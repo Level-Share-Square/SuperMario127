@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://scenes/menu/options/options.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/menu/menu_controller/screen_manager.gd" type="Script" id=2]
@@ -24,8 +24,7 @@
 [ext_resource path="res://scenes/editor/action_manager/action_manager.gd" type="Script" id=22]
 [ext_resource path="res://generation/generated_tiles.res" type="TileSet" id=23]
 [ext_resource path="res://scenes/menu/button_scripts/button_sound.gd" type="Script" id=24]
-[ext_resource path="res://scenes/oldeditor/placement/rectangle_fill.gd" type="Script" id=26]
-[ext_resource path="res://scenes/editor/pen_tool.gd" type="Script" id=27]
+[ext_resource path="res://scenes/editor/paint_tool.gd" type="Script" id=27]
 [ext_resource path="res://scenes/oldeditor/assets/grid.png" type="Texture" id=28]
 [ext_resource path="res://scenes/actors/mode_switcher/ui/play_button.png" type="Texture" id=29]
 [ext_resource path="res://scenes/editor/grid.gd" type="Script" id=30]
@@ -52,24 +51,20 @@ margin_bottom = 40.0
 mouse_filter = 2
 script = ExtResource( 8 )
 
-[node name="Pen" type="Control" parent="Tools"]
+[node name="TilePaint" type="Control" parent="Tools"]
 margin_right = 40.0
 margin_bottom = 40.0
 mouse_filter = 2
 script = ExtResource( 27 )
+inverse_tool_name = "ObjectPaint"
 
-[node name="RectangleFill" type="Control" parent="Tools"]
+[node name="ObjectPaint" type="Control" parent="Tools"]
 margin_right = 40.0
 margin_bottom = 40.0
 mouse_filter = 2
-script = ExtResource( 26 )
-
-[node name="Node2D" type="Node2D" parent="Tools/RectangleFill"]
-z_index = 10
-
-[node name="Drag" type="ColorRect" parent="Tools/RectangleFill/Node2D"]
-mouse_filter = 2
-color = Color( 1, 1, 1, 0.501961 )
+script = ExtResource( 27 )
+tool_type = 1
+inverse_tool_name = "TilePaint"
 
 [node name="TileBuffer" type="TileMap" parent="."]
 unique_name_in_owner = true
@@ -197,13 +192,15 @@ custom_constants/separation = 2
 [node name="Bottom" type="PanelContainer" parent="UI/EditorUI/ItemSuitcase"]
 margin_top = 13.0
 margin_right = 184.0
-margin_bottom = 32.0
+margin_bottom = 158.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="BottomMat" type="MarginContainer" parent="UI/EditorUI/ItemSuitcase/Bottom"]
 margin_left = 6.0
 margin_top = 6.0
 margin_right = 178.0
-margin_bottom = 13.0
+margin_bottom = 139.0
 custom_constants/margin_right = 2
 custom_constants/margin_top = 5
 custom_constants/margin_left = 2
@@ -211,9 +208,9 @@ custom_constants/margin_bottom = 2
 
 [node name="Items" type="GridContainer" parent="UI/EditorUI/ItemSuitcase/Bottom/BottomMat"]
 margin_left = 2.0
-margin_top = 5.0
+margin_top = 68.0
 margin_right = 2.0
-margin_bottom = 5.0
+margin_bottom = 68.0
 size_flags_horizontal = 2
 size_flags_vertical = 6
 custom_constants/vseparation = 2
@@ -298,6 +295,7 @@ stream = ExtResource( 18 )
 volume_db = -10.0
 bus = "Sounds"
 
+[connection signal="item_changed" from="." to="Tools" method="item_changed"]
 [connection signal="pressed" from="UI/EditorUI/MarginContainer/Utilities/Undo" to="ActionManager" method="undo"]
 [connection signal="pressed" from="UI/EditorUI/MarginContainer/Utilities/Redo" to="ActionManager" method="redo"]
 [connection signal="pressed" from="UI/EditorUI/MarginContainer/Utilities/ItemPicker" to="UI/ItemPickerWindow" method="popup" binds= [ Rect2( 450, 60, 248, 248 ) ]]

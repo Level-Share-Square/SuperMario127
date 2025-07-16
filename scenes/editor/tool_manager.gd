@@ -4,8 +4,7 @@ extends Control
 
 var mouse_position: Vector2 = get_global_mouse_position()
 
-onready var current_tool: EditorTool = $Pen
-
+onready var current_tool: EditorTool = $TilePaint
 
 signal tool_changed()
 
@@ -19,18 +18,27 @@ func _unhandled_input(event: InputEvent) -> void:
 	if Input.is_action_just_released("place") or Input.is_action_just_released("erase"):
 		current_tool._click_released(event, mouse_position)
 	
-	if event is InputEventMouseMotion or _is_camera_moving():
+	if event is InputEventMouseMotion:
 		current_tool._mouse_movement(event, mouse_position)
-	
-	print(mouse_position)
 
 
-func _is_camera_moving():
-	var direction := Input.get_vector("editor_left", "editor_right", "editor_up", "editor_down")
-	
-	return direction.length() > 0
+func _physics_process(delta: float):
+	current_tool._update(delta)
+	current_tool.left_held = Input.is_action_pressed("place") and not Input.is_action_pressed("erase")
+	current_tool.right_held = Input.is_action_pressed("erase") and not Input.is_action_pressed("place")
 
 
 func change_tool(tool_name: String) -> void:
 	current_tool = get_node(tool_name)
+	print(current_tool)
 	emit_signal("tool_changed")
+
+
+func item_changed(placeable_item: PlaceableItem):
+	match current_tool.tool_type:
+		EditorTool.Type.TileTool:
+			if placeable_item is PlaceableObject:
+				change_tool(current_tool.inverse_tool_name)
+		EditorTool.Type.ObjectTool:
+			if placeable_item is PlaceableTile:
+				change_tool(current_tool.inverse_tool_name)

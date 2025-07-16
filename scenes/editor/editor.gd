@@ -24,6 +24,9 @@ onready var editor_options = $UI/EditorOptionsWindow
 onready var backgrounds = $Backgrounds
 
 
+signal item_changed(placeable_item)
+
+
 func _ready():
 	selected_item = placeable_items.placeable_items["til_grass"]
 	#this is to dynamically update the framerate
@@ -112,3 +115,4 @@ func get_shared_node() -> LevelShared:
 	
 func new_item_selected(placeable_item):
 	selected_item = placeable_item
+	emit_signal("item_changed", placeable_item)
