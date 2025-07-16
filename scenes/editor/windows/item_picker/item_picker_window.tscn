@@ -157,23 +157,23 @@ custom_constants/separation = 3
 
 [node name="GroupsBox" type="ScrollContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox" index="0"]
 margin_right = 244.0
-margin_bottom = 26.0
+margin_bottom = 28.0
 scroll_vertical_enabled = false
 
 [node name="GroupMat" type="MarginContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/GroupsBox" index="0"]
 margin_right = 236.0
-margin_bottom = 26.0
+margin_bottom = 28.0
 size_flags_horizontal = 3
 custom_constants/margin_right = 2
-custom_constants/margin_top = 1
+custom_constants/margin_top = 3
 custom_constants/margin_left = 2
 custom_constants/margin_bottom = 6
 
 [node name="Groups" type="HBoxContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/GroupsBox/GroupMat" index="0"]
 margin_left = 2.0
-margin_top = 1.0
+margin_top = 3.0
 margin_right = 234.0
-margin_bottom = 20.0
+margin_bottom = 22.0
 size_flags_horizontal = 3
 custom_constants/separation = 6
 script = ExtResource( 4 )
@@ -183,13 +183,23 @@ unique_name_in_owner = true
 icon = ExtResource( 2 )
 color = Color( 0, 0.294118, 0.705882, 1 )
 
-[node name="SearchBar" type="LineEdit" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/GroupsBox/GroupMat/Groups" index="1"]
-unique_name_in_owner = true
+[node name="SearchMat" type="MarginContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/GroupsBox/GroupMat/Groups" index="1"]
+visible = false
 margin_left = 14.0
 margin_right = 232.0
 margin_bottom = 19.0
 size_flags_horizontal = 3
+custom_constants/margin_top = 2
+custom_constants/margin_bottom = -2
+
+[node name="SearchBar" type="LineEdit" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/GroupsBox/GroupMat/Groups/SearchMat" index="0"]
+unique_name_in_owner = true
+margin_top = 2.0
+margin_right = 218.0
+margin_bottom = 21.0
+size_flags_horizontal = 3
 size_flags_vertical = 3
+placeholder_text = "Search..."
 
 [node name="Special" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/GroupsBox/GroupMat/Groups" index="2" instance=ExtResource( 8 )]
 visible = false
@@ -224,7 +234,7 @@ expand_icon = false
 color = Color( 0.117647, 0.686275, 0, 1 )
 
 [node name="TabContainer" type="TabContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox" index="1"]
-margin_top = 29.0
+margin_top = 31.0
 margin_right = 244.0
 margin_bottom = 211.0
 size_flags_horizontal = 3

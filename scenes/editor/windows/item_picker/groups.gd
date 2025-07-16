@@ -7,23 +7,23 @@ var bar_shown = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	for i in get_children():
-		if "SearchBar" in str(i.name):
-			i.visible = false
+	for child in get_children():
+		if child == search_bar.get_parent():
+			child.visible = false
 		else:
-			i.visible = true
+			child.visible = true
 	search.connect("pressed", self, "_on_search_pressed")
 
 func _on_search_pressed():
 	bar_shown = !bar_shown
 	if bar_shown:
-		for i in get_children():
-			i.visible = false
-			search_bar.visible = true
+		for child in get_children():
+			child.visible = false
+			search_bar.get_parent().visible = true
 			search.visible = true
 	else:
-		for i in get_children():
-			if i == search_bar:
-				i.visible = false
+		for child in get_children():
+			if child == search_bar.get_parent():
+				search_bar.get_parent().visible = false
 			else:
-				i.visible = true
+				child.visible = true

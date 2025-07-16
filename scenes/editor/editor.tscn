@@ -190,6 +190,10 @@ texture_normal = ExtResource( 29 )
 expand = true
 
 [node name="ItemPickerWindow" parent="UI" instance=ExtResource( 9 )]
+margin_left = 450.0
+margin_top = 60.0
+margin_right = 706.0
+margin_bottom = 316.0
 
 [node name="EditorOptionsWindow" parent="UI" instance=ExtResource( 21 )]
 visible = false
@@ -248,7 +252,7 @@ stream = ExtResource( 18 )
 volume_db = -10.0
 bus = "Sounds"
 
-[connection signal="pressed" from="UI/EditorUI/Utilities/ItemPicker" to="UI/ItemPickerWindow" method="popup_centered" binds= [ Vector2( 256, 256 ) ]]
+[connection signal="pressed" from="UI/EditorUI/Utilities/ItemPicker" to="UI/ItemPickerWindow" method="popup" binds= [ Rect2( 450, 60, 248, 248 ) ]]
 [connection signal="pressed" from="UI/EditorUI/Utilities/Settings" to="UI/EditorOptionsWindow" method="popup" binds= [ Rect2( 344, 66, 420, 220 ) ]]
 [connection signal="item_selected" from="UI/ItemPickerWindow" to="UI/EditorUI/ItemSuitcase" method="item_selected"]
 [connection signal="open_editor_settings" from="UI/EditorOptionsWindow" to="Options/ScreenManager" method="screen_change" binds= [ "Options" ]]
