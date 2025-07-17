@@ -1,0 +1,36 @@
+[gd_resource type="Resource" load_steps=20 format=2]
+
+[ext_resource path="res://scenes/editor/items/placeable_object.gd" type="Script" id=1]
+[ext_resource path="res://scenes/actors/objects/cobweb3/palettes/cobweb_droopy_icon7.png" type="Texture" id=2]
+[ext_resource path="res://scenes/actors/objects/cobweb3/palettes/cobweb_droopy_icon8.png" type="Texture" id=3]
+[ext_resource path="res://scenes/actors/objects/cobweb3/cobweb_droopy1.png" type="Texture" id=4]
+[ext_resource path="res://scenes/actors/objects/cobweb3/palettes/cobweb_droopy5.png" type="Texture" id=5]
+[ext_resource path="res://scenes/actors/objects/cobweb3/palettes/cobweb_droopy2.png" type="Texture" id=6]
+[ext_resource path="res://scenes/actors/objects/cobweb3/palettes/cobweb_droopy4.png" type="Texture" id=7]
+[ext_resource path="res://scenes/actors/objects/cobweb3/palettes/cobweb_droopy6.png" type="Texture" id=8]
+[ext_resource path="res://scenes/actors/objects/cobweb3/palettes/cobweb_droopy_icon3.png" type="Texture" id=9]
+[ext_resource path="res://scenes/actors/objects/cobweb3/palettes/cobweb_droopy_icon5.png" type="Texture" id=10]
+[ext_resource path="res://scenes/actors/objects/cobweb3/palettes/cobweb_droopy_icon2.png" type="Texture" id=11]
+[ext_resource path="res://scenes/actors/objects/cobweb3/cobweb_droopy_icon1.png" type="Texture" id=12]
+[ext_resource path="res://scenes/actors/objects/cobweb3/palettes/cobweb_droopy3.png" type="Texture" id=13]
+[ext_resource path="res://scenes/actors/objects/cobweb3/palettes/cobweb_droopy_icon4.png" type="Texture" id=14]
+[ext_resource path="res://scenes/actors/objects/cobweb3/palettes/cobweb_droopy7.png" type="Texture" id=15]
+[ext_resource path="res://scenes/actors/objects/cobweb3/palettes/cobweb_droopy9.png" type="Texture" id=16]
+[ext_resource path="res://scenes/actors/objects/cobweb3/palettes/cobweb_droopy_icon9.png" type="Texture" id=17]
+[ext_resource path="res://scenes/actors/objects/cobweb3/palettes/cobweb_droopy_icon6.png" type="Texture" id=18]
+[ext_resource path="res://scenes/actors/objects/cobweb3/palettes/cobweb_droopy8.png" type="Texture" id=19]
+
+[resource]
+script = ExtResource( 1 )
+item_name = "Droopy Cobweb"
+groups = PoolStringArray( "decoration" )
+change_to = ""
+items_in_sequence = 0
+index_in_sequence = 0
+icons = [ ExtResource( 12 ), ExtResource( 11 ), ExtResource( 9 ), ExtResource( 14 ), ExtResource( 10 ), ExtResource( 18 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 17 ) ]
+previews = [ ExtResource( 4 ), ExtResource( 6 ), ExtResource( 13 ), ExtResource( 7 ), ExtResource( 5 ), ExtResource( 8 ), ExtResource( 15 ), ExtResource( 19 ), ExtResource( 16 ) ]
+priority = 0
+object_id = 116
+object_center = Vector2( 0, 0 )
+tile_mode_offset = Vector2( 0, 0 )
+tile_mode_step = 32

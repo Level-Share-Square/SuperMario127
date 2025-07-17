@@ -1,0 +1,19 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://scenes/editor/items/placeable_object.gd" type="Script" id=1]
+[ext_resource path="res://assets/tiles/log/icon.png" type="Texture" id=2]
+
+[resource]
+script = ExtResource( 1 )
+item_name = "Log"
+groups = PoolStringArray( "warp" )
+change_to = ""
+items_in_sequence = 0
+index_in_sequence = 0
+icons = [ ExtResource( 2 ) ]
+previews = [ ExtResource( 2 ) ]
+priority = 0
+object_id = 10
+object_center = Vector2( 0, 0 )
+tile_mode_offset = Vector2( 0, 0 )
+tile_mode_step = 32

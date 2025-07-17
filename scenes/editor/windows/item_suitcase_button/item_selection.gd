@@ -1,7 +1,7 @@
 extends ButtonSound
 
 
-var placeable_item: Resource = preload("res://scenes/editor/items/placeable_items/blue_coin.tres")
+var placeable_item: Resource = preload("res://scenes/editor/items/placeable_items/placeable_objects/blue_coin.tres")
 var button_pressed: bool
 var hold_timer = 2
 

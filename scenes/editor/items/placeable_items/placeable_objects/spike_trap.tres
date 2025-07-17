@@ -1,0 +1,19 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://scenes/actors/objects/spike_trap/spike_trap.png" type="Texture" id=1]
+[ext_resource path="res://scenes/editor/items/placeable_object.gd" type="Script" id=2]
+
+[resource]
+script = ExtResource( 2 )
+item_name = "Spike Trap"
+groups = PoolStringArray( "decoration" )
+change_to = ""
+items_in_sequence = 0
+index_in_sequence = 0
+icons = [ ExtResource( 1 ) ]
+previews = [ ExtResource( 1 ) ]
+priority = 0
+object_id = 88
+object_center = Vector2( 0, 0 )
+tile_mode_offset = Vector2( 0, 0 )
+tile_mode_step = 32

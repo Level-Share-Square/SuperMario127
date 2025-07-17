@@ -1,7 +1,7 @@
 extends ButtonSound
 
 
-var placeable_item: Resource = preload("res://scenes/editor/items/placeable_items/blue_coin.tres")
+var placeable_item: Resource = preload("res://scenes/editor/items/placeable_items/placeable_objects/blue_coin.tres")
 
 onready var icon_display: TextureRect = $"%Icon"
 onready var grid: TextureRect = $"%Grid"

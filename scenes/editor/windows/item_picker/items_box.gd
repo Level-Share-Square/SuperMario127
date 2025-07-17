@@ -14,16 +14,19 @@ onready var search_bar = get_node("%SearchBar")
 
 func _ready():
 	search_bar.connect("text_changed", self, "_on_search")
-	load_items(get_items_by_group(initial_group))
+	load_items(get_items_by_group(initial_group), true)
 
 
-func load_items(items: Array):
+func load_items(items: Array, priority_sort: bool):
 	for i in tile_items_box.get_children():
 		i.queue_free()
 	for i in object_items_box.get_children():
 		i.queue_free()
 	if items.size() <= 0:
 		return
+		
+	if priority_sort:
+		items.sort_custom(self, "_sort_by_priority")
 	
 	for item in items:
 		var item_button = item_button_scene.instance()
@@ -56,18 +59,19 @@ func _on_search(new_text):
 #Bad sorting algorithm -dignity
 func sort_by_fuzzy_search(search: String):
 	if search == "":
-		load_items(get_items_by_group(initial_group))
+		load_items(get_items_by_group(initial_group), true)
 		return
 	var score_dictionary: Dictionary
 	for key in placeable_items.placeable_items:
-		print(key.substr(4, key.length()).length())
 		var item = key
-		var score = 0
+		var score: int = 0
+		var score_ratio: float = 0.0
 		for letter_item in item.substr(4, item.length()):
 			for letter_search in search:
 				if letter_search.to_lower() == letter_item.to_lower():
 					score += 1
-				score_dictionary[item] = score
+		score_ratio = float(score)/float(item.length())
+		score_dictionary[item] = score_ratio
 
 	var score_array: Array 
 	for i in score_dictionary:
@@ -94,7 +98,8 @@ func sort_by_fuzzy_search(search: String):
 		var key = pair.keys()[0]
 		return_array.append(placeable_items.placeable_items[key])
 	return_array = return_array.slice(0, 9)
-	load_items(return_array)
+	load_items(return_array, false)
+	owner.groups.reset()
 	return return_array
 
 

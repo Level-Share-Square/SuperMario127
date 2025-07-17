@@ -100,6 +100,7 @@ grow_end = -7.0
 thickness = 2
 
 [node name="ItemPickerWindow" instance=ExtResource( 1 )]
+visible = false
 margin_right = 256.0
 margin_bottom = 256.0
 script = ExtResource( 3 )
@@ -170,6 +171,7 @@ custom_constants/margin_left = 2
 custom_constants/margin_bottom = 6
 
 [node name="Groups" type="HBoxContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/GroupsBox/GroupMat" index="0"]
+unique_name_in_owner = true
 margin_left = 2.0
 margin_top = 3.0
 margin_right = 234.0
@@ -180,6 +182,7 @@ script = ExtResource( 4 )
 
 [node name="Search" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/GroupsBox/GroupMat/Groups" index="0" instance=ExtResource( 8 )]
 unique_name_in_owner = true
+visible = false
 icon = ExtResource( 2 )
 color = Color( 0, 0.294118, 0.705882, 1 )
 
@@ -201,7 +204,7 @@ size_flags_vertical = 3
 placeholder_text = "Search..."
 
 [node name="Special" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/GroupsBox/GroupMat/Groups" index="2" instance=ExtResource( 8 )]
-visible = false
+unique_name_in_owner = true
 margin_left = 181.0
 margin_right = 232.0
 text = "Special"
@@ -209,26 +212,26 @@ expand_icon = false
 color = Color( 0.556863, 0.152941, 0.658824, 1 )
 
 [node name="Dialogue" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/GroupsBox/GroupMat/Groups" index="3" instance=ExtResource( 8 )]
-visible = false
+unique_name_in_owner = true
 margin_left = 168.0
 margin_right = 232.0
 text = "Dialogue"
 expand_icon = false
-color = Color( 0.5, 0.325, 0, 1 )
+color = Color( 0.501961, 0.32549, 0, 1 )
 
 [node name="Switches" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/GroupsBox/GroupMat/Groups" index="4" instance=ExtResource( 8 )]
-visible = false
+unique_name_in_owner = true
 margin_left = 203.0
 margin_right = 266.0
 text = "Switches"
 expand_icon = false
-color = Color( 0.098, 0.2156, 0.98, 1 )
+color = Color( 0.0980392, 0.215686, 0.980392, 1 )
 
-[node name="Teleport" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/GroupsBox/GroupMat/Groups" index="5" instance=ExtResource( 8 )]
-visible = false
+[node name="Warp" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/GroupsBox/GroupMat/Groups" index="5" instance=ExtResource( 8 )]
+unique_name_in_owner = true
 margin_left = 272.0
 margin_right = 334.0
-text = "Teleport"
+text = "Warp"
 expand_icon = false
 color = Color( 0.117647, 0.686275, 0, 1 )
 
@@ -258,6 +261,7 @@ custom_constants/margin_left = 1
 custom_constants/margin_bottom = 4
 
 [node name="ItemsBox" type="VBoxContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/TabContainer/ItemsScroll/ItemsMat" index="0"]
+unique_name_in_owner = true
 margin_left = 1.0
 margin_top = 1.0
 margin_right = 4.0
@@ -329,4 +333,4 @@ size_flags_vertical = 3
 [connection signal="focus_exited" from="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/GroupsBox/GroupMat/Groups/Special" to="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/GroupsBox/GroupMat/Groups/Special/Content" method="_button_up"]
 [connection signal="focus_exited" from="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/GroupsBox/GroupMat/Groups/Dialogue" to="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/GroupsBox/GroupMat/Groups/Dialogue/Content" method="_button_up"]
 [connection signal="focus_exited" from="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/GroupsBox/GroupMat/Groups/Switches" to="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/GroupsBox/GroupMat/Groups/Switches/Content" method="_button_up"]
-[connection signal="focus_exited" from="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/GroupsBox/GroupMat/Groups/Teleport" to="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/GroupsBox/GroupMat/Groups/Teleport/Content" method="_button_up"]
+[connection signal="focus_exited" from="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/GroupsBox/GroupMat/Groups/Warp" to="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/GroupsBox/GroupMat/Groups/Warp/Content" method="_button_up"]
