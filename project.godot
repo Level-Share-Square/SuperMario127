@@ -257,7 +257,7 @@ _global_script_classes=[ {
 "base": "Control",
 "class": "EditorTool",
 "language": "GDScript",
-"path": "res://scenes/editor/editor_tool.gd"
+"path": "res://scenes/editor/tools/editor_tool.gd"
 }, {
 "base": "Popup",
 "class": "EditorWindow",
@@ -303,6 +303,11 @@ _global_script_classes=[ {
 "class": "EnemyWanderState",
 "language": "GDScript",
 "path": "res://scenes/actors/objects/enemy/states/wander_state.gd"
+}, {
+"base": "Action",
+"class": "EraseObjectAction",
+"language": "GDScript",
+"path": "res://scenes/editor/action_manager/actions/erase_object.gd"
 }, {
 "base": "State",
 "class": "ExitPaintingState",
@@ -742,7 +747,7 @@ _global_script_classes=[ {
 "base": "Control",
 "class": "ToolManager",
 "language": "GDScript",
-"path": "res://scenes/editor/tool_manager.gd"
+"path": "res://scenes/editor/tools/tool_manager.gd"
 }, {
 "base": "Node",
 "class": "TouchCheck",
@@ -944,6 +949,7 @@ _global_script_class_icons={
 "EnemyStopState": "",
 "EnemyWanderIdleState": "",
 "EnemyWanderState": "",
+"EraseObjectAction": "",
 "ExitPaintingState": "",
 "FallState": "",
 "FolderCard": "",

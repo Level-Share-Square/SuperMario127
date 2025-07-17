@@ -75,7 +75,7 @@ func create_object(object, add_to_data):
 
 func get_object_at_position(position: Vector2):
 	for object in self.get_children():
-		if object.position == position:
+		if object.position.is_equal_approx(position):
 			return object
 
 

@@ -51,10 +51,14 @@ func get_items_by_group(group: String) -> Array:
 			if group in item_data.groups:
 				filtered_items.append(item_data)
 	
+	filtered_items.sort_custom(self, "_sort_by_priority")
+	
 	return filtered_items
+
 
 func _on_search(new_text):
 	sort_by_fuzzy_search(new_text)
+
 
 #Bad sorting algorithm -dignity
 func sort_by_fuzzy_search(search: String):
