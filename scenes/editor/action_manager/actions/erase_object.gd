@@ -1,19 +1,11 @@
 class_name EraseObjectAction
-extends Action
-
-
-var shared: LevelShared
-
-var object: GameObject
+extends BaseObjectAction
 
 
 func _do() -> void:
 	if is_instance_valid(object):
-		object_data = object.level_object.get_ref()
-		shared.destroy_object(object, true)
+		remove_object()
 
-
-var object_data: ObjectData
 func _undo() -> void:
-	if is_instance_valid(object_data):
-		object = shared.create_object(object_data, true)
+	if is_instance_valid(object):
+		restore_object()

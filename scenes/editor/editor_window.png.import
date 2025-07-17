@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/editor_window.png-da03148c6161a035be9403599641bb23.stex"
+path="res://.import/editor_window.png-b9e643205a60ba5428506d60af1a3601.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/misc/editor_window.png"
-dest_files=[ "res://.import/editor_window.png-da03148c6161a035be9403599641bb23.stex" ]
+source_file="res://scenes/editor/editor_window.png"
+dest_files=[ "res://.import/editor_window.png-b9e643205a60ba5428506d60af1a3601.stex" ]
 
 [params]
 

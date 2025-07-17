@@ -1,7 +1,7 @@
 [gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://scenes/menu/button_scripts/button_sound.gd" type="Script" id=1]
-[ext_resource path="res://assets/misc/editor_theme.tres" type="Theme" id=2]
+[ext_resource path="res://scenes/editor/editor_theme.tres" type="Theme" id=2]
 [ext_resource path="res://assets/fonts/DelfinoFont16.tres" type="DynamicFont" id=3]
 [ext_resource path="res://scenes/oldeditor/sounds/hover.wav" type="AudioStream" id=4]
 [ext_resource path="res://assets/misc/gear.svg" type="Texture" id=5]

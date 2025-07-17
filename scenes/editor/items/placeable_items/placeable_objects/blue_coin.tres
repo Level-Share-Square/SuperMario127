@@ -13,7 +13,6 @@ items_in_sequence = 2
 index_in_sequence = 1
 icons = [ ExtResource( 2 ) ]
 previews = [ ExtResource( 3 ) ]
-priority = 0
 object_id = 40
 object_center = Vector2( 0, 0 )
 tile_mode_offset = Vector2( 0, 0 )

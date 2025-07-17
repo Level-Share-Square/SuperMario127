@@ -1,17 +1,13 @@
 class_name PlaceObjectAction
-extends Action
-
-
-var shared: LevelShared
-
-var object_data: ObjectData
+extends BaseObjectAction
 
 
 func _do() -> void:
-	object = shared.create_object(object_data, true)
+	if is_instance_valid(object):
+		restore_object()
+	else:
+		create_new_object()
 
-
-var object: GameObject
 func _undo() -> void:
 	if is_instance_valid(object):
-		shared.destroy_object(object, true)
+		remove_object()

@@ -10,7 +10,7 @@
 [ext_resource path="res://scenes/shared/background/backgrounds/day/day.png" type="Texture" id=8]
 [ext_resource path="res://scenes/editor/windows/editor_options_window.gd" type="Script" id=9]
 [ext_resource path="res://scenes/actors/objects/painting/border.png" type="Texture" id=10]
-[ext_resource path="res://assets/misc/editor_theme.tres" type="Theme" id=11]
+[ext_resource path="res://scenes/editor/editor_theme.tres" type="Theme" id=11]
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=12]
 [ext_resource path="res://scenes/editor/windows/areas.gd" type="Script" id=13]
 [ext_resource path="res://scenes/editor/windows/music.gd" type="Script" id=14]
@@ -110,6 +110,7 @@ use_filter = true
 font_data = ExtResource( 12 )
 
 [node name="EditorOptionsWindow" instance=ExtResource( 3 )]
+visible = false
 script = ExtResource( 9 )
 title = "Level Settings"
 window_size = Vector2( 420, 220 )
@@ -150,7 +151,6 @@ all_tabs_in_front = true
 use_hidden_tabs_for_min_size = true
 
 [node name="Level" type="MarginContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/Tabs" index="0"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 6.0
@@ -353,6 +353,7 @@ text = "Success!"
 align = 1
 
 [node name="Environment" type="ScrollContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/Tabs" index="3"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 6.0
