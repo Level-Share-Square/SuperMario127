@@ -1,0 +1,465 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://scenes/editor/editor_theme.tres" type="Theme" id=1]
+[ext_resource path="res://scenes/oldeditor/assets/grid.png" type="Texture" id=2]
+[ext_resource path="res://scenes/editor/grid.gd" type="Script" id=3]
+[ext_resource path="res://scenes/editor/buttons/popup_custom.gd" type="Script" id=4]
+[ext_resource path="res://scenes/oldeditor/sounds/hover.wav" type="AudioStream" id=5]
+[ext_resource path="res://scenes/oldeditor/sounds/click2.wav" type="AudioStream" id=6]
+[ext_resource path="res://scenes/editor/windows/item_suitcase_button/item_selection.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/actors/objects/hover_box/hover_box.png" type="Texture" id=8]
+
+[sub_resource type="Gradient" id=5]
+offsets = PoolRealArray( 0.644172, 1 )
+colors = PoolColorArray( 0, 0, 0, 0.501961, 0, 0, 0, 0 )
+
+[sub_resource type="GradientTexture2D" id=6]
+gradient = SubResource( 5 )
+fill = 1
+fill_from = Vector2( 0.5, 0.5 )
+fill_to = Vector2( 1, 0.5 )
+
+[sub_resource type="InputEventKey" id=3]
+scancode = 49
+physical_scancode = 49
+
+[sub_resource type="ShortCut" id=4]
+shortcut = SubResource( 3 )
+
+[sub_resource type="StyleBoxLine" id=2]
+color = Color( 0, 0, 0, 0.498039 )
+
+[node name="EditorMockup" type="Node2D"]
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="EditorUI" type="MarginContainer" parent="UI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+theme = ExtResource( 1 )
+custom_constants/margin_right = 8
+custom_constants/margin_top = 8
+custom_constants/margin_left = 8
+custom_constants/margin_bottom = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/EditorUI"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 760.0
+margin_bottom = 424.0
+
+[node name="Items" type="VBoxContainer" parent="UI/EditorUI/HBoxContainer"]
+visible = false
+margin_right = 192.0
+margin_bottom = 131.0
+size_flags_vertical = 0
+custom_constants/separation = 4
+
+[node name="Panel" type="PanelContainer" parent="UI/EditorUI/HBoxContainer/Items"]
+self_modulate = Color( 1, 1, 1, 0 )
+margin_right = 192.0
+margin_bottom = 131.0
+
+[node name="Margin" type="MarginContainer" parent="UI/EditorUI/HBoxContainer/Items/Panel"]
+margin_left = 6.0
+margin_top = 6.0
+margin_right = 186.0
+margin_bottom = 125.0
+custom_constants/margin_right = 2
+custom_constants/margin_top = 5
+custom_constants/margin_left = 2
+custom_constants/margin_bottom = 2
+
+[node name="Items" type="GridContainer" parent="UI/EditorUI/HBoxContainer/Items/Panel/Margin"]
+margin_left = 2.0
+margin_top = 5.0
+margin_right = 178.0
+margin_bottom = 117.0
+size_flags_horizontal = 2
+size_flags_vertical = 6
+custom_constants/vseparation = 8
+custom_constants/hseparation = 4
+columns = 5
+
+[node name="ItemBase" parent="UI/EditorUI/HBoxContainer/Items/Panel/Margin/Items" instance=ExtResource( 7 )]
+visible = true
+icon = ExtResource( 8 )
+
+[node name="Shadow" type="TextureRect" parent="UI/EditorUI/HBoxContainer/Items/Panel/Margin/Items/ItemBase"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 24.0
+margin_bottom = 5.0
+texture = SubResource( 6 )
+expand = true
+
+[node name="ItemBase2" parent="UI/EditorUI/HBoxContainer/Items/Panel/Margin/Items" instance=ExtResource( 7 )]
+visible = true
+margin_left = 36.0
+margin_right = 68.0
+shortcut = SubResource( 4 )
+icon = ExtResource( 8 )
+
+[node name="Shadow" type="TextureRect" parent="UI/EditorUI/HBoxContainer/Items/Panel/Margin/Items/ItemBase2"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 24.0
+margin_bottom = 5.0
+texture = SubResource( 6 )
+expand = true
+
+[node name="ItemBase3" parent="UI/EditorUI/HBoxContainer/Items/Panel/Margin/Items" instance=ExtResource( 7 )]
+visible = true
+margin_left = 72.0
+margin_right = 104.0
+shortcut = SubResource( 4 )
+icon = ExtResource( 8 )
+
+[node name="Shadow" type="TextureRect" parent="UI/EditorUI/HBoxContainer/Items/Panel/Margin/Items/ItemBase3"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 24.0
+margin_bottom = 5.0
+texture = SubResource( 6 )
+expand = true
+
+[node name="ItemBase4" parent="UI/EditorUI/HBoxContainer/Items/Panel/Margin/Items" instance=ExtResource( 7 )]
+visible = true
+margin_left = 108.0
+margin_right = 140.0
+shortcut = SubResource( 4 )
+icon = ExtResource( 8 )
+
+[node name="Shadow" type="TextureRect" parent="UI/EditorUI/HBoxContainer/Items/Panel/Margin/Items/ItemBase4"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 24.0
+margin_bottom = 5.0
+texture = SubResource( 6 )
+expand = true
+
+[node name="ItemBase5" parent="UI/EditorUI/HBoxContainer/Items/Panel/Margin/Items" instance=ExtResource( 7 )]
+visible = true
+margin_left = 144.0
+margin_right = 176.0
+shortcut = SubResource( 4 )
+icon = ExtResource( 8 )
+
+[node name="Shadow" type="TextureRect" parent="UI/EditorUI/HBoxContainer/Items/Panel/Margin/Items/ItemBase5"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 24.0
+margin_bottom = 5.0
+texture = SubResource( 6 )
+expand = true
+
+[node name="ItemBase6" parent="UI/EditorUI/HBoxContainer/Items/Panel/Margin/Items" instance=ExtResource( 7 )]
+visible = true
+margin_top = 40.0
+margin_bottom = 72.0
+shortcut = SubResource( 4 )
+icon = ExtResource( 8 )
+
+[node name="Shadow" type="TextureRect" parent="UI/EditorUI/HBoxContainer/Items/Panel/Margin/Items/ItemBase6"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 24.0
+margin_bottom = 5.0
+texture = SubResource( 6 )
+expand = true
+
+[node name="ItemBase7" parent="UI/EditorUI/HBoxContainer/Items/Panel/Margin/Items" instance=ExtResource( 7 )]
+visible = true
+margin_left = 36.0
+margin_top = 40.0
+margin_right = 68.0
+margin_bottom = 72.0
+shortcut = SubResource( 4 )
+icon = ExtResource( 8 )
+
+[node name="Shadow" type="TextureRect" parent="UI/EditorUI/HBoxContainer/Items/Panel/Margin/Items/ItemBase7"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 24.0
+margin_bottom = 5.0
+texture = SubResource( 6 )
+expand = true
+
+[node name="ItemBase8" parent="UI/EditorUI/HBoxContainer/Items/Panel/Margin/Items" instance=ExtResource( 7 )]
+visible = true
+margin_left = 72.0
+margin_top = 40.0
+margin_right = 104.0
+margin_bottom = 72.0
+shortcut = SubResource( 4 )
+icon = ExtResource( 8 )
+
+[node name="Shadow" type="TextureRect" parent="UI/EditorUI/HBoxContainer/Items/Panel/Margin/Items/ItemBase8"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 24.0
+margin_bottom = 5.0
+texture = SubResource( 6 )
+expand = true
+
+[node name="ItemBase9" parent="UI/EditorUI/HBoxContainer/Items/Panel/Margin/Items" instance=ExtResource( 7 )]
+visible = true
+margin_left = 108.0
+margin_top = 40.0
+margin_right = 140.0
+margin_bottom = 72.0
+shortcut = SubResource( 4 )
+icon = ExtResource( 8 )
+
+[node name="Shadow" type="TextureRect" parent="UI/EditorUI/HBoxContainer/Items/Panel/Margin/Items/ItemBase9"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 24.0
+margin_bottom = 5.0
+texture = SubResource( 6 )
+expand = true
+
+[node name="ItemBase10" parent="UI/EditorUI/HBoxContainer/Items/Panel/Margin/Items" instance=ExtResource( 7 )]
+visible = true
+margin_left = 144.0
+margin_top = 40.0
+margin_right = 176.0
+margin_bottom = 72.0
+shortcut = SubResource( 4 )
+icon = ExtResource( 8 )
+
+[node name="Shadow" type="TextureRect" parent="UI/EditorUI/HBoxContainer/Items/Panel/Margin/Items/ItemBase10"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 24.0
+margin_bottom = 5.0
+texture = SubResource( 6 )
+expand = true
+
+[node name="ItemBase11" parent="UI/EditorUI/HBoxContainer/Items/Panel/Margin/Items" instance=ExtResource( 7 )]
+visible = true
+margin_top = 80.0
+margin_bottom = 112.0
+shortcut = SubResource( 4 )
+icon = ExtResource( 8 )
+
+[node name="Shadow" type="TextureRect" parent="UI/EditorUI/HBoxContainer/Items/Panel/Margin/Items/ItemBase11"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 24.0
+margin_bottom = 5.0
+texture = SubResource( 6 )
+expand = true
+
+[node name="ItemBase12" parent="UI/EditorUI/HBoxContainer/Items/Panel/Margin/Items" instance=ExtResource( 7 )]
+visible = true
+margin_left = 36.0
+margin_top = 80.0
+margin_right = 68.0
+margin_bottom = 112.0
+shortcut = SubResource( 4 )
+icon = ExtResource( 8 )
+
+[node name="Shadow" type="TextureRect" parent="UI/EditorUI/HBoxContainer/Items/Panel/Margin/Items/ItemBase12"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 24.0
+margin_bottom = 5.0
+texture = SubResource( 6 )
+expand = true
+
+[node name="ItemBase13" parent="UI/EditorUI/HBoxContainer/Items/Panel/Margin/Items" instance=ExtResource( 7 )]
+visible = true
+margin_left = 72.0
+margin_top = 80.0
+margin_right = 104.0
+margin_bottom = 112.0
+shortcut = SubResource( 4 )
+icon = ExtResource( 8 )
+
+[node name="Shadow" type="TextureRect" parent="UI/EditorUI/HBoxContainer/Items/Panel/Margin/Items/ItemBase13"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 24.0
+margin_bottom = 5.0
+texture = SubResource( 6 )
+expand = true
+
+[node name="ItemBase14" parent="UI/EditorUI/HBoxContainer/Items/Panel/Margin/Items" instance=ExtResource( 7 )]
+visible = true
+margin_left = 108.0
+margin_top = 80.0
+margin_right = 140.0
+margin_bottom = 112.0
+shortcut = SubResource( 4 )
+icon = ExtResource( 8 )
+
+[node name="Shadow" type="TextureRect" parent="UI/EditorUI/HBoxContainer/Items/Panel/Margin/Items/ItemBase14"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 24.0
+margin_bottom = 5.0
+texture = SubResource( 6 )
+expand = true
+
+[node name="ItemBase15" parent="UI/EditorUI/HBoxContainer/Items/Panel/Margin/Items" instance=ExtResource( 7 )]
+visible = true
+margin_left = 144.0
+margin_top = 80.0
+margin_right = 176.0
+margin_bottom = 112.0
+shortcut = SubResource( 4 )
+icon = ExtResource( 8 )
+
+[node name="Shadow" type="TextureRect" parent="UI/EditorUI/HBoxContainer/Items/Panel/Margin/Items/ItemBase15"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 24.0
+margin_bottom = 5.0
+texture = SubResource( 6 )
+expand = true
+
+[node name="Padding" type="Control" parent="UI/EditorUI/HBoxContainer"]
+margin_right = 489.0
+margin_bottom = 416.0
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/EditorUI/HBoxContainer"]
+margin_left = 493.0
+margin_right = 752.0
+margin_bottom = 19.0
+size_flags_vertical = 0
+
+[node name="Button3" type="Button" parent="UI/EditorUI/HBoxContainer/HBoxContainer"]
+margin_right = 44.0
+margin_bottom = 19.0
+text = "Edit..."
+
+[node name="Button2" type="Button" parent="UI/EditorUI/HBoxContainer/HBoxContainer"]
+margin_left = 48.0
+margin_right = 97.0
+margin_bottom = 19.0
+text = "View..."
+script = ExtResource( 4 )
+
+[node name="Menu" type="PanelContainer" parent="UI/EditorUI/HBoxContainer/HBoxContainer/Button2"]
+anchor_left = 0.5
+anchor_top = 0.95
+anchor_right = 0.5
+anchor_bottom = 0.95
+margin_left = -56.5
+margin_top = -0.0499992
+margin_right = 56.5
+margin_bottom = 69.95
+theme_type_variation = "MenuPanel"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/EditorUI/HBoxContainer/HBoxContainer/Button2/Menu"]
+margin_left = 4.0
+margin_top = 1.0
+margin_right = 109.0
+margin_bottom = 69.0
+rect_clip_content = true
+custom_constants/separation = 0
+
+[node name="Button" type="CheckButton" parent="UI/EditorUI/HBoxContainer/HBoxContainer/Button2/Menu/VBoxContainer"]
+margin_right = 105.0
+margin_bottom = 22.0
+theme_type_variation = "CheckButton2"
+pressed = true
+text = "Display Grid"
+flat = true
+
+[node name="HSeparator" type="HSeparator" parent="UI/EditorUI/HBoxContainer/HBoxContainer/Button2/Menu/VBoxContainer"]
+margin_top = 22.0
+margin_right = 105.0
+margin_bottom = 26.0
+custom_styles/separator = SubResource( 2 )
+
+[node name="Button2" type="Button" parent="UI/EditorUI/HBoxContainer/HBoxContainer/Button2/Menu/VBoxContainer"]
+margin_top = 26.0
+margin_right = 105.0
+margin_bottom = 45.0
+text = "Reset Zoom"
+flat = true
+
+[node name="HSeparator2" type="HSeparator" parent="UI/EditorUI/HBoxContainer/HBoxContainer/Button2/Menu/VBoxContainer"]
+margin_top = 45.0
+margin_right = 105.0
+margin_bottom = 49.0
+custom_styles/separator = SubResource( 2 )
+
+[node name="Button3" type="Button" parent="UI/EditorUI/HBoxContainer/HBoxContainer/Button2/Menu/VBoxContainer"]
+margin_top = 49.0
+margin_right = 105.0
+margin_bottom = 68.0
+text = "Settings"
+flat = true
+
+[node name="Button" type="Button" parent="UI/EditorUI/HBoxContainer/HBoxContainer"]
+margin_left = 101.0
+margin_right = 173.0
+margin_bottom = 19.0
+text = "Level Info"
+
+[node name="Button4" type="Button" parent="UI/EditorUI/HBoxContainer/HBoxContainer"]
+margin_left = 177.0
+margin_right = 215.0
+margin_bottom = 19.0
+text = "Save"
+
+[node name="Button5" type="Button" parent="UI/EditorUI/HBoxContainer/HBoxContainer"]
+margin_left = 219.0
+margin_right = 255.0
+margin_bottom = 19.0
+text = "Quit"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/EditorUI/HBoxContainer/HBoxContainer"]
+margin_left = 259.0
+margin_right = 259.0
+margin_bottom = 19.0
+
+[node name="Grid" type="ParallaxBackground" parent="UI"]
+layer = -1
+script = ExtResource( 3 )
+
+[node name="GridRepeat" type="ParallaxLayer" parent="UI/Grid"]
+motion_mirroring = Vector2( 3072, 1664 )
+
+[node name="GridTexture" type="TextureRect" parent="UI/Grid/GridRepeat"]
+unique_name_in_owner = true
+margin_right = 3072.0
+margin_bottom = 1664.0
+mouse_filter = 2
+texture = ExtResource( 2 )
+stretch_mode = 2
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource( 5 )
+volume_db = -10.0
+bus = "Sounds"
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource( 6 )
+volume_db = -10.0
+bus = "Sounds"
