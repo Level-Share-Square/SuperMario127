@@ -6,7 +6,6 @@ var last_mouse_tile: Vector2
 
 func _click_left(_event: InputEvent, _world_pos: Vector2) -> void:
 	if Input.is_action_just_pressed("place"):
-		print(_event.doubleclick)
 		place_object(_world_pos)
 
 
