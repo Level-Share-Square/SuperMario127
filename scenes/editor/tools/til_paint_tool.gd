@@ -15,34 +15,32 @@ func _click(_event: InputEvent, _world_pos: Vector2) -> void:
 	if Input.is_action_just_pressed("erase"):
 		erase_tile(last_mouse_tile)
 		mouse_input = 1
-#	elif editor.selected_item is PlaceableObject:
-#		if Input.is_action_just_pressed("place"):
-#			place_object(_world_pos)
-#			mouse_input = 0
 
 
-func _update(delta: float) -> void:
+func _click_released(_event: InputEvent, _world_pos: Vector2) -> void:
 	if editor.selected_item is PlaceableTile:
-		var mouse_tile: Vector2 = (get_global_mouse_position() / editor.TILE_SIZE).floor()
-		
-		var line: = line_util.get_line(last_mouse_tile, mouse_tile)
-		
-		if left_held and mouse_input == 0:
-			for point in line:
-				draw_tile(point)
-		
-		if right_held and mouse_input == 1:
-			for point in line:
-				erase_tile(point)
-		
 		if Input.is_action_just_released("place") and mouse_input == 0:
 			finalize_placement()
 			mouse_input = -1
-		
+			
 		if Input.is_action_just_released("erase") and mouse_input == 1:
 			finalize_erase()
 			mouse_input = -1
-	
+
+
+func _mouse_movement(_event: InputEvent, world_pos: Vector2) -> void:
+	if editor.selected_item is PlaceableTile:
+		var mouse_tile: Vector2 = (get_global_mouse_position() / editor.TILE_SIZE).floor()
+		var line: = line_util.get_line(last_mouse_tile, mouse_tile)
+		
+		if Input.is_action_pressed("place") and mouse_input == 0:
+			for point in line:
+				draw_tile(point)
+		
+		if Input.is_action_pressed("erase") and mouse_input == 1:
+			for point in line:
+				erase_tile(point)
+		
 		last_mouse_tile = mouse_tile
 
 

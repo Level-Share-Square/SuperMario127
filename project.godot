@@ -257,7 +257,7 @@ _global_script_classes=[ {
 "base": "Control",
 "class": "EditorTool",
 "language": "GDScript",
-"path": "res://scenes/editor/editor_tool.gd"
+"path": "res://scenes/editor/tools/editor_tool.gd"
 }, {
 "base": "Popup",
 "class": "EditorWindow",
@@ -747,7 +747,7 @@ _global_script_classes=[ {
 "base": "Control",
 "class": "ToolManager",
 "language": "GDScript",
-"path": "res://scenes/editor/tool_manager.gd"
+"path": "res://scenes/editor/tools/tool_manager.gd"
 }, {
 "base": "Node",
 "class": "TouchCheck",

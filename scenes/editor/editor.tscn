@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://scenes/menu/options/options.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/menu/menu_controller/screen_manager.gd" type="Script" id=2]
@@ -7,7 +7,7 @@
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/shared/backgrounds.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/editor/editor_camera.tscn" type="PackedScene" id=7]
-[ext_resource path="res://scenes/editor/tool_manager.gd" type="Script" id=8]
+[ext_resource path="res://scenes/editor/tools/tool_manager.gd" type="Script" id=8]
 [ext_resource path="res://scenes/editor/windows/item_picker/item_picker_window.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scenes/editor/assets/item_picker.svg" type="Texture" id=10]
 [ext_resource path="res://scenes/editor/assets/item_picker_pressed.svg" type="Texture" id=11]
@@ -24,11 +24,14 @@
 [ext_resource path="res://scenes/editor/action_manager/action_manager.gd" type="Script" id=22]
 [ext_resource path="res://generation/generated_tiles.res" type="TileSet" id=23]
 [ext_resource path="res://scenes/menu/button_scripts/button_sound.gd" type="Script" id=24]
-[ext_resource path="res://scenes/editor/paint_tool.gd" type="Script" id=27]
+[ext_resource path="res://scenes/editor/tools/obj_paint_tool.gd" type="Script" id=25]
+[ext_resource path="res://scenes/editor/assets/redo.svg" type="Texture" id=26]
+[ext_resource path="res://scenes/editor/tools/til_paint_tool.gd" type="Script" id=27]
 [ext_resource path="res://scenes/oldeditor/assets/grid.png" type="Texture" id=28]
 [ext_resource path="res://scenes/actors/mode_switcher/ui/play_button.png" type="Texture" id=29]
 [ext_resource path="res://scenes/editor/grid.gd" type="Script" id=30]
 [ext_resource path="res://scenes/editor/items/items.tres" type="Resource" id=31]
+[ext_resource path="res://scenes/editor/assets/undo.svg" type="Texture" id=32]
 
 [node name="Editor" type="Node2D"]
 script = ExtResource( 3 )
@@ -41,6 +44,7 @@ shared_path = NodePath("Shared")
 [node name="Shared" parent="." instance=ExtResource( 5 )]
 
 [node name="EditorCamera" parent="." instance=ExtResource( 7 )]
+unique_name_in_owner = true
 limit_left = -10000000
 limit_top = -10000000
 
@@ -62,7 +66,7 @@ inverse_tool_name = "ObjectPaint"
 margin_right = 40.0
 margin_bottom = 40.0
 mouse_filter = 2
-script = ExtResource( 27 )
+script = ExtResource( 25 )
 tool_type = 1
 inverse_tool_name = "TilePaint"
 
@@ -95,7 +99,7 @@ theme = ExtResource( 4 )
 [node name="MarginContainer" type="MarginContainer" parent="UI/EditorUI"]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -189.0
+margin_left = -202.0
 margin_bottom = 56.0
 custom_constants/margin_right = 4
 custom_constants/margin_top = 4
@@ -103,9 +107,9 @@ custom_constants/margin_left = 4
 custom_constants/margin_bottom = 4
 
 [node name="Utilities" type="HBoxContainer" parent="UI/EditorUI/MarginContainer"]
-margin_left = 4.0
+margin_left = 20.0
 margin_top = 4.0
-margin_right = 185.0
+margin_right = 198.0
 margin_bottom = 52.0
 mouse_filter = 2
 size_flags_horizontal = 10
@@ -113,25 +117,36 @@ size_flags_vertical = 6
 alignment = 2
 
 [node name="Undo" type="Button" parent="UI/EditorUI/MarginContainer/Utilities"]
-margin_right = 42.0
-margin_bottom = 48.0
+margin_top = 4.0
+margin_right = 40.0
+margin_bottom = 44.0
+rect_min_size = Vector2( 40, 40 )
 focus_mode = 0
+mouse_default_cursor_shape = 2
+size_flags_vertical = 4
 enabled_focus_mode = 0
-text = "Undo"
+icon = ExtResource( 32 )
+expand_icon = true
 script = ExtResource( 24 )
 
 [node name="Redo" type="Button" parent="UI/EditorUI/MarginContainer/Utilities"]
-margin_left = 46.0
-margin_right = 87.0
-margin_bottom = 48.0
+margin_left = 44.0
+margin_top = 4.0
+margin_right = 84.0
+margin_bottom = 44.0
+rect_min_size = Vector2( 40, 40 )
 focus_mode = 0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 enabled_focus_mode = 0
-text = "Redo"
+icon = ExtResource( 26 )
+expand_icon = true
 script = ExtResource( 24 )
 
 [node name="ItemPicker" type="TextureButton" parent="UI/EditorUI/MarginContainer/Utilities"]
-margin_left = 91.0
-margin_right = 133.0
+margin_left = 88.0
+margin_right = 130.0
 margin_bottom = 48.0
 rect_min_size = Vector2( 42, 48 )
 focus_mode = 0
@@ -144,8 +159,8 @@ stretch_mode = 5
 script = ExtResource( 16 )
 
 [node name="Settings" type="TextureButton" parent="UI/EditorUI/MarginContainer/Utilities"]
-margin_left = 137.0
-margin_right = 181.0
+margin_left = 134.0
+margin_right = 178.0
 margin_bottom = 48.0
 rect_min_size = Vector2( 44, 0 )
 focus_mode = 0

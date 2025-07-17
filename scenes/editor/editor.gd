@@ -14,9 +14,10 @@ var placed_item_property = null
 var hovered_objects: Dictionary = {}
 var selected_item: PlaceableItem
 
+onready var editor_camera: Camera2D = $"%EditorCamera"
 onready var tool_manager: ToolManager = $"%Tools"
-onready var action_manager: ActionManager = $"%ActionManager"
 onready var tile_buffer: TileMap = $"%TileBuffer"
+onready var action_manager: ActionManager = $"%ActionManager"
 
 onready var save_button = $UI/EditorUI/Utilities/Save
 onready var editor_options = $UI/EditorOptionsWindow
@@ -87,18 +88,22 @@ func on_save_pressed():
 
 
 func object_hovered(object: GameObject):
+	if tool_manager.current_tool.tool_type == EditorTool.Type.TileTool:
+		return
+	
 	# Look you come up with a better object ID system when you have none
 	hovered_objects.get_or_add(object.name, object)
 	object.hovered = true
 	object.modulate.a = .5
-	print(hovered_objects)
 
 
 func object_unhovered(object: GameObject):
+	if not object in hovered_objects.values():
+		return
+	
 	hovered_objects.erase(object.name)
 	object.hovered = false
 	object.modulate.a = 1
-	print(hovered_objects)
 
 
 func _update_editor_framerate():

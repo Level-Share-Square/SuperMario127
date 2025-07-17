@@ -6,6 +6,8 @@ export var zoom_level: float = 1.0
 
 var editor: Editor = get_owner()
 
+var last_pos: Vector2
+
 
 signal zoom_changed(zoom_level)
 
@@ -44,10 +46,14 @@ func camera_movement(delta: float):
 	var move_speed = speed * 2 if Input.is_action_pressed("speed_up_camera") else speed
 	var direction := Input.get_vector("editor_left", "editor_right", "editor_up", "editor_down")
 	
-	position += direction*move_speed*60*delta
+	last_pos = position
+	position += direction * move_speed * 60 * delta
 	
 	resolve_limit_collisions()
 
+
+func is_moving() -> bool:
+	return not position.is_equal_approx(last_pos)
 
 func update_limits(level_area: LevelArea):
 	var area_bounds = level_area.settings.bounds.grow(3)

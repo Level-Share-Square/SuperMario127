@@ -23,9 +23,10 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _physics_process(delta: float):
-	current_tool._update(delta)
-	current_tool.left_held = Input.is_action_pressed("place") and not Input.is_action_pressed("erase")
-	current_tool.right_held = Input.is_action_pressed("erase") and not Input.is_action_pressed("place")
+	if owner.editor_camera.is_moving():
+		print("camera moving")
+		var event := InputEventMouseMotion.new()
+		_unhandled_input(event)
 
 
 func change_tool(tool_name: String) -> void:
