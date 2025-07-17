@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=179 format=2]
+[gd_resource type="Resource" load_steps=184 format=2]
 
 [ext_resource path="res://scenes/editor/items/placeable_items.gd" type="Script" id=1]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/blue_coin.tres" type="Resource" id=2]
@@ -147,7 +147,7 @@
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/toad.tres" type="Resource" id=145]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/buoyant_bouncer.tres" type="Resource" id=146]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/boo_block.tres" type="Resource" id=147]
-[ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/cave.tres" type="Resource" id=148]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/bricks_stairs_left.tres" type="Resource" id=148]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/gem_block.tres" type="Resource" id=149]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/glass.tres" type="Resource" id=150]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/wood.tres" type="Resource" id=151]
@@ -178,6 +178,11 @@
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/garden.tres" type="Resource" id=176]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/columns.tres" type="Resource" id=177]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/clouds.tres" type="Resource" id=178]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/bricks_stairs_right.tres" type="Resource" id=179]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/dark_bricks_stairs_left.tres" type="Resource" id=180]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/dark_bricks_stairs_right.tres" type="Resource" id=181]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/fire_bricks_stairs_left.tres" type="Resource" id=182]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/fire_bricks_stairs_right.tres" type="Resource" id=183]
 
 [resource]
 script = ExtResource( 1 )
@@ -329,18 +334,23 @@ placeable_items = {
 "til_boo_block": ExtResource( 147 ),
 "til_bookshelf": ExtResource( 173 ),
 "til_brick": ExtResource( 3 ),
+"til_brick_stairs_left": ExtResource( 148 ),
+"til_brick_stairs_right": ExtResource( 179 ),
 "til_cabin_window": ExtResource( 175 ),
 "til_carpet": ExtResource( 161 ),
 "til_castle_pillar": ExtResource( 165 ),
 "til_castle_wall": ExtResource( 168 ),
 "til_castle_wood": ExtResource( 158 ),
-"til_cave": ExtResource( 148 ),
 "til_cloud": ExtResource( 178 ),
 "til_cobblestone": ExtResource( 171 ),
 "til_columns": ExtResource( 177 ),
 "til_crystal": ExtResource( 166 ),
 "til_dark_brick": ExtResource( 172 ),
+"til_dark_brick_stairs_left": ExtResource( 180 ),
+"til_dark_brick_stairs_right": ExtResource( 181 ),
 "til_fire_brick": ExtResource( 162 ),
+"til_fire_brick_stairs_left": ExtResource( 182 ),
+"til_fire_bricks_stairs_right": ExtResource( 183 ),
 "til_garden": ExtResource( 176 ),
 "til_gem_block": ExtResource( 149 ),
 "til_glass": ExtResource( 150 ),

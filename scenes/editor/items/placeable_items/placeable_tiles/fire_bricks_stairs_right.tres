@@ -1,0 +1,26 @@
+[gd_resource type="Resource" load_steps=12 format=2]
+
+[ext_resource path="res://scenes/editor/items/placeable_tile.gd" type="Script" id=1]
+[ext_resource path="res://assets/tiles/fire_bricks/icon_slopeR.png" type="Texture" id=2]
+[ext_resource path="res://assets/tiles/fire_bricks/palette_icons/4_slopeR.png" type="Texture" id=3]
+[ext_resource path="res://assets/tiles/fire_bricks/icon.png" type="Texture" id=4]
+[ext_resource path="res://assets/tiles/fire_bricks/palette_icons/2_slopeR.png" type="Texture" id=5]
+[ext_resource path="res://assets/tiles/fire_bricks/palette_icons/0_slopeR.png" type="Texture" id=6]
+[ext_resource path="res://assets/tiles/fire_bricks/palette_icons/3_slopeR.png" type="Texture" id=7]
+[ext_resource path="res://assets/tiles/fire_bricks/palette_icons/1_slopeR.png" type="Texture" id=8]
+[ext_resource path="res://assets/tiles/fire_bricks/palette_icons/6Purple-magma_brick_slope_r_icon.png" type="Texture" id=9]
+[ext_resource path="res://assets/tiles/fire_bricks/palette_icons/5Yellow-magma_brick_slope_r_icon.png" type="Texture" id=10]
+[ext_resource path="res://assets/tiles/fire_bricks/palette_icons/7Extra-magma_brick_slope_r_icon.png" type="Texture" id=11]
+
+[resource]
+script = ExtResource( 1 )
+item_name = "Fire Bricks (Right Stairs)"
+groups = PoolStringArray( "special" )
+change_to = ""
+items_in_sequence = 0
+index_in_sequence = 0
+icons = [ ExtResource( 2 ), ExtResource( 6 ), ExtResource( 8 ), ExtResource( 5 ), ExtResource( 7 ), ExtResource( 3 ), ExtResource( 10 ), ExtResource( 9 ), ExtResource( 11 ) ]
+previews = [ ExtResource( 4 ) ]
+priority = 0
+tileset_id = 31
+tile_id = 0

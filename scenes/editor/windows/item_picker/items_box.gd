@@ -117,6 +117,7 @@ func sort_by_fuzzy_search(search: String):
 	owner.groups.reset()
 	return return_array
 
+
 func find_words(item):
 	var word: String
 	var word_array: Array
@@ -136,7 +137,8 @@ func find_words(item):
 		if letter_counter == item.length():
 			word_array.append(word)
 	return word_array
-	
+
+
 func quicksort(array):
 	var length = len(array)
 	if length <= 1:
@@ -152,11 +154,13 @@ func quicksort(array):
 			low.append(i)
 	return quicksort(low) + [pivot] + quicksort(high)
 
+
 func _sort_by_priority(a, b):
 	if a["priority"] > b["priority"]:
 		return true
 	return false
-	
+
+
 func _sort_by_ascending(a, b):
 	if a[a.keys()[0]] > b[b.keys()[0]]:
 		return true

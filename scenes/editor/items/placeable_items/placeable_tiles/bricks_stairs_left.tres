@@ -1,0 +1,26 @@
+[gd_resource type="Resource" load_steps=12 format=2]
+
+[ext_resource path="res://scenes/editor/items/placeable_tile.gd" type="Script" id=1]
+[ext_resource path="res://assets/tiles/bricks/icon_slope_left.png" type="Texture" id=2]
+[ext_resource path="res://assets/tiles/bricks/palette_icons/3_slopeL.png" type="Texture" id=3]
+[ext_resource path="res://assets/tiles/bricks/palette_icons/0_slopeL.png" type="Texture" id=4]
+[ext_resource path="res://assets/tiles/bricks/icon.png" type="Texture" id=5]
+[ext_resource path="res://assets/tiles/bricks/palette_icons/2_slopeL.png" type="Texture" id=6]
+[ext_resource path="res://assets/tiles/bricks/palette_icons/4_slopeL.png" type="Texture" id=7]
+[ext_resource path="res://assets/tiles/bricks/palette_icons/1_slopeL.png" type="Texture" id=8]
+[ext_resource path="res://assets/tiles/bricks/palette_icons/5Brown-striped_brick_slope_l_icon.png" type="Texture" id=9]
+[ext_resource path="res://assets/tiles/bricks/palette_icons/6Extra-striped_brick_slope_l_icon.png" type="Texture" id=10]
+[ext_resource path="res://assets/tiles/bricks/palette_icons/7White-striped_brick_slope_l_icon.png" type="Texture" id=11]
+
+[resource]
+script = ExtResource( 1 )
+item_name = "Bricks (Left Stairs)"
+groups = PoolStringArray( "special" )
+change_to = ""
+items_in_sequence = 0
+index_in_sequence = 0
+icons = [ ExtResource( 2 ), ExtResource( 4 ), ExtResource( 8 ), ExtResource( 6 ), ExtResource( 3 ), ExtResource( 7 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ) ]
+previews = [ ExtResource( 5 ) ]
+priority = 0
+tileset_id = 1
+tile_id = 1
