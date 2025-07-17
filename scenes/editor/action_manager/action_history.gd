@@ -1,4 +1,5 @@
 extends VBoxContainer
 
 
-func 
+func _ready():
+	pass

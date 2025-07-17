@@ -17,6 +17,13 @@ func _click(_event: InputEvent, _world_pos: Vector2) -> void:
 		
 
 
+func _mouse_movement(_event: InputEvent, _world_pos: Vector2) -> void:
+	if Input.is_action_just_pressed("erase"):
+		for object in editor.hovered_objects.values():
+			erase_object(object)
+
+
+
 func place_object(pos: Vector2):
 	if shared.is_object_at_position(pos):
 		return
