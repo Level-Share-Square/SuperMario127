@@ -15,6 +15,7 @@ func _click_left(_event: InputEvent, _world_pos: Vector2) -> void:
 		return
 	
 	if Input.is_action_just_pressed("place"):
+		last_mouse_tile = get_mouse_tile_pos()
 		draw_tile(last_mouse_tile)
 		mouse_input = 0
 
@@ -24,6 +25,7 @@ func _click_right(_event: InputEvent, _world_pos: Vector2) -> void:
 		return
 	
 	if Input.is_action_just_pressed("erase"):
+		last_mouse_tile = get_mouse_tile_pos()
 		erase_tile(last_mouse_tile)
 		mouse_input = 1
 
@@ -47,7 +49,7 @@ func _click_right_released(_event: InputEvent, _world_pos: Vector2) -> void:
 
 func _mouse_movement(_event: InputEvent, world_pos: Vector2) -> void:
 	if editor.selected_item is PlaceableTile:
-		var mouse_tile: Vector2 = (get_global_mouse_position() / editor.TILE_SIZE).floor()
+		var mouse_tile: Vector2 = get_mouse_tile_pos()
 		var line: = line_util.get_line(last_mouse_tile, mouse_tile)
 		
 		if not eraser_only:
@@ -112,3 +114,9 @@ func finalize_erase() -> void:
 	editor.action_manager.commit_action(action)
 	
 	editor.tile_buffer.clear()
+
+# Mouse coords to tile grid coords
+func get_mouse_tile_pos() -> Vector2:
+	return (get_global_mouse_position() / editor.TILE_SIZE).floor()
+	
+	
