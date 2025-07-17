@@ -1,11 +1,16 @@
 extends EditorTool
 
 
+export var eraser_only: bool = false
+
 var last_mouse_tile: Vector2
 var mouse_input: int = -1
 
 
 func _click_left(_event: InputEvent, _world_pos: Vector2) -> void:
+	if eraser_only:
+		return
+	
 	if mouse_input > -1:
 		return
 	
@@ -24,6 +29,9 @@ func _click_right(_event: InputEvent, _world_pos: Vector2) -> void:
 
 
 func _click_left_released(_event: InputEvent, _world_pos: Vector2) -> void:
+	if eraser_only:
+		return
+	
 	if editor.selected_item is PlaceableTile:
 		if Input.is_action_just_released("place") and mouse_input == 0:
 			finalize_placement()
@@ -42,9 +50,10 @@ func _mouse_movement(_event: InputEvent, world_pos: Vector2) -> void:
 		var mouse_tile: Vector2 = (get_global_mouse_position() / editor.TILE_SIZE).floor()
 		var line: = line_util.get_line(last_mouse_tile, mouse_tile)
 		
-		if Input.is_action_pressed("place") and mouse_input == 0:
-			for point in line:
-				draw_tile(point)
+		if not eraser_only:
+			if Input.is_action_pressed("place") and mouse_input == 0:
+				for point in line:
+					draw_tile(point)
 		
 		if Input.is_action_pressed("erase") and mouse_input == 1:
 			for point in line:

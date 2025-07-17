@@ -1,10 +1,15 @@
 extends EditorTool
 
 
+export var eraser_only: bool = false
+
 var last_mouse_tile: Vector2
 
 
 func _click_left(_event: InputEvent, _world_pos: Vector2) -> void:
+	if eraser_only:
+		return
+	
 	if Input.is_action_just_pressed("place"):
 		place_object(_world_pos)
 

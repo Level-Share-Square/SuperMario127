@@ -65,6 +65,14 @@ mouse_filter = 2
 script = ExtResource( 27 )
 inverse_tool_name = "ObjectPaint"
 
+[node name="TileErase" type="Control" parent="Tools"]
+margin_right = 40.0
+margin_bottom = 40.0
+mouse_filter = 2
+script = ExtResource( 27 )
+inverse_tool_name = "ObjectPaint"
+eraser_only = true
+
 [node name="ObjectPaint" type="Control" parent="Tools"]
 margin_right = 40.0
 margin_bottom = 40.0
@@ -72,6 +80,15 @@ mouse_filter = 2
 script = ExtResource( 25 )
 tool_type = 1
 inverse_tool_name = "TilePaint"
+
+[node name="ObjectErase" type="Control" parent="Tools"]
+margin_right = 40.0
+margin_bottom = 40.0
+mouse_filter = 2
+script = ExtResource( 25 )
+tool_type = 1
+inverse_tool_name = "TilePaint"
+eraser_only = true
 
 [node name="TileBuffer" type="TileMap" parent="."]
 unique_name_in_owner = true

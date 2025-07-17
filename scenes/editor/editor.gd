@@ -108,12 +108,14 @@ func object_unhovered(object: GameObject):
 	hovered_objects.erase(object.name)
 	object.hovered = false
 	object.modulate.a = 1
-	
+
+
 func _process(delta):
 	if Input.is_action_just_pressed("right_click"):
 		selection_box.show()
 	for i in selected_objects:
 		i.modulate = Color(0.7, 0.7, 1.2, i.modulate.a)
+
 
 func object_clicked(object: GameObject):
 	if tool_manager.current_tool.tool_type == EditorTool.Type.TileTool:
