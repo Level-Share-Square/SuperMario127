@@ -1,5 +1,7 @@
 extends EditorWindow
 
+onready var items_box = $"%ItemsBox"
+onready var groups = $"%Groups"
 
 signal item_selected(item)
 

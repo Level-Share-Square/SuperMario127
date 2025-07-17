@@ -6,10 +6,6 @@ var undo_stack: Array
 var redo_stack: Array
 
 
-signal undo(action)
-signal redo(action)
-
-
 func commit_action(action: Action) -> void:
 	redo_stack.clear()
 	
@@ -22,7 +18,6 @@ func undo() -> void:
 	
 	var action: Action = undo_stack.pop_back()
 	action._undo()
-	emit_signal("undo", action)
 	redo_stack.append(action)
 
 
@@ -31,5 +26,4 @@ func redo() -> void:
 	
 	var action: Action = redo_stack.pop_back()
 	action._do()
-	emit_signal("redo", action)
 	undo_stack.append(action)

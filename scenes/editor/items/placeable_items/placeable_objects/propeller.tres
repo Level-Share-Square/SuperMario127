@@ -1,0 +1,28 @@
+[gd_resource type="Resource" load_steps=12 format=2]
+
+[ext_resource path="res://scenes/editor/items/placeable_object.gd" type="Script" id=1]
+[ext_resource path="res://scenes/actors/objects/propeller/propeller.png" type="Texture" id=2]
+[ext_resource path="res://scenes/actors/objects/propeller/palettes/3/propeller3.png" type="Texture" id=3]
+[ext_resource path="res://scenes/actors/objects/propeller/palettes/4/propeller4.png" type="Texture" id=4]
+[ext_resource path="res://scenes/actors/objects/propeller/propeller_icon.png" type="Texture" id=5]
+[ext_resource path="res://scenes/actors/objects/propeller/palettes/1/propeller1.png" type="Texture" id=6]
+[ext_resource path="res://scenes/actors/objects/propeller/palettes/2/propeller2.png" type="Texture" id=7]
+[ext_resource path="res://scenes/actors/objects/propeller/palettes/2/propeller_icon2.png" type="Texture" id=8]
+[ext_resource path="res://scenes/actors/objects/propeller/palettes/1/propeller_icon1.png" type="Texture" id=9]
+[ext_resource path="res://scenes/actors/objects/propeller/palettes/3/propeller_icon3.png" type="Texture" id=10]
+[ext_resource path="res://scenes/actors/objects/propeller/palettes/4/propeller_icon4.png" type="Texture" id=11]
+
+[resource]
+script = ExtResource( 1 )
+item_name = "Propeller"
+groups = PoolStringArray( "decoration" )
+change_to = ""
+items_in_sequence = 0
+index_in_sequence = 0
+icons = [ ExtResource( 5 ), ExtResource( 9 ), ExtResource( 8 ), ExtResource( 10 ), ExtResource( 11 ) ]
+previews = [ ExtResource( 2 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 3 ), ExtResource( 4 ) ]
+priority = 0
+object_id = 136
+object_center = Vector2( 0, 0 )
+tile_mode_offset = Vector2( 0, 0 )
+tile_mode_step = 32

@@ -1,0 +1,31 @@
+[gd_resource type="Resource" load_steps=15 format=2]
+
+[ext_resource path="res://scenes/editor/items/placeable_object.gd" type="Script" id=1]
+[ext_resource path="res://scenes/actors/objects/small_bush/palettes/2/icon.png" type="Texture" id=2]
+[ext_resource path="res://scenes/actors/objects/small_bush/small_bush.png" type="Texture" id=3]
+[ext_resource path="res://scenes/actors/objects/small_bush/palettes/1/small_bush.png" type="Texture" id=4]
+[ext_resource path="res://scenes/actors/objects/small_bush/palettes/6/small_bush.png" type="Texture" id=5]
+[ext_resource path="res://scenes/actors/objects/small_bush/palettes/4/small_bush.png" type="Texture" id=6]
+[ext_resource path="res://scenes/actors/objects/small_bush/palettes/2/small_bush.png" type="Texture" id=7]
+[ext_resource path="res://scenes/actors/objects/small_bush/palettes/1/icon.png" type="Texture" id=8]
+[ext_resource path="res://scenes/actors/objects/small_bush/palettes/5/small_bush.png" type="Texture" id=9]
+[ext_resource path="res://scenes/actors/objects/small_bush/palettes/3/icon.png" type="Texture" id=10]
+[ext_resource path="res://scenes/actors/objects/small_bush/palettes/4/icon.png" type="Texture" id=11]
+[ext_resource path="res://scenes/actors/objects/small_bush/palettes/6/icon.png" type="Texture" id=12]
+[ext_resource path="res://scenes/actors/objects/small_bush/palettes/5/icon.png" type="Texture" id=13]
+[ext_resource path="res://scenes/actors/objects/small_bush/palettes/3/small_bush.png" type="Texture" id=14]
+
+[resource]
+script = ExtResource( 1 )
+item_name = "Small Bush"
+groups = PoolStringArray( "warp" )
+change_to = ""
+items_in_sequence = 0
+index_in_sequence = 0
+icons = [ ExtResource( 3 ), ExtResource( 8 ), ExtResource( 2 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 13 ), ExtResource( 12 ) ]
+previews = [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 7 ), ExtResource( 14 ), ExtResource( 6 ), ExtResource( 9 ), ExtResource( 5 ) ]
+priority = 0
+object_id = 12
+object_center = Vector2( 0, 0 )
+tile_mode_offset = Vector2( 0, 0 )
+tile_mode_step = 32

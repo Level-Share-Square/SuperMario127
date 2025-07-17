@@ -1,0 +1,23 @@
+[gd_resource type="Resource" load_steps=7 format=2]
+
+[ext_resource path="res://scenes/actors/objects/coral_small/SCoralP.png" type="Texture" id=1]
+[ext_resource path="res://scenes/editor/items/placeable_object.gd" type="Script" id=2]
+[ext_resource path="res://scenes/actors/objects/coral_small/palettes/4/SCoralY.png" type="Texture" id=3]
+[ext_resource path="res://scenes/actors/objects/coral_small/palettes/2/SCoralG.png" type="Texture" id=4]
+[ext_resource path="res://scenes/actors/objects/coral_small/palettes/1/SCoralB.png" type="Texture" id=5]
+[ext_resource path="res://scenes/actors/objects/coral_small/palettes/3/SCoralR.png" type="Texture" id=6]
+
+[resource]
+script = ExtResource( 2 )
+item_name = "Small Coral"
+groups = PoolStringArray( "decoration" )
+change_to = ""
+items_in_sequence = 0
+index_in_sequence = 0
+icons = [ ExtResource( 1 ), ExtResource( 5 ), ExtResource( 4 ), ExtResource( 6 ), ExtResource( 3 ) ]
+previews = [ ExtResource( 1 ), ExtResource( 5 ), ExtResource( 4 ), ExtResource( 6 ), ExtResource( 3 ) ]
+priority = 0
+object_id = 102
+object_center = Vector2( 0, 0 )
+tile_mode_offset = Vector2( 0, 0 )
+tile_mode_step = 32
