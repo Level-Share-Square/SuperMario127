@@ -3,10 +3,12 @@ extends Camera2D
 
 export var speed: float = 12.0
 export var zoom_level: float = 1.0
+export var smoothing: float = 12.5
 
 var editor: Editor = get_owner()
 
 var last_pos: Vector2
+var sim_pos: Vector2
 
 
 signal zoom_changed(zoom_level)
@@ -47,13 +49,17 @@ func camera_movement(delta: float):
 	var direction := Input.get_vector("editor_left", "editor_right", "editor_up", "editor_down")
 	
 	last_pos = position
-	position += direction * move_speed * 60 * delta
+	sim_pos += direction * move_speed * 60 * delta
+	sim_pos = resolve_limit_collisions(sim_pos)
 	
-	resolve_limit_collisions()
+	position = lerp(position, sim_pos, 12.5 * delta)
+	position = resolve_limit_collisions(position)
+	
 
 
 func is_moving() -> bool:
 	return not position.is_equal_approx(last_pos)
+
 
 func update_limits(level_area: LevelArea):
 	var area_bounds = level_area.settings.bounds.grow(3)
@@ -64,27 +70,30 @@ func update_limits(level_area: LevelArea):
 	limit_right = int(area_bounds.end.x * 32)
 	limit_bottom = int(area_bounds.end.y * 32)
 	
-	resolve_limit_collisions()
+	sim_pos = resolve_limit_collisions(sim_pos)
+	position = resolve_limit_collisions(position)
 
 
-func resolve_limit_collisions():
+func resolve_limit_collisions(pos: Vector2) -> Vector2:
 	# If you were curious, this stops the camera node's position value from
 	# exceeding the level bounds. If you don't do this, the camera will continue
 	# to move past the limits while the viewport won't.
 	
-	var camera_left = position.x - ((get_viewport_rect().size.x / 2) * zoom.x)
-	var camera_right = position.x + ((get_viewport_rect().size.x / 2) * zoom.x)
-	var camera_up = position.y - ((get_viewport_rect().size.y / 2) * zoom.y)
-	var camera_down = position.y + ((get_viewport_rect().size.y / 2) * zoom.y)
+	var camera_left = pos.x - ((get_viewport_rect().size.x / 2) * zoom.x)
+	var camera_right = pos.x + ((get_viewport_rect().size.x / 2) * zoom.x)
+	var camera_up = pos.y - ((get_viewport_rect().size.y / 2) * zoom.y)
+	var camera_down = pos.y + ((get_viewport_rect().size.y / 2) * zoom.y)
 	
 	if camera_left < limit_left:
-		position.x = limit_left + ((get_viewport_rect().size.x / 2) * zoom.x)
+		pos.x = limit_left + ((get_viewport_rect().size.x / 2) * zoom.x)
 	if camera_right > limit_right:
-		position.x = limit_right - ((get_viewport_rect().size.x / 2) * zoom.x)
+		pos.x = limit_right - ((get_viewport_rect().size.x / 2) * zoom.x)
 	if camera_up < limit_top:
-		position.y = limit_top + ((get_viewport_rect().size.y / 2) * zoom.y)
+		pos.y = limit_top + ((get_viewport_rect().size.y / 2) * zoom.y)
 	if camera_down > limit_bottom:
-		position.y = limit_bottom - ((get_viewport_rect().size.y / 2) * zoom.y)
+		pos.y = limit_bottom - ((get_viewport_rect().size.y / 2) * zoom.y)
+	
+	return pos
 
 
 # Functions to avoid copy pasted code

@@ -47,6 +47,7 @@ shared_path = NodePath("Shared")
 unique_name_in_owner = true
 limit_left = -10000000
 limit_top = -10000000
+smoothing_enabled = false
 
 [node name="Tools" type="Control" parent="."]
 unique_name_in_owner = true
