@@ -25,7 +25,3 @@ func _click_released(_event: InputEvent, _world_pos: Vector2) -> void:
 
 func _mouse_movement(_event: InputEvent, _world_pos: Vector2) -> void:
 	pass
-
-
-func _update(delta: float):
-	pass

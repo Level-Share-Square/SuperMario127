@@ -304,6 +304,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/actors/objects/enemy/states/wander_state.gd"
 }, {
+"base": "Action",
+"class": "EraseObjectAction",
+"language": "GDScript",
+"path": "res://scenes/editor/action_manager/actions/erase_object.gd"
+}, {
 "base": "State",
 "class": "ExitPaintingState",
 "language": "GDScript",
@@ -949,6 +954,7 @@ _global_script_class_icons={
 "EnemyStopState": "",
 "EnemyWanderIdleState": "",
 "EnemyWanderState": "",
+"EraseObjectAction": "",
 "ExitPaintingState": "",
 "FallState": "",
 "FolderCard": "",
