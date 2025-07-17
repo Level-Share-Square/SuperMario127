@@ -100,7 +100,6 @@ grow_end = -7.0
 thickness = 2
 
 [node name="ItemPickerWindow" instance=ExtResource( 1 )]
-visible = false
 margin_right = 256.0
 margin_bottom = 256.0
 script = ExtResource( 3 )
@@ -158,11 +157,11 @@ custom_constants/separation = 3
 
 [node name="GroupsBox" type="ScrollContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox" index="0"]
 margin_right = 244.0
-margin_bottom = 28.0
+margin_bottom = 36.0
 scroll_vertical_enabled = false
 
 [node name="GroupMat" type="MarginContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/GroupsBox" index="0"]
-margin_right = 304.0
+margin_right = 318.0
 margin_bottom = 28.0
 size_flags_horizontal = 3
 custom_constants/margin_right = 2
@@ -174,7 +173,7 @@ custom_constants/margin_bottom = 6
 unique_name_in_owner = true
 margin_left = 2.0
 margin_top = 3.0
-margin_right = 302.0
+margin_right = 316.0
 margin_bottom = 22.0
 size_flags_horizontal = 3
 custom_constants/separation = 6
@@ -182,13 +181,12 @@ script = ExtResource( 4 )
 
 [node name="Search" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/GroupsBox/GroupMat/Groups" index="0" instance=ExtResource( 8 )]
 unique_name_in_owner = true
-visible = false
 icon = ExtResource( 2 )
 color = Color( 0, 0.294118, 0.705882, 1 )
 
 [node name="SearchMat" type="MarginContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/GroupsBox/GroupMat/Groups" index="1"]
 margin_left = 14.0
-margin_right = 232.0
+margin_right = 70.0
 margin_bottom = 19.0
 size_flags_horizontal = 3
 custom_constants/margin_top = 2
@@ -197,7 +195,7 @@ custom_constants/margin_bottom = -2
 [node name="SearchBar" type="LineEdit" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/GroupsBox/GroupMat/Groups/SearchMat" index="0"]
 unique_name_in_owner = true
 margin_top = 2.0
-margin_right = 218.0
+margin_right = 56.0
 margin_bottom = 21.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -205,16 +203,16 @@ placeholder_text = "Search..."
 
 [node name="Special" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/GroupsBox/GroupMat/Groups" index="2" instance=ExtResource( 8 )]
 unique_name_in_owner = true
-margin_left = 181.0
-margin_right = 232.0
+margin_left = 76.0
+margin_right = 127.0
 text = "Special"
 expand_icon = false
 color = Color( 0.556863, 0.152941, 0.658824, 1 )
 
 [node name="Dialogue" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/GroupsBox/GroupMat/Groups" index="3" instance=ExtResource( 8 )]
 unique_name_in_owner = true
-margin_left = 168.0
-margin_right = 232.0
+margin_left = 133.0
+margin_right = 197.0
 text = "Dialogue"
 expand_icon = false
 color = Color( 0.501961, 0.32549, 0, 1 )
@@ -230,13 +228,13 @@ color = Color( 0.0980392, 0.215686, 0.980392, 1 )
 [node name="Warp" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/GroupsBox/GroupMat/Groups" index="5" instance=ExtResource( 8 )]
 unique_name_in_owner = true
 margin_left = 272.0
-margin_right = 334.0
+margin_right = 314.0
 text = "Warp"
 expand_icon = false
 color = Color( 0.117647, 0.686275, 0, 1 )
 
 [node name="TabContainer" type="TabContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox" index="1"]
-margin_top = 31.0
+margin_top = 39.0
 margin_right = 244.0
 margin_bottom = 211.0
 size_flags_horizontal = 3
@@ -253,8 +251,9 @@ margin_bottom = -6.0
 scroll_horizontal_enabled = false
 
 [node name="ItemsMat" type="MarginContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/TabContainer/ItemsScroll" index="0"]
-margin_right = 5.0
-margin_bottom = 25.0
+margin_right = 224.0
+margin_bottom = 67.0
+size_flags_horizontal = 3
 custom_constants/margin_right = 1
 custom_constants/margin_top = 1
 custom_constants/margin_left = 1
@@ -264,8 +263,8 @@ custom_constants/margin_bottom = 4
 unique_name_in_owner = true
 margin_left = 1.0
 margin_top = 1.0
-margin_right = 4.0
-margin_bottom = 21.0
+margin_right = 223.0
+margin_bottom = 63.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 1
@@ -273,9 +272,19 @@ script = ExtResource( 11 )
 placeable_items = ExtResource( 10 )
 item_button_scene = ExtResource( 5 )
 
-[node name="TileItems" type="GridContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/TabContainer/ItemsScroll/ItemsMat/ItemsBox" index="0"]
+[node name="Tiles" type="Label" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/TabContainer/ItemsScroll/ItemsMat/ItemsBox" index="0"]
+margin_right = 222.0
+margin_bottom = 17.0
+size_flags_horizontal = 3
+size_flags_vertical = 6
+text = "Tiles"
+align = 1
+
+[node name="TileItems" type="GridContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/TabContainer/ItemsScroll/ItemsMat/ItemsBox" index="1"]
 unique_name_in_owner = true
-margin_right = 3.0
+margin_top = 21.0
+margin_right = 222.0
+margin_bottom = 21.0
 custom_constants/vseparation = 10
 custom_constants/hseparation = 8
 columns = 4
@@ -303,18 +312,27 @@ visible = false
 margin_top = 58.0
 margin_bottom = 106.0
 
-[node name="HSeparator" type="HSeparator" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/TabContainer/ItemsScroll/ItemsMat/ItemsBox" index="1"]
-margin_top = 4.0
-margin_right = 3.0
-margin_bottom = 16.0
+[node name="HSeparator" type="HSeparator" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/TabContainer/ItemsScroll/ItemsMat/ItemsBox" index="2"]
+margin_top = 25.0
+margin_right = 222.0
+margin_bottom = 37.0
 custom_constants/separation = 12
 custom_styles/separator = SubResource( 10 )
 
-[node name="ObjectItems" type="GridContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/TabContainer/ItemsScroll/ItemsMat/ItemsBox" index="2"]
+[node name="Objects" type="Label" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/TabContainer/ItemsScroll/ItemsMat/ItemsBox" index="3"]
+margin_top = 41.0
+margin_right = 222.0
+margin_bottom = 58.0
+size_flags_horizontal = 3
+size_flags_vertical = 6
+text = "Objects"
+align = 1
+
+[node name="ObjectItems" type="GridContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/TabContainer/ItemsScroll/ItemsMat/ItemsBox" index="4"]
 unique_name_in_owner = true
-margin_top = 20.0
-margin_right = 3.0
-margin_bottom = 20.0
+margin_top = 62.0
+margin_right = 222.0
+margin_bottom = 62.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/vseparation = 10

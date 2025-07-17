@@ -1,0 +1,26 @@
+[gd_resource type="Resource" load_steps=12 format=2]
+
+[ext_resource path="res://scenes/editor/items/placeable_tile.gd" type="Script" id=1]
+[ext_resource path="res://assets/tiles/black_granite/icon.png" type="Texture" id=2]
+[ext_resource path="res://assets/tiles/black_granite/palettes/3_block.png" type="Texture" id=3]
+[ext_resource path="res://assets/tiles/black_granite/palettes/7_block.png" type="Texture" id=4]
+[ext_resource path="res://assets/tiles/black_granite/palettes/5_block.png" type="Texture" id=5]
+[ext_resource path="res://assets/tiles/black_granite/palettes/6_block.png" type="Texture" id=6]
+[ext_resource path="res://assets/tiles/black_granite/palettes/9_block.png" type="Texture" id=7]
+[ext_resource path="res://assets/tiles/black_granite/palettes/8_block.png" type="Texture" id=8]
+[ext_resource path="res://assets/tiles/black_granite/palettes/2_block.png" type="Texture" id=9]
+[ext_resource path="res://assets/tiles/black_granite/palettes/1_block.png" type="Texture" id=10]
+[ext_resource path="res://assets/tiles/black_granite/palettes/4_block.png" type="Texture" id=11]
+
+[resource]
+script = ExtResource( 1 )
+item_name = "Black Granite"
+groups = PoolStringArray( "special" )
+change_to = ""
+items_in_sequence = 0
+index_in_sequence = 0
+icons = [ ExtResource( 2 ), ExtResource( 10 ), ExtResource( 9 ), ExtResource( 3 ), ExtResource( 11 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 4 ), ExtResource( 8 ), ExtResource( 7 ) ]
+previews = [ ExtResource( 2 ) ]
+priority = 0
+tileset_id = 19
+tile_id = 0

@@ -1,0 +1,22 @@
+[gd_resource type="Resource" load_steps=8 format=2]
+
+[ext_resource path="res://scenes/editor/items/placeable_tile.gd" type="Script" id=1]
+[ext_resource path="res://assets/tiles/snow/pallete_icons/1_block.png" type="Texture" id=2]
+[ext_resource path="res://assets/tiles/snow/pallete_icons/4_block.png" type="Texture" id=3]
+[ext_resource path="res://assets/tiles/snow/pallete_icons/5_block.png" type="Texture" id=4]
+[ext_resource path="res://assets/tiles/snow/pallete_icons/3_block.png" type="Texture" id=5]
+[ext_resource path="res://assets/tiles/snow/pallete_icons/2_block.png" type="Texture" id=6]
+[ext_resource path="res://assets/tiles/snow/icon.png" type="Texture" id=7]
+
+[resource]
+script = ExtResource( 1 )
+item_name = "Snow"
+groups = PoolStringArray( "special" )
+change_to = ""
+items_in_sequence = 0
+index_in_sequence = 0
+icons = [ ExtResource( 7 ), ExtResource( 2 ), ExtResource( 6 ), ExtResource( 5 ), ExtResource( 3 ), ExtResource( 4 ) ]
+previews = [ ExtResource( 7 ) ]
+priority = 0
+tileset_id = 7
+tile_id = 0

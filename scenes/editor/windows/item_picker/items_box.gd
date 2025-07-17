@@ -91,6 +91,7 @@ func sort_by_fuzzy_search(search: String):
 			
 	score_array.sort_custom(self, "_sort_by_ascending")
 			
+	#o7 bubble sort
 #	while true:
 #		var fail = false
 #		for pair in score_array:
@@ -107,7 +108,7 @@ func sort_by_fuzzy_search(search: String):
 #		if fail == false:
 #			break
 	
-	score_array = score_array.slice(0, 9)
+	score_array = score_array.slice(0, 19)
 	var return_array: Array
 	for pair in score_array:
 		var key = pair.keys()[0]

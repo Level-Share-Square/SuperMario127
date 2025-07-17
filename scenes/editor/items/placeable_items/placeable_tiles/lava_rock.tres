@@ -1,0 +1,22 @@
+[gd_resource type="Resource" load_steps=8 format=2]
+
+[ext_resource path="res://scenes/editor/items/placeable_tile.gd" type="Script" id=1]
+[ext_resource path="res://assets/tiles/lava_rock/palette_icons/5_block.png" type="Texture" id=2]
+[ext_resource path="res://assets/tiles/lava_rock/icon.png" type="Texture" id=3]
+[ext_resource path="res://assets/tiles/lava_rock/palette_icons/4_block.png" type="Texture" id=4]
+[ext_resource path="res://assets/tiles/lava_rock/palette_icons/1_block.png" type="Texture" id=5]
+[ext_resource path="res://assets/tiles/lava_rock/palette_icons/3_block.png" type="Texture" id=6]
+[ext_resource path="res://assets/tiles/lava_rock/palette_icons/2_block.png" type="Texture" id=7]
+
+[resource]
+script = ExtResource( 1 )
+item_name = "Lava Rock"
+groups = PoolStringArray( "special" )
+change_to = ""
+items_in_sequence = 0
+index_in_sequence = 0
+icons = [ ExtResource( 3 ), ExtResource( 5 ), ExtResource( 7 ), ExtResource( 6 ), ExtResource( 4 ), ExtResource( 2 ) ]
+previews = [ ExtResource( 3 ) ]
+priority = 0
+tileset_id = 29
+tile_id = 0

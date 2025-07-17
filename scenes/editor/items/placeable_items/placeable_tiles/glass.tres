@@ -1,0 +1,26 @@
+[gd_resource type="Resource" load_steps=12 format=2]
+
+[ext_resource path="res://scenes/editor/items/placeable_tile.gd" type="Script" id=1]
+[ext_resource path="res://assets/tiles/glass/icon.png" type="Texture" id=2]
+[ext_resource path="res://assets/tiles/glass/palette_icons/3.png" type="Texture" id=3]
+[ext_resource path="res://assets/tiles/glass/palette_icons/2.png" type="Texture" id=4]
+[ext_resource path="res://assets/tiles/glass/palette_icons/7.png" type="Texture" id=5]
+[ext_resource path="res://assets/tiles/glass/palette_icons/5.png" type="Texture" id=6]
+[ext_resource path="res://assets/tiles/glass/palette_icons/1.png" type="Texture" id=7]
+[ext_resource path="res://assets/tiles/glass/palette_icons/4.png" type="Texture" id=8]
+[ext_resource path="res://assets/tiles/glass/palette_icons/6.png" type="Texture" id=9]
+[ext_resource path="res://assets/tiles/glass/palette_icons/9.png" type="Texture" id=10]
+[ext_resource path="res://assets/tiles/glass/palette_icons/8.png" type="Texture" id=11]
+
+[resource]
+script = ExtResource( 1 )
+item_name = "Glass"
+groups = PoolStringArray( "special" )
+change_to = ""
+items_in_sequence = 0
+index_in_sequence = 0
+icons = [ ExtResource( 2 ), ExtResource( 7 ), ExtResource( 4 ), ExtResource( 3 ), ExtResource( 8 ), ExtResource( 6 ), ExtResource( 9 ), ExtResource( 5 ), ExtResource( 11 ), ExtResource( 10 ) ]
+previews = [ ExtResource( 2 ) ]
+priority = 0
+tileset_id = 9
+tile_id = 0
