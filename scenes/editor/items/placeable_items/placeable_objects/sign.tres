@@ -1,8 +1,16 @@
-[gd_resource type="Resource" load_steps=4 format=2]
+[gd_resource type="Resource" load_steps=12 format=2]
 
 [ext_resource path="res://scenes/editor/items/placeable_object.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/objects/sign/icon.png" type="Texture" id=2]
-[ext_resource path="res://scenes/actors/objects/sign/sign.png" type="Texture" id=3]
+[ext_resource path="res://scenes/actors/objects/sign/palettes/1/icon.png" type="Texture" id=3]
+[ext_resource path="res://scenes/actors/objects/sign/palettes/2/icon.png" type="Texture" id=4]
+[ext_resource path="res://scenes/actors/objects/sign/palettes/3/blue_sign.png" type="Texture" id=5]
+[ext_resource path="res://scenes/actors/objects/sign/palettes/5/green_sign.png" type="Texture" id=6]
+[ext_resource path="res://scenes/actors/objects/sign/palettes/6/icon.png" type="Texture" id=7]
+[ext_resource path="res://scenes/actors/objects/sign/palettes/7/icon.png" type="Texture" id=8]
+[ext_resource path="res://scenes/actors/objects/sign/palettes/8/icon.png" type="Texture" id=9]
+[ext_resource path="res://scenes/actors/objects/sign/palettes/9/icon.png" type="Texture" id=10]
+[ext_resource path="res://scenes/actors/objects/sign/palettes/4/pink_sign.png" type="Texture" id=11]
 
 [resource]
 script = ExtResource( 1 )
@@ -11,8 +19,8 @@ groups = PoolStringArray( "warp" )
 change_to = ""
 items_in_sequence = 0
 index_in_sequence = 0
-icons = [ ExtResource( 2 ) ]
-previews = [ ExtResource( 3 ) ]
+icons = [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 11 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ) ]
+previews = [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 11 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ) ]
 priority = 0
 object_id = 14
 object_center = Vector2( 0, 0 )

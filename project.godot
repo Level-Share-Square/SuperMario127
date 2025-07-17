@@ -254,7 +254,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/oldeditor/editor_hitbox.gd"
 }, {
-"base": "Control",
+"base": "Reference",
 "class": "EditorTool",
 "language": "GDScript",
 "path": "res://scenes/editor/tools/editor_tool.gd"
@@ -744,7 +744,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/player/ui_new/timers/timer_manager.gd"
 }, {
-"base": "Control",
+"base": "Reference",
 "class": "ToolManager",
 "language": "GDScript",
 "path": "res://scenes/editor/tools/tool_manager.gd"

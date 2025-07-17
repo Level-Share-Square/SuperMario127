@@ -1,8 +1,18 @@
-[gd_resource type="Resource" load_steps=4 format=2]
+[gd_resource type="Resource" load_steps=14 format=2]
 
 [ext_resource path="res://scenes/editor/items/placeable_object.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/objects/big_tree/icon.png" type="Texture" id=2]
 [ext_resource path="res://scenes/actors/objects/big_tree/preview.png" type="Texture" id=3]
+[ext_resource path="res://scenes/actors/objects/big_tree/palettes/1/icon.png" type="Texture" id=4]
+[ext_resource path="res://scenes/actors/objects/big_tree/palettes/2/preview.png" type="Texture" id=5]
+[ext_resource path="res://scenes/actors/objects/big_tree/palettes/4/preview.png" type="Texture" id=6]
+[ext_resource path="res://scenes/actors/objects/big_tree/palettes/4/icon.png" type="Texture" id=7]
+[ext_resource path="res://scenes/actors/objects/big_tree/palettes/5/icon.png" type="Texture" id=8]
+[ext_resource path="res://scenes/actors/objects/big_tree/palettes/3/preview.png" type="Texture" id=9]
+[ext_resource path="res://scenes/actors/objects/big_tree/palettes/2/icon.png" type="Texture" id=10]
+[ext_resource path="res://scenes/actors/objects/big_tree/palettes/3/icon.png" type="Texture" id=11]
+[ext_resource path="res://scenes/actors/objects/big_tree/palettes/5/preview.png" type="Texture" id=12]
+[ext_resource path="res://scenes/actors/objects/big_tree/palettes/1/preview.png" type="Texture" id=13]
 
 [resource]
 script = ExtResource( 1 )
@@ -11,8 +21,8 @@ groups = PoolStringArray( "warp" )
 change_to = ""
 items_in_sequence = 0
 index_in_sequence = 0
-icons = [ ExtResource( 2 ) ]
-previews = [ ExtResource( 3 ) ]
+icons = [ ExtResource( 2 ), ExtResource( 4 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 7 ), ExtResource( 8 ) ]
+previews = [ ExtResource( 3 ), ExtResource( 13 ), ExtResource( 5 ), ExtResource( 9 ), ExtResource( 6 ), ExtResource( 12 ) ]
 priority = 0
 object_id = 4
 object_center = Vector2( 0, 0 )

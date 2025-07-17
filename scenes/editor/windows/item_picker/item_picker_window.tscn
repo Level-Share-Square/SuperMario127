@@ -162,7 +162,7 @@ margin_bottom = 28.0
 scroll_vertical_enabled = false
 
 [node name="GroupMat" type="MarginContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/GroupsBox" index="0"]
-margin_right = 236.0
+margin_right = 304.0
 margin_bottom = 28.0
 size_flags_horizontal = 3
 custom_constants/margin_right = 2
@@ -174,7 +174,7 @@ custom_constants/margin_bottom = 6
 unique_name_in_owner = true
 margin_left = 2.0
 margin_top = 3.0
-margin_right = 234.0
+margin_right = 302.0
 margin_bottom = 22.0
 size_flags_horizontal = 3
 custom_constants/separation = 6
