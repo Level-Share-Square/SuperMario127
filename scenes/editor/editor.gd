@@ -12,6 +12,7 @@ export(NodePath) var shared_path
 var placed_item_property = null
 
 var hovered_objects: Dictionary = {}
+var selected_objects: Dictionary = {}
 var selected_item: PlaceableItem
 
 onready var editor_camera: Camera2D = $"%EditorCamera"
@@ -21,6 +22,8 @@ onready var action_manager: ActionManager = $"%ActionManager"
 
 onready var save_button = $UI/EditorUI/Utilities/Save
 onready var editor_options = $UI/EditorOptionsWindow
+onready var selection_box = $"%SelectionBox"
+
 
 onready var backgrounds = $Backgrounds
 
@@ -88,13 +91,14 @@ func on_save_pressed():
 
 
 func object_hovered(object: GameObject):
+	print(object.position)
 	if tool_manager.current_tool.tool_type == EditorTool.Type.TileTool:
 		return
 	
 	# Look you come up with a better object ID system when you have none
 	hovered_objects.get_or_add(object.name, object)
 	object.hovered = true
-	object.modulate.a = .5
+	object.modulate.a = 0.5
 
 
 func object_unhovered(object: GameObject):
@@ -104,6 +108,25 @@ func object_unhovered(object: GameObject):
 	hovered_objects.erase(object.name)
 	object.hovered = false
 	object.modulate.a = 1
+	
+func _process(delta):
+	if Input.is_action_just_pressed("right_click"):
+		selection_box.show()
+	for i in selected_objects:
+		i.modulate = Color(0.7, 0.7, 1.2, i.modulate.a)
+
+func object_clicked(object: GameObject):
+	if tool_manager.current_tool.tool_type == EditorTool.Type.TileTool:
+		return
+		
+	object.selected = !object.selected
+	if object.selected:
+		selected_objects.get_or_add(object, object.name)
+		object.modulate = Color(0.7, 0.7, 1.2, object.modulate.a)
+	else:
+		selected_objects.erase(object)
+		object.modulate = Color(1, 1, 1, object.modulate.a)
+	
 
 
 func _update_editor_framerate():

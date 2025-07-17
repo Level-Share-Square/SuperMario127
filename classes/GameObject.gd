@@ -22,6 +22,7 @@ var level_object: WeakRef = null
 var shared: LevelShared = null
 
 var hovered: bool = false
+var selected: bool = false
 
 var enabled: bool = true
 var preview_position := Vector2(72, 92)
@@ -47,9 +48,11 @@ onready var editor_hitbox: Area2D = get_node_or_null("EditorHitbox")
 
 
 signal property_changed(key, value)
+signal object_clicked(object)
 
 
 func _ready():
+	set_process(false)
 	if visible == false and mode == 1:
 		visible = true
 		var color = modulate
@@ -85,7 +88,7 @@ func _ready():
 			editor_hitbox = Area2D.new()
 			editor_hitbox.name = "EditorHitbox"
 			editor_hitbox.monitorable = false
-			editor_hitbox.monitoring = false
+			editor_hitbox.monitoring = true
 			add_child(editor_hitbox)
 			
 			var collision_shape = CollisionShape2D.new()
@@ -95,6 +98,9 @@ func _ready():
 		var editor = get_tree().current_scene
 		editor_hitbox.connect("mouse_entered", editor, "object_hovered", [self])
 		editor_hitbox.connect("mouse_exited", editor, "object_unhovered", [self])
+		if enabled == true:
+			print(editor_hitbox.connect("area_entered", editor.selection_box, "_on_object_entered", [self]))
+			print(editor_hitbox.connect("area_exited", editor.selection_box, "_on_object_exited", [self]))
 	else:
 		if is_instance_valid(editor_hitbox):
 			editor_hitbox.queue_free()
@@ -105,6 +111,8 @@ func _ready():
 		set_property_menu("layer", ["option", 6, 0, ['Way Background', 'Very Background', 'Background', 'Ground', 'Foreground', 'Very Foreground']])
 	
 	update_layer()
+	yield(get_tree().create_timer(0.1), "timeout")
+	set_process(true)
 
 
 func create_collision_polygons_from_tree(node: Node, node_transform: Transform2D, array: Array) -> void:
@@ -160,6 +168,13 @@ func get_property_index(key) -> int:
 			return index
 		index += 1
 	return index
+
+func _process(delta):
+	if Input.is_action_just_pressed("click") && hovered == true:
+		var editor = get_tree().current_scene
+		connect("object_clicked", editor, "object_clicked", [self])
+		emit_signal("object_clicked")
+			
 
 
 func set_property(key, value, change_level_object = true, alias = null):

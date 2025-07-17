@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://scenes/menu/options/options.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/menu/menu_controller/screen_manager.gd" type="Script" id=2]
@@ -33,6 +33,7 @@
 [ext_resource path="res://scenes/editor/items/items.tres" type="Resource" id=31]
 [ext_resource path="res://scenes/editor/assets/undo.svg" type="Texture" id=32]
 [ext_resource path="res://scenes/editor/action_manager/action_history.gd" type="Script" id=33]
+[ext_resource path="res://scenes/editor/tools/selection_box/selection_box.tscn" type="PackedScene" id=34]
 
 [node name="Editor" type="Node2D"]
 script = ExtResource( 3 )
@@ -74,7 +75,7 @@ inverse_tool_name = "TilePaint"
 
 [node name="TileBuffer" type="TileMap" parent="."]
 unique_name_in_owner = true
-modulate = Color( 1, 1, 1, 0.75 )
+modulate = Color( 1, 1, 1, 0.74902 )
 z_index = 128
 tile_set = ExtResource( 23 )
 cell_size = Vector2( 32, 32 )
@@ -322,6 +323,9 @@ __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": true
 }
+
+[node name="SelectionBox" parent="." instance=ExtResource( 34 )]
+unique_name_in_owner = true
 
 [node name="HoverSound" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
