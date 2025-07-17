@@ -50,8 +50,9 @@ func create_object_data(position: Vector2, object_id: int, palette: int) -> Obje
 
 
 func erase_object(object: GameObject):
+	editor.object_unhovered(object)
+	
 	var action := EraseObjectAction.new()
 	action.shared = shared
 	action.object = object
-	editor.hovered_objects.erase(object.name)
 	editor.action_manager.commit_action(action)
