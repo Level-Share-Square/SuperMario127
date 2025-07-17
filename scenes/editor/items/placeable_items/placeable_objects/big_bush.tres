@@ -1,8 +1,8 @@
-[gd_resource type="Resource" load_steps=14 format=2]
+[gd_resource type="Resource" load_steps=15 format=2]
 
 [ext_resource path="res://scenes/editor/items/placeable_object.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/objects/big_bush/palettes/6/big_bush.png" type="Texture" id=2]
-[ext_resource path="res://scenes/actors/objects/big_bush/palettes/3/big_bush.png" type="Texture" id=3]
+[ext_resource path="res://scenes/actors/objects/big_bush/big_bush.png" type="Texture" id=3]
 [ext_resource path="res://scenes/actors/objects/big_bush/palettes/1/icon.png" type="Texture" id=4]
 [ext_resource path="res://scenes/actors/objects/big_bush/palettes/6/icon.png" type="Texture" id=5]
 [ext_resource path="res://scenes/actors/objects/big_bush/palettes/3/icon.png" type="Texture" id=6]
@@ -13,6 +13,7 @@
 [ext_resource path="res://scenes/actors/objects/big_bush/palettes/5/big_bush.png" type="Texture" id=11]
 [ext_resource path="res://scenes/actors/objects/big_bush/palettes/2/icon.png" type="Texture" id=12]
 [ext_resource path="res://scenes/actors/objects/big_bush/palettes/1/big_bush.png" type="Texture" id=13]
+[ext_resource path="res://scenes/actors/objects/big_bush/palettes/3/big_bush.png" type="Texture" id=14]
 
 [resource]
 script = ExtResource( 1 )
@@ -21,8 +22,8 @@ groups = PoolStringArray( "warp" )
 change_to = ""
 items_in_sequence = 0
 index_in_sequence = 0
-icons = [ ExtResource( 4 ), ExtResource( 12 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 5 ) ]
-previews = [ ExtResource( 13 ), ExtResource( 9 ), ExtResource( 3 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 2 ) ]
+icons = [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 12 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 5 ) ]
+previews = [ ExtResource( 3 ), ExtResource( 13 ), ExtResource( 9 ), ExtResource( 14 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 2 ) ]
 priority = 0
 object_id = 11
 object_center = Vector2( 0, 0 )

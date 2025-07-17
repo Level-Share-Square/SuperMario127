@@ -19,7 +19,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/oldeditor/action.gd"
 }, {
-"base": "Reference",
+"base": "Node",
 "class": "ActionManager",
 "language": "GDScript",
 "path": "res://scenes/editor/action_manager/action_manager.gd"
