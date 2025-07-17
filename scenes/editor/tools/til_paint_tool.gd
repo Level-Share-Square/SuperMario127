@@ -5,24 +5,33 @@ var last_mouse_tile: Vector2
 var mouse_input: int = -1
 
 
-func _click(_event: InputEvent, _world_pos: Vector2) -> void:
+func _click_left(_event: InputEvent, _world_pos: Vector2) -> void:
 	if mouse_input > -1:
 		return
 	
 	if Input.is_action_just_pressed("place"):
 		draw_tile(last_mouse_tile)
 		mouse_input = 0
+
+
+func _click_right(_event: InputEvent, _world_pos: Vector2) -> void:
+	if mouse_input > -1:
+		return
+	
 	if Input.is_action_just_pressed("erase"):
 		erase_tile(last_mouse_tile)
 		mouse_input = 1
 
 
-func _click_released(_event: InputEvent, _world_pos: Vector2) -> void:
+func _click_left_released(_event: InputEvent, _world_pos: Vector2) -> void:
 	if editor.selected_item is PlaceableTile:
 		if Input.is_action_just_released("place") and mouse_input == 0:
 			finalize_placement()
 			mouse_input = -1
-			
+
+
+func _click_right_released(_event: InputEvent, _world_pos: Vector2) -> void:
+	if editor.selected_item is PlaceableTile:
 		if Input.is_action_just_released("erase") and mouse_input == 1:
 			finalize_erase()
 			mouse_input = -1
@@ -70,7 +79,6 @@ func erase_tile(pos: Vector2) -> void:
 		editor.tile_buffer.update_bitmask_area(pos)
 
 
-
 func finalize_placement() -> void:
 	var action := PlaceTilesAction.new()
 	action.shared = shared
@@ -95,34 +103,3 @@ func finalize_erase() -> void:
 	editor.action_manager.commit_action(action)
 	
 	editor.tile_buffer.clear()
-
-
-func place_object(pos: Vector2):
-	var object_item: PlaceableObject = editor.selected_item
-	var data = create_object_data(pos.snapped(Vector2(8, 8)), object_item.object_id, object_item.palette)
-	
-	var action := PlaceObjectAction.new()
-	action.shared = shared
-	action.object_data = data
-	editor.action_manager.commit_action(action)
-	
-	
-#	elif Input.is_action_pressed("erase"):
-#		for object in editor.hovered_objects.values():
-#			editor.hovered_objects.erase(object.name)
-#			shared.destroy_object(object, true)
-#			break
-
-
-func create_object_data(position: Vector2, object_id: int, palette: int) -> ObjectData:
-	var data = ObjectData.new()
-	data.type_id = object_id
-	data.palette = palette
-	data.properties.append(position)
-	data.properties.append(Vector2(1, 1))
-	data.properties.append(0)
-	data.properties.append(true)
-	data.properties.append(true)
-	data.properties.append(LevelShared.Layers.Middle)
-	
-	return data

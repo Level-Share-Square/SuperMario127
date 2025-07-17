@@ -12,21 +12,26 @@ signal tool_changed()
 func _unhandled_input(event: InputEvent) -> void:
 	mouse_position = get_global_mouse_position()
 	
-	if Input.is_action_just_pressed("place") or Input.is_action_just_pressed("erase"):
-		current_tool._click(event, mouse_position)
+	if event is InputEventMouseButton:
+		if Input.is_action_just_pressed("place") :
+			current_tool._click_left(event, mouse_position)
 
-	if Input.is_action_just_released("place") or Input.is_action_just_released("erase"):
-		current_tool._click_released(event, mouse_position)
-	
-	if event is InputEventMouseMotion:
+		if Input.is_action_just_pressed("erase"):
+			current_tool._click_right(event, mouse_position)
+
+		if Input.is_action_just_released("place"):
+			current_tool._click_left_released(event, mouse_position)
+
+		if Input.is_action_just_released("erase"):
+			current_tool._click_right_released(event, mouse_position)
+	elif event is InputEventMouseMotion:
 		current_tool._mouse_movement(event, mouse_position)
 
 
 func _physics_process(delta: float):
 	if owner.editor_camera.is_moving():
-		print("camera moving")
 		var event := InputEventMouseMotion.new()
-		_unhandled_input(event)
+		current_tool._mouse_movement(event, get_global_mouse_position())
 
 
 func change_tool(tool_name: String) -> void:
