@@ -21,4 +21,4 @@ icons = [ ExtResource( 6 ), ExtResource( 5 ), ExtResource( 3 ), ExtResource( 4 )
 previews = [ ExtResource( 2 ) ]
 priority = 0
 tileset_id = 28
-tile_id = 2
+tile_id = 3

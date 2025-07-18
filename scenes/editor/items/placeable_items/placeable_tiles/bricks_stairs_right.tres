@@ -22,5 +22,5 @@ index_in_sequence = 0
 icons = [ ExtResource( 2 ), ExtResource( 4 ), ExtResource( 7 ), ExtResource( 6 ), ExtResource( 3 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 11 ), ExtResource( 10 ) ]
 previews = [ ExtResource( 5 ) ]
 priority = 0
-tileset_id = 2
-tile_id = 0
+tileset_id = 1
+tile_id = 3
