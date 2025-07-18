@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://scenes/actors/objects/liquid/liquid_base.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/actors/objects/toxic_gas/toxic_gas.gdshader" type="Shader" id=2]
 [ext_resource path="res://scenes/actors/objects/toxic_gas/toxic_gas.gd" type="Script" id=3]
 [ext_resource path="res://scenes/actors/objects/toxic_gas/main.png" type="Texture" id=4]
 [ext_resource path="res://scenes/actors/mario/icon.png" type="Texture" id=5]
+[ext_resource path="res://scenes/actors/objects/toxic_gas/toxic_gas_top.tres" type="Shader" id=6]
 
 [sub_resource type="RectangleShape2D" id=6]
 resource_local_to_scene = true
@@ -27,9 +28,30 @@ noise = SubResource( 2 )
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 2 )
 shader_param/color = Color( 0.862745, 0, 1, 1 )
-shader_param/tex1_scale_speed = Plane( 0.25, 0.25, 0.125, 0.1 )
-shader_param/tex2_scale_speed = Plane( 0.5, 0.5, 0.05, 0.01 )
-shader_param/distortion_scale_speed = Plane( 0.25, 0.25, 0.01, 0.01 )
+shader_param/position = null
+shader_param/size = Vector2( 640, 320 )
+shader_param/offset = Vector2( 0, 0 )
+shader_param/rotation = 0.0
+shader_param/tex1_offset = null
+shader_param/tex1_speed = Vector2( 0.01, 0 )
+shader_param/tex2_offset = Vector2( 0, 0 )
+shader_param/tex2_speed = Vector2( 0.05, 0.025 )
+shader_param/distortion_offset = null
+shader_param/distortion_speed = null
+shader_param/tex1_texture = SubResource( 3 )
+shader_param/tex2_texture = ExtResource( 4 )
+shader_param/distortion_texture = SubResource( 5 )
+
+[sub_resource type="ShaderMaterial" id=7]
+shader = ExtResource( 6 )
+shader_param/color = Color( 0.862745, 0, 1, 1 )
+shader_param/position = null
+shader_param/size = Vector2( 640, 12 )
+shader_param/offset = null
+shader_param/rotation = null
+shader_param/tex1_speed = Vector2( 0.009, 0 )
+shader_param/tex2_speed = Vector2( 0.05, 0.025 )
+shader_param/distortion_speed = null
 shader_param/tex1_texture = SubResource( 3 )
 shader_param/tex2_texture = ExtResource( 4 )
 shader_param/distortion_texture = SubResource( 5 )
@@ -37,8 +59,8 @@ shader_param/distortion_texture = SubResource( 5 )
 [node name="ToxicGas" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
 liquid_type = 3
-size = Vector2( 128, 128 )
 color = Color( 0.862745, 0, 1, 1 )
+surface_offset = 2.0
 toxicity = 7.0
 
 [node name="LiquidArea" parent="." index="0"]
@@ -52,16 +74,19 @@ shape = SubResource( 6 )
 position = Vector2( 30, 82 )
 texture = ExtResource( 5 )
 
-[node name="Body" type="ColorRect" parent="." index="2"]
+[node name="Visual" type="Node2D" parent="." index="2"]
+
+[node name="Body" type="ColorRect" parent="Visual" index="0"]
 material = SubResource( 1 )
-margin_right = 128.0
-margin_bottom = 128.0
+margin_top = 2.0
+margin_right = 640.0
+margin_bottom = 322.0
 mouse_filter = 2
 
-[node name="Waves" type="ColorRect" parent="." index="3"]
-visible = false
-material = SubResource( 1 )
-margin_right = 128.0
-margin_bottom = 128.0
+[node name="Waves" type="ColorRect" parent="Visual" index="1"]
+material = SubResource( 7 )
+margin_top = -10.0
+margin_right = 640.0
+margin_bottom = 2.0
 mouse_filter = 2
 color = Color( 1, 1, 1, 0 )

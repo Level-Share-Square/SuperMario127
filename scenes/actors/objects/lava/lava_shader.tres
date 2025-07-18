@@ -31,7 +31,6 @@ float random (vec2 uv) {
     return fract(sin(dot(uv.xy, vec2(12.9898,78.233))) * 43758.5453123);
 }
 
-
 float sine(vec2 uv_coords, float time, float arg1, float arg2) {
 	return sin((uv_coords.x * arg1 * (size.x / 20.0f)) + time * arg2);
 }

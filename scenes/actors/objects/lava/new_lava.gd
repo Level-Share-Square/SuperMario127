@@ -98,11 +98,11 @@ func update():
 		liquid_body.rect_size = size
 	
 	#update new stuff
-	waves.material.set_shader_param("position", position)
+	waves.material.set_shader_param("position", global_position)
 	waves.material.set_shader_param("size", waves.rect_size)
 	waves.material.set_shader_param("offset", Vector2(position.x, 0))
 	
-	liquid_body.material.set_shader_param("position", Vector2.ZERO)
+	liquid_body.material.set_shader_param("position", global_position)
 	liquid_body.material.set_shader_param("size", liquid_body.rect_size)
 	liquid_body.material.set_shader_param("offset", position)
 	liquid_body.material.set_shader_param("rotation", rotation)
