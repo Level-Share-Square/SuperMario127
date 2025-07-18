@@ -4,17 +4,6 @@ extends ScrollContainer
 export(Resource) var backgrounds
 export(Resource) var foregrounds
 
-onready var background_dropdown = $"%BGDropdown"
-onready var foreground_dropdown = $"%FGDropdown"
-onready var autoscroll_pick = $"%ASPick"
-
-onready var background = $"%Background"
-onready var foreground = $"%Foreground"
-
-
-onready var palette_menu_button = $"%PaletteMenuButton"
-onready var palette_menu = $"%PalettesGrid"
-
 var bg_index: int = 0
 var fg_index: int = 0
 
@@ -22,7 +11,20 @@ var current_palette = 0
 
 var area: LevelArea
 
+onready var bg_palette_button_scene = preload("res://scenes/editor/windows/editor_options/bg_palette_button.tscn")
+
+onready var background_dropdown = $"%BGDropdown"
+onready var foreground_dropdown = $"%FGDropdown"
+onready var autoscroll_pick = $"%ASPick"
+
+onready var background = $"%Background"
+onready var foreground = $"%Foreground"
+
+onready var palette_menu_button = $"%PaletteMenuButton"
+onready var palette_menu = $"%PalettesGrid"
+
 signal update_background()
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -63,36 +65,34 @@ func load_settings():
 	background_dropdown.select(bg_index)
 	foreground_dropdown.select(fg_index)
 	autoscroll_pick.value = area.settings.bg_autoscroll_speed
-	init_palette_dropdown()
-	
+	_init_palette_dropdown()
+
+
 # adds the palette previews to the grid 
-func init_palette_dropdown():
-	
+func _init_palette_dropdown():
 	#init and clear previous entries
 	for child in palette_menu.get_children():
 		palette_menu.remove_child(child)
 	
-	var resource = load("res://scenes/shared/background/foregrounds/%s/resource.tres" % foregrounds.ids[fg_index])
+	var fg_resource: ForegroundResource = load("res://scenes/shared/background/foregrounds/%s/resource.tres" % foregrounds.ids[fg_index])
+	var bg_resource: SkyResource = load("res://scenes/shared/background/backgrounds/%s/resource.tres" % backgrounds.ids[bg_index])
 	#(for default palette since its coded differently)
-	var default_texture = TextureRect.new()
-	default_texture.texture = resource.preview
-	default_texture.expand = true
-	default_texture.rect_min_size.y = 63
-	default_texture.size_flags_horizontal = SIZE_EXPAND_FILL
-	default_texture.connect("gui_input", self, "_on_palette_selected", [0])
-	palette_menu.add_child(default_texture)
-		
-	for i in range(0, resource.palettes.size()):
-		var palette_texture = TextureRect.new()
-		palette_texture.texture = resource.palettes[i]
-		palette_texture.expand = true
-		palette_texture.rect_min_size.y = 63
-		palette_texture.size_flags_horizontal = SIZE_EXPAND_FILL
-		palette_texture.connect("gui_input", self, "_on_palette_selected", [i + 1])
-		palette_menu.add_child(palette_texture)
+	var default_palette: BGPaletteButton = bg_palette_button_scene.instance()
+	default_palette.setup_button(fg_resource.preview, bg_resource)
+	default_palette.connect("gui_input", self, "_on_palette_selected", [0])
+	palette_menu.add_child(default_palette)
+	
+	for i in range(fg_resource.palettes.size()):
+		var palette_button: BGPaletteButton = bg_palette_button_scene.instance()
+		palette_button.setup_button(fg_resource.palettes[i], bg_resource)
+		palette_button.connect("gui_input", self, "_on_palette_selected", [i + 1])
+		palette_menu.add_child(palette_button)
 
 
 func _on_palette_selected(event: InputEvent, index: int):
+	if not event is InputEventMouseButton:
+		return
+	
 	if event.is_action_pressed("LMB"):
 		var resource = load("res://scenes/shared/background/foregrounds/%s/resource.tres" % foregrounds.ids[fg_index])
 		var palettes = resource.palettes
@@ -101,16 +101,21 @@ func _on_palette_selected(event: InputEvent, index: int):
 			foreground.texture = resource.preview
 		else:
 			foreground.texture = palettes[current_palette - 1]
-		Singleton.CurrentLevelData.level_info.thumbnail_background_palette = current_palette
+		
+		# Note: This should probably be in the save function instead.
+#		Singleton.CurrentLevelData.level_info.thumbnail_background_palette = current_palette
 		area.settings.background_palette = current_palette
 		emit_signal("update_background")
-	
+
+
 func _on_bg_selected(index: int):
 	var resource = load("res://scenes/shared/background/backgrounds/%s/resource.tres" % backgrounds.ids[index])
 	background.texture = resource.texture
-	Singleton.CurrentLevelData.level_info.thumbnail_sky = index
+	# Note: This should probably be in the save function instead.
+#	Singleton.CurrentLevelData.level_info.thumbnail_sky = index
 	area.settings.sky = index
 	bg_index = index
+	_init_palette_dropdown()
 	emit_signal("update_background")
 
 
@@ -118,20 +123,20 @@ func _on_fg_selected(index: int):
 	current_palette = 0
 	var resource = load("res://scenes/shared/background/foregrounds/%s/resource.tres" % foregrounds.ids[index])
 	foreground.texture = resource.preview
-	Singleton.CurrentLevelData.level_info.thumbnail_background = index
+	# Note: This should probably be in the save function instead.
+#	Singleton.CurrentLevelData.level_info.thumbnail_background = index
 	area.settings.background = index
 	area.settings.background_palette = 0
 	fg_index = index
-	init_palette_dropdown()
+	_init_palette_dropdown()
 	emit_signal("update_background")
-	
+
 
 func _on_palette_menu_toggled(pressed: bool):
 	background.visible = !pressed
-	foreground.visible = !pressed
-	palette_menu.get_parent().visible = pressed
-	palette_menu.visible = pressed
-	init_palette_dropdown()
+	palette_menu.get_parent().get_parent().visible = pressed
+	_init_palette_dropdown()
+
 
 func _on_autoscroll_change(value):
 	area.settings.bg_autoscroll_speed = value
