@@ -110,6 +110,7 @@ use_filter = true
 font_data = ExtResource( 12 )
 
 [node name="EditorOptionsWindow" instance=ExtResource( 3 )]
+visible = false
 script = ExtResource( 9 )
 title = "Level Settings"
 window_size = Vector2( 420, 220 )
@@ -150,7 +151,6 @@ all_tabs_in_front = true
 use_hidden_tabs_for_min_size = true
 
 [node name="Level" type="MarginContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/Tabs" index="0"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 6.0
@@ -353,6 +353,7 @@ text = "Success!"
 align = 1
 
 [node name="Environment" type="ScrollContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/Tabs" index="3"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 6.0
@@ -377,6 +378,7 @@ margin_bottom = 132.0
 
 [node name="Background" type="TextureRect" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/Tabs/Environment/HBoxContainer/VBoxContainer" index="0"]
 unique_name_in_owner = true
+visible = false
 show_behind_parent = true
 margin_right = 180.0
 margin_bottom = 109.0
@@ -399,13 +401,11 @@ expand = true
 stretch_mode = 6
 
 [node name="ScrollContainer" type="ScrollContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/Tabs/Environment/HBoxContainer/VBoxContainer" index="1"]
-visible = false
-margin_top = 56.0
 margin_right = 180.0
 margin_bottom = 109.0
 size_flags_vertical = 3
 
-[node name="PalettesGrid" type="GridContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/Tabs/Environment/HBoxContainer/VBoxContainer/ScrollContainer" index="2"]
+[node name="PalettesGrid" type="GridContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/Tabs/Environment/HBoxContainer/VBoxContainer/ScrollContainer" index="0"]
 unique_name_in_owner = true
 margin_right = 172.0
 size_flags_horizontal = 3

@@ -6,6 +6,8 @@ extends NinePatchRect
 onready var selection_area = $SelectionArea
 onready var selection_shape = $SelectionArea/SelectionShape
 onready var white_highlight = $WhiteHighlight
+onready var selection_tools = $SelectionTools
+onready var edit_selection = $"%EditSelection"
 
 onready var sel_border = preload("res://scenes/editor/tools/selection_box/selection_border.png")
 ## Delay between animation steps in frames.
@@ -46,53 +48,53 @@ func _process(delta):
 
 		timer = animation_delay
 		
-
-	if Input.is_action_just_pressed("right_click"):
-		rect_size = Vector2(0, 0)
-		pos1 = get_global_mouse_position()
-		rect_position = pos1
-		if owner.hovered_objects.empty():
-			for i in owner.selected_objects:
-				i.modulate = Color(1, 1, 1, i.modulate.a)
-			owner.selected_objects = {}
-			selected_dict = {}
-			texture = Texture.new()
-			yield(get_tree().create_timer(0.1), "timeout")
-			white_highlight.visible = true
-			erase = true
-			expand = true
-			selection_shape.disabled = false
-			selection_area.monitorable = true
-	
-	if expand == true:
-		box_expansion()
-			
-		
-	if Input.is_action_just_released("right_click"):
-		print(selected_dict)
-		if pos1 != null:
-			white_highlight.visible = false
-			texture = AtlasTexture.new()
-			texture.atlas = sel_border
-			texture.region = Rect2(0, 0, 28, 28)
-			if abs(pos1.length() - get_global_mouse_position().length()) < 10:
-				hide()
-				rect_size = Vector2(0, 0)
-				expand = false
+	if selection_tools.active_tool == "None":
+		if Input.is_action_just_pressed("middle"):
+			edit_selection.hide()
+			rect_size = Vector2(0, 0)
+			pos1 = get_global_mouse_position()
+			rect_position = pos1
+			if owner.hovered_objects.empty():
 				for i in owner.selected_objects:
 					i.modulate = Color(1, 1, 1, i.modulate.a)
 				owner.selected_objects = {}
-				selection_area.monitorable = false
-				selection_shape.disabled = true
-			else:
-				for i in selected_dict:
-					owner.selected_objects[i] = selected_dict[i]
-					i.modulate = Color(0.8, 0.8, 1.2, i.modulate.a)
-				erase = false
-				expand = false
-				selection_area.monitorable = false
-				selection_shape.disabled = true
-				snap_to_selected_size()
+				selected_dict = {}
+				texture = Texture.new()
+				yield(get_tree().create_timer(0.1), "timeout")
+				white_highlight.visible = true
+				erase = true
+				expand = true
+				selection_shape.disabled = false
+				selection_area.monitorable = true
+		
+		if expand == true:
+			box_expansion()
+				
+			
+		if Input.is_action_just_released("middle"):
+			if pos1 != null:
+				white_highlight.visible = false
+				texture = AtlasTexture.new()
+				texture.atlas = sel_border
+				texture.region = Rect2(0, 0, 28, 28)
+				if abs(pos1.length() - get_global_mouse_position().length()) < 10:
+					hide()
+					rect_size = Vector2(0, 0)
+					expand = false
+					for i in owner.selected_objects:
+						i.modulate = Color(1, 1, 1, i.modulate.a)
+					owner.selected_objects = {}
+					selection_area.monitorable = false
+					selection_shape.disabled = true
+				else:
+					for i in selected_dict:
+						owner.selected_objects[i] = selected_dict[i]
+						i.modulate = Color(0.8, 0.8, 1.2, i.modulate.a)
+					erase = false
+					expand = false
+					selection_area.monitorable = false
+					selection_shape.disabled = true
+					snap_to_selected_size()
 					
 			
 func _on_object_entered(area, object):
@@ -154,11 +156,15 @@ func snap_to_selected_size():
 			
 	rect_position = Vector2(far_left, far_up)
 	rect_size = Vector2(abs(far_left - far_right), far_down - far_up)
-	print(rect_scale)
-	match rect_scale:
-		Vector2(-1, 1):
-			rect_scale = Vector2(-1, -1)
-		Vector2(-1, -1):
-			rect_scale = Vector2(1, 1)
-		Vector2(1, -1):
-			rect_scale = Vector2(-1, -1)
+	if selection_tools.active_tool != "Move":
+		match rect_scale:
+			Vector2(-1, 1):
+				rect_scale = Vector2(-1, -1)
+			Vector2(-1, -1):
+				rect_scale = Vector2(1, 1)
+			Vector2(1, -1):
+				rect_scale = Vector2(-1, -1)
+				
+		edit_selection.show()
+#	edit_selection.rect_position = Vector2(rect_position.x + 95, rect_position.y + 100 + rect_size.y)
+
