@@ -13,14 +13,15 @@ extents = Vector2( 42.5, 10 )
 [node name="SelectionBox" type="NinePatchRect"]
 margin_left = 220.0
 margin_top = 70.0
-margin_right = 521.966
-margin_bottom = 290.0
+margin_right = 384.0
+margin_bottom = 142.0
 texture = SubResource( 1 )
+draw_center = false
 region_rect = Rect2( 0, 0, 28, 28 )
-patch_margin_left = 4
-patch_margin_top = 4
-patch_margin_right = 4
-patch_margin_bottom = 5
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 script = ExtResource( 2 )
@@ -33,6 +34,8 @@ position = Vector2( 204.5, 59 )
 shape = SubResource( 2 )
 
 [node name="WhiteHighlight" type="ReferenceRect" parent="."]
+margin_left = 1.0
+margin_top = 1.0
 margin_right = 163.0
 margin_bottom = 71.0
 border_color = Color( 1, 1, 1, 1 )

@@ -1,0 +1,24 @@
+[gd_resource type="Resource" load_steps=10 format=2]
+
+[ext_resource path="res://scenes/editor/items/placeable_tile.gd" type="Script" id=1]
+[ext_resource path="res://assets/tiles/marble_bricks/left_slope_icon.png" type="Texture" id=2]
+[ext_resource path="res://assets/tiles/marble_bricks/pallete_icons/2_slopeL.png" type="Texture" id=3]
+[ext_resource path="res://assets/tiles/marble_bricks/icon.png" type="Texture" id=4]
+[ext_resource path="res://assets/tiles/marble_bricks/pallete_icons/1_slopeL.png" type="Texture" id=5]
+[ext_resource path="res://assets/tiles/marble_bricks/pallete_icons/5Yellow-marble_brick_slope_l_icon.png" type="Texture" id=6]
+[ext_resource path="res://assets/tiles/marble_bricks/pallete_icons/4Brown-marble_brick_slope_l_icon.png" type="Texture" id=7]
+[ext_resource path="res://assets/tiles/marble_bricks/pallete_icons/6Blue-marble_brick_slope_l_icon.png" type="Texture" id=8]
+[ext_resource path="res://assets/tiles/marble_bricks/pallete_icons/3Purple-marble_brick_slope_l_icon.png" type="Texture" id=9]
+
+[resource]
+script = ExtResource( 1 )
+item_name = "Marble Bricks (Left Stairs)"
+groups = PoolStringArray( "special" )
+change_to = ""
+items_in_sequence = 0
+index_in_sequence = 0
+icons = [ ExtResource( 2 ), ExtResource( 5 ), ExtResource( 3 ), ExtResource( 9 ), ExtResource( 7 ), ExtResource( 6 ), ExtResource( 8 ) ]
+previews = [ ExtResource( 4 ) ]
+priority = 0
+tileset_id = 15
+tile_id = 1
