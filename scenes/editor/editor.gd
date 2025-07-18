@@ -128,6 +128,10 @@ func object_clicked(object: GameObject):
 	else:
 		selected_objects.erase(object)
 		object.modulate = Color(1, 1, 1, object.modulate.a)
+		
+	if selected_objects.size() > 1:
+		selection_box.show()
+		selection_box.snap_to_selected_size()
 	
 
 
