@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=184 format=2]
+[gd_resource type="Resource" load_steps=188 format=2]
 
 [ext_resource path="res://scenes/editor/items/placeable_items.gd" type="Script" id=1]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/blue_coin.tres" type="Resource" id=2]
@@ -173,7 +173,7 @@
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/cobblestone.tres" type="Resource" id=171]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/dark_bricks.tres" type="Resource" id=172]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/bookshelf.tres" type="Resource" id=173]
-[ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/pitch_black.tres" type="Resource" id=174]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/color_tile.tres" type="Resource" id=174]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/cabin_window.tres" type="Resource" id=175]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/garden.tres" type="Resource" id=176]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/columns.tres" type="Resource" id=177]
@@ -183,6 +183,10 @@
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/dark_bricks_stairs_right.tres" type="Resource" id=181]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/fire_bricks_stairs_left.tres" type="Resource" id=182]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/fire_bricks_stairs_right.tres" type="Resource" id=183]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/pyramid_bricks_stairs_left.tres" type="Resource" id=184]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/pyramid_bricks_stairs_right.tres" type="Resource" id=185]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/marble_bricks_stairs_left.tres" type="Resource" id=186]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/marble_bricks_stairs_right.tres" type="Resource" id=187]
 
 [resource]
 script = ExtResource( 1 )
@@ -343,6 +347,7 @@ placeable_items = {
 "til_castle_wood": ExtResource( 158 ),
 "til_cloud": ExtResource( 178 ),
 "til_cobblestone": ExtResource( 171 ),
+"til_color_tile": ExtResource( 174 ),
 "til_columns": ExtResource( 177 ),
 "til_crystal": ExtResource( 166 ),
 "til_dark_brick": ExtResource( 172 ),
@@ -358,9 +363,12 @@ placeable_items = {
 "til_lava_rock": ExtResource( 159 ),
 "til_log": ExtResource( 164 ),
 "til_marble_brick": ExtResource( 153 ),
+"til_marble_brick_stairs_left": ExtResource( 186 ),
+"til_marble_brick_stairs_right": ExtResource( 187 ),
 "til_negative_rock": ExtResource( 157 ),
-"til_pitch_black": ExtResource( 174 ),
-"til_pyramind_brick": ExtResource( 160 ),
+"til_pyramid_brick_stairs_left": ExtResource( 184 ),
+"til_pyramid_brick_stairs_right": ExtResource( 185 ),
+"til_pyramid_bricks": ExtResource( 160 ),
 "til_roof": ExtResource( 169 ),
 "til_sand": ExtResource( 163 ),
 "til_snow": ExtResource( 152 ),
