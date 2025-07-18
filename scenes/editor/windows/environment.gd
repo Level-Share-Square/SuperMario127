@@ -11,8 +11,9 @@ onready var autoscroll_pick = $"%ASPick"
 onready var background = $"%Background"
 onready var foreground = $"%Foreground"
 
-onready var left_button = $"%LeftButton"
-onready var right_button = $"%RightButton"
+
+onready var palette_menu_button = $"%PaletteMenuButton"
+onready var palette_menu = $"%PalettesGrid"
 
 var bg_index: int = 0
 var fg_index: int = 0
@@ -34,11 +35,12 @@ func _ready():
 	background_dropdown.connect("item_selected", self, "_on_bg_selected")
 	foreground_dropdown.connect("item_selected", self, "_on_fg_selected")
 	
-	left_button.connect("pressed", self, "_on_left_pressed")
-	right_button.connect("pressed", self, "_on_right_pressed")
+	palette_menu_button.connect("toggled", self, "_on_palette_menu_toggled")
 	
 	# I was wrong dignity... sorry... we can just do this on ready
 	area = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area]
+	
+	
 	
 	autoscroll_pick.connect("value_changed", self, "_on_autoscroll_change")
 	connect("update_background", owner, "update_background")
@@ -61,8 +63,48 @@ func load_settings():
 	background_dropdown.select(bg_index)
 	foreground_dropdown.select(fg_index)
 	autoscroll_pick.value = area.settings.bg_autoscroll_speed
+	init_palette_dropdown()
+	
+# adds the palette previews to the grid 
+func init_palette_dropdown():
+	
+	#init and clear previous entries
+	for child in palette_menu.get_children():
+		palette_menu.remove_child(child)
+	
+	var resource = load("res://scenes/shared/background/foregrounds/%s/resource.tres" % foregrounds.ids[fg_index])
+	#(for default palette since its coded differently)
+	var default_texture = TextureRect.new()
+	default_texture.texture = resource.preview
+	default_texture.expand = true
+	default_texture.rect_min_size.y = 63
+	default_texture.size_flags_horizontal = SIZE_EXPAND_FILL
+	default_texture.connect("gui_input", self, "_on_palette_selected", [0])
+	palette_menu.add_child(default_texture)
+		
+	for i in range(0, resource.palettes.size()):
+		var palette_texture = TextureRect.new()
+		palette_texture.texture = resource.palettes[i]
+		palette_texture.expand = true
+		palette_texture.rect_min_size.y = 63
+		palette_texture.size_flags_horizontal = SIZE_EXPAND_FILL
+		palette_texture.connect("gui_input", self, "_on_palette_selected", [i + 1])
+		palette_menu.add_child(palette_texture)
 
 
+func _on_palette_selected(event: InputEvent, index: int):
+	if event.is_action_pressed("LMB"):
+		var resource = load("res://scenes/shared/background/foregrounds/%s/resource.tres" % foregrounds.ids[fg_index])
+		var palettes = resource.palettes
+		current_palette = index
+		if current_palette == 0:
+			foreground.texture = resource.preview
+		else:
+			foreground.texture = palettes[current_palette - 1]
+		Singleton.CurrentLevelData.level_info.thumbnail_background_palette = current_palette
+		area.settings.background_palette = current_palette
+		emit_signal("update_background")
+	
 func _on_bg_selected(index: int):
 	var resource = load("res://scenes/shared/background/backgrounds/%s/resource.tres" % backgrounds.ids[index])
 	background.texture = resource.texture
@@ -80,34 +122,16 @@ func _on_fg_selected(index: int):
 	area.settings.background = index
 	area.settings.background_palette = 0
 	fg_index = index
+	init_palette_dropdown()
 	emit_signal("update_background")
+	
 
-
-func _on_right_pressed():
-	var resource = load("res://scenes/shared/background/foregrounds/%s/resource.tres" % foregrounds.ids[fg_index])
-	if resource.palettes.size() > 0:
-		current_palette = wrapi(current_palette + 1, 0, resource.palettes.size())
-		if current_palette == 0:
-			foreground.texture = resource.preview
-		else:
-			foreground.texture = resource.palettes[current_palette - 1]
-		Singleton.CurrentLevelData.level_info.thumbnail_background_palette = current_palette
-		area.settings.background_palette = current_palette
-		emit_signal("update_background")
-
-
-func _on_left_pressed():
-	var resource = load("res://scenes/shared/background/foregrounds/%s/resource.tres" % foregrounds.ids[fg_index])
-	if resource.palettes.size() != null:
-		current_palette = wrapi(current_palette - 1, 0, resource.palettes.size())
-		if current_palette == 0:
-			foreground.texture = resource.preview
-		else:
-			foreground.texture = resource.palettes[current_palette - 1]
-		Singleton.CurrentLevelData.level_info.thumbnail_background_palette = current_palette
-		area.settings.background_palette = current_palette
-		emit_signal("update_background")
-
+func _on_palette_menu_toggled(pressed: bool):
+	background.visible = !pressed
+	foreground.visible = !pressed
+	palette_menu.get_parent().visible = pressed
+	palette_menu.visible = pressed
+	init_palette_dropdown()
 
 func _on_autoscroll_change(value):
 	area.settings.bg_autoscroll_speed = value
