@@ -17,8 +17,7 @@ export var frame_count: int = 5
 
 var timer: float = 0
 
-var pos1
-
+var start_pos: Vector2
 var selected_dict = {}
 
 var expand: bool = false
@@ -33,50 +32,63 @@ func _ready():
 	selection_area.connect("area_entered", self, "_on_object_entered")
 
 
+func hide_selection_box():
+	hide()
+	self_modulate.a = 0
+	rect_size = Vector2.ZERO
+	rect_scale = Vector2.ONE
+	expand = false
+	selection_area.monitorable = false
+	selection_shape.disabled = true
+
+func show_selection_box():
+	show()
+	self_modulate.a = 1
+	rect_scale = Vector2.ONE
+	white_highlight.hide()
+	erase = false
+	expand = false
+	selection_area.monitorable = false
+	selection_shape.disabled = true
+	snap_to_selected_size()
+
+
 func _unhandled_input(event):
 	if selection_tools.active_tool == null:
-		if event.is_action_pressed("middle"):
+		if event.is_action_pressed("middle") and editor.hovered_objects.empty():
+			if not editor.selected_objects.empty():
+				var action := SelectObjectsAction.new()
+				action.editor = editor
+				action.selection_box = self
+				action.selected_objects = {}
+				editor.action_manager.commit_action(action)
+			else:
+				hide_selection_box()
+			
 			edit_selection.hide()
 			rect_size = Vector2(0, 0)
-			pos1 = get_global_mouse_position()
-			rect_position = pos1
-			if editor.hovered_objects.empty():
-				for object in editor.selected_objects:
-					object.modulate = Color(1, 1, 1, object.modulate.a)
-				editor.selected_objects = {}
-				selected_dict = {}
-				texture = Texture.new()
-				yield(get_tree().create_timer(0.1), "timeout")
-				white_highlight.visible = true
-				erase = true
-				expand = true
-				selection_shape.disabled = false
-				selection_area.monitorable = true
+			start_pos = get_global_mouse_position()
+			rect_position = start_pos
 			
+			white_highlight.visible = true
+			erase = true
+			expand = true
+			selection_shape.disabled = false
+			selection_area.monitorable = true
+		
 		elif event.is_action_released("middle"):
-			if pos1 != null:
+			if start_pos != null:
 				white_highlight.visible = false
-				texture = AtlasTexture.new()
-				texture.atlas = sel_border
-				texture.region = Rect2(0, 0, 28, 28)
-				if abs(pos1.length() - get_global_mouse_position().length()) < 10:
-					hide()
-					rect_size = Vector2(0, 0)
-					expand = false
-					for object in editor.selected_objects:
-						object.modulate = Color(1, 1, 1, object.modulate.a)
-					editor.selected_objects = {}
-					selection_area.monitorable = false
-					selection_shape.disabled = true
+				
+				if not (editor.selected_objects.empty() and selected_dict.empty()):
+					var action := SelectObjectsAction.new()
+					action.editor = editor
+					action.selection_box = self
+					action.selected_objects = selected_dict
+					editor.action_manager.commit_action(action)
 				else:
-					for object in selected_dict:
-						editor.selected_objects[object] = selected_dict[object]
-						object.modulate = Color(0.8, 0.8, 1.2, object.modulate.a)
-					erase = false
-					expand = false
-					selection_area.monitorable = false
-					selection_shape.disabled = true
-					snap_to_selected_size()
+					hide_selection_box()
+
 
 func _process(delta):
 	white_highlight.rect_size = rect_size
@@ -99,26 +111,24 @@ func _process(delta):
 
 func _on_object_entered(area, object):
 	if expand == true:
-		editor.selected_objects.get_or_add(object, object.name)
 		selected_dict.get_or_add(object, object.name)
 		object.modulate = Color(0.7, 0.7, 1.2, object.modulate.a)
 
 
 func _on_object_exited(area, object):
 	if erase == true:
-		editor.selected_objects.erase(object)
 		selected_dict.erase(object)
 		object.modulate = Color(1, 1, 1, object.modulate.a)
 
 
 func box_expansion():
-	rect_size.x = abs(pos1.x - get_global_mouse_position().x)
-	rect_size.y = abs(pos1.y - get_global_mouse_position().y)
+	rect_size.x = abs(start_pos.x - get_global_mouse_position().x)
+	rect_size.y = abs(start_pos.y - get_global_mouse_position().y)
 	
 	selection_shape.position = Vector2(rect_size.x/2, rect_size.y/2)
 	selection_shape.shape.extents = Vector2(rect_size.x/2, rect_size.y/2)
 	
-	if pos1.x - get_global_mouse_position().x > 0:
+	if start_pos.x - get_global_mouse_position().x > 0:
 		rect_rotation = 180
 		rect_scale.y = -1
 		rect_scale.x = 1
@@ -127,11 +137,11 @@ func box_expansion():
 		rect_scale.y = 1
 		rect_scale.x = 1
 		
-	if pos1.y - get_global_mouse_position().y > 0:
-		rect_rotation = 180 if pos1.x - get_global_mouse_position().x < 0 else 0
+	if start_pos.y - get_global_mouse_position().y > 0:
+		rect_rotation = 180 if start_pos.x - get_global_mouse_position().x < 0 else 0
 		rect_scale.x = -1
 	else:
-		rect_rotation = 0 if pos1.x - get_global_mouse_position().x < 0 else 180
+		rect_rotation = 0 if start_pos.x - get_global_mouse_position().x < 0 else 180
 		rect_scale.x = 1
 
 
@@ -150,7 +160,6 @@ func snap_to_selected_size():
 		if object.global_position.y > far_down:
 			far_down = object.global_position.y
 		
-			
 	rect_position = Vector2(far_left, far_up)
 	rect_size = Vector2(abs(far_left - far_right), far_down - far_up)
 	if selection_tools.active_tool == null or selection_tools.active_tool.name != "Move":
