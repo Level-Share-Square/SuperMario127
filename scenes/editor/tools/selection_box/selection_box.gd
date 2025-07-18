@@ -48,7 +48,7 @@ func _process(delta):
 
 		timer = animation_delay
 		
-	if selection_tools.active_tool == "None":
+	if selection_tools.active_tool == null:
 		if Input.is_action_just_pressed("middle"):
 			edit_selection.hide()
 			rect_size = Vector2(0, 0)
@@ -156,7 +156,7 @@ func snap_to_selected_size():
 			
 	rect_position = Vector2(far_left, far_up)
 	rect_size = Vector2(abs(far_left - far_right), far_down - far_up)
-	if selection_tools.active_tool != "Move":
+	if selection_tools.active_tool == null or selection_tools.active_tool.name != "Move":
 		match rect_scale:
 			Vector2(-1, 1):
 				rect_scale = Vector2(-1, -1)

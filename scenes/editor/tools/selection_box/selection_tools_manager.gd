@@ -1,13 +1,11 @@
 extends Control
 
 
-var active_tool = "None"
+var active_tool: SelectionTool
 onready var move = $"%Move"
 onready var rotate = $"%Rotate"
 onready var delete = $"%Delete"
 
-onready var move_button = $"%MoveButton"
-onready var rotate_button = $"%RotateButton"
 onready var pivot_toggle_button = $"%PivotToggleButton"
 onready var properties_button = $"%PropertiesButton"
 onready var delete_button = $"%DeleteButton"
@@ -17,27 +15,23 @@ onready var editor = get_tree().get_current_scene()
 onready var selection_box = editor.get_node("%SelectionBox")
 
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	for i in button_container.get_children():
-		i.connect("button_down", self, "_on_" + i.name + "_pressed")
+	for node in button_container.get_children():
+		if node is SelectionToolButton:
+			node.connect("button_down", self, "button_pressed", [node])
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	print(active_tool)
-	match active_tool:
-		"Move":
-			move.action()
-		"Rotate":
-			rotate.action()
-		"Delete":
-			delete.action()
-		_:
-			pass
-			
-func _on_MoveButton_pressed():
-	if active_tool == "Move":
+	if is_instance_valid(active_tool):
+		active_tool.update()
+
+func button_pressed(button: SelectionToolButton):
+	if active_tool == button.associated_tool:
+		active_tool.commit_to_action()
+		active_tool.is_active = false
+		active_tool = null
 		return
-	active_tool = "Move"
-	move.update_mouse_anchor()
+	
+	else:
+		active_tool = button.associated_tool
+		active_tool.is_active = true
+		active_tool.clicked()
