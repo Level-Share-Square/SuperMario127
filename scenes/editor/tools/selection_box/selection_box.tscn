@@ -1,7 +1,12 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scenes/editor/tools/selection_box/selection_border.png" type="Texture" id=1]
 [ext_resource path="res://scenes/editor/tools/selection_box/selection_box.gd" type="Script" id=2]
+[ext_resource path="res://scenes/editor/tools/selection_box/selection_tools_manager.gd" type="Script" id=3]
+[ext_resource path="res://scenes/editor/tools/selection_box/selection_tools/move.gd" type="Script" id=4]
+[ext_resource path="res://scenes/editor/editor_theme.tres" type="Theme" id=5]
+[ext_resource path="res://scenes/editor/tools/selection_box/tool_button.gd" type="Script" id=6]
+[ext_resource path="res://scenes/editor/tools/selection_box/selection_tool.gd" type="Script" id=7]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 1 )
@@ -41,3 +46,114 @@ margin_bottom = 71.0
 border_color = Color( 1, 1, 1, 1 )
 border_width = 2.0
 editor_only = false
+
+[node name="SelectionTools" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 3 )
+
+[node name="Move" type="Control" parent="SelectionTools"]
+unique_name_in_owner = true
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 4 )
+
+[node name="Rotate" type="Control" parent="SelectionTools"]
+unique_name_in_owner = true
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 7 )
+
+[node name="Delete" type="Control" parent="SelectionTools"]
+unique_name_in_owner = true
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 7 )
+
+[node name="EditSelection" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+anchor_left = 0.5
+anchor_top = 0.95
+anchor_right = 0.5
+anchor_bottom = 0.95
+margin_left = -154.0
+margin_top = 2.6
+margin_right = 158.0
+margin_bottom = 26.6
+theme = ExtResource( 5 )
+theme_type_variation = "MenuPanel"
+
+[node name="ButtonContainer" type="HBoxContainer" parent="EditSelection"]
+margin_left = 4.0
+margin_top = 1.0
+margin_right = 308.0
+margin_bottom = 23.0
+rect_clip_content = true
+custom_constants/separation = 0
+
+[node name="Move" type="Button" parent="EditSelection/ButtonContainer"]
+margin_right = 44.0
+margin_bottom = 22.0
+text = "Move"
+flat = true
+script = ExtResource( 6 )
+associated_tool_path = NodePath("../../../SelectionTools/Move")
+
+[node name="VSeparator" type="VSeparator" parent="EditSelection/ButtonContainer"]
+modulate = Color( 0.501961, 0.501961, 0.501961, 1 )
+margin_left = 44.0
+margin_right = 48.0
+margin_bottom = 22.0
+
+[node name="Rotate" type="Button" parent="EditSelection/ButtonContainer"]
+margin_left = 48.0
+margin_right = 100.0
+margin_bottom = 22.0
+text = "Rotate"
+flat = true
+script = ExtResource( 6 )
+associated_tool_path = NodePath("../../../SelectionTools/Rotate")
+
+[node name="VSeparator2" type="VSeparator" parent="EditSelection/ButtonContainer"]
+modulate = Color( 0.501961, 0.501961, 0.501961, 1 )
+margin_left = 100.0
+margin_right = 104.0
+margin_bottom = 22.0
+
+[node name="PivotToggleButton" type="CheckButton" parent="EditSelection/ButtonContainer"]
+unique_name_in_owner = true
+margin_left = 104.0
+margin_right = 168.0
+margin_bottom = 22.0
+text = "Pivot"
+flat = true
+align = 1
+
+[node name="VSeparator3" type="VSeparator" parent="EditSelection/ButtonContainer"]
+modulate = Color( 0.501961, 0.501961, 0.501961, 1 )
+margin_left = 168.0
+margin_right = 172.0
+margin_bottom = 22.0
+
+[node name="PropertiesButton" type="Button" parent="EditSelection/ButtonContainer"]
+unique_name_in_owner = true
+margin_left = 172.0
+margin_right = 248.0
+margin_bottom = 22.0
+text = "Properties"
+flat = true
+
+[node name="VSeparator4" type="VSeparator" parent="EditSelection/ButtonContainer"]
+modulate = Color( 0.501961, 0.501961, 0.501961, 1 )
+margin_left = 248.0
+margin_right = 252.0
+margin_bottom = 22.0
+
+[node name="Delete" type="Button" parent="EditSelection/ButtonContainer"]
+margin_left = 252.0
+margin_right = 304.0
+margin_bottom = 22.0
+text = "Delete"
+flat = true
+script = ExtResource( 6 )
+associated_tool_path = NodePath("../../../SelectionTools/Delete")

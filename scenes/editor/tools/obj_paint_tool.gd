@@ -53,7 +53,6 @@ func create_object_data(position: Vector2, object_id: int, palette: int) -> Obje
 	
 	return data
 
-
 func erase_object(object: GameObject):
 	editor.object_unhovered(object)
 	

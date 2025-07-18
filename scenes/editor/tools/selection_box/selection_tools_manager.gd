@@ -1,0 +1,37 @@
+extends Control
+
+
+var active_tool: SelectionTool
+onready var move = $"%Move"
+onready var rotate = $"%Rotate"
+onready var delete = $"%Delete"
+
+onready var pivot_toggle_button = $"%PivotToggleButton"
+onready var properties_button = $"%PropertiesButton"
+onready var delete_button = $"%DeleteButton"
+onready var button_container = $"../EditSelection/ButtonContainer"
+
+onready var editor = get_tree().get_current_scene()
+onready var selection_box = editor.get_node("%SelectionBox")
+
+
+func _ready():
+	for node in button_container.get_children():
+		if node is SelectionToolButton:
+			node.connect("button_down", self, "button_pressed", [node])
+
+func _process(delta):
+	if is_instance_valid(active_tool):
+		active_tool.update()
+
+func button_pressed(button: SelectionToolButton):
+	if active_tool == button.associated_tool:
+		active_tool.commit_to_action()
+		active_tool.is_active = false
+		active_tool = null
+		return
+	
+	else:
+		active_tool = button.associated_tool
+		active_tool.is_active = true
+		active_tool.clicked()

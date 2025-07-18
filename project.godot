@@ -14,7 +14,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/menu/level_portal/login/account_info.gd"
 }, {
-"base": "Node",
+"base": "Reference",
 "class": "Action",
 "language": "GDScript",
 "path": "res://scenes/editor/action_manager/actions/action.gd"
@@ -108,6 +108,16 @@ _global_script_classes=[ {
 "class": "CampaignCard",
 "language": "GDScript",
 "path": "res://scenes/menu/levels_list/cards/campaign/campaign_card.gd"
+}, {
+"base": "Action",
+"class": "ChangePropertyAction",
+"language": "GDScript",
+"path": "res://scenes/editor/action_manager/actions/change_property.gd"
+}, {
+"base": "ChangePropertyAction",
+"class": "ChangePropertyBulkAction",
+"language": "GDScript",
+"path": "res://scenes/editor/action_manager/actions/change_property_bulk.gd"
 }, {
 "base": "KinematicBody2D",
 "class": "Character",
@@ -264,7 +274,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/oldeditor/editor_hitbox.gd"
 }, {
-"base": "Control",
+"base": "Reference",
 "class": "EditorTool",
 "language": "GDScript",
 "path": "res://scenes/editor/tools/editor_tool.gd"
@@ -384,7 +394,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/menu/levels_list/misc/http_thumbnails.gd"
 }, {
-"base": "ScrollContainer",
+"base": "Reference",
 "class": "HelpPage",
 "language": "GDScript",
 "path": "res://scenes/oldeditor/window/HelpPage.gd"
@@ -518,6 +528,11 @@ _global_script_classes=[ {
 "class": "MetalPowerup",
 "language": "GDScript",
 "path": "res://scenes/actors/mario/powerups/Metal.gd"
+}, {
+"base": "SelectionTool",
+"class": "MoveSelection",
+"language": "GDScript",
+"path": "res://scenes/editor/tools/selection_box/selection_tools/move.gd"
 }, {
 "base": "Reference",
 "class": "MusicDownloader",
@@ -689,6 +704,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/editor/tools/selection_box/selection_box.gd"
 }, {
+"base": "Control",
+"class": "SelectionTool",
+"language": "GDScript",
+"path": "res://scenes/editor/tools/selection_box/selection_tool.gd"
+}, {
+"base": "Node",
+"class": "SelectionToolButton",
+"language": "GDScript",
+"path": "res://scenes/editor/tools/selection_box/tool_button.gd"
+}, {
 "base": "PhysicsBody2D",
 "class": "SemiSolidPlatform",
 "language": "GDScript",
@@ -764,7 +789,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/player/ui_new/timers/timer_manager.gd"
 }, {
-"base": "Control",
+"base": "Reference",
 "class": "ToolManager",
 "language": "GDScript",
 "path": "res://scenes/editor/tools/tool_manager.gd"
@@ -930,6 +955,8 @@ _global_script_class_icons={
 "CameraCutscene": "",
 "CameraStopper": "",
 "CampaignCard": "",
+"ChangePropertyAction": "",
+"ChangePropertyBulkAction": "",
 "Character": "",
 "CharacterHitbox": "",
 "ChatMessage": "",
@@ -1012,6 +1039,7 @@ _global_script_class_icons={
 "LiquidBase": "",
 "Member": "",
 "MetalPowerup": "",
+"MoveSelection": "",
 "MusicDownloader": "",
 "NPCBase": "",
 "NoActionState": "",
@@ -1046,6 +1074,8 @@ _global_script_class_icons={
 "Screen": "",
 "ScreenSizeUtil": "",
 "SelectionBox": "",
+"SelectionTool": "",
+"SelectionToolButton": "",
 "SemiSolidPlatform": "",
 "SkyResource": "",
 "SlideState": "",
@@ -1098,7 +1128,6 @@ config/name="Super Mario 127"
 run/main_scene="res://scenes/menu/launcher/launcher.tscn"
 config/use_custom_user_dir=true
 config/custom_user_dir_name="dev"
-boot_splash/show_image=false
 boot_splash/image="res://assets/misc/startup_new.png"
 boot_splash/bg_color=Color( 0.431373, 0.0352941, 0.34902, 1 )
 config/icon="res://assets/misc/icon.png"
@@ -1552,6 +1581,11 @@ click={
 right_click={
 "deadzone": 0.5,
 "events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":2,"canceled":false,"pressed":false,"doubleclick":false,"script":null)
+ ]
+}
+middle={
+"deadzone": 0.5,
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":3,"canceled":false,"pressed":false,"doubleclick":false,"script":null)
  ]
 }
 

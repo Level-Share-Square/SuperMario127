@@ -23,6 +23,7 @@ onready var action_manager: ActionManager = $"%ActionManager"
 onready var save_button = $UI/EditorUI/Utilities/Save
 onready var editor_options = $UI/EditorOptionsWindow
 onready var selection_box = $"%SelectionBox"
+onready var edit_selection = $"%EditSelection"
 
 
 onready var backgrounds = $Backgrounds
@@ -111,23 +112,23 @@ func object_unhovered(object: GameObject):
 
 
 func _process(delta):
-	if Input.is_action_just_pressed("right_click"):
+	if Input.is_action_just_pressed("middle"):
 		selection_box.show()
 	for i in selected_objects:
 		i.modulate = Color(0.7, 0.7, 1.2, i.modulate.a)
 
 
-func object_clicked(object: GameObject):
-	if tool_manager.current_tool.tool_type == EditorTool.Type.TileTool:
-		return
-		
-	object.selected = !object.selected
-	if object.selected:
-		selected_objects.get_or_add(object, object.name)
-		object.modulate = Color(0.7, 0.7, 1.2, object.modulate.a)
-	else:
-		selected_objects.erase(object)
-		object.modulate = Color(1, 1, 1, object.modulate.a)
+#func object_clicked(object: GameObject):
+#	if tool_manager.current_tool.tool_type == EditorTool.Type.TileTool:
+#		return
+#
+#	object.selected = !object.selected
+#	if object.selected:
+#		selected_objects.get_or_add(object, object.name)
+#		object.modulate = Color(0.7, 0.7, 1.2, object.modulate.a)
+#	else:
+#		selected_objects.erase(object)
+#		object.modulate = Color(1, 1, 1, object.modulate.a)
 	
 
 
