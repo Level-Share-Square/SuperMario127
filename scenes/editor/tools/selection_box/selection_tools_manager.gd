@@ -12,7 +12,7 @@ onready var delete_button = $"%DeleteButton"
 onready var button_container = $"../EditSelection/ButtonContainer"
 
 onready var editor = get_tree().get_current_scene()
-onready var selection_box = editor.get_node("%SelectionBox")
+onready var selection_box = get_owner()
 
 
 func _ready():
@@ -26,12 +26,14 @@ func _process(delta):
 
 func button_pressed(button: SelectionToolButton):
 	if active_tool == button.associated_tool:
+		selection_box.toggle_ui(true)
 		active_tool.commit_to_action()
 		active_tool.is_active = false
 		active_tool = null
 		return
 	
 	else:
+		selection_box.toggle_ui(false)
 		active_tool = button.associated_tool
 		active_tool.is_active = true
 		active_tool.clicked()
