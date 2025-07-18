@@ -100,7 +100,6 @@ grow_end = -7.0
 thickness = 2
 
 [node name="ItemPickerWindow" instance=ExtResource( 1 )]
-visible = false
 margin_right = 256.0
 margin_bottom = 256.0
 script = ExtResource( 3 )

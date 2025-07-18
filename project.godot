@@ -34,6 +34,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/actors/objects/area_transition/area_transition_helper.gd"
 }, {
+"base": "TextureRect",
+"class": "BGPaletteButton",
+"language": "GDScript",
+"path": "res://scenes/editor/windows/editor_options/bg_palette_button.gd"
+}, {
 "base": "State",
 "class": "BackflipState",
 "language": "GDScript",
@@ -910,6 +915,7 @@ _global_script_class_icons={
 "ActionManager": "",
 "AreaTransition": "",
 "AreaTransitionHelper": "",
+"BGPaletteButton": "",
 "BackflipState": "",
 "BaseButtonSound": "",
 "BaseCard": "",
@@ -1137,7 +1143,7 @@ window/options/ninepatch_mode=0
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/discord_game_sdk/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/discord_game_sdk/plugin.cfg", "res://addons/native_dialogs/plugin.cfg" )
 
 [global]
 
