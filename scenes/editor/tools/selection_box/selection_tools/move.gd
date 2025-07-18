@@ -1,9 +1,11 @@
 class_name MoveSelection
 extends SelectionTool
 
+
 var object_offsets: Dictionary = {}
 var new_position: float
 var action: ChangePropertyBulkAction
+
 
 func _input(event):
 	if is_active:

@@ -43,6 +43,7 @@ margin_left = 1.0
 margin_top = 1.0
 margin_right = 163.0
 margin_bottom = 71.0
+mouse_filter = 2
 border_color = Color( 1, 1, 1, 1 )
 border_width = 2.0
 editor_only = false
@@ -50,24 +51,28 @@ editor_only = false
 [node name="SelectionTools" type="Control" parent="."]
 margin_right = 40.0
 margin_bottom = 40.0
+mouse_filter = 2
 script = ExtResource( 3 )
 
 [node name="Move" type="Control" parent="SelectionTools"]
 unique_name_in_owner = true
 margin_right = 40.0
 margin_bottom = 40.0
+mouse_filter = 2
 script = ExtResource( 4 )
 
 [node name="Rotate" type="Control" parent="SelectionTools"]
 unique_name_in_owner = true
 margin_right = 40.0
 margin_bottom = 40.0
+mouse_filter = 2
 script = ExtResource( 7 )
 
 [node name="Delete" type="Control" parent="SelectionTools"]
 unique_name_in_owner = true
 margin_right = 40.0
 margin_bottom = 40.0
+mouse_filter = 2
 script = ExtResource( 7 )
 
 [node name="EditSelection" type="PanelContainer" parent="."]
@@ -80,6 +85,7 @@ margin_left = -154.0
 margin_top = 2.6
 margin_right = 158.0
 margin_bottom = 26.6
+mouse_filter = 2
 theme = ExtResource( 5 )
 theme_type_variation = "MenuPanel"
 
@@ -89,11 +95,13 @@ margin_top = 1.0
 margin_right = 308.0
 margin_bottom = 23.0
 rect_clip_content = true
+mouse_filter = 2
 custom_constants/separation = 0
 
 [node name="Move" type="Button" parent="EditSelection/ButtonContainer"]
 margin_right = 44.0
 margin_bottom = 22.0
+focus_mode = 0
 text = "Move"
 flat = true
 script = ExtResource( 6 )
@@ -104,11 +112,13 @@ modulate = Color( 0.501961, 0.501961, 0.501961, 1 )
 margin_left = 44.0
 margin_right = 48.0
 margin_bottom = 22.0
+mouse_filter = 2
 
 [node name="Rotate" type="Button" parent="EditSelection/ButtonContainer"]
 margin_left = 48.0
 margin_right = 100.0
 margin_bottom = 22.0
+focus_mode = 0
 text = "Rotate"
 flat = true
 script = ExtResource( 6 )
@@ -119,12 +129,14 @@ modulate = Color( 0.501961, 0.501961, 0.501961, 1 )
 margin_left = 100.0
 margin_right = 104.0
 margin_bottom = 22.0
+mouse_filter = 2
 
 [node name="PivotToggleButton" type="CheckButton" parent="EditSelection/ButtonContainer"]
 unique_name_in_owner = true
 margin_left = 104.0
 margin_right = 168.0
 margin_bottom = 22.0
+focus_mode = 0
 text = "Pivot"
 flat = true
 align = 1
@@ -134,12 +146,14 @@ modulate = Color( 0.501961, 0.501961, 0.501961, 1 )
 margin_left = 168.0
 margin_right = 172.0
 margin_bottom = 22.0
+mouse_filter = 2
 
 [node name="PropertiesButton" type="Button" parent="EditSelection/ButtonContainer"]
 unique_name_in_owner = true
 margin_left = 172.0
 margin_right = 248.0
 margin_bottom = 22.0
+focus_mode = 0
 text = "Properties"
 flat = true
 
@@ -148,11 +162,13 @@ modulate = Color( 0.501961, 0.501961, 0.501961, 1 )
 margin_left = 248.0
 margin_right = 252.0
 margin_bottom = 22.0
+mouse_filter = 2
 
 [node name="Delete" type="Button" parent="EditSelection/ButtonContainer"]
 margin_left = 252.0
 margin_right = 304.0
 margin_bottom = 22.0
+focus_mode = 0
 text = "Delete"
 flat = true
 script = ExtResource( 6 )

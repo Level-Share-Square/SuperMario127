@@ -108,6 +108,7 @@ unique_name_in_owner = true
 script = ExtResource( 22 )
 
 [node name="UI" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
 
 [node name="EditorUI" type="Control" parent="UI"]
 unique_name_in_owner = true
@@ -357,6 +358,8 @@ volume_db = -10.0
 bus = "Sounds"
 
 [connection signal="item_changed" from="." to="Tools" method="item_changed"]
+[connection signal="redo" from="ActionManager" to="SelectionBox" method="snap_to_selected_size"]
+[connection signal="undo" from="ActionManager" to="SelectionBox" method="snap_to_selected_size"]
 [connection signal="pressed" from="UI/EditorUI/MarginContainer/VBoxContainer/Utilities/Undo" to="ActionManager" method="undo"]
 [connection signal="pressed" from="UI/EditorUI/MarginContainer/VBoxContainer/Utilities/Redo" to="ActionManager" method="redo"]
 [connection signal="pressed" from="UI/EditorUI/MarginContainer/VBoxContainer/Utilities/ItemPicker" to="UI/ItemPickerWindow" method="popup" binds= [ Rect2( 450, 60, 248, 248 ) ]]

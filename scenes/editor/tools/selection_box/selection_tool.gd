@@ -2,7 +2,7 @@ class_name SelectionTool
 extends Control
 
 onready var editor = get_tree().get_current_scene()
-onready var selection_box = editor.get_node("%SelectionBox")
+onready var selection_box = get_owner()
 var is_active: bool = false
 
 func clicked():
