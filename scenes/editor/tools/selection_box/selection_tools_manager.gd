@@ -12,7 +12,7 @@ onready var delete_button = $"%DeleteButton"
 onready var button_container = $"../EditSelection/ButtonContainer"
 
 onready var editor = get_tree().get_current_scene()
-onready var selection_box = get_owner().get_node("SelectionBox")
+onready var selection_box = get_owner()
 
 
 func _ready():

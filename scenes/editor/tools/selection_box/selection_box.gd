@@ -1,16 +1,17 @@
 class_name SelectionBox
-extends NinePatchRect
+extends Control
 ## Object selector for the level designer.
 
-onready var editor = get_owner().get_owner()
-onready var ui = get_parent().get_node("%UI")
-onready var selection_area = $SelectionArea
-onready var selection_shape = $SelectionArea/SelectionShape
-onready var white_highlight = $WhiteHighlight
-onready var selection_tools = $SelectionTools
+onready var selection_box = $"%SelectionBox"
+onready var editor = get_owner()
+onready var ui = get_node("%UI")
+onready var selection_area = $"%SelectionArea"
+onready var selection_shape = $"%SelectionShape"
+onready var white_highlight = $"%WhiteHighlight"
+onready var selection_tools = $"%SelectionTools"
 onready var edit_selection = $"%EditSelection"
-onready var pivot = get_parent().get_node("Pivot")
-onready var pivot_toggle = $EditSelection/ButtonContainer/PivotToggleButton
+onready var pivot = get_node("Pivot")
+onready var pivot_toggle = $"%PivotToggleButton"
 
 onready var sel_border = preload("res://scenes/editor/tools/selection_box/selection_border.png")
 ## Delay between animation steps in frames.
@@ -41,9 +42,9 @@ func hide_selection_box():
 	hide()
 	if pivot_toggle.pressed:
 		pivot.visible = false
-	self_modulate.a = 0
-	rect_size = Vector2.ZERO
-	rect_scale = Vector2.ONE
+	selection_box.self_modulate.a = 0
+	selection_box.rect_size = Vector2.ZERO
+	selection_box.rect_scale = Vector2.ONE
 	expand = false
 	selection_area.monitorable = false
 	selection_shape.disabled = true
@@ -53,15 +54,14 @@ func show_selection_box():
 	show()
 	if pivot_toggle.pressed:
 		pivot.visible = true
-	self_modulate.a = 1
-	rect_scale = Vector2.ONE
+	selection_box.self_modulate.a = 1
+	selection_box.rect_scale = Vector2.ONE
 	white_highlight.hide()
 	erase = false
 	expand = false
 	selection_area.monitorable = false
 	selection_shape.disabled = true
 	snap_to_selected_size()
-
 
 func _unhandled_input(event):
 	if selection_tools.active_tool == null:
@@ -72,16 +72,16 @@ func _unhandled_input(event):
 			if not editor.selected_objects.empty():
 				var action := SelectObjectsAction.new()
 				action.editor = editor
-				action.selection_box = self
+				action.selection_box = selection_box
 				action.selected_objects = {}
 				editor.action_manager.commit_action(action)
 			else:
 				hide_selection_box()
 			
 			edit_selection.hide()
-			rect_size = Vector2(0, 0)
+			selection_box.rect_size = Vector2(0, 0)
 			start_pos = get_global_mouse_position()
-			rect_position = start_pos
+			selection_box.rect_position = start_pos
 			
 			white_highlight.visible = true
 			erase = true
@@ -93,10 +93,11 @@ func _unhandled_input(event):
 			if start_pos != null:
 				white_highlight.visible = false
 				expand = false
+				pivot.reveal_thyself()
 				if not (editor.selected_objects.empty() and selected_dict.empty()):
 					var action := SelectObjectsAction.new()
 					action.editor = editor
-					action.selection_box = self
+					action.selection_box = selection_box
 					action.selected_objects = selected_dict
 					editor.action_manager.commit_action(action)
 				else:
@@ -104,16 +105,16 @@ func _unhandled_input(event):
 
 
 func _process(delta):
-	white_highlight.rect_size = rect_size
+	white_highlight.rect_size = selection_box.rect_size
 	if not visible: return
 		
 	timer = max(timer - 1, 0)
 
 	if timer <= 0:
-		region_rect.position.x = wrapi(
-			region_rect.position.x + region_rect.size.x,
+		selection_box.region_rect.position.x = wrapi(
+			selection_box.region_rect.position.x + selection_box.region_rect.size.x,
 			0,
-			frame_count * region_rect.size.x
+			frame_count * selection_box.region_rect.size.x
 		)
 		timer = animation_delay
 		
@@ -134,27 +135,27 @@ func _on_object_exited(area, object):
 
 
 func box_expansion():
-	rect_size.x = abs(start_pos.x - get_global_mouse_position().x)
-	rect_size.y = abs(start_pos.y - get_global_mouse_position().y)
+	selection_box.rect_size.x = abs(start_pos.x - get_global_mouse_position().x)
+	selection_box.rect_size.y = abs(start_pos.y - get_global_mouse_position().y)
 	
-	selection_shape.position = Vector2(rect_size.x/2, rect_size.y/2)
-	selection_shape.shape.extents = Vector2(rect_size.x/2, rect_size.y/2)
+	selection_shape.position = Vector2(selection_box.rect_size.x/2, selection_box.rect_size.y/2)
+	selection_shape.shape.extents = Vector2(selection_box.rect_size.x/2, selection_box.rect_size.y/2)
 	
 	if start_pos.x - get_global_mouse_position().x > 0:
-		rect_rotation = 180
-		rect_scale.y = -1
-		rect_scale.x = 1
+		selection_box.rect_rotation = 180
+		selection_box.rect_scale.y = -1
+		selection_box.rect_scale.x = 1
 	else:
-		rect_rotation = 0
-		rect_scale.y = 1
-		rect_scale.x = 1
+		selection_box.rect_rotation = 0
+		selection_box.rect_scale.y = 1
+		selection_box.rect_scale.x = 1
 		
 	if start_pos.y - get_global_mouse_position().y > 0:
-		rect_rotation = 180 if start_pos.x - get_global_mouse_position().x < 0 else 0
-		rect_scale.x = -1
+		selection_box.rect_rotation = 180 if start_pos.x - get_global_mouse_position().x < 0 else 0
+		selection_box.rect_scale.x = -1
 	else:
-		rect_rotation = 0 if start_pos.x - get_global_mouse_position().x < 0 else 180
-		rect_scale.x = 1
+		selection_box.rect_rotation = 0 if start_pos.x - get_global_mouse_position().x < 0 else 180
+		selection_box.rect_scale.x = 1
 
 
 func snap_to_selected_size():
@@ -172,26 +173,34 @@ func snap_to_selected_size():
 		if object.global_position.y > far_down:
 			far_down = object.global_position.y
 		
-	rect_position = Vector2(far_left, far_up)
-	rect_size = Vector2(abs(far_left - far_right), far_down - far_up)
+	selection_box.rect_position = Vector2(far_left, far_up)
+	selection_box.rect_size = Vector2(abs(far_left - far_right), far_down - far_up)
 	if selection_tools.active_tool == null:
-		match rect_scale:
+		match selection_box.rect_scale:
 			Vector2(-1, 1):
-				rect_scale = Vector2(-1, -1)
+				selection_box.rect_scale = Vector2(-1, -1)
 			Vector2(-1, -1):
-				rect_scale = Vector2(1, 1)
+				selection_box.rect_scale = Vector2(1, 1)
 			Vector2(1, -1):
-				rect_scale = Vector2(-1, -1)
+				selection_box.rect_scale = Vector2(-1, -1)
 			Vector2(1, 1):
-				rect_scale = Vector2(-1, -1)
+				selection_box.rect_scale = Vector2(-1, -1)
 				
 		edit_selection.show()
-		rect_rotation = 180
+		selection_box.rect_rotation = 180
 
 
 func toggle_ui(is_visible: bool):
 	ui.visible = is_visible
-	visible = is_visible
+	selection_box.visible = is_visible
 	if pivot_toggle.pressed:
 		pivot.visible = is_visible
 	
+
+
+func _on_ActionManager_redo():
+	snap_to_selected_size()
+
+
+func _on_ActionManager_undo():
+	snap_to_selected_size()

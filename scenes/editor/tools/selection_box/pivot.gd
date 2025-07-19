@@ -1,6 +1,7 @@
 extends TextureButton
 
-onready var selection_box = get_parent().get_node("SelectionBox")
+onready var selection_box = get_parent()
+onready var actual_box = selection_box.get_node("%SelectionBox")
 
 
 func _process(delta):
@@ -18,8 +19,16 @@ func on_toggle():
 		selection_box.pivot_position = Vector2.ZERO
 	else:
 		show()
-		rect_global_position = Vector2(selection_box.rect_global_position.x + selection_box.rect_size.x/2, selection_box.rect_global_position.y + selection_box.rect_size.y/2)
+		rect_global_position = Vector2(actual_box.rect_global_position.x + actual_box.rect_size.x/2, actual_box.rect_global_position.y + actual_box.rect_size.y/2)
 		selection_box.pivot_position = rect_global_position
 
+func reveal_thyself():
+	selection_box.pivot_toggle.pressed = true
+	show()
+	yield(get_tree().create_timer(0.001), "timeout")
+	rect_global_position = Vector2(actual_box.rect_global_position.x + actual_box.rect_size.x/2, actual_box.rect_global_position.y + actual_box.rect_size.y/2)
+	selection_box.pivot_position = rect_global_position
+	
 func center_pivot():
-	rect_global_position = Vector2(selection_box.rect_global_position.x + selection_box.rect_size.x/2, selection_box.rect_global_position.y + selection_box.rect_size.y/2)
+	rect_global_position = Vector2(actual_box.rect_global_position.x + actual_box.rect_size.x/2, actual_box.rect_global_position.y + actual_box.rect_size.y/2)
+	selection_box.pivot_position = rect_global_position
