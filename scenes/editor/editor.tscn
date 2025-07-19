@@ -90,6 +90,10 @@ tool_type = 1
 inverse_tool_name = "TileErase"
 eraser_only = true
 
+[node name="ObjectSelection" parent="Tools" instance=ExtResource( 34 )]
+unique_name_in_owner = true
+tool_type = 1
+
 [node name="TileBuffer" type="TileMap" parent="."]
 unique_name_in_owner = true
 modulate = Color( 1, 1, 1, 0.74902 )
@@ -342,9 +346,6 @@ __meta__ = {
 "_edit_use_anchors_": true
 }
 
-[node name="ObjectSelection" parent="." instance=ExtResource( 34 )]
-unique_name_in_owner = true
-
 [node name="HoverSound" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource( 19 )
@@ -358,10 +359,10 @@ volume_db = -10.0
 bus = "Sounds"
 
 [connection signal="item_changed" from="." to="Tools" method="item_changed"]
-[connection signal="redo" from="ActionManager" to="ObjectSelection" method="snap_to_selected_size"]
-[connection signal="redo" from="ActionManager" to="ObjectSelection" method="_on_ActionManager_redo"]
-[connection signal="undo" from="ActionManager" to="ObjectSelection" method="snap_to_selected_size"]
-[connection signal="undo" from="ActionManager" to="ObjectSelection" method="_on_ActionManager_undo"]
+[connection signal="redo" from="ActionManager" to="Tools/ObjectSelection" method="snap_to_selected_size"]
+[connection signal="redo" from="ActionManager" to="Tools/ObjectSelection" method="_on_ActionManager_redo"]
+[connection signal="undo" from="ActionManager" to="Tools/ObjectSelection" method="snap_to_selected_size"]
+[connection signal="undo" from="ActionManager" to="Tools/ObjectSelection" method="_on_ActionManager_undo"]
 [connection signal="pressed" from="UI/EditorUI/MarginContainer/VBoxContainer/Utilities/Undo" to="ActionManager" method="undo"]
 [connection signal="pressed" from="UI/EditorUI/MarginContainer/VBoxContainer/Utilities/Redo" to="ActionManager" method="redo"]
 [connection signal="pressed" from="UI/EditorUI/MarginContainer/VBoxContainer/Utilities/ItemPicker" to="UI/ItemPickerWindow" method="popup" binds= [ Rect2( 450, 60, 248, 248 ) ]]

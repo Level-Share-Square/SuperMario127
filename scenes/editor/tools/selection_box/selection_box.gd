@@ -1,9 +1,8 @@
 class_name SelectionBox
-extends Control
+extends EditorTool
 ## Object selector for the level designer.
 
 onready var selection_box = $"%SelectionBox"
-onready var editor = get_owner()
 onready var ui = get_node("%UI")
 onready var selection_area = $"%SelectionArea"
 onready var selection_shape = $"%SelectionShape"
