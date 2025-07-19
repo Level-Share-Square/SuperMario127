@@ -134,6 +134,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/discord_game_sdk/example/lobby/chat_message.gd"
 }, {
+"base": "CheckButton",
+"class": "CheckButtonSound",
+"language": "GDScript",
+"path": "res://scenes/menu/button_scripts/check_button_sound.gd"
+}, {
 "base": "Area2D",
 "class": "CircleArea",
 "language": "GDScript",
@@ -970,6 +975,7 @@ _global_script_class_icons={
 "Character": "",
 "CharacterHitbox": "",
 "ChatMessage": "",
+"CheckButtonSound": "",
 "CircleArea": "",
 "CloudNozzle": "",
 "Component": "",
@@ -1184,7 +1190,7 @@ window/options/ninepatch_mode=0
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/discord_game_sdk/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/RadialMenu/plugin.cfg", "res://addons/discord_game_sdk/plugin.cfg" )
 
 [global]
 

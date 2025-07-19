@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/rectangle_fill_tool.png-92d08b048d71c8af8b1bc1fbde81bb77.stex"
+path="res://.import/PivotOff.svg-bc28612b65019fbb46d6bd84daeb4753.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/editor/assets/rectangle_fill_tool.png"
-dest_files=[ "res://.import/rectangle_fill_tool.png-92d08b048d71c8af8b1bc1fbde81bb77.stex" ]
+source_file="res://scenes/editor/assets/PivotOff.svg"
+dest_files=[ "res://.import/PivotOff.svg-bc28612b65019fbb46d6bd84daeb4753.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
