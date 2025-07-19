@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=54 format=2]
+[gd_resource type="Theme" load_steps=67 format=2]
 
 [ext_resource path="res://assets/fonts/delfino_small.tres" type="DynamicFont" id=1]
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=2]
@@ -183,6 +183,70 @@ corner_radius_top_right = 2
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 2
 expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxEmpty" id=160]
+
+[sub_resource type="StyleBoxEmpty" id=174]
+
+[sub_resource type="StyleBoxFlat" id=162]
+bg_color = Color( 0.407843, 0.607843, 1, 0.25098 )
+border_color = Color( 0.407843, 0.607843, 1, 0 )
+corner_radius_top_left = 128
+corner_radius_top_right = 128
+corner_radius_bottom_right = 128
+corner_radius_bottom_left = 128
+anti_aliasing_size = 6.0
+
+[sub_resource type="StyleBoxFlat" id=168]
+bg_color = Color( 0.407843, 0.607843, 1, 0.12549 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.407843, 0.607843, 1, 0 )
+border_blend = true
+corner_radius_top_left = 128
+corner_radius_top_right = 128
+corner_radius_bottom_right = 128
+corner_radius_bottom_left = 128
+anti_aliasing = false
+
+[sub_resource type="StyleBoxEmpty" id=163]
+
+[sub_resource type="StyleBoxEmpty" id=171]
+
+[sub_resource type="StyleBoxEmpty" id=172]
+
+[sub_resource type="StyleBoxEmpty" id=173]
+
+[sub_resource type="Gradient" id=165]
+colors = PoolColorArray( 0, 0, 0, 1, 0, 0, 0, 0.501961 )
+
+[sub_resource type="GradientTexture2D" id=166]
+gradient = SubResource( 165 )
+fill_from = Vector2( 0.5, 1 )
+fill_to = Vector2( 0.5, 0 )
+
+[sub_resource type="StyleBoxTexture" id=167]
+texture = SubResource( 166 )
+region_rect = Rect2( 0, 0, 64, 64 )
+margin_left = 4.0
+margin_right = 4.0
+margin_top = 4.0
+margin_bottom = 4.0
+
+[sub_resource type="GradientTexture2D" id=169]
+gradient = SubResource( 165 )
+fill_from = Vector2( 0.5, 0 )
+fill_to = Vector2( 0.5, 1 )
+
+[sub_resource type="StyleBoxTexture" id=170]
+texture = SubResource( 169 )
+region_rect = Rect2( 0, 0, 64, 64 )
+margin_left = 4.0
+margin_right = 4.0
+margin_top = 4.0
+margin_bottom = 4.0
 
 [sub_resource type="StyleBoxFlat" id=147]
 bg_color = Color( 1, 1, 1, 1 )
@@ -571,18 +635,39 @@ ButtonRed/styles/disabled = SubResource( 119 )
 ButtonRed/styles/hover = SubResource( 110 )
 ButtonRed/styles/normal = SubResource( 111 )
 ButtonRed/styles/pressed = SubResource( 119 )
+ButtonTransparent/base_type = "Button"
+ButtonTransparent/colors/icon_color_hover_pressed = Color( 0.8, 0.866667, 1, 1 )
+ButtonTransparent/colors/icon_color_pressed = Color( 0.8, 0.866667, 1, 1 )
+ButtonTransparent/styles/disabled = SubResource( 160 )
+ButtonTransparent/styles/focus = SubResource( 174 )
+ButtonTransparent/styles/hover = SubResource( 162 )
+ButtonTransparent/styles/hover_pressed = SubResource( 168 )
+ButtonTransparent/styles/normal = SubResource( 163 )
+ButtonTransparent/styles/pressed = SubResource( 168 )
 CheckBox/icons/checked = ExtResource( 4 )
 CheckBox/icons/unchecked = ExtResource( 5 )
 CheckButton/icons/off = ExtResource( 5 )
 CheckButton/icons/on = ExtResource( 4 )
 CheckButton/styles/hover_pressed = SubResource( 118 )
-CheckButton2/base_type = "CheckButton"
-CheckButton2/colors/font_color = Color( 0, 0, 0, 1 )
-CheckButton2/colors/font_color_disabled = Color( 0, 0, 0, 1 )
-CheckButton2/colors/font_color_focus = Color( 0, 0, 0, 1 )
-CheckButton2/colors/font_color_hover = Color( 0, 0, 0, 1 )
-CheckButton2/colors/font_color_hover_pressed = Color( 0, 0, 0, 1 )
-CheckButton2/colors/font_color_pressed = Color( 0, 0, 0, 1 )
+CheckButtonTransparent/base_type = "CheckButton"
+CheckButtonTransparent/colors/font_color = Color( 1, 1, 1, 1 )
+CheckButtonTransparent/colors/font_color_disabled = Color( 0, 0, 0, 1 )
+CheckButtonTransparent/colors/font_color_focus = Color( 1, 1, 1, 1 )
+CheckButtonTransparent/colors/font_color_hover = Color( 1, 1, 1, 1 )
+CheckButtonTransparent/colors/font_color_hover_pressed = Color( 1, 1, 1, 1 )
+CheckButtonTransparent/colors/font_color_pressed = Color( 1, 1, 1, 1 )
+CheckButtonTransparent/icons/off = null
+CheckButtonTransparent/icons/on = null
+CheckButtonTransparent/styles/disabled = SubResource( 171 )
+CheckButtonTransparent/styles/focus = SubResource( 172 )
+CheckButtonTransparent/styles/hover = SubResource( 162 )
+CheckButtonTransparent/styles/hover_pressed = SubResource( 168 )
+CheckButtonTransparent/styles/normal = SubResource( 163 )
+CheckButtonTransparent/styles/pressed = SubResource( 173 )
+FlatPanel/base_type = "Panel"
+FlatPanel/styles/panel = SubResource( 167 )
+FlatPanel2/base_type = "Panel"
+FlatPanel2/styles/panel = SubResource( 170 )
 HScrollBar/styles/grabber = SubResource( 147 )
 HScrollBar/styles/grabber_highlight = SubResource( 149 )
 HScrollBar/styles/grabber_pressed = SubResource( 150 )
