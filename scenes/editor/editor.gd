@@ -114,6 +114,7 @@ func object_unhovered(object: GameObject):
 func _process(delta):
 	if Input.is_action_just_pressed("middle"):
 		selection_box.show()
+		selection_box.get_parent().show()
 	for i in selected_objects:
 		i.modulate = Color(0.7, 0.7, 1.2, i.modulate.a)
 

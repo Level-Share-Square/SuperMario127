@@ -47,11 +47,8 @@ func _rotate(object: GameObject):
 		var pivot = selection_box.pivot_position + selection_box.pivot.rect_pivot_offset
 		var offset = object_offsets[object]
 
-
-		# Rotate the offset vector around the pivot
 		var rotated_offset = offset.rotated(theta)
 
-		# Apply rotated position
 		object.global_position = pivot + rotated_offset
 		object.rotation = old_rotation + theta
 		

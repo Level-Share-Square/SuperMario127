@@ -16,11 +16,11 @@ func select_objects(selected_dict: Dictionary):
 		editor.selected_objects[object] = selected_dict[object]
 		object.modulate = Color(0.8, 0.8, 1.2, object.modulate.a)
 	
-	selection_box.selected_dict = editor.selected_objects.duplicate()
+	selection_box.get_parent().selected_dict = editor.selected_objects.duplicate()
 	if selected_dict.empty():
-		selection_box.hide_selection_box()
+		selection_box.get_parent().hide_selection_box()
 	else:
-		selection_box.show_selection_box()
+		selection_box.get_parent().show_selection_box()
 
 
 func _do() -> void:

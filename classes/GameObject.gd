@@ -99,8 +99,8 @@ func _ready():
 		editor_hitbox.connect("mouse_entered", editor, "object_hovered", [self])
 		editor_hitbox.connect("mouse_exited", editor, "object_unhovered", [self])
 		if enabled == true:
-			print(editor_hitbox.connect("area_entered", editor.selection_box, "_on_object_entered", [self]))
-			print(editor_hitbox.connect("area_exited", editor.selection_box, "_on_object_exited", [self]))
+			print(editor_hitbox.connect("area_entered", editor.selection_box.get_parent(), "_on_object_entered", [self]))
+			print(editor_hitbox.connect("area_exited", editor.selection_box.get_parent(), "_on_object_exited", [self]))
 	else:
 		if is_instance_valid(editor_hitbox):
 			editor_hitbox.queue_free()

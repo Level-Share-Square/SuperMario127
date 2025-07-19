@@ -32,9 +32,9 @@ extents = Vector2( 42.5, 10 )
 [node name="ObjectSelection" type="Control"]
 margin_right = 40.0
 margin_bottom = 40.0
+script = ExtResource( 2 )
 
 [node name="Pivot" type="TextureButton" parent="."]
-visible = false
 anchor_left = 0.024
 anchor_top = 0.056
 anchor_right = 0.024
@@ -51,6 +51,7 @@ texture_hover = SubResource( 3 )
 script = ExtResource( 10 )
 
 [node name="SelectionBox" type="NinePatchRect" parent="."]
+unique_name_in_owner = true
 margin_left = 220.0
 margin_top = 70.0
 margin_right = 384.0
@@ -64,16 +65,18 @@ patch_margin_right = 2
 patch_margin_bottom = 2
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
-script = ExtResource( 2 )
 
 [node name="SelectionArea" type="Area2D" parent="SelectionBox"]
+unique_name_in_owner = true
 collision_mask = 0
 
 [node name="SelectionShape" type="CollisionShape2D" parent="SelectionBox/SelectionArea"]
+unique_name_in_owner = true
 position = Vector2( 204.5, 59 )
 shape = SubResource( 2 )
 
 [node name="WhiteHighlight" type="ReferenceRect" parent="SelectionBox"]
+unique_name_in_owner = true
 margin_left = 1.0
 margin_top = 1.0
 margin_right = 163.0
@@ -84,6 +87,7 @@ border_width = 2.0
 editor_only = false
 
 [node name="SelectionTools" type="Control" parent="SelectionBox"]
+unique_name_in_owner = true
 margin_right = 40.0
 margin_bottom = 40.0
 mouse_filter = 2
@@ -172,6 +176,7 @@ margin_left = 104.0
 margin_right = 168.0
 margin_bottom = 22.0
 focus_mode = 0
+pressed = true
 text = "Pivot"
 flat = true
 align = 1
