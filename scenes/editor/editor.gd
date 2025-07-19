@@ -22,7 +22,7 @@ onready var action_manager: ActionManager = $"%ActionManager"
 
 onready var save_button = $UI/EditorUI/Utilities/Save
 onready var editor_options = $UI/EditorOptionsWindow
-onready var selection_box = $"%SelectionBox"
+onready var selection_box = $"%ObjectSelection".get_node("SelectionBox")
 onready var edit_selection = $"%EditSelection"
 
 

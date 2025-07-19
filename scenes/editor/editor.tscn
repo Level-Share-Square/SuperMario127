@@ -342,7 +342,7 @@ __meta__ = {
 "_edit_use_anchors_": true
 }
 
-[node name="SelectionBox" parent="." instance=ExtResource( 34 )]
+[node name="ObjectSelection" parent="." instance=ExtResource( 34 )]
 unique_name_in_owner = true
 
 [node name="HoverSound" type="AudioStreamPlayer" parent="."]
@@ -358,8 +358,8 @@ volume_db = -10.0
 bus = "Sounds"
 
 [connection signal="item_changed" from="." to="Tools" method="item_changed"]
-[connection signal="redo" from="ActionManager" to="SelectionBox" method="snap_to_selected_size"]
-[connection signal="undo" from="ActionManager" to="SelectionBox" method="snap_to_selected_size"]
+[connection signal="redo" from="ActionManager" to="ObjectSelection" method="snap_to_selected_size"]
+[connection signal="undo" from="ActionManager" to="ObjectSelection" method="snap_to_selected_size"]
 [connection signal="pressed" from="UI/EditorUI/MarginContainer/VBoxContainer/Utilities/Undo" to="ActionManager" method="undo"]
 [connection signal="pressed" from="UI/EditorUI/MarginContainer/VBoxContainer/Utilities/Redo" to="ActionManager" method="redo"]
 [connection signal="pressed" from="UI/EditorUI/MarginContainer/VBoxContainer/Utilities/ItemPicker" to="UI/ItemPickerWindow" method="popup" binds= [ Rect2( 450, 60, 248, 248 ) ]]

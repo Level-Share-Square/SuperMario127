@@ -2,13 +2,15 @@ class_name SelectionBox
 extends NinePatchRect
 ## Object selector for the level designer.
 
-onready var editor = get_owner()
-onready var ui = $"%UI"
+onready var editor = get_owner().get_owner()
+onready var ui = get_parent().get_node("%UI")
 onready var selection_area = $SelectionArea
 onready var selection_shape = $SelectionArea/SelectionShape
 onready var white_highlight = $WhiteHighlight
 onready var selection_tools = $SelectionTools
 onready var edit_selection = $"%EditSelection"
+onready var pivot = get_parent().get_node("Pivot")
+onready var pivot_toggle = $EditSelection/ButtonContainer/PivotToggleButton
 
 onready var sel_border = preload("res://scenes/editor/tools/selection_box/selection_border.png")
 ## Delay between animation steps in frames.
@@ -20,29 +22,37 @@ var timer: float = 0
 var start_pos: Vector2
 var selected_dict = {}
 
+var pivot_position = Vector2(0, 0)
 var expand: bool = false
 var erase: bool = true
 
 
 func _ready():
 	hide()
+	pivot.hide()
 	selection_shape.disabled = true
 	selection_area.monitorable = false
 	timer = animation_delay
 	selection_area.connect("area_entered", self, "_on_object_entered")
+	pivot_toggle.connect("button_down", pivot, "on_toggle")
 
 
 func hide_selection_box():
 	hide()
+	if pivot_toggle.pressed:
+		pivot.visible = false
 	self_modulate.a = 0
 	rect_size = Vector2.ZERO
 	rect_scale = Vector2.ONE
 	expand = false
 	selection_area.monitorable = false
 	selection_shape.disabled = true
+	snap_to_selected_size()
 
 func show_selection_box():
 	show()
+	if pivot_toggle.pressed:
+		pivot.visible = true
 	self_modulate.a = 1
 	rect_scale = Vector2.ONE
 	white_highlight.hide()
@@ -56,6 +66,9 @@ func show_selection_box():
 func _unhandled_input(event):
 	if selection_tools.active_tool == null:
 		if event.is_action_pressed("middle") and editor.hovered_objects.empty():
+			pivot_toggle.pressed = false
+			pivot.hide()
+			pivot_position = Vector2.ZERO
 			if not editor.selected_objects.empty():
 				var action := SelectObjectsAction.new()
 				action.editor = editor
@@ -79,7 +92,7 @@ func _unhandled_input(event):
 		elif event.is_action_released("middle"):
 			if start_pos != null:
 				white_highlight.visible = false
-				
+				expand = false
 				if not (editor.selected_objects.empty() and selected_dict.empty()):
 					var action := SelectObjectsAction.new()
 					action.editor = editor
@@ -107,7 +120,6 @@ func _process(delta):
 	if selection_tools.active_tool == null:
 		if expand == true:
 			box_expansion()
-
 
 func _on_object_entered(area, object):
 	if expand == true:
@@ -162,7 +174,7 @@ func snap_to_selected_size():
 		
 	rect_position = Vector2(far_left, far_up)
 	rect_size = Vector2(abs(far_left - far_right), far_down - far_up)
-	if selection_tools.active_tool == null or selection_tools.active_tool.name != "Move":
+	if selection_tools.active_tool == null:
 		match rect_scale:
 			Vector2(-1, 1):
 				rect_scale = Vector2(-1, -1)
@@ -170,9 +182,16 @@ func snap_to_selected_size():
 				rect_scale = Vector2(1, 1)
 			Vector2(1, -1):
 				rect_scale = Vector2(-1, -1)
+			Vector2(1, 1):
+				rect_scale = Vector2(-1, -1)
 				
 		edit_selection.show()
+		rect_rotation = 180
 
 
 func toggle_ui(is_visible: bool):
 	ui.visible = is_visible
+	visible = is_visible
+	if pivot_toggle.pressed:
+		pivot.visible = is_visible
+	

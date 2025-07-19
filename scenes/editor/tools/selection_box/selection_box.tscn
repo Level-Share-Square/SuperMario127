@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://scenes/editor/tools/selection_box/selection_border.png" type="Texture" id=1]
 [ext_resource path="res://scenes/editor/tools/selection_box/selection_box.gd" type="Script" id=2]
@@ -7,6 +7,20 @@
 [ext_resource path="res://scenes/editor/editor_theme.tres" type="Theme" id=5]
 [ext_resource path="res://scenes/editor/tools/selection_box/tool_button.gd" type="Script" id=6]
 [ext_resource path="res://scenes/editor/tools/selection_box/selection_tool.gd" type="Script" id=7]
+[ext_resource path="res://scenes/editor/tools/selection_box/rotate.gd" type="Script" id=8]
+[ext_resource path="res://scenes/editor/tools/selection_box/pivot.png" type="Texture" id=9]
+[ext_resource path="res://scenes/editor/tools/selection_box/pivot.gd" type="Script" id=10]
+[ext_resource path="res://scenes/editor/tools/selection_box/pivot_1.png" type="Texture" id=11]
+[ext_resource path="res://scenes/editor/tools/selection_box/pivot_2.png" type="Texture" id=12]
+
+[sub_resource type="AnimatedTexture" id=3]
+frames = 3
+fps = 5.0
+frame_0/texture = ExtResource( 9 )
+frame_1/texture = ExtResource( 11 )
+frame_1/delay_sec = 0.0
+frame_2/texture = ExtResource( 12 )
+frame_2/delay_sec = 0.0
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 1 )
@@ -15,7 +29,28 @@ region = Rect2( 0, 0, 28, 28 )
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 42.5, 10 )
 
-[node name="SelectionBox" type="NinePatchRect"]
+[node name="ObjectSelection" type="Control"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="Pivot" type="TextureButton" parent="."]
+visible = false
+anchor_left = 0.024
+anchor_top = 0.056
+anchor_right = 0.024
+anchor_bottom = 0.056
+margin_left = 215.04
+margin_top = 63.76
+margin_right = 223.04
+margin_bottom = 71.76
+rect_scale = Vector2( 2, 2 )
+rect_pivot_offset = Vector2( 4, 4 )
+texture_normal = SubResource( 3 )
+texture_pressed = SubResource( 3 )
+texture_hover = SubResource( 3 )
+script = ExtResource( 10 )
+
+[node name="SelectionBox" type="NinePatchRect" parent="."]
 margin_left = 220.0
 margin_top = 70.0
 margin_right = 384.0
@@ -31,14 +66,14 @@ axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 script = ExtResource( 2 )
 
-[node name="SelectionArea" type="Area2D" parent="."]
+[node name="SelectionArea" type="Area2D" parent="SelectionBox"]
 collision_mask = 0
 
-[node name="SelectionShape" type="CollisionShape2D" parent="SelectionArea"]
+[node name="SelectionShape" type="CollisionShape2D" parent="SelectionBox/SelectionArea"]
 position = Vector2( 204.5, 59 )
 shape = SubResource( 2 )
 
-[node name="WhiteHighlight" type="ReferenceRect" parent="."]
+[node name="WhiteHighlight" type="ReferenceRect" parent="SelectionBox"]
 margin_left = 1.0
 margin_top = 1.0
 margin_right = 163.0
@@ -48,34 +83,34 @@ border_color = Color( 1, 1, 1, 1 )
 border_width = 2.0
 editor_only = false
 
-[node name="SelectionTools" type="Control" parent="."]
+[node name="SelectionTools" type="Control" parent="SelectionBox"]
 margin_right = 40.0
 margin_bottom = 40.0
 mouse_filter = 2
 script = ExtResource( 3 )
 
-[node name="Move" type="Control" parent="SelectionTools"]
+[node name="Move" type="Control" parent="SelectionBox/SelectionTools"]
 unique_name_in_owner = true
 margin_right = 40.0
 margin_bottom = 40.0
 mouse_filter = 2
 script = ExtResource( 4 )
 
-[node name="Rotate" type="Control" parent="SelectionTools"]
+[node name="Rotate" type="Control" parent="SelectionBox/SelectionTools"]
+unique_name_in_owner = true
+margin_right = 40.0
+margin_bottom = 40.0
+mouse_filter = 2
+script = ExtResource( 8 )
+
+[node name="Delete" type="Control" parent="SelectionBox/SelectionTools"]
 unique_name_in_owner = true
 margin_right = 40.0
 margin_bottom = 40.0
 mouse_filter = 2
 script = ExtResource( 7 )
 
-[node name="Delete" type="Control" parent="SelectionTools"]
-unique_name_in_owner = true
-margin_right = 40.0
-margin_bottom = 40.0
-mouse_filter = 2
-script = ExtResource( 7 )
-
-[node name="EditSelection" type="PanelContainer" parent="."]
+[node name="EditSelection" type="PanelContainer" parent="SelectionBox"]
 unique_name_in_owner = true
 anchor_left = 0.5
 anchor_top = 0.95
@@ -89,7 +124,7 @@ mouse_filter = 2
 theme = ExtResource( 5 )
 theme_type_variation = "MenuPanel"
 
-[node name="ButtonContainer" type="HBoxContainer" parent="EditSelection"]
+[node name="ButtonContainer" type="HBoxContainer" parent="SelectionBox/EditSelection"]
 margin_left = 4.0
 margin_top = 1.0
 margin_right = 308.0
@@ -98,7 +133,7 @@ rect_clip_content = true
 mouse_filter = 2
 custom_constants/separation = 0
 
-[node name="Move" type="Button" parent="EditSelection/ButtonContainer"]
+[node name="Move" type="Button" parent="SelectionBox/EditSelection/ButtonContainer"]
 margin_right = 44.0
 margin_bottom = 22.0
 focus_mode = 0
@@ -107,14 +142,14 @@ flat = true
 script = ExtResource( 6 )
 associated_tool_path = NodePath("../../../SelectionTools/Move")
 
-[node name="VSeparator" type="VSeparator" parent="EditSelection/ButtonContainer"]
+[node name="VSeparator" type="VSeparator" parent="SelectionBox/EditSelection/ButtonContainer"]
 modulate = Color( 0.501961, 0.501961, 0.501961, 1 )
 margin_left = 44.0
 margin_right = 48.0
 margin_bottom = 22.0
 mouse_filter = 2
 
-[node name="Rotate" type="Button" parent="EditSelection/ButtonContainer"]
+[node name="Rotate" type="Button" parent="SelectionBox/EditSelection/ButtonContainer"]
 margin_left = 48.0
 margin_right = 100.0
 margin_bottom = 22.0
@@ -124,14 +159,14 @@ flat = true
 script = ExtResource( 6 )
 associated_tool_path = NodePath("../../../SelectionTools/Rotate")
 
-[node name="VSeparator2" type="VSeparator" parent="EditSelection/ButtonContainer"]
+[node name="VSeparator2" type="VSeparator" parent="SelectionBox/EditSelection/ButtonContainer"]
 modulate = Color( 0.501961, 0.501961, 0.501961, 1 )
 margin_left = 100.0
 margin_right = 104.0
 margin_bottom = 22.0
 mouse_filter = 2
 
-[node name="PivotToggleButton" type="CheckButton" parent="EditSelection/ButtonContainer"]
+[node name="PivotToggleButton" type="CheckButton" parent="SelectionBox/EditSelection/ButtonContainer"]
 unique_name_in_owner = true
 margin_left = 104.0
 margin_right = 168.0
@@ -141,14 +176,14 @@ text = "Pivot"
 flat = true
 align = 1
 
-[node name="VSeparator3" type="VSeparator" parent="EditSelection/ButtonContainer"]
+[node name="VSeparator3" type="VSeparator" parent="SelectionBox/EditSelection/ButtonContainer"]
 modulate = Color( 0.501961, 0.501961, 0.501961, 1 )
 margin_left = 168.0
 margin_right = 172.0
 margin_bottom = 22.0
 mouse_filter = 2
 
-[node name="PropertiesButton" type="Button" parent="EditSelection/ButtonContainer"]
+[node name="PropertiesButton" type="Button" parent="SelectionBox/EditSelection/ButtonContainer"]
 unique_name_in_owner = true
 margin_left = 172.0
 margin_right = 248.0
@@ -157,14 +192,14 @@ focus_mode = 0
 text = "Properties"
 flat = true
 
-[node name="VSeparator4" type="VSeparator" parent="EditSelection/ButtonContainer"]
+[node name="VSeparator4" type="VSeparator" parent="SelectionBox/EditSelection/ButtonContainer"]
 modulate = Color( 0.501961, 0.501961, 0.501961, 1 )
 margin_left = 248.0
 margin_right = 252.0
 margin_bottom = 22.0
 mouse_filter = 2
 
-[node name="Delete" type="Button" parent="EditSelection/ButtonContainer"]
+[node name="Delete" type="Button" parent="SelectionBox/EditSelection/ButtonContainer"]
 margin_left = 252.0
 margin_right = 304.0
 margin_bottom = 22.0

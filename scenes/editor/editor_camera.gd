@@ -42,8 +42,6 @@ func load_in(_level_data: LevelData, level_area: LevelArea):
 func camera_movement(delta: float):
 	var editor_ui: Control = get_node("%EditorUI")
 	
-	if editor_ui.get_focus_owner():
-		return
 	
 	var move_speed = speed * 2 if Input.is_action_pressed("speed_up_camera") else speed
 	var direction := Input.get_vector("editor_left", "editor_right", "editor_up", "editor_down")
