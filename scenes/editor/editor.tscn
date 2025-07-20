@@ -400,6 +400,7 @@ margin_left = 8.0
 margin_top = 8.0
 margin_right = 760.0
 margin_bottom = 424.0
+mouse_filter = 2
 
 [node name="Options" type="HBoxContainer" parent="UI/EditorUI/Top"]
 margin_right = 160.0
@@ -611,6 +612,7 @@ script = ExtResource( 24 )
 margin_left = 164.0
 margin_right = 680.0
 margin_bottom = 416.0
+mouse_filter = 2
 size_flags_horizontal = 3
 
 [node name="Tools" type="HBoxContainer" parent="UI/EditorUI/Top"]
@@ -928,7 +930,6 @@ margin_bottom = 416.0
 size_flags_vertical = 8
 custom_constants/separation = 0
 script = ExtResource( 17 )
-placeable_items = ExtResource( 31 )
 
 [node name="ItemPickerButton" type="PanelContainer" parent="UI/EditorUI/Bottom/Hotbar"]
 margin_right = 52.0
