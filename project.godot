@@ -694,6 +694,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/editor/tools/selection_box/rotate.gd"
 }, {
+"base": "SelectionTool",
+"class": "ScaleSelection",
+"language": "GDScript",
+"path": "res://scenes/editor/tools/selection_box/scale.gd"
+}, {
 "base": "CanvasLayer",
 "class": "SceneTransitions",
 "language": "GDScript",
@@ -1087,6 +1092,7 @@ _global_script_class_icons={
 "ResizeAreaAction": "",
 "RocketNozzle": "",
 "RotateSelection": "",
+"ScaleSelection": "",
 "SceneTransitions": "",
 "Screen": "",
 "ScreenSizeUtil": "",
