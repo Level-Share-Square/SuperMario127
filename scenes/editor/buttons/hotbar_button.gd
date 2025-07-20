@@ -6,6 +6,12 @@ onready var tween_hover = $TweenHover
 onready var icon_offset = $"%IconOffset"
 onready var icon_node = $"%Icon"
 
+var item: PlaceableItem
+
+func _process(delta):
+	if item != null:
+		icon_node.texture = item.icons[0]
+
 func button_down():
 	tween.stop_all()
 	tween.interpolate_property(icon_node, "rect_position:y",

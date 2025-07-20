@@ -21,7 +21,7 @@ func check_held():
 			#YOU CAN TRY GET_NODE("%ITEMSUITCASE) IT WONT WORK
 			#YOU CAN TRY $"../PATH TO SUITCASE" AND IT WONT WORK
 			#I HATE THIS ENGINE
-			get_parent().get_parent().get_parent().get_parent().new_favorite_selected(placeable_item, self)
+			get_parent().get_parent().get_parent().get_parent().get_parent().new_favorite_selected(placeable_item, self)
 			button_pressed = false
 			return
 		

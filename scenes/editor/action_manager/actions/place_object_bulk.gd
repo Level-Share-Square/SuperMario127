@@ -15,7 +15,7 @@ func _do() -> void:
 		return
 	for i in objects:
 		object_data = i
-		var new_object = shared.create_object(object_data, true)
+		var new_object = shared.creat_object(object_data, true)
 		print(new_object)
 		new_objects[new_object] = new_object.name
 		
