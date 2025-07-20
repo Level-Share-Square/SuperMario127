@@ -124,8 +124,10 @@ theme = ExtResource( 4 )
 [node name="MarginContainer" type="MarginContainer" parent="UI/EditorUI"]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -186.0
-margin_bottom = 56.0
+margin_left = -328.0
+margin_top = -73.0
+margin_right = 4.0
+margin_bottom = 127.0
 custom_constants/margin_right = 4
 custom_constants/margin_top = 4
 custom_constants/margin_left = 4
@@ -134,20 +136,51 @@ custom_constants/margin_bottom = 4
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/EditorUI/MarginContainer"]
 margin_left = 4.0
 margin_top = 4.0
-margin_right = 182.0
+margin_right = 328.0
 margin_bottom = 196.0
+alignment = 2
 
 [node name="Utilities" type="HBoxContainer" parent="UI/EditorUI/MarginContainer/VBoxContainer"]
-margin_right = 178.0
-margin_bottom = 48.0
+margin_left = 52.0
+margin_top = 72.0
+margin_right = 324.0
+margin_bottom = 120.0
 mouse_filter = 2
 size_flags_horizontal = 10
 size_flags_vertical = 6
 alignment = 2
 
-[node name="Undo" type="Button" parent="UI/EditorUI/MarginContainer/VBoxContainer/Utilities"]
+[node name="Copy" type="Button" parent="UI/EditorUI/MarginContainer/VBoxContainer/Utilities"]
 margin_top = 4.0
-margin_right = 40.0
+margin_right = 41.0
+margin_bottom = 44.0
+rect_min_size = Vector2( 40, 40 )
+focus_mode = 0
+mouse_default_cursor_shape = 2
+size_flags_vertical = 4
+enabled_focus_mode = 0
+text = "Copy"
+expand_icon = true
+script = ExtResource( 24 )
+
+[node name="Paste" type="Button" parent="UI/EditorUI/MarginContainer/VBoxContainer/Utilities"]
+margin_left = 45.0
+margin_top = 4.0
+margin_right = 90.0
+margin_bottom = 44.0
+rect_min_size = Vector2( 40, 40 )
+focus_mode = 0
+mouse_default_cursor_shape = 2
+size_flags_vertical = 4
+enabled_focus_mode = 0
+text = "Paste"
+expand_icon = true
+script = ExtResource( 24 )
+
+[node name="Undo" type="Button" parent="UI/EditorUI/MarginContainer/VBoxContainer/Utilities"]
+margin_left = 94.0
+margin_top = 4.0
+margin_right = 134.0
 margin_bottom = 44.0
 rect_min_size = Vector2( 40, 40 )
 focus_mode = 0
@@ -159,9 +192,9 @@ expand_icon = true
 script = ExtResource( 24 )
 
 [node name="Redo" type="Button" parent="UI/EditorUI/MarginContainer/VBoxContainer/Utilities"]
-margin_left = 44.0
+margin_left = 138.0
 margin_top = 4.0
-margin_right = 84.0
+margin_right = 178.0
 margin_bottom = 44.0
 rect_min_size = Vector2( 40, 40 )
 focus_mode = 0
@@ -174,8 +207,8 @@ expand_icon = true
 script = ExtResource( 24 )
 
 [node name="ItemPicker" type="TextureButton" parent="UI/EditorUI/MarginContainer/VBoxContainer/Utilities"]
-margin_left = 88.0
-margin_right = 130.0
+margin_left = 182.0
+margin_right = 224.0
 margin_bottom = 48.0
 rect_min_size = Vector2( 42, 48 )
 focus_mode = 0
@@ -188,8 +221,8 @@ stretch_mode = 5
 script = ExtResource( 16 )
 
 [node name="Settings" type="TextureButton" parent="UI/EditorUI/MarginContainer/VBoxContainer/Utilities"]
-margin_left = 134.0
-margin_right = 178.0
+margin_left = 228.0
+margin_right = 272.0
 margin_bottom = 48.0
 rect_min_size = Vector2( 44, 0 )
 focus_mode = 0
@@ -202,21 +235,22 @@ stretch_mode = 5
 script = ExtResource( 16 )
 
 [node name="PanelContainer" type="PanelContainer" parent="UI/EditorUI/MarginContainer/VBoxContainer"]
+visible = false
 margin_top = 52.0
-margin_right = 178.0
+margin_right = 324.0
 margin_bottom = 192.0
 size_flags_vertical = 3
 
 [node name="ScrollContainer" type="ScrollContainer" parent="UI/EditorUI/MarginContainer/VBoxContainer/PanelContainer"]
 margin_left = 6.0
 margin_top = 6.0
-margin_right = 172.0
+margin_right = 318.0
 margin_bottom = 134.0
 rect_min_size = Vector2( 0, 128 )
 size_flags_vertical = 3
 
 [node name="ActionHistory" type="VBoxContainer" parent="UI/EditorUI/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer"]
-margin_right = 158.0
+margin_right = 304.0
 size_flags_horizontal = 3
 custom_constants/separation = 3
 script = ExtResource( 33 )
@@ -363,6 +397,8 @@ bus = "Sounds"
 [connection signal="redo" from="ActionManager" to="Tools/ObjectSelection" method="_on_ActionManager_redo"]
 [connection signal="undo" from="ActionManager" to="Tools/ObjectSelection" method="snap_to_selected_size"]
 [connection signal="undo" from="ActionManager" to="Tools/ObjectSelection" method="_on_ActionManager_undo"]
+[connection signal="button_down" from="UI/EditorUI/MarginContainer/VBoxContainer/Utilities/Copy" to="Tools/ObjectSelection" method="_on_Copy_button_down"]
+[connection signal="button_down" from="UI/EditorUI/MarginContainer/VBoxContainer/Utilities/Paste" to="Tools/ObjectSelection" method="_on_Paste_button_down"]
 [connection signal="pressed" from="UI/EditorUI/MarginContainer/VBoxContainer/Utilities/Undo" to="ActionManager" method="undo"]
 [connection signal="pressed" from="UI/EditorUI/MarginContainer/VBoxContainer/Utilities/Redo" to="ActionManager" method="redo"]
 [connection signal="pressed" from="UI/EditorUI/MarginContainer/VBoxContainer/Utilities/ItemPicker" to="UI/ItemPickerWindow" method="popup" binds= [ Rect2( 450, 60, 248, 248 ) ]]

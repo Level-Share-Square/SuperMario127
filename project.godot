@@ -594,10 +594,15 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://classes/ParticleCollection.gd"
 }, {
-"base": "Action",
+"base": "BaseObjectAction",
 "class": "PlaceObjectAction",
 "language": "GDScript",
 "path": "res://scenes/editor/action_manager/actions/place_object.gd"
+}, {
+"base": "BaseObjectAction",
+"class": "PlaceObjectBulkAction",
+"language": "GDScript",
+"path": "res://scenes/editor/action_manager/actions/place_object_bulk.gd"
 }, {
 "base": "Action",
 "class": "PlaceTilesAction",
@@ -1073,6 +1078,7 @@ _global_script_class_icons={
 "ParallaxLayerResource": "",
 "ParticlesCollection": "",
 "PlaceObjectAction": "",
+"PlaceObjectBulkAction": "",
 "PlaceTilesAction": "",
 "PlaceableItem": "",
 "PlaceableItemList": "",

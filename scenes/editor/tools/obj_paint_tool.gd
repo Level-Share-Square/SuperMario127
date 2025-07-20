@@ -36,6 +36,7 @@ func place_object(pos: Vector2):
 	
 	var action := PlaceObjectAction.new()
 	action.shared = shared
+	print(data)
 	action.object_data = data
 	editor.action_manager.commit_action(action)
 

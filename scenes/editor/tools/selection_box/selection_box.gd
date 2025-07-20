@@ -203,3 +203,40 @@ func _on_ActionManager_redo():
 
 func _on_ActionManager_undo():
 	snap_to_selected_size()
+
+
+
+func _on_Copy_button_down():
+	if editor.selected_objects != {}:
+		var copied_objects: Array
+		for i in editor.selected_objects:
+			var data = i.level_object.get_ref()
+			copied_objects.append({"type_id": data.type_id, "palette": data.palette, "properties": data.properties})
+		OS.set_clipboard(JSON.print(copied_objects))
+
+func generate_object_data():
+	var data = JSON.parse(OS.get_clipboard())
+	var result = data.result
+	var data_array: Array
+	for i in result:
+		var object_data = ObjectData.new()
+		object_data.properties = i["properties"]
+		object_data.palette = i["palette"]
+		object_data.type_id = i["type_id"]
+		data_array.append(object_data)
+	return data_array
+
+func _on_Paste_button_down():
+	for object in selected_dict:
+		object.modulate = Color(1, 1, 1, object.modulate.a)
+	selected_dict = {}
+	snap_to_selected_size()
+	var action = PlaceObjectBulkAction.new()
+	action.shared = shared
+	action.objects = generate_object_data()
+	editor.action_manager.commit_action(action)
+	while action.new_objects == {}:
+		pass
+	editor.selected_objects = action.new_objects
+	selected_dict = action.new_objects
+	snap_to_selected_size()
