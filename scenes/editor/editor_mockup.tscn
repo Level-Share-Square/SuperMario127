@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=46 format=2]
 
 [ext_resource path="res://scenes/editor/editor_theme.tres" type="Theme" id=1]
 [ext_resource path="res://scenes/oldeditor/assets/grid.png" type="Texture" id=2]
@@ -6,46 +6,66 @@
 [ext_resource path="res://scenes/editor/buttons/popup_custom.gd" type="Script" id=4]
 [ext_resource path="res://scenes/oldeditor/sounds/hover.wav" type="AudioStream" id=5]
 [ext_resource path="res://scenes/oldeditor/sounds/click2.wav" type="AudioStream" id=6]
-[ext_resource path="res://scenes/editor/windows/item_suitcase_button/item_selection.tscn" type="PackedScene" id=7]
-[ext_resource path="res://scenes/actors/objects/hover_box/hover_box.png" type="Texture" id=8]
+[ext_resource path="res://scenes/editor/assets/hotbar_click.wav" type="AudioStream" id=7]
 [ext_resource path="res://scenes/menu/levels_list/icons/settings.png" type="Texture" id=9]
-[ext_resource path="res://scenes/menu/levels_list/icons/view_info.png" type="Texture" id=10]
+[ext_resource path="res://scenes/editor/assets/Scale.svg" type="Texture" id=10]
 [ext_resource path="res://scenes/menu/pause/pause_main/icons/quit.png" type="Texture" id=11]
 [ext_resource path="res://scenes/menu/levels_list/icons/copy.png" type="Texture" id=12]
-[ext_resource path="res://scenes/menu/levels_list/icons/delete.png" type="Texture" id=13]
+[ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=13]
 [ext_resource path="res://scenes/menu/button_scripts/button_sound.gd" type="Script" id=14]
 [ext_resource path="res://scenes/editor/assets/redo.svg" type="Texture" id=15]
 [ext_resource path="res://scenes/editor/assets/undo.svg" type="Texture" id=16]
 [ext_resource path="res://scenes/menu/levels_list/icons/import_from_code.png" type="Texture" id=17]
 [ext_resource path="res://scenes/shared/background/backgrounds/aurora/aurorabor1.png" type="Texture" id=18]
-[ext_resource path="res://scenes/editor/assets/paint_tool.png" type="Texture" id=19]
-[ext_resource path="res://scenes/editor/assets/eraser_tool.png" type="Texture" id=20]
+[ext_resource path="res://scenes/editor/assets/Erase.svg" type="Texture" id=19]
+[ext_resource path="res://scenes/editor/assets/Paint.svg" type="Texture" id=20]
 [ext_resource path="res://scenes/editor/assets/select_tool.png" type="Texture" id=21]
 [ext_resource path="res://scenes/editor/assets/tile_lock_tool.png" type="Texture" id=22]
 [ext_resource path="res://scenes/editor/tools/selection_box/selection_border.png" type="Texture" id=23]
-[ext_resource path="res://scenes/menu/levels_list/icons/add.png" type="Texture" id=24]
-[ext_resource path="res://scenes/editor/assets/checkbox.svg" type="Texture" id=25]
+[ext_resource path="res://scenes/editor/assets/Dropdown.svg" type="Texture" id=24]
+[ext_resource path="res://scenes/editor/assets/PivotOn.svg" type="Texture" id=25]
 [ext_resource path="res://scenes/menu/levels_list/icons/reset_save.png" type="Texture" id=26]
 [ext_resource path="res://scenes/editor/assets/move_selection.png" type="Texture" id=27]
-
-[sub_resource type="Gradient" id=5]
-offsets = PoolRealArray( 0.644172, 1 )
-colors = PoolColorArray( 0, 0, 0, 0.501961, 0, 0, 0, 0 )
-
-[sub_resource type="GradientTexture2D" id=6]
-gradient = SubResource( 5 )
-fill = 1
-fill_from = Vector2( 0.5, 0.5 )
-fill_to = Vector2( 1, 0.5 )
-
-[sub_resource type="InputEventKey" id=3]
-scancode = 49
-physical_scancode = 49
-
-[sub_resource type="ShortCut" id=4]
-shortcut = SubResource( 3 )
+[ext_resource path="res://scenes/editor/assets/DropdownFlipped.svg" type="Texture" id=28]
+[ext_resource path="res://scenes/editor/assets/EditorSave.svg" type="Texture" id=29]
+[ext_resource path="res://scenes/menu/button_scripts/check_button_sound.gd" type="Script" id=30]
+[ext_resource path="res://scenes/menu/levels_list/icons/delete.png" type="Texture" id=31]
+[ext_resource path="res://scenes/editor/assets/editor_Dropdown.wav" type="AudioStream" id=32]
+[ext_resource path="res://scenes/editor/assets/editor_Redo.wav" type="AudioStream" id=33]
+[ext_resource path="res://scenes/editor/assets/editor_Undo.wav" type="AudioStream" id=34]
+[ext_resource path="res://scenes/editor/buttons/hotbar_button.tscn" type="PackedScene" id=35]
+[ext_resource path="res://scenes/editor/assets/RectangleFill.svg" type="Texture" id=36]
+[ext_resource path="res://assets/fonts/delfino_small.tres" type="DynamicFont" id=37]
+[ext_resource path="res://scenes/menu/levels_list/icons/star_coin.png" type="Texture" id=38]
 
 [sub_resource type="ButtonGroup" id=7]
+
+[sub_resource type="Gradient" id=165]
+colors = PoolColorArray( 0, 0, 0, 1, 0, 0, 0, 0.501961 )
+
+[sub_resource type="GradientTexture2D" id=166]
+gradient = SubResource( 165 )
+fill_from = Vector2( 0.5, 1 )
+fill_to = Vector2( 0.5, 0 )
+
+[sub_resource type="StyleBoxTexture" id=167]
+texture = SubResource( 166 )
+region_rect = Rect2( 0, 0, 64, 64 )
+margin_top = 1.0
+margin_bottom = 1.0
+
+[sub_resource type="DynamicFont" id=10]
+size = 14
+outline_color = Color( 0, 0, 0, 1 )
+use_filter = true
+extra_spacing_top = 1
+extra_spacing_char = -1
+extra_spacing_space = 2
+font_data = ExtResource( 13 )
+
+[sub_resource type="ButtonGroup" id=171]
+
+[sub_resource type="ButtonGroup" id=172]
 
 [sub_resource type="AtlasTexture" id=8]
 atlas = ExtResource( 23 )
@@ -63,300 +83,13 @@ texture = ExtResource( 18 )
 [node name="EditorUI" type="MarginContainer" parent="UI"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+rect_clip_content = true
 mouse_filter = 2
 theme = ExtResource( 1 )
 custom_constants/margin_right = 8
 custom_constants/margin_top = 8
 custom_constants/margin_left = 8
 custom_constants/margin_bottom = 8
-
-[node name="Items" type="VBoxContainer" parent="UI/EditorUI"]
-visible = false
-margin_left = 8.0
-margin_top = 8.0
-margin_right = 760.0
-margin_bottom = 20.0
-size_flags_vertical = 0
-custom_constants/separation = 4
-
-[node name="Panel" type="PanelContainer" parent="UI/EditorUI/Items"]
-self_modulate = Color( 1, 1, 1, 0 )
-margin_right = 192.0
-margin_bottom = 131.0
-
-[node name="Margin" type="MarginContainer" parent="UI/EditorUI/Items/Panel"]
-margin_left = 6.0
-margin_top = 6.0
-margin_right = 186.0
-margin_bottom = 125.0
-custom_constants/margin_right = 2
-custom_constants/margin_top = 5
-custom_constants/margin_left = 2
-custom_constants/margin_bottom = 2
-
-[node name="Items" type="GridContainer" parent="UI/EditorUI/Items/Panel/Margin"]
-margin_left = 2.0
-margin_top = 5.0
-margin_right = 178.0
-margin_bottom = 117.0
-size_flags_horizontal = 2
-size_flags_vertical = 6
-custom_constants/vseparation = 8
-custom_constants/hseparation = 4
-columns = 5
-
-[node name="ItemBase" parent="UI/EditorUI/Items/Panel/Margin/Items" instance=ExtResource( 7 )]
-visible = true
-icon = ExtResource( 8 )
-
-[node name="Shadow" type="TextureRect" parent="UI/EditorUI/Items/Panel/Margin/Items/ItemBase"]
-show_behind_parent = true
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = 24.0
-margin_bottom = 5.0
-texture = SubResource( 6 )
-expand = true
-
-[node name="ItemBase2" parent="UI/EditorUI/Items/Panel/Margin/Items" instance=ExtResource( 7 )]
-visible = true
-margin_left = 36.0
-margin_right = 68.0
-shortcut = SubResource( 4 )
-icon = ExtResource( 8 )
-
-[node name="Shadow" type="TextureRect" parent="UI/EditorUI/Items/Panel/Margin/Items/ItemBase2"]
-show_behind_parent = true
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = 24.0
-margin_bottom = 5.0
-texture = SubResource( 6 )
-expand = true
-
-[node name="ItemBase3" parent="UI/EditorUI/Items/Panel/Margin/Items" instance=ExtResource( 7 )]
-visible = true
-margin_left = 72.0
-margin_right = 104.0
-shortcut = SubResource( 4 )
-icon = ExtResource( 8 )
-
-[node name="Shadow" type="TextureRect" parent="UI/EditorUI/Items/Panel/Margin/Items/ItemBase3"]
-show_behind_parent = true
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = 24.0
-margin_bottom = 5.0
-texture = SubResource( 6 )
-expand = true
-
-[node name="ItemBase4" parent="UI/EditorUI/Items/Panel/Margin/Items" instance=ExtResource( 7 )]
-visible = true
-margin_left = 108.0
-margin_right = 140.0
-shortcut = SubResource( 4 )
-icon = ExtResource( 8 )
-
-[node name="Shadow" type="TextureRect" parent="UI/EditorUI/Items/Panel/Margin/Items/ItemBase4"]
-show_behind_parent = true
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = 24.0
-margin_bottom = 5.0
-texture = SubResource( 6 )
-expand = true
-
-[node name="ItemBase5" parent="UI/EditorUI/Items/Panel/Margin/Items" instance=ExtResource( 7 )]
-visible = true
-margin_left = 144.0
-margin_right = 176.0
-shortcut = SubResource( 4 )
-icon = ExtResource( 8 )
-
-[node name="Shadow" type="TextureRect" parent="UI/EditorUI/Items/Panel/Margin/Items/ItemBase5"]
-show_behind_parent = true
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = 24.0
-margin_bottom = 5.0
-texture = SubResource( 6 )
-expand = true
-
-[node name="ItemBase6" parent="UI/EditorUI/Items/Panel/Margin/Items" instance=ExtResource( 7 )]
-visible = true
-margin_top = 40.0
-margin_bottom = 72.0
-shortcut = SubResource( 4 )
-icon = ExtResource( 8 )
-
-[node name="Shadow" type="TextureRect" parent="UI/EditorUI/Items/Panel/Margin/Items/ItemBase6"]
-show_behind_parent = true
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = 24.0
-margin_bottom = 5.0
-texture = SubResource( 6 )
-expand = true
-
-[node name="ItemBase7" parent="UI/EditorUI/Items/Panel/Margin/Items" instance=ExtResource( 7 )]
-visible = true
-margin_left = 36.0
-margin_top = 40.0
-margin_right = 68.0
-margin_bottom = 72.0
-shortcut = SubResource( 4 )
-icon = ExtResource( 8 )
-
-[node name="Shadow" type="TextureRect" parent="UI/EditorUI/Items/Panel/Margin/Items/ItemBase7"]
-show_behind_parent = true
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = 24.0
-margin_bottom = 5.0
-texture = SubResource( 6 )
-expand = true
-
-[node name="ItemBase8" parent="UI/EditorUI/Items/Panel/Margin/Items" instance=ExtResource( 7 )]
-visible = true
-margin_left = 72.0
-margin_top = 40.0
-margin_right = 104.0
-margin_bottom = 72.0
-shortcut = SubResource( 4 )
-icon = ExtResource( 8 )
-
-[node name="Shadow" type="TextureRect" parent="UI/EditorUI/Items/Panel/Margin/Items/ItemBase8"]
-show_behind_parent = true
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = 24.0
-margin_bottom = 5.0
-texture = SubResource( 6 )
-expand = true
-
-[node name="ItemBase9" parent="UI/EditorUI/Items/Panel/Margin/Items" instance=ExtResource( 7 )]
-visible = true
-margin_left = 108.0
-margin_top = 40.0
-margin_right = 140.0
-margin_bottom = 72.0
-shortcut = SubResource( 4 )
-icon = ExtResource( 8 )
-
-[node name="Shadow" type="TextureRect" parent="UI/EditorUI/Items/Panel/Margin/Items/ItemBase9"]
-show_behind_parent = true
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = 24.0
-margin_bottom = 5.0
-texture = SubResource( 6 )
-expand = true
-
-[node name="ItemBase10" parent="UI/EditorUI/Items/Panel/Margin/Items" instance=ExtResource( 7 )]
-visible = true
-margin_left = 144.0
-margin_top = 40.0
-margin_right = 176.0
-margin_bottom = 72.0
-shortcut = SubResource( 4 )
-icon = ExtResource( 8 )
-
-[node name="Shadow" type="TextureRect" parent="UI/EditorUI/Items/Panel/Margin/Items/ItemBase10"]
-show_behind_parent = true
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = 24.0
-margin_bottom = 5.0
-texture = SubResource( 6 )
-expand = true
-
-[node name="ItemBase11" parent="UI/EditorUI/Items/Panel/Margin/Items" instance=ExtResource( 7 )]
-visible = true
-margin_top = 80.0
-margin_bottom = 112.0
-shortcut = SubResource( 4 )
-icon = ExtResource( 8 )
-
-[node name="Shadow" type="TextureRect" parent="UI/EditorUI/Items/Panel/Margin/Items/ItemBase11"]
-show_behind_parent = true
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = 24.0
-margin_bottom = 5.0
-texture = SubResource( 6 )
-expand = true
-
-[node name="ItemBase12" parent="UI/EditorUI/Items/Panel/Margin/Items" instance=ExtResource( 7 )]
-visible = true
-margin_left = 36.0
-margin_top = 80.0
-margin_right = 68.0
-margin_bottom = 112.0
-shortcut = SubResource( 4 )
-icon = ExtResource( 8 )
-
-[node name="Shadow" type="TextureRect" parent="UI/EditorUI/Items/Panel/Margin/Items/ItemBase12"]
-show_behind_parent = true
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = 24.0
-margin_bottom = 5.0
-texture = SubResource( 6 )
-expand = true
-
-[node name="ItemBase13" parent="UI/EditorUI/Items/Panel/Margin/Items" instance=ExtResource( 7 )]
-visible = true
-margin_left = 72.0
-margin_top = 80.0
-margin_right = 104.0
-margin_bottom = 112.0
-shortcut = SubResource( 4 )
-icon = ExtResource( 8 )
-
-[node name="Shadow" type="TextureRect" parent="UI/EditorUI/Items/Panel/Margin/Items/ItemBase13"]
-show_behind_parent = true
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = 24.0
-margin_bottom = 5.0
-texture = SubResource( 6 )
-expand = true
-
-[node name="ItemBase14" parent="UI/EditorUI/Items/Panel/Margin/Items" instance=ExtResource( 7 )]
-visible = true
-margin_left = 108.0
-margin_top = 80.0
-margin_right = 140.0
-margin_bottom = 112.0
-shortcut = SubResource( 4 )
-icon = ExtResource( 8 )
-
-[node name="Shadow" type="TextureRect" parent="UI/EditorUI/Items/Panel/Margin/Items/ItemBase14"]
-show_behind_parent = true
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = 24.0
-margin_bottom = 5.0
-texture = SubResource( 6 )
-expand = true
-
-[node name="ItemBase15" parent="UI/EditorUI/Items/Panel/Margin/Items" instance=ExtResource( 7 )]
-visible = true
-margin_left = 144.0
-margin_top = 80.0
-margin_right = 176.0
-margin_bottom = 112.0
-shortcut = SubResource( 4 )
-icon = ExtResource( 8 )
-
-[node name="Shadow" type="TextureRect" parent="UI/EditorUI/Items/Panel/Margin/Items/ItemBase15"]
-show_behind_parent = true
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = 24.0
-margin_bottom = 5.0
-texture = SubResource( 6 )
-expand = true
 
 [node name="Top" type="HBoxContainer" parent="UI/EditorUI"]
 margin_left = 8.0
@@ -418,11 +151,14 @@ rect_min_size = Vector2( 24, 0 )
 focus_mode = 0
 size_flags_vertical = 3
 theme_type_variation = "ButtonTransparent"
-icon = ExtResource( 10 )
+icon = ExtResource( 24 )
 icon_align = 1
 expand_icon = true
 script = ExtResource( 4 )
+click_override = "DropdownSound"
 menu_path = NodePath("../../../Padding/ViewMenu")
+open_icon = ExtResource( 24 )
+close_icon = ExtResource( 28 )
 
 [node name="VSeparator2" type="VSeparator" parent="UI/EditorUI/Top/Options/VBoxContainer/PanelContainer/HBoxContainer"]
 margin_left = 36.0
@@ -437,7 +173,7 @@ rect_min_size = Vector2( 24, 0 )
 focus_mode = 0
 size_flags_vertical = 3
 theme_type_variation = "ButtonTransparent"
-icon = ExtResource( 12 )
+icon = ExtResource( 29 )
 icon_align = 1
 expand_icon = true
 script = ExtResource( 14 )
@@ -468,7 +204,7 @@ size_flags_vertical = 3
 
 [node name="ViewMenu" type="PanelContainer" parent="UI/EditorUI/Top/Options/VBoxContainer/Padding"]
 anchor_right = 1.0
-margin_bottom = 114.0
+margin_bottom = 109.0
 size_flags_horizontal = 3
 theme_type_variation = "FlatPanel2"
 
@@ -476,58 +212,61 @@ theme_type_variation = "FlatPanel2"
 margin_left = 4.0
 margin_top = 4.0
 margin_right = 108.0
-margin_bottom = 114.0
+margin_bottom = 146.0
 rect_clip_content = true
-custom_constants/separation = 0
+custom_constants/separation = 2
 
 [node name="Grid" type="CheckButton" parent="UI/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/VBoxContainer"]
 margin_right = 104.0
-margin_bottom = 20.0
+margin_bottom = 17.0
 focus_mode = 0
 theme_type_variation = "CheckButtonTransparent"
 pressed = true
 text = "Show Grid"
 align = 1
+script = ExtResource( 30 )
 
 [node name="HSeparator" type="HSeparator" parent="UI/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/VBoxContainer"]
-margin_top = 20.0
+margin_top = 19.0
 margin_right = 104.0
-margin_bottom = 24.0
+margin_bottom = 23.0
 
-[node name="Grid2" type="CheckButton" parent="UI/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/VBoxContainer"]
-margin_top = 24.0
+[node name="Layers" type="CheckButton" parent="UI/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/VBoxContainer"]
+margin_top = 25.0
 margin_right = 104.0
-margin_bottom = 44.0
+margin_bottom = 42.0
 focus_mode = 0
 theme_type_variation = "CheckButtonTransparent"
 pressed = true
-text = "8px Snap"
+text = "Show Layers"
 align = 1
+script = ExtResource( 30 )
 
 [node name="HSeparator2" type="HSeparator" parent="UI/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/VBoxContainer"]
 margin_top = 44.0
 margin_right = 104.0
 margin_bottom = 48.0
 
-[node name="Grid3" type="CheckButton" parent="UI/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/VBoxContainer"]
-margin_top = 48.0
+[node name="PixelSnap" type="CheckButton" parent="UI/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/VBoxContainer"]
+margin_top = 50.0
 margin_right = 104.0
-margin_bottom = 68.0
+margin_bottom = 67.0
 focus_mode = 0
 theme_type_variation = "CheckButtonTransparent"
 pressed = true
-text = "Layers"
+text = "8px Snap"
 align = 1
+script = ExtResource( 30 )
 
 [node name="HSeparator3" type="HSeparator" parent="UI/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/VBoxContainer"]
-margin_top = 68.0
+margin_top = 69.0
 margin_right = 104.0
-margin_bottom = 72.0
+margin_bottom = 73.0
 
 [node name="ResetZoom" type="Button" parent="UI/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/VBoxContainer"]
-margin_top = 72.0
+margin_top = 75.0
 margin_right = 104.0
-margin_bottom = 89.0
+margin_bottom = 92.0
 focus_mode = 0
 theme_type_variation = "ButtonTransparent"
 custom_colors/font_color = Color( 1, 1, 1, 1 )
@@ -535,15 +274,29 @@ text = "Reset Zoom"
 script = ExtResource( 14 )
 
 [node name="HSeparator4" type="HSeparator" parent="UI/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/VBoxContainer"]
-margin_top = 89.0
+margin_top = 94.0
 margin_right = 104.0
-margin_bottom = 93.0
+margin_bottom = 98.0
+
+[node name="Autosaves" type="Button" parent="UI/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/VBoxContainer"]
+margin_top = 100.0
+margin_right = 104.0
+margin_bottom = 117.0
+focus_mode = 0
+theme_type_variation = "ButtonTransparent"
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "Autosaves"
+script = ExtResource( 14 )
+
+[node name="HSeparator5" type="HSeparator" parent="UI/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/VBoxContainer"]
+margin_top = 119.0
+margin_right = 104.0
+margin_bottom = 123.0
 
 [node name="Settings" type="Button" parent="UI/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/VBoxContainer"]
-margin_top = 93.0
+margin_top = 125.0
 margin_right = 104.0
-margin_bottom = 110.0
-focus_mode = 0
+margin_bottom = 142.0
 theme_type_variation = "ButtonTransparent"
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "Settings"
@@ -586,6 +339,7 @@ icon = ExtResource( 16 )
 icon_align = 1
 expand_icon = true
 script = ExtResource( 14 )
+click_override = "UndoSound"
 
 [node name="VSeparator" type="VSeparator" parent="UI/EditorUI/Top/Tools/PanelContainer/HBoxContainer"]
 margin_left = 28.0
@@ -604,6 +358,7 @@ icon = ExtResource( 15 )
 icon_align = 1
 expand_icon = true
 script = ExtResource( 14 )
+click_override = "RedoSound"
 
 [node name="SelectionActions" type="HBoxContainer" parent="UI/EditorUI/Top/Tools/PanelContainer/HBoxContainer"]
 visible = false
@@ -659,7 +414,7 @@ rect_min_size = Vector2( 24, 24 )
 focus_mode = 0
 size_flags_vertical = 3
 theme_type_variation = "ButtonTransparent"
-icon = ExtResource( 13 )
+icon = ExtResource( 31 )
 icon_align = 1
 expand_icon = true
 script = ExtResource( 14 )
@@ -694,6 +449,7 @@ margin_bottom = 136.0
 mouse_filter = 2
 
 [node name="Object" type="VBoxContainer" parent="UI/EditorUI/Middle/Tools/VBoxContainer"]
+visible = false
 margin_right = 24.0
 margin_bottom = 132.0
 mouse_filter = 2
@@ -705,8 +461,9 @@ rect_min_size = Vector2( 24, 24 )
 size_flags_vertical = 3
 theme_type_variation = "ButtonTransparent"
 toggle_mode = true
+pressed = true
 group = SubResource( 7 )
-icon = ExtResource( 19 )
+icon = ExtResource( 20 )
 icon_align = 1
 expand_icon = true
 script = ExtResource( 14 )
@@ -725,7 +482,7 @@ size_flags_vertical = 3
 theme_type_variation = "ButtonTransparent"
 toggle_mode = true
 group = SubResource( 7 )
-icon = ExtResource( 20 )
+icon = ExtResource( 19 )
 icon_align = 1
 expand_icon = true
 script = ExtResource( 14 )
@@ -767,6 +524,306 @@ icon = ExtResource( 22 )
 icon_align = 1
 expand_icon = true
 script = ExtResource( 14 )
+
+[node name="Tile" type="VBoxContainer" parent="UI/EditorUI/Middle/Tools/VBoxContainer"]
+margin_right = 24.0
+margin_bottom = 132.0
+mouse_filter = 2
+
+[node name="Paint" type="Button" parent="UI/EditorUI/Middle/Tools/VBoxContainer/Tile"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+size_flags_vertical = 3
+theme_type_variation = "ButtonTransparent"
+toggle_mode = true
+pressed = true
+group = SubResource( 7 )
+icon = ExtResource( 20 )
+icon_align = 1
+expand_icon = true
+script = ExtResource( 14 )
+
+[node name="VSeparator" type="HSeparator" parent="UI/EditorUI/Middle/Tools/VBoxContainer/Tile"]
+margin_top = 28.0
+margin_right = 24.0
+margin_bottom = 32.0
+
+[node name="Erase" type="Button" parent="UI/EditorUI/Middle/Tools/VBoxContainer/Tile"]
+margin_top = 36.0
+margin_right = 24.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 24, 24 )
+size_flags_vertical = 3
+theme_type_variation = "ButtonTransparent"
+toggle_mode = true
+group = SubResource( 7 )
+icon = ExtResource( 19 )
+icon_align = 1
+expand_icon = true
+script = ExtResource( 14 )
+
+[node name="VSeparator2" type="HSeparator" parent="UI/EditorUI/Middle/Tools/VBoxContainer/Tile"]
+margin_top = 64.0
+margin_right = 24.0
+margin_bottom = 68.0
+
+[node name="Select" type="Button" parent="UI/EditorUI/Middle/Tools/VBoxContainer/Tile"]
+margin_top = 72.0
+margin_right = 24.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 24, 24 )
+size_flags_vertical = 3
+theme_type_variation = "ButtonTransparent"
+toggle_mode = true
+group = SubResource( 7 )
+icon = ExtResource( 21 )
+icon_align = 1
+expand_icon = true
+script = ExtResource( 14 )
+
+[node name="VSeparator3" type="HSeparator" parent="UI/EditorUI/Middle/Tools/VBoxContainer/Tile"]
+margin_top = 100.0
+margin_right = 24.0
+margin_bottom = 104.0
+
+[node name="RectangleFill" type="Button" parent="UI/EditorUI/Middle/Tools/VBoxContainer/Tile"]
+margin_top = 108.0
+margin_right = 24.0
+margin_bottom = 132.0
+rect_min_size = Vector2( 24, 24 )
+size_flags_vertical = 3
+theme_type_variation = "ButtonTransparent"
+toggle_mode = true
+group = SubResource( 7 )
+icon = ExtResource( 36 )
+icon_align = 1
+expand_icon = true
+script = ExtResource( 14 )
+
+[node name="Bottom" type="HBoxContainer" parent="UI/EditorUI"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 760.0
+margin_bottom = 424.0
+mouse_filter = 2
+
+[node name="Hotbar" type="HBoxContainer" parent="UI/EditorUI/Bottom"]
+margin_top = 364.0
+margin_right = 268.0
+margin_bottom = 416.0
+size_flags_vertical = 8
+custom_constants/separation = 0
+
+[node name="PanelContainer" type="PanelContainer" parent="UI/EditorUI/Bottom/Hotbar"]
+margin_right = 52.0
+margin_bottom = 52.0
+rect_min_size = Vector2( 52, 52 )
+theme_type_variation = "FlatPanel"
+
+[node name="Button" type="Button" parent="UI/EditorUI/Bottom/Hotbar/PanelContainer"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 48.0
+margin_bottom = 48.0
+theme_type_variation = "ButtonTransparent"
+icon = ExtResource( 22 )
+icon_align = 1
+expand_icon = true
+script = ExtResource( 14 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/EditorUI/Bottom/Hotbar"]
+margin_left = 52.0
+margin_right = 252.0
+margin_bottom = 52.0
+custom_constants/separation = 0
+
+[node name="PanelContainer2" type="PanelContainer" parent="UI/EditorUI/Bottom/Hotbar/VBoxContainer"]
+margin_right = 200.0
+margin_bottom = 20.0
+size_flags_vertical = 3
+theme_type_variation = "FlatPanel"
+custom_styles/panel = SubResource( 167 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/EditorUI/Bottom/Hotbar/VBoxContainer/PanelContainer2"]
+margin_top = 1.0
+margin_right = 200.0
+margin_bottom = 19.0
+rect_min_size = Vector2( 0, 4 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 0
+
+[node name="Palettes" type="Button" parent="UI/EditorUI/Bottom/Hotbar/VBoxContainer/PanelContainer2/HBoxContainer"]
+margin_right = 36.0
+margin_bottom = 18.0
+focus_mode = 0
+size_flags_horizontal = 3
+theme_type_variation = "ButtonTransparent"
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 10 )
+icon = ExtResource( 38 )
+icon_align = 1
+expand_icon = true
+script = ExtResource( 14 )
+
+[node name="VSeparator" type="VSeparator" parent="UI/EditorUI/Bottom/Hotbar/VBoxContainer/PanelContainer2/HBoxContainer"]
+margin_left = 36.0
+margin_right = 40.0
+margin_bottom = 18.0
+
+[node name="LoadoutA" type="Button" parent="UI/EditorUI/Bottom/Hotbar/VBoxContainer/PanelContainer2/HBoxContainer"]
+margin_left = 40.0
+margin_right = 76.0
+margin_bottom = 18.0
+focus_mode = 0
+size_flags_horizontal = 3
+theme_type_variation = "ButtonTransparent"
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_pressed = Color( 0.8, 0.866667, 1, 1 )
+custom_fonts/font = ExtResource( 37 )
+toggle_mode = true
+pressed = true
+group = SubResource( 171 )
+text = "A"
+script = ExtResource( 14 )
+
+[node name="VSeparator2" type="VSeparator" parent="UI/EditorUI/Bottom/Hotbar/VBoxContainer/PanelContainer2/HBoxContainer"]
+margin_left = 76.0
+margin_right = 80.0
+margin_bottom = 18.0
+
+[node name="LoadoutB" type="Button" parent="UI/EditorUI/Bottom/Hotbar/VBoxContainer/PanelContainer2/HBoxContainer"]
+margin_left = 80.0
+margin_right = 116.0
+margin_bottom = 18.0
+focus_mode = 0
+size_flags_horizontal = 3
+theme_type_variation = "ButtonTransparent"
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_pressed = Color( 0.8, 0.866667, 1, 1 )
+custom_fonts/font = SubResource( 10 )
+toggle_mode = true
+group = SubResource( 171 )
+text = "B"
+script = ExtResource( 14 )
+
+[node name="VSeparator3" type="VSeparator" parent="UI/EditorUI/Bottom/Hotbar/VBoxContainer/PanelContainer2/HBoxContainer"]
+margin_left = 116.0
+margin_right = 120.0
+margin_bottom = 18.0
+
+[node name="LoadoutC" type="Button" parent="UI/EditorUI/Bottom/Hotbar/VBoxContainer/PanelContainer2/HBoxContainer"]
+margin_left = 120.0
+margin_right = 156.0
+margin_bottom = 18.0
+focus_mode = 0
+size_flags_horizontal = 3
+theme_type_variation = "ButtonTransparent"
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_pressed = Color( 0.8, 0.866667, 1, 1 )
+custom_fonts/font = SubResource( 10 )
+toggle_mode = true
+group = SubResource( 171 )
+text = "C"
+script = ExtResource( 14 )
+
+[node name="VSeparator4" type="VSeparator" parent="UI/EditorUI/Bottom/Hotbar/VBoxContainer/PanelContainer2/HBoxContainer"]
+margin_left = 156.0
+margin_right = 160.0
+margin_bottom = 18.0
+
+[node name="LoadoutD" type="Button" parent="UI/EditorUI/Bottom/Hotbar/VBoxContainer/PanelContainer2/HBoxContainer"]
+margin_left = 160.0
+margin_right = 196.0
+margin_bottom = 18.0
+focus_mode = 0
+size_flags_horizontal = 3
+theme_type_variation = "ButtonTransparent"
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_pressed = Color( 0.8, 0.866667, 1, 1 )
+custom_fonts/font = SubResource( 10 )
+toggle_mode = true
+group = SubResource( 171 )
+text = "D"
+script = ExtResource( 14 )
+
+[node name="VSeparator5" type="VSeparator" parent="UI/EditorUI/Bottom/Hotbar/VBoxContainer/PanelContainer2/HBoxContainer"]
+margin_left = 196.0
+margin_right = 200.0
+margin_bottom = 18.0
+
+[node name="PanelContainer" type="PanelContainer" parent="UI/EditorUI/Bottom/Hotbar/VBoxContainer"]
+margin_top = 20.0
+margin_right = 200.0
+margin_bottom = 52.0
+size_flags_vertical = 8
+theme_type_variation = "FlatPanel2"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/EditorUI/Bottom/Hotbar/VBoxContainer/PanelContainer"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 196.0
+margin_bottom = 28.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Button" parent="UI/EditorUI/Bottom/Hotbar/VBoxContainer/PanelContainer/HBoxContainer" instance=ExtResource( 35 )]
+group = SubResource( 172 )
+
+[node name="Button2" parent="UI/EditorUI/Bottom/Hotbar/VBoxContainer/PanelContainer/HBoxContainer" instance=ExtResource( 35 )]
+margin_left = 28.0
+margin_right = 52.0
+pressed = false
+group = SubResource( 172 )
+
+[node name="Button3" parent="UI/EditorUI/Bottom/Hotbar/VBoxContainer/PanelContainer/HBoxContainer" instance=ExtResource( 35 )]
+margin_left = 56.0
+margin_right = 80.0
+pressed = false
+group = SubResource( 172 )
+
+[node name="Button4" parent="UI/EditorUI/Bottom/Hotbar/VBoxContainer/PanelContainer/HBoxContainer" instance=ExtResource( 35 )]
+margin_left = 84.0
+margin_right = 108.0
+pressed = false
+group = SubResource( 172 )
+
+[node name="Button5" parent="UI/EditorUI/Bottom/Hotbar/VBoxContainer/PanelContainer/HBoxContainer" instance=ExtResource( 35 )]
+margin_left = 112.0
+margin_right = 136.0
+pressed = false
+group = SubResource( 172 )
+
+[node name="Button6" parent="UI/EditorUI/Bottom/Hotbar/VBoxContainer/PanelContainer/HBoxContainer" instance=ExtResource( 35 )]
+margin_left = 140.0
+margin_right = 164.0
+pressed = false
+group = SubResource( 172 )
+
+[node name="Button7" parent="UI/EditorUI/Bottom/Hotbar/VBoxContainer/PanelContainer/HBoxContainer" instance=ExtResource( 35 )]
+margin_left = 168.0
+margin_right = 192.0
+pressed = false
+group = SubResource( 172 )
+
+[node name="PanelContainer2" type="PanelContainer" parent="UI/EditorUI/Bottom/Hotbar"]
+margin_left = 252.0
+margin_right = 268.0
+margin_bottom = 52.0
+theme_type_variation = "FlatPanel"
+
+[node name="Button" type="Button" parent="UI/EditorUI/Bottom/Hotbar/PanelContainer2"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 12.0
+margin_bottom = 48.0
+focus_mode = 0
+theme_type_variation = "ButtonTransparent"
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "<"
+script = ExtResource( 14 )
+click_override = "DropdownSound"
 
 [node name="Grid" type="ParallaxBackground" parent="UI"]
 layer = -1
@@ -817,16 +874,16 @@ theme_type_variation = "FlatPanel"
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/SelectionBox/EditSelection"]
 margin_left = 4.0
 margin_top = 4.0
-margin_right = 132.0
+margin_right = 137.0
 margin_bottom = 21.0
 grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
 [node name="MoveSelection" type="Button" parent="UI/SelectionBox/EditSelection/HBoxContainer"]
-margin_right = 16.0
+margin_right = 17.0
 margin_bottom = 17.0
-rect_min_size = Vector2( 16, 16 )
+rect_min_size = Vector2( 17, 17 )
 size_flags_vertical = 3
 theme_type_variation = "ButtonTransparent"
 icon = ExtResource( 27 )
@@ -835,15 +892,15 @@ expand_icon = true
 script = ExtResource( 14 )
 
 [node name="VSeparator" type="VSeparator" parent="UI/SelectionBox/EditSelection/HBoxContainer"]
-margin_left = 20.0
-margin_right = 24.0
+margin_left = 21.0
+margin_right = 25.0
 margin_bottom = 17.0
 
 [node name="RotateSelection" type="Button" parent="UI/SelectionBox/EditSelection/HBoxContainer"]
-margin_left = 28.0
-margin_right = 44.0
+margin_left = 29.0
+margin_right = 46.0
 margin_bottom = 17.0
-rect_min_size = Vector2( 16, 16 )
+rect_min_size = Vector2( 17, 17 )
 size_flags_vertical = 3
 theme_type_variation = "ButtonTransparent"
 icon = ExtResource( 26 )
@@ -852,32 +909,32 @@ expand_icon = true
 script = ExtResource( 14 )
 
 [node name="VSeparator2" type="VSeparator" parent="UI/SelectionBox/EditSelection/HBoxContainer"]
-margin_left = 48.0
-margin_right = 52.0
+margin_left = 50.0
+margin_right = 54.0
 margin_bottom = 17.0
 
 [node name="ScaleSelection" type="Button" parent="UI/SelectionBox/EditSelection/HBoxContainer"]
-margin_left = 56.0
-margin_right = 72.0
+margin_left = 58.0
+margin_right = 75.0
 margin_bottom = 17.0
-rect_min_size = Vector2( 16, 16 )
+rect_min_size = Vector2( 17, 17 )
 size_flags_vertical = 3
 theme_type_variation = "ButtonTransparent"
-icon = ExtResource( 24 )
+icon = ExtResource( 10 )
 icon_align = 1
 expand_icon = true
 script = ExtResource( 14 )
 
 [node name="VSeparator3" type="VSeparator" parent="UI/SelectionBox/EditSelection/HBoxContainer"]
-margin_left = 76.0
-margin_right = 80.0
+margin_left = 79.0
+margin_right = 83.0
 margin_bottom = 17.0
 
 [node name="Pivot" type="Button" parent="UI/SelectionBox/EditSelection/HBoxContainer"]
-margin_left = 84.0
-margin_right = 100.0
+margin_left = 87.0
+margin_right = 104.0
 margin_bottom = 17.0
-rect_min_size = Vector2( 16, 16 )
+rect_min_size = Vector2( 17, 17 )
 size_flags_vertical = 3
 theme_type_variation = "ButtonTransparent"
 icon = ExtResource( 25 )
@@ -886,15 +943,15 @@ expand_icon = true
 script = ExtResource( 14 )
 
 [node name="VSeparator4" type="VSeparator" parent="UI/SelectionBox/EditSelection/HBoxContainer"]
-margin_left = 104.0
-margin_right = 108.0
+margin_left = 108.0
+margin_right = 112.0
 margin_bottom = 17.0
 
 [node name="Properties" type="Button" parent="UI/SelectionBox/EditSelection/HBoxContainer"]
-margin_left = 112.0
-margin_right = 128.0
+margin_left = 116.0
+margin_right = 133.0
 margin_bottom = 17.0
-rect_min_size = Vector2( 16, 16 )
+rect_min_size = Vector2( 17, 17 )
 size_flags_vertical = 3
 theme_type_variation = "ButtonTransparent"
 icon = ExtResource( 9 )
@@ -912,4 +969,28 @@ bus = "Sounds"
 unique_name_in_owner = true
 stream = ExtResource( 6 )
 volume_db = -10.0
+bus = "Sounds"
+
+[node name="HotbarClickSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource( 7 )
+volume_db = -10.0
+bus = "Sounds"
+
+[node name="DropdownSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource( 32 )
+volume_db = -5.0
+bus = "Sounds"
+
+[node name="UndoSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource( 34 )
+volume_db = -7.5
+bus = "Sounds"
+
+[node name="RedoSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource( 33 )
+volume_db = -7.5
 bus = "Sounds"

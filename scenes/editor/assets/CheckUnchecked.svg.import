@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/undo.svg-2906e3fce92746197a4a5ca8927c6fa5.stex"
+path="res://.import/CheckUnchecked.svg-7e98a7ce413890c81c4f04b189f01fa3.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/editor/assets/undo.svg"
-dest_files=[ "res://.import/undo.svg-2906e3fce92746197a4a5ca8927c6fa5.stex" ]
+source_file="res://scenes/editor/assets/CheckUnchecked.svg"
+dest_files=[ "res://.import/CheckUnchecked.svg-7e98a7ce413890c81c4f04b189f01fa3.stex" ]
 
 [params]
 
@@ -27,9 +27,9 @@ flags/srgb=2
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
-process/invert_color=true
+process/invert_color=false
 process/normal_map_invert_y=false
 stream=false
 size_limit=0
 detect_3d=true
-svg/scale=4.0
+svg/scale=0.14
