@@ -61,7 +61,7 @@ func _rotate(object: GameObject):
 func commit_to_action():
 	for object in editor.selected_objects:
 		action.affected_objects[object]["changed_properties"]["position"] = object.position
-		action.affected_objects[object]["changed_properties"]["rotation"] = object.rotation
+		action.affected_objects[object]["changed_properties"]["rotation_degrees"] = object.rotation_degrees
 	editor.action_manager.commit_action(action)
 	action = null
 
@@ -70,7 +70,7 @@ func setup_affected_objects() -> Dictionary:
 	for object in editor.selected_objects:
 		affected_objects[object] = {
 			"changed_properties": {
-				"rotation": object.rotation,
+				"rotation_degrees": object.rotation_degrees,
 				"position": object.position,
 			},
 			"original_properties": {}

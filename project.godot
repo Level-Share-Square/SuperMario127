@@ -724,7 +724,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/editor/action_manager/actions/select_objects.gd"
 }, {
-"base": "NinePatchRect",
+"base": "EditorTool",
 "class": "SelectionBox",
 "language": "GDScript",
 "path": "res://scenes/editor/tools/selection_box/selection_box.gd"
@@ -1202,7 +1202,7 @@ window/options/ninepatch_mode=0
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/RadialMenu/plugin.cfg", "res://addons/discord_game_sdk/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/discord_game_sdk/plugin.cfg" )
 
 [global]
 

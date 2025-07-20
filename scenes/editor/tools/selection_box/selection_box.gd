@@ -210,8 +210,11 @@ func _on_Copy_button_down():
 	if editor.selected_objects != {}:
 		var copied_objects: Array
 		for i in editor.selected_objects:
-			var data = i.level_object.get_ref()
-			copied_objects.append({"type_id": data.type_id, "palette": data.palette, "properties": data.properties})
+			var data: ObjectData = i.level_object.get_ref()
+			var properties: Array = []
+			for property in data.properties:
+				properties.append(value_util.encode_value(property))
+			copied_objects.append({"type_id": data.type_id, "palette": data.palette, "properties": properties})
 		OS.set_clipboard(JSON.print(copied_objects))
 
 func generate_object_data():
@@ -220,7 +223,10 @@ func generate_object_data():
 	var data_array: Array
 	for i in result:
 		var object_data = ObjectData.new()
-		object_data.properties = i["properties"]
+		var properties: Array = []
+		for property in i["properties"]:
+			properties.append(value_util.decode_value(property))
+		object_data.properties = properties
 		object_data.palette = i["palette"]
 		object_data.type_id = i["type_id"]
 		data_array.append(object_data)
