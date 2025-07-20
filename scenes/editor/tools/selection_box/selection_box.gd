@@ -195,18 +195,16 @@ func toggle_ui(is_visible: bool):
 	if pivot_toggle.pressed:
 		pivot.visible = is_visible
 	
-
-
-func _on_ActionManager_redo():
+	
+func on_redo():
 	snap_to_selected_size()
-
-
-func _on_ActionManager_undo():
+	
+	
+func on_undo():
 	snap_to_selected_size()
-
-
-
-func _on_Copy_button_down():
+	
+	
+func copy():
 	if editor.selected_objects != {}:
 		var copied_objects: Array
 		for i in editor.selected_objects:
@@ -232,7 +230,7 @@ func generate_object_data():
 		data_array.append(object_data)
 	return data_array
 
-func _on_Paste_button_down():
+func paste():
 	for object in selected_dict:
 		object.modulate = Color(1, 1, 1, object.modulate.a)
 	selected_dict = {}

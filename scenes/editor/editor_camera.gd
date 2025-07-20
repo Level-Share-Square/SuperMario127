@@ -13,8 +13,10 @@ var sim_pos: Vector2
 
 signal zoom_changed(zoom_level)
 
+var speedup_held: bool
+var is_moving: bool
 
-func _input(event):
+func _unhandled_input(event):
 	var zoom_amount = 0.25
 	if Input.is_action_pressed("8_pixel_lock"):
 		zoom_amount = 0.05
@@ -23,6 +25,11 @@ func _input(event):
 		add_zoom_level(zoom_amount)
 	elif event.is_action_pressed("zoom_in"):
 		add_zoom_level(-zoom_amount)
+	
+	if event.is_action_pressed("speed_up_camera"):
+		speedup_held = true
+	if event.is_action_released("speed_up_camera"):
+		speedup_held = false
 
 
 func _physics_process(delta):
@@ -42,9 +49,12 @@ func load_in(_level_data: LevelData, level_area: LevelArea):
 func camera_movement(delta: float):
 	var editor_ui: Control = get_node("%EditorUI")
 	
-	
-	var move_speed = speed * 2 if Input.is_action_pressed("speed_up_camera") else speed
+	var move_speed = speed * 2 if speedup_held else speed
 	var direction := Input.get_vector("editor_left", "editor_right", "editor_up", "editor_down")
+	
+	if is_instance_valid(editor_ui.get_focus_owner()):
+		move_speed = 0
+	
 	
 	last_pos = position
 	sim_pos += direction * move_speed * 60 * delta

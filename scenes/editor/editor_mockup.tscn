@@ -44,13 +44,13 @@
 [sub_resource type="Gradient" id=165]
 colors = PoolColorArray( 0, 0, 0, 1, 0, 0, 0, 0.501961 )
 
-[sub_resource type="GradientTexture2D" id=166]
+[sub_resource type="GradientTexture2D" id=173]
 gradient = SubResource( 165 )
 fill_from = Vector2( 0.5, 1 )
 fill_to = Vector2( 0.5, 0 )
 
 [sub_resource type="StyleBoxTexture" id=167]
-texture = SubResource( 166 )
+texture = SubResource( 173 )
 region_rect = Rect2( 0, 0, 64, 64 )
 margin_top = 1.0
 margin_bottom = 1.0
