@@ -220,29 +220,36 @@ func _on_Copy_button_down():
 func generate_object_data():
 	var data = JSON.parse(OS.get_clipboard())
 	var result = data.result
-	var data_array: Array
-	for i in result:
-		var object_data = ObjectData.new()
-		var properties: Array = []
-		for property in i["properties"]:
-			properties.append(value_util.decode_value(property))
-		object_data.properties = properties
-		object_data.palette = i["palette"]
-		object_data.type_id = i["type_id"]
-		data_array.append(object_data)
-	return data_array
+	if result is Array:
+		var data_array: Array
+		for i in result:
+			var object_data = ObjectData.new()
+			var properties: Array = []
+			for property in i["properties"]:
+				properties.append(value_util.decode_value(property))
+			object_data.properties = properties
+			object_data.palette = i["palette"]
+			object_data.type_id = i["type_id"]
+			data_array.append(object_data)
+		return data_array
+	else:
+		return []
 
 func _on_Paste_button_down():
-	for object in selected_dict:
-		object.modulate = Color(1, 1, 1, object.modulate.a)
-	selected_dict = {}
-	snap_to_selected_size()
-	var action = PlaceObjectBulkAction.new()
-	action.shared = shared
-	action.objects = generate_object_data()
-	editor.action_manager.commit_action(action)
-	while action.new_objects == {}:
-		pass
-	editor.selected_objects = action.new_objects
-	selected_dict = action.new_objects
-	snap_to_selected_size()
+	var object_data = generate_object_data()
+	if object_data == []:
+		return
+	else:
+		for object in selected_dict:
+			object.modulate = Color(1, 1, 1, object.modulate.a)
+		selected_dict = {}
+		snap_to_selected_size()
+		var action = PlaceObjectBulkAction.new()
+		action.shared = shared
+		action.objects = object_data
+		editor.action_manager.commit_action(action)
+		while action.new_objects == {}:
+			pass
+		editor.selected_objects = action.new_objects
+		selected_dict = action.new_objects
+		snap_to_selected_size()
