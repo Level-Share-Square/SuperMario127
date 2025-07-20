@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=2]
+[gd_scene load_steps=47 format=2]
 
 [ext_resource path="res://scenes/editor/editor_theme.tres" type="Theme" id=1]
 [ext_resource path="res://scenes/oldeditor/assets/grid.png" type="Texture" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://scenes/oldeditor/sounds/hover.wav" type="AudioStream" id=5]
 [ext_resource path="res://scenes/oldeditor/sounds/click2.wav" type="AudioStream" id=6]
 [ext_resource path="res://scenes/editor/assets/hotbar_click.wav" type="AudioStream" id=7]
+[ext_resource path="res://scenes/editor/buttons/collapse_button.gd" type="Script" id=8]
 [ext_resource path="res://scenes/menu/levels_list/icons/settings.png" type="Texture" id=9]
 [ext_resource path="res://scenes/editor/assets/Scale.svg" type="Texture" id=10]
 [ext_resource path="res://scenes/menu/pause/pause_main/icons/quit.png" type="Texture" id=11]
@@ -619,6 +620,7 @@ custom_constants/separation = 0
 margin_right = 52.0
 margin_bottom = 52.0
 rect_min_size = Vector2( 52, 52 )
+mouse_filter = 2
 theme_type_variation = "FlatPanel"
 
 [node name="Button" type="Button" parent="UI/EditorUI/Bottom/Hotbar/PanelContainer"]
@@ -632,30 +634,44 @@ icon_align = 1
 expand_icon = true
 script = ExtResource( 14 )
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/EditorUI/Bottom/Hotbar"]
+[node name="Middle" type="Control" parent="UI/EditorUI/Bottom/Hotbar"]
 margin_left = 52.0
 margin_right = 252.0
 margin_bottom = 52.0
+rect_min_size = Vector2( 200, 0 )
+rect_clip_content = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/EditorUI/Bottom/Hotbar/Middle"]
+margin_right = 200.0
+margin_bottom = 52.0
+mouse_filter = 2
 custom_constants/separation = 0
 
-[node name="PanelContainer2" type="PanelContainer" parent="UI/EditorUI/Bottom/Hotbar/VBoxContainer"]
+[node name="PanelContainer2" type="PanelContainer" parent="UI/EditorUI/Bottom/Hotbar/Middle/VBoxContainer"]
 margin_right = 200.0
 margin_bottom = 20.0
+mouse_filter = 2
 size_flags_vertical = 3
 theme_type_variation = "FlatPanel"
 custom_styles/panel = SubResource( 167 )
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/EditorUI/Bottom/Hotbar/VBoxContainer/PanelContainer2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/EditorUI/Bottom/Hotbar/Middle/VBoxContainer/PanelContainer2"]
 margin_top = 1.0
 margin_right = 200.0
 margin_bottom = 19.0
 rect_min_size = Vector2( 0, 4 )
+mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 0
 
-[node name="Palettes" type="Button" parent="UI/EditorUI/Bottom/Hotbar/VBoxContainer/PanelContainer2/HBoxContainer"]
-margin_right = 36.0
+[node name="VSeparator6" type="VSeparator" parent="UI/EditorUI/Bottom/Hotbar/Middle/VBoxContainer/PanelContainer2/HBoxContainer"]
+margin_right = 4.0
+margin_bottom = 18.0
+
+[node name="Palettes" type="Button" parent="UI/EditorUI/Bottom/Hotbar/Middle/VBoxContainer/PanelContainer2/HBoxContainer"]
+margin_left = 4.0
+margin_right = 39.0
 margin_bottom = 18.0
 focus_mode = 0
 size_flags_horizontal = 3
@@ -667,14 +683,14 @@ icon_align = 1
 expand_icon = true
 script = ExtResource( 14 )
 
-[node name="VSeparator" type="VSeparator" parent="UI/EditorUI/Bottom/Hotbar/VBoxContainer/PanelContainer2/HBoxContainer"]
-margin_left = 36.0
-margin_right = 40.0
+[node name="VSeparator" type="VSeparator" parent="UI/EditorUI/Bottom/Hotbar/Middle/VBoxContainer/PanelContainer2/HBoxContainer"]
+margin_left = 39.0
+margin_right = 43.0
 margin_bottom = 18.0
 
-[node name="LoadoutA" type="Button" parent="UI/EditorUI/Bottom/Hotbar/VBoxContainer/PanelContainer2/HBoxContainer"]
-margin_left = 40.0
-margin_right = 76.0
+[node name="LoadoutA" type="Button" parent="UI/EditorUI/Bottom/Hotbar/Middle/VBoxContainer/PanelContainer2/HBoxContainer"]
+margin_left = 43.0
+margin_right = 78.0
 margin_bottom = 18.0
 focus_mode = 0
 size_flags_horizontal = 3
@@ -688,14 +704,14 @@ group = SubResource( 171 )
 text = "A"
 script = ExtResource( 14 )
 
-[node name="VSeparator2" type="VSeparator" parent="UI/EditorUI/Bottom/Hotbar/VBoxContainer/PanelContainer2/HBoxContainer"]
-margin_left = 76.0
-margin_right = 80.0
+[node name="VSeparator2" type="VSeparator" parent="UI/EditorUI/Bottom/Hotbar/Middle/VBoxContainer/PanelContainer2/HBoxContainer"]
+margin_left = 78.0
+margin_right = 82.0
 margin_bottom = 18.0
 
-[node name="LoadoutB" type="Button" parent="UI/EditorUI/Bottom/Hotbar/VBoxContainer/PanelContainer2/HBoxContainer"]
-margin_left = 80.0
-margin_right = 116.0
+[node name="LoadoutB" type="Button" parent="UI/EditorUI/Bottom/Hotbar/Middle/VBoxContainer/PanelContainer2/HBoxContainer"]
+margin_left = 82.0
+margin_right = 117.0
 margin_bottom = 18.0
 focus_mode = 0
 size_flags_horizontal = 3
@@ -708,13 +724,13 @@ group = SubResource( 171 )
 text = "B"
 script = ExtResource( 14 )
 
-[node name="VSeparator3" type="VSeparator" parent="UI/EditorUI/Bottom/Hotbar/VBoxContainer/PanelContainer2/HBoxContainer"]
-margin_left = 116.0
-margin_right = 120.0
+[node name="VSeparator3" type="VSeparator" parent="UI/EditorUI/Bottom/Hotbar/Middle/VBoxContainer/PanelContainer2/HBoxContainer"]
+margin_left = 117.0
+margin_right = 121.0
 margin_bottom = 18.0
 
-[node name="LoadoutC" type="Button" parent="UI/EditorUI/Bottom/Hotbar/VBoxContainer/PanelContainer2/HBoxContainer"]
-margin_left = 120.0
+[node name="LoadoutC" type="Button" parent="UI/EditorUI/Bottom/Hotbar/Middle/VBoxContainer/PanelContainer2/HBoxContainer"]
+margin_left = 121.0
 margin_right = 156.0
 margin_bottom = 18.0
 focus_mode = 0
@@ -728,12 +744,12 @@ group = SubResource( 171 )
 text = "C"
 script = ExtResource( 14 )
 
-[node name="VSeparator4" type="VSeparator" parent="UI/EditorUI/Bottom/Hotbar/VBoxContainer/PanelContainer2/HBoxContainer"]
+[node name="VSeparator4" type="VSeparator" parent="UI/EditorUI/Bottom/Hotbar/Middle/VBoxContainer/PanelContainer2/HBoxContainer"]
 margin_left = 156.0
 margin_right = 160.0
 margin_bottom = 18.0
 
-[node name="LoadoutD" type="Button" parent="UI/EditorUI/Bottom/Hotbar/VBoxContainer/PanelContainer2/HBoxContainer"]
+[node name="LoadoutD" type="Button" parent="UI/EditorUI/Bottom/Hotbar/Middle/VBoxContainer/PanelContainer2/HBoxContainer"]
 margin_left = 160.0
 margin_right = 196.0
 margin_bottom = 18.0
@@ -748,64 +764,70 @@ group = SubResource( 171 )
 text = "D"
 script = ExtResource( 14 )
 
-[node name="VSeparator5" type="VSeparator" parent="UI/EditorUI/Bottom/Hotbar/VBoxContainer/PanelContainer2/HBoxContainer"]
+[node name="VSeparator5" type="VSeparator" parent="UI/EditorUI/Bottom/Hotbar/Middle/VBoxContainer/PanelContainer2/HBoxContainer"]
 margin_left = 196.0
 margin_right = 200.0
 margin_bottom = 18.0
 
-[node name="PanelContainer" type="PanelContainer" parent="UI/EditorUI/Bottom/Hotbar/VBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="UI/EditorUI/Bottom/Hotbar/Middle/VBoxContainer"]
 margin_top = 20.0
 margin_right = 200.0
 margin_bottom = 52.0
+mouse_filter = 2
 size_flags_vertical = 8
 theme_type_variation = "FlatPanel2"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/EditorUI/Bottom/Hotbar/VBoxContainer/PanelContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/EditorUI/Bottom/Hotbar/Middle/VBoxContainer/PanelContainer"]
 margin_left = 4.0
 margin_top = 4.0
 margin_right = 196.0
 margin_bottom = 28.0
+mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Button" parent="UI/EditorUI/Bottom/Hotbar/VBoxContainer/PanelContainer/HBoxContainer" instance=ExtResource( 35 )]
+[node name="Button" parent="UI/EditorUI/Bottom/Hotbar/Middle/VBoxContainer/PanelContainer/HBoxContainer" instance=ExtResource( 35 )]
 group = SubResource( 172 )
 
-[node name="Button2" parent="UI/EditorUI/Bottom/Hotbar/VBoxContainer/PanelContainer/HBoxContainer" instance=ExtResource( 35 )]
+[node name="Button2" parent="UI/EditorUI/Bottom/Hotbar/Middle/VBoxContainer/PanelContainer/HBoxContainer" instance=ExtResource( 35 )]
 margin_left = 28.0
 margin_right = 52.0
 pressed = false
 group = SubResource( 172 )
 
-[node name="Button3" parent="UI/EditorUI/Bottom/Hotbar/VBoxContainer/PanelContainer/HBoxContainer" instance=ExtResource( 35 )]
+[node name="Button3" parent="UI/EditorUI/Bottom/Hotbar/Middle/VBoxContainer/PanelContainer/HBoxContainer" instance=ExtResource( 35 )]
 margin_left = 56.0
 margin_right = 80.0
 pressed = false
 group = SubResource( 172 )
 
-[node name="Button4" parent="UI/EditorUI/Bottom/Hotbar/VBoxContainer/PanelContainer/HBoxContainer" instance=ExtResource( 35 )]
+[node name="Button4" parent="UI/EditorUI/Bottom/Hotbar/Middle/VBoxContainer/PanelContainer/HBoxContainer" instance=ExtResource( 35 )]
 margin_left = 84.0
 margin_right = 108.0
 pressed = false
 group = SubResource( 172 )
 
-[node name="Button5" parent="UI/EditorUI/Bottom/Hotbar/VBoxContainer/PanelContainer/HBoxContainer" instance=ExtResource( 35 )]
+[node name="Button5" parent="UI/EditorUI/Bottom/Hotbar/Middle/VBoxContainer/PanelContainer/HBoxContainer" instance=ExtResource( 35 )]
 margin_left = 112.0
 margin_right = 136.0
 pressed = false
 group = SubResource( 172 )
 
-[node name="Button6" parent="UI/EditorUI/Bottom/Hotbar/VBoxContainer/PanelContainer/HBoxContainer" instance=ExtResource( 35 )]
+[node name="Button6" parent="UI/EditorUI/Bottom/Hotbar/Middle/VBoxContainer/PanelContainer/HBoxContainer" instance=ExtResource( 35 )]
 margin_left = 140.0
 margin_right = 164.0
 pressed = false
 group = SubResource( 172 )
 
-[node name="Button7" parent="UI/EditorUI/Bottom/Hotbar/VBoxContainer/PanelContainer/HBoxContainer" instance=ExtResource( 35 )]
+[node name="Button7" parent="UI/EditorUI/Bottom/Hotbar/Middle/VBoxContainer/PanelContainer/HBoxContainer" instance=ExtResource( 35 )]
 margin_left = 168.0
 margin_right = 192.0
 pressed = false
 group = SubResource( 172 )
+
+[node name="MouseBlocker" type="Control" parent="UI/EditorUI/Bottom/Hotbar/Middle"]
+visible = false
+rect_min_size = Vector2( 200, 52 )
 
 [node name="PanelContainer2" type="PanelContainer" parent="UI/EditorUI/Bottom/Hotbar"]
 margin_left = 252.0
@@ -822,8 +844,12 @@ focus_mode = 0
 theme_type_variation = "ButtonTransparent"
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "<"
-script = ExtResource( 14 )
+script = ExtResource( 8 )
 click_override = "DropdownSound"
+menu_path = NodePath("../../Middle")
+blocker_path = NodePath("../../Middle/MouseBlocker")
+open_text = ">"
+close_text = "<"
 
 [node name="Grid" type="ParallaxBackground" parent="UI"]
 layer = -1
