@@ -24,7 +24,8 @@ func _ready() -> void:
 
 func on_mouse_entered() -> void:
 	if disabled: return
-	grab_focus()
+	if focus_mode != FOCUS_NONE:
+		grab_focus()
 	hover_sound.play()
 
 func on_mouse_exited() -> void:
