@@ -71,7 +71,6 @@ func new_favorite_selected(placeable_item: Resource):
 		loadouts[selected_loadout].insert(6, loadouts[selected_loadout].pop_at(fav_items[selected_loadout].find(item_name)))
 		fav_items[selected_loadout].erase(item_name)
 		items_favorited[selected_loadout] -= 1
-		print(fav_items[selected_loadout])
 		refresh_loadout()
 		return
 	fav_items[selected_loadout].append(item_name)
@@ -79,12 +78,6 @@ func new_favorite_selected(placeable_item: Resource):
 	loadouts[selected_loadout].insert(items_favorited[selected_loadout], item_name)
 	items_favorited[selected_loadout] += 1
 	refresh_loadout()
-	print(fav_items[selected_loadout])
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
 
 func _on_ItemPickerWindow_item_selected(item):
 	var index = items_favorited[selected_loadout]
@@ -96,4 +89,9 @@ func _on_ItemPickerWindow_item_selected(item):
 	
 func refresh_loadout():
 	for item_button in button_container.get_children():
-		item_button.item = placeable_items.placeable_items[loadouts[selected_loadout][item_button.get_index()]]
+		var item = loadouts[selected_loadout][item_button.get_index()]
+		if item in fav_items[selected_loadout]:
+			item_button.favorite = true
+		else:
+			item_button.favorite = false
+		item_button.item = placeable_items.placeable_items[item]

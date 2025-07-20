@@ -12,6 +12,7 @@ onready var hotbar = $"%Hotbar"
 var item: PlaceableItem
 var held: bool = false
 var favorite_wait_timer: float = 2.0
+var favorite = false
 
 func _process(delta):
 	if item != null:
