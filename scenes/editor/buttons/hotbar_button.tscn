@@ -11,6 +11,7 @@ margin_right = 24.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 24, 24 )
 rect_pivot_offset = Vector2( -72, -22 )
+focus_mode = 0
 theme_type_variation = "ButtonHotbar"
 toggle_mode = true
 pressed = true
@@ -109,6 +110,8 @@ stretch_mode = 2
 [node name="Tween" type="Tween" parent="."]
 
 [node name="TweenHover" type="Tween" parent="."]
+
+[node name="TweenProgress" type="Tween" parent="."]
 
 [connection signal="button_down" from="." to="." method="button_down"]
 [connection signal="button_up" from="." to="." method="button_up"]

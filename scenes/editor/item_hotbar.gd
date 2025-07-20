@@ -27,10 +27,9 @@ var loadouts: Array = [
 
 func _ready():
 	selected_loadout = 0
-	yield(get_tree().create_timer(0.1), "timeout")
 	for item_button in button_container.get_children():
 		item_button.connect("button_down", self, "_on_item_button_pressed", [item_button])
-		item_button.item = placeable_items.placeable_items[loadouts[selected_loadout][item_button.get_index()]]
+		item_button.change_item(placeable_items.placeable_items[loadouts[selected_loadout][item_button.get_index()]])
 	for loadout_button in loadout_container.get_children():
 		if "Loadout" in loadout_button.name:
 			loadout_button.connect("button_down", self, "_on_loadout_pressed", [loadout_button])
@@ -46,12 +45,11 @@ func _on_item_button_pressed(item_button):
 		"til":
 			editor.tool_manager.change_tool("TilePaint")
 
-func _process(delta):
+func check_items():
 	for item_button in button_container.get_children():
 		if item_button.item == editor.selected_item:
 			item_button.pressed = true
-		else:
-			item_button.pressed = false
+			return
 
 func _on_loadout_pressed(loadout_button):
 	match loadout_button.name:
@@ -64,34 +62,36 @@ func _on_loadout_pressed(loadout_button):
 		"LoadoutD":
 			selected_loadout = 3
 	refresh_loadout()
+	check_items()
 
-func new_favorite_selected(placeable_item: Resource):
+func new_favorite_selected(placeable_item: Resource, index: int):
 	var item_name =  placeable_items.placeable_items.find_key(placeable_item)
-	if item_name in fav_items[selected_loadout]:
-		loadouts[selected_loadout].insert(6, loadouts[selected_loadout].pop_at(fav_items[selected_loadout].find(item_name)))
+	if index < fav_items[selected_loadout].size():
+		loadouts[selected_loadout].insert(index, loadouts[selected_loadout].pop_at(fav_items[selected_loadout].find(item_name)))
 		fav_items[selected_loadout].erase(item_name)
 		items_favorited[selected_loadout] -= 1
 		refresh_loadout()
 		return
 	fav_items[selected_loadout].append(item_name)
-	loadouts[selected_loadout].remove(items_favorited[selected_loadout])
+	loadouts[selected_loadout].remove(index)
 	loadouts[selected_loadout].insert(items_favorited[selected_loadout], item_name)
 	items_favorited[selected_loadout] += 1
 	refresh_loadout()
 
-func _on_ItemPickerWindow_item_selected(item):
-	var index = items_favorited[selected_loadout]
-	bottom_row.move_child(bottom_row.get_children()[6],index)
-	bottom_row.get_children()[index].item = item
-	bottom_row.get_children()[index].visible = true
-	loadouts[selected_loadout].insert(index, loadouts[selected_loadout].pop_back())
-	loadouts[selected_loadout][index] = placeable_items.placeable_items.find_key(item)
+func _on_ItemPickerWindow_item_selected(item: PlaceableItem):
+	var start_index: int = items_favorited[selected_loadout]
+	var boxes: Array = bottom_row.get_children()
+	var selected_box: Button = boxes[start_index]
+	selected_box.change_item(item)
+	selected_box.visible = true
+	bottom_row.move_child(boxes[6], start_index)
+	loadouts[selected_loadout].insert(start_index, loadouts[selected_loadout].pop_back())
+	loadouts[selected_loadout][start_index] = placeable_items.placeable_items.find_key(item)
 	
 func refresh_loadout():
+	var favs_amount: int = fav_items[selected_loadout].size()
 	for item_button in button_container.get_children():
 		var item = loadouts[selected_loadout][item_button.get_index()]
-		if item in fav_items[selected_loadout]:
-			item_button.favorite = true
-		else:
-			item_button.favorite = false
-		item_button.item = placeable_items.placeable_items[item]
+		item_button.set_favorite(favs_amount > 0)
+		item_button.change_item(placeable_items.placeable_items[item])
+		favs_amount -= 1
