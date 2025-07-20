@@ -16,7 +16,7 @@
 [ext_resource path="res://scenes/editor/assets/gear_popup_pressed.svg" type="Texture" id=14]
 [ext_resource path="res://scenes/editor/assets/gear_popup_hover.svg" type="Texture" id=15]
 [ext_resource path="res://scenes/editor/base_button_sound.gd" type="Script" id=16]
-[ext_resource path="res://scenes/editor/item_suitcase.gd" type="Script" id=17]
+[ext_resource path="res://scenes/editor/item_hotbar.gd" type="Script" id=17]
 [ext_resource path="res://scenes/oldeditor/sounds/click2.wav" type="AudioStream" id=18]
 [ext_resource path="res://scenes/oldeditor/sounds/hover.wav" type="AudioStream" id=19]
 [ext_resource path="res://scenes/editor/assets/gear_popup.svg" type="Texture" id=20]
@@ -924,12 +924,14 @@ margin_bottom = 424.0
 mouse_filter = 2
 
 [node name="Hotbar" type="HBoxContainer" parent="UI/EditorUI/Bottom"]
+unique_name_in_owner = true
 margin_top = 364.0
 margin_right = 268.0
 margin_bottom = 416.0
 size_flags_vertical = 8
 custom_constants/separation = 0
 script = ExtResource( 17 )
+placeable_items = ExtResource( 31 )
 
 [node name="ItemPickerButton" type="PanelContainer" parent="UI/EditorUI/Bottom/Hotbar"]
 margin_right = 52.0
@@ -1271,4 +1273,5 @@ bus = "Sounds"
 [connection signal="pressed" from="UI/EditorUI/Top/Tools/PanelContainer/HBoxContainer/SelectionActions/Paste" to="Tools/ObjectSelection" method="paste"]
 [connection signal="pressed" from="UI/EditorUI/Bottom/Hotbar/ItemPickerButton/Button" to="UI/ItemPickerWindow" method="popup" binds= [ Rect2( 450, 60, 248, 248 ) ]]
 [connection signal="item_selected" from="UI/ItemPickerWindow" to="UI/EditorUIOld/ItemSuitcase" method="item_selected"]
+[connection signal="item_selected" from="UI/ItemPickerWindow" to="UI/EditorUI/Bottom/Hotbar" method="_on_ItemPickerWindow_item_selected"]
 [connection signal="open_editor_settings" from="UI/EditorOptionsWindow" to="Options/ScreenManager" method="screen_change" binds= [ "Options" ]]
