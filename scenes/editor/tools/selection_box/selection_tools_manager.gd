@@ -43,4 +43,5 @@ func button_pressed(button: SelectionToolButton):
 		selection_box.toggle_ui(false)
 		active_tool = button.associated_tool
 		active_tool.is_active = true
+		active_tool._get_pivot_offset()
 		active_tool.clicked()

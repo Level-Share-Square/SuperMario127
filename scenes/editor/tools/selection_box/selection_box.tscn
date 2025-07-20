@@ -6,7 +6,7 @@
 [ext_resource path="res://scenes/editor/tools/selection_box/selection_tools/move.gd" type="Script" id=4]
 [ext_resource path="res://scenes/editor/editor_theme.tres" type="Theme" id=5]
 [ext_resource path="res://scenes/editor/tools/selection_box/tool_button.gd" type="Script" id=6]
-[ext_resource path="res://scenes/editor/tools/selection_box/selection_tool.gd" type="Script" id=7]
+[ext_resource path="res://scenes/editor/tools/selection_box/scale.gd" type="Script" id=7]
 [ext_resource path="res://scenes/editor/tools/selection_box/rotate.gd" type="Script" id=8]
 [ext_resource path="res://scenes/editor/tools/selection_box/pivot.png" type="Texture" id=9]
 [ext_resource path="res://scenes/editor/tools/selection_box/pivot.gd" type="Script" id=10]
@@ -59,10 +59,10 @@ margin_bottom = 142.0
 texture = SubResource( 1 )
 draw_center = false
 region_rect = Rect2( 0, 0, 28, 28 )
-patch_margin_left = 2
-patch_margin_top = 2
-patch_margin_right = 2
-patch_margin_bottom = 2
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
@@ -107,7 +107,7 @@ margin_bottom = 40.0
 mouse_filter = 2
 script = ExtResource( 8 )
 
-[node name="Delete" type="Control" parent="SelectionBox/SelectionTools"]
+[node name="Scale" type="Control" parent="SelectionBox/SelectionTools"]
 unique_name_in_owner = true
 margin_right = 40.0
 margin_bottom = 40.0
@@ -122,7 +122,7 @@ anchor_right = 0.5
 anchor_bottom = 0.95
 margin_left = -154.0
 margin_top = 2.6
-margin_right = 158.0
+margin_right = 147.0
 margin_bottom = 26.6
 mouse_filter = 2
 theme = ExtResource( 5 )
@@ -131,9 +131,8 @@ theme_type_variation = "MenuPanel"
 [node name="ButtonContainer" type="HBoxContainer" parent="SelectionBox/EditSelection"]
 margin_left = 4.0
 margin_top = 1.0
-margin_right = 308.0
+margin_right = 297.0
 margin_bottom = 23.0
-rect_clip_content = true
 mouse_filter = 2
 custom_constants/separation = 0
 
@@ -188,28 +187,28 @@ margin_right = 172.0
 margin_bottom = 22.0
 mouse_filter = 2
 
+[node name="Scale" type="Button" parent="SelectionBox/EditSelection/ButtonContainer"]
+margin_left = 172.0
+margin_right = 213.0
+margin_bottom = 22.0
+focus_mode = 0
+text = "Scale"
+flat = true
+script = ExtResource( 6 )
+associated_tool_path = NodePath("../../../SelectionTools/Scale")
+
+[node name="VSeparator4" type="VSeparator" parent="SelectionBox/EditSelection/ButtonContainer"]
+modulate = Color( 0.501961, 0.501961, 0.501961, 1 )
+margin_left = 213.0
+margin_right = 217.0
+margin_bottom = 22.0
+mouse_filter = 2
+
 [node name="PropertiesButton" type="Button" parent="SelectionBox/EditSelection/ButtonContainer"]
 unique_name_in_owner = true
-margin_left = 172.0
-margin_right = 248.0
+margin_left = 217.0
+margin_right = 293.0
 margin_bottom = 22.0
 focus_mode = 0
 text = "Properties"
 flat = true
-
-[node name="VSeparator4" type="VSeparator" parent="SelectionBox/EditSelection/ButtonContainer"]
-modulate = Color( 0.501961, 0.501961, 0.501961, 1 )
-margin_left = 248.0
-margin_right = 252.0
-margin_bottom = 22.0
-mouse_filter = 2
-
-[node name="Delete" type="Button" parent="SelectionBox/EditSelection/ButtonContainer"]
-margin_left = 252.0
-margin_right = 304.0
-margin_bottom = 22.0
-focus_mode = 0
-text = "Delete"
-flat = true
-script = ExtResource( 6 )
-associated_tool_path = NodePath("../../../SelectionTools/Delete")
