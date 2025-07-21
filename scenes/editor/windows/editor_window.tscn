@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://scenes/menu/button_scripts/button_sound.gd" type="Script" id=2]
@@ -6,9 +6,22 @@
 [ext_resource path="res://scenes/editor/editor_theme.tres" type="Theme" id=4]
 [ext_resource path="res://scenes/oldeditor/sounds/hover.wav" type="AudioStream" id=5]
 [ext_resource path="res://scenes/editor/windows/editor_window_new.gd" type="Script" id=6]
-[ext_resource path="res://scenes/editor/windows/editor_window_icon.gd" type="Script" id=8]
+[ext_resource path="res://scenes/menu/levels_list/icons/settings.png" type="Texture" id=7]
+[ext_resource path="res://scenes/menu/background_scroll/background.tscn" type="PackedScene" id=8]
 [ext_resource path="res://assets/misc/gear.svg" type="Texture" id=9]
-[ext_resource path="res://scenes/editor/pop_up_icon_material.tres" type="Material" id=10]
+
+[sub_resource type="Gradient" id=173]
+interpolation_mode = 2
+offsets = PoolRealArray( 0, 0.5, 1 )
+colors = PoolColorArray( 1, 1, 1, 0.19, 1, 1, 1, 0, 1, 1, 1, 0.19 )
+
+[sub_resource type="GradientTexture2D" id=174]
+gradient = SubResource( 173 )
+fill_to = Vector2( 0, 1 )
+
+[sub_resource type="StyleBoxTexture" id=175]
+texture = SubResource( 174 )
+region_rect = Rect2( 0, 0, 64, 64 )
 
 [sub_resource type="DynamicFont" id=3]
 outline_color = Color( 0, 0, 0, 1 )
@@ -16,79 +29,76 @@ use_filter = true
 font_data = ExtResource( 1 )
 
 [node name="EditorWindow" type="PanelContainer"]
-margin_left = 153.0
-margin_top = 76.0
-margin_right = 451.0
-margin_bottom = 217.0
+margin_right = 272.0
+margin_bottom = 165.0
 focus_mode = 1
 theme = ExtResource( 4 )
 theme_type_variation = "WindowBack"
+custom_styles/panel = SubResource( 175 )
 script = ExtResource( 6 )
-drag_control_path = NodePath("WindowMat/HeaderContentDivider/HeaderMat/HeaderBox")
-close_button_path = NodePath("WindowMat/HeaderContentDivider/HeaderMat/HeaderBox/WindowClose")
+drag_control_path = NodePath("ContentDivider/Header/HeaderMat/HeaderBox")
+close_button_path = NodePath("ContentDivider/Header/HeaderMat/HeaderBox/WindowClose")
 resize_control_path = NodePath("Control/ResizeHandle")
 title = "Window Title"
 icon = ExtResource( 9 )
 icon_tooltip = "I have no tool to tip for you..."
 
-[node name="Border" type="PanelContainer" parent="."]
-margin_right = 298.0
-margin_bottom = 141.0
-mouse_filter = 2
-theme_type_variation = "WindowBorder"
+[node name="Background" parent="." instance=ExtResource( 8 )]
+modulate = Color( 1, 1, 1.1, 1 )
+show_behind_parent = true
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 272.0
+margin_bottom = 165.0
+overlay_tint = Color( 0.084, 0.0898, 0.2, 0.133333 )
 
-[node name="WindowMat" type="MarginContainer" parent="."]
-margin_right = 298.0
-margin_bottom = 141.0
-mouse_filter = 2
-custom_constants/margin_right = 4
-custom_constants/margin_top = 4
-custom_constants/margin_left = 4
-custom_constants/margin_bottom = 4
+[node name="ContentDivider" type="VBoxContainer" parent="."]
+margin_right = 272.0
+margin_bottom = 165.0
+mouse_filter = 0
+custom_constants/separation = 0
 
-[node name="HeaderContentDivider" type="VBoxContainer" parent="WindowMat"]
+[node name="Header" type="PanelContainer" parent="ContentDivider"]
+margin_right = 272.0
+margin_bottom = 31.0
+theme_type_variation = "FlatPanel"
+
+[node name="HeaderMat" type="MarginContainer" parent="ContentDivider/Header"]
 margin_left = 4.0
 margin_top = 4.0
-margin_right = 294.0
-margin_bottom = 137.0
-mouse_filter = 0
-
-[node name="HeaderMat" type="MarginContainer" parent="WindowMat/HeaderContentDivider"]
-margin_right = 290.0
-margin_bottom = 26.0
+margin_right = 268.0
+margin_bottom = 27.0
 custom_constants/margin_right = 6
-custom_constants/margin_top = 3
+custom_constants/margin_top = 1
 custom_constants/margin_left = 6
-custom_constants/margin_bottom = 1
+custom_constants/margin_bottom = 0
 
-[node name="HeaderBox" type="HBoxContainer" parent="WindowMat/HeaderContentDivider/HeaderMat"]
+[node name="HeaderBox" type="HBoxContainer" parent="ContentDivider/Header/HeaderMat"]
 margin_left = 6.0
-margin_top = 3.0
-margin_right = 284.0
-margin_bottom = 25.0
+margin_top = 1.0
+margin_right = 258.0
+margin_bottom = 23.0
 custom_constants/separation = 1
 
-[node name="Icon" type="TextureRect" parent="WindowMat/HeaderContentDivider/HeaderMat/HeaderBox"]
-material = ExtResource( 10 )
+[node name="Icon" type="TextureRect" parent="ContentDivider/Header/HeaderMat/HeaderBox"]
 margin_right = 21.0
 margin_bottom = 22.0
 rect_min_size = Vector2( 21, 21 )
 mouse_default_cursor_shape = 16
-texture = ExtResource( 9 )
+texture = ExtResource( 7 )
 expand = true
 stretch_mode = 7
-script = ExtResource( 8 )
 
-[node name="IconSpacer" type="Control" parent="WindowMat/HeaderContentDivider/HeaderMat/HeaderBox"]
+[node name="IconSpacer" type="Control" parent="ContentDivider/Header/HeaderMat/HeaderBox"]
 margin_left = 22.0
 margin_right = 24.0
 margin_bottom = 22.0
 rect_min_size = Vector2( 2, 0 )
 mouse_filter = 2
 
-[node name="Title" type="RichTextLabel" parent="WindowMat/HeaderContentDivider/HeaderMat/HeaderBox"]
+[node name="Title" type="RichTextLabel" parent="ContentDivider/Header/HeaderMat/HeaderBox"]
 margin_left = 25.0
-margin_right = 256.0
+margin_right = 230.0
 margin_bottom = 22.0
 rect_min_size = Vector2( 128, 0 )
 mouse_filter = 2
@@ -101,9 +111,9 @@ bbcode_text = "Title"
 text = "Title"
 fit_content_height = true
 
-[node name="WindowClose" type="Button" parent="WindowMat/HeaderContentDivider/HeaderMat/HeaderBox"]
-margin_left = 257.0
-margin_right = 278.0
+[node name="WindowClose" type="Button" parent="ContentDivider/Header/HeaderMat/HeaderBox"]
+margin_left = 231.0
+margin_right = 252.0
 margin_bottom = 22.0
 rect_min_size = Vector2( 21, 21 )
 hint_tooltip = "Close"
@@ -116,16 +126,17 @@ text = "X"
 icon_align = 1
 script = ExtResource( 2 )
 
-[node name="HSeparator" type="HSeparator" parent="WindowMat/HeaderContentDivider"]
-margin_top = 30.0
-margin_right = 290.0
-margin_bottom = 30.0
+[node name="HSeparator" type="HSeparator" parent="ContentDivider"]
+modulate = Color( 0, 0, 0, 1 )
+margin_top = 31.0
+margin_right = 272.0
+margin_bottom = 31.0
 custom_constants/separation = 0
 
-[node name="ContentMat" type="MarginContainer" parent="WindowMat/HeaderContentDivider"]
-margin_top = 34.0
-margin_right = 290.0
-margin_bottom = 133.0
+[node name="ContentMat" type="MarginContainer" parent="ContentDivider"]
+margin_top = 31.0
+margin_right = 272.0
+margin_bottom = 165.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/margin_right = 1
@@ -133,9 +144,24 @@ custom_constants/margin_top = 1
 custom_constants/margin_left = 0
 custom_constants/margin_bottom = 2
 
+[node name="Border" type="PanelContainer" parent="."]
+margin_right = 272.0
+margin_bottom = 165.0
+mouse_filter = 2
+theme_type_variation = "WindowBorder"
+
+[node name="WindowMat" type="MarginContainer" parent="."]
+margin_right = 272.0
+margin_bottom = 165.0
+mouse_filter = 2
+custom_constants/margin_right = 4
+custom_constants/margin_top = 4
+custom_constants/margin_left = 4
+custom_constants/margin_bottom = 4
+
 [node name="Control" type="Control" parent="."]
-margin_right = 298.0
-margin_bottom = 141.0
+margin_right = 272.0
+margin_bottom = 165.0
 mouse_filter = 2
 
 [node name="ResizeHandle" type="Control" parent="Control"]

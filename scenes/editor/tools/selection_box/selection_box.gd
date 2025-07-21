@@ -34,7 +34,6 @@ func _ready():
 	selection_area.monitorable = false
 	timer = animation_delay
 	selection_area.connect("area_entered", self, "_on_object_entered")
-	pivot_toggle.connect("button_down", pivot, "on_toggle")
 
 
 func hide_selection_box():

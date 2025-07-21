@@ -183,13 +183,11 @@ content_margin_right = 4.0
 content_margin_top = 3.0
 bg_color = Color( 0.458824, 0.0156863, 0.0156863, 1 )
 skew = Vector2( 0.1, 0 )
-border_width_top = 2
 border_color = Color( 0.458824, 0.0156863, 0.0156863, 0 )
 corner_radius_top_left = 4
 corner_radius_top_right = 2
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 2
-expand_margin_bottom = 2.0
 
 [sub_resource type="StyleBoxFlat" id=110]
 content_margin_left = 4.0
@@ -198,13 +196,11 @@ content_margin_top = 1.0
 content_margin_bottom = 1.0
 bg_color = Color( 0.513726, 0.0156863, 0.0156863, 1 )
 skew = Vector2( 0.1, 0 )
-border_width_bottom = 2
 border_color = Color( 0.321569, 0.00784314, 0.00784314, 1 )
 corner_radius_top_left = 4
 corner_radius_top_right = 2
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 2
-expand_margin_bottom = 2.0
 
 [sub_resource type="StyleBoxFlat" id=111]
 content_margin_left = 4.0
@@ -213,13 +209,11 @@ content_margin_top = 1.0
 content_margin_bottom = 1.0
 bg_color = Color( 0.698039, 0.2, 0.2, 1 )
 skew = Vector2( 0.1, 0 )
-border_width_bottom = 2
 border_color = Color( 0.47, 0.1363, 0.1363, 1 )
 corner_radius_top_left = 4
 corner_radius_top_right = 2
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 2
-expand_margin_bottom = 2.0
 
 [sub_resource type="StyleBoxEmpty" id=160]
 
@@ -606,13 +600,13 @@ texture = SubResource( 138 )
 region_rect = Rect2( 0, 0, 64, 64 )
 
 [sub_resource type="StyleBoxFlat" id=104]
-bg_color = Color( 0, 0, 0, 1 )
+bg_color = Color( 1, 1, 1, 0 )
 draw_center = false
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
-border_color = Color( 0.4002, 0.48633, 0.87, 1 )
+border_color = Color( 1, 1, 1, 0.501961 )
 corner_radius_top_left = 3
 corner_radius_top_right = 3
 corner_radius_bottom_right = 3

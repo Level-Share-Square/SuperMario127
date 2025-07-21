@@ -2,6 +2,7 @@ class_name MoveSelection
 extends SelectionTool
 
 
+var pivot_offset: Vector2
 var object_offsets: Dictionary = {}
 var new_position: float
 var action: ChangePropertyBulkAction
@@ -9,12 +10,14 @@ var action: ChangePropertyBulkAction
 
 func _input(event):
 	if is_active:
+		selection_box.pivot_position = get_global_mouse_position() + pivot_offset
 		for object in editor.selected_objects:
 			object.global_position = get_global_mouse_position() + object_offsets[object]
 		selection_box.snap_to_selected_size()
 
 
 func clicked():
+	pivot_offset = selection_box.pivot_position - get_global_mouse_position()
 	for object in editor.selected_objects:
 		object_offsets[object] = object.global_position - get_global_mouse_position()
 	

@@ -284,10 +284,10 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/editor/tools/editor_tool.gd"
 }, {
-"base": "Popup",
+"base": "PanelContainer",
 "class": "EditorWindow",
 "language": "GDScript",
-"path": "res://scenes/editor/windows/editor_window.gd"
+"path": "res://scenes/editor/windows/editor_window_new.gd"
 }, {
 "base": "KinematicBody2D",
 "class": "EnemyBase",
@@ -754,7 +754,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/editor/tools/selection_box/selection_tool.gd"
 }, {
-"base": "Node",
+"base": "ButtonSound",
 "class": "SelectionToolButton",
 "language": "GDScript",
 "path": "res://scenes/editor/tools/selection_box/tool_button.gd"
