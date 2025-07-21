@@ -2,7 +2,7 @@
 
 [ext_resource path="res://assets/fonts/arial.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://assets/fonts/DelfinoFont10.tres" type="DynamicFont" id=2]
-[ext_resource path="res://scenes/editor/windows/area_panel.gd" type="Script" id=3]
+[ext_resource path="res://scenes/editor/windows/editor_options/area_panel.gd" type="Script" id=3]
 
 [sub_resource type="Gradient" id=16]
 colors = PoolColorArray( 0.945098, 0, 0, 1, 0.0431373, 0.752941, 0.0117647, 1 )
