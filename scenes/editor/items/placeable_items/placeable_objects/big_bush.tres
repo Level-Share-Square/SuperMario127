@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=15 format=2]
+[gd_resource type="Resource" load_steps=16 format=2]
 
 [ext_resource path="res://scenes/editor/items/placeable_object.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/objects/big_bush/palettes/6/big_bush.png" type="Texture" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://scenes/actors/objects/big_bush/palettes/2/icon.png" type="Texture" id=12]
 [ext_resource path="res://scenes/actors/objects/big_bush/palettes/1/big_bush.png" type="Texture" id=13]
 [ext_resource path="res://scenes/actors/objects/big_bush/palettes/3/big_bush.png" type="Texture" id=14]
+[ext_resource path="res://scenes/actors/objects/big_bush/icon.png" type="Texture" id=15]
 
 [resource]
 script = ExtResource( 1 )
@@ -22,7 +23,7 @@ groups = PoolStringArray( "warp" )
 change_to = ""
 items_in_sequence = 0
 index_in_sequence = 0
-icons = [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 12 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 5 ) ]
+icons = [ ExtResource( 15 ), ExtResource( 4 ), ExtResource( 12 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 5 ) ]
 previews = [ ExtResource( 3 ), ExtResource( 13 ), ExtResource( 9 ), ExtResource( 14 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 2 ) ]
 priority = 0
 object_id = 11

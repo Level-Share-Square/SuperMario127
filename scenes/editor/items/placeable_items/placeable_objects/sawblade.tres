@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=7 format=2]
+[gd_resource type="Resource" load_steps=12 format=2]
 
 [ext_resource path="res://scenes/editor/items/placeable_object.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/objects/sawblade/sawblade1.png" type="Texture" id=2]
@@ -6,6 +6,11 @@
 [ext_resource path="res://scenes/actors/objects/sawblade/pals/icesaw1.png" type="Texture" id=4]
 [ext_resource path="res://scenes/actors/objects/sawblade/pals/goldsaw1.png" type="Texture" id=5]
 [ext_resource path="res://scenes/actors/objects/sawblade/pals/rustsaw1.png" type="Texture" id=6]
+[ext_resource path="res://scenes/actors/objects/sawblade/icon.png" type="Texture" id=7]
+[ext_resource path="res://scenes/actors/objects/sawblade/pals/icon_3.png" type="Texture" id=8]
+[ext_resource path="res://scenes/actors/objects/sawblade/pals/icon_4.png" type="Texture" id=9]
+[ext_resource path="res://scenes/actors/objects/sawblade/pals/icon_1.png" type="Texture" id=10]
+[ext_resource path="res://scenes/actors/objects/sawblade/pals/icon_2.png" type="Texture" id=11]
 
 [resource]
 script = ExtResource( 1 )
@@ -14,7 +19,7 @@ groups = PoolStringArray( "decoration" )
 change_to = ""
 items_in_sequence = 0
 index_in_sequence = 0
-icons = [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 5 ), ExtResource( 4 ), ExtResource( 6 ) ]
+icons = [ ExtResource( 7 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 8 ), ExtResource( 9 ) ]
 previews = [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 5 ), ExtResource( 4 ), ExtResource( 6 ) ]
 priority = 0
 object_id = 114

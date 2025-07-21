@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=12 format=2]
+[gd_resource type="Resource" load_steps=21 format=2]
 
 [ext_resource path="res://scenes/editor/items/placeable_object.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/objects/sign/icon.png" type="Texture" id=2]
@@ -11,6 +11,15 @@
 [ext_resource path="res://scenes/actors/objects/sign/palettes/8/icon.png" type="Texture" id=9]
 [ext_resource path="res://scenes/actors/objects/sign/palettes/9/icon.png" type="Texture" id=10]
 [ext_resource path="res://scenes/actors/objects/sign/palettes/4/pink_sign.png" type="Texture" id=11]
+[ext_resource path="res://scenes/actors/objects/sign/sign.png" type="Texture" id=12]
+[ext_resource path="res://scenes/actors/objects/sign/palettes/1/sign.png" type="Texture" id=13]
+[ext_resource path="res://scenes/actors/objects/sign/palettes/8/sign.png" type="Texture" id=14]
+[ext_resource path="res://scenes/actors/objects/sign/palettes/4/icon.png" type="Texture" id=15]
+[ext_resource path="res://scenes/actors/objects/sign/palettes/7/sign.png" type="Texture" id=16]
+[ext_resource path="res://scenes/actors/objects/sign/palettes/2/sign.png" type="Texture" id=17]
+[ext_resource path="res://scenes/actors/objects/sign/palettes/9/sign.png" type="Texture" id=18]
+[ext_resource path="res://scenes/actors/objects/sign/palettes/3/icon.png" type="Texture" id=19]
+[ext_resource path="res://scenes/actors/objects/sign/palettes/5/icon.png" type="Texture" id=20]
 
 [resource]
 script = ExtResource( 1 )
@@ -19,8 +28,8 @@ groups = PoolStringArray( "warp" )
 change_to = ""
 items_in_sequence = 0
 index_in_sequence = 0
-icons = [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 11 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ) ]
-previews = [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 11 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ) ]
+icons = [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 19 ), ExtResource( 15 ), ExtResource( 20 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ) ]
+previews = [ ExtResource( 12 ), ExtResource( 13 ), ExtResource( 17 ), ExtResource( 5 ), ExtResource( 11 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 16 ), ExtResource( 14 ), ExtResource( 18 ) ]
 priority = 0
 object_id = 14
 object_center = Vector2( 0, 0 )

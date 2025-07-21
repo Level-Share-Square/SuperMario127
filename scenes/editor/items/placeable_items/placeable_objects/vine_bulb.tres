@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=8 format=2]
+[gd_resource type="Resource" load_steps=14 format=2]
 
 [ext_resource path="res://scenes/editor/items/placeable_object.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/objects/vine_bulb/palletes/vine_bulb3.png" type="Texture" id=2]
@@ -7,6 +7,12 @@
 [ext_resource path="res://scenes/actors/objects/vine_bulb/vine_bulb.png" type="Texture" id=5]
 [ext_resource path="res://scenes/actors/objects/vine_bulb/palletes/vine_bulb2.png" type="Texture" id=6]
 [ext_resource path="res://scenes/actors/objects/vine_bulb/palletes/vine_bulb5.png" type="Texture" id=7]
+[ext_resource path="res://scenes/actors/objects/vine_bulb/palletes/icon_5.png" type="Texture" id=8]
+[ext_resource path="res://scenes/actors/objects/vine_bulb/palletes/icon_3.png" type="Texture" id=9]
+[ext_resource path="res://scenes/actors/objects/vine_bulb/palletes/icon_4.png" type="Texture" id=10]
+[ext_resource path="res://scenes/actors/objects/vine_bulb/icon.png" type="Texture" id=11]
+[ext_resource path="res://scenes/actors/objects/vine_bulb/palletes/icon_1.png" type="Texture" id=12]
+[ext_resource path="res://scenes/actors/objects/vine_bulb/palletes/icon_2.png" type="Texture" id=13]
 
 [resource]
 script = ExtResource( 1 )
@@ -15,7 +21,7 @@ groups = PoolStringArray( "decoration" )
 change_to = ""
 items_in_sequence = 0
 index_in_sequence = 0
-icons = [ ExtResource( 5 ), ExtResource( 4 ), ExtResource( 6 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 7 ) ]
+icons = [ ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 8 ) ]
 previews = [ ExtResource( 5 ), ExtResource( 4 ), ExtResource( 6 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 7 ) ]
 priority = 0
 object_id = 119
