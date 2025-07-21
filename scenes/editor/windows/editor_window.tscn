@@ -5,7 +5,7 @@
 [ext_resource path="res://scenes/oldeditor/sounds/click2.wav" type="AudioStream" id=3]
 [ext_resource path="res://scenes/editor/editor_theme.tres" type="Theme" id=4]
 [ext_resource path="res://scenes/oldeditor/sounds/hover.wav" type="AudioStream" id=5]
-[ext_resource path="res://scenes/editor/windows/editor_window.gd" type="Script" id=7]
+[ext_resource path="res://scenes/editor/windows/editor_window_new.gd" type="Script" id=6]
 [ext_resource path="res://scenes/editor/windows/editor_window_icon.gd" type="Script" id=8]
 [ext_resource path="res://assets/misc/gear.svg" type="Texture" id=9]
 [ext_resource path="res://scenes/editor/pop_up_icon_material.tres" type="Material" id=10]
@@ -15,66 +15,60 @@ outline_color = Color( 0, 0, 0, 1 )
 use_filter = true
 font_data = ExtResource( 1 )
 
-[node name="EditorWindow" type="Popup"]
-visible = true
-margin_right = 419.0
-margin_bottom = 220.0
-theme = ExtResource( 4 )
-popup_exclusive = true
-script = ExtResource( 7 )
-window_panel_path = NodePath("WindowBack")
-drag_control_path = NodePath("WindowBack/WindowMat/HeaderContentDivider/HeaderMat")
-close_button_path = NodePath("WindowBack/WindowMat/HeaderContentDivider/HeaderMat/HeaderBox/WindowClose")
-resize_control_path = NodePath("ResizeHandle")
-title = "Window Title"
-icon = ExtResource( 9 )
-icon_tooltip = "I have no tip to tool for you..."
-window_size = Vector2( 256, 1 )
-
-[node name="WindowBack" type="PanelContainer" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
+[node name="EditorWindow" type="PanelContainer"]
+margin_left = 153.0
+margin_top = 76.0
+margin_right = 451.0
+margin_bottom = 217.0
 focus_mode = 1
 theme = ExtResource( 4 )
 theme_type_variation = "WindowBack"
+script = ExtResource( 6 )
+drag_control_path = NodePath("WindowMat/HeaderContentDivider/HeaderMat/HeaderBox")
+close_button_path = NodePath("WindowMat/HeaderContentDivider/HeaderMat/HeaderBox/WindowClose")
+resize_control_path = NodePath("Control/ResizeHandle")
+title = "Window Title"
+icon = ExtResource( 9 )
+icon_tooltip = "I have no tool to tip for you..."
 
-[node name="Border" type="PanelContainer" parent="WindowBack"]
-margin_right = 419.0
-margin_bottom = 220.0
+[node name="Border" type="PanelContainer" parent="."]
+margin_right = 298.0
+margin_bottom = 141.0
 mouse_filter = 2
 theme_type_variation = "WindowBorder"
 
-[node name="WindowMat" type="MarginContainer" parent="WindowBack"]
-margin_right = 419.0
-margin_bottom = 220.0
+[node name="WindowMat" type="MarginContainer" parent="."]
+margin_right = 298.0
+margin_bottom = 141.0
 mouse_filter = 2
 custom_constants/margin_right = 4
 custom_constants/margin_top = 4
 custom_constants/margin_left = 4
 custom_constants/margin_bottom = 4
 
-[node name="HeaderContentDivider" type="VBoxContainer" parent="WindowBack/WindowMat"]
+[node name="HeaderContentDivider" type="VBoxContainer" parent="WindowMat"]
 margin_left = 4.0
 margin_top = 4.0
-margin_right = 415.0
-margin_bottom = 216.0
+margin_right = 294.0
+margin_bottom = 137.0
+mouse_filter = 0
 
-[node name="HeaderMat" type="MarginContainer" parent="WindowBack/WindowMat/HeaderContentDivider"]
-margin_right = 411.0
+[node name="HeaderMat" type="MarginContainer" parent="WindowMat/HeaderContentDivider"]
+margin_right = 290.0
 margin_bottom = 26.0
 custom_constants/margin_right = 6
 custom_constants/margin_top = 3
 custom_constants/margin_left = 6
 custom_constants/margin_bottom = 1
 
-[node name="HeaderBox" type="HBoxContainer" parent="WindowBack/WindowMat/HeaderContentDivider/HeaderMat"]
+[node name="HeaderBox" type="HBoxContainer" parent="WindowMat/HeaderContentDivider/HeaderMat"]
 margin_left = 6.0
 margin_top = 3.0
-margin_right = 405.0
+margin_right = 284.0
 margin_bottom = 25.0
 custom_constants/separation = 1
 
-[node name="Icon" type="TextureRect" parent="WindowBack/WindowMat/HeaderContentDivider/HeaderMat/HeaderBox"]
+[node name="Icon" type="TextureRect" parent="WindowMat/HeaderContentDivider/HeaderMat/HeaderBox"]
 material = ExtResource( 10 )
 margin_right = 21.0
 margin_bottom = 22.0
@@ -85,16 +79,16 @@ expand = true
 stretch_mode = 7
 script = ExtResource( 8 )
 
-[node name="IconSpacer" type="Control" parent="WindowBack/WindowMat/HeaderContentDivider/HeaderMat/HeaderBox"]
+[node name="IconSpacer" type="Control" parent="WindowMat/HeaderContentDivider/HeaderMat/HeaderBox"]
 margin_left = 22.0
 margin_right = 24.0
 margin_bottom = 22.0
 rect_min_size = Vector2( 2, 0 )
 mouse_filter = 2
 
-[node name="Title" type="RichTextLabel" parent="WindowBack/WindowMat/HeaderContentDivider/HeaderMat/HeaderBox"]
+[node name="Title" type="RichTextLabel" parent="WindowMat/HeaderContentDivider/HeaderMat/HeaderBox"]
 margin_left = 25.0
-margin_right = 377.0
+margin_right = 256.0
 margin_bottom = 22.0
 rect_min_size = Vector2( 128, 0 )
 mouse_filter = 2
@@ -107,9 +101,9 @@ bbcode_text = "Title"
 text = "Title"
 fit_content_height = true
 
-[node name="WindowClose" type="Button" parent="WindowBack/WindowMat/HeaderContentDivider/HeaderMat/HeaderBox"]
-margin_left = 378.0
-margin_right = 399.0
+[node name="WindowClose" type="Button" parent="WindowMat/HeaderContentDivider/HeaderMat/HeaderBox"]
+margin_left = 257.0
+margin_right = 278.0
 margin_bottom = 22.0
 rect_min_size = Vector2( 21, 21 )
 hint_tooltip = "Close"
@@ -122,16 +116,16 @@ text = "X"
 icon_align = 1
 script = ExtResource( 2 )
 
-[node name="HSeparator" type="HSeparator" parent="WindowBack/WindowMat/HeaderContentDivider"]
+[node name="HSeparator" type="HSeparator" parent="WindowMat/HeaderContentDivider"]
 margin_top = 30.0
-margin_right = 411.0
+margin_right = 290.0
 margin_bottom = 30.0
 custom_constants/separation = 0
 
-[node name="ContentMat" type="MarginContainer" parent="WindowBack/WindowMat/HeaderContentDivider"]
+[node name="ContentMat" type="MarginContainer" parent="WindowMat/HeaderContentDivider"]
 margin_top = 34.0
-margin_right = 411.0
-margin_bottom = 212.0
+margin_right = 290.0
+margin_bottom = 133.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/margin_right = 1
@@ -139,15 +133,20 @@ custom_constants/margin_top = 1
 custom_constants/margin_left = 0
 custom_constants/margin_bottom = 2
 
-[node name="ResizeHandle" type="Control" parent="."]
+[node name="Control" type="Control" parent="."]
+margin_right = 298.0
+margin_bottom = 141.0
+mouse_filter = 2
+
+[node name="ResizeHandle" type="Control" parent="Control"]
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -5.0
-margin_top = -5.0
-margin_right = 5.0
-margin_bottom = 5.0
+margin_left = -10.0
+margin_top = -10.0
+margin_right = 10.0
+margin_bottom = 10.0
 grow_horizontal = 0
 grow_vertical = 0
 mouse_default_cursor_shape = 12

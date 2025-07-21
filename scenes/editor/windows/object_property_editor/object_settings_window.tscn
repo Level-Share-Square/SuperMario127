@@ -7,7 +7,7 @@
 [ext_resource path="res://assets/fonts/DelfinoFont10.tres" type="DynamicFont" id=5]
 [ext_resource path="res://scenes/editor/windows/object_property_editor/property_groups.gd" type="Script" id=6]
 
-[sub_resource type="Shader" id=1]
+[sub_resource type="Shader" id=23]
 code = "//from https://godotshaders.com/shader/2d-outline-inline/
 shader_type canvas_item;
 
@@ -79,58 +79,68 @@ void fragment() {
 	}
 }"
 
-[sub_resource type="ShaderMaterial" id=2]
+[sub_resource type="ShaderMaterial" id=24]
 resource_local_to_scene = true
-shader = SubResource( 1 )
+shader = SubResource( 23 )
 shader_param/color = Color( 0.768627, 0.768627, 0.768627, 1 )
 shader_param/width = 11.6364
 shader_param/pattern = 0
 shader_param/min_alpha = 1.0
-shader_param/blur_level = 1.0
+shader_param/blur_level = 0.0
 shader_param/inside = false
 shader_param/add_margins = true
 shader_param/texture_offset = Vector2( 0, 2 )
 
 [node name="ObjectSettingsWindow" instance=ExtResource( 1 )]
-visible = false
 script = ExtResource( 2 )
 title = "{Object} Settings"
 icon_tooltip = "No object tooltip has been set..."
-window_size = Vector2( 0, 0 )
 
-[node name="Icon" parent="WindowBack/WindowMat/HeaderContentDivider/HeaderMat/HeaderBox" index="0"]
-material = SubResource( 2 )
+[node name="Border" parent="." index="0"]
+margin_bottom = 191.0
 
-[node name="ContentBox" type="HBoxContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat" index="0"]
+[node name="WindowMat" parent="." index="1"]
+margin_bottom = 191.0
+
+[node name="HeaderContentDivider" parent="WindowMat" index="0"]
+margin_bottom = 187.0
+
+[node name="Icon" parent="WindowMat/HeaderContentDivider/HeaderMat/HeaderBox" index="0"]
+material = SubResource( 24 )
+
+[node name="ContentMat" parent="WindowMat/HeaderContentDivider" index="2"]
+margin_bottom = 183.0
+
+[node name="ContentBox" type="HBoxContainer" parent="WindowMat/HeaderContentDivider/ContentMat" index="0"]
 margin_top = 1.0
-margin_right = 410.0
-margin_bottom = 176.0
+margin_right = 289.0
+margin_bottom = 147.0
 size_flags_vertical = 3
 
-[node name="PreviewMat" type="MarginContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox" index="0"]
+[node name="PreviewMat" type="MarginContainer" parent="WindowMat/HeaderContentDivider/ContentMat/ContentBox" index="0"]
 margin_right = 107.0
-margin_bottom = 175.0
+margin_bottom = 146.0
 custom_constants/margin_right = 2
 custom_constants/margin_left = 2
 
-[node name="Preview" type="VBoxContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PreviewMat" index="0"]
+[node name="Preview" type="VBoxContainer" parent="WindowMat/HeaderContentDivider/ContentMat/ContentBox/PreviewMat" index="0"]
 margin_left = 2.0
 margin_right = 105.0
-margin_bottom = 175.0
+margin_bottom = 146.0
 
-[node name="AspectRatioContainer" type="AspectRatioContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PreviewMat/Preview" index="0"]
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="WindowMat/HeaderContentDivider/ContentMat/ContentBox/PreviewMat/Preview" index="0"]
 margin_right = 103.0
 margin_bottom = 98.0
 
-[node name="PreviewBack" type="PanelContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PreviewMat/Preview/AspectRatioContainer" index="0"]
-margin_left = 51.5
-margin_right = 51.5
+[node name="PreviewBack" type="PanelContainer" parent="WindowMat/HeaderContentDivider/ContentMat/ContentBox/PreviewMat/Preview/AspectRatioContainer" index="0"]
+margin_left = 3.5
+margin_right = 99.5
 margin_bottom = 98.0
 size_flags_horizontal = 6
 theme = ExtResource( 3 )
 theme_type_variation = "PreviewPanel"
 
-[node name="PreviewContainer" type="ViewportContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PreviewMat/Preview/AspectRatioContainer/PreviewBack" index="0"]
+[node name="PreviewContainer" type="ViewportContainer" parent="WindowMat/HeaderContentDivider/ContentMat/ContentBox/PreviewMat/Preview/AspectRatioContainer/PreviewBack" index="0"]
 margin_right = 96.0
 margin_bottom = 96.0
 rect_min_size = Vector2( 96, 96 )
@@ -138,14 +148,14 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 stretch = true
 
-[node name="Viewport" type="Viewport" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PreviewMat/Preview/AspectRatioContainer/PreviewBack/PreviewContainer" index="0"]
+[node name="Viewport" type="Viewport" parent="WindowMat/HeaderContentDivider/ContentMat/ContentBox/PreviewMat/Preview/AspectRatioContainer/PreviewBack/PreviewContainer" index="0"]
 size = Vector2( 96, 96 )
 size_override_stretch = true
 transparent_bg = true
 handle_input_locally = false
-render_target_update_mode = 0
+render_target_update_mode = 3
 
-[node name="Delete" type="Button" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PreviewMat/Preview" index="1"]
+[node name="Delete" type="Button" parent="WindowMat/HeaderContentDivider/ContentMat/ContentBox/PreviewMat/Preview" index="1"]
 margin_top = 102.0
 margin_right = 103.0
 margin_bottom = 124.0
@@ -155,12 +165,12 @@ theme_type_variation = "ButtonRed"
 text = "Delete"
 script = ExtResource( 4 )
 
-[node name="ZOrderControls" type="HBoxContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PreviewMat/Preview" index="2"]
+[node name="ZOrderControls" type="HBoxContainer" parent="WindowMat/HeaderContentDivider/ContentMat/ContentBox/PreviewMat/Preview" index="2"]
 margin_top = 128.0
 margin_right = 103.0
 margin_bottom = 146.0
 
-[node name="Back" type="Button" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PreviewMat/Preview/ZOrderControls" index="0"]
+[node name="Back" type="Button" parent="WindowMat/HeaderContentDivider/ContentMat/ContentBox/PreviewMat/Preview/ZOrderControls" index="0"]
 margin_right = 47.0
 margin_bottom = 18.0
 rect_min_size = Vector2( 0, 18 )
@@ -171,7 +181,7 @@ custom_fonts/font = ExtResource( 5 )
 text = "To Back"
 script = ExtResource( 4 )
 
-[node name="Front" type="Button" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PreviewMat/Preview/ZOrderControls" index="1"]
+[node name="Front" type="Button" parent="WindowMat/HeaderContentDivider/ContentMat/ContentBox/PreviewMat/Preview/ZOrderControls" index="1"]
 margin_left = 51.0
 margin_right = 103.0
 margin_bottom = 18.0
@@ -183,16 +193,16 @@ custom_fonts/font = ExtResource( 5 )
 text = "To Front"
 script = ExtResource( 4 )
 
-[node name="VSeparator" type="VSeparator" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox" index="1"]
+[node name="VSeparator" type="VSeparator" parent="WindowMat/HeaderContentDivider/ContentMat/ContentBox" index="1"]
 margin_left = 111.0
 margin_right = 115.0
-margin_bottom = 175.0
+margin_bottom = 146.0
 
-[node name="PropertyGroups" type="TabContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox" index="2"]
+[node name="PropertyGroups" type="TabContainer" parent="WindowMat/HeaderContentDivider/ContentMat/ContentBox" index="2"]
 unique_name_in_owner = true
 margin_left = 119.0
-margin_right = 410.0
-margin_bottom = 175.0
+margin_right = 289.0
+margin_bottom = 146.0
 mouse_filter = 1
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -202,3 +212,6 @@ tab_align = 0
 all_tabs_in_front = true
 use_hidden_tabs_for_min_size = true
 script = ExtResource( 6 )
+
+[node name="Control" parent="." index="2"]
+margin_bottom = 191.0

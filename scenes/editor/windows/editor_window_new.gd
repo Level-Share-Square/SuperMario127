@@ -1,5 +1,5 @@
-class_name EditorWindowOld
-extends Popup
+class_name EditorWindow
+extends PanelContainer
 
 
 export(NodePath) var drag_control_path
@@ -32,17 +32,16 @@ func set_tooltip(val):
 
 func _ready() -> void:
 	var drag_control: Control = get_node(drag_control_path)
-	drag_control.connect("gui_input", self, "drag_window")
+	if is_instance_valid(drag_control):
+		drag_control.connect("gui_input", self, "drag_window")
 	
 	var close_button: BaseButton = get_node(close_button_path)
-	close_button.connect("pressed", self, "close")
+	if is_instance_valid(close_button):
+		close_button.connect("pressed", self, "close")
 	
 	var resize_control: Control = get_node(resize_control_path)
-	resize_control.connect("gui_input", self, "resize_window")
-	
-	# I don't know why, but if you don't pop the window up first the 
-	# minimum size is never calculated
-	popup_centered(Vector2(0, 0))
+	if is_instance_valid(resize_control):
+		resize_control.connect("gui_input", self, "resize_window")
 	
 	rect_min_size.x = max(rect_min_size.x, window_size.x)
 	rect_min_size.y = max(rect_min_size.y, window_size.y)
@@ -52,10 +51,18 @@ func _ready() -> void:
 	if not self == get_tree().current_scene:
 		hide()
 	
-	set_title(title)
+	while not is_instance_valid(title_node):
+		yield(get_tree(), "idle_frame")
 	
-	set_icon(icon)
-	set_tooltip(icon_tooltip)
+	title_node.connect("ready", self, "set_title")
+	icon_node.connect("ready", self, "set_icon")
+	icon_node.connect("ready", self, "set_tooltip")
+
+
+func popup(rect: Rect2) -> void:
+	rect_position = rect.position
+	rect_size = rect.size
+	show()
 
 
 func close():
