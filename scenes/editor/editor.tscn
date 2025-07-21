@@ -1497,6 +1497,8 @@ margin_left = 344.0
 margin_top = 66.0
 margin_right = 763.0
 margin_bottom = 286.0
+drag_control_path = NodePath("WindowMat/HeaderContentDivider/HeaderMat")
+resize_control_path = NodePath("ResizeHandle")
 
 [node name="Grid" type="ParallaxBackground" parent="UI"]
 layer = -1

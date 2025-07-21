@@ -42,8 +42,6 @@ func _ready():
 	# I was wrong dignity... sorry... we can just do this on ready
 	area = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area]
 	
-	
-	
 	autoscroll_pick.connect("value_changed", self, "_on_autoscroll_change")
 	connect("update_background", owner, "update_background")
 	
@@ -109,10 +107,11 @@ func _on_palette_selected(event: InputEvent, index: int):
 
 
 func _on_bg_selected(index: int):
-	var resource = load("res://scenes/shared/background/backgrounds/%s/resource.tres" % backgrounds.ids[index])
+	var resource: SkyResource = load("res://scenes/shared/background/backgrounds/%s/resource.tres" % backgrounds.ids[index])
 	background.texture = resource.texture
 	# Note: This should probably be in the save function instead.
 #	Singleton.CurrentLevelData.level_info.thumbnail_sky = index
+	foreground.modulate = resource.parallax_modulate
 	area.settings.sky = index
 	bg_index = index
 	_init_palette_dropdown()

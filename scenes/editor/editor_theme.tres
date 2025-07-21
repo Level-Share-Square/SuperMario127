@@ -594,7 +594,7 @@ grow_end = 0.0
 vertical = true
 
 [sub_resource type="Gradient" id=137]
-colors = PoolColorArray( 0.105882, 0.12549, 0.407843, 1, 0.152941, 0.254902, 0.576471, 1 )
+colors = PoolColorArray( 0.012, 0.0272, 0.24, 1, 0.0585, 0.14985, 0.45, 1 )
 
 [sub_resource type="GradientTexture2D" id=138]
 gradient = SubResource( 137 )
@@ -612,7 +612,7 @@ border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
-border_color = Color( 0.486275, 0.588235, 0.678431, 1 )
+border_color = Color( 0.4002, 0.48633, 0.87, 1 )
 corner_radius_top_left = 3
 corner_radius_top_right = 3
 corner_radius_bottom_right = 3
