@@ -1,6 +1,5 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://scenes/editor/editor_theme.tres" type="Theme" id=1]
 [ext_resource path="res://assets/tiles/bricks/palette_icons/1_block.png" type="Texture" id=2]
 [ext_resource path="res://scenes/oldeditor/assets/grid2.png" type="Texture" id=3]
 [ext_resource path="res://scenes/editor/windows/item_picker/item_button.gd" type="Script" id=4]
@@ -11,8 +10,7 @@ margin_right = 32.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 focus_mode = 0
-theme = ExtResource( 1 )
-theme_type_variation = "ButtonRectangle"
+theme_type_variation = "ButtonHotbar"
 enabled_focus_mode = 0
 keep_pressed_outside = true
 script = ExtResource( 4 )

@@ -8,7 +8,6 @@
 [ext_resource path="res://scenes/shared/backgrounds.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/editor/editor_camera.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/editor/tools/tool_manager.gd" type="Script" id=8]
-[ext_resource path="res://scenes/editor/windows/item_picker/item_picker_window.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scenes/editor/assets/item_picker.svg" type="Texture" id=10]
 [ext_resource path="res://scenes/editor/assets/item_picker_pressed.svg" type="Texture" id=11]
 [ext_resource path="res://scenes/editor/assets/item_picker_hover.svg" type="Texture" id=12]
@@ -62,6 +61,7 @@
 [ext_resource path="res://scenes/editor/item_picker_panel.gd" type="Script" id=61]
 [ext_resource path="res://scenes/editor/assets/magnifying_glass_v2.svg" type="Texture" id=62]
 [ext_resource path="res://scenes/menu/line_edit_unfocus.gd" type="Script" id=63]
+[ext_resource path="res://scenes/editor/windows/item_picker/items_box.gd" type="Script" id=64]
 
 [sub_resource type="CanvasItemMaterial" id=176]
 blend_mode = 1
@@ -433,6 +433,7 @@ mouse_filter = 2
 custom_constants/separation = 0
 
 [node name="ItemPickerPanel" type="PanelContainer" parent="UI/HBoxContainer"]
+unique_name_in_owner = true
 material = SubResource( 176 )
 margin_right = 144.0
 margin_bottom = 432.0
@@ -488,6 +489,7 @@ placeholder_text = "Search..."
 script = ExtResource( 63 )
 
 [node name="Search" type="Button" parent="UI/HBoxContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
 margin_left = 105.0
 margin_right = 124.0
 margin_bottom = 19.0
@@ -510,6 +512,7 @@ margin_bottom = 105.0
 alignment = 1
 
 [node name="Tiles" type="GridContainer" parent="UI/HBoxContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/Groups"]
+unique_name_in_owner = true
 margin_right = 124.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
@@ -551,6 +554,7 @@ margin_right = 124.0
 margin_bottom = 32.0
 
 [node name="Objects" type="GridContainer" parent="UI/HBoxContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/Groups"]
+unique_name_in_owner = true
 margin_top = 36.0
 margin_right = 124.0
 margin_bottom = 74.0
@@ -627,77 +631,20 @@ scroll_horizontal_enabled = false
 
 [node name="CenterContainer" type="CenterContainer" parent="UI/HBoxContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/ScrollContainer"]
 margin_right = 116.0
-margin_bottom = 146.0
 size_flags_horizontal = 3
 
-[node name="Items" type="VBoxContainer" parent="UI/HBoxContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/ScrollContainer/CenterContainer"]
-margin_left = 4.0
-margin_right = 112.0
-margin_bottom = 146.0
-custom_constants/separation = 6
-
-[node name="Tiles" type="GridContainer" parent="UI/HBoxContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/ScrollContainer/CenterContainer/Items"]
-margin_right = 108.0
-margin_bottom = 146.0
+[node name="ItemsGrid" type="GridContainer" parent="UI/HBoxContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/ScrollContainer/CenterContainer"]
+unique_name_in_owner = true
+margin_left = 58.0
+margin_right = 58.0
+size_flags_horizontal = 3
 custom_constants/vseparation = 6
 custom_constants/hseparation = 6
 columns = 3
-
-[node name="Test" parent="UI/HBoxContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/ScrollContainer/CenterContainer/Items/Tiles" instance=ExtResource( 59 )]
-theme_type_variation = "ButtonHotbar"
-
-[node name="Test2" parent="UI/HBoxContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/ScrollContainer/CenterContainer/Items/Tiles" instance=ExtResource( 59 )]
-margin_left = 38.0
-margin_right = 70.0
-theme_type_variation = "ButtonHotbar"
-
-[node name="Test3" parent="UI/HBoxContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/ScrollContainer/CenterContainer/Items/Tiles" instance=ExtResource( 59 )]
-margin_left = 76.0
-margin_right = 108.0
-theme_type_variation = "ButtonHotbar"
-
-[node name="Test4" parent="UI/HBoxContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/ScrollContainer/CenterContainer/Items/Tiles" instance=ExtResource( 59 )]
-margin_top = 38.0
-margin_bottom = 70.0
-theme_type_variation = "ButtonHotbar"
-
-[node name="Test5" parent="UI/HBoxContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/ScrollContainer/CenterContainer/Items/Tiles" instance=ExtResource( 59 )]
-margin_left = 38.0
-margin_top = 38.0
-margin_right = 70.0
-margin_bottom = 70.0
-theme_type_variation = "ButtonHotbar"
-
-[node name="Test6" parent="UI/HBoxContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/ScrollContainer/CenterContainer/Items/Tiles" instance=ExtResource( 59 )]
-margin_left = 76.0
-margin_top = 38.0
-margin_right = 108.0
-margin_bottom = 70.0
-theme_type_variation = "ButtonHotbar"
-
-[node name="Test7" parent="UI/HBoxContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/ScrollContainer/CenterContainer/Items/Tiles" instance=ExtResource( 59 )]
-margin_top = 76.0
-margin_bottom = 108.0
-theme_type_variation = "ButtonHotbar"
-
-[node name="Test8" parent="UI/HBoxContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/ScrollContainer/CenterContainer/Items/Tiles" instance=ExtResource( 59 )]
-margin_left = 38.0
-margin_top = 76.0
-margin_right = 70.0
-margin_bottom = 108.0
-theme_type_variation = "ButtonHotbar"
-
-[node name="Test9" parent="UI/HBoxContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/ScrollContainer/CenterContainer/Items/Tiles" instance=ExtResource( 59 )]
-margin_left = 76.0
-margin_top = 76.0
-margin_right = 108.0
-margin_bottom = 108.0
-theme_type_variation = "ButtonHotbar"
-
-[node name="Test10" parent="UI/HBoxContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/ScrollContainer/CenterContainer/Items/Tiles" instance=ExtResource( 59 )]
-margin_top = 114.0
-margin_bottom = 146.0
-theme_type_variation = "ButtonHotbar"
+script = ExtResource( 64 )
+placeable_items = ExtResource( 31 )
+item_button_scene = ExtResource( 59 )
+initial_group = "terrain"
 
 [node name="HSeparator2" type="HSeparator" parent="UI/HBoxContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer"]
 margin_top = 367.0
@@ -710,7 +657,8 @@ margin_right = 124.0
 margin_bottom = 412.0
 custom_constants/margin_right = 6
 
-[node name="Label" type="Label" parent="UI/HBoxContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/MarginContainer"]
+[node name="ItemLabel" type="Label" parent="UI/HBoxContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/MarginContainer"]
+unique_name_in_owner = true
 margin_right = 118.0
 margin_bottom = 37.0
 text = "121 Garden Half Tile"
@@ -1543,12 +1491,6 @@ blocker_path = NodePath("../../Middle/MouseBlocker")
 open_text = ">"
 close_text = "<"
 
-[node name="ItemPickerWindow" parent="UI" instance=ExtResource( 9 )]
-margin_left = 450.0
-margin_top = 60.0
-margin_right = 706.0
-margin_bottom = 316.0
-
 [node name="EditorOptionsWindow" parent="UI" instance=ExtResource( 21 )]
 margin_left = 344.0
 margin_top = 66.0
@@ -1638,7 +1580,6 @@ bus = "Sounds"
 [connection signal="button_down" from="UI/EditorUIOld/MarginContainer/VBoxContainer/Utilities/Paste" to="Tools/ObjectSelection" method="_on_Paste_button_down"]
 [connection signal="pressed" from="UI/EditorUIOld/MarginContainer/VBoxContainer/Utilities/Undo" to="ActionManager" method="undo"]
 [connection signal="pressed" from="UI/EditorUIOld/MarginContainer/VBoxContainer/Utilities/Redo" to="ActionManager" method="redo"]
-[connection signal="pressed" from="UI/EditorUIOld/MarginContainer/VBoxContainer/Utilities/ItemPicker" to="UI/ItemPickerWindow" method="popup" binds= [ Rect2( 450, 60, 248, 248 ) ]]
 [connection signal="pressed" from="UI/EditorUIOld/MarginContainer/VBoxContainer/Utilities/Settings" to="UI/EditorOptionsWindow" method="popup" binds= [ Rect2( 344, 66, 420, 220 ) ]]
 [connection signal="pressed" from="UI/HBoxContainer/EditorUI/Top/Options/PanelContainer/Settings" to="UI/EditorOptionsWindow" method="popup" binds= [ Rect2( 344, 66, 420, 220 ) ]]
 [connection signal="pressed" from="UI/HBoxContainer/EditorUI/Top/Tools/PanelContainer/HBoxContainer/Undo" to="ActionManager" method="undo"]
@@ -1646,6 +1587,4 @@ bus = "Sounds"
 [connection signal="pressed" from="UI/HBoxContainer/EditorUI/Top/Tools/PanelContainer/HBoxContainer/SelectionActions/Copy" to="Tools/ObjectSelection" method="copy"]
 [connection signal="pressed" from="UI/HBoxContainer/EditorUI/Top/Tools/PanelContainer/HBoxContainer/SelectionActions/Paste" to="Tools/ObjectSelection" method="paste"]
 [connection signal="pressed" from="UI/HBoxContainer/EditorUI/Bottom/Hotbar/ItemPickerButton/Button" to="UI/HBoxContainer/ItemPickerPanel" method="toggle"]
-[connection signal="item_selected" from="UI/ItemPickerWindow" to="UI/EditorUIOld/ItemSuitcase" method="item_selected"]
-[connection signal="item_selected" from="UI/ItemPickerWindow" to="UI/HBoxContainer/EditorUI/Bottom/Hotbar" method="_on_ItemPickerWindow_item_selected"]
 [connection signal="open_editor_settings" from="UI/EditorOptionsWindow" to="Options/ScreenManager" method="screen_change" binds= [ "Options" ]]

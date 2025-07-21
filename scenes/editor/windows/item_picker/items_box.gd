@@ -1,6 +1,5 @@
 extends GridContainer
 
-
 export var placeable_items: Resource
 export var item_button_scene: PackedScene
 export var initial_group: String = "special"
