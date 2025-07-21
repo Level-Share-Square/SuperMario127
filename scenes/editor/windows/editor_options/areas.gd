@@ -5,7 +5,7 @@ onready var v_box_container = $VBoxContainer
 onready var new_area = $VBoxContainer/Add
 
 
-const AREA_PANEL_SCENE = "res://scenes/editor/windows/area_panel.tscn"
+const AREA_PANEL_SCENE = "res://scenes/editor/windows/editor_options/area_panel.tscn"
 
 
 func _ready():
