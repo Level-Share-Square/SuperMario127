@@ -20,7 +20,7 @@
 [ext_resource path="res://scenes/oldeditor/sounds/click2.wav" type="AudioStream" id=18]
 [ext_resource path="res://scenes/oldeditor/sounds/hover.wav" type="AudioStream" id=19]
 [ext_resource path="res://scenes/editor/assets/gear_popup.svg" type="Texture" id=20]
-[ext_resource path="res://scenes/editor/windows/editor_options_window_2.tscn" type="PackedScene" id=21]
+[ext_resource path="res://scenes/editor/windows/editor_options/editor_options_window_2.tscn" type="PackedScene" id=21]
 [ext_resource path="res://scenes/editor/action_manager/action_manager.gd" type="Script" id=22]
 [ext_resource path="res://generation/generated_tiles.res" type="TileSet" id=23]
 [ext_resource path="res://scenes/menu/button_scripts/button_sound.gd" type="Script" id=24]
@@ -515,7 +515,7 @@ margin_bottom = 24.0
 size_flags_horizontal = 3
 columns = 2
 
-[node name="Special" type="Button" parent="UI/HBoxContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/Groups/Tiles"]
+[node name="Terrain" type="Button" parent="UI/HBoxContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/Groups/Tiles"]
 margin_right = 60.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 0, 24 )
@@ -530,7 +530,7 @@ group = SubResource( 178 )
 text = "Terrain"
 script = ExtResource( 24 )
 
-[node name="Special2" type="Button" parent="UI/HBoxContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/Groups/Tiles"]
+[node name="Structures" type="Button" parent="UI/HBoxContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/Groups/Tiles"]
 margin_left = 64.0
 margin_right = 124.0
 margin_bottom = 24.0
@@ -570,7 +570,7 @@ group = SubResource( 178 )
 text = "Special"
 script = ExtResource( 24 )
 
-[node name="Special2" type="Button" parent="UI/HBoxContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/Groups/Objects"]
+[node name="Obstacles" type="Button" parent="UI/HBoxContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/Groups/Objects"]
 margin_left = 62.0
 margin_right = 124.0
 margin_bottom = 17.0
@@ -584,7 +584,7 @@ group = SubResource( 178 )
 text = "Obstacles"
 script = ExtResource( 24 )
 
-[node name="Special3" type="Button" parent="UI/HBoxContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/Groups/Objects"]
+[node name="Entities" type="Button" parent="UI/HBoxContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/Groups/Objects"]
 margin_top = 21.0
 margin_right = 58.0
 margin_bottom = 38.0
@@ -598,7 +598,7 @@ group = SubResource( 178 )
 text = "Entities"
 script = ExtResource( 24 )
 
-[node name="Special4" type="Button" parent="UI/HBoxContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/Groups/Objects"]
+[node name="Decoration" type="Button" parent="UI/HBoxContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/Groups/Objects"]
 margin_left = 62.0
 margin_top = 21.0
 margin_right = 124.0
