@@ -50,13 +50,14 @@ func create_object(object, add_to_data):
 				object_node.layer
 		
 		object_node._set_properties()
-		object_node._set_property_values()
 		
 		var index = 0
 		for value in object.properties:
 			var true_value = value_util.get_true_value(value)
 			object_node.set_property_by_index(index, true_value, false)
 			index += 1
+		
+		object_node._set_property_values()
 		
 		call_deferred("add_child", object_node)
 		
