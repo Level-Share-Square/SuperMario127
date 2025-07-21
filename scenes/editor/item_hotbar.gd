@@ -87,6 +87,7 @@ func _on_ItemPickerWindow_item_selected(item: PlaceableItem):
 	bottom_row.move_child(boxes[6], start_index)
 	loadouts[selected_loadout].insert(start_index, loadouts[selected_loadout].pop_back())
 	loadouts[selected_loadout][start_index] = placeable_items.placeable_items.find_key(item)
+	refresh_loadout()
 	
 func refresh_loadout():
 	var favs_amount: int = fav_items[selected_loadout].size()

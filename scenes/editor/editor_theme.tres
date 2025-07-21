@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=88 format=2]
+[gd_resource type="Theme" load_steps=74 format=2]
 
 [ext_resource path="res://assets/fonts/delfino_small.tres" type="DynamicFont" id=1]
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=2]
@@ -120,35 +120,6 @@ content_margin_bottom = 1.0
 bg_color = Color( 0.588235, 0.631373, 0.921569, 1 )
 corner_radius_bottom_right = 4
 
-[sub_resource type="StyleBoxEmpty" id=181]
-
-[sub_resource type="StyleBoxFlat" id=186]
-content_margin_left = 2.0
-content_margin_right = 2.0
-bg_color = Color( 0.84, 0.78, 0.46, 1 )
-corner_radius_bottom_right = 4
-
-[sub_resource type="StyleBoxFlat" id=187]
-content_margin_left = 2.0
-content_margin_right = 2.0
-bg_color = Color( 0.75, 0.49, 0.46, 1 )
-corner_radius_bottom_right = 4
-
-[sub_resource type="StyleBoxFlat" id=188]
-content_margin_left = 2.0
-content_margin_right = 2.0
-content_margin_top = 2.0
-content_margin_bottom = 2.0
-bg_color = Color( 1, 1, 0.5, 1 )
-border_color = Color( 1, 1, 1, 1 )
-corner_radius_bottom_right = 4
-
-[sub_resource type="StyleBoxFlat" id=189]
-content_margin_left = 2.0
-content_margin_right = 2.0
-bg_color = Color( 0.89, 0.63, 0.46, 1 )
-corner_radius_bottom_right = 4
-
 [sub_resource type="StyleBoxFlat" id=120]
 content_margin_left = 4.0
 content_margin_right = 4.0
@@ -249,62 +220,6 @@ corner_radius_top_right = 2
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 2
 expand_margin_bottom = 2.0
-
-[sub_resource type="StyleBoxEmpty" id=190]
-
-[sub_resource type="StyleBoxFlat" id=182]
-content_margin_left = 2.0
-content_margin_right = 2.0
-bg_color = Color( 0.7544, 0.77648, 0.92, 1 )
-corner_radius_bottom_right = 4
-
-[sub_resource type="StyleBoxFlat" id=183]
-content_margin_left = 2.0
-content_margin_right = 2.0
-bg_color = Color( 0.4232, 0.48944, 0.92, 1 )
-corner_radius_bottom_right = 4
-
-[sub_resource type="StyleBoxFlat" id=184]
-content_margin_left = 2.0
-content_margin_right = 2.0
-content_margin_top = 2.0
-content_margin_bottom = 2.0
-bg_color = Color( 1, 1, 1, 1 )
-border_color = Color( 1, 1, 1, 1 )
-corner_radius_bottom_right = 4
-
-[sub_resource type="StyleBoxFlat" id=185]
-content_margin_left = 2.0
-content_margin_right = 2.0
-bg_color = Color( 0.588235, 0.631373, 0.921569, 1 )
-corner_radius_bottom_right = 4
-
-[sub_resource type="StyleBoxFlat" id=191]
-content_margin_left = 2.0
-content_margin_right = 2.0
-bg_color = Color( 0.84, 0.78, 0.46, 1 )
-corner_radius_bottom_right = 4
-
-[sub_resource type="StyleBoxFlat" id=192]
-content_margin_left = 2.0
-content_margin_right = 2.0
-bg_color = Color( 0.75, 0.49, 0.46, 1 )
-corner_radius_bottom_right = 4
-
-[sub_resource type="StyleBoxFlat" id=193]
-content_margin_left = 2.0
-content_margin_right = 2.0
-content_margin_top = 2.0
-content_margin_bottom = 2.0
-bg_color = Color( 1, 1, 0.5, 1 )
-border_color = Color( 1, 1, 1, 1 )
-corner_radius_bottom_right = 4
-
-[sub_resource type="StyleBoxFlat" id=194]
-content_margin_left = 2.0
-content_margin_right = 2.0
-bg_color = Color( 0.89, 0.63, 0.46, 1 )
-corner_radius_bottom_right = 4
 
 [sub_resource type="StyleBoxEmpty" id=160]
 
