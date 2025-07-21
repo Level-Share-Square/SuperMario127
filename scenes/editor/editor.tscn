@@ -47,11 +47,10 @@
 [ext_resource path="res://scenes/menu/button_scripts/check_button_sound.gd" type="Script" id=45]
 [ext_resource path="res://scenes/editor/assets/RectangleFill.svg" type="Texture" id=46]
 [ext_resource path="res://scenes/menu/levels_list/icons/star_coin.png" type="Texture" id=47]
-[ext_resource path="res://scenes/editor/assets/DropdownFlipped.svg" type="Texture" id=48]
+[ext_resource path="res://scenes/editor/assets/bitmap.svg" type="Texture" id=48]
 [ext_resource path="res://scenes/editor/assets/Paint.svg" type="Texture" id=49]
 [ext_resource path="res://scenes/editor/assets/select_tool.png" type="Texture" id=50]
 [ext_resource path="res://scenes/editor/assets/tile_lock_tool.png" type="Texture" id=51]
-[ext_resource path="res://scenes/editor/assets/Dropdown.svg" type="Texture" id=52]
 [ext_resource path="res://scenes/editor/assets/Erase.svg" type="Texture" id=53]
 [ext_resource path="res://scenes/menu/levels_list/icons/delete.png" type="Texture" id=54]
 [ext_resource path="res://scenes/editor/assets/editor_Redo.wav" type="AudioStream" id=55]
@@ -78,6 +77,15 @@ fill_to = Vector2( 0, 1 )
 [sub_resource type="StyleBoxTexture" id=175]
 texture = SubResource( 174 )
 region_rect = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="DynamicFont" id=180]
+size = 14
+outline_color = Color( 0, 0, 0, 1 )
+use_filter = true
+extra_spacing_top = 1
+extra_spacing_char = -2
+extra_spacing_space = 2
+font_data = ExtResource( 40 )
 
 [sub_resource type="ButtonGroup" id=178]
 
@@ -479,7 +487,7 @@ theme_type_variation = "LineEditStraight"
 placeholder_text = "Search..."
 script = ExtResource( 63 )
 
-[node name="Special" type="Button" parent="UI/HBoxContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="Search" type="Button" parent="UI/HBoxContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer"]
 margin_left = 105.0
 margin_right = 124.0
 margin_bottom = 19.0
@@ -495,132 +503,123 @@ margin_top = 23.0
 margin_right = 124.0
 margin_bottom = 27.0
 
-[node name="Groups" type="HBoxContainer" parent="UI/HBoxContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer"]
+[node name="Groups" type="VBoxContainer" parent="UI/HBoxContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer"]
 margin_top = 31.0
 margin_right = 124.0
-margin_bottom = 117.0
+margin_bottom = 105.0
 alignment = 1
 
-[node name="Tiles" type="VBoxContainer" parent="UI/HBoxContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/Groups"]
-margin_right = 56.0
-margin_bottom = 86.0
+[node name="Tiles" type="GridContainer" parent="UI/HBoxContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/Groups"]
+margin_right = 124.0
+margin_bottom = 24.0
 size_flags_horizontal = 3
-custom_constants/separation = 6
+columns = 2
 
 [node name="Special" type="Button" parent="UI/HBoxContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/Groups/Tiles"]
-margin_right = 56.0
-margin_bottom = 17.0
+margin_right = 60.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 0, 24 )
 focus_mode = 0
+size_flags_horizontal = 3
 theme_type_variation = "ButtonTransparent"
 custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 180 )
 toggle_mode = true
 pressed = true
 group = SubResource( 178 )
-text = "Special"
+text = "Terrain"
 script = ExtResource( 24 )
 
 [node name="Special2" type="Button" parent="UI/HBoxContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/Groups/Tiles"]
-margin_top = 23.0
-margin_right = 56.0
-margin_bottom = 40.0
-focus_mode = 0
-theme_type_variation = "ButtonTransparent"
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-toggle_mode = true
-group = SubResource( 178 )
-text = "Special"
-script = ExtResource( 24 )
-
-[node name="Special3" type="Button" parent="UI/HBoxContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/Groups/Tiles"]
-margin_top = 46.0
-margin_right = 56.0
-margin_bottom = 63.0
-focus_mode = 0
-theme_type_variation = "ButtonTransparent"
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-toggle_mode = true
-group = SubResource( 178 )
-text = "Special"
-script = ExtResource( 24 )
-
-[node name="Special4" type="Button" parent="UI/HBoxContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/Groups/Tiles"]
-margin_top = 69.0
-margin_right = 56.0
-margin_bottom = 86.0
-focus_mode = 0
-theme_type_variation = "ButtonTransparent"
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-toggle_mode = true
-group = SubResource( 178 )
-text = "Special"
-script = ExtResource( 24 )
-
-[node name="VSeparator" type="VSeparator" parent="UI/HBoxContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/Groups"]
-margin_left = 60.0
-margin_right = 64.0
-margin_bottom = 86.0
-
-[node name="Objects" type="VBoxContainer" parent="UI/HBoxContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/Groups"]
-margin_left = 68.0
+margin_left = 64.0
 margin_right = 124.0
-margin_bottom = 86.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 0, 24 )
+focus_mode = 0
 size_flags_horizontal = 3
-custom_constants/separation = 6
+theme_type_variation = "ButtonTransparent"
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 180 )
+toggle_mode = true
+group = SubResource( 178 )
+text = "Structures"
+script = ExtResource( 24 )
+
+[node name="HSeparator" type="HSeparator" parent="UI/HBoxContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/Groups"]
+margin_top = 28.0
+margin_right = 124.0
+margin_bottom = 32.0
+
+[node name="Objects" type="GridContainer" parent="UI/HBoxContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/Groups"]
+margin_top = 36.0
+margin_right = 124.0
+margin_bottom = 74.0
+size_flags_horizontal = 3
+columns = 2
 
 [node name="Special" type="Button" parent="UI/HBoxContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/Groups/Objects"]
-margin_right = 56.0
+margin_right = 58.0
 margin_bottom = 17.0
 focus_mode = 0
+size_flags_horizontal = 3
 theme_type_variation = "ButtonTransparent"
 custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 180 )
 toggle_mode = true
 group = SubResource( 178 )
 text = "Special"
 script = ExtResource( 24 )
 
 [node name="Special2" type="Button" parent="UI/HBoxContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/Groups/Objects"]
-margin_top = 23.0
-margin_right = 56.0
-margin_bottom = 40.0
+margin_left = 62.0
+margin_right = 124.0
+margin_bottom = 17.0
 focus_mode = 0
+size_flags_horizontal = 3
 theme_type_variation = "ButtonTransparent"
 custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 180 )
 toggle_mode = true
 group = SubResource( 178 )
-text = "Special"
+text = "Obstacles"
 script = ExtResource( 24 )
 
 [node name="Special3" type="Button" parent="UI/HBoxContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/Groups/Objects"]
-margin_top = 46.0
-margin_right = 56.0
-margin_bottom = 63.0
+margin_top = 21.0
+margin_right = 58.0
+margin_bottom = 38.0
 focus_mode = 0
+size_flags_horizontal = 3
 theme_type_variation = "ButtonTransparent"
 custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 180 )
 toggle_mode = true
 group = SubResource( 178 )
-text = "Special"
+text = "Entities"
 script = ExtResource( 24 )
 
 [node name="Special4" type="Button" parent="UI/HBoxContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/Groups/Objects"]
-margin_top = 69.0
-margin_right = 56.0
-margin_bottom = 86.0
+margin_left = 62.0
+margin_top = 21.0
+margin_right = 124.0
+margin_bottom = 38.0
 focus_mode = 0
+size_flags_horizontal = 3
 theme_type_variation = "ButtonTransparent"
 custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 180 )
 toggle_mode = true
 group = SubResource( 178 )
-text = "Special"
+text = "Decoration"
 script = ExtResource( 24 )
 
 [node name="HSeparator" type="HSeparator" parent="UI/HBoxContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer"]
-margin_top = 121.0
+margin_top = 109.0
 margin_right = 124.0
-margin_bottom = 125.0
+margin_bottom = 113.0
 
 [node name="ScrollContainer" type="ScrollContainer" parent="UI/HBoxContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer"]
-margin_top = 129.0
+margin_top = 117.0
 margin_right = 124.0
 margin_bottom = 363.0
 size_flags_vertical = 3
@@ -645,50 +644,60 @@ custom_constants/hseparation = 6
 columns = 3
 
 [node name="Test" parent="UI/HBoxContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/ScrollContainer/CenterContainer/Items/Tiles" instance=ExtResource( 59 )]
+theme_type_variation = "ButtonHotbar"
 
 [node name="Test2" parent="UI/HBoxContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/ScrollContainer/CenterContainer/Items/Tiles" instance=ExtResource( 59 )]
 margin_left = 38.0
 margin_right = 70.0
+theme_type_variation = "ButtonHotbar"
 
 [node name="Test3" parent="UI/HBoxContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/ScrollContainer/CenterContainer/Items/Tiles" instance=ExtResource( 59 )]
 margin_left = 76.0
 margin_right = 108.0
+theme_type_variation = "ButtonHotbar"
 
 [node name="Test4" parent="UI/HBoxContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/ScrollContainer/CenterContainer/Items/Tiles" instance=ExtResource( 59 )]
 margin_top = 38.0
 margin_bottom = 70.0
+theme_type_variation = "ButtonHotbar"
 
 [node name="Test5" parent="UI/HBoxContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/ScrollContainer/CenterContainer/Items/Tiles" instance=ExtResource( 59 )]
 margin_left = 38.0
 margin_top = 38.0
 margin_right = 70.0
 margin_bottom = 70.0
+theme_type_variation = "ButtonHotbar"
 
 [node name="Test6" parent="UI/HBoxContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/ScrollContainer/CenterContainer/Items/Tiles" instance=ExtResource( 59 )]
 margin_left = 76.0
 margin_top = 38.0
 margin_right = 108.0
 margin_bottom = 70.0
+theme_type_variation = "ButtonHotbar"
 
 [node name="Test7" parent="UI/HBoxContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/ScrollContainer/CenterContainer/Items/Tiles" instance=ExtResource( 59 )]
 margin_top = 76.0
 margin_bottom = 108.0
+theme_type_variation = "ButtonHotbar"
 
 [node name="Test8" parent="UI/HBoxContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/ScrollContainer/CenterContainer/Items/Tiles" instance=ExtResource( 59 )]
 margin_left = 38.0
 margin_top = 76.0
 margin_right = 70.0
 margin_bottom = 108.0
+theme_type_variation = "ButtonHotbar"
 
 [node name="Test9" parent="UI/HBoxContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/ScrollContainer/CenterContainer/Items/Tiles" instance=ExtResource( 59 )]
 margin_left = 76.0
 margin_top = 76.0
 margin_right = 108.0
 margin_bottom = 108.0
+theme_type_variation = "ButtonHotbar"
 
 [node name="Test10" parent="UI/HBoxContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/ScrollContainer/CenterContainer/Items/Tiles" instance=ExtResource( 59 )]
 margin_top = 114.0
 margin_bottom = 146.0
+theme_type_variation = "ButtonHotbar"
 
 [node name="HSeparator2" type="HSeparator" parent="UI/HBoxContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer"]
 margin_top = 367.0
@@ -752,9 +761,10 @@ margin_top = 4.0
 margin_right = 44.0
 margin_bottom = 44.0
 rect_min_size = Vector2( 40, 40 )
+hint_tooltip = "Level Properties"
 focus_mode = 0
 theme_type_variation = "ButtonTransparent"
-icon = ExtResource( 39 )
+icon = ExtResource( 48 )
 expand_icon = true
 script = ExtResource( 24 )
 
@@ -786,17 +796,18 @@ margin_left = 8.0
 margin_right = 32.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 24, 0 )
+hint_tooltip = "Settings"
 focus_mode = 0
 size_flags_vertical = 3
 theme_type_variation = "ButtonTransparent"
-icon = ExtResource( 52 )
+icon = ExtResource( 39 )
 icon_align = 1
 expand_icon = true
 script = ExtResource( 37 )
 click_override = "DropdownSound"
 menu_path = NodePath("../../../Padding/ViewMenu")
-open_icon = ExtResource( 52 )
-close_icon = ExtResource( 48 )
+open_icon = ExtResource( 39 )
+close_icon = ExtResource( 39 )
 
 [node name="VSeparator2" type="VSeparator" parent="UI/HBoxContainer/EditorUI/Top/Options/VBoxContainer/PanelContainer/HBoxContainer"]
 margin_left = 36.0
@@ -808,6 +819,7 @@ margin_left = 44.0
 margin_right = 68.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 24, 0 )
+hint_tooltip = "Save Level"
 focus_mode = 0
 size_flags_vertical = 3
 theme_type_variation = "ButtonTransparent"
@@ -826,6 +838,7 @@ margin_left = 80.0
 margin_right = 104.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 24, 0 )
+hint_tooltip = "Quit to Menu"
 focus_mode = 0
 size_flags_vertical = 3
 theme_type_variation = "ButtonTransparent"
@@ -972,6 +985,7 @@ margin_bottom = 28.0
 margin_right = 24.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 24, 24 )
+hint_tooltip = "Undo"
 focus_mode = 0
 size_flags_vertical = 3
 theme_type_variation = "ButtonTransparent"
@@ -991,6 +1005,7 @@ margin_left = 36.0
 margin_right = 60.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 24, 24 )
+hint_tooltip = "Redo"
 focus_mode = 0
 size_flags_vertical = 3
 theme_type_variation = "ButtonTransparent"
@@ -1015,6 +1030,7 @@ margin_left = 8.0
 margin_right = 32.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 24, 24 )
+hint_tooltip = "Copy"
 focus_mode = 0
 size_flags_vertical = 3
 theme_type_variation = "ButtonTransparent"
@@ -1033,6 +1049,7 @@ margin_left = 44.0
 margin_right = 68.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 24, 24 )
+hint_tooltip = "Paste"
 focus_mode = 0
 size_flags_vertical = 3
 theme_type_variation = "ButtonTransparent"
@@ -1051,6 +1068,7 @@ margin_left = 80.0
 margin_right = 104.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 24, 24 )
+hint_tooltip = "Delete Selection"
 focus_mode = 0
 size_flags_vertical = 3
 theme_type_variation = "ButtonTransparent"
@@ -1098,6 +1116,7 @@ mouse_filter = 2
 margin_right = 24.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 24, 24 )
+hint_tooltip = "Paint Tool"
 focus_mode = 0
 size_flags_vertical = 3
 theme_type_variation = "ButtonTransparent"
@@ -1128,6 +1147,7 @@ margin_top = 36.0
 margin_right = 24.0
 margin_bottom = 60.0
 rect_min_size = Vector2( 24, 24 )
+hint_tooltip = "Eraser Tool"
 focus_mode = 0
 size_flags_vertical = 3
 theme_type_variation = "ButtonTransparent"
@@ -1148,6 +1168,7 @@ margin_top = 72.0
 margin_right = 24.0
 margin_bottom = 96.0
 rect_min_size = Vector2( 24, 24 )
+hint_tooltip = "Selection Tool"
 focus_mode = 0
 size_flags_vertical = 3
 theme_type_variation = "ButtonTransparent"
@@ -1168,6 +1189,7 @@ margin_top = 108.0
 margin_right = 24.0
 margin_bottom = 132.0
 rect_min_size = Vector2( 24, 24 )
+hint_tooltip = "Tile Lock Tool"
 focus_mode = 0
 size_flags_vertical = 3
 theme_type_variation = "ButtonTransparent"
@@ -1187,6 +1209,7 @@ mouse_filter = 2
 margin_right = 24.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 24, 24 )
+hint_tooltip = "Paint Tool"
 focus_mode = 0
 size_flags_vertical = 3
 theme_type_variation = "ButtonTransparent"
@@ -1208,6 +1231,7 @@ margin_top = 36.0
 margin_right = 24.0
 margin_bottom = 60.0
 rect_min_size = Vector2( 24, 24 )
+hint_tooltip = "Eraser Tool"
 focus_mode = 0
 size_flags_vertical = 3
 theme_type_variation = "ButtonTransparent"
@@ -1228,6 +1252,7 @@ margin_top = 72.0
 margin_right = 24.0
 margin_bottom = 96.0
 rect_min_size = Vector2( 24, 24 )
+hint_tooltip = "Selection Tool"
 focus_mode = 0
 size_flags_vertical = 3
 theme_type_variation = "ButtonTransparent"
@@ -1248,6 +1273,7 @@ margin_top = 108.0
 margin_right = 24.0
 margin_bottom = 132.0
 rect_min_size = Vector2( 24, 24 )
+hint_tooltip = "Rectangle Fill Tool"
 focus_mode = 0
 size_flags_vertical = 3
 theme_type_variation = "ButtonTransparent"
@@ -1287,6 +1313,7 @@ margin_left = 4.0
 margin_top = 4.0
 margin_right = 48.0
 margin_bottom = 48.0
+hint_tooltip = "Item Picker"
 focus_mode = 0
 theme_type_variation = "ButtonTransparent"
 icon = ExtResource( 51 )
@@ -1333,6 +1360,7 @@ margin_bottom = 18.0
 margin_left = 4.0
 margin_right = 39.0
 margin_bottom = 18.0
+hint_tooltip = "Palettes"
 focus_mode = 0
 size_flags_horizontal = 3
 theme_type_variation = "ButtonTransparent"
@@ -1352,6 +1380,7 @@ margin_bottom = 18.0
 margin_left = 43.0
 margin_right = 78.0
 margin_bottom = 18.0
+hint_tooltip = "Loadout A"
 focus_mode = 0
 size_flags_horizontal = 3
 theme_type_variation = "ButtonTransparent"
@@ -1373,6 +1402,7 @@ margin_bottom = 18.0
 margin_left = 82.0
 margin_right = 117.0
 margin_bottom = 18.0
+hint_tooltip = "Loadout B"
 focus_mode = 0
 size_flags_horizontal = 3
 theme_type_variation = "ButtonTransparent"
@@ -1393,6 +1423,7 @@ margin_bottom = 18.0
 margin_left = 121.0
 margin_right = 156.0
 margin_bottom = 18.0
+hint_tooltip = "Loadout C"
 focus_mode = 0
 size_flags_horizontal = 3
 theme_type_variation = "ButtonTransparent"
@@ -1413,6 +1444,7 @@ margin_bottom = 18.0
 margin_left = 160.0
 margin_right = 196.0
 margin_bottom = 18.0
+hint_tooltip = "Loadout D"
 focus_mode = 0
 size_flags_horizontal = 3
 theme_type_variation = "ButtonTransparent"
