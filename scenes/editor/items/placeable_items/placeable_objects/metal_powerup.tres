@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource( 1 )
-item_name = "Metal Gear"
+item_name = "Power Gear"
 groups = PoolStringArray( "warp" )
 change_to = ""
 items_in_sequence = 0

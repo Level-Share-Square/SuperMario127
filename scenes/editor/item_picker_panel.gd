@@ -44,10 +44,8 @@ func _ready():
 		object_group.connect("button_down", self, "_on_group_pressed", [object_group])
 				
 func _on_group_pressed(group):
-	if group.pressed == true:
-		items_grid.load_items(items_grid.get_items_by_group(""), true)
-	else:
-		print(group.name)
+	if not group.pressed:
+		search_bar.text = ""
 		items_grid.load_items(items_grid.get_items_by_group(group.name), true)
 		
 func reset():
@@ -57,14 +55,5 @@ func reset():
 		object_group.pressed = false
 
 func item_selected(item):
-	var item_type: String
-	var item_id: String
-	var item_name: String
-	if "object_id" in item:
-		item_id = str(item.object_id)
-	else:
-		item_id = str(item.tileset_id)
-	item_name = item.item_name
-	item_label.text = "%s %s" % [item_id, item_name]
 	hotbar.on_item_selected(item)
 	
