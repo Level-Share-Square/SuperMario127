@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=189 format=2]
+[gd_resource type="Resource" load_steps=191 format=2]
 
 [ext_resource path="res://scenes/editor/items/placeable_items.gd" type="Script" id=1]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/blue_coin.tres" type="Resource" id=2]
@@ -188,6 +188,8 @@
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/marble_bricks_stairs_left.tres" type="Resource" id=186]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/marble_bricks_stairs_right.tres" type="Resource" id=187]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/grass_slope_right.tres" type="Resource" id=188]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/grass_half_tile.tres" type="Resource" id=189]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/grass_slope_left.tres" type="Resource" id=190]
 
 [resource]
 script = ExtResource( 1 )
@@ -361,6 +363,8 @@ placeable_items = {
 "til_gem_block": ExtResource( 149 ),
 "til_glass": ExtResource( 150 ),
 "til_grass": ExtResource( 14 ),
+"til_grass_half_tile": ExtResource( 189 ),
+"til_grass_slope_left": ExtResource( 190 ),
 "til_grass_slope_right": ExtResource( 188 ),
 "til_lava_rock": ExtResource( 159 ),
 "til_log": ExtResource( 164 ),
