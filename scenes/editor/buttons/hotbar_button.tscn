@@ -93,6 +93,7 @@ mouse_filter = 2
 color = Color( 0.75, 0.75, 0.75, 1 )
 
 [node name="Grid" type="TextureRect" parent="Clip"]
+visible = false
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5

@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=74 format=2]
+[gd_resource type="Theme" load_steps=76 format=2]
 
 [ext_resource path="res://assets/fonts/delfino_small.tres" type="DynamicFont" id=1]
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=2]
@@ -370,6 +370,30 @@ corner_radius_bottom_right = 4
 corner_radius_bottom_left = 2
 expand_margin_top = 2.0
 
+[sub_resource type="StyleBoxFlat" id=181]
+content_margin_left = 4.0
+content_margin_right = 4.0
+content_margin_top = 1.0
+content_margin_bottom = 1.0
+bg_color = Color( 1, 1, 1, 1 )
+border_color = Color( 0.65, 0.65, 0.65, 1 )
+corner_radius_top_left = 4
+corner_radius_top_right = 2
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id=182]
+content_margin_left = 4.0
+content_margin_right = 4.0
+content_margin_top = 1.0
+content_margin_bottom = 1.0
+bg_color = Color( 0.7, 0.7, 0.7, 1 )
+border_color = Color( 0.498039, 0.498039, 0.498039, 1 )
+corner_radius_top_left = 4
+corner_radius_top_right = 2
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 2
+
 [sub_resource type="StyleBoxFlat" id=159]
 content_margin_left = 4.0
 content_margin_right = 4.0
@@ -680,6 +704,8 @@ ButtonRed/styles/hover = SubResource( 110 )
 ButtonRed/styles/normal = SubResource( 111 )
 ButtonRed/styles/pressed = SubResource( 119 )
 ButtonTransparent/base_type = "Button"
+ButtonTransparent/colors/font_color_hover = Color( 0.8, 0.866667, 1, 1 )
+ButtonTransparent/colors/font_color_pressed = Color( 0.8, 0.866667, 1, 1 )
 ButtonTransparent/colors/icon_color_hover_pressed = Color( 0.8, 0.866667, 1, 1 )
 ButtonTransparent/colors/icon_color_pressed = Color( 0.8, 0.866667, 1, 1 )
 ButtonTransparent/styles/disabled = SubResource( 160 )
@@ -732,6 +758,9 @@ LineEdit/colors/font_color_uneditable = Color( 0, 0, 0, 0.501961 )
 LineEdit/styles/focus = SubResource( 155 )
 LineEdit/styles/normal = SubResource( 156 )
 LineEdit/styles/read_only = SubResource( 113 )
+LineEditStraight/base_type = "LineEdit"
+LineEditStraight/styles/normal = SubResource( 181 )
+LineEditStraight/styles/read_only = SubResource( 182 )
 MenuPanel/base_type = "Panel"
 MenuPanel/styles/panel = SubResource( 159 )
 OptionButton/icons/arrow = ExtResource( 3 )
