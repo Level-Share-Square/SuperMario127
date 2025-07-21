@@ -1,0 +1,26 @@
+[gd_scene format=2]
+
+[node name="Tab" type="ScrollContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 6.0
+margin_top = 29.0
+margin_right = -6.0
+margin_bottom = -6.0
+
+[node name="Subgroups" type="VBoxContainer" parent="."]
+margin_right = 3.0
+margin_bottom = 12.0
+
+[node name="Lines" type="VBoxContainer" parent="Subgroups"]
+margin_right = 3.0
+
+[node name="HSeparator" type="HSeparator" parent="Subgroups"]
+margin_top = 4.0
+margin_right = 3.0
+margin_bottom = 8.0
+
+[node name="Buttons" type="GridContainer" parent="Subgroups"]
+margin_top = 12.0
+margin_right = 3.0
+margin_bottom = 12.0

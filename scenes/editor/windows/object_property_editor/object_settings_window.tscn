@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scenes/editor/windows/editor_window.tscn" type="PackedScene" id=1]
-[ext_resource path="res://scenes/editor/windows/object_settings_window.gd" type="Script" id=2]
+[ext_resource path="res://scenes/editor/windows/object_property_editor/object_settings_window.gd" type="Script" id=2]
 [ext_resource path="res://scenes/editor/editor_theme.tres" type="Theme" id=3]
 [ext_resource path="res://scenes/menu/button_scripts/button_sound.gd" type="Script" id=4]
 [ext_resource path="res://assets/fonts/DelfinoFont10.tres" type="DynamicFont" id=5]
+[ext_resource path="res://scenes/editor/windows/object_property_editor/property_groups.gd" type="Script" id=6]
 
 [sub_resource type="Shader" id=1]
 code = "//from https://godotshaders.com/shader/2d-outline-inline/
@@ -91,6 +92,7 @@ shader_param/add_margins = true
 shader_param/texture_offset = Vector2( 0, 2 )
 
 [node name="ObjectSettingsWindow" instance=ExtResource( 1 )]
+visible = false
 script = ExtResource( 2 )
 title = "{Object} Settings"
 icon_tooltip = "No object tooltip has been set..."
@@ -187,6 +189,7 @@ margin_right = 115.0
 margin_bottom = 175.0
 
 [node name="PropertyGroups" type="TabContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox" index="2"]
+unique_name_in_owner = true
 margin_left = 119.0
 margin_right = 410.0
 margin_bottom = 175.0
@@ -198,3 +201,4 @@ custom_constants/hseparation = 8
 tab_align = 0
 all_tabs_in_front = true
 use_hidden_tabs_for_min_size = true
+script = ExtResource( 6 )
