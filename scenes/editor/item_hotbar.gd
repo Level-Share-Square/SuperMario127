@@ -78,7 +78,7 @@ func new_favorite_selected(placeable_item: Resource, index: int):
 	items_favorited[selected_loadout] += 1
 	refresh_loadout()
 
-func _on_ItemPickerWindow_item_selected(item: PlaceableItem):
+func on_item_selected(item: PlaceableItem):
 	var start_index: int = items_favorited[selected_loadout]
 	var boxes: Array = bottom_row.get_children()
 	var selected_box: Button = boxes[start_index]
