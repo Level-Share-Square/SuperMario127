@@ -1,15 +1,12 @@
-extends VBoxContainer
+extends GridContainer
 
 
 export var placeable_items: Resource
 export var item_button_scene: PackedScene
-export var initial_group: String = ""
-
-
-onready var tile_items_box: GridContainer = get_node("%TileItems")
-onready var object_items_box: GridContainer = get_node("%ObjectItems")
+export var initial_group: String = "special"
 
 onready var search_bar = get_node("%SearchBar")
+onready var item_picker_panel = $"%ItemPickerPanel"
 
 
 func _ready():
@@ -18,26 +15,21 @@ func _ready():
 
 
 func load_items(items: Array, priority_sort: bool):
-	for i in tile_items_box.get_children():
-		i.queue_free()
-	for i in object_items_box.get_children():
-		i.queue_free()
 	if items.size() <= 0:
 		return
 		
 	if priority_sort:
 		items.sort_custom(self, "_sort_by_priority")
 	
+	for children in get_children():
+		children.queue_free()
+		
 	for item in items:
 		var item_button = item_button_scene.instance()
 		item_button.placeable_item = item
-		
-		if item is PlaceableTile:
-			tile_items_box.add_child(item_button)
-		elif item is PlaceableObject:
-			object_items_box.add_child(item_button)
+		add_child(item_button)
 			
-		item_button.connect("item_selected", owner, "item_selected")
+		item_button.connect("item_selected", item_picker_panel, "item_selected")
 
 
 func get_items_by_group(group: String) -> Array:
@@ -53,6 +45,7 @@ func get_items_by_group(group: String) -> Array:
 	
 	filtered_items.sort_custom(self, "_sort_by_priority")
 	
+	print(filtered_items)
 	return filtered_items
 
 
@@ -90,23 +83,6 @@ func sort_by_fuzzy_search(search: String):
 		score_array.append({i: score_dictionary[i]})
 			
 	score_array.sort_custom(self, "_sort_by_ascending")
-			
-	#o7 bubble sort
-#	while true:
-#		var fail = false
-#		for pair in score_array:
-#			var current_index = score_array.find(pair)
-#			var current_score = pair[pair.keys()[0]]
-#			if score_array.find(pair) + 1 == score_array.size():
-#				break
-#			var next_score = score_array[score_array.find(pair) + 1][score_array[score_array.find(pair) + 1].keys()[0]]
-#			if next_score > current_score:
-#				var temp_pair = pair
-#				score_array.remove(current_index)
-#				score_array.insert(current_index + 1, pair)
-#				fail = true
-#		if fail == false:
-#			break
 	
 	score_array = score_array.slice(0, 19)
 	var return_array: Array
@@ -114,7 +90,7 @@ func sort_by_fuzzy_search(search: String):
 		var key = pair.keys()[0]
 		return_array.append(placeable_items.placeable_items[key])
 	load_items(return_array, false)
-	owner.groups.reset()
+	item_picker_panel.reset()
 	return return_array
 
 
@@ -137,22 +113,6 @@ func find_words(item):
 		if letter_counter == item.length():
 			word_array.append(word)
 	return word_array
-
-
-func quicksort(array):
-	var length = len(array)
-	if length <= 1:
-		return array
-	
-	var pivot = array[randi() % len(array)]
-	var high = []
-	var low = []
-	for i in array:
-		if pivot[pivot.keys()[0]] > i[i.keys()[0]]:
-			high.append(i)
-		else:
-			low.append(i)
-	return quicksort(low) + [pivot] + quicksort(high)
 
 
 func _sort_by_priority(a, b):
