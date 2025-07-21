@@ -10,7 +10,6 @@ onready var item_label = $"%ItemLabel"
 
 
 func _ready():
-	search_bar.connect("text_changed", self, "_on_search")
 	load_items(get_items_by_group(initial_group), true)
 
 
@@ -57,7 +56,7 @@ func get_items_by_group(group: String) -> Array:
 	return filtered_items
 
 
-func _on_search(new_text):
+func _on_search(new_text: String = search_bar.text):
 	sort_by_fuzzy_search(new_text)
 
 

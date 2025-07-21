@@ -1582,6 +1582,7 @@ bus = "Sounds"
 [connection signal="pressed" from="UI/EditorUIOld/MarginContainer/VBoxContainer/Utilities/Undo" to="ActionManager" method="undo"]
 [connection signal="pressed" from="UI/EditorUIOld/MarginContainer/VBoxContainer/Utilities/Redo" to="ActionManager" method="redo"]
 [connection signal="pressed" from="UI/EditorUIOld/MarginContainer/VBoxContainer/Utilities/Settings" to="UI/EditorOptionsWindow" method="popup" binds= [ Rect2( 344, 66, 420, 220 ) ]]
+[connection signal="pressed" from="UI/HBoxContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/Search" to="UI/HBoxContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/ScrollContainer/CenterContainer/ItemsGrid" method="_on_search"]
 [connection signal="pressed" from="UI/HBoxContainer/EditorUI/Top/Options/PanelContainer/Settings" to="UI/EditorOptionsWindow" method="popup" binds= [ Rect2( 344, 66, 420, 220 ) ]]
 [connection signal="pressed" from="UI/HBoxContainer/EditorUI/Top/Tools/PanelContainer/HBoxContainer/Undo" to="ActionManager" method="undo"]
 [connection signal="pressed" from="UI/HBoxContainer/EditorUI/Top/Tools/PanelContainer/HBoxContainer/Redo" to="ActionManager" method="redo"]

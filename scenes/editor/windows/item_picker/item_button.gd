@@ -4,8 +4,6 @@ extends ButtonSound
 var placeable_item: Resource = preload("res://scenes/editor/items/placeable_items/placeable_objects/blue_coin.tres")
 
 onready var icon_display: TextureRect = $"%Icon"
-onready var grid: TextureRect = $"%Grid"
-
 signal item_selected(placeable_item)
 
 
@@ -22,11 +20,6 @@ func set_item(value: PlaceableItem):
 		icon_display.texture = placeable_item.icons[placeable_item.palette]
 	
 	hint_tooltip = placeable_item.item_name
-	
-	if placeable_item is PlaceableObject:
-		grid.visible = false
-	else:
-		grid.visible = true
 
 
 func create_cycling_icon(icons: Array) -> AnimatedTexture:
