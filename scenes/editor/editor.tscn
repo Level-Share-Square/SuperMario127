@@ -661,6 +661,7 @@ custom_constants/margin_right = 6
 unique_name_in_owner = true
 margin_right = 118.0
 margin_bottom = 37.0
+rect_min_size = Vector2( 0, 37 )
 text = "121 Garden Half Tile"
 align = 1
 autowrap = true

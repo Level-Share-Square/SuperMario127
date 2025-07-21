@@ -6,6 +6,7 @@ export var initial_group: String = "special"
 
 onready var search_bar = get_node("%SearchBar")
 onready var item_picker_panel = $"%ItemPickerPanel"
+onready var item_label = $"%ItemLabel"
 
 
 func _ready():
@@ -14,9 +15,6 @@ func _ready():
 
 
 func load_items(items: Array, priority_sort: bool):
-	if items.size() <= 0:
-		return
-		
 	if priority_sort:
 		items.sort_custom(self, "_sort_by_priority")
 	
@@ -27,7 +25,18 @@ func load_items(items: Array, priority_sort: bool):
 		var item_button = item_button_scene.instance()
 		item_button.placeable_item = item
 		add_child(item_button)
-			
+		
+		var item_id: String
+		var item_name: String
+		if "object_id" in item:
+			item_id = str(item.object_id)
+		else:
+			item_id = str(item.tileset_id)
+		item_name = item.item_name
+		
+		var name_display: String = "%s %s" % [item_id, item_name]
+		item_button.connect("mouse_entered", item_label, "set_text", [name_display])
+		item_button.connect("mouse_exited", item_label, "set_text", [""])
 		item_button.connect("item_selected", item_picker_panel, "item_selected")
 
 

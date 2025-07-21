@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource( 1 )
-item_name = "Wing Feather"
+item_name = "Super Feather"
 groups = PoolStringArray( "warp" )
 change_to = ""
 items_in_sequence = 0
