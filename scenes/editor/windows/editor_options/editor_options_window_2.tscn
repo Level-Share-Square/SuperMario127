@@ -179,7 +179,6 @@ all_tabs_in_front = true
 use_hidden_tabs_for_min_size = true
 
 [node name="Level" type="MarginContainer" parent="WindowMat/HeaderContentDivider/ContentMat/Tabs" index="0"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 6.0
@@ -306,6 +305,7 @@ margin_right = 361.0
 margin_bottom = 99.0
 
 [node name="Environment" type="ScrollContainer" parent="WindowMat/HeaderContentDivider/ContentMat/Tabs" index="2"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 6.0
@@ -402,7 +402,7 @@ margin_bottom = 115.0
 size_flags_horizontal = 3
 
 [node name="MarginContainer" type="MarginContainer" parent="WindowMat/HeaderContentDivider/ContentMat/Tabs/Environment/HBoxContainer/ScrollContainer" index="0"]
-margin_right = 124.0
+margin_right = 132.0
 margin_bottom = 132.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -411,7 +411,7 @@ custom_constants/margin_left = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="WindowMat/HeaderContentDivider/ContentMat/Tabs/Environment/HBoxContainer/ScrollContainer/MarginContainer" index="0"]
 margin_left = 2.0
-margin_right = 124.0
+margin_right = 132.0
 margin_bottom = 132.0
 size_flags_horizontal = 3
 custom_constants/separation = 6
