@@ -80,7 +80,8 @@ margin_right = 258.0
 margin_bottom = 23.0
 custom_constants/separation = 1
 
-[node name="Icon" type="TextureRect" parent="ContentDivider/Header/HeaderMat/HeaderBox"]
+[node name="WindowIcon" type="TextureRect" parent="ContentDivider/Header/HeaderMat/HeaderBox"]
+unique_name_in_owner = true
 margin_right = 21.0
 margin_bottom = 22.0
 rect_min_size = Vector2( 21, 21 )
@@ -96,7 +97,8 @@ margin_bottom = 22.0
 rect_min_size = Vector2( 2, 0 )
 mouse_filter = 2
 
-[node name="Title" type="RichTextLabel" parent="ContentDivider/Header/HeaderMat/HeaderBox"]
+[node name="WindowTitle" type="RichTextLabel" parent="ContentDivider/Header/HeaderMat/HeaderBox"]
+unique_name_in_owner = true
 margin_left = 25.0
 margin_right = 230.0
 margin_bottom = 22.0

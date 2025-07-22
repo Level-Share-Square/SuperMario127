@@ -13,8 +13,8 @@ export var window_size: Vector2
 
 var drag_position: Vector2
 
-onready var title_node: RichTextLabel = $WindowBack/WindowMat/HeaderContentDivider/HeaderMat/HeaderBox/Title
-onready var icon_node: TextureRect = $WindowBack/WindowMat/HeaderContentDivider/HeaderMat/HeaderBox/Icon
+onready var title_node: RichTextLabel = $"%WindowTitle"
+onready var icon_node: TextureRect = $"%WindowIcon"
 
 
 func set_title(val: String):
@@ -60,9 +60,17 @@ func _ready() -> void:
 
 
 func popup(rect: Rect2) -> void:
+	if visible:
+		return
+	
 	rect_position = rect.position
 	rect_size = rect.size
+	rect_scale = Vector2.ZERO
 	show()
+	
+	var tween = create_tween()
+	tween.set_ease(Tween.EASE_OUT)
+	tween.tween_property(self, "rect_scale", Vector2.ONE, 0.1)
 
 
 func close():
