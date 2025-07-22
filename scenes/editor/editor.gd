@@ -112,7 +112,7 @@ func object_unhovered(object: GameObject):
 
 
 func _process(delta):
-	if Input.is_action_just_pressed("middle"):
+	if Input.is_action_just_pressed("LMB") && tool_manager.current_tool == selection_box.get_parent():
 		selection_box.show()
 		selection_box.get_parent().show()
 	for i in selected_objects:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=67 format=2]
+[gd_scene load_steps=70 format=2]
 
 [ext_resource path="res://scenes/menu/options/options.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/menu/menu_controller/screen_manager.gd" type="Script" id=2]
@@ -9,6 +9,9 @@
 [ext_resource path="res://scenes/editor/editor_camera.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/editor/tools/tool_manager.gd" type="Script" id=8]
 [ext_resource path="res://scenes/editor/assets/palette.svg" type="Texture" id=9]
+[ext_resource path="res://scenes/editor/tool_selector.gd" type="Script" id=10]
+[ext_resource path="res://scenes/editor/obj_erase_tool.gd" type="Script" id=11]
+[ext_resource path="res://scenes/editor/til_erase_tool.gd" type="Script" id=12]
 [ext_resource path="res://scenes/editor/item_hotbar.gd" type="Script" id=17]
 [ext_resource path="res://scenes/oldeditor/sounds/click2.wav" type="AudioStream" id=18]
 [ext_resource path="res://scenes/oldeditor/sounds/hover.wav" type="AudioStream" id=19]
@@ -155,9 +158,7 @@ inverse_tool_name = "ObjectPaint"
 
 [node name="TileErase" type="Control" parent="ZIndex/Tools"]
 mouse_filter = 2
-script = ExtResource( 27 )
-inverse_tool_name = "ObjectErase"
-eraser_only = true
+script = ExtResource( 12 )
 
 [node name="ObjectPaint" type="Control" parent="ZIndex/Tools"]
 mouse_filter = 2
@@ -167,10 +168,9 @@ inverse_tool_name = "TilePaint"
 
 [node name="ObjectErase" type="Control" parent="ZIndex/Tools"]
 mouse_filter = 2
-script = ExtResource( 25 )
+script = ExtResource( 11 )
 tool_type = 1
 inverse_tool_name = "TileErase"
-eraser_only = true
 
 [node name="ObjectSelection" parent="ZIndex/Tools" instance=ExtResource( 34 )]
 unique_name_in_owner = true
@@ -815,18 +815,20 @@ size_flags_horizontal = 3
 
 [node name="Tools" type="PanelContainer" parent="UI/UIContainer/EditorUI/Middle"]
 margin_left = 718.0
-margin_top = 138.0
+margin_top = 120.0
 margin_right = 750.0
-margin_bottom = 278.0
+margin_bottom = 296.0
 mouse_filter = 2
 size_flags_vertical = 4
 theme_type_variation = "FlatPanel"
+script = ExtResource( 10 )
+editor_path = NodePath("../../../../..")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/UIContainer/EditorUI/Middle/Tools"]
 margin_left = 4.0
 margin_top = 4.0
 margin_right = 28.0
-margin_bottom = 136.0
+margin_bottom = 172.0
 mouse_filter = 2
 
 [node name="Object" type="VBoxContainer" parent="UI/UIContainer/EditorUI/Middle/Tools/VBoxContainer"]
@@ -907,28 +909,13 @@ margin_top = 100.0
 margin_right = 24.0
 margin_bottom = 104.0
 
-[node name="TileLock" type="Button" parent="UI/UIContainer/EditorUI/Middle/Tools/VBoxContainer/Object"]
-margin_top = 108.0
+[node name="ItemTools" type="VBoxContainer" parent="UI/UIContainer/EditorUI/Middle/Tools/VBoxContainer"]
+unique_name_in_owner = true
 margin_right = 24.0
-margin_bottom = 132.0
-rect_min_size = Vector2( 24, 24 )
-hint_tooltip = "Tile Lock Tool"
-focus_mode = 0
-size_flags_vertical = 3
-theme_type_variation = "ButtonTransparent"
-toggle_mode = true
-group = SubResource( 167 )
-icon = ExtResource( 51 )
-icon_align = 1
-expand_icon = true
-script = ExtResource( 24 )
-
-[node name="Tile" type="VBoxContainer" parent="UI/UIContainer/EditorUI/Middle/Tools/VBoxContainer"]
-margin_right = 24.0
-margin_bottom = 132.0
+margin_bottom = 168.0
 mouse_filter = 2
 
-[node name="Paint" type="Button" parent="UI/UIContainer/EditorUI/Middle/Tools/VBoxContainer/Tile"]
+[node name="Paint" type="Button" parent="UI/UIContainer/EditorUI/Middle/Tools/VBoxContainer/ItemTools"]
 margin_right = 24.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 24, 24 )
@@ -944,12 +931,12 @@ icon_align = 1
 expand_icon = true
 script = ExtResource( 24 )
 
-[node name="VSeparator" type="HSeparator" parent="UI/UIContainer/EditorUI/Middle/Tools/VBoxContainer/Tile"]
+[node name="VSeparator" type="HSeparator" parent="UI/UIContainer/EditorUI/Middle/Tools/VBoxContainer/ItemTools"]
 margin_top = 28.0
 margin_right = 24.0
 margin_bottom = 32.0
 
-[node name="Erase" type="Button" parent="UI/UIContainer/EditorUI/Middle/Tools/VBoxContainer/Tile"]
+[node name="Erase" type="Button" parent="UI/UIContainer/EditorUI/Middle/Tools/VBoxContainer/ItemTools"]
 margin_top = 36.0
 margin_right = 24.0
 margin_bottom = 60.0
@@ -965,12 +952,12 @@ icon_align = 1
 expand_icon = true
 script = ExtResource( 24 )
 
-[node name="VSeparator2" type="HSeparator" parent="UI/UIContainer/EditorUI/Middle/Tools/VBoxContainer/Tile"]
+[node name="VSeparator2" type="HSeparator" parent="UI/UIContainer/EditorUI/Middle/Tools/VBoxContainer/ItemTools"]
 margin_top = 64.0
 margin_right = 24.0
 margin_bottom = 68.0
 
-[node name="Select" type="Button" parent="UI/UIContainer/EditorUI/Middle/Tools/VBoxContainer/Tile"]
+[node name="Select" type="Button" parent="UI/UIContainer/EditorUI/Middle/Tools/VBoxContainer/ItemTools"]
 margin_top = 72.0
 margin_right = 24.0
 margin_bottom = 96.0
@@ -986,12 +973,13 @@ icon_align = 1
 expand_icon = true
 script = ExtResource( 24 )
 
-[node name="VSeparator3" type="HSeparator" parent="UI/UIContainer/EditorUI/Middle/Tools/VBoxContainer/Tile"]
+[node name="VSeparator3" type="HSeparator" parent="UI/UIContainer/EditorUI/Middle/Tools/VBoxContainer/ItemTools"]
 margin_top = 100.0
 margin_right = 24.0
 margin_bottom = 104.0
 
-[node name="RectangleFill" type="Button" parent="UI/UIContainer/EditorUI/Middle/Tools/VBoxContainer/Tile"]
+[node name="RectangleFill" type="Button" parent="UI/UIContainer/EditorUI/Middle/Tools/VBoxContainer/ItemTools"]
+unique_name_in_owner = true
 margin_top = 108.0
 margin_right = 24.0
 margin_bottom = 132.0
@@ -1003,6 +991,28 @@ theme_type_variation = "ButtonTransparent"
 toggle_mode = true
 group = SubResource( 167 )
 icon = ExtResource( 46 )
+icon_align = 1
+expand_icon = true
+script = ExtResource( 24 )
+
+[node name="VSeparator4" type="HSeparator" parent="UI/UIContainer/EditorUI/Middle/Tools/VBoxContainer/ItemTools"]
+margin_top = 136.0
+margin_right = 24.0
+margin_bottom = 140.0
+
+[node name="TileLock" type="Button" parent="UI/UIContainer/EditorUI/Middle/Tools/VBoxContainer/ItemTools"]
+unique_name_in_owner = true
+margin_top = 144.0
+margin_right = 24.0
+margin_bottom = 168.0
+rect_min_size = Vector2( 24, 24 )
+hint_tooltip = "Tile Lock Tool"
+focus_mode = 0
+size_flags_vertical = 3
+theme_type_variation = "ButtonTransparent"
+toggle_mode = true
+group = SubResource( 167 )
+icon = ExtResource( 51 )
 icon_align = 1
 expand_icon = true
 script = ExtResource( 24 )
@@ -1341,6 +1351,7 @@ volume_db = -7.5
 bus = "Sounds"
 
 [connection signal="item_changed" from="." to="ZIndex/Tools" method="item_changed"]
+[connection signal="tool_changed" from="ZIndex/Tools" to="UI/UIContainer/EditorUI/Middle/Tools" method="_on_Tools_tool_changed"]
 [connection signal="redo" from="ActionManager" to="ZIndex/Tools/ObjectSelection" method="snap_to_selected_size"]
 [connection signal="redo" from="ActionManager" to="ZIndex/Tools/ObjectSelection" method="on_redo"]
 [connection signal="undo" from="ActionManager" to="ZIndex/Tools/ObjectSelection" method="snap_to_selected_size"]
@@ -1350,4 +1361,5 @@ bus = "Sounds"
 [connection signal="pressed" from="UI/UIContainer/EditorUI/Top/Tools/PanelContainer/HBoxContainer/Redo" to="ActionManager" method="redo"]
 [connection signal="pressed" from="UI/UIContainer/EditorUI/Top/Tools/PanelContainer/HBoxContainer/SelectionActions/Copy" to="ZIndex/Tools/ObjectSelection" method="copy"]
 [connection signal="pressed" from="UI/UIContainer/EditorUI/Top/Tools/PanelContainer/HBoxContainer/SelectionActions/Paste" to="ZIndex/Tools/ObjectSelection" method="paste"]
+[connection signal="tool_picked" from="UI/UIContainer/EditorUI/Middle/Tools" to="ZIndex/Tools" method="_on_Tools_tool_picked"]
 [connection signal="pressed" from="UI/UIContainer/EditorUI/Bottom/Hotbar/ItemPickerButton/Button" to="UI/UIContainer/ItemPickerPanel" method="toggle"]

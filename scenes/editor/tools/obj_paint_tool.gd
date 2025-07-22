@@ -1,30 +1,11 @@
 extends EditorTool
 
-
-export var eraser_only: bool = false
-
 var last_mouse_tile: Vector2
 
 
 func _click_left(_event: InputEvent, _world_pos: Vector2) -> void:
-	if eraser_only:
-		return
-	
 	if Input.is_action_just_pressed("place"):
 		place_object(_world_pos)
-
-
-func _click_right(_event: InputEvent, _world_pos: Vector2) -> void:
-	if Input.is_action_just_pressed("erase"):
-		for object in editor.hovered_objects.values():
-			erase_object(object)
-			break
-
-
-func _mouse_movement(_event: InputEvent, _world_pos: Vector2) -> void:
-	if Input.is_action_pressed("erase"):
-		for object in editor.hovered_objects.values():
-			erase_object(object)
 
 
 func place_object(pos: Vector2):
@@ -53,11 +34,3 @@ func create_object_data(position: Vector2, object_id: int, palette: int) -> Obje
 	data.properties.append(LevelShared.Layers.Middle)
 	
 	return data
-
-func erase_object(object: GameObject):
-	editor.object_unhovered(object)
-	
-	var action := EraseObjectAction.new()
-	action.shared = shared
-	action.object = object
-	editor.action_manager.commit_action(action)

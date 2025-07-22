@@ -63,7 +63,7 @@ func show_selection_box():
 
 func _unhandled_input(event):
 	if selection_tools.active_tool == null:
-		if event.is_action_pressed("middle") and editor.hovered_objects.empty():
+		if event.is_action_pressed("LMB") and editor.hovered_objects.empty():
 			pivot_toggle.pressed = false
 			pivot.hide()
 			pivot_position = Vector2.ZERO
@@ -87,7 +87,7 @@ func _unhandled_input(event):
 			selection_shape.disabled = false
 			selection_area.monitorable = true
 		
-		elif event.is_action_released("middle"):
+		elif event.is_action_released("LMB"):
 			if start_pos != null:
 				white_highlight.visible = false
 				expand = false

@@ -4,6 +4,7 @@ extends Control
 
 var mouse_position: Vector2 = get_global_mouse_position()
 
+onready var editor = owner
 onready var current_tool: EditorTool = $TilePaint
 
 signal tool_changed()
@@ -48,3 +49,25 @@ func item_changed(placeable_item: PlaceableItem):
 		EditorTool.Type.ObjectTool:
 			if placeable_item is PlaceableTile:
 				change_tool(current_tool.inverse_tool_name)
+
+
+func _on_Tools_tool_picked(tool_name):
+	match tool_name:
+		"Paint":
+			if "object_id" in editor.selected_item:
+				change_tool("ObjectPaint")
+			else:
+				change_tool("TilePaint")
+		"Erase":
+			if "object_id" in editor.selected_item:
+				change_tool("ObjectErase")
+			else:
+				change_tool("TileErase")
+		"Select":
+			current_tool = $ObjectSelection #Until we get Tile Selection #Also no clue why it isn't recognizing get_node("ObjectSelection")
+		"RectangleFill":
+			pass
+		"TileLock":
+			pass
+	print(current_tool)
+		
