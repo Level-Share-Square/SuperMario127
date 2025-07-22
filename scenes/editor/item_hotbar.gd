@@ -147,8 +147,10 @@ func palette_selected(palette):
 	bottom_row.show()
 	palette_container.hide()
 	palettes.pressed = false
+	print(palette)
 	for item_button in bottom_row.get_children():
 		if item_button.pressed:
 			item_button.palette = palette
+			editor.selected_item.palette = palette
 			item_button.icon_node.texture = editor.selected_item.icons[palette]
 			_on_item_button_pressed(item_button)
