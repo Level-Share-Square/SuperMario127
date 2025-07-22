@@ -2,6 +2,8 @@ class_name EditorWindow
 extends PanelContainer
 
 
+const popup_anim_duration: float = 0.1
+
 export(NodePath) var drag_control_path
 export(NodePath) var close_button_path
 export(NodePath) var resize_control_path
@@ -70,7 +72,7 @@ func popup(rect: Rect2) -> void:
 	
 	var tween = create_tween()
 	tween.set_ease(Tween.EASE_OUT)
-	tween.tween_property(self, "rect_scale", Vector2.ONE, 0.1)
+	tween.tween_property(self, "rect_scale", Vector2.ONE, popup_anim_duration)
 
 
 func close():
