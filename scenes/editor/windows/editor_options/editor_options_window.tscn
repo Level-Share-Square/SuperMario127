@@ -131,7 +131,6 @@ margin_bottom = 220.0
 theme = ExtResource( 2 )
 popup_exclusive = true
 script = ExtResource( 8 )
-window_panel_path = NodePath("WindowBack")
 drag_control_path = NodePath("WindowBack/WindowMat/HeaderContentDivider/HeaderMat")
 close_button_path = NodePath("WindowBack/WindowMat/HeaderContentDivider/HeaderMat/HeaderBox/WindowClose")
 title = "Editor Settings"
