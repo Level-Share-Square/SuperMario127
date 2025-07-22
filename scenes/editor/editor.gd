@@ -33,7 +33,7 @@ signal item_changed(placeable_item)
 
 
 func _ready():
-	selected_item = placeable_items.placeable_items["til_grass"]
+	selected_item = placeable_items.placeable_items["obj_coin"]
 	#this is to dynamically update the framerate
 	_update_editor_framerate()
 	

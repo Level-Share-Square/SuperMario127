@@ -37,6 +37,7 @@ var loadout_palettes: Array = [
 func _ready():
 	bottom_row.show()
 	palette_container.hide()
+	bottom_row.get_children()[0].pressed = true
 	selected_loadout = 0
 	for item_button in button_container.get_children():
 		item_button.connect("button_down", self, "_on_item_button_pressed", [item_button])
@@ -121,13 +122,6 @@ func refresh_loadout():
 		item_button.set_favorite(favs_amount > 0)
 		item_button.change_item(placeable_items.placeable_items[item])
 		favs_amount -= 1
-		
-func generate_next_palette_array(buttons: Array) -> Array:
-	var palette_array: Array = []
-	for item_button in buttons:
-		palette_array.append(item_button.palette)
-	palette_array[selected_loadout].insert(items_favorited[selected_loadout], palette_array[selected_loadout].pop_back())
-	return palette_array
 
 func _on_palettes_pressed():
 	bottom_row.visible = palettes.pressed

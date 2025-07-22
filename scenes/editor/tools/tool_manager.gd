@@ -5,7 +5,7 @@ extends Control
 var mouse_position: Vector2 = get_global_mouse_position()
 
 onready var editor = owner
-onready var current_tool: EditorTool = $TilePaint
+onready var current_tool: EditorTool = $ObjectPaint
 
 signal tool_changed()
 
