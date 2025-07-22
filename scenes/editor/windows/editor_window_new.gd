@@ -75,6 +75,13 @@ func popup(rect: Rect2) -> void:
 	tween.tween_property(self, "rect_scale", Vector2.ONE, popup_anim_duration)
 
 
+func popup_centered(size: Vector2) -> void:
+	size = Vector2(max(size.x, rect_min_size.x), max(size.y, rect_min_size.y))
+	var position: Vector2 = (get_viewport_rect().size / 2.0) - (size / 2.0)
+	
+	popup(Rect2(position, size))
+
+
 func close():
 	hide()
 
