@@ -69,5 +69,4 @@ func _on_Tools_tool_picked(tool_name):
 			pass
 		"TileLock":
 			pass
-	print(current_tool)
 		

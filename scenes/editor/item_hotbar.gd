@@ -6,6 +6,8 @@ onready var editor = owner
 onready var bottom_row = $Middle/VBoxContainer/PanelContainer/HBoxContainer
 onready var button_container = $Middle/VBoxContainer/PanelContainer/HBoxContainer
 onready var loadout_container = $Middle/VBoxContainer/PanelContainer2/HBoxContainer
+onready var palette_container = $"%PaletteContainer"
+onready var palettes = $"%Palettes"
 
 var selected_loadout: int = 0
 
@@ -25,7 +27,16 @@ var loadouts: Array = [
 	["obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus"],
 ]
 
+var loadout_palettes: Array = [
+	[0, 0, 0, 0, 0, 0, 0],
+	[0, 0, 0, 0, 0, 0, 0],
+	[0, 0, 0, 0, 0, 0, 0],
+	[0, 0, 0, 0, 0, 0, 0],
+]
+
 func _ready():
+	bottom_row.show()
+	palette_container.hide()
 	selected_loadout = 0
 	for item_button in button_container.get_children():
 		item_button.connect("button_down", self, "_on_item_button_pressed", [item_button])
@@ -33,12 +44,16 @@ func _ready():
 	for loadout_button in loadout_container.get_children():
 		if "Loadout" in loadout_button.name:
 			loadout_button.connect("button_down", self, "_on_loadout_pressed", [loadout_button])
+		else:
+			loadout_button.connect("button_down", self, "_on_palettes_pressed")
 	editor.selected_item = placeable_items.placeable_items["obj_coin"]
 
 func _on_item_button_pressed(item_button):
 	var item_name: String = loadouts[selected_loadout][item_button.get_index()]
 	var associated_item = placeable_items.placeable_items[loadouts[selected_loadout][item_button.get_index()]]
 	editor.selected_item = associated_item
+	if item_button.palette != 0:
+		editor.selected_item.palette = item_button.palette
 	match item_name.substr(0, 3):
 		"obj":
 			editor.tool_manager.change_tool("ObjectPaint")
@@ -49,9 +64,15 @@ func check_items():
 	for item_button in button_container.get_children():
 		if item_button.item == editor.selected_item:
 			item_button.pressed = true
-			return
+		item_button.palette = loadout_palettes[selected_loadout][item_button.get_index()]
+		item_button.icon_node.texture = item_button.item.icons[item_button.palette]
+	return
 
 func _on_loadout_pressed(loadout_button):
+	var loadout_palette: Array = []
+	for buttons in bottom_row.get_children():
+		loadout_palette.append(buttons.palette)
+	loadout_palettes[selected_loadout] = loadout_palette
 	match loadout_button.name:
 		"LoadoutA":
 			selected_loadout = 0
@@ -65,9 +86,11 @@ func _on_loadout_pressed(loadout_button):
 	check_items()
 
 func new_favorite_selected(placeable_item: Resource, index: int):
+	var boxes: Array = bottom_row.get_children()
 	var item_name =  placeable_items.placeable_items.find_key(placeable_item)
 	if index < fav_items[selected_loadout].size():
-		loadouts[selected_loadout].insert(index, loadouts[selected_loadout].pop_at(fav_items[selected_loadout].find(item_name)))
+		loadouts[selected_loadout].insert(items_favorited[selected_loadout] - 1, loadouts[selected_loadout].pop_at(fav_items[selected_loadout].find(item_name)))
+		bottom_row.move_child(boxes[index], items_favorited[selected_loadout] - 1)
 		fav_items[selected_loadout].erase(item_name)
 		items_favorited[selected_loadout] -= 1
 		refresh_loadout()
@@ -75,6 +98,7 @@ func new_favorite_selected(placeable_item: Resource, index: int):
 	fav_items[selected_loadout].append(item_name)
 	loadouts[selected_loadout].remove(index)
 	loadouts[selected_loadout].insert(items_favorited[selected_loadout], item_name)
+	bottom_row.move_child(boxes[index], items_favorited[selected_loadout])
 	items_favorited[selected_loadout] += 1
 	refresh_loadout()
 
@@ -84,6 +108,7 @@ func on_item_selected(item: PlaceableItem):
 	var selected_box: Button = boxes[start_index]
 	selected_box.change_item(item)
 	selected_box.visible = true
+	boxes[6].palette = 0
 	bottom_row.move_child(boxes[6], start_index)
 	loadouts[selected_loadout].insert(start_index, loadouts[selected_loadout].pop_back())
 	loadouts[selected_loadout][start_index] = placeable_items.placeable_items.find_key(item)
@@ -96,3 +121,34 @@ func refresh_loadout():
 		item_button.set_favorite(favs_amount > 0)
 		item_button.change_item(placeable_items.placeable_items[item])
 		favs_amount -= 1
+		
+func generate_next_palette_array(buttons: Array) -> Array:
+	var palette_array: Array = []
+	for item_button in buttons:
+		palette_array.append(item_button.palette)
+	palette_array[selected_loadout].insert(items_favorited[selected_loadout], palette_array[selected_loadout].pop_back())
+	return palette_array
+
+func _on_palettes_pressed():
+	bottom_row.visible = palettes.pressed
+	palette_container.visible = !palettes.pressed
+	var palette_count: int = editor.selected_item.icons.size() - 1
+	var item_palettes: Array = editor.selected_item.icons
+
+	for palette_button in palette_container.get_children():
+		palette_button.item = editor.selected_item
+		if palette_button.get_index() < item_palettes.size():
+			palette_button.show()
+			palette_button.icon_node.texture = item_palettes[palette_button.get_index()]
+		else:
+			palette_button.hide()
+			
+func palette_selected(palette):
+	bottom_row.show()
+	palette_container.hide()
+	palettes.pressed = false
+	for item_button in bottom_row.get_children():
+		if item_button.pressed:
+			item_button.palette = palette
+			item_button.icon_node.texture = editor.selected_item.icons[palette]
+			_on_item_button_pressed(item_button)

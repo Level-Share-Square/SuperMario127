@@ -1,4 +1,4 @@
-[gd_scene load_steps=70 format=2]
+[gd_scene load_steps=72 format=2]
 
 [ext_resource path="res://scenes/menu/options/options.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/menu/menu_controller/screen_manager.gd" type="Script" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://scenes/editor/tool_selector.gd" type="Script" id=10]
 [ext_resource path="res://scenes/editor/obj_erase_tool.gd" type="Script" id=11]
 [ext_resource path="res://scenes/editor/til_erase_tool.gd" type="Script" id=12]
+[ext_resource path="res://scenes/editor/buttons/palette_button.tscn" type="PackedScene" id=13]
 [ext_resource path="res://scenes/editor/item_hotbar.gd" type="Script" id=17]
 [ext_resource path="res://scenes/oldeditor/sounds/click2.wav" type="AudioStream" id=18]
 [ext_resource path="res://scenes/oldeditor/sounds/hover.wav" type="AudioStream" id=19]
@@ -123,6 +124,8 @@ content_margin_bottom = 4.0
 bg_color = Color( 0, 0, 0, 0.815686 )
 
 [sub_resource type="ButtonGroup" id=172]
+
+[sub_resource type="ButtonGroup" id=181]
 
 [node name="Editor" type="Node2D"]
 script = ExtResource( 3 )
@@ -454,6 +457,7 @@ margin_bottom = 432.0
 rect_clip_content = true
 mouse_filter = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
 theme = ExtResource( 4 )
 custom_constants/margin_right = 8
 custom_constants/margin_top = 8
@@ -815,9 +819,9 @@ size_flags_horizontal = 3
 
 [node name="Tools" type="PanelContainer" parent="UI/UIContainer/EditorUI/Middle"]
 margin_left = 718.0
-margin_top = 120.0
+margin_top = 156.0
 margin_right = 750.0
-margin_bottom = 296.0
+margin_bottom = 260.0
 mouse_filter = 2
 size_flags_vertical = 4
 theme_type_variation = "FlatPanel"
@@ -828,7 +832,7 @@ editor_path = NodePath("../../../../..")
 margin_left = 4.0
 margin_top = 4.0
 margin_right = 28.0
-margin_bottom = 172.0
+margin_bottom = 100.0
 mouse_filter = 2
 
 [node name="Object" type="VBoxContainer" parent="UI/UIContainer/EditorUI/Middle/Tools/VBoxContainer"]
@@ -912,7 +916,7 @@ margin_bottom = 104.0
 [node name="ItemTools" type="VBoxContainer" parent="UI/UIContainer/EditorUI/Middle/Tools/VBoxContainer"]
 unique_name_in_owner = true
 margin_right = 24.0
-margin_bottom = 168.0
+margin_bottom = 96.0
 mouse_filter = 2
 
 [node name="Paint" type="Button" parent="UI/UIContainer/EditorUI/Middle/Tools/VBoxContainer/ItemTools"]
@@ -974,12 +978,14 @@ expand_icon = true
 script = ExtResource( 24 )
 
 [node name="VSeparator3" type="HSeparator" parent="UI/UIContainer/EditorUI/Middle/Tools/VBoxContainer/ItemTools"]
+visible = false
 margin_top = 100.0
 margin_right = 24.0
 margin_bottom = 104.0
 
 [node name="RectangleFill" type="Button" parent="UI/UIContainer/EditorUI/Middle/Tools/VBoxContainer/ItemTools"]
 unique_name_in_owner = true
+visible = false
 margin_top = 108.0
 margin_right = 24.0
 margin_bottom = 132.0
@@ -996,12 +1002,14 @@ expand_icon = true
 script = ExtResource( 24 )
 
 [node name="VSeparator4" type="HSeparator" parent="UI/UIContainer/EditorUI/Middle/Tools/VBoxContainer/ItemTools"]
-margin_top = 136.0
+visible = false
+margin_top = 108.0
 margin_right = 24.0
-margin_bottom = 140.0
+margin_bottom = 112.0
 
 [node name="TileLock" type="Button" parent="UI/UIContainer/EditorUI/Middle/Tools/VBoxContainer/ItemTools"]
 unique_name_in_owner = true
+visible = false
 margin_top = 144.0
 margin_right = 24.0
 margin_bottom = 168.0
@@ -1023,6 +1031,7 @@ margin_top = 8.0
 margin_right = 758.0
 margin_bottom = 424.0
 mouse_filter = 2
+size_flags_vertical = 3
 
 [node name="Hotbar" type="HBoxContainer" parent="UI/UIContainer/EditorUI/Bottom"]
 unique_name_in_owner = true
@@ -1062,13 +1071,13 @@ rect_min_size = Vector2( 200, 0 )
 rect_clip_content = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/UIContainer/EditorUI/Bottom/Hotbar/Middle"]
-margin_right = 200.0
+margin_right = 256.0
 margin_bottom = 52.0
 mouse_filter = 2
 custom_constants/separation = 0
 
 [node name="PanelContainer2" type="PanelContainer" parent="UI/UIContainer/EditorUI/Bottom/Hotbar/Middle/VBoxContainer"]
-margin_right = 200.0
+margin_right = 256.0
 margin_bottom = 20.0
 mouse_filter = 2
 size_flags_vertical = 3
@@ -1077,11 +1086,10 @@ custom_styles/panel = SubResource( 169 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/UIContainer/EditorUI/Bottom/Hotbar/Middle/VBoxContainer/PanelContainer2"]
 margin_top = 1.0
-margin_right = 200.0
+margin_right = 256.0
 margin_bottom = 19.0
 rect_min_size = Vector2( 0, 4 )
 mouse_filter = 2
-size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 0
 
@@ -1090,8 +1098,9 @@ margin_right = 4.0
 margin_bottom = 18.0
 
 [node name="Palettes" type="Button" parent="UI/UIContainer/EditorUI/Bottom/Hotbar/Middle/VBoxContainer/PanelContainer2/HBoxContainer"]
+unique_name_in_owner = true
 margin_left = 4.0
-margin_right = 39.0
+margin_right = 50.0
 margin_bottom = 18.0
 hint_tooltip = "Palettes"
 focus_mode = 0
@@ -1099,19 +1108,20 @@ size_flags_horizontal = 3
 theme_type_variation = "ButtonTransparent"
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_fonts/font = SubResource( 170 )
+toggle_mode = true
 icon = ExtResource( 9 )
 icon_align = 1
 expand_icon = true
 script = ExtResource( 24 )
 
 [node name="VSeparator" type="VSeparator" parent="UI/UIContainer/EditorUI/Bottom/Hotbar/Middle/VBoxContainer/PanelContainer2/HBoxContainer"]
-margin_left = 39.0
-margin_right = 43.0
+margin_left = 50.0
+margin_right = 54.0
 margin_bottom = 18.0
 
 [node name="LoadoutA" type="Button" parent="UI/UIContainer/EditorUI/Bottom/Hotbar/Middle/VBoxContainer/PanelContainer2/HBoxContainer"]
-margin_left = 43.0
-margin_right = 78.0
+margin_left = 54.0
+margin_right = 100.0
 margin_bottom = 18.0
 hint_tooltip = "Loadout A"
 focus_mode = 0
@@ -1127,13 +1137,13 @@ text = "A"
 script = ExtResource( 24 )
 
 [node name="VSeparator2" type="VSeparator" parent="UI/UIContainer/EditorUI/Bottom/Hotbar/Middle/VBoxContainer/PanelContainer2/HBoxContainer"]
-margin_left = 78.0
-margin_right = 82.0
+margin_left = 100.0
+margin_right = 104.0
 margin_bottom = 18.0
 
 [node name="LoadoutB" type="Button" parent="UI/UIContainer/EditorUI/Bottom/Hotbar/Middle/VBoxContainer/PanelContainer2/HBoxContainer"]
-margin_left = 82.0
-margin_right = 117.0
+margin_left = 104.0
+margin_right = 151.0
 margin_bottom = 18.0
 hint_tooltip = "Loadout B"
 focus_mode = 0
@@ -1148,13 +1158,13 @@ text = "B"
 script = ExtResource( 24 )
 
 [node name="VSeparator3" type="VSeparator" parent="UI/UIContainer/EditorUI/Bottom/Hotbar/Middle/VBoxContainer/PanelContainer2/HBoxContainer"]
-margin_left = 117.0
-margin_right = 121.0
+margin_left = 151.0
+margin_right = 155.0
 margin_bottom = 18.0
 
 [node name="LoadoutC" type="Button" parent="UI/UIContainer/EditorUI/Bottom/Hotbar/Middle/VBoxContainer/PanelContainer2/HBoxContainer"]
-margin_left = 121.0
-margin_right = 156.0
+margin_left = 155.0
+margin_right = 201.0
 margin_bottom = 18.0
 hint_tooltip = "Loadout C"
 focus_mode = 0
@@ -1169,13 +1179,13 @@ text = "C"
 script = ExtResource( 24 )
 
 [node name="VSeparator4" type="VSeparator" parent="UI/UIContainer/EditorUI/Bottom/Hotbar/Middle/VBoxContainer/PanelContainer2/HBoxContainer"]
-margin_left = 156.0
-margin_right = 160.0
+margin_left = 201.0
+margin_right = 205.0
 margin_bottom = 18.0
 
 [node name="LoadoutD" type="Button" parent="UI/UIContainer/EditorUI/Bottom/Hotbar/Middle/VBoxContainer/PanelContainer2/HBoxContainer"]
-margin_left = 160.0
-margin_right = 196.0
+margin_left = 205.0
+margin_right = 252.0
 margin_bottom = 18.0
 hint_tooltip = "Loadout D"
 focus_mode = 0
@@ -1190,19 +1200,20 @@ text = "D"
 script = ExtResource( 24 )
 
 [node name="VSeparator5" type="VSeparator" parent="UI/UIContainer/EditorUI/Bottom/Hotbar/Middle/VBoxContainer/PanelContainer2/HBoxContainer"]
-margin_left = 196.0
-margin_right = 200.0
+margin_left = 252.0
+margin_right = 256.0
 margin_bottom = 18.0
 
 [node name="PanelContainer" type="PanelContainer" parent="UI/UIContainer/EditorUI/Bottom/Hotbar/Middle/VBoxContainer"]
 margin_top = 20.0
-margin_right = 200.0
+margin_right = 256.0
 margin_bottom = 52.0
 mouse_filter = 2
 size_flags_vertical = 8
 custom_styles/panel = SubResource( 179 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/UIContainer/EditorUI/Bottom/Hotbar/Middle/VBoxContainer/PanelContainer"]
+visible = false
 margin_left = 4.0
 margin_top = 4.0
 margin_right = 196.0
@@ -1249,6 +1260,66 @@ margin_left = 168.0
 margin_right = 192.0
 pressed = false
 group = SubResource( 172 )
+
+[node name="PaletteContainer" type="HBoxContainer" parent="UI/UIContainer/EditorUI/Bottom/Hotbar/Middle/VBoxContainer/PanelContainer"]
+unique_name_in_owner = true
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 252.0
+margin_bottom = 28.0
+mouse_filter = 2
+size_flags_vertical = 3
+
+[node name="Button1" parent="UI/UIContainer/EditorUI/Bottom/Hotbar/Middle/VBoxContainer/PanelContainer/PaletteContainer" instance=ExtResource( 13 )]
+group = SubResource( 181 )
+
+[node name="Button2" parent="UI/UIContainer/EditorUI/Bottom/Hotbar/Middle/VBoxContainer/PanelContainer/PaletteContainer" instance=ExtResource( 13 )]
+margin_left = 28.0
+margin_right = 52.0
+focus_mode = 2
+group = SubResource( 181 )
+
+[node name="Button3" parent="UI/UIContainer/EditorUI/Bottom/Hotbar/Middle/VBoxContainer/PanelContainer/PaletteContainer" instance=ExtResource( 13 )]
+margin_left = 56.0
+margin_right = 80.0
+focus_mode = 2
+group = SubResource( 181 )
+
+[node name="Button4" parent="UI/UIContainer/EditorUI/Bottom/Hotbar/Middle/VBoxContainer/PanelContainer/PaletteContainer" instance=ExtResource( 13 )]
+margin_left = 84.0
+margin_right = 108.0
+focus_mode = 2
+group = SubResource( 181 )
+
+[node name="Button5" parent="UI/UIContainer/EditorUI/Bottom/Hotbar/Middle/VBoxContainer/PanelContainer/PaletteContainer" instance=ExtResource( 13 )]
+margin_left = 112.0
+margin_right = 136.0
+focus_mode = 2
+group = SubResource( 181 )
+
+[node name="Button6" parent="UI/UIContainer/EditorUI/Bottom/Hotbar/Middle/VBoxContainer/PanelContainer/PaletteContainer" instance=ExtResource( 13 )]
+margin_left = 140.0
+margin_right = 164.0
+focus_mode = 2
+group = SubResource( 181 )
+
+[node name="Button7" parent="UI/UIContainer/EditorUI/Bottom/Hotbar/Middle/VBoxContainer/PanelContainer/PaletteContainer" instance=ExtResource( 13 )]
+margin_left = 168.0
+margin_right = 192.0
+focus_mode = 2
+group = SubResource( 181 )
+
+[node name="Button8" parent="UI/UIContainer/EditorUI/Bottom/Hotbar/Middle/VBoxContainer/PanelContainer/PaletteContainer" instance=ExtResource( 13 )]
+margin_left = 196.0
+margin_right = 220.0
+focus_mode = 2
+group = SubResource( 181 )
+
+[node name="Button9" parent="UI/UIContainer/EditorUI/Bottom/Hotbar/Middle/VBoxContainer/PanelContainer/PaletteContainer" instance=ExtResource( 13 )]
+margin_left = 224.0
+margin_right = 248.0
+focus_mode = 2
+group = SubResource( 181 )
 
 [node name="MouseBlocker" type="Control" parent="UI/UIContainer/EditorUI/Bottom/Hotbar/Middle"]
 visible = false

@@ -1,0 +1,118 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scenes/oldeditor/assets/grid.png" type="Texture" id=1]
+[ext_resource path="res://scenes/actors/objects/on_off_switch/icon.png" type="Texture" id=2]
+[ext_resource path="res://scenes/editor/buttons/palette_button.gd" type="Script" id=3]
+
+[sub_resource type="ButtonGroup" id=172]
+
+[node name="Button" type="Button"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+rect_pivot_offset = Vector2( -72, -22 )
+focus_mode = 0
+theme_type_variation = "ButtonHotbar"
+toggle_mode = true
+group = SubResource( 172 )
+icon_align = 1
+expand_icon = true
+script = ExtResource( 3 )
+
+[node name="Clip" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_clip_content = true
+mouse_filter = 2
+
+[node name="IconOffset" type="Control" parent="Clip"]
+unique_name_in_owner = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="Icon" type="TextureRect" parent="Clip/IconOffset"]
+unique_name_in_owner = true
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -11.0
+margin_top = -11.0
+margin_right = 11.0
+margin_bottom = 11.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 22, 22 )
+rect_pivot_offset = Vector2( 10, 10 )
+mouse_filter = 2
+texture = ExtResource( 2 )
+expand = true
+
+[node name="MarginContainer" type="MarginContainer" parent="Clip"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+custom_constants/margin_right = 1
+custom_constants/margin_top = 1
+custom_constants/margin_left = 1
+custom_constants/margin_bottom = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Clip/MarginContainer"]
+margin_left = 1.0
+margin_top = 21.0
+margin_right = 23.0
+margin_bottom = 23.0
+mouse_filter = 2
+size_flags_vertical = 8
+custom_constants/separation = 1
+
+[node name="ColorRect" type="ColorRect" parent="Clip/MarginContainer/HBoxContainer"]
+margin_right = 2.0
+margin_bottom = 2.0
+rect_min_size = Vector2( 2, 2 )
+mouse_filter = 2
+color = Color( 0.75, 0.75, 0.75, 1 )
+
+[node name="ColorRect2" type="ColorRect" parent="Clip/MarginContainer/HBoxContainer"]
+margin_left = 3.0
+margin_right = 5.0
+margin_bottom = 2.0
+rect_min_size = Vector2( 2, 2 )
+mouse_filter = 2
+color = Color( 0.75, 0.75, 0.75, 1 )
+
+[node name="ColorRect3" type="ColorRect" parent="Clip/MarginContainer/HBoxContainer"]
+margin_left = 6.0
+margin_right = 8.0
+margin_bottom = 2.0
+rect_min_size = Vector2( 2, 2 )
+mouse_filter = 2
+color = Color( 0.75, 0.75, 0.75, 1 )
+
+[node name="Grid" type="TextureRect" parent="Clip"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -48.0
+margin_top = -48.0
+margin_right = 48.0
+margin_bottom = 48.0
+rect_scale = Vector2( 0.75, 0.75 )
+rect_pivot_offset = Vector2( 48, 48 )
+mouse_filter = 2
+texture = ExtResource( 1 )
+stretch_mode = 2
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="TweenHover" type="Tween" parent="."]
+
+[node name="TweenProgress" type="Tween" parent="."]
+
+[connection signal="button_down" from="." to="." method="button_down"]
+[connection signal="button_up" from="." to="." method="button_up"]
+[connection signal="mouse_entered" from="." to="." method="mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="mouse_exited"]

@@ -16,21 +16,6 @@ onready var hotbar = $"%Hotbar"
 var item: PlaceableItem
 var favorite = false
 var palette = 0
-var changed = false
-
-func set_favorite(is_favorite: bool):
-	favorite = is_favorite
-	self_modulate = Color.white if not favorite else FAVORITE_COLOR
-
-func change_item(new_item: PlaceableItem):
-	tween_progress.disconnect("tween_all_completed", hotbar, "new_favorite_selected")
-	item = new_item
-	if is_instance_valid(item):
-		if palette < item.icons.size():
-			icon_node.texture = item.icons[palette]
-		else:
-			icon_node.texture = item.icons[0]
-		tween_progress.connect("tween_all_completed", hotbar, "new_favorite_selected", [item, get_index()])
 
 func button_down():
 	tween.stop_all()
@@ -46,6 +31,7 @@ func button_down():
 		self_modulate, target_color, WAIT_TIMER,
 		Tween.TRANS_CIRC, Tween.EASE_IN_OUT)
 	tween_progress.start()
+	hotbar.palette_selected(get_index())
 
 func button_up():
 	tween.stop_all()
@@ -54,9 +40,6 @@ func button_up():
 		Tween.TRANS_BOUNCE, Tween.EASE_IN)
 	tween.start()
 	
-	tween_progress.stop_all()
-	set_favorite(favorite)
-
 func mouse_entered():
 	tween_hover.stop_all()
 	tween_hover.interpolate_property(icon_offset, "rect_position:y",
