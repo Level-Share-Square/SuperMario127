@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=76 format=2]
+[gd_resource type="Theme" load_steps=77 format=2]
 
 [ext_resource path="res://assets/fonts/delfino_small.tres" type="DynamicFont" id=1]
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://assets/misc/checkbox.png" type="Texture" id=5]
 [ext_resource path="res://scenes/editor/assets/CheckUnchecked.svg" type="Texture" id=6]
 [ext_resource path="res://scenes/editor/assets/CheckChecked.svg" type="Texture" id=7]
+[ext_resource path="res://scenes/editor/assets/text_clear.svg" type="Texture" id=8]
 
 [sub_resource type="StyleBoxFlat" id=113]
 content_margin_left = 4.0
@@ -749,10 +750,12 @@ ImageBorder/styles/panel = SubResource( 157 )
 LineEdit/colors/cursor_color = Color( 0, 0, 0, 1 )
 LineEdit/colors/font_color = Color( 0, 0, 0, 1 )
 LineEdit/colors/font_color_uneditable = Color( 0, 0, 0, 0.501961 )
+LineEdit/icons/clear = ExtResource( 8 )
 LineEdit/styles/focus = SubResource( 155 )
 LineEdit/styles/normal = SubResource( 156 )
 LineEdit/styles/read_only = SubResource( 113 )
 LineEditStraight/base_type = "LineEdit"
+LineEditStraight/icons/clear = ExtResource( 8 )
 LineEditStraight/styles/normal = SubResource( 181 )
 LineEditStraight/styles/read_only = SubResource( 182 )
 MenuPanel/base_type = "Panel"
