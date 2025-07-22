@@ -54,12 +54,12 @@ func item_changed(placeable_item: PlaceableItem):
 func _on_Tools_tool_picked(tool_name):
 	match tool_name:
 		"Paint":
-			if "object_id" in editor.selected_item:
+			if editor.selected_item is PlaceableObject:
 				change_tool("ObjectPaint")
 			else:
 				change_tool("TilePaint")
 		"Erase":
-			if "object_id" in editor.selected_item:
+			if editor.selected_item is PlaceableObject:
 				change_tool("ObjectErase")
 			else:
 				change_tool("TileErase")

@@ -7,6 +7,7 @@ enum Type {TileTool, ObjectTool}
 
 export(Type) var tool_type: int
 export var inverse_tool_name: String
+export var right_click_tool_name: String
 
 var left_held: bool
 var right_held: bool

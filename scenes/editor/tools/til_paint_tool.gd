@@ -1,5 +1,6 @@
 extends EditorTool
 
+
 var last_mouse_tile: Vector2
 var mouse_input: int = -1
 
@@ -12,7 +13,6 @@ func _click_left(_event: InputEvent, _world_pos: Vector2) -> void:
 		last_mouse_tile = get_mouse_tile_pos()
 		draw_tile(last_mouse_tile)
 		mouse_input = 0
-
 
 
 func _click_left_released(_event: InputEvent, _world_pos: Vector2) -> void:

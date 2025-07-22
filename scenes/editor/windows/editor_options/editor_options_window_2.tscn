@@ -25,48 +25,53 @@ use_filter = true
 font_data = ExtResource( 12 )
 
 [node name="EditorOptionsWindow" instance=ExtResource( 3 )]
-margin_right = 432.0
-margin_bottom = 224.0
+margin_right = 400.0
+margin_bottom = 220.0
 script = ExtResource( 9 )
 title = "Level Settings"
 icon = ExtResource( 1 )
-window_size = Vector2( 420, 220 )
+window_size = Vector2( 400, 220 )
 
 [node name="Background" parent="." index="0"]
-margin_right = 432.0
-margin_bottom = 224.0
+margin_right = 400.0
+margin_bottom = 220.0
 
 [node name="ContentDivider" parent="." index="1"]
-margin_right = 432.0
-margin_bottom = 224.0
+margin_right = 400.0
+margin_bottom = 220.0
 
 [node name="Header" parent="ContentDivider" index="0"]
-margin_right = 432.0
+margin_right = 400.0
 
 [node name="HeaderMat" parent="ContentDivider/Header" index="0"]
-margin_right = 428.0
+margin_right = 396.0
 
 [node name="HeaderBox" parent="ContentDivider/Header/HeaderMat" index="0"]
-margin_right = 418.0
+margin_right = 386.0
 
 [node name="WindowTitle" parent="ContentDivider/Header/HeaderMat/HeaderBox" index="2"]
-margin_right = 390.0
+margin_right = 357.0
 
 [node name="WindowClose" parent="ContentDivider/Header/HeaderMat/HeaderBox" index="3"]
-margin_left = 391.0
-margin_right = 412.0
+margin_left = 358.0
+margin_right = 380.0
 
 [node name="HSeparator" parent="ContentDivider" index="1"]
-margin_right = 432.0
+margin_right = 400.0
 
 [node name="ContentMat" parent="ContentDivider" index="2"]
-margin_right = 432.0
-margin_bottom = 224.0
+margin_right = 400.0
+margin_bottom = 220.0
+custom_constants/margin_right = 6
+custom_constants/margin_top = 6
+custom_constants/margin_left = 6
+custom_constants/margin_bottom = 6
 
 [node name="Tabs" type="TabContainer" parent="ContentDivider/ContentMat" index="0"]
-margin_top = 1.0
-margin_right = 431.0
-margin_bottom = 191.0
+margin_left = 6.0
+margin_top = 6.0
+margin_right = 394.0
+margin_bottom = 183.0
 mouse_filter = 1
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -80,10 +85,10 @@ use_hidden_tabs_for_min_size = true
 [node name="Level" type="MarginContainer" parent="ContentDivider/ContentMat/Tabs" index="0"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 6.0
-margin_top = 29.0
-margin_right = -6.0
-margin_bottom = -6.0
+margin_left = 4.0
+margin_top = 27.0
+margin_right = -4.0
+margin_bottom = -4.0
 custom_constants/margin_right = 5
 custom_constants/margin_top = 5
 custom_constants/margin_left = 5
@@ -93,21 +98,30 @@ script = ExtResource( 15 )
 [node name="HBoxContainer" type="HBoxContainer" parent="ContentDivider/ContentMat/Tabs/Level" index="0"]
 margin_left = 5.0
 margin_top = 5.0
-margin_right = 414.0
-margin_bottom = 150.0
+margin_right = 375.0
+margin_bottom = 141.0
 custom_constants/separation = 10
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ContentDivider/ContentMat/Tabs/Level/HBoxContainer" index="0"]
-margin_right = 194.0
-margin_bottom = 145.0
+margin_right = 159.0
+margin_bottom = 136.0
 size_flags_horizontal = 3
 custom_constants/separation = 6
 alignment = 1
 
-[node name="Border" type="NinePatchRect" parent="ContentDivider/ContentMat/Tabs/Level/HBoxContainer/VBoxContainer" index="0"]
+[node name="AspectContainer" type="AspectRatioContainer" parent="ContentDivider/ContentMat/Tabs/Level/HBoxContainer/VBoxContainer" index="0"]
 unique_name_in_owner = true
-margin_right = 194.0
-margin_bottom = 120.0
+margin_right = 159.0
+margin_bottom = 111.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+ratio = 1.7778
+
+[node name="Border" type="NinePatchRect" parent="ContentDivider/ContentMat/Tabs/Level/HBoxContainer/VBoxContainer/AspectContainer" index="0"]
+unique_name_in_owner = true
+margin_top = 10.7818
+margin_right = 159.0
+margin_bottom = 100.218
 rect_min_size = Vector2( 0, 80 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -117,7 +131,8 @@ patch_margin_top = 6
 patch_margin_right = 6
 patch_margin_bottom = 6
 
-[node name="TextureRect" type="TextureRect" parent="ContentDivider/ContentMat/Tabs/Level/HBoxContainer/VBoxContainer/Border" index="0"]
+[node name="Thumbnail" type="TextureRect" parent="ContentDivider/ContentMat/Tabs/Level/HBoxContainer/VBoxContainer/AspectContainer/Border" index="0"]
+unique_name_in_owner = true
 show_behind_parent = true
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -129,36 +144,36 @@ stretch_mode = 6
 
 [node name="ThumbnailURL" type="LineEdit" parent="ContentDivider/ContentMat/Tabs/Level/HBoxContainer/VBoxContainer" index="1"]
 unique_name_in_owner = true
-margin_top = 126.0
-margin_right = 194.0
-margin_bottom = 145.0
+margin_top = 117.0
+margin_right = 159.0
+margin_bottom = 136.0
 placeholder_text = "Thumbnail Url"
 
 [node name="VSeparator" type="VSeparator" parent="ContentDivider/ContentMat/Tabs/Level/HBoxContainer" index="1"]
-margin_left = 204.0
-margin_right = 204.0
-margin_bottom = 145.0
+margin_left = 169.0
+margin_right = 169.0
+margin_bottom = 136.0
 custom_constants/separation = 0
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="ContentDivider/ContentMat/Tabs/Level/HBoxContainer" index="2"]
-margin_left = 214.0
-margin_right = 409.0
-margin_bottom = 145.0
+margin_left = 179.0
+margin_right = 370.0
+margin_bottom = 136.0
 rect_min_size = Vector2( 191, 0 )
 size_flags_horizontal = 3
 
 [node name="Level Name" type="LineEdit" parent="ContentDivider/ContentMat/Tabs/Level/HBoxContainer/VBoxContainer2" index="0"]
 unique_name_in_owner = true
-margin_right = 195.0
+margin_right = 191.0
 margin_bottom = 19.0
 align = 1
 placeholder_text = "Level Name"
 
 [node name="Author" type="LineEdit" parent="ContentDivider/ContentMat/Tabs/Level/HBoxContainer/VBoxContainer2" index="1"]
 unique_name_in_owner = true
-margin_left = 30.0
+margin_left = 28.0
 margin_top = 23.0
-margin_right = 165.0
+margin_right = 163.0
 margin_bottom = 39.0
 rect_min_size = Vector2( 135, 0 )
 size_flags_horizontal = 6
@@ -169,8 +184,8 @@ placeholder_text = "Author"
 [node name="Description" type="TextEdit" parent="ContentDivider/ContentMat/Tabs/Level/HBoxContainer/VBoxContainer2" index="2"]
 unique_name_in_owner = true
 margin_top = 43.0
-margin_right = 195.0
-margin_bottom = 145.0
+margin_right = 191.0
+margin_bottom = 136.0
 size_flags_vertical = 3
 custom_fonts/font = ExtResource( 7 )
 text = "Write a description of your level here."
@@ -188,7 +203,7 @@ scroll_horizontal_enabled = false
 script = ExtResource( 13 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ContentDivider/ContentMat/Tabs/Areas" index="0"]
-margin_right = 411.0
+margin_right = 368.0
 margin_bottom = 35.0
 size_flags_horizontal = 3
 
@@ -218,8 +233,8 @@ backgrounds = ExtResource( 18 )
 foregrounds = ExtResource( 19 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ContentDivider/ContentMat/Tabs/Environment" index="0"]
-margin_right = 411.0
-margin_bottom = 155.0
+margin_right = 368.0
+margin_bottom = 142.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -385,16 +400,16 @@ scroll_deadzone = 7
 script = ExtResource( 14 )
 
 [node name="CenterContainer" type="CenterContainer" parent="ContentDivider/ContentMat/Tabs/Music" index="0"]
-margin_right = 411.0
-margin_bottom = 155.0
+margin_right = 368.0
+margin_bottom = 142.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ContentDivider/ContentMat/Tabs/Music/CenterContainer" index="0"]
-margin_left = 25.0
-margin_top = 34.0
-margin_right = 386.0
-margin_bottom = 121.0
+margin_left = 3.0
+margin_top = 27.0
+margin_right = 364.0
+margin_bottom = 114.0
 custom_constants/separation = 47
 alignment = 1
 
@@ -447,13 +462,13 @@ icon_align = 1
 script = ExtResource( 6 )
 
 [node name="Border" parent="." index="2"]
-margin_right = 432.0
-margin_bottom = 224.0
+margin_right = 400.0
+margin_bottom = 220.0
 
 [node name="WindowMat" parent="." index="3"]
-margin_right = 432.0
-margin_bottom = 224.0
+margin_right = 400.0
+margin_bottom = 220.0
 
 [node name="Control" parent="." index="4"]
-margin_right = 432.0
-margin_bottom = 224.0
+margin_right = 400.0
+margin_bottom = 220.0

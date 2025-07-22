@@ -42,6 +42,7 @@ resize_control_path = NodePath("Control/ResizeHandle")
 title = "Window Title"
 icon = ExtResource( 9 )
 icon_tooltip = "I have no tool to tip for you..."
+window_size = Vector2( 256, 256 )
 
 [node name="Background" parent="." instance=ExtResource( 8 )]
 modulate = Color( 1, 1, 1.1, 1 )
@@ -100,7 +101,7 @@ mouse_filter = 2
 [node name="WindowTitle" type="RichTextLabel" parent="ContentDivider/Header/HeaderMat/HeaderBox"]
 unique_name_in_owner = true
 margin_left = 25.0
-margin_right = 230.0
+margin_right = 229.0
 margin_bottom = 22.0
 rect_min_size = Vector2( 128, 0 )
 mouse_filter = 2
@@ -114,10 +115,10 @@ text = "Title"
 fit_content_height = true
 
 [node name="WindowClose" type="Button" parent="ContentDivider/Header/HeaderMat/HeaderBox"]
-margin_left = 231.0
+margin_left = 230.0
 margin_right = 252.0
 margin_bottom = 22.0
-rect_min_size = Vector2( 21, 21 )
+rect_min_size = Vector2( 22, 22 )
 hint_tooltip = "Close"
 focus_mode = 0
 theme = ExtResource( 4 )

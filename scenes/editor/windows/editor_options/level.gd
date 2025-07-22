@@ -3,12 +3,19 @@ extends MarginContainer
 onready var level_name = get_node("%Level Name")
 onready var author = get_node("%Author")
 onready var description = get_node("%Description")
+onready var thumbnail = $"%Thumbnail"
+onready var aspect_container = $"%AspectContainer"
 onready var thumbnail_url = get_node("%Thumbnail URL")
 onready var window = owner
 
 
+func _ready() -> void:
+	var thumb_size = thumbnail.texture.get_size()
+	aspect_container.ratio = thumb_size.x/thumb_size.y
+
+
 # Called when the node enters the scene tree for the first time.
-func _process(delta):
+func _process(_delta):
 	owner.level_name = level_name
 	owner.author = author
 	owner.description = description
@@ -18,8 +25,3 @@ func _process(delta):
 	#the truth is that i made this script then realized i could just do it over there
 	#by then, it was already over
 	#im upset
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass

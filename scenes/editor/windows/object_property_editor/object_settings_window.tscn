@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/editor/windows/editor_window.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/editor/windows/object_property_editor/object_settings_window.gd" type="Script" id=2]
@@ -7,154 +7,71 @@
 [ext_resource path="res://assets/fonts/DelfinoFont10.tres" type="DynamicFont" id=5]
 [ext_resource path="res://scenes/editor/windows/object_property_editor/property_groups.gd" type="Script" id=6]
 
-[sub_resource type="Shader" id=23]
-code = "//from https://godotshaders.com/shader/2d-outline-inline/
-shader_type canvas_item;
-
-uniform vec4 color : hint_color = vec4(1.0);
-uniform float width = 1.0;
-uniform int pattern : hint_range(0, 2) = 0; // diamond, circle, square
-uniform float min_alpha : hint_range(0, 1) = 0; // min alpha when considering pixel
-uniform float blur_level : hint_range(0, 5) = 1;
-uniform bool inside = false;
-uniform bool add_margins = true; // only useful when inside is false
-uniform vec2 texture_offset = vec2(0);
-
-void vertex() {
-	if (add_margins) {
-		VERTEX += (UV * 2.0 - 1.0);
-	}
-}
-
-bool hasContraryNeighbour(vec2 uv, vec2 texture_pixel_size, sampler2D texture) {
-	// Only check vertical pixels below (x = 0, y < 0)
-	for (float j = -ceil(width); j < 0.0; j++) {
-		float y = abs(j) > width ? -width : j;
-		vec2 xy = uv + texture_pixel_size * vec2(0.0, y); // x = 0.0: vertical only
-
-		if ((xy != clamp(xy, vec2(0.0), vec2(1.0)) || texture(texture, xy).a <= 0.0) == inside) {
-			return true;
-		}
-	}
-	return false;
-}
-
-
-vec4 col_lerp(vec4 a, vec4 b, float t) {
-return a + (t * (b - a));
-}
-
-float antialias(vec2 uv, vec2 texture_pixel_size, sampler2D in_texture) {
-	float output = float(0);
-	for (int j = 0; j <= 7; j++) {
-		vec2 offset = vec2(sin(float(45) * float(j)) * (texture_pixel_size.x * blur_level), cos(float(45) * float(j)) * (texture_pixel_size.y * blur_level));
-		if (hasContraryNeighbour(uv + offset, texture_pixel_size, in_texture)) {
-			output += float(1);
-	}
-}
-return output / float(8);
-}
-
-void fragment() {
-	vec2 uv = UV + (texture_offset * TEXTURE_PIXEL_SIZE);
-	vec2 texture_pixel_size = vec2(1.0) / (vec2(1.0) / TEXTURE_PIXEL_SIZE + vec2(width * 2.0));
-	if (add_margins) {
-		uv = (uv - texture_pixel_size * width) * TEXTURE_PIXEL_SIZE / texture_pixel_size;
-		
-		if (uv != clamp(uv, vec2(0.0), vec2(1.0))) {
-			COLOR.a = 0.0;
-		} else {
-			COLOR = texture(TEXTURE, uv);
-		}
-		
-	} else {
-		COLOR = texture(TEXTURE, uv);
-	}
-
-	if ((COLOR.a >= min_alpha) == inside && antialias(uv, TEXTURE_PIXEL_SIZE, TEXTURE) > float(0)) {
-		COLOR.rgb = inside ? mix(COLOR.rgb, color.rgb, color.a) : color.rgb;
-		COLOR.a += (1.0 - COLOR.a) * color.a;
-		COLOR.a *= antialias(uv, TEXTURE_PIXEL_SIZE, TEXTURE);
-		COLOR = col_lerp(COLOR, texture(TEXTURE, uv), texture(TEXTURE, uv).a);
-	}
-}"
-
-[sub_resource type="ShaderMaterial" id=24]
-resource_local_to_scene = true
-shader = SubResource( 23 )
-shader_param/color = Color( 0.768627, 0.768627, 0.768627, 1 )
-shader_param/width = 11.6364
-shader_param/pattern = 0
-shader_param/min_alpha = 1.0
-shader_param/blur_level = 0.0
-shader_param/inside = false
-shader_param/add_margins = true
-shader_param/texture_offset = Vector2( 0, 2 )
-
 [node name="ObjectSettingsWindow" instance=ExtResource( 1 )]
-margin_right = 475.0
-margin_bottom = 267.0
+margin_right = 363.0
+margin_bottom = 180.0
 script = ExtResource( 2 )
 title = "{Object} Settings"
 icon_tooltip = "No object tooltip has been set..."
 
-[node name="Border" parent="." index="0"]
-margin_right = 322.0
-margin_bottom = 191.0
+[node name="Background" parent="." index="0"]
+margin_right = 363.0
+margin_bottom = 185.0
 
-[node name="WindowMat" parent="." index="1"]
-margin_right = 322.0
-margin_bottom = 191.0
+[node name="ContentDivider" parent="." index="1"]
+margin_right = 363.0
+margin_bottom = 185.0
 
-[node name="HeaderContentDivider" parent="WindowMat" index="0"]
-margin_right = 318.0
-margin_bottom = 187.0
+[node name="Header" parent="ContentDivider" index="0"]
+margin_right = 363.0
 
-[node name="HeaderMat" parent="WindowMat/HeaderContentDivider" index="0"]
-margin_right = 314.0
+[node name="HeaderMat" parent="ContentDivider/Header" index="0"]
+margin_right = 359.0
 
-[node name="HeaderBox" parent="WindowMat/HeaderContentDivider/HeaderMat" index="0"]
-margin_right = 308.0
+[node name="HeaderBox" parent="ContentDivider/Header/HeaderMat" index="0"]
+margin_right = 349.0
 
-[node name="Icon" parent="WindowMat/HeaderContentDivider/HeaderMat/HeaderBox" index="0"]
-material = SubResource( 24 )
+[node name="WindowTitle" parent="ContentDivider/Header/HeaderMat/HeaderBox" index="2"]
+margin_right = 321.0
 
-[node name="Title" parent="WindowMat/HeaderContentDivider/HeaderMat/HeaderBox" index="2"]
-margin_right = 280.0
+[node name="WindowClose" parent="ContentDivider/Header/HeaderMat/HeaderBox" index="3"]
+margin_left = 322.0
+margin_right = 343.0
 
-[node name="WindowClose" parent="WindowMat/HeaderContentDivider/HeaderMat/HeaderBox" index="3"]
-margin_left = 281.0
-margin_right = 302.0
+[node name="HSeparator" parent="ContentDivider" index="1"]
+margin_right = 363.0
 
-[node name="HSeparator" parent="WindowMat/HeaderContentDivider" index="1"]
-margin_right = 314.0
+[node name="ContentMat" parent="ContentDivider" index="2"]
+margin_right = 363.0
+margin_bottom = 185.0
+custom_constants/margin_right = 4
+custom_constants/margin_top = 4
+custom_constants/margin_left = 4
+custom_constants/margin_bottom = 4
 
-[node name="ContentMat" parent="WindowMat/HeaderContentDivider" index="2"]
-margin_right = 314.0
-margin_bottom = 183.0
-
-[node name="ContentBox" type="HBoxContainer" parent="WindowMat/HeaderContentDivider/ContentMat" index="0"]
-margin_top = 1.0
-margin_right = 313.0
-margin_bottom = 147.0
+[node name="ContentBox" type="HBoxContainer" parent="ContentDivider/ContentMat" index="0"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 359.0
+margin_bottom = 150.0
 size_flags_vertical = 3
 
-[node name="PreviewMat" type="MarginContainer" parent="WindowMat/HeaderContentDivider/ContentMat/ContentBox" index="0"]
+[node name="PreviewMat" type="MarginContainer" parent="ContentDivider/ContentMat/ContentBox" index="0"]
 margin_right = 107.0
 margin_bottom = 146.0
 custom_constants/margin_right = 2
 custom_constants/margin_left = 2
 
-[node name="Preview" type="VBoxContainer" parent="WindowMat/HeaderContentDivider/ContentMat/ContentBox/PreviewMat" index="0"]
+[node name="Preview" type="VBoxContainer" parent="ContentDivider/ContentMat/ContentBox/PreviewMat" index="0"]
 margin_left = 2.0
 margin_right = 105.0
 margin_bottom = 146.0
 
-[node name="AspectRatioContainer" type="AspectRatioContainer" parent="WindowMat/HeaderContentDivider/ContentMat/ContentBox/PreviewMat/Preview" index="0"]
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="ContentDivider/ContentMat/ContentBox/PreviewMat/Preview" index="0"]
 margin_right = 103.0
 margin_bottom = 98.0
 
-[node name="PreviewBack" type="PanelContainer" parent="WindowMat/HeaderContentDivider/ContentMat/ContentBox/PreviewMat/Preview/AspectRatioContainer" index="0"]
+[node name="PreviewBack" type="PanelContainer" parent="ContentDivider/ContentMat/ContentBox/PreviewMat/Preview/AspectRatioContainer" index="0"]
 margin_left = 3.5
 margin_right = 99.5
 margin_bottom = 98.0
@@ -162,7 +79,7 @@ size_flags_horizontal = 6
 theme = ExtResource( 3 )
 theme_type_variation = "PreviewPanel"
 
-[node name="PreviewContainer" type="ViewportContainer" parent="WindowMat/HeaderContentDivider/ContentMat/ContentBox/PreviewMat/Preview/AspectRatioContainer/PreviewBack" index="0"]
+[node name="PreviewContainer" type="ViewportContainer" parent="ContentDivider/ContentMat/ContentBox/PreviewMat/Preview/AspectRatioContainer/PreviewBack" index="0"]
 margin_right = 96.0
 margin_bottom = 96.0
 rect_min_size = Vector2( 96, 96 )
@@ -170,42 +87,20 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 stretch = true
 
-[node name="Viewport" type="Viewport" parent="WindowMat/HeaderContentDivider/ContentMat/ContentBox/PreviewMat/Preview/AspectRatioContainer/PreviewBack/PreviewContainer" index="0"]
+[node name="Viewport" type="Viewport" parent="ContentDivider/ContentMat/ContentBox/PreviewMat/Preview/AspectRatioContainer/PreviewBack/PreviewContainer" index="0"]
 size = Vector2( 96, 96 )
 size_override_stretch = true
 transparent_bg = true
 handle_input_locally = false
 render_target_update_mode = 3
 
-[node name="Delete" type="Button" parent="WindowMat/HeaderContentDivider/ContentMat/ContentBox/PreviewMat/Preview" index="1"]
+[node name="ZOrderControls" type="HBoxContainer" parent="ContentDivider/ContentMat/ContentBox/PreviewMat/Preview" index="1"]
 margin_top = 102.0
 margin_right = 103.0
-margin_bottom = 124.0
-rect_min_size = Vector2( 0, 22 )
-theme = ExtResource( 3 )
-theme_type_variation = "ButtonRed"
-text = "Delete"
-script = ExtResource( 4 )
+margin_bottom = 120.0
 
-[node name="ZOrderControls" type="HBoxContainer" parent="WindowMat/HeaderContentDivider/ContentMat/ContentBox/PreviewMat/Preview" index="2"]
-margin_top = 128.0
-margin_right = 103.0
-margin_bottom = 146.0
-
-[node name="Back" type="Button" parent="WindowMat/HeaderContentDivider/ContentMat/ContentBox/PreviewMat/Preview/ZOrderControls" index="0"]
-margin_right = 47.0
-margin_bottom = 18.0
-rect_min_size = Vector2( 0, 18 )
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_type_variation = "ButtonPurple"
-custom_fonts/font = ExtResource( 5 )
-text = "To Back"
-script = ExtResource( 4 )
-
-[node name="Front" type="Button" parent="WindowMat/HeaderContentDivider/ContentMat/ContentBox/PreviewMat/Preview/ZOrderControls" index="1"]
-margin_left = 51.0
-margin_right = 103.0
+[node name="Front" type="Button" parent="ContentDivider/ContentMat/ContentBox/PreviewMat/Preview/ZOrderControls" index="0"]
+margin_right = 52.0
 margin_bottom = 18.0
 rect_min_size = Vector2( 0, 18 )
 size_flags_horizontal = 3
@@ -215,15 +110,37 @@ custom_fonts/font = ExtResource( 5 )
 text = "To Front"
 script = ExtResource( 4 )
 
-[node name="VSeparator" type="VSeparator" parent="WindowMat/HeaderContentDivider/ContentMat/ContentBox" index="1"]
+[node name="Back" type="Button" parent="ContentDivider/ContentMat/ContentBox/PreviewMat/Preview/ZOrderControls" index="1"]
+margin_left = 56.0
+margin_right = 103.0
+margin_bottom = 18.0
+rect_min_size = Vector2( 0, 18 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_type_variation = "ButtonPurple"
+custom_fonts/font = ExtResource( 5 )
+text = "To Back"
+script = ExtResource( 4 )
+
+[node name="Delete" type="Button" parent="ContentDivider/ContentMat/ContentBox/PreviewMat/Preview" index="2"]
+margin_top = 124.0
+margin_right = 103.0
+margin_bottom = 146.0
+rect_min_size = Vector2( 0, 22 )
+theme = ExtResource( 3 )
+theme_type_variation = "ButtonRed"
+text = "Delete"
+script = ExtResource( 4 )
+
+[node name="VSeparator" type="VSeparator" parent="ContentDivider/ContentMat/ContentBox" index="1"]
 margin_left = 111.0
 margin_right = 115.0
 margin_bottom = 146.0
 
-[node name="PropertyGroups" type="TabContainer" parent="WindowMat/HeaderContentDivider/ContentMat/ContentBox" index="2"]
+[node name="PropertyGroups" type="TabContainer" parent="ContentDivider/ContentMat/ContentBox" index="2"]
 unique_name_in_owner = true
 margin_left = 119.0
-margin_right = 313.0
+margin_right = 355.0
 margin_bottom = 146.0
 mouse_filter = 1
 size_flags_horizontal = 3
@@ -235,6 +152,14 @@ all_tabs_in_front = true
 use_hidden_tabs_for_min_size = true
 script = ExtResource( 6 )
 
-[node name="Control" parent="." index="2"]
-margin_right = 322.0
-margin_bottom = 191.0
+[node name="Border" parent="." index="2"]
+margin_right = 363.0
+margin_bottom = 185.0
+
+[node name="WindowMat" parent="." index="3"]
+margin_right = 363.0
+margin_bottom = 185.0
+
+[node name="Control" parent="." index="4"]
+margin_right = 363.0
+margin_bottom = 185.0

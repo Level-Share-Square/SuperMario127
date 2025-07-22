@@ -33,6 +33,8 @@ func set_tooltip(val):
 
 
 func _ready() -> void:
+	hide()
+	
 	var drag_control: Control = get_node(drag_control_path)
 	if is_instance_valid(drag_control):
 		drag_control.connect("gui_input", self, "drag_window")
@@ -48,7 +50,7 @@ func _ready() -> void:
 	rect_min_size.x = max(rect_min_size.x, window_size.x)
 	rect_min_size.y = max(rect_min_size.y, window_size.y)
 	
-	rect_size = rect_min_size
+	popup_centered(window_size)
 	
 	if not self == get_tree().current_scene:
 		hide()
@@ -73,7 +75,7 @@ func popup(rect: Rect2) -> void:
 	
 	var tween = create_tween()
 	tween.set_ease(Tween.EASE_OUT)
-	tween.set_trans(Tween.TRANS_SINE)
+	tween.set_trans(Tween.TRANS_CUBIC)
 	tween.tween_property(self, "rect_scale", Vector2.ONE, popup_anim_duration)
 
 
@@ -86,8 +88,8 @@ func popup_centered(size: Vector2) -> void:
 
 func close():
 	var tween = create_tween()
-	tween.set_ease(Tween.EASE_OUT)
-	tween.set_trans(Tween.TRANS_SINE)
+	tween.set_ease(Tween.EASE_IN)
+	tween.set_trans(Tween.TRANS_CUBIC)
 	tween.tween_property(self, "rect_scale", Vector2.ZERO, popup_anim_duration)
 	
 	yield(tween, "finished")
