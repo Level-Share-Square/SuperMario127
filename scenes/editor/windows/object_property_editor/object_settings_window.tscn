@@ -92,28 +92,50 @@ shader_param/add_margins = true
 shader_param/texture_offset = Vector2( 0, 2 )
 
 [node name="ObjectSettingsWindow" instance=ExtResource( 1 )]
+margin_right = 475.0
+margin_bottom = 267.0
 script = ExtResource( 2 )
 title = "{Object} Settings"
 icon_tooltip = "No object tooltip has been set..."
 
 [node name="Border" parent="." index="0"]
+margin_right = 322.0
 margin_bottom = 191.0
 
 [node name="WindowMat" parent="." index="1"]
+margin_right = 322.0
 margin_bottom = 191.0
 
 [node name="HeaderContentDivider" parent="WindowMat" index="0"]
+margin_right = 318.0
 margin_bottom = 187.0
+
+[node name="HeaderMat" parent="WindowMat/HeaderContentDivider" index="0"]
+margin_right = 314.0
+
+[node name="HeaderBox" parent="WindowMat/HeaderContentDivider/HeaderMat" index="0"]
+margin_right = 308.0
 
 [node name="Icon" parent="WindowMat/HeaderContentDivider/HeaderMat/HeaderBox" index="0"]
 material = SubResource( 24 )
 
+[node name="Title" parent="WindowMat/HeaderContentDivider/HeaderMat/HeaderBox" index="2"]
+margin_right = 280.0
+
+[node name="WindowClose" parent="WindowMat/HeaderContentDivider/HeaderMat/HeaderBox" index="3"]
+margin_left = 281.0
+margin_right = 302.0
+
+[node name="HSeparator" parent="WindowMat/HeaderContentDivider" index="1"]
+margin_right = 314.0
+
 [node name="ContentMat" parent="WindowMat/HeaderContentDivider" index="2"]
+margin_right = 314.0
 margin_bottom = 183.0
 
 [node name="ContentBox" type="HBoxContainer" parent="WindowMat/HeaderContentDivider/ContentMat" index="0"]
 margin_top = 1.0
-margin_right = 289.0
+margin_right = 313.0
 margin_bottom = 147.0
 size_flags_vertical = 3
 
@@ -201,7 +223,7 @@ margin_bottom = 146.0
 [node name="PropertyGroups" type="TabContainer" parent="WindowMat/HeaderContentDivider/ContentMat/ContentBox" index="2"]
 unique_name_in_owner = true
 margin_left = 119.0
-margin_right = 289.0
+margin_right = 313.0
 margin_bottom = 146.0
 mouse_filter = 1
 size_flags_horizontal = 3
@@ -214,4 +236,5 @@ use_hidden_tabs_for_min_size = true
 script = ExtResource( 6 )
 
 [node name="Control" parent="." index="2"]
+margin_right = 322.0
 margin_bottom = 191.0

@@ -8,6 +8,7 @@
 [ext_resource path="res://scenes/shared/backgrounds.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/editor/editor_camera.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/editor/tools/tool_manager.gd" type="Script" id=8]
+[ext_resource path="res://scenes/editor/assets/palette.svg" type="Texture" id=9]
 [ext_resource path="res://scenes/editor/item_hotbar.gd" type="Script" id=17]
 [ext_resource path="res://scenes/oldeditor/sounds/click2.wav" type="AudioStream" id=18]
 [ext_resource path="res://scenes/oldeditor/sounds/hover.wav" type="AudioStream" id=19]
@@ -34,7 +35,6 @@
 [ext_resource path="res://scenes/editor/buttons/collapse_button.gd" type="Script" id=44]
 [ext_resource path="res://scenes/menu/button_scripts/check_button_sound.gd" type="Script" id=45]
 [ext_resource path="res://scenes/editor/assets/RectangleFill.svg" type="Texture" id=46]
-[ext_resource path="res://scenes/menu/levels_list/icons/star_coin.png" type="Texture" id=47]
 [ext_resource path="res://scenes/editor/assets/bitmap.svg" type="Texture" id=48]
 [ext_resource path="res://scenes/editor/assets/Paint.svg" type="Texture" id=49]
 [ext_resource path="res://scenes/editor/assets/select_tool.png" type="Texture" id=50]
@@ -1089,7 +1089,7 @@ size_flags_horizontal = 3
 theme_type_variation = "ButtonTransparent"
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_fonts/font = SubResource( 170 )
-icon = ExtResource( 47 )
+icon = ExtResource( 9 )
 icon_align = 1
 expand_icon = true
 script = ExtResource( 24 )
@@ -1341,10 +1341,10 @@ volume_db = -7.5
 bus = "Sounds"
 
 [connection signal="item_changed" from="." to="ZIndex/Tools" method="item_changed"]
-[connection signal="redo" from="ActionManager" to="ZIndex/Tools/ObjectSelection" method="snap_to_selected_size"]
 [connection signal="redo" from="ActionManager" to="ZIndex/Tools/ObjectSelection" method="on_redo"]
-[connection signal="undo" from="ActionManager" to="ZIndex/Tools/ObjectSelection" method="snap_to_selected_size"]
+[connection signal="redo" from="ActionManager" to="ZIndex/Tools/ObjectSelection" method="snap_to_selected_size"]
 [connection signal="undo" from="ActionManager" to="ZIndex/Tools/ObjectSelection" method="on_undo"]
+[connection signal="undo" from="ActionManager" to="ZIndex/Tools/ObjectSelection" method="snap_to_selected_size"]
 [connection signal="pressed" from="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/Search" to="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/ScrollContainer/CenterContainer/ItemsGrid" method="_on_search"]
 [connection signal="pressed" from="UI/UIContainer/EditorUI/Top/Tools/PanelContainer/HBoxContainer/Undo" to="ActionManager" method="undo"]
 [connection signal="pressed" from="UI/UIContainer/EditorUI/Top/Tools/PanelContainer/HBoxContainer/Redo" to="ActionManager" method="redo"]
