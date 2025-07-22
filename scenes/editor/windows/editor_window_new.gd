@@ -67,11 +67,13 @@ func popup(rect: Rect2) -> void:
 	
 	rect_position = rect.position
 	rect_size = rect.size
+	rect_pivot_offset = rect_size / 2.0
 	rect_scale = Vector2.ZERO
 	show()
 	
 	var tween = create_tween()
 	tween.set_ease(Tween.EASE_OUT)
+	tween.set_trans(Tween.TRANS_SINE)
 	tween.tween_property(self, "rect_scale", Vector2.ONE, popup_anim_duration)
 
 
@@ -83,6 +85,13 @@ func popup_centered(size: Vector2) -> void:
 
 
 func close():
+	var tween = create_tween()
+	tween.set_ease(Tween.EASE_OUT)
+	tween.set_trans(Tween.TRANS_SINE)
+	tween.tween_property(self, "rect_scale", Vector2.ZERO, popup_anim_duration)
+	
+	yield(tween, "finished")
+	
 	hide()
 
 
