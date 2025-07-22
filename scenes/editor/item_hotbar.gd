@@ -53,8 +53,7 @@ func _on_item_button_pressed(item_button):
 	var item_name: String = loadouts[selected_loadout][item_button.get_index()]
 	var associated_item = placeable_items.placeable_items[loadouts[selected_loadout][item_button.get_index()]]
 	editor.selected_item = associated_item
-	if item_button.palette != 0:
-		editor.selected_item.palette = item_button.palette
+	editor.selected_item.palette = item_button.palette
 	match item_name.substr(0, 3):
 		"obj":
 			editor.tool_manager.change_tool("ObjectPaint")
