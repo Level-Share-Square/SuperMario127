@@ -1,4 +1,4 @@
-[gd_scene load_steps=76 format=2]
+[gd_scene load_steps=77 format=2]
 
 [ext_resource path="res://scenes/menu/options/options.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/menu/menu_controller/screen_manager.gd" type="Script" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://scenes/editor/til_erase_tool.gd" type="Script" id=12]
 [ext_resource path="res://scenes/editor/buttons/palette_button.tscn" type="PackedScene" id=13]
 [ext_resource path="res://scenes/editor/windows/editor_options/editor_options_window_2.tscn" type="PackedScene" id=14]
+[ext_resource path="res://scenes/editor/editor_settings_dropdown.gd" type="Script" id=15]
 [ext_resource path="res://scenes/editor/item_hotbar.gd" type="Script" id=17]
 [ext_resource path="res://scenes/oldeditor/sounds/click2.wav" type="AudioStream" id=18]
 [ext_resource path="res://scenes/oldeditor/sounds/hover.wav" type="AudioStream" id=19]
@@ -601,6 +602,7 @@ anchor_right = 1.0
 margin_bottom = 109.0
 size_flags_horizontal = 3
 theme_type_variation = "FlatPanel2"
+script = ExtResource( 15 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu"]
 margin_left = 4.0
@@ -1373,6 +1375,7 @@ open_text = ">"
 close_text = "<"
 
 [node name="EditorOptionsWindow" parent="UI" instance=ExtResource( 14 )]
+visible = false
 margin_left = 10.0
 margin_top = 62.0
 margin_right = 442.0
@@ -1468,3 +1471,4 @@ bus = "Sounds"
 [connection signal="pressed" from="UI/UIContainer/EditorUI/Top/Tools/PanelContainer/HBoxContainer/SelectionActions/Paste" to="ZIndex/Tools/ObjectSelection" method="paste"]
 [connection signal="tool_picked" from="UI/UIContainer/EditorUI/Middle/Tools" to="ZIndex/Tools" method="_on_Tools_tool_picked"]
 [connection signal="pressed" from="UI/UIContainer/EditorUI/Bottom/Hotbar/ItemPickerButton/Button" to="UI/UIContainer/ItemPickerPanel" method="toggle"]
+[connection signal="screen_opened" from="Options/ScreenManager/Options" to="Options/ScreenManager/Options/Subscreens/Controls/VBoxContainer/Devices" method="screen_opened"]

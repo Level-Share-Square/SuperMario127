@@ -10,6 +10,7 @@ export var placeable_items: Resource
 export(NodePath) var shared_path
 
 var placed_item_property = null
+var pixel_lock = true
 
 var hovered_objects: Dictionary = {}
 var selected_objects: Dictionary = {}
