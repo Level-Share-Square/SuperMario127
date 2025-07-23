@@ -1,6 +1,6 @@
 extends PanelContainer
 
-onready var grid_texture = $"%GridTexture"
+onready var grid = $"%Grid"
 onready var editor_camera = $"%EditorCamera"
 onready var editor = owner
 
@@ -12,7 +12,7 @@ func _ready():
 func on_button_pressed(button: Button):
 	match button.name:
 		"Grid":
-			grid_texture.visible = !button.pressed
+			grid.toggle_grid(!button.pressed)
 		"Layers":
 			pass
 		"PixelSnap":

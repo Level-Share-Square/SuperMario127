@@ -12,7 +12,7 @@ func _input(event):
 	if is_active:
 		selection_box.pivot_position = get_global_mouse_position() + pivot_offset
 		for object in editor.selected_objects:
-			object.global_position = get_global_mouse_position() + object_offsets[object]
+			object.global_position = (get_global_mouse_position() + object_offsets[object]).snapped(Vector2(8, 8)) if editor.pixel_lock else get_global_mouse_position() + object_offsets[object]
 		selection_box.snap_to_selected_size()
 
 

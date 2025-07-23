@@ -20,7 +20,7 @@ func on_toggle():
 	if not pivot_toggle.pressed:
 		hide()
 		pivot_toggle.icon = pivot_off_icon
-		selection_box.pivot_position = Vector2.ZERO
+		selection_box.pivot_position = Vector2(actual_box.rect_global_position.x + actual_box.rect_size.x/2, actual_box.rect_global_position.y + actual_box.rect_size.y/2)
 	else:
 		show()
 		pivot_toggle.icon = pivot_on_icon

@@ -1383,6 +1383,7 @@ margin_bottom = 286.0
 custom_styles/panel = SubResource( 184 )
 
 [node name="Grid" type="ParallaxBackground" parent="UI"]
+unique_name_in_owner = true
 layer = -1
 script = ExtResource( 30 )
 
