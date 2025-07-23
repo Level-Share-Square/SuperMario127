@@ -1,6 +1,12 @@
-[gd_resource type="Resource" load_steps=16 format=2]
+[gd_resource type="Resource" load_steps=22 format=2]
 
 [ext_resource path="res://scenes/editor/items/placeable_items.gd" type="Script" id=1]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/crystal_half_tile.tres" type="Resource" id=2]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/color_tile_slope_left.tres" type="Resource" id=3]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/clouds_half_tile.tres" type="Resource" id=4]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/crystal_slope_left.tres" type="Resource" id=5]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/crystal_slope_right.tres" type="Resource" id=6]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/color_tile_slope_right.tres" type="Resource" id=7]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/grass.tres" type="Resource" id=14]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/boo_block.tres" type="Resource" id=147]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/snow.tres" type="Resource" id=152]
@@ -21,14 +27,14 @@ script = ExtResource( 1 )
 placeable_items = {
 "til_boo_block": ExtResource( 147 ),
 "til_clouds": ExtResource( 178 ),
-"til_clouds_half_tile": ExtResource( 178 ),
+"til_clouds_half_tile": ExtResource( 4 ),
 "til_color_tile": ExtResource( 174 ),
-"til_color_tile_slope_left": ExtResource( 174 ),
-"til_color_tile_slope_right": ExtResource( 174 ),
+"til_color_tile_slope_left": ExtResource( 3 ),
+"til_color_tile_slope_right": ExtResource( 7 ),
 "til_crystal": ExtResource( 166 ),
-"til_crystal_half_tile": ExtResource( 166 ),
-"til_crystal_slope_left": ExtResource( 166 ),
-"til_crystal_slope_right": ExtResource( 166 ),
+"til_crystal_half_tile": ExtResource( 2 ),
+"til_crystal_slope_left": ExtResource( 5 ),
+"til_crystal_slope_right": ExtResource( 6 ),
 "til_garden": ExtResource( 176 ),
 "til_garden_half_tile": ExtResource( 176 ),
 "til_garden_slope_left": ExtResource( 176 ),
