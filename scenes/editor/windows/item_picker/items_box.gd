@@ -2,7 +2,8 @@ extends GridContainer
 
 export var placeable_items: Resource
 export var item_button_scene: PackedScene
-export var initial_group: String = "special"
+export var initial_group: String = "Terrain"
+export(Dictionary) var categories
 
 onready var search_bar = get_node("%SearchBar")
 onready var item_picker_panel = $"%ItemPickerPanel"
@@ -40,19 +41,12 @@ func load_items(items: Array, priority_sort: bool):
 
 
 func get_items_by_group(group: String) -> Array:
-	var items: Dictionary = placeable_items.placeable_items
 	var filtered_items: Array
 	
-	for item_data in items.values():
-		if group.empty():
-			filtered_items.append(item_data)
-		else:
-			if group in item_data.groups:
-				filtered_items.append(item_data)
+	for item in categories[group.capitalize()].placeable_items:
+		filtered_items.append(categories[group.capitalize()].placeable_items[item])
 	
 	filtered_items.sort_custom(self, "_sort_by_priority")
-	
-	print(filtered_items)
 	return filtered_items
 
 

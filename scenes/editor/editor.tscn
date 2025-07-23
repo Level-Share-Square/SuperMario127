@@ -1,4 +1,4 @@
-[gd_scene load_steps=79 format=2]
+[gd_scene load_steps=85 format=2]
 
 [ext_resource path="res://scenes/menu/options/options.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/menu/menu_controller/screen_manager.gd" type="Script" id=2]
@@ -28,14 +28,17 @@
 [ext_resource path="res://scenes/editor/assets/redo.svg" type="Texture" id=26]
 [ext_resource path="res://scenes/editor/tools/til_paint_tool.gd" type="Script" id=27]
 [ext_resource path="res://scenes/oldeditor/assets/grid.png" type="Texture" id=28]
+[ext_resource path="res://scenes/editor/items/categories/Terrain.tres" type="Resource" id=29]
 [ext_resource path="res://scenes/editor/grid.gd" type="Script" id=30]
 [ext_resource path="res://scenes/editor/items/items.tres" type="Resource" id=31]
 [ext_resource path="res://scenes/editor/assets/undo.svg" type="Texture" id=32]
+[ext_resource path="res://scenes/editor/items/categories/Decoration.tres" type="Resource" id=33]
 [ext_resource path="res://scenes/editor/tools/selection_box/selection_box.tscn" type="PackedScene" id=34]
 [ext_resource path="res://assets/fonts/delfino_small.tres" type="DynamicFont" id=35]
 [ext_resource path="res://scenes/editor/buttons/hotbar_button.tscn" type="PackedScene" id=36]
 [ext_resource path="res://scenes/editor/buttons/popup_custom.gd" type="Script" id=37]
 [ext_resource path="res://scenes/editor/assets/EditorSave.svg" type="Texture" id=38]
+[ext_resource path="res://scenes/editor/items/categories/Obstacles.tres" type="Resource" id=39]
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=40]
 [ext_resource path="res://scenes/menu/levels_list/icons/copy.png" type="Texture" id=41]
 [ext_resource path="res://scenes/menu/levels_list/icons/import_from_code.png" type="Texture" id=42]
@@ -43,10 +46,12 @@
 [ext_resource path="res://scenes/editor/buttons/collapse_button.gd" type="Script" id=44]
 [ext_resource path="res://scenes/menu/button_scripts/check_button_sound.gd" type="Script" id=45]
 [ext_resource path="res://scenes/editor/assets/RectangleFill.svg" type="Texture" id=46]
+[ext_resource path="res://scenes/editor/items/categories/Special.tres" type="Resource" id=47]
 [ext_resource path="res://scenes/editor/assets/bitmap.svg" type="Texture" id=48]
 [ext_resource path="res://scenes/editor/assets/Paint.svg" type="Texture" id=49]
 [ext_resource path="res://scenes/editor/assets/select_tool.png" type="Texture" id=50]
 [ext_resource path="res://scenes/editor/assets/tile_lock_tool.png" type="Texture" id=51]
+[ext_resource path="res://scenes/editor/items/categories/Entities.tres" type="Resource" id=52]
 [ext_resource path="res://scenes/editor/assets/Erase.svg" type="Texture" id=53]
 [ext_resource path="res://scenes/menu/levels_list/icons/delete.png" type="Texture" id=54]
 [ext_resource path="res://scenes/editor/assets/editor_Redo.wav" type="AudioStream" id=55]
@@ -59,6 +64,7 @@
 [ext_resource path="res://scenes/editor/assets/magnifying_glass_v2.svg" type="Texture" id=62]
 [ext_resource path="res://scenes/menu/line_edit_unfocus.gd" type="Script" id=63]
 [ext_resource path="res://scenes/editor/windows/item_picker/items_box.gd" type="Script" id=64]
+[ext_resource path="res://scenes/editor/items/categories/Structures.tres" type="Resource" id=65]
 
 [sub_resource type="CanvasItemMaterial" id=176]
 blend_mode = 1
@@ -441,6 +447,14 @@ script = ExtResource( 64 )
 placeable_items = ExtResource( 31 )
 item_button_scene = ExtResource( 59 )
 initial_group = "terrain"
+categories = {
+"Decoration": ExtResource( 33 ),
+"Entities": ExtResource( 52 ),
+"Obstacles": ExtResource( 39 ),
+"Special": ExtResource( 47 ),
+"Structures": ExtResource( 65 ),
+"Terrain": ExtResource( 29 )
+}
 
 [node name="HSeparator2" type="HSeparator" parent="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer"]
 margin_top = 367.0

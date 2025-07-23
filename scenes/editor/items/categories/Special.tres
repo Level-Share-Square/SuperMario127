@@ -1,13 +1,12 @@
-[gd_resource type="Resource" load_steps=40 format=2]
+[gd_resource type="Resource" load_steps=39 format=2]
 
 [ext_resource path="res://scenes/editor/items/placeable_items.gd" type="Script" id=1]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/blue_coin.tres" type="Resource" id=2]
-[ext_resource path="res://scenes/actors/objects/shine_shard/shine_shard.tscn" type="PackedScene" id=3]
-[ext_resource path="res://scenes/actors/objects/level_entrance/level_entrance.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/level_entrance.tres" type="Resource" id=4]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/coin.tres" type="Resource" id=5]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/red_coin.tres" type="Resource" id=6]
-[ext_resource path="res://scenes/actors/objects/cannon/cannon.tscn" type="PackedScene" id=7]
-[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/shine.tres" type="Resource" id=8]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/cannon.tres" type="Resource" id=7]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/shine_shard.tres" type="Resource" id=8]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/hover_box.tres" type="Resource" id=24]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/big_bottle.tres" type="Resource" id=25]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/pipe.tres" type="Resource" id=27]
@@ -67,7 +66,7 @@ placeable_items = {
 "obj_rocket_box": ExtResource( 39 ),
 "obj_shine": ExtResource( 8 ),
 "obj_shine_activator": ExtResource( 125 ),
-"obj_shine_shard": ExtResource( 3 ),
+"obj_shine_shard": ExtResource( 8 ),
 "obj_sling_star": ExtResource( 107 ),
 "obj_small_bottle": ExtResource( 29 ),
 "obj_spinning_heart": ExtResource( 84 ),
