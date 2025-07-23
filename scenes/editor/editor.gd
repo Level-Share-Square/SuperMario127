@@ -120,17 +120,19 @@ func _process(delta):
 		i.modulate = Color(0.7, 0.7, 1.2, i.modulate.a)
 
 
-#func object_clicked(object: GameObject):
-#	if tool_manager.current_tool.tool_type == EditorTool.Type.TileTool:
-#		return
-#
-#	object.selected = !object.selected
-#	if object.selected:
-#		selected_objects.get_or_add(object, object.name)
-#		object.modulate = Color(0.7, 0.7, 1.2, object.modulate.a)
-#	else:
-#		selected_objects.erase(object)
-#		object.modulate = Color(1, 1, 1, object.modulate.a)
+func quit_to_menu():
+	var level_id: String = Singleton.CurrentLevelData.level_id
+	var working_folder: String = Singleton.CurrentLevelData.working_folder
+	var is_campaign: bool = Singleton.CurrentLevelData.is_campaign
+	
+	var code_path: String = level_list_util.get_level_file_path(level_id, working_folder)
+	var level_code: String = level_list_util.load_level_code_file(code_path)
+	
+	Singleton.CurrentLevelData.level_info = LevelInfo.new(level_id, working_folder, level_code)
+	if Singleton.SceneSwitcher.menu_return_args.size() > 0:
+		Singleton.SceneSwitcher.menu_return_args = [Singleton.CurrentLevelData.level_info, level_id, working_folder, true, is_campaign]
+	
+	Singleton.SceneSwitcher.quit_to_menu_with_transition("levels_screen")
 	
 
 

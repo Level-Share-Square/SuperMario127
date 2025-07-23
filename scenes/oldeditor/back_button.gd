@@ -16,4 +16,4 @@ func on_pressed():
 	if Singleton.CurrentLevelData.unsaved_editor_changes:
 		emit_signal("open_quit_wo_saving_popup")
 	else:
-		get_owner().quit_to_menu()
+		get_owner().quit_t

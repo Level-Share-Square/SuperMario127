@@ -1,4 +1,4 @@
-[gd_scene load_steps=78 format=2]
+[gd_scene load_steps=79 format=2]
 
 [ext_resource path="res://scenes/menu/options/options.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/menu/menu_controller/screen_manager.gd" type="Script" id=2]
@@ -14,11 +14,13 @@
 [ext_resource path="res://scenes/editor/til_erase_tool.gd" type="Script" id=12]
 [ext_resource path="res://scenes/editor/buttons/palette_button.tscn" type="PackedScene" id=13]
 [ext_resource path="res://scenes/editor/windows/editor_options/editor_options_window_2.tscn" type="PackedScene" id=14]
-[ext_resource path="res://scenes/editor/editor_settings_dropdown.gd" type="Script" id=15]
+[ext_resource path="res://scenes/editor/assets/DropdownFlipped.svg" type="Texture" id=15]
 [ext_resource path="res://scenes/editor/selection_actions.gd" type="Script" id=16]
 [ext_resource path="res://scenes/editor/item_hotbar.gd" type="Script" id=17]
 [ext_resource path="res://scenes/oldeditor/sounds/click2.wav" type="AudioStream" id=18]
 [ext_resource path="res://scenes/oldeditor/sounds/hover.wav" type="AudioStream" id=19]
+[ext_resource path="res://scenes/editor/editor_top_menu.gd" type="Script" id=20]
+[ext_resource path="res://scenes/editor/assets/Dropdown.svg" type="Texture" id=21]
 [ext_resource path="res://scenes/editor/action_manager/action_manager.gd" type="Script" id=22]
 [ext_resource path="res://generation/generated_tiles.res" type="TileSet" id=23]
 [ext_resource path="res://scenes/menu/button_scripts/button_sound.gd" type="Script" id=24]
@@ -34,7 +36,6 @@
 [ext_resource path="res://scenes/editor/buttons/hotbar_button.tscn" type="PackedScene" id=36]
 [ext_resource path="res://scenes/editor/buttons/popup_custom.gd" type="Script" id=37]
 [ext_resource path="res://scenes/editor/assets/EditorSave.svg" type="Texture" id=38]
-[ext_resource path="res://scenes/menu/levels_list/icons/settings.png" type="Texture" id=39]
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=40]
 [ext_resource path="res://scenes/menu/levels_list/icons/copy.png" type="Texture" id=41]
 [ext_resource path="res://scenes/menu/levels_list/icons/import_from_code.png" type="Texture" id=42]
@@ -488,6 +489,7 @@ margin_top = 8.0
 margin_right = 758.0
 margin_bottom = 424.0
 mouse_filter = 2
+script = ExtResource( 20 )
 
 [node name="Options" type="HBoxContainer" parent="UI/UIContainer/EditorUI/Top"]
 margin_right = 160.0
@@ -526,17 +528,18 @@ size_flags_vertical = 3
 size_flags_stretch_ratio = 2.0
 theme_type_variation = "FlatPanel"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/PanelContainer"]
+[node name="Settings" type="HBoxContainer" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/PanelContainer"]
+unique_name_in_owner = true
 margin_left = 4.0
 margin_top = 4.0
 margin_right = 108.0
 margin_bottom = 28.0
 
-[node name="VSeparator" type="VSeparator" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/PanelContainer/HBoxContainer"]
+[node name="VSeparator" type="VSeparator" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/PanelContainer/Settings"]
 margin_right = 4.0
 margin_bottom = 24.0
 
-[node name="View" type="Button" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/PanelContainer/HBoxContainer"]
+[node name="View" type="Button" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/PanelContainer/Settings"]
 margin_left = 8.0
 margin_right = 32.0
 margin_bottom = 24.0
@@ -545,21 +548,21 @@ hint_tooltip = "Settings"
 focus_mode = 0
 size_flags_vertical = 3
 theme_type_variation = "ButtonTransparent"
-icon = ExtResource( 39 )
+icon = ExtResource( 21 )
 icon_align = 1
 expand_icon = true
 script = ExtResource( 37 )
 click_override = "DropdownSound"
 menu_path = NodePath("../../../Padding/ViewMenu")
-open_icon = ExtResource( 39 )
-close_icon = ExtResource( 39 )
+open_icon = ExtResource( 21 )
+close_icon = ExtResource( 15 )
 
-[node name="VSeparator2" type="VSeparator" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/PanelContainer/HBoxContainer"]
+[node name="VSeparator2" type="VSeparator" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/PanelContainer/Settings"]
 margin_left = 36.0
 margin_right = 40.0
 margin_bottom = 24.0
 
-[node name="Save" type="Button" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/PanelContainer/HBoxContainer"]
+[node name="Save" type="Button" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/PanelContainer/Settings"]
 margin_left = 44.0
 margin_right = 68.0
 margin_bottom = 24.0
@@ -573,12 +576,13 @@ icon_align = 1
 expand_icon = true
 script = ExtResource( 24 )
 
-[node name="VSeparator3" type="VSeparator" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/PanelContainer/HBoxContainer"]
+[node name="VSeparator3" type="VSeparator" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/PanelContainer/Settings"]
 margin_left = 72.0
 margin_right = 76.0
 margin_bottom = 24.0
 
-[node name="Quit" type="Button" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/PanelContainer/HBoxContainer"]
+[node name="Quit" type="Button" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/PanelContainer/Settings"]
+unique_name_in_owner = true
 margin_left = 80.0
 margin_right = 104.0
 margin_bottom = 24.0
@@ -603,9 +607,9 @@ anchor_right = 1.0
 margin_bottom = 109.0
 size_flags_horizontal = 3
 theme_type_variation = "FlatPanel2"
-script = ExtResource( 15 )
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu"]
+[node name="ViewDropdown" type="VBoxContainer" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu"]
+unique_name_in_owner = true
 margin_left = 4.0
 margin_top = 4.0
 margin_right = 108.0
@@ -613,7 +617,7 @@ margin_bottom = 146.0
 rect_clip_content = true
 custom_constants/separation = 2
 
-[node name="Grid" type="CheckButton" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/VBoxContainer"]
+[node name="Grid" type="CheckButton" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown"]
 margin_right = 104.0
 margin_bottom = 17.0
 focus_mode = 0
@@ -623,12 +627,12 @@ text = "Show Grid"
 align = 1
 script = ExtResource( 45 )
 
-[node name="HSeparator" type="HSeparator" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown"]
 margin_top = 19.0
 margin_right = 104.0
 margin_bottom = 23.0
 
-[node name="Layers" type="CheckButton" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/VBoxContainer"]
+[node name="Layers" type="CheckButton" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown"]
 margin_top = 25.0
 margin_right = 104.0
 margin_bottom = 42.0
@@ -639,12 +643,12 @@ text = "Show Layers"
 align = 1
 script = ExtResource( 45 )
 
-[node name="HSeparator2" type="HSeparator" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/VBoxContainer"]
+[node name="HSeparator2" type="HSeparator" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown"]
 margin_top = 44.0
 margin_right = 104.0
 margin_bottom = 48.0
 
-[node name="PixelSnap" type="CheckButton" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/VBoxContainer"]
+[node name="PixelSnap" type="CheckButton" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown"]
 margin_top = 50.0
 margin_right = 104.0
 margin_bottom = 67.0
@@ -655,12 +659,12 @@ text = "8px Snap"
 align = 1
 script = ExtResource( 45 )
 
-[node name="HSeparator3" type="HSeparator" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/VBoxContainer"]
+[node name="HSeparator3" type="HSeparator" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown"]
 margin_top = 69.0
 margin_right = 104.0
 margin_bottom = 73.0
 
-[node name="ResetZoom" type="Button" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/VBoxContainer"]
+[node name="ResetZoom" type="Button" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown"]
 margin_top = 75.0
 margin_right = 104.0
 margin_bottom = 92.0
@@ -670,12 +674,12 @@ custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "Reset Zoom"
 script = ExtResource( 24 )
 
-[node name="HSeparator4" type="HSeparator" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/VBoxContainer"]
+[node name="HSeparator4" type="HSeparator" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown"]
 margin_top = 94.0
 margin_right = 104.0
 margin_bottom = 98.0
 
-[node name="Autosaves" type="Button" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/VBoxContainer"]
+[node name="Autosaves" type="Button" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown"]
 margin_top = 100.0
 margin_right = 104.0
 margin_bottom = 117.0
@@ -685,12 +689,12 @@ custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "Autosaves"
 script = ExtResource( 24 )
 
-[node name="HSeparator5" type="HSeparator" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/VBoxContainer"]
+[node name="HSeparator5" type="HSeparator" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown"]
 margin_top = 119.0
 margin_right = 104.0
 margin_bottom = 123.0
 
-[node name="Settings" type="Button" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/VBoxContainer"]
+[node name="Settings" type="Button" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown"]
 margin_top = 125.0
 margin_right = 104.0
 margin_bottom = 142.0

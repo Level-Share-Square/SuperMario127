@@ -6140,3 +6140,5 @@ __meta__ = {
 [node name="ClickSound" type="AudioStreamPlayer" parent="BoundsControl"]
 stream = ExtResource( 120 )
 bus = "Sounds"
+
+[connection signal="screen_opened" from="Options/ScreenManager/Options" to="Options/ScreenManager/Options/Subscreens/Controls/VBoxContainer/Devices" method="screen_opened"]
