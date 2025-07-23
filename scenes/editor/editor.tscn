@@ -1054,7 +1054,7 @@ size_flags_vertical = 3
 [node name="Hotbar" type="HBoxContainer" parent="UI/UIContainer/EditorUI/Bottom"]
 unique_name_in_owner = true
 margin_top = 364.0
-margin_right = 268.0
+margin_right = 324.0
 margin_bottom = 416.0
 size_flags_vertical = 8
 custom_constants/separation = 0
@@ -1083,9 +1083,9 @@ script = ExtResource( 24 )
 
 [node name="Middle" type="Control" parent="UI/UIContainer/EditorUI/Bottom/Hotbar"]
 margin_left = 52.0
-margin_right = 252.0
+margin_right = 308.0
 margin_bottom = 52.0
-rect_min_size = Vector2( 200, 0 )
+rect_min_size = Vector2( 256, 0 )
 rect_clip_content = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/UIContainer/EditorUI/Bottom/Hotbar/Middle"]
@@ -1234,7 +1234,7 @@ custom_styles/panel = SubResource( 179 )
 visible = false
 margin_left = 4.0
 margin_top = 4.0
-margin_right = 196.0
+margin_right = 252.0
 margin_bottom = 28.0
 mouse_filter = 2
 size_flags_horizontal = 3
@@ -1344,8 +1344,8 @@ visible = false
 rect_min_size = Vector2( 200, 52 )
 
 [node name="Collapse" type="PanelContainer" parent="UI/UIContainer/EditorUI/Bottom/Hotbar"]
-margin_left = 252.0
-margin_right = 268.0
+margin_left = 308.0
+margin_right = 324.0
 margin_bottom = 52.0
 theme_type_variation = "FlatPanel"
 

@@ -10,6 +10,7 @@ margin_right = 143.0
 margin_bottom = 22.0
 rect_pivot_offset = Vector2( -87, -55 )
 toggle_mode = true
+keep_pressed_outside = false
 
 [node name="ContentBox" parent="Content/ContentMat" index="0"]
 margin_right = 139.0

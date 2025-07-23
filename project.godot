@@ -89,6 +89,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/menu/button_scripts/button_hover-rotate.gd"
 }, {
+"base": "PropertyEditor",
+"class": "ButtonPropertyEditor",
+"language": "GDScript",
+"path": "res://scenes/editor/windows/object_property_editor/property_editor_scenes/button_property_editor.gd"
+}, {
 "base": "Button",
 "class": "ButtonSound",
 "language": "GDScript",
@@ -669,6 +674,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/editor/windows/object_property_editor/property_editor_scenes/property_hints.gd"
 }, {
+"base": "ScrollContainer",
+"class": "PropertyTab",
+"language": "GDScript",
+"path": "res://scenes/editor/windows/object_property_editor/property_tab.gd"
+}, {
 "base": "LiquidBase",
 "class": "Quicksand",
 "language": "GDScript",
@@ -1001,6 +1011,7 @@ _global_script_class_icons={
 "BusGroup": "",
 "ButtSlideState": "",
 "ButtonHoverRotate": "",
+"ButtonPropertyEditor": "",
 "ButtonSound": "",
 "CameraCutscene": "",
 "CameraStopper": "",
@@ -1117,6 +1128,7 @@ _global_script_class_icons={
 "PropertyEditor": "",
 "PropertyEditorLoader": "",
 "PropertyHints": "",
+"PropertyTab": "",
 "Quicksand": "",
 "QuicksandHopState": "",
 "QuicksandIdleState": "",

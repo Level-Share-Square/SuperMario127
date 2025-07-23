@@ -15,8 +15,9 @@ func _ready() -> void:
 #	var test: Array = get_node_and_resource(NodePath(self_path))
 #	print(test[0].get_indexed(test[2]))
 	
-	update_text()
+	set_label_text(text)
 	update_text_styles()
+	text = ""
 	
 	if is_instance_valid(icon):
 		create_icon()
@@ -30,14 +31,17 @@ func _process(delta) -> void:
 	update_text_styles()
 
 
-func update_text() -> void:
-	if not text == "":
-		label.text = text
-		text = ""
+func set_label_text(new_text: String) -> void:
+	if not new_text.empty():
+		label.visible = true
+		label.text = new_text
 	else:
 		label.visible = false
 	
 	label.add_font_override("font", get_font("font"))
+	
+	yield(get_tree(), "idle_frame")
+	rect_min_size = content_mat.get_minimum_size()
 
 
 func update_text_styles() -> void:

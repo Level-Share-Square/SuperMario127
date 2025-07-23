@@ -1,16 +1,19 @@
+class_name PropertyTab
 extends ScrollContainer
 
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+const subgroup_pointers: Array = ["Buttons", "Lines", "Dialogue", "Warp"]
+
+onready var subgroups = $"%Subgroups"
 
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func add_editor(editor: PropertyEditor) -> void:
+	var subgroup = get_node("%" + subgroup_pointers[editor.subgroup])
+	subgroup.add_child(editor)
+	
+	if subgroup.get_child_count() > 0:
+		subgroup.show()
+		
+		# my hacky method of getting the horizontal separators to show up :D
+		var child_index = subgroup.get_index()
+		subgroups.get_child(child_index + 1).visible = true

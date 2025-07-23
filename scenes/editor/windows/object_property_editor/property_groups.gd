@@ -37,17 +37,20 @@ func create_property_editor(
 		property_editor.connect("ready", property_editor, "setup", [value, hints])
 		
 		var property_tab = get_or_add_tab(hints.tab)
-		print(property_tab)
-		property_tab.add_child(property_editor)
+		property_tab.add_editor(property_editor)
 
 
-func get_or_add_tab(tab_name: String) -> ScrollContainer:
+func get_or_add_tab(tab_name: String) -> PropertyTab:
 	var tab = tabs.get(tab_name)
 	
 	if not is_instance_valid(tab):
-		tab = ScrollContainer.new()
+		var scene: PackedScene = preload("res://scenes/editor/windows/object_property_editor/property_tab.tscn")
+		
+		if not is_instance_valid(scene):
+			return null
+		
+		tab = scene.instance()
 		tab.name = tab_name.capitalize()
-		tab.scroll_horizontal = false
 		
 		add_child(tab)
 		tabs.get_or_add(tab_name, tab)

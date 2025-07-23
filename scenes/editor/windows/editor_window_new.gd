@@ -55,12 +55,9 @@ func _ready() -> void:
 	if not self == get_tree().current_scene:
 		hide()
 	
-	while not is_instance_valid(title_node):
-		yield(get_tree(), "idle_frame")
-	
-	title_node.connect("ready", self, "set_title")
-	icon_node.connect("ready", self, "set_icon")
-	icon_node.connect("ready", self, "set_tooltip")
+	set_title(title)
+	set_icon(icon)
+	set_tooltip(icon_tooltip)
 
 
 func popup(rect: Rect2) -> void:

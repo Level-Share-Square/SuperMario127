@@ -39,15 +39,19 @@ func _ready():
 	palette_container.hide()
 	bottom_row.get_children()[0].pressed = true
 	selected_loadout = 0
+	
 	for item_button in button_container.get_children():
 		item_button.connect("button_down", self, "_on_item_button_pressed", [item_button])
 		item_button.change_item(placeable_items.placeable_items[loadouts[selected_loadout][item_button.get_index()]])
+	
 	for loadout_button in loadout_container.get_children():
 		if "Loadout" in loadout_button.name:
 			loadout_button.connect("button_down", self, "_on_loadout_pressed", [loadout_button])
 		else:
 			loadout_button.connect("button_down", self, "_on_palettes_pressed")
+	
 	editor.selected_item = placeable_items.placeable_items["obj_coin"]
+
 
 func _on_item_button_pressed(item_button):
 	var item_name: String = loadouts[selected_loadout][item_button.get_index()]
@@ -60,6 +64,7 @@ func _on_item_button_pressed(item_button):
 		"til":
 			editor.tool_manager.change_tool("TilePaint")
 
+
 func check_items():
 	for item_button in button_container.get_children():
 		if item_button.item == editor.selected_item:
@@ -67,6 +72,7 @@ func check_items():
 		item_button.palette = loadout_palettes[selected_loadout][item_button.get_index()]
 		item_button.icon_node.texture = item_button.item.icons[item_button.palette]
 	return
+
 
 func _on_loadout_pressed(loadout_button):
 	var loadout_palette: Array = []
@@ -85,9 +91,11 @@ func _on_loadout_pressed(loadout_button):
 	refresh_loadout()
 	check_items()
 
+
 func new_favorite_selected(placeable_item: Resource, index: int):
 	var boxes: Array = bottom_row.get_children()
 	var item_name =  placeable_items.placeable_items.find_key(placeable_item)
+	
 	if index < fav_items[selected_loadout].size():
 		loadouts[selected_loadout].insert(items_favorited[selected_loadout] - 1, loadouts[selected_loadout].pop_at(fav_items[selected_loadout].find(item_name)))
 		bottom_row.move_child(boxes[index], items_favorited[selected_loadout] - 1)
@@ -95,12 +103,14 @@ func new_favorite_selected(placeable_item: Resource, index: int):
 		items_favorited[selected_loadout] -= 1
 		refresh_loadout()
 		return
+	
 	fav_items[selected_loadout].append(item_name)
 	loadouts[selected_loadout].remove(index)
 	loadouts[selected_loadout].insert(items_favorited[selected_loadout], item_name)
 	bottom_row.move_child(boxes[index], items_favorited[selected_loadout])
 	items_favorited[selected_loadout] += 1
 	refresh_loadout()
+
 
 func on_item_selected(item: PlaceableItem):
 	var start_index: int = items_favorited[selected_loadout]
@@ -113,7 +123,8 @@ func on_item_selected(item: PlaceableItem):
 	loadouts[selected_loadout].insert(start_index, loadouts[selected_loadout].pop_back())
 	loadouts[selected_loadout][start_index] = placeable_items.placeable_items.find_key(item)
 	refresh_loadout()
-	
+
+
 func refresh_loadout():
 	var favs_amount: int = fav_items[selected_loadout].size()
 	for item_button in button_container.get_children():
@@ -121,6 +132,7 @@ func refresh_loadout():
 		item_button.set_favorite(favs_amount > 0)
 		item_button.change_item(placeable_items.placeable_items[item])
 		favs_amount -= 1
+
 
 func _on_palettes_pressed():
 	bottom_row.visible = palettes.pressed
@@ -135,12 +147,14 @@ func _on_palettes_pressed():
 			palette_button.icon_node.texture = item_palettes[palette_button.get_index()]
 		else:
 			palette_button.hide()
-			
+
+
 func palette_selected(palette):
 	bottom_row.show()
 	palette_container.hide()
 	palettes.pressed = false
-	print(palette)
+#	print(palette)
+	
 	for item_button in bottom_row.get_children():
 		if item_button.pressed:
 			item_button.palette = palette

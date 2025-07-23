@@ -13,6 +13,7 @@ margin_bottom = 180.0
 script = ExtResource( 2 )
 title = "{Object} Settings"
 icon_tooltip = "No object tooltip has been set..."
+window_size = Vector2( 256, 200 )
 
 [node name="Background" parent="." index="0"]
 margin_right = 363.0
@@ -32,10 +33,10 @@ margin_right = 359.0
 margin_right = 349.0
 
 [node name="WindowTitle" parent="ContentDivider/Header/HeaderMat/HeaderBox" index="2"]
-margin_right = 321.0
+margin_right = 320.0
 
 [node name="WindowClose" parent="ContentDivider/Header/HeaderMat/HeaderBox" index="3"]
-margin_left = 322.0
+margin_left = 321.0
 margin_right = 343.0
 
 [node name="HSeparator" parent="ContentDivider" index="1"]
