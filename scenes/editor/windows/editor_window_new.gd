@@ -97,6 +97,13 @@ func close():
 	hide()
 
 
+func toggle_window(size: Vector2) -> void:
+	if visible:
+		close()
+	else:
+		popup_centered(size)
+
+
 func drag_window(event):
 	if event is InputEventMouseButton:
 		if event.pressed:

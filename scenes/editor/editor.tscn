@@ -1454,7 +1454,7 @@ bus = "Sounds"
 [connection signal="undo" from="ActionManager" to="ZIndex/Tools/ObjectSelection" method="on_undo"]
 [connection signal="text_entered" from="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/SearchBar" to="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/ScrollContainer/CenterContainer/ItemsGrid" method="_on_search"]
 [connection signal="pressed" from="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/Search" to="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/ScrollContainer/CenterContainer/ItemsGrid" method="_on_search"]
-[connection signal="pressed" from="UI/UIContainer/EditorUI/Top/Options/PanelContainer/Settings" to="UI/EditorOptionsWindow" method="popup_centered" binds= [ Vector2( 400, 220 ) ]]
+[connection signal="pressed" from="UI/UIContainer/EditorUI/Top/Options/PanelContainer/Settings" to="UI/EditorOptionsWindow" method="toggle_window" binds= [ Vector2( 400, 220 ) ]]
 [connection signal="pressed" from="UI/UIContainer/EditorUI/Top/Tools/PanelContainer/HBoxContainer/Undo" to="ActionManager" method="undo"]
 [connection signal="pressed" from="UI/UIContainer/EditorUI/Top/Tools/PanelContainer/HBoxContainer/Redo" to="ActionManager" method="redo"]
 [connection signal="pressed" from="UI/UIContainer/EditorUI/Top/Tools/PanelContainer/HBoxContainer/SelectionActions/Copy" to="ZIndex/Tools/ObjectSelection" method="copy"]
