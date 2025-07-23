@@ -586,14 +586,14 @@ custom_constants/separation = 40
 alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Subscreens/Controls/VBoxContainer"]
-margin_top = 10.0
+margin_top = 8.0
 margin_right = 544.0
 margin_bottom = 66.0
 custom_constants/separation = 8
 
 [node name="Category" type="HBoxContainer" parent="Subscreens/Controls/VBoxContainer/VBoxContainer"]
 margin_right = 544.0
-margin_bottom = 24.0
+margin_bottom = 25.0
 custom_constants/separation = 12
 alignment = 1
 script = ExtResource( 13 )
@@ -604,13 +604,13 @@ remapper_path = NodePath("../../Remapper")
 [node name="Label" type="Label" parent="Subscreens/Controls/VBoxContainer/VBoxContainer/Category"]
 margin_left = 43.0
 margin_right = 133.0
-margin_bottom = 24.0
+margin_bottom = 25.0
 text = "Category:"
 
 [node name="Player1" type="Button" parent="Subscreens/Controls/VBoxContainer/VBoxContainer/Category"]
 margin_left = 145.0
 margin_right = 225.0
-margin_bottom = 24.0
+margin_bottom = 25.0
 rect_min_size = Vector2( 80, 0 )
 focus_neighbour_left = NodePath("../Hotkeys")
 theme_type_variation = "OptionsToggleSelect"
@@ -621,7 +621,7 @@ extend_amount = 2
 [node name="Player2" type="Button" parent="Subscreens/Controls/VBoxContainer/VBoxContainer/Category"]
 margin_left = 237.0
 margin_right = 317.0
-margin_bottom = 24.0
+margin_bottom = 25.0
 rect_min_size = Vector2( 80, 0 )
 theme_type_variation = "OptionsToggle"
 text = "Player 2"
@@ -631,7 +631,7 @@ extend_amount = 2
 [node name="Interface" type="Button" parent="Subscreens/Controls/VBoxContainer/VBoxContainer/Category"]
 margin_left = 329.0
 margin_right = 409.0
-margin_bottom = 24.0
+margin_bottom = 25.0
 rect_min_size = Vector2( 80, 0 )
 theme_type_variation = "OptionsToggle"
 text = "Interface"
@@ -641,7 +641,7 @@ extend_amount = 2
 [node name="Hotkeys" type="Button" parent="Subscreens/Controls/VBoxContainer/VBoxContainer/Category"]
 margin_left = 421.0
 margin_right = 501.0
-margin_bottom = 24.0
+margin_bottom = 25.0
 rect_min_size = Vector2( 80, 0 )
 focus_neighbour_right = NodePath("../Player1")
 theme_type_variation = "OptionsToggle"
@@ -650,9 +650,9 @@ script = ExtResource( 19 )
 extend_amount = 2
 
 [node name="Preset" type="HBoxContainer" parent="Subscreens/Controls/VBoxContainer/VBoxContainer"]
-margin_top = 32.0
+margin_top = 33.0
 margin_right = 544.0
-margin_bottom = 56.0
+margin_bottom = 58.0
 custom_constants/separation = 12
 alignment = 1
 script = ExtResource( 1 )
@@ -666,20 +666,20 @@ buttons_by_screen = {
 category_init = [ [ "Controls (Player 1)", "res://scenes/menu/options/controls/presets/default.cfg" ], [ "Controls (Player 2)", "res://scenes/menu/options/controls/presets/wasd.cfg" ], [ "Controls (Interface)", "res://scenes/menu/options/controls/presets/interface.cfg" ], [ "Controls (Hotkeys)", "res://scenes/menu/options/controls/presets/hotkeys.cfg" ], [ "Controls (Player 1) (Controller)", "res://scenes/menu/options/controls/presets/controller/default.cfg" ], [ "Controls (Player 2) (Controller)", "res://scenes/menu/options/controls/presets/controller/none.cfg" ], [ "Controls (Interface) (Controller)", "res://scenes/menu/options/controls/presets/controller/interface.cfg" ], [ "Controls (Hotkeys) (Controller)", "res://scenes/menu/options/controls/presets/controller/hotkeys.cfg" ] ]
 
 [node name="Label" type="Label" parent="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset"]
-margin_left = 48.0
-margin_right = 117.0
-margin_bottom = 24.0
+margin_left = 47.0
+margin_right = 118.0
+margin_bottom = 25.0
 text = "Preset: "
 
 [node name="Keyboard" type="HBoxContainer" parent="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset"]
-margin_left = 129.0
-margin_right = 496.0
-margin_bottom = 24.0
+margin_left = 130.0
+margin_right = 497.0
+margin_bottom = 25.0
 custom_constants/separation = 12
 
 [node name="Default" type="Button" parent="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset/Keyboard"]
 margin_right = 80.0
-margin_bottom = 24.0
+margin_bottom = 25.0
 rect_min_size = Vector2( 80, 0 )
 focus_neighbour_left = NodePath("../KBM")
 focus_neighbour_top = NodePath("../../../Category/Player1")
@@ -691,7 +691,7 @@ extend_amount = 2
 [node name="Mario63" type="Button" parent="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset/Keyboard"]
 margin_left = 92.0
 margin_right = 172.0
-margin_bottom = 24.0
+margin_bottom = 25.0
 rect_min_size = Vector2( 80, 0 )
 focus_neighbour_top = NodePath("../../../Category/Player2")
 theme_type_variation = "OptionsToggle"
@@ -702,7 +702,7 @@ extend_amount = 2
 [node name="WASD" type="Button" parent="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset/Keyboard"]
 margin_left = 184.0
 margin_right = 264.0
-margin_bottom = 24.0
+margin_bottom = 25.0
 rect_min_size = Vector2( 80, 0 )
 focus_neighbour_top = NodePath("../../../Category/Interface")
 theme_type_variation = "OptionsToggle"
@@ -713,7 +713,7 @@ extend_amount = 2
 [node name="KBM" type="Button" parent="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset/Keyboard"]
 margin_left = 276.0
 margin_right = 367.0
-margin_bottom = 24.0
+margin_bottom = 25.0
 rect_min_size = Vector2( 80, 0 )
 focus_neighbour_top = NodePath("../../../Category/Hotkeys")
 focus_neighbour_right = NodePath("../Default")
@@ -1005,9 +1005,9 @@ setting_key = "63_wing_cap"
 
 [node name="Player2" type="GridContainer" parent="Subscreens/Controls/VBoxContainer/Remapper"]
 visible = false
-margin_left = 14.0
+margin_left = 32.0
 margin_top = 1.0
-margin_right = 530.0
+margin_right = 512.0
 margin_bottom = 226.0
 custom_constants/vseparation = 24
 custom_constants/hseparation = 32
@@ -1563,7 +1563,7 @@ extend_amount = 2
 [node name="Devices" type="VBoxContainer" parent="Subscreens/Controls/VBoxContainer"]
 margin_top = 374.0
 margin_right = 544.0
-margin_bottom = 398.0
+margin_bottom = 399.0
 custom_constants/separation = 8
 script = ExtResource( 18 )
 default_theme = "OptionsToggle"
@@ -1571,20 +1571,20 @@ selected_theme = "OptionsToggleSelect"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Subscreens/Controls/VBoxContainer/Devices"]
 margin_right = 544.0
-margin_bottom = 24.0
+margin_bottom = 25.0
 custom_constants/separation = 12
 alignment = 1
 
 [node name="Label" type="Label" parent="Subscreens/Controls/VBoxContainer/Devices/HBoxContainer"]
-margin_left = 110.0
-margin_right = 205.0
-margin_bottom = 24.0
+margin_left = 109.0
+margin_right = 206.0
+margin_bottom = 25.0
 text = "Input Type:"
 
 [node name="Keyboard" type="Button" parent="Subscreens/Controls/VBoxContainer/Devices/HBoxContainer"]
-margin_left = 217.0
-margin_right = 313.0
-margin_bottom = 24.0
+margin_left = 218.0
+margin_right = 314.0
+margin_bottom = 25.0
 rect_min_size = Vector2( 96, 0 )
 focus_neighbour_left = NodePath("../Controller")
 theme_type_variation = "OptionsToggleSelect"
@@ -1593,9 +1593,9 @@ script = ExtResource( 19 )
 extend_amount = 2
 
 [node name="Controller" type="Button" parent="Subscreens/Controls/VBoxContainer/Devices/HBoxContainer"]
-margin_left = 325.0
-margin_right = 421.0
-margin_bottom = 24.0
+margin_left = 326.0
+margin_right = 422.0
+margin_bottom = 25.0
 rect_min_size = Vector2( 96, 0 )
 focus_neighbour_right = NodePath("../Keyboard")
 theme_type_variation = "OptionsToggle"
@@ -1604,9 +1604,9 @@ script = ExtResource( 19 )
 extend_amount = 2
 
 [node name="Control" type="Control" parent="Subscreens/Controls/VBoxContainer/Devices/HBoxContainer"]
-margin_left = 433.0
-margin_right = 433.0
-margin_bottom = 24.0
+margin_left = 434.0
+margin_right = 434.0
+margin_bottom = 25.0
 
 [node name="DeviceLabel" type="Label" parent="Subscreens/Controls/VBoxContainer/Devices/HBoxContainer"]
 visible = false

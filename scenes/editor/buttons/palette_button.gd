@@ -23,14 +23,6 @@ func button_down():
 		icon_node.rect_position.y, -3, 0.075,
 		Tween.TRANS_CIRC, Tween.EASE_OUT)
 	tween.start()
-	
-	var default_color: Color = Color.white if not favorite else FAVORITE_COLOR
-	var target_color: Color = FAVORITE_COLOR if not favorite else Color.white
-	
-	tween_progress.interpolate_property(self, "self_modulate",
-		self_modulate, target_color, WAIT_TIMER,
-		Tween.TRANS_CIRC, Tween.EASE_IN_OUT)
-	tween_progress.start()
 	hotbar.palette_selected(get_index())
 
 func button_up():

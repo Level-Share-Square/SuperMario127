@@ -55,6 +55,7 @@ margin_left = 358.0
 margin_right = 380.0
 
 [node name="HSeparator" parent="ContentDivider" index="1"]
+modulate = Color( 1, 1, 1, 1 )
 margin_right = 400.0
 
 [node name="ContentMat" parent="ContentDivider" index="2"]

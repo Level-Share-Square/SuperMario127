@@ -172,7 +172,6 @@ script = ExtResource( 8 )
 mouse_filter = 2
 script = ExtResource( 27 )
 inverse_tool_name = "ObjectPaint"
-right_click_tool_name = "TileErase"
 
 [node name="TileErase" type="Control" parent="ZIndex/Tools"]
 mouse_filter = 2
@@ -184,7 +183,6 @@ mouse_filter = 2
 script = ExtResource( 25 )
 tool_type = 1
 inverse_tool_name = "TilePaint"
-right_click_tool_name = "ObjectErase"
 
 [node name="ObjectErase" type="Control" parent="ZIndex/Tools"]
 mouse_filter = 2
@@ -1289,54 +1287,63 @@ mouse_filter = 2
 size_flags_vertical = 3
 
 [node name="Button1" parent="UI/UIContainer/EditorUI/Bottom/Hotbar/Middle/VBoxContainer/PanelContainer/PaletteContainer" instance=ExtResource( 13 )]
+toggle_mode = false
 group = SubResource( 181 )
 
 [node name="Button2" parent="UI/UIContainer/EditorUI/Bottom/Hotbar/Middle/VBoxContainer/PanelContainer/PaletteContainer" instance=ExtResource( 13 )]
 margin_left = 28.0
 margin_right = 52.0
 focus_mode = 2
+toggle_mode = false
 group = SubResource( 181 )
 
 [node name="Button3" parent="UI/UIContainer/EditorUI/Bottom/Hotbar/Middle/VBoxContainer/PanelContainer/PaletteContainer" instance=ExtResource( 13 )]
 margin_left = 56.0
 margin_right = 80.0
 focus_mode = 2
+toggle_mode = false
 group = SubResource( 181 )
 
 [node name="Button4" parent="UI/UIContainer/EditorUI/Bottom/Hotbar/Middle/VBoxContainer/PanelContainer/PaletteContainer" instance=ExtResource( 13 )]
 margin_left = 84.0
 margin_right = 108.0
 focus_mode = 2
+toggle_mode = false
 group = SubResource( 181 )
 
 [node name="Button5" parent="UI/UIContainer/EditorUI/Bottom/Hotbar/Middle/VBoxContainer/PanelContainer/PaletteContainer" instance=ExtResource( 13 )]
 margin_left = 112.0
 margin_right = 136.0
 focus_mode = 2
+toggle_mode = false
 group = SubResource( 181 )
 
 [node name="Button6" parent="UI/UIContainer/EditorUI/Bottom/Hotbar/Middle/VBoxContainer/PanelContainer/PaletteContainer" instance=ExtResource( 13 )]
 margin_left = 140.0
 margin_right = 164.0
 focus_mode = 2
+toggle_mode = false
 group = SubResource( 181 )
 
 [node name="Button7" parent="UI/UIContainer/EditorUI/Bottom/Hotbar/Middle/VBoxContainer/PanelContainer/PaletteContainer" instance=ExtResource( 13 )]
 margin_left = 168.0
 margin_right = 192.0
 focus_mode = 2
+toggle_mode = false
 group = SubResource( 181 )
 
 [node name="Button8" parent="UI/UIContainer/EditorUI/Bottom/Hotbar/Middle/VBoxContainer/PanelContainer/PaletteContainer" instance=ExtResource( 13 )]
 margin_left = 196.0
 margin_right = 220.0
 focus_mode = 2
+toggle_mode = false
 group = SubResource( 181 )
 
 [node name="Button9" parent="UI/UIContainer/EditorUI/Bottom/Hotbar/Middle/VBoxContainer/PanelContainer/PaletteContainer" instance=ExtResource( 13 )]
 margin_left = 224.0
 margin_right = 248.0
 focus_mode = 2
+toggle_mode = false
 group = SubResource( 181 )
 
 [node name="MouseBlocker" type="Control" parent="UI/UIContainer/EditorUI/Bottom/Hotbar/Middle"]
