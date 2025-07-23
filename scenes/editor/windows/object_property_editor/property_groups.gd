@@ -35,6 +35,8 @@ func create_property_editor(
 			type_path = "bool"
 		TYPE_INT:
 			type_path = "int"
+		TYPE_STRING_ARRAY:
+			type_path = "PoolStringArray"
 	
 	var scene: PackedScene = load("res://scenes/editor/windows/object_property_editor/property_editor_scenes/%s/" % type_path + hints.editor + "/" + hints.editor + ".tscn")
 	if is_instance_valid(scene):
@@ -61,6 +63,9 @@ func get_or_add_tab(tab_name: String) -> PropertyTab:
 		tab.name = tab_name.capitalize()
 		
 		add_child(tab)
+		move_child(tab, 0)
+		
 		tabs.get_or_add(tab_name, tab)
+		
 	
 	return tab
