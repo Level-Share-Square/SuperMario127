@@ -3,17 +3,22 @@ extends TabContainer
 
 
 var tabs: Dictionary = {}
+var object: GameObject
+var data: ObjectData
 
-
-func load_property_editors(data: ObjectData):
+func load_property_editors(game_object: GameObject, object_data: ObjectData):
+	object = game_object
+	data = object_data
 	for i in range(data.properties.size()):
 		create_property_editor(
+			i,
 			data.properties[i], 
 			data.property_hints[i]
 		)
 
 
 func create_property_editor(
+	index: int,
 	value, 
 	hints: PropertyHints
 ):
@@ -35,6 +40,9 @@ func create_property_editor(
 	if is_instance_valid(scene):
 		property_editor = scene.instance()
 		property_editor.connect("ready", property_editor, "setup", [value, hints])
+		property_editor.index = index
+		property_editor.object = object
+		property_editor.object_data = data
 		
 		var property_tab = get_or_add_tab(hints.tab)
 		property_tab.add_editor(property_editor)

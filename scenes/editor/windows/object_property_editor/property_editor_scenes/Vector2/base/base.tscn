@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://scenes/editor/windows/object_property_editor/property_editor_scenes/line_property_editor.gd" type="Script" id=1]
+[ext_resource path="res://scenes/editor/windows/object_property_editor/property_editor_scenes/Vector2/base/base.gd" type="Script" id=1]
 
 [node name="Vector2" type="HBoxContainer"]
 margin_right = 180.0
@@ -32,6 +32,7 @@ margin_right = 120.0
 margin_bottom = 26.0
 
 [node name="X" type="LineEdit" parent="MarginContainer/Editor"]
+unique_name_in_owner = true
 margin_right = 58.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 0, 22 )
@@ -43,6 +44,7 @@ placeholder_alpha = 0.4
 caret_blink = true
 
 [node name="Y" type="LineEdit" parent="MarginContainer/Editor"]
+unique_name_in_owner = true
 margin_left = 62.0
 margin_right = 120.0
 margin_bottom = 24.0

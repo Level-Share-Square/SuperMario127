@@ -183,17 +183,16 @@ func set_property(key, value, change_level_object = true, alias = null):
 		return
 	
 	self[key] = value
-	if alias != null:
-		editor_aliases[key] = alias
+	
+	var object_data = level_object.get_ref()
 	
 	if change_level_object and is_savable_property(key) and !is_preview:
-		var level_object_ref = level_object.get_ref()
 		var index: int = get_property_index(key)
 		
-		if index == level_object_ref.properties.size():
-			level_object_ref.properties.append(value)
+		if index == object_data.properties.size():
+			object_data.properties.append(value)
 		else:
-			level_object_ref.properties[index] = value
+			object_data.properties[index] = value
 		
 		if key == "visible":
 			if mode == 1:
