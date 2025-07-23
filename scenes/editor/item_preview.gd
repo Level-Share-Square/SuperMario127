@@ -14,7 +14,7 @@ func _process(delta):
 	rect_global_position = mouse_pos
 
 func update_item(item, palette, is_obj):
-	texture = item.icons[palette]
+	texture = item.previews[palette]
 	is_object = is_obj
 
 

@@ -143,3 +143,7 @@ func set_zoom_level(level : float) -> void:
 
 func add_zoom_level(level : float) -> void:
 	set_zoom_level(zoom_level + level)
+
+
+func _on_ResetZoom_button_down():
+	set_zoom_level(1.0)
