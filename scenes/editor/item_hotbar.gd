@@ -8,6 +8,7 @@ onready var button_container = $Middle/VBoxContainer/PanelContainer/HBoxContaine
 onready var loadout_container = $Middle/VBoxContainer/PanelContainer2/HBoxContainer
 onready var palette_container = $"%PaletteContainer"
 onready var palettes = $"%Palettes"
+onready var item_preview = $"%ItemPreview"
 
 var selected_loadout: int = 0
 
@@ -61,8 +62,10 @@ func _on_item_button_pressed(item_button):
 	match item_name.substr(0, 3):
 		"obj":
 			editor.tool_manager.change_tool("ObjectPaint")
+			item_preview.update_item(associated_item, associated_item.palette, true)
 		"til":
 			editor.tool_manager.change_tool("TilePaint")
+			item_preview.update_item(associated_item, associated_item.palette, false)
 
 
 func check_items():

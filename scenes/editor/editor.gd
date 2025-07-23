@@ -25,6 +25,7 @@ onready var save_button = $UI/EditorUI/Utilities/Save
 onready var editor_options = $UI/EditorOptionsWindow
 onready var selection_box = $"%ObjectSelection".get_node("SelectionBox")
 onready var edit_selection = $"%EditSelection"
+onready var item_preview = $"%ItemPreview"
 
 
 onready var backgrounds = $Backgrounds
@@ -35,6 +36,7 @@ signal item_changed(placeable_item)
 
 func _ready():
 	selected_item = placeable_items.placeable_items["obj_coin"]
+	item_preview.update_item(selected_item, selected_item.palette, true)
 	#this is to dynamically update the framerate
 	_update_editor_framerate()
 	
@@ -147,7 +149,3 @@ func switch_scenes():
 
 func get_shared_node() -> LevelShared:
 	return get_node(shared_path) as LevelShared
-	
-func new_item_selected(placeable_item):
-	selected_item = placeable_item
-	emit_signal("item_changed", placeable_item)
