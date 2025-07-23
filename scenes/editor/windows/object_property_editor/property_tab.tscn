@@ -28,7 +28,7 @@ size_flags_vertical = 3
 [node name="Warp" type="VBoxContainer" parent="SubgroupsMat/Subgroups"]
 unique_name_in_owner = true
 visible = false
-margin_right = 3.0
+margin_right = 4.0
 size_flags_horizontal = 3
 custom_constants/separation = 4
 

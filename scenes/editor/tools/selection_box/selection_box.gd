@@ -11,6 +11,7 @@ onready var selection_tools = $"%SelectionTools"
 onready var edit_selection = $"%EditSelection"
 onready var pivot = get_node("Pivot")
 onready var pivot_toggle = $"%PivotToggleButton"
+onready var item_actions = $"../../../UI/UIContainer/EditorUI/Top/Tools/ItemActions"
 
 onready var sel_border = preload("res://scenes/editor/tools/selection_box/selection_border.png")
 ## Delay between animation steps in frames.
@@ -38,15 +39,14 @@ func _ready():
 
 func hide_selection_box():
 	hide()
-	if pivot_toggle.pressed:
-		pivot.visible = false
+	pivot.visible = false
 	selection_box.self_modulate.a = 0
 	selection_box.rect_size = Vector2.ZERO
 	selection_box.rect_scale = Vector2.ONE
+	edit_selection.hide()
 	expand = false
 	selection_area.monitorable = false
 	selection_shape.disabled = true
-	snap_to_selected_size()
 
 func show_selection_box():
 	show()
@@ -59,47 +59,51 @@ func show_selection_box():
 	expand = false
 	selection_area.monitorable = false
 	selection_shape.disabled = true
+	edit_selection.show()
 	snap_to_selected_size()
 
 func _unhandled_input(event):
-	if selection_tools.active_tool == null:
-		if event.is_action_pressed("LMB") and editor.hovered_objects.empty():
-			pivot_toggle.pressed = false
-			pivot.hide()
-			pivot_position = Vector2.ZERO
-			if not editor.selected_objects.empty():
-				var action := SelectObjectsAction.new()
-				action.editor = editor
-				action.selection_box = selection_box
-				action.selected_objects = {}
-				editor.action_manager.commit_action(action)
-			else:
-				hide_selection_box()
-			
-			edit_selection.hide()
-			selection_box.rect_size = Vector2(0, 0)
-			start_pos = get_global_mouse_position()
-			selection_box.rect_position = start_pos
-			
-			white_highlight.visible = true
-			erase = true
-			expand = true
-			selection_shape.disabled = false
-			selection_area.monitorable = true
-		
-		elif event.is_action_released("LMB"):
-			if start_pos != null:
-				white_highlight.visible = false
-				expand = false
-				pivot.reveal_thyself()
-				if not (editor.selected_objects.empty() and selected_dict.empty()):
+	if editor.tool_manager.current_tool == self:
+		if selection_tools.active_tool == null:
+			if event.is_action_pressed("LMB") and editor.hovered_objects.empty():
+				pivot_toggle.pressed = false
+				pivot.hide()
+				pivot_position = Vector2.ZERO
+				if not editor.selected_objects.empty():
 					var action := SelectObjectsAction.new()
 					action.editor = editor
 					action.selection_box = selection_box
-					action.selected_objects = selected_dict
+					action.selected_objects = {}
 					editor.action_manager.commit_action(action)
 				else:
 					hide_selection_box()
+				
+				edit_selection.hide()
+				selection_box.rect_size = Vector2(0, 0)
+				start_pos = get_global_mouse_position()
+				selection_box.rect_position = start_pos
+				
+				white_highlight.visible = true
+				erase = true
+				expand = true
+				selection_shape.disabled = false
+				selection_area.monitorable = true
+			
+			elif event.is_action_released("LMB"):
+				if start_pos != null:
+					white_highlight.visible = false
+					expand = false
+					pivot.reveal_thyself()
+					if not (editor.selected_objects.empty() and selected_dict.empty()):
+						item_actions.show_selection_actions()
+						var action := SelectObjectsAction.new()
+						action.editor = editor
+						action.selection_box = selection_box
+						action.selected_objects = selected_dict
+						editor.action_manager.commit_action(action)
+					else:
+						hide_selection_box()
+						item_actions.hide_selection_actions()
 
 
 func _process(delta):
@@ -157,6 +161,9 @@ func box_expansion():
 
 
 func snap_to_selected_size():
+	if editor.selected_objects.empty():
+		hide_selection_box()
+		return
 	var far_left = 999999999
 	var far_right = -999999999
 	var far_up = 999999999
@@ -196,11 +203,11 @@ func toggle_ui(is_visible: bool):
 	
 	
 func on_redo():
-	snap_to_selected_size()
+	show_selection_box()
 	
 	
 func on_undo():
-	snap_to_selected_size()
+	show_selection_box()
 	
 	
 func copy():
@@ -213,6 +220,7 @@ func copy():
 				properties.append(value_util.encode_value(property))
 			copied_objects.append({"type_id": data.type_id, "palette": data.palette, "properties": properties})
 		OS.set_clipboard(JSON.print(copied_objects))
+		item_actions.verify_clipboard()
 
 func generate_object_data():
 	var data = JSON.parse(OS.get_clipboard())
@@ -237,6 +245,8 @@ func paste():
 	if object_data == []:
 		return
 	else:
+		editor.tool_manager.change_tool(name)
+		show_selection_box()
 		for object in selected_dict:
 			object.modulate = Color(1, 1, 1, object.modulate.a)
 		selected_dict = {}
@@ -249,4 +259,19 @@ func paste():
 			pass
 		editor.selected_objects = action.new_objects
 		selected_dict = action.new_objects
-		snap_to_selected_size()
+		show_selection_box()
+		item_actions.show_selection_actions()
+
+
+func _on_Delete_button_down():
+	for object in selected_dict:
+		object.modulate = Color(1, 1, 1, object.modulate.a)
+	var action = EraseObjectBulkAction.new()
+	action.shared = shared
+	action.objects = editor.selected_objects.keys()
+	editor.action_manager.commit_action(action)
+
+	editor.selected_objects = {}
+	selected_dict = {}
+	hide_selection_box()
+	item_actions.hide_selection_actions()

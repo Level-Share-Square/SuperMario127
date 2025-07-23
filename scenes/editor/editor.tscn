@@ -1,4 +1,4 @@
-[gd_scene load_steps=77 format=2]
+[gd_scene load_steps=78 format=2]
 
 [ext_resource path="res://scenes/menu/options/options.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/menu/menu_controller/screen_manager.gd" type="Script" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://scenes/editor/buttons/palette_button.tscn" type="PackedScene" id=13]
 [ext_resource path="res://scenes/editor/windows/editor_options/editor_options_window_2.tscn" type="PackedScene" id=14]
 [ext_resource path="res://scenes/editor/editor_settings_dropdown.gd" type="Script" id=15]
+[ext_resource path="res://scenes/editor/selection_actions.gd" type="Script" id=16]
 [ext_resource path="res://scenes/editor/item_hotbar.gd" type="Script" id=17]
 [ext_resource path="res://scenes/oldeditor/sounds/click2.wav" type="AudioStream" id=18]
 [ext_resource path="res://scenes/oldeditor/sounds/hover.wav" type="AudioStream" id=19]
@@ -701,32 +702,33 @@ script = ExtResource( 24 )
 
 [node name="Padding" type="Control" parent="UI/UIContainer/EditorUI/Top"]
 margin_left = 164.0
-margin_right = 678.0
+margin_right = 642.0
 margin_bottom = 416.0
 mouse_filter = 2
 size_flags_horizontal = 3
 
 [node name="Tools" type="HBoxContainer" parent="UI/UIContainer/EditorUI/Top"]
-margin_left = 682.0
+margin_left = 646.0
 margin_right = 750.0
 margin_bottom = 32.0
 size_flags_vertical = 0
 custom_constants/separation = 0
 
-[node name="PanelContainer" type="PanelContainer" parent="UI/UIContainer/EditorUI/Top/Tools"]
-margin_right = 68.0
+[node name="ItemActions" type="PanelContainer" parent="UI/UIContainer/EditorUI/Top/Tools"]
+margin_right = 104.0
 margin_bottom = 32.0
 size_flags_vertical = 3
 size_flags_stretch_ratio = 2.0
 theme_type_variation = "FlatPanel"
+script = ExtResource( 16 )
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/UIContainer/EditorUI/Top/Tools/PanelContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/UIContainer/EditorUI/Top/Tools/ItemActions"]
 margin_left = 4.0
 margin_top = 4.0
-margin_right = 64.0
+margin_right = 100.0
 margin_bottom = 28.0
 
-[node name="Undo" type="Button" parent="UI/UIContainer/EditorUI/Top/Tools/PanelContainer/HBoxContainer"]
+[node name="Undo" type="Button" parent="UI/UIContainer/EditorUI/Top/Tools/ItemActions/HBoxContainer"]
 margin_right = 24.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 24, 24 )
@@ -740,12 +742,12 @@ expand_icon = true
 script = ExtResource( 24 )
 click_override = "UndoSound"
 
-[node name="VSeparator" type="VSeparator" parent="UI/UIContainer/EditorUI/Top/Tools/PanelContainer/HBoxContainer"]
+[node name="VSeparator" type="VSeparator" parent="UI/UIContainer/EditorUI/Top/Tools/ItemActions/HBoxContainer"]
 margin_left = 28.0
 margin_right = 32.0
 margin_bottom = 24.0
 
-[node name="Redo" type="Button" parent="UI/UIContainer/EditorUI/Top/Tools/PanelContainer/HBoxContainer"]
+[node name="Redo" type="Button" parent="UI/UIContainer/EditorUI/Top/Tools/ItemActions/HBoxContainer"]
 margin_left = 36.0
 margin_right = 60.0
 margin_bottom = 24.0
@@ -760,19 +762,39 @@ expand_icon = true
 script = ExtResource( 24 )
 click_override = "RedoSound"
 
-[node name="SelectionActions" type="HBoxContainer" parent="UI/UIContainer/EditorUI/Top/Tools/PanelContainer/HBoxContainer"]
+[node name="SelectionActions" type="HBoxContainer" parent="UI/UIContainer/EditorUI/Top/Tools/ItemActions/HBoxContainer"]
+unique_name_in_owner = true
 visible = false
 margin_left = 64.0
-margin_right = 168.0
+margin_right = 132.0
 margin_bottom = 24.0
 
-[node name="VSeparator2" type="VSeparator" parent="UI/UIContainer/EditorUI/Top/Tools/PanelContainer/HBoxContainer/SelectionActions"]
+[node name="VSeparator4" type="VSeparator" parent="UI/UIContainer/EditorUI/Top/Tools/ItemActions/HBoxContainer/SelectionActions"]
 margin_right = 4.0
 margin_bottom = 24.0
 
-[node name="Copy" type="Button" parent="UI/UIContainer/EditorUI/Top/Tools/PanelContainer/HBoxContainer/SelectionActions"]
+[node name="Delete" type="Button" parent="UI/UIContainer/EditorUI/Top/Tools/ItemActions/HBoxContainer/SelectionActions"]
 margin_left = 8.0
 margin_right = 32.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+hint_tooltip = "Delete Selection"
+focus_mode = 0
+size_flags_vertical = 3
+theme_type_variation = "ButtonTransparent"
+icon = ExtResource( 54 )
+icon_align = 1
+expand_icon = true
+script = ExtResource( 24 )
+
+[node name="VSeparator2" type="VSeparator" parent="UI/UIContainer/EditorUI/Top/Tools/ItemActions/HBoxContainer/SelectionActions"]
+margin_left = 36.0
+margin_right = 40.0
+margin_bottom = 24.0
+
+[node name="Copy" type="Button" parent="UI/UIContainer/EditorUI/Top/Tools/ItemActions/HBoxContainer/SelectionActions"]
+margin_left = 44.0
+margin_right = 68.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 24, 24 )
 hint_tooltip = "Copy"
@@ -784,14 +806,19 @@ icon_align = 1
 expand_icon = true
 script = ExtResource( 24 )
 
-[node name="VSeparator3" type="VSeparator" parent="UI/UIContainer/EditorUI/Top/Tools/PanelContainer/HBoxContainer/SelectionActions"]
-margin_left = 36.0
-margin_right = 40.0
+[node name="PasteAction" type="HBoxContainer" parent="UI/UIContainer/EditorUI/Top/Tools/ItemActions/HBoxContainer"]
+unique_name_in_owner = true
+margin_left = 64.0
+margin_right = 96.0
 margin_bottom = 24.0
 
-[node name="Paste" type="Button" parent="UI/UIContainer/EditorUI/Top/Tools/PanelContainer/HBoxContainer/SelectionActions"]
-margin_left = 44.0
-margin_right = 68.0
+[node name="VSeparator3" type="VSeparator" parent="UI/UIContainer/EditorUI/Top/Tools/ItemActions/HBoxContainer/PasteAction"]
+margin_right = 4.0
+margin_bottom = 24.0
+
+[node name="Paste" type="Button" parent="UI/UIContainer/EditorUI/Top/Tools/ItemActions/HBoxContainer/PasteAction"]
+margin_left = 8.0
+margin_right = 32.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 24, 24 )
 hint_tooltip = "Paste"
@@ -799,25 +826,6 @@ focus_mode = 0
 size_flags_vertical = 3
 theme_type_variation = "ButtonTransparent"
 icon = ExtResource( 42 )
-icon_align = 1
-expand_icon = true
-script = ExtResource( 24 )
-
-[node name="VSeparator4" type="VSeparator" parent="UI/UIContainer/EditorUI/Top/Tools/PanelContainer/HBoxContainer/SelectionActions"]
-margin_left = 72.0
-margin_right = 76.0
-margin_bottom = 24.0
-
-[node name="Delete" type="Button" parent="UI/UIContainer/EditorUI/Top/Tools/PanelContainer/HBoxContainer/SelectionActions"]
-margin_left = 80.0
-margin_right = 104.0
-margin_bottom = 24.0
-rect_min_size = Vector2( 24, 24 )
-hint_tooltip = "Delete Selection"
-focus_mode = 0
-size_flags_vertical = 3
-theme_type_variation = "ButtonTransparent"
-icon = ExtResource( 54 )
 icon_align = 1
 expand_icon = true
 script = ExtResource( 24 )
@@ -1466,10 +1474,11 @@ bus = "Sounds"
 [connection signal="text_entered" from="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/SearchBar" to="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/ScrollContainer/CenterContainer/ItemsGrid" method="_on_search"]
 [connection signal="pressed" from="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/Search" to="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/ScrollContainer/CenterContainer/ItemsGrid" method="_on_search"]
 [connection signal="pressed" from="UI/UIContainer/EditorUI/Top/Options/PanelContainer/Settings" to="UI/EditorOptionsWindow" method="toggle_window" binds= [ Vector2( 400, 220 ) ]]
-[connection signal="pressed" from="UI/UIContainer/EditorUI/Top/Tools/PanelContainer/HBoxContainer/Undo" to="ActionManager" method="undo"]
-[connection signal="pressed" from="UI/UIContainer/EditorUI/Top/Tools/PanelContainer/HBoxContainer/Redo" to="ActionManager" method="redo"]
-[connection signal="pressed" from="UI/UIContainer/EditorUI/Top/Tools/PanelContainer/HBoxContainer/SelectionActions/Copy" to="ZIndex/Tools/ObjectSelection" method="copy"]
-[connection signal="pressed" from="UI/UIContainer/EditorUI/Top/Tools/PanelContainer/HBoxContainer/SelectionActions/Paste" to="ZIndex/Tools/ObjectSelection" method="paste"]
+[connection signal="pressed" from="UI/UIContainer/EditorUI/Top/Tools/ItemActions/HBoxContainer/Undo" to="ActionManager" method="undo"]
+[connection signal="pressed" from="UI/UIContainer/EditorUI/Top/Tools/ItemActions/HBoxContainer/Redo" to="ActionManager" method="redo"]
+[connection signal="button_down" from="UI/UIContainer/EditorUI/Top/Tools/ItemActions/HBoxContainer/SelectionActions/Delete" to="ZIndex/Tools/ObjectSelection" method="_on_Delete_button_down"]
+[connection signal="pressed" from="UI/UIContainer/EditorUI/Top/Tools/ItemActions/HBoxContainer/SelectionActions/Copy" to="ZIndex/Tools/ObjectSelection" method="copy"]
+[connection signal="pressed" from="UI/UIContainer/EditorUI/Top/Tools/ItemActions/HBoxContainer/PasteAction/Paste" to="ZIndex/Tools/ObjectSelection" method="paste"]
 [connection signal="tool_picked" from="UI/UIContainer/EditorUI/Middle/Tools" to="ZIndex/Tools" method="_on_Tools_tool_picked"]
 [connection signal="pressed" from="UI/UIContainer/EditorUI/Bottom/Hotbar/ItemPickerButton/Button" to="UI/UIContainer/ItemPickerPanel" method="toggle"]
 [connection signal="screen_opened" from="Options/ScreenManager/Options" to="Options/ScreenManager/Options/Subscreens/Controls/VBoxContainer/Devices" method="screen_opened"]
