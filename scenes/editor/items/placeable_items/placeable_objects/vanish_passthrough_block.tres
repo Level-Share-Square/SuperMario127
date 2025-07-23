@@ -6,7 +6,7 @@
 
 [resource]
 script = ExtResource( 1 )
-item_name = "Vanish Passable Block"
+item_name = "Vanish Passable Grate"
 groups = PoolStringArray( "warp" )
 change_to = ""
 items_in_sequence = 0

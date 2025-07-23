@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource( 1 )
-item_name = "Vanish Pepper"
+item_name = "Ghost Pepper"
 groups = PoolStringArray( "warp" )
 change_to = ""
 items_in_sequence = 0
