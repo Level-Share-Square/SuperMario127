@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=191 format=2]
+[gd_resource type="Resource" load_steps=192 format=2]
 
 [ext_resource path="res://scenes/editor/items/placeable_items.gd" type="Script" id=1]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/blue_coin.tres" type="Resource" id=2]
@@ -190,6 +190,7 @@
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/grass_slope_right.tres" type="Resource" id=188]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/grass_half_tile.tres" type="Resource" id=189]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/grass_slope_left.tres" type="Resource" id=190]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/key.tres" type="Resource" id=191]
 
 [resource]
 script = ExtResource( 1 )
@@ -249,6 +250,7 @@ placeable_items = {
 "obj_hover_box": ExtResource( 24 ),
 "obj_hover_nozzle": ExtResource( 28 ),
 "obj_jelectro": ExtResource( 80 ),
+"obj_key": ExtResource( 191 ),
 "obj_koopa_troopa": ExtResource( 38 ),
 "obj_large_cave_spore": ExtResource( 66 ),
 "obj_large_cave_tree": ExtResource( 55 ),

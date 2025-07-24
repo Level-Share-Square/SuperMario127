@@ -16,6 +16,9 @@ signal zoom_changed(zoom_level)
 var speedup_held: bool
 var is_moving: bool
 
+func _ready():
+	position = Vector2(288, 840)
+
 func _unhandled_input(event):
 	var zoom_amount = 0.25
 	if Input.is_action_pressed("8_pixel_lock"):

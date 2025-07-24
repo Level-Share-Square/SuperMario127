@@ -4,6 +4,7 @@ signal coin_collected(new_value)
 signal red_coin_collected(new_value)
 signal shine_shard_collected(new_value)
 signal purple_starbit_collected(new_value)
+signal local_key_collected(new_value)
 
 signal switch_state_changed
 signal hover_fludd_activated
@@ -18,6 +19,7 @@ var max_shine_shards := 0
 var purple_starbits_collected := [[0, []]]
 var max_purple_starbits := 0
 var required_purple_starbits = []
+var local_keys_collected := []
 var nozzles_collected = ["null"]
 var teleporters = []
 var transition_data: Dictionary = {}
@@ -37,6 +39,7 @@ func reload():
 	red_coins_collected = Singleton.CheckpointSaved.current_red_coins.duplicate(true)
 	shine_shards_collected = Singleton.CheckpointSaved.current_shine_shards.duplicate(true)
 	purple_starbits_collected = Singleton.CheckpointSaved.current_purple_starbits.duplicate(true)
+	local_keys_collected = Singleton.CheckpointSaved.current_local_keys.duplicate(true)
 	nozzles_collected = Singleton.CheckpointSaved.nozzles_collected.duplicate(true)
 	liquid_positions = Singleton.CheckpointSaved.liquid_positions.duplicate(true)
 	switch_state = Singleton.CheckpointSaved.switch_state.duplicate(true)
@@ -111,6 +114,11 @@ func collect_purple_starbit(id: int):
 	purple_starbits_collected[area][0] += 1
 	purple_starbits_collected[area][1].append(id)
 	emit_signal("purple_starbit_collected", purple_starbits_collected[area][0])
+
+func collect_local_key(id: String):
+	if !(id in local_keys_collected):
+		local_keys_collected.append(id)
+		emit_signal("local_key_collected", id)
 
 
 func activate_shine(id: int):
