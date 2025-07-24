@@ -58,7 +58,7 @@ func _ready():
 			if is_collected:
 				scrollable_shines.append(i)
 			if !is_collected && final_select_shine == false:
-				scrollable_shines.append(i)
+				scrollable_shines.append(i if i != 0 else 1)
 				final_select_shine = true
 			if (i == find_last_collected_shine()) || find_last_collected_shine() == -1:
 				end = true
@@ -111,7 +111,7 @@ func _ready():
 	
 	move_shine_sprites(true) # make sure everything is in the right spot and size and such
 	update_labels()
-
+	print(scrollable_shines)
 
 func _input(event):
 	if Input.is_action_just_pressed("ui_right"):
