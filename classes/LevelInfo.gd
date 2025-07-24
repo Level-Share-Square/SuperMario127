@@ -153,7 +153,7 @@ func init_collectibles():
 						"do_kick_out": object.properties[14],
 						"enabled": object.properties[4],
 					}
-					shine_dictionary.merge({"entrance_area": -1, "entrance_tag": "_entrance"} if object.properties.size() == 18 else {"entrance_area": object.properties[18], "entrance_tag": object.properties[19]})
+					shine_dictionary.merge({"entrance_area": -1, "entrance_tag": "_entrance"} if object.properties.size() != 20 else {"entrance_area": object.properties[18], "entrance_tag": object.properties[19]})
 		
 					# Lol band aid
 					if object.properties.size() > 13:
