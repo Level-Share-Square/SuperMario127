@@ -1,9 +1,9 @@
 extends EditorWindow
 
-var level_name
-var author
-var description
-var thumbnail_url
+onready var level_name = $"%Level Name"
+onready var author = $"%Author"
+onready var description = $"%Description"
+onready var thumbnail_url = $"%ThumbnailURL"
 
 signal open_editor_settings
 

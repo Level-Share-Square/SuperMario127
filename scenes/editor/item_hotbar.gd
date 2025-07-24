@@ -8,6 +8,7 @@ onready var button_container = $Middle/VBoxContainer/PanelContainer/HBoxContaine
 onready var loadout_container = $Middle/VBoxContainer/PanelContainer2/HBoxContainer
 onready var palette_container = $"%PaletteContainer"
 onready var palettes = $"%Palettes"
+onready var item_preview = $"%ItemPreview"
 
 var selected_loadout: int = 0
 
@@ -21,17 +22,17 @@ var fav_items: Array = [
 var items_favorited: Array = [0, 0, 0, 0] #Per each loadout
 
 var loadouts: Array = [
-	["obj_coin", "obj_mario", "til_grass", "til_brick", "obj_shine", "obj_star_coin", "obj_red_coin"],
-	["obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus"],
-	["obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus"],
-	["obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus"],
+	["obj_coin", "obj_mario", "til_grass", "til_brick", "obj_shine", "obj_star_coin", "obj_red_coin", "obj_blue_coin", "obj_barrel_cactus", "til_cabin_window"],
+	["obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus"],
+	["obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus"],
+	["obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus"],
 ]
 
 var loadout_palettes: Array = [
-	[0, 0, 0, 0, 0, 0, 0],
-	[0, 0, 0, 0, 0, 0, 0],
-	[0, 0, 0, 0, 0, 0, 0],
-	[0, 0, 0, 0, 0, 0, 0],
+	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 ]
 
 func _ready():
@@ -61,8 +62,10 @@ func _on_item_button_pressed(item_button):
 	match item_name.substr(0, 3):
 		"obj":
 			editor.tool_manager.change_tool("ObjectPaint")
+			item_preview.update_item(associated_item, associated_item.palette, true)
 		"til":
 			editor.tool_manager.change_tool("TilePaint")
+			item_preview.update_item(associated_item, associated_item.palette, false)
 
 
 func check_items():
@@ -118,8 +121,8 @@ func on_item_selected(item: PlaceableItem):
 	var selected_box: Button = boxes[start_index]
 	selected_box.change_item(item)
 	selected_box.visible = true
-	boxes[6].palette = 0
-	bottom_row.move_child(boxes[6], start_index)
+	boxes[9].palette = 0
+	bottom_row.move_child(boxes[9], start_index)
 	loadouts[selected_loadout].insert(start_index, loadouts[selected_loadout].pop_back())
 	loadouts[selected_loadout][start_index] = placeable_items.placeable_items.find_key(item)
 	refresh_loadout()

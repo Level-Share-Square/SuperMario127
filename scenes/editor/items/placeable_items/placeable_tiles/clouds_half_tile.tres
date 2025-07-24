@@ -1,0 +1,26 @@
+[gd_resource type="Resource" load_steps=12 format=2]
+
+[ext_resource path="res://scenes/editor/items/placeable_tile.gd" type="Script" id=1]
+[ext_resource path="res://assets/tiles/cloud/palletes/3_block.png" type="Texture" id=2]
+[ext_resource path="res://assets/tiles/cloud/palletes/2_block.png" type="Texture" id=3]
+[ext_resource path="res://assets/tiles/cloud/palletes/7_block.png" type="Texture" id=4]
+[ext_resource path="res://assets/tiles/cloud/palletes/4_block.png" type="Texture" id=5]
+[ext_resource path="res://assets/tiles/cloud/palletes/1_block.png" type="Texture" id=6]
+[ext_resource path="res://assets/tiles/cloud/palletes/8_block.png" type="Texture" id=7]
+[ext_resource path="res://assets/tiles/cloud/palletes/0_block.png" type="Texture" id=8]
+[ext_resource path="res://assets/tiles/cloud/cloud_fullblock.png" type="Texture" id=9]
+[ext_resource path="res://assets/tiles/cloud/palletes/5_block.png" type="Texture" id=10]
+[ext_resource path="res://assets/tiles/cloud/palletes/6_block.png" type="Texture" id=11]
+
+[resource]
+script = ExtResource( 1 )
+item_name = "Clouds"
+groups = PoolStringArray( "special" )
+change_to = ""
+items_in_sequence = 0
+index_in_sequence = 0
+icons = [ ExtResource( 9 ), ExtResource( 8 ), ExtResource( 6 ), ExtResource( 3 ), ExtResource( 2 ), ExtResource( 5 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 4 ), ExtResource( 7 ) ]
+previews = [ ExtResource( 9 ) ]
+priority = 0
+tileset_id = 39
+tile_id = 1

@@ -47,6 +47,7 @@ func get_items_by_group(group: String) -> Array:
 		filtered_items.append(categories[group.capitalize()].placeable_items[item])
 	
 	filtered_items.sort_custom(self, "_sort_by_priority")
+	print(filtered_items)
 	return filtered_items
 
 

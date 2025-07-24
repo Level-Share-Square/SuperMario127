@@ -22,13 +22,7 @@ func on_button_pressed(button: Button):
 			pass
 		"PixelSnap":
 			editor.pixel_lock = !button.pressed
-		"ResetZoom":
-			editor_camera.set_zoom_level(1.0)
 		"Autosaves":
 			pass
 		"Settings":
 			pass
-		"Save":
-			pass
-		"Quit":
-			editor.quit_to_menu() #Add unsaved changes check later

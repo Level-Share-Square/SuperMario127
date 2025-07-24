@@ -14,7 +14,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/menu/level_portal/login/account_info.gd"
 }, {
-"base": "Node",
+"base": "Reference",
 "class": "Action",
 "language": "GDScript",
 "path": "res://scenes/editor/action_manager/actions/action.gd"
@@ -284,7 +284,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/oldeditor/editor_hitbox.gd"
 }, {
-"base": "Control",
+"base": "Reference",
 "class": "EditorTool",
 "language": "GDScript",
 "path": "res://scenes/editor/tools/editor_tool.gd"
@@ -293,11 +293,6 @@ _global_script_classes=[ {
 "class": "EditorWindow",
 "language": "GDScript",
 "path": "res://scenes/editor/windows/editor_window_new.gd"
-}, {
-"base": "Popup",
-"class": "EditorWindowOld",
-"language": "GDScript",
-"path": "res://scenes/editor/windows/editor_window.gd"
 }, {
 "base": "KinematicBody2D",
 "class": "EnemyBase",
@@ -414,7 +409,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/menu/levels_list/misc/http_thumbnails.gd"
 }, {
-"base": "ScrollContainer",
+"base": "Reference",
 "class": "HelpPage",
 "language": "GDScript",
 "path": "res://scenes/oldeditor/window/HelpPage.gd"
@@ -662,7 +657,7 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "Powerup",
 "language": "GDScript",
-"path": "res://scenes/actors/mario/Powerup.gd"
+"path": "res://scenes/actors/mario/powerups/Powerup.gd"
 }, {
 "base": "HBoxContainer",
 "class": "PropertyEditor",
@@ -774,7 +769,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/editor/tools/selection_box/selection_tool.gd"
 }, {
-"base": "Node",
+"base": "ButtonSound",
 "class": "SelectionToolButton",
 "language": "GDScript",
 "path": "res://scenes/editor/tools/selection_box/tool_button.gd"
@@ -854,7 +849,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/player/ui_new/timers/timer_manager.gd"
 }, {
-"base": "Control",
+"base": "Reference",
 "class": "ToolManager",
 "language": "GDScript",
 "path": "res://scenes/editor/tools/tool_manager.gd"
@@ -1057,7 +1052,6 @@ _global_script_class_icons={
 "EditorHitbox": "",
 "EditorTool": "",
 "EditorWindow": "",
-"EditorWindowOld": "",
 "EnemyBase": "",
 "EnemyDamage": "",
 "EnemyPatrolState": "",

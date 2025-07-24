@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=266 format=2]
+[gd_resource type="SpriteFrames" load_steps=280 format=2]
 
 [ext_resource path="res://scenes/actors/mario/mario.png" type="Texture" id=1]
 [ext_resource path="res://scenes/actors/mario/mario_shine_get.png" type="Texture" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://scenes/actors/mario/animations/talking/mario/disagree.png" type="Texture" id=10]
 [ext_resource path="res://scenes/actors/mario/animations/talking/mario/thinking.png" type="Texture" id=11]
 [ext_resource path="res://scenes/actors/mario/animations/talking/mario/angry.png" type="Texture" id=12]
+[ext_resource path="res://scenes/actors/mario/animations/key_get/mario.png" type="Texture" id=13]
 
 [sub_resource type="AtlasTexture" id=301]
 atlas = ExtResource( 12 )
@@ -380,6 +381,58 @@ region = Rect2( 48, 240, 48, 48 )
 [sub_resource type="AtlasTexture" id=87]
 atlas = ExtResource( 1 )
 region = Rect2( 48, 192, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=336]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 672, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=337]
+atlas = ExtResource( 1 )
+region = Rect2( 48, 672, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=338]
+atlas = ExtResource( 1 )
+region = Rect2( 96, 672, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=339]
+atlas = ExtResource( 1 )
+region = Rect2( 144, 672, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=340]
+atlas = ExtResource( 1 )
+region = Rect2( 192, 672, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=341]
+atlas = ExtResource( 1 )
+region = Rect2( 240, 672, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=342]
+atlas = ExtResource( 1 )
+region = Rect2( 288, 672, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=343]
+atlas = ExtResource( 1 )
+region = Rect2( 336, 672, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=344]
+atlas = ExtResource( 1 )
+region = Rect2( 528, 48, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=345]
+atlas = ExtResource( 13 )
+region = Rect2( 0, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=346]
+atlas = ExtResource( 13 )
+region = Rect2( 48, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=347]
+atlas = ExtResource( 13 )
+region = Rect2( 96, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=348]
+atlas = ExtResource( 13 )
+region = Rect2( 144, 0, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=187]
 atlas = ExtResource( 4 )
@@ -1185,6 +1238,11 @@ animations = [ {
 "frames": [ SubResource( 87 ) ],
 "loop": false,
 "name": "jumpRight",
+"speed": 12.0
+}, {
+"frames": [ SubResource( 336 ), SubResource( 337 ), SubResource( 338 ), SubResource( 339 ), SubResource( 340 ), SubResource( 341 ), SubResource( 342 ), SubResource( 343 ), SubResource( 344 ), SubResource( 345 ), SubResource( 346 ), SubResource( 347 ), SubResource( 348 ) ],
+"loop": false,
+"name": "keyDance",
 "speed": 12.0
 }, {
 "frames": [ SubResource( 187 ), SubResource( 188 ), SubResource( 189 ), SubResource( 190 ), SubResource( 191 ), SubResource( 192 ), SubResource( 193 ), SubResource( 194 ), SubResource( 195 ), SubResource( 196 ), SubResource( 197 ), SubResource( 198 ) ],

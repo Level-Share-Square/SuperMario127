@@ -16,6 +16,9 @@ signal zoom_changed(zoom_level)
 var speedup_held: bool
 var is_moving: bool
 
+func _ready():
+	position = Vector2(288, 840)
+
 func _unhandled_input(event):
 	var zoom_amount = 0.25
 	if Input.is_action_pressed("8_pixel_lock"):
@@ -143,3 +146,7 @@ func set_zoom_level(level : float) -> void:
 
 func add_zoom_level(level : float) -> void:
 	set_zoom_level(zoom_level + level)
+
+
+func _on_ResetZoom_button_down():
+	set_zoom_level(1.0)

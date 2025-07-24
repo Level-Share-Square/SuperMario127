@@ -1,10 +1,11 @@
-[gd_resource type="Resource" load_steps=6 format=2]
+[gd_resource type="Resource" load_steps=7 format=2]
 
 [ext_resource path="res://scenes/editor/items/placeable_tile.gd" type="Script" id=1]
 [ext_resource path="res://assets/tiles/cabin_window/cabin_window.png" type="Texture" id=2]
-[ext_resource path="res://assets/tiles/cabin_window/1.png" type="Texture" id=3]
-[ext_resource path="res://assets/tiles/cabin_window/2.png" type="Texture" id=4]
-[ext_resource path="res://assets/tiles/cabin_window/3.png" type="Texture" id=5]
+[ext_resource path="res://assets/tiles/cabin_window/icon_1.png" type="Texture" id=3]
+[ext_resource path="res://assets/tiles/cabin_window/icon_3.png" type="Texture" id=4]
+[ext_resource path="res://assets/tiles/cabin_window/icon_2.png" type="Texture" id=5]
+[ext_resource path="res://assets/tiles/cabin_window/icon_4.png" type="Texture" id=6]
 
 [resource]
 script = ExtResource( 1 )
@@ -13,7 +14,7 @@ groups = PoolStringArray( "special" )
 change_to = ""
 items_in_sequence = 0
 index_in_sequence = 0
-icons = [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 2 ) ]
+icons = [ ExtResource( 6 ), ExtResource( 3 ), ExtResource( 5 ), ExtResource( 4 ) ]
 previews = [ ExtResource( 2 ) ]
 priority = 0
 tileset_id = 33
