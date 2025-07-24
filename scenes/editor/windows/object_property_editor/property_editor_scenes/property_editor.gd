@@ -2,7 +2,7 @@ class_name PropertyEditor
 extends HBoxContainer
 
 
-enum Subgroups {Bool, Misc, Dialogue, Warps}
+enum Subgroups {Bool, Lines, Dialogue, Warps}
 
 export(Subgroups) var subgroup: int = 1
 

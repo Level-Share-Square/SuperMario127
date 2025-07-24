@@ -4,13 +4,12 @@ export var play_bus : String
 export var edit_bus : String
 
 var character
-var character2
-
 
 onready var http_request = $HTTPRequest
 
 onready var temporary_music_player : AudioStreamPlayer = $TemporaryMusicPlayer
 onready var water_music_player : AudioStreamPlayer = $WaterMusicPlayer
+onready var timer_music_player : AudioStreamPlayer = $TimerMusicPlayer
 onready var tween : Tween = $Tween
 
 
@@ -155,7 +154,6 @@ func change_song(old_setting, music_setting) -> void:
 		if typeof(music_setting) != typeof(old_setting) or music_setting != old_setting:
 			base_volume = 0
 			handle_custom_song(music_setting)
-			
 	
 	if song != null and stream != song.stream:
 		stream = song.stream
@@ -179,14 +177,17 @@ func change_song(old_setting, music_setting) -> void:
 	else:
 		bus = play_bus # perhaps we should define a general bus or a menu bus later # FUCKIGN YES WWE SHOULD
 
+
 func toggle_underwater_music(state):
 	if has_water:
 		play_water = state
 	else:
 		play_water = false
 
+
 func reset_music():
 	toggle_underwater_music(false)
+
 
 func _process(delta) -> void:
 	var current_scene = get_tree().get_current_scene()
@@ -219,6 +220,7 @@ func _process(delta) -> void:
 	else:
 		temporary_music_player.volume_db = linear2db(lerp(db2linear(temporary_music_player.volume_db), 0, delta * 3))
 		temporary_music_player.volume_db = linear2db(lerp(db2linear(temporary_music_player.volume_db), 0, delta * 3))
+
 
 # the plan for this is to mute the current bgm, play the temp song, and then fade the current bgm back in
 func play_temporary_music(temp_song_id : int = 0, temp_song_volume : float = 0) -> void:

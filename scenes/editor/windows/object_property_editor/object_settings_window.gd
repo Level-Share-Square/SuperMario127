@@ -1,7 +1,9 @@
 extends EditorWindow
 
 
-var game_object: GameObject = GameObject.new()
+var objects: Array = [GameObject.new()]
+
+var data_temp: Array = []
 
 onready var property_groups: PropertyEditorLoader = $"%PropertyGroups"
 
@@ -23,4 +25,4 @@ func _ready():
 
 
 func load_object(data: ObjectData):
-	property_groups.load_property_editors(game_object, data)
+	property_groups.load_property_editors(game_object)

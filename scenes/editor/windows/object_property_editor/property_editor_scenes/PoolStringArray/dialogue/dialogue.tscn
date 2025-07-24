@@ -29,9 +29,8 @@ corner_radius_bottom_right = 64
 corner_radius_bottom_left = 64
 
 [node name="Dialogue" type="HBoxContainer"]
-margin_top = 214.0
 margin_right = 256.0
-margin_bottom = 214.0
+margin_bottom = 206.0
 script = ExtResource( 9 )
 subgroup = 2
 
@@ -59,7 +58,6 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "Hello, how are you doing on this fine day?
 I'm doing splendid!"
-show_line_numbers = true
 smooth_scrolling = true
 v_scroll_speed = 0.0
 wrap_enabled = true

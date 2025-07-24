@@ -19,4 +19,8 @@ bus = "Music"
 volume_db = -80.0
 bus = "Music"
 
+[node name="TimerMusicPlayer" type="AudioStreamPlayer" parent="."]
+volume_db = -80.0
+bus = "Music"
+
 [node name="Tween" type="Tween" parent="."]
