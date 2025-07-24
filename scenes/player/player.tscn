@@ -1,4 +1,4 @@
-[gd_scene load_steps=98 format=2]
+[gd_scene load_steps=101 format=2]
 
 [ext_resource path="res://scenes/player/player.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -44,6 +44,7 @@
 [ext_resource path="res://scenes/player/ui_new/shine/high_score.wav" type="AudioStream" id=42]
 [ext_resource path="res://scenes/player/ui_new/shine/new_record.gd" type="Script" id=43]
 [ext_resource path="res://scenes/player/ui_new/shine/127tally_drum.wav" type="AudioStream" id=44]
+[ext_resource path="res://scenes/player/ui_new/key_get.gd" type="Script" id=45]
 [ext_resource path="res://scenes/actors/objects/p_switch/tick.wav" type="AudioStream" id=58]
 [ext_resource path="res://scenes/actors/objects/p_switch/tick_end.wav" type="AudioStream" id=59]
 [ext_resource path="res://scenes/actors/objects/boo/laugh.wav" type="AudioStream" id=60]
@@ -680,6 +681,109 @@ outline_color = Color( 0, 0.0431373, 0.313726, 1 )
 use_filter = true
 extra_spacing_char = -1
 font_data = ExtResource( 26 )
+
+[sub_resource type="Animation" id=242]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("VBoxContainer/KeyName:percent_visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("VBoxContainer/KeyName/Backing:percent_visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("VBoxContainer/KeyName/Panel:rect_scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("VBoxContainer/KeyName:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0.752941, 1 ) ]
+}
+
+[sub_resource type="Animation" id=243]
+resource_name = "transition"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("VBoxContainer/KeyName:percent_visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ 1.0, 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("VBoxContainer/KeyName/Backing:percent_visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ 1.0, 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("VBoxContainer/KeyName/Panel:rect_scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.3, 0.6 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("VBoxContainer/KeyName:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.1, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0, 0, 0.752941, 1 ) ]
+}
 
 [sub_resource type="Animation" id=206]
 length = 0.001
@@ -1470,7 +1574,7 @@ one_shot = true
 [node name="HighScore" type="AudioStreamPlayer" parent="UIUnder/HUD/Control/ShineResults"]
 stream = ExtResource( 42 )
 volume_db = 3.0
-bus = "Sounds"
+bus = "Music"
 
 [node name="Count" type="AudioStreamPlayer" parent="UIUnder/HUD/Control/ShineResults"]
 stream = ExtResource( 44 )
@@ -1607,6 +1711,70 @@ align = 1
 __meta__ = {
 "_edit_use_anchors_": true
 }
+
+[node name="KeyGet" type="PanelContainer" parent="UIUnder/HUD/Control"]
+unique_name_in_owner = true
+self_modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 45 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UIUnder/HUD/Control/KeyGet"]
+margin_left = 85.0
+margin_top = 360.0
+margin_right = 647.0
+margin_bottom = 404.0
+mouse_filter = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+custom_constants/separation = 4
+alignment = 1
+
+[node name="KeyName" type="Label" parent="UIUnder/HUD/Control/KeyGet/VBoxContainer"]
+modulate = Color( 0, 0, 0.752941, 1 )
+margin_right = 562.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+custom_fonts/font = SubResource( 11 )
+text = "You got the Mario Kart 8 Deluxe - Booster Course Pass DLC key!"
+align = 1
+percent_visible = 0.0
+
+[node name="Panel" type="Panel" parent="UIUnder/HUD/Control/KeyGet/VBoxContainer/KeyName"]
+modulate = Color( 0.247059, 0.27451, 0.737255, 0.752941 )
+show_behind_parent = true
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+rect_min_size = Vector2( 0, 8 )
+rect_scale = Vector2( 1e-05, 1 )
+custom_styles/panel = SubResource( 235 )
+
+[node name="Backing" type="Label" parent="UIUnder/HUD/Control/KeyGet/VBoxContainer/KeyName"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 1.0
+margin_bottom = 1.0
+size_flags_horizontal = 3
+custom_colors/font_color = Color( 0, 0.0431373, 0.313726, 1 )
+custom_fonts/font = SubResource( 11 )
+text = "You got the Mario Kart 8 Deluxe - Booster Course Pass DLC key!"
+align = 1
+percent_visible = 0.0
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Padding" type="Control" parent="UIUnder/HUD/Control/KeyGet/VBoxContainer"]
+margin_top = 28.0
+margin_right = 562.0
+margin_bottom = 44.0
+rect_min_size = Vector2( 0, 16 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UIUnder/HUD/Control/KeyGet"]
+anims/RESET = SubResource( 242 )
+anims/transition = SubResource( 243 )
 
 [node name="SignText" parent="UIUnder" instance=ExtResource( 25 )]
 unique_name_in_owner = true
