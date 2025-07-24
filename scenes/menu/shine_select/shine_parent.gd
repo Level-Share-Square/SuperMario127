@@ -36,17 +36,32 @@ var shine_details_indices: Array = []
 # contains an array that stores dictionaries containing all the information needed to populate the shine select screen
 var shine_details: Array = []
 
+var scrollable_shines: Array = [0]
+
 var selected_shine_index: int = -1
 
 func _ready():
 	shine_details = level_info.shine_details
 	
 	var shine_index: int = 0
+	var final_select_shine: bool = false
 	for i in range(shine_details.size()):
+		var end: bool = false
+		
+		var collected_shines = level_info.collected_shines
+		var is_collected = collected_shines[str(shine_details[i]["id"])]
 		if used_shine_ids.has(shine_details[i]["id"]):
 			continue
 		if !shine_details[i]["show_in_menu"]:
 			continue
+		if Singleton.CurrentLevelData.shine_progression:
+			if is_collected:
+				scrollable_shines.append(i)
+			if !is_collected && final_select_shine == false:
+				scrollable_shines.append(i)
+				final_select_shine = true
+			if (i == find_last_collected_shine()) || find_last_collected_shine() == -1:
+				end = true
 
 		used_shine_ids.append(shine_details[i]["id"])
 
@@ -69,8 +84,6 @@ func _ready():
 		
 		# if the shine isn't collected, make it blue on the shine select scree
 		# if it is collected, show the correct colour of the shine
-		var collected_shines = level_info.collected_shines
-		var is_collected = collected_shines[str(shine_details[i]["id"])]
 		if !is_collected:
 			# automatically select first empty shine
 			if selected_shine_index == -1:
@@ -83,6 +96,15 @@ func _ready():
 		shine_index += 1
 		shine_sprite.add_to_group("shine_sprites")
 		add_child(shine_sprite)
+		
+		if final_select_shine:
+			if (i == 1 && i - 1 == find_last_collected_shine()):
+				break
+		if end:
+			if i == 0 && find_last_collected_shine() != -1:
+				end = false
+			else:
+				break
 	
 	selected_shine_index = max(0, selected_shine_index)
 	get_child(selected_shine_index).selected = true
@@ -93,8 +115,20 @@ func _ready():
 
 func _input(event):
 	if Input.is_action_just_pressed("ui_right"):
+		if Singleton.CurrentLevelData.shine_progression:
+			if scrollable_shines.size() > 1:
+				var scrollable_index: int = scrollable_shines.find(selected_shine_index)
+				var scroll_amount = scrollable_shines[scrollable_index + 1] - scrollable_shines[scrollable_index] if scrollable_index + 1 < scrollable_shines.size() else 1
+				attempt_increment_selected_shine_index(scroll_amount if scroll_amount != 0 else 1)
+			return
 		attempt_increment_selected_shine_index(1)
 	elif Input.is_action_just_pressed("ui_left"):
+		if Singleton.CurrentLevelData.shine_progression:
+			if scrollable_shines.size() > 1:
+				var scrollable_index: int = scrollable_shines.find(selected_shine_index)
+				var scroll_amount = scrollable_shines[scrollable_index - 1] - scrollable_shines[scrollable_index]
+				attempt_increment_selected_shine_index(scroll_amount if selected_shine_index != 0 else 0)
+			return
 		attempt_increment_selected_shine_index(-1)
 	elif Input.is_action_just_pressed("ui_accept"):
 		get_parent().start_level()
@@ -109,8 +143,7 @@ func attempt_increment_selected_shine_index(increment : int) -> void:
 
 	var previous_selected_shine_index = selected_shine_index
 	# warning-ignore:narrowing_conversion
-	selected_shine_index = clamp(selected_shine_index + increment, 0, shine_sprites.size() - 1)
-
+	selected_shine_index = clamp(selected_shine_index + increment, 0, shine_sprites.size() - 1 if !Singleton.CurrentLevelData.shine_progression else scrollable_shines.back())
 	# no point in doing anything if the value didn't actually change
 	if selected_shine_index == previous_selected_shine_index:
 		return
@@ -161,3 +194,11 @@ func update_labels() -> void:
 		shine_details[shine_details_indices[selected_shine_index]]["description"] +
 		"[/center]"
 	)
+
+func find_last_collected_shine() -> int:
+	var collected_shines = level_info.collected_shines
+	var shine_index = -1
+	for shine in collected_shines:
+		if collected_shines[shine]:
+			shine_index = shine
+	return int(shine_index)

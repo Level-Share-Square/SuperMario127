@@ -1626,7 +1626,6 @@ visible = false
 use_parent_material = true
 frames = ExtResource( 23 )
 animation = "shineDance"
-frame = 2
 script = ExtResource( 63 )
 
 [node name="Wings" type="AnimatedSprite" parent="Sprite"]
@@ -1634,7 +1633,6 @@ visible = false
 use_parent_material = true
 frames = ExtResource( 65 )
 animation = "shineDance"
-frame = 2
 script = ExtResource( 63 )
 
 [node name="Water2" type="AnimatedSprite" parent="Sprite"]

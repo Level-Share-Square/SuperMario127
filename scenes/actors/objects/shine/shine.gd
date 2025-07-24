@@ -67,6 +67,8 @@ var id := 0
 var do_kick_out := true
 var sort_position : int = 0
 var activation_tag : String = "empty"
+var entrance_area: int = 0
+var entrance_tag: String = "_entrance"
 
 var score_from_before = 0 # haha that rhymes
 
@@ -74,8 +76,8 @@ signal shine_collected
 signal shine_dance_end
 
 func _set_properties() -> void:
-	savable_properties = ["title", "description", "show_in_menu", "activated", "red_coins_activate", "shine_shards_activate", "color", "id", "do_kick_out", "sort_position", "required_purples", "activation_tag"]
-	editable_properties = ["title", "description", "show_in_menu", "activated", "red_coins_activate", "shine_shards_activate", "required_purples", "color", "do_kick_out", "activation_tag", "sort_position", "id"]
+	savable_properties = ["title", "description", "show_in_menu", "activated", "red_coins_activate", "shine_shards_activate", "color", "id", "do_kick_out", "sort_position", "required_purples", "activation_tag", "entrance_area", "entrance_tag"]
+	editable_properties = ["title", "description", "show_in_menu", "activated", "red_coins_activate", "shine_shards_activate", "required_purples", "color", "do_kick_out", "activation_tag", "sort_position", "id", "entrance_area", "entrance_tag"]
 
 
 func _set_property_values() -> void:
@@ -91,6 +93,8 @@ func _set_property_values() -> void:
 	set_property("sort_position", sort_position, true)
 	set_property("required_purples", required_purples, true)
 	set_property("activation_tag", activation_tag, true)
+	set_property("entrance_area", entrance_area, true)
+	set_property("entrance_tag", entrance_tag, true)
 
 
 func _ready() -> void:

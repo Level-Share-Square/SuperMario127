@@ -24,6 +24,8 @@ var time_score : float = 0
 # used to track if there's unsaved changes in the editor, specifically by the save and close buttons of the editor
 var unsaved_editor_changes : bool = false
 
+var shine_progression: bool = false
+
 # incremented and used by shines/star coins to make the newest shine/star coin have a unique id (aka previous id + 1) 
 var next_shine_id : int = 0
 var next_star_coin_id : int = 0
