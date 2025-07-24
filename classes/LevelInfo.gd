@@ -151,8 +151,10 @@ func init_collectibles():
 						"color": object.properties[12].to_rgba32() if typeof(object.properties[12]) == TYPE_COLOR else Color(1, 1, 0).to_rgba32(),
 						"id": object.properties[13],
 						"do_kick_out": object.properties[14],
-						"enabled": object.properties[4]
+						"enabled": object.properties[4],
 					}
+					shine_dictionary.merge({"entrance_area": -1, "entrance_tag": "_entrance"} if object.properties.size() == 18 else {"entrance_area": object.properties[18], "entrance_tag": object.properties[19]})
+		
 					# Lol band aid
 					if object.properties.size() > 13:
 						shine_dictionary["sort_order"] = object.properties[15]
