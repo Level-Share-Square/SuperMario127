@@ -1625,14 +1625,16 @@ playing = true
 visible = false
 use_parent_material = true
 frames = ExtResource( 23 )
-animation = "idleRight"
+animation = "shineDance"
+frame = 2
 script = ExtResource( 63 )
 
 [node name="Wings" type="AnimatedSprite" parent="Sprite"]
 visible = false
 use_parent_material = true
 frames = ExtResource( 65 )
-animation = "idleRight"
+animation = "shineDance"
+frame = 2
 script = ExtResource( 63 )
 
 [node name="Water2" type="AnimatedSprite" parent="Sprite"]
@@ -2270,9 +2272,10 @@ playing = true
 
 [node name="CollectedShine" type="AnimatedSprite" parent="."]
 visible = false
-position = Vector2( -0.499446, -40.9587 )
+position = Vector2( -1, 20 )
+scale = Vector2( 0.1, 0.1 )
+z_index = -5
 frames = ExtResource( 55 )
-speed_scale = 3.66667
 playing = true
 
 [node name="ShineParticles" type="Particles2D" parent="CollectedShine"]

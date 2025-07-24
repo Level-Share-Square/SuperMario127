@@ -33,6 +33,7 @@ var palette_dict = {
 
 var current_level_info : LevelInfo
 var required_amount := 1
+var required_key: String
 var collectible := "shine"
 var collectible_count: int
 var text := ""
@@ -41,15 +42,15 @@ var insufficient_text: String = "Sorry! You need {num} {col} to open this door!"
 var is_single: bool = false
 var reset_read_timer := 0.0
 
-var possible_coll = ["shine", "star coin", "coin", "star bit", "unknown"]
+var possible_coll = ["shine", "star coin", "coin", "star bit", "key", "unknown"]
 var coll
 
 
 # overriding cos star doors have a bunch of unique properties that need accounting for
 ### PROPERTIES
 func _set_properties() -> void:
-	savable_properties = ["target_area", "tag", "teleport_mode", "max_pan_distance", "level_path", "collectible", "required_amount", "insufficient_text", "is_single"]
-	editable_properties = ["target_area", "tag", "teleport_mode", "max_pan_distance", "level_path", "collectible", "required_amount", "insufficient_text"]
+	savable_properties = ["target_area", "tag", "teleport_mode", "max_pan_distance", "level_path", "collectible", "required_amount", "required_key", "insufficient_text", "is_single"]
+	editable_properties = ["target_area", "tag", "teleport_mode", "max_pan_distance", "level_path", "collectible", "required_amount", "required_key", "insufficient_text"]
 
 
 func _set_property_values() -> void:
@@ -64,6 +65,7 @@ func _set_property_values() -> void:
 	set_property("collectible", collectible)
 	set_property_menu("collectible", ["option_string", possible_coll, 0, ["Shines", "Star Coins", "Coins", "Star Bits", "Empty"]])
 	set_property("required_amount", required_amount)
+	set_property("required_key", required_key)
 	set_property("insufficient_text", insufficient_text)
 	set_property("is_single", is_single)
 
@@ -93,6 +95,13 @@ func start_entrance_animation(character: Character, open_door: bool = true) -> v
 	elif collectible == "star bit":
 		var star_bits_collected: int = Singleton.CurrentLevelData.level_data.vars.purple_starbits_collected[Singleton.CurrentLevelData.area][0]
 		if star_bits_collected < required_amount:
+			can_enter = false
+	elif collectible == "key":
+		var keys_collected: Array = Singleton.CurrentLevelData.level_data.vars.local_keys_collected
+		print(keys_collected)
+		if required_key in keys_collected:
+			can_enter = true
+		else:
 			can_enter = false
 	else:
 		if collectible_count < required_amount:
@@ -228,7 +237,7 @@ func _ready() -> void:
 	var collectible_text: String = collectible
 	if required_amount != 1: collectible_text += "s"
 	text = insufficient_text.format({
-		"num": required_amount,
+		"num": required_amount if collectible != "key" else "the %s" % [required_key],
 		"col": collectible_text
 	})
 	

@@ -72,5 +72,5 @@ placeable_items = {
 "obj_vine_stem": ExtResource( 120 ),
 "obj_vine_stem_end": ExtResource( 133 ),
 "obj_vine_thorns": ExtResource( 132 ),
-"obj_wood_platform": ExtResource( 56 ),
+"obj_wood_platform": ExtResource( 56 )
 }

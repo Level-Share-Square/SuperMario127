@@ -320,6 +320,7 @@ const ANIM_IDS : Dictionary = {
 	"thinking": 52,
 	"angry": 53,
 	"enterPainting": 54,
+	"keyDance": 55,
 }
 
 func _ready():
