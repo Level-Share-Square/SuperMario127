@@ -14,7 +14,7 @@ shader = ExtResource( 3 )
 shader_param/ray_count = 4
 shader_param/ray_distance = 0.4
 shader_param/ray_seperation_degrees = 22.0
-shader_param/rotation = 2.56859
+shader_param/rotation = 0.968214
 
 [sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 14, 16.5 )
@@ -32,7 +32,7 @@ bus = "Sounds"
 
 [node name="CollectJingle" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
-volume_db = 3.0
+volume_db = 2.0
 bus = "Music"
 
 [node name="Sprite" type="Sprite" parent="."]
