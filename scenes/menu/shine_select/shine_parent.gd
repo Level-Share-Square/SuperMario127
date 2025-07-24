@@ -36,7 +36,7 @@ var shine_details_indices: Array = []
 # contains an array that stores dictionaries containing all the information needed to populate the shine select screen
 var shine_details: Array = []
 
-var scrollable_shines: Array = [0]
+var scrollable_shines: Array = []
 
 var selected_shine_index: int = -1
 
@@ -44,24 +44,32 @@ func _ready():
 	shine_details = level_info.shine_details
 	
 	var shine_index: int = 0
+	var collected_shines = level_info.collected_shines
 	var final_select_shine: bool = false
+	for shine in shine_details:
+		var shine_id: int = shine["id"]
+		var is_collected = collected_shines[str(shine_id)]
+		if !is_collected && !final_select_shine && !shine_id in scrollable_shines:
+			scrollable_shines.append(shine_id)
+			final_select_shine = true
+		if is_collected:
+			scrollable_shines.append(shine_id)
+	
+	
 	for i in range(shine_details.size()):
 		var end: bool = false
 		
-		var collected_shines = level_info.collected_shines
 		var is_collected = collected_shines[str(shine_details[i]["id"])]
 		if used_shine_ids.has(shine_details[i]["id"]):
 			continue
 		if !shine_details[i]["show_in_menu"]:
 			continue
 		if Singleton.CurrentLevelData.shine_progression:
-			if is_collected:
-				scrollable_shines.append(i)
-			if !is_collected && final_select_shine == false:
-				scrollable_shines.append(i if i != 0 else 1)
-				final_select_shine = true
-			if (i == find_last_collected_shine()) || find_last_collected_shine() == -1:
-				end = true
+			if !is_collected && find_last_collected_shine() == i - 1:
+				if scrollable_shines[0] + scrollable_shines.back() == scrollable_shines.size() - 1:
+					end = true
+				else:
+					break
 
 		used_shine_ids.append(shine_details[i]["id"])
 
@@ -98,17 +106,13 @@ func _ready():
 		add_child(shine_sprite)
 		
 		if end:
-			if i == 0 && find_last_collected_shine() != -1:
-				end = false
-			else:
-				break
+			break
 	
 	selected_shine_index = max(0, selected_shine_index)
 	get_child(selected_shine_index).selected = true
 	
 	move_shine_sprites(true) # make sure everything is in the right spot and size and such
 	update_labels()
-	print(scrollable_shines)
 
 func _input(event):
 	if Input.is_action_just_pressed("ui_right"):
