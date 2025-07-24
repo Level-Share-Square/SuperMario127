@@ -657,7 +657,7 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "Powerup",
 "language": "GDScript",
-"path": "res://scenes/actors/mario/Powerup.gd"
+"path": "res://scenes/actors/mario/powerups/Powerup.gd"
 }, {
 "base": "HBoxContainer",
 "class": "PropertyEditor",

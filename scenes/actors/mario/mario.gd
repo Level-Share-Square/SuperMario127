@@ -219,9 +219,6 @@ export var character := 0
 export var mario_frames : SpriteFrames
 export var luigi_frames : SpriteFrames
 
-export var mario_alt_frames : SpriteFrames
-export var luigi_alt_frames : SpriteFrames
-
 export var mario_wing_frames : SpriteFrames
 export var luigi_wing_frames : SpriteFrames
 
@@ -325,6 +322,8 @@ const ANIM_IDS : Dictionary = {
 	"keyDance": 55,
 }
 
+const PALETTE_SWAP_MAT: ShaderMaterial = preload("res://scenes/actors/mario/materials/palette_swap.tres")
+
 func _ready():
 	_update_player_framerate()
 	Engine.set_target_fps(60)
@@ -403,20 +402,18 @@ func load_in(level_data : LevelData, level_area : LevelArea):
 		add_collision_exception_with(get_node(exception))
 	var _connect = player_collision.connect("body_entered", self, "player_hit")
 	
-	# Whether or not the alt character (e.g. Wario for Mario) should be loaded instead
-	var use_alt_character : bool = Singleton.PlayerSettings.player1_character == Singleton.PlayerSettings.player2_character and player_id != 0
 	match character:
 		0: # Mario
 			sound_player = $Sounds
 			$Sounds2.queue_free()
 			remove_child($Sounds2)
-			sprite.frames = mario_alt_frames if use_alt_character else mario_frames
+			sprite.frames = mario_frames
 			real_friction = friction
 		1: # Luigi
 			sound_player = $Sounds2
 			$Sounds.queue_free()
 			remove_child($Sounds)
-			sprite.frames = luigi_alt_frames if use_alt_character else luigi_frames
+			sprite.frames = luigi_frames
 			move_speed = luigi_speed
 			acceleration = luigi_accel
 			friction = luigi_fric
@@ -595,6 +592,8 @@ func set_powerup(powerup_node: Node, set_temporary_music: bool, duration = -1) -
 			powerup.time_left = duration
 		powerup._start(0, set_temporary_music)
 		powerup.apply_visuals()
+	else:
+		sprite.material = PALETTE_SWAP_MAT
 
 func set_state_by_name(name: String, delta: float = 0.0001) -> void:
 	if is_instance_valid(get_state_node(name)):
