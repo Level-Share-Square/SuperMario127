@@ -63,39 +63,29 @@ func play_get_anim():
 	collect_jingle.play()
 	
 	# make the character's held key match this one
-	character.collected_key.self_modulate = color
+	character.collected_key.self_modulate = sprite.self_modulate
 	character.collected_key.texture = sprite.texture
 	character.collected_key_rays.color = color
 	
-	character.sprite.animation = "shineDance"
-	character.anim_player.play("shine_dance")
+	character.anim_player.play("key_dance")
 	# warning-ignore: return_value_discarded
-	character.anim_player.connect("animation_finished", self, "character_shine_dance_finished", [], CONNECT_ONESHOT)
+	character.anim_player.connect("animation_finished", self, "restore_control", [character], CONNECT_ONESHOT)
 	
 	set_physics_process(false)
-		
-func character_shine_dance_finished(_animation: Animation):
-	key_get.disappear()
-	Singleton.Music.volume_multiplier = 1
-	
-	character.shine_kill = false
-	character.anim_player.play("shine_dance_stop")
-	character.anim_player.connect("animation_finished", self, "restore_control", [character], CONNECT_ONESHOT)
 
 func restore_control(_animation : String, character : Character) -> void:
 	# bad code sorry
 	yield(get_tree().create_timer(0.2), "timeout")
-
-	# re-enable mode switching if in the editor test mode
+	
+	key_get.disappear()
+	Singleton.Music.volume_multiplier = 1
+	character.shine_kill = false
 
 	# pausing disabled for same reasons as mode switcher button
 	Singleton.CurrentLevelData.can_pause = true
 
 	# stop the animation
 	character.anim_player.stop()
-	
-	# hide the shine used for the shine dance animation
-	character.hide_shine_dance_shine()
 	
 	# player animations won't play past frame 0 after the shine dance without this
 	character.sprite.playing = true
