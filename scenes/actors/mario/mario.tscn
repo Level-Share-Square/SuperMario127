@@ -1,4 +1,4 @@
-[gd_scene load_steps=194 format=2]
+[gd_scene load_steps=200 format=2]
 
 [ext_resource path="res://scenes/actors/mario/animation_frames.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/actors/mario/states/Bounce.gd" type="Script" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://scenes/actors/mario/states/Getup.gd" type="Script" id=14]
 [ext_resource path="res://scenes/actors/mario/alt_frames.tres" type="SpriteFrames" id=15]
 [ext_resource path="res://scenes/actors/mario/luigi_alt_frames.tres" type="SpriteFrames" id=16]
+[ext_resource path="res://scenes/actors/objects/key/key.png" type="Texture" id=17]
 [ext_resource path="res://scenes/actors/mario/states/GroundPoundStart.gd" type="Script" id=18]
 [ext_resource path="res://scenes/actors/mario/states/GroundPound.gd" type="Script" id=19]
 [ext_resource path="res://scenes/actors/mario/states/GroundPoundEnd.gd" type="Script" id=20]
@@ -84,6 +85,9 @@
 [ext_resource path="res://scenes/actors/objects/quicksand/quicksand_particles.tscn" type="PackedScene" id=83]
 [ext_resource path="res://scenes/actors/mario/enemy_collision_area.gd" type="Script" id=84]
 [ext_resource path="res://scenes/actors/mario/states/ExitPainting.gd" type="Script" id=85]
+[ext_resource path="res://scenes/actors/objects/shine/shine_rays.gdshader" type="Shader" id=86]
+[ext_resource path="res://scenes/actors/objects/shine/shine_rays.gd" type="Script" id=87]
+[ext_resource path="res://scenes/actors/objects/key/key_outline.png" type="Texture" id=88]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 5.5, 4 )
@@ -826,6 +830,95 @@ tracks/1/keys = {
 } ]
 }
 
+[sub_resource type="Animation" id=115]
+resource_name = "key_dance"
+length = 2.25
+step = 0.025
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.725 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ "spinning", "shineDance" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 2.26 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.275, 0.325, 0.65, 0.725, 1.1 ),
+"transitions": PoolRealArray( 0.870551, 0, 0.870551, 0, 1, 1 ),
+"update": 0,
+"values": [ 0, 7, 0, 7, 12, 20 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite:position")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.725 ),
+"transitions": PoolRealArray( 1.27765e-07, 0 ),
+"update": 1,
+"values": [ Vector2( 0, 0 ), Vector2( 0, -4.5 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Sprite/Fludd:animation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "shineDance" ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Sprite/Fludd:frame")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0.01, 0.9, 1.48 ),
+"transitions": PoolRealArray( 0.87, 2, 1 ),
+"update": 1,
+"values": [ 0, 14, 21 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Sprite/Fludd:playing")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 2.25 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, false ]
+}
+
 [sub_resource type="Animation" id=99]
 resource_name = "nodding"
 length = 0.9
@@ -1515,6 +1608,14 @@ orbit_velocity_random = 0.0
 damping = 100.0
 anim_speed = 1.3
 
+[sub_resource type="ShaderMaterial" id=114]
+resource_local_to_scene = true
+shader = ExtResource( 86 )
+shader_param/ray_count = 4
+shader_param/ray_distance = 0.15
+shader_param/ray_seperation_degrees = 22.0
+shader_param/rotation = 5.35024
+
 [sub_resource type="RectangleShape2D" id=85]
 extents = Vector2( 8, 18 )
 
@@ -1625,16 +1726,14 @@ playing = true
 visible = false
 use_parent_material = true
 frames = ExtResource( 23 )
-animation = "shineDance"
-frame = 2
+animation = "idleRight"
 script = ExtResource( 63 )
 
 [node name="Wings" type="AnimatedSprite" parent="Sprite"]
 visible = false
 use_parent_material = true
 frames = ExtResource( 65 )
-animation = "shineDance"
-frame = 2
+animation = "idleRight"
 script = ExtResource( 63 )
 
 [node name="Water2" type="AnimatedSprite" parent="Sprite"]
@@ -2254,6 +2353,7 @@ anims/disagree = SubResource( 100 )
 anims/enter_door = SubResource( 62 )
 anims/exit_door = SubResource( 63 )
 anims/happy = SubResource( 97 )
+anims/key_dance = SubResource( 115 )
 anims/nodding = SubResource( 99 )
 anims/shine_dance = SubResource( 64 )
 anims/shine_dance_stop = SubResource( 65 )
@@ -2285,6 +2385,29 @@ emitting = false
 local_coords = false
 process_material = SubResource( 84 )
 texture = ExtResource( 56 )
+
+[node name="CollectedKey" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 17 )
+
+[node name="VectorRays" type="ColorRect" parent="CollectedKey"]
+show_behind_parent = true
+material = SubResource( 114 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -105.5
+margin_top = -108.0
+margin_right = 86.5
+margin_bottom = 84.0
+mouse_filter = 2
+color = Color( 1, 1, 0, 1 )
+script = ExtResource( 87 )
+ray_distance = 0.15
+
+[node name="Outline" type="Sprite" parent="CollectedKey"]
+texture = ExtResource( 88 )
 
 [node name="BottomPos" type="Node2D" parent="."]
 visible = false

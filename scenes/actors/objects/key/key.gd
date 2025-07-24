@@ -1,13 +1,22 @@
 extends GameObject
 
+const DEFAULT_COLOR: Color = Color.yellow
+const DEFAULT_TEXTURE: StreamTexture = preload("res://scenes/actors/objects/key/key.png")
+const RECOLORABLE_TEXTURE: StreamTexture = preload("res://scenes/actors/objects/key/key_recolorable.png")
+
 onready var sprite = $Sprite
+onready var vector_rays = $Sprite/VectorRays
 onready var area = $Area2D
-onready var animation_player = $AnimationPlayer
+onready var collect_sound = $CollectSound
+onready var collect_jingle = $CollectJingle
+
+onready var current_scene : Node = get_tree().current_scene
+onready var key_get : Node = current_scene.get_node_or_null("%KeyGet")
 
 var id: String
-var color: Color
-var collected = false
+var color: Color = Color.yellow
 
+var collected = false
 var character
 
 func _set_properties():
@@ -26,9 +35,10 @@ func _physics_process(delta):
 func collect(body):
 	if enabled and body.name.begins_with("Character") and !body.dead:
 		Singleton.CurrentLevelData.level_data.vars.collect_local_key(id)
-		print(Singleton.CurrentLevelData.level_data.vars.local_keys_collected)
+		#print(Singleton.CurrentLevelData.level_data.vars.local_keys_collected)
 		character = body
 		collected = true
+		collect_sound.play()
 		body.anim_player.stop()
 		body.set_state_by_name("FallState", get_physics_process_delta_time())
 		body.velocity.x = 0
@@ -42,10 +52,20 @@ func collect(body):
 		body.set_collision_layer_bit(1, false)
 		body.set_inter_player_collision(false)
 		
+		Singleton.Music.volume_multiplier = 0.33
 		visible = false
 		
 func play_get_anim():
 	character.set_state_by_name("NoActionState", get_physics_process_delta_time())
+	
+	key_get.appear(id)
+	
+	collect_jingle.play()
+	
+	# make the character's held key match this one
+	character.collected_key.self_modulate = color
+	character.collected_key.texture = sprite.texture
+	character.collected_key_rays.color = color
 	
 	character.sprite.animation = "shineDance"
 	character.anim_player.play("shine_dance")
@@ -55,6 +75,9 @@ func play_get_anim():
 	set_physics_process(false)
 		
 func character_shine_dance_finished(_animation: Animation):
+	key_get.disappear()
+	Singleton.Music.volume_multiplier = 1
+	
 	character.shine_kill = false
 	character.anim_player.play("shine_dance_stop")
 	character.anim_player.connect("animation_finished", self, "restore_control", [character], CONNECT_ONESHOT)
@@ -88,7 +111,19 @@ func restore_control(_animation : String, character : Character) -> void:
 	character.shine_cutscene = false
 	queue_free()
 
+func update_property(key, value):
+	if key == "color":
+		vector_rays.color = color
+		if color == DEFAULT_COLOR:
+			sprite.texture = DEFAULT_TEXTURE
+			sprite.self_modulate = Color.white
+		else:
+			sprite.texture = RECOLORABLE_TEXTURE
+			sprite.self_modulate = color
+
 func _ready():
 	if id in Singleton.CheckpointSaved.current_local_keys:
 		queue_free()
 	var _connect = area.connect("body_entered", self, "collect")
+	_connect = connect("property_changed", self, "update_property")
+	update_property("color", color)
