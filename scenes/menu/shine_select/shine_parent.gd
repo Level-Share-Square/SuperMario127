@@ -97,9 +97,6 @@ func _ready():
 		shine_sprite.add_to_group("shine_sprites")
 		add_child(shine_sprite)
 		
-		if final_select_shine:
-			if (i == 1 && i - 1 == find_last_collected_shine()):
-				break
 		if end:
 			if i == 0 && find_last_collected_shine() != -1:
 				end = false
