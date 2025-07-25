@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/nes.png-8ddde573a3729d3e501ff72b0d9a6802.stex"
+path="res://.import/inverted.png-72ff617ca45e103e95103fccb47e7484.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/actors/mario/palettes/luigi/nes.png"
-dest_files=[ "res://.import/nes.png-8ddde573a3729d3e501ff72b0d9a6802.stex" ]
+source_file="res://scenes/actors/mario/palettes/mario/inverted.png"
+dest_files=[ "res://.import/inverted.png-72ff617ca45e103e95103fccb47e7484.stex" ]
 
 [params]
 
