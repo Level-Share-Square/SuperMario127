@@ -1637,7 +1637,7 @@ shader = ExtResource( 86 )
 shader_param/ray_count = 4
 shader_param/ray_distance = 0.4
 shader_param/ray_seperation_degrees = 22.0
-shader_param/rotation = 3.48087
+shader_param/rotation = 6.07775
 
 [sub_resource type="RectangleShape2D" id=85]
 extents = Vector2( 8, 18 )
@@ -1740,7 +1740,6 @@ script = ExtResource( 76 )
 [node name="Sprite" type="AnimatedSprite" parent="."]
 material = ExtResource( 89 )
 rotation = 6.28319
-z_index = 219
 frames = ExtResource( 1 )
 animation = "idleRight"
 playing = true
