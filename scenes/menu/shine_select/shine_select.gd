@@ -49,7 +49,7 @@ func start_level():
 		"target_area": shine_details[shine_parent.selected_shine_index].get("entrance_area", -1),
 		"target_tag": shine_details[shine_parent.selected_shine_index].get("entrance_tag", "_entrance")
 	} 
-	Singleton.CurrentLevelData.area = Singleton.CurrentLevelData.level_info.shine_details[shine_parent.selected_shine_index].get("entrance_area", -1)
+	print(Singleton.CurrentLevelData.area)
 	
 	if not shine_parent.can_interact: return
 	shine_parent.can_interact = false
