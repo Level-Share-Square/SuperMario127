@@ -71,14 +71,11 @@ func _ready():
 	load_in(data, data.areas[Singleton.CurrentLevelData.area])
 	
 	Singleton.Music.character = get_node(character)
-	Singleton.Music.character2 = get_node(character2)
 	#Singleton.Music.reset_music()
 	if !Singleton.Music.playing:
 		Singleton.Music.play() # make sure the music will play even if it's stopped prior to loading the player
 
 	can_collect_coins.append(get_node(character))
-	if Singleton.PlayerSettings.number_of_players == 2:
-		can_collect_coins.append(get_node(character2))
 		
 	Singleton.CurrentLevelData.level_data.vars.max_red_coins = 0
 	Singleton.CurrentLevelData.level_data.vars.max_shine_shards = 0

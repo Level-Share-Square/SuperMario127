@@ -2,10 +2,11 @@ extends TextureRect
 
 onready var editor = get_parent()
 
+var offset := Vector2(16, 16)
 var is_object: bool = true
 
 func _process(delta):
-	var mouse_pos = get_global_mouse_position() - Vector2(16, 16)
+	var mouse_pos = get_global_mouse_position() - offset
 	if is_object:
 		if editor.pixel_lock:
 			mouse_pos = Vector2(stepify(mouse_pos.x, 8), stepify(mouse_pos.y, 8))
@@ -15,6 +16,7 @@ func _process(delta):
 
 func update_item(item, palette, is_obj):
 	texture = item.previews[palette]
+	offset = texture.get_size()/2
 	is_object = is_obj
 
 
