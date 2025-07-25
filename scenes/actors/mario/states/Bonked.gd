@@ -18,7 +18,14 @@ func _start_check(_delta):
 	return false
 	
 func _start(_delta):
+	character.bonk_particles.emitting = true
 	bonk_direction = character.facing_direction
+	if bonk_direction == 1:
+		character.bonk_particles.process_material.direction = Vector3(-500, 0, 0)
+		character.bonk_particles.position = Vector2(13, 7)
+	else:
+		character.bonk_particles.process_material.direction = Vector3(500, 0, 0)
+		character.bonk_particles.position = Vector2(-13, 7)
 	character.sprite.rotation_degrees = 0
 	character.current_jump = 0
 	character.friction = 8

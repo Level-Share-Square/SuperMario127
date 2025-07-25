@@ -30,6 +30,9 @@ onready var bubble_particles_left : Particles2D = $Sprite/BubblesLeft
 onready var bubble_particles_right : Particles2D = $Sprite/BubblesRight
 onready var turbo_particles : Particles2D = $Sprite/TurboParticles
 onready var rocket_particles : Particles2D = $Sprite/RocketParticles
+onready var dust_land_particles : Particles2D = $Sprite/DustLandParticles
+onready var dust_jump_particles : Particles2D = $Sprite/DustJumpParticles
+onready var bonk_particles : Particles2D = $Sprite/BonkParticles
 
 onready var collision_shape : CollisionShape2D = $Collision
 onready var dive_collision_shape : CollisionShape2D = $CollisionDive
@@ -249,6 +252,8 @@ export var rotating_jump = false
 
 var level_bounds = Rect2(0, 0, 80, 30)
 var number_of_players = 2
+
+var squish_lerp: bool = false
 
 var next_position : Vector2
 var sync_interpolation_speed = 20
@@ -757,6 +762,10 @@ func get_weight() -> int:
 	return 2 if metal_voice else 1
 
 func _physics_process(delta: float) -> void:
+	if squish_lerp == true:
+		sprite.scale = lerp(sprite.scale, Vector2(1, 1), 0.05)
+	if sprite.scale.is_equal_approx(Vector2(1, 1)):
+		squish_lerp = false
 	update_inputs()
 	if state and (state.name == "NoActionState" or state.name == "LaunchStarState"):
 		update_ghost()

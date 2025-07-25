@@ -4,8 +4,8 @@
 [ext_resource path="res://scenes/actors/objects/cheep_cheep/cheep_cheep.png" type="Texture" id=2]
 [ext_resource path="res://scenes/actors/objects/bullet_bill/sound.wav" type="AudioStream" id=3]
 [ext_resource path="res://scenes/actors/objects/goomba/animations/poof.png" type="Texture" id=4]
-[ext_resource path="res://scenes/actors/objects/goomba/poof.wav" type="AudioStream" id=5]
-[ext_resource path="res://scenes/actors/objects/goomba/stomp.wav" type="AudioStream" id=6]
+[ext_resource path="res://scenes/actors/objects/goomba/sounds/stomp.wav" type="AudioStream" id=5]
+[ext_resource path="res://scenes/actors/objects/goomba/sounds/poof.wav" type="AudioStream" id=6]
 [ext_resource path="res://scenes/actors/objects/old_goomba/body.gd" type="Script" id=7]
 [ext_resource path="res://scenes/actors/objects/cheep_cheep/recolorable.png" type="Texture" id=8]
 [ext_resource path="res://scenes/actors/mario/FluddAnimSync.gd" type="Script" id=9]
@@ -222,7 +222,7 @@ position = Vector2( 0, 8 )
 shape = SubResource( 15 )
 
 [node name="Stomp" type="AudioStreamPlayer" parent="CheepCheep"]
-stream = ExtResource( 6 )
+stream = ExtResource( 5 )
 volume_db = -3.0
 bus = "Sounds"
 
@@ -232,7 +232,7 @@ volume_db = -10.0
 bus = "Sounds"
 
 [node name="Disappear" type="AudioStreamPlayer" parent="CheepCheep"]
-stream = ExtResource( 5 )
+stream = ExtResource( 6 )
 volume_db = -3.0
 bus = "Sounds"
 

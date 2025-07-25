@@ -39,6 +39,9 @@ func _start(delta):
 	## jump height variation
 	jump_released = false
 	
+	character.dust_jump_particles.emitting = true
+	character.dust_jump_particles.process_material.direction = Vector3(-character.velocity.x/800, 1, 0)
+	character.sprite.scale = Vector2(0.8, 1.2)
 	var sprite = character.sprite
 	var sound_player = character.sound_player
 	jump_buffer = 0
@@ -130,6 +133,7 @@ func _stop_check(_delta):
 		return character.velocity.y > 0
 
 func _general_update(delta):
+	character.sprite.scale = lerp(character.sprite.scale, Vector2(1, 1), 0.08)
 	var sprite = character.sprite
 	if character.rotating_jump:
 		if character.velocity.y > 0:

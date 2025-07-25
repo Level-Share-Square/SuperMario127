@@ -23,6 +23,11 @@ func _update(_delta):
 
 func _stop(_delta):
 	character.jump_animation = 0
+	yield(get_tree(), "physics_frame")
+	if round(character.velocity.y) == 0:
+		character.dust_land_particles.emitting = true
+		character.sprite.scale = Vector2(1.1, 0.9)
+		character.squish_lerp = true
 
 func _stop_check(_delta):
 	return character.is_grounded()
