@@ -40,7 +40,6 @@ func reload():
 	shine_shards_collected = Singleton.CheckpointSaved.current_shine_shards.duplicate(true)
 	purple_starbits_collected = Singleton.CheckpointSaved.current_purple_starbits.duplicate(true)
 	local_keys_collected = Singleton.CheckpointSaved.current_local_keys.duplicate(true)
-	nozzles_collected = Singleton.CheckpointSaved.nozzles_collected.duplicate(true)
 	liquid_positions = Singleton.CheckpointSaved.liquid_positions.duplicate(true)
 	switch_state = Singleton.CheckpointSaved.switch_state.duplicate(true)
 	activated_shine_ids = Singleton.CheckpointSaved.activated_shine_ids.duplicate(true)

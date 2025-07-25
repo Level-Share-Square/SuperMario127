@@ -339,7 +339,12 @@ func _ready():
 	Singleton.Music.toggle_underwater_music(false)
 	for input in input_names.keys():
 		inputs.append([false, false, str(input)])
-	if Singleton.CurrentLevelData.level_info.chosen_fludd != "null":
+	var level_info: LevelInfo = Singleton.CurrentLevelData.level_info
+	var fludd_array: Array = ["HoverNozzle", "RocketNozzle", "TurboNozzle"]
+	for fludd_index in level_info.activated_fludds.size():
+		if level_info.activated_fludds[fludd_index]:
+			add_nozzle(fludd_array[fludd_index])
+	if level_info.chosen_fludd != "null":
 		set_nozzle(Singleton.CurrentLevelData.level_info.chosen_fludd)
 
 func _update_player_framerate():
@@ -604,6 +609,7 @@ func set_state_by_name(name: String, delta: float = 0.0001) -> void:
 func add_nozzle(new_nozzle: String) -> void:
 	if !new_nozzle in Singleton.CurrentLevelData.level_data.vars.nozzles_collected:
 		Singleton.CurrentLevelData.level_data.vars.nozzles_collected.append(new_nozzle)
+	print(Singleton.CurrentLevelData.level_data.vars.nozzles_collected)
 
 func get_nozzle_node(name: String) -> Node:
 	if nozzles_node.has_node(name):
