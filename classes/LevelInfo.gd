@@ -46,6 +46,7 @@ var collected_star_coins : Dictionary = {} # same as collected_shines
 var coin_score : int = 0
 var time_scores : Dictionary = {} # time_scores should probably be stored as the sum of delta while playing, keys are same as collected_shines
 var activated_fludds : Array = [false, false, false]
+var chosen_fludd: String = "null"
 var validity_check: ValidityChecker
 var previous_number_of_players: int = 0
 

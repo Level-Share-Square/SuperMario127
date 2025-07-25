@@ -14,6 +14,8 @@ onready var back = $VBoxContainer/BottomBar/MarginContainer/Back
 onready var level_title: Label = $"%LevelTitle"
 onready var level_title_backing: Label = $"%LevelTitleBacking"
 
+onready var fludds = $"%FLUDD"
+
 ## level data
 onready var level_info: LevelInfo = Singleton.CurrentLevelData.level_info
 onready var level_data: LevelData = Singleton.CurrentLevelData.level_data
@@ -23,6 +25,12 @@ func back():
 	Singleton.SceneSwitcher.quit_level()
 
 func _ready():
+	for fludd in fludds.get_children():
+		if level_info.activated_fludds[fludd.get_index()]:
+			fludd.visible = true
+			fludd.connect("button_down", self, "_on_fludd_pressed", [fludd.name])
+		else:
+			fludd.visible = false
 	get_tree().paused = false
 	
 	mission_select_sfx.play()
@@ -68,3 +76,6 @@ func start_level():
 # kinda lame that you HAVE to use the arguments a signal gives always 
 func animation_finished(_animation_name: String):
 	Singleton.SceneSwitcher.force_start_level()
+
+func _on_fludd_pressed(fludd: String):
+	level_info.chosen_fludd = fludd

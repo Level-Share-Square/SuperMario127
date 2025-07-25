@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://scenes/menu/theme.tres" type="Theme" id=1]
 [ext_resource path="res://assets/fonts/New Super Mario Font U.ttf" type="DynamicFontData" id=2]
@@ -18,6 +18,9 @@
 [ext_resource path="res://scenes/menu/box_shadow.png" type="Texture" id=16]
 [ext_resource path="res://scenes/menu/shine_select/shine_parent.gd" type="Script" id=17]
 [ext_resource path="res://assets/fonts/DelfinoFont20.tres" type="DynamicFont" id=18]
+[ext_resource path="res://scenes/actors/objects/hover_box/hover_box.png" type="Texture" id=19]
+[ext_resource path="res://scenes/actors/objects/rocket_box/rocket_box.png" type="Texture" id=20]
+[ext_resource path="res://scenes/actors/objects/turbo_box/turbo_box.png" type="Texture" id=21]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -354,6 +357,38 @@ patch_margin_left = 11
 patch_margin_top = 11
 patch_margin_right = 11
 patch_margin_bottom = 11
+
+[node name="MarginContainer3" type="MarginContainer" parent="VBoxContainer/BottomBar"]
+margin_left = 575.0
+margin_top = 56.0
+margin_right = 709.0
+margin_bottom = 112.0
+rect_scale = Vector2( 1.5, 1.5 )
+
+[node name="FLUDD" type="HBoxContainer" parent="VBoxContainer/BottomBar/MarginContainer3"]
+unique_name_in_owner = true
+margin_left = 12.0
+margin_top = 12.0
+margin_right = 122.0
+margin_bottom = 44.0
+custom_constants/separation = 4
+
+[node name="HoverNozzle" type="TextureButton" parent="VBoxContainer/BottomBar/MarginContainer3/FLUDD"]
+margin_right = 34.0
+margin_bottom = 32.0
+texture_normal = ExtResource( 19 )
+
+[node name="RocketNozzle" type="TextureButton" parent="VBoxContainer/BottomBar/MarginContainer3/FLUDD"]
+margin_left = 38.0
+margin_right = 72.0
+margin_bottom = 32.0
+texture_normal = ExtResource( 20 )
+
+[node name="TurboNozzle" type="TextureButton" parent="VBoxContainer/BottomBar/MarginContainer3/FLUDD"]
+margin_left = 76.0
+margin_right = 110.0
+margin_bottom = 32.0
+texture_normal = ExtResource( 21 )
 
 [node name="ShineParent" type="Node2D" parent="."]
 position = Vector2( 384, 216 )

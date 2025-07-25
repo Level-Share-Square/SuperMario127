@@ -339,6 +339,8 @@ func _ready():
 	Singleton.Music.toggle_underwater_music(false)
 	for input in input_names.keys():
 		inputs.append([false, false, str(input)])
+	if Singleton.CurrentLevelData.level_info.chosen_fludd != "null":
+		set_nozzle(Singleton.CurrentLevelData.level_info.chosen_fludd)
 
 func _update_player_framerate():
 	fps_util._update_framerate(false)
