@@ -75,7 +75,7 @@ func _stop(delta : float) -> void:
 		sprite.rotation_degrees = 0
 	if character.is_on_wall():
 		character.velocity.x = 150 * -character.facing_direction
-		character.velocity.y = -65
+		character.velocity.y = -200
 		character.position.x -= 2 * character.facing_direction
 		character.set_state_by_name("BonkedState", delta)
 		character.sound_player.play_bonk_sound()

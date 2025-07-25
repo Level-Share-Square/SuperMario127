@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/bonk_star_temp.png-b51ff595868e97c8e27bd03766879391.stex"
+path="res://.import/bonk.png-1282d71676506199cd97c893a12cd56e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/actors/mario/misc/bonk_star_temp.png"
-dest_files=[ "res://.import/bonk_star_temp.png-b51ff595868e97c8e27bd03766879391.stex" ]
+source_file="res://scenes/actors/mario/particles/bonk.png"
+dest_files=[ "res://.import/bonk.png-1282d71676506199cd97c893a12cd56e.stex" ]
 
 [params]
 

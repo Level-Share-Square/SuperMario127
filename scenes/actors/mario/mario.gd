@@ -30,9 +30,9 @@ onready var bubble_particles_left : Particles2D = $Sprite/BubblesLeft
 onready var bubble_particles_right : Particles2D = $Sprite/BubblesRight
 onready var turbo_particles : Particles2D = $Sprite/TurboParticles
 onready var rocket_particles : Particles2D = $Sprite/RocketParticles
-onready var dust_land_particles : Particles2D = $Sprite/DustLandParticles
-onready var dust_jump_particles : Particles2D = $Sprite/DustJumpParticles
-onready var bonk_particles : Particles2D = $Sprite/BonkParticles
+onready var dust_land_particles : Particles2D = $Particles/DustLandParticles
+onready var dust_jump_particles : Particles2D = $Particles/DustJumpParticles
+onready var bonk_particles : Particles2D = $Particles/BonkParticles
 
 onready var collision_shape : CollisionShape2D = $Collision
 onready var dive_collision_shape : CollisionShape2D = $CollisionDive

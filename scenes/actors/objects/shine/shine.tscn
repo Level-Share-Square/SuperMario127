@@ -107,7 +107,7 @@ shader = ExtResource( 17 )
 shader_param/ray_count = 4
 shader_param/ray_distance = 0.45
 shader_param/ray_seperation_degrees = 22.0
-shader_param/rotation = 4.76845
+shader_param/rotation = 4.39351
 
 [sub_resource type="CanvasItemMaterial" id=33]
 particles_animation = true
@@ -1271,7 +1271,7 @@ playing = true
 
 [node name="AnimatedSpriteOutline" type="AnimatedSprite" parent="AnimatedSprite"]
 frames = SubResource( 20 )
-frame = 11
+frame = 12
 script = ExtResource( 14 )
 
 [node name="Particles2D" type="Particles2D" parent="AnimatedSprite"]

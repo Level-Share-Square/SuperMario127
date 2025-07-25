@@ -14,7 +14,7 @@
 [ext_resource path="res://scenes/actors/mario/states/Bonked.gd" type="Script" id=12]
 [ext_resource path="res://scenes/actors/mario/states/Dive.gd" type="Script" id=13]
 [ext_resource path="res://scenes/actors/mario/states/Getup.gd" type="Script" id=14]
-[ext_resource path="res://scenes/actors/mario/misc/bonk_star_temp.png" type="Texture" id=15]
+[ext_resource path="res://scenes/actors/mario/particles/bonk.png" type="Texture" id=15]
 [ext_resource path="res://scenes/actors/objects/key/key.png" type="Texture" id=17]
 [ext_resource path="res://scenes/actors/mario/states/GroundPoundStart.gd" type="Script" id=18]
 [ext_resource path="res://scenes/actors/mario/states/GroundPound.gd" type="Script" id=19]
@@ -125,6 +125,79 @@ height = 320
 fill = 1
 fill_from = Vector2( 0.5, 0.5 )
 fill_to = Vector2( 0.97, 0.5 )
+
+[sub_resource type="CanvasItemMaterial" id=130]
+particles_animation = true
+particles_anim_h_frames = 10
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id=125]
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=126]
+gradient = SubResource( 125 )
+
+[sub_resource type="Curve" id=128]
+min_value = -1.0
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=127]
+curve = SubResource( 128 )
+
+[sub_resource type="Curve" id=131]
+_data = [ Vector2( 0, 0.515766 ), 0.0, 0.0, 0, 0, Vector2( 0.380711, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.290909 ), -2.5438, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=132]
+curve = SubResource( 131 )
+
+[sub_resource type="ParticlesMaterial" id=135]
+flag_disable_z = true
+direction = Vector3( 0, 1, 0 )
+spread = 30.71
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 42.22
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = -100.0
+damping = 100.0
+scale_curve = SubResource( 132 )
+color_ramp = SubResource( 126 )
+hue_variation = 1.0
+hue_variation_curve = SubResource( 127 )
+
+[sub_resource type="ParticlesMaterial" id=134]
+emission_shape = 2
+emission_box_extents = Vector3( 3, 10, 1 )
+flag_disable_z = true
+direction = Vector3( 1, 1, 0 )
+spread = 13.97
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = -93.03
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = -100.0
+damping = 100.0
+scale_curve = SubResource( 132 )
+color_ramp = SubResource( 126 )
+hue_variation = 1.0
+hue_variation_curve = SubResource( 127 )
+
+[sub_resource type="ParticlesMaterial" id=133]
+flag_disable_z = true
+direction = Vector3( -1, -0.75, 0 )
+gravity = Vector3( 0, 250, 0 )
+initial_velocity = 150.0
+initial_velocity_random = 0.17
+angular_velocity = 46.41
+angular_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = -100.0
+scale_curve = SubResource( 132 )
+color_ramp = SubResource( 126 )
+hue_variation = 1.0
+hue_variation_curve = SubResource( 127 )
 
 [sub_resource type="CanvasItemMaterial" id=8]
 particles_animation = true
@@ -258,78 +331,6 @@ damping = 100.0
 scale_curve = SubResource( 124 )
 color_ramp = SubResource( 123 )
 hue_variation = 1.0
-
-[sub_resource type="CanvasItemMaterial" id=130]
-particles_animation = true
-particles_anim_h_frames = 10
-particles_anim_v_frames = 1
-particles_anim_loop = false
-
-[sub_resource type="Gradient" id=125]
-colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
-
-[sub_resource type="GradientTexture" id=126]
-gradient = SubResource( 125 )
-
-[sub_resource type="Curve" id=128]
-min_value = -1.0
-_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
-
-[sub_resource type="CurveTexture" id=127]
-curve = SubResource( 128 )
-
-[sub_resource type="Curve" id=131]
-_data = [ Vector2( 0, 0.515766 ), 0.0, 0.0, 0, 0, Vector2( 0.380711, 1 ), 0.0, 0.0, 0, 0 ]
-
-[sub_resource type="CurveTexture" id=132]
-curve = SubResource( 131 )
-
-[sub_resource type="ParticlesMaterial" id=135]
-flag_disable_z = true
-direction = Vector3( 0, 1, 0 )
-spread = 30.71
-gravity = Vector3( 0, 0, 0 )
-initial_velocity = 42.22
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-linear_accel = -100.0
-damping = 100.0
-scale_curve = SubResource( 132 )
-color_ramp = SubResource( 126 )
-hue_variation = 1.0
-hue_variation_curve = SubResource( 127 )
-
-[sub_resource type="ParticlesMaterial" id=134]
-emission_shape = 1
-emission_sphere_radius = 3.06
-flag_disable_z = true
-direction = Vector3( 1, 1, 0 )
-spread = 13.97
-gravity = Vector3( 0, 0, 0 )
-initial_velocity = -93.03
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-linear_accel = -100.0
-damping = 100.0
-scale_curve = SubResource( 132 )
-color_ramp = SubResource( 126 )
-hue_variation = 1.0
-hue_variation_curve = SubResource( 127 )
-
-[sub_resource type="ParticlesMaterial" id=133]
-flag_disable_z = true
-direction = Vector3( -500, 0, 0 )
-spread = 28.06
-gravity = Vector3( 0, 0, 0 )
-initial_velocity = 145.16
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-linear_accel = -100.0
-damping = 100.0
-scale_curve = SubResource( 132 )
-color_ramp = SubResource( 126 )
-hue_variation = 1.0
-hue_variation_curve = SubResource( 127 )
 
 [sub_resource type="RectangleShape2D" id=104]
 extents = Vector2( 4.5, 14.5 )
@@ -1710,7 +1711,7 @@ shader = ExtResource( 86 )
 shader_param/ray_count = 4
 shader_param/ray_distance = 0.4
 shader_param/ray_seperation_degrees = 22.0
-shader_param/rotation = 1.49995
+shader_param/rotation = 5.05744
 
 [sub_resource type="RectangleShape2D" id=85]
 extents = Vector2( 8, 18 )
@@ -1810,6 +1811,48 @@ range_height = 1.0
 range_item_cull_mask = 524288
 script = ExtResource( 76 )
 
+[node name="Particles" type="Node2D" parent="."]
+
+[node name="DustLandParticles" type="Particles2D" parent="Particles"]
+material = SubResource( 130 )
+position = Vector2( -2.0001, 21 )
+emitting = false
+amount = 5
+lifetime = 0.25
+one_shot = true
+explosiveness = 1.0
+fixed_fps = 60
+local_coords = false
+process_material = SubResource( 135 )
+texture = ExtResource( 30 )
+
+[node name="DustJumpParticles" type="Particles2D" parent="Particles"]
+material = SubResource( 130 )
+position = Vector2( -2.00015, 31 )
+emitting = false
+amount = 5
+lifetime = 0.25
+one_shot = true
+explosiveness = 1.0
+fixed_fps = 60
+local_coords = false
+process_material = SubResource( 134 )
+texture = ExtResource( 30 )
+
+[node name="BonkParticles" type="Particles2D" parent="Particles"]
+modulate = Color( 1, 1, 0.501961, 1 )
+show_behind_parent = true
+position = Vector2( 8, 3.95457e-05 )
+emitting = false
+amount = 6
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+fixed_fps = 60
+local_coords = false
+process_material = SubResource( 133 )
+texture = ExtResource( 15 )
+
 [node name="Sprite" type="AnimatedSprite" parent="."]
 material = ExtResource( 89 )
 rotation = 6.28319
@@ -1820,13 +1863,13 @@ playing = true
 [node name="Fludd" type="AnimatedSprite" parent="Sprite"]
 visible = false
 frames = ExtResource( 23 )
-animation = "fallRight"
+animation = "idleRight"
 script = ExtResource( 63 )
 
 [node name="Wings" type="AnimatedSprite" parent="Sprite"]
 visible = false
 frames = ExtResource( 65 )
-animation = "fallRight"
+animation = "idleRight"
 script = ExtResource( 63 )
 
 [node name="Water2" type="AnimatedSprite" parent="Sprite"]
@@ -1916,44 +1959,6 @@ local_coords = false
 process_material = SubResource( 129 )
 texture = ExtResource( 30 )
 
-[node name="DustLandParticles" type="Particles2D" parent="Sprite"]
-material = SubResource( 130 )
-position = Vector2( -2, 21 )
-emitting = false
-amount = 5
-lifetime = 0.25
-one_shot = true
-explosiveness = 1.0
-fixed_fps = 60
-local_coords = false
-process_material = SubResource( 135 )
-texture = ExtResource( 30 )
-
-[node name="DustJumpParticles" type="Particles2D" parent="Sprite"]
-material = SubResource( 130 )
-position = Vector2( -1.99991, 38 )
-emitting = false
-amount = 5
-lifetime = 0.25
-one_shot = true
-explosiveness = 1.0
-fixed_fps = 60
-local_coords = false
-process_material = SubResource( 134 )
-texture = ExtResource( 30 )
-
-[node name="BonkParticles" type="Particles2D" parent="Sprite"]
-position = Vector2( -15, 7.00007 )
-emitting = false
-amount = 4
-lifetime = 0.5
-one_shot = true
-explosiveness = 1.0
-fixed_fps = 60
-local_coords = false
-process_material = SubResource( 133 )
-texture = ExtResource( 15 )
-
 [node name="IsCrushedDetector" type="Area2D" parent="."]
 visible = false
 collision_layer = 0
@@ -2015,6 +2020,7 @@ script = ExtResource( 29 )
 
 [node name="BonkedState" type="Node" parent="States"]
 script = ExtResource( 12 )
+bonk_particles_path = NodePath("../../Particles/BonkParticles")
 
 [node name="CrushedState" type="Node" parent="States"]
 script = ExtResource( 72 )
