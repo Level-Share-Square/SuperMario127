@@ -65,7 +65,7 @@ func _activated_update(delta):
 			character.global_position.y -= 15
 
 	if character.check_liquid(LiquidBase.LiquidType.Water):
-		var speed_limit = direction_vector.normalized() * SPEED_CAP
+		var speed_limit = direction_vector * SPEED_CAP
 		character.velocity = lerp(character.velocity, speed_limit, 0.05)
 	else:
 		var normal = character.sprite.transform.x.normalized()

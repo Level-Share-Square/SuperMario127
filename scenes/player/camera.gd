@@ -18,7 +18,7 @@ var in_cutscene: bool = false
 var shake_strength: float = 0.0
 var shake = false
 
-const GP_ZOOM_IN = Vector2(0.07, 0.07)
+const GP_ZOOM_IN = Vector2(0.025, 0.025)
 var old_zoom: Vector2
 var disable_gp_zoom: bool = false
 

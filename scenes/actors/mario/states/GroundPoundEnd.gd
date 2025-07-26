@@ -20,7 +20,7 @@ func _start_check(_delta):
 
 func _start(_delta):
 	particle_timer = 0.2
-	character.camera.shake_strength = 10
+	character.camera.shake_strength = 4
 	character.camera.shake = true
 	if !character.camera.disable_gp_zoom:
 		character.camera.old_zoom  = character.camera.zoom
