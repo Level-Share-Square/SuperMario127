@@ -2,6 +2,8 @@ extends State
 
 class_name SwimmingState
 
+const JUMP_SQUISH := Vector2(0.4, 1.6)
+
 var base_swim_speed = 285
 var boost_speed = 450
 
@@ -75,6 +77,7 @@ func _update(delta):
 		move_vector.y += 1
 	
 	if character.inputs[character.input_names.spin][1]:
+		character.sprite.scale = JUMP_SQUISH
 		boost_buffer = 0.15
 	
 	if boost_buffer > 0 and boost_time_left <= 0.15 and boost_disable_time <= 0:
@@ -177,6 +180,6 @@ func _stop_check(_delta):
 	return !character.check_liquid(LiquidBase.LiquidType.Water) or (character.powerup != null and character.powerup.id == "Metal")
 
 func _general_update(_delta):
-	
+	character.sprite.scale = lerp(character.sprite.scale, Vector2(1, 1), 0.08)
 	if (!character.swimming && character.sound_player.swim_sound.playing):
 		character.sound_player.set_swim_playing(false)

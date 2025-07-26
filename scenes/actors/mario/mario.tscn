@@ -1714,7 +1714,7 @@ shader = ExtResource( 86 )
 shader_param/ray_count = 4
 shader_param/ray_distance = 0.4
 shader_param/ray_seperation_degrees = 22.0
-shader_param/rotation = 3.28666
+shader_param/rotation = 3.38217
 
 [sub_resource type="RectangleShape2D" id=85]
 extents = Vector2( 8, 18 )

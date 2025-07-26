@@ -37,6 +37,14 @@ func _activated_update(delta):
 		if character.is_walled_right():
 			direction = 1
 		character.damage_with_knockback(character.position + Vector2(direction * 8, 0), 0, "Hit", 0)
+		character.bonk_particles.restart()
+		character.bonk_particles.emitting = true
+		if direction == 1:
+			character.bonk_particles.process_material.direction = Vector3(-500, 0, 0)
+			character.bonk_particles.position = Vector2(13, 7)
+		else:
+			character.bonk_particles.process_material.direction = Vector3(500, 0, 0)
+			character.bonk_particles.position = Vector2(-13, 7)
 	
 	if character.fuel > 0 and !character.check_liquid(LiquidBase.LiquidType.Water):
 		character.fuel -= fuel_depletion

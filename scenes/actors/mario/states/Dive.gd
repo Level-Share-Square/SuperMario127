@@ -2,6 +2,8 @@ extends State
 
 class_name DiveState
 
+const LAND_SQUISH := Vector2(1.4, 0.6)
+
 export var dive_power : Vector2 = Vector2(1200, 75)
 export var dive_power_luigi : Vector2 = Vector2(1200, 75)
 export var bonk_power : float = 150
@@ -81,6 +83,8 @@ func _stop(delta : float) -> void:
 		character.sound_player.play_bonk_sound()
 	if character.is_grounded():
 		character.set_state_by_name("SlideState", delta)
+		character.sprite.scale = LAND_SQUISH
+		character.squish_lerp = true
 	elif !character.check_liquid(LiquidBase.LiquidType.Water):
 		sprite.rotation_degrees = 0
 	character.ground_shape.disabled = true

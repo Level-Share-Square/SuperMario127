@@ -2,6 +2,8 @@ extends Nozzle
 
 class_name RocketNozzle
 
+const JUMP_SQUISH := Vector2(0.6, 1.4)
+
 export var boost_power := 5000
 export var depletion := 100
 export var fuel_depletion := 5
@@ -20,6 +22,7 @@ func _activate_check(_delta):
 	return !(character.state == character.get_state_node("SwimmingState") and character.state.boost_time_left > 0) and cooldown_time == 0 and !(character.state == character.get_state_node("BackflipState") and character.state.disable_turning == true) and character.get_state_node("SlideState").crouch_buffer == 0
 	
 func is_state(state):
+	character.sprite.scale = JUMP_SQUISH
 	return character.state == character.get_state_node(state)
 		
 func _activated_update(delta):

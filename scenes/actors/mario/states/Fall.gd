@@ -1,5 +1,7 @@
 extends State
 
+const LAND_SQUISH := Vector2(1.1, 0.9)
+
 class_name FallState
 	
 func _start_check(_delta):
@@ -25,8 +27,9 @@ func _stop(_delta):
 	character.jump_animation = 0
 	yield(get_tree(), "physics_frame")
 	if round(character.velocity.y) == 0 and character.is_grounded():
+		character.dust_land_particles.restart()
 		character.dust_land_particles.emitting = true
-		character.sprite.scale = Vector2(1.1, 0.9)
+		character.sprite.scale = LAND_SQUISH
 		character.squish_lerp = true
 
 func _stop_check(_delta):

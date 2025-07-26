@@ -2,6 +2,8 @@ extends State
 
 class_name JumpState
 
+const JUMP_SQUISH := Vector2(0.8, 1.2)
+
 export var jump_power: float = 350
 export var double_jump_power: float = 425
 export var triple_jump_power: float = 495
@@ -39,9 +41,10 @@ func _start(delta):
 	## jump height variation
 	jump_released = false
 	
+	character.dust_jump_particles.restart()
 	character.dust_jump_particles.emitting = true
 	character.dust_jump_particles.process_material.direction = Vector3(-character.velocity.x/800, 1, 0)
-	character.sprite.scale = Vector2(0.8, 1.2)
+	character.sprite.scale = JUMP_SQUISH
 	var sprite = character.sprite
 	var sound_player = character.sound_player
 	jump_buffer = 0

@@ -2,6 +2,8 @@ extends State
 
 class_name BackflipState
 
+const JUMP_SQUISH := Vector2(0.6, 1.4)
+
 var is_crouch = false
 var stop = false
 var getup_buffer = 0
@@ -27,7 +29,7 @@ func _ready():
 func _start(_delta):
 	## jump height variation
 	jump_released = false
-	
+	character.sprite.scale = JUMP_SQUISH
 	priority = 4
 	unlock_timer = 0.4
 	direction_on_start = character.facing_direction
@@ -84,6 +86,7 @@ func _stop_check(_delta):
 	return character.is_grounded()
 
 func _general_update(delta):
+	character.sprite.scale = lerp(character.sprite.scale, Vector2(1, 1), 0.08)
 	if unlock_timer > 0:
 		unlock_timer -= delta
 		if unlock_timer <= 0:

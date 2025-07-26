@@ -2,6 +2,8 @@ extends State
 
 class_name BonkedState
 
+const LAND_SQUISH := Vector2(1.5, 0.5)
+
 export var bonk_particles_path: NodePath
 onready var initial_particles_pos = get_node(bonk_particles_path).position
 export var bonk_direction: int = 1
@@ -20,6 +22,7 @@ func _start_check(_delta):
 	return false
 	
 func _start(_delta):
+	character.sprite.scale = LAND_SQUISH
 	character.bonk_particles.restart()
 	character.bonk_particles.emitting = true
 	bonk_direction = character.facing_direction
@@ -38,6 +41,7 @@ func _start(_delta):
 	time_until_cancel = 0.65
 
 func _update(delta):
+	character.sprite.scale = lerp(character.sprite.scale, Vector2(1, 1), 0.08)
 	if time_until_cancel > 0:
 		time_until_cancel -= delta
 		if time_until_cancel <= 0:
