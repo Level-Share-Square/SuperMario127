@@ -2,7 +2,7 @@ extends State
 
 class_name DiveState
 
-const LAND_SQUISH := Vector2(1.1, 0.9)
+const LAND_SQUISH := Vector2(1.15, 0.85)
 
 export var dive_power : Vector2 = Vector2(1200, 75)
 export var dive_power_luigi : Vector2 = Vector2(1200, 75)
