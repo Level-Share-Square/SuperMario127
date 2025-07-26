@@ -98,7 +98,6 @@ func _start(delta):
 	ledge_buffer = 0
 
 func _update(_delta):
-	print(lerp_speed)
 	var sprite = character.sprite
 	if override and character.rotating_jump:
 		if character.rotating_jump:
