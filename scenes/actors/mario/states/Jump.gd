@@ -2,7 +2,9 @@ extends State
 
 class_name JumpState
 
-const JUMP_SQUISH := Vector2(0.8, 1.2)
+const JUMP_SQUISH := Vector2(0.9, 1.1)
+const FAST_LERP: float = 0.08
+const SLOW_LERP: float = 0.05
 
 export var jump_power: float = 350
 export var double_jump_power: float = 425
@@ -20,6 +22,7 @@ var jump_playing = false
 var last_grounded = false
 var override = false
 var direction_on_tj = 1
+var lerp_speed: float = SLOW_LERP
 
 
 ## jump height variation
@@ -39,6 +42,7 @@ func _start_check(_delta):
 
 func _start(delta):
 	## jump height variation
+	lerp_speed = SLOW_LERP
 	jump_released = false
 	
 	character.dust_jump_particles.restart()
@@ -92,6 +96,7 @@ func _start(delta):
 	ledge_buffer = 0
 
 func _update(_delta):
+	character.sprite.scale = lerp(character.sprite.scale, Vector2(1, 1), lerp_speed)
 	var sprite = character.sprite
 	if override and character.rotating_jump:
 		if character.rotating_jump:
@@ -128,6 +133,7 @@ func _update(_delta):
 	## jump height variation
 	if not jump_released and not character.inputs[2][0] and dive_buffer <= 0:
 		jump_released = true
+		lerp_speed = FAST_LERP
 		character.velocity.y *= HEIGHT_MULT
 
 
@@ -136,7 +142,6 @@ func _stop_check(_delta):
 		return character.velocity.y > 0
 
 func _general_update(delta):
-	character.sprite.scale = lerp(character.sprite.scale, Vector2(1, 1), 0.08)
 	var sprite = character.sprite
 	if character.rotating_jump:
 		if character.velocity.y > 0:
@@ -174,3 +179,5 @@ func _general_update(delta):
 			dive_buffer = 0
 	last_grounded = character.is_grounded()
 	
+func _stop(delta):
+	character.squish_lerp = true

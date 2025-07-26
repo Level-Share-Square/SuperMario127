@@ -1,6 +1,6 @@
 extends State
 
-const LAND_SQUISH := Vector2(1.1, 0.9)
+const LAND_SQUISH := Vector2(1.08, 0.92)
 
 class_name FallState
 	

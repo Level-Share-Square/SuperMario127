@@ -61,6 +61,7 @@ func _start(_delta):
 
 func _update(_delta):
 	# if 127cs wasnt a thing this code would get me cancelled lol
+	character.sprite.scale = lerp(character.sprite.scale, Vector2(1, 1), 0.08)
 	var division_amount = unlock_timer * 2.5
 	if division_amount == 0:
 		division_amount = 0.05
@@ -86,7 +87,6 @@ func _stop_check(_delta):
 	return character.is_grounded()
 
 func _general_update(delta):
-	character.sprite.scale = lerp(character.sprite.scale, Vector2(1, 1), 0.08)
 	if unlock_timer > 0:
 		unlock_timer -= delta
 		if unlock_timer <= 0:

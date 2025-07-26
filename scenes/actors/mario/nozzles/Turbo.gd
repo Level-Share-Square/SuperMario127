@@ -2,6 +2,8 @@ extends Nozzle
 
 class_name TurboNozzle
 
+const LAND_SQUISH := Vector2(1.3, 0.7)
+
 export var boost_power := 1000
 export var depletion := 100
 export var fuel_depletion := 0.037
@@ -19,7 +21,8 @@ func _activate_check(_delta):
 func is_state(state):
 	return character.state == character.get_state_node(state)
 	
-func _activated_update(delta):	
+func _activated_update(delta):
+	print("gay")
 	character.turbo_particles.process_material.initial_velocity = 1000 - abs(character.velocity.x)
 	
 	var normal = character.sprite.transform.x.normalized()
@@ -38,6 +41,8 @@ func _activated_update(delta):
 			direction = 1
 		character.damage_with_knockback(character.position + Vector2(direction * 8, 0), 0, "Hit", 0)
 		character.bonk_particles.restart()
+		character.sprite.scale = LAND_SQUISH
+		character.squish_lerp = true
 		character.bonk_particles.emitting = true
 		if direction == 1:
 			character.bonk_particles.process_material.direction = Vector3(-500, 0, 0)

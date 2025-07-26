@@ -2,7 +2,7 @@ extends State
 
 class_name BonkedState
 
-const LAND_SQUISH := Vector2(1.5, 0.5)
+const LAND_SQUISH := Vector2(1.2, 0.8)
 
 export var bonk_particles_path: NodePath
 onready var initial_particles_pos = get_node(bonk_particles_path).position

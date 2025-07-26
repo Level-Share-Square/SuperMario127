@@ -2,7 +2,7 @@ extends Nozzle
 
 class_name RocketNozzle
 
-const JUMP_SQUISH := Vector2(0.6, 1.4)
+const JUMP_SQUISH := Vector2(0.7, 1.3)
 
 export var boost_power := 5000
 export var depletion := 100
@@ -71,6 +71,7 @@ func _activated_update(delta):
 	
 	if (character.velocity.y > power * normal.y and normal.y > 0) or (character.velocity.y < power * normal.y and normal.y < 0):
 		character.velocity.y = sqrt(abs(character.velocity.y)) * sign(character.velocity.y)
+		character.squish_lerp = true
 		character.velocity.y -= accel * normal.y
 	
 	if character.fuel > 0 and !character.swimming:

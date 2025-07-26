@@ -2,7 +2,7 @@ extends State
 
 class_name WallJumpState
 
-const JUMP_SQUISH := Vector2(0.6, 1.4)
+const JUMP_SQUISH := Vector2(0.8, 1.2)
 
 export var walljump_power = Vector2(350, 320)
 export var minimum_power = 225
@@ -61,6 +61,7 @@ func _start(_delta):
 	character.is_wj_chained = true
 
 func _update(_delta):
+	character.sprite.scale = lerp(character.sprite.scale, Vector2(1, 1), 0.08)
 	var sprite = character.sprite
 	if (direction_on_wj == 1):
 		sprite.animation = "jumpRight"
@@ -77,7 +78,6 @@ func _stop_check(_delta):
 	return wall_jump_timer <= 0 or character.is_walled() or character.is_grounded()
 	
 func _general_update(delta):
-	character.sprite.scale = lerp(character.sprite.scale, Vector2(1, 1), 0.08)
 	if character.position.x > position_on_wj.x - 3 and character.position.x < position_on_wj.x + 3:
 		character_in_range = true
 	else:

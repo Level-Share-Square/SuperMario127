@@ -763,7 +763,7 @@ func get_weight() -> int:
 
 func _physics_process(delta: float) -> void:
 	if squish_lerp == true:
-		sprite.scale = lerp(sprite.scale, Vector2(1, 1), 0.05)
+		sprite.scale = lerp(sprite.scale, Vector2(1, 1), 0.08)
 	if sprite.scale.is_equal_approx(Vector2(1, 1)):
 		squish_lerp = false
 	update_inputs()
