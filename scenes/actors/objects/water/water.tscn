@@ -71,6 +71,9 @@ color = Color( 0.278431, 0.662745, 0.85098, 1 )
 surface_offset = -15.0
 toxicity = 0.0
 
+[node name="LiquidArea" parent="." index="0"]
+collision_layer = 32896
+
 [node name="CollisionShape2D" parent="LiquidArea" index="0"]
 shape = SubResource( 7 )
 

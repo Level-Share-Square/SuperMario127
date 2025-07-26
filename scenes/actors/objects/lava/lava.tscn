@@ -210,6 +210,7 @@ surface_offset = -14.0
 
 [node name="LiquidArea" parent="." index="0"]
 visible = false
+collision_layer = 33024
 
 [node name="CollisionShape2D" parent="LiquidArea" index="0"]
 shape = SubResource( 10 )
