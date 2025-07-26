@@ -55,14 +55,14 @@ func _activated_update(delta):
 		character.facing_direction = 1
 	
 	#IDK IF THIS DOES ANYTHING IMPORTANT
-#	character.water_check.enabled = true if !character.check_liquid(LiquidBase.LiquidType.Water) else false
-#	if character.water_check.is_colliding() and !character.check_liquid(LiquidBase.LiquidType.Water):
-#		if character.state == null:
-#			character.velocity.y = 10
-#		character.global_position.y = character.water_check.get_collision_point().y - 20
-#		character.breath = 100
-#		if character.get_input(2, true):
-#			character.global_position.y -= 15
+	character.water_check.enabled = true if !character.check_liquid(LiquidBase.LiquidType.Water) else false
+	if character.water_check.is_colliding() and !character.check_liquid(LiquidBase.LiquidType.Water):
+		if character.state == null:
+			character.velocity.y = 10
+		character.global_position.y = character.water_check.get_collision_point().y - 20
+		character.breath = 100
+		if character.get_input(2, true):
+			character.global_position.y -= 15
 
 	if character.check_liquid(LiquidBase.LiquidType.Water):
 		var speed_limit = direction_vector.normalized() * SPEED_CAP
