@@ -25,8 +25,9 @@ func _start(_delta):
 	character.velocity.y = ground_pound_power
 
 func _update(delta):
-	if character.inputs[character.input_names.dive][1] and can_dive:
+	if (character.inputs[character.input_names.dive][1] || character.inputs[character.input_names.spin][1]) and can_dive:
 		character.velocity.y = -dive_vertical_power
+		get_parent().get_node("DiveState").dive_buffer = 0.075
 		character.set_state_by_name("DiveState", delta)
 
 func _stop(delta):

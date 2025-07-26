@@ -1,4 +1,4 @@
-[gd_scene load_steps=212 format=2]
+[gd_scene load_steps=213 format=2]
 
 [ext_resource path="res://scenes/actors/mario/animation_frames.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/actors/mario/states/Bounce.gd" type="Script" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://scenes/actors/mario/states/Dive.gd" type="Script" id=13]
 [ext_resource path="res://scenes/actors/mario/states/Getup.gd" type="Script" id=14]
 [ext_resource path="res://scenes/actors/mario/particles/bonk.png" type="Texture" id=15]
+[ext_resource path="res://scenes/actors/mario/gp_blur.gd" type="Script" id=16]
 [ext_resource path="res://scenes/actors/objects/key/key.png" type="Texture" id=17]
 [ext_resource path="res://scenes/actors/mario/states/GroundPoundStart.gd" type="Script" id=18]
 [ext_resource path="res://scenes/actors/mario/states/GroundPound.gd" type="Script" id=19]
@@ -1720,7 +1721,7 @@ shader = ExtResource( 86 )
 shader_param/ray_count = 4
 shader_param/ray_distance = 0.4
 shader_param/ray_seperation_degrees = 22.0
-shader_param/rotation = 0.97276
+shader_param/rotation = 2.94904
 
 [sub_resource type="RectangleShape2D" id=85]
 extents = Vector2( 8, 18 )
@@ -1979,16 +1980,39 @@ frames = ExtResource( 1 )
 animation = "idleRight"
 playing = true
 
+[node name="SpriteBlur" type="AnimatedSprite" parent="Sprite"]
+show_behind_parent = true
+material = ExtResource( 89 )
+position = Vector2( 2.72848e-12, 0 )
+frames = ExtResource( 1 )
+animation = "groundPoundLeft"
+playing = true
+script = ExtResource( 16 )
+y_offset = -12
+opacity = Color( 0, 0, 0, 0.34902 )
+
+[node name="SpriteBlur2" type="AnimatedSprite" parent="Sprite"]
+self_modulate = Color( 1, 1, 1, 0.45098 )
+show_behind_parent = true
+material = ExtResource( 89 )
+position = Vector2( -1.19209e-07, 1.19209e-07 )
+frames = ExtResource( 1 )
+animation = "groundPoundLeft"
+playing = true
+script = ExtResource( 16 )
+y_offset = -8
+opacity = Color( 0, 0, 0, 0.741176 )
+
 [node name="Fludd" type="AnimatedSprite" parent="Sprite"]
 visible = false
 frames = ExtResource( 23 )
-animation = "idleRight"
+animation = "groundPoundLeft"
 script = ExtResource( 63 )
 
 [node name="Wings" type="AnimatedSprite" parent="Sprite"]
 visible = false
 frames = ExtResource( 65 )
-animation = "idleRight"
+animation = "groundPoundLeft"
 script = ExtResource( 63 )
 
 [node name="Water2" type="AnimatedSprite" parent="Sprite"]

@@ -15,6 +15,13 @@ var area
 var shape
 var in_cutscene: bool = false
 
+var shake_strength: float = 0.0
+var shake = false
+
+const GP_ZOOM_IN = Vector2(0.07, 0.07)
+var old_zoom: Vector2
+var disable_gp_zoom: bool = false
+
 var cutscene_queue: Array
 var current_cutscene: CameraCutscene
 
@@ -29,6 +36,7 @@ var character_vel = Vector2(0, 0)
 
 func _ready():
 	in_cutscene = false
+	old_zoom = zoom
 	
 	if is_instance_valid(character_node) && character_node.player_id == 1:
 		shape = get_node(character2_cam_collider).get_node("CollisionShape2D")
@@ -105,9 +113,20 @@ func _physics_process(delta):
 			
 			if Singleton.PlayerSettings.player2_character == character_node.player_id:
 						area.global_position = global_position
+						
+						
+	if !zoom.is_equal_approx(old_zoom):
+		zoom = lerp(zoom, old_zoom, 0.08)
+	if shake == true:
+		if round(shake_strength) > 0:
+			shake_strength = lerp(shake_strength, 0, 0.2)
+			offset = _get_random_offset()
+		else:
+			shake = false
 
 
 func set_zoom_tween(target : Vector2, time : float, override = false):
+	old_zoom = target
 	current_zoom = target
 	yield(get_tree(), "physics_frame")
 	yield(get_tree(), "physics_frame")
@@ -115,6 +134,8 @@ func set_zoom_tween(target : Vector2, time : float, override = false):
 	# overrides level boundary safety check
 	if override:
 		zoom_tween.interpolate_property(self, "zoom", zoom, target, time, 1, 0)
+		disable_gp_zoom = true
+		print(zoom_tween.connect("tween_all_completed", self, "on_zoom_tween_zoomed"))
 		zoom_tween.start()
 		return
 	var level_size : Vector2 = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].settings.bounds.size * 16
@@ -129,8 +150,12 @@ func set_zoom_tween(target : Vector2, time : float, override = false):
 		max_size = (level_size.x/size.x)
 	target = Vector2(min(target.x, max_size), min(target.y, max_size))
 	zoom_tween.interpolate_property(self, "zoom", zoom, target, time, 1, 0)
+	disable_gp_zoom = true
+	print(zoom_tween.connect("tween_all_completed", self, "on_zoom_tween_zoomed"))
 	zoom_tween.start()
 
+func on_zoom_tween_zoomed():
+	disable_gp_zoom = false
 
 func load_in(_level_data : LevelData, level_area : LevelArea):
 	var level_bounds = level_area.settings.bounds
@@ -223,6 +248,9 @@ func play_cutscene(cutscene : CameraCutscene, reverse: bool = false):
 		
 	update_cutscene_queue()
 
+func _get_random_offset() -> Vector2:
+	randomize()
+	return Vector2(rand_range(-shake_strength, shake_strength), rand_range(-shake_strength, shake_strength))
 
 func update_cutscene_queue():
 	var last_cutscene: CameraCutscene = cutscene_queue.pop_front()
