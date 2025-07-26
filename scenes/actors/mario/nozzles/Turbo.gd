@@ -3,6 +3,7 @@ extends Nozzle
 class_name TurboNozzle
 
 const LAND_SQUISH := Vector2(1.3, 0.7)
+const SPEED_CAP: int = 700
 
 export var boost_power := 1000
 export var depletion := 100
@@ -22,19 +23,11 @@ func is_state(state):
 	return character.state == character.get_state_node(state)
 	
 func _activated_update(delta):
-	print("gay")
+#	print(character.velocity)
 	character.turbo_particles.process_material.initial_velocity = 1000 - abs(character.velocity.x)
-	
-	var normal = character.sprite.transform.x.normalized()
-	var power = boost_power
-	character.velocity.x += (accel * normal.x) * character.facing_direction
-	character.velocity.y += (accel * 0.1 * normal.y) * character.facing_direction
-	
-	if character.velocity.x > boost_power and character.facing_direction == 1:
-		character.velocity.x -= accel
-	if character.velocity.x < -boost_power and character.facing_direction == -1:
-		character.velocity.x += accel
-
+	var direction_vector: Vector2
+	direction_vector.x = int(character.inputs[character.input_names.right][0]) - int(character.inputs[character.input_names.left][0])
+	direction_vector.y = int(character.inputs[character.input_names.down][0]) - int(character.inputs[character.input_names.up][0])
 	if character.is_walled():
 		var direction = -1
 		if character.is_walled_right():
@@ -61,15 +54,28 @@ func _activated_update(delta):
 	elif character.inputs[1][0] and !character.inputs[0][0]:
 		character.facing_direction = 1
 	
-	character.water_check.enabled = true if !character.check_liquid(LiquidBase.LiquidType.Water) else false
-	if character.water_check.is_colliding() and !character.check_liquid(LiquidBase.LiquidType.Water):
-		if character.state == null:
-			character.velocity.y = 10
-		character.global_position.y = character.water_check.get_collision_point().y - 20
-		character.breath = 100
-		if character.get_input(2, true):
-			character.global_position.y -= 15
+	#IDK IF THIS DOES ANYTHING IMPORTANT
+#	character.water_check.enabled = true if !character.check_liquid(LiquidBase.LiquidType.Water) else false
+#	if character.water_check.is_colliding() and !character.check_liquid(LiquidBase.LiquidType.Water):
+#		if character.state == null:
+#			character.velocity.y = 10
+#		character.global_position.y = character.water_check.get_collision_point().y - 20
+#		character.breath = 100
+#		if character.get_input(2, true):
+#			character.global_position.y -= 15
 
+	if character.check_liquid(LiquidBase.LiquidType.Water):
+		var speed_limit = direction_vector.normalized() * SPEED_CAP
+		character.velocity = lerp(character.velocity, speed_limit, 0.05)
+	else:
+		var normal = character.sprite.transform.x.normalized()
+		var power = boost_power
+		character.velocity.x += (accel * normal.x) * character.facing_direction
+		character.velocity.y += (accel * 0.1 * normal.y) * character.facing_direction
+		if character.velocity.x > boost_power and character.facing_direction == 1:
+			character.velocity.x -= accel
+		if character.velocity.x < -boost_power and character.facing_direction == -1:
+			character.velocity.x += accel
 func _update(_delta):
 	if character.is_grounded():
 		character.stamina = 100
