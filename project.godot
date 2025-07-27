@@ -414,7 +414,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/menu/levels_list/misc/http_thumbnails.gd"
 }, {
-"base": "Reference",
+"base": "ScrollContainer",
 "class": "HelpPage",
 "language": "GDScript",
 "path": "res://scenes/oldeditor/window/HelpPage.gd"
@@ -779,7 +779,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/editor/tools/selection_box/selection_tool.gd"
 }, {
-"base": "ButtonSound",
+"base": "Node",
 "class": "SelectionToolButton",
 "language": "GDScript",
 "path": "res://scenes/editor/tools/selection_box/tool_button.gd"
