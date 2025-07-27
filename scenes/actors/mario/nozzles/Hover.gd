@@ -14,12 +14,19 @@ func _init():
 	blacklisted_states = ["WingMarioState", "LavaBoostState", "RainbowStarState", "ButtSlideState", "WallSlideState", "GroundPoundStartState", "GroundPoundState", "GroundPoundEndState", "GetupState", "KnockbackState", "BonkedState", "SpinningState"]
 
 func _activate_check(_delta):
-	return !(character.state == character.get_state_node("SwimmingState") and character.state.boost_time_left > 0) and !(character.state == character.get_state_node("BackflipState") and character.state.disable_turning == true) and (character.get_state_node("SlideState").crouch_buffer == 0 or character.swimming)
+	return !(character.state == character.get_state_node("SwimmingState") and character.state.boost_time_left > 0) and (character.get_state_node("SlideState").crouch_buffer == 0 or character.swimming)
 	
 func is_state(state):
 	return character.state == character.get_state_node(state)
 	
 func _activated_update(delta):
+	var sprite = character.sprite
+
+	if is_state("JumpState") or is_state("BackflipState"):
+		sprite.rotation_degrees = 0
+		character.rotating_jump = false
+		character.state.disable_turning = false
+
 	if !is_state("DiveState") and !is_state("SlideState") and !character.swimming:
 		if character.facing_direction == 1:
 			character.sprite.animation = "jumpRight"
@@ -28,12 +35,11 @@ func _activated_update(delta):
 
 	if (character.state == null or !character.state.override_rotation) and !character.rotating_jump:
 		override_rotation = true
-		var sprite = character.sprite
 		var sprite_rotation = (character.velocity.x / character.move_speed) * 6
 		sprite.rotation_degrees = lerp(sprite.rotation_degrees, sprite_rotation, fps_util.PHYSICS_DELTA * rotation_interpolation_speed)
-	else:
-		override_rotation = false
-			
+#	else:
+#		override_rotation = false
+
 	var normal = character.sprite.transform.y.normalized()
 	character.jump_animation = 0
 	

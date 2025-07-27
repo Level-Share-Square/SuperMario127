@@ -104,7 +104,7 @@ func _update(_delta):
 			sprite.animation="tripleJumpRight"
 		if abs(sprite.rotation_degrees) > 360 or character.is_grounded():
 			override = false
-		
+
 	elif jump_playing and character.velocity.y < 0 and !character.is_grounded():
 		if character.facing_direction == 1:
 			if character.jump_animation == 0:
