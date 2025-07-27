@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://scenes/menu/options/character/palette_button.gd" type="Script" id=1]
+[ext_resource path="res://assets/fonts/delfino_small.tres" type="DynamicFont" id=2]
+[ext_resource path="res://scenes/menu/options/assets/palette_orb.png" type="Texture" id=3]
+[ext_resource path="res://scenes/actors/mario/palettes/mario/default.png" type="Texture" id=4]
+[ext_resource path="res://scenes/menu/options/assets/palette_outline.png" type="Texture" id=5]
+
+[node name="PaletteButton" type="Button"]
+margin_right = 32.0
+margin_bottom = 33.0
+rect_min_size = Vector2( 32, 32 )
+theme_type_variation = "PaletteButton"
+custom_fonts/font = ExtResource( 2 )
+toggle_mode = true
+script = ExtResource( 1 )
+extend_amount = 2
+base_texture = ExtResource( 3 )
+in_palette = ExtResource( 4 )
+
+[node name="Orb" type="Sprite" parent="."]
+scale = Vector2( 2, 2 )
+texture = ExtResource( 3 )
+centered = false
+
+[node name="Outline" type="Sprite" parent="."]
+scale = Vector2( 2, 2 )
+texture = ExtResource( 5 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 16, 16 )
+
+[connection signal="toggled" from="." to="." method="toggled"]

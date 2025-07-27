@@ -5,12 +5,11 @@
 [ext_resource path="res://scenes/actors/mario/palettes/luigi/default.png" type="Texture" id=3]
 [ext_resource path="res://scenes/actors/mario/palettes/luigi/twilight.png" type="Texture" id=4]
 [ext_resource path="res://scenes/actors/mario/palettes/mario/default.png" type="Texture" id=5]
-[ext_resource path="res://scenes/actors/mario/palettes/mario/twilight.png" type="Texture" id=6]
+[ext_resource path="res://scenes/actors/mario/palettes/mario/vintage.png" type="Texture" id=6]
 
 [sub_resource type="Shader" id=117]
 code = "shader_type canvas_item;
 
-uniform bool screen_mode = true;
 uniform int num_colors;
 uniform float precision : hint_range(0.0, 1.0, 0.1) = 0.1;
 
@@ -34,9 +33,8 @@ void fragment() {
 	COLOR = swap_color(color);
 }"
 
-[sub_resource type="ShaderMaterial" id=118]
+[sub_resource type="ShaderMaterial" id=120]
 shader = SubResource( 117 )
-shader_param/screen_mode = false
 shader_param/num_colors = 32
 shader_param/precision = 0.1
 shader_param/palette_in = ExtResource( 5 )
@@ -44,7 +42,6 @@ shader_param/palette_out = ExtResource( 6 )
 
 [sub_resource type="ShaderMaterial" id=119]
 shader = SubResource( 117 )
-shader_param/screen_mode = false
 shader_param/num_colors = 32
 shader_param/precision = 0.1
 shader_param/palette_in = ExtResource( 3 )
@@ -53,7 +50,7 @@ shader_param/palette_out = ExtResource( 4 )
 [node name="PaletteTesting" type="Node2D"]
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
-material = SubResource( 118 )
+material = SubResource( 120 )
 rotation = 6.28319
 z_index = 219
 frames = ExtResource( 1 )

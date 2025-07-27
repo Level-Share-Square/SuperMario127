@@ -1,4 +1,4 @@
-[gd_scene load_steps=101 format=2]
+[gd_scene load_steps=100 format=2]
 
 [ext_resource path="res://scenes/player/player.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -1238,15 +1238,10 @@ font_data = ExtResource( 11 )
 [sub_resource type="RectangleShape2D" id=18]
 extents = Vector2( 393, 216 )
 
-[sub_resource type="RectangleShape2D" id=24]
-resource_local_to_scene = true
-extents = Vector2( 393, 216 )
-
 [node name="Player" type="Node2D"]
 script = ExtResource( 1 )
-nodes_to_load = [ NodePath("Viewports/ViewportContainer/Viewport/World/Shared"), NodePath("Viewports/ViewportContainer/Viewport/World/Character"), NodePath("Viewports/ViewportContainer/Viewport/CameraP1"), NodePath("Viewports/ViewportContainer/Viewport/World/Character2"), NodePath("Viewports/ViewportContainer2/Viewport/CameraP2"), NodePath("Viewports/ViewportContainer/Viewport/Backgrounds"), NodePath("Viewports/ViewportContainer2/Viewport/Backgrounds") ]
+nodes_to_load = [ NodePath("Viewports/ViewportContainer/Viewport/World/Shared"), NodePath("Viewports/ViewportContainer/Viewport/World/Character"), NodePath("Viewports/ViewportContainer/Viewport/CameraP1"), NodePath(""), NodePath(""), NodePath("Viewports/ViewportContainer/Viewport/Backgrounds"), NodePath("") ]
 character = NodePath("Viewports/ViewportContainer/Viewport/World/Character")
-character2 = NodePath("Viewports/ViewportContainer/Viewport/World/Character2")
 camera = NodePath("Viewports/ViewportContainer/Viewport/CameraP1")
 shared = NodePath("Viewports/ViewportContainer/Viewport/World/Shared")
 
@@ -2381,7 +2376,7 @@ __meta__ = {
 character_scene_path = "res://scenes/actors/mario/mario.tscn"
 
 [node name="ViewportContainer" type="ViewportContainer" parent="Viewports"]
-margin_right = 384.0
+margin_right = 772.0
 margin_bottom = 432.0
 mouse_filter = 2
 size_flags_horizontal = 3
@@ -2393,7 +2388,7 @@ __meta__ = {
 }
 
 [node name="Viewport" type="Viewport" parent="Viewports/ViewportContainer"]
-size = Vector2( 384, 432 )
+size = Vector2( 772, 432 )
 handle_input_locally = false
 render_target_update_mode = 3
 
@@ -2417,7 +2412,6 @@ editor_draw_screen = false
 script = ExtResource( 4 )
 character = NodePath("../World/Character")
 background = NodePath("../Backgrounds")
-character2_cam_collider = NodePath("../World/Character2/CamCollision2")
 
 [node name="ZoomTween" type="Tween" parent="Viewports/ViewportContainer/Viewport/CameraP1"]
 
@@ -2439,21 +2433,7 @@ script = ExtResource( 21 )
 unique_name_in_owner = true
 
 [node name="Character" parent="Viewports/ViewportContainer/Viewport/World" instance=ExtResource( 3 )]
-collision_exceptions = [ NodePath("../Character2") ]
-
-[node name="Character2" parent="Viewports/ViewportContainer/Viewport/World" instance=ExtResource( 3 )]
-player_id = 1
-collision_exceptions = [ NodePath("../Character") ]
-character = 1
-
-[node name="CamCollision2" type="Area2D" parent="Viewports/ViewportContainer/Viewport/World/Character2"]
-position = Vector2( 1000, 920 )
-collision_layer = 0
-collision_mask = 2048
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Viewports/ViewportContainer/Viewport/World/Character2/CamCollision2"]
-visible = false
-shape = SubResource( 24 )
+collision_exceptions = [ NodePath("") ]
 
 [node name="GhostMario" parent="Viewports/ViewportContainer/Viewport/World" instance=ExtResource( 16 )]
 
@@ -2490,87 +2470,6 @@ layer = 60
 character_path = NodePath("../../Viewport/World/Character")
 camera_path = NodePath("../../Viewport/CameraP1")
 viewport_offset = Vector2( 192, 216 )
-
-[node name="ViewportContainer2" type="ViewportContainer" parent="Viewports"]
-margin_left = 388.0
-margin_right = 772.0
-margin_bottom = 432.0
-mouse_filter = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-stretch = true
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="Viewport" type="Viewport" parent="Viewports/ViewportContainer2"]
-size = Vector2( 384, 432 )
-handle_input_locally = false
-render_target_update_mode = 3
-
-[node name="CameraP2" type="Camera2D" parent="Viewports/ViewportContainer2/Viewport"]
-pause_mode = 2
-position = Vector2( 0, -80 )
-rotating = true
-current = true
-process_mode = 0
-limit_left = 0
-limit_top = 0
-limit_right = 960
-limit_bottom = 960
-limit_smoothed = true
-smoothing_enabled = true
-smoothing_speed = 15.0
-drag_margin_left = 0.0
-drag_margin_top = 0.0
-drag_margin_right = 0.0
-drag_margin_bottom = 0.0
-editor_draw_screen = false
-script = ExtResource( 4 )
-character = NodePath("../../../ViewportContainer/Viewport/World/Character2")
-background = NodePath("../Backgrounds")
-character2_cam_collider = NodePath("../../../ViewportContainer/Viewport/World/Character2/CamCollision2")
-
-[node name="ZoomTween" type="Tween" parent="Viewports/ViewportContainer2/Viewport/CameraP2"]
-
-[node name="CutsceneTween" type="Tween" parent="Viewports/ViewportContainer2/Viewport/CameraP2"]
-pause_mode = 2
-
-[node name="Backgrounds" parent="Viewports/ViewportContainer2/Viewport" instance=ExtResource( 13 )]
-
-[node name="World" type="Node2D" parent="Viewports/ViewportContainer2/Viewport"]
-
-[node name="CanvasLayer" type="CanvasLayer" parent="Viewports/ViewportContainer2"]
-layer = 60
-
-[node name="Health" parent="Viewports/ViewportContainer2/CanvasLayer" instance=ExtResource( 17 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 688.0
-margin_top = 14.0
-margin_right = 752.0
-margin_bottom = 78.0
-character_path = NodePath("../../../ViewportContainer/Viewport/World/Character2")
-
-[node name="Fludd" parent="Viewports/ViewportContainer2/CanvasLayer" instance=ExtResource( 23 )]
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -66.0
-margin_top = -66.0
-margin_right = -26.0
-margin_bottom = -16.0
-character_path = NodePath("../../../ViewportContainer/Viewport/World/Character2")
-
-[node name="CanvasLayer2" type="CanvasLayer" parent="Viewports/ViewportContainer2"]
-layer = 60
-
-[node name="Stamina" parent="Viewports/ViewportContainer2/CanvasLayer2" instance=ExtResource( 24 )]
-character_path = NodePath("../../../ViewportContainer/Viewport/World/Character2")
-camera_path = NodePath("../../Viewport/CameraP2")
-viewport_offset = Vector2( 576, 216 )
 
 [node name="SharedSounds" type="Node" parent="."]
 unique_name_in_owner = true
@@ -2624,6 +2523,5 @@ bus = "Sounds"
 [connection signal="timeout" from="UIUnder/HUD/Control/ShineResults/RecordTimer" to="UIUnder/HUD/Control/ShineResults" method="hide_ui"]
 [connection signal="resized" from="UIUnder/HUD/Control/ShineResults/VBoxContainer/NewRecord" to="UIUnder/HUD/Control/ShineResults/VBoxContainer/NewRecord" method="resized"]
 [connection signal="player_removed" from="Viewports" to="Viewports/ViewportContainer/CanvasLayer2/Stamina" method="player_removed"]
-[connection signal="player_removed" from="Viewports" to="Viewports/ViewportContainer2/CanvasLayer2/Stamina" method="player_removed"]
 
 [editable path="UIUnder/HUD/Control/TimerManager"]

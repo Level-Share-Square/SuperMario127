@@ -5,7 +5,6 @@
 [sub_resource type="Shader" id=117]
 code = "shader_type canvas_item;
 
-uniform bool screen_mode = true;
 uniform int num_colors;
 uniform float precision : hint_range(0.0, 1.0, 0.1) = 0.1;
 
@@ -31,7 +30,6 @@ void fragment() {
 
 [resource]
 shader = SubResource( 117 )
-shader_param/screen_mode = false
 shader_param/num_colors = 32
 shader_param/precision = 0.1
 shader_param/palette_in = ExtResource( 1 )

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/deceitful.png-2617d52e00421763cfd0a94f94b284b0.stex"
+path="res://.import/mario_dance.png-584ea8e33fe32f3d61a374379e1f83ca.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/actors/mario/palettes/luigi/deceitful.png"
-dest_files=[ "res://.import/deceitful.png-2617d52e00421763cfd0a94f94b284b0.stex" ]
+source_file="res://scenes/actors/mario/animations/character_select/mario_dance.png"
+dest_files=[ "res://.import/mario_dance.png-584ea8e33fe32f3d61a374379e1f83ca.stex" ]
 
 [params]
 

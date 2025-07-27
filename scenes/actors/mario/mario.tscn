@@ -1721,7 +1721,7 @@ shader = ExtResource( 86 )
 shader_param/ray_count = 4
 shader_param/ray_distance = 0.4
 shader_param/ray_seperation_degrees = 22.0
-shader_param/rotation = 0.727488
+shader_param/rotation = 2.80819
 
 [sub_resource type="RectangleShape2D" id=85]
 extents = Vector2( 8, 18 )
@@ -2006,13 +2006,13 @@ opacity = Color( 0, 0, 0, 0.741176 )
 [node name="Fludd" type="AnimatedSprite" parent="Sprite"]
 visible = false
 frames = ExtResource( 23 )
-animation = "groundPoundLeft"
+animation = "idleRight"
 script = ExtResource( 63 )
 
 [node name="Wings" type="AnimatedSprite" parent="Sprite"]
 visible = false
 frames = ExtResource( 65 )
-animation = "groundPoundLeft"
+animation = "idleRight"
 script = ExtResource( 63 )
 
 [node name="Water2" type="AnimatedSprite" parent="Sprite"]

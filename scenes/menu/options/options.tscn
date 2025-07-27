@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=2]
+[gd_scene load_steps=63 format=2]
 
 [ext_resource path="res://scenes/menu/options/controls/preset_loader.gd" type="Script" id=1]
 [ext_resource path="res://scenes/menu/theme.tres" type="Theme" id=2]
@@ -10,7 +10,6 @@
 [ext_resource path="res://scenes/menu/screen.gd" type="Script" id=8]
 [ext_resource path="res://scenes/menu/options/buttons/slider_option.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scenes/menu/options/buttons/boolean_option.tscn" type="PackedScene" id=10]
-[ext_resource path="res://scenes/menu/options/buttons/enum_option.tscn" type="PackedScene" id=11]
 [ext_resource path="res://scenes/menu/options/controls/keybind.tscn" type="PackedScene" id=12]
 [ext_resource path="res://scenes/menu/options/controls/category_buttons.gd" type="Script" id=13]
 [ext_resource path="res://scenes/menu/options/buttons/enum_slider_option.tscn" type="PackedScene" id=14]
@@ -27,6 +26,14 @@
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=25]
 [ext_resource path="res://scenes/menu/version_number.gd" type="Script" id=26]
 [ext_resource path="res://scenes/menu/options/General.gd" type="Script" id=27]
+[ext_resource path="res://assets/fonts/New Super Mario Font U.ttf" type="DynamicFontData" id=28]
+[ext_resource path="res://scenes/actors/mario/palettes/mario/default.png" type="Texture" id=29]
+[ext_resource path="res://scenes/menu/options/character/mario_frames.tres" type="SpriteFrames" id=30]
+[ext_resource path="res://scenes/menu/options/character/character_sprite.gd" type="Script" id=31]
+[ext_resource path="res://scenes/menu/options/character/character_button.gd" type="Script" id=32]
+[ext_resource path="res://scenes/menu/options/assets/mario_orb.png" type="Texture" id=33]
+[ext_resource path="res://scenes/menu/options/character/palettes.gd" type="Script" id=36]
+[ext_resource path="res://scenes/menu/options/assets/luigi_orb.png" type="Texture" id=37]
 
 [sub_resource type="CanvasItemMaterial" id=11]
 blend_mode = 1
@@ -56,6 +63,56 @@ func _ready():
 	if OS.has_feature(\"JavaScript\"):
 		get_parent().hide()
 "
+
+[sub_resource type="DynamicFont" id=33]
+size = 28
+outline_size = 3
+outline_color = Color( 0, 0, 0, 1 )
+extra_spacing_char = -1
+font_data = ExtResource( 28 )
+
+[sub_resource type="Shader" id=117]
+code = "shader_type canvas_item;
+
+uniform int num_colors;
+uniform float precision : hint_range(0.0, 1.0, 0.1) = 0.1;
+
+uniform sampler2D palette_in;
+uniform sampler2D palette_out;
+
+vec4 swap_color(vec4 color) {
+	float inc = 1.0 / float(num_colors); 
+	for (float i = 0.0; i < 1.0; i += inc) {
+		vec2 uv = vec2(i, 0.0);
+		vec4 color_in = texture(palette_in, uv);
+		if (distance(color, color_in) <= precision) {
+			return texture(palette_out, uv);
+		}
+	}
+	return color;
+}
+
+void fragment() {
+	vec4 color = texture(TEXTURE, UV);
+	COLOR = swap_color(color);
+}"
+
+[sub_resource type="ShaderMaterial" id=118]
+shader = SubResource( 117 )
+shader_param/num_colors = 32
+shader_param/precision = 0.1
+shader_param/palette_in = ExtResource( 29 )
+shader_param/palette_out = ExtResource( 29 )
+
+[sub_resource type="DynamicFont" id=34]
+size = 20
+outline_size = 2
+outline_color = Color( 0, 0.0431373, 0.313726, 1 )
+use_filter = true
+extra_spacing_char = -1
+font_data = ExtResource( 25 )
+
+[sub_resource type="ButtonGroup" id=36]
 
 [sub_resource type="DynamicFont" id=24]
 
@@ -322,9 +379,9 @@ margin_bottom = 432.0
 alignment = 1
 
 [node name="Back" type="Button" parent="BlackBar/MarginContainer/VBoxContainer"]
-margin_top = 112.0
+margin_top = 87.0
 margin_right = 192.0
-margin_bottom = 145.0
+margin_bottom = 120.0
 focus_neighbour_top = NodePath("../Storage")
 focus_neighbour_bottom = NodePath("../General")
 theme_type_variation = "Red"
@@ -348,16 +405,16 @@ patch_margin_right = 11
 patch_margin_bottom = 11
 
 [node name="Padding" type="Control" parent="BlackBar/MarginContainer/VBoxContainer"]
-margin_top = 161.0
+margin_top = 136.0
 margin_right = 192.0
-margin_bottom = 161.0
+margin_bottom = 136.0
 
 [node name="General" type="Button" parent="BlackBar/MarginContainer/VBoxContainer"]
-margin_top = 177.0
+margin_top = 152.0
 margin_right = 192.0
-margin_bottom = 210.0
+margin_bottom = 185.0
 focus_neighbour_top = NodePath("../Back")
-focus_neighbour_bottom = NodePath("../Controls")
+focus_neighbour_bottom = NodePath("../Character")
 text = "General"
 align = 2
 script = ExtResource( 3 )
@@ -377,10 +434,34 @@ patch_margin_top = 11
 patch_margin_right = 11
 patch_margin_bottom = 11
 
-[node name="Controls" type="Button" parent="BlackBar/MarginContainer/VBoxContainer"]
-margin_top = 226.0
+[node name="Character" type="Button" parent="BlackBar/MarginContainer/VBoxContainer"]
+margin_top = 201.0
 margin_right = 192.0
-margin_bottom = 259.0
+margin_bottom = 234.0
+focus_neighbour_top = NodePath("../General")
+text = "Character"
+align = 2
+script = ExtResource( 3 )
+
+[node name="Shadow" type="NinePatchRect" parent="BlackBar/MarginContainer/VBoxContainer/Character"]
+modulate = Color( 1, 1, 1, 0.25098 )
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 6.0
+margin_top = 6.0
+margin_right = 6.0
+margin_bottom = 6.0
+texture = ExtResource( 6 )
+patch_margin_left = 11
+patch_margin_top = 11
+patch_margin_right = 11
+patch_margin_bottom = 11
+
+[node name="Controls" type="Button" parent="BlackBar/MarginContainer/VBoxContainer"]
+margin_top = 250.0
+margin_right = 192.0
+margin_bottom = 283.0
 focus_neighbour_top = NodePath("../General")
 text = "Controls"
 align = 2
@@ -402,9 +483,9 @@ patch_margin_right = 11
 patch_margin_bottom = 11
 
 [node name="Storage" type="Button" parent="BlackBar/MarginContainer/VBoxContainer"]
-margin_top = 275.0
+margin_top = 299.0
 margin_right = 192.0
-margin_bottom = 308.0
+margin_bottom = 332.0
 focus_neighbour_bottom = NodePath("../Back")
 text = "Storage"
 align = 2
@@ -438,6 +519,7 @@ margin_left = -568.0
 margin_top = -216.0
 margin_bottom = 216.0
 rect_min_size = Vector2( 568, 0 )
+mouse_filter = 2
 script = ExtResource( 16 )
 default_subscreen_path = NodePath("General")
 buttons_container_path = NodePath("../BlackBar/MarginContainer/VBoxContainer")
@@ -520,12 +602,12 @@ margin_right = 228.0
 setting_section = "General"
 setting_key = "show_timer"
 
-[node name="Character" parent="Subscreens/General/VBoxContainer/GridContainer" instance=ExtResource( 11 )]
+[node name="CameraShake" parent="Subscreens/General/VBoxContainer/GridContainer" instance=ExtResource( 10 )]
 margin_left = 268.0
 margin_right = 362.0
 setting_section = "General"
-setting_key = "first_player"
-options = [ "Mario", "Luigi" ]
+setting_key = "camera_shake"
+default_value = true
 
 [node name="WindowScale" parent="Subscreens/General/VBoxContainer/GridContainer" instance=ExtResource( 14 )]
 margin_left = 402.0
@@ -571,6 +653,218 @@ setting_section = "General"
 setting_key = "fps_cap"
 default_value = 3
 options = [ "30", "40", "50", "60" ]
+
+[node name="Character" type="MarginContainer" parent="Subscreens"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Subscreens/Character"]
+margin_left = 12.0
+margin_top = 12.0
+margin_right = 556.0
+margin_bottom = 420.0
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Subscreens/Character/HBoxContainer"]
+margin_right = 540.0
+margin_bottom = 408.0
+mouse_filter = 2
+size_flags_horizontal = 3
+alignment = 2
+
+[node name="CharNameLabel" type="Label" parent="Subscreens/Character/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+margin_top = 26.0
+margin_right = 540.0
+margin_bottom = 56.0
+custom_fonts/font = SubResource( 33 )
+text = "Mario"
+align = 1
+
+[node name="CharNameLabelBacking" type="Label" parent="Subscreens/Character/HBoxContainer/VBoxContainer/CharNameLabel"]
+unique_name_in_owner = true
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 3.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 33 )
+text = "Mario"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="CharContainer" type="Control" parent="Subscreens/Character/HBoxContainer/VBoxContainer"]
+margin_top = 72.0
+margin_right = 540.0
+margin_bottom = 200.0
+rect_min_size = Vector2( 0, 128 )
+
+[node name="CharacterSprite" type="AnimatedSprite" parent="Subscreens/Character/HBoxContainer/VBoxContainer/CharContainer"]
+unique_name_in_owner = true
+material = SubResource( 118 )
+position = Vector2( 270, 48 )
+scale = Vector2( 3, 3 )
+frames = ExtResource( 30 )
+animation = "dance"
+playing = true
+script = ExtResource( 31 )
+
+[node name="PaletteLabel" type="Label" parent="Subscreens/Character/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+margin_top = 216.0
+margin_right = 540.0
+margin_bottom = 240.0
+custom_fonts/font = SubResource( 34 )
+text = "Default Palette"
+align = 1
+
+[node name="PaletteLabelBacking" type="Label" parent="Subscreens/Character/HBoxContainer/VBoxContainer/PaletteLabel"]
+unique_name_in_owner = true
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 2.0
+custom_colors/font_color = Color( 0, 0.0431373, 0.313726, 1 )
+custom_fonts/font = SubResource( 34 )
+text = "Default Palette"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="HSeparator" type="HSeparator" parent="Subscreens/Character/HBoxContainer/VBoxContainer"]
+margin_top = 256.0
+margin_right = 540.0
+margin_bottom = 260.0
+
+[node name="Buttons" type="HBoxContainer" parent="Subscreens/Character/HBoxContainer/VBoxContainer"]
+margin_top = 276.0
+margin_right = 540.0
+margin_bottom = 408.0
+mouse_filter = 2
+custom_constants/separation = 16
+
+[node name="Palettes" type="VBoxContainer" parent="Subscreens/Character/HBoxContainer/VBoxContainer/Buttons"]
+margin_right = 84.0
+margin_bottom = 132.0
+custom_constants/separation = 0
+script = ExtResource( 36 )
+
+[node name="Row1" type="HBoxContainer" parent="Subscreens/Character/HBoxContainer/VBoxContainer/Buttons/Palettes"]
+margin_right = 84.0
+margin_bottom = 33.0
+rect_min_size = Vector2( 0, 33 )
+mouse_filter = 2
+custom_constants/separation = 4
+
+[node name="MarioButton" type="Button" parent="Subscreens/Character/HBoxContainer/VBoxContainer/Buttons/Palettes/Row1"]
+unique_name_in_owner = true
+margin_right = 32.0
+margin_bottom = 33.0
+rect_min_size = Vector2( 32, 32 )
+focus_neighbour_bottom = NodePath("../../Row2/LuigiButton")
+theme_type_variation = "PaletteButton"
+custom_fonts/font = ExtResource( 15 )
+toggle_mode = true
+pressed = true
+group = SubResource( 36 )
+script = ExtResource( 32 )
+extend_amount = 2
+
+[node name="Orb" type="Sprite" parent="Subscreens/Character/HBoxContainer/VBoxContainer/Buttons/Palettes/Row1/MarioButton"]
+scale = Vector2( 2, 2 )
+texture = ExtResource( 33 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 16, 16 )
+
+[node name="Row2" type="HBoxContainer" parent="Subscreens/Character/HBoxContainer/VBoxContainer/Buttons/Palettes"]
+margin_top = 33.0
+margin_right = 84.0
+margin_bottom = 66.0
+rect_min_size = Vector2( 0, 33 )
+mouse_filter = 2
+custom_constants/separation = 4
+
+[node name="Padding" type="Control" parent="Subscreens/Character/HBoxContainer/VBoxContainer/Buttons/Palettes/Row2"]
+margin_right = 12.0
+margin_bottom = 33.0
+rect_min_size = Vector2( 12, 0 )
+
+[node name="LuigiButton" type="Button" parent="Subscreens/Character/HBoxContainer/VBoxContainer/Buttons/Palettes/Row2"]
+unique_name_in_owner = true
+margin_left = 16.0
+margin_right = 48.0
+margin_bottom = 33.0
+rect_min_size = Vector2( 32, 32 )
+focus_neighbour_top = NodePath("../../Row1/MarioButton")
+theme_type_variation = "PaletteButton"
+custom_fonts/font = ExtResource( 15 )
+toggle_mode = true
+group = SubResource( 36 )
+script = ExtResource( 32 )
+extend_amount = 2
+
+[node name="Orb" type="Sprite" parent="Subscreens/Character/HBoxContainer/VBoxContainer/Buttons/Palettes/Row2/LuigiButton"]
+scale = Vector2( 2, 2 )
+texture = ExtResource( 37 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 16, 16 )
+
+[node name="Row3" type="HBoxContainer" parent="Subscreens/Character/HBoxContainer/VBoxContainer/Buttons/Palettes"]
+margin_top = 66.0
+margin_right = 84.0
+margin_bottom = 99.0
+rect_min_size = Vector2( 0, 33 )
+mouse_filter = 2
+custom_constants/separation = 4
+
+[node name="Padding" type="Control" parent="Subscreens/Character/HBoxContainer/VBoxContainer/Buttons/Palettes/Row3"]
+margin_right = 32.0
+margin_bottom = 33.0
+rect_min_size = Vector2( 32, 33 )
+
+[node name="Padding2" type="Control" parent="Subscreens/Character/HBoxContainer/VBoxContainer/Buttons/Palettes/Row3"]
+margin_left = 36.0
+margin_right = 68.0
+margin_bottom = 33.0
+rect_min_size = Vector2( 32, 33 )
+
+[node name="Row4" type="HBoxContainer" parent="Subscreens/Character/HBoxContainer/VBoxContainer/Buttons/Palettes"]
+margin_top = 99.0
+margin_right = 84.0
+margin_bottom = 132.0
+rect_min_size = Vector2( 0, 33 )
+mouse_filter = 2
+custom_constants/separation = 4
+
+[node name="Padding" type="Control" parent="Subscreens/Character/HBoxContainer/VBoxContainer/Buttons/Palettes/Row4"]
+margin_right = 12.0
+margin_bottom = 33.0
+rect_min_size = Vector2( 12, 0 )
+
+[node name="Padding2" type="Control" parent="Subscreens/Character/HBoxContainer/VBoxContainer/Buttons/Palettes/Row4"]
+margin_left = 16.0
+margin_right = 48.0
+margin_bottom = 33.0
+rect_min_size = Vector2( 32, 33 )
+
+[node name="Padding3" type="Control" parent="Subscreens/Character/HBoxContainer/VBoxContainer/Buttons/Palettes/Row4"]
+margin_left = 52.0
+margin_right = 84.0
+margin_bottom = 33.0
+rect_min_size = Vector2( 32, 33 )
+
+[node name="PanelContainer" type="CenterContainer" parent="Subscreens/Character/HBoxContainer"]
+self_modulate = Color( 1, 1, 1, 0 )
+margin_left = 544.0
+margin_right = 544.0
+margin_bottom = 408.0
 
 [node name="Controls" type="MarginContainer" parent="Subscreens"]
 visible = false
@@ -1734,7 +2028,6 @@ script = ExtResource( 19 )
 script = ExtResource( 24 )
 
 [node name="Label" type="Label" parent="."]
-modulate = Color( 1, 1, 1, 0 )
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
@@ -1764,8 +2057,15 @@ anims/transition = SubResource( 1 )
 [connection signal="back_press" from="Focus" to="." method="transition" binds= [ "MainMenu" ]]
 [connection signal="pressed" from="BlackBar/MarginContainer/VBoxContainer/Back" to="." method="transition" binds= [ "MainMenu" ]]
 [connection signal="pressed" from="BlackBar/MarginContainer/VBoxContainer/General" to="Subscreens" method="change_subscreen" binds= [ "General" ]]
+[connection signal="pressed" from="BlackBar/MarginContainer/VBoxContainer/Character" to="Subscreens" method="change_subscreen" binds= [ "Character" ]]
 [connection signal="pressed" from="BlackBar/MarginContainer/VBoxContainer/Controls" to="Subscreens" method="change_subscreen" binds= [ "Controls" ]]
 [connection signal="pressed" from="BlackBar/MarginContainer/VBoxContainer/Storage" to="Subscreens" method="change_subscreen" binds= [ "Storage" ]]
+[connection signal="visibility_changed" from="Subscreens/Character" to="Subscreens/Character/HBoxContainer/VBoxContainer/Buttons/Palettes" method="visibility_changed"]
+[connection signal="animation_finished" from="Subscreens/Character/HBoxContainer/VBoxContainer/CharContainer/CharacterSprite" to="Subscreens/Character/HBoxContainer/VBoxContainer/CharContainer/CharacterSprite" method="play" binds= [ "dance" ]]
+[connection signal="button_down" from="Subscreens/Character/HBoxContainer/VBoxContainer/Buttons/Palettes/Row1/MarioButton" to="Subscreens/Character/HBoxContainer/VBoxContainer/Buttons/Palettes" method="set_character" binds= [ 0 ]]
+[connection signal="toggled" from="Subscreens/Character/HBoxContainer/VBoxContainer/Buttons/Palettes/Row1/MarioButton" to="Subscreens/Character/HBoxContainer/VBoxContainer/Buttons/Palettes/Row1/MarioButton" method="toggled"]
+[connection signal="button_down" from="Subscreens/Character/HBoxContainer/VBoxContainer/Buttons/Palettes/Row2/LuigiButton" to="Subscreens/Character/HBoxContainer/VBoxContainer/Buttons/Palettes" method="set_character" binds= [ 1 ]]
+[connection signal="toggled" from="Subscreens/Character/HBoxContainer/VBoxContainer/Buttons/Palettes/Row2/LuigiButton" to="Subscreens/Character/HBoxContainer/VBoxContainer/Buttons/Palettes/Row2/LuigiButton" method="toggled"]
 [connection signal="category_switched" from="Subscreens/Controls/VBoxContainer/VBoxContainer/Category" to="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset" method="update_visible_buttons"]
 [connection signal="category_switched" from="Subscreens/Controls/VBoxContainer/VBoxContainer/Category" to="Subscreens/Controls/VBoxContainer/Devices" method="screen_opened"]
 [connection signal="pressed" from="Subscreens/Controls/VBoxContainer/VBoxContainer/Category/Player1" to="Subscreens/Controls/VBoxContainer/VBoxContainer/Category" method="switch_category" binds= [ "Player1" ]]

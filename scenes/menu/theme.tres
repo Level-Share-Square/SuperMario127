@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=95 format=2]
+[gd_resource type="Theme" load_steps=97 format=2]
 
 [ext_resource path="res://assets/fonts/DelfinoFont20.tres" type="DynamicFont" id=1]
 [ext_resource path="res://scenes/menu/options/buttons/grabber_highlight.png" type="Texture" id=2]
@@ -503,6 +503,40 @@ border_width_bottom = 2
 border_color = Color( 0, 0.0431373, 0.313726, 0 )
 border_blend = true
 
+[sub_resource type="StyleBoxFlat" id=101]
+bg_color = Color( 0.5, 0.5, 1, 0.5 )
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color( 0.5, 0.5, 1, 0 )
+border_blend = true
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+expand_margin_left = 2.0
+expand_margin_right = 2.0
+expand_margin_top = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id=100]
+bg_color = Color( 0, 0, 0, 0.501961 )
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color( 0, 0, 0, 0 )
+border_blend = true
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+expand_margin_left = 2.0
+expand_margin_right = 2.0
+expand_margin_top = 2.0
+expand_margin_bottom = 2.0
+
 [sub_resource type="StyleBoxFlat" id=43]
 bg_color = Color( 1, 1, 1, 1 )
 border_width_left = 4
@@ -908,6 +942,11 @@ PageButton/styles/disabled = SubResource( 76 )
 PageButton/styles/hover = SubResource( 74 )
 PageButton/styles/normal = SubResource( 73 )
 PageButton/styles/pressed = SubResource( 75 )
+PaletteButton/base_type = "Button"
+PaletteButton/fonts/font = ExtResource( 5 )
+PaletteButton/styles/hover = SubResource( 101 )
+PaletteButton/styles/normal = SubResource( 100 )
+PaletteButton/styles/pressed = SubResource( 100 )
 Panel/styles/panel = SubResource( 43 )
 PanelContainer/styles/panel = SubResource( 72 )
 PanelSlanted/base_type = "Panel"

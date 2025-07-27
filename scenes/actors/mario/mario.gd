@@ -327,7 +327,17 @@ const ANIM_IDS : Dictionary = {
 	"keyDance": 55,
 }
 
+const PALETTES_PATH: String = "res://scenes/actors/mario/palettes/%s/%s.png"
 const PALETTE_SWAP_MAT: ShaderMaterial = preload("res://scenes/actors/mario/materials/palette_swap.tres")
+const PALETTE_INS: Array = [
+	preload("res://scenes/actors/mario/palettes/mario/default.png"),
+	preload("res://scenes/actors/mario/palettes/luigi/default.png")
+]
+const CHAR_NAMES: Array = [
+	"Mario",
+	"Luigi"
+]
+var cur_palette: String = "default"
 
 func _ready():
 	_update_player_framerate()
@@ -433,6 +443,13 @@ func load_in(level_data : LevelData, level_area : LevelArea):
 			wing_sprite.frames = luigi_wing_frames
 		_:
 			printerr("Illegal character loaded: " + str(character) + " REEEEEE")
+	
+	## palettes
+	var char_folder: String = CHAR_NAMES[character].to_lower()
+	cur_palette = LocalSettings.load_setting("General", "char_palette", "default")
+	PALETTE_SWAP_MAT.set_shader_param("palette_in", load(PALETTES_PATH % [char_folder, "default"]))
+	PALETTE_SWAP_MAT.set_shader_param("palette_out", load(PALETTES_PATH % [char_folder, cur_palette]))
+	##
 	
 	sound_player.set_deferred("name", "Sounds")
 	call_deferred("add_child", sound_player) #Will throw an error if the level you're in is reset. Not that big of a deal.
