@@ -4,4 +4,4 @@
 
 [resource]
 script = ExtResource( 1 )
-ids = PoolStringArray( "default", "brotherly", "greedy", "dastardly", "fiery", "icy", "bubbly", "industrial", "dapper", "blizzard", "starry", "twilight", "inverted", "drained", "invincible", "shadowy", "classic", "explorer", "retro", "vintage", "solar", "lunar", "stellar", "gummy" )
+ids = PoolStringArray( "default", "brotherly", "greedy", "dastardly", "fiery", "icy", "bubbly", "industrial", "dapper", "blizzard", "starry", "twilight", "inverted", "drained", "invincible", "shadowy", "classic", "prehistoric", "retro", "vintage", "solar", "lunar", "stellar", "gummy", "laborer", "vessel", "moldy", "freeloader", "copper", "silver", "gilded", "iridescent", "ruby", "emerald", "sapphire", "garnet", "peachy", "mimicry", "undead" )

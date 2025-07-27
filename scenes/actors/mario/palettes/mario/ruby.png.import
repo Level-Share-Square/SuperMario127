@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/explorer.png-22f481c95202267dec0be09bc33a3f84.stex"
+path="res://.import/ruby.png-fc1bfb03c0b93c928255efa9297af92f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/actors/mario/palettes/mario/explorer.png"
-dest_files=[ "res://.import/explorer.png-22f481c95202267dec0be09bc33a3f84.stex" ]
+source_file="res://scenes/actors/mario/palettes/mario/ruby.png"
+dest_files=[ "res://.import/ruby.png-fc1bfb03c0b93c928255efa9297af92f.stex" ]
 
 [params]
 

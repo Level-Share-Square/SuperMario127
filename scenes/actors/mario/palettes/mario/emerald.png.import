@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/explorer.png-ea9d9f5390f9ae81cff37d9c4992be9b.stex"
+path="res://.import/emerald.png-6bbf6374206df94a54b6c1354328b6f9.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/actors/mario/palettes/luigi/explorer.png"
-dest_files=[ "res://.import/explorer.png-ea9d9f5390f9ae81cff37d9c4992be9b.stex" ]
+source_file="res://scenes/actors/mario/palettes/mario/emerald.png"
+dest_files=[ "res://.import/emerald.png-6bbf6374206df94a54b6c1354328b6f9.stex" ]
 
 [params]
 
