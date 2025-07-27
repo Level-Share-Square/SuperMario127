@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/laborer.png-724ecd0c95c3c9ebf8f6ae8ad3c69a19.stex"
+path="res://.import/messenger.png-ebfa3d44fcb897dae564ce0716652f8a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/actors/mario/palettes/luigi/laborer.png"
-dest_files=[ "res://.import/laborer.png-724ecd0c95c3c9ebf8f6ae8ad3c69a19.stex" ]
+source_file="res://scenes/actors/mario/palettes/luigi/messenger.png"
+dest_files=[ "res://.import/messenger.png-ebfa3d44fcb897dae564ce0716652f8a.stex" ]
 
 [params]
 

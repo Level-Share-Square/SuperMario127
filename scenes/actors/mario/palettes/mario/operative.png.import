@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/laborer.png-3d713116d2c27580916512d8bc9a247e.stex"
+path="res://.import/operative.png-549d7d81ac6059e24d9976bd3412dfca.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/actors/mario/palettes/mario/laborer.png"
-dest_files=[ "res://.import/laborer.png-3d713116d2c27580916512d8bc9a247e.stex" ]
+source_file="res://scenes/actors/mario/palettes/mario/operative.png"
+dest_files=[ "res://.import/operative.png-549d7d81ac6059e24d9976bd3412dfca.stex" ]
 
 [params]
 
