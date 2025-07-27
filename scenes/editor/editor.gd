@@ -10,6 +10,7 @@ export(NodePath) var shared_path
 
 var placed_item_property = null
 var pixel_lock = true
+var object_layering = true
 
 export(LevelShared.Layers) var layer: int = 2
 

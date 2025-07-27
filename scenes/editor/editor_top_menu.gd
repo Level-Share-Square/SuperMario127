@@ -22,6 +22,8 @@ func on_button_pressed(button: Button):
 			pass
 		"PixelSnap":
 			editor.pixel_lock = !button.pressed
+		"Layering":
+			editor.object_layering = !button.pressed
 		"Autosaves":
 			pass
 		"Settings":
