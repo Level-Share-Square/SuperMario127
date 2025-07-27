@@ -314,7 +314,8 @@ static func convert_054_to_055(result):
 						object.properties[13] = insufficient_text
 						object.properties[14] = is_single
 						
-					
+					124: #buoyant platform
+						object.properties[0] += Vector2(0, 15 * -object.properties[1].y)
 					
 				
 				new_objects.append(object)
