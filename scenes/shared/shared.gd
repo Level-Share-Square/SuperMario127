@@ -46,8 +46,7 @@ func get_objects_node():
 
 func set_tile(x: int, y: int, layer: int, tileset_id: int, tile_id: int, palette_id : int = 0):
 	#print("set ",x," ",y)
-	layer = wrapi(layer - 1, 0, 3)
-	tilemaps_node.set_tile(x, y, layer, tileset_id, tile_id, palette_id)
+	tilemaps_node.set_tile(x, y, convert_layer(layer), tileset_id, tile_id, palette_id)
 
 func get_tile(x: int, y:int, layer: int):
 	return tilemaps_node.get_tile_in_data(x, y, layer)
@@ -193,3 +192,14 @@ func move_object_to_back(object):
 
 func move_object_to_front(object):
 	objects_node.move_object_to_front(object)
+
+func convert_layer(layer):
+	match layer:
+		0:
+			return 3
+		1:
+			return 0
+		2:
+			return 1
+		3:
+			return 2

@@ -14,7 +14,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/menu/level_portal/login/account_info.gd"
 }, {
-"base": "Reference",
+"base": "Node",
 "class": "Action",
 "language": "GDScript",
 "path": "res://scenes/editor/action_manager/actions/action.gd"
@@ -419,7 +419,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/menu/levels_list/misc/http_thumbnails.gd"
 }, {
-"base": "ScrollContainer",
+"base": "Reference",
 "class": "HelpPage",
 "language": "GDScript",
 "path": "res://scenes/oldeditor/window/HelpPage.gd"
@@ -688,11 +688,6 @@ _global_script_classes=[ {
 "class": "PropertyHints",
 "language": "GDScript",
 "path": "res://scenes/editor/windows/object_property_editor/property_editor_scenes/property_hints.gd"
-}, {
-"base": "ScrollContainer",
-"class": "PropertyTab",
-"language": "GDScript",
-"path": "res://scenes/editor/windows/object_property_editor/property_tab.gd"
 }, {
 "base": "LiquidBase",
 "class": "Quicksand",
@@ -1146,7 +1141,6 @@ _global_script_class_icons={
 "PropertyEditor": "",
 "PropertyEditorLoader": "",
 "PropertyHints": "",
-"PropertyTab": "",
 "Quicksand": "",
 "QuicksandHopState": "",
 "QuicksandIdleState": "",

@@ -50,7 +50,7 @@ func draw_tile(pos: Vector2) -> void:
 func finalize_placement() -> void:
 	var action := PlaceTilesAction.new()
 	action.shared = shared
-	action.layer = LevelShared.TileLayers.Middle
+	action.layer = editor.layer
 	action.tileset_id = editor.selected_item.tileset_id
 	action.tile_id = editor.selected_item.tile_id
 	action.palette = editor.selected_item.palette

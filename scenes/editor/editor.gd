@@ -11,6 +11,7 @@ export(NodePath) var shared_path
 var placed_item_property = null
 var pixel_lock = true
 
+export(LevelShared.Layers) var layer: int = 2
 
 var hovered_objects: Dictionary = {}
 var selected_objects: Dictionary = {}

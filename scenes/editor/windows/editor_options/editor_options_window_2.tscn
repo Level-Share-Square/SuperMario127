@@ -238,8 +238,8 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ContentDivider/ContentMat/Tabs/Environment/HBoxContainer" index="0"]
-margin_right = 239.0
-margin_bottom = 155.0
+margin_right = 213.0
+margin_bottom = 142.0
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 1.5
 
@@ -271,8 +271,8 @@ columns = 2
 [node name="Background" type="TextureRect" parent="ContentDivider/ContentMat/Tabs/Environment/HBoxContainer/VBoxContainer" index="1"]
 unique_name_in_owner = true
 show_behind_parent = true
-margin_right = 239.0
-margin_bottom = 132.0
+margin_right = 213.0
+margin_bottom = 119.0
 rect_min_size = Vector2( 180, 0 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -293,10 +293,10 @@ stretch_mode = 6
 
 [node name="PaletteMenuButton" type="Button" parent="ContentDivider/ContentMat/Tabs/Environment/HBoxContainer/VBoxContainer" index="2"]
 unique_name_in_owner = true
-margin_left = 59.0
-margin_top = 136.0
-margin_right = 179.0
-margin_bottom = 155.0
+margin_left = 46.0
+margin_top = 123.0
+margin_right = 166.0
+margin_bottom = 142.0
 rect_min_size = Vector2( 120, 0 )
 size_flags_horizontal = 4
 toggle_mode = true
@@ -304,19 +304,19 @@ text = "View palettes"
 script = ExtResource( 6 )
 
 [node name="VSeparator" type="VSeparator" parent="ContentDivider/ContentMat/Tabs/Environment/HBoxContainer" index="1"]
-margin_left = 243.0
-margin_right = 247.0
-margin_bottom = 155.0
+margin_left = 217.0
+margin_right = 221.0
+margin_bottom = 142.0
 
 [node name="ScrollContainer" type="ScrollContainer" parent="ContentDivider/ContentMat/Tabs/Environment/HBoxContainer" index="2"]
-margin_left = 251.0
-margin_right = 411.0
-margin_bottom = 155.0
+margin_left = 225.0
+margin_right = 368.0
+margin_bottom = 142.0
 size_flags_horizontal = 3
 
 [node name="MarginContainer" type="MarginContainer" parent="ContentDivider/ContentMat/Tabs/Environment/HBoxContainer/ScrollContainer" index="0"]
-margin_right = 152.0
-margin_bottom = 155.0
+margin_right = 135.0
+margin_bottom = 142.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/margin_right = 0
@@ -324,17 +324,17 @@ custom_constants/margin_left = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ContentDivider/ContentMat/Tabs/Environment/HBoxContainer/ScrollContainer/MarginContainer" index="0"]
 margin_left = 2.0
-margin_right = 152.0
-margin_bottom = 155.0
+margin_right = 135.0
+margin_bottom = 142.0
 size_flags_horizontal = 3
 custom_constants/separation = 6
 
 [node name="Background" type="VBoxContainer" parent="ContentDivider/ContentMat/Tabs/Environment/HBoxContainer/ScrollContainer/MarginContainer/VBoxContainer" index="0"]
-margin_right = 150.0
+margin_right = 133.0
 margin_bottom = 40.0
 
 [node name="Label" type="Label" parent="ContentDivider/ContentMat/Tabs/Environment/HBoxContainer/ScrollContainer/MarginContainer/VBoxContainer/Background" index="0"]
-margin_right = 150.0
+margin_right = 133.0
 margin_bottom = 17.0
 text = "Background"
 align = 1
@@ -342,17 +342,17 @@ align = 1
 [node name="BGDropdown" type="OptionButton" parent="ContentDivider/ContentMat/Tabs/Environment/HBoxContainer/ScrollContainer/MarginContainer/VBoxContainer/Background" index="1"]
 unique_name_in_owner = true
 margin_top = 21.0
-margin_right = 150.0
+margin_right = 133.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 120, 0 )
 
 [node name="Foreground" type="VBoxContainer" parent="ContentDivider/ContentMat/Tabs/Environment/HBoxContainer/ScrollContainer/MarginContainer/VBoxContainer" index="1"]
 margin_top = 46.0
-margin_right = 150.0
+margin_right = 133.0
 margin_bottom = 86.0
 
 [node name="Label" type="Label" parent="ContentDivider/ContentMat/Tabs/Environment/HBoxContainer/ScrollContainer/MarginContainer/VBoxContainer/Foreground" index="0"]
-margin_right = 150.0
+margin_right = 133.0
 margin_bottom = 17.0
 text = "Foreground"
 align = 1
@@ -360,17 +360,17 @@ align = 1
 [node name="FGDropdown" type="OptionButton" parent="ContentDivider/ContentMat/Tabs/Environment/HBoxContainer/ScrollContainer/MarginContainer/VBoxContainer/Foreground" index="1"]
 unique_name_in_owner = true
 margin_top = 21.0
-margin_right = 150.0
+margin_right = 133.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 120, 0 )
 
 [node name="Autoscroll" type="VBoxContainer" parent="ContentDivider/ContentMat/Tabs/Environment/HBoxContainer/ScrollContainer/MarginContainer/VBoxContainer" index="2"]
 margin_top = 92.0
-margin_right = 150.0
+margin_right = 133.0
 margin_bottom = 132.0
 
 [node name="Label" type="Label" parent="ContentDivider/ContentMat/Tabs/Environment/HBoxContainer/ScrollContainer/MarginContainer/VBoxContainer/Autoscroll" index="0"]
-margin_right = 150.0
+margin_right = 133.0
 margin_bottom = 17.0
 text = "Autoscroll Speed"
 align = 1
@@ -378,7 +378,7 @@ align = 1
 [node name="ASPick" type="SpinBox" parent="ContentDivider/ContentMat/Tabs/Environment/HBoxContainer/ScrollContainer/MarginContainer/VBoxContainer/Autoscroll" index="1"]
 unique_name_in_owner = true
 margin_top = 21.0
-margin_right = 150.0
+margin_right = 133.0
 margin_bottom = 40.0
 min_value = -6400.0
 max_value = 6400.0
