@@ -28,14 +28,15 @@ func _ready():
 		sprite.z_index = 0
 	rotation_degrees = 0
 	if mode != 1:
-		var _connect = area.connect("body_entered", self, "enter_area")
-		var _connect2 = area.connect("body_exited", self, "exit_area")
-		
-		var _connect3 = detector.connect("body_entered", self, "enter_detector")
-		if !activated and !Singleton.CurrentLevelData.level_data.vars.is_fludd_activated(0):
-			Singleton.CurrentLevelData.level_data.vars.connect("hover_fludd_activated", self, "_on_fludd_activated", [], CONNECT_ONESHOT)
-			sprite.modulate.a = 0.2
-			loaded_activated = false
+		if layer == middle:
+			var _connect = area.connect("body_entered", self, "enter_area")
+			var _connect2 = area.connect("body_exited", self, "exit_area")
+			
+			var _connect3 = detector.connect("body_entered", self, "enter_detector")
+			if !activated and !Singleton.CurrentLevelData.level_data.vars.is_fludd_activated(0):
+				Singleton.CurrentLevelData.level_data.vars.connect("hover_fludd_activated", self, "_on_fludd_activated", [], CONNECT_ONESHOT)
+				sprite.modulate.a = 0.2
+				loaded_activated = false
 
 func enter_area(body):
 	if body.name.begins_with("Character"):

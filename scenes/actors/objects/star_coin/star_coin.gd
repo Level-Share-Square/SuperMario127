@@ -23,7 +23,8 @@ func _set_property_values():
 	set_property("id", id, true, "ID")
 
 func _ready() -> void:
-	var _connect = area.connect("body_entered", self, "collect")
+	if layer == middle:
+		var _connect = area.connect("body_entered", self, "collect")
 
 	if Singleton.ModeSwitcher.get_node("ModeSwitcherButton").invisible:
 		var collected_star_coins = Singleton.CurrentLevelData.level_info.collected_star_coins

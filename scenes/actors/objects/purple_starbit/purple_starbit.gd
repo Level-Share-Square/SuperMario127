@@ -44,7 +44,8 @@ func _ready():
 	if id in Singleton.CurrentLevelData.level_data.vars.purple_starbits_collected[Singleton.CurrentLevelData.area][1] and !timed:
 		queue_free()
 	
-	var _connect = area.connect("body_entered", self, "collect")
+	if layer == middle:
+		var _connect = area.connect("body_entered", self, "collect")
 
 var prev_activate_shape = false
 func _process(delta):

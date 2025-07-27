@@ -23,6 +23,19 @@ front_tilemap = NodePath("Front")
 [node name="VeryBack" type="TileMap" parent="Tilemaps"]
 modulate = Color( 0.545098, 0.545098, 0.545098, 1 )
 z_index = -11
+z_as_relative = false
+tile_set = ExtResource( 4 )
+cell_size = Vector2( 32, 32 )
+collision_layer = 262144
+collision_mask = 262144
+format = 1
+script = ExtResource( 3 )
+background = true
+
+[node name="Back" type="TileMap" parent="Tilemaps"]
+modulate = Color( 0.545098, 0.545098, 0.545098, 1 )
+z_index = -10
+z_as_relative = false
 tile_set = ExtResource( 4 )
 cell_size = Vector2( 32, 32 )
 collision_layer = 262144
@@ -32,29 +45,20 @@ script = ExtResource( 3 )
 layer = 1
 background = true
 
-[node name="Back" type="TileMap" parent="Tilemaps"]
-modulate = Color( 0.545098, 0.545098, 0.545098, 1 )
-z_index = -10
-tile_set = ExtResource( 4 )
-cell_size = Vector2( 32, 32 )
-collision_layer = 262144
-collision_mask = 262144
-format = 1
-script = ExtResource( 3 )
-layer = 2
-background = true
-
 [node name="Middle" type="TileMap" parent="Tilemaps"]
+z_index = -1
+z_as_relative = false
 tile_set = ExtResource( 4 )
 cell_size = Vector2( 32, 32 )
 collision_mask = 0
 format = 1
 script = ExtResource( 3 )
-layer = 3
+layer = 2
 
 [node name="Front" type="TileMap" parent="Tilemaps"]
 light_mask = 524289
 z_index = 10
+z_as_relative = false
 tile_set = ExtResource( 4 )
 cell_size = Vector2( 32, 32 )
 cell_quadrant_size = 64
@@ -62,7 +66,7 @@ collision_layer = 262144
 collision_mask = 262144
 format = 1
 script = ExtResource( 3 )
-layer = 4
+layer = 3
 
 [node name="Objects" type="Node" parent="."]
 script = ExtResource( 5 )

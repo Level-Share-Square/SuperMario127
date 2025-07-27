@@ -136,3 +136,8 @@ func _body_entered(body):
 func _body_exited(body):
 	if body.name.begins_with("Character") and is_rainbow(body) and body.global_position.y + 23 < area.global_position.y:
 		break_block()
+
+func is_middle(check):
+	.is_middle(check)
+	if !check:
+		collision_shape.disabled = true

@@ -3,22 +3,20 @@ extends LevelDataLoader
 
 
 enum Layers {
-	WayBack,
 	VeryBack,
 	Back,
 	Middle,
 	Front,
-	VeryFront,
 }
 
 enum TileLayers {
+	VeryBack,
 	Back,
 	Middle,
 	Front,
-	VeryBack,
 }
 
-const layer_index_offset: int = -3
+const layer_index_offset: int = -2
 const layer_spacing: int = 16
 
 export var tilemaps : NodePath
@@ -48,6 +46,7 @@ func get_objects_node():
 
 func set_tile(x: int, y: int, layer: int, tileset_id: int, tile_id: int, palette_id : int = 0):
 	#print("set ",x," ",y)
+	layer = wrapi(layer - 1, 0, 3)
 	tilemaps_node.set_tile(x, y, layer, tileset_id, tile_id, palette_id)
 
 func get_tile(x: int, y:int, layer: int):

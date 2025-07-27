@@ -68,6 +68,7 @@ func _ready():
 		platform_area_collision_shape.disabled = true
 		
 	update_parts()
+	is_middle(layer == middle)
 	
 	if color == Color(1, 1, 1):
 		sprite.texture = normal_texture
@@ -92,3 +93,8 @@ func update_parts():
 	
 	#calculate the total platform scale
 	scale_x = scale.x * (left_width + right_width + part_width * parts) / (left_width + right_width + part_width)
+
+func is_middle(check):
+	.is_middle(check)
+	
+	collision_shape.disabled = !check

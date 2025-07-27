@@ -140,3 +140,11 @@ func create_coin(): #creates a coin
 	var velocity_x = -power if int(time_alive * 10) % 2 == 0 else power
 	object.properties.append(Vector2(velocity_x, -300)) #makes the coin move around and fly in the air when the block breaks
 	get_parent().create_object(object, false) #finishes the object creation
+
+func is_middle(check):
+	.is_middle(check)
+	if !check:
+		collision_shape.disabled = true
+		for _area in [area, stomp_area, spin_area, turbo_spin_area]:
+			_area.collision_layer = 0
+			_area.collision_mask = 0

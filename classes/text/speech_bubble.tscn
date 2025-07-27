@@ -116,7 +116,7 @@ mouse_filter = 2
 [node name="RichTextLabel" type="RichTextLabel" parent="Dialogue"]
 margin_left = 108.0
 margin_right = 108.0
-margin_bottom = 17.0
+margin_bottom = 18.0
 grow_vertical = 0
 rect_clip_content = false
 mouse_filter = 2

@@ -28,7 +28,8 @@ func _ready():
 	
 	if mode != 1:
 		display.visible = false
-		var _connect = use_area.connect("body_entered", self, "set_checkpoint")
+		if layer == middle:
+			var _connect = use_area.connect("body_entered", self, "set_checkpoint")
 	else:
 		display.visible = true
 	

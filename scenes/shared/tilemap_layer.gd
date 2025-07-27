@@ -4,7 +4,7 @@ extends TileMap
 
 const BackgroundColor = Color(0.54, 0.54, 0.54)
 
-export(LevelShared.Layers) var layer = 0
+export(LevelShared.TileLayers) var layer = 0
 export var background = false
 
 var transparent = false
@@ -16,7 +16,7 @@ var z_layer: int = 0
 
 func _ready():
 	z_layer = layer + LevelShared.layer_index_offset
-	z_index = z_layer * LevelShared.layer_spacing
+	z_index = z_layer * LevelShared.layer_spacing if layer != 2 else z_layer * LevelShared.layer_spacing + 2
 	
 	if background:
 		color = Color(BackgroundColor, 1.0)

@@ -68,7 +68,7 @@ func update_layer():
 	if render_in_front:
 		layer_shift = (LevelShared.layer_spacing * 2) + 1
 	else:
-		layer_shift = -1
+		layer_shift = 1
 	
 	.update_layer()
 

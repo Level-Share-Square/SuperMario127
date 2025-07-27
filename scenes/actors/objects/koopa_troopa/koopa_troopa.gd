@@ -101,6 +101,7 @@ func _ready() -> void:
 	if scale.x < 0 and mode == 0 and enabled:
 		facing_direction = sign(scale.x)
 		scale.x = abs(scale.x)
+		
 
 func delete_wings():
 	if !rainbow:
@@ -359,3 +360,7 @@ func physics_process_koopa(delta, level_bounds):
 			if !right_check.is_colliding() or (body.global_position.x > (level_bounds.end.x * 32 - 1) - 4) or body.test_move(body.global_transform, Vector2(0.1, 0)):
 				facing_direction = -1
 			
+func is_middle(check: bool):
+	.is_middle(check)
+	if !check:
+		sprite.play("default")

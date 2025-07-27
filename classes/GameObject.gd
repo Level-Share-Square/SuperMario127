@@ -5,7 +5,7 @@ extends Node2D
 const BG_MODULATE := Color(0.54, 0.54, 0.54)
 
 
-export(LevelShared.Layers) var default_layer: int = 3
+export(LevelShared.Layers) var default_layer: int = 1
 export var layer_shift: int = 0
 export var lock_layer: bool = false
 export var ignore_layer_disabling: bool = false
@@ -25,11 +25,13 @@ var hovered: bool = false
 var selected: bool = false
 
 var enabled: bool = true
+var is_middle: bool = true
 var preview_position := Vector2(72, 92)
 var palette: int = 0
 var palettes: int = 0
 
-var layer: int = 3
+var middle: int = LevelShared.Layers.Middle
+var layer: int = 1
 var z_layer: int = 0
 
 # true if creating a GameObject for the object settings preview
@@ -112,7 +114,6 @@ func _ready():
 	
 	update_layer()
 	yield(get_tree().create_timer(0.1), "timeout")
-	set_process(true)
 
 
 func create_collision_polygons_from_tree(node: Node, node_transform: Transform2D, array: Array) -> void:
@@ -170,6 +171,7 @@ func get_property_index(key) -> int:
 	return index
 
 func _process(delta):
+	is_middle(layer == middle)
 	if Input.is_action_just_pressed("click") && hovered == true:
 		var editor = get_tree().current_scene
 		connect("object_clicked", editor, "object_clicked", [self])
@@ -247,7 +249,7 @@ func set_property_menu(key, menu_array: Array):
 
 
 func update_layer():
-	if layer <= 5:
+	if layer <= 3:
 		z_layer = layer + LevelShared.layer_index_offset
 		z_index = (z_layer * LevelShared.layer_spacing) + layer_shift
 	else:
@@ -257,10 +259,6 @@ func update_layer():
 		modulate = BG_MODULATE
 	else:
 		modulate = Color(1, 1, 1)
-	
-	if layer != default_layer:
-		set_property("enabled", ignore_layer_disabling, true)
-
 
 func parts_input_handler(event, object):
 	if event is InputEventMouseButton and event.is_pressed() and hovered:
@@ -276,3 +274,9 @@ func parts_input_handler(event, object):
 					object.parts = 1
 				object.set_property("parts", object.parts, true)
 				object.update_parts()
+				
+
+func is_middle(check: bool) -> void:
+	is_middle = check
+	set_process(check)
+	set_physics_process(check)

@@ -222,7 +222,7 @@ static func convert_052_to_053(result):
 			var new_objects = []
 			for object_result in area_result.objects:
 				var object = object_result
-				object.properties.insert(5, 3)
+				object.properties.insert(5, 2)
 				
 				if object.type_id == 82: #checkpoint conversion
 					var old_properties = object.properties.duplicate()
@@ -273,6 +273,9 @@ static func convert_054_to_055(result):
 						object.properties[8] = int(teleport_mode) # true = remote, false = local (why was it that way :/)
 						object.properties[9] = 0 if force_fadeout == true else 800 # setting max pan distance to 0 acts the same as force fadeout
 						object.properties[10] = ""
+					
+					29: # goomba
+						object.properties[0] += Vector2(0, 25)
 						
 					48: # door
 						object.properties.resize(10)
@@ -310,6 +313,7 @@ static func convert_054_to_055(result):
 						object.properties[12] = required_amount
 						object.properties[13] = insufficient_text
 						object.properties[14] = is_single
+						
 					
 					
 				

@@ -109,7 +109,8 @@ func _ready() -> void:
 		
 		if red_coins_activate or shine_shards_activate or purple_starbits_activate:
 			activated = false
-		var _connect = area.connect("body_entered", self, "collect")
+		if layer == middle:
+			var _connect = area.connect("body_entered", self, "collect")
 		unpause_timer.wait_time = UNPAUSE_TIMER_LENGTH
 		
 		if activated:

@@ -53,6 +53,7 @@ var spawn_pos
 
 
 func _ready():
+	is_middle(layer == middle)
 	if palette != 0:
 		sprite.texture = palette_textures[palette]
 
@@ -86,3 +87,8 @@ func update_parts():
 	rigidbody.shape.extents.x = collision_shape.shape.extents.x
 	#calculate the total platform scale
 	scale_x = scale.x * (left_width + right_width + part_width * parts) / (left_width + right_width + part_width)
+
+func is_middle(check):
+	.is_middle(check)
+	
+	collision_shape.disabled = !check

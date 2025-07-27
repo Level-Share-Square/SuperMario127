@@ -99,10 +99,11 @@ func pit() -> void:
 
 ## get off me mario!!
 func damage_player(character: Character) -> void:
-	if damage > 0:
-		character.damage_with_knockback(global_position, damage)
-	else:
-		character.knockback(global_position, knockback_power, set_player_knockback_state)
+	if enemy.enabled:
+		if damage > 0:
+			character.damage_with_knockback(global_position, damage)
+		else:
+			character.knockback(global_position, knockback_power, set_player_knockback_state)
 
 
 func bounce_player(character: Character) -> void:

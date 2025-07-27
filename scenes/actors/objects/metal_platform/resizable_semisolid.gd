@@ -53,6 +53,7 @@ func _ready():
 		platform_area_collision_shape.disabled = true
 		
 	update_parts()
+	is_middle(layer == middle)
 
 func update_parts():
 	sprite.rect_position.x = -(left_width + (part_width * parts) + right_width) / 2
@@ -63,3 +64,8 @@ func update_parts():
 	
 	#calculate the total platform scale
 	scale_x = scale.x * (left_width + right_width + part_width * parts) / (left_width + right_width + part_width)
+
+func is_middle(check):
+	.is_middle(check)
+	
+	collision_shape.disabled = !check

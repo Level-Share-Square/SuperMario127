@@ -44,7 +44,8 @@ func _ready():
 	if id in Singleton.CurrentLevelData.level_data.vars.red_coins_collected[1]:
 		queue_free()
 	
-	var _connect = area.connect("body_entered", self, "collect")
+	if layer == middle:
+		var _connect = area.connect("body_entered", self, "collect")
 
 func _process(delta):
 	if !collected:

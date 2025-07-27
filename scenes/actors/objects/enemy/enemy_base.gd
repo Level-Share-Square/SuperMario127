@@ -73,6 +73,7 @@ func set_state_node(new_state: EnemyState) -> void:
 
 
 func _ready():
+	z_as_relative = true
 	if spawn_effect:
 		spawn_particles.emitting = true
 	

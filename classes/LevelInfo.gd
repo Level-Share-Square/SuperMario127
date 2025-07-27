@@ -153,6 +153,7 @@ func init_collectibles():
 						"id": object.properties[13],
 						"do_kick_out": object.properties[14],
 						"enabled": object.properties[4],
+						"layer": object.properties[5],
 					}
 					shine_dictionary.merge({"entrance_area": -1, "entrance_tag": "_entrance"} if object.properties.size() != 20 else {"entrance_area": object.properties[18], "entrance_tag": object.properties[19]})
 		
@@ -168,7 +169,7 @@ func init_collectibles():
 						if shine["id"] == shine_dictionary["id"]:
 							repeated_shine = true
 					
-					if !repeated_shine and shine_dictionary["enabled"]:
+					if !repeated_shine and shine_dictionary["enabled"] and shine_dictionary["layer"] == LevelShared.Layers.Middle:
 						shine_details.append(shine_dictionary)
 						
 						# initialize collected_shines and time_scores
@@ -177,6 +178,7 @@ func init_collectibles():
 						
 				OBJECT_ID_STAR_COIN:
 					var star_coin_id : int = object.properties[6]
+					var layer = object.properties[5]
 					var enabled = object.properties[3]
 					
 					var repeated_star_coin : bool = false
@@ -185,7 +187,7 @@ func init_collectibles():
 						if id == star_coin_id:
 							repeated_star_coin = true
 					
-					if !repeated_star_coin and enabled:
+					if !repeated_star_coin and enabled and layer == LevelShared.Layers.Middle:
 						star_coin_details.append(star_coin_id)
 						
 						# initialize collected star coins
