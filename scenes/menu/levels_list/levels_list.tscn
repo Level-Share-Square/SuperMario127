@@ -943,7 +943,7 @@ alignment = 1
 script = ExtResource( 50 )
 
 [node name="Label" type="Label" parent="Panel/Subscreens/LevelView/OldLevels"]
-margin_top = 116.0
+margin_top = 115.0
 margin_right = 672.0
 margin_bottom = 140.0
 size_flags_vertical = 1
@@ -953,32 +953,32 @@ align = 1
 [node name="Label2" type="Label" parent="Panel/Subscreens/LevelView/OldLevels"]
 margin_top = 148.0
 margin_right = 672.0
-margin_bottom = 172.0
+margin_bottom = 173.0
 size_flags_vertical = 1
 text = "Don't close the game!"
 align = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel/Subscreens/LevelView/OldLevels"]
-margin_top = 180.0
+margin_top = 181.0
 margin_right = 672.0
-margin_bottom = 196.0
+margin_bottom = 198.0
 
 [node name="Padding" type="Control" parent="Panel/Subscreens/LevelView/OldLevels/HBoxContainer"]
 margin_right = 128.0
-margin_bottom = 16.0
+margin_bottom = 17.0
 rect_min_size = Vector2( 128, 0 )
 
 [node name="ProgressBar" type="ProgressBar" parent="Panel/Subscreens/LevelView/OldLevels/HBoxContainer"]
 margin_left = 132.0
 margin_right = 540.0
-margin_bottom = 16.0
+margin_bottom = 17.0
 size_flags_horizontal = 3
 size_flags_vertical = 1
 
 [node name="Padding2" type="Control" parent="Panel/Subscreens/LevelView/OldLevels/HBoxContainer"]
 margin_left = 544.0
 margin_right = 672.0
-margin_bottom = 16.0
+margin_bottom = 17.0
 rect_min_size = Vector2( 128, 0 )
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Panel/Subscreens/LevelView"]
@@ -1092,7 +1092,7 @@ __meta__ = {
 [node name="Author" type="Label" parent="Panel/Subscreens/LevelInfo/LevelPanel/InfoTab/Info"]
 margin_top = 24.0
 margin_right = 380.0
-margin_bottom = 40.0
+margin_bottom = 41.0
 custom_fonts/font = ExtResource( 23 )
 text = "by hop193"
 align = 1
@@ -1100,15 +1100,15 @@ valign = 1
 clip_text = true
 
 [node name="Padding" type="Control" parent="Panel/Subscreens/LevelInfo/LevelPanel/InfoTab/Info"]
-margin_top = 40.0
+margin_top = 41.0
 margin_right = 380.0
-margin_bottom = 46.0
+margin_bottom = 47.0
 rect_min_size = Vector2( 0, 6 )
 
 [node name="Shines" type="HBoxContainer" parent="Panel/Subscreens/LevelInfo/LevelPanel/InfoTab/Info"]
-margin_top = 46.0
+margin_top = 47.0
 margin_right = 380.0
-margin_bottom = 82.0
+margin_bottom = 83.0
 
 [node name="Control" type="Control" parent="Panel/Subscreens/LevelInfo/LevelPanel/InfoTab/Info/Shines"]
 margin_right = 36.0
@@ -1131,7 +1131,7 @@ stretch_mode = 6
 
 [node name="Label" type="Label" parent="Panel/Subscreens/LevelInfo/LevelPanel/InfoTab/Info/Shines"]
 margin_left = 40.0
-margin_top = 6.0
+margin_top = 5.0
 margin_right = 66.0
 margin_bottom = 30.0
 text = "1/4"
@@ -1139,9 +1139,9 @@ align = 1
 valign = 1
 
 [node name="StarCoins" type="HBoxContainer" parent="Panel/Subscreens/LevelInfo/LevelPanel/InfoTab/Info"]
-margin_top = 82.0
+margin_top = 83.0
 margin_right = 380.0
-margin_bottom = 118.0
+margin_bottom = 119.0
 
 [node name="Control" type="Control" parent="Panel/Subscreens/LevelInfo/LevelPanel/InfoTab/Info/StarCoins"]
 margin_right = 36.0
@@ -1164,7 +1164,7 @@ stretch_mode = 6
 
 [node name="Label" type="Label" parent="Panel/Subscreens/LevelInfo/LevelPanel/InfoTab/Info/StarCoins"]
 margin_left = 40.0
-margin_top = 6.0
+margin_top = 5.0
 margin_right = 66.0
 margin_bottom = 30.0
 text = "1/4"
@@ -1172,15 +1172,15 @@ align = 1
 valign = 1
 
 [node name="Padding2" type="Control" parent="Panel/Subscreens/LevelInfo/LevelPanel/InfoTab/Info"]
-margin_top = 118.0
+margin_top = 119.0
 margin_right = 380.0
-margin_bottom = 124.0
+margin_bottom = 125.0
 rect_min_size = Vector2( 0, 6 )
 
 [node name="Completion" type="Label" parent="Panel/Subscreens/LevelInfo/LevelPanel/InfoTab/Info"]
-margin_top = 124.0
-margin_right = 102.0
-margin_bottom = 148.0
+margin_top = 125.0
+margin_right = 104.0
+margin_bottom = 150.0
 size_flags_horizontal = 0
 text = "Completed: "
 valign = 1

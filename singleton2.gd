@@ -1,5 +1,6 @@
 extends Node2D
 
+var first_startup : bool = true
 var rp : bool = true
 var dead = false
 var player_name

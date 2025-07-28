@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://assets/misc/new127icon.png" type="Texture" id=1]
 [ext_resource path="res://scenes/menu/theme.tres" type="Theme" id=2]
@@ -12,12 +12,13 @@
 [ext_resource path="res://assets/sounds/click2.wav" type="AudioStream" id=10]
 [ext_resource path="res://assets/sounds/hover.wav" type="AudioStream" id=11]
 [ext_resource path="res://scenes/menu/screen.gd" type="Script" id=12]
-[ext_resource path="res://assets/fonts/super-mario-bros-nes.ttf" type="DynamicFontData" id=13]
+[ext_resource path="res://scenes/menu/main_menu/logo_tint.gdshader" type="Shader" id=13]
 [ext_resource path="res://scenes/menu/main_menu/secret/sprite.png" type="Texture" id=14]
 [ext_resource path="res://scenes/menu/main_menu/secret/logo.png" type="Texture" id=15]
 [ext_resource path="res://scenes/menu/button_scripts/press_countdown.gd" type="Script" id=16]
 [ext_resource path="res://scenes/menu/button_scripts/icon_helper.gd" type="Script" id=17]
 [ext_resource path="res://scenes/actors/objects/pipe/pipe.png" type="Texture" id=18]
+[ext_resource path="res://assets/fonts/DelfinoFont32.tres" type="DynamicFont" id=19]
 [ext_resource path="res://scenes/menu/main_menu/discord-mark-white.svg" type="Texture" id=20]
 [ext_resource path="res://scenes/menu/pause/pause_main/icons/settings.png" type="Texture" id=21]
 [ext_resource path="res://scenes/menu/level_portal/icons/author.png" type="Texture" id=22]
@@ -66,24 +67,61 @@ func toggle_secret(key: String, secret_enabled):
 		hide_node.visible = !secret_enabled
 "
 
+[sub_resource type="ShaderMaterial" id=15]
+shader = ExtResource( 13 )
+shader_param/effectiveness = 0.0
+
 [sub_resource type="GDScript" id=5]
 resource_name = "floaty"
 script/source = "extends Sprite
+
+var ready: bool = false
+
+var do_idle: bool = false
 
 export var power: float
 export var speed: float
 
 var time = 0.0
 
+onready var ap: AnimationPlayer = get_node(\"../../AnimationPlayer\")
+
+
+func _input(event):
+	if not ready or event is InputEventMouseMotion:
+		return
+
+	ap.play(\"title_to_menu\")
+
+	do_idle = false
+
+
+func _ready():
+	owner.overwrite_default_transition = Singleton2.first_startup
+	ap.play(\"title_appear\")
+
+
 func _process(delta):
+	print(owner.overwrite_default_transition)
+	if not do_idle:
+		return
+
 	time += delta
 	position.y = sin(time*speed) * power
-"
 
-[sub_resource type="DynamicFont" id=7]
-size = 128
-use_filter = true
-font_data = ExtResource( 13 )
+
+func _on_AnimationPlayer_animation_finished(anim_name):
+	if anim_name == \"title_appear\":
+		ready = true
+		do_idle = true
+
+	if anim_name == \"title_to_menu\":
+		ready = false
+		do_idle = true
+
+		Singleton2.first_startup = false
+		owner.overwrite_default_transition = false
+"
 
 [sub_resource type="Animation" id=3]
 resource_name = "RESET"
@@ -157,7 +195,220 @@ tracks/5/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
+"values": [ Color( 0, 0, 0, 0 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("LogoAnchor/Logo:material:shader_param/effectiveness")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("Label:modulate")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
 "values": [ Color( 1, 1, 1, 0 ) ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("LogoAnchor:rect_scale")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=13]
+resource_name = "title_appear"
+length = 1.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("LogoAnchor/Logo:material:shader_param/effectiveness")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 0.6, 0.7, 1.3 ),
+"transitions": PoolRealArray( 1, 2, 0.5, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 1.0, 1.0, 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("LogoAnchor:margin_left")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ -648.0, -648.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("LogoAnchor:anchor_right")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.0, 1.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("LogoAnchor:rect_scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1.5, 1.5 ), Vector2( 1.5, 1.5 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Label:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.5, 1.3, 1.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath(".:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=12]
+resource_name = "title_to_menu"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("MarginContainer:margin_right")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 2 ),
+"update": 0,
+"values": [ 0, 237.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("MarginContainer:margin_left")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 2 ),
+"update": 0,
+"values": [ -237, 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("LogoAnchor:margin_left")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 2 ),
+"update": 0,
+"values": [ -648, -385.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("LogoAnchor:margin_right")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 2 ),
+"update": 0,
+"values": [ -522, 0.0 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("WhiteBar:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("WhiteBar2:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("LogoAnchor:rect_scale")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1.46409, 1 ),
+"update": 0,
+"values": [ Vector2( 1.5, 1.5 ), Vector2( 1, 1 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("Label:modulate")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0, 0.952941, 1, 0 ) ]
 }
 
 [sub_resource type="Animation" id=4]
@@ -237,11 +488,13 @@ tracks/5/keys = {
 }
 
 [node name="MainMenu" type="Control"]
+modulate = Color( 0, 0, 0, 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_clip_content = true
 theme = ExtResource( 2 )
 script = ExtResource( 12 )
+overwrite_default_transition = true
 
 [node name="ButtonFunctions" type="Control" parent="."]
 script = ExtResource( 3 )
@@ -273,7 +526,7 @@ texture = SubResource( 8 )
 expand = true
 
 [node name="WhiteBar2" type="TextureRect" parent="."]
-modulate = Color( 1, 1, 1, 0 )
+modulate = Color( 0, 0, 0, 0 )
 margin_left = 981.0
 margin_top = 207.0
 margin_right = 2128.0
@@ -588,10 +841,7 @@ rect_min_size = Vector2( 18, 0 )
 anchor_left = 1.0
 anchor_right = 1.0
 margin_right = 385.0
-margin_bottom = 245.0
-__meta__ = {
-"_edit_lock_": true
-}
+margin_bottom = 490.0
 
 [node name="Secret" type="Node" parent="LogoAnchor"]
 script = SubResource( 9 )
@@ -599,7 +849,8 @@ show_node_path = NodePath("../Sprite")
 hide_node_path = NodePath("../Logo")
 
 [node name="Logo" type="Sprite" parent="LogoAnchor"]
-scale = Vector2( 0.175, 0.175 )
+material = SubResource( 15 )
+scale = Vector2( 0.177879, 0.175 )
 texture = ExtResource( 1 )
 centered = false
 script = SubResource( 5 )
@@ -613,27 +864,6 @@ position = Vector2( 64, 80 )
 scale = Vector2( 3.9, 3.9 )
 texture = ExtResource( 6 )
 centered = false
-
-[node name="Legacy" type="Label" parent="LogoAnchor/Logo"]
-visible = false
-margin_left = 937.143
-margin_top = 1211.43
-margin_right = 2089.14
-margin_bottom = 1467.43
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_fonts/font = SubResource( 7 )
-text = "LEGACY"
-
-[node name="Shadow" type="Label" parent="LogoAnchor/Logo/Legacy"]
-modulate = Color( 0, 0, 0, 0.25098 )
-show_behind_parent = true
-margin_left = 16.0
-margin_top = 16.0
-margin_right = 1168.0
-margin_bottom = 272.0
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_fonts/font = SubResource( 7 )
-text = "LEGACY"
 
 [node name="Sprite" type="Sprite" parent="LogoAnchor"]
 visible = false
@@ -669,7 +899,30 @@ grow_vertical = 0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 3 )
+anims/title_appear = SubResource( 13 )
+anims/title_to_menu = SubResource( 12 )
 anims/transition = SubResource( 4 )
+
+[node name="Label" type="Label" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+anchor_left = 0.5
+anchor_top = 0.85
+anchor_right = 0.5
+anchor_bottom = 0.85
+margin_left = -179.0
+margin_top = -123.092
+margin_right = 179.0
+margin_bottom = 123.092
+grow_horizontal = 2
+grow_vertical = 2
+rect_pivot_offset = Vector2( -189, 46.892 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 2
+custom_constants/shadow_offset_y = 2
+custom_fonts/font = ExtResource( 19 )
+text = "Press a button to start!"
+align = 1
+valign = 1
 
 [connection signal="screen_opened" from="." to="Focus" method="focus_node" flags=3 binds= [ "" ]]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/DevLevels" to="." method="transition" binds= [ "LevelsList" ]]
@@ -686,3 +939,4 @@ anims/transition = SubResource( 4 )
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/Discord" to="ButtonFunctions" method="open_discord"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/Credits" to="." method="transition" binds= [ "Credits" ]]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/Credits" to="Focus" method="set_default_focus" binds= [ "%Credits" ]]
+[connection signal="animation_finished" from="AnimationPlayer" to="LogoAnchor/Logo" method="_on_AnimationPlayer_animation_finished"]
