@@ -10,6 +10,8 @@ var time_alive := 0.0
 
 var last_downwards := false
 onready var fludd_sprite = $Fludd
+onready var sprite = $"%Sprite"
+
 
 func _ready():
 	var level_area = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area]
@@ -18,6 +20,7 @@ func _ready():
 func play_anim():
 	velocity = Vector2()
 	visible = true
+	material = sprite.material
 	animation = "death"
 	anim_playing = true
 	time_until_fall = 0.55

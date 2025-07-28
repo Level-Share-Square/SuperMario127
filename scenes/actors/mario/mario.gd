@@ -437,9 +437,10 @@ func load_in(level_data : LevelData, level_area : LevelArea):
 			remove_child($Sounds)
 			sprite.frames = luigi_frames
 			move_speed = luigi_speed
-			acceleration = luigi_accel
-			friction = luigi_fric
-			real_friction = luigi_fric
+#			acceleration = luigi_accel
+#			friction = luigi_fric
+#			real_friction = luigi_fric
+			real_friction = friction
 			wing_sprite.frames = luigi_wing_frames
 		_:
 			printerr("Illegal character loaded: " + str(character) + " REEEEEE")
