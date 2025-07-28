@@ -133,6 +133,7 @@ radius = 17.0
 [node name="Boo" type="Node2D"]
 z_index = 12
 script = ExtResource( 1 )
+internal_id = "boo"
 
 [node name="AttackArea" type="Area2D" parent="."]
 collision_layer = 4

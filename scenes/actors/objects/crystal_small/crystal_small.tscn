@@ -12,6 +12,7 @@
 
 [node name="Small Crystal" type="Node2D"]
 script = ExtResource( 1 )
+internal_id = "small_crystal"
 palette_textures = [ ExtResource( 5 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 9 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 4 ) ]
 
 [node name="Sprite" type="Sprite" parent="."]

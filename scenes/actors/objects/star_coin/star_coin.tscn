@@ -72,6 +72,7 @@ tracks/3/keys = {
 
 [node name="StarCoin" type="Node2D"]
 script = ExtResource( 3 )
+internal_id = "star_coin"
 normal_frames = ExtResource( 1 )
 collected_frames = ExtResource( 6 )
 normal_particles = ExtResource( 5 )

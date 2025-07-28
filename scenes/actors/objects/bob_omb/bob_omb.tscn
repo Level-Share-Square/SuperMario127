@@ -42,6 +42,7 @@ extents = Vector2( 9, 12 )
 [node name="BobOmb" type="Node2D"]
 z_index = -2
 script = ExtResource( 2 )
+internal_id = "bob_omb"
 
 [node name="KinematicBody2D" type="KinematicBody2D" parent="."]
 collision_layer = 4

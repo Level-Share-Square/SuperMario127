@@ -12,6 +12,7 @@
 [node name="BigBush" type="Node2D"]
 z_index = -1
 script = ExtResource( 2 )
+internal_id = "big_bush"
 custom_preview_position = Vector2( 75, 145 )
 palette_textures = [ ExtResource( 6 ), ExtResource( 3 ), ExtResource( 5 ), ExtResource( 7 ), ExtResource( 4 ), ExtResource( 8 ) ]
 

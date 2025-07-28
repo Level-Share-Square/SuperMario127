@@ -28,6 +28,7 @@ extents = Vector2( 18, 16 )
 [node name="KoopaTroopa" type="Node2D"]
 z_index = -2
 script = ExtResource( 1 )
+internal_id = "koopa_troopa"
 normal_sprite = ExtResource( 2 )
 normal_color_sprite = ExtResource( 4 )
 para_sprite = ExtResource( 6 )

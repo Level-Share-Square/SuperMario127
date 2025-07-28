@@ -10,6 +10,7 @@
 
 [node name="LargeSnowTree" type="Node2D"]
 script = ExtResource( 2 )
+internal_id = "large_snow_tree"
 palette_textures = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ) ]
 
 [node name="Sprite" type="Sprite" parent="."]

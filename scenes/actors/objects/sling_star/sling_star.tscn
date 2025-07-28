@@ -329,6 +329,7 @@ tracks/2/keys = {
 
 [node name="SlingStar" type="Node2D"]
 script = ExtResource( 1 )
+internal_id = "sling_star"
 
 [node name="PlayerDetector" type="Area2D" parent="."]
 position = Vector2( -0.166855, 13.5153 )

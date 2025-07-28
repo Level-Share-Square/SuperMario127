@@ -171,6 +171,7 @@ anim_speed = 1.0
 [node name="NipperPlant" type="Node2D"]
 z_index = -2
 script = ExtResource( 3 )
+internal_id = "nipper_plant"
 
 [node name="Body" type="KinematicBody2D" parent="."]
 collision_layer = 4

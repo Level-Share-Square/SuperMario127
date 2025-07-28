@@ -67,6 +67,7 @@ shader_param/x_size = 1800.0
 
 [node name="Water" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
+internal_id = "water"
 color = Color( 0.278431, 0.662745, 0.85098, 1 )
 surface_offset = -15.0
 toxicity = 0.0

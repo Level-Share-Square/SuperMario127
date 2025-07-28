@@ -9,7 +9,6 @@ export(LevelShared.Layers) var default_layer: int = 1
 export var layer_shift: int = 0
 export var lock_layer: bool = false
 export var ignore_layer_disabling: bool = false
-
 export var generate_editor_hitbox: bool = false
 
 var global := {}
@@ -52,8 +51,14 @@ onready var editor_hitbox: Area2D = get_node_or_null("EditorHitbox")
 signal property_changed(key, value)
 signal object_clicked(object)
 
+export var internal_id: String
+const PLACEABLE_ITEM_PATH: String = "res://scenes/editor/items/placeable_items/placeable_objects/%s.tres"
+var placeable_item: PlaceableItem
+func load_placeable_item():
+	placeable_item = load(PLACEABLE_ITEM_PATH % internal_id)
 
 func _ready():
+	load_placeable_item()
 	set_process(false)
 	if visible == false and mode == 1:
 		visible = true

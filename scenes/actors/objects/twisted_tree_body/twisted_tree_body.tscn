@@ -12,6 +12,7 @@
 [node name="TwistedTreeBody" type="Node2D"]
 z_index = -1
 script = ExtResource( 2 )
+internal_id = "twisted_tree_body"
 palette_textures = [ ExtResource( 8 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 3 ), ExtResource( 7 ), ExtResource( 4 ) ]
 
 [node name="Node2D" type="Node2D" parent="."]

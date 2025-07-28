@@ -10,6 +10,7 @@
 
 [node name="vine" type="Node2D"]
 script = ExtResource( 6 )
+internal_id = "vine_bulb"
 palette_textures = [ ExtResource( 3 ), ExtResource( 7 ), ExtResource( 2 ), ExtResource( 5 ), ExtResource( 4 ) ]
 
 [node name="Sprite" type="Sprite" parent="."]

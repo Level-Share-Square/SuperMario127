@@ -219,6 +219,7 @@ radius = 24.0
 
 [node name="PurpleStarbit" type="Node2D" groups=["PurpleStarbits"]]
 script = ExtResource( 2 )
+internal_id = "purple_starbit"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 5 )

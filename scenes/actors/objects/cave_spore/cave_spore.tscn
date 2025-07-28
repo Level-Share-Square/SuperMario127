@@ -17,6 +17,7 @@ extents = Vector2( 32, 32 )
 [node name="CaveSpore" type="Node2D"]
 z_index = -1
 script = ExtResource( 4 )
+internal_id = "cave_spore"
 palette_textures = [ ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ) ]
 
 [node name="Sprite" type="Sprite" parent="."]

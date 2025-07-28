@@ -35,6 +35,7 @@ radius = 9.0
 
 [node name="Coin" type="Node2D"]
 script = ExtResource( 3 )
+internal_id = "yellow_coin"
 
 [node name="KinematicBody2D" type="KinematicBody2D" parent="."]
 collision_layer = 8

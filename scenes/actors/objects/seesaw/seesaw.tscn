@@ -21,6 +21,7 @@ extents = Vector2( 42, 15 )
 [node name="Seesaw" type="Node2D"]
 position = Vector2( -1, 0 )
 script = ExtResource( 2 )
+internal_id = "seesaw"
 
 [node name="KinematicBody2D" type="KinematicBody2D" parent="."]
 collision_layer = 16

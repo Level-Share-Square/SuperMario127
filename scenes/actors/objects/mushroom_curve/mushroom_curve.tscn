@@ -6,6 +6,7 @@
 [node name="MushroomCurve" type="Node2D"]
 z_index = -1
 script = ExtResource( 2 )
+internal_id = "mushroom_curve"
 custom_preview_position = Vector2( 70, 100 )
 
 [node name="Sprite" type="Sprite" parent="."]

@@ -16,13 +16,11 @@ content_margin_top = 1.0
 content_margin_bottom = 1.0
 bg_color = Color( 0.7, 0.7, 0.7, 1 )
 skew = Vector2( 0.1, 0 )
-border_width_bottom = 2
 border_color = Color( 0.498039, 0.498039, 0.498039, 1 )
 corner_radius_top_left = 4
 corner_radius_top_right = 2
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 2
-expand_margin_bottom = 2.0
 
 [sub_resource type="StyleBoxEmpty" id=154]
 
@@ -33,13 +31,11 @@ content_margin_top = 1.0
 content_margin_bottom = 1.0
 bg_color = Color( 0.588235, 0.631373, 0.921569, 1 )
 skew = Vector2( 0.1, 0 )
-border_width_bottom = 2
 border_color = Color( 0.439216, 0.454902, 0.87451, 1 )
 corner_radius_top_left = 4
 corner_radius_top_right = 2
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 2
-expand_margin_bottom = 2.0
 
 [sub_resource type="StyleBoxFlat" id=118]
 content_margin_left = 4.0
@@ -47,13 +43,11 @@ content_margin_right = 4.0
 content_margin_top = 3.0
 bg_color = Color( 0.588235, 0.631373, 0.921569, 1 )
 skew = Vector2( 0.1, 0 )
-border_width_top = 2
 border_color = Color( 0.588235, 0.631373, 0.921569, 0 )
 corner_radius_top_left = 4
 corner_radius_top_right = 2
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 2
-expand_margin_bottom = 2.0
 
 [sub_resource type="StyleBoxFlat" id=151]
 content_margin_left = 4.0
@@ -62,13 +56,11 @@ content_margin_top = 1.0
 content_margin_bottom = 1.0
 bg_color = Color( 1, 1, 1, 1 )
 skew = Vector2( 0.1, 0 )
-border_width_bottom = 2
 border_color = Color( 0.65, 0.65, 0.65, 1 )
 corner_radius_top_left = 4
 corner_radius_top_right = 2
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 1
-expand_margin_bottom = 2.0
 
 [sub_resource type="StyleBoxFlat" id=125]
 content_margin_left = 4.0
@@ -76,13 +68,11 @@ content_margin_right = 4.0
 content_margin_top = 3.0
 bg_color = Color( 0.47451, 0.517647, 0.807843, 1 )
 skew = Vector2( 0.1, 0 )
-border_width_top = 2
 border_color = Color( 0.47451, 0.517647, 0.807843, 0 )
 corner_radius_top_left = 4
 corner_radius_top_right = 2
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 2
-expand_margin_bottom = 2.0
 
 [sub_resource type="StyleBoxEmpty" id=158]
 
@@ -128,13 +118,11 @@ content_margin_top = 1.0
 content_margin_bottom = 1.0
 bg_color = Color( 0.534333, 0.203, 0.7, 1 )
 skew = Vector2( 0.1, 0 )
-border_width_bottom = 2
 border_color = Color( 0.358767, 0.1363, 0.47, 1 )
 corner_radius_top_left = 4
 corner_radius_top_right = 2
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 2
-expand_margin_bottom = 2.0
 
 [sub_resource type="StyleBoxFlat" id=144]
 content_margin_left = 4.0
@@ -352,19 +340,17 @@ corner_radius_bottom_left = 1
 [sub_resource type="StyleBoxEmpty" id=155]
 
 [sub_resource type="StyleBoxFlat" id=156]
-content_margin_left = 4.0
-content_margin_right = 4.0
-content_margin_top = 1.0
-content_margin_bottom = 1.0
+content_margin_left = 0.0
+content_margin_right = 0.0
+content_margin_top = 0.0
+content_margin_bottom = 0.0
 bg_color = Color( 1, 1, 1, 1 )
 skew = Vector2( 0.1, 0 )
-border_width_top = 2
 border_color = Color( 0.65, 0.65, 0.65, 1 )
 corner_radius_top_left = 4
 corner_radius_top_right = 2
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 2
-expand_margin_top = 2.0
 
 [sub_resource type="StyleBoxFlat" id=181]
 content_margin_left = 4.0
@@ -466,8 +452,6 @@ border_width_bottom = 2
 border_color = Color( 0.308, 0.5544, 0.77, 1 )
 corner_radius_top_left = 2
 corner_radius_top_right = 2
-corner_radius_bottom_right = 2
-corner_radius_bottom_left = 2
 
 [sub_resource type="StyleBoxFlat" id=142]
 content_margin_left = 4.0
@@ -479,8 +463,6 @@ border_width_bottom = 2
 border_color = Color( 0.1681, 0.297113, 0.41, 1 )
 corner_radius_top_left = 2
 corner_radius_top_right = 2
-corner_radius_bottom_right = 2
-corner_radius_bottom_left = 2
 
 [sub_resource type="StyleBoxFlat" id=140]
 content_margin_left = 4.0
@@ -492,8 +474,6 @@ border_width_top = 2
 border_color = Color( 0.34902, 0.572549, 0.709804, 0 )
 corner_radius_top_left = 2
 corner_radius_top_right = 2
-corner_radius_bottom_right = 2
-corner_radius_bottom_left = 2
 
 [sub_resource type="StyleBoxFlat" id=130]
 content_margin_left = 6.0

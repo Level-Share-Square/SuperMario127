@@ -107,7 +107,7 @@ shader = ExtResource( 17 )
 shader_param/ray_count = 4
 shader_param/ray_distance = 0.45
 shader_param/ray_seperation_degrees = 22.0
-shader_param/rotation = 2.93153
+shader_param/rotation = 3.00247
 
 [sub_resource type="CanvasItemMaterial" id=33]
 particles_animation = true
@@ -1213,6 +1213,7 @@ tracks/11/keys = {
 
 [node name="Shine" type="Node2D"]
 script = ExtResource( 3 )
+internal_id = "shine"
 normal_frames = ExtResource( 1 )
 recolorable_frames = ExtResource( 10 )
 collected_frames = ExtResource( 11 )
@@ -1271,7 +1272,7 @@ playing = true
 
 [node name="AnimatedSpriteOutline" type="AnimatedSprite" parent="AnimatedSprite"]
 frames = SubResource( 20 )
-frame = 7
+frame = 8
 script = ExtResource( 14 )
 
 [node name="Particles2D" type="Particles2D" parent="AnimatedSprite"]

@@ -67,6 +67,7 @@ extents = Vector2( 9, 40 )
 [node name="Fire" type="Node2D"]
 z_index = -2
 script = ExtResource( 2 )
+internal_id = "fire"
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 4 )

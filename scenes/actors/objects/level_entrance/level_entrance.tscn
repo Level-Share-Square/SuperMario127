@@ -19,6 +19,7 @@ z_index = -1
 script = ExtResource( 3 )
 default_layer = 2
 lock_layer = true
+internal_id = "level_entrance"
 
 [node name="WarpHelper" type="Node2D" parent="."]
 unique_name_in_owner = true

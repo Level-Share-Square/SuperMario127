@@ -12,6 +12,7 @@ z_index = -2
 script = ExtResource( 2 )
 default_layer = 2
 layer_shift = -2
+internal_id = "rock"
 palette_textures = [ ExtResource( 4 ), ExtResource( 3 ), ExtResource( 5 ), ExtResource( 6 ) ]
 
 [node name="Sprite" type="Sprite" parent="."]

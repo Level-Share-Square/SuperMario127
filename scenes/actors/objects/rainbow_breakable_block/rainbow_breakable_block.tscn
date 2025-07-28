@@ -50,6 +50,7 @@ shader_param/gradient = SubResource( 3 )
 [node name="BreakableBlock" type="Node2D"]
 z_index = -1
 script = ExtResource( 1 )
+internal_id = "rainbow_breakable_block"
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2( 0, -16 )

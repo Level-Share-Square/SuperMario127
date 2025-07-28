@@ -18,6 +18,7 @@ extents = Vector2( 16, 10 )
 
 [node name="HoverNozzle" type="Node2D"]
 script = ExtResource( 1 )
+internal_id = "hover_nozzle"
 
 [node name="KinematicBody2D" type="KinematicBody2D" parent="."]
 collision_layer = 8

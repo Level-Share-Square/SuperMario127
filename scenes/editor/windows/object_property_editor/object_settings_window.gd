@@ -1,28 +1,24 @@
 extends EditorWindow
 
 
-var objects: Array = [GameObject.new()]
+const TITLE_TEXT: String = "%s Properties"
 
-var data_temp: Array = []
+onready var window_title = $"%WindowTitle"
+onready var window_icon = $"%WindowIcon"
 
-onready var property_groups: PropertyEditorLoader = $"%PropertyGroups"
+var objects: Dictionary
+var common_properties: Array
+var common_property_tabs: Array
 
 
-func _ready():
-	var data = ObjectData.new()
-	data.properties = [Vector2(0, 0), Vector2(1, 1), 0.0, true, true, 3, PoolStringArray([])]
-	data.property_hints = [
-		PropertyHints.new("Position", "base", "misc", "", []),
-		PropertyHints.new("Scale", "base", "misc", "", []),
-		PropertyHints.new("Rotation", "base", "misc", "", []),
-		PropertyHints.new("Visible", "button", "misc", "", []),
-		PropertyHints.new("Enabled", "button", "misc", "", []),
-		PropertyHints.new("Layer", "dropdown", "misc", "", []),
-		PropertyHints.new("Dialogue", "dialogue", "dialogue", "", []),
-	]
+func load_objects(_objects: Dictionary):
+	objects = _objects
 	
-	load_object(data)
-
-
-func load_object(data: ObjectData):
-	property_groups.load_property_editors(game_object)
+	for _item in objects.keys():
+		var item: PlaceableItem = _item
+		var game_object = objects[item]
+		
+		window_title.text = TITLE_TEXT % item.item_name
+		window_icon.texture = item.icons[item.palette]
+	
+	popup_centered(rect_size)

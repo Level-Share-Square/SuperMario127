@@ -4,10 +4,10 @@
 [ext_resource path="res://scenes/actors/objects/blurp/blurp.png" type="Texture" id=2]
 [ext_resource path="res://scenes/actors/objects/blurp/recolorable.png" type="Texture" id=3]
 [ext_resource path="res://scenes/actors/objects/old_goomba/body.gd" type="Script" id=4]
-[ext_resource path="res://scenes/actors/objects/goomba/stomp.wav" type="AudioStream" id=5]
+[ext_resource path="res://scenes/actors/objects/goomba/sounds/stomp.wav" type="AudioStream" id=5]
 [ext_resource path="res://scenes/actors/objects/bullet_bill/sound.wav" type="AudioStream" id=6]
 [ext_resource path="res://scenes/actors/objects/goomba/animations/poof.png" type="Texture" id=7]
-[ext_resource path="res://scenes/actors/objects/goomba/poof.wav" type="AudioStream" id=8]
+[ext_resource path="res://scenes/actors/objects/goomba/sounds/poof.wav" type="AudioStream" id=8]
 [ext_resource path="res://scenes/actors/mario/FluddAnimSync.gd" type="Script" id=9]
 
 [sub_resource type="AtlasTexture" id=5]
@@ -150,6 +150,7 @@ tracks/4/keys = {
 [node name="Blurp" type="Node2D"]
 z_index = -2
 script = ExtResource( 1 )
+internal_id = "blurp"
 color = Color( 0.160784, 0.870588, 0, 1 )
 top_point = Vector2( 0, -9 )
 

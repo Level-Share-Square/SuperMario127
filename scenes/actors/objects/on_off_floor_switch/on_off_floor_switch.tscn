@@ -134,6 +134,7 @@ tracks/1/keys = {
 [node name="Switch" type="Node2D"]
 z_index = -2
 script = ExtResource( 5 )
+internal_id = "on_off_floor_switch"
 
 [node name="Switch" type="Sprite" parent="."]
 position = Vector2( 0, 6 )

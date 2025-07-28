@@ -195,6 +195,7 @@ extents = Vector2( 11.5, 16 )
 
 [node name="WingPowerup" type="Node2D"]
 script = ExtResource( 3 )
+internal_id = "wing_powerup"
 
 [node name="Particles2D" type="Particles2D" parent="."]
 material = SubResource( 1 )

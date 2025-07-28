@@ -1,8 +1,6 @@
-class_name EditorWindow
-extends PanelContainer
+class_name EditorWindowOld
+extends Popup
 
-
-const popup_anim_duration: float = 0.1
 
 export(NodePath) var drag_control_path
 export(NodePath) var close_button_path
@@ -15,8 +13,8 @@ export var window_size: Vector2
 
 var drag_position: Vector2
 
-onready var title_node: RichTextLabel = $"%WindowTitle"
-onready var icon_node: TextureRect = $"%WindowIcon"
+onready var title_node: RichTextLabel = $WindowBack/WindowMat/HeaderContentDivider/HeaderMat/HeaderBox/Title
+onready var icon_node: TextureRect = $WindowBack/WindowMat/HeaderContentDivider/HeaderMat/HeaderBox/Icon
 
 
 func set_title(val: String):
@@ -33,72 +31,35 @@ func set_tooltip(val):
 
 
 func _ready() -> void:
-	hide()
-	
 	var drag_control: Control = get_node(drag_control_path)
-	if is_instance_valid(drag_control):
-		drag_control.connect("gui_input", self, "drag_window")
+	drag_control.connect("gui_input", self, "drag_window")
 	
 	var close_button: BaseButton = get_node(close_button_path)
-	if is_instance_valid(close_button):
-		close_button.connect("pressed", self, "close")
+	close_button.connect("pressed", self, "close")
 	
 	var resize_control: Control = get_node(resize_control_path)
-	if is_instance_valid(resize_control):
-		resize_control.connect("gui_input", self, "resize_window")
+	resize_control.connect("gui_input", self, "resize_window")
+	
+	# I don't know why, but if you don't pop the window up first the 
+	# minimum size is never calculated
+	popup_centered(Vector2(0, 0))
 	
 	rect_min_size.x = max(rect_min_size.x, window_size.x)
 	rect_min_size.y = max(rect_min_size.y, window_size.y)
 	
-	popup_centered(window_size)
+	rect_size = rect_min_size
 	
-	if not self == get_tree().current_scene:
-		hide()
+	#if not self == get_tree().current_scene:
+		#hide()
 	
 	set_title(title)
+	
 	set_icon(icon)
 	set_tooltip(icon_tooltip)
 
 
-func popup(rect: Rect2) -> void:
-	if visible:
-		return
-	
-	rect_position = rect.position
-	rect_size = rect.size
-	rect_pivot_offset = rect_size / 2.0
-	rect_scale = Vector2.ZERO
-	show()
-	
-	var tween = create_tween()
-	tween.set_ease(Tween.EASE_OUT)
-	tween.set_trans(Tween.TRANS_CUBIC)
-	tween.tween_property(self, "rect_scale", Vector2.ONE, popup_anim_duration)
-
-
-func popup_centered(size: Vector2) -> void:
-	size = Vector2(max(size.x, rect_min_size.x), max(size.y, rect_min_size.y))
-	var position: Vector2 = (get_viewport_rect().size / 2.0) - (size / 2.0)
-	
-	popup(Rect2(position, size))
-
-
 func close():
-	var tween = create_tween()
-	tween.set_ease(Tween.EASE_IN)
-	tween.set_trans(Tween.TRANS_CUBIC)
-	tween.tween_property(self, "rect_scale", Vector2.ZERO, popup_anim_duration)
-	
-	yield(tween, "finished")
-	
 	hide()
-
-
-func toggle_window(size: Vector2) -> void:
-	if visible:
-		close()
-	else:
-		popup_centered(size)
 
 
 func drag_window(event):

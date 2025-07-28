@@ -151,6 +151,7 @@ extents = Vector2( 16, 16 )
 
 [node name="SpinningHeart" type="Node2D"]
 script = ExtResource( 1 )
+internal_id = "spinning_heart"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )

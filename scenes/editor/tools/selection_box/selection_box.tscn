@@ -253,3 +253,4 @@ volume_db = -10.0
 bus = "Sounds"
 
 [connection signal="pressed" from="SelectionBox/EditSelection/ButtonContainer/PivotToggleButton" to="Pivot" method="on_toggle"]
+[connection signal="pressed" from="SelectionBox/EditSelection/ButtonContainer/PropertiesButton" to="." method="open_properties_window"]

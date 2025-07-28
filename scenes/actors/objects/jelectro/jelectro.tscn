@@ -116,6 +116,7 @@ anim_offset_random = 0.27
 
 [node name="Jelectro" type="Node2D"]
 script = ExtResource( 2 )
+internal_id = "jelectro"
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 4

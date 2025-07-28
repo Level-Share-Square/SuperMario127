@@ -9,6 +9,7 @@
 [node name="BarrelCactus" type="Node2D"]
 z_index = -1
 script = ExtResource( 2 )
+internal_id = "barrel_cactus"
 custom_preview_position = Vector2( 75, 145 )
 palette_textures = [ ExtResource( 4 ), ExtResource( 3 ), ExtResource( 5 ) ]
 

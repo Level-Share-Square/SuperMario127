@@ -60,6 +60,7 @@ anim_speed = 1.0
 [node name="BreakableBlock" type="Node2D"]
 z_index = -1
 script = ExtResource( 1 )
+internal_id = "metal_breakable_block"
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )

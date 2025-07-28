@@ -13,6 +13,7 @@
 
 [node name="Cobweb2" type="Node2D"]
 script = ExtResource( 1 )
+internal_id = "cobweb2"
 palette_textures = [ ExtResource( 3 ), ExtResource( 5 ), ExtResource( 8 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 10 ), ExtResource( 4 ), ExtResource( 9 ) ]
 
 [node name="Sprite" type="Sprite" parent="."]

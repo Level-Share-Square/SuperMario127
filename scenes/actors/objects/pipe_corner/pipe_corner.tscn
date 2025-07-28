@@ -9,6 +9,7 @@ extents = Vector2( 16, 16 )
 
 [node name="PipeCorner" type="Node2D"]
 script = ExtResource( 1 )
+internal_id = "pipe_corner"
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( -16, -16 )

@@ -13,6 +13,7 @@
 [node name="TwistedTreeTop" type="Node2D"]
 z_index = -1
 script = ExtResource( 2 )
+internal_id = "twisted_tree_top"
 palette_textures = [ ExtResource( 6 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 7 ), ExtResource( 5 ), ExtResource( 4 ) ]
 
 [node name="Sprite" type="Sprite" parent="."]

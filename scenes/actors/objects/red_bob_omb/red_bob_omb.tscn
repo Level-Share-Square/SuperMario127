@@ -367,6 +367,7 @@ animations = [ {
 
 [node name="RedBobOmb" instance=ExtResource( 1 )]
 script = ExtResource( 8 )
+internal_id = "red_bob_omb"
 
 [node name="DialogueDetector" parent="." index="0"]
 visible = false

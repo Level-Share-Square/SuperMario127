@@ -48,6 +48,7 @@ tracks/2/keys = {
 [node name="TouchLift" type="Node2D"]
 z_index = -2
 script = ExtResource( 2 )
+internal_id = "touch_lift"
 circle_texture = ExtResource( 3 )
 
 [node name="Path2D" type="Path2D" parent="."]

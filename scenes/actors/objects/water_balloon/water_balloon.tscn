@@ -158,6 +158,7 @@ anim_offset_random = 1.0
 
 [node name="water_balloon" type="Node2D"]
 script = ExtResource( 1 )
+internal_id = "water_balloon"
 normal_texture = ExtResource( 2 )
 recolorable_texture = ExtResource( 7 )
 

@@ -10,4 +10,5 @@
 z_index = 9
 texture = ExtResource( 1 )
 script = ExtResource( 2 )
+internal_id = "airship_window"
 palette_textures = [ ExtResource( 5 ), ExtResource( 4 ), ExtResource( 3 ) ]

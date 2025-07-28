@@ -16,6 +16,7 @@ extents = Vector2( 14.5, 20 )
 
 [node name="Pipe" type="Node2D"]
 script = ExtResource( 1 )
+internal_id = "pipe"
 normal_texture = ExtResource( 2 )
 recolorable_texture = ExtResource( 4 )
 

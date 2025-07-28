@@ -16,6 +16,7 @@ height = 30.0
 [node name="vine" type="Node2D"]
 z_index = -1
 script = ExtResource( 1 )
+internal_id = "vine_thorns"
 palette_textures = [ ExtResource( 7 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 2 ), ExtResource( 4 ) ]
 
 [node name="Sprite" type="NinePatchRect" parent="."]

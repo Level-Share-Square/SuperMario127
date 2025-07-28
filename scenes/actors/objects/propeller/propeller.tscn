@@ -9,6 +9,7 @@ extents = Vector2( 26, 3.125 )
 
 [node name="Propellor" type="Node2D"]
 script = ExtResource( 2 )
+internal_id = "propeller"
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 0, -6 )

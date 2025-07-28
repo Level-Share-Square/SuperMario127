@@ -19,6 +19,7 @@ extents = Vector2( 48, 32 )
 [node name="SnowPillar" type="Node2D"]
 z_index = -1
 script = ExtResource( 4 )
+internal_id = "snow_pillar"
 palette_textures = [ ExtResource( 8 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 9 ), ExtResource( 7 ) ]
 
 [node name="Sprite" type="Sprite" parent="."]
