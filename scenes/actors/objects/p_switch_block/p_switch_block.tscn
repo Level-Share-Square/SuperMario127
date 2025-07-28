@@ -13,6 +13,7 @@ extents = Vector2( 13, 13 )
 [node name="SwitchBlock" type="Node2D"]
 z_index = -1
 script = ExtResource( 2 )
+internal_id = "p_switch_block"
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )

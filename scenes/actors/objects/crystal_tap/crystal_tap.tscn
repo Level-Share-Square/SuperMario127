@@ -126,6 +126,7 @@ extents = Vector2( 16, 14 )
 [node name="CrystalTap" type="Node2D"]
 z_index = 1
 script = ExtResource( 2 )
+internal_id = "crystal_tap"
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 17 )

@@ -17,6 +17,7 @@ extents = Vector2( 8.14942, 0.15 )
 [node name="Log" type="Node2D"]
 z_index = -1
 script = ExtResource( 2 )
+internal_id = "log"
 
 [node name="Sprite" type="Sprite" parent="."]
 z_index = -7

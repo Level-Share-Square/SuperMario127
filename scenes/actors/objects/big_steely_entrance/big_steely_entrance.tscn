@@ -9,6 +9,7 @@ radius = 27.1451
 [node name="BigSteelyObject" type="Node2D"]
 z_index = -6
 script = ExtResource( 1 )
+internal_id = "big_steely_object"
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )

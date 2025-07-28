@@ -797,6 +797,7 @@ colors = PoolColorArray( 1, 1, 1, 1, 0, 0, 0, 0 )
 [node name="LaunchStar" type="Node2D"]
 z_index = -2
 script = ExtResource( 1 )
+internal_id = "launch_star"
 
 [node name="Path2D" type="Path2D" parent="."]
 curve = SubResource( 1 )

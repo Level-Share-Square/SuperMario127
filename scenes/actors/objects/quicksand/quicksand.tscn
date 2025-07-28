@@ -101,6 +101,7 @@ anim_speed_random = 0.2
 
 [node name="Quicksand" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
+internal_id = "quicksand"
 liquid_type = 2
 color = Color( 1, 0.584314, 0, 1 )
 surface_offset = -8.0

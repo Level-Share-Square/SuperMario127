@@ -111,16 +111,16 @@ alignment = 1
 [node name="AspectContainer" type="AspectRatioContainer" parent="ContentDivider/ContentMat/Tabs/Level/HBoxContainer/VBoxContainer" index="0"]
 unique_name_in_owner = true
 margin_right = 159.0
-margin_bottom = 111.0
+margin_bottom = 113.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 ratio = 1.7778
 
 [node name="Border" type="NinePatchRect" parent="ContentDivider/ContentMat/Tabs/Level/HBoxContainer/VBoxContainer/AspectContainer" index="0"]
 unique_name_in_owner = true
-margin_top = 10.7818
+margin_top = 11.7818
 margin_right = 159.0
-margin_bottom = 100.218
+margin_bottom = 101.218
 rect_min_size = Vector2( 0, 80 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -143,7 +143,7 @@ stretch_mode = 6
 
 [node name="ThumbnailURL" type="LineEdit" parent="ContentDivider/ContentMat/Tabs/Level/HBoxContainer/VBoxContainer" index="1"]
 unique_name_in_owner = true
-margin_top = 117.0
+margin_top = 119.0
 margin_right = 159.0
 margin_bottom = 136.0
 placeholder_text = "Thumbnail Url"
@@ -164,16 +164,16 @@ size_flags_horizontal = 3
 [node name="Level Name" type="LineEdit" parent="ContentDivider/ContentMat/Tabs/Level/HBoxContainer/VBoxContainer2" index="0"]
 unique_name_in_owner = true
 margin_right = 191.0
-margin_bottom = 19.0
+margin_bottom = 17.0
 align = 1
 placeholder_text = "Level Name"
 
 [node name="Author" type="LineEdit" parent="ContentDivider/ContentMat/Tabs/Level/HBoxContainer/VBoxContainer2" index="1"]
 unique_name_in_owner = true
 margin_left = 28.0
-margin_top = 23.0
+margin_top = 21.0
 margin_right = 163.0
-margin_bottom = 39.0
+margin_bottom = 35.0
 rect_min_size = Vector2( 135, 0 )
 size_flags_horizontal = 6
 custom_fonts/font = ExtResource( 7 )
@@ -182,7 +182,7 @@ placeholder_text = "Author"
 
 [node name="Description" type="TextEdit" parent="ContentDivider/ContentMat/Tabs/Level/HBoxContainer/VBoxContainer2" index="2"]
 unique_name_in_owner = true
-margin_top = 43.0
+margin_top = 39.0
 margin_right = 191.0
 margin_bottom = 136.0
 size_flags_vertical = 3
@@ -406,9 +406,9 @@ size_flags_vertical = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ContentDivider/ContentMat/Tabs/Music/CenterContainer" index="0"]
 margin_left = 3.0
-margin_top = 27.0
+margin_top = 28.0
 margin_right = 364.0
-margin_bottom = 114.0
+margin_bottom = 113.0
 custom_constants/separation = 47
 alignment = 1
 

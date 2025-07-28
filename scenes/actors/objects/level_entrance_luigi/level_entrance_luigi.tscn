@@ -6,3 +6,4 @@
 z_index = -1
 script = ExtResource( 1 )
 lock_layer = true
+internal_id = "level_entrance_luigi"

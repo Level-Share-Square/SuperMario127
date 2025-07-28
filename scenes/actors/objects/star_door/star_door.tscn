@@ -15,6 +15,7 @@
 
 [node name="StarDoor" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
+internal_id = "star_door"
 double_door_frames = ExtResource( 4 )
 single_door_frames = ExtResource( 16 )
 double_icon_frames = ExtResource( 3 )

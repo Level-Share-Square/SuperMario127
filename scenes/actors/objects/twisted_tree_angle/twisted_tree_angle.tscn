@@ -12,6 +12,7 @@
 [node name="TwistedTreeAngle" type="Node2D"]
 z_index = -1
 script = ExtResource( 2 )
+internal_id = "twisted_tree_angle"
 custom_preview_position = Vector2( 70, 110 )
 palette_textures = [ ExtResource( 6 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 7 ), ExtResource( 8 ) ]
 

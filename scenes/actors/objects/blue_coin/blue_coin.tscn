@@ -30,6 +30,7 @@ radius = 20.0
 resource_local_to_scene = true
 
 [node name="BlueCoin" instance=ExtResource( 1 )]
+internal_id = "blue_coin"
 coins = 5
 
 [node name="Particles" parent="KinematicBody2D" index="0"]

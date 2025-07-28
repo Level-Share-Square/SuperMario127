@@ -204,6 +204,7 @@ frame_1/delay_sec = 0.0
 
 [node name="Lava" instance=ExtResource( 4 )]
 script = ExtResource( 8 )
+internal_id = "lava"
 liquid_type = 1
 color = Color( 1, 0, 0, 1 )
 surface_offset = -14.0

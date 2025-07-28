@@ -11,7 +11,8 @@ onready var selection_tools = $"%SelectionTools"
 onready var edit_selection = $"%EditSelection"
 onready var pivot = get_node("Pivot")
 onready var pivot_toggle = $"%PivotToggleButton"
-onready var item_actions = $"../../../UI/UIContainer/EditorUI/Top/Tools/ItemActions"
+onready var item_actions = $"%ItemActions"
+onready var object_settings_window = $"%ObjectSettingsWindow"
 
 onready var sel_border = preload("res://scenes/editor/tools/selection_box/selection_border.png")
 ## Delay between animation steps in frames.
@@ -275,3 +276,11 @@ func _on_Delete_button_down():
 	selected_dict = {}
 	hide_selection_box()
 	item_actions.hide_selection_actions()
+
+
+func open_properties_window():
+	var objects: Dictionary
+	for selected_object in editor.selected_objects:
+		objects[selected_object.placeable_item] = selected_object
+	
+	object_settings_window.load_objects(objects)

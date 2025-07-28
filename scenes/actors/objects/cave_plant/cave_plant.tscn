@@ -11,6 +11,7 @@
 [node name="CavePlant" type="Node2D"]
 z_index = -1
 script = ExtResource( 2 )
+internal_id = "cave_plant"
 custom_preview_position = Vector2( 70, 120 )
 palette_textures = [ ExtResource( 6 ), ExtResource( 3 ), ExtResource( 5 ), ExtResource( 4 ), ExtResource( 7 ) ]
 

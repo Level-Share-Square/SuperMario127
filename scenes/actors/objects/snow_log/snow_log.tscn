@@ -20,6 +20,7 @@ extents = Vector2( 56, 32 )
 
 [node name="SnowLog" type="Node2D"]
 script = ExtResource( 4 )
+internal_id = "snow_log"
 palette_textures = [ ExtResource( 7 ), ExtResource( 11 ), ExtResource( 6 ), ExtResource( 10 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 5 ) ]
 
 [node name="Sprite" type="Sprite" parent="."]

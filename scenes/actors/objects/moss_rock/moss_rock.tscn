@@ -15,6 +15,7 @@
 [node name="MossRock" type="Node2D"]
 z_index = -2
 script = ExtResource( 2 )
+internal_id = "moss_rock"
 custom_preview_position = Vector2( 64, 80 )
 palette_textures = [ ExtResource( 6 ), ExtResource( 3 ), ExtResource( 5 ), ExtResource( 7 ), ExtResource( 4 ), ExtResource( 9 ), ExtResource( 8 ), ExtResource( 11 ), ExtResource( 10 ) ]
 

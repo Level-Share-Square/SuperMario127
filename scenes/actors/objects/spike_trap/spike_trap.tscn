@@ -15,6 +15,7 @@ extents = Vector2( 16, 16 )
 
 [node name="SpikeTrap" type="Node2D"]
 script = ExtResource( 1 )
+internal_id = "spike_trap"
 palette_textures = [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ) ]
 
 [node name="Area2D" type="Area2D" parent="."]

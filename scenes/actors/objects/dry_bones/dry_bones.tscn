@@ -5,6 +5,7 @@
 
 [node name="DryBones" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
+internal_id = "dry_bones"
 enemy_scene_path = "res://scenes/actors/objects/dry_bones/dry_bones_enemy.tscn"
 is_stationary = false
 toss_wait = 5.0

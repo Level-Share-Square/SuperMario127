@@ -19,6 +19,7 @@ extents = Vector2( 48, 32 )
 
 [node name="vine_flower" type="Node2D"]
 script = ExtResource( 10 )
+internal_id = "vine_flower"
 palette_textures = [ ExtResource( 6 ), ExtResource( 4 ), ExtResource( 7 ), ExtResource( 2 ), ExtResource( 5 ) ]
 
 [node name="Sprite" type="Sprite" parent="."]

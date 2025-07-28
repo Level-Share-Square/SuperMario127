@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/redo.svg-cde9f7c4b38fa97dbf383d6a43c0a368.stex"
+path="res://.import/RotateArrow.svg-f9247144b83483494462db491141e39c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/editor/assets/redo.svg"
-dest_files=[ "res://.import/redo.svg-cde9f7c4b38fa97dbf383d6a43c0a368.stex" ]
+source_file="res://scenes/editor/assets/RotateArrow.svg"
+dest_files=[ "res://.import/RotateArrow.svg-f9247144b83483494462db491141e39c.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
@@ -32,4 +32,4 @@ process/normal_map_invert_y=false
 stream=false
 size_limit=0
 detect_3d=true
-svg/scale=4.0
+svg/scale=1.0

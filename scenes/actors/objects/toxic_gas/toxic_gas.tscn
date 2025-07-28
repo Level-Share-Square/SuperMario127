@@ -58,6 +58,7 @@ shader_param/distortion_texture = SubResource( 5 )
 
 [node name="ToxicGas" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
+internal_id = "toxic_gas"
 liquid_type = 3
 color = Color( 0.862745, 0, 1, 1 )
 surface_offset = 2.0

@@ -168,6 +168,7 @@ radius = 11.0
 
 [node name="SkeletonGoonie" instance=ExtResource( 1 )]
 script = ExtResource( 4 )
+internal_id = "skeleton_goonie"
 
 [node name="Sprite" parent="." index="0"]
 frames = SubResource( 11 )

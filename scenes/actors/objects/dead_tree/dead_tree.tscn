@@ -14,6 +14,7 @@
 [node name="DeadTree" type="Node2D"]
 script = ExtResource( 2 )
 generate_editor_hitbox = true
+internal_id = "dead_tree"
 palette_textures = [ ExtResource( 6 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 9 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 3 ), ExtResource( 10 ) ]
 
 [node name="Sprite" type="Sprite" parent="."]

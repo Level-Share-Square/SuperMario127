@@ -11,6 +11,7 @@
 
 [node name="Yoshi" instance=ExtResource( 2 )]
 script = ExtResource( 8 )
+internal_id = "yoshi"
 
 [node name="AnimationHandler" parent="KinematicBody2D" index="2"]
 position = Vector2( -1, -7 )

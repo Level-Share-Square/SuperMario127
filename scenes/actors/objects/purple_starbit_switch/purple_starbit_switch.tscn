@@ -134,6 +134,7 @@ tracks/1/keys = {
 [node name="PurpleStarbitSwitch" type="Node2D"]
 z_index = -2
 script = ExtResource( 5 )
+internal_id = "purple_starbit_switch"
 
 [node name="Base" type="Sprite" parent="."]
 texture = ExtResource( 1 )

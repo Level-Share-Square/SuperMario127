@@ -46,6 +46,7 @@ extents = Vector2( 22, 1 )
 [node name="BulletBill" type="Node2D"]
 z_index = -2
 script = ExtResource( 1 )
+internal_id = "bullet_bill"
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 3 )

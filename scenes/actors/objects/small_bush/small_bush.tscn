@@ -12,6 +12,7 @@
 [node name="SmallBush" type="Node2D"]
 z_index = -1
 script = ExtResource( 2 )
+internal_id = "small_bush"
 custom_preview_position = Vector2( 70, 110 )
 palette_textures = [ ExtResource( 5 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 7 ), ExtResource( 6 ), ExtResource( 8 ) ]
 

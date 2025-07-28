@@ -58,6 +58,7 @@ resource_name = "notice"
 
 [node name="Thwomp" type="Node2D"]
 script = ExtResource( 1 )
+internal_id = "thwomp"
 fall_accel = 0.5
 detection_range = 64.0
 

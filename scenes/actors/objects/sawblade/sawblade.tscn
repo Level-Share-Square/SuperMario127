@@ -56,6 +56,7 @@ radius = 27.0185
 
 [node name="Sawblade" type="Node2D"]
 script = ExtResource( 1 )
+internal_id = "sawblade"
 circle_texture = ExtResource( 4 )
 
 [node name="Path2D" type="Path2D" parent="."]

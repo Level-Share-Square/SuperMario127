@@ -270,6 +270,7 @@ extents = Vector2( 25, 17 )
 
 [node name="Cannon" type="Node2D"]
 script = ExtResource( 4 )
+internal_id = "cannon"
 
 [node name="PipeEnterLogic" parent="." instance=ExtResource( 1 )]
 position = Vector2( 0, -31 )

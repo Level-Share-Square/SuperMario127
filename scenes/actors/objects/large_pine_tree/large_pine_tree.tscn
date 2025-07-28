@@ -17,6 +17,7 @@ shader_param/center = Vector2( 0.5, 1 )
 
 [node name="LargePineTree" type="Node2D"]
 script = ExtResource( 2 )
+internal_id = "large_pine_tree"
 palette_textures = [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 6 ), ExtResource( 5 ), ExtResource( 7 ) ]
 
 [node name="Sprite" type="Sprite" parent="."]

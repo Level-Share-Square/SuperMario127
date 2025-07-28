@@ -16,6 +16,7 @@ load_path = "res://.import/cobweb.png-eb8b16aa5e99a7b26fe9fd2c701ac758.stex"
 [node name="Cobweb" type="Node2D"]
 z_index = -1
 script = ExtResource( 1 )
+internal_id = "cobweb"
 palette_textures = [ ExtResource( 6 ), ExtResource( 9 ), ExtResource( 4 ), ExtResource( 3 ), ExtResource( 5 ), ExtResource( 8 ), ExtResource( 7 ), ExtResource( 2 ) ]
 
 [node name="Sprite" type="Sprite" parent="."]

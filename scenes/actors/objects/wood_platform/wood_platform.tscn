@@ -21,6 +21,7 @@ extents = Vector2( 48, 28 )
 [node name="WoodPlatform" type="Node2D"]
 z_index = -1
 script = ExtResource( 4 )
+internal_id = "wood_platform"
 palette_textures = [ ExtResource( 1 ), ExtResource( 7 ), ExtResource( 6 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 8 ) ]
 
 [node name="Sprite" type="NinePatchRect" parent="."]

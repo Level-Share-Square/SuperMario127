@@ -39,18 +39,22 @@ atlas = ExtResource( 2 )
 region = Rect2( 196, 2, 56, 12 )
 
 [sub_resource type="AtlasTexture" id=9]
+flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 4, 2, 56, 12 )
 
 [sub_resource type="AtlasTexture" id=10]
+flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 68, 2, 56, 12 )
 
 [sub_resource type="AtlasTexture" id=11]
+flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 132, 2, 56, 12 )
 
 [sub_resource type="AtlasTexture" id=12]
+flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 196, 2, 56, 12 )
 

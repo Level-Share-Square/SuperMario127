@@ -8,6 +8,7 @@ extents = Vector2( 15, 32 )
 [node name="BigSteelyDespawner" type="Node2D"]
 z_index = -2
 script = ExtResource( 1 )
+internal_id = "big_steely_despawner"
 
 [node name="Sprite" type="ColorRect" parent="."]
 margin_left = -32.0

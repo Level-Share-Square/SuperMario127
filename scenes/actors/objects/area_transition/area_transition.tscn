@@ -19,6 +19,7 @@ extents = Vector2( 42, 52 )
 
 [node name="AreaTransition" type="Node2D"]
 script = ExtResource( 1 )
+internal_id = "area_transition"
 
 [node name="WarpHelper" type="Node2D" parent="."]
 unique_name_in_owner = true

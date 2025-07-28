@@ -12,6 +12,7 @@ extents = Vector2( 16, 16 )
 
 [node name="Sponge" type="Node2D"]
 script = ExtResource( 1 )
+internal_id = "sponge"
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
