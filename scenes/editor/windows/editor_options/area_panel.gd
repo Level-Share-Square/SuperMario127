@@ -77,7 +77,6 @@ func duplicate_area():
 		var area = LevelArea.new()
 		var dup = Singleton.CurrentLevelData.level_data.areas[id]
 		area.duplicate(dup)
-		print(area.settings.name)
 		Singleton.CurrentLevelData.level_data.areas.append(area)
 		get_parent().get_parent().reload_areas()
 	
@@ -118,3 +117,6 @@ func move_area_up():
 			Singleton.CurrentLevelData.area += 1
 			
 		get_parent().get_parent().reload_areas()
+		
+func copy_area():
+	OS.set_clipboard(Singleton.CurrentLevelData.level_data.get_encoded_area_data(Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area]))

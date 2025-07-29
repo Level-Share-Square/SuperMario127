@@ -2,7 +2,7 @@ extends ScrollContainer
 
 
 onready var v_box_container = $VBoxContainer
-onready var new_area = $VBoxContainer/Add
+onready var new_area = $VBoxContainer/HBoxContainer/Add
 
 
 const AREA_PANEL_SCENE = "res://scenes/editor/windows/editor_options/area_panel.tscn"
@@ -19,7 +19,7 @@ func _ready():
 func reload_areas():
 	# child die funny
 	for child in v_box_container.get_children():
-		if !"Add" in child.name:
+		if !"HBoxContainer" in child.name:
 			child.queue_free()
 	
 	var index = 0
@@ -44,3 +44,19 @@ func create_area():
 		reload_areas()
 
 		new_area.disabled = (Singleton.CurrentLevelData.level_data.areas.size() == 32)
+		
+
+
+func paste_area():
+	var area_code: String = OS.get_clipboard()
+	if area_code.substr(0, 9) != "LevelArea":
+		printerr("Not an area!")
+		return
+	var validity_checker = ValidityChecker.new()
+	area_code.erase(0, 10)
+	var area = validity_checker.decode_area(area_code)
+	for i in area.objects:
+		i["properties"].append(i["properties"].pop_front())
+	print(area.settings)
+	Singleton.CurrentLevelData.level_data.areas.append(validity_checker.get_area(area))
+	reload_areas()

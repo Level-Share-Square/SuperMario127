@@ -137,6 +137,7 @@ func get_settings(result) -> LevelAreaSettings:
 	settings.music = result.music
 	settings.gravity = abs(result.gravity)
 	settings.timer = abs(result.timer)
+	settings.name = result.name
 	var size_vec2 = get_vector2(result.size)
 	settings.bounds.size = Vector2(clamp(size_vec2.x, 24, 1500), clamp(size_vec2.y, 14, 1500))
 	return settings
@@ -337,6 +338,7 @@ func get_encoded_level_data():
 		level_string += value_util.encode_value(settings.gravity) + ","
 		level_string += value_util.encode_value(settings.background_palette) + ","
 		level_string += value_util.encode_value(settings.timer) + "~"
+		level_string += value_util.encode_value(settings.name) + ","
 		
 		var tiles := []
 		var very_background_tiles := []
@@ -386,3 +388,65 @@ func get_encoded_level_data():
 	level_string.erase(level_string.length() - 1, 1)
 	return level_string
 
+func get_encoded_area_data(area: LevelArea):
+	var level_string: String
+	var settings = area.settings
+	
+	level_string += "LevelArea_"
+	
+	# Settings
+	level_string += value_util.encode_value(settings.bounds.size) + ","
+	
+	level_string += value_util.encode_value(settings.sky) + ","
+	level_string += value_util.encode_value(settings.background) + ","
+	level_string += value_util.encode_value(settings.music) + ","
+	level_string += value_util.encode_value(settings.gravity) + ","
+	level_string += value_util.encode_value(settings.background_palette) + ","
+	level_string += value_util.encode_value(settings.timer) + ","
+	level_string += value_util.encode_value(settings.name) + "~"
+	
+	var tiles := []
+	var very_background_tiles := []
+	var background_tiles := []
+	var foreground_tiles := []
+
+	
+	level_code_util.generate_from_chunks(area.tile_chunks, [background_tiles, tiles, foreground_tiles, very_background_tiles], settings.bounds)
+	# Tiles
+	var saved_tiles = level_code_util.encode(tiles, settings)
+	var saved_very_background_tiles = level_code_util.encode(very_background_tiles, settings)
+	var saved_background_tiles = level_code_util.encode(background_tiles, settings)
+	var saved_foreground_tiles = level_code_util.encode(foreground_tiles, settings)
+	
+	for tile in saved_tiles:
+		level_string += tile + ","
+	level_string.erase(level_string.length() - 1, 1)
+	level_string += "~"
+
+	for tile in saved_very_background_tiles:
+		level_string += tile + ","
+	level_string.erase(level_string.length() - 1, 1)
+	level_string += "~"
+	
+	for tile in saved_background_tiles:
+		level_string += tile + ","
+	level_string.erase(level_string.length() - 1, 1)
+	level_string += "~"
+	
+	for tile in saved_foreground_tiles:
+		level_string += tile + ","
+	level_string.erase(level_string.length() - 1, 1)
+	level_string += "~"
+	
+	for object in area.objects:
+		var added_object = ""
+		added_object += str(object.type_id) + ","
+		added_object += str(object.palette) + ","
+		
+		added_object += value_util.encode_value(value_util.get_true_value(object.properties[0]-settings.bounds.position*32)) + ","
+		for i in range(1,object.properties.size()):
+			added_object += value_util.encode_value(value_util.get_true_value(object.properties[i])) + ","
+		added_object.erase(added_object.length() - 1, 1)
+		level_string += added_object + "|"
+	level_string.erase(level_string.length() - 1, 1)
+	return level_string

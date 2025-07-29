@@ -1488,6 +1488,7 @@ open_text = ">"
 close_text = "<"
 
 [node name="EditorOptionsWindow" parent="UI" instance=ExtResource( 14 )]
+unique_name_in_owner = true
 visible = false
 margin_left = 10.0
 margin_top = 62.0
