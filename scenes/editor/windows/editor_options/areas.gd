@@ -23,11 +23,20 @@ func reload_areas():
 			child.queue_free()
 	
 	var index = 0
+	var default_names: int = 0
 	for area in Singleton.CurrentLevelData.level_data.areas:
 		var area_panel = load(AREA_PANEL_SCENE).instance()
 		area_panel.set_background(area.settings.sky, area.settings.background, area.settings.background_palette)
 		area_panel.set_id(index)
-		area_panel.set_name(area.settings.name)
+		if area.settings.name == "My Area":
+			default_names = 1
+		elif "My Area " + str(default_names) in area.settings.name:
+			default_names += 1
+		if area.settings.name == "":
+			area_panel.set_name("My Area " + str(default_names) if default_names > 0 else "My Area")
+			default_names += 1
+		else:
+			area_panel.set_name(area.settings.name)
 		v_box_container.add_child(area_panel)
 		index += 1
 	

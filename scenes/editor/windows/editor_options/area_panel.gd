@@ -3,6 +3,7 @@ extends PanelContainer
 onready var switch_to_button = $HBoxContainer/SwitchArea
 onready var delete_button = $HBoxContainer/VBoxContainer/HBoxContainer/Delete
 onready var duplicate_button = $HBoxContainer/VBoxContainer/HBoxContainer/Dupe
+onready var area_name = $HBoxContainer/VBoxContainer/LineEdit
 
 onready var x_line = $HBoxContainer/GridContainer2/LineEdit2
 onready var y_line = $HBoxContainer/GridContainer2/LineEdit
@@ -11,7 +12,7 @@ const background_id_mapper = "res://scenes/shared/background/backgrounds/ids.tre
 const foreground_id_mapper = "res://scenes/shared/background/foregrounds/ids.tres"
 
 var id
-
+var area_names: Array = []
 
 func set_background(sky, background, palette):
 	var background_mapped_id = load(background_id_mapper).ids[sky]
@@ -34,6 +35,7 @@ func set_background(sky, background, palette):
 
 func set_name(new_name: String):
 	$HBoxContainer/VBoxContainer/LineEdit.text = new_name
+	Singleton.CurrentLevelData.level_data.areas[id].settings.name = new_name
 
 func set_id(new_id):
 	var id_text = get_node("ID")
@@ -49,7 +51,10 @@ func swap(areaA : LevelArea, areaB : LevelArea, areasArray : Array) -> Array:
   return areasArray
 
 func _ready():
-	$HBoxContainer/VBoxContainer/LineEdit.connect("text_changed", self, "area_renamed")
+	for area in Singleton.CurrentLevelData.level_data.areas:
+		area_names.append(area.settings.name)
+		print(area.settings.name)
+	area_name.connect("text_changed", self, "area_renamed")
 	var _connect = switch_to_button.connect("pressed", self, "switch_to_area")
 	_connect = delete_button.connect("pressed", self, "delete_area")
 	_connect = duplicate_button.connect("pressed", self, "duplicate_area")
@@ -69,7 +74,10 @@ func delete_area():
 			Singleton.CurrentLevelData.area -= 1
 		get_parent().get_parent().reload_areas()
 
-func area_renamed(new_text):
+func area_renamed(new_text: String):
+	if new_text in area_names:
+		new_text.erase(new_text.length() - 1, 1)
+		area_name.text = new_text
 	Singleton.CurrentLevelData.level_data.areas[id].settings.name = new_text
 
 func duplicate_area():

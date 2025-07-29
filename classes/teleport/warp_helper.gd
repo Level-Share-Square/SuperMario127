@@ -60,7 +60,7 @@ func location_warp(character: Character, target_tag: String, max_pan_distance: i
 	target_teleporter.start_exit_animation(character)
 
 
-func area_warp(character: Character, target_tag: String, target_area: int) -> void:
+func area_warp(character: Character, target_tag: String, target_area_name: String) -> void:
 #	if is_instance_valid(timer_manager):
 #		if (area_id == Singleton.CurrentLevelData.area):
 #
@@ -115,13 +115,17 @@ func area_warp(character: Character, target_tag: String, target_area: int) -> vo
 #		teleportation_mode
 #	]
 	Singleton.CurrentLevelData.level_data.vars.transition_data = {"target_tag": target_tag}
+	var target_area: int
+	for area in Singleton.CurrentLevelData.level_data.areas:
+		if area.settings.name == target_area_name:
+			target_area = Singleton.CurrentLevelData.level_data.areas.find(area)
 	character.switch_areas(target_area, 0.5)
 
 
 ## setting target area to -1 will enter mario into the level normally, other
 ## values will skip the shine select and exit mario out of a specific teleport object
 func level_warp(character: Character, target_level: String, 
-				target_tag: String, target_area: int = -1) -> void:
+				target_tag: String, target_area_name: String = "") -> void:
 	
 	var level_id: String = target_level
 	var working_folder: String = Singleton.CurrentLevelData.working_folder
@@ -129,6 +133,10 @@ func level_warp(character: Character, target_level: String,
 	
 	var hub_level: String = Singleton.CurrentLevelData.hub_level
 	var selected_file: int = Singleton.CurrentLevelData.selected_file
+	var target_area: int = -1
+	for area in Singleton.CurrentLevelData.level_data.areas:
+		if area.settings.name == target_area_name:
+			target_area = Singleton.CurrentLevelData.level_data.areas.find(area)
 	
 	if target_area != -1:
 		Singleton.CurrentLevelData.level_transition_data = {

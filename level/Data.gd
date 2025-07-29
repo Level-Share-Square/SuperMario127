@@ -337,8 +337,8 @@ func get_encoded_level_data():
 		level_string += value_util.encode_value(settings.music) + ","
 		level_string += value_util.encode_value(settings.gravity) + ","
 		level_string += value_util.encode_value(settings.background_palette) + ","
-		level_string += value_util.encode_value(settings.timer) + "~"
-		level_string += value_util.encode_value(settings.name) + ","
+		level_string += value_util.encode_value(settings.timer) + ","
+		level_string += value_util.encode_value(settings.name) + "~"
 		
 		var tiles := []
 		var very_background_tiles := []

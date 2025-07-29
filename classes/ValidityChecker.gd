@@ -266,9 +266,9 @@ func decode(code: String)-> Dictionary:
 			full_result.areas[area_id].settings.timer = 0.00
 			
 		if area_settings_array.size() > 7:
-			full_result.settings.name = value_util.decode_value(area_settings_array[7])
+			full_result.areas[area_id].settings.name = value_util.decode_value(area_settings_array[7])
 		else:
-			full_result.areas[area_id].settings.name = "My Area"
+			full_result.areas[area_id].settings.name = ""
 		
 		
 		if(conversion_util.compareVersions(full_result.format_version, "0.4.5") == -1):
@@ -358,8 +358,6 @@ func decode_area(area: String):
 		
 	if area_settings_array.size() > 7:
 		full_result.settings.name = value_util.decode_value(area_settings_array[7])
-	else:
-		full_result.settings.name = "My Area"
 	
 	
 	var area_tiles_array = area_array[1].split(",")
