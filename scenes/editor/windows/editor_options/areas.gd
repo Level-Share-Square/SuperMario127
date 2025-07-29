@@ -57,6 +57,5 @@ func paste_area():
 	var area = validity_checker.decode_area(area_code)
 	for i in area.objects:
 		i["properties"].append(i["properties"].pop_front())
-	print(area.settings)
 	Singleton.CurrentLevelData.level_data.areas.append(validity_checker.get_area(area))
 	reload_areas()
