@@ -5,9 +5,36 @@ var last_mouse_tile: Vector2
 
 
 func _click_left(_event: InputEvent, _world_pos: Vector2) -> void:
-	if Input.is_action_just_pressed("place"):
-		place_object(_world_pos)
-
+	if editor.selected_objects.empty() && editor.hovered_objects.empty():
+		if Input.is_action_just_pressed("place"):
+			place_object(_world_pos)
+	else:
+		editor.selection_box.get_parent().hide_selection_box()
+		for object in editor.selected_objects:
+			object.modulate = Color(1, 1, 1, object.modulate.a)
+		editor.selected_objects = {}
+		action()
+		editor.selection_box.get_parent().item_actions.hide_selection_actions()
+		editor.selection_box.get_parent().pivot_toggle.show()
+		editor.selection_box.get_parent().vseparator3.show()
+		
+#sorry lmao
+func select(object: GameObject):
+	editor.selected_objects = {}
+	editor.selected_objects[object] = object.name
+	editor.selection_box.get_parent().show_selection_box()
+	editor.selection_box.get_parent().pivot.visible = false
+	editor.selection_box.get_parent().pivot_toggle.pressed = false
+	action(editor.selected_objects)
+	editor.selection_box.get_parent().pivot_toggle.hide()
+	editor.selection_box.get_parent().vseparator3.hide()
+	
+func action(objects: Dictionary = {}) -> void:
+	var action := SelectObjectsAction.new()
+	action.editor = editor
+	action.selection_box = editor.selection_box
+	action.selected_objects = objects
+	editor.action_manager.commit_action(action)
 
 func place_object(pos: Vector2):
 	if shared.is_object_at_position(Vector2(round(pos.x), round(pos.y))):

@@ -67,9 +67,19 @@ func _ready():
 	
 		Singleton.CurrentLevelData.unsaved_editor_changes = false
 
+func _physics_process(delta):
+	if !hovered_objects.empty():
+		yield(get_tree(), "physics_frame")
+		if Input.is_action_just_pressed("LMB") && "ObjectPaint" in tool_manager.current_tool.name:
+			var closest_object = hovered_objects.values()[0]
+			for object in hovered_objects.values():
+				if Vector2(abs(object.global_position.x - get_global_mouse_position().x), abs(object.global_position.y - get_global_mouse_position().y)) < closest_object.global_position:
+					closest_object = object
+			tool_manager.current_tool.select(closest_object)
+			
+
 
 func object_hovered(object: GameObject):
-	print(object.position)
 	if tool_manager.current_tool.tool_type == EditorTool.Type.TileTool:
 		return
 	
