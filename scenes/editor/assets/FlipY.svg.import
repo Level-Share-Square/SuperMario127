@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/select_tool.png-8fc71325af47bf5d3e2f27ceecbb0f15.stex"
+path="res://.import/FlipY.svg-46f2dd0e8b6b429e1ea5d2cbcb4e27bb.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/editor/assets/select_tool.png"
-dest_files=[ "res://.import/select_tool.png-8fc71325af47bf5d3e2f27ceecbb0f15.stex" ]
+source_file="res://scenes/editor/assets/FlipY.svg"
+dest_files=[ "res://.import/FlipY.svg-46f2dd0e8b6b429e1ea5d2cbcb4e27bb.stex" ]
 
 [params]
 

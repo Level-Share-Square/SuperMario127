@@ -419,7 +419,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/menu/levels_list/misc/http_thumbnails.gd"
 }, {
-"base": "ScrollContainer",
+"base": "Reference",
 "class": "HelpPage",
 "language": "GDScript",
 "path": "res://scenes/oldeditor/window/HelpPage.gd"
@@ -689,7 +689,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/editor/windows/object_property_editor/property_editor_scenes/property_hints.gd"
 }, {
-"base": "ScrollContainer",
 "base": "PanelContainer",
 "class": "PropertyTab",
 "language": "GDScript",

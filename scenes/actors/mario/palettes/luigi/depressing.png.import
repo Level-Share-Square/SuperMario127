@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/mimicry.png-28ea385af459e3d6e7f60b899f32a71f.stex"
+path="res://.import/depressing.png-6d867df7c03860dda743f55569dbcfc9.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/actors/mario/palettes/luigi/mimicry.png"
-dest_files=[ "res://.import/mimicry.png-28ea385af459e3d6e7f60b899f32a71f.stex" ]
+source_file="res://scenes/actors/mario/palettes/luigi/depressing.png"
+dest_files=[ "res://.import/depressing.png-6d867df7c03860dda743f55569dbcfc9.stex" ]
 
 [params]
 

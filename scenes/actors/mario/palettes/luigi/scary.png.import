@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/iridescent.png-943e73d9fcceafee8b8538f1314a9c27.stex"
+path="res://.import/scary.png-d2f4740d414e36f34dd9cacc7b0b9a43.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/actors/mario/palettes/luigi/iridescent.png"
-dest_files=[ "res://.import/iridescent.png-943e73d9fcceafee8b8538f1314a9c27.stex" ]
+source_file="res://scenes/actors/mario/palettes/luigi/scary.png"
+dest_files=[ "res://.import/scary.png-d2f4740d414e36f34dd9cacc7b0b9a43.stex" ]
 
 [params]
 

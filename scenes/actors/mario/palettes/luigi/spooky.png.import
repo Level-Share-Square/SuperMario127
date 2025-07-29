@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/messenger.png-2d58fa0b0f15c1950255c68faf30379a.stex"
+path="res://.import/spooky.png-b74aa1b84df2d76fec04c1ed88cd8c00.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/actors/mario/palettes/mario/messenger.png"
-dest_files=[ "res://.import/messenger.png-2d58fa0b0f15c1950255c68faf30379a.stex" ]
+source_file="res://scenes/actors/mario/palettes/luigi/spooky.png"
+dest_files=[ "res://.import/spooky.png-b74aa1b84df2d76fec04c1ed88cd8c00.stex" ]
 
 [params]
 

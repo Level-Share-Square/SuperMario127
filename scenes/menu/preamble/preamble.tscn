@@ -3,7 +3,7 @@
 [ext_resource path="res://scenes/menu/theme.tres" type="Theme" id=1]
 [ext_resource path="res://assets/fonts/DelfinoFont16.tres" type="DynamicFont" id=2]
 [ext_resource path="res://scenes/menu/screen.gd" type="Script" id=3]
-[ext_resource path="res://scenes/menu/main_menu/preamble.gd" type="Script" id=4]
+[ext_resource path="res://scenes/menu/preamble/preamble.gd" type="Script" id=4]
 
 [sub_resource type="Gradient" id=1]
 colors = PoolColorArray( 0, 0, 0, 1, 0.1297, 0, 0.195313, 1 )
@@ -141,7 +141,6 @@ tracks/5/keys = {
 }
 
 [node name="Preamble" type="TextureRect"]
-modulate = Color( 0, 0, 0, 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 texture = SubResource( 2 )
@@ -152,6 +151,7 @@ script = ExtResource( 3 )
 margin_right = 40.0
 margin_bottom = 40.0
 script = ExtResource( 4 )
+get_outta_here = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
@@ -177,7 +177,6 @@ However, this game is not officially endorsed by them.
 "
 align = 1
 valign = 1
-percent_visible = 0.0
 
 [node name="Indicator" type="Label" parent="."]
 unique_name_in_owner = true
@@ -196,7 +195,6 @@ custom_fonts/font = ExtResource( 2 )
 text = "Press any button to continue."
 
 [node name="Presents" type="Label" parent="."]
-visible = false
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -212,6 +210,5 @@ text = "Solarshine Studios
 presents..."
 align = 1
 valign = 1
-percent_visible = 0.0
 
 [connection signal="screen_change" from="." to="." method="_on_Preamble_screen_change" binds= [ "MainScreen" ]]

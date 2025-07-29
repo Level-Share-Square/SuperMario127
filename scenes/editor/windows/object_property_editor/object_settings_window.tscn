@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://scenes/editor/windows/editor_window.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/editor/windows/object_property_editor/object_settings_window.gd" type="Script" id=2]
@@ -12,6 +12,8 @@
 [ext_resource path="res://scenes/editor/assets/RotateArrow.svg" type="Texture" id=10]
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=11]
 [ext_resource path="res://scenes/menu/line_edit_unfocus.gd" type="Script" id=12]
+[ext_resource path="res://scenes/editor/assets/FlipY.svg" type="Texture" id=13]
+[ext_resource path="res://scenes/editor/assets/FlipX.svg" type="Texture" id=14]
 
 [sub_resource type="StyleBoxEmpty" id=5]
 
@@ -42,11 +44,11 @@ window_size = Vector2( 256, 200 )
 
 [node name="Background" parent="." index="0"]
 margin_right = 256.0
-margin_bottom = 192.0
+margin_bottom = 204.0
 
 [node name="ContentDivider" parent="." index="1"]
 margin_right = 256.0
-margin_bottom = 192.0
+margin_bottom = 204.0
 
 [node name="Header" parent="ContentDivider" index="0"]
 margin_right = 256.0
@@ -69,7 +71,7 @@ margin_right = 256.0
 
 [node name="ContentMat" parent="ContentDivider" index="2"]
 margin_right = 256.0
-margin_bottom = 192.0
+margin_bottom = 204.0
 custom_constants/margin_right = 4
 custom_constants/margin_top = 4
 custom_constants/margin_left = 4
@@ -79,13 +81,13 @@ custom_constants/margin_bottom = 4
 margin_left = 4.0
 margin_top = 4.0
 margin_right = 252.0
-margin_bottom = 157.0
+margin_bottom = 169.0
 size_flags_vertical = 3
 
 [node name="PropertyGroups" type="TabContainer" parent="ContentDivider/ContentMat/ContentBox" index="0"]
 unique_name_in_owner = true
 margin_right = 248.0
-margin_bottom = 153.0
+margin_bottom = 165.0
 mouse_filter = 1
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -96,6 +98,7 @@ use_hidden_tabs_for_min_size = true
 script = ExtResource( 6 )
 
 [node name="Misc" type="PanelContainer" parent="ContentDivider/ContentMat/ContentBox/PropertyGroups" index="0"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -109,7 +112,6 @@ margin_right = 240.0
 margin_bottom = 122.0
 
 [node name="Base" parent="ContentDivider/ContentMat/ContentBox/PropertyGroups" index="1" instance=ExtResource( 5 )]
-visible = false
 margin_left = 4.0
 margin_top = 27.0
 margin_right = -4.0
@@ -419,26 +421,30 @@ pressed = true
 margin_top = 91.0
 margin_right = 240.0
 margin_bottom = 110.0
+alignment = 1
 
 [node name="FlipX" type="Button" parent="ContentDivider/ContentMat/ContentBox/PropertyGroups/Base/Properties/HBoxContainer/Extras/Flip" index="0"]
+margin_left = 96.0
 margin_right = 118.0
 margin_bottom = 19.0
-rect_min_size = Vector2( 0, 18 )
-size_flags_horizontal = 3
+rect_min_size = Vector2( 22, 19 )
+hint_tooltip = "Mirror Object (X axis)"
 size_flags_vertical = 3
 theme_type_variation = "ButtonPurple"
-text = "Flip X"
+icon = ExtResource( 14 )
+expand_icon = true
 script = ExtResource( 4 )
 
-[node name="FlipX2" type="Button" parent="ContentDivider/ContentMat/ContentBox/PropertyGroups/Base/Properties/HBoxContainer/Extras/Flip" index="1"]
+[node name="FlipY" type="Button" parent="ContentDivider/ContentMat/ContentBox/PropertyGroups/Base/Properties/HBoxContainer/Extras/Flip" index="1"]
 margin_left = 122.0
-margin_right = 240.0
+margin_right = 144.0
 margin_bottom = 19.0
-rect_min_size = Vector2( 0, 18 )
-size_flags_horizontal = 3
+rect_min_size = Vector2( 22, 19 )
+hint_tooltip = "Mirror Object (Y axis)"
 size_flags_vertical = 3
 theme_type_variation = "ButtonPurple"
-text = "Flip Y"
+icon = ExtResource( 13 )
+expand_icon = true
 script = ExtResource( 4 )
 
 [node name="Ordering" type="HBoxContainer" parent="ContentDivider/ContentMat/ContentBox/PropertyGroups/Base/Properties" index="1"]
@@ -500,6 +506,7 @@ margin_left = 220.0
 margin_right = 240.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 20, 20 )
+hint_tooltip = "Delete Object"
 theme_type_variation = "ButtonRed"
 icon = ExtResource( 7 )
 expand_icon = true
@@ -507,12 +514,12 @@ script = ExtResource( 4 )
 
 [node name="Border" parent="." index="2"]
 margin_right = 256.0
-margin_bottom = 192.0
+margin_bottom = 204.0
 
 [node name="WindowMat" parent="." index="3"]
 margin_right = 256.0
-margin_bottom = 192.0
+margin_bottom = 204.0
 
 [node name="Control" parent="." index="4"]
 margin_right = 256.0
-margin_bottom = 192.0
+margin_bottom = 204.0

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/iridescent.png-32e446bfbf759fad7383fa56dd0527da.stex"
+path="res://.import/FlipX.svg-3e52614dc6d5e6e96f8632c9d20fda63.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/actors/mario/palettes/mario/iridescent.png"
-dest_files=[ "res://.import/iridescent.png-32e446bfbf759fad7383fa56dd0527da.stex" ]
+source_file="res://scenes/editor/assets/FlipX.svg"
+dest_files=[ "res://.import/FlipX.svg-3e52614dc6d5e6e96f8632c9d20fda63.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=false
+flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

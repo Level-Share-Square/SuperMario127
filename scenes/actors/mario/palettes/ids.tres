@@ -4,4 +4,4 @@
 
 [resource]
 script = ExtResource( 1 )
-ids = PoolStringArray( "default", "brotherly", "greedy", "dastardly", "fiery", "icy", "bubbly", "industrial", "dapper", "blizzard", "starry", "twilight", "inverted", "drained", "invincible", "shadowy", "classic", "prehistoric", "retro", "vintage", "solar", "lunar", "stellar", "gummy", "messenger", "operative", "moldy", "freeloader", "copper", "silver", "gilded", "iridescent", "ruby", "emerald", "sapphire", "garnet", "peachy", "mimicry", "undead", "vessel" )
+ids = PoolStringArray( "default", "brotherly", "greedy", "dastardly", "fiery", "icy", "bubbly", "industrial", "dapper", "blizzard", "starry", "twilight", "inverted", "drained", "invincible", "shadowy", "classic", "prehistoric", "retro", "vintage", "solar", "lunar", "stellar", "gummy", "informative", "operative", "moldy", "freeloader", "copper", "silver", "gilded", "ruby", "emerald", "sapphire", "garnet", "peachy", "mimicked", "undead", "vessel", "depressing", "antiquated", "playful", "spooky", "scary", "jolly", "grand", "mysterious", "glowing", "creative" )
