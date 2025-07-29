@@ -11,6 +11,7 @@ onready var selection_tools = $"%SelectionTools"
 onready var edit_selection = $"%EditSelection"
 onready var pivot = get_node("Pivot")
 onready var pivot_toggle = $"%PivotToggleButton"
+onready var vseparator3 = $"%VSeparator3"
 onready var item_actions = $"%ItemActions"
 onready var object_settings_window = $"%ObjectSettingsWindow"
 
@@ -61,6 +62,9 @@ func show_selection_box():
 	selection_area.monitorable = false
 	selection_shape.disabled = true
 	edit_selection.show()
+	item_actions.show_selection_actions()
+	pivot_toggle.show()
+	vseparator3.show()
 	snap_to_selected_size()
 
 func _unhandled_input(event):
@@ -180,6 +184,7 @@ func snap_to_selected_size():
 			far_down = object.global_position.y
 		
 	selection_box.rect_position = Vector2(far_left, far_up)
+	selection_box.self_modulate.a = 1 if editor.selected_objects.size() > 1 else 0
 	selection_box.rect_size = Vector2(abs(far_left - far_right), far_down - far_up)
 	if selection_tools.active_tool == null:
 		match selection_box.rect_scale:

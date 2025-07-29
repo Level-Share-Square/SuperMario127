@@ -67,7 +67,7 @@ unique_name_in_owner = true
 margin_left = 220.0
 margin_top = 70.0
 margin_right = 384.0
-margin_bottom = 142.0
+margin_bottom = 161.0
 texture = SubResource( 1 )
 draw_center = false
 region_rect = Rect2( 0, 0, 28, 28 )
@@ -89,6 +89,7 @@ shape = SubResource( 2 )
 
 [node name="WhiteHighlight" type="ReferenceRect" parent="SelectionBox"]
 unique_name_in_owner = true
+visible = false
 margin_left = 1.0
 margin_top = 1.0
 margin_right = 163.0
@@ -132,10 +133,11 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = -70.5
-margin_right = 70.5
+margin_left = -70.0
+margin_right = 71.0
 margin_bottom = 25.0
-size_flags_vertical = 3
+size_flags_horizontal = 15
+size_flags_vertical = 15
 size_flags_stretch_ratio = 2.0
 theme_type_variation = "FlatPanel"
 
@@ -200,6 +202,7 @@ script = ExtResource( 6 )
 associated_tool_path = NodePath("../../../SelectionTools/Scale")
 
 [node name="VSeparator3" type="VSeparator" parent="SelectionBox/EditSelection/ButtonContainer"]
+unique_name_in_owner = true
 margin_left = 79.0
 margin_right = 83.0
 margin_bottom = 17.0
