@@ -286,6 +286,6 @@ func _on_Delete_button_down():
 func open_properties_window():
 	var objects: Dictionary
 	for selected_object in editor.selected_objects:
-		objects[selected_object.placeable_item] = selected_object
+		objects[selected_object] = selected_object.placeable_item
 	
 	object_settings_window.load_objects(objects)

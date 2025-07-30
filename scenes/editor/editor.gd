@@ -76,7 +76,6 @@ func _physics_process(delta):
 				if Vector2(abs(object.global_position.x - get_global_mouse_position().x), abs(object.global_position.y - get_global_mouse_position().y)) < closest_object.global_position:
 					closest_object = object
 			tool_manager.current_tool.select(closest_object)
-			
 
 
 func object_hovered(object: GameObject):

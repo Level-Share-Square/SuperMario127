@@ -1,4 +1,4 @@
-extends LinePropertyEditor
+extends HBoxContainer
 
 
 onready var x = $"%X"

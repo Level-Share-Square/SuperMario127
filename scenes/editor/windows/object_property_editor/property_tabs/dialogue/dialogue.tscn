@@ -8,7 +8,7 @@
 [ext_resource path="res://scenes/oldeditor/property_type_scenes/PoolStringArray/base/player_preview_small.png" type="Texture" id=6]
 [ext_resource path="res://assets/styles/ButtonStyleDisabled.tres" type="StyleBox" id=7]
 [ext_resource path="res://scenes/oldeditor/window/option_icon.gd" type="Script" id=8]
-[ext_resource path="res://scenes/editor/windows/object_property_editor/property_editor_scenes/property_editor.gd" type="Script" id=9]
+[ext_resource path="res://scenes/editor/windows/object_property_editor/misc_property_scenes/property_editor.gd" type="Script" id=9]
 
 [sub_resource type="DynamicFont" id=2]
 size = 13

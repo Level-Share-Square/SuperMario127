@@ -1366,21 +1366,18 @@ group = SubResource( 172 )
 [node name="Button8" parent="UI/UIContainer/EditorUI/Bottom/Hotbar/Middle/VBoxContainer/PanelContainer/HBoxContainer" instance=ExtResource( 36 )]
 margin_left = 196.0
 margin_right = 220.0
-focus_mode = 2
 pressed = false
 group = SubResource( 172 )
 
 [node name="Button9" parent="UI/UIContainer/EditorUI/Bottom/Hotbar/Middle/VBoxContainer/PanelContainer/HBoxContainer" instance=ExtResource( 36 )]
 margin_left = 224.0
 margin_right = 248.0
-focus_mode = 2
 pressed = false
 group = SubResource( 172 )
 
 [node name="Button10" parent="UI/UIContainer/EditorUI/Bottom/Hotbar/Middle/VBoxContainer/PanelContainer/HBoxContainer" instance=ExtResource( 36 )]
 margin_left = 252.0
 margin_right = 276.0
-focus_mode = 2
 pressed = false
 group = SubResource( 172 )
 
@@ -1401,63 +1398,54 @@ group = SubResource( 181 )
 [node name="Button2" parent="UI/UIContainer/EditorUI/Bottom/Hotbar/Middle/VBoxContainer/PanelContainer/PaletteContainer" instance=ExtResource( 13 )]
 margin_left = 28.0
 margin_right = 52.0
-focus_mode = 2
 toggle_mode = false
 group = SubResource( 181 )
 
 [node name="Button3" parent="UI/UIContainer/EditorUI/Bottom/Hotbar/Middle/VBoxContainer/PanelContainer/PaletteContainer" instance=ExtResource( 13 )]
 margin_left = 56.0
 margin_right = 80.0
-focus_mode = 2
 toggle_mode = false
 group = SubResource( 181 )
 
 [node name="Button4" parent="UI/UIContainer/EditorUI/Bottom/Hotbar/Middle/VBoxContainer/PanelContainer/PaletteContainer" instance=ExtResource( 13 )]
 margin_left = 84.0
 margin_right = 108.0
-focus_mode = 2
 toggle_mode = false
 group = SubResource( 181 )
 
 [node name="Button5" parent="UI/UIContainer/EditorUI/Bottom/Hotbar/Middle/VBoxContainer/PanelContainer/PaletteContainer" instance=ExtResource( 13 )]
 margin_left = 112.0
 margin_right = 136.0
-focus_mode = 2
 toggle_mode = false
 group = SubResource( 181 )
 
 [node name="Button6" parent="UI/UIContainer/EditorUI/Bottom/Hotbar/Middle/VBoxContainer/PanelContainer/PaletteContainer" instance=ExtResource( 13 )]
 margin_left = 140.0
 margin_right = 164.0
-focus_mode = 2
 toggle_mode = false
 group = SubResource( 181 )
 
 [node name="Button7" parent="UI/UIContainer/EditorUI/Bottom/Hotbar/Middle/VBoxContainer/PanelContainer/PaletteContainer" instance=ExtResource( 13 )]
 margin_left = 168.0
 margin_right = 192.0
-focus_mode = 2
 toggle_mode = false
 group = SubResource( 181 )
 
 [node name="Button8" parent="UI/UIContainer/EditorUI/Bottom/Hotbar/Middle/VBoxContainer/PanelContainer/PaletteContainer" instance=ExtResource( 13 )]
 margin_left = 196.0
 margin_right = 220.0
-focus_mode = 2
 toggle_mode = false
 group = SubResource( 181 )
 
 [node name="Button9" parent="UI/UIContainer/EditorUI/Bottom/Hotbar/Middle/VBoxContainer/PanelContainer/PaletteContainer" instance=ExtResource( 13 )]
 margin_left = 224.0
 margin_right = 248.0
-focus_mode = 2
 toggle_mode = false
 group = SubResource( 181 )
 
 [node name="Button10" parent="UI/UIContainer/EditorUI/Bottom/Hotbar/Middle/VBoxContainer/PanelContainer/PaletteContainer" instance=ExtResource( 13 )]
 margin_left = 252.0
 margin_right = 276.0
-focus_mode = 2
 toggle_mode = false
 group = SubResource( 181 )
 
@@ -1589,10 +1577,10 @@ bus = "Sounds"
 [connection signal="item_changed" from="." to="ZIndex/Tools" method="item_changed"]
 [connection signal="tool_changed" from="ZIndex/Tools" to="UI/UIContainer/EditorUI/Middle/Tools" method="_on_Tools_tool_changed"]
 [connection signal="tool_changed" from="ZIndex/Tools" to="ItemPreview" method="_on_Tools_tool_changed"]
-[connection signal="redo" from="ActionManager" to="ZIndex/Tools/ObjectSelection" method="snap_to_selected_size"]
 [connection signal="redo" from="ActionManager" to="ZIndex/Tools/ObjectSelection" method="on_redo"]
-[connection signal="undo" from="ActionManager" to="ZIndex/Tools/ObjectSelection" method="snap_to_selected_size"]
+[connection signal="redo" from="ActionManager" to="ZIndex/Tools/ObjectSelection" method="snap_to_selected_size"]
 [connection signal="undo" from="ActionManager" to="ZIndex/Tools/ObjectSelection" method="on_undo"]
+[connection signal="undo" from="ActionManager" to="ZIndex/Tools/ObjectSelection" method="snap_to_selected_size"]
 [connection signal="text_entered" from="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/SearchBar" to="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/ScrollContainer/CenterContainer/ItemsGrid" method="_on_search"]
 [connection signal="pressed" from="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/Search" to="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/ScrollContainer/CenterContainer/ItemsGrid" method="_on_search"]
 [connection signal="pressed" from="UI/UIContainer/EditorUI/Top/Options/PanelContainer/Settings" to="UI/EditorOptionsWindow" method="toggle_window" binds= [ Vector2( 400, 220 ) ]]

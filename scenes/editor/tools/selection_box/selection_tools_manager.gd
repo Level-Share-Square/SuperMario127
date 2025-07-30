@@ -9,7 +9,7 @@ onready var delete = $"%Delete"
 onready var pivot_toggle_button = $"%PivotToggleButton"
 onready var properties_button = $"%PropertiesButton"
 onready var delete_button = $"%DeleteButton"
-onready var button_container = $"../EditSelection/ButtonContainer"
+onready var button_container = $"%ButtonContainer"
 
 onready var editor = get_tree().get_current_scene()
 onready var selection_box = get_owner()

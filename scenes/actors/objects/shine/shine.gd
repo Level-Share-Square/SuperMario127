@@ -77,7 +77,7 @@ signal shine_dance_end
 
 func _set_properties() -> void:
 	savable_properties = ["title", "description", "show_in_menu", "activated", "red_coins_activate", "shine_shards_activate", "color", "id", "do_kick_out", "sort_position", "required_purples", "activation_tag", "entrance_area", "entrance_tag"]
-	editable_properties = ["title", "description", "show_in_menu", "activated", "red_coins_activate", "shine_shards_activate", "required_purples", "color", "do_kick_out", "activation_tag", "sort_position", "id", "entrance_area", "entrance_tag"]
+	editable_properties = ["title", "description", "show_in_menu", "activated", "red_coins_activate", "shine_shards_activate", "required_purples", "color", "do_kick_out", "activation_tag", "sort_position", "entrance_area", "entrance_tag"]
 
 
 func _set_property_values() -> void:
