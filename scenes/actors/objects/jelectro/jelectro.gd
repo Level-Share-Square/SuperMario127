@@ -31,3 +31,8 @@ func kill(body):
 func _ready():
 	var _connect = area.connect("body_entered", self, "kill")
 	var _connect2 = delete_timer.connect("timeout", self, "queue_free")
+
+func is_middle(check: bool):
+	.is_middle(check)
+	
+	area.get_node("CollisionShape2D").disabled = !check

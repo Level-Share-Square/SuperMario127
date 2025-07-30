@@ -155,8 +155,8 @@ func _ready():
 	
 	change_size()
 	
-	liquid_area.monitoring = (enabled and mode != 1)
-	liquid_area.monitorable = (enabled and mode != 1)
+	liquid_area.monitoring = (enabled and mode != 1 and layer == middle)
+	liquid_area.monitorable = (enabled and mode != 1 and layer == middle)
 	
 	update_liquid_color(color)
 	update()

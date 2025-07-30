@@ -62,7 +62,7 @@ func _set_property_values():
 
 
 func detect_player(body : Character) -> void:
-	if character == null and enabled and body != null and !dead:
+	if character == null and enabled and body != null and !dead and layer == middle:
 		character = body
 
 func remove_player(body : Character) -> void:
@@ -91,7 +91,7 @@ func _ready() -> void:
 	time_alive += float(Singleton.CurrentLevelData.enemies_instanced) / 2.0
 	gravity = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].settings.gravity
 	
-	if scale.x < 0 and enabled and mode != 1:
+	if scale.x < 0 and enabled and mode != 1 and layer == middle:
 		scale.x = abs(scale.x)
 		facing_direction = -facing_direction
 
@@ -159,7 +159,7 @@ func _process(_delta) -> void:
 func _physics_process(delta : float) -> void:
 	time_alive += delta
 	
-	if mode != 1 and enabled and loaded:
+	if mode != 1 and enabled and loaded and layer == middle:
 		var is_in_platform := false
 		var platform_collision_enabled := false
 		for platform_body in platform_detector.get_overlapping_areas():

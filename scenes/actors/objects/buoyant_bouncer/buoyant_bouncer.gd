@@ -304,3 +304,8 @@ func update_parts():
 	topcol_shape.shape.extents.x = (left_width + (part_width * parts) + right_width) / 2
 	#calculate the total platform scale
 	scale_x = scale.x * (left_width + right_width + part_width * parts) / (left_width + right_width + part_width)
+
+func is_middle(check):
+	.is_middle(check)
+	
+	collision_shape.disabled = !check

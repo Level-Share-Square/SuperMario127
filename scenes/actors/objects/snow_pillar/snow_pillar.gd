@@ -5,7 +5,7 @@ export var custom_preview_position = Vector2(70, 170)
 export(Array, Texture) var palette_textures
 
 func _ready():
-	collision_shape.disabled = !enabled
+	collision_shape.disabled = !enabled or !layer == middle
 	preview_position = custom_preview_position
 	if is_preview:
 		z_index = 0

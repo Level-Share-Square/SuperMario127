@@ -41,7 +41,7 @@ func goonie_ready():
 	if speed == 0:
 		speed = 0.00001
 		set_property("speed", speed, true)
-	$StaticBody2D/CollisionShape2D.disabled = !enabled
+	$StaticBody2D/CollisionShape2D.disabled = !enabled or !layer == middle
 	spreads_started += Singleton.CurrentLevelData.enemies_instanced % 3
 	Singleton.CurrentLevelData.enemies_instanced += 1
 	var add_amount = 0
@@ -109,3 +109,6 @@ func goonie_physics_process(delta):
 func _on_PlatformArea_body_exited(body):
 	if body.get("velocity") != null:
 		body.velocity += Vector2(momentum.x, min(0, momentum.y))
+
+func is_middle(check):
+	return

@@ -47,7 +47,7 @@ func _physics_process(delta):
 	#rotation_degrees = 0
 	color_sprite.modulate = color
 		
-	if mode != 1:
+	if mode != 1 && layer == middle:
 		spawn_timer -= delta
 		if spawn_timer <= 0.35 and sprite.frame == 3:
 			sprite.frame = 0
@@ -107,3 +107,8 @@ func _physics_process(delta):
 			
 		elif spawn_timer <= 0:
 			spawn_timer = wait_time
+
+func is_middle(check: bool):
+	.is_middle(check)
+	collision_shape.disabled = !check
+	

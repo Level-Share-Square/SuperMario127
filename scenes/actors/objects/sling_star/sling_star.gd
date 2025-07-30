@@ -81,7 +81,7 @@ func _process(delta):
 	pass
 	
 func _physics_process(delta):
-	if enabled and mode == 0:
+	if enabled and mode == 0 and layer == middle:
 		
 		match(state):
 			states.IDLE:

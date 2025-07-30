@@ -19,7 +19,7 @@ func _set_property_values():
 	set_property("steely_despawn_timer", steely_despawn_timer)
 
 func _ready():
-	if mode == 0: # if in play mode
+	if mode == 0 && layer == middle: # if in play mode and layer is middle
 		spawn_timer.wait_time = spawn_interval
 		spawn_timer.start()
 		spawn_timer.connect("timeout", self, "_on_spawn_timer_timeout")

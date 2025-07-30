@@ -124,6 +124,7 @@ func _ready():
 	yield(get_tree().create_timer(0.1), "timeout")
 	
 	property_hints.resize(editable_properties.size())
+	is_middle(layer == middle)
 
 
 func create_collision_polygons_from_tree(node: Node, node_transform: Transform2D, array: Array) -> void:

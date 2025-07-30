@@ -154,91 +154,91 @@ internal_id = "blurp"
 color = Color( 0.160784, 0.870588, 0, 1 )
 top_point = Vector2( 0, -9 )
 
-[node name="Blurp" type="KinematicBody2D" parent="."]
+[node name="CheepCheep" type="KinematicBody2D" parent="."]
 collision_layer = 4
 collision_mask = 85
 script = ExtResource( 4 )
 
-[node name="Sprite" type="AnimatedSprite" parent="Blurp"]
+[node name="Sprite" type="AnimatedSprite" parent="CheepCheep"]
 frames = SubResource( 4 )
 
-[node name="ColorSprite" type="AnimatedSprite" parent="Blurp/Sprite"]
+[node name="ColorSprite" type="AnimatedSprite" parent="CheepCheep/Sprite"]
 modulate = Color( 0.160784, 0.870588, 0, 1 )
 frames = SubResource( 11 )
 script = ExtResource( 9 )
 
-[node name="GroundCollision" type="CollisionShape2D" parent="Blurp"]
+[node name="GroundCollision" type="CollisionShape2D" parent="CheepCheep"]
 visible = false
 position = Vector2( 0, -1 )
 shape = SubResource( 9 )
 
-[node name="BoxCollision" type="CollisionShape2D" parent="Blurp"]
+[node name="BoxCollision" type="CollisionShape2D" parent="CheepCheep"]
 visible = false
 position = Vector2( 0, -2 )
 shape = SubResource( 10 )
 
-[node name="AttackArea" type="Area2D" parent="Blurp"]
+[node name="AttackArea" type="Area2D" parent="CheepCheep"]
 visible = false
 position = Vector2( 0, -7 )
 collision_layer = 4
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Blurp/AttackArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CheepCheep/AttackArea"]
 position = Vector2( 0, 8 )
 shape = SubResource( 19 )
 
-[node name="PlayerDetector" type="Area2D" parent="Blurp"]
+[node name="PlayerDetector" type="Area2D" parent="CheepCheep"]
 visible = false
 position = Vector2( 0, -7 )
 collision_layer = 0
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Blurp/PlayerDetector"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CheepCheep/PlayerDetector"]
 shape = SubResource( 20 )
 
-[node name="PlayerExitDetector" type="Area2D" parent="Blurp"]
+[node name="PlayerExitDetector" type="Area2D" parent="CheepCheep"]
 visible = false
 position = Vector2( 0, -7 )
 collision_layer = 0
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Blurp/PlayerExitDetector"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CheepCheep/PlayerExitDetector"]
 shape = SubResource( 21 )
 
-[node name="PlatformDetector" type="Area2D" parent="Blurp"]
+[node name="PlatformDetector" type="Area2D" parent="CheepCheep"]
 visible = false
 collision_layer = 4
 collision_mask = 16
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Blurp/PlatformDetector"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CheepCheep/PlatformDetector"]
 shape = SubResource( 22 )
 
-[node name="WaterDetector" type="Area2D" parent="Blurp"]
+[node name="WaterDetector" type="Area2D" parent="CheepCheep"]
 visible = false
 position = Vector2( 0, -7 )
 collision_layer = 0
 collision_mask = 128
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Blurp/WaterDetector"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CheepCheep/WaterDetector"]
 position = Vector2( 0, 8 )
 shape = SubResource( 15 )
 
-[node name="Stomp" type="AudioStreamPlayer" parent="Blurp"]
+[node name="Stomp" type="AudioStreamPlayer" parent="CheepCheep"]
 stream = ExtResource( 5 )
 volume_db = -3.0
 bus = "Sounds"
 
-[node name="Hit" type="AudioStreamPlayer" parent="Blurp"]
+[node name="Hit" type="AudioStreamPlayer" parent="CheepCheep"]
 stream = ExtResource( 6 )
 volume_db = -10.0
 bus = "Sounds"
 
-[node name="Disappear" type="AudioStreamPlayer" parent="Blurp"]
+[node name="Disappear" type="AudioStreamPlayer" parent="CheepCheep"]
 stream = ExtResource( 8 )
 volume_db = -3.0
 bus = "Sounds"
 
-[node name="Poof" type="Particles2D" parent="Blurp"]
+[node name="Poof" type="Particles2D" parent="CheepCheep"]
 material = SubResource( 16 )
 emitting = false
 amount = 1
@@ -247,10 +247,10 @@ one_shot = true
 process_material = SubResource( 17 )
 texture = ExtResource( 7 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Blurp"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CheepCheep"]
 anims/Stomped = SubResource( 18 )
 
-[node name="BottomPos" type="Node2D" parent="Blurp"]
+[node name="BottomPos" type="Node2D" parent="CheepCheep"]
 position = Vector2( 0, 5 )
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]

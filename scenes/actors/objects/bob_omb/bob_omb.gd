@@ -49,7 +49,7 @@ func _set_property_values():
 	pass
 
 func player_entered(body):
-	if enabled and body.name.begins_with("Character") and !dead and character == null:
+	if enabled and body.name.begins_with("Character") and !dead and character == null and layer == middle:
 		character = body
 		explode_timer = 4
 		fuse_sound.play()
@@ -95,7 +95,7 @@ func _ready() -> void:
 		scale.x = abs(scale.x)
 		facing_direction = -facing_direction
 	
-	if !enabled:
+	if !enabled and !layer == middle:
 		kinematic_body.set_collision_mask_bit(3, false)
 	
 func _process(_delta):
@@ -105,7 +105,7 @@ func _process(_delta):
 		sprite.frame = wrapi(OS.get_ticks_msec() / 166, 0, 8)
 		
 func exploded(explosion_pos : Vector2):
-	if enabled:
+	if enabled and layer == middle:
 		hit = true
 		snap = Vector2(0, 0)
 		velocity.x = (kinematic_body.global_position - explosion_pos).normalized().x * 275
@@ -134,7 +134,7 @@ func shell_hit(shell_pos : Vector2):
 	character = 0 # hacker chungus
 
 func _physics_process(delta):
-	if mode == 1 or !enabled:
+	if mode == 1 or !enabled or !layer == middle:
 		return
 	
 	var is_in_platform = false
@@ -167,7 +167,7 @@ func _physics_process(delta):
 		if damage_timer < 0:
 			damage_timer = 0
 	
-	if mode != 1 and enabled and !dead and loaded:
+	if mode != 1 and enabled and !dead and loaded and layer == middle:
 		visibility_enabler.global_position = kinematic_body.global_position
 		
 		if water_detector.get_overlapping_areas().size() > 0:

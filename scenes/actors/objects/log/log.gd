@@ -35,7 +35,7 @@ func _ready():
 	if is_preview:
 		z_index = 0
 		sprite.z_index = 0
-	if !enabled:
+	if !enabled or !layer == middle:
 		collision_shape.disabled = true
 	orig_pos = position
 	if mode != 1:

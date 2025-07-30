@@ -116,3 +116,9 @@ func _process(_delta):
 			color != last_color ||
 			render_in_front != last_front):
 		change_size()
+
+func is_middle(check):
+	.is_middle(check)
+	
+	area_collision.disabled = !check
+	body_collision.disabled = !check

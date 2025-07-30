@@ -74,7 +74,7 @@ func _process(delta):
 	recolorable_sprite.visible = sprite.visible
 	recolorable_sprite.rotation = sprite.rotation
 	
-	if not (mode != 1 and enabled):
+	if not (mode != 1 and enabled and layer == middle):
 		return
 	
 	if (fire != 0):
@@ -128,7 +128,7 @@ func create_coin()->void :
 	get_parent().create_object(object, false)
 
 func _physics_process(delta):
-	if not (mode != 1 and enabled):
+	if not (mode != 1 and enabled and layer == middle):
 		return
 	
 	if (not hit):

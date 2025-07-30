@@ -221,3 +221,12 @@ func attempt_enable_collision(body : PhysicsBody2D = null) -> void:
 	# simple little math thing, if can_enable_collision is true, it'll be a 1, if false it'll be a 0, 
 	#so one of the values will be multiplied by 0 and therefore impact anything
 	cannon_moveable.z_index = Z_INDEX_FOREGROUND * int(can_enable_collision) + Z_INDEX_BACKGROUND * int(!can_enable_collision)
+
+func is_middle(check):
+	.is_middle(check)
+	
+	$EntranceCollision/CollisionShape2D.disabled = !check
+	$NearbyCharacterDetection/CollisionShape2D.disabled = !check
+	$RingCollision/CollisionShape2D.disabled = !check
+	$PipeEnterLogic/Area2D/CollisionShape2D.disabled = !check
+	$PipeEnterLogic/GPArea/CollisionShape2D.disabled = !check

@@ -56,14 +56,14 @@ func kill(body):
 			knockback(body.global_position)
 
 func attacked(new_area):
-	if !enabled: return
+	if !enabled or !layer == middle: return
 
 	if new_area.has_method("is_hurt_area"):
 		knockback_velocity.y = -80
 		knockback(area.global_position)
 
 func stomp(body):
-	if !enabled: return
+	if !enabled or !layer == middle: return
 	var body_cast = body as Character #this filters out any bodies other than the player from being used
 	if "Character" in str(body):
 		if body.invincible:
@@ -95,7 +95,7 @@ func undetect_player(body):
 		character = null
 
 func _physics_process(delta):
-	if !enabled: 
+	if !enabled or !layer == middle: 
 		sprite.frame = 3
 
 	if mode == 1 or dead:
@@ -105,7 +105,7 @@ func _physics_process(delta):
 	global_position.y = middle_pos.y + sin(time_alive) * sine_amplitude
 	global_position.x = middle_pos.x
 	
-	if !enabled:
+	if !enabled or !layer == middle:
 		return
 	
 	var active_frame = 3
@@ -171,3 +171,7 @@ func increment_towards(value, target, step):
 			value = target
 	
 	return value
+
+func is_middle(check: bool):
+	.is_middle(check)
+	area_collision_shape.disabled = !check

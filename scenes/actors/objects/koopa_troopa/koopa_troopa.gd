@@ -98,7 +98,7 @@ func _ready() -> void:
 	sprite.frames = para_sprite if winged else normal_sprite
 	sprite_color.frames = para_color_sprite if winged else normal_color_sprite
 	
-	if scale.x < 0 and mode == 0 and enabled:
+	if scale.x < 0 and mode == 0 and enabled and layer == middle:
 		facing_direction = sign(scale.x)
 		scale.x = abs(scale.x)
 		
@@ -193,7 +193,7 @@ func _physics_process(delta):
 	
 	if !loaded and visibility_notifier and visibility_notifier.is_on_screen():
 		loaded = true
-	if mode != 1 and enabled and !dead and loaded:
+	if mode != 1 and enabled and !dead and loaded and layer == middle:
 		var level_bounds = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].settings.bounds
 		if !hit:
 			# Run the appropriate physics process function

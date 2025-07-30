@@ -7,6 +7,7 @@ func _ready():
 		z_index = 0
 		$Sprite.z_index = 0
 	$StaticBody2D/CollisionShape2D.disabled = !enabled
+	$StaticBody2D/CollisionShape2D.disabled = !layer == middle
 
 	if palette != 0:
 		$Sprite.texture = palette_textures[palette - 1]

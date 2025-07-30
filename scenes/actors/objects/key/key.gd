@@ -114,6 +114,7 @@ func update_property(key, value):
 func _ready():
 	if id in Singleton.CheckpointSaved.current_local_keys:
 		queue_free()
-	var _connect = area.connect("body_entered", self, "collect")
-	_connect = connect("property_changed", self, "update_property")
+	if enabled and layer == middle:
+		var _connect = area.connect("body_entered", self, "collect")
+	var _connect = connect("property_changed", self, "update_property")
 	update_property("color", color)
