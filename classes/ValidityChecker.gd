@@ -264,7 +264,11 @@ func decode(code: String)-> Dictionary:
 			full_result.areas[area_id].settings.timer = value_util.decode_value(area_settings_array[6])
 		else:
 			full_result.areas[area_id].settings.timer = 0.00
-		
+			
+		if area_settings_array.size() > 7:
+			full_result.areas[area_id].settings.name = value_util.decode_value(area_settings_array[7])
+		else:
+			full_result.areas[area_id].settings.name = ""
 		
 		
 		if(conversion_util.compareVersions(full_result.format_version, "0.4.5") == -1):
@@ -318,6 +322,88 @@ func decode(code: String)-> Dictionary:
 					index += 1
 				full_result.areas[area_id].objects.append(decoded_object)
 	
+	return full_result
+	
+func decode_area(area: String):
+	var area_array = area.split("~")
+	var area_settings_array = area_array[0].split(",")
+	var full_result = {}
+	
+	if (area_settings_array.size() < 4):
+		full_result = {"decode_error":true}
+		invalid_reason = "Area"\
+		+" missing required value(s)- foreground, background, "\
+		+"music, or gravity."
+		return full_result
+	
+	full_result.settings = {}
+	full_result.settings.size = value_util.decode_value(area_settings_array[0])
+	full_result.settings.sky = value_util.decode_value(area_settings_array[1])
+	full_result.settings.background = value_util.decode_value(area_settings_array[2])
+	full_result.settings.music = value_util.decode_value(area_settings_array[3])
+	if area_settings_array.size() > 4:
+		full_result.settings.gravity = value_util.decode_value(area_settings_array[4])
+	else:
+		full_result.settings.gravity = 7.82
+	
+	if area_settings_array.size() > 5:
+		full_result.settings.background_palette = value_util.decode_value(area_settings_array[5])
+	else:
+		full_result.settings.background_palette = 0
+	
+	if area_settings_array.size() > 6:
+		full_result.settings.timer = value_util.decode_value(area_settings_array[6])
+	else:
+		full_result.settings.timer = 0.00
+		
+	if area_settings_array.size() > 7:
+		full_result.settings.name = value_util.decode_value(area_settings_array[7])
+	
+	
+	var area_tiles_array = area_array[1].split(",")
+	full_result.foreground_tiles = []
+	for tile in area_tiles_array:
+		full_result.foreground_tiles.append(tile)
+		
+	var area_very_background_tiles_array = area_array[2].split(",")
+	full_result.very_background_tiles = []
+	for tile in area_very_background_tiles_array:
+		full_result.very_background_tiles.append(tile)
+
+	var area_background_tiles_array = area_array[3].split(",")
+	full_result.background_tiles = []
+	for tile in area_background_tiles_array:
+		full_result.background_tiles.append(tile)
+		
+	var area_foreground_tiles_array = area_array[4].split(",")
+	full_result.very_foreground_tiles = []
+	for tile in area_foreground_tiles_array:
+		full_result.very_foreground_tiles.append(tile)
+		
+	full_result.objects = []
+	if area_array.size() > 5:
+		var objects_array = area_array[5].split("|")
+		for object in objects_array:
+			var object_array = object.split(",")
+			var decoded_object = {}
+			decoded_object.properties = []
+			decoded_object.type_id = int(object_array[0])
+			if (!is_object_multiplayer_compatible(decoded_object.type_id,self)):
+				full_result = {"decode_error":true}
+				invalid_reason = "Area"\
+				+" has an object incompatible with multiplayer ("\
+				+get_object_name(decoded_object.type_id)+")\nPlease turn off multiplayer to play"\
+				+" or edit this level."
+				return full_result
+			var start_index = 1
+			start_index = 0
+			decoded_object.palette = 0
+			var index = 0
+			for value in object_array:
+				if index > start_index:
+					decoded_object.properties.append(value_util.decode_value(value))
+				index += 1
+			full_result.objects.append(decoded_object)
 	return full_result
 
 func load_in(code: String)-> void:

@@ -6,6 +6,7 @@ var mouse_input: int = -1
 
 
 func _click_left(_event: InputEvent, _world_pos: Vector2) -> void:
+	print(shared.get_tile(9999, 9999, 2))
 	if mouse_input > -1:
 		return
 	
@@ -32,6 +33,7 @@ func _mouse_movement(_event: InputEvent, world_pos: Vector2) -> void:
 				draw_tile(point)
 		
 		last_mouse_tile = mouse_tile
+	print(last_mouse_tile)
 
 
 func draw_tile(pos: Vector2) -> void:

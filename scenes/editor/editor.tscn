@@ -1,4 +1,4 @@
-[gd_scene load_steps=91 format=2]
+[gd_scene load_steps=94 format=2]
 
 [ext_resource path="res://scenes/menu/options/options.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/menu/menu_controller/screen_manager.gd" type="Script" id=2]
@@ -68,6 +68,9 @@
 [ext_resource path="res://scenes/editor/item_preview.gd" type="Script" id=66]
 [ext_resource path="res://scenes/editor/windows/object_property_editor/object_settings_window.tscn" type="PackedScene" id=67]
 [ext_resource path="res://scenes/editor/layer_picker.gd" type="Script" id=68]
+[ext_resource path="res://scenes/editor/tools/tile_fill.gd" type="Script" id=69]
+[ext_resource path="res://scenes/editor/tools/tile_rect_fill.tscn" type="PackedScene" id=70]
+[ext_resource path="res://scenes/editor/tools/tile_lock_tool.gd" type="Script" id=71]
 
 [sub_resource type="CanvasItemMaterial" id=176]
 blend_mode = 1
@@ -203,6 +206,12 @@ mouse_filter = 2
 script = ExtResource( 12 )
 inverse_tool_name = "ObjectErase"
 
+[node name="TileFill" type="Control" parent="ZIndex/Tools"]
+mouse_filter = 2
+script = ExtResource( 69 )
+
+[node name="TileRectFill" parent="ZIndex/Tools" instance=ExtResource( 70 )]
+
 [node name="ObjectPaint" type="Control" parent="ZIndex/Tools"]
 mouse_filter = 2
 script = ExtResource( 25 )
@@ -214,6 +223,10 @@ mouse_filter = 2
 script = ExtResource( 11 )
 tool_type = 1
 inverse_tool_name = "TileErase"
+
+[node name="ObjectTileLock" type="Control" parent="ZIndex/Tools"]
+mouse_filter = 2
+script = ExtResource( 71 )
 
 [node name="ObjectSelection" parent="ZIndex/Tools" instance=ExtResource( 34 )]
 unique_name_in_owner = true
@@ -234,6 +247,11 @@ collision_mask = 0
 navigation_layers = 0
 occluder_light_mask = 0
 format = 1
+
+[node name="ObjectBuffer" type="Control" parent="."]
+unique_name_in_owner = true
+margin_right = 40.0
+margin_bottom = 40.0
 
 [node name="ActionManager" type="Node" parent="."]
 unique_name_in_owner = true
@@ -919,9 +937,9 @@ size_flags_horizontal = 3
 
 [node name="Tools" type="PanelContainer" parent="UI/UIContainer/EditorUI/Middle"]
 margin_left = 718.0
-margin_top = 156.0
+margin_top = 114.0
 margin_right = 750.0
-margin_bottom = 260.0
+margin_bottom = 302.0
 mouse_filter = 2
 size_flags_vertical = 4
 theme_type_variation = "FlatPanel"
@@ -932,7 +950,7 @@ editor_path = NodePath("../../../../..")
 margin_left = 4.0
 margin_top = 4.0
 margin_right = 28.0
-margin_bottom = 100.0
+margin_bottom = 184.0
 mouse_filter = 2
 
 [node name="Object" type="VBoxContainer" parent="UI/UIContainer/EditorUI/Middle/Tools/VBoxContainer"]
@@ -1016,7 +1034,7 @@ margin_bottom = 104.0
 [node name="ItemTools" type="VBoxContainer" parent="UI/UIContainer/EditorUI/Middle/Tools/VBoxContainer"]
 unique_name_in_owner = true
 margin_right = 24.0
-margin_bottom = 96.0
+margin_bottom = 180.0
 mouse_filter = 2
 
 [node name="Paint" type="Button" parent="UI/UIContainer/EditorUI/Middle/Tools/VBoxContainer/ItemTools"]
@@ -1077,18 +1095,39 @@ icon_align = 1
 expand_icon = true
 script = ExtResource( 24 )
 
+[node name="VSeparator4" type="HSeparator" parent="UI/UIContainer/EditorUI/Middle/Tools/VBoxContainer/ItemTools"]
+visible = false
+margin_top = 108.0
+margin_right = 24.0
+margin_bottom = 112.0
+
+[node name="TileFill" type="Button" parent="UI/UIContainer/EditorUI/Middle/Tools/VBoxContainer/ItemTools"]
+unique_name_in_owner = true
+margin_top = 100.0
+margin_right = 24.0
+margin_bottom = 124.0
+rect_min_size = Vector2( 24, 24 )
+hint_tooltip = "Fill Tool"
+size_flags_vertical = 3
+theme_type_variation = "ButtonTransparent"
+toggle_mode = true
+group = SubResource( 167 )
+icon = ExtResource( 46 )
+icon_align = 1
+expand_icon = true
+script = ExtResource( 24 )
+
 [node name="VSeparator3" type="HSeparator" parent="UI/UIContainer/EditorUI/Middle/Tools/VBoxContainer/ItemTools"]
 visible = false
 margin_top = 100.0
 margin_right = 24.0
 margin_bottom = 104.0
 
-[node name="RectangleFill" type="Button" parent="UI/UIContainer/EditorUI/Middle/Tools/VBoxContainer/ItemTools"]
+[node name="TileRectFill" type="Button" parent="UI/UIContainer/EditorUI/Middle/Tools/VBoxContainer/ItemTools"]
 unique_name_in_owner = true
-visible = false
-margin_top = 108.0
+margin_top = 128.0
 margin_right = 24.0
-margin_bottom = 132.0
+margin_bottom = 152.0
 rect_min_size = Vector2( 24, 24 )
 hint_tooltip = "Rectangle Fill Tool"
 focus_mode = 0
@@ -1101,18 +1140,17 @@ icon_align = 1
 expand_icon = true
 script = ExtResource( 24 )
 
-[node name="VSeparator4" type="HSeparator" parent="UI/UIContainer/EditorUI/Middle/Tools/VBoxContainer/ItemTools"]
+[node name="VSeparator5" type="HSeparator" parent="UI/UIContainer/EditorUI/Middle/Tools/VBoxContainer/ItemTools"]
 visible = false
 margin_top = 108.0
 margin_right = 24.0
 margin_bottom = 112.0
 
-[node name="TileLock" type="Button" parent="UI/UIContainer/EditorUI/Middle/Tools/VBoxContainer/ItemTools"]
+[node name="ObjectLock" type="Button" parent="UI/UIContainer/EditorUI/Middle/Tools/VBoxContainer/ItemTools"]
 unique_name_in_owner = true
-visible = false
-margin_top = 144.0
+margin_top = 156.0
 margin_right = 24.0
-margin_bottom = 168.0
+margin_bottom = 180.0
 rect_min_size = Vector2( 24, 24 )
 hint_tooltip = "Tile Lock Tool"
 focus_mode = 0
@@ -1476,6 +1514,7 @@ open_text = ">"
 close_text = "<"
 
 [node name="EditorOptionsWindow" parent="UI" instance=ExtResource( 14 )]
+unique_name_in_owner = true
 visible = false
 margin_left = 10.0
 margin_top = 62.0

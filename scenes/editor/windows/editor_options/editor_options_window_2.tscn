@@ -206,15 +206,29 @@ margin_right = 368.0
 margin_bottom = 35.0
 size_flags_horizontal = 3
 
-[node name="Add" type="Button" parent="ContentDivider/ContentMat/Tabs/Areas/VBoxContainer" index="0"]
-margin_right = 411.0
+[node name="HBoxContainer" type="HBoxContainer" parent="ContentDivider/ContentMat/Tabs/Areas/VBoxContainer" index="0"]
+margin_right = 414.0
 margin_bottom = 19.0
+custom_constants/separation = 16
+
+[node name="Add" type="Button" parent="ContentDivider/ContentMat/Tabs/Areas/VBoxContainer/HBoxContainer" index="0"]
+margin_right = 199.0
+margin_bottom = 19.0
+size_flags_horizontal = 3
 size_flags_vertical = 4
 text = "Add"
 
+[node name="Paste" type="Button" parent="ContentDivider/ContentMat/Tabs/Areas/VBoxContainer/HBoxContainer" index="1"]
+margin_left = 215.0
+margin_right = 414.0
+margin_bottom = 19.0
+size_flags_horizontal = 3
+size_flags_vertical = 4
+text = "Paste"
+
 [node name="AreaPanel" parent="ContentDivider/ContentMat/Tabs/Areas/VBoxContainer" index="1" instance=ExtResource( 4 )]
 margin_top = 23.0
-margin_right = 411.0
+margin_right = 414.0
 margin_bottom = 99.0
 
 [node name="Environment" type="ScrollContainer" parent="ContentDivider/ContentMat/Tabs" index="2"]
@@ -471,3 +485,5 @@ margin_bottom = 220.0
 [node name="Control" parent="." index="4"]
 margin_right = 400.0
 margin_bottom = 220.0
+
+[connection signal="button_down" from="ContentDivider/ContentMat/Tabs/Areas/VBoxContainer/HBoxContainer/Paste" to="ContentDivider/ContentMat/Tabs/Areas" method="paste_area"]

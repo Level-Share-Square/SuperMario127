@@ -1874,6 +1874,7 @@ rect_clip_content = true
 script = ExtResource( 9 )
 
 [node name="Focus" type="Control" parent="Panel/Subscreens/AddElement"]
+visible = false
 margin_left = 12.0
 margin_top = 12.0
 margin_right = 660.0

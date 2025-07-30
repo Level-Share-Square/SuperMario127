@@ -9,7 +9,6 @@ onready var current_tool: EditorTool = $ObjectPaint
 
 signal tool_changed()
 
-
 func _unhandled_input(event: InputEvent) -> void:
 	mouse_position = get_global_mouse_position()
 	
@@ -65,8 +64,10 @@ func _on_Tools_tool_picked(tool_name):
 				change_tool("TileErase")
 		"Select":
 			current_tool = $ObjectSelection #Until we get Tile Selection #Also no clue why it isn't recognizing get_node("ObjectSelection")
-		"RectangleFill":
-			pass
-		"TileLock":
-			pass
+		"TileFill":
+			change_tool("TileFill")
+		"TileRectFill":
+			change_tool("TileRectFill")
+		"ObjectLock":
+			change_tool("ObjectTileLock")
 		
