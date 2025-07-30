@@ -305,3 +305,7 @@ func goonie_physics_process(delta: float):
 
 func goonie_platform_area_exited(body):
 	pass
+	
+func is_middle(check: bool):
+	stomp_area_wing.get_node("CollisionShape2D").disabled = !check
+	attack_area.get_node("CollisionShape2D").disabled = !check

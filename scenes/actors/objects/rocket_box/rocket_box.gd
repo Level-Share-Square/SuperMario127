@@ -51,7 +51,7 @@ func exit_area(body):
 func enter_detector(body):
 	if !loaded_activated:
 		return
-	if body.name.begins_with("Character") and respawn_timer == 0 and enabled and body.velocity.y > 0:
+	if body.name.begins_with("Character") and respawn_timer == 0 and enabled and body.velocity.y > 0 and layer == middle:
 		respawn_timer = 10.0
 		if body.state != body.get_state_node("GroundPoundState"):
 			body.velocity.y = -230

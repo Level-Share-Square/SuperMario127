@@ -53,7 +53,7 @@ var current_weights := []
 var scale_x : float
 
 func _ready():
-	if !enabled:
+	if !enabled or !layer == middle:
 		collision_shape.disabled = true
 		area_collision_shape.disabled = true
 		platform_area_collision_shape.disabled = true

@@ -4,7 +4,7 @@ onready var static_body : StaticBody2D = $StaticBody2D
 onready var collision_shape : CollisionShape2D = $StaticBody2D/CollisionShape2D
 
 func _ready() -> void:
-	if !enabled:
+	if !enabled or !layer == middle:
 		collision_shape.disabled = true
 	elif scale != Vector2.ONE: # Nothing to do on default scale
 		# Set inverse scale on the body so its overall scale is identity.

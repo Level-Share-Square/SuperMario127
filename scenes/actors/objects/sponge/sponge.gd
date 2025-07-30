@@ -33,7 +33,7 @@ func change_size():
 func _ready():
 	if get_tree().get_current_scene().mode == 0:
 		sponge_range_sprite.visible = false
-	if !enabled:
+	if !enabled or !layer == middle:
 		area_collision.disabled = true
 		collision_shape.disabled = true
 		

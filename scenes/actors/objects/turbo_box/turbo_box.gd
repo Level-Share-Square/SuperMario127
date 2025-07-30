@@ -115,3 +115,8 @@ func _process(_delta):
 			collision_shape.disabled = true
 		if character.velocity.y > 10 and direction.y < -0.5:
 			collision_shape.disabled = true
+
+func is_middle(check):
+	.is_middle(check)
+	
+	$StompDetector/CollisionShape2D.disabled = !check

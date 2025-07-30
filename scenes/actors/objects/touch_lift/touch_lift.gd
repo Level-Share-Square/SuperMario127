@@ -124,8 +124,8 @@ onready var part_width = platform_sprite.texture.get_width() - left_width - righ
 func _ready():
 	activated = !touch_start
 	$TouchLiftPlatform/Area2D/CollisionShape2D.disabled = false
-	platform.collision_shape.disabled = !enabled
-	platform.platform_area_collision_shape.disabled = !enabled
+	platform.collision_shape.disabled = !enabled or !layer == middle
+	platform.platform_area_collision_shape.disabled = !enabled or !layer == middle
 	
 	platform.platform_area_collision_shape.get_parent().connect("body_entered", self, "_on_touch_area_entered")
 	if curve.get_point_count() == 0:

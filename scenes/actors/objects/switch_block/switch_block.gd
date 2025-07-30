@@ -21,7 +21,7 @@ func _ready():
 	init()
 	hit_bounce_enabled = false
 	connect("property_changed", self, "_on_property_changed")
-	if !enabled:
+	if !enabled or !layer == middle:
 		$StaticBody2D.set_collision_layer_bit(0, false)
 	if mode != 1:
 		hit_area.connect("body_entered", self, "_on_hit_body_entered")

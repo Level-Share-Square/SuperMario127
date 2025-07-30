@@ -43,17 +43,17 @@ func _physics_process(delta):
 		if triggered:
 			particles.emitting = true
 			for body in area.get_overlapping_bodies():
-				if enabled and body is Character and !body.dead and body.controllable:
+				if enabled and body is Character and !body.dead and body.controllable and layer == middle:
 					if !is_instance_valid(body.powerup):
 						character_apply_wind(body, delta)
 					else:
 						if body.powerup != body.get_powerup_node("MetalPowerup"):
 							character_apply_wind(body, delta)
 				
-				elif enabled and body is EnemyBase:
+				elif enabled and body is EnemyBase and layer == middle:
 					body.velocity = apply_velocity(body.velocity, delta)
 						
-				elif enabled and not (body is Character) and "velocity" in body:
+				elif enabled and not (body is Character) and "velocity" in body and layer == middle:
 					var body_object = body.get_parent()
 					body_object.velocity = apply_velocity(body_object.velocity, delta)
 		else:
@@ -116,18 +116,18 @@ func update_property(key, value):
 	update_size()
 
 func entered(body):
-	if enabled and body is EnemyBase:
+	if enabled and body is EnemyBase and layer == middle:
 		body.snap_enabled = false
-	if enabled and body is Character and !body.dead and body.controllable:
+	if enabled and body is Character and !body.dead and body.controllable and layer == middle:
 		body.velocity += Vector2(wind_power, wind_power)*wind_angle_vector
 	if triggerable:
 		particles.preprocess = 0
 		triggered = true
 
 func exited(body):
-	if enabled and body is EnemyBase:
+	if enabled and body is EnemyBase and layer == middle:
 		body.snap_enabled = true
-	elif enabled and body is Character and !body.dead and body.controllable:
+	elif enabled and body is Character and !body.dead and body.controllable and layer == middle:
 		body.in_wind = false
 		if wind_angle_vector.x != 0 and body.velocity.x >= (wind_power*wind_angle_vector.y)*18:
 			body.velocity.x = body.velocity.x*.95

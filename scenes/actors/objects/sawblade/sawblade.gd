@@ -101,3 +101,6 @@ func _physics_process(delta):
 		#beautiful logic right here (makes saw move back and forward
 		if pathfollow.offset >= path.curve.get_baked_length() or pathfollow.offset <= 0:
 			working_speed = -working_speed
+
+func is_middle(check: bool):
+	$Path2D/PathFollow2D/Saw/Area2D/CollisionShape2D.disabled = !check
