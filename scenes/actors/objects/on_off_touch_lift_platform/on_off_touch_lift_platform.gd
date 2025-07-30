@@ -16,6 +16,8 @@ onready var part_width = 6
 
 onready var inverted: bool = get_parent().inverted
 onready var enabled: bool = get_parent().enabled
+onready var layer: int = get_parent().layer
+onready var middle: int = get_parent().middle
 
 onready var parent = get_parent()
 
@@ -97,8 +99,8 @@ func toggle_state():
 
 func switch_state(new_state):
 		if(parent.disappears):
-			collision_shape.set_deferred("disabled", not enabled or not new_state)
-			platform_area_collision_shape.set_deferred("disabled", not enabled or not new_state)
+			collision_shape.set_deferred("disabled", not enabled or not new_state or not layer == middle)
+			platform_area_collision_shape.set_deferred("disabled", not enabled or not new_state or not layer == middle)
 			animation_player.play(str(new_state).to_lower())
 			sprite.visible = new_state
 			sprite2.visible = !new_state
@@ -123,3 +125,6 @@ func _on_Area2D_body_exited(body):
 	if "state" in body and !is_instance_valid(body.state):
 		body.set_state_by_name("FallState")
 		#self.apply_velocity = false
+
+func is_middle(check: bool):
+	return

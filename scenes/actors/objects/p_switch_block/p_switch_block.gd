@@ -55,3 +55,7 @@ func _physics_process(delta):
 	else:
 		sprite.modulate = activated_color if activated else deactivated_color
 		collision_shape.disabled = !activated
+
+func is_middle(check):
+	.is_middle(check)
+	collision_shape.disabled = !check

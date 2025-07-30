@@ -108,3 +108,8 @@ func depth_check(pos: Vector2):
 		return DepthResults.Sinking
 	else:
 		return DepthResults.Surface
+
+func is_middle(check: bool):
+	.is_middle(check)
+	
+	$LiquidArea/CollisionShape2D.disabled = !check

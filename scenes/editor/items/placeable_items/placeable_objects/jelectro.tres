@@ -1,7 +1,7 @@
 [gd_resource type="Resource" load_steps=4 format=2]
 
 [ext_resource path="res://scenes/actors/objects/jelectro/icon.png" type="Texture" id=1]
-[ext_resource path="res://scenes/actors/objects/jelectro/jelectro.png" type="Texture" id=2]
+[ext_resource path="res://scenes/actors/objects/jelectro/preview.png" type="Texture" id=2]
 [ext_resource path="res://scenes/editor/items/placeable_object.gd" type="Script" id=3]
 
 [resource]

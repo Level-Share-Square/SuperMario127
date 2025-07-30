@@ -223,7 +223,6 @@ func attempt_enable_collision(body : PhysicsBody2D = null) -> void:
 	cannon_moveable.z_index = Z_INDEX_FOREGROUND * int(can_enable_collision) + Z_INDEX_BACKGROUND * int(!can_enable_collision)
 
 func is_middle(check):
-	.is_middle(check)
 	
 	$EntranceCollision/CollisionShape2D.disabled = !check
 	$NearbyCharacterDetection/CollisionShape2D.disabled = !check

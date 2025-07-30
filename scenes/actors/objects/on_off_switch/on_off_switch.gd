@@ -25,7 +25,7 @@ func _ready():
 #
 	sprite.region_rect.position.x = int(!Singleton.CurrentLevelData.level_data.vars.switch_state.has(palette)) * 32
 	
-	if !enabled:
+	if !enabled or !layer == middle:
 		$StaticBody2D.set_collision_layer_bit(0, false)
 
 	sprite.region_rect.position.y = palette * 32
@@ -58,3 +58,7 @@ func _on_curve_tween(value):
 	sprite.position = value
 	sprite.reset_physics_interpolation()
 
+func is_middle(check: bool):
+	.is_middle(check)
+	
+	hit_collider.get_node("CollisionShape2D").disabled = !check
