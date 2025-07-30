@@ -49,7 +49,7 @@ func set_tile(x: int, y: int, layer: int, tileset_id: int, tile_id: int, palette
 	tilemaps_node.set_tile(x, y, convert_layer(layer), tileset_id, tile_id, palette_id)
 
 func get_tile(x: int, y:int, layer: int):
-	return tilemaps_node.get_tile_in_data(x, y, layer)
+	return tilemaps_node.get_tile_in_data(x, y, convert_layer(layer))
 
 func create_object(object, add_to_data):
 	return objects_node.create_object(object, add_to_data)

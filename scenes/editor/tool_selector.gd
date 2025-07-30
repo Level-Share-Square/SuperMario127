@@ -12,17 +12,32 @@ signal tool_picked(tool_name)
 func _ready():
 	for button in item_tools.get_children():
 		if button is Button:
+			detect_tool_buttons(button)
 			button.connect("button_down", self, "on_button_pressed", [button])
+			
 	
 func on_button_pressed(button):
 	emit_signal("tool_picked", button.name)
 	
-
+func detect_tool_buttons(button: Button):
+	yield(get_tree(), "idle_frame")
+	print(button.name)
+	if "Tile" in button.name && "Object" in editor.tool_manager.current_tool.name:
+		button.hide()
+		return
+	else:
+		button.show()
+	if "Object" in button.name && "Tile" in editor.tool_manager.current_tool.name:
+		button.hide()
+		return
+	else:
+		button.show()
 
 func _on_Tools_tool_changed():
 	for button in item_tools.get_children():
 		if button.name in editor.tool_manager.current_tool.name:
 			button.pressed = true
 		elif button is Button:
+			detect_tool_buttons(button)
 			button.pressed = false
 			

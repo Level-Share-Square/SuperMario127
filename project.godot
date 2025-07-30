@@ -854,6 +854,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/shared/tilemap_layer.gd"
 }, {
+"base": "EditorTool",
+"class": "TileRectFill",
+"language": "GDScript",
+"path": "res://scenes/editor/tools/tile_rect_fill.gd"
+}, {
 "base": "Control",
 "class": "TimerBase",
 "language": "GDScript",
@@ -1179,6 +1184,7 @@ _global_script_class_icons={
 "Teleporter": "",
 "ThumbnailDownloader": "",
 "TileMapLayer": "",
+"TileRectFill": "",
 "TimerBase": "",
 "TimerManager": "",
 "ToolManager": "",
