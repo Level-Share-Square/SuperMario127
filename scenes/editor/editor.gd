@@ -21,6 +21,7 @@ var selected_item: PlaceableItem
 onready var editor_camera: Camera2D = $"%EditorCamera"
 onready var tool_manager: ToolManager = $"%Tools"
 onready var tile_buffer: TileMap = $"%TileBuffer"
+onready var object_buffer = $"%ObjectBuffer"
 onready var action_manager: ActionManager = $"%ActionManager"
 
 onready var save_button = $UI/EditorUI/Utilities/Save
@@ -80,6 +81,7 @@ func _physics_process(delta):
 
 
 func object_hovered(object: GameObject):
+	print("man")
 	if tool_manager.current_tool.tool_type == EditorTool.Type.TileTool:
 		return
 	

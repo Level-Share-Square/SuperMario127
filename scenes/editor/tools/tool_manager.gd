@@ -68,4 +68,6 @@ func _on_Tools_tool_picked(tool_name):
 			change_tool("TileFill")
 		"TileRectFill":
 			change_tool("TileRectFill")
+		"ObjectLock":
+			change_tool("ObjectTileLock")
 		

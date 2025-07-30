@@ -35,9 +35,9 @@ func detect_tool_buttons(button: Button):
 
 func _on_Tools_tool_changed():
 	for button in item_tools.get_children():
-		if button.name in editor.tool_manager.current_tool.name:
-			button.pressed = true
-		elif button is Button:
-			detect_tool_buttons(button)
-			button.pressed = false
-			
+		if button is Button:
+			if button.name in editor.tool_manager.current_tool.name:
+				button.pressed = true
+			else:
+				button.pressed = false
+				
