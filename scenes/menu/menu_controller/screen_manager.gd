@@ -17,8 +17,7 @@ func _ready():
 		if screen.visible:
 			# do open animation sped-up so its visible if the
 			# reset vars normally make it invisible
-			if not screen.overwrite_default_transition:
-				screen.animation_player.play("transition", -1, -INF, true)
+			screen.animation_player.play("transition", -1, -INF, true)
 			screen.emit_signal("screen_opened")
 
 
@@ -35,9 +34,8 @@ func screen_change(new_screen_name: String):
 	current_screen = new_screen
 	
 	new_screen.animation_player.play_backwards("transition")
-#	set_deferred("screen.visible", true)
 	new_screen.visible = true
-
+	
 	if new_screen.music_id > -1:
 		Singleton.Music.change_song(Singleton.Music.last_song, new_screen.music_id)
 	

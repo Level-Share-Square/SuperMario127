@@ -7,8 +7,6 @@ signal screen_change(new_screen_name)
 export var music_id: int = -1
 onready var animation_player = $AnimationPlayer
 
-export var overwrite_default_transition: bool = false
-
 
 func transition(new_screen_name: String):
 	if is_instance_valid(get_focus_owner()): 
@@ -22,8 +20,3 @@ func transition(new_screen_name: String):
 
 func animation_finished(_anim_name: String, new_screen_name: String):
 	emit_signal("screen_change", new_screen_name)
-
-
-
-func _on_Preamble_screen_change(new_screen_name, extra_arg_0):
-	pass # Replace with function body.

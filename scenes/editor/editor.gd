@@ -21,10 +21,11 @@ var selected_item: PlaceableItem
 onready var editor_camera: Camera2D = $"%EditorCamera"
 onready var tool_manager: ToolManager = $"%Tools"
 onready var tile_buffer: TileMap = $"%TileBuffer"
+onready var object_buffer = $"%ObjectBuffer"
 onready var action_manager: ActionManager = $"%ActionManager"
 
 onready var save_button = $UI/EditorUI/Utilities/Save
-onready var editor_options = $UI/EditorOptionsWindow
+onready var editor_options = $"%EditorOptionsWindow"
 onready var selection_box = $"%ObjectSelection".get_node("SelectionBox")
 onready var edit_selection = $"%EditSelection"
 onready var item_preview = $"%ItemPreview"
@@ -67,9 +68,19 @@ func _ready():
 	
 		Singleton.CurrentLevelData.unsaved_editor_changes = false
 
+func _physics_process(delta):
+	if !hovered_objects.empty():
+		yield(get_tree(), "physics_frame")
+		if Input.is_action_just_pressed("LMB") && "ObjectPaint" in tool_manager.current_tool.name:
+			var closest_object = hovered_objects.values()[0]
+			for object in hovered_objects.values():
+				if Vector2(abs(object.global_position.x - get_global_mouse_position().x), abs(object.global_position.y - get_global_mouse_position().y)) < closest_object.global_position:
+					closest_object = object
+			tool_manager.current_tool.select(closest_object)
+
 
 func object_hovered(object: GameObject):
-	print(object.position)
+	print("man")
 	if tool_manager.current_tool.tool_type == EditorTool.Type.TileTool:
 		return
 	

@@ -1,0 +1,32 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://scenes/editor/windows/object_property_editor/misc_property_scenes/property_editor.gd" type="Script" id=1]
+
+[node name="Fallback" type="HBoxContainer"]
+margin_top = 26.0
+margin_right = 232.0
+margin_bottom = 43.0
+script = ExtResource( 1 )
+
+[node name="PropertyName" type="Label" parent="."]
+unique_name_in_owner = true
+margin_top = 1.0
+margin_right = 60.0
+margin_bottom = 15.0
+rect_min_size = Vector2( 60, 0 )
+mouse_filter = 1
+mouse_default_cursor_shape = 16
+text = "Property:"
+
+[node name="Padding" type="Control" parent="."]
+margin_left = 64.0
+margin_right = 71.0
+margin_bottom = 17.0
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="."]
+margin_left = 75.0
+margin_top = 1.0
+margin_right = 232.0
+margin_bottom = 15.0
+text = "Unsupported (pls report)"

@@ -37,10 +37,13 @@ var z_layer: int = 0
 var is_preview : bool = false
 
 var base_savable_properties: PoolStringArray = ["position", "scale", "rotation_degrees", "enabled", "visible", "layer"]
+var base_hidden_properties: PoolStringArray = []
 var savable_properties: PoolStringArray = []
 
 var base_editable_properties: PoolStringArray = ["enabled", "visible", "rotation_degrees", "scale", "position", "layer"]
 var editable_properties: PoolStringArray = []
+
+var property_hints: PoolStringArray = []
 
 var property_value_to_name := {}
 var property_value_menus := {}
@@ -119,6 +122,8 @@ func _ready():
 	
 	update_layer()
 	yield(get_tree().create_timer(0.1), "timeout")
+	
+	property_hints.resize(editable_properties.size())
 
 
 func create_collision_polygons_from_tree(node: Node, node_transform: Transform2D, array: Array) -> void:

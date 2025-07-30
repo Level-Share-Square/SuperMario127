@@ -17,7 +17,7 @@ var is_blue := false
 
 func _set_properties():
 	savable_properties = ["id"]
-	editable_properties = ["id"]
+	editable_properties = []
 
 func _set_property_values():
 	set_property("id", id, true, "ID")
