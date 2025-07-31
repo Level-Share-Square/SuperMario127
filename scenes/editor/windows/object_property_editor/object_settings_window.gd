@@ -15,6 +15,9 @@ var property_tallies: Dictionary
 
 
 func load_objects(_objects: Dictionary):
+	for game_object in objects.keys():
+		game_object.disconnect("tree_exited", self, "close")
+	
 	objects = _objects
 	
 	common_properties = []
@@ -30,9 +33,10 @@ func load_objects(_objects: Dictionary):
 	).instance()
 	property_groups.add_child(base_tab)
 	
-	for _game_object in objects.keys():
-		var game_object: GameObject = _game_object
+	for game_object in objects.keys():
 		var item: PlaceableItem = objects[game_object]
+		
+		game_object.connect("tree_exited", self, "close")
 		
 		window_title.text = TITLE_TEXT % item.item_name
 		window_icon.texture = item.icons[item.palette]

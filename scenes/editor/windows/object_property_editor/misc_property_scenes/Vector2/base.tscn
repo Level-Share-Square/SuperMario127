@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://scenes/editor/windows/object_property_editor/misc_property_scenes/property_editor.gd" type="Script" id=1]
+[ext_resource path="res://scenes/editor/windows/object_property_editor/misc_property_scenes/Vector2/base.gd" type="Script" id=1]
 [ext_resource path="res://scenes/menu/spinbox_unfocus.gd" type="Script" id=2]
 
 [node name="Vector2" type="HBoxContainer"]
@@ -53,3 +53,6 @@ allow_lesser = true
 align = 1
 custom_arrow_step = 1.0
 script = ExtResource( 2 )
+
+[connection signal="value_changed" from="X" to="." method="change_property"]
+[connection signal="value_changed" from="Y" to="." method="change_property"]

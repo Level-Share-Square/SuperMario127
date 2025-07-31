@@ -1188,7 +1188,7 @@ func encode_int_bytes(val: int, num: int) -> PoolByteArray:
 	return output
 	
 func switch_areas(area_id, transition_time):
-	Singleton.SceneTransitions.reload_scene(cutout_circle, cutout_circle, transition_time, area_id, false, false)
+	Singleton.SceneTransitions.reload_scene(cutout_circle, cutout_circle, transition_time, area_id, false)
 	if !switched:
 		if Singleton.PlayerSettings.other_player_id != -1:
 			get_tree().multiplayer.send_bytes(JSON.print(["area", area_id, transition_time]).to_ascii())
@@ -1201,7 +1201,6 @@ func kill(cause: String) -> void:
 		if Singleton.PlayerSettings.other_player_id != -1:
 			get_tree().multiplayer.send_bytes(JSON.print(["reload"]).to_ascii())
 		dead = true
-		var reload := true
 		var cutout_in := cutout_circle
 		var cutout_out := cutout_circle
 		var transition_time := 0.75
@@ -1211,11 +1210,8 @@ func kill(cause: String) -> void:
 			"fall":
 				toggle_movement(false)
 				sound_player.play_fall_sound()
-				if number_of_players == 1:
-					cutout_in = cutout_death
-					yield(get_tree().create_timer(1), "timeout")
-				else:
-					reload = false
+				cutout_in = cutout_death
+				yield(get_tree().create_timer(1), "timeout")
 			"reload":
 				transition_time = 0.4
 			"green_demon":
@@ -1252,8 +1248,6 @@ func kill(cause: String) -> void:
 				else:
 					sound_player.play_lava_hurt_sound()
 				yield(get_tree().create_timer(0.75), "timeout")
-				if number_of_players != 1:
-					reload = false
 			"timer":
 				sound_player.play_last_hit_sound()
 				toggle_movement(false)
@@ -1266,7 +1260,6 @@ func kill(cause: String) -> void:
 				yield(get_tree().create_timer(0.55), "timeout")
 				sound_player.play_timeout_sound()
 				yield(get_tree().create_timer(0.75), "timeout")
-				reload = true
 			"quicksand":
 				controllable = false
 				disable_movement = true
@@ -1275,11 +1268,8 @@ func kill(cause: String) -> void:
 #				sprite.speed_scale = 0
 #				sprite.frame = 0
 				sound_player.play_death_sound()
-				if number_of_players == 1:
-					cutout_in = cutout_death
-					yield(get_tree().create_timer(1), "timeout")
-				else:
-					reload = false
+				cutout_in = cutout_death
+				yield(get_tree().create_timer(1), "timeout")
 			"poison":
 				sound_player.play_last_hit_sound()
 				controllable = false
@@ -1294,31 +1284,7 @@ func kill(cause: String) -> void:
 				sound_player.play_death_sound()
 				yield(get_tree().create_timer(0.75), "timeout")
 				
-			
-		if reload:
-			Singleton.SceneTransitions.reload_scene(cutout_in, cutout_out, transition_time, 0, true)
-		else:
-			yield(get_tree().create_timer(3), "timeout")
-			set_powerup(null, false)
-			
-			health = 8
-			health_shards = 0
-			emit_signal("health_changed", health, health_shards)
-			
-			if Singleton.CheckpointSaved.current_checkpoint_id != -1 and Singleton.CheckpointSaved.current_area == Singleton.CurrentLevelData.area and Singleton.CurrentLevelData.level_data.vars.transition_data == []:
-				position = Singleton.CheckpointSaved.current_spawn_pos
-				reset_physics_interpolation()
-			else:
-				position = spawn_pos - Vector2(0, 16)
-				reset_physics_interpolation()
-			last_position = position # fixes infinite death bug
-			dead = false
-			movable = true
-			sprite.visible = true
-			death_sprite.visible = false
-			controllable = true
-			Singleton.CurrentLevelData.can_pause = true
-			set_state_by_name("FallState", 0)
+		Singleton.SceneTransitions.reload_scene(cutout_in, cutout_out, transition_time, 0, true)
 
 func exit() -> void:
 	#if the mode switcher button is not invisible, we're in edit mode, switch back to that, but if we're in play mode then for now just reload the scene
