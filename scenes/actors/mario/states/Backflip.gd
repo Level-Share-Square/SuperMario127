@@ -2,7 +2,7 @@ extends State
 
 class_name BackflipState
 
-const JUMP_SQUISH := Vector2(0.6, 1.4)
+const JUMP_SQUISH := Vector2(0.9, 1.2)
 
 var is_crouch = false
 var stop = false
