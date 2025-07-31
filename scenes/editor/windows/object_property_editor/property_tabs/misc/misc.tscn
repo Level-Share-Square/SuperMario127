@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/editor/windows/object_property_editor/property_tabs/misc/misc.gd" type="Script" id=1]
+[ext_resource path="res://scenes/oldeditor/sounds/click2.wav" type="AudioStream" id=2]
+[ext_resource path="res://scenes/oldeditor/sounds/hover.wav" type="AudioStream" id=3]
 
 [sub_resource type="StyleBoxEmpty" id=5]
 
@@ -23,3 +25,15 @@ scroll_horizontal_enabled = false
 unique_name_in_owner = true
 margin_right = 760.0
 size_flags_horizontal = 3
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource( 3 )
+volume_db = -10.0
+bus = "Sounds"
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource( 2 )
+volume_db = -10.0
+bus = "Sounds"

@@ -1,9 +1,7 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://scenes/editor/windows/object_property_editor/misc_property_scenes/property_editor.gd" type="Script" id=1]
+[ext_resource path="res://scenes/editor/windows/object_property_editor/misc_property_scenes/int/base.gd" type="Script" id=1]
 [ext_resource path="res://scenes/menu/spinbox_unfocus.gd" type="Script" id=2]
-[ext_resource path="res://scenes/oldeditor/sounds/click2.wav" type="AudioStream" id=3]
-[ext_resource path="res://scenes/oldeditor/sounds/hover.wav" type="AudioStream" id=4]
 
 [node name="Int" type="HBoxContainer"]
 margin_top = 26.0
@@ -38,14 +36,4 @@ allow_lesser = true
 custom_arrow_step = 1.0
 script = ExtResource( 2 )
 
-[node name="HoverSound" type="AudioStreamPlayer" parent="."]
-unique_name_in_owner = true
-stream = ExtResource( 4 )
-volume_db = -10.0
-bus = "Sounds"
-
-[node name="ClickSound" type="AudioStreamPlayer" parent="."]
-unique_name_in_owner = true
-stream = ExtResource( 3 )
-volume_db = -10.0
-bus = "Sounds"
+[connection signal="value_changed" from="SpinBox" to="." method="change_property"]

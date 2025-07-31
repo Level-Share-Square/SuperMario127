@@ -21,7 +21,7 @@ var transitioning = false
 const DARK_MODE_TRANSITION_COLOR = Color.black
 const TRANSITION_COLOR = Color.white
 
-func reload_scene(transition_in_tex = cutout_circle, transition_out_tex = cutout_circle, transition_time = 0.5, new_area = -1, clear_vars = false, r_press = true):
+func reload_scene(transition_in_tex = cutout_circle, transition_out_tex = cutout_circle, transition_time = 0.5, new_area = -1, clear_vars = false):
 	#if the button is invisible, then we're probably not in editing mode, but if it's visible make sure we don't reload the scene while it's switching
 	if Singleton.ModeSwitcher.get_node("ModeSwitcherButton").invisible or !Singleton.ModeSwitcher.get_node("ModeSwitcherButton").switching_disabled:
 		var volume_multiplier = Singleton.Music.volume_multiplier
@@ -29,8 +29,7 @@ func reload_scene(transition_in_tex = cutout_circle, transition_out_tex = cutout
 		yield(do_transition_animation(transition_in_tex, transition_time, TRANSITION_SCALE_UNCOVER, TRANSITION_SCALE_COVERED, volume_multiplier, volume_multiplier / 4, false, false), "completed")
 		
 		Singleton.CurrentLevelData.stop_tracking_time_score()
-		if !r_press:
-			get_tree().reload_current_scene()
+		get_tree().reload_current_scene()
 		if new_area != -1:
 			Singleton.CurrentLevelData.area = new_area
 			
