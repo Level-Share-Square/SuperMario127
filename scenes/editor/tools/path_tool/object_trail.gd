@@ -8,6 +8,7 @@ onready var widget_container = $"%WidgetContainer"
 onready var dist = $"%HSlider"
 onready var handle = $"%Handle"
 onready var handle_link = $"%HandleLink"
+onready var previews = $"%Previews"
 
 enum {MODE_PLACE, MODE_SELECT}
 
@@ -39,6 +40,7 @@ func _click_left(_event: InputEvent, _world_pos: Vector2):
 		texture_node.set_handles_active(true)
 	if handle_link.pressed:
 		texture_node._toggle_handle_link()
+	update_objects_array()
 
 
 func create_object_data(position: Vector2, object_id: int, palette: int) -> ObjectData:
@@ -61,18 +63,13 @@ func _on_Tools_tool_changed():
 	nodes.clear()
 	for icon in path_node_container.get_children():
 		icon.queue_free()
+	for preview in previews.get_children():
+		preview.queue_free()
 	widget_container.hide()
 
 
 func _on_Check_button_down():
-	var counter: int
-	for point in line.points:
-		if line.points.size() - 1 != line.points.find(point):
-			counter += 1
-			if counter == dist.value:
-				var data = create_object_data(point, editor.selected_item.object_id, editor.selected_item.palette)
-				objects_array.append(data)
-				counter = 0
+	update_objects_array()
 	var action := PlaceObjectBulkAction.new()
 	action.shared = shared
 	action.objects = objects_array
@@ -121,3 +118,27 @@ func _on_Handle_button_down():
 
 func widget_move_to(node: Node):
 	widget_container.rect_global_position = node.position + Vector2(-140, 16)
+
+func update_objects_array() -> void:
+	objects_array = []
+	for preview in previews.get_children():
+		preview.queue_free()
+	var counter: int
+	for point in line.points:
+		if line.points.size() - 1 != line.points.find(point):
+			counter += 1
+			if counter == dist.value:
+				var data = create_object_data(point, editor.selected_item.object_id, editor.selected_item.palette)
+				objects_array.append(data)
+				counter = 0
+	for object in objects_array:
+		var preview = TextureRect.new()
+		preview.texture = editor.selected_item.previews[editor.selected_item.palette]
+		preview.rect_position = object.properties[0] - preview.texture.get_size()/2
+		preview.modulate.a = 0.5
+		previews.add_child(preview)
+		
+
+
+func _on_HSlider_value_changed(value):
+	update_objects_array()

@@ -89,9 +89,15 @@ focus_mode = 0
 theme = ExtResource( 4 )
 min_value = 1.0
 max_value = 20.0
-value = 1.0
+value = 10.0
+
+[node name="Previews" type="Control" parent="."]
+unique_name_in_owner = true
+margin_right = 40.0
+margin_bottom = 40.0
 
 [connection signal="button_down" from="WidgetContainer/VBoxContainer/HBoxContainer/Handle" to="." method="_on_Handle_button_down"]
 [connection signal="button_down" from="WidgetContainer/VBoxContainer/HBoxContainer/HandleLink" to="." method="_on_HandleLink_button_down"]
 [connection signal="button_down" from="WidgetContainer/VBoxContainer/HBoxContainer/Delete" to="." method="_on_Delete_button_down"]
 [connection signal="button_down" from="WidgetContainer/VBoxContainer/HBoxContainer/Confirm" to="." method="_on_Check_button_down"]
+[connection signal="value_changed" from="WidgetContainer/VBoxContainer/HSlider" to="." method="_on_HSlider_value_changed"]
