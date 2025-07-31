@@ -1,0 +1,97 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://scenes/editor/tools/path_tool/object_trail.gd" type="Script" id=1]
+[ext_resource path="res://scenes/oldeditor/property_type_scenes/Path/base/dash1.png" type="Texture" id=2]
+[ext_resource path="res://scenes/editor/editor_theme.tres" type="Theme" id=3]
+[ext_resource path="res://scenes/shared/ui/selector.tres" type="Theme" id=4]
+
+[sub_resource type="Curve2D" id=1]
+_data = {
+"points": PoolVector2Array(  )
+}
+
+[node name="ObjectTrail" type="Control"]
+script = ExtResource( 1 )
+
+[node name="Line" type="Line2D" parent="."]
+unique_name_in_owner = true
+position = Vector2( 1, -6 )
+width = 8.0
+default_color = Color( 1, 1, 1, 1 )
+texture = ExtResource( 2 )
+texture_mode = 1
+sharp_limit = 1.0
+antialiased = true
+
+[node name="path" type="Path2D" parent="Line"]
+curve = SubResource( 1 )
+
+[node name="Icons" type="Control" parent="."]
+unique_name_in_owner = true
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="WidgetContainer" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+margin_right = 36.0
+margin_bottom = 35.0
+theme = ExtResource( 3 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="WidgetContainer"]
+margin_left = 6.0
+margin_top = 6.0
+margin_right = 285.0
+margin_bottom = 46.0
+custom_constants/separation = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="WidgetContainer/VBoxContainer"]
+margin_right = 279.0
+margin_bottom = 19.0
+
+[node name="Handle" type="Button" parent="WidgetContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+margin_right = 58.0
+margin_bottom = 19.0
+focus_mode = 0
+toggle_mode = true
+text = "Handles"
+
+[node name="HandleLink" type="Button" parent="WidgetContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+margin_left = 62.0
+margin_right = 161.0
+margin_bottom = 19.0
+focus_mode = 0
+toggle_mode = true
+text = "Handle Linking"
+
+[node name="Delete" type="Button" parent="WidgetContainer/VBoxContainer/HBoxContainer"]
+margin_left = 165.0
+margin_right = 217.0
+margin_bottom = 19.0
+focus_mode = 0
+toggle_mode = true
+text = "Delete"
+
+[node name="Confirm" type="Button" parent="WidgetContainer/VBoxContainer/HBoxContainer"]
+margin_left = 221.0
+margin_right = 279.0
+margin_bottom = 19.0
+focus_mode = 0
+text = "Confirm"
+
+[node name="HSlider" type="HSlider" parent="WidgetContainer/VBoxContainer"]
+unique_name_in_owner = true
+margin_top = 24.0
+margin_right = 279.0
+margin_bottom = 40.0
+focus_mode = 0
+theme = ExtResource( 4 )
+min_value = 1.0
+max_value = 20.0
+value = 1.0
+
+[connection signal="button_down" from="WidgetContainer/VBoxContainer/HBoxContainer/Handle" to="." method="_on_Handle_button_down"]
+[connection signal="button_down" from="WidgetContainer/VBoxContainer/HBoxContainer/HandleLink" to="." method="_on_HandleLink_button_down"]
+[connection signal="button_down" from="WidgetContainer/VBoxContainer/HBoxContainer/Delete" to="." method="_on_Delete_button_down"]
+[connection signal="button_down" from="WidgetContainer/VBoxContainer/HBoxContainer/Confirm" to="." method="_on_Check_button_down"]

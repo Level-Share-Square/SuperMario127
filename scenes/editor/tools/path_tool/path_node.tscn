@@ -1,18 +1,18 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://scenes/oldeditor/property_type_scenes/Path/base/PathNode.gd" type="Script" id=1]
-[ext_resource path="res://scenes/oldeditor/property_type_scenes/Path/base/circle.png" type="Texture" id=3]
+[ext_resource path="res://scenes/oldeditor/property_type_scenes/Path/base/circle.png" type="Texture" id=1]
+[ext_resource path="res://scenes/editor/tools/path_tool/path_node.gd" type="Script" id=2]
 
 [sub_resource type="AtlasTexture" id=1]
-atlas = ExtResource( 3 )
+atlas = ExtResource( 1 )
 region = Rect2( 0, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=2]
-atlas = ExtResource( 3 )
+atlas = ExtResource( 1 )
 region = Rect2( 66, 0, 64, 64 )
 
 [node name="PathNode" type="Node2D"]
-script = ExtResource( 1 )
+script = ExtResource( 2 )
 
 [node name="PathNodeButton" type="TextureButton" parent="."]
 margin_left = -32.0
@@ -21,7 +21,7 @@ margin_right = 32.0
 margin_bottom = 32.0
 rect_scale = Vector2( 0.25, 0.25 )
 rect_pivot_offset = Vector2( 32, 32 )
-focus_mode = 1
+focus_mode = 0
 texture_normal = SubResource( 1 )
 texture_pressed = SubResource( 1 )
 texture_hover = SubResource( 2 )
@@ -42,6 +42,7 @@ margin_right = 32.0
 margin_bottom = 32.0
 rect_scale = Vector2( 0.2, 0.2 )
 rect_pivot_offset = Vector2( 32, 32 )
+focus_mode = 0
 texture_normal = SubResource( 1 )
 texture_pressed = SubResource( 1 )
 texture_hover = SubResource( 2 )
@@ -62,6 +63,7 @@ margin_right = 32.0
 margin_bottom = 32.0
 rect_scale = Vector2( 0.2, 0.2 )
 rect_pivot_offset = Vector2( 32, 32 )
+focus_mode = 0
 texture_normal = SubResource( 1 )
 texture_pressed = SubResource( 1 )
 texture_hover = SubResource( 2 )

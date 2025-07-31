@@ -28,9 +28,14 @@ func _ready():
 	set_handles_active(false)
 
 func delete():
+	if get_index() == ui.get_ref().line.get_node("path").curve.get_point_count() - 1:
+		ui.get_ref().widget_move_to(ui.get_ref().nodes[ui.get_ref().line.get_node("path").curve.get_point_count() - 2])
+	if ui.get_ref().line.get_node("path").curve.get_point_count() == 1:
+		ui.get_ref().widget_container.hide()
 	if !first:
 		ui.get_ref().delete_node(self)
 		queue_free()
+		
 
 func _process(delta):
 	if check_if_hovered():
@@ -54,24 +59,16 @@ func deselect():
 
 func _on_PathNodeButton_gui_input(event):
 	if event is InputEventMouseButton:
-		if event.pressed and event.button_index == BUTTON_LEFT:
-			if Input.is_action_pressed("path_editor_modkey"):
-				if handles_active:
-					_toggle_handle_link()
-				else:
-					set_handles_active(true)
+		if event.pressed and event.button_index == BUTTON_LEFT && ui.get_ref().delete == false:
 			held = true
 			select()
-		elif !event.pressed && event.button_index == BUTTON_LEFT:
+		elif !event.pressed && event.button_index == BUTTON_LEFT && ui.get_ref().delete == false:
 			held = false
-		elif event.pressed and event.button_index == BUTTON_RIGHT:
-			if handles_active && Input.is_action_pressed("path_editor_modkey"):
-				set_handles_active(false)
-				return
+		elif event.pressed and event.button_index == BUTTON_LEFT && ui.get_ref().delete == true:
 			delete()
 	if held && event is InputEventMouseMotion:
 		position = ui.get_ref().path_node_container.get_global_transform().xform_inv(ui.get_ref().editor.get_global_mouse_position())
-		if !Input.is_action_pressed("path_editor_snap"):
+		if ui.get_ref().editor.pixel_lock:
 			position = position.snapped(Vector2(8, 8))
 		ui.get_ref().update_node_position(self)
 
