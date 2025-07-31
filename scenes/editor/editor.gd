@@ -96,7 +96,10 @@ func object_unhovered(object: GameObject):
 	
 	hovered_objects.erase(object.name)
 	object.hovered = false
-	object.modulate.a = 1
+	if object.level_object.get_ref().properties[4]:
+		object.modulate.a = 1
+	else:
+		object.modulate.a = 0.5
 
 
 func _process(delta):

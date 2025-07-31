@@ -6,6 +6,7 @@ onready var editor = get_node(editor_path)
 onready var tile_lock: Button = $"%ObjectLock"
 onready var rectangle_fill: Button = $"%TileFill"
 onready var tile_rect_fill = $"%TileRectFill"
+onready var object_trail = $"%ObjectTrail"
 onready var item_tools: VBoxContainer = $"%ItemTools"
 
 signal tool_picked(tool_name)
@@ -26,11 +27,12 @@ func detect_tool_buttons(button: Button):
 		tile_lock.show()
 		rectangle_fill.hide()
 		tile_rect_fill.hide()
+		object_trail.show()
 	else:
 		tile_lock.hide()
 		rectangle_fill.show()
 		tile_rect_fill.show()
-
+		object_trail.hide()
 
 func _on_Tools_tool_changed():
 	for button in item_tools.get_children():
