@@ -1,5 +1,5 @@
 class_name PropertyEditor
-extends HBoxContainer
+extends Control
 
 onready var hover_sound: AudioStreamPlayer = get_parent().get_node("%HoverSound") 
 onready var click_sound: AudioStreamPlayer = get_parent().get_node("%ClickSound") 

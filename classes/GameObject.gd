@@ -4,7 +4,6 @@ extends Node2D
 
 const BG_MODULATE := Color(0.54, 0.54, 0.54)
 
-
 export(LevelShared.Layers) var default_layer: int = 1
 export var layer_shift: int = 0
 export var lock_layer: bool = false
@@ -114,11 +113,6 @@ func _ready():
 	else:
 		if is_instance_valid(editor_hitbox):
 			editor_hitbox.queue_free()
-	
-	if lock_layer:
-		set_property_menu("layer", ["option", 1, layer, ['Way Background', 'Very Background', 'Background', 'Ground', 'Foreground', 'Very Foreground']])
-	else:
-		set_property_menu("layer", ["option", 6, 0, ['Way Background', 'Very Background', 'Background', 'Ground', 'Foreground', 'Very Foreground']])
 	
 	update_layer()
 	yield(get_tree().create_timer(0.1), "timeout")

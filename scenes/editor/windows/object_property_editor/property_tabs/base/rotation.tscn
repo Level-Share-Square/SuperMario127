@@ -1,0 +1,140 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://scenes/menu/line_edit_unfocus.gd" type="Script" id=2]
+[ext_resource path="res://scenes/editor/assets/RotateArrow.svg" type="Texture" id=3]
+[ext_resource path="res://scenes/editor/windows/object_property_editor/property_tabs/base/rotation.gd" type="Script" id=4]
+[ext_resource path="res://scenes/editor/windows/object_property_editor/property_tabs/base/rotation_anim.gd" type="Script" id=5]
+
+[sub_resource type="DynamicFont" id=5]
+size = 14
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+use_filter = true
+extra_spacing_top = 1
+extra_spacing_char = -1
+extra_spacing_space = 2
+font_data = ExtResource( 1 )
+
+[sub_resource type="StyleBoxEmpty" id=2]
+
+[sub_resource type="StyleBoxEmpty" id=3]
+
+[sub_resource type="StyleBoxEmpty" id=4]
+
+[node name="Rotation" type="PanelContainer"]
+margin_right = 80.0
+margin_bottom = 277.0
+size_flags_horizontal = 4
+script = ExtResource( 4 )
+
+[node name="Buttons" type="HBoxContainer" parent="."]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 73.0
+margin_bottom = 270.0
+size_flags_horizontal = 0
+size_flags_vertical = 3
+custom_constants/separation = 0
+alignment = 1
+
+[node name="Left" type="TextureButton" parent="Buttons"]
+unique_name_in_owner = true
+margin_right = 33.0
+margin_bottom = 263.0
+rect_min_size = Vector2( 33, 33 )
+rect_pivot_offset = Vector2( 33, 16 )
+focus_mode = 0
+action_mode = 0
+texture_normal = ExtResource( 3 )
+expand = true
+stretch_mode = 4
+script = ExtResource( 5 )
+direction = -1
+
+[node name="Tween" type="Tween" parent="Buttons/Left"]
+
+[node name="Tween2" type="Tween" parent="Buttons/Left"]
+
+[node name="Timer" type="Timer" parent="Buttons/Left"]
+wait_time = 0.5
+one_shot = true
+
+[node name="Right" type="TextureButton" parent="Buttons"]
+unique_name_in_owner = true
+show_behind_parent = true
+margin_left = 33.0
+margin_right = 66.0
+margin_bottom = 263.0
+rect_min_size = Vector2( 33, 33 )
+rect_pivot_offset = Vector2( 0, 16 )
+focus_mode = 0
+action_mode = 0
+texture_normal = ExtResource( 3 )
+expand = true
+stretch_mode = 4
+flip_h = true
+script = ExtResource( 5 )
+
+[node name="Tween" type="Tween" parent="Buttons/Right"]
+
+[node name="Tween2" type="Tween" parent="Buttons/Right"]
+
+[node name="Timer" type="Timer" parent="Buttons/Right"]
+wait_time = 0.5
+one_shot = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 73.0
+margin_bottom = 270.0
+mouse_filter = 2
+custom_constants/separation = 0
+
+[node name="Padding" type="Control" parent="VBoxContainer"]
+margin_right = 66.0
+margin_bottom = 8.0
+rect_min_size = Vector2( 0, 8 )
+
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer"]
+unique_name_in_owner = true
+margin_left = 17.0
+margin_top = 8.0
+margin_right = 49.0
+margin_bottom = 263.0
+size_flags_horizontal = 4
+size_flags_vertical = 3
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_constants/minimum_spaces = 8
+custom_fonts/font = SubResource( 5 )
+custom_styles/read_only = SubResource( 2 )
+custom_styles/focus = SubResource( 3 )
+custom_styles/normal = SubResource( 4 )
+text = "360"
+align = 1
+script = ExtResource( 2 )
+
+[node name="PropertyName" type="Label" parent="."]
+unique_name_in_owner = true
+visible = false
+margin_left = 7.0
+margin_top = 131.0
+margin_right = 73.0
+margin_bottom = 145.0
+
+[connection signal="button_down" from="Buttons/Left" to="Buttons/Left" method="button_down"]
+[connection signal="button_up" from="Buttons/Left" to="Buttons/Left" method="button_up"]
+[connection signal="mouse_entered" from="Buttons/Left" to="Buttons/Left" method="mouse_entered"]
+[connection signal="mouse_exited" from="Buttons/Left" to="Buttons/Left" method="mouse_exited"]
+[connection signal="pressed" from="Buttons/Left" to="." method="increment_property" binds= [ -1.0 ]]
+[connection signal="pressed" from="Buttons/Left" to="Buttons/Left" method="pressed"]
+[connection signal="timeout" from="Buttons/Left/Timer" to="Buttons/Left" method="set_firing" binds= [ true ]]
+[connection signal="button_down" from="Buttons/Right" to="Buttons/Right" method="button_down"]
+[connection signal="button_up" from="Buttons/Right" to="Buttons/Right" method="button_up"]
+[connection signal="mouse_entered" from="Buttons/Right" to="Buttons/Right" method="mouse_entered"]
+[connection signal="mouse_exited" from="Buttons/Right" to="Buttons/Right" method="mouse_exited"]
+[connection signal="pressed" from="Buttons/Right" to="." method="increment_property" binds= [ 1.0 ]]
+[connection signal="pressed" from="Buttons/Right" to="Buttons/Right" method="pressed"]
+[connection signal="timeout" from="Buttons/Right/Timer" to="Buttons/Right" method="set_firing" binds= [ true ]]
+[connection signal="focus_exited" from="VBoxContainer/LineEdit" to="." method="done_editing"]
