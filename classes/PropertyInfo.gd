@@ -6,10 +6,10 @@ var hint: String
 # for floats, ints, and vector2s
 var min_value = -1
 var max_value = -1
-var step = 1
+var step: float = 1
 
-func _init(_hint: String, _min_value = -1, _max_value = 1, _step = 1):
+func _init(_hint: String, _step = 1, _min_value = -INF, _max_value = INF):
 	hint = _hint
+	step = _step
 	min_value = _min_value
 	max_value = _max_value
-	step = _step

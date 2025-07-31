@@ -1,20 +1,23 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://scenes/menu/button_scripts/button_sound.gd" type="Script" id=2]
 [ext_resource path="res://scenes/menu/line_edit_unfocus.gd" type="Script" id=3]
 [ext_resource path="res://scenes/editor/assets/SendToFront.svg" type="Texture" id=4]
-[ext_resource path="res://scenes/menu/levels_list/icons/view_info.png" type="Texture" id=5]
+[ext_resource path="res://scenes/editor/windows/object_property_editor/property_tabs/base/base.gd" type="Script" id=5]
 [ext_resource path="res://scenes/editor/assets/SendToBack.svg" type="Texture" id=6]
-[ext_resource path="res://scenes/editor/windows/object_property_editor/property_tab.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/editor/windows/object_property_editor/misc_property_scenes/int/base.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/editor/assets/FlipY.svg" type="Texture" id=8]
 [ext_resource path="res://scenes/editor/assets/RotateArrow.svg" type="Texture" id=9]
 [ext_resource path="res://scenes/editor/assets/FlipX.svg" type="Texture" id=10]
-[ext_resource path="res://scenes/menu/spinbox_unfocus.gd" type="Script" id=11]
 [ext_resource path="res://scenes/oldeditor/sounds/click2.wav" type="AudioStream" id=12]
 [ext_resource path="res://scenes/oldeditor/sounds/hover.wav" type="AudioStream" id=13]
+[ext_resource path="res://scenes/editor/windows/object_property_editor/misc_property_scenes/Vector2/base.tscn" type="PackedScene" id=14]
+[ext_resource path="res://scenes/editor/windows/object_property_editor/misc_property_scenes/bool/base.tscn" type="PackedScene" id=15]
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="StyleBoxEmpty" id=1]
+
+[sub_resource type="DynamicFont" id=5]
 size = 14
 outline_size = 2
 outline_color = Color( 0, 0, 0, 1 )
@@ -30,231 +33,87 @@ font_data = ExtResource( 1 )
 
 [sub_resource type="StyleBoxEmpty" id=4]
 
-[node name="Base" instance=ExtResource( 7 )]
-
-[node name="Properties" type="VBoxContainer" parent="." index="0"]
-margin_right = 756.0
-margin_bottom = 397.0
+[node name="Base" type="PanelContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 27.0
+margin_right = -4.0
+margin_bottom = -4.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+custom_styles/panel = SubResource( 1 )
+script = ExtResource( 5 )
+affected_properties = PoolStringArray( "position", "scale", "rotation_degrees", "enabled", "visible", "layer" )
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Properties" index="0"]
-margin_right = 756.0
-margin_bottom = 373.0
-size_flags_vertical = 3
-
-[node name="Vectors" type="VBoxContainer" parent="Properties/HBoxContainer" index="0"]
-visible = false
-margin_right = 132.0
-margin_bottom = 110.0
+[node name="Properties" type="VBoxContainer" parent="."]
+margin_right = 760.0
+margin_bottom = 401.0
+size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 8
 
-[node name="Position" type="VBoxContainer" parent="Properties/HBoxContainer/Vectors" index="0"]
-margin_right = 132.0
-margin_bottom = 38.0
-hint_tooltip = "X and Y coordinates, in pixels."
-alignment = 1
+[node name="HBoxContainer" type="HBoxContainer" parent="Properties"]
+margin_right = 760.0
+margin_bottom = 277.0
+size_flags_vertical = 3
 
-[node name="Info" type="HBoxContainer" parent="Properties/HBoxContainer/Vectors/Position" index="0"]
-margin_right = 132.0
-margin_bottom = 17.0
-size_flags_horizontal = 3
-custom_constants/separation = 1
-alignment = 1
-
-[node name="HoverInfo" type="Control" parent="Properties/HBoxContainer/Vectors/Position/Info" index="0"]
-visible = false
-margin_left = 29.0
-margin_right = 48.0
-margin_bottom = 19.0
-rect_min_size = Vector2( 19, 19 )
-hint_tooltip = "X and Y coordinates, in pixels."
-
-[node name="Icon" type="TextureRect" parent="Properties/HBoxContainer/Vectors/Position/Info/HoverInfo" index="0"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 2.0
-margin_top = 2.0
-margin_right = -2.0
-margin_bottom = -1.0
-texture = ExtResource( 5 )
-expand = true
-stretch_mode = 6
-
-[node name="PropertyName" type="Label" parent="Properties/HBoxContainer/Vectors/Position/Info" index="1"]
-margin_left = 39.0
-margin_right = 93.0
-margin_bottom = 17.0
-text = "Position:"
-
-[node name="Value" type="HBoxContainer" parent="Properties/HBoxContainer/Vectors/Position" index="1"]
-margin_top = 21.0
-margin_right = 132.0
-margin_bottom = 38.0
-
-[node name="SpinBox" type="SpinBox" parent="Properties/HBoxContainer/Vectors/Position/Value" index="0"]
-margin_right = 64.0
-margin_bottom = 17.0
-min_value = inf_neg
-max_value = inf
-step = 0.001
-allow_greater = true
-allow_lesser = true
-align = 1
-suffix = "px"
-custom_arrow_step = 1.0
-script = ExtResource( 11 )
-
-[node name="SpinBox2" type="SpinBox" parent="Properties/HBoxContainer/Vectors/Position/Value" index="1"]
-margin_left = 68.0
-margin_right = 132.0
-margin_bottom = 17.0
-min_value = inf_neg
-max_value = inf
-step = 0.001
-allow_greater = true
-allow_lesser = true
-align = 1
-suffix = "px"
-custom_arrow_step = 1.0
-script = ExtResource( 11 )
-
-[node name="Scale" type="VBoxContainer" parent="Properties/HBoxContainer/Vectors" index="1"]
-margin_top = 46.0
-margin_right = 132.0
-margin_bottom = 84.0
-hint_tooltip = "X and Y scale, relative to the object's size."
-alignment = 1
-
-[node name="Info" type="HBoxContainer" parent="Properties/HBoxContainer/Vectors/Scale" index="0"]
-margin_right = 132.0
-margin_bottom = 17.0
-size_flags_horizontal = 3
-custom_constants/separation = 1
-alignment = 1
-
-[node name="HoverInfo" type="Control" parent="Properties/HBoxContainer/Vectors/Scale/Info" index="0"]
-visible = false
-margin_left = 38.0
-margin_right = 57.0
-margin_bottom = 19.0
-rect_min_size = Vector2( 19, 19 )
-hint_tooltip = "X and Y scale, relative to the object's size."
-
-[node name="Icon" type="TextureRect" parent="Properties/HBoxContainer/Vectors/Scale/Info/HoverInfo" index="0"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 2.0
-margin_top = 2.0
-margin_right = -2.0
-margin_bottom = -1.0
-texture = ExtResource( 5 )
-expand = true
-stretch_mode = 6
-
-[node name="PropertyName" type="Label" parent="Properties/HBoxContainer/Vectors/Scale/Info" index="1"]
-margin_left = 48.0
-margin_right = 84.0
-margin_bottom = 17.0
-text = "Scale:"
-
-[node name="Value" type="HBoxContainer" parent="Properties/HBoxContainer/Vectors/Scale" index="1"]
-margin_top = 21.0
-margin_right = 132.0
-margin_bottom = 38.0
-
-[node name="SpinBox" type="SpinBox" parent="Properties/HBoxContainer/Vectors/Scale/Value" index="0"]
-margin_right = 64.0
-margin_bottom = 17.0
-min_value = inf_neg
-max_value = inf
-step = 0.001
-allow_greater = true
-allow_lesser = true
-align = 1
-suffix = "px"
-custom_arrow_step = 0.05
-script = ExtResource( 11 )
-
-[node name="SpinBox2" type="SpinBox" parent="Properties/HBoxContainer/Vectors/Scale/Value" index="1"]
-margin_left = 68.0
-margin_right = 132.0
-margin_bottom = 17.0
-min_value = inf_neg
-max_value = inf
-step = 0.001
-allow_greater = true
-allow_lesser = true
-align = 1
-suffix = "px"
-custom_arrow_step = 0.05
-script = ExtResource( 11 )
-
-[node name="Extras" type="VBoxContainer" parent="Properties/HBoxContainer" index="1"]
-margin_right = 756.0
-margin_bottom = 373.0
-size_flags_horizontal = 3
-alignment = 1
-
-[node name="PanelContainer" type="PanelContainer" parent="Properties/HBoxContainer/Extras" index="0"]
-margin_left = 338.0
-margin_top = 119.0
-margin_right = 418.0
-margin_bottom = 166.0
+[node name="Rotation" type="PanelContainer" parent="Properties/HBoxContainer"]
+margin_right = 80.0
+margin_bottom = 277.0
 size_flags_horizontal = 4
 
-[node name="Rotation" type="HBoxContainer" parent="Properties/HBoxContainer/Extras/PanelContainer" index="0"]
+[node name="Buttons" type="HBoxContainer" parent="Properties/HBoxContainer/Rotation"]
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 73.0
-margin_bottom = 40.0
+margin_bottom = 270.0
 size_flags_horizontal = 0
 size_flags_vertical = 3
 custom_constants/separation = 0
 alignment = 1
 
-[node name="Left" type="TextureButton" parent="Properties/HBoxContainer/Extras/PanelContainer/Rotation" index="0"]
+[node name="Left" type="TextureButton" parent="Properties/HBoxContainer/Rotation/Buttons"]
 margin_right = 33.0
-margin_bottom = 33.0
+margin_bottom = 263.0
 rect_min_size = Vector2( 33, 33 )
 texture_normal = ExtResource( 9 )
 expand = true
 stretch_mode = 4
 
-[node name="Right" type="TextureButton" parent="Properties/HBoxContainer/Extras/PanelContainer/Rotation" index="1"]
+[node name="Right" type="TextureButton" parent="Properties/HBoxContainer/Rotation/Buttons"]
 show_behind_parent = true
 margin_left = 33.0
 margin_right = 66.0
-margin_bottom = 33.0
+margin_bottom = 263.0
 rect_min_size = Vector2( 33, 33 )
 texture_normal = ExtResource( 9 )
 expand = true
 stretch_mode = 4
 flip_h = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Properties/HBoxContainer/Extras/PanelContainer" index="1"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Properties/HBoxContainer/Rotation"]
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 73.0
-margin_bottom = 40.0
+margin_bottom = 270.0
 custom_constants/separation = 0
 
-[node name="Padding" type="Control" parent="Properties/HBoxContainer/Extras/PanelContainer/VBoxContainer" index="0"]
+[node name="Padding" type="Control" parent="Properties/HBoxContainer/Rotation/VBoxContainer"]
 margin_right = 66.0
 margin_bottom = 8.0
 rect_min_size = Vector2( 0, 8 )
 
-[node name="LineEdit" type="LineEdit" parent="Properties/HBoxContainer/Extras/PanelContainer/VBoxContainer" index="1"]
+[node name="LineEdit" type="LineEdit" parent="Properties/HBoxContainer/Rotation/VBoxContainer"]
 margin_left = 17.0
 margin_top = 8.0
 margin_right = 49.0
-margin_bottom = 33.0
+margin_bottom = 263.0
 size_flags_horizontal = 4
 size_flags_vertical = 3
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_constants/minimum_spaces = 8
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 5 )
 custom_styles/read_only = SubResource( 2 )
 custom_styles/focus = SubResource( 3 )
 custom_styles/normal = SubResource( 4 )
@@ -262,106 +121,81 @@ text = "360"
 align = 1
 script = ExtResource( 3 )
 
-[node name="Visible" type="HBoxContainer" parent="Properties/HBoxContainer/Extras" index="1"]
-margin_top = 170.0
-margin_right = 756.0
-margin_bottom = 210.0
+[node name="Extras" type="VBoxContainer" parent="Properties/HBoxContainer"]
+margin_left = 84.0
+margin_right = 760.0
+margin_bottom = 277.0
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Visible" parent="Properties/HBoxContainer/Extras" instance=ExtResource( 15 )]
+unique_name_in_owner = true
+margin_top = 96.0
+margin_right = 676.0
+margin_bottom = 136.0
 hint_tooltip = "Hide this object, while preserving its function"
 
-[node name="HoverInfo" type="Control" parent="Properties/HBoxContainer/Extras/Visible" index="0"]
-visible = false
-margin_right = 19.0
-margin_bottom = 19.0
-rect_min_size = Vector2( 19, 19 )
-hint_tooltip = "Hide this object, while preserving its function"
-
-[node name="Icon" type="TextureRect" parent="Properties/HBoxContainer/Extras/Visible/HoverInfo" index="0"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 2.0
-margin_top = 2.0
-margin_right = -2.0
-margin_bottom = -1.0
-texture = ExtResource( 5 )
-expand = true
-stretch_mode = 6
-
-[node name="PropertyName" type="Label" parent="Properties/HBoxContainer/Extras/Visible" index="1"]
-margin_top = 13.0
+[node name="Enabled" parent="Properties/HBoxContainer/Extras" instance=ExtResource( 15 )]
+unique_name_in_owner = true
+margin_top = 140.0
 margin_right = 676.0
-margin_bottom = 27.0
-size_flags_horizontal = 3
-text = "Show"
-
-[node name="CheckBox" type="CheckButton" parent="Properties/HBoxContainer/Extras/Visible" index="2"]
-margin_left = 680.0
-margin_right = 756.0
-margin_bottom = 40.0
-theme_type_variation = "CheckButtonTransparent"
-pressed = true
-
-[node name="Enabled" type="HBoxContainer" parent="Properties/HBoxContainer/Extras" index="2"]
-margin_top = 214.0
-margin_right = 756.0
-margin_bottom = 254.0
+margin_bottom = 180.0
 hint_tooltip = "Disable collision and/or functionality, depending on the object."
 
-[node name="HoverInfo" type="Control" parent="Properties/HBoxContainer/Extras/Enabled" index="0"]
-visible = false
-margin_right = 19.0
-margin_bottom = 19.0
-rect_min_size = Vector2( 19, 19 )
-hint_tooltip = "Disable collision and/or functionality, depending on the object."
+[node name="Palette" parent="Properties" instance=ExtResource( 7 )]
+unique_name_in_owner = true
+margin_top = 285.0
+margin_right = 760.0
+margin_bottom = 309.0
+hint_tooltip = "The color variation of this object."
 
-[node name="Icon" type="TextureRect" parent="Properties/HBoxContainer/Extras/Enabled/HoverInfo" index="0"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 2.0
-margin_top = 2.0
-margin_right = -2.0
-margin_bottom = -1.0
-texture = ExtResource( 5 )
-expand = true
-stretch_mode = 6
+[node name="Position" parent="Properties" instance=ExtResource( 14 )]
+unique_name_in_owner = true
+margin_top = 317.0
+margin_right = 760.0
+margin_bottom = 341.0
+hint_tooltip = "X and Y coordinates, in pixels."
 
-[node name="PropertyName" type="Label" parent="Properties/HBoxContainer/Extras/Enabled" index="1"]
-margin_top = 13.0
-margin_right = 676.0
-margin_bottom = 27.0
-size_flags_horizontal = 3
-text = "Enable"
+[node name="Scale" parent="Properties" instance=ExtResource( 14 )]
+unique_name_in_owner = true
+margin_top = 349.0
+margin_right = 760.0
+margin_bottom = 373.0
+hint_tooltip = "X and Y scale, relative to the object's size."
 
-[node name="CheckBox" type="CheckButton" parent="Properties/HBoxContainer/Extras/Enabled" index="2"]
-margin_left = 680.0
-margin_right = 756.0
-margin_bottom = 40.0
-theme_type_variation = "CheckButtonTransparent"
-pressed = true
+[node name="Ordering" type="HBoxContainer" parent="Properties"]
+margin_top = 381.0
+margin_right = 760.0
+margin_bottom = 401.0
 
-[node name="Ordering" type="HBoxContainer" parent="Properties" index="1"]
-margin_top = 377.0
-margin_right = 756.0
-margin_bottom = 397.0
-
-[node name="Layer" type="HBoxContainer" parent="Properties/Ordering" index="0"]
-margin_right = 114.0
+[node name="Layer" type="HBoxContainer" parent="Properties/Ordering"]
+margin_right = 652.0
 margin_bottom = 20.0
+size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="Properties/Ordering/Layer" index="0"]
+[node name="Label" type="Label" parent="Properties/Ordering/Layer"]
 margin_top = 3.0
 margin_right = 38.0
 margin_bottom = 17.0
 text = "Layer:"
 
-[node name="OptionButton" type="OptionButton" parent="Properties/Ordering/Layer" index="1"]
+[node name="OptionButton" type="OptionButton" parent="Properties/Ordering/Layer"]
 margin_left = 42.0
-margin_right = 114.0
+margin_right = 652.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 72, 0 )
+size_flags_horizontal = 3
 
-[node name="Back" type="Button" parent="Properties/Ordering" index="1"]
-margin_left = 118.0
-margin_right = 142.0
+[node name="Padding" type="Control" parent="Properties/Ordering"]
+visible = false
+margin_left = 121.0
+margin_right = 132.0
+margin_bottom = 19.0
+size_flags_horizontal = 3
+
+[node name="Back" type="Button" parent="Properties/Ordering"]
+margin_left = 656.0
+margin_right = 680.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 24, 18 )
 hint_tooltip = "Send to Back"
@@ -371,9 +205,9 @@ icon = ExtResource( 6 )
 expand_icon = true
 script = ExtResource( 2 )
 
-[node name="Front" type="Button" parent="Properties/Ordering" index="2"]
-margin_left = 146.0
-margin_right = 170.0
+[node name="Front" type="Button" parent="Properties/Ordering"]
+margin_left = 684.0
+margin_right = 708.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 24, 18 )
 hint_tooltip = "Send to Front"
@@ -383,15 +217,9 @@ icon = ExtResource( 4 )
 expand_icon = true
 script = ExtResource( 2 )
 
-[node name="Padding" type="Control" parent="Properties/Ordering" index="3"]
-margin_left = 174.0
-margin_right = 704.0
-margin_bottom = 20.0
-size_flags_horizontal = 3
-
-[node name="FlipX" type="Button" parent="Properties/Ordering" index="4"]
-margin_left = 708.0
-margin_right = 730.0
+[node name="FlipX" type="Button" parent="Properties/Ordering"]
+margin_left = 712.0
+margin_right = 734.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 22, 19 )
 hint_tooltip = "Mirror Object (X axis)"
@@ -401,9 +229,9 @@ icon = ExtResource( 10 )
 expand_icon = true
 script = ExtResource( 2 )
 
-[node name="FlipY" type="Button" parent="Properties/Ordering" index="5"]
-margin_left = 734.0
-margin_right = 756.0
+[node name="FlipY" type="Button" parent="Properties/Ordering"]
+margin_left = 738.0
+margin_right = 760.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 22, 19 )
 hint_tooltip = "Mirror Object (Y axis)"
@@ -413,13 +241,13 @@ icon = ExtResource( 8 )
 expand_icon = true
 script = ExtResource( 2 )
 
-[node name="HoverSound" type="AudioStreamPlayer" parent="." index="1"]
+[node name="HoverSound" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource( 13 )
 volume_db = -10.0
 bus = "Sounds"
 
-[node name="ClickSound" type="AudioStreamPlayer" parent="." index="2"]
+[node name="ClickSound" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource( 12 )
 volume_db = -10.0

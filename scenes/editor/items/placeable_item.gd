@@ -24,9 +24,12 @@ var preview: Texture = Texture.new()
 var palette: int = 0
 
 
+func get_palette_count() -> int:
+	return int(max(1, min(icons.size(), previews.size()))) - 1
+
 func set_palette(value: int):
-	var palette_count: int = max(1, min(icons.size(), previews.size()))
-	palette = clamp(value, 0, palette_count-1)
+	var palette_count: int = get_palette_count()
+	palette = clamp(value, 0, palette_count)
 	
 	icon = icons[palette]
 	preview = previews[palette]

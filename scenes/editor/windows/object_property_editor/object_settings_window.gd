@@ -31,6 +31,7 @@ func load_objects(_objects: Dictionary):
 	var base_tab: PropertyTab = preload(
 		"res://scenes/editor/windows/object_property_editor/property_tabs/base/base.tscn"
 	).instance()
+	base_tab.load_base_properties(editor, objects)
 	property_groups.add_child(base_tab)
 	
 	for game_object in objects.keys():

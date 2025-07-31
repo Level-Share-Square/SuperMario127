@@ -31,8 +31,6 @@ margin_right = 232.0
 margin_bottom = 24.0
 min_value = inf_neg
 max_value = inf
-allow_greater = true
-allow_lesser = true
 custom_arrow_step = 1.0
 script = ExtResource( 2 )
 
