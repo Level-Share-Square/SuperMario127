@@ -34,9 +34,6 @@ func reload_scene(transition_in_tex = cutout_circle, transition_out_tex = cutout
 		if new_area != -1:
 			Singleton.CurrentLevelData.area = new_area
 			
-		if r_press:
-			GhostArrays.reload = get_tree().reload_current_scene()
-		
 		yield(get_tree().create_timer(0.1), "timeout")
 		get_tree().paused = false
 		

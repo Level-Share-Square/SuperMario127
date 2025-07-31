@@ -5,9 +5,7 @@ var rp : bool = true
 var dead = false
 var player_name
 var current_var
-var save_ghost = false
 var level
-var ghost_enabled = false
 var crash
 var crash_happened = "no"
 var disable_hotkeys = false
@@ -79,8 +77,3 @@ func _notification(what):
 	
 func reset_time():
 	time = autosave_timer
-
-func _process(_delta):
-	if save_ghost == true:
-		yield(get_tree().create_timer(0.5), "timeout")
-		save_ghost = false

@@ -3,6 +3,7 @@ extends EditorWindow
 
 const TITLE_TEXT: String = "%s Properties"
 
+onready var editor: Editor = get_owner()
 onready var window_title = $"%WindowTitle"
 onready var window_icon = $"%WindowIcon"
 onready var property_groups = $"%PropertyGroups"
@@ -57,7 +58,7 @@ func load_objects(_objects: Dictionary):
 		var misc_tab: PropertyTab = preload(
 			"res://scenes/editor/windows/object_property_editor/property_tabs/misc/misc.tscn"
 		).instance()
-		misc_tab.load_misc_properties(common_properties)
+		misc_tab.load_misc_properties(editor, objects, common_properties)
 		property_groups.add_child(misc_tab)
 		property_groups.move_child(misc_tab, 0)
 	

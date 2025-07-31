@@ -15,7 +15,7 @@ export var set_player_knockback_state: bool = true
 export(BounceType) var bounce_type: int = 0
 export var bounce_power: float = 330
 export var spring_bounce_windup_length: float = 0.15
-export var spring_bounce_depth: float = 6
+export var spring_bounce_depth: float = 14
 
 onready var attack_area = get_node_or_null("Attack") 
 onready var stomp_area = get_node_or_null("Stomp")
@@ -118,7 +118,9 @@ func bounce_player(character: Character) -> void:
 				character.set_state_by_name("BounceState", 0)
 			
 			character.velocity.y = 0
+			character.get_state_node("BounceState").auto_flip = true
 			character.movable = false
+			character.sprite.animation = "stomp"
 			character.enemy_collision.set_deferred("monitorable", false)
 			if character.move_direction != 0:
 				character.global_position.x += character.move_direction * 2
@@ -126,15 +128,18 @@ func bounce_player(character: Character) -> void:
 			var tween: SceneTreeTween = get_tree().create_tween()
 			tween.set_trans(Tween.TRANS_QUAD)
 			tween.tween_property(character, "global_position:y", character.global_position.y + spring_bounce_depth, spring_bounce_windup_length / 2.0)
+			tween.tween_property(character.sprite, "frame", 2, spring_bounce_windup_length / 2.0)
 			yield(tween, "finished")
 			
 			tween = get_tree().create_tween()
 			tween.set_trans(Tween.TRANS_LINEAR)
 			tween.tween_property(character, "global_position:y", character.global_position.y - spring_bounce_depth, spring_bounce_windup_length / 2.0)
+			tween.tween_property(character.sprite, "frame", 5, spring_bounce_windup_length / 2.0)
 			yield(tween, "finished")
 			
 			character.enemy_collision.set_deferred("monitorable", true)
 			character.movable = true
+			character.get_state_node("BounceState").auto_flip = false
 			character.velocity.y = -bounce_power
 
 

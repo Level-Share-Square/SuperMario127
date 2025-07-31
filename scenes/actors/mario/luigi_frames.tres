@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=255 format=2]
+[gd_resource type="SpriteFrames" load_steps=262 format=2]
 
 [ext_resource path="res://scenes/actors/mario/luigi.png" type="Texture" id=1]
 [ext_resource path="res://scenes/actors/mario/luigi_shine_get.png" type="Texture" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://scenes/actors/mario/animations/talking/luigi/disagree.png" type="Texture" id=11]
 [ext_resource path="res://scenes/actors/mario/animations/talking/luigi/thinking.png" type="Texture" id=12]
 [ext_resource path="res://scenes/actors/mario/animations/key_get/luigi.png" type="Texture" id=13]
+[ext_resource path="res://scenes/actors/mario/animations/stomp/luigi.png" type="Texture" id=14]
 
 [sub_resource type="AtlasTexture" id=228]
 atlas = ExtResource( 8 )
@@ -838,6 +839,30 @@ region = Rect2( 56, 56, 56, 56 )
 atlas = ExtResource( 3 )
 region = Rect2( 112, 56, 56, 56 )
 
+[sub_resource type="AtlasTexture" id=260]
+atlas = ExtResource( 1 )
+region = Rect2( 96, 192, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=261]
+atlas = ExtResource( 14 )
+region = Rect2( 0, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=262]
+atlas = ExtResource( 14 )
+region = Rect2( 48, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=263]
+atlas = ExtResource( 14 )
+region = Rect2( 96, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=264]
+atlas = ExtResource( 14 )
+region = Rect2( 144, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=265]
+atlas = ExtResource( 1 )
+region = Rect2( 48, 192, 48, 48 )
+
 [sub_resource type="AtlasTexture" id=116]
 atlas = ExtResource( 5 )
 region = Rect2( 0, 0, 48, 48 )
@@ -1219,6 +1244,11 @@ animations = [ {
 "loop": true,
 "name": "starRunRight",
 "speed": 26.0
+}, {
+"frames": [ SubResource( 260 ), SubResource( 261 ), SubResource( 262 ), SubResource( 263 ), SubResource( 264 ), SubResource( 265 ) ],
+"loop": false,
+"name": "stomp",
+"speed": 0.0
 }, {
 "frames": [ SubResource( 116 ), SubResource( 117 ), SubResource( 118 ), SubResource( 119 ), SubResource( 120 ), SubResource( 121 ), SubResource( 122 ), SubResource( 123 ), SubResource( 124 ), SubResource( 125 ), SubResource( 126 ) ],
 "loop": true,

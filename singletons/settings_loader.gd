@@ -44,8 +44,6 @@ func change_setting(key: String, new_value):
 			Engine.target_fps = 10 * (new_value + 3)
 		"rich_presence":
 			Singleton2.rp = new_value
-		"level_ghost":
-			Singleton2.ghost_enabled = new_value
 		"dark_mode":
 			Singleton2.dark_mode = new_value
 			Singleton2.toggle_dark_mode()

@@ -14,7 +14,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/menu/level_portal/login/account_info.gd"
 }, {
-"base": "Node",
+"base": "Reference",
 "class": "Action",
 "language": "GDScript",
 "path": "res://scenes/editor/action_manager/actions/action.gd"
@@ -189,72 +189,72 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://classes/text/dialogue.gd"
 }, {
-"base": "Reference",
+"base": "",
 "class": "DiscordActivity",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_activity.gdns"
 }, {
-"base": "Reference",
+"base": "",
 "class": "DiscordActivityAssets",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_activity_assets.gdns"
 }, {
-"base": "Reference",
+"base": "",
 "class": "DiscordActivityManager",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_activity_manager.gdns"
 }, {
-"base": "Reference",
+"base": "",
 "class": "DiscordActivityParty",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_activity_party.gdns"
 }, {
-"base": "Reference",
+"base": "",
 "class": "DiscordActivitySecrets",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_activity_secrets.gdns"
 }, {
-"base": "Reference",
+"base": "",
 "class": "DiscordActivityTimestamps",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_activity_timestamps.gdns"
 }, {
-"base": "Reference",
+"base": "",
 "class": "DiscordCore",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_core.gdns"
 }, {
-"base": "Reference",
+"base": "",
 "class": "DiscordLobby",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_lobby.gdns"
 }, {
-"base": "Reference",
+"base": "",
 "class": "DiscordLobbyManager",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_lobby_manager.gdns"
 }, {
-"base": "Reference",
+"base": "",
 "class": "DiscordLobbyTransaction",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_lobby_transaction.gdns"
 }, {
-"base": "Reference",
+"base": "",
 "class": "DiscordOverlayManager",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_overlay_manager.gdns"
 }, {
-"base": "Reference",
+"base": "",
 "class": "DiscordPartySize",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_party_size.gdns"
 }, {
-"base": "Reference",
+"base": "",
 "class": "DiscordResult",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_result.gdns"
 }, {
-"base": "Reference",
+"base": "",
 "class": "DiscordUser",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_user.gdns"
@@ -284,7 +284,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/oldeditor/editor_hitbox.gd"
 }, {
-"base": "Control",
+"base": "Reference",
 "class": "EditorTool",
 "language": "GDScript",
 "path": "res://scenes/editor/tools/editor_tool.gd"
@@ -664,7 +664,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/actors/mario/powerups/Powerup.gd"
 }, {
-"base": "Reference",
+"base": "HBoxContainer",
 "class": "PropertyEditor",
 "language": "GDScript",
 "path": "res://scenes/editor/windows/object_property_editor/misc_property_scenes/property_editor.gd"
@@ -859,7 +859,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/player/ui_new/timers/timer_manager.gd"
 }, {
-"base": "Control",
+"base": "Reference",
 "class": "ToolManager",
 "language": "GDScript",
 "path": "res://scenes/editor/tools/tool_manager.gd"
@@ -1223,7 +1223,6 @@ LocalSettings="*res://singletons/local_settings.gd"
 Singleton="*res://singletons/main_singleton.gd"
 Singleton2="*res://singleton2.gd"
 SettingsLoader="*res://singletons/settings_loader.tscn"
-GhostArrays="*res://scenes/actors/mario/misc/ghostarrays.gd"
 Discord="*res://addons/discord_game_sdk/discord.gd"
 LastInputDevice="*res://singletons/last_input_device.gd"
 LSSPing="*res://singletons/lss_ping.tscn"

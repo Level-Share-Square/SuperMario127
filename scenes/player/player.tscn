@@ -1,4 +1,4 @@
-[gd_scene load_steps=100 format=2]
+[gd_scene load_steps=99 format=2]
 
 [ext_resource path="res://scenes/player/player.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -15,7 +15,6 @@
 [ext_resource path="res://scenes/shared/backgrounds.tscn" type="PackedScene" id=13]
 [ext_resource path="res://scenes/player/ui_new/polygon_swatch.tscn" type="PackedScene" id=14]
 [ext_resource path="res://assets/fonts/marioscript_ui.tres" type="DynamicFont" id=15]
-[ext_resource path="res://scenes/actors/mario/GhostMario.tscn" type="PackedScene" id=16]
 [ext_resource path="res://scenes/player/ui_new/health/health.tscn" type="PackedScene" id=17]
 [ext_resource path="res://scenes/player/ui_new/collectibles/coins.gd" type="Script" id=18]
 [ext_resource path="res://scenes/player/ui_new/collectibles/red_coins.gd" type="Script" id=19]
@@ -2434,8 +2433,6 @@ unique_name_in_owner = true
 
 [node name="Character" parent="Viewports/ViewportContainer/Viewport/World" instance=ExtResource( 3 )]
 collision_exceptions = [ NodePath("") ]
-
-[node name="GhostMario" parent="Viewports/ViewportContainer/Viewport/World" instance=ExtResource( 16 )]
 
 [node name="Backgrounds" parent="Viewports/ViewportContainer/Viewport" instance=ExtResource( 13 )]
 

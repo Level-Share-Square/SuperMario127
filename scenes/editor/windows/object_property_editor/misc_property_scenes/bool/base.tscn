@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://scenes/editor/windows/object_property_editor/misc_property_scenes/property_editor.gd" type="Script" id=1]
+[ext_resource path="res://scenes/editor/windows/object_property_editor/misc_property_scenes/bool/base.gd" type="Script" id=1]
 
 [node name="Bool" type="HBoxContainer"]
 margin_top = 26.0
@@ -29,3 +29,5 @@ margin_left = 156.0
 margin_right = 232.0
 margin_bottom = 40.0
 theme_type_variation = "CheckButtonTransparent"
+
+[connection signal="toggled" from="CheckButton" to="." method="change_property"]

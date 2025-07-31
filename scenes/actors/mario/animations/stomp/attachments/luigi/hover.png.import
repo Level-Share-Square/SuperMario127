@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/asset_archive.png-f7d620d0d9a1a5b00a00092b7dbc6c7b.stex"
+path="res://.import/hover.png-8151e2ee26e20179b07e8f7abfc61f28.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/actors/objects/mushroom_body/asset_archive.png"
-dest_files=[ "res://.import/asset_archive.png-f7d620d0d9a1a5b00a00092b7dbc6c7b.stex" ]
+source_file="res://scenes/actors/mario/animations/stomp/attachments/luigi/hover.png"
+dest_files=[ "res://.import/hover.png-8151e2ee26e20179b07e8f7abfc61f28.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

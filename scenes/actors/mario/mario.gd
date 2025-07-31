@@ -192,12 +192,6 @@ var next_flash := 0.0
 var frames_until_flash := 3
 var metal_voice := false
 var file = File.new()
-var ghost_pos = []
-var ghost_anim = []
-var temp_gp = []
-var temp_ga = []
-var temp_gsr = []
-var temp_gar = []
 
 var can_heal : bool = true
 var healing_timer_enabled := false
@@ -786,7 +780,6 @@ func _physics_process(delta: float) -> void:
 		squish_lerp = false
 	update_inputs()
 	if state and (state.name == "NoActionState" or state.name == "LaunchStarState"):
-		update_ghost()
 		return
 	
 	bottom_pos.position = bottom_pos_offset if not using_dive_collision else bottom_pos_dive_offset
@@ -1177,30 +1170,6 @@ func _physics_process(delta: float) -> void:
 		if player_id == Singleton.PlayerSettings.my_player_index and is_network_master():
 			rpc_unreliable("sync", position, velocity, sprite.frame, sprite.animation, sprite.rotation_degrees, attacking, big_attack, heavy, dead, controllable)
 			#print("hi")
-	update_ghost()
-
-
-func update_ghost():
-	if !Singleton2.save_ghost:
-		GhostArrays.temp_gp.append(Vector2(int(position.x), int(position.y)))
-		GhostArrays.temp_ga.append(ANIM_IDS[sprite.animation])
-		GhostArrays.temp_gsr.append(int(sprite.rotation_degrees))
-		GhostArrays.temp_gar.append(Singleton.CurrentLevelData.area)
-
-	var level_info = Singleton.CurrentLevelData.level_info
-	if Singleton2.save_ghost == true and GhostArrays.dont_save == false:
-		Singleton2.save_ghost = false
-
-		var directory := Directory.new()
-		if !directory.dir_exists("user://replays"):
-			directory.make_dir("user://replays")
-
-		file.open("user://replays/" + str(level_info.level_name) + "_" + str(level_info.selected_shine) + ".127ghost", File.WRITE)
-		file.store_var(GhostArrays.temp_gp)
-		file.store_var(GhostArrays.temp_ga)
-		file.store_var(GhostArrays.temp_gsr)
-		file.store_var(GhostArrays.temp_gar)
-		file.close()
 
 	
 
@@ -1339,7 +1308,6 @@ func kill(cause: String) -> void:
 			if Singleton.CheckpointSaved.current_checkpoint_id != -1 and Singleton.CheckpointSaved.current_area == Singleton.CurrentLevelData.area and Singleton.CurrentLevelData.level_data.vars.transition_data == []:
 				position = Singleton.CheckpointSaved.current_spawn_pos
 				reset_physics_interpolation()
-				GhostArrays.dont_save = true
 			else:
 				position = spawn_pos - Vector2(0, 16)
 				reset_physics_interpolation()

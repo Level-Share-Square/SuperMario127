@@ -530,14 +530,13 @@ anchor_bottom = 1.0
 script = ExtResource( 27 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Subscreens/General"]
-margin_left = 17.0
 margin_top = 64.0
-margin_right = 550.0
+margin_right = 570.0
 margin_bottom = 367.0
 custom_constants/separation = 32
 
 [node name="MarginContainer" type="MarginContainer" parent="Subscreens/General/VBoxContainer"]
-margin_right = 533.0
+margin_right = 570.0
 margin_bottom = 140.0
 custom_constants/margin_right = 96
 custom_constants/margin_top = 0
@@ -546,12 +545,12 @@ custom_constants/margin_bottom = 0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Subscreens/General/VBoxContainer/MarginContainer"]
 margin_left = 96.0
-margin_right = 437.0
+margin_right = 474.0
 margin_bottom = 140.0
 alignment = 1
 
 [node name="MasterVolume" parent="Subscreens/General/VBoxContainer/MarginContainer/VBoxContainer" instance=ExtResource( 9 )]
-margin_right = 341.0
+margin_right = 378.0
 margin_bottom = 36.0
 rect_min_size = Vector2( 160, 0 )
 setting_section = "Audio"
@@ -560,7 +559,7 @@ default_value = 75.0
 
 [node name="Music" parent="Subscreens/General/VBoxContainer/MarginContainer/VBoxContainer" instance=ExtResource( 9 )]
 margin_top = 52.0
-margin_right = 341.0
+margin_right = 378.0
 margin_bottom = 88.0
 rect_min_size = Vector2( 160, 0 )
 setting_section = "Audio"
@@ -569,7 +568,7 @@ default_value = 100.0
 
 [node name="SoundEffects" parent="Subscreens/General/VBoxContainer/MarginContainer/VBoxContainer" instance=ExtResource( 9 )]
 margin_top = 104.0
-margin_right = 341.0
+margin_right = 378.0
 margin_bottom = 140.0
 rect_min_size = Vector2( 160, 0 )
 setting_section = "Audio"
@@ -578,40 +577,56 @@ default_value = 100.0
 
 [node name="Separator" type="ColorRect" parent="Subscreens/General/VBoxContainer"]
 margin_top = 172.0
-margin_right = 533.0
+margin_right = 570.0
 margin_bottom = 173.0
 rect_min_size = Vector2( 0, 1 )
 
 [node name="GridContainer" type="GridContainer" parent="Subscreens/General/VBoxContainer"]
 margin_top = 205.0
-margin_right = 533.0
+margin_right = 570.0
 margin_bottom = 303.0
 custom_constants/vseparation = 20
 custom_constants/hseparation = 40
 columns = 4
 
-[node name="VSync" parent="Subscreens/General/VBoxContainer/GridContainer" instance=ExtResource( 10 )]
+[node name="DarkTransitions" parent="Subscreens/General/VBoxContainer/GridContainer" instance=ExtResource( 10 )]
 margin_right = 94.0
 setting_section = "General"
-setting_key = "v_sync"
-default_value = true
+setting_key = "dark_mode"
 
 [node name="ShowTimer" parent="Subscreens/General/VBoxContainer/GridContainer" instance=ExtResource( 10 )]
 margin_left = 134.0
-margin_right = 228.0
+margin_right = 265.0
 setting_section = "General"
 setting_key = "show_timer"
 
 [node name="CameraShake" parent="Subscreens/General/VBoxContainer/GridContainer" instance=ExtResource( 10 )]
-margin_left = 268.0
-margin_right = 362.0
+margin_left = 305.0
+margin_right = 436.0
 setting_section = "General"
 setting_key = "camera_shake"
 default_value = true
 
+[node name="RichPresence" parent="Subscreens/General/VBoxContainer/GridContainer" instance=ExtResource( 10 )]
+margin_left = 476.0
+margin_right = 570.0
+setting_section = "General"
+setting_key = "rich_presence"
+default_value = true
+
+[node name="VSync" parent="Subscreens/General/VBoxContainer/GridContainer" instance=ExtResource( 10 )]
+margin_top = 59.0
+margin_right = 94.0
+margin_bottom = 98.0
+setting_section = "General"
+setting_key = "v_sync"
+default_value = true
+
 [node name="WindowScale" parent="Subscreens/General/VBoxContainer/GridContainer" instance=ExtResource( 14 )]
-margin_left = 402.0
-margin_right = 533.0
+margin_left = 134.0
+margin_top = 59.0
+margin_right = 265.0
+margin_bottom = 98.0
 rect_min_size = Vector2( 120, 0 )
 setting_section = "General"
 setting_key = "window_scale"
@@ -620,34 +635,10 @@ options = [ "1x", "2x", "3x", "Full" ]
 [node name="Node" type="Node" parent="Subscreens/General/VBoxContainer/GridContainer/WindowScale"]
 script = SubResource( 14 )
 
-[node name="RichPresence" parent="Subscreens/General/VBoxContainer/GridContainer" instance=ExtResource( 10 )]
-margin_top = 59.0
-margin_right = 94.0
-margin_bottom = 98.0
-setting_section = "General"
-setting_key = "rich_presence"
-default_value = true
-
-[node name="DarkTransitions" parent="Subscreens/General/VBoxContainer/GridContainer" instance=ExtResource( 10 )]
-margin_left = 134.0
-margin_top = 59.0
-margin_right = 228.0
-margin_bottom = 98.0
-setting_section = "General"
-setting_key = "dark_mode"
-
-[node name="LevelGhost" parent="Subscreens/General/VBoxContainer/GridContainer" instance=ExtResource( 10 )]
-margin_left = 268.0
-margin_top = 59.0
-margin_right = 362.0
-margin_bottom = 98.0
-setting_section = "General"
-setting_key = "level_ghost"
-
 [node name="FPSCap" parent="Subscreens/General/VBoxContainer/GridContainer" instance=ExtResource( 14 )]
-margin_left = 402.0
+margin_left = 305.0
 margin_top = 59.0
-margin_right = 533.0
+margin_right = 436.0
 margin_bottom = 98.0
 setting_section = "General"
 setting_key = "fps_cap"
@@ -2032,10 +2023,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -58.0
-margin_top = 16.0
-margin_right = -7.0
-margin_bottom = 41.0
+margin_left = 710.0
+margin_top = 448.0
+margin_right = 761.0
+margin_bottom = 473.0
 grow_horizontal = 0
 grow_vertical = 0
 text = "v0.9.1"

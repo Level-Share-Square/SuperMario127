@@ -209,12 +209,6 @@ func reset_save_data(delete_file: bool = true, selected_file: int = -1) -> void:
 	
 	if delete_file and level_list_util.file_exists(get_save_path(selected_file)):
 		level_list_util.delete_file(get_save_path(selected_file))
-	
-	# delete replays
-	for shine in shine_details:
-		var replay_path: String = "user://replays/" + level_name + "_" + str(shine.id) + ".127ghost"
-		if level_list_util.file_exists(replay_path):
-			level_list_util.delete_file(replay_path)
 
 
 ### new functions designed to save separately to the level code
@@ -317,7 +311,6 @@ func update_time_and_coin_score(shine_id : int, save_to_disk : bool = true):
 
 	if new_time_score < time_scores[str(shine_id)] or time_scores[str(shine_id)] == EMPTY_TIME_SCORE:
 		time_scores[str(shine_id)] = new_time_score
-		Singleton2.save_ghost = true
 	if save_to_disk:
 		level_list_util.save_level_save_file(get_save_file_dictionary(), get_save_path())
 		if Singleton.CurrentLevelData.selected_file > -1:
