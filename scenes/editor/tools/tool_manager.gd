@@ -70,4 +70,6 @@ func _on_Tools_tool_picked(tool_name):
 			change_tool("TileRectFill")
 		"ObjectLock":
 			change_tool("ObjectTileLock")
+		"ObjectTrail":
+			change_tool("ObjectTrail")
 		

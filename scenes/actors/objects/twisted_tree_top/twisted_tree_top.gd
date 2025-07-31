@@ -10,7 +10,7 @@ var color: = Color(1, 0, 0)
 func _set_properties():
 	savable_properties = ["color"]
 	editable_properties = ["color"]
-	
+
 func _set_property_values():
 	set_property("color", color, true)
 
@@ -26,6 +26,6 @@ func _ready():
 func _process(delta):
 	if color == Color(1, 0, 0):
 		recolorable.visible = false
-	else :
+	else:
 		recolorable.visible = true
 		recolorable.self_modulate = color

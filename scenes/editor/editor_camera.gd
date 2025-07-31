@@ -41,10 +41,10 @@ func _physics_process(delta):
 
 
 func load_in(_level_data: LevelData, level_area: LevelArea):
-	for object in level_area.objects:
-		if is_instance_valid(object) and object is ObjectData:
-			if object.type_id == 0:
-				position = object.properties[0] # properties[0] is always position, at least for spawners
+#	for object in level_area.objects:
+#		if is_instance_valid(object) and object is ObjectData:
+#			if object.type_id == 0:
+#				position = object.properties[0] # properties[0] is always position, at least for spawners
 	
 	update_limits(level_area)
 
