@@ -4,8 +4,8 @@ extends PropertyTab
 const TYPE_LOOKUP: Dictionary = {
 	TYPE_BOOL: "bool",
 	TYPE_INT: "int",
-	TYPE_REAL: "fallback",
-	TYPE_STRING: "fallback",
+	TYPE_REAL: "float",
+	TYPE_STRING: "String",
 	TYPE_VECTOR2: "Vector2",
 	TYPE_COLOR: "fallback"
 }
