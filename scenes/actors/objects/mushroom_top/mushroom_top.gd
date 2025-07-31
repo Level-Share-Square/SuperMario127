@@ -7,8 +7,12 @@ onready var bounce_area_collision : CollisionShape2D = $StaticBody2D/Area2D/Coll
 onready var animation_player : AnimationPlayer = $AnimationPlayer
 onready var mushroom_cap : Sprite = $Sprite
 onready var mushroom_cap_color : Sprite = $Sprite/Color
+onready var mushroom_spots_color : Sprite = $Sprite/ColorSpots
+onready var mushroom_spots_color_modulate : Sprite = $Sprite/ColorSpots/Modulate
 onready var resizeable_cap : NinePatchRect = $Node2D/Resizeable
 onready var resizeable_cap_color : NinePatchRect = $Node2D/Resizeable/ResizableColor
+onready var resizeable_spots_color : NinePatchRect = $Node2D/Resizeable/ResizableColorSpots
+onready var resizeable_spots_color_modulate : NinePatchRect = $Node2D/Resizeable/ResizableColorSpots/Modulate
 onready var sound : AudioStreamPlayer = $AudioStreamPlayer
 onready var visibility_enabler : VisibilityEnabler2D = $VisibilityEnabler2D
 onready var timer : Timer = $IdleBounceTimer
@@ -57,12 +61,18 @@ func _ready():
 func update_property(key, value):
 	if color == Color(1, 0, 0):
 		mushroom_cap_color.visible = false
+		mushroom_spots_color.visible = false
 		resizeable_cap_color.visible = false
+		resizeable_spots_color.visible = false
 	else:
 		mushroom_cap_color.visible = true
+		mushroom_spots_color.visible = true
 		resizeable_cap_color.visible = true
+		resizeable_spots_color.visible = true
 		mushroom_cap_color.modulate = color
+		mushroom_spots_color_modulate.modulate = color
 		resizeable_cap_color.modulate = color
+		resizeable_spots_color_modulate.modulate = color
 	
 	if parts > 0:
 		resizeable_cap.visible = true

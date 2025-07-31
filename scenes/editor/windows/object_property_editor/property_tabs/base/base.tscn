@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://scenes/menu/button_scripts/button_sound.gd" type="Script" id=2]
@@ -11,6 +11,8 @@
 [ext_resource path="res://scenes/editor/assets/RotateArrow.svg" type="Texture" id=9]
 [ext_resource path="res://scenes/editor/assets/FlipX.svg" type="Texture" id=10]
 [ext_resource path="res://scenes/menu/spinbox_unfocus.gd" type="Script" id=11]
+[ext_resource path="res://scenes/oldeditor/sounds/click2.wav" type="AudioStream" id=12]
+[ext_resource path="res://scenes/oldeditor/sounds/hover.wav" type="AudioStream" id=13]
 
 [sub_resource type="DynamicFont" id=1]
 size = 14
@@ -410,3 +412,15 @@ theme_type_variation = "ButtonPurple"
 icon = ExtResource( 8 )
 expand_icon = true
 script = ExtResource( 2 )
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="." index="1"]
+unique_name_in_owner = true
+stream = ExtResource( 13 )
+volume_db = -10.0
+bus = "Sounds"
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="." index="2"]
+unique_name_in_owner = true
+stream = ExtResource( 12 )
+volume_db = -10.0
+bus = "Sounds"

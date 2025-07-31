@@ -43,7 +43,7 @@ var savable_properties: PoolStringArray = []
 var base_editable_properties: PoolStringArray = ["enabled", "visible", "rotation_degrees", "scale", "position", "layer"]
 var editable_properties: PoolStringArray = []
 
-var property_hints: PoolStringArray = []
+var property_info: PoolStringArray = []
 
 var property_value_to_name := {}
 var property_value_menus := {}
@@ -123,7 +123,7 @@ func _ready():
 	update_layer()
 	yield(get_tree().create_timer(0.1), "timeout")
 	
-	property_hints.resize(editable_properties.size())
+	property_info.resize(editable_properties.size())
 	is_middle(layer == middle)
 
 

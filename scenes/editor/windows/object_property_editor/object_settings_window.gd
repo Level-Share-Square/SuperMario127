@@ -41,7 +41,7 @@ func load_objects(_objects: Dictionary):
 			var property: Array = [
 				_property, 
 				typeof(game_object[_property]), 
-				str(game_object.property_hints[index])
+				game_object.property_info[index]
 			]
 			if not property in common_properties:
 				common_properties.append(property)

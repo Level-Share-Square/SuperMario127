@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://scenes/actors/objects/mushroom_top/mushroom_top.png" type="Texture" id=1]
 [ext_resource path="res://scenes/actors/objects/metal_platform/semi_solid_platform.gd" type="Script" id=2]
@@ -10,6 +10,11 @@
 [ext_resource path="res://scenes/actors/objects/mushroom_top/sounds/bounce.wav" type="AudioStream" id=8]
 [ext_resource path="res://scenes/actors/objects/mushroom_top/mushroom_top_resizeable.png" type="Texture" id=9]
 [ext_resource path="res://scenes/actors/objects/mushroom_top/color_resizeable.png" type="Texture" id=10]
+[ext_resource path="res://scenes/actors/objects/mushroom_top/spots_color_resizeable.png" type="Texture" id=11]
+[ext_resource path="res://scenes/actors/objects/mushroom_top/spots_color.png" type="Texture" id=12]
+
+[sub_resource type="CanvasItemMaterial" id=6]
+blend_mode = 1
 
 [sub_resource type="Animation" id=4]
 resource_name = "bounce"
@@ -195,10 +200,29 @@ axis_stretch_horizontal = 1
 
 [node name="ResizableColor" type="NinePatchRect" parent="Node2D/Resizeable"]
 visible = false
-margin_top = -6.0
 margin_right = 96.0
-margin_bottom = 26.0
+margin_bottom = 32.0
 texture = ExtResource( 10 )
+patch_margin_left = 32
+patch_margin_right = 32
+axis_stretch_horizontal = 1
+
+[node name="ResizableColorSpots" type="NinePatchRect" parent="Node2D/Resizeable"]
+visible = false
+modulate = Color( 0.8, 0.8, 0.8, 1 )
+margin_right = 96.0
+margin_bottom = 32.0
+texture = ExtResource( 11 )
+patch_margin_left = 32
+patch_margin_right = 32
+axis_stretch_horizontal = 1
+
+[node name="Modulate" type="NinePatchRect" parent="Node2D/Resizeable/ResizableColorSpots"]
+modulate = Color( 0, 1, 0, 1 )
+material = SubResource( 6 )
+margin_right = 96.0
+margin_bottom = 32.0
+texture = ExtResource( 11 )
 patch_margin_left = 32
 patch_margin_right = 32
 axis_stretch_horizontal = 1
@@ -211,14 +235,32 @@ offset = Vector2( 0, -10 )
 
 [node name="Color" type="Sprite" parent="Sprite"]
 visible = false
+modulate = Color( 0, 1, 0, 1 )
 position = Vector2( 0, -5 )
 z_index = -8
 z_as_relative = false
 texture = ExtResource( 4 )
 offset = Vector2( 0, 1 )
 
+[node name="ColorSpots" type="Sprite" parent="Sprite"]
+visible = false
+modulate = Color( 0.8, 0.8, 0.8, 1 )
+position = Vector2( 0, -5 )
+z_index = -8
+z_as_relative = false
+texture = ExtResource( 12 )
+offset = Vector2( 0, 1 )
+
+[node name="Modulate" type="Sprite" parent="Sprite/ColorSpots"]
+modulate = Color( 0, 1, 0, 1 )
+material = SubResource( 6 )
+z_index = -8
+z_as_relative = false
+texture = ExtResource( 12 )
+offset = Vector2( 0, 1 )
+
 [node name="MushroomTopStem" type="Sprite" parent="."]
-position = Vector2( 0, 5 )
+position = Vector2( 0, 3 )
 z_index = -8
 texture = ExtResource( 6 )
 offset = Vector2( 0, 5.5 )
@@ -230,6 +272,7 @@ anims/bounce_weak = SubResource( 3 )
 anims/idle = SubResource( 5 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
+visible = false
 position = Vector2( 0, -8 )
 collision_layer = 16
 collision_mask = 2147483649
