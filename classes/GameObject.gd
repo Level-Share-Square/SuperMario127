@@ -103,6 +103,9 @@ func _ready():
 			collision_shape.shape = RectangleShape2D.new()
 			editor_hitbox.add_child(collision_shape)
 		
+		if is_instance_valid(level_object.get_ref()):
+			visibility = level_object.get_ref().properties[4]
+		
 		var editor = get_tree().current_scene
 		editor_hitbox.connect("mouse_entered", editor, "object_hovered", [self])
 		editor_hitbox.connect("mouse_exited", editor, "object_unhovered", [self])
@@ -117,8 +120,6 @@ func _ready():
 	yield(get_tree().create_timer(0.1), "timeout")
 	
 	property_info.resize(editable_properties.size())
-	if is_instance_valid(level_object.get_ref()):
-		visibility = level_object.get_ref().properties[4]
 	set_process(true)
 	is_middle(layer == middle)
 
