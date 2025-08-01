@@ -87,7 +87,6 @@ func object_hovered(object: GameObject):
 	# Look you come up with a better object ID system when you have none
 	hovered_objects.get_or_add(object.name, object)
 	object.hovered = true
-	object.modulate.a = 0.5
 
 
 func object_unhovered(object: GameObject):
@@ -96,18 +95,13 @@ func object_unhovered(object: GameObject):
 	
 	hovered_objects.erase(object.name)
 	object.hovered = false
-	if object.level_object.get_ref().properties[4]:
-		object.modulate.a = 1
-	else:
-		object.modulate.a = 0.5
 
 
 func _process(delta):
 	if Input.is_action_just_pressed("LMB") && tool_manager.current_tool == selection_box.get_parent() && selection_box.get_parent().visible == false:
 		selection_box.show()
 		selection_box.get_parent().show()
-	for i in selected_objects:
-		i.modulate = Color(0.7, 0.7, 1.2, i.modulate.a)
+	
 
 
 	
@@ -151,6 +145,7 @@ func _on_Save_button_down():
 	save_meta_util.update_all_with_level(level_id, working_folder, false, Singleton.CurrentLevelData.level_info)
 	
 	Singleton.CurrentLevelData.unsaved_editor_changes = false
+	editor_options.get_node("%Areas").reload_areas()
 
 
 func _on_Quit_button_down():

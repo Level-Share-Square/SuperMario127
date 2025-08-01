@@ -10,6 +10,8 @@ onready var y_line = $HBoxContainer/GridContainer2/LineEdit
 
 const background_id_mapper = "res://scenes/shared/background/backgrounds/ids.tres"
 const foreground_id_mapper = "res://scenes/shared/background/foregrounds/ids.tres"
+onready var background_preview = $"%Background"
+onready var foreground_preview = $"%Foreground"
 
 var id
 var area_names: Array = []
@@ -21,17 +23,14 @@ func set_background(sky, background, palette):
 	var foreground_mapped_id = load(foreground_id_mapper).ids[background]
 	var foreground_resource = load("res://scenes/shared/background/foregrounds/" + foreground_mapped_id + "/resource.tres")
 	
-#	Add these previews later.
-
-#	var background_preview = get_node("Preview/BackgroundPreview")
-#	var foreground_preview = get_node("Preview/ForegroundPreview")
-#
-#	background_preview.texture = background_resource.texture
-#	if palette == 0:
-#		foreground_preview.texture = foreground_resource.preview
-#	else:
-#		foreground_preview.texture = foreground_resource.palettes[palette - 1]
-#	foreground_preview.modulate = background_resource.parallax_modulate
+	background_preview = $"%Background"
+	foreground_preview = $"%Foreground"
+	background_preview.texture = background_resource.texture
+	if palette == 0:
+		foreground_preview.texture = foreground_resource.preview
+	else:
+		foreground_preview.texture = foreground_resource.palettes[palette - 1]
+	foreground_preview.modulate = background_resource.parallax_modulate
 
 func set_name(new_name: String):
 	$HBoxContainer/VBoxContainer/LineEdit.text = new_name
@@ -61,6 +60,7 @@ func _ready():
 	if id == Singleton.CurrentLevelData.area:
 		switch_to_button.disabled = true
 		delete_button.disabled = true
+	var area_settings = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].settings
 
 func switch_to_area():
 	if id != Singleton.CurrentLevelData.area:

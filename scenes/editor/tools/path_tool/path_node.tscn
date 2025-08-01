@@ -33,6 +33,7 @@ position = Vector2( 24, 0 )
 z_index = -1
 points = PoolVector2Array( 0, 0, -24, 0 )
 width = 5.0
+default_color = Color( 0.4, 0.501961, 1, 0.498039 )
 
 [node name="HandleRButton" type="TextureButton" parent="HandleR"]
 self_modulate = Color( 0.694118, 0.694118, 0.694118, 1 )
@@ -54,6 +55,7 @@ position = Vector2( -24, 0 )
 z_index = -1
 points = PoolVector2Array( 0, 0, 24, 0 )
 width = 5.0
+default_color = Color( 0.4, 0.501961, 1, 0.498039 )
 
 [node name="HandleLButton" type="TextureButton" parent="HandleL"]
 self_modulate = Color( 0.694118, 0.694118, 0.694118, 1 )

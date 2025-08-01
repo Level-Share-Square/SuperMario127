@@ -94,7 +94,7 @@ func instance_enemy(emit_particles: bool = true) -> EnemyBase:
 	if layer > middle:
 		spawned_enemy.enabled = false
 	if layer < middle:
-		spawned_enemy.modulate = BG_MODULATE
+		spawned_enemy.modulate = modulate
 		spawned_enemy.enabled = false
 		
 	add_child(spawned_enemy)

@@ -1,15 +1,21 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://assets/fonts/arial.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://assets/fonts/DelfinoFont10.tres" type="DynamicFont" id=2]
 [ext_resource path="res://scenes/editor/windows/editor_options/area_panel.gd" type="Script" id=3]
+[ext_resource path="res://scenes/shared/background/backgrounds/day/day.png" type="Texture" id=4]
+[ext_resource path="res://scenes/shared/background/foregrounds/forest/preview.png" type="Texture" id=5]
 
-[sub_resource type="Gradient" id=16]
-colors = PoolColorArray( 0.945098, 0, 0, 1, 0.0431373, 0.752941, 0.0117647, 1 )
+[sub_resource type="StyleBoxFlat" id=18]
+bg_color = Color( 0.305882, 0.517647, 1, 0.419608 )
 
-[sub_resource type="GradientTexture2D" id=17]
-gradient = SubResource( 16 )
-fill_from = Vector2( 0, 1 )
+[sub_resource type="StyleBoxFlat" id=19]
+bg_color = Color( 0.745098, 0.745098, 0.745098, 0.533333 )
+
+[sub_resource type="StyleBoxFlat" id=16]
+bg_color = Color( 0.6, 0.6, 0.6, 0.411765 )
+
+[sub_resource type="StyleBoxEmpty" id=17]
 
 [sub_resource type="StyleBoxFlat" id=10]
 bg_color = Color( 0.141176, 0.223529, 0.541176, 1 )
@@ -36,27 +42,54 @@ script = ExtResource( 3 )
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 424.0
-margin_bottom = 71.0
+margin_right = 383.0
+margin_bottom = 55.0
 
-[node name="SwitchArea" type="TextureButton" parent="HBoxContainer"]
-margin_right = 70.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 70, 0 )
+[node name="SwitchArea" type="Button" parent="HBoxContainer"]
+margin_top = 4.0
+margin_right = 69.794
+margin_bottom = 43.278
+rect_min_size = Vector2( 69.794, 39.278 )
+focus_mode = 0
 size_flags_vertical = 4
-theme_type_variation = "ButtonRed"
-texture_normal = SubResource( 17 )
+custom_styles/hover = SubResource( 18 )
+custom_styles/pressed = SubResource( 19 )
+custom_styles/disabled = SubResource( 16 )
+custom_styles/normal = SubResource( 17 )
+
+[node name="Background" type="TextureRect" parent="HBoxContainer/SwitchArea"]
+unique_name_in_owner = true
+show_behind_parent = true
+margin_left = -59.0
+margin_right = 129.0
+margin_bottom = 39.0
+rect_min_size = Vector2( 180, 0 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 4 )
+expand = true
+stretch_mode = 6
+
+[node name="Foreground" type="TextureRect" parent="HBoxContainer/SwitchArea/Background"]
+unique_name_in_owner = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 180, 0 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 5 )
+expand = true
+stretch_mode = 6
 
 [node name="Control" type="Control" parent="HBoxContainer"]
-margin_left = 74.0
-margin_right = 74.0
-margin_bottom = 64.0
+margin_left = 73.0
+margin_right = 73.0
+margin_bottom = 48.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
-margin_left = 78.0
-margin_top = 8.0
-margin_right = 299.0
-margin_bottom = 56.0
+margin_left = 77.0
+margin_right = 298.0
+margin_bottom = 48.0
 size_flags_vertical = 4
 
 [node name="LineEdit" type="LineEdit" parent="HBoxContainer/VBoxContainer"]
@@ -95,15 +128,15 @@ size_flags_vertical = 4
 text = "Duplicate"
 
 [node name="Control3" type="Control" parent="HBoxContainer"]
-margin_left = 303.0
-margin_right = 303.0
-margin_bottom = 64.0
+margin_left = 302.0
+margin_right = 302.0
+margin_bottom = 48.0
 
 [node name="GridContainer2" type="GridContainer" parent="HBoxContainer"]
-margin_left = 307.0
-margin_top = 6.0
-margin_right = 379.0
-margin_bottom = 58.0
+visible = false
+margin_left = 306.0
+margin_right = 378.0
+margin_bottom = 52.0
 size_flags_vertical = 6
 columns = 2
 
@@ -137,15 +170,15 @@ custom_fonts/font = ExtResource( 2 )
 text = "0"
 
 [node name="Control2" type="Control" parent="HBoxContainer"]
-margin_left = 383.0
-margin_right = 383.0
-margin_bottom = 64.0
+margin_left = 306.0
+margin_right = 342.0
+margin_bottom = 48.0
 size_flags_horizontal = 3
 
 [node name="TextureButton" type="Button" parent="HBoxContainer"]
-margin_left = 387.0
-margin_right = 417.0
-margin_bottom = 64.0
+margin_left = 346.0
+margin_right = 376.0
+margin_bottom = 48.0
 rect_min_size = Vector2( 30, 0 )
 theme = SubResource( 15 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )

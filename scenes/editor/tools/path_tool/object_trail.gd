@@ -83,6 +83,7 @@ func update_node_position(node: Node2D):
 		update_line()
 		if index == line.get_node("path").curve.get_point_count() - 1:
 			widget_container.rect_global_position = Array(line.points).back() + Vector2(-140, 16)
+		update_objects_array()
 		
 func update_node_handles(node: Node2D):
 	var index = nodes.find(node, 0)
@@ -90,6 +91,7 @@ func update_node_handles(node: Node2D):
 		line.get_node("path").curve.set_point_in(index, node.left_handle.position)
 		line.get_node("path").curve.set_point_out(index, node.right_handle.position)
 		update_line()
+		update_objects_array()
 
 func delete_node(node : Node):
 	if is_instance_valid(node) && nodes.has(node):
@@ -136,6 +138,7 @@ func update_objects_array() -> void:
 		preview.texture = editor.selected_item.previews[editor.selected_item.palette]
 		preview.rect_position = object.properties[0] - preview.texture.get_size()/2
 		preview.modulate.a = 0.5
+		preview.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		previews.add_child(preview)
 		
 
