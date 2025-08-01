@@ -117,7 +117,7 @@ func _ready():
 	yield(get_tree().create_timer(0.1), "timeout")
 	
 	property_info.resize(editable_properties.size())
-	if is_instance_valid(level_object):
+	if is_instance_valid(level_object.get_ref()):
 		visibility = level_object.get_ref().properties[4]
 	set_process(true)
 	is_middle(layer == middle)
