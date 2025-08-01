@@ -79,7 +79,6 @@ func _physics_process(delta):
 
 
 func object_hovered(object: GameObject):
-	print("man")
 	if tool_manager.current_tool.tool_type == EditorTool.Type.TileTool:
 		return
 	

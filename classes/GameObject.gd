@@ -32,7 +32,7 @@ var palette: int = 0
 var palettes: int = 0
 
 var middle: int = LevelShared.Layers.Middle
-var layer: int = 1
+var layer: int = LevelShared.Layers.Middle
 var z_layer: int = 0
 
 # true if creating a GameObject for the object settings preview
@@ -73,7 +73,7 @@ func _ready():
 		set_property("layer", default_layer, true)
 	
 	z_layer = layer + LevelShared.layer_index_offset
-	
+	print(layer)
 	
 	if get_tree().current_scene.mode == 1:
 		if generate_editor_hitbox:
