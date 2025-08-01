@@ -57,6 +57,7 @@ margin_top = 96.0
 margin_right = 676.0
 margin_bottom = 136.0
 hint_tooltip = "Hide this object, while preserving its function"
+check_matches = false
 
 [node name="Enabled" parent="Properties/HBoxContainer/Extras" instance=ExtResource( 15 )]
 unique_name_in_owner = true

@@ -7,7 +7,7 @@ var selected_modulate := Color(0.7, 0.7, 1.2, modulate.a)
 var hover_modulate := Color(modulate.r, modulate.g, modulate.b, 0.5)
 var default_modulate := Color(1, 1, 1, modulate.a)
 
-export(LevelShared.Layers) var default_layer: int = 1
+export(LevelShared.Layers) var default_layer: int = LevelShared.Layers.Middle
 export var layer_shift: int = 0
 export var lock_layer: bool = false
 export var ignore_layer_disabling: bool = false
@@ -67,12 +67,6 @@ func load_placeable_item():
 func _ready():
 	load_placeable_item()
 	set_process(false)
-	if visible == false and mode == 1:
-		visible = true
-		var color = modulate
-		color.a = 0.5
-		modulate = color
-	
 #	print("From object, ", level_object)
 	
 	if layer != default_layer and lock_layer:
@@ -193,14 +187,15 @@ func _process(delta):
 
 
 func modulate_set():
+	modulate = default_modulate
+	
 	if selected:
-		modulate = selected_modulate
-		return
-	if !is_middle:
-		modulate = bg_modulate
-	else:
-		modulate = default_modulate
-	if hovered || !visibility:
+		modulate *= selected_modulate
+	
+	if layer < LevelShared.Layers.Middle:
+		modulate *= bg_modulate
+	
+	if hovered or not visibility:
 		modulate.a = hover_modulate.a
 
 

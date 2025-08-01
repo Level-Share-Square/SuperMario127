@@ -5,6 +5,10 @@ onready var hover_sound: AudioStreamPlayer = get_parent().get_node("%HoverSound"
 onready var click_sound: AudioStreamPlayer = get_parent().get_node("%ClickSound") 
 const NAME_TEXT: String = "%s: "
 
+# check if the property actually changes before updating it
+# can be toggled off because of visibility shenanigans
+export var check_matches: bool = true
+
 var editor: Editor
 var objects: Dictionary
 var property: Array
@@ -37,7 +41,7 @@ func property_changed(key: String, new_value):
 
 func change_property(new_value):
 	var affected_objects: Dictionary = setup_affected_objects(new_value)
-	if affected_objects["property_matches"] >= objects.size(): return
+	if check_matches and affected_objects["property_matches"] >= objects.size(): return
 	affected_objects.erase("property_matches")
 	
 	var action := ChangePropertyBulkAction.new()
