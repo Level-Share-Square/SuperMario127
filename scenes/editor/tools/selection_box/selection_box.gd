@@ -93,6 +93,7 @@ func _unhandled_input(event):
 				expand = true
 				selection_shape.disabled = false
 				selection_area.monitorable = true
+				print(editor.selected_objects)
 			
 			elif event.is_action_released("LMB"):
 				if start_pos != null:
@@ -132,13 +133,13 @@ func _process(delta):
 func _on_object_entered(area, object):
 	if expand == true:
 		selected_dict.get_or_add(object, object.name)
-		object.modulate = Color(0.7, 0.7, 1.2, object.modulate.a)
+		object.selected = true
 
 
 func _on_object_exited(area, object):
 	if erase == true:
 		selected_dict.erase(object)
-		object.modulate = Color(1, 1, 1, object.modulate.a)
+		object.selected = false
 
 
 func box_expansion():
@@ -254,7 +255,7 @@ func paste():
 		editor.tool_manager.change_tool(name)
 		show_selection_box()
 		for object in selected_dict:
-			object.modulate = Color(1, 1, 1, object.modulate.a)
+			object.selected = false
 		selected_dict = {}
 		snap_to_selected_size()
 		var action = PlaceObjectBulkAction.new()
@@ -271,7 +272,7 @@ func paste():
 
 func _on_Delete_button_down():
 	for object in selected_dict:
-		object.modulate = Color(1, 1, 1, object.modulate.a)
+		object.selected = false
 	var action = EraseObjectBulkAction.new()
 	action.shared = shared
 	action.objects = editor.selected_objects.keys()

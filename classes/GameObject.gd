@@ -2,7 +2,10 @@ class_name GameObject
 extends Node2D
 
 
-const BG_MODULATE := Color(0.54, 0.54, 0.54)
+var bg_modulate := Color(0.54, 0.54, 0.54, modulate.a)
+var selected_modulate := Color(0.7, 0.7, 1.2, modulate.a)
+var hover_modulate := Color(modulate.r, modulate.g, modulate.b, 0.5)
+var default_modulate := Color(1, 1, 1, modulate.a)
 
 export(LevelShared.Layers) var default_layer: int = 1
 export var layer_shift: int = 0
@@ -34,6 +37,8 @@ var z_layer: int = 0
 
 # true if creating a GameObject for the object settings preview
 var is_preview : bool = false
+
+var visibility: bool = true #for modulate
 
 var base_savable_properties: PoolStringArray = ["position", "scale", "rotation_degrees", "enabled", "visible", "layer"]
 var base_hidden_properties: PoolStringArray = []
@@ -118,6 +123,9 @@ func _ready():
 	yield(get_tree().create_timer(0.1), "timeout")
 	
 	property_info.resize(editable_properties.size())
+	if is_instance_valid(level_object):
+		visibility = level_object.get_ref().properties[4]
+	set_process(true)
 	is_middle(layer == middle)
 
 
@@ -181,7 +189,19 @@ func _process(delta):
 		var editor = get_tree().current_scene
 		connect("object_clicked", editor, "object_clicked", [self])
 		emit_signal("object_clicked")
-			
+	modulate_set()
+
+
+func modulate_set():
+	if selected:
+		modulate = selected_modulate
+		return
+	if !is_middle:
+		modulate = bg_modulate
+	else:
+		modulate = default_modulate
+	if hovered || !visibility:
+		modulate.a = hover_modulate.a
 
 
 func set_property(key, value, change_level_object = true, alias = null):
@@ -204,9 +224,7 @@ func set_property(key, value, change_level_object = true, alias = null):
 		if key == "visible":
 			if mode == 1:
 				visible = true
-				var color = modulate
-				color.a = 0.5 if value == false else 1.0
-				modulate = color
+				visibility = value
 		elif key == "layer":
 			update_layer()
 			
@@ -259,11 +277,6 @@ func update_layer():
 		z_index = (z_layer * LevelShared.layer_spacing) + layer_shift
 	else:
 		printerr("Object has assigned layer %s" % layer)
-	
-	if layer < LevelShared.Layers.Middle:
-		modulate = BG_MODULATE
-	else:
-		modulate = Color(1, 1, 1)
 
 func parts_input_handler(event, object):
 	if event is InputEventMouseButton and event.is_pressed() and hovered:
@@ -283,5 +296,4 @@ func parts_input_handler(event, object):
 
 func is_middle(check: bool) -> void:
 	is_middle = check
-	set_process(check)
 	set_physics_process(check)

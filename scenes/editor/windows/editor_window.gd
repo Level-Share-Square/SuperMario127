@@ -85,9 +85,9 @@ func close():
 	tween.set_ease(Tween.EASE_IN)
 	tween.set_trans(Tween.TRANS_CUBIC)
 	tween.tween_property(self, "rect_scale", Vector2.ZERO, popup_anim_duration)
-	
+
 	yield(tween, "finished")
-	
+
 	hide()
 
 

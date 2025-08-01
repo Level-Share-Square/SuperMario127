@@ -11,7 +11,7 @@ func _click_left(_event: InputEvent, _world_pos: Vector2) -> void:
 	else:
 		editor.selection_box.get_parent().hide_selection_box()
 		for object in editor.selected_objects:
-			object.modulate = Color(1, 1, 1, object.modulate.a)
+			object.selected = false
 		editor.selected_objects = {}
 		action()
 		editor.selection_box.get_parent().item_actions.hide_selection_actions()
@@ -58,6 +58,7 @@ func create_object_data(position: Vector2, object_id: int, palette: int) -> Obje
 	data.properties.append(0)
 	data.properties.append(true)
 	data.properties.append(true)
+	print(editor.layer)
 	data.properties.append(editor.layer if editor.object_layering else LevelShared.Layers.Middle)
 	
 	return data
