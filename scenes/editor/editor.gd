@@ -38,7 +38,6 @@ signal item_changed(placeable_item)
 
 
 func _ready():
-	selected_item = placeable_items.placeable_items["obj_coin"]
 	item_preview.update_item(selected_item, selected_item.palette, true)
 	#this is to dynamically update the framerate
 	_update_editor_framerate()
@@ -80,7 +79,6 @@ func _physics_process(delta):
 
 
 func object_hovered(object: GameObject):
-	print("man")
 	if tool_manager.current_tool.tool_type == EditorTool.Type.TileTool:
 		return
 	
@@ -125,6 +123,7 @@ func _on_Save_button_down():
 	Singleton.CurrentLevelData.level_info.level_author = level_settings.author.text
 	Singleton.CurrentLevelData.level_info.level_description = level_settings.description.text
 	Singleton.CurrentLevelData.level_info.thumbnail_url = level_settings.get_node("%ThumbnailURL").text #thanks godot
+	$"%Hotbar".update_level_data()
 	
 	var level_id: String = Singleton.CurrentLevelData.level_id
 	var working_folder: String = Singleton.CurrentLevelData.working_folder

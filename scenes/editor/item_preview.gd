@@ -15,9 +15,12 @@ func _process(delta):
 	rect_global_position = mouse_pos
 
 func update_item(item, palette, is_obj):
-	texture = item.previews[palette]
-	offset = texture.get_size()/2
 	is_object = is_obj
+	if is_obj:
+		texture = item.previews[palette]
+	else:
+		texture = item.icons[palette]
+	offset = texture.get_size()/2
 
 
 func _on_Tools_tool_changed():

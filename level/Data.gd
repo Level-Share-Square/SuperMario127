@@ -25,6 +25,10 @@ var layout_ids: Array = []
 var layout_palettes: Array = []
 var pinned_items: Array = []
 
+var loadouts: Array = []
+var favorites: Array = []
+var palettes: Array = []
+var fav_items: Array = []
 
 static func check_code(code):
 	return typeof(code) == TYPE_DICTIONARY or code.size() >= 5
@@ -313,15 +317,17 @@ func get_encoded_level_data():
 	level_string += level_thumbnail.percent_encode() + ","
 	
 	level_string += "["
-	for index in range(layout_ids.size()):
-		if index != 0:
-			level_string += ","
-		level_string += str(layout_palettes[index]) + str(layout_ids[index])
-	level_string += "^"
-	for index in range(pinned_items.size()):
-		if index != 0:
-			level_string += ","
-		level_string += str(pinned_items[index][1]) + str(pinned_items[index][0])
+	var loadout_index = 0
+	for loadout in loadouts:
+		level_string += "%s^" % [str(favorites[loadout_index])]
+		var item_index = 0
+		for item in loadout:
+			level_string += str(palettes[loadout_index][item_index])
+			level_string += "%s," % [item] if item_index != loadout.size() - 1 else "%s" % [item]
+			item_index += 1
+		if loadout_index != loadouts.size() - 1:
+			level_string += "|"
+		loadout_index += 1
 	level_string += "],"
 	
 	for area in areas:

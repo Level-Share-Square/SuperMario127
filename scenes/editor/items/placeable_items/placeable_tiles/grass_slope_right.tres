@@ -16,9 +16,9 @@
 script = ExtResource( 1 )
 item_name = "Grass Slope Right"
 groups = PoolStringArray( "special" )
-change_to = ""
-items_in_sequence = 0
-index_in_sequence = 0
+change_to = "til_grass_slope_left"
+items_in_sequence = 4
+index_in_sequence = 2
 icons = [ ExtResource( 8 ), ExtResource( 10 ), ExtResource( 9 ), ExtResource( 11 ), ExtResource( 4 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 5 ) ]
 previews = [ ExtResource( 8 ) ]
 priority = 0

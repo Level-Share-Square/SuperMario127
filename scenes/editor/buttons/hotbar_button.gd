@@ -10,13 +10,17 @@ onready var tween_progress = $TweenProgress
 onready var icon_offset = $"%IconOffset"
 onready var icon_node = $"%Icon"
 onready var progress = $"%Progress"
+onready var series_container = $"%SeriesContainer"
 
 onready var hotbar = $"%Hotbar"
 
 var item: PlaceableItem
 var favorite = false
 var palette = 0
-var changed = false
+var variant: int = 0
+
+var timer: float = 0.0
+var timer_start: bool = false
 
 func set_favorite(is_favorite: bool):
 	favorite = is_favorite
@@ -31,8 +35,20 @@ func change_item(new_item: PlaceableItem):
 		else:
 			icon_node.texture = item.icons[0]
 		tween_progress.connect("tween_all_completed", hotbar, "new_favorite_selected", [item, get_index()])
+		for indicator in series_container.get_children():
+			variant = item.index_in_sequence
+			indicator.color = Color(0, 0.75, 0.75) if indicator.get_index() == variant else Color("bfbfbf")
+			if indicator.get_index() < item.items_in_sequence:
+				indicator.show()
+			else:
+				indicator.hide()
+
+func _physics_process(delta):
+	if timer_start == true:
+		timer += delta
 
 func button_down():
+	print(variant)
 	tween.stop_all()
 	tween.interpolate_property(icon_node, "rect_position:y",
 		icon_node.rect_position.y, -3, 0.075,
@@ -53,9 +69,26 @@ func button_up():
 		icon_node.rect_position.y, 1, 0.15,
 		Tween.TRANS_BOUNCE, Tween.EASE_IN)
 	tween.start()
+	if timer <= 0.5 and timer != 0.0:
+		change_variant()
+	else:
+		pass
+	timer = 0.0
+	timer_start = false
 	
 	tween_progress.stop_all()
 	set_favorite(favorite)
+
+func change_variant():
+	if item.change_to != "":
+		var old_item = item
+		var new_item = hotbar.placeable_items.placeable_items[item.change_to]
+		change_item(new_item)
+		var index = hotbar.loadouts[hotbar.selected_loadout].find(hotbar.placeable_items.placeable_items.find_key(old_item))
+		hotbar.loadouts[hotbar.selected_loadout].pop_at(index)
+		hotbar.loadouts[hotbar.selected_loadout].insert(index, hotbar.placeable_items.placeable_items.find_key(new_item))
+		print(hotbar.loadouts[hotbar.selected_loadout])
+		hotbar._on_item_button_pressed(self)
 
 func mouse_entered():
 	tween_hover.stop_all()

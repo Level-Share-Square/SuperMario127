@@ -28,7 +28,6 @@ func _ready():
 	for item_button in button_container.get_children():
 		item_button.connect("button_down", self, "_on_item_button_pressed", [item_button])
 		item_button.item = placeable_items.placeable_items[loadouts[selected_loadout][item_button.get_index()]]
-	editor.selected_item = placeable_items.placeable_items["obj_coin"]
 #func _process(delta):
 #	print(editor)
 

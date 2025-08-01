@@ -10,6 +10,7 @@ var is_level_multiplayer_compatible: bool = true
 var invalid_reason: String
 var level_code: String
 var result: Dictionary = {}
+var new_toolbar: bool = false
 
 export (ValidityCheckTypes) var validity_check_type = -1
 
@@ -185,42 +186,77 @@ func decode(code: String)-> Dictionary:
 		full_result.description = code_array[3].percent_decode()
 		full_result.thumbnail_url = code_array[4].percent_decode()
 		
-		var editor_array: Array = code_array[5].split("^")
-		if editor_array.size() > 1:
-			layout_array = editor_array[0].split(",")
-			pins_array = editor_array[1].split(",")
-		
+		var layout_ids: Array = []
+		var layout_palettes: Array = []
+		var pinned_items: Array = []
 		add_amount = 4
-	
-	
-	var layout_ids: Array = []
-	var layout_palettes: Array = []
-	var pinned_items: Array = []
-	
-	var starting_toolbar = preload("res://scenes/oldeditor/starting_toolbar.tres")
-	for index in range(starting_toolbar.ids.size()):
-		layout_ids.append(starting_toolbar.ids[index])
-		layout_palettes.append(0)
-	
-	for index in range(layout_array.size()):
-		var item: String = layout_array[index]
-		var palette := int(item[0])
-		item.erase(0, 1)
-		
-		layout_ids[index] = item
-		layout_palettes[index] = palette
-		
-	for index in range(pins_array.size()):
-		var item: String = pins_array[index]
-		if item != "":
-			var palette := int(item[0])
-			item.erase(0, 1)
+		if code_array[5].substr(1, 1) != "^":
+			new_toolbar = false
+			var editor_array: Array = code_array[5].split("^")
+			if editor_array.size() > 1:
+				layout_array = editor_array[0].split(",")
+				pins_array = editor_array[1].split(",")
 			
-			var pin_array: Array = []
-			pin_array.append(item)
-			pin_array.append(palette)
-			pinned_items.append(pin_array)
-	
+			
+			
+			
+			var starting_toolbar = preload("res://scenes/oldeditor/starting_toolbar.tres")
+			for index in range(starting_toolbar.ids.size()):
+				layout_ids.append(starting_toolbar.ids[index])
+				layout_palettes.append(0)
+			
+			for index in range(layout_array.size()):
+				var item: String = layout_array[index]
+				var palette := int(item[0])
+				item.erase(0, 1)
+				
+				layout_ids[index] = item
+				layout_palettes[index] = palette
+				
+			for index in range(pins_array.size()):
+				var item: String = pins_array[index]
+				if item != "":
+					var palette := int(item[0])
+					item.erase(0, 1)
+					
+					var pin_array: Array = []
+					pin_array.append(item)
+					pin_array.append(palette)
+					pinned_items.append(pin_array)
+		else:
+			new_toolbar = true
+			var loadouts_array: Array = [[], [], [], []]
+			var favs_array: Array = [[], [], [], []]
+			var favs_num_array: Array = []
+			var palettes_array: Array = [[], [], [], []]
+			
+			var split_loadouts = code_array[5].split("|")
+			var loadout_counter = 0
+
+			for incomplete_loadout in split_loadouts:
+				favs_num_array.append(int(incomplete_loadout.left(1)))
+			var favs_num_copy = favs_num_array.duplicate()
+			for incomplete_loadout in split_loadouts:
+				incomplete_loadout.erase(0, 2)
+				var items = incomplete_loadout.split(",")
+				for item in items:
+					palettes_array[loadout_counter].append(int(item.left(1)))
+					item.erase(0, 1)
+					loadouts_array[loadout_counter].append(item)
+					if favs_num_copy[loadout_counter] > 0:
+						favs_array[loadout_counter].append(item)
+						favs_num_copy[loadout_counter] -= 1
+				loadout_counter += 1
+				
+			full_result.loadouts = loadouts_array
+			full_result.fav_items = favs_array
+			full_result.items_favorited = favs_num_array
+			full_result.loadout_palettes = palettes_array
+			
+			
+				
+			
+			
 	full_result.layout_ids = layout_ids
 	full_result.layout_palettes = layout_palettes
 	full_result.pinned_items = pinned_items
@@ -321,7 +357,6 @@ func decode(code: String)-> Dictionary:
 						decoded_object.properties.append(value_util.decode_value(value))
 					index += 1
 				full_result.areas[area_id].objects.append(decoded_object)
-	
 	return full_result
 	
 func decode_area(area: String):
@@ -488,6 +523,12 @@ func load_in(code: String)-> void:
 	layout_ids = result.layout_ids
 	layout_palettes = result.layout_palettes
 	pinned_items = result.pinned_items
+	
+	if new_toolbar:
+		loadouts = result.loadouts
+		palettes = result.loadout_palettes
+		favorites = result.items_favorited
+		fav_items = result.fav_items
 	
 	if format_version == current_format_version:
 		areas = []

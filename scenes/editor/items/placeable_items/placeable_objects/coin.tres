@@ -8,7 +8,7 @@
 script = ExtResource( 1 )
 item_name = "Coin"
 groups = PoolStringArray( "collectables" )
-change_to = "blue_coin"
+change_to = ""
 items_in_sequence = 2
 index_in_sequence = 0
 icons = [ ExtResource( 3 ) ]
