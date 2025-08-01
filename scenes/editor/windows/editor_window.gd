@@ -10,7 +10,6 @@ export(NodePath) var resize_control_path
 export var title: String
 export var icon: Texture
 export var icon_tooltip: String
-export var window_size: Vector2
 
 var drag_position: Vector2
 
@@ -44,10 +43,7 @@ func _ready() -> void:
 	if is_instance_valid(resize_control):
 		resize_control.connect("gui_input", self, "resize_window")
 	
-	rect_min_size.x = max(rect_min_size.x, window_size.x)
-	rect_min_size.y = max(rect_min_size.y, window_size.y)
-	
-	popup_centered(window_size)
+	popup_centered(rect_size)
 	
 	if not self == get_tree().current_scene:
 		hide()
@@ -91,7 +87,7 @@ func close():
 	hide()
 
 
-func toggle_window(size: Vector2) -> void:
+func toggle_window(size: Vector2 = rect_size) -> void:
 	if visible:
 		close()
 	else:

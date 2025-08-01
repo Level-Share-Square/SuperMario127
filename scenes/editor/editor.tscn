@@ -1549,13 +1549,13 @@ blocker_path = NodePath("../../Middle/MouseBlocker")
 open_text = ">"
 close_text = "<"
 
-[node name="EditorOptionsWindow" parent="UI" instance=ExtResource( 14 )]
+[node name="LevelSettingsWindow" parent="UI" instance=ExtResource( 14 )]
 unique_name_in_owner = true
 visible = false
-margin_left = 10.0
-margin_top = 62.0
-margin_right = 442.0
-margin_bottom = 286.0
+margin_left = 208.0
+margin_top = 97.0
+margin_right = 496.0
+margin_bottom = 339.0
 custom_styles/panel = SubResource( 184 )
 
 [node name="ObjectSettingsWindow" parent="UI" instance=ExtResource( 67 )]
@@ -1659,7 +1659,7 @@ bus = "Sounds"
 [connection signal="undo" from="ActionManager" to="ZIndex/Tools/ObjectSelection" method="snap_to_selected_size"]
 [connection signal="text_entered" from="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/SearchBar" to="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/ScrollContainer/CenterContainer/ItemsGrid" method="_on_search"]
 [connection signal="pressed" from="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/Search" to="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/ScrollContainer/CenterContainer/ItemsGrid" method="_on_search"]
-[connection signal="pressed" from="UI/UIContainer/EditorUI/Top/Options/PanelContainer/Settings" to="UI/EditorOptionsWindow" method="toggle_window" binds= [ Vector2( 400, 220 ) ]]
+[connection signal="pressed" from="UI/UIContainer/EditorUI/Top/Options/PanelContainer/Settings" to="UI/LevelSettingsWindow" method="toggle_window"]
 [connection signal="button_down" from="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/PanelContainer/Settings/Save" to="." method="_on_Save_button_down"]
 [connection signal="button_down" from="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/PanelContainer/Settings/Quit" to="." method="_on_Quit_button_down"]
 [connection signal="button_down" from="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown/ResetZoom" to="EditorCamera" method="_on_ResetZoom_button_down"]

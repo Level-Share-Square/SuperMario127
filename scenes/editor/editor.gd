@@ -25,7 +25,7 @@ onready var object_buffer = $"%ObjectBuffer"
 onready var action_manager: ActionManager = $"%ActionManager"
 
 onready var save_button = $UI/EditorUI/Utilities/Save
-onready var editor_options = $"%EditorOptionsWindow"
+onready var level_settings = $"%LevelSettingsWindow"
 onready var selection_box = $"%ObjectSelection".get_node("SelectionBox")
 onready var edit_selection = $"%EditSelection"
 onready var item_preview = $"%ItemPreview"
@@ -127,10 +127,10 @@ func get_shared_node() -> LevelShared:
 
 
 func _on_Save_button_down():
-	Singleton.CurrentLevelData.level_info.level_name = editor_options.level_name.text
-	Singleton.CurrentLevelData.level_info.level_author = editor_options.author.text
-	Singleton.CurrentLevelData.level_info.level_description = editor_options.description.text
-	Singleton.CurrentLevelData.level_info.thumbnail_url = editor_options.get_node("%ThumbnailURL").text #thanks godot
+	Singleton.CurrentLevelData.level_info.level_name = level_settings.level_name.text
+	Singleton.CurrentLevelData.level_info.level_author = level_settings.author.text
+	Singleton.CurrentLevelData.level_info.level_description = level_settings.description.text
+	Singleton.CurrentLevelData.level_info.thumbnail_url = level_settings.get_node("%ThumbnailURL").text #thanks godot
 	
 	var level_id: String = Singleton.CurrentLevelData.level_id
 	var working_folder: String = Singleton.CurrentLevelData.working_folder

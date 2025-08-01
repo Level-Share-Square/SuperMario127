@@ -10,7 +10,6 @@ margin_bottom = 192.0
 script = ExtResource( 2 )
 title = "{Object} Settings"
 icon_tooltip = "No object tooltip has been set..."
-window_size = Vector2( 256, 200 )
 
 [node name="Background" parent="." index="0"]
 margin_right = 256.0

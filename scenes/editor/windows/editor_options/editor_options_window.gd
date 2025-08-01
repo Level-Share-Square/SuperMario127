@@ -14,3 +14,9 @@ func on_editor_settings_pressed():
 
 func update_background():
 	owner.backgrounds.update_background_area(Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area])
+
+func update_level_info():
+	owner.level_name = level_name.text
+	owner.author = author.text
+	owner.description = description.text
+	owner.thumbnail_url = thumbnail_url.text

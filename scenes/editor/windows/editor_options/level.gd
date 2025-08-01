@@ -12,16 +12,3 @@ onready var window = owner
 func _ready() -> void:
 	var thumb_size = thumbnail.texture.get_size()
 	aspect_container.ratio = thumb_size.x/thumb_size.y
-
-
-# Called when the node enters the scene tree for the first time.
-func _process(_delta):
-	owner.level_name = level_name
-	owner.author = author
-	owner.description = description
-	owner.thumbnail_url = thumbnail_url
-	
-	#you may be asking why i did this here instead of in the editor options window
-	#the truth is that i made this script then realized i could just do it over there
-	#by then, it was already over
-	#im upset

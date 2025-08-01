@@ -17,10 +17,12 @@ onready var background_dropdown = $"%BGDropdown"
 onready var foreground_dropdown = $"%FGDropdown"
 onready var autoscroll_pick = $"%ASPick"
 
+onready var bg_container = $"%BGContainer"
 onready var background = $"%Background"
 onready var foreground = $"%Foreground"
 
 onready var palette_menu_button = $"%PaletteMenuButton"
+onready var palettes_container = $"%PalettesContainer"
 onready var palette_menu = $"%PalettesGrid"
 
 signal update_background()
@@ -37,7 +39,7 @@ func _ready():
 	background_dropdown.connect("item_selected", self, "_on_bg_selected")
 	foreground_dropdown.connect("item_selected", self, "_on_fg_selected")
 	
-	palette_menu_button.connect("toggled", self, "_on_palette_menu_toggled")
+	palette_menu_button.connect("pressed", self, "_on_palette_menu_opened")
 	
 	# I was wrong dignity... sorry... we can just do this on ready
 	area = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area]
@@ -105,6 +107,9 @@ func _on_palette_selected(event: InputEvent, index: int):
 		area.settings.background_palette = current_palette
 		emit_signal("update_background")
 
+		bg_container.show()
+		palettes_container.hide()
+
 
 func _on_bg_selected(index: int):
 	var resource: SkyResource = load("res://scenes/shared/background/backgrounds/%s/resource.tres" % backgrounds.ids[index])
@@ -131,9 +136,9 @@ func _on_fg_selected(index: int):
 	emit_signal("update_background")
 
 
-func _on_palette_menu_toggled(pressed: bool):
-	background.visible = !pressed
-	palette_menu.get_parent().get_parent().visible = pressed
+func _on_palette_menu_opened():
+	bg_container.hide()
+	palettes_container.show()
 	_init_palette_dropdown()
 
 
