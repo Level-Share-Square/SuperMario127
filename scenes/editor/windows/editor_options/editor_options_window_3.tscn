@@ -26,7 +26,7 @@ outline_color = Color( 0, 0, 0, 1 )
 use_filter = true
 font_data = ExtResource( 12 )
 
-[node name="EditorOptionsWindow2" instance=ExtResource( 3 )]
+[node name="EditorOptionsWindow" instance=ExtResource( 3 )]
 margin_right = 400.0
 margin_bottom = 220.0
 script = ExtResource( 9 )
@@ -202,46 +202,47 @@ wrap_enabled = true
 script = ExtResource( 20 )
 
 [node name="Areas" type="ScrollContainer" parent="ContentDivider/ContentMat/Tabs" index="1"]
-unique_name_in_owner = true
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 4.0
-margin_top = 27.0
-margin_right = -4.0
-margin_bottom = -4.0
+margin_left = 6.0
+margin_top = 29.0
+margin_right = -6.0
+margin_bottom = -6.0
 scroll_horizontal_enabled = false
 script = ExtResource( 13 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ContentDivider/ContentMat/Tabs/Areas" index="0"]
-margin_right = 372.0
+margin_right = 368.0
 margin_bottom = 35.0
 size_flags_horizontal = 3
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ContentDivider/ContentMat/Tabs/Areas/VBoxContainer" index="0"]
-margin_right = 372.0
+margin_right = 368.0
 margin_bottom = 19.0
 custom_constants/separation = 16
 
 [node name="Add" type="Button" parent="ContentDivider/ContentMat/Tabs/Areas/VBoxContainer/HBoxContainer" index="0"]
-margin_right = 178.0
+margin_right = 176.0
 margin_bottom = 19.0
+focus_mode = 0
 size_flags_horizontal = 3
 size_flags_vertical = 4
 text = "Add"
 
 [node name="Paste" type="Button" parent="ContentDivider/ContentMat/Tabs/Areas/VBoxContainer/HBoxContainer" index="1"]
-margin_left = 194.0
-margin_right = 372.0
+margin_left = 192.0
+margin_right = 368.0
 margin_bottom = 19.0
+focus_mode = 0
 size_flags_horizontal = 3
 size_flags_vertical = 4
 text = "Paste"
 
 [node name="AreaPanel" parent="ContentDivider/ContentMat/Tabs/Areas/VBoxContainer" index="1" instance=ExtResource( 4 )]
 margin_top = 23.0
-margin_right = 372.0
-margin_bottom = 75.0
+margin_right = 368.0
+margin_bottom = 151.0
 
 [node name="Background" type="ScrollContainer" parent="ContentDivider/ContentMat/Tabs" index="2"]
 visible = false
@@ -350,6 +351,7 @@ margin_left = 4.0
 margin_top = 4.0
 margin_right = 24.0
 margin_bottom = 24.0
+focus_mode = 0
 theme_type_variation = "ButtonTransparent"
 icon = ExtResource( 1 )
 expand_icon = true
@@ -427,6 +429,7 @@ margin_top = 21.0
 margin_right = 136.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 120, 0 )
+focus_mode = 0
 script = ExtResource( 6 )
 
 [node name="Foreground" type="VBoxContainer" parent="ContentDivider/ContentMat/Tabs/Background/HBoxContainer/MarginContainer/VBoxContainer" index="1"]
@@ -446,6 +449,7 @@ margin_top = 21.0
 margin_right = 136.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 120, 0 )
+focus_mode = 0
 script = ExtResource( 6 )
 
 [node name="Music" type="ScrollContainer" parent="ContentDivider/ContentMat/Tabs" index="3"]
@@ -476,11 +480,11 @@ alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ContentDivider/ContentMat/Tabs/Music/CenterContainer/VBoxContainer" index="0"]
 margin_right = 361.0
-margin_bottom = 19.0
+margin_bottom = 17.0
 
 [node name="Loop" type="LineEdit" parent="ContentDivider/ContentMat/Tabs/Music/CenterContainer/VBoxContainer/HBoxContainer" index="0"]
 margin_right = 150.0
-margin_bottom = 19.0
+margin_bottom = 17.0
 rect_min_size = Vector2( 150, 0 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -490,16 +494,15 @@ placeholder_text = "Loop Point (ms)"
 
 [node name="Control" type="Label" parent="ContentDivider/ContentMat/Tabs/Music/CenterContainer/VBoxContainer/HBoxContainer" index="1"]
 margin_left = 154.0
-margin_top = 1.0
 margin_right = 207.0
-margin_bottom = 18.0
+margin_bottom = 17.0
 text = "Success!"
 align = 1
 
 [node name="OggLink" type="LineEdit" parent="ContentDivider/ContentMat/Tabs/Music/CenterContainer/VBoxContainer/HBoxContainer" index="2"]
 margin_left = 211.0
 margin_right = 361.0
-margin_bottom = 19.0
+margin_bottom = 17.0
 rect_min_size = Vector2( 150, 0 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -508,9 +511,9 @@ expand_to_text_length = true
 placeholder_text = "Link to .ogg File"
 
 [node name="WindowMatHeaderContentDividerContentMatTabsMusicCenterContainerVBoxContainerWindowClose" type="Button" parent="ContentDivider/ContentMat/Tabs/Music/CenterContainer/VBoxContainer" index="1"]
-margin_top = 66.0
+margin_top = 64.0
 margin_right = 361.0
-margin_bottom = 87.0
+margin_bottom = 85.0
 rect_min_size = Vector2( 20.194, 21 )
 hint_tooltip = "Close"
 focus_mode = 0
@@ -534,4 +537,8 @@ margin_bottom = 241.0
 margin_right = 400.0
 margin_bottom = 241.0
 
+[connection signal="focus_exited" from="ContentDivider/ContentMat/Tabs/Level/HBoxContainer/VBoxContainer/ThumbnailURL" to="." method="update_level_info"]
+[connection signal="focus_exited" from="ContentDivider/ContentMat/Tabs/Level/HBoxContainer/VBoxContainer/Level Name" to="." method="update_level_info"]
+[connection signal="focus_exited" from="ContentDivider/ContentMat/Tabs/Level/HBoxContainer/VBoxContainer/Author" to="." method="update_level_info"]
+[connection signal="focus_exited" from="ContentDivider/ContentMat/Tabs/Level/HBoxContainer/VBoxContainer2/Description" to="." method="update_level_info"]
 [connection signal="button_down" from="ContentDivider/ContentMat/Tabs/Areas/VBoxContainer/HBoxContainer/Paste" to="ContentDivider/ContentMat/Tabs/Areas" method="paste_area"]

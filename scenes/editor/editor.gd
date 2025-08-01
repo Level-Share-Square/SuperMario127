@@ -145,7 +145,7 @@ func _on_Save_button_down():
 	save_meta_util.update_all_with_level(level_id, working_folder, false, Singleton.CurrentLevelData.level_info)
 	
 	Singleton.CurrentLevelData.unsaved_editor_changes = false
-	editor_options.get_node("%Areas").reload_areas()
+	level_settings.get_node("%Areas").reload_areas()
 
 
 func _on_Quit_button_down():
