@@ -69,7 +69,6 @@ func _ready():
 
 func _physics_process(delta):
 	if !hovered_objects.empty():
-		yield(get_tree(), "physics_frame")
 		if Input.is_action_just_pressed("LMB") && "ObjectPaint" in tool_manager.current_tool.name:
 			var closest_object = hovered_objects.values()[0]
 			for object in hovered_objects.values():

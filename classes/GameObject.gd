@@ -32,7 +32,7 @@ var palette: int = 0
 var palettes: int = 0
 
 var middle: int = LevelShared.Layers.Middle
-var layer: int = 1
+var layer: int = LevelShared.Layers.Middle
 var z_layer: int = 0
 
 # true if creating a GameObject for the object settings preview
@@ -73,7 +73,7 @@ func _ready():
 		set_property("layer", default_layer, true)
 	
 	z_layer = layer + LevelShared.layer_index_offset
-	
+	print(layer)
 	
 	if get_tree().current_scene.mode == 1:
 		if generate_editor_hitbox:
@@ -103,6 +103,9 @@ func _ready():
 			collision_shape.shape = RectangleShape2D.new()
 			editor_hitbox.add_child(collision_shape)
 		
+		if is_instance_valid(level_object.get_ref()):
+			visibility = level_object.get_ref().properties[4]
+		
 		var editor = get_tree().current_scene
 		editor_hitbox.connect("mouse_entered", editor, "object_hovered", [self])
 		editor_hitbox.connect("mouse_exited", editor, "object_unhovered", [self])
@@ -117,8 +120,6 @@ func _ready():
 	yield(get_tree().create_timer(0.1), "timeout")
 	
 	property_info.resize(editable_properties.size())
-	if is_instance_valid(level_object):
-		visibility = level_object.get_ref().properties[4]
 	set_process(true)
 	is_middle(layer == middle)
 
