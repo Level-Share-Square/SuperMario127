@@ -4,6 +4,7 @@ extends Node
 
 signal undo
 signal redo
+signal action
 
 var undo_stack: Array
 var redo_stack: Array
@@ -14,6 +15,7 @@ func commit_action(action: Action) -> void:
 	
 	action._do()
 	undo_stack.append(action)
+	emit_signal("action")
 
 
 func undo() -> void:

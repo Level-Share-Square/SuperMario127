@@ -8,6 +8,12 @@ func _click_left(_event: InputEvent, _world_pos: Vector2) -> void:
 	if editor.selected_objects.empty() && editor.hovered_objects.empty():
 		if Input.is_action_just_pressed("place"):
 			place_object(_world_pos)
+	elif !editor.hovered_objects.empty():
+		var closest_object = editor.hovered_objects.values()[0]
+		for object in editor.hovered_objects.values():
+			if Vector2(abs(object.global_position.x - get_global_mouse_position().x), abs(object.global_position.y - get_global_mouse_position().y)) < closest_object.global_position:
+				closest_object = object
+		select(closest_object)
 	else:
 		editor.selection_box.get_parent().hide_selection_box()
 		for object in editor.selected_objects:
