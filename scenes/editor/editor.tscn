@@ -777,25 +777,25 @@ script = ExtResource( 24 )
 
 [node name="Padding" type="Control" parent="UI/UIContainer/EditorUI/Top"]
 margin_left = 164.0
-margin_right = 586.0
+margin_right = 630.0
 margin_bottom = 416.0
 mouse_filter = 2
 size_flags_horizontal = 3
 
 [node name="Tools" type="HBoxContainer" parent="UI/UIContainer/EditorUI/Top"]
-margin_left = 590.0
+margin_left = 634.0
 margin_right = 750.0
 margin_bottom = 48.0
 size_flags_vertical = 0
 custom_constants/separation = 0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/UIContainer/EditorUI/Top/Tools"]
-margin_right = 112.0
+margin_right = 68.0
 margin_bottom = 48.0
 
 [node name="ItemActions" type="PanelContainer" parent="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer"]
 unique_name_in_owner = true
-margin_right = 112.0
+margin_right = 68.0
 margin_bottom = 32.0
 size_flags_vertical = 3
 size_flags_stretch_ratio = 2.0
@@ -805,42 +805,8 @@ script = ExtResource( 16 )
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/ItemActions"]
 margin_left = 4.0
 margin_top = 4.0
-margin_right = 108.0
+margin_right = 64.0
 margin_bottom = 28.0
-
-[node name="Undo" type="Button" parent="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/ItemActions/HBoxContainer"]
-margin_right = 24.0
-margin_bottom = 24.0
-rect_min_size = Vector2( 24, 24 )
-hint_tooltip = "Undo"
-focus_mode = 0
-size_flags_vertical = 3
-theme_type_variation = "ButtonTransparent"
-icon = ExtResource( 32 )
-icon_align = 1
-expand_icon = true
-script = ExtResource( 24 )
-click_override = "UndoSound"
-
-[node name="VSeparator" type="VSeparator" parent="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/ItemActions/HBoxContainer"]
-margin_left = 28.0
-margin_right = 32.0
-margin_bottom = 24.0
-
-[node name="Redo" type="Button" parent="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/ItemActions/HBoxContainer"]
-margin_left = 36.0
-margin_right = 60.0
-margin_bottom = 24.0
-rect_min_size = Vector2( 24, 24 )
-hint_tooltip = "Redo"
-focus_mode = 0
-size_flags_vertical = 3
-theme_type_variation = "ButtonTransparent"
-icon = ExtResource( 26 )
-icon_align = 1
-expand_icon = true
-script = ExtResource( 24 )
-click_override = "RedoSound"
 
 [node name="SelectionActions" type="HBoxContainer" parent="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/ItemActions/HBoxContainer"]
 unique_name_in_owner = true
@@ -880,19 +846,19 @@ icon_align = 1
 expand_icon = true
 script = ExtResource( 24 )
 
-[node name="PasteAction" type="HBoxContainer" parent="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/ItemActions/HBoxContainer"]
-unique_name_in_owner = true
+[node name="VSeparator3" type="VSeparator" parent="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/ItemActions/HBoxContainer/SelectionActions"]
 margin_left = 64.0
-margin_right = 104.0
+margin_right = 68.0
 margin_bottom = 24.0
 
-[node name="VSeparator3" type="VSeparator" parent="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/ItemActions/HBoxContainer/PasteAction"]
-margin_right = 4.0
+[node name="PasteAction" type="HBoxContainer" parent="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/ItemActions/HBoxContainer"]
+unique_name_in_owner = true
+visible = false
+margin_right = 32.0
 margin_bottom = 24.0
 
 [node name="Paste" type="Button" parent="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/ItemActions/HBoxContainer/PasteAction"]
-margin_left = 8.0
-margin_right = 32.0
+margin_right = 24.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 24, 24 )
 hint_tooltip = "Paste"
@@ -905,19 +871,53 @@ expand_icon = true
 script = ExtResource( 24 )
 
 [node name="VSeparator4" type="VSeparator" parent="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/ItemActions/HBoxContainer/PasteAction"]
-margin_left = 36.0
-margin_right = 40.0
+margin_left = 28.0
+margin_right = 32.0
 margin_bottom = 24.0
+
+[node name="Undo" type="Button" parent="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/ItemActions/HBoxContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+hint_tooltip = "Undo"
+focus_mode = 0
+size_flags_vertical = 3
+theme_type_variation = "ButtonTransparent"
+icon = ExtResource( 32 )
+icon_align = 1
+expand_icon = true
+script = ExtResource( 24 )
+click_override = "UndoSound"
+
+[node name="VSeparator" type="VSeparator" parent="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/ItemActions/HBoxContainer"]
+margin_left = 28.0
+margin_right = 32.0
+margin_bottom = 24.0
+
+[node name="Redo" type="Button" parent="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/ItemActions/HBoxContainer"]
+margin_left = 36.0
+margin_right = 60.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+hint_tooltip = "Redo"
+focus_mode = 0
+size_flags_vertical = 3
+theme_type_variation = "ButtonTransparent"
+icon = ExtResource( 26 )
+icon_align = 1
+expand_icon = true
+script = ExtResource( 24 )
+click_override = "RedoSound"
 
 [node name="Padding" type="Control" parent="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer"]
 margin_top = 36.0
-margin_right = 112.0
+margin_right = 68.0
 margin_bottom = 48.0
 size_flags_vertical = 3
 
 [node name="Layers" type="PanelContainer" parent="UI/UIContainer/EditorUI/Top/Tools"]
-margin_left = 112.0
-margin_right = 160.0
+margin_left = 68.0
+margin_right = 116.0
 margin_bottom = 48.0
 hint_tooltip = "Change Layer"
 size_flags_stretch_ratio = 2.0
@@ -1656,9 +1656,8 @@ bus = "Sounds"
 [connection signal="tool_changed" from="ZIndex/Tools" to="ZIndex/Tools/ObjectTrail" method="_on_Tools_tool_changed"]
 [connection signal="tool_changed" from="ZIndex/Tools" to="UI/UIContainer/EditorUI/Middle/Tools" method="_on_Tools_tool_changed"]
 [connection signal="tool_changed" from="ZIndex/Tools" to="ItemPreview" method="_on_Tools_tool_changed"]
-[connection signal="action" from="ActionManager" to="SaveManager" method="_on_ActionManager_action"]
-[connection signal="redo" from="ActionManager" to="ZIndex/Tools/ObjectSelection" method="snap_to_selected_size"]
 [connection signal="redo" from="ActionManager" to="ZIndex/Tools/ObjectSelection" method="on_redo"]
+[connection signal="redo" from="ActionManager" to="ZIndex/Tools/ObjectSelection" method="snap_to_selected_size"]
 [connection signal="undo" from="ActionManager" to="ZIndex/Tools/ObjectSelection" method="snap_to_selected_size"]
 [connection signal="undo" from="ActionManager" to="ZIndex/Tools/ObjectSelection" method="on_undo"]
 [connection signal="text_entered" from="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/SearchBar" to="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/ScrollContainer/CenterContainer/ItemsGrid" method="_on_search"]
@@ -1667,11 +1666,11 @@ bus = "Sounds"
 [connection signal="button_down" from="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/PanelContainer/Settings/Save" to="SaveManager" method="_on_Save_button_down"]
 [connection signal="button_down" from="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/PanelContainer/Settings/Quit" to="SaveManager" method="_on_Quit_button_down"]
 [connection signal="button_down" from="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown/ResetZoom" to="EditorCamera" method="_on_ResetZoom_button_down"]
-[connection signal="pressed" from="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/ItemActions/HBoxContainer/Undo" to="ActionManager" method="undo"]
-[connection signal="pressed" from="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/ItemActions/HBoxContainer/Redo" to="ActionManager" method="redo"]
 [connection signal="button_down" from="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/ItemActions/HBoxContainer/SelectionActions/Delete" to="ZIndex/Tools/ObjectSelection" method="_on_Delete_button_down"]
 [connection signal="pressed" from="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/ItemActions/HBoxContainer/SelectionActions/Copy" to="ZIndex/Tools/ObjectSelection" method="copy"]
 [connection signal="pressed" from="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/ItemActions/HBoxContainer/PasteAction/Paste" to="ZIndex/Tools/ObjectSelection" method="paste"]
+[connection signal="pressed" from="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/ItemActions/HBoxContainer/Undo" to="ActionManager" method="undo"]
+[connection signal="pressed" from="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/ItemActions/HBoxContainer/Redo" to="ActionManager" method="redo"]
 [connection signal="pressed" from="UI/UIContainer/EditorUI/Top/Tools/Layers/LayerPicker" to="UI/UIContainer/EditorUI/Top/Tools/Layers" method="pressed"]
 [connection signal="tool_picked" from="UI/UIContainer/EditorUI/Middle/Tools" to="ZIndex/Tools" method="_on_Tools_tool_picked"]
 [connection signal="pressed" from="UI/UIContainer/EditorUI/Bottom/Hotbar/ItemPickerButton/Button" to="UI/UIContainer/ItemPickerPanel" method="toggle"]

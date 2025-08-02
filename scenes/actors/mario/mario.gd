@@ -1093,14 +1093,14 @@ func _physics_process(delta: float) -> void:
 		
 		water_sprite_2.position = water_sprite.position - Vector2(-5 * facing_direction, 2)
 		water_sprite_2.reset_physics_interpolation()
-		water_particles.position = water_sprite.position + Vector2(12, 3)
+		water_particles.position = water_sprite.position + Vector2(12, 4)
 		water_particles.reset_physics_interpolation()
-		water_particles_2.position = water_particles.position + (Vector2(9.5 * facing_direction, 2))
+		water_particles_2.position = water_particles.position + (Vector2(9.5 * facing_direction, 3))
 		water_particles_2.reset_physics_interpolation()
 		turbo_particles.process_material.direction = Vector3(-facing_direction, 0, 0)
-		turbo_particles.position = water_sprite.position + Vector2(-3 * facing_direction, -11.5 if facing_direction == -1 else 11.5)
+		turbo_particles.position = water_sprite.position + Vector2(-4 * facing_direction, -11.5 if facing_direction == -1 else 11.5)
 		turbo_particles.reset_physics_interpolation()
-		rocket_particles.position = water_sprite.position + Vector2(8 if facing_direction == 1 else 10, 1.5)
+		rocket_particles.position = water_sprite.position + Vector2(8 if facing_direction == 1 else 10, 2.5)
 		rocket_particles.reset_physics_interpolation()
 	else:
 		fludd_sprite.visible = false

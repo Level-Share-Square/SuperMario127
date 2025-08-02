@@ -151,7 +151,8 @@ func on_item_selected(item: PlaceableItem):
 	loadouts[selected_loadout].insert(start_index, loadouts[selected_loadout].pop_back())
 	loadouts[selected_loadout][start_index] = placeable_items.placeable_items.find_key(item)
 	refresh_loadout()
-	
+
+	boxes[9].set_deferred("pressed", true)
 
 
 func refresh_loadout():
