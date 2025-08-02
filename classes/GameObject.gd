@@ -73,7 +73,6 @@ func _ready():
 		set_property("layer", default_layer, true)
 	
 	z_layer = layer + LevelShared.layer_index_offset
-	print(layer)
 	
 	if get_tree().current_scene.mode == 1:
 		if generate_editor_hitbox:

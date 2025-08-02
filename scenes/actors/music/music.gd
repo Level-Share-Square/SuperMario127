@@ -11,7 +11,7 @@ onready var temporary_music_player : AudioStreamPlayer = $TemporaryMusicPlayer
 onready var water_music_player : AudioStreamPlayer = $WaterMusicPlayer
 onready var timer_music_player : AudioStreamPlayer = $TimerMusicPlayer
 onready var tween : Tween = $Tween
-
+onready var timer: Timer = $Timer
 
 export var volume_multiplier := 1.0
 export var loading := false
@@ -24,6 +24,7 @@ var cur_setting = -1
 
 var song_cache := []
 var loop := 1.0
+var loop_end: float = 0.0
 
 var play_music := true
 var play_water := false
@@ -74,12 +75,18 @@ func reset_custom_song() -> void:
 func handle_custom_song(url: String) -> void:
 	loop = 0.0
 	if url.begins_with("LP"):
-		var trimmed_url = url.trim_prefix("LP").split("=")
-		loop = float(trimmed_url[0])
-		url = trimmed_url[1]
+		if !"|" in url:
+			var trimmed_url = url.trim_prefix("LP").split("=")
+			loop = float(trimmed_url[0])
+			url = trimmed_url[1]
+		else:
+			var variables = decode_new_music(url)
+			loop = variables[0]
+			url = variables[1]
+			loop_end = variables[2]
 	
 	stop()
-	
+	print(url)
 	var file_path: String = get_custom_file_path()
 	if not level_list_util.file_exists(file_path):
 		print("OGG file not found, downloading from url...")
@@ -98,6 +105,46 @@ func handle_custom_song(url: String) -> void:
 		
 		load_ogg(bytes)
 
+func decode_new_music(raw_music: String) -> Array:
+	print("gay")
+	var loop_start
+	var loop_end
+	var song_name
+	var url
+	var loop_start_string = raw_music.substr(0, raw_music.find("="))
+	loop_start_string.erase(0, 2)
+	if float(loop_start_string) == 0:
+		loop_start = 0.0
+	else:
+		loop_start = float(loop_start_string)
+	
+	raw_music.erase(0, raw_music.find("h"))
+	
+	if raw_music.find("|") != -1:
+		url = raw_music.substr(0, raw_music.find("|"))
+	else:
+		url = raw_music
+		song_name = ""
+		loop_end = 0
+		return [loop_start, url, loop_end, song_name]
+		
+	raw_music.erase(0, raw_music.find("|") + 1)
+	
+	var loop_end_string = raw_music.substr(0, raw_music.find("N"))
+	loop_end_string.erase(0, 4)
+	if float(loop_end_string) == 0:
+		loop_end = 0.0
+	else:
+		loop_end = float(loop_end_string)
+	
+	raw_music.erase(0, raw_music.find("N"))
+	
+	if raw_music == "N=":
+		pass
+	else:
+		raw_music.erase(0, 2)
+		song_name = raw_music
+	return [loop_start, url, loop_end, song_name]
 
 func save_ogg(url: String, level_id: String, area: int, working_folder: String) -> void:
 	var file_path: String = level_list_util.get_level_music_path(
@@ -136,10 +183,23 @@ func load_ogg(bytes: PoolByteArray) -> void:
 	if get_tree().get_current_scene().mode != 2:
 		self.stream = stream
 		play()
+	print(loop_end)
+	if loop_end != 0.0:
+		timer.wait_time = loop_end
+		timer.start()
+		timer.connect("timeout", self, "on_loop_end_reached")
+	else:
+		timer.stop()
 	
 	print("OGG file loaded.")
 #######
 
+func on_loop_end_reached():
+	timer.wait_time = loop_end - loop
+	timer.stop()
+	timer.start()
+	stop()
+	play(loop)
 
 func change_song(old_setting, music_setting) -> void:
 	var song
