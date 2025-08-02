@@ -1,0 +1,36 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scenes/editor/tools/selection_box/selection_border.png" type="Texture" id=1]
+[ext_resource path="res://scenes/editor/tools/tile_selection/tile_selection.gd" type="Script" id=2]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 28, 28 )
+
+[node name="TileSelection" type="Control"]
+mouse_filter = 2
+script = ExtResource( 2 )
+
+[node name="Highlight" type="ReferenceRect" parent="."]
+unique_name_in_owner = true
+margin_right = 40.0
+margin_bottom = 40.0
+border_color = Color( 1, 1, 1, 1 )
+border_width = 3.0
+editor_only = false
+
+[node name="SelectionBox" type="NinePatchRect" parent="."]
+unique_name_in_owner = true
+margin_left = 220.0
+margin_top = 70.0
+margin_right = 384.0
+margin_bottom = 161.0
+texture = SubResource( 1 )
+draw_center = false
+region_rect = Rect2( 0, 0, 28, 28 )
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1

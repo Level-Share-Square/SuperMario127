@@ -554,6 +554,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/editor/tools/selection_box/selection_tools/move.gd"
 }, {
+"base": "Action",
+"class": "MoveTilesAction",
+"language": "GDScript",
+"path": "res://scenes/editor/action_manager/actions/move_tiles.gd"
+}, {
 "base": "Reference",
 "class": "MusicDownloader",
 "language": "GDScript",
@@ -849,6 +854,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/editor/tools/tile_rect_fill.gd"
 }, {
+"base": "EditorTool",
+"class": "TileSelection",
+"language": "GDScript",
+"path": "res://scenes/editor/tools/tile_selection/tile_selection.gd"
+}, {
 "base": "Control",
 "class": "TimerBase",
 "language": "GDScript",
@@ -1114,6 +1124,7 @@ _global_script_class_icons={
 "Member": "",
 "MetalPowerup": "",
 "MoveSelection": "",
+"MoveTilesAction": "",
 "MusicDownloader": "",
 "NPCBase": "",
 "NoActionState": "",
@@ -1173,6 +1184,7 @@ _global_script_class_icons={
 "ThumbnailDownloader": "",
 "TileMapLayer": "",
 "TileRectFill": "",
+"TileSelection": "",
 "TimerBase": "",
 "TimerManager": "",
 "ToolManager": "",
