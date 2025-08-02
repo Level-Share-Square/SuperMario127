@@ -142,6 +142,7 @@ func get_settings(result) -> LevelAreaSettings:
 	settings.gravity = abs(result.gravity)
 	settings.timer = abs(result.timer)
 	settings.name = result.name
+	settings.underwater_music = result.underwater_music
 	var size_vec2 = get_vector2(result.size)
 	settings.bounds.size = Vector2(clamp(size_vec2.x, 24, 1500), clamp(size_vec2.y, 14, 1500))
 	return settings
@@ -344,7 +345,8 @@ func get_encoded_level_data():
 		level_string += value_util.encode_value(settings.gravity) + ","
 		level_string += value_util.encode_value(settings.background_palette) + ","
 		level_string += value_util.encode_value(settings.timer) + ","
-		level_string += value_util.encode_value(settings.name) + "~"
+		level_string += value_util.encode_value(settings.name) + ","
+		level_string += value_util.encode_value(settings.underwater_music) + "~"
 		
 		var tiles := []
 		var very_background_tiles := []
@@ -409,7 +411,8 @@ func get_encoded_area_data(area: LevelArea):
 	level_string += value_util.encode_value(settings.gravity) + ","
 	level_string += value_util.encode_value(settings.background_palette) + ","
 	level_string += value_util.encode_value(settings.timer) + ","
-	level_string += value_util.encode_value(settings.name) + "~"
+	level_string += value_util.encode_value(settings.name) + ","
+	level_string += value_util.encode_value(settings.underwater_music) + "~"
 	
 	var tiles := []
 	var very_background_tiles := []

@@ -26,3 +26,5 @@ bus = "Music"
 [node name="Tween" type="Tween" parent="."]
 
 [node name="Timer" type="Timer" parent="."]
+
+[node name="UnderwaterTimer" type="Timer" parent="."]

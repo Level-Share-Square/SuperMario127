@@ -12,6 +12,7 @@ onready var water_music_player : AudioStreamPlayer = $WaterMusicPlayer
 onready var timer_music_player : AudioStreamPlayer = $TimerMusicPlayer
 onready var tween : Tween = $Tween
 onready var timer: Timer = $Timer
+onready var underwater_timer: Timer = $UnderwaterTimer
 
 export var volume_multiplier := 1.0
 export var loading := false
@@ -25,6 +26,9 @@ var cur_setting = -1
 var song_cache := []
 var loop := 1.0
 var loop_end: float = 0.0
+
+var underwater_loop: float = 0.0
+var underwater_loop_end: float = 0.0
 
 var play_music := true
 var play_water := false
@@ -55,7 +59,7 @@ func is_tween_active() -> bool:
 
 
 ##### CUSTOM MUSIC
-func get_custom_file_path() -> String:
+func get_custom_file_path(underwater: bool = false) -> String:
 	# i think accessing leveldata singleton is safe for now since
 	# this only is called inside levels, i hope i dont regret that decision
 	var level_id: String = Singleton.CurrentLevelData.level_id
@@ -65,14 +69,15 @@ func get_custom_file_path() -> String:
 	return level_list_util.get_level_music_path(
 		level_id, 
 		area,
-		working_folder)
+		working_folder,
+		underwater)
 
 func reset_custom_song() -> void:
 	var file_path: String = get_custom_file_path()
 	if level_list_util.file_exists(file_path):
 		level_list_util.delete_file(file_path)
 
-func handle_custom_song(url: String) -> void:
+func handle_custom_song(url: String, underwater: bool = false) -> void:
 	loop = 0.0
 	if url.begins_with("LP"):
 		if !"|" in url:
@@ -81,20 +86,23 @@ func handle_custom_song(url: String) -> void:
 			url = trimmed_url[1]
 		else:
 			var variables = decode_new_music(url)
-			loop = variables[0]
+			if underwater:
+				underwater_loop = variables[0]
+				underwater_loop_end = variables[2]
+			else:
+				loop = variables[0]
+				loop_end = variables[2]
 			url = variables[1]
-			loop_end = variables[2]
 	
 	stop()
-	print(url)
-	var file_path: String = get_custom_file_path()
+	var file_path: String = get_custom_file_path(underwater)
 	if not level_list_util.file_exists(file_path):
 		print("OGG file not found, downloading from url...")
 		
 		var level_id: String = Singleton.CurrentLevelData.level_id
 		var area: int = Singleton.CurrentLevelData.area
 		var working_folder: String = Singleton.CurrentLevelData.working_folder
-		save_ogg(url, level_id, area, working_folder)
+		save_ogg(url, level_id, area, working_folder, underwater)
 	else:
 		print("OGG file found, loading...")
 		
@@ -103,10 +111,12 @@ func handle_custom_song(url: String) -> void:
 		var bytes: PoolByteArray = ogg_file.get_buffer(ogg_file.get_len())
 		ogg_file.close()
 		
-		load_ogg(bytes)
+		if !underwater:
+			load_ogg(bytes)
+		else:
+			load_underwater_ogg(bytes)
 
 func decode_new_music(raw_music: String) -> Array:
-	print("gay")
 	var loop_start
 	var loop_end
 	var song_name
@@ -140,26 +150,27 @@ func decode_new_music(raw_music: String) -> Array:
 	raw_music.erase(0, raw_music.find("N"))
 	
 	if raw_music == "N=":
-		pass
+		song_name = ""
 	else:
 		raw_music.erase(0, 2)
 		song_name = raw_music
 	return [loop_start, url, loop_end, song_name]
 
-func save_ogg(url: String, level_id: String, area: int, working_folder: String) -> void:
+func save_ogg(url: String, level_id: String, area: int, working_folder: String, underwater: bool = false) -> void:
 	var file_path: String = level_list_util.get_level_music_path(
 		level_id, 
 		area,
-		working_folder)
+		working_folder,
+		underwater)
 	
 	#http_request.download_file = file_path
 	http_request.request(url)
 	
 	# warning-ignore:return_value_discarded
-	http_request.connect("request_completed", self, "request_completed", [file_path], CONNECT_ONESHOT)
+	http_request.connect("request_completed", self, "request_completed", [file_path, underwater], CONNECT_ONESHOT)
 
 
-func request_completed(result: int, response_code: int, headers: PoolStringArray, body: PoolByteArray, file_path: String):
+func request_completed(result: int, response_code: int, headers: PoolStringArray, body: PoolByteArray, file_path: String, underwater: bool = false):
 	var ogg_file := File.new()
 	var err: int = ogg_file.open(file_path, File.WRITE)
 	if err != OK:
@@ -169,7 +180,10 @@ func request_completed(result: int, response_code: int, headers: PoolStringArray
 	ogg_file.store_buffer(body)
 	ogg_file.close()
 	
-	load_ogg(body)
+	if !underwater:
+		load_ogg(body)
+	else:
+		load_underwater_ogg(body)
 
 
 func load_ogg(bytes: PoolByteArray) -> void:
@@ -183,15 +197,41 @@ func load_ogg(bytes: PoolByteArray) -> void:
 	if get_tree().get_current_scene().mode != 2:
 		self.stream = stream
 		play()
-	print(loop_end)
 	if loop_end != 0.0:
 		timer.wait_time = loop_end
 		timer.start()
 		timer.connect("timeout", self, "on_loop_end_reached")
 	else:
 		timer.stop()
+		
+	var underwater_raw = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].settings.underwater_music
+	if underwater_raw == "":
+		has_water = false
+	else:
+		handle_custom_song(underwater_raw, true)
 	
 	print("OGG file loaded.")
+	
+func load_underwater_ogg(bytes: PoolByteArray) -> void:
+	var new_stream := AudioStreamOGGVorbis.new()
+	new_stream.data = bytes
+	new_stream.loop = true
+	new_stream.loop_offset = underwater_loop
+	if new_stream.data == null:
+		return
+
+	if get_tree().get_current_scene().mode != 2:
+		water_music_player.stream = new_stream
+		water_music_player.play()
+		water_music_player.volume_db = -80
+		has_water = true
+		play_water = false
+	if underwater_loop_end != 0.0:
+		underwater_timer.wait_time = underwater_loop_end
+		underwater_timer.start()
+		underwater_timer.connect("timeout", self, "on_underwater_loop_end_reached")
+	else:
+		underwater_timer.stop()
 #######
 
 func on_loop_end_reached():
@@ -200,6 +240,13 @@ func on_loop_end_reached():
 	timer.start()
 	stop()
 	play(loop)
+	
+func on_underwater_loop_end_reached():
+	underwater_timer.wait_time = underwater_loop_end - underwater_loop
+	underwater_timer.stop()
+	underwater_timer.start()
+	water_music_player.stop()
+	water_music_player.play(underwater_loop)
 
 func change_song(old_setting, music_setting) -> void:
 	var song
@@ -210,7 +257,6 @@ func change_song(old_setting, music_setting) -> void:
 	elif typeof(music_setting) == TYPE_STRING:
 		# Custom music can't have water variations currently
 		# Set has_water to false whenever loading custom music
-		has_water = false
 		if typeof(music_setting) != typeof(old_setting) or music_setting != old_setting:
 			base_volume = 0
 			handle_custom_song(music_setting)

@@ -305,7 +305,10 @@ func decode(code: String)-> Dictionary:
 			full_result.areas[area_id].settings.name = value_util.decode_value(area_settings_array[7])
 		else:
 			full_result.areas[area_id].settings.name = ""
-		
+		if area_settings_array.size() > 8:
+			full_result.areas[area_id].settings.underwater_music = value_util.decode_value(area_settings_array[8])
+		else:
+			full_result.areas[area_id].settings.underwater_music = ""
 		
 		if(conversion_util.compareVersions(full_result.format_version, "0.4.5") == -1):
 			area_array.insert(2,"0*0")
@@ -393,6 +396,11 @@ func decode_area(area: String):
 		
 	if area_settings_array.size() > 7:
 		full_result.settings.name = value_util.decode_value(area_settings_array[7])
+		
+	if area_settings_array.size() > 8:
+		full_result.settings.underwater_music = value_util.decode_value(area_settings_array[8])
+	else:
+		full_result.settings.underwater_music = ""
 	
 	
 	var area_tiles_array = area_array[1].split(",")

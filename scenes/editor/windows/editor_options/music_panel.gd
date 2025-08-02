@@ -31,7 +31,6 @@ func update_panel():
 		raw_music = area.settings.music
 	else:
 		raw_music = area.settings.underwater_music
-		return
 		
 	if typeof(raw_music) == TYPE_INT:
 		return #regular music implementation

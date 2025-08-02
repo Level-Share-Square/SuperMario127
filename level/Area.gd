@@ -44,6 +44,7 @@ func duplicate_settings(base_settings):
 	new_settings.background = base_settings.background
 	new_settings.background_palette = base_settings.background_palette
 	new_settings.music = base_settings.music
+	new_settings.underwater_music = base_settings.underwater_music
 	new_settings.bounds = base_settings.bounds
 	new_settings.gravity = base_settings.gravity
 	new_settings.timer = base_settings.timer
