@@ -1,0 +1,72 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/editor/editor_theme.tres" type="Theme" id=1]
+[ext_resource path="res://scenes/editor/windows/editor_options/music_panel.gd" type="Script" id=2]
+
+[node name="BGMPanel" type="PanelContainer"]
+margin_top = 21.0
+margin_right = 372.0
+margin_bottom = 73.0
+rect_min_size = Vector2( 372, 0 )
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_left = 6.0
+margin_top = 6.0
+margin_right = 366.0
+margin_bottom = 46.0
+alignment = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_right = 360.0
+margin_bottom = 19.0
+size_flags_vertical = 8
+
+[node name="SongURL" type="LineEdit" parent="VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+margin_right = 282.0
+margin_bottom = 19.0
+size_flags_horizontal = 3
+align = 1
+placeholder_text = "Song URL (.mp3, .ogg)"
+
+[node name="Import" type="Button" parent="VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+margin_left = 286.0
+margin_right = 360.0
+margin_bottom = 19.0
+size_flags_vertical = 3
+theme_type_variation = "ButtonPurple"
+text = "Import File"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 23.0
+margin_right = 360.0
+margin_bottom = 40.0
+
+[node name="SongName" type="LineEdit" parent="VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+margin_right = 170.0
+margin_bottom = 17.0
+rect_min_size = Vector2( 170, 0 )
+align = 1
+placeholder_text = "Song Name"
+
+[node name="LoopStart" type="LineEdit" parent="VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+margin_left = 174.0
+margin_right = 264.0
+margin_bottom = 17.0
+rect_min_size = Vector2( 90, 0 )
+align = 1
+placeholder_text = "Loop Start"
+
+[node name="LoopEnd" type="LineEdit" parent="VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+margin_left = 268.0
+margin_right = 358.0
+margin_bottom = 17.0
+rect_min_size = Vector2( 90, 0 )
+align = 1
+placeholder_text = "Loop End"

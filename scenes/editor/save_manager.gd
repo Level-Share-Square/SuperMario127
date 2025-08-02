@@ -39,6 +39,10 @@ func _on_Quit_button_down():
 		if Singleton.SceneSwitcher.menu_return_args.size() > 0:
 			Singleton.SceneSwitcher.menu_return_args = [Singleton.CurrentLevelData.level_info, level_id, working_folder, true, is_campaign]
 		
+		Singleton.Music.loop = 0
+		Singleton.Music.loop_end = 0
+		Singleton.Music.timer.stop()
+		
 		Singleton.SceneSwitcher.quit_to_menu_with_transition("levels_screen")
 
 func _on_Save_button_down():

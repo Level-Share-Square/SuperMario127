@@ -52,7 +52,6 @@ func swap(areaA : LevelArea, areaB : LevelArea, areasArray : Array) -> Array:
 func _ready():
 	for area in Singleton.CurrentLevelData.level_data.areas:
 		area_names.append(area.settings.name)
-		print(area.settings.name)
 	area_name.connect("text_changed", self, "area_renamed")
 	var _connect = switch_to_button.connect("pressed", self, "switch_to_area")
 	_connect = delete_button.connect("pressed", self, "delete_area")

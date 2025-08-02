@@ -16,6 +16,7 @@ export(LevelShared.Layers) var layer: int = 2
 
 var hovered_objects: Dictionary = {}
 var selected_objects: Dictionary = {}
+var selected_tiles: Dictionary = {}
 var selected_item: PlaceableItem
 
 onready var editor_camera: Camera2D = $"%EditorCamera"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://scenes/editor/assets/palette.svg" type="Texture" id=1]
 [ext_resource path="res://scenes/menu/line_edit_unfocus.gd" type="Script" id=2]
@@ -10,21 +10,14 @@
 [ext_resource path="res://scenes/shared/background/backgrounds/day/day.png" type="Texture" id=8]
 [ext_resource path="res://scenes/editor/windows/editor_options/editor_options_window.gd" type="Script" id=9]
 [ext_resource path="res://scenes/actors/objects/painting/border.png" type="Texture" id=10]
-[ext_resource path="res://scenes/editor/editor_theme.tres" type="Theme" id=11]
-[ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=12]
+[ext_resource path="res://scenes/editor/windows/editor_options/music_panel.tscn" type="PackedScene" id=11]
 [ext_resource path="res://scenes/editor/windows/editor_options/areas.gd" type="Script" id=13]
-[ext_resource path="res://scenes/editor/windows/editor_options/music.gd" type="Script" id=14]
 [ext_resource path="res://scenes/editor/windows/editor_options/level.gd" type="Script" id=15]
 [ext_resource path="res://scenes/shared/background/foregrounds/forest/preview.png" type="Texture" id=16]
 [ext_resource path="res://scenes/editor/windows/editor_options/environment.gd" type="Script" id=17]
 [ext_resource path="res://scenes/shared/background/backgrounds/ids.tres" type="Resource" id=18]
 [ext_resource path="res://scenes/shared/background/foregrounds/ids.tres" type="Resource" id=19]
 [ext_resource path="res://scenes/menu/text_edit_unfocus.gd" type="Script" id=20]
-
-[sub_resource type="DynamicFont" id=3]
-outline_color = Color( 0, 0, 0, 1 )
-use_filter = true
-font_data = ExtResource( 12 )
 
 [node name="EditorOptionsWindow2" instance=ExtResource( 3 )]
 margin_right = 400.0
@@ -458,69 +451,30 @@ margin_right = -6.0
 margin_bottom = -6.0
 scroll_horizontal_enabled = false
 scroll_deadzone = 7
-script = ExtResource( 14 )
 
-[node name="CenterContainer" type="CenterContainer" parent="ContentDivider/ContentMat/Tabs/Music" index="0"]
-margin_right = 368.0
-margin_bottom = 163.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
+[node name="VBoxContainer" type="VBoxContainer" parent="ContentDivider/ContentMat/Tabs/Music" index="0"]
+margin_right = 372.0
+margin_bottom = 70.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ContentDivider/ContentMat/Tabs/Music/CenterContainer" index="0"]
-margin_left = 3.0
-margin_top = 39.0
-margin_right = 364.0
-margin_bottom = 124.0
-custom_constants/separation = 47
-alignment = 1
-
-[node name="HBoxContainer" type="HBoxContainer" parent="ContentDivider/ContentMat/Tabs/Music/CenterContainer/VBoxContainer" index="0"]
-margin_right = 361.0
-margin_bottom = 19.0
-
-[node name="Loop" type="LineEdit" parent="ContentDivider/ContentMat/Tabs/Music/CenterContainer/VBoxContainer/HBoxContainer" index="0"]
-margin_right = 150.0
-margin_bottom = 19.0
-rect_min_size = Vector2( 150, 0 )
-size_flags_horizontal = 3
-size_flags_vertical = 3
-align = 1
-expand_to_text_length = true
-placeholder_text = "Loop Point (ms)"
-
-[node name="Control" type="Label" parent="ContentDivider/ContentMat/Tabs/Music/CenterContainer/VBoxContainer/HBoxContainer" index="1"]
-margin_left = 154.0
-margin_top = 1.0
-margin_right = 207.0
-margin_bottom = 18.0
-text = "Success!"
+[node name="Label" type="Label" parent="ContentDivider/ContentMat/Tabs/Music/VBoxContainer" index="0"]
+margin_right = 372.0
+margin_bottom = 17.0
+text = "Background Music:"
 align = 1
 
-[node name="OggLink" type="LineEdit" parent="ContentDivider/ContentMat/Tabs/Music/CenterContainer/VBoxContainer/HBoxContainer" index="2"]
-margin_left = 211.0
-margin_right = 361.0
-margin_bottom = 19.0
-rect_min_size = Vector2( 150, 0 )
-size_flags_horizontal = 3
-size_flags_vertical = 3
-align = 1
-expand_to_text_length = true
-placeholder_text = "Link to .ogg File"
+[node name="BGMPanel" parent="ContentDivider/ContentMat/Tabs/Music/VBoxContainer" index="1" instance=ExtResource( 11 )]
 
-[node name="WindowMatHeaderContentDividerContentMatTabsMusicCenterContainerVBoxContainerWindowClose" type="Button" parent="ContentDivider/ContentMat/Tabs/Music/CenterContainer/VBoxContainer" index="1"]
-margin_top = 66.0
-margin_right = 361.0
-margin_bottom = 87.0
-rect_min_size = Vector2( 20.194, 21 )
-hint_tooltip = "Close"
-focus_mode = 0
-theme = ExtResource( 11 )
-theme_type_variation = "de"
-custom_fonts/font = SubResource( 3 )
-enabled_focus_mode = 0
-text = "Save"
-icon_align = 1
-script = ExtResource( 6 )
+[node name="Label2" type="Label" parent="ContentDivider/ContentMat/Tabs/Music/VBoxContainer" index="2"]
+margin_top = 77.0
+margin_right = 372.0
+margin_bottom = 94.0
+text = "Underwater Music:"
+align = 1
+
+[node name="UWMPanel" parent="ContentDivider/ContentMat/Tabs/Music/VBoxContainer" index="3" instance=ExtResource( 11 )]
+margin_top = 98.0
+margin_bottom = 150.0
+music_type = 1
 
 [node name="Border" parent="." index="2"]
 margin_right = 400.0
