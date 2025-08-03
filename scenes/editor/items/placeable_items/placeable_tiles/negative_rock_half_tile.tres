@@ -1,0 +1,20 @@
+[gd_resource type="Resource" load_steps=6 format=2]
+
+[ext_resource path="res://scenes/editor/items/placeable_tile.gd" type="Script" id=1]
+[ext_resource path="res://assets/tiles/negative_rock/slab_icon.png" type="Texture" id=2]
+[ext_resource path="res://assets/tiles/negative_rock/palette_icons/1_slab.png" type="Texture" id=3]
+[ext_resource path="res://assets/tiles/negative_rock/palette_icons/2_slab.png" type="Texture" id=4]
+[ext_resource path="res://assets/tiles/negative_rock/palette_icons/3_slab.png" type="Texture" id=5]
+
+[resource]
+script = ExtResource( 1 )
+item_name = "Negative Rock (Half Tile)"
+groups = PoolStringArray( "special" )
+change_to = "til_negative_rock_slope_left"
+items_in_sequence = 4
+index_in_sequence = 1
+icons = [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ) ]
+previews = [ ExtResource( 2 ) ]
+priority = 0
+tileset_id = 18
+tile_id = 1

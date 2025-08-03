@@ -16,9 +16,9 @@
 script = ExtResource( 1 )
 item_name = "Fire Bricks (Left Stairs)"
 groups = PoolStringArray( "special" )
-change_to = ""
+change_to = "til_fire_brick_stairs_right"
 items_in_sequence = 3
-index_in_sequence = 2
+index_in_sequence = 1
 icons = [ ExtResource( 2 ), ExtResource( 6 ), ExtResource( 3 ), ExtResource( 5 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 10 ), ExtResource( 9 ), ExtResource( 11 ) ]
 previews = [ ExtResource( 4 ) ]
 priority = 0

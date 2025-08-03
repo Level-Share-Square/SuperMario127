@@ -1,0 +1,26 @@
+[gd_resource type="Resource" load_steps=12 format=2]
+
+[ext_resource path="res://scenes/editor/items/placeable_tile.gd" type="Script" id=1]
+[ext_resource path="res://assets/tiles/glass/icon_sloper.png" type="Texture" id=2]
+[ext_resource path="res://assets/tiles/glass/palette_icons/1_sloper.png" type="Texture" id=3]
+[ext_resource path="res://assets/tiles/glass/palette_icons/5_sloper.png" type="Texture" id=4]
+[ext_resource path="res://assets/tiles/glass/palette_icons/6_sloper.png" type="Texture" id=5]
+[ext_resource path="res://assets/tiles/glass/palette_icons/4_sloper.png" type="Texture" id=6]
+[ext_resource path="res://assets/tiles/glass/palette_icons/9_sloper.png" type="Texture" id=7]
+[ext_resource path="res://assets/tiles/glass/palette_icons/7_sloper.png" type="Texture" id=8]
+[ext_resource path="res://assets/tiles/glass/palette_icons/2_sloper.png" type="Texture" id=9]
+[ext_resource path="res://assets/tiles/glass/palette_icons/3_sloper.png" type="Texture" id=10]
+[ext_resource path="res://assets/tiles/glass/palette_icons/8_sloper.png" type="Texture" id=11]
+
+[resource]
+script = ExtResource( 1 )
+item_name = "Glass (Right Slope)"
+groups = PoolStringArray( "special" )
+change_to = "til_glass"
+items_in_sequence = 3
+index_in_sequence = 2
+icons = [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 6 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 8 ), ExtResource( 11 ), ExtResource( 7 ) ]
+previews = [ ExtResource( 2 ) ]
+priority = 0
+tileset_id = 9
+tile_id = 3

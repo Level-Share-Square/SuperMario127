@@ -1,0 +1,25 @@
+[gd_resource type="Resource" load_steps=11 format=2]
+
+[ext_resource path="res://scenes/editor/items/placeable_tile.gd" type="Script" id=1]
+[ext_resource path="res://assets/tiles/toy_blocks/pallete icons/0_slopeL.png" type="Texture" id=2]
+[ext_resource path="res://assets/tiles/toy_blocks/pallete icons/1_slopeL.png" type="Texture" id=3]
+[ext_resource path="res://assets/tiles/toy_blocks/pallete icons/4_slopeL.png" type="Texture" id=4]
+[ext_resource path="res://assets/tiles/toy_blocks/pallete icons/6_slopeL.png" type="Texture" id=5]
+[ext_resource path="res://assets/tiles/toy_blocks/pallete icons/3_slopeL.png" type="Texture" id=6]
+[ext_resource path="res://assets/tiles/toy_blocks/pallete icons/7_slopeL.png" type="Texture" id=7]
+[ext_resource path="res://assets/tiles/toy_blocks/pallete icons/2_slopeL.png" type="Texture" id=8]
+[ext_resource path="res://assets/tiles/toy_blocks/pallete icons/5_slopeL.png" type="Texture" id=9]
+[ext_resource path="res://assets/tiles/toy_blocks/left_slope_icon.png" type="Texture" id=10]
+
+[resource]
+script = ExtResource( 1 )
+item_name = "Toy Blocks (Left Stairs)"
+groups = PoolStringArray( "special" )
+change_to = "til_toy_blocks_stairs_right"
+items_in_sequence = 3
+index_in_sequence = 1
+icons = [ ExtResource( 10 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 8 ), ExtResource( 6 ), ExtResource( 4 ), ExtResource( 9 ), ExtResource( 5 ), ExtResource( 7 ) ]
+previews = [ ExtResource( 10 ) ]
+priority = 0
+tileset_id = 17
+tile_id = 2

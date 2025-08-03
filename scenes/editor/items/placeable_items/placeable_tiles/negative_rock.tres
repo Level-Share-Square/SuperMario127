@@ -10,7 +10,7 @@
 script = ExtResource( 1 )
 item_name = "Negative Rock"
 groups = PoolStringArray( "special" )
-change_to = ""
+change_to = "til_negative_rock_half_tile"
 items_in_sequence = 4
 index_in_sequence = 0
 icons = [ ExtResource( 2 ), ExtResource( 5 ), ExtResource( 3 ), ExtResource( 4 ) ]

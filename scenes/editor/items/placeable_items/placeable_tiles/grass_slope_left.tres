@@ -14,11 +14,11 @@
 
 [resource]
 script = ExtResource( 1 )
-item_name = "Grass Slope Left"
+item_name = "Grass (Left Slope)"
 groups = PoolStringArray( "special" )
-change_to = "til_grass"
+change_to = "til_grass_slope_right"
 items_in_sequence = 4
-index_in_sequence = 3
+index_in_sequence = 2
 icons = [ ExtResource( 9 ), ExtResource( 11 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 10 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ) ]
 previews = [ ExtResource( 9 ) ]
 priority = 0
