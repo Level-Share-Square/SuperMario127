@@ -3,7 +3,7 @@ extends Action
 
 var shared: LevelShared
 
-var old_tile_locations: Array
+var old_tiles: Dictionary
 var new_tiles: Dictionary
 var layer: int
 
@@ -26,19 +26,30 @@ class Tile:
 
 func _do() -> void:
 	undo_tiles.clear()
-	for tile in old_tile_locations:
-		var last_tile = shared.get_tile(tile.x, tile.y, layer)
-		
-		undo_tiles.append(
-			Tile.new(tile, layer, last_tile[0], last_tile[1], last_tile[2])
-		)
-		
-		shared.set_tile(tile.x, tile.y, layer, 0, 0, 0)
-		
+	
 	var tile_types: Array
 	for tile in new_tiles.values():
-		if !tile in tile_types:
+		if !tile in tile_types && !tile == [0, 0, 0]:
 			tile_types.append(tile)
+			
+	if !old_tiles.empty():
+		for tile in old_tiles.keys():
+			var last_tile = shared.get_tile(tile.x, tile.y, layer)
+			
+			undo_tiles.append(
+				Tile.new(tile, layer, last_tile[0], last_tile[1], last_tile[2])
+			)
+			
+			shared.set_tile(tile.x, tile.y, layer, 0, 0, 0)
+
+		for tile in old_tiles:
+				var tileset_id = old_tiles[tile][0]
+				var tile_id = old_tiles[tile][1]
+				var palette = old_tiles[tile][2]
+				
+				undo_tiles.append(
+					Tile.new(tile, layer, tileset_id, tile_id, palette)
+				)
 		
 	for tile_value in tile_types:
 		for tile in new_tiles:
