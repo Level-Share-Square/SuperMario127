@@ -41,7 +41,6 @@ resize_control_path = NodePath("Control/ResizeHandle")
 title = "Window Title"
 icon = ExtResource( 7 )
 icon_tooltip = "I have no tool to tip for you..."
-window_size = Vector2( 256, 256 )
 
 [node name="Background" parent="." instance=ExtResource( 8 )]
 modulate = Color( 1, 1, 1.1, 1 )

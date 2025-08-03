@@ -1,4 +1,4 @@
-[gd_scene load_steps=97 format=2]
+[gd_scene load_steps=99 format=2]
 
 [ext_resource path="res://scenes/menu/options/options.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/menu/menu_controller/screen_manager.gd" type="Script" id=2]
@@ -74,6 +74,8 @@
 [ext_resource path="res://scenes/editor/tools/path_tool/object_trail.tscn" type="PackedScene" id=72]
 [ext_resource path="res://scenes/editor/save_manager.gd" type="Script" id=73]
 [ext_resource path="res://scenes/editor/tools/tile_selection/tile_selection.tscn" type="PackedScene" id=74]
+[ext_resource path="res://scenes/editor/windows/help.tscn" type="PackedScene" id=75]
+[ext_resource path="res://scenes/editor/tools/tilelock.svg" type="Texture" id=76]
 
 [sub_resource type="CanvasItemMaterial" id=176]
 blend_mode = 1
@@ -672,7 +674,7 @@ unique_name_in_owner = true
 margin_left = 4.0
 margin_top = 4.0
 margin_right = 108.0
-margin_bottom = 171.0
+margin_bottom = 196.0
 rect_clip_content = true
 custom_constants/separation = 2
 
@@ -762,15 +764,30 @@ custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "Autosaves"
 script = ExtResource( 24 )
 
-[node name="HSeparator5" type="HSeparator" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown"]
+[node name="HSeparator7" type="HSeparator" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown"]
 margin_top = 144.0
 margin_right = 104.0
 margin_bottom = 148.0
 
-[node name="Settings" type="Button" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown"]
+[node name="Help" type="Button" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown"]
 margin_top = 150.0
 margin_right = 104.0
 margin_bottom = 167.0
+focus_mode = 0
+theme_type_variation = "ButtonTransparent"
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "Help"
+script = ExtResource( 24 )
+
+[node name="HSeparator5" type="HSeparator" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown"]
+margin_top = 169.0
+margin_right = 104.0
+margin_bottom = 173.0
+
+[node name="Settings" type="Button" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown"]
+margin_top = 175.0
+margin_right = 104.0
+margin_bottom = 192.0
 focus_mode = 0
 theme_type_variation = "ButtonTransparent"
 custom_colors/font_color = Color( 1, 1, 1, 1 )
@@ -1179,7 +1196,7 @@ size_flags_vertical = 3
 theme_type_variation = "ButtonTransparent"
 toggle_mode = true
 group = SubResource( 167 )
-icon = ExtResource( 51 )
+icon = ExtResource( 76 )
 icon_align = 1
 expand_icon = true
 script = ExtResource( 24 )
@@ -1573,6 +1590,10 @@ margin_right = 512.0
 margin_bottom = 312.0
 custom_styles/panel = SubResource( 187 )
 
+[node name="HelpWindow" parent="UI" instance=ExtResource( 75 )]
+visible = false
+title = ""
+
 [node name="Grid" type="ParallaxBackground" parent="UI"]
 unique_name_in_owner = true
 layer = -1
@@ -1669,6 +1690,7 @@ bus = "Sounds"
 [connection signal="button_down" from="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/PanelContainer/Settings/Save" to="SaveManager" method="_on_Save_button_down"]
 [connection signal="button_down" from="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/PanelContainer/Settings/Quit" to="SaveManager" method="_on_Quit_button_down"]
 [connection signal="button_down" from="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown/ResetZoom" to="EditorCamera" method="_on_ResetZoom_button_down"]
+[connection signal="button_down" from="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown/Help" to="UI/HelpWindow" method="toggle_window"]
 [connection signal="button_down" from="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/ItemActions/HBoxContainer/SelectionActions/Delete" to="ZIndex/Tools/TileSelection" method="_on_Delete_button_down"]
 [connection signal="button_down" from="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/ItemActions/HBoxContainer/SelectionActions/Delete" to="ZIndex/Tools/ObjectSelection" method="_on_Delete_button_down"]
 [connection signal="button_down" from="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/ItemActions/HBoxContainer/SelectionActions/Copy" to="ZIndex/Tools/TileSelection" method="_on_Copy_button_down"]

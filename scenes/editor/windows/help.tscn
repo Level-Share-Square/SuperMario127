@@ -1,0 +1,298 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://assets/tiles/tiles.tres" type="TileSet" id=1]
+[ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://scenes/editor/windows/editor_window.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/oldeditor/window/link_funtionality.gd" type="Script" id=4]
+[ext_resource path="res://scenes/editor/windows/image_scroll.gd" type="Script" id=5]
+[ext_resource path="res://scenes/editor/windows/help.gd" type="Script" id=6]
+
+[sub_resource type="DynamicFont" id=15]
+size = 12
+use_filter = true
+font_data = ExtResource( 2 )
+
+[sub_resource type="Gradient" id=14]
+offsets = PoolRealArray( 0, 0.8 )
+colors = PoolColorArray( 0, 0, 0, 0, 0.121569, 0.180392, 0.517647, 1 )
+
+[sub_resource type="GradientTexture" id=16]
+gradient = SubResource( 14 )
+width = 193
+
+[node name="HelpWindow" instance=ExtResource( 3 )]
+margin_right = 451.0
+margin_bottom = 236.0
+script = ExtResource( 6 )
+drag_control_path = NodePath("")
+close_button_path = NodePath("")
+resize_control_path = NodePath("")
+title = "Help Window"
+icon = null
+icon_tooltip = ""
+
+[node name="Background" parent="." index="0"]
+margin_right = 451.0
+margin_bottom = 236.0
+
+[node name="ContentDivider" parent="." index="1"]
+margin_right = 451.0
+margin_bottom = 236.0
+
+[node name="Header" parent="ContentDivider" index="0"]
+margin_right = 451.0
+
+[node name="HeaderMat" parent="ContentDivider/Header" index="0"]
+margin_right = 447.0
+
+[node name="HeaderBox" parent="ContentDivider/Header/HeaderMat" index="0"]
+margin_right = 437.0
+
+[node name="WindowTitle" parent="ContentDivider/Header/HeaderMat/HeaderBox" index="2"]
+margin_right = 408.0
+bbcode_text = "Help Window"
+text = "Help Window"
+
+[node name="WindowClose" parent="ContentDivider/Header/HeaderMat/HeaderBox" index="3"]
+margin_left = 409.0
+margin_right = 431.0
+
+[node name="HSeparator" parent="ContentDivider" index="1"]
+modulate = Color( 1, 1, 1, 1 )
+margin_right = 451.0
+
+[node name="ContentMat" parent="ContentDivider" index="2"]
+margin_right = 451.0
+margin_bottom = 236.0
+custom_constants/margin_right = 6
+custom_constants/margin_top = 6
+custom_constants/margin_left = 6
+custom_constants/margin_bottom = 6
+
+[node name="Tabs" type="TabContainer" parent="ContentDivider/ContentMat" index="0"]
+margin_left = 6.0
+margin_top = 6.0
+margin_right = 445.0
+margin_bottom = 199.0
+mouse_filter = 1
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.5
+custom_constants/hseparation = 8
+custom_constants/side_margin = 4
+tab_align = 0
+all_tabs_in_front = true
+use_hidden_tabs_for_min_size = true
+
+[node name="Tiles" type="MarginContainer" parent="ContentDivider/ContentMat/Tabs" index="0"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 27.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_clip_content = true
+custom_constants/margin_right = 5
+custom_constants/margin_top = 5
+custom_constants/margin_left = 5
+custom_constants/margin_bottom = 5
+
+[node name="ScrollContainer" type="ScrollContainer" parent="ContentDivider/ContentMat/Tabs/Tiles" index="0"]
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 426.0
+margin_bottom = 157.0
+script = ExtResource( 5 )
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ContentDivider/ContentMat/Tabs/Tiles/ScrollContainer" index="0"]
+margin_right = 405.0
+margin_bottom = 1110.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_colors/default_color = Color( 1, 1, 1, 1 )
+custom_fonts/normal_font = SubResource( 15 )
+bbcode_enabled = true
+bbcode_text = "[center][color=yellow]--Guide to Autotiling--[/color][/center]
+Autotiling is a system that automatically
+connects tiles together, reducing the 
+amount of time and effort needed to create
+good-looking terrain.
+
+The two most common types of autotiling 
+used are Terrain Tiling, and Brick Tiling.
+
+First, let's cover Brick Tiling.
+
+[center][color=yellow]--Brick Tiling--[/color][/center]
+This tiling system is relatively simple.
+These tiles don't usually change much based 
+on their placement, and slopes are easy to understand.
+
+Slope tiles should be placed in a diagonal line, on tiles with
+empty space next to them. If a tile is above a slope tile,
+you'll get a ceiling tile instead.
+
+Next up is Terrain Tiling.
+
+[center][color=yellow]--Terrain Tiling--[/color][/center]
+In comparison to Brick Tiling, this tiling system is
+somewhat complex, and uses 4 different tile types to
+create terrain:
+
+
+Full tiles, left slopes, right slopes, and half tiles.
+
+Full tiles are useful for flat edges, or 
+making things look blocky.
+
+Left and right slopes are useful for making 
+precise angles, combined with full tiles.
+
+And half tiles are useful for making smooth 
+natural-looking terrain, 
+with round hills and bumps.
+
+Currently, these tiles don't always connect seamlessly
+with other types. This will likely be changed 
+in a future update.
+
+If you run into issues like this 
+when combining tile types,
+place the respective slope over the cutoff tiles.
+
+ 					-->
+
+
+Now it looks seamless!
+
+
+[center][color=yellow]--Boo Blocks--[/color][/center]
+The boo block is a unique kind of tile, 
+which turns invisible when you play
+the level. These tiles will still connect terrain/brick tiles,
+which makes them very useful when used in combination with 
+layers.
+
+
+[center][color=yellow]--Palettes--[/color][/center]
+Right clicking on a tile in the toolbar
+will change it's color, allowing for unique
+uses of existing tiles, sometimes in ways they weren't intended for! 
+This also works with objects, and backgrounds
+(right click the arrow in settings to change palette) 
+
+
+That should be everything you need to know about tiles. If anything above wasn't clear or you still have questions, feel free to ask in the [url=https://discord.gg/QrftDjD][color=fuchsia]Super Mario 127 Discord[/color][/url]!
+"
+text = "--Guide to Autotiling--
+Autotiling is a system that automatically
+connects tiles together, reducing the 
+amount of time and effort needed to create
+good-looking terrain.
+
+The two most common types of autotiling 
+used are Terrain Tiling, and Brick Tiling.
+
+First, let's cover Brick Tiling.
+
+--Brick Tiling--
+This tiling system is relatively simple.
+These tiles don't usually change much based 
+on their placement, and slopes are easy to understand.
+
+Slope tiles should be placed in a diagonal line, on tiles with
+empty space next to them. If a tile is above a slope tile,
+you'll get a ceiling tile instead.
+
+Next up is Terrain Tiling.
+
+--Terrain Tiling--
+In comparison to Brick Tiling, this tiling system is
+somewhat complex, and uses 4 different tile types to
+create terrain:
+
+
+Full tiles, left slopes, right slopes, and half tiles.
+
+Full tiles are useful for flat edges, or 
+making things look blocky.
+
+Left and right slopes are useful for making 
+precise angles, combined with full tiles.
+
+And half tiles are useful for making smooth 
+natural-looking terrain, 
+with round hills and bumps.
+
+Currently, these tiles don't always connect seamlessly
+with other types. This will likely be changed 
+in a future update.
+
+If you run into issues like this 
+when combining tile types,
+place the respective slope over the cutoff tiles.
+
+ 					-->
+
+
+Now it looks seamless!
+
+
+--Boo Blocks--
+The boo block is a unique kind of tile, 
+which turns invisible when you play
+the level. These tiles will still connect terrain/brick tiles,
+which makes them very useful when used in combination with 
+layers.
+
+
+--Palettes--
+Right clicking on a tile in the toolbar
+will change it's color, allowing for unique
+uses of existing tiles, sometimes in ways they weren't intended for! 
+This also works with objects, and backgrounds
+(right click the arrow in settings to change palette) 
+
+
+That should be everything you need to know about tiles. If anything above wasn't clear or you still have questions, feel free to ask in the Super Mario 127 Discord!
+"
+fit_content_height = true
+scroll_active = false
+script = ExtResource( 4 )
+
+[node name="Images" type="Node2D" parent="ContentDivider/ContentMat/Tabs/Tiles/ScrollContainer" index="1"]
+position = Vector2( 438, 0 )
+scale = Vector2( 0.5, 0.5 )
+
+[node name="TileMap" type="TileMap" parent="ContentDivider/ContentMat/Tabs/Tiles/ScrollContainer/Images" index="0"]
+position = Vector2( 198, -128 )
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 32, 32 )
+format = 1
+tile_data = PoolIntArray( 458738, 8, 196621, 458739, 8, 131085, 458741, 5, 13, 458742, 4, 11, 524273, 8, 65549, 524274, 8, 65541, 524275, 8, 65542, 524276, 2, 13, 524277, 5, 65541, 524278, 2, 131083, 589809, 2, 65544, 589810, 2, 65549, 589811, 2, 65551, 589812, 2, 131081, 589813, 2, 65548, 589814, 2, 131083, 655345, 5, 196616, 655346, 8, 131077, 655347, 2, 131081, 655348, 2, 131081, 655349, 8, 131078, 655350, 8, 196619, 720882, 8, 196632, 720883, 8, 196617, 720884, 8, 196617, 720885, 8, 65560, 1507308, 7, 7, 1507309, 3, 1, 1507310, 3, 1, 1507311, 3, 1, 1507312, 6, 6, 1572844, 7, 9, 1572845, 3, 1, 1572846, 3, 1, 1572847, 3, 1, 1572848, 6, 8, 2031600, 2, 196608, 2031602, 5, 196608, 2031604, 4, 196608, 2031606, 8, 196608, 2162670, 2, 8, 2162671, 2, 11, 2228205, 2, 8, 2228206, 2, 65541, 2228207, 2, 131083, 2293740, 2, 196609, 2293741, 2, 196613, 2293742, 2, 196617, 2293743, 2, 196619, 2359281, 5, 13, 2359282, 4, 13, 2424816, 5, 13, 2424817, 5, 65541, 2424818, 4, 65542, 2424819, 4, 13, 2490351, 2, 196609, 2490352, 5, 196613, 2490353, 5, 196617, 2490354, 2, 196617, 2490355, 4, 196614, 2490356, 2, 196611, 2555890, 8, 196621, 2555891, 8, 10, 2555892, 8, 10, 2555893, 8, 131085, 2621420, 8, 196621, 2621421, 8, 131085, 2621424, 8, 196621, 2621425, 8, 65551, 2621426, 8, 65541, 2621427, 8, 131081, 2621428, 8, 65548, 2621429, 8, 65542, 2621430, 8, 16, 2686954, 8, 8, 2686955, 8, 65551, 2686956, 8, 65541, 2686957, 8, 65542, 2686958, 8, 15, 2686959, 8, 65551, 2686960, 8, 65541, 2686961, 2, 131081, 2686962, 2, 131081, 2686963, 2, 131081, 2686964, 2, 131081, 2686965, 2, 131081, 2686966, 4, 65542, 2686967, 8, 13, 2752490, 8, 196632, 2752491, 8, 196617, 2752492, 8, 196617, 2752493, 8, 196617, 2752494, 8, 196617, 2752495, 8, 196617, 2752496, 8, 196617, 2752497, 8, 196617, 2752498, 8, 196617, 2752499, 8, 196617, 2752500, 8, 196617, 2752501, 8, 196617, 2752502, 8, 196617, 2752503, 8, 65560, 2949099, 5, 15, 3014634, 5, 13, 3014635, 2, 65543, 3080169, 5, 196609, 3080170, 2, 196613, 3080171, 2, 196619, 3211233, 5, 15, 3211238, 5, 15, 3276768, 5, 13, 3276769, 2, 65543, 3276773, 5, 13, 3276774, 5, 65543, 3342303, 5, 196609, 3342304, 2, 196613, 3342305, 2, 196619, 3342308, 5, 196609, 3342309, 5, 196613, 3342310, 2, 196619, 3604464, 18, 8, 3604465, 18, 10, 3604466, 18, 10, 3604467, 18, 10, 3604468, 18, 10, 3604469, 18, 11, 3670000, 18, 65544, 3670001, 18, 131081, 3670002, 18, 131081, 3670003, 18, 131081, 3670004, 18, 131081, 3670005, 18, 131083, 3735536, 18, 196616, 3735537, 18, 196617, 3735538, 18, 196617, 3735539, 18, 196617, 3735540, 18, 196617, 3735541, 18, 196619, 4521965, 31, 0, 4521966, 33, 0, 4521967, 34, 0, 4521968, 32, 0, 4521970, 12, 0, 4521971, 9, 1, 4521972, 3, 1, 4521973, 15, 2 )
+
+[node name="TextureRect" type="TextureRect" parent="ContentDivider/ContentMat/Tabs/Tiles/ScrollContainer/Images/TileMap" index="0"]
+margin_left = -510.0
+margin_top = 1728.0
+margin_right = -306.0
+margin_bottom = 1825.0
+size_flags_horizontal = 0
+texture = SubResource( 16 )
+stretch_mode = 1
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Border" parent="." index="2"]
+margin_right = 451.0
+margin_bottom = 236.0
+
+[node name="WindowMat" parent="." index="3"]
+margin_right = 451.0
+margin_bottom = 236.0
+
+[node name="Control" parent="." index="4"]
+margin_right = 451.0
+margin_bottom = 236.0
+
+[connection signal="button_down" from="ContentDivider/Header/HeaderMat/HeaderBox/WindowClose" to="." method="close"]
