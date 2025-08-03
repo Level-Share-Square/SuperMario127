@@ -66,7 +66,7 @@ func _on_Tools_tool_picked(tool_name):
 			if editor.selected_item is PlaceableObject:
 				change_tool("ObjectSelection")
 			else:
-				change_tool("TileSelection") #Until we get Tile Selection #Also no clue why it isn't recognizing get_node("ObjectSelection")
+				change_tool("TileSelection")
 		"TileFill":
 			change_tool("TileFill")
 		"TileRectFill":

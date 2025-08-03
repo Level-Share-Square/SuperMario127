@@ -119,7 +119,6 @@ func move_tiles():
 				new_selected_tiles[new_pos] = editor.selected_tiles[tile_pos]
 				editor.tile_buffer.set_cellv(new_pos, shared.tilemaps_node.get_tile(editor.selected_tiles[tile_pos][0], editor.selected_tiles[tile_pos][1], editor.selected_tiles[tile_pos][2]))
 				editor.tile_buffer.update_bitmask_area(new_pos)
-				print(relative_tile_grid_pos)
 			if new_selected_tiles.size() == old_selected_tile_size:
 				tile_grid_starting_pos = tile_grid_pos
 				editor.selected_tiles = new_selected_tiles

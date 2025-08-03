@@ -5,6 +5,7 @@ extends Node2D
 var bg_modulate := Color(0.54, 0.54, 0.54, modulate.a)
 var selected_modulate := Color(0.7, 0.7, 1.2, modulate.a)
 var hover_modulate := Color(modulate.r, modulate.g, modulate.b, 0.5)
+var translucent_modulate := Color(0, 0, 0, 0.25)
 var default_modulate := Color(1, 1, 1, modulate.a)
 
 export(LevelShared.Layers) var default_layer: int = LevelShared.Layers.Middle
@@ -24,6 +25,7 @@ var shared: LevelShared = null
 
 var hovered: bool = false
 var selected: bool = false
+var translucent: bool = false
 
 var enabled: bool = true
 var is_middle: bool = true
@@ -75,6 +77,7 @@ func _ready():
 	z_layer = layer + LevelShared.layer_index_offset
 	
 	if get_tree().current_scene.mode == 1:
+		shared.get_node("%Layers").connect("layer_changed", self, "_on_layer_changed")
 		if generate_editor_hitbox:
 			if is_instance_valid(editor_hitbox):
 				editor_hitbox.queue_free()
@@ -197,6 +200,9 @@ func modulate_set():
 	
 	if hovered or not visibility:
 		modulate.a = hover_modulate.a
+		
+	if translucent:
+		modulate *= translucent_modulate
 
 
 func set_property(key, value, change_level_object = true, alias = null):
@@ -292,3 +298,9 @@ func parts_input_handler(event, object):
 func is_middle(check: bool) -> void:
 	is_middle = check
 	set_physics_process(check)
+
+func _on_layer_changed(new_layer):
+	if new_layer != layer && shared.get_parent().show_layers:
+		translucent = true
+	else:
+		translucent = false

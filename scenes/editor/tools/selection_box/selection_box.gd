@@ -132,14 +132,27 @@ func _process(delta):
 
 func _on_object_entered(area, object):
 	if expand == true:
-		selected_dict.get_or_add(object, object.name)
-		object.selected = true
-
+		if editor.show_layers:
+			if editor.layer == object.layer:
+				selected_dict.get_or_add(object, object.name)
+				object.selected = true
+			else:
+				return
+		else:
+			selected_dict.get_or_add(object, object.name)
+			object.selected = true
 
 func _on_object_exited(area, object):
 	if erase == true:
-		selected_dict.erase(object)
-		object.selected = false
+		if editor.show_layers:
+			if editor.layer == object.layer:
+				selected_dict.erase(object)
+				object.selected = false
+			else:
+				return
+		else:
+			selected_dict.erase(object)
+			object.selected = false
 
 
 func box_expansion():

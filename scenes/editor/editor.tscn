@@ -697,8 +697,7 @@ margin_right = 104.0
 margin_bottom = 42.0
 focus_mode = 0
 theme_type_variation = "CheckButtonTransparent"
-pressed = true
-text = "Show Layers"
+text = "Focus Layer"
 align = 1
 script = ExtResource( 45 )
 
@@ -919,6 +918,7 @@ margin_bottom = 48.0
 size_flags_vertical = 3
 
 [node name="Layers" type="PanelContainer" parent="UI/UIContainer/EditorUI/Top/Tools"]
+unique_name_in_owner = true
 margin_left = 68.0
 margin_right = 116.0
 margin_bottom = 48.0
@@ -934,7 +934,7 @@ margin_top = 4.0
 margin_right = 44.0
 margin_bottom = 44.0
 rect_min_size = Vector2( 40, 40 )
-hint_tooltip = "Undo"
+hint_tooltip = "Change Layer"
 focus_mode = 0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -1661,8 +1661,8 @@ bus = "Sounds"
 [connection signal="tool_changed" from="ZIndex/Tools" to="ItemPreview" method="_on_Tools_tool_changed"]
 [connection signal="redo" from="ActionManager" to="ZIndex/Tools/ObjectSelection" method="on_redo"]
 [connection signal="redo" from="ActionManager" to="ZIndex/Tools/ObjectSelection" method="snap_to_selected_size"]
-[connection signal="undo" from="ActionManager" to="ZIndex/Tools/ObjectSelection" method="snap_to_selected_size"]
 [connection signal="undo" from="ActionManager" to="ZIndex/Tools/ObjectSelection" method="on_undo"]
+[connection signal="undo" from="ActionManager" to="ZIndex/Tools/ObjectSelection" method="snap_to_selected_size"]
 [connection signal="text_entered" from="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/SearchBar" to="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/ScrollContainer/CenterContainer/ItemsGrid" method="_on_search"]
 [connection signal="pressed" from="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/Search" to="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/ScrollContainer/CenterContainer/ItemsGrid" method="_on_search"]
 [connection signal="pressed" from="UI/UIContainer/EditorUI/Top/Options/PanelContainer/Settings" to="UI/LevelSettingsWindow" method="toggle_window"]
@@ -1677,3 +1677,4 @@ bus = "Sounds"
 [connection signal="pressed" from="UI/UIContainer/EditorUI/Top/Tools/Layers/LayerPicker" to="UI/UIContainer/EditorUI/Top/Tools/Layers" method="pressed"]
 [connection signal="tool_picked" from="UI/UIContainer/EditorUI/Middle/Tools" to="ZIndex/Tools" method="_on_Tools_tool_picked"]
 [connection signal="pressed" from="UI/UIContainer/EditorUI/Bottom/Hotbar/ItemPickerButton/Button" to="UI/UIContainer/ItemPickerPanel" method="toggle"]
+[connection signal="screen_opened" from="Options/ScreenManager/Options" to="Options/ScreenManager/Options/Subscreens/Controls/VBoxContainer/Devices" method="screen_opened"]
