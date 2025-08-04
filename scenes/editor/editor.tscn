@@ -183,6 +183,7 @@ shared_path = NodePath("Shared")
 [node name="Backgrounds" parent="." instance=ExtResource( 6 )]
 
 [node name="Shared" parent="." instance=ExtResource( 5 )]
+unique_name_in_owner = true
 
 [node name="EditorCamera" parent="." instance=ExtResource( 7 )]
 unique_name_in_owner = true

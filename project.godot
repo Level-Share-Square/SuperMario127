@@ -159,6 +159,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/actors/mario/nozzles/Cloud.gd"
 }, {
+"base": "Button",
+"class": "CollapsibleContainer",
+"language": "GDScript",
+"path": "res://scenes/editor/windows/editor_options/collapsible_container.gd"
+}, {
 "base": "Node",
 "class": "Component",
 "language": "GDScript",
@@ -1050,6 +1055,7 @@ _global_script_class_icons={
 "CheckButtonSound": "",
 "CircleArea": "",
 "CloudNozzle": "",
+"CollapsibleContainer": "",
 "Component": "",
 "ControlPresets": "",
 "CrushedBaseState": "",
