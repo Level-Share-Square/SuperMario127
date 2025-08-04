@@ -26,6 +26,7 @@ onready var tile_buffer: TileMap = $"%TileBuffer"
 onready var object_buffer = $"%ObjectBuffer"
 onready var action_manager: ActionManager = $"%ActionManager"
 onready var screen_manager = $"%ScreenManager"
+onready var save_manager = $"SaveManager"
 
 onready var save_button = $UI/EditorUI/Utilities/Save
 onready var level_settings = $"%LevelSettingsWindow"

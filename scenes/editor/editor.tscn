@@ -1,4 +1,4 @@
-[gd_scene load_steps=100 format=2]
+[gd_scene load_steps=104 format=2]
 
 [ext_resource path="res://scenes/menu/options/options.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/menu/menu_controller/screen_manager.gd" type="Script" id=2]
@@ -77,6 +77,7 @@
 [ext_resource path="res://scenes/editor/windows/help.tscn" type="PackedScene" id=75]
 [ext_resource path="res://scenes/editor/tools/tilelock.svg" type="Texture" id=76]
 [ext_resource path="res://scenes/oldeditor/autosave.tscn" type="PackedScene" id=77]
+[ext_resource path="res://scenes/editor/windows/quit_confirm_window.tscn" type="PackedScene" id=78]
 
 [sub_resource type="CanvasItemMaterial" id=176]
 blend_mode = 1
@@ -173,6 +174,19 @@ fill_to = Vector2( 0, 1 )
 
 [sub_resource type="StyleBoxTexture" id=187]
 texture = SubResource( 186 )
+region_rect = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="Gradient" id=188]
+interpolation_mode = 2
+offsets = PoolRealArray( 0, 0.5, 1 )
+colors = PoolColorArray( 1, 1, 1, 0.19, 1, 1, 1, 0, 1, 1, 1, 0.19 )
+
+[sub_resource type="GradientTexture2D" id=189]
+gradient = SubResource( 188 )
+fill_to = Vector2( 0, 1 )
+
+[sub_resource type="StyleBoxTexture" id=190]
+texture = SubResource( 189 )
 region_rect = Rect2( 0, 0, 64, 64 )
 
 [node name="Editor" type="Node2D"]
@@ -1593,7 +1607,15 @@ custom_styles/panel = SubResource( 187 )
 
 [node name="HelpWindow" parent="UI" instance=ExtResource( 75 )]
 visible = false
+custom_styles/panel = SubResource( 190 )
 title = ""
+
+[node name="QuitConfirmWindow" parent="UI" instance=ExtResource( 78 )]
+unique_name_in_owner = true
+margin_left = 259.0
+margin_top = 172.0
+margin_right = 509.0
+margin_bottom = 253.0
 
 [node name="Grid" type="ParallaxBackground" parent="UI"]
 unique_name_in_owner = true
@@ -1684,6 +1706,7 @@ position = Vector2( 470, 113 )
 [connection signal="tool_changed" from="ZIndex/Tools" to="ZIndex/Tools/ObjectTrail" method="_on_Tools_tool_changed"]
 [connection signal="tool_changed" from="ZIndex/Tools" to="UI/UIContainer/EditorUI/Middle/Tools" method="_on_Tools_tool_changed"]
 [connection signal="tool_changed" from="ZIndex/Tools" to="ItemPreview" method="_on_Tools_tool_changed"]
+[connection signal="action" from="ActionManager" to="SaveManager" method="_on_ActionManager_action"]
 [connection signal="redo" from="ActionManager" to="ZIndex/Tools/ObjectSelection" method="snap_to_selected_size"]
 [connection signal="redo" from="ActionManager" to="ZIndex/Tools/ObjectSelection" method="on_redo"]
 [connection signal="undo" from="ActionManager" to="ZIndex/Tools/ObjectSelection" method="snap_to_selected_size"]

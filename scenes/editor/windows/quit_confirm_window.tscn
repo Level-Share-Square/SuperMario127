@@ -1,0 +1,135 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scenes/editor/windows/quit_confirm_window.gd" type="Script" id=1]
+[ext_resource path="res://scenes/editor/windows/editor_window.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/menu/button_scripts/press_countdown.gd" type="Script" id=3]
+
+[node name="QuitConfirmWindow" instance=ExtResource( 2 )]
+margin_right = 250.0
+margin_bottom = 81.0
+script = ExtResource( 1 )
+drag_control_path = NodePath("")
+close_button_path = NodePath("")
+resize_control_path = NodePath("")
+title = ""
+icon = null
+icon_tooltip = ""
+
+[node name="Background" parent="." index="0"]
+margin_right = 250.0
+margin_bottom = 81.0
+
+[node name="ContentDivider" parent="." index="1"]
+margin_right = 250.0
+margin_bottom = 81.0
+
+[node name="Header" parent="ContentDivider" index="0"]
+visible = false
+
+[node name="HSeparator" parent="ContentDivider" index="1"]
+margin_top = 0.0
+margin_right = 250.0
+margin_bottom = 0.0
+
+[node name="ContentMat" parent="ContentDivider" index="2"]
+margin_top = 0.0
+margin_right = 250.0
+margin_bottom = 81.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ContentDivider/ContentMat" index="0"]
+margin_top = 1.0
+margin_right = 250.0
+margin_bottom = 79.0
+custom_constants/separation = 0
+
+[node name="PanelContainer" type="PanelContainer" parent="ContentDivider/ContentMat/VBoxContainer" index="0"]
+margin_right = 250.0
+margin_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+theme_type_variation = "FlatPanel"
+
+[node name="Description" type="RichTextLabel" parent="ContentDivider/ContentMat/VBoxContainer/PanelContainer" index="0"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 246.0
+margin_bottom = 46.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+bbcode_text = "[center]Are you sure you want to leave?
+You have [color=#ff7979][shake]UNSAVED CHANGES[/shake][/color]."
+text = "Are you sure you want to leave?
+You have UNSAVED CHANGES."
+fit_content_height = true
+scroll_active = false
+
+[node name="HSeparator" type="HSeparator" parent="ContentDivider/ContentMat/VBoxContainer" index="1"]
+margin_top = 50.0
+margin_right = 250.0
+margin_bottom = 50.0
+custom_constants/separation = 0
+
+[node name="Control" type="Control" parent="ContentDivider/ContentMat/VBoxContainer" index="2"]
+margin_top = 50.0
+margin_right = 250.0
+margin_bottom = 53.0
+rect_min_size = Vector2( 0, 3 )
+size_flags_stretch_ratio = 0.09
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ContentDivider/ContentMat/VBoxContainer" index="3"]
+margin_left = 12.0
+margin_top = 53.0
+margin_right = 237.0
+margin_bottom = 78.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 7
+size_flags_stretch_ratio = 0.5
+custom_constants/separation = 45
+alignment = 1
+
+[node name="Confirm" type="Button" parent="ContentDivider/ContentMat/VBoxContainer/HBoxContainer" index="0"]
+margin_top = 3.0
+margin_right = 90.0
+margin_bottom = 22.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 90, 0 )
+size_flags_vertical = 4
+theme_type_variation = "ButtonRed"
+text = "Confirm"
+
+[node name="Countdown" type="Node" parent="ContentDivider/ContentMat/VBoxContainer/HBoxContainer/Confirm" index="0"]
+script = ExtResource( 3 )
+countdown_style = 1
+countdown_time = 3
+
+[node name="Cancel" type="Button" parent="ContentDivider/ContentMat/VBoxContainer/HBoxContainer" index="1"]
+margin_left = 135.0
+margin_top = 3.0
+margin_right = 225.0
+margin_bottom = 22.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 90, 0 )
+size_flags_vertical = 4
+text = "Cancel"
+
+[node name="Border" parent="." index="2"]
+margin_right = 250.0
+margin_bottom = 81.0
+
+[node name="WindowMat" parent="." index="3"]
+margin_right = 250.0
+margin_bottom = 81.0
+
+[node name="Control" parent="." index="4"]
+margin_right = 250.0
+margin_bottom = 81.0
+
+[connection signal="pressed" from="ContentDivider/ContentMat/VBoxContainer/HBoxContainer/Confirm/Countdown" to="." method="_on_Countdown_pressed"]
+[connection signal="pressed" from="ContentDivider/ContentMat/VBoxContainer/HBoxContainer/Cancel" to="." method="close"]
