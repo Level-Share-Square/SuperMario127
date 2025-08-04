@@ -67,7 +67,6 @@ margin_left = 6.0
 margin_top = 6.0
 margin_right = 394.0
 margin_bottom = 204.0
-rect_pivot_offset = Vector2( -131, 46 )
 mouse_filter = 1
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -79,7 +78,6 @@ all_tabs_in_front = true
 use_hidden_tabs_for_min_size = true
 
 [node name="Level" type="MarginContainer" parent="ContentDivider/ContentMat/Tabs" index="0"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -480,6 +478,7 @@ margin_bottom = 150.0
 music_type = 1
 
 [node name="Autosave" type="ScrollContainer" parent="ContentDivider/ContentMat/Tabs" index="4"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 6.0
@@ -492,9 +491,8 @@ script = ExtResource( 12 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ContentDivider/ContentMat/Tabs/Autosave" index="0"]
 margin_right = 368.0
-margin_bottom = 163.0
+margin_bottom = 27.0
 size_flags_horizontal = 3
-size_flags_vertical = 3
 alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ContentDivider/ContentMat/Tabs/Autosave/VBoxContainer" index="0"]
@@ -515,37 +513,42 @@ unique_name_in_owner = true
 margin_left = 225.0
 margin_right = 247.0
 margin_bottom = 19.0
-focus_mode = 0
 
 [node name="HSeparator" type="HSeparator" parent="ContentDivider/ContentMat/Tabs/Autosave/VBoxContainer" index="1"]
 margin_top = 23.0
 margin_right = 368.0
 margin_bottom = 27.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ContentDivider/ContentMat/Tabs/Autosave/VBoxContainer" index="2"]
-margin_top = 31.0
-margin_right = 368.0
-margin_bottom = 163.0
-size_flags_vertical = 3
+[node name="VBoxContainer" type="VBoxContainer" parent="ContentDivider/ContentMat/Tabs/Autosave/VBoxContainer/HSeparator" index="0"]
+margin_top = 7.0
+margin_right = 367.0
+margin_bottom = 47.0
+alignment = 1
 
-[node name="Label" type="Label" parent="ContentDivider/ContentMat/Tabs/Autosave/VBoxContainer/VBoxContainer" index="0"]
-margin_right = 368.0
+[node name="Label" type="Label" parent="ContentDivider/ContentMat/Tabs/Autosave/VBoxContainer/HSeparator/VBoxContainer" index="0"]
+margin_right = 367.0
 margin_bottom = 17.0
 text = "Available Autosaves"
 align = 1
 
-[node name="ScrollContainer" type="ScrollContainer" parent="ContentDivider/ContentMat/Tabs/Autosave/VBoxContainer/VBoxContainer" index="1"]
+[node name="ScrollContainer" type="ScrollContainer" parent="ContentDivider/ContentMat/Tabs/Autosave/VBoxContainer/HSeparator/VBoxContainer" index="1"]
 margin_top = 21.0
-margin_right = 368.0
-margin_bottom = 132.0
-size_flags_vertical = 3
-
-[node name="SavesContainer" type="VBoxContainer" parent="ContentDivider/ContentMat/Tabs/Autosave/VBoxContainer/VBoxContainer/ScrollContainer" index="0"]
-unique_name_in_owner = true
-margin_right = 360.0
-margin_bottom = 111.0
+margin_right = 367.0
+margin_bottom = 40.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+
+[node name="SavesContainer" type="VBoxContainer" parent="ContentDivider/ContentMat/Tabs/Autosave/VBoxContainer/HSeparator/VBoxContainer/ScrollContainer" index="0"]
+unique_name_in_owner = true
+margin_right = 359.0
+margin_bottom = 19.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+
+[node name="Button" type="Button" parent="ContentDivider/ContentMat/Tabs/Autosave/VBoxContainer/HSeparator/VBoxContainer/ScrollContainer/SavesContainer" index="0"]
+margin_right = 359.0
+margin_bottom = 19.0
 
 [node name="Border" parent="." index="2"]
 margin_right = 400.0

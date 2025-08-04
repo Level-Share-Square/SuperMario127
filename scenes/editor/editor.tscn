@@ -1,4 +1,4 @@
-[gd_scene load_steps=100 format=2]
+[gd_scene load_steps=99 format=2]
 
 [ext_resource path="res://scenes/menu/options/options.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/menu/menu_controller/screen_manager.gd" type="Script" id=2]
@@ -76,7 +76,6 @@
 [ext_resource path="res://scenes/editor/tools/tile_selection/tile_selection.tscn" type="PackedScene" id=74]
 [ext_resource path="res://scenes/editor/windows/help.tscn" type="PackedScene" id=75]
 [ext_resource path="res://scenes/editor/tools/tilelock.svg" type="Texture" id=76]
-[ext_resource path="res://scenes/oldeditor/autosave.tscn" type="PackedScene" id=77]
 
 [sub_resource type="CanvasItemMaterial" id=176]
 blend_mode = 1
@@ -1677,9 +1676,6 @@ unique_name_in_owner = true
 stream = ExtResource( 55 )
 volume_db = -7.5
 bus = "Sounds"
-
-[node name="Autosave" parent="." instance=ExtResource( 77 )]
-position = Vector2( 470, 113 )
 
 [connection signal="tool_changed" from="ZIndex/Tools" to="ZIndex/Tools/ObjectTrail" method="_on_Tools_tool_changed"]
 [connection signal="tool_changed" from="ZIndex/Tools" to="UI/UIContainer/EditorUI/Middle/Tools" method="_on_Tools_tool_changed"]
