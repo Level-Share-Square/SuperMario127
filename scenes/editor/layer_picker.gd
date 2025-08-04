@@ -1,13 +1,17 @@
 extends PanelContainer
 
+
 onready var layer_picker = $"%LayerPicker"
 onready var editor = owner
 onready var shared = editor.get_node("Shared")
 
-var layer_names: Array = ["BG1", "BG0", "G", "FG"]
+
+var layer_names: Array = ["BG0", "BG1", "G", "FG"]
 onready var cur_layer: int = editor.layer
 
+
 signal layer_changed(layer)
+
 
 func pressed() -> void:
 	cur_layer = wrapi(cur_layer + 1, 0, layer_names.size())

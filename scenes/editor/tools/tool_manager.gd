@@ -28,7 +28,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		current_tool._mouse_movement(event, mouse_position)
 
 
-func _physics_process(delta: float):
+func _process(_delta: float):
 	if owner.editor_camera.is_moving():
 		var event := InputEventMouseMotion.new()
 		current_tool._mouse_movement(event, get_global_mouse_position())
