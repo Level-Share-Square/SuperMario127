@@ -247,7 +247,7 @@ tool_type = 1
 [node name="TileBuffer" type="TileMap" parent="."]
 unique_name_in_owner = true
 modulate = Color( 1, 1, 1, 0.74902 )
-z_index = 128
+z_index = 256
 tile_set = ExtResource( 23 )
 cell_size = Vector2( 32, 32 )
 cell_quadrant_size = 64
