@@ -1,11 +1,14 @@
 extends Button
 class_name ButtonSound
 
+
 onready var hover_sound: AudioStreamPlayer = get_parent().get_node("%HoverSound") 
 onready var click_sound: AudioStreamPlayer = get_parent().get_node("%ClickSound") 
 
+
 export var hover_override: String
 export var click_override: String
+
 
 func _ready() -> void:
 	if hover_override != "":
@@ -22,19 +25,23 @@ func _ready() -> void:
 	#warning-ignore:return_value_discarded
 	connect("pressed", self, "on_pressed")
 
+
 func on_mouse_entered() -> void:
 	if disabled: return
 	if focus_mode != FOCUS_NONE:
 		grab_focus()
 	hover_sound.play()
 
+
 func on_mouse_exited() -> void:
 	if disabled: return
 	release_focus()
 
+
 func on_focus_entered() -> void:
 	if disabled: return
 	hover_sound.play()
+
 
 func on_pressed() -> void:
 	click_sound.play()

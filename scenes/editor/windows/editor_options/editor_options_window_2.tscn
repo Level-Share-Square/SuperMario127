@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://scenes/editor/assets/palette.svg" type="Texture" id=1]
 [ext_resource path="res://scenes/menu/line_edit_unfocus.gd" type="Script" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://scenes/editor/windows/editor_options/editor_options_window.gd" type="Script" id=9]
 [ext_resource path="res://scenes/actors/objects/painting/border.png" type="Texture" id=10]
 [ext_resource path="res://scenes/editor/windows/editor_options/music_panel.tscn" type="PackedScene" id=11]
+[ext_resource path="res://scenes/oldeditor/autosave.gd" type="Script" id=12]
 [ext_resource path="res://scenes/editor/windows/editor_options/areas.gd" type="Script" id=13]
 [ext_resource path="res://scenes/editor/windows/editor_options/level.gd" type="Script" id=15]
 [ext_resource path="res://scenes/shared/background/foregrounds/forest/preview.png" type="Texture" id=16]
@@ -476,6 +477,79 @@ margin_top = 98.0
 margin_bottom = 150.0
 music_type = 1
 
+[node name="Autosave" type="ScrollContainer" parent="ContentDivider/ContentMat/Tabs" index="4"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 6.0
+margin_top = 29.0
+margin_right = -6.0
+margin_bottom = -6.0
+scroll_horizontal_enabled = false
+scroll_deadzone = 7
+script = ExtResource( 12 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ContentDivider/ContentMat/Tabs/Autosave" index="0"]
+margin_right = 368.0
+margin_bottom = 27.0
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ContentDivider/ContentMat/Tabs/Autosave/VBoxContainer" index="0"]
+margin_right = 368.0
+margin_bottom = 19.0
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Label" type="Label" parent="ContentDivider/ContentMat/Tabs/Autosave/VBoxContainer/HBoxContainer" index="0"]
+margin_left = 120.0
+margin_top = 1.0
+margin_right = 221.0
+margin_bottom = 18.0
+text = "Autosave Timer:"
+
+[node name="IntervalOptions" type="OptionButton" parent="ContentDivider/ContentMat/Tabs/Autosave/VBoxContainer/HBoxContainer" index="1"]
+unique_name_in_owner = true
+margin_left = 225.0
+margin_right = 247.0
+margin_bottom = 19.0
+
+[node name="HSeparator" type="HSeparator" parent="ContentDivider/ContentMat/Tabs/Autosave/VBoxContainer" index="1"]
+margin_top = 23.0
+margin_right = 368.0
+margin_bottom = 27.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ContentDivider/ContentMat/Tabs/Autosave/VBoxContainer/HSeparator" index="0"]
+margin_top = 7.0
+margin_right = 367.0
+margin_bottom = 47.0
+alignment = 1
+
+[node name="Label" type="Label" parent="ContentDivider/ContentMat/Tabs/Autosave/VBoxContainer/HSeparator/VBoxContainer" index="0"]
+margin_right = 367.0
+margin_bottom = 17.0
+text = "Available Autosaves"
+align = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="ContentDivider/ContentMat/Tabs/Autosave/VBoxContainer/HSeparator/VBoxContainer" index="1"]
+margin_top = 21.0
+margin_right = 367.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="SavesContainer" type="VBoxContainer" parent="ContentDivider/ContentMat/Tabs/Autosave/VBoxContainer/HSeparator/VBoxContainer/ScrollContainer" index="0"]
+unique_name_in_owner = true
+margin_right = 359.0
+margin_bottom = 19.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+
+[node name="Button" type="Button" parent="ContentDivider/ContentMat/Tabs/Autosave/VBoxContainer/HSeparator/VBoxContainer/ScrollContainer/SavesContainer" index="0"]
+margin_right = 359.0
+margin_bottom = 19.0
+
 [node name="Border" parent="." index="2"]
 margin_right = 400.0
 margin_bottom = 241.0
@@ -489,3 +563,4 @@ margin_right = 400.0
 margin_bottom = 241.0
 
 [connection signal="button_down" from="ContentDivider/ContentMat/Tabs/Areas/VBoxContainer/HBoxContainer/Paste" to="ContentDivider/ContentMat/Tabs/Areas" method="paste_area"]
+[connection signal="item_selected" from="ContentDivider/ContentMat/Tabs/Autosave/VBoxContainer/HBoxContainer/IntervalOptions" to="ContentDivider/ContentMat/Tabs/Autosave" method="interval_selected"]

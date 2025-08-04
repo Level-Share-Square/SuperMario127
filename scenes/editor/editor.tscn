@@ -13,7 +13,7 @@
 [ext_resource path="res://scenes/editor/obj_erase_tool.gd" type="Script" id=11]
 [ext_resource path="res://scenes/editor/til_erase_tool.gd" type="Script" id=12]
 [ext_resource path="res://scenes/editor/buttons/palette_button.tscn" type="PackedScene" id=13]
-[ext_resource path="res://scenes/editor/windows/editor_options/editor_options_window_2.tscn" type="PackedScene" id=14]
+[ext_resource path="res://scenes/editor/windows/editor_options/editor_options_window.tscn" type="PackedScene" id=14]
 [ext_resource path="res://scenes/editor/assets/DropdownFlipped.svg" type="Texture" id=15]
 [ext_resource path="res://scenes/editor/selection_actions.gd" type="Script" id=16]
 [ext_resource path="res://scenes/editor/item_hotbar.gd" type="Script" id=17]
@@ -262,7 +262,7 @@ tool_type = 1
 [node name="TileBuffer" type="TileMap" parent="."]
 unique_name_in_owner = true
 modulate = Color( 1, 1, 1, 0.74902 )
-z_index = 128
+z_index = 256
 tile_set = ExtResource( 23 )
 cell_size = Vector2( 32, 32 )
 cell_quadrant_size = 64
@@ -1699,9 +1699,6 @@ unique_name_in_owner = true
 stream = ExtResource( 55 )
 volume_db = -7.5
 bus = "Sounds"
-
-[node name="Autosave" parent="." instance=ExtResource( 77 )]
-position = Vector2( 470, 113 )
 
 [connection signal="tool_changed" from="ZIndex/Tools" to="ZIndex/Tools/ObjectTrail" method="_on_Tools_tool_changed"]
 [connection signal="tool_changed" from="ZIndex/Tools" to="UI/UIContainer/EditorUI/Middle/Tools" method="_on_Tools_tool_changed"]
