@@ -801,6 +801,7 @@ theme_type_variation = "PaletteButton"
 custom_fonts/font = ExtResource( 15 )
 toggle_mode = true
 pressed = true
+action_mode = 0
 group = SubResource( 36 )
 script = ExtResource( 32 )
 extend_amount = 2
@@ -841,6 +842,7 @@ focus_neighbour_top = NodePath("../../Row3/MarioButton")
 theme_type_variation = "PaletteButton"
 custom_fonts/font = ExtResource( 15 )
 toggle_mode = true
+action_mode = 0
 group = SubResource( 36 )
 script = ExtResource( 32 )
 extend_amount = 2
@@ -1121,9 +1123,9 @@ script = ExtResource( 17 )
 category_paths = [ NodePath("Player1"), NodePath("Player2"), NodePath("Interface"), NodePath("Hotkeys/Gameplay"), NodePath("Hotkeys/Editor") ]
 
 [node name="Player1" type="GridContainer" parent="Subscreens/Controls/VBoxContainer/Remapper"]
-margin_left = 14.0
+margin_left = 32.0
 margin_top = 1.0
-margin_right = 530.0
+margin_right = 512.0
 margin_bottom = 226.0
 custom_constants/vseparation = 24
 custom_constants/hseparation = 32
@@ -1297,9 +1299,9 @@ setting_key = "63_wing_cap"
 
 [node name="Player2" type="GridContainer" parent="Subscreens/Controls/VBoxContainer/Remapper"]
 visible = false
-margin_left = 14.0
+margin_left = 32.0
 margin_top = 1.0
-margin_right = 530.0
+margin_right = 512.0
 margin_bottom = 226.0
 custom_constants/vseparation = 24
 custom_constants/hseparation = 32

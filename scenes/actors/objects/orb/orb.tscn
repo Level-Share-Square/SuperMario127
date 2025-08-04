@@ -1,0 +1,90 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://classes/GameObject.gd" type="Script" id=1]
+[ext_resource path="res://scenes/actors/objects/orb/orb.png" type="Texture" id=2]
+[ext_resource path="res://scenes/actors/objects/orb/hope_orb.png" type="Texture" id=3]
+[ext_resource path="res://scenes/actors/objects/shine/shine_rays.gdshader" type="Shader" id=4]
+[ext_resource path="res://scenes/actors/objects/shine/shine_rays.gd" type="Script" id=5]
+[ext_resource path="res://scenes/actors/objects/orb/hope.png" type="Texture" id=6]
+
+[sub_resource type="ShaderMaterial" id=3]
+resource_local_to_scene = true
+shader = ExtResource( 4 )
+shader_param/ray_count = 4
+shader_param/ray_distance = 0.5
+shader_param/ray_seperation_degrees = 22.0
+shader_param/rotation = 4.19227
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+render_mode unshaded;
+
+uniform bool Smooth = true;
+uniform float width : hint_range(0.0, 16) = 1.0;
+uniform vec4 outline_color : hint_color = vec4(0.0, 0.0, 0.0, 1.0);
+uniform int pixel_size : hint_range(1, 10) = 4;
+
+void fragment()
+{
+	vec2 unit = (1.0/float(pixel_size) ) / vec2(textureSize(TEXTURE, 0));
+	vec4 pixel_color = texture(TEXTURE, UV);
+	if (pixel_color.a == 0.0) {
+		pixel_color = outline_color;
+		pixel_color.a = 0.0;
+		for (float x = -ceil(width); x <= ceil(width); x++) {
+			for (float y = -ceil(width); y <= ceil(width); y++) {
+				if (texture(TEXTURE, UV + vec2(x*unit.x, y*unit.y)).a == 0.0 || (x==0.0 && y==0.0)) {
+					continue;
+				}
+				if (Smooth) {
+					pixel_color.a += outline_color.a / (pow(x,2)+pow(y,2)) * (1.0-pow(2.0, -width));
+					if (pixel_color.a > 1.0) {
+						pixel_color.a = 1.0;
+					}
+				} else {
+					pixel_color.a = outline_color.a;
+					break;
+				}
+			}
+		}
+	}
+	COLOR = pixel_color;
+}
+"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/Smooth = true
+shader_param/width = 4.0
+shader_param/outline_color = Color( 0.65, 0.3575, 0.065, 0.501961 )
+shader_param/pixel_size = 4
+
+[node name="Orb" type="Node2D"]
+script = ExtResource( 1 )
+internal_id = "orb"
+
+[node name="VectorRays" type="ColorRect" parent="."]
+show_behind_parent = true
+material = SubResource( 3 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -32.0
+margin_top = -32.0
+margin_right = 32.0
+margin_bottom = 32.0
+mouse_filter = 2
+color = Color( 1, 0.501961, 0, 1 )
+script = ExtResource( 5 )
+ray_distance = 0.5
+
+[node name="Empty" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+
+[node name="Rock" type="Sprite" parent="."]
+texture = ExtResource( 3 )
+
+[node name="Kanji" type="Sprite" parent="."]
+material = SubResource( 2 )
+texture = ExtResource( 6 )
