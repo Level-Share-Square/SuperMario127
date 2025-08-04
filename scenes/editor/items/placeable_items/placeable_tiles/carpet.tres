@@ -12,9 +12,9 @@
 
 [resource]
 script = ExtResource( 1 )
-item_name = "Capet"
+item_name = "Carpet"
 groups = PoolStringArray( "special" )
-change_to = ""
+change_to = "til_carpet_stairs_left"
 items_in_sequence = 3
 index_in_sequence = 0
 icons = [ ExtResource( 6 ), ExtResource( 3 ), ExtResource( 2 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 9 ), ExtResource( 8 ), ExtResource( 7 ) ]

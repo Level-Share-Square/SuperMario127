@@ -1,0 +1,23 @@
+[gd_resource type="Resource" load_steps=9 format=2]
+
+[ext_resource path="res://scenes/editor/items/placeable_tile.gd" type="Script" id=1]
+[ext_resource path="res://assets/tiles/garden/palette_icons/0_slab.png" type="Texture" id=2]
+[ext_resource path="res://assets/tiles/garden/palette_icons/1_slab.png" type="Texture" id=3]
+[ext_resource path="res://assets/tiles/garden/palette_icons/2_slab.png" type="Texture" id=4]
+[ext_resource path="res://assets/tiles/garden/palette_icons/3_slab.png" type="Texture" id=5]
+[ext_resource path="res://assets/tiles/garden/palette_icons/5_slab.png" type="Texture" id=6]
+[ext_resource path="res://assets/tiles/garden/palette_icons/4_slab.png" type="Texture" id=7]
+[ext_resource path="res://assets/tiles/garden/icon_slab.png" type="Texture" id=8]
+
+[resource]
+script = ExtResource( 1 )
+item_name = "Garden (Half Tile)"
+groups = PoolStringArray( "special" )
+change_to = "til_garden_slope_left"
+items_in_sequence = 4
+index_in_sequence = 1
+icons = [ ExtResource( 8 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 7 ), ExtResource( 6 ) ]
+previews = [ ExtResource( 8 ) ]
+priority = 0
+tileset_id = 34
+tile_id = 1

@@ -13,7 +13,13 @@ func _click_left(_event: InputEvent, _world_pos: Vector2) -> void:
 		for object in editor.hovered_objects.values():
 			if Vector2(abs(object.global_position.x - get_global_mouse_position().x), abs(object.global_position.y - get_global_mouse_position().y)) < closest_object.global_position:
 				closest_object = object
-		select(closest_object)
+		if editor.show_layers:
+			if closest_object.layer == editor.layer:
+				select(closest_object)
+			else:
+				return
+		else:
+			select(closest_object)
 	else:
 		editor.selection_box.get_parent().hide_selection_box()
 		for object in editor.selected_objects:

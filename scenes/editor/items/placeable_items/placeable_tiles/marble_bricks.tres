@@ -13,7 +13,7 @@
 script = ExtResource( 1 )
 item_name = "Marble Bricks"
 groups = PoolStringArray( "special" )
-change_to = ""
+change_to = "til_marble_brick_stairs_left"
 items_in_sequence = 3
 index_in_sequence = 0
 icons = [ ExtResource( 4 ), ExtResource( 3 ), ExtResource( 2 ), ExtResource( 8 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 5 ) ]

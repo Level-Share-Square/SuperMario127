@@ -8,7 +8,7 @@ func _ready():
 
 func verify_clipboard():
 	var clipboard = JSON.parse(OS.get_clipboard()).result
-	if clipboard is Array:
+	if clipboard is Array || clipboard is Dictionary:
 		paste_action.show()
 	else:
 		paste_action.hide()

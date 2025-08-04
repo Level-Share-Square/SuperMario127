@@ -1,0 +1,24 @@
+[gd_resource type="Resource" load_steps=10 format=2]
+
+[ext_resource path="res://scenes/editor/items/placeable_tile.gd" type="Script" id=1]
+[ext_resource path="res://assets/tiles/wood/palette_icons/2_slopeL.png" type="Texture" id=2]
+[ext_resource path="res://assets/tiles/wood/palette_icons/4_slopeL.png" type="Texture" id=3]
+[ext_resource path="res://assets/tiles/wood/icon_slopeL.png" type="Texture" id=4]
+[ext_resource path="res://assets/tiles/wood/palette_icons/1_slopeL.png" type="Texture" id=5]
+[ext_resource path="res://assets/tiles/wood/palette_icons/3_slopeL.png" type="Texture" id=6]
+[ext_resource path="res://assets/tiles/wood/palette_icons/7_slopeL.png" type="Texture" id=7]
+[ext_resource path="res://assets/tiles/wood/palette_icons/5_slopeL.png" type="Texture" id=8]
+[ext_resource path="res://assets/tiles/wood/palette_icons/6_slopeL.png" type="Texture" id=9]
+
+[resource]
+script = ExtResource( 1 )
+item_name = "Wood (Left Stairs)"
+groups = PoolStringArray( "special" )
+change_to = "til_wood_stairs_right"
+items_in_sequence = 3
+index_in_sequence = 1
+icons = [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 2 ), ExtResource( 6 ), ExtResource( 3 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 7 ) ]
+previews = [ ExtResource( 4 ) ]
+priority = 0
+tileset_id = 10
+tile_id = 2

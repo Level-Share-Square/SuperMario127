@@ -1,0 +1,25 @@
+[gd_resource type="Resource" load_steps=11 format=2]
+
+[ext_resource path="res://scenes/editor/items/placeable_tile.gd" type="Script" id=1]
+[ext_resource path="res://assets/tiles/log/palletes/3_slope_R.png" type="Texture" id=2]
+[ext_resource path="res://assets/tiles/log/icon_slope_right.png" type="Texture" id=3]
+[ext_resource path="res://assets/tiles/log/palletes/1_slope_R.png" type="Texture" id=4]
+[ext_resource path="res://assets/tiles/log/palletes/2_slope_R.png" type="Texture" id=5]
+[ext_resource path="res://assets/tiles/log/palletes/4_slope_R.png" type="Texture" id=6]
+[ext_resource path="res://assets/tiles/log/palletes/5_slope_R.png" type="Texture" id=7]
+[ext_resource path="res://assets/tiles/log/palletes/6_slopeR.png" type="Texture" id=8]
+[ext_resource path="res://assets/tiles/log/palletes/8_slopeR.png" type="Texture" id=9]
+[ext_resource path="res://assets/tiles/log/palletes/7_slopeR.png" type="Texture" id=10]
+
+[resource]
+script = ExtResource( 1 )
+item_name = "Log (Right Slope)"
+groups = PoolStringArray( "special" )
+change_to = "til_log"
+items_in_sequence = 4
+index_in_sequence = 3
+icons = [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 2 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 10 ), ExtResource( 9 ) ]
+previews = [ ExtResource( 3 ) ]
+priority = 0
+tileset_id = 38
+tile_id = 3

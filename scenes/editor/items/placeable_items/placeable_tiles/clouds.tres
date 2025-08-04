@@ -16,7 +16,7 @@
 script = ExtResource( 1 )
 item_name = "Clouds"
 groups = PoolStringArray( "special" )
-change_to = ""
+change_to = "til_clouds_half_tile"
 items_in_sequence = 2
 index_in_sequence = 0
 icons = [ ExtResource( 11 ), ExtResource( 10 ), ExtResource( 7 ), ExtResource( 5 ), ExtResource( 3 ), ExtResource( 9 ), ExtResource( 4 ), ExtResource( 2 ), ExtResource( 6 ), ExtResource( 8 ) ]

@@ -132,14 +132,27 @@ func _process(delta):
 
 func _on_object_entered(area, object):
 	if expand == true:
-		selected_dict.get_or_add(object, object.name)
-		object.selected = true
-
+		if editor.show_layers:
+			if editor.layer == object.layer:
+				selected_dict.get_or_add(object, object.name)
+				object.selected = true
+			else:
+				return
+		else:
+			selected_dict.get_or_add(object, object.name)
+			object.selected = true
 
 func _on_object_exited(area, object):
 	if erase == true:
-		selected_dict.erase(object)
-		object.selected = false
+		if editor.show_layers:
+			if editor.layer == object.layer:
+				selected_dict.erase(object)
+				object.selected = false
+			else:
+				return
+		else:
+			selected_dict.erase(object)
+			object.selected = false
 
 
 func box_expansion():
@@ -218,16 +231,17 @@ func on_undo():
 	
 	
 func copy():
-	if editor.selected_objects != {}:
-		var copied_objects: Array
-		for i in editor.selected_objects:
-			var data: ObjectData = i.level_object.get_ref()
-			var properties: Array = []
-			for property in data.properties:
-				properties.append(value_util.encode_value(property))
-			copied_objects.append({"type_id": data.type_id, "palette": data.palette, "properties": properties})
-		OS.set_clipboard(JSON.print(copied_objects))
-		item_actions.verify_clipboard()
+	if editor.tool_manager.current_tool == self:
+		if editor.selected_objects != {}:
+			var copied_objects: Array
+			for i in editor.selected_objects:
+				var data: ObjectData = i.level_object.get_ref()
+				var properties: Array = []
+				for property in data.properties:
+					properties.append(value_util.encode_value(property))
+				copied_objects.append({"type_id": data.type_id, "palette": data.palette, "properties": properties})
+			OS.set_clipboard(JSON.print(copied_objects))
+			item_actions.verify_clipboard()
 
 func generate_object_data():
 	var data = JSON.parse(OS.get_clipboard())
@@ -248,40 +262,42 @@ func generate_object_data():
 		return []
 
 func paste():
-	var object_data = generate_object_data()
-	if object_data == []:
-		return
-	else:
-		editor.tool_manager.change_tool(name)
-		show_selection_box()
-		for object in selected_dict:
-			object.selected = false
-		selected_dict = {}
-		snap_to_selected_size()
-		var action = PlaceObjectBulkAction.new()
-		action.shared = shared
-		action.objects = object_data
-		editor.action_manager.commit_action(action)
-		while action.new_objects == {}:
-			pass
-		editor.selected_objects = action.new_objects
-		selected_dict = action.new_objects
-		show_selection_box()
-		item_actions.show_selection_actions()
+	if editor.tool_manager.current_tool == self:
+		var object_data = generate_object_data()
+		if object_data == []:
+			return
+		else:
+			editor.tool_manager.change_tool(name)
+			show_selection_box()
+			for object in selected_dict:
+				object.selected = false
+			selected_dict = {}
+			snap_to_selected_size()
+			var action = PlaceObjectBulkAction.new()
+			action.shared = shared
+			action.objects = object_data
+			editor.action_manager.commit_action(action)
+			while action.new_objects == {}:
+				pass
+			editor.selected_objects = action.new_objects
+			selected_dict = action.new_objects
+			show_selection_box()
+			item_actions.show_selection_actions()
 
 
 func _on_Delete_button_down():
-	for object in selected_dict:
-		object.selected = false
-	var action = EraseObjectBulkAction.new()
-	action.shared = shared
-	action.objects = editor.selected_objects.keys()
-	editor.action_manager.commit_action(action)
+	if editor.tool_manager.current_tool == self:
+		for object in selected_dict:
+			object.selected = false
+		var action = EraseObjectBulkAction.new()
+		action.shared = shared
+		action.objects = editor.selected_objects.keys()
+		editor.action_manager.commit_action(action)
 
-	editor.selected_objects = {}
-	selected_dict = {}
-	hide_selection_box()
-	item_actions.hide_selection_actions()
+		editor.selected_objects = {}
+		selected_dict = {}
+		hide_selection_box()
+		item_actions.hide_selection_actions()
 
 
 func open_properties_window():

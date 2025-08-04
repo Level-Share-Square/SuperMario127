@@ -5,6 +5,7 @@ onready var editor_camera = $"%EditorCamera"
 onready var settings = $"%Settings"
 onready var view_dropdown = $"%ViewDropdown"
 onready var editor = owner
+onready var shared = editor.get_node("Shared")
 
 func _ready():
 	for button in view_dropdown.get_children():
@@ -19,7 +20,16 @@ func on_button_pressed(button: Button):
 		"Grid":
 			grid.toggle_grid(!button.pressed)
 		"Layers":
-			pass
+			editor.show_layers = !button.pressed
+			for tilemap in shared.tilemaps_node.get_children():
+				if editor.show_layers:
+					if tilemap.layer != editor.layer:
+						tilemap.transparent = true
+					else:
+						tilemap.transparent = false
+				else:
+					tilemap.transparent = false
+			get_node("%Layers").emit_signal("layer_changed", editor.layer)
 		"PixelSnap":
 			editor.pixel_lock = !button.pressed
 		"Layering":
@@ -27,4 +37,4 @@ func on_button_pressed(button: Button):
 		"Autosaves":
 			pass
 		"Settings":
-			pass
+			editor.screen_manager.screen_change("Options")

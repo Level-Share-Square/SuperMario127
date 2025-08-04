@@ -1,24 +1,24 @@
 [gd_resource type="Resource" load_steps=10 format=2]
 
 [ext_resource path="res://scenes/editor/items/placeable_tile.gd" type="Script" id=1]
-[ext_resource path="res://assets/tiles/pitch_black/palette_icons/5.png" type="Texture" id=2]
-[ext_resource path="res://assets/tiles/pitch_black/palette_icons/1.png" type="Texture" id=3]
-[ext_resource path="res://assets/tiles/pitch_black/palette_icons/4.png" type="Texture" id=4]
-[ext_resource path="res://assets/tiles/pitch_black/icon.png" type="Texture" id=5]
-[ext_resource path="res://assets/tiles/pitch_black/palette_icons/3.png" type="Texture" id=6]
-[ext_resource path="res://assets/tiles/pitch_black/palette_icons/6.png" type="Texture" id=7]
-[ext_resource path="res://assets/tiles/pitch_black/palette_icons/7.png" type="Texture" id=8]
-[ext_resource path="res://assets/tiles/pitch_black/palette_icons/2.png" type="Texture" id=9]
+[ext_resource path="res://assets/tiles/pitch_black/palette_icons/7_slopeL.png" type="Texture" id=2]
+[ext_resource path="res://assets/tiles/pitch_black/icon_slopeL.png" type="Texture" id=3]
+[ext_resource path="res://assets/tiles/pitch_black/palette_icons/2_slopeL.png" type="Texture" id=4]
+[ext_resource path="res://assets/tiles/pitch_black/palette_icons/5_slopeL.png" type="Texture" id=5]
+[ext_resource path="res://assets/tiles/pitch_black/palette_icons/6_slopeL.png" type="Texture" id=6]
+[ext_resource path="res://assets/tiles/pitch_black/palette_icons/4_slopeL.png" type="Texture" id=7]
+[ext_resource path="res://assets/tiles/pitch_black/palette_icons/1_slopeL.png" type="Texture" id=8]
+[ext_resource path="res://assets/tiles/pitch_black/palette_icons/3_slopeL.png" type="Texture" id=9]
 
 [resource]
 script = ExtResource( 1 )
-item_name = "Color Tile"
+item_name = "Color Tile (Left Slope)"
 groups = PoolStringArray( "special" )
-change_to = ""
-items_in_sequence = 0
-index_in_sequence = 0
-icons = [ ExtResource( 5 ), ExtResource( 3 ), ExtResource( 9 ), ExtResource( 6 ), ExtResource( 4 ), ExtResource( 2 ), ExtResource( 7 ), ExtResource( 8 ) ]
-previews = [ ExtResource( 5 ) ]
+change_to = "til_color_tile_slope_right"
+items_in_sequence = 3
+index_in_sequence = 1
+icons = [ ExtResource( 3 ), ExtResource( 8 ), ExtResource( 4 ), ExtResource( 9 ), ExtResource( 7 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 2 ) ]
+previews = [ ExtResource( 3 ) ]
 priority = 0
 tileset_id = 21
 tile_id = 2

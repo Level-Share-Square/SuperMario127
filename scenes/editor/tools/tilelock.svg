@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 419.73 419.73">
+  <g id="Layer_50" data-name="Layer 50">
+    <g>
+      <rect x="112.79" y="218.81" width="92.08" height="88.14" style="fill: #fff; stroke: rgba(255, 255, 255, 0); stroke-miterlimit: 10; stroke-width: 11px;"/>
+      <rect x="214.87" y="218.81" width="92.08" height="88.14" style="fill: #fff; stroke: rgba(255, 255, 255, 0); stroke-miterlimit: 10; stroke-width: 11px;"/>
+      <rect x="163.44" y="112.79" width="92.08" height="97.08" style="fill: #fff; stroke: rgba(255, 255, 255, 0); stroke-miterlimit: 10; stroke-width: 11px;"/>
+      <rect x="112.79" y="112.79" width="41.8" height="97.08" style="fill: #fff; stroke: rgba(255, 255, 255, 0); stroke-miterlimit: 10; stroke-width: 11px;"/>
+      <rect x="265.15" y="112.79" width="41.8" height="97.08" style="fill: #fff; stroke: rgba(255, 255, 255, 0); stroke-miterlimit: 10; stroke-width: 11px;"/>
+    </g>
+    <g>
+      <path d="M0,112.79h97.08v194.16H0v-12.89h84.19V125.67H0" style="fill: #fff;"/>
+      <path d="M419.73,306.94h-97.08V112.79h97.08v12.89h-84.19v168.39h84.19" style="fill: #fff;"/>
+    </g>
+    <g>
+      <path d="M306.94,0v97.08H112.79V0h12.89v84.19h168.39V0" style="fill: #fff;"/>
+      <path d="M112.79,419.73v-97.08h194.16v97.08h-12.89v-84.19H125.67v84.19" style="fill: #fff;"/>
+    </g>
+  </g>
+</svg>

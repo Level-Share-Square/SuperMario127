@@ -1,0 +1,26 @@
+[gd_resource type="Resource" load_steps=12 format=2]
+
+[ext_resource path="res://scenes/editor/items/placeable_tile.gd" type="Script" id=1]
+[ext_resource path="res://assets/tiles/black_granite/palettes/2_slopeR.png" type="Texture" id=2]
+[ext_resource path="res://assets/tiles/black_granite/palettes/1_slopeR.png" type="Texture" id=3]
+[ext_resource path="res://assets/tiles/black_granite/palettes/8_slopeR.png" type="Texture" id=4]
+[ext_resource path="res://assets/tiles/black_granite/palettes/5_slopeR.png" type="Texture" id=5]
+[ext_resource path="res://assets/tiles/black_granite/palettes/9_slopeR.png" type="Texture" id=6]
+[ext_resource path="res://assets/tiles/black_granite/palettes/7_slopeR.png" type="Texture" id=7]
+[ext_resource path="res://assets/tiles/black_granite/palettes/3_slopeR.png" type="Texture" id=8]
+[ext_resource path="res://assets/tiles/black_granite/icon_slopeR.png" type="Texture" id=9]
+[ext_resource path="res://assets/tiles/black_granite/palettes/4_slopeR.png" type="Texture" id=10]
+[ext_resource path="res://assets/tiles/black_granite/palettes/6_slopeR.png" type="Texture" id=11]
+
+[resource]
+script = ExtResource( 1 )
+item_name = "Black Granite Slope Right"
+groups = PoolStringArray( "special" )
+change_to = "til_black_granite"
+items_in_sequence = 4
+index_in_sequence = 3
+icons = [ ExtResource( 9 ), ExtResource( 3 ), ExtResource( 2 ), ExtResource( 8 ), ExtResource( 10 ), ExtResource( 5 ), ExtResource( 11 ), ExtResource( 7 ), ExtResource( 4 ), ExtResource( 6 ) ]
+previews = [ ExtResource( 9 ) ]
+priority = 0
+tileset_id = 19
+tile_id = 3

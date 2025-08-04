@@ -15,7 +15,7 @@
 script = ExtResource( 1 )
 item_name = "Dark Bricks"
 groups = PoolStringArray( "special" )
-change_to = ""
+change_to = "til_dark_brick_stairs_left"
 items_in_sequence = 3
 index_in_sequence = 0
 icons = [ ExtResource( 7 ), ExtResource( 5 ), ExtResource( 4 ), ExtResource( 2 ), ExtResource( 6 ), ExtResource( 3 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ) ]

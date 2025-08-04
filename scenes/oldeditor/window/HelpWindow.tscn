@@ -510,12 +510,12 @@ size = 32
 use_filter = true
 font_data = ExtResource( 1 )
 
-[sub_resource type="Gradient" id=14]
+[sub_resource type="Gradient" id=23]
 offsets = PoolRealArray( 0, 0.8 )
 colors = PoolColorArray( 0, 0, 0, 0, 0.121569, 0.180392, 0.517647, 1 )
 
 [sub_resource type="GradientTexture" id=15]
-gradient = SubResource( 14 )
+gradient = SubResource( 23 )
 width = 193
 
 [sub_resource type="DynamicFont" id=20]
@@ -538,7 +538,7 @@ font_data = ExtResource( 1 )
 margin_left = 165.0
 margin_top = 130.0
 margin_right = 1218.0
-margin_bottom = 764.0
+margin_bottom = 4545.0
 rect_scale = Vector2( 0.4, 0.4 )
 mouse_filter = 0
 texture = ExtResource( 14 )
@@ -597,6 +597,7 @@ script = ExtResource( 6 )
 page_name = "Hotkeys"
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Pages/Hotkeys"]
+visible = false
 margin_left = 16.0
 margin_top = 8.0
 margin_right = 950.0
@@ -689,24 +690,20 @@ scroll_active = false
 script = ExtResource( 12 )
 
 [node name="Autotiling" type="ScrollContainer" parent="Pages"]
-visible = false
-margin_left = 448.5
-margin_top = 450.802
-margin_right = 1426.5
-margin_bottom = 806.802
+margin_left = 449.0
+margin_top = 451.0
+margin_right = 1427.0
+margin_bottom = 4078.0
 theme = SubResource( 11 )
 scroll_horizontal_enabled = false
 script = ExtResource( 3 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 page_name = "Autotiling"
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Pages/Autotiling"]
 margin_left = 16.0
 margin_top = 8.0
 margin_right = 962.0
-margin_bottom = 2783.0
+margin_bottom = 3619.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_colors/default_color = Color( 1, 1, 1, 1 )

@@ -1,0 +1,26 @@
+[gd_resource type="Resource" load_steps=12 format=2]
+
+[ext_resource path="res://scenes/editor/items/placeable_tile.gd" type="Script" id=1]
+[ext_resource path="res://assets/tiles/columns/palletes/8_slopeR.png" type="Texture" id=2]
+[ext_resource path="res://assets/tiles/columns/palletes/4_slopeR.png" type="Texture" id=3]
+[ext_resource path="res://assets/tiles/columns/palletes/5_slopeR.png" type="Texture" id=4]
+[ext_resource path="res://assets/tiles/columns/palletes/6_slopeR.png" type="Texture" id=5]
+[ext_resource path="res://assets/tiles/columns/palletes/9_slopeR.png" type="Texture" id=6]
+[ext_resource path="res://assets/tiles/columns/palletes/7_slopeR.png" type="Texture" id=7]
+[ext_resource path="res://assets/tiles/columns/palletes/2_slopeR.png" type="Texture" id=8]
+[ext_resource path="res://assets/tiles/columns/right_slope_icon.png" type="Texture" id=9]
+[ext_resource path="res://assets/tiles/columns/palletes/1_slopeR.png" type="Texture" id=10]
+[ext_resource path="res://assets/tiles/columns/palletes/3_slopeR.png" type="Texture" id=11]
+
+[resource]
+script = ExtResource( 1 )
+item_name = "Columns (Right Slope)"
+groups = PoolStringArray( "special" )
+change_to = "til_columns"
+items_in_sequence = 4
+index_in_sequence = 3
+icons = [ ExtResource( 10 ), ExtResource( 8 ), ExtResource( 11 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 7 ), ExtResource( 2 ), ExtResource( 6 ) ]
+previews = [ ExtResource( 9 ) ]
+priority = 0
+tileset_id = 37
+tile_id = 3

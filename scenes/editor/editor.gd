@@ -11,6 +11,7 @@ export(NodePath) var shared_path
 var placed_item_property = null
 var pixel_lock = true
 var object_layering = true
+var show_layers = false
 
 export(LevelShared.Layers) var layer: int = 2
 
@@ -24,6 +25,7 @@ onready var tool_manager: ToolManager = $"%Tools"
 onready var tile_buffer: TileMap = $"%TileBuffer"
 onready var object_buffer = $"%ObjectBuffer"
 onready var action_manager: ActionManager = $"%ActionManager"
+onready var screen_manager = $"%ScreenManager"
 
 onready var save_button = $UI/EditorUI/Utilities/Save
 onready var level_settings = $"%LevelSettingsWindow"

@@ -20,9 +20,16 @@ onready var fludds = $"%FLUDD"
 onready var level_info: LevelInfo = Singleton.CurrentLevelData.level_info
 onready var level_data: LevelData = Singleton.CurrentLevelData.level_data
 
+# other
+var backing_out: bool = false
+
+
 func back():
-	anim_player.play("transition")
-	Singleton.SceneSwitcher.quit_level()
+	if not backing_out:
+		anim_player.play("transition")
+		Singleton.SceneSwitcher.quit_level()
+		backing_out = true
+
 
 func _ready():
 	for fludd in fludds.get_children():
