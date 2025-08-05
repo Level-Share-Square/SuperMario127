@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/actors/objects/tile_batch/tile_batch.gd" type="Script" id=1]
+[ext_resource path="res://assets/tiles/tiles.tres" type="TileSet" id=2]
+
+[node name="TileBatch" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="Tiles" type="TileMap" parent="."]
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 32, 32 )
+cell_tile_origin = 1
+show_collision = true
+format = 1
+tile_data = PoolIntArray( -327678, 5, 15, -262143, 5, 13, -262142, 5, 65543, -131074, 676, 13, -131073, 674, 10, -196608, 5, 13, -196607, 5, 65545, -196606, 2, 196619, -65538, 2, 8, -65537, 2, 10, -131072, 5, 65541, -131071, 2, 131083, -2, 2, 65544, -1, 2, 131081, -65536, 2, 131081, -65535, 2, 131083, 65534, 2, 65544, 65535, 2, 131081, 0, 2, 131081, 1, 2, 131083, 131070, 2, 196616, 131071, 2, 196617, 65536, 2, 196617, 65537, 2, 196619 )
