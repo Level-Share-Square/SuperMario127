@@ -32,7 +32,6 @@ corner_radius_bottom_left = 64
 margin_right = 256.0
 margin_bottom = 206.0
 script = ExtResource( 9 )
-subgroup = 2
 
 [node name="Container" type="VBoxContainer" parent="."]
 margin_right = 256.0

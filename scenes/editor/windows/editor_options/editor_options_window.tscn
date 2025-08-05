@@ -29,36 +29,35 @@ script = ExtResource( 9 )
 title = "Level Settings"
 
 [node name="Background" parent="." index="0"]
-margin_right = 400.0
+margin_right = 408.0
 margin_bottom = 241.0
 
 [node name="ContentDivider" parent="." index="1"]
-margin_right = 400.0
+margin_right = 408.0
 margin_bottom = 241.0
 
 [node name="Header" parent="ContentDivider" index="0"]
-margin_right = 400.0
+margin_right = 408.0
 
 [node name="HeaderMat" parent="ContentDivider/Header" index="0"]
-margin_right = 396.0
+margin_right = 404.0
 
 [node name="HeaderBox" parent="ContentDivider/Header/HeaderMat" index="0"]
-margin_right = 386.0
+margin_right = 394.0
 
 [node name="WindowTitle" parent="ContentDivider/Header/HeaderMat/HeaderBox" index="2"]
-margin_right = 357.0
-margin_bottom = 21.0
+margin_right = 365.0
 
 [node name="WindowClose" parent="ContentDivider/Header/HeaderMat/HeaderBox" index="3"]
-margin_left = 358.0
-margin_right = 380.0
+margin_left = 366.0
+margin_right = 388.0
 
 [node name="HSeparator" parent="ContentDivider" index="1"]
 modulate = Color( 1, 1, 1, 1 )
-margin_right = 400.0
+margin_right = 408.0
 
 [node name="ContentMat" parent="ContentDivider" index="2"]
-margin_right = 400.0
+margin_right = 408.0
 margin_bottom = 241.0
 custom_constants/margin_right = 6
 custom_constants/margin_top = 6
@@ -68,7 +67,7 @@ custom_constants/margin_bottom = 6
 [node name="Tabs" type="TabContainer" parent="ContentDivider/ContentMat" index="0"]
 margin_left = 6.0
 margin_top = 6.0
-margin_right = 394.0
+margin_right = 402.0
 margin_bottom = 204.0
 rect_pivot_offset = Vector2( -131, 46 )
 mouse_filter = 1
@@ -82,6 +81,7 @@ all_tabs_in_front = true
 use_hidden_tabs_for_min_size = true
 
 [node name="Level" type="MarginContainer" parent="ContentDivider/ContentMat/Tabs" index="0"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -97,7 +97,7 @@ script = ExtResource( 15 )
 [node name="HBoxContainer" type="HBoxContainer" parent="ContentDivider/ContentMat/Tabs/Level" index="0"]
 margin_left = 5.0
 margin_top = 5.0
-margin_right = 375.0
+margin_right = 383.0
 margin_bottom = 162.0
 custom_constants/separation = 10
 
@@ -212,7 +212,7 @@ scroll_horizontal_enabled = false
 script = ExtResource( 13 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ContentDivider/ContentMat/Tabs/Areas" index="0"]
-margin_right = 372.0
+margin_right = 380.0
 margin_bottom = 35.0
 size_flags_horizontal = 3
 
@@ -256,7 +256,7 @@ backgrounds = ExtResource( 18 )
 foregrounds = ExtResource( 19 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ContentDivider/ContentMat/Tabs/Background" index="0"]
-margin_right = 372.0
+margin_right = 380.0
 margin_bottom = 167.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -456,10 +456,10 @@ script = ExtResource( 6 )
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 6.0
-margin_top = 29.0
-margin_right = -6.0
-margin_bottom = -6.0
+margin_left = 4.0
+margin_top = 27.0
+margin_right = -4.0
+margin_bottom = -4.0
 scroll_horizontal_enabled = false
 scroll_deadzone = 7
 
@@ -491,91 +491,98 @@ music_type = 1
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 6.0
-margin_top = 29.0
-margin_right = -6.0
-margin_bottom = -6.0
+margin_left = 4.0
+margin_top = 27.0
+margin_right = -4.0
+margin_bottom = -4.0
 scroll_horizontal_enabled = false
 scroll_deadzone = 7
 script = ExtResource( 12 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ContentDivider/ContentMat/Tabs/Autosave" index="0"]
-margin_right = 368.0
-margin_bottom = 163.0
+margin_right = 380.0
+margin_bottom = 167.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ContentDivider/ContentMat/Tabs/Autosave/VBoxContainer" index="0"]
-margin_right = 368.0
+margin_right = 372.0
 margin_bottom = 19.0
 size_flags_horizontal = 3
 alignment = 1
 
 [node name="Label" type="Label" parent="ContentDivider/ContentMat/Tabs/Autosave/VBoxContainer/HBoxContainer" index="0"]
-margin_left = 120.0
+margin_left = 122.0
 margin_top = 1.0
-margin_right = 221.0
+margin_right = 223.0
 margin_bottom = 18.0
 text = "Autosave Timer:"
 
 [node name="IntervalOptions" type="OptionButton" parent="ContentDivider/ContentMat/Tabs/Autosave/VBoxContainer/HBoxContainer" index="1"]
 unique_name_in_owner = true
-margin_left = 225.0
-margin_right = 247.0
+margin_left = 227.0
+margin_right = 249.0
 margin_bottom = 19.0
 focus_mode = 0
 
 [node name="HSeparator" type="HSeparator" parent="ContentDivider/ContentMat/Tabs/Autosave/VBoxContainer" index="1"]
 margin_top = 23.0
-margin_right = 368.0
+margin_right = 372.0
 margin_bottom = 27.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ContentDivider/ContentMat/Tabs/Autosave/VBoxContainer" index="2"]
 margin_top = 31.0
-margin_right = 368.0
-margin_bottom = 163.0
+margin_right = 372.0
+margin_bottom = 167.0
 size_flags_vertical = 3
 
 [node name="Label" type="Label" parent="ContentDivider/ContentMat/Tabs/Autosave/VBoxContainer/VBoxContainer" index="0"]
-margin_right = 368.0
+margin_right = 372.0
 margin_bottom = 17.0
 text = "Available Autosaves"
 align = 1
 
 [node name="ScrollContainer" type="ScrollContainer" parent="ContentDivider/ContentMat/Tabs/Autosave/VBoxContainer/VBoxContainer" index="1"]
 margin_top = 21.0
-margin_right = 368.0
-margin_bottom = 132.0
+margin_right = 372.0
+margin_bottom = 136.0
 size_flags_vertical = 3
 
 [node name="SavesContainer" type="VBoxContainer" parent="ContentDivider/ContentMat/Tabs/Autosave/VBoxContainer/VBoxContainer/ScrollContainer" index="0"]
 unique_name_in_owner = true
-margin_right = 360.0
-margin_bottom = 111.0
+margin_right = 364.0
+margin_bottom = 115.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Settings" type="ScrollContainer" parent="ContentDivider/ContentMat/Tabs" index="5"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 6.0
-margin_top = 29.0
-margin_right = -6.0
-margin_bottom = -6.0
+margin_left = 4.0
+margin_top = 27.0
+margin_right = -4.0
+margin_bottom = -4.0
 scroll_horizontal_enabled = false
 scroll_deadzone = 7
 script = ExtResource( 12 )
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ContentDivider/ContentMat/Tabs/Settings" index="0"]
-margin_right = 368.0
-margin_bottom = 347.0
-rect_clip_content = true
+[node name="MarginContainer" type="MarginContainer" parent="ContentDivider/ContentMat/Tabs/Settings" index="0"]
+margin_right = 372.0
+margin_bottom = 348.0
+custom_constants/margin_right = 2
+custom_constants/margin_top = 1
+custom_constants/margin_left = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer" index="0"]
+margin_left = 2.0
+margin_top = 1.0
+margin_right = 370.0
+margin_bottom = 348.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PalettesSection" type="Button" parent="ContentDivider/ContentMat/Tabs/Settings/VBoxContainer" index="0"]
+[node name="PalettesSection" type="Button" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer" index="0"]
 margin_right = 368.0
 margin_bottom = 19.0
 focus_mode = 0
@@ -584,14 +591,14 @@ align = 0
 script = ExtResource( 21 )
 selected_container_path = NodePath("../Control2")
 
-[node name="Control2" type="Control" parent="ContentDivider/ContentMat/Tabs/Settings/VBoxContainer" index="1"]
+[node name="Control2" type="Control" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer" index="1"]
 margin_top = 23.0
 margin_right = 368.0
 margin_bottom = 113.0
 rect_min_size = Vector2( 368, 90 )
 rect_clip_content = true
 
-[node name="VBoxContainer3" type="VBoxContainer" parent="ContentDivider/ContentMat/Tabs/Settings/VBoxContainer/Control2" index="0"]
+[node name="VBoxContainer3" type="VBoxContainer" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Control2" index="0"]
 margin_top = 3.0
 margin_right = 368.0
 margin_bottom = 93.0
@@ -601,79 +608,79 @@ __meta__ = {
 "_edit_use_anchors_": true
 }
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ContentDivider/ContentMat/Tabs/Settings/VBoxContainer/Control2/VBoxContainer3" index="0"]
+[node name="HBoxContainer" type="HBoxContainer" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Control2/VBoxContainer3" index="0"]
 margin_right = 368.0
 margin_bottom = 17.0
 custom_constants/separation = 10
 alignment = 1
 
-[node name="Label" type="Label" parent="ContentDivider/ContentMat/Tabs/Settings/VBoxContainer/Control2/VBoxContainer3/HBoxContainer" index="0"]
+[node name="Label" type="Label" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Control2/VBoxContainer3/HBoxContainer" index="0"]
 margin_left = 64.0
 margin_right = 152.0
 margin_bottom = 17.0
 text = "Level Bounds:"
 
-[node name="SpinBoxSound" type="SpinBox" parent="ContentDivider/ContentMat/Tabs/Settings/VBoxContainer/Control2/VBoxContainer3/HBoxContainer" index="1"]
+[node name="SpinBoxSound" type="SpinBox" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Control2/VBoxContainer3/HBoxContainer" index="1"]
 margin_left = 162.0
 margin_right = 228.0
 margin_bottom = 17.0
 prefix = "X"
 script = ExtResource( 5 )
 
-[node name="SpinBoxSound2" type="SpinBox" parent="ContentDivider/ContentMat/Tabs/Settings/VBoxContainer/Control2/VBoxContainer3/HBoxContainer" index="2"]
+[node name="SpinBoxSound2" type="SpinBox" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Control2/VBoxContainer3/HBoxContainer" index="2"]
 margin_left = 238.0
 margin_right = 304.0
 margin_bottom = 17.0
 prefix = "Y"
 script = ExtResource( 5 )
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="ContentDivider/ContentMat/Tabs/Settings/VBoxContainer/Control2/VBoxContainer3" index="1"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Control2/VBoxContainer3" index="1"]
 margin_top = 26.0
 margin_right = 368.0
 margin_bottom = 43.0
 custom_constants/separation = 10
 alignment = 1
 
-[node name="Label" type="Label" parent="ContentDivider/ContentMat/Tabs/Settings/VBoxContainer/Control2/VBoxContainer3/HBoxContainer2" index="0"]
+[node name="Label" type="Label" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Control2/VBoxContainer3/HBoxContainer2" index="0"]
 margin_left = 121.0
 margin_right = 171.0
 margin_bottom = 17.0
 text = "Gravity:"
 
-[node name="SpinBox" type="SpinBox" parent="ContentDivider/ContentMat/Tabs/Settings/VBoxContainer/Control2/VBoxContainer3/HBoxContainer2" index="1"]
+[node name="SpinBox" type="SpinBox" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Control2/VBoxContainer3/HBoxContainer2" index="1"]
 margin_left = 181.0
 margin_right = 247.0
 margin_bottom = 17.0
 script = ExtResource( 5 )
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="ContentDivider/ContentMat/Tabs/Settings/VBoxContainer/Control2/VBoxContainer3" index="2"]
+[node name="HBoxContainer3" type="HBoxContainer" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Control2/VBoxContainer3" index="2"]
 margin_top = 52.0
 margin_right = 368.0
 margin_bottom = 69.0
 custom_constants/separation = 10
 alignment = 1
 
-[node name="Label" type="Label" parent="ContentDivider/ContentMat/Tabs/Settings/VBoxContainer/Control2/VBoxContainer3/HBoxContainer3" index="0"]
+[node name="Label" type="Label" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Control2/VBoxContainer3/HBoxContainer3" index="0"]
 margin_left = 89.0
 margin_right = 126.0
 margin_bottom = 17.0
 text = "Timer:"
 
-[node name="SpinBox2" type="SpinBox" parent="ContentDivider/ContentMat/Tabs/Settings/VBoxContainer/Control2/VBoxContainer3/HBoxContainer3" index="1"]
+[node name="SpinBox2" type="SpinBox" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Control2/VBoxContainer3/HBoxContainer3" index="1"]
 margin_left = 136.0
 margin_right = 202.0
 margin_bottom = 17.0
 suffix = "m"
 script = ExtResource( 5 )
 
-[node name="SpinBox" type="SpinBox" parent="ContentDivider/ContentMat/Tabs/Settings/VBoxContainer/Control2/VBoxContainer3/HBoxContainer3" index="2"]
+[node name="SpinBox" type="SpinBox" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Control2/VBoxContainer3/HBoxContainer3" index="2"]
 margin_left = 212.0
 margin_right = 278.0
 margin_bottom = 17.0
 suffix = "s"
 script = ExtResource( 5 )
 
-[node name="WeatherSection" type="Button" parent="ContentDivider/ContentMat/Tabs/Settings/VBoxContainer" index="2"]
+[node name="WeatherSection" type="Button" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer" index="2"]
 margin_top = 117.0
 margin_right = 368.0
 margin_bottom = 136.0
@@ -683,14 +690,14 @@ align = 0
 script = ExtResource( 21 )
 selected_container_path = NodePath("../Control3")
 
-[node name="Control3" type="Control" parent="ContentDivider/ContentMat/Tabs/Settings/VBoxContainer" index="3"]
+[node name="Control3" type="Control" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer" index="3"]
 margin_top = 140.0
 margin_right = 368.0
 margin_bottom = 230.0
 rect_min_size = Vector2( 368, 90 )
 rect_clip_content = true
 
-[node name="VBoxContainer3" type="VBoxContainer" parent="ContentDivider/ContentMat/Tabs/Settings/VBoxContainer/Control3" index="0"]
+[node name="VBoxContainer3" type="VBoxContainer" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Control3" index="0"]
 margin_top = 3.0
 margin_right = 368.0
 margin_bottom = 93.0
@@ -700,79 +707,79 @@ __meta__ = {
 "_edit_use_anchors_": true
 }
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ContentDivider/ContentMat/Tabs/Settings/VBoxContainer/Control3/VBoxContainer3" index="0"]
+[node name="HBoxContainer" type="HBoxContainer" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Control3/VBoxContainer3" index="0"]
 margin_right = 368.0
 margin_bottom = 17.0
 custom_constants/separation = 10
 alignment = 1
 
-[node name="Label" type="Label" parent="ContentDivider/ContentMat/Tabs/Settings/VBoxContainer/Control3/VBoxContainer3/HBoxContainer" index="0"]
+[node name="Label" type="Label" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Control3/VBoxContainer3/HBoxContainer" index="0"]
 margin_left = 64.0
 margin_right = 152.0
 margin_bottom = 17.0
 text = "Level Bounds:"
 
-[node name="SpinBoxSound" type="SpinBox" parent="ContentDivider/ContentMat/Tabs/Settings/VBoxContainer/Control3/VBoxContainer3/HBoxContainer" index="1"]
+[node name="SpinBoxSound" type="SpinBox" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Control3/VBoxContainer3/HBoxContainer" index="1"]
 margin_left = 162.0
 margin_right = 228.0
 margin_bottom = 17.0
 prefix = "X"
 script = ExtResource( 5 )
 
-[node name="SpinBoxSound2" type="SpinBox" parent="ContentDivider/ContentMat/Tabs/Settings/VBoxContainer/Control3/VBoxContainer3/HBoxContainer" index="2"]
+[node name="SpinBoxSound2" type="SpinBox" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Control3/VBoxContainer3/HBoxContainer" index="2"]
 margin_left = 238.0
 margin_right = 304.0
 margin_bottom = 17.0
 prefix = "Y"
 script = ExtResource( 5 )
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="ContentDivider/ContentMat/Tabs/Settings/VBoxContainer/Control3/VBoxContainer3" index="1"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Control3/VBoxContainer3" index="1"]
 margin_top = 26.0
 margin_right = 368.0
 margin_bottom = 43.0
 custom_constants/separation = 10
 alignment = 1
 
-[node name="Label" type="Label" parent="ContentDivider/ContentMat/Tabs/Settings/VBoxContainer/Control3/VBoxContainer3/HBoxContainer2" index="0"]
+[node name="Label" type="Label" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Control3/VBoxContainer3/HBoxContainer2" index="0"]
 margin_left = 121.0
 margin_right = 171.0
 margin_bottom = 17.0
 text = "Gravity:"
 
-[node name="SpinBox" type="SpinBox" parent="ContentDivider/ContentMat/Tabs/Settings/VBoxContainer/Control3/VBoxContainer3/HBoxContainer2" index="1"]
+[node name="SpinBox" type="SpinBox" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Control3/VBoxContainer3/HBoxContainer2" index="1"]
 margin_left = 181.0
 margin_right = 247.0
 margin_bottom = 17.0
 script = ExtResource( 5 )
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="ContentDivider/ContentMat/Tabs/Settings/VBoxContainer/Control3/VBoxContainer3" index="2"]
+[node name="HBoxContainer3" type="HBoxContainer" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Control3/VBoxContainer3" index="2"]
 margin_top = 52.0
 margin_right = 368.0
 margin_bottom = 69.0
 custom_constants/separation = 10
 alignment = 1
 
-[node name="Label" type="Label" parent="ContentDivider/ContentMat/Tabs/Settings/VBoxContainer/Control3/VBoxContainer3/HBoxContainer3" index="0"]
+[node name="Label" type="Label" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Control3/VBoxContainer3/HBoxContainer3" index="0"]
 margin_left = 89.0
 margin_right = 126.0
 margin_bottom = 17.0
 text = "Timer:"
 
-[node name="SpinBox2" type="SpinBox" parent="ContentDivider/ContentMat/Tabs/Settings/VBoxContainer/Control3/VBoxContainer3/HBoxContainer3" index="1"]
+[node name="SpinBox2" type="SpinBox" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Control3/VBoxContainer3/HBoxContainer3" index="1"]
 margin_left = 136.0
 margin_right = 202.0
 margin_bottom = 17.0
 suffix = "m"
 script = ExtResource( 5 )
 
-[node name="SpinBox" type="SpinBox" parent="ContentDivider/ContentMat/Tabs/Settings/VBoxContainer/Control3/VBoxContainer3/HBoxContainer3" index="2"]
+[node name="SpinBox" type="SpinBox" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Control3/VBoxContainer3/HBoxContainer3" index="2"]
 margin_left = 212.0
 margin_right = 278.0
 margin_bottom = 17.0
 suffix = "s"
 script = ExtResource( 5 )
 
-[node name="AreaSection" type="Button" parent="ContentDivider/ContentMat/Tabs/Settings/VBoxContainer" index="4"]
+[node name="AreaSection" type="Button" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer" index="4"]
 margin_top = 234.0
 margin_right = 368.0
 margin_bottom = 253.0
@@ -782,7 +789,7 @@ align = 0
 script = ExtResource( 21 )
 selected_container_path = NodePath("../AreaSettings")
 
-[node name="AreaSettings" type="Control" parent="ContentDivider/ContentMat/Tabs/Settings/VBoxContainer" index="5"]
+[node name="AreaSettings" type="Control" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer" index="5"]
 margin_top = 257.0
 margin_right = 368.0
 margin_bottom = 347.0
@@ -790,7 +797,7 @@ rect_min_size = Vector2( 368, 90 )
 rect_clip_content = true
 script = ExtResource( 14 )
 
-[node name="VBoxContainer3" type="VBoxContainer" parent="ContentDivider/ContentMat/Tabs/Settings/VBoxContainer/AreaSettings" index="0"]
+[node name="VBoxContainer3" type="VBoxContainer" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/AreaSettings" index="0"]
 margin_top = 3.0
 margin_right = 368.0
 margin_bottom = 93.0
@@ -800,19 +807,19 @@ __meta__ = {
 "_edit_use_anchors_": true
 }
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ContentDivider/ContentMat/Tabs/Settings/VBoxContainer/AreaSettings/VBoxContainer3" index="0"]
+[node name="HBoxContainer" type="HBoxContainer" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/AreaSettings/VBoxContainer3" index="0"]
 margin_right = 368.0
 margin_bottom = 17.0
 custom_constants/separation = 10
 alignment = 1
 
-[node name="Label" type="Label" parent="ContentDivider/ContentMat/Tabs/Settings/VBoxContainer/AreaSettings/VBoxContainer3/HBoxContainer" index="0"]
+[node name="Label" type="Label" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/AreaSettings/VBoxContainer3/HBoxContainer" index="0"]
 margin_left = 64.0
 margin_right = 152.0
 margin_bottom = 17.0
 text = "Level Bounds:"
 
-[node name="SizeX" type="SpinBox" parent="ContentDivider/ContentMat/Tabs/Settings/VBoxContainer/AreaSettings/VBoxContainer3/HBoxContainer" index="1"]
+[node name="SizeX" type="SpinBox" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/AreaSettings/VBoxContainer3/HBoxContainer" index="1"]
 unique_name_in_owner = true
 margin_left = 162.0
 margin_right = 228.0
@@ -820,7 +827,7 @@ margin_bottom = 17.0
 prefix = "X"
 script = ExtResource( 5 )
 
-[node name="SizeY" type="SpinBox" parent="ContentDivider/ContentMat/Tabs/Settings/VBoxContainer/AreaSettings/VBoxContainer3/HBoxContainer" index="2"]
+[node name="SizeY" type="SpinBox" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/AreaSettings/VBoxContainer3/HBoxContainer" index="2"]
 unique_name_in_owner = true
 margin_left = 238.0
 margin_right = 304.0
@@ -828,20 +835,20 @@ margin_bottom = 17.0
 prefix = "Y"
 script = ExtResource( 5 )
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="ContentDivider/ContentMat/Tabs/Settings/VBoxContainer/AreaSettings/VBoxContainer3" index="1"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/AreaSettings/VBoxContainer3" index="1"]
 margin_top = 26.0
 margin_right = 368.0
 margin_bottom = 43.0
 custom_constants/separation = 10
 alignment = 1
 
-[node name="Label" type="Label" parent="ContentDivider/ContentMat/Tabs/Settings/VBoxContainer/AreaSettings/VBoxContainer3/HBoxContainer2" index="0"]
+[node name="Label" type="Label" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/AreaSettings/VBoxContainer3/HBoxContainer2" index="0"]
 margin_left = 121.0
 margin_right = 171.0
 margin_bottom = 17.0
 text = "Gravity:"
 
-[node name="Gravity" type="SpinBox" parent="ContentDivider/ContentMat/Tabs/Settings/VBoxContainer/AreaSettings/VBoxContainer3/HBoxContainer2" index="1"]
+[node name="Gravity" type="SpinBox" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/AreaSettings/VBoxContainer3/HBoxContainer2" index="1"]
 unique_name_in_owner = true
 margin_left = 181.0
 margin_right = 247.0
@@ -849,20 +856,20 @@ margin_bottom = 17.0
 step = 0.01
 script = ExtResource( 5 )
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="ContentDivider/ContentMat/Tabs/Settings/VBoxContainer/AreaSettings/VBoxContainer3" index="2"]
+[node name="HBoxContainer3" type="HBoxContainer" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/AreaSettings/VBoxContainer3" index="2"]
 margin_top = 52.0
 margin_right = 368.0
 margin_bottom = 69.0
 custom_constants/separation = 10
 alignment = 1
 
-[node name="Label" type="Label" parent="ContentDivider/ContentMat/Tabs/Settings/VBoxContainer/AreaSettings/VBoxContainer3/HBoxContainer3" index="0"]
+[node name="Label" type="Label" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/AreaSettings/VBoxContainer3/HBoxContainer3" index="0"]
 margin_left = 89.0
 margin_right = 126.0
 margin_bottom = 17.0
 text = "Timer:"
 
-[node name="Mins" type="SpinBox" parent="ContentDivider/ContentMat/Tabs/Settings/VBoxContainer/AreaSettings/VBoxContainer3/HBoxContainer3" index="1"]
+[node name="Mins" type="SpinBox" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/AreaSettings/VBoxContainer3/HBoxContainer3" index="1"]
 unique_name_in_owner = true
 margin_left = 136.0
 margin_right = 202.0
@@ -871,7 +878,7 @@ max_value = 999.0
 suffix = "m"
 script = ExtResource( 5 )
 
-[node name="Sec" type="SpinBox" parent="ContentDivider/ContentMat/Tabs/Settings/VBoxContainer/AreaSettings/VBoxContainer3/HBoxContainer3" index="2"]
+[node name="Sec" type="SpinBox" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/AreaSettings/VBoxContainer3/HBoxContainer3" index="2"]
 unique_name_in_owner = true
 margin_left = 212.0
 margin_right = 278.0
@@ -882,15 +889,15 @@ suffix = "s"
 script = ExtResource( 5 )
 
 [node name="Border" parent="." index="2"]
-margin_right = 400.0
+margin_right = 408.0
 margin_bottom = 241.0
 
 [node name="WindowMat" parent="." index="3"]
-margin_right = 400.0
+margin_right = 408.0
 margin_bottom = 241.0
 
 [node name="Control" parent="." index="4"]
-margin_right = 400.0
+margin_right = 408.0
 margin_bottom = 241.0
 
 [connection signal="button_down" from="ContentDivider/ContentMat/Tabs/Areas/VBoxContainer/HBoxContainer/Paste" to="ContentDivider/ContentMat/Tabs/Areas" method="paste_area"]

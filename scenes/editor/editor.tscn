@@ -259,6 +259,14 @@ tool_type = 1
 
 [node name="ObjectTrail" parent="ZIndex/Tools" instance=ExtResource( 72 )]
 
+[node name="ItemPreview" type="TextureRect" parent="ZIndex"]
+unique_name_in_owner = true
+modulate = Color( 1, 1, 1, 0.368627 )
+margin_right = 40.0
+margin_bottom = 40.0
+mouse_filter = 2
+script = ExtResource( 66 )
+
 [node name="TileBuffer" type="TileMap" parent="."]
 unique_name_in_owner = true
 modulate = Color( 1, 1, 1, 0.74902 )
@@ -286,14 +294,6 @@ script = ExtResource( 22 )
 
 [node name="UI" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
-
-[node name="ItemPreview" type="TextureRect" parent="UI"]
-unique_name_in_owner = true
-modulate = Color( 1, 1, 1, 0.368627 )
-margin_right = 40.0
-margin_bottom = 40.0
-mouse_filter = 2
-script = ExtResource( 66 )
 
 [node name="UIContainer" type="HBoxContainer" parent="UI"]
 anchor_right = 1.0
@@ -1700,13 +1700,13 @@ volume_db = -7.5
 bus = "Sounds"
 
 [connection signal="tool_changed" from="ZIndex/Tools" to="ZIndex/Tools/ObjectTrail" method="_on_Tools_tool_changed"]
-[connection signal="tool_changed" from="ZIndex/Tools" to="UI/ItemPreview" method="_on_Tools_tool_changed"]
+[connection signal="tool_changed" from="ZIndex/Tools" to="ZIndex/ItemPreview" method="_on_Tools_tool_changed"]
 [connection signal="tool_changed" from="ZIndex/Tools" to="UI/UIContainer/EditorUI/Middle/Tools" method="_on_Tools_tool_changed"]
 [connection signal="action" from="ActionManager" to="SaveManager" method="_on_ActionManager_action"]
-[connection signal="redo" from="ActionManager" to="ZIndex/Tools/ObjectSelection" method="snap_to_selected_size"]
 [connection signal="redo" from="ActionManager" to="ZIndex/Tools/ObjectSelection" method="on_redo"]
-[connection signal="undo" from="ActionManager" to="ZIndex/Tools/ObjectSelection" method="snap_to_selected_size"]
+[connection signal="redo" from="ActionManager" to="ZIndex/Tools/ObjectSelection" method="snap_to_selected_size"]
 [connection signal="undo" from="ActionManager" to="ZIndex/Tools/ObjectSelection" method="on_undo"]
+[connection signal="undo" from="ActionManager" to="ZIndex/Tools/ObjectSelection" method="snap_to_selected_size"]
 [connection signal="text_entered" from="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/SearchBar" to="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/ScrollContainer/CenterContainer/ItemsGrid" method="_on_search"]
 [connection signal="pressed" from="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/Search" to="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/ScrollContainer/CenterContainer/ItemsGrid" method="_on_search"]
 [connection signal="pressed" from="UI/UIContainer/EditorUI/Top/Options/PanelContainer/Settings" to="UI/LevelSettingsWindow" method="toggle_window"]

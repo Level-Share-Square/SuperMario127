@@ -12,7 +12,7 @@ func load_property(_editor: Editor, _objects: Dictionary, _property: Array):
 func change_property(new_value):
 	.change_property(wrapf(new_value, 0, 360))
 
-func done_editing():
+func done_editing(_val: String):
 	change_property(float($"%LineEdit".text))
 
 func increment_property(step: float):

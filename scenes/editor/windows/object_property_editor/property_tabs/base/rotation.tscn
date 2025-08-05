@@ -105,6 +105,9 @@ margin_right = 49.0
 margin_bottom = 263.0
 size_flags_horizontal = 4
 size_flags_vertical = 3
+custom_colors/selection_color = Color( 0.568627, 0, 1, 1 )
+custom_colors/cursor_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_selected = Color( 1, 1, 1, 1 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_constants/minimum_spaces = 8
 custom_fonts/font = SubResource( 5 )
@@ -137,4 +140,5 @@ margin_bottom = 145.0
 [connection signal="pressed" from="Buttons/Right" to="." method="increment_property" binds= [ 1.0 ]]
 [connection signal="pressed" from="Buttons/Right" to="Buttons/Right" method="pressed"]
 [connection signal="timeout" from="Buttons/Right/Timer" to="Buttons/Right" method="set_firing" binds= [ true ]]
-[connection signal="focus_exited" from="VBoxContainer/LineEdit" to="." method="done_editing"]
+[connection signal="focus_exited" from="VBoxContainer/LineEdit" to="." method="done_editing" binds= [ "lmao" ]]
+[connection signal="text_entered" from="VBoxContainer/LineEdit" to="." method="done_editing"]
