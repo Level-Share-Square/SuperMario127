@@ -13,6 +13,7 @@ var editor: Editor
 var objects: Dictionary
 var property: Array
 
+
 func load_property(_editor: Editor, _objects: Dictionary, _property: Array):
 	editor = _editor
 	objects = _objects
@@ -30,14 +31,17 @@ func load_property(_editor: Editor, _objects: Dictionary, _property: Array):
 	for object in _objects:
 		object.connect("property_changed", self, "property_changed")
 
+
 func _ready():
 	for node in get_children():
 		if "hover_sound" in node:
 			node.hover_sound = hover_sound
 			node.click_sound = click_sound
 
+
 func property_changed(key: String, new_value):
 	if key != property[0]: return
+
 
 func change_property(new_value):
 	var affected_objects: Dictionary = setup_affected_objects(new_value)
@@ -48,6 +52,7 @@ func change_property(new_value):
 	action.affected_objects = affected_objects
 	action.bulk_store_original_properties()
 	editor.action_manager.commit_action(action)
+
 
 func setup_affected_objects(new_value) -> Dictionary:
 	var affected_objects: Dictionary = {"property_matches": 0}

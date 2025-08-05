@@ -78,11 +78,13 @@ func popup_centered(size: Vector2) -> void:
 
 func close():
 	var tween = create_tween()
-	tween.set_ease(Tween.EASE_IN)
-	tween.set_trans(Tween.TRANS_CUBIC)
-	tween.tween_property(self, "rect_scale", Vector2.ZERO, popup_anim_duration)
+	
+	if is_instance_valid(tween):
+		tween.set_ease(Tween.EASE_IN)
+		tween.set_trans(Tween.TRANS_CUBIC)
+		tween.tween_property(self, "rect_scale", Vector2.ZERO, popup_anim_duration)
 
-	yield(tween, "finished")
+		yield(tween, "finished")
 
 	hide()
 
