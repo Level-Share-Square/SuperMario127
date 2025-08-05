@@ -8,6 +8,7 @@
 [ext_resource path="res://scenes/editor/assets/CheckUnchecked.svg" type="Texture" id=6]
 [ext_resource path="res://scenes/editor/assets/CheckChecked.svg" type="Texture" id=7]
 [ext_resource path="res://scenes/editor/assets/text_clear.svg" type="Texture" id=8]
+[ext_resource path="res://assets/fonts/DelfinoFont16.tres" type="DynamicFont" id=9]
 
 [sub_resource type="StyleBoxFlat" id=113]
 content_margin_left = 4.0
@@ -599,13 +600,6 @@ fill_to = Vector2( 0, 0 )
 texture = SubResource( 94 )
 region_rect = Rect2( 0, 0, 32, 32 )
 
-[sub_resource type="DynamicFont" id=128]
-outline_color = Color( 0, 0, 0, 1 )
-use_filter = true
-extra_spacing_top = 2
-extra_spacing_char = -1
-font_data = ExtResource( 2 )
-
 [resource]
 default_font = ExtResource( 1 )
 Button/colors/font_color = Color( 0, 0, 0, 1 )
@@ -766,4 +760,4 @@ WindowBorder/styles/panel = SubResource( 104 )
 WindowContent/base_type = "PanelContainer"
 WindowContent/styles/panel = SubResource( 95 )
 WindowTitle/base_type = "RichTextLabel"
-WindowTitle/fonts/normal_font = SubResource( 128 )
+WindowTitle/fonts/normal_font = ExtResource( 9 )

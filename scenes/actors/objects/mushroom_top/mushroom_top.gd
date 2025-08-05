@@ -31,15 +31,18 @@ var parts : int = 0
 var base_scale_factor : float = 0.0
 var spring_anim_power : float = 0.0
 
+
 func _set_properties():
 	savable_properties = ["color", "bouncy", "strong_bounce_power", "parts"]
 	editable_properties = ["parts", "color", "bouncy", "strong_bounce_power"]
-	
+
+
 func _set_property_values():
 	set_property("color", color, true)
 	set_property("bouncy", bouncy, true)
 	set_property("strong_bounce_power", strong_bounce_power, true)
 	set_property("parts", parts, true)
+
 
 func _ready():
 	var _connect = connect("property_changed", self, "update_property")
@@ -57,6 +60,7 @@ func _ready():
 	
 	if parts < 0:
 		parts = 0
+
 
 func update_property(key, value):
 	if color == Color(1, 0, 0):
@@ -85,6 +89,7 @@ func update_property(key, value):
 		mushroom_cap.visible = true
 		resizeable_cap.visible = false
 
+
 func update_parts():
 	collision_shape.shape.extents.x = 28 + (16 * parts)
 	bounce_area_collision.shape.extents.x = 29 + (16 * parts)
@@ -101,6 +106,7 @@ func update_parts():
 	visibility_enabler.rect.size.x = 128 + (32 * parts)
 	visibility_enabler.rect.position.x = -visibility_enabler.rect.size.x/2
 
+
 func _input(event):
 	if event is InputEventMouseButton and event.is_pressed() and hovered:
 		if event.button_index == 5: # Mouse wheel down
@@ -112,6 +118,7 @@ func _input(event):
 			parts += 1
 			set_property("parts", parts)
 
+
 func _process(delta):
 	if !is_equal_approx(spring_anim_power, 0):
 		update_bounce_anim(delta)
@@ -121,6 +128,7 @@ func _process(delta):
 			
 		if $Node2D.scale != Vector2.ONE:
 			$Node2D.scale = Vector2.ONE
+
 
 func _physics_process(delta):
 	for object in blacklisted_bodies.keys():
@@ -150,6 +158,7 @@ func bounce(body):
 		actually_bounce(body.get_parent())
 	
 	add_body_to_bounce(body)
+
 
 func actually_bounce(body):
 	var normal := transform.y
@@ -192,30 +201,33 @@ func actually_bounce(body):
 	if "stamina" in body:
 		body.stamina = 100
 
+
 func add_body_to_bounce(body):
 	blacklisted_bodies.get_or_add(body, 0.1)
 
+
 func remove_body_to_bounce(body):
 	blacklisted_bodies.erase(body)
+
 
 func idle_bounce_anim():
 	if is_equal_approx(spring_anim_power, 0):
 		animation_player.play("idle")
 
-func set_bounce_anim(power : float):
+
+func set_bounce_anim(power: float):
 	spring_anim_power = power
 
-func update_bounce_anim(delta):
+
+func update_bounce_anim(delta: float):
 	var spring_constant = 500.0
 	var damping_constant = 5
-	
-	var damping_ratio = damping_constant / (2 * sqrt(spring_constant))
 	
 	var force = (-spring_constant * base_scale_factor) + (damping_constant * spring_anim_power)
 	spring_anim_power -= force * delta
 	base_scale_factor -= spring_anim_power * delta
 	
-	mushroom_cap.scale.y = (1 + base_scale_factor*1.25)
-	mushroom_cap.scale.x = 1-((mushroom_cap.scale.y-1)/2)
-	$Node2D.scale.y = (1 + base_scale_factor*1.25)
-	$Node2D.scale.x = 1-(($Node2D.scale.y-1)/2)
+	mushroom_cap.scale.y = 1 + (base_scale_factor * 1.25)
+	mushroom_cap.scale.x = (1 - ((mushroom_cap.scale.y - 1) / 2.0)) * (32 / (32 * parts))
+	$Node2D.scale.y = (1 + base_scale_factor * 1.25)
+	$Node2D.scale.x = 1 - (($Node2D.scale.y - 1) / 2)

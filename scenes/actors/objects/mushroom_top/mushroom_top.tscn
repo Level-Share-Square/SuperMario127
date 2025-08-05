@@ -218,6 +218,7 @@ patch_margin_right = 32
 axis_stretch_horizontal = 1
 
 [node name="Modulate" type="NinePatchRect" parent="Node2D/Resizeable/ResizableColorSpots"]
+visible = false
 modulate = Color( 0, 1, 0, 1 )
 material = SubResource( 6 )
 margin_right = 96.0
@@ -259,7 +260,7 @@ z_as_relative = false
 texture = ExtResource( 12 )
 offset = Vector2( 0, 1 )
 
-[node name="MushroomTopStem" type="Sprite" parent="."]
+[node name="Stem" type="Sprite" parent="."]
 position = Vector2( 0, 3 )
 z_index = -8
 texture = ExtResource( 6 )

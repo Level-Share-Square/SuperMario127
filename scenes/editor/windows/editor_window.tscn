@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://scenes/menu/button_scripts/button_sound.gd" type="Script" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://scenes/editor/windows/editor_window.gd" type="Script" id=6]
 [ext_resource path="res://scenes/menu/levels_list/icons/settings.png" type="Texture" id=7]
 [ext_resource path="res://scenes/menu/background_scroll/background.tscn" type="PackedScene" id=8]
+[ext_resource path="res://assets/fonts/DelfinoFont16.tres" type="DynamicFont" id=9]
 
 [sub_resource type="Gradient" id=173]
 interpolation_mode = 2
@@ -100,16 +101,17 @@ mouse_filter = 2
 unique_name_in_owner = true
 margin_left = 25.0
 margin_right = 229.0
-margin_bottom = 22.0
+margin_bottom = 21.0
 rect_min_size = Vector2( 128, 0 )
 mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 6
 theme = ExtResource( 4 )
 theme_type_variation = "WindowTitle"
+custom_fonts/normal_font = ExtResource( 9 )
 bbcode_enabled = true
-bbcode_text = "Title"
-text = "Title"
+bbcode_text = "Title Font"
+text = "Title Font"
 fit_content_height = true
 
 [node name="WindowClose" type="Button" parent="ContentDivider/Header/HeaderMat/HeaderBox"]
