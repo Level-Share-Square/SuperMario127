@@ -28,7 +28,8 @@ func _input(event):
 	gradient_selector.rect_position.y = clamp(get_local_mouse_position().y, whiteY, blackY)
 	value = (gradient_selector.rect_position.y - blackY) / (whiteY - blackY)
 	color_wheel.self_modulate = Color(value, value, value)
-	
+	modulate = color_wheel.base_color
+	modulate.v = value
 	var new_color = color_wheel.base_color
 	new_color.v = value
 	color_wheel.emit_signal("updated", new_color)

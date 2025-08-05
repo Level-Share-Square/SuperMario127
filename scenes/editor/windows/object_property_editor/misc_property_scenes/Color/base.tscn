@@ -971,6 +971,7 @@ margin_bottom = 107.0
 size_flags_horizontal = 3
 
 [node name="Wheel" type="TextureRect" parent="VBoxContainer/Control/Expanded/HBoxContainer"]
+unique_name_in_owner = true
 material = SubResource( 189 )
 margin_right = 100.0
 margin_bottom = 100.0
@@ -1034,7 +1035,8 @@ size_flags_horizontal = 3
 max_value = 255.0
 rounded = true
 
-[node name="SpinBoxSound" type="SpinBox" parent="VBoxContainer/Control/Expanded/SliderR"]
+[node name="R" type="SpinBox" parent="VBoxContainer/Control/Expanded/SliderR"]
+unique_name_in_owner = true
 margin_left = 224.0
 margin_right = 290.0
 margin_bottom = 17.0
@@ -1063,7 +1065,8 @@ size_flags_horizontal = 3
 max_value = 255.0
 rounded = true
 
-[node name="SpinBoxSound" type="SpinBox" parent="VBoxContainer/Control/Expanded/SliderG"]
+[node name="G" type="SpinBox" parent="VBoxContainer/Control/Expanded/SliderG"]
+unique_name_in_owner = true
 margin_left = 224.0
 margin_right = 290.0
 margin_bottom = 17.0
@@ -1071,6 +1074,7 @@ max_value = 255.0
 allow_greater = true
 allow_lesser = true
 script = ExtResource( 12 )
+component = 1
 
 [node name="SliderB" type="HBoxContainer" parent="VBoxContainer/Control/Expanded"]
 margin_top = 153.0
@@ -1092,7 +1096,8 @@ size_flags_horizontal = 3
 max_value = 255.0
 rounded = true
 
-[node name="SpinBoxSound" type="SpinBox" parent="VBoxContainer/Control/Expanded/SliderB"]
+[node name="B" type="SpinBox" parent="VBoxContainer/Control/Expanded/SliderB"]
+unique_name_in_owner = true
 margin_left = 224.0
 margin_right = 290.0
 margin_bottom = 17.0
@@ -1122,7 +1127,8 @@ size_flags_horizontal = 3
 max_value = 255.0
 rounded = true
 
-[node name="SpinBoxSound" type="SpinBox" parent="VBoxContainer/Control/Expanded/SliderA"]
+[node name="A" type="SpinBox" parent="VBoxContainer/Control/Expanded/SliderA"]
+unique_name_in_owner = true
 margin_left = 224.0
 margin_right = 290.0
 margin_bottom = 17.0
@@ -1130,5 +1136,4 @@ max_value = 255.0
 allow_greater = true
 allow_lesser = true
 script = ExtResource( 12 )
-
-[connection signal="updated" from="VBoxContainer/Control/Expanded/HBoxContainer/Wheel" to="VBoxContainer/Control/Expanded/SliderR/SpinBoxSound" method="_on_Wheel_updated"]
+component = 3

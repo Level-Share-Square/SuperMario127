@@ -6,11 +6,20 @@ onready var selector = $"HSV Color Selector"
 onready var gradient_selector = get_parent().get_node("Gradient")
 onready var new_color_preview = get_parent().get_node("ColorPreviews/NewColorPreview")
 onready var color_manager = $Color
+onready var r = $"%R"
+onready var g = $"%G"
+onready var b = $"%B"
+onready var a = $"%A"
 
 var property_node : Node
 var base_color : Color # color without transparency
 
 signal updated(color)
+
+func _ready():
+	var colors = [r, g, b, a]
+	for color in colors:
+		color.connect("color_change", self, "_on_color_changed")
 
 func _input(event):
 	if get_parent().get_parent().get_parent().rect_min_size.y == 0:
@@ -34,15 +43,13 @@ func _input(event):
 	gradient_selector.modulate = base_color
 	gradient_selector.modulate.a = 255
 	emit_signal("updated", base_color)
-
-
+	
 func update_value(color: Color, notify_manager: bool = true):
 	var length := get_rect().size.x * color.s / 2
 	var angle := color.h*2*PI
 	selector.rect_position = Vector2(sin(angle)*length, cos(angle)*length)
 	gradient_selector.modulate = color
 	gradient_selector.modulate.a = 255
-	new_color_preview.modulate = color
 	self_modulate = Color(color.v, color.v, color.v)
 	gradient_selector.set_brightness(color.v)
 	base_color = color
