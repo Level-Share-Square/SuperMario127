@@ -1,4 +1,7 @@
-extends ButtonSound
+extends Button
+#       ^^^^^^
+# ALOELUCIDITY CHABGE THIS BACK TO ButtonSound WHEN
+# U FIX THE WEIRD AUDIOPLAYER REFERENCE PROBLEM
 
 export var menu_path: NodePath
 onready var menu: Control = get_node(menu_path)

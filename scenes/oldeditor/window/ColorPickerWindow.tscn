@@ -17,14 +17,13 @@
 
 [sub_resource type="StreamTexture" id=1]
 flags = 4
-load_path = "res://.import/window.png-70f8a0c1f0411efce833bd946d8ccc07.stex"
 
 [sub_resource type="DynamicFont" id=2]
 size = 56
 use_filter = true
 font_data = ExtResource( 1 )
 
-[sub_resource type="Shader" id=3]
+[sub_resource type="Shader" id=8]
 code = "shader_type canvas_item;
 
 void vertex() {
@@ -64,9 +63,9 @@ void light() {
 "
 
 [sub_resource type="ShaderMaterial" id=4]
-shader = SubResource( 3 )
+shader = SubResource( 8 )
 
-[sub_resource type="Shader" id=5]
+[sub_resource type="Shader" id=9]
 code = "shader_type canvas_item;
 uniform sampler2D Texture;
 
@@ -78,14 +77,13 @@ void fragment() {
 "
 
 [sub_resource type="ShaderMaterial" id=6]
-shader = SubResource( 5 )
+shader = SubResource( 9 )
 
 [sub_resource type="DynamicFont" id=7]
 size = 48
 font_data = ExtResource( 1 )
 
 [node name="ColorPickerWindow" type="NinePatchRect"]
-visible = false
 margin_left = 165.0
 margin_top = 66.0
 margin_right = 1218.0
@@ -145,9 +143,6 @@ margin_left = 17.0
 margin_top = 104.0
 margin_right = 1035.0
 margin_bottom = 692.46
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Wheel" type="Sprite" parent="Contents"]
 material = SubResource( 4 )

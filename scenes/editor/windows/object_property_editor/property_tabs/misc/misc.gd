@@ -7,7 +7,7 @@ const TYPE_LOOKUP: Dictionary = {
 	TYPE_REAL: "float",
 	TYPE_STRING: "String",
 	TYPE_VECTOR2: "Vector2",
-	TYPE_COLOR: "fallback",
+	TYPE_COLOR: "Color",
 	TYPE_OBJECT: "Curve2D"
 }
 

@@ -1,4 +1,4 @@
-extends Sprite
+extends TextureRect
 
 var pressed = false
 

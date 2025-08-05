@@ -1590,7 +1590,6 @@ theme_type_variation = "ButtonTransparent"
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "<"
 script = ExtResource( 44 )
-click_override = "DropdownSound"
 menu_path = NodePath("../../Middle")
 blocker_path = NodePath("../../Middle/MouseBlocker")
 open_text = ">"
