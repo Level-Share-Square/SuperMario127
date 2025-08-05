@@ -7,7 +7,8 @@ const TYPE_LOOKUP: Dictionary = {
 	TYPE_REAL: "float",
 	TYPE_STRING: "String",
 	TYPE_VECTOR2: "Vector2",
-	TYPE_COLOR: "fallback"
+	TYPE_COLOR: "fallback",
+	TYPE_OBJECT: "Curve2D"
 }
 
 const TAB_SCENE_PATH: String = "res://scenes/editor/windows/object_property_editor/misc_property_scenes/%s/base.tscn"
