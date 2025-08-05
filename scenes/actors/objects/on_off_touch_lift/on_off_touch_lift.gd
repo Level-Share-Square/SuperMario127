@@ -34,7 +34,7 @@ var inverted : bool = false
 
 func _set_properties():
 	savable_properties = ["parts", "max_speed", "curve", "move_type", "touch_start", "start_offset", "disappears", "inverted", "custom_path", "path_length"]
-	editable_properties = ["parts", "max_speed", "move_type", "touch_start", "start_offset", "inverted", "custom_path", "path_length"]
+	editable_properties = ["parts", "max_speed", "move_type", "touch_start", "start_offset", "inverted", "curve", "path_length"]
 	
 func _set_property_values():
 	set_property("parts", parts)

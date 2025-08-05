@@ -77,7 +77,8 @@ func _ready():
 	z_layer = layer + LevelShared.layer_index_offset
 	
 	if get_tree().current_scene.mode == 1:
-		shared.get_node("%Layers").connect("layer_changed", self, "_on_layer_changed")
+		if is_instance_valid(level_object):
+			shared.get_node("%Layers").connect("layer_changed", self, "_on_layer_changed")
 		if generate_editor_hitbox:
 			if is_instance_valid(editor_hitbox):
 				editor_hitbox.queue_free()
@@ -105,7 +106,7 @@ func _ready():
 			collision_shape.shape = RectangleShape2D.new()
 			editor_hitbox.add_child(collision_shape)
 		
-		if is_instance_valid(level_object.get_ref()):
+		if is_instance_valid(level_object):
 			visibility = level_object.get_ref().properties[4]
 		
 		var editor = get_tree().current_scene
@@ -304,3 +305,10 @@ func _on_layer_changed(new_layer):
 		translucent = true
 	else:
 		translucent = false
+		
+func recursive_find_shared(node):
+	if node.name == "Shared":
+		print(node)
+		return node
+	else:
+		return recursive_find_shared(node.get_parent())

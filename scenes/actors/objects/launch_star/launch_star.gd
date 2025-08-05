@@ -33,7 +33,7 @@ var custom_path = Curve2D.new()
 
 func _set_properties():
 	savable_properties = ["curve", "custom_path", "speed"]
-	editable_properties = ["custom_path", "speed"]
+	editable_properties = ["curve", "speed"]
 
 func _set_property_values():
 	set_property("curve", curve)

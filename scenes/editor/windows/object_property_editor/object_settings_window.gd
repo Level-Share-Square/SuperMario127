@@ -38,6 +38,10 @@ func load_objects(_objects: Dictionary):
 		var item: PlaceableItem = objects[game_object]
 		
 		game_object.connect("tree_exited", self, "close")
+		var curve
+		for property in game_object.level_object.get_ref().properties:
+			if "Curve2D" in str(property):
+				curve = property
 		
 		window_title.text = TITLE_TEXT % item.item_name
 		window_icon.texture = item.icons[item.palette]
@@ -47,7 +51,7 @@ func load_objects(_objects: Dictionary):
 			var property: Array = [
 				_property, 
 				typeof(game_object[_property]), 
-				game_object.property_info[index]
+				game_object.property_info[index] if typeof(game_object[_property]) != 17 else value_util.encode_value(curve)
 			]
 			if not property in common_properties:
 				common_properties.append(property)

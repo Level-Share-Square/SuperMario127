@@ -13,29 +13,45 @@ onready var property_editor
 
 enum {MODE_PLACE, MODE_SELECT}
 
+onready var object
 var current_mode = MODE_PLACE
 
 onready var selected_node : Node2D
 onready var nodes = Array()
-
+var init_curve
 var delete: bool
+onready var editor = get_parent()
 
 var last_hovered_node
 var amount: int = 3
 var objects_array: Array
-
 func _ready():
-	widget_container.hide()
+	line.get_node("path").curve = init_curve
+	update_line()
+	for point in line.get_node("path").curve.get_point_count():
+		var texture_node = VERTEX_PATH.instance()
+		nodes.append(texture_node)
+		texture_node.ui = weakref(self)
+		texture_node.position = line.get_node("path").curve.get_point_position(point)
+		path_node_container.add_child(texture_node)
+		widget_move_to(texture_node)
+		if handle.pressed:
+			texture_node.set_handles_active(true)
+		if handle_link.pressed:
+			texture_node._toggle_handle_link()
+	if line.get_node("path").curve.get_point_count() < 1:
+		widget_container.hide()
 
-func _physics_process(delta):
+func _unhandled_input(event):
 	if Input.is_action_just_pressed("LMB"):
+		get_tree().set_input_as_handled()
 		widget_container.show()
-		line.get_node("path").curve.add_point(get_global_mouse_position())
+		line.get_node("path").curve.add_point(get_global_mouse_position() - object.position)
 		update_line()
 		var texture_node = VERTEX_PATH.instance()
 		nodes.append(texture_node)
 		texture_node.ui = weakref(self)
-		texture_node.position = get_global_mouse_position()
+		texture_node.position = get_global_mouse_position() - object.position
 		path_node_container.add_child(texture_node)
 		widget_move_to(texture_node)
 		if handle.pressed:
@@ -65,7 +81,7 @@ func update_node_position(node: Node2D):
 		line.get_node("path").curve.set_point_position(index, node.position)
 		update_line()
 		if index == line.get_node("path").curve.get_point_count() - 1:
-			widget_container.rect_global_position = Array(line.points).back() + Vector2(-140, 16)
+			widget_move_to(nodes.back())
 		
 func update_node_handles(node: Node2D):
 	var index = nodes.find(node, 0)
@@ -100,6 +116,6 @@ func _on_Handle_button_down():
 		node.set_handles_active(!$WidgetContainer/VBoxContainer/HBoxContainer/Handle.pressed)
 
 func widget_move_to(node: Node):
-	widget_container.rect_global_position = node.position + Vector2(-140, 16)
+	widget_container.rect_global_position = node.position + object.position + Vector2(-140, 16)
 		
 
