@@ -19,8 +19,8 @@ export var removal_action: Script
 
 export var priority: int = 0
 
-var icon: Texture = Texture.new()
-var preview: Texture = Texture.new()
+var icon: Texture
+var preview: Texture
 var palette: int = 0
 
 

@@ -34,22 +34,33 @@ func _ready():
 	
 func load_autosaves() -> Array:
 	var level_id = Singleton.CurrentLevelData.level_id
+	var level_name = Singleton.CurrentLevelData.level_info.level_name
 	
 	var autosaves: Array = []
-	var dir := Directory.new()
+	var dir: Directory = Directory.new()
 	dir.open(AUTOSAVE_FOLDER)
 	dir.list_dir_begin(true, true)
 	
 	while true:
-		var file: String = dir.get_next()
-		if file == "":
+		var file_name: String = dir.get_next()
+		if file_name == "":
 			break
 		else:
-			var split = file.split("_")
-			var autosaved_id = split[0]
-			var time = split[1]
-			if autosaved_id == level_id:
-				autosaves.append(time)
+			var split = file_name.split("_")
+			
+			if split.size() > 1:
+				var autosaved_id = split[0]
+				var time = split[1]
+				if autosaved_id == level_id:
+					autosaves.append(time)
+				elif autosaved_id == level_name:
+					if not dir.dir_exists("old_autosaves"):
+						dir.make_dir("old_autosaves")
+					
+					dir.rename(file_name, "old_autosaves/%s" % file_name)
+			else:
+				if file_name == "settings.file":
+					dir.remove("settings.file")
 	
 	dir.list_dir_end()
 	return autosaves
