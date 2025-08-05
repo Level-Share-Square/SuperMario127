@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://scenes/editor/windows/object_property_editor/misc_property_scenes/Curve2D/base.gd" type="Script" id=2]
+
+[node name="Curve2D" type="Control"]
+script = ExtResource( 2 )
+
+[node name="PropertyName" type="Label" parent="."]
+unique_name_in_owner = true
+margin_top = 5.0
+margin_right = 60.0
+margin_bottom = 19.0
+rect_min_size = Vector2( 60, 0 )
+mouse_filter = 1
+mouse_default_cursor_shape = 16
+text = "Property:"
+
+[node name="Button" type="Button" parent="."]
+margin_left = 64.0
+margin_right = 232.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+text = "Create Curve"
+
+[connection signal="button_down" from="Button" to="." method="begin_curve"]

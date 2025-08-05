@@ -1,9 +1,8 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://scenes/editor/tools/path_tool/object_trail.gd" type="Script" id=1]
+[ext_resource path="res://scenes/editor/windows/object_property_editor/misc_property_scenes/Curve2D/pathmaker.gd" type="Script" id=1]
 [ext_resource path="res://scenes/oldeditor/property_type_scenes/Path/base/dash1.png" type="Texture" id=2]
 [ext_resource path="res://scenes/editor/editor_theme.tres" type="Theme" id=3]
-[ext_resource path="res://scenes/shared/ui/selector.tres" type="Theme" id=4]
 [ext_resource path="res://scenes/editor/tools/path_tool/previews.gd" type="Script" id=5]
 
 [sub_resource type="Curve2D" id=1]
@@ -42,7 +41,7 @@ theme = ExtResource( 3 )
 margin_left = 6.0
 margin_top = 6.0
 margin_right = 285.0
-margin_bottom = 46.0
+margin_bottom = 29.0
 custom_constants/separation = 5
 
 [node name="HBoxContainer" type="HBoxContainer" parent="WidgetContainer/VBoxContainer"]
@@ -81,17 +80,6 @@ margin_bottom = 19.0
 focus_mode = 0
 text = "Confirm"
 
-[node name="HSlider" type="HSlider" parent="WidgetContainer/VBoxContainer"]
-unique_name_in_owner = true
-margin_top = 24.0
-margin_right = 279.0
-margin_bottom = 40.0
-focus_mode = 0
-theme = ExtResource( 4 )
-min_value = 1.0
-max_value = 20.0
-value = 10.0
-
 [node name="Previews" type="Control" parent="."]
 unique_name_in_owner = true
 margin_right = 40.0
@@ -102,4 +90,3 @@ script = ExtResource( 5 )
 [connection signal="button_down" from="WidgetContainer/VBoxContainer/HBoxContainer/HandleLink" to="." method="_on_HandleLink_button_down"]
 [connection signal="button_down" from="WidgetContainer/VBoxContainer/HBoxContainer/Delete" to="." method="_on_Delete_button_down"]
 [connection signal="button_down" from="WidgetContainer/VBoxContainer/HBoxContainer/Confirm" to="." method="_on_Check_button_down"]
-[connection signal="value_changed" from="WidgetContainer/VBoxContainer/HSlider" to="." method="_on_HSlider_value_changed"]
