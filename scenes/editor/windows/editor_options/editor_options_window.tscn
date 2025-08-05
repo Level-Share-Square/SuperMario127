@@ -47,6 +47,7 @@ margin_right = 386.0
 
 [node name="WindowTitle" parent="ContentDivider/Header/HeaderMat/HeaderBox" index="2"]
 margin_right = 357.0
+margin_bottom = 21.0
 
 [node name="WindowClose" parent="ContentDivider/Header/HeaderMat/HeaderBox" index="3"]
 margin_left = 358.0
@@ -81,7 +82,6 @@ all_tabs_in_front = true
 use_hidden_tabs_for_min_size = true
 
 [node name="Level" type="MarginContainer" parent="ContentDivider/ContentMat/Tabs" index="0"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -242,6 +242,7 @@ margin_right = 372.0
 margin_bottom = 75.0
 
 [node name="Background" type="ScrollContainer" parent="ContentDivider/ContentMat/Tabs" index="2"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0

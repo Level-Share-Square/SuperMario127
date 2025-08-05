@@ -977,7 +977,7 @@ margin_bottom = 100.0
 rect_min_size = Vector2( 100, 100 )
 texture = ExtResource( 16 )
 expand = true
-stretch_mode = 6
+stretch_mode = 5
 script = ExtResource( 18 )
 
 [node name="HSV Color Selector" type="TextureRect" parent="VBoxContainer/Control/Expanded/HBoxContainer/Wheel"]
@@ -997,9 +997,9 @@ stretch_mode = 4
 [node name="Gradient" type="TextureRect" parent="VBoxContainer/Control/Expanded/HBoxContainer"]
 material = SubResource( 190 )
 margin_left = 104.0
-margin_right = 119.0
+margin_right = 122.0
 margin_bottom = 100.0
-rect_min_size = Vector2( 15, 0 )
+rect_min_size = Vector2( 18, 0 )
 texture = ExtResource( 15 )
 expand = true
 script = ExtResource( 17 )
@@ -1007,9 +1007,12 @@ script = ExtResource( 17 )
 [node name="Gradient Selector" type="TextureRect" parent="VBoxContainer/Control/Expanded/HBoxContainer/Gradient"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = -1.5
+margin_right = 74.5
+margin_bottom = -98.0
 texture = ExtResource( 14 )
 expand = true
-stretch_mode = 6
+stretch_mode = 5
 
 [node name="SliderR" type="HBoxContainer" parent="VBoxContainer/Control/Expanded"]
 margin_top = 111.0
@@ -1097,6 +1100,7 @@ max_value = 255.0
 allow_greater = true
 allow_lesser = true
 script = ExtResource( 12 )
+component = 2
 
 [node name="SliderA" type="HBoxContainer" parent="VBoxContainer/Control/Expanded"]
 margin_top = 174.0
@@ -1126,3 +1130,5 @@ max_value = 255.0
 allow_greater = true
 allow_lesser = true
 script = ExtResource( 12 )
+
+[connection signal="updated" from="VBoxContainer/Control/Expanded/HBoxContainer/Wheel" to="VBoxContainer/Control/Expanded/SliderR/SpinBoxSound" method="_on_Wheel_updated"]
