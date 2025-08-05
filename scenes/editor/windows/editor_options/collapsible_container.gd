@@ -10,7 +10,7 @@ var min_size: float
 func _ready():
 	connect("button_down", self, "on_pressed")
 	selected_container.rect_min_size = selected_container.get_child(0).rect_size
-	min_size = selected_container.rect_min_size.y
+	min_size = selected_container.get_child(0).rect_size.y
 	selected_container.rect_min_size.y = 0
 	
 func on_pressed():

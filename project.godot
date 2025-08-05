@@ -14,7 +14,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/menu/level_portal/login/account_info.gd"
 }, {
-"base": "Node",
+"base": "Reference",
 "class": "Action",
 "language": "GDScript",
 "path": "res://scenes/editor/action_manager/actions/action.gd"
@@ -424,7 +424,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/menu/levels_list/misc/http_thumbnails.gd"
 }, {
-"base": "Reference",
+"base": "ScrollContainer",
 "class": "HelpPage",
 "language": "GDScript",
 "path": "res://scenes/oldeditor/window/HelpPage.gd"
