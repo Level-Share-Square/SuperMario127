@@ -20,7 +20,7 @@ var baked_length : float = 0.0
 
 func _set_properties():
 	savable_properties = ["curve", "custom_path", "speed", "start_offset", "loops", "baked_length"]
-	editable_properties = ["custom_path", "speed", "start_offset", "baked_length", "loops"]
+	editable_properties = ["curve", "speed", "start_offset", "baked_length", "loops"]
 	
 func _set_property_values():
 	set_property("curve", curve)

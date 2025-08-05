@@ -2,6 +2,7 @@ extends GameObject
 
 onready var area = $Area2D
 onready var metal_bounce_noise = $AudioStreamPlayer2D
+onready var sawblade = $"../../.."
 
 const METAL_KNOCKBACK = 400
 const METAL_KNOCKBACK_SPEED_LIMIT = 800
@@ -46,5 +47,6 @@ func kill(body):
 			body.sound_player.play_hit_sound()
 
 func _ready():
+	shared = sawblade.shared
 	var _connect = area.connect("body_entered", self, "kill")
 	add_to_group("sawblades")

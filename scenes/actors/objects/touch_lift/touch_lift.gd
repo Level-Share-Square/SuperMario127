@@ -36,7 +36,7 @@ var path_length : float = 0
 
 func _set_properties():
 	savable_properties = ["parts", "max_speed", "curve", "move_type", "touch_start", "color", "start_offset", "custom_path", "path_length"]
-	editable_properties = ["parts", "max_speed", "move_type", "touch_start", "color", "start_offset", "custom_path", "path_length"]
+	editable_properties = ["parts", "max_speed", "move_type", "touch_start", "color", "start_offset", "curve", "path_length"]
 	
 func _set_property_values():
 	set_property("parts", parts)

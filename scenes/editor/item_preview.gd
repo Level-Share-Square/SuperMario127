@@ -1,6 +1,6 @@
 extends TextureRect
 
-onready var editor = get_parent()
+onready var editor = owner
 
 var offset := Vector2(16, 16)
 var is_object: bool = true
