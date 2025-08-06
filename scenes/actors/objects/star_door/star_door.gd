@@ -98,7 +98,7 @@ func start_entrance_animation(character: Character, open_door: bool = true) -> v
 			can_enter = false
 	elif collectible == "key":
 		var keys_collected: Array = Singleton.CurrentLevelData.level_data.vars.local_keys_collected
-		print(keys_collected)
+#		print(keys_collected)
 		if required_key in keys_collected:
 			can_enter = true
 		else:

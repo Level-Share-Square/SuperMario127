@@ -5,7 +5,7 @@ var objects: Array = []
 var new_objects: Dictionary = {}
 
 func _do() -> void:
-	print(new_objects)
+#	print(new_objects)
 	if !new_objects.empty():
 		for i in new_objects:
 			object = i
@@ -16,7 +16,7 @@ func _do() -> void:
 	for i in objects:
 		object_data = i
 		var new_object = shared.create_object(object_data, true)
-		print(new_object)
+#		print(new_object)
 		new_objects[new_object] = new_object.name
 		
 

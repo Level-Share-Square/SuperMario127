@@ -76,7 +76,7 @@ func begin_warp(character: Character) -> void:
 			warp_helper.location_warp(character, tag, max_pan_distance)
 		
 		TeleportMode.Area:
-			print(target_area)
+#			print(target_area)
 			warp_helper.area_warp(character, tag, target_area)
 		
 		TeleportMode.Level:

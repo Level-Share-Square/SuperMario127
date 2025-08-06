@@ -1,0 +1,43 @@
+[gd_scene format=2]
+
+[node name="LevelShared" type="Node2D"]
+
+[node name="Layer" type="ParallaxBackground" parent="."]
+layer = -2
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="Layer"]
+
+[node name="TileMapLayer" type="TileMap" parent="Layer/ParallaxLayer"]
+format = 1
+
+[node name="ObjectLayer" type="Node2D" parent="Layer/ParallaxLayer"]
+
+[node name="Layer2" type="ParallaxBackground" parent="."]
+layer = -1
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="Layer2"]
+
+[node name="TileMapLayer" type="TileMap" parent="Layer2/ParallaxLayer"]
+format = 1
+
+[node name="ObjectLayer" type="Node2D" parent="Layer2/ParallaxLayer"]
+
+[node name="Layer3" type="ParallaxBackground" parent="."]
+layer = 0
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="Layer3"]
+
+[node name="TileMapLayer" type="TileMap" parent="Layer3/ParallaxLayer"]
+format = 1
+
+[node name="ObjectLayer" type="Node2D" parent="Layer3/ParallaxLayer"]
+
+[node name="Layer4" type="ParallaxBackground" parent="."]
+layer = 1
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="Layer4"]
+
+[node name="TileMapLayer" type="TileMap" parent="Layer4/ParallaxLayer"]
+format = 1
+
+[node name="ObjectLayer" type="Node2D" parent="Layer4/ParallaxLayer"]

@@ -160,8 +160,7 @@ collision_mask = 81
 position = Vector2( 0, 4 )
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
-visible = false
-rect = Rect2( -300, -300, 600, 600 )
+rect = Rect2( -128, -128, 256, 256 )
 pause_particles = false
 process_parent = true
 physics_process_parent = true

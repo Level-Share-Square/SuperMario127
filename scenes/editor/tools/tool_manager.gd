@@ -36,7 +36,7 @@ func _process(_delta: float):
 
 func change_tool(tool_name: String) -> void:
 	current_tool = get_node(tool_name)
-	print(current_tool)
+#	print(current_tool)
 	emit_signal("tool_changed")
 
 

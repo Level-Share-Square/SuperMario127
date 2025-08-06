@@ -35,7 +35,7 @@ func update():
 			object.scale = object_scales[object] + scale_factor
 	elif mode == "Global":
 		for object in editor.selected_objects:
-			print(object_offsets[object])
+#			print(object_offsets[object])
 			var scaled_offset = object_offsets[object] * scale_factor
 			object.global_position = object_offsets[object] + (selection_box.pivot_position + scaled_offset)
 			object.scale.x = object_scales[object].x + (selection_box.pivot_position - object.global_position).x/70.0

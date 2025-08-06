@@ -27,20 +27,20 @@ var hovered: bool = false
 var selected: bool = false
 var translucent: bool = false
 
+var loaded: bool = false
+
 var enabled: bool = true
-var is_middle: bool = true
 var preview_position := Vector2(72, 92)
 var palette: int = 0
 var palettes: int = 0
 
-var middle: int = LevelShared.Layers.Middle
 var layer: int = LevelShared.Layers.Middle
 var z_layer: int = 0
 
 # true if creating a GameObject for the object settings preview
 var is_preview : bool = false
 
-var visibility: bool = true #for modulate
+var visibility: bool = true # for modulate
 
 var base_savable_properties: PoolStringArray = ["position", "scale", "rotation_degrees", "enabled", "visible", "layer"]
 var base_hidden_properties: PoolStringArray = []
@@ -63,13 +63,14 @@ signal object_clicked(object)
 export var internal_id: String
 const PLACEABLE_ITEM_PATH: String = "res://scenes/editor/items/placeable_items/placeable_objects/%s.tres"
 var placeable_item: PlaceableItem
+
+
 func load_placeable_item():
 	placeable_item = load(PLACEABLE_ITEM_PATH % internal_id)
 
+
 func _ready():
 	load_placeable_item()
-	set_process(false)
-#	print("From object, ", level_object)
 	
 	if layer != default_layer and lock_layer:
 		set_property("layer", default_layer, true)
@@ -113,18 +114,96 @@ func _ready():
 		editor_hitbox.connect("mouse_entered", editor, "object_hovered", [self])
 		editor_hitbox.connect("mouse_exited", editor, "object_unhovered", [self])
 		if enabled == true:
-			print(editor_hitbox.connect("area_entered", editor.selection_box.get_parent(), "_on_object_entered", [self]))
-			print(editor_hitbox.connect("area_exited", editor.selection_box.get_parent(), "_on_object_exited", [self]))
+			editor_hitbox.connect("area_entered", editor.selection_box.get_parent(), "_on_object_entered", [self])
+			editor_hitbox.connect("area_exited", editor.selection_box.get_parent(), "_on_object_exited", [self])
 	else:
 		if is_instance_valid(editor_hitbox):
 			editor_hitbox.queue_free()
 	
 	update_layer()
-	yield(get_tree().create_timer(0.1), "timeout")
+	
+	yield(get_tree(), "idle_frame")
 	
 	property_info.resize(editable_properties.size())
-	set_process(true)
-	is_middle(layer == middle)
+	
+	match mode:
+		LevelPlayer.mode:
+			_object_ready()
+			
+			if loaded:
+				_level_loaded()
+		Editor.mode:
+			_editor_ready()
+			
+			if loaded:
+				_editor_loaded()
+
+
+func _process(delta):
+	match mode:
+		LevelPlayer.mode:
+			if is_default_layer():
+				_object_process(delta)
+		Editor.mode:
+			_editor_process(delta)
+
+
+func _physics_process(delta):
+	match mode:
+		LevelPlayer.mode:
+			if is_default_layer():
+				_object_physics_process(delta)
+		Editor.mode:
+			_editor_physics_process(delta)
+
+
+func _unhandled_input(event):
+	if Input.is_action_just_pressed("click") and hovered and mode == Editor.mode:
+		var editor: Editor = get_tree().current_scene
+		connect("object_clicked", editor, "object_clicked", [self])
+		emit_signal("object_clicked")
+	
+	modulate_set()
+
+
+## run when the game object enters the scene tree
+func _object_ready() -> void:
+	pass
+
+
+## Run when all objects are loaded.
+func _level_loaded() -> void:
+	pass
+
+
+## Run every process frame when the object is on it's default layer.
+func _object_process(delta: float) -> void:
+	pass
+
+
+## Run every physics frame when the object is on it's default layer.
+func _object_physics_process(delta: float) -> void:
+	pass
+
+
+## run when the game object enters the scene tree in the editor
+func _editor_ready() -> void:
+	pass
+
+
+## Run when all objects are loaded in the editor.
+func _editor_loaded() -> void:
+	pass
+
+
+## Run every process frame in the editor.
+func _editor_process(delta: float) -> void:
+	pass
+
+
+## Run every physics frame in the editor.
+func _editor_physics_process(delta: float) -> void:
+	pass
 
 
 func create_collision_polygons_from_tree(node: Node, node_transform: Transform2D, array: Array) -> void:
@@ -180,14 +259,6 @@ func get_property_index(key) -> int:
 			return index
 		index += 1
 	return index
-
-func _process(delta):
-	is_middle(layer == middle)
-	if Input.is_action_just_pressed("click") && hovered == true:
-		var editor = get_tree().current_scene
-		connect("object_clicked", editor, "object_clicked", [self])
-		emit_signal("object_clicked")
-	modulate_set()
 
 
 func modulate_set():
@@ -280,6 +351,7 @@ func update_layer():
 	else:
 		printerr("Object has assigned layer %s" % layer)
 
+
 func parts_input_handler(event, object):
 	if event is InputEventMouseButton and event.is_pressed() and hovered:
 		match event.button_index:
@@ -294,21 +366,21 @@ func parts_input_handler(event, object):
 					object.parts = 1
 				object.set_property("parts", object.parts, true)
 				object.update_parts()
-				
 
-func is_middle(check: bool) -> void:
-	is_middle = check
-	set_physics_process(check)
+
+func is_default_layer() -> bool:
+	return layer == default_layer
+
 
 func _on_layer_changed(new_layer):
 	if new_layer != layer && shared.get_parent().show_layers:
 		translucent = true
 	else:
 		translucent = false
-		
+
+
 func recursive_find_shared(node):
 	if node.name == "Shared":
-		print(node)
 		return node
 	else:
 		return recursive_find_shared(node.get_parent())

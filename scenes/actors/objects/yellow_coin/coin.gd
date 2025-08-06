@@ -139,7 +139,7 @@ func calc_physics(interp : bool, delta) -> Vector2:
 	
 	#if in water slow velocity down to zero gradually
 	if water_detector.get_overlapping_areas().size() > 0:
-		print("water :D")
+#		print("water :D")
 		gravity_scale = 0.25
 	else:
 		gravity_scale = 1

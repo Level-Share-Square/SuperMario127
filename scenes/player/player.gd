@@ -1,4 +1,8 @@
+class_name LevelPlayer
 extends LevelDataLoader
+
+const mode = 0
+const coin_anim_fps = 12
 
 onready var tick_sound = $SharedSounds/TickSound
 onready var tick_end_sound = $SharedSounds/TickEndSound
@@ -8,11 +12,9 @@ export var character2 : NodePath
 export var camera : NodePath
 export var shared : NodePath
 
-var mode = 0
 var ssc_displayed = true
 
 export var coin_frame : int
-const coin_anim_fps = 12
 var can_collect_coins : Array
 
 export var switch_timer : float = 0.0

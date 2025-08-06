@@ -77,7 +77,7 @@ func duplicate_area():
 		var area = LevelArea.new()
 		var dup = Singleton.CurrentLevelData.level_data.areas[id]
 		area.duplicate(dup)
-		print(area.settings.name)
+#		print(area.settings.name)
 		Singleton.CurrentLevelData.level_data.areas.append(area)
 		get_parent().get_parent().reload_areas()
 	

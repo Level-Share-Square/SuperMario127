@@ -57,7 +57,7 @@ func _ready():
 		fav_items = Singleton.CurrentLevelData.level_data.fav_items
 		loadout_palettes = Singleton.CurrentLevelData.level_data.palettes
 		items_favorited = Singleton.CurrentLevelData.level_data.favorites
-	print(loadout_palettes)
+#	print(loadout_palettes)
 	refresh_loadout()
 	check_items()
 
@@ -85,7 +85,7 @@ func update_level_data():
 	for buttons in bottom_row.get_children():
 		loadout_palette.append(buttons.palette)
 	loadout_palettes[selected_loadout] = loadout_palette
-	print(loadout_palettes[selected_loadout])
+#	print(loadout_palettes[selected_loadout])
 	Singleton.CurrentLevelData.level_data.palettes = loadout_palettes
 	Singleton.CurrentLevelData.level_data.favorites = items_favorited
 	Singleton.CurrentLevelData.level_data.fav_items = fav_items
@@ -95,7 +95,7 @@ func check_items():
 		if item_button.item == editor.selected_item:
 			item_button.pressed = true
 		item_button.palette = loadout_palettes[selected_loadout][item_button.get_index()]
-		print(item_button.get_index())
+#		print(item_button.get_index())
 		item_button.icon_node.texture = item_button.item.icons[item_button.palette]
 	
 	return

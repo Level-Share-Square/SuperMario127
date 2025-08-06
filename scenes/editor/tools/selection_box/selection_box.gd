@@ -93,7 +93,7 @@ func _unhandled_input(event):
 				expand = true
 				selection_shape.disabled = false
 				selection_area.monitorable = true
-				print(editor.selected_objects)
+#				print(editor.selected_objects)
 			
 			elif event.is_action_released("LMB"):
 				if start_pos != null:

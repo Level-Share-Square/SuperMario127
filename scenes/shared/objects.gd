@@ -35,13 +35,11 @@ func create_object(object, add_to_data):
 	var mode = get_tree().get_current_scene().mode
 	var object_scene = Singleton.CurrentLevelData.get_cached_object(object.type_id)
 	if object_scene != null:
-		if object.type_id == 47:
-			print("HERE\nHEREHERE\nHEREHERE\nHEREHERE\nHEREHERE\nHEREHERE\nHEREHERE\nHEREHERE\nHEREHERE\nHEREHERE\nHEREHERE\nHEREHERE\nHEREHERE\nHEREHERE\nHERE")
 		var object_node: GameObject = object_scene.instance()
 		object_node.mode = mode
 		object_node.level_data = level_data
 		object_node.level_area = level_area
-		print(weakref(object))
+#		print(weakref(object))
 		object_node.level_object = weakref(object)
 		object_node.shared = get_node(shared_path)
 		object_node.palette = object.palette

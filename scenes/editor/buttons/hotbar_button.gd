@@ -48,7 +48,7 @@ func _physics_process(delta):
 		timer += delta
 
 func button_down():
-	print(variant)
+#	print(variant)
 	tween.stop_all()
 	tween.interpolate_property(icon_node, "rect_position:y",
 		icon_node.rect_position.y, -3, 0.075,
@@ -87,7 +87,7 @@ func change_variant():
 		var index = hotbar.loadouts[hotbar.selected_loadout].find(hotbar.placeable_items.placeable_items.find_key(old_item))
 		hotbar.loadouts[hotbar.selected_loadout].pop_at(index)
 		hotbar.loadouts[hotbar.selected_loadout].insert(index, hotbar.placeable_items.placeable_items.find_key(new_item))
-		print(hotbar.loadouts[hotbar.selected_loadout])
+#		print(hotbar.loadouts[hotbar.selected_loadout])
 		hotbar._on_item_button_pressed(self)
 
 func mouse_entered():
