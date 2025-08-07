@@ -9,6 +9,8 @@ var very_background_tiles := []
 var foreground_tiles := []
 var very_foreground_tiles := []
 
+var layers: Array = []
+
 var settings := LevelAreaSettings.new()
 
 func _init():

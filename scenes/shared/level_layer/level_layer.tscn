@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://scenes/shared/level_layer/level_layer.gd" type="Script" id=1]
+
+[node name="Layer" type="ParallaxBackground"]
+layer = 0
+script = ExtResource( 1 )
+
+[node name="Parallax" type="ParallaxLayer" parent="."]
+
+[node name="TileMapLayer" type="TileMap" parent="Parallax"]
+format = 1
+
+[node name="ObjectLayer" type="Node2D" parent="Parallax"]
