@@ -13,19 +13,17 @@ func _ready():
 
 
 func load_layers(layer_data: Array):
-	for data in layer_data:
-		var new_layer = layer_scene.instance()
-		new_layer.connect("ready", new_layer, "setup", [layer_data])
-		
-		add_child(new_layer)
+	for layer in layer_data:
+		layer = layer as LevelLayerData
+		add_layer()
 
 
-func add_layer(layer_data: LevelLayerData):
+func add_layer(index: int):
 	var new_layer = layer_scene.instance()
 	new_layer.connect("ready", new_layer, "setup", [layer_data])
 	
 	add_child(new_layer)
 
 
-func remove_layer(layer_data: LevelLayerData):
+func remove_layer(index: int):
 	

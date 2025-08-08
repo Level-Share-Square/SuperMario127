@@ -142,8 +142,10 @@ func _ready():
 func _process(delta):
 	match mode:
 		LevelPlayer.mode:
-			if is_default_layer():
-				_object_process(delta)
+			_object_process(delta)
+			
+			if is_on_ground_layer():
+				_object_logic_process(delta)
 		Editor.mode:
 			_editor_process(delta)
 
@@ -151,8 +153,10 @@ func _process(delta):
 func _physics_process(delta):
 	match mode:
 		LevelPlayer.mode:
-			if is_default_layer():
-				_object_physics_process(delta)
+			_object_physics_process(delta)
+			
+			if is_on_ground_layer():
+				_object_logic_physics_process(delta)
 		Editor.mode:
 			_editor_physics_process(delta)
 
@@ -176,13 +180,23 @@ func _level_loaded() -> void:
 	pass
 
 
-## Run every process frame when the object is on it's default layer.
+## Run every process frame in the LevelPlayer.
 func _object_process(delta: float) -> void:
 	pass
 
 
-## Run every physics frame when the object is on it's default layer.
+## Run every physics frame in the LevelPlayer.
 func _object_physics_process(delta: float) -> void:
+	pass
+
+
+## Run every process frame when the object is on the ground layer.
+func _object_logic_process(delta: float) -> void:
+	pass
+
+
+## Run every physics frame when the object is on the ground layer.
+func _object_logic_physics_process(delta: float) -> void:
 	pass
 
 
@@ -368,8 +382,8 @@ func parts_input_handler(event, object):
 				object.update_parts()
 
 
-func is_default_layer() -> bool:
-	return layer == default_layer
+func is_on_ground_layer() -> bool:
+	return true
 
 
 func _on_layer_changed(new_layer):
