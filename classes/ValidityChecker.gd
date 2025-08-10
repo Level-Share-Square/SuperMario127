@@ -3,7 +3,7 @@ class_name ValidityChecker
 
 const INFO_DATA_SUFFIX: String = "~0*0~0*0~0*0~0*0]"
 const MULTIPLAYER_INVALID_OBJECTS: Array = [145] # List of object IDs invalid with multiplayer
-enum ValidityCheckTypes {INIT = 0,NONE = 1,INFO = 2,FULL = 3}
+enum ValidityCheckTypes {INIT, NONE, INFO, FULL}
 
 var is_valid: bool = true
 var is_level_multiplayer_compatible: bool = true
@@ -181,7 +181,7 @@ func decode(code: String)-> Dictionary:
 	if full_result.format_version == "0.4.0" or full_result.format_version == "0.4.1":
 		add_amount = 0
 	
-	elif conversion_util.compareVersions(full_result.format_version, "0.5.0") > -1:
+	elif conversion_util.compare_versions(full_result.format_version, "0.5.0") > -1:
 		full_result.author = code_array[2].percent_decode()
 		full_result.description = code_array[3].percent_decode()
 		full_result.thumbnail_url = code_array[4].percent_decode()
@@ -281,34 +281,33 @@ func decode(code: String)-> Dictionary:
 			return full_result
 		
 		full_result.areas.append({})
-		full_result.areas[area_id].settings = {}
-		full_result.areas[area_id].settings.size = value_util.decode_value(area_settings_array[0])
-		full_result.areas[area_id].settings.sky = value_util.decode_value(area_settings_array[1])
-		full_result.areas[area_id].settings.background = value_util.decode_value(area_settings_array[2])
-		full_result.areas[area_id].settings.music = value_util.decode_value(area_settings_array[3])
+		full_result.areas[area_id].size = value_util.decode_value(area_settings_array[0])
+		full_result.areas[area_id].sky = value_util.decode_value(area_settings_array[1])
+		full_result.areas[area_id].background = value_util.decode_value(area_settings_array[2])
+		full_result.areas[area_id].music = value_util.decode_value(area_settings_array[3])
 		if area_settings_array.size() > 4:
-			full_result.areas[area_id].settings.gravity = value_util.decode_value(area_settings_array[4])
+			full_result.areas[area_id].gravity = value_util.decode_value(area_settings_array[4])
 		else:
-			full_result.areas[area_id].settings.gravity = 7.82
+			full_result.areas[area_id].gravity = 7.82
 		
 		if area_settings_array.size() > 5:
-			full_result.areas[area_id].settings.background_palette = value_util.decode_value(area_settings_array[5])
+			full_result.areas[area_id].background_palette = value_util.decode_value(area_settings_array[5])
 		else:
-			full_result.areas[area_id].settings.background_palette = 0
+			full_result.areas[area_id].background_palette = 0
 		
 		if area_settings_array.size() > 6:
-			full_result.areas[area_id].settings.timer = value_util.decode_value(area_settings_array[6])
+			full_result.areas[area_id].timer = value_util.decode_value(area_settings_array[6])
 		else:
-			full_result.areas[area_id].settings.timer = 0.00
+			full_result.areas[area_id].timer = 0.00
 			
 		if area_settings_array.size() > 7:
-			full_result.areas[area_id].settings.name = value_util.decode_value(area_settings_array[7])
+			full_result.areas[area_id].name = value_util.decode_value(area_settings_array[7])
 		else:
-			full_result.areas[area_id].settings.name = ""
+			full_result.areas[area_id].name = ""
 		if area_settings_array.size() > 8:
-			full_result.areas[area_id].settings.underwater_music = value_util.decode_value(area_settings_array[8])
+			full_result.areas[area_id].underwater_music = value_util.decode_value(area_settings_array[8])
 		else:
-			full_result.areas[area_id].settings.underwater_music = ""
+			full_result.areas[area_id].underwater_music = ""
 		
 		if(conversion_util.compareVersions(full_result.format_version, "0.4.5") == -1):
 			area_array.insert(2,"0*0")

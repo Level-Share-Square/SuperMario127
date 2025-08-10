@@ -33,58 +33,12 @@ var fav_items: Array = []
 static func check_code(code):
 	return typeof(code) == TYPE_DICTIONARY or code.size() >= 5
 
+
 func _init(code: String = "",skip: bool = false):
 	if (skip):
 		return
 	if code == "":
 		code = level_list_util.load_level_code_file(DEFAULT_CODE_PATH)
-#	load_in(code)
-#	var ready_function_struct = FunctionStruct.new()
-	
-#	functions.size_ready_function = ready_function_struct
-	
-	####################
-	
-#	var process_function_struct = FunctionStruct.new()
-	
-#	var time_alive = InterpreterVar.new()
-#	time_alive.path = ["object", "global", "time_alive"]
-#
-#	var should_scale_condition = LessThanCondition.new()
-#	should_scale_condition.values = [time_alive, 10]
-#
-#	var if_scale = IfStatementInstruction.new()
-#	if_scale.value = should_scale_condition
-#	process_function_struct.instructions.append(if_scale)
-#
-#	var object_scale = InterpreterVar.new()
-#	object_scale.path = ["object", "scale"]
-
-#	var new_scale = AdditionOperation.new()
-#	new_scale.values = [object_scale, Vector2(0.1, 0.1)]
-
-#	var method_execution = MethodExecution.new()
-#	method_execution.path = ["object", "set_property"]
-#	method_execution.args = ["scale", new_scale, false]
-
-#	var call_method = CallMethodInstruction.new()
-#	call_method.scope = 0
-#	call_method.value = method_execution
-#	process_function_struct.instructions.append(call_method)
-#
-#	var exit_scope = ExitScopeInstruction.new()
-#	exit_scope.scope = 1
-#	process_function_struct.instructions.append(exit_scope)
-#
-#	var time_alive_addition = AdditionOperation.new()
-#	time_alive_addition.values = [time_alive, 1]
-#
-#	var set_time_alive = SetValueInstruction.new()
-#	set_time_alive.path = ["object", "global", "time_alive"]
-#	set_time_alive.value = time_alive_addition
-#	process_function_struct.instructions.append(set_time_alive)
-	
-#	functions.size_process_function = process_function_struct
 
 
 func get_vector2(result) -> Vector2:
@@ -95,13 +49,21 @@ func get_vector2(result) -> Vector2:
 
 func get_area(result) -> LevelArea:
 	var area = LevelArea.new()
-	area.settings = get_settings(result.settings)
 	area.tile_chunks.clear()
 	area.very_foreground_tiles.clear()
 	area.foreground_tiles.clear()
 	area.background_tiles.clear()
 	area.very_background_tiles.clear()
-
+	
+	area.sky = result.sky
+	area.background = result.background
+	area.background_palette = result.background_palette
+	area.music = result.music
+	area.gravity = abs(result.gravity)
+	area.timer = abs(result.timer)
+	area.name = result.name
+	area.underwater_music = result.underwater_music
+	
 	area.tile_chunks = get_chunks([
 		result.background_tiles, 
 		result.foreground_tiles, 
@@ -133,19 +95,19 @@ func get_area(result) -> LevelArea:
 	return area
 
 
-func get_settings(result) -> LevelAreaSettings:
-	var settings = LevelAreaSettings.new()
-	settings.sky = result.sky
-	settings.background = result.background
-	settings.background_palette = result.background_palette
-	settings.music = result.music
-	settings.gravity = abs(result.gravity)
-	settings.timer = abs(result.timer)
-	settings.name = result.name
-	settings.underwater_music = result.underwater_music
-	var size_vec2 = get_vector2(result.size)
-	settings.bounds.size = Vector2(clamp(size_vec2.x, 24, 1500), clamp(size_vec2.y, 14, 1500))
-	return settings
+#func get_settings(result) -> LevelAreaSettings:
+#	var settings = LevelAreaSettings.new()
+#	settings.sky = result.sky
+#	settings.background = result.background
+#	settings.background_palette = result.background_palette
+#	settings.music = result.music
+#	settings.gravity = abs(result.gravity)
+#	settings.timer = abs(result.timer)
+#	settings.name = result.name
+#	settings.underwater_music = result.underwater_music
+#	var size_vec2 = get_vector2(result.size)
+#	settings.bounds.size = Vector2(clamp(size_vec2.x, 24, 1500), clamp(size_vec2.y, 14, 1500))
+#	return settings
 
 
 func get_chunks(resultLayers: Array, size: Vector2) -> Dictionary:

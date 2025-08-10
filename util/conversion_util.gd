@@ -310,7 +310,7 @@ static func convert_054_to_055(result):
 	return result
 
 
-static func compareVersions(version, other) -> int:
+static func compare_versions(version, other) -> int:
 	var v = version.split(".")
 	var o = other.split(".")
 	

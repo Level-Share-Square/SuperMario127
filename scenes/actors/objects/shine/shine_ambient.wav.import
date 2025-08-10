@@ -1,0 +1,23 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/shine_ambient.wav-5424218e84ad548e459578556c6dfda3.sample"
+
+[deps]
+
+source_file="res://scenes/actors/objects/shine/shine_ambient.wav"
+dest_files=[ "res://.import/shine_ambient.wav-5424218e84ad548e459578556c6dfda3.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=2
+edit/loop_begin=5792
+edit/loop_end=-1
+compress/mode=0

@@ -6,7 +6,7 @@
 [ext_resource path="res://scenes/actors/mario/particles/shine_sparkles.png" type="Texture" id=4]
 [ext_resource path="res://scenes/actors/objects/shine/ghost.png" type="Texture" id=5]
 [ext_resource path="res://scenes/actors/objects/shine/appear.wav" type="AudioStream" id=6]
-[ext_resource path="res://scenes/actors/objects/shine/ambient.wav" type="AudioStream" id=7]
+[ext_resource path="res://scenes/actors/objects/shine/shine_ambient.wav" type="AudioStream" id=7]
 [ext_resource path="res://scenes/actors/objects/shine/texture_outline.png" type="Texture" id=8]
 [ext_resource path="res://scenes/actors/mario/particles/recolorable_sparkles.png" type="Texture" id=9]
 [ext_resource path="res://scenes/actors/objects/shine/frames_recolorable.tres" type="SpriteFrames" id=10]
@@ -107,7 +107,7 @@ shader = ExtResource( 17 )
 shader_param/ray_count = 4
 shader_param/ray_distance = 0.45
 shader_param/ray_seperation_degrees = 22.0
-shader_param/rotation = 1.71557
+shader_param/rotation = 5.27582
 
 [sub_resource type="CanvasItemMaterial" id=33]
 particles_animation = true
@@ -1272,6 +1272,7 @@ playing = true
 
 [node name="AnimatedSpriteOutline" type="AnimatedSprite" parent="AnimatedSprite"]
 frames = SubResource( 20 )
+frame = 10
 script = ExtResource( 14 )
 
 [node name="Particles2D" type="Particles2D" parent="AnimatedSprite"]

@@ -1,25 +1,36 @@
 class_name LevelArea
+extends Resource
 
-var objects = []
-var tile_chunks : = {}
+export var objects = []
+export var tile_chunks : = {}
 
 #for loading only
-var background_tiles := []
-var very_background_tiles := []
-var foreground_tiles := []
-var very_foreground_tiles := []
+export var background_tiles := []
+export var very_background_tiles := []
+export var foreground_tiles := []
+export var very_foreground_tiles := []
 
-var layers: Array = []
+export var layers: Array = []
 
-var settings := LevelAreaSettings.new()
+## These variables were in their own resource for some reason, took em out of there bc
+## in terms of functionality this is really no different than before.
+export var bounds: Rect2 = Rect2(0, 0, 80, 30)
 
-func _init():
-	pass
+export var name: String = ""
 
-func duplicate(base_area):
-	settings = duplicate_settings(base_area.settings)
-	objects = base_area.duplicate_objects(base_area.objects)
-	tile_chunks = base_area.tile_chunks.duplicate(true)
+export var sky: int = 1
+export var background: int = 1
+export var background_palette: int = 0
+export var bg_autoscroll_speed: float = 0.0
+
+export var gravity: float = 7.82
+export var timer: float = 0.00
+
+export var music_id:int = 1
+
+export var music_link: String = ""
+export var underwater_music_link: String = ""
+
 
 func duplicate_objects(base_objects: Array):
 	var new_objects: Array
@@ -38,17 +49,3 @@ func duplicate_objects(base_objects: Array):
 		new_objects.append(new_object)
 	
 	return new_objects
-
-func duplicate_settings(base_settings):
-	var new_settings = LevelAreaSettings.new()
-	new_settings.name = base_settings.name
-	new_settings.sky = base_settings.sky
-	new_settings.background = base_settings.background
-	new_settings.background_palette = base_settings.background_palette
-	new_settings.music = base_settings.music
-	new_settings.underwater_music = base_settings.underwater_music
-	new_settings.bounds = base_settings.bounds
-	new_settings.gravity = base_settings.gravity
-	new_settings.timer = base_settings.timer
-	
-	return new_settings
