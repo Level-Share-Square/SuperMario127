@@ -1,6 +1,6 @@
+class_name LevelSong
 extends Resource
 
-class_name LevelSong
 
 export var stream : AudioStream
 export var underwater_stream : AudioStream

@@ -1,6 +1,6 @@
+class_name ParallaxLayerResource
 extends Resource
 
-class_name ParallaxLayerResource
 
 export var texture : Texture
 export var scale : Vector2

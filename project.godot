@@ -549,7 +549,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://level/Tileset.gd"
 }, {
-"base": "Reference",
+"base": "Resource",
 "class": "LevelVars",
 "language": "GDScript",
 "path": "res://level/Vars.gd"

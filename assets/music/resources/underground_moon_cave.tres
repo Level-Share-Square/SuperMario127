@@ -4,7 +4,10 @@
 
 [resource]
 script = ExtResource( 1 )
+stream_link = ""
+underwater_stream_link = ""
+timer_stream_link = ""
 volume_db = 0
 pitch_scale = 1
 title = "Underground Moon Cave"
-note = "From Super Mario Odyssey"
+note = "Remix by SilvererCoin & aloelucity"

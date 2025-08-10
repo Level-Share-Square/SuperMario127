@@ -1,4 +1,5 @@
 class_name LevelVars
+extends Resource
 
 signal coin_collected(new_value)
 signal red_coin_collected(new_value)
