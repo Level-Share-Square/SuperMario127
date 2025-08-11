@@ -444,5 +444,3 @@ stream = ExtResource( 12 )
 [node name="SpawnParticles" parent="." index="13"]
 position = Vector2( 0, -9 )
 process_material = SubResource( 50 )
-
-[connection signal="area_entered" from="AnimatedSprite/DialogueDetector" to="AnimatedSprite/DialogueDetector" method="area_entered"]

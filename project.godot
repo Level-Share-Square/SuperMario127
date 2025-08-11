@@ -504,6 +504,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://classes/LevelDataLoader.gd"
 }, {
+"base": "Reference",
+"class": "LevelDecoder",
+"language": "GDScript",
+"path": "res://util/new/level_decoder.gd"
+}, {
 "base": "Node",
 "class": "LevelInfo",
 "language": "GDScript",
@@ -1134,6 +1139,7 @@ _global_script_class_icons={
 "LevelCard": "",
 "LevelData": "",
 "LevelDataLoader": "",
+"LevelDecoder": "",
 "LevelInfo": "",
 "LevelLayer": "",
 "LevelLayerData": "",

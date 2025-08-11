@@ -92,9 +92,9 @@ func _init(passed_id: String, passed_folder: String, passed_level_code: String =
 	level_description = result.get("description", "")
 	
 	thumbnail_url = result.get("thumbnail_url", "")
-	thumbnail_sky = result.areas[0].settings.sky
-	thumbnail_background = result.areas[0].settings.background
-	thumbnail_background_palette = result.areas[0].settings.background_palette
+	thumbnail_sky = result.areas[0].sky
+	thumbnail_background = result.areas[0].background
+	thumbnail_background_palette = result.areas[0].background_palette
 
 
 func load_in() -> void:
@@ -125,8 +125,8 @@ func load_in() -> void:
 	level_description = level_data.description
 	thumbnail_url = level_data.thumbnail_url
 	
-	thumbnail_sky = level_data.areas[0].settings.sky
-	thumbnail_background = level_data.areas[0].settings.background
+	thumbnail_sky = level_data.areas[0].sky
+	thumbnail_background = level_data.areas[0].background
 
 	init_collectibles()
 	

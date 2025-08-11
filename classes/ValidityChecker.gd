@@ -104,7 +104,7 @@ static func decode_info(code: String)-> Dictionary:
 	if info_result.format_version == "0.4.0" or info_result.format_version == "0.4.1":
 		add_amount = 0
 	
-	elif conversion_util.compareVersions(info_result.format_version, "0.5.0") > -1:
+	elif conversion_util.compare_versions(info_result.format_version, "0.5.0") > -1:
 		info_result.author = code_array[2].percent_decode()
 		info_result.description = code_array[3].percent_decode()
 		info_result.thumbnail_url = code_array[4].percent_decode()
@@ -116,14 +116,13 @@ static func decode_info(code: String)-> Dictionary:
 	
 	var area_index: int = 2 + add_amount
 	info_result.areas = [{}]
-	info_result.areas[0].settings = {}
-	info_result.areas[0].settings.sky = value_util.decode_value(code_array[area_index + 1])
-	info_result.areas[0].settings.background = value_util.decode_value(code_array[area_index + 2])
-	info_result.areas[0].settings.background_palette = 0
+	info_result.areas[0].sky = value_util.decode_value(code_array[area_index + 1])
+	info_result.areas[0].background = value_util.decode_value(code_array[area_index + 2])
+	info_result.areas[0].background_palette = 0
 	
-	if conversion_util.compareVersions(info_result.format_version, "0.4.6") == 1:
+	if conversion_util.compare_versions(info_result.format_version, "0.4.6") == 1:
 		var split: String = code_array[area_index + 5].get_slice("~", 0)
-		info_result.areas[0].settings.background_palette = value_util.decode_value(split)
+		info_result.areas[0].background_palette = value_util.decode_value(split)
 	
 	return info_result
 
@@ -149,9 +148,9 @@ func info_check()-> void:
 		invalid_reason = "This level has an invalid level code."
 		return
 	
-	if (typeof(result.areas[0].settings.sky) != TYPE_INT or
-	typeof(result.areas[0].settings.background) != TYPE_INT or
-	typeof(result.areas[0].settings.background_palette) != TYPE_INT):
+	if (typeof(result.areas[0].sky) != TYPE_INT or
+	typeof(result.areas[0].background) != TYPE_INT or
+	typeof(result.areas[0].background_palette) != TYPE_INT):
 		invalid_reason = "Area settings for area ID 0 are invalid."
 		return
 	
@@ -309,7 +308,7 @@ func decode(code: String)-> Dictionary:
 		else:
 			full_result.areas[area_id].underwater_music = ""
 		
-		if(conversion_util.compareVersions(full_result.format_version, "0.4.5") == -1):
+		if(conversion_util.compare_versions(full_result.format_version, "0.4.5") == -1):
 			area_array.insert(2,"0*0")
 		
 		var area_tiles_array = area_array[1].split(",")
@@ -348,7 +347,7 @@ func decode(code: String)-> Dictionary:
 					+" or edit this level."
 					return full_result
 				var start_index = 1
-				if (conversion_util.compareVersions(full_result.format_version, "0.4.7") != -1):
+				if (conversion_util.compare_versions(full_result.format_version, "0.4.7") != -1):
 					decoded_object.palette = int(object_array[1])
 				else:
 					start_index = 0
@@ -373,33 +372,32 @@ func decode_area(area: String):
 		+"music, or gravity."
 		return full_result
 	
-	full_result.settings = {}
-	full_result.settings.size = value_util.decode_value(area_settings_array[0])
-	full_result.settings.sky = value_util.decode_value(area_settings_array[1])
-	full_result.settings.background = value_util.decode_value(area_settings_array[2])
-	full_result.settings.music = value_util.decode_value(area_settings_array[3])
+	full_result.size = value_util.decode_value(area_settings_array[0])
+	full_result.sky = value_util.decode_value(area_settings_array[1])
+	full_result.background = value_util.decode_value(area_settings_array[2])
+	full_result.music = value_util.decode_value(area_settings_array[3])
 	if area_settings_array.size() > 4:
-		full_result.settings.gravity = value_util.decode_value(area_settings_array[4])
+		full_result.gravity = value_util.decode_value(area_settings_array[4])
 	else:
-		full_result.settings.gravity = 7.82
+		full_result.gravity = 7.82
 	
 	if area_settings_array.size() > 5:
-		full_result.settings.background_palette = value_util.decode_value(area_settings_array[5])
+		full_result.background_palette = value_util.decode_value(area_settings_array[5])
 	else:
-		full_result.settings.background_palette = 0
+		full_result.background_palette = 0
 	
 	if area_settings_array.size() > 6:
-		full_result.settings.timer = value_util.decode_value(area_settings_array[6])
+		full_result.timer = value_util.decode_value(area_settings_array[6])
 	else:
-		full_result.settings.timer = 0.00
+		full_result.timer = 0.00
 		
 	if area_settings_array.size() > 7:
-		full_result.settings.name = value_util.decode_value(area_settings_array[7])
+		full_result.name = value_util.decode_value(area_settings_array[7])
 		
 	if area_settings_array.size() > 8:
-		full_result.settings.underwater_music = value_util.decode_value(area_settings_array[8])
+		full_result.underwater_music = value_util.decode_value(area_settings_array[8])
 	else:
-		full_result.settings.underwater_music = ""
+		full_result.underwater_music = ""
 	
 	
 	var area_tiles_array = area_array[1].split(",")
@@ -540,7 +538,7 @@ func load_in(code: String)-> void:
 	if format_version == current_format_version:
 		areas = []
 		for area_result in result.areas:
-			if (area_result.size() == 6):
+			if (area_result.size() == 14):
 				var area = get_area(area_result)
 				
 				if is_instance_valid(area):
@@ -549,6 +547,8 @@ func load_in(code: String)-> void:
 					printerr("Found invalid area while parsing level code, area will be skipped.")
 			else:
 				printerr("Found invalid area while parsing level code, area will be skipped.")
+			
+			print(area_result.size())
 	else:
 		print("Outdated format version. Current version is " \
 		+ current_format_version + ", but course uses version " + format_version + ".")

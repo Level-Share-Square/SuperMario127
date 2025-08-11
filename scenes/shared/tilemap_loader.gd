@@ -132,7 +132,7 @@ func load_in(loaded_level_data : LevelData, loaded_level_area : LevelArea):
 	update_tilemaps()
 
 func update_tilemaps():
-	var bounds = level_area.settings.bounds
+	var bounds = level_area.bounds
 	
 	var tile_set = very_back_tilemap_node.tile_set
 	

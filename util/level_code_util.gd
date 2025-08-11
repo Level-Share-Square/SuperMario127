@@ -32,7 +32,7 @@ static func fast_is_valid(value: String) -> bool:
 	return true
 
 const empty_tile := [0,0,0]
-static func encode(tiles, settings):
+static func encode(tiles, size):
 	#print(settings.bounds)
 	var new_data = []
 	var last_index = -1
@@ -41,7 +41,7 @@ static func encode(tiles, settings):
 	var append_string = ""
 	var prepend_string = ""
 	
-	for index in range(settings.bounds.size.x * settings.bounds.size.y):
+	for index in range(size.x * size.y):
 		var encoded_tile = tiles[index]
 		if not encoded_tile:
 			encoded_tile = empty_tile

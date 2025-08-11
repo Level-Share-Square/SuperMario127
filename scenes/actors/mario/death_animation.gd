@@ -15,7 +15,7 @@ onready var sprite = $"%Sprite"
 
 func _ready():
 	var level_area = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area]
-	gravity = level_area.settings.gravity
+	gravity = level_area.gravity
 
 func play_anim():
 	velocity = Vector2()

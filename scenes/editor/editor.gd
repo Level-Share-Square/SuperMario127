@@ -72,7 +72,7 @@ func _ready():
 		Singleton.CurrentLevelData.unsaved_editor_changes = false
 
 
-func object_hovered(object: GameObject):
+func object_hovered(object):
 	if tool_manager.current_tool.tool_type == EditorTool.Type.TileTool:
 		return
 	
@@ -81,7 +81,7 @@ func object_hovered(object: GameObject):
 	object.hovered = true
 
 
-func object_unhovered(object: GameObject):
+func object_unhovered(object):
 	if not object in hovered_objects.values():
 		return
 	
@@ -93,10 +93,6 @@ func _process(delta):
 	if Input.is_action_just_pressed("LMB") && tool_manager.current_tool == selection_box.get_parent() && selection_box.get_parent().visible == false:
 		selection_box.show()
 		selection_box.get_parent().show()
-	
-
-
-	
 
 
 func _update_editor_framerate():

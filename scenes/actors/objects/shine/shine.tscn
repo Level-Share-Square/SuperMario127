@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=2]
+[gd_scene load_steps=53 format=2]
 
 [ext_resource path="res://scenes/actors/objects/shine/frames_normal.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://assets/particles/shiny_particle_material.tres" type="Material" id=2]
@@ -22,6 +22,34 @@
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 6, 6 )
+
+[sub_resource type="CanvasItemMaterial" id=38]
+blend_mode = 1
+
+[sub_resource type="Gradient" id=39]
+colors = PoolColorArray( 1, 1, 1, 0.498039, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture2D" id=40]
+gradient = SubResource( 39 )
+fill = 1
+fill_from = Vector2( 0.5, 0.5 )
+fill_to = Vector2( 0.5, 0 )
+
+[sub_resource type="ShaderMaterial" id=24]
+resource_local_to_scene = true
+shader = ExtResource( 17 )
+shader_param/ray_count = 4
+shader_param/ray_distance = 0.45
+shader_param/ray_seperation_degrees = 22.0
+shader_param/rotation = 1.00522
+
+[sub_resource type="ShaderMaterial" id=41]
+resource_local_to_scene = true
+shader = ExtResource( 17 )
+shader_param/ray_count = 4
+shader_param/ray_distance = 0.275
+shader_param/ray_seperation_degrees = 27.243
+shader_param/rotation = 2.70423
 
 [sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 8 )
@@ -100,14 +128,6 @@ particles_animation = true
 particles_anim_h_frames = 5
 particles_anim_v_frames = 1
 particles_anim_loop = false
-
-[sub_resource type="ShaderMaterial" id=24]
-resource_local_to_scene = true
-shader = ExtResource( 17 )
-shader_param/ray_count = 4
-shader_param/ray_distance = 0.45
-shader_param/ray_seperation_degrees = 22.0
-shader_param/rotation = 3.35522
 
 [sub_resource type="CanvasItemMaterial" id=33]
 particles_animation = true
@@ -450,7 +470,7 @@ tracks/0/keys = {
 "values": [ 0.0, 0.0, 1.0, 6.0, 6.0, 1.0 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("AnimatedSprite:offset")
+tracks/1/path = NodePath("AnimatedSprite:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -500,7 +520,7 @@ tracks/4/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, -64 ), Vector2( 0, 0 ) ]
 }
 tracks/5/type = "value"
-tracks/5/path = NodePath("RaysContainer/VectorRays:modulate")
+tracks/5/path = NodePath("RaysContainer:modulate")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
@@ -524,7 +544,7 @@ tracks/6/keys = {
 "values": [ 0 ]
 }
 tracks/7/type = "value"
-tracks/7/path = NodePath("RaysContainer/VectorRays:modulate:a")
+tracks/7/path = NodePath("RaysContainer:modulate:a")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/imported = false
@@ -681,6 +701,30 @@ tracks/19/keys = {
 "times": PoolRealArray(  ),
 "transitions": PoolRealArray(  ),
 "values": [  ]
+}
+tracks/20/type = "value"
+tracks/20/path = NodePath("RaysContainer/VectorRays2:ray_rotation_speed")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/keys = {
+"times": PoolRealArray( 0, 1.5, 2.7 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ -9.5, -9.5, -0.6 ]
+}
+tracks/21/type = "value"
+tracks/21/path = NodePath("RaysContainer/Glow:self_modulate")
+tracks/21/interp = 1
+tracks/21/loop_wrap = true
+tracks/21/imported = false
+tracks/21/enabled = true
+tracks/21/keys = {
+"times": PoolRealArray( 0, 0.5, 2.7 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 
 [sub_resource type="Animation" id=37]
@@ -1266,26 +1310,16 @@ visible = false
 z_index = -1
 texture = ExtResource( 5 )
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-frames = ExtResource( 1 )
-playing = true
-
-[node name="AnimatedSpriteOutline" type="AnimatedSprite" parent="AnimatedSprite"]
-frames = SubResource( 20 )
-script = ExtResource( 14 )
-
-[node name="Particles2D" type="Particles2D" parent="AnimatedSprite"]
-show_behind_parent = true
-material = SubResource( 21 )
-local_coords = false
-process_material = ExtResource( 2 )
-texture = ExtResource( 4 )
-__meta__ = {
-"_editor_description_": ""
-}
-
 [node name="RaysContainer" type="Node2D" parent="."]
-z_index = -1
+
+[node name="Glow" type="TextureRect" parent="RaysContainer"]
+material = SubResource( 38 )
+margin_left = -36.0
+margin_top = -35.0
+margin_right = 36.0
+margin_bottom = 37.0
+texture = SubResource( 40 )
+stretch_mode = 1
 
 [node name="VectorRays" type="ColorRect" parent="RaysContainer"]
 material = SubResource( 24 )
@@ -1301,6 +1335,41 @@ mouse_filter = 2
 color = Color( 0.890196, 0.803922, 0.0392157, 1 )
 script = ExtResource( 15 )
 ray_distance = 0.45
+
+[node name="VectorRays2" type="ColorRect" parent="RaysContainer"]
+material = SubResource( 41 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -96.0
+margin_top = -94.0
+margin_right = 96.0
+margin_bottom = 98.0
+mouse_filter = 2
+color = Color( 0.890196, 0.803922, 0.0392157, 1 )
+script = ExtResource( 15 )
+ray_rotation_speed = -0.6
+ray_distance = 0.275
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = ExtResource( 1 )
+playing = true
+
+[node name="AnimatedSpriteOutline" type="AnimatedSprite" parent="AnimatedSprite"]
+frames = SubResource( 20 )
+frame = 9
+script = ExtResource( 14 )
+
+[node name="Particles2D" type="Particles2D" parent="AnimatedSprite"]
+show_behind_parent = true
+material = SubResource( 21 )
+local_coords = false
+process_material = ExtResource( 2 )
+texture = ExtResource( 4 )
+__meta__ = {
+"_editor_description_": ""
+}
 
 [node name="SpawnParticles" type="Particles2D" parent="."]
 visible = false

@@ -163,7 +163,7 @@ func _physics_process(delta):
 
 func _unhandled_input(event):
 	if Input.is_action_just_pressed("click") and hovered and mode == Editor.mode:
-		var editor: Editor = get_tree().current_scene
+		var editor = get_tree().current_scene
 		connect("object_clicked", editor, "object_clicked", [self])
 		emit_signal("object_clicked")
 	
