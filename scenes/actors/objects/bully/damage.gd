@@ -1,10 +1,16 @@
 extends EnemyDamage
 
 
+export var bully_jump_knockback: Vector2 = Vector2(150, 0)
+export var bully_spin_knockback: Vector2 = Vector2(84, -150)
+export var bully_gp_knockback: Vector2 = Vector2(250, 0)
+export var bully_ram_knockback: Vector2 = Vector2(100, 0)
+
+
 func stomp(body: PhysicsBody2D = null) -> void:
 	if is_instance_valid(body):
-		var normal: float = (enemy.global_position - body.global_position).sign().x
-		enemy.velocity = Vector2(normal * 150, 0)
+		var direction: float = (enemy.global_position - body.global_position).sign().x
+		enemy.velocity = Vector2(direction * bully_jump_knockback.x, bully_jump_knockback.y)
 	
 	enemy.set_state_by_name("KnockbackState")
 
@@ -13,17 +19,44 @@ func spin_attacked(body: PhysicsBody2D = null) -> void:
 	if enemy.state == enemy.get_state_by_name("KnockbackState"):
 		return
 	
+	print(body)
+	
 	if is_instance_valid(body):
-		var normal: float = (enemy.global_position - body.global_position).sign().x
-		enemy.velocity = Vector2(normal * 84 * max(1.0, abs(body.velocity.x / 196.0)), -150)
+		if body is Character:
+			if body.state == body.get_state_node("DiveState") or body.state == body.get_state_node("SlideState"):
+				dived(body)
+				return
+		
+		var direction: float = (enemy.global_position - body.global_position).sign().x
+		enemy.velocity = Vector2(direction * bully_spin_knockback.x, bully_spin_knockback.y)
 	
 	enemy.set_state_by_name("KnockbackState")
 
 
 func ground_pound(body: PhysicsBody2D = null) -> void:
 	if is_instance_valid(body):
-		var normal: float = (enemy.global_position - body.global_position).sign().x
-		enemy.velocity = Vector2(normal * 250, 0)
+		var direction: float = (enemy.global_position - body.global_position).sign().x
+		enemy.velocity = Vector2(direction * bully_gp_knockback.x, bully_gp_knockback.y)
+	
+	enemy.set_state_by_name("KnockbackState")
+
+
+func dived(player: Character):
+	damage_player(player)
+	
+	if is_instance_valid(player):
+		var direction: float = (enemy.global_position - player.global_position).sign().x
+		enemy.velocity = Vector2(direction * bully_ram_knockback.x * 1.5, bully_ram_knockback.y)
+	
+	enemy.set_state_by_name("KnockbackState")
+
+
+func damage_player(player: Character):
+	.damage_player(player)
+	
+	if is_instance_valid(player):
+		var direction: float = (enemy.global_position - player.global_position).sign().x
+		enemy.velocity = Vector2(direction * bully_ram_knockback.x, bully_ram_knockback.y)
 	
 	enemy.set_state_by_name("KnockbackState")
 

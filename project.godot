@@ -1757,7 +1757,7 @@ limits/debugger_stdout/max_messages_per_frame=100
 
 [physics]
 
-2d/physics_engine="GodotPhysics"
+2d/use_bvh=false
 
 [rendering]
 

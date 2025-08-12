@@ -7,7 +7,7 @@ signal state_changed(new_state)
 
 const UP_DIR := Vector2.UP
 const SNAP_VECTOR := Vector2(0, 12)
-const FLOOR_MAX_ANGLE: float = rad2deg(67)
+const FLOOR_MAX_ANGLE: float = deg2rad(67)
 
 # the enemy cant fall faster than gravity times this
 export var max_gravity_factor: float = 20

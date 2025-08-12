@@ -37,6 +37,7 @@ onready var swim_sound = $OtherSounds/Swim
 onready var spin_water_sound = $OtherSounds/SpinWater
 onready var powerup_sound_voiceless = $OtherSounds/Powerup
 onready var burn_sound = $OtherSounds/Burn
+onready var bonk_sound = $OtherSounds/Bonk
 
 onready var footsteps_default = $Footsteps/Default
 onready var footsteps_metal = $Footsteps/Metal
@@ -178,6 +179,7 @@ func play_powerup_jingle():
 func play_bonk_sound():
 	if ready:
 		hit_sounds.play()
+		bonk_sound.play()
 
 func play_gp_windup_sound():
 	if ready:

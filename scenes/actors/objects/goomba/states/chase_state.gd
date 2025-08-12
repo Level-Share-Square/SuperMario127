@@ -34,7 +34,6 @@ func _update(delta: float) -> void:
 			
 			if not ledge_detector.is_colliding():
 				jump()
-#				print(enemy.is_on_ground())
 	else:
 		if enemy.velocity.y > 0:
 			enemy.sprite.play("fall")

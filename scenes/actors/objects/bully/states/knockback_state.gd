@@ -13,4 +13,4 @@ func _update(delta: float):
 		enemy.set_state_by_name("IdleState")
 	
 	if enemy.is_on_floor():
-		enemy.velocity.x = move_toward(enemy.velocity.x, 0, delta * 5 * 60)
+		enemy.velocity.x = move_toward(enemy.velocity.x, 0, delta * 3 * 60)

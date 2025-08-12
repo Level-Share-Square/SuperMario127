@@ -338,7 +338,7 @@ shape = SubResource( 62 )
 script = ExtResource( 10 )
 move_speed = 32.0
 chase_speed = 96.0
-accel = 4.0
+accel = 6.0
 
 [node name="Ledge" type="RayCast2D" parent="States/ChaseState" index="0"]
 position = Vector2( -12, -8 )
@@ -370,6 +370,10 @@ knockback_power = Vector2( 350, 200 )
 set_player_knockback_state = false
 spring_bounce_windup_length = 0.125
 spring_bounce_depth = 8.0
+bully_jump_knockback = Vector2( 150, 0 )
+bully_spin_knockback = Vector2( 72, -150 )
+bully_gp_knockback = Vector2( 250, 0 )
+bully_ram_knockback = Vector2( 115, 0 )
 
 [node name="Crush" parent="Damage" index="0"]
 position = Vector2( 0, -1 )

@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=2]
+[gd_scene load_steps=62 format=2]
 
 [ext_resource path="res://addons/mixing-desk/sound/nonspatial/ran_cont.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/mario/sounds.gd" type="Script" id=2]
@@ -60,6 +60,7 @@
 [ext_resource path="res://scenes/actors/mario/sounds_luigi/talk/STRM_L43_HUNNN2.wav" type="AudioStream" id=58]
 [ext_resource path="res://scenes/actors/mario/sounds_luigi/talk/STRM_L21_OK.wav" type="AudioStream" id=59]
 [ext_resource path="res://scenes/actors/mario/sounds_luigi/Timeout1.wav" type="AudioStream" id=60]
+[ext_resource path="res://scenes/actors/mario/sounds_misc/bonk.ogg" type="AudioStream" id=61]
 
 [node name="Sounds" type="Node"]
 script = ExtResource( 2 )
@@ -404,4 +405,10 @@ bus = "Sounds"
 [node name="Burn" type="AudioStreamPlayer" parent="OtherSounds"]
 stream = ExtResource( 44 )
 volume_db = -7.0
+bus = "Sounds"
+
+[node name="Bonk" type="AudioStreamPlayer" parent="OtherSounds"]
+stream = ExtResource( 61 )
+volume_db = -7.75
+pitch_scale = 1.15
 bus = "Sounds"

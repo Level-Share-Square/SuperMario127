@@ -15,7 +15,6 @@ func _update(delta: float) -> void:
 	
 	if enemy.is_on_ground():
 		enemy.sprite.play("walk")
-		pass
 	else:
 		if enemy.velocity.y > 0:
 			enemy.sprite.play("fall")
