@@ -62,7 +62,7 @@ func box_expansion():
 		highlight.rect_scale.x = 1
 
 func draw_tile(pos: Vector2) -> void:
-	var level_bounds: Rect2 = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].settings.bounds
+	var level_bounds: Rect2 = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].bounds
 	if not level_bounds.has_point(pos):
 		return
 	

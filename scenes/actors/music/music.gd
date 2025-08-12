@@ -204,7 +204,7 @@ func load_ogg(bytes: PoolByteArray) -> void:
 	else:
 		timer.stop()
 		
-	var underwater_raw = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].settings.underwater_music
+	var underwater_raw = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].underwater_music
 	if underwater_raw == "":
 		has_water = false
 	else:
@@ -302,7 +302,7 @@ func _process(delta) -> void:
 	# change this script so this entire block ceases to exist because it is bad and it makes me simultaniously mad and sad
 	# scenes should ask the music singleton to change the music, the music singleton shouldn't check every frame for if it should change the music
 	if "mode" in current_scene: #script will crash if the scene root doesn't have this property defined
-		var level_song = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].settings.music if play_music else 0
+		var level_song = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].music if play_music else 0
 		current_song = level_song
 		if current_scene.mode != last_mode or typeof(last_song) != typeof(level_song):
 			change_song(last_song, level_song)

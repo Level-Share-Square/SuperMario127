@@ -23,6 +23,7 @@ func _ready() -> void:
 func on_focus_entered() -> void:
 	hover_sound.play()
 
+
 func play_sound(val) -> void:
 	click_sound.pitch_scale = map(val, min_value, max_value, 0.5, 2.0)
 	click_sound.play()

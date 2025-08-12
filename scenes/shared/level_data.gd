@@ -41,7 +41,7 @@ func pick_random_music() -> void:
 	rng.randomize()
 	var array_index = rng.randi_range(0, random_music.size() - 1)
 	if (level_data.areas.size() > 0):
-		level_data.areas[area].music_id = random_music[array_index]
+		level_data.areas[area].music = random_music[array_index]
 
 func create_level_data():
 	level_data = ValidityChecker.new()

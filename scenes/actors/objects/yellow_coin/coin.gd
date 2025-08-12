@@ -56,14 +56,14 @@ func collect(body, is_shell = false):
 
 
 func _ready():
-	if layer == middle:
+	if layer == LevelShared.Layers.Middle:
 		var _connect = area.connect("body_entered", self, "collect")
 	
 	for body in area.get_overlapping_bodies():
 			if enabled and !collected and (body and body.name.begins_with("Character") and !body.dead):
 				collect(body)
 	
-	gravity = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].settings.gravity
+	gravity = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].gravity
 	
 #	print(collision_shape)
 	

@@ -10,7 +10,7 @@ static func convert_040_to_041(result):
 				break
 			
 			var new_objects = []
-			area_result.settings.music = int(area_result.settings.music)
+			area_result.music = int(area_result.music)
 			for object_result in area_result.objects:
 				var object = object_result
 				object.properties[2] = int(object.properties[2])

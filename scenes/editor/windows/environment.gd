@@ -51,11 +51,11 @@ func _ready():
 
 
 func load_settings():
-	bg_index = area.settings.sky
-	fg_index = area.settings.background
+	bg_index = area.sky
+	fg_index = area.background
 	var background_resource = load("res://scenes/shared/background/backgrounds/%s/resource.tres" % backgrounds.ids[bg_index])
 	var foreground_resource = load("res://scenes/shared/background/foregrounds/%s/resource.tres" % foregrounds.ids[fg_index])
-	current_palette = area.settings.background_palette
+	current_palette = area.background_palette
 	background.texture = background_resource.texture
 	if current_palette == 0:
 		foreground.texture = foreground_resource.preview
@@ -64,7 +64,7 @@ func load_settings():
 	yield(get_tree(), "idle_frame")
 	background_dropdown.select(bg_index)
 	foreground_dropdown.select(fg_index)
-	autoscroll_pick.value = area.settings.bg_autoscroll_speed
+	autoscroll_pick.value = area.bg_autoscroll_speed
 	_init_palette_dropdown()
 
 
@@ -104,7 +104,7 @@ func _on_palette_selected(event: InputEvent, index: int):
 		
 		# Note: This should probably be in the save function instead.
 #		Singleton.CurrentLevelData.level_info.thumbnail_background_palette = current_palette
-		area.settings.background_palette = current_palette
+		area.background_palette = current_palette
 		emit_signal("update_background")
 
 
@@ -113,7 +113,7 @@ func _on_bg_selected(index: int):
 	background.texture = resource.texture
 	# Note: This should probably be in the save function instead.
 #	Singleton.CurrentLevelData.level_info.thumbnail_sky = index
-	area.settings.sky = index
+	area.sky = index
 	bg_index = index
 	_init_palette_dropdown()
 	emit_signal("update_background")
@@ -125,8 +125,8 @@ func _on_fg_selected(index: int):
 	foreground.texture = resource.preview
 	# Note: This should probably be in the save function instead.
 #	Singleton.CurrentLevelData.level_info.thumbnail_background = index
-	area.settings.background = index
-	area.settings.background_palette = 0
+	area.background = index
+	area.background_palette = 0
 	fg_index = index
 	_init_palette_dropdown()
 	emit_signal("update_background")
@@ -139,5 +139,5 @@ func _on_palette_menu_toggled(pressed: bool):
 
 
 func _on_autoscroll_change(value):
-	area.settings.bg_autoscroll_speed = value
+	area.bg_autoscroll_speed = value
 	emit_signal("update_background")

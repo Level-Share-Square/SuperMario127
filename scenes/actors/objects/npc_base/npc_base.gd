@@ -102,7 +102,7 @@ func _ready():
 		# warning-ignore: unused_variable
 		connect("property_changed", self, "property_changed")
 	else:
-		gravity = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].settings.gravity
+		gravity = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].gravity
 		yield(get_tree(), "idle_frame")
 		working_speed = walk_speed
 		pathfollow.loop = !move_type

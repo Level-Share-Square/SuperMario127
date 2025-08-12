@@ -19,6 +19,7 @@ export var collected_spawn_particles : Texture
 onready var animated_sprite : AnimatedSprite = $AnimatedSprite
 onready var outline_sprite : AnimatedSprite = $AnimatedSprite/AnimatedSpriteOutline
 onready var vector_rays: ColorRect = $RaysContainer/VectorRays
+onready var vector_rays_small: ColorRect = $RaysContainer/VectorRaysSmall
 onready var particles : Particles2D = $AnimatedSprite/Particles2D
 onready var spawn_particles : Particles2D = $SpawnParticles
 onready var ghost : Sprite = $Ghost

@@ -26,10 +26,9 @@ export var bg_autoscroll_speed: float = 0.0
 export var gravity: float = 7.82
 export var timer: float = 0.00
 
-export var music_id:int = 1
-
-export var music_link: String = ""
-export var underwater_music_link: String = ""
+# can hold either the ID for music in the files or a link to custom music
+export var music = 1
+export var underwater_music: String = ""
 
 
 func duplicate_objects(base_objects: Array):

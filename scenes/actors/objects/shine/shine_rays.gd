@@ -7,6 +7,7 @@ export var ray_distance: float = 0.4
 
 var ray_rotation: float = 0
 
+
 func _process(delta):
 	ray_rotation += ray_rotation_speed * delta
 	ray_rotation = wrapf(ray_rotation, 0, 2 * PI)

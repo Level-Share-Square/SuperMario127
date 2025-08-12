@@ -28,9 +28,9 @@ func update_panel():
 	var area = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area]
 	var raw_music
 	if music_type == 0:
-		raw_music = area.settings.music
+		raw_music = area.music
 	else:
-		raw_music = area.settings.underwater_music
+		raw_music = area.underwater_music
 		
 	if typeof(raw_music) == TYPE_INT:
 		return #regular music implementation
@@ -53,9 +53,9 @@ func save_song() -> String:
 	var encoded_song: String = ""
 	encoded_song += "LP%s=%s|LEP=%sN=%s" % [loop_start, url, loop_end, song_name]
 	if music_type == 0:
-		area.settings.music = encoded_song
+		area.music = encoded_song
 	else:
-		area.settings.underwater_music = encoded_song
+		area.underwater_music = encoded_song
 	return encoded_song
 
 func on_text_changed(new_text):

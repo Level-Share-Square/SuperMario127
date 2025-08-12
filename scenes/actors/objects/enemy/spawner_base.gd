@@ -75,7 +75,7 @@ func instance_enemy(emit_particles: bool = true) -> EnemyBase:
 	spawned_enemy.visible = is_visible
 	
 	# give it proper gravity
-	spawned_enemy.gravity = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].settings.gravity * 2
+	spawned_enemy.gravity = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].gravity * 2
 	# handle being flipped
 	if scale.x < 0:
 		spawned_enemy.scale = Vector2.ONE
@@ -91,9 +91,9 @@ func instance_enemy(emit_particles: bool = true) -> EnemyBase:
 	
 	spawned_enemies.append(spawned_enemy)
 	
-	if layer > middle:
+	if layer > LevelShared.Layers.Middle:
 		spawned_enemy.enabled = false
-	if layer < middle:
+	if layer < LevelShared.Layers.Middle:
 		spawned_enemy.modulate = modulate
 		spawned_enemy.enabled = false
 		

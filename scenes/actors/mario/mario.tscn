@@ -376,6 +376,7 @@ hue_variation = 1.0
 hue_variation_curve = SubResource( 127 )
 
 [sub_resource type="Gradient" id=136]
+offsets = PoolRealArray( 0.750988, 1 )
 colors = PoolColorArray( 1, 1, 0.501961, 1, 1, 0.501961, 0.501961, 0 )
 
 [sub_resource type="GradientTexture" id=137]
@@ -385,8 +386,8 @@ gradient = SubResource( 136 )
 flag_disable_z = true
 direction = Vector3( -1, -0.75, 0 )
 gravity = Vector3( 0, 300, 0 )
-initial_velocity = 200.0
-initial_velocity_random = 0.17
+initial_velocity = 350.0
+initial_velocity_random = 0.09
 angular_velocity = 46.41
 angular_velocity_random = 1.0
 orbit_velocity = 0.0
@@ -1721,7 +1722,7 @@ shader = ExtResource( 86 )
 shader_param/ray_count = 4
 shader_param/ray_distance = 0.4
 shader_param/ray_seperation_degrees = 22.0
-shader_param/rotation = 1.81739
+shader_param/rotation = 3.12474
 
 [sub_resource type="RectangleShape2D" id=85]
 extents = Vector2( 8, 18 )
@@ -1964,10 +1965,9 @@ modulate = Color( 1, 1, 0.501961, 1 )
 show_behind_parent = true
 position = Vector2( 8, 3.95457e-05 )
 emitting = false
-lifetime = 0.5
+lifetime = 0.11
 one_shot = true
 explosiveness = 1.0
-fixed_fps = 60
 local_coords = false
 process_material = SubResource( 133 )
 texture = ExtResource( 15 )
@@ -2407,8 +2407,6 @@ position = Vector2( 0, 6 )
 collision_layer = 2
 collision_mask = 17
 script = ExtResource( 58 )
-character_path = NodePath("..")
-normal_shape = NodePath("CollisionShape2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SpinArea"]
 modulate = Color( 0.839216, 0.345098, 0.345098, 1 )
@@ -2421,8 +2419,6 @@ position = Vector2( 0, 6 )
 collision_layer = 2
 collision_mask = 17
 script = ExtResource( 58 )
-character_path = NodePath("..")
-normal_shape = NodePath("CollisionShape2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SpinSwimArea"]
 modulate = Color( 0.839216, 0.345098, 0.345098, 1 )

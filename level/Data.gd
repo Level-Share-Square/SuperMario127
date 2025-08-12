@@ -59,15 +59,12 @@ func get_area(result) -> LevelArea:
 	area.background = result.background
 	area.background_palette = result.background_palette
 	
-	if typeof(result.music) == TYPE_INT:
-		area.music_id = result.music
-	elif typeof(result.music) == TYPE_STRING:
-		area.music_link = result.music
-	
 	area.gravity = abs(result.gravity)
 	area.timer = abs(result.timer)
 	area.name = result.name
-	area.underwater_music_link = result.underwater_music
+	
+	area.music = result.music
+	area.underwater_music = result.underwater_music
 	
 	area.tile_chunks = get_chunks([
 		result.background_tiles, 
@@ -416,7 +413,7 @@ func get_encoded_area_data(area: LevelArea):
 		added_object += str(object.type_id) + ","
 		added_object += str(object.palette) + ","
 		
-		added_object += value_util.encode_value(value_util.get_true_value(object.properties[0]-settings.bounds.position*32)) + ","
+		added_object += value_util.encode_value(value_util.get_true_value(object.properties[0]-area.bounds.position*32)) + ","
 		for i in range(1,object.properties.size()):
 			added_object += value_util.encode_value(value_util.get_true_value(object.properties[i])) + ","
 		added_object.erase(added_object.length() - 1, 1)

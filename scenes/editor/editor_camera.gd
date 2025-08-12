@@ -73,7 +73,7 @@ func is_moving() -> bool:
 
 
 func update_limits(level_area: LevelArea):
-	var area_bounds = level_area.settings.bounds.grow(3)
+	var area_bounds = level_area.bounds.grow(3)
 	
 	limit_left = int(area_bounds.position.x * 32)
 	limit_top = int(area_bounds.position.y * 32 * zoom.x) #needs to include the toolbar
@@ -119,7 +119,7 @@ func cap_zoom_level(zoom : float) -> float:
 	# I'd prefer to not hardcode this but frankly it's not worth the time to 
 	# figure out getting the height of the toolbar.
 	var toolbar_size : float = 0
-	var level_size : Vector2 = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].settings.bounds.size
+	var level_size : Vector2 = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].bounds.size
 
 	while (
 		viewport_size.x * zoom > (level_size.x + 6) * Editor.TILE_SIZE.x or 

@@ -89,7 +89,7 @@ func _ready() -> void:
 	player_exit_detector.scale = Vector2(1, 1) / scale
 	Singleton.CurrentLevelData.enemies_instanced += 1
 	time_alive += float(Singleton.CurrentLevelData.enemies_instanced) / 2.0
-	gravity = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].settings.gravity
+	gravity = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].gravity
 	
 	if scale.x < 0 and enabled and mode != 1 and layer == middle:
 		scale.x = abs(scale.x)

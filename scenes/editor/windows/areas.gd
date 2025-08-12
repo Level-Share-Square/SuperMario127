@@ -25,9 +25,9 @@ func reload_areas():
 	var index = 0
 	for area in Singleton.CurrentLevelData.level_data.areas:
 		var area_panel = load(AREA_PANEL_SCENE).instance()
-		area_panel.set_background(area.settings.sky, area.settings.background, area.settings.background_palette)
+		area_panel.set_background(area.sky, area.background, area.background_palette)
 		area_panel.set_id(index)
-		area_panel.set_name(area.settings.name)
+		area_panel.set_name(area.name)
 		v_box_container.add_child(area_panel)
 		index += 1
 	

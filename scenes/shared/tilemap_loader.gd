@@ -222,7 +222,7 @@ func update_tilemaps():
 
 #func _draw():
 #	for tilemap in [middle_tilemap_node]:
-#		var bounds = level_area.settings.bounds
+#		var bounds = level_area.bounds
 #		for x in range(bounds.position.x, bounds.end.x):
 #			for y in range(bounds.position.y, bounds.end.y):
 #				var tile = tilemap.get_cell(x, y)

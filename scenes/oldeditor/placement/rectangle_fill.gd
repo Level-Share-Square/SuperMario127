@@ -47,7 +47,7 @@ func set_tile(pos: Vector2):
 	var shared = editor.shared
 	
 	if not item.on_place(pos, editor.level_data, editor.level_area): return
-	if not editor.level_area.settings.bounds.has_point(pos+Vector2(0.5,0.5)): return
+	if not editor.level_area.bounds.has_point(pos+Vector2(0.5,0.5)): return
 	
 	
 	var tileset_id: int = item.tileset_id if placing_button == 0 else 0

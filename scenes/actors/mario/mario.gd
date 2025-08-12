@@ -413,7 +413,7 @@ func play_shine_sound() -> void:
 
 # warning-ignore: unused_argument
 func load_in(level_data : LevelData, level_area : LevelArea):
-	level_bounds = level_area.settings.bounds
+	level_bounds = level_area.bounds
 	for exception in collision_exceptions:
 		add_collision_exception_with(get_node(exception))
 	var _connect = player_collision.connect("body_entered", self, "player_hit")
@@ -455,7 +455,7 @@ func load_in(level_data : LevelData, level_area : LevelArea):
 	collision_raycast.disabled = false
 	left_collision.disabled = false
 	right_collision.disabled = false
-	gravity = level_area.settings.gravity
+	gravity = level_area.gravity
 	
 	# reset some stuff that can be changed by accident when using the editor
 	sprite.playing = true

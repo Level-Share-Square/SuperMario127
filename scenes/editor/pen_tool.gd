@@ -8,7 +8,7 @@ var tile_mode: bool = false
 
 
 func _ready():
-	level_bounds = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].settings.bounds
+	level_bounds = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].bounds
 
 
 func _update(delta: float):

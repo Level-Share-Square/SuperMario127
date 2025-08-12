@@ -72,7 +72,7 @@ func _ready():
 	if palette != 0:
 		$Sprite.texture = palette_textures[palette]
 	var editor = get_tree().current_scene
-	grav = editor.level_area.settings.gravity
+	grav = editor.level_area.gravity
 	if physics_enabled:
 		var _connect = waterdet.connect("area_entered", self, "water_entered")
 		var _connect2 = grounddet.connect("body_entered", self, "ground_entered")
@@ -255,7 +255,7 @@ func _physics_process(delta):
 		if waterdet.get_overlapping_areas().size() == 0:
 			in_water = false
 			
-		var bounds = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].settings.bounds 
+		var bounds = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].bounds 
 		if global_position.x < bounds.position.x * 32 - 300 or global_position.x > bounds.end.x * 32 + 300 or global_position.y > bounds.end.y * 32+ 300:
 			global_position = spawn_pos
 		var result_vector = global_position

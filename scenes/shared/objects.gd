@@ -27,7 +27,7 @@ func load_in(loaded_level_data : LevelData, loaded_level_area : LevelArea):
 		create_object(object, false)
 
 
-func set_property(object_node : GameObject, property, value):
+func set_property(object_node: GameObject, property, value):
 	object_node.set_property(property, value, true)
 
 

@@ -1,6 +1,12 @@
 extends EnemyState
 
 
+func _start() -> void:
+	._start()
+	
+	enemy.sprite.play("knockback")
+
+
 func _update(delta: float):
 	if enemy.velocity.length_squared() < 2500 and enemy.is_on_floor():
 		enemy.sprite.rotation = 0
