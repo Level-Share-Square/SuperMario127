@@ -2,16 +2,10 @@ class_name LevelLayer
 extends ParallaxBackground
 
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+onready var tile_map_manager: TileMapManager = $"%TileMapManager"
+onready var object_manager = $"%ObjectManager"
 
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func load_in(level_data: LevelData, level_area: LevelArea):
+	tile_map_manager.load_in(level_data, level_area)
+	object_manager.load_in(level_data, level_area)

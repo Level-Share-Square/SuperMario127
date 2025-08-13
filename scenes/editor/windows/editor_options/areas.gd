@@ -52,8 +52,7 @@ func create_area():
 		Singleton.CurrentLevelData.level_data.areas.append(area)
 		reload_areas()
 
-		new_area.disabled = (Singleton.CurrentLevelData.level_data.areas.size() == 32)
-		
+	new_area.disabled = (Singleton.CurrentLevelData.level_data.areas.size() == 32)
 
 
 func paste_area():

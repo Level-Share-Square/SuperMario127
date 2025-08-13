@@ -30,8 +30,6 @@ func _ready():
 		var tileset : LevelTileset = load("res://assets/tiles/" + tileset_id + "/resource.tres")
 		tileset_cache.append(tileset)
 		
-		var tileset_resource = middle_tilemap_node.tile_set
-		
 		var tile_variations = [
 			tileset.block_tile_id,
 			tileset.slab_tile_id,
