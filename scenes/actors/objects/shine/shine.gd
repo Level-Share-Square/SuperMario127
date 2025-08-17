@@ -385,9 +385,14 @@ func start_shine_dance() -> void:
 	character.set_state_by_name("NoActionState", get_physics_process_delta_time())
 
 	# make the character's victory shine sprite match this one
-	character.collected_shine.self_modulate = animated_sprite.self_modulate
 	character.collected_shine.frames = animated_sprite.frames
+	
+	character.collected_shine_recolorable.frames = recolorable_sprite.frames
+	character.collected_shine_recolorable.self_modulate = recolorable_sprite.self_modulate
+	character.collected_shine.visible = recolorable_sprite.visible
+	
 	character.collected_shine_particles.texture = particles.texture
+	character.collected_shine_particles.self_modulate = particles.self_modulate
 	
 	character.sprite.animation = "shineDance"
 	character.anim_player.play("shine_dance")

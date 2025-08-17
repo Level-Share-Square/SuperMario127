@@ -80,8 +80,8 @@ onready var bottom_pos : Node2D = $BottomPos
 onready var dialogue_focus : Node2D = $DialogueFocus
 onready var ring_particles : AnimatedSprite = $Particles/RingParticles
 onready var ring_particles_back : AnimatedSprite = $Particles/RingParticlesBack
-onready var collected_shine : AnimatedSprite = $CollectedShine # used for the shine dance animation, can be edited to reflect different shine colours or sprites or something
-onready var collected_shine_outline : AnimatedSprite = $CollectedShineOutline # this is separate from the recolorable part
+onready var collected_shine : AnimatedSprite = $CollectedShine # used for the shine dance animation
+onready var collected_shine_recolorable : AnimatedSprite = $CollectedShine/Recolorable # this is overlayed on top
 onready var collected_shine_particles : Particles2D = $CollectedShine/ShineParticles # same as above
 onready var collected_key : Sprite = $CollectedKey # used for the key dance animation, can be edited to reflect different key colours or sprites or something
 onready var collected_key_rays : ColorRect = $CollectedKey/VectorRays # same as above
@@ -704,11 +704,11 @@ func _process(delta: float) -> void:
 	if next_position:
 		position = position.linear_interpolate(next_position, fps_util.PHYSICS_DELTA * sync_interpolation_speed)
 	
-	collected_shine_outline.frame = collected_shine.frame
-	collected_shine_outline.position = collected_shine.position
-	collected_shine_outline.scale = collected_shine.scale
-	collected_shine_outline.visible = collected_shine.visible
-	collected_shine_outline.z_index = collected_shine.z_index
+	collected_shine_recolorable.frame = collected_shine.frame
+	collected_shine_recolorable.position = collected_shine.position
+	collected_shine_recolorable.scale = collected_shine.scale
+	collected_shine_recolorable.visible = collected_shine.visible
+	collected_shine_recolorable.z_index = collected_shine.z_index
 	
 	if state == get_state_node("NoActionState"):
 		return

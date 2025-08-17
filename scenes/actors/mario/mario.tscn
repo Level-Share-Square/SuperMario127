@@ -1,4 +1,4 @@
-[gd_scene load_steps=213 format=2]
+[gd_scene load_steps=196 format=2]
 
 [ext_resource path="res://scenes/actors/mario/animation_frames.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/actors/mario/states/Bounce.gd" type="Script" id=2]
@@ -60,7 +60,7 @@
 [ext_resource path="res://scenes/actors/mario/is_hurt_area.gd" type="Script" id=58]
 [ext_resource path="res://scenes/actors/mario/particles/area_of_attack_ring.png" type="Texture" id=59]
 [ext_resource path="res://scenes/actors/objects/cannon/nsmbwiiBobombCannon.wav" type="AudioStream" id=60]
-[ext_resource path="res://scenes/actors/objects/shine/texture_outline.png" type="Texture" id=61]
+[ext_resource path="res://scenes/actors/objects/shine/frames_recolorable.tres" type="SpriteFrames" id=61]
 [ext_resource path="res://scenes/actors/mario/powerups/Wing.gd" type="Script" id=62]
 [ext_resource path="res://scenes/actors/mario/FluddAnimSync.gd" type="Script" id=63]
 [ext_resource path="res://scenes/actors/mario/wing_frames_luigi.tres" type="SpriteFrames" id=64]
@@ -1626,78 +1626,6 @@ tracks/3/keys = {
 "values": [ 2 ]
 }
 
-[sub_resource type="AtlasTexture" id=66]
-atlas = ExtResource( 61 )
-region = Rect2( 0, 0, 27, 31 )
-
-[sub_resource type="AtlasTexture" id=67]
-atlas = ExtResource( 61 )
-region = Rect2( 27, 0, 27, 31 )
-
-[sub_resource type="AtlasTexture" id=68]
-atlas = ExtResource( 61 )
-region = Rect2( 54, 0, 27, 31 )
-
-[sub_resource type="AtlasTexture" id=69]
-atlas = ExtResource( 61 )
-region = Rect2( 81, 0, 27, 31 )
-
-[sub_resource type="AtlasTexture" id=70]
-atlas = ExtResource( 61 )
-region = Rect2( 108, 0, 27, 31 )
-
-[sub_resource type="AtlasTexture" id=71]
-atlas = ExtResource( 61 )
-region = Rect2( 135, 0, 27, 31 )
-
-[sub_resource type="AtlasTexture" id=72]
-atlas = ExtResource( 61 )
-region = Rect2( 162, 0, 27, 31 )
-
-[sub_resource type="AtlasTexture" id=73]
-atlas = ExtResource( 61 )
-region = Rect2( 189, 0, 27, 31 )
-
-[sub_resource type="AtlasTexture" id=74]
-atlas = ExtResource( 61 )
-region = Rect2( 0, 31, 27, 31 )
-
-[sub_resource type="AtlasTexture" id=75]
-atlas = ExtResource( 61 )
-region = Rect2( 27, 31, 27, 31 )
-
-[sub_resource type="AtlasTexture" id=76]
-atlas = ExtResource( 61 )
-region = Rect2( 54, 31, 27, 31 )
-
-[sub_resource type="AtlasTexture" id=77]
-atlas = ExtResource( 61 )
-region = Rect2( 81, 31, 27, 31 )
-
-[sub_resource type="AtlasTexture" id=78]
-atlas = ExtResource( 61 )
-region = Rect2( 108, 31, 27, 31 )
-
-[sub_resource type="AtlasTexture" id=79]
-atlas = ExtResource( 61 )
-region = Rect2( 135, 31, 27, 31 )
-
-[sub_resource type="AtlasTexture" id=80]
-atlas = ExtResource( 61 )
-region = Rect2( 162, 31, 27, 31 )
-
-[sub_resource type="AtlasTexture" id=81]
-atlas = ExtResource( 61 )
-region = Rect2( 189, 31, 27, 31 )
-
-[sub_resource type="SpriteFrames" id=82]
-animations = [ {
-"frames": [ SubResource( 66 ), SubResource( 67 ), SubResource( 68 ), SubResource( 69 ), SubResource( 70 ), SubResource( 71 ), SubResource( 72 ), SubResource( 73 ), SubResource( 74 ), SubResource( 75 ), SubResource( 76 ), SubResource( 77 ), SubResource( 78 ), SubResource( 79 ), SubResource( 80 ), SubResource( 81 ) ],
-"loop": true,
-"name": "default",
-"speed": 8.0
-} ]
-
 [sub_resource type="CanvasItemMaterial" id=83]
 particles_animation = true
 particles_anim_h_frames = 5
@@ -1722,7 +1650,7 @@ shader = ExtResource( 86 )
 shader_param/ray_count = 4
 shader_param/ray_distance = 0.4
 shader_param/ray_seperation_degrees = 22.0
-shader_param/rotation = 4.41738
+shader_param/rotation = 3.97129
 
 [sub_resource type="RectangleShape2D" id=85]
 extents = Vector2( 8, 18 )
@@ -2533,20 +2461,18 @@ anims/thinking = SubResource( 101 )
 anims/triple_jump = SubResource( 92 )
 anims/triple_jump_right = SubResource( 94 )
 
-[node name="CollectedShineOutline" type="AnimatedSprite" parent="."]
-visible = false
-position = Vector2( -1, 20 )
-z_index = -5
-frames = SubResource( 82 )
-playing = true
-
 [node name="CollectedShine" type="AnimatedSprite" parent="."]
-visible = false
 position = Vector2( -1, 20 )
 scale = Vector2( 0.1, 0.1 )
 z_index = -5
 frames = ExtResource( 55 )
 playing = true
+
+[node name="Recolorable" type="AnimatedSprite" parent="CollectedShine"]
+visible = false
+scale = Vector2( 1, 1 )
+frames = ExtResource( 61 )
+centered = false
 
 [node name="ShineParticles" type="Particles2D" parent="CollectedShine"]
 show_behind_parent = true
