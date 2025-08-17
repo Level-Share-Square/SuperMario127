@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://scenes/actors/objects/enemy/enemy_base.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/actors/objects/bully/states/knockback_state.gd" type="Script" id=2]
@@ -10,10 +10,11 @@
 [ext_resource path="res://scenes/actors/objects/bully/states/die_state.gd" type="Script" id=8]
 [ext_resource path="res://scenes/actors/objects/bully/bully_enemy.gd" type="Script" id=9]
 [ext_resource path="res://scenes/actors/objects/bully/states/chase_state.gd" type="Script" id=10]
-[ext_resource path="res://scenes/actors/objects/goomba/recolorable_frames.tres" type="SpriteFrames" id=11]
+[ext_resource path="res://scenes/actors/mario/FluddAnimSync.gd" type="Script" id=11]
 [ext_resource path="res://scenes/actors/objects/goomba/sounds/poof.wav" type="AudioStream" id=12]
 [ext_resource path="res://scenes/actors/objects/goomba/sounds/stomp.wav" type="AudioStream" id=13]
 [ext_resource path="res://scenes/actors/objects/goomba/animations/poof.png" type="Texture" id=14]
+[ext_resource path="res://scenes/actors/objects/bully/animations/normal_horns_recolorable.tres" type="SpriteFrames" id=15]
 
 [sub_resource type="CapsuleShape2D" id=64]
 height = 2.0
@@ -362,6 +363,11 @@ script = ExtResource( 8 )
 can_attack = false
 can_be_hurt = false
 
+[node name="InstaDieState" type="Node2D" parent="States" index="5"]
+script = ExtResource( 8 )
+can_attack = false
+can_be_hurt = false
+
 [node name="Damage" parent="." index="6"]
 position = Vector2( 0, 1 )
 script = ExtResource( 3 )
@@ -401,10 +407,11 @@ offset = Vector2( 0, -7 )
 
 [node name="RecolorSprite" type="AnimatedSprite" parent="AnimatedSprite" index="0"]
 visible = false
-self_modulate = Color( 1, 0.4, 0.333333, 1 )
-frames = ExtResource( 11 )
+self_modulate = Color( 0, 0.929412, 1, 1 )
+frames = ExtResource( 15 )
 animation = "idle"
 offset = Vector2( 0, -7 )
+script = ExtResource( 11 )
 
 [node name="DialogueDetector" parent="AnimatedSprite" index="1"]
 visible = false

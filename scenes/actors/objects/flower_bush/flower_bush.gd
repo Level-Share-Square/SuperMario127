@@ -13,6 +13,7 @@ func _ready():
 	if enabled:
 		interaction_area.connect("body_entered", self, "start_anim")
 
+
 func _process(delta):
 	if enabled:
 		if !is_equal_approx(displacement_spring_anim_power, 0):
@@ -25,6 +26,7 @@ func _process(delta):
 		else:
 			sprite.scale = Vector2.ONE
 
+
 func start_anim(body):
 	var entrance_velocity := Vector2.ZERO
 	
@@ -32,8 +34,6 @@ func start_anim(body):
 		entrance_velocity = body.velocity
 	elif "velocity" in body.get_parent():
 		entrance_velocity = body.get_parent().velocity
-	
-	
 	
 	if sign(entrance_velocity.x) == 0:
 		set_scale_spring(8)

@@ -41,6 +41,10 @@ func ground_pound(body: PhysicsBody2D = null) -> void:
 	enemy.set_state_by_name("KnockbackState")
 
 
+func magicked(body: PhysicsBody2D = null) -> void:
+	pass
+
+
 func dived(player: Character):
 	damage_player(player)
 	

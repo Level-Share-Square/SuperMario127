@@ -1,13 +1,14 @@
 class_name TileMapManager
 extends TileMap
 
+
 ## Replace all instances of this in functions with layer_data.tile_data and
 ## remove this once we're done testing.
 var debug_tile_data: Dictionary = {
-	Vector3(0, 0, 8): Vector3(1, 0, 0),
-	Vector3(2, 1, 4): Vector3(2, 0, 1),
-	Vector3(1, 2, 6): Vector3(1, 0, 2),
-	Vector3(7, 2, 6): Vector3(1, 0, 1),
+	Vector2(0, 0): hash_tile_data(1, 0, 0),
+	Vector2(2, 1): hash_tile_data(2, 0, 1),
+	Vector2(1, 2): hash_tile_data(1, 0, 2),
+	Vector2(7, 2): hash_tile_data(1, 0, 1),
 }
 
 var tileset_cache := []
@@ -16,6 +17,21 @@ var tileset_palettes := []
 var level_data: LevelData
 var area_data: LevelArea
 var layer_data: LevelLayerData
+
+
+static func hash_tile_data(tileset: int, tile: int, palette: int) -> int:
+	var t: int = tileset << 48
+	var v: int = tile << 32
+	var p: int = palette << 16
+	return t | v | p
+
+static func fix_hashed_tile_data(value: int) -> PoolIntArray:
+	var data: PoolIntArray = [0, 0, 0]
+	data[0] = value >> 48 & 0xFFFF
+	data[1] = value >> 32 & 0xFFFF
+	data[2] = value >> 16 & 0xFFFF
+	
+	return data
 
 
 func _ready():
@@ -27,110 +43,62 @@ func _ready():
 	
 	tileset_palettes = preload("res://generation/tileset_palettes.res").tileset_palettes
 	
-	load_tile_strips(debug_tile_data)
+	_debug_populate_tile_data(Rect2(0, 0, 1500, 1500))
+	
+#	load_tiles(debug_tile_data)
 
 
 func _unhandled_input(event):
 	if event.is_action_pressed("LMB"):
-		set_tile(get_global_mouse_position() / 32, Vector3(1, 0, 0))
+		set_tile(get_global_mouse_position() / 32, PoolIntArray([1, 0, 0]), true)
 	elif event.is_action_pressed("RMB"):
-		set_tile(get_global_mouse_position() / 32, Vector3.ZERO)
+		set_tile(get_global_mouse_position() / 32, PoolIntArray([0, 0, 0]), true)
 
 
-func load_tile_strips(data: Dictionary):
-	for strip in data:
-		var tile_data: Vector3 = data.get(strip)
-		for offset in range(strip.z):
-			var tile_pos := Vector2(strip.x + offset, strip.y)
-			set_tile(tile_pos, tile_data)
+func _debug_populate_tile_data(test_rect):
+	for x in range(test_rect.position.x, test_rect.size.x + test_rect.position.x):
+		for y in range(test_rect.position.y, test_rect.size.y + test_rect.position.y):
+			print("%s, %s" % [x, y])
+			set_tile(Vector2(x, y), [1, 0, 0])
+
+
+func load_tiles(data: Dictionary):
+	for pos in data:
+		set_tile(pos, fix_hashed_tile_data(data[pos]), false)
 	
 	update_dirty_quadrants()
 
 
-func set_tile(tile_pos: Vector2, tile_data: Vector3):
-	if tile_data.x == 0:
-		_remove_tile(tile_pos)
+func set_tile(tile_pos: Vector2, data: PoolIntArray, modify_data: bool = false):
+	if data[0] == 0:
+		_remove_tile(tile_pos, modify_data)
 	else:
-		_place_tile(tile_pos, tile_data)
+		_place_tile(tile_pos, data, modify_data)
 
 
-func _place_tile(tile_pos: Vector2, tile_data: Vector3):
-	var raw_id = get_raw_tile_id(tile_data.x, tile_data.y, tile_data.z)
+func _place_tile(tile_pos: Vector2, data: PoolIntArray, modify_data: bool = false):
+	var raw_id = get_raw_tile_id(data[0], data[1], data[2])
 	set_cellv(tile_pos, raw_id)
 	update_autotile(tile_pos)
 	
-	for strip in debug_tile_data:
-		if strip.y == tile_pos.y:
-			var neighbors: Dictionary = get_identical_neighbors(tile_pos, tile_data)
-			if neighbors.size() == 2:
-				for neighbor in neighbors:
-					debug_tile_data.erase(neighbor)
-				
-				debug_tile_data.merge(
-					merge_tile_strip(tile_pos, neighbors),
-					true
-				)
-				return
+	if not modify_data:
+		return
 	
-	debug_tile_data.merge({Vector3(tile_pos.x, tile_pos.y, 1): Vector3(1, 0, 0)})
+	if debug_tile_data.has(tile_pos):
+		debug_tile_data[tile_pos] = data
+	else:
+		debug_tile_data.get_or_add(tile_pos, hash_tile_data(data[0], data[1], data[2]))
 
 
-func get_identical_neighbors(tile_pos: Vector2, tile_data: Vector3) -> Dictionary:
-	var neighbors: Dictionary = {}
-	if get_tile_at_position(Vector2(tile_pos.x - 1, tile_pos.y)) == tile_data:
-		var neighbor_left: Dictionary = get_strip_at_position(Vector2(tile_pos.x - 1, tile_pos.y))
-		neighbors.merge(neighbor_left)
-	
-	if get_tile_at_position(Vector2(tile_pos.x + 1, tile_pos.y)) == tile_data:
-		var neighbor_right: Dictionary = get_strip_at_position(Vector2(tile_pos.x + 1, tile_pos.y))
-		neighbors.merge(neighbor_right)
-	
-	return neighbors
-
-
-func _remove_tile(tile_pos: Vector2):
+func _remove_tile(tile_pos: Vector2, modify_data: bool = false):
 	set_cellv(tile_pos, INVALID_CELL)
 	update_autotile(tile_pos)
 	
-	for strip in debug_tile_data:
-		if strip.y == tile_pos.y:
-			for offset in range(strip.z):
-				var strip_tile_pos := Vector2(strip.x + offset, strip.y)
-				if strip_tile_pos.x == tile_pos.x:
-					debug_tile_data.merge(
-						split_tile_strip(tile_pos, strip),
-						true
-					)
-					return
+	if not modify_data:
+		return
 	
-	debug_tile_data.erase(Vector3(tile_pos.x, tile_pos.y, 1))
-
-
-func merge_tile_strip(tile_pos: Vector2, strips: Dictionary) -> Dictionary:
-	if not strips.size() == 2:
-		printerr("Cannot merge more than two tile strips!")
-		return {}
-	
-	var leftmost_pos: Vector2
-	var merged_length: int = 1
-	var tile_data: Vector3
-	for strip in strips:
-		if leftmost_pos.x > strip.x:
-			leftmost_pos = Vector2(strip.x, strip.y)
-		
-		merged_length += strip.z
-	
-	var merged_strip: Dictionary = {
-		Vector3(leftmost_pos.x, leftmost_pos.y, merged_length): tile_data
-	}
-	
-	return merged_strip
-
-
-func split_tile_strip(tile_pos: Vector2, strip: Dictionary) -> Dictionary:
-	
-	
-	return {}
+	if debug_tile_data.has(tile_pos):
+		debug_tile_data.erase(tile_pos)
 
 
 func update_autotile(tile_pos: Vector2, use_godot_autotile: bool = true):
@@ -141,22 +109,8 @@ func update_autotile(tile_pos: Vector2, use_godot_autotile: bool = true):
 		pass
 
 
-func get_strip_at_position(tile_pos: Vector2) -> Dictionary:
-	for strip in debug_tile_data:
-		if strip.y == tile_pos.y:
-			if tile_pos.x >= strip.x and tile_pos.x < strip.x + strip.z:
-				return {strip: debug_tile_data.get(strip)}
-	
-	return {}
-
-
-func get_tile_at_position(tile_pos: Vector2) -> Vector3:
-	for strip in debug_tile_data:
-		if strip.y == tile_pos.y:
-			if tile_pos.x >= strip.x and tile_pos.x < strip.x + strip.z:
-				return debug_tile_data.get(strip)
-	
-	return Vector3.ZERO
+func get_tile_at_position(tile_pos: Vector2) -> PoolIntArray:
+	return debug_tile_data.get(tile_pos, [0, 0, 0])
 
 
 func get_raw_tile_id(tileset_id: int, tile_id: int, palette_id: int = 0) -> int:
