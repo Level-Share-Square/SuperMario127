@@ -3,8 +3,14 @@ extends VBoxContainer
 const HIDDEN_TITLE: String = "???"
 
 const SHINE_SCENE: PackedScene = preload("res://scenes/menu/pause/shine_map/shine.tscn")
-const FRAMES_COLLECTED: SpriteFrames = preload("res://scenes/actors/objects/shine/frames_collected.tres")
-const FRAMES_RECOLORABLE: SpriteFrames = preload("res://scenes/actors/objects/shine/frames_recolorable.tres")
+
+const FRAMES_NORMAL: Resource = preload("res://scenes/actors/objects/shine/frames_normal.tres")
+const FRAMES_RECOLORABLE: Resource = preload("res://scenes/actors/objects/shine/frames_recolorable.tres")
+const FRAMES_COLLECTED: Resource = preload("res://scenes/actors/objects/shine/frames_collected.tres")
+
+const FRAMES_POCKET: Resource = preload("res://scenes/actors/objects/shine/frames_pocket.tres")
+const FRAMES_POCKET_RECOLORABLE: Resource = preload("res://scenes/actors/objects/shine/frames_pocket_recolorable.tres")
+const FRAMES_POCKET_COLLECTED: Resource = preload("res://scenes/actors/objects/shine/frames_pocket_collected.tres")
 
 const STAR_COIN_SCENE: PackedScene = preload("res://scenes/menu/pause/shine_map/star_coin.tscn")
 const COIN_FRAMES_COLLECTED: SpriteFrames = preload("res://scenes/actors/objects/star_coin/collected_frames.tres")
@@ -47,19 +53,22 @@ func populate(level_dict: Dictionary) -> void:
 func add_shine(is_collected: bool, shine_dictionary: Dictionary, time_score: int, is_hidden: bool):
 	var shine: Control = SHINE_SCENE.instance()
 	var sprite: AnimatedSprite = shine.get_node("AnimatedSprite")
-	var outline: AnimatedSprite = shine.get_node("AnimatedSprite/Outline")
+	var recolorable: AnimatedSprite = shine.get_node("AnimatedSprite/Recolorable")
+	var do_kick_out: bool = shine_dictionary.get("do_kick_out", true)
 	
 	if is_collected:
+		sprite.frames = FRAMES_NORMAL if do_kick_out else FRAMES_POCKET
 		# Shine color is stored as rgba32 from a json, and json converts stuff to float so it has to be converted twice
 		var shine_color: Color = Color(int(shine_dictionary.get("color", Color.yellow.to_rgba32())))
 		if shine_color != Color.yellow:
-			sprite.frames = FRAMES_RECOLORABLE
-			sprite.self_modulate = shine_color
+			recolorable.frames = FRAMES_RECOLORABLE if do_kick_out else FRAMES_POCKET_RECOLORABLE
+			recolorable.self_modulate = shine_color
+			recolorable.show()
 	else:
-		sprite.frames = FRAMES_COLLECTED
+		sprite.frames = FRAMES_COLLECTED if do_kick_out else FRAMES_POCKET_COLLECTED
 	
 	sprite.play("default")
-	outline.play("default")
+	recolorable.play("default")
 	
 	if is_hidden:
 		shine.hint_tooltip = "???"

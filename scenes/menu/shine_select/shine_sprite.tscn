@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://scenes/actors/objects/shine/frames_outline.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://scenes/actors/objects/shine/frames_recolorable.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/actors/objects/shine/frames_normal.tres" type="SpriteFrames" id=2]
 [ext_resource path="res://scenes/oldmenu/shine_select_screen/shine_sprite.gd" type="Script" id=3]
 
@@ -46,7 +46,7 @@ tracks/1/keys = {
 "values": [ 1.0, 4.0 ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("ShineOutline:speed_scale")
+tracks/2/path = NodePath("ShineRecolorable:speed_scale")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -59,11 +59,12 @@ tracks/2/keys = {
 }
 
 [node name="ShineBody" type="AnimatedSprite"]
-scale = Vector2( 2, 2 )
+scale = Vector2( 4, 4 )
 frames = ExtResource( 2 )
 script = ExtResource( 3 )
 
-[node name="ShineOutline" type="AnimatedSprite" parent="."]
+[node name="ShineRecolorable" type="AnimatedSprite" parent="."]
+visible = false
 frames = ExtResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

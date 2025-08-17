@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scenes/actors/objects/shine/frames_normal.tres" type="SpriteFrames" id=1]
-[ext_resource path="res://scenes/actors/objects/shine/frames_outline.tres" type="SpriteFrames" id=2]
+[ext_resource path="res://scenes/actors/objects/shine/frames_recolorable.tres" type="SpriteFrames" id=2]
 [ext_resource path="res://scenes/menu/pause/shine_map/custom_tooltip.gd" type="Script" id=4]
 
 [node name="Shine" type="Control"]
@@ -15,6 +15,7 @@ position = Vector2( 2.5, 0 )
 frames = ExtResource( 1 )
 centered = false
 
-[node name="Outline" type="AnimatedSprite" parent="AnimatedSprite"]
+[node name="Recolorable" type="AnimatedSprite" parent="AnimatedSprite"]
+visible = false
 frames = ExtResource( 2 )
 centered = false

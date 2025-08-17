@@ -1,4 +1,4 @@
-[gd_scene load_steps=275 format=2]
+[gd_scene load_steps=274 format=2]
 
 [ext_resource path="res://scenes/menu/theme.tres" type="Theme" id=1]
 [ext_resource path="res://scenes/menu/level_portal/level_grid.gd" type="Script" id=2]
@@ -27,8 +27,7 @@
 [ext_resource path="res://scenes/menu/level_portal/pages.gd" type="Script" id=25]
 [ext_resource path="res://scenes/menu/level_portal/http/http_images.gd" type="Script" id=26]
 [ext_resource path="res://scenes/menu/level_portal/page_button.tscn" type="PackedScene" id=27]
-[ext_resource path="res://scenes/actors/objects/shine/frames_normal.tres" type="SpriteFrames" id=28]
-[ext_resource path="res://scenes/actors/objects/shine/frames_outline.tres" type="SpriteFrames" id=29]
+[ext_resource path="res://scenes/actors/objects/shine/frames_normal.tres" type="SpriteFrames" id=29]
 [ext_resource path="res://scenes/menu/level_portal/go_to_page.gd" type="Script" id=30]
 [ext_resource path="res://shaders/outline2.shader" type="Shader" id=31]
 [ext_resource path="res://scenes/menu/level_portal/default_thumb.png" type="Texture" id=32]
@@ -2003,7 +2002,7 @@ margin_right = 294.0
 margin_bottom = 24.0
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Loading/LoadSprite"]
-frames = ExtResource( 28 )
+frames = ExtResource( 29 )
 playing = true
 centered = false
 offset = Vector2( 0, -8 )
@@ -3060,12 +3059,6 @@ margin_right = 116.0
 margin_bottom = 24.0
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Subscreens/Login/MarginContainer/LoginPanel/MarginContainer/PleaseWait/HBoxContainer/Sprite"]
-frames = ExtResource( 28 )
-playing = true
-centered = false
-offset = Vector2( 0, -8 )
-
-[node name="Outline" type="AnimatedSprite" parent="Subscreens/Login/MarginContainer/LoginPanel/MarginContainer/PleaseWait/HBoxContainer/Sprite/AnimatedSprite"]
 frames = ExtResource( 29 )
 playing = true
 centered = false
@@ -3220,10 +3213,9 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-margin_left = 640.0
-margin_top = 32.0
-margin_right = 768.0
-margin_bottom = 464.0
+margin_left = -128.0
+margin_top = -184.0
+margin_bottom = 248.0
 rect_min_size = Vector2( 128, 0 )
 mouse_filter = 2
 script = ExtResource( 17 )

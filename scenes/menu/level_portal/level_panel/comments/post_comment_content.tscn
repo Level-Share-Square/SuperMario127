@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://scenes/menu/level_portal/default_icon.png" type="Texture" id=1]
 [ext_resource path="res://shaders/rounded_corners.gdshader" type="Shader" id=2]
@@ -8,7 +8,6 @@
 [ext_resource path="res://scenes/menu/button_scripts/button_sound.gd" type="Script" id=6]
 [ext_resource path="res://assets/sounds/hover.wav" type="AudioStream" id=7]
 [ext_resource path="res://assets/sounds/click2.wav" type="AudioStream" id=8]
-[ext_resource path="res://scenes/actors/objects/shine/frames_outline.tres" type="SpriteFrames" id=9]
 [ext_resource path="res://scenes/actors/objects/shine/frames_normal.tres" type="SpriteFrames" id=10]
 [ext_resource path="res://scenes/menu/text_edit_unfocus.gd" type="Script" id=11]
 
@@ -66,7 +65,7 @@ expand = true
 [node name="AuthorName" type="Label" parent="Info"]
 unique_name_in_owner = true
 margin_left = 28.0
-margin_top = 4.0
+margin_top = 3.0
 margin_right = 90.0
 margin_bottom = 20.0
 custom_fonts/font = ExtResource( 3 )
@@ -76,15 +75,15 @@ valign = 1
 
 [node name="Padding" type="Control" parent="Info"]
 margin_left = 94.0
-margin_right = 266.0
+margin_right = 256.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
 
 [node name="Label" type="Label" parent="Info"]
 unique_name_in_owner = true
 modulate = Color( 0.721569, 0.803922, 1, 1 )
-margin_left = 270.0
-margin_top = 4.0
+margin_left = 260.0
+margin_top = 3.0
 margin_right = 452.0
 margin_bottom = 20.0
 custom_fonts/font = ExtResource( 3 )
@@ -96,7 +95,7 @@ valign = 1
 unique_name_in_owner = true
 margin_top = 28.0
 margin_right = 452.0
-margin_bottom = 148.0
+margin_bottom = 149.0
 custom_constants/separation = 4
 
 [node name="PanelContainer" type="PanelContainer" parent="Edit"]
@@ -133,12 +132,12 @@ script = ExtResource( 11 )
 [node name="HBoxContainer2" type="HBoxContainer" parent="Edit"]
 margin_top = 100.0
 margin_right = 452.0
-margin_bottom = 120.0
+margin_bottom = 121.0
 custom_constants/separation = 2
 
 [node name="Post" type="Button" parent="Edit/HBoxContainer2"]
-margin_right = 37.0
-margin_bottom = 20.0
+margin_right = 41.0
+margin_bottom = 21.0
 theme_type_variation = "TransparentButton"
 text = " Post "
 script = ExtResource( 6 )
@@ -195,9 +194,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Sending/CenterContainer"]
-margin_left = 168.0
-margin_top = 36.0
-margin_right = 284.0
+margin_left = 167.0
+margin_top = 35.0
+margin_right = 285.0
 margin_bottom = 60.0
 alignment = 1
 
@@ -213,12 +212,6 @@ margin_bottom = 24.0
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Sending/CenterContainer/HBoxContainer/Sprite"]
 frames = ExtResource( 10 )
-playing = true
-centered = false
-offset = Vector2( 0, -8 )
-
-[node name="Outline" type="AnimatedSprite" parent="Sending/CenterContainer/HBoxContainer/Sprite/AnimatedSprite"]
-frames = ExtResource( 9 )
 playing = true
 centered = false
 offset = Vector2( 0, -8 )

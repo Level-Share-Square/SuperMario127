@@ -4,70 +4,78 @@
 # Prvent pausing after collecting a star
 extends GameObject
 
-export var normal_frames : SpriteFrames
-export var recolorable_frames : SpriteFrames
-export var collected_frames : SpriteFrames
+export var normal_frames: SpriteFrames
+export var recolorable_frames: SpriteFrames
+export var collected_frames: SpriteFrames
 
-export var normal_particles : StreamTexture
-export var recolorable_particles : StreamTexture
-export var collected_particles : StreamTexture
+export var pocket_frames: SpriteFrames
+export var pocket_recolorable_frames: SpriteFrames
+export var pocket_collected_frames: SpriteFrames
 
-export var normal_spawn_particles : Texture
-export var recolorable_spawn_particles : Texture
-export var collected_spawn_particles : Texture
+export var normal_particles: StreamTexture
+export var recolorable_particles: StreamTexture
+export var collected_particles: StreamTexture
 
-onready var animated_sprite : AnimatedSprite = $AnimatedSprite
-onready var outline_sprite : AnimatedSprite = $AnimatedSprite/AnimatedSpriteOutline
+export var normal_spawn_particles: Texture
+export var recolorable_spawn_particles: Texture
+export var collected_spawn_particles: Texture
+
+onready var animated_sprite: AnimatedSprite = $AnimatedSprite
+onready var recolorable_sprite: AnimatedSprite = $AnimatedSprite/AnimatedSpriteRecolorable
 onready var vector_rays: ColorRect = $RaysContainer/VectorRays
 onready var vector_rays_small: ColorRect = $RaysContainer/VectorRaysSmall
-onready var particles : Particles2D = $AnimatedSprite/Particles2D
-onready var spawn_particles : Particles2D = $SpawnParticles
-onready var ghost : Sprite = $Ghost
-onready var area : Area2D = $Area2D
-onready var unpause_timer : Timer = $UnpauseTimer
-onready var collect_sound : AudioStreamPlayer = $CollectSound
+onready var particles: Particles2D = $AnimatedSprite/Particles2D
+onready var spawn_particles: Particles2D = $SpawnParticles
+onready var ghost: Sprite = $Ghost
+onready var area: Area2D = $Area2D
+onready var unpause_timer: Timer = $UnpauseTimer
+onready var collect_sound: AudioStreamPlayer = $CollectSound
 onready var appear_sound = $AppearSound
-onready var ambient_sound : AudioStreamPlayer2D = $AmbientSound
-onready var animation_player : AnimationPlayer = $AnimationPlayer
-onready var current_scene : Node = get_tree().current_scene
-onready var shine_get : Node = current_scene.get_node_or_null("%ShineGet")
-onready var transitions : Node = Singleton.SceneTransitions
-onready var mode_switcher_button : Node = Singleton.ModeSwitcher.get_node("ModeSwitcherButton")
+onready var ambient_sound: AudioStreamPlayer2D = $AmbientSound
+onready var animation_player: AnimationPlayer = $AnimationPlayer
+onready var current_scene: Node = get_tree().current_scene
+onready var shine_get: Node = current_scene.get_node_or_null("%ShineGet")
+onready var transitions: Node = Singleton.SceneTransitions
+onready var mode_switcher_button: Node = Singleton.ModeSwitcher.get_node("ModeSwitcherButton")
 
 const UNPAUSE_TIMER_LENGTH = 3.35
 
-const COURSE_CLEAR_MUSIC_ID := 28
-const COURSE_CLEAR_MUSIC_VOLUME := -2.25
-const SHINE_DANCE_END_DELAY := 0.65
-const MUSIC_TRANSITION_TIME_PLAY_MODE := 0.5
+const COURSE_CLEAR_MUSIC_ID:= 28
+const POCKET_CLEAR_MUSIC_ID:= 71
+const COURSE_CLEAR_MUSIC_VOLUME:= -2.25
+const SHINE_DANCE_END_DELAY:= 0.65
+const MUSIC_TRANSITION_TIME_PLAY_MODE:= 0.5
+
+const SINE_AMOUNT: float = 2.0
+const SINE_SPEED: float = 1.5
 
 enum ActivateAnimations {NORMAL, SKIP, SHORT}
 
-var collected := false
-var character : Character
+var collected:= false
+var character: Character
 
-var anim_damp := 160
-const NORMAL_COLOR := Color(1, 1, 0)
-const NORMAL_RAY_COLOR := Color8(227, 205, 10)
-const WHITE_COLOR := Color(1, 1, 1)
+var anim_damp:= 160
+const NORMAL_COLOR:= Color(1, 1, 0)
+const NORMAL_RAY_COLOR:= Color8(227, 205, 10)
+const WHITE_COLOR:= Color(1, 1, 1)
 
-var last_color : Color
-var is_blue := false
+var last_color: Color
+var is_blue:= false
 var send_score = false
-var purple_starbits_activate := false
+var purple_starbits_activate:= false
 
-var title := "Unnamed Shine"
-var description := ""
-var show_in_menu := true
-var activated := true
-var red_coins_activate := false
-var shine_shards_activate := false
-var required_purples := 0
-var color := Color(1, 1, 0)
-var id := 0
-var do_kick_out := true
-var sort_position : int = 0
-var activation_tag : String = "empty"
+var title:= "Unnamed Shine"
+var description:= ""
+var show_in_menu:= true
+var activated:= true
+var red_coins_activate:= false
+var shine_shards_activate:= false
+var required_purples:= 0
+var color:= Color(1, 1, 0)
+var id:= 0
+var do_kick_out:= true
+var sort_position: int = 0
+var activation_tag: String = "empty"
 var entrance_area: int = 0
 var entrance_tag: String = "_entrance"
 
@@ -149,9 +157,13 @@ func on_place():
 func update_color(key, value):
 	if key == "color":
 		if !is_blue:
+			animated_sprite.frames = normal_frames if do_kick_out else pocket_frames
+			animated_sprite.self_modulate = WHITE_COLOR
+			
 			if color != NORMAL_COLOR:
-				animated_sprite.self_modulate = color
-				animated_sprite.frames = recolorable_frames
+				recolorable_sprite.self_modulate = color
+				recolorable_sprite.frames = recolorable_frames if do_kick_out else pocket_recolorable_frames
+				recolorable_sprite.show()
 				
 				particles.texture = recolorable_particles
 				
@@ -162,8 +174,7 @@ func update_color(key, value):
 				vector_rays.color = color
 				vector_rays.color.s *= 3
 			else:
-				animated_sprite.self_modulate = WHITE_COLOR
-				animated_sprite.frames = normal_frames
+				recolorable_sprite.hide()
 				
 				particles.texture = normal_particles
 				
@@ -173,7 +184,8 @@ func update_color(key, value):
 				vector_rays.visible = true if do_kick_out else false
 		else:
 			animated_sprite.self_modulate = WHITE_COLOR
-			animated_sprite.frames = collected_frames
+			animated_sprite.frames = collected_frames if do_kick_out else pocket_collected_frames
+			recolorable_sprite.hide()
 			
 			particles.texture = collected_particles
 			
@@ -194,7 +206,7 @@ func update_color(key, value):
 			vector_rays.color = NORMAL_RAY_COLOR
 
 
-func _physics_process(_delta : float) -> void:
+func _physics_process(_delta: float) -> void:
 	animated_sprite.flip_h = !do_kick_out
 	if !animated_sprite.playing: #looks like if it is not set to playing, some manual animation is done instead
 		#warning-ignore:integer_division
@@ -230,6 +242,13 @@ func _physics_process(_delta : float) -> void:
 		
 		if character.is_grounded():
 			start_shine_dance() #shine dance setup also disables physics process, so it's only called once
+
+	if do_kick_out:
+		animated_sprite.offset = Vector2.ZERO
+		recolorable_sprite.offset = Vector2.ZERO
+	else:
+		animated_sprite.offset.y = sin(Time.get_unix_time_from_system() * SINE_SPEED) * SINE_AMOUNT
+		recolorable_sprite.offset = animated_sprite.offset
 
 func activate_shine(animation: int, temporary: bool = false, manual_start_cutscene: bool = false) -> void:
 	pause_mode = PAUSE_MODE_INHERIT
@@ -295,7 +314,7 @@ func update_ambient_noise() -> void:
 	ambient_sound.playing = activated and !is_blue
 
 
-func collect(body : PhysicsBody2D) -> void:
+func collect(body: PhysicsBody2D) -> void:
 	if activated and enabled and !collected and body.name.begins_with("Character") and body.controllable:
 		
 		var timer_manager = get_node("/root").get_node("Player").get_timer_manager()
@@ -375,14 +394,14 @@ func start_shine_dance() -> void:
 	
 	
 	shine_get.appear(title)
-	Singleton.Music.play_temporary_music(COURSE_CLEAR_MUSIC_ID, COURSE_CLEAR_MUSIC_VOLUME)
+	Singleton.Music.play_temporary_music(COURSE_CLEAR_MUSIC_ID if do_kick_out else POCKET_CLEAR_MUSIC_ID, COURSE_CLEAR_MUSIC_VOLUME)
 	
 	# warning-ignore: return_value_discarded
 	character.anim_player.connect("animation_finished", self, "character_shine_dance_finished", [], CONNECT_ONESHOT)
 	
 	set_physics_process(false)
 
-func character_shine_dance_finished(_animation : Animation) -> void:
+func character_shine_dance_finished(_animation: Animation) -> void:
 	# delay a bit once the animation is done before starting the fadeout/transition back to the editor
 	yield(get_tree().create_timer(SHINE_DANCE_END_DELAY), "timeout") 
 	#bus is changed based on whether or not you are in the player, or editor, this makes sure music 
@@ -418,7 +437,7 @@ func character_shine_dance_finished(_animation : Animation) -> void:
 		character.anim_player.connect("animation_finished", self, "emit_signal", ["shine_dance_end"], CONNECT_ONESHOT)
 
 # warning-ignore:shadowed_variable
-func restore_control(_animation : String, character : Character) -> void:
+func restore_control(_animation: String, character: Character) -> void:
 	# bad code sorry
 	yield(get_tree().create_timer(0.2), "timeout")
 
