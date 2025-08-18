@@ -50,47 +50,45 @@ func _ready():
 
 func _unhandled_input(event):
 	if event.is_action_pressed("LMB"):
-		set_tile(get_global_mouse_position() / 32, PoolIntArray([1, 0, 0]), true)
+		place_tile(Tile.new(1, 0, 0, get_global_mouse_position() / 32), true)
 	elif event.is_action_pressed("RMB"):
-		set_tile(get_global_mouse_position() / 32, PoolIntArray([0, 0, 0]), true)
+		remove_tile(get_global_mouse_position() / 32, true)
 
 
 func _debug_populate_tile_data(test_rect):
+
 	for x in range(test_rect.position.x, test_rect.size.x + test_rect.position.x):
 		for y in range(test_rect.position.y, test_rect.size.y + test_rect.position.y):
 			print("%s, %s" % [x, y])
-			set_tile(Vector2(x, y), [1, 0, 0])
+			place_tile(Tile.new(1, 0, 0, Vector2(x, y)))
 
 
-func load_tiles(data: Dictionary):
-	for pos in data:
-		set_tile(pos, fix_hashed_tile_data(data[pos]), false)
+# tile array
+func load_tiles(tiles: Array):
+	for tile in tiles:
+		place_tile(tile, false)
 	
 	update_dirty_quadrants()
 
 
-func set_tile(tile_pos: Vector2, data: PoolIntArray, modify_data: bool = false):
-	if data[0] == 0:
-		_remove_tile(tile_pos, modify_data)
-	else:
-		_place_tile(tile_pos, data, modify_data)
 
 
-func _place_tile(tile_pos: Vector2, data: PoolIntArray, modify_data: bool = false):
-	var raw_id = get_raw_tile_id(data[0], data[1], data[2])
-	set_cellv(tile_pos, raw_id)
-	update_autotile(tile_pos)
+
+func place_tile(tile: Tile, modify_data: bool = false):
+	var raw_id = get_raw_tile_id(tile.tileset_id, tile.tile_type, tile.palette)
+	set_cellv(tile.pos, raw_id)
+	update_autotile(tile.pos)
 	
 	if not modify_data:
 		return
 	
-	if debug_tile_data.has(tile_pos):
-		debug_tile_data[tile_pos] = data
+	if debug_tile_data.has(tile.pos):
+		debug_tile_data[tile.pos] = hash_tile_data(tile.tileset_id, tile.tile_type, tile.palette)
 	else:
-		debug_tile_data.get_or_add(tile_pos, hash_tile_data(data[0], data[1], data[2]))
+		debug_tile_data.get_or_add(tile.pos, hash_tile_data(tile.tileset_id, tile.tile_type, tile.palette))
 
 
-func _remove_tile(tile_pos: Vector2, modify_data: bool = false):
+func remove_tile(tile_pos: Vector2, modify_data: bool = false):
 	set_cellv(tile_pos, INVALID_CELL)
 	update_autotile(tile_pos)
 	
