@@ -1,5 +1,5 @@
 class_name Tile
-extends Node
+extends Resource
 
 
 # Object that models a tile

@@ -12,22 +12,8 @@ func load_in(level_data: LevelData, level_area: LevelArea):
 	tile_map_manager.load_in(level_data, level_area)
 	object_manager.load_in(level_data, level_area)
 	
-	
-# Interface functions
-func place(to_place):
-	if to_place is GameObject:
-		place_object(to_place)
-	elif to_place is Tile:
-		place_tile(to_place)
-		
-func remove(to_remove):
-	if to_remove is GameObject:
-		remove_object(to_remove)
-	elif to_remove is Vector2:
-		remove_tile(to_remove)
-	
 
-# Logic functions
+# Interface functions
 
 func place_tile(to_place: Tile):
 	tile_map_manager.place_tile(to_place)
@@ -40,5 +26,8 @@ func remove_object(to_remove: GameObject):
 	
 func remove_tile(to_remove: Vector2):
 	tile_map_manager.remove_tile(to_remove)
+	
+func set_parallax_distance(distance: int):
+	pass
 	
 
