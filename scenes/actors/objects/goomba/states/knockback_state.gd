@@ -5,6 +5,8 @@ onready var hit_sound: AudioStreamPlayer2D = enemy.get_node("Sounds/Hit")
 
 
 func _start():
+	enemy.sprite.play("knockback")
+	
 	hit_sound.play()
 
 

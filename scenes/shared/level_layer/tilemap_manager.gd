@@ -25,6 +25,7 @@ static func hash_tile_data(tileset: int, tile: int, palette: int) -> int:
 	var p: int = palette << 16
 	return t | v | p
 
+
 static func fix_hashed_tile_data(value: int) -> PoolIntArray:
 	var data: PoolIntArray = [0, 0, 0]
 	data[0] = value >> 48 & 0xFFFF
@@ -56,7 +57,6 @@ func _unhandled_input(event):
 
 
 func _debug_populate_tile_data(test_rect):
-
 	for x in range(test_rect.position.x, test_rect.size.x + test_rect.position.x):
 		for y in range(test_rect.position.y, test_rect.size.y + test_rect.position.y):
 			print("%s, %s" % [x, y])
@@ -69,9 +69,6 @@ func load_tiles(tiles: Array):
 		place_tile(tile, false)
 	
 	update_dirty_quadrants()
-
-
-
 
 
 func place_tile(tile: Tile, modify_data: bool = false):

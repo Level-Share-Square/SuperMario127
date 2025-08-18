@@ -8,7 +8,7 @@ var new_tiles: Dictionary
 var layer: int
 
 
-class Tile:
+class ActionTile:
 	var pos: Vector2
 	var lay: int
 	var tileset: int
@@ -37,7 +37,7 @@ func _do() -> void:
 			var last_tile = shared.get_tile(tile.x, tile.y, layer)
 			
 			undo_tiles.append(
-				Tile.new(tile, layer, last_tile[0], last_tile[1], last_tile[2])
+				ActionTile.new(tile, layer, last_tile[0], last_tile[1], last_tile[2])
 			)
 			
 			shared.set_tile(tile.x, tile.y, layer, 0, 0, 0)
@@ -48,7 +48,7 @@ func _do() -> void:
 				var palette = old_tiles[tile][2]
 				
 				undo_tiles.append(
-					Tile.new(tile, layer, tileset_id, tile_id, palette)
+					ActionTile.new(tile, layer, tileset_id, tile_id, palette)
 				)
 		
 	for tile_value in tile_types:
@@ -60,7 +60,7 @@ func _do() -> void:
 				var last_tile = shared.get_tile(tile.x, tile.y, layer)
 				
 				undo_tiles.append(
-					Tile.new(tile, layer, last_tile[0], last_tile[1], last_tile[2])
+					ActionTile.new(tile, layer, last_tile[0], last_tile[1], last_tile[2])
 				)
 				
 				shared.set_tile(tile.x, tile.y, layer, tileset_id, tile_id, palette)

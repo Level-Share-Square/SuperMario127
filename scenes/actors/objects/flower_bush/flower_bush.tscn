@@ -31,6 +31,16 @@ z_index = -9
 texture = ExtResource( 4 )
 offset = Vector2( 0, -9 )
 
+[node name="FlowersRecolor" type="Sprite" parent="Sprite"]
+
+[node name="NoFlowers" type="Sprite" parent="."]
+position = Vector2( 0, 9 )
+
+[node name="Parts" type="NinePatchRect" parent="."]
+margin_top = 9.0
+margin_right = 40.0
+margin_bottom = 49.0
+
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 16430

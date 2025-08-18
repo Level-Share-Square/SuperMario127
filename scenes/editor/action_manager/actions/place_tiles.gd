@@ -10,7 +10,7 @@ var tile_id: int
 var palette: int
 
 
-class Tile:
+class ActionTile:
 	var pos: Vector2
 	var lay: int
 	var tileset: int
@@ -32,7 +32,7 @@ func _do() -> void:
 		var last_tile = shared.get_tile(tile.x, tile.y, layer)
 		
 		undo_tiles.append(
-			Tile.new(tile, layer, last_tile[0], last_tile[1], last_tile[2])
+			ActionTile.new(tile, layer, last_tile[0], last_tile[1], last_tile[2])
 		)
 		
 		shared.set_tile(tile.x, tile.y, layer, tileset_id, tile_id, palette)

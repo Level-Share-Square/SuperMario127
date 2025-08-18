@@ -29,7 +29,7 @@ particles_anim_loop = false
 offsets = PoolRealArray( 0, 0.623077, 1 )
 colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0 )
 
-[sub_resource type="GradientTexture" id=7]
+[sub_resource type="GradientTexture" id=13]
 gradient = SubResource( 6 )
 
 [sub_resource type="ParticlesMaterial" id=8]
@@ -44,7 +44,7 @@ angular_velocity = 150.0
 angular_velocity_random = 0.21
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
-color_ramp = SubResource( 7 )
+color_ramp = SubResource( 13 )
 anim_offset = 1.0
 anim_offset_random = 1.0
 
@@ -57,7 +57,7 @@ particles_anim_loop = false
 [sub_resource type="Gradient" id=10]
 colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
 
-[sub_resource type="GradientTexture" id=11]
+[sub_resource type="GradientTexture" id=14]
 gradient = SubResource( 10 )
 
 [sub_resource type="ParticlesMaterial" id=12]
@@ -71,7 +71,7 @@ initial_velocity = 16.67
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 scale = 0.75
-color_ramp = SubResource( 11 )
+color_ramp = SubResource( 14 )
 anim_speed = 1.0
 
 [node name="BigSteely" type="Node2D"]
@@ -151,7 +151,6 @@ texture = ExtResource( 5 )
 [node name="DustParticle" type="Particles2D" parent="Steely"]
 material = SubResource( 9 )
 emitting = false
-amount = 3
 one_shot = true
 explosiveness = 1.0
 process_material = SubResource( 12 )

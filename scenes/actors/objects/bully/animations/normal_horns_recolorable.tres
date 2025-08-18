@@ -1,6 +1,22 @@
-[gd_resource type="SpriteFrames" load_steps=21 format=2]
+[gd_resource type="SpriteFrames" load_steps=27 format=2]
 
 [ext_resource path="res://scenes/actors/objects/bully/animations/bully_horns_recolorable.png" type="Texture" id=2]
+
+[sub_resource type="AtlasTexture" id=42]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 224, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=43]
+atlas = ExtResource( 2 )
+region = Rect2( 32, 224, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=44]
+atlas = ExtResource( 2 )
+region = Rect2( 64, 224, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=45]
+atlas = ExtResource( 2 )
+region = Rect2( 96, 224, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=23]
 atlas = ExtResource( 2 )
@@ -54,6 +70,14 @@ region = Rect2( 128, 96, 32, 32 )
 atlas = ExtResource( 2 )
 region = Rect2( 160, 96, 32, 32 )
 
+[sub_resource type="AtlasTexture" id=46]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 192, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=47]
+atlas = ExtResource( 2 )
+region = Rect2( 32, 192, 32, 32 )
+
 [sub_resource type="AtlasTexture" id=36]
 atlas = ExtResource( 2 )
 region = Rect2( 96, 64, 32, 32 )
@@ -80,6 +104,11 @@ region = Rect2( 64, 64, 32, 32 )
 
 [resource]
 animations = [ {
+"frames": [ SubResource( 42 ), SubResource( 43 ), SubResource( 44 ), SubResource( 45 ) ],
+"loop": true,
+"name": "burn",
+"speed": 5.0
+}, {
 "frames": [ SubResource( 23 ) ],
 "loop": true,
 "name": "fall",
@@ -104,6 +133,11 @@ animations = [ {
 "loop": true,
 "name": "run",
 "speed": 14.0
+}, {
+"frames": [ SubResource( 46 ), SubResource( 47 ) ],
+"loop": true,
+"name": "speak",
+"speed": 5.0
 }, {
 "frames": [ SubResource( 36 ), SubResource( 37 ), SubResource( 38 ), SubResource( 39 ), SubResource( 40 ), SubResource( 41 ) ],
 "loop": true,

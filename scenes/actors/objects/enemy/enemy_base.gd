@@ -97,7 +97,7 @@ func _physics_process(delta):
 		gravity_multiplier *= state.gravity_multiplier
 	
 	# gravity and floating in liquids
-	if not float_in_liquids or liquids_detector.get_overlapping_areas().size() <= 0:
+	if not float_in_liquids or liquids_detector.get_overlapping_areas().empty():
 		if not is_on_floor():
 			velocity.y += gravity * gravity_multiplier * delta * 60
 			velocity.y = min(velocity.y, gravity * max_gravity_factor)
@@ -128,7 +128,7 @@ func is_on_ground() -> bool:
 	return floor_detector.is_colliding()
 
 
-func create_coin(velocity: Vector2, offset: Vector2) -> void:
+func create_coin(velocity: Vector2, offset: Vector2) -> GameObject:
 	var object: = ObjectData.new()
 	object.type_id = 1
 	object.properties = []
@@ -143,4 +143,4 @@ func create_coin(velocity: Vector2, offset: Vector2) -> void:
 	
 	var shared = get_tree().current_scene.get_shared_node()
 	
-	shared.create_object(object, false)
+	return shared.create_object(object, false)

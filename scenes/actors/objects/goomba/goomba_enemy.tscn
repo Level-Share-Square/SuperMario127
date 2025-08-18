@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=2]
+[gd_scene load_steps=56 format=2]
 
 [ext_resource path="res://scenes/actors/objects/enemy/enemy_base.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/actors/objects/goomba/goomba_enemy.gd" type="Script" id=2]
@@ -46,9 +46,9 @@ extents = Vector2( 12, 2 )
 resource_local_to_scene = true
 extents = Vector2( 7, 6 )
 
-[sub_resource type="AtlasTexture" id=37]
+[sub_resource type="AtlasTexture" id=64]
 atlas = ExtResource( 4 )
-region = Rect2( 0, 64, 32, 32 )
+region = Rect2( 0, 96, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=38]
 atlas = ExtResource( 4 )
@@ -66,13 +66,53 @@ region = Rect2( 64, 0, 32, 32 )
 atlas = ExtResource( 4 )
 region = Rect2( 96, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=42]
+[sub_resource type="AtlasTexture" id=65]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 128, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=66]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 160, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=67]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 64, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=68]
 atlas = ExtResource( 4 )
 region = Rect2( 32, 64, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=43]
+[sub_resource type="AtlasTexture" id=69]
 atlas = ExtResource( 4 )
-region = Rect2( 32, 96, 32, 32 )
+region = Rect2( 64, 64, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=70]
+atlas = ExtResource( 4 )
+region = Rect2( 96, 64, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=71]
+atlas = ExtResource( 4 )
+region = Rect2( 128, 64, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=72]
+atlas = ExtResource( 4 )
+region = Rect2( 160, 64, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=74]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 192, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=75]
+atlas = ExtResource( 4 )
+region = Rect2( 32, 192, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=76]
+atlas = ExtResource( 4 )
+region = Rect2( 64, 192, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=73]
+atlas = ExtResource( 4 )
+region = Rect2( 32, 160, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=44]
 atlas = ExtResource( 4 )
@@ -100,7 +140,7 @@ region = Rect2( 160, 32, 32, 32 )
 
 [sub_resource type="SpriteFrames" id=15]
 animations = [ {
-"frames": [ SubResource( 37 ) ],
+"frames": [ SubResource( 64 ) ],
 "loop": false,
 "name": "fall",
 "speed": 0.0
@@ -110,17 +150,27 @@ animations = [ {
 "name": "idle",
 "speed": 6.0
 }, {
-"frames": [ SubResource( 42 ) ],
+"frames": [ SubResource( 65 ) ],
 "loop": false,
 "name": "jump",
 "speed": 0.0
 }, {
-"frames": [  ],
+"frames": [ SubResource( 66 ) ],
 "loop": true,
-"name": "speak",
+"name": "knockback",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 43 ) ],
+"frames": [ SubResource( 67 ), SubResource( 68 ), SubResource( 69 ), SubResource( 70 ), SubResource( 71 ), SubResource( 72 ) ],
+"loop": true,
+"name": "run",
+"speed": 12.0
+}, {
+"frames": [ SubResource( 74 ), SubResource( 75 ), SubResource( 76 ), SubResource( 75 ) ],
+"loop": true,
+"name": "speak",
+"speed": 12.0
+}, {
+"frames": [ SubResource( 73 ) ],
 "loop": true,
 "name": "stomped",
 "speed": 6.0
@@ -259,7 +309,7 @@ tracks/3/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
-"values": [ "idle", "stomped", "idle" ]
+"values": [ "idle", "stomped", "knockback" ]
 }
 tracks/4/type = "audio"
 tracks/4/path = NodePath("Sounds/Stomp")
@@ -477,8 +527,9 @@ offset = Vector2( 0, -7 )
 visible = false
 self_modulate = Color( 1, 0.4, 0.333333, 1 )
 frames = ExtResource( 11 )
-animation = "idle"
-offset = Vector2( 0, -7 )
+animation = "run"
+frame = 3
+offset = Vector2( 0, -16 )
 script = ExtResource( 10 )
 
 [node name="DialogueDetector" parent="AnimatedSprite" index="1"]

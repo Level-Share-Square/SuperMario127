@@ -31,10 +31,13 @@ func _ready():
 
 ## sorry but this has to be done, we don't want mario to be able to stand inside an enemy
 func _physics_process(delta):
-	if attack_area.get_overlapping_areas().size() > 0:
+	if not attack_area.get_overlapping_areas().empty():
 		var areas = attack_area.get_overlapping_areas()
 		for area in areas:
 			attack_area_entered(area)
+	
+	if not enemy.liquids_detector.get_overlapping_areas().empty():
+		check_liquid_area()
 	
 	if enemy.global_position.y > (level_bounds.end.y * 32) + 128:
 		pit()
@@ -72,13 +75,12 @@ func exploded(body: PhysicsBody2D = null) -> void:
 
 
 ## fire
-## doesnt function, need ability to distinguish lava and fire
+## doesnt function
 func burnt() -> void:
 	pass
 
 
 ## lava
-## doesnt function, need ability to distinguish lava and fire
 func incinerated() -> void:
 	pass
 
@@ -191,6 +193,16 @@ func stomp_area_entered(area: Area2D) -> void:
 			else:
 				stomp(character)
 				bounce_player(character)
+
+
+func check_liquid_area() -> void:
+	var areas = attack_area.get_overlapping_areas()
+	for area in areas:
+		if area.get_parent() is LiquidBase:
+			var liquid: LiquidBase = area.get_parent()
+			match liquid.liquid_type:
+				LiquidBase.LiquidType.Lava:
+					incinerated()
 
 
 ## if terrain manages to touch this, our enemy has probably been squished...

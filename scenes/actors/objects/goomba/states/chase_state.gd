@@ -27,7 +27,7 @@ func _update(delta: float) -> void:
 		return
 	
 	if enemy.is_on_ground():
-		enemy.sprite.play("walk")
+		enemy.sprite.play("run")
 		
 		if is_instance_valid(ledge_detector):
 			ledge_detector.position.x = abs(ledge_detector.position.x) * enemy.facing_direction

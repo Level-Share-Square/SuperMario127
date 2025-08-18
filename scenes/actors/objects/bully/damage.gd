@@ -42,7 +42,7 @@ func ground_pound(body: PhysicsBody2D = null) -> void:
 
 
 func magicked(body: PhysicsBody2D = null) -> void:
-	pass
+	enemy.set_state_by_name("InstaDieState")
 
 
 func dived(player: Character):
@@ -66,8 +66,22 @@ func damage_player(player: Character):
 
 
 func incinerated() -> void:
+	enemy.animation_player.play("incinerated")
 	enemy.set_state_by_name("DieState")
 
 
 func pit() -> void:
-	incinerated()
+	enemy.animation_player.play("pit")
+	enemy.set_state_by_name("DieState")
+
+
+func check_liquid_area() -> void:
+	var areas = attack_area.get_overlapping_areas()
+	for area in areas:
+		if area.get_parent() is LiquidBase:
+			var liquid: LiquidBase = area.get_parent()
+			match liquid.liquid_type:
+				LiquidBase.LiquidType.Lava:
+					incinerated()
+				LiquidBase.LiquidType.Quicksand:
+					incinerated()

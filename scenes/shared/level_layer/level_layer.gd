@@ -18,16 +18,18 @@ func load_in(level_data: LevelData, level_area: LevelArea):
 func place_tile(to_place: Tile):
 	tile_map_manager.place_tile(to_place)
 
+
 func place_object(to_place: GameObject):
 	object_manager.place_object(to_place)
-	
+
+
 func remove_object(to_remove: GameObject):
 	object_manager.remove_object(to_remove)
-	
+
+
 func remove_tile(to_remove: Vector2):
 	tile_map_manager.remove_tile(to_remove)
-	
+
+
 func set_parallax_distance(distance: int):
 	pass
-	
-

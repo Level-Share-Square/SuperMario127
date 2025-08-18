@@ -2,13 +2,13 @@ extends GameObject
 
 onready var coin = $KinematicBody2D/Coin
 onready var particles = $KinematicBody2D/Particles
-onready var kinematic_body = $KinematicBody2D
+onready var kinematic_body: KinematicBody2D = $KinematicBody2D
 onready var area = $KinematicBody2D/Area2D
 onready var water_detector = $KinematicBody2D/WaterDetector
 onready var collision_shape = $KinematicBody2D/CollisionShape2D
 onready var shape = $KinematicBody2D/Area2D/CollisionShape2D
 onready var water_shape = $KinematicBody2D/WaterDetector/CollisionShape2D
-onready var visibility_enabler = $VisibilityEnabler2D
+onready var visibility_enabler: VisibilityEnabler2D = $VisibilityEnabler2D
 onready var bottom_pos = $KinematicBody2D/BottomPos
 
 export var coins : int = 1
@@ -128,7 +128,11 @@ func _physics_process(delta):
 	velocity = calc_physics(false, delta)
 	
 	kinematic_body.move_and_slide_with_snap(velocity, Vector2(0, 0), Vector2.UP, false, 8, deg2rad(56))
-	if visibility_enabler.global_position != kinematic_body.global_position:
+	
+	if velocity.y > 0:
+		toggle_terrain_collision(true)
+	
+	if not visibility_enabler.global_position.is_equal_approx(kinematic_body.global_position):
 		visibility_enabler.global_position = kinematic_body.global_position
 
 
@@ -157,6 +161,10 @@ func calc_physics(interp : bool, delta) -> Vector2:
 		new_velocity.y = 0
 	
 	return new_velocity
+
+
+func toggle_terrain_collision(state: bool) -> void:
+	get_node("KinematicBody2D").set_collision_mask_bit(0, state)
 
 
 func shell_hit():

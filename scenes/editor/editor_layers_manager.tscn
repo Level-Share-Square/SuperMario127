@@ -2,5 +2,5 @@
 
 [ext_resource path="res://scenes/editor/editor_layers_manager.gd" type="Script" id=1]
 
-[node name="editor_layers_manager" type="Node2D"]
+[node name="EditorLayerManager" type="Node2D"]
 script = ExtResource( 1 )

@@ -9,6 +9,16 @@ var displacement_spring_anim_power : float = 0.0
 var base_scale_factor : float = 0.0
 var scale_spring_anim_power : float = 0.0
 
+var flowers: bool = true
+var flower_color: Color = Color.yellow
+var parts: int = 1
+
+
+func _set_properties():
+	savable_properties = ["flowers", "flower_color", "parts"]
+	editable_properties = ["flowers", "flower_color", "parts"]
+
+
 func _ready():
 	if enabled:
 		interaction_area.connect("body_entered", self, "start_anim")

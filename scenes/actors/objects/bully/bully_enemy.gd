@@ -7,6 +7,7 @@ export var horn_color := Color.red
 
 onready var recolor_sprite: AnimatedSprite = $AnimatedSprite/RecolorSprite
 onready var player_detector: Area2D = $PlayerDetector
+onready var animation_player = get_node("%AnimationPlayer")
 
 
 func set_color(value: Color) -> void:

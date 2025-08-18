@@ -24,6 +24,7 @@ func load_in(loaded_level_data : LevelData, loaded_level_area : LevelArea):
 	level_area = loaded_level_area
 	
 	for object in loaded_level_area.objects:
+		print(loaded_level_area.objects.size())
 		create_object(object, false)
 
 
@@ -46,9 +47,9 @@ func create_object(object, add_to_data):
 		
 #		print(object_node.level_object)
 		
-		if not add_to_data:
-			if object_node.layer != object_node.default_layer:
-				object_node.layer
+#		if not add_to_data:
+#			if object_node.layer != object_node.default_layer:
+#				object_node.layer
 		
 		object_node._set_properties()
 		

@@ -1,3 +1,4 @@
+class_name EditorLayerManager
 extends Node2D
 
 const MAX_LAYERS = 10
