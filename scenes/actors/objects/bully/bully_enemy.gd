@@ -1,30 +1,53 @@
 extends EnemyBase
 
 
-const DEFAULT_COLOR := Color.red
+const DEFAULT_HORN_COLOR := Color.yellow
+const DEFAULT_FEET_COLOR := Color.green
 
-export var horn_color := Color.red
+export var horn_color := Color.yellow setget set_horn_color
+export var feet_color := Color.green setget set_feet_color
 
-onready var recolor_sprite: AnimatedSprite = $AnimatedSprite/RecolorSprite
+onready var horn_sprite: AnimatedSprite = $AnimatedSprite/RecolorSpriteHorns
+onready var feet_sprite: AnimatedSprite = $AnimatedSprite/RecolorSpriteFeet
 onready var player_detector: Area2D = $PlayerDetector
 onready var animation_player = get_node("%AnimationPlayer")
 
 
-func set_color(value: Color) -> void:
+func set_horn_color(value: Color) -> void:
 	horn_color = value
 	
-	if horn_color != DEFAULT_COLOR:
+	if not is_instance_valid(horn_sprite):
+		return
+	
+	if not horn_color.is_equal_approx(DEFAULT_HORN_COLOR):
 		var true_color = horn_color
 		true_color.s /= 1.5
 		
-		recolor_sprite.visible = true
-		recolor_sprite.self_modulate = true_color
+		horn_sprite.visible = true
+		horn_sprite.self_modulate = true_color
 	else:
-		recolor_sprite.visible = false
+		horn_sprite.visible = false
+
+
+func set_feet_color(value: Color) -> void:
+	feet_color = value
+	
+	if not is_instance_valid(feet_sprite):
+		return
+	
+	if not feet_color.is_equal_approx(DEFAULT_FEET_COLOR):
+		var true_color = horn_color
+		true_color.s /= 1.5
+		
+		feet_sprite.visible = true
+		feet_sprite.self_modulate = true_color
+	else:
+		feet_sprite.visible = false
 
 
 func _ready():
-	set_color(horn_color)
+	set_horn_color(horn_color)
+	set_feet_color(feet_color)
 
 
 func _enter_tree():

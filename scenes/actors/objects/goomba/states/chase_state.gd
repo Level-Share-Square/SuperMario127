@@ -36,9 +36,9 @@ func _update(delta: float) -> void:
 				jump()
 	else:
 		if enemy.velocity.y > 0:
-			enemy.sprite.play("fall")
+			enemy.sprite.play("run_fall")
 		else:
-			enemy.sprite.play("jump")
+			enemy.sprite.play("run_jump")
 	
 	enemy.facing_direction = sign(target_player.global_position.x - enemy.global_position.x)
 	enemy.sprite.speed_scale = move_toward(enemy.sprite.speed_scale, chase_speed / move_speed, delta * accel * 60)

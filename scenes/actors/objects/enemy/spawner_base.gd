@@ -54,6 +54,7 @@ func _set_properties():
 		editable_properties.insert(i, enemy_property)
 		i += 1
 
+
 func _set_property_values():
 	for spawner_property in spawner_properties:
 		set_property(spawner_property, self[spawner_property], true)
@@ -96,7 +97,7 @@ func instance_enemy(emit_particles: bool = true) -> EnemyBase:
 	if layer < LevelShared.Layers.Middle:
 		spawned_enemy.modulate = modulate
 		spawned_enemy.enabled = false
-		
+	
 	add_child(spawned_enemy)
 	return spawned_enemy
 

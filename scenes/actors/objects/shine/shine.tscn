@@ -47,7 +47,7 @@ shader = ExtResource( 17 )
 shader_param/ray_count = 4
 shader_param/ray_distance = 0.45
 shader_param/ray_seperation_degrees = 22.0
-shader_param/rotation = 4.67697
+shader_param/rotation = 3.06653
 
 [sub_resource type="ShaderMaterial" id=41]
 resource_local_to_scene = true
@@ -55,7 +55,7 @@ shader = ExtResource( 17 )
 shader_param/ray_count = 4
 shader_param/ray_distance = 0.275
 shader_param/ray_seperation_degrees = 27.243
-shader_param/rotation = 3.19014
+shader_param/rotation = 3.2168
 
 [sub_resource type="CanvasItemMaterial" id=21]
 particles_animation = true
@@ -1288,7 +1288,7 @@ texture = ExtResource( 5 )
 [node name="Glow" type="Sprite" parent="RaysContainer"]
 self_modulate = Color( 0.996078, 0.996078, 0.996078, 1 )
 material = SubResource( 38 )
-scale = Vector2( 1.0864, 1.0864 )
+scale = Vector2( 1.06878, 1.06878 )
 texture = SubResource( 40 )
 script = ExtResource( 18 )
 min_scale = 1.0
@@ -1332,7 +1332,6 @@ playing = true
 [node name="AnimatedSpriteRecolorable" type="AnimatedSprite" parent="AnimatedSprite"]
 visible = false
 frames = ExtResource( 10 )
-frame = 6
 script = ExtResource( 14 )
 
 [node name="Particles2D" type="Particles2D" parent="AnimatedSprite"]

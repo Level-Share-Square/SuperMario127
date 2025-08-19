@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=2]
+[gd_scene load_steps=58 format=2]
 
 [ext_resource path="res://scenes/actors/objects/enemy/enemy_base.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/actors/objects/goomba/goomba_enemy.gd" type="Script" id=2]
@@ -98,6 +98,14 @@ region = Rect2( 128, 64, 32, 32 )
 atlas = ExtResource( 4 )
 region = Rect2( 160, 64, 32, 32 )
 
+[sub_resource type="AtlasTexture" id=77]
+atlas = ExtResource( 4 )
+region = Rect2( 32, 96, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=78]
+atlas = ExtResource( 4 )
+region = Rect2( 32, 128, 32, 32 )
+
 [sub_resource type="AtlasTexture" id=74]
 atlas = ExtResource( 4 )
 region = Rect2( 0, 192, 32, 32 )
@@ -164,6 +172,16 @@ animations = [ {
 "loop": true,
 "name": "run",
 "speed": 12.0
+}, {
+"frames": [ SubResource( 77 ) ],
+"loop": true,
+"name": "run_fall",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 78 ) ],
+"loop": true,
+"name": "run_jump",
+"speed": 5.0
 }, {
 "frames": [ SubResource( 74 ), SubResource( 75 ), SubResource( 76 ), SubResource( 75 ) ],
 "loop": true,
@@ -415,6 +433,9 @@ color = Color( 1, 0, 0, 1 )
 position = Vector2( 0, -9 )
 shape = SubResource( 36 )
 
+[node name="LiquidsDetector" parent="." index="1"]
+monitoring = true
+
 [node name="CollisionShape2D" parent="LiquidsDetector" index="0"]
 position = Vector2( 0, -9.5 )
 shape = SubResource( 57 )
@@ -527,8 +548,7 @@ offset = Vector2( 0, -7 )
 visible = false
 self_modulate = Color( 1, 0.4, 0.333333, 1 )
 frames = ExtResource( 11 )
-animation = "run"
-frame = 3
+animation = "run_fall"
 offset = Vector2( 0, -16 )
 script = ExtResource( 10 )
 

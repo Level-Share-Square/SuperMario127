@@ -42,7 +42,8 @@ func ground_pound(body: PhysicsBody2D = null) -> void:
 
 
 func magicked(body: PhysicsBody2D = null) -> void:
-	enemy.set_state_by_name("InstaDieState")
+	enemy.animation_player.play("die")
+	enemy.set_state_by_name("DieState")
 
 
 func dived(player: Character):

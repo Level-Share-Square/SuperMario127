@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=24 format=2]
+[gd_resource type="SpriteFrames" load_steps=26 format=2]
 
 [ext_resource path="res://scenes/actors/objects/goomba/animations/recolorable.png" type="Texture" id=1]
 
@@ -49,6 +49,14 @@ region = Rect2( 128, 128, 32, 32 )
 [sub_resource type="AtlasTexture" id=19]
 atlas = ExtResource( 1 )
 region = Rect2( 160, 128, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=23]
+atlas = ExtResource( 1 )
+region = Rect2( 64, 64, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=24]
+atlas = ExtResource( 1 )
+region = Rect2( 96, 64, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=20]
 atlas = ExtResource( 1 )
@@ -110,6 +118,16 @@ animations = [ {
 "frames": [ SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ) ],
 "loop": true,
 "name": "run",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 23 ) ],
+"loop": true,
+"name": "run_fall",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 24 ) ],
+"loop": true,
+"name": "run_jump",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 21 ) ],
