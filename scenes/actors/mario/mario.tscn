@@ -1650,7 +1650,7 @@ shader = ExtResource( 86 )
 shader_param/ray_count = 4
 shader_param/ray_distance = 0.4
 shader_param/ray_seperation_degrees = 22.0
-shader_param/rotation = 3.97129
+shader_param/rotation = 4.48659
 
 [sub_resource type="RectangleShape2D" id=85]
 extents = Vector2( 8, 18 )
@@ -1909,24 +1909,26 @@ animation = "idleRight"
 playing = true
 
 [node name="SpriteBlur" type="AnimatedSprite" parent="Sprite"]
+show_behind_parent = true
 material = ExtResource( 89 )
 position = Vector2( 2.72848e-12, 0 )
 frames = ExtResource( 1 )
 animation = "groundPoundLeft"
 playing = true
 script = ExtResource( 16 )
-y_offset = -12
+y_offset = -3
 opacity = Color( 0, 0, 0, 0.34902 )
 
 [node name="SpriteBlur2" type="AnimatedSprite" parent="Sprite"]
 self_modulate = Color( 1, 1, 1, 0.45098 )
+show_behind_parent = true
 material = ExtResource( 89 )
 position = Vector2( -1.19209e-07, 1.19209e-07 )
 frames = ExtResource( 1 )
 animation = "groundPoundLeft"
 playing = true
 script = ExtResource( 16 )
-y_offset = -4
+y_offset = -6
 opacity = Color( 0, 0, 0, 0.741176 )
 
 [node name="Fludd" type="AnimatedSprite" parent="Sprite"]
@@ -2462,6 +2464,7 @@ anims/triple_jump = SubResource( 92 )
 anims/triple_jump_right = SubResource( 94 )
 
 [node name="CollectedShine" type="AnimatedSprite" parent="."]
+visible = false
 position = Vector2( -1, 20 )
 scale = Vector2( 0.1, 0.1 )
 z_index = -5
@@ -2470,7 +2473,6 @@ playing = true
 
 [node name="Recolorable" type="AnimatedSprite" parent="CollectedShine"]
 visible = false
-scale = Vector2( 1, 1 )
 frames = ExtResource( 61 )
 centered = false
 

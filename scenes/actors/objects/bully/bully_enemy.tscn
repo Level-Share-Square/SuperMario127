@@ -629,7 +629,6 @@ offset = Vector2( 0, -7 )
 self_modulate = Color( 0, 0.929412, 1, 1 )
 frames = ExtResource( 15 )
 animation = "idle"
-frame = 2
 offset = Vector2( 0, -7 )
 script = ExtResource( 11 )
 
@@ -637,7 +636,6 @@ script = ExtResource( 11 )
 self_modulate = Color( 0, 0.415686, 1, 1 )
 frames = SubResource( 75 )
 animation = "idle"
-frame = 2
 offset = Vector2( 0, -7 )
 script = ExtResource( 11 )
 
@@ -647,7 +645,6 @@ self_modulate = Color( 1, 0, 0, 1 )
 material = SubResource( 70 )
 frames = ExtResource( 4 )
 animation = "idle"
-frame = 2
 offset = Vector2( 0, -7 )
 script = ExtResource( 11 )
 
