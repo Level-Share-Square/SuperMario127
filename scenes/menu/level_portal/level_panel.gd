@@ -125,7 +125,7 @@ func load_level(_page_info: LSSLevelPage):
 	
 	var version_comparison: int = conversion_util.compareVersions(
 		page_info.level_code.get_slice(",", 0), 
-		LevelData.current_format_version)
+		LevelDataOld.current_format_version)
 	
 	outdated_version.visible = (version_comparison > 0)
 	level_buttons.visible = (version_comparison <= 0)
@@ -204,10 +204,10 @@ func play_level():
 
 ## adding descriptions, author, thumbnail
 var keys_defaults: Array = [
-	["name", "level_name", LevelData.DEFAULT_NAME],
-	["description", "description", LevelData.DEFAULT_DESCRIPTION],
-	["author", "author_name", LevelData.DEFAULT_AUTHOR],
-	["thumbnail_url", "thumbnail_url", LevelData.DEFAULT_THUMBNAIL_URL]
+	["name", "level_name", LevelDataOld.DEFAULT_NAME],
+	["description", "description", LevelDataOld.DEFAULT_DESCRIPTION],
+	["author", "author_name", LevelDataOld.DEFAULT_AUTHOR],
+	["thumbnail_url", "thumbnail_url", LevelDataOld.DEFAULT_THUMBNAIL_URL]
 ]
 
 func add_info_to_level(page_info: LSSLevelPage) -> LSSLevelPage:

@@ -60,7 +60,7 @@ func is_tween_active() -> bool:
 
 ##### CUSTOM MUSIC
 func get_custom_file_path(underwater: bool = false) -> String:
-	# i think accessing leveldata singleton is safe for now since
+	# i think accessing LevelDataOld singleton is safe for now since
 	# this only is called inside levels, i hope i dont regret that decision
 	var level_id: String = Singleton.CurrentLevelData.level_id
 	var area: int = Singleton.CurrentLevelData.area

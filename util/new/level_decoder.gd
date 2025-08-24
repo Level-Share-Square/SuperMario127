@@ -1,7 +1,7 @@
 class_name LevelDecoder
 
 
-static func decode(level_code: String) -> LevelData:
-	var level_data: LevelData = LevelData.new()
+static func decode(level_code: String) -> LevelDataOld:
+	var level_data: LevelDataOld = LevelDataOld.new()
 	
 	return level_data

@@ -10,10 +10,10 @@ var auto_scroll_speed := 0.0
 func _ready():
 	ready = true
 
-func load_in(_level_data : LevelData, level_area : LevelArea):
+func load_in(_level_data : LevelDataOld, level_area : LevelAreaOld):
 	update_background(level_area.sky, level_area.background, level_area.bounds, 0, level_area.background_palette, level_area.bg_autoscroll_speed)
 
-func update_background_area(area : LevelArea):
+func update_background_area(area : LevelAreaOld):
 	update_background(area.sky, area.background, area.bounds, 0, area.background_palette, area.bg_autoscroll_speed)
 
 func update_background(sky : int = 1, background : int = 1, bounds : Rect2 = Rect2(0, 0, 0, 0), extra_y_offset : float = 0, background_palette : int = 0, speed_override: float = 0):

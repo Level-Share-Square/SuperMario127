@@ -7,12 +7,12 @@ const LAYER_SCENE_PATH: String = "res://scenes/shared/level_layer/level_layer.ts
 var layer_scene: PackedScene = preload(LAYER_SCENE_PATH)
 
 var current_area_id: int = 0
-var current_area: LevelArea 
+var current_area: LevelAreaOld 
 
 var layers: Array = []
 
 
-func load_in(level_data: LevelData, level_area: LevelArea):
+func load_in(level_data: LevelDataOld, level_area: LevelAreaOld):
 	load_layers(level_area.layers)
 
 

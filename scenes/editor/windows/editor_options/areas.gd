@@ -47,7 +47,7 @@ func reload_areas():
 
 func create_area():
 	if Singleton.CurrentLevelData.level_data.areas.size() != 32:
-		var area = LevelArea.new()
+		var area = LevelAreaOld.new()
 		area.duplicate(Singleton.EditorSavedSettings.default_area)
 		Singleton.CurrentLevelData.level_data.areas.append(area)
 		reload_areas()
@@ -57,7 +57,7 @@ func create_area():
 
 func paste_area():
 	var area_code: String = OS.get_clipboard()
-	if area_code.substr(0, 9) != "LevelArea":
+	if area_code.substr(0, 9) != "LevelAreaOld":
 		printerr("Not an area!")
 		return
 	var validity_checker = ValidityChecker.new()

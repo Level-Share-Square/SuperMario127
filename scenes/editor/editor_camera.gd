@@ -40,7 +40,7 @@ func _physics_process(delta):
 	camera_movement(delta)
 
 
-func load_in(_level_data: LevelData, level_area: LevelArea):
+func load_in(_level_data: LevelDataOld, level_area: LevelAreaOld):
 #	for object in level_area.objects:
 #		if is_instance_valid(object) and object is ObjectData:
 #			if object.type_id == 0:
@@ -72,7 +72,7 @@ func is_moving() -> bool:
 	return not position.is_equal_approx(last_pos)
 
 
-func update_limits(level_area: LevelArea):
+func update_limits(level_area: LevelAreaOld):
 	var area_bounds = level_area.bounds.grow(3)
 	
 	limit_left = int(area_bounds.position.x * 32)

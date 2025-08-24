@@ -14,8 +14,8 @@ var debug_tile_data: Dictionary = {
 var tileset_cache := []
 var tileset_palettes := []
 
-var level_data: LevelData
-var area_data: LevelArea
+var level_data: LevelDataOld
+var area_data: LevelAreaOld
 var layer_data: LevelLayerData
 
 
@@ -51,7 +51,7 @@ func _ready():
 
 func _unhandled_input(event):
 	if event.is_action_pressed("LMB"):
-		place_tile(Tile.new(1, 0, 0, get_global_mouse_position() / 32), true)
+		place_tile(TileData.new(1, 0, 0, get_global_mouse_position() / 32), true)
 	elif event.is_action_pressed("RMB"):
 		remove_tile(get_global_mouse_position() / 32, true)
 
@@ -60,7 +60,7 @@ func _debug_populate_tile_data(test_rect):
 	for x in range(test_rect.position.x, test_rect.size.x + test_rect.position.x):
 		for y in range(test_rect.position.y, test_rect.size.y + test_rect.position.y):
 			print("%s, %s" % [x, y])
-			place_tile(Tile.new(1, 0, 0, Vector2(x, y)))
+			place_tile(TileData.new(1, 0, 0, Vector2(x, y)))
 
 
 # tile array
@@ -71,7 +71,7 @@ func load_tiles(tiles: Array):
 	update_dirty_quadrants()
 
 
-func place_tile(tile: Tile, modify_data: bool = false):
+func place_tile(tile: TileData, modify_data: bool = false):
 	var raw_id = get_raw_tile_id(tile.tileset_id, tile.tile_type, tile.palette)
 	set_cellv(tile.pos, raw_id)
 	update_autotile(tile.pos)

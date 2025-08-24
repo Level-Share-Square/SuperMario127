@@ -45,7 +45,7 @@ func _packet_recieved(_id, packet_ascii):
 	if packet[0] == "load level":
 		Singleton.PlayerSettings.player1_character = packet[2]
 		Singleton.PlayerSettings.player2_character = packet[3]
-		var level_data = LevelData.new()
+		var level_data = LevelDataOld.new()
 		level_data.load_in(packet[1])
 		Singleton.CurrentLevelData.level_data = level_data
 		

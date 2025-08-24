@@ -9,7 +9,7 @@ var fg_index: int = 0
 
 var current_palette = 0
 
-var area: LevelArea
+var area: LevelAreaOld
 
 onready var bg_palette_button_scene = preload("res://scenes/editor/windows/editor_options/bg_palette_button.tscn")
 

@@ -18,7 +18,7 @@ onready var fludds = $"%FLUDD"
 
 ## level data
 onready var level_info: LevelInfo = Singleton.CurrentLevelData.level_info
-onready var level_data: LevelData = Singleton.CurrentLevelData.level_data
+onready var level_data: LevelDataOld = Singleton.CurrentLevelData.level_data
 
 # other
 var backing_out: bool = false

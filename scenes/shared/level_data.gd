@@ -11,7 +11,7 @@ var hub_return_data: Dictionary
 var shine_kickout_data: Dictionary
 
 var level_info : LevelInfo
-var level_data : LevelData
+var level_data : LevelDataOld
 var area := 0
 var enemies_instanced := 0
 

@@ -4,7 +4,7 @@ extends Button
 
 func _on_button_pressed():
 	if level_code_util.is_valid(OS.clipboard):
-		var level_data = LevelData.new()
+		var level_data = LevelDataOld.new()
 		level_data.load_in(OS.clipboard)
 		Singleton.CurrentLevelData.level_data = level_data
 		

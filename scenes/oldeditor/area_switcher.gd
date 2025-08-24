@@ -2,7 +2,7 @@ extends Button
 
 func on_pressed():
 	if Singleton.CurrentLevelData.level_data.areas.size() <= 1:
-		var area = LevelArea.new()
+		var area = LevelAreaOld.new()
 		Singleton.CurrentLevelData.level_data.areas.append(area)
 	Singleton.CurrentLevelData.area = 1 if Singleton.CurrentLevelData.area == 0 else 0
 	# warning-ignore:return_value_discarded

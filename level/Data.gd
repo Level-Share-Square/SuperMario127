@@ -1,4 +1,4 @@
-class_name LevelData
+class_name LevelDataOld
 extends Resource
 
 
@@ -47,8 +47,8 @@ func get_vector2(result) -> Vector2:
 	return Vector2(result.x, result.y)
 
 
-func get_area(result) -> LevelArea:
-	var area = LevelArea.new()
+func get_area(result) -> LevelAreaOld:
+	var area = LevelAreaOld.new()
 	area.tile_chunks.clear()
 	area.very_foreground_tiles.clear()
 	area.foreground_tiles.clear()
@@ -97,8 +97,8 @@ func get_area(result) -> LevelArea:
 	return area
 
 
-#func get_settings(result) -> LevelAreaSettings:
-#	var settings = LevelAreaSettings.new()
+#func get_settings(result) -> LevelAreaOldSettings:
+#	var settings = LevelAreaOldSettings.new()
 #	settings.sky = result.sky
 #	settings.background = result.background
 #	settings.background_palette = result.background_palette
@@ -358,10 +358,10 @@ func get_encoded_level_data():
 	level_string.erase(level_string.length() - 1, 1)
 	return level_string
 
-func get_encoded_area_data(area: LevelArea):
+func get_encoded_area_data(area: LevelAreaOld):
 	var level_string: String
 	
-	level_string += "LevelArea_"
+	level_string += "LevelAreaOld_"
 	
 	# Settings
 	level_string += value_util.encode_value(area.bounds.size) + ","

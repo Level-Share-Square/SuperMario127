@@ -10,8 +10,8 @@ onready var back_tilemap_node : TileMap = get_node(back_tilemap)
 onready var middle_tilemap_node : TileMap = get_node(middle_tilemap)
 onready var front_tilemap_node : TileMap = get_node(front_tilemap)
 
-var level_data : LevelData
-var level_area : LevelArea
+var level_data : LevelDataOld
+var level_area : LevelAreaOld
 
 var tileset_cache := []
 var tileset_palettes := []
@@ -122,7 +122,7 @@ func set_tile_visual(x: int, y: int, layer: int, tileset_id: int, tile_id: int, 
 		if(update_bitmask):
 			layer_tilemap_node.update_bitmask_area(Vector2(x, y))
 
-func load_in(loaded_level_data : LevelData, loaded_level_area : LevelArea):
+func load_in(loaded_level_data : LevelDataOld, loaded_level_area : LevelAreaOld):
 	
 	level_data = loaded_level_data
 	level_area = loaded_level_area

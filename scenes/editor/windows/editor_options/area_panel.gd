@@ -41,7 +41,7 @@ func set_id(new_id):
 	id = new_id
 #	name_line.text = "ID: " + str(id)
 
-func swap(areaA : LevelArea, areaB : LevelArea, areasArray : Array) -> Array:
+func swap(areaA : LevelAreaOld, areaB : LevelAreaOld, areasArray : Array) -> Array:
   var area1 = areasArray.find(areaA)
   var area2 = areasArray.find(areaB)
   var temp = areasArray[area1]

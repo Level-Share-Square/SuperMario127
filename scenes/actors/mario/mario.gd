@@ -412,7 +412,7 @@ func play_shine_sound() -> void:
 
 
 # warning-ignore: unused_argument
-func load_in(level_data : LevelData, level_area : LevelArea):
+func load_in(level_data : LevelDataOld, level_area : LevelAreaOld):
 	level_bounds = level_area.bounds
 	for exception in collision_exceptions:
 		add_collision_exception_with(get_node(exception))

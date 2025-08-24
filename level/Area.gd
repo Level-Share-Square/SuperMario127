@@ -1,4 +1,4 @@
-class_name LevelArea
+class_name LevelAreaOld
 extends Resource
 
 export var objects = []

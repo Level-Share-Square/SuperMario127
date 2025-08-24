@@ -4,12 +4,12 @@ class_name LevelDataLoader
 
 export(Array, NodePath) var nodes_to_load = []
 
-var level_data : LevelData
-var level_area : LevelArea
+var level_data : LevelDataOld
+var level_area : LevelAreaOld
 
 signal loaded
 
-func load_in(loaded_level_data : LevelData, loaded_level_area : LevelArea):
+func load_in(loaded_level_data : LevelDataOld, loaded_level_area : LevelAreaOld):
 	Singleton.MiscShared.is_controlling = false
 	level_data = loaded_level_data
 	level_area = loaded_level_area

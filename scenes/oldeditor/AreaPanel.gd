@@ -34,7 +34,7 @@ func set_id(new_id):
 	id = new_id
 	id_text.text = "ID: " + str(id)
 
-func swap(areaA : LevelArea, areaB : LevelArea, areasArray : Array) -> Array:
+func swap(areaA : LevelAreaOld, areaB : LevelAreaOld, areasArray : Array) -> Array:
   var area1 = areasArray.find(areaA)
   var area2 = areasArray.find(areaB)
   var temp = areasArray[area1]
@@ -74,7 +74,7 @@ func check_moveability():
 
 func duplicate_area():
 	if Singleton.CurrentLevelData.level_data.areas.size() != 32:
-		var area = LevelArea.new()
+		var area = LevelAreaOld.new()
 		var dup = Singleton.CurrentLevelData.level_data.areas[id]
 		area.duplicate(dup)
 		Singleton.CurrentLevelData.level_data.areas.append(area)
@@ -82,7 +82,7 @@ func duplicate_area():
 	
 func move_area_down():
 	if id < Singleton.CurrentLevelData.level_data.areas.size() - 1 && Singleton.CurrentLevelData.level_data.areas.size() > 1:
-		var area1 = LevelArea.new()
+		var area1 = LevelAreaOld.new()
 		area1.duplicate(Singleton.CurrentLevelData.level_data.areas[id])
 		area1.settings = Singleton.CurrentLevelData.level_data.areas[id].settings
 		Singleton.CurrentLevelData.level_data.areas.remove(id)
@@ -102,7 +102,7 @@ func move_area_down():
 
 func move_area_up():
 	if id > 0 && Singleton.CurrentLevelData.level_data.areas.size() > 1:
-		var area1 = LevelArea.new()
+		var area1 = LevelAreaOld.new()
 		area1.duplicate(Singleton.CurrentLevelData.level_data.areas[id])
 		area1.settings = Singleton.CurrentLevelData.level_data.areas[id].settings
 		Singleton.CurrentLevelData.level_data.areas.remove(id)

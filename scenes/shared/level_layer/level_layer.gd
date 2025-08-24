@@ -8,14 +8,14 @@ onready var object_manager = $"%ObjectManager"
 var level_layer_data: LevelLayerData
 
 
-func load_in(level_data: LevelData, level_area: LevelArea):
+func load_in(level_data: LevelDataOld, level_area: LevelAreaOld):
 	tile_map_manager.load_in(level_data, level_area)
 	object_manager.load_in(level_data, level_area)
 	
 
 # Interface functions
 
-func place_tile(to_place: Tile):
+func place_tile(to_place: TileData):
 	tile_map_manager.place_tile(to_place)
 
 

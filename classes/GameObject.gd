@@ -18,8 +18,8 @@ var global := {}
 var editor_aliases := {}
 
 var mode: int = 0
-var level_data: LevelData = null
-var level_area: LevelArea = null
+var level_data: LevelDataOld = null
+var level_area: LevelAreaOld = null
 var level_object: WeakRef = null
 var shared: LevelShared = null
 

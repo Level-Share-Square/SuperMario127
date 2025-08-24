@@ -4,7 +4,7 @@ extends Action
 
 var shared: LevelShared
 
-var area_settings: LevelAreaSettings = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].area_settings
+var area_settings: LevelAreaOldSettings = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].area_settings
 var bounds: Rect2
 
 

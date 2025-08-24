@@ -1,4 +1,4 @@
-extends LevelData
+extends LevelDataOld
 class_name ValidityChecker
 
 const INFO_DATA_SUFFIX: String = "~0*0~0*0~0*0~0*0]"
@@ -462,7 +462,7 @@ func load_in(code: String)-> void:
 		result = {}
 		return
 	
-	if (!LevelData.check_code(result)):
+	if (!LevelDataOld.check_code(result)):
 		invalid_reason = "Level has an invalid code structure or is missing required parts."
 		result = {}
 		return

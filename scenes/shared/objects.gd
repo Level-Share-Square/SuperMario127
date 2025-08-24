@@ -6,8 +6,8 @@ signal objects_ready
 
 export(NodePath) var shared_path
 
-var level_data : LevelData
-var level_area : LevelArea
+var level_data : LevelDataOld
+var level_area : LevelAreaOld
 
 var object_cache = []
 
@@ -16,7 +16,7 @@ var object_index: int = 0
 var loaded: bool = false
 
 
-func load_in(loaded_level_data : LevelData, loaded_level_area : LevelArea):
+func load_in(loaded_level_data : LevelDataOld, loaded_level_area : LevelAreaOld):
 	loaded = false
 	object_index = 0
 	

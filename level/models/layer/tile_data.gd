@@ -1,4 +1,4 @@
-class_name Tile
+class_name TileData
 extends Resource
 
 

@@ -17,7 +17,7 @@ var level_folder: String
 
 # i'm not quite sure what the idea was behind making it load
 # the level data twice, but i went and removed that
-var level_data : LevelData
+var level_data : LevelDataOld
 # if the code was already loaded in full once,
 # no point in wasting time doing it again :p
 var is_fully_loaded: bool
