@@ -8,10 +8,7 @@ var tile_datas: Array
 
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func _init(set_layer_metadata, set_object_datas, set_tile_datas):
+	layer_metadata = set_layer_metadata
+	object_datas = set_object_datas
+	tile_datas = set_tile_datas

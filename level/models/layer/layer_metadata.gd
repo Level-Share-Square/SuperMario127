@@ -13,11 +13,10 @@ var is_ground: bool
 var activated_mission_id: int = -1
 
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func _init(set_parallax_distance, set_autoset_tint, set_layer_tint, set_order, set_is_ground, set_activated_mission_id):
+	parallax_distance = set_parallax_distance
+	autoset_tint = set_autoset_tint
+	layer_tint = set_layer_tint
+	order = set_order
+	is_ground = set_is_ground
+	activated_mission_id = set_activated_mission_id

@@ -6,12 +6,6 @@ var area_metadata: AreaMetadata
 var layers: Array
 
 
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func _init(set_area_metadata: AreaMetadata, set_layers: Array):
+	area_metadata = set_area_metadata
+	layers = set_layers

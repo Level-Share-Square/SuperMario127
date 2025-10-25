@@ -519,6 +519,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/menu/levels_list/cards/level/level_card.gd"
 }, {
+"base": "Reference",
+"class": "LevelCodeSerializer",
+"language": "GDScript",
+"path": "res://level/data/level_code_serializer.gd"
+}, {
+"base": "Reference",
+"class": "LevelCodeTokenizer",
+"language": "GDScript",
+"path": "res://level/data/level_code_tokenizer.gd"
+}, {
 "base": "Resource",
 "class": "LevelData",
 "language": "GDScript",
@@ -653,6 +663,11 @@ _global_script_classes=[ {
 "class": "ObjectManager",
 "language": "GDScript",
 "path": "res://scenes/shared/level_layer/object_manager.gd"
+}, {
+"base": "Resource",
+"class": "ObjectMetadata",
+"language": "GDScript",
+"path": "res://level/models/layer/object_metadata.gd"
 }, {
 "base": "Reference",
 "class": "OldAction",
@@ -1202,6 +1217,8 @@ _global_script_class_icons={
 "LayerMetadata": "",
 "LevelAreaOld": "",
 "LevelCard": "",
+"LevelCodeSerializer": "",
+"LevelCodeTokenizer": "",
 "LevelData": "",
 "LevelDataLoader": "",
 "LevelDataOld": "",
@@ -1229,6 +1246,7 @@ _global_script_class_icons={
 "Nozzle": "",
 "ObjectData": "",
 "ObjectManager": "",
+"ObjectMetadata": "",
 "OldAction": "",
 "OldEditorWindow": "",
 "OptionBase": "",

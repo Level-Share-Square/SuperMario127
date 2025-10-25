@@ -1,7 +1,10 @@
 class_name ObjectData
 extends Resource
 
-var type_id: int = 0
-var palette: int = 0
-
+var metadata: ObjectMetadata
 var properties: Array = []
+
+
+func _init(set_metadata, set_properties):
+	metadata = set_metadata
+	properties = set_properties
