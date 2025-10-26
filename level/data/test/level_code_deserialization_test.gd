@@ -8,6 +8,8 @@ const TEST_CODE_PATH = "res://level/data/test/test_code.txt"
 func _ready():
 	var code = load_file()
 	var level = LevelCodeSerializer.deserialize_level_code(code)
+	# breakpoint here
+	pass
 
 
 func load_file():
