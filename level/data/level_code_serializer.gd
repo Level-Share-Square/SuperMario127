@@ -5,7 +5,15 @@ class_name LevelCodeSerializer
 static func deserialize_level_code(code: String) -> LevelData:
 	var level_code = LevelCodeTokenizer.splice_level(code)
 	var metadata_code = LevelCodeTokenizer.splice_metadata(code)
-	var areas_code = LevelCodeTokenizer.splice_areas(level_code)
+	var level_components_code = LevelCodeTokenizer.splice_level_components(level_code)
+	
+	# all area codes (in one string)
+	var area_list_code = level_components_code[0]
+	var mission_data_code = level_components_code[1]
+	var editor_data_code = level_components_code[2]
+	
+	# all area codes(in a string array)
+	var areas_code = LevelCodeTokenizer.splice_areas(area_list_code)
 
 	
 	var new_level_metadata = deserialize_level_metadata_code(metadata_code)
@@ -20,20 +28,27 @@ static func deserialize_level_code(code: String) -> LevelData:
 	
 static func deserialize_area_code(area_code: String) -> AreaData:
 	var area_metadata_code = LevelCodeTokenizer.splice_metadata(area_code)
-	var layers_code = LevelCodeTokenizer.splice_layers(area_code)
+	var area_components_code = LevelCodeTokenizer.splice_area_components(area_code)
+	
+	var layers_code = area_components_code[0]
 	
 	var area_metadata = deserialize_area_metadata_code(area_metadata_code)
-	var layers = []
-	for layer in layers_code:
-		layers.push_back(deserialize_layer_code(layer))
+	var layers = deserialize_layers_code(layers_code)
 		
 	return AreaData.new(area_metadata, layers)
 	
+static func deserialize_layers_code(layers_code: String) -> Array:
+	var layers_code_array = LevelCodeTokenizer.splice_layers(layers_code)
+	var layers = []
+	for layer in layers_code_array:
+		layers.push_back(deserialize_layer_code(layer))
+	return layers
+	
 static func deserialize_layer_code(layer_code: String) -> LayerData:
 	var layer_metadata_code = LevelCodeTokenizer.splice_metadata(layer_code)
-	var tiles_and_objects = LevelCodeTokenizer.splice_tiles_and_objects(layer_code)
-	var tiles_code = tiles_and_objects[0]
-	var objects_code = tiles_and_objects[1]
+	var layer_components = LevelCodeTokenizer.splice_layer_components(layer_code)
+	var tiles_code = layer_components[0]
+	var objects_code = layer_components[1]
 	
 	var layer_metadata = deserialize_layer_metadata_code(layer_metadata_code)
 	var tiles = []
@@ -81,7 +96,7 @@ static func deserialize_area_metadata_code(area_code: String) -> AreaMetadata:
 	var area_metadata_code = LevelCodeTokenizer.splice_metadata(area_code)
 	var vars = deserialize_datas_code(area_metadata_code)
 	
-	var bounds: Vector2 = vars[0]
+	var bounds: Rect2 = vars[0]
 	var name: String = vars[1]
 	var sky: int = vars[2]
 	var background: int = vars[3]

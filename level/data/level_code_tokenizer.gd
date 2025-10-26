@@ -1,14 +1,16 @@
 class_name LevelCodeTokenizer
 
 const level_pattern = "\\[(?:[^\\[\\]]+|\\[[^\\[\\]]*\\])*\\]"
+const level_components_pattern = "\\[(?:[^\\[\\]]+|\\[[^\\[\\]]*\\])*\\]"
 const area_pattern = "\\[(?:[^\\[\\]]+|\\[[^\\[\\]]*\\])*\\]"
+const area_components_pattern = "\\[(?:[^\\[\\]]+|\\[[^\\[\\]]*\\])*\\]"
 const layer_pattern = "\\[(?:[^\\[\\]]+|\\[[^\\[\\]]*\\])*\\]"
-const tiles_and_objects_pattern = "\\[(?:[^\\[\\]]+|\\[[^\\[\\]]*\\])*\\]"
+const layer_components_pattern = "\\[(?:[^\\[\\]]+|\\[[^\\[\\]]*\\])*\\]"
 const tile_pattern = "\\[(?:[^\\[\\]]+|\\[[^\\[\\]]*\\])*\\]"
 const objects_pattern = "\\[(?:[^\\[\\]]+|\\[[^\\[\\]]*\\])*\\]"
 const object_pattern = "\\[(?:[^\\[\\]]+|\\[[^\\[\\]]*\\])*\\]"
 const metadata_pattern = "\\{(?:[^{}]++|\\{[^{}]*\\})*\\}"
-const data_pattern = "^[^,]*"
+const data_pattern = "^((?:[^[\\],]|\\[[^\\]]*\\])*)"
 const array_data_pattern = "\\{(?:[^{}]++|\\{[^{}]*\\})*\\}"
 
 
@@ -16,24 +18,36 @@ const array_data_pattern = "\\{(?:[^{}]++|\\{[^{}]*\\})*\\}"
 static func splice_level(code: String):
 	var regex = RegEx.new()
 	regex.compile(level_pattern)
-	return regex_match_to_string_array(regex.search_all(code))
+	return regex.search(code).get_string()
 	
 # takes full level code
-static func splice_areas(code: String):
+static func splice_level_components(code: String):
 	var regex = RegEx.new()
 	regex.compile(area_pattern)
 	return regex_match_to_string_array(regex.search_all(code))
 	
+# takes list of area codes
+static func splice_areas(code: String):
+	var regex = RegEx.new()
+	regex.compile(area_components_pattern)
+	return regex_match_to_string_array(regex.search_all(code))
+	
 # takes code of one area
+static func splice_area_components(code: String):
+	var regex = RegEx.new()
+	regex.compile(layer_pattern)
+	return regex_match_to_string_array(regex.search_all(code))
+	
+# takes list of layer codes
 static func splice_layers(code: String):
 	var regex = RegEx.new()
 	regex.compile(layer_pattern)
 	return regex_match_to_string_array(regex.search_all(code))
 	
 # takes code of one layer
-static func splice_tiles_and_objects(code: String):
+static func splice_layer_components(code: String):
 	var regex = RegEx.new()
-	regex.compile(tiles_and_objects_pattern)
+	regex.compile(layer_components_pattern)
 	return regex_match_to_string_array(regex.search_all(code))
 
 # takes code of all tiles
@@ -52,7 +66,7 @@ static func splice_objects(code: String):
 static func splice_object(code: String):
 	var regex = RegEx.new()
 	regex.compile(object_pattern)
-	return regex.search_all(code).get_string()
+	return regex.search(code).get_string()
 	
 # Pass any type into this to get its metadata.
 static func splice_metadata(code: String):
