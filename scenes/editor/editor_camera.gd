@@ -42,7 +42,7 @@ func _physics_process(delta):
 
 func load_in(_level_data: LevelDataOld, level_area: LevelAreaOld):
 #	for object in level_area.objects:
-#		if is_instance_valid(object) and object is ObjectData:
+#		if is_instance_valid(object) and object is ObjectDataOld:
 #			if object.type_id == 0:
 #				position = object.properties[0] # properties[0] is always position, at least for spawners
 	

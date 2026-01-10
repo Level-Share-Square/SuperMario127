@@ -116,8 +116,8 @@ func place_object(pos: Vector2):
 #			break
 
 
-func create_object_data(position: Vector2, object_id: int, palette: int) -> ObjectData:
-	var data = ObjectData.new()
+func create_object_data(position: Vector2, object_id: int, palette: int) -> ObjectDataOld:
+	var data = ObjectDataOld.new()
 	data.type_id = object_id
 	data.palette = palette
 	data.properties.append(position)
