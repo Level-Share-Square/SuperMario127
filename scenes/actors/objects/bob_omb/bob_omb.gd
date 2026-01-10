@@ -59,7 +59,7 @@ func player_entered(body):
 
 
 func create_coin():
-	var object = ObjectData.new()
+	var object = ObjectDataOld.new()
 	object.type_id = 1
 	object.properties = []
 	object.properties.append(kinematic_body.global_position)

@@ -235,7 +235,7 @@ func copy():
 		if editor.selected_objects != {}:
 			var copied_objects: Array
 			for i in editor.selected_objects:
-				var data: ObjectData = i.level_object.get_ref()
+				var data: ObjectDataOld = i.level_object.get_ref()
 				var properties: Array = []
 				for property in data.properties:
 					properties.append(value_util.encode_value(property))
@@ -249,7 +249,7 @@ func generate_object_data():
 	if result is Array:
 		var data_array: Array
 		for i in result:
-			var object_data = ObjectData.new()
+			var object_data = ObjectDataOld.new()
 			var properties: Array = []
 			for property in i["properties"]:
 				properties.append(value_util.decode_value(property))

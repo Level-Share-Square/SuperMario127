@@ -63,7 +63,7 @@ func enter_detector(body):
 			body.add_nozzle("RocketNozzle")
 			
 			#create nozzle after bouncing
-			var object = ObjectData.new()
+			var object = ObjectDataOld.new()
 			object.type_id = 20
 			object.properties = []
 			object.properties.append(position + Vector2(0, 4))

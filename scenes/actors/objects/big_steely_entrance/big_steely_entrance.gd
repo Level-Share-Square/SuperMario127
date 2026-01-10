@@ -46,7 +46,7 @@ func check_for_blocking_elements() -> bool:
 	return get_world_2d().direct_space_state.intersect_shape(shape_query_parameters).empty()
 
 func create_new_steely_object() -> Node:
-	var object = ObjectData.new()
+	var object = ObjectDataOld.new()
 	object.type_id = 37
 	object.properties = []
 	object.properties.append(global_position)

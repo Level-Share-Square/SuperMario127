@@ -129,7 +129,7 @@ func is_on_ground() -> bool:
 
 
 func create_coin(velocity: Vector2, offset: Vector2) -> GameObject:
-	var object: = ObjectData.new()
+	var object: = ObjectDataOld.new()
 	object.type_id = 1
 	object.properties = []
 	object.properties.append(global_position + offset)

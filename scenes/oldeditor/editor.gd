@@ -505,8 +505,8 @@ func _process(delta : float) -> void:
 			
 			if left_held and selected_tool == 0 and Input.is_action_just_pressed("place") and !rotating and selected_box.item.is_object:
 				if Input.is_action_pressed("duplicate"):
-					var object := ObjectData.new()
-					var original_object : ObjectData = hovered_object.level_object.get_ref()
+					var object := ObjectDataOld.new()
+					var original_object : ObjectDataOld = hovered_object.level_object.get_ref()
 					object.type_id = original_object.type_id
 					object.palette = original_object.palette
 					for prop in original_object.properties:
@@ -595,7 +595,7 @@ func _process(delta : float) -> void:
 						
 					
 					if object_pos and !shared.is_object_at_position(object_pos) and item.on_place(object_pos, level_data, level_area):
-						var object := ObjectData.new()
+						var object := ObjectDataOld.new()
 						object.type_id = item.object_id
 						object.palette = item.palette_index
 						object.properties.append(object_pos)
@@ -645,7 +645,7 @@ func _process(delta : float) -> void:
 					
 				
 				if object_pos and !shared.is_object_at_position(object_pos) and item.on_place(object_pos, level_data, level_area):
-					var object := ObjectData.new()
+					var object := ObjectDataOld.new()
 					object.type_id = item.object_id
 					object.palette = item.palette_index
 					object.properties.append(object_pos)

@@ -113,7 +113,7 @@ func hit(hit_pos: Vector2):
 	position.y -= 2
 
 func create_coin()->void :
-	var object: = ObjectData.new()
+	var object: = ObjectDataOld.new()
 	object.type_id = 1
 	object.properties = []
 	object.properties.append(body.global_position)
@@ -258,7 +258,7 @@ func calculate_fireball_velocity(source_position: Vector2, target_position: Vect
 	return new_velocity/.13
 
 func spawn_fireball():
-	var object: = ObjectData.new()
+	var object: = ObjectDataOld.new()
 					
 	object.type_id = 134
 	object.properties = []
