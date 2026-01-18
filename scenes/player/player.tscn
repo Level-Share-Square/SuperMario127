@@ -1243,6 +1243,7 @@ nodes_to_load = [ NodePath("Viewports/ViewportContainer/Viewport/World/Shared"),
 character = NodePath("Viewports/ViewportContainer/Viewport/World/Character")
 camera = NodePath("Viewports/ViewportContainer/Viewport/CameraP1")
 shared = NodePath("Viewports/ViewportContainer/Viewport/World/Shared")
+backgrounds = NodePath("Viewports/ViewportContainer/Viewport/Backgrounds")
 
 [node name="PhotoModeController" type="Node" parent="."]
 pause_mode = 2
@@ -2519,6 +2520,5 @@ bus = "Sounds"
 [connection signal="timeout" from="UIUnder/HUD/Control/ShineResults/HideTimer" to="UIUnder/HUD/Control/ShineResults" method="hide_ui"]
 [connection signal="timeout" from="UIUnder/HUD/Control/ShineResults/RecordTimer" to="UIUnder/HUD/Control/ShineResults" method="hide_ui"]
 [connection signal="resized" from="UIUnder/HUD/Control/ShineResults/VBoxContainer/NewRecord" to="UIUnder/HUD/Control/ShineResults/VBoxContainer/NewRecord" method="resized"]
-[connection signal="player_removed" from="Viewports" to="Viewports/ViewportContainer/CanvasLayer2/Stamina" method="player_removed"]
 
 [editable path="UIUnder/HUD/Control/TimerManager"]

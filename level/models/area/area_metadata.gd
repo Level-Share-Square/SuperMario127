@@ -1,7 +1,7 @@
 class_name AreaMetadata
 extends Resource
 
-# holds the code for the entire area, so that an area can be loaded with just it's metadata 
+# holds the code for the entire area, so that an area can be loaded with just its metadata 
 var area_code: String = ""
 var bounds: Rect2 = Rect2(0, 0, 80, 30)
 

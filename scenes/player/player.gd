@@ -11,6 +11,7 @@ export var character : NodePath
 export var character2 : NodePath
 export var camera : NodePath
 export var shared : NodePath
+export var backgrounds : NodePath
 
 var ssc_displayed = true
 
