@@ -1,16 +1,27 @@
 extends Node
 
+var layers: Array
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+func add_layer(layer: LevelLayer):
+	layers.append(layer)
+	
+func remove_layer(index: int):
+	if(index >= layers.size()):
+		push_error("tried to delete OOB layer")
+	layers.remove(index)
 
+func add_item(item: GameObject, index: int):
+	if(index >= layers.size()):
+		push_error("tried to delete OOB layer")
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+func add_tile(tile: TileData, index: int):
+	if(index >= layers.size()):
+		push_error("tried to delete OOB layer")
 
+func remove_item(item: GameObject, index: int):
+	if(index >= layers.size()):
+		push_error("tried to delete OOB layer")
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func remove_tile(tile: TileData, index: int):
+	if(index >= layers.size()):
+		push_error("tried to delete OOB layer")
