@@ -1,13 +1,12 @@
+class_name LevelDataInstancer
 extends Node
 
 
-var player: LevelPlayer
+
 
 
 # The purpose of this script is to take the new level data format, and instance all of the data into an actual level by setting variables which are scattered across multiple scenes and scripts
 
-func _init(_player: LevelPlayer):
-	player = _player
 
 func instance_level_data(data: LevelData):
 	instance_level_metadata(data.level_metadata)
@@ -17,6 +16,17 @@ func instance_level_data(data: LevelData):
 		instance_area(area_data)
 	
 func instance_level_metadata(data: LevelMetadata):
+	if(Singleton.CurrentLevelData.level_info == null):
+		#this is a conflict with the old loading logic, im not sure how to get around it...
+		var level_id: String = Singleton.CurrentLevelData.level_id
+		var working_folder: String = Singleton.CurrentLevelData.working_folder
+		var is_campaign: bool = Singleton.CurrentLevelData.is_campaign
+		
+		var code_path: String = level_list_util.get_level_file_path(level_id, working_folder)
+		var level_code: String = level_list_util.load_level_code_file(code_path)
+		
+		Singleton.CurrentLevelData.level_info = LevelInfo.new(level_id, working_folder, level_code)
+	
 	var level_info = Singleton.CurrentLevelData.level_info
 	level_info.level_name = data.level_name
 	level_info.level_author = data.level_author
@@ -27,7 +37,7 @@ func instance_level_metadata(data: LevelMetadata):
 	level_info.thumbnail_background_palette = data.level_thumbnail_background_palette
 	
 func instance_area(data: AreaData):
-	var area_data: LevelAreaOld = AreaDataOld.new()
+	var area_data: LevelAreaOld = LevelAreaOld.new()
 	instance_area_metadata(data.area_metadata, area_data)
 	instance_layers_array(data.layers, area_data)
 	Singleton.CurrentLevelData.level_data.areas.append(area_data)
@@ -58,7 +68,8 @@ func instance_layer(data: LayerData, layer: LevelLayer):
 func instance_objects_array(object_datas: Array, layer: LevelLayer):
 	for data in object_datas:
 		var object = ObjectDataOld.new()
-		instance_object(data, objet)
+		instance_object(data, object)
+		layer.place_object(object)
 		
 func instance_object(data: ObjectData, object: ObjectDataOld):
 	instance_object_metadata(data.metadata, object)
@@ -72,14 +83,16 @@ func instance_object_metadata(data: ObjectMetadata, object: ObjectDataOld):
 	object.properties.append(data.rotation)
 	
 func instance_tiles_array(tiles: Array, layer: LevelLayer):
-	var tilemap: TileMap = TileMap.new()
 	for tile in tiles:
-		instance_tile(tile, tilemap)
-	# add tilemap to layer
+		instance_tile(tile, layer)
 	
-func instance_tile(tile: TileData, tilemap: TileMap):
-	pass
-	
+func instance_tile(tile: TileData, layer: LevelLayer):
+	layer.place_tile(tile)
 	
 func instance_layer_metadata(data: LayerMetadata, layer: LevelLayer):
-	pass
+	layer.set_parallax_distance(data.parallax_distance)
+	layer.set_autoset_tint(data.autoset_tint)
+	layer.set_layer_tint(data.layer_tint)
+	layer.set_order(data.order)
+	layer.set_is_ground(data.is_ground)
+	layer.set_activated_mission_id(data.activated_mission_id)

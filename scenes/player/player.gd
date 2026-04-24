@@ -53,7 +53,11 @@ func _physics_process(delta):
 func _ready():
 	sound_timer = wrapf(switch_timer, 0, 1.1)
 #	vignette.visible = false
-	
+
+	var layers_node = get_node(layers)
+	for layer in Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].layers:
+		layers_node.add_layer(layer)
+
 	Singleton.CurrentLevelData.enemies_instanced = 0
 	Singleton.CurrentLevelData.level_data.vars.reset_counters()
 	
@@ -93,6 +97,7 @@ func _ready():
 
 	yield(get_tree(), "physics_frame")
 	Singleton.CurrentLevelData.level_data.vars.max_red_coins = Singleton.CurrentLevelData.get_red_coins_before_area(Singleton.CurrentLevelData.level_data.areas.size())
+	
 
 func _unhandled_input(event):
 	if event.is_action_pressed("reload") or event.is_action_pressed("reload_from_start") and !Singleton.SceneTransitions.transitioning and (!Singleton.ModeSwitcher.get_node("ModeSwitcherButton").switching_disabled or Singleton.ModeSwitcher.get_node("ModeSwitcherButton").invisible):

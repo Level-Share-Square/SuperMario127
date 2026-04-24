@@ -534,6 +534,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://level/models/level/level.gd"
 }, {
+"base": "Node",
+"class": "LevelDataInstancer",
+"language": "GDScript",
+"path": "res://scenes/player/level/level_data_instancer.gd"
+}, {
 "base": "Node2D",
 "class": "LevelDataLoader",
 "language": "GDScript",
@@ -1230,6 +1235,7 @@ _global_script_class_icons={
 "LevelCodeSerializer": "",
 "LevelCodeTokenizer": "",
 "LevelData": "",
+"LevelDataInstancer": "",
 "LevelDataLoader": "",
 "LevelDataOld": "",
 "LevelDecoder": "",

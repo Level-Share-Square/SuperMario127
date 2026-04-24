@@ -106,8 +106,11 @@ static func deserialize_level_metadata_code(level_metadata_code: String) -> Leve
 	var level_author = vars[1]
 	var level_description = vars[2]
 	var level_thumbnail_url = vars[3]
+	var level_thumbnail_sky = vars[4]
+	var level_thumbnail_background = vars[5]
+	var level_thumbnail_background_palette = vars[6]
 	
-	return LevelMetadata.new(level_name, level_author, level_description, level_thumbnail_url)
+	return LevelMetadata.new(level_name, level_author, level_description, level_thumbnail_url, level_thumbnail_sky, level_thumbnail_background, level_thumbnail_background_palette)
 	
 	
 # !! Takes full area code as input! so that the area code can be stored as a variable
