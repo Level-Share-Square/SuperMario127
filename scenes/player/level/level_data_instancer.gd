@@ -67,13 +67,14 @@ func instance_layer(data: LayerData, layer: LevelLayer):
 	
 func instance_objects_array(object_datas: Array, layer: LevelLayer):
 	for data in object_datas:
-		var object = ObjectDataOld.new()
-		instance_object(data, object)
-		layer.place_object(object)
+		instance_object(data, layer)
 		
-func instance_object(data: ObjectData, object: ObjectDataOld):
+func instance_object(data: ObjectData, layer: LevelLayer):
+	var object = ObjectDataOld.new()
 	instance_object_metadata(data.metadata, object)
 	object.properties.append(data.properties)
+	var shared = LevelShared
+	layer.place_object(shared.create_object(object, true))
 	
 func instance_object_metadata(data: ObjectMetadata, object: ObjectDataOld):
 	object.type_id = data.type_id
