@@ -2,7 +2,7 @@ class_name LevelDataInstancer
 extends Node
 
 
-
+const LAYER_SCENE = preload("res://scenes/shared/level_layer/level_layer.tscn")
 
 
 # The purpose of this script is to take the new level data format, and instance all of the data into an actual level by setting variables which are scattered across multiple scenes and scripts
@@ -56,7 +56,8 @@ func instance_area_metadata(data: AreaMetadata, data_old: LevelAreaOld):
 
 func instance_layers_array(layers: Array, data_old: LevelAreaOld):
 	for layer in layers:
-		var new_layer = LevelLayer.new()
+		var new_layer = LAYER_SCENE.instance()
+		add_child(new_layer)
 		instance_layer(layer, new_layer)
 		data_old.layers.append(new_layer)
 		
