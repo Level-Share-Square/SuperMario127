@@ -5,6 +5,8 @@ var type_id: int = 0
 var palette: int = 0
 var enabled: bool = true
 var rotation: int = 0
+var scale: Vector2 = Vector2(1.0, 1.0)
+var position: Vector2 = Vector2(0.0, 0.0)
 
 
 func _init(set_type_id, set_palette, set_enabled, set_rotation):

@@ -152,6 +152,8 @@ static func deserialize_object_metadata_code(object_metadata_code: String) -> Ob
 	var palette: int = vars[1]
 	var enabled: bool = vars[2]
 	var rotation: int = vars[3]
+	var scale: Vector2 = vars[4]
+	var position: Vector2 = vars[5]
 	
 	return ObjectMetadata.new(type_id, palette, enabled, rotation)
 	
