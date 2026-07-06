@@ -44,8 +44,6 @@ func _ready():
 	
 	tileset_palettes = preload("res://generation/tileset_palettes.res").tileset_palettes
 	
-	_debug_populate_tile_data(Rect2(0, 0, 1500, 1500))
-	
 #	load_tiles(debug_tile_data)
 
 
@@ -54,14 +52,6 @@ func _unhandled_input(event):
 		place_tile(TileData.new(1, 0, 0, get_global_mouse_position() / 32), true)
 	elif event.is_action_pressed("RMB"):
 		remove_tile(get_global_mouse_position() / 32, true)
-
-
-func _debug_populate_tile_data(test_rect):
-	for x in range(test_rect.position.x, test_rect.size.x + test_rect.position.x):
-		for y in range(test_rect.position.y, test_rect.size.y + test_rect.position.y):
-			print("%s, %s" % [x, y])
-			place_tile(TileData.new(1, 0, 0, Vector2(x, y)))
-
 
 # tile array
 func load_tiles(tiles: Array):
