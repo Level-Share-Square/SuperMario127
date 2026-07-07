@@ -169,49 +169,75 @@ static func deserialize_datas_code(datas_code: String) -> Array:
 	
 	
 static func deserialize_data_code(data_code: String):
-	var code = data_code.substr(0, 1)
-	var data = data_code.substr(1)
-	var result
+	var type_code = data_code.substr(0, 1)
+	var data = ""
+	if type_code == "a":
+		type_code = data_code.substr(0, 2)
+		data = data_code.substr(2)
+	else:
+		data = data_code.substr(1)
 	
-	match code:
+	match type_code:
 		#string
 		"S":
-			result = data
+			return data
 		#Int
 		"I":
-			result = int(data)
+			return int(data)
 		#Bool
 		"B":
-			result = bool(data)
+			return bool(data)
 		#Float
 		"F":
-			result = float(data)
-		#vector
+			return float(data)
+		#Vector2
 		"V":
 			data = LevelCodeTokenizer.splice_data_array(data)
 			var data_array = deserialize_datas_code(data)
-			result = Vector2(data_array[0], data_array[1])
+			return Vector2(data_array[0], data_array[1])
 		# Color
 		"C":
 			data = LevelCodeTokenizer.splice_data_array(data)
 			var data_array = deserialize_datas_code(data)
 			if(data_array.size() > 3):
-				result = Color(data_array[0], data_array[1], data_array[2], data_array[3])
+				return Color(data_array[0], data_array[1], data_array[2], data_array[3])
 			else:
-				result = Color(data_array[0], data_array[1], data_array[2], 255)
+				return Color(data_array[0], data_array[1], data_array[2], 255)
 		# PoolStringArray
-		"T":
+		"aS":
 			data = LevelCodeTokenizer.splice_data_array(data)
-			result = PoolStringArray(deserialize_datas_code(data))
+			return PoolStringArray(deserialize_datas_code(data))
+		# PoolIntArray
+		"aI":
+			data = LevelCodeTokenizer.splice_data_array(data)
+			return PoolIntArray(deserialize_datas_code(data))
+		# PoolRealArray 
+		# MAN I wish we had godot 4 for things like PackedFloat64Array
+		"aF":
+			data = LevelCodeTokenizer.splice_data_array(data)
+			return PoolRealArray(deserialize_datas_code(data))
 		# PoolVector2Array
-		"E":
+		"aV":
 			data = LevelCodeTokenizer.splice_data_array(data)
-			result = PoolVector2Array(deserialize_datas_code(data))
+			return PoolVector2Array(deserialize_datas_code(data))
 		 # Rect2
 		"R":
 			data = LevelCodeTokenizer.splice_data_array(data)
 			var data_array = deserialize_datas_code(data)
-			result = Rect2(data_array[0], data_array[1], data_array[2], data_array[3])
-		# Still need to do curve2d but idk how that one works really
-		
-	return result
+			return Rect2(data_array[0], data_array[1], data_array[2], data_array[3])
+		# Curve2D
+		"U":
+			data = LevelCodeTokenizer.splice_data_array(data)
+			var data_array = deserialize_datas_code(data)
+			
+			var points: Array = deserialize_datas_code(data_array[0])
+			var point_ins: Array = deserialize_datas_code(data_array[0])
+			var point_outs: Array = deserialize_datas_code(data_array[0])
+			var curve: Curve2D = Curve2D.new()
+			for i in range(points.size()):
+				curve.add_point(points[i], point_ins[i], point_outs[i])
+			
+			return curve
+		# Dialogue; not implemented yet
+#		"D":
+#			data = LevelCodeTokenizer.splice_data_array(data)
