@@ -19,8 +19,8 @@ enum TileLayers {
 const layer_index_offset: int = -2
 const layer_spacing: int = 16
 
-export var tilemaps : NodePath
-export var objects : NodePath
+export var tilemaps: NodePath
+export var objects: NodePath
 export var boo_block_texture = "res://assets/tiles/boo_block/boo_block.png"
 export var boo_block_texture_invis = "res://assets/tiles/boo_block/boo_block_invis.png"
 

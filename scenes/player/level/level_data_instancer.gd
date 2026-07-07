@@ -14,7 +14,8 @@ func instance_level_data(data: LevelData):
 	for area in data.area_metadatas:
 		var area_data = LevelCodeSerializer.deserialize_area_code(area.area_code)
 		instance_area(area_data)
-	
+
+
 func instance_level_metadata(data: LevelMetadata):
 	if(Singleton.CurrentLevelData.level_info == null):
 		#this is a conflict with the old loading logic, im not sure how to get around it...
@@ -35,13 +36,15 @@ func instance_level_metadata(data: LevelMetadata):
 	level_info.thumbnail_sky = data.level_thumbnail_sky
 	level_info.thumbnail_background = data.level_thumbnail_background
 	level_info.thumbnail_background_palette = data.level_thumbnail_background_palette
-	
+
+
 func instance_area(data: AreaData):
 	var area_data: LevelAreaOld = LevelAreaOld.new()
 	instance_area_metadata(data.area_metadata, area_data)
 	instance_layers_array(data.layers, area_data)
 	Singleton.CurrentLevelData.level_data.areas.append(area_data)
-	
+
+
 func instance_area_metadata(data: AreaMetadata, data_old: LevelAreaOld):
 	data_old.bounds = data.bounds
 	data_old.sky = data.sky
@@ -54,22 +57,26 @@ func instance_area_metadata(data: AreaMetadata, data_old: LevelAreaOld):
 	data_old.music = data.music
 	data_old.underwater_music = data.underwater_music
 
+
 func instance_layers_array(layers: Array, data_old: LevelAreaOld):
 	for layer in layers:
 		var new_layer = LAYER_SCENE.instance()
 		add_child(new_layer)
 		instance_layer(layer, new_layer)
 		data_old.layers.append(new_layer)
-		
+
+
 func instance_layer(data: LayerData, layer: LevelLayer):
 	instance_layer_metadata(data.layer_metadata, layer)
 	instance_objects_array(data.object_datas, layer)
 	instance_tiles_array(data.tile_datas, layer)
-	
+
+
 func instance_objects_array(object_datas: Array, layer: LevelLayer):
 	for data in object_datas:
 		instance_object(data, layer)
-		
+
+
 func instance_object(data: ObjectData, layer: LevelLayer):
 	var object = ObjectDataOld.new()
 	instance_object_metadata(data.metadata, object)
@@ -84,13 +91,17 @@ func instance_object_metadata(data: ObjectMetadata, object: ObjectDataOld):
 	object.properties.append(data.enabled)
 	object.properties.append(data.rotation)
 	
+
+
 func instance_tiles_array(tiles: Array, layer: LevelLayer):
 	for tile in tiles:
 		instance_tile(tile, layer)
-	
+
+
 func instance_tile(tile: TileData, layer: LevelLayer):
 	layer.place_tile(tile)
-	
+
+
 func instance_layer_metadata(data: LayerMetadata, layer: LevelLayer):
 	layer.set_parallax_distance(data.parallax_distance)
 	layer.set_autoset_tint(data.autoset_tint)

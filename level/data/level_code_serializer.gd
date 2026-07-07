@@ -26,8 +26,8 @@ static func deserialize_level_code(code: String) -> LevelData:
 	
 	var level_data = LevelData.new(new_level_metadata, new_mission_metadata, new_saved_editor_data, new_current_area, new_area_metadatas)
 	return level_data
-	
-	
+
+
 static func deserialize_area_code(area_code: String) -> AreaData:
 	var area_components_code = LevelCodeTokenizer.splice_area_components(area_code)
 	

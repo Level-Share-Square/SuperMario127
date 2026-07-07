@@ -9,69 +9,74 @@ const array_data_pattern = "\\{(?:[^{}]++|\\{[^{}]*\\})*\\}"
 static func splice_level(code: String):
 	var result = get_outermost_brackets(code)[0]
 	return get_outermost_brackets(code)[0]
-	
+
+
 # takes full level code
 static func splice_level_components(code: String):
-
 	return get_outermost_brackets(code)
-	
+
+
 # takes list of area codes
 static func splice_areas(code: String):
-
 	return get_outermost_brackets(code)
-	
+
+
 # takes code of one area
 static func splice_area_components(code: String):
-
 	return get_outermost_brackets(code)
-	
+
+
 # takes list of layer codes
 static func splice_layers(code: String):
-
 	return get_outermost_brackets(code)
-	
+
+
 # takes code of one layer
 static func splice_layer_components(code: String):
-
 	return get_outermost_brackets(code)
+
 
 # takes code of all tiles
 static func splice_tiles(code: String):
-
 	return get_outermost_brackets(code)
-	
+
+
 # takes code of all objects
 static func splice_objects(code: String):
-
 	return get_outermost_brackets(code)
-	
+
+
 # takes code of one object
 static func splice_object(code: String):
-
 	return get_outermost_brackets(code)[0]
-	
+
+
 # Pass any type into this to get its metadata.
 static func splice_metadata(code: String):
 	var regex = RegEx.new()
 	regex.compile(metadata_pattern)
 	return regex.search(code).get_string(1)
 
+
 # Used to get a list of primitive data types
 static func splice_data(code: String):
 	var regex = RegEx.new()
 	regex.compile(data_pattern)
 	return regex_match_to_string_array(regex.search_all(code))
-	
+
+
 # Handles extracting the items in an array data type
 static func splice_data_array(code: String):
 	return get_outermost_brackets(code)[0]
-	
+
+
 static func regex_match_to_string_array(matches: Array) -> Array:
 	var result = []
 	for mat in matches:
 		result.push_back(mat.get_string(0))
 	return result
-	
+
+
 # get brackets on the outmost layer, and ignore everything within curly braces
 static func get_outermost_brackets(text: String) -> Array:
 	var results: Array = []
@@ -101,6 +106,3 @@ static func get_outermost_brackets(text: String) -> Array:
 					start = -1
 	
 	return results
-
-
-

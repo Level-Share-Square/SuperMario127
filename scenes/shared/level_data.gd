@@ -136,8 +136,10 @@ func get_cached_foreground(index: int):
 #			loaded_ids += 1
 #			break
 
+
 func reset():
 	create_level_data()
+
 
 #var thread : Thread
 func _init() -> void:
@@ -157,17 +159,21 @@ func _init() -> void:
 	#thread = Thread.new()
 	#thread.start(self, "create_cache")
 
+
 # for now, process is disabled by default, so the timer needs to be started manually, if process here is ever needed for something else, create a bool for this
 func _process(delta):
 	time_score += delta
+
 
 func start_tracking_time_score(keep_time : bool = false):
 	set_process(true)
 	if !keep_time:
 		time_score = 0
 
+
 func stop_tracking_time_score():
 	set_process(false)
+
 
 func set_shine_ids():
 	var last_shine_id = 0
@@ -178,6 +184,7 @@ func set_shine_ids():
 				last_shine_id += 1
 	return last_shine_id
 
+
 func set_star_coin_ids():
 	var last_star_coin_id = 0
 	for area in Singleton.CurrentLevelData.level_data.areas:
@@ -186,6 +193,7 @@ func set_star_coin_ids():
 				object.properties[6] = last_star_coin_id
 				last_star_coin_id += 1
 	return last_star_coin_id
+
 
 func set_checkpoint_ids():
 	var checkpoint_id = 0
@@ -197,6 +205,7 @@ func set_checkpoint_ids():
 				checkpoint_id += 1
 	return checkpoint_id
 
+
 func get_red_coins_before_area(area_id : int):
 	var last_red_coin_id = 0
 	for index in range(area_id):
@@ -205,5 +214,3 @@ func get_red_coins_before_area(area_id : int):
 			if object.type_id == 30 and object.properties[3]:
 				last_red_coin_id += 1
 	return last_red_coin_id
-
-

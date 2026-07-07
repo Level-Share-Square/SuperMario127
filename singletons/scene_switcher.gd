@@ -9,6 +9,7 @@ var menu_return_screen: String
 var menu_return_args: Array
 var reload_base_folder: bool
 
+
 func quit_to_menu(screen_to_open : String = ""):
 	# if we quit from the pause menu, the tree will be paused, and that means the menu will also be paused and not work
 	get_tree().paused = false 
@@ -21,6 +22,7 @@ func quit_to_menu(screen_to_open : String = ""):
 	var main_menu_controller_scene = ResourceLoader.load("res://scenes/menu/menu_controller/menu_controller.tscn")
 	# warning-ignore: return_value_discarded
 	get_tree().change_scene_to(main_menu_controller_scene)
+
 
 func quit_to_menu_with_transition(screen_to_open : String = ""):
 	# after the transition finishes fading out, switch to the menu before starting the fade in
