@@ -13,4 +13,4 @@ func on_editor_settings_pressed():
 	emit_signal("open_editor_settings")
 
 func update_background():
-	owner.backgrounds.update_background_area(Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area])
+	owner.backgrounds.update_background_area(CurrentLevelData.level_data.areas[CurrentLevelData.area])

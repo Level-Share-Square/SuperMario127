@@ -13,8 +13,8 @@ onready var music_id_mapper = preload("res://assets/music/ids.tres")
 onready var sorted_list = preload("res://assets/music/sort_order.tres")
 
 func update_display():
-	var data = Singleton.CurrentLevelData.level_data
-	var area = data.areas[Singleton.CurrentLevelData.area]
+	var data = CurrentLevelData.level_data
+	var area = data.areas[CurrentLevelData.area]
 	
 	if typeof(area.settings.music) == TYPE_INT:
 		var resource = Singleton.MiscCache.get_music_node(area.settings.music)
@@ -44,7 +44,7 @@ func text_entered(text):
 		re.compile("(\\d+(?:\\.\\d+)?)")
 		if not re.search(music_note.text):
 			music_note.text = "0.00"
-		Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].settings.music = "LP" + music_note.text + "=" + music_title.text
+		CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.music = "LP" + music_note.text + "=" + music_title.text
 		Singleton.Music.reset_custom_song()
 		update_display()
 
@@ -71,8 +71,8 @@ func get_index_in_array(value, array):
 	return -1
 	
 func button_press():
-	var data = Singleton.CurrentLevelData.level_data
-	var area = data.areas[Singleton.CurrentLevelData.area]
+	var data = CurrentLevelData.level_data
+	var area = data.areas[CurrentLevelData.area]
 	
 	area.settings.music = area.settings.music if typeof(area.settings.music) == TYPE_INT else 0
 	var music_name = music_id_mapper.ids[area.settings.music]

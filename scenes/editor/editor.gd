@@ -51,12 +51,12 @@ func _ready():
 	
 	Engine.iterations_per_second = 60
 	# reset these to 0 since they get incremented by the loading in process every time
-	Singleton.CurrentLevelData.next_shine_id = 0
-	Singleton.CurrentLevelData.next_star_coin_id = 0
+	CurrentLevelData.next_shine_id = 0
+	CurrentLevelData.next_star_coin_id = 0
 	Singleton.CheckpointSaved.reset()
 	
-	var data = Singleton.CurrentLevelData.level_data
-	load_in(data, data.areas[Singleton.CurrentLevelData.area])
+	var data = CurrentLevelData.level_data
+	load_in(data, data.areas[CurrentLevelData.area])
 	
 	# if the mode switch button is invisible then the editor hasn't been readyed for the first time yet
 	# (editor _ready() gets called every time a mode switch happens)
@@ -69,7 +69,7 @@ func _ready():
 		# make sure the mode switcher button is set to have the play button as it's visual
 		Singleton.ModeSwitcher.button.change_visuals(0)
 	
-		Singleton.CurrentLevelData.unsaved_editor_changes = false
+		CurrentLevelData.unsaved_editor_changes = false
 
 
 func object_hovered(object):

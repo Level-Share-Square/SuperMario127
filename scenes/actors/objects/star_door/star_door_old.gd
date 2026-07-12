@@ -107,9 +107,9 @@ func _ready() -> void:
 	var append_tag
 	if destination_tag != "default_teleporter" || destination_tag != null:
 		append_tag = destination_tag.to_lower()
-	Singleton.CurrentLevelData.level_data.vars.teleporters.append([append_tag, self])
+	CurrentLevelData.level_data.vars.teleporters.append([append_tag, self])
 	
-	current_level_info = Singleton.CurrentLevelData.level_info
+	current_level_info = CurrentLevelData.level_info
 	match(collectible):
 		"shine":
 			collectible_dictionary = current_level_info.collected_shines
@@ -145,7 +145,7 @@ func exit_local_teleport():
 		door_enter_logic.is_idle = true
 
 func exit_remote_teleport():
-	Singleton.CurrentLevelData.level_data.vars.transition_data = []
+	CurrentLevelData.level_data.vars.transition_data = []
 	door_enter_logic.is_idle = true
 
 func _process(delta):

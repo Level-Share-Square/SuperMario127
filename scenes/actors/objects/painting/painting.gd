@@ -168,8 +168,8 @@ func _ready() -> void:
 func _on_property_changed(key, value):
 	if key == "teleport_mode" or key == "level_path":
 		if teleport_mode == TeleportMode.Level: 
-			if Singleton.CurrentLevelData.is_campaign:
-				var working_folder: String = Singleton.CurrentLevelData.working_folder
+			if CurrentLevelData.is_campaign:
+				var working_folder: String = CurrentLevelData.working_folder
 				var thumb_path: String = level_list_util.get_level_thumbnail_path(level_path, working_folder)
 				if level_list_util.file_exists(thumb_path):
 					custom_image.texture = level_list_util.get_image_from_path(thumb_path)

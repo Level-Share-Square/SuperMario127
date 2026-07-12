@@ -1,7 +1,7 @@
 extends Node2D
 
 ## level data
-onready var level_info: LevelInfo = Singleton.CurrentLevelData.level_info
+onready var level_info: LevelInfo = CurrentLevelData.level_info
 
 ## nodes
 onready var tween: Tween = $"%Tween"
@@ -64,7 +64,7 @@ func _ready():
 			continue
 		if !shine_details[i]["show_in_menu"]:
 			continue
-		if Singleton.CurrentLevelData.shine_progression:
+		if CurrentLevelData.shine_progression:
 			if !is_collected && find_last_collected_shine() == i - 1:
 				if scrollable_shines[0] + scrollable_shines.back() == scrollable_shines.size() - 1:
 					end = true
@@ -116,7 +116,7 @@ func _ready():
 
 func _input(event):
 	if Input.is_action_just_pressed("ui_right"):
-		if Singleton.CurrentLevelData.shine_progression:
+		if CurrentLevelData.shine_progression:
 			if scrollable_shines.size() > 1:
 				var scrollable_index: int = scrollable_shines.find(selected_shine_index)
 				var scroll_amount = scrollable_shines[scrollable_index + 1] - scrollable_shines[scrollable_index] if scrollable_index + 1 < scrollable_shines.size() else 1
@@ -124,7 +124,7 @@ func _input(event):
 			return
 		attempt_increment_selected_shine_index(1)
 	elif Input.is_action_just_pressed("ui_left"):
-		if Singleton.CurrentLevelData.shine_progression:
+		if CurrentLevelData.shine_progression:
 			if scrollable_shines.size() > 1:
 				var scrollable_index: int = scrollable_shines.find(selected_shine_index)
 				var scroll_amount = scrollable_shines[scrollable_index - 1] - scrollable_shines[scrollable_index]
@@ -144,7 +144,7 @@ func attempt_increment_selected_shine_index(increment : int) -> void:
 
 	var previous_selected_shine_index = selected_shine_index
 	# warning-ignore:narrowing_conversion
-	selected_shine_index = clamp(selected_shine_index + increment, 0, shine_sprites.size() - 1 if !Singleton.CurrentLevelData.shine_progression else scrollable_shines.back())
+	selected_shine_index = clamp(selected_shine_index + increment, 0, shine_sprites.size() - 1 if !CurrentLevelData.shine_progression else scrollable_shines.back())
 	# no point in doing anything if the value didn't actually change
 	if selected_shine_index == previous_selected_shine_index:
 		return

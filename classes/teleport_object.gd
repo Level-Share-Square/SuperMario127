@@ -70,7 +70,7 @@ func local_tp(entering_character : Character, entering):
 	exit_local_teleport()
 
 func find_local_pair():
-	for i in Singleton.CurrentLevelData.level_data.vars.teleporters:
+	for i in CurrentLevelData.level_data.vars.teleporters:
 		if i[0] == destination_tag.to_lower() && i[1] != self and !i[1].teleportation_mode:
 			return i[1]
 	return self
@@ -89,13 +89,13 @@ func change_areas(entering_character : Character, entering, force_fadeout):
 	var character2
 	if is_instance_valid(get_tree().get_current_scene().get_node(get_tree().get_current_scene().character2)):
 			character2 = get_tree().get_current_scene().get_node(get_tree().get_current_scene().character2)
-	if area_id >= Singleton.CurrentLevelData.level_data.areas.size():
-		area_id = Singleton.CurrentLevelData.area
+	if area_id >= CurrentLevelData.level_data.areas.size():
+		area_id = CurrentLevelData.area
 	
 	if entering:
 		if is_instance_valid(timer_manager):
 			
-			if (area_id == Singleton.CurrentLevelData.area):
+			if (area_id == CurrentLevelData.area):
 				
 				var area_timer: Control = timer_manager.get_timer("area_timer")
 				
@@ -110,12 +110,12 @@ func change_areas(entering_character : Character, entering, force_fadeout):
 			printerr("Couldn't find timer manager node!")
 		
 		# band aid crash fix
-		while Singleton.CurrentLevelData.level_data.vars.liquid_positions.size() <= Singleton.CurrentLevelData.area:
-			Singleton.CurrentLevelData.level_data.vars.liquid_positions.append([])
+		while CurrentLevelData.level_data.vars.liquid_positions.size() <= CurrentLevelData.area:
+			CurrentLevelData.level_data.vars.liquid_positions.append([])
 		
-		Singleton.CurrentLevelData.level_data.vars.liquid_positions[Singleton.CurrentLevelData.area] = []
-		for liquid in Singleton.CurrentLevelData.level_data.vars.liquids:
-			Singleton.CurrentLevelData.level_data.vars.liquid_positions[Singleton.CurrentLevelData.area].append(liquid[1].save_pos)
+		CurrentLevelData.level_data.vars.liquid_positions[CurrentLevelData.area] = []
+		for liquid in CurrentLevelData.level_data.vars.liquids:
+			CurrentLevelData.level_data.vars.liquid_positions[CurrentLevelData.area].append(liquid[1].save_pos)
 		
 		var powerup_array = [null, null, null]
 		if is_instance_valid(character.powerup):
@@ -129,7 +129,7 @@ func change_areas(entering_character : Character, entering, force_fadeout):
 		if !is_instance_valid(character.state):
 			character.state = character.get_state_node("FallState")
 		
-		Singleton.CurrentLevelData.level_data.vars.transition_character_data = [
+		CurrentLevelData.level_data.vars.transition_character_data = [
 			character.health,
 			character.health_shards,
 			nozzle_name,
@@ -138,7 +138,7 @@ func change_areas(entering_character : Character, entering, force_fadeout):
 			get_tree().get_current_scene().switch_timer
 		]
 		if object_type == "area_transition":
-			Singleton.CurrentLevelData.level_data.vars.transition_character_data.append(AreaTransitionHelper.new(character.velocity, character.state, character.facing_direction, to_local(character.position), self.vertical))
+			CurrentLevelData.level_data.vars.transition_character_data.append(AreaTransitionHelper.new(character.velocity, character.state, character.facing_direction, to_local(character.position), self.vertical))
 		
 		if character2 != null:
 			var nozzle_name_2 = null
@@ -151,7 +151,7 @@ func change_areas(entering_character : Character, entering, force_fadeout):
 				powerup_array2[1] = character2.powerup.time_left
 				powerup_array2[2] = character2.powerup.play_temp_music
 			
-			Singleton.CurrentLevelData.level_data.vars.transition_character_data_2 = [
+			CurrentLevelData.level_data.vars.transition_character_data_2 = [
 				character2.health,
 				character2.health_shards,
 				nozzle_name_2,
@@ -160,11 +160,11 @@ func change_areas(entering_character : Character, entering, force_fadeout):
 				get_tree().get_current_scene().switch_timer
 			]
 			if object_type == "area_transition":
-				Singleton.CurrentLevelData.level_data.vars.transition_character_data_2.append(AreaTransitionHelper.new(character2.velocity, character2.state, character2.facing_direction, to_local(character2.position), self.vertical))
+				CurrentLevelData.level_data.vars.transition_character_data_2.append(AreaTransitionHelper.new(character2.velocity, character2.state, character2.facing_direction, to_local(character2.position), self.vertical))
 		else:
-			Singleton.CurrentLevelData.level_data.vars.transition_character_data_2 = []
+			CurrentLevelData.level_data.vars.transition_character_data_2 = []
 
-		Singleton.CurrentLevelData.level_data.vars.transition_data = [
+		CurrentLevelData.level_data.vars.transition_data = [
 			object_type, 
 			destination_tag,
 			teleportation_mode
@@ -199,10 +199,10 @@ func _start_local_transition(character : Character, entering, working_force_fade
 			add_child(tween)
 			tween.connect("tween_all_completed", self, "local_tp", [character, true], CONNECT_ONESHOT)
 			var end_point = local_pair.global_position
-			if Singleton.CurrentLevelData.level_data.vars.transition_character_data.size() == 1 and local_pair.stops_camera:
-				end_point = Singleton.CurrentLevelData.level_data.vars.transition_character_data.back().find_camera_position(local_pair.vertical, local_pair.global_position, character.camera.base_size, local_pair.parts * 32)
-			if Singleton.CurrentLevelData.level_data.vars.transition_character_data_2.size() == 1 and local_pair.stops_camera:
-				end_point = Singleton.CurrentLevelData.level_data.vars.transition_character_data_2.back().find_camera_position(local_pair.vertical, local_pair.global_position, character.camera.base_size, local_pair.parts * 32)
+			if CurrentLevelData.level_data.vars.transition_character_data.size() == 1 and local_pair.stops_camera:
+				end_point = CurrentLevelData.level_data.vars.transition_character_data.back().find_camera_position(local_pair.vertical, local_pair.global_position, character.camera.base_size, local_pair.parts * 32)
+			if CurrentLevelData.level_data.vars.transition_character_data_2.size() == 1 and local_pair.stops_camera:
+				end_point = CurrentLevelData.level_data.vars.transition_character_data_2.back().find_camera_position(local_pair.vertical, local_pair.global_position, character.camera.base_size, local_pair.parts * 32)
 			tween.interpolate_property(character.camera, "position", null, end_point, 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN)
 			tween.start()
 		else:

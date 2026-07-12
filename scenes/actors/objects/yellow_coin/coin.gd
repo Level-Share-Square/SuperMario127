@@ -37,7 +37,7 @@ func _set_property_values():
 
 func collect(body, is_shell = false):
 	if enabled and !collected and (body and body.name.begins_with("Character") and !body.dead) or is_shell:
-		Singleton.CurrentLevelData.level_data.vars.collect_coin(coins)
+		CurrentLevelData.level_data.vars.collect_coin(coins)
 		
 		if body:
 			body.heal(1 if coins == 1 else 15)
@@ -63,7 +63,7 @@ func _ready():
 			if enabled and !collected and (body and body.name.begins_with("Character") and !body.dead):
 				collect(body)
 	
-	gravity = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].gravity
+	gravity = CurrentLevelData.level_data.areas[CurrentLevelData.area].gravity
 	
 #	print(collision_shape)
 	

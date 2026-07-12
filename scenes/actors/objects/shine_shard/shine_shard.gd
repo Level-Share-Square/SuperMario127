@@ -20,7 +20,7 @@ export var anim_damp = 80
 
 func collect(body):
 	if enabled and !collected and body.name.begins_with("Character") and !body.dead:
-		Singleton.CurrentLevelData.level_data.vars.collect_shine_shard(id)
+		CurrentLevelData.level_data.vars.collect_shine_shard(id)
 		var player_id = 1
 		if body.name == "Character":
 			player_id = 0
@@ -28,7 +28,7 @@ func collect(body):
 			sound.play()
 		collected = true
 		
-		label.text = str(Singleton.CurrentLevelData.level_data.vars.shine_shards_collected[Singleton.CurrentLevelData.area][0])
+		label.text = str(CurrentLevelData.level_data.vars.shine_shards_collected[CurrentLevelData.area][0])
 		
 		#all of the collecting animation takes place in the animation player now, any old commented
 		#out code is part of the old animation and is simply left here to revert if necessary
@@ -47,14 +47,14 @@ func _ready():
 		return
 	
 	if enabled:
-		id = Singleton.CurrentLevelData.level_data.vars.max_shine_shards
-		Singleton.CurrentLevelData.level_data.vars.max_shine_shards += 1
+		id = CurrentLevelData.level_data.vars.max_shine_shards
+		CurrentLevelData.level_data.vars.max_shine_shards += 1
 	
 	# band aid crash fix
-	while Singleton.CurrentLevelData.level_data.vars.shine_shards_collected.size() <= Singleton.CurrentLevelData.area:
-		Singleton.CurrentLevelData.level_data.vars.shine_shards_collected.append([0, []])
+	while CurrentLevelData.level_data.vars.shine_shards_collected.size() <= CurrentLevelData.area:
+		CurrentLevelData.level_data.vars.shine_shards_collected.append([0, []])
 	
-	if id in Singleton.CurrentLevelData.level_data.vars.shine_shards_collected[Singleton.CurrentLevelData.area][1]:
+	if id in CurrentLevelData.level_data.vars.shine_shards_collected[CurrentLevelData.area][1]:
 		queue_free()
 	
 	if layer == middle:

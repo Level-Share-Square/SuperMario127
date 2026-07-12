@@ -45,7 +45,7 @@ func reload():
 	switch_state = Singleton.CheckpointSaved.switch_state.duplicate(true)
 	activated_shine_ids = Singleton.CheckpointSaved.activated_shine_ids.duplicate(true)
 	required_purple_starbits = []
-	for area in Singleton.CurrentLevelData.level_data.areas:
+	for area in CurrentLevelData.level_data.areas:
 		required_purple_starbits.append([0])
 	
 
@@ -58,7 +58,7 @@ func reset_counters():
 	checkpoints = []
 	current_liquid_id = 0
 	last_red_coin_id = 0
-	for area in Singleton.CurrentLevelData.level_data.areas:
+	for area in CurrentLevelData.level_data.areas:
 		required_purple_starbits.append([0])
 
 func init():
@@ -77,7 +77,7 @@ func toggle_switch_state(var channel : int):
 
 func activate_fludd(var type : int):
 	if Singleton.ModeSwitcher.get_node("ModeSwitcherButton").invisible:
-		Singleton.CurrentLevelData.level_info.set_fludd_activated(type, Singleton.CurrentLevelData.selected_file > -2)
+		CurrentLevelData.level_info.set_fludd_activated(type, CurrentLevelData.selected_file > -2)
 	match(type):
 		0:
 			emit_signal("hover_fludd_activated")
@@ -88,7 +88,7 @@ func activate_fludd(var type : int):
 
 
 func is_fludd_activated(var type : int):
-	return Singleton.CurrentLevelData.level_info.activated_fludds[type]
+	return CurrentLevelData.level_info.activated_fludds[type]
 
 
 func collect_coin(amount: int):
@@ -103,14 +103,14 @@ func collect_red_coin(id: int):
 
 
 func collect_shine_shard(id: int):
-	var area: int = Singleton.CurrentLevelData.area
+	var area: int = CurrentLevelData.area
 	shine_shards_collected[area][0] += 1
 	shine_shards_collected[area][1].append(id)
 	emit_signal("shine_shard_collected", shine_shards_collected[area][0])
 
 
 func collect_purple_starbit(id: int):
-	var area: int = Singleton.CurrentLevelData.area
+	var area: int = CurrentLevelData.area
 	purple_starbits_collected[area][0] += 1
 	purple_starbits_collected[area][1].append(id)
 	emit_signal("purple_starbit_collected", purple_starbits_collected[area][0])

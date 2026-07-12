@@ -34,7 +34,7 @@ func set_property(object_node: GameObject, property, value):
 
 func create_object(object, add_to_data):
 	var mode = get_tree().get_current_scene().mode
-	var object_scene = Singleton.CurrentLevelData.get_cached_object(object.type_id)
+	var object_scene = CurrentLevelData.get_cached_object(object.type_id)
 	if object_scene != null:
 		var object_node: GameObject = object_scene.instance()
 		object_node.mode = mode
@@ -86,14 +86,14 @@ func destroy_object(object_node, remove_from_data):
 	if remove_from_data:
 		level_area.objects.erase(level_object)
 	object_node.queue_free()
-#	if (!Singleton.CurrentLevelData.level_info.validity_check.is_object_multiplayer_compatible(\
+#	if (!CurrentLevelData.level_info.validity_check.is_object_multiplayer_compatible(\
 #	level_object.type_id,self)):
 #		for area in level_data.areas:
 #			for object in area.objects:
-#				if (!Singleton.CurrentLevelData.level_info.validity_check.is_object_multiplayer_compatible(\
+#				if (!CurrentLevelData.level_info.validity_check.is_object_multiplayer_compatible(\
 #				object.type_id,self)):
 #					return
-#		Singleton.CurrentLevelData.level_info.validity_check.is_level_multiplayer_compatible = true
+#		CurrentLevelData.level_info.validity_check.is_level_multiplayer_compatible = true
 
 
 func move_object_to_back(object_node):

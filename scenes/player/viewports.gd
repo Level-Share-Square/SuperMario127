@@ -50,7 +50,7 @@ func remove_player():
 func _ready():
 	player1.character = Singleton.PlayerSettings.player1_character
 	player1.number_of_players = Singleton.PlayerSettings.number_of_players
-	for object in Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].objects:
+	for object in CurrentLevelData.level_data.areas[CurrentLevelData.area].objects:
 		if object.type_id == 0:
 			player1_spawn = object.properties[0]
 			player1.spawn_pos = player1_spawn

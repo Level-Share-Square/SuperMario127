@@ -25,14 +25,14 @@ func _ready():
 	shared_node.get_node("Objects").connect("objects_ready", self, "delayed_ready")
 
 func delayed_ready():
-	variables = Singleton.CurrentLevelData.level_data.vars
+	variables = CurrentLevelData.level_data.vars
 	max_purples = variables.max_purple_starbits
 	if max_purples <= 0: return
 	
 	show()
 	variables.connect("purple_starbit_collected", self, "collect_coin")
 
-	var new_coins: int = variables.purple_starbits_collected[Singleton.CurrentLevelData.area][0]
+	var new_coins: int = variables.purple_starbits_collected[CurrentLevelData.area][0]
 	update_counter(new_coins)
 	
 	if required_purples <= 0:
@@ -56,12 +56,12 @@ func update_counter(new_coins: int):
 	max_label.text = "(" + str(max_purples) + ")"
 
 func update_required_purples():
-	var current_required_purples = variables.required_purple_starbits[Singleton.CurrentLevelData.area]
+	var current_required_purples = variables.required_purple_starbits[CurrentLevelData.area]
 	if len(current_required_purples) > 0:
 		if len(current_required_purples) > 1:
-			if variables.purple_starbits_collected[Singleton.CurrentLevelData.area][0] >= required_purples:
-				variables.required_purple_starbits[Singleton.CurrentLevelData.area].pop_front()
-			required_purples = variables.required_purple_starbits[Singleton.CurrentLevelData.area][0]
+			if variables.purple_starbits_collected[CurrentLevelData.area][0] >= required_purples:
+				variables.required_purple_starbits[CurrentLevelData.area].pop_front()
+			required_purples = variables.required_purple_starbits[CurrentLevelData.area][0]
 
 
 # this is to make sure the counter always displays underneath any radial timers

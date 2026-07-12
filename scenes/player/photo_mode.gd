@@ -27,4 +27,4 @@ func update_photo_mode(do_pause = true):
 	get_tree().paused = is_photo_mode and do_pause
 	
 	if do_pause:
-		Singleton.CurrentLevelData.can_pause = not is_photo_mode
+		CurrentLevelData.can_pause = not is_photo_mode

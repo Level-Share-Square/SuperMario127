@@ -33,9 +33,9 @@ func _ready():
 		outline.animation = str(palette) + "_outline"
 
 	switch_state(inverted)
-	if Singleton.CurrentLevelData.level_data.vars.switch_state.has(palette):
+	if CurrentLevelData.level_data.vars.switch_state.has(palette):
 		toggle_state()
-	Singleton.CurrentLevelData.level_data.vars.connect("switch_state_changed", self, "_on_switch_state_changed")
+	CurrentLevelData.level_data.vars.connect("switch_state_changed", self, "_on_switch_state_changed")
 
 func toggle_state():
 	inverted = !inverted

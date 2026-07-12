@@ -17,18 +17,18 @@ func instance_level_data(data: LevelData):
 
 
 func instance_level_metadata(data: LevelMetadata):
-	if(Singleton.CurrentLevelData.level_info == null):
+	if(CurrentLevelData.level_info == null):
 		#this is a conflict with the old loading logic, im not sure how to get around it...
-		var level_id: String = Singleton.CurrentLevelData.level_id
-		var working_folder: String = Singleton.CurrentLevelData.working_folder
-		var is_campaign: bool = Singleton.CurrentLevelData.is_campaign
+		var level_id: String = CurrentLevelData.level_id
+		var working_folder: String = CurrentLevelData.working_folder
+		var is_campaign: bool = CurrentLevelData.is_campaign
 		
 		var code_path: String = level_list_util.get_level_file_path(level_id, working_folder)
 		var level_code: String = level_list_util.load_level_code_file(code_path)
 		
-		Singleton.CurrentLevelData.level_info = LevelInfo.new(level_id, working_folder, level_code)
+		CurrentLevelData.level_info = LevelInfo.new(level_id, working_folder, level_code)
 	
-	var level_info = Singleton.CurrentLevelData.level_info
+	var level_info = CurrentLevelData.level_info
 	level_info.level_name = data.level_name
 	level_info.level_author = data.level_author
 	level_info.level_description = data.level_description
@@ -42,7 +42,7 @@ func instance_area(data: AreaData):
 	var area_data: LevelAreaOld = LevelAreaOld.new()
 	instance_area_metadata(data.area_metadata, area_data)
 	instance_layers_array(data.layers, area_data)
-	Singleton.CurrentLevelData.level_data.areas.append(area_data)
+	CurrentLevelData.level_data.areas.append(area_data)
 
 
 func instance_area_metadata(data: AreaMetadata, data_old: LevelAreaOld):

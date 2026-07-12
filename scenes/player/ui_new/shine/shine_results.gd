@@ -27,14 +27,14 @@ var sound_cooldown: int = 0
 
 func _ready():
 	if (
-		Singleton.CurrentLevelData.is_hub_level() 
-		and not Singleton.CurrentLevelData.shine_kickout_data.empty()
+		CurrentLevelData.is_hub_level() 
+		and not CurrentLevelData.shine_kickout_data.empty()
 	):
-		shine_name.text = Singleton.CurrentLevelData.shine_kickout_data.get("title", "Unknown Shine")
+		shine_name.text = CurrentLevelData.shine_kickout_data.get("title", "Unknown Shine")
 		shine_backing.text = shine_name.text
-		target_score = Singleton.CurrentLevelData.shine_kickout_data.get("time_score", 0)
-		new_record = Singleton.CurrentLevelData.shine_kickout_data.get("new_record", false)
-		Singleton.CurrentLevelData.shine_kickout_data = {}
+		target_score = CurrentLevelData.shine_kickout_data.get("time_score", 0)
+		new_record = CurrentLevelData.shine_kickout_data.get("new_record", false)
+		CurrentLevelData.shine_kickout_data = {}
 		show_timer.start()
 
 

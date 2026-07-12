@@ -54,7 +54,7 @@ func _ready():
 func _physics_process(delta):
 	# we don't need anything below this if its just displaying ur time score :)
 	if show_time_score:
-		timer_display.text = LevelInfo.generate_time_string(Singleton.CurrentLevelData.time_score)
+		timer_display.text = LevelInfo.generate_time_string(CurrentLevelData.time_score)
 		return
 	
 	var player = get_node("/root").get_node("Player").get_node(get_node("/root").get_node("Player").character)

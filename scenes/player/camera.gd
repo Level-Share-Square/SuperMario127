@@ -138,7 +138,7 @@ func set_zoom_tween(target : Vector2, time : float, override = false):
 		print(zoom_tween.connect("tween_all_completed", self, "on_zoom_tween_zoomed"))
 		zoom_tween.start()
 		return
-	var level_size : Vector2 = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].bounds.size * 16
+	var level_size : Vector2 = CurrentLevelData.level_data.areas[CurrentLevelData.area].bounds.size * 16
 	var intended_zoom = target * size
 	
 	var divide: float = size.y
@@ -202,7 +202,7 @@ func play_cutscene(cutscene : CameraCutscene, reverse: bool = false):
 	cutscene.owner.pause_mode = PAUSE_MODE_PROCESS
 	get_tree().paused = true
 	character_node.toggle_movement(false)
-	Singleton.CurrentLevelData.can_pause = false
+	CurrentLevelData.can_pause = false
 	
 	var new_position = cutscene.to if !reverse else character_node.position
 	var camera_distance = position.distance_to(new_position)
@@ -265,4 +265,4 @@ func update_cutscene_queue():
 		get_tree().paused = false
 		character_node.toggle_movement(true)
 		smoothing_enabled = true
-		Singleton.CurrentLevelData.can_pause = true
+		CurrentLevelData.can_pause = true

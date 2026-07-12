@@ -67,7 +67,7 @@ func _set_property_values():
 
 func instance_enemy(emit_particles: bool = true) -> EnemyBase:
 	# idk why this is needed? but its here
-	Singleton.CurrentLevelData.enemies_instanced += 1
+	CurrentLevelData.enemies_instanced += 1
 	
 	var spawned_enemy: EnemyBase = load(enemy_scene_path).instance()
 	# disable it if in editor
@@ -76,7 +76,7 @@ func instance_enemy(emit_particles: bool = true) -> EnemyBase:
 	spawned_enemy.visible = is_visible
 	
 	# give it proper gravity
-	spawned_enemy.gravity = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].gravity * 2
+	spawned_enemy.gravity = CurrentLevelData.level_data.areas[CurrentLevelData.area].gravity * 2
 	# handle being flipped
 	if scale.x < 0:
 		spawned_enemy.scale = Vector2.ONE

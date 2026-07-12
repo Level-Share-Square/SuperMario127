@@ -94,9 +94,9 @@ func _ready():
 	sprite.connect("frame_changed", self, "update_eyes")
 	
 	player_detector.scale = Vector2(1, 1) / scale
-	Singleton.CurrentLevelData.enemies_instanced += 1
-	time_alive += float(Singleton.CurrentLevelData.enemies_instanced) / 2.0
-	gravity = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].gravity
+	CurrentLevelData.enemies_instanced += 1
+	time_alive += float(CurrentLevelData.enemies_instanced) / 2.0
+	gravity = CurrentLevelData.level_data.areas[CurrentLevelData.area].gravity
 	inv_timer = -1.0
 	
 	if scale.x < 0:
@@ -427,7 +427,7 @@ func physics_process_normal(delta, is_in_platform: bool):
 			if !right_check.is_colliding():
 				facing_direction = -1
 	
-	var level_bounds = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].bounds
+	var level_bounds = CurrentLevelData.level_data.areas[CurrentLevelData.area].bounds
 	#makes sure rex doesn't run off the side of the level
 	if kinematic_body.global_position.x < (level_bounds.position.x * 32):
 		facing_direction = 1

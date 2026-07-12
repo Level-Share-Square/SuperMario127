@@ -67,10 +67,10 @@ func _ready():
 	
 	switch_state(inverted)
 
-	if Singleton.CurrentLevelData.level_data.vars.switch_state.has(parent.palette):
+	if CurrentLevelData.level_data.vars.switch_state.has(parent.palette):
 		toggle_state()
 
-	Singleton.CurrentLevelData.level_data.vars.connect("switch_state_changed", self, "_on_switch_state_changed")
+	CurrentLevelData.level_data.vars.connect("switch_state_changed", self, "_on_switch_state_changed")
 
 	_on_switch_state_changed(parent.palette)
 

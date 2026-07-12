@@ -22,8 +22,8 @@ func location_warp(character: Character, target_tag: String, max_pan_distance: i
 		character.camera.auto_move = false
 		
 		var end_point: Vector2 = target_teleporter.global_position
-		if Singleton.CurrentLevelData.level_data.vars.area_transition_helper != null and target_teleporter is AreaTransition:
-			end_point = Singleton.CurrentLevelData.level_data.vars.area_transition_helper.find_camera_position(
+		if CurrentLevelData.level_data.vars.area_transition_helper != null and target_teleporter is AreaTransition:
+			end_point = CurrentLevelData.level_data.vars.area_transition_helper.find_camera_position(
 				target_teleporter.vertical, 
 				target_teleporter.global_position, 
 				character.camera.base_size, 
@@ -62,7 +62,7 @@ func location_warp(character: Character, target_tag: String, max_pan_distance: i
 
 func area_warp(character: Character, target_tag: String, target_area: int) -> void:
 #	if is_instance_valid(timer_manager):
-#		if (area_id == Singleton.CurrentLevelData.area):
+#		if (area_id == CurrentLevelData.area):
 #
 #			var area_timer: Control = timer_manager.get_timer("area_timer")
 #
@@ -77,12 +77,12 @@ func area_warp(character: Character, target_tag: String, target_area: int) -> vo
 #		printerr("Couldn't find timer manager node!")
 	
 	# band aid crash fix
-	while Singleton.CurrentLevelData.level_data.vars.liquid_positions.size() <= Singleton.CurrentLevelData.area:
-		Singleton.CurrentLevelData.level_data.vars.liquid_positions.append([])
+	while CurrentLevelData.level_data.vars.liquid_positions.size() <= CurrentLevelData.area:
+		CurrentLevelData.level_data.vars.liquid_positions.append([])
 	
-	Singleton.CurrentLevelData.level_data.vars.liquid_positions[Singleton.CurrentLevelData.area] = []
-	for liquid in Singleton.CurrentLevelData.level_data.vars.liquids:
-		Singleton.CurrentLevelData.level_data.vars.liquid_positions[Singleton.CurrentLevelData.area].append(liquid[1].save_pos)
+	CurrentLevelData.level_data.vars.liquid_positions[CurrentLevelData.area] = []
+	for liquid in CurrentLevelData.level_data.vars.liquids:
+		CurrentLevelData.level_data.vars.liquid_positions[CurrentLevelData.area].append(liquid[1].save_pos)
 	
 	var powerup_array = [null, null, null]
 	if is_instance_valid(character.powerup):
@@ -96,7 +96,7 @@ func area_warp(character: Character, target_tag: String, target_area: int) -> vo
 	if !is_instance_valid(character.state):
 		character.state = character.get_state_node("FallState")
 	
-	Singleton.CurrentLevelData.level_data.vars.transition_character_data = [
+	CurrentLevelData.level_data.vars.transition_character_data = [
 		character.health,
 		character.health_shards,
 		nozzle_name,
@@ -105,16 +105,16 @@ func area_warp(character: Character, target_tag: String, target_area: int) -> vo
 		get_tree().get_current_scene().switch_timer
 	]
 #	if object_type == "area_transition":
-#		Singleton.CurrentLevelData.level_data.vars.transition_character_data.append(AreaTransitionHelper.new(character.velocity, character.state, character.facing_direction, to_local(character.position), self.vertical))
+#		CurrentLevelData.level_data.vars.transition_character_data.append(AreaTransitionHelper.new(character.velocity, character.state, character.facing_direction, to_local(character.position), self.vertical))
 	
-	Singleton.CurrentLevelData.level_data.vars.transition_character_data_2 = []
+	CurrentLevelData.level_data.vars.transition_character_data_2 = []
 	
-#	Singleton.CurrentLevelData.level_data.vars.transition_data = [
+#	CurrentLevelData.level_data.vars.transition_data = [
 #		object_type, 
 #		target_tag,
 #		teleportation_mode
 #	]
-	Singleton.CurrentLevelData.level_data.vars.transition_data = {"target_tag": target_tag}
+	CurrentLevelData.level_data.vars.transition_data = {"target_tag": target_tag}
 	character.switch_areas(target_area, 0.5)
 
 
@@ -124,24 +124,24 @@ func level_warp(character: Character, target_level: String,
 				target_tag: String, target_area: int = -1) -> void:
 	
 	var level_id: String = target_level
-	var working_folder: String = Singleton.CurrentLevelData.working_folder
+	var working_folder: String = CurrentLevelData.working_folder
 	var level_info: LevelInfo = Singleton.SceneSwitcher.load_level_info(level_id, working_folder)
 	
-	var hub_level: String = Singleton.CurrentLevelData.hub_level
-	var selected_file: int = Singleton.CurrentLevelData.selected_file
+	var hub_level: String = CurrentLevelData.hub_level
+	var selected_file: int = CurrentLevelData.selected_file
 	
 	if target_area != -1:
-		Singleton.CurrentLevelData.level_transition_data = {
+		CurrentLevelData.level_transition_data = {
 			"target_area": target_area, "target_tag": target_tag}
 	else:
-		Singleton.CurrentLevelData.level_transition_data = {}
+		CurrentLevelData.level_transition_data = {}
 	
-	if Singleton.CurrentLevelData.is_hub_level():
+	if CurrentLevelData.is_hub_level():
 		if one_way:
-			Singleton.CurrentLevelData.hub_return_data = {}
+			CurrentLevelData.hub_return_data = {}
 		else:
-			Singleton.CurrentLevelData.hub_return_data = {
-				"target_area": Singleton.CurrentLevelData.area, "target_tag": target_tag}
+			CurrentLevelData.hub_return_data = {
+				"target_area": CurrentLevelData.area, "target_tag": target_tag}
 			
 	
 	Singleton.Music.reset_music()
@@ -151,7 +151,7 @@ func level_warp(character: Character, target_level: String,
 
 ### OTHER ###
 func find_teleporter(target_tag: String) -> GameObject:
-	for i in Singleton.CurrentLevelData.level_data.vars.teleporters:
+	for i in CurrentLevelData.level_data.vars.teleporters:
 		if i[0] == target_tag.to_lower() && i[1] != teleporter:
 			return i[1]
 	return teleporter

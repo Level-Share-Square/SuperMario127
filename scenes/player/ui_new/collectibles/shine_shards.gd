@@ -15,7 +15,7 @@ func _ready():
 	shared_node.get_node("Objects").connect("objects_ready", self, "delayed_ready")
 
 func delayed_ready():
-	var variables: LevelVars = Singleton.CurrentLevelData.level_data.vars
+	var variables: LevelVars = CurrentLevelData.level_data.vars
 	max_shards = variables.max_shine_shards
 	fill.max_value = max_shards
 	
@@ -25,7 +25,7 @@ func delayed_ready():
 		
 		var shard_amount = (
 			variables.shine_shards_collected[
-				Singleton.CurrentLevelData.area][0]
+				CurrentLevelData.area][0]
 			)
 		
 		label.text = str(max_shards-shard_amount)

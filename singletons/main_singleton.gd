@@ -26,15 +26,11 @@ var EditorSavedSettings setget ,_get_editor_saved_settings
 func _get_editor_saved_settings():
 	return lazy_get("EditorSavedSettings", "res://scenes/oldeditor/editor_saved_settings.tscn", EditorSavedSettings)
 
-var CurrentLevelData setget ,_get_current_level_data
-func _get_current_level_data():
-	return lazy_get("CurrentLevelData", "res://scenes/shared/level_data.tscn", CurrentLevelData)
-
 var ModeSwitcher setget ,_get_mode_switcher
 func _get_mode_switcher():
 	return lazy_get("ModeSwitcher", "res://scenes/actors/mode_switcher/mode_switcher.tscn", ModeSwitcher)
 
-var SceneTransitions setget ,_get_scene_transitions
+var SceneTransitions: SceneTransitions setget ,_get_scene_transitions
 func _get_scene_transitions():
 	return lazy_get("SceneTransitions", "res://scenes/actors/scene_transitions/SceneTransitions.tscn", SceneTransitions)
 

@@ -301,7 +301,7 @@ func start_level(start_in_edit_mode : bool):
 	can_interact = false
 	
 	var level_info = levels[selected_level]
-	Singleton.CurrentLevelData.level_data = level_info.level_data
+	CurrentLevelData.level_data = level_info.level_data
 
 	# if it's a multi-shine level, open the shine select screen, otherwise open the level directly 
 	# TODO: additional checks for things like all shines set to not show in menu and such

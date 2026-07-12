@@ -29,7 +29,7 @@ func _peer_connected(id):
 	if connected_type == "Server":
 		Singleton.PlayerSettings.my_player_index = 0
 		print("Player connected! ID: " + str(id))
-		var _send_bytes = get_tree().multiplayer.send_bytes(JSON.print(["load level", Singleton.CurrentLevelData.level_data.get_encoded_level_data(), Singleton.PlayerSettings.player1_character, Singleton.PlayerSettings.player2_character]).to_ascii())
+		var _send_bytes = get_tree().multiplayer.send_bytes(JSON.print(["load level", CurrentLevelData.level_data.get_encoded_level_data(), Singleton.PlayerSettings.player1_character, Singleton.PlayerSettings.player2_character]).to_ascii())
 		var _reload = get_tree().reload_current_scene()
 	else:
 		Singleton.PlayerSettings.my_player_index = 1
@@ -47,7 +47,7 @@ func _packet_recieved(_id, packet_ascii):
 		Singleton.PlayerSettings.player2_character = packet[3]
 		var level_data = LevelDataOld.new()
 		level_data.load_in(packet[1])
-		Singleton.CurrentLevelData.level_data = level_data
+		CurrentLevelData.level_data = level_data
 		
 		yield(get_tree().create_timer(0.1), "timeout")
 		var _reload = get_tree().reload_current_scene()

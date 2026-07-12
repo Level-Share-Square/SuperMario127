@@ -13,7 +13,7 @@ func on_pressed():
 	# call the original 127 button version of this method (plays the click sound)
 	.on_pressed()
 
-	if Singleton.CurrentLevelData.unsaved_editor_changes:
+	if CurrentLevelData.unsaved_editor_changes:
 		emit_signal("open_quit_wo_saving_popup")
 	else:
 		get_owner().quit_t

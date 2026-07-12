@@ -33,12 +33,12 @@ func _ready():
 	else:
 		display.visible = true
 	
-	Singleton.CurrentLevelData.set_checkpoint_ids()
+	CurrentLevelData.set_checkpoint_ids()
 	id = level_object.get_ref().properties[9]
 	if Singleton.CheckpointSaved.current_checkpoint_id == id:
 		is_used = true
 	
-	Singleton.CurrentLevelData.level_data.vars.checkpoints.append([id, self])
+	CurrentLevelData.level_data.vars.checkpoints.append([id, self])
 
 func _physics_process(delta):
 	var sprite = $Rotation/RotationRight
@@ -67,30 +67,30 @@ func set_checkpoint(body):
 	
 	Singleton.CheckpointSaved.current_checkpoint_id = id
 	Singleton.CheckpointSaved.current_spawn_pos = global_position + spawn_offset
-	Singleton.CheckpointSaved.current_area = Singleton.CurrentLevelData.area
-	Singleton.CheckpointSaved.current_coins = Singleton.CurrentLevelData.level_data.vars.coins_collected
-	Singleton.CheckpointSaved.nozzles_collected = Singleton.CurrentLevelData.level_data.vars.nozzles_collected.duplicate(true)
-	Singleton.CheckpointSaved.current_red_coins = Singleton.CurrentLevelData.level_data.vars.red_coins_collected.duplicate(true)
-	Singleton.CheckpointSaved.current_shine_shards = Singleton.CurrentLevelData.level_data.vars.shine_shards_collected.duplicate(true)
-	Singleton.CheckpointSaved.current_purple_starbits = Singleton.CurrentLevelData.level_data.vars.purple_starbits_collected.duplicate(true)
-	Singleton.CheckpointSaved.current_local_keys = Singleton.CurrentLevelData.level_data.vars.local_keys_collected.duplicate(true)
+	Singleton.CheckpointSaved.current_area = CurrentLevelData.area
+	Singleton.CheckpointSaved.current_coins = CurrentLevelData.level_data.vars.coins_collected
+	Singleton.CheckpointSaved.nozzles_collected = CurrentLevelData.level_data.vars.nozzles_collected.duplicate(true)
+	Singleton.CheckpointSaved.current_red_coins = CurrentLevelData.level_data.vars.red_coins_collected.duplicate(true)
+	Singleton.CheckpointSaved.current_shine_shards = CurrentLevelData.level_data.vars.shine_shards_collected.duplicate(true)
+	Singleton.CheckpointSaved.current_purple_starbits = CurrentLevelData.level_data.vars.purple_starbits_collected.duplicate(true)
+	Singleton.CheckpointSaved.current_local_keys = CurrentLevelData.level_data.vars.local_keys_collected.duplicate(true)
 	
-	while Singleton.CurrentLevelData.level_data.vars.liquid_positions.size() <= Singleton.CurrentLevelData.area:
-		Singleton.CurrentLevelData.level_data.vars.liquid_positions.append([])
+	while CurrentLevelData.level_data.vars.liquid_positions.size() <= CurrentLevelData.area:
+		CurrentLevelData.level_data.vars.liquid_positions.append([])
 	
 	if save_water_level:
-		Singleton.CurrentLevelData.level_data.vars.liquid_positions[Singleton.CurrentLevelData.area] = []
-		for liquid in Singleton.CurrentLevelData.level_data.vars.liquids:
-			Singleton.CurrentLevelData.level_data.vars.liquid_positions[Singleton.CurrentLevelData.area].append(liquid[1].save_pos)
+		CurrentLevelData.level_data.vars.liquid_positions[CurrentLevelData.area] = []
+		for liquid in CurrentLevelData.level_data.vars.liquids:
+			CurrentLevelData.level_data.vars.liquid_positions[CurrentLevelData.area].append(liquid[1].save_pos)
 	
 	if save_switch_state:
-		Singleton.CheckpointSaved.switch_state = Singleton.CurrentLevelData.level_data.vars.switch_state.duplicate(true)
-	Singleton.CheckpointSaved.liquid_positions = Singleton.CurrentLevelData.level_data.vars.liquid_positions.duplicate(true)
-	Singleton.CheckpointSaved.activated_shine_ids = Singleton.CurrentLevelData.level_data.vars.activated_shine_ids.duplicate(true)
+		Singleton.CheckpointSaved.switch_state = CurrentLevelData.level_data.vars.switch_state.duplicate(true)
+	Singleton.CheckpointSaved.liquid_positions = CurrentLevelData.level_data.vars.liquid_positions.duplicate(true)
+	Singleton.CheckpointSaved.activated_shine_ids = CurrentLevelData.level_data.vars.activated_shine_ids.duplicate(true)
 	
-	Singleton.CurrentLevelData.level_transition_data = {}
+	CurrentLevelData.level_transition_data = {}
 	
-	for checkpoint in Singleton.CurrentLevelData.level_data.vars.checkpoints:
+	for checkpoint in CurrentLevelData.level_data.vars.checkpoints:
 		if checkpoint[1] != self:
 			checkpoint[1].unset_checkpoint()
 	

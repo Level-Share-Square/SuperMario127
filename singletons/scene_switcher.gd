@@ -32,18 +32,18 @@ func quit_to_menu_with_transition(screen_to_open : String = ""):
 
 
 func quit_level(do_transition: bool = true):
-	if Singleton.CurrentLevelData.is_campaign and Singleton.CurrentLevelData.level_id != Singleton.CurrentLevelData.hub_level:
+	if CurrentLevelData.is_campaign and CurrentLevelData.level_id != CurrentLevelData.hub_level:
 		## ok maybe make a helper function for setting up 
 		## and starting a level from its id and folder ^^;
 		## this is getting to be too much boilerplate
-		var level_id: String = Singleton.CurrentLevelData.hub_level
-		var working_folder: String = Singleton.CurrentLevelData.working_folder
+		var level_id: String = CurrentLevelData.hub_level
+		var working_folder: String = CurrentLevelData.working_folder
 		var level_info: LevelInfo = load_level_info(level_id, working_folder)
-		var hub_level: String = Singleton.CurrentLevelData.hub_level
-		var selected_file: int = Singleton.CurrentLevelData.selected_file
+		var hub_level: String = CurrentLevelData.hub_level
+		var selected_file: int = CurrentLevelData.selected_file
 		
-		Singleton.CurrentLevelData.level_transition_data = Singleton.CurrentLevelData.hub_return_data
-		Singleton.CurrentLevelData.hub_return_data = {}
+		CurrentLevelData.level_transition_data = CurrentLevelData.hub_return_data
+		CurrentLevelData.hub_return_data = {}
 		
 		if do_transition:
 			var _connect = Singleton.SceneTransitions.connect("transition_finished", self, "start_level", 
@@ -53,9 +53,9 @@ func quit_level(do_transition: bool = true):
 			yield(get_tree(), "physics_frame")
 			start_level(level_info, level_id, working_folder, false, true, hub_level, false, true, selected_file)
 	else:
-		Singleton.CurrentLevelData.level_transition_data = {}
-		Singleton.CurrentLevelData.hub_return_data = {}
-		Singleton.CurrentLevelData.shine_kickout_data = {}
+		CurrentLevelData.level_transition_data = {}
+		CurrentLevelData.hub_return_data = {}
+		CurrentLevelData.shine_kickout_data = {}
 		if do_transition:
 			quit_to_menu_with_transition("levels_screen")
 		else:
@@ -80,20 +80,20 @@ func setup_level(level_info: LevelInfo, level_id: String, working_folder: String
 	if level_list_util.file_exists(save_path):
 		level_info.load_save_from_dictionary(level_list_util.load_level_save_file(save_path))
 	
-	Singleton.CurrentLevelData.level_info = level_info
-	Singleton.CurrentLevelData.level_data = level_info.level_data
+	CurrentLevelData.level_info = level_info
+	CurrentLevelData.level_data = level_info.level_data
 	
-	Singleton.CurrentLevelData.working_folder = working_folder
-	Singleton.CurrentLevelData.level_id = level_id
-	Singleton.CurrentLevelData.hub_level = hub_level
-	Singleton.CurrentLevelData.is_campaign = level_list_util.is_campaign(working_folder)
-	Singleton.CurrentLevelData.selected_file = selected_file
+	CurrentLevelData.working_folder = working_folder
+	CurrentLevelData.level_id = level_id
+	CurrentLevelData.hub_level = hub_level
+	CurrentLevelData.is_campaign = level_list_util.is_campaign(working_folder)
+	CurrentLevelData.selected_file = selected_file
 	
-	Singleton.CurrentLevelData.level_info.selected_shine = -1
-	Singleton.CurrentLevelData.area = 0
+	CurrentLevelData.level_info.selected_shine = -1
+	CurrentLevelData.area = 0
 	
-	if not Singleton.CurrentLevelData.level_transition_data.empty():
-		Singleton.CurrentLevelData.area = Singleton.CurrentLevelData.level_transition_data.get("target_area", 0)
+	if not CurrentLevelData.level_transition_data.empty():
+		CurrentLevelData.area = CurrentLevelData.level_transition_data.get("target_area", 0)
 	
 	Singleton.CheckpointSaved.reset()
 

@@ -214,7 +214,7 @@ func reset_save_data(delete_file: bool = true, selected_file: int = -1) -> void:
 ### new functions designed to save separately to the level code
 func get_save_path(selected_file: int = -3) -> String:
 	if selected_file == -3:
-		selected_file = Singleton.CurrentLevelData.selected_file
+		selected_file = CurrentLevelData.selected_file
 	return level_list_util.get_level_save_path(level_id, level_folder, selected_file)
 
 func get_save_file_dictionary() -> Dictionary:
@@ -275,9 +275,9 @@ static func shine_sort(item1 : Dictionary, item2 : Dictionary) -> bool:
 	return item1["sort_order"] < item2["sort_order"]
 
 func update_meta_file() -> void:
-	var selected_file: int = Singleton.CurrentLevelData.selected_file
-	var level_id: String = Singleton.CurrentLevelData.level_id
-	var campaign_path: String = Singleton.CurrentLevelData.working_folder
+	var selected_file: int = CurrentLevelData.selected_file
+	var level_id: String = CurrentLevelData.level_id
+	var campaign_path: String = CurrentLevelData.working_folder
 	var save_folder: String = level_list_util.get_save_folder(campaign_path, selected_file)
 	var meta_dict: Dictionary = save_meta_util.load_meta_file(save_folder)
 	meta_dict = save_meta_util.update_meta_level(level_id, meta_dict, campaign_path, selected_file, self)
@@ -287,14 +287,14 @@ func set_shine_collected(shine_id : int, save_to_disk : bool = true) -> void:
 	collected_shines[str(shine_id)] = true
 	if save_to_disk:
 		level_list_util.save_level_save_file(get_save_file_dictionary(), get_save_path())
-		if Singleton.CurrentLevelData.selected_file > -1:
+		if CurrentLevelData.selected_file > -1:
 			update_meta_file()
 
 func set_star_coin_collected(star_coin_id : int, save_to_disk : bool = true) -> void:
 	collected_star_coins[str(star_coin_id)] = true
 	if save_to_disk:
 		level_list_util.save_level_save_file(get_save_file_dictionary(), get_save_path())
-		if Singleton.CurrentLevelData.selected_file > -1:
+		if CurrentLevelData.selected_file > -1:
 			update_meta_file()
 
 func set_fludd_activated(fludd_id : int, save_to_disk : bool = true) -> void:
@@ -303,8 +303,8 @@ func set_fludd_activated(fludd_id : int, save_to_disk : bool = true) -> void:
 		level_list_util.save_level_save_file(get_save_file_dictionary(), get_save_path())
 
 func update_time_and_coin_score(shine_id : int, save_to_disk : bool = true):
-	var new_coin_score = Singleton.CurrentLevelData.level_data.vars.coins_collected
-	var new_time_score = Singleton.CurrentLevelData.time_score
+	var new_coin_score = CurrentLevelData.level_data.vars.coins_collected
+	var new_time_score = CurrentLevelData.time_score
 
 	if new_coin_score > coin_score:
 		coin_score = new_coin_score 
@@ -313,25 +313,25 @@ func update_time_and_coin_score(shine_id : int, save_to_disk : bool = true):
 		time_scores[str(shine_id)] = new_time_score
 	if save_to_disk:
 		level_list_util.save_level_save_file(get_save_file_dictionary(), get_save_path())
-		if Singleton.CurrentLevelData.selected_file > -1:
+		if CurrentLevelData.selected_file > -1:
 			update_meta_file()
 
 func is_new_record(shine_id : int) -> bool:
-	var new_time_score = Singleton.CurrentLevelData.time_score
+	var new_time_score = CurrentLevelData.time_score
 	if new_time_score < time_scores[str(shine_id)] or time_scores[str(shine_id)] == EMPTY_TIME_SCORE:
 		return true
 	return false
 
 func get_level_background_texture() -> StreamTexture:
-	var background_resource = Singleton.CurrentLevelData.get_cached_background(thumbnail_sky)
+	var background_resource = CurrentLevelData.get_cached_background(thumbnail_sky)
 	return background_resource.texture
 	
 func get_level_background_modulate() -> Color:
-	var background_resource = Singleton.CurrentLevelData.get_cached_background(thumbnail_sky)
+	var background_resource = CurrentLevelData.get_cached_background(thumbnail_sky)
 	return background_resource.parallax_modulate
 
 func get_level_foreground_texture() -> StreamTexture:
-	var foreground_resource = Singleton.CurrentLevelData.get_cached_foreground(thumbnail_background)
+	var foreground_resource = CurrentLevelData.get_cached_foreground(thumbnail_background)
 	var palette = thumbnail_background_palette
 	
 	if palette == 0:

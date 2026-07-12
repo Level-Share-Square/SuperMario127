@@ -8,7 +8,7 @@ func _ready():
 	yield(get_tree(), "physics_frame")
 	yield(get_tree(), "physics_frame")
 	
-	var variables: LevelVars = Singleton.CurrentLevelData.level_data.vars
+	var variables: LevelVars = CurrentLevelData.level_data.vars
 	variables.connect("coin_collected", self, "collect_coin")
 	
 	var new_coins: int = variables.coins_collected

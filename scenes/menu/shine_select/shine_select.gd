@@ -17,8 +17,8 @@ onready var level_title_backing: Label = $"%LevelTitleBacking"
 onready var fludds = $"%FLUDD"
 
 ## level data
-onready var level_info: LevelInfo = Singleton.CurrentLevelData.level_info
-onready var level_data: LevelDataOld = Singleton.CurrentLevelData.level_data
+onready var level_info: LevelInfo = CurrentLevelData.level_info
+onready var level_data: LevelDataOld = CurrentLevelData.level_data
 
 # other
 var backing_out: bool = false
@@ -51,12 +51,12 @@ func _ready():
 	anim_player.play_backwards("transition")
 
 func start_level():
-	var shine_details: Array = Singleton.CurrentLevelData.level_info.shine_details
-	Singleton.CurrentLevelData.level_transition_data = {
+	var shine_details: Array = CurrentLevelData.level_info.shine_details
+	CurrentLevelData.level_transition_data = {
 		"target_area": shine_details[shine_parent.selected_shine_index].get("entrance_area", -1),
 		"target_tag": shine_details[shine_parent.selected_shine_index].get("entrance_tag", "_entrance")
 	} 
-#	print(Singleton.CurrentLevelData.area)
+#	print(CurrentLevelData.area)
 	
 	if not shine_parent.can_interact: return
 	shine_parent.can_interact = false
@@ -73,7 +73,7 @@ func start_level():
 	
 	get_tree().call_group("shine_sprites", "start_pressed_animation")
 	
-	Singleton.CurrentLevelData.level_info.selected_shine = shine_parent.shine_details_indices[shine_parent.selected_shine_index]
+	CurrentLevelData.level_info.selected_shine = shine_parent.shine_details_indices[shine_parent.selected_shine_index]
 	
 	# levels screen is supposed to set the CurrentLevelData before changing to the shine select screen
 	# so we'll assume it's safe to just go straight to the player scene 

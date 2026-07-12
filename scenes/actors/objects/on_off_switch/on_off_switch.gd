@@ -23,7 +23,7 @@ func _ready():
 #	if mode == 1:
 #			set_property("default_state", default_state, true)
 #
-	sprite.region_rect.position.x = int(!Singleton.CurrentLevelData.level_data.vars.switch_state.has(palette)) * 32
+	sprite.region_rect.position.x = int(!CurrentLevelData.level_data.vars.switch_state.has(palette)) * 32
 	
 	if !enabled or !layer == middle:
 		$StaticBody2D.set_collision_layer_bit(0, false)
@@ -34,7 +34,7 @@ func _ready():
 
 func _connect():
 	curve_tween.connect("curve_tween", self, "_on_curve_tween")
-	Singleton.CurrentLevelData.level_data.vars.connect("switch_state_changed", self, "_on_switch_state_changed")
+	CurrentLevelData.level_data.vars.connect("switch_state_changed", self, "_on_switch_state_changed")
 	if mode != 1:
 		hit_collider.connect("body_entered", self, "_on_hit_body_entered")
 		hit_collider.connect("area_entered", self, "_on_hit_area_entered")
@@ -52,7 +52,7 @@ func _on_switch_state_changed(channel):
 
 func _on_hit():
 	switch_sound.play()
-	Singleton.CurrentLevelData.level_data.vars.toggle_switch_state(palette)
+	CurrentLevelData.level_data.vars.toggle_switch_state(palette)
 
 func _on_curve_tween(value):
 	sprite.position = value

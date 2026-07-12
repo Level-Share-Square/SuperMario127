@@ -31,7 +31,7 @@ func _ready():
 	connect("property_changed", self, "_on_property_changed")
 
 	if is_zero_approx(rotation): #TODO: Vertical & Lateral pipes
-		Singleton.CurrentLevelData.level_data.vars.teleporters.append([destination_tag.to_lower(), self])
+		CurrentLevelData.level_data.vars.teleporters.append([destination_tag.to_lower(), self])
 	else:
 		enabled = false
 

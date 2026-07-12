@@ -27,9 +27,9 @@ func reset():
 	switch_state = []
 	activated_shine_ids = []
 	
-	for index in Singleton.CurrentLevelData.level_data.areas.size():
+	for index in CurrentLevelData.level_data.areas.size():
 		current_shine_shards.append([0, []])
 		current_purple_starbits.append([0, []])
 		liquid_positions.append([])
 
-	Singleton.CurrentLevelData.level_data.vars.init()
+	CurrentLevelData.level_data.vars.init()

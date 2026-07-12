@@ -21,7 +21,7 @@ func _ready():
 	modulate = Color(1, 1, 1, 0)
 
 func open(text : String, sign_node : Node2D, character_node : Character):
-	Singleton.CurrentLevelData.can_pause = false
+	CurrentLevelData.can_pause = false
 	
 	character = character_node
 	sign_obj = sign_node
@@ -31,7 +31,7 @@ func open(text : String, sign_node : Node2D, character_node : Character):
 	open = true
 
 func close():
-	Singleton.CurrentLevelData.can_pause = true
+	CurrentLevelData.can_pause = true
 	
 	open = false
 	sign_obj.reset_read_timer = 0.5

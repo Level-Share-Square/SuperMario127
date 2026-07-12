@@ -36,7 +36,7 @@ func collect(body):
 
 func _ready():
 	var _connect = area.connect("body_entered", self, "collect")
-	gravity = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].gravity
+	gravity = CurrentLevelData.level_data.areas[CurrentLevelData.area].gravity
 	kinematic_body.get_node("Sprite_" + nozzle_type).visible = true
 	
 func _process(delta):

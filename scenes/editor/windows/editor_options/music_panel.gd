@@ -17,7 +17,7 @@ var song_name: String = "A song"
 var loop_end: float
 
 func _ready():
-	if !Singleton.CurrentLevelData.is_campaign:
+	if !CurrentLevelData.is_campaign:
 		import.hide()
 	update_panel()
 	var lines = [song_url_line, song_name_line, loop_start_line, loop_end_line]
@@ -25,7 +25,7 @@ func _ready():
 		line.connect("text_changed", self, "on_text_changed")
 
 func update_panel():
-	var area = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area]
+	var area = CurrentLevelData.level_data.areas[CurrentLevelData.area]
 	var raw_music
 	if music_type == 0:
 		raw_music = area.music
@@ -49,7 +49,7 @@ func update_panel():
 		
 
 func save_song() -> String:
-	var area = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area]
+	var area = CurrentLevelData.level_data.areas[CurrentLevelData.area]
 	var encoded_song: String = ""
 	encoded_song += "LP%s=%s|LEP=%sN=%s" % [loop_start, url, loop_end, song_name]
 	if music_type == 0:

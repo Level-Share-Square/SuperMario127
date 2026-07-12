@@ -27,7 +27,7 @@ func _ready() -> void:
 		var _connect = area.connect("body_entered", self, "collect")
 
 	if Singleton.ModeSwitcher.get_node("ModeSwitcherButton").invisible:
-		var collected_star_coins = Singleton.CurrentLevelData.level_info.collected_star_coins
+		var collected_star_coins = CurrentLevelData.level_info.collected_star_coins
 		# Get the value, returning false if the key doesn't exist
 		is_blue = collected_star_coins.get(str(id), false)
 
@@ -35,7 +35,7 @@ func _ready() -> void:
 	anim_sprite.play("default")
 
 func on_place():
-	Singleton.CurrentLevelData.set_star_coin_ids()
+	CurrentLevelData.set_star_coin_ids()
 	id = level_object.get_ref().properties[6]
 	set_property("id", id)
 
@@ -50,7 +50,7 @@ func update_color():
 func collect(body : PhysicsBody2D) -> void:
 	if enabled and !collected and (body is Character):
 		if Singleton.ModeSwitcher.get_node("ModeSwitcherButton").invisible:
-			Singleton.CurrentLevelData.level_info.set_star_coin_collected(id, Singleton.CurrentLevelData.selected_file > -2)
+			CurrentLevelData.level_info.set_star_coin_collected(id, CurrentLevelData.selected_file > -2)
 
 		collected = true
 

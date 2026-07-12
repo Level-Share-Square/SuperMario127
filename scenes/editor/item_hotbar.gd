@@ -52,11 +52,11 @@ func _ready():
 			loadout_button.connect("button_down", self, "_on_palettes_pressed")
 	
 	
-	if Singleton.CurrentLevelData.level_data.loadouts != []:
-		loadouts = Singleton.CurrentLevelData.level_data.loadouts
-		fav_items = Singleton.CurrentLevelData.level_data.fav_items
-		loadout_palettes = Singleton.CurrentLevelData.level_data.palettes
-		items_favorited = Singleton.CurrentLevelData.level_data.favorites
+	if CurrentLevelData.level_data.loadouts != []:
+		loadouts = CurrentLevelData.level_data.loadouts
+		fav_items = CurrentLevelData.level_data.fav_items
+		loadout_palettes = CurrentLevelData.level_data.palettes
+		items_favorited = CurrentLevelData.level_data.favorites
 #	print(loadout_palettes)
 	refresh_loadout()
 	check_items()
@@ -80,15 +80,15 @@ func _on_item_button_pressed(item_button):
 	
 
 func update_level_data():
-	Singleton.CurrentLevelData.level_data.loadouts = loadouts
+	CurrentLevelData.level_data.loadouts = loadouts
 	var loadout_palette: Array = []
 	for buttons in bottom_row.get_children():
 		loadout_palette.append(buttons.palette)
 	loadout_palettes[selected_loadout] = loadout_palette
 #	print(loadout_palettes[selected_loadout])
-	Singleton.CurrentLevelData.level_data.palettes = loadout_palettes
-	Singleton.CurrentLevelData.level_data.favorites = items_favorited
-	Singleton.CurrentLevelData.level_data.fav_items = fav_items
+	CurrentLevelData.level_data.palettes = loadout_palettes
+	CurrentLevelData.level_data.favorites = items_favorited
+	CurrentLevelData.level_data.fav_items = fav_items
 
 func check_items():
 	for item_button in button_container.get_children():

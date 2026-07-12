@@ -119,7 +119,7 @@ func cap_zoom_level(zoom : float) -> float:
 	# I'd prefer to not hardcode this but frankly it's not worth the time to 
 	# figure out getting the height of the toolbar.
 	var toolbar_size : float = 0
-	var level_size : Vector2 = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].bounds.size
+	var level_size : Vector2 = CurrentLevelData.level_data.areas[CurrentLevelData.area].bounds.size
 
 	while (
 		viewport_size.x * zoom > (level_size.x + 6) * Editor.TILE_SIZE.x or 

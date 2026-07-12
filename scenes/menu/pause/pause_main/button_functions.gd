@@ -39,8 +39,8 @@ func quit():
 
 func set_quit_name():
 	quit.text = QUIT_TEXT if (
-		Singleton.CurrentLevelData.is_hub_level() 
-		or not Singleton.CurrentLevelData.is_campaign
+		CurrentLevelData.is_hub_level() 
+		or not CurrentLevelData.is_campaign
 	) else HUB_TEXT
 	
 	icon.offset = Vector2(
@@ -49,5 +49,5 @@ func set_quit_name():
 	
 	countdown.initial_text = quit.text
 	
-	shine_map.visible = Singleton.CurrentLevelData.is_hub_level()
-	retry_start.visible = not Singleton.CurrentLevelData.is_hub_level()
+	shine_map.visible = CurrentLevelData.is_hub_level()
+	retry_start.visible = not CurrentLevelData.is_hub_level()

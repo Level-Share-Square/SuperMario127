@@ -21,7 +21,7 @@ export var anim_damp = 80
 
 func collect(body):
 	if enabled and !collected and collectable and body.name.begins_with("Character") and !body.dead:
-		Singleton.CurrentLevelData.level_data.vars.collect_purple_starbit(id)
+		CurrentLevelData.level_data.vars.collect_purple_starbit(id)
 		var player_id = 1
 		if body.name == "Character":
 			player_id = 0
@@ -34,14 +34,14 @@ func _ready():
 	if mode == 1: return
 	if enabled:
 #		add_to_group("purple_starbits")
-		id = Singleton.CurrentLevelData.level_data.vars.max_purple_starbits
-		Singleton.CurrentLevelData.level_data.vars.max_purple_starbits += 1
+		id = CurrentLevelData.level_data.vars.max_purple_starbits
+		CurrentLevelData.level_data.vars.max_purple_starbits += 1
 	
 	# band aid crash fix
-	while Singleton.CurrentLevelData.level_data.vars.purple_starbits_collected.size() <= Singleton.CurrentLevelData.area:
-		Singleton.CurrentLevelData.level_data.vars.purple_starbits_collected.append([0, []])
+	while CurrentLevelData.level_data.vars.purple_starbits_collected.size() <= CurrentLevelData.area:
+		CurrentLevelData.level_data.vars.purple_starbits_collected.append([0, []])
 	
-	if id in Singleton.CurrentLevelData.level_data.vars.purple_starbits_collected[Singleton.CurrentLevelData.area][1] and !timed:
+	if id in CurrentLevelData.level_data.vars.purple_starbits_collected[CurrentLevelData.area][1] and !timed:
 		queue_free()
 	
 	if layer == middle:
@@ -80,9 +80,9 @@ func _process(delta):
 		animated_sprite.frame = wrapi(OS.get_ticks_msec() / (1000/8), 0, 16)
 
 #func turn_off():
-#	var req_purples = Singleton.CurrentLevelData.level_data.vars.required_purple_starbits[Singleton.CurrentLevelData.area][0]
-#	if Singleton.CurrentLevelData.level_data.vars.purple_starbits_collected[Singleton.CurrentLevelData.area][0] < req_purples:
-#		Singleton.CurrentLevelData.level_data.vars.purple_starbits_collected[Singleton.CurrentLevelData.area] = [0, []]
+#	var req_purples = CurrentLevelData.level_data.vars.required_purple_starbits[CurrentLevelData.area][0]
+#	if CurrentLevelData.level_data.vars.purple_starbits_collected[CurrentLevelData.area][0] < req_purples:
+#		CurrentLevelData.level_data.vars.purple_starbits_collected[CurrentLevelData.area] = [0, []]
 #		timed = true
 #		timer_on = false
 #		enabled = false
@@ -93,10 +93,10 @@ func _process(delta):
 #		yield(tween, "tween_all_completed")
 #		visible = false
 #		print("shut off")
-#	elif (Singleton.CurrentLevelData.level_data.vars.purple_starbits_collected[Singleton.CurrentLevelData.area][0] > req_purples) and (len(Singleton.CurrentLevelData.level_data.vars.required_purple_starbits[Singleton.CurrentLevelData.area]) > 1):
-#		Singleton.CurrentLevelData.level_data.vars.purple_starbits_collected[Singleton.CurrentLevelData.area][0] = req_purples
-#		for _i in range(req_purples, Singleton.CurrentLevelData.level_data.vars.purple_starbits_collected[Singleton.CurrentLevelData.area][0]):
-#			var popped_id = Singleton.CurrentLevelData.level_data.vars.purple_starbits_collected[Singleton.CurrentLevelData.area][1].pop_back()
+#	elif (CurrentLevelData.level_data.vars.purple_starbits_collected[CurrentLevelData.area][0] > req_purples) and (len(CurrentLevelData.level_data.vars.required_purple_starbits[CurrentLevelData.area]) > 1):
+#		CurrentLevelData.level_data.vars.purple_starbits_collected[CurrentLevelData.area][0] = req_purples
+#		for _i in range(req_purples, CurrentLevelData.level_data.vars.purple_starbits_collected[CurrentLevelData.area][0]):
+#			var popped_id = CurrentLevelData.level_data.vars.purple_starbits_collected[CurrentLevelData.area][1].pop_back()
 #			if id == popped_id:
 #				timed = true
 #				timer_on = false

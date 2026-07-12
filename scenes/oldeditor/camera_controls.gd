@@ -90,7 +90,7 @@ func _physics_process(delta):
 	if(zoom.x != editor.zoom_level):
 		var zoom_level = editor.zoom_level
 		zoom = zoom.linear_interpolate(Vector2(zoom_level, zoom_level), delta * lerp_speed)
-		update_limits(Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area])
+		update_limits(CurrentLevelData.level_data.areas[CurrentLevelData.area])
 
 func _ready():
 	default_height = get_viewport_rect().size.y

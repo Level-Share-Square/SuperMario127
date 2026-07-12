@@ -25,8 +25,8 @@ func play_level(selected_file: int, collected_shines: int = 0) -> void:
 	
 	Singleton.SceneSwitcher.menu_return_screen = "MainMenu"
 	Singleton.SceneSwitcher.menu_return_args = []
-	Singleton.CurrentLevelData.level_transition_data = {}
-	Singleton.CurrentLevelData.hub_return_data = {}
+	CurrentLevelData.level_transition_data = {}
+	CurrentLevelData.hub_return_data = {}
 	
 	Singleton.Music.reset_music()
 	Singleton.Music.stop()

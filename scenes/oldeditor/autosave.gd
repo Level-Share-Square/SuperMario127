@@ -33,8 +33,8 @@ func _ready():
 		saves_container.add_child(button)
 	
 func load_autosaves() -> Array:
-	var level_id = Singleton.CurrentLevelData.level_id
-	var level_name = Singleton.CurrentLevelData.level_info.level_name
+	var level_id = CurrentLevelData.level_id
+	var level_name = CurrentLevelData.level_info.level_name
 	
 	var autosaves: Array = []
 	var dir: Directory = Directory.new()
@@ -66,9 +66,9 @@ func load_autosaves() -> Array:
 	return autosaves
 	
 func open_autosave(time):
-	var level_id = Singleton.CurrentLevelData.level_id
+	var level_id = CurrentLevelData.level_id
 	var level_code: String
-	var working_folder = Singleton.CurrentLevelData.working_folder
+	var working_folder = CurrentLevelData.working_folder
 	var file = File.new()
 	file.open(AUTOSAVE_FOLDER + "%s_%s" % [level_id, time], File.READ)
 	level_code = file.get_line()
@@ -76,7 +76,7 @@ func open_autosave(time):
 	
 	var level_info := LevelInfo.new(level_id, working_folder, level_code)
 	level_info.load_in()
-	Singleton.CurrentLevelData.level_data = level_info.level_data
+	CurrentLevelData.level_data = level_info.level_data
 	Singleton.SceneTransitions.reload_scene()
 	
 func _physics_process(delta):
@@ -87,11 +87,11 @@ func _physics_process(delta):
 		timer = interval
 
 func autosave():
-	var file_name: String = "%s_%s" % [Singleton.CurrentLevelData.level_id, round(Time.get_unix_time_from_system())]
+	var file_name: String = "%s_%s" % [CurrentLevelData.level_id, round(Time.get_unix_time_from_system())]
 	
 	var file := File.new()
 	file.open(AUTOSAVE_FOLDER + file_name, File.WRITE)
-	file.store_string(Singleton.CurrentLevelData.level_data.get_encoded_level_data())
+	file.store_string(CurrentLevelData.level_data.get_encoded_level_data())
 	file.close()
 	emit_signal("autosaved")
 

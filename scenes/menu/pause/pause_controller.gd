@@ -11,14 +11,14 @@ onready var screen_manager = $Screens
 var is_open
 
 func _ready():
-	Singleton.CurrentLevelData.can_pause = true
+	CurrentLevelData.can_pause = true
 
 func set_tree_paused(value: bool):
-	Singleton.CurrentLevelData.set_process(!value)
+	CurrentLevelData.set_process(!value)
 	get_tree().paused = value
 
 func can_pause() -> bool:
-	return Singleton.CurrentLevelData.can_pause and !Singleton.SceneTransitions.transitioning
+	return CurrentLevelData.can_pause and !Singleton.SceneTransitions.transitioning
 
 func pause():
 	if !cooldown.is_stopped(): return

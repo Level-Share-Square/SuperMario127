@@ -111,8 +111,8 @@ func _ready() -> void:
 	if mode != 1: # not in edit mode
 		if required_purples > 0:
 			purple_starbits_activate = true
-			Singleton.CurrentLevelData.level_data.vars.required_purple_starbits[Singleton.CurrentLevelData.area].append(required_purples)
-			Singleton.CurrentLevelData.level_data.vars.required_purple_starbits[Singleton.CurrentLevelData.area].sort()
+			CurrentLevelData.level_data.vars.required_purple_starbits[CurrentLevelData.area].append(required_purples)
+			CurrentLevelData.level_data.vars.required_purple_starbits[CurrentLevelData.area].sort()
 		else:
 			purple_starbits_activate = false
 		
@@ -131,7 +131,7 @@ func _ready() -> void:
 		# if the shine is collected, make it blue 
 		# (collected_shines is a Dictionary where the key is the shine id and the value is a bool)
 		if Singleton.ModeSwitcher.get_node("ModeSwitcherButton").invisible:
-			var collected_shines = Singleton.CurrentLevelData.level_info.collected_shines
+			var collected_shines = CurrentLevelData.level_info.collected_shines
 
 			# Get the value, returning false if the key doesn't exist
 			is_blue = collected_shines.get(str(id), false)
@@ -149,7 +149,7 @@ func _ready() -> void:
 
 
 func on_place():
-	Singleton.CurrentLevelData.set_shine_ids()
+	CurrentLevelData.set_shine_ids()
 	id = level_object.get_ref().properties[13]
 	set_property("id", id)
 
@@ -213,22 +213,22 @@ func _physics_process(_delta: float) -> void:
 		animated_sprite.frame = wrapi(OS.get_ticks_msec() / (1000/8), 0, 16)
 		
 	if mode != 1:
-		var do_animation: bool = not (id in Singleton.CurrentLevelData.level_data.vars.activated_shine_ids)
+		var do_animation: bool = not (id in CurrentLevelData.level_data.vars.activated_shine_ids)
 		
 		# band aid crash fix
-		while Singleton.CurrentLevelData.level_data.vars.shine_shards_collected.size() <= Singleton.CurrentLevelData.area:
-			Singleton.CurrentLevelData.level_data.vars.shine_shards_collected.append([0, []])
-		while Singleton.CurrentLevelData.level_data.vars.purple_starbits_collected.size() <= Singleton.CurrentLevelData.area:
-			Singleton.CurrentLevelData.level_data.vars.purple_starbits_collected.append([0, []])
+		while CurrentLevelData.level_data.vars.shine_shards_collected.size() <= CurrentLevelData.area:
+			CurrentLevelData.level_data.vars.shine_shards_collected.append([0, []])
+		while CurrentLevelData.level_data.vars.purple_starbits_collected.size() <= CurrentLevelData.area:
+			CurrentLevelData.level_data.vars.purple_starbits_collected.append([0, []])
 		
-		if red_coins_activate and !activated and Singleton.CurrentLevelData.level_data.vars.max_red_coins > 0:
-			if Singleton.CurrentLevelData.level_data.vars.red_coins_collected[0] == Singleton.CurrentLevelData.level_data.vars.max_red_coins:
+		if red_coins_activate and !activated and CurrentLevelData.level_data.vars.max_red_coins > 0:
+			if CurrentLevelData.level_data.vars.red_coins_collected[0] == CurrentLevelData.level_data.vars.max_red_coins:
 				activate_shine(ActivateAnimations.NORMAL if do_animation else ActivateAnimations.SKIP, false, true)
-		if shine_shards_activate and !activated and Singleton.CurrentLevelData.level_data.vars.max_shine_shards > 0:
-			if Singleton.CurrentLevelData.level_data.vars.shine_shards_collected[Singleton.CurrentLevelData.area][0] == Singleton.CurrentLevelData.level_data.vars.max_shine_shards:
+		if shine_shards_activate and !activated and CurrentLevelData.level_data.vars.max_shine_shards > 0:
+			if CurrentLevelData.level_data.vars.shine_shards_collected[CurrentLevelData.area][0] == CurrentLevelData.level_data.vars.max_shine_shards:
 				activate_shine(ActivateAnimations.NORMAL if do_animation else ActivateAnimations.SKIP, false, true)
-		if purple_starbits_activate and !activated and Singleton.CurrentLevelData.level_data.vars.max_purple_starbits > 0:
-			if Singleton.CurrentLevelData.level_data.vars.purple_starbits_collected[Singleton.CurrentLevelData.area][0] >= required_purples:
+		if purple_starbits_activate and !activated and CurrentLevelData.level_data.vars.max_purple_starbits > 0:
+			if CurrentLevelData.level_data.vars.purple_starbits_collected[CurrentLevelData.area][0] >= required_purples:
 				activate_shine(ActivateAnimations.NORMAL if do_animation else ActivateAnimations.SKIP, false, true)
 	
 	if collected:
@@ -293,7 +293,7 @@ func activate_shine(animation: int, temporary: bool = false, manual_start_cutsce
 	activated = true
 	
 	if !temporary:
-		Singleton.CurrentLevelData.level_data.vars.activate_shine(id)
+		CurrentLevelData.level_data.vars.activate_shine(id)
 	
 	if manual_start_cutscene:
 		camera.start_queue()
@@ -306,7 +306,7 @@ func deactivate_shine(do_animation: bool) -> void:
 	animation_player.play("disappear")
 	
 	activated = false
-	Singleton.CurrentLevelData.level_data.vars.deactivate_shine(id)
+	CurrentLevelData.level_data.vars.deactivate_shine(id)
 
 
 # Updates the ambient noise appropriately depending on if the shine is active and not collected prior.
@@ -351,7 +351,7 @@ func collect(body: PhysicsBody2D) -> void:
 		character.set_inter_player_collision(false)
 
 		Singleton.ModeSwitcher.get_node("ModeSwitcherButton").switching_disabled = true
-		Singleton.CurrentLevelData.can_pause = false
+		CurrentLevelData.can_pause = false
 
 		# mute level music (gets un-muted after shine dance finishes)
 		Singleton.Music.volume_multiplier = 0
@@ -362,20 +362,20 @@ func collect(body: PhysicsBody2D) -> void:
 		visible = false
 
 		if Singleton.ModeSwitcher.get_node("ModeSwitcherButton").invisible:
-			var is_new_record: bool = Singleton.CurrentLevelData.level_info.is_new_record(id)
+			var is_new_record: bool = CurrentLevelData.level_info.is_new_record(id)
 			
-			score_from_before = Singleton.CurrentLevelData.time_score
-			Singleton.CurrentLevelData.level_info.set_shine_collected(id, false)
-			Singleton.CurrentLevelData.level_info.update_time_and_coin_score(id, Singleton.CurrentLevelData.selected_file > -2)
-			Singleton.CurrentLevelData.stop_tracking_time_score()
+			score_from_before = CurrentLevelData.time_score
+			CurrentLevelData.level_info.set_shine_collected(id, false)
+			CurrentLevelData.level_info.update_time_and_coin_score(id, CurrentLevelData.selected_file > -2)
+			CurrentLevelData.stop_tracking_time_score()
 			if !do_kick_out:
-				var level_info = Singleton.CurrentLevelData.level_info
+				var level_info = CurrentLevelData.level_info
 				var new_shine_id = level_info.selected_shine + 1
 				if new_shine_id < level_info.shine_details.size():
 					level_info.selected_shine = new_shine_id
 				get_tree().get_current_scene().get_node("%PauseController").emit_signal("shine_collected")
-			elif Singleton.CurrentLevelData.is_playing_campaign():
-				Singleton.CurrentLevelData.shine_kickout_data = {
+			elif CurrentLevelData.is_playing_campaign():
+				CurrentLevelData.shine_kickout_data = {
 					"title": title,
 					"time_score": score_from_before,
 					"new_record": is_new_record
@@ -432,7 +432,7 @@ func character_shine_dance_finished(_animation: Animation) -> void:
 			mode_switcher_button._pressed()
 			
 			# pausing disabled for same reasons as mode switcher button
-			Singleton.CurrentLevelData.can_pause = true
+			CurrentLevelData.can_pause = true
 	else: 
 		# start playing the dance stop animation
 		shine_get.disappear()
@@ -451,7 +451,7 @@ func restore_control(_animation: String, character: Character) -> void:
 		mode_switcher_button.switching_disabled = false 
 
 	# pausing disabled for same reasons as mode switcher button
-	Singleton.CurrentLevelData.can_pause = true
+	CurrentLevelData.can_pause = true
 
 	# stop the animation
 	character.anim_player.stop()
@@ -475,7 +475,7 @@ func restore_control(_animation: String, character: Character) -> void:
 	timer_manager.pause_resume_timer("area_timer", false)
 	
 	# to prevent cheese on other shine time scores
-	Singleton.CurrentLevelData.start_tracking_time_score()
-	Singleton.CurrentLevelData.time_score = score_from_before
+	CurrentLevelData.start_tracking_time_score()
+	CurrentLevelData.time_score = score_from_before
 	
 	Singleton.Music.stop_temporary_music()

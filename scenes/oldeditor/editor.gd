@@ -78,16 +78,16 @@ signal zoom_changed(zoom)
 
 
 func quit_to_menu():
-	var level_id: String = Singleton.CurrentLevelData.level_id
-	var working_folder: String = Singleton.CurrentLevelData.working_folder
-	var is_campaign: bool = Singleton.CurrentLevelData.is_campaign
+	var level_id: String = CurrentLevelData.level_id
+	var working_folder: String = CurrentLevelData.working_folder
+	var is_campaign: bool = CurrentLevelData.is_campaign
 	
 	var code_path: String = level_list_util.get_level_file_path(level_id, working_folder)
 	var level_code: String = level_list_util.load_level_code_file(code_path)
 	
-	Singleton.CurrentLevelData.level_info = LevelInfo.new(level_id, working_folder, level_code)
+	CurrentLevelData.level_info = LevelInfo.new(level_id, working_folder, level_code)
 	if Singleton.SceneSwitcher.menu_return_args.size() > 0:
-		Singleton.SceneSwitcher.menu_return_args = [Singleton.CurrentLevelData.level_info, level_id, working_folder, true, is_campaign]
+		Singleton.SceneSwitcher.menu_return_args = [CurrentLevelData.level_info, level_id, working_folder, true, is_campaign]
 	
 	Singleton.SceneSwitcher.quit_to_menu_with_transition("levels_screen")
 
@@ -104,7 +104,7 @@ func cap_zoom_level(zoom : float) -> float:
 	# I'd prefer to not hardcode this but frankly it's not worth the time to 
 	# figure out getting the height of the toolbar.
 	var toolbar_size : float = 70
-	var level_size : Vector2 = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].settings.bounds.size
+	var level_size : Vector2 = CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.bounds.size
 
 	while (
 		viewport_size.x * zoom > (level_size.x + 6) * TILE_SIZE or 
@@ -182,17 +182,17 @@ func _ready() -> void:
 	
 	Engine.iterations_per_second = 60
 	# reset these to 0 since they get incremented by the loading in process every time
-	Singleton.CurrentLevelData.next_shine_id = 0
-	Singleton.CurrentLevelData.next_star_coin_id = 0
+	CurrentLevelData.next_shine_id = 0
+	CurrentLevelData.next_star_coin_id = 0
 	Singleton.CheckpointSaved.reset()
 	
-	var data = Singleton.CurrentLevelData.level_data
-	load_in(data, data.areas[Singleton.CurrentLevelData.area])
+	var data = CurrentLevelData.level_data
+	load_in(data, data.areas[CurrentLevelData.area])
 	zoom_level = Singleton.EditorSavedSettings.zoom_level
 	editing_layer = Singleton.EditorSavedSettings.layer
 	layers_transparent = Singleton.EditorSavedSettings.layers_transparent
 	
-	for pinned_item in Singleton.CurrentLevelData.level_data.pinned_items:
+	for pinned_item in CurrentLevelData.level_data.pinned_items:
 		var item: Node = placeable_items.find_node(pinned_item[0])
 		item.palette_index = pinned_item[1]
 		pinned_items.append(item)
@@ -210,7 +210,7 @@ func _ready() -> void:
 		# make sure the mode switcher button is set to have the play button as it's visual
 		Singleton.ModeSwitcher.get_node("ModeSwitcherButton").change_visuals(0)
 	
-		Singleton.CurrentLevelData.unsaved_editor_changes = false
+		CurrentLevelData.unsaved_editor_changes = false
 
 func _update_editor_framerate():
 	fps_util._update_framerate(true)
@@ -343,7 +343,7 @@ func sync_pinned_items() -> void:
 		pin_array.append(pinned_item.name)
 		pin_array.append(pinned_item.palette_index)
 		encoded_pinned_items.append(pin_array)
-	Singleton.CurrentLevelData.level_data.pinned_items = encoded_pinned_items
+	CurrentLevelData.level_data.pinned_items = encoded_pinned_items
 
 
 func switch_scenes() -> void:
@@ -425,23 +425,23 @@ func _process(delta : float) -> void:
 	if Singleton2.time <= 0:
 		sync_pinned_items()
 		
-		var level_info = Singleton.CurrentLevelData.level_info
+		var level_info = CurrentLevelData.level_info
 		var time = round(Time.get_unix_time_from_system())
 		
-		var level_id: String = Singleton.CurrentLevelData.level_id
-		var working_folder: String = Singleton.CurrentLevelData.working_folder
+		var level_id: String = CurrentLevelData.level_id
+		var working_folder: String = CurrentLevelData.working_folder
 		# whoever coded this previously, u should know this was essentially making it
 		# turn the level data into a code four times over
-		var level_code: String = Singleton.CurrentLevelData.level_data.get_encoded_level_data()
+		var level_code: String = CurrentLevelData.level_data.get_encoded_level_data()
 		var file_path: String = level_list_util.get_level_file_path(level_id, working_folder)
 		
-		Singleton.CurrentLevelData.level_info = LevelInfo.new(level_id, working_folder, level_code)
-		Singleton.CurrentLevelData.level_info.load_in()
+		CurrentLevelData.level_info = LevelInfo.new(level_id, working_folder, level_code)
+		CurrentLevelData.level_info.load_in()
 		level_list_util.save_level_code_file(level_code, file_path)
 		
 		level_list_util.autosave_level_to_disk(level_code, "user://autosaves/" + "main_" + str(level_info.level_name) + ".autosave")
 		level_list_util.autosave_level_to_disk(level_code, "user://autosaves/" + str(level_info.level_name) + "_" + str(time) + ".autosave")
-		Singleton.CurrentLevelData.unsaved_editor_changes = false
+		CurrentLevelData.unsaved_editor_changes = false
 		
 		Singleton2.reset_time()
 	# warning-ignore: integer_division
@@ -609,7 +609,7 @@ func _process(delta : float) -> void:
 						objects_stack.append([shared.create_object(object, true),true,object_copy])
 						# Set level as not multiplayer compatible if the object placed
 						# isn't compatible with multiplayer and also changes game mode to singleplayer
-#						Singleton.CurrentLevelData.level_info.validity_check.is_object_multiplayer_compatible(object.type_id,self)
+#						CurrentLevelData.level_info.validity_check.is_object_multiplayer_compatible(object.type_id,self)
 						# Merciful Lord Jesus, please forgive me for 
 						# writing this abhorrent line of code. Amen.
 						last_object_pos = object_pos
@@ -659,7 +659,7 @@ func _process(delta : float) -> void:
 					objects_stack.append([shared.create_object(object, true),true,object_copy])
 					# Set level as not multiplayer compatible if the object placed
 					# isn't compatible with multiplayer and also changes game mode to singleplayer
-					Singleton.CurrentLevelData.level_info.validity_check.is_object_multiplayer_compatible(object.type_id,self)
+					CurrentLevelData.level_info.validity_check.is_object_multiplayer_compatible(object.type_id,self)
 					# Merciful Lord Jesus, please forgive me for 
 					# writing this abhorrent line of code. Amen.
 					last_object_pos = object_pos
@@ -745,7 +745,7 @@ func _process(delta : float) -> void:
 #					Singleton.ActionManager.add_action(action2)
 
 				# if an action is being added, that means we should count the count the level data as modified and in need of a save
-				Singleton.CurrentLevelData.unsaved_editor_changes = true
+				CurrentLevelData.unsaved_editor_changes = true
 		
 #		if last_mouse_pos != mouse_pos:
 		last_mouse_pos = mouse_pos

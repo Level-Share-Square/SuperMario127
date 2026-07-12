@@ -63,16 +63,16 @@ func _ready():
 	
 	if !Singleton.MiscShared.is_play_reload:
 		Singleton.CheckpointSaved.reset()
-		Singleton.CurrentLevelData.level_data.vars.init()
+		CurrentLevelData.level_data.vars.init()
 	
-	if Singleton.CurrentLevelData.level_data.vars.transition_data.empty():
+	if CurrentLevelData.level_data.vars.transition_data.empty():
 		if Singleton.CheckpointSaved.current_checkpoint_id != -1:
-			Singleton.CurrentLevelData.area = Singleton.CheckpointSaved.current_area
-		Singleton.CurrentLevelData.level_data.vars.reload()
+			CurrentLevelData.area = Singleton.CheckpointSaved.current_area
+		CurrentLevelData.level_data.vars.reload()
 	
-	if Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].timer > 0.00:
+	if CurrentLevelData.level_data.areas[CurrentLevelData.area].timer > 0.00:
 		var timer_manager = get_timer_manager()
-		timer_manager.add_set_timer("area_timer", Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].timer, "death", true, true)
+		timer_manager.add_set_timer("area_timer", CurrentLevelData.level_data.areas[CurrentLevelData.area].timer, "death", true, true)
 #		vignette.visible = true
 	
 	var data = Singleton.CurrentLevelData.level_data
@@ -85,19 +85,19 @@ func _ready():
 
 	can_collect_coins.append(get_node(character))
 		
-	Singleton.CurrentLevelData.level_data.vars.max_red_coins = 0
-	Singleton.CurrentLevelData.level_data.vars.max_shine_shards = 0
-	Singleton.CurrentLevelData.level_data.vars.max_purple_starbits = 0
-	Singleton.CurrentLevelData.level_data.vars.teleporters = []
-	Singleton.CurrentLevelData.level_data.vars.liquids = []
-	Singleton.CurrentLevelData.level_data.vars.checkpoints = []
+	CurrentLevelData.level_data.vars.max_red_coins = 0
+	CurrentLevelData.level_data.vars.max_shine_shards = 0
+	CurrentLevelData.level_data.vars.max_purple_starbits = 0
+	CurrentLevelData.level_data.vars.teleporters = []
+	CurrentLevelData.level_data.vars.liquids = []
+	CurrentLevelData.level_data.vars.checkpoints = []
 	
 	Singleton.MiscShared.is_play_reload = true
 	get_tree().paused = false
-
-	yield(get_tree(), "physics_frame")
-	Singleton.CurrentLevelData.level_data.vars.max_red_coins = Singleton.CurrentLevelData.get_red_coins_before_area(Singleton.CurrentLevelData.level_data.areas.size())
 	
+	yield(get_tree(), "physics_frame")
+	CurrentLevelData.level_data.vars.max_red_coins = CurrentLevelData.get_red_coins_before_area(CurrentLevelData.level_data.areas.size())
+
 
 func _unhandled_input(event):
 	if event.is_action_pressed("reload") or event.is_action_pressed("reload_from_start") and !Singleton.SceneTransitions.transitioning and (!Singleton.ModeSwitcher.get_node("ModeSwitcherButton").switching_disabled or Singleton.ModeSwitcher.get_node("ModeSwitcherButton").invisible):

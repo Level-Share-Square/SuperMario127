@@ -40,7 +40,7 @@ func _ready():
 	palette_menu_button.connect("toggled", self, "_on_palette_menu_toggled")
 	
 	# I was wrong dignity... sorry... we can just do this on ready
-	area = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area]
+	area = CurrentLevelData.level_data.areas[CurrentLevelData.area]
 	
 	
 	
@@ -103,7 +103,7 @@ func _on_palette_selected(event: InputEvent, index: int):
 			foreground.texture = palettes[current_palette - 1]
 		
 		# Note: This should probably be in the save function instead.
-#		Singleton.CurrentLevelData.level_info.thumbnail_background_palette = current_palette
+#		CurrentLevelData.level_info.thumbnail_background_palette = current_palette
 		area.background_palette = current_palette
 		emit_signal("update_background")
 
@@ -112,7 +112,7 @@ func _on_bg_selected(index: int):
 	var resource = load("res://scenes/shared/background/backgrounds/%s/resource.tres" % backgrounds.ids[index])
 	background.texture = resource.texture
 	# Note: This should probably be in the save function instead.
-#	Singleton.CurrentLevelData.level_info.thumbnail_sky = index
+#	CurrentLevelData.level_info.thumbnail_sky = index
 	area.sky = index
 	bg_index = index
 	_init_palette_dropdown()
@@ -124,7 +124,7 @@ func _on_fg_selected(index: int):
 	var resource = load("res://scenes/shared/background/foregrounds/%s/resource.tres" % foregrounds.ids[index])
 	foreground.texture = resource.preview
 	# Note: This should probably be in the save function instead.
-#	Singleton.CurrentLevelData.level_info.thumbnail_background = index
+#	CurrentLevelData.level_info.thumbnail_background = index
 	area.background = index
 	area.background_palette = 0
 	fg_index = index

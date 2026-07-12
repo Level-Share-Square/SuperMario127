@@ -21,7 +21,7 @@ var hit: = false
 
 func _ready():
 	if mode != 1:
-		gravity = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].gravity
+		gravity = CurrentLevelData.level_data.areas[CurrentLevelData.area].gravity
 		if bouncy:
 			modulate = Color(0, 1, 1)
 			bounce_count = 2

@@ -28,23 +28,23 @@ func _ready():
 	_connect = thumbnail_url.connect("focus_exited", self, "update_thumbnail_url", [thumbnail_url.text])
 	_connect = description.connect("focus_exited", self, "update_description", [description.text])
 	
-	level_name.text = Singleton.CurrentLevelData.level_data.name
-	level_author.text = Singleton.CurrentLevelData.level_data.author
-	thumbnail_url.text = Singleton.CurrentLevelData.level_data.thumbnail_url
-	description.text = Singleton.CurrentLevelData.level_data.description
+	level_name.text = CurrentLevelData.level_data.name
+	level_author.text = CurrentLevelData.level_data.author
+	thumbnail_url.text = CurrentLevelData.level_data.thumbnail_url
+	description.text = CurrentLevelData.level_data.description
 
 
 func update_level_name(new_value: String):
-	Singleton.CurrentLevelData.level_data.name = new_value
+	CurrentLevelData.level_data.name = new_value
 
 func update_level_author(new_value: String):
-	Singleton.CurrentLevelData.level_data.author = new_value
+	CurrentLevelData.level_data.author = new_value
 
 func update_thumbnail_url(new_value: String):
-	Singleton.CurrentLevelData.level_data.thumbnail_url = new_value
+	CurrentLevelData.level_data.thumbnail_url = new_value
 
 func update_description(new_value: String):
-	Singleton.CurrentLevelData.level_data.description = new_value
+	CurrentLevelData.level_data.description = new_value
 
 func _input(event):
 	if event.is_action_pressed("text_release_focus"):

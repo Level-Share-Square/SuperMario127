@@ -102,7 +102,7 @@ func _ready():
 		# warning-ignore: unused_variable
 		connect("property_changed", self, "property_changed")
 	else:
-		gravity = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].gravity
+		gravity = CurrentLevelData.level_data.areas[CurrentLevelData.area].gravity
 		yield(get_tree(), "idle_frame")
 		working_speed = walk_speed
 		pathfollow.loop = !move_type
@@ -127,11 +127,11 @@ func _ready():
 		
 		if required_shines > 0:
 			var collected_shines: int
-			if Singleton.CurrentLevelData.is_playing_hub_level():
-				var total_dict: Dictionary = Singleton.CurrentLevelData.get_meta_collectibles()
+			if CurrentLevelData.is_playing_hub_level():
+				var total_dict: Dictionary = CurrentLevelData.get_meta_collectibles()
 				collected_shines = total_dict.get("collected_shines", 0)
 			else:
-				collected_shines = Singleton.CurrentLevelData.level_info.collected_shines.values().count(true)
+				collected_shines = CurrentLevelData.level_info.collected_shines.values().count(true)
 			
 			if collected_shines < required_shines:
 				queue_free()

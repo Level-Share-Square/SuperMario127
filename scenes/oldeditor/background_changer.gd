@@ -20,8 +20,8 @@ onready var foreground_id_mapper = preload("res://scenes/shared/background/foreg
 onready var sorted_fg_list = preload("res://scenes/shared/background/foregrounds/sort_order.tres")
 
 func update_preview():
-	var data = Singleton.CurrentLevelData.level_data
-	var area = data.areas[Singleton.CurrentLevelData.area]
+	var data = CurrentLevelData.level_data
+	var area = data.areas[CurrentLevelData.area]
 	var palette = area.settings.background_palette
 	
 	if (abs(area.settings.sky) > background_id_mapper.ids.size()-1):
@@ -71,8 +71,8 @@ func get_index_in_array(value, array):
 	return -1
 	
 func button_press():
-	var data = Singleton.CurrentLevelData.level_data
-	var area = data.areas[Singleton.CurrentLevelData.area]
+	var data = CurrentLevelData.level_data
+	var area = data.areas[CurrentLevelData.area]
 	
 	if background_button_left.pressed:
 		area.settings.sky -= 1

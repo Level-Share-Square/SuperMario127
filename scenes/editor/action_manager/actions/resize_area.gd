@@ -4,12 +4,12 @@ extends Action
 
 var shared: LevelShared
 
-var area_settings: LevelAreaOldSettings = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].area_settings
+var area_settings: LevelAreaOldSettings = CurrentLevelData.level_data.areas[CurrentLevelData.area].area_settings
 var bounds: Rect2
 
 
 func _do() -> void:
-	area_settings = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].area_settings
+	area_settings = CurrentLevelData.level_data.areas[CurrentLevelData.area].area_settings
 	last_bounds = area_settings.bounds
 	area_settings.bounds = bounds
 	

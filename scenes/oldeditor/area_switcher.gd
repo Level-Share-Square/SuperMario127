@@ -1,10 +1,10 @@
 extends Button
 
 func on_pressed():
-	if Singleton.CurrentLevelData.level_data.areas.size() <= 1:
+	if CurrentLevelData.level_data.areas.size() <= 1:
 		var area = LevelAreaOld.new()
-		Singleton.CurrentLevelData.level_data.areas.append(area)
-	Singleton.CurrentLevelData.area = 1 if Singleton.CurrentLevelData.area == 0 else 0
+		CurrentLevelData.level_data.areas.append(area)
+	CurrentLevelData.area = 1 if CurrentLevelData.area == 0 else 0
 	# warning-ignore:return_value_discarded
 	get_tree().reload_current_scene()
 

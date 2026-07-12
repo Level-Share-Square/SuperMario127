@@ -10,11 +10,11 @@ func screen_opened():
 
 
 func update_counters():
-	if not Singleton.CurrentLevelData.is_playing_hub_level():
+	if not CurrentLevelData.is_playing_hub_level():
 		update_shine_counter()
 		update_star_coin_counter()
 	else:
-		var total_dict: Dictionary = Singleton.CurrentLevelData.get_meta_collectibles()
+		var total_dict: Dictionary = CurrentLevelData.get_meta_collectibles()
 		
 		var collected_shines: int = total_dict.get("collected_shines", 0)
 		var total_shines: int = total_dict.get("total_shines", 0)
@@ -26,7 +26,7 @@ func update_counters():
 
 
 func update_shine_counter():
-	var level_info = Singleton.CurrentLevelData.level_info
+	var level_info = CurrentLevelData.level_info
 
 	# Only count shine sprites that have show_in_menu on
 	var total_shine_count := 0
@@ -41,7 +41,7 @@ func update_shine_counter():
 
 
 func update_star_coin_counter():
-	var level_info = Singleton.CurrentLevelData.level_info
+	var level_info = CurrentLevelData.level_info
 
 	var collected_star_coin_count = level_info.collected_star_coins.values().count(true)
 	star_coin_counter.text = "%s/%s" % [collected_star_coin_count, level_info.collected_star_coins.size()]

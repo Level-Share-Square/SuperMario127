@@ -45,7 +45,7 @@ func _init():
 func _ready():
 	.ready() #Calls parent class "TeleportObject"
 	connect("property_changed", self, "_on_property_changed")
-	Singleton.CurrentLevelData.level_data.vars.teleporters.append([destination_tag.to_lower(), self])
+	CurrentLevelData.level_data.vars.teleporters.append([destination_tag.to_lower(), self])
 	if mode == 1:
 		var _connect2 = connect("property_changed", self, "update_property")
 		sprite.visible = true
@@ -179,11 +179,11 @@ func start_pipe_enter_animation(character : Character) -> void:
 			pair.is_idle = false
 			character.gravity_scale = 0
 			if character.player_id == 0:
-				Singleton.CurrentLevelData.level_data.vars.transition_character_data = []
-				Singleton.CurrentLevelData.level_data.vars.transition_character_data.append(AreaTransitionHelper.new(character.velocity, character.state, character.facing_direction, to_local(character.position), self.vertical))
+				CurrentLevelData.level_data.vars.transition_character_data = []
+				CurrentLevelData.level_data.vars.transition_character_data.append(AreaTransitionHelper.new(character.velocity, character.state, character.facing_direction, to_local(character.position), self.vertical))
 			else:
-				Singleton.CurrentLevelData.level_data.vars.transition_character_data_2 = []
-				Singleton.CurrentLevelData.level_data.vars.transition_character_data_2.append(AreaTransitionHelper.new(character.velocity, character.state, character.facing_direction, to_local(character.position), self.vertical))
+				CurrentLevelData.level_data.vars.transition_character_data_2 = []
+				CurrentLevelData.level_data.vars.transition_character_data_2.append(AreaTransitionHelper.new(character.velocity, character.state, character.facing_direction, to_local(character.position), self.vertical))
 			character.camera.auto_move = false
 	else:
 		pass
@@ -218,13 +218,13 @@ func start_pipe_exit_animation(character : Character, tp_mode : bool) -> void:
 
 func pipe_exit_anim_finished(character : Character):
 	#this means we came from a transition 
-	if (Singleton.CurrentLevelData.level_data.vars.transition_character_data.size() >= 7
-	|| Singleton.CurrentLevelData.level_data.vars.transition_character_data_2.size() >= 7):
+	if (CurrentLevelData.level_data.vars.transition_character_data.size() >= 7
+	|| CurrentLevelData.level_data.vars.transition_character_data_2.size() >= 7):
 		exit_with_helper(character)
 	# exits the pipe and gives back control to mario
-	Singleton.CurrentLevelData.level_data.vars.transition_data = []
-	Singleton.CurrentLevelData.level_data.vars.transition_character_data = []
-	Singleton.CurrentLevelData.level_data.vars.transition_character_data_2 = []
+	CurrentLevelData.level_data.vars.transition_data = []
+	CurrentLevelData.level_data.vars.transition_character_data = []
+	CurrentLevelData.level_data.vars.transition_character_data_2 = []
 	entering = false
 	#character.toggle_movement(true)
 	# undo collision changes 
@@ -256,9 +256,9 @@ func exit_with_helper(character : Character):
 	add_child(timer)
 	timer.start()
 	if character.player_id == 0:
-		Singleton.CurrentLevelData.level_data.vars.transition_character_data = []
+		CurrentLevelData.level_data.vars.transition_character_data = []
 	else:
-		Singleton.CurrentLevelData.level_data.vars.transition_character_data_2 = []
+		CurrentLevelData.level_data.vars.transition_character_data_2 = []
 
 
 
@@ -278,9 +278,9 @@ func set_camera(character: Character):
 
 func get_character_transition_data(character : Character) -> Array:
 		if character.player_id == 0:
-			return Singleton.CurrentLevelData.level_data.vars.transition_character_data
+			return CurrentLevelData.level_data.vars.transition_character_data
 		else:
-			return Singleton.CurrentLevelData.level_data.vars.transition_character_data_2
+			return CurrentLevelData.level_data.vars.transition_character_data_2
 			
 
 func _process(delta):

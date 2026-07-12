@@ -28,7 +28,7 @@ var shine_offset: int = 0
 func _ready():
 	pause_controller.connect("shine_collected", self, "update_shine_info")
 	
-	level_info = Singleton.CurrentLevelData.level_info
+	level_info = CurrentLevelData.level_info
 	
 	if is_instance_valid(level_info):
 		total_shines = level_info.shine_details.size()
@@ -39,7 +39,7 @@ func _ready():
 
 
 func update_shine_info():
-	level_info = Singleton.CurrentLevelData.level_info
+	level_info = CurrentLevelData.level_info
 	
 	star.visible = false
 	level_name.text = level_info.level_name

@@ -27,13 +27,13 @@ onready var sound = $AudioStreamPlayer
 func _ready():
 	if mode == 0:
 		if character_string != "character" and Singleton.PlayerSettings.number_of_players == 1: return
-		if enabled and (Singleton.CheckpointSaved.current_checkpoint_id == -1 or Singleton.CurrentLevelData.level_data.vars.transition_data != []):
+		if enabled and (Singleton.CheckpointSaved.current_checkpoint_id == -1 or CurrentLevelData.level_data.vars.transition_data != []):
 			var player = get_tree().get_current_scene()
 			character = player.get_node(player[character_string])
-			transition_data = Singleton.CurrentLevelData.level_data.vars.transition_data
-			transition_character_data = Singleton.CurrentLevelData.level_data.vars.transition_character_data
+			transition_data = CurrentLevelData.level_data.vars.transition_data
+			transition_character_data = CurrentLevelData.level_data.vars.transition_character_data
 			if character_string != "character":
-				transition_character_data = Singleton.CurrentLevelData.level_data.vars.transition_character_data_2
+				transition_character_data = CurrentLevelData.level_data.vars.transition_character_data_2
 				
 			if transition_data.size() == 0:
 				character.position = position
@@ -42,7 +42,7 @@ func _ready():
 				var obj
 				
 				yield(get_tree(), "physics_frame")
-				for tp_obj in Singleton.CurrentLevelData.level_data.vars.teleporters:
+				for tp_obj in CurrentLevelData.level_data.vars.teleporters:
 					if tp_obj[0] == transition_data[1].to_lower():
 						obj = tp_obj
 						found_obj = true
@@ -61,7 +61,7 @@ func _ready():
 							printerr("Remote teleport unsuccessful! %s has an invalid object type!" % transition_data[1])
 							character.position = position
 							character.reset_physics_interpolation()
-							Singleton.CurrentLevelData.level_data.vars.transition_data = []
+							CurrentLevelData.level_data.vars.transition_data = []
 							pass
 					
 				else:
@@ -117,7 +117,7 @@ func exit_teleport(obj : Array):
 		_cleanup()
 
 func _cleanup():
-	Singleton.CurrentLevelData.level_data.vars.transition_data = []
+	CurrentLevelData.level_data.vars.transition_data = []
 
 	character.spawn_pos = position
 	character.get_node("Spotlight").enabled = false

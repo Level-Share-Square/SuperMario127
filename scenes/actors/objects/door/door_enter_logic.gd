@@ -122,7 +122,7 @@ func start_door_exit_animation(character : Character, tp_mode : bool) -> void:
 
 func door_exit_anim_finished(_animation : String, character : Character) -> void:
 	# closes the door and gives back control to mario
-	Singleton.CurrentLevelData.level_data.vars.transition_data = []
+	CurrentLevelData.level_data.vars.transition_data = []
 	is_idle = true
 	entering = false
 	character.velocity = Vector2.ZERO

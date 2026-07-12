@@ -14,7 +14,7 @@ func _process(delta):
 		hover_sound.play()
 	last_hovered = is_hovered()
 	
-	self_modulate = lerp(self_modulate, Color(1.0, 0.4, 0.4) if Singleton.CurrentLevelData.unsaved_editor_changes else Color(1.0, 1.0, 1.0), delta * 3 if Singleton.CurrentLevelData.unsaved_editor_changes else delta * 10)
+	self_modulate = lerp(self_modulate, Color(1.0, 0.4, 0.4) if CurrentLevelData.unsaved_editor_changes else Color(1.0, 1.0, 1.0), delta * 3 if CurrentLevelData.unsaved_editor_changes else delta * 10)
 
 func _pressed():
 	click_sound.play()
@@ -22,9 +22,9 @@ func _pressed():
 	var editor: Node = get_owner()
 	editor.sync_pinned_items()
 	
-	var level_id: String = Singleton.CurrentLevelData.level_id
-	var working_folder: String = Singleton.CurrentLevelData.working_folder
-	var level_code: String = Singleton.CurrentLevelData.level_data.get_encoded_level_data()
+	var level_id: String = CurrentLevelData.level_id
+	var working_folder: String = CurrentLevelData.working_folder
+	var level_code: String = CurrentLevelData.level_data.get_encoded_level_data()
 	
 	var file_path = level_list_util.get_level_file_path(
 		level_id, working_folder
@@ -41,11 +41,11 @@ func _pressed():
 		if level_list_util.file_exists(save_path):
 			level_list_util.delete_file(save_path)
 	
-	Singleton.CurrentLevelData.level_info.reset_save_data(false)
-	Singleton.CurrentLevelData.level_info.init_collectibles()
-	save_meta_util.update_all_with_level(level_id, working_folder, false, Singleton.CurrentLevelData.level_info)
+	CurrentLevelData.level_info.reset_save_data(false)
+	CurrentLevelData.level_info.init_collectibles()
+	save_meta_util.update_all_with_level(level_id, working_folder, false, CurrentLevelData.level_info)
 	
-	Singleton.CurrentLevelData.unsaved_editor_changes = false
+	CurrentLevelData.unsaved_editor_changes = false
 		
 func on_input(event):
 	if event is InputEventMouseButton and event.pressed:

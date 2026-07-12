@@ -90,14 +90,14 @@ func start_entrance_animation(character: Character, open_door: bool = true) -> v
 	
 	# yucky code to stop character from entering if they dont have enough
 	if collectible == "coin":
-		if Singleton.CurrentLevelData.level_data.vars.coins_collected < required_amount:
+		if CurrentLevelData.level_data.vars.coins_collected < required_amount:
 			can_enter = false
 	elif collectible == "star bit":
-		var star_bits_collected: int = Singleton.CurrentLevelData.level_data.vars.purple_starbits_collected[Singleton.CurrentLevelData.area][0]
+		var star_bits_collected: int = CurrentLevelData.level_data.vars.purple_starbits_collected[CurrentLevelData.area][0]
 		if star_bits_collected < required_amount:
 			can_enter = false
 	elif collectible == "key":
-		var keys_collected: Array = Singleton.CurrentLevelData.level_data.vars.local_keys_collected
+		var keys_collected: Array = CurrentLevelData.level_data.vars.local_keys_collected
 #		print(keys_collected)
 		if required_key in keys_collected:
 			can_enter = true
@@ -109,7 +109,7 @@ func start_entrance_animation(character: Character, open_door: bool = true) -> v
 	
 	if (
 		not Singleton.ModeSwitcher.get_node("ModeSwitcherButton").invisible 
-		or Singleton.CurrentLevelData.selected_file == -2
+		or CurrentLevelData.selected_file == -2
 	) and (
 		collectible == "shine" or collectible == "star coin"
 	):
@@ -176,7 +176,7 @@ func open_menu_ui(character):
 	get_tree().get_current_scene().get_node("%SignText").open(text, self, character)
 
 func update_collectible_counts():
-	current_level_info = Singleton.CurrentLevelData.level_info
+	current_level_info = CurrentLevelData.level_info
 	match(collectible):
 		"shine":
 			collectible_count = current_level_info.collected_shines.values().count(true)
@@ -189,8 +189,8 @@ func update_collectible_counts():
 		_:
 			collectible_count = current_level_info.collected_shines.values().count(true)
 	
-	if collectible == "shine" or "star coin" and Singleton.CurrentLevelData.is_playing_hub_level():
-		var total_dict: Dictionary = Singleton.CurrentLevelData.get_meta_collectibles()
+	if collectible == "shine" or "star coin" and CurrentLevelData.is_playing_hub_level():
+		var total_dict: Dictionary = CurrentLevelData.get_meta_collectibles()
 		if collectible == "shine":
 			collectible_count = total_dict.get("collected_shines", 0)
 		elif collectible == "star_coin":

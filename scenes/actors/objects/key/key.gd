@@ -34,8 +34,8 @@ func _physics_process(delta):
 
 func collect(body):
 	if enabled and body.name.begins_with("Character") and !body.dead:
-		Singleton.CurrentLevelData.level_data.vars.collect_local_key(id)
-		#print(Singleton.CurrentLevelData.level_data.vars.local_keys_collected)
+		CurrentLevelData.level_data.vars.collect_local_key(id)
+		#print(CurrentLevelData.level_data.vars.local_keys_collected)
 		character = body
 		collected = true
 		collect_sound.play()
@@ -82,7 +82,7 @@ func restore_control(_animation : String, character : Character) -> void:
 	character.shine_kill = false
 
 	# pausing disabled for same reasons as mode switcher button
-	Singleton.CurrentLevelData.can_pause = true
+	CurrentLevelData.can_pause = true
 
 	# stop the animation
 	character.anim_player.stop()

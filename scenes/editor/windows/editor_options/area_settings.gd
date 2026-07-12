@@ -18,7 +18,7 @@ func _ready():
 		value.connect("value_changed", self, "value_changed", [value])
 	
 func load_settings():
-	var area = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area]
+	var area = CurrentLevelData.level_data.areas[CurrentLevelData.area]
 	size_x.value = area.bounds.size.x
 	size_y.value = area.bounds.size.y
 	gravity.value = area.gravity
@@ -26,7 +26,7 @@ func load_settings():
 	sec.value = fmod(area.timer, 60.0) 
 
 func value_changed(value, changed_value):
-	var area =  Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area]
+	var area =  CurrentLevelData.level_data.areas[CurrentLevelData.area]
 
 	area.bounds.size.x = size_x.value
 	area.bounds.size.y = size_y.value

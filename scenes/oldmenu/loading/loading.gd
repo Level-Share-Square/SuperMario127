@@ -267,7 +267,7 @@ func load_singletons(_userdata):
 	print("Finished loading all " + str(amount_of_scenes) + " singletons in ", str(ms_end - ms_start), " ms")
 	
 	# Last 75% = load scenes within the singletons
-	var loading_nodes := [Singleton.MiscCache, Singleton.CurrentLevelData]
+	var loading_nodes := [Singleton.MiscCache, CurrentLevelData]
 	var loaded_ids_sum := 0
 	var loaded_max_sum := 1 # to be able to enter the loop
 	

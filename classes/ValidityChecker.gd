@@ -67,7 +67,7 @@ func is_object_multiplayer_compatible(id: int,caller: Object)-> bool:
 
 func get_object_name(id: int)-> String:
 	
-	return Singleton.CurrentLevelData.object_id_map.ids[id]
+	return CurrentLevelData.object_id_map.ids[id]
 
 ## this function makes it so we can get info about a level for
 ## its card without loading everything in the level and wasting

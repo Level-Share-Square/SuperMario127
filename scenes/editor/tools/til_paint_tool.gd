@@ -37,7 +37,7 @@ func _mouse_movement(_event: InputEvent, world_pos: Vector2) -> void:
 
 
 func draw_tile(pos: Vector2) -> void:
-	var level_bounds: Rect2 = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].bounds
+	var level_bounds: Rect2 = CurrentLevelData.level_data.areas[CurrentLevelData.area].bounds
 	if not level_bounds.has_point(pos):
 		return
 	

@@ -55,7 +55,7 @@ func _set_property_values():
 	set_property("super_jump_height", super_jump_height, true, "Jump Height")
 
 func _ready():
-	gravity = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].gravity
+	gravity = CurrentLevelData.level_data.areas[CurrentLevelData.area].gravity
 	
 	if scale.x < 0:
 		scale.x = abs(scale.x)

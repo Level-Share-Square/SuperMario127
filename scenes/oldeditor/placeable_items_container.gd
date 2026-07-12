@@ -13,8 +13,8 @@ var hovered: bool = false
 
 func _ready():
 	var placeable_items = editor_node.get_node(editor_node.placeable_items_path)
-	var starting_toolbar = Singleton.CurrentLevelData.level_data.layout_ids
-	var starting_toolbar_palettes = Singleton.CurrentLevelData.level_data.layout_palettes
+	var starting_toolbar = CurrentLevelData.level_data.layout_ids
+	var starting_toolbar_palettes = CurrentLevelData.level_data.layout_palettes
 	for index in range(number_of_boxes):
 		var item
 		if index < starting_toolbar.size():

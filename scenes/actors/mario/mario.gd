@@ -337,24 +337,24 @@ func _ready():
 	_update_player_framerate()
 	Engine.set_target_fps(60)
 	Engine.iterations_per_second = 60
-	Singleton.CurrentLevelData.can_pause = true
+	CurrentLevelData.can_pause = true
 
 	heal_timer.connect("timeout", self, "_on_heal_timer_timeout")
 	heal_tick_timer.connect("timeout", self, "_on_heal_tick_timer_timeout")
 	ground_collider_enable_timer.connect("timeout", self, "_on_ground_collder_timer_timeout")
-#	print(Singleton.CurrentLevelData.level_data.vars.transition_data)
+#	print(CurrentLevelData.level_data.vars.transition_data)
 	hide()
 	toggle_movement(false)
 	Singleton.Music.toggle_underwater_music(false)
 	for input in input_names.keys():
 		inputs.append([false, false, str(input)])
-	var level_info: LevelInfo = Singleton.CurrentLevelData.level_info
+	var level_info: LevelInfo = CurrentLevelData.level_info
 	var fludd_array: Array = ["HoverNozzle", "RocketNozzle", "TurboNozzle"]
 	for fludd_index in level_info.activated_fludds.size():
 		if level_info.activated_fludds[fludd_index]:
 			add_nozzle(fludd_array[fludd_index])
 	if level_info.chosen_fludd != "null":
-		set_nozzle(Singleton.CurrentLevelData.level_info.chosen_fludd)
+		set_nozzle(CurrentLevelData.level_info.chosen_fludd)
 
 func _update_player_framerate():
 	fps_util._update_framerate(false)
@@ -467,17 +467,17 @@ func load_in(level_data : LevelDataOld, level_area : LevelAreaOld):
 		return
 	
 	# time score
-	if Singleton.CurrentLevelData.level_data.vars.transition_data.empty() and Singleton.CheckpointSaved.current_checkpoint_id == -1:
-		Singleton.CurrentLevelData.start_tracking_time_score()
+	if CurrentLevelData.level_data.vars.transition_data.empty() and Singleton.CheckpointSaved.current_checkpoint_id == -1:
+		CurrentLevelData.start_tracking_time_score()
 	else:
-		var score_from_before = Singleton.CurrentLevelData.time_score
-		Singleton.CurrentLevelData.start_tracking_time_score()
-		Singleton.CurrentLevelData.time_score = score_from_before
+		var score_from_before = CurrentLevelData.time_score
+		CurrentLevelData.start_tracking_time_score()
+		CurrentLevelData.time_score = score_from_before
 	
 	# teleporters
 	var do_teleport: bool = false
-	var target_tag: String = Singleton.CurrentLevelData.level_data.vars.transition_data.get("target_tag", "")
-	var level_target_tag: String = Singleton.CurrentLevelData.level_transition_data.get("target_tag", "")
+	var target_tag: String = CurrentLevelData.level_data.vars.transition_data.get("target_tag", "")
+	var level_target_tag: String = CurrentLevelData.level_transition_data.get("target_tag", "")
 	
 	if target_tag != "":
 		do_teleport = true
@@ -520,7 +520,7 @@ func load_in(level_data : LevelDataOld, level_area : LevelAreaOld):
 
 
 func find_teleporter(target_tag: String) -> GameObject:
-	for i in Singleton.CurrentLevelData.level_data.vars.teleporters:
+	for i in CurrentLevelData.level_data.vars.teleporters:
 		if i[0] == target_tag.to_lower():
 			return i[1]
 	return null
@@ -624,9 +624,9 @@ func set_state_by_name(name: String, delta: float = 0.0001) -> void:
 		set_state(get_state_node(name), delta)
 		
 func add_nozzle(new_nozzle: String) -> void:
-	if !new_nozzle in Singleton.CurrentLevelData.level_data.vars.nozzles_collected:
-		Singleton.CurrentLevelData.level_data.vars.nozzles_collected.append(new_nozzle)
-	print(Singleton.CurrentLevelData.level_data.vars.nozzles_collected)
+	if !new_nozzle in CurrentLevelData.level_data.vars.nozzles_collected:
+		CurrentLevelData.level_data.vars.nozzles_collected.append(new_nozzle)
+	print(CurrentLevelData.level_data.vars.nozzles_collected)
 
 func get_nozzle_node(name: String) -> Node:
 	if nozzles_node.has_node(name):
@@ -640,7 +640,7 @@ func nozzle_sort(a, b):
 	return false
 
 func set_nozzle(new_nozzle: String, change_index := true) -> void:
-	Singleton.CurrentLevelData.level_data.vars.nozzles_collected.sort_custom(self, "nozzle_sort")
+	CurrentLevelData.level_data.vars.nozzles_collected.sort_custom(self, "nozzle_sort")
 	
 	fludd_sound.stop()
 	turbo_sound.stop()
@@ -654,7 +654,7 @@ func set_nozzle(new_nozzle: String, change_index := true) -> void:
 	using_turbo = false
 	turbo_nerf = false
 	if change_index:
-		nozzles_list_index = Singleton.CurrentLevelData.level_data.vars.nozzles_collected.find(str(new_nozzle))
+		nozzles_list_index = CurrentLevelData.level_data.vars.nozzles_collected.find(str(new_nozzle))
 	
 	if is_instance_valid(nozzle) and (is_instance_valid(powerup) and powerup.name == "RainbowPowerup"):
 		set_nozzle("null", true) # Mario simply isn't allowed to have fludd
@@ -1032,18 +1032,18 @@ func _physics_process(delta: float) -> void:
 		snap = Vector2.ZERO
 	
 	# Switch nozzle
-	if (inputs[8][1] and Singleton.CurrentLevelData.level_data.vars.nozzles_collected.size() > 1
+	if (inputs[8][1] and CurrentLevelData.level_data.vars.nozzles_collected.size() > 1
 	# Rainbow Mario can't use fludd, so no point in allowing switching nozzles
 	and (!is_instance_valid(powerup) or powerup.name != "RainbowPowerup")):
 		nozzles_list_index += 1
-		if nozzles_list_index >= Singleton.CurrentLevelData.level_data.vars.nozzles_collected.size():
+		if nozzles_list_index >= CurrentLevelData.level_data.vars.nozzles_collected.size():
 			nozzles_list_index = 0
 		
-		var new_nozzle = str(Singleton.CurrentLevelData.level_data.vars.nozzles_collected[nozzles_list_index])
+		var new_nozzle = str(CurrentLevelData.level_data.vars.nozzles_collected[nozzles_list_index])
 		set_nozzle(new_nozzle, false)
 		
 		nozzle_switch_sound.play()
-		#print(Singleton.CurrentLevelData.level_data.vars.nozzles_collected)
+		#print(CurrentLevelData.level_data.vars.nozzles_collected)
 	
 	# Handle nozzle
 	if is_instance_valid(nozzle):
@@ -1196,7 +1196,7 @@ func switch_areas(area_id, transition_time):
 
 	
 func kill(cause: String) -> void:
-	Singleton.CurrentLevelData.can_pause = false
+	CurrentLevelData.can_pause = false
 	if !dead:
 		if Singleton.PlayerSettings.other_player_id != -1:
 			get_tree().multiplayer.send_bytes(JSON.print(["reload"]).to_ascii())

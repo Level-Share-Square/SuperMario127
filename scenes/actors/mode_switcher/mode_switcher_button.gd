@@ -78,10 +78,10 @@ func switch() -> void:
 
 		Singleton.ActionManager.clear_history()
 		
-		#Singleton.CurrentLevelData.area = 0
-		Singleton.CheckpointSaved.current_area = Singleton.CurrentLevelData.area
-		Singleton.CurrentLevelData.level_data.vars.reload()
-		Singleton.CurrentLevelData.enemies_instanced = 0
+		#CurrentLevelData.area = 0
+		Singleton.CheckpointSaved.current_area = CurrentLevelData.area
+		CurrentLevelData.level_data.vars.reload()
+		CurrentLevelData.enemies_instanced = 0
 		Singleton.MiscShared.is_play_reload = true
 		
 		sound.play()
@@ -121,8 +121,8 @@ func switch() -> void:
 		
 		yield(get_tree().create_timer(0.3), "timeout")
 		get_tree().paused = false
-		Singleton.CurrentLevelData.level_data.vars = LevelVars.new() # Reset vars
-		Singleton.CurrentLevelData.level_data.vars.init()
+		CurrentLevelData.level_data.vars = LevelVars.new() # Reset vars
+		CurrentLevelData.level_data.vars.init()
 		
 		get_tree().get_current_scene().switch_scenes()
 		var new_scene_mode = get_tree().get_current_scene().mode

@@ -48,72 +48,72 @@ func _ready():
 	_connect = duplicate_button.connect("pressed", self, "duplicate_area")
 	_connect = move_down_button.connect("pressed", self, "move_area_down")
 	_connect = move_up_button.connect("pressed", self, "move_area_up")
-	if id == Singleton.CurrentLevelData.area:
+	if id == CurrentLevelData.area:
 		switch_to_button.disabled = true
 		delete_button.disabled = true
 	check_moveability()
 
 func switch_to_area():
-	if id != Singleton.CurrentLevelData.area:
-		Singleton.CurrentLevelData.area = id
+	if id != CurrentLevelData.area:
+		CurrentLevelData.area = id
 		Singleton.SceneTransitions.reload_scene()
 
 func delete_area():
-	if id != Singleton.CurrentLevelData.area:
-		Singleton.CurrentLevelData.level_data.areas.remove(id)
-		if Singleton.CurrentLevelData.area > id:
-			Singleton.CurrentLevelData.area -= 1
+	if id != CurrentLevelData.area:
+		CurrentLevelData.level_data.areas.remove(id)
+		if CurrentLevelData.area > id:
+			CurrentLevelData.area -= 1
 		get_parent().get_parent().get_parent().reload_areas()
 		
 func check_moveability():
 	var index = id
 	if index - 1 == -1:
 		move_up_button.disabled = true
-	if index + 1 == Singleton.CurrentLevelData.level_data.areas.size():
+	if index + 1 == CurrentLevelData.level_data.areas.size():
 		move_down_button.disabled = true
 
 func duplicate_area():
-	if Singleton.CurrentLevelData.level_data.areas.size() != 32:
+	if CurrentLevelData.level_data.areas.size() != 32:
 		var area = LevelAreaOld.new()
-		var dup = Singleton.CurrentLevelData.level_data.areas[id]
+		var dup = CurrentLevelData.level_data.areas[id]
 		area.duplicate(dup)
-		Singleton.CurrentLevelData.level_data.areas.append(area)
+		CurrentLevelData.level_data.areas.append(area)
 		get_parent().get_parent().get_parent().reload_areas()
 	
 func move_area_down():
-	if id < Singleton.CurrentLevelData.level_data.areas.size() - 1 && Singleton.CurrentLevelData.level_data.areas.size() > 1:
+	if id < CurrentLevelData.level_data.areas.size() - 1 && CurrentLevelData.level_data.areas.size() > 1:
 		var area1 = LevelAreaOld.new()
-		area1.duplicate(Singleton.CurrentLevelData.level_data.areas[id])
-		area1.settings = Singleton.CurrentLevelData.level_data.areas[id].settings
-		Singleton.CurrentLevelData.level_data.areas.remove(id)
-		Singleton.CurrentLevelData.level_data.areas.insert(id+1, area1)
+		area1.duplicate(CurrentLevelData.level_data.areas[id])
+		area1.settings = CurrentLevelData.level_data.areas[id].settings
+		CurrentLevelData.level_data.areas.remove(id)
+		CurrentLevelData.level_data.areas.insert(id+1, area1)
 		
 		# Properly re-assign the current area.
-		if (Singleton.CurrentLevelData.area == id):
+		if (CurrentLevelData.area == id):
 			# If the area we're moving is the current area.
-			Singleton.CurrentLevelData.area += 1
+			CurrentLevelData.area += 1
 			
-		elif (abs(Singleton.CurrentLevelData.area - id) == 1):
+		elif (abs(CurrentLevelData.area - id) == 1):
 			# If the area we're moving is next to the current area.
-			Singleton.CurrentLevelData.area -= 1
+			CurrentLevelData.area -= 1
 			
 		# Don't re-assign the current area if it isn't next to the area we're moving.
 		get_parent().get_parent().get_parent().reload_areas()
 
 func move_area_up():
-	if id > 0 && Singleton.CurrentLevelData.level_data.areas.size() > 1:
+	if id > 0 && CurrentLevelData.level_data.areas.size() > 1:
 		var area1 = LevelAreaOld.new()
-		area1.duplicate(Singleton.CurrentLevelData.level_data.areas[id])
-		area1.settings = Singleton.CurrentLevelData.level_data.areas[id].settings
-		Singleton.CurrentLevelData.level_data.areas.remove(id)
-		Singleton.CurrentLevelData.level_data.areas.insert(id-1, area1)
+		area1.duplicate(CurrentLevelData.level_data.areas[id])
+		area1.settings = CurrentLevelData.level_data.areas[id].settings
+		CurrentLevelData.level_data.areas.remove(id)
+		CurrentLevelData.level_data.areas.insert(id-1, area1)
 		
-		if (Singleton.CurrentLevelData.area == id):
+		if (CurrentLevelData.area == id):
 			
-			Singleton.CurrentLevelData.area -= 1
+			CurrentLevelData.area -= 1
 			
-		elif (abs(Singleton.CurrentLevelData.area - id) == 1):
+		elif (abs(CurrentLevelData.area - id) == 1):
 			
-			Singleton.CurrentLevelData.area += 1
+			CurrentLevelData.area += 1
 			
 		get_parent().get_parent().get_parent().reload_areas()

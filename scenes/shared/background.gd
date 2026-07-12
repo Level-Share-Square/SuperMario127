@@ -22,11 +22,11 @@ func update_background(sky : int = 1, background : int = 1, bounds : Rect2 = Rec
 		
 	#warning-ignore:unused_variable
 	var background_id_mapper = preload("res://scenes/shared/background/backgrounds/ids.tres")
-	var background_resource = Singleton.CurrentLevelData.get_cached_background(sky)
+	var background_resource = CurrentLevelData.get_cached_background(sky)
 	
 	#warning-ignore:unused_variable
 	var foreground_id_mapper = preload("res://scenes/shared/background/foregrounds/ids.tres")
-	var foreground_resource = Singleton.CurrentLevelData.get_cached_foreground(background)
+	var foreground_resource = CurrentLevelData.get_cached_foreground(background)
 	
 	background_node.texture = background_resource.texture
 	

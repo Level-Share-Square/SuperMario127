@@ -34,7 +34,7 @@ func set_background(sky, background, palette):
 
 func set_name(new_name: String):
 	$HBoxContainer/VBoxContainer/LineEdit.text = new_name
-	Singleton.CurrentLevelData.level_data.areas[id].name = new_name
+	CurrentLevelData.level_data.areas[id].name = new_name
 
 func set_id(new_id):
 	var id_text = get_node("ID")
@@ -50,27 +50,27 @@ func swap(areaA : LevelAreaOld, areaB : LevelAreaOld, areasArray : Array) -> Arr
   return areasArray
 
 func _ready():
-	for area in Singleton.CurrentLevelData.level_data.areas:
+	for area in CurrentLevelData.level_data.areas:
 		area_names.append(area.name)
 	area_name.connect("text_changed", self, "area_renamed")
 	var _connect = switch_to_button.connect("pressed", self, "switch_to_area")
 	_connect = delete_button.connect("pressed", self, "delete_area")
 	_connect = duplicate_button.connect("pressed", self, "duplicate_area")
-	if id == Singleton.CurrentLevelData.area:
+	if id == CurrentLevelData.area:
 		switch_to_button.disabled = true
 		delete_button.disabled = true
 
 func switch_to_area():
-	if id != Singleton.CurrentLevelData.area:
-		Singleton.CurrentLevelData.area = id
+	if id != CurrentLevelData.area:
+		CurrentLevelData.area = id
 		Singleton.SceneTransitions.reload_scene()
 
 
 func delete_area():
-	if id != Singleton.CurrentLevelData.area:
-		Singleton.CurrentLevelData.level_data.areas.remove(id)
-		if Singleton.CurrentLevelData.area > id:
-			Singleton.CurrentLevelData.area -= 1
+	if id != CurrentLevelData.area:
+		CurrentLevelData.level_data.areas.remove(id)
+		if CurrentLevelData.area > id:
+			CurrentLevelData.area -= 1
 		get_parent().get_parent().reload_areas()
 
 
@@ -78,27 +78,27 @@ func area_renamed(new_text: String):
 	if new_text in area_names:
 		new_text.erase(new_text.length() - 1, 1)
 		area_name.text = new_text
-	Singleton.CurrentLevelData.level_data.areas[id].name = new_text
+	CurrentLevelData.level_data.areas[id].name = new_text
 
 
 func duplicate_area():
-	if Singleton.CurrentLevelData.level_data.areas.size() != 32:
-		var area = Singleton.CurrentLevelData.level_data.areas[id].duplicate(true)
-		Singleton.CurrentLevelData.level_data.areas.append(area)
+	if CurrentLevelData.level_data.areas.size() != 32:
+		var area = CurrentLevelData.level_data.areas[id].duplicate(true)
+		CurrentLevelData.level_data.areas.append(area)
 		get_parent().get_parent().reload_areas()
 
 
 func move_area_down():
-	if id < Singleton.CurrentLevelData.level_data.areas.size() - 1 && Singleton.CurrentLevelData.level_data.areas.size() > 1:
-		var area = Singleton.CurrentLevelData.level_data.areas.pop_at(id)
-		Singleton.CurrentLevelData.level_data.areas.insert(id + 1, area)
+	if id < CurrentLevelData.level_data.areas.size() - 1 && CurrentLevelData.level_data.areas.size() > 1:
+		var area = CurrentLevelData.level_data.areas.pop_at(id)
+		CurrentLevelData.level_data.areas.insert(id + 1, area)
 		
 		# Properly re-assign the current area.
-		if Singleton.CurrentLevelData.area == id:
+		if CurrentLevelData.area == id:
 			# If the area we're moving is the current area.
-			Singleton.CurrentLevelData.area += 1
+			CurrentLevelData.area += 1
 			
-		elif abs(Singleton.CurrentLevelData.area - id) == 1:
+		elif abs(CurrentLevelData.area - id) == 1:
 			# If the area we're moving is next to the current area.
 			Singleton .CurrentLevelData.area -= 1
 			
@@ -107,20 +107,20 @@ func move_area_down():
 
 
 func move_area_up():
-	if id > 0 && Singleton.CurrentLevelData.level_data.areas.size() > 1:
-		var area = Singleton.CurrentLevelData.level_data.areas.pop_at(id)
-		Singleton.CurrentLevelData.level_data.areas.insert(id - 1, area)
+	if id > 0 && CurrentLevelData.level_data.areas.size() > 1:
+		var area = CurrentLevelData.level_data.areas.pop_at(id)
+		CurrentLevelData.level_data.areas.insert(id - 1, area)
 		
-		if Singleton.CurrentLevelData.area == id:
+		if CurrentLevelData.area == id:
 			
-			Singleton.CurrentLevelData.area -= 1
+			CurrentLevelData.area -= 1
 			
-		elif abs(Singleton.CurrentLevelData.area - id) == 1:
+		elif abs(CurrentLevelData.area - id) == 1:
 			
-			Singleton.CurrentLevelData.area += 1
+			CurrentLevelData.area += 1
 			
 		get_parent().get_parent().reload_areas()
 
 
 func copy_area():
-	OS.set_clipboard(Singleton.CurrentLevelData.level_data.get_encoded_area_data(Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area]))
+	OS.set_clipboard(CurrentLevelData.level_data.get_encoded_area_data(CurrentLevelData.level_data.areas[CurrentLevelData.area]))

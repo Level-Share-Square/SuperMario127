@@ -88,9 +88,9 @@ func _ready() -> void:
 	$VisibilityEnabler2D.connect("screen_entered", self, "on_show")
 	on_visibility_changed($VisibilityEnabler2D.is_on_screen())
 	original_position = global_position
-	Singleton.CurrentLevelData.enemies_instanced += 1
-	time_alive += float(Singleton.CurrentLevelData.enemies_instanced) / 2.0
-	gravity = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].gravity
+	CurrentLevelData.enemies_instanced += 1
+	time_alive += float(CurrentLevelData.enemies_instanced) / 2.0
+	gravity = CurrentLevelData.level_data.areas[CurrentLevelData.area].gravity
 	
 	var scene = get_tree().current_scene
 	if scene.mode == 1 and scene.placed_item_property == "Para":
@@ -194,7 +194,7 @@ func _physics_process(delta):
 	if !loaded and visibility_notifier and visibility_notifier.is_on_screen():
 		loaded = true
 	if mode != 1 and enabled and !dead and loaded and layer == middle:
-		var level_bounds = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].bounds
+		var level_bounds = CurrentLevelData.level_data.areas[CurrentLevelData.area].bounds
 		if !hit:
 			# Run the appropriate physics process function
 			if is_instance_valid(shell):
