@@ -529,7 +529,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://level/data/level_code_tokenizer.gd"
 }, {
-"base": "Reference",
+"base": "Resource",
 "class": "LevelData",
 "language": "GDScript",
 "path": "res://level/Data.gd"
@@ -559,7 +559,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://classes/LevelInfo.gd"
 }, {
-"base": "ParallaxBackground",
+"base": "Node2D",
 "class": "LevelLayer",
 "language": "GDScript",
 "path": "res://scenes/shared/level_layer/level_layer.gd"
@@ -962,7 +962,7 @@ _global_script_classes=[ {
 "base": "TileMap",
 "class": "TileMapManager",
 "language": "GDScript",
-"path": "res://scenes/shared/level_layer/tilemap_manager.gd"
+"path": "res://scenes/shared/level_layer/tile_map_manager.gd"
 }, {
 "base": "EditorTool",
 "class": "TileRectFill",
@@ -1118,6 +1118,11 @@ _global_script_classes=[ {
 "class": "text_replace_util",
 "language": "GDScript",
 "path": "res://util/text_replace_util.gd"
+}, {
+"base": "Object",
+"class": "tile_util",
+"language": "GDScript",
+"path": "res://util/new/tile_util.gd"
 }, {
 "base": "Reference",
 "class": "uuid_util",
@@ -1352,6 +1357,7 @@ _global_script_class_icons={
 "save_meta_util": "",
 "sort_file_util": "",
 "text_replace_util": "",
+"tile_util": "",
 "uuid_util": "",
 "value_util": ""
 }

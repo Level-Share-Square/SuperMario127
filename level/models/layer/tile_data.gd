@@ -2,43 +2,54 @@ class_name TileData
 extends Resource
 
 
-# Object that models a tile
-# Use this to represent a tile in all scenarios before it's eventually encoded into memory in tilemap_manager
-
-var tileset_id: int setget set_tileset_id, get_tileset_id
-var tile_type: int setget set_tile_type, get_tile_type
-var palette: int setget set_palette, get_palette
-var pos: Vector2 setget set_pos, get_pos
-
-func _init(set_tileset_id: int, set_tile_type: int, set_palette: int, set_pos: Vector2):
-	tileset_id = set_tileset_id
-	tile_type = set_tile_type
-	palette = set_palette
-	pos = set_pos
+# Resource that stores tiles for any object to use and store in a level code.
 
 
-#-----------------------------------------------------#
+const TILE_CHUNK_SIZE: int = 16
 
-func set_tileset_id(set_tileset_id: int):
-	tileset_id = set_tileset_id
+## Dictionary of Vector2s and PoolIntArrays
+var chunks: Dictionary
+
+
+static func get_chunk_coords(coords: Vector2) -> Vector2:
+	return (coords / TILE_CHUNK_SIZE).floor()
+
+
+func set_tile(coords: Vector2, tileset: int, type: int, palette: int) -> void:
+	# if any of these are below 0, then the tile is being erased
+	if tileset < 0 or type < 0 or palette < 0:
+		tileset = 0
+		type = 0
+		palette = 0
 	
-func get_tileset_id() -> int:
-	return tileset_id
+	coords = coords.snapped(Vector2.ONE)
+	var chunk_coords: Vector2 = get_chunk_coords(coords)
+	var chunk: PoolIntArray = chunks.get_or_add(chunk_coords, PoolIntArray())
+	if chunk.empty():
+		chunk.resize(TILE_CHUNK_SIZE * TILE_CHUNK_SIZE)
+		chunk.fill(0)
 	
-func set_tile_type(set_tile_type: int):
-	tile_type = set_tile_type
+	var tile_index: int = posmod(coords.x, TILE_CHUNK_SIZE) + posmod(coords.y, TILE_CHUNK_SIZE) * TILE_CHUNK_SIZE
+	chunk[tile_index] = tile_util.get_packed_tile(tileset, type, palette)
 	
-func get_tile_type() -> int:
-	return tile_type
-	
-func set_palette(set_palette: int):
-	palette = set_palette
-	
-func get_palette() -> int:
-	return tileset_id
-	
-func set_pos(set_pos: Vector2):
-	pos = set_pos
-	
-func get_pos() -> Vector2:
-	return pos
+	chunks[chunk_coords] = chunk
+
+
+func erase_tile(coords: Vector2) -> void:
+	set_tile(coords, -1, -1, -1)
+
+
+func get_packed_tile_at(coords: Vector2) -> int:
+	return 0
+
+
+func get_tile_set_id_at(coords: Vector2) -> int:
+	return tile_util.get_tile_set_id_from_packed(get_packed_tile_at(coords))
+
+
+func get_tile_id_at(coords: Vector2) -> int:
+	return tile_util.get_tile_id_from_packed(get_packed_tile_at(coords))
+
+
+func get_palette_id_at(coords: Vector2) -> int:
+	return tile_util.get_palette_id_from_packed(get_packed_tile_at(coords))

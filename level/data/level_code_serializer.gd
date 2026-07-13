@@ -61,6 +61,10 @@ static func deserialize_layer_code(layer_code: String) -> LayerData:
 	var tiles = deserialize_tiles_code(tiles_code)
 	var objects = deserialize_objects_code(objects_code)
 	
+	var tile_data = TileData.new()
+	for tile in tiles:
+		tile_data.set_tile(tile[3], tile[0], tile[1], tile[2])
+	
 	return LayerData.new(layer_metadata, objects, tiles)
 	
 	
@@ -73,7 +77,7 @@ static func deserialize_tiles_code(tiles_code: String) -> Array:
 	return tiles
 	
 	
-static func deserialize_tile_code(tile_code: String) -> TileData:
+static func deserialize_tile_code(tile_code: String) -> Array:
 	var data = deserialize_datas_code(tile_code)
 	
 	var tileset_id = data[0]
@@ -81,7 +85,7 @@ static func deserialize_tile_code(tile_code: String) -> TileData:
 	var palette = data[2]
 	var pos = data[3]
 	
-	return TileData.new(tileset_id, tile_type, palette, pos)
+	return [tileset_id, tile_type, palette, pos]
 	
 	
 static func deserialize_objects_code(objects_code: String) -> Array:

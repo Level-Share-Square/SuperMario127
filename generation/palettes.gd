@@ -1,2 +1,3 @@
 extends Resource
-export var tileset_palettes: Array
+
+export var tileset_ids: Array

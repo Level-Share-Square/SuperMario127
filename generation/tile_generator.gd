@@ -24,10 +24,14 @@ func load_tilesets():
 		]
 		
 		var palette_ids = []
-		palette_ids.resize(tileset.palettes.size())
-		var palette_ids_i := 0
+		palette_ids.resize(tileset.palettes.size() + 1)
+		
+		var tile_variation_ids = tile_variations
+		
+		palette_ids[0] = tile_variation_ids
+		var palette_ids_i := 1
 		for palette in tileset.palettes:
-			var tile_variation_ids = []
+			tile_variation_ids = []
 			tile_variation_ids.resize(tile_variations.size())
 			print(tile_variations)
 			var tile_variations_i := 0
@@ -66,8 +70,8 @@ func load_tilesets():
 	
 	var palette_storage := Resource.new()
 	palette_storage.set_script(preload("res://generation/palettes.gd"))
-	palette_storage.tileset_palettes = tileset_palettes
-	ResourceSaver.save("res://generation/tileset_palettes.res", palette_storage)
+	palette_storage.tileset_ids = tileset_palettes
+	ResourceSaver.save("res://generation/tileset_ids.res", palette_storage)
 	
 	$Label.text = "Tiles resource saved to res://generation/generated_tiles.res"
 	print("Finished loading all " + str(level_tilesets.ids.size()) + " tilesets.")

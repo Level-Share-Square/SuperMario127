@@ -1,13 +1,13 @@
 class_name LevelLayer
-extends ParallaxBackground
+extends Node2D
 
 
 onready var tile_map_manager: TileMapManager = $"%TileMapManager"
-onready var object_manager = $"%ObjectManager"
+onready var object_manager: ObjectManager = $"%ObjectManager"
 
 var parallax_distance: int = 0
 var autoset_tint: bool = true
-var layer_tint: Color = Color(1, 1, 1, 1)
+var layer_tint: Color = Color.white
 
 var order: int = 0
 var is_ground: bool = true
@@ -15,14 +15,14 @@ var is_ground: bool = true
 var activated_mission_id: int = -1
 
 
-func load_in(level_data: LevelDataOld, level_area: LevelAreaOld):
-	tile_map_manager.load_in(level_data, level_area)
-	object_manager.load_in(level_data, level_area)
+func load_in(layer_data: LayerData):
+	tile_map_manager.load_in(layer_data)
+	object_manager.load_in(layer_data)
 
 # Interface functions
 
-func place_tile(to_place: TileData):
-	tile_map_manager.place_tile(to_place)
+func place_tile(coords, tile_set, tile, palette):
+	tile_map_manager.place_tile(coords, tile_set, tile, palette)
 
 
 func place_object(to_place: GameObject):

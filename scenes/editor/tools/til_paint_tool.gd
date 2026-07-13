@@ -61,8 +61,7 @@ func finalize_placement() -> void:
 	
 	editor.tile_buffer.clear()
 
+
 # Mouse coords to tile grid coords
 func get_mouse_tile_pos() -> Vector2:
 	return (get_global_mouse_position() / editor.TILE_SIZE).floor()
-	
-	
