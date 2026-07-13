@@ -164,16 +164,10 @@ func get_objects_overlapping_position(point: Vector2, area_rect: Rect2, area: Ar
 		
 	return found_objects
 
-func destroy_objects_overlapping_position(point: Vector2, area_check : Rect2, remove_from_data):
-	var objectsToDelete = get_objects_overlapping_position(point, area_check)
-	
-	for object_node in objectsToDelete:
-		if remove_from_data:
-			level_area.objects.erase(object_node.level_object)
-		object_node.queue_free()
 
 func update_tilemaps():
 	tilemaps_node.update_tilemaps()
+
 
 func toggle_layer_transparency(current_layer: int, is_transparent: bool):
 	var index = 0
