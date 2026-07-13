@@ -52,16 +52,20 @@ var player_hotkeys = [
 var default_hotkeys = editor_hotkeys + player_hotkeys
 signal dark_mode_toggled
 
+
 func toggle_dark_mode():
 	emit_signal("dark_mode_toggled")
 
+
 func _init():
 	var file = File.new()
-	file.open("user://mods/active.127mod", file.READ)
-	mod_path = file.get_line()
-	var success = ProjectSettings.load_resource_pack(mod_path)
-	#print(success)
-	mod_active = success
+	var e: int = file.open("user://mods/active.127mod", file.READ)
+	if e == OK:
+		mod_path = file.get_line()
+		var success = ProjectSettings.load_resource_pack(mod_path)
+		#print(success)
+		mod_active = success
+
 
 func _ready():
 	yield(get_tree().create_timer(3),"timeout")
