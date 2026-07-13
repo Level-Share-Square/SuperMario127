@@ -3,7 +3,7 @@ extends Resource
 
 
 # "distance" from the g layer, affects scroll speed
-var parallax_distance: int = 0
+var parallax_distance: float = 0
 var autoset_tint: bool = true
 var layer_tint: Color = Color.white
 
@@ -17,7 +17,7 @@ var disabled: bool = false
 
 
 func _init(
-		set_parallax_distance: int = 0, 
+		set_parallax_distance: float = 0, 
 		set_autoset_tint: bool = true, 
 		set_layer_tint: Color = Color.white, 
 		set_order: int = 0, 
