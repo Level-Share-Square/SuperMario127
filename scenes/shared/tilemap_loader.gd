@@ -10,11 +10,10 @@ onready var back_tilemap_node : TileMap = get_node(back_tilemap)
 onready var middle_tilemap_node : TileMap = get_node(middle_tilemap)
 onready var front_tilemap_node : TileMap = get_node(front_tilemap)
 
-var level_data : LevelDataOld
-var level_area : LevelAreaOld
 
 var tileset_cache := []
 var tileset_palettes := []
+
 
 func _ready():
 	var level_tilesets := preload("res://assets/tiles/ids.tres")
@@ -85,7 +84,7 @@ const emptyTile = [0,0,0]
 func get_tile_in_data(x: int, y: int, layer: int):
 	var chunk_key = get_chunk_key(x, y, layer)
 	
-	if level_area.tile_chunks.has(chunk_key):
+	if CurrentLevelData.current_area_data.tile_chunks.has(chunk_key):
 		var tile = level_area.tile_chunks[chunk_key][posmod(x, 16)+posmod(y, 16)*16]
 		return tile if tile else emptyTile
 	else:
@@ -122,12 +121,10 @@ func set_tile_visual(x: int, y: int, layer: int, tileset_id: int, tile_id: int, 
 		if(update_bitmask):
 			layer_tilemap_node.update_bitmask_area(Vector2(x, y))
 
-func load_in(loaded_level_data : LevelDataOld, loaded_level_area : LevelAreaOld):
-	
-	level_data = loaded_level_data
-	level_area = loaded_level_area
-	
+
+func load_in():
 	update_tilemaps()
+
 
 func update_tilemaps():
 	var bounds = level_area.bounds

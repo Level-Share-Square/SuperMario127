@@ -45,7 +45,7 @@ func reload():
 	switch_state = Singleton.CheckpointSaved.switch_state.duplicate(true)
 	activated_shine_ids = Singleton.CheckpointSaved.activated_shine_ids.duplicate(true)
 	required_purple_starbits = []
-	for area in CurrentLevelData.level_data.areas:
+	for area in CurrentLevelData.area_headers:
 		required_purple_starbits.append([0])
 	
 
@@ -58,7 +58,7 @@ func reset_counters():
 	checkpoints = []
 	current_liquid_id = 0
 	last_red_coin_id = 0
-	for area in CurrentLevelData.level_data.areas:
+	for area in CurrentLevelData.area_headers:
 		required_purple_starbits.append([0])
 
 func init():
@@ -103,14 +103,14 @@ func collect_red_coin(id: int):
 
 
 func collect_shine_shard(id: int):
-	var area: int = CurrentLevelData.area
+	var area: int = CurrentLevelData.area_id
 	shine_shards_collected[area][0] += 1
 	shine_shards_collected[area][1].append(id)
 	emit_signal("shine_shard_collected", shine_shards_collected[area][0])
 
 
 func collect_purple_starbit(id: int):
-	var area: int = CurrentLevelData.area
+	var area: int = CurrentLevelData.area_id
 	purple_starbits_collected[area][0] += 1
 	purple_starbits_collected[area][1].append(id)
 	emit_signal("purple_starbit_collected", purple_starbits_collected[area][0])

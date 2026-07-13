@@ -18,8 +18,6 @@ var global := {}
 var editor_aliases := {}
 
 var mode: int = 0
-var level_data: LevelDataOld = null
-var level_area: LevelAreaOld = null
 var level_object: WeakRef = null
 var shared: LevelShared = null
 
@@ -255,7 +253,6 @@ func create_collision_polygons_from_tree(node: Node, node_transform: Transform2D
 	for child in node.get_children():
 		if child is Node2D:
 			create_collision_polygons_from_tree(child, node_transform * child.transform, array)
-
 
 
 func is_savable_property(key) -> bool:

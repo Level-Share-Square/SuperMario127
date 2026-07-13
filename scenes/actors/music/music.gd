@@ -63,7 +63,7 @@ func get_custom_file_path(underwater: bool = false) -> String:
 	# i think accessing LevelDataOld singleton is safe for now since
 	# this only is called inside levels, i hope i dont regret that decision
 	var level_id: String = CurrentLevelData.level_id
-	var area: int = CurrentLevelData.area
+	var area: int = CurrentLevelData.area_id
 	var working_folder: String = CurrentLevelData.working_folder
 	
 	return level_list_util.get_level_music_path(
@@ -100,7 +100,7 @@ func handle_custom_song(url: String, underwater: bool = false) -> void:
 		print("OGG file not found, downloading from url...")
 		
 		var level_id: String = CurrentLevelData.level_id
-		var area: int = CurrentLevelData.area
+		var area: int = CurrentLevelData.area_id
 		var working_folder: String = CurrentLevelData.working_folder
 		save_ogg(url, level_id, area, working_folder, underwater)
 	else:
@@ -302,7 +302,7 @@ func _process(delta) -> void:
 	# change this script so this entire block ceases to exist because it is bad and it makes me simultaniously mad and sad
 	# scenes should ask the music singleton to change the music, the music singleton shouldn't check every frame for if it should change the music
 	if "mode" in current_scene: #script will crash if the scene root doesn't have this property defined
-		var level_song = CurrentLevelData.level_data.areas[CurrentLevelData.area].music if play_music else 0
+		var level_song = CurrentLevelData.area.header.music if play_music else 0
 		current_song = level_song
 		if current_scene.mode != last_mode or typeof(last_song) != typeof(level_song):
 			change_song(last_song, level_song)

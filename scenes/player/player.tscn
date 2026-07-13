@@ -1239,7 +1239,7 @@ extents = Vector2( 393, 216 )
 
 [node name="Player" type="Node2D"]
 script = ExtResource( 1 )
-nodes_to_load = [ NodePath("Viewports/ViewportContainer/Viewport/Area/LevelShared"), NodePath("Viewports/ViewportContainer/Viewport/CameraP1"), NodePath("Viewports/ViewportContainer/Viewport/Area/Character"), NodePath("Viewports/ViewportContainer/Viewport/Backgrounds") ]
+nodes_to_load = [ NodePath("Viewports/ViewportContainer/Viewport/Area/LevelShared"), NodePath("Viewports/ViewportContainer/Viewport/Area/Character"), NodePath("Viewports/ViewportContainer/Viewport/CameraP1"), NodePath("Viewports/ViewportContainer/Viewport/Backgrounds") ]
 character = NodePath("Viewports/ViewportContainer/Viewport/Area/Character")
 camera = NodePath("Viewports/ViewportContainer/Viewport/CameraP1")
 shared = NodePath("Viewports/ViewportContainer/Viewport/Area/LevelShared")
@@ -2438,56 +2438,7 @@ script = ExtResource( 21 )
 [node name="LevelShared" parent="Viewports/ViewportContainer/Viewport/Area" instance=ExtResource( 2 )]
 
 [node name="Character" parent="Viewports/ViewportContainer/Viewport/Area" instance=ExtResource( 3 )]
-initial_position = null
-velocity = null
-gravity_scale = null
-facing_direction = null
-move_direction = null
-last_move_direction = null
-move_speed = null
-acceleration = null
-deceleration = null
-aerial_acceleration = null
-friction = null
-aerial_friction = null
-max_aerial_velocity = null
-max_frictionless_slide_velocity = null
-raycast_length = null
-is_wj_chained = null
-real_friction = null
-direction_on_stick = null
-rotating = null
-swimming = null
-spawn_pos = null
-gravity = null
-disable_movement = null
-disable_turning = null
-disable_friction = null
-disable_animation = null
-attacking = null
-big_attack = null
-invincible = null
-heavy = null
-shine_kill = null
-player_id = null
-controllable = null
-shine_cutscene = null
-auto_flip = null
-invulnerable = null
-invulnerable_frames = null
-movable = null
-dead = null
-stomping = null
-dive_cooldown = null
-health = null
-health_shards = null
-snap = null
 collision_exceptions = [ NodePath("") ]
-character = null
-inputs = null
-controlled_locally = null
-rotating_jump = null
-rotation_interpolation_speed = null
 
 [node name="Backgrounds" parent="Viewports/ViewportContainer/Viewport" instance=ExtResource( 13 )]
 

@@ -23,7 +23,7 @@ var area_id: int = 0
 var area: AreaData
 var enemies_instanced: int = 0
 
-var vars: LevelVars
+var vars: LevelVars = LevelVars.new()
 
 var time_score_paused: bool
 var time_score: float = 0
@@ -76,13 +76,18 @@ func _process(delta: float) -> void:
 
 
 ## loading
-func load_level_metadata(code: String) -> void:
+func load_level_metadata(code: String, is_spliced: bool = false) -> void:
+	if not is_spliced:
+		code = LevelCodeTokenizer.splice_level(code)
+	
 	var metadata_code = LevelCodeTokenizer.splice_metadata(code)
 	level_metadata = LevelCodeSerializer.deserialize_level_metadata_code(metadata_code)
 
 
 func load_level_headers(code: String) -> void:
-	load_level_metadata(code)
+	code = LevelCodeTokenizer.splice_level(code)
+	
+	load_level_metadata(code, true)
 	
 	var components_code = LevelCodeTokenizer.splice_level_components(code)
 	var editor_data_code = components_code[2]
@@ -90,7 +95,7 @@ func load_level_headers(code: String) -> void:
 	# load area headers
 	var area_codes: PoolStringArray = LevelCodeTokenizer.splice_areas(components_code[0])
 	for area_code in area_codes:
-		var area_header: AreaHeader = LevelCodeSerializer.deserialize_area_metadata_code(area_code)
+		var area_header: AreaHeader = LevelCodeSerializer.deserialize_area_header_code(area_code)
 		area_headers.append(area_header)
 	
 	# load mission data

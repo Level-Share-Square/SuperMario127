@@ -27,4 +27,3 @@ func instance_debug_level():
 	CurrentLevelData.load_level_headers(content)
 	CurrentLevelData.load_level_area(0)
 	get_tree().change_scene_to(PLAYER_PATH)
-

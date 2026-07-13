@@ -40,8 +40,8 @@ func _init(code: String = "", skip: bool = false):
 		code = level_list_util.load_level_code_file(DEFAULT_CODE_PATH)
 
 
-func get_area(result) -> LevelAreaOld:
-	var area = LevelAreaOld.new()
+func get_area(result) -> AreaDataOld:
+	var area = AreaDataOld.new()
 	area.tile_chunks.clear()
 	area.very_foreground_tiles.clear()
 	area.foreground_tiles.clear()
@@ -336,7 +336,7 @@ func get_encoded_level_data():
 	level_string.erase(level_string.length() - 1, 1)
 	return level_string
 
-func get_encoded_area_data(area: LevelAreaOld):
+func get_encoded_area_data(area: AreaDataOld):
 	var level_string: String
 	
 	level_string += "LevelAreaOld_"

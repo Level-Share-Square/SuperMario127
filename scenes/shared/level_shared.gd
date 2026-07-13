@@ -6,28 +6,34 @@ const LAYER_SCENE_PATH: String = "res://scenes/shared/level_layer/level_layer.ts
 
 var layer_scene: PackedScene = preload(LAYER_SCENE_PATH)
 
-var current_area_id: int = 0
-var current_area: LevelAreaOld 
-
-var layers: Array = []
+var layers: Array
 
 
-func load_in(level_data: LevelDataOld, level_area: LevelAreaOld):
-	load_layers(level_area.layers)
+func load_in():
+	load_layers(CurrentLevelData.area.layers)
 
 
-func load_layers(layer_data: Array):
-	for layer in layer_data:
-		layer = layer as LevelLayerData
-		add_layer()
+func load_layers(layer_data_list: Array):
+	for layer_data in layer_data_list:
+		layer_data = layer_data
+		add_layer(layer_data)
 
 
-func add_layer(id: int):
-	var new_layer = layer_scene.instance()
-	new_layer.connect("ready", new_layer, "setup", [layer_data])
-	
+func add_layer(layer_data = null, add_to_data: bool = false):
+	var new_layer: LevelLayer = layer_scene.instance()
 	add_child(new_layer)
-
-
-func remove_layer(id: int):
 	
+	if not is_instance_valid(layer_data):
+		var layer_metadata = LayerMetadata.new()
+		layer_data = LayerData.new(layer_metadata, TileData.new(), [])
+	
+	new_layer.load_in(layer_data)
+	
+	
+	if add_to_data:
+		CurrentLevelData.area.layers.append(layer_data)
+
+
+func remove_layer(index: int):
+	var removed: LevelLayer = layers[index]
+	layers.remove(index)

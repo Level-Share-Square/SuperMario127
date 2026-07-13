@@ -1650,7 +1650,7 @@ shader = ExtResource( 86 )
 shader_param/ray_count = 4
 shader_param/ray_distance = 0.4
 shader_param/ray_seperation_degrees = 22.0
-shader_param/rotation = 4.48659
+shader_param/rotation = 4.71543
 
 [sub_resource type="RectangleShape2D" id=85]
 extents = Vector2( 8, 18 )
@@ -1667,6 +1667,7 @@ cutout_circle = ExtResource( 9 )
 cutout_shine = ExtResource( 54 )
 current_jump = 2
 jump_animation = 1
+collision_exceptions = [ NodePath(".") ]
 mario_frames = ExtResource( 1 )
 luigi_frames = ExtResource( 21 )
 mario_wing_frames = ExtResource( 65 )

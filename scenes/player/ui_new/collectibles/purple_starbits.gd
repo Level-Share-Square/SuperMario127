@@ -21,8 +21,8 @@ var variables: LevelVars
 
 func _ready():
 	hide()
-	var shared_node: LevelShared = get_tree().get_current_scene().get_shared_node()
-	shared_node.get_node("Objects").connect("objects_ready", self, "delayed_ready")
+#	var shared_node: LevelShared = get_tree().get_current_scene().get_shared()
+#	shared_node.get_node("Objects").connect("objects_ready", self, "delayed_ready")
 
 func delayed_ready():
 	variables = CurrentLevelData.level_data.vars
@@ -32,7 +32,7 @@ func delayed_ready():
 	show()
 	variables.connect("purple_starbit_collected", self, "collect_coin")
 
-	var new_coins: int = variables.purple_starbits_collected[CurrentLevelData.area][0]
+	var new_coins: int = variables.purple_starbits_collected[CurrentLevelData.area_id][0]
 	update_counter(new_coins)
 	
 	if required_purples <= 0:
@@ -59,9 +59,9 @@ func update_required_purples():
 	var current_required_purples = variables.required_purple_starbits[CurrentLevelData.area]
 	if len(current_required_purples) > 0:
 		if len(current_required_purples) > 1:
-			if variables.purple_starbits_collected[CurrentLevelData.area][0] >= required_purples:
-				variables.required_purple_starbits[CurrentLevelData.area].pop_front()
-			required_purples = variables.required_purple_starbits[CurrentLevelData.area][0]
+			if variables.purple_starbits_collected[CurrentLevelData.area_id][0] >= required_purples:
+				variables.required_purple_starbits[CurrentLevelData.area_id].pop_front()
+			required_purples = variables.required_purple_starbits[CurrentLevelData.area_id][0]
 
 
 # this is to make sure the counter always displays underneath any radial timers

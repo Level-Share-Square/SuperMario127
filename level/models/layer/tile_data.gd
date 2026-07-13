@@ -8,7 +8,8 @@ extends Resource
 const TILE_CHUNK_SIZE: int = 16
 
 ## Dictionary of Vector2s and PoolIntArrays
-var chunks: Dictionary
+var chunks: Dictionary = {}
+var used_tiles: PoolVector2Array = PoolVector2Array()
 
 
 static func get_chunk_coords(coords: Vector2) -> Vector2:
@@ -21,6 +22,11 @@ func set_tile(coords: Vector2, tileset: int, type: int, palette: int) -> void:
 		tileset = 0
 		type = 0
 		palette = 0
+		
+		used_tiles.remove(used_tiles.find(coords))
+	else:
+		if not used_tiles.has(coords):
+			used_tiles.append(coords)
 	
 	coords = coords.snapped(Vector2.ONE)
 	var chunk_coords: Vector2 = get_chunk_coords(coords)
@@ -40,7 +46,14 @@ func erase_tile(coords: Vector2) -> void:
 
 
 func get_packed_tile_at(coords: Vector2) -> int:
-	return 0
+	var chunk_coords: Vector2 = get_chunk_coords(coords)
+	var chunk: PoolIntArray = chunks.get(chunk_coords, PoolIntArray())
+	if chunk.empty():
+		chunk.resize(TILE_CHUNK_SIZE * TILE_CHUNK_SIZE)
+		chunk.fill(0)
+	
+	var tile_index: int = posmod(coords.x, TILE_CHUNK_SIZE) + posmod(coords.y, TILE_CHUNK_SIZE) * TILE_CHUNK_SIZE
+	return chunk[tile_index]
 
 
 func get_tile_set_id_at(coords: Vector2) -> int:

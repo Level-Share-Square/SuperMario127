@@ -5,8 +5,8 @@ signal player_removed
 onready var viewport_container1 = $ViewportContainer
 onready var viewport1 = $ViewportContainer/Viewport
 onready var camera1 = $ViewportContainer/Viewport/CameraP1
-onready var world = $ViewportContainer/Viewport/World
-onready var player1 = $ViewportContainer/Viewport/World/Character
+onready var world = $ViewportContainer/Viewport/Area
+onready var player1 = $ViewportContainer/Viewport/Area/Character
 
 export var character_scene_path : String
 
@@ -50,11 +50,7 @@ func remove_player():
 func _ready():
 	player1.character = Singleton.PlayerSettings.player1_character
 	player1.number_of_players = Singleton.PlayerSettings.number_of_players
-	for object in CurrentLevelData.level_data.areas[CurrentLevelData.area].objects:
-		if object.type_id == 0:
-			player1_spawn = object.properties[0]
-			player1.spawn_pos = player1_spawn
-	## can we kill whoever did this?
-	if Singleton.PlayerSettings.number_of_players == 1:
-		Singleton.PlayerSettings.number_of_players = 2
-		remove_player()
+	for object in CurrentLevelData.area.get_objects_on_ground():
+		if object.metadata.type_id == 0:
+#			player1_spawn = object.properties[0]
+			player1.spawn_pos = Vector2.ZERO

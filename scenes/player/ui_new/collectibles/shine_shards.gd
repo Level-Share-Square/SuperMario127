@@ -11,11 +11,11 @@ var max_shards: int
 
 func _ready():
 	hide()
-	var shared_node: LevelShared = get_tree().get_current_scene().get_shared_node()
-	shared_node.get_node("Objects").connect("objects_ready", self, "delayed_ready")
+#	var shared_node: LevelShared = get_tree().get_current_scene().get_shared_node()
+#	shared_node.get_node("Objects").connect("objects_ready", self, "delayed_ready")
 
 func delayed_ready():
-	var variables: LevelVars = CurrentLevelData.level_data.vars
+	var variables: LevelVars = CurrentLevelData.vars
 	max_shards = variables.max_shine_shards
 	fill.max_value = max_shards
 	
@@ -23,10 +23,7 @@ func delayed_ready():
 		show()
 		variables.connect("shine_shard_collected", self, "collect_shard")
 		
-		var shard_amount = (
-			variables.shine_shards_collected[
-				CurrentLevelData.area][0]
-			)
+		var shard_amount = variables.shine_shards_collected[CurrentLevelData.area_id][0]
 		
 		label.text = str(max_shards-shard_amount)
 		fill.value = shard_amount

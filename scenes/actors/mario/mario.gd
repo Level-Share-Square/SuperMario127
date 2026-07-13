@@ -335,8 +335,6 @@ var cur_palette: String = "default"
 
 func _ready():
 	_update_player_framerate()
-	Engine.set_target_fps(60)
-	Engine.iterations_per_second = 60
 	CurrentLevelData.can_pause = true
 
 	heal_timer.connect("timeout", self, "_on_heal_timer_timeout")
@@ -348,17 +346,17 @@ func _ready():
 	Singleton.Music.toggle_underwater_music(false)
 	for input in input_names.keys():
 		inputs.append([false, false, str(input)])
-	var level_info: LevelInfo = CurrentLevelData.level_info
-	var fludd_array: Array = ["HoverNozzle", "RocketNozzle", "TurboNozzle"]
-	for fludd_index in level_info.activated_fludds.size():
-		if level_info.activated_fludds[fludd_index]:
-			add_nozzle(fludd_array[fludd_index])
-	if level_info.chosen_fludd != "null":
-		set_nozzle(CurrentLevelData.level_info.chosen_fludd)
+#	var level_info: LevelInfo = CurrentLevelData.level_info
+#	var fludd_array: Array = ["HoverNozzle", "RocketNozzle", "TurboNozzle"]
+#	for fludd_index in level_info.activated_fludds.size():
+#		if level_info.activated_fludds[fludd_index]:
+#			add_nozzle(fludd_array[fludd_index])
+#	if level_info.chosen_fludd != "null":
+#		set_nozzle(CurrentLevelData.level_info.chosen_fludd)
 
 func _update_player_framerate():
 	fps_util._update_framerate(false)
-	get_tree().create_timer(1.0).connect("timeout", self, "_update_player_framerate")
+#	get_tree().create_timer(1.0).connect("timeout", self, "_update_player_framerate")
 
 #slavery in super mario 127 :flushed:
 puppet func sync(pos, vel, sprite_frame, sprite_animation, sprite_rotation, is_attacking, is_big_attacking, is_heavy, is_dead, is_controllable): # Ok slave
@@ -412,8 +410,8 @@ func play_shine_sound() -> void:
 
 
 # warning-ignore: unused_argument
-func load_in(level_data : LevelDataOld, level_area : LevelAreaOld):
-	level_bounds = level_area.bounds
+func load_in():
+	level_bounds = CurrentLevelData.area.header.bounds
 	for exception in collision_exceptions:
 		add_collision_exception_with(get_node(exception))
 	var _connect = player_collision.connect("body_entered", self, "player_hit")
@@ -455,7 +453,7 @@ func load_in(level_data : LevelDataOld, level_area : LevelAreaOld):
 	collision_raycast.disabled = false
 	left_collision.disabled = false
 	right_collision.disabled = false
-	gravity = level_area.gravity
+	gravity = CurrentLevelData.area.header.gravity
 	
 	# reset some stuff that can be changed by accident when using the editor
 	sprite.playing = true
@@ -467,16 +465,14 @@ func load_in(level_data : LevelDataOld, level_area : LevelAreaOld):
 		return
 	
 	# time score
-	if CurrentLevelData.level_data.vars.transition_data.empty() and Singleton.CheckpointSaved.current_checkpoint_id == -1:
-		CurrentLevelData.start_tracking_time_score()
+	if CurrentLevelData.vars.transition_data.empty() and Singleton.CheckpointSaved.current_checkpoint_id == -1:
+		CurrentLevelData.start_time_score()
 	else:
-		var score_from_before = CurrentLevelData.time_score
-		CurrentLevelData.start_tracking_time_score()
-		CurrentLevelData.time_score = score_from_before
+		CurrentLevelData.unpause_time_score()
 	
 	# teleporters
 	var do_teleport: bool = false
-	var target_tag: String = CurrentLevelData.level_data.vars.transition_data.get("target_tag", "")
+	var target_tag: String = CurrentLevelData.vars.transition_data.get("target_tag", "")
 	var level_target_tag: String = CurrentLevelData.level_transition_data.get("target_tag", "")
 	
 	if target_tag != "":
@@ -494,24 +490,24 @@ func load_in(level_data : LevelDataOld, level_area : LevelAreaOld):
 		target_tag = "_entrance"
 	
 	if do_teleport:
-		var shared_node: LevelShared = get_tree().get_current_scene().get_shared_node()
-		var objects_node: Node = shared_node.get_objects_node()
-		if not objects_node.loaded:
-			yield(objects_node, "objects_ready")
-		
+		var shared_node: LevelShared = get_tree().get_current_scene().get_shared()
+#		var objects_node: Node = shared_node.get_objects_node()
+#		if not objects_node.loaded:
+#			yield(objects_node, "objects_ready")
+
 		var teleporter: GameObject = find_teleporter(target_tag)
 		if not is_instance_valid(teleporter):
 			target_tag = "_entrance"
 			teleporter = find_teleporter(target_tag)
-		
+
 		if is_instance_valid(teleporter):
 			global_position = teleporter.global_position
 			reset_physics_interpolation()
-			
+
 			if not teleporter.has_method("is_level_entrance"):
 				# to stop tweens from failing to play on startup
 				yield(get_tree().create_timer(0.3), "timeout")
-			
+
 			show()
 			teleporter.start_exit_animation(self)
 		else:
@@ -520,7 +516,7 @@ func load_in(level_data : LevelDataOld, level_area : LevelAreaOld):
 
 
 func find_teleporter(target_tag: String) -> GameObject:
-	for i in CurrentLevelData.level_data.vars.teleporters:
+	for i in CurrentLevelData.vars.teleporters:
 		if i[0] == target_tag.to_lower():
 			return i[1]
 	return null

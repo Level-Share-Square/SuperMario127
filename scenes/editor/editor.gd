@@ -55,8 +55,7 @@ func _ready():
 	CurrentLevelData.next_star_coin_id = 0
 	Singleton.CheckpointSaved.reset()
 	
-	var data = CurrentLevelData.level_data
-	load_in(data, data.areas[CurrentLevelData.area])
+	load_in()
 	
 	# if the mode switch button is invisible then the editor hasn't been readyed for the first time yet
 	# (editor _ready() gets called every time a mode switch happens)

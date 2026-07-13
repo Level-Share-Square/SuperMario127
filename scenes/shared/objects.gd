@@ -6,9 +6,6 @@ signal objects_ready
 
 export(NodePath) var shared_path
 
-var level_data : LevelDataOld
-var level_area : LevelAreaOld
-
 var object_cache = []
 
 var object_index: int = 0
@@ -16,16 +13,14 @@ var object_index: int = 0
 var loaded: bool = false
 
 
-func load_in(loaded_level_data : LevelDataOld, loaded_level_area : LevelAreaOld):
+func load_in():
 	loaded = false
 	object_index = 0
 	
-	level_data = loaded_level_data
-	level_area = loaded_level_area
 	
-	for object in loaded_level_area.objects:
-		print(loaded_level_area.objects.size())
-		create_object(object, false)
+#	for object in Curre.objects:
+#		print(loaded_level_area.objects.size())
+#		create_object(object, false)
 
 
 func set_property(object_node: GameObject, property, value):
@@ -38,8 +33,8 @@ func create_object(object, add_to_data):
 	if object_scene != null:
 		var object_node: GameObject = object_scene.instance()
 		object_node.mode = mode
-		object_node.level_data = level_data
-		object_node.level_area = level_area
+#		object_node.level_data = level_data
+#		object_node.level_area = level_area
 #		print(weakref(object))
 		object_node.level_object = weakref(object)
 		object_node.shared = get_node(shared_path)
@@ -64,7 +59,7 @@ func create_object(object, add_to_data):
 		call_deferred("add_child", object_node)
 		
 		if add_to_data:
-			level_area.objects.append(object)
+#			level_area.objects.append(object)
 			if object_node.has_method("on_place"):
 				object_node.on_place()
 		
@@ -84,8 +79,9 @@ func get_object_at_position(position: Vector2):
 func destroy_object(object_node, remove_from_data):
 	var level_object = object_node.level_object.get_ref()
 	if remove_from_data:
-		level_area.objects.erase(level_object)
-	object_node.queue_free()
+		pass
+#		level_area.objects.erase(level_object)
+#	object_node.queue_free()
 #	if (!CurrentLevelData.level_info.validity_check.is_object_multiplayer_compatible(\
 #	level_object.type_id,self)):
 #		for area in level_data.areas:
@@ -98,15 +94,15 @@ func destroy_object(object_node, remove_from_data):
 
 func move_object_to_back(object_node):
 	var level_object = object_node.level_object.get_ref()
-	level_area.objects.erase(level_object)
-	level_area.objects.insert(0, level_object)
+#	level_area.objects.erase(level_object)
+#	level_area.objects.insert(0, level_object)
 	move_child(object_node, 0)
 
 
 func move_object_to_front(object_node):
 	var level_object = object_node.level_object.get_ref()
-	level_area.objects.erase(level_object)
-	level_area.objects.append(level_object)
+#	level_area.objects.erase(level_object)
+#	level_area.objects.append(level_object)
 	move_child(object_node, get_child_count()-1)
 
 
@@ -115,10 +111,10 @@ func object_ready():
 		return
 	
 	object_index += 1
-	var object_count = level_area.objects.size()
+#	var object_count = level_area.objects.size()
 #	print("%s, %s" % [object_index, object_count])
 	
-	if object_index == object_count and get_tree().get_current_scene().mode == 0:
-		loaded = true
-		emit_signal("objects_ready")
-		print("Objects are all loaded!")
+#	if object_index == object_count and get_tree().get_current_scene().mode == 0:
+#		loaded = true
+#		emit_signal("objects_ready")
+#		print("Objects are all loaded!")

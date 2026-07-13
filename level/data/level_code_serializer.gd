@@ -54,8 +54,8 @@ static func deserialize_layers_code(layers_code: String) -> Array:
 static func deserialize_layer_code(layer_code: String) -> LayerData:
 	var layer_metadata_code = LevelCodeTokenizer.splice_metadata(layer_code)
 	var layer_components = LevelCodeTokenizer.splice_layer_components(layer_code)
-	var tiles_code = layer_components[1]
 	var objects_code = layer_components[0]
+	var tiles_code = layer_components[1]
 	
 	var layer_metadata = deserialize_layer_metadata_code(layer_metadata_code)
 	var tiles = deserialize_tiles_code(tiles_code)
@@ -65,7 +65,7 @@ static func deserialize_layer_code(layer_code: String) -> LayerData:
 	for tile in tiles:
 		tile_data.set_tile(tile[3], tile[0], tile[1], tile[2])
 	
-	return LayerData.new(layer_metadata, objects, tiles)
+	return LayerData.new(layer_metadata, tile_data, objects)
 	
 	
 static func deserialize_tiles_code(tiles_code: String) -> Array:

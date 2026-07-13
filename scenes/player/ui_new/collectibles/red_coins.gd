@@ -10,8 +10,8 @@ var max_reds: int
 
 func _ready():
 	hide()
-	var shared_node: LevelShared = get_tree().get_current_scene().get_shared_node()
-	shared_node.get_node("Objects").connect("objects_ready", self, "delayed_ready")
+#	var shared_node: LevelShared = get_tree().get_current_scene().get_shared_node()
+#	shared_node.get_node("Objects").connect("objects_ready", self, "delayed_ready")
 
 func delayed_ready():
 	# yield one more frame since the player scene needs to set things up

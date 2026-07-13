@@ -18,7 +18,7 @@ onready var right_button = $CenterContainer/ShineDetails/Buttons/Right
 
 
 ## variables
-var level_info: LevelInfo
+var level_info: Node = null
 
 var total_shines: int
 var selected_shine: int
@@ -28,7 +28,7 @@ var shine_offset: int = 0
 func _ready():
 	pause_controller.connect("shine_collected", self, "update_shine_info")
 	
-	level_info = CurrentLevelData.level_info
+#	level_info = CurrentLevelData.level_info
 	
 	if is_instance_valid(level_info):
 		total_shines = level_info.shine_details.size()
@@ -39,20 +39,21 @@ func _ready():
 
 
 func update_shine_info():
-	level_info = CurrentLevelData.level_info
+#	level_info = CurrentLevelData.level_info
 	
 	star.visible = false
-	level_name.text = level_info.level_name
+	level_name.text = "TEST"
 	level_name_back.text = level_name.text
 	
 	if selected_shine == -1: # This can happen if there are no shine sprites in the level
 		shine_name.text = "No shine sprite selected"
 		shine_description.bbcode_text = "[center]There are no shine sprites in this level.[/center]"
 	else:
-		var selected_shine_info = level_info.shine_details[selected_shine + shine_offset]
-		shine_name.text = selected_shine_info["title"]
-		shine_description.bbcode_text = "[center]%s[/center]" % selected_shine_info["description"] 
-		star.visible = level_info.collected_shines.get(str(selected_shine_info["id"]), false)
+#		var selected_shine_info = level_info.shine_details[selected_shine + shine_offset]
+#		shine_name.text = selected_shine_info["title"]
+#		shine_description.bbcode_text = "[center]%s[/center]" % selected_shine_info["description"] 
+#		star.visible = level_info.collected_shines.get(str(selected_shine_info["id"]), false)
+		star.visible = false
 	
 	index.text = str(selected_shine + shine_offset + 1) + "/" + str(total_shines)
 

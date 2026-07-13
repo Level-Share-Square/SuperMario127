@@ -48,18 +48,18 @@ func _ready():
 #	vignette.visible = false
 
 	CurrentLevelData.enemies_instanced = 0
-	CurrentLevelData.level_data.vars.reset_counters()
+	CurrentLevelData.vars.reset_counters()
 	
 	if !Singleton.MiscShared.is_play_reload:
 		Singleton.CheckpointSaved.reset()
-		CurrentLevelData.level_data.vars.init()
+		CurrentLevelData.vars.init()
 	
-	if CurrentLevelData.level_data.vars.transition_data.empty():
+	if CurrentLevelData.vars.transition_data.empty():
 		if Singleton.CheckpointSaved.current_checkpoint_id != -1:
 			CurrentLevelData.area = Singleton.CheckpointSaved.current_area
-		CurrentLevelData.level_data.vars.reload()
+		CurrentLevelData.vars.reload()
 	
-	if CurrentLevelData.level_data.areas[CurrentLevelData.area].timer > 0.00:
+	if CurrentLevelData.area.header.timer > 0.00:
 		var timer_manager = get_timer_manager()
 		timer_manager.add_set_timer("area_timer", CurrentLevelData.level_data.areas[CurrentLevelData.area].timer, "death", true, true)
 #		vignette.visible = true
@@ -73,18 +73,18 @@ func _ready():
 	
 	can_collect_coins.append(get_node(character))
 		
-	CurrentLevelData.level_data.vars.max_red_coins = 0
-	CurrentLevelData.level_data.vars.max_shine_shards = 0
-	CurrentLevelData.level_data.vars.max_purple_starbits = 0
-	CurrentLevelData.level_data.vars.teleporters = []
-	CurrentLevelData.level_data.vars.liquids = []
-	CurrentLevelData.level_data.vars.checkpoints = []
+	CurrentLevelData.vars.max_red_coins = 0
+	CurrentLevelData.vars.max_shine_shards = 0
+	CurrentLevelData.vars.max_purple_starbits = 0
+	CurrentLevelData.vars.teleporters = []
+	CurrentLevelData.vars.liquids = []
+	CurrentLevelData.vars.checkpoints = []
 	
 	Singleton.MiscShared.is_play_reload = true
 	get_tree().paused = false
 	
 	yield(get_tree(), "physics_frame")
-	CurrentLevelData.level_data.vars.max_red_coins = CurrentLevelData.get_red_coins_before_area(CurrentLevelData.level_data.areas.size())
+#	CurrentLevelData.vars.max_red_coins = CurrentLevelData.get_red_coins_before_area(CurrentLevelData.area_headers.size())
 
 
 func _unhandled_input(event):

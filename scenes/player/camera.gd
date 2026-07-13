@@ -157,8 +157,8 @@ func set_zoom_tween(target : Vector2, time : float, override = false):
 func on_zoom_tween_zoomed():
 	disable_gp_zoom = false
 
-func load_in(_level_data : LevelDataOld, level_area : LevelAreaOld):
-	var level_bounds = level_area.bounds
+func load_in():
+	var level_bounds = CurrentLevelData.area.header.bounds
 	limit_left = level_bounds.position.x * 32
 	limit_top = level_bounds.position.y * 32
 	limit_right = level_bounds.end.x * 32

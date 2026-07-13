@@ -39,13 +39,13 @@ func instance_level_metadata(data: LevelMetadata):
 
 
 func instance_area(data: AreaData):
-	var area_data: LevelAreaOld = LevelAreaOld.new()
+	var area_data: AreaDataOld = AreaDataOld.new()
 	instance_area_metadata(data.area_metadata, area_data)
 	instance_layers_array(data.layers, area_data)
 	CurrentLevelData.level_data.areas.append(area_data)
 
 
-func instance_area_metadata(data: AreaMetadata, data_old: LevelAreaOld):
+func instance_area_metadata(data: AreaHeader, data_old: AreaDataOld):
 	data_old.bounds = data.bounds
 	data_old.sky = data.sky
 	data_old.background = data.background
@@ -58,7 +58,7 @@ func instance_area_metadata(data: AreaMetadata, data_old: LevelAreaOld):
 	data_old.underwater_music = data.underwater_music
 
 
-func instance_layers_array(layers: Array, data_old: LevelAreaOld):
+func instance_layers_array(layers: Array, data_old: AreaDataOld):
 	for layer in layers:
 		var new_layer = LAYER_SCENE.instance()
 		add_child(new_layer)
@@ -99,7 +99,8 @@ func instance_tiles_array(tiles: Array, layer: LevelLayer):
 
 
 func instance_tile(tile: TileData, layer: LevelLayer):
-	layer.place_tile(tile)
+	pass
+#	layer.place_tile(tile)
 
 
 func instance_layer_metadata(data: LayerMetadata, layer: LevelLayer):

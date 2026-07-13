@@ -7,7 +7,7 @@ extends Object
 # converting from 127's tile set ids to Godot's tile set IDs.
 
 
-const TILE_IDS: Array = preload("res://generation/tileset_palettes.res").tileset_ids
+const TILE_IDS: Array = preload("res://generation/tileset_ids.res").tileset_ids
 
 
 static func get_packed_tile(tile_set: int, tile: int, palette: int) -> int:
@@ -24,6 +24,14 @@ static func get_tile_id_from_packed(value: int) -> int:
 
 static func get_palette_id_from_packed(value: int) -> int:
 	return (value & 0x00FF0000) >> 32
+
+
+static func get_real_tile_set_id_from_packed(value: int) -> int:
+	return get_real_tile_set_id(
+		get_tile_set_id_from_packed(value), 
+		get_tile_id_from_packed(value), 
+		get_palette_id_from_packed(value)
+	)
 
 
 static func get_real_tile_set_id(tileset_id: int, tile_id: int, palette_id: int = 0) -> int:
