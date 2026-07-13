@@ -18,8 +18,8 @@ var global := {}
 var editor_aliases := {}
 
 var mode: int = 0
-var level_object: WeakRef = null
-var shared: LevelShared = null
+var object_data_ref: WeakRef = null
+var level_layer_ref: WeakRef = null
 
 var hovered: bool = false
 var selected: bool = false
@@ -76,8 +76,6 @@ func _ready():
 	z_layer = layer + LevelShared.layer_index_offset
 	
 	if get_tree().current_scene.mode == 1:
-		if is_instance_valid(level_object):
-			shared.get_node("%Layers").connect("layer_changed", self, "_on_layer_changed")
 		if generate_editor_hitbox:
 			if is_instance_valid(editor_hitbox):
 				editor_hitbox.queue_free()
@@ -105,8 +103,8 @@ func _ready():
 			collision_shape.shape = RectangleShape2D.new()
 			editor_hitbox.add_child(collision_shape)
 		
-		if is_instance_valid(level_object):
-			visibility = level_object.get_ref().properties[4]
+		if is_instance_valid(object_data_ref):
+			visibility = object_data_ref.get_ref().properties[4]
 		
 		var editor = get_tree().current_scene
 		editor_hitbox.connect("mouse_entered", editor, "object_hovered", [self])
@@ -295,7 +293,7 @@ func set_property(key, value, change_level_object = true, alias = null):
 	
 	self[key] = value
 	
-	var object_data = level_object.get_ref()
+	var object_data = object_data_ref.get_ref()
 	
 	if change_level_object and is_savable_property(key) and !is_preview:
 		var index: int = get_property_index(key)
@@ -384,10 +382,11 @@ func is_on_ground_layer() -> bool:
 
 
 func _on_layer_changed(new_layer):
-	if new_layer != layer && shared.get_parent().show_layers:
-		translucent = true
-	else:
-		translucent = false
+	pass
+#	if new_layer != layer && shared.get_parent().show_layers:
+#		translucent = true
+#	else:
+#		translucent = false
 
 
 func recursive_find_shared(node):

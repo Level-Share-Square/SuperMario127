@@ -159,11 +159,9 @@ static func deserialize_object_metadata_code(object_metadata_code: String) -> Ob
 	var type_id: int = vars[0]
 	var palette: int = vars[1]
 	var enabled: bool = vars[2]
-	var rotation: int = vars[3]
-	var scale: Vector2 = vars[4]
-	var position: Vector2 = vars[5]
+	var position: Vector2 = vars[3]
 	
-	return ObjectMetadata.new(type_id, palette, enabled, rotation)
+	return ObjectMetadata.new(position, type_id, enabled, palette)
 	
 # basically, this is the finest grain part of the level code; we are just looking at primitive values
 # pass in a list of primitive values to this function and it will interpret them

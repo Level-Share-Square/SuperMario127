@@ -52,5 +52,5 @@ func _ready():
 	player1.number_of_players = Singleton.PlayerSettings.number_of_players
 	for object in CurrentLevelData.area.get_objects_on_ground():
 		if object.metadata.type_id == 0:
-#			player1_spawn = object.properties[0]
-			player1.spawn_pos = Vector2.ZERO
+			player1_spawn = object.metadata.position
+			player1.spawn_pos = player1_spawn

@@ -12,3 +12,20 @@ func _init(set_layer_metadata: LayerMetadata, set_tile_data: TileData, set_objec
 	layer_metadata = set_layer_metadata
 	object_data = set_object_data
 	tile_data = set_tile_data
+
+
+func place_tile(coords: Vector2, tileset: int, type: int, palette: int = 0) -> void:
+	tile_data.set_tile(coords, tileset, type, palette)
+
+
+func erase_tile(coords: Vector2) -> void:
+	tile_data.erase_tile(coords)
+
+
+func add_object(data: ObjectData) -> void:
+	object_data.append(data)
+
+
+func place_object(position: Vector2, data: ObjectData):
+	data.position = position
+	add_object(data)

@@ -9,7 +9,7 @@ func _unhandled_input(event):
 	if event.is_action_pressed("LMB"):
 		place_tile(get_global_mouse_position() / 32, 1, 0, 0, true)
 	elif event.is_action_pressed("RMB"):
-		remove_tile(get_global_mouse_position() / 32, true)
+		erase_tile(get_global_mouse_position() / 32, true)
 
 
 func load_in(s_layer_data: LayerData):
@@ -36,7 +36,7 @@ func place_tile(coords: Vector2, tileset: int, type: int, palette: int, modify_d
 	layer_data.tile_data.set_tile(coords, tileset, type, palette)
 
 
-func remove_tile(coords: Vector2, modify_data: bool = false):
+func erase_tile(coords: Vector2, modify_data: bool = false):
 	set_cellv(coords, INVALID_CELL)
 	update_autotile(coords)
 	

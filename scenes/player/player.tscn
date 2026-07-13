@@ -2435,10 +2435,10 @@ shape = SubResource( 18 )
 [node name="Area" type="Node2D" parent="Viewports/ViewportContainer/Viewport"]
 script = ExtResource( 21 )
 
-[node name="LevelShared" parent="Viewports/ViewportContainer/Viewport/Area" instance=ExtResource( 2 )]
-
 [node name="Character" parent="Viewports/ViewportContainer/Viewport/Area" instance=ExtResource( 3 )]
 collision_exceptions = [ NodePath("") ]
+
+[node name="LevelShared" parent="Viewports/ViewportContainer/Viewport/Area" instance=ExtResource( 2 )]
 
 [node name="Backgrounds" parent="Viewports/ViewportContainer/Viewport" instance=ExtResource( 13 )]
 

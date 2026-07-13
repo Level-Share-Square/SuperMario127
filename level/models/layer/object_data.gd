@@ -5,6 +5,6 @@ var metadata: ObjectMetadata
 var properties: Array = []
 
 
-func _init(set_metadata, set_properties):
-	metadata = set_metadata
-	properties = set_properties
+func _init(s_metadata: ObjectMetadata, s_properties: Array):
+	metadata = s_metadata
+	properties = s_properties

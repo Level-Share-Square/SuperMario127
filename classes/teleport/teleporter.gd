@@ -53,8 +53,8 @@ func start_exit_animation(character: Character) -> void:
 
 ## mostly just restoring control to mario
 func finish_exit_animation(character: Character) -> void:
-	CurrentLevelData.level_data.vars.transition_data = {}
-	CurrentLevelData.level_data.vars.area_transition_helper = null
+	CurrentLevelData.vars.transition_data = {}
+	CurrentLevelData.vars.area_transition_helper = null
 	if not character.dead:
 		character.toggle_movement(true)
 	character.velocity = Vector2.ZERO
@@ -65,7 +65,7 @@ func finish_exit_animation(character: Character) -> void:
 
 ### MISC
 func _ready():
-	CurrentLevelData.level_data.vars.teleporters.append([tag.to_lower(), self])
+	CurrentLevelData.vars.teleporters.append([tag.to_lower(), self])
 	if "\n" in tag:
 		tag = tag.replace("\n", "")
 

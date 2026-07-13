@@ -76,8 +76,8 @@ func _ready() -> void:
 	Singleton.Music.last_song = 31
 	
 	Singleton.CheckpointSaved.reset()
-	CurrentLevelData.area = 0
-	CurrentLevelData.level_data.vars.init()
+	CurrentLevelData.load_level_area(0)
+	CurrentLevelData.vars.init()
 	Singleton.MiscShared.is_play_reload = false
 	
 	# warning-ignore:return_value_discarded
