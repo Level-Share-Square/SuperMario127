@@ -1,7 +1,7 @@
-[gd_scene load_steps=100 format=2]
+[gd_scene load_steps=99 format=2]
 
 [ext_resource path="res://scenes/player/player.gd" type="Script" id=1]
-[ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/shared/level_shared.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/actors/mario/mario.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/player/camera.gd" type="Script" id=4]
 [ext_resource path="res://scenes/menu/pause/pause_controller.tscn" type="PackedScene" id=5]
@@ -15,7 +15,6 @@
 [ext_resource path="res://scenes/shared/backgrounds.tscn" type="PackedScene" id=13]
 [ext_resource path="res://scenes/player/ui_new/polygon_swatch.tscn" type="PackedScene" id=14]
 [ext_resource path="res://assets/fonts/marioscript_ui.tres" type="DynamicFont" id=15]
-[ext_resource path="res://scenes/player/level/layers.gd" type="Script" id=16]
 [ext_resource path="res://scenes/player/ui_new/health/health.tscn" type="PackedScene" id=17]
 [ext_resource path="res://scenes/player/ui_new/collectibles/coins.gd" type="Script" id=18]
 [ext_resource path="res://scenes/player/ui_new/collectibles/red_coins.gd" type="Script" id=19]
@@ -1240,12 +1239,11 @@ extents = Vector2( 393, 216 )
 
 [node name="Player" type="Node2D"]
 script = ExtResource( 1 )
-nodes_to_load = [ NodePath("Viewports/ViewportContainer/Viewport/World/Shared"), NodePath("Viewports/ViewportContainer/Viewport/World/Character"), NodePath("Viewports/ViewportContainer/Viewport/CameraP1"), NodePath(""), NodePath(""), NodePath("Viewports/ViewportContainer/Viewport/Backgrounds"), NodePath("") ]
-character = NodePath("Viewports/ViewportContainer/Viewport/World/Character")
+nodes_to_load = [ NodePath("Viewports/ViewportContainer/Viewport/Area/LevelShared"), NodePath("Viewports/ViewportContainer/Viewport/CameraP1"), NodePath("Viewports/ViewportContainer/Viewport/Area/Character"), NodePath("Viewports/ViewportContainer/Viewport/Backgrounds") ]
+character = NodePath("Viewports/ViewportContainer/Viewport/Area/Character")
 camera = NodePath("Viewports/ViewportContainer/Viewport/CameraP1")
-shared = NodePath("Viewports/ViewportContainer/Viewport/World/Shared")
+shared = NodePath("Viewports/ViewportContainer/Viewport/Area/LevelShared")
 backgrounds = NodePath("Viewports/ViewportContainer/Viewport/Backgrounds")
-layers = NodePath("Viewports/ViewportContainer/Viewport/World/Layers")
 
 [node name="PhotoModeController" type="Node" parent="."]
 pause_mode = 2
@@ -1298,6 +1296,12 @@ __meta__ = {
 margin_left = 318.0
 margin_right = 414.0
 
+[node name="TimeScore" parent="UIUnder/HUD/Control/TimerManager/Timers/Grid" index="0"]
+is_counting = null
+time = null
+sound = null
+kill_on_end = null
+
 [node name="PurpleStarbits" type="Control" parent="UIUnder/HUD/Control/TimerManager/RadialTimers" index="0"]
 visible = false
 margin_top = 384.0
@@ -1320,7 +1324,7 @@ anims/collect = SubResource( 217 )
 anims/RESET = SubResource( 227 )
 anims/transition = SubResource( 228 )
 script = ExtResource( 31 )
-character_path = NodePath("../../../../../../../Viewports/ViewportContainer/Viewport/World/Character")
+character_path = NodePath("../../../../../../../Viewports/ViewportContainer/Viewport/Area/Character")
 
 [node name="Fadeout" type="AnimationPlayer" parent="UIUnder/HUD/Control/TimerManager/RadialTimers/PurpleStarbits"]
 anims/RESET = SubResource( 218 )
@@ -2362,7 +2366,7 @@ visible = false
 __meta__ = {
 "_edit_lock_": true
 }
-character_path = NodePath("../../Viewports/ViewportContainer/Viewport/World/Character")
+character_path = NodePath("../../Viewports/ViewportContainer/Viewport/Area/Character")
 
 [node name="Viewports" type="HBoxContainer" parent="."]
 margin_right = 772.0
@@ -2412,7 +2416,7 @@ drag_margin_right = 0.0
 drag_margin_bottom = 0.0
 editor_draw_screen = false
 script = ExtResource( 4 )
-character = NodePath("../World/Character")
+character = NodePath("../Area/Character")
 background = NodePath("../Backgrounds")
 
 [node name="ZoomTween" type="Tween" parent="Viewports/ViewportContainer/Viewport/CameraP1"]
@@ -2428,17 +2432,62 @@ collision_mask = 2048
 visible = false
 shape = SubResource( 18 )
 
-[node name="World" type="Node2D" parent="Viewports/ViewportContainer/Viewport"]
+[node name="Area" type="Node2D" parent="Viewports/ViewportContainer/Viewport"]
 script = ExtResource( 21 )
 
-[node name="Shared" parent="Viewports/ViewportContainer/Viewport/World" instance=ExtResource( 2 )]
-unique_name_in_owner = true
+[node name="LevelShared" parent="Viewports/ViewportContainer/Viewport/Area" instance=ExtResource( 2 )]
 
-[node name="Character" parent="Viewports/ViewportContainer/Viewport/World" instance=ExtResource( 3 )]
+[node name="Character" parent="Viewports/ViewportContainer/Viewport/Area" instance=ExtResource( 3 )]
+initial_position = null
+velocity = null
+gravity_scale = null
+facing_direction = null
+move_direction = null
+last_move_direction = null
+move_speed = null
+acceleration = null
+deceleration = null
+aerial_acceleration = null
+friction = null
+aerial_friction = null
+max_aerial_velocity = null
+max_frictionless_slide_velocity = null
+raycast_length = null
+is_wj_chained = null
+real_friction = null
+direction_on_stick = null
+rotating = null
+swimming = null
+spawn_pos = null
+gravity = null
+disable_movement = null
+disable_turning = null
+disable_friction = null
+disable_animation = null
+attacking = null
+big_attack = null
+invincible = null
+heavy = null
+shine_kill = null
+player_id = null
+controllable = null
+shine_cutscene = null
+auto_flip = null
+invulnerable = null
+invulnerable_frames = null
+movable = null
+dead = null
+stomping = null
+dive_cooldown = null
+health = null
+health_shards = null
+snap = null
 collision_exceptions = [ NodePath("") ]
-
-[node name="Layers" type="Node2D" parent="Viewports/ViewportContainer/Viewport/World"]
-script = ExtResource( 16 )
+character = null
+inputs = null
+controlled_locally = null
+rotating_jump = null
+rotation_interpolation_speed = null
 
 [node name="Backgrounds" parent="Viewports/ViewportContainer/Viewport" instance=ExtResource( 13 )]
 
@@ -2453,7 +2502,7 @@ margin_left = 688.0
 margin_top = 14.0
 margin_right = 752.0
 margin_bottom = 78.0
-character_path = NodePath("../../Viewport/World/Character")
+character_path = NodePath("../../Viewport/Area/Character")
 
 [node name="Fludd" parent="Viewports/ViewportContainer/CanvasLayer" instance=ExtResource( 23 )]
 anchor_left = 1.0
@@ -2464,13 +2513,13 @@ margin_left = -66.0
 margin_top = -66.0
 margin_right = -26.0
 margin_bottom = -16.0
-character_path = NodePath("../../Viewport/World/Character")
+character_path = NodePath("../../Viewport/Area/Character")
 
 [node name="CanvasLayer2" type="CanvasLayer" parent="Viewports/ViewportContainer"]
 layer = 60
 
 [node name="Stamina" parent="Viewports/ViewportContainer/CanvasLayer2" instance=ExtResource( 24 )]
-character_path = NodePath("../../Viewport/World/Character")
+character_path = NodePath("../../Viewport/Area/Character")
 camera_path = NodePath("../../Viewport/CameraP1")
 viewport_offset = Vector2( 192, 216 )
 

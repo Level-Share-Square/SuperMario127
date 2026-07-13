@@ -1,23 +1,23 @@
-class_name AreaMetadata
+class_name AreaHeader
 extends Resource
 
 # holds the code for the entire area, so that an area can be loaded with just its metadata 
-var area_code: String = ""
-var bounds: Rect2 = Rect2(0, 0, 80, 30)
-
 var name: String = ""
+var bounds: Rect2 = Rect2(0, 0, 80, 30)
 
 var sky: int = 1
 var background: int = 1
 var background_palette: int = 0
 var bg_autoscroll_speed: float = 0.0
 
-var gravity: float = 7.82
-var timer: float = 0.00
-
 # can hold either the ID for music in the files or a link to custom music
 var music = 1
 var underwater_music: String = ""
+
+var gravity: float = 7.82
+var timer: float = 0.00
+
+var area_code: String = ""
 
 
 func _init(set_area_code, set_bounds, set_name, set_sky, set_background, set_background_palette, set_bg_autoscroll_speed, set_gravity, set_timer, set_music, set_underwater_music):

@@ -1,31 +1,35 @@
 class_name LevelCodeSerializer
+extends Object
+
+# Not necessary since I'm killing the need for an overarching LevelData class
+#static func deserialize_level_code(code: String) -> LevelData:
+#	var level_code = LevelCodeTokenizer.splice_level(code)
+#	var metadata_code = LevelCodeTokenizer.splice_metadata(code)
+#	var level_components_code = LevelCodeTokenizer.splice_level_components(level_code)
+#
+#	# all area codes (in one string)
+#	var area_list_code = level_components_code[0]
+#	var mission_data_code = level_components_code[1]
+#	var editor_data_code = level_components_code[2]
+#
+#	# all area codes(in a string array)
+#	var areas_code = LevelCodeTokenizer.splice_areas(area_list_code)
+#
+#
+#	var new_level_metadata = deserialize_level_metadata_code(metadata_code)
+#	var new_current_area = deserialize_area_code(areas_code[0])
+#	var new_area_metadatas = []
+#	for metadata in areas_code:
+#		new_area_metadatas.push_back(deserialize_area_metadata_code(metadata))
+#	var new_mission_metadata = MissionMetadata.new()
+#	var new_saved_editor_data = SavedEditorData.new()
+#
+#	var level_data = LevelData.new(new_level_metadata, new_mission_metadata, new_saved_editor_data, new_current_area, new_area_metadatas)
+#	return level_data
 
 
-
-static func deserialize_level_code(code: String) -> LevelData:
-	var level_code = LevelCodeTokenizer.splice_level(code)
-	var metadata_code = LevelCodeTokenizer.splice_metadata(code)
-	var level_components_code = LevelCodeTokenizer.splice_level_components(level_code)
-	
-	# all area codes (in one string)
-	var area_list_code = level_components_code[0]
-	var mission_data_code = level_components_code[1]
-	var editor_data_code = level_components_code[2]
-	
-	# all area codes(in a string array)
-	var areas_code = LevelCodeTokenizer.splice_areas(area_list_code)
-
-	
-	var new_level_metadata = deserialize_level_metadata_code(metadata_code)
-	var new_current_area = deserialize_area_code(areas_code[0])
-	var new_area_metadatas = []
-	for metadata in areas_code:
-		new_area_metadatas.push_back(deserialize_area_metadata_code(metadata))
-	var new_mission_metadata = MissionMetadata.new()
-	var new_saved_editor_data = SavedEditorData.new()
-	
-	var level_data = LevelData.new(new_level_metadata, new_mission_metadata, new_saved_editor_data, new_current_area, new_area_metadatas)
-	return level_data
+static func deserialize_mission_data(mission_code) -> MissionData:
+	return MissionData.new()
 
 
 static func deserialize_area_code(area_code: String) -> AreaData:
@@ -33,10 +37,10 @@ static func deserialize_area_code(area_code: String) -> AreaData:
 	
 	var layers_code = area_components_code[0]
 	
-	var area_metadata = deserialize_area_metadata_code(area_code)
+	var area_header = deserialize_area_header_code(area_code)
 	var layers = deserialize_layers_code(layers_code)
 		
-	return AreaData.new(area_metadata, layers)
+	return AreaData.new(area_header, layers)
 	
 	
 static func deserialize_layers_code(layers_code: String) -> Array:
@@ -114,7 +118,7 @@ static func deserialize_level_metadata_code(level_metadata_code: String) -> Leve
 	
 	
 # !! Takes full area code as input! so that the area code can be stored as a variable
-static func deserialize_area_metadata_code(area_code: String) -> AreaMetadata:
+static func deserialize_area_header_code(area_code: String) -> AreaHeader:
 	var area_metadata_code = LevelCodeTokenizer.splice_metadata(area_code)
 	var vars = deserialize_datas_code(area_metadata_code)
 	
@@ -129,7 +133,7 @@ static func deserialize_area_metadata_code(area_code: String) -> AreaMetadata:
 	var music = vars[8]
 	var underwater_music: String = vars[9]
 
-	return AreaMetadata.new(area_code, bounds, name, sky, background, background_palette, bg_autoscroll_speed, gravity, timer, music, underwater_music)
+	return AreaHeader.new(area_code, bounds, name, sky, background, background_palette, bg_autoscroll_speed, gravity, timer, music, underwater_music)
 	
 	
 static func deserialize_layer_metadata_code(layer_metadata_code: String) -> LayerMetadata:
@@ -140,7 +144,7 @@ static func deserialize_layer_metadata_code(layer_metadata_code: String) -> Laye
 	var layer_tint: Color = vars[2]
 	var order: int = vars[3]
 	var is_ground: bool = vars[4]
-	var activated_mission_id: int = vars[5]
+	var activated_mission_id: PoolIntArray = vars[5]
 	
 	return LayerMetadata.new(parallax_distance, autoset_tint, layer_tint, order, is_ground, activated_mission_id)
 	
@@ -178,19 +182,19 @@ static func deserialize_data_code(data_code: String):
 		data = data_code.substr(1)
 	
 	match type_code:
-		#string
+		# String
 		"S":
 			return data
-		#Int
+		# int
 		"I":
 			return int(data)
-		#Bool
+		# bool
 		"B":
 			return bool(data)
-		#Float
+		# float
 		"F":
 			return float(data)
-		#Vector2
+		# Vector2
 		"V":
 			data = LevelCodeTokenizer.splice_data_array(data)
 			var data_array = deserialize_datas_code(data)

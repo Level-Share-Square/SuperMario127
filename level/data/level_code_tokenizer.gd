@@ -1,4 +1,6 @@
 class_name LevelCodeTokenizer
+extends Object
+
 
 const metadata_pattern = "\\{([^{}]*)\\}"
 const data_pattern = "(?:[^\\[\\],]+|\\[[^\\]]*\\])+"

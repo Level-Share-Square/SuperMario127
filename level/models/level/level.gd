@@ -1,4 +1,4 @@
-class_name LevelData
+class_name LevelDataNew
 extends Resource
 
 

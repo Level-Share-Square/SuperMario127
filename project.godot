@@ -27,10 +27,15 @@ _global_script_classes=[ {
 "base": "Resource",
 "class": "AreaData",
 "language": "GDScript",
-"path": "res://level/models/area/area.gd"
+"path": "res://level/models/area/area_data.gd"
 }, {
 "base": "Resource",
-"class": "AreaMetadata",
+"class": "AreaDataOld",
+"language": "GDScript",
+"path": "res://level/Area.gd"
+}, {
+"base": "Resource",
+"class": "AreaHeader",
 "language": "GDScript",
 "path": "res://level/models/area/area_metadata.gd"
 }, {
@@ -502,37 +507,32 @@ _global_script_classes=[ {
 "base": "Resource",
 "class": "LayerData",
 "language": "GDScript",
-"path": "res://level/models/layer/layer.gd"
+"path": "res://level/models/layer/layer_data.gd"
 }, {
 "base": "Resource",
 "class": "LayerMetadata",
 "language": "GDScript",
 "path": "res://level/models/layer/layer_metadata.gd"
 }, {
-"base": "Resource",
-"class": "LevelAreaOld",
-"language": "GDScript",
-"path": "res://level/Area.gd"
-}, {
 "base": "BaseCard",
 "class": "LevelCard",
 "language": "GDScript",
 "path": "res://scenes/menu/levels_list/cards/level/level_card.gd"
 }, {
-"base": "Reference",
+"base": "Object",
 "class": "LevelCodeSerializer",
 "language": "GDScript",
 "path": "res://level/data/level_code_serializer.gd"
 }, {
-"base": "Reference",
+"base": "Object",
 "class": "LevelCodeTokenizer",
 "language": "GDScript",
 "path": "res://level/data/level_code_tokenizer.gd"
 }, {
-"base": "Resource",
+"base": "Reference",
 "class": "LevelData",
 "language": "GDScript",
-"path": "res://level/models/level/level.gd"
+"path": "res://level/Data.gd"
 }, {
 "base": "Node",
 "class": "LevelDataInstancer",
@@ -545,9 +545,9 @@ _global_script_classes=[ {
 "path": "res://classes/LevelDataLoader.gd"
 }, {
 "base": "Resource",
-"class": "LevelDataOld",
+"class": "LevelDataNew",
 "language": "GDScript",
-"path": "res://level/Data.gd"
+"path": "res://level/models/level/level.gd"
 }, {
 "base": "Reference",
 "class": "LevelDecoder",
@@ -630,7 +630,7 @@ _global_script_classes=[ {
 "path": "res://scenes/actors/mario/powerups/Metal.gd"
 }, {
 "base": "Resource",
-"class": "MissionMetadata",
+"class": "MissionData",
 "language": "GDScript",
 "path": "res://level/models/level/mission_metadata.gd"
 }, {
@@ -1134,7 +1134,8 @@ _global_script_class_icons={
 "Action": "",
 "ActionManager": "",
 "AreaData": "",
-"AreaMetadata": "",
+"AreaDataOld": "",
+"AreaHeader": "",
 "AreaTransition": "",
 "AreaTransitionHelper": "",
 "Autosave": "",
@@ -1230,14 +1231,13 @@ _global_script_class_icons={
 "LavaBoostState": "",
 "LayerData": "",
 "LayerMetadata": "",
-"LevelAreaOld": "",
 "LevelCard": "",
 "LevelCodeSerializer": "",
 "LevelCodeTokenizer": "",
 "LevelData": "",
 "LevelDataInstancer": "",
 "LevelDataLoader": "",
-"LevelDataOld": "",
+"LevelDataNew": "",
 "LevelDecoder": "",
 "LevelInfo": "",
 "LevelLayer": "",
@@ -1254,7 +1254,7 @@ _global_script_class_icons={
 "LiquidBase": "",
 "Member": "",
 "MetalPowerup": "",
-"MissionMetadata": "",
+"MissionData": "",
 "MoveSelection": "",
 "MoveTilesAction": "",
 "MusicDownloader": "",
@@ -1376,7 +1376,7 @@ SettingsLoader="*res://singletons/settings_loader.tscn"
 Discord="*res://addons/discord_game_sdk/discord.gd"
 LastInputDevice="*res://singletons/last_input_device.gd"
 LSSPing="*res://singletons/lss_ping.tscn"
-CurrentLevelData="*res://scenes/shared/level_data.tscn"
+CurrentLevelData="*res://scenes/shared/current_level_data.tscn"
 
 [debug]
 

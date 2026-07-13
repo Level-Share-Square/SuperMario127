@@ -37,7 +37,7 @@ static func input_to_text(input_key: String, player_id: int) -> String:
 	return COLOR_OPENING + "Unbound" + COLOR_CLOSING
 
 
-static func parse_text(text : String, character : Character) -> String:
+static func parse_text(text: String, character: Character) -> String:
 	text = text.replace(":char:", CHARACTER_NAMES[character.character].to_lower())
 	text = text.replace(":Char:", CHARACTER_NAMES[character.character])
 	text = text.replace(":CHAR:", CHARACTER_NAMES[character.character].to_upper())

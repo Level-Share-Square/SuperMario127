@@ -8,25 +8,17 @@ onready var tick_sound = $SharedSounds/TickSound
 onready var tick_end_sound = $SharedSounds/TickEndSound
 
 export var character : NodePath
-export var character2 : NodePath
 export var camera : NodePath
 export var shared : NodePath
 export var backgrounds : NodePath
-export var layers : NodePath
 
 var ssc_displayed = true
 
-export var coin_frame : int
 var can_collect_coins : Array
 
 export var switch_timer : float = 0.0
 export var sound_timer : float = 0.0
 
-func get_shared_node() -> Node:
-	return get_node(shared)
-
-func _process(_delta):
-	coin_frame = (OS.get_ticks_msec() * coin_anim_fps / 1000) % 4
 
 func _physics_process(delta):
 	var viewport_rect : Rect2 = get_viewport_rect()
@@ -50,16 +42,13 @@ func _physics_process(delta):
 		if switch_timer <= 0:
 			switch_timer = 0
 
+
 func _ready():
 	sound_timer = wrapf(switch_timer, 0, 1.1)
 #	vignette.visible = false
 
-	var layers_node = get_node(layers)
-	for layer in Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].layers:
-		layers_node.add_layer(layer)
-
-	Singleton.CurrentLevelData.enemies_instanced = 0
-	Singleton.CurrentLevelData.level_data.vars.reset_counters()
+	CurrentLevelData.enemies_instanced = 0
+	CurrentLevelData.level_data.vars.reset_counters()
 	
 	if !Singleton.MiscShared.is_play_reload:
 		Singleton.CheckpointSaved.reset()
@@ -75,14 +64,13 @@ func _ready():
 		timer_manager.add_set_timer("area_timer", CurrentLevelData.level_data.areas[CurrentLevelData.area].timer, "death", true, true)
 #		vignette.visible = true
 	
-	var data = Singleton.CurrentLevelData.level_data
-	load_in(data, data.areas[Singleton.CurrentLevelData.area])
+	load_in()
 	
 	Singleton.Music.character = get_node(character)
 	#Singleton.Music.reset_music()
 	if !Singleton.Music.playing:
 		Singleton.Music.play() # make sure the music will play even if it's stopped prior to loading the player
-
+	
 	can_collect_coins.append(get_node(character))
 		
 	CurrentLevelData.level_data.vars.max_red_coins = 0
@@ -105,8 +93,6 @@ func _unhandled_input(event):
 			Singleton.CheckpointSaved.reset()
 		if !get_node(character).dead:
 			get_node(character).kill("reload")
-		elif Singleton.PlayerSettings.number_of_players == 2:
-			get_node(character2).kill("reload")
 		if Singleton.PlayerSettings.other_player_id != -1:
 			var _send_bytes = get_tree().multiplayer.send_bytes(JSON.print(["reload"]).to_ascii())
 
@@ -121,8 +107,10 @@ func switch_scenes():
 			pass
 	var _change_scene = get_tree().change_scene("res://scenes/editor/editor.tscn")
 
+
 func reload_scene():
 	get_tree().reload_current_scene()
+
 
 func update_activity() -> void:
 	var activity = Discord.Activity.new()
@@ -143,10 +131,12 @@ func update_activity() -> void:
 		printerr(str(result))
 
 
+func get_shared() -> LevelShared:
+	return get_node(shared) as LevelShared
+
+
 func get_characters() -> Array:
 	var array: Array = [get_node(character)]
-	if Singleton.PlayerSettings.number_of_players == 2:
-		array.append(get_node(character2))
 	return array
 
 

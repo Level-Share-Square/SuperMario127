@@ -1,4 +1,4 @@
-class_name LevelDataOld
+class_name LevelData
 extends Resource
 
 
@@ -16,10 +16,8 @@ var author := DEFAULT_AUTHOR
 var description := DEFAULT_DESCRIPTION
 var thumbnail_url := DEFAULT_THUMBNAIL_URL
 
-var areas = []
-var functions = {}
-var global_vars_node = null
-var vars : LevelVars
+var areas: Array
+var vars: LevelVars
 
 var layout_ids: Array = []
 var layout_palettes: Array = []
@@ -30,21 +28,16 @@ var favorites: Array = []
 var palettes: Array = []
 var fav_items: Array = []
 
+
 static func check_code(code):
 	return typeof(code) == TYPE_DICTIONARY or code.size() >= 5
 
 
-func _init(code: String = "",skip: bool = false):
+func _init(code: String = "", skip: bool = false):
 	if (skip):
 		return
 	if code == "":
 		code = level_list_util.load_level_code_file(DEFAULT_CODE_PATH)
-
-
-func get_vector2(result) -> Vector2:
-	if (typeof(result) != TYPE_VECTOR2):
-		return Vector2(24,14)
-	return Vector2(result.x, result.y)
 
 
 func get_area(result) -> LevelAreaOld:
@@ -95,21 +88,6 @@ func get_area(result) -> LevelAreaOld:
 		var object = get_object(object_result)
 		area.objects.append(object)
 	return area
-
-
-#func get_settings(result) -> LevelAreaOldSettings:
-#	var settings = LevelAreaOldSettings.new()
-#	settings.sky = result.sky
-#	settings.background = result.background
-#	settings.background_palette = result.background_palette
-#	settings.music = result.music
-#	settings.gravity = abs(result.gravity)
-#	settings.timer = abs(result.timer)
-#	settings.name = result.name
-#	settings.underwater_music = result.underwater_music
-#	var size_vec2 = get_vector2(result.size)
-#	settings.bounds.size = Vector2(clamp(size_vec2.x, 24, 1500), clamp(size_vec2.y, 14, 1500))
-#	return settings
 
 
 func get_chunks(resultLayers: Array, size: Vector2) -> Dictionary:

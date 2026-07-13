@@ -1,4 +1,4 @@
-class_name MissionMetadata
+class_name MissionData
 extends Resource
 
 

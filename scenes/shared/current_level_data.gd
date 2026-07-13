@@ -1,0 +1,212 @@
+extends Node
+
+
+var level_id: String
+var working_folder: String = level_list_util.BASE_FOLDER
+var hub_level: String = ""
+var is_campaign: bool = false
+var selected_file: int = -1
+
+var level_transition_data: Dictionary
+var hub_return_data: Dictionary
+var shine_kickout_data: Dictionary
+
+## Level header data
+var level_metadata: LevelMetadata
+var saved_editor_data: SavedEditorData
+# Array of AreaHeader
+var area_headers: Array
+# Array of MissionData
+var mission_data: Array
+
+var area_id: int = 0
+var area: AreaData
+var enemies_instanced: int = 0
+
+var vars: LevelVars
+
+var time_score_paused: bool
+var time_score: float = 0
+
+# used to track if there's unsaved changes in the editor, specifically by the save and close buttons of the editor
+var unsaved_editor_changes: bool = false
+
+var shine_progression: bool = false
+
+# incremented and used by shines/star coins to make the newest shine/star coin have a unique id (aka previous id + 1) 
+var next_shine_id: int = 0
+var next_star_coin_id: int = 0
+
+# can be used by anything that needs to disable pausing for some time
+var can_pause: bool = true
+
+# Cached objects and backgrounds 
+# TODO: test if godot caching can replace these
+var object_id_map: IdMap
+var background_id_mapper: IdMap
+var foreground_id_mapper: IdMap
+
+var object_cache := []
+var background_cache := []
+var foreground_cache := []
+
+
+#var thread : Thread
+func _init() -> void:
+	# since the time score is incremented here, it must keep incrementing while paused
+	pause_mode = PAUSE_MODE_PROCESS
+	set_process(false)
+	
+	object_id_map = preload("res://scenes/actors/objects/ids.tres")
+	background_id_mapper = preload("res://scenes/shared/background/backgrounds/ids.tres")
+	foreground_id_mapper = preload("res://scenes/shared/background/foregrounds/ids.tres")
+	
+	object_cache.resize(object_id_map.ids.size())
+	background_cache.resize(background_id_mapper.ids.size())
+	foreground_cache.resize(foreground_id_mapper.ids.size())
+	
+	#thread = Thread.new()
+	#thread.start(self, "create_cache")
+
+
+# for now, process is disabled by default, so the timer needs to be started manually, if process here is ever needed for something else, create a bool for this
+func _process(delta: float) -> void:
+	if not time_score_paused:
+		time_score += delta
+
+
+## loading
+func load_level_metadata(code: String) -> void:
+	var metadata_code = LevelCodeTokenizer.splice_metadata(code)
+	level_metadata = LevelCodeSerializer.deserialize_level_metadata_code(metadata_code)
+
+
+func load_level_headers(code: String) -> void:
+	load_level_metadata(code)
+	
+	var components_code = LevelCodeTokenizer.splice_level_components(code)
+	var editor_data_code = components_code[2]
+	
+	# load area headers
+	var area_codes: PoolStringArray = LevelCodeTokenizer.splice_areas(components_code[0])
+	for area_code in area_codes:
+		var area_header: AreaHeader = LevelCodeSerializer.deserialize_area_metadata_code(area_code)
+		area_headers.append(area_header)
+	
+	# load mission data
+	var mission_codes: PoolStringArray = LevelCodeTokenizer.get_outermost_brackets(components_code[1])
+	for mission_code in mission_codes:
+		var mission_data: MissionData = MissionData.new()
+		mission_data.append(mission_data)
+
+
+func load_level_area(new_area_id: int) -> void:
+	area_id = new_area_id
+	
+	var area_code: String = area_headers[area_id].area_code
+	area = LevelCodeSerializer.deserialize_area_code(area_code)
+
+
+## campaign
+func is_hub_level() -> bool:
+	return is_campaign and level_id == hub_level
+
+
+func is_playing_hub_level() -> bool:
+	return is_hub_level() and is_playing_campaign()
+
+
+func is_playing_campaign() -> bool:
+	return is_campaign and selected_file > -1
+
+
+func get_meta_dict() -> Dictionary:
+	var save_folder: String = level_list_util.get_save_folder(working_folder, selected_file)
+	return save_meta_util.load_meta_file(save_folder)
+
+
+func get_meta_collectibles() -> Dictionary:
+	var meta_dict: Dictionary = get_meta_dict()
+	return save_meta_util.get_collectible_totals(meta_dict)
+
+
+## caching
+func get_cached_object(index: int):
+	if object_cache[index] != null:
+		return object_cache[index]
+	
+	var key: String = object_id_map.ids[index]
+	var path: String = "res://scenes/actors/objects/" + key + "/" + key + ".tscn"
+	
+	object_cache[index] = load(path)
+	return object_cache[index]
+
+
+func get_cached_background(index: int):
+	if background_cache.size() <= index or abs(index) > background_cache.size()-1:
+		index = 0
+	if background_cache[index] != null:
+		return background_cache[index]
+	
+	var key: String = background_id_mapper.ids[index]
+	var path: String = "res://scenes/shared/background/backgrounds/" + key + "/resource.tres"
+	
+	background_cache[index] = load(path)
+	return background_cache[index]
+
+
+func get_cached_foreground(index: int):
+	if foreground_cache.size() <= index or abs(index) > foreground_cache.size()-1:
+		index = 0
+	if foreground_cache[index] != null:
+		return foreground_cache[index]
+	
+	var key: String = foreground_id_mapper.ids[index]
+	var path: String = "res://scenes/shared/background/foregrounds/" + key + "/resource.tres"
+	
+	foreground_cache[index] = load(path)
+	return foreground_cache[index]
+
+
+## time score
+func reset_time_score():
+	time_score = 0
+
+
+func start_time_score():
+	reset_time_score()
+	unpause_time_score()
+
+
+func set_time_score_paused(paused: bool):
+	time_score_paused = paused
+
+
+func unpause_time_score():
+	time_score_paused = false
+
+
+func pause_time_score():
+	time_score_paused = true
+
+
+# TODO: star coins need new ID logic with the addition of missions
+func get_new_star_coin_id() -> int:
+	return 0
+#	var new_id = 0
+#	for area in CurrentLevelData.level_data.areas:
+#		for object in area.objects:
+#			if object.type_id == 52:
+#				last_star_coin_id += 1
+#	return last_star_coin_id
+
+
+func set_checkpoint_ids():
+	var checkpoint_id = 0
+#	for area in CurrentLevelData.level_data.areas:
+#		for object in area.objects:
+#			if object.type_id == 82:
+#				object.properties.resize(10)
+#				object.properties[9] = checkpoint_id
+#				checkpoint_id += 1
+	return checkpoint_id
