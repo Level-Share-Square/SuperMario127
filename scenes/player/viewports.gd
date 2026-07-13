@@ -8,7 +8,7 @@ onready var camera1 = $ViewportContainer/Viewport/CameraP1
 onready var world = $ViewportContainer/Viewport/Area
 onready var player1 = $ViewportContainer/Viewport/Area/Character
 
-export var character_scene_path : String
+export var character_scene_path: String
 
 var player1_spawn = Vector2(0, 0)
 var player2_spawn = Vector2(0, 0)
@@ -47,10 +47,8 @@ func remove_player():
 		
 		queue_free()
 
-func _ready():
-	player1.character = Singleton.PlayerSettings.player1_character
-	player1.number_of_players = Singleton.PlayerSettings.number_of_players
-	for object in CurrentLevelData.area.get_objects_on_ground():
-		if object.metadata.type_id == 0:
-			player1_spawn = object.metadata.position
-			player1.spawn_pos = player1_spawn
+#func _ready():
+#
+#	if Singleton.PlayerSettings.number_of_players == 1:
+#		Singleton.PlayerSettings.number_of_players = 2
+#		remove_player()

@@ -7,10 +7,10 @@ const coin_anim_fps = 12
 onready var tick_sound = $SharedSounds/TickSound
 onready var tick_end_sound = $SharedSounds/TickEndSound
 
-export var character : NodePath
-export var camera : NodePath
-export var shared : NodePath
-export var backgrounds : NodePath
+export var character: NodePath
+export var camera: NodePath
+export var shared: NodePath
+export var backgrounds: NodePath
 
 var ssc_displayed = true
 
@@ -79,6 +79,13 @@ func _ready():
 	CurrentLevelData.vars.teleporters = []
 	CurrentLevelData.vars.liquids = []
 	CurrentLevelData.vars.checkpoints = []
+	
+	var player_char = get_node(character)
+	player_char.character = Singleton.PlayerSettings.player1_character
+	player_char.number_of_players = Singleton.PlayerSettings.number_of_players
+	for object in CurrentLevelData.area.get_objects_on_ground():
+		if object.metadata.type_id == 0:
+			player_char.spawn_pos = object.metadata.position
 	
 	Singleton.MiscShared.is_play_reload = true
 	get_tree().paused = false

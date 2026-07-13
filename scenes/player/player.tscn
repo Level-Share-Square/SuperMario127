@@ -1239,11 +1239,11 @@ extents = Vector2( 393, 216 )
 
 [node name="Player" type="Node2D"]
 script = ExtResource( 1 )
-nodes_to_load = [ NodePath("Viewports/ViewportContainer/Viewport/Area/LevelShared"), NodePath("Viewports/ViewportContainer/Viewport/Area/Character"), NodePath("Viewports/ViewportContainer/Viewport/CameraP1"), NodePath("Viewports/ViewportContainer/Viewport/Backgrounds") ]
-character = NodePath("Viewports/ViewportContainer/Viewport/Area/Character")
-camera = NodePath("Viewports/ViewportContainer/Viewport/CameraP1")
-shared = NodePath("Viewports/ViewportContainer/Viewport/Area/LevelShared")
-backgrounds = NodePath("Viewports/ViewportContainer/Viewport/Backgrounds")
+nodes_to_load = [ NodePath("Area/LevelShared"), NodePath("Area/Character"), NodePath("CameraP1"), NodePath("Backgrounds") ]
+character = NodePath("Area/Character")
+camera = NodePath("CameraP1")
+shared = NodePath("Area/LevelShared")
+backgrounds = NodePath("Backgrounds")
 
 [node name="PhotoModeController" type="Node" parent="."]
 pause_mode = 2
@@ -1324,7 +1324,7 @@ anims/collect = SubResource( 217 )
 anims/RESET = SubResource( 227 )
 anims/transition = SubResource( 228 )
 script = ExtResource( 31 )
-character_path = NodePath("../../../../../../../Viewports/ViewportContainer/Viewport/Area/Character")
+character_path = NodePath("../../../../../../../Area/Character")
 
 [node name="Fadeout" type="AnimationPlayer" parent="UIUnder/HUD/Control/TimerManager/RadialTimers/PurpleStarbits"]
 anims/RESET = SubResource( 218 )
@@ -2366,9 +2366,86 @@ visible = false
 __meta__ = {
 "_edit_lock_": true
 }
-character_path = NodePath("../../Viewports/ViewportContainer/Viewport/Area/Character")
+character_path = NodePath("../../Area/Character")
+
+[node name="CameraP1" type="Camera2D" parent="."]
+pause_mode = 2
+position = Vector2( 0, -80 )
+rotating = true
+current = true
+process_mode = 0
+limit_left = 0
+limit_top = 0
+limit_right = 960
+limit_bottom = 960
+smoothing_enabled = true
+smoothing_speed = 15.0
+drag_margin_left = 0.0
+drag_margin_top = 0.0
+drag_margin_right = 0.0
+drag_margin_bottom = 0.0
+editor_draw_screen = false
+script = ExtResource( 4 )
+character = NodePath("../Area/Character")
+background = NodePath("../Backgrounds")
+
+[node name="ZoomTween" type="Tween" parent="CameraP1"]
+
+[node name="CutsceneTween" type="Tween" parent="CameraP1"]
+pause_mode = 2
+
+[node name="Area2D" type="Area2D" parent="CameraP1"]
+collision_layer = 0
+collision_mask = 2048
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraP1/Area2D"]
+visible = false
+shape = SubResource( 18 )
+
+[node name="Area" type="Node2D" parent="."]
+script = ExtResource( 21 )
+
+[node name="Character" parent="Area" instance=ExtResource( 3 )]
+collision_exceptions = [ NodePath("") ]
+
+[node name="LevelShared" parent="Area" instance=ExtResource( 2 )]
+
+[node name="Backgrounds" parent="." instance=ExtResource( 13 )]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 60
+script = ExtResource( 22 )
+
+[node name="Health" parent="CanvasLayer" instance=ExtResource( 17 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 688.0
+margin_top = 14.0
+margin_right = 752.0
+margin_bottom = 78.0
+character_path = NodePath("../../Area/Character")
+
+[node name="Fludd" parent="CanvasLayer" instance=ExtResource( 23 )]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -66.0
+margin_top = -66.0
+margin_right = -26.0
+margin_bottom = -16.0
+character_path = NodePath("../../Area/Character")
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+layer = 60
+
+[node name="Stamina" parent="CanvasLayer2" instance=ExtResource( 24 )]
+character_path = NodePath("../../Area/Character")
+camera_path = NodePath("../../CameraP1")
+viewport_offset = Vector2( 192, 216 )
 
 [node name="Viewports" type="HBoxContainer" parent="."]
+visible = false
 margin_right = 772.0
 margin_bottom = 432.0
 mouse_filter = 2
@@ -2396,83 +2473,7 @@ __meta__ = {
 [node name="Viewport" type="Viewport" parent="Viewports/ViewportContainer"]
 size = Vector2( 772, 432 )
 handle_input_locally = false
-render_target_update_mode = 3
-
-[node name="CameraP1" type="Camera2D" parent="Viewports/ViewportContainer/Viewport"]
-pause_mode = 2
-position = Vector2( 0, -80 )
-rotating = true
-current = true
-process_mode = 0
-limit_left = 0
-limit_top = 0
-limit_right = 960
-limit_bottom = 960
-smoothing_enabled = true
-smoothing_speed = 15.0
-drag_margin_left = 0.0
-drag_margin_top = 0.0
-drag_margin_right = 0.0
-drag_margin_bottom = 0.0
-editor_draw_screen = false
-script = ExtResource( 4 )
-character = NodePath("../Area/Character")
-background = NodePath("../Backgrounds")
-
-[node name="ZoomTween" type="Tween" parent="Viewports/ViewportContainer/Viewport/CameraP1"]
-
-[node name="CutsceneTween" type="Tween" parent="Viewports/ViewportContainer/Viewport/CameraP1"]
-pause_mode = 2
-
-[node name="Area2D" type="Area2D" parent="Viewports/ViewportContainer/Viewport/CameraP1"]
-collision_layer = 0
-collision_mask = 2048
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Viewports/ViewportContainer/Viewport/CameraP1/Area2D"]
-visible = false
-shape = SubResource( 18 )
-
-[node name="Area" type="Node2D" parent="Viewports/ViewportContainer/Viewport"]
-script = ExtResource( 21 )
-
-[node name="Character" parent="Viewports/ViewportContainer/Viewport/Area" instance=ExtResource( 3 )]
-collision_exceptions = [ NodePath("") ]
-
-[node name="LevelShared" parent="Viewports/ViewportContainer/Viewport/Area" instance=ExtResource( 2 )]
-
-[node name="Backgrounds" parent="Viewports/ViewportContainer/Viewport" instance=ExtResource( 13 )]
-
-[node name="CanvasLayer" type="CanvasLayer" parent="Viewports/ViewportContainer"]
-layer = 60
-script = ExtResource( 22 )
-
-[node name="Health" parent="Viewports/ViewportContainer/CanvasLayer" instance=ExtResource( 17 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 688.0
-margin_top = 14.0
-margin_right = 752.0
-margin_bottom = 78.0
-character_path = NodePath("../../Viewport/Area/Character")
-
-[node name="Fludd" parent="Viewports/ViewportContainer/CanvasLayer" instance=ExtResource( 23 )]
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -66.0
-margin_top = -66.0
-margin_right = -26.0
-margin_bottom = -16.0
-character_path = NodePath("../../Viewport/Area/Character")
-
-[node name="CanvasLayer2" type="CanvasLayer" parent="Viewports/ViewportContainer"]
-layer = 60
-
-[node name="Stamina" parent="Viewports/ViewportContainer/CanvasLayer2" instance=ExtResource( 24 )]
-character_path = NodePath("../../Viewport/Area/Character")
-camera_path = NodePath("../../Viewport/CameraP1")
-viewport_offset = Vector2( 192, 216 )
+render_target_update_mode = 0
 
 [node name="SharedSounds" type="Node" parent="."]
 unique_name_in_owner = true
