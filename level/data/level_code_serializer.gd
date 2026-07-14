@@ -192,7 +192,7 @@ static func deserialize_data_code(data_code: String):
 			return int(data)
 		# bool
 		"B":
-			return bool(data)
+			return int(data) != 0
 		# float
 		"F":
 			return float(data)

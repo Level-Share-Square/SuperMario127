@@ -1,5 +1,5 @@
 class_name LevelGroundLayer
-extends Node2D
+extends LevelLayer
 
 
 onready var tile_map_manager: TileMapManager = $"%TileMapManager"

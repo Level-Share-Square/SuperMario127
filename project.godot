@@ -554,7 +554,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://util/new/level_decoder.gd"
 }, {
-"base": "Node2D",
+"base": "LevelLayer",
 "class": "LevelGroundLayer",
 "language": "GDScript",
 "path": "res://scenes/shared/layers/ground_layer/ground_layer.gd"
@@ -563,6 +563,11 @@ _global_script_classes=[ {
 "class": "LevelInfo",
 "language": "GDScript",
 "path": "res://classes/LevelInfo.gd"
+}, {
+"base": "Node2D",
+"class": "LevelLayer",
+"language": "GDScript",
+"path": "res://scenes/shared/layers/level_layer.gd"
 }, {
 "base": "Node",
 "class": "LevelListHandler",
@@ -574,7 +579,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://level/models/level/level_metadata.gd"
 }, {
-"base": "ParallaxBackground",
+"base": "LevelLayer",
 "class": "LevelParallaxLayer",
 "language": "GDScript",
 "path": "res://scenes/shared/layers/parallax_layer/parallax_layer.gd"
@@ -674,7 +679,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://level/ObjectDataOld.gd"
 }, {
-"base": "Reference",
+"base": "Node2D",
 "class": "ObjectManager",
 "language": "GDScript",
 "path": "res://scenes/shared/layers/object_manager.gd"
@@ -959,7 +964,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/shared/tilemap_layer.gd"
 }, {
-"base": "Reference",
+"base": "TileMap",
 "class": "TileMapManager",
 "language": "GDScript",
 "path": "res://scenes/shared/layers/tile_map_manager.gd"
@@ -1246,6 +1251,7 @@ _global_script_class_icons={
 "LevelDecoder": "",
 "LevelGroundLayer": "",
 "LevelInfo": "",
+"LevelLayer": "",
 "LevelListHandler": "",
 "LevelMetadata": "",
 "LevelParallaxLayer": "",
