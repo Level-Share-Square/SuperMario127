@@ -47,5 +47,34 @@ static func get_serialized_tiles(tile_chunks: Dictionary) -> PoolByteArray:
 
 
 # Returns a chunk dictionary for TileData
-static func deserialize_tiles_into_chunks(tile_data: PoolByteArray) -> Dictionary:
-	return {}
+static func tile_bytes_to_chunks(tile_data: PoolByteArray) -> Dictionary:
+	var chunks: Dictionary = {}
+	var strip_start_coords: Vector2 = Vector2.ZERO
+	var coords: Vector2 = Vector2.ZERO
+	var next_strip: bool = true
+	
+	var i: int = 0
+	while (i < tile_data.size()):
+		if next_strip:
+			next_strip = false
+			strip_start_coords.x = tile_data[i] + (tile_data[i + 1] << 8)
+			strip_start_coords.y = tile_data[i + 2] + (tile_data[i + 3] << 8)
+			coords = strip_start_coords
+			i += 4
+		else:
+			if tile_data[i + 1] == 0xFF:
+				next_strip = true
+			else:
+				var chunk_coords: Vector2 = (coords / TileData.TILE_CHUNK_SIZE).floor()
+				var chunk: PoolIntArray = chunks.get_or_add(chunk_coords, PoolIntArray())
+				if chunk.empty():
+					chunk.resize(TileData.TILE_CHUNK_SIZE * TileData.TILE_CHUNK_SIZE)
+					chunk.fill(0)
+				
+				var tile_index: int = posmod(coords.x, TileData.TILE_CHUNK_SIZE) + posmod(coords.y, TileData.TILE_CHUNK_SIZE) * TileData.TILE_CHUNK_SIZE
+				chunk[tile_index] = tile_util.get_packed_tile(tile_data[i], tile_data[i + 1], tile_data[i + 2])
+				
+				coords.x += 1
+				i += 4
+	
+	return chunks

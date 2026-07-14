@@ -41,16 +41,16 @@ static func deserialize_area_code(area_code: String) -> AreaData:
 	var layers = deserialize_layers_code(layers_code)
 		
 	return AreaData.new(area_header, layers)
-	
-	
+
+
 static func deserialize_layers_code(layers_code: String) -> Array:
 	var layers_code_array = LevelCodeTokenizer.splice_layers(layers_code)
 	var layers = []
 	for layer in layers_code_array:
 		layers.push_back(deserialize_layer_code(layer))
 	return layers
-	
-	
+
+
 static func deserialize_layer_code(layer_code: String) -> LayerData:
 	var layer_metadata_code = LevelCodeTokenizer.splice_metadata(layer_code)
 	var layer_components = LevelCodeTokenizer.splice_layer_components(layer_code)
@@ -66,8 +66,8 @@ static func deserialize_layer_code(layer_code: String) -> LayerData:
 		tile_data.set_tile(tile[3], tile[0], tile[1], tile[2])
 	
 	return LayerData.new(layer_metadata, tile_data, objects)
-	
-	
+
+
 static func deserialize_tiles_code(tiles_code: String) -> Array:
 	var tiles_code_array = LevelCodeTokenizer.splice_tiles(tiles_code)
 	var tiles = []
@@ -86,8 +86,8 @@ static func deserialize_tile_code(tile_code: String) -> Array:
 	var pos = data[3]
 	
 	return [tileset_id, tile_type, palette, pos]
-	
-	
+
+
 static func deserialize_objects_code(objects_code: String) -> Array:
 	var objects_code_array = LevelCodeTokenizer.splice_objects(objects_code)
 	var objects = []
@@ -95,8 +95,8 @@ static func deserialize_objects_code(objects_code: String) -> Array:
 		objects.push_back(deserialize_object_code(object))
 	
 	return objects
-	
-	
+
+
 static func deserialize_object_code(object_code: String) -> ObjectData:
 	var object_metadata_code = LevelCodeTokenizer.splice_metadata(object_code)
 	var object_var_code = LevelCodeTokenizer.splice_object(object_code)
@@ -105,8 +105,8 @@ static func deserialize_object_code(object_code: String) -> ObjectData:
 	var object_vars = deserialize_datas_code(object_var_code)
 	
 	return ObjectData.new(object_metadata, object_vars)
-	
-	
+
+
 static func deserialize_level_metadata_code(level_metadata_code: String) -> LevelMetadata:
 	var vars = deserialize_datas_code(level_metadata_code)
 	
@@ -119,8 +119,8 @@ static func deserialize_level_metadata_code(level_metadata_code: String) -> Leve
 	var level_thumbnail_background_palette = vars[6]
 	
 	return LevelMetadata.new(level_name, level_author, level_description, level_thumbnail_url, level_thumbnail_sky, level_thumbnail_background, level_thumbnail_background_palette)
-	
-	
+
+
 # !! Takes full area code as input! so that the area code can be stored as a variable
 static func deserialize_area_header_code(area_code: String) -> AreaHeader:
 	var area_metadata_code = LevelCodeTokenizer.splice_metadata(area_code)
@@ -136,10 +136,10 @@ static func deserialize_area_header_code(area_code: String) -> AreaHeader:
 	var timer: float = vars[7]
 	var music = vars[8]
 	var underwater_music: String = vars[9]
-
+	
 	return AreaHeader.new(area_code, bounds, name, sky, background, background_palette, bg_autoscroll_speed, gravity, timer, music, underwater_music)
-	
-	
+
+
 static func deserialize_layer_metadata_code(layer_metadata_code: String) -> LayerMetadata:
 	var vars = deserialize_datas_code(layer_metadata_code)
 	
@@ -151,8 +151,8 @@ static func deserialize_layer_metadata_code(layer_metadata_code: String) -> Laye
 	var activated_mission_id: PoolIntArray = vars[5]
 	
 	return LayerMetadata.new(parallax_distance, autoset_tint, layer_tint, order, is_ground, activated_mission_id)
-	
-	
+
+
 static func deserialize_object_metadata_code(object_metadata_code: String) -> ObjectMetadata:
 	var vars = deserialize_datas_code(object_metadata_code)
 	
@@ -162,7 +162,8 @@ static func deserialize_object_metadata_code(object_metadata_code: String) -> Ob
 	var position: Vector2 = vars[3]
 	
 	return ObjectMetadata.new(position, type_id, enabled, palette)
-	
+
+
 # basically, this is the finest grain part of the level code; we are just looking at primitive values
 # pass in a list of primitive values to this function and it will interpret them
 static func deserialize_datas_code(datas_code: String) -> Array:
@@ -172,8 +173,8 @@ static func deserialize_datas_code(datas_code: String) -> Array:
 		vars.push_back(deserialize_data_code(v))
 		
 	return vars
-	
-	
+
+
 static func deserialize_data_code(data_code: String):
 	var type_code = data_code.substr(0, 1)
 	var data = ""
@@ -226,6 +227,8 @@ static func deserialize_data_code(data_code: String):
 		"aV":
 			data = LevelCodeTokenizer.splice_data_array(data)
 			return PoolVector2Array(deserialize_datas_code(data))
+		"aB":
+			return data.to_wchar()
 		 # Rect2
 		"R":
 			data = LevelCodeTokenizer.splice_data_array(data)
@@ -244,6 +247,14 @@ static func deserialize_data_code(data_code: String):
 				curve.add_point(points[i], point_ins[i], point_outs[i])
 			
 			return curve
+		# TileData
+		"T":
+			data = deserialize_data_code(data)
+			
+			var tile_data: TileData = TileData.new()
+			tile_data.chunks = tile_util.tile_bytes_to_chunks(data)
+			
+			return tile_data
 		# Dialogue; not implemented yet
 #		"D":
 #			data = LevelCodeTokenizer.splice_data_array(data)
