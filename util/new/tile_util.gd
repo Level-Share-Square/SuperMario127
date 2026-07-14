@@ -7,6 +7,7 @@ extends Object
 # converting from 127's tile set ids to Godot's tile set IDs.
 
 
+const TILE_CHUNK_SIZE: int = 16
 const TILE_IDS: Array = preload("res://generation/tileset_ids.res").tileset_ids
 
 
@@ -65,14 +66,14 @@ static func tile_bytes_to_chunks(tile_data: PoolByteArray) -> Dictionary:
 			if tile_data[i + 1] == 0xFF:
 				next_strip = true
 			else:
-				var chunk_coords: Vector2 = (coords / TileData.TILE_CHUNK_SIZE).floor()
+				var chunk_coords: Vector2 = (coords / TILE_CHUNK_SIZE).floor()
 				var chunk: PoolIntArray = chunks.get_or_add(chunk_coords, PoolIntArray())
 				if chunk.empty():
-					chunk.resize(TileData.TILE_CHUNK_SIZE * TileData.TILE_CHUNK_SIZE)
+					chunk.resize(TILE_CHUNK_SIZE * TILE_CHUNK_SIZE)
 					chunk.fill(0)
 				
-				var tile_index: int = posmod(coords.x, TileData.TILE_CHUNK_SIZE) + posmod(coords.y, TileData.TILE_CHUNK_SIZE) * TileData.TILE_CHUNK_SIZE
-				chunk[tile_index] = tile_util.get_packed_tile(tile_data[i], tile_data[i + 1], tile_data[i + 2])
+				var tile_index: int = posmod(coords.x, TILE_CHUNK_SIZE) + posmod(coords.y, TILE_CHUNK_SIZE) * TILE_CHUNK_SIZE
+				chunk[tile_index] = get_packed_tile(tile_data[i], tile_data[i + 1], tile_data[i + 2])
 				
 				coords.x += 1
 				i += 4
