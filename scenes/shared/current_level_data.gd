@@ -1,6 +1,13 @@
 extends Node
 
 
+const DEFAULT_CODE_PATH: String = "res://level/default_level.tres"
+const DEFAULT_NAME: String = "My Level"
+const DEFAULT_AUTHOR: String = "Unknown"
+const DEFAULT_DESCRIPTION: String = "This level has no description."
+const DEFAULT_THUMBNAIL_URL: String = ""
+
+
 var level_id: String
 var working_folder: String = level_list_util.BASE_FOLDER
 var hub_level: String = ""

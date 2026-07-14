@@ -90,7 +90,7 @@ func setup_level(level_info: LevelInfo, level_id: String, working_folder: String
 	CurrentLevelData.selected_file = selected_file
 	
 	CurrentLevelData.level_info.selected_shine = -1
-	CurrentLevelData.area = 0
+	CurrentLevelData.load_level_area(0)
 	
 	if not CurrentLevelData.level_transition_data.empty():
 		CurrentLevelData.area = CurrentLevelData.level_transition_data.get("target_area", 0)
