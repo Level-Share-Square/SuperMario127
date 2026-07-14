@@ -238,7 +238,7 @@ func copy():
 				var data: ObjectDataOld = i.level_object.get_ref()
 				var properties: Array = []
 				for property in data.properties:
-					properties.append(value_util.encode_value(property))
+					properties.append(old_value_util.encode_value(property))
 				copied_objects.append({"type_id": data.type_id, "palette": data.palette, "properties": properties})
 			OS.set_clipboard(JSON.print(copied_objects))
 			item_actions.verify_clipboard()
@@ -252,7 +252,7 @@ func generate_object_data():
 			var object_data = ObjectDataOld.new()
 			var properties: Array = []
 			for property in i["properties"]:
-				properties.append(value_util.decode_value(property))
+				properties.append(old_value_util.decode_value(property))
 			object_data.properties = properties
 			object_data.palette = i["palette"]
 			object_data.type_id = i["type_id"]

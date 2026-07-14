@@ -35,12 +35,12 @@ func update_palette(new_index : int):
 	icon = palette_icons[palette_index]
 	preview = palette_previews[palette_index]
 
-func on_place(position: Vector2, level_data: LevelDataOld, level_area: LevelAreaOld):
-	if is_instance_valid(placement_action):
-		return placement_action.new().act(get_tree().current_scene, position, level_data, level_area)
-	return true
-
-func on_erase(position: Vector2, level_data: LevelDataOld, level_area: LevelAreaOld):
-	if is_instance_valid(removal_action):
-		return removal_action.new().act(get_tree().current_scene, position, level_data, level_area)
-	return true
+#func on_place(position: Vector2, level_data: LevelDataOld, level_area: LevelAreaOld):
+#	if is_instance_valid(placement_action):
+#		return placement_action.new().act(get_tree().current_scene, position, level_data, level_area)
+#	return true
+#
+#func on_erase(position: Vector2, level_data: LevelDataOld, level_area: LevelAreaOld):
+#	if is_instance_valid(removal_action):
+#		return removal_action.new().act(get_tree().current_scene, position, level_data, level_area)
+#	return true

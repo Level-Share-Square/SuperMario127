@@ -310,6 +310,113 @@ static func convert_054_to_055(result):
 	return result
 
 
+static func get_level_metadata_from_old_data(level_data) -> LevelMetadata:
+	var starting_area: AreaDataOld = level_data.areas[0]
+	return LevelMetadata.new(
+		level_data.name,
+		level_data.author,
+		level_data.description,
+		level_data.thumbnail_url,
+		starting_area.sky,
+		starting_area.background,
+		starting_area.background_palette
+	)
+
+
+static func get_editor_data_from_old_data(level_data) -> SavedEditorData:
+	var editor_data: SavedEditorData = SavedEditorData.new()
+	
+	return editor_data
+
+
+static func get_mission_data_from_old_data(level_data) -> Array:
+	var mission_data: Array = []
+	
+	return mission_data
+
+
+static func get_area_headers_from_old_data(level_data) -> Array:
+	var area_headers: Array = []
+	
+	var area_header: AreaHeader
+	for old_area in level_data.areas:
+		old_area = old_area as AreaDataOld
+		area_header = AreaHeader.new(
+			"",
+			old_area.bounds,
+			old_area.name,
+			old_area.sky,
+			old_area.background,
+			old_area.background_palette,
+			old_area.bg_autoscroll_speed,
+			old_area.gravity,
+			old_area.timer,
+			old_area.music,
+			old_area.underwater_music
+		)
+		
+		area_header.area_code = get_new_area_code(area_header, old_area)
+		
+		area_headers.append(area_header)
+	
+	return area_headers
+
+
+static func get_new_area_code(header: AreaHeader, old_area: AreaDataOld) -> String:
+	var area_data: AreaData = AreaData.new(header, [])
+	
+	var layers: Dictionary = {}
+	var ground: LayerData = layers.get_or_add(0, LayerData.new(LayerMetadata.new(), TileData.new()))
+	ground.layer_metadata.is_ground = true
+	for chunk_key in old_area.tile_chunks:
+		var layer: int = int(chunk_key.substr(4, 1))
+		var layer_data: LayerData = layers.get_or_add(layer, LayerData.new(LayerMetadata.new(), TileData.new()))
+		if layer_data != ground:
+			layer_data.layer_metadata.is_ground == false
+		print(chunk_key.substr(2, 1))
+		var chunk_coord: Vector2 = Vector2(int(chunk_key.substr(0, 1)), int(chunk_key.substr(2, 1)))
+		var new_chunk_data: PoolIntArray = PoolIntArray()
+		for tile in old_area.tile_chunks.get(chunk_key):
+			if is_instance_valid(tile):
+				new_chunk_data.append(tile_util.get_packed_tile(tile[0], tile[1], tile[2]))
+		
+		layer_data.tile_data.set_chunk_data(chunk_coord, new_chunk_data)
+	
+	for old_object in old_area.objects:
+		old_object = old_object as ObjectDataOld
+		var position: Vector2 = old_object.properties.pop_at(0)
+		var enabled: bool = old_object.properties.pop_at(3 - 1)
+		var property_dictionary: Dictionary = {}
+		for i in old_object.properties.size():
+			property_dictionary.get_or_add(i, old_object.properties[i])
+		
+		var new_object: ObjectData = ObjectData.new(
+			ObjectMetadata.new(
+				position,
+				old_object.type_id,
+				enabled,
+				old_object.palette
+			), 
+			property_dictionary
+		)
+		ground.object_data.append(new_object)
+	
+	area_data.layers = layers.values()
+	
+	return LevelCodeSerializer.serialize_area(area_data)
+
+
+static func get_new_level_data_from_old_data(level_data) -> LevelDataContainer:
+	var container: LevelDataContainer = LevelDataContainer.new(
+		get_level_metadata_from_old_data(level_data),
+		get_editor_data_from_old_data(level_data),
+		get_mission_data_from_old_data(level_data),
+		get_area_headers_from_old_data(level_data)
+	)
+	
+	return container
+
+
 static func compare_versions(version, other) -> int:
 	var v = version.split(".")
 	var o = other.split(".")
@@ -319,14 +426,14 @@ static func compare_versions(version, other) -> int:
 	for i in range(3):
 		var nv = int(v[i])
 		var no = int(o[i])
-		if(nv<no):
-			return -1 #smaller version
+		if(nv < no):
+			return -1 # smaller version
 		# so originally this was a lower than symbol again instead of a greater than symbol like it should be?
 		# that caused me quite a fair deal of annoyance... and it was over one character,, (dies)
-		if(nv>no):
-			return 1 #bigger version
+		if(nv > no):
+			return 1 # bigger version
 
-	return 0 #same version
+	return 0 # same version
 
 
 static func get_chunk_tile_id(chunk : String):

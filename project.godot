@@ -402,7 +402,7 @@ _global_script_classes=[ {
 "base": "Node2D",
 "class": "GameObject",
 "language": "GDScript",
-"path": "res://classes/GameObject.gd"
+"path": "res://scenes/shared/game_object.gd"
 }, {
 "base": "Resource",
 "class": "GameState",
@@ -1109,6 +1109,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://util/new/levels_list/lss_link_util.gd"
 }, {
+"base": "Object",
+"class": "old_value_util",
+"language": "GDScript",
+"path": "res://util/value_util.gd"
+}, {
 "base": "Reference",
 "class": "save_meta_util",
 "language": "GDScript",
@@ -1133,11 +1138,6 @@ _global_script_classes=[ {
 "class": "uuid_util",
 "language": "GDScript",
 "path": "res://util/uuid_util.gd"
-}, {
-"base": "Reference",
-"class": "value_util",
-"language": "GDScript",
-"path": "res://util/value_util.gd"
 } ]
 _global_script_class_icons={
 "AccountInfo": "",
@@ -1360,12 +1360,12 @@ _global_script_class_icons={
 "level_list_util": "",
 "line_util": "",
 "lss_link_util": "",
+"old_value_util": "",
 "save_meta_util": "",
 "sort_file_util": "",
 "text_replace_util": "",
 "tile_util": "",
-"uuid_util": "",
-"value_util": ""
+"uuid_util": ""
 }
 
 [application]

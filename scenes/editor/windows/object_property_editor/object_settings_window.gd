@@ -51,7 +51,7 @@ func load_objects(_objects: Dictionary):
 			var property: Array = [
 				_property, 
 				typeof(game_object[_property]), 
-				game_object.property_info[index] if typeof(game_object[_property]) != 17 else value_util.encode_value(curve)
+				game_object.property_info[index] if typeof(game_object[_property]) != 17 else old_value_util.encode_value(curve)
 			]
 			if not property in common_properties:
 				common_properties.append(property)

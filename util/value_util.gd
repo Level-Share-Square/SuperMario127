@@ -1,4 +1,5 @@
-class_name value_util
+class_name old_value_util
+extends Object
 
 static func get_true_value(value):
 #	if typeof(value) == TYPE_DICTIONARY:

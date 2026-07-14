@@ -50,7 +50,7 @@ func create_object(object, add_to_data):
 		
 		var index = 0
 		for value in object.properties:
-			var true_value = value_util.get_true_value(value)
+			var true_value = old_value_util.get_true_value(value)
 			object_node.set_property_by_index(index, true_value, false)
 			index += 1
 		

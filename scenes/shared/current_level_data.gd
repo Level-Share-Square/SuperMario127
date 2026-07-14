@@ -83,18 +83,25 @@ func _process(delta: float) -> void:
 
 
 ## loading
-func load_level_metadata(code: String, is_spliced: bool = false) -> void:
 	if not is_spliced:
 		code = LevelCodeTokenizer.splice_level(code)
 	
 	var metadata_code = LevelCodeTokenizer.splice_metadata(code)
 	level_metadata = LevelCodeSerializer.deserialize_level_metadata_code(metadata_code)
+func load_level_metadata(code: String) -> void:
 
 
 func load_level_headers(code: String) -> void:
+	if code.substr(0, 2) != "[{":
+		var level_data: LevelData = LevelData.new(code)
+		level_data.load_in(code)
+		
+		var container: LevelDataContainer = conversion_util.get_new_level_data_from_old_data(level_data)
+		code = container.serialize()
+	
 	code = LevelCodeTokenizer.splice_level(code)
 	
-	load_level_metadata(code, true)
+	load_level_metadata(code)
 	
 	var components_code = LevelCodeTokenizer.splice_level_components(code)
 	var editor_data_code = components_code[2]

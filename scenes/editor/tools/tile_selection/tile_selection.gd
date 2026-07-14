@@ -176,15 +176,15 @@ func _on_Paste_pressed():
 		var raw_tiles = result[0]
 		var tiles: Dictionary
 		for tile_pos in raw_tiles:
-			tiles[get_tile_ver((value_util.decode_value(tile_pos) + camera.position))/32] = raw_tiles[tile_pos]
+			tiles[get_tile_ver((old_value_util.decode_value(tile_pos) + camera.position))/32] = raw_tiles[tile_pos]
 		if typeof(tiles) == TYPE_DICTIONARY:
 			pasted = true
 			editor.selected_tiles = tiles
 			set_initial_buffer()
 			selection_box.show()
-			selection_box.rect_position = get_tile_ver(value_util.decode_value(result[1][0]) + camera.position)
-			selection_box.rect_scale = value_util.decode_value(result[1][1])
-			selection_box.rect_size = value_util.decode_value(result[1][2])
+			selection_box.rect_position = get_tile_ver(old_value_util.decode_value(result[1][0]) + camera.position)
+			selection_box.rect_scale = old_value_util.decode_value(result[1][1])
+			selection_box.rect_size = old_value_util.decode_value(result[1][2])
 			selection_box.rect_rotation = result[1][3]
 
 
@@ -192,8 +192,8 @@ func _on_Copy_button_down():
 	if editor.tool_manager.current_tool == self:
 		var tiles: Dictionary
 		for tile_pos in editor.selected_tiles:
-			tiles[value_util.encode_value(tile_pos*32 - camera.position)] = editor.selected_tiles[tile_pos]
-		OS.set_clipboard(JSON.print([tiles, [value_util.encode_value(Vector2(round(selection_box.rect_position.x - camera.position.x), round(selection_box.rect_position.y - camera.position.y))), value_util.encode_value(selection_box.rect_scale), value_util.encode_value(selection_box.rect_size), selection_box.rect_rotation]]))
+			tiles[old_value_util.encode_value(tile_pos*32 - camera.position)] = editor.selected_tiles[tile_pos]
+		OS.set_clipboard(JSON.print([tiles, [old_value_util.encode_value(Vector2(round(selection_box.rect_position.x - camera.position.x), round(selection_box.rect_position.y - camera.position.y))), old_value_util.encode_value(selection_box.rect_scale), old_value_util.encode_value(selection_box.rect_size), selection_box.rect_rotation]]))
 
 
 

@@ -10,7 +10,7 @@ func change_property(new_value):
 
 func load_property(_editor: Editor, _objects: Dictionary, _property: Array):
 	.load_property(_editor, _objects, _property)
-	init_curve = value_util.decode_value(_property[2])
+	init_curve = old_value_util.decode_value(_property[2])
 	
 func begin_curve():
 	editor.get_node("%UI").visible = false

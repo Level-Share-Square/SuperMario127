@@ -48,6 +48,8 @@ func get_area(result) -> AreaDataOld:
 	area.background_tiles.clear()
 	area.very_background_tiles.clear()
 	
+	area.bounds.size = result.size
+	
 	area.sky = result.sky
 	area.background = result.background
 	area.background_palette = result.background_palette
@@ -63,8 +65,7 @@ func get_area(result) -> AreaDataOld:
 		result.background_tiles, 
 		result.foreground_tiles, 
 		result.very_foreground_tiles, 
-		result.very_background_tiles], 
-
+		result.very_background_tiles],
 		area.bounds.size)
 
 	# for very_foreground_tiles_result in result.very_foreground_tiles:
@@ -172,76 +173,110 @@ func get_object(result) -> ObjectDataOld:
 	return object
 
 
-#func load_in(code):
-#	print("loading in level data...")
-#	vars = LevelVars.new()
-#
-#	var result
-#	result = level_code_util.decode(code)
-#
-#	if !check_code(result):
-#		return
-#
-#	if result.format_version == "0.4.0":
-#		result = conversion_util.convert_040_to_041(result)
-#
-#	if result.format_version == "0.4.1":
-#		result.format_version = "0.4.2"
-#
-#	if result.format_version == "0.4.2":
-#		result = conversion_util.convert_042_to_043(result)
-#
-#	if result.format_version == "0.4.3":
-#		result.format_version = "0.4.4"
-#
-#	if result.format_version == "0.4.4":
-#		result = conversion_util.convert_044_to_045(result)
-#
-#	if result.format_version == "0.4.5":
-#		result.format_version = "0.4.6"
-#
-#	if result.format_version == "0.4.6":
-#		result.format_version = "0.4.7"
-#
-#	if result.format_version == "0.4.7":
-#		result = conversion_util.convert_047_to_048(result)
-#
-#	if result.format_version == "0.4.8":
-#		result = conversion_util.convert_048_to_049(result)
-#
-#	if result.format_version == "0.4.9":
-#		result = conversion_util.convert_049_to_050(result)
-#
-#	if result.format_version == "0.5.0":
-#		result.format_version = "0.5.1"
-#
-#	if result.format_version == "0.5.1":
-#		result = conversion_util.convert_051_to_052(result)
-#
-#	if result.format_version == "0.5.2":
-#		result = conversion_util.convert_052_to_053(result)
-#
-#	assert(result.format_version)
-#	var version_int = result.format_version.replace(".","")
-#	var format_version = result.format_version
-#	name = result.name
-#
-#	if (version_int.is_valid_integer()):
-#		author = result.author
-#		description = result.description
-#		thumbnail_url = result.thumbnail_url
-#
-#	layout_ids = result.layout_ids
-#	layout_palettes = result.layout_palettes
-#	pinned_items = result.pinned_items
-#
-#	if format_version == current_format_version:
-#		for area_result in result.areas:
-#			if (area_result.size() == 6):
-#				var area = get_area(area_result)
-#				areas.append(area)
-#	else:
-#		print("Outdated format version. Current version is " + current_format_version + ", but course uses version " + format_version + ".")
+func load_in(code):
+	vars = LevelVars.new()
+
+	var result = level_code_util.decode(code)
+
+	if not result.has("format_version"):
+		result = {}
+		return
+
+	var starting_format_version = result.format_version
+
+	if result.has("decode_error"):
+		result = {}
+		return
+
+	if not check_code(result):
+		result = {}
+		return
+
+	if result.format_version == "0.4.0":
+		result = conversion_util.convert_040_to_041(result)
+
+	if result.format_version == "0.4.1":
+		result.format_version = "0.4.2"
+
+	if result.format_version == "0.4.2":
+		result = conversion_util.convert_042_to_043(result)
+
+	if result.format_version == "0.4.3":
+		result.format_version = "0.4.4"
+
+	if result.format_version == "0.4.4":
+		result = conversion_util.convert_044_to_045(result)
+
+	if result.format_version == "0.4.5":
+		result.format_version = "0.4.6"
+
+	if result.format_version == "0.4.6":
+		result.format_version = "0.4.7"
+
+	if result.format_version == "0.4.7":
+		result = conversion_util.convert_047_to_048(result)
+
+	if result.format_version == "0.4.8":
+		result = conversion_util.convert_048_to_049(result)
+
+	if result.format_version == "0.4.9":
+		result = conversion_util.convert_049_to_050(result)
+
+	if result.format_version == "0.5.0":
+		result.format_version = "0.5.1"
+
+	if result.format_version == "0.5.1":
+		result = conversion_util.convert_051_to_052(result)
+
+	if result.format_version == "0.5.2":
+		result = conversion_util.convert_052_to_053(result)
+
+	if result.format_version == "0.5.3":
+		if starting_format_version == "0.5.3":
+			result = conversion_util.convert_053_to_054(result)
+		else:
+			result.format_version = "0.5.4"
+
+	if result.format_version == "0.5.4":
+		result = conversion_util.convert_054_to_055(result)
+
+	assert(result.format_version)
+	var version_int = result.format_version.replace(".","")
+	var format_version = result.format_version
+	name = result.name
+
+	if (version_int.is_valid_integer()):
+		author = result.author
+		description = result.description
+		thumbnail_url = result.thumbnail_url
+
+	layout_ids = result.layout_ids
+	layout_palettes = result.layout_palettes
+	pinned_items = result.pinned_items
+
+	if result.has("loadouts"):
+		loadouts = result.loadouts
+		palettes = result.loadout_palettes
+		favorites = result.items_favorited
+		fav_items = result.fav_items
+
+	if format_version == current_format_version:
+		areas = []
+		for area_result in result.areas:
+			if (area_result.size() == 14):
+				var area = get_area(area_result)
+
+				if is_instance_valid(area):
+					areas.append(area)
+				else:
+					printerr("Found invalid area while parsing level code, area will be skipped.")
+			else:
+				printerr("Found invalid area while parsing level code, area will be skipped.")
+
+			print(area_result.size())
+	else:
+		print("Outdated format version. Current version is " \
+		+ current_format_version + ", but course uses version " + format_version + ".")
 
 
 func get_encoded_level_data():
@@ -277,16 +312,16 @@ func get_encoded_level_data():
 		level_string += "["
 		
 		# Settings
-		level_string += value_util.encode_value(area.bounds.size) + ","
+		level_string += old_value_util.encode_value(area.bounds.size) + ","
 		
-		level_string += value_util.encode_value(area.sky) + ","
-		level_string += value_util.encode_value(area.background) + ","
-		level_string += value_util.encode_value(area.music) + ","
-		level_string += value_util.encode_value(area.gravity) + ","
-		level_string += value_util.encode_value(area.background_palette) + ","
-		level_string += value_util.encode_value(area.timer) + ","
-		level_string += value_util.encode_value(area.name) + ","
-		level_string += value_util.encode_value(area.underwater_music) + "~"
+		level_string += old_value_util.encode_value(area.sky) + ","
+		level_string += old_value_util.encode_value(area.background) + ","
+		level_string += old_value_util.encode_value(area.music) + ","
+		level_string += old_value_util.encode_value(area.gravity) + ","
+		level_string += old_value_util.encode_value(area.background_palette) + ","
+		level_string += old_value_util.encode_value(area.timer) + ","
+		level_string += old_value_util.encode_value(area.name) + ","
+		level_string += old_value_util.encode_value(area.underwater_music) + "~"
 		
 		var tiles := []
 		var very_background_tiles := []
@@ -326,9 +361,9 @@ func get_encoded_level_data():
 			added_object += str(object.type_id) + ","
 			added_object += str(object.palette) + ","
 			
-			added_object += value_util.encode_value(value_util.get_true_value(object.properties[0]-area.bounds.position*32)) + ","
+			added_object += old_value_util.encode_value(old_value_util.get_true_value(object.properties[0]-area.bounds.position*32)) + ","
 			for i in range(1,object.properties.size()):
-				added_object += value_util.encode_value(value_util.get_true_value(object.properties[i])) + ","
+				added_object += old_value_util.encode_value(old_value_util.get_true_value(object.properties[i])) + ","
 			added_object.erase(added_object.length() - 1, 1)
 			level_string += added_object + "|"
 		level_string.erase(level_string.length() - 1, 1)
@@ -342,16 +377,16 @@ func get_encoded_area_data(area: AreaDataOld):
 	level_string += "LevelAreaOld_"
 	
 	# Settings
-	level_string += value_util.encode_value(area.bounds.size) + ","
+	level_string += old_value_util.encode_value(area.bounds.size) + ","
 	
-	level_string += value_util.encode_value(area.sky) + ","
-	level_string += value_util.encode_value(area.background) + ","
-	level_string += value_util.encode_value(area.music) + ","
-	level_string += value_util.encode_value(area.gravity) + ","
-	level_string += value_util.encode_value(area.background_palette) + ","
-	level_string += value_util.encode_value(area.timer) + ","
-	level_string += value_util.encode_value(area.name) + ","
-	level_string += value_util.encode_value(area.underwater_music) + "~"
+	level_string += old_value_util.encode_value(area.sky) + ","
+	level_string += old_value_util.encode_value(area.background) + ","
+	level_string += old_value_util.encode_value(area.music) + ","
+	level_string += old_value_util.encode_value(area.gravity) + ","
+	level_string += old_value_util.encode_value(area.background_palette) + ","
+	level_string += old_value_util.encode_value(area.timer) + ","
+	level_string += old_value_util.encode_value(area.name) + ","
+	level_string += old_value_util.encode_value(area.underwater_music) + "~"
 	
 	var tiles := []
 	var very_background_tiles := []
@@ -391,9 +426,9 @@ func get_encoded_area_data(area: AreaDataOld):
 		added_object += str(object.type_id) + ","
 		added_object += str(object.palette) + ","
 		
-		added_object += value_util.encode_value(value_util.get_true_value(object.properties[0]-area.bounds.position*32)) + ","
+		added_object += old_value_util.encode_value(old_value_util.get_true_value(object.properties[0]-area.bounds.position*32)) + ","
 		for i in range(1,object.properties.size()):
-			added_object += value_util.encode_value(value_util.get_true_value(object.properties[i])) + ","
+			added_object += old_value_util.encode_value(old_value_util.get_true_value(object.properties[i])) + ","
 		added_object.erase(added_object.length() - 1, 1)
 		level_string += added_object + "|"
 	level_string.erase(level_string.length() - 1, 1)
