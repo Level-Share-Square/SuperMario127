@@ -69,7 +69,7 @@ func load_tilesets():
 	ResourceSaver.save("res://generation/generated_tiles.res", tileset_resource)
 	
 	var palette_storage := Resource.new()
-	palette_storage.set_script(preload("res://generation/palettes.gd"))
+	palette_storage.set_script(preload("res://generation/tileset_ids.gd"))
 	palette_storage.tileset_ids = tileset_palettes
 	ResourceSaver.save("res://generation/tileset_ids.res", palette_storage)
 	
