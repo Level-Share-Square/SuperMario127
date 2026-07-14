@@ -8,6 +8,10 @@ extends Object
 
 
 const TILE_CHUNK_SIZE: int = 16
+const BYTES_PER_TILE: int = 3
+const CHUNK_HEADER_SIZE: int = 6
+# bounds size is 2^16 + 1 due to the right and bottom edges being exclusive
+const CHUNK_COORD_BOUNDS: Rect2 = Rect2(-32767, -32767, 65537, 65537) 
 const TILE_IDS: Array = preload("res://generation/tileset_ids.res").tileset_ids
 
 
@@ -42,40 +46,79 @@ static func get_real_tile_set_id(tileset_id: int, tile_id: int, palette_id: int 
 	return TILE_IDS[tileset_id][palette_id][tile_id]
 
 
-# Takes a chunk dictionary from TileData
-static func get_serialized_tiles(tile_chunks: Dictionary) -> PoolByteArray:
-	return PoolByteArray()
+# Takes a chunk dictionary and used tiles list from TileData
+static func chunks_to_tile_bytes(tile_chunks: Dictionary) -> PoolByteArray:
+	var tile_bytes: PoolByteArray = PoolByteArray()
+	
+	for chunk_coord in tile_chunks:
+		if not CHUNK_COORD_BOUNDS.has_point(chunk_coord):
+			# if the chunk isn't in at a in-bounds coord we just skip it
+			# that really shouldn't happen but it's a safety measure you know?
+			continue
+		
+		tile_bytes.append(int(chunk_coord.abs().x))
+		if chunk_coord.sign().x >= 0:
+			tile_bytes.append(int(chunk_coord.abs().x) >> 8)
+		else:
+			tile_bytes.append((int(chunk_coord.abs().x) >> 8) | 0b10000000)
+		
+		tile_bytes.append(int(chunk_coord.abs().y))
+		if chunk_coord.sign().y >= 0:
+			tile_bytes.append(int(chunk_coord.abs().y) >> 8)
+		else:
+			tile_bytes.append((int(chunk_coord.abs().y) >> 8) | 0b10000000)
+		
+		var chunk_buffer: PoolByteArray = PoolByteArray()
+		for tile in tile_chunks[chunk_coord]:
+			chunk_buffer.append(get_tile_set_id_from_packed(tile))
+			chunk_buffer.append(get_tile_id_from_packed(tile))
+			chunk_buffer.append(get_palette_id_from_packed(tile))
+		
+		chunk_buffer = chunk_buffer.compress(File.COMPRESSION_FASTLZ)
+		tile_bytes.append(chunk_buffer.size())
+		tile_bytes.append(chunk_buffer.size() >> 8)
+		print()
+		tile_bytes.append_array(chunk_buffer)
+	
+	return tile_bytes
 
 
 # Returns a chunk dictionary for TileData
-static func tile_bytes_to_chunks(tile_data: PoolByteArray) -> Dictionary:
+static func tile_bytes_to_chunks(tile_bytes: PoolByteArray) -> Dictionary:
 	var chunks: Dictionary = {}
-	var strip_start_coords: Vector2 = Vector2.ZERO
-	var coords: Vector2 = Vector2.ZERO
-	var next_strip: bool = true
 	
-	var i: int = 0
-	while (i < tile_data.size()):
-		if next_strip:
-			next_strip = false
-			strip_start_coords.x = tile_data[i] + (tile_data[i + 1] << 8)
-			strip_start_coords.y = tile_data[i + 2] + (tile_data[i + 3] << 8)
-			coords = strip_start_coords
-			i += 4
-		else:
-			if tile_data[i + 1] == 0xFF:
-				next_strip = true
-			else:
-				var chunk_coords: Vector2 = (coords / TILE_CHUNK_SIZE).floor()
-				var chunk: PoolIntArray = chunks.get_or_add(chunk_coords, PoolIntArray())
-				if chunk.empty():
-					chunk.resize(TILE_CHUNK_SIZE * TILE_CHUNK_SIZE)
-					chunk.fill(0)
-				
-				var tile_index: int = posmod(coords.x, TILE_CHUNK_SIZE) + posmod(coords.y, TILE_CHUNK_SIZE) * TILE_CHUNK_SIZE
-				chunk[tile_index] = get_packed_tile(tile_data[i], tile_data[i + 1], tile_data[i + 2])
-				
-				coords.x += 1
-				i += 4
+	var chunk_start: int = 0
+	var chunk_coords: Vector2 = Vector2.ZERO
+	var chunk_size: int = 1024
+	var chunk_buffer: PoolByteArray = PoolByteArray()
+	while (chunk_start < tile_bytes.size()):
+		if tile_bytes[chunk_start + 1] & 0b10000000 == 0: # positive chunk coord
+			chunk_coords.x = int(tile_bytes[chunk_start] | (tile_bytes[chunk_start + 1] << 8))
+		else: # negative chunk coord
+			var high: int = tile_bytes[chunk_start + 1] & 0b01111111
+			chunk_coords.x = -int(tile_bytes[chunk_start] | (high << 8))
+		
+		if tile_bytes[chunk_start + 3] & 0b10000000 == 0: # positive chunk coord
+			chunk_coords.y = int(tile_bytes[chunk_start + 2] | (tile_bytes[chunk_start + 3] << 8))
+		else: # negative chunk coord
+			var high: int = tile_bytes[chunk_start + 3] & 0b01111111
+			chunk_coords.y = -int(tile_bytes[chunk_start + 2] | (high << 8))
+		
+		chunk_size = tile_bytes[chunk_start + 4] | (tile_bytes[chunk_start + 5] << 8)
+		# subtracting 1 is needed due to PoolByteArray.subarray() having both the start and end inclusive
+		chunk_buffer = tile_bytes.subarray(chunk_start + CHUNK_HEADER_SIZE, chunk_start + CHUNK_HEADER_SIZE + chunk_size - 1)
+		chunk_buffer = chunk_buffer.decompress(TILE_CHUNK_SIZE * TILE_CHUNK_SIZE * BYTES_PER_TILE, File.COMPRESSION_FASTLZ)
+		
+		var chunk: PoolIntArray = chunks.get_or_add(chunk_coords, PoolIntArray())
+		if chunk.empty():
+			chunk.resize(TILE_CHUNK_SIZE * TILE_CHUNK_SIZE)
+			chunk.fill(0)
+		
+		for i in range(0, chunk_buffer.size(), BYTES_PER_TILE):
+			chunk[i / BYTES_PER_TILE] = get_packed_tile(chunk_buffer[i], chunk_buffer[i + 1], chunk_buffer[i + 2])
+		
+		chunks[chunk_coords] = chunk
+		
+		chunk_start += CHUNK_HEADER_SIZE + chunk_size
 	
 	return chunks

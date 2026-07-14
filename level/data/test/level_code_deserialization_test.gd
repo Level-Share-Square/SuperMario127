@@ -7,6 +7,23 @@ const PLAYER_PATH = preload("res://scenes/player/player.tscn")
 
 func _ready():
 	instance_debug_level()
+	
+#	tile_byte_test(
+#		{
+#			Vector2(-16, 0): [1, 0, 0],
+#			Vector2(-16, 1): [1, 0, 0],
+#			Vector2(-16, 2): [1, 0, 0],
+#			Vector2(0, 3): [1, 0, 0],
+#			Vector2(0, 4): [1, 0, 0],
+#			Vector2(0, 5): [1, 0, 0],
+#			Vector2(16, 0): [1, 0, 0],
+#			Vector2(16, 1): [1, 0, 0],
+#			Vector2(16, 2): [1, 0, 0],
+#			Vector2(32, 3): [1, 0, 0],
+#			Vector2(32, 4): [1, 0, 0],
+#			Vector2(32, 5): [1, 0, 0],
+#		}
+#	)
 
 
 func load_file():
@@ -27,3 +44,17 @@ func instance_debug_level():
 	CurrentLevelData.load_level_headers(content)
 	CurrentLevelData.load_level_area(0)
 	get_tree().change_scene_to(PLAYER_PATH)
+
+
+func tile_byte_test(tiles: Dictionary):
+	var tile_data: TileData = TileData.new()
+	
+	for coord in tiles:
+		tile_data.set_tile(coord, tiles[coord][0], tiles[coord][0], tiles[coord][0])
+	
+	var tile_bytes: PoolByteArray = tile_util.chunks_to_tile_bytes(tile_data.chunks)
+	var chunks_from_bytes: Dictionary = tile_util.tile_bytes_to_chunks(tile_bytes)
+	
+	print("TileData chunks: ", tile_data.chunks)
+	print("Tile bytes: ", tile_bytes)
+	print("Chunks from bytes: ", chunks_from_bytes)
