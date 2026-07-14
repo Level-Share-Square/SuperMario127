@@ -13,6 +13,7 @@ export var layer_shift: int = 0
 export var lock_layer: bool = false
 export var ignore_layer_disabling: bool = false
 export var generate_editor_hitbox: bool = false
+export var _property_ids: Dictionary
 
 var global := {}
 var editor_aliases := {}
@@ -70,8 +71,10 @@ func load_placeable_item():
 func _ready():
 	load_placeable_item()
 	
-	if layer != default_layer and lock_layer:
-		set_property("layer", default_layer, true)
+#	if layer != default_layer and lock_layer:
+#		set_property("layer", default_layer, true)
+	
+	set_object_data_property_metadata()
 	
 	z_layer = layer + LevelShared.layer_index_offset
 	
@@ -253,6 +256,18 @@ func create_collision_polygons_from_tree(node: Node, node_transform: Transform2D
 			create_collision_polygons_from_tree(child, node_transform * child.transform, array)
 
 
+func set_object_data_property_metadata() -> void:
+	var object_data: ObjectData = object_data_ref.get_ref()
+	
+	if is_instance_valid(object_data):
+		object_data.property_ids = _property_ids
+		
+		var property_id: int = -1
+		for property in _property_ids.keys():
+			property_id = _property_ids.get(property)
+			object_data.default_values[property_id] = self[property]
+
+
 func is_savable_property(key) -> bool:
 	for savable_property in (base_savable_properties + savable_properties):
 		if key == savable_property:
@@ -286,22 +301,21 @@ func modulate_set():
 		modulate *= translucent_modulate
 
 
-func set_property(key, value, change_level_object = true, alias = null):
+func set_property(key, value, change_object_data = true, alias = null):
 	if typeof(self[key]) != typeof(value):
 		assert("Object tried to set property '" + key + "', but the provided type does not match.")
 		return
 	
 	self[key] = value
 	
-	var object_data = object_data_ref.get_ref()
+	var object_data: ObjectData = object_data_ref.get_ref()
 	
-	if change_level_object and is_savable_property(key) and !is_preview:
-		var index: int = get_property_index(key)
+	if change_object_data and is_savable_property(key) and !is_preview:
+		var id: int = _property_ids.get(key, -1)
+		if id < 0:
+			return
 		
-		if index == object_data.properties.size():
-			object_data.properties.append(value)
-		else:
-			object_data.properties[index] = value
+		object_data.set_property(key, value)
 		
 		if key == "visible":
 			if mode == 1:
@@ -309,7 +323,7 @@ func set_property(key, value, change_level_object = true, alias = null):
 				visibility = value
 		elif key == "layer":
 			update_layer()
-			
+	
 	if mode == 1 and !is_preview:
 		emit_signal("property_changed", key, value)
 
