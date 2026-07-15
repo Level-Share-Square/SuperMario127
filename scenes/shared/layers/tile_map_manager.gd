@@ -15,24 +15,40 @@ var layer_data: LayerData
 func load_in(s_layer_data: LayerData):
 	layer_data = s_layer_data
 	
-	if not layer_data.layer_metadata.is_ground or not is_zero_approx(layer_data.layer_metadata.parallax_distance):
+	clear()
+	
+	if not layer_data.layer_metadata.is_ground:
 		collision_layer = 0
 		collision_mask = 0
 	
-	for coords in layer_data.tile_data.used_tiles:
-		var packed_tile: int = layer_data.tile_data.get_packed_tile_at(coords)
+	var packed_tile: int = 0
+	var min_tile_coord: Vector2
+	var max_tile_coord: Vector2
+	for coord in layer_data.tile_data.used_tiles:
+		if min_tile_coord.x > coord.x and min_tile_coord.y > coord.y:
+			min_tile_coord = coord
+		
+		if max_tile_coord.x < coord.x and max_tile_coord.y < coord.y:
+			max_tile_coord = coord
+		
+		packed_tile = layer_data.tile_data.get_packed_tile_at(coord)
 		place_tile(
-			coords, 
+			coord,
 			tile_util.get_tile_set_id_from_packed(packed_tile),
 			tile_util.get_tile_id_from_packed(packed_tile),
-			tile_util.get_palette_id_from_packed(packed_tile)
+			tile_util.get_palette_id_from_packed(packed_tile),
+			false
 		)
+	
+	update_bitmask_region(min_tile_coord, max_tile_coord)
+	update_dirty_quadrants()
 
 
-func place_tile(coords: Vector2, tileset: int, type: int, palette: int, modify_data: bool = false):
-	var raw_id = tile_util.get_real_tile_set_id(tileset, type, palette)
-	set_cellv(coords, raw_id)
-	update_autotile(coords)
+func place_tile(coords: Vector2, tileset: int, type: int, palette: int, update_autotile: bool = true, modify_data: bool = false):
+	set_cellv(coords, tile_util.get_real_tile_set_id(tileset, type, palette))
+	
+	if update_autotile:
+		update_autotile(coords)
 	
 	if not modify_data:
 		return

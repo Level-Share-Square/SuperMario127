@@ -16,7 +16,7 @@ const TILE_IDS: Array = preload("res://generation/tileset_ids.res").tileset_ids
 
 
 static func get_packed_tile(tile_set: int, tile: int, palette: int) -> int:
-	return tile_set | (tile << 16) | (palette << 32)
+	return tile_set | (tile << 8) | (palette << 16)
 
 
 static func get_tile_set_id_from_packed(value: int) -> int:
@@ -24,11 +24,11 @@ static func get_tile_set_id_from_packed(value: int) -> int:
 
 
 static func get_tile_id_from_packed(value: int) -> int:
-	return (value & 0x0000FF00) >> 16
+	return (value & 0x0000FF00) >> 8
 
 
 static func get_palette_id_from_packed(value: int) -> int:
-	return (value & 0x00FF0000) >> 32
+	return (value & 0x00FF0000) >> 16
 
 
 static func get_real_tile_set_id_from_packed(value: int) -> int:
@@ -89,7 +89,7 @@ static func tile_bytes_to_chunks(tile_bytes: PoolByteArray) -> Dictionary:
 	
 	var chunk_start: int = 0
 	var chunk_coords: Vector2 = Vector2.ZERO
-	var chunk_size: int = 1024
+	var chunk_size: int = 768
 	var chunk_buffer: PoolByteArray = PoolByteArray()
 	while (chunk_start < tile_bytes.size()):
 		if tile_bytes[chunk_start + 1] & 0b10000000 == 0: # positive chunk coord

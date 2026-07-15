@@ -23,7 +23,8 @@ func set_tile(coords: Vector2, tileset: int, type: int, palette: int) -> void:
 		type = 0
 		palette = 0
 		
-		used_tiles.remove(used_tiles.find(coords))
+		while used_tiles.has(coords):
+			used_tiles.remove(used_tiles.find(coords))
 	else:
 		if not used_tiles.has(coords):
 			used_tiles.append(coords)
@@ -43,6 +44,21 @@ func set_tile(coords: Vector2, tileset: int, type: int, palette: int) -> void:
 
 func erase_tile(coords: Vector2) -> void:
 	set_tile(coords, -1, -1, -1)
+
+
+func set_chunk_data(chunk_coords: Vector2, chunk_data: PoolIntArray) -> void:
+	if chunk_data.count(0) >= tile_util.TILE_CHUNK_SIZE * tile_util.TILE_CHUNK_SIZE:
+		return
+	
+	if chunks.has(chunk_coords):
+		chunks[chunk_coords] = chunk_data
+	else:
+		chunks.get_or_add(chunk_coords, chunk_data)
+	
+	for x in range(tile_util.TILE_CHUNK_SIZE):
+		for y in range(tile_util.TILE_CHUNK_SIZE):
+			if chunk_data[x + y * TILE_CHUNK_SIZE] > 0:
+				used_tiles.append(chunk_coords * 16 + Vector2(x, y))
 
 
 func get_packed_tile_at(coords: Vector2) -> int:
