@@ -19,8 +19,8 @@ export var anim_damp = 80
 
 func collect(body):
 	if enabled and !collected and body.name.begins_with("Character") and !body.dead:
-		CurrentLevelData.level_data.vars.collect_coin(2)
-		CurrentLevelData.level_data.vars.collect_red_coin(id)
+		CurrentLevelData.vars.collect_coin(2)
+		CurrentLevelData.vars.collect_red_coin(id)
 		body.heal(5)
 		var player_id = 1
 		if body.name == "Character":
@@ -37,15 +37,14 @@ func collect(body):
 func _ready():
 	animation_player.play("RESET")
 	if mode == 1: return
-	if enabled:
-		id = CurrentLevelData.level_data.vars.last_red_coin_id + CurrentLevelData.get_red_coins_before_area(CurrentLevelData.area)
-		CurrentLevelData.level_data.vars.last_red_coin_id += 1
+#	if enabled:
+#		id = CurrentLevelData.vars.last_red_coin_id + CurrentLevelData.get_red_coins_before_area(CurrentLevelData.area)
+#		CurrentLevelData.vars.last_red_coin_id += 1
 	
-	if id in CurrentLevelData.level_data.vars.red_coins_collected[1]:
+	if id in CurrentLevelData.vars.red_coins_collected[1]:
 		queue_free()
 	
-	if layer == middle:
-		var _connect = area.connect("body_entered", self, "collect")
+	var _connect = area.connect("body_entered", self, "collect")
 
 func _process(delta):
 	if !collected:

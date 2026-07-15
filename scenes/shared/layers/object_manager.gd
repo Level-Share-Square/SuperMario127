@@ -8,6 +8,9 @@ var layer_data: LayerData
 func load_in(s_layer_data: LayerData):
 	layer_data = s_layer_data
 	
+	for child in get_children():
+		queue_free()
+	
 	for object_data in layer_data.object_data:
 		create_object(object_data)
 

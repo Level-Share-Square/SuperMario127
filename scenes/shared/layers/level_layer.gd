@@ -6,6 +6,9 @@ const LAYER_Z_SPACING: int = 8 # amount of z indices the layer has on either sid
 const DEFAULT_BACKGROUND_COLOR: Color = Color(0.545098, 0.545098, 0.545098)
 
 
+onready var tile_map_manager: TileMapManager = $"%TileMapManager"
+onready var object_manager: ObjectManager = $"%ObjectManager"
+
 var layer_tint: Color = Color.white
 var autoset_tint: bool = true
 var order: int = 0 setget set_order
@@ -14,10 +17,11 @@ var activated_mission_ids: PoolIntArray = []
 
 
 func load_in(layer_data: LayerData):
-	layer_tint = layer_data.layer_metadata.layer_tint
 	autoset_tint = layer_data.layer_metadata.autoset_tint
-	set_order(layer_data.layer_metadata.order)
 	activated_mission_ids = layer_data.layer_metadata.activated_mission_ids
+	
+	set_layer_modulate(layer_data.layer_metadata.layer_tint)
+	set_order(layer_data.layer_metadata.order)
 
 
 func set_order(s_order: int) -> void:

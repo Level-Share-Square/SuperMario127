@@ -204,7 +204,7 @@ func load_ogg(bytes: PoolByteArray) -> void:
 	else:
 		timer.stop()
 		
-	var underwater_raw = CurrentLevelData.level_data.areas[CurrentLevelData.area].underwater_music
+	var underwater_raw = CurrentLevelData.area.header.underwater_music
 	if underwater_raw == "":
 		has_water = false
 	else:

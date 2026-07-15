@@ -36,7 +36,7 @@ func _ready():
 	else:
 		connect("transform_changed", self, "update")
 	
-	liquid_area_collision.disabled = !enabled or !layer == middle
+	liquid_area_collision.disabled = !enabled
 	
 	update_liquid_color(color)
 	update()

@@ -72,6 +72,10 @@ static func splice_data_array(code: String):
 	return get_outermost_brackets(code)[0]
 
 
+static func splice_dictionary(code: String):
+	return get_outermost_brackets(code)[0]
+
+
 static func regex_match_to_string_array(matches: Array) -> Array:
 	var result = []
 	for mat in matches:

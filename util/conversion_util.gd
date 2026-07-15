@@ -365,21 +365,22 @@ static func get_area_headers_from_old_data(level_data) -> Array:
 static func get_new_area_code(header: AreaHeader, old_area: AreaDataOld) -> String:
 	var area_data: AreaData = AreaData.new(header, [])
 	
-	var layers: Dictionary = {}
-	var ground: LayerData = layers.get_or_add(1, LayerData.new(LayerMetadata.new(), TileData.new()))
-	ground.layer_metadata.is_ground = true
+	var BACKGROUND_TINT: Color = Color(0.545098, 0.545098, 0.545098)
+	
+	# ahh the last time VeryBack's cursed layer index will ever get to haunt me...
+	var layers: Dictionary = {
+		3: LayerData.new(LayerMetadata.new(0.1, Vector2.ZERO, false, BACKGROUND_TINT, -2, false), TileData.new()),
+		0: LayerData.new(LayerMetadata.new(0.1, Vector2.ZERO, false, BACKGROUND_TINT, -1, false), TileData.new()),
+		1: LayerData.new(LayerMetadata.new(0, Vector2.ZERO, false, Color.white, 0, true), TileData.new()),
+		2: LayerData.new(LayerMetadata.new(-0.05, Vector2.ZERO, false, Color.white, 1, false), TileData.new()),
+	}
+	
+	var object_layer_map: Array = [3, 0, 1, 2]
+	
 	for chunk_key in old_area.tile_chunks:
-		var layer: int = int(chunk_key.substr(4, 1))
-		var layer_data: LayerData = layers.get_or_add(layer, LayerData.new(LayerMetadata.new(0, false, Color.white, 0, false), TileData.new()))
-		if layer == 3:
-			layer_data.layer_metadata.order = -2
-			layer_data.layer_metadata.layer_tint = Color(0.545098, 0.545098, 0.545098)
-		if layer == 0:
-			layer_data.layer_metadata.order = -1
-			layer_data.layer_metadata.layer_tint = Color(0.545098, 0.545098, 0.545098)
-		if layer == 2:
-			layer_data.layer_metadata.order = 1
-		
+		chunk_key = chunk_key as String
+		var layer: int = int(chunk_key.split(":")[2])
+		var layer_data: LayerData = layers[layer]
 		var chunk_coord: Vector2 = Vector2(int(chunk_key.substr(0, 1)), int(chunk_key.substr(2, 1)))
 		var new_chunk_data: PoolIntArray = PoolIntArray()
 		for tile in old_area.tile_chunks.get(chunk_key):
@@ -392,8 +393,14 @@ static func get_new_area_code(header: AreaHeader, old_area: AreaDataOld) -> Stri
 	
 	for old_object in old_area.objects:
 		old_object = old_object as ObjectDataOld
+		var object_layer: int = object_layer_map[old_object.properties.pop_at(5)]
+		var enabled: bool = old_object.properties.pop_at(3)
 		var position: Vector2 = old_object.properties.pop_at(0)
-		var enabled: bool = old_object.properties.pop_at(3 - 1)
+		
+		if old_object.type_id == 14:
+			if old_object.properties[5]:
+				object_layer = 0
+		
 		var property_dictionary: Dictionary = {}
 		for i in old_object.properties.size():
 			property_dictionary.get_or_add(i, old_object.properties[i])
@@ -407,7 +414,7 @@ static func get_new_area_code(header: AreaHeader, old_area: AreaDataOld) -> Stri
 			), 
 			property_dictionary
 		)
-		ground.object_data.append(new_object)
+		layers[object_layer].object_data.append(new_object)
 	
 	area_data.layers = layers.values()
 	

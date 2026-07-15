@@ -4,14 +4,8 @@ extends Resource
 
 export var bounds: Rect2 = Rect2(0, 0, 80, 30)
 
-export var objects = []
-export var tile_chunks : = {}
-
-#for loading only
-export var background_tiles := []
-export var very_background_tiles := []
-export var foreground_tiles := []
-export var very_foreground_tiles := []
+export var objects: Array = []
+export var tile_chunks: Dictionary = {}
 
 export var name: String = ""
 

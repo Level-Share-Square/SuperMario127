@@ -22,8 +22,8 @@ func location_warp(character: Character, target_tag: String, max_pan_distance: i
 		character.camera.auto_move = false
 		
 		var end_point: Vector2 = target_teleporter.global_position
-		if CurrentLevelData.level_data.vars.area_transition_helper != null and target_teleporter is AreaTransition:
-			end_point = CurrentLevelData.level_data.vars.area_transition_helper.find_camera_position(
+		if CurrentLevelData.vars.area_transition_helper != null and target_teleporter is AreaTransition:
+			end_point = CurrentLevelData.vars.area_transition_helper.find_camera_position(
 				target_teleporter.vertical, 
 				target_teleporter.global_position, 
 				character.camera.base_size, 
@@ -151,7 +151,7 @@ func level_warp(character: Character, target_level: String,
 
 ### OTHER ###
 func find_teleporter(target_tag: String) -> GameObject:
-	for i in CurrentLevelData.level_data.vars.teleporters:
+	for i in CurrentLevelData.vars.teleporters:
 		if i[0] == target_tag.to_lower() && i[1] != teleporter:
 			return i[1]
 	return teleporter

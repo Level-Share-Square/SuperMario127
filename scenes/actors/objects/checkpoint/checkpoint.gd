@@ -28,17 +28,16 @@ func _ready():
 	
 	if mode != 1:
 		display.visible = false
-		if layer == middle:
-			var _connect = use_area.connect("body_entered", self, "set_checkpoint")
+		var _connect = use_area.connect("body_entered", self, "set_checkpoint")
 	else:
 		display.visible = true
 	
-	CurrentLevelData.set_checkpoint_ids()
-	id = level_object.get_ref().properties[9]
+#	CurrentLevelData.set_checkpoint_ids()
+#	id = level_object.get_ref().properties[9]
 	if Singleton.CheckpointSaved.current_checkpoint_id == id:
 		is_used = true
 	
-	CurrentLevelData.level_data.vars.checkpoints.append([id, self])
+	CurrentLevelData.vars.checkpoints.append([id, self])
 
 func _physics_process(delta):
 	var sprite = $Rotation/RotationRight
@@ -67,30 +66,30 @@ func set_checkpoint(body):
 	
 	Singleton.CheckpointSaved.current_checkpoint_id = id
 	Singleton.CheckpointSaved.current_spawn_pos = global_position + spawn_offset
-	Singleton.CheckpointSaved.current_area = CurrentLevelData.area
-	Singleton.CheckpointSaved.current_coins = CurrentLevelData.level_data.vars.coins_collected
-	Singleton.CheckpointSaved.nozzles_collected = CurrentLevelData.level_data.vars.nozzles_collected.duplicate(true)
-	Singleton.CheckpointSaved.current_red_coins = CurrentLevelData.level_data.vars.red_coins_collected.duplicate(true)
-	Singleton.CheckpointSaved.current_shine_shards = CurrentLevelData.level_data.vars.shine_shards_collected.duplicate(true)
-	Singleton.CheckpointSaved.current_purple_starbits = CurrentLevelData.level_data.vars.purple_starbits_collected.duplicate(true)
-	Singleton.CheckpointSaved.current_local_keys = CurrentLevelData.level_data.vars.local_keys_collected.duplicate(true)
+	Singleton.CheckpointSaved.current_area = CurrentLevelData.area_id
+	Singleton.CheckpointSaved.current_coins = CurrentLevelData.vars.coins_collected
+	Singleton.CheckpointSaved.nozzles_collected = CurrentLevelData.vars.nozzles_collected.duplicate(true)
+	Singleton.CheckpointSaved.current_red_coins = CurrentLevelData.vars.red_coins_collected.duplicate(true)
+	Singleton.CheckpointSaved.current_shine_shards = CurrentLevelData.vars.shine_shards_collected.duplicate(true)
+	Singleton.CheckpointSaved.current_purple_starbits = CurrentLevelData.vars.purple_starbits_collected.duplicate(true)
+	Singleton.CheckpointSaved.current_local_keys = CurrentLevelData.vars.local_keys_collected.duplicate(true)
 	
-	while CurrentLevelData.level_data.vars.liquid_positions.size() <= CurrentLevelData.area:
-		CurrentLevelData.level_data.vars.liquid_positions.append([])
+	while CurrentLevelData.vars.liquid_positions.size() <= CurrentLevelData.area_id:
+		CurrentLevelData.vars.liquid_positions.append([])
 	
 	if save_water_level:
-		CurrentLevelData.level_data.vars.liquid_positions[CurrentLevelData.area] = []
-		for liquid in CurrentLevelData.level_data.vars.liquids:
-			CurrentLevelData.level_data.vars.liquid_positions[CurrentLevelData.area].append(liquid[1].save_pos)
+		CurrentLevelData.vars.liquid_positions[CurrentLevelData.area_id] = []
+		for liquid in CurrentLevelData.vars.liquids:
+			CurrentLevelData.vars.liquid_positions[CurrentLevelData.area_id].append(liquid[1].save_pos)
 	
 	if save_switch_state:
-		Singleton.CheckpointSaved.switch_state = CurrentLevelData.level_data.vars.switch_state.duplicate(true)
-	Singleton.CheckpointSaved.liquid_positions = CurrentLevelData.level_data.vars.liquid_positions.duplicate(true)
-	Singleton.CheckpointSaved.activated_shine_ids = CurrentLevelData.level_data.vars.activated_shine_ids.duplicate(true)
+		Singleton.CheckpointSaved.switch_state = CurrentLevelData.vars.switch_state.duplicate(true)
+	Singleton.CheckpointSaved.liquid_positions = CurrentLevelData.vars.liquid_positions.duplicate(true)
+	Singleton.CheckpointSaved.activated_shine_ids = CurrentLevelData.vars.activated_shine_ids.duplicate(true)
 	
 	CurrentLevelData.level_transition_data = {}
 	
-	for checkpoint in CurrentLevelData.level_data.vars.checkpoints:
+	for checkpoint in CurrentLevelData.vars.checkpoints:
 		if checkpoint[1] != self:
 			checkpoint[1].unset_checkpoint()
 	

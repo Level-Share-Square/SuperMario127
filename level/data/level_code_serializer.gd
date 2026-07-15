@@ -74,6 +74,7 @@ static func serialize_layer(layer: LayerData) -> String:
 	layer_code += serialize_metadata(
 		[
 			layer.layer_metadata.parallax_distance,
+			layer.layer_metadata.parallax_offset,
 			layer.layer_metadata.autoset_tint,
 			layer.layer_metadata.layer_tint,
 			layer.layer_metadata.order,
@@ -189,11 +190,18 @@ static func serialize_data(value) -> String:
 	match typeof(value):
 		TYPE_STRING:
 			value = value as String
-			data_code = LevelCodeHandler.TYPE_CODE_STRING
-			
-			if not value.empty():
-				var bytes: PoolByteArray = value.to_utf8().compress(File.COMPRESSION_DEFLATE)
-				data_code += Marshalls.raw_to_base64(bytes)
+			data_code = LevelCodeHandler.TYPE_CODE_STRING + value
+#			data_code = LevelCodeHandler.TYPE_CODE_STRING
+#
+#			if not value.empty():
+#				var bytes: PoolByteArray = value.to_utf8().compress(File.COMPRESSION_DEFLATE)
+#				data_code += Marshalls.raw_to_base64(bytes)
+#				# convert from Base64 to Base64URL
+#				data_code = data_code.replace("+", "-")
+#				data_code = data_code.replace("/", "_")
+#				# padding in Base64 isn't URI encoding safe, so we replace "="
+#				# with "~" while serializing
+#				data_code = data_code.replace("=", "~")
 		TYPE_INT:
 			value = value as int
 			data_code = LevelCodeHandler.TYPE_CODE_INT + base64_encode_int(value)

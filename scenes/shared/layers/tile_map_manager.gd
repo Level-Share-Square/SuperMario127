@@ -22,15 +22,7 @@ func load_in(s_layer_data: LayerData):
 		collision_mask = 0
 	
 	var packed_tile: int = 0
-	var min_tile_coord: Vector2
-	var max_tile_coord: Vector2
 	for coord in layer_data.tile_data.used_tiles:
-		if min_tile_coord.x > coord.x and min_tile_coord.y > coord.y:
-			min_tile_coord = coord
-		
-		if max_tile_coord.x < coord.x and max_tile_coord.y < coord.y:
-			max_tile_coord = coord
-		
 		packed_tile = layer_data.tile_data.get_packed_tile_at(coord)
 		place_tile(
 			coord,
@@ -40,7 +32,7 @@ func load_in(s_layer_data: LayerData):
 			false
 		)
 	
-	update_bitmask_region(min_tile_coord, max_tile_coord)
+	update_bitmask_region()
 	update_dirty_quadrants()
 
 

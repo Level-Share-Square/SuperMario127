@@ -286,8 +286,11 @@ static func decode(code: String)-> Dictionary:
 						decoded_object.properties.append(old_value_util.decode_value(value))
 					index += 1
 				full_result.areas[area_id].objects.append(decoded_object)
+				
+				if decoded_object.properties.size() < 5:
+					print(decoded_object)
 	
-	print(full_result)
+#	print(full_result)
 	
 	return full_result
 

@@ -62,17 +62,24 @@ func enter_detector(body):
 			body.add_nozzle("TurboNozzle")
 			
 			#create nozzle after bouncing
-			var object = ObjectDataOld.new()
-			object.type_id = 20
-			object.properties = []
-			object.properties.append(position + Vector2(0, 4))
-			object.properties.append(Vector2(1, 1))
-			object.properties.append(0)
-			object.properties.append(true)
-			object.properties.append(true)
-			object.properties.append(layer)
-			object.properties.append(Vector2(0, -250))
-			object.properties.append("TurboNozzle")
+			var object = ObjectData.new(
+				ObjectMetadata.new(
+					position + Vector2(0, 4),
+					20,
+					true,
+					0
+				),
+				{}
+			)
+			
+#			object.properties = []
+#			object.properties.append()
+#			object.properties.append(Vector2(1, 1))
+#			object.properties.append(0)
+#			object.properties.append(true)
+#			object.properties.append(true)
+#			object.properties.append(Vector2(0, -250))
+#			object.properties.append("TurboNozzle")
 			get_parent().create_object(object, false)
 		
 		else:
@@ -84,7 +91,7 @@ func enter_detector(body):
 		sound.play()
 		
 		# activates all deactivated hover turbo loaded in the level
-		CurrentLevelData.level_data.vars.activate_fludd(1)
+		CurrentLevelData.vars.activate_fludd(1)
 		
 func _on_fludd_activated():
 	sprite.modulate.a = 1

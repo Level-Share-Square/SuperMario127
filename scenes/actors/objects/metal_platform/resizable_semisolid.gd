@@ -53,7 +53,7 @@ func _ready():
 		platform_area_collision_shape.disabled = true
 		
 	update_parts()
-	is_middle(layer == middle)
+
 
 func update_parts():
 	sprite.rect_position.x = -(left_width + (part_width * parts) + right_width) / 2

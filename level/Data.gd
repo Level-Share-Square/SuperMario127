@@ -42,7 +42,8 @@ func _init(code: String = "", skip: bool = false):
 
 func get_area(result) -> AreaDataOld:
 	var area = AreaDataOld.new()
-	area.tile_chunks.clear()
+	area.tile_chunks = {}
+	area.objects = []
 	
 	area.bounds.size = result.size
 	
@@ -64,25 +65,10 @@ func get_area(result) -> AreaDataOld:
 		result.very_background_tiles],
 		area.bounds.size)
 
-	# for very_foreground_tiles_result in result.very_foreground_tiles:
-	# 	var tiles = get_tiles(very_foreground_tiles_result)
-	# 	for tile in tiles:
-	# 		area.very_foreground_tiles.append(tile)
-	# for tiles_result in result.foreground_tiles:
-	# 	var tiles = get_tiles(tiles_result)
-	# 	for tile in tiles:
-	# 		area.foreground_tiles.append(tile)
-	# for background_tiles_result in result.background_tiles:
-	# 	var tiles = get_tiles(background_tiles_result)
-	# 	for tile in tiles:
-	# 		area.background_tiles.append(tile)
-	# for background_tiles_result in result.very_background_tiles:
-	# 	var tiles = get_tiles(background_tiles_result)
-	# 	for tile in tiles:
-	# 		area.very_background_tiles.append(tile)
-
 	for object_result in result.objects:
 		var object = get_object(object_result)
+		if object.properties.size() < 6:
+			print(object)
 		area.objects.append(object)
 	return area
 

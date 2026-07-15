@@ -118,7 +118,7 @@ func _physics_process(_delta) -> void:
 	# you're not able to enter a door if you're in the air, aren't controllable,
 	# have dive collision enabled, or are pressing a movement direction (helps with the Legacy control preset)
 	# also, rainbow mario can't enter doors
-	if not enabled || layer != middle: return
+	if not enabled: return
 	if global_rotation != 0: return
 	if busy: return
 	if not is_instance_valid(stored_character): return

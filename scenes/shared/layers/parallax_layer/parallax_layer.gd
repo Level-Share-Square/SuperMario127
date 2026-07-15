@@ -2,28 +2,31 @@ class_name LevelParallaxLayer
 extends LevelLayer
 
 
-onready var tile_map_manager: TileMapManager = $"%TileMapManager"
-onready var object_manager: ObjectManager = $"%ObjectManager"
-
-
 var parallax_distance: float = 0
+var parallax_offset: Vector2 = Vector2.ZERO
 
 
 func _process(delta: float) -> void:
 #	var canvas_position: Vector2 = get_canvas_transform().origin
-	var parallax_factor: float = parallax_distance
-	position = -get_canvas_transform().origin * parallax_factor
+	var canvas_transform: Transform2D = get_canvas_transform()
+	position = (-canvas_transform.get_origin() / canvas_transform.get_scale() + (get_viewport_rect().size / 2.0) + parallax_offset) * parallax_distance
+	scale = Vector2(1 - parallax_distance, 1 - parallax_distance)
 
 
 func load_in(layer_data: LayerData):
 	.load_in(layer_data)
 	
-	modulate = layer_tint
-	z_index = order
+	parallax_distance = layer_data.layer_metadata.parallax_distance
 	
 	tile_map_manager.load_in(layer_data)
-	
 	object_manager.load_in(layer_data)
+
+
+func _modulate_autoset() -> Color:
+	if parallax_distance > 0:
+		return Color.white.darkened(parallax_distance)
+	else:
+		return Color.white
 
 
 # Tiles

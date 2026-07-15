@@ -24,7 +24,7 @@ func _set_property_values():
 
 func _ready():
 	collision_shape.shape = collision_shape.shape.duplicate(true)
-	collision_shape.disabled = !enabled or !layer == middle
+	collision_shape.disabled = !enabled
 		
 	update_parts()
 

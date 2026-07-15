@@ -39,12 +39,12 @@ func _ready():
 	bottom_collision_shape.shape = bottom_collision_shape.shape.duplicate(true)
 	platform_area_shape.shape = platform_area_shape.shape.duplicate(true)
 	
-	if !enabled or !layer == middle:
+	if !enabled:
 		bottom_collision_shape.disabled = true
 		bounce_collision_shape.disabled = true
 		platform_area_shape.disabled = true
 	
-	if enabled and mode == 0 and layer == middle:
+	if enabled and mode == 0:
 		area_2d.connect("body_entered", self, "bounce")
 	elif mode == 1:
 		var _connect = connect("property_changed", self, "update_property")
@@ -64,7 +64,7 @@ func _physics_process(delta):
 			else:
 				blacklisted_bodies[object] = cooldown
 		
-	if enabled and mode == 0 and layer == middle:
+	if enabled and mode == 0:
 		if area_2d.get_overlapping_bodies().size() > 0:
 			for body in area_2d.get_overlapping_bodies():
 					bounce(body)

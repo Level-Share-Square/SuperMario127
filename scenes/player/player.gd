@@ -56,7 +56,7 @@ func _ready():
 	
 	if CurrentLevelData.vars.transition_data.empty():
 		if Singleton.CheckpointSaved.current_checkpoint_id != -1:
-			CurrentLevelData.area = Singleton.CheckpointSaved.current_area
+			CurrentLevelData.load_level_area(Singleton.CheckpointSaved.current_area)
 		CurrentLevelData.vars.reload()
 	
 	if CurrentLevelData.area.header.timer > 0.00:

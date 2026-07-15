@@ -74,7 +74,7 @@ static func chunks_to_tile_bytes(tile_chunks: Dictionary) -> PoolByteArray:
 			chunk_buffer.append(get_tile_id_from_packed(tile))
 			chunk_buffer.append(get_palette_id_from_packed(tile))
 		
-		chunk_buffer = chunk_buffer.compress(File.COMPRESSION_FASTLZ)
+		chunk_buffer = chunk_buffer.compress(File.COMPRESSION_DEFLATE)
 		tile_bytes.append(chunk_buffer.size())
 		tile_bytes.append(chunk_buffer.size() >> 8)
 		print()
@@ -107,7 +107,7 @@ static func tile_bytes_to_chunks(tile_bytes: PoolByteArray) -> Dictionary:
 		chunk_size = tile_bytes[chunk_start + 4] | (tile_bytes[chunk_start + 5] << 8)
 		# subtracting 1 is needed due to PoolByteArray.subarray() having both the start and end inclusive
 		chunk_buffer = tile_bytes.subarray(chunk_start + CHUNK_HEADER_SIZE, chunk_start + CHUNK_HEADER_SIZE + chunk_size - 1)
-		chunk_buffer = chunk_buffer.decompress(TILE_CHUNK_SIZE * TILE_CHUNK_SIZE * BYTES_PER_TILE, File.COMPRESSION_FASTLZ)
+		chunk_buffer = chunk_buffer.decompress(TILE_CHUNK_SIZE * TILE_CHUNK_SIZE * BYTES_PER_TILE, File.COMPRESSION_DEFLATE)
 		
 		var chunk: PoolIntArray = chunks.get_or_add(chunk_coords, PoolIntArray())
 		if chunk.empty():

@@ -26,7 +26,7 @@ var area_headers: Array
 # Array of MissionData
 var mission_data: Array
 
-var area_id: int = 0
+var area_id: int = -1
 var area: AreaData
 var enemies_instanced: int = 0
 
@@ -114,6 +114,9 @@ func load_level_headers(code: String) -> void:
 
 
 func load_level_area(new_area_id: int) -> void:
+	if area_id == new_area_id:
+		return
+	
 	area_id = new_area_id
 	
 	var area_code: String = area_headers[area_id].area_code
@@ -171,7 +174,7 @@ func get_cached_object(index: int):
 	var key: String = object_id_map.ids[index]
 	var path: String = "res://scenes/actors/objects/" + key + "/" + key + ".tscn"
 	
-	object_cache[index] = load(path)
+	object_cache[index] = ResourceLoader.load(path)
 	return object_cache[index]
 
 
@@ -184,7 +187,7 @@ func get_cached_background(index: int):
 	var key: String = background_id_mapper.ids[index]
 	var path: String = "res://scenes/shared/background/backgrounds/" + key + "/resource.tres"
 	
-	background_cache[index] = load(path)
+	background_cache[index] = ResourceLoader.load(path)
 	return background_cache[index]
 
 
@@ -197,7 +200,7 @@ func get_cached_foreground(index: int):
 	var key: String = foreground_id_mapper.ids[index]
 	var path: String = "res://scenes/shared/background/foregrounds/" + key + "/resource.tres"
 	
-	foreground_cache[index] = load(path)
+	foreground_cache[index] = ResourceLoader.load(path)
 	return foreground_cache[index]
 
 

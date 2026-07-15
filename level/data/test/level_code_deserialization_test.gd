@@ -8,6 +8,8 @@ const PLAYER_PATH = preload("res://scenes/player/player.tscn")
 func _ready():
 	instance_debug_level()
 	
+#	convert_debug_level()
+	
 #	tile_byte_test(
 #		{
 #			Vector2(-16, 0): [1, 0, 0],
@@ -37,7 +39,7 @@ func load_file():
 
 
 func instance_debug_level():
-	var TEST_CODE_PATH = "res://level/data/test/old_test_code.txt"
+	var TEST_CODE_PATH = "res://level/data/test/archipelago_old.txt"
 	var file = File.new()
 	file.open(TEST_CODE_PATH, File.READ)
 	var content = file.get_as_text()
@@ -45,6 +47,20 @@ func instance_debug_level():
 	CurrentLevelData.load_level_headers(content)
 	CurrentLevelData.load_level_area(0)
 	get_tree().change_scene_to(PLAYER_PATH)
+
+
+func convert_debug_level():
+	var TEST_CODE_PATH = "res://level/data/test/judgement_day_code.txt"
+	var file = File.new()
+	file.open(TEST_CODE_PATH, File.READ)
+	var content = file.get_as_text()
+	file.close()
+	var new_code: String = CurrentLevelData.convert_old_code_to_new(content)
+#	print(new_code)
+	
+	file.open("res://level/data/test/judgement_day_new.txt", File.WRITE)
+	file.store_string(new_code)
+	file.close()
 
 
 func tile_byte_test(tiles: Dictionary):

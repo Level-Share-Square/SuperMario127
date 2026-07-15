@@ -19,5 +19,5 @@ func _process(_delta):
 #		print(body)
 
 func _ready():
-	if !enabled or !layer == middle:
+	if !enabled:
 		collision_shape.disabled = true
