@@ -23,21 +23,22 @@ func _set_property_values():
 	set_property("id", id, true, "ID")
 
 func _ready() -> void:
-	if layer == middle:
-		var _connect = area.connect("body_entered", self, "collect")
+#	if layer == middle:
+#		var _connect = area.connect("body_entered", self, "collect")
 
-	if Singleton.ModeSwitcher.get_node("ModeSwitcherButton").invisible:
-		var collected_star_coins = CurrentLevelData.level_info.collected_star_coins
-		# Get the value, returning false if the key doesn't exist
-		is_blue = collected_star_coins.get(str(id), false)
+#	if Singleton.ModeSwitcher.get_node("ModeSwitcherButton").invisible:
+#		var collected_star_coins = CurrentLevelData.level_info.collected_star_coins
+#		# Get the value, returning false if the key doesn't exist
+#		is_blue = collected_star_coins.get(str(id), false)
 
 	update_color()
 	anim_sprite.play("default")
 
 func on_place():
-	CurrentLevelData.set_star_coin_ids()
-	id = level_object.get_ref().properties[6]
-	set_property("id", id)
+	pass
+#	CurrentLevelData.set_star_coin_ids()
+#	id = object_data_ref.get_ref().properties[6]
+#	set_property("id", id)
 
 func update_color():
 	if !is_blue:
@@ -47,10 +48,11 @@ func update_color():
 		anim_sprite.frames = collected_frames
 		particles.texture = collected_particles
 
+
 func collect(body : PhysicsBody2D) -> void:
 	if enabled and !collected and (body is Character):
-		if Singleton.ModeSwitcher.get_node("ModeSwitcherButton").invisible:
-			CurrentLevelData.level_info.set_star_coin_collected(id, CurrentLevelData.selected_file > -2)
+#		if Singleton.ModeSwitcher.get_node("ModeSwitcherButton").invisible:
+#			CurrentLevelData.level_info.set_star_coin_collected(id, CurrentLevelData.selected_file > -2)
 
 		collected = true
 

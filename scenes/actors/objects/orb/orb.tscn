@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://classes/GameObject.gd" type="Script" id=1]
+[ext_resource path="res://scenes/shared/game_object.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/objects/orb/orb.png" type="Texture" id=2]
 [ext_resource path="res://scenes/actors/objects/orb/hope_orb.png" type="Texture" id=3]
 [ext_resource path="res://scenes/actors/objects/shine/shine_rays.gdshader" type="Shader" id=4]

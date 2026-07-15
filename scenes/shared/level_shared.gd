@@ -26,7 +26,7 @@ func add_layer(layer_data = null, add_to_data: bool = false):
 		var layer_metadata = LayerMetadata.new()
 		layer_data = LayerData.new(layer_metadata, TileData.new(), [])
 	
-	var new_layer
+	var new_layer: LevelLayer
 	if layer_data.layer_metadata.is_ground:
 		new_layer = ground_layer_scene.instance()
 	else:

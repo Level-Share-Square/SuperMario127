@@ -83,25 +83,19 @@ func _process(delta: float) -> void:
 
 
 ## loading
-	if not is_spliced:
-		code = LevelCodeTokenizer.splice_level(code)
-	
-	var metadata_code = LevelCodeTokenizer.splice_metadata(code)
-	level_metadata = LevelCodeSerializer.deserialize_level_metadata_code(metadata_code)
 func load_level_metadata(code: String) -> void:
+	code = LevelCodeTokenizer.splice_level(code)
+	level_metadata = LevelCodeDeserializer.deserialize_level_metadata_code(code)
 
 
 func load_level_headers(code: String) -> void:
 	if code.substr(0, 2) != "[{":
-		var level_data: LevelData = LevelData.new(code)
-		level_data.load_in(code)
-		
-		var container: LevelDataContainer = conversion_util.get_new_level_data_from_old_data(level_data)
-		code = container.serialize()
-	
-	code = LevelCodeTokenizer.splice_level(code)
+		convert_and_load_level(code)
+		return
 	
 	load_level_metadata(code)
+	
+	code = LevelCodeTokenizer.splice_level(code)
 	
 	var components_code = LevelCodeTokenizer.splice_level_components(code)
 	var editor_data_code = components_code[2]
@@ -109,7 +103,7 @@ func load_level_headers(code: String) -> void:
 	# load area headers
 	var area_codes: PoolStringArray = LevelCodeTokenizer.splice_areas(components_code[0])
 	for area_code in area_codes:
-		var area_header: AreaHeader = LevelCodeSerializer.deserialize_area_header_code(area_code)
+		var area_header: AreaHeader = LevelCodeDeserializer.deserialize_area_header_code(area_code)
 		area_headers.append(area_header)
 	
 	# load mission data
@@ -123,7 +117,27 @@ func load_level_area(new_area_id: int) -> void:
 	area_id = new_area_id
 	
 	var area_code: String = area_headers[area_id].area_code
-	area = LevelCodeSerializer.deserialize_area_code(area_code)
+	area = LevelCodeDeserializer.deserialize_area_code(area_code)
+
+
+# conversion
+func convert_and_load_level(code: String) -> void:
+	var level_data: LevelData = LevelData.new(code)
+	level_data.load_in(code)
+	
+	var container: LevelDataContainer = conversion_util.get_new_level_data_from_old_data(level_data)
+	level_metadata = container.level_metadata
+	saved_editor_data = container.saved_editor_data
+	mission_data = container.mission_data
+	area_headers = container.area_headers
+
+
+func convert_old_code_to_new(code: String) -> String:
+	var level_data: LevelData = LevelData.new(code)
+	level_data.load_in(code)
+	
+	var container: LevelDataContainer = conversion_util.get_new_level_data_from_old_data(level_data)
+	return LevelCodeSerializer.serialize_level_data(container)
 
 
 ## campaign

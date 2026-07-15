@@ -25,7 +25,7 @@ func is_metal_or_rainbow(body):
 	return body.powerup != null and (body.powerup.id == "Metal" or body.powerup.id == "Rainbow")
 
 func kill(body):
-	if !(enabled and body.name.begins_with("Character") and !body.dead and body.controllable and layer == middle):
+	if !enabled and body.name.begins_with("Character") and !body.dead and body.controllable:
 		return
 	
 	if is_metal_or_rainbow(body):
@@ -52,7 +52,7 @@ func _ready():
 		var _connect = area.connect("body_entered", self, "kill")
 	else:
 		var _connect = connect("property_changed", self, "update_property")
-		area.get_child(0).disabled = !enabled or !layer == middle
+		area.get_child(0).disabled = !enabled
 		if is_preview:
 			z_index = 0
 			sprite.z_index = 0

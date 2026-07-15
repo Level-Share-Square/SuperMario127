@@ -5,16 +5,10 @@ extends LevelLayer
 onready var tile_map_manager: TileMapManager = $"%TileMapManager"
 onready var object_manager: ObjectManager = $"%ObjectManager"
 
-var autoset_tint: bool = true
-var layer_tint: Color = Color.white
-var order: int = 0
-# Empty means always active
-var activated_mission_ids: PoolIntArray = []
-
-var last_canvas_position = Vector2.ZERO
-
 
 func load_in(layer_data: LayerData):
+	.load_in(layer_data)
+	
 	tile_map_manager.load_in(layer_data)
 	object_manager.load_in(layer_data)
 

@@ -43,7 +43,7 @@ func create_object(object_data: ObjectData, add_to_data: bool = false) -> GameOb
 	return game_object
 
 
-func erase_object(game_object: GameObject) -> void:
+func erase_object(game_object) -> void:
 	var object_data: ObjectData = game_object.object_data_ref.get_ref()
 	game_object.queue_free()
 	object_data.free()

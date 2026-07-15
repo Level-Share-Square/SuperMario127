@@ -130,11 +130,11 @@ func _ready() -> void:
 		
 		# if the shine is collected, make it blue 
 		# (collected_shines is a Dictionary where the key is the shine id and the value is a bool)
-		if Singleton.ModeSwitcher.get_node("ModeSwitcherButton").invisible:
-			var collected_shines = CurrentLevelData.level_info.collected_shines
-
-			# Get the value, returning false if the key doesn't exist
-			is_blue = collected_shines.get(str(id), false)
+#		if Singleton.ModeSwitcher.get_node("ModeSwitcherButton").invisible:
+#			var collected_shines = CurrentLevelData.level_info.collected_shines
+#
+#			# Get the value, returning false if the key doesn't exist
+#			is_blue = collected_shines.get(str(id), false)
 		if is_blue:
 			vector_rays.color = Color.blue
 	else:
@@ -147,11 +147,11 @@ func _ready() -> void:
 	if activation_tag.to_lower() != "empty":
 		add_to_group("tag_shine_%s" % activation_tag.to_lower())
 
-
-func on_place():
-	CurrentLevelData.set_shine_ids()
-	id = level_object.get_ref().properties[13]
-	set_property("id", id)
+#
+#func on_place():
+#	CurrentLevelData.set_shine_ids()
+#	id = level_object.get_ref().properties[13]
+#	set_property("id", id)
 
 
 func update_color(key, value):
@@ -213,22 +213,22 @@ func _physics_process(_delta: float) -> void:
 		animated_sprite.frame = wrapi(OS.get_ticks_msec() / (1000/8), 0, 16)
 		
 	if mode != 1:
-		var do_animation: bool = not (id in CurrentLevelData.level_data.vars.activated_shine_ids)
+		var do_animation: bool = not (id in CurrentLevelData.vars.activated_shine_ids)
 		
 		# band aid crash fix
-		while CurrentLevelData.level_data.vars.shine_shards_collected.size() <= CurrentLevelData.area:
-			CurrentLevelData.level_data.vars.shine_shards_collected.append([0, []])
-		while CurrentLevelData.level_data.vars.purple_starbits_collected.size() <= CurrentLevelData.area:
-			CurrentLevelData.level_data.vars.purple_starbits_collected.append([0, []])
+		while CurrentLevelData.vars.shine_shards_collected.size() <= CurrentLevelData.area_id:
+			CurrentLevelData.vars.shine_shards_collected.append([0, []])
+		while CurrentLevelData.vars.purple_starbits_collected.size() <= CurrentLevelData.area_id:
+			CurrentLevelData.vars.purple_starbits_collected.append([0, []])
 		
 		if red_coins_activate and !activated and CurrentLevelData.level_data.vars.max_red_coins > 0:
-			if CurrentLevelData.level_data.vars.red_coins_collected[0] == CurrentLevelData.level_data.vars.max_red_coins:
+			if CurrentLevelData.vars.red_coins_collected[0] == CurrentLevelData.vars.max_red_coins:
 				activate_shine(ActivateAnimations.NORMAL if do_animation else ActivateAnimations.SKIP, false, true)
-		if shine_shards_activate and !activated and CurrentLevelData.level_data.vars.max_shine_shards > 0:
-			if CurrentLevelData.level_data.vars.shine_shards_collected[CurrentLevelData.area][0] == CurrentLevelData.level_data.vars.max_shine_shards:
+		if shine_shards_activate and !activated and CurrentLevelData.vars.max_shine_shards > 0:
+			if CurrentLevelData.vars.shine_shards_collected[CurrentLevelData.area_id][0] == CurrentLevelData.vars.max_shine_shards:
 				activate_shine(ActivateAnimations.NORMAL if do_animation else ActivateAnimations.SKIP, false, true)
-		if purple_starbits_activate and !activated and CurrentLevelData.level_data.vars.max_purple_starbits > 0:
-			if CurrentLevelData.level_data.vars.purple_starbits_collected[CurrentLevelData.area][0] >= required_purples:
+		if purple_starbits_activate and !activated and CurrentLevelData.vars.max_purple_starbits > 0:
+			if CurrentLevelData.vars.purple_starbits_collected[CurrentLevelData.area_id][0] >= required_purples:
 				activate_shine(ActivateAnimations.NORMAL if do_animation else ActivateAnimations.SKIP, false, true)
 	
 	if collected:
@@ -361,25 +361,25 @@ func collect(body: PhysicsBody2D) -> void:
 		collected = true
 		visible = false
 
-		if Singleton.ModeSwitcher.get_node("ModeSwitcherButton").invisible:
-			var is_new_record: bool = CurrentLevelData.level_info.is_new_record(id)
-			
-			score_from_before = CurrentLevelData.time_score
-			CurrentLevelData.level_info.set_shine_collected(id, false)
-			CurrentLevelData.level_info.update_time_and_coin_score(id, CurrentLevelData.selected_file > -2)
-			CurrentLevelData.stop_tracking_time_score()
-			if !do_kick_out:
-				var level_info = CurrentLevelData.level_info
-				var new_shine_id = level_info.selected_shine + 1
-				if new_shine_id < level_info.shine_details.size():
-					level_info.selected_shine = new_shine_id
-				get_tree().get_current_scene().get_node("%PauseController").emit_signal("shine_collected")
-			elif CurrentLevelData.is_playing_campaign():
-				CurrentLevelData.shine_kickout_data = {
-					"title": title,
-					"time_score": score_from_before,
-					"new_record": is_new_record
-				}
+#		if Singleton.ModeSwitcher.get_node("ModeSwitcherButton").invisible:
+#			var is_new_record: bool = CurrentLevelData.level_info.is_new_record(id)
+#
+#			score_from_before = CurrentLevelData.time_score
+#			CurrentLevelData.level_info.set_shine_collected(id, false)
+#			CurrentLevelData.level_info.update_time_and_coin_score(id, CurrentLevelData.selected_file > -2)
+#			CurrentLevelData.stop_tracking_time_score()
+#			if !do_kick_out:
+#				var level_info = CurrentLevelData.level_info
+#				var new_shine_id = level_info.selected_shine + 1
+#				if new_shine_id < level_info.shine_details.size():
+#					level_info.selected_shine = new_shine_id
+#				get_tree().get_current_scene().get_node("%PauseController").emit_signal("shine_collected")
+#			elif CurrentLevelData.is_playing_campaign():
+#				CurrentLevelData.shine_kickout_data = {
+#					"title": title,
+#					"time_score": score_from_before,
+#					"new_record": is_new_record
+#				}
 
 func start_shine_dance() -> void:
 	character.set_state_by_name("NoActionState", get_physics_process_delta_time())

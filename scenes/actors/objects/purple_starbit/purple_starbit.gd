@@ -21,7 +21,7 @@ export var anim_damp = 80
 
 func collect(body):
 	if enabled and !collected and collectable and body.name.begins_with("Character") and !body.dead:
-		CurrentLevelData.level_data.vars.collect_purple_starbit(id)
+		CurrentLevelData.vars.collect_purple_starbit(id)
 		var player_id = 1
 		if body.name == "Character":
 			player_id = 0
@@ -34,18 +34,17 @@ func _ready():
 	if mode == 1: return
 	if enabled:
 #		add_to_group("purple_starbits")
-		id = CurrentLevelData.level_data.vars.max_purple_starbits
-		CurrentLevelData.level_data.vars.max_purple_starbits += 1
+		id = CurrentLevelData.vars.max_purple_starbits
+		CurrentLevelData.vars.max_purple_starbits += 1
 	
 	# band aid crash fix
-	while CurrentLevelData.level_data.vars.purple_starbits_collected.size() <= CurrentLevelData.area:
-		CurrentLevelData.level_data.vars.purple_starbits_collected.append([0, []])
+	while CurrentLevelData.vars.purple_starbits_collected.size() <= CurrentLevelData.area_id:
+		CurrentLevelData.vars.purple_starbits_collected.append([0, []])
 	
-	if id in CurrentLevelData.level_data.vars.purple_starbits_collected[CurrentLevelData.area][1] and !timed:
+	if id in CurrentLevelData.vars.purple_starbits_collected[CurrentLevelData.area_id][1] and !timed:
 		queue_free()
 	
-	if layer == middle:
-		var _connect = area.connect("body_entered", self, "collect")
+	var _connect = area.connect("body_entered", self, "collect")
 
 var prev_activate_shape = false
 func _process(delta):

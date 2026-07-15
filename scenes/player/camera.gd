@@ -65,7 +65,6 @@ func _physics_process(delta):
 			if is_instance_valid(bg):
 				bg.parallax_node.scroll_base_scale.y = zoom.y
 			if skip_to_player:
-				yield(get_tree(), "idle_frame")
 				reset_smoothing()
 				skip_to_player = false
 			shape.shape.extents = base_size * zoom.y
@@ -128,8 +127,6 @@ func _physics_process(delta):
 func set_zoom_tween(target : Vector2, time : float, override = false):
 	old_zoom = target
 	current_zoom = target
-	yield(get_tree(), "physics_frame")
-	yield(get_tree(), "physics_frame")
 	zoom_tween.remove_all()
 	# overrides level boundary safety check
 	if override:
@@ -138,7 +135,7 @@ func set_zoom_tween(target : Vector2, time : float, override = false):
 		print(zoom_tween.connect("tween_all_completed", self, "on_zoom_tween_zoomed"))
 		zoom_tween.start()
 		return
-	var level_size : Vector2 = CurrentLevelData.level_data.areas[CurrentLevelData.area].bounds.size * 16
+	var level_size : Vector2 = CurrentLevelData.area.header.bounds.size * 16
 	var intended_zoom = target * size
 	
 	var divide: float = size.y

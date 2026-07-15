@@ -1,4 +1,4 @@
-[gd_scene load_steps=99 format=2]
+[gd_scene load_steps=98 format=2]
 
 [ext_resource path="res://scenes/player/player.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/level_shared.tscn" type="PackedScene" id=2]
@@ -11,7 +11,6 @@
 [ext_resource path="res://scenes/actors/objects/purple_starbit/purple_collect.wav" type="AudioStream" id=9]
 [ext_resource path="res://scenes/player/ui_new/ui/shine_shards.png" type="Texture" id=10]
 [ext_resource path="res://assets/fonts/super-mario-script-3-1402.ttf" type="DynamicFontData" id=11]
-[ext_resource path="res://scenes/player/viewports.gd" type="Script" id=12]
 [ext_resource path="res://scenes/shared/backgrounds.tscn" type="PackedScene" id=13]
 [ext_resource path="res://scenes/player/ui_new/polygon_swatch.tscn" type="PackedScene" id=14]
 [ext_resource path="res://assets/fonts/marioscript_ui.tres" type="DynamicFont" id=15]
@@ -2443,37 +2442,6 @@ layer = 60
 character_path = NodePath("../../Area/Character")
 camera_path = NodePath("../../CameraP1")
 viewport_offset = Vector2( 192, 216 )
-
-[node name="Viewports" type="HBoxContainer" parent="."]
-visible = false
-margin_right = 772.0
-margin_bottom = 432.0
-mouse_filter = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-script = ExtResource( 12 )
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
-character_scene_path = "res://scenes/actors/mario/mario.tscn"
-
-[node name="ViewportContainer" type="ViewportContainer" parent="Viewports"]
-margin_right = 772.0
-margin_bottom = 432.0
-mouse_filter = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-stretch = true
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="Viewport" type="Viewport" parent="Viewports/ViewportContainer"]
-size = Vector2( 772, 432 )
-handle_input_locally = false
-render_target_update_mode = 0
 
 [node name="SharedSounds" type="Node" parent="."]
 unique_name_in_owner = true

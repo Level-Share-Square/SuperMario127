@@ -4,24 +4,25 @@ extends LevelLayer
 
 onready var tile_map_manager: TileMapManager = $"%TileMapManager"
 onready var object_manager: ObjectManager = $"%ObjectManager"
-onready var parallax_background: ParallaxBackground = $"%ParallaxBackground"
+
 
 var parallax_distance: float = 0
-var autoset_tint: bool = true
-var layer_tint: Color = Color.white
 
-var order: int = 0
-# -1 means always activated
-var activated_mission_id: int = -1
 
-var last_canvas_position = Vector2.ZERO
+func _process(delta: float) -> void:
+#	var canvas_position: Vector2 = get_canvas_transform().origin
+	var parallax_factor: float = parallax_distance
+	position = -get_canvas_transform().origin * parallax_factor
 
 
 func load_in(layer_data: LayerData):
-	var parallax_factor: float = 1
-	parallax_background.scroll_base_scale = Vector2(parallax_factor, parallax_factor)
+	.load_in(layer_data)
+	
+	modulate = layer_tint
+	z_index = order
 	
 	tile_map_manager.load_in(layer_data)
+	
 	object_manager.load_in(layer_data)
 
 
@@ -43,12 +44,6 @@ func place_object(s_position: Vector2, to_place: ObjectData):
 	object_manager.place_object(s_position, to_place)
 
 
-func erase_object(to_remove: GameObject):
+func erase_object(to_remove):
 	object_manager.erase_object(to_remove)
 	
-# misc
-
-func set_parallax_distance(distance: float):
-	parallax_background.scroll_base_scale = Vector2(distance, distance)
-	scale = Vector2(-distance, -distance)
-

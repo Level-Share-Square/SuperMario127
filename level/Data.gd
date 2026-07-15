@@ -43,10 +43,6 @@ func _init(code: String = "", skip: bool = false):
 func get_area(result) -> AreaDataOld:
 	var area = AreaDataOld.new()
 	area.tile_chunks.clear()
-	area.very_foreground_tiles.clear()
-	area.foreground_tiles.clear()
-	area.background_tiles.clear()
-	area.very_background_tiles.clear()
 	
 	area.bounds.size = result.size
 	
@@ -165,8 +161,7 @@ func get_chunk_for_position(x: int, y: int, layer: int, chunks: Dictionary) -> A
 
 
 func get_object(result) -> ObjectDataOld:
-	var object
-	object = ObjectDataOld.new()
+	var object: ObjectDataOld = ObjectDataOld.new()
 	object.type_id = result.type_id
 	object.palette = result.palette
 	object.properties = result.properties

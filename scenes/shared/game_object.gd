@@ -257,6 +257,9 @@ func create_collision_polygons_from_tree(node: Node, node_transform: Transform2D
 
 
 func set_object_data_property_metadata() -> void:
+	if not is_instance_valid(object_data_ref):
+		return
+	
 	var object_data: ObjectData = object_data_ref.get_ref()
 	
 	if is_instance_valid(object_data):

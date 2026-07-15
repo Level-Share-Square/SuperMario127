@@ -51,7 +51,7 @@ func exit_area(body):
 func enter_detector(body):
 	if !loaded_activated:
 		return
-	if body.name.begins_with("Character") and respawn_timer == 0 and enabled and body.velocity.y > 0 and layer == middle:
+	if body.name.begins_with("Character") and respawn_timer == 0 and enabled and body.velocity.y > 0:
 		respawn_timer = 10.0
 		if body.state != body.get_state_node("GroundPoundState"):
 			body.velocity.y = -230
@@ -63,17 +63,20 @@ func enter_detector(body):
 			body.add_nozzle("RocketNozzle")
 			
 			#create nozzle after bouncing
-			var object = ObjectDataOld.new()
-			object.type_id = 20
-			object.properties = []
-			object.properties.append(position + Vector2(0, 4))
-			object.properties.append(Vector2(1, 1))
-			object.properties.append(0)
-			object.properties.append(true)
-			object.properties.append(true)
-			object.properties.append(layer)
-			object.properties.append(Vector2(0, -250))
-			object.properties.append("RocketNozzle")
+			var object = ObjectData.new(
+				ObjectMetadata.new(position + Vector2(0, 4), 20, true, palette),
+				{}
+			)
+			
+#			object.type_id = 20
+#			object.properties = []
+#			object.properties.append(position + Vector2(0, 4))
+#			object.properties.append(Vector2(1, 1))
+#			object.properties.append(0)
+#			object.properties.append(true)
+#			object.properties.append(layer)
+#			object.properties.append(Vector2(0, -250))
+#			object.properties.append("RocketNozzle")
 			get_parent().create_object(object, false)
 		
 		else:
@@ -85,7 +88,7 @@ func enter_detector(body):
 		sound.play()
 		
 		# activates all deactivated rocket turbo loaded in the level
-		CurrentLevelData.level_data.vars.activate_fludd(2)
+		CurrentLevelData.vars.activate_fludd(2)
 		
 func _on_fludd_activated():
 	sprite.modulate.a = 1

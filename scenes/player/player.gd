@@ -61,7 +61,7 @@ func _ready():
 	
 	if CurrentLevelData.area.header.timer > 0.00:
 		var timer_manager = get_timer_manager()
-		timer_manager.add_set_timer("area_timer", CurrentLevelData.level_data.areas[CurrentLevelData.area].timer, "death", true, true)
+		timer_manager.add_set_timer("area_timer", CurrentLevelData.area.header.timer, "death", true, true)
 #		vignette.visible = true
 	
 	load_in()

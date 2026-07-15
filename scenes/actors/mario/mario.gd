@@ -620,9 +620,9 @@ func set_state_by_name(name: String, delta: float = 0.0001) -> void:
 		set_state(get_state_node(name), delta)
 		
 func add_nozzle(new_nozzle: String) -> void:
-	if !new_nozzle in CurrentLevelData.level_data.vars.nozzles_collected:
-		CurrentLevelData.level_data.vars.nozzles_collected.append(new_nozzle)
-	print(CurrentLevelData.level_data.vars.nozzles_collected)
+	if !new_nozzle in CurrentLevelData.vars.nozzles_collected:
+		CurrentLevelData.vars.nozzles_collected.append(new_nozzle)
+	print(CurrentLevelData.vars.nozzles_collected)
 
 func get_nozzle_node(name: String) -> Node:
 	if nozzles_node.has_node(name):
@@ -636,7 +636,7 @@ func nozzle_sort(a, b):
 	return false
 
 func set_nozzle(new_nozzle: String, change_index := true) -> void:
-	CurrentLevelData.level_data.vars.nozzles_collected.sort_custom(self, "nozzle_sort")
+	CurrentLevelData.vars.nozzles_collected.sort_custom(self, "nozzle_sort")
 	
 	fludd_sound.stop()
 	turbo_sound.stop()
@@ -650,7 +650,7 @@ func set_nozzle(new_nozzle: String, change_index := true) -> void:
 	using_turbo = false
 	turbo_nerf = false
 	if change_index:
-		nozzles_list_index = CurrentLevelData.level_data.vars.nozzles_collected.find(str(new_nozzle))
+		nozzles_list_index = CurrentLevelData.vars.nozzles_collected.find(str(new_nozzle))
 	
 	if is_instance_valid(nozzle) and (is_instance_valid(powerup) and powerup.name == "RainbowPowerup"):
 		set_nozzle("null", true) # Mario simply isn't allowed to have fludd
@@ -1028,14 +1028,14 @@ func _physics_process(delta: float) -> void:
 		snap = Vector2.ZERO
 	
 	# Switch nozzle
-	if (inputs[8][1] and CurrentLevelData.level_data.vars.nozzles_collected.size() > 1
+	if (inputs[8][1] and CurrentLevelData.vars.nozzles_collected.size() > 1
 	# Rainbow Mario can't use fludd, so no point in allowing switching nozzles
 	and (!is_instance_valid(powerup) or powerup.name != "RainbowPowerup")):
 		nozzles_list_index += 1
-		if nozzles_list_index >= CurrentLevelData.level_data.vars.nozzles_collected.size():
+		if nozzles_list_index >= CurrentLevelData.vars.nozzles_collected.size():
 			nozzles_list_index = 0
 		
-		var new_nozzle = str(CurrentLevelData.level_data.vars.nozzles_collected[nozzles_list_index])
+		var new_nozzle = str(CurrentLevelData.vars.nozzles_collected[nozzles_list_index])
 		set_nozzle(new_nozzle, false)
 		
 		nozzle_switch_sound.play()

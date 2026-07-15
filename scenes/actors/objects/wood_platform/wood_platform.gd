@@ -51,7 +51,6 @@ var scale_x : float
 export var override_part_width := 0 # If this value is not equal to 0, this'll replace part_width with it's value
 
 func _ready():
-	is_middle(layer == middle)
 	if override_part_width != 0:
 		part_width = override_part_width
 

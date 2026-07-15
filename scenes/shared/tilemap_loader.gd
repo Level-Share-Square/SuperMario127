@@ -10,6 +10,7 @@ onready var back_tilemap_node : TileMap = get_node(back_tilemap)
 onready var middle_tilemap_node : TileMap = get_node(middle_tilemap)
 onready var front_tilemap_node : TileMap = get_node(front_tilemap)
 
+var level_area
 
 var tileset_cache := []
 var tileset_palettes := []
@@ -36,7 +37,7 @@ func _ready():
 			tileset.right_slope_tile_id
 		]
 		
-		tileset_palettes = preload("res://generation/tileset_palettes.res").tileset_palettes
+		tileset_palettes = load("res://generation/tileset_palettes.res").tileset_palettes
 	
 func get_tile(tileset_id, tile_id, palette_id = 0):
 	if palette_id == 0 or tileset_palettes[tileset_id].size() < palette_id:
@@ -84,11 +85,11 @@ const emptyTile = [0,0,0]
 func get_tile_in_data(x: int, y: int, layer: int):
 	var chunk_key = get_chunk_key(x, y, layer)
 	
-	if CurrentLevelData.current_area_data.tile_chunks.has(chunk_key):
-		var tile = level_area.tile_chunks[chunk_key][posmod(x, 16)+posmod(y, 16)*16]
-		return tile if tile else emptyTile
-	else:
-		return emptyTile
+#	if CurrentLevelData.current_area_data.tile_chunks.has(chunk_key):
+#		var tile = level_area.tile_chunks[chunk_key][posmod(x, 16)+posmod(y, 16)*16]
+#		return tile if tile else emptyTile
+#	else:
+#		return emptyTile
 
 var numChunks : int = 0
 func set_tile(x: int, y: int, layer: int, tileset_id: int, tile_id: int, palette_id: int = 0):

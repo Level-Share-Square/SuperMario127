@@ -366,19 +366,27 @@ static func get_new_area_code(header: AreaHeader, old_area: AreaDataOld) -> Stri
 	var area_data: AreaData = AreaData.new(header, [])
 	
 	var layers: Dictionary = {}
-	var ground: LayerData = layers.get_or_add(0, LayerData.new(LayerMetadata.new(), TileData.new()))
+	var ground: LayerData = layers.get_or_add(1, LayerData.new(LayerMetadata.new(), TileData.new()))
 	ground.layer_metadata.is_ground = true
 	for chunk_key in old_area.tile_chunks:
 		var layer: int = int(chunk_key.substr(4, 1))
-		var layer_data: LayerData = layers.get_or_add(layer, LayerData.new(LayerMetadata.new(), TileData.new()))
-		if layer_data != ground:
-			layer_data.layer_metadata.is_ground == false
-		print(chunk_key.substr(2, 1))
+		var layer_data: LayerData = layers.get_or_add(layer, LayerData.new(LayerMetadata.new(0, false, Color.white, 0, false), TileData.new()))
+		if layer == 3:
+			layer_data.layer_metadata.order = -2
+			layer_data.layer_metadata.layer_tint = Color(0.545098, 0.545098, 0.545098)
+		if layer == 0:
+			layer_data.layer_metadata.order = -1
+			layer_data.layer_metadata.layer_tint = Color(0.545098, 0.545098, 0.545098)
+		if layer == 2:
+			layer_data.layer_metadata.order = 1
+		
 		var chunk_coord: Vector2 = Vector2(int(chunk_key.substr(0, 1)), int(chunk_key.substr(2, 1)))
 		var new_chunk_data: PoolIntArray = PoolIntArray()
 		for tile in old_area.tile_chunks.get(chunk_key):
-			if is_instance_valid(tile):
+			if tile != null:
 				new_chunk_data.append(tile_util.get_packed_tile(tile[0], tile[1], tile[2]))
+			else:
+				new_chunk_data.append(0)
 		
 		layer_data.tile_data.set_chunk_data(chunk_coord, new_chunk_data)
 	

@@ -47,6 +47,6 @@ func kill(body):
 			body.sound_player.play_hit_sound()
 
 func _ready():
-	shared = sawblade.shared
+#	shared = sawblade.shared
 	var _connect = area.connect("body_entered", self, "kill")
 	add_to_group("sawblades")
