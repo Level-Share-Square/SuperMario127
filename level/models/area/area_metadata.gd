@@ -1,5 +1,5 @@
 class_name AreaHeader
-extends Resource
+extends LevelDataResource
 
 # holds the code for the entire area, so that an area can be loaded with just its metadata 
 var name: String = ""

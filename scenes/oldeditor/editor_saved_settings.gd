@@ -13,10 +13,11 @@ var pinned_items : Array
 var tileset_loaded = false
 var loading_tileset := false
 
-var default_level : LevelDataOld
-var default_area : LevelAreaOld
+var default_level
+var default_area
 
 func _init():
-	default_level = ValidityChecker.new()
-	default_level.check_validity()
-	default_area = default_level.areas[0]
+	pass
+#	default_level = ValidityChecker.new()
+#	default_level.check_validity()
+#	default_area = default_level.areas[0]

@@ -1,5 +1,5 @@
 class_name LevelMetadata
-extends Resource
+extends LevelDataResource
 
 
 # todo: move these consts to the place where the "create new level" function will be

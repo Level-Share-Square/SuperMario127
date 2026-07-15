@@ -1,5 +1,5 @@
 class_name ObjectMetadata
-extends Resource
+extends LevelDataResource
 
 
 var type_id: int = 0

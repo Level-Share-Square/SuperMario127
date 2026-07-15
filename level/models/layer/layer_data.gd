@@ -1,5 +1,5 @@
 class_name LayerData
-extends Resource
+extends LevelDataResource
 
 
 var layer_metadata: LayerMetadata
@@ -22,10 +22,10 @@ func erase_tile(coords: Vector2) -> void:
 	tile_data.erase_tile(coords)
 
 
-func add_object(data: ObjectData) -> void:
+func add_object(data) -> void:
 	object_data.append(data)
 
 
-func place_object(position: Vector2, data: ObjectData):
+func place_object(position: Vector2, data):
 	data.position = position
 	add_object(data)

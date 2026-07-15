@@ -1,5 +1,5 @@
 class_name LayerMetadata
-extends Resource
+extends LevelDataResource
 
 
 # "distance" from the g layer, affects scroll speed

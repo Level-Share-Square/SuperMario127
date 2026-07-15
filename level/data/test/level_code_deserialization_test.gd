@@ -24,6 +24,8 @@ func _ready():
 #			Vector2(32, 5): [1, 0, 0],
 #		}
 #	)
+	
+#	base64_int_test([0, 1, 2, 3, 4, -1, -2, -3, -4])
 
 
 func load_file():
@@ -35,8 +37,7 @@ func load_file():
 
 
 func instance_debug_level():
-	# This whole funciton is a mess i have no idea how to do it right
-	var TEST_CODE_PATH = "res://level/data/test/test_code.txt"
+	var TEST_CODE_PATH = "res://level/data/test/old_test_code.txt"
 	var file = File.new()
 	file.open(TEST_CODE_PATH, File.READ)
 	var content = file.get_as_text()
@@ -58,3 +59,12 @@ func tile_byte_test(tiles: Dictionary):
 	print("TileData chunks: ", tile_data.chunks)
 	print("Tile bytes: ", tile_bytes)
 	print("Chunks from bytes: ", chunks_from_bytes)
+
+
+func base64_int_test(integers: PoolIntArray):
+	for integer in integers:
+		print("Value: ", integer)
+		var encoded: String = LevelCodeSerializer.base64_encode_int(integer)
+		print("Encoded: ", encoded)
+		var decoded: int = LevelCodeDeserializer.base64_decode_int(encoded)
+		print("Decoded: ", decoded)

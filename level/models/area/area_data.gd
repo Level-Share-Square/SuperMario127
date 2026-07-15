@@ -1,5 +1,5 @@
 class_name AreaData
-extends Resource
+extends LevelDataResource
 
 
 var header: AreaHeader

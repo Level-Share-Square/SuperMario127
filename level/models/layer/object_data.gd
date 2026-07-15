@@ -1,5 +1,5 @@
 class_name ObjectData
-extends Resource
+extends LevelDataResource
 
 
 const PALETTE_PROP_NAME: String = "palette"

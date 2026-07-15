@@ -12,7 +12,7 @@ func instance_level_data(data: LevelData):
 	instance_level_metadata(data.level_metadata)
 	#Old functionality is that all areas are loaded at once. We should really change this later. For now im keeping it this way for simplicities sake.
 	for area in data.area_metadatas:
-		var area_data = LevelCodeSerializer.deserialize_area_code(area.area_code)
+		var area_data = LevelCodeDeserializer.deserialize_area_code(area.area_code)
 		instance_area(area_data)
 
 

@@ -1,5 +1,5 @@
 class_name SavedEditorData
-extends Resource
+extends LevelDataResource
 
 
 # Declare member variables here. Examples:
