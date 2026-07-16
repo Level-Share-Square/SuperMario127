@@ -524,6 +524,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/menu/levels_list/cards/level/level_card.gd"
 }, {
+"base": "Resource",
+"class": "LevelCodeContainer",
+"language": "GDScript",
+"path": "res://level/level_resource.gd"
+}, {
 "base": "LevelCodeHandler",
 "class": "LevelCodeDeserializer",
 "language": "GDScript",
@@ -1263,6 +1268,7 @@ _global_script_class_icons={
 "LayerMetadata": "",
 "LevelBackgrounds": "",
 "LevelCard": "",
+"LevelCodeContainer": "",
 "LevelCodeDeserializer": "",
 "LevelCodeHandler": "",
 "LevelCodeSerializer": "",
