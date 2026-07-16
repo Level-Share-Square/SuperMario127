@@ -96,8 +96,8 @@ func _ready():
 			collision_shape.shape = RectangleShape2D.new()
 			editor_hitbox.add_child(collision_shape)
 		
-		if is_instance_valid(object_data_ref):
-			visibility = object_data_ref.get_ref().properties[4]
+#		if is_instance_valid(object_data_ref):
+#			visibility = object_data_ref.get_ref().properties[4]
 		
 		var editor = get_tree().current_scene
 		editor_hitbox.connect("mouse_entered", editor, "object_hovered", [self])

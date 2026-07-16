@@ -231,13 +231,13 @@ func play_cutscene(cutscene : CameraCutscene, reverse: bool = false):
 	
 	elif cutscene.cutscene_type == cutscene.Type.TRANSITION:
 		smoothing_enabled = false
-		Singleton.SceneTransitions.do_transition_animation(
-			Singleton.SceneTransitions.cutout_circle, 
+		SceneTransitions.do_transition_animation(
+			SceneTransitions.cutout_circle, 
 			cutscene.time
 			)
-		yield(Singleton.SceneTransitions, "transition_finished")
+		yield(SceneTransitions, "transition_finished")
 		position = new_position
-		yield(Singleton.SceneTransitions, "transition_finished")
+		yield(SceneTransitions, "transition_finished")
 		
 		if cutscene.animation != "" and !reverse:
 			cutscene.owner.animation_player.play(cutscene.animation)

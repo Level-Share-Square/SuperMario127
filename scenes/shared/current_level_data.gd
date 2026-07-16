@@ -85,6 +85,7 @@ func _process(delta: float) -> void:
 ## loading
 func load_level_metadata(code: String) -> void:
 	code = LevelCodeTokenizer.splice_level(code)
+	code = LevelCodeTokenizer.splice_metadata(code)
 	level_metadata = LevelCodeDeserializer.deserialize_level_metadata_code(code)
 
 
@@ -125,7 +126,7 @@ func load_level_area(new_area_id: int) -> void:
 
 # conversion
 func convert_and_load_level(code: String) -> void:
-	var level_data: LevelData = LevelData.new(code)
+	var level_data: LevelDataOld = LevelDataOld.new(code)
 	level_data.load_in(code)
 	
 	var container: LevelDataContainer = conversion_util.get_new_level_data_from_old_data(level_data)
@@ -136,7 +137,7 @@ func convert_and_load_level(code: String) -> void:
 
 
 func convert_old_code_to_new(code: String) -> String:
-	var level_data: LevelData = LevelData.new(code)
+	var level_data: LevelDataOld = LevelDataOld.new(code)
 	level_data.load_in(code)
 	
 	var container: LevelDataContainer = conversion_util.get_new_level_data_from_old_data(level_data)

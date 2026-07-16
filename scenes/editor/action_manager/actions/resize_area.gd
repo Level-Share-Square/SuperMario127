@@ -4,7 +4,7 @@ extends Action
 
 var shared: LevelShared
 
-var area_settings: LevelAreaOldSettings = CurrentLevelData.level_data.areas[CurrentLevelData.area].area_settings
+var area_settings: AreaDataOldSettings = CurrentLevelData.level_data.areas[CurrentLevelData.area].area_settings
 var bounds: Rect2
 
 

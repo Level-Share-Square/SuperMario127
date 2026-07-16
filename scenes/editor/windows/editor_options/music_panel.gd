@@ -25,12 +25,12 @@ func _ready():
 		line.connect("text_changed", self, "on_text_changed")
 
 func update_panel():
-	var area = CurrentLevelData.level_data.areas[CurrentLevelData.area]
+	var area = CurrentLevelData.area
 	var raw_music
 	if music_type == 0:
-		raw_music = area.music
+		raw_music = area.header.music
 	else:
-		raw_music = area.underwater_music
+		raw_music = area.header.underwater_music
 		
 	if typeof(raw_music) == TYPE_INT:
 		return #regular music implementation
@@ -49,13 +49,13 @@ func update_panel():
 		
 
 func save_song() -> String:
-	var area = CurrentLevelData.level_data.areas[CurrentLevelData.area]
+	var area = CurrentLevelData.area
 	var encoded_song: String = ""
 	encoded_song += "LP%s=%s|LEP=%sN=%s" % [loop_start, url, loop_end, song_name]
 	if music_type == 0:
-		area.music = encoded_song
+		area.header.music = encoded_song
 	else:
-		area.underwater_music = encoded_song
+		area.header.underwater_music = encoded_song
 	return encoded_song
 
 func on_text_changed(new_text):

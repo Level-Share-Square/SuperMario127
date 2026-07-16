@@ -23,9 +23,9 @@ func resume():
 	pause_controller.pause()
 
 func retry():
-	var cutout = Singleton.SceneTransitions.cutout_circle
+	var cutout = SceneTransitions.cutout_circle
 	Singleton.Music.stop_temporary_music()
-	Singleton.SceneTransitions.reload_scene(cutout, cutout, 0.4, 0, true)
+	SceneTransitions.reload_scene(cutout, cutout, 0.4, 0, true)
 
 func retry_start():
 	Singleton.CheckpointSaved.reset()

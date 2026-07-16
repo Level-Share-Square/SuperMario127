@@ -18,7 +18,7 @@ func set_tree_paused(value: bool):
 	get_tree().paused = value
 
 func can_pause() -> bool:
-	return CurrentLevelData.can_pause and !Singleton.SceneTransitions.transitioning
+	return CurrentLevelData.can_pause and !SceneTransitions.transitioning
 
 func pause():
 	if !cooldown.is_stopped(): return

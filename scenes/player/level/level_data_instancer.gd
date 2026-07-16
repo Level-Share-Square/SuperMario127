@@ -8,7 +8,7 @@ const LAYER_SCENE = preload("res://scenes/shared/level_layer/level_layer.tscn")
 # The purpose of this script is to take the new level data format, and instance all of the data into an actual level by setting variables which are scattered across multiple scenes and scripts
 
 
-func instance_level_data(data: LevelData):
+func instance_level_data(data: LevelDataOld):
 	instance_level_metadata(data.level_metadata)
 	#Old functionality is that all areas are loaded at once. We should really change this later. For now im keeping it this way for simplicities sake.
 	for area in data.area_metadatas:

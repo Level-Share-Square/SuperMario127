@@ -1,4 +1,4 @@
-func act(editor, position: Vector2, _level_data: LevelDataOld, _level_area: LevelAreaOld):
+func act(editor, position: Vector2, _level_data: LevelDataOld, _level_area: AreaDataOld):
 	var shared = editor.get_shared_node()
 	var objects = shared.get_objects_node()
 

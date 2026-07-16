@@ -11,8 +11,8 @@ const AREA_PANEL_SCENE = "res://scenes/editor/windows/editor_options/area_panel.
 func _ready():
 	var _connect = get_parent().connect("window_opened", self, "reload_areas")
 	_connect = new_area.connect("pressed", self, "create_area")
-	if CurrentLevelData.level_data.areas.size() >= 32:
-		new_area.disabled = true
+#	if CurrentLevelData.level_data.areas.size() >= 32:
+#		new_area.disabled = true
 	reload_areas()
 
 
@@ -24,30 +24,30 @@ func reload_areas():
 	
 	var index = 0
 	var default_names: int = 0
-	for area in CurrentLevelData.level_data.areas:
-		var area_panel = load(AREA_PANEL_SCENE).instance()
-		area_panel.set_background(area.sky, area.background, area.background_palette)
-		area_panel.set_id(index)
-		if area.name == "My Area":
-			default_names = 1
-		elif "My Area " + str(default_names) in area.name:
-			default_names += 1
-		if area.name == "":
-			area_panel.set_name("My Area " + str(default_names) if default_names > 0 else "My Area")
-			default_names += 1
-		else:
-			area_panel.set_name(area.name)
-		v_box_container.add_child(area_panel)
-		index += 1
+#	for area in CurrentLevelData.level_data.areas:
+#		var area_panel = load(AREA_PANEL_SCENE).instance()
+#		area_panel.set_background(area.sky, area.background, area.background_palette)
+#		area_panel.set_id(index)
+#		if area.name == "My Area":
+#			default_names = 1
+#		elif "My Area " + str(default_names) in area.name:
+#			default_names += 1
+#		if area.name == "":
+#			area_panel.set_name("My Area " + str(default_names) if default_names > 0 else "My Area")
+#			default_names += 1
+#		else:
+#			area_panel.set_name(area.name)
+#		v_box_container.add_child(area_panel)
+#		index += 1
 	
 	v_box_container.add_child(Control.new()) # because godot :mov:
 	
-	new_area.disabled = (CurrentLevelData.level_data.areas.size() >= 32)
+#	new_area.disabled = (CurrentLevelData.level_data.areas.size() >= 32)
 
 
 func create_area():
 	if CurrentLevelData.level_data.areas.size() != 32:
-		var area = LevelAreaOld.new()
+		var area = AreaDataOld.new()
 		area.duplicate(Singleton.EditorSavedSettings.default_area)
 		CurrentLevelData.level_data.areas.append(area)
 		reload_areas()
@@ -57,7 +57,7 @@ func create_area():
 
 func paste_area():
 	var area_code: String = OS.get_clipboard()
-	if area_code.substr(0, 9) != "LevelAreaOld":
+	if area_code.substr(0, 9) != "AreaDataOld":
 		printerr("Not an area!")
 		return
 	var validity_checker = ValidityChecker.new()

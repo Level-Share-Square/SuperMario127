@@ -1184,7 +1184,7 @@ func encode_int_bytes(val: int, num: int) -> PoolByteArray:
 	return output
 	
 func switch_areas(area_id, transition_time):
-	Singleton.SceneTransitions.reload_scene(cutout_circle, cutout_circle, transition_time, area_id, false)
+	SceneTransitions.reload_scene(cutout_circle, cutout_circle, transition_time, area_id, false)
 	if !switched:
 		if Singleton.PlayerSettings.other_player_id != -1:
 			get_tree().multiplayer.send_bytes(JSON.print(["area", area_id, transition_time]).to_ascii())
@@ -1280,7 +1280,7 @@ func kill(cause: String) -> void:
 				sound_player.play_death_sound()
 				yield(get_tree().create_timer(0.75), "timeout")
 				
-		Singleton.SceneTransitions.reload_scene(cutout_in, cutout_out, transition_time, 0, true)
+		SceneTransitions.reload_scene(cutout_in, cutout_out, transition_time, 0, true)
 
 func exit() -> void:
 	#if the mode switcher button is not invisible, we're in edit mode, switch back to that, but if we're in play mode then for now just reload the scene

@@ -1,4 +1,4 @@
-class_name LevelData
+class_name LevelDataOld
 extends Resource
 
 
@@ -355,7 +355,7 @@ func get_encoded_level_data():
 func get_encoded_area_data(area: AreaDataOld):
 	var level_string: String
 	
-	level_string += "LevelAreaOld_"
+	level_string += "AreaDataOld_"
 	
 	# Settings
 	level_string += old_value_util.encode_value(area.bounds.size) + ","

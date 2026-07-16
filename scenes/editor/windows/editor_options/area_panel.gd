@@ -41,7 +41,7 @@ func set_id(new_id):
 	id = new_id
 #	name_line.text = "ID: " + str(id)
 
-func swap(areaA : LevelAreaOld, areaB : LevelAreaOld, areasArray : Array) -> Array:
+func swap(areaA : AreaDataOld, areaB : AreaDataOld, areasArray : Array) -> Array:
   var area1 = areasArray.find(areaA)
   var area2 = areasArray.find(areaB)
   var temp = areasArray[area1]
@@ -50,27 +50,27 @@ func swap(areaA : LevelAreaOld, areaB : LevelAreaOld, areasArray : Array) -> Arr
   return areasArray
 
 func _ready():
-	for area in CurrentLevelData.level_data.areas:
-		area_names.append(area.name)
+#	for area_id in CurrentLevelData.level_data.areas:
+#		area_names.append(area_id.name)
 	area_name.connect("text_changed", self, "area_renamed")
 	var _connect = switch_to_button.connect("pressed", self, "switch_to_area")
 	_connect = delete_button.connect("pressed", self, "delete_area")
 	_connect = duplicate_button.connect("pressed", self, "duplicate_area")
-	if id == CurrentLevelData.area:
+	if id == CurrentLevelData.area_id:
 		switch_to_button.disabled = true
 		delete_button.disabled = true
 
 func switch_to_area():
-	if id != CurrentLevelData.area:
-		CurrentLevelData.area = id
-		Singleton.SceneTransitions.reload_scene()
+	if id != CurrentLevelData.area_id:
+		CurrentLevelData.area_id = id
+		SceneTransitions.reload_scene()
 
 
 func delete_area():
-	if id != CurrentLevelData.area:
+	if id != CurrentLevelData.area_id:
 		CurrentLevelData.level_data.areas.remove(id)
-		if CurrentLevelData.area > id:
-			CurrentLevelData.area -= 1
+		if CurrentLevelData.area_id > id:
+			CurrentLevelData.area_id -= 1
 		get_parent().get_parent().reload_areas()
 
 
@@ -83,44 +83,44 @@ func area_renamed(new_text: String):
 
 func duplicate_area():
 	if CurrentLevelData.level_data.areas.size() != 32:
-		var area = CurrentLevelData.level_data.areas[id].duplicate(true)
-		CurrentLevelData.level_data.areas.append(area)
+		var area_id = CurrentLevelData.level_data.areas[id].duplicate(true)
+		CurrentLevelData.level_data.areas.append(area_id)
 		get_parent().get_parent().reload_areas()
 
 
 func move_area_down():
 	if id < CurrentLevelData.level_data.areas.size() - 1 && CurrentLevelData.level_data.areas.size() > 1:
-		var area = CurrentLevelData.level_data.areas.pop_at(id)
-		CurrentLevelData.level_data.areas.insert(id + 1, area)
+		var area_id = CurrentLevelData.level_data.areas.pop_at(id)
+		CurrentLevelData.level_data.areas.insert(id + 1, area_id)
 		
-		# Properly re-assign the current area.
-		if CurrentLevelData.area == id:
-			# If the area we're moving is the current area.
-			CurrentLevelData.area += 1
+		# Properly re-assign the current area_id.
+		if CurrentLevelData.area_id == id:
+			# If the area_id we're moving is the current area_id.
+			CurrentLevelData.area_id += 1
 			
-		elif abs(CurrentLevelData.area - id) == 1:
-			# If the area we're moving is next to the current area.
-			Singleton .CurrentLevelData.area -= 1
+		elif abs(CurrentLevelData.area_id - id) == 1:
+			# If the area_id we're moving is next to the current area_id.
+			Singleton .CurrentLevelData.area_id -= 1
 			
-		# Don't re-assign the current area if it isn't next to the area we're moving.
+		# Don't re-assign the current area_id if it isn't next to the area_id we're moving.
 		get_parent().get_parent().reload_areas()
 
 
 func move_area_up():
 	if id > 0 && CurrentLevelData.level_data.areas.size() > 1:
-		var area = CurrentLevelData.level_data.areas.pop_at(id)
-		CurrentLevelData.level_data.areas.insert(id - 1, area)
+		var area_id = CurrentLevelData.level_data.areas.pop_at(id)
+		CurrentLevelData.level_data.areas.insert(id - 1, area_id)
 		
-		if CurrentLevelData.area == id:
+		if CurrentLevelData.area_id == id:
 			
-			CurrentLevelData.area -= 1
+			CurrentLevelData.area_id -= 1
 			
-		elif abs(CurrentLevelData.area - id) == 1:
+		elif abs(CurrentLevelData.area_id - id) == 1:
 			
-			CurrentLevelData.area += 1
+			CurrentLevelData.area_id += 1
 			
 		get_parent().get_parent().reload_areas()
 
 
 func copy_area():
-	OS.set_clipboard(CurrentLevelData.level_data.get_encoded_area_data(CurrentLevelData.level_data.areas[CurrentLevelData.area]))
+	OS.set_clipboard(CurrentLevelData.level_data.get_encoded_area_data(CurrentLevelData.level_data.areas[CurrentLevelData.area_id]))

@@ -327,14 +327,14 @@ func start_level(start_in_edit_mode : bool):
 	$TransitionRect.visible = false
 	# use the first fire of the transition_finished signal to change the scene when the screen finishes transitioning out
 	var goal_scene = EDITOR_SCENE if start_in_edit_mode else PLAYER_SCENE
-	var _connect = Singleton.SceneTransitions.connect("transition_finished", get_tree(), "change_scene_to", [goal_scene], CONNECT_ONESHOT)
+	var _connect = SceneTransitions.connect("transition_finished", get_tree(), "change_scene_to", [goal_scene], CONNECT_ONESHOT)
 	
-	Singleton.SceneTransitions.play_transition_audio()
+	SceneTransitions.play_transition_audio()
 	
 	if is_dark:
-		Singleton.SceneTransitions.do_transition_fade(Singleton.SceneTransitions.DEFAULT_TRANSITION_TIME, Color(0, 0, 0, 0), Color(0, 0, 0, 1))
+		SceneTransitions.do_transition_fade(SceneTransitions.DEFAULT_TRANSITION_TIME, Color(0, 0, 0, 0), Color(0, 0, 0, 1))
 	else:
-		Singleton.SceneTransitions.do_transition_fade(Singleton.SceneTransitions.DEFAULT_TRANSITION_TIME, Color(1, 1, 1, 0), Color(1, 1, 1, 1))
+		SceneTransitions.do_transition_fade(SceneTransitions.DEFAULT_TRANSITION_TIME, Color(1, 1, 1, 0), Color(1, 1, 1, 1))
 
 func set_level_code_panel(new_value : bool):
 	level_list_panel.visible = !new_value 

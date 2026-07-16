@@ -38,7 +38,7 @@ func reload_areas():
 
 func create_area():
 	if CurrentLevelData.level_data.areas.size() != 32:
-		var area = LevelAreaOld.new()
+		var area = AreaDataOld.new()
 		area.duplicate(Singleton.EditorSavedSettings.default_area)
 		CurrentLevelData.level_data.areas.append(area)
 		reload_areas()

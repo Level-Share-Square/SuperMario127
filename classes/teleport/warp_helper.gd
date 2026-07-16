@@ -37,7 +37,7 @@ func location_warp(character: Character, target_tag: String, max_pan_distance: i
 		tween.start()
 	else:
 		transition_in(character)
-		yield(Singleton.SceneTransitions, "transition_finished")
+		yield(SceneTransitions, "transition_finished")
 	
 	yield(get_tree().create_timer(WAIT_TIME), "timeout")
 	
@@ -159,14 +159,14 @@ func find_teleporter(target_tag: String) -> GameObject:
 
 func transition_in(character: Character) -> void:
 	# sets the transition center to Mario's position
-	Singleton.SceneTransitions.canvas_mask.global_position = get_character_screen_position(character)
-	Singleton.SceneTransitions.do_transition_animation(Singleton.SceneTransitions.cutout_circle, Singleton.SceneTransitions.DEFAULT_TRANSITION_TIME, Singleton.SceneTransitions.TRANSITION_SCALE_UNCOVER, Singleton.SceneTransitions.TRANSITION_SCALE_COVERED, -1, -1, false)
+	SceneTransitions.canvas_mask.global_position = get_character_screen_position(character)
+	SceneTransitions.do_transition_animation(SceneTransitions.cutout_circle, SceneTransitions.DEFAULT_TRANSITION_TIME, SceneTransitions.TRANSITION_SCALE_UNCOVER, SceneTransitions.TRANSITION_SCALE_COVERED, -1, -1, false)
 
 
 func transition_out(character: Character) -> void:
 	# sets the transition center to Mario's position
-	Singleton.SceneTransitions.canvas_mask.global_position = get_character_screen_position(character)
-	Singleton.SceneTransitions.do_transition_animation(Singleton.SceneTransitions.cutout_circle, Singleton.SceneTransitions.DEFAULT_TRANSITION_TIME, Singleton.SceneTransitions.TRANSITION_SCALE_COVERED, Singleton.SceneTransitions.TRANSITION_SCALE_UNCOVER, -1, -1, false)
+	SceneTransitions.canvas_mask.global_position = get_character_screen_position(character)
+	SceneTransitions.do_transition_animation(SceneTransitions.cutout_circle, SceneTransitions.DEFAULT_TRANSITION_TIME, SceneTransitions.TRANSITION_SCALE_COVERED, SceneTransitions.TRANSITION_SCALE_UNCOVER, -1, -1, false)
 
 
 func get_character_screen_position(character : Character) -> Vector2:
