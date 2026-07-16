@@ -2,15 +2,14 @@ class_name LevelCodeTokenizer
 extends Object
 
 
-const metadata_pattern = "\\{([^{}]*)\\}"
-const data_pattern = "(?:[^\\[\\],]+|\\[[^\\]]*\\])+"
-const dictionary_entry_pattern = "(?:[^\\[\\]~]+|\\[[^\\]]*\\])+"
+const METADATA_PATTERN = "\\{([^{}]*)\\}"
+const DATA_PATTERN = "(?:[^\\[\\],]+|\\[[^\\]]*\\])+"
+const DICTIONARY_ENTRY_PATTERN = "(?:[^\\[\\]:]+|\\[[^\\]]*\\])+"
 const array_data_pattern = "\\{(?:[^{}]++|\\{[^{}]*\\})*\\}"
 
 
 #probably wont be necessary..
 static func splice_level(code: String):
-	var result = get_outermost_brackets(code)[0]
 	return get_outermost_brackets(code)[0]
 
 
@@ -57,14 +56,14 @@ static func splice_object(code: String):
 # Pass any type into this to get its metadata.
 static func splice_metadata(code: String):
 	var regex = RegEx.new()
-	regex.compile(metadata_pattern)
+	regex.compile(METADATA_PATTERN)
 	return regex.search(code).get_string(1)
 
 
 # Used to get a list of primitive data types
 static func splice_data(code: String):
 	var regex = RegEx.new()
-	regex.compile(data_pattern)
+	regex.compile(DATA_PATTERN)
 	return regex_match_to_string_array(regex.search_all(code))
 
 
@@ -75,15 +74,12 @@ static func splice_data_array(code: String):
 
 # Used to get a list of key-value pairs
 static func splice_dictionary(code: String):
-	var regex = RegEx.new()
-	regex.compile(data_pattern)
-	return regex_match_to_string_array(regex.search_all(code))
+	return get_outermost_brackets(code)
 
 
 # Used to get an 2 element array that represents a key-value pair
 static func splice_dictionary_entry(code: String):
 	var regex = RegEx.new()
-	regex.compile(dictionary_entry_pattern)
 	return regex_match_to_string_array(regex.search_all(code))
 
 

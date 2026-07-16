@@ -77,7 +77,6 @@ static func chunks_to_tile_bytes(tile_chunks: Dictionary) -> PoolByteArray:
 		chunk_buffer = chunk_buffer.compress(File.COMPRESSION_DEFLATE)
 		tile_bytes.append(chunk_buffer.size())
 		tile_bytes.append(chunk_buffer.size() >> 8)
-		print()
 		tile_bytes.append_array(chunk_buffer)
 	
 	return tile_bytes
@@ -86,6 +85,11 @@ static func chunks_to_tile_bytes(tile_chunks: Dictionary) -> PoolByteArray:
 # Returns a chunk dictionary for TileData
 static func tile_bytes_to_chunks(tile_bytes: PoolByteArray) -> Dictionary:
 	var chunks: Dictionary = {}
+	
+	# if the bytes array is too small we obviously can't do anything so just
+	# return the empty dictionary
+	if tile_bytes.size() < CHUNK_HEADER_SIZE + TILE_CHUNK_SIZE:
+		return chunks
 	
 	var chunk_start: int = 0
 	var chunk_coords: Vector2 = Vector2.ZERO
