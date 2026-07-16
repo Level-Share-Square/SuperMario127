@@ -321,4 +321,5 @@ static func deserialize_data_code(data_code: String):
 		LevelCodeHandler.TYPE_CODE_DIALOGUE_DATA:
 			data = data
 	
-	return data
+	printerr("Could not decode data string \"%s\"!")
+	return null
