@@ -94,27 +94,35 @@ static func serialize_layer(layer: LayerData) -> String:
 
 
 static func serialize_objects(object_data: Array) -> String:
-	var code: String = "["
+	var code: String = ""
 	
 	for object in object_data:
-		object = object as ObjectData
-		code += "["
+		var object_code: String = serialize_object(object)
+		code += wrap_code_in_brackets(object_code)
+	
+	return wrap_code_in_brackets(code)
+
+
+static func serialize_object(object: ObjectData) -> String:
+		var object_code: String = ""
 		
-		code += serialize_metadata(
+		object_code += serialize_metadata(
 			[
 				object.metadata.type_id,
 				object.metadata.palette,
-				object.metadata.enabled,
 				object.metadata.position,
+				object.metadata.in_front,
+				object.metadata.enabled,
 			]
 		)
-		code += "[]" # serialize properties here
 		
-		code += "]"
-	
-	code += "]"
-	
-	return code
+		var property_dictionary: Dictionary = {}
+		for property in object.properties:
+			property_dictionary.get_or_add(property, object.properties[property])
+		
+		object_code += wrap_code_in_brackets(serialize_data(object.properties))
+		
+		return object_code
 
 
 static func serialize_layer_tile_data(tile_data: TileData) -> String:
