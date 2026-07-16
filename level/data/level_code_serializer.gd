@@ -255,6 +255,9 @@ static func serialize_data(value) -> String:
 		TYPE_COLOR:
 			value = value as Color
 			data_code = LevelCodeHandler.TYPE_CODE_COLOR + serialize_data_array([value.r, value.g, value.b, value.a])
+		TYPE_ARRAY:
+			value = value as Array
+			data_code = LevelCodeHandler.TYPE_CODE_STRING_ARRAY + serialize_data_array(value)
 		TYPE_STRING_ARRAY:
 			value = value as PoolStringArray
 			data_code = LevelCodeHandler.TYPE_CODE_STRING_ARRAY + serialize_data_array(value)
