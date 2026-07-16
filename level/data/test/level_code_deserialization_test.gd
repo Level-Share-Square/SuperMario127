@@ -6,9 +6,9 @@ const PLAYER_PATH = preload("res://scenes/player/player.tscn")
 
 
 func _ready():
-#	instance_debug_level()
-	
 	convert_debug_level()
+	
+	instance_debug_level()
 	
 #	tile_byte_test(
 #		{
