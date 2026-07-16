@@ -333,7 +333,23 @@ static func get_mission_data_from_old_data(level_data) -> Array:
 	var mission_data: Array = []
 	
 	return mission_data
-
+	
+static func get_area_data_from_old_data(old_area: AreaDataOld) -> AreaData:
+	var area_header := AreaHeader.new(
+		"",
+		old_area.bounds,
+		old_area.name,
+		old_area.sky,
+		old_area.background,
+		old_area.background_palette,
+		old_area.bg_autoscroll_speed,
+		old_area.gravity,
+		old_area.timer,
+		old_area.music,
+		old_area.underwater_music
+	)
+	
+	return get_new_area_code(area_header, old_area)
 
 static func get_area_headers_from_old_data(level_data) -> Array:
 	var area_headers: Array = []
@@ -355,14 +371,14 @@ static func get_area_headers_from_old_data(level_data) -> Array:
 			old_area.underwater_music
 		)
 		
-		area_header.area_code = get_new_area_code(area_header, old_area)
+		area_header.area_code = LevelCodeSerializer.serialize_area(get_new_area_code(area_header, old_area))
 		
 		area_headers.append(area_header)
 	
 	return area_headers
 
 
-static func get_new_area_code(header: AreaHeader, old_area: AreaDataOld) -> String:
+static func get_new_area_code(header: AreaHeader, old_area: AreaDataOld) -> AreaData:
 	var area_data: AreaData = AreaData.new(header, [])
 	
 	var BACKGROUND_TINT: Color = Color(0.545098, 0.545098, 0.545098)
@@ -418,7 +434,7 @@ static func get_new_area_code(header: AreaHeader, old_area: AreaDataOld) -> Stri
 	
 	area_data.layers = layers.values()
 	
-	return LevelCodeSerializer.serialize_area(area_data)
+	return area_data
 
 
 static func get_new_level_data_from_old_data(level_data) -> LevelDataContainer:

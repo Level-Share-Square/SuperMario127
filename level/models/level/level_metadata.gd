@@ -30,3 +30,20 @@ func _init(set_name: String, set_author: String, set_description: String, set_ur
 	level_thumbnail_sky = set_sky
 	level_thumbnail_background = set_background
 	level_thumbnail_background_palette = set_background_palette
+
+func get_level_background_texture() -> StreamTexture:
+	var background_resource = CurrentLevelData.get_cached_background(level_thumbnail_sky)
+	return background_resource.texture
+	
+func get_level_background_modulate() -> Color:
+	var background_resource = CurrentLevelData.get_cached_background(level_thumbnail_sky)
+	return background_resource.parallax_modulate
+
+func get_level_foreground_texture() -> StreamTexture:
+	var foreground_resource = CurrentLevelData.get_cached_foreground(level_thumbnail_background)
+	var palette = level_thumbnail_background_palette
+	
+	if palette == 0:
+		return foreground_resource.preview
+	else:
+		return foreground_resource.palettes[palette - 1]

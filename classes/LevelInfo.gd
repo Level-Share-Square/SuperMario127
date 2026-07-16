@@ -275,13 +275,14 @@ static func shine_sort(item1 : Dictionary, item2 : Dictionary) -> bool:
 	return item1["sort_order"] < item2["sort_order"]
 
 func update_meta_file() -> void:
-	var selected_file: int = CurrentLevelData.selected_file
-	var level_id: String = CurrentLevelData.level_id
-	var campaign_path: String = CurrentLevelData.working_folder
-	var save_folder: String = level_list_util.get_save_folder(campaign_path, selected_file)
-	var meta_dict: Dictionary = save_meta_util.load_meta_file(save_folder)
-	meta_dict = save_meta_util.update_meta_level(level_id, meta_dict, campaign_path, selected_file, self)
-	save_meta_util.save_meta_file(save_folder, meta_dict)
+#	var selected_file: int = CurrentLevelData.selected_file
+#	var level_id: String = CurrentLevelData.level_id
+#	var campaign_path: String = CurrentLevelData.working_folder
+#	var save_folder: String = level_list_util.get_save_folder(campaign_path, selected_file)
+#	var meta_dict: Dictionary = save_meta_util.load_meta_file(save_folder)
+#	meta_dict = save_meta_util.update_meta_level(level_id, meta_dict, campaign_path, selected_file, self)
+#	save_meta_util.save_meta_file(save_folder, meta_dict)
+	pass
 
 func set_shine_collected(shine_id : int, save_to_disk : bool = true) -> void:
 	collected_shines[str(shine_id)] = true

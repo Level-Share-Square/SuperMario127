@@ -86,11 +86,16 @@ func load_collectibles_info(level_info: LevelInfo)-> void:
 func load_level_info(_level_info: LevelInfo, _level_id: String, _working_folder: String, _can_edit: bool = true, _is_campaign: bool = false):
 	yield(get_parent(), "screen_opened")
 	
+	CurrentLevelData.load_level_metadata(_level_info.level_code)
+	CurrentLevelData.level_id = _level_id
 	level_info = _level_info
 	level_id = _level_id
 	working_folder = _working_folder
 	can_edit = _can_edit
 	is_campaign = _is_campaign
+	
+	var level_metadata: LevelMetadata = CurrentLevelData.level_metadata
+
 	
 	var current_number_of_players: int = Singleton.PlayerSettings.number_of_players
 	# load the real level data now
@@ -130,11 +135,11 @@ func load_level_info(_level_info: LevelInfo, _level_id: String, _working_folder:
 	
 	completion.visible = not is_campaign
 	
-	title.text = level_info.level_name
+	title.text = level_metadata.level_name
 	title_shadow.text = title.text
 	
-	author.text = author_prefix + level_info.level_author
-	description.bbcode_text = "[center]" + level_info.level_description + "[/center]"
+	author.text = author_prefix + level_metadata.level_author
+	description.bbcode_text = "[center]" + level_metadata.level_description + "[/center]"
 	
 	# buttons
 	edit_button.visible = can_edit
@@ -147,18 +152,18 @@ func load_level_info(_level_info: LevelInfo, _level_id: String, _working_folder:
 		reset_button.focus_neighbour_bottom = reset_button.get_path_to(delete_button)
 	
 	# thumbnail
-	var cached_image: ImageTexture = http_thumbnails.get_cached_image(level_info.thumbnail_url)
+	var cached_image: ImageTexture = http_thumbnails.get_cached_image(level_metadata.level_thumbnail_url)
 	if cached_image == null:
 		var thumb_path: String = level_list_util.get_level_thumbnail_path(level_id, working_folder)
 		if level_list_util.file_exists(thumb_path):
 			cached_image = level_list_util.get_image_from_path(thumb_path)
 	
 	if cached_image == null:
-		thumbnail.texture = level_info.get_level_background_texture()
+		thumbnail.texture = level_metadata.get_level_background_texture()
 		
 		foreground.visible = true
-		foreground.modulate = level_info.get_level_background_modulate()
-		foreground.texture = level_info.get_level_foreground_texture()
+		foreground.modulate = level_metadata.get_level_background_modulate()
+		foreground.texture = level_metadata.get_level_foreground_texture()
 	else:
 		thumbnail.texture = cached_image
 		foreground.visible = false
