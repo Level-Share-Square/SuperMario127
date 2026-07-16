@@ -171,7 +171,10 @@ static func deserialize_dictionary(code: String) -> Dictionary:
 	var dictionary: Dictionary = {}
 	for pair_code in pair_codes:
 		var pair: Array = LevelCodeTokenizer.splice_dictionary_entry(pair_code)
-		dictionary.get_or_add(pair[0], pair[1])
+		var key: int = deserialize_data_code(pair[0])
+		var value = deserialize_data_code(pair[1])
+		
+		dictionary.get_or_add(key, value)
 	
 	return dictionary
 
@@ -251,17 +254,17 @@ static func deserialize_data_code(data_code: String):
 	
 	match type_code:
 		LevelCodeHandler.TYPE_CODE_STRING:
-			return data
-			
-#			if data.empty():
-#				return ""
-#			else:
-#				data = data.replace("-", "+")
-#				data = data.replace("_", "/")
-#				# undo the padding replacement
-#				data = data.replace("~", "=")
-#				data = Marshalls.base64_to_raw(data)
-#				return data.decompress_dynamic(-1, File.COMPRESSION_DEFLATE).get_string_from_utf8()
+#			return data
+#			
+			if data.empty():
+				return ""
+			else:
+				data = data.replace("-", "+")
+				data = data.replace("_", "/")
+				# undo the padding replacement
+				data = data.replace("~", "=")
+				data = Marshalls.base64_to_raw(data)
+				return data.decompress_dynamic(-1, File.COMPRESSION_DEFLATE).get_string_from_utf8()
 		LevelCodeHandler.TYPE_CODE_INT:
 			return base64_decode_int(data)
 		LevelCodeHandler.TYPE_CODE_BOOL:
@@ -327,10 +330,10 @@ static func deserialize_data_code(data_code: String):
 		# TileData
 		LevelCodeHandler.TYPE_CODE_TILE_DATA:
 			data = LevelCodeTokenizer.splice_data_array(data)
-			var data_array = deserialize_datas_code(data)
+			var tile_bytes = deserialize_datas_code(data)[0]
 			
 			var tile_data: TileData = TileData.new()
-			var chunk_data: Dictionary = tile_util.tile_bytes_to_chunks(data_array[0])
+			var chunk_data: Dictionary = tile_util.tile_bytes_to_chunks(tile_bytes)
 			for chunk_coords in chunk_data.keys():
 				tile_data.set_chunk_data(chunk_coords, chunk_data.get(chunk_coords))
 			

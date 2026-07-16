@@ -80,6 +80,7 @@ static func splice_dictionary(code: String):
 # Used to get an 2 element array that represents a key-value pair
 static func splice_dictionary_entry(code: String):
 	var regex = RegEx.new()
+	regex.compile(DICTIONARY_ENTRY_PATTERN)
 	return regex_match_to_string_array(regex.search_all(code))
 
 

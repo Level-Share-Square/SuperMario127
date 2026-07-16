@@ -12,6 +12,11 @@ var chunks: Dictionary = {}
 var used_tiles: PoolVector2Array = PoolVector2Array()
 
 
+func _init() -> void:
+	chunks = {}
+	used_tiles = PoolVector2Array()
+
+
 static func get_chunk_coords(coords: Vector2) -> Vector2:
 	return (coords / TILE_CHUNK_SIZE).floor()
 

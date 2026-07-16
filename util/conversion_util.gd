@@ -419,6 +419,20 @@ static func get_new_area_code(header: AreaHeader, old_area: AreaDataOld) -> Area
 		
 		var property_dictionary: Dictionary = {}
 		for i in old_object.properties.size():
+			var value = old_object.properties[i]
+			# can't get all the default properties but we can at least check the old
+			# base ones and not include them if they're unchanged
+			match i:
+				0:
+					if value is Vector2 and value != Vector2.ONE:
+						property_dictionary.get_or_add(i, old_object.properties[i])
+				1:
+					if value is int and value != 0:
+						property_dictionary.get_or_add(i, old_object.properties[i])
+				2:
+					if value is bool and value != true:
+						property_dictionary.get_or_add(i, old_object.properties[i])
+				
 			property_dictionary.get_or_add(i, old_object.properties[i])
 		
 		var new_object: ObjectData = ObjectData.new(

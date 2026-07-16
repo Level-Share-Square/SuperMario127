@@ -173,10 +173,12 @@ static func serialize_dictionary(dict: Dictionary) -> String:
 	var code: String = ""
 	
 	for key in dict:
-		code += serialize_data(key)
-		code += "~"
-		code += serialize_data(dict[key])
-		code += ","
+		var pair_code: String = ""
+		pair_code += serialize_data(key)
+		pair_code += ":"
+		pair_code += serialize_data(dict[key])
+		
+		code += wrap_code_in_brackets(pair_code) + ","
 	
 	return wrap_code_in_brackets(code)
 
@@ -236,18 +238,18 @@ static func serialize_data(value) -> String:
 	match typeof(value):
 		TYPE_STRING:
 			value = value as String
-			data_code = LevelCodeHandler.TYPE_CODE_STRING + value
-#			data_code = LevelCodeHandler.TYPE_CODE_STRING
-#
-#			if not value.empty():
-#				var bytes: PoolByteArray = value.to_utf8().compress(File.COMPRESSION_DEFLATE)
-#				data_code += Marshalls.raw_to_base64(bytes)
-#				# convert from Base64 to Base64URL
-#				data_code = data_code.replace("+", "-")
-#				data_code = data_code.replace("/", "_")
-#				# padding in Base64 isn't URI encoding safe, so we replace "="
-#				# with "~" while serializing
-#				data_code = data_code.replace("=", "~")
+#			data_code = LevelCodeHandler.TYPE_CODE_STRING + value
+			data_code = LevelCodeHandler.TYPE_CODE_STRING
+			
+			if not value.empty():
+				var bytes: PoolByteArray = value.to_utf8().compress(File.COMPRESSION_DEFLATE)
+				data_code += Marshalls.raw_to_base64(bytes)
+				# convert from Base64 to Base64URL
+				data_code = data_code.replace("+", "-")
+				data_code = data_code.replace("/", "_")
+				# padding in Base64 isn't URI encoding safe, so we replace "="
+				# with "~" while serializing
+				data_code = data_code.replace("=", "~")
 		TYPE_INT:
 			value = value as int
 			data_code = LevelCodeHandler.TYPE_CODE_INT + base64_encode_int(value)
