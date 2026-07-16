@@ -514,6 +514,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://level/models/layer/layer_metadata.gd"
 }, {
+"base": "Node2D",
+"class": "LevelBackgrounds",
+"language": "GDScript",
+"path": "res://scenes/shared/background.gd"
+}, {
 "base": "BaseCard",
 "class": "LevelCard",
 "language": "GDScript",
@@ -1256,6 +1261,7 @@ _global_script_class_icons={
 "LavaBoostState": "",
 "LayerData": "",
 "LayerMetadata": "",
+"LevelBackgrounds": "",
 "LevelCard": "",
 "LevelCodeDeserializer": "",
 "LevelCodeHandler": "",

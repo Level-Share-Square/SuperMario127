@@ -1,3 +1,4 @@
+class_name LevelBackgrounds
 extends Node2D
 
 onready var parallax_node = $Parallax
