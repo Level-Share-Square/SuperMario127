@@ -64,15 +64,6 @@ func update_property(key, value):
 	pass
 
 
-func update_layer():
-	if render_in_front:
-		layer_shift = (LevelShared.layer_spacing * 2) + 1
-	else:
-		layer_shift = 1
-	
-	.update_layer()
-
-
 func _set_properties():
 	savable_properties = []
 	editable_properties = []

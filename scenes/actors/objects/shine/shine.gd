@@ -52,7 +52,7 @@ const SINE_SPEED: float = 1.5
 enum ActivateAnimations {NORMAL, SKIP, SHORT}
 
 var collected:= false
-var character: Character
+var character
 
 var anim_damp:= 160
 const NORMAL_COLOR:= Color(1, 1, 0)
@@ -111,15 +111,13 @@ func _ready() -> void:
 	if mode != 1: # not in edit mode
 		if required_purples > 0:
 			purple_starbits_activate = true
-			CurrentLevelData.level_data.vars.required_purple_starbits[CurrentLevelData.area].append(required_purples)
-			CurrentLevelData.level_data.vars.required_purple_starbits[CurrentLevelData.area].sort()
+			CurrentLevelData.vars.required_purple_starbits[CurrentLevelData.area].append(required_purples)
+			CurrentLevelData.vars.required_purple_starbits[CurrentLevelData.area].sort()
 		else:
 			purple_starbits_activate = false
 		
 		if red_coins_activate or shine_shards_activate or purple_starbits_activate:
 			activated = false
-		if layer == LevelShared.Layers.Middle:
-			var _connect = area.connect("body_entered", self, "collect")
 		unpause_timer.wait_time = UNPAUSE_TIMER_LENGTH
 		
 		if activated:
@@ -144,7 +142,7 @@ func _ready() -> void:
 	var _connect = connect("property_changed", self, "update_color")
 	update_color("color", color)
 	
-	if activation_tag.to_lower() != "empty":
+	if activation_tag != "":
 		add_to_group("tag_shine_%s" % activation_tag.to_lower())
 
 #
@@ -442,7 +440,7 @@ func character_shine_dance_finished(_animation: Animation) -> void:
 		character.anim_player.connect("animation_finished", self, "emit_signal", ["shine_dance_end"], CONNECT_ONESHOT)
 
 # warning-ignore:shadowed_variable
-func restore_control(_animation: String, character: Character) -> void:
+func restore_control(_animation: String, character) -> void:
 	# bad code sorry
 	yield(get_tree().create_timer(0.2), "timeout")
 

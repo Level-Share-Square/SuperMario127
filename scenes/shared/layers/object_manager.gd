@@ -15,23 +15,23 @@ func load_in(s_layer_data: LayerData):
 		create_object(object_data)
 
 
-func place_object(s_position: Vector2, object_data: ObjectData, add_to_data: bool = false) -> GameObject:
+func place_object(s_position: Vector2, object_data: ObjectData, add_to_data: bool = false):
 	if add_to_data:
 		layer_data.place_object(s_position, object_data)
 	
-	var game_object: GameObject = create_object(object_data, false)
+	var game_object = create_object(object_data, false)
 	
 	return game_object
 
 
-func create_object(object_data: ObjectData, add_to_data: bool = false) -> GameObject:
+func create_object(object_data: ObjectData, add_to_data: bool = false):
 	if add_to_data:
 		layer_data.add_object(object_data)
 	
 	var mode = get_tree().get_current_scene().mode
 	var object_scene = CurrentLevelData.get_cached_object(object_data.metadata.type_id)
 	
-	var game_object: GameObject = object_scene.instance()
+	var game_object = object_scene.instance()
 	game_object.mode = mode
 	game_object.object_data_ref = weakref(object_data)
 	game_object.level_layer_ref = weakref(get_parent())

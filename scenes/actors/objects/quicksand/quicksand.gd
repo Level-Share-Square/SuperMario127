@@ -23,7 +23,6 @@ func get_liquid_properties():
 
 func update_property(key, value):
 	update()
-	update_layer()
 	match(key):
 		"color":
 			update_liquid_color(value)

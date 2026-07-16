@@ -67,7 +67,7 @@ func place_object(s_position: Vector2, to_place: ObjectData):
 	pass
 
 
-func erase_object(to_remove: GameObject):
+func erase_object(to_remove):
 	pass
 
 
