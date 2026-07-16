@@ -20,6 +20,8 @@ func load_in(s_layer_data: LayerData):
 	if not layer_data.layer_metadata.is_ground:
 		collision_layer = 0
 		collision_mask = 0
+	else:
+		_add_margins()
 	
 	var packed_tile: int = 0
 	for coord in layer_data.tile_data.used_tiles:
@@ -64,3 +66,23 @@ func update_autotile(coords: Vector2, use_godot_autotile: bool = true):
 	else:
 		# Custom autotile logic goes here
 		pass
+
+# this is so the autotiling actually extends correctly. we only need this for
+# ground layers (and maybe even temporarily for that considering you can store
+# tile data literally anywhere now
+func _add_margins():
+	var bounds: Rect2 = CurrentLevelData.area.header.bounds
+	var tile: int = tile_set.find_tile_by_name("LevelMargin")
+	
+	var left: int = bounds.position.x - 1
+	var top: int = bounds.position.y - 1
+	var right: int = bounds.end.x
+	var bottom: int = bounds.end.y
+	
+	for x in range(left, right): 
+		set_cell(x, top, tile)
+		set_cell(x, bottom, tile)
+
+	for y in range(top, bottom):
+		set_cell(left, y, tile)
+		set_cell(right, y, tile)

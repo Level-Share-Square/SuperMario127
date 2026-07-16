@@ -381,7 +381,7 @@ static func get_new_area_code(header: AreaHeader, old_area: AreaDataOld) -> Stri
 		chunk_key = chunk_key as String
 		var layer: int = int(chunk_key.split(":")[2])
 		var layer_data: LayerData = layers[layer]
-		var chunk_coord: Vector2 = Vector2(int(chunk_key.substr(0, 1)), int(chunk_key.substr(2, 1)))
+		var chunk_coord: Vector2 = Vector2(int(chunk_key.split(":")[0]), int(chunk_key.split(":")[1]))
 		var new_chunk_data: PoolIntArray = PoolIntArray()
 		for tile in old_area.tile_chunks.get(chunk_key):
 			if tile != null:
