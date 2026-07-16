@@ -30,10 +30,6 @@ var ModeSwitcher setget ,_get_mode_switcher
 func _get_mode_switcher():
 	return lazy_get("ModeSwitcher", "res://scenes/actors/mode_switcher/mode_switcher.tscn", ModeSwitcher)
 
-var SceneTransitions: SceneTransitions setget ,_get_scene_transitions
-func _get_scene_transitions():
-	return lazy_get("SceneTransitions", "res://scenes/actors/scene_transitions/SceneTransitions.tscn", SceneTransitions)
-
 var SceneSwitcher setget ,_get_scene_switcher
 func _get_scene_switcher():
 	return lazy_get("SceneSwitcher", "res://singletons/scene_switcher.tscn", SceneSwitcher)

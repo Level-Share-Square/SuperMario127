@@ -18,20 +18,20 @@ func _ready():
 		value.connect("value_changed", self, "value_changed", [value])
 	
 func load_settings():
-	var area = CurrentLevelData.level_data.areas[CurrentLevelData.area]
-	size_x.value = area.bounds.size.x
-	size_y.value = area.bounds.size.y
-	gravity.value = area.gravity
-	mins.value = int(area.timer/60)
-	sec.value = fmod(area.timer, 60.0) 
+	var area = CurrentLevelData.area
+	size_x.value = area.header.bounds.size.x
+	size_y.value = area.header.bounds.size.y
+	gravity.value = area.header.gravity
+	mins.value = int(area.header.timer/60)
+	sec.value = fmod(area.header.timer, 60.0) 
 
 func value_changed(value, changed_value):
-	var area =  CurrentLevelData.level_data.areas[CurrentLevelData.area]
+	var area =  CurrentLevelData.area
 
-	area.bounds.size.x = size_x.value
-	area.bounds.size.y = size_y.value
-	area.gravity = gravity.value
-	area.timer = mins.value*60 + sec.value
+	area.header.bounds.size.x = size_x.value
+	area.header.bounds.size.y = size_y.value
+	area.header.gravity = gravity.value
+	area.header.timer = mins.value*60 + sec.value
 	if "Size" in changed_value.name:
 		shared.update_tilemaps()
 		camera.update_limits(area)

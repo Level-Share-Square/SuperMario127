@@ -1,7 +1,7 @@
 class_name LevelResourceTool
 
 
-static func unpack_level_data(level_data: LevelData):
+static func unpack_level_data(level_data: LevelDataOld):
 	pass
 
 static func set_level_vars(level_metadata: LevelMetadata):

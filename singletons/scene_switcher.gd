@@ -27,8 +27,8 @@ func quit_to_menu(screen_to_open : String = ""):
 func quit_to_menu_with_transition(screen_to_open : String = ""):
 	# after the transition finishes fading out, switch to the menu before starting the fade in
 	# warning-ignore: return_value_discarded
-	Singleton.SceneTransitions.connect("transition_finished", self, "quit_to_menu", [screen_to_open], CONNECT_ONESHOT)
-	Singleton.SceneTransitions.do_transition_fade(Singleton.SceneTransitions.DEFAULT_TRANSITION_TIME)
+	SceneTransitions.connect("transition_finished", self, "quit_to_menu", [screen_to_open], CONNECT_ONESHOT)
+	SceneTransitions.do_transition_fade(SceneTransitions.DEFAULT_TRANSITION_TIME)
 
 
 func quit_level(do_transition: bool = true):
@@ -46,9 +46,9 @@ func quit_level(do_transition: bool = true):
 		CurrentLevelData.hub_return_data = {}
 		
 		if do_transition:
-			var _connect = Singleton.SceneTransitions.connect("transition_finished", self, "start_level", 
+			var _connect = SceneTransitions.connect("transition_finished", self, "start_level", 
 			[level_info, level_id, working_folder, false, true, hub_level, false, true, selected_file], CONNECT_ONESHOT)
-			Singleton.SceneTransitions.do_transition_fade(Singleton.SceneTransitions.DEFAULT_TRANSITION_TIME)
+			SceneTransitions.do_transition_fade(SceneTransitions.DEFAULT_TRANSITION_TIME)
 		else:
 			yield(get_tree(), "physics_frame")
 			start_level(level_info, level_id, working_folder, false, true, hub_level, false, true, selected_file)
@@ -80,16 +80,18 @@ func setup_level(level_info: LevelInfo, level_id: String, working_folder: String
 	if level_list_util.file_exists(save_path):
 		level_info.load_save_from_dictionary(level_list_util.load_level_save_file(save_path))
 	
-	CurrentLevelData.level_info = level_info
-	CurrentLevelData.level_data = level_info.level_data
-	
-	CurrentLevelData.working_folder = working_folder
-	CurrentLevelData.level_id = level_id
-	CurrentLevelData.hub_level = hub_level
-	CurrentLevelData.is_campaign = level_list_util.is_campaign(working_folder)
-	CurrentLevelData.selected_file = selected_file
-	
-	CurrentLevelData.level_info.selected_shine = -1
+#	CurrentLevelData.level_info = level_info
+#	CurrentLevelData.level_data = level_info.level_data
+#
+#	CurrentLevelData.working_folder = working_folder
+#	CurrentLevelData.level_id = level_id
+#	CurrentLevelData.hub_level = hub_level
+#	CurrentLevelData.is_campaign = level_list_util.is_campaign(working_folder)
+#	CurrentLevelData.selected_file = selected_file
+#
+#	CurrentLevelData.level_info.selected_shine = -1
+	CurrentLevelData.load_level_metadata(level_info.level_code)
+	CurrentLevelData.load_level_headers(level_info.level_code)
 	CurrentLevelData.load_level_area(0)
 	
 	if not CurrentLevelData.level_transition_data.empty():
@@ -125,12 +127,12 @@ func start_level(level_info: LevelInfo, level_id: String, working_folder: String
 	
 	if do_transition:
 		# setup level when the transition finishes so music doesnt bug out
-		var _connect = Singleton.SceneTransitions.connect("transition_finished", self, "setup_level", [level_info, level_id, working_folder, hub_level, selected_file], CONNECT_ONESHOT)
-		_connect = Singleton.SceneTransitions.connect("transition_finished", get_tree(), "change_scene", [goal_scene], CONNECT_ONESHOT)
+		var _connect = SceneTransitions.connect("transition_finished", self, "setup_level", [level_info, level_id, working_folder, hub_level, selected_file], CONNECT_ONESHOT)
+		_connect = SceneTransitions.connect("transition_finished", get_tree(), "change_scene", [goal_scene], CONNECT_ONESHOT)
 		
 		if play_warp_sound:
-			Singleton.SceneTransitions.play_transition_audio()
-		Singleton.SceneTransitions.do_transition_fade(Singleton.SceneTransitions.DEFAULT_TRANSITION_TIME)
+			SceneTransitions.play_transition_audio()
+		SceneTransitions.do_transition_fade(SceneTransitions.DEFAULT_TRANSITION_TIME)
 	else:
 		setup_level(level_info, level_id, working_folder, hub_level, selected_file)
 		get_tree().change_scene(goal_scene)
@@ -138,6 +140,6 @@ func start_level(level_info: LevelInfo, level_id: String, working_folder: String
 ## start level without setting any variables
 ## or doing any shine select screen checks
 func force_start_level():
-	var _connect = Singleton.SceneTransitions.connect("transition_finished", get_tree(), "change_scene", [PLAYER_PATH], CONNECT_ONESHOT)
+	var _connect = SceneTransitions.connect("transition_finished", get_tree(), "change_scene", [PLAYER_PATH], CONNECT_ONESHOT)
 	
-	Singleton.SceneTransitions.do_transition_fade(Singleton.SceneTransitions.DEFAULT_TRANSITION_TIME)
+	SceneTransitions.do_transition_fade(SceneTransitions.DEFAULT_TRANSITION_TIME)

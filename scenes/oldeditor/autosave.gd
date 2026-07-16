@@ -33,37 +33,37 @@ func _ready():
 		saves_container.add_child(button)
 	
 func load_autosaves() -> Array:
-	var level_id = CurrentLevelData.level_id
-	var level_name = CurrentLevelData.level_info.level_name
-	
-	var autosaves: Array = []
-	var dir: Directory = Directory.new()
-	dir.open(AUTOSAVE_FOLDER)
-	dir.list_dir_begin(true, true)
-	
-	while true:
-		var file_name: String = dir.get_next()
-		if file_name == "":
-			break
-		else:
-			var split = file_name.split("_")
-			
-			if split.size() > 1:
-				var autosaved_id = split[0]
-				var time = split[1]
-				if autosaved_id == level_id:
-					autosaves.append(time)
-				elif autosaved_id == level_name:
-					if not dir.dir_exists("old_autosaves"):
-						dir.make_dir("old_autosaves")
-					
-					dir.rename(file_name, "old_autosaves/%s" % file_name)
-			else:
-				if file_name == "settings.file":
-					dir.remove("settings.file")
-	
-	dir.list_dir_end()
-	return autosaves
+#	var level_id = CurrentLevelData.level_id
+#	var level_name = CurrentLevelData.level_info.level_name
+#
+#	var autosaves: Array = []
+#	var dir: Directory = Directory.new()
+#	dir.open(AUTOSAVE_FOLDER)
+#	dir.list_dir_begin(true, true)
+#
+#	while true:
+#		var file_name: String = dir.get_next()
+#		if file_name == "":
+#			break
+#		else:
+#			var split = file_name.split("_")
+#
+#			if split.size() > 1:
+#				var autosaved_id = split[0]
+#				var time = split[1]
+#				if autosaved_id == level_id:
+#					autosaves.append(time)
+#				elif autosaved_id == level_name:
+#					if not dir.dir_exists("old_autosaves"):
+#						dir.make_dir("old_autosaves")
+#
+#					dir.rename(file_name, "old_autosaves/%s" % file_name)
+#			else:
+#				if file_name == "settings.file":
+#					dir.remove("settings.file")
+#
+#	dir.list_dir_end()
+	return []
 	
 func open_autosave(time):
 	var level_id = CurrentLevelData.level_id
@@ -77,7 +77,7 @@ func open_autosave(time):
 	var level_info := LevelInfo.new(level_id, working_folder, level_code)
 	level_info.load_in()
 	CurrentLevelData.level_data = level_info.level_data
-	Singleton.SceneTransitions.reload_scene()
+	SceneTransitions.reload_scene()
 	
 func _physics_process(delta):
 	if timer > 0:

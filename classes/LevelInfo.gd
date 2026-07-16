@@ -17,7 +17,7 @@ var level_folder: String
 
 # i'm not quite sure what the idea was behind making it load
 # the level data twice, but i went and removed that
-var level_data : LevelData
+var level_data : LevelDataOld
 # if the code was already loaded in full once,
 # no point in wasting time doing it again :p
 var is_fully_loaded: bool
@@ -73,28 +73,28 @@ func _init(passed_id: String, passed_folder: String, passed_level_code: String =
 	level_folder = passed_folder
 	level_code = passed_level_code
 	
-#	if (!is_instance_valid(validity_check)):
-#		validity_check = ValidityChecker.new(level_code,ValidityChecker.ValidityCheckTypes.INFO)
-#	else:
-#		validity_check.validity_check_type = ValidityChecker.ValidityCheckTypes.INFO
-#	validity_check.check_validity()
-#	var result = validity_check.result
-#
-#	if (!validity_check.is_level_multiplayer_compatible):
-#		level_name = "\"MultiplayerIncompatibleLevel\""
-#		return
-#	if (!validity_check.is_valid):
-#		level_name = "\"InvalidLevel\""
-#		return
-	
-#	level_name = result.get("name", "")
-#	level_author = result.get("author", "")
-#	level_description = result.get("description", "")
-#
-#	thumbnail_url = result.get("thumbnail_url", "")
-#	thumbnail_sky = result.areas[0].sky
-#	thumbnail_background = result.areas[0].background
-#	thumbnail_background_palette = result.areas[0].background_palette
+	if (!is_instance_valid(validity_check)):
+		validity_check = ValidityChecker.new(level_code,ValidityChecker.ValidityCheckTypes.INFO)
+	else:
+		validity_check.validity_check_type = ValidityChecker.ValidityCheckTypes.INFO
+	validity_check.check_validity()
+	var result = validity_check.result
+
+	if (!validity_check.is_level_multiplayer_compatible):
+		level_name = "\"MultiplayerIncompatibleLevel\""
+		return
+	if (!validity_check.is_valid):
+		level_name = "\"InvalidLevel\""
+		return
+
+	level_name = result.get("name", "")
+	level_author = result.get("author", "")
+	level_description = result.get("description", "")
+
+	thumbnail_url = result.get("thumbnail_url", "")
+	thumbnail_sky = result.areas[0].sky
+	thumbnail_background = result.areas[0].background
+	thumbnail_background_palette = result.areas[0].background_palette
 
 
 func load_in() -> void:
@@ -103,11 +103,11 @@ func load_in() -> void:
 	
 	if current_number_of_players == previous_number_of_players and is_fully_loaded: return
 	
-#	if (!is_instance_valid(validity_check)):
-#		validity_check = ValidityChecker.new(level_code, ValidityChecker.ValidityCheckTypes.FULL)
-#	else:
-#		validity_check.validity_check_type = ValidityChecker.ValidityCheckTypes.FULL
-#	validity_check.check_validity()
+	if (!is_instance_valid(validity_check)):
+		validity_check = ValidityChecker.new(level_code, ValidityChecker.ValidityCheckTypes.FULL)
+	else:
+		validity_check.validity_check_type = ValidityChecker.ValidityCheckTypes.FULL
+	validity_check.check_validity()
 	
 	previous_number_of_players = int(current_number_of_players)
 	
@@ -118,7 +118,7 @@ func load_in() -> void:
 		level_name = "\"InvalidLevel\""
 		return
 	
-#	level_data = validity_check
+	level_data = validity_check
 	
 	level_name = level_data.name
 	level_author = level_data.author

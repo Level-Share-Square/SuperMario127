@@ -35,7 +35,7 @@ onready var ambient_sound: AudioStreamPlayer2D = $AmbientSound
 onready var animation_player: AnimationPlayer = $AnimationPlayer
 onready var current_scene: Node = get_tree().current_scene
 onready var shine_get: Node = current_scene.get_node_or_null("%ShineGet")
-onready var transitions: Node = Singleton.SceneTransitions
+onready var transitions: Node = SceneTransitions
 onready var mode_switcher_button: Node = Singleton.ModeSwitcher.get_node("ModeSwitcherButton")
 
 const UNPAUSE_TIMER_LENGTH = 3.35
@@ -411,12 +411,12 @@ func character_shine_dance_finished(_animation: Animation) -> void:
 	#fades to the correct volume in both situations
 	if do_kick_out:
 		if mode_switcher_button.invisible: #if not running through the editor, play the transition
-			var _connect = Singleton.SceneTransitions.connect("transition_finished", Singleton.SceneSwitcher, "quit_level", [false], CONNECT_ONESHOT)
-			Singleton.SceneTransitions.do_transition_animation(
+			var _connect = SceneTransitions.connect("transition_finished", Singleton.SceneSwitcher, "quit_level", [false], CONNECT_ONESHOT)
+			SceneTransitions.do_transition_animation(
 				character.cutout_shine, 
-				Singleton.SceneTransitions.DEFAULT_TRANSITION_TIME, 
-				Singleton.SceneTransitions.TRANSITION_SCALE_UNCOVER, 
-				Singleton.SceneTransitions.TRANSITION_SCALE_COVERED,
+				SceneTransitions.DEFAULT_TRANSITION_TIME, 
+				SceneTransitions.TRANSITION_SCALE_UNCOVER, 
+				SceneTransitions.TRANSITION_SCALE_COVERED,
 				0,
 				0,
 				true,

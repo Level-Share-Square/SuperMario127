@@ -99,30 +99,30 @@ func load_level_info(_level_info: LevelInfo, _level_id: String, _working_folder:
 	
 	previous_number_of_players = int(current_number_of_players)
 	
-	if (!level_info.validity_check.is_valid):
-		# Invalid level detected!
-		edit_button.visible = false
-		play_button.visible = false
-		if (!level_info.validity_check.is_level_multiplayer_compatible):
-			title.text = "Multiplayer Incompatible Level"
-			author.text = author_prefix + level_info.level_author
-		else:
-			title.text = "Invalid Level"
-			author.text = ""
-		title_shadow.text = title.text
-		description.bbcode_text = "[center]" + level_info.validity_check.invalid_reason + "[/center]"
-		back_button.focus_neighbour_top = back_button.get_path_to(reset_button)
-		reset_button.focus_neighbour_bottom = reset_button.get_path_to(back_button)
-		
-		foreground.visible = false
-		thumbnail.texture = default_thumbnail
-		
-		load_time_scores()
-		load_collectibles_info(level_info)
-		percentage_label.text = "100%"
-		percentage_label.modulate = completion_color
-		
-		return
+#	if (!level_info.validity_check.is_valid):
+#		# Invalid level detected!
+#		edit_button.visible = false
+#		play_button.visible = false
+#		if (!level_info.validity_check.is_level_multiplayer_compatible):
+#			title.text = "Multiplayer Incompatible Level"
+#			author.text = author_prefix + level_info.level_author
+#		else:
+#			title.text = "Invalid Level"
+#			author.text = ""
+#		title_shadow.text = title.text
+#		description.bbcode_text = "[center]" + level_info.validity_check.invalid_reason + "[/center]"
+#		back_button.focus_neighbour_top = back_button.get_path_to(reset_button)
+#		reset_button.focus_neighbour_bottom = reset_button.get_path_to(back_button)
+#
+#		foreground.visible = false
+#		thumbnail.texture = default_thumbnail
+#
+#		load_time_scores()
+#		load_collectibles_info(level_info)
+#		percentage_label.text = "100%"
+#		percentage_label.modulate = completion_color
+#
+#		return
 	
 	play_button.visible = true
 	view_tab.visible = not is_campaign

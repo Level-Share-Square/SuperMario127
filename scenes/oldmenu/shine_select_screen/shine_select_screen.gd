@@ -255,10 +255,10 @@ func on_animation_finished(anim_name : String) -> void:
 func change_to_player_scene(_animation : String) -> void:
 	# Start fading out now; the transition has finished
 	if Singleton2.dark_mode:
-		Singleton.SceneTransitions.do_transition_fade(Singleton.SceneTransitions.DEFAULT_TRANSITION_TIME,\
+		SceneTransitions.do_transition_fade(SceneTransitions.DEFAULT_TRANSITION_TIME,\
 		Color(0, 0, 0, 1), Color(0, 0, 0, 0), false)
 	else:
-		Singleton.SceneTransitions.do_transition_fade(Singleton.SceneTransitions.DEFAULT_TRANSITION_TIME,\
+		SceneTransitions.do_transition_fade(SceneTransitions.DEFAULT_TRANSITION_TIME,\
 		Color(1, 1, 1, 1), Color(1, 1, 1, 0), false)
 
 	var _change_scene = get_tree().change_scene_to(PLAYER_SCENE)

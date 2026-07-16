@@ -37,7 +37,9 @@ func _ready():
 			tileset.right_slope_tile_id
 		]
 		
-		tileset_palettes = load("res://generation/tileset_palettes.res").tileset_palettes
+#		tileset_palettes = load("res://generation/tileset_palettes.res").tileset_ids
+	level_area = CurrentLevelData.area.header
+	
 	
 func get_tile(tileset_id, tile_id, palette_id = 0):
 	if palette_id == 0 or tileset_palettes[tileset_id].size() < palette_id:
@@ -143,8 +145,8 @@ func update_tilemaps():
 	front_tilemap_node.clear()
 	
 #	print("Area Chunk Count: " + str(level_area.tile_chunks.size()))
-	for key in level_area.tile_chunks:
-		var chunk : Array = level_area.tile_chunks[key]
+	for key in CurrentLevelData.area.layers[0].tile_data.chunks:
+		var chunk : Array = CurrentLevelData.area.layers[0].tile_data.chunks[key]
 
 		var _key : Array = key.split(":")
 		var chunk_x := int(_key[0])

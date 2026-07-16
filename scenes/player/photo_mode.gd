@@ -16,7 +16,7 @@ func _input(event):
 	if Singleton.PlayerSettings.number_of_players != 1:
 		character2_node = player.get_node(player.character2)
 	# extremely long if statement jumpscare
-	if !Singleton.SceneTransitions.transitioning and (!Singleton.ModeSwitcher.get_node("ModeSwitcherButton").switching_disabled or Singleton.ModeSwitcher.get_node("ModeSwitcherButton").invisible) and event.is_action_pressed("toggle_ui") and !(get_tree().paused and !Singleton.PhotoMode.enabled):
+	if !SceneTransitions.transitioning and (!Singleton.ModeSwitcher.get_node("ModeSwitcherButton").switching_disabled or Singleton.ModeSwitcher.get_node("ModeSwitcherButton").invisible) and event.is_action_pressed("toggle_ui") and !(get_tree().paused and !Singleton.PhotoMode.enabled):
 		if !(character_node.dead or (Singleton.PlayerSettings.number_of_players != 1 and character2_node.dead)):
 			Singleton.PhotoMode.enabled = !Singleton.PhotoMode.enabled
 			update_photo_mode(true)

@@ -32,7 +32,7 @@ func _unhandled_input(event):
 		right_held = false
 
 
-func load_in(_level_data: LevelDataOld, level_area: LevelAreaOld):
+func load_in(_level_data: LevelDataOld, level_area: AreaDataOld):
 	var zoom_level = Singleton.EditorSavedSettings.zoom_level
 	position.x = (get_viewport_rect().size.x / 2) * zoom_level
 	position.y = (level_area.settings.bounds.end.y * 32) - ((get_viewport_rect().size.y / 2) * zoom_level)
@@ -48,7 +48,7 @@ func load_in(_level_data: LevelDataOld, level_area: LevelAreaOld):
 	
 
 
-func update_limits(level_area : LevelAreaOld):	
+func update_limits(level_area : AreaDataOld):	
 	var area_bounds = level_area.settings.bounds.grow(3)
 
 	limit_left  = int(area_bounds.position.x * 32)

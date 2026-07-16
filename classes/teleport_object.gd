@@ -207,19 +207,19 @@ func _start_local_transition(character : Character, entering, working_force_fade
 			tween.start()
 		else:
 			# warning-ignore: return_value_discarded
-			Singleton.SceneTransitions.connect("transition_finished", self, "local_tp", [character, true], CONNECT_ONESHOT)
+			SceneTransitions.connect("transition_finished", self, "local_tp", [character, true], CONNECT_ONESHOT)
 			
 			# sets the transition center to Mario's position
-			Singleton.SceneTransitions.canvas_mask.global_position = get_character_screen_position(character)
+			SceneTransitions.canvas_mask.global_position = get_character_screen_position(character)
 			# this starts an inner scene transition, then connects a function (one shot) to start as it finishes
-			Singleton.SceneTransitions.do_transition_animation(Singleton.SceneTransitions.cutout_circle, Singleton.SceneTransitions.DEFAULT_TRANSITION_TIME, Singleton.SceneTransitions.TRANSITION_SCALE_UNCOVER, Singleton.SceneTransitions.TRANSITION_SCALE_COVERED, -1, -1, false, false)
+			SceneTransitions.do_transition_animation(SceneTransitions.cutout_circle, SceneTransitions.DEFAULT_TRANSITION_TIME, SceneTransitions.TRANSITION_SCALE_UNCOVER, SceneTransitions.TRANSITION_SCALE_COVERED, -1, -1, false, false)
 	else:
 		
 		if global_position.distance_to(local_pair.global_position) > 800 or character.force_warp_fadeout:
 			# sets the transition center to Mario's position
-			Singleton.SceneTransitions.canvas_mask.global_position = get_character_screen_position(character)
+			SceneTransitions.canvas_mask.global_position = get_character_screen_position(character)
 			# this starts an inner scene transition, then connects a function (one shot) to start as it finishes
-			Singleton.SceneTransitions.do_transition_animation(Singleton.SceneTransitions.cutout_circle, Singleton.SceneTransitions.DEFAULT_TRANSITION_TIME, Singleton.SceneTransitions.TRANSITION_SCALE_COVERED, Singleton.SceneTransitions.TRANSITION_SCALE_UNCOVER, -1, -1, false, false)
+			SceneTransitions.do_transition_animation(SceneTransitions.cutout_circle, SceneTransitions.DEFAULT_TRANSITION_TIME, SceneTransitions.TRANSITION_SCALE_COVERED, SceneTransitions.TRANSITION_SCALE_UNCOVER, -1, -1, false, false)
 		
 class AreaTransitionHelper:
 	var velocity

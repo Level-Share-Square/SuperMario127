@@ -34,7 +34,7 @@ func set_id(new_id):
 	id = new_id
 	id_text.text = "ID: " + str(id)
 
-func swap(areaA : LevelAreaOld, areaB : LevelAreaOld, areasArray : Array) -> Array:
+func swap(areaA : AreaDataOld, areaB : AreaDataOld, areasArray : Array) -> Array:
   var area1 = areasArray.find(areaA)
   var area2 = areasArray.find(areaB)
   var temp = areasArray[area1]
@@ -56,7 +56,7 @@ func _ready():
 func switch_to_area():
 	if id != CurrentLevelData.area:
 		CurrentLevelData.area = id
-		Singleton.SceneTransitions.reload_scene()
+		SceneTransitions.reload_scene()
 
 func delete_area():
 	if id != CurrentLevelData.area:
@@ -74,7 +74,7 @@ func check_moveability():
 
 func duplicate_area():
 	if CurrentLevelData.level_data.areas.size() != 32:
-		var area = LevelAreaOld.new()
+		var area = AreaDataOld.new()
 		var dup = CurrentLevelData.level_data.areas[id]
 		area.duplicate(dup)
 		CurrentLevelData.level_data.areas.append(area)
@@ -82,7 +82,7 @@ func duplicate_area():
 	
 func move_area_down():
 	if id < CurrentLevelData.level_data.areas.size() - 1 && CurrentLevelData.level_data.areas.size() > 1:
-		var area1 = LevelAreaOld.new()
+		var area1 = AreaDataOld.new()
 		area1.duplicate(CurrentLevelData.level_data.areas[id])
 		area1.settings = CurrentLevelData.level_data.areas[id].settings
 		CurrentLevelData.level_data.areas.remove(id)
@@ -102,7 +102,7 @@ func move_area_down():
 
 func move_area_up():
 	if id > 0 && CurrentLevelData.level_data.areas.size() > 1:
-		var area1 = LevelAreaOld.new()
+		var area1 = AreaDataOld.new()
 		area1.duplicate(CurrentLevelData.level_data.areas[id])
 		area1.settings = CurrentLevelData.level_data.areas[id].settings
 		CurrentLevelData.level_data.areas.remove(id)
