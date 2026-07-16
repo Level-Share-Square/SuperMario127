@@ -170,7 +170,7 @@ static func deserialize_dictionary(code: String) -> Dictionary:
 	var pair_codes: Array = LevelCodeTokenizer.splice_dictionary(code)
 	var dictionary: Dictionary = {}
 	for pair_code in pair_codes:
-		var pair: Array = LevelCodeTokenizer.splice_dictionary_entry(code)
+		var pair: Array = LevelCodeTokenizer.splice_dictionary_entry(pair_code)
 		dictionary.get_or_add(pair[0], pair[1])
 	
 	return dictionary
