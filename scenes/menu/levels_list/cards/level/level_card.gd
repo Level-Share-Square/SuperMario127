@@ -10,6 +10,8 @@ var level_info: LevelInfo
 var is_campaign: bool
 var has_save: bool
 
+var level_metadata: LevelMetadata
+
 
 func pass_nodes(
 	_list_handler: LevelListHandler,

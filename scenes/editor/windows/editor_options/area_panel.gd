@@ -34,7 +34,7 @@ func set_background(sky, background, palette):
 
 func set_name(new_name: String):
 	$HBoxContainer/VBoxContainer/LineEdit.text = new_name
-	CurrentLevelData.level_data.areas[id].name = new_name
+	CurrentLevelData.area_headers[id].name = new_name
 
 func set_id(new_id):
 	var id_text = get_node("ID")
@@ -68,7 +68,7 @@ func switch_to_area():
 
 func delete_area():
 	if id != CurrentLevelData.area_id:
-		CurrentLevelData.level_data.areas.remove(id)
+		CurrentLevelData.area_headers.remove(id)
 		if CurrentLevelData.area_id > id:
 			CurrentLevelData.area_id -= 1
 		get_parent().get_parent().reload_areas()
@@ -78,20 +78,20 @@ func area_renamed(new_text: String):
 	if new_text in area_names:
 		new_text.erase(new_text.length() - 1, 1)
 		area_name.text = new_text
-	CurrentLevelData.level_data.areas[id].name = new_text
+	CurrentLevelData.area_headers[id].name = new_text
 
 
 func duplicate_area():
-	if CurrentLevelData.level_data.areas.size() != 32:
-		var area_id = CurrentLevelData.level_data.areas[id].duplicate(true)
-		CurrentLevelData.level_data.areas.append(area_id)
+	if CurrentLevelData.area_headers.size() != 32:
+		var area_id = CurrentLevelData.area_headers[id].duplicate(true)
+		CurrentLevelData.area_headers.append(area_id)
 		get_parent().get_parent().reload_areas()
 
 
 func move_area_down():
-	if id < CurrentLevelData.level_data.areas.size() - 1 && CurrentLevelData.level_data.areas.size() > 1:
-		var area_id = CurrentLevelData.level_data.areas.pop_at(id)
-		CurrentLevelData.level_data.areas.insert(id + 1, area_id)
+	if id < CurrentLevelData.area_headers.size() - 1 && CurrentLevelData.area_headers.size() > 1:
+		var area_id = CurrentLevelData.area_headers.pop_at(id)
+		CurrentLevelData.area_headers.insert(id + 1, area_id)
 		
 		# Properly re-assign the current area_id.
 		if CurrentLevelData.area_id == id:
@@ -100,16 +100,16 @@ func move_area_down():
 			
 		elif abs(CurrentLevelData.area_id - id) == 1:
 			# If the area_id we're moving is next to the current area_id.
-			Singleton .CurrentLevelData.area_id -= 1
+			CurrentLevelData.area_id -= 1
 			
 		# Don't re-assign the current area_id if it isn't next to the area_id we're moving.
 		get_parent().get_parent().reload_areas()
 
 
 func move_area_up():
-	if id > 0 && CurrentLevelData.level_data.areas.size() > 1:
-		var area_id = CurrentLevelData.level_data.areas.pop_at(id)
-		CurrentLevelData.level_data.areas.insert(id - 1, area_id)
+	if id > 0 && CurrentLevelData.area_headers.size() > 1:
+		var area_id = CurrentLevelData.area_headers.pop_at(id)
+		CurrentLevelData.area_headers.insert(id - 1, area_id)
 		
 		if CurrentLevelData.area_id == id:
 			
@@ -123,4 +123,4 @@ func move_area_up():
 
 
 func copy_area():
-	OS.set_clipboard(CurrentLevelData.level_data.get_encoded_area_data(CurrentLevelData.level_data.areas[CurrentLevelData.area_id]))
+	OS.set_clipboard(LevelCodeSerializer.serialize_area(CurrentLevelData.area))

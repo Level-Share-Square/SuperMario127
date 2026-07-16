@@ -569,7 +569,7 @@ script = ExtResource( 12 )
 
 [node name="MarginContainer" type="MarginContainer" parent="ContentDivider/ContentMat/Tabs/Settings" index="0"]
 margin_right = 372.0
-margin_bottom = 348.0
+margin_bottom = 160.0
 custom_constants/margin_right = 2
 custom_constants/margin_top = 1
 custom_constants/margin_left = 2
@@ -578,7 +578,7 @@ custom_constants/margin_left = 2
 margin_left = 2.0
 margin_top = 1.0
 margin_right = 370.0
-margin_bottom = 348.0
+margin_bottom = 160.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -592,6 +592,7 @@ script = ExtResource( 21 )
 selected_container_path = NodePath("../Control2")
 
 [node name="Control2" type="Control" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer" index="1"]
+visible = false
 margin_top = 23.0
 margin_right = 368.0
 margin_bottom = 113.0
@@ -681,9 +682,9 @@ suffix = "s"
 script = ExtResource( 5 )
 
 [node name="WeatherSection" type="Button" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer" index="2"]
-margin_top = 117.0
+margin_top = 23.0
 margin_right = 368.0
-margin_bottom = 136.0
+margin_bottom = 42.0
 focus_mode = 0
 text = "> Weather"
 align = 0
@@ -691,6 +692,7 @@ script = ExtResource( 21 )
 selected_container_path = NodePath("../Control3")
 
 [node name="Control3" type="Control" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer" index="3"]
+visible = false
 margin_top = 140.0
 margin_right = 368.0
 margin_bottom = 230.0
@@ -780,9 +782,9 @@ suffix = "s"
 script = ExtResource( 5 )
 
 [node name="AreaSection" type="Button" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer" index="4"]
-margin_top = 234.0
+margin_top = 46.0
 margin_right = 368.0
-margin_bottom = 253.0
+margin_bottom = 65.0
 focus_mode = 0
 text = "> Area Settings"
 align = 0
@@ -790,9 +792,9 @@ script = ExtResource( 21 )
 selected_container_path = NodePath("../AreaSettings")
 
 [node name="AreaSettings" type="Control" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer" index="5"]
-margin_top = 257.0
+margin_top = 69.0
 margin_right = 368.0
-margin_bottom = 347.0
+margin_bottom = 159.0
 rect_min_size = Vector2( 368, 90 )
 rect_clip_content = true
 script = ExtResource( 14 )

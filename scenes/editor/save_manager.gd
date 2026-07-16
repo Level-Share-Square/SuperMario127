@@ -12,6 +12,7 @@ var unsaved_changes: bool = false
 
 func _ready():
 	initial_hash = get_hash()
+	print(CurrentLevelData.level_id)
 
 func get_hash() -> int:
 	return hash([action_manager.undo_stack, action_manager.redo_stack])
@@ -35,15 +36,17 @@ func _on_Quit_button_down():
 
 
 func _on_Save_button_down():
-	CurrentLevelData.level_info.level_name = level_settings.level_name.text
-	CurrentLevelData.level_info.level_author = level_settings.author.text
-	CurrentLevelData.level_info.level_description = level_settings.description.text
-	CurrentLevelData.level_info.thumbnail_url = level_settings.get_node("%ThumbnailURL").text #thanks godot
-	$"%Hotbar".update_level_data()
+#	CurrentLevelData.level_info.level_name = level_settings.level_name.text
+#	CurrentLevelData.level_info.level_author = level_settings.author.text
+#	CurrentLevelData.level_info.level_description = level_settings.description.text
+#	CurrentLevelData.level_info.thumbnail_url = level_settings.get_node("%ThumbnailURL").text #thanks godot
+#	$"%Hotbar".update_level_data()
+	level_settings.update_level_info()
+	print(CurrentLevelData.level_id)
 	
 	var level_id: String = CurrentLevelData.level_id
 	var working_folder: String = CurrentLevelData.working_folder
-	var level_code: String = CurrentLevelData.level_data.get_encoded_level_data()
+	var level_code: String = LevelCodeSerializer.serialize_level_data(LevelDataContainer.new(CurrentLevelData.level_metadata, SavedEditorData.new(), [], CurrentLevelData.area_headers))
 	
 	var file_path = level_list_util.get_level_file_path(level_id, working_folder)
 	level_list_util.save_level_code_file(level_code, file_path)
@@ -55,9 +58,9 @@ func _on_Save_button_down():
 		if level_list_util.file_exists(save_path):
 			level_list_util.delete_file(save_path)
 			
-	CurrentLevelData.level_info.reset_save_data(false)
-	CurrentLevelData.level_info.init_collectibles()
-	save_meta_util.update_all_with_level(level_id, working_folder, false, CurrentLevelData.level_info)
+#	CurrentLevelData.level_info.reset_save_data(false)
+#	CurrentLevelData.level_info.init_collectibles()
+#	save_meta_util.update_all_with_level(level_id, working_folder, false, CurrentLevelData.level_metadata)
 	
 	CurrentLevelData.unsaved_editor_changes = false
 	level_settings.get_node("%Areas").reload_areas()

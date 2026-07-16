@@ -53,42 +53,42 @@ static func update_meta(meta_dict: Dictionary, campaign_path: String, selected_f
 		meta_dict = update_meta_level(level_id, meta_dict, campaign_path, selected_file)
 	return meta_dict
 
-static func update_meta_level(level_id: String, meta_dict: Dictionary, campaign_path: String, selected_file: int, level_info = null) -> Dictionary:
-	if not is_instance_valid(level_info):
+static func update_meta_level(level_id: String, meta_dict: Dictionary, campaign_path: String, selected_file: int, level_metadata: LevelMetadata = null) -> Dictionary:
+	if not is_instance_valid(level_metadata):
 		var file_path: String = level_list_util.get_level_file_path(level_id, campaign_path)
 		var level_code: String = level_list_util.load_level_code_file(file_path)
 		# weird workaround to allow instancing levelinfo without cyclic reference error
-		var level_info_script = load("res://classes/LevelInfo.gd")
-		level_info = level_info_script.new(level_id, campaign_path, level_code)
+		var level_metadata_script = load("res://classes/LevelInfo.gd")
+		level_metadata = level_metadata_script.new(level_id, campaign_path, level_code)
 		
-		if level_info.validity_check.is_valid:
-			level_info.load_in()
+		if level_metadata.validity_check.is_valid:
+			level_metadata.load_in()
 		
 		var save_path: String = level_list_util.get_level_save_path(level_id, campaign_path, selected_file)
 		if level_list_util.file_exists(save_path):
-			level_info.load_save_from_dictionary(level_list_util.load_level_save_file(save_path))
+			level_metadata.load_save_from_dictionary(level_list_util.load_level_save_file(save_path))
 	
 	meta_dict["levels"][level_id] = {}
-	meta_dict["levels"][level_id]["name"] = level_info.level_name
+	meta_dict["levels"][level_id]["name"] = level_metadata.level_name
 	
-	var collectible_counts: Dictionary = level_info.get_collectible_counts()
-	meta_dict["levels"][level_id]["total_shines"] = collectible_counts["total_shines"]
-	meta_dict["levels"][level_id]["total_star_coins"] = collectible_counts["total_star_coins"]
-	meta_dict["levels"][level_id]["collected_star_coins"] = level_info.collected_star_coins.values()
-	
-	meta_dict["levels"][level_id]["collected_shines"] = []
-	meta_dict["levels"][level_id]["shine_details"] = []
-	meta_dict["levels"][level_id]["shine_times"] = []
-	
-	for shine_dictionary in level_info.shine_details:
-		var shine_id: String = str(shine_dictionary.get("id", 0))
-		meta_dict["levels"][level_id]["collected_shines"].append(level_info.collected_shines[shine_id])
-		meta_dict["levels"][level_id]["shine_details"].append(shine_dictionary)
-		meta_dict["levels"][level_id]["shine_times"].append(level_info.time_scores[shine_id])
+#	var collectible_counts: Dictionary = level_metadata.get_collectible_counts()
+#	meta_dict["levels"][level_id]["total_shines"] = collectible_counts["total_shines"]
+#	meta_dict["levels"][level_id]["total_star_coins"] = collectible_counts["total_star_coins"]
+#	meta_dict["levels"][level_id]["collected_star_coins"] = level_metadata.collected_star_coins.values()
+#
+#	meta_dict["levels"][level_id]["collected_shines"] = []
+#	meta_dict["levels"][level_id]["shine_details"] = []
+#	meta_dict["levels"][level_id]["shine_times"] = []
+#
+#	for shine_dictionary in level_metadata.shine_details:
+#		var shine_id: String = str(shine_dictionary.get("id", 0))
+#		meta_dict["levels"][level_id]["collected_shines"].append(level_metadata.collected_shines[shine_id])
+#		meta_dict["levels"][level_id]["shine_details"].append(shine_dictionary)
+#		meta_dict["levels"][level_id]["shine_times"].append(level_metadata.time_scores[shine_id])
 	
 	return meta_dict
 
-static func update_all_with_level(level_id: String, campaign_path: String, is_erasing: bool, level_info = null) -> void:
+static func update_all_with_level(level_id: String, campaign_path: String, is_erasing: bool, level_metadata: LevelMetadata = null) -> void:
 	for selected_file in range(3):
 		var save_folder: String = level_list_util.get_save_folder(campaign_path, selected_file)
 		if level_list_util.file_exists(save_folder + "meta.127save"):
@@ -97,6 +97,6 @@ static func update_all_with_level(level_id: String, campaign_path: String, is_er
 			if is_erasing:
 				meta_dict["levels"].erase(level_id)
 			else:
-				update_meta_level(level_id, meta_dict, campaign_path, selected_file, level_info)
+				update_meta_level(level_id, meta_dict, campaign_path, selected_file, level_metadata)
 			
 			save_meta_file(save_folder, meta_dict)

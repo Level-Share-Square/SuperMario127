@@ -7,16 +7,21 @@ onready var thumbnail_url = $"%ThumbnailURL"
 
 signal open_editor_settings
 
+func _ready():
+	level_name.text = CurrentLevelData.level_metadata.level_name
+	author.text = CurrentLevelData.level_metadata.level_author
+	description.text = CurrentLevelData.level_metadata.level_description
+	thumbnail_url.text = CurrentLevelData.level_metadata.level_thumbnail_url 
 
 func on_editor_settings_pressed():
 	hide()
 	emit_signal("open_editor_settings")
 
 func update_background():
-	owner.backgrounds.update_background_area(CurrentLevelData.level_data.areas[CurrentLevelData.area])
+	owner.backgrounds.update_background_area(CurrentLevelData.area.header)
 
 func update_level_info():
-	owner.level_name = level_name.text
-	owner.author = author.text
-	owner.description = description.text
-	owner.thumbnail_url = thumbnail_url.text
+	CurrentLevelData.level_metadata.level_name = level_name.text
+	CurrentLevelData.level_metadata.level_author = author.text
+	CurrentLevelData.level_metadata.level_description = description.text
+	CurrentLevelData.level_metadata.level_thumbnail_url = thumbnail_url.text
