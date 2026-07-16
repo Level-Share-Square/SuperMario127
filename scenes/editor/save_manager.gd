@@ -12,7 +12,6 @@ var unsaved_changes: bool = false
 
 func _ready():
 	initial_hash = get_hash()
-	print(CurrentLevelData.level_id)
 
 func get_hash() -> int:
 	return hash([action_manager.undo_stack, action_manager.redo_stack])
@@ -42,7 +41,6 @@ func _on_Save_button_down():
 #	CurrentLevelData.level_info.thumbnail_url = level_settings.get_node("%ThumbnailURL").text #thanks godot
 #	$"%Hotbar".update_level_data()
 	level_settings.update_level_info()
-	print(CurrentLevelData.level_id)
 	
 	var level_id: String = CurrentLevelData.level_id
 	var working_folder: String = CurrentLevelData.working_folder
@@ -78,7 +76,6 @@ func quit():
 	var code_path: String = level_list_util.get_level_file_path(level_id, working_folder)
 	var level_code: String = level_list_util.load_level_code_file(code_path)
 	
-	CurrentLevelData.level_info = LevelInfo.new(level_id, working_folder, level_code)
 	if Singleton.SceneSwitcher.menu_return_args.size() > 0:
 		Singleton.SceneSwitcher.menu_return_args = [CurrentLevelData.level_info, level_id, working_folder, true, is_campaign]
 	

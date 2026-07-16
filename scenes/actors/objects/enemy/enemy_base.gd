@@ -137,7 +137,6 @@ func create_coin(velocity: Vector2, offset: Vector2) -> GameObject:
 	object.properties.append(0)
 	object.properties.append(true)
 	object.properties.append(true)
-	object.properties.append(LevelShared.Layers.Middle)
 	object.properties.append(true)
 	object.properties.append(velocity)
 	

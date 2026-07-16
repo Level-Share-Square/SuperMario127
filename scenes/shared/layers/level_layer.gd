@@ -50,7 +50,7 @@ func _modulate_autoset() -> Color:
 
 
 # Tiles
-func place_tile(coords, tile_set, tile, palette):
+func place_tile(coords, tile_set, tile, palette, update_autotile, modify_data):
 	pass
 
 

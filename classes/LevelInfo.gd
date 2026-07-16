@@ -169,7 +169,7 @@ func init_collectibles():
 						if shine["id"] == shine_dictionary["id"]:
 							repeated_shine = true
 					
-					if !repeated_shine and shine_dictionary["enabled"] and shine_dictionary["layer"] == LevelShared.Layers.Middle:
+					if !repeated_shine and shine_dictionary["enabled"]:
 						shine_details.append(shine_dictionary)
 						
 						# initialize collected_shines and time_scores
@@ -187,7 +187,7 @@ func init_collectibles():
 						if id == star_coin_id:
 							repeated_star_coin = true
 					
-					if !repeated_star_coin and enabled and layer == LevelShared.Layers.Middle:
+					if !repeated_star_coin and enabled:
 						star_coin_details.append(star_coin_id)
 						
 						# initialize collected star coins

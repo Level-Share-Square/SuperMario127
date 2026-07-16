@@ -92,12 +92,6 @@ func instance_enemy(emit_particles: bool = true) -> EnemyBase:
 	
 	spawned_enemies.append(spawned_enemy)
 	
-	if layer > LevelShared.Layers.Middle:
-		spawned_enemy.enabled = false
-	if layer < LevelShared.Layers.Middle:
-		spawned_enemy.modulate = modulate
-		spawned_enemy.enabled = false
-	
 	add_child(spawned_enemy)
 	return spawned_enemy
 

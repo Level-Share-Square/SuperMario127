@@ -81,7 +81,7 @@ func _process(delta):
 	pass
 	
 func _physics_process(delta):
-	if enabled and mode == 0 and layer == LevelShared.Layers.Middle:
+	if enabled and mode == 0:
 		
 		match(state):
 			states.IDLE:

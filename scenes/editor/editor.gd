@@ -13,7 +13,7 @@ var pixel_lock = true
 var object_layering = true
 var show_layers = false
 
-export(LevelShared.Layers) var layer: int = 2
+var layer: int = 0
 
 var hovered_objects: Dictionary = {}
 var selected_objects: Dictionary = {}
@@ -92,6 +92,7 @@ func _process(delta):
 	if Input.is_action_just_pressed("LMB") && tool_manager.current_tool == selection_box.get_parent() && selection_box.get_parent().visible == false:
 		selection_box.show()
 		selection_box.get_parent().show()
+		
 
 
 func _update_editor_framerate():

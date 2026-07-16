@@ -1,5 +1,5 @@
 extends LevelDataLoader
-
+class_name LevelShared
 
 const GROUND_LAYER_SCENE_PATH: String = "res://scenes/shared/layers/ground_layer/ground_layer.tscn"
 const PARALLAX_LAYER_SCENE_PATH: String = "res://scenes/shared/layers/parallax_layer/parallax_layer.tscn"
@@ -35,6 +35,7 @@ func add_layer(layer_data = null, add_to_data: bool = false):
 	add_child(new_layer)
 	
 	new_layer.load_in(layer_data)
+	layers.append(new_layer)
 	
 	if add_to_data:
 		CurrentLevelData.area.layers.append(layer_data)
@@ -43,3 +44,9 @@ func add_layer(layer_data = null, add_to_data: bool = false):
 func remove_layer(index: int):
 	var removed = layers[index]
 	layers.remove(index)
+	
+func set_tile(x: int, y: int, index: int, tileset_id: int, tile_id: int, palette_id : int = 0):
+	layers[index].place_tile(Vector2(x, y), tileset_id, tile_id, palette_id, true, true)
+
+func get_tile(x: int, y: int, index: int):
+	return layers[index].tile_map_manager.layer_data.tile_data.get_tile_data_at(Vector2(x, y))

@@ -37,12 +37,12 @@ func _mouse_movement(_event: InputEvent, world_pos: Vector2) -> void:
 
 
 func draw_tile(pos: Vector2) -> void:
-	var level_bounds: Rect2 = CurrentLevelData.level_data.areas[CurrentLevelData.area].bounds
+	var level_bounds: Rect2 = CurrentLevelData.area.header.bounds
 	if not level_bounds.has_point(pos):
 		return
 	
 	var item = editor.selected_item
-	var cache_tile = shared.tilemaps_node.get_tile(item.tileset_id, item.tile_id, item.palette)
+	var cache_tile = tile_util.get_packed_tile(item.tileset_id, item.tile_id, item.palette)
 	
 	if editor.tile_buffer.get_cell(pos.x, pos.y) == TileMap.INVALID_CELL:
 		editor.tile_buffer.set_cellv(pos, cache_tile)
