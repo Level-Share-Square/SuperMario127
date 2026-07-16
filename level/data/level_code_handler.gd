@@ -9,6 +9,7 @@ const TYPE_CODE_FLOAT = "F" # float
 const TYPE_CODE_VECTOR2 = "V" # Vector2
 const TYPE_CODE_COLOR = "C" # Color
 const TYPE_CODE_ARRAY = "A" # Array
+const TYPE_CODE_DICTIONARY = "K" # Dictionary
 const TYPE_CODE_STRING_ARRAY = "aS" # PoolStringArray
 const TYPE_CODE_INT_ARRAY = "aI" # PoolIntArray
 const TYPE_CODE_FLOAT_ARRAY = "aF" # PoolRealArray; MAN I wish we had godot 4 for things like PackedFloat64Array

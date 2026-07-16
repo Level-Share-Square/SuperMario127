@@ -24,6 +24,8 @@ static func serialize_areas(area_headers: Array) -> String:
 		
 		area_data = LevelCodeDeserializer.deserialize_area_code(header.area_code)
 		area_data.header = header
+		# we do the enclosing in here because otherwise we can't
+		# serialize_area to get the level codes for AreaHeader
 		areas_code += "["
 		areas_code += serialize_area(area_data)
 		areas_code += "]"
@@ -161,8 +163,9 @@ static func serialize_data_array(values: Array) -> String:
 	return data_array_code
 
 
-# custom Base64 integer encoding/decoding from Super Mario Shockwave (thanks luci :D)
-static func base64_encode_int(number : int):
+
+# Base64 integer encoding/decoding from Super Mario Shockwave (thanks luci :D)
+static func base64_encode_int(number: int) -> String:
 	var characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_"
 	var is_negative = false
 	if sign(number) < 0:
@@ -181,6 +184,28 @@ static func base64_encode_int(number : int):
 		string = "~"
 	for digit in digits:
 		string += characters[digit]
+	return string
+
+
+static func base64_encode_float(number: float) -> String:
+	var is_negative = false
+	if sign(number) < 0:
+		is_negative = true
+		number = abs(number)
+	
+	var number_components: PoolRealArray = str(number).split_floats(".")
+	
+	var string = ""
+	if is_negative:
+		string = "~"
+	
+	if number_components.size() == 1:
+		string += base64_encode_int(number_components[0])
+	else:
+		string += base64_encode_int(number_components[0])
+		string += "."
+		string += base64_encode_int(number_components[1])
+	
 	return string
 
 
@@ -210,7 +235,7 @@ static func serialize_data(value) -> String:
 			data_code = LevelCodeHandler.TYPE_CODE_BOOL + str(int(value))
 		TYPE_REAL:
 			value = value as float
-			data_code = LevelCodeHandler.TYPE_CODE_FLOAT + str(value)
+			data_code = LevelCodeHandler.TYPE_CODE_FLOAT + base64_encode_float(value)
 		TYPE_VECTOR2:
 			value = value as Vector2
 			data_code = LevelCodeHandler.TYPE_CODE_VECTOR2 + serialize_data_array([value.x, value.y])
@@ -232,13 +257,14 @@ static func serialize_data(value) -> String:
 		TYPE_RAW_ARRAY:
 			value = value as PoolByteArray
 			data_code = LevelCodeHandler.TYPE_CODE_BYTES
-			data_code += Marshalls.raw_to_base64(value)
-			# convert from Base64 to Base64URL
-			data_code = data_code.replace("+", "-")
-			data_code = data_code.replace("/", "_")
-			# padding in Base64 isn't URI encoding safe, so we replace "="
-			# with "~" while serializing
-			data_code = data_code.replace("=", "~")
+			if not value.empty():
+				data_code += Marshalls.raw_to_base64(value)
+				# convert from Base64 to Base64URL
+				data_code = data_code.replace("+", "-")
+				data_code = data_code.replace("/", "_")
+				# padding in Base64 isn't URI encoding safe, so we replace "="
+				# with "~" while serializing
+				data_code = data_code.replace("=", "~")
 		TYPE_RECT2:
 			value = value as Rect2
 			data_code = LevelCodeHandler.TYPE_CODE_RECT2 + serialize_data_array([value.position.x, value.position.y, value.size.x, value.size.y])

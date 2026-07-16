@@ -202,6 +202,26 @@ static func base64_decode_int(number: String) -> int:
 	return final_number
 
 
+static func base64_decode_float(number: String) -> float:
+	var is_negative = false
+	if number[0] == "~":
+		is_negative = true
+		number = number.substr(1)
+	
+	var components: PoolStringArray = number.split(".")
+	var whole: int = 0
+	var fract: int = 0
+	if components.size() == 1:
+		whole = base64_decode_int(components[0])
+	else:
+		whole = base64_decode_int(components[0])
+		fract = base64_decode_int(components[1])
+	
+	var fract_string = "0." + str(fract)
+	
+	return float(whole) + fract_string.to_float()
+
+
 static func deserialize_data_code(data_code: String):
 	var type_code = data_code.substr(0, 1)
 	var data = ""
@@ -229,7 +249,7 @@ static func deserialize_data_code(data_code: String):
 		LevelCodeHandler.TYPE_CODE_BOOL:
 			return int(data) != 0
 		LevelCodeHandler.TYPE_CODE_FLOAT:
-			return float(data)
+			return base64_decode_float(data)
 		LevelCodeHandler.TYPE_CODE_VECTOR2:
 			data = LevelCodeTokenizer.splice_data_array(data)
 			var data_array = deserialize_datas_code(data)
@@ -257,6 +277,9 @@ static func deserialize_data_code(data_code: String):
 			data = LevelCodeTokenizer.splice_data_array(data)
 			return PoolVector2Array(deserialize_datas_code(data))
 		LevelCodeHandler.TYPE_CODE_BYTES:
+			if data.empty():
+				return PoolByteArray()
+			
 			# convert from Base64URL to Base64
 			data = data.replace("-", "+")
 			data = data.replace("_", "/")
