@@ -258,6 +258,9 @@ static func serialize_data(value) -> String:
 		TYPE_ARRAY:
 			value = value as Array
 			data_code = LevelCodeHandler.TYPE_CODE_STRING_ARRAY + serialize_data_array(value)
+		TYPE_DICTIONARY:
+			value = value as Dictionary
+			data_code = LevelCodeHandler.TYPE_CODE_DICTIONARY + serialize_dictionary(value)
 		TYPE_STRING_ARRAY:
 			value = value as PoolStringArray
 			data_code = LevelCodeHandler.TYPE_CODE_STRING_ARRAY + serialize_data_array(value)

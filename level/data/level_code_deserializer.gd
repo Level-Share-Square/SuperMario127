@@ -161,6 +161,16 @@ static func deserialize_object_metadata_code(object_metadata_code: String) -> Ob
 	return ObjectMetadata.new(position, type_id, enabled, palette)
 
 
+static func deserialize_dictionary(code: String) -> Dictionary:
+	var pair_codes: Array = LevelCodeTokenizer.splice_dictionary(code)
+	var dictionary: Dictionary = {}
+	for pair_code in pair_codes:
+		var pair: Array = LevelCodeTokenizer.splice_dictionary_pair(code)
+		dictionary.get_or_add(pair[0], pair[1])
+	
+	return dictionary
+
+
 # basically, this is the finest grain part of the level code; we are just looking at primitive values
 # pass in a list of primitive values to this function and it will interpret them
 static func deserialize_datas_code(datas_code: String) -> Array:
@@ -267,6 +277,9 @@ static func deserialize_data_code(data_code: String):
 		LevelCodeHandler.TYPE_CODE_ARRAY:
 			data = LevelCodeTokenizer.splice_data_array(data)
 			return deserialize_datas_code(data)
+		LevelCodeHandler.TYPE_CODE_DICTIONARY:
+			data = LevelCodeTokenizer.splice_data_array(data)
+			return deserialize_dictionary(data)
 		LevelCodeHandler.TYPE_CODE_STRING_ARRAY:
 			data = LevelCodeTokenizer.splice_data_array(data)
 			return PoolStringArray(deserialize_datas_code(data))

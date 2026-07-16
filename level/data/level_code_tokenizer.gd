@@ -4,6 +4,7 @@ extends Object
 
 const metadata_pattern = "\\{([^{}]*)\\}"
 const data_pattern = "(?:[^\\[\\],]+|\\[[^\\]]*\\])+"
+const dictionary_entry_pattern = "(?:[^\\[\\]~]+|\\[[^\\]]*\\])+"
 const array_data_pattern = "\\{(?:[^{}]++|\\{[^{}]*\\})*\\}"
 
 
@@ -72,8 +73,18 @@ static func splice_data_array(code: String):
 	return get_outermost_brackets(code)[0]
 
 
+# Used to get a list of key-value pairs
 static func splice_dictionary(code: String):
-	return get_outermost_brackets(code)[0]
+	var regex = RegEx.new()
+	regex.compile(data_pattern)
+	return regex_match_to_string_array(regex.search_all(code))
+
+
+# Used to get an 2 element array that represents a key-value pair
+static func splice_dictionary_entry(code: String):
+	var regex = RegEx.new()
+	regex.compile(data_pattern)
+	return regex_match_to_string_array(regex.search_all(code))
 
 
 static func regex_match_to_string_array(matches: Array) -> Array:
