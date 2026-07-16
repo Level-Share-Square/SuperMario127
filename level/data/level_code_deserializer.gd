@@ -219,7 +219,10 @@ static func base64_decode_float(number: String) -> float:
 	
 	var fract_string = "0." + str(fract)
 	
-	return float(whole) + fract_string.to_float()
+	if not is_negative:
+		return float(whole) + fract_string.to_float()
+	else:
+		return -float(whole) + fract_string.to_float()
 
 
 static func deserialize_data_code(data_code: String):
