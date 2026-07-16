@@ -7,11 +7,6 @@ var selected_modulate := Color(0.7, 0.7, 1.2, modulate.a)
 var hover_modulate := Color(modulate.r, modulate.g, modulate.b, 0.5)
 var translucent_modulate := Color(0, 0, 0, 0.25)
 var default_modulate := Color(1, 1, 1, modulate.a)
-
-export(LevelShared.Layers) var default_layer: int = LevelShared.Layers.Middle
-export var layer_shift: int = 0
-export var lock_layer: bool = false
-export var ignore_layer_disabling: bool = false
 export var generate_editor_hitbox: bool = false
 export var _property_ids: Dictionary
 
@@ -33,7 +28,6 @@ var preview_position := Vector2(72, 92)
 var palette: int = 0
 var palettes: int = 0
 
-var layer: int = LevelShared.Layers.Middle
 var z_layer: int = 0
 
 # true if creating a GameObject for the object settings preview
@@ -41,11 +35,11 @@ var is_preview : bool = false
 
 var visibility: bool = true # for modulate
 
-var base_savable_properties: PoolStringArray = ["position", "scale", "rotation_degrees", "enabled", "visible", "layer"]
+var base_savable_properties: PoolStringArray = ["position", "scale", "rotation_degrees", "enabled", "visible"]
 var base_hidden_properties: PoolStringArray = []
 var savable_properties: PoolStringArray = []
 
-var base_editable_properties: PoolStringArray = ["enabled", "visible", "rotation_degrees", "scale", "position", "layer"]
+var base_editable_properties: PoolStringArray = ["enabled", "visible", "rotation_degrees", "scale", "position"]
 var editable_properties: PoolStringArray = []
 
 var property_info: PoolStringArray = []
@@ -72,12 +66,7 @@ func load_placeable_item():
 func _ready():
 	load_placeable_item()
 	
-#	if layer != default_layer and lock_layer:
-#		set_property("layer", default_layer, true)
-	
 	set_object_data_property_metadata()
-	
-	z_layer = layer + LevelShared.layer_index_offset
 	
 	if get_tree().current_scene.mode == 1:
 		if generate_editor_hitbox:
@@ -120,8 +109,6 @@ func _ready():
 		if is_instance_valid(editor_hitbox):
 			editor_hitbox.queue_free()
 	
-	update_layer()
-	
 	property_info.resize(editable_properties.size())
 	
 	match mode:
@@ -162,8 +149,6 @@ func _unhandled_input(event):
 		var editor = get_tree().current_scene
 		connect("object_clicked", editor, "object_clicked", [self])
 		emit_signal("object_clicked")
-	
-	modulate_set()
 
 
 ## run when the game object enters the scene tree
@@ -295,22 +280,6 @@ func get_property_index(key) -> int:
 	return index
 
 
-func modulate_set():
-	modulate = default_modulate
-	
-	if selected:
-		modulate *= selected_modulate
-	
-	if layer < LevelShared.Layers.Middle:
-		modulate *= bg_modulate
-	
-	if hovered or not visibility:
-		modulate.a = hover_modulate.a
-		
-	if translucent:
-		modulate *= translucent_modulate
-
-
 func set_property(key, value, change_object_data = true, alias = null):
 	if typeof(self[key]) != typeof(value):
 		assert("Object tried to set property '" + key + "', but the provided type does not match.")
@@ -331,8 +300,6 @@ func set_property(key, value, change_object_data = true, alias = null):
 			if mode == 1:
 				visible = true
 				visibility = value
-		elif key == "layer":
-			update_layer()
 	
 	if mode == 1 and !is_preview:
 		emit_signal("property_changed", key, value)
@@ -377,14 +344,6 @@ func set_property_menu(key, menu_array: Array):
 		printerr("Property menu for %s was not set!" % key)
 
 
-func update_layer():
-	if layer <= 3:
-		z_layer = layer + LevelShared.layer_index_offset
-		z_index = (z_layer * LevelShared.layer_spacing) + layer_shift
-	else:
-		printerr("Object has assigned layer %s" % layer)
-
-
 func parts_input_handler(event, object):
 	if event is InputEventMouseButton and event.is_pressed() and hovered:
 		match event.button_index:
@@ -402,19 +361,4 @@ func parts_input_handler(event, object):
 
 
 func is_on_ground_layer() -> bool:
-	return true
-
-
-func _on_layer_changed(new_layer):
-	pass
-#	if new_layer != layer && shared.get_parent().show_layers:
-#		translucent = true
-#	else:
-#		translucent = false
-
-
-func recursive_find_shared(node):
-	if node.name == "Shared":
-		return node
-	else:
-		return recursive_find_shared(node.get_parent())
+	return level_layer_ref.get_ref() is LevelGroundLayer
