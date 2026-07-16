@@ -152,16 +152,29 @@ static func serialize_metadata(values: Array) -> String:
 
 
 static func serialize_data_array(values: Array) -> String:
-	var data_array_code: String = "["
+	var data_array_code: String = ""
 	
 	for value in values:
 		data_array_code += serialize_data(value)
 		data_array_code += ","
 	
-	data_array_code += "]"
-	
-	return data_array_code
+	return wrap_code_in_brackets(data_array_code)
 
+
+static func serialize_dictionary(dict: Dictionary) -> String:
+	var code: String = ""
+	
+	for key in dict:
+		code += serialize_data(key)
+		code += "~"
+		code += serialize_data(dict[key])
+		code += ","
+	
+	return wrap_code_in_brackets(code)
+
+
+static func wrap_code_in_brackets(code: String) -> String:
+	return "[" + code + "]"
 
 
 # Base64 integer encoding/decoding from Super Mario Shockwave (thanks luci :D)
