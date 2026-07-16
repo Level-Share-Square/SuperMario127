@@ -122,21 +122,13 @@ func _ready():
 	
 	update_layer()
 	
-	yield(get_tree(), "idle_frame")
-	
 	property_info.resize(editable_properties.size())
 	
 	match mode:
 		LevelPlayer.mode:
 			_object_ready()
-			
-			if loaded:
-				_level_loaded()
 		Editor.mode:
 			_editor_ready()
-			
-			if loaded:
-				_editor_loaded()
 
 
 func _process(delta):
@@ -145,7 +137,9 @@ func _process(delta):
 			_object_process(delta)
 			
 			if is_on_ground_layer():
-				_object_logic_process(delta)
+				_object_ground_process(delta)
+			else:
+				_object_parallax_process(delta)
 		Editor.mode:
 			_editor_process(delta)
 
@@ -156,7 +150,9 @@ func _physics_process(delta):
 			_object_physics_process(delta)
 			
 			if is_on_ground_layer():
-				_object_logic_physics_process(delta)
+				_object_ground_physics_process(delta)
+			else:
+				_object_parallax_physics_process(delta)
 		Editor.mode:
 			_editor_physics_process(delta)
 
@@ -190,13 +186,23 @@ func _object_physics_process(delta: float) -> void:
 	pass
 
 
-## Run every process frame when the object is on the ground layer.
-func _object_logic_process(delta: float) -> void:
+## Run every process frame when the object is on a ground layer.
+func _object_ground_process(delta: float) -> void:
 	pass
 
 
-## Run every physics frame when the object is on the ground layer.
-func _object_logic_physics_process(delta: float) -> void:
+## Run every physics frame when the object is on a ground layer.
+func _object_ground_physics_process(delta: float) -> void:
+	pass
+
+
+## Run every process frame when the object is on a ground layer.
+func _object_parallax_process(delta: float) -> void:
+	pass
+
+
+## Run every physics frame when the object is on a ground layer.
+func _object_parallax_physics_process(delta: float) -> void:
 	pass
 
 
