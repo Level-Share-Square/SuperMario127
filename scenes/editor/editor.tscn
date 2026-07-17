@@ -33,7 +33,7 @@
 [ext_resource path="res://scenes/editor/items/items.tres" type="Resource" id=31]
 [ext_resource path="res://scenes/editor/assets/undo.svg" type="Texture" id=32]
 [ext_resource path="res://scenes/editor/items/categories/Decoration.tres" type="Resource" id=33]
-[ext_resource path="res://scenes/editor/tools/selection_box/selection_box.tscn" type="PackedScene" id=34]
+[ext_resource path="res://scenes/editor/tools/object_selection.tscn" type="PackedScene" id=34]
 [ext_resource path="res://assets/fonts/delfino_small.tres" type="DynamicFont" id=35]
 [ext_resource path="res://scenes/editor/buttons/hotbar_button.tscn" type="PackedScene" id=36]
 [ext_resource path="res://scenes/editor/buttons/popup_custom.gd" type="Script" id=37]
@@ -219,12 +219,10 @@ script = ExtResource( 8 )
 [node name="TilePaint" type="Control" parent="ZIndex/Tools"]
 mouse_filter = 2
 script = ExtResource( 27 )
-inverse_tool_name = "ObjectPaint"
 
 [node name="TileErase" type="Control" parent="ZIndex/Tools"]
 mouse_filter = 2
 script = ExtResource( 12 )
-inverse_tool_name = "ObjectErase"
 
 [node name="TileFill" type="Control" parent="ZIndex/Tools"]
 mouse_filter = 2
@@ -237,27 +235,19 @@ script = ExtResource( 69 )
 [node name="ObjectPaint" type="Control" parent="ZIndex/Tools"]
 mouse_filter = 2
 script = ExtResource( 25 )
-tool_type = 1
-inverse_tool_name = "TilePaint"
 
 [node name="ObjectErase" type="Control" parent="ZIndex/Tools"]
 mouse_filter = 2
 script = ExtResource( 11 )
-tool_type = 1
-inverse_tool_name = "TileErase"
 
 [node name="ObjectTileLock" type="Control" parent="ZIndex/Tools"]
 mouse_filter = 2
 script = ExtResource( 71 )
 
-[node name="ObjectSelection" parent="ZIndex/Tools" instance=ExtResource( 34 )]
-unique_name_in_owner = true
-margin_right = 0.0
-margin_bottom = 0.0
-mouse_filter = 2
-tool_type = 1
-
 [node name="ObjectTrail" parent="ZIndex/Tools" instance=ExtResource( 72 )]
+
+[node name="ObjectSelection" parent="ZIndex/Tools" instance=ExtResource( 34 )]
+tool_type = 1
 
 [node name="ItemPreview" type="TextureRect" parent="ZIndex"]
 unique_name_in_owner = true
@@ -1703,10 +1693,6 @@ bus = "Sounds"
 [connection signal="tool_changed" from="ZIndex/Tools" to="ZIndex/ItemPreview" method="_on_Tools_tool_changed"]
 [connection signal="tool_changed" from="ZIndex/Tools" to="UI/UIContainer/EditorUI/Middle/Tools" method="_on_Tools_tool_changed"]
 [connection signal="action" from="ActionManager" to="SaveManager" method="_on_ActionManager_action"]
-[connection signal="redo" from="ActionManager" to="ZIndex/Tools/ObjectSelection" method="snap_to_selected_size"]
-[connection signal="redo" from="ActionManager" to="ZIndex/Tools/ObjectSelection" method="on_redo"]
-[connection signal="undo" from="ActionManager" to="ZIndex/Tools/ObjectSelection" method="snap_to_selected_size"]
-[connection signal="undo" from="ActionManager" to="ZIndex/Tools/ObjectSelection" method="on_undo"]
 [connection signal="text_entered" from="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/SearchBar" to="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/ScrollContainer/CenterContainer/ItemsGrid" method="_on_search"]
 [connection signal="pressed" from="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/Search" to="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/ScrollContainer/CenterContainer/ItemsGrid" method="_on_search"]
 [connection signal="pressed" from="UI/UIContainer/EditorUI/Top/Options/PanelContainer/Settings" to="UI/LevelSettingsWindow" method="toggle_window"]
@@ -1714,9 +1700,6 @@ bus = "Sounds"
 [connection signal="button_down" from="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/PanelContainer/Settings/Quit" to="SaveManager" method="_on_Quit_button_down"]
 [connection signal="button_down" from="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown/ResetZoom" to="EditorCamera" method="_on_ResetZoom_button_down"]
 [connection signal="button_down" from="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown/Help" to="UI/HelpWindow" method="toggle_window"]
-[connection signal="button_down" from="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/ItemActions/HBoxContainer/SelectionActions/Delete" to="ZIndex/Tools/ObjectSelection" method="_on_Delete_button_down"]
-[connection signal="pressed" from="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/ItemActions/HBoxContainer/SelectionActions/Copy" to="ZIndex/Tools/ObjectSelection" method="copy"]
-[connection signal="pressed" from="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/ItemActions/HBoxContainer/PasteAction/Paste" to="ZIndex/Tools/ObjectSelection" method="paste"]
 [connection signal="pressed" from="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/ItemActions/HBoxContainer/Undo" to="ActionManager" method="undo"]
 [connection signal="pressed" from="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/ItemActions/HBoxContainer/Redo" to="ActionManager" method="redo"]
 [connection signal="pressed" from="UI/UIContainer/EditorUI/Top/Tools/Layers/LayerPicker" to="UI/UIContainer/EditorUI/Top/Tools/Layers" method="pressed"]

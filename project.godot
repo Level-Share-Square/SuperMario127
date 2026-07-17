@@ -14,7 +14,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/menu/level_portal/login/account_info.gd"
 }, {
-"base": "Reference",
+"base": "Node",
 "class": "Action",
 "language": "GDScript",
 "path": "res://scenes/editor/action_manager/actions/action.gd"
@@ -319,7 +319,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/editor/tools/editor_tool.gd"
 }, {
-"base": "Reference",
+"base": "PanelContainer",
 "class": "EditorWindow",
 "language": "GDScript",
 "path": "res://scenes/editor/windows/editor_window.gd"
@@ -444,7 +444,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/menu/levels_list/misc/http_thumbnails.gd"
 }, {
-"base": "Reference",
+"base": "ScrollContainer",
 "class": "HelpPage",
 "language": "GDScript",
 "path": "res://scenes/oldeditor/window/HelpPage.gd"
@@ -759,7 +759,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/editor/action_manager/actions/place_tiles.gd"
 }, {
-"base": "Reference",
+"base": "Resource",
 "class": "PlaceableItem",
 "language": "GDScript",
 "path": "res://scenes/editor/items/placeable_item.gd"
@@ -988,11 +988,6 @@ _global_script_classes=[ {
 "class": "TileMapManager",
 "language": "GDScript",
 "path": "res://scenes/shared/layers/tile_map_manager.gd"
-}, {
-"base": "EditorTool",
-"class": "TileRectFill",
-"language": "GDScript",
-"path": "res://scenes/editor/tools/tile_rect_fill.gd"
 }, {
 "base": "Selector",
 "class": "TileSelector",
@@ -1356,7 +1351,6 @@ _global_script_class_icons={
 "TileData": "",
 "TileMapLayer": "",
 "TileMapManager": "",
-"TileRectFill": "",
 "TileSelector": "",
 "TimerBase": "",
 "TimerManager": "",
@@ -1407,6 +1401,7 @@ config/windows_native_icon="res://assets/misc/icon.ico"
 
 LocalSettings="*res://singletons/local_settings.gd"
 Singleton="*res://singletons/main_singleton.gd"
+Singleton2="*res://singleton2.gd"
 SettingsLoader="*res://singletons/settings_loader.tscn"
 Discord="*res://addons/discord_game_sdk/discord.gd"
 LastInputDevice="*res://singletons/last_input_device.gd"

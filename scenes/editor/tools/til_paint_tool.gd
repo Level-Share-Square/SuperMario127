@@ -42,7 +42,7 @@ func draw_tile(pos: Vector2) -> void:
 		return
 	
 	var item = editor.selected_item
-	var cache_tile = tile_util.get_packed_tile(item.tileset_id, item.tile_id, item.palette)
+	var cache_tile = tile_util.get_real_tile_set_id(item.tileset_id, item.tile_id, item.palette)
 	
 	if editor.tile_buffer.get_cell(pos.x, pos.y) == TileMap.INVALID_CELL:
 		editor.tile_buffer.set_cellv(pos, cache_tile)

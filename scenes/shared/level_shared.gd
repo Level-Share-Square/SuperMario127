@@ -23,6 +23,8 @@ func load_layers(layer_data_list: Array):
 		layer_data = layer_data
 		add_layer(layer_data)
 
+func get_layer_index(layer: LevelLayer):
+	return layers.find(layer)
 
 func add_layer(layer_data = null, add_to_data: bool = false):
 	if not is_instance_valid(layer_data):

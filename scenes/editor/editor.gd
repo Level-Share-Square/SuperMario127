@@ -30,7 +30,6 @@ onready var save_manager = $"SaveManager"
 
 onready var save_button = $UI/EditorUI/Utilities/Save
 onready var level_settings = $"%LevelSettingsWindow"
-onready var selection_box = $"%ObjectSelection".get_node("SelectionBox")
 onready var edit_selection = $"%EditSelection"
 onready var item_preview = $"%ItemPreview"
 
@@ -87,12 +86,6 @@ func object_unhovered(object):
 	
 	hovered_objects.erase(object.name)
 	object.hovered = false
-
-
-func _process(delta):
-	if Input.is_action_just_pressed("LMB") && tool_manager.current_tool == selection_box.get_parent() && selection_box.get_parent().visible == false:
-		selection_box.show()
-		selection_box.get_parent().show()
 		
 
 
@@ -107,4 +100,4 @@ func switch_scenes():
 
 func get_shared_node() -> LevelShared:
 	return get_node(shared_path) as LevelShared
-
+	

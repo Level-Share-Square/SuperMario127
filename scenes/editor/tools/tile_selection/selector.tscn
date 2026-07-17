@@ -16,6 +16,7 @@ unique_name_in_owner = true
 anchor_right = 0.69
 margin_right = 40.0
 margin_bottom = 40.0
+mouse_filter = 2
 border_color = Color( 1, 1, 1, 1 )
 border_width = 3.0
 editor_only = false

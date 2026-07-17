@@ -82,7 +82,8 @@ axis_stretch_vertical = 1
 
 [node name="SelectionArea" type="Area2D" parent="SelectionBox"]
 unique_name_in_owner = true
-collision_mask = 0
+collision_layer = 3
+collision_mask = 3
 
 [node name="SelectionShape" type="CollisionShape2D" parent="SelectionBox/SelectionArea"]
 unique_name_in_owner = true
