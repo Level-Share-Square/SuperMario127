@@ -12,6 +12,11 @@ func on_mouse_released():
 		return
 		
 	select_tiles()
+	editor.item_actions.show_selection_actions()
+	
+func on_mouse_clicked():
+	if !fill_rect.has_point(get_adjusted_mouse_position()):
+		editor.tile_buffer.clear()
 	
 func select_tiles():
 	var tile_fill_rect := Rect2(get_tile_grid_position(fill_rect.position), get_tile_grid_position(fill_rect.size))
@@ -83,3 +88,62 @@ func on_undo():
 	if editor.tool_manager.current_tool == self:
 		reset_bounds()
 		hide_visuals()
+
+func on_copy():
+	if editor.tool_manager.current_tool == self:
+		var tile_data := TileData.new()
+		var layer_chunks = CurrentLevelData.area.layers[editor.layer].tile_data.chunks
+		for position in editor.selected_tiles:
+			var chunk_pos = tile_data.get_chunk_coords(position)
+			
+			if !tile_data.chunks.has(chunk_pos):
+				var chunk = PoolIntArray()
+				chunk.resize(TileData.TILE_CHUNK_SIZE * TileData.TILE_CHUNK_SIZE)
+				chunk.fill(0)
+				tile_data.chunks[chunk_pos] = chunk
+				
+			var tile_index: int = posmod(position.x, TileData.TILE_CHUNK_SIZE) + posmod(position.y, TileData.TILE_CHUNK_SIZE) * TileData.TILE_CHUNK_SIZE
+			tile_data.chunks[chunk_pos][tile_index] = layer_chunks[chunk_pos][tile_index]
+		OS.set_clipboard(JSON.print([LevelCodeSerializer.serialize_data(tile_data), [camera.position.x, camera.position.y]]))
+		editor.item_actions.show_selection_actions()
+
+func on_paste():
+	if editor.tool_manager.current_tool == self:
+		var data = JSON.parse(OS.get_clipboard()).result
+		var tiledata: TileData = LevelCodeDeserializer.deserialize_data_code(data[0]) as TileData
+		var camera_offset: Vector2 = camera.position - Vector2(data[1][0], data[1][1])
+		var new_selection: Dictionary = {}
+		
+		for pos in tiledata.used_tiles:
+			var tile = tiledata.get_tile_data_from_packed(tiledata.get_packed_tile_at(pos))
+			if shared.is_air(tile):
+				continue
+			new_selection[pos + (camera_offset/TILE_SIZE).floor()] = tile
+			
+		fill_rect = Rect2(new_selection.keys()[0] * TILE_SIZE, TILE)
+			
+		editor.selected_tiles.clear()
+		for position in new_selection:
+			editor.selected_tiles[position] = new_selection[position]
+			fill_rect = fill_rect.expand(position * TILE_SIZE)
+		
+		fill_rect.size += TILE
+			
+		selection_box.rect_global_position = fill_rect.position
+		selection_box.rect_size = fill_rect.size
+		selection_box.show()
+		editor.tile_buffer.modulate = shared.layers[editor.layer].layer_tint
+		set_buffer()
+
+func on_delete():
+	if editor.tool_manager.current_tool == self and !editor.selected_tiles.empty():
+		var action := PlaceTilesAction.new()
+		action.shared = shared
+		action.layer = editor.layer
+		action.tileset_id = 0
+		action.tile_id = 0
+		action.palette = 0
+		action.do_tiles = editor.selected_tiles.keys()
+		editor.action_manager.commit_action(action)
+		editor.selected_tiles = {}
+		reset_bounds()

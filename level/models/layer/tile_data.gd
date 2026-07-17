@@ -91,3 +91,6 @@ func get_palette_id_at(coords: Vector2) -> int:
 
 func get_tile_data_at(coords: Vector2) -> Array:
 	return [get_tile_set_id_at(coords), get_tile_id_at(coords), get_palette_id_at(coords)]
+
+func get_tile_data_from_packed(packed_data) -> Array:
+	return [tile_util.get_tile_set_id_from_packed(packed_data), tile_util.get_tile_id_from_packed(packed_data), tile_util.get_palette_id_from_packed(packed_data)]

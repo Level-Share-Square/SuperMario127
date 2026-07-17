@@ -25,6 +25,7 @@ onready var tool_manager: ToolManager = $"%Tools"
 onready var tile_buffer: TileMap = $"%TileBuffer"
 onready var object_buffer = $"%ObjectBuffer"
 onready var action_manager: ActionManager = $"%ActionManager"
+onready var item_actions = $"%ItemActions"
 onready var screen_manager = $"%ScreenManager"
 onready var save_manager = $"SaveManager"
 
@@ -69,6 +70,8 @@ func _ready():
 		Singleton.ModeSwitcher.button.change_visuals(0)
 	
 		CurrentLevelData.unsaved_editor_changes = false
+		
+	item_actions.verify_clipboard()
 
 
 func object_hovered(object):
