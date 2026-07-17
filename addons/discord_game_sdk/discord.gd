@@ -267,3 +267,26 @@ func _ready():
 func _process(delta:float) -> void:
 	if discore_core_:
 		discore_core_.run_callbacks()
+
+
+func set_rich_presence_enabled(enabled: bool) -> void:
+	if not enabled and activity_manager:
+		activity_manager.clear_activity()
+
+
+func set_playing(state: String) -> void:
+	if activity_manager == null:
+		return
+	var activity = Activity.new()
+	activity.set_type(ActivityType.Playing)
+	activity.set_state(state)
+	var assets = activity.get_assets()
+	assets.set_large_image("sm127")
+	assets.set_large_text("0.9.0")
+	assets.set_small_image("capsule_main")
+	assets.set_small_text("ZONE 2 WOOO")
+	var timestamps = activity.get_timestamps()
+	timestamps.set_start(OS.get_unix_time() + 1)
+	var result = yield(activity_manager.update_activity(activity), "result").result
+	if result != Result.Ok:
+		printerr(str(result))

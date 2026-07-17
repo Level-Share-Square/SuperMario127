@@ -23,7 +23,7 @@ func pressed():
 		click_sound.play()
 		var window = preload("res://scenes/oldeditor/window/TextInput.tscn")
 		window_child = window.instance()
-		Singleton2.disable_hotkeys = true
+		EditorState.disable_hotkeys = true
 		get_parent().get_parent().get_parent().get_parent().add_child(window_child)
 		window_child.set_as_toplevel(true)
 		window_child.get_node("Contents/TextEdit").text = text.text

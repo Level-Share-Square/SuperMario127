@@ -38,7 +38,7 @@ func _ready():
 func create_mod_button(path: String):
 	var mod_button: Button = none_button.duplicate()
 	mod_button.text = path.get_basename()
-	mod_button.disabled = (path == Singleton2.mod_path.get_file())
+	mod_button.disabled = (path == ModLoader.path.get_file())
 	mod_button.connect("pressed", self, "set_active_mod", [path])
 	mods_container.call_deferred("add_child", mod_button)
 

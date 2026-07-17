@@ -39,10 +39,10 @@ var possible_parallax = [
 func _ready() -> void:
 	randomize()
 	
-	var picked_background = possible_backgrounds[0] if !Singleton2.dark_mode else possible_backgrounds[1]
-	var picked_parallax =  possible_parallax[0] if !Singleton2.dark_mode else possible_parallax[1]
+	var picked_background = possible_backgrounds[0] if !LocalSettings.load_setting("General", "dark_mode", false) else possible_backgrounds[1]
+	var picked_parallax =  possible_parallax[0] if !LocalSettings.load_setting("General", "dark_mode", false) else possible_parallax[1]
 	
-	var extra_offset = 65 if !Singleton2.dark_mode else 200
+	var extra_offset = 65 if !LocalSettings.load_setting("General", "dark_mode", false) else 200
 	
 	backgrounds.update_background(picked_background, picked_parallax, Rect2(0, 0, 24, 14), extra_offset, 0)
 	backgrounds.do_auto_scroll = true
@@ -81,7 +81,7 @@ func _ready() -> void:
 	Singleton.MiscShared.is_play_reload = false
 	
 	# warning-ignore:return_value_discarded
-	Singleton2.connect("dark_mode_toggled",self,"dark_mode_toggled")
+	LocalSettings.connect("setting_changed",self,"dark_mode_toggled")
 
 # change this to use an enum or something, store enum in menu_variables
 func start_changing_screens(this_screen_name : String, new_screen_name : String) -> void:
@@ -128,9 +128,11 @@ func finish_changing_screens(_anim_name : String = "") -> void:
 	current_screen._open_screen()
 	current_screen.can_interact = true
 	
-func dark_mode_toggled():
-	var picked_background = possible_backgrounds[0] if !Singleton2.dark_mode else possible_backgrounds[1]
-	var picked_parallax = possible_parallax[0] if !Singleton2.dark_mode else possible_parallax[1]
+func dark_mode_toggled(key: String = "dark_mode", _value = null) -> void:
+	if key != "dark_mode":
+		return
+	var picked_background = possible_backgrounds[0] if !LocalSettings.load_setting("General", "dark_mode", false) else possible_backgrounds[1]
+	var picked_parallax = possible_parallax[0] if !LocalSettings.load_setting("General", "dark_mode", false) else possible_parallax[1]
 	
 	backgrounds.update_background(picked_background, picked_parallax, Rect2(0, 0, 24, 14), 0, 0)
 	backgrounds.do_auto_scroll = true

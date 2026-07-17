@@ -46,7 +46,7 @@ func reopen()-> void:
 			Tween.TRANS_CIRC, Tween.EASE_OUT)
 		tween.start()
 		yield(tween, "tween_completed")
-		Singleton2.disable_hotkeys = true
+		EditorState.disable_hotkeys = true
 	
 	var back_button = get_parent().get_node_or_null("BackButton")
 	
@@ -121,7 +121,7 @@ func temporary_close()-> void:
 		tween.start()
 		yield(tween, "tween_completed")
 		visible = false
-		Singleton2.disable_hotkeys = false
+		EditorState.disable_hotkeys = false
 
 func close():
 	

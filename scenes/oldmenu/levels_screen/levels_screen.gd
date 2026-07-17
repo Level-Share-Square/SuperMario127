@@ -67,8 +67,10 @@ var show_sample_levels := true
 
 var is_dark:bool = false
 
-func toggle_dark_mode():
-	if Singleton2.dark_mode:
+func toggle_dark_mode(key: String = "dark_mode", _value = null) -> void:
+	if key != "dark_mode":
+		return
+	if LocalSettings.load_setting("General", "dark_mode", false):
 		$TransitionRect.modulate = Color(0,0,0)
 		is_dark = true
 	else:
@@ -76,10 +78,9 @@ func toggle_dark_mode():
 		is_dark = false
 
 func _ready() -> void:
-	Singleton2.save_ghost = false
-	
+
 	toggle_dark_mode()
-	Singleton2.connect("dark_mode_toggled",self,"toggle_dark_mode")
+	LocalSettings.connect("setting_changed",self,"toggle_dark_mode")
 	
 	var _connect
 
@@ -358,19 +359,14 @@ func set_control_buttons(is_enabled : bool) -> void:
 
 func on_level_selected(index : int) -> void:
 	Singleton.SavedLevels.selected_level = index
-	Singleton2.level = Singleton.SavedLevels.selected_level
 	var level_info : LevelInfo = levels[Singleton.SavedLevels.selected_level]
 	populate_info_panel(level_info)
 	
 	if double_click:
-		if Singleton2.rp == true:
+		if LocalSettings.load_setting("General", "rich_presence", true):
 			update_activity()
-		elif Singleton2.rp == false:
-			if Singleton2.dead == false:
-				Discord.queue_free()
-				Singleton2.dead = true
-			elif Singleton2.dead == true:
-				pass
+		else:
+			Discord.set_rich_presence_enabled(false)
 		start_level(false)
 
 func on_button_back_pressed() -> void:
@@ -448,28 +444,20 @@ func on_button_sample_levels_pressed() -> void:
 
 
 func on_button_play_pressed() -> void:
-	if Singleton2.rp == true:
+	if LocalSettings.load_setting("General", "rich_presence", true):
 		update_activity()
-	elif Singleton2.rp == false:
-		if Singleton2.dead == false:
-			Discord.queue_free()
-			Singleton2.dead = true
-		elif Singleton2.dead == true:
-			pass
+	else:
+		Discord.set_rich_presence_enabled(false)
 	if !can_interact:
 		return
 	start_level(false)
 
 func on_button_edit_pressed() -> void:
 	toggle_dark_mode()
-	if Singleton2.rp == true:
+	if LocalSettings.load_setting("General", "rich_presence", true):
 		update_activity2()
-	elif Singleton2.rp == false:
-		if Singleton2.dead == false:
-			Discord.queue_free()
-			Singleton2.dead = true
-		elif Singleton2.dead == true:
-			pass
+	else:
+		Discord.set_rich_presence_enabled(false)
 	if !can_interact:
 		return
 	start_level(true)
@@ -510,38 +498,8 @@ func on_button_close_time_scores_pressed() -> void:
 
 	
 func update_activity() -> void:
-	var activity = Discord.Activity.new()
-	activity.set_type(Discord.ActivityType.Playing)
-	activity.set_state("Playing " + level_name_label.text)
-
-	var assets = activity.get_assets()
-	assets.set_large_image("sm127")
-	assets.set_large_text("0.8.0")
-	assets.set_small_image("capsule_main")
-	assets.set_small_text("ZONE 2 WOOO")
-	
-	var timestamps = activity.get_timestamps()
-	timestamps.set_start(OS.get_unix_time() + 1)
-
-	var result = yield(Discord.activity_manager.update_activity(activity), "result").result
-	if result != Discord.Result.Ok:
-		printerr(str(result))
+	Discord.set_playing("Playing " + level_name_label.text)
 		
 func update_activity2() -> void:
-	var activity = Discord.Activity.new()
-	activity.set_type(Discord.ActivityType.Playing)
-	activity.set_state("Editing a level")
-
-	var assets = activity.get_assets()
-	assets.set_large_image("sm127")
-	assets.set_large_text("0.8.0")
-	assets.set_small_image("capsule_main")
-	assets.set_small_text("ZONE 2 WOOO")
-	
-	var timestamps = activity.get_timestamps()
-	timestamps.set_start(OS.get_unix_time() + 1)
-
-	var result = yield(Discord.activity_manager.update_activity(activity), "result").result
-	if result != Discord.Result.Ok:
-		printerr(str(result))
+	Discord.set_playing("Editing a level")
 

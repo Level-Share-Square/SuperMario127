@@ -6,8 +6,8 @@ onready var current_mod = $VBoxContainer/CurrentMod
 
 
 func _ready():
-	if Singleton2.mod_active:
-		current_mod.text = "Current Mod: " + Singleton2.mod_path.get_file().get_basename()
+	if ModLoader.active:
+		current_mod.text = "Current Mod: " + ModLoader.path.get_file().get_basename()
 		yield(timer, "timeout")
 	
 	Singleton.SceneSwitcher.quit_to_menu()
