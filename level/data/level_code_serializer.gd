@@ -304,7 +304,7 @@ static func serialize_data(value) -> String:
 				data_code = LevelCodeHandler.TYPE_CODE_CURVE_2D
 				
 				var point_data: PoolVector2Array = PoolVector2Array()
-				for i in range(value.get_point_count() * 3):
+				for i in range(value.get_point_count()):
 					point_data.append(value.get_point_position(i))
 					point_data.append(value.get_point_in(i))
 					point_data.append(value.get_point_out(i))
