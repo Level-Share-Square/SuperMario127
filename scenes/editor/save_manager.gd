@@ -44,6 +44,9 @@ func _on_Save_button_down():
 	
 	var level_id: String = CurrentLevelData.level_id
 	var working_folder: String = CurrentLevelData.working_folder
+	
+	CurrentLevelData.area_headers[CurrentLevelData.area_id].area_code = LevelCodeSerializer.serialize_area(CurrentLevelData.area)
+	
 	var level_code: String = LevelCodeSerializer.serialize_level_data(LevelDataContainer.new(CurrentLevelData.level_metadata, SavedEditorData.new(), [], CurrentLevelData.area_headers))
 	
 	var file_path = level_list_util.get_level_file_path(level_id, working_folder)
