@@ -34,12 +34,12 @@ func _mouse_movement(_event: InputEvent, world_pos: Vector2) -> void:
 
 
 func erase_tile(pos: Vector2) -> void:
-	var level_bounds: Rect2 = CurrentLevelData.level_data.areas[CurrentLevelData.area].bounds
+	var level_bounds: Rect2 = CurrentLevelData.area.header.bounds
 	if not level_bounds.has_point(pos):
 		return
 	
 	var item = editor.selected_item
-	var visual = shared.tilemaps_node.get_tile(21, 0, 2)
+	var visual = tile_util.get_packed_tile(21, 0, 2)
 	
 	if editor.tile_buffer.get_cell(pos.x, pos.y) == TileMap.INVALID_CELL:
 		editor.tile_buffer.set_cellv(pos, visual)

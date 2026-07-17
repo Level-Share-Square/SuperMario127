@@ -59,6 +59,5 @@ func create_object_data(position: Vector2, object_id: int, palette: int) -> Obje
 	data.properties.append(0)
 	data.properties.append(true)
 	data.properties.append(true)
-	data.properties.append(LevelShared.Layers.Middle)
 	
 	return data

@@ -56,8 +56,8 @@ func _test_load_in(layer_data: LayerData) -> void:
 
 
 # tiles
-func place_tile(coords, tile_set, tile, palette):
-	tile_map_manager.place_tile(coords, tile_set, tile, palette)
+func place_tile(coords, tile_set, tile, palette, update_autotile, modify_data):
+	tile_map_manager.place_tile(coords, tile_set, tile, palette, update_autotile, modify_data)
 
 
 func erase_tile(to_remove: Vector2):
