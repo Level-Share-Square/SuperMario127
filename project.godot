@@ -1452,7 +1452,7 @@ change=false
 audio=false
 transforms=false
 fps=true
-"Game Version"="0.9.2"
+"Game Version"="0.10.0"
 
 [importer_defaults]
 
