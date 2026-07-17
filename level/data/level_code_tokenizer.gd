@@ -10,7 +10,7 @@ const array_data_pattern = "\\{(?:[^{}]++|\\{[^{}]*\\})*\\}"
 
 #probably wont be necessary..
 static func splice_level(code: String):
-	return get_outermost_brackets(code)[0]
+	return code.substr(1, code.length() - 2)
 
 
 # takes full level code
