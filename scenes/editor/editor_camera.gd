@@ -72,8 +72,8 @@ func is_moving() -> bool:
 	return not position.is_equal_approx(last_pos)
 
 
-func update_limits(level_area):
-	var area_bounds = level_area.bounds.grow(3)
+func update_limits(level_area_header: AreaHeader):
+	var area_bounds = level_area_header.bounds.grow(3)
 	
 	limit_left = int(area_bounds.position.x * 32)
 	limit_top = int(area_bounds.position.y * 32 * zoom.x) #needs to include the toolbar
