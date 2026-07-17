@@ -37,7 +37,6 @@ func create_object(object_data: ObjectData, add_to_data: bool = false):
 	game_object.level_layer_ref = weakref(get_parent())
 	game_object.palette = object_data.metadata.palette
 	game_object.position = object_data.metadata.position
-	game_object.enabled = object_data.metadata.enabled
 	
 	game_object._set_properties()
 	

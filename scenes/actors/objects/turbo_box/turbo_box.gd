@@ -66,7 +66,6 @@ func enter_detector(body):
 				ObjectMetadata.new(
 					position + Vector2(0, 4),
 					20,
-					true,
 					0
 				),
 				{}

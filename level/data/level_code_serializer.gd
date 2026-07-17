@@ -111,16 +111,17 @@ static func serialize_object(object: ObjectData) -> String:
 				object.metadata.type_id,
 				object.metadata.palette,
 				object.metadata.position,
-				object.metadata.in_front,
-				object.metadata.enabled,
 			]
 		)
 		
-		var property_dictionary: Dictionary = {}
-		for property in object.properties:
-			property_dictionary.get_or_add(property, object.properties[property])
+		var properties_code: String = ""
+		for property_id in object.properties:
+			properties_code += serialize_data(property_id)
+			properties_code += ":"
+			properties_code += serialize_data(object.properties[property_id])
+			properties_code += ";"
 		
-		object_code += wrap_code_in_brackets(serialize_data(object.properties))
+		object_code += wrap_code_in_brackets(properties_code)
 		
 		return object_code
 

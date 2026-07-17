@@ -410,7 +410,6 @@ static func get_new_area_code(header: AreaHeader, old_area: AreaDataOld) -> Area
 	for old_object in old_area.objects:
 		old_object = old_object as ObjectDataOld
 		var object_layer: int = object_layer_map[old_object.properties.pop_at(5)]
-		var enabled: bool = old_object.properties.pop_at(3)
 		var position: Vector2 = old_object.properties.pop_at(0)
 		
 		if old_object.type_id == 14:
@@ -423,23 +422,25 @@ static func get_new_area_code(header: AreaHeader, old_area: AreaDataOld) -> Area
 			# can't get all the default properties but we can at least check the old
 			# base ones and not include them if they're unchanged
 			match i:
-				0:
+				0: # scale
 					if value is Vector2 and value != Vector2.ONE:
 						property_dictionary.get_or_add(i, old_object.properties[i])
-				1:
+				1: # rotation degrees
 					if value is int and value != 0:
 						property_dictionary.get_or_add(i, old_object.properties[i])
-				2:
+				2: # enabled
 					if value is bool and value != true:
 						property_dictionary.get_or_add(i, old_object.properties[i])
-				
-			property_dictionary.get_or_add(i, old_object.properties[i])
+				3: # visible
+					if value is bool and value != true:
+						property_dictionary.get_or_add(i, old_object.properties[i])
+				_:
+					property_dictionary.get_or_add(i, old_object.properties[i])
 		
 		var new_object: ObjectData = ObjectData.new(
 			ObjectMetadata.new(
 				position,
 				old_object.type_id,
-				enabled,
 				old_object.palette
 			), 
 			property_dictionary

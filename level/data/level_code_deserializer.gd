@@ -104,7 +104,18 @@ static func deserialize_object_code(object_code: String) -> ObjectData:
 
 
 static func deserialize_object_properties(code: String) -> Dictionary:
-	return deserialize_data_code(code)
+	var properties: Dictionary = {}
+	
+	var pair_codes: PoolStringArray = code.split(";", false)
+	for pair_code in pair_codes:
+		var pair: Array = LevelCodeTokenizer.splice_dictionary_entry(pair_code)
+		var key: int = deserialize_data_code(pair[0])
+		var value = deserialize_data_code(pair[1])
+		
+		properties.get_or_add(key, value)
+	
+	return properties
+	
 
 
 static func deserialize_level_metadata_code(level_metadata_code: String) -> LevelMetadata:
@@ -160,10 +171,8 @@ static func deserialize_object_metadata_code(object_metadata_code: String) -> Ob
 	var type_id: int = vars[0]
 	var palette: int = vars[1]
 	var position: Vector2 = vars[2]
-	var enabled: bool = vars[3]
-	var in_front: bool = vars[4]
 	
-	return ObjectMetadata.new(position, type_id, enabled, palette)
+	return ObjectMetadata.new(position, type_id, palette)
 
 
 static func deserialize_dictionary(code: String) -> Dictionary:
