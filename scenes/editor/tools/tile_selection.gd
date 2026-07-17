@@ -14,9 +14,8 @@ func on_mouse_released():
 	select_tiles()
 	editor.item_actions.show_selection_actions()
 	
-func on_mouse_clicked():
-	if !fill_rect.has_point(get_adjusted_mouse_position()):
-		editor.tile_buffer.clear()
+func on_selection_outside_clicked():
+	editor.tile_buffer.clear()
 	
 func select_tiles():
 	var tile_fill_rect := Rect2(get_tile_grid_position(fill_rect.position), get_tile_grid_position(fill_rect.size))

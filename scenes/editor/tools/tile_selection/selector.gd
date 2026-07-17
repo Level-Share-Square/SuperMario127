@@ -37,10 +37,6 @@ func get_mouse_grid_position():
 func get_adjusted_mouse_position():
 	return get_global_mouse_position().snapped(TILE)
 	
-func is_on_tile_grid(position: Vector2):
-	var tolerance = TILE_SIZE/4
-	return position.distance_to(((position / TILE_SIZE).round() * TILE_SIZE)) < tolerance
-	
 func _click_left(event, mouse_position):
 	var adjusted_mouse_position = get_adjusted_mouse_position()
 	on_mouse_clicked()
