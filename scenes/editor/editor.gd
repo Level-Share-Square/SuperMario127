@@ -57,6 +57,7 @@ func _ready():
 	
 	load_in()
 	
+	
 	# if the mode switch button is invisible then the editor hasn't been readyed for the first time yet
 	# (editor _ready() gets called every time a mode switch happens)
 	# if the button is invisible and we're in the editor scene, we know it's time to setup the editor for the first time

@@ -62,6 +62,7 @@ func _ready():
 
 func switch_to_area():
 	if id != CurrentLevelData.area_id:
+		CurrentLevelData.load_level_area(id)
 		CurrentLevelData.area_id = id
 		SceneTransitions.reload_scene()
 

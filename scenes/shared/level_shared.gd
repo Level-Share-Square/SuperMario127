@@ -10,6 +10,9 @@ var parallax_layer_scene: PackedScene = preload(PARALLAX_LAYER_SCENE_PATH)
 
 var layers: Array
 
+const layer_index_offset: int = -2
+const layer_spacing: int = 16
+
 
 func load_in():
 	load_layers(CurrentLevelData.area.layers)
