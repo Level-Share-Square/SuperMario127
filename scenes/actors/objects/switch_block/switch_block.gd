@@ -21,7 +21,7 @@ func _ready():
 	init()
 	hit_bounce_enabled = false
 	connect("property_changed", self, "_on_property_changed")
-	if !enabled or !layer == middle:
+	if !enabled:
 		$StaticBody2D.set_collision_layer_bit(0, false)
 	if mode != 1:
 		hit_area.connect("body_entered", self, "_on_hit_body_entered")
@@ -33,9 +33,9 @@ func _ready():
 		outline.animation = str(palette) + "_outline"
 
 	switch_state(inverted)
-	if CurrentLevelData.level_data.vars.switch_state.has(palette):
+	if CurrentLevelData.vars.switch_state.has(palette):
 		toggle_state()
-	CurrentLevelData.level_data.vars.connect("switch_state_changed", self, "_on_switch_state_changed")
+	CurrentLevelData.vars.connect("switch_state_changed", self, "_on_switch_state_changed")
 
 func toggle_state():
 	inverted = !inverted

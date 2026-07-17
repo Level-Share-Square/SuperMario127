@@ -12,7 +12,6 @@ func _ready() -> void:
 	if "mode" in current_scene:
 		if current_scene.mode == 0: # player
 			character = current_scene.get_node(current_scene.character)
-			character2 = current_scene.get_node(current_scene.character2)
 		set_process(false)
 
 func _process(_delta : float) -> void:

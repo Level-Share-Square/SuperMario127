@@ -318,13 +318,11 @@ static func deserialize_data_code(data_code: String):
 			data = LevelCodeTokenizer.splice_data_array(data)
 			var data_array = deserialize_datas_code(data)
 			
-			var points: PoolVector2Array = data_array[0]
-			var point_ins: PoolVector2Array = data_array[1]
-			var point_outs: PoolVector2Array = data_array[2]
+			var point_data: PoolVector2Array = data_array
 			
 			var curve: Curve2D = Curve2D.new()
-			for i in range(points.size()):
-				curve.add_point(points[i], point_ins[i], point_outs[i])
+			for i in range(0, point_data.size(), 3):
+				curve.add_point(point_data[i], point_data[i + 1], point_data[i + 2])
 			
 			return curve
 		# TileData

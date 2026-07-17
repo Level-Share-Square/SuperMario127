@@ -23,7 +23,7 @@ static func get_chunk_coords(coords: Vector2) -> Vector2:
 
 func set_tile(coords: Vector2, tileset: int, type: int, palette: int) -> void:
 	# if any of these are below 0, then the tile is being erased
-	if tileset < 0 or type < 0 or palette < 0:
+	if tileset <= 0 or type <= 0 or palette <= 0:
 		tileset = 0
 		type = 0
 		palette = 0

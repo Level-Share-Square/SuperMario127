@@ -304,14 +304,12 @@ static func serialize_data(value) -> String:
 				data_code = LevelCodeHandler.TYPE_CODE_CURVE_2D
 				
 				var point_data: PoolVector2Array = PoolVector2Array()
-				var point_in_data: PoolVector2Array = PoolVector2Array()
-				var point_out_data: PoolVector2Array = PoolVector2Array()
-				for i in range(value.get_point_count()):
+				for i in range(value.get_point_count() * 3):
 					point_data.append(value.get_point_position(i))
-					point_in_data.append(value.get_point_in(i))
-					point_out_data.append(value.get_point_out(i))
+					point_data.append(value.get_point_in(i))
+					point_data.append(value.get_point_out(i))
 				
-				data_code += serialize_data_array([point_data, point_in_data, point_out_data])
+				data_code += serialize_data(point_data)
 			elif value is TileData:
 				value = value as TileData
 				data_code = LevelCodeHandler.TYPE_CODE_TILE_DATA

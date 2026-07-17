@@ -222,7 +222,7 @@ static func convert_052_to_053(result):
 			var new_objects = []
 			for object_result in area_result.objects:
 				var object = object_result
-				object.properties.insert(5, LevelShared.Layers.Middle)
+				object.properties.insert(5, 2)
 				
 				if object.type_id == 82: #checkpoint conversion
 					var old_properties = object.properties.duplicate()

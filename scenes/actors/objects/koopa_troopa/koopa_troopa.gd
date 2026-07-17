@@ -27,7 +27,6 @@ export var para_color_sprite : SpriteFrames
 export var shell_scene : PackedScene
 
 var dead = false
-var loaded = false
 
 var gravity : float
 var gravity_scale : float
@@ -90,7 +89,7 @@ func _ready() -> void:
 	original_position = global_position
 	CurrentLevelData.enemies_instanced += 1
 	time_alive += float(CurrentLevelData.enemies_instanced) / 2.0
-	gravity = CurrentLevelData.level_data.areas[CurrentLevelData.area].gravity
+	gravity = CurrentLevelData.area.header.gravity
 	
 	var scene = get_tree().current_scene
 	if scene.mode == 1 and scene.placed_item_property == "Para":
@@ -98,7 +97,7 @@ func _ready() -> void:
 	sprite.frames = para_sprite if winged else normal_sprite
 	sprite_color.frames = para_color_sprite if winged else normal_color_sprite
 	
-	if scale.x < 0 and mode == 0 and enabled and layer == middle:
+	if scale.x < 0 and mode == 0 and enabled:
 		facing_direction = sign(scale.x)
 		scale.x = abs(scale.x)
 		
@@ -193,7 +192,7 @@ func _physics_process(delta):
 	
 	if !loaded and visibility_notifier and visibility_notifier.is_on_screen():
 		loaded = true
-	if mode != 1 and enabled and !dead and loaded and layer == middle:
+	if mode != 1 and enabled and !dead and loaded:
 		var level_bounds = CurrentLevelData.level_data.areas[CurrentLevelData.area].bounds
 		if !hit:
 			# Run the appropriate physics process function
