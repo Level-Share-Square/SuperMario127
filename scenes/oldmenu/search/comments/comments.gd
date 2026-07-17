@@ -82,7 +82,7 @@ func back_pressed():
 func on_edit():
 	var window = preload("res://scenes/editor/window/TextInput2.tscn")
 	var window_child = window.instance()
-	Singleton2.disable_hotkeys = true
+	EditorState.disable_hotkeys = true
 	add_child(window_child)
 	window_child.set_as_toplevel(true)
 	window_child.get_node("Contents/TextEdit").text = textedit.text

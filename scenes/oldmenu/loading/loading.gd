@@ -64,8 +64,8 @@ static func get_data_or_null():
 		
 func _ready():
 	#currently this doesnt work because settings arent initialized until after loading screen is finished
-	bg_rect.visible = !Singleton2.dark_mode
-	if Singleton2.mod_active == true:
+	bg_rect.visible = !LocalSettings.load_setting("General", "dark_mode", false)
+	if ModLoader.active == true:
 		reset_mod.show()
 		var tween = Tween.new()
 		add_child(tween)
@@ -77,7 +77,7 @@ func _ready():
 	var data = get_data_or_null()
 	if data != null:
 		if data.has("richpresence"):
-			Singleton2.rp = data["richpresence"]
+			LocalSettings.change_setting("General", "rich_presence", data.get("richpresence"))
 #		if data.has("darkmode"):
 #			Singleton2.dark_mode = data["darkmode"]
 #	if Singleton2.dark_mode:
@@ -97,14 +97,10 @@ func _ready():
 		file.open("user://081.dmitri", File.WRITE)
 		file.close()
 		dir.remove("user://080.darius")
-	if Singleton2.rp == true:
+	if LocalSettings.load_setting("General", "rich_presence", true):
 		update_activity()
-	elif Singleton2.rp == false:
-		if Singleton2.dead == false:
-			Discord.queue_free()
-			Singleton2.dead = true
-		elif Singleton2.dead == true:
-			pass
+	else:
+		Discord.set_rich_presence_enabled(false)
 	animation_player.play("FadeIn")
 #	yield(get_tree().create_timer(5), "timeout")
 	if !Singleton.loaded:
@@ -119,7 +115,7 @@ func _ready():
 		dir.make_dir("user://hotkeys")
 		file.open("user://hotkeys/defhotkeys.file", File.WRITE)
 		var dict = {}
-		for i in Singleton2.default_hotkeys:
+		for i in Hotkeys.defaults():
 			dict[i] = InputMap.get_action_list(i)[0].get_scancode()
 		file.store_var(dict)
 		file.close()
@@ -152,22 +148,7 @@ func _physics_process(delta):
 		spawn_timer -= delta
 
 func update_activity() -> void:
-	var activity = Discord.Activity.new()
-	activity.set_type(Discord.ActivityType.Playing)
-	activity.set_state("Loading...")
-
-	var assets = activity.get_assets()
-	assets.set_large_image("sm127")
-	assets.set_large_text("0.8.0")
-	assets.set_small_image("capsule_main")
-	assets.set_small_text("ZONE 2 WOOO")
-	
-	var timestamps = activity.get_timestamps()
-	timestamps.set_start(OS.get_unix_time() + 1)
-
-	var result = yield(Discord.activity_manager.update_activity(activity), "result").result
-	if result != Discord.Result.Ok:
-		printerr(str(result))
+	Discord.set_playing("Loading...")
 		
 
 func load_palettes(_userdata):

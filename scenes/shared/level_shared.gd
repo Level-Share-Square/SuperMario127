@@ -53,3 +53,6 @@ func set_tile(x: int, y: int, index: int, tileset_id: int, tile_id: int, palette
 
 func get_tile(x: int, y: int, index: int):
 	return layers[index].tile_map_manager.layer_data.tile_data.get_tile_data_at(Vector2(x, y))
+
+func is_air(tile_data: Array):
+	return tile_data[0] <= 0 or tile_data[1] < 0 or tile_data[2] < 0

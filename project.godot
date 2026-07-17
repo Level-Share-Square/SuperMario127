@@ -14,7 +14,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/menu/level_portal/login/account_info.gd"
 }, {
-"base": "Node",
+"base": "Reference",
 "class": "Action",
 "language": "GDScript",
 "path": "res://scenes/editor/action_manager/actions/action.gd"
@@ -319,7 +319,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/editor/tools/editor_tool.gd"
 }, {
-"base": "PanelContainer",
+"base": "Reference",
 "class": "EditorWindow",
 "language": "GDScript",
 "path": "res://scenes/editor/windows/editor_window.gd"
@@ -444,7 +444,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/menu/levels_list/misc/http_thumbnails.gd"
 }, {
-"base": "ScrollContainer",
+"base": "Reference",
 "class": "HelpPage",
 "language": "GDScript",
 "path": "res://scenes/oldeditor/window/HelpPage.gd"
@@ -553,11 +553,6 @@ _global_script_classes=[ {
 "class": "LevelDataContainer",
 "language": "GDScript",
 "path": "res://level/models/level/level_data_container.gd"
-}, {
-"base": "Node",
-"class": "LevelDataInstancer",
-"language": "GDScript",
-"path": "res://scenes/player/level/level_data_instancer.gd"
 }, {
 "base": "Node2D",
 "class": "LevelDataLoader",
@@ -764,7 +759,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/editor/action_manager/actions/place_tiles.gd"
 }, {
-"base": "Resource",
+"base": "Reference",
 "class": "PlaceableItem",
 "language": "GDScript",
 "path": "res://scenes/editor/items/placeable_item.gd"
@@ -909,6 +904,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/editor/tools/selection_box/tool_button.gd"
 }, {
+"base": "EditorTool",
+"class": "Selector",
+"language": "GDScript",
+"path": "res://scenes/editor/tools/tile_selection/selector.gd"
+}, {
 "base": "PhysicsBody2D",
 "class": "SemiSolidPlatform",
 "language": "GDScript",
@@ -994,10 +994,10 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/editor/tools/tile_rect_fill.gd"
 }, {
-"base": "EditorTool",
-"class": "TileSelection",
+"base": "Selector",
+"class": "TileSelector",
 "language": "GDScript",
-"path": "res://scenes/editor/tools/tile_selection/tile_selection.gd"
+"path": "res://scenes/editor/tools/tile_selection.gd"
 }, {
 "base": "Control",
 "class": "TimerBase",
@@ -1269,7 +1269,6 @@ _global_script_class_icons={
 "LevelCodeSerializer": "",
 "LevelCodeTokenizer": "",
 "LevelDataContainer": "",
-"LevelDataInstancer": "",
 "LevelDataLoader": "",
 "LevelDataOld": "",
 "LevelDataResource": "",
@@ -1340,6 +1339,7 @@ _global_script_class_icons={
 "SelectionBox": "",
 "SelectionTool": "",
 "SelectionToolButton": "",
+"Selector": "",
 "SemiSolidPlatform": "",
 "SkyResource": "",
 "SlideState": "",
@@ -1357,7 +1357,7 @@ _global_script_class_icons={
 "TileMapLayer": "",
 "TileMapManager": "",
 "TileRectFill": "",
-"TileSelection": "",
+"TileSelector": "",
 "TimerBase": "",
 "TimerManager": "",
 "ToolManager": "",
@@ -1407,13 +1407,15 @@ config/windows_native_icon="res://assets/misc/icon.ico"
 
 LocalSettings="*res://singletons/local_settings.gd"
 Singleton="*res://singletons/main_singleton.gd"
-Singleton2="*res://singleton2.gd"
 SettingsLoader="*res://singletons/settings_loader.tscn"
 Discord="*res://addons/discord_game_sdk/discord.gd"
 LastInputDevice="*res://singletons/last_input_device.gd"
 LSSPing="*res://singletons/lss_ping.tscn"
 CurrentLevelData="*res://scenes/shared/current_level_data.tscn"
 SceneTransitions="*res://scenes/actors/scene_transitions/SceneTransitions.tscn"
+ModLoader="*res://singletons/mod_loader.gd"
+EditorState="*res://singletons/editor_state.gd"
+Hotkeys="*res://singletons/hotkeys.gd"
 
 [debug]
 

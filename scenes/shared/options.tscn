@@ -297,13 +297,13 @@ onready var button : Button = $Box
 var value : bool = false
 
 func _ready():
-	value = Singleton2.rp
+	value = LocalSettings.load_setting(\"General\", \"rich_presence\", true)
 	_update_text()
 	var _connect = button.connect(\"pressed\", self, \"_update_value\")
 
 func _update_value():
 	value = !value
-	Singleton2.rp = value
+	LocalSettings.change_setting(\"General\", \"rich_presence\", value)
 	_update_text()
 
 func _update_text():

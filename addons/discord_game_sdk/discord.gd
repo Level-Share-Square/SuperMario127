@@ -248,6 +248,7 @@ var discore_core_:DiscordCore
 var activity_manager:ActivityManager_
 var lobby_manager:LobbyManager_
 var overlay_manager:OverlayManager_
+var supported: bool = false
 
 func _ready():
 	# uncomment to test against a second canary discord client
@@ -256,6 +257,9 @@ func _ready():
 	#else:
 	#	OS.set_environment("DISCORD_INSTANCE_ID", "0")
 	
+	supported = _sdk_supported()
+	if not supported:
+		return
 	discore_core_ = DiscordCore.new()
 	if discore_core_:
 		discore_core_.create(729767289406095403, CreateFlags.NoRequireDiscord)
@@ -267,3 +271,31 @@ func _ready():
 func _process(delta:float) -> void:
 	if discore_core_:
 		discore_core_.run_callbacks()
+
+
+func set_rich_presence_enabled(enabled: bool) -> void:
+	if not enabled and activity_manager:
+		activity_manager.clear_activity()
+
+
+func set_playing(state: String) -> void:
+	if activity_manager == null:
+		return
+	var activity = Activity.new()
+	activity.set_type(ActivityType.Playing)
+	activity.set_state(state)
+	var assets = activity.get_assets()
+	assets.set_large_image("sm127")
+	assets.set_large_text("0.9.0")
+	assets.set_small_image("capsule_main")
+	assets.set_small_text("ZONE 2 WOOO")
+	var timestamps = activity.get_timestamps()
+	timestamps.set_start(OS.get_unix_time() + 1)
+	var result = yield(activity_manager.update_activity(activity), "result").result
+	if result != Result.Ok:
+		printerr(str(result))
+
+
+func _sdk_supported() -> bool:
+	# Discord's SDK ships no arm64 macOS native lib, so it can't load on Apple Silicon.
+	return not (OS.get_name() == "OSX" and "Apple" in OS.get_processor_name())

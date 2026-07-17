@@ -39,7 +39,7 @@ func erase_tile(pos: Vector2) -> void:
 		return
 	
 	var item = editor.selected_item
-	var visual = tile_util.get_packed_tile(21, 0, 2)
+	var visual = tile_util.get_real_tile_set_id(21, 0, 2)
 	
 	if editor.tile_buffer.get_cell(pos.x, pos.y) == TileMap.INVALID_CELL:
 		editor.tile_buffer.set_cellv(pos, visual)

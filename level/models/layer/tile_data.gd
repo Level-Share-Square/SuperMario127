@@ -89,5 +89,5 @@ func get_palette_id_at(coords: Vector2) -> int:
 	return tile_util.get_palette_id_from_packed(get_packed_tile_at(coords))
 
 
-func get_tile_data_at(coords: Vector2) -> PoolIntArray:
-	return PoolIntArray([get_tile_set_id_at(coords), get_tile_id_at(coords), get_palette_id_at(coords)])
+func get_tile_data_at(coords: Vector2) -> Array:
+	return [get_tile_set_id_at(coords), get_tile_id_at(coords), get_palette_id_at(coords)]
