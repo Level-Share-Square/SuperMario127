@@ -104,14 +104,10 @@ func _unhandled_input(event):
 			var _send_bytes = get_tree().multiplayer.send_bytes(JSON.print(["reload"]).to_ascii())
 
 func switch_scenes():
-	if Singleton2.rp == true:
+	if LocalSettings.load_setting("General", "rich_presence", true):
 		update_activity()
-	elif Singleton2.rp == false:
-		if Singleton2.dead == false:
-			Discord.queue_free()
-			Singleton2.dead = true
-		elif Singleton2.dead == true:
-			pass
+	else:
+		Discord.set_rich_presence_enabled(false)
 	var _change_scene = get_tree().change_scene("res://scenes/editor/editor.tscn")
 
 
@@ -120,22 +116,7 @@ func reload_scene():
 
 
 func update_activity() -> void:
-	var activity = Discord.Activity.new()
-	activity.set_type(Discord.ActivityType.Playing)
-	activity.set_state("Editing a level")
-
-	var assets = activity.get_assets()
-	assets.set_large_image("sm127")
-	assets.set_large_text("0.9.0")
-	assets.set_small_image("capsule_main")
-	assets.set_small_text("ZONE 2 WOOO")
-	
-	var timestamps = activity.get_timestamps()
-	timestamps.set_start(OS.get_unix_time() + 1)
-
-	var result = yield(Discord.activity_manager.update_activity(activity), "result").result
-	if result != Discord.Result.Ok:
-		printerr(str(result))
+	Discord.set_playing("Editing a level")
 
 
 func get_shared() -> LevelShared:

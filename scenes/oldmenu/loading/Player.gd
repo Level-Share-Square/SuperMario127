@@ -24,7 +24,7 @@ func hit_block(detected_area):
 		move_speed = 0
 		if parent.button_pressed == false:
 			get_tree().get_current_scene().get_node("AnimationPlayer").play("FadeOut")
-			if Singleton2.mod_active:
+			if ModLoader.active:
 				var res = get_parent().get_parent().get_node("ResetMod")
 				res.show()
 				var tween = Tween.new()

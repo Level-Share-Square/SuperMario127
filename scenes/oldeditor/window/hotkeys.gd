@@ -32,7 +32,7 @@ func _ready():
 	var j = 0
 	for i in hotkey_parent.get_children():
 		if "LevelSettingsWindow" in str(get_parent()):
-			if Singleton2.editor_hotkeys.has(i.name):
+			if Hotkeys.is_editor_action(i.name):
 				i.show()
 				var action_name = i.name
 				hotkeys[action_name] = InputMap.get_action_list(action_name)[0]
@@ -43,7 +43,7 @@ func _ready():
 				i.hide()
 				
 		else:
-			if Singleton2.player_hotkeys.has(i.name):
+			if Hotkeys.is_player_action(i.name):
 				settings.hide()
 				reset.hide()
 				i.show()
@@ -108,7 +108,7 @@ func load_hotkeys(hotkey_dict: Dictionary):
 func settings_pressed():
 	hide()
 	get_parent().get_node("LevelSettings").show()
-	Singleton2.disable_hotkeys = false
+	EditorState.disable_hotkeys = false
 	
 func reset_pressed():
 	var file = File.new()

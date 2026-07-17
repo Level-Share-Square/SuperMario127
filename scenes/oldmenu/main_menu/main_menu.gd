@@ -31,15 +31,10 @@ func _ready() -> void:
 	$Control/ColorRect.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	if UserInfo.username != "":
 		button_login.text = "Logged in as " + UserInfo.username
-	Singleton2.crash = false
-	if Singleton2.rp == true:
+	if LocalSettings.load_setting("General", "rich_presence", true):
 		update_activity()
-	elif Singleton2.rp == false:
-		if Singleton2.dead == false:
-			Discord.queue_free()
-			Singleton2.dead = true
-		elif Singleton2.dead == true:
-			pass
+	else:
+		Discord.set_rich_presence_enabled(false)
 	var _connect = button_levels.connect("pressed", self, "on_button_levels_pressed")
 	_connect = button_templates.connect("pressed", self, "on_button_templates_pressed")
 	_connect = button_options.connect("pressed", self, "on_button_options_pressed")
@@ -54,22 +49,7 @@ func _ready() -> void:
 #	$LogInWindow.open()
 #
 func update_activity() -> void:
-	var activity = Discord.Activity.new()
-	activity.set_type(Discord.ActivityType.Playing)
-	activity.set_state("On the Main Menu")
-
-	var assets = activity.get_assets()
-	assets.set_large_image("sm127")
-	assets.set_large_text("0.8.0")
-	assets.set_small_image("capsule_main")
-	assets.set_small_text("ZONE 2 WOOO")
-	
-	var timestamps = activity.get_timestamps()
-	timestamps.set_start(OS.get_unix_time() + 1)
-
-	var result = yield(Discord.activity_manager.update_activity(activity), "result").result
-	if result != Discord.Result.Ok:
-		printerr(str(result))
+	Discord.set_playing("On the Main Menu")
 
 
 func _input(_event : InputEvent) -> void:

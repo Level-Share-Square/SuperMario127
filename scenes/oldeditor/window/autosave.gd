@@ -105,7 +105,7 @@ func populate_info_panel(level_info : LevelInfo = null) -> void:
 func load_level():
 	get_parent().close()
 	get_parent().visible = false
-	Singleton2.disable_hotkeys = false
+	EditorState.disable_hotkeys = false
 	if date.selected == 0:
 		CurrentLevelData.level_data = LevelInfo.new(level_id, working_folder, main_level_code).level_data
 	get_tree().reload_current_scene()

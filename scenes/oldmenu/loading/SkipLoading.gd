@@ -8,7 +8,7 @@ func _button_pressed():
 	parent.button_pressed = true
 	var animplayer = get_parent().get_node("AnimationPlayer")
 	animplayer.play("buttonFadeOut")
-	if Singleton2.mod_active:
+	if ModLoader.active:
 		var res = get_parent().get_node("ResetMod")
 		res.show()
 		var tween = Tween.new()

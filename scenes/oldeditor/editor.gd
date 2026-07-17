@@ -137,7 +137,7 @@ func switch_layers() -> void:
 	shared.toggle_layer_transparency(editing_layer, layers_transparent)
 
 func _unhandled_input(event) -> void:
-	if Singleton2.disable_hotkeys == false:
+	if EditorState.disable_hotkeys == false:
 		if event.is_action_pressed("switch_placement_mode"):
 			placement_mode = "Tile" if placement_mode == "Drag" else "Drag"
 		elif event.is_action_pressed("toggle_surface_snap"):
@@ -218,7 +218,6 @@ func _update_editor_framerate():
 
 func set_selected_box(new_selected_box: Node) -> void:
 	Singleton.EditorSavedSettings.selected_box = new_selected_box.box_index
-	Singleton2.new_box = new_selected_box
 	item_preview.update_preview(new_selected_box.item)
 	selected_box = new_selected_box
 	for placeable_item_button in placeable_items_button_container.get_children():
@@ -349,34 +348,15 @@ func sync_pinned_items() -> void:
 func switch_scenes() -> void:
 	sync_pinned_items()
 	
-	if Singleton2.rp == true:
+	if LocalSettings.load_setting("General", "rich_presence", true):
 		update_activity()
-	elif Singleton2.rp == false:
-		if Singleton2.dead == false:
-			Discord.queue_free()
-			Singleton2.dead = true
-		elif Singleton2.dead == true:
-			pass
+	else:
+		Discord.set_rich_presence_enabled(false)
 	var _change_scene = get_tree().change_scene("res://scenes/player/player.tscn")
 	
 	
 func update_activity() -> void:
-	var activity = Discord.Activity.new()
-	activity.set_type(Discord.ActivityType.Playing)
-	activity.set_state("Playtesting a level")
-
-	var assets = activity.get_assets()
-	assets.set_large_image("sm127")
-	assets.set_large_text("0.9.0")
-	assets.set_small_image("capsule_main")
-	assets.set_small_text("ZONE 2 WOOO")
-	
-	var timestamps = activity.get_timestamps()
-	timestamps.set_start(OS.get_unix_time() + 1)
-
-	var result = yield(Discord.activity_manager.update_activity(activity), "result").result
-	if result != Discord.Result.Ok:
-		printerr(str(result))
+	Discord.set_playing("Playtesting a level")
 
 func update_selected_object(mouse_pos : Vector2) -> void:
 	if mouse_object_area.position != mouse_pos:
@@ -416,13 +396,13 @@ func _process(delta : float) -> void:
 #		ui_visible = $UI.visible
 
 	if visible_child_count == 0:
-		Singleton2.disable_hotkeys = false
+		EditorState.disable_hotkeys = false
 	else:
-		Singleton2.disable_hotkeys = true
+		EditorState.disable_hotkeys = true
 
-	if Singleton2.time > 0:
-		Singleton2.time -= 1
-	if Singleton2.time <= 0:
+	if EditorState.time > 0:
+		EditorState.time -= 1
+	if EditorState.time <= 0:
 		sync_pinned_items()
 		
 		var level_info = CurrentLevelData.level_info
@@ -443,7 +423,7 @@ func _process(delta : float) -> void:
 		level_list_util.autosave_level_to_disk(level_code, "user://autosaves/" + str(level_info.level_name) + "_" + str(time) + ".autosave")
 		CurrentLevelData.unsaved_editor_changes = false
 		
-		Singleton2.reset_time()
+		EditorState.reset_time()
 	# warning-ignore: integer_division
 	coin_frame = (OS.get_ticks_msec() * COIN_ANIM_FPS / 1000) % 4
 	
@@ -453,7 +433,7 @@ func _process(delta : float) -> void:
 	
 	zoom_level = cap_zoom_level(zoom_level); # Make sure it didn't accidentally get larger somehow
 	
-	if Input.is_action_just_pressed("invis_ui") and Singleton2.disable_hotkeys == false:
+	if Input.is_action_just_pressed("invis_ui") and EditorState.disable_hotkeys == false:
 		$"UI".visible = !$"UI".visible
 		$"Grid".visible = !$"Grid".visible
 		$"PlaceableItems/MiscGroup/BooBlock".preview = invis_boo
@@ -483,7 +463,7 @@ func _process(delta : float) -> void:
 		
 		# Handle hovered objects
 		if is_instance_valid(hovered_object):
-			if Singleton2.disable_hotkeys == false:
+			if EditorState.disable_hotkeys == false:
 				if Input.is_action_just_pressed("rotate"):
 					rotating = true
 				
