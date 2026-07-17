@@ -1,18 +1,19 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scenes/editor/tools/selection_box/selection_border.png" type="Texture" id=1]
-[ext_resource path="res://scenes/editor/tools/tile_selection/tile_selection.gd" type="Script" id=2]
+[ext_resource path="res://scenes/editor/tools/tile_selection/selector.gd" type="Script" id=2]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 1 )
 region = Rect2( 0, 0, 28, 28 )
 
-[node name="TileSelection" type="Control"]
+[node name="Selector" type="Control"]
 mouse_filter = 2
 script = ExtResource( 2 )
 
 [node name="Highlight" type="ReferenceRect" parent="."]
 unique_name_in_owner = true
+anchor_right = 0.69
 margin_right = 40.0
 margin_bottom = 40.0
 border_color = Color( 1, 1, 1, 1 )
