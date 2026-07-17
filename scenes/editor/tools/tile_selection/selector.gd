@@ -24,6 +24,9 @@ signal mouse_motion(position)
 func _ready():
 	highlight.hide()
 	selection_box.hide()
+	
+	yield(editor, "ready")
+	editor.tool_manager.connect("tool_changed", self, "on_tool_changed")
 
 func get_tile_grid_position(vector: Vector2):
 	return vector.snapped(TILE) / TILE_SIZE
@@ -120,8 +123,10 @@ func on_mouse_released():
 		hide_visuals()
 		return false
 	return true
-
-
+	
+func on_tool_changed():
+	reset_bounds()
+	hide_visuals()
 
 #func _on_Paste_pressed():
 #	if editor.tool_manager.current_tool == self:

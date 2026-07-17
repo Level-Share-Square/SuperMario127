@@ -2,7 +2,7 @@ extends Selector
 class_name TileSelector
 
 func _ready():
-	yield(editor, "ready")
+	yield(._ready(), "completed")
 	editor.action_manager.connect("undo", self, "on_undo")
 
 func on_mouse_released():

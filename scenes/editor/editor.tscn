@@ -69,7 +69,7 @@
 [ext_resource path="res://scenes/editor/windows/object_property_editor/object_settings_window.tscn" type="PackedScene" id=67]
 [ext_resource path="res://scenes/editor/layer_picker.gd" type="Script" id=68]
 [ext_resource path="res://scenes/editor/tools/tile_fill.gd" type="Script" id=69]
-[ext_resource path="res://scenes/editor/tools/tile_rect_fill.tscn" type="PackedScene" id=70]
+[ext_resource path="res://scenes/editor/tools/tile_rectfill.tscn" type="PackedScene" id=70]
 [ext_resource path="res://scenes/editor/tools/tile_lock_tool.gd" type="Script" id=71]
 [ext_resource path="res://scenes/editor/tools/path_tool/object_trail.tscn" type="PackedScene" id=72]
 [ext_resource path="res://scenes/editor/save_manager.gd" type="Script" id=73]
@@ -230,9 +230,9 @@ inverse_tool_name = "ObjectErase"
 mouse_filter = 2
 script = ExtResource( 69 )
 
-[node name="TileRectFill" parent="ZIndex/Tools" instance=ExtResource( 70 )]
-
 [node name="TileSelection" parent="ZIndex/Tools" instance=ExtResource( 74 )]
+
+[node name="TileRectFill" parent="ZIndex/Tools" instance=ExtResource( 70 )]
 
 [node name="ObjectPaint" type="Control" parent="ZIndex/Tools"]
 mouse_filter = 2
