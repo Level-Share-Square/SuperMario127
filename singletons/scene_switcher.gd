@@ -91,7 +91,7 @@ func setup_level(level_info: LevelInfo, level_id: String, working_folder: String
 #
 #	CurrentLevelData.level_info.selected_shine = -1
 	CurrentLevelData.load_level_headers(level_info.level_code)
-	CurrentLevelData.load_level_area(0)
+	CurrentLevelData.switch_to_area(0)
 	
 	if not CurrentLevelData.level_transition_data.empty():
 		CurrentLevelData.area = CurrentLevelData.level_transition_data.get("target_area", 0)

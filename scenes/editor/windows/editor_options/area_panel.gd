@@ -60,10 +60,10 @@ func _ready():
 		switch_to_button.disabled = true
 		delete_button.disabled = true
 
+
 func switch_to_area():
 	if id != CurrentLevelData.area_id:
-		CurrentLevelData.load_level_area(id)
-		CurrentLevelData.area_id = id
+		CurrentLevelData.switch_to_area(id, false, true)
 		SceneTransitions.reload_scene()
 
 

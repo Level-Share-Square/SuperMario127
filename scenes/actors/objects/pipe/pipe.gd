@@ -186,8 +186,7 @@ func _ready():
 	_on_property_changed("color", color)
 	connect("property_changed", self, "_on_property_changed")
 	
-	if layer == 0 or layer == 1:
-		collision_shape.disabled = true
+	collision_shape.disabled = true
 
 
 func is_rainbow(body) -> bool:

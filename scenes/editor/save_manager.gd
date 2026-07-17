@@ -45,7 +45,11 @@ func _on_Save_button_down():
 	var level_id: String = CurrentLevelData.level_id
 	var working_folder: String = CurrentLevelData.working_folder
 	
-	CurrentLevelData.area_headers[CurrentLevelData.area_id].area_code = LevelCodeSerializer.serialize_area(CurrentLevelData.area)
+	for area_id in CurrentLevelData.loaded_areas:
+		# should probably put this in CurrentLevelData
+		CurrentLevelData.area_headers[area_id].area_code = LevelCodeSerializer.serialize_area(CurrentLevelData.loaded_areas[area_id])
+	
+	CurrentLevelData.unload_all_but_current_area()
 	
 	var level_code: String = LevelCodeSerializer.serialize_level_data(LevelDataContainer.new(CurrentLevelData.level_metadata, SavedEditorData.new(), [], CurrentLevelData.area_headers))
 	

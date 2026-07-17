@@ -57,8 +57,7 @@ func _ready():
 	if id in CurrentLevelData.level_data.vars.shine_shards_collected[CurrentLevelData.area][1]:
 		queue_free()
 	
-	if layer == middle:
-		var _connect = area.connect("body_entered", self, "collect")
+	var _connect = area.connect("body_entered", self, "collect")
 	animation_player.play("default")
 
 func _process(delta):

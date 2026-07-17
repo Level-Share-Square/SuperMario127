@@ -20,14 +20,21 @@ var shine_kickout_data: Dictionary
 
 ## Level header data
 var level_metadata: LevelMetadata
+# Editor Data
 var saved_editor_data: SavedEditorData
 # Array of AreaHeader
 var area_headers: Array
 # Array of MissionData
 var mission_data: Array
 
+var loaded_areas: Dictionary = {}
+
 var area_id: int = -1
 var area: AreaData
+
+var mission_id: int = -1
+var mission: MissionData
+
 var enemies_instanced: int = 0
 
 var vars: LevelVars = LevelVars.new()
@@ -56,6 +63,9 @@ var foreground_id_mapper: IdMap
 var object_cache := []
 var background_cache := []
 var foreground_cache := []
+
+
+signal finished(result)
 
 
 #var thread : Thread
@@ -114,14 +124,40 @@ func load_level_headers(code: String) -> void:
 		mission_data.append(mission_data)
 
 
-func load_level_area(new_area_id: int) -> void:
+func switch_to_area(new_area_id: int, always_reload: bool = true, keep_old_loaded: bool = false) -> void:
 	if area_id == new_area_id:
 		return
 	
+	if not keep_old_loaded:
+		unload_level_area(area_id)
+	
 	area_id = new_area_id
 	
-	var area_code: String = area_headers[area_id].area_code
-	area = LevelCodeDeserializer.deserialize_area_code(area_code)
+	area = load_level_area(area_id, always_reload)
+
+
+func unload_all_but_current_area() -> void:
+	for loaded_area_id in loaded_areas.keys():
+		if loaded_area_id != area_id:
+			loaded_areas.erase(loaded_area_id)
+
+
+func load_level_area(load_area_id: int, always_reload: bool = false) -> AreaData:
+	if not always_reload:
+		if not loaded_areas.has(load_area_id):
+			var area_code: String = area_headers[area_id].area_code
+			loaded_areas[load_area_id] = LevelCodeDeserializer.deserialize_area_code(area_code)
+		else:
+			print("Area %s is already loaded!" % str(area_id))
+	else:
+		var area_code: String = area_headers[area_id].area_code
+		loaded_areas[load_area_id] = LevelCodeDeserializer.deserialize_area_code(area_code)
+	
+	return loaded_areas[load_area_id]
+
+
+func unload_level_area(unload_area_id: int) -> void:
+	loaded_areas.erase(area_id)
 
 
 # conversion

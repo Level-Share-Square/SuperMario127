@@ -32,7 +32,7 @@ func reload_scene(transition_in_tex = cutout_circle, transition_out_tex = cutout
 		CurrentLevelData.reset_time_score()
 		get_tree().reload_current_scene()
 		if new_area != -1 and new_area != CurrentLevelData.area_id:
-			CurrentLevelData.load_level_area(new_area)
+			CurrentLevelData.switch_to_area(new_area)
 			
 		yield(get_tree().create_timer(0.1), "timeout")
 		get_tree().paused = false

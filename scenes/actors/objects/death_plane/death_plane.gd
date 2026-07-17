@@ -77,7 +77,7 @@ func update_parts():
 		camera_stop_shape.shape.extents.x = collision_shape.shape.extents.x + 26
 		
 func kill(body):
-	if enabled and layer == middle and body.name.begins_with("Character") and !body.dead and body.controllable:
+	if enabled and body.name.begins_with("Character") and !body.dead and body.controllable:
 		if stops_camera:
 			body.sprite.visible = false
 			body.kill("fall")

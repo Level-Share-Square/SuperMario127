@@ -3,12 +3,13 @@ extends Node2D
 
 const TEST_CODE_PATH = "res://level/data/test/test_code.txt"
 const PLAYER_PATH = preload("res://scenes/player/player.tscn")
+const EDITOR_PATH = preload("res://scenes/editor/editor.tscn")
 
 
 func _ready():
-	convert_debug_level()
+#	convert_debug_level()
 	
-#	instance_debug_level()
+	instance_debug_level()
 	
 #	tile_byte_test(
 #		{
@@ -45,8 +46,8 @@ func instance_debug_level():
 	var content = file.get_as_text()
 	file.close()
 	CurrentLevelData.load_level_headers(content)
-	CurrentLevelData.load_level_area(0)
-	get_tree().change_scene_to(PLAYER_PATH)
+	CurrentLevelData.switch_to_area(0)
+	get_tree().change_scene_to(EDITOR_PATH)
 
 
 func convert_debug_level():

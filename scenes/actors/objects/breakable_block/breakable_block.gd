@@ -124,22 +124,23 @@ func _physics_process(delta):
 			handle_character_exception(scene.get_node(scene.character2))
 
 func create_coin(): #creates a coin
-	time_alive += 1
-	time_alive += (time_alive/3*5/10)
-	var object = ObjectDataOld.new()
-	object.type_id = 1
-	object.properties = []
-	object.properties.append(static_body.global_position)
-	object.properties.append(Vector2(1, 1))
-	object.properties.append(0)
-	object.properties.append(true)
-	object.properties.append(true)
-	object.properties.append(layer)
-	object.properties.append(true)
-	var power = int(time_alive*100) % 80
-	var velocity_x = -power if int(time_alive * 10) % 2 == 0 else power
-	object.properties.append(Vector2(velocity_x, -300)) #makes the coin move around and fly in the air when the block breaks
-	get_parent().create_object(object, false) #finishes the object creation
+	pass # I'll pass thanks
+#	time_alive += 1
+#	time_alive += (time_alive/3*5/10)
+#	var object = ObjectDataOld.new()
+#	object.type_id = 1
+#	object.properties = []
+#	object.properties.append(static_body.global_position)
+#	object.properties.append(Vector2(1, 1))
+#	object.properties.append(0)
+#	object.properties.append(true)
+#	object.properties.append(true)
+#	object.properties.append(layer)
+#	object.properties.append(true)
+#	var power = int(time_alive*100) % 80
+#	var velocity_x = -power if int(time_alive * 10) % 2 == 0 else power
+#	object.properties.append(Vector2(velocity_x, -300)) #makes the coin move around and fly in the air when the block breaks
+#	get_parent().create_object(object, false) #finishes the object creation
 
 func is_middle(check):
 	.is_middle(check)

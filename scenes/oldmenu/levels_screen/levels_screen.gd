@@ -51,7 +51,7 @@ onready var confirm_delete_window = $PopupContainer/ConfirmDelete
 const PLAYER_SCENE : PackedScene = preload("res://scenes/player/player.tscn")
 const EDITOR_SCENE : PackedScene = preload("res://scenes/editor/editor.tscn")
 
-const TEMPLATE_LEVEL: String = preload("res://assets/level_data/template_level.tres").contents
+const TEMPLATE_LEVEL: String = ""
 
 const NO_LEVEL : int = -1
 
@@ -331,10 +331,10 @@ func start_level(start_in_edit_mode : bool):
 	
 	SceneTransitions.play_transition_audio()
 	
-	if is_dark:
-		SceneTransitions.do_transition_fade(SceneTransitions.DEFAULT_TRANSITION_TIME, Color(0, 0, 0, 0), Color(0, 0, 0, 1))
-	else:
-		SceneTransitions.do_transition_fade(SceneTransitions.DEFAULT_TRANSITION_TIME, Color(1, 1, 1, 0), Color(1, 1, 1, 1))
+#	if is_dark:
+#		SceneTransitions.do_transition_fade(SceneTransitions.DEFAULT_TRANSITION_TIME, Color(0, 0, 0, 0), Color(0, 0, 0, 1))
+#	else:
+#		SceneTransitions.do_transition_fade(SceneTransitions.DEFAULT_TRANSITION_TIME, Color(1, 1, 1, 0), Color(1, 1, 1, 1))
 
 func set_level_code_panel(new_value : bool):
 	level_list_panel.visible = !new_value 
@@ -394,14 +394,14 @@ func on_button_code_import_pressed() -> void:
 	var also_level_code = OS.clipboard
 
 	if level_code_util.is_valid(level_code):
-		var level_info : LevelInfo = LevelInfo.new(level_code)
+		var level_info : LevelInfo = LevelInfo.new(level_code, "", "")
 		add_level(level_info)
 		level_code_entry.text = ""
 		set_level_code_panel(false)
 		return
 		
 	if level_code_util.is_valid(also_level_code):
-		var level_info : LevelInfo = LevelInfo.new(also_level_code)
+		var level_info : LevelInfo = LevelInfo.new(also_level_code, "", "")
 		add_level(level_info)
 		level_code_entry.text = ""
 		set_level_code_panel(false)
@@ -409,7 +409,7 @@ func on_button_code_import_pressed() -> void:
 func import(code):
 
 	if level_code_util.is_valid(code):
-		var level_info : LevelInfo = LevelInfo.new(code)
+		var level_info : LevelInfo = LevelInfo.new(code, "", "")
 		add_level(level_info)
 		level_code_entry.text = ""
 		set_level_code_panel(false)
@@ -480,7 +480,7 @@ func on_button_delete_pressed() -> void:
 		return
 	
 	var level_code = levels[selected_level].level_code
-	var level_info : LevelInfo = LevelInfo.new(level_code)
+	var level_info : LevelInfo = LevelInfo.new(level_code, "", "")
 	
 	pop_up_container.visible = true
 	confirm_delete_window.set_level_name(level_info.level_name)
