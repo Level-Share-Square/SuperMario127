@@ -82,6 +82,7 @@ all_tabs_in_front = true
 use_hidden_tabs_for_min_size = true
 
 [node name="Level" type="MarginContainer" parent="ContentDivider/ContentMat/Tabs" index="0"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -547,7 +548,6 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Autosave" type="ScrollContainer" parent="ContentDivider/ContentMat/Tabs" index="4"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -571,19 +571,34 @@ margin_bottom = 19.0
 size_flags_horizontal = 3
 alignment = 1
 
-[node name="Label" type="Label" parent="ContentDivider/ContentMat/Tabs/Autosave/VBoxContainer/HBoxContainer" index="0"]
-margin_left = 122.0
+[node name="HBoxContainer" type="HBoxContainer" parent="ContentDivider/ContentMat/Tabs/Autosave/VBoxContainer/HBoxContainer" index="0"]
+margin_right = 184.0
+margin_bottom = 19.0
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="ContentDivider/ContentMat/Tabs/Autosave/VBoxContainer/HBoxContainer/HBoxContainer" index="0"]
 margin_top = 1.0
-margin_right = 223.0
+margin_right = 101.0
 margin_bottom = 18.0
 text = "Autosave Timer:"
 
-[node name="IntervalOptions" type="OptionButton" parent="ContentDivider/ContentMat/Tabs/Autosave/VBoxContainer/HBoxContainer" index="1"]
+[node name="IntervalOptions" type="OptionButton" parent="ContentDivider/ContentMat/Tabs/Autosave/VBoxContainer/HBoxContainer/HBoxContainer" index="1"]
 unique_name_in_owner = true
-margin_left = 227.0
-margin_right = 249.0
+margin_left = 105.0
+margin_right = 127.0
 margin_bottom = 19.0
 focus_mode = 0
+
+[node name="ResetAutosaves" type="Button" parent="ContentDivider/ContentMat/Tabs/Autosave/VBoxContainer/HBoxContainer" index="1"]
+unique_name_in_owner = true
+margin_left = 257.0
+margin_right = 372.0
+margin_bottom = 19.0
+size_flags_horizontal = 10
+text = "Reset Autosaves"
+script = ExtResource( 6 )
+hover_override = "HoverSound"
+click_override = "ClickSound"
 
 [node name="HSeparator" type="HSeparator" parent="ContentDivider/ContentMat/Tabs/Autosave/VBoxContainer" index="1"]
 margin_top = 23.0
@@ -962,4 +977,4 @@ margin_right = 400.0
 margin_bottom = 241.0
 
 [connection signal="button_down" from="ContentDivider/ContentMat/Tabs/Areas/VBoxContainer/HBoxContainer/Paste" to="ContentDivider/ContentMat/Tabs/Areas" method="paste_area"]
-[connection signal="item_selected" from="ContentDivider/ContentMat/Tabs/Autosave/VBoxContainer/HBoxContainer/IntervalOptions" to="ContentDivider/ContentMat/Tabs/Autosave" method="interval_selected"]
+[connection signal="item_selected" from="ContentDivider/ContentMat/Tabs/Autosave/VBoxContainer/HBoxContainer/HBoxContainer/IntervalOptions" to="ContentDivider/ContentMat/Tabs/Autosave" method="interval_selected"]

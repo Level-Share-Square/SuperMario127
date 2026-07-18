@@ -13,6 +13,7 @@ var intervals: Dictionary = {
 
 onready var interval_options: OptionButton = $"%IntervalOptions"
 onready var saves_container = $"%SavesContainer"
+onready var reset_autosaves = $"%ResetAutosaves"
 
 var interval: int = 900
 var timer: float = 0
@@ -25,12 +26,8 @@ func _ready():
 		interval_options.add_item(interval_name)
 	interval_options._select_int(intervals.keys().find(interval))
 	timer = interval
-	for autosave in load_autosaves():
-		var button = Button.new()
-		button.text = Time.get_datetime_string_from_unix_time(int(autosave), true)
-		button.focus_mode = Control.FOCUS_NONE
-		button.connect("button_down", self, "open_autosave", [autosave])
-		saves_container.add_child(button)
+	load_autosave_buttons()
+	reset_autosaves.connect("button_down", self, "on_reset_pressed")
 	
 func load_autosaves() -> Array:
 	var autosaves: Array = []
@@ -99,11 +96,7 @@ func autosave():
 	file.store_string(level_code)
 	file.close()
 
-	var button = Button.new()
-	button.text = Time.get_datetime_string_from_unix_time(time, true)
-	button.focus_mode = Control.FOCUS_NONE
-	button.connect("button_down", self, "open_autosave", [str(time)])
-	saves_container.add_child(button)
+	load_autosave_buttons()
 	
 	emit_signal("autosaved")
 
@@ -112,3 +105,36 @@ func interval_selected(index):
 	interval = intervals.keys()[index]
 	LocalSettings.change_setting("General", "autosave_interval", interval)
 	timer = interval
+
+func on_reset_pressed():
+	var dir: Directory = Directory.new()
+	if !dir.dir_exists(AUTOSAVE_FOLDER):
+		dir.make_dir_recursive(AUTOSAVE_FOLDER)
+		return
+	dir.open(AUTOSAVE_FOLDER)
+	dir.list_dir_begin(true, true)
+
+	while true:
+		var file_name: String = dir.get_next()
+		if file_name == "":
+			break
+		else:
+			var split = file_name.split("_")
+
+			if split.size() > 1:
+				var autosaved_id = split[0]
+				var time = split[1]
+				if autosaved_id == CurrentLevelData.level_id:
+					dir.remove(AUTOSAVE_FOLDER + "/" + file_name)
+	load_autosave_buttons()
+
+func load_autosave_buttons():
+	for child in saves_container.get_children():
+		child.disconnect("button_down", self, "open_autosave")
+		child.queue_free()
+	for autosave in load_autosaves():
+		var button = Button.new()
+		button.text = Time.get_datetime_string_from_unix_time(int(autosave), true)
+		button.focus_mode = Control.FOCUS_NONE
+		button.connect("button_down", self, "open_autosave", [autosave])
+		saves_container.add_child(button)
