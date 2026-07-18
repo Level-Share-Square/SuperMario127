@@ -1417,6 +1417,7 @@ SceneTransitions="*res://scenes/actors/scene_transitions/SceneTransitions.tscn"
 ModLoader="*res://singletons/mod_loader.gd"
 EditorState="*res://singletons/editor_state.gd"
 Hotkeys="*res://singletons/hotkeys.gd"
+AssetHandler="*res://singletons/asset_handler.tscn"
 
 [debug]
 

@@ -94,28 +94,49 @@ func handle_custom_song(url: String, underwater: bool = false) -> void:
 				loop_end = variables[2]
 			url = variables[1]
 			
+	var song_stream = yield(AssetHandler.load_sound(url, CurrentLevelData.working_folder), "completed")
 	
+	if song_stream == null:
+		return
+	if song_stream.data == null:
+		return
 
-	var file_path: String = get_custom_file_path(underwater)
-	if not level_list_util.file_exists(file_path):
-		print("OGG file not found, downloading from url...")
-		
-		var level_id: String = CurrentLevelData.level_id
-		var area: int = CurrentLevelData.area_id
-		var working_folder: String = CurrentLevelData.working_folder
-		save_ogg(url, level_id, area, working_folder, underwater)
+	if !underwater:
+		play_custom_normal(song_stream)
 	else:
-		print("OGG file found, loading...")
+		play_custom_underwater(song_stream)
 		
-		var ogg_file := File.new()
-		var _open = ogg_file.open(file_path, File.READ)
-		var bytes: PoolByteArray = ogg_file.get_buffer(ogg_file.get_len())
-		ogg_file.close()
+func play_custom_underwater(song_stream):
+	if get_tree().get_current_scene().mode != 2:
+		water_music_player.stream = song_stream
+		water_music_player.play()
+		water_music_player.volume_db = -80
+		has_water = CurrentLevelData.area.header.music is String and CurrentLevelData.area.header.music != CurrentLevelData.area.header.underwater_music
+		play_water = false
+	if underwater_loop_end != 0.0:
+		underwater_timer.wait_time = underwater_loop_end
+		underwater_timer.start()
+		underwater_timer.connect("timeout", self, "on_underwater_loop_end_reached")
+	else:
+		underwater_timer.stop()
 		
-		if !underwater:
-			load_ogg(bytes)
-		else:
-			load_underwater_ogg(bytes)
+func play_custom_normal(song_stream):
+	if get_tree().get_current_scene().mode != 2:
+		self.stream = song_stream
+		play()
+	if loop_end != 0.0:
+		timer.wait_time = loop_end
+		timer.start()
+		timer.connect("timeout", self, "on_loop_end_reached")
+	else:
+		timer.stop()
+
+	var underwater_raw = CurrentLevelData.area.header.underwater_music
+	if underwater_raw == "":
+		handle_custom_song(CurrentLevelData.area.header.music, true)
+	else:
+		handle_custom_song(underwater_raw, true)
+	
 
 func decode_new_music(raw_music: String) -> Array:
 	var loop_start
@@ -156,83 +177,82 @@ func decode_new_music(raw_music: String) -> Array:
 		raw_music.erase(0, 2)
 		song_name = raw_music
 	return [loop_start, url, loop_end, song_name]
-
-func save_ogg(url: String, level_id: String, area: int, working_folder: String, underwater: bool = false) -> void:
-	var file_path: String = level_list_util.get_level_music_path(
-		level_id, 
-		area,
-		working_folder,
-		underwater)
-	
-	#http_request.download_file = file_path
-	http_request.request(url)
-
-	# warning-ignore:return_value_discarded
-	http_request.connect("request_completed", self, "request_completed", [file_path, underwater], CONNECT_ONESHOT)
-
-
-func request_completed(result: int, response_code: int, headers: PoolStringArray, body: PoolByteArray, file_path: String, underwater: bool = false):
-	var ogg_file := File.new()
-	var err: int = ogg_file.open(file_path, File.WRITE)
-	if err != OK:
-		printerr("Error saving custom music file. Error code: " + str(err) + "\nFile path: " + file_path)
-		return
-	
-	ogg_file.store_buffer(body)
-	ogg_file.close()
-	print("am i running")
-	if !underwater:
-		load_ogg(body)
-	else:
-		load_underwater_ogg(body)
-
-
-func load_ogg(bytes: PoolByteArray) -> void:
-	var stream := AudioStreamOGGVorbis.new()
-	stream.data = bytes
-	stream.loop = true
-	stream.loop_offset = loop
-	if stream.data == null:
-		return
-
-	if get_tree().get_current_scene().mode != 2:
-		self.stream = stream
-		play()
-	if loop_end != 0.0:
-		timer.wait_time = loop_end
-		timer.start()
-		timer.connect("timeout", self, "on_loop_end_reached")
-	else:
-		timer.stop()
-		
-	var underwater_raw = CurrentLevelData.area.header.underwater_music
-	if underwater_raw == "":
-		has_water = false
-	else:
-		handle_custom_song(underwater_raw, true)
-	
-	print("OGG file loaded.")
-	
-func load_underwater_ogg(bytes: PoolByteArray) -> void:
-	var new_stream := AudioStreamOGGVorbis.new()
-	new_stream.data = bytes
-	new_stream.loop = true
-	new_stream.loop_offset = underwater_loop
-	if new_stream.data == null:
-		return
-
-	if get_tree().get_current_scene().mode != 2:
-		water_music_player.stream = new_stream
-		water_music_player.play()
-		water_music_player.volume_db = -80
-		has_water = true
-		play_water = false
-	if underwater_loop_end != 0.0:
-		underwater_timer.wait_time = underwater_loop_end
-		underwater_timer.start()
-		underwater_timer.connect("timeout", self, "on_underwater_loop_end_reached")
-	else:
-		underwater_timer.stop()
+#
+#func save_ogg(url: String, level_id: String, area: int, working_folder: String, underwater: bool = false) -> void:
+#	var file_path: String = level_list_util.get_level_music_path(
+#		level_id, 
+#		area,
+#		working_folder,
+#		underwater)
+#
+#	#http_request.download_file = file_path
+#	http_request.request(url)
+#
+#	# warning-ignore:return_value_discarded
+#	http_request.connect("request_completed", self, "request_completed", [file_path, underwater], CONNECT_ONESHOT)
+#
+#
+#func request_completed(result: int, response_code: int, headers: PoolStringArray, body: PoolByteArray, file_path: String, underwater: bool = false):
+#	var ogg_file := File.new()
+#	var err: int = ogg_file.open(file_path, File.WRITE)
+#	if err != OK:
+#		printerr("Error saving custom music file. Error code: " + str(err) + "\nFile path: " + file_path)
+#		return
+#
+#	ogg_file.store_buffer(body)
+#	ogg_file.close()
+#	if !underwater:
+#		load_ogg(body)
+#	else:
+#		load_underwater_ogg(body)
+#
+#
+#func load_ogg(bytes: PoolByteArray) -> void:
+#	var stream := AudioStreamOGGVorbis.new()
+#	stream.data = bytes
+#	stream.loop = true
+#	stream.loop_offset = loop
+#	if stream.data == null:
+#		return
+#
+#	if get_tree().get_current_scene().mode != 2:
+#		self.stream = stream
+#		play()
+#	if loop_end != 0.0:
+#		timer.wait_time = loop_end
+#		timer.start()
+#		timer.connect("timeout", self, "on_loop_end_reached")
+#	else:
+#		timer.stop()
+#
+#	var underwater_raw = CurrentLevelData.area.header.underwater_music
+#	if underwater_raw == "":
+#		has_water = false
+#	else:
+#		handle_custom_song(underwater_raw, true)
+#
+#	print("OGG file loaded.")
+#
+#func load_underwater_ogg(bytes: PoolByteArray) -> void:
+#	var new_stream := AudioStreamOGGVorbis.new()
+#	new_stream.data = bytes
+#	new_stream.loop = true
+#	new_stream.loop_offset = underwater_loop
+#	if new_stream.data == null:
+#		return
+#
+#	if get_tree().get_current_scene().mode != 2:
+#		water_music_player.stream = new_stream
+#		water_music_player.play()
+#		water_music_player.volume_db = -80
+#		has_water = true
+#		play_water = false
+#	if underwater_loop_end != 0.0:
+#		underwater_timer.wait_time = underwater_loop_end
+#		underwater_timer.start()
+#		underwater_timer.connect("timeout", self, "on_underwater_loop_end_reached")
+#	else:
+#		underwater_timer.stop()
 #######
 
 func on_loop_end_reached():
