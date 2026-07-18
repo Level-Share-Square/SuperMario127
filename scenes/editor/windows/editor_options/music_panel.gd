@@ -56,6 +56,12 @@ func save_song() -> String:
 		area.header.music = encoded_song
 	else:
 		area.header.underwater_music = encoded_song
+		
+	var level_id: String = CurrentLevelData.level_id
+	var area_id: int = CurrentLevelData.area_id
+	var working_folder: String = CurrentLevelData.working_folder
+	Singleton.Music.save_ogg(url, level_id, area_id, working_folder, music_type == MUSIC_TYPE.Underwater)
+	
 	return encoded_song
 
 func on_text_changed(new_text):

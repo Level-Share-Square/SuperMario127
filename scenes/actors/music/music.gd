@@ -93,8 +93,9 @@ func handle_custom_song(url: String, underwater: bool = false) -> void:
 				loop = variables[0]
 				loop_end = variables[2]
 			url = variables[1]
+			
 	
-	stop()
+
 	var file_path: String = get_custom_file_path(underwater)
 	if not level_list_util.file_exists(file_path):
 		print("OGG file not found, downloading from url...")
@@ -165,7 +166,7 @@ func save_ogg(url: String, level_id: String, area: int, working_folder: String, 
 	
 	#http_request.download_file = file_path
 	http_request.request(url)
-	
+
 	# warning-ignore:return_value_discarded
 	http_request.connect("request_completed", self, "request_completed", [file_path, underwater], CONNECT_ONESHOT)
 
@@ -179,7 +180,7 @@ func request_completed(result: int, response_code: int, headers: PoolStringArray
 	
 	ogg_file.store_buffer(body)
 	ogg_file.close()
-	
+	print("am i running")
 	if !underwater:
 		load_ogg(body)
 	else:
@@ -250,7 +251,6 @@ func on_underwater_loop_end_reached():
 
 func change_song(old_setting, music_setting) -> void:
 	var song
-	
 	cur_setting = music_setting
 	if typeof(music_setting) == TYPE_INT:
 		song = get_song(music_setting)

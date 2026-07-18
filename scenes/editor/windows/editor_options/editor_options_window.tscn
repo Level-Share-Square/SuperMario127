@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://scenes/editor/assets/palette.svg" type="Texture" id=1]
 [ext_resource path="res://scenes/menu/line_edit_unfocus.gd" type="Script" id=2]
@@ -21,6 +21,7 @@
 [ext_resource path="res://scenes/shared/background/foregrounds/ids.tres" type="Resource" id=19]
 [ext_resource path="res://scenes/menu/text_edit_unfocus.gd" type="Script" id=20]
 [ext_resource path="res://scenes/editor/windows/editor_options/collapsible_container.gd" type="Script" id=21]
+[ext_resource path="res://scenes/editor/windows/editor_options/music_manager.gd" type="Script" id=23]
 
 [node name="EditorOptionsWindow" instance=ExtResource( 3 )]
 margin_right = 400.0
@@ -461,30 +462,89 @@ margin_right = -4.0
 margin_bottom = -4.0
 scroll_horizontal_enabled = false
 scroll_deadzone = 7
+script = ExtResource( 23 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ContentDivider/ContentMat/Tabs/Music" index="0"]
 margin_right = 372.0
-margin_bottom = 70.0
+margin_bottom = 167.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="Label" type="Label" parent="ContentDivider/ContentMat/Tabs/Music/VBoxContainer" index="0"]
+[node name="HBoxContainer" type="HBoxContainer" parent="ContentDivider/ContentMat/Tabs/Music/VBoxContainer" index="0"]
+margin_right = 372.0
+margin_bottom = 19.0
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Padding" type="Control" parent="ContentDivider/ContentMat/Tabs/Music/VBoxContainer/HBoxContainer" index="0"]
+margin_bottom = 19.0
+
+[node name="SongType" type="Label" parent="ContentDivider/ContentMat/Tabs/Music/VBoxContainer/HBoxContainer" index="1"]
+unique_name_in_owner = true
+margin_left = 4.0
+margin_right = 88.0
+margin_bottom = 17.0
+size_flags_vertical = 2
+text = "Preset Music"
+
+[node name="Padding2" type="Control" parent="ContentDivider/ContentMat/Tabs/Music/VBoxContainer/HBoxContainer" index="2"]
+margin_left = 92.0
+margin_right = 285.0
+margin_bottom = 19.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Switch" type="Button" parent="ContentDivider/ContentMat/Tabs/Music/VBoxContainer/HBoxContainer" index="3"]
+unique_name_in_owner = true
+margin_left = 289.0
+margin_right = 372.0
+margin_bottom = 19.0
+size_flags_horizontal = 8
+size_flags_vertical = 0
+text = "Use Custom"
+script = ExtResource( 6 )
+
+[node name="CustomMusic" type="VBoxContainer" parent="ContentDivider/ContentMat/Tabs/Music/VBoxContainer" index="1"]
+unique_name_in_owner = true
+visible = false
+margin_top = 23.0
+margin_right = 372.0
+margin_bottom = 173.0
+
+[node name="Label" type="Label" parent="ContentDivider/ContentMat/Tabs/Music/VBoxContainer/CustomMusic" index="0"]
 margin_right = 372.0
 margin_bottom = 17.0
 text = "Background Music:"
 align = 1
 
-[node name="BGMPanel" parent="ContentDivider/ContentMat/Tabs/Music/VBoxContainer" index="1" instance=ExtResource( 11 )]
+[node name="BGMPanel" parent="ContentDivider/ContentMat/Tabs/Music/VBoxContainer/CustomMusic" index="1" instance=ExtResource( 11 )]
 
-[node name="Label2" type="Label" parent="ContentDivider/ContentMat/Tabs/Music/VBoxContainer" index="2"]
+[node name="Label2" type="Label" parent="ContentDivider/ContentMat/Tabs/Music/VBoxContainer/CustomMusic" index="2"]
 margin_top = 77.0
 margin_right = 372.0
 margin_bottom = 94.0
 text = "Underwater Music:"
 align = 1
 
-[node name="UWMPanel" parent="ContentDivider/ContentMat/Tabs/Music/VBoxContainer" index="3" instance=ExtResource( 11 )]
+[node name="UWMPanel" parent="ContentDivider/ContentMat/Tabs/Music/VBoxContainer/CustomMusic" index="3" instance=ExtResource( 11 )]
 margin_top = 98.0
 margin_bottom = 150.0
 music_type = 1
+
+[node name="PresetMusic" type="ScrollContainer" parent="ContentDivider/ContentMat/Tabs/Music/VBoxContainer" index="2"]
+unique_name_in_owner = true
+margin_top = 23.0
+margin_right = 372.0
+margin_bottom = 167.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="SongContainer" type="VBoxContainer" parent="ContentDivider/ContentMat/Tabs/Music/VBoxContainer/PresetMusic" index="0"]
+unique_name_in_owner = true
+margin_right = 364.0
+margin_bottom = 144.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="Autosave" type="ScrollContainer" parent="ContentDivider/ContentMat/Tabs" index="4"]
 visible = false

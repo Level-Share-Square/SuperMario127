@@ -929,6 +929,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/actors/mario/states/SlideStop.gd"
 }, {
+"base": "PanelContainer",
+"class": "SongPanel",
+"language": "GDScript",
+"path": "res://scenes/editor/windows/editor_options/song_panel.gd"
+}, {
 "base": "Node",
 "class": "SoundGroup",
 "language": "GDScript",
@@ -1339,6 +1344,7 @@ _global_script_class_icons={
 "SkyResource": "",
 "SlideState": "",
 "SlideStopState": "",
+"SongPanel": "",
 "SoundGroup": "",
 "SpinBoxSound": "",
 "SpinningState": "",

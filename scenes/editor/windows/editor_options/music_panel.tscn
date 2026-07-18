@@ -16,57 +16,79 @@ margin_left = 6.0
 margin_top = 6.0
 margin_right = 366.0
 margin_bottom = 46.0
-alignment = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="SongContainer" type="HBoxContainer" parent="VBoxContainer"]
 margin_right = 360.0
 margin_bottom = 19.0
 size_flags_vertical = 8
 
-[node name="SongURL" type="LineEdit" parent="VBoxContainer/HBoxContainer"]
+[node name="SongURL" type="LineEdit" parent="VBoxContainer/SongContainer"]
 unique_name_in_owner = true
 margin_right = 282.0
 margin_bottom = 19.0
 size_flags_horizontal = 3
+size_flags_vertical = 3
 align = 1
 placeholder_text = "Song URL (.mp3, .ogg)"
+caret_blink = true
+caret_blink_speed = 0.5
 
-[node name="Import" type="Button" parent="VBoxContainer/HBoxContainer"]
+[node name="Import" type="Button" parent="VBoxContainer/SongContainer"]
 unique_name_in_owner = true
 margin_left = 286.0
 margin_right = 360.0
 margin_bottom = 19.0
-size_flags_vertical = 3
+size_flags_horizontal = 12
 theme_type_variation = "ButtonPurple"
 text = "Import File"
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+[node name="InfoContainer" type="HBoxContainer" parent="VBoxContainer"]
+unique_name_in_owner = true
 margin_top = 23.0
 margin_right = 360.0
 margin_bottom = 40.0
+alignment = 1
 
-[node name="SongName" type="LineEdit" parent="VBoxContainer/HBoxContainer2"]
+[node name="SongName" type="LineEdit" parent="VBoxContainer/InfoContainer"]
 unique_name_in_owner = true
 margin_right = 170.0
 margin_bottom = 17.0
 rect_min_size = Vector2( 170, 0 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
 align = 1
 placeholder_text = "Song Name"
+caret_blink = true
+caret_blink_speed = 0.5
 
-[node name="LoopStart" type="LineEdit" parent="VBoxContainer/HBoxContainer2"]
+[node name="LoopStart" type="LineEdit" parent="VBoxContainer/InfoContainer"]
 unique_name_in_owner = true
 margin_left = 174.0
-margin_right = 264.0
+margin_right = 265.0
 margin_bottom = 17.0
 rect_min_size = Vector2( 90, 0 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
 align = 1
 placeholder_text = "Loop Start"
+caret_blink = true
+caret_blink_speed = 0.5
 
-[node name="LoopEnd" type="LineEdit" parent="VBoxContainer/HBoxContainer2"]
+[node name="LoopEnd" type="LineEdit" parent="VBoxContainer/InfoContainer"]
 unique_name_in_owner = true
-margin_left = 268.0
-margin_right = 358.0
+margin_left = 269.0
+margin_right = 360.0
 margin_bottom = 17.0
 rect_min_size = Vector2( 90, 0 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
 align = 1
 placeholder_text = "Loop End"
+caret_blink = true
+caret_blink_speed = 0.5
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
