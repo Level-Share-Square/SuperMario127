@@ -57,10 +57,6 @@ func save_song() -> String:
 	else:
 		area.header.underwater_music = encoded_song
 		
-	# This should be removed once music is fixed
-	var level_id: String = CurrentLevelData.level_id
-	var area_id: int = CurrentLevelData.area_id
-	var working_folder: String = CurrentLevelData.working_folder
 	
 	return encoded_song
 

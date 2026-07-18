@@ -625,7 +625,6 @@ margin_right = -4.0
 margin_bottom = -4.0
 scroll_horizontal_enabled = false
 scroll_deadzone = 7
-script = ExtResource( 12 )
 
 [node name="MarginContainer" type="MarginContainer" parent="ContentDivider/ContentMat/Tabs/Settings" index="0"]
 margin_right = 372.0

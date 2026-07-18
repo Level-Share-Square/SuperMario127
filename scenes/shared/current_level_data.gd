@@ -111,12 +111,14 @@ func load_level_headers(code: String) -> void:
 	var components_code = LevelCodeTokenizer.splice_level_components(code)
 	var editor_data_code = components_code[2]
 	
+	area_headers.clear()
 	# load area headers
 	var area_codes: PoolStringArray = LevelCodeTokenizer.splice_areas(components_code[0])
 	for area_code in area_codes:
 		var area_header: AreaHeader = LevelCodeDeserializer.deserialize_area_header_code(area_code)
 		area_headers.append(area_header)
 	
+	mission_data.clear()
 	# load mission data
 	var mission_codes: PoolStringArray = LevelCodeTokenizer.get_outermost_brackets(components_code[1])
 	for mission_code in mission_codes:
@@ -125,8 +127,6 @@ func load_level_headers(code: String) -> void:
 
 
 func switch_to_area(new_area_id: int, always_reload: bool = true, keep_old_loaded: bool = false) -> void:
-	if area_id == new_area_id:
-		return
 	
 	if not keep_old_loaded:
 		unload_level_area(area_id)
