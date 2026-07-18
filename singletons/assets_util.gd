@@ -66,7 +66,7 @@ func fetch_asset_path(url: String, working_folder: String) -> String:
 		dir.make_dir_recursive(assets_dir)
 	
 	if dir.file_exists(path):
-		yield(Engine.get_main_loop(), "idle_frame") # this function must be a coroutine
+		yield(get_tree(), "idle_frame") # this function must be a coroutine
 		return path
 		
 	else:
@@ -84,7 +84,7 @@ func request_completed(result: int, response_code: int, headers: PoolStringArray
 	var file := File.new()
 	var err: int = file.open(file_path, File.WRITE)
 	if err != OK:
-		printerr("Error saving custom music file. Error code: " + str(err) + "\nFile path: " + file_path)
+		printerr("Error saving file. Error code: " + str(err) + "\nFile path: " + file_path)
 		emit_signal("file_loaded", err)
 		return
 	
