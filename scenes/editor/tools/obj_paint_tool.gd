@@ -49,7 +49,7 @@ func action(objects: Dictionary = {}) -> void:
 	editor.action_manager.commit_action(action)
 
 func place_object(pos: Vector2):
-	if shared.is_object_at_position(Vector2(round(pos.x), round(pos.y))):
+	if shared.get_object_at_position(Vector2(round(pos.x), round(pos.y)), editor.layer):
 		return
 	
 	var object_item: PlaceableObject = editor.selected_item
@@ -57,19 +57,13 @@ func place_object(pos: Vector2):
 	
 	var action := PlaceObjectAction.new()
 	action.shared = shared
+	action.layer = editor.layer
 	action.object_data = data
 	editor.action_manager.commit_action(action)
 
 
-func create_object_data(position: Vector2, object_id: int, palette: int) -> ObjectDataOld:
-	var data = ObjectDataOld.new()
-	data.type_id = object_id
-	data.palette = palette
-	data.properties.append(position)
-	data.properties.append(Vector2(1, 1))
-	data.properties.append(0)
-	data.properties.append(true)
-	data.properties.append(true)
-#	print(editor.layer)
+func create_object_data(position: Vector2, object_id: int, palette: int) -> ObjectData:
+	var metadata := ObjectMetadata.new(position, object_id, palette)
+	var data := ObjectData.new(metadata)
 	
 	return data

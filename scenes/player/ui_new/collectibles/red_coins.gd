@@ -17,7 +17,7 @@ func delayed_ready():
 	# yield one more frame since the player scene needs to set things up
 	yield(get_tree(), "physics_frame")
 	
-	var variables: LevelVars = CurrentLevelData.level_data.vars
+	var variables: LevelVars = CurrentLevelData.vars
 	max_reds = variables.max_red_coins
 	
 	if max_reds > 0:

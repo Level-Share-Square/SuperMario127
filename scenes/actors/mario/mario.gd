@@ -340,7 +340,7 @@ func _ready():
 	heal_timer.connect("timeout", self, "_on_heal_timer_timeout")
 	heal_tick_timer.connect("timeout", self, "_on_heal_tick_timer_timeout")
 	ground_collider_enable_timer.connect("timeout", self, "_on_ground_collder_timer_timeout")
-#	print(CurrentLevelData.level_data.vars.transition_data)
+#	print(CurrentLevelData.vars.transition_data)
 	hide()
 	toggle_movement(false)
 	Singleton.Music.toggle_underwater_music(false)
@@ -1039,7 +1039,7 @@ func _physics_process(delta: float) -> void:
 		set_nozzle(new_nozzle, false)
 		
 		nozzle_switch_sound.play()
-		#print(CurrentLevelData.level_data.vars.nozzles_collected)
+		#print(CurrentLevelData.vars.nozzles_collected)
 	
 	# Handle nozzle
 	if is_instance_valid(nozzle):

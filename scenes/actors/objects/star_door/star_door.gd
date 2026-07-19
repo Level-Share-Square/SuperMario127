@@ -90,14 +90,14 @@ func start_entrance_animation(character: Character, open_door: bool = true) -> v
 	
 	# yucky code to stop character from entering if they dont have enough
 	if collectible == "coin":
-		if CurrentLevelData.level_data.vars.coins_collected < required_amount:
+		if CurrentLevelData.vars.coins_collected < required_amount:
 			can_enter = false
 	elif collectible == "star bit":
-		var star_bits_collected: int = CurrentLevelData.level_data.vars.purple_starbits_collected[CurrentLevelData.area][0]
+		var star_bits_collected: int = CurrentLevelData.vars.purple_starbits_collected[CurrentLevelData.area][0]
 		if star_bits_collected < required_amount:
 			can_enter = false
 	elif collectible == "key":
-		var keys_collected: Array = CurrentLevelData.level_data.vars.local_keys_collected
+		var keys_collected: Array = CurrentLevelData.vars.local_keys_collected
 #		print(keys_collected)
 		if required_key in keys_collected:
 			can_enter = true

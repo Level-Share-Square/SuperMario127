@@ -111,9 +111,8 @@ static func deserialize_object_properties(code: String) -> Dictionary:
 		var pair: Array = LevelCodeTokenizer.splice_dictionary_entry(pair_code)
 		var key: int = deserialize_data_code(pair[0])
 		var value = deserialize_data_code(pair[1])
-		
+
 		properties.get_or_add(key, value)
-	
 	return properties
 	
 

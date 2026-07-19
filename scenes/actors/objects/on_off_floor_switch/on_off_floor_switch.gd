@@ -36,10 +36,10 @@ func _ready():
 	switch.region_rect.position.y = palette * 21
 	switch.region_rect.position.x = int(!switch_mode) * 20
 	connect("property_changed", self, "_on_property_changed")
-	CurrentLevelData.level_data.vars.connect("switch_state_changed", self, "_on_switch_state_changed")
+	CurrentLevelData.vars.connect("switch_state_changed", self, "_on_switch_state_changed")
 	update_switch_state()
 
-	if CurrentLevelData.level_data.vars.switch_state.has(palette):
+	if CurrentLevelData.vars.switch_state.has(palette):
 		switch_mode = !switch_mode
 		update_switch_state()
 
@@ -50,7 +50,7 @@ func press(hit_pos : Vector2) -> void:
 		anim_player.play("press", -1, 2.0)
 		self_activated = true
 		beep_sound.volume_db = 0
-		CurrentLevelData.level_data.vars.toggle_switch_state(palette)#set_switch_state(palette, switch_mode)
+		CurrentLevelData.vars.toggle_switch_state(palette)#set_switch_state(palette, switch_mode)
 		boost_timer = 0.175
 
 func _physics_process(delta):

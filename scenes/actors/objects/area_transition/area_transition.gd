@@ -118,7 +118,7 @@ func start_entrance_animation(character: Character) -> void:
 	character.camera.set_zoom_tween(Vector2(1, 1), 0.5)
 	
 	if teleport_mode == TeleportMode.Location:
-		CurrentLevelData.level_data.vars.area_transition_helper = AreaTransitionHelper.new(
+		CurrentLevelData.vars.area_transition_helper = AreaTransitionHelper.new(
 			character.velocity, 
 			character.state, 
 			character.facing_direction, 
@@ -137,7 +137,7 @@ func start_exit_animation(character: Character) -> void:
 	is_idle = false
 	entering = false
 	
-	var helper: AreaTransitionHelper = CurrentLevelData.level_data.vars.area_transition_helper
+	var helper: AreaTransitionHelper = CurrentLevelData.vars.area_transition_helper
 	finish_exit_animation(character)
 	
 	character.toggle_movement(false)

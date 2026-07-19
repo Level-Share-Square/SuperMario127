@@ -59,11 +59,11 @@ func erase_tile(to_remove: Vector2):
 
 
 # Objects
-func add_object(to_add: ObjectData):
+func add_object(to_add: ObjectData, modify_data: bool = false):
 	pass
 
 
-func place_object(s_position: Vector2, to_place: ObjectData):
+func place_object(to_place: ObjectData, modify_data: bool = false):
 	pass
 
 

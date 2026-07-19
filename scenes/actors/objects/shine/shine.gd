@@ -219,7 +219,7 @@ func _physics_process(_delta: float) -> void:
 		while CurrentLevelData.vars.purple_starbits_collected.size() <= CurrentLevelData.area_id:
 			CurrentLevelData.vars.purple_starbits_collected.append([0, []])
 		
-		if red_coins_activate and !activated and CurrentLevelData.level_data.vars.max_red_coins > 0:
+		if red_coins_activate and !activated and CurrentLevelData.vars.max_red_coins > 0:
 			if CurrentLevelData.vars.red_coins_collected[0] == CurrentLevelData.vars.max_red_coins:
 				activate_shine(ActivateAnimations.NORMAL if do_animation else ActivateAnimations.SKIP, false, true)
 		if shine_shards_activate and !activated and CurrentLevelData.vars.max_shine_shards > 0:
@@ -291,7 +291,7 @@ func activate_shine(animation: int, temporary: bool = false, manual_start_cutsce
 	activated = true
 	
 	if !temporary:
-		CurrentLevelData.level_data.vars.activate_shine(id)
+		CurrentLevelData.vars.activate_shine(id)
 	
 	if manual_start_cutscene:
 		camera.start_queue()
@@ -304,7 +304,7 @@ func deactivate_shine(do_animation: bool) -> void:
 	animation_player.play("disappear")
 	
 	activated = false
-	CurrentLevelData.level_data.vars.deactivate_shine(id)
+	CurrentLevelData.vars.deactivate_shine(id)
 
 
 # Updates the ambient noise appropriately depending on if the shine is active and not collected prior.

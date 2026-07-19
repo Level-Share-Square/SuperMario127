@@ -25,7 +25,7 @@ func _ready():
 #	shared_node.get_node("Objects").connect("objects_ready", self, "delayed_ready")
 
 func delayed_ready():
-	variables = CurrentLevelData.level_data.vars
+	variables = CurrentLevelData.vars
 	max_purples = variables.max_purple_starbits
 	if max_purples <= 0: return
 	

@@ -158,7 +158,6 @@ func load_in(code):
 	vars = LevelVars.new()
 
 	var result = level_code_util.decode(code)
-
 	if not result.has("format_version"):
 		result = {}
 		return

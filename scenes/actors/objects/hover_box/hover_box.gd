@@ -33,8 +33,8 @@ func _ready():
 			var _connect2 = area.connect("body_exited", self, "exit_area")
 			
 			var _connect3 = detector.connect("body_entered", self, "enter_detector")
-			if !activated and !CurrentLevelData.level_data.vars.is_fludd_activated(0):
-				CurrentLevelData.level_data.vars.connect("hover_fludd_activated", self, "_on_fludd_activated", [], CONNECT_ONESHOT)
+			if !activated and !CurrentLevelData.vars.is_fludd_activated(0):
+				CurrentLevelData.vars.connect("hover_fludd_activated", self, "_on_fludd_activated", [], CONNECT_ONESHOT)
 				sprite.modulate.a = 0.2
 				loaded_activated = false
 
@@ -85,7 +85,7 @@ func enter_detector(body):
 
 		
 		# activates all deactivated hover fludds loaded in the level
-		CurrentLevelData.level_data.vars.activate_fludd(0)
+		CurrentLevelData.vars.activate_fludd(0)
 		
 func _on_fludd_activated():
 	sprite.modulate.a = 1

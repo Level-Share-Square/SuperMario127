@@ -1,6 +1,14 @@
 class_name GameObject
 extends Node2D
 
+enum BasePropertyIDs {
+	PALETTE = -2
+	POSITION = -1
+	SCALE = 0
+	ROTATION = 1
+	ENABLED = 2
+	VISIBLE = 3
+}
 
 var bg_modulate := Color(0.54, 0.54, 0.54, modulate.a)
 var selected_modulate := Color(0.7, 0.7, 1.2, modulate.a)
@@ -8,7 +16,6 @@ var hover_modulate := Color(modulate.r, modulate.g, modulate.b, 0.5)
 var translucent_modulate := Color(0, 0, 0, 0.25)
 var default_modulate := Color(1, 1, 1, modulate.a)
 export var generate_editor_hitbox: bool = false
-export var _property_ids: Dictionary
 
 var global := {}
 var editor_aliases := {}
@@ -49,6 +56,15 @@ var property_value_menus := {}
 
 onready var editor_hitbox: Area2D = get_node_or_null("EditorHitbox")
 
+export var property_ids: Dictionary = {
+	"palette": BasePropertyIDs.PALETTE,
+	"position": BasePropertyIDs.POSITION,
+	"scale": BasePropertyIDs.SCALE,
+	"rotation": BasePropertyIDs.ROTATION,
+	"enabled": BasePropertyIDs.ENABLED,
+	"visible": BasePropertyIDs.VISIBLE
+}
+
 
 signal property_changed(key, value)
 signal object_clicked(object)
@@ -62,9 +78,15 @@ func load_placeable_item():
 	if ResourceLoader.exists(PLACEABLE_ITEM_PATH % internal_id):
 		placeable_item = ResourceLoader.load(PLACEABLE_ITEM_PATH % internal_id)
 
+func _init():
+	property_ids = property_ids.duplicate()
 
 func _ready():
 	load_placeable_item()
+	
+			
+	for property in savable_properties:
+		property_ids.get_or_add(property, property_ids.values().size() - 2)
 	
 	set_object_data_property_metadata()
 	
@@ -108,14 +130,16 @@ func _ready():
 	else:
 		if is_instance_valid(editor_hitbox):
 			editor_hitbox.queue_free()
-	
-	property_info.resize(editable_properties.size())
+			
+	set_object_properties_from_data()
 	
 	match mode:
 		LevelPlayer.mode:
 			_object_ready()
 		Editor.mode:
 			_editor_ready()
+			
+			
 
 
 func _process(delta):
@@ -247,6 +271,12 @@ func create_collision_polygons_from_tree(node: Node, node_transform: Transform2D
 		if child is Node2D:
 			create_collision_polygons_from_tree(child, node_transform * child.transform, array)
 
+func set_object_properties_from_data() -> void:
+	var properties = object_data_ref.get_ref().default_values.duplicate(true)
+	properties.merge(object_data_ref.get_ref().properties, true)
+	for property in properties:
+		if properties[property]:
+			set_property_by_index(property, properties[property])
 
 func set_object_data_property_metadata() -> void:
 	if not is_instance_valid(object_data_ref):
@@ -255,29 +285,24 @@ func set_object_data_property_metadata() -> void:
 	var object_data: ObjectData = object_data_ref.get_ref()
 	
 	if is_instance_valid(object_data):
-		object_data.property_ids = _property_ids
+		object_data.property_ids = property_ids
 		
 		var property_id: int = -1
-		for property in _property_ids.keys():
-			property_id = _property_ids.get(property)
+		for property in property_ids.keys():
+			property_id = property_ids.get(property)
 			object_data.default_values[property_id] = self[property]
 
 
 func is_savable_property(key) -> bool:
-	for savable_property in (base_savable_properties + savable_properties):
-		if key == savable_property:
+	for property in property_ids:
+		if key == property:
 			return true
 	
 	return false
 
 
 func get_property_index(key) -> int:
-	var index = 0
-	for savable_property in (base_savable_properties + savable_properties):
-		if key == savable_property:
-			return index
-		index += 1
-	return index
+	return property_ids[key]
 
 
 func set_property(key, value, change_object_data = true, alias = null):
@@ -290,11 +315,11 @@ func set_property(key, value, change_object_data = true, alias = null):
 	var object_data: ObjectData = object_data_ref.get_ref()
 	
 	if change_object_data and is_savable_property(key) and !is_preview:
-		var id: int = _property_ids.get(key, -1)
+		var id: int = property_ids.get(key, -1)
 		if id < 0:
 			return
 		
-		object_data.set_property(key, value)
+		object_data.set_property(get_property_index(key), value)
 		
 		if key == "visible":
 			if mode == 1:
@@ -316,10 +341,9 @@ func has_editor_alias(key):
 	return false
 
 
-func set_property_by_index(index, value, change_level_object, alias = null):
-	if (index < (base_savable_properties + savable_properties).size()):
-		var key = (base_savable_properties + savable_properties)[index]
-		set_property(key, value, change_level_object, alias)
+func set_property_by_index(index, value, change_level_object = true, alias = null):
+	var key = property_ids.find_key(index)
+	set_property(key, value, change_level_object, alias)
 
 
 func _set_properties():

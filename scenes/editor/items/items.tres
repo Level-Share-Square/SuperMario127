@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=240 format=2]
+[gd_resource type="Resource" load_steps=241 format=2]
 
 [ext_resource path="res://scenes/editor/items/placeable_items.gd" type="Script" id=1]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/blue_coin.tres" type="Resource" id=2]
@@ -239,6 +239,7 @@
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/wood_fence_slope_right.tres" type="Resource" id=237]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/glass_slope_right.tres" type="Resource" id=238]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/glass_slope_left.tres" type="Resource" id=239]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/barrel.tres" type="Resource" id=240]
 
 [resource]
 script = ExtResource( 1 )
@@ -246,6 +247,7 @@ placeable_items = {
 "obj_airship_window": ExtResource( 86 ),
 "obj_area_transition": ExtResource( 112 ),
 "obj_arrow": ExtResource( 53 ),
+"obj_barrel": ExtResource( 240 ),
 "obj_barrel_cactus": ExtResource( 75 ),
 "obj_big_bottle": ExtResource( 25 ),
 "obj_big_bush": ExtResource( 16 ),

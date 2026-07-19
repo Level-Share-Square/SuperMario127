@@ -304,7 +304,7 @@ func set_fludd_activated(fludd_id : int, save_to_disk : bool = true) -> void:
 		level_list_util.save_level_save_file(get_save_file_dictionary(), get_save_path())
 
 func update_time_and_coin_score(shine_id : int, save_to_disk : bool = true):
-	var new_coin_score = CurrentLevelData.level_data.vars.coins_collected
+	var new_coin_score = CurrentLevelData.vars.coins_collected
 	var new_time_score = CurrentLevelData.time_score
 
 	if new_coin_score > coin_score:

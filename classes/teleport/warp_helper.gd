@@ -77,12 +77,12 @@ func area_warp(character: Character, target_tag: String, target_area: int) -> vo
 #		printerr("Couldn't find timer manager node!")
 	
 	# band aid crash fix
-	while CurrentLevelData.level_data.vars.liquid_positions.size() <= CurrentLevelData.area:
-		CurrentLevelData.level_data.vars.liquid_positions.append([])
+	while CurrentLevelData.vars.liquid_positions.size() <= CurrentLevelData.area:
+		CurrentLevelData.vars.liquid_positions.append([])
 	
-	CurrentLevelData.level_data.vars.liquid_positions[CurrentLevelData.area] = []
-	for liquid in CurrentLevelData.level_data.vars.liquids:
-		CurrentLevelData.level_data.vars.liquid_positions[CurrentLevelData.area].append(liquid[1].save_pos)
+	CurrentLevelData.vars.liquid_positions[CurrentLevelData.area] = []
+	for liquid in CurrentLevelData.vars.liquids:
+		CurrentLevelData.vars.liquid_positions[CurrentLevelData.area].append(liquid[1].save_pos)
 	
 	var powerup_array = [null, null, null]
 	if is_instance_valid(character.powerup):
@@ -96,7 +96,7 @@ func area_warp(character: Character, target_tag: String, target_area: int) -> vo
 	if !is_instance_valid(character.state):
 		character.state = character.get_state_node("FallState")
 	
-	CurrentLevelData.level_data.vars.transition_character_data = [
+	CurrentLevelData.vars.transition_character_data = [
 		character.health,
 		character.health_shards,
 		nozzle_name,
@@ -105,16 +105,16 @@ func area_warp(character: Character, target_tag: String, target_area: int) -> vo
 		get_tree().get_current_scene().switch_timer
 	]
 #	if object_type == "area_transition":
-#		CurrentLevelData.level_data.vars.transition_character_data.append(AreaTransitionHelper.new(character.velocity, character.state, character.facing_direction, to_local(character.position), self.vertical))
+#		CurrentLevelData.vars.transition_character_data.append(AreaTransitionHelper.new(character.velocity, character.state, character.facing_direction, to_local(character.position), self.vertical))
 	
-	CurrentLevelData.level_data.vars.transition_character_data_2 = []
+	CurrentLevelData.vars.transition_character_data_2 = []
 	
-#	CurrentLevelData.level_data.vars.transition_data = [
+#	CurrentLevelData.vars.transition_data = [
 #		object_type, 
 #		target_tag,
 #		teleportation_mode
 #	]
-	CurrentLevelData.level_data.vars.transition_data = {"target_tag": target_tag}
+	CurrentLevelData.vars.transition_data = {"target_tag": target_tag}
 	character.switch_areas(target_area, 0.5)
 
 

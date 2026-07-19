@@ -158,7 +158,7 @@ func start_pipe_exit_animation(character : Character, tp_mode : bool) -> void:
 
 func pipe_exit_anim_finished(character : Character):
 	# exits the pipe and gives back control to mario
-	CurrentLevelData.level_data.vars.transition_data = []
+	CurrentLevelData.vars.transition_data = []
 	is_idle = true
 	entering = false
 	character.velocity = Vector2.ZERO

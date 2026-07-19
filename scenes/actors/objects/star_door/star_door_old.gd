@@ -107,7 +107,7 @@ func _ready() -> void:
 	var append_tag
 	if destination_tag != "default_teleporter" || destination_tag != null:
 		append_tag = destination_tag.to_lower()
-	CurrentLevelData.level_data.vars.teleporters.append([append_tag, self])
+	CurrentLevelData.vars.teleporters.append([append_tag, self])
 	
 	current_level_info = CurrentLevelData.level_info
 	match(collectible):
@@ -145,7 +145,7 @@ func exit_local_teleport():
 		door_enter_logic.is_idle = true
 
 func exit_remote_teleport():
-	CurrentLevelData.level_data.vars.transition_data = []
+	CurrentLevelData.vars.transition_data = []
 	door_enter_logic.is_idle = true
 
 func _process(delta):

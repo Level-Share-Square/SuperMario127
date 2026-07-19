@@ -79,9 +79,9 @@ func _process(delta):
 		animated_sprite.frame = wrapi(OS.get_ticks_msec() / (1000/8), 0, 16)
 
 #func turn_off():
-#	var req_purples = CurrentLevelData.level_data.vars.required_purple_starbits[CurrentLevelData.area][0]
-#	if CurrentLevelData.level_data.vars.purple_starbits_collected[CurrentLevelData.area][0] < req_purples:
-#		CurrentLevelData.level_data.vars.purple_starbits_collected[CurrentLevelData.area] = [0, []]
+#	var req_purples = CurrentLevelData.vars.required_purple_starbits[CurrentLevelData.area][0]
+#	if CurrentLevelData.vars.purple_starbits_collected[CurrentLevelData.area][0] < req_purples:
+#		CurrentLevelData.vars.purple_starbits_collected[CurrentLevelData.area] = [0, []]
 #		timed = true
 #		timer_on = false
 #		enabled = false
@@ -92,10 +92,10 @@ func _process(delta):
 #		yield(tween, "tween_all_completed")
 #		visible = false
 #		print("shut off")
-#	elif (CurrentLevelData.level_data.vars.purple_starbits_collected[CurrentLevelData.area][0] > req_purples) and (len(CurrentLevelData.level_data.vars.required_purple_starbits[CurrentLevelData.area]) > 1):
-#		CurrentLevelData.level_data.vars.purple_starbits_collected[CurrentLevelData.area][0] = req_purples
-#		for _i in range(req_purples, CurrentLevelData.level_data.vars.purple_starbits_collected[CurrentLevelData.area][0]):
-#			var popped_id = CurrentLevelData.level_data.vars.purple_starbits_collected[CurrentLevelData.area][1].pop_back()
+#	elif (CurrentLevelData.vars.purple_starbits_collected[CurrentLevelData.area][0] > req_purples) and (len(CurrentLevelData.vars.required_purple_starbits[CurrentLevelData.area]) > 1):
+#		CurrentLevelData.vars.purple_starbits_collected[CurrentLevelData.area][0] = req_purples
+#		for _i in range(req_purples, CurrentLevelData.vars.purple_starbits_collected[CurrentLevelData.area][0]):
+#			var popped_id = CurrentLevelData.vars.purple_starbits_collected[CurrentLevelData.area][1].pop_back()
 #			if id == popped_id:
 #				timed = true
 #				timer_on = false

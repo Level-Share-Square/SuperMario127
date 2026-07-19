@@ -26,12 +26,12 @@ func collect(body):
 		if body.name == "Character":
 			player_id = 0
 		if Singleton.PlayerSettings.other_player_id == -1 or Singleton.PlayerSettings.my_player_index == player_id:
-			if CurrentLevelData.level_data.vars.red_coins_collected[0] != CurrentLevelData.level_data.vars.max_red_coins:
+			if CurrentLevelData.vars.red_coins_collected[0] != CurrentLevelData.vars.max_red_coins:
 				sound.play()
 			else:
 				last_sound.play()
 		collected = true
-		label.text = str(CurrentLevelData.level_data.vars.red_coins_collected[0])
+		label.text = str(CurrentLevelData.vars.red_coins_collected[0])
 		animation_player.play("collect")
 		
 func _ready():

@@ -79,10 +79,10 @@ func start_door_enter_animation(character : Character) -> void:
 	var can_enter = true
 	# yucky code to stop character from entering if they dont have enough
 	if get_parent().collectible == "coin":
-		if CurrentLevelData.level_data.vars.coins_collected < get_parent().required_amount:
+		if CurrentLevelData.vars.coins_collected < get_parent().required_amount:
 			can_enter = false
 	elif get_parent().collectible == "star bit":
-		var star_bits_collected: int = CurrentLevelData.level_data.vars.purple_starbits_collected[CurrentLevelData.area][0]
+		var star_bits_collected: int = CurrentLevelData.vars.purple_starbits_collected[CurrentLevelData.area][0]
 		if star_bits_collected < get_parent().required_amount:
 			can_enter = false
 	else:
@@ -161,7 +161,7 @@ func start_door_exit_animation(character : Character, tp_mode : bool) -> void:
 
 func door_exit_anim_finished(_animation : String, character : Character) -> void:
 	# closes the door and gives back control to mario
-	CurrentLevelData.level_data.vars.transition_data = []
+	CurrentLevelData.vars.transition_data = []
 	is_idle = true
 	entering = false
 	character.velocity = Vector2.ZERO

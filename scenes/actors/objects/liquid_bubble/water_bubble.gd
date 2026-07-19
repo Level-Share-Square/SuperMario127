@@ -37,13 +37,13 @@ func _set_property_values():
 	set_bool_alias("tap_mode", "Move", "Scale")
 
 func _ready():
-	var id = CurrentLevelData.level_data.vars.current_liquid_id
-	if CurrentLevelData.level_data.vars.liquid_positions.size() > CurrentLevelData.area and CurrentLevelData.level_data.vars.liquid_positions[CurrentLevelData.area].size() > id:
-		var set_position = CurrentLevelData.level_data.vars.liquid_positions[CurrentLevelData.area][id]
+	var id = CurrentLevelData.vars.current_liquid_id
+	if CurrentLevelData.vars.liquid_positions.size() > CurrentLevelData.area and CurrentLevelData.vars.liquid_positions[CurrentLevelData.area].size() > id:
+		var set_position = CurrentLevelData.vars.liquid_positions[CurrentLevelData.area][id]
 		if set_position != Vector2():
 			global_position = set_position
 			save_pos = set_position
-	CurrentLevelData.level_data.vars.current_liquid_id += 1
+	CurrentLevelData.vars.current_liquid_id += 1
 	
 	color.a = 0.5
 	area_collision.shape = area_collision.shape.duplicate()
@@ -52,7 +52,7 @@ func _ready():
 	
 	area_collision.disabled = !enabled
 	
-	CurrentLevelData.level_data.vars.liquids.append([tag.to_lower(), self])
+	CurrentLevelData.vars.liquids.append([tag.to_lower(), self])
 
 func change_size():
 	area.set_radius(radius)

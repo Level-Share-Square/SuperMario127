@@ -80,7 +80,7 @@ func switch() -> void:
 		
 		#CurrentLevelData.area = 0
 		Singleton.CheckpointSaved.current_area = CurrentLevelData.area_id
-#		CurrentLevelData.vars.reload()
+		CurrentLevelData.vars.reload()
 		CurrentLevelData.enemies_instanced = 0
 		Singleton.MiscShared.is_play_reload = true
 		

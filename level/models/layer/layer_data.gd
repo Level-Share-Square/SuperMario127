@@ -26,6 +26,6 @@ func add_object(data) -> void:
 	object_data.append(data)
 
 
-func place_object(position: Vector2, data):
-	data.position = position
+func place_object(position: Vector2, data: ObjectData):
+	data.metadata.position = position
 	add_object(data)
