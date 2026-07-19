@@ -1,0 +1,91 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://scenes/actors/objects/barrel/barrel.gd" type="Script" id=1]
+[ext_resource path="res://scenes/actors/objects/barrel/color_spriteframes.tres" type="SpriteFrames" id=2]
+[ext_resource path="res://scenes/actors/objects/bullet_bill/sound.wav" type="AudioStream" id=3]
+[ext_resource path="res://scenes/actors/objects/koopa_troopa/body.gd" type="Script" id=7]
+[ext_resource path="res://scenes/actors/objects/barrel/regular_frames.tres" type="SpriteFrames" id=9]
+
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 9, 9 )
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 11, 10.5 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 14, 2 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 11, 10 )
+
+[node name="Barrel" type="Node2D"]
+z_index = -2
+script = ExtResource( 1 )
+
+[node name="BarrelBody" type="KinematicBody2D" parent="."]
+collision_layer = 4
+collision_mask = 2147483733
+script = ExtResource( 7 )
+
+[node name="Sprite" type="AnimatedSprite" parent="BarrelBody"]
+frames = ExtResource( 9 )
+animation = "rolling"
+playing = true
+
+[node name="Color" type="AnimatedSprite" parent="BarrelBody/Sprite"]
+frames = ExtResource( 2 )
+animation = "rolling"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BarrelBody"]
+position = Vector2( 0, 2 )
+shape = SubResource( 7 )
+
+[node name="AttackArea" type="Area2D" parent="BarrelBody"]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BarrelBody/AttackArea"]
+position = Vector2( 0, 1.5 )
+shape = SubResource( 6 )
+
+[node name="StompArea" type="Area2D" parent="BarrelBody"]
+visible = false
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BarrelBody/StompArea"]
+position = Vector2( 0, -4 )
+shape = SubResource( 4 )
+
+[node name="WaterDetector" type="Area2D" parent="BarrelBody"]
+visible = false
+collision_layer = 0
+collision_mask = 128
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BarrelBody/WaterDetector"]
+position = Vector2( 0, 2 )
+shape = SubResource( 3 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer2D" parent="BarrelBody"]
+stream = ExtResource( 3 )
+volume_db = -10.0
+max_distance = 1000.0
+bus = "Sounds"
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="BarrelBody"]
+visible = false
+rect = Rect2( -200, -200, 400, 400 )
+
+[node name="BottomPos" type="Node2D" parent="BarrelBody"]
+position = Vector2( 0, 12 )
+
+[node name="GroundedCheck" type="RayCast2D" parent="BarrelBody"]
+enabled = true
+cast_to = Vector2( 0, 20 )
+collision_mask = 17
+
+[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+visible = false
+rect = Rect2( -200, -200, 400, 400 )
+process_parent = true
+physics_process_parent = true

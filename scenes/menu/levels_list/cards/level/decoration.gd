@@ -18,13 +18,9 @@ onready var name_label := $"%Name"
 
 ## external
 var level_info: LevelInfo
-var http_thumbnails: HTTPThumbnails
 
 
 func _ready():
-	http_thumbnails = level_card.http_thumbnails
-	http_thumbnails.connect("image_loaded", self, "load_custom_thumbnail")
-	
 	level_info = level_card.level_info
 	name_label.text = level_info.level_name
 	
@@ -35,7 +31,7 @@ func _ready():
 		name_label.text = "Invalid Level"
 		thumbnail.texture = default_thumbnail
 	else:
-		check_thumbnail()
+		load_custom_thumbnail(level_info.thumbnail_url)
 	
 	if level_card.has_save and level_info.is_fully_completed():
 		activate_completion_style()
@@ -49,19 +45,6 @@ func activate_completion_style():
 	thumbnail_edge.modulate = COMPLETED_COLOR
 
 
-func check_thumbnail():
-	var thumbnail_url: String = level_info.thumbnail_url
-	if thumbnail_url != "":
-		var cached_image: ImageTexture = http_thumbnails.get_cached_image(thumbnail_url)
-		if cached_image == null:
-			http_thumbnails.add_to_queue(thumbnail_url, level_card.id)
-			http_thumbnails.load_next_image()
-		else:
-			load_custom_thumbnail(thumbnail_url, cached_image)
-	else:
-		visibility_enabler_2d.connect("viewport_entered", self, "load_default_thumbnail", [], CONNECT_ONESHOT)
-
-
 func load_default_thumbnail(_viewport: Viewport = null):
 	thumbnail.texture = level_info.get_level_background_texture()
 	
@@ -69,10 +52,12 @@ func load_default_thumbnail(_viewport: Viewport = null):
 	foreground.texture = level_info.get_level_foreground_texture()
 
 
-func load_custom_thumbnail(url: String, texture: ImageTexture):
-	if url != level_info.thumbnail_url: return
+func load_custom_thumbnail(url: String):
+	var thumbnail_texture: ImageTexture = yield(AssetHandler.load_image(url, CurrentLevelData.working_folder), "completed")
 	
-	thumbnail.texture = texture
-	foreground.visible = false
+	if !thumbnail_texture:
+		load_default_thumbnail()
+		return
 	
-	http_thumbnails.disconnect("image_loaded", self, "load_custom_thumbnail")
+	thumbnail.texture = thumbnail_texture
+	

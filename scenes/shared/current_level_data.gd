@@ -174,7 +174,9 @@ func convert_and_load_level(code: String) -> void:
 
 func convert_old_code_to_new(code: String) -> String:
 	var level_data: LevelDataOld = LevelDataOld.new(code)
-	level_data.load_in(code)
+	if !level_data.load_in(code):
+		return ""
+	
 	
 	var container: LevelDataContainer = conversion_util.get_new_level_data_from_old_data(level_data)
 	return LevelCodeSerializer.serialize_level_data(container)
