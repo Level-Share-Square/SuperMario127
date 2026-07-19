@@ -1123,9 +1123,9 @@ script = ExtResource( 17 )
 category_paths = [ NodePath("Player1"), NodePath("Player2"), NodePath("Interface"), NodePath("Hotkeys/Gameplay"), NodePath("Hotkeys/Editor") ]
 
 [node name="Player1" type="GridContainer" parent="Subscreens/Controls/VBoxContainer/Remapper"]
-margin_left = 32.0
+margin_left = 14.0
 margin_top = 1.0
-margin_right = 512.0
+margin_right = 530.0
 margin_bottom = 226.0
 custom_constants/vseparation = 24
 custom_constants/hseparation = 32
@@ -1299,9 +1299,9 @@ setting_key = "63_wing_cap"
 
 [node name="Player2" type="GridContainer" parent="Subscreens/Controls/VBoxContainer/Remapper"]
 visible = false
-margin_left = 32.0
+margin_left = 14.0
 margin_top = 1.0
-margin_right = 512.0
+margin_right = 530.0
 margin_bottom = 226.0
 custom_constants/vseparation = 24
 custom_constants/hseparation = 32
@@ -2000,9 +2000,9 @@ margin_right = 222.0
 alignment = 1
 
 [node name="OpenAppdata" type="Button" parent="Subscreens/Storage/VBoxContainer"]
-margin_top = 184.0
+margin_top = 164.0
 margin_right = 158.0
-margin_bottom = 208.0
+margin_bottom = 188.0
 rect_min_size = Vector2( 80, 24 )
 focus_neighbour_top = NodePath("../CleanOldData")
 theme_type_variation = "OptionsToggle"
@@ -2011,9 +2011,9 @@ script = ExtResource( 19 )
 
 [node name="CleanOldData" type="Button" parent="Subscreens/Storage/VBoxContainer"]
 unique_name_in_owner = true
-margin_top = 224.0
+margin_top = 204.0
 margin_right = 158.0
-margin_bottom = 248.0
+margin_bottom = 228.0
 rect_min_size = Vector2( 80, 24 )
 focus_neighbour_bottom = NodePath("../OpenAppdata")
 theme_type_variation = "OptionsToggle"
@@ -2025,6 +2025,24 @@ text = "Clean Old Data"
 script = ExtResource( 19 )
 
 [node name="Countdown" type="Node" parent="Subscreens/Storage/VBoxContainer/CleanOldData"]
+script = ExtResource( 24 )
+
+[node name="ClearCache" type="Button" parent="Subscreens/Storage/VBoxContainer"]
+unique_name_in_owner = true
+margin_top = 244.0
+margin_right = 158.0
+margin_bottom = 268.0
+rect_min_size = Vector2( 80, 24 )
+focus_neighbour_bottom = NodePath("../OpenAppdata")
+theme_type_variation = "OptionsToggle"
+custom_colors/font_color_focus = Color( 0.694118, 0.2, 0.2, 1 )
+custom_colors/font_color = Color( 0.694118, 0.2, 0.2, 1 )
+custom_colors/font_color_hover = Color( 0.694118, 0.2, 0.2, 1 )
+custom_colors/font_color_pressed = Color( 0.694118, 0.2, 0.2, 1 )
+text = "Clear Cache"
+script = ExtResource( 19 )
+
+[node name="Countdown" type="Node" parent="Subscreens/Storage/VBoxContainer/ClearCache"]
 script = ExtResource( 24 )
 
 [node name="Label" type="Label" parent="."]
@@ -2099,3 +2117,4 @@ anims/transition = SubResource( 1 )
 [connection signal="ready" from="Subscreens/Storage/ModLoader" to="Subscreens/Storage/ModLoader" method="check_old_data" binds= [ false ]]
 [connection signal="pressed" from="Subscreens/Storage/VBoxContainer/OpenAppdata" to="Subscreens/Storage/ModLoader" method="open_appdata"]
 [connection signal="pressed" from="Subscreens/Storage/VBoxContainer/CleanOldData/Countdown" to="Subscreens/Storage/ModLoader" method="check_old_data" binds= [ true ]]
+[connection signal="pressed" from="Subscreens/Storage/VBoxContainer/ClearCache/Countdown" to="Subscreens/Storage/ModLoader" method="clear_cache"]

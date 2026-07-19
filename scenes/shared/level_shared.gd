@@ -46,9 +46,11 @@ func add_layer(layer_data = null, add_to_data: bool = false):
 		CurrentLevelData.area.layers.append(layer_data)
 
 
-func remove_layer(index: int):
+func remove_layer(index: int, remove_from_data: bool = false):
 	var removed = layers[index]
 	layers.remove(index)
+	if remove_from_data:
+		CurrentLevelData.area.layers.remove(index)
 	
 func set_tile(x: int, y: int, index: int, tileset_id: int, tile_id: int, palette_id : int = 0):
 	layers[index].place_tile(Vector2(x, y), tileset_id, tile_id, palette_id, true, true)

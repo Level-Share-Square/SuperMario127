@@ -96,3 +96,6 @@ func check_old_data(delete_data: bool):
 	
 	old_data_button.disabled = (not has_old_data) or delete_data 
 	return has_old_data
+
+func clear_cache():
+	pass
