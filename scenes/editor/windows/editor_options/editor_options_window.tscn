@@ -631,7 +631,6 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Settings" type="ScrollContainer" parent="ContentDivider/ContentMat/Tabs" index="5"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -643,7 +642,7 @@ scroll_deadzone = 7
 
 [node name="MarginContainer" type="MarginContainer" parent="ContentDivider/ContentMat/Tabs/Settings" index="0"]
 margin_right = 372.0
-margin_bottom = 160.0
+margin_bottom = 91.0
 custom_constants/margin_right = 2
 custom_constants/margin_top = 1
 custom_constants/margin_left = 2
@@ -652,11 +651,12 @@ custom_constants/margin_left = 2
 margin_left = 2.0
 margin_top = 1.0
 margin_right = 370.0
-margin_bottom = 160.0
+margin_bottom = 91.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="PalettesSection" type="Button" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer" index="0"]
+visible = false
 margin_right = 368.0
 margin_bottom = 19.0
 focus_mode = 0
@@ -756,9 +756,9 @@ suffix = "s"
 script = ExtResource( 5 )
 
 [node name="WeatherSection" type="Button" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer" index="2"]
-margin_top = 23.0
+visible = false
 margin_right = 368.0
-margin_bottom = 42.0
+margin_bottom = 19.0
 focus_mode = 0
 text = "> Weather"
 align = 0
@@ -856,9 +856,9 @@ suffix = "s"
 script = ExtResource( 5 )
 
 [node name="AreaSection" type="Button" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer" index="4"]
-margin_top = 46.0
+visible = false
 margin_right = 368.0
-margin_bottom = 65.0
+margin_bottom = 19.0
 focus_mode = 0
 text = "> Area Settings"
 align = 0
@@ -866,9 +866,8 @@ script = ExtResource( 21 )
 selected_container_path = NodePath("../AreaSettings")
 
 [node name="AreaSettings" type="Control" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer" index="5"]
-margin_top = 69.0
 margin_right = 368.0
-margin_bottom = 159.0
+margin_bottom = 90.0
 rect_min_size = Vector2( 368, 90 )
 rect_clip_content = true
 script = ExtResource( 14 )
@@ -900,6 +899,7 @@ unique_name_in_owner = true
 margin_left = 162.0
 margin_right = 228.0
 margin_bottom = 17.0
+max_value = 999.0
 prefix = "X"
 script = ExtResource( 5 )
 
@@ -908,6 +908,7 @@ unique_name_in_owner = true
 margin_left = 238.0
 margin_right = 304.0
 margin_bottom = 17.0
+max_value = 999.0
 prefix = "Y"
 script = ExtResource( 5 )
 

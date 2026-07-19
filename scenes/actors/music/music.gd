@@ -80,19 +80,14 @@ func reset_custom_song() -> void:
 func handle_custom_song(url: String, underwater: bool = false) -> void:
 	loop = 0.0
 	if url.begins_with("LP"):
-		if !"|" in url:
-			var trimmed_url = url.trim_prefix("LP").split("=")
-			loop = float(trimmed_url[0])
-			url = trimmed_url[1]
+		var variables = decode_music(url)
+		if underwater:
+			underwater_loop = variables[0]
+			underwater_loop_end = variables[2]
 		else:
-			var variables = decode_new_music(url)
-			if underwater:
-				underwater_loop = variables[0]
-				underwater_loop_end = variables[2]
-			else:
-				loop = variables[0]
-				loop_end = variables[2]
-			url = variables[1]
+			loop = variables[0]
+			loop_end = variables[2]
+		url = variables[1]
 			
 	var song_stream = yield(AssetHandler.load_sound(url, CurrentLevelData.working_folder), "completed")
 	
@@ -138,11 +133,20 @@ func play_custom_normal(song_stream):
 		handle_custom_song(underwater_raw, true)
 	
 
-func decode_new_music(raw_music: String) -> Array:
+func decode_music(raw_music: String) -> Array:
+	if !raw_music.begins_with("LP"):
+		return [0, raw_music, 0, ""]
 	var loop_start
 	var loop_end
 	var song_name
 	var url
+	if !"|" in raw_music:
+		var trimmed_url = raw_music.trim_prefix("LP").split("=")
+		loop_start = float(trimmed_url[0])
+		url = trimmed_url[1]
+		loop_end = 0
+		song_name = ""
+		return [loop_start, url, loop_end, song_name]
 	var loop_start_string = raw_music.substr(0, raw_music.find("="))
 	loop_start_string.erase(0, 2)
 	if float(loop_start_string) == 0:

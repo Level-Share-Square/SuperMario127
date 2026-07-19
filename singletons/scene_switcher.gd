@@ -93,6 +93,12 @@ func setup_level(level_info: LevelInfo, level_id: String, working_folder: String
 	CurrentLevelData.load_level_headers(level_info.level_code)
 	CurrentLevelData.switch_to_area(0)
 	
+	for area_header in CurrentLevelData.area_headers:
+		if area_header.music is String and area_header.music:
+			yield(AssetHandler.fetch_asset_path(Singleton.Music.decode_music(area_header.music)[1], working_folder), "completed")
+		if area_header.underwater_music and area_header.underwater_music:
+			yield(AssetHandler.fetch_asset_path(Singleton.Music.decode_music(area_header.underwater_music)[1], working_folder), "completed")
+	
 	if not CurrentLevelData.level_transition_data.empty():
 		CurrentLevelData.area = CurrentLevelData.level_transition_data.get("target_area", 0)
 	
@@ -133,7 +139,7 @@ func start_level(level_info: LevelInfo, level_id: String, working_folder: String
 			SceneTransitions.play_transition_audio()
 		SceneTransitions.do_transition_fade(SceneTransitions.DEFAULT_TRANSITION_TIME)
 	else:
-		setup_level(level_info, level_id, working_folder, hub_level, selected_file)
+		yield(setup_level(level_info, level_id, working_folder, hub_level, selected_file), "completed")
 		get_tree().change_scene(goal_scene)
 
 ## start level without setting any variables

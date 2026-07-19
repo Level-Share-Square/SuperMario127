@@ -7,7 +7,7 @@ var file_extension: String
 func load_sound(url: String, working_folder: String):
 	var sound_path: String = yield(fetch_asset_path(url, working_folder), "completed")
 	
-	if sound_path == null:
+	if !sound_path:
 		printerr("Failed to fetch asset path.")
 		return null
 		
@@ -16,6 +16,8 @@ func load_sound(url: String, working_folder: String):
 	
 	if err != OK:
 		printerr("Failed to open sound.")
+		var dir := Directory.new()
+		dir.remove(sound_path)
 		return null
 		
 	var bytes: PoolByteArray = file.get_buffer(file.get_len())
@@ -59,6 +61,7 @@ func fetch_asset_path(url: String, working_folder: String) -> String:
 	var url_hash: String = str(hash(url))
 	var assets_dir: String = working_folder + "/assets"
 	file_extension = url.get_extension()
+	print(url)
 	var path: String = assets_dir + "/" + url_hash + "." + file_extension
 	
 	var dir := Directory.new()
@@ -73,22 +76,19 @@ func fetch_asset_path(url: String, working_folder: String) -> String:
 	else:
 		var http_request := HTTPRequest.new()
 		add_child(http_request)
-		
+		http_request.download_file = path
+		http_request.timeout = 10
 		http_request.request(url)
 		http_request.connect("request_completed", self, "request_completed", [path], CONNECT_ONESHOT)
 		
-		var err = yield(self, "file_loaded")
+		var response: Array = yield(http_request, "request_completed")
+		
+		var result = response[0]
+		var response_code = response[1]
+		var body = response[3]
+		
 		http_request.queue_free()
-		return path if err == OK else null
+		return path if response[1] != ERR_FILE_CANT_OPEN else ""
 
 func request_completed(result: int, response_code: int, headers: PoolStringArray, body: PoolByteArray, file_path: String):
-	var file := File.new()
-	var err: int = file.open(file_path, File.WRITE)
-	if err != OK:
-		printerr("Error saving file. Error code: " + str(err) + "\nFile path: " + file_path)
-		emit_signal("file_loaded", err)
-		return
-	
-	file.store_buffer(body)
-	file.close()
-	emit_signal("file_loaded", OK)
+	pass

@@ -36,7 +36,7 @@ func update_panel():
 		return #regular music implementation
 		
 	#final music url example: LP0.00={Link}|LEP=0.00N=supermario127song
-	var variables: Array = Singleton.Music.decode_new_music(raw_music)
+	var variables: Array = Singleton.Music.decode_music(raw_music)
 	loop_start = variables[0]
 	url = variables[1]
 	loop_end = variables[2]
