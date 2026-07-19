@@ -7,6 +7,7 @@ const PUSH_VEL := 250
 const LERP_STRENGTH := 0.08
 const SQUISH_STRENGTH := 1.2
 const HOP_HEIGHT := 100
+const ROLL_BUFFER_DURATION := 10
 
 onready var sprite : AnimatedSprite = $BarrelBody/Sprite
 onready var sprite_color : AnimatedSprite = $BarrelBody/Sprite/Color
@@ -30,14 +31,19 @@ var is_rolling = false
 var color := Color.white
 var max_speed := 1000
 var physics = true
+var autoroll = true
+var roll_buffer: float = ROLL_BUFFER_DURATION
 
 func _set_properties():
-	savable_properties = ["color", "max_speed", "physics"]
-	editable_properties = ["color", "max_speed", "physics"]
+	savable_properties = ["color", "max_speed", "physics", "autoroll"]
+	editable_properties = ["color", "max_speed", "physics", "autoroll"]
 
 func _set_property_values():
 	set_property("color", color, true)
 	set_property("max_speed", max_speed, true)
+	set_property("physics", physics, true)
+	set_property("autoroll", autoroll, true)
+	
 
 func _ready() -> void:
 	CurrentLevelData.enemies_instanced += 1
@@ -49,32 +55,40 @@ func _ready() -> void:
 	water_detector.connect("area_exited", self, "on_water_exited")
 	
 	attack_area.connect("body_entered", self, "on_body_entered")
+	
+	if autoroll:
+		is_rolling = true
+		sprite.play("rolling")
+		sprite_color.play("rolling")
 
 func _object_ground_physics_process(delta):
-	if velocity.y < max_speed:
-		velocity.y += gravity*delta
-	else:
-		velocity.y = max_speed
+	if roll_buffer >= 0:
+		roll_buffer -= 1
 		
 	sprite.scale = sprite.scale.move_toward(Vector2(1, 1), LERP_STRENGTH)
 	sprite_color.scale = sprite.scale.move_toward(Vector2(1, 1), LERP_STRENGTH)
 		
 	dust.global_position = body.global_position
 		
-	velocity = body.move_and_slide_with_snap(velocity, snap, Vector2.UP)
 		
 	sprite.speed_scale = abs(10*velocity.x) / max_speed
 	sprite_color.speed_scale = abs(10*velocity.x) / max_speed
-	
-	if is_rolling:
-		rolling(delta)
-	else:
-		stationary(delta)
+	if physics:
+		if velocity.y < max_speed:
+			velocity.y += gravity*delta
+		else:
+			velocity.y = max_speed
+		if is_rolling:
+			rolling(delta)
+		else:
+			stationary(delta)
 		
 func stationary(delta):
-	pass
+	velocity = body.move_and_slide(velocity, Vector2.UP, true)
 		
 func rolling(delta):
+	velocity = body.move_and_slide_with_snap(velocity, snap, Vector2.UP)
+	
 	var overlapping_bodies: Array = attack_area.get_overlapping_bodies()
 
 	for body in overlapping_bodies:
@@ -103,6 +117,8 @@ func on_body_entered(entered_body):
 			roll(entered_body)
 
 func roll(entered_body):
+	if roll_buffer > 0:
+		return
 	var direction = sign(entered_body.velocity.x)
 	if (direction == 1 and entered_body.global_position.x > body.global_position.x) or (direction == -1 and entered_body.global_position.x < body.global_position.x):
 		return
@@ -121,6 +137,8 @@ func roll(entered_body):
 	dust.restart()
 	dust.emitting = true
 	hop_sound.play()
+	
+	roll_buffer = ROLL_BUFFER_DURATION
 	
 
 func on_water_entered(area):
