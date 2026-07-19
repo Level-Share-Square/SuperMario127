@@ -61,7 +61,6 @@ func fetch_asset_path(url: String, working_folder: String) -> String:
 	var url_hash: String = str(hash(url))
 	var assets_dir: String = working_folder + "/assets"
 	file_extension = url.get_extension()
-	print(url)
 	var path: String = assets_dir + "/" + url_hash + "." + file_extension
 	
 	var dir := Directory.new()
