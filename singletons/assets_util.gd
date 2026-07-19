@@ -51,6 +51,8 @@ func load_image(url: String, working_folder: String) -> ImageTexture:
 	
 	if err != OK:
 		printerr("Failed to load image from path ", image_path, ". Error code: ", err)
+		var dir := Directory.new()
+		dir.remove(image_path)
 		return null
 		
 	var texture := ImageTexture.new()
