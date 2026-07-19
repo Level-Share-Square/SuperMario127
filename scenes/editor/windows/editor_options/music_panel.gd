@@ -32,7 +32,7 @@ func update_panel():
 	else:
 		raw_music = area.header.underwater_music
 		
-	if typeof(raw_music) == TYPE_INT:
+	if !raw_music is String:
 		return #regular music implementation
 		
 	#final music url example: LP0.00={Link}|LEP=0.00N=supermario127song

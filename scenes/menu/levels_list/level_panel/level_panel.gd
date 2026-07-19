@@ -152,11 +152,7 @@ func load_level_info(_level_info: LevelInfo, _level_id: String, _working_folder:
 		reset_button.focus_neighbour_bottom = reset_button.get_path_to(delete_button)
 	
 	# thumbnail
-	var cached_image: ImageTexture = http_thumbnails.get_cached_image(level_metadata.level_thumbnail_url)
-	if cached_image == null:
-		var thumb_path: String = level_list_util.get_level_thumbnail_path(level_id, working_folder)
-		if level_list_util.file_exists(thumb_path):
-			cached_image = level_list_util.get_image_from_path(thumb_path)
+	var cached_image: ImageTexture = yield(AssetHandler.load_image(level_metadata.level_thumbnail_url, working_folder), "completed")
 	
 	if cached_image == null:
 		thumbnail.texture = level_metadata.get_level_background_texture()

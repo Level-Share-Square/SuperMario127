@@ -276,14 +276,14 @@ func on_underwater_loop_end_reached():
 func change_song(old_setting, music_setting) -> void:
 	var song
 	cur_setting = music_setting
-	if typeof(music_setting) == TYPE_INT:
-		song = get_song(music_setting)
-	elif typeof(music_setting) == TYPE_STRING:
+	if typeof(music_setting) == TYPE_STRING:
 		# Custom music can't have water variations currently
 		# Set has_water to false whenever loading custom music
 		if typeof(music_setting) != typeof(old_setting) or music_setting != old_setting:
 			base_volume = 0
 			handle_custom_song(music_setting)
+	else:
+		song = get_song(music_setting)
 	
 	if song != null and stream != song.stream:
 		stream = song.stream

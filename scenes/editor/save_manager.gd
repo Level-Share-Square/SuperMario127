@@ -40,13 +40,13 @@ func _on_Save_button_down():
 #	CurrentLevelData.level_info.level_description = level_settings.description.text
 #	CurrentLevelData.level_info.thumbnail_url = level_settings.get_node("%ThumbnailURL").text #thanks godot
 #	$"%Hotbar".update_level_data()
-	level_settings.update_level_info()
 	
 	var level_id: String = CurrentLevelData.level_id
 	var working_folder: String = CurrentLevelData.working_folder
 	
 	for area_id in CurrentLevelData.loaded_areas:
 		# should probably put this in CurrentLevelData
+		CurrentLevelData.area_headers[area_id] = CurrentLevelData.loaded_areas[area_id].header
 		CurrentLevelData.area_headers[area_id].area_code = LevelCodeSerializer.serialize_area(CurrentLevelData.loaded_areas[area_id])
 	
 	CurrentLevelData.unload_all_but_current_area()

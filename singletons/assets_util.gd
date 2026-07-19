@@ -15,7 +15,7 @@ func load_sound(url: String, working_folder: String):
 	var err := file.open(sound_path, File.READ)
 	
 	if err != OK:
-		printerr("Failed to open sound.")
+		printerr("Failed to open sound", sound_path, " with error code ", err, ".")
 		var dir := Directory.new()
 		dir.remove(sound_path)
 		return null
@@ -50,7 +50,7 @@ func load_image(url: String, working_folder: String) -> ImageTexture:
 	var err := image.load(image_path)
 	
 	if err != OK:
-		printerr("Failed to load image from path", image_path, ". Error code: ", err)
+		printerr("Failed to load image from path ", image_path, ". Error code: ", err)
 		return null
 		
 	var texture := ImageTexture.new()
@@ -58,7 +58,7 @@ func load_image(url: String, working_folder: String) -> ImageTexture:
 	return texture
 
 func fetch_asset_path(url: String, working_folder: String) -> String:
-	var url_hash: String = str(hash(url))
+	var url_hash: String = url.sha256_text()
 	var assets_dir: String = working_folder + "/assets"
 	file_extension = url.get_extension()
 	var path: String = assets_dir + "/" + url_hash + "." + file_extension
@@ -73,8 +73,12 @@ func fetch_asset_path(url: String, working_folder: String) -> String:
 		return path
 		
 	else:
+		if !url.begins_with("http"):
+			yield(get_tree(), "idle_frame") # this function must be a coroutine
+			return ""
 		var http_request := HTTPRequest.new()
 		add_child(http_request)
+		print("Caching new asset: ", url)
 		http_request.download_file = path
 		http_request.timeout = 10
 		http_request.request(url)

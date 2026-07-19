@@ -71,3 +71,8 @@ func erase_object(to_remove):
 	pass
 
 
+func get_object_at_position(position: Vector2):
+	for object in object_manager.get_children():
+		if object.position.is_equal_approx(position):
+			return object
+	return null

@@ -19,7 +19,7 @@ func _ready():
 	var area_header: AreaHeader = CurrentLevelData.area.header
 	var ids: PoolStringArray = Singleton.Music.level_songs.ids
 
-	is_preset = area_header.music is int
+	is_preset = !area_header.music is String
 
 	for id in ids:
 		var index = ids.find(id)
