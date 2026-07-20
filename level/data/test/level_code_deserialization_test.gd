@@ -7,8 +7,9 @@ const EDITOR_PATH = preload("res://scenes/editor/editor.tscn")
 
 
 func _ready():
+	test_level_code_validation()
 	convert_debug_level()
-	
+
 #	instance_debug_level()
 	
 #	tile_byte_test(
@@ -38,13 +39,28 @@ func load_file():
 	file.close()
 	return content
 
+func test_level_code_validation():
+	var invalid_1 = get_path_as_text("res://level/data/test/invalid_level_1.txt")
+	var invalid_2 = get_path_as_text("res://level/data/test/invalid_level_2.txt")
+	var invalid_3 = get_path_as_text("res://level/data/test/invalid_level_3.txt")
+	print(level_code_validator_util.validate_level_code(invalid_1))
+	print(level_code_validator_util.validate_level_code(invalid_2))
+	print(level_code_validator_util.validate_level_code(invalid_3))
+	pass
+
+func get_path_as_text(path: String):
+	var file = File.new()
+	file.open(path, File.READ)
+	var content = file.get_as_text()
+	file.close()
+	return content
 
 func instance_debug_level():
 	var TEST_CODE_PATH = "res://level/data/test/archipelago_old.txt"
 	var file = File.new()
 	file.open(TEST_CODE_PATH, File.READ)
 	var content = file.get_as_text()
-	file.close()
+
 	CurrentLevelData.load_level_headers(content)
 	CurrentLevelData.switch_to_area(0)
 	get_tree().change_scene_to(EDITOR_PATH)
