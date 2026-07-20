@@ -90,6 +90,7 @@ func setup_level(level_info: LevelInfo, level_id: String, working_folder: String
 #	CurrentLevelData.selected_file = selected_file
 #
 #	CurrentLevelData.level_info.selected_shine = -1
+	print("ass")
 	CurrentLevelData.load_level_headers(level_info.level_code)
 	CurrentLevelData.switch_to_area(0)
 	
@@ -130,6 +131,7 @@ func start_level(level_info: LevelInfo, level_id: String, working_folder: String
 	if level_info.shine_details.size() == 1:
 		level_info.selected_shine = 0
 	
+	print("is me")
 	if do_transition:
 		# setup level when the transition finishes so music doesnt bug out
 		var _connect = SceneTransitions.connect("transition_finished", self, "setup_level", [level_info, level_id, working_folder, hub_level, selected_file], CONNECT_ONESHOT)
@@ -145,6 +147,7 @@ func start_level(level_info: LevelInfo, level_id: String, working_folder: String
 ## start level without setting any variables
 ## or doing any shine select screen checks
 func force_start_level():
+	print("no is me")
 	var _connect = SceneTransitions.connect("transition_finished", get_tree(), "change_scene", [PLAYER_PATH], CONNECT_ONESHOT)
 	
 	SceneTransitions.do_transition_fade(SceneTransitions.DEFAULT_TRANSITION_TIME)

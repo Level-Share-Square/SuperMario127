@@ -53,7 +53,6 @@ var spawn_pos
 
 
 func _ready():
-	is_middle(layer == middle)
 	if palette != 0:
 		sprite.texture = palette_textures[palette]
 

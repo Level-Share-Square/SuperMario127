@@ -38,7 +38,6 @@ var facing_direction := -1
 var time_alive = 0.0
 
 var hit = false
-var loaded = true
 var snap := Vector2(0, 12)
 
 
@@ -52,7 +51,7 @@ func _set_property_values():
 
 
 func player_entered(body):
-	if enabled and body.name.begins_with("Character") and !dead and character == null and layer == middle:
+	if enabled and body.name.begins_with("Character") and !dead and character == null:
 		character = body
 		explode_timer = 4
 		fuse_sound.play()
@@ -67,7 +66,6 @@ func create_coin():
 	object.properties.append(0)
 	object.properties.append(true)
 	object.properties.append(true)
-	object.properties.append(layer)
 	object.properties.append(true)
 	var velocity_x = -80 if int(time_alive * 10) % 2 == 0 else 80
 	object.properties.append(Vector2(velocity_x, -300))

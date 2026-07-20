@@ -6,9 +6,6 @@ export(Array, Texture) var palette_textures
 
 func _ready():
 	preview_position = custom_preview_position
-	if is_preview:
-		z_index = 0
-		$Sprite.z_index = 0
 	
 	if palette != 0:
 		$Sprite.texture = palette_textures[palette - 1]

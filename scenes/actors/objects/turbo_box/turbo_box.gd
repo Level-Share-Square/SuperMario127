@@ -79,7 +79,7 @@ func enter_detector(body):
 #			object.properties.append(true)
 #			object.properties.append(Vector2(0, -250))
 #			object.properties.append("TurboNozzle")
-			get_parent().create_object(object, false)
+			get_parent().create_object(object)
 		
 		else:
 			collect_sound.play()

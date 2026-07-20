@@ -6,8 +6,8 @@ enum BasePropertyIDs {
 	POSITION = -1
 	SCALE = 0
 	ROTATION = 1
-	VISIBLE = 2
-	ENABLED = 3
+	ENABLED = 2
+	VISIBLE = 3
 }
 
 var bg_modulate := Color(0.54, 0.54, 0.54, modulate.a)
@@ -131,6 +131,8 @@ func _ready():
 		if is_instance_valid(editor_hitbox):
 			editor_hitbox.queue_free()
 			
+#	print(object_data_ref.get_ref().properties)
+			
 	set_object_properties_from_data()
 	
 	match mode:
@@ -138,7 +140,6 @@ func _ready():
 			_object_ready()
 		Editor.mode:
 			_editor_ready()
-			
 			
 
 
@@ -272,10 +273,13 @@ func create_collision_polygons_from_tree(node: Node, node_transform: Transform2D
 			create_collision_polygons_from_tree(child, node_transform * child.transform, array)
 
 func set_object_properties_from_data() -> void:
-	var properties = object_data_ref.get_ref().default_values.duplicate(true)
-	properties.merge(object_data_ref.get_ref().properties, true)
+	var properties: Dictionary = {}
+	for property in object_data_ref.get_ref().default_values:
+		properties[property] = object_data_ref.get_ref().default_values[property]
+	for property in object_data_ref.get_ref().properties:
+		properties[property] = object_data_ref.get_ref().properties[property]
 	for property in properties:
-		if properties[property]:
+		if properties[property] != null:
 			set_property_by_index(property, properties[property])
 
 func set_object_data_property_metadata() -> void:
@@ -307,7 +311,7 @@ func get_property_index(key) -> int:
 
 func set_property(key, value, change_object_data = true, alias = null):
 	if typeof(self[key]) != typeof(value):
-		assert("Object tried to set property '" + key + "', but the provided type does not match.")
+		print("Object tried to set property '" + key + "', but the provided type does not match.")
 		return
 	
 	self[key] = value
@@ -318,6 +322,7 @@ func set_property(key, value, change_object_data = true, alias = null):
 		var id: int = property_ids.get(key, -1)
 		if id < 0:
 			return
+			
 		
 		object_data.set_property(get_property_index(key), value)
 		

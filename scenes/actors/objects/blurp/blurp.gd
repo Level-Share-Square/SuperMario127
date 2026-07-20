@@ -46,8 +46,6 @@ var snap := Vector2(0, 12)
 
 var bounced := false
 
-var loaded := true
-
 var character : Character
 
 export var top_point : Vector2
@@ -62,7 +60,7 @@ func _set_property_values():
 
 
 func detect_player(body : Character) -> void:
-	if character == null and enabled and body != null and !dead and layer == middle:
+	if character == null and enabled and body != null and !dead:
 		character = body
 
 func remove_player(body : Character) -> void:
@@ -116,7 +114,6 @@ func create_coin() -> void:
 	object.properties.append(0)
 	object.properties.append(true)
 	object.properties.append(true)
-	object.properties.append(layer)
 	object.properties.append(true)
 	var velocity_x = -80 if int(time_alive * 10) % 2 == 0 else 80
 	object.properties.append(Vector2(velocity_x, -300))
@@ -165,7 +162,7 @@ func _process(_delta) -> void:
 func _physics_process(delta : float) -> void:
 	time_alive += delta
 	
-	if mode != 1 and enabled and loaded and layer == middle:
+	if mode != 1 and enabled and loaded:
 		var is_in_platform := false
 		var platform_collision_enabled := false
 		for platform_body in platform_detector.get_overlapping_areas():

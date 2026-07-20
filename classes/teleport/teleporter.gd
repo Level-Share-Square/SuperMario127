@@ -65,18 +65,20 @@ func finish_exit_animation(character: Character) -> void:
 
 ### MISC
 func _ready():
-	CurrentLevelData.vars.teleporters.append([tag.to_lower(), self])
+	._ready()
+
 	if "\n" in tag:
 		tag = tag.replace("\n", "")
-
+	CurrentLevelData.vars.teleporters.append([tag.to_lower(), self])
 
 func begin_warp(character: Character) -> void:
+	print(teleport_mode)
 	match teleport_mode:
 		TeleportMode.Location:
 			warp_helper.location_warp(character, tag, max_pan_distance)
 		
 		TeleportMode.Area:
-#			print(target_area)
+			print(target_area)
 			warp_helper.area_warp(character, tag, target_area)
 		
 		TeleportMode.Level:

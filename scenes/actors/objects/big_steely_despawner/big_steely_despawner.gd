@@ -9,12 +9,12 @@ func _set_properties():
 	
 func _set_property_values():
 	set_property("speed_threshold", speed_threshold)
-func _physics_process(delta):
-	if layer == middle:
-		for body in steely_detector.get_overlapping_bodies():
-			if body.name.begins_with("Steely"):
-				var steely = body.get_parent()
-				if steely.velocity.length() < speed_threshold and !steely.fade_away:
-					steely.fade_away = true
-					steely.shape.disabled = true
-			
+	
+func _object_ground_physics_process(delta):
+	for body in steely_detector.get_overlapping_bodies():
+		if body.name.begins_with("Steely"):
+			var steely = body.get_parent()
+			if steely.velocity.length() < speed_threshold and !steely.fade_away:
+				steely.fade_away = true
+				steely.shape.disabled = true
+		

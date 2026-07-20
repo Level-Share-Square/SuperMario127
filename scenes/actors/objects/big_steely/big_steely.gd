@@ -80,7 +80,6 @@ func create_coin(): #creates a coin
 	object.properties.append(0)
 	object.properties.append(true)
 	object.properties.append(true)
-	object.properties.append(layer)
 	object.properties.append(true)
 	var power = int(time_alive*100) % 80
 	var velocity_x = -power if int(time_alive * 10) % 2 == 0 else power
@@ -165,7 +164,7 @@ func _physics_process(delta):
 		rotation = 0
 		velocity = body.move_and_slide(velocity)
 		
-		if !visiblity_notifier.is_on_screen() or global_position.y > (level_area.bounds.end.y * 32) + 96:
+		if !visiblity_notifier.is_on_screen() or global_position.y > (CurrentLevelData.area.header.bounds.end.y * 32) + 96:
 			queue_free()
 
 		for hit_body in break_detector.get_overlapping_bodies():

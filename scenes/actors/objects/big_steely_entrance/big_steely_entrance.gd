@@ -18,11 +18,10 @@ func _set_property_values():
 	set_property("spawn_interval", spawn_interval, 1)
 	set_property("steely_despawn_timer", steely_despawn_timer)
 
-func _ready():
-	if mode == 0 && layer == middle: # if in play mode and layer is middle
-		spawn_timer.wait_time = spawn_interval
-		spawn_timer.start()
-		spawn_timer.connect("timeout", self, "_on_spawn_timer_timeout")
+func _object_ready():
+	spawn_timer.wait_time = spawn_interval
+	spawn_timer.start()
+	spawn_timer.connect("timeout", self, "_on_spawn_timer_timeout")
 
 func _on_spawn_timer_timeout():
 	var no_steelies_in_front = check_for_blocking_elements()
@@ -54,7 +53,6 @@ func create_new_steely_object() -> Node:
 	object.properties.append(0)
 	object.properties.append(true)
 	object.properties.append(true)
-	object.properties.append(layer)
 
 	return objects.create_object(object, false)
 

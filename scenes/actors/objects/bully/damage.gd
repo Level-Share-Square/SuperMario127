@@ -56,7 +56,7 @@ func dived(player: Character):
 	enemy.set_state_by_name("KnockbackState")
 
 
-func damage_player(player: Character):
+func damage_player(player: Character) -> void:
 	.damage_player(player)
 	
 	if is_instance_valid(player):
