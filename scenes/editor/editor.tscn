@@ -248,16 +248,20 @@ script = ExtResource( 69 )
 [node name="ObjectPaint" type="Control" parent="ZIndex/Tools"]
 mouse_filter = 2
 script = ExtResource( 25 )
+tool_type = 1
 
 [node name="ObjectErase" type="Control" parent="ZIndex/Tools"]
 mouse_filter = 2
 script = ExtResource( 11 )
+tool_type = 1
 
 [node name="ObjectTileLock" type="Control" parent="ZIndex/Tools"]
 mouse_filter = 2
 script = ExtResource( 71 )
+tool_type = 1
 
 [node name="ObjectTrail" parent="ZIndex/Tools" instance=ExtResource( 72 )]
+tool_type = 1
 
 [node name="ObjectSelection" parent="ZIndex/Tools" instance=ExtResource( 34 )]
 tool_type = 1

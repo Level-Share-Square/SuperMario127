@@ -81,6 +81,7 @@ func object_hovered(object):
 	# Look you come up with a better object ID system when you have none
 	hovered_objects.get_or_add(object.name, object)
 	object.hovered = true
+	object.modulate_set()
 
 
 func object_unhovered(object):
@@ -89,6 +90,7 @@ func object_unhovered(object):
 	
 	hovered_objects.erase(object.name)
 	object.hovered = false
+	object.modulate_set()
 		
 
 

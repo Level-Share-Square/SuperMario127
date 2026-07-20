@@ -121,7 +121,7 @@ func _ready():
 #		if is_instance_valid(object_data_ref):
 #			visibility = object_data_ref.get_ref().properties[4]
 		
-		
+
 		
 		editor_hitbox.collision_mask = 2
 		var editor = get_tree().current_scene
@@ -271,6 +271,18 @@ func create_collision_polygons_from_tree(node: Node, node_transform: Transform2D
 	for child in node.get_children():
 		if child is Node2D:
 			create_collision_polygons_from_tree(child, node_transform * child.transform, array)
+
+func modulate_set():
+	modulate = default_modulate
+	
+	if selected:
+		modulate *= selected_modulate
+	
+	if hovered or not visibility:
+		modulate.a = hover_modulate.a
+		
+	if translucent:
+		modulate *= translucent_modulate
 
 func set_object_properties_from_data() -> void:
 	# silver you gotta clean this up
