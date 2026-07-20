@@ -112,10 +112,6 @@ func body_entered(body) -> void:
 func body_exited(body) -> void:
 	if body == stored_character:
 		stored_character = null
-
-func _process(delta):
-	print(name)
-
 ### INPUT
 func _physics_process(_delta) -> void:
 	# you're not able to enter a door if you're in the air, aren't controllable,

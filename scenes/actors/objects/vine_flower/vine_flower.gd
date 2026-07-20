@@ -14,7 +14,7 @@ func _set_property_values():
 	set_property("color", color, 1)
 
 func _ready():
-	collision_shape.disabled = !enabled or !layer == middle
+	collision_shape.disabled = !enabled
 	preview_position = custom_preview_position
 	if is_preview:
 		z_index = 0

@@ -40,7 +40,7 @@ func is_vanish(body):
 	return body.powerup != null and body.powerup.id == "Vanish"
 
 func kill(body):
-	if enabled and body.name.begins_with("Character") and !body.dead and body.controllable and !is_vanish(body) and layer == middle:
+	if enabled and body.name.begins_with("Character") and !body.dead and body.controllable and !is_vanish(body):
 		body.kill("green_demon")
 		enabled = false
 		chase = false
@@ -53,7 +53,7 @@ func _ready():
 	original_position = position
 	particles.process_material.scale = (scale.x + scale.y) / 2 # Average works well enough
 	particles.amount = 6 * current_speed
-	if mode != 1 and layer == middle:
+	if mode != 1:
 		var _connect = area.connect("body_entered", self, "kill")
 		if chase:
 			Singleton.MiscShared.play_green_demon_audio(revolve_sound, cc) #since the game doesn't detect a rotation at the start, we play the sound manually

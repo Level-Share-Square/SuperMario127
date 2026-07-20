@@ -140,7 +140,7 @@ func _physics_process(delta):
 					hit_body.get_parent().steely_hit(global_position)
 		
 	
-		gravity = CurrentLevelData.level_data.areas[CurrentLevelData.area].gravity
+		gravity = CurrentLevelData.area.header.gravity
 		#body.apply_central_impulse(Vector2(0, gravity))
 		velocity.y += gravity * gravity_scale
 		velocity.y += gravity * gravity_scale

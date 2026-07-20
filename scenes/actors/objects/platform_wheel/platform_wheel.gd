@@ -69,8 +69,8 @@ func _process(_delta):
 				instance.set_parts(parts)
 				
 				# Disable the collision if enabled = false
-				instance.collision_shape.disabled = !enabled or !layer == middle
-				instance.platform_area_collision_shape.disabled = !enabled or !layer == middle
+				instance.collision_shape.disabled = !enabled
+				instance.platform_area_collision_shape.disabled = !enabled
 				
 		elif platform_count<platforms.size():
 			var delta_count = platforms.size() - platform_count
@@ -117,8 +117,8 @@ func _ready():
 		instance.z_index = z_index
 		
 		# Disable the collision if enabled = false
-		instance.collision_shape.disabled = !enabled or !layer == middle
-		instance.platform_area_collision_shape.disabled = !enabled or !layer == middle
+		instance.collision_shape.disabled = !enabled
+		instance.platform_area_collision_shape.disabled = !enabled
 		
 func _physics_process(_delta):
 	time_alive += fps_util.PHYSICS_DELTA * speed

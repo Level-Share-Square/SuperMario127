@@ -43,7 +43,7 @@ func _ready():
 	use_area.connect("mouse_exited", self, "_on_UseArea_mouse_exited")
 
 	connect("property_changed", self, "_on_property_changed")
-	if enabled and layer == middle:
+	if enabled:
 		var _connect = use_area.connect("body_entered", self, "set_liquid_level")
 	yield(get_tree(), "physics_frame")
 	if mode != 1:

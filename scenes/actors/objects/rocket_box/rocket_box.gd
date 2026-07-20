@@ -74,7 +74,7 @@ func enter_detector(body):
 #			object.properties.append(Vector2(1, 1))
 #			object.properties.append(0)
 #			object.properties.append(true)
-#			object.properties.append(layer)
+#			
 #			object.properties.append(Vector2(0, -250))
 #			object.properties.append("RocketNozzle")
 			get_parent().create_object(object, false)

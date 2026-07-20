@@ -60,7 +60,7 @@ export var property_ids: Dictionary = {
 	"palette": BasePropertyIDs.PALETTE,
 	"position": BasePropertyIDs.POSITION,
 	"scale": BasePropertyIDs.SCALE,
-	"rotation": BasePropertyIDs.ROTATION,
+	"rotation_degrees": BasePropertyIDs.ROTATION,
 	"enabled": BasePropertyIDs.ENABLED,
 	"visible": BasePropertyIDs.VISIBLE
 }
@@ -273,11 +273,14 @@ func create_collision_polygons_from_tree(node: Node, node_transform: Transform2D
 			create_collision_polygons_from_tree(child, node_transform * child.transform, array)
 
 func set_object_properties_from_data() -> void:
+	# silver you gotta clean this up
 	var properties: Dictionary = {}
 	for property in object_data_ref.get_ref().default_values:
 		properties[property] = object_data_ref.get_ref().default_values[property]
+		
 	for property in object_data_ref.get_ref().properties:
 		properties[property] = object_data_ref.get_ref().properties[property]
+		
 	for property in properties:
 		if properties[property] != null:
 			set_property_by_index(property, properties[property])
@@ -311,7 +314,7 @@ func get_property_index(key) -> int:
 
 func set_property(key, value, change_object_data = true, alias = null):
 	if typeof(self[key]) != typeof(value):
-		print("Object tried to set property '" + key + "', but the provided type does not match.")
+		print("Object ", name, " tried to set property '" + key + "', but the provided type does not match.")
 		return
 	
 	self[key] = value

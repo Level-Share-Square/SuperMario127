@@ -87,7 +87,7 @@ func _ready() -> void:
 	player_exit_detector.scale = Vector2(1, 1) / scale
 	CurrentLevelData.enemies_instanced += 1
 	time_alive += float(CurrentLevelData.enemies_instanced) / 2.0
-	gravity = CurrentLevelData.level_data.areas[CurrentLevelData.area].gravity
+	gravity = CurrentLevelData.area.header.gravity
 	
 	if scale.x < 0:
 		scale.x = abs(scale.x)

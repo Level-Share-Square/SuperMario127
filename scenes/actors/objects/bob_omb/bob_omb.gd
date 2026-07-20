@@ -91,13 +91,13 @@ func _ready() -> void:
 	player_detector.scale = Vector2(1, 1) / scale
 	CurrentLevelData.enemies_instanced += 1
 	time_alive += float(CurrentLevelData.enemies_instanced) / 2.0
-	gravity = CurrentLevelData.level_data.areas[CurrentLevelData.area].gravity
+	gravity = CurrentLevelData.area.header.gravity
 	
 	if scale.x < 0:
 		scale.x = abs(scale.x)
 		facing_direction = -facing_direction
 	
-	if !enabled and !layer == middle:
+	if !enabled:
 		kinematic_body.set_collision_mask_bit(3, false)
 	
 func _process(_delta):
@@ -107,7 +107,7 @@ func _process(_delta):
 		sprite.frame = wrapi(OS.get_ticks_msec() / 166, 0, 8)
 		
 func exploded(explosion_pos : Vector2):
-	if enabled and layer == middle:
+	if enabled:
 		hit = true
 		snap = Vector2(0, 0)
 		velocity.x = (kinematic_body.global_position - explosion_pos).normalized().x * 275
@@ -136,7 +136,7 @@ func shell_hit(shell_pos : Vector2):
 	character = 0 # hacker chungus
 
 func _physics_process(delta):
-	if mode == 1 or !enabled or !layer == middle:
+	if mode == 1 or !enabled:
 		return
 	
 	var is_in_platform = false

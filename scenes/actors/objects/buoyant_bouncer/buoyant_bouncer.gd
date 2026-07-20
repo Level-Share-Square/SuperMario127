@@ -255,7 +255,7 @@ func _physics_process(delta):
 		if waterdet.get_overlapping_areas().size() == 0:
 			in_water = false
 			
-		var bounds = CurrentLevelData.level_data.areas[CurrentLevelData.area].bounds 
+		var bounds = CurrentLevelData.area.header.bounds 
 		if global_position.x < bounds.position.x * 32 - 300 or global_position.x > bounds.end.x * 32 + 300 or global_position.y > bounds.end.y * 32+ 300:
 			global_position = spawn_pos
 		var result_vector = global_position
