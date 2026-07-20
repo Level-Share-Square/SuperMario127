@@ -41,7 +41,6 @@ func goonie_ready():
 	if speed == 0:
 		speed = 0.00001
 		set_property("speed", speed, true)
-	$StaticBody2D/CollisionShape2D.disabled = !enabled or !layer == middle
 	spreads_started += CurrentLevelData.enemies_instanced % 3
 	CurrentLevelData.enemies_instanced += 1
 	var add_amount = 0

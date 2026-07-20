@@ -24,6 +24,9 @@ func erase_tile(coords: Vector2) -> void:
 
 func add_object(data) -> void:
 	object_data.append(data)
+	
+func erase_object(data) -> void:
+	object_data.erase(data)
 
 
 func place_object(position: Vector2, data: ObjectData):

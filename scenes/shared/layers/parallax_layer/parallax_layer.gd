@@ -78,11 +78,11 @@ func erase_tile(to_remove: Vector2):
 
 # Objects
 func add_object(to_add: ObjectData, modify_data: bool = false):
-	object_manager.place_object(to_add, modify_data)
+	return object_manager.place_object(to_add, modify_data)
 
 
 func place_object(to_place: ObjectData, modify_data: bool = false):
-	object_manager.place_object(to_place, modify_data)
+	return object_manager.place_object(to_place, modify_data)
 
 
 func erase_object(to_remove):

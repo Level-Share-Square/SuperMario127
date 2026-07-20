@@ -13,13 +13,5 @@ func create_new_object():
 	object = shared.create_object(object_data, layer)
 
 func remove_object():
-	var objects_node: Node = shared.get_objects_manager(layer)
-	
-	object_data = object.object_data_ref.get_ref()
-	object_index = objects_node.find(object_data)
-
-	objects_node.remove_child(object)
-
-func restore_object():
-	var objects_node: Node = shared.get_objects_manager(layer)
-	objects_node.add_child(object)
+	var objects_node: ObjectManager = shared.get_objects_manager(layer)
+	objects_node.erase_object(object)

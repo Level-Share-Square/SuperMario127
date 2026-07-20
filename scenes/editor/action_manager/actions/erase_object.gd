@@ -8,4 +8,4 @@ func _do() -> void:
 
 func _undo() -> void:
 	if is_instance_valid(object):
-		restore_object()
+		create_new_object()

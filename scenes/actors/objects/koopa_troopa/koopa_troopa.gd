@@ -193,7 +193,7 @@ func _physics_process(delta):
 	if !loaded and visibility_notifier and visibility_notifier.is_on_screen():
 		loaded = true
 	if mode != 1 and enabled and !dead and loaded:
-		var level_bounds = CurrentLevelData.level_data.areas[CurrentLevelData.area].bounds
+		var level_bounds = CurrentLevelData.area.header.bounds
 		if !hit:
 			# Run the appropriate physics process function
 			if is_instance_valid(shell):

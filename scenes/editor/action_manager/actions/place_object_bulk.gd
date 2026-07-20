@@ -7,17 +7,12 @@ var new_objects: Dictionary = {}
 func _do() -> void:
 #	print(new_objects)
 	if !new_objects.empty():
-		for i in new_objects:
-			object = i
-			object_data = i.level_object.get_ref()
-			object_index = i.get_index()
-			restore_object()
-		return
+		objects = new_objects.values().duplicate(true)
+		new_objects.clear()
 	for i in objects:
 		object_data = i
-		var new_object = shared.create_object(object_data, true)
-#		print(new_object)
-		new_objects[new_object] = new_object.name
+		var new_object = shared.create_object(object_data, layer)
+		new_objects[new_object] = object_data
 		
 
 func _undo() -> void:

@@ -43,15 +43,9 @@ func _click_left(_event: InputEvent, _world_pos: Vector2):
 	update_objects_array()
 
 
-func create_object_data(position: Vector2, object_id: int, palette: int) -> ObjectDataOld:
-	var data = ObjectDataOld.new()
-	data.type_id = object_id
-	data.palette = palette
-	data.properties.append(position)
-	data.properties.append(Vector2(1, 1))
-	data.properties.append(0)
-	data.properties.append(true)
-	data.properties.append(true)
+func create_object_data(position: Vector2, object_id: int, palette: int) -> ObjectData:
+	var metadata := ObjectMetadata.new(position, object_id, palette)
+	var data := ObjectData.new(metadata)
 	
 	return data
 	
@@ -72,6 +66,7 @@ func _on_Check_button_down():
 	var action := PlaceObjectBulkAction.new()
 	action.shared = shared
 	action.objects = objects_array
+	action.layer = editor.layer
 	editor.action_manager.commit_action(action)
 	_on_Tools_tool_changed()
 
@@ -135,7 +130,7 @@ func update_objects_array() -> void:
 	for object in objects_array:
 		var preview = TextureRect.new()
 		preview.texture = editor.selected_item.previews[editor.selected_item.palette]
-		preview.rect_position = object.properties[0] - preview.texture.get_size()/2
+		preview.rect_position = object.get_property(-2) - preview.texture.get_size()/2
 		preview.modulate.a = 0.5
 		preview.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		previews.add_child(preview)

@@ -42,6 +42,18 @@ func set_property(property_id: int, value) -> void:
 				properties[property_id] = value
 			else:
 				properties.get_or_add(property_id, value)
+				
+func get_property(property_id: int):
+	match property_id:
+		PALETTE_PROP_ID:
+			return metadata.palette
+		POSITION_PROP_ID:
+			return metadata.position
+		ENABLED_PROP_ID:
+			return metadata.enabled
+		_:
+			properties.get(property_id)
+	
 
 
 func is_default_value(property_id: int, value) -> bool:

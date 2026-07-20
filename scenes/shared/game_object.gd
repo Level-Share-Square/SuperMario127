@@ -6,8 +6,8 @@ enum BasePropertyIDs {
 	POSITION = -1
 	SCALE = 0
 	ROTATION = 1
-	ENABLED = 2
-	VISIBLE = 3
+	VISIBLE = 2
+	ENABLED = 3
 }
 
 var bg_modulate := Color(0.54, 0.54, 0.54, modulate.a)
@@ -328,6 +328,9 @@ func set_property(key, value, change_object_data = true, alias = null):
 	
 	if mode == 1 and !is_preview:
 		emit_signal("property_changed", key, value)
+		
+func get_property(key):
+	return object_data_ref.get_ref().get_property(get_property_index(key))
 
 
 func get_editor_alias(key):
