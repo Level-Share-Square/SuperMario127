@@ -41,8 +41,7 @@ func collect(body):
 		
 func _ready():
 	yield(get_tree().create_timer(0.2), "timeout")
-	if layer == middle:
-		var _connect = area.connect("body_entered", self, "collect")
+	var _connect = area.connect("body_entered", self, "collect")
 
 func _process(delta):
 	if respawn_timer > 0 and can_respawn:

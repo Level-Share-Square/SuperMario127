@@ -72,13 +72,7 @@ func _ready():
 		Singleton.Music.play() # make sure the music will play even if it's stopped prior to loading the player
 	
 	can_collect_coins.append(get_node(character))
-		
-	CurrentLevelData.vars.max_red_coins = 0
-	CurrentLevelData.vars.max_shine_shards = 0
-	CurrentLevelData.vars.max_purple_starbits = 0
-	CurrentLevelData.vars.teleporters = []
-	CurrentLevelData.vars.liquids = []
-	CurrentLevelData.vars.checkpoints = []
+	
 	
 	var player_char = get_node(character)
 	player_char.character = Singleton.PlayerSettings.player1_character
