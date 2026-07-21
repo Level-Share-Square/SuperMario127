@@ -10,7 +10,8 @@ var layer_data: LayerData
 #		place_tile(get_global_mouse_position() / 32, 1, 0, 0, true)
 #	elif event.is_action_pressed("RMB"):
 #		erase_tile(get_global_mouse_position() / 32, true)
-
+func _ready():
+	tile_set
 
 func load_in(s_layer_data: LayerData):
 	layer_data = s_layer_data

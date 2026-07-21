@@ -106,16 +106,13 @@ func area_warp(character: Character, target_tag: String, target_area: int) -> vo
 	]
 #	if object_type == "area_transition":
 #		CurrentLevelData.vars.transition_character_data.append(AreaTransitionHelper.new(character.velocity, character.state, character.facing_direction, to_local(character.position), self.vertical))
-	
-	CurrentLevelData.vars.transition_character_data_2 = []
-	
+
 #	CurrentLevelData.vars.transition_data = [
 #		object_type, 
 #		target_tag,
 #		teleportation_mode
 #	]
 	CurrentLevelData.vars.transition_data = {"target_tag": target_tag}
-	print("L")
 	character.switch_areas(target_area, 0.5)
 
 
