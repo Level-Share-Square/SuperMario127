@@ -337,7 +337,6 @@ func set_property(key, value, change_object_data = true, alias = null):
 		var id: int = property_ids.get(key, -1)
 		if id < 0:
 			return
-			
 		
 		object_data.set_property(get_property_index(key), value)
 		
