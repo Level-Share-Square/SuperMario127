@@ -154,6 +154,7 @@ static func deserialize_area_header_code(area_code: String) -> AreaHeader:
 	if vars == null:
 		area_header.mark_as_faulty("Invalid data in area header")
 		return area_header
+	area_header.area_code = area_code
 	area_header.bounds = set_or_use_default_value(vars, 0, area_header.bounds)
 	area_header.name = set_or_use_default_value(vars, 1, area_header.name)
 	area_header.sky = set_or_use_default_value(vars, 2, area_header.sky)
