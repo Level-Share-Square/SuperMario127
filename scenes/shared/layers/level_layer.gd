@@ -19,8 +19,9 @@ var activated_mission_ids: PoolIntArray = []
 func load_in(layer_data: LayerData):
 	autoset_tint = layer_data.layer_metadata.autoset_tint
 	activated_mission_ids = layer_data.layer_metadata.activated_mission_ids
-	
-	set_layer_modulate(layer_data.layer_metadata.layer_tint)
+	var tint = layer_data.layer_metadata.layer_tint
+	# A value of layer tint should be 1-100
+	set_layer_modulate(Color(tint.r * tint.a, tint.g * tint.a, tint.b * tint.a, layer_data.layer_metadata.layer_opacity))
 	set_order(layer_data.layer_metadata.order)
 
 
