@@ -16,7 +16,7 @@ func get_resource_path(song_id: String) -> String:
 	return RESOURCE_PATH + song_id + ".tres"
 	
 func _ready():
-	var area_header: AreaHeader = CurrentLevelData.area.header
+	var area_header: AreaHeader = CurrentLevelData.current_area.header
 	var ids: PoolStringArray = Singleton.Music.level_songs.ids
 
 	is_preset = !area_header.music is String
@@ -56,7 +56,7 @@ func on_switch():
 	set_preset(is_preset)
 
 func on_used(panel: SongPanel):
-	CurrentLevelData.area.header.music = panel.id
+	CurrentLevelData.current_area.header.music = panel.id
 
 	if song_in_use:
 		song_in_use.disable_button(false)

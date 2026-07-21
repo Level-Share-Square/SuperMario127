@@ -62,7 +62,7 @@ func _ready():
 			if enabled and !collected and (body and body.name.begins_with("Character") and !body.dead):
 				collect(body)
 	
-	gravity = CurrentLevelData.area.header.gravity
+	gravity = CurrentLevelData.current_area.header.gravity
 	
 #	print(collision_shape)
 	

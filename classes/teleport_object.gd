@@ -90,12 +90,12 @@ func change_areas(entering_character : Character, entering, force_fadeout):
 	if is_instance_valid(get_tree().get_current_scene().get_node(get_tree().get_current_scene().character2)):
 			character2 = get_tree().get_current_scene().get_node(get_tree().get_current_scene().character2)
 	if area_id >= CurrentLevelData.level_data.areas.size():
-		area_id = CurrentLevelData.area
+		area_id = CurrentLevelData.current_area
 	
 	if entering:
 		if is_instance_valid(timer_manager):
 			
-			if (area_id == CurrentLevelData.area):
+			if (area_id == CurrentLevelData.current_area):
 				
 				var area_timer: Control = timer_manager.get_timer("area_timer")
 				
@@ -110,12 +110,12 @@ func change_areas(entering_character : Character, entering, force_fadeout):
 			printerr("Couldn't find timer manager node!")
 		
 		# band aid crash fix
-		while CurrentLevelData.vars.liquid_positions.size() <= CurrentLevelData.area:
+		while CurrentLevelData.vars.liquid_positions.size() <= CurrentLevelData.current_area:
 			CurrentLevelData.vars.liquid_positions.append([])
 		
-		CurrentLevelData.vars.liquid_positions[CurrentLevelData.area] = []
+		CurrentLevelData.vars.liquid_positions[CurrentLevelData.current_area] = []
 		for liquid in CurrentLevelData.vars.liquids:
-			CurrentLevelData.vars.liquid_positions[CurrentLevelData.area].append(liquid[1].save_pos)
+			CurrentLevelData.vars.liquid_positions[CurrentLevelData.current_area].append(liquid[1].save_pos)
 		
 		var powerup_array = [null, null, null]
 		if is_instance_valid(character.powerup):

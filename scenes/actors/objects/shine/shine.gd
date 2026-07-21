@@ -111,8 +111,8 @@ func _ready() -> void:
 	if mode != 1: # not in edit mode
 		if required_purples > 0:
 			purple_starbits_activate = true
-			CurrentLevelData.vars.required_purple_starbits[CurrentLevelData.area].append(required_purples)
-			CurrentLevelData.vars.required_purple_starbits[CurrentLevelData.area].sort()
+			CurrentLevelData.vars.required_purple_starbits[CurrentLevelData.current_area].append(required_purples)
+			CurrentLevelData.vars.required_purple_starbits[CurrentLevelData.current_area].sort()
 		else:
 			purple_starbits_activate = false
 		

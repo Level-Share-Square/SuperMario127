@@ -15,7 +15,7 @@ const layer_spacing: int = 16
 
 
 func load_in():
-	load_layers(CurrentLevelData.area.layers)
+	load_layers(CurrentLevelData.current_area.layers)
 
 
 func load_layers(layer_data_list: Array):
@@ -43,14 +43,14 @@ func add_layer(layer_data = null, add_to_data: bool = false):
 	layers.append(new_layer)
 	
 	if add_to_data:
-		CurrentLevelData.area.layers.append(layer_data)
+		CurrentLevelData.current_area.layers.append(layer_data)
 
 
 func remove_layer(index: int, remove_from_data: bool = false):
 	var removed = layers[index]
 	layers.remove(index)
 	if remove_from_data:
-		CurrentLevelData.area.layers.remove(index)
+		CurrentLevelData.current_area.layers.remove(index)
 	
 func set_tile(x: int, y: int, index: int, tileset_id: int, tile_id: int, palette_id : int = 0):
 	layers[index].place_tile(Vector2(x, y), tileset_id, tile_id, palette_id, true, true)

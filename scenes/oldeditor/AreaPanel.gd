@@ -48,21 +48,21 @@ func _ready():
 	_connect = duplicate_button.connect("pressed", self, "duplicate_area")
 	_connect = move_down_button.connect("pressed", self, "move_area_down")
 	_connect = move_up_button.connect("pressed", self, "move_area_up")
-	if id == CurrentLevelData.area:
+	if id == CurrentLevelData.current_area:
 		switch_to_button.disabled = true
 		delete_button.disabled = true
 	check_moveability()
 
 func switch_to_area():
-	if id != CurrentLevelData.area:
-		CurrentLevelData.area = id
+	if id != CurrentLevelData.current_area:
+		CurrentLevelData.current_area = id
 		SceneTransitions.reload_scene()
 
 func delete_area():
-	if id != CurrentLevelData.area:
+	if id != CurrentLevelData.current_area:
 		CurrentLevelData.level_data.areas.remove(id)
-		if CurrentLevelData.area > id:
-			CurrentLevelData.area -= 1
+		if CurrentLevelData.current_area > id:
+			CurrentLevelData.current_area -= 1
 		get_parent().get_parent().get_parent().reload_areas()
 		
 func check_moveability():
@@ -89,13 +89,13 @@ func move_area_down():
 		CurrentLevelData.level_data.areas.insert(id+1, area1)
 		
 		# Properly re-assign the current area.
-		if (CurrentLevelData.area == id):
+		if (CurrentLevelData.current_area == id):
 			# If the area we're moving is the current area.
-			CurrentLevelData.area += 1
+			CurrentLevelData.current_area += 1
 			
-		elif (abs(CurrentLevelData.area - id) == 1):
+		elif (abs(CurrentLevelData.current_area - id) == 1):
 			# If the area we're moving is next to the current area.
-			CurrentLevelData.area -= 1
+			CurrentLevelData.current_area -= 1
 			
 		# Don't re-assign the current area if it isn't next to the area we're moving.
 		get_parent().get_parent().get_parent().reload_areas()
@@ -108,12 +108,12 @@ func move_area_up():
 		CurrentLevelData.level_data.areas.remove(id)
 		CurrentLevelData.level_data.areas.insert(id-1, area1)
 		
-		if (CurrentLevelData.area == id):
+		if (CurrentLevelData.current_area == id):
 			
-			CurrentLevelData.area -= 1
+			CurrentLevelData.current_area -= 1
 			
-		elif (abs(CurrentLevelData.area - id) == 1):
+		elif (abs(CurrentLevelData.current_area - id) == 1):
 			
-			CurrentLevelData.area += 1
+			CurrentLevelData.current_area += 1
 			
 		get_parent().get_parent().get_parent().reload_areas()

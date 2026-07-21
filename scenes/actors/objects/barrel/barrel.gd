@@ -47,7 +47,7 @@ func _set_property_values():
 
 func _ready() -> void:
 	CurrentLevelData.enemies_instanced += 1
-	gravity = CurrentLevelData.area.header.gravity*100
+	gravity = CurrentLevelData.current_area.header.gravity*100
 	sprite_color.modulate = color
 	sprite.play("default")
 	sprite_color.play("default")
@@ -143,8 +143,8 @@ func roll(entered_body):
 
 func on_water_entered(area):
 	gravity_scale = 0.3
-	gravity = CurrentLevelData.area.header.gravity * gravity_scale * 100
+	gravity = CurrentLevelData.current_area.header.gravity * gravity_scale * 100
 	
 func on_water_exited(area):
 	gravity_scale = 1
-	gravity = CurrentLevelData.area.header.gravity * gravity_scale * 100
+	gravity = CurrentLevelData.current_area.header.gravity * gravity_scale * 100

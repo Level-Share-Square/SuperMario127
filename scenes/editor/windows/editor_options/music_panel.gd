@@ -25,7 +25,7 @@ func _ready():
 		line.connect("text_changed", self, "on_text_changed")
 
 func update_panel():
-	var area = CurrentLevelData.area
+	var area = CurrentLevelData.current_area
 	var raw_music
 	if music_type == 0:
 		raw_music = area.header.music
@@ -49,7 +49,7 @@ func update_panel():
 		
 
 func save_song() -> String:
-	var area = CurrentLevelData.area
+	var area = CurrentLevelData.current_area
 	var encoded_song: String = ""
 	encoded_song += "LP%s=%s|LEP=%sN=%s" % [loop_start, url, loop_end, song_name]
 	if music_type == 0:

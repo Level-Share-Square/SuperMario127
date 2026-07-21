@@ -59,9 +59,9 @@ func _ready():
 			CurrentLevelData.switch_to_area(Singleton.CheckpointSaved.current_area)
 		CurrentLevelData.vars.reload()
 	
-	if CurrentLevelData.area.header.timer > 0.00:
+	if CurrentLevelData.current_area.header.timer > 0.00:
 		var timer_manager = get_timer_manager()
-		timer_manager.add_set_timer("area_timer", CurrentLevelData.area.header.timer, "death", true, true)
+		timer_manager.add_set_timer("area_timer", CurrentLevelData.current_area.header.timer, "death", true, true)
 #		vignette.visible = true
 	
 	load_in()
@@ -77,7 +77,7 @@ func _ready():
 	var player_char = get_node(character)
 	player_char.character = Singleton.PlayerSettings.player1_character
 	player_char.number_of_players = Singleton.PlayerSettings.number_of_players
-	for object in CurrentLevelData.area.get_objects_on_ground():
+	for object in CurrentLevelData.current_area.get_objects_on_ground():
 		if object.metadata.type_id == 0:
 			player_char.spawn_pos = object.metadata.position
 	

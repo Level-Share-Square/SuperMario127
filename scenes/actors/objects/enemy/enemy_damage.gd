@@ -26,7 +26,7 @@ var level_bounds: Rect2
 
 
 func _ready():
-	level_bounds = CurrentLevelData.area.header.bounds
+	level_bounds = CurrentLevelData.current_area.header.bounds
 
 
 ## sorry but this has to be done, we don't want mario to be able to stand inside an enemy

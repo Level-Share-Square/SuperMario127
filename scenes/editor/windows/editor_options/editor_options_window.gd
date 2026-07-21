@@ -21,4 +21,4 @@ func on_editor_settings_pressed():
 	emit_signal("open_editor_settings")
 
 func update_background():
-	owner.backgrounds.update_background_area(CurrentLevelData.area.header)
+	owner.backgrounds.update_background_area(CurrentLevelData.current_area.header)

@@ -70,7 +70,7 @@ func update_autotile(coords: Vector2, use_godot_autotile: bool = true):
 # ground layers (and maybe even temporarily for that considering you can store
 # tile data literally anywhere now
 func _add_margins():
-	var bounds: Rect2 = CurrentLevelData.area.header.bounds
+	var bounds: Rect2 = CurrentLevelData.current_area.header.bounds
 	var tile: int = tile_set.find_tile_by_name("LevelMargin")
 	
 	var left: int = bounds.position.x - 1

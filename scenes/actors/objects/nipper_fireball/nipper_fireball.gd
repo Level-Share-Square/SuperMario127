@@ -21,7 +21,7 @@ var hit: = false
 
 func _ready():
 	if mode != 1:
-		gravity = CurrentLevelData.area.header.gravity
+		gravity = CurrentLevelData.current_area.header.gravity
 		if bouncy:
 			modulate = Color(0, 1, 1)
 			bounce_count = 2

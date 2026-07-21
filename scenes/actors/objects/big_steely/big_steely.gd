@@ -140,7 +140,7 @@ func _physics_process(delta):
 					hit_body.get_parent().steely_hit(global_position)
 		
 	
-		gravity = CurrentLevelData.area.header.gravity
+		gravity = CurrentLevelData.current_area.header.gravity
 		#body.apply_central_impulse(Vector2(0, gravity))
 		velocity.y += gravity * gravity_scale
 		velocity.y += gravity * gravity_scale
@@ -164,7 +164,7 @@ func _physics_process(delta):
 		rotation = 0
 		velocity = body.move_and_slide(velocity)
 		
-		if !visiblity_notifier.is_on_screen() or global_position.y > (CurrentLevelData.area.header.bounds.end.y * 32) + 96:
+		if !visiblity_notifier.is_on_screen() or global_position.y > (CurrentLevelData.current_area.header.bounds.end.y * 32) + 96:
 			queue_free()
 
 		for hit_body in break_detector.get_overlapping_bodies():

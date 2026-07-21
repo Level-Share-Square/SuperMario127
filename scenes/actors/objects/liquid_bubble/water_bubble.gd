@@ -38,8 +38,8 @@ func _set_property_values():
 
 func _ready():
 	var id = CurrentLevelData.vars.current_liquid_id
-	if CurrentLevelData.vars.liquid_positions.size() > CurrentLevelData.area and CurrentLevelData.vars.liquid_positions[CurrentLevelData.area].size() > id:
-		var set_position = CurrentLevelData.vars.liquid_positions[CurrentLevelData.area][id]
+	if CurrentLevelData.vars.liquid_positions.size() > CurrentLevelData.current_area and CurrentLevelData.vars.liquid_positions[CurrentLevelData.current_area].size() > id:
+		var set_position = CurrentLevelData.vars.liquid_positions[CurrentLevelData.current_area][id]
 		if set_position != Vector2():
 			global_position = set_position
 			save_pos = set_position

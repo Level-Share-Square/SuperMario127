@@ -79,7 +79,7 @@ func goonie_ready():
 	bomb_body = get_node("StaticBody2D/BombBody")
 	poof = get_node("Sprite/Poof")
 	
-	gravity = CurrentLevelData.area.header.gravity
+	gravity = CurrentLevelData.current_area.header.gravity
 	wingless_collision_layer = wingless_body.collision_layer
 	wingless_collision_mask = wingless_body.collision_mask
 	bomb_collision_mask = bomb_body.collision_mask

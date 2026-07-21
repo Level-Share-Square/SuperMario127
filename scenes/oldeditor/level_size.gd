@@ -30,7 +30,7 @@ onready var click_sound = $ClickSound
 
 func update_label():
 	var data = CurrentLevelData.level_data
-	var area = data.areas[CurrentLevelData.area]
+	var area = data.areas[CurrentLevelData.current_area]
 	
 	size_label.text = "x: " + str(area.settings.bounds.size.x) + "\ny: " + str(area.settings.bounds.size.y)
 	
@@ -65,7 +65,7 @@ func button_hovered():
 
 func button_press():
 	var data = CurrentLevelData.level_data
-	var area = data.areas[CurrentLevelData.area]
+	var area = data.areas[CurrentLevelData.current_area]
 	
 	var amount = 1
 	

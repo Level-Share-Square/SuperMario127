@@ -30,10 +30,10 @@ var mission_data: Array
 var loaded_areas: Dictionary = {}
 
 var area_id: int = -1
-var area: AreaData
+var current_area: AreaData
 
-var mission_id: int = -1
-var mission: MissionData
+var current_mission_id: int = -1
+var current_mission: MissionData
 
 var enemies_instanced: int = 0
 
@@ -133,7 +133,7 @@ func switch_to_area(new_area_id: int, always_reload: bool = true, keep_old_loade
 	
 	area_id = new_area_id
 	
-	area = load_level_area(area_id, always_reload)
+	current_area = load_level_area(area_id, always_reload)
 
 
 func unload_all_but_current_area() -> void:

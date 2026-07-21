@@ -15,7 +15,7 @@ func on_mouse_released():
 	reset_bounds()
 	
 func draw_tile(pos: Vector2) -> void:
-	var level_bounds: Rect2 = CurrentLevelData.area.header.bounds
+	var level_bounds: Rect2 = CurrentLevelData.current_area.header.bounds
 	if not level_bounds.has_point(pos):
 		return
 	

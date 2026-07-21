@@ -82,7 +82,7 @@ func start_door_enter_animation(character : Character) -> void:
 		if CurrentLevelData.vars.coins_collected < get_parent().required_amount:
 			can_enter = false
 	elif get_parent().collectible == "star bit":
-		var star_bits_collected: int = CurrentLevelData.vars.purple_starbits_collected[CurrentLevelData.area][0]
+		var star_bits_collected: int = CurrentLevelData.vars.purple_starbits_collected[CurrentLevelData.current_area][0]
 		if star_bits_collected < get_parent().required_amount:
 			can_enter = false
 	else:

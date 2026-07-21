@@ -91,7 +91,7 @@ func on_undo():
 func on_copy():
 	if editor.tool_manager.current_tool == self:
 		var tile_data := TileData.new()
-		var layer_chunks = CurrentLevelData.area.layers[editor.layer].tile_data.chunks
+		var layer_chunks = CurrentLevelData.current_area.layers[editor.layer].tile_data.chunks
 		for position in editor.selected_tiles:
 			var chunk_pos = tile_data.get_chunk_coords(position)
 			

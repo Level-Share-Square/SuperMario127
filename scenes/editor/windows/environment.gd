@@ -40,7 +40,7 @@ func _ready():
 	palette_menu_button.connect("toggled", self, "_on_palette_menu_toggled")
 	
 	# I was wrong dignity... sorry... we can just do this on ready
-	area = CurrentLevelData.level_data.areas[CurrentLevelData.area]
+	area = CurrentLevelData.level_data.areas[CurrentLevelData.current_area]
 	
 	
 	

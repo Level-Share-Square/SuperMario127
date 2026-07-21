@@ -46,7 +46,7 @@ func load_in():
 #			if object.type_id == 0:
 #				position = object.properties[0] # properties[0] is always position, at least for spawners
 	
-	update_limits(CurrentLevelData.area.header)
+	update_limits(CurrentLevelData.current_area.header)
 
 
 func camera_movement(delta: float):
@@ -119,7 +119,7 @@ func cap_zoom_level(zoom : float) -> float:
 	# I'd prefer to not hardcode this but frankly it's not worth the time to 
 	# figure out getting the height of the toolbar.
 	var toolbar_size : float = 0
-	var level_size : Vector2 = CurrentLevelData.area.header.bounds.size
+	var level_size : Vector2 = CurrentLevelData.current_area.header.bounds.size
 
 	while (
 		viewport_size.x * zoom > (level_size.x + 6) * Editor.TILE_SIZE.x or 

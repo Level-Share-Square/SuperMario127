@@ -89,7 +89,7 @@ func _ready() -> void:
 	original_position = global_position
 	CurrentLevelData.enemies_instanced += 1
 	time_alive += float(CurrentLevelData.enemies_instanced) / 2.0
-	gravity = CurrentLevelData.area.header.gravity
+	gravity = CurrentLevelData.current_area.header.gravity
 	
 	var scene = get_tree().current_scene
 	if scene.mode == 1 and scene.placed_item_property == "Para":
@@ -193,7 +193,7 @@ func _physics_process(delta):
 	if !loaded and visibility_notifier and visibility_notifier.is_on_screen():
 		loaded = true
 	if mode != 1 and enabled and !dead and loaded:
-		var level_bounds = CurrentLevelData.area.header.bounds
+		var level_bounds = CurrentLevelData.current_area.header.bounds
 		if !hit:
 			# Run the appropriate physics process function
 			if is_instance_valid(shell):

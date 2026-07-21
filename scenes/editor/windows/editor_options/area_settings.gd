@@ -18,7 +18,7 @@ func _ready():
 		value.connect("value_changed", self, "value_changed", [value])
 	
 func load_settings():
-	var area = CurrentLevelData.area
+	var area = CurrentLevelData.current_area
 	size_x.value = area.header.bounds.size.x
 	size_y.value = area.header.bounds.size.y
 	gravity.value = area.header.gravity
@@ -26,7 +26,7 @@ func load_settings():
 	sec.value = fmod(area.header.timer, 60.0) 
 
 func value_changed(value, changed_value):
-	var area =  CurrentLevelData.area
+	var area =  CurrentLevelData.current_area
 
 	area.header.bounds.size.x = size_x.value
 	area.header.bounds.size.y = size_y.value

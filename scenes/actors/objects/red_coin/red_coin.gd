@@ -38,7 +38,7 @@ func _ready():
 	animation_player.play("RESET")
 	if mode == 1: return
 #	if enabled:
-#		id = CurrentLevelData.vars.last_red_coin_id + CurrentLevelData.get_red_coins_before_area(CurrentLevelData.area)
+#		id = CurrentLevelData.vars.last_red_coin_id + CurrentLevelData.get_red_coins_before_area(CurrentLevelData.current_area)
 #		CurrentLevelData.vars.last_red_coin_id += 1
 	
 	if id in CurrentLevelData.vars.red_coins_collected[1]:

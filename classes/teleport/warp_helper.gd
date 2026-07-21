@@ -62,7 +62,7 @@ func location_warp(character: Character, target_tag: String, max_pan_distance: i
 
 func area_warp(character: Character, target_tag: String, target_area: int) -> void:
 #	if is_instance_valid(timer_manager):
-#		if (area_id == CurrentLevelData.area):
+#		if (area_id == CurrentLevelData.current_area):
 #
 #			var area_timer: Control = timer_manager.get_timer("area_timer")
 #

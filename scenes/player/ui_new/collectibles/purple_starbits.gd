@@ -56,7 +56,7 @@ func update_counter(new_coins: int):
 	max_label.text = "(" + str(max_purples) + ")"
 
 func update_required_purples():
-	var current_required_purples = variables.required_purple_starbits[CurrentLevelData.area]
+	var current_required_purples = variables.required_purple_starbits[CurrentLevelData.current_area]
 	if len(current_required_purples) > 0:
 		if len(current_required_purples) > 1:
 			if variables.purple_starbits_collected[CurrentLevelData.area_id][0] >= required_purples:

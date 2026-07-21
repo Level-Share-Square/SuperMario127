@@ -124,4 +124,4 @@ func move_area_up():
 
 
 func copy_area():
-	OS.set_clipboard(LevelCodeSerializer.serialize_area(CurrentLevelData.area))
+	OS.set_clipboard(LevelCodeSerializer.serialize_area(CurrentLevelData.current_area))

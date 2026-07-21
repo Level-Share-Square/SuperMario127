@@ -76,7 +76,7 @@ func instance_enemy(emit_particles: bool = true) -> EnemyBase:
 	spawned_enemy.visible = is_visible
 	
 	# give it proper gravity
-	spawned_enemy.gravity = CurrentLevelData.area.header.gravity * 2
+	spawned_enemy.gravity = CurrentLevelData.current_area.header.gravity * 2
 	# handle being flipped
 	if scale.x < 0:
 		spawned_enemy.scale = Vector2.ONE

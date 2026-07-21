@@ -106,7 +106,7 @@ func play_custom_underwater(song_stream):
 		water_music_player.stream = song_stream
 		water_music_player.play()
 		water_music_player.volume_db = -80
-		has_water = CurrentLevelData.area.header.music is String and CurrentLevelData.area.header.music != CurrentLevelData.area.header.underwater_music
+		has_water = CurrentLevelData.current_area.header.music is String and CurrentLevelData.current_area.header.music != CurrentLevelData.current_area.header.underwater_music
 		play_water = false
 	if underwater_loop_end != 0.0:
 		underwater_timer.wait_time = underwater_loop_end
@@ -126,9 +126,9 @@ func play_custom_normal(song_stream):
 	else:
 		timer.stop()
 
-	var underwater_raw = CurrentLevelData.area.header.underwater_music
+	var underwater_raw = CurrentLevelData.current_area.header.underwater_music
 	if underwater_raw == "":
-		handle_custom_song(CurrentLevelData.area.header.music, true)
+		handle_custom_song(CurrentLevelData.current_area.header.music, true)
 	else:
 		handle_custom_song(underwater_raw, true)
 	
@@ -229,7 +229,7 @@ func decode_music(raw_music: String) -> Array:
 #	else:
 #		timer.stop()
 #
-#	var underwater_raw = CurrentLevelData.area.header.underwater_music
+#	var underwater_raw = CurrentLevelData.current_area.header.underwater_music
 #	if underwater_raw == "":
 #		has_water = false
 #	else:
@@ -326,7 +326,7 @@ func _process(delta) -> void:
 	# change this script so this entire block ceases to exist because it is bad and it makes me simultaniously mad and sad
 	# scenes should ask the music singleton to change the music, the music singleton shouldn't check every frame for if it should change the music
 	if "mode" in current_scene: #script will crash if the scene root doesn't have this property defined
-		var level_song = CurrentLevelData.area.header.music if play_music else 0
+		var level_song = CurrentLevelData.current_area.header.music if play_music else 0
 		current_song = level_song
 		if current_scene.mode != last_mode or typeof(last_song) != typeof(level_song):
 			change_song(last_song, level_song)

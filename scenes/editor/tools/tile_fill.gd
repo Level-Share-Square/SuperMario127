@@ -5,7 +5,7 @@ func _click_left(_event: InputEvent, _world_pos: Vector2) -> void:
 
 
 func draw_tile(pos: Vector2) -> void:
-	var level_bounds: Rect2 = CurrentLevelData.area.header.bounds
+	var level_bounds: Rect2 = CurrentLevelData.current_area.header.bounds
 	if not level_bounds.has_point(pos):
 		return
 	
@@ -14,7 +14,7 @@ func draw_tile(pos: Vector2) -> void:
 		
 
 func fill_place(pos_x, pos_y):
-	var level_bounds: Rect2 = CurrentLevelData.area.header.bounds
+	var level_bounds: Rect2 = CurrentLevelData.current_area.header.bounds
 	var empty_tile = [0,0,0]
 	var cells := [Vector2(pos_x, pos_y)]
 	while cells:

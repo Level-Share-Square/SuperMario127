@@ -14,7 +14,7 @@ onready var sprite = $"%Sprite"
 
 
 func _ready():
-	gravity = CurrentLevelData.area.header.gravity
+	gravity = CurrentLevelData.current_area.header.gravity
 
 
 func play_anim():

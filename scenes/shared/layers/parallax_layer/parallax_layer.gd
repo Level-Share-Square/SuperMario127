@@ -24,7 +24,7 @@ func _process(delta: float) -> void:
 func load_in(layer_data: LayerData):
 	.load_in(layer_data)
 	
-#	base_offset.x = (CurrentLevelData.area.header.bounds.end.y * 32) - 640
+#	base_offset.x = (CurrentLevelData.current_area.header.bounds.end.y * 32) - 640
 	
 	parallax_distance = layer_data.layer_metadata.parallax_distance
 	

@@ -104,7 +104,7 @@ func cap_zoom_level(zoom : float) -> float:
 	# I'd prefer to not hardcode this but frankly it's not worth the time to 
 	# figure out getting the height of the toolbar.
 	var toolbar_size : float = 70
-	var level_size : Vector2 = CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.bounds.size
+	var level_size : Vector2 = CurrentLevelData.level_data.areas[CurrentLevelData.current_area].settings.bounds.size
 
 	while (
 		viewport_size.x * zoom > (level_size.x + 6) * TILE_SIZE or 
@@ -187,7 +187,7 @@ func _ready() -> void:
 	Singleton.CheckpointSaved.reset()
 	
 	var data = CurrentLevelData.level_data
-	load_in(data, data.areas[CurrentLevelData.area])
+	load_in(data, data.areas[CurrentLevelData.current_area])
 	zoom_level = Singleton.EditorSavedSettings.zoom_level
 	editing_layer = Singleton.EditorSavedSettings.layer
 	layers_transparent = Singleton.EditorSavedSettings.layers_transparent

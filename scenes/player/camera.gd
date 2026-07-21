@@ -135,7 +135,7 @@ func set_zoom_tween(target : Vector2, time : float, override = false):
 		print(zoom_tween.connect("tween_all_completed", self, "on_zoom_tween_zoomed"))
 		zoom_tween.start()
 		return
-	var level_size : Vector2 = CurrentLevelData.area.header.bounds.size * 16
+	var level_size : Vector2 = CurrentLevelData.current_area.header.bounds.size * 16
 	var intended_zoom = target * size
 	
 	var divide: float = size.y
@@ -155,7 +155,7 @@ func on_zoom_tween_zoomed():
 	disable_gp_zoom = false
 
 func load_in():
-	var level_bounds = CurrentLevelData.area.header.bounds
+	var level_bounds = CurrentLevelData.current_area.header.bounds
 	limit_left = level_bounds.position.x * 32
 	limit_top = level_bounds.position.y * 32
 	limit_right = level_bounds.end.x * 32

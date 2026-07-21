@@ -40,7 +40,7 @@ func _ready():
 	palette_menu_button.connect("pressed", self, "_on_palette_menu_opened")
 	
 #	# I was wrong dignity... sorry... we can just do this on ready
-#	area = CurrentLevelData.area.header
+#	area = CurrentLevelData.current_area.header
 	
 	autoscroll_pick.connect("value_changed", self, "_on_autoscroll_change")
 	connect("update_background", owner, "update_background")
@@ -49,11 +49,11 @@ func _ready():
 
 
 func load_settings():
-	bg_index = CurrentLevelData.area.header.sky
-	fg_index = CurrentLevelData.area.header.background
+	bg_index = CurrentLevelData.current_area.header.sky
+	fg_index = CurrentLevelData.current_area.header.background
 	var background_resource = load("res://scenes/shared/background/backgrounds/%s/resource.tres" % backgrounds.ids[bg_index])
 	var foreground_resource = load("res://scenes/shared/background/foregrounds/%s/resource.tres" % foregrounds.ids[fg_index])
-	current_palette = CurrentLevelData.area.header.background_palette
+	current_palette = CurrentLevelData.current_area.header.background_palette
 	background.texture = background_resource.texture
 	if current_palette == 0:
 		foreground.texture = foreground_resource.preview
@@ -62,7 +62,7 @@ func load_settings():
 	yield(get_tree(), "idle_frame")
 	background_dropdown.select(bg_index)
 	foreground_dropdown.select(fg_index)
-	autoscroll_pick.value = CurrentLevelData.area.header.bg_autoscroll_speed
+	autoscroll_pick.value = CurrentLevelData.current_area.header.bg_autoscroll_speed
 	_init_palette_dropdown()
 
 
@@ -102,7 +102,7 @@ func _on_palette_selected(event: InputEvent, index: int):
 		
 		# Note: This should probably be in the save function instead.
 #		CurrentLevelData.level_info.thumbnail_background_palette = current_palette
-		CurrentLevelData.area.header.background_palette = current_palette
+		CurrentLevelData.current_area.header.background_palette = current_palette
 		emit_signal("update_background")
 
 		bg_container.show()
@@ -115,7 +115,7 @@ func _on_bg_selected(index: int):
 	# Note: This should probably be in the save function instead.
 #	CurrentLevelData.level_info.thumbnail_sky = index
 	foreground.modulate = resource.parallax_modulate
-	CurrentLevelData.area.header.sky = index
+	CurrentLevelData.current_area.header.sky = index
 	bg_index = index
 	_init_palette_dropdown()
 	emit_signal("update_background")
@@ -127,8 +127,8 @@ func _on_fg_selected(index: int):
 	foreground.texture = resource.preview
 	# Note: This should probably be in the save function instead.
 #	CurrentLevelData.level_info.thumbnail_background = index
-	CurrentLevelData.area.header.background = index
-	CurrentLevelData.area.header.background_palette = 0
+	CurrentLevelData.current_area.header.background = index
+	CurrentLevelData.current_area.header.background_palette = 0
 	fg_index = index
 	_init_palette_dropdown()
 	emit_signal("update_background")
@@ -141,5 +141,5 @@ func _on_palette_menu_opened():
 
 
 func _on_autoscroll_change(value):
-	CurrentLevelData.area.header.bg_autoscroll_speed = value
+	CurrentLevelData.current_area.header.bg_autoscroll_speed = value
 	emit_signal("update_background")
