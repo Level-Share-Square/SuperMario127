@@ -13,19 +13,20 @@ var layers: Array
 const layer_index_offset: int = -2
 const layer_spacing: int = 16
 
-export var boo_blocks: Array = [
-	["res://assets/tiles/boo_block/boo_block.png", "res://assets/tiles/boo_block/boo_block_invis.png"],
-	["res://assets/tiles/boo_block/boo_slope_left.png", "res://assets/tiles/boo_block/boo_slope_left_invis.png"],
-	["res://assets/tiles/boo_block/boo_slope_right.png", "res://assets/tiles/boo_block/boo_slope_right_invis.png"]
-]
+export var boo_block_texture = "res://assets/tiles/boo_block/boo_block.png"
+export var boo_block_texture_invis = "res://assets/tiles/boo_block/boo_block_invis.png"
+
+onready var loaded_boo_texture = load(boo_block_texture)
+onready var loaded_boo_texture_invis = load(boo_block_texture_invis)
 		
 
 func load_in():
 	load_layers(CurrentLevelData.current_area.layers)
-	if get_tree().get_current_scene().mode == 1:
-		layers[0].tile_map_manager.tile_set.tile_set_texture(18, load(boo_blocks[0][0]))
-	else:
-		layers[0].tile_map_manager.tile_set.tile_set_texture(18, load(boo_blocks[0][1]))
+	var tex = loaded_boo_texture
+	if get_tree().get_current_scene().mode == 0:
+		tex = loaded_boo_texture_invis
+	layers[0].tile_map_manager.tile_set.tile_set_texture(18, tex)
+
 
 
 func load_layers(layer_data_list: Array):
