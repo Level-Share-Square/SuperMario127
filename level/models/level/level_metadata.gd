@@ -22,7 +22,7 @@ var level_thumbnail_background : int = DEFAULT_THUMBNAIL_BACKGROUND
 var level_thumbnail_background_palette : int = DEFAULT_THUMBNAIL_BACKGROUND_PALETTE
 
 
-func _init(set_name: String, set_author: String, set_description: String, set_url: String, set_sky: int, set_background: int, set_background_palette: int):
+func _init(set_name: String = DEFAULT_NAME, set_author: String = DEFAULT_AUTHOR, set_description: String = DEFAULT_DESCRIPTION, set_url: String = DEFAULT_THUMBNAIL_URL, set_sky: int = DEFAULT_THUMBNAIL_SKY, set_background: int = DEFAULT_THUMBNAIL_BACKGROUND, set_background_palette: int = DEFAULT_THUMBNAIL_BACKGROUND_PALETTE):
 	level_name = set_name
 	level_author = set_author
 	level_description = set_description
@@ -30,6 +30,7 @@ func _init(set_name: String, set_author: String, set_description: String, set_ur
 	level_thumbnail_sky = set_sky
 	level_thumbnail_background = set_background
 	level_thumbnail_background_palette = set_background_palette
+
 
 func get_level_background_texture() -> StreamTexture:
 	var background_resource = CurrentLevelData.get_cached_background(level_thumbnail_sky)

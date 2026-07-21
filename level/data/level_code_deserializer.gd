@@ -58,7 +58,9 @@ static func deserialize_layer_code(layer_code: String) -> LayerData:
 	var tiles_code = layer_components[0]
 	
 	var layer_metadata: LayerMetadata = deserialize_layer_metadata_code(layer_metadata_code)
-	var tile_data: TileData = deserialize_datas_code(tiles_code)[0]
+	var tile_data: TileData
+	var deserialized_tile_data = deserialize_datas_code(tiles_code)
+	tile_data = TileData.new() if deserialized_tile_data == null else deserialized_tile_data[0]
 	var objects: Array = deserialize_objects_code(objects_code)
 	
 	return LayerData.new(layer_metadata, tile_data, objects)
@@ -98,9 +100,14 @@ static func deserialize_object_code(object_code: String) -> ObjectData:
 	var object_var_code = LevelCodeTokenizer.splice_object(object_code)
 	
 	var object_metadata = deserialize_object_metadata_code(object_metadata_code)
+	var object_data = ObjectData.new(object_metadata)
 	var object_vars = deserialize_object_properties(object_var_code)
-	
-	return ObjectData.new(object_metadata, object_vars)
+	for vars in object_vars:
+		if object_vars[vars] == null:
+			object_vars.erase(vars)
+			object_data.mark_as_faulty("Invalid property in object")
+	object_data.properties = object_vars
+	return object_data
 
 
 static func deserialize_object_properties(code: String) -> Dictionary:
@@ -109,69 +116,87 @@ static func deserialize_object_properties(code: String) -> Dictionary:
 	var pair_codes: PoolStringArray = code.split(";", false)
 	for pair_code in pair_codes:
 		var pair: Array = LevelCodeTokenizer.splice_dictionary_entry(pair_code)
-		var key: int = deserialize_data_code(pair[0])
-		var value = deserialize_data_code(pair[1])
+		if(pair.size() < 2):
+			properties.get_or_add("ERROR", null)
+		else:
+			var key: int = deserialize_data_code(pair[0])
+			var value = deserialize_data_code(pair[1])
 
-		properties.get_or_add(key, value)
+			properties.get_or_add(key, value)
 	return properties
 	
 
 
 static func deserialize_level_metadata_code(level_metadata_code: String) -> LevelMetadata:
+	var metadata = LevelMetadata.new()
 	var vars = deserialize_datas_code(level_metadata_code)
+	if vars == null:
+		metadata.mark_as_faulty("Invalid data in level metadata")
+		return metadata
+	metadata.level_name = vars[0]
+	metadata.level_author = vars[1]
+	metadata.level_description = vars[2]
+	metadata.level_thumbnail_url = vars[3]
+	metadata.level_thumbnail_sky = vars[4]
+	metadata.level_thumbnail_background = vars[5]
+	metadata.level_thumbnail_background_palette = vars[6]
 	
-	var level_name = vars[0]
-	var level_author = vars[1]
-	var level_description = vars[2]
-	var level_thumbnail_url = vars[3]
-	var level_thumbnail_sky = vars[4]
-	var level_thumbnail_background = vars[5]
-	var level_thumbnail_background_palette = vars[6]
-	
-	return LevelMetadata.new(level_name, level_author, level_description, level_thumbnail_url, level_thumbnail_sky, level_thumbnail_background, level_thumbnail_background_palette)
+	return metadata
 
 
 # !! Takes full area code as input! so that the area code can be stored as a variable
 static func deserialize_area_header_code(area_code: String) -> AreaHeader:
 	var area_metadata_code = LevelCodeTokenizer.splice_metadata(area_code)
 	var vars = deserialize_datas_code(area_metadata_code)
+	var area_header = AreaHeader.new()
 	
-	var bounds: Rect2 = vars[0]
-	var name: String = vars[1]
-	var sky: int = vars[2]
-	var background: int = vars[3]
-	var background_palette: int = vars[4]
-	var bg_autoscroll_speed: float = vars[5]
-	var gravity: float = vars[6]
-	var timer: float = vars[7]
-	var music = vars[8]
-	var underwater_music: String = vars[9]
+	if vars == null:
+		area_header.mark_as_faulty("Invalid data in area header")
+		return area_header
+	area_header.bounds = vars[0]
+	area_header.name = vars[1]
+	area_header.sky = vars[2]
+	area_header.background = vars[3]
+	area_header.background_palette = vars[4]
+	area_header.bg_autoscroll_speed = vars[5]
+	area_header.gravity = vars[6]
+	area_header.timer = vars[7]
+	area_header.music = vars[8]
+	area_header.underwater_music = vars[9]
 	
-	return AreaHeader.new(area_code, bounds, name, sky, background, background_palette, bg_autoscroll_speed, gravity, timer, music, underwater_music)
+	return area_header
 
 
 static func deserialize_layer_metadata_code(layer_metadata_code: String) -> LayerMetadata:
 	var vars = deserialize_datas_code(layer_metadata_code)
+	var layer_metadata = LayerMetadata.new()
+	if vars == null:
+		layer_metadata.mark_as_faulty("Invalid data in layer metadata")
+		return layer_metadata
 	
-	var parallax_distance: float = vars[0]
-	var parallax_offset: Vector2 = vars[1]
-	var autoset_tint: bool = vars[2]
-	var layer_tint: Color = vars[3]
-	var order: int = vars[4]
-	var is_ground: bool = vars[5]
-	var activated_mission_id: PoolIntArray = vars[6]
+	layer_metadata.parallax_distance = vars[0]
+	layer_metadata.parallax_offset = vars[1]
+	layer_metadata.autoset_tint = vars[2]
+	layer_metadata.layer_tint = vars[3]
+	layer_metadata.order = vars[4]
+	layer_metadata.is_ground = vars[5]
+	layer_metadata.activated_mission_ids = vars[6]
 	
-	return LayerMetadata.new(parallax_distance, parallax_offset, autoset_tint, layer_tint, order, is_ground, activated_mission_id)
+	return layer_metadata
 
 
 static func deserialize_object_metadata_code(object_metadata_code: String) -> ObjectMetadata:
 	var vars = deserialize_datas_code(object_metadata_code)
+	var object_metadata = ObjectMetadata.new()
+	if vars == null:
+		object_metadata.mark_as_faulty("Invalid data in object metadata")
+		return object_metadata
+		
+	object_metadata.type_id = vars[0]
+	object_metadata.palette = vars[1]
+	object_metadata.position = vars[2]
 	
-	var type_id: int = vars[0]
-	var palette: int = vars[1]
-	var position: Vector2 = vars[2]
-	
-	return ObjectMetadata.new(position, type_id, palette)
+	return object_metadata
 
 
 static func deserialize_dictionary(code: String) -> Dictionary:
@@ -179,26 +204,29 @@ static func deserialize_dictionary(code: String) -> Dictionary:
 	var dictionary: Dictionary = {}
 	for pair_code in pair_codes:
 		var pair: Array = LevelCodeTokenizer.splice_dictionary_entry(pair_code)
-		var key: int = deserialize_data_code(pair[0])
-		var value = deserialize_data_code(pair[1])
-		
-		dictionary.get_or_add(key, value)
+		if(pair.size() < 2):
+			dictionary.get_or_add("ERROR", null)
+		else:
+			var key: int = deserialize_data_code(pair[0])
+			var value = deserialize_data_code(pair[1])
+			
+			dictionary.get_or_add(key, value)
 	
 	return dictionary
 
 
 # basically, this is the finest grain part of the level code; we are just looking at primitive values
 # pass in a list of primitive values to this function and it will interpret them
-static func deserialize_datas_code(datas_code: String) -> Array:
+static func deserialize_datas_code(datas_code: String):
 	var vars_code = LevelCodeTokenizer.splice_data(datas_code)
 	var vars = []
 	for v in vars_code:
 		vars.push_back(deserialize_data_code(v))
-		
+	if null in vars: return null
 	return vars
 
 
-static func base64_decode_int(number: String) -> int:
+static func base64_decode_int(number: String):
 	number = number.strip_edges()
 	number = number.strip_escapes()
 	if number == "":
@@ -214,6 +242,7 @@ static func base64_decode_int(number: String) -> int:
 	var index = 0
 	for digit in number:
 		var digit_int = characters.find(digit)
+		if digit_int == -1: return null
 		digit_int = digit_int * pow(64, index)
 		digits.append(digit_int)
 		index += 1
@@ -228,7 +257,7 @@ static func base64_decode_int(number: String) -> int:
 	return final_number
 
 
-static func base64_decode_float(number: String) -> float:
+static func base64_decode_float(number: String):
 	var is_negative = false
 	if number[0] == "~":
 		is_negative = true
@@ -239,9 +268,11 @@ static func base64_decode_float(number: String) -> float:
 	var fract: int = 0
 	if components.size() == 1:
 		whole = base64_decode_int(components[0])
+		if whole == null: return null
 	else:
 		whole = base64_decode_int(components[0])
 		fract = base64_decode_int(components[1])
+		if whole == null or fract == null: return null
 	
 	var fract_string = "0." + str(fract)
 	
@@ -255,6 +286,7 @@ static func deserialize_data_code(data_code: String):
 	var type_code = data_code.substr(0, 1)
 	var data = ""
 	if type_code == "a":
+		if data_code.length() < 3: return null
 		type_code = data_code.substr(0, 2)
 		data = data_code.substr(2)
 	else:
@@ -295,19 +327,29 @@ static func deserialize_data_code(data_code: String):
 			return deserialize_datas_code(data)
 		LevelCodeHandler.TYPE_CODE_DICTIONARY:
 			data = LevelCodeTokenizer.splice_data_array(data)
-			return deserialize_dictionary(data)
+			var dictionary = deserialize_dictionary(data)
+			if null in dictionary.keys or null in dictionary.values: return null
+			return dictionary
 		LevelCodeHandler.TYPE_CODE_STRING_ARRAY:
 			data = LevelCodeTokenizer.splice_data_array(data)
-			return PoolStringArray(deserialize_datas_code(data))
+			var data_array = deserialize_datas_code(data)
+			if data_array == null: return null
+			return PoolStringArray(data_array)
 		LevelCodeHandler.TYPE_CODE_INT_ARRAY:
 			data = LevelCodeTokenizer.splice_data_array(data)
-			return PoolIntArray(deserialize_datas_code(data))
+			var data_array = deserialize_datas_code(data)
+			if data_array == null: return null
+			return PoolIntArray(data_array)
 		LevelCodeHandler.TYPE_CODE_FLOAT_ARRAY:
 			data = LevelCodeTokenizer.splice_data_array(data)
-			return PoolRealArray(deserialize_datas_code(data))
+			var data_array = deserialize_datas_code(data)
+			if data_array == null: return null
+			return PoolRealArray(data_array)
 		LevelCodeHandler.TYPE_CODE_VECTOR2_ARRAY:
 			data = LevelCodeTokenizer.splice_data_array(data)
-			return PoolVector2Array(deserialize_datas_code(data))
+			var data_array = deserialize_datas_code(data)
+			if data_array == null: return null
+			return PoolVector2Array(data_array)
 		LevelCodeHandler.TYPE_CODE_BYTES:
 			if data.empty():
 				return PoolByteArray()
@@ -321,11 +363,12 @@ static func deserialize_data_code(data_code: String):
 		LevelCodeHandler.TYPE_CODE_RECT2:
 			data = LevelCodeTokenizer.splice_data_array(data)
 			var data_array = deserialize_datas_code(data)
+			if data_array == null: return null
 			return Rect2(data_array[0], data_array[1], data_array[2], data_array[3])
 		LevelCodeHandler.TYPE_CODE_CURVE_2D:
 			data = LevelCodeTokenizer.splice_data_array(data)
 			var data_array = deserialize_datas_code(data)
-			
+			if data_array == null: return null
 			var point_data: PoolVector2Array = data_array
 			
 			var curve: Curve2D = Curve2D.new()
@@ -336,7 +379,9 @@ static func deserialize_data_code(data_code: String):
 		# TileData
 		LevelCodeHandler.TYPE_CODE_TILE_DATA:
 			data = LevelCodeTokenizer.splice_data_array(data)
-			var tile_bytes = deserialize_datas_code(data)[0]
+			var data_array = deserialize_datas_code(data)
+			if data_array == null: return null
+			var tile_bytes = data_array[0]
 			
 			var tile_data: TileData = TileData.new()
 			var chunk_data: Dictionary = tile_util.tile_bytes_to_chunks(tile_bytes)
