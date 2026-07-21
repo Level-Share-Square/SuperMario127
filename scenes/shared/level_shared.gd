@@ -13,9 +13,19 @@ var layers: Array
 const layer_index_offset: int = -2
 const layer_spacing: int = 16
 
+export var boo_blocks: Array = [
+	["res://assets/tiles/boo_block/boo_block.png", "res://assets/tiles/boo_block/boo_block_invis.png"],
+	["res://assets/tiles/boo_block/boo_slope_left.png", "res://assets/tiles/boo_block/boo_slope_left_invis.png"],
+	["res://assets/tiles/boo_block/boo_slope_right.png", "res://assets/tiles/boo_block/boo_slope_right_invis.png"]
+]
+		
 
 func load_in():
 	load_layers(CurrentLevelData.area.layers)
+	if get_tree().get_current_scene().mode == 1:
+		layers[0].tile_map_manager.tile_set.tile_set_texture(18, load(boo_blocks[0][0]))
+	else:
+		layers[0].tile_map_manager.tile_set.tile_set_texture(18, load(boo_blocks[0][1]))
 
 
 func load_layers(layer_data_list: Array):

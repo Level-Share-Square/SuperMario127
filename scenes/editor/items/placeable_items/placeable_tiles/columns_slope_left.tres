@@ -16,10 +16,10 @@
 script = ExtResource( 1 )
 item_name = "Columns (Left Slope)"
 groups = PoolStringArray( "special" )
-change_to = "til_crystal_slope_right"
+change_to = "til_column_slope_right"
 items_in_sequence = 4
 index_in_sequence = 2
-icons = [ ExtResource( 8 ), ExtResource( 10 ), ExtResource( 6 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 9 ), ExtResource( 7 ), ExtResource( 5 ), ExtResource( 11 ) ]
+icons = [ ExtResource( 2 ), ExtResource( 8 ), ExtResource( 10 ), ExtResource( 6 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 9 ), ExtResource( 7 ), ExtResource( 5 ), ExtResource( 11 ) ]
 previews = [ ExtResource( 2 ) ]
 priority = 0
 tileset_id = 37
