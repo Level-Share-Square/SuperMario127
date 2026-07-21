@@ -1419,7 +1419,6 @@ config/windows_native_icon="res://assets/misc/icon.ico"
 
 LocalSettings="*res://singletons/local_settings.gd"
 Singleton="*res://singletons/main_singleton.gd"
-Singleton2="*res://singleton2.gd"
 SettingsLoader="*res://singletons/settings_loader.tscn"
 Discord="*res://addons/discord_game_sdk/discord.gd"
 LastInputDevice="*res://singletons/last_input_device.gd"
@@ -1468,7 +1467,9 @@ change=false
 audio=false
 transforms=false
 fps=true
-"Game Version"="0.10.0"
+game_version="0.10.0"
+level_code_version=100
+old_level_code_version="0.5.5"
 
 [importer_defaults]
 
