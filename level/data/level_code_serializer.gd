@@ -145,7 +145,10 @@ static func serialize_level_metadata(data: LevelMetadata) -> String:
 			data.level_thumbnail_url,
 			data.level_thumbnail_sky,
 			data.level_thumbnail_background,
-			data.level_thumbnail_background_palette
+			data.level_thumbnail_background_palette,
+			# Since this is the only version of the serializer we're storing,
+			# it's fine to just store this code version.
+			ProjectSettings.get_setting("global/level_code_version"),
 		]
 	)
 
