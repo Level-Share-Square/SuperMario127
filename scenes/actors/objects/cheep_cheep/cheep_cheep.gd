@@ -46,7 +46,7 @@ var snap := Vector2(0, 0)
 
 var bounced := false
 
-var loaded := true
+
 
 var character : Character
 
@@ -62,7 +62,7 @@ func _set_property_values():
 
 
 func detect_player(body : Character) -> void:
-	if character == null and enabled and body != null and !dead and layer == middle:
+	if character == null and enabled and body != null and !dead:
 		character = body
 
 func remove_player(body : Character) -> void:
@@ -89,9 +89,9 @@ func _ready() -> void:
 	player_exit_detector.scale = Vector2(1, 1) / scale
 	CurrentLevelData.enemies_instanced += 1
 	time_alive += float(CurrentLevelData.enemies_instanced) / 2.0
-	gravity = CurrentLevelData.level_data.areas[CurrentLevelData.area].gravity
+	gravity = CurrentLevelData.area.header.gravity
 	
-	if scale.x < 0 and enabled and mode != 1 and layer == middle:
+	if scale.x < 0 and enabled and mode != 1:
 		scale.x = abs(scale.x)
 		facing_direction = -facing_direction
 
@@ -116,7 +116,7 @@ func create_coin() -> void:
 	object.properties.append(0)
 	object.properties.append(true)
 	object.properties.append(true)
-	object.properties.append(layer)
+	
 	object.properties.append(true)
 	var velocity_x = -80 if int(time_alive * 10) % 2 == 0 else 80
 	object.properties.append(Vector2(velocity_x, -300))
@@ -159,7 +159,7 @@ func _process(_delta) -> void:
 func _physics_process(delta : float) -> void:
 	time_alive += delta
 	
-	if mode != 1 and enabled and loaded and layer == middle:
+	if mode != 1 and enabled and loaded:
 		var is_in_platform := false
 		var platform_collision_enabled := false
 		for platform_body in platform_detector.get_overlapping_areas():

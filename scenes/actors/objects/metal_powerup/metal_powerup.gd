@@ -36,10 +36,9 @@ func collect(body):
 		respawn_timer = 10.0
 		collected = true
 
-func _ready():
+func _object_ready():
 	yield(get_tree().create_timer(0.2), "timeout")
-	if layer == middle:
-		var _connect = area.connect("body_entered", self, "collect")
+	var _connect = area.connect("body_entered", self, "collect")
 	
 	for body in area.get_overlapping_bodies():
 			if enabled and !collected and (body and body.name.begins_with("Character") and !body.dead):

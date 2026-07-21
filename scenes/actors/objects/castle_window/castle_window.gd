@@ -14,10 +14,6 @@ func _set_property_values():
 
 
 func _ready():
-	if is_background:
-		layer = 1
-		update_layer()
-		is_background = false
 	
 	if palette != 0:
 		self.texture = palette_textures[palette - 1]

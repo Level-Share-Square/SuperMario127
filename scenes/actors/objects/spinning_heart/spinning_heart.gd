@@ -48,7 +48,7 @@ func body_exit(body):
 
 func _physics_process(delta):
 	if charbody != null:
-		if enabled and !on_cooldown and charbody.name.begins_with("Character") and !charbody.dead and layer == middle:
+		if enabled and !on_cooldown and charbody.name.begins_with("Character") and !charbody.dead:
 			if cooldown:
 				timer.start()
 				on_cooldown = true

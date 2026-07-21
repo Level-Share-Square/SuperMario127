@@ -120,8 +120,6 @@ func _physics_process(delta):
 		var scene : Node = get_tree().current_scene
 		if scene.has_node(scene.character):
 			handle_character_exception(scene.get_node(scene.character))
-		if scene.has_node(scene.character2):
-			handle_character_exception(scene.get_node(scene.character2))
 
 func create_coin(): #creates a coin
 	pass # I'll pass thanks
@@ -135,7 +133,7 @@ func create_coin(): #creates a coin
 #	object.properties.append(0)
 #	object.properties.append(true)
 #	object.properties.append(true)
-#	object.properties.append(layer)
+#	
 #	object.properties.append(true)
 #	var power = int(time_alive*100) % 80
 #	var velocity_x = -power if int(time_alive * 10) % 2 == 0 else power

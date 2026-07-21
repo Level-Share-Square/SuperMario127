@@ -79,7 +79,7 @@ func goonie_ready():
 	bomb_body = get_node("StaticBody2D/BombBody")
 	poof = get_node("Sprite/Poof")
 	
-	gravity = CurrentLevelData.level_data.areas[CurrentLevelData.area].gravity
+	gravity = CurrentLevelData.area.header.gravity
 	wingless_collision_layer = wingless_body.collision_layer
 	wingless_collision_mask = wingless_body.collision_mask
 	bomb_collision_mask = bomb_body.collision_mask
@@ -103,7 +103,7 @@ func create_coin(spawn_pos) -> void:
 	object.properties.append(0)
 	object.properties.append(true)
 	object.properties.append(true)
-	object.properties.append(layer)
+	
 	object.properties.append(true)
 	var velocity_x = - 80 if randi() % 2 == 0 else 80
 	object.properties.append(Vector2(velocity_x, - 300))

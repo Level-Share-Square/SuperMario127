@@ -8,7 +8,7 @@ var tile_mode: bool = false
 
 
 func _ready():
-	level_bounds = CurrentLevelData.level_data.areas[CurrentLevelData.area].bounds
+	level_bounds = CurrentLevelData.area.header.bounds
 
 
 func _update(delta: float):

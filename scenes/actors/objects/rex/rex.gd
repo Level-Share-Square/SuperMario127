@@ -96,7 +96,7 @@ func _ready():
 	player_detector.scale = Vector2(1, 1) / scale
 	CurrentLevelData.enemies_instanced += 1
 	time_alive += float(CurrentLevelData.enemies_instanced) / 2.0
-	gravity = CurrentLevelData.level_data.areas[CurrentLevelData.area].gravity
+	gravity = CurrentLevelData.area.header.gravity
 	inv_timer = -1.0
 	
 	if scale.x < 0:
@@ -105,7 +105,7 @@ func _ready():
 	
 	update_eyes()
 	
-	if mode == 1 or !enabled or !layer == middle:
+	if mode == 1 or !enabled:
 		sprite.animation = "default"
 		eye_sprite.animation = "default"
 
@@ -136,14 +136,14 @@ func create_coin() -> void:
 	object.properties.append(0)
 	object.properties.append(true)
 	object.properties.append(true)
-	object.properties.append(layer)
+	
 	object.properties.append(true)
 	var velocity_x = - 80 if int(time_alive * 10) % 2 == 0 else 80
 	object.properties.append(Vector2(velocity_x, - 300))
 	get_parent().create_object(object, false)
 
 func detect_player(body:Character)->void :
-	if character == null and enabled and body != null and not dead and layer == middle:
+	if character == null and enabled and body != null and not dead:
 		character = body
 		
 		facing_direction = sign(character.global_position.x - body.global_position.x)
@@ -151,7 +151,7 @@ func detect_player(body:Character)->void :
 			jump()
 
 func lose_player(body: Character):
-	if character != null and enabled and body != null and not dead and layer == middle:
+	if character != null and enabled and body != null and not dead:
 		character = null
 
 func on_visibility_changed(is_visible:bool)->void :
@@ -186,7 +186,7 @@ func update_eyes():
 	eye_sprite.offset = sprite.offset
 
 func kill(hit_pos:Vector2):
-	if not hit and not dead and enabled and inv_timer <= 0 and layer == middle:
+	if not hit and not dead and enabled and inv_timer <= 0:
 		if is_instance_valid(kinematic_body):
 			kinematic_body.set_collision_layer_bit(2, false)
 			stomp_area.set_collision_layer_bit(2, false)
@@ -230,7 +230,7 @@ func _physics_process(delta:float)->void :
 	time_alive += delta
 	water_scale.x = 0.95 if water_detector.get_overlapping_areas().size() > 0 else 1
 	water_scale.y = 0.25 if water_detector.get_overlapping_areas().size() > 0 else 1
-	if mode != 1 and enabled and layer == middle:
+	if mode != 1 and enabled:
 		sprite.animation = "walking" if not squish else "walking_squished"
 		update_eyes()
 	
@@ -306,7 +306,7 @@ func _physics_process(delta:float)->void :
 		elif (inv_timer <= 0 and collision_layer_area.get_overlapping_bodies().empty()):
 			reset_collision_layers()
 	
-	if mode != 1 and enabled and loaded and layer == middle:
+	if mode != 1 and enabled and loaded:
 		var is_in_platform: = false
 		var platform_collision_enabled: = false
 		for platform_body in platform_detector.get_overlapping_areas():
@@ -427,7 +427,7 @@ func physics_process_normal(delta, is_in_platform: bool):
 			if !right_check.is_colliding():
 				facing_direction = -1
 	
-	var level_bounds = CurrentLevelData.level_data.areas[CurrentLevelData.area].bounds
+	var level_bounds = CurrentLevelData.area.header.bounds
 	#makes sure rex doesn't run off the side of the level
 	if kinematic_body.global_position.x < (level_bounds.position.x * 32):
 		facing_direction = 1

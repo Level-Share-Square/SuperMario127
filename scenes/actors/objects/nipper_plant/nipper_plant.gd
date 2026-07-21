@@ -55,7 +55,7 @@ func _set_property_values():
 	set_property("super_jump_height", super_jump_height, true, "Jump Height")
 
 func _ready():
-	gravity = CurrentLevelData.level_data.areas[CurrentLevelData.area].gravity
+	gravity = CurrentLevelData.area.header.gravity
 	
 	if scale.x < 0:
 		scale.x = abs(scale.x)
@@ -74,7 +74,7 @@ func _process(delta):
 	recolorable_sprite.visible = sprite.visible
 	recolorable_sprite.rotation = sprite.rotation
 	
-	if not (mode != 1 and enabled and layer == middle):
+	if not (mode != 1 and enabled):
 		return
 	
 	if (fire != 0):
@@ -121,14 +121,14 @@ func create_coin()->void :
 	object.properties.append(0)
 	object.properties.append(true)
 	object.properties.append(true)
-	object.properties.append(layer)
+	
 	object.properties.append(true)
 	var velocity_x = - 80 if randi() % 2 == 0 else 80
 	object.properties.append(Vector2(velocity_x, - 300))
 	get_parent().create_object(object, false)
 
 func _physics_process(delta):
-	if not (mode != 1 and enabled and layer == middle):
+	if not (mode != 1 and enabled):
 		return
 	
 	if (not hit):
@@ -267,7 +267,7 @@ func spawn_fireball():
 	object.properties.append(0)
 	object.properties.append(true)
 	object.properties.append(true)
-	object.properties.append(layer)
+	
 	object.properties.append(calculate_fireball_velocity(body.global_position - Vector2(0, 8), character_position, gravity))
 	object.properties.append(fire == 2)
 	get_parent().create_object(object, false)

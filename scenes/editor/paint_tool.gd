@@ -47,7 +47,7 @@ func _update(delta: float) -> void:
 
 
 func draw_tile(pos: Vector2) -> void:
-	var level_bounds: Rect2 = CurrentLevelData.level_data.areas[CurrentLevelData.area].bounds
+	var level_bounds: Rect2 = CurrentLevelData.area.header.bounds
 	if not level_bounds.has_point(pos):
 		return
 	
@@ -60,7 +60,7 @@ func draw_tile(pos: Vector2) -> void:
 
 
 func erase_tile(pos: Vector2) -> void:
-	var level_bounds: Rect2 = CurrentLevelData.level_data.areas[CurrentLevelData.area].bounds
+	var level_bounds: Rect2 = CurrentLevelData.area.header.bounds
 	if not level_bounds.has_point(pos):
 		return
 	

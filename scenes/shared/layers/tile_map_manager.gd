@@ -20,8 +20,7 @@ func load_in(s_layer_data: LayerData):
 	if not layer_data.layer_metadata.is_ground:
 		collision_layer = 0
 		collision_mask = 0
-	else:
-		_add_margins()
+	_add_margins()
 	
 	var packed_tile: int = 0
 	for coord in layer_data.tile_data.used_tiles:
@@ -86,3 +85,5 @@ func _add_margins():
 	for y in range(top, bottom):
 		set_cell(left, y, tile)
 		set_cell(right, y, tile)
+		
+	set_cellv(Vector2(right, bottom), tile) # it isn't filling this tile in the loop for some reason?

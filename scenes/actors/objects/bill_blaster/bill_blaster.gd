@@ -47,7 +47,7 @@ func _physics_process(delta):
 	#rotation_degrees = 0
 	color_sprite.modulate = color
 		
-	if mode != 1 && layer == middle:
+	if mode != 1:
 		spawn_timer -= delta
 		if spawn_timer <= 0.35 and sprite.frame == 3:
 			sprite.frame = 0
@@ -89,7 +89,6 @@ func _physics_process(delta):
 			object.properties.append(scale)
 			object.properties.append(rotation_degrees)
 			object.properties.append(enabled)
-			object.properties.append(layer)
 			object.properties.append(true)
 			object.properties.append(chase)
 			object.properties.append(speed)

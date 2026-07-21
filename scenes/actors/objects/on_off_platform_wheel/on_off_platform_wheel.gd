@@ -70,8 +70,8 @@ func _process(_delta):
 					# Disable to fix rotation issues.
 					instance.set_sync_to_physics(false)
 				# Disable the collision if enabled = false
-				instance.collision_shape.disabled = !enabled or !layer == middle
-				instance.platform_area_collision_shape.disabled = !enabled or !layer == middle
+				instance.collision_shape.disabled = !enabled
+				instance.platform_area_collision_shape.disabled = !enabled
 				
 		elif platform_count<platforms.size():
 			var delta_count = platforms.size() - platform_count
@@ -113,8 +113,8 @@ func _ready():
 			# Disable to fix rotation issues.
 			instance.set_sync_to_physics(false)
 		# Disable the collision if enabled = false
-		instance.collision_shape.disabled = !enabled or !layer == middle
-		instance.platform_area_collision_shape.disabled = !enabled or !layer == middle
+		instance.collision_shape.disabled = !enabled
+		instance.platform_area_collision_shape.disabled = !enabled
 		instance.z_index = z_index
 	
 	#_set_platform_pos()

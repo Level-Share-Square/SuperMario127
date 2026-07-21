@@ -247,12 +247,13 @@ static func base64_decode_int(number: String):
 		digits.append(digit_int)
 		index += 1
 		
-	var final_number = 0
+	var final_number: int = 0
 	for digit in digits:
 		final_number += digit
 	
 	if is_negative:
 		final_number = -final_number
+	
 	
 	return final_number
 

@@ -28,7 +28,7 @@ func collect(body):
 			sound.play()
 		collected = true
 		
-		label.text = str(CurrentLevelData.vars.shine_shards_collected[CurrentLevelData.area][0])
+		label.text = str(CurrentLevelData.vars.shine_shards_collected[CurrentLevelData.area_id][0])
 		
 		#all of the collecting animation takes place in the animation player now, any old commented
 		#out code is part of the old animation and is simply left here to revert if necessary
@@ -51,10 +51,10 @@ func _ready():
 		CurrentLevelData.vars.max_shine_shards += 1
 	
 	# band aid crash fix
-	while CurrentLevelData.vars.shine_shards_collected.size() <= CurrentLevelData.area:
+	while CurrentLevelData.vars.shine_shards_collected.size() <= CurrentLevelData.area_id:
 		CurrentLevelData.vars.shine_shards_collected.append([0, []])
 	
-	if id in CurrentLevelData.vars.shine_shards_collected[CurrentLevelData.area][1]:
+	if id in CurrentLevelData.vars.shine_shards_collected[CurrentLevelData.area_id][1]:
 		queue_free()
 	
 	var _connect = area.connect("body_entered", self, "collect")

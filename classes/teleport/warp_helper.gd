@@ -77,12 +77,12 @@ func area_warp(character: Character, target_tag: String, target_area: int) -> vo
 #		printerr("Couldn't find timer manager node!")
 	
 	# band aid crash fix
-	while CurrentLevelData.vars.liquid_positions.size() <= CurrentLevelData.area:
+	while CurrentLevelData.vars.liquid_positions.size() <= CurrentLevelData.area_id:
 		CurrentLevelData.vars.liquid_positions.append([])
 	
-	CurrentLevelData.vars.liquid_positions[CurrentLevelData.area] = []
+	CurrentLevelData.vars.liquid_positions[CurrentLevelData.area_id] = []
 	for liquid in CurrentLevelData.vars.liquids:
-		CurrentLevelData.vars.liquid_positions[CurrentLevelData.area].append(liquid[1].save_pos)
+		CurrentLevelData.vars.liquid_positions[CurrentLevelData.area_id].append(liquid[1].save_pos)
 	
 	var powerup_array = [null, null, null]
 	if is_instance_valid(character.powerup):
@@ -115,6 +115,7 @@ func area_warp(character: Character, target_tag: String, target_area: int) -> vo
 #		teleportation_mode
 #	]
 	CurrentLevelData.vars.transition_data = {"target_tag": target_tag}
+	print("L")
 	character.switch_areas(target_area, 0.5)
 
 
@@ -141,7 +142,7 @@ func level_warp(character: Character, target_level: String,
 			CurrentLevelData.hub_return_data = {}
 		else:
 			CurrentLevelData.hub_return_data = {
-				"target_area": CurrentLevelData.area, "target_tag": target_tag}
+				"target_area": CurrentLevelData.area_id, "target_tag": target_tag}
 			
 	
 	Singleton.Music.reset_music()

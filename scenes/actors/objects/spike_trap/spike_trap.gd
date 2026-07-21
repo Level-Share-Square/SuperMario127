@@ -8,7 +8,7 @@ export(Array, Texture) var palette_textures
 var stored_character : Character
 
 func kill(body):
-	if !enabled or body.invincible or body.invulnerable or !layer == middle:
+	if !enabled or body.invincible or body.invulnerable:
 		return
 	
 	body.damage(1, "hit", 60)

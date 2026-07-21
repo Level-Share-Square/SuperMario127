@@ -116,10 +116,12 @@ static func serialize_object(object: ObjectData) -> String:
 		
 		var properties_code: String = ""
 		for property_id in object.properties:
+#			print("prop: ", property_id, " ", object.properties[property_id], " ", typeof(object.properties[property_id]))
 			properties_code += serialize_data(property_id)
 			properties_code += ":"
 			properties_code += serialize_data(object.properties[property_id])
 			properties_code += ";"
+#			print("data: ", serialize_data(object.properties[property_id]))
 		
 		object_code += wrap_code_in_brackets(properties_code)
 		

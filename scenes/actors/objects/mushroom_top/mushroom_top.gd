@@ -46,13 +46,13 @@ func _set_property_values():
 
 func _ready():
 	var _connect = connect("property_changed", self, "update_property")
-	if bouncy and enabled and mode == 0 and layer == middle:
+	if bouncy and enabled and mode == 0:
 		_connect = timer.connect("timeout", self, "idle_bounce_anim")
 		_connect = area_2d.connect("body_entered", self, "bounce")
 	
 	update_property("color", color)
 	update_parts()
-	collision_shape.disabled = !enabled or bouncy or !layer == middle
+	collision_shape.disabled = !enabled or bouncy
 	preview_position = custom_preview_position
 	if is_preview:
 		z_index = 0
@@ -140,7 +140,7 @@ func _physics_process(delta):
 			else:
 				blacklisted_bodies[object] = cooldown
 		
-	if bouncy and enabled and mode == 0 and layer == middle:
+	if bouncy and enabled and mode == 0:
 		if area_2d.get_overlapping_bodies().size() > 0:
 			for body in area_2d.get_overlapping_bodies():
 					bounce(body)

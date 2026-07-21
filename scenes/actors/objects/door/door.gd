@@ -103,6 +103,7 @@ func reset_sprite(character: Character): #This is here in case Mario came from a
 	character.sprite.position = Vector2.ZERO
 
 
+
 ### AREA2D STUFF
 func body_entered(body) -> void:
 	if not is_instance_valid(stored_character) and body is Character:
@@ -111,8 +112,6 @@ func body_entered(body) -> void:
 func body_exited(body) -> void:
 	if body == stored_character:
 		stored_character = null
-
-
 ### INPUT
 func _physics_process(_delta) -> void:
 	# you're not able to enter a door if you're in the air, aren't controllable,
@@ -135,6 +134,7 @@ func _physics_process(_delta) -> void:
 		start_entrance_animation(stored_character)
 
 
+
 ### MISC
 func is_rainbow(body) -> bool:
 	return body.powerup != null and body.powerup.id == "Rainbow"
@@ -142,7 +142,6 @@ func is_rainbow(body) -> bool:
 
 func _ready() -> void:
 	._ready()
-	
 	if is_preview:
 		z_index = 0
 		door_sprite.z_index = 0

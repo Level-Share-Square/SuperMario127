@@ -25,7 +25,7 @@ func _ready():
 #
 	sprite.region_rect.position.x = int(!CurrentLevelData.vars.switch_state.has(palette)) * 32
 	
-	if !enabled or !layer == middle:
+	if !enabled:
 		$StaticBody2D.set_collision_layer_bit(0, false)
 
 	sprite.region_rect.position.y = palette * 32

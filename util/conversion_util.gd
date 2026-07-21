@@ -426,7 +426,7 @@ static func get_new_area_code(header: AreaHeader, old_area: AreaDataOld) -> Area
 					if value is Vector2 and value != Vector2.ONE:
 						property_dictionary.get_or_add(i, old_object.properties[i])
 				1: # rotation degrees
-					if value is int and value != 0:
+					if value is float and !is_zero_approx(value):
 						property_dictionary.get_or_add(i, old_object.properties[i])
 				2: # enabled
 					if value is bool and value != true:
