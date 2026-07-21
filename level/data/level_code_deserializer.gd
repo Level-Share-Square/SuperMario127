@@ -133,13 +133,14 @@ static func deserialize_level_metadata_code(level_metadata_code: String) -> Leve
 	if vars == null:
 		metadata.mark_as_faulty("Invalid data in level metadata")
 		return metadata
-	metadata.level_name = vars[0]
-	metadata.level_author = vars[1]
-	metadata.level_description = vars[2]
-	metadata.level_thumbnail_url = vars[3]
-	metadata.level_thumbnail_sky = vars[4]
-	metadata.level_thumbnail_background = vars[5]
-	metadata.level_thumbnail_background_palette = vars[6]
+	metadata.level_name = set_or_use_default_value(vars, 0, metadata.level_name)
+	metadata.level_author = set_or_use_default_value(vars, 1, metadata.level_author)
+	metadata.level_description = set_or_use_default_value(vars, 2, metadata.level_description)
+	metadata.level_thumbnail_url = set_or_use_default_value(vars, 3, metadata.level_thumbnail_url)
+	metadata.level_thumbnail_sky = set_or_use_default_value(vars, 4, metadata.level_thumbnail_sky)
+	metadata.level_thumbnail_background = set_or_use_default_value(vars, 5, metadata.level_thumbnail_background)
+	metadata.level_thumbnail_background_palette = set_or_use_default_value(vars, 6, metadata.level_thumbnail_background_palette)
+	metadata.level_version = set_or_use_default_value(vars, 7, metadata.level_version)
 	
 	return metadata
 
@@ -153,16 +154,16 @@ static func deserialize_area_header_code(area_code: String) -> AreaHeader:
 	if vars == null:
 		area_header.mark_as_faulty("Invalid data in area header")
 		return area_header
-	area_header.bounds = vars[0]
-	area_header.name = vars[1]
-	area_header.sky = vars[2]
-	area_header.background = vars[3]
-	area_header.background_palette = vars[4]
-	area_header.bg_autoscroll_speed = vars[5]
-	area_header.gravity = vars[6]
-	area_header.timer = vars[7]
-	area_header.music = vars[8]
-	area_header.underwater_music = vars[9]
+	area_header.bounds = set_or_use_default_value(vars, 0, area_header.bounds)
+	area_header.name = set_or_use_default_value(vars, 1, area_header.name)
+	area_header.sky = set_or_use_default_value(vars, 2, area_header.sky)
+	area_header.background = set_or_use_default_value(vars, 3, area_header.background)
+	area_header.background_palette = set_or_use_default_value(vars, 4, area_header.background_palette)
+	area_header.bg_autoscroll_speed = set_or_use_default_value(vars, 5, area_header.bg_autoscroll_speed)
+	area_header.gravity = set_or_use_default_value(vars, 6, area_header.gravity)
+	area_header.timer = set_or_use_default_value(vars, 7, area_header.timer)
+	area_header.music = set_or_use_default_value(vars, 8, area_header.music)
+	area_header.underwater_music = set_or_use_default_value(vars, 9, area_header.underwater_music)
 	
 	return area_header
 
@@ -174,13 +175,14 @@ static func deserialize_layer_metadata_code(layer_metadata_code: String) -> Laye
 		layer_metadata.mark_as_faulty("Invalid data in layer metadata")
 		return layer_metadata
 	
-	layer_metadata.parallax_distance = vars[0]
-	layer_metadata.parallax_offset = vars[1]
-	layer_metadata.autoset_tint = vars[2]
-	layer_metadata.layer_tint = vars[3]
-	layer_metadata.order = vars[4]
-	layer_metadata.is_ground = vars[5]
-	layer_metadata.activated_mission_ids = vars[6]
+	layer_metadata.parallax_distance = set_or_use_default_value(vars, 0, layer_metadata.parallax_distance)
+	layer_metadata.parallax_offset = set_or_use_default_value(vars, 1, layer_metadata.parallax_offset)
+	layer_metadata.autoset_tint = set_or_use_default_value(vars, 2, layer_metadata.autoset_tint)
+	layer_metadata.layer_tint = set_or_use_default_value(vars, 3, layer_metadata.layer_tint)
+	layer_metadata.order = set_or_use_default_value(vars, 4, layer_metadata.order)
+	layer_metadata.is_ground = set_or_use_default_value(vars, 5, layer_metadata.is_ground)
+	layer_metadata.activated_mission_ids = set_or_use_default_value(vars, 6, layer_metadata.activated_mission_ids)
+	layer_metadata.layer_opacity = set_or_use_default_value(vars, 7, layer_metadata.layer_opacity)
 	
 	return layer_metadata
 
@@ -281,6 +283,11 @@ static func base64_decode_float(number: String):
 		return float(whole) + fract_string.to_float()
 	else:
 		return -float(whole) + fract_string.to_float()
+		
+static func set_or_use_default_value(vars: Array, index: int, default_value):
+	if(index >= vars.size()):
+		return default_value
+	return vars[index]
 
 
 static func deserialize_data_code(data_code: String):

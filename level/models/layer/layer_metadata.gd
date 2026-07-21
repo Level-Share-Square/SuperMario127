@@ -7,6 +7,7 @@ var parallax_distance: float = 0
 var parallax_offset: Vector2 = Vector2.ZERO
 var autoset_tint: bool = true
 var layer_tint: Color = Color.white
+var layer_opacity: float = 1.0
 
 var order: int
 var is_ground: bool
@@ -25,7 +26,8 @@ func _init(
 		set_order: int = 0, 
 		set_is_ground: bool = true, 
 		set_activated_mission_ids: PoolIntArray = PoolIntArray(),
-		set_disabled: bool = false
+		set_disabled: bool = false,
+		set_opacity: float = 1.0
 	):
 	parallax_distance = set_parallax_distance
 	autoset_tint = set_autoset_tint
@@ -34,3 +36,4 @@ func _init(
 	is_ground = set_is_ground
 	activated_mission_ids = set_activated_mission_ids
 	disabled = set_disabled
+	layer_opacity = set_opacity
