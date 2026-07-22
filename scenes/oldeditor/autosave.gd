@@ -15,19 +15,13 @@ onready var interval_options: OptionButton = $"%IntervalOptions"
 onready var saves_container = $"%SavesContainer"
 onready var reset_autosaves = $"%ResetAutosaves"
 
-var interval: int = 900
-var timer: float = 0
-
-signal autosaved
-
 func _ready():
-	interval = LocalSettings.load_setting("General", "autosave_interval", 900)
 	for interval_name in intervals.values():
 		interval_options.add_item(interval_name)
-	interval_options._select_int(intervals.keys().find(interval))
-	timer = interval
+	interval_options._select_int(intervals.keys().find(EditorState.autosave_interval))
 	load_autosave_buttons()
 	reset_autosaves.connect("button_down", self, "on_reset_pressed")
+	EditorState.connect("autosave", self, "autosave")
 	
 func load_autosaves() -> Array:
 	var autosaves: Array = []
@@ -74,13 +68,6 @@ func open_autosave(time):
 	CurrentLevelData.switch_to_area(CurrentLevelData.area_id)
 
 	SceneTransitions.reload_scene()
-	
-func _physics_process(delta):
-	if timer > 0:
-		timer -= delta
-	elif timer != -1:
-		autosave()
-		timer = interval
 
 func autosave():
 	var time = Time.get_unix_time_from_system()
@@ -97,14 +84,12 @@ func autosave():
 	file.close()
 
 	load_autosave_buttons()
-	
-	emit_signal("autosaved")
 
 
 func interval_selected(index):
-	interval = intervals.keys()[index]
+	var interval = intervals.keys()[index]
+	EditorState.set_interval(interval)
 	LocalSettings.change_setting("General", "autosave_interval", interval)
-	timer = interval
 
 func on_reset_pressed():
 	var dir: Directory = Directory.new()
