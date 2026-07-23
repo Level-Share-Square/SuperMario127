@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=2]
+[gd_scene load_steps=40 format=2]
 
 [ext_resource path="res://scenes/actors/objects/shine/frames_normal.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://assets/particles/shiny_particle_material.tres" type="Material" id=2]
@@ -20,6 +20,7 @@
 [ext_resource path="res://scenes/actors/objects/shine/glow_effect.gd" type="Script" id=18]
 [ext_resource path="res://scenes/actors/objects/shine/frames_pocket_recolorable.tres" type="SpriteFrames" id=19]
 [ext_resource path="res://scenes/actors/objects/shine/frames_pocket_collected.tres" type="SpriteFrames" id=20]
+[ext_resource path="res://scenes/actors/objects/shine/shine_rays_recolorable.gd" type="Script" id=21]
 
 [sub_resource type="StreamTexture" id=1]
 
@@ -47,7 +48,7 @@ shader = ExtResource( 17 )
 shader_param/ray_count = 4
 shader_param/ray_distance = 0.45
 shader_param/ray_seperation_degrees = 22.0
-shader_param/rotation = 3.06653
+shader_param/rotation = 0.497326
 
 [sub_resource type="ShaderMaterial" id=41]
 resource_local_to_scene = true
@@ -55,7 +56,7 @@ shader = ExtResource( 17 )
 shader_param/ray_count = 4
 shader_param/ray_distance = 0.275
 shader_param/ray_seperation_degrees = 27.243
-shader_param/rotation = 3.2168
+shader_param/rotation = 5.78594
 
 [sub_resource type="CanvasItemMaterial" id=21]
 particles_animation = true
@@ -1288,7 +1289,7 @@ texture = ExtResource( 5 )
 [node name="Glow" type="Sprite" parent="RaysContainer"]
 self_modulate = Color( 0.996078, 0.996078, 0.996078, 1 )
 material = SubResource( 38 )
-scale = Vector2( 1.06878, 1.06878 )
+scale = Vector2( 1.06279, 1.06279 )
 texture = SubResource( 40 )
 script = ExtResource( 18 )
 min_scale = 1.0
@@ -1332,6 +1333,7 @@ playing = true
 [node name="AnimatedSpriteRecolorable" type="AnimatedSprite" parent="AnimatedSprite"]
 visible = false
 frames = ExtResource( 10 )
+frame = 12
 script = ExtResource( 14 )
 
 [node name="Particles2D" type="Particles2D" parent="AnimatedSprite"]
@@ -1340,9 +1342,11 @@ material = SubResource( 21 )
 local_coords = false
 process_material = ExtResource( 2 )
 texture = ExtResource( 4 )
+script = ExtResource( 21 )
 __meta__ = {
 "_editor_description_": ""
 }
+shine_path = NodePath("../..")
 
 [node name="SpawnParticles" type="Particles2D" parent="."]
 visible = false
