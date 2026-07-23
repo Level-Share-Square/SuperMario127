@@ -5,7 +5,7 @@ const TIME_SCORE_SCENE: PackedScene = preload("res://scenes/menu/levels_list/lev
 
 onready var list_handler = $"%ListHandler"
 onready var http_thumbnails = $"%HTTPThumbnails"
-onready var default_thumbnail = preload("res://.import/default_thumb.png-3e78509f186eb58e5a939ece4213411a.stex")
+onready var default_thumbnail = preload("res://scenes/menu/level_portal/default_thumb.png")
 
 var working_folder: String
 var level_id: String
@@ -95,7 +95,6 @@ func load_level_info(_level_info: LevelInfo, _level_id: String, _working_folder:
 	is_campaign = _is_campaign
 	
 	var level_metadata: LevelMetadata = CurrentLevelData.level_metadata
-
 	
 	var current_number_of_players: int = Singleton.PlayerSettings.number_of_players
 	# load the real level data now

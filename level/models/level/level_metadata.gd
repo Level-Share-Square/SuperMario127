@@ -22,8 +22,10 @@ var level_thumbnail_background : int = DEFAULT_THUMBNAIL_BACKGROUND
 var level_thumbnail_background_palette : int = DEFAULT_THUMBNAIL_BACKGROUND_PALETTE
 var level_version : int = 0
 
+var collectible_data: CollectibleData
 
-func _init(set_name: String = DEFAULT_NAME, set_author: String = DEFAULT_AUTHOR, set_description: String = DEFAULT_DESCRIPTION, set_url: String = DEFAULT_THUMBNAIL_URL, set_sky: int = DEFAULT_THUMBNAIL_SKY, set_background: int = DEFAULT_THUMBNAIL_BACKGROUND, set_background_palette: int = DEFAULT_THUMBNAIL_BACKGROUND_PALETTE, set_level_version : int = 0):
+
+func _init(set_name: String = DEFAULT_NAME, set_author: String = DEFAULT_AUTHOR, set_description: String = DEFAULT_DESCRIPTION, set_url: String = DEFAULT_THUMBNAIL_URL, set_sky: int = DEFAULT_THUMBNAIL_SKY, set_background: int = DEFAULT_THUMBNAIL_BACKGROUND, set_background_palette: int = DEFAULT_THUMBNAIL_BACKGROUND_PALETTE, set_level_version : int = 100, s_collectible_data: CollectibleData = CollectibleData.new()):
 	level_name = set_name
 	level_author = set_author
 	level_description = set_description
@@ -32,6 +34,8 @@ func _init(set_name: String = DEFAULT_NAME, set_author: String = DEFAULT_AUTHOR,
 	level_thumbnail_background = set_background
 	level_thumbnail_background_palette = set_background_palette
 	level_version = set_level_version
+	
+	collectible_data = s_collectible_data
 
 
 func get_level_background_texture() -> StreamTexture:

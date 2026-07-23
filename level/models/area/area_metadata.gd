@@ -11,6 +11,7 @@ const DEFAULT_MUSIC: int = 0
 const DEFAULT_GRAVITY: float = 7.82
 const DEFAULT_TIMER: float = 0.0 
 
+
 var name: String
 var bounds: Rect2
 

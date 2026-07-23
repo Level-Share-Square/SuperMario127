@@ -7,9 +7,9 @@ const EDITOR_PATH = preload("res://scenes/editor/editor.tscn")
 
 
 func _ready():
-	test_level_code_validation()
+#	test_level_code_validation()
 	convert_debug_level()
-
+	
 #	instance_debug_level()
 	
 #	tile_byte_test(
@@ -30,6 +30,19 @@ func _ready():
 #	)
 	
 #	base64_int_test([0, 1, 2, 3, 4, -1, -2, -3, -4])
+	
+#	collectible_data_storage_test(
+#		CollectibleData.new(
+#			[
+#				MissionData.new(uuid_util.v4(), true, "Test 1", "Desc 1", 0),
+#				MissionData.new(uuid_util.v4(), true, "Test 2", "Desc 2", 2),
+#			],
+#			[
+#				StarCoinData.new(uuid_util.v4()),
+#				StarCoinData.new(uuid_util.v4()),
+#			]
+#		)
+#	)
 
 
 func load_file():
@@ -38,6 +51,7 @@ func load_file():
 	var content = file.get_as_text()
 	file.close()
 	return content
+
 
 func test_level_code_validation():
 	var invalid_1 = get_path_as_text("res://level/data/test/invalid_level_1.txt")
@@ -48,12 +62,14 @@ func test_level_code_validation():
 	print(level_code_validator_util.validate_level_code(invalid_3))
 	pass
 
+
 func get_path_as_text(path: String):
 	var file = File.new()
 	file.open(path, File.READ)
 	var content = file.get_as_text()
 	file.close()
 	return content
+
 
 func instance_debug_level():
 	var TEST_CODE_PATH = "res://level/data/test/archipelago_old.txt"
@@ -100,3 +116,14 @@ func base64_int_test(integers: PoolIntArray):
 		print("Encoded: ", encoded)
 		var decoded: int = LevelCodeDeserializer.base64_decode_int(encoded)
 		print("Decoded: ", decoded)
+
+
+func collectible_data_storage_test(collectible_data: CollectibleData):
+	print(collectible_data.mission_data)
+	print(collectible_data.star_coin_data)
+	
+	var code: String = LevelCodeSerializer.serialize_collectible_data(collectible_data)
+	collectible_data = LevelCodeDeserializer.deserialize_collectible_data_code(code)
+	
+	print(collectible_data.mission_data)
+	print(collectible_data.star_coin_data)
