@@ -138,15 +138,27 @@ func _ready():
 	match mode:
 		LevelPlayer.mode:
 			_object_ready()
+			
+			if not enabled:
+				_object_disabled_ready()
+				return
+			
+			if is_on_ground_layer():
+				_object_ground_ready()
+			else:
+				_object_parallax_ready()
 		Editor.mode:
 			_editor_ready()
-			
 
 
 func _process(delta):
 	match mode:
 		LevelPlayer.mode:
 			_object_process(delta)
+			
+			if not enabled:
+				_object_disabled_process(delta)
+				return
 			
 			if is_on_ground_layer():
 				_object_ground_process(delta)
@@ -160,6 +172,10 @@ func _physics_process(delta):
 	match mode:
 		LevelPlayer.mode:
 			_object_physics_process(delta)
+			
+			if not enabled:
+				_object_disabled_physics_process(delta)
+				return
 			
 			if is_on_ground_layer():
 				_object_ground_physics_process(delta)
@@ -196,6 +212,11 @@ func _object_physics_process(delta: float) -> void:
 	pass
 
 
+## run when the game object enters the scene tree
+func _object_ground_ready() -> void:
+	pass
+
+
 ## Run every process frame when the object is on a ground layer.
 func _object_ground_process(delta: float) -> void:
 	pass
@@ -206,6 +227,11 @@ func _object_ground_physics_process(delta: float) -> void:
 	pass
 
 
+## run when the game object enters the scene tree
+func _object_parallax_ready() -> void:
+	pass
+
+
 ## Run every process frame when the object is on a ground layer.
 func _object_parallax_process(delta: float) -> void:
 	pass
@@ -213,6 +239,21 @@ func _object_parallax_process(delta: float) -> void:
 
 ## Run every physics frame when the object is on a ground layer.
 func _object_parallax_physics_process(delta: float) -> void:
+	pass
+
+
+## run when the game object enters the scene tree
+func _object_disabled_ready() -> void:
+	pass
+
+
+## Run every process frame when the object is disabled.
+func _object_disabled_process(delta: float) -> void:
+	pass
+
+
+## Run every physics frame when the object is disabled.
+func _object_disabled_physics_process(delta: float) -> void:
 	pass
 
 
