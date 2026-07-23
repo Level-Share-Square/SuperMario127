@@ -43,7 +43,6 @@ signal item_changed(placeable_item)
 
 
 func _ready():
-	item_preview.update_item(selected_item, selected_item.palette, true)
 	#this is to dynamically update the framerate
 	_update_editor_framerate()
 	
@@ -73,12 +72,13 @@ func _ready():
 		CurrentLevelData.unsaved_editor_changes = false
 		
 	item_actions.verify_clipboard()
+	item_preview.update_item(selected_item, selected_item.palette, selected_item is PlaceableObject)
 
 
 func object_hovered(object):
 	if tool_manager.current_tool.tool_type == EditorTool.Type.TileTool:
 		return
-	if get_shared_node().layers.find(object.level_layer_ref.get_ref()) != layer:
+	if get_shared_node().layers.find(object.level_layer_ref.get_ref()) 	!= layer:
 		return
 	
 	# Look you come up with a better object ID system when you have none

@@ -13,4 +13,4 @@ func _update_parallax(layer: int):
 		set_parallax_distance(shared.layers[editor.layer].parallax_scroll.parallax_distance)
 	else:
 		set_parallax_distance(0)
-	
+	_update_scroll()

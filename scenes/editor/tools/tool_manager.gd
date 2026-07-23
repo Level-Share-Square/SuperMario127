@@ -9,6 +9,13 @@ onready var current_tool: EditorTool = $ObjectPaint
 
 signal tool_changed()
 
+func _ready():
+	yield(editor, "ready")
+	if editor.selected_item is PlaceableObject:
+		change_tool("ObjectPaint")
+	else:
+		change_tool("TilePaint")
+
 func _unhandled_input(event: InputEvent) -> void:
 	mouse_position = get_global_mouse_position()
 	
@@ -36,7 +43,6 @@ func _process(_delta: float):
 
 func change_tool(tool_name: String) -> void:
 	current_tool = get_node(tool_name)
-#	print(current_tool)
 	emit_signal("tool_changed")
 
 
@@ -48,7 +54,6 @@ func item_changed(placeable_item: PlaceableItem):
 		EditorTool.Type.ObjectTool:
 			if placeable_item is PlaceableTile:
 				change_tool(current_tool.inverse_tool_name)
-
 
 func _on_Tools_tool_picked(tool_name):
 	match tool_name:

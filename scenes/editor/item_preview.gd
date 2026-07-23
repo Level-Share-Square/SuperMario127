@@ -3,7 +3,11 @@ extends TextureRect
 onready var editor = owner
 
 var offset := Vector2(16, 16)
-var is_object: bool = true
+var is_object: bool
+
+func _ready():
+	print(editor.selected_item is PlaceableObject)
+	is_object = editor.selected_item is PlaceableObject
 
 func _process(delta):
 	var mouse_pos = get_global_mouse_position() - offset

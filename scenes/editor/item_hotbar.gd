@@ -163,6 +163,7 @@ func refresh_loadout():
 		item_button.set_favorite(favs_amount > 0)
 		item_button.change_item(placeable_items.placeable_items[item])
 		favs_amount -= 1
+	update_level_data()
 
 
 func _on_palettes_pressed():
