@@ -55,66 +55,37 @@ func _on_search(new_text: String = search_bar.text):
 	sort_by_fuzzy_search(new_text)
 
 
-#Bad sorting algorithm -dignity
+# better sorting algorithm -dignity
 func sort_by_fuzzy_search(search: String):
 	if search == "":
 		load_items(get_items_by_group(initial_group), true)
 		return
-	var score_dictionary: Dictionary
+	var score_array: Array
 	for key in placeable_items.placeable_items:
-		var item = key
-		var score: int = 0
-		var score_ratio: float = 0.0
-		var word_array_items = find_words(item.substr(4, item.length()))
-		var word_array_search = find_words(search)
+		var item_name: String = key.substr(4)
+		var score: float = 0
 		
-		for letter_item in item.substr(4, item.length()):
-			for letter_search in search:
-				if letter_search.to_lower() == letter_item.to_lower():
-					score += 1
+		if item_name.findn(search) != -1:
+			score += 10
 					
-		score_ratio = float(score)/float(item.length())
-		for i in word_array_items:
-			for j in word_array_search:
-				if i == j:
-					score_ratio += 1
-		score_dictionary[item] = score_ratio
-
-	var score_array: Array 
-	for i in score_dictionary:
-		score_array.append({i: score_dictionary[i]})
+		if search.is_subsequence_ofi(item_name):
+			score += 5
 			
-	score_array.sort_custom(self, "_sort_by_ascending")
+		score += item_name.similarity(search) * 2
+		
+		if score > 0:
+			score_array.append({"data": placeable_items.placeable_items[key], "score": score})
+			
+	score_array.sort_custom(self, "_sort_by_score")
 	
 	score_array = score_array.slice(0, 19)
 	var return_array: Array
 	for pair in score_array:
-		var key = pair.keys()[0]
-		return_array.append(placeable_items.placeable_items[key])
+		return_array.append(pair["data"])
+		
 	load_items(return_array, false)
 	item_picker_panel.reset()
 	return return_array
-
-
-func find_words(item):
-	var word: String
-	var word_array: Array
-	var letter_counter = 0
-	for letters in item:
-		if " " in letters:
-			letter_counter += 1
-			word_array.append(word)
-			word = ""
-		elif letters != "_":
-			letter_counter += 1
-			word += letters
-		else:
-			letter_counter += 1
-			word_array.append(word)
-			word = ""
-		if letter_counter == item.length():
-			word_array.append(word)
-	return word_array
 
 
 func _sort_by_priority(a, b):
@@ -123,7 +94,5 @@ func _sort_by_priority(a, b):
 	return false
 
 
-func _sort_by_ascending(a, b):
-	if a[a.keys()[0]] > b[b.keys()[0]]:
-		return true
-	return false
+func _sort_by_score(a, b):
+	return a["score"] > b["score"]

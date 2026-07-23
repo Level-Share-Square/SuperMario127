@@ -31,7 +31,7 @@ var is_rolling = false
 var color := Color.white
 var max_speed := 1000
 var physics = true
-var autoroll = true
+var autoroll = false
 var roll_buffer: float = ROLL_BUFFER_DURATION
 
 func _set_properties():

@@ -8,15 +8,20 @@ static func serialize_level_data(var level_data: LevelDataContainer) -> String:
 	code += serialize_level_metadata(level_data.level_metadata)
 	code += serialize_areas(level_data.area_headers)
 	code += "[]" # mission data
-	code += "[]" # editor data
+	code += serialize_editor_data(level_data.editor_data)
 
 	code += "]"
 
 	return code
 
 
+static func serialize_editor_data(editor_data: EditorData) -> String:
+	var code: String = ""
+	return wrap_code_in_brackets(code)
+
+
 static func serialize_areas(area_headers: Array) -> String:
-	var areas_code: String = "["
+	var areas_code: String = ""
 	
 	var area_data: AreaData
 	for header in area_headers:
@@ -26,13 +31,9 @@ static func serialize_areas(area_headers: Array) -> String:
 		area_data.header = header
 		# we do the enclosing in here because otherwise we can't
 		# serialize_area to get the level codes for AreaHeader
-		areas_code += "["
-		areas_code += serialize_area(area_data)
-		areas_code += "]"
+		areas_code += wrap_code_in_brackets(serialize_area(area_data))
 	
-	areas_code += "]"
-	
-	return areas_code
+	return wrap_code_in_brackets(areas_code)
 
 
 static func serialize_area(area: AreaData) -> String:
@@ -71,7 +72,7 @@ static func serialize_layers(layer_data: Array) -> String:
 
 
 static func serialize_layer(layer: LayerData) -> String:
-	var layer_code: String = "["
+	var layer_code: String = ""
 	
 	layer_code += serialize_metadata(
 		[
@@ -82,15 +83,14 @@ static func serialize_layer(layer: LayerData) -> String:
 			layer.layer_metadata.order,
 			layer.layer_metadata.is_ground,
 			layer.layer_metadata.activated_mission_ids,
+			layer.layer_metadata.layer_opacity
 		]
 	)
 	
 	layer_code += serialize_layer_tile_data(layer.tile_data)
 	layer_code += serialize_objects(layer.object_data)
 	
-	layer_code += "]"
-	
-	return layer_code
+	return wrap_code_in_brackets(layer_code)
 
 
 static func serialize_objects(object_data: Array) -> String:
@@ -129,11 +129,7 @@ static func serialize_object(object: ObjectData) -> String:
 
 
 static func serialize_layer_tile_data(tile_data: TileData) -> String:
-	var tile_code: String = "["
-	tile_code += serialize_data(tile_data)
-	tile_code += "]"
-	
-	return tile_code
+	return wrap_code_in_brackets(serialize_data(tile_data))
 
 
 static func serialize_level_metadata(data: LevelMetadata) -> String:
@@ -190,7 +186,7 @@ static func serialize_dictionary(dict: Dictionary) -> String:
 
 
 static func wrap_code_in_brackets(code: String) -> String:
-	return "[" + code + "]"
+	return "[%s]" % code
 
 
 # Base64 integer encoding/decoding from Super Mario Shockwave (thanks luci :D)

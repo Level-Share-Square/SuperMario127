@@ -51,7 +51,7 @@ func _on_Save_button_down():
 	
 	CurrentLevelData.unload_all_but_current_area()
 	
-	var level_code: String = LevelCodeSerializer.serialize_level_data(LevelDataContainer.new(CurrentLevelData.level_metadata, SavedEditorData.new(), [], CurrentLevelData.area_headers))
+	var level_code: String = LevelCodeSerializer.serialize_level_data(LevelDataContainer.new(CurrentLevelData.level_metadata, EditorData.new(), [], CurrentLevelData.area_headers))
 	
 	var file_path = level_list_util.get_level_file_path(level_id, working_folder)
 	level_list_util.save_level_code_file(level_code, file_path)

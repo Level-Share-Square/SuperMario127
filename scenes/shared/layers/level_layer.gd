@@ -1,6 +1,7 @@
 class_name LevelLayer
 extends Node2D
 
+var layer_data: LayerData
 
 const LAYER_Z_SPACING: int = 8 # amount of z indices the layer has on either side of it
 const DEFAULT_BACKGROUND_COLOR: Color = Color(0.545098, 0.545098, 0.545098)
@@ -23,6 +24,7 @@ func load_in(layer_data: LayerData):
 	# A value of layer tint should be 1-100
 	set_layer_modulate(Color(tint.r * tint.a, tint.g * tint.a, tint.b * tint.a, layer_data.layer_metadata.layer_opacity))
 	set_order(layer_data.layer_metadata.order)
+	self.layer_data = layer_data
 
 
 func set_order(s_order: int) -> void:

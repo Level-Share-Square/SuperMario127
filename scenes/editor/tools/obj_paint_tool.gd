@@ -34,17 +34,11 @@ func _click_left(_event: InputEvent, _world_pos: Vector2) -> void:
 func select(object: GameObject):
 	editor.selected_objects = {}
 	editor.selected_objects[object] = object.name
-	editor.selection_box.get_parent().show_selection_box()
-	editor.selection_box.get_parent().pivot.visible = false
-	editor.selection_box.get_parent().pivot_toggle.pressed = false
 	action(editor.selected_objects)
-	editor.selection_box.get_parent().pivot_toggle.hide()
-	editor.selection_box.get_parent().vseparator3.hide()
 	
 func action(objects: Dictionary = {}) -> void:
 	var action := SelectObjectsAction.new()
 	action.editor = editor
-	action.selection_box = editor.selection_box
 	action.selected_objects = objects
 	editor.action_manager.commit_action(action)
 
