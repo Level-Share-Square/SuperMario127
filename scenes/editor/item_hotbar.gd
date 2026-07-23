@@ -52,11 +52,11 @@ func _ready():
 			loadout_button.connect("button_down", self, "_on_palettes_pressed")
 	
 	
-	if CurrentLevelData.editor_data.loadouts != []:
-		loadouts = CurrentLevelData.editor_data.loadouts
-		fav_items = CurrentLevelData.editor_data.fav_items
-		loadout_palettes = CurrentLevelData.editor_data.palettes
-		items_favorited = CurrentLevelData.editor_data.favorites
+#	if CurrentLevelData.editor_data.loadouts != []:
+#		loadouts = CurrentLevelData.editor_data.loadouts
+#		fav_items = CurrentLevelData.editor_data.fav_items
+#		loadout_palettes = CurrentLevelData.editor_data.palettes
+#		items_favorited = CurrentLevelData.editor_data.favorites
 #	print(loadout_palettes)
 	refresh_loadout()
 	check_items()

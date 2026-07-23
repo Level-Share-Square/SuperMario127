@@ -750,6 +750,11 @@ _global_script_classes=[ {
 "path": "res://classes/ParallaxLayerResource.gd"
 }, {
 "base": "Node2D",
+"class": "ParallaxScroll",
+"language": "GDScript",
+"path": "res://scenes/shared/layers/parallax_layer/parallax_scroll.gd"
+}, {
+"base": "Node2D",
 "class": "ParticlesCollection",
 "language": "GDScript",
 "path": "res://classes/ParticleCollection.gd"
@@ -1318,6 +1323,7 @@ _global_script_class_icons={
 "PaletteButton": "",
 "PanningCamera2D": "",
 "ParallaxLayerResource": "",
+"ParallaxScroll": "",
 "ParticlesCollection": "",
 "PlaceObjectAction": "",
 "PlaceObjectBulkAction": "",

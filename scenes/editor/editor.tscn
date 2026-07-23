@@ -296,6 +296,7 @@ format = 1
 unique_name_in_owner = true
 margin_right = 40.0
 margin_bottom = 40.0
+mouse_filter = 2
 
 [node name="SaveManager" type="Node" parent="."]
 script = ExtResource( 73 )
