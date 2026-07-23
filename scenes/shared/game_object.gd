@@ -119,8 +119,6 @@ func _ready():
 #		if is_instance_valid(object_data_ref):
 #			visibility = object_data_ref.get_ref().properties[4]
 		
-
-		
 		editor_hitbox.collision_mask = 2
 		var editor = get_tree().current_scene
 		editor_hitbox.connect("mouse_entered", editor, "object_hovered", [self])
@@ -135,18 +133,18 @@ func _ready():
 	
 	match mode:
 		LevelPlayer.mode:
-			_object_ready()
+			call_deferred("_object_ready")
 			
 			if not enabled:
-				_object_disabled_ready()
+				call_deferred("_object_disabled_ready")
 				return
 			
 			if is_on_ground_layer():
-				_object_ground_ready()
+				call_deferred("_object_ground_ready")
 			else:
-				_object_parallax_ready()
+				call_deferred("_object_parallax_ready")
 		Editor.mode:
-			_editor_ready()
+			call_deferred("_editor_ready")
 
 
 func _process(delta):
