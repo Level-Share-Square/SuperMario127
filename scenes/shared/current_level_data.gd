@@ -21,7 +21,7 @@ var shine_kickout_data: Dictionary
 ## Level header data
 var level_metadata: LevelMetadata
 # Editor Data
-var saved_editor_data: SavedEditorData
+var editor_data: EditorData
 # Array of AreaHeader
 var area_headers: Array
 # Array of MissionData

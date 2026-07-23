@@ -8,11 +8,16 @@ static func serialize_level_data(var level_data: LevelDataContainer) -> String:
 	code += serialize_level_metadata(level_data.level_metadata)
 	code += serialize_areas(level_data.area_headers)
 	code += "[]" # mission data
-	code += "[]" # editor data
+	code += serialize_editor_data(level_data.editor_data)
 
 	code += "]"
 
 	return code
+
+
+static func serialize_editor_data(editor_data: EditorData) -> String:
+	var code: String = ""
+	return wrap_code_in_brackets(code)
 
 
 static func serialize_areas(area_headers: Array) -> String:

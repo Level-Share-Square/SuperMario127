@@ -323,8 +323,8 @@ static func get_level_metadata_from_old_data(level_data) -> LevelMetadata:
 	)
 
 
-static func get_editor_data_from_old_data(level_data) -> SavedEditorData:
-	var editor_data: SavedEditorData = SavedEditorData.new()
+static func get_editor_data_from_old_data(level_data) -> EditorData:
+	var editor_data: EditorData = EditorData.new()
 	
 	return editor_data
 
