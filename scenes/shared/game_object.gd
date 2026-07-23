@@ -225,12 +225,12 @@ func _object_ground_physics_process(delta: float) -> void:
 
 ## run when the game object enters the scene tree
 func _object_parallax_ready() -> void:
-	pass
+	_object_disabled_ready()
 
 
 ## Run every process frame when the object is on a ground layer.
 func _object_parallax_process(delta: float) -> void:
-	pass
+	_object_disabled_process(delta)
 
 
 ## Run every physics frame when the object is on a ground layer.
