@@ -1,21 +1,26 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scenes/shared/layers/tile_map_manager.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/layers/parallax_layer/parallax_layer.gd" type="Script" id=2]
 [ext_resource path="res://scenes/shared/layers/object_manager.gd" type="Script" id=3]
 [ext_resource path="res://generation/generated_tiles.res" type="TileSet" id=4]
+[ext_resource path="res://scenes/shared/layers/parallax_layer/parallax_scroll.gd" type="Script" id=5]
 
 [node name="Layer" type="Node2D"]
 script = ExtResource( 2 )
 
-[node name="ObjectManager" type="Node2D" parent="."]
+[node name="ParallaxScroll" type="Node2D" parent="."]
+unique_name_in_owner = true
+script = ExtResource( 5 )
+
+[node name="ObjectManager" type="Node2D" parent="ParallaxScroll"]
 unique_name_in_owner = true
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="TileMapManager" type="TileMap" parent="."]
+[node name="TileMapManager" type="TileMap" parent="ParallaxScroll"]
 unique_name_in_owner = true
 tile_set = ExtResource( 4 )
 cell_size = Vector2( 32, 32 )

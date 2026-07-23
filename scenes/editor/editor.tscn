@@ -1,4 +1,4 @@
-[gd_scene load_steps=106 format=2]
+[gd_scene load_steps=107 format=2]
 
 [ext_resource path="res://scenes/menu/options/options.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/menu/menu_controller/screen_manager.gd" type="Script" id=2]
@@ -76,6 +76,7 @@
 [ext_resource path="res://scenes/editor/tools/tile_selection.tscn" type="PackedScene" id=74]
 [ext_resource path="res://scenes/editor/windows/help.tscn" type="PackedScene" id=75]
 [ext_resource path="res://scenes/editor/tools/tilelock.svg" type="Texture" id=76]
+[ext_resource path="res://scenes/editor/editor_parallax_scroll.gd" type="Script" id=77]
 [ext_resource path="res://scenes/editor/windows/quit_confirm_window.tscn" type="PackedScene" id=78]
 
 [sub_resource type="CanvasItemMaterial" id=176]
@@ -212,12 +213,6 @@ shared_path = NodePath("LevelShared")
 [node name="LevelShared" parent="." instance=ExtResource( 5 )]
 unique_name_in_owner = true
 
-[node name="EditorCamera" parent="." instance=ExtResource( 7 )]
-unique_name_in_owner = true
-limit_left = -10000000
-limit_top = -10000000
-smoothing_enabled = false
-
 [node name="ZIndex" type="Node2D" parent="."]
 z_index = 128
 z_as_relative = false
@@ -274,23 +269,11 @@ margin_bottom = 40.0
 mouse_filter = 2
 script = ExtResource( 66 )
 
-[node name="TileBuffer" type="TileMap" parent="."]
+[node name="EditorCamera" parent="." instance=ExtResource( 7 )]
 unique_name_in_owner = true
-modulate = Color( 1, 1, 1, 0.74902 )
-z_index = 256
-tile_set = ExtResource( 23 )
-cell_size = Vector2( 32, 32 )
-cell_quadrant_size = 64
-collision_layer = 0
-collision_mask = 0
-navigation_layers = 0
-occluder_light_mask = 0
-format = 1
-
-[node name="ObjectBuffer" type="Control" parent="."]
-unique_name_in_owner = true
-margin_right = 40.0
-margin_bottom = 40.0
+limit_left = -10000000
+limit_top = -10000000
+smoothing_enabled = false
 
 [node name="SaveManager" type="Node" parent="."]
 script = ExtResource( 73 )
@@ -1707,9 +1690,31 @@ stream = ExtResource( 55 )
 volume_db = -7.5
 bus = "Sounds"
 
+[node name="ParallaxScroll" type="Node2D" parent="."]
+unique_name_in_owner = true
+script = ExtResource( 77 )
+
+[node name="TileBuffer" type="TileMap" parent="ParallaxScroll"]
+unique_name_in_owner = true
+modulate = Color( 1, 1, 1, 0.74902 )
+z_index = 256
+tile_set = ExtResource( 23 )
+cell_size = Vector2( 32, 32 )
+cell_quadrant_size = 64
+collision_layer = 0
+collision_mask = 0
+navigation_layers = 0
+occluder_light_mask = 0
+format = 1
+
+[node name="ObjectBuffer" type="Control" parent="ParallaxScroll"]
+unique_name_in_owner = true
+margin_right = 40.0
+margin_bottom = 40.0
+
+[connection signal="tool_changed" from="ZIndex/Tools" to="UI/UIContainer/EditorUI/Middle/Tools" method="_on_Tools_tool_changed"]
 [connection signal="tool_changed" from="ZIndex/Tools" to="ZIndex/Tools/ObjectTrail" method="_on_Tools_tool_changed"]
 [connection signal="tool_changed" from="ZIndex/Tools" to="ZIndex/ItemPreview" method="_on_Tools_tool_changed"]
-[connection signal="tool_changed" from="ZIndex/Tools" to="UI/UIContainer/EditorUI/Middle/Tools" method="_on_Tools_tool_changed"]
 [connection signal="action" from="ActionManager" to="SaveManager" method="_on_ActionManager_action"]
 [connection signal="text_entered" from="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/SearchBar" to="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/ScrollContainer/CenterContainer/ItemsGrid" method="_on_search"]
 [connection signal="pressed" from="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/Search" to="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/ScrollContainer/CenterContainer/ItemsGrid" method="_on_search"]
