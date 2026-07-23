@@ -167,7 +167,7 @@ func convert_and_load_level(code: String) -> void:
 	
 	var container: LevelDataContainer = conversion_util.get_new_level_data_from_old_data(level_data)
 	level_metadata = container.level_metadata
-	saved_editor_data = container.saved_editor_data
+	editor_data = container.editor_data
 	mission_data = container.mission_data
 	area_headers = container.area_headers
 
