@@ -15,12 +15,7 @@ func select_objects(selected_dict: Dictionary):
 	for object in selected_dict:
 		editor.selected_objects[object] = selected_dict[object]
 		object.selected = true
-	
-	selection_box.get_parent().selected_dict = editor.selected_objects.duplicate()
-	if selected_dict.empty():
-		selection_box.get_parent().hide_selection_box()
-	else:
-		selection_box.get_parent().show_selection_box()
+	editor.open_object_properties(selected_dict)
 
 
 func _do() -> void:

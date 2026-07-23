@@ -81,15 +81,6 @@ func load_base_properties(_editor: Editor, _objects: Dictionary):
 	else:
 		palette_property.hide()
 
-	if not "layer" in base_hidden_properties:
-		layer_property.load_property(editor, objects, [
-			"layer",
-			TYPE_INT,
-			PropertyInfo.new(layer_property.hint_tooltip)
-		])
-	else:
-		layer_property.hide()
-
 func flip_objects(multiplier: Vector2): # Hello everybody my name is
 	var action := ChangePropertyBulkAction.new()
 	action.affected_objects = setup_flipped_objects(multiplier)

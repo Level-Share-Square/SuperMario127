@@ -39,7 +39,7 @@ func load_objects(_objects: Dictionary):
 		
 		game_object.connect("tree_exited", self, "close")
 		var curve
-		for property in game_object.level_object.get_ref().properties:
+		for property in game_object.object_data_ref.get_ref().properties:
 			if "Curve2D" in str(property):
 				curve = property
 		
@@ -51,7 +51,7 @@ func load_objects(_objects: Dictionary):
 			var property: Array = [
 				_property, 
 				typeof(game_object[_property]), 
-				game_object.property_info[index] if typeof(game_object[_property]) != 17 else old_value_util.encode_value(curve)
+				game_object[_property] if typeof(game_object[_property]) != 17 else old_value_util.encode_value(curve)
 			]
 			if not property in common_properties:
 				common_properties.append(property)
