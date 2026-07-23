@@ -182,7 +182,7 @@ static func deserialize_layer_metadata_code(layer_metadata_code: String) -> Laye
 	layer_metadata.layer_tint = set_or_use_default_value(vars, 3, layer_metadata.layer_tint)
 	layer_metadata.order = set_or_use_default_value(vars, 4, layer_metadata.order)
 	layer_metadata.is_ground = set_or_use_default_value(vars, 5, layer_metadata.is_ground)
-	layer_metadata.activated_scenario_ids = set_or_use_default_value(vars, 6, layer_metadata.activated_scenario_ids)
+	layer_metadata.activated_mission_ids = set_or_use_default_value(vars, 6, layer_metadata.activated_mission_ids)
 	layer_metadata.layer_opacity = set_or_use_default_value(vars, 7, layer_metadata.layer_opacity)
 	
 	return layer_metadata
