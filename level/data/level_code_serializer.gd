@@ -25,6 +25,60 @@ static func serialize_editor_data(editor_data: EditorData) -> String:
 	return wrap_code_in_brackets(code)
 
 
+
+static func serialize_collectible_data(collectible_data: CollectibleData) -> String:
+	var code: String = ""
+	
+	code += serialize_missions(collectible_data.mission_data)
+	code += serialize_star_coins(collectible_data.star_coin_data)
+	
+	return wrap_code_in_brackets(code)
+
+
+static func serialize_missions(mission_data: Array) -> String:
+	var code: String = ""
+	
+	for mission in mission_data:
+		mission = mission as MissionData
+		
+		var mission_code: String = serialize_data_array(
+			[
+				mission.mission_uuid,
+				mission.mission_show_in_menu,
+				mission.shine_name,
+				mission.shine_description,
+				mission.shine_sort_order,
+				mission.shine_color,
+				mission.shine_force_leave,
+				mission.spawn_area_id,
+				mission.spawn_teleporter_tag,
+			]
+		)
+		
+		code += mission_code
+	
+	return wrap_code_in_brackets(code)
+
+
+static func serialize_star_coins(star_coin_data: Array) -> String:
+	var code: String = ""
+	
+	for star_coin in star_coin_data:
+		star_coin = star_coin as StarCoinData
+		
+		var star_coin_code: String = serialize_data_array(
+			[
+				star_coin.star_coin_uuid,
+				star_coin.star_coin_hint,
+				star_coin.star_coin_color,
+			]
+		)
+		
+		code += star_coin_code
+	
+	return wrap_code_in_brackets(code)
+
+
 static func serialize_areas(area_headers: Array) -> String:
 	var areas_code: String = ""
 	
@@ -138,20 +192,27 @@ static func serialize_layer_tile_data(tile_data: TileData) -> String:
 
 
 static func serialize_level_metadata(data: LevelMetadata) -> String:
-	return serialize_metadata(
+	var metadata_code: String = "{"
+	
+	metadata_code += serialize_data_array(
 		[
-			data.level_name, 
-			data.level_author, 
-			data.level_description,
-			data.level_thumbnail_url,
-			data.level_thumbnail_sky,
-			data.level_thumbnail_background,
-			data.level_thumbnail_background_palette,
-			# Since this is the only version of the serializer we're storing,
-			# it's fine to just store this code version.
-			ProjectSettings.get_setting("global/level_code_version"),
+		data.level_name, 
+		data.level_author, 
+		data.level_description,
+		data.level_thumbnail_url,
+		data.level_thumbnail_sky,
+		data.level_thumbnail_background,
+		data.level_thumbnail_background_palette,
+		# Since this is the only version of the serializer we're storing,
+		# it's fine to just store this code version.
+		ProjectSettings.get_setting("global/level_code_version"),
 		]
 	)
+	metadata_code += serialize_collectible_data(data.collectible_data)
+	
+	metadata_code += "}"
+	
+	return metadata_code
 
 
 static func serialize_metadata(values: Array) -> String:

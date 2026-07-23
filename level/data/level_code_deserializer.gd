@@ -20,10 +20,9 @@ static func deserialize_level_code(code: String) -> LevelDataContainer:
 	for header in areas_code:
 		new_area_headers.push_back(deserialize_area_header_code(header))
 	
-	var new_mission_data: Array = []
 	var new_editor_data = deserialize_editor_data(editor_data_code)
 	
-	var level_data = LevelDataContainer.new(new_level_metadata, new_editor_data, new_mission_data, new_area_headers)
+	var level_data = LevelDataContainer.new(new_level_metadata, new_editor_data, new_area_headers)
 	return level_data
 
 
@@ -141,8 +140,10 @@ static func deserialize_object_properties(code: String) -> Dictionary:
 
 
 static func deserialize_level_metadata_code(level_metadata_code: String) -> LevelMetadata:
+	var components = LevelCodeTokenizer.get_outermost_brackets(level_metadata_code)
+	
 	var metadata = LevelMetadata.new()
-	var vars = deserialize_datas_code(level_metadata_code)
+	var vars = deserialize_datas_code(level_metadata_code[0])
 	if vars == null:
 		metadata.mark_as_faulty("Invalid data in level metadata")
 		return metadata
@@ -155,7 +156,61 @@ static func deserialize_level_metadata_code(level_metadata_code: String) -> Leve
 	metadata.level_thumbnail_background_palette = set_or_use_default_value(vars, 6, metadata.level_thumbnail_background_palette)
 	metadata.level_version = set_or_use_default_value(vars, 7, metadata.level_version)
 	
+	metadata.collectible_data = deserialize_collectible_data_code(level_metadata_code[1])
+	
 	return metadata
+
+
+static func deserialize_collectible_data_code(code: String) -> CollectibleData:
+	code = LevelCodeTokenizer.get_outermost_brackets(code)[0]
+	var components = LevelCodeTokenizer.get_outermost_brackets(code)
+	
+	var mission_data_code = components[0]
+	var mission_data: Array = deserialize_mission_datas_code(mission_data_code)
+	var star_coin_data_code = components[1]
+	var star_coin_data: Array = deserialize_star_coin_datas_code(star_coin_data_code)
+	
+	return CollectibleData.new(mission_data, star_coin_data)
+
+
+static func deserialize_mission_datas_code(code: String) -> Array:
+	var mission_codes = LevelCodeTokenizer.get_outermost_brackets(code)
+	
+	var mission_datas: Array = []
+	for mission_code in mission_codes:
+		var mission_data: MissionData = MissionData.new()
+		var vars: Array = deserialize_datas_code(mission_code)
+		
+		mission_data.mission_uuid = set_or_use_default_value(vars, 0, mission_data.mission_uuid)
+		mission_data.mission_show_in_menu = set_or_use_default_value(vars, 1, mission_data.mission_uuid)
+		mission_data.shine_name = set_or_use_default_value(vars, 2, mission_data.shine_name)
+		mission_data.shine_description = set_or_use_default_value(vars, 3, mission_data.shine_description)
+		mission_data.shine_sort_order = set_or_use_default_value(vars, 4, mission_data.shine_sort_order)
+		mission_data.shine_color = set_or_use_default_value(vars, 5, mission_data.shine_color)
+		mission_data.shine_force_leave = set_or_use_default_value(vars, 6, mission_data.shine_force_leave)
+		mission_data.spawn_area_id = set_or_use_default_value(vars, 7, mission_data.spawn_area_id)
+		mission_data.spawn_teleporter_tag = set_or_use_default_value(vars, 8, mission_data.spawn_teleporter_tag)
+		
+		mission_datas.append(mission_data)
+	
+	return mission_datas
+
+
+static func deserialize_star_coin_datas_code(code: String) -> Array:
+	var star_coin_codes = LevelCodeTokenizer.get_outermost_brackets(code)
+	
+	var star_coin_datas: Array = []
+	for star_coin_code in star_coin_codes:
+		var star_coin_data: StarCoinData = StarCoinData.new()
+		var vars: Array = deserialize_datas_code(star_coin_code)
+		
+		star_coin_data.star_coin_uuid = set_or_use_default_value(vars, 0, star_coin_data.star_coin_uuid)
+		star_coin_data.star_coin_hint = set_or_use_default_value(vars, 1, star_coin_data.star_coin_hint)
+		star_coin_data.star_coin_color = set_or_use_default_value(vars, 2, star_coin_data.star_coin_color)
+		
+		star_coin_datas.append(star_coin_data)
+	
+	return star_coin_datas
 
 
 # !! Takes full area code as input! so that the area code can be stored as a variable

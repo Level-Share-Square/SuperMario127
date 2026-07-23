@@ -319,21 +319,50 @@ static func get_level_metadata_from_old_data(level_data) -> LevelMetadata:
 		level_data.thumbnail_url,
 		starting_area.sky,
 		starting_area.background,
-		starting_area.background_palette
+		starting_area.background_palette,
+		100,
+		get_collectible_data_from_old_data(level_data)
 	)
 
 
-static func get_editor_data_from_old_data(level_data) -> EditorData:
-	var editor_data: EditorData = EditorData.new()
+static func get_collectible_data_from_old_data(level_data) -> CollectibleData:
+	var mission_datas: Array = []
+	var star_coin_datas: Array = []
 	
-	return editor_data
+	var SHINE_ID: int = 2
+	var STAR_COIN_ID: int = 52
+	
+	for area in level_data.areas:
+		area = area as AreaDataOld
+		for object in area.objects:
+			object = object as ObjectDataOld
+			
+			if object.type_id == SHINE_ID:
+				var mission_data: MissionData = MissionData.new(
+					uuid_util.v4(),
+					object.properties[8], # Show in menu
+					object.properties[6], # Shine name
+					object.properties[7], # Shine desc
+					object.properties[15], # Sort order
+					object.properties[12], # Color
+					object.properties[14], # Kick out
+					0,
+					"spawn"
+				)
+				
+				mission_datas.append(mission_data)
+			elif object.type_id == STAR_COIN_ID:
+				var star_coin_data: StarCoinData = StarCoinData.new(
+					uuid_util.v4(),
+					"",
+					Color.white
+				)
+				
+				star_coin_datas.append(star_coin_data)
+	
+	return CollectibleData.new(mission_datas, star_coin_datas)
 
 
-static func get_mission_data_from_old_data(level_data) -> Array:
-	var mission_data: Array = []
-	
-	return mission_data
-	
 static func get_area_data_from_old_data(old_area: AreaDataOld) -> AreaData:
 	var area_header := AreaHeader.new(
 		"",
@@ -455,8 +484,7 @@ static func get_new_area_code(header: AreaHeader, old_area: AreaDataOld) -> Area
 static func get_new_level_data_from_old_data(level_data) -> LevelDataContainer:
 	var container: LevelDataContainer = LevelDataContainer.new(
 		get_level_metadata_from_old_data(level_data),
-		get_editor_data_from_old_data(level_data),
-		get_mission_data_from_old_data(level_data),
+		EditorData.new(),
 		get_area_headers_from_old_data(level_data)
 	)
 	
