@@ -2,6 +2,7 @@ extends Node
 
 
 const DEFAULT_CODE_PATH: String = "res://level/default_level.tres"
+const DEFAULT_AREA_PATH: String = "res://level/default_area.tres"
 const DEFAULT_NAME: String = "My Level"
 const DEFAULT_AUTHOR: String = "Unknown"
 const DEFAULT_DESCRIPTION: String = "This level has no description."

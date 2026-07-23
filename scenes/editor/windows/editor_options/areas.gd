@@ -47,13 +47,13 @@ func reload_areas():
 
 
 func create_area():
-	if CurrentLevelData.level_data.areas.size() != 32:
-		var area = AreaDataOld.new()
-		area.duplicate(Singleton.EditorSavedSettings.default_area)
-		CurrentLevelData.level_data.areas.append(area)
+	if CurrentLevelData.area_headers.size() != 32:
+		var area_code = level_list_util.load_level_code_file(CurrentLevelData.DEFAULT_AREA_PATH)
+		var area = LevelCodeDeserializer.deserialize_area_header_code(area_code)
+		CurrentLevelData.area_headers.append(area)
 		reload_areas()
 
-	new_area.disabled = (CurrentLevelData.level_data.areas.size() == 32)
+	new_area.disabled = (CurrentLevelData.area_headers.size() == 32)
 
 
 func paste_area():
@@ -66,6 +66,8 @@ func paste_area():
 			i["properties"].append(i["properties"].pop_front())
 		area = conversion_util.get_area_data_from_old_data(area)
 		CurrentLevelData.area_headers.append(area.header)
-	else: # new validity checker here
+	elif level_code_validator_util.validate_level_code(area_code):
 		CurrentLevelData.area_headers.append(LevelCodeDeserializer.deserialize_area_code(area_code).header)
+	else:
+		printerr("Invalid area code: ", area_code)
 	reload_areas()
