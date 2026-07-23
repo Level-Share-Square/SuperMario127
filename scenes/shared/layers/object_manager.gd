@@ -34,7 +34,7 @@ func create_object(object_data: ObjectData):
 	var game_object = object_scene.instance()
 	game_object.mode = mode
 	game_object.object_data_ref = weakref(object_data)
-	game_object.level_layer_ref = weakref(get_parent())
+	game_object.level_layer_ref = weakref(owner)
 	game_object.palette = object_data.metadata.palette
 	game_object.position = object_data.metadata.position
 	

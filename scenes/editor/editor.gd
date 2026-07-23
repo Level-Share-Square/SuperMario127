@@ -28,6 +28,7 @@ onready var action_manager: ActionManager = $"%ActionManager"
 onready var item_actions = $"%ItemActions"
 onready var screen_manager = $"%ScreenManager"
 onready var save_manager = $"SaveManager"
+onready var object_settings_window = $"%ObjectSettingsWindow"
 
 onready var save_button = $UI/EditorUI/Utilities/Save
 onready var level_settings = $"%LevelSettingsWindow"
@@ -94,6 +95,12 @@ func object_unhovered(object):
 	object.hovered = false
 	object.modulate_set()
 		
+
+func open_object_properties(selected_objects):
+	var objects: Dictionary
+	for selected_object in selected_objects:
+		objects[selected_object] = selected_object.placeable_item
+	object_settings_window.load_objects(objects)
 
 
 func _update_editor_framerate():

@@ -1,4 +1,4 @@
-[gd_scene load_steps=106 format=2]
+[gd_scene load_steps=108 format=2]
 
 [ext_resource path="res://scenes/menu/options/options.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/menu/menu_controller/screen_manager.gd" type="Script" id=2]
@@ -76,7 +76,9 @@
 [ext_resource path="res://scenes/editor/tools/tile_selection.tscn" type="PackedScene" id=74]
 [ext_resource path="res://scenes/editor/windows/help.tscn" type="PackedScene" id=75]
 [ext_resource path="res://scenes/editor/tools/tilelock.svg" type="Texture" id=76]
+[ext_resource path="res://scenes/editor/editor_parallax_scroll.gd" type="Script" id=77]
 [ext_resource path="res://scenes/editor/windows/quit_confirm_window.tscn" type="PackedScene" id=78]
+[ext_resource path="res://scenes/editor/windows/temp_layer_adder.tscn" type="PackedScene" id=79]
 
 [sub_resource type="CanvasItemMaterial" id=176]
 blend_mode = 1
@@ -274,7 +276,10 @@ margin_bottom = 40.0
 mouse_filter = 2
 script = ExtResource( 66 )
 
-[node name="TileBuffer" type="TileMap" parent="."]
+[node name="ParallaxScroll" type="Node2D" parent="."]
+script = ExtResource( 77 )
+
+[node name="TileBuffer" type="TileMap" parent="ParallaxScroll"]
 unique_name_in_owner = true
 modulate = Color( 1, 1, 1, 0.74902 )
 z_index = 256
@@ -287,10 +292,11 @@ navigation_layers = 0
 occluder_light_mask = 0
 format = 1
 
-[node name="ObjectBuffer" type="Control" parent="."]
+[node name="ObjectBuffer" type="Control" parent="ParallaxScroll"]
 unique_name_in_owner = true
 margin_right = 40.0
 margin_bottom = 40.0
+mouse_filter = 2
 
 [node name="SaveManager" type="Node" parent="."]
 script = ExtResource( 73 )
@@ -704,7 +710,7 @@ unique_name_in_owner = true
 margin_left = 4.0
 margin_top = 4.0
 margin_right = 108.0
-margin_bottom = 196.0
+margin_bottom = 221.0
 rect_clip_content = true
 custom_constants/separation = 2
 
@@ -822,6 +828,20 @@ focus_mode = 0
 theme_type_variation = "ButtonTransparent"
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "Settings"
+script = ExtResource( 24 )
+
+[node name="HSeparator8" type="HSeparator" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown"]
+margin_top = 194.0
+margin_right = 104.0
+margin_bottom = 198.0
+
+[node name="Layer" type="Button" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown"]
+margin_top = 200.0
+margin_right = 104.0
+margin_bottom = 217.0
+theme_type_variation = "ButtonTransparent"
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "Linktober Aura"
 script = ExtResource( 24 )
 
 [node name="Padding" type="Control" parent="UI/UIContainer/EditorUI/Top"]
@@ -1631,6 +1651,10 @@ margin_top = 172.0
 margin_right = 509.0
 margin_bottom = 253.0
 custom_styles/panel = SubResource( 193 )
+
+[node name="LayerAdder" parent="UI" instance=ExtResource( 79 )]
+unique_name_in_owner = true
+visible = false
 
 [node name="Grid" type="ParallaxBackground" parent="UI"]
 unique_name_in_owner = true

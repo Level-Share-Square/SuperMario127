@@ -145,7 +145,7 @@ func _ready():
 				call_deferred("_object_parallax_ready")
 		Editor.mode:
 			call_deferred("_editor_ready")
-
+	loaded = true
 
 func _process(delta):
 	match mode:
@@ -240,7 +240,7 @@ func _object_parallax_physics_process(delta: float) -> void:
 
 ## run when the game object enters the scene tree
 func _object_disabled_ready() -> void:
-	pass
+	enabled = false
 
 
 ## Run every process frame when the object is disabled.

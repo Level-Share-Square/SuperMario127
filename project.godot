@@ -309,6 +309,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/editor/editor_button.gd"
 }, {
+"base": "LevelDataResource",
+"class": "EditorData",
+"language": "GDScript",
+"path": "res://level/models/level/editor_data.gd"
+}, {
 "base": "Area2D",
 "class": "EditorHitbox",
 "language": "GDScript",
@@ -745,6 +750,11 @@ _global_script_classes=[ {
 "path": "res://classes/ParallaxLayerResource.gd"
 }, {
 "base": "Node2D",
+"class": "ParallaxScroll",
+"language": "GDScript",
+"path": "res://scenes/shared/layers/parallax_layer/parallax_scroll.gd"
+}, {
+"base": "Node2D",
 "class": "ParticlesCollection",
 "language": "GDScript",
 "path": "res://classes/ParticleCollection.gd"
@@ -868,11 +878,6 @@ _global_script_classes=[ {
 "class": "RotateSelection",
 "language": "GDScript",
 "path": "res://scenes/editor/tools/selection_box/rotate.gd"
-}, {
-"base": "LevelDataResource",
-"class": "SavedEditorData",
-"language": "GDScript",
-"path": "res://level/models/level/saved_editor.gd"
 }, {
 "base": "SelectionTool",
 "class": "ScaleSelection",
@@ -1230,6 +1235,7 @@ _global_script_class_icons={
 "DoorTeleport": "",
 "Editor": "",
 "EditorButton": "",
+"EditorData": "",
 "EditorHitbox": "",
 "EditorLayerManager": "",
 "EditorTool": "",
@@ -1317,6 +1323,7 @@ _global_script_class_icons={
 "PaletteButton": "",
 "PanningCamera2D": "",
 "ParallaxLayerResource": "",
+"ParallaxScroll": "",
 "ParticlesCollection": "",
 "PlaceObjectAction": "",
 "PlaceObjectBulkAction": "",
@@ -1342,7 +1349,6 @@ _global_script_class_icons={
 "ResizeAreaAction": "",
 "RocketNozzle": "",
 "RotateSelection": "",
-"SavedEditorData": "",
 "ScaleSelection": "",
 "Screen": "",
 "ScreenSizeUtil": "",

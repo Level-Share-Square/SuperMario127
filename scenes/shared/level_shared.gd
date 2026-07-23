@@ -36,8 +36,11 @@ func load_layers(layer_data_list: Array):
 
 func get_layer_index(layer: LevelLayer):
 	return layers.find(layer)
+	
+func get_layer_at(index: int):
+	return layers[index]
 
-func add_layer(layer_data = null, add_to_data: bool = false):
+func add_layer(layer_data = null, add_to_data: bool = false, at: int = layers.size()):
 	if not is_instance_valid(layer_data):
 		var layer_metadata = LayerMetadata.new()
 		layer_data = LayerData.new(layer_metadata, TileData.new(), [])
@@ -54,14 +57,20 @@ func add_layer(layer_data = null, add_to_data: bool = false):
 	layers.append(new_layer)
 	
 	if add_to_data:
-		CurrentLevelData.current_area.layers.append(layer_data)
+		CurrentLevelData.current_area.layers.insert(at, layer_data)
 
 
 func remove_layer(index: int, remove_from_data: bool = false):
 	var removed = layers[index]
 	layers.remove(index)
+	removed.queue_free()
 	if remove_from_data:
 		CurrentLevelData.current_area.layers.remove(index)
+		
+func edit_layer(index: int, data: LayerData):
+	var layer = layers[index]
+	layer.load_in(data)
+	CurrentLevelData.current_area.layers[index] = data
 	
 func set_tile(x: int, y: int, index: int, tileset_id: int, tile_id: int, palette_id : int = 0):
 	layers[index].place_tile(Vector2(x, y), tileset_id, tile_id, palette_id, true, true)
