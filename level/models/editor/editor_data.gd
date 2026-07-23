@@ -31,10 +31,19 @@ func _init(
 	fav_counts = s_fav_counts
 	selected_loadout = s_selected_loadout
 	
-	var i = s_loadouts.size() - 1
+	var i = loadouts.size() - 1
 	while i < MAX_LOADOUTS - 1:
 		loadouts.append(DEFAULT_ITEMS[i])
+		i += 1
+	i = palettes.size() - 1
+	while i < MAX_LOADOUTS - 1:
 		palettes.append([0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+		i += 1
+	i = fav_items.size() - 1
+	while i < MAX_LOADOUTS - 1:
 		fav_items.append([])
+		i += 1
+	i = fav_counts.size() - 1
+	while i < MAX_LOADOUTS - 1:
 		fav_counts.append(0)
 		i += 1
