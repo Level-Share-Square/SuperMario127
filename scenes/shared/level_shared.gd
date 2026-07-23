@@ -72,8 +72,8 @@ func get_tile(x: int, y: int, index: int):
 func is_air(tile_data: Array):
 	return tile_data[0] <= 0 or tile_data[1] < 0 or tile_data[2] < 0
 
-func create_object(object: ObjectData, index: int):
-	return layers[index].place_object(object, true)
+func create_object(object: ObjectData, index: int, add_to_data = false):
+	return layers[index].place_object(object, add_to_data)
 
 func get_objects_manager(index: int):
 	return layers[index].object_manager

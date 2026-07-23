@@ -19,6 +19,8 @@ var properties: Dictionary = {}
 func _init(s_metadata: ObjectMetadata, s_properties: Dictionary = {}):
 	metadata = s_metadata
 	properties = s_properties
+	
+	
 
 
 func set_property(property_id: int, value) -> void:
@@ -42,6 +44,10 @@ func set_property(property_id: int, value) -> void:
 				properties[property_id] = value
 			else:
 				properties.get_or_add(property_id, value)
+				
+func set_property_by_name(property_name: String, value):
+	var property_id: int = property_ids.get_or_add(property_name, 4 + property_ids.size())
+	set_property(property_id, value)
 				
 func get_property(property_id: int):
 	match property_id:

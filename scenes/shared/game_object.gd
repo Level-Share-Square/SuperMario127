@@ -84,11 +84,9 @@ func _init():
 func _ready():
 	load_placeable_item()
 	
-			
+	set_object_data_property_metadata()
 	for property in savable_properties:
 		property_ids.get_or_add(property, property_ids.values().size() - 2)
-	
-	set_object_data_property_metadata()
 	
 	if get_tree().current_scene.mode == 1:
 		if generate_editor_hitbox:
@@ -309,6 +307,8 @@ func set_object_data_property_metadata() -> void:
 		var property_id: int = -1
 		for property in property_ids.keys():
 			property_id = property_ids.get(property)
+			if object_data.default_values.has(property_id):
+				continue
 			object_data.default_values[property_id] = self[property]
 
 
@@ -408,3 +408,13 @@ func parts_input_handler(event, object):
 
 func is_on_ground_layer() -> bool:
 	return level_layer_ref.get_ref() is LevelGroundLayer
+	
+func create_coin(coin_id, body, physics, velocity) -> void:
+	var object := ObjectData.new(ObjectMetadata.new(
+		body.global_position,
+		coin_id,
+		0
+	))
+	object.set_property_by_name("physics", physics)
+	object.set_property_by_name("velocity", velocity)
+	get_parent().create_object(object)

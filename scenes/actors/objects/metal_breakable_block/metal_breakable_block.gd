@@ -61,7 +61,8 @@ func _physics_process(delta):
 			if !broken and hit_body.name.begins_with("Character"): if hit_body.velocity.y > 0 and hit_body.big_attack and is_metal(hit_body):
 				broken = true
 				if not broken_sound.is_playing(): 
-					for i in(coins): create_coin()
+					var velocity_x = -80 if int(time_alive * 10) % 2 == 0 else 80
+					for i in(coins): create_coin(1, static_body, true, Vector2(velocity_x, -300))
 					break_particle.show()
 					dust_particle.show()
 					break_particle.set_emitting(true)
@@ -73,7 +74,8 @@ func _physics_process(delta):
 			if !broken and hit_body.name.begins_with("Character"): if hit_body.attacking and !hit_body.big_attack and is_metal(hit_body):
 				broken = true
 				if not broken_sound.is_playing(): 
-					for i in(coins): create_coin()
+					var velocity_x = -80 if int(time_alive * 10) % 2 == 0 else 80
+					for i in(coins): create_coin(1, static_body, true, Vector2(velocity_x, -300))
 					break_particle.show()
 					dust_particle.show()
 					break_particle.set_emitting(true)
@@ -85,7 +87,8 @@ func _physics_process(delta):
 			if !broken and hit_area.has_method("is_hurt_area") and is_metal(hit_area.get_parent()):
 				broken = true
 				if not broken_sound.is_playing(): 
-					for i in(coins): create_coin()
+					var velocity_x = -80 if int(time_alive * 10) % 2 == 0 else 80
+					for i in(coins): create_coin(1, static_body, true, Vector2(velocity_x, -300))
 					break_particle.show()
 					dust_particle.show()
 					break_particle.set_emitting(true)
@@ -113,22 +116,6 @@ func _physics_process(delta):
 			static_body.set_collision_mask_bit(1, false)
 			stomp_area.set_collision_layer_bit(0, false)
 
-func create_coin(): #creates a coin
-	time_alive += 1
-	time_alive += (time_alive/3*5/10)
-	var object = ObjectDataOld.new()
-	object.type_id = 1
-	object.properties = []
-	object.properties.append(static_body.global_position)
-	object.properties.append(Vector2(1, 1))
-	object.properties.append(0)
-	object.properties.append(true)
-	object.properties.append(true)
-	object.properties.append(true)
-	var power = int(time_alive*100) % 80
-	var velocity_x = -power if int(time_alive * 10) % 2 == 0 else power
-	object.properties.append(Vector2(velocity_x, -300)) #makes the coin move around and fly in the air when the block breaks
-	get_parent().create_object(object, false) #finishes the object creation
 
 func is_middle(check):
 	.is_middle(check)

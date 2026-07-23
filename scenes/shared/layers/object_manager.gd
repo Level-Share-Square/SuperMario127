@@ -12,9 +12,7 @@ func load_in(s_layer_data: LayerData):
 		queue_free()
 	
 	for object_data in layer_data.object_data:
-		var passed_metadata := ObjectMetadata.new(object_data.metadata.position, object_data.metadata.type_id, object_data.metadata.palette)
-		var passed_data := ObjectData.new(passed_metadata, object_data.properties.duplicate(true))
-		create_object(passed_data)
+		create_object(object_data)
 
 
 func place_object(object_data: ObjectData, add_to_data: bool = false):
@@ -42,8 +40,9 @@ func create_object(object_data: ObjectData):
 	
 	game_object._set_properties()
 	
-	
 	add_child(game_object)
+
+	object_data.property_ids = game_object.property_ids
 	
 	return game_object
 

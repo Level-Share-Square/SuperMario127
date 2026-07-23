@@ -330,7 +330,7 @@ static func deserialize_data_code(data_code: String):
 			if(data_array.size() > 3):
 				return Color(data_array[0], data_array[1], data_array[2], data_array[3])
 			else:
-				return Color(data_array[0], data_array[1], data_array[2], 255)
+				return Color(data_array[0], data_array[1], data_array[2], 1)
 		LevelCodeHandler.TYPE_CODE_ARRAY:
 			data = LevelCodeTokenizer.splice_data_array(data)
 			return deserialize_datas_code(data)

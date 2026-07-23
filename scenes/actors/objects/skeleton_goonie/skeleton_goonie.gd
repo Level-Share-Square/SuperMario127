@@ -94,20 +94,6 @@ func goonie_ready():
 func exploded(hit_pos:Vector2):
 	hurt(hit_pos)
 
-func create_coin(spawn_pos) -> void:
-	var object: = ObjectDataOld.new()
-	object.type_id = 1
-	object.properties = []
-	object.properties.append(spawn_pos)
-	object.properties.append(Vector2(1, 1))
-	object.properties.append(0)
-	object.properties.append(true)
-	object.properties.append(true)
-	
-	object.properties.append(true)
-	var velocity_x = - 80 if randi() % 2 == 0 else 80
-	object.properties.append(Vector2(velocity_x, - 300))
-	get_parent().create_object(object, false)
 
 func hurt(hit_pos:Vector2):
 	if (inv_timer > 0):
@@ -143,7 +129,8 @@ func hurt(hit_pos:Vector2):
 		if (sprite.flip_h): head_particle.texture = load("res://scenes/actors/objects/skeleton_goonie/headflip_h.png")
 		head_particle.emitting = true
 		head_particle.restart()
-		create_coin(wingless_body.global_position)
+		var velocity_x = - 80 if randi() % 2 == 0 else 80
+		create_coin(1, wingless_body.global_position, true, Vector2(velocity_x, -300))
 	bones_sfx.play()
 	hit_sfx.play()
 	poof.emitting = true

@@ -63,28 +63,18 @@ func destroy():
 	broken = true
 	disable_all_descendants(self)
 	sound.play()
-	create_coin()
+	
+	time_alive += 1
+	time_alive += (time_alive/3*5/10)
+	var power = int(time_alive*100) % 80
+	var velocity_x = -power if int(time_alive * 10) % 2 == 0 else power
+	create_coin(40, body, true, Vector2(velocity_x, -300))
+	
 	dust_particle.emitting = true
 	break_particle.emitting = true
 	sprite.visible = false
 	break_timer = 1.5
 
-func create_coin(): #creates a coin
-	time_alive += 1
-	time_alive += (time_alive/3*5/10)
-	var object = ObjectDataOld.new()
-	object.type_id = 40
-	object.properties = []
-	object.properties.append(body.global_position)
-	object.properties.append(Vector2(1, 1))
-	object.properties.append(0)
-	object.properties.append(true)
-	object.properties.append(true)
-	object.properties.append(true)
-	var power = int(time_alive*100) % 80
-	var velocity_x = -power if int(time_alive * 10) % 2 == 0 else power
-	object.properties.append(Vector2(velocity_x, -300)) #makes the coin move around and fly in the air when the block breaks
-	get_parent().create_object(object, false) #finishes the object creation
 
 func _physics_process(delta):
 	time_alive += delta
