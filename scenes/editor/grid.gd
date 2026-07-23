@@ -1,5 +1,7 @@
 extends ParallaxBackground
 
+onready var parallax_scroll = $"%ParallaxScroll"
+onready var grid_repeat = $"%GridRepeat"
 
 var hidden: bool = false
 var camera_zoom_level: float = 1.0
@@ -23,3 +25,7 @@ func update_visibility(zoom_level: float):
 		visible = false
 	else:
 		visible = hidden
+
+func _process(delta):
+	grid_repeat.motion_offset = parallax_scroll.position
+	grid_repeat.scale = parallax_scroll.scale
