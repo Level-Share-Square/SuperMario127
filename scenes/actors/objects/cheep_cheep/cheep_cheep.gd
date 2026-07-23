@@ -107,21 +107,6 @@ func steely_hit(hit_pos : Vector2) -> void:
 	if !hit:
 		kill(hit_pos)
 
-func create_coin() -> void:
-	var object := ObjectDataOld.new()
-	object.type_id = 1
-	object.properties = []
-	object.properties.append(kinematic_body.global_position)
-	object.properties.append(Vector2(1, 1))
-	object.properties.append(0)
-	object.properties.append(true)
-	object.properties.append(true)
-	
-	object.properties.append(true)
-	var velocity_x = -80 if int(time_alive * 10) % 2 == 0 else 80
-	object.properties.append(Vector2(velocity_x, -300))
-	get_parent().create_object(object, false)
-
 func kill(hit_pos : Vector2) -> void:
 	if !hit and !dead:
 		if is_instance_valid(kinematic_body):
@@ -244,7 +229,8 @@ func physics_process_hit(delta: float, is_in_platform: bool) -> void:
 			delete_timer = 1.25
 			poof_sound.play()
 			velocity = Vector2()
-			create_coin()
+			var velocity_x = -80 if int(time_alive * 10) % 2 == 0 else 80
+			create_coin(1, kinematic_body, true, Vector2(velocity_x, -300))
 	if delete_timer > 0:
 		delete_timer -= delta
 		if delete_timer <= 0:

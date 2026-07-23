@@ -57,21 +57,6 @@ func player_entered(body):
 		fuse_sound.play()
 
 
-func create_coin():
-	var object = ObjectDataOld.new()
-	object.type_id = 1
-	object.properties = []
-	object.properties.append(kinematic_body.global_position)
-	object.properties.append(Vector2(1, 1))
-	object.properties.append(0)
-	object.properties.append(true)
-	object.properties.append(true)
-	object.properties.append(true)
-	var velocity_x = -80 if int(time_alive * 10) % 2 == 0 else 80
-	object.properties.append(Vector2(velocity_x, -300))
-	get_parent().create_object(object, false)
-
-
 func on_visibility_changed(is_visible: bool) -> void:
 	for raycast in raycasts:
 		if is_instance_valid(raycast):
@@ -248,7 +233,8 @@ func _physics_process(delta):
 					dead = true
 					damage_timer = 0.35
 					delete_timer = 3.0
-					create_coin()
+					var velocity_x = -80 if int(time_alive * 10) % 2 == 0 else 80
+					create_coin(1, kinematic_body, true, Vector2(velocity_x, -300))
 			if !dead and !hit:
 				facing_direction = 1 if (character.global_position.x > kinematic_body.global_position.x) else -1
 				velocity.x = lerp(velocity.x, facing_direction * run_speed, fps_util.PHYSICS_DELTA * accel)

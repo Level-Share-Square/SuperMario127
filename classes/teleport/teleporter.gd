@@ -63,6 +63,7 @@ func finish_exit_animation(character: Character) -> void:
 	character.set_inter_player_collision(true)
 
 
+
 ### MISC
 func _ready():
 	._ready()

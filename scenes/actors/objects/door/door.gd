@@ -87,6 +87,8 @@ func exit_animation_finished(_animation: String, character: Character):
 	animate_door(true)
 	emit_signal("exit_completed")
 
+func _process(delta):
+	print(tag)
 
 func animate_door(is_backwards: bool) -> void:
 	# this function just plays the door animation, so code doesn't have to repeat

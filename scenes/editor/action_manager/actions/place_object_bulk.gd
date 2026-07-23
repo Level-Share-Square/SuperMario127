@@ -11,7 +11,7 @@ func _do() -> void:
 		new_objects.clear()
 	for i in objects:
 		object_data = i
-		var new_object = shared.create_object(object_data, layer)
+		var new_object = shared.create_object(object_data, layer, true)
 		new_objects[new_object] = object_data
 		
 

@@ -112,20 +112,6 @@ func hit(hit_pos: Vector2):
 	hide_timer = 3.0
 	position.y -= 2
 
-func create_coin()->void :
-	var object: = ObjectDataOld.new()
-	object.type_id = 1
-	object.properties = []
-	object.properties.append(body.global_position)
-	object.properties.append(Vector2(1, 1))
-	object.properties.append(0)
-	object.properties.append(true)
-	object.properties.append(true)
-	
-	object.properties.append(true)
-	var velocity_x = - 80 if randi() % 2 == 0 else 80
-	object.properties.append(Vector2(velocity_x, - 300))
-	get_parent().create_object(object, false)
 
 func _physics_process(delta):
 	if not (mode != 1 and enabled):
@@ -226,7 +212,8 @@ func _physics_process(delta):
 			poof.emitting = true
 			poof_sfx.play()
 			poof.restart()
-			create_coin()
+			var velocity_x = - 80 if randi() % 2 == 0 else 80
+			create_coin(1, body, true, Vector2(velocity_x, -300))
 	elif (delete_timer > 0):
 		delete_timer -= delta
 		velocity = Vector2.ZERO

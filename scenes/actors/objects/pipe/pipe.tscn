@@ -53,7 +53,6 @@ self_modulate = Color( 0.733333, 1, 0.694118, 1 )
 texture = ExtResource( 5 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
-visible = false
 position = Vector2( 0, -4 )
 collision_mask = 2
 

@@ -29,6 +29,8 @@ var enabled: bool
 var snap_enabled: bool = true
 # whether to emit particles on startup
 var spawn_effect: bool = true
+# layer ref
+var layer_ref: WeakRef
 
 # water and lava
 onready var liquids_detector: Area2D = $LiquidsDetector
@@ -128,18 +130,15 @@ func is_on_ground() -> bool:
 	return floor_detector.is_colliding()
 
 
-func create_coin(velocity: Vector2, offset: Vector2) -> GameObject:
-	var object: = ObjectDataOld.new()
-	object.type_id = 1
-	object.properties = []
-	object.properties.append(global_position + offset)
-	object.properties.append(Vector2.ONE)
-	object.properties.append(0)
-	object.properties.append(true)
-	object.properties.append(true)
-	object.properties.append(true)
-	object.properties.append(velocity)
+func create_coin(velocity: Vector2, offset: Vector2) -> GameObject:	
+	var object := ObjectData.new(ObjectMetadata.new(
+		global_position + offset,
+		1,
+		0
+	))
+	object.set_property_by_name("physics", true)
+	object.set_property_by_name("velocity", velocity)
 	
-	var shared = get_tree().current_scene.get_shared_node()
+	var shared = get_tree().current_scene.get_shared()
 	
-	return shared.create_object(object, false)
+	return layer_ref.get_ref().place_object(object)

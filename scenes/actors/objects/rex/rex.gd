@@ -59,7 +59,6 @@ var knockback_affect := false
 
 var character:Character
 
-var loaded: = true
 var dead: = false
 var was_stomped: = false
 var was_ground_pound: = false
@@ -127,20 +126,6 @@ func steely_hit(hit_pos:Vector2)->void :
 	if not hit:
 		kill(hit_pos)
 
-func create_coin() -> void:
-	var object: = ObjectDataOld.new()
-	object.type_id = 1
-	object.properties = []
-	object.properties.append(kinematic_body.global_position)
-	object.properties.append(Vector2(1, 1))
-	object.properties.append(0)
-	object.properties.append(true)
-	object.properties.append(true)
-	
-	object.properties.append(true)
-	var velocity_x = - 80 if int(time_alive * 10) % 2 == 0 else 80
-	object.properties.append(Vector2(velocity_x, - 300))
-	get_parent().create_object(object, false)
 
 func detect_player(body:Character)->void :
 	if character == null and enabled and body != null and not dead:
@@ -277,7 +262,8 @@ func _physics_process(delta:float)->void :
 					delete_timer = 1.25
 					poof_sound.play()
 					velocity = Vector2()
-					create_coin()
+					var velocity_x = - 80 if int(time_alive * 10) % 2 == 0 else 80
+					create_coin(1, kinematic_body, true, Vector2(velocity_x, -300))
 			else:
 				was_stomped = false
 				was_ground_pound = false

@@ -185,9 +185,6 @@ func _ready():
 	
 	_on_property_changed("color", color)
 	connect("property_changed", self, "_on_property_changed")
-	
-	collision_shape.disabled = true
-
 
 func is_rainbow(body) -> bool:
 	return body.powerup != null and body.powerup.id == "Rainbow"

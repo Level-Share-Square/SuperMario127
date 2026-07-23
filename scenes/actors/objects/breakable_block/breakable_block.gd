@@ -56,7 +56,8 @@ func break_box():
 	if !broken:
 		broken = true
 		if !broken_sound.is_playing(): 
-			for i in(coins): create_coin()
+			var velocity_x = -80 if int(time_alive * 10) % 2 == 0 else 80
+			for i in(coins): create_coin(1, static_body, true, Vector2(velocity_x, -300))
 			break_particle.show()
 			dust_particle.show()
 			break_particle.set_emitting(true)
@@ -120,25 +121,6 @@ func _physics_process(delta):
 		var scene : Node = get_tree().current_scene
 		if scene.has_node(scene.character):
 			handle_character_exception(scene.get_node(scene.character))
-
-func create_coin(): #creates a coin
-	pass # I'll pass thanks
-#	time_alive += 1
-#	time_alive += (time_alive/3*5/10)
-#	var object = ObjectDataOld.new()
-#	object.type_id = 1
-#	object.properties = []
-#	object.properties.append(static_body.global_position)
-#	object.properties.append(Vector2(1, 1))
-#	object.properties.append(0)
-#	object.properties.append(true)
-#	object.properties.append(true)
-#	
-#	object.properties.append(true)
-#	var power = int(time_alive*100) % 80
-#	var velocity_x = -power if int(time_alive * 10) % 2 == 0 else power
-#	object.properties.append(Vector2(velocity_x, -300)) #makes the coin move around and fly in the air when the block breaks
-#	get_parent().create_object(object, false) #finishes the object creation
 
 func is_middle(check):
 	.is_middle(check)

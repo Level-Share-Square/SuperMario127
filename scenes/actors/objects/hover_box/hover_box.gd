@@ -60,18 +60,7 @@ func enter_detector(body):
 			body.add_nozzle("HoverNozzle")
 			
 			#create nozzle after bouncing
-			var object = ObjectDataOld.new()
-			object.type_id = 20
-			object.properties = []
-			object.properties.append(position + Vector2(0, 4))
-			object.properties.append(Vector2(1, 1))
-			object.properties.append(0)
-			object.properties.append(true)
-			object.properties.append(true)
-			
-			object.properties.append(Vector2(0, -250))
-			object.properties.append("HoverNozzle")
-			get_parent().create_object(object, false)
+			create_nozzle("HoverNozzle")
 		
 		else:
 			collect_sound.play()
@@ -89,6 +78,18 @@ func enter_detector(body):
 func _on_fludd_activated():
 	sprite.modulate.a = 1
 	loaded_activated = true
+		
+func create_nozzle(nozzle: String):
+	var object = ObjectData.new(
+		ObjectMetadata.new(
+			position + Vector2(0, 4),
+			20,
+			0
+		)
+	)
+	object.set_property_by_name("velocity", Vector2(0, -250))
+	object.set_property_by_name("nozzle_type", nozzle)
+	get_parent().create_object(object)
 		
 func _physics_process(delta):
 	if respawn_timer > 0:
