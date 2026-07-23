@@ -84,6 +84,8 @@ func instance_enemy(emit_particles: bool = true) -> EnemyBase:
 	# and rotation
 	if enabled:
 		rotation = 0
+	# and layer trol
+	spawned_enemy.layer_ref = level_layer_ref
 	
 	spawned_enemy.velocity = initial_velocity
 	spawned_enemy.spawn_effect = emit_particles

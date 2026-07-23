@@ -77,6 +77,8 @@ func _ready():
 func object_hovered(object):
 	if tool_manager.current_tool.tool_type == EditorTool.Type.TileTool:
 		return
+	if get_shared_node().layers.find(object.level_layer_ref.get_ref()) != layer:
+		return
 	
 	# Look you come up with a better object ID system when you have none
 	hovered_objects.get_or_add(object.name, object)

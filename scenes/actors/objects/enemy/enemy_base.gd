@@ -29,6 +29,8 @@ var enabled: bool
 var snap_enabled: bool = true
 # whether to emit particles on startup
 var spawn_effect: bool = true
+# layer ref
+var layer_ref: WeakRef
 
 # water and lava
 onready var liquids_detector: Area2D = $LiquidsDetector
@@ -139,4 +141,4 @@ func create_coin(velocity: Vector2, offset: Vector2) -> GameObject:
 	
 	var shared = get_tree().current_scene.get_shared()
 	
-	return shared.create_object(object, 0)
+	return layer_ref.get_ref().place_object(object)
