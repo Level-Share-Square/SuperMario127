@@ -88,6 +88,7 @@ func update_level_data():
 #	print(loadout_palettes[selected_loadout])
 	CurrentLevelData.editor_data.palettes = loadout_palettes
 	CurrentLevelData.editor_data.fav_items = fav_items
+	CurrentLevelData.editor_data.fav_counts = items_favorited
 
 
 func check_items():

@@ -309,10 +309,10 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/editor/editor_button.gd"
 }, {
-"base": "LevelDataResource",
+"base": "Reference",
 "class": "EditorData",
 "language": "GDScript",
-"path": "res://level/models/level/editor_data.gd"
+"path": "res://level/models/editor/editor_data.gd"
 }, {
 "base": "Area2D",
 "class": "EditorHitbox",
