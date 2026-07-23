@@ -44,6 +44,9 @@ func _set_property_values():
 	set_property("open_menu", open_menu, true)
 	set_property("on_wall", on_wall, true)
 
+func _object_parallax_ready():
+	pass
+
 func _ready():
 	if is_preview:
 		z_index = 0
