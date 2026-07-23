@@ -7,7 +7,6 @@ static func serialize_level_data(var level_data: LevelDataContainer) -> String:
 
 	code += serialize_level_metadata(level_data.level_metadata)
 	code += serialize_areas(level_data.area_headers)
-	code += "[]" # mission data
 	code += serialize_editor_data(level_data.editor_data)
 
 	code += "]"
@@ -17,6 +16,12 @@ static func serialize_level_data(var level_data: LevelDataContainer) -> String:
 
 static func serialize_editor_data(editor_data: EditorData) -> String:
 	var code: String = ""
+	
+	code += serialize_data_array(editor_data.loadouts)
+	code += serialize_data_array(editor_data.palettes)
+	code += serialize_data_array(editor_data.fav_items)
+	code += serialize_data_array(editor_data.fav_counts)
+	
 	return wrap_code_in_brackets(code)
 
 
@@ -268,7 +273,7 @@ static func serialize_data(value) -> String:
 			data_code = LevelCodeHandler.TYPE_CODE_COLOR + serialize_data_array([value.r, value.g, value.b, value.a])
 		TYPE_ARRAY:
 			value = value as Array
-			data_code = LevelCodeHandler.TYPE_CODE_STRING_ARRAY + serialize_data_array(value)
+			data_code = LevelCodeHandler.TYPE_CODE_ARRAY + serialize_data_array(value)
 		TYPE_DICTIONARY:
 			value = value as Dictionary
 			data_code = LevelCodeHandler.TYPE_CODE_DICTIONARY + serialize_dictionary(value)

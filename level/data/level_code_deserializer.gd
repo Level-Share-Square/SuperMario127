@@ -9,8 +9,7 @@ static func deserialize_level_code(code: String) -> LevelDataContainer:
 	
 	# all area codes (in one string)
 	var area_list_code = level_components_code[0]
-	var mission_data_code = level_components_code[1]
-	var editor_data_code = level_components_code[2]
+	var editor_data_code = level_components_code[1]
 	
 	# all area codes(in a string array)
 	var areas_code = LevelCodeTokenizer.splice_areas(area_list_code)
@@ -33,9 +32,17 @@ static func deserialize_mission_data(mission_code) -> MissionData:
 
 
 static func deserialize_editor_data(editor_data_code: String) -> EditorData:
-	var compenents: Array = LevelCodeTokenizer.splice_editor_data_components(editor_data_code)
+	if editor_data_code.empty():
+		return EditorData.new()
 	
-	return EditorData.new()
+	var components: Array = LevelCodeTokenizer.splice_editor_data_components(editor_data_code)
+	
+	var layouts: Array = deserialize_datas_code(components[0])
+	var palettes: Array = deserialize_datas_code(components[1])
+	var fav_items: Array = deserialize_datas_code(components[2])
+	var fav_count: Array = deserialize_datas_code(components[3])
+	
+	return EditorData.new(layouts, palettes, fav_items, fav_count)
 
 
 static func deserialize_area_code(area_code: String) -> AreaData:
@@ -188,7 +195,7 @@ static func deserialize_layer_metadata_code(layer_metadata_code: String) -> Laye
 	layer_metadata.layer_tint = set_or_use_default_value(vars, 3, layer_metadata.layer_tint)
 	layer_metadata.order = set_or_use_default_value(vars, 4, layer_metadata.order)
 	layer_metadata.is_ground = set_or_use_default_value(vars, 5, layer_metadata.is_ground)
-	layer_metadata.activated_scenario_ids = set_or_use_default_value(vars, 6, layer_metadata.activated_scenario_ids)
+	layer_metadata.activated_mission_ids = set_or_use_default_value(vars, 6, layer_metadata.activated_mission_ids)
 	layer_metadata.layer_opacity = set_or_use_default_value(vars, 7, layer_metadata.layer_opacity)
 	
 	return layer_metadata

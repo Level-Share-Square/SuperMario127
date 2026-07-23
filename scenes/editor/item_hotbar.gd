@@ -10,36 +10,34 @@ onready var palette_container = $"%PaletteContainer"
 onready var palettes = $"%Palettes"
 onready var item_preview = $"%ItemPreview"
 
+
+var items_favorited: PoolIntArray = [0, 0, 0, 0] #Per each loadout
+var fav_items: Array = [
+	Array([]),
+	Array([]),
+	Array([]),
+	Array([]),
+]
+var loadouts: Array = [
+	Array(["obj_coin", "obj_mario", "til_grass", "til_brick", "obj_shine", "obj_star_coin", "obj_red_coin", "obj_blue_coin", "obj_barrel_cactus", "til_cabin_window"]),
+	Array(["obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus"]),
+	Array(["obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus"]),
+	Array(["obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus"]),
+]
+var loadout_palettes: Array = [
+	PoolIntArray([0, 0, 0, 0, 0, 0, 0, 0, 0, 0]),
+	PoolIntArray([0, 0, 0, 0, 0, 0, 0, 0, 0, 0]),
+	PoolIntArray([0, 0, 0, 0, 0, 0, 0, 0, 0, 0]),
+	PoolIntArray([0, 0, 0, 0, 0, 0, 0, 0, 0, 0]),
+]
+
 var selected_loadout: int = 0
 
-var fav_items: Array = [
-	[],
-	[],
-	[],
-	[],
-]
-
-var items_favorited: Array = [0, 0, 0, 0] #Per each loadout
-
-var loadouts: Array = [
-	["obj_coin", "obj_mario", "til_grass", "til_brick", "obj_shine", "obj_star_coin", "obj_red_coin", "obj_blue_coin", "obj_barrel_cactus", "til_cabin_window"],
-	["obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus"],
-	["obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus"],
-	["obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus"],
-]
-
-var loadout_palettes: Array = [
-	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-]
 
 func _ready():
 	bottom_row.show()
 	palette_container.hide()
 	bottom_row.get_children()[0].pressed = true
-	selected_loadout = 0
 	
 	for item_button in button_container.get_children():
 		item_button.connect("button_down", self, "_on_item_button_pressed", [item_button])
@@ -51,17 +49,17 @@ func _ready():
 		else:
 			loadout_button.connect("button_down", self, "_on_palettes_pressed")
 	
-	
 	if CurrentLevelData.editor_data.loadouts != []:
 		loadouts = CurrentLevelData.editor_data.loadouts
 		fav_items = CurrentLevelData.editor_data.fav_items
 		loadout_palettes = CurrentLevelData.editor_data.palettes
-		items_favorited = CurrentLevelData.editor_data.favorites
-#	print(loadout_palettes)
+		items_favorited = CurrentLevelData.editor_data.fav_counts
+	
 	refresh_loadout()
 	check_items()
-
+	
 	editor.selected_item = bottom_row.get_children()[0].item
+
 
 func _on_item_button_pressed(item_button):
 	var item_name: String = loadouts[selected_loadout][item_button.get_index()]
@@ -78,6 +76,8 @@ func _on_item_button_pressed(item_button):
 			editor.tool_manager.change_tool("TilePaint")
 			item_preview.update_item(associated_item, associated_item.palette, false)
 	
+	update_level_data()
+
 
 func update_level_data():
 	CurrentLevelData.editor_data.loadouts = loadouts
@@ -87,7 +87,6 @@ func update_level_data():
 	loadout_palettes[selected_loadout] = loadout_palette
 #	print(loadout_palettes[selected_loadout])
 	CurrentLevelData.editor_data.palettes = loadout_palettes
-	CurrentLevelData.editor_data.favorites = items_favorited
 	CurrentLevelData.editor_data.fav_items = fav_items
 
 
@@ -138,7 +137,6 @@ func new_favorite_selected(placeable_item: Resource, index: int):
 	bottom_row.move_child(boxes[index], items_favorited[selected_loadout])
 	items_favorited[selected_loadout] += 1
 	refresh_loadout()
-	
 
 
 func on_item_selected(item: PlaceableItem):
@@ -164,7 +162,6 @@ func refresh_loadout():
 		item_button.set_favorite(favs_amount > 0)
 		item_button.change_item(placeable_items.placeable_items[item])
 		favs_amount -= 1
-	
 
 
 func _on_palettes_pressed():
@@ -180,7 +177,6 @@ func _on_palettes_pressed():
 			palette_button.icon_node.texture = item_palettes[palette_button.get_index()]
 		else:
 			palette_button.hide()
-	
 
 
 func palette_selected(palette):
@@ -194,4 +190,3 @@ func palette_selected(palette):
 			editor.selected_item.palette = palette
 			item_button.icon_node.texture = editor.selected_item.icons[palette]
 			_on_item_button_pressed(item_button)
-	
