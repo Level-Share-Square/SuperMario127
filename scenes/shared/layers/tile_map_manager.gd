@@ -32,8 +32,34 @@ func load_in(s_layer_data: LayerData):
 			false
 		)
 	
+#	for chunk in layer_data.tile_data.chunks:
+#		create_tilemap_chunk(chunk, layer_data.tile_data.chunks[chunk])
+	
 	update_bitmask_region()
 	update_dirty_quadrants()
+
+
+func create_tilemap_chunk(chunk_coord: Vector2, chunk_data: PoolIntArray):
+	var tilemap_chunk: TileMap = TileMap.new()
+	tilemap_chunk.position = chunk_coord * 32 * 16
+	tilemap_chunk.cell_size = cell_size
+	tilemap_chunk.collision_layer = collision_layer
+	tilemap_chunk.collision_mask = collision_mask
+	tilemap_chunk.tile_set = tile_set
+	
+	var visibility_enabler: VisibilityEnabler2D = VisibilityEnabler2D.new()
+	visibility_enabler.rect = Rect2(-16, -16, 34 * 16, 34 * 16)
+	tilemap_chunk.add_child(visibility_enabler)
+	
+	var tile_coord: Vector2 = Vector2.ZERO
+	for i in range(chunk_data.size()):
+		tile_coord = Vector2(i % 16, floor(i / 16))
+		tilemap_chunk.set_cellv(tile_coord, tile_util.get_real_tile_set_id_from_packed(chunk_data[i]))
+	
+	tilemap_chunk.update_bitmask_region()
+	tilemap_chunk.update_dirty_quadrants()
+	
+	add_child(tilemap_chunk)
 
 
 func place_tile(coords: Vector2, tileset: int, type: int, palette: int, update_autotile: bool = true, modify_data: bool = false):
@@ -77,12 +103,10 @@ func _add_margins():
 	var right: int = bounds.end.x
 	var bottom: int = bounds.end.y
 	
-	for x in range(left, right): 
+	for x in range(left, right + 1): 
 		set_cell(x, top, tile)
 		set_cell(x, bottom, tile)
 
-	for y in range(top, bottom):
+	for y in range(top, bottom + 1):
 		set_cell(left, y, tile)
 		set_cell(right, y, tile)
-		
-	set_cellv(Vector2(right, bottom), tile) # it isn't filling this tile in the loop for some reason?
