@@ -82,8 +82,33 @@ func load_placeable_item():
 	if ResourceLoader.exists(PLACEABLE_ITEM_PATH % internal_id):
 		placeable_item = ResourceLoader.load(PLACEABLE_ITEM_PATH % internal_id)
 
+
 func _init():
 	property_ids = property_ids.duplicate()
+
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_READY:
+		match mode:
+			LevelPlayer.mode:
+		#		call_deferred("_object_ready")
+				_object_ready()
+				
+				if not enabled:
+		#			call_deferred("_object_disabled_ready")
+					_object_disabled_ready()
+					return
+				
+				if is_on_ground_layer():
+		#			call_deferred("_object_ground_ready")
+					_object_ground_ready()
+				else:
+		#			call_deferred("_object_parallax_ready")
+					_object_parallax_ready()
+			Editor.mode:
+		#		call_deferred("_editor_ready")
+				_editor_ready()
+
 
 func _ready():
 	load_placeable_item()
@@ -135,54 +160,63 @@ func _ready():
 			
 	set_object_properties_from_data()
 	
-	match mode:
-		LevelPlayer.mode:
-			call_deferred("_object_ready")
-			
-			if not enabled:
-				call_deferred("_object_disabled_ready")
-				return
-			
-			if is_on_ground_layer():
-				call_deferred("_object_ground_ready")
-			else:
-				call_deferred("_object_parallax_ready")
-		Editor.mode:
-			call_deferred("_editor_ready")
+#	match mode:
+#		LevelPlayer.mode:
+##			call_deferred("_object_ready")
+#			_object_ready()
+#
+#			if not enabled:
+##				call_deferred("_object_disabled_ready")
+#				_object_disabled_ready()
+#				return
+#
+#			if is_on_ground_layer():
+##				call_deferred("_object_ground_ready")
+#				_object_ground_ready()
+#			else:
+##				call_deferred("_object_parallax_ready")
+#				_object_parallax_ready()
+#		Editor.mode:
+##			call_deferred("_editor_ready")
+#			_editor_ready()
 	loaded = true
 
 func _process(delta):
 	match mode:
 		LevelPlayer.mode:
+#			call_deferred("_object_process", delta)
 			_object_process(delta)
-			
+
 			if not enabled:
+#				call_deferred("_object_disabled_process", delta)
 				_object_disabled_process(delta)
 				return
-			
+
 			if is_on_ground_layer():
+#				call_deferred("_object_ground_process", delta)
 				_object_ground_process(delta)
 			else:
+#				call_deferred("_object_parallax_process", delta)
 				_object_parallax_process(delta)
 		Editor.mode:
+#			call_deferred("_editor_process", delta)
 			_editor_process(delta)
 
 
 func _physics_process(delta):
-	match mode:
-		LevelPlayer.mode:
-			_object_physics_process(delta)
-			
-			if not enabled:
-				_object_disabled_physics_process(delta)
-				return
-			
-			if is_on_ground_layer():
-				_object_ground_physics_process(delta)
-			else:
-				_object_parallax_physics_process(delta)
-		Editor.mode:
-			_editor_physics_process(delta)
+	if mode == LevelPlayer.mode:
+		_object_physics_process(delta)
+		
+		if not enabled:
+			_object_disabled_physics_process(delta)
+			return
+
+		if is_on_ground_layer():
+			_object_ground_physics_process(delta)
+		else:
+			_object_parallax_physics_process(delta)
+	elif Editor.mode:
+		_editor_physics_process(delta)
 
 
 func _unhandled_input(event):
@@ -452,7 +486,8 @@ func parts_input_handler(event, object):
 
 func is_on_ground_layer() -> bool:
 	return level_layer_ref.get_ref() is LevelGroundLayer
-	
+
+
 func create_coin(coin_id, body, physics, velocity) -> void:
 	var object := ObjectData.new(ObjectMetadata.new(
 		body.global_position,
