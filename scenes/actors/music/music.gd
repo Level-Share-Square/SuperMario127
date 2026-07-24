@@ -72,10 +72,12 @@ func get_custom_file_path(underwater: bool = false) -> String:
 		working_folder,
 		underwater)
 
+
 func reset_custom_song() -> void:
 	var file_path: String = get_custom_file_path()
 	if level_list_util.file_exists(file_path):
 		level_list_util.delete_file(file_path)
+
 
 func handle_custom_song(url: String, underwater: bool = false) -> void:
 	loop = 0.0
@@ -100,7 +102,8 @@ func handle_custom_song(url: String, underwater: bool = false) -> void:
 		play_custom_normal(song_stream)
 	else:
 		play_custom_underwater(song_stream)
-		
+
+
 func play_custom_underwater(song_stream):
 	if get_tree().get_current_scene().mode != 2:
 		water_music_player.stream = song_stream
@@ -294,10 +297,12 @@ func change_song(old_setting, music_setting) -> void:
 			water_music_player.stream = song.underwater_stream
 			water_music_player.play()
 			water_music_player.volume_db = -80
+			water_music_player.bus = "Music"
 			has_water = true
 			play_water = false
 		else:
 			water_music_player.stop()
+			water_music_player.bus = "WaterMusicFilters"
 			has_water = false
 			play_water = false
 	

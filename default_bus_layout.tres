@@ -1,4 +1,22 @@
-[gd_resource type="AudioBusLayout" load_steps=6 format=2]
+[gd_resource type="AudioBusLayout" load_steps=10 format=2]
+
+[sub_resource type="AudioEffectEQ" id=9]
+resource_name = "EQ"
+band_db/32_hz = -0.4
+band_db/100_hz = -7.4
+band_db/320_hz = -11.7
+band_db/1000_hz = -4.8
+band_db/3200_hz = 5.3
+band_db/10000_hz = 9.6
+
+[sub_resource type="AudioEffectChorus" id=7]
+resource_name = "Chorus"
+
+[sub_resource type="AudioEffectStereoEnhance" id=10]
+resource_name = "StereoEnhance"
+
+[sub_resource type="AudioEffectFilter" id=6]
+resource_name = "Filter"
 
 [sub_resource type="AudioEffectFilter" id=1]
 resource_name = "Filter"
@@ -41,45 +59,59 @@ bus/1/name = "Music"
 bus/1/solo = false
 bus/1/mute = false
 bus/1/bypass_fx = false
-bus/1/volume_db = -0.130497
+bus/1/volume_db = 0.0
 bus/1/send = "Master"
-bus/2/name = "Editor"
+bus/2/name = "WaterMusicFilters"
 bus/2/solo = false
 bus/2/mute = false
 bus/2/bypass_fx = false
-bus/2/volume_db = -8.39524
+bus/2/volume_db = -2.51026
 bus/2/send = "Music"
-bus/2/effect/0/effect = SubResource( 1 )
+bus/2/effect/0/effect = SubResource( 9 )
 bus/2/effect/0/enabled = true
-bus/3/name = "Sounds"
+bus/2/effect/1/effect = SubResource( 7 )
+bus/2/effect/1/enabled = true
+bus/2/effect/2/effect = SubResource( 10 )
+bus/2/effect/2/enabled = true
+bus/2/effect/3/effect = SubResource( 6 )
+bus/2/effect/3/enabled = true
+bus/3/name = "Editor"
 bus/3/solo = false
 bus/3/mute = false
 bus/3/bypass_fx = false
-bus/3/volume_db = 0.0
-bus/3/send = "Master"
-bus/4/name = "Voices"
+bus/3/volume_db = -8.39524
+bus/3/send = "Music"
+bus/3/effect/0/effect = SubResource( 1 )
+bus/3/effect/0/enabled = true
+bus/4/name = "Sounds"
 bus/4/solo = false
 bus/4/mute = false
 bus/4/bypass_fx = false
-bus/4/volume_db = -2.3125
-bus/4/send = "Sounds"
-bus/5/name = "VoicesMetal"
+bus/4/volume_db = 0.0
+bus/4/send = "Master"
+bus/5/name = "Voices"
 bus/5/solo = false
 bus/5/mute = false
 bus/5/bypass_fx = false
-bus/5/volume_db = -6.25101
+bus/5/volume_db = -2.3125
 bus/5/send = "Sounds"
-bus/5/effect/0/effect = SubResource( 2 )
-bus/5/effect/0/enabled = true
-bus/5/effect/1/effect = SubResource( 3 )
-bus/5/effect/1/enabled = true
-bus/6/name = "ObjectSounds"
+bus/6/name = "VoicesMetal"
 bus/6/solo = false
 bus/6/mute = false
 bus/6/bypass_fx = false
-bus/6/volume_db = 0.0
+bus/6/volume_db = -6.25101
 bus/6/send = "Sounds"
-bus/6/effect/0/effect = SubResource( 4 )
+bus/6/effect/0/effect = SubResource( 2 )
 bus/6/effect/0/enabled = true
-bus/6/effect/1/effect = SubResource( 5 )
-bus/6/effect/1/enabled = false
+bus/6/effect/1/effect = SubResource( 3 )
+bus/6/effect/1/enabled = true
+bus/7/name = "ObjectSounds"
+bus/7/solo = false
+bus/7/mute = false
+bus/7/bypass_fx = false
+bus/7/volume_db = 0.0
+bus/7/send = "Sounds"
+bus/7/effect/0/effect = SubResource( 4 )
+bus/7/effect/0/enabled = true
+bus/7/effect/1/effect = SubResource( 5 )
+bus/7/effect/1/enabled = false
