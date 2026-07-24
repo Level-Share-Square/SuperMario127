@@ -26,7 +26,7 @@ func _set_property_values():
 	set_property("reversed", reversed, true)
 	set_property("offset", offset, true)
 
-func _ready():
+func _object_ready():
 	burning = !reversed
 	next_state_timer = burning_time if !reversed else retracted_time
 	
@@ -34,7 +34,7 @@ func _ready():
 	
 	area.connect("body_entered", self, "burn_player")
 
-func _physics_process(delta):
+func _object_physics_process(delta):
 	if mode == 1:
 		return
 	
@@ -77,5 +77,5 @@ func burn_player(body):
 	#bc I don't know how to do it better frankly
 	if body is Character:
 		if body.powerup != body.get_powerup_node("MetalPowerup"):
-			body.set_state_by_name("LavaBoostState", fps_util.PHYSICS_DELTA)
+			body.set_state_by_name("LavaBoostState", get_physics_process_delta_time())
 			body.velocity.y = -body.get_state_node("LavaBoostState").boost_velocity
