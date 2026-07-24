@@ -21,14 +21,15 @@ func _click_left(_event: InputEvent, _world_pos: Vector2) -> void:
 		else:
 			select(closest_object)
 	else:
-		editor.selection_box.get_parent().hide_selection_box()
-		for object in editor.selected_objects:
-			object.selected = false
-		editor.selected_objects = {}
-		action()
-		editor.selection_box.get_parent().item_actions.hide_selection_actions()
-		editor.selection_box.get_parent().pivot_toggle.show()
-		editor.selection_box.get_parent().vseparator3.show()
+#		editor.selection_box.get_parent().hide_selection_box()
+#		for object in editor.selected_objects:
+#			object.selected = false
+#		editor.selected_objects = {}
+#		action()
+#		editor.selection_box.get_parent().item_actions.hide_selection_actions()
+#		editor.selection_box.get_parent().pivot_toggle.show()
+#		editor.selection_box.get_parent().vseparator3.show()
+		pass
 		
 #sorry lmao
 func select(object: GameObject):

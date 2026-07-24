@@ -41,7 +41,7 @@ func create_object(object_data: ObjectData):
 	game_object._set_properties()
 	
 	add_child(game_object)
-
+	
 	object_data.property_ids = game_object.property_ids
 	
 	return game_object

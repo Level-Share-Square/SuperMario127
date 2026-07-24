@@ -15,6 +15,7 @@ export var property_ids: Dictionary
 var default_values: Dictionary = {}
 var properties: Dictionary = {}
 
+signal populated_ids
 
 func _init(s_metadata: ObjectMetadata, s_properties: Dictionary = {}):
 	metadata = s_metadata
@@ -45,6 +46,7 @@ func set_property(property_id: int, value) -> void:
 
 
 func set_property_by_name(property_name: String, value):
+	yield(self, "populated_ids") # wait until the IDs dictionary is filled
 	var property_id: int = property_ids.get_or_add(property_name, 4 + property_ids.size())
 	set_property(property_id, value)
 

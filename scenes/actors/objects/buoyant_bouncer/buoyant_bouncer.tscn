@@ -91,7 +91,7 @@ shape = SubResource( 2 )
 
 [node name="watercol" type="Area2D" parent="."]
 collision_layer = 0
-collision_mask = 768
+collision_mask = 32768
 
 [node name="det" type="CollisionShape2D" parent="watercol"]
 position = Vector2( -4.625, 10.75 )

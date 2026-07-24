@@ -33,6 +33,9 @@ func _ready():
 	add_to_group("blasters")
 	spawn_timer = wait_time+offset
 	sprite.frame = 3
+
+func _object_disabled_ready():
+	._object_disabled_ready()
 	collision_shape.disabled = !enabled
 
 func _process(delta):
@@ -81,21 +84,7 @@ func _physics_process(delta):
 			
 			var prev_scale_x = scale.x
 			scale.x = scale.y
-			
-			var object = ObjectDataOld.new()
-			object.type_id = 25
-			object.properties = []
-			object.properties.append(transform.xform(Vector2(16 * facing_direction, 0)))
-			object.properties.append(scale)
-			object.properties.append(rotation_degrees)
-			object.properties.append(enabled)
-			object.properties.append(true)
-			object.properties.append(chase)
-			object.properties.append(speed)
-			object.properties.append(color)
-			object.properties.append(facing_direction)
-			object.properties.append(invincible)
-			get_parent().create_object(object, false)
+			create_new_bill(chase, speed, color, facing_direction, invincible)
 			
 			scale.x = prev_scale_x
 			
@@ -106,6 +95,22 @@ func _physics_process(delta):
 			
 		elif spawn_timer <= 0:
 			spawn_timer = wait_time
+
+func create_new_bill(chase, speed, color, facing_direction, invincible) -> Node:
+	var object := ObjectData.new(ObjectMetadata.new(
+		transform.xform(Vector2(16 * facing_direction, 0)),
+		25,
+		0
+	))
+	object.set_property_by_name("scale", scale)
+	object.set_property_by_name("rotation_degrees", rotation_degrees)
+	object.set_property_by_name("enabled", enabled)
+	object.set_property_by_name("chase", chase)
+	object.set_property_by_name("speed", speed)
+	object.set_property_by_name("color", color)
+	object.set_property_by_name("facing_direction", facing_direction)
+	object.set_property_by_name("invincible", invincible)
+	return get_parent().create_object(object)
 
 func is_middle(check: bool):
 	.is_middle(check)

@@ -92,7 +92,6 @@ func _notification(what: int) -> void:
 		match mode:
 			LevelPlayer.mode:
 		#		call_deferred("_object_ready")
-				_object_ready()
 				
 				if not enabled:
 		#			call_deferred("_object_disabled_ready")
@@ -105,6 +104,8 @@ func _notification(what: int) -> void:
 				else:
 		#			call_deferred("_object_parallax_ready")
 					_object_parallax_ready()
+					
+				_object_ready()
 			Editor.mode:
 		#		call_deferred("_editor_ready")
 				_editor_ready()
@@ -116,6 +117,8 @@ func _ready():
 	set_object_data_property_metadata()
 	for property in savable_properties:
 		property_ids.get_or_add(property, property_ids.values().size() - 3)
+	
+	object_data_ref.get_ref().emit_signal("populated_ids")
 	
 	if get_tree().current_scene.mode == 1:
 		if generate_editor_hitbox:
@@ -156,7 +159,6 @@ func _ready():
 		if is_instance_valid(editor_hitbox):
 			editor_hitbox.queue_free()
 			
-#	print(object_data_ref.get_ref().properties)
 			
 	set_object_properties_from_data()
 	
@@ -367,7 +369,7 @@ func set_object_properties_from_data() -> void:
 		
 	for property in object_data_ref.get_ref().properties:
 		properties[property] = object_data_ref.get_ref().properties[property]
-		
+
 	for property in properties:
 		if properties[property] != null:
 			set_property_by_index(property, properties[property])

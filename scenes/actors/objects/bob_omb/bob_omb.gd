@@ -84,6 +84,7 @@ func _ready() -> void:
 	
 	if !enabled:
 		kinematic_body.set_collision_mask_bit(3, false)
+		kinematic_body.set_collision_layer_bit(3, false)
 	
 func _process(_delta):
 	fuse.frame = sprite.frame

@@ -15,6 +15,7 @@ onready var attack_area : Area2D = $BarrelBody/AttackArea
 onready var stomp_area : Area2D = $BarrelBody/StompArea
 onready var water_detector : Area2D = $BarrelBody/WaterDetector
 onready var visibility_notifier : VisibilityNotifier2D = $BarrelBody/VisibilityNotifier2D
+onready var collision_shape = $BarrelBody/CollisionShape2D
 onready var dust = $"%DustLandParticles"
 onready var hop_sound = $"%HopSound"
 
@@ -82,6 +83,9 @@ func _object_ground_physics_process(delta):
 			rolling(delta)
 		else:
 			stationary(delta)
+	
+func _object_disabled_ready():
+	collision_shape.disabled = true
 		
 func stationary(delta):
 	velocity = body.move_and_slide(velocity, Vector2.UP, true)

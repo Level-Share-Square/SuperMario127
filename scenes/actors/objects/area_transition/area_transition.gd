@@ -40,12 +40,6 @@ func _set_property_values() -> void:
 func _ready():
 	._ready()
 	
-	if mode == 1:
-		var _connect2 = connect("property_changed", self, "update_property")
-		sprite.visible = true
-	else:
-		sprite.visible = false
-	
 	update_property("parts", parts)
 	update_property("vertical", vertical)
 	camera_stopper.set_size(camera_stop_shape.shape.extents)
@@ -56,6 +50,21 @@ func _ready():
 	yield(get_tree().create_timer(1.0), "timeout")
 	$Area2D.connect("body_entered", self, "body_entered")
 	$Area2D.connect("body_exited", self, "body_exited")
+	
+func _editor_ready():
+	._editor_ready()
+	var _connect2 = connect("property_changed", self, "update_property")
+	sprite.visible = true
+
+func _object_ready():
+	._object_ready()
+	sprite.visible = true
+	
+func _object_parallax_ready():
+	._object_parallax_ready()
+	camera_stopper.set_size(Vector2.ZERO)
+	camera_stopper.monitorable = false
+	camera_stopper.visible = false
 
 func _unhandled_input(event: InputEvent) -> void:
 	parts_input_handler(event,self)

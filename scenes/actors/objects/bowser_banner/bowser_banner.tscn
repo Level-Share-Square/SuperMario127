@@ -539,7 +539,6 @@ extents = Vector2( 48, 28 )
 [node name="Bowser Banner" type="Node2D"]
 position = Vector2( 0, 90 )
 script = ExtResource( 3 )
-layer_shift = 2
 internal_id = "bowser_banner"
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]

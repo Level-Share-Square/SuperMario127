@@ -24,12 +24,7 @@ func _set_properties():
 func _set_property_values(): set_property("coins", coins, true)
 
 func _ready():
-	if !enabled:
-		collision_shape.disabled = true
-		for _area in [area, stomp_area, spin_area, turbo_spin_area]:
-			_area.collision_layer = 0
-			_area.collision_mask = 0
-	elif scale != Vector2.ONE: # Nothing to do on default scale
+	if scale != Vector2.ONE: # Nothing to do on default scale
 		# Set inverse scale on the body so its overall scale is identity.
 		# For whatever reason, division doesn't work on vectors, soo
 		static_body.scale = Vector2(1.0 / scale.x, 1.0 / scale.y)
@@ -41,6 +36,14 @@ func _ready():
 		
 	break_particle.hide()
 	dust_particle.hide()
+	
+func _object_disabled_ready():
+	._object_disabled_ready()
+	if !enabled:
+		collision_shape.disabled = true
+		for _area in [area, stomp_area, spin_area, turbo_spin_area]:
+			_area.collision_layer = 0
+			_area.collision_mask = 0
 	
 #warning-ignore:unused_argument
 func exploded(hit_pos):

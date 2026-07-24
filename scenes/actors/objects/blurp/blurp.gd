@@ -1,19 +1,19 @@
 extends GameObject
 
-onready var sprite : AnimatedSprite = $CheepCheep/Sprite
-onready var color_sprite : AnimatedSprite = $CheepCheep/ColorSprite
-onready var kinematic_body : KinematicBody2D = $CheepCheep
-onready var attack_area : Area2D = $CheepCheep/AttackArea
-onready var player_detector : Area2D = $CheepCheep/PlayerDetector
-onready var player_exit_detector : Area2D = $CheepCheep/PlayerExitDetector
-onready var platform_detector : Area2D = $CheepCheep/PlatformDetector
-onready var particles : Particles2D = $CheepCheep/Poof
-onready var stomp_sound : AudioStreamPlayer = $CheepCheep/Stomp
-onready var poof_sound : AudioStreamPlayer = $CheepCheep/Disappear
-onready var hit_sound : AudioStreamPlayer = $CheepCheep/Hit
-onready var anim_player : AnimationPlayer = $CheepCheep/AnimationPlayer
-onready var bottom_pos : Node2D = $CheepCheep/BottomPos
-onready var water_detector : Node2D = $CheepCheep/WaterDetector
+onready var sprite : AnimatedSprite = $Blurp/Sprite
+onready var color_sprite : AnimatedSprite = $Blurp/Sprite/ColorSprite
+onready var kinematic_body : KinematicBody2D = $Blurp
+onready var attack_area : Area2D = $Blurp/AttackArea
+onready var player_detector : Area2D = $Blurp/PlayerDetector
+onready var player_exit_detector : Area2D = $Blurp/PlayerExitDetector
+onready var platform_detector : Area2D = $Blurp/PlatformDetector
+onready var particles : Particles2D = $Blurp/Poof
+onready var stomp_sound : AudioStreamPlayer = $Blurp/Stomp
+onready var poof_sound : AudioStreamPlayer = $Blurp/Disappear
+onready var hit_sound : AudioStreamPlayer = $Blurp/Hit
+onready var anim_player : AnimationPlayer = $Blurp/AnimationPlayer
+onready var bottom_pos : Node2D = $Blurp/BottomPos
+onready var water_detector : Node2D = $Blurp/WaterDetector
 
 onready var visibility_enabler : VisibilityEnabler2D = $VisibilityEnabler2D
 var dead := false

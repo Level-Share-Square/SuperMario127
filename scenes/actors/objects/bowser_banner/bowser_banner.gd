@@ -21,13 +21,16 @@ func _set_property_values():
 
 
 func _ready():
-	collision_shape.disabled = !enabled
 	preview_position = custom_preview_position
 	if is_preview:
 		z_index = 0
 		$AnimatedSprite.z_index = 0
 	$AnimatedSprite.animation = String(palette)
 	$Color.animation = String(palette)
+	
+func _object_disabled_ready():
+	._object_disabled_ready()
+	collision_shape.disabled = true
 
 
 func _process(delta):
