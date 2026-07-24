@@ -55,7 +55,7 @@ func collect(body, is_shell = false):
 		particles.connect("animation_finished", self, "queue_free")
 
 
-func _ready():
+func _object_ground_ready():
 	var _connect = area.connect("body_entered", self, "collect")
 	
 	for body in area.get_overlapping_bodies():
@@ -71,25 +71,24 @@ func _ready():
 
 
 var prev_activate_shape = false
-func _process(delta):
+func _object_ground_process(delta):
 	# Toggle the collection shape (perf)
-	if mode != 1:
-		var root = get_tree().current_scene
-		var activate_shape = false
-		if !collected:
-			var can_collect_coins = root.can_collect_coins
-			for entity in can_collect_coins:
-				if entity == null:
-					can_collect_coins.erase(entity)
-					continue
-				
-				var entity_global_position = entity.global_transform.get_origin()
-				if (entity_global_position - kinematic_body.global_position).length_squared() <= 200 + 472.25:
-					activate_shape = true
+	var root = get_tree().current_scene
+	var activate_shape = false
+	if !collected:
+		var can_collect_coins = root.can_collect_coins
+		for entity in can_collect_coins:
+			if entity == null:
+				can_collect_coins.erase(entity)
+				continue
+			
+			var entity_global_position = entity.global_transform.get_origin()
+			if (entity_global_position - kinematic_body.global_position).length_squared() <= 200 + 472.25:
+				activate_shape = true
 		
-		if activate_shape != prev_activate_shape:
-			shape.disabled = !activate_shape
-			prev_activate_shape = activate_shape
+	if activate_shape != prev_activate_shape:
+		shape.disabled = !activate_shape
+		prev_activate_shape = activate_shape
 	
 	if blink:
 		visible = !visible
@@ -114,9 +113,9 @@ func despawn_coin():
 	queue_free() # die
 
 
-func _physics_process(delta):
+func _object_ground_physics_process(delta):
 	# Everything else here is irrelevant for edit mode
-	if mode == 1 or !do_physics() or !visibility_enabler.is_on_screen():
+	if !do_physics() or !visibility_enabler.is_on_screen():
 		return
 	
 	water_detector.monitoring = do_physics()
@@ -135,7 +134,7 @@ func _physics_process(delta):
 		visibility_enabler.global_position = kinematic_body.global_position
 
 
-func calc_physics(interp : bool, delta) -> Vector2:
+func calc_physics(interp: bool, delta) -> Vector2:
 	var new_velocity := velocity
 	#changes whether physics is being run every frame or not
 	var interp_scale : int = 1 if interp == false else 2
@@ -148,12 +147,12 @@ func calc_physics(interp : bool, delta) -> Vector2:
 		gravity_scale = 1
 	
 	#friction calculations
-	new_velocity.x -= sign(new_velocity.x)*frictin_coeff * interp_scale
+	new_velocity.x -= sign(new_velocity.x) * frictin_coeff * interp_scale * delta * 60
 	
 	#gravity calculations
 	
 	if velocity.y < 600:
-		new_velocity.y += gravity * gravity_scale * 2 * interp_scale
+		new_velocity.y += gravity * gravity_scale * 2 * interp_scale * delta * 60
 	
 	#if on the floor, set the Y velocity to zero so it doesn't stack
 	if kinematic_body.is_on_floor():

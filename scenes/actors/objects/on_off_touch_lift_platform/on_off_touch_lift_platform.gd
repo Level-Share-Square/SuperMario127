@@ -16,8 +16,6 @@ onready var part_width = 6
 
 onready var inverted: bool = get_parent().inverted
 onready var enabled: bool = get_parent().enabled
-onready var layer: int = get_parent().layer
-onready var middle: int = get_parent().middle
 
 onready var parent = get_parent()
 
@@ -125,6 +123,3 @@ func _on_Area2D_body_exited(body):
 	if "state" in body and !is_instance_valid(body.state):
 		body.set_state_by_name("FallState")
 		#self.apply_velocity = false
-
-func is_middle(check: bool):
-	return

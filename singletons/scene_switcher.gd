@@ -13,7 +13,7 @@ var reload_base_folder: bool
 func quit_to_menu(screen_to_open : String = ""):
 	# if we quit from the pause menu, the tree will be paused, and that means the menu will also be paused and not work
 	get_tree().paused = false 
-	Singleton.CheckpointSaved.reset()
+	CurrentLevelData.checkpoint_data.reset()
 	
 	# if the mode switcher button is visible (eg quitting from the editor), hide and disable it
 	Singleton.ModeSwitcher.get_node("ModeSwitcherButton").invisible = true
@@ -102,7 +102,7 @@ func setup_level(level_info: LevelInfo, level_id: String, working_folder: String
 	if not CurrentLevelData.level_transition_data.empty():
 		CurrentLevelData.current_area = CurrentLevelData.level_transition_data.get("target_area", 0)
 	
-	Singleton.CheckpointSaved.reset()
+	CurrentLevelData.checkpoint_data.reset()
 
 ## loads shine select if there's more than 1 shine,
 ## else loads directly into level

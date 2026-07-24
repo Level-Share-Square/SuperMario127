@@ -75,7 +75,7 @@ func _ready() -> void:
 	Singleton.Music.change_song(Singleton.Music.last_song, 31) # temporary, should add a way for screens to define their own music setting later
 	Singleton.Music.last_song = 31
 	
-	Singleton.CheckpointSaved.reset()
+	CurrentLevelData.checkpoint_data.reset()
 	CurrentLevelData.switch_to_area(0)
 	CurrentLevelData.vars.init()
 	Singleton.MiscShared.is_play_reload = false

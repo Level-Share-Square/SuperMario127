@@ -13,7 +13,7 @@ func _set_properties():
 func _set_property_values():
 	set_property("sway", sway, true)
 
-func _process(delta):
+func _object_process(delta):
 	if sway:
 		sprite.material.set_shader_param("strength", sin((OS.get_ticks_msec()/1000.0) + sway_offset)/30.0)
 	else:

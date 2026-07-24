@@ -19,22 +19,21 @@ func _set_properties():
 	editable_properties = ["flowers", "flower_color", "parts"]
 
 
-func _ready():
+func _object_ground_ready():
 	if enabled:
 		interaction_area.connect("body_entered", self, "start_anim")
 
 
-func _process(delta):
-	if enabled:
-		if !is_equal_approx(displacement_spring_anim_power, 0):
-			update_displacement_spring(delta)
-		else:
-			sprite.material.set_shader_param("strength", 0)
-		
-		if !is_equal_approx(scale_spring_anim_power, 0):
-			update_scale_spring(delta)
-		else:
-			sprite.scale = Vector2.ONE
+func _object_ground_process(delta: float) -> void:
+	if !is_equal_approx(displacement_spring_anim_power, 0):
+		update_displacement_spring(delta)
+	else:
+		sprite.material.set_shader_param("strength", 0)
+	
+	if !is_equal_approx(scale_spring_anim_power, 0):
+		update_scale_spring(delta)
+	else:
+		sprite.scale = Vector2.ONE
 
 
 func start_anim(body):

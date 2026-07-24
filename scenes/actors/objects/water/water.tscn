@@ -14,7 +14,7 @@ uniform vec4 color_tint : hint_color;
 
 void fragment() {
 	vec4 screen = textureLod(SCREEN_TEXTURE, SCREEN_UV, 0.0);
-	
+
 	screen = mix(screen, color_tint, 0.4);
 	screen.rgb = mix(vec3(0.5), screen.rgb, 1.4);
 	
@@ -78,11 +78,7 @@ collision_layer = 32896
 [node name="CollisionShape2D" parent="LiquidArea" index="0"]
 shape = SubResource( 7 )
 
-[node name="BackBufferCopy" type="BackBufferCopy" parent="." index="1"]
-position = Vector2( 900, 300 )
-copy_mode = 2
-
-[node name="Visual" type="Node2D" parent="." index="2"]
+[node name="Visual" type="Node2D" parent="." index="1"]
 
 [node name="Body" type="ColorRect" parent="Visual" index="0"]
 material = SubResource( 5 )

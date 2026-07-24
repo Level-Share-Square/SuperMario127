@@ -58,7 +58,3 @@ func _get_notification_handler() -> Node:
 var MiscShared setget ,_get_misc_shared
 func _get_misc_shared() -> Node:
 	return lazy_get("MiscShared", "res://scenes/shared/miscshared.tscn", MiscShared)
-
-var CheckpointSaved setget ,_get_checkpoint_saved
-func _get_checkpoint_saved() -> Node:
-	return lazy_get("CheckpointSaved", "res://classes/CheckpointSaved.tscn", CheckpointSaved)

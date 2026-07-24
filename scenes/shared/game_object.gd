@@ -2,6 +2,7 @@ class_name GameObject
 extends Node2D
 
 enum BasePropertyIDs {
+	IN_FRONT = -3
 	PALETTE = -2
 	POSITION = -1
 	SCALE = 0
@@ -30,6 +31,8 @@ var translucent: bool = false
 
 var loaded: bool = false
 
+var in_front: bool = false
+
 var enabled: bool = true
 var preview_position := Vector2(72, 92)
 var palette: int = 0
@@ -57,6 +60,7 @@ var property_value_menus := {}
 onready var editor_hitbox: Area2D = get_node_or_null("EditorHitbox")
 
 export var property_ids: Dictionary = {
+	"in_front": BasePropertyIDs.IN_FRONT,
 	"palette": BasePropertyIDs.PALETTE,
 	"position": BasePropertyIDs.POSITION,
 	"scale": BasePropertyIDs.SCALE,
@@ -78,15 +82,40 @@ func load_placeable_item():
 	if ResourceLoader.exists(PLACEABLE_ITEM_PATH % internal_id):
 		placeable_item = ResourceLoader.load(PLACEABLE_ITEM_PATH % internal_id)
 
+
 func _init():
 	property_ids = property_ids.duplicate()
+
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_READY:
+		match mode:
+			LevelPlayer.mode:
+		#		call_deferred("_object_ready")
+				_object_ready()
+				
+				if not enabled:
+		#			call_deferred("_object_disabled_ready")
+					_object_disabled_ready()
+					return
+				
+				if is_on_ground_layer():
+		#			call_deferred("_object_ground_ready")
+					_object_ground_ready()
+				else:
+		#			call_deferred("_object_parallax_ready")
+					_object_parallax_ready()
+			Editor.mode:
+		#		call_deferred("_editor_ready")
+				_editor_ready()
+
 
 func _ready():
 	load_placeable_item()
 	
 	set_object_data_property_metadata()
 	for property in savable_properties:
-		property_ids.get_or_add(property, property_ids.values().size() - 2)
+		property_ids.get_or_add(property, property_ids.values().size() - 3)
 	
 	if get_tree().current_scene.mode == 1:
 		if generate_editor_hitbox:
@@ -131,54 +160,63 @@ func _ready():
 			
 	set_object_properties_from_data()
 	
-	match mode:
-		LevelPlayer.mode:
-			call_deferred("_object_ready")
-			
-			if not enabled:
-				call_deferred("_object_disabled_ready")
-				return
-			
-			if is_on_ground_layer():
-				call_deferred("_object_ground_ready")
-			else:
-				call_deferred("_object_parallax_ready")
-		Editor.mode:
-			call_deferred("_editor_ready")
+#	match mode:
+#		LevelPlayer.mode:
+##			call_deferred("_object_ready")
+#			_object_ready()
+#
+#			if not enabled:
+##				call_deferred("_object_disabled_ready")
+#				_object_disabled_ready()
+#				return
+#
+#			if is_on_ground_layer():
+##				call_deferred("_object_ground_ready")
+#				_object_ground_ready()
+#			else:
+##				call_deferred("_object_parallax_ready")
+#				_object_parallax_ready()
+#		Editor.mode:
+##			call_deferred("_editor_ready")
+#			_editor_ready()
 	loaded = true
 
 func _process(delta):
 	match mode:
 		LevelPlayer.mode:
+#			call_deferred("_object_process", delta)
 			_object_process(delta)
-			
+
 			if not enabled:
+#				call_deferred("_object_disabled_process", delta)
 				_object_disabled_process(delta)
 				return
-			
+
 			if is_on_ground_layer():
+#				call_deferred("_object_ground_process", delta)
 				_object_ground_process(delta)
 			else:
+#				call_deferred("_object_parallax_process", delta)
 				_object_parallax_process(delta)
 		Editor.mode:
+#			call_deferred("_editor_process", delta)
 			_editor_process(delta)
 
 
 func _physics_process(delta):
-	match mode:
-		LevelPlayer.mode:
-			_object_physics_process(delta)
-			
-			if not enabled:
-				_object_disabled_physics_process(delta)
-				return
-			
-			if is_on_ground_layer():
-				_object_ground_physics_process(delta)
-			else:
-				_object_parallax_physics_process(delta)
-		Editor.mode:
-			_editor_physics_process(delta)
+	if mode == LevelPlayer.mode:
+		_object_physics_process(delta)
+		
+		if not enabled:
+			_object_disabled_physics_process(delta)
+			return
+
+		if is_on_ground_layer():
+			_object_ground_physics_process(delta)
+		else:
+			_object_parallax_physics_process(delta)
+	elif Editor.mode:
+		_editor_physics_process(delta)
 
 
 func _unhandled_input(event):
@@ -386,7 +424,8 @@ func set_property(key, value, change_object_data = true, alias = null):
 	
 	if mode == 1 and !is_preview:
 		emit_signal("property_changed", key, value)
-		
+
+
 func get_property(key):
 	return object_data_ref.get_ref().get_property(get_property_index(key))
 
@@ -447,7 +486,8 @@ func parts_input_handler(event, object):
 
 func is_on_ground_layer() -> bool:
 	return level_layer_ref.get_ref() is LevelGroundLayer
-	
+
+
 func create_coin(coin_id, body, physics, velocity) -> void:
 	var object := ObjectData.new(ObjectMetadata.new(
 		body.global_position,

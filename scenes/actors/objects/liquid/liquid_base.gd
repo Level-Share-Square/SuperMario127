@@ -89,10 +89,7 @@ func _set_property_values():
 	set_liquid_property_menus()
 
 
-func _ready():
-	if mode == 1:
-		connect("property_changed", self, "update_property")
-	
+func _object_ready():
 	connect("transform_changed", self, "update")
 	connect("ready", self, "change_size")
 	
@@ -112,6 +109,11 @@ func _ready():
 	CurrentLevelData.vars.liquids.append([tag.to_lower(), self])
 
 
+func _editor_ready() -> void:
+	connect("property_changed", self, "update_property")
+	_object_ready()
+
+
 func change_size():
 	if !is_instance_valid(waves) and !is_instance_valid(liquid_body): return
 	
@@ -125,7 +127,7 @@ func change_size():
 	emit_signal("transform_changed") #calling update in here causes issues with getting nodes, so we connect that to this instead
 
 
-func _physics_process(_delta):
+func _object_physics_process(_delta):
 	if !moving: return
 	
 	if !horizontal:
@@ -153,7 +155,7 @@ func _physics_process(_delta):
 			change_size() # Letting it happen in _process causes issues
 
 
-func _process(_delta):
+func _object_process(_delta):
 	if "\n" in tag:
 		tag = tag.replace("\n", "")
 	if (size != last_size ||

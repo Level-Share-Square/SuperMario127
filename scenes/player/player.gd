@@ -51,12 +51,12 @@ func _ready():
 	CurrentLevelData.vars.reset_counters()
 	
 	if !Singleton.MiscShared.is_play_reload:
-		Singleton.CheckpointSaved.reset()
+		CurrentLevelData.checkpoint_data.reset()
 		CurrentLevelData.vars.init()
 	
 	if CurrentLevelData.vars.transition_data.empty():
-		if Singleton.CheckpointSaved.current_checkpoint_id != -1:
-			CurrentLevelData.switch_to_area(Singleton.CheckpointSaved.current_area)
+		if CurrentLevelData.checkpoint_data.current_checkpoint_id != -1:
+			CurrentLevelData.switch_to_area(CurrentLevelData.checkpoint_data.current_area)
 		CurrentLevelData.vars.reload()
 	
 	if CurrentLevelData.current_area.header.timer > 0.00:
@@ -91,7 +91,7 @@ func _ready():
 func _unhandled_input(event):
 	if event.is_action_pressed("reload") or event.is_action_pressed("reload_from_start") and !SceneTransitions.transitioning and (!Singleton.ModeSwitcher.get_node("ModeSwitcherButton").switching_disabled or Singleton.ModeSwitcher.get_node("ModeSwitcherButton").invisible):
 		if event.is_action_pressed("reload_from_start"):
-			Singleton.CheckpointSaved.reset()
+			CurrentLevelData.checkpoint_data.reset()
 		if !get_node(character).dead:
 			get_node(character).kill("reload")
 		if Singleton.PlayerSettings.other_player_id != -1:

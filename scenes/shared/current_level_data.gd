@@ -39,6 +39,7 @@ var current_mission: MissionData
 var enemies_instanced: int = 0
 
 var vars: LevelVars = LevelVars.new()
+var checkpoint_data: CheckpointData = CheckpointData.new()
 
 var time_score_paused: bool
 var time_score: float = 0
@@ -171,7 +172,6 @@ func convert_and_load_level(code: String) -> void:
 	var container: LevelDataContainer = conversion_util.get_new_level_data_from_old_data(level_data)
 	level_metadata = container.level_metadata
 	editor_data = container.editor_data
-	mission_data = container.mission_data
 	area_headers = container.area_headers
 
 
@@ -179,7 +179,6 @@ func convert_old_code_to_new(code: String) -> String:
 	var level_data: LevelDataOld = LevelDataOld.new(code)
 	level_data.load_in(code)
 #		return ""
-	
 	
 	var container: LevelDataContainer = conversion_util.get_new_level_data_from_old_data(level_data)
 	return LevelCodeSerializer.serialize_level_data(container)

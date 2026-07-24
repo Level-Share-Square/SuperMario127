@@ -465,7 +465,7 @@ func load_in():
 		return
 	
 	# time score
-	if CurrentLevelData.vars.transition_data.empty() and Singleton.CheckpointSaved.current_checkpoint_id == -1:
+	if CurrentLevelData.vars.transition_data.empty() and CurrentLevelData.checkpoint_data.current_checkpoint_id == -1:
 		CurrentLevelData.start_time_score()
 	else:
 		CurrentLevelData.unpause_time_score()
@@ -477,8 +477,8 @@ func load_in():
 	
 	if target_tag != "":
 		do_teleport = true
-	elif Singleton.CheckpointSaved.current_checkpoint_id != -1:
-		position = Singleton.CheckpointSaved.current_spawn_pos
+	elif CurrentLevelData.checkpoint_data.current_checkpoint_id != -1:
+		position = CurrentLevelData.checkpoint_data.current_spawn_pos
 		reset_physics_interpolation()
 		toggle_movement(true)
 		show()

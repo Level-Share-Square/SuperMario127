@@ -184,10 +184,10 @@ func _ready() -> void:
 	# reset these to 0 since they get incremented by the loading in process every time
 	CurrentLevelData.next_shine_id = 0
 	CurrentLevelData.next_star_coin_id = 0
-	Singleton.CheckpointSaved.reset()
+	CurrentLevelData.checkpoint_data.reset()
 	
 	var data = CurrentLevelData.level_data
-	load_in(data, data.areas[CurrentLevelData.current_area])
+#	load_in(data, data.areas[CurrentLevelData.current_area])
 	zoom_level = Singleton.EditorSavedSettings.zoom_level
 	editing_layer = Singleton.EditorSavedSettings.layer
 	layers_transparent = Singleton.EditorSavedSettings.layers_transparent

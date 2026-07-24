@@ -112,7 +112,7 @@ func update_property(key, value):
 			sprite.self_modulate = color
 
 func _ready():
-	if id in Singleton.CheckpointSaved.current_local_keys:
+	if id in CurrentLevelData.checkpoint_data.current_local_keys:
 		queue_free()
 	if enabled:
 		var _connect = area.connect("body_entered", self, "collect")

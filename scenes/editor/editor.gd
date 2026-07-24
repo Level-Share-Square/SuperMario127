@@ -53,7 +53,7 @@ func _ready():
 	# reset these to 0 since they get incremented by the loading in process every time
 	CurrentLevelData.next_shine_id = 0
 	CurrentLevelData.next_star_coin_id = 0
-	Singleton.CheckpointSaved.reset()
+	CurrentLevelData.checkpoint_data.reset()
 	
 	load_in()
 	

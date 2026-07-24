@@ -65,45 +65,34 @@ var send_score = false
 var purple_starbits_activate:= false
 
 var title:= "Unnamed Shine"
-var description:= ""
-var show_in_menu:= true
-var activated:= true
-var red_coins_activate:= false
-var shine_shards_activate:= false
-var required_purples:= 0
-var color:= Color(1, 1, 0)
-var id:= 0
-var do_kick_out:= true
-var sort_position: int = 0
-var activation_tag: String = "empty"
-var entrance_area: int = 0
-var entrance_tag: String = "_entrance"
+var do_kick_out: bool = true
+var activated: bool = true
+var red_coins_activate: bool = false
+var shine_shards_activate: bool = false
+var required_purples: int = 0
+var color: Color = Color(1, 1, 0)
+var mission_uuid: String = ""
+var activation_tag: String = ""
 
 var score_from_before = 0 # haha that rhymes
 
 signal shine_collected
 signal shine_dance_end
 
+
 func _set_properties() -> void:
-	savable_properties = ["title", "description", "show_in_menu", "activated", "red_coins_activate", "shine_shards_activate", "color", "id", "do_kick_out", "sort_position", "required_purples", "activation_tag", "entrance_area", "entrance_tag"]
-	editable_properties = ["title", "description", "show_in_menu", "activated", "red_coins_activate", "shine_shards_activate", "required_purples", "color", "do_kick_out", "activation_tag", "sort_position", "entrance_area", "entrance_tag"]
+	savable_properties = ["activated", "red_coins_activate", "shine_shards_activate", "color", "mission_uuid", "required_purples", "activation_tag"]
+	editable_properties = ["mission_uuid", "activated", "red_coins_activate", "shine_shards_activate", "required_purples", "color", "activation_tag"]
 
 
 func _set_property_values() -> void:
-	set_property("title", title, true)
-	set_property("description", description, true)
-	set_property("show_in_menu", show_in_menu, true)
 	set_property("activated", activated, true)
 	set_property("red_coins_activate", red_coins_activate, true)
 	set_property("shine_shards_activate", shine_shards_activate, true)
 	set_property("color", color, true)
-	set_property("id", id, true, "ID")
-	set_property("do_kick_out", do_kick_out, true)
-	set_property("sort_position", sort_position, true)
+	set_property("mission_uuid", mission_uuid, true, "Mission UUID")
 	set_property("required_purples", required_purples, true)
 	set_property("activation_tag", activation_tag, true)
-	set_property("entrance_area", entrance_area, true)
-	set_property("entrance_tag", entrance_tag, true)
 
 
 func _ready() -> void:
@@ -111,8 +100,8 @@ func _ready() -> void:
 	if mode != 1: # not in edit mode
 		if required_purples > 0:
 			purple_starbits_activate = true
-			CurrentLevelData.vars.required_purple_starbits[CurrentLevelData.current_area].append(required_purples)
-			CurrentLevelData.vars.required_purple_starbits[CurrentLevelData.current_area].sort()
+			CurrentLevelData.vars.required_purple_starbits[CurrentLevelData.area_id].append(required_purples)
+			CurrentLevelData.vars.required_purple_starbits[CurrentLevelData.area_id].sort()
 		else:
 			purple_starbits_activate = false
 		
@@ -211,7 +200,8 @@ func _physics_process(_delta: float) -> void:
 		animated_sprite.frame = wrapi(OS.get_ticks_msec() / (1000/8), 0, 16)
 		
 	if mode != 1:
-		var do_animation: bool = not (id in CurrentLevelData.vars.activated_shine_ids)
+#		var do_animation: bool = not (id in CurrentLevelData.vars.activated_shine_ids)
+		var do_animation: bool = true
 		
 		# band aid crash fix
 		while CurrentLevelData.vars.shine_shards_collected.size() <= CurrentLevelData.area_id:
@@ -290,8 +280,8 @@ func activate_shine(animation: int, temporary: bool = false, manual_start_cutsce
 	
 	activated = true
 	
-	if !temporary:
-		CurrentLevelData.vars.activate_shine(id)
+#	if !temporary:
+#		CurrentLevelData.vars.activate_shine(id)
 	
 	if manual_start_cutscene:
 		camera.start_queue()
@@ -304,7 +294,7 @@ func deactivate_shine(do_animation: bool) -> void:
 	animation_player.play("disappear")
 	
 	activated = false
-	CurrentLevelData.vars.deactivate_shine(id)
+#	CurrentLevelData.vars.deactivate_shine(id)
 
 
 # Updates the ambient noise appropriately depending on if the shine is active and not collected prior.
