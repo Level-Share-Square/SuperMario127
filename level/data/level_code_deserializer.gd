@@ -162,6 +162,7 @@ static func deserialize_level_metadata_code(level_metadata_code: String) -> Leve
 
 
 static func deserialize_collectible_data_code(code: String) -> CollectibleData:
+	var components = LevelCodeTokenizer.get_outermost_brackets(code)
 	var components: Array = LevelCodeTokenizer.get_outermost_brackets(code)
 	
 	var mission_data_code = components[0]
