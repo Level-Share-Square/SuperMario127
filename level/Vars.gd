@@ -36,14 +36,14 @@ var switch_state : Array = []
 var activated_shine_ids := []
 
 func reload():
-	coins_collected = Singleton.CheckpointSaved.current_coins
-	red_coins_collected = Singleton.CheckpointSaved.current_red_coins.duplicate(true)
-	shine_shards_collected = Singleton.CheckpointSaved.current_shine_shards.duplicate(true)
-	purple_starbits_collected = Singleton.CheckpointSaved.current_purple_starbits.duplicate(true)
-	local_keys_collected = Singleton.CheckpointSaved.current_local_keys.duplicate(true)
-	liquid_positions = Singleton.CheckpointSaved.liquid_positions.duplicate(true)
-	switch_state = Singleton.CheckpointSaved.switch_state.duplicate(true)
-	activated_shine_ids = Singleton.CheckpointSaved.activated_shine_ids.duplicate(true)
+	coins_collected = CurrentLevelData.checkpoint_data.current_coins
+	red_coins_collected = CurrentLevelData.checkpoint_data.current_red_coins.duplicate(true)
+	shine_shards_collected = CurrentLevelData.checkpoint_data.current_shine_shards.duplicate(true)
+	purple_starbits_collected = CurrentLevelData.checkpoint_data.current_purple_starbits.duplicate(true)
+	local_keys_collected = CurrentLevelData.checkpoint_data.current_local_keys.duplicate(true)
+	liquid_positions = CurrentLevelData.checkpoint_data.liquid_positions.duplicate(true)
+	switch_state = CurrentLevelData.checkpoint_data.switch_state.duplicate(true)
+	activated_shine_ids = CurrentLevelData.checkpoint_data.activated_shine_ids.duplicate(true)
 	required_purple_starbits = []
 	for area in CurrentLevelData.area_headers:
 		required_purple_starbits.append([0])

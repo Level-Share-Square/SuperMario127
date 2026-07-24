@@ -28,7 +28,7 @@ func retry():
 	SceneTransitions.reload_scene(cutout, cutout, 0.4, 0, true)
 
 func retry_start():
-	Singleton.CheckpointSaved.reset()
+	CurrentLevelData.checkpoint_data.reset()
 	retry()
 
 func quit():

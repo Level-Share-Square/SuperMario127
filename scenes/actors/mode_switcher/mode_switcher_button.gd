@@ -79,7 +79,7 @@ func switch() -> void:
 		Singleton.ActionManager.clear_history()
 		
 		#CurrentLevelData.current_area = 0
-		Singleton.CheckpointSaved.current_area = CurrentLevelData.area_id
+		CurrentLevelData.checkpoint_data.current_area = CurrentLevelData.area_id
 		CurrentLevelData.vars.reload()
 		CurrentLevelData.enemies_instanced = 0
 		Singleton.MiscShared.is_play_reload = true

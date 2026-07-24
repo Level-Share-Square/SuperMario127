@@ -27,7 +27,7 @@ onready var sound = $AudioStreamPlayer
 func _ready():
 	if mode == 0:
 		if character_string != "character" and Singleton.PlayerSettings.number_of_players == 1: return
-		if enabled and (Singleton.CheckpointSaved.current_checkpoint_id == -1 or CurrentLevelData.vars.transition_data != []):
+		if enabled and (CurrentLevelData.checkpoint_data.current_checkpoint_id == -1 or CurrentLevelData.vars.transition_data != []):
 			var player = get_tree().get_current_scene()
 			character = player.get_node(player[character_string])
 			transition_data = CurrentLevelData.vars.transition_data

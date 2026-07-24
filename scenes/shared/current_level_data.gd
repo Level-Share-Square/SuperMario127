@@ -39,6 +39,7 @@ var current_mission: MissionData
 var enemies_instanced: int = 0
 
 var vars: LevelVars = LevelVars.new()
+var checkpoint_data: CheckpointData = CheckpointData.new()
 
 var time_score_paused: bool
 var time_score: float = 0

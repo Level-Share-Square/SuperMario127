@@ -169,6 +169,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/menu/button_scripts/check_button_sound.gd"
 }, {
+"base": "Resource",
+"class": "CheckpointData",
+"language": "GDScript",
+"path": "res://level/checkpoint_data.gd"
+}, {
 "base": "Area2D",
 "class": "CircleArea",
 "language": "GDScript",
@@ -1217,6 +1222,7 @@ _global_script_class_icons={
 "CharacterHitbox": "",
 "ChatMessage": "",
 "CheckButtonSound": "",
+"CheckpointData": "",
 "CircleArea": "",
 "CloudNozzle": "",
 "CollapsibleContainer": "",

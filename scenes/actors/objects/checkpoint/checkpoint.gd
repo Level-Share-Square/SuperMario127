@@ -34,7 +34,7 @@ func _ready():
 	
 #	CurrentLevelData.set_checkpoint_ids()
 #	id = level_object.get_ref().properties[9]
-	if Singleton.CheckpointSaved.current_checkpoint_id == id:
+	if CurrentLevelData.checkpoint_data.current_checkpoint_id == id:
 		is_used = true
 	
 	CurrentLevelData.vars.checkpoints.append([id, self])
@@ -64,15 +64,15 @@ func set_checkpoint(body):
 	
 	is_used = true
 	
-	Singleton.CheckpointSaved.current_checkpoint_id = id
-	Singleton.CheckpointSaved.current_spawn_pos = global_position + spawn_offset
-	Singleton.CheckpointSaved.current_area = CurrentLevelData.area_id
-	Singleton.CheckpointSaved.current_coins = CurrentLevelData.vars.coins_collected
-	Singleton.CheckpointSaved.nozzles_collected = CurrentLevelData.vars.nozzles_collected.duplicate(true)
-	Singleton.CheckpointSaved.current_red_coins = CurrentLevelData.vars.red_coins_collected.duplicate(true)
-	Singleton.CheckpointSaved.current_shine_shards = CurrentLevelData.vars.shine_shards_collected.duplicate(true)
-	Singleton.CheckpointSaved.current_purple_starbits = CurrentLevelData.vars.purple_starbits_collected.duplicate(true)
-	Singleton.CheckpointSaved.current_local_keys = CurrentLevelData.vars.local_keys_collected.duplicate(true)
+	CurrentLevelData.checkpoint_data.current_checkpoint_id = id
+	CurrentLevelData.checkpoint_data.current_spawn_pos = global_position + spawn_offset
+	CurrentLevelData.checkpoint_data.current_area = CurrentLevelData.area_id
+	CurrentLevelData.checkpoint_data.current_coins = CurrentLevelData.vars.coins_collected
+	CurrentLevelData.checkpoint_data.nozzles_collected = CurrentLevelData.vars.nozzles_collected.duplicate(true)
+	CurrentLevelData.checkpoint_data.current_red_coins = CurrentLevelData.vars.red_coins_collected.duplicate(true)
+	CurrentLevelData.checkpoint_data.current_shine_shards = CurrentLevelData.vars.shine_shards_collected.duplicate(true)
+	CurrentLevelData.checkpoint_data.current_purple_starbits = CurrentLevelData.vars.purple_starbits_collected.duplicate(true)
+	CurrentLevelData.checkpoint_data.current_local_keys = CurrentLevelData.vars.local_keys_collected.duplicate(true)
 	
 	while CurrentLevelData.vars.liquid_positions.size() <= CurrentLevelData.area_id:
 		CurrentLevelData.vars.liquid_positions.append([])
@@ -83,9 +83,9 @@ func set_checkpoint(body):
 			CurrentLevelData.vars.liquid_positions[CurrentLevelData.area_id].append(liquid[1].save_pos)
 	
 	if save_switch_state:
-		Singleton.CheckpointSaved.switch_state = CurrentLevelData.vars.switch_state.duplicate(true)
-	Singleton.CheckpointSaved.liquid_positions = CurrentLevelData.vars.liquid_positions.duplicate(true)
-	Singleton.CheckpointSaved.activated_shine_ids = CurrentLevelData.vars.activated_shine_ids.duplicate(true)
+		CurrentLevelData.checkpoint_data.switch_state = CurrentLevelData.vars.switch_state.duplicate(true)
+	CurrentLevelData.checkpoint_data.liquid_positions = CurrentLevelData.vars.liquid_positions.duplicate(true)
+	CurrentLevelData.checkpoint_data.activated_shine_ids = CurrentLevelData.vars.activated_shine_ids.duplicate(true)
 	
 	CurrentLevelData.level_transition_data = {}
 	

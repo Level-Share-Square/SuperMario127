@@ -62,7 +62,7 @@ func _physics_process(delta):
 	if cached_pos != Vector2() and chase and character != null:
 		var move_to = (cached_pos - global_position).normalized()
 		global_position += move_to * current_speed * 2
-		
+	
 	if mode != 1 and chase and !poofed:
 		if chase_anim_finished:
 			current_speed = lerp(current_speed, chase_speed, fps_util.PHYSICS_DELTA * 2) #this will make the transition from animation to movement not so jarring
