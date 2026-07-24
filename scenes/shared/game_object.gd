@@ -2,6 +2,7 @@ class_name GameObject
 extends Node2D
 
 enum BasePropertyIDs {
+	IN_FRONT = -3
 	PALETTE = -2
 	POSITION = -1
 	SCALE = 0
@@ -30,6 +31,8 @@ var translucent: bool = false
 
 var loaded: bool = false
 
+var in_front: bool = false
+
 var enabled: bool = true
 var preview_position := Vector2(72, 92)
 var palette: int = 0
@@ -57,6 +60,7 @@ var property_value_menus := {}
 onready var editor_hitbox: Area2D = get_node_or_null("EditorHitbox")
 
 export var property_ids: Dictionary = {
+	"in_front": BasePropertyIDs.IN_FRONT,
 	"palette": BasePropertyIDs.PALETTE,
 	"position": BasePropertyIDs.POSITION,
 	"scale": BasePropertyIDs.SCALE,
@@ -86,7 +90,7 @@ func _ready():
 	
 	set_object_data_property_metadata()
 	for property in savable_properties:
-		property_ids.get_or_add(property, property_ids.values().size() - 2)
+		property_ids.get_or_add(property, property_ids.values().size() - 3)
 	
 	if get_tree().current_scene.mode == 1:
 		if generate_editor_hitbox:
@@ -386,7 +390,8 @@ func set_property(key, value, change_object_data = true, alias = null):
 	
 	if mode == 1 and !is_preview:
 		emit_signal("property_changed", key, value)
-		
+
+
 func get_property(key):
 	return object_data_ref.get_ref().get_property(get_property_index(key))
 

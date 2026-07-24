@@ -336,19 +336,30 @@ static func get_collectible_data_from_old_data(level_data) -> CollectibleData:
 		area = area as AreaDataOld
 		for object in area.objects:
 			object = object as ObjectDataOld
+			var shine_properties: Array = object.properties.duplicate(true)
 			
 			if object.type_id == SHINE_ID:
 				var mission_data: MissionData = MissionData.new(
 					uuid_util.v4(),
-					object.properties[8], # Show in menu
-					object.properties[6], # Shine name
-					object.properties[7], # Shine desc
-					object.properties[15], # Sort order
-					object.properties[12], # Color
-					object.properties[14], # Kick out
+					shine_properties[8], # Show in menu
+					shine_properties[6], # Shine name
+					shine_properties[7], # Shine desc
+					shine_properties[15], # Sort order
+					shine_properties[12], # Color
+					shine_properties[14], # Kick out
 					0,
 					"spawn"
 				)
+				
+				object.properties = shine_properties.slice(0, 5)
+				object.properties.resize(13)
+				object.properties[6] = shine_properties[9]
+				object.properties[7] = shine_properties[10]
+				object.properties[8] = shine_properties[11]
+				object.properties[9] = shine_properties[12]
+				object.properties[10] = mission_data.mission_uuid
+				object.properties[11] = 0 if shine_properties.size() <= 15 else shine_properties[15]
+				object.properties[12] = ""
 				
 				mission_datas.append(mission_data)
 			elif object.type_id == STAR_COIN_ID:

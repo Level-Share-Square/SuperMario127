@@ -8,9 +8,9 @@ const EDITOR_PATH = preload("res://scenes/editor/editor.tscn")
 
 func _ready():
 #	test_level_code_validation()
-	convert_debug_level()
+#	convert_debug_level()
 	
-#	instance_debug_level()
+	instance_debug_level()
 	
 #	tile_byte_test(
 #		{
