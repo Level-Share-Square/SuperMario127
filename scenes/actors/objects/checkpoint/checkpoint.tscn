@@ -73,3 +73,7 @@ visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EditorArea"]
 shape = SubResource( 4 )
+
+[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+unique_name_in_owner = true
+rect = Rect2( -64, -64, 128, 128 )
