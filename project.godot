@@ -184,6 +184,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/editor/windows/editor_options/collapsible_container.gd"
 }, {
+"base": "LevelDataResource",
+"class": "CollectibleData",
+"language": "GDScript",
+"path": "res://level/models/collectibles/collectible_data.gd"
+}, {
 "base": "Node",
 "class": "Component",
 "language": "GDScript",
@@ -664,10 +669,10 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/actors/mario/powerups/Metal.gd"
 }, {
-"base": "LevelDataResource",
+"base": "Reference",
 "class": "MissionData",
 "language": "GDScript",
-"path": "res://level/models/level/mission_metadata.gd"
+"path": "res://level/models/collectibles/mission_data.gd"
 }, {
 "base": "SelectionTool",
 "class": "MoveSelection",
@@ -964,6 +969,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/actors/mario/states/Squished.gd"
 }, {
+"base": "LevelDataResource",
+"class": "StarCoinData",
+"language": "GDScript",
+"path": "res://level/models/collectibles/star_coin_data.gd"
+}, {
 "base": "Node",
 "class": "State",
 "language": "GDScript",
@@ -1210,6 +1220,7 @@ _global_script_class_icons={
 "CircleArea": "",
 "CloudNozzle": "",
 "CollapsibleContainer": "",
+"CollectibleData": "",
 "Component": "",
 "ControlPresets": "",
 "CrushedBaseState": "",
@@ -1366,6 +1377,7 @@ _global_script_class_icons={
 "SpinBoxSound": "",
 "SpinningState": "",
 "SquishedState": "",
+"StarCoinData": "",
 "State": "",
 "SwimmingState": "",
 "TeleportObject": "",
