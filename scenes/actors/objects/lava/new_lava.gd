@@ -2,9 +2,7 @@ class_name Lava
 extends LiquidBase
 
 onready var new = $New
-onready var lava_light_viewport = $New/Waves/Viewport
-onready var lava_light_texture = $New/Waves/Viewport/LavaLight
-onready var lava_light = $New/Waves/Light2D
+onready var lava_light = $New/Waves/LavaLight
 onready var bubbles = $New/Waves/Bubbles
 
 onready var body_collision = $StaticBody2D/CollisionShape2D
@@ -14,9 +12,9 @@ onready var old_waves = $Old/Waves
 onready var old_waves_recolorable = $Old/Waves/WavesRecolorable
 onready var old_lava_fill = $Old/Body
 
-var use_old_lava : bool = false
-var lighting : bool = true
-var surface_color : Color = Color8(255, 195, 0, 255)
+var use_old_lava: bool = true
+var lighting: bool = true
+var surface_color: Color = Color8(255, 195, 0, 255)
 
 var surface_gradient : GradientTexture = GradientTexture.new()
 
@@ -90,39 +88,32 @@ func update():
 	if waves_enable:
 		waves.visible = true
 		waves.rect_size.x = size.x
-		liquid_body.rect_position.y = 0
-		liquid_body.rect_size = size
+		waves.material.set_shader_param("position", global_position)
+		waves.material.set_shader_param("size", waves.rect_size)
+		waves.material.set_shader_param("offset", Vector2(position.x, 0))
 	else:
 		waves.visible = false
-		liquid_body.rect_position.y = 0
-		liquid_body.rect_size = size
 	
 	#update new stuff
-	waves.material.set_shader_param("position", global_position)
-	waves.material.set_shader_param("size", waves.rect_size)
-	waves.material.set_shader_param("offset", Vector2(position.x, 0))
-	
+	liquid_body.rect_position.y = 0
+	liquid_body.rect_size = size
 	liquid_body.material.set_shader_param("position", global_position)
 	liquid_body.material.set_shader_param("size", liquid_body.rect_size)
 	liquid_body.material.set_shader_param("offset", position)
 	liquid_body.material.set_shader_param("rotation", rotation)
 	
-	lava_light_texture.rect_size.x = size.x
-	lava_light_texture.material.set_shader_param("noise_scale", Vector2(size.x/256, .25))
-	
-	lava_light_viewport.size.x = size.x
-	
+	lava_light.rect_size.x = size.x
+	lava_light.material.set_shader_param("noise_scale", Vector2(size.x/256, .25))
 	lava_light.visible = lighting
-	lava_light.position.x = size.x/2
 	lava_light.color = color.linear_interpolate(surface_color, 0.5)
-	
-	update_light_layer()
 	
 	bubbles.position.x = size.x/2
 	bubbles.process_material.emission_box_extents.x = (size.x/2) - 4
 	bubbles.amount = int(size.x/14)
 	bubbles.visibility_rect.position.x = -size.x/2
 	bubbles.visibility_rect.size.x = size.x
+	bubbles.modulate = color.linear_interpolate(surface_color, 0.75)
+#	bubbles.modulate.a = 0.43
 	
 	#update old stuff
 	body_collision.position = liquid_area_collision.position
@@ -143,15 +134,13 @@ func update():
 
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
+func _object_ready():
+	._object_ready()
+	
 	#gets the correct nodes for the waves and liquid body
 	waves = $New/Waves
 	liquid_body = $New/Body
 	visual = $New if !use_old_lava else $Old
-	
-	var scene = get_tree().current_scene
-	if scene.mode == 1 and scene.placed_item_property == "NewLava":
-		set_property("use_old_lava", false)
 	
 	change_size()
 	
@@ -160,11 +149,30 @@ func _ready():
 	
 	update_liquid_color(color)
 	update()
+
+
+func _object_ground_ready() -> void:
+	liquid_area.monitoring = true
+	liquid_area.monitorable = true
+
+
+func _object_disabled_ready() -> void:
+	liquid_area.monitoring = false
+	liquid_area.monitorable = false
+
+
+func _editor_ready() -> void:
+	var scene = get_tree().current_scene
+	if scene.placed_item_property == "NewLava":
+		set_property("use_old_lava", false)
 	
+	_object_ready()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _object_process(_delta):
+	._object_process(_delta)
+	
 	if (new.visible == use_old_lava):
 		new.visible = !use_old_lava
 		old.visible = use_old_lava
