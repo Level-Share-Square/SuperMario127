@@ -1952,20 +1952,19 @@ project/assembly_name="Super Mario 127"
 limits/debugger_stdout/max_chars_per_second=100000
 limits/debugger_stdout/max_messages_per_frame=100
 
-[physics]
-
-2d/use_bvh=false
-
 [rendering]
 
 quality/driver/fallback_to_gles2=true
 quality/intended_usage/framebuffer_allocation=0
 quality/intended_usage/framebuffer_allocation.mobile=0
+threads/thread_model=2
 vram_compression/import_bptc=true
 vram_compression/import_etc=true
 quality/filters/anisotropic_filter_level=1
+batching/parameters/item_reordering_lookahead=0
 batching/precision/uv_contract=true
 gles3/shaders/shader_compilation_mode=2
+2d/options/culling_mode=0
 limits/buffers/canvas_polygon_buffer_size_kb=1024
 limits/buffers/canvas_polygon_index_buffer_size_kb=1024
 limits/rendering/max_renderable_elements=131072
