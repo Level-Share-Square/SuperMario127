@@ -91,21 +91,12 @@ func _notification(what: int) -> void:
 	if what == NOTIFICATION_READY:
 		match mode:
 			LevelPlayer.mode:
-		#		call_deferred("_object_ready")
-				
-				if not enabled:
-		#			call_deferred("_object_disabled_ready")
-					_object_disabled_ready()
-					return
-				
 				if is_on_ground_layer():
 		#			call_deferred("_object_ground_ready")
 					_object_ground_ready()
 				else:
 		#			call_deferred("_object_parallax_ready")
 					_object_parallax_ready()
-					
-				_object_ready()
 			Editor.mode:
 		#		call_deferred("_editor_ready")
 				_editor_ready()
@@ -250,7 +241,10 @@ func _object_physics_process(delta: float) -> void:
 
 ## run when the game object enters the scene tree
 func _object_ground_ready() -> void:
-	pass
+	if enabled:
+		_object_ready()
+	else:
+		_object_disabled_ready()
 
 
 ## Run every process frame when the object is on a ground layer.

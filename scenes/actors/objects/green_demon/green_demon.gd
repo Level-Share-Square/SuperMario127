@@ -48,7 +48,7 @@ func kill(body):
 		particles.emitting = false
 		particles2.emitting = false
 
-func _ready():
+func _object_ready():
 	cc = Singleton.MiscShared.get_can_control()
 	original_position = position
 	particles.process_material.scale = (scale.x + scale.y) / 2 # Average works well enough
@@ -58,7 +58,7 @@ func _ready():
 		if chase:
 			Singleton.MiscShared.play_green_demon_audio(revolve_sound, cc) #since the game doesn't detect a rotation at the start, we play the sound manually
 
-func _physics_process(delta):
+func _object_ground_physics_process(delta):
 	if cached_pos != Vector2() and chase and character != null:
 		var move_to = (cached_pos - global_position).normalized()
 		global_position += move_to * current_speed * 2

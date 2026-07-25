@@ -11,7 +11,7 @@ var burning_time = 2.5
 var offset = 0.0
 var color = Color(1, 0, 0)
 
-var next_state_timer
+var next_state_timer: float = 0
 var burning = true
 var reversed = false
 
