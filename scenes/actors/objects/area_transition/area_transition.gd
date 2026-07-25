@@ -58,7 +58,7 @@ func _editor_ready():
 
 func _object_ready():
 	._object_ready()
-	sprite.visible = true
+	sprite.visible = false
 	
 func _object_parallax_ready():
 	._object_parallax_ready()

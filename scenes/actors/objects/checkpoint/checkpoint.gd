@@ -28,7 +28,6 @@ func _set_property_values():
 
 func _object_ground_ready():
 	display.visible = false
-	var _connect = use_area.connect("body_entered", self, "set_checkpoint")
 	
 #	CurrentLevelData.set_checkpoint_ids()
 #	id = level_object.get_ref().properties[9]
@@ -41,6 +40,8 @@ func _object_ground_ready():
 func _editor_ready():
 	display.visible = true
 
+func _object_ready():
+	var _connect = use_area.connect("body_entered", self, "set_checkpoint")
 
 func _object_process(delta: float):
 	update_ring_particles(delta)

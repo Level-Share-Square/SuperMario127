@@ -18,6 +18,8 @@ onready var invuln_timer = $InvulnTimer
 onready var audio_player : AudioStreamPlayer = $AudioStreamPlayer
 onready var particles : Particles2D = $CannonMoveable/SpriteBodyReverser/SpriteBody/Particles2D
 onready var nearby_character_detection : Area2D = $NearbyCharacterDetection
+onready var collision_shape_2d = $RingCollision/CollisionShape2D
+onready var collision_shape_2d_2 = $EntranceCollision/CollisionShape2D
 
 # the character using the cannon
 var stored_character : Character
@@ -73,6 +75,11 @@ func _ready() -> void:
 		cannon_direction_multiplier = -1
 	# warning-ignore:return_value_discarded
 	pipe_enter_logic.connect("pipe_animation_finished", self, "_start_cannon_animation")
+
+func _object_parallax_ready():
+	._object_parallax_ready()
+	collision_shape_2d.disabled = true
+	collision_shape_2d_2.disabled = true
 
 #disabled by default until process is enabled, so this can assume the cannon is already in an active state
 func _physics_process(delta : float) -> void:
@@ -221,11 +228,3 @@ func attempt_enable_collision(body : PhysicsBody2D = null) -> void:
 	# simple little math thing, if can_enable_collision is true, it'll be a 1, if false it'll be a 0, 
 	#so one of the values will be multiplied by 0 and therefore impact anything
 	cannon_moveable.z_index = Z_INDEX_FOREGROUND * int(can_enable_collision) + Z_INDEX_BACKGROUND * int(!can_enable_collision)
-
-func is_middle(check):
-	
-	$EntranceCollision/CollisionShape2D.disabled = !check
-	$NearbyCharacterDetection/CollisionShape2D.disabled = !check
-	$RingCollision/CollisionShape2D.disabled = !check
-	$PipeEnterLogic/Area2D/CollisionShape2D.disabled = !check
-	$PipeEnterLogic/GPArea/CollisionShape2D.disabled = !check
