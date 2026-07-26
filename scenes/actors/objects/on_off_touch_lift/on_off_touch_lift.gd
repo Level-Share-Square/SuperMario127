@@ -151,6 +151,13 @@ func _ready():
 		
 		set_property("end_position", path.curve.get_point_position(path.curve.get_point_count()-1)/32)
 
+func _object_disabled_ready():
+	._object_disabled_ready()
+	platform.collision_shape.disabled = true
+	platform.platform_area_collision_shape.disabled = true
+	platform.enabled = false
+	platform.switch_state(platform.sprite.visible)
+
 func set_sprite_parts(sprite):
 	sprite.rect_position.x = -(left_width + (part_width * parts) + right_width) / 2
 	sprite.rect_size.x = left_width + right_width + part_width * parts
