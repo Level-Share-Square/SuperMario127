@@ -35,9 +35,11 @@ func collect(body):
 		body.set_nozzle(nozzle_type)
 
 func _ready():
-	var _connect = area.connect("body_entered", self, "collect")
 	gravity = CurrentLevelData.current_area.header.gravity
 	kinematic_body.get_node("Sprite_" + nozzle_type).visible = true
+	
+func _object_ready():
+	var _connect = area.connect("body_entered", self, "collect")
 	
 func _process(delta):
 	if destroy_timer > 0:

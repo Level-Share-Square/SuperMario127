@@ -46,13 +46,10 @@ func _set_property_values():
 
 func _ready():
 	var _connect = connect("property_changed", self, "update_property")
-	if bouncy and enabled and mode == 0:
-		_connect = timer.connect("timeout", self, "idle_bounce_anim")
-		_connect = area_2d.connect("body_entered", self, "bounce")
 	
 	update_property("color", color)
 	update_parts()
-	collision_shape.disabled = !enabled or bouncy
+	collision_shape.disabled = bouncy
 	preview_position = custom_preview_position
 	if is_preview:
 		z_index = 0
@@ -61,6 +58,15 @@ func _ready():
 	if parts < 0:
 		parts = 0
 
+func _object_disabled_ready():
+	._object_disabled_ready()
+	collision_shape.disabled = true
+
+func _object_ready():
+	._object_ready()
+	if bouncy:
+		var _connect = timer.connect("timeout", self, "idle_bounce_anim")
+		_connect = area_2d.connect("body_entered", self, "bounce")
 
 func update_property(key, value):
 	if color == Color(1, 0, 0):

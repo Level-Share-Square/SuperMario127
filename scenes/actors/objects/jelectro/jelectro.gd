@@ -28,7 +28,7 @@ func kill(body):
 		else:
 			body.sound_player.play_hit_sound()
 
-func _ready():
+func _object_ready():
 	var _connect = area.connect("body_entered", self, "kill")
 	var _connect2 = delete_timer.connect("timeout", self, "queue_free")
 

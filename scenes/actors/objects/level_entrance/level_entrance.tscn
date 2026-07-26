@@ -21,7 +21,6 @@ animations = [ {
 [node name="tp_exit" type="Node2D"]
 z_index = -1
 script = ExtResource( 3 )
-lock_layer = true
 internal_id = "level_entrance"
 
 [node name="WarpHelper" type="Node2D" parent="."]

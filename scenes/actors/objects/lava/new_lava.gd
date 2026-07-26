@@ -134,8 +134,7 @@ func update():
 
 
 # Called when the node enters the scene tree for the first time.
-func _object_ready():
-	._object_ready()
+func _ready():
 	
 	#gets the correct nodes for the waves and liquid body
 	waves = $New/Waves
@@ -143,20 +142,17 @@ func _object_ready():
 	visual = $New if !use_old_lava else $Old
 	
 	change_size()
-	
-	liquid_area.monitoring = (enabled and mode != 1)
-	liquid_area.monitorable = (enabled and mode != 1)
-	
+
 	update_liquid_color(color)
 	update()
 
-
-func _object_ground_ready() -> void:
+func _object_ready():
+	._object_ready()
 	liquid_area.monitoring = true
 	liquid_area.monitorable = true
 
-
 func _object_disabled_ready() -> void:
+	._object_disabled_ready()
 	liquid_area.monitoring = false
 	liquid_area.monitorable = false
 

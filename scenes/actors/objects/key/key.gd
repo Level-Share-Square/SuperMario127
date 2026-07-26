@@ -111,10 +111,11 @@ func update_property(key, value):
 			sprite.texture = RECOLORABLE_TEXTURE
 			sprite.self_modulate = color
 
-func _ready():
+func _object_ready():
 	if id in CurrentLevelData.checkpoint_data.current_local_keys:
 		queue_free()
-	if enabled:
-		var _connect = area.connect("body_entered", self, "collect")
+	var _connect = area.connect("body_entered", self, "collect")
+	
+func _editor_ready():
 	var _connect = connect("property_changed", self, "update_property")
 	update_property("color", color)
