@@ -11,4 +11,14 @@ func load_layer(_layer_data: LayerData, _can_delete: bool, layer_color: Color) -
 	var layer_metadata: LayerMetadata = _layer_data.layer_metadata
 	
 	$"%Select".text = layer_metadata.layer_name
-	$"%LayerColor".modulate = layer_color
+	$"%LayerColor".modulate = get_band_color(layer_metadata.order)
+
+func get_band_color(order: int) -> Color:
+	var max_layer: float = EditorLayerManager.MAX_LAYERS / 2.0
+	var factor: float = clamp(order, -max_layer, max_layer) / max_layer
+	
+	return Color(
+		(1 - max(0, -factor)),
+		1,
+		(1 - max(0, factor))
+	)

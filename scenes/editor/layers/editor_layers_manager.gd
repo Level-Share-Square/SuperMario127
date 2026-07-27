@@ -16,11 +16,11 @@ func init_layer_manager(set_layers: Array):
 	
 
 # Editor interface functions
-func place(to_place):
-	if to_place is GameObject:
-		current_layer.place_object(to_place)
-	elif to_place is Tile:
-		current_layer.place_tile(to_place)
+#func place(to_place):
+#	if to_place is GameObject:
+#		current_layer.place_object(to_place)
+#	else:
+#		current_layer.place_tile(to_place)
 		
 func remove(to_remove):
 	if to_remove is GameObject:

@@ -41,7 +41,7 @@ func get_layer_index(layer: LevelLayer):
 func get_layer_at(index: int):
 	return layers[index]
 
-func add_layer(layer_data = null, add_to_data: bool = false, at: int = layers.size()):
+func add_layer(layer_data = null, add_to_data: bool = false, at: int = layers.size()) -> LevelLayer:
 	if not is_instance_valid(layer_data):
 		var layer_metadata = LayerMetadata.new()
 		layer_data = LayerData.new(layer_metadata, TileData.new(), [])
@@ -61,6 +61,7 @@ func add_layer(layer_data = null, add_to_data: bool = false, at: int = layers.si
 	if add_to_data:
 		CurrentLevelData.current_area.layers.insert(at, layer_data)
 
+	return new_layer
 
 func remove_layer(index: int, remove_from_data: bool = false):
 	var removed = layers[index]

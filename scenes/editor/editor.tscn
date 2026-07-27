@@ -1081,6 +1081,7 @@ max_height = 304.0
 unique_name_in_owner = true
 margin_right = 103.0
 size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="Actions" type="HBoxContainer" parent="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/DropdownParent/LayerMenu/MarginContainer/LayerDropdown"]
 margin_top = 4.0
@@ -1090,6 +1091,7 @@ size_flags_horizontal = 3
 custom_constants/separation = 5
 
 [node name="PickLayer" type="Button" parent="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/DropdownParent/LayerMenu/MarginContainer/LayerDropdown/Actions"]
+unique_name_in_owner = true
 margin_right = 111.0
 margin_bottom = 17.0
 rect_min_size = Vector2( 24, 16 )
