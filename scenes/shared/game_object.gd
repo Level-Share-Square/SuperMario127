@@ -110,7 +110,6 @@ func _ready():
 		property_ids.get_or_add(property, property_ids.values().size() - 3)
 	
 	object_data_ref.get_ref().emit_signal("populated_ids")
-	
 	if get_tree().current_scene.mode == 1:
 		if generate_editor_hitbox:
 			if is_instance_valid(editor_hitbox):

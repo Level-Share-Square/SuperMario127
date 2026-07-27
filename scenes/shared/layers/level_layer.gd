@@ -16,7 +16,6 @@ var order: int = 0 setget set_order
 # Empty means always active
 var activated_mission_ids: PoolIntArray = []
 
-
 func load_in(layer_data: LayerData):
 	autoset_tint = layer_data.layer_metadata.autoset_tint
 	activated_mission_ids = layer_data.layer_metadata.activated_mission_ids
@@ -39,7 +38,6 @@ func set_layer_modulate(color: Color) -> void:
 
 func _update_z_index() -> void:
 	z_index = order * LAYER_Z_SPACING * 2
-
 
 func _update_modulate() -> void:
 	if autoset_tint:

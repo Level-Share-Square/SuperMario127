@@ -28,6 +28,7 @@ func update_layer():
 		Color(hex.text),
 		int(order.text),
 		ground.pressed,
+		"New Layer",
 		PoolIntArray(),
 		false,
 		float(opacity.text)

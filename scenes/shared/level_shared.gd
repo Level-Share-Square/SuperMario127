@@ -70,10 +70,13 @@ func remove_layer(index: int, remove_from_data: bool = false):
 	if remove_from_data:
 		CurrentLevelData.current_area.layers.remove(index)
 		
-func edit_layer(index: int, data: LayerData):
-	var layer = layers[index]
-	layer.load_in(data)
-	CurrentLevelData.current_area.layers[index] = data
+func edit_layer(index: int, property: String, value):
+	var layer: LevelLayer = layers[index]
+	var layer_data: LayerData = layer.layer_data
+	
+	layer_data.layer_metadata[property] = value
+	layer.load_in(layer_data)
+	CurrentLevelData.current_area.layers[index] = layer_data
 	
 func set_tile(x: int, y: int, index: int, tileset_id: int, tile_id: int, palette_id : int = 0):
 	layers[index].place_tile(Vector2(x, y), tileset_id, tile_id, palette_id, true, true)

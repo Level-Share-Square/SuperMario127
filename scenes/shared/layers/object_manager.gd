@@ -7,13 +7,12 @@ var layer_data: LayerData
 
 func load_in(s_layer_data: LayerData):
 	layer_data = s_layer_data
-	
+
 	for child in get_children():
-		queue_free()
+		child.queue_free()
 	
 	for object_data in layer_data.object_data:
 		create_object(object_data)
-
 
 func place_object(object_data: ObjectData, add_to_data: bool = false):
 	var s_position = object_data.metadata.position

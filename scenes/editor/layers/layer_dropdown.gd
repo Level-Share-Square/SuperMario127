@@ -23,6 +23,7 @@ func _ready():
 func add_layer(layer_data: LayerData) -> void:	
 	var layer_info: LayerInfo = LAYER_INFO_SCENE.instance()
 	layer_info.load_layer(layer_data, layer_data.layer_metadata.order == editor.layer, Color.red)
+	layer_info.shared = shared
 	layers.add_child(layer_info)
 
 	var h_separator := HSeparator.new()
@@ -37,6 +38,7 @@ func update_layers() -> void:
 		
 		var layer_info: LayerInfo = LAYER_INFO_SCENE.instance()
 		layer_info.load_layer(layer_data, layer_data.layer_metadata.order == editor.layer, Color.red)
+		layer_info.shared = shared
 		layers.add_child(layer_info)
 
 		var h_separator := HSeparator.new()

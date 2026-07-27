@@ -26,8 +26,9 @@ func _init(
 		set_parallax_offset: Vector2 = Vector2.ZERO, 
 		set_autoset_tint: bool = true, 
 		set_layer_tint: Color = Color.white, 
-		set_order: int = 0, 
-		set_is_ground: bool = true, 
+		set_order: int = 0,
+		set_is_ground: bool = true,
+		set_name: String = "New Layer",
 		set_activated_mission_ids: PoolIntArray = PoolIntArray(),
 		set_disabled: bool = false,
 		set_opacity: float = 1.0
@@ -40,3 +41,4 @@ func _init(
 	activated_mission_ids = set_activated_mission_ids
 	disabled = set_disabled
 	layer_opacity = set_opacity
+	layer_name = set_name
