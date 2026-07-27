@@ -2,18 +2,21 @@ class_name LayerMetadata
 extends LevelDataResource
 
 
+var layer_name: String = "New Layer"
 # "distance" from the g layer, affects scroll speed
 var parallax_distance: float = 0
 var parallax_offset: Vector2 = Vector2.ZERO
 var autoset_tint: bool = true
 var layer_tint: Color = Color.white
 var layer_opacity: float = 1.0
+# saved separately to layer opacity
+var layer_visible: bool = true
 
 var order: int
 var is_ground: bool
 # empty means always activated unless disabled is set to true
 var activated_mission_ids: PoolIntArray = PoolIntArray()
-# for if a layer to be permanently hidden, if this is true
+# for a layer to be permanently unloaded, if this is true
 # it should be stripped from the final exported level code for LSS
 var disabled: bool = false
 

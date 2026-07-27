@@ -18,7 +18,8 @@ export var boo_block_texture_invis = "res://assets/tiles/boo_block/boo_block_inv
 
 onready var loaded_boo_texture = load(boo_block_texture)
 onready var loaded_boo_texture_invis = load(boo_block_texture_invis)
-		
+
+signal layer_added(layer)
 
 func load_in():
 	load_layers(CurrentLevelData.current_area.layers)
@@ -55,6 +56,7 @@ func add_layer(layer_data = null, add_to_data: bool = false, at: int = layers.si
 	
 	new_layer.load_in(layer_data)
 	layers.append(new_layer)
+	emit_signal("layer_added", layer_data)
 	
 	if add_to_data:
 		CurrentLevelData.current_area.layers.insert(at, layer_data)

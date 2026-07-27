@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://scenes/editor/editor_layers_manager.gd" type="Script" id=1]
+[ext_resource path="res://scenes/editor/layers/editor_layers_manager.gd" type="Script" id=1]
 
 [node name="EditorLayerManager" type="Node2D"]
 script = ExtResource( 1 )
