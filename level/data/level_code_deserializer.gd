@@ -251,6 +251,7 @@ static func deserialize_layer_metadata_code(layer_metadata_code: String) -> Laye
 	layer_metadata.is_ground = set_or_use_default_value(vars, 5, layer_metadata.is_ground)
 	layer_metadata.activated_mission_ids = set_or_use_default_value(vars, 6, layer_metadata.activated_mission_ids)
 	layer_metadata.layer_opacity = set_or_use_default_value(vars, 7, layer_metadata.layer_opacity)
+	layer_metadata.layer_name = set_or_use_default_value(vars, 8, layer_metadata.layer_name)
 	
 	return layer_metadata
 
