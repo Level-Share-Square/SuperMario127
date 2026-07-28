@@ -1,4 +1,4 @@
-[gd_scene load_steps=114 format=2]
+[gd_scene load_steps=113 format=2]
 
 [ext_resource path="res://scenes/menu/options/options.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/menu/menu_controller/screen_manager.gd" type="Script" id=2]
@@ -83,7 +83,6 @@
 [ext_resource path="res://scenes/editor/dropdown_parent.gd" type="Script" id=81]
 [ext_resource path="res://scenes/editor/assets/ArrowLeft.svg" type="Texture" id=82]
 [ext_resource path="res://scenes/editor/layers/max_height.gd" type="Script" id=83]
-[ext_resource path="res://scenes/editor/assets/ArrowRight.svg" type="Texture" id=84]
 
 [sub_resource type="CanvasItemMaterial" id=176]
 blend_mode = 1
@@ -1749,11 +1748,8 @@ custom_colors/font_color = Color( 1, 1, 1, 1 )
 icon = ExtResource( 82 )
 expand_icon = true
 script = ExtResource( 44 )
-click_override = "DropdownSound"
 menu_path = NodePath("../../Middle")
 blocker_path = NodePath("../../Middle/MouseBlocker")
-open_icon = ExtResource( 84 )
-close_icon = ExtResource( 82 )
 
 [node name="LevelSettingsWindow" parent="UI" instance=ExtResource( 14 )]
 unique_name_in_owner = true

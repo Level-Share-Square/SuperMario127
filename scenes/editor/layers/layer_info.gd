@@ -11,7 +11,7 @@ var can_delete: bool
 signal layer_selected(layer_data)
 
 func _ready():
-	select.connect("pressed", self, "emit_signal", ["layer_selected", layer_data])
+	select.connect("pressed", self, "emit_signal", ["layer_selected", layer_data.layer_metadata.order])
 
 func load_layer(_layer_data: LayerData, _can_delete: bool) -> void:
 	layer_data = _layer_data
@@ -19,7 +19,7 @@ func load_layer(_layer_data: LayerData, _can_delete: bool) -> void:
 	var layer_metadata: LayerMetadata = _layer_data.layer_metadata
 	
 	$"%Select".text = layer_metadata.layer_name
-	$"%LayerColor".modulate = EditorLayerManager.get_band_color(layer_metadata.order)
+	$"%LayerColor".modulate = EditorLayerManager.get_band_color(layer_metadata.order, 2)
 
 func delete_layer() -> void:
 	var action := DeleteLayerAction.new()

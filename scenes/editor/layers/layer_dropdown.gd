@@ -21,17 +21,12 @@ func _ready():
 	editor.action_manager.connect("redo", self, "update_layers")
 	editor.action_manager.connect("action", self, "update_layers")
 
-func select_layer(layer_data: LayerData) -> void:
-	var layer_metadata: LayerMetadata = layer_data.layer_metadata
+func select_layer(index: int) -> void:
+	var layer_metadata: LayerMetadata = shared.get_layer_at(index).layer_data.layer_metadata
 	layer_picker.text = layer_metadata.layer_name
-	layer_picker.get_node("LayerColor").modulate = EditorLayerManager.get_band_color(layer_metadata.order)
 	
-	var index: int = 0
-	for level_layer in shared.layers:
-		if level_layer.layer_data == layer_data:
-			editor.layer = index
-			break
-		index += 1
+	layer_picker.get_node("LayerColor").modulate = EditorLayerManager.get_band_color(layer_metadata.order, 2)
+	editor.layer = index
 	
 	# to close the dropdown
 	layer_picker.emit_signal("pressed")

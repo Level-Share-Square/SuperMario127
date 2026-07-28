@@ -52,9 +52,9 @@ func move_layer(old_index: int, new_index: int):
 		new_index -= 1
 	layers.insert(new_index, temp)
 
-static func get_band_color(order: int) -> Color:
+static func get_band_color(order: int, anchor: int) -> Color:
 	var max_layer: float = MAX_LAYERS / 2.0
-	var factor: float = clamp(order, -max_layer, max_layer) / max_layer
+	var factor: float = clamp(order - anchor, -max_layer, max_layer) / max_layer
 	
 	return Color(
 		(1 - max(0, -factor)),
