@@ -23,10 +23,13 @@ func load_layer(_layer_data: LayerData, _can_delete: bool) -> void:
 	$"%LayerColor".modulate = EditorLayerManager.get_band_color(layer_metadata.order)
 
 func test() -> void:
-	var action := EditLayerAction.new()
+#	var action := EditLayerAction.new()
+#	action.shared = shared
+#	action.property = "layer_tint"
+#	action.new_value = Color.blue
+#	action.layer_index = get_index()/2
+#	shared.get_parent().action_manager.commit_action(action)
+	var action := DeleteLayerAction.new()
 	action.shared = shared
-	action.property = "layer_tint"
-	action.new_value = Color.blue
 	action.layer_index = get_index()/2
-	print(shared.get_layer_at(get_index()/2).layer_data.layer_metadata.order) # dis is broken
 	shared.get_parent().action_manager.commit_action(action)

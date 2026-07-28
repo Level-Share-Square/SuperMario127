@@ -4,7 +4,7 @@ extends Action
 var shared: LevelShared
 var layer: LevelLayer
 
-func add_layer(layer_data: LayerData):
+func add_layer(layer_data: LayerData, layer_index: int = -1):
 	if !layer_data:
 		layer_data = LayerData.new(
 			LayerMetadata.new(),
@@ -14,7 +14,8 @@ func add_layer(layer_data: LayerData):
 		layer_data.layer_metadata.order = shared.layers.back().layer_data.layer_metadata.order + 1
 		layer_data.layer_metadata.layer_name = layer_data.layer_metadata.layer_name % (shared.layers.size() + 1)
 	
-	layer = shared.add_layer(layer_data, true)
+	layer_index = layer_index if layer_index != -1 else shared.layers.size()
+	layer = shared.add_layer(layer_data, true, layer_index)
 
 func remove_layer():
 	shared.remove_layer(shared.get_layer_index(layer), true)

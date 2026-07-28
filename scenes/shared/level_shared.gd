@@ -55,7 +55,7 @@ func add_layer(layer_data = null, add_to_data: bool = false, at: int = layers.si
 	add_child(new_layer)
 	
 	new_layer.load_in(layer_data)
-	layers.append(new_layer)
+	layers.insert(at, new_layer)
 	emit_signal("layer_added", layer_data)
 	
 	if add_to_data:
