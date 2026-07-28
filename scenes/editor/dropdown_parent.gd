@@ -11,4 +11,3 @@ func _ready() -> void:
 func dropdown_resized() -> void:
 	rect_min_size.x = max(dropdown.rect_size.x, parent.rect_size.x)
 	dropdown.rect_size.x = rect_min_size.x
-	print("resized")

@@ -41,7 +41,7 @@ func visibility_changed():
 		palette_button.character = current_character
 		palette_button.group = button_group
 		palette_button.pressed = (palette_id == current_palette)
-		palette_button.connect("button_down", self, "set_palette", [palette_id])
+		palette_button.connect("pressed", self, "set_palette", [palette_id])
 		connect("character_changed", palette_button, "load_palette")
 		
 		var destination: HBoxContainer = row_1
