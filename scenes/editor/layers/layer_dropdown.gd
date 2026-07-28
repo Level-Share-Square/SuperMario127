@@ -6,14 +6,14 @@ const LAYER_INFO_SCENE: PackedScene = preload("res://scenes/editor/layers/layer_
 onready var editor: Editor = owner
 onready var shared: LevelShared = editor.get_shared_node()
 onready var layers: Container = $"%Layers"
-onready var pick_layer = $"%PickLayer"
+onready var new_layer = $"%NewLayer"
 
 
 func _ready():
 	for layer_data in shared.layers:
 		add_layer(layer_data)
 	shared.connect("layer_added", self, "add_layer")
-	pick_layer.connect("button_down", self, "new_layer")
+	new_layer.connect("button_down", self, "new_layer")
 	
 	yield(editor, "ready")
 	editor.action_manager.connect("undo", self, "update_layers")

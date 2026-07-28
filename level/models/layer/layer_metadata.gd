@@ -2,7 +2,7 @@ class_name LayerMetadata
 extends LevelDataResource
 
 
-var layer_name: String = "New Layer"
+var layer_name: String = "Layer %s"
 # "distance" from the g layer, affects scroll speed
 var parallax_distance: float = 0
 var parallax_offset: Vector2 = Vector2.ZERO
@@ -28,7 +28,7 @@ func _init(
 		set_layer_tint: Color = Color.white, 
 		set_order: int = 0,
 		set_is_ground: bool = true,
-		set_name: String = "New Layer",
+		set_name: String = "Layer %s",
 		set_activated_mission_ids: PoolIntArray = PoolIntArray(),
 		set_disabled: bool = false,
 		set_opacity: float = 1.0

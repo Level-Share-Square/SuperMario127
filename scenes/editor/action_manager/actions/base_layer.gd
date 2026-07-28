@@ -12,6 +12,7 @@ func add_layer(layer_data: LayerData):
 			[]
 		)
 		layer_data.layer_metadata.order = shared.layers.back().layer_data.layer_metadata.order + 1
+		layer_data.layer_metadata.layer_name = layer_data.layer_metadata.layer_name % (shared.layers.size() + 1)
 	
 	layer = shared.add_layer(layer_data, true)
 
