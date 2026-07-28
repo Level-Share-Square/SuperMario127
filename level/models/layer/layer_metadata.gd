@@ -14,6 +14,7 @@ var layer_visible: bool = true
 
 var order: int
 var is_ground: bool
+var is_origin: bool = false
 # empty means always activated unless disabled is set to true
 var activated_mission_ids: PoolIntArray = PoolIntArray()
 # for a layer to be permanently unloaded, if this is true
@@ -29,6 +30,7 @@ func _init(
 		set_order: int = 0,
 		set_is_ground: bool = true,
 		set_name: String = "Layer %s",
+		set_is_origin: bool = false,
 		set_activated_mission_ids: PoolIntArray = PoolIntArray(),
 		set_disabled: bool = false,
 		set_opacity: float = 1.0
@@ -42,3 +44,4 @@ func _init(
 	disabled = set_disabled
 	layer_opacity = set_opacity
 	layer_name = set_name
+	is_origin = set_is_origin

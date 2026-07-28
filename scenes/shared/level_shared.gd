@@ -9,6 +9,7 @@ var ground_layer_scene: PackedScene = preload(GROUND_LAYER_SCENE_PATH)
 var parallax_layer_scene: PackedScene = preload(PARALLAX_LAYER_SCENE_PATH)
 
 var layers: Array
+var origin: LevelGroundLayer
 
 const layer_index_offset: int = -2
 const layer_spacing: int = 16
@@ -20,6 +21,7 @@ onready var loaded_boo_texture = load(boo_block_texture)
 onready var loaded_boo_texture_invis = load(boo_block_texture_invis)
 
 signal layer_added(layer)
+signal found_origin
 
 func load_in():
 	load_layers(CurrentLevelData.current_area.layers)
@@ -28,12 +30,19 @@ func load_in():
 		tex = loaded_boo_texture_invis
 	layers[0].tile_map_manager.tile_set.tile_set_texture(18, tex)
 
-
-
 func load_layers(layer_data_list: Array):
 	for layer_data in layer_data_list:
 		layer_data = layer_data
-		add_layer(layer_data)
+		var layer: LevelLayer = add_layer(layer_data)
+		
+		if layer.layer_data.layer_metadata.is_origin:
+			origin = layer
+			emit_signal("found_origin")
+			
+	# This is a failsafe in case none of the layers are origin
+	if !origin:
+		origin = layers[2]
+		emit_signal("found_origin")
 
 func get_layer_index(layer: LevelLayer):
 	return layers.find(layer)

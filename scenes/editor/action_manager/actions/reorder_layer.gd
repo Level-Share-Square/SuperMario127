@@ -16,10 +16,7 @@ func move_layers():
 	var end_pos: int = max(layer_index, final_layer_index)
 	
 	for i in range(start_pos, end_pos + 1):
-		var layer: LevelLayer = shared.get_layer_at(i)
-		
-		layer.layer_data.layer_metadata.order = i
-		layer.load_in(layer.layer_data)
+		shared.edit_layer(i, "order", i)
 
 	swap_indices()
 

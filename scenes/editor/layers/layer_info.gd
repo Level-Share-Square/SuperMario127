@@ -12,6 +12,7 @@ signal layer_selected(layer_data)
 
 func _ready():
 	select.connect("pressed", self, "emit_signal", ["layer_selected", layer_data.layer_metadata.order])
+	edit.connect("pressed", self, "test")
 
 func load_layer(_layer_data: LayerData, _can_delete: bool) -> void:
 	layer_data = _layer_data
@@ -19,7 +20,11 @@ func load_layer(_layer_data: LayerData, _can_delete: bool) -> void:
 	var layer_metadata: LayerMetadata = _layer_data.layer_metadata
 	
 	$"%Select".text = layer_metadata.layer_name
-	$"%LayerColor".modulate = EditorLayerManager.get_band_color(layer_metadata.order, 2)
+	
+	if !is_instance_valid(shared.origin):
+		yield(shared, "found_origin")
+	
+	$"%LayerColor".modulate = EditorLayerManager.get_band_color(layer_metadata.order, shared.origin.layer_data.layer_metadata.order)
 
 func delete_layer() -> void:
 	var action := DeleteLayerAction.new()
@@ -28,9 +33,8 @@ func delete_layer() -> void:
 	shared.get_parent().action_manager.commit_action(action)
 
 func test() -> void:
-	var action := EditLayerAction.new()
+	var action := ReorderLayerAction.new()
 	action.shared = shared
-	action.property = "layer_tint"
-	action.new_value = Color.blue
 	action.layer_index = get_index()/2
+	action.final_layer_index = shared.layers.size() - 1
 	shared.get_parent().action_manager.commit_action(action)

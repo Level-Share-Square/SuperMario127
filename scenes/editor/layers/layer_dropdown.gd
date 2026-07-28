@@ -25,7 +25,7 @@ func select_layer(index: int) -> void:
 	var layer_metadata: LayerMetadata = shared.get_layer_at(index).layer_data.layer_metadata
 	layer_picker.text = layer_metadata.layer_name
 	
-	layer_picker.get_node("LayerColor").modulate = EditorLayerManager.get_band_color(layer_metadata.order, 2)
+	layer_picker.get_node("LayerColor").modulate = EditorLayerManager.get_band_color(layer_metadata.order, shared.origin.layer_data.layer_metadata.order)
 	editor.layer = index
 	
 	# to close the dropdown
@@ -33,8 +33,8 @@ func select_layer(index: int) -> void:
 
 func add_layer(layer_data: LayerData) -> void:
 	var layer_info: LayerInfo = LAYER_INFO_SCENE.instance()
-	layer_info.load_layer(layer_data, layer_data.layer_metadata.order == editor.layer)
 	layer_info.shared = shared
+	layer_info.load_layer(layer_data, layer_data.layer_metadata.order == editor.layer)
 	layer_info.connect("layer_selected", self, "select_layer")
 	layers.add_child(layer_info)
 
