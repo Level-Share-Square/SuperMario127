@@ -1,7 +1,4 @@
-extends Button
-#       ^^^^^^
-# ALOELUCIDITY CHABGE THIS BACK TO ButtonSound WHEN
-# U FIX THE WEIRD AUDIOPLAYER REFERENCE PROBLEM
+extends ButtonSound
 
 export var menu_path: NodePath
 onready var menu: Control = get_node(menu_path)
@@ -11,15 +8,15 @@ onready var blocker: Control = get_node(blocker_path)
 onready var tween := Tween.new()
 var menu_visible: bool = true
 
-export var open_text: String
-export var close_text: String
+export var open_icon: StreamTexture
+export var close_icon: StreamTexture
 
 func _ready():
 	add_child(tween)
 	connect("pressed", self, "toggle_menu")
 
 func toggle_menu():
-	text = open_text if menu_visible else close_text
+	icon = open_icon if menu_visible else close_icon
 	menu_visible = not menu_visible
 	if menu_visible:
 		menu.show()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=112 format=2]
+[gd_scene load_steps=114 format=2]
 
 [ext_resource path="res://scenes/menu/options/options.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/menu/menu_controller/screen_manager.gd" type="Script" id=2]
@@ -81,7 +81,9 @@
 [ext_resource path="res://scenes/editor/windows/temp_layer_adder.tscn" type="PackedScene" id=79]
 [ext_resource path="res://scenes/editor/layers/layer_dropdown.gd" type="Script" id=80]
 [ext_resource path="res://scenes/editor/dropdown_parent.gd" type="Script" id=81]
+[ext_resource path="res://scenes/editor/assets/ArrowLeft.svg" type="Texture" id=82]
 [ext_resource path="res://scenes/editor/layers/max_height.gd" type="Script" id=83]
+[ext_resource path="res://scenes/editor/assets/ArrowRight.svg" type="Texture" id=84]
 
 [sub_resource type="CanvasItemMaterial" id=176]
 blend_mode = 1
@@ -1018,7 +1020,7 @@ unique_name_in_owner = true
 margin_left = 72.0
 margin_right = 119.0
 margin_bottom = 24.0
-hint_tooltip = "Change Layer"
+hint_tooltip = "Select Layer"
 focus_mode = 0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -1096,7 +1098,6 @@ unique_name_in_owner = true
 margin_right = 111.0
 margin_bottom = 17.0
 rect_min_size = Vector2( 24, 16 )
-hint_tooltip = "Redo"
 focus_mode = 0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -1741,15 +1742,18 @@ margin_left = 4.0
 margin_top = 4.0
 margin_right = 12.0
 margin_bottom = 48.0
+rect_min_size = Vector2( 8, 0 )
 focus_mode = 0
 theme_type_variation = "ButtonTransparent"
 custom_colors/font_color = Color( 1, 1, 1, 1 )
-text = "<"
+icon = ExtResource( 82 )
+expand_icon = true
 script = ExtResource( 44 )
+click_override = "DropdownSound"
 menu_path = NodePath("../../Middle")
 blocker_path = NodePath("../../Middle/MouseBlocker")
-open_text = ">"
-close_text = "<"
+open_icon = ExtResource( 84 )
+close_icon = ExtResource( 82 )
 
 [node name="LevelSettingsWindow" parent="UI" instance=ExtResource( 14 )]
 unique_name_in_owner = true

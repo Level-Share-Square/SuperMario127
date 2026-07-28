@@ -18,8 +18,8 @@
 [ext_resource path="res://scenes/menu/button_scripts/press_countdown.gd" type="Script" id=16]
 [ext_resource path="res://scenes/menu/button_scripts/icon_helper.gd" type="Script" id=17]
 [ext_resource path="res://scenes/actors/objects/pipe/pipe.png" type="Texture" id=18]
+[ext_resource path="res://scenes/menu/pause/pause_main/icons/settings.svg" type="Texture" id=19]
 [ext_resource path="res://scenes/menu/main_menu/discord-mark-white.svg" type="Texture" id=20]
-[ext_resource path="res://scenes/menu/pause/pause_main/icons/settings.png" type="Texture" id=21]
 [ext_resource path="res://scenes/menu/level_portal/icons/author.png" type="Texture" id=22]
 [ext_resource path="res://scenes/menu/pause/pause_main/icons/quit.png" type="Texture" id=23]
 
@@ -481,7 +481,7 @@ margin_right = 31.0
 margin_bottom = 29.5
 rect_scale = Vector2( 0.9, 0.9 )
 rect_pivot_offset = Vector2( 13, 13 )
-texture = ExtResource( 21 )
+texture = ExtResource( 19 )
 expand = true
 stretch_mode = 6
 script = ExtResource( 17 )
