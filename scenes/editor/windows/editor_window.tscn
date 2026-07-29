@@ -41,7 +41,6 @@ close_button_path = NodePath("ContentDivider/Header/HeaderMat/HeaderBox/WindowCl
 resize_control_path = NodePath("Control/ResizeHandle")
 title = "Window Title"
 icon = ExtResource( 7 )
-icon_tooltip = "I have no tool to tip for you..."
 
 [node name="Background" parent="." instance=ExtResource( 8 )]
 modulate = Color( 1, 1, 1.1, 1 )

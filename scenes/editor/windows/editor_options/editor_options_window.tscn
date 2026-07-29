@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://scenes/editor/assets/palette.svg" type="Texture" id=1]
 [ext_resource path="res://scenes/menu/line_edit_unfocus.gd" type="Script" id=2]
@@ -19,7 +19,6 @@
 [ext_resource path="res://scenes/shared/background/backgrounds/ids.tres" type="Resource" id=18]
 [ext_resource path="res://scenes/shared/background/foregrounds/ids.tres" type="Resource" id=19]
 [ext_resource path="res://scenes/menu/text_edit_unfocus.gd" type="Script" id=20]
-[ext_resource path="res://scenes/editor/windows/editor_options/collapsible_container.gd" type="Script" id=21]
 [ext_resource path="res://scenes/editor/windows/editor_options/music_manager.gd" type="Script" id=23]
 
 [node name="EditorOptionsWindow" instance=ExtResource( 3 )]
@@ -761,14 +760,11 @@ margin_bottom = 19.0
 focus_mode = 0
 text = "> Palettes"
 align = 0
-script = ExtResource( 21 )
-selected_container_path = NodePath("../Control2")
 
 [node name="Control2" type="Control" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer" index="1"]
 visible = false
-margin_top = 23.0
 margin_right = 368.0
-margin_bottom = 113.0
+margin_bottom = 90.0
 rect_min_size = Vector2( 368, 90 )
 rect_clip_content = true
 
@@ -861,8 +857,6 @@ margin_bottom = 19.0
 focus_mode = 0
 text = "> Weather"
 align = 0
-script = ExtResource( 21 )
-selected_container_path = NodePath("../Control3")
 
 [node name="Control3" type="Control" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer" index="3"]
 visible = false
@@ -961,8 +955,6 @@ margin_bottom = 19.0
 focus_mode = 0
 text = "> Area Settings"
 align = 0
-script = ExtResource( 21 )
-selected_container_path = NodePath("../AreaSettings")
 
 [node name="AreaSettings" type="Control" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer" index="5"]
 margin_right = 368.0

@@ -8,11 +8,14 @@ var shared: LevelShared
 var layer_data: LayerData
 var can_delete: bool
 
-signal layer_selected(layer_data)
+signal layer_selected(layer_index)
 
 func _ready():
-	select.connect("pressed", self, "emit_signal", ["layer_selected", layer_data.layer_metadata.order])
+	select.connect("pressed", self, "selected")
 	edit.connect("pressed", self, "test")
+
+func selected():
+	emit_signal("layer_selected", layer_data.layer_metadata.order)
 
 func load_layer(_layer_data: LayerData, _can_delete: bool) -> void:
 	layer_data = _layer_data

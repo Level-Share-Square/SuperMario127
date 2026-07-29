@@ -1,11 +1,7 @@
 extends ParallaxScroll
 
-onready var layer_switcher = $"%LayersOld"
 onready var editor = owner
 onready var shared = editor.get_shared_node()
-
-func _ready() -> void:
-	layer_switcher.connect("layer_changed", self, "_update_parallax")
 	
 func _update_parallax(layer: int):
 	var cur_layer = shared.layers[editor.layer]

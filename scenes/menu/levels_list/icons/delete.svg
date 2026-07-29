@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 108.1 150.69">
+  <g id="Delete">
+    <line x1="5" y1="24.49" x2="103.1" y2="24.49" style="fill: none; stroke: #fff; stroke-linecap: round; stroke-miterlimit: 10; stroke-width: 10px;"/>
+    <path d="M30.79,19.99v-6.49c0-4.7,3.81-8.5,8.5-8.5h29.51c4.7,0,8.5,3.81,8.5,8.5v6.49" style="fill: none; stroke: #fff; stroke-miterlimit: 10; stroke-width: 10px;"/>
+    <path d="M6.46,41.84l7.68,95.02c0,4.87,3.81,8.82,8.5,8.82h62.81c4.7,0,8.5-3.95,8.5-8.82l7.68-95.02H6.46Z" style="fill: none; stroke: #fff; stroke-miterlimit: 10; stroke-width: 10px;"/>
+    <line x1="36.31" y1="45.48" x2="40.79" y2="142.05" style="fill: none; stroke: #fff; stroke-miterlimit: 10; stroke-width: 10px;"/>
+    <line x1="71.79" y1="45.48" x2="67.31" y2="142.05" style="fill: none; stroke: #fff; stroke-miterlimit: 10; stroke-width: 10px;"/>
+    <polyline points="108.1 24.49 108.1 29.49 0 29.49 0 24.49" style="fill: #fff;"/>
+  </g>
+</svg>

@@ -1,4 +1,4 @@
-[gd_scene load_steps=121 format=2]
+[gd_scene load_steps=119 format=2]
 
 [ext_resource path="res://scenes/menu/options/options.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/menu/menu_controller/screen_manager.gd" type="Script" id=2]
@@ -53,7 +53,7 @@
 [ext_resource path="res://scenes/editor/assets/tile_lock_tool.png" type="Texture" id=51]
 [ext_resource path="res://scenes/editor/items/categories/Entities.tres" type="Resource" id=52]
 [ext_resource path="res://scenes/editor/assets/Erase.svg" type="Texture" id=53]
-[ext_resource path="res://scenes/menu/levels_list/icons/delete.png" type="Texture" id=54]
+[ext_resource path="res://scenes/menu/levels_list/icons/delete.svg" type="Texture" id=54]
 [ext_resource path="res://scenes/editor/assets/editor_Redo.wav" type="AudioStream" id=55]
 [ext_resource path="res://scenes/editor/assets/editor_Undo.wav" type="AudioStream" id=56]
 [ext_resource path="res://scenes/editor/assets/hotbar_click.wav" type="AudioStream" id=57]
@@ -67,7 +67,6 @@
 [ext_resource path="res://scenes/editor/items/categories/Structures.tres" type="Resource" id=65]
 [ext_resource path="res://scenes/editor/item_preview.gd" type="Script" id=66]
 [ext_resource path="res://scenes/editor/windows/object_property_editor/object_settings_window.tscn" type="PackedScene" id=67]
-[ext_resource path="res://scenes/editor/layers/layer_picker_old.gd" type="Script" id=68]
 [ext_resource path="res://scenes/editor/tools/tile_fill.gd" type="Script" id=69]
 [ext_resource path="res://scenes/editor/tools/tile_rectfill.tscn" type="PackedScene" id=70]
 [ext_resource path="res://scenes/editor/tools/tile_lock_tool.gd" type="Script" id=71]
@@ -78,12 +77,11 @@
 [ext_resource path="res://scenes/editor/tools/tilelock.svg" type="Texture" id=76]
 [ext_resource path="res://scenes/editor/editor_parallax_scroll.gd" type="Script" id=77]
 [ext_resource path="res://scenes/editor/windows/quit_confirm_window.tscn" type="PackedScene" id=78]
-[ext_resource path="res://scenes/editor/windows/temp_layer_adder.tscn" type="PackedScene" id=79]
+[ext_resource path="res://scenes/editor/windows/layer_editor.tscn" type="PackedScene" id=79]
 [ext_resource path="res://scenes/editor/layers/layer_dropdown.gd" type="Script" id=80]
 [ext_resource path="res://scenes/editor/dropdown_parent.gd" type="Script" id=81]
 [ext_resource path="res://scenes/editor/assets/ArrowLeft.svg" type="Texture" id=82]
 [ext_resource path="res://scenes/editor/layers/max_height.gd" type="Script" id=83]
-[ext_resource path="res://scenes/editor/windows/editor_window.gd" type="Script" id=84]
 [ext_resource path="res://scenes/editor/windows/autosave_window.tscn" type="PackedScene" id=85]
 
 [sub_resource type="CanvasItemMaterial" id=176]
@@ -1135,48 +1133,24 @@ icon_align = 1
 expand_icon = true
 script = ExtResource( 24 )
 
-[node name="LayersOld" type="PanelContainer" parent="UI/UIContainer/EditorUI/Top/Tools"]
-unique_name_in_owner = true
-visible = false
-margin_left = 76.0
-margin_right = 84.0
-margin_bottom = 44.0
-hint_tooltip = "Change Layer"
-size_flags_horizontal = 3
-size_flags_vertical = 3
-size_flags_stretch_ratio = 2.0
-theme_type_variation = "FlatPanel"
-script = ExtResource( 68 )
-
-[node name="LayerPickerOld" type="Button" parent="UI/UIContainer/EditorUI/Top/Tools/LayersOld"]
-unique_name_in_owner = true
-visible = false
-margin_left = 4.0
-margin_top = 4.0
-margin_right = 44.0
-margin_bottom = 44.0
-rect_min_size = Vector2( 40, 40 )
-hint_tooltip = "Change Layer"
-focus_mode = 0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_type_variation = "ButtonTransparent"
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-text = "-2"
-script = ExtResource( 24 )
-
 [node name="Middle" type="HBoxContainer" parent="UI/UIContainer/EditorUI"]
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 758.0
 margin_bottom = 424.0
 mouse_filter = 2
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Padding" type="Control" parent="UI/UIContainer/EditorUI/Middle"]
 margin_right = 714.0
 margin_bottom = 416.0
 mouse_filter = 2
 size_flags_horizontal = 3
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Tools" type="PanelContainer" parent="UI/UIContainer/EditorUI/Middle"]
 margin_left = 718.0
@@ -1437,6 +1411,9 @@ margin_right = 758.0
 margin_bottom = 424.0
 mouse_filter = 2
 size_flags_vertical = 3
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Hotbar" type="HBoxContainer" parent="UI/UIContainer/EditorUI/Bottom"]
 unique_name_in_owner = true
@@ -1817,7 +1794,6 @@ custom_styles/panel = SubResource( 200 )
 unique_name_in_owner = true
 visible = false
 custom_styles/panel = SubResource( 197 )
-script = ExtResource( 84 )
 
 [node name="Options" type="CanvasLayer" parent="."]
 layer = 128
@@ -1892,6 +1868,5 @@ bus = "Sounds"
 [connection signal="pressed" from="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/Actions/HBoxContainer/Undo" to="ActionManager" method="undo"]
 [connection signal="pressed" from="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/Actions/HBoxContainer/Redo" to="ActionManager" method="redo"]
 [connection signal="pressed" from="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/Actions/HBoxContainer/LayerPicker" to="UI/UIContainer/EditorUI/Middle/Tools" method="toggle_visible"]
-[connection signal="pressed" from="UI/UIContainer/EditorUI/Top/Tools/LayersOld/LayerPickerOld" to="UI/UIContainer/EditorUI/Top/Tools/LayersOld" method="pressed"]
 [connection signal="tool_picked" from="UI/UIContainer/EditorUI/Middle/Tools" to="ZIndex/Tools" method="_on_Tools_tool_picked"]
 [connection signal="pressed" from="UI/UIContainer/EditorUI/Bottom/Hotbar/ItemPickerButton/Button" to="UI/UIContainer/ItemPickerPanel" method="toggle"]

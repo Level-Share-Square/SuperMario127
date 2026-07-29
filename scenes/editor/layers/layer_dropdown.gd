@@ -22,6 +22,8 @@ func _ready():
 	editor.action_manager.connect("action", self, "update_layers")
 
 func select_layer(index: int) -> void:
+	print(index)
+	
 	var layer_metadata: LayerMetadata = shared.get_layer_at(index).layer_data.layer_metadata
 	layer_picker.text = layer_metadata.layer_name
 	

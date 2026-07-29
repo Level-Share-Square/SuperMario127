@@ -4,7 +4,6 @@ extends PanelContainer
 export(NodePath) var editor_path
 onready var editor = get_node(editor_path)
 
-onready var initial_margin: float = margin_left
 onready var tile_lock: Button = $"%ObjectLock"
 onready var rectangle_fill: Button = $"%TileFill"
 onready var tile_rect_fill = $"%TileRectFill"
@@ -56,14 +55,23 @@ func _on_Tools_tool_changed():
 
 
 func toggle_visible(hide: bool = is_visible):
-	is_visible = !is_visible
+	is_visible = not hide
 	
 	tween.stop_all()
 	tween.interpolate_property(
 		self, 
-		"margin_left", 
-		margin_left, 
-		768 if hide else initial_margin, 
+		"anchor_left", 
+		anchor_left, 
+		0.1 if hide else 0, 
+		TWEEN_TIME,
+		TWEEN_STYLE,
+		TWEEN_DIR
+	)
+	tween.interpolate_property(
+		self, 
+		"anchor_right", 
+		anchor_right, 
+		0.1 if hide else 0, 
 		TWEEN_TIME,
 		TWEEN_STYLE,
 		TWEEN_DIR
