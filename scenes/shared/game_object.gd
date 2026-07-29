@@ -278,7 +278,7 @@ func _object_parallax_physics_process(delta: float) -> void:
 
 ## run when the game object enters the scene tree
 func _object_disabled_ready() -> void:
-	enabled = false
+	pass
 
 
 ## Run every process frame when the object is disabled.
@@ -421,6 +421,9 @@ func set_property(key, value, change_object_data = true, alias = null):
 			if mode == 1:
 				visible = true
 				visibility = value
+		
+		if key == "in_front":
+			z_index = 1
 	
 	if mode == 1 and !is_preview:
 		emit_signal("property_changed", key, value)

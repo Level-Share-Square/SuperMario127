@@ -26,10 +26,8 @@ func place_object(object_data: ObjectData, add_to_data: bool = false):
 
 
 func create_object(object_data: ObjectData):
-	
 	var mode = get_tree().get_current_scene().mode
 	var object_scene = CurrentLevelData.get_cached_object(object_data.metadata.type_id)
-	
 	
 	var game_object = object_scene.instance()
 	game_object.mode = mode

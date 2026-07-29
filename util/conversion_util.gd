@@ -452,8 +452,8 @@ static func get_new_area_code(header: AreaHeader, old_area: AreaDataOld) -> Area
 		var object_layer: int = object_layer_map[old_object.properties.pop_at(5)]
 		var position: Vector2 = old_object.properties.pop_at(0)
 		
-		if old_object.type_id == 14:
-			if old_object.properties[5]:
+		if old_object.type_id == 14: # sign
+			if old_object.properties[5] == true: # is background
 				object_layer = 0
 		
 		var property_dictionary: Dictionary = {}
@@ -476,6 +476,8 @@ static func get_new_area_code(header: AreaHeader, old_area: AreaDataOld) -> Area
 						property_dictionary.get_or_add(i, old_object.properties[i])
 				_:
 					property_dictionary.get_or_add(i, old_object.properties[i])
+		
+		property_dictionary.get_or_add(-3, object_layer == 0 or object_layer == 3) # in front
 		
 		var new_object: ObjectData = ObjectData.new(
 			ObjectMetadata.new(
