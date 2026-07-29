@@ -43,14 +43,16 @@ func _ready():
 	use_area.connect("mouse_exited", self, "_on_UseArea_mouse_exited")
 
 	connect("property_changed", self, "_on_property_changed")
-	if enabled:
-		var _connect = use_area.connect("body_entered", self, "set_liquid_level")
 	yield(get_tree(), "physics_frame")
 	if mode != 1:
 		offset_line.visible = false
 
 	else:
 		offset_line.visible = true
+	
+func _object_ready():
+	if enabled:
+		var _connect = use_area.connect("body_entered", self, "set_liquid_level")
 	
 
 func ready_synced():

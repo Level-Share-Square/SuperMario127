@@ -1,6 +1,6 @@
 extends ParallaxScroll
 
-onready var layer_switcher = $"%Layers"
+onready var layer_switcher = $"%LayersOld"
 onready var editor = owner
 onready var shared = editor.get_shared_node()
 

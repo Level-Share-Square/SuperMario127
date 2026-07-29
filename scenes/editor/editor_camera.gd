@@ -18,6 +18,7 @@ var is_moving: bool
 
 func _ready():
 	position = Vector2(288, 840)
+	sim_pos = position
 
 func _unhandled_input(event):
 	var zoom_amount = 0.25

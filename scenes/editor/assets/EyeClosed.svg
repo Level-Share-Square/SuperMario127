@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 273.42 69.02">
-  <g id="Layer_41" data-name="Layer 41">
-    <path d="M7,7c85.58,72.93,172.04,73.79,259.42,0" style="fill: none; stroke: #fff; stroke-linecap: round; stroke-miterlimit: 10; stroke-width: 14px;"/>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256.34 98.32">
+  <g id="EYEEE">
+    <g>
+      <path d="M10,10c77.97,58.96,156.74,59.66,236.34,0" style="fill: none; stroke: #fff; stroke-linecap: round; stroke-miterlimit: 10; stroke-width: 20px;"/>
+      <line x1="128.17" y1="89.32" x2="128.17" y2="65.67" style="fill: none; stroke: #fff; stroke-linecap: round; stroke-miterlimit: 10; stroke-width: 18px;"/>
+      <line x1="71.54" y1="81.16" x2="81.06" y2="53.06" style="fill: none; stroke: #fff; stroke-linecap: round; stroke-miterlimit: 10; stroke-width: 18px;"/>
+      <line x1="16.29" y1="58.31" x2="35.07" y2="29.91" style="fill: none; stroke: #fff; stroke-linecap: round; stroke-miterlimit: 10; stroke-width: 18px;"/>
+      <line x1="184.8" y1="80.86" x2="175.28" y2="52.76" style="fill: none; stroke: #fff; stroke-linecap: round; stroke-miterlimit: 10; stroke-width: 18px;"/>
+      <line x1="240.05" y1="58.02" x2="221.27" y2="29.61" style="fill: none; stroke: #fff; stroke-linecap: round; stroke-miterlimit: 10; stroke-width: 18px;"/>
+    </g>
   </g>
 </svg>

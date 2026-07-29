@@ -1,7 +1,7 @@
 extends PanelContainer
 
 
-onready var layer_picker = $"%LayerPicker"
+onready var layer_picker = $"%LayerPickerOld"
 onready var editor = owner
 onready var shared = editor.get_shared_node()
 

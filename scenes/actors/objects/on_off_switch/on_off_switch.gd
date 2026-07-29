@@ -24,12 +24,15 @@ func _ready():
 #			set_property("default_state", default_state, true)
 #
 	sprite.region_rect.position.x = int(!CurrentLevelData.vars.switch_state.has(palette)) * 32
-	
-	if !enabled:
-		$StaticBody2D.set_collision_layer_bit(0, false)
 
 	sprite.region_rect.position.y = palette * 32
+
+func _object_disabled_ready():
+	._object_disabled_ready()
+	$StaticBody2D.set_collision_layer_bit(0, false)
 	
+func _object_ready():
+	._object_ready()
 	_connect()
 
 func _connect():
@@ -57,8 +60,3 @@ func _on_hit():
 func _on_curve_tween(value):
 	sprite.position = value
 	sprite.reset_physics_interpolation()
-
-func is_middle(check: bool):
-	.is_middle(check)
-	
-	hit_collider.get_node("CollisionShape2D").disabled = !check

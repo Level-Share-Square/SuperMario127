@@ -29,14 +29,23 @@ func _ready() -> void:
 		collision_shape.shape.extents = Vector2(collision_shape.shape.extents.x * scale.x,\
 												collision_shape.shape.extents.y * scale.y)
 
+func _object_ready():
+	._object_ready()
+	p.visible = true
+	collision_shape.disabled = false
+	area_collision_shape.disabled = false
+	
+func _object_disabled_ready():
+	._object_disabled_ready()
+	p.visible = false
+	collision_shape.disabled = true
+	area_collision_shape.disabled = true
+
 func _physics_process(delta):
 	if mode == 1 and activated and enabled:
 		sprite.modulate = Color(1, 0.5, 0.5)
 	elif mode == 1 or !enabled:
 		sprite.modulate = Color(1, 1, 1)
-		
-	p.visible = enabled
-	area_collision_shape.disabled = !collision_shape.disabled
 	
 	if !is_instance_valid(current_scene) or mode == 1 or !enabled: return
 	

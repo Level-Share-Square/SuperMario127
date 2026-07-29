@@ -91,14 +91,6 @@ func _notification(what: int) -> void:
 	if what == NOTIFICATION_READY:
 		match mode:
 			LevelPlayer.mode:
-		#		call_deferred("_object_ready")
-				_object_ready()
-				
-				if not enabled:
-		#			call_deferred("_object_disabled_ready")
-					_object_disabled_ready()
-					return
-				
 				if is_on_ground_layer():
 		#			call_deferred("_object_ground_ready")
 					_object_ground_ready()
@@ -117,6 +109,7 @@ func _ready():
 	for property in savable_properties:
 		property_ids.get_or_add(property, property_ids.values().size() - 3)
 	
+	object_data_ref.get_ref().emit_signal("populated_ids")
 	if get_tree().current_scene.mode == 1:
 		if generate_editor_hitbox:
 			if is_instance_valid(editor_hitbox):
@@ -156,7 +149,6 @@ func _ready():
 		if is_instance_valid(editor_hitbox):
 			editor_hitbox.queue_free()
 			
-#	print(object_data_ref.get_ref().properties)
 			
 	set_object_properties_from_data()
 	
@@ -248,7 +240,10 @@ func _object_physics_process(delta: float) -> void:
 
 ## run when the game object enters the scene tree
 func _object_ground_ready() -> void:
-	pass
+	if enabled:
+		_object_ready()
+	else:
+		_object_disabled_ready()
 
 
 ## Run every process frame when the object is on a ground layer.
@@ -367,7 +362,7 @@ func set_object_properties_from_data() -> void:
 		
 	for property in object_data_ref.get_ref().properties:
 		properties[property] = object_data_ref.get_ref().properties[property]
-		
+
 	for property in properties:
 		if properties[property] != null:
 			set_property_by_index(property, properties[property])

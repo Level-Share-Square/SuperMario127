@@ -24,6 +24,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/editor/action_manager/action_manager.gd"
 }, {
+"base": "BaseLayerAction",
+"class": "AddLayerAction",
+"language": "GDScript",
+"path": "res://scenes/editor/action_manager/actions/add_layer.gd"
+}, {
 "base": "LevelDataResource",
 "class": "AreaData",
 "language": "GDScript",
@@ -78,6 +83,11 @@ _global_script_classes=[ {
 "class": "BaseCard",
 "language": "GDScript",
 "path": "res://scenes/menu/levels_list/cards/base_card.gd"
+}, {
+"base": "Action",
+"class": "BaseLayerAction",
+"language": "GDScript",
+"path": "res://scenes/editor/action_manager/actions/base_layer.gd"
 }, {
 "base": "Action",
 "class": "BaseObjectAction",
@@ -224,77 +234,82 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/actors/objects/big_tree/Decoration.gd"
 }, {
+"base": "BaseLayerAction",
+"class": "DeleteLayerAction",
+"language": "GDScript",
+"path": "res://scenes/editor/action_manager/actions/delete_layer.gd"
+}, {
 "base": "Node2D",
 "class": "Dialog",
 "language": "GDScript",
 "path": "res://classes/text/dialogue.gd"
 }, {
-"base": "Reference",
+"base": "",
 "class": "DiscordActivity",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_activity.gdns"
 }, {
-"base": "Reference",
+"base": "",
 "class": "DiscordActivityAssets",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_activity_assets.gdns"
 }, {
-"base": "Reference",
+"base": "",
 "class": "DiscordActivityManager",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_activity_manager.gdns"
 }, {
-"base": "Reference",
+"base": "",
 "class": "DiscordActivityParty",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_activity_party.gdns"
 }, {
-"base": "Reference",
+"base": "",
 "class": "DiscordActivitySecrets",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_activity_secrets.gdns"
 }, {
-"base": "Reference",
+"base": "",
 "class": "DiscordActivityTimestamps",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_activity_timestamps.gdns"
 }, {
-"base": "Reference",
+"base": "",
 "class": "DiscordCore",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_core.gdns"
 }, {
-"base": "Reference",
+"base": "",
 "class": "DiscordLobby",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_lobby.gdns"
 }, {
-"base": "Reference",
+"base": "",
 "class": "DiscordLobbyManager",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_lobby_manager.gdns"
 }, {
-"base": "Reference",
+"base": "",
 "class": "DiscordLobbyTransaction",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_lobby_transaction.gdns"
 }, {
-"base": "Reference",
+"base": "",
 "class": "DiscordOverlayManager",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_overlay_manager.gdns"
 }, {
-"base": "Reference",
+"base": "",
 "class": "DiscordPartySize",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_party_size.gdns"
 }, {
-"base": "Reference",
+"base": "",
 "class": "DiscordResult",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_result.gdns"
 }, {
-"base": "Reference",
+"base": "",
 "class": "DiscordUser",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_user.gdns"
@@ -308,6 +323,11 @@ _global_script_classes=[ {
 "class": "DoorTeleport",
 "language": "GDScript",
 "path": "res://scenes/actors/objects/door/door.gd"
+}, {
+"base": "Action",
+"class": "EditLayerAction",
+"language": "GDScript",
+"path": "res://scenes/editor/action_manager/actions/edit_layer.gd"
 }, {
 "base": "LevelDataLoader",
 "class": "Editor",
@@ -332,7 +352,7 @@ _global_script_classes=[ {
 "base": "Node2D",
 "class": "EditorLayerManager",
 "language": "GDScript",
-"path": "res://scenes/editor/editor_layers_manager.gd"
+"path": "res://scenes/editor/layers/editor_layers_manager.gd"
 }, {
 "base": "Control",
 "class": "EditorTool",
@@ -528,6 +548,11 @@ _global_script_classes=[ {
 "class": "LayerData",
 "language": "GDScript",
 "path": "res://level/models/layer/layer_data.gd"
+}, {
+"base": "HBoxContainer",
+"class": "LayerInfo",
+"language": "GDScript",
+"path": "res://scenes/editor/layers/layer_info.gd"
 }, {
 "base": "LevelDataResource",
 "class": "LayerMetadata",
@@ -869,6 +894,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/menu/range_sound.gd"
 }, {
+"base": "Action",
+"class": "ReorderLayerAction",
+"language": "GDScript",
+"path": "res://scenes/editor/action_manager/actions/reorder_layer.gd"
+}, {
 "base": "GameObject",
 "class": "ResizableSemisolid",
 "language": "GDScript",
@@ -1193,6 +1223,7 @@ _global_script_class_icons={
 "AccountInfo": "",
 "Action": "",
 "ActionManager": "",
+"AddLayerAction": "",
 "AreaData": "",
 "AreaDataOld": "",
 "AreaHeader": "",
@@ -1204,6 +1235,7 @@ _global_script_class_icons={
 "Barrel": "",
 "BaseButtonSound": "",
 "BaseCard": "",
+"BaseLayerAction": "",
 "BaseObjectAction": "",
 "Block": "",
 "BonkedState": "",
@@ -1233,6 +1265,7 @@ _global_script_class_icons={
 "CrushedState": "",
 "CurveTween": "",
 "Decoration": "",
+"DeleteLayerAction": "",
 "Dialog": "",
 "DiscordActivity": "",
 "DiscordActivityAssets": "",
@@ -1250,6 +1283,7 @@ _global_script_class_icons={
 "DiscordUser": "",
 "DiveState": "",
 "DoorTeleport": "",
+"EditLayerAction": "",
 "Editor": "",
 "EditorButton": "",
 "EditorData": "",
@@ -1294,6 +1328,7 @@ _global_script_class_icons={
 "Lava": "",
 "LavaBoostState": "",
 "LayerData": "",
+"LayerInfo": "",
 "LayerMetadata": "",
 "LevelBackgrounds": "",
 "LevelCard": "",
@@ -1362,6 +1397,7 @@ _global_script_class_icons={
 "RainbowStarState": "",
 "RainbowStarWindupState": "",
 "RangeSound": "",
+"ReorderLayerAction": "",
 "ResizableSemisolid": "",
 "ResizeAreaAction": "",
 "RocketNozzle": "",
@@ -1951,6 +1987,10 @@ project/assembly_name="Super Mario 127"
 
 limits/debugger_stdout/max_chars_per_second=100000
 limits/debugger_stdout/max_messages_per_frame=100
+
+[physics]
+
+2d/use_bvh=false
 
 [rendering]
 

@@ -14,7 +14,6 @@ func _set_property_values() -> void:
 func _init():
 	tag = "_entrance"
 
-
 func start_exit_animation(character: Character) -> void:
 	character.show()
 	finish_exit_animation(character)

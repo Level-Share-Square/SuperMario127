@@ -19,9 +19,8 @@ func _set_properties():
 	editable_properties = ["flowers", "flower_color", "parts"]
 
 
-func _object_ground_ready():
-	if enabled:
-		interaction_area.connect("body_entered", self, "start_anim")
+func _object_ready():
+	interaction_area.connect("body_entered", self, "start_anim")
 
 
 func _object_ground_process(delta: float) -> void:

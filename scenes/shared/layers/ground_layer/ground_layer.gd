@@ -10,7 +10,6 @@ func load_in(layer_data: LayerData) -> void:
 	
 #	_test_load_in(layer_data)
 
-
 # used for testing load times
 func _test_load_in(layer_data: LayerData) -> void:
 	# tile loading

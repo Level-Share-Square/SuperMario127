@@ -5,6 +5,7 @@ onready var menu: PanelContainer = get_node(menu_path)
 
 onready var tween := Tween.new()
 var menu_visible: bool = false
+var use_icon: bool = true
 
 export var open_icon: StreamTexture
 export var close_icon: StreamTexture
@@ -15,7 +16,8 @@ func _ready():
 	connect("pressed", self, "toggle_menu")
 
 func toggle_menu():
-	icon = open_icon if menu_visible else close_icon
+	if use_icon:
+		icon = open_icon if menu_visible else close_icon
 	menu_visible = not menu_visible
 	if menu_visible:
 		tween.interpolate_property(

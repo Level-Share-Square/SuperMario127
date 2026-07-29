@@ -252,7 +252,7 @@ placeable_items = {
 "obj_big_bottle": ExtResource( 25 ),
 "obj_big_bush": ExtResource( 16 ),
 "obj_big_steely_despawner": ExtResource( 110 ),
-"obj_big_steely_spawner": ExtResource( 42 ),
+"obj_big_steely_entrance": ExtResource( 42 ),
 "obj_big_tree": ExtResource( 10 ),
 "obj_bill_blaster": ExtResource( 30 ),
 "obj_blue_coin": ExtResource( 2 ),

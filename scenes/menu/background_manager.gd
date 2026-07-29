@@ -5,17 +5,18 @@ onready var backgrounds = $Backgrounds
 
 const BG_ID: int = 1
 const PARALLAX_ID: int = 13
-const PARALLAX_OFFSET: int = 65
 const PARALLAX_PALETTE: int = 0
+const PARALLAX_OFFSET: int = 65
 const SCROLL_SPEED: float = 300.0
 
 const BACKGROUNDS := [
 	[1, 13, 0, 64],
 	[2, 1, 0, 160],
 	[4, 8, 0, 96],
-	[7, 21, 0, 64],
 	[8, 18, 0, 260],
+	[7, 21, 0, 64],
 	[10, 1, 1, 160],
+	[6, 16, 2, 72]
 ]
 
 var current_star_coins: int = 0
@@ -23,7 +24,8 @@ var total_star_coins: int = 100
 
 
 func _ready():
-	var preset = get_random_preset()
+	## the backgrounds should differ in 1.0, but for 0.10.0 it will be fixed like previous updates
+	var preset = BACKGROUNDS[6] #get_random_preset()
 	
 	backgrounds.do_auto_scroll = true
 	backgrounds.update_background(

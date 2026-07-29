@@ -30,7 +30,7 @@ func on_button_pressed(button: Button):
 						tilemap.transparent = false
 				else:
 					tilemap.transparent = false
-			get_node("%Layers").emit_signal("layer_changed", editor.layer)
+			get_node("%LayersOld").emit_signal("layer_changed", editor.layer)
 		"PixelSnap":
 			editor.pixel_lock = !button.pressed
 		"Layering":

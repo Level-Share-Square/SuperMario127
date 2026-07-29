@@ -425,10 +425,10 @@ static func get_new_area_code(header: AreaHeader, old_area: AreaDataOld) -> Area
 	
 	# ahh the last time VeryBack's cursed layer index will ever get to haunt me...
 	var layers: Dictionary = {
-		3: LayerData.new(LayerMetadata.new(50, Vector2.ZERO, false, BACKGROUND_TINT, -2, false), TileData.new()),
-		0: LayerData.new(LayerMetadata.new(50, Vector2.ZERO, false, BACKGROUND_TINT, -1, false), TileData.new()),
-		1: LayerData.new(LayerMetadata.new(0, Vector2.ZERO, false, Color.white, 0, true), TileData.new()),
-		2: LayerData.new(LayerMetadata.new(-50, Vector2.ZERO, false, Color.white, 1, false), TileData.new()),
+		3: LayerData.new(LayerMetadata.new(0, Vector2.ZERO, false, BACKGROUND_TINT, 0, false, "Very Back", false), TileData.new()),
+		0: LayerData.new(LayerMetadata.new(0, Vector2.ZERO, false, BACKGROUND_TINT, 1, false, "Background", false), TileData.new()),
+		1: LayerData.new(LayerMetadata.new(0, Vector2.ZERO, false, Color.white, 2, true, "Ground", true), TileData.new()),
+		2: LayerData.new(LayerMetadata.new(0, Vector2.ZERO, false, Color.white, 3, false, "Foreground", false), TileData.new()),
 	}
 	
 	var object_layer_map: Array = [3, 0, 1, 2]

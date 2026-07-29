@@ -18,7 +18,7 @@
 [ext_resource path="res://scenes/menu/pause/pause_main/icons/retry_from_start.png" type="Texture" id=16]
 [ext_resource path="res://scenes/menu/pause/pause_main/icons/retry.png" type="Texture" id=17]
 [ext_resource path="res://scenes/menu/pause/pause_main/icons/quit.png" type="Texture" id=18]
-[ext_resource path="res://scenes/menu/pause/pause_main/icons/settings.png" type="Texture" id=19]
+[ext_resource path="res://scenes/menu/pause/pause_main/icons/settings.svg" type="Texture" id=19]
 [ext_resource path="res://assets/fonts/New Super Mario Font U.ttf" type="DynamicFontData" id=20]
 [ext_resource path="res://scenes/menu/levels_list/icons/star_coin.png" type="Texture" id=21]
 [ext_resource path="res://scenes/menu/levels_list/icons/shine.png" type="Texture" id=22]

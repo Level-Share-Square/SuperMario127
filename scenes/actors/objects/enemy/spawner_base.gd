@@ -123,17 +123,13 @@ func enemy_deleted(enemy: EnemyBase):
 		respawn_timer.start()
 
 
-func _ready():
-	if mode != 1:
-		is_visible = visible
-		visible = true
-	
-	if enabled and mode != 1 and spawn_offset > 0:
+func _object_ready():
+	if mode != 1 and spawn_offset > 0:
 		yield(get_tree().create_timer(spawn_offset), "timeout")
 	
 	var spawned_enemy: EnemyBase = instance_enemy()
 	
-	if enabled and mode != 1:
+	if mode != 1:
 		respawn_timer.wait_time = respawn_time
 		match respawn_mode:
 			RespawnMode.Offscreen:
@@ -149,3 +145,13 @@ func _ready():
 	for i in range(5):
 		yield(get_tree(), "idle_frame")
 	spawned_enemy.connect("tree_exited", self, "enemy_deleted", [spawned_enemy])
+
+func _object_parallax_ready():
+	._object_parallax_ready()
+	instance_enemy()
+
+func _editor_ready():
+	._editor_ready()
+	is_visible = visible
+	visible = true
+	instance_enemy()

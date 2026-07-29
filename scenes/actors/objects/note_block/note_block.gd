@@ -38,18 +38,22 @@ func _ready():
 	bounce_collision_shape.shape = bounce_collision_shape.shape.duplicate(true)
 	bottom_collision_shape.shape = bottom_collision_shape.shape.duplicate(true)
 	platform_area_shape.shape = platform_area_shape.shape.duplicate(true)
-	
-	if !enabled:
-		bottom_collision_shape.disabled = true
-		bounce_collision_shape.disabled = true
-		platform_area_shape.disabled = true
-	
-	if enabled and mode == 0:
-		area_2d.connect("body_entered", self, "bounce")
-	elif mode == 1:
-		var _connect = connect("property_changed", self, "update_property")
 		
 	update_parts()
+
+func _object_disabled_ready():
+	._object_disabled_ready()
+	bottom_collision_shape.disabled = true
+	bounce_collision_shape.disabled = true
+	platform_area_shape.disabled = true
+	
+func _object_ready():
+	._object_ready()
+	area_2d.connect("body_entered", self, "bounce")
+	
+func _editor_ready():
+	._editor_ready()
+	var _connect = connect("property_changed", self, "update_property")
 
 func _unhandled_input(event: InputEvent) -> void:
 	parts_input_handler(event,self)

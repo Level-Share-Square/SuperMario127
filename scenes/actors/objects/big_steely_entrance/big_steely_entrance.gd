@@ -45,16 +45,13 @@ func check_for_blocking_elements() -> bool:
 	return get_world_2d().direct_space_state.intersect_shape(shape_query_parameters).empty()
 
 func create_new_steely_object() -> Node:
-	var object = ObjectDataOld.new()
-	object.type_id = 37
-	object.properties = []
-	object.properties.append(global_position)
-	object.properties.append(scale)
-	object.properties.append(0)
-	object.properties.append(true)
-	object.properties.append(true)
+	var object := ObjectData.new(ObjectMetadata.new(
+		global_position,
+		37,
+		0
+	))
 
-	return objects.create_object(object, false)
+	return get_parent().create_object(object)
 
 func _remove_steely():
 	for i in range(steely_nodes.size()):

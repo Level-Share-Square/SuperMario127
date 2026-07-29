@@ -1,4 +1,4 @@
-[gd_scene load_steps=108 format=2]
+[gd_scene load_steps=113 format=2]
 
 [ext_resource path="res://scenes/menu/options/options.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/menu/menu_controller/screen_manager.gd" type="Script" id=2]
@@ -67,7 +67,7 @@
 [ext_resource path="res://scenes/editor/items/categories/Structures.tres" type="Resource" id=65]
 [ext_resource path="res://scenes/editor/item_preview.gd" type="Script" id=66]
 [ext_resource path="res://scenes/editor/windows/object_property_editor/object_settings_window.tscn" type="PackedScene" id=67]
-[ext_resource path="res://scenes/editor/layer_picker.gd" type="Script" id=68]
+[ext_resource path="res://scenes/editor/layers/layer_picker_old.gd" type="Script" id=68]
 [ext_resource path="res://scenes/editor/tools/tile_fill.gd" type="Script" id=69]
 [ext_resource path="res://scenes/editor/tools/tile_rectfill.tscn" type="PackedScene" id=70]
 [ext_resource path="res://scenes/editor/tools/tile_lock_tool.gd" type="Script" id=71]
@@ -79,6 +79,10 @@
 [ext_resource path="res://scenes/editor/editor_parallax_scroll.gd" type="Script" id=77]
 [ext_resource path="res://scenes/editor/windows/quit_confirm_window.tscn" type="PackedScene" id=78]
 [ext_resource path="res://scenes/editor/windows/temp_layer_adder.tscn" type="PackedScene" id=79]
+[ext_resource path="res://scenes/editor/layers/layer_dropdown.gd" type="Script" id=80]
+[ext_resource path="res://scenes/editor/dropdown_parent.gd" type="Script" id=81]
+[ext_resource path="res://scenes/editor/assets/ArrowLeft.svg" type="Texture" id=82]
+[ext_resource path="res://scenes/editor/layers/max_height.gd" type="Script" id=83]
 
 [sub_resource type="CanvasItemMaterial" id=176]
 blend_mode = 1
@@ -112,6 +116,11 @@ content_margin_left = 3.0
 color = Color( 1, 1, 1, 0.752941 )
 thickness = 2
 vertical = true
+
+[sub_resource type="StyleBoxLine" id=194]
+color = Color( 1, 1, 1, 1 )
+grow_begin = -1.0
+grow_end = -1.0
 
 [sub_resource type="ButtonGroup" id=167]
 
@@ -867,44 +876,45 @@ script = ExtResource( 24 )
 
 [node name="Padding" type="Control" parent="UI/UIContainer/EditorUI/Top"]
 margin_left = 164.0
-margin_right = 630.0
+margin_right = 619.0
 margin_bottom = 416.0
 mouse_filter = 2
 size_flags_horizontal = 3
 
 [node name="Tools" type="HBoxContainer" parent="UI/UIContainer/EditorUI/Top"]
-margin_left = 634.0
+margin_left = 623.0
 margin_right = 750.0
-margin_bottom = 48.0
+margin_bottom = 32.0
 size_flags_vertical = 0
 custom_constants/separation = 0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/UIContainer/EditorUI/Top/Tools"]
-margin_right = 68.0
-margin_bottom = 48.0
+margin_right = 127.0
+margin_bottom = 32.0
+custom_constants/separation = 0
 
-[node name="ItemActions" type="PanelContainer" parent="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer"]
+[node name="Actions" type="PanelContainer" parent="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer"]
 unique_name_in_owner = true
-margin_right = 68.0
+margin_right = 127.0
 margin_bottom = 32.0
 size_flags_vertical = 3
 size_flags_stretch_ratio = 2.0
 theme_type_variation = "FlatPanel"
 script = ExtResource( 16 )
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/ItemActions"]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/Actions"]
 margin_left = 4.0
 margin_top = 4.0
-margin_right = 64.0
+margin_right = 123.0
 margin_bottom = 28.0
 
-[node name="SelectionActions" type="HBoxContainer" parent="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/ItemActions/HBoxContainer"]
+[node name="SelectionActions" type="HBoxContainer" parent="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/Actions/HBoxContainer"]
 unique_name_in_owner = true
 visible = false
 margin_right = 68.0
 margin_bottom = 24.0
 
-[node name="Delete" type="Button" parent="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/ItemActions/HBoxContainer/SelectionActions"]
+[node name="Delete" type="Button" parent="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/Actions/HBoxContainer/SelectionActions"]
 margin_right = 24.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 24, 24 )
@@ -917,12 +927,12 @@ icon_align = 1
 expand_icon = true
 script = ExtResource( 24 )
 
-[node name="VSeparator2" type="VSeparator" parent="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/ItemActions/HBoxContainer/SelectionActions"]
+[node name="VSeparator2" type="VSeparator" parent="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/Actions/HBoxContainer/SelectionActions"]
 margin_left = 28.0
 margin_right = 32.0
 margin_bottom = 24.0
 
-[node name="Copy" type="Button" parent="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/ItemActions/HBoxContainer/SelectionActions"]
+[node name="Copy" type="Button" parent="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/Actions/HBoxContainer/SelectionActions"]
 margin_left = 36.0
 margin_right = 60.0
 margin_bottom = 24.0
@@ -936,18 +946,18 @@ icon_align = 1
 expand_icon = true
 script = ExtResource( 24 )
 
-[node name="VSeparator3" type="VSeparator" parent="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/ItemActions/HBoxContainer/SelectionActions"]
+[node name="VSeparator3" type="VSeparator" parent="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/Actions/HBoxContainer/SelectionActions"]
 margin_left = 64.0
 margin_right = 68.0
 margin_bottom = 24.0
 
-[node name="PasteAction" type="HBoxContainer" parent="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/ItemActions/HBoxContainer"]
+[node name="PasteAction" type="HBoxContainer" parent="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/Actions/HBoxContainer"]
 unique_name_in_owner = true
 visible = false
 margin_right = 32.0
 margin_bottom = 24.0
 
-[node name="Paste" type="Button" parent="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/ItemActions/HBoxContainer/PasteAction"]
+[node name="Paste" type="Button" parent="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/Actions/HBoxContainer/PasteAction"]
 margin_right = 24.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 24, 24 )
@@ -960,12 +970,12 @@ icon_align = 1
 expand_icon = true
 script = ExtResource( 24 )
 
-[node name="VSeparator4" type="VSeparator" parent="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/ItemActions/HBoxContainer/PasteAction"]
+[node name="VSeparator4" type="VSeparator" parent="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/Actions/HBoxContainer/PasteAction"]
 margin_left = 28.0
 margin_right = 32.0
 margin_bottom = 24.0
 
-[node name="Undo" type="Button" parent="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/ItemActions/HBoxContainer"]
+[node name="Undo" type="Button" parent="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/Actions/HBoxContainer"]
 margin_right = 24.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 24, 24 )
@@ -979,12 +989,12 @@ expand_icon = true
 script = ExtResource( 24 )
 click_override = "UndoSound"
 
-[node name="VSeparator" type="VSeparator" parent="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/ItemActions/HBoxContainer"]
+[node name="VSeparator" type="VSeparator" parent="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/Actions/HBoxContainer"]
 margin_left = 28.0
 margin_right = 32.0
 margin_bottom = 24.0
 
-[node name="Redo" type="Button" parent="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/ItemActions/HBoxContainer"]
+[node name="Redo" type="Button" parent="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/Actions/HBoxContainer"]
 margin_left = 36.0
 margin_right = 60.0
 margin_bottom = 24.0
@@ -999,24 +1009,120 @@ expand_icon = true
 script = ExtResource( 24 )
 click_override = "RedoSound"
 
-[node name="Padding" type="Control" parent="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer"]
-margin_top = 36.0
+[node name="VSeparator2" type="VSeparator" parent="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/Actions/HBoxContainer"]
+margin_left = 64.0
 margin_right = 68.0
-margin_bottom = 48.0
-size_flags_vertical = 3
+margin_bottom = 24.0
 
-[node name="Layers" type="PanelContainer" parent="UI/UIContainer/EditorUI/Top/Tools"]
+[node name="LayerPicker" type="Button" parent="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/Actions/HBoxContainer"]
 unique_name_in_owner = true
-margin_left = 68.0
-margin_right = 116.0
-margin_bottom = 48.0
+margin_left = 72.0
+margin_right = 119.0
+margin_bottom = 24.0
+hint_tooltip = "Select Layer"
+focus_mode = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_type_variation = "ButtonTransparent"
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+enabled_focus_mode = 0
+text = "Ground"
+script = ExtResource( 37 )
+click_override = "DropdownSound"
+menu_path = NodePath("../../../DropdownParent/LayerMenu")
+
+[node name="LayerColor" type="HSeparator" parent="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/Actions/HBoxContainer/LayerPicker"]
+modulate = Color( 1, 0, 0, 1 )
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -3.0
+custom_styles/separator = SubResource( 194 )
+
+[node name="DropdownParent" type="Control" parent="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer"]
+margin_top = 32.0
+margin_right = 127.0
+margin_bottom = 32.0
+script = ExtResource( 81 )
+
+[node name="LayerMenu" type="PanelContainer" parent="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/DropdownParent"]
+unique_name_in_owner = true
+margin_right = 127.0
+margin_bottom = 37.0
+size_flags_horizontal = 3
+theme_type_variation = "FlatPanel2"
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/DropdownParent/LayerMenu"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 123.0
+margin_bottom = 33.0
+size_flags_horizontal = 3
+custom_constants/margin_right = 4
+custom_constants/margin_top = 4
+custom_constants/margin_left = 4
+custom_constants/margin_bottom = 4
+
+[node name="LayerDropdown" type="VBoxContainer" parent="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/DropdownParent/LayerMenu/MarginContainer"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 115.0
+margin_bottom = 25.0
+rect_clip_content = true
+size_flags_horizontal = 3
+script = ExtResource( 80 )
+
+[node name="ScrollContainer" type="ScrollContainer" parent="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/DropdownParent/LayerMenu/MarginContainer/LayerDropdown"]
+margin_right = 111.0
+follow_focus = true
+scroll_horizontal_enabled = false
+script = ExtResource( 83 )
+max_height = 256.0
+
+[node name="Layers" type="VBoxContainer" parent="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/DropdownParent/LayerMenu/MarginContainer/LayerDropdown/ScrollContainer"]
+unique_name_in_owner = true
+margin_right = 103.0
+size_flags_horizontal = 3
+size_flags_vertical = 0
+
+[node name="Actions" type="HBoxContainer" parent="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/DropdownParent/LayerMenu/MarginContainer/LayerDropdown"]
+margin_top = 4.0
+margin_right = 111.0
+margin_bottom = 21.0
+size_flags_horizontal = 3
+custom_constants/separation = 5
+
+[node name="NewLayer" type="Button" parent="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/DropdownParent/LayerMenu/MarginContainer/LayerDropdown/Actions"]
+unique_name_in_owner = true
+margin_right = 111.0
+margin_bottom = 17.0
+rect_min_size = Vector2( 24, 16 )
+focus_mode = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_type_variation = "ButtonTransparent"
+enabled_focus_mode = 0
+text = "New Layer..."
+icon_align = 1
+expand_icon = true
+script = ExtResource( 24 )
+
+[node name="LayersOld" type="PanelContainer" parent="UI/UIContainer/EditorUI/Top/Tools"]
+unique_name_in_owner = true
+visible = false
+margin_left = 76.0
+margin_right = 84.0
+margin_bottom = 44.0
 hint_tooltip = "Change Layer"
+size_flags_horizontal = 3
+size_flags_vertical = 3
 size_flags_stretch_ratio = 2.0
 theme_type_variation = "FlatPanel"
 script = ExtResource( 68 )
 
-[node name="LayerPicker" type="Button" parent="UI/UIContainer/EditorUI/Top/Tools/Layers"]
+[node name="LayerPickerOld" type="Button" parent="UI/UIContainer/EditorUI/Top/Tools/LayersOld"]
 unique_name_in_owner = true
+visible = false
 margin_left = 4.0
 margin_top = 4.0
 margin_right = 44.0
@@ -1293,6 +1399,8 @@ icon = ExtResource( 51 )
 icon_align = 1
 expand_icon = true
 script = ExtResource( 24 )
+
+[node name="Tween" type="Tween" parent="UI/UIContainer/EditorUI/Middle/Tools"]
 
 [node name="Bottom" type="HBoxContainer" parent="UI/UIContainer/EditorUI"]
 margin_left = 8.0
@@ -1633,15 +1741,15 @@ margin_left = 4.0
 margin_top = 4.0
 margin_right = 12.0
 margin_bottom = 48.0
+rect_min_size = Vector2( 8, 0 )
 focus_mode = 0
 theme_type_variation = "ButtonTransparent"
 custom_colors/font_color = Color( 1, 1, 1, 1 )
-text = "<"
+icon = ExtResource( 82 )
+expand_icon = true
 script = ExtResource( 44 )
 menu_path = NodePath("../../Middle")
 blocker_path = NodePath("../../Middle/MouseBlocker")
-open_text = ">"
-close_text = "<"
 
 [node name="LevelSettingsWindow" parent="UI" instance=ExtResource( 14 )]
 unique_name_in_owner = true
@@ -1744,11 +1852,12 @@ bus = "Sounds"
 [connection signal="button_down" from="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/PanelContainer/Settings/Quit" to="SaveManager" method="_on_Quit_button_down"]
 [connection signal="button_down" from="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown/ResetZoom" to="EditorCamera" method="_on_ResetZoom_button_down"]
 [connection signal="button_down" from="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown/Help" to="UI/HelpWindow" method="toggle_window"]
-[connection signal="button_down" from="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/ItemActions/HBoxContainer/SelectionActions/Delete" to="ZIndex/Tools/TileSelection" method="on_delete"]
-[connection signal="button_down" from="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/ItemActions/HBoxContainer/SelectionActions/Copy" to="ZIndex/Tools/TileSelection" method="on_copy"]
-[connection signal="button_down" from="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/ItemActions/HBoxContainer/PasteAction/Paste" to="ZIndex/Tools/TileSelection" method="on_paste"]
-[connection signal="pressed" from="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/ItemActions/HBoxContainer/Undo" to="ActionManager" method="undo"]
-[connection signal="pressed" from="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/ItemActions/HBoxContainer/Redo" to="ActionManager" method="redo"]
-[connection signal="pressed" from="UI/UIContainer/EditorUI/Top/Tools/Layers/LayerPicker" to="UI/UIContainer/EditorUI/Top/Tools/Layers" method="pressed"]
+[connection signal="button_down" from="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/Actions/HBoxContainer/SelectionActions/Delete" to="ZIndex/Tools/TileSelection" method="on_delete"]
+[connection signal="button_down" from="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/Actions/HBoxContainer/SelectionActions/Copy" to="ZIndex/Tools/TileSelection" method="on_copy"]
+[connection signal="button_down" from="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/Actions/HBoxContainer/PasteAction/Paste" to="ZIndex/Tools/TileSelection" method="on_paste"]
+[connection signal="pressed" from="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/Actions/HBoxContainer/Undo" to="ActionManager" method="undo"]
+[connection signal="pressed" from="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/Actions/HBoxContainer/Redo" to="ActionManager" method="redo"]
+[connection signal="pressed" from="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/Actions/HBoxContainer/LayerPicker" to="UI/UIContainer/EditorUI/Middle/Tools" method="toggle_visible"]
+[connection signal="pressed" from="UI/UIContainer/EditorUI/Top/Tools/LayersOld/LayerPickerOld" to="UI/UIContainer/EditorUI/Top/Tools/LayersOld" method="pressed"]
 [connection signal="tool_picked" from="UI/UIContainer/EditorUI/Middle/Tools" to="ZIndex/Tools" method="_on_Tools_tool_picked"]
 [connection signal="pressed" from="UI/UIContainer/EditorUI/Bottom/Hotbar/ItemPickerButton/Button" to="UI/UIContainer/ItemPickerPanel" method="toggle"]

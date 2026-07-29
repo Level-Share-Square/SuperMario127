@@ -16,11 +16,11 @@ func init_layer_manager(set_layers: Array):
 	
 
 # Editor interface functions
-func place(to_place):
-	if to_place is GameObject:
-		current_layer.place_object(to_place)
-	elif to_place is Tile:
-		current_layer.place_tile(to_place)
+#func place(to_place):
+#	if to_place is GameObject:
+#		current_layer.place_object(to_place)
+#	else:
+#		current_layer.place_tile(to_place)
 		
 func remove(to_remove):
 	if to_remove is GameObject:
@@ -51,3 +51,13 @@ func move_layer(old_index: int, new_index: int):
 	if(old_index < new_index):
 		new_index -= 1
 	layers.insert(new_index, temp)
+
+static func get_band_color(order: int, anchor: int) -> Color:
+	var max_layer: float = MAX_LAYERS / 2.0
+	var factor: float = clamp(order - anchor, -max_layer, max_layer) / max_layer
+	
+	return Color(
+		(1 - max(0, -factor)),
+		1,
+		(1 - max(0, factor))
+	)

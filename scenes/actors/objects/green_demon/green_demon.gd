@@ -1,5 +1,8 @@
 extends GameObject
 
+const IDLE_PATH = "res://scenes/actors/objects/green_demon/new_idle.png"
+const CHASE_PATH = "res://scenes/actors/objects/green_demon/new_moving.png"
+
 onready var area = $Area2D
 onready var sprite = $Sprite
 onready var particles = $Particles2D
@@ -49,6 +52,13 @@ func kill(body):
 		particles2.emitting = false
 
 func _ready():
+	update_sprite()
+	
+func _editor_ready():
+	._editor_ready()
+	connect("property_changed", self, "on_property_changed")
+
+func _object_ready():
 	cc = Singleton.MiscShared.get_can_control()
 	original_position = position
 	particles.process_material.scale = (scale.x + scale.y) / 2 # Average works well enough
@@ -58,7 +68,7 @@ func _ready():
 		if chase:
 			Singleton.MiscShared.play_green_demon_audio(revolve_sound, cc) #since the game doesn't detect a rotation at the start, we play the sound manually
 
-func _physics_process(delta):
+func _object_ground_physics_process(delta):
 	if cached_pos != Vector2() and chase and character != null:
 		var move_to = (cached_pos - global_position).normalized()
 		global_position += move_to * current_speed * 2
@@ -130,3 +140,12 @@ func _physics_process(delta):
 		update_timer -= delta
 		if update_timer <= 0:
 			update_timer = 0
+
+func update_sprite():
+	if chase:
+		sprite.texture = level_list_util.get_image_from_path(CHASE_PATH)
+	else:
+		sprite.texture = level_list_util.get_image_from_path(IDLE_PATH)
+
+func on_property_changed(key, value):
+	update_sprite()

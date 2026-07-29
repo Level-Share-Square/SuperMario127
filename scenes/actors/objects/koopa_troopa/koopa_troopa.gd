@@ -183,7 +183,7 @@ func _process(_delta):
 		sprite_color.frame = sprite.frame
 		sprite_color.modulate = color
 
-func _physics_process(delta):
+func _object_ground_physics_process(delta):
 	if is_queued_for_deletion():
 		print("this has been hit??")
 		return # Prevent crashes

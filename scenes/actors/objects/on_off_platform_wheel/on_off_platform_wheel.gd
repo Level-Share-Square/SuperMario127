@@ -113,8 +113,6 @@ func _ready():
 			# Disable to fix rotation issues.
 			instance.set_sync_to_physics(false)
 		# Disable the collision if enabled = false
-		instance.collision_shape.disabled = !enabled
-		instance.platform_area_collision_shape.disabled = !enabled
 		instance.z_index = z_index
 	
 	#_set_platform_pos()
@@ -122,6 +120,13 @@ func _ready():
 	if(!disappears && inverted):
 		frozen = true
 
+func _object_disabled_ready():
+	._object_disabled_ready()
+	for instance in platforms:
+		instance.collision_shape.disabled = true
+		instance.platform_area_collision_shape.disabled = true
+		instance.enabled = false
+		instance.switch_state(instance.sprite.visible)
 
 func _physics_process(_delta):
 	if(!frozen):

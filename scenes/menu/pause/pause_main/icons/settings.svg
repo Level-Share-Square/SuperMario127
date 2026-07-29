@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 147.77 147.77">
+  <g id="Options">
+    <circle cx="73.88" cy="73.88" r="42.97" style="fill: none; stroke: #fff; stroke-linecap: round; stroke-linejoin: round; stroke-width: 25px;"/>
+    <g>
+      <polygon points="52.24 125.18 94.35 125.18 86.15 145.77 60.44 145.77 52.24 125.18" style="fill: #fff; stroke: #fff; stroke-linecap: round; stroke-linejoin: round; stroke-width: 4px;"/>
+      <polygon points="94.94 22.59 52.83 22.59 61.03 2 86.74 2 94.94 22.59" style="fill: #fff; stroke: #fff; stroke-linecap: round; stroke-linejoin: round; stroke-width: 4px;"/>
+    </g>
+    <g>
+      <polygon points="22.59 52.53 22.59 94.65 2 86.44 2 60.74 22.59 52.53" style="fill: #fff; stroke: #fff; stroke-linecap: round; stroke-linejoin: round; stroke-width: 4px;"/>
+      <polygon points="125.18 95.24 125.18 53.12 145.77 61.33 145.77 87.03 125.18 95.24" style="fill: #fff; stroke: #fff; stroke-linecap: round; stroke-linejoin: round; stroke-width: 4px;"/>
+    </g>
+    <g>
+      <g>
+        <polygon points="22.51 95.06 52.29 124.84 31.93 133.59 13.76 115.42 22.51 95.06" style="fill: #fff; stroke: #fff; stroke-linecap: round; stroke-linejoin: round; stroke-width: 4px;"/>
+        <polygon points="125.25 52.71 95.47 22.93 115.83 14.17 134.01 32.35 125.25 52.71" style="fill: #fff; stroke: #fff; stroke-linecap: round; stroke-linejoin: round; stroke-width: 4px;"/>
+      </g>
+      <g>
+        <polygon points="52.71 22.51 22.93 52.29 14.17 31.93 32.35 13.76 52.71 22.51" style="fill: #fff; stroke: #fff; stroke-linecap: round; stroke-linejoin: round; stroke-width: 4px;"/>
+        <polygon points="95.06 125.25 124.84 95.47 133.59 115.83 115.42 134.01 95.06 125.25" style="fill: #fff; stroke: #fff; stroke-linecap: round; stroke-linejoin: round; stroke-width: 4px;"/>
+      </g>
+    </g>
+  </g>
+</svg>

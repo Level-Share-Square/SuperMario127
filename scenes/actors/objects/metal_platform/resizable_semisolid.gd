@@ -47,13 +47,13 @@ func _ready():
 
 	platform_area_collision_shape.shape = platform_area_collision_shape.shape.duplicate(true)
 	collision_shape.shape = collision_shape.shape.duplicate(true)
-	
-	if !enabled:
-		collision_shape.disabled = true
-		platform_area_collision_shape.disabled = true
 		
 	update_parts()
 
+func _object_disabled_ready():
+	._object_disabled_ready()
+	collision_shape.disabled = true
+	platform_area_collision_shape.disabled = true
 
 func update_parts():
 	sprite.rect_position.x = -(left_width + (part_width * parts) + right_width) / 2

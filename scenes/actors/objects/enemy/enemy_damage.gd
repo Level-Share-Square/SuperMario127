@@ -36,7 +36,7 @@ func _physics_process(delta):
 		for area in areas:
 			attack_area_entered(area)
 	
-	if not enemy.liquids_detector.get_overlapping_areas().empty():
+	if enemy.liquids_detector.monitoring and not enemy.liquids_detector.get_overlapping_areas().empty():
 		check_liquid_area()
 	
 	if enemy.global_position.y > (level_bounds.end.y * 32) + 128:

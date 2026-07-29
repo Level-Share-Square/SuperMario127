@@ -23,7 +23,7 @@ func _set_properties():
 func _set_property_values():
 	set_property("activated", activated)
 
-func _ready():
+func _object_ready():
 	if is_preview:
 		z_index = 0
 		sprite.z_index = 0

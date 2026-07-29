@@ -72,7 +72,7 @@ func _ready():
 	if palette != 0:
 		$Sprite.texture = palette_textures[palette]
 	var editor = get_tree().current_scene
-	grav = editor.level_area.gravity
+	grav = CurrentLevelData.current_area.header.gravity
 	if physics_enabled:
 		var _connect = waterdet.connect("area_entered", self, "water_entered")
 		var _connect2 = grounddet.connect("body_entered", self, "ground_entered")
@@ -87,17 +87,19 @@ func _ready():
 	groundcol_shape.shape = groundcol_shape.shape.duplicate(true)
 	topcol_shape.shape = topcol_shape.shape.duplicate(true)
 
-	if !enabled:
-		collision_shape.disabled = true
-
 	if !physics_enabled:
 		watercol_shape.disabled = true
 		groundcol_shape.disabled = true
 		platform_area_collision_shape.disabled = true
 		can_collide_with_floor = true
 
-	spawn_pos = global_position
+	spawn_pos = position
 	update_parts()
+	
+func _object_disabled_ready():
+	._object_disabled_ready()
+	if !enabled:
+		collision_shape.disabled = true
 
 func mario_entered(body):
 	if "Character" in str(body):
@@ -160,11 +162,10 @@ func actually_bounce(body):
 
 func platform_area_entered(area):
 	if area.get_parent().name.begins_with("DeathPlane"):
-		global_position = spawn_pos
+		position = spawn_pos
 		rotation_degrees = 0
 
 func water_entered(area):
-	#print(area)
 	if "Col" in str(area) or "Area2D" in str(area):
 		in_water = true
 		for i in waterdet.get_overlapping_areas():
@@ -195,10 +196,12 @@ func water_exited(area):
 		
 
 func calculate_corners(area):
-	var temp_top_left = area.global_position - Vector2(0, 10)
-	var temp_top_right = area.transform.xform(Vector2(area.width, - 10))
-	var temp_bottom_right = area.transform.xform(Vector2(area.width, area.height))
-	var temp_bottom_left = area.transform.xform(Vector2(0, area.height))
+	if !area is LiquidBase:
+		return
+	var temp_top_left = area.position - Vector2(0, 10)
+	var temp_top_right = area.transform.xform(Vector2(area.size.x, - 10))
+	var temp_bottom_right = area.transform.xform(area.size)
+	var temp_bottom_left = area.transform.xform(Vector2(0, area.size.y))
 	var temp_corners
 	var temp_largest
 	
@@ -221,7 +224,7 @@ func calculate_corners(area):
 		largest = temp_largest
 
 func set_position(new_position):
-	var movement = new_position - global_position
+	var movement = new_position - position
 	position = new_position
 	reset_physics_interpolation()
 	
@@ -256,32 +259,32 @@ func _physics_process(delta):
 			in_water = false
 			
 		var bounds = CurrentLevelData.current_area.header.bounds 
-		if global_position.x < bounds.position.x * 32 - 300 or global_position.x > bounds.end.x * 32 + 300 or global_position.y > bounds.end.y * 32+ 300:
-			global_position = spawn_pos
-		var result_vector = global_position
+		if position.x < bounds.position.x * 32 - 300 or position.x > bounds.end.x * 32 + 300 or position.y > bounds.end.y * 32+ 300:
+			position = spawn_pos
+		var result_vector = position
 		if is_instance_valid(water) and in_water:
-			#global_position.x += (rotation_degrees/90) * 3
+			#position.x += (rotation_degrees/90) * 3
 			result_vector += Vector2((rotation_degrees/90) * 3.3, 0)
 			if water.moving:
 				calculate_corners(water)
 				
-			if global_position.x < corners[largest].x and slope_left != 16331239353195370:
+			if position.x < corners[largest].x and slope_left != 16331239353195370:
 				rotation = lerp_angle(rotation, rotation_left, 0.01)
-				#global_position.y = lerp(global_position.y, slope_left * global_position.x + (corners[largest-1].y - slope_left * corners[largest-1].x), 0.1)
-				var point = slope_left * global_position.x + (corners[largest-1].y - slope_left * corners[largest-1].x)
-				if abs(global_position.y - point) < 20:
+				#position.y = lerp(position.y, slope_left * position.x + (corners[largest-1].y - slope_left * corners[largest-1].x), 0.1)
+				var point = slope_left * position.x + (corners[largest-1].y - slope_left * corners[largest-1].x)
+				if abs(position.y - point) < 20:
 					buoyancy = 0.3
 				else:
 					buoyancy = 0.02
-				result_vector = Vector2(result_vector.x, lerp(global_position.y, point, buoyancy))
+				result_vector = Vector2(result_vector.x, lerp(position.y, point, buoyancy))
 			else:
 				rotation = lerp_angle(rotation, rotation_right, 0.01)
-				var point = slope_right * global_position.x + (corners[largest].y - slope_right * corners[largest].x)
-				if abs(global_position.y - point) < 20:
+				var point = slope_right * position.x + (corners[largest].y - slope_right * corners[largest].x)
+				if abs(position.y - point) < 20:
 					buoyancy = 0.3
 				else:
 					buoyancy = 0.02
-				result_vector = Vector2(result_vector.x, lerp(global_position.y, point, buoyancy))
+				result_vector = Vector2(result_vector.x, lerp(position.y, point, buoyancy))
 				
 			
 			animplay.play("bob")

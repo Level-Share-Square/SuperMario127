@@ -22,6 +22,8 @@ func add_layer():
 		Color(hex.text),
 		int(order.text),
 		ground.pressed,
+		"New Layer",
+		false,
 		PoolIntArray(),
 		false,
 		float(opacity.text)

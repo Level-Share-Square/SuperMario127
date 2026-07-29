@@ -2,18 +2,22 @@ class_name LayerMetadata
 extends LevelDataResource
 
 
+var layer_name: String = "Layer %s"
 # "distance" from the g layer, affects scroll speed
 var parallax_distance: float = 0
 var parallax_offset: Vector2 = Vector2.ZERO
 var autoset_tint: bool = true
 var layer_tint: Color = Color.white
 var layer_opacity: float = 1.0
+# saved separately to layer opacity
+var layer_visible: bool = true
 
 var order: int
 var is_ground: bool
+var is_origin: bool = false
 # empty means always activated unless disabled is set to true
 var activated_mission_ids: PoolIntArray = PoolIntArray()
-# for if a layer to be permanently hidden, if this is true
+# for a layer to be permanently unloaded, if this is true
 # it should be stripped from the final exported level code for LSS
 var disabled: bool = false
 
@@ -23,8 +27,10 @@ func _init(
 		set_parallax_offset: Vector2 = Vector2.ZERO, 
 		set_autoset_tint: bool = true, 
 		set_layer_tint: Color = Color.white, 
-		set_order: int = 0, 
-		set_is_ground: bool = true, 
+		set_order: int = 0,
+		set_is_ground: bool = true,
+		set_name: String = "Layer %s",
+		set_is_origin: bool = false,
 		set_activated_mission_ids: PoolIntArray = PoolIntArray(),
 		set_disabled: bool = false,
 		set_opacity: float = 1.0
@@ -37,3 +43,5 @@ func _init(
 	activated_mission_ids = set_activated_mission_ids
 	disabled = set_disabled
 	layer_opacity = set_opacity
+	layer_name = set_name
+	is_origin = set_is_origin

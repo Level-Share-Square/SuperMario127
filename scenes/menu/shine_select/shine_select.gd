@@ -35,7 +35,7 @@ func _ready():
 	for fludd in fludds.get_children():
 		if level_info.activated_fludds[fludd.get_index()]:
 			fludd.visible = true
-			fludd.connect("button_down", self, "_on_fludd_pressed", [fludd.name])
+			fludd.connect("pressed", self, "_on_fludd_pressed", [fludd.name])
 		else:
 			fludd.visible = false
 	get_tree().paused = false

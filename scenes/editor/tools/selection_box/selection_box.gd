@@ -12,7 +12,7 @@ onready var edit_selection = $"%EditSelection"
 onready var pivot = get_node("Pivot")
 onready var pivot_toggle = $"%PivotToggleButton"
 onready var vseparator3 = $"%VSeparator3"
-onready var item_actions = $"%ItemActions"
+onready var item_actions = $"%Actions"
 onready var object_settings_window = $"%ObjectSettingsWindow"
 
 onready var sel_border = preload("res://scenes/editor/tools/selection_box/selection_border.png")
