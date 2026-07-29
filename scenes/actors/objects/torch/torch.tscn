@@ -74,9 +74,7 @@ animations = [ {
 } ]
 
 [node name="Torch" type="Node2D"]
-z_index = -2
 script = ExtResource( 1 )
-ignore_layer_disabling = true
 internal_id = "torch"
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
@@ -94,9 +92,8 @@ playing = true
 texture = ExtResource( 3 )
 color = Color( 0.870588, 0.647059, 0.0509804, 1 )
 energy = 1.27
-range_z_min = -10
-range_z_max = -10
-range_layer_max = 1
+range_z_min = -7
+range_z_max = -7
 shadow_color = Color( 0.282353, 0.172549, 0.172549, 0.631373 )
 script = ExtResource( 5 )
 textures = [ ExtResource( 8 ), ExtResource( 6 ), ExtResource( 7 ) ]
