@@ -1,0 +1,140 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scenes/editor/windows/editor_window.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/oldeditor/autosave.gd" type="Script" id=2]
+[ext_resource path="res://scenes/menu/button_scripts/button_sound.gd" type="Script" id=3]
+
+[node name="AutosaveWindow" instance=ExtResource( 1 )]
+margin_right = 345.0
+margin_bottom = 191.0
+title = "Autosave"
+
+[node name="Background" parent="." index="0"]
+margin_right = 345.0
+margin_bottom = 191.0
+
+[node name="ContentDivider" parent="." index="1"]
+margin_right = 345.0
+margin_bottom = 191.0
+
+[node name="Header" parent="ContentDivider" index="0"]
+margin_right = 345.0
+
+[node name="HeaderMat" parent="ContentDivider/Header" index="0"]
+margin_right = 341.0
+
+[node name="HeaderBox" parent="ContentDivider/Header/HeaderMat" index="0"]
+margin_right = 331.0
+
+[node name="WindowTitle" parent="ContentDivider/Header/HeaderMat/HeaderBox" index="2"]
+margin_right = 302.0
+
+[node name="WindowClose" parent="ContentDivider/Header/HeaderMat/HeaderBox" index="3"]
+margin_left = 303.0
+margin_right = 325.0
+
+[node name="HSeparator" parent="ContentDivider" index="1"]
+margin_right = 345.0
+
+[node name="ContentMat" parent="ContentDivider" index="2"]
+margin_right = 345.0
+margin_bottom = 191.0
+
+[node name="PanelContainer" type="PanelContainer" parent="ContentDivider/ContentMat" index="0"]
+margin_top = 1.0
+margin_right = 345.0
+margin_bottom = 158.0
+
+[node name="Autosave" type="ScrollContainer" parent="ContentDivider/ContentMat/PanelContainer" index="0"]
+margin_left = 6.0
+margin_top = 6.0
+margin_right = 339.0
+margin_bottom = 151.0
+scroll_horizontal_enabled = false
+scroll_deadzone = 7
+script = ExtResource( 2 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ContentDivider/ContentMat/PanelContainer/Autosave" index="0"]
+margin_right = 325.0
+margin_bottom = 145.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ContentDivider/ContentMat/PanelContainer/Autosave/VBoxContainer" index="0"]
+margin_right = 325.0
+margin_bottom = 19.0
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ContentDivider/ContentMat/PanelContainer/Autosave/VBoxContainer/HBoxContainer" index="0"]
+margin_right = 160.0
+margin_bottom = 19.0
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="ContentDivider/ContentMat/PanelContainer/Autosave/VBoxContainer/HBoxContainer/HBoxContainer" index="0"]
+margin_top = 1.0
+margin_right = 101.0
+margin_bottom = 18.0
+text = "Autosave Timer:"
+
+[node name="IntervalOptions" type="OptionButton" parent="ContentDivider/ContentMat/PanelContainer/Autosave/VBoxContainer/HBoxContainer/HBoxContainer" index="1"]
+unique_name_in_owner = true
+margin_left = 105.0
+margin_right = 127.0
+margin_bottom = 19.0
+
+[node name="ResetAutosaves" type="Button" parent="ContentDivider/ContentMat/PanelContainer/Autosave/VBoxContainer/HBoxContainer" index="1"]
+unique_name_in_owner = true
+margin_left = 210.0
+margin_right = 325.0
+margin_bottom = 19.0
+size_flags_horizontal = 10
+text = "Reset Autosaves"
+script = ExtResource( 3 )
+hover_override = "HoverSound"
+click_override = "ClickSound"
+
+[node name="HSeparator" type="HSeparator" parent="ContentDivider/ContentMat/PanelContainer/Autosave/VBoxContainer" index="1"]
+margin_top = 23.0
+margin_right = 325.0
+margin_bottom = 27.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ContentDivider/ContentMat/PanelContainer/Autosave/VBoxContainer" index="2"]
+margin_top = 31.0
+margin_right = 325.0
+margin_bottom = 145.0
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="ContentDivider/ContentMat/PanelContainer/Autosave/VBoxContainer/VBoxContainer" index="0"]
+margin_right = 325.0
+margin_bottom = 17.0
+text = "Available Autosaves"
+align = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="ContentDivider/ContentMat/PanelContainer/Autosave/VBoxContainer/VBoxContainer" index="1"]
+margin_top = 21.0
+margin_right = 325.0
+margin_bottom = 114.0
+size_flags_vertical = 3
+
+[node name="SavesContainer" type="VBoxContainer" parent="ContentDivider/ContentMat/PanelContainer/Autosave/VBoxContainer/VBoxContainer/ScrollContainer" index="0"]
+unique_name_in_owner = true
+margin_right = 317.0
+margin_bottom = 93.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Border" parent="." index="2"]
+margin_right = 345.0
+margin_bottom = 191.0
+
+[node name="WindowMat" parent="." index="3"]
+margin_right = 345.0
+margin_bottom = 191.0
+
+[node name="Control" parent="." index="4"]
+margin_right = 345.0
+margin_bottom = 191.0
+
+[connection signal="item_selected" from="ContentDivider/ContentMat/PanelContainer/Autosave/VBoxContainer/HBoxContainer/HBoxContainer/IntervalOptions" to="ContentDivider/ContentMat/PanelContainer/Autosave" method="interval_selected"]

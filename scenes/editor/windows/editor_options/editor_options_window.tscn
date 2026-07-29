@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://scenes/editor/assets/palette.svg" type="Texture" id=1]
 [ext_resource path="res://scenes/menu/line_edit_unfocus.gd" type="Script" id=2]
@@ -11,7 +11,6 @@
 [ext_resource path="res://scenes/editor/windows/editor_options/editor_options_window.gd" type="Script" id=9]
 [ext_resource path="res://scenes/actors/objects/painting/border.png" type="Texture" id=10]
 [ext_resource path="res://scenes/editor/windows/editor_options/music_panel.tscn" type="PackedScene" id=11]
-[ext_resource path="res://scenes/oldeditor/autosave.gd" type="Script" id=12]
 [ext_resource path="res://scenes/editor/windows/editor_options/areas.gd" type="Script" id=13]
 [ext_resource path="res://scenes/editor/windows/editor_options/area_settings.gd" type="Script" id=14]
 [ext_resource path="res://scenes/editor/windows/editor_options/level.gd" type="Script" id=15]
@@ -72,8 +71,6 @@ margin_right = 394.0
 margin_bottom = 204.0
 rect_pivot_offset = Vector2( -131, 46 )
 mouse_filter = 1
-size_flags_horizontal = 3
-size_flags_vertical = 3
 size_flags_stretch_ratio = 2.5
 custom_constants/hseparation = 8
 custom_constants/side_margin = 4
@@ -546,7 +543,7 @@ margin_bottom = 144.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Autosave" type="ScrollContainer" parent="ContentDivider/ContentMat/Tabs" index="4"]
+[node name="Missions" type="HBoxContainer" parent="ContentDivider/ContentMat/Tabs" index="4"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -554,81 +551,182 @@ margin_left = 4.0
 margin_top = 27.0
 margin_right = -4.0
 margin_bottom = -4.0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="ContentDivider/ContentMat/Tabs/Missions" index="0"]
+margin_right = 79.0
+margin_bottom = 167.0
 scroll_horizontal_enabled = false
-scroll_deadzone = 7
-script = ExtResource( 12 )
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ContentDivider/ContentMat/Tabs/Autosave" index="0"]
-margin_right = 372.0
-margin_bottom = 167.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-alignment = 1
+[node name="VBoxContainer" type="VBoxContainer" parent="ContentDivider/ContentMat/Tabs/Missions/ScrollContainer" index="0"]
+margin_right = 63.0
+margin_bottom = 180.0
+size_flags_horizontal = 0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ContentDivider/ContentMat/Tabs/Autosave/VBoxContainer" index="0"]
-margin_right = 372.0
+[node name="ButtonSound" type="Button" parent="ContentDivider/ContentMat/Tabs/Missions/ScrollContainer/VBoxContainer" index="0"]
+margin_right = 63.0
 margin_bottom = 19.0
-size_flags_horizontal = 3
-alignment = 1
-
-[node name="HBoxContainer" type="HBoxContainer" parent="ContentDivider/ContentMat/Tabs/Autosave/VBoxContainer/HBoxContainer" index="0"]
-margin_right = 184.0
-margin_bottom = 19.0
-size_flags_horizontal = 3
-
-[node name="Label" type="Label" parent="ContentDivider/ContentMat/Tabs/Autosave/VBoxContainer/HBoxContainer/HBoxContainer" index="0"]
-margin_top = 1.0
-margin_right = 101.0
-margin_bottom = 18.0
-text = "Autosave Timer:"
-
-[node name="IntervalOptions" type="OptionButton" parent="ContentDivider/ContentMat/Tabs/Autosave/VBoxContainer/HBoxContainer/HBoxContainer" index="1"]
-unique_name_in_owner = true
-margin_left = 105.0
-margin_right = 127.0
-margin_bottom = 19.0
-focus_mode = 0
-
-[node name="ResetAutosaves" type="Button" parent="ContentDivider/ContentMat/Tabs/Autosave/VBoxContainer/HBoxContainer" index="1"]
-unique_name_in_owner = true
-margin_left = 257.0
-margin_right = 372.0
-margin_bottom = 19.0
-size_flags_horizontal = 10
-text = "Reset Autosaves"
+text = "Mission 1"
 script = ExtResource( 6 )
-hover_override = "HoverSound"
-click_override = "ClickSound"
 
-[node name="HSeparator" type="HSeparator" parent="ContentDivider/ContentMat/Tabs/Autosave/VBoxContainer" index="1"]
+[node name="ButtonSound2" type="Button" parent="ContentDivider/ContentMat/Tabs/Missions/ScrollContainer/VBoxContainer" index="1"]
 margin_top = 23.0
-margin_right = 372.0
-margin_bottom = 27.0
+margin_right = 63.0
+margin_bottom = 42.0
+text = "Mission 1"
+script = ExtResource( 6 )
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ContentDivider/ContentMat/Tabs/Autosave/VBoxContainer" index="2"]
-margin_top = 31.0
-margin_right = 372.0
+[node name="ButtonSound3" type="Button" parent="ContentDivider/ContentMat/Tabs/Missions/ScrollContainer/VBoxContainer" index="2"]
+margin_top = 46.0
+margin_right = 63.0
+margin_bottom = 65.0
+text = "Mission 1"
+script = ExtResource( 6 )
+
+[node name="ButtonSound4" type="Button" parent="ContentDivider/ContentMat/Tabs/Missions/ScrollContainer/VBoxContainer" index="3"]
+margin_top = 69.0
+margin_right = 63.0
+margin_bottom = 88.0
+text = "Mission 1"
+script = ExtResource( 6 )
+
+[node name="ButtonSound5" type="Button" parent="ContentDivider/ContentMat/Tabs/Missions/ScrollContainer/VBoxContainer" index="4"]
+margin_top = 92.0
+margin_right = 63.0
+margin_bottom = 111.0
+text = "Mission 1"
+script = ExtResource( 6 )
+
+[node name="ButtonSound6" type="Button" parent="ContentDivider/ContentMat/Tabs/Missions/ScrollContainer/VBoxContainer" index="5"]
+margin_top = 115.0
+margin_right = 63.0
+margin_bottom = 134.0
+text = "Mission 1"
+script = ExtResource( 6 )
+
+[node name="ButtonSound7" type="Button" parent="ContentDivider/ContentMat/Tabs/Missions/ScrollContainer/VBoxContainer" index="6"]
+margin_top = 138.0
+margin_right = 63.0
+margin_bottom = 157.0
+text = "Mission 1"
+script = ExtResource( 6 )
+
+[node name="ButtonSound8" type="Button" parent="ContentDivider/ContentMat/Tabs/Missions/ScrollContainer/VBoxContainer" index="7"]
+margin_top = 161.0
+margin_right = 63.0
+margin_bottom = 180.0
+text = "Mission 1"
+script = ExtResource( 6 )
+
+[node name="VSeparator" type="VSeparator" parent="ContentDivider/ContentMat/Tabs/Missions" index="1"]
+margin_left = 83.0
+margin_right = 87.0
 margin_bottom = 167.0
-size_flags_vertical = 3
 
-[node name="Label" type="Label" parent="ContentDivider/ContentMat/Tabs/Autosave/VBoxContainer/VBoxContainer" index="0"]
-margin_right = 372.0
-margin_bottom = 17.0
-text = "Available Autosaves"
-align = 1
-
-[node name="ScrollContainer" type="ScrollContainer" parent="ContentDivider/ContentMat/Tabs/Autosave/VBoxContainer/VBoxContainer" index="1"]
-margin_top = 21.0
-margin_right = 372.0
-margin_bottom = 136.0
-size_flags_vertical = 3
-
-[node name="SavesContainer" type="VBoxContainer" parent="ContentDivider/ContentMat/Tabs/Autosave/VBoxContainer/VBoxContainer/ScrollContainer" index="0"]
-unique_name_in_owner = true
-margin_right = 364.0
-margin_bottom = 115.0
+[node name="VBoxContainer" type="VBoxContainer" parent="ContentDivider/ContentMat/Tabs/Missions" index="2"]
+margin_left = 91.0
+margin_right = 380.0
+margin_bottom = 167.0
 size_flags_horizontal = 3
-size_flags_vertical = 3
+custom_constants/separation = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ContentDivider/ContentMat/Tabs/Missions/VBoxContainer" index="0"]
+margin_right = 289.0
+margin_bottom = 17.0
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="ContentDivider/ContentMat/Tabs/Missions/VBoxContainer/HBoxContainer" index="0"]
+margin_right = 59.0
+margin_bottom = 17.0
+text = "Property"
+
+[node name="Control" type="Control" parent="ContentDivider/ContentMat/Tabs/Missions/VBoxContainer/HBoxContainer" index="1"]
+margin_left = 63.0
+margin_right = 174.0
+margin_bottom = 17.0
+size_flags_horizontal = 3
+
+[node name="LineEdit" type="LineEdit" parent="ContentDivider/ContentMat/Tabs/Missions/VBoxContainer/HBoxContainer" index="2"]
+margin_left = 178.0
+margin_right = 289.0
+margin_bottom = 17.0
+size_flags_horizontal = 3
+align = 1
+placeholder_text = "Value"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="ContentDivider/ContentMat/Tabs/Missions/VBoxContainer" index="1"]
+margin_top = 22.0
+margin_right = 289.0
+margin_bottom = 39.0
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="ContentDivider/ContentMat/Tabs/Missions/VBoxContainer/HBoxContainer2" index="0"]
+margin_right = 59.0
+margin_bottom = 17.0
+text = "Property"
+
+[node name="Control" type="Control" parent="ContentDivider/ContentMat/Tabs/Missions/VBoxContainer/HBoxContainer2" index="1"]
+margin_left = 63.0
+margin_right = 174.0
+margin_bottom = 17.0
+size_flags_horizontal = 3
+
+[node name="LineEdit" type="LineEdit" parent="ContentDivider/ContentMat/Tabs/Missions/VBoxContainer/HBoxContainer2" index="2"]
+margin_left = 178.0
+margin_right = 289.0
+margin_bottom = 17.0
+size_flags_horizontal = 3
+align = 1
+placeholder_text = "Value"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="ContentDivider/ContentMat/Tabs/Missions/VBoxContainer" index="2"]
+margin_top = 44.0
+margin_right = 289.0
+margin_bottom = 61.0
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="ContentDivider/ContentMat/Tabs/Missions/VBoxContainer/HBoxContainer3" index="0"]
+margin_right = 59.0
+margin_bottom = 17.0
+text = "Property"
+
+[node name="Control" type="Control" parent="ContentDivider/ContentMat/Tabs/Missions/VBoxContainer/HBoxContainer3" index="1"]
+margin_left = 63.0
+margin_right = 174.0
+margin_bottom = 17.0
+size_flags_horizontal = 3
+
+[node name="LineEdit" type="LineEdit" parent="ContentDivider/ContentMat/Tabs/Missions/VBoxContainer/HBoxContainer3" index="2"]
+margin_left = 178.0
+margin_right = 289.0
+margin_bottom = 17.0
+size_flags_horizontal = 3
+align = 1
+placeholder_text = "Value"
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="ContentDivider/ContentMat/Tabs/Missions/VBoxContainer" index="3"]
+margin_top = 66.0
+margin_right = 289.0
+margin_bottom = 83.0
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="ContentDivider/ContentMat/Tabs/Missions/VBoxContainer/HBoxContainer4" index="0"]
+margin_right = 59.0
+margin_bottom = 17.0
+text = "Property"
+
+[node name="Control" type="Control" parent="ContentDivider/ContentMat/Tabs/Missions/VBoxContainer/HBoxContainer4" index="1"]
+margin_left = 63.0
+margin_right = 174.0
+margin_bottom = 17.0
+size_flags_horizontal = 3
+
+[node name="LineEdit" type="LineEdit" parent="ContentDivider/ContentMat/Tabs/Missions/VBoxContainer/HBoxContainer4" index="2"]
+margin_left = 178.0
+margin_right = 289.0
+margin_bottom = 17.0
+size_flags_horizontal = 3
+align = 1
+placeholder_text = "Value"
 
 [node name="Settings" type="ScrollContainer" parent="ContentDivider/ContentMat/Tabs" index="5"]
 visible = false
@@ -979,4 +1077,3 @@ margin_right = 400.0
 margin_bottom = 241.0
 
 [connection signal="button_down" from="ContentDivider/ContentMat/Tabs/Areas/VBoxContainer/HBoxContainer/Paste" to="ContentDivider/ContentMat/Tabs/Areas" method="paste_area"]
-[connection signal="item_selected" from="ContentDivider/ContentMat/Tabs/Autosave/VBoxContainer/HBoxContainer/HBoxContainer/IntervalOptions" to="ContentDivider/ContentMat/Tabs/Autosave" method="interval_selected"]

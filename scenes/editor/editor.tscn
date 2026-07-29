@@ -1,4 +1,4 @@
-[gd_scene load_steps=113 format=2]
+[gd_scene load_steps=121 format=2]
 
 [ext_resource path="res://scenes/menu/options/options.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/menu/menu_controller/screen_manager.gd" type="Script" id=2]
@@ -83,6 +83,8 @@
 [ext_resource path="res://scenes/editor/dropdown_parent.gd" type="Script" id=81]
 [ext_resource path="res://scenes/editor/assets/ArrowLeft.svg" type="Texture" id=82]
 [ext_resource path="res://scenes/editor/layers/max_height.gd" type="Script" id=83]
+[ext_resource path="res://scenes/editor/windows/editor_window.gd" type="Script" id=84]
+[ext_resource path="res://scenes/editor/windows/autosave_window.tscn" type="PackedScene" id=85]
 
 [sub_resource type="CanvasItemMaterial" id=176]
 blend_mode = 1
@@ -210,6 +212,32 @@ fill_to = Vector2( 0, 1 )
 
 [sub_resource type="StyleBoxTexture" id=193]
 texture = SubResource( 192 )
+region_rect = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="Gradient" id=198]
+interpolation_mode = 2
+offsets = PoolRealArray( 0, 0.5, 1 )
+colors = PoolColorArray( 1, 1, 1, 0.19, 1, 1, 1, 0, 1, 1, 1, 0.19 )
+
+[sub_resource type="GradientTexture2D" id=199]
+gradient = SubResource( 198 )
+fill_to = Vector2( 0, 1 )
+
+[sub_resource type="StyleBoxTexture" id=200]
+texture = SubResource( 199 )
+region_rect = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="Gradient" id=195]
+interpolation_mode = 2
+offsets = PoolRealArray( 0, 0.5, 1 )
+colors = PoolColorArray( 1, 1, 1, 0.19, 1, 1, 1, 0, 1, 1, 1, 0.19 )
+
+[sub_resource type="GradientTexture2D" id=196]
+gradient = SubResource( 195 )
+fill_to = Vector2( 0, 1 )
+
+[sub_resource type="StyleBoxTexture" id=197]
+texture = SubResource( 196 )
 region_rect = Rect2( 0, 0, 64, 64 )
 
 [node name="Editor" type="Node2D"]
@@ -1781,9 +1809,15 @@ margin_right = 509.0
 margin_bottom = 253.0
 custom_styles/panel = SubResource( 193 )
 
+[node name="AutosaveWindow" parent="UI" instance=ExtResource( 85 )]
+unique_name_in_owner = true
+custom_styles/panel = SubResource( 200 )
+
 [node name="LayerAdder" parent="UI" instance=ExtResource( 79 )]
 unique_name_in_owner = true
 visible = false
+custom_styles/panel = SubResource( 197 )
+script = ExtResource( 84 )
 
 [node name="Options" type="CanvasLayer" parent="."]
 layer = 128

@@ -7,6 +7,7 @@ onready var view_dropdown = $"%ViewDropdown"
 onready var editor = owner
 onready var shared = editor.get_node("Shared")
 onready var layer_adder = $"%LayerAdder"
+onready var autosave_window = $"%AutosaveWindow"
 
 func _ready():
 	for button in view_dropdown.get_children():
@@ -36,7 +37,7 @@ func on_button_pressed(button: Button):
 		"Layering":
 			editor.object_layering = !button.pressed
 		"Autosaves":
-			pass
+			autosave_window.toggle_window()
 		"Settings":
 			editor.screen_manager.screen_change("Options")
 		"Layer":
