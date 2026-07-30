@@ -37,12 +37,12 @@ func load_layers(layer_data_list: Array):
 		
 		if layer.layer_data.layer_metadata.is_origin:
 			origin = layer
-			emit_signal("found_origin")
+			emit_signal("found_origin", origin.layer_data.layer_metadata.order)
 			
 	# This is a failsafe in case none of the layers are origin
 	if !origin:
 		origin = layers[2]
-		emit_signal("found_origin")
+		emit_signal("found_origin", origin.layer_data.layer_metadata.order)
 
 func get_layer_index(layer: LevelLayer):
 	return layers.find(layer)

@@ -12,7 +12,7 @@ signal layer_selected(layer_index)
 
 func _ready():
 	select.connect("pressed", self, "selected")
-	edit.connect("pressed", self, "test")
+	edit.connect("pressed", self, "show_layer_editor")
 
 func selected():
 	emit_signal("layer_selected", layer_data.layer_metadata.order)
@@ -35,9 +35,6 @@ func delete_layer() -> void:
 	action.layer_index = get_index()/2
 	shared.get_parent().action_manager.commit_action(action)
 
-func test() -> void:
-	var action := ReorderLayerAction.new()
-	action.shared = shared
-	action.layer_index = get_index()/2
-	action.final_layer_index = shared.layers.size() - 1
-	shared.get_parent().action_manager.commit_action(action)
+func show_layer_editor() -> void:
+	var layer_editor = shared.get_node("%LayerEditor")
+	layer_editor.populate_window(layer_data)

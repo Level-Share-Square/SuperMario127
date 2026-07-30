@@ -1081,8 +1081,8 @@ theme_type_variation = "FlatPanel2"
 [node name="MarginContainer" type="MarginContainer" parent="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/DropdownParent/LayerMenu"]
 margin_left = 4.0
 margin_top = 4.0
-margin_right = 123.0
-margin_bottom = 33.0
+margin_right = 141.0
+margin_bottom = 58.0
 size_flags_horizontal = 3
 custom_constants/margin_right = 4
 custom_constants/margin_top = 4
@@ -1092,14 +1092,14 @@ custom_constants/margin_bottom = 4
 [node name="LayerDropdown" type="VBoxContainer" parent="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/DropdownParent/LayerMenu/MarginContainer"]
 margin_left = 4.0
 margin_top = 4.0
-margin_right = 115.0
-margin_bottom = 25.0
+margin_right = 133.0
+margin_bottom = 50.0
 rect_clip_content = true
 size_flags_horizontal = 3
 script = ExtResource( 80 )
 
 [node name="ScrollContainer" type="ScrollContainer" parent="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/DropdownParent/LayerMenu/MarginContainer/LayerDropdown"]
-margin_right = 111.0
+margin_right = 129.0
 follow_focus = true
 scroll_horizontal_enabled = false
 script = ExtResource( 83 )
@@ -1107,20 +1107,21 @@ max_height = 256.0
 
 [node name="Layers" type="VBoxContainer" parent="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/DropdownParent/LayerMenu/MarginContainer/LayerDropdown/ScrollContainer"]
 unique_name_in_owner = true
-margin_right = 103.0
+margin_right = 121.0
 size_flags_horizontal = 3
 size_flags_vertical = 0
 
-[node name="Actions" type="HBoxContainer" parent="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/DropdownParent/LayerMenu/MarginContainer/LayerDropdown"]
+[node name="Actions" type="VBoxContainer" parent="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/DropdownParent/LayerMenu/MarginContainer/LayerDropdown"]
 margin_top = 4.0
-margin_right = 111.0
-margin_bottom = 21.0
+margin_right = 129.0
+margin_bottom = 46.0
 size_flags_horizontal = 3
-custom_constants/separation = 5
+custom_constants/separation = 2
+alignment = 1
 
 [node name="NewLayer" type="Button" parent="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/DropdownParent/LayerMenu/MarginContainer/LayerDropdown/Actions"]
 unique_name_in_owner = true
-margin_right = 111.0
+margin_right = 129.0
 margin_bottom = 17.0
 rect_min_size = Vector2( 24, 16 )
 focus_mode = 0
@@ -1128,7 +1129,28 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_type_variation = "ButtonTransparent"
 enabled_focus_mode = 0
-text = "New Layer..."
+text = "New Ground Layer..."
+icon_align = 1
+expand_icon = true
+script = ExtResource( 24 )
+
+[node name="HSeparator" type="HSeparator" parent="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/DropdownParent/LayerMenu/MarginContainer/LayerDropdown/Actions"]
+margin_top = 19.0
+margin_right = 129.0
+margin_bottom = 23.0
+
+[node name="NewDecor" type="Button" parent="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/DropdownParent/LayerMenu/MarginContainer/LayerDropdown/Actions"]
+unique_name_in_owner = true
+margin_top = 25.0
+margin_right = 129.0
+margin_bottom = 42.0
+rect_min_size = Vector2( 24, 16 )
+focus_mode = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_type_variation = "ButtonTransparent"
+enabled_focus_mode = 0
+text = "New Decor Layer..."
 icon_align = 1
 expand_icon = true
 script = ExtResource( 24 )
@@ -1790,7 +1812,7 @@ custom_styles/panel = SubResource( 193 )
 unique_name_in_owner = true
 custom_styles/panel = SubResource( 200 )
 
-[node name="LayerAdder" parent="UI" instance=ExtResource( 79 )]
+[node name="LayerEditor" parent="UI" instance=ExtResource( 79 )]
 unique_name_in_owner = true
 visible = false
 custom_styles/panel = SubResource( 197 )

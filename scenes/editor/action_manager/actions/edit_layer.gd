@@ -10,7 +10,6 @@ var old_value
 
 func change_property(value) -> void:
 	old_value = shared.get_layer_at(layer_index).layer_data.layer_metadata[property]
-
 	shared.edit_layer(layer_index, property, value)
 	
 

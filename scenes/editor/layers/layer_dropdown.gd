@@ -7,14 +7,18 @@ onready var editor: Editor = owner
 onready var shared: LevelShared = editor.get_shared_node()
 onready var layers: Container = $"%Layers"
 onready var new_layer = $"%NewLayer"
+onready var new_decor = $"%NewDecor"
 onready var layer_picker = $"%LayerPicker"
+onready var parallax_scroll = $"%ParallaxScroll"
 
 
 func _ready():
 	for layer_data in shared.layers:
 		add_layer(layer_data)
 	shared.connect("layer_added", self, "add_layer")
-	new_layer.connect("button_down", self, "new_layer")
+	new_layer.connect("button_down", self, "new_layer", [true])
+	new_decor.connect("button_down", self, "new_layer", [false])
+	shared.connect("found_origin", self, "select_layer")
 	
 	yield(editor, "ready")
 	editor.action_manager.connect("undo", self, "update_layers")
@@ -51,7 +55,9 @@ func update_layers() -> void:
 		var layer_data = layer.layer_data
 		add_layer(layer_data)
 
-func new_layer() -> void:
+func new_layer(ground: bool = true) -> void:
+	print(ground)
 	var action := AddLayerAction.new()
 	action.shared = shared
+	action.ground = ground
 	editor.action_manager.commit_action(action)

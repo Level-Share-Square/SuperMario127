@@ -1,13 +1,18 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scenes/editor/windows/editor_window.tscn" type="PackedScene" id=1]
-[ext_resource path="res://scenes/editor/windows/object_property_editor/misc_property_scenes/Vector2/base.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/editor/windows/object_property_editor/misc_property_scenes/String/base.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/editor/windows/object_property_editor/misc_property_scenes/bool/base.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/editor/windows/object_property_editor/misc_property_scenes/Color/base.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/editor/windows/layer_properties.gd" type="Script" id=6]
+[ext_resource path="res://scenes/editor/windows/layer_editor.gd" type="Script" id=7]
+[ext_resource path="res://assets/misc/gear.svg" type="Texture" id=8]
+[ext_resource path="res://scenes/editor/windows/object_property_editor/misc_property_scenes/float/base.tscn" type="PackedScene" id=9]
 
 [node name="LayerEditor" instance=ExtResource( 1 )]
-title = "Edit Layer"
+script = ExtResource( 7 )
+title = "Layer Editor"
+icon = ExtResource( 8 )
 
 [node name="Background" parent="." index="0"]
 margin_right = 338.0
@@ -60,33 +65,40 @@ margin_right = 318.0
 margin_bottom = 110.0
 scroll_horizontal_enabled = false
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ContentDivider/ContentMat/VBoxContainer/Panel/ScrollContainer" index="0"]
+[node name="LayerProperties" type="VBoxContainer" parent="ContentDivider/ContentMat/VBoxContainer/Panel/ScrollContainer" index="0"]
+unique_name_in_owner = true
 margin_right = 298.0
-margin_bottom = 323.0
+margin_bottom = 313.0
+script = ExtResource( 6 )
 
-[node name="LayerName" parent="ContentDivider/ContentMat/VBoxContainer/Panel/ScrollContainer/VBoxContainer" index="0" instance=ExtResource( 3 )]
+[node name="LayerName" parent="ContentDivider/ContentMat/VBoxContainer/Panel/ScrollContainer/LayerProperties" index="0" instance=ExtResource( 3 )]
+unique_name_in_owner = true
 margin_top = 0.0
 margin_right = 298.0
 margin_bottom = 17.0
 
-[node name="Parallax" parent="ContentDivider/ContentMat/VBoxContainer/Panel/ScrollContainer/VBoxContainer" index="1" instance=ExtResource( 2 )]
+[node name="Parallax" parent="ContentDivider/ContentMat/VBoxContainer/Panel/ScrollContainer/LayerProperties" index="1" instance=ExtResource( 9 )]
+unique_name_in_owner = true
 margin_top = 21.0
 margin_right = 298.0
-margin_bottom = 43.0
+margin_bottom = 38.0
 
-[node name="Scale" parent="ContentDivider/ContentMat/VBoxContainer/Panel/ScrollContainer/VBoxContainer" index="2" instance=ExtResource( 2 )]
-margin_top = 47.0
+[node name="IsGround" parent="ContentDivider/ContentMat/VBoxContainer/Panel/ScrollContainer/LayerProperties" index="2" instance=ExtResource( 4 )]
+unique_name_in_owner = true
+margin_top = 42.0
 margin_right = 298.0
-margin_bottom = 69.0
+margin_bottom = 59.0
 
-[node name="IsGround" parent="ContentDivider/ContentMat/VBoxContainer/Panel/ScrollContainer/VBoxContainer" index="3" instance=ExtResource( 4 )]
-margin_top = 73.0
+[node name="Tint" parent="ContentDivider/ContentMat/VBoxContainer/Panel/ScrollContainer/LayerProperties" index="3" instance=ExtResource( 5 )]
+unique_name_in_owner = true
+margin_top = 63.0
+margin_bottom = 292.0
+
+[node name="Opacity" parent="ContentDivider/ContentMat/VBoxContainer/Panel/ScrollContainer/LayerProperties" index="4" instance=ExtResource( 9 )]
+unique_name_in_owner = true
+margin_top = 296.0
 margin_right = 298.0
-margin_bottom = 90.0
-
-[node name="Tint" parent="ContentDivider/ContentMat/VBoxContainer/Panel/ScrollContainer/VBoxContainer" index="4" instance=ExtResource( 5 )]
-margin_top = 94.0
-margin_bottom = 323.0
+margin_bottom = 313.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ContentDivider/ContentMat/VBoxContainer" index="1"]
 margin_top = 118.0
