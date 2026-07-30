@@ -22,6 +22,8 @@ func set_parallax_distance(s_parallax_distance: float) -> void:
 		return
 	
 	parallax_distance = s_parallax_distance
+	
+	_update_scroll()
 
 
 func set_screen_offset(s_screen_offset: Vector2) -> void:
