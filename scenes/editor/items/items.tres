@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=241 format=2]
+[gd_resource type="Resource" load_steps=242 format=2]
 
 [ext_resource path="res://scenes/editor/items/placeable_items.gd" type="Script" id=1]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/blue_coin.tres" type="Resource" id=2]
@@ -240,6 +240,7 @@
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/glass_slope_right.tres" type="Resource" id=238]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/glass_slope_left.tres" type="Resource" id=239]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/barrel.tres" type="Resource" id=240]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/pendulum.tres" type="Resource" id=241]
 
 [resource]
 script = ExtResource( 1 )
@@ -330,6 +331,7 @@ placeable_items = {
 "obj_painting": ExtResource( 124 ),
 "obj_palm_tree": ExtResource( 69 ),
 "obj_pearl_platform": ExtResource( 46 ),
+"obj_pendulum": ExtResource( 241 ),
 "obj_pine_tree": ExtResource( 62 ),
 "obj_pipe": ExtResource( 27 ),
 "obj_pipe_body": ExtResource( 85 ),

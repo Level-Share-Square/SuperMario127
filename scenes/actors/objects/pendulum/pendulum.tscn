@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scenes/actors/objects/pendulum/pendulum.gd" type="Script" id=1]
+[ext_resource path="res://scenes/actors/objects/pendulum/placeholder_pivot.png" type="Texture" id=2]
+[ext_resource path="res://scenes/actors/objects/pendulum/placeholder_body.png" type="Texture" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 16, 10 )
+
+[node name="Pendulum" type="Node2D"]
+script = ExtResource( 1 )
+internal_id = "pendulum"
+
+[node name="Pendulum" type="Sprite" parent="."]
+position = Vector2( -2, 55 )
+texture = ExtResource( 3 )
+
+[node name="Pivot" type="Sprite" parent="."]
+unique_name_in_owner = true
+position = Vector2( 0, 3 )
+texture = ExtResource( 2 )
+
+[node name="Collision" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collision"]
+unique_name_in_owner = true
+position = Vector2( -2, 101 )
+shape = SubResource( 1 )

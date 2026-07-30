@@ -25,7 +25,7 @@ var disabled: bool = false
 func _init(
 		set_parallax_distance: float = 0, 
 		set_parallax_offset: Vector2 = Vector2.ZERO, 
-		set_autoset_tint: bool = true, 
+		set_autoset_tint: bool = false, 
 		set_layer_tint: Color = Color.white, 
 		set_order: int = 0,
 		set_is_ground: bool = true,
