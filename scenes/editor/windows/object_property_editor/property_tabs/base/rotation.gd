@@ -6,8 +6,8 @@ func property_changed(key: String, new_value):
 	var line_edit: LineEdit = $"%LineEdit"
 	line_edit.text = str(stepify(new_value, 0.01))
 
-func load_property(_editor: Editor, _objects: Dictionary, _property: Array):
-	.load_property(_editor, _objects, _property)
+func load_property(_editor: Editor, init_value, _property: Array):
+	.load_property(_editor, init_value, _property)
 
 func change_property(new_value):
 	.change_property(wrapf(new_value, 0, 360))

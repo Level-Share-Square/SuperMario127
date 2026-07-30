@@ -1,8 +1,5 @@
 extends PropertyTab
 
-var editor: Editor
-var objects: Dictionary
-
 func load_base_properties(_editor: Editor, _objects: Dictionary):
 	editor = _editor
 	objects = _objects
@@ -22,47 +19,52 @@ func load_base_properties(_editor: Editor, _objects: Dictionary):
 				base_hidden_properties.append(hidden_property)
 	
 	if not "position" in base_hidden_properties:
-		position_property.load_property(editor, objects, [
+		position_property.load_property(editor, get_property_value(objects.keys()[0], "position"), [
 			"position",
 			TYPE_VECTOR2,
 			PropertyInfo.new(position_property.hint_tooltip)
 		])
+		connect_signals(position_property)
 	else:
 		position_property.hide()
 
 	if not "scale" in base_hidden_properties:
-		scale_property.load_property(editor, objects, [
+		scale_property.load_property(editor, get_property_value(objects.keys()[0], "scale"), [
 			"scale",
 			TYPE_VECTOR2,
 			PropertyInfo.new(scale_property.hint_tooltip, 0.05)
 		])
+		connect_signals(scale_property)
 	else:
 		scale_property.hide()
 
 	if not "rotation_degrees" in base_hidden_properties:
-		rotation_property.load_property(editor, objects, [
+		rotation_property.load_property(editor, get_property_value(objects.keys()[0], "rotation_degrees"), [
 			"rotation_degrees",
 			TYPE_REAL,
 			PropertyInfo.new(rotation_property.hint_tooltip)
 		])
+		connect_signals(rotation_property)
 	else:
 		rotation_property.hide()
 
 	if not "visible" in base_hidden_properties:
-		visible_property.load_property(editor, objects, [
+		visible_property.load_property(editor, get_property_value(objects.keys()[0], "visible"), [
 			"visible",
 			TYPE_BOOL,
 			PropertyInfo.new(visible_property.hint_tooltip)
 		])
+		connect_signals(visible_property)
 	else:
 		visible_property.hide()
 
 	if not "enabled" in base_hidden_properties:
-		enabled_property.load_property(editor, objects, [
+		enabled_property.load_property(editor, get_property_value(objects.keys()[0], "enabled"), [
 			"enabled",
 			TYPE_BOOL,
 			PropertyInfo.new(enabled_property.hint_tooltip)
 		])
+		connect_signals(enabled_property)
 	else:
 		enabled_property.hide()
 	
@@ -73,11 +75,12 @@ func load_base_properties(_editor: Editor, _objects: Dictionary):
 			palette_count = placeable_item.get_palette_count()
 	
 	if palette_count > 0:
-		palette_property.load_property(editor, objects, [
+		palette_property.load_property(editor, get_property_value(objects.keys()[0], "palette"), [
 			"palette",
 			TYPE_INT,
 			PropertyInfo.new(palette_property.hint_tooltip, 1, 0, palette_count)
 		])
+		connect_signals(palette_property)
 	else:
 		palette_property.hide()
 
