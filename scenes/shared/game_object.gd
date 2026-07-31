@@ -81,13 +81,14 @@ func load_placeable_item():
 
 func _init():
 	property_ids = property_ids.duplicate()
-	_register_properties()
-	
-	load_placeable_item()
 	
 	set_process(true)
 	set_physics_process(true)
 
+func _ready():
+	_register_properties()
+	load_placeable_item()
+	set_object_data(object_data)
 
 func _process(delta: float) -> void:
 	update()
@@ -132,7 +133,8 @@ func _level_loaded() -> void:
 
 ## run when the game object enters the scene tree
 func _object_ready() -> void:
-	pass
+	if !is_on_ground_layer():
+		enabled = false
 
 
 ## Run every process frame in the LevelPlayer.
@@ -198,8 +200,7 @@ func register_property(id: int, property: String, default_value, editable: bool 
 
 func set_object_data(data: ObjectData) -> void:
 	object_data = data
-	
-	for id in property_ids.keys():
+	for id in object_data.properties:
 		set_property_by_id(id, object_data.properties[id], false)
 
 

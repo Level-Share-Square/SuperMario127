@@ -69,7 +69,7 @@ func on_copy():
 		
 		var objects: Array = []
 		for object in editor.selected_objects:
-			objects.append(object.object_data_ref.get_ref())
+			objects.append(object.object_data)
 		
 		OS.set_clipboard(JSON.print([LevelCodeSerializer.serialize_objects(objects), [camera.position.x, camera.position.y]]))
 		editor.item_actions.show_selection_actions()

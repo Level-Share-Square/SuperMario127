@@ -30,21 +30,18 @@ func create_object(object_data: ObjectData):
 	
 	var game_object = object_scene.instance()
 	game_object.mode = mode
-	game_object.object_data_ref = weakref(object_data)
+	game_object.object_data = object_data
 	game_object.level_layer_ref = weakref(owner)
 	game_object.palette = object_data.metadata.palette
 	game_object.position = object_data.metadata.position
 	
-	game_object._set_properties()
-	
 	add_child(game_object)
-	
-	object_data.property_ids = game_object.property_ids
+
 	
 	return game_object
 
 
 func erase_object(game_object) -> void:
-	var object_data: ObjectData = game_object.object_data_ref.get_ref()
+	var object_data: ObjectData = game_object.object_data_ref
 	game_object.queue_free()
 	layer_data.erase_object(object_data)

@@ -8,14 +8,14 @@ var last_parts := 1
 
 var color := Color(1, 0, 0)
 
-func _set_properties():
-	savable_properties = ["parts", "color"]
-	editable_properties = ["parts", "color"]
+#func _set_properties():
+#	savable_properties = ["parts", "color"]
+#	editable_properties = ["parts", "color"]
 
 	
-func _set_property_values():
-	set_property("parts", parts, 1)
-	set_property("color", color, 1)
+func _register_properties():
+	register_property(4, "parts", parts, 1)
+	register_property(5, "color", color, 1)
 
 func _unhandled_input(event: InputEvent) -> void:
 	parts_input_handler(event,self)
@@ -56,12 +56,15 @@ func _ready():
 
 	platform_area_collision_shape.shape = platform_area_collision_shape.shape.duplicate(true)
 	collision_shape.shape = collision_shape.shape.duplicate(true)
-	
-	if !enabled:
-		collision_shape.disabled = true
-		platform_area_collision_shape.disabled = true
 		
 	update_parts()
+
+func _object_ready():
+	._object_ready()
+	if !enabled:
+		print("im disabled!")
+		collision_shape.disabled = true
+		platform_area_collision_shape.disabled = true
 
 func update_parts():
 	sprite.rect_position.x = -(left_width + (part_width * parts) + right_width) / 2

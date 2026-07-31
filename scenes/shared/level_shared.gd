@@ -47,7 +47,7 @@ func load_layers(layer_data_list: Array):
 func get_layer_index(layer: LevelLayer):
 	return layers.find(layer)
 	
-func get_layer_at(index: int):
+func get_layer_at(index: int) -> LevelLayer:
 	return layers[index]
 
 func add_layer(layer_data = null, add_to_data: bool = false, at: int = layers.size()) -> LevelLayer:

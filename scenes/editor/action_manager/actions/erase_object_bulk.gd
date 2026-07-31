@@ -9,7 +9,7 @@ signal delete_undo(objects)
 func _do() -> void:
 	for selected_object in objects:
 		object = selected_object
-		object_datas.append(object.object_data_ref.get_ref())
+		object_datas.append(object.object_data)
 		if is_instance_valid(object):
 			remove_object()
 

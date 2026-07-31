@@ -80,19 +80,19 @@ signal shine_collected
 signal shine_dance_end
 
 
-func _set_properties() -> void:
-	savable_properties = ["activated", "red_coins_activate", "shine_shards_activate", "color", "mission_uuid", "required_purples", "activation_tag"]
-	editable_properties = ["mission_uuid", "activated", "red_coins_activate", "shine_shards_activate", "required_purples", "color", "activation_tag"]
+#func _set_properties() -> void:
+#	savable_properties = ["activated", "red_coins_activate", "shine_shards_activate", "color", "mission_uuid", "required_purples", "activation_tag"]
+#	editable_properties = ["mission_uuid", "activated", "red_coins_activate", "shine_shards_activate", "required_purples", "color", "activation_tag"]
 
 
-func _set_property_values() -> void:
-	set_property("activated", activated, true)
-	set_property("red_coins_activate", red_coins_activate, true)
-	set_property("shine_shards_activate", shine_shards_activate, true)
-	set_property("color", color, true)
-	set_property("mission_uuid", mission_uuid, true, "Mission UUID")
-	set_property("required_purples", required_purples, true)
-	set_property("activation_tag", activation_tag, true)
+func _register_properties() -> void:
+	register_property(4, "activated", activated, true)
+	register_property(5, "red_coins_activate", red_coins_activate, true)
+	register_property(6, "shine_shards_activate", shine_shards_activate, true)
+	register_property(7, "color", color, true)
+	register_property(8, "mission_uuid", mission_uuid, true)
+	register_property(9, "required_purples", required_purples, true)
+	register_property(10, "activation_tag", activation_tag, true)
 
 
 func _ready() -> void:

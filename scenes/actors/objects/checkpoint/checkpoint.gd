@@ -15,19 +15,21 @@ var spawn_offset := Vector2(0,0)
 var id = 0
 
 
-func _set_properties():
-	savable_properties = ["save_water_level", "spawn_offset", "save_switch_state", "id"]
-	editable_properties = ["save_water_level", "save_switch_state", "spawn_offset"]
+#func _set_properties():
+#	savable_properties = ["save_water_level", "spawn_offset", "save_switch_state", "id"]
+#	editable_properties = ["save_water_level", "save_switch_state", "spawn_offset"]
 
 
-func _set_property_values():
-	set_property("save_water_level", save_water_level, true)
-	set_property("spawn_offset", spawn_offset, true)
-	set_property("save_switch_state", save_switch_state, true)
+func _register_properties():
+	register_property(4, "save_water_level", save_water_level, true)
+	register_property(5, "spawn_offset", spawn_offset, true)
+	register_property(6, "save_switch_state", save_switch_state, true)
 
 
-func _object_ground_ready():
+func _object_ready():
 	display.visible = false
+	if enabled:
+		var _connect = use_area.connect("body_entered", self, "set_checkpoint")
 	
 #	CurrentLevelData.set_checkpoint_ids()
 #	id = level_object.get_ref().properties[9]
@@ -39,9 +41,6 @@ func _object_ground_ready():
 
 func _editor_ready():
 	display.visible = true
-
-func _object_ready():
-	var _connect = use_area.connect("body_entered", self, "set_checkpoint")
 
 func _object_process(delta: float):
 	update_ring_particles(delta)

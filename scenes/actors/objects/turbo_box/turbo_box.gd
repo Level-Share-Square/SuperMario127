@@ -17,7 +17,7 @@ var loaded_activated = true
 var respawn_timer = 0.0
 
 func _register_properties():
-	register_property(0, "activated", activated)
+	register_property(4, "activated", activated)
 
 
 func _object_ready():
@@ -77,16 +77,9 @@ func _on_fludd_activated():
 	loaded_activated = true
 	
 func create_nozzle(nozzle: String):
-	var object = ObjectData.new(
-		ObjectMetadata.new(
-			position + Vector2(0, 4),
-			20,
-			0
-		)
-	)
-	object.set_property_by_name("velocity", Vector2(0, -250))
-	object.set_property_by_name("nozzle_type", nozzle)
-	get_parent().create_object(object)
+	var object = create_object(position + Vector2(0, 4), 20, 0)
+	object.set_property("velocity", Vector2(0, -250))
+	object.set_property("nozzle_type", nozzle)
 		
 func _physics_process(delta):
 	if respawn_timer > 0:

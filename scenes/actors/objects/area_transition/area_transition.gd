@@ -15,25 +15,11 @@ var stops_camera: bool = true
 var is_idle: bool = true
 var entering: bool = false
 
-
-### PROPERTIES
-func _set_properties() -> void:
-	savable_properties = ["target_area", "tag", "teleport_mode", "max_pan_distance", "level_path", "vertical", "parts", "stops_camera"]
-	editable_properties = ["target_area", "tag", "teleport_mode", "max_pan_distance", "level_path", "vertical", "parts", "stops_camera"]
-
-
-func _set_property_values() -> void:
-	set_property("target_area", target_area)
-	set_property("tag", tag)
-	set_property("teleport_mode", teleport_mode, true)
-	set_property_menu("teleport_mode", ["option", 3, 0, ["Location", "Area", "Level"]])
-	set_bool_alias("teleportation_mode", "Remote", "Local")
-	set_property("max_pan_distance", max_pan_distance)
-	set_property("level_path", level_path)
-
-	set_property("vertical", vertical)
-	set_property("parts", parts)
-	set_property("stops_camera", stops_camera)
+func _register_properties():
+	._register_properties()
+	register_property(9, "vertical", vertical)
+	register_property(10, "parts", parts)
+	register_property(11, "stops_camera", stops_camera)
 
 
 ### AREA TRANSITION STUFF
@@ -59,12 +45,10 @@ func _editor_ready():
 func _object_ready():
 	._object_ready()
 	sprite.visible = false
-	
-func _object_parallax_ready():
-	._object_parallax_ready()
-	camera_stopper.set_size(Vector2.ZERO)
-	camera_stopper.monitorable = false
-	camera_stopper.visible = false
+	if !enabled:
+		camera_stopper.set_size(Vector2.ZERO)
+		camera_stopper.monitorable = false
+		camera_stopper.visible = false
 
 func _unhandled_input(event: InputEvent) -> void:
 	parts_input_handler(event,self)

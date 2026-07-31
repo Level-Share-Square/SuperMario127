@@ -452,9 +452,9 @@ static func get_new_area_code(header: AreaHeader, old_area: AreaDataOld) -> Area
 		var object_layer: int = object_layer_map[old_object.properties.pop_at(5)]
 		var position: Vector2 = old_object.properties.pop_at(0)
 		
-		if old_object.type_id == 14: # sign
-			if old_object.properties[5] == true: # is background
-				object_layer = 0
+#		if old_object.type_id == 14: # sign
+#			if old_object.properties[5] == true: # is background
+#				object_layer = 0
 		
 		var property_dictionary: Dictionary = {}
 		for i in old_object.properties.size():

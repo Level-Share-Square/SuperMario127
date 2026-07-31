@@ -5,6 +5,8 @@ var last_mouse_tile: Vector2
 
 
 func _click_left(_event: InputEvent, _world_pos: Vector2) -> void:
+	editor.get_hovered_objects()
+	
 	if editor.selected_objects.empty() && editor.hovered_objects.empty():
 		if Input.is_action_just_pressed("place"):
 			place_object(_world_pos)
@@ -33,14 +35,14 @@ func _click_left(_event: InputEvent, _world_pos: Vector2) -> void:
 		
 #sorry lmao
 func select(object: GameObject):
-	editor.selected_objects = {}
-	editor.selected_objects[object] = object.name
+	editor.selected_objects = []
+	editor.selected_objects.append(object)
 	action(editor.selected_objects)
 	
-func action(objects: Dictionary = {}) -> void:
+func action(objects: Array = []) -> void:
 	var action := SelectObjectsAction.new()
 	action.editor = editor
-#	action.selected_objects = objects
+	action.selected_objects = editor.selected_objects
 	editor.action_manager.commit_action(action)
 
 func place_object(pos: Vector2):

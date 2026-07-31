@@ -35,17 +35,14 @@ var on_wall := false
 export(Array, Texture) var palette_textures
 export(Array, Texture) var palette_textures_2
 
-func _set_properties():
-	savable_properties = ["text", "open_menu", "on_wall"]
-	editable_properties = ["text", "open_menu", "on_wall"]
+#func _set_properties():
+#	savable_properties = ["text", "open_menu", "on_wall"]
+#	editable_properties = ["text", "open_menu", "on_wall"]
 	
-func _set_property_values():
-	set_property("text", text, true)
-	set_property("open_menu", open_menu, true)
-	set_property("on_wall", on_wall, true)
-
-func _object_parallax_ready():
-	pass
+func _register_properties():
+	register_property(4, "text", text, true)
+	register_property(5, "open_menu", open_menu, true)
+	register_property(6, "on_wall", on_wall, true)
 
 func _ready():
 	if is_preview:

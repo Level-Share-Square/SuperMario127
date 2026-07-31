@@ -116,3 +116,8 @@ func switch_scenes():
 func get_shared_node() -> LevelShared:
 	return get_node(shared_path) as LevelShared
 	
+func get_hovered_objects():
+	hovered_objects.clear()
+	for object in get_shared_node().get_layer_at(layer).object_manager.get_children():
+		if object.is_object_hovered():
+			hovered_objects.get_or_add(object.name, object)

@@ -15,12 +15,12 @@ var id : int = 0
 var collected := false
 var is_blue := false
 
-func _set_properties():
-	savable_properties = ["id"]
-	editable_properties = []
+#func _set_properties():
+#	savable_properties = ["id"]
+#	editable_properties = []
 
-func _set_property_values():
-	set_property("id", id, true, "ID")
+func _register_properties():
+	register_property(4, "id", id, false)
 
 func _ready() -> void:
 #	if layer == middle:
@@ -37,7 +37,7 @@ func _ready() -> void:
 func on_place():
 	pass
 #	CurrentLevelData.set_star_coin_ids()
-#	id = object_data_ref.get_ref().properties[6]
+#	id = object_data.properties[6]
 #	set_property("id", id)
 
 func update_color():

@@ -13,10 +13,10 @@ func load_base_properties(_editor: Editor, _objects: Dictionary):
 	var layer_property: PropertyEditor = $"%Layer"
 
 	var base_hidden_properties: PoolStringArray = []
-	for game_object in _objects.keys():
-		for hidden_property in game_object.base_hidden_properties:
-			if not base_hidden_properties.has(hidden_property):
-				base_hidden_properties.append(hidden_property)
+#	for game_object in _objects.keys():
+#		for hidden_property in game_object.base_hidden_properties:
+#			if not base_hidden_properties.has(hidden_property):
+#				base_hidden_properties.append(hidden_property)
 	
 	if not "position" in base_hidden_properties:
 		position_property.load_property(editor, get_property_value(objects.keys()[0], "position"), [

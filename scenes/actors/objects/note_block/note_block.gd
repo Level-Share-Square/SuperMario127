@@ -26,13 +26,13 @@ var parts := 1
 var last_parts := 1
 
 
-func _set_properties():
-	savable_properties = ["parts", "strong_bounce_power"]
-	editable_properties = ["parts", "strong_bounce_power"]
+#func _set_properties():
+#	savable_properties = ["parts", "strong_bounce_power"]
+#	editable_properties = ["parts", "strong_bounce_power"]
 	
-func _set_property_values():
-	set_property("parts", parts, 1)
-	set_property("strong_bounce_power", strong_bounce_power, 1)
+func _register_properties():
+	register_property(4, "parts", parts, true)
+	register_property(5, "strong_bounce_power", strong_bounce_power, true)
 	
 func _ready():
 	bounce_collision_shape.shape = bounce_collision_shape.shape.duplicate(true)
@@ -41,15 +41,13 @@ func _ready():
 		
 	update_parts()
 
-func _object_disabled_ready():
-	._object_disabled_ready()
-	bottom_collision_shape.disabled = true
-	bounce_collision_shape.disabled = true
-	platform_area_shape.disabled = true
-	
 func _object_ready():
 	._object_ready()
-	area_2d.connect("body_entered", self, "bounce")
+	if enabled:
+		area_2d.connect("body_entered", self, "bounce")
+	bottom_collision_shape.disabled = !enabled
+	bounce_collision_shape.disabled = !enabled
+	platform_area_shape.disabled = !enabled
 	
 func _editor_ready():
 	._editor_ready()

@@ -10,12 +10,12 @@ var current_scene
 
 var activated = false
 
-func _set_properties():
-	savable_properties = ["activated"]
-	editable_properties = ["activated"]
+#func _set_properties():
+#	savable_properties = ["activated"]
+#	editable_properties = ["activated"]
 
-func _set_property_values():
-	set_property("activated", activated, true)
+func _register_properties():
+	register_property(4, "activated", activated, true)
 
 func _ready() -> void:
 	current_scene = get_tree().get_current_scene()
@@ -31,15 +31,9 @@ func _ready() -> void:
 
 func _object_ready():
 	._object_ready()
-	p.visible = true
-	collision_shape.disabled = false
-	area_collision_shape.disabled = false
-	
-func _object_disabled_ready():
-	._object_disabled_ready()
-	p.visible = false
-	collision_shape.disabled = true
-	area_collision_shape.disabled = true
+	p.visible = enabled
+	collision_shape.disabled = !enabled
+	area_collision_shape.disabled = !enabled
 
 func _physics_process(delta):
 	if mode == 1 and activated and enabled:

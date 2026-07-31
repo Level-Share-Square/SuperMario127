@@ -13,12 +13,12 @@ onready var current_scene = get_tree().get_current_scene()
 
 var pressed_time := 20.0
 
-func _set_properties():
-	savable_properties = ["pressed_time"]
-	editable_properties = ["pressed_time"]
+#func _set_properties():
+#	savable_properties = ["pressed_time"]
+#	editable_properties = ["pressed_time"]
 
-func _set_property_values():
-	set_property("pressed_time", pressed_time, true)
+func _register_properties():
+	register_property(4, "pressed_time", pressed_time, true)
 
 func _ready():
 	rotation = 0
