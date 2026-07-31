@@ -25,14 +25,9 @@ var physics_frame := true
 var physics_run := false
 
 
-func _set_properties():
-	savable_properties = ["physics", "velocity"]
-	editable_properties = ["physics", "velocity"]
-
-
 func _set_property_values():
-	set_property("physics", physics, true)
-	set_property("velocity", velocity, true)
+	register_property(0, "physics", physics)
+	register_property(1, "velocity", velocity)
 
 
 func collect(body, is_shell = false):
@@ -55,7 +50,7 @@ func collect(body, is_shell = false):
 		particles.connect("animation_finished", self, "queue_free")
 
 
-func _object_ground_ready():
+func _object_ready():
 	var _connect = area.connect("body_entered", self, "collect")
 	
 	for body in area.get_overlapping_bodies():
@@ -70,28 +65,33 @@ func _object_ground_ready():
 		despawn_coin()
 
 
-var prev_activate_shape = false
-func _object_ground_process(delta):
-	# Toggle the collection shape (perf)
-	var root = get_tree().current_scene
-	var activate_shape = false
-	if !collected:
-		var can_collect_coins = root.can_collect_coins
-		for entity in can_collect_coins:
-			if entity == null:
-				can_collect_coins.erase(entity)
-				continue
-			
-			var entity_global_position = entity.global_transform.get_origin()
-			if (entity_global_position - kinematic_body.global_position).length_squared() <= 200 + 472.25:
-				activate_shape = true
-		
-	if activate_shape != prev_activate_shape:
-		shape.disabled = !activate_shape
-		prev_activate_shape = activate_shape
-	
+func _object_process(delta):
 	if blink:
 		visible = !visible
+
+
+var prev_activate_shape = false
+func _object_physics_process(delta):
+	if not is_on_ground_layer() or not enabled:
+		return
+	
+	if !do_physics() or !visibility_enabler.is_on_screen():
+		return
+	
+	water_detector.monitoring = do_physics()
+	
+	if collision_shape:
+		collision_shape.disabled = !do_physics()
+	
+	velocity = calc_physics(false, delta)
+	
+	kinematic_body.move_and_slide_with_snap(velocity, Vector2(0, 0), Vector2.UP, false, 8, deg2rad(56))
+	
+	if velocity.y > 0:
+		toggle_terrain_collision(true)
+	
+	if not visibility_enabler.global_position.is_equal_approx(kinematic_body.global_position):
+		visibility_enabler.global_position = kinematic_body.global_position
 
 
 func horizontal_cast():
@@ -111,27 +111,6 @@ func despawn_coin():
 	blink = true # Make the coin flash before disappearing
 	yield(get_tree().create_timer(1.0, false), "timeout")
 	queue_free() # die
-
-
-func _object_ground_physics_process(delta):
-	# Everything else here is irrelevant for edit mode
-	if !do_physics() or !visibility_enabler.is_on_screen():
-		return
-	
-	water_detector.monitoring = do_physics()
-	
-	if collision_shape:
-		collision_shape.disabled = !do_physics()
-	
-	velocity = calc_physics(false, delta)
-	
-	kinematic_body.move_and_slide_with_snap(velocity, Vector2(0, 0), Vector2.UP, false, 8, deg2rad(56))
-	
-	if velocity.y > 0:
-		toggle_terrain_collision(true)
-	
-	if not visibility_enabler.global_position.is_equal_approx(kinematic_body.global_position):
-		visibility_enabler.global_position = kinematic_body.global_position
 
 
 func calc_physics(interp: bool, delta) -> Vector2:

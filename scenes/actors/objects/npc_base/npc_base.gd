@@ -38,32 +38,25 @@ var working_speed: float = 0
 var dialogue_trigger: Node
 
 
-func _set_properties():
-	savable_properties = ["curve", "custom_path", "move_type", "walk_speed", "physics_enabled", "idle_expression", "idle_action", "speaking_expression", "speaking_action", "path_reference", "tag_link", "required_shines"]
-	editable_properties = ["idle_expression", "idle_action", "speaking_expression", "speaking_action", "tag_link", "curve", "walk_speed", "move_type", "physics_enabled", "required_shines", "path_reference"]
-
-
-func _set_property_values():
-	set_property("curve", curve, true)
-	set_property("custom_path", curve, true)
-	set_property("move_type", move_type, true)
-	set_bool_alias("move_type", "Loop", "Reset")
-	set_property("walk_speed", walk_speed, true)
-	set_property("physics_enabled", physics_enabled, true)
-	
-	set_property("idle_expression", idle_expression, true)
+func _register_properties():
+	register_property(5, "idle_expression", idle_expression, true)
 	set_property_menu("idle_expression", ["option", expression_map.size(), 0, expression_map])
-	set_property("idle_action", idle_action, true)
+	register_property(6, "idle_action", idle_action, true)
 	set_property_menu("idle_action", ["option", action_map.size(), 0, action_map])
 	
-	set_property("speaking_expression", speaking_expression, true)
+	register_property(7, "speaking_expression", speaking_expression, true)
 	set_property_menu("speaking_expression", ["option", expression_map.size(), 0, expression_map])
-	set_property("speaking_action", speaking_action, true)
+	register_property(8, "speaking_action", speaking_action, true)
 	set_property_menu("speaking_action", ["option", action_map.size(), 0, action_map])
 	
-	set_property("path_reference", path_reference, true)
-	set_property("tag_link", tag_link, true)
-	set_property("required_shines", required_shines, true)
+	register_property(10, "tag_link", tag_link, true)
+	register_property(0, "curve", curve, true)
+	register_property(3, "walk_speed", walk_speed, true)
+	register_property(2, "move_type", move_type, true)
+	set_bool_alias("move_type", "Loop", "Reset")
+	register_property(4, "physics_enabled", physics_enabled, true)
+	register_property(11, "required_shines", required_shines, true)
+	register_property(9, "path_reference", path_reference, true)
 
 
 func get_dialogue_from_tag(tag: String) -> Node:

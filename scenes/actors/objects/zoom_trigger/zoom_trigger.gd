@@ -10,15 +10,10 @@ var zoom_time : float = 1.0
 var parts := 1
 
 
-func _set_properties():
-	savable_properties = ["target_zoom", "zoom_time", "parts"]
-	editable_properties = ["target_zoom", "zoom_time", "parts"]
-
-
 func _set_property_values():
-	set_property("target_zoom", target_zoom)
-	set_property("zoom_time", zoom_time, true, "Zoom Time")
-	set_property("parts", parts)
+	register_property(0, "target_zoom", target_zoom)
+	register_property(1, "zoom_time", zoom_time)
+	register_property(2, "parts", parts)
 
 
 func _unhandled_input(event: InputEvent) -> void:

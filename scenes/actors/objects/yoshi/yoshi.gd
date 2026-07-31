@@ -1,7 +1,7 @@
 extends NPCBase
 
 
-const rainbow_animation_speed := 1500
+const RAINBOW_ANIM_SPEED := 1500
 
 onready var visibility_notifier = $"%VisibilityNotifier2D"
 
@@ -14,25 +14,20 @@ var shoe_color := Color.orangered
 var rainbow: bool
 
 
-func _set_properties():
-	savable_properties = ["curve", "custom_path", "move_type", "walk_speed", "physics_enabled", "idle_expression", "idle_action", "speaking_expression", "speaking_action", "path_reference", "tag_link", "required_shines", "skin_color", "shoe_color", "rainbow"]
-	editable_properties = ["idle_expression", "idle_action", "speaking_expression", "speaking_action", "tag_link", "curve", "walk_speed", "move_type", "physics_enabled", "required_shines", "path_reference", "skin_color", "shoe_color", "rainbow"]
-
-
-func _set_property_values():
-	._set_property_values()
+func _register_properites():
+	._register_properites()
 	
-	set_property("skin_color", skin_color, true)
-	set_property("shoe_color", shoe_color, true)
-	set_property("rainbow", rainbow, true)
+	register_property(12, "skin_color", skin_color, true)
+	register_property(13, "shoe_color", shoe_color, true)
+	register_property(14, "rainbow", rainbow, true)
 
 
 func _process(delta):
 	if not visibility_notifier.is_on_screen() and not is_preview: return
 	
 	if rainbow:
-		skin_color.h = float(OS.get_ticks_msec() % rainbow_animation_speed) / rainbow_animation_speed
-		shoe_color.h = float(OS.get_ticks_msec() % rainbow_animation_speed) / rainbow_animation_speed
+		skin_color.h = float(OS.get_ticks_msec() % RAINBOW_ANIM_SPEED) / RAINBOW_ANIM_SPEED
+		shoe_color.h = float(OS.get_ticks_msec() % RAINBOW_ANIM_SPEED) / RAINBOW_ANIM_SPEED
 	
 	head_color.modulate = skin_color
 	body_color1.modulate = skin_color

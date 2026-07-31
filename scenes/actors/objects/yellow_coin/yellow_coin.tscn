@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scenes/actors/objects/yellow_coin/KinematicBody2D.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/objects/yellow_coin/yellow.tres" type="SpriteFrames" id=2]
@@ -29,9 +29,6 @@ radius = 20.0
 
 [sub_resource type="CircleShape2D" id=2]
 resource_local_to_scene = true
-
-[sub_resource type="CircleShape2D" id=3]
-radius = 9.0
 
 [node name="Coin" type="Node2D"]
 script = ExtResource( 3 )
@@ -78,11 +75,3 @@ position = Vector2( 0, 8 )
 rect = Rect2( -256, -256, 512, 512 )
 process_parent = true
 physics_process_parent = true
-
-[node name="EditorHitbox" type="Area2D" parent="."]
-collision_mask = 0
-monitoring = false
-monitorable = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="EditorHitbox"]
-shape = SubResource( 3 )
