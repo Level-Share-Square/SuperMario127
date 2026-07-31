@@ -68,7 +68,7 @@ func on_mission_selected(mission: MissionData):
 	connect_signals(spawn_area_id)
 	
 	spawn_teleporter_tag.load_property(editor, mission["spawn_teleporter_tag"], [
-		"shine_name",
+		"spawn_teleporter_tag",
 		TYPE_STRING,
 		PropertyInfo.new(spawn_teleporter_tag.hint_tooltip)
 	])
