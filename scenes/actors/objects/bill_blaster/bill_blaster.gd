@@ -15,36 +15,36 @@ var color := Color(0, 1, 0)
 var invincible := false
 var force_direction := 0
 
-func _set_properties():
-	savable_properties = ["chase", "speed", "color", "wait_time", "invincible", "force_direction", "offset"]
-	editable_properties = ["chase", "speed", "offset", "color", "wait_time", "invincible", "force_direction"]
-	
-func _set_property_values():
-	set_property("chase", chase, true)
-	set_property("speed", speed, true)
-	set_property("color", color, true)
-	set_property("wait_time", wait_time, true)
-	set_property("invincible", invincible, true)
-	set_property("force_direction", force_direction, true)
-	set_property_menu("force_direction", ["option", 3, -1, ['Face Player', 'Right', 'Left']])
-	set_property("offset", offset, true)
+
+func _register_properties():
+	register_property(0, "chase", chase)
+	register_property(1, "speed", speed)
+	register_property(6, "offset", offset)
+	register_property(2, "color", color)
+	register_property(3, "wait_time", wait_time)
+	register_property(4, "invincible", invincible)
+	register_property(5, "force_direction", force_direction)
+#	set_property_menu("force_direction", ["option", 3, -1, ['Face Player', 'Right', 'Left']])
+
 
 func _ready():
 	add_to_group("blasters")
-	spawn_timer = wait_time+offset
+	spawn_timer = wait_time + offset
 	sprite.frame = 3
 
-func _object_disabled_ready():
-	._object_disabled_ready()
+
+func _object_ready():
 	collision_shape.disabled = !enabled
 
-func _process(delta):
+
+func _object_process(delta):
 	if sprite.frame == 1 or sprite.frame == 2:
 		sprite.scale = sprite.scale.linear_interpolate(Vector2(1.75, 1.75), delta * 12)
 	else:
 		sprite.scale = sprite.scale.linear_interpolate(Vector2(1, 1), delta * 7)
 
-func _physics_process(delta):
+
+func _object_physics_process(delta):
 	if invincible:
 		color.h = float(wrapi(OS.get_ticks_msec(), 0, 500)) / 500
 	#rotation_degrees = 0
@@ -96,23 +96,17 @@ func _physics_process(delta):
 		elif spawn_timer <= 0:
 			spawn_timer = wait_time
 
-func create_new_bill(chase, speed, color, facing_direction, invincible) -> Node:
-	var object := ObjectData.new(ObjectMetadata.new(
-		transform.xform(Vector2(16 * facing_direction, 0)),
-		25,
-		0
-	))
-	object.set_property_by_name("scale", scale)
-	object.set_property_by_name("rotation_degrees", rotation_degrees)
-	object.set_property_by_name("enabled", enabled)
-	object.set_property_by_name("chase", chase)
-	object.set_property_by_name("speed", speed)
-	object.set_property_by_name("color", color)
-	object.set_property_by_name("facing_direction", facing_direction)
-	object.set_property_by_name("invincible", invincible)
-	return get_parent().create_object(object)
 
-func is_middle(check: bool):
-	.is_middle(check)
-	collision_shape.disabled = !check
+func create_new_bill(chase, speed, color, facing_direction, invincible) -> Node:
+	var object: GameObject = create_object(transform.xform(Vector2(16 * facing_direction, 0)), 25, 0)
 	
+	object.set_property("scale", scale)
+	object.set_property("rotation_degrees", rotation_degrees)
+	object.set_property("enabled", enabled)
+	object.set_property("chase", chase)
+	object.set_property("speed", speed)
+	object.set_property("color", color)
+	object.set_property("facing_direction", facing_direction)
+	object.set_property("invincible", invincible)
+	
+	return object

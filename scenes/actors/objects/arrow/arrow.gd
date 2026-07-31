@@ -1,6 +1,5 @@
 extends GameObject
 
-var show_behind_player = true
 var color = Color(1, 0, 0)
 var moves = false
 
@@ -14,26 +13,18 @@ onready var sprite = $Sprite
 onready var recolorable = $Recolorable
 onready var animationplayer = $AnimationPlayer
 
-func _set_properties():
-	savable_properties = ["show_behind_player", "color", "moves", "rainbow", "outline_color"]
-	editable_properties = ["show_behind_player", "color", "moves", "rainbow", "outline_color"]
 
-func _set_property_values(): 
-	set_property("show_behind_player", show_behind_player, true)
-	set_property("color", color, true)
-	set_property("moves", moves, true)
-	set_property("rainbow", rainbow, true)
-	set_property("outline_color", outline_color, true)
+func _register_properties(): 
+	register_property(1, "color", color)
+	register_property(2, "moves", moves)
+	register_property(3, "rainbow", rainbow)
+	register_property(4, "outline_color", outline_color)
+
 
 func _ready():
 	preview_position = Vector2(70, 85)
 	if is_preview:
 		return
-	
-	if show_behind_player: 
-		z_index = -2
-	else:
-		z_index = 2
 
 func _process(delta):
 	if rainbow:

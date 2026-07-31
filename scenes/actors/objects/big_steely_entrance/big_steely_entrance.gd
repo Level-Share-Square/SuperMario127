@@ -7,28 +7,27 @@ var steely_despawn_timer := 20.0
 
 const STEELY_SPAWN_LIMIT = 16
 
-onready var objects = get_parent()
-onready var spawn_timer = $SpawnTimer
+onready var objects: ObjectManager = get_parent()
+onready var spawn_timer: Timer = $SpawnTimer
+onready var overlap_checker: Area2D = $OverlapChecker
 
-func _set_properties():
-	savable_properties = ["spawn_interval", "steely_despawn_timer"]
-	editable_properties = ["spawn_interval", "steely_despawn_timer"]
-	
+
 func _set_property_values():
-	set_property("spawn_interval", spawn_interval, 1)
-	set_property("steely_despawn_timer", steely_despawn_timer)
+	register_property(0, "spawn_interval", spawn_interval)
+	register_property(1, "steely_despawn_timer", steely_despawn_timer)
+
 
 func _object_ready():
-	spawn_timer.wait_time = spawn_interval
-	spawn_timer.start()
-	spawn_timer.connect("timeout", self, "_on_spawn_timer_timeout")
+	if enabled:
+		spawn_timer.wait_time = spawn_interval
+		spawn_timer.start()
+		spawn_timer.connect("timeout", self, "_on_spawn_timer_timeout")
+
 
 func _on_spawn_timer_timeout():
-	var no_steelies_in_front = check_for_blocking_elements()
-
-	if no_steelies_in_front and steely_nodes.size() < STEELY_SPAWN_LIMIT and enabled: 
+	if overlap_checker.has_over and steely_nodes.size() < STEELY_SPAWN_LIMIT and enabled: 
 		var steely_node = create_new_steely_object()
-
+		
 		if steely_despawn_timer > 0:
 			#needs to be called deffered since the steely isn't even in the tree yet
 			steely_node.call_deferred("setup_despawn_timer", steely_despawn_timer) 
@@ -36,13 +35,6 @@ func _on_spawn_timer_timeout():
 		steely_node.connect("tree_exited", self, "_remove_steely")
 		steely_nodes.append(steely_node)
 
-func check_for_blocking_elements() -> bool:
-	#use the collision shape to query the space state to check for collisions with steelies, if there's any steelies in the way don't spawn a new one
-	var shape_query_parameters = Physics2DShapeQueryParameters.new()
-	shape_query_parameters.set_shape($CollisionShape2D.shape)
-	shape_query_parameters.transform = transform
-	shape_query_parameters.collision_layer = 1 + 2 + 32 #layers for terrain, players, and big steelies
-	return get_world_2d().direct_space_state.intersect_shape(shape_query_parameters).empty()
 
 func create_new_steely_object() -> Node:
 	var object := ObjectData.new(ObjectMetadata.new(
@@ -52,6 +44,7 @@ func create_new_steely_object() -> Node:
 	))
 
 	return get_parent().create_object(object)
+
 
 func _remove_steely():
 	for i in range(steely_nodes.size()):

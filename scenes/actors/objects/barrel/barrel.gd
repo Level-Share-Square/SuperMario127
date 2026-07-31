@@ -35,16 +35,13 @@ var physics = true
 var autoroll = false
 var roll_buffer: float = ROLL_BUFFER_DURATION
 
-func _set_properties():
-	savable_properties = ["color", "max_speed", "physics", "autoroll"]
-	editable_properties = ["color", "max_speed", "physics", "autoroll"]
 
-func _set_property_values():
-	set_property("color", color, true)
-	set_property("max_speed", max_speed, true)
-	set_property("physics", physics, true)
-	set_property("autoroll", autoroll, true)
-	
+func _register_properties():
+	register_property(0, "color", color)
+	register_property(1, "max_speed", max_speed)
+	register_property(2, "physics", physics)
+	register_property(3, "autoroll", autoroll)
+
 
 func _ready() -> void:
 	CurrentLevelData.enemies_instanced += 1
@@ -61,6 +58,7 @@ func _ready() -> void:
 		is_rolling = true
 		sprite.play("rolling")
 		sprite_color.play("rolling")
+
 
 func _object_ground_physics_process(delta):
 	if roll_buffer >= 0:
@@ -83,13 +81,16 @@ func _object_ground_physics_process(delta):
 			rolling(delta)
 		else:
 			stationary(delta)
-	
+
+
 func _object_disabled_ready():
 	collision_shape.disabled = true
-		
+
+
 func stationary(delta):
 	velocity = body.move_and_slide(velocity, Vector2.UP, true)
-		
+
+
 func rolling(delta):
 	velocity = body.move_and_slide_with_snap(velocity, snap, Vector2.UP)
 	
@@ -104,13 +105,15 @@ func rolling(delta):
 				roll(body)
 
 	velocity.x = move_toward(velocity.x, 0, DECEL)
-		
+
+
 func move_body(entered_body):
 	velocity.x += PUSH_VEL * sign(entered_body.velocity.x)
 	velocity.x = clamp(velocity.x, -max_speed, max_speed)
 	sprite.scale = Vector2(SQUISH_STRENGTH, SQUISH_STRENGTH)
 	sprite_color.scale = Vector2(SQUISH_STRENGTH, SQUISH_STRENGTH)
-		
+
+
 func on_body_entered(entered_body):
 	if is_rolling:
 		return
@@ -119,6 +122,7 @@ func on_body_entered(entered_body):
 	if "velocity" in entered_body and entered_body != self:
 		if !is_zero_approx(entered_body.velocity.x):
 			roll(entered_body)
+
 
 func roll(entered_body):
 	if roll_buffer > 0:
@@ -143,12 +147,13 @@ func roll(entered_body):
 	hop_sound.play()
 	
 	roll_buffer = ROLL_BUFFER_DURATION
-	
+
 
 func on_water_entered(area):
 	gravity_scale = 0.3
 	gravity = CurrentLevelData.current_area.header.gravity * gravity_scale * 100
-	
+
+
 func on_water_exited(area):
 	gravity_scale = 1
 	gravity = CurrentLevelData.current_area.header.gravity * gravity_scale * 100

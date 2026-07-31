@@ -1,14 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/actors/objects/big_bottle/big_bottle.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/objects/big_bottle/big_bottle.png" type="Texture" id=2]
 [ext_resource path="res://scenes/actors/objects/hover_nozzle/sound.wav" type="AudioStream" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 9.5, 16 )
-
-[sub_resource type="CircleShape2D" id=2]
-radius = 16.0
+extents = Vector2( 8.5, 16 )
 
 [node name="BigBottle" type="Node2D"]
 script = ExtResource( 1 )
@@ -22,7 +19,7 @@ bus = "Sounds"
 [node name="Sprite" type="Sprite" parent="."]
 z_index = -1
 texture = ExtResource( 2 )
-offset = Vector2( 0, 1 )
+offset = Vector2( -0.5, 1 )
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 8
@@ -31,6 +28,3 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2( -0.5, 0 )
 shape = SubResource( 1 )
-
-[node name="EditorCircle" type="CollisionShape2D" parent="."]
-shape = SubResource( 2 )

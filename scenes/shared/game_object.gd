@@ -11,63 +11,59 @@ enum BasePropertyIDs {
 	VISIBLE = 3
 }
 
-var bg_modulate := Color(0.54, 0.54, 0.54, modulate.a)
-var selected_modulate := Color(0.7, 0.7, 1.2, modulate.a)
-var hover_modulate := Color(modulate.r, modulate.g, modulate.b, 0.5)
-var translucent_modulate := Color(0, 0, 0, 0.25)
-var default_modulate := Color(1, 1, 1, modulate.a)
-export var generate_editor_hitbox: bool = false
+const EDITOR_INVISIBLE_ALPHA: float = 0.25
+const EDITOR_RECT_DRAW_COLOR: Color = Color(0.039216, 0.196078, 0.815686, 0.705882)
 
-var global := {}
-var editor_aliases := {}
+
+export var editor_rect: Rect2 = Rect2(-8, -8, 16, 16)
+export var preview_position := Vector2(72, 92)
 
 var mode: int = 0
-var object_data_ref: WeakRef = null
+var object_data: ObjectData = null
 var level_layer_ref: WeakRef = null
 
-var hovered: bool = false
 var selected: bool = false
 var translucent: bool = false
 
 var loaded: bool = false
-
-var in_front: bool = false
-
-var enabled: bool = true
-var preview_position := Vector2(72, 92)
-var palette: int = 0
 var palettes: int = 0
 
-var z_layer: int = 0
+var in_front: bool = false
+var enabled: bool = true
+var palette: int = 0
 
 # true if creating a GameObject for the object settings preview
 var is_preview : bool = false
 
 var visibility: bool = true # for modulate
 
-var base_savable_properties: PoolStringArray = ["position", "scale", "rotation_degrees", "enabled", "visible"]
-var base_hidden_properties: PoolStringArray = []
-var savable_properties: PoolStringArray = []
-
-var base_editable_properties: PoolStringArray = ["enabled", "visible", "rotation_degrees", "scale", "position"]
-var editable_properties: PoolStringArray = []
-
 var property_info: PoolStringArray = []
 
 var property_value_to_name := {}
 var property_value_menus := {}
 
-onready var editor_hitbox: Area2D = get_node_or_null("EditorHitbox")
-
-export var property_ids: Dictionary = {
-	"in_front": BasePropertyIDs.IN_FRONT,
-	"palette": BasePropertyIDs.PALETTE,
-	"position": BasePropertyIDs.POSITION,
-	"scale": BasePropertyIDs.SCALE,
-	"rotation_degrees": BasePropertyIDs.ROTATION,
-	"enabled": BasePropertyIDs.ENABLED,
-	"visible": BasePropertyIDs.VISIBLE
+var property_ids: Dictionary = {
+	BasePropertyIDs.IN_FRONT: "in_front",
+	BasePropertyIDs.PALETTE: "palette",
+	BasePropertyIDs.POSITION: "position",
+	BasePropertyIDs.SCALE: "scale",
+	BasePropertyIDs.ROTATION: "rotation_degrees",
+	BasePropertyIDs.ENABLED: "enabled",
+	BasePropertyIDs.VISIBLE: "visible"
 }
+
+var property_defaults: Dictionary = {
+	"in_front": false,
+	"palette": 0,
+	"scale": Vector2.ONE,
+	"rotation_degrees": 0,
+	"enabled": true,
+	"visible": true
+}
+
+var editable_properties: PoolStringArray = []
+
+onready var editor_hitbox: Area2D = get_node_or_null("EditorHitbox")
 
 
 signal property_changed(key, value)
@@ -85,146 +81,57 @@ func load_placeable_item():
 
 func _init():
 	property_ids = property_ids.duplicate()
+	_register_properties()
+	
+	load_placeable_item()
+	
+	set_process(true)
+	set_physics_process(true)
+
+
+func _process(delta: float) -> void:
+	update()
 
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_READY:
-		match mode:
-			LevelPlayer.mode:
-				if is_on_ground_layer():
-		#			call_deferred("_object_ground_ready")
-					_object_ground_ready()
-				else:
-		#			call_deferred("_object_parallax_ready")
-					_object_parallax_ready()
-			Editor.mode:
-		#		call_deferred("_editor_ready")
-				_editor_ready()
-
-
-func _ready():
-	load_placeable_item()
-	
-	set_object_data_property_metadata()
-	for property in savable_properties:
-		property_ids.get_or_add(property, property_ids.values().size() - 3)
-	
-	object_data_ref.get_ref().emit_signal("populated_ids")
-	if get_tree().current_scene.mode == 1:
-		if generate_editor_hitbox:
-			if is_instance_valid(editor_hitbox):
-				editor_hitbox.queue_free()
-			
-			editor_hitbox = Area2D.new()
-			editor_hitbox.name = "EditorHitbox"
-			editor_hitbox.monitorable = false
-			editor_hitbox.monitoring = false
-			add_child(editor_hitbox)
-			
-			var polygons: Array = []
-			create_collision_polygons_from_tree(self, Transform2D.IDENTITY, polygons)
-			
-			for polygon in polygons:
-				editor_hitbox.add_child(polygon)
-			
-		elif not is_instance_valid(editor_hitbox):
-			editor_hitbox = Area2D.new()
-			editor_hitbox.name = "EditorHitbox"
-			editor_hitbox.monitorable = false
-			editor_hitbox.monitoring = true
-			add_child(editor_hitbox)
-			
-			var collision_shape = CollisionShape2D.new()
-			collision_shape.shape = RectangleShape2D.new()
-			editor_hitbox.add_child(collision_shape)
-		
-#		if is_instance_valid(object_data_ref):
-#			visibility = object_data_ref.get_ref().properties[4]
-		
-		editor_hitbox.collision_mask = 2
-		var editor = get_tree().current_scene
-		editor_hitbox.connect("mouse_entered", editor, "object_hovered", [self])
-		editor_hitbox.connect("mouse_exited", editor, "object_unhovered", [self])
-	else:
-		if is_instance_valid(editor_hitbox):
-			editor_hitbox.queue_free()
-			
-			
-	set_object_properties_from_data()
-	
-#	match mode:
-#		LevelPlayer.mode:
-##			call_deferred("_object_ready")
-#			_object_ready()
-#
-#			if not enabled:
-##				call_deferred("_object_disabled_ready")
-#				_object_disabled_ready()
-#				return
-#
-#			if is_on_ground_layer():
-##				call_deferred("_object_ground_ready")
-#				_object_ground_ready()
-#			else:
-##				call_deferred("_object_parallax_ready")
-#				_object_parallax_ready()
-#		Editor.mode:
-##			call_deferred("_editor_ready")
-#			_editor_ready()
-	loaded = true
-
-func _process(delta):
-	match mode:
-		LevelPlayer.mode:
-#			call_deferred("_object_process", delta)
+		if mode == LevelPlayer.mode:
+			_object_ready()
+		elif mode == Editor.mode:
+			_editor_ready()
+	elif what == NOTIFICATION_PROCESS:
+		var delta: float = get_process_delta_time()
+		if mode == LevelPlayer.mode:
 			_object_process(delta)
-
-			if not enabled:
-#				call_deferred("_object_disabled_process", delta)
-				_object_disabled_process(delta)
-				return
-
-			if is_on_ground_layer():
-#				call_deferred("_object_ground_process", delta)
-				_object_ground_process(delta)
-			else:
-#				call_deferred("_object_parallax_process", delta)
-				_object_parallax_process(delta)
-		Editor.mode:
-#			call_deferred("_editor_process", delta)
+		elif mode == Editor.mode:
 			_editor_process(delta)
-
-
-func _physics_process(delta):
-	if mode == LevelPlayer.mode:
-		_object_physics_process(delta)
-		
-		if not enabled:
-			_object_disabled_physics_process(delta)
-			return
-
-		if is_on_ground_layer():
-			_object_ground_physics_process(delta)
-		else:
-			_object_parallax_physics_process(delta)
-	elif Editor.mode:
-		_editor_physics_process(delta)
+	elif what == NOTIFICATION_PHYSICS_PROCESS:
+		var delta: float = get_physics_process_delta_time()
+		if mode == LevelPlayer.mode:
+			_object_physics_process(delta)
+		elif mode == Editor.mode:
+			_editor_physics_process(delta)
 
 
 func _unhandled_input(event):
-	if Input.is_action_just_pressed("click") and hovered and mode == Editor.mode:
+	if event.is_action_pressed("click") and is_object_hovered():
 		var editor = get_tree().current_scene
 		connect("object_clicked", editor, "object_clicked", [self])
 		emit_signal("object_clicked")
 
 
-## run when the game object enters the scene tree
-func _object_ready() -> void:
-	pass
+func _draw() -> void:
+	if is_object_hovered():
+		draw_rect(editor_rect, EDITOR_RECT_DRAW_COLOR)
 
 
 ## Run when all objects are loaded.
 func _level_loaded() -> void:
+	pass
+
+
+## run when the game object enters the scene tree
+func _object_ready() -> void:
 	pass
 
 
@@ -238,61 +145,8 @@ func _object_physics_process(delta: float) -> void:
 	pass
 
 
-## run when the game object enters the scene tree
-func _object_ground_ready() -> void:
-	if enabled:
-		_object_ready()
-	else:
-		_object_disabled_ready()
-
-
-## Run every process frame when the object is on a ground layer.
-func _object_ground_process(delta: float) -> void:
-	pass
-
-
-## Run every physics frame when the object is on a ground layer.
-func _object_ground_physics_process(delta: float) -> void:
-	pass
-
-
-## run when the game object enters the scene tree
-func _object_parallax_ready() -> void:
-	_object_disabled_ready()
-
-
-## Run every process frame when the object is on a ground layer.
-func _object_parallax_process(delta: float) -> void:
-	_object_disabled_process(delta)
-
-
-## Run every physics frame when the object is on a ground layer.
-func _object_parallax_physics_process(delta: float) -> void:
-	_object_disabled_physics_process(delta)
-
-
-## run when the game object enters the scene tree
-func _object_disabled_ready() -> void:
-	pass
-
-
-## Run every process frame when the object is disabled.
-func _object_disabled_process(delta: float) -> void:
-	pass
-
-
-## Run every physics frame when the object is disabled.
-func _object_disabled_physics_process(delta: float) -> void:
-	pass
-
-
 ## run when the game object enters the scene tree in the editor
 func _editor_ready() -> void:
-	pass
-
-
-## Run when all objects are loaded in the editor.
-func _editor_loaded() -> void:
 	pass
 
 
@@ -306,85 +160,11 @@ func _editor_physics_process(delta: float) -> void:
 	pass
 
 
-func create_collision_polygons_from_tree(node: Node, node_transform: Transform2D, array: Array) -> void:
-	if node is Sprite:
-		var bitmap := BitMap.new()
-		bitmap.create_from_image_alpha(node.texture.get_data())
-		
-		var rect : Rect2
-		if node.region_enabled:
-			rect = node.region_rect
-		else:
-			rect.size = node.texture.get_size()
-		
-		var polygons: Array = bitmap.opaque_to_polygons(rect)
-		for polygon in polygons:
-			for i in range(polygon.size()):
-				var point: Vector2 = polygon[i]
-				point -= rect.position
-				
-				if node.flip_h:
-					point.x = rect.size.x - point.x - 1.0
-				if node.flip_v:
-					point.y = rect.size.y - point.y - 1.0
-				
-				if node.centered:
-					point -= rect.size / 2.0
-				
-				polygon[i] = point
-			
-			var collision_polygon := CollisionPolygon2D.new()
-			collision_polygon.transform = node_transform.translated(node.offset)
-			collision_polygon.polygon = polygon
-			array.append(collision_polygon)
-	
-	for child in node.get_children():
-		if child is Node2D:
-			create_collision_polygons_from_tree(child, node_transform * child.transform, array)
-
-func modulate_set():
-	modulate = default_modulate
-	
-	if selected:
-		modulate *= selected_modulate
-	
-	if hovered or not visibility:
-		modulate.a = hover_modulate.a
-		
-	if translucent:
-		modulate *= translucent_modulate
-
-func set_object_properties_from_data() -> void:
-	# silver you gotta clean this up
-	var properties: Dictionary = {}
-	for property in object_data_ref.get_ref().default_values:
-		properties[property] = object_data_ref.get_ref().default_values[property]
-		
-	for property in object_data_ref.get_ref().properties:
-		properties[property] = object_data_ref.get_ref().properties[property]
-
-	for property in properties:
-		if properties[property] != null:
-			set_property_by_index(property, properties[property])
-
-func set_object_data_property_metadata() -> void:
-	if not is_instance_valid(object_data_ref):
-		return
-	
-	var object_data: ObjectData = object_data_ref.get_ref()
-	
-	if is_instance_valid(object_data):
-		object_data.property_ids = property_ids
-		
-		var property_id: int = -1
-		for property in property_ids.keys():
-			property_id = property_ids.get(property)
-			if object_data.default_values.has(property_id):
-				continue
-			object_data.default_values[property_id] = self[property]
+func _register_properties():
+	pass
 
 
-func is_savable_property(key) -> bool:
+func is_savable_property(key: String) -> bool:
 	for property in property_ids:
 		if key == property:
 			return true
@@ -392,64 +172,63 @@ func is_savable_property(key) -> bool:
 	return false
 
 
-func get_property_index(key) -> int:
-	return property_ids[key]
+func get_property_index(property: String) -> int:
+	return property_ids.find_key(property)
 
 
-func set_property(key, value, change_object_data = true, alias = null):
-	if typeof(self[key]) != typeof(value):
-		print("Object ", name, " tried to set property '" + key + "', but the provided type does not match.")
+func register_property(id: int, property: String, default_value, editable: bool = true) -> void:
+	if typeof(self[property]) != typeof(default_value):
+		printerr("Object ", name, " tried to register property \"" + property + "\", but the provided type does not match.")
 		return
 	
-	self[key] = value
+	if id in property_ids.keys():
+		return
 	
-	var object_data: ObjectData = object_data_ref.get_ref()
+	if property in property_ids.values():
+		return
 	
-	if change_object_data and is_savable_property(key) and !is_preview:
-		var id: int = property_ids.get(key, -1)
-		if id < 0:
-			return
+	self[property] = default_value
+	
+	property_ids.get_or_add(id, property)
+	property_defaults.get_or_add(property, default_value)
+
+
+func set_object_data(data: ObjectData) -> void:
+	object_data = data
+	
+	for id in property_ids.keys():
+		set_property_by_id(id, object_data.properties[id], false)
+
+
+func set_property_by_id(property_id: int, value, change_object_data: bool = false) -> void:
+	set_property(property_ids[property_id], value, change_object_data)
+
+
+func set_property(property: String, value, change_object_data = false):
+	if typeof(self[property]) != typeof(value):
+		print("Object ", name, " tried to set property \"" + property + "\", but the provided type does not match.")
+		return
+	
+	self[property] = value
+	
+	if change_object_data:
+		var id: int = property_ids.find_key(property)
 		
-		object_data.set_property(get_property_index(key), value)
+		if value != property_defaults.get(property):
+			object_data.set_property(id, value)
 		
-		if key == "visible":
+		if property == "visible":
 			if mode == 1:
 				visible = true
 				visibility = value
 		
-		if key == "in_front":
+		if property == "in_front" and value == true:
 			z_index = 1
+		else:
+			z_index = 0
 	
 	if mode == 1 and !is_preview:
-		emit_signal("property_changed", key, value)
-
-
-func get_property(key):
-	return object_data_ref.get_ref().get_property(get_property_index(key))
-
-
-func get_editor_alias(key):
-	return editor_aliases[key]
-
-
-func has_editor_alias(key):
-	for i in editor_aliases.keys():
-		if i == key:
-			return true
-	return false
-
-
-func set_property_by_index(index, value, change_level_object = true, alias = null):
-	var key = property_ids.find_key(index)
-	set_property(key, value, change_level_object, alias)
-
-
-func _set_properties():
-	pass
-
-
-func _set_property_values():
-	pass
+		emit_signal("property_changed", property, value)
 
 
 func set_bool_alias(key, true_alias, false_alias):
@@ -467,7 +246,7 @@ func set_property_menu(key, menu_array: Array):
 
 
 func parts_input_handler(event, object):
-	if event is InputEventMouseButton and event.is_pressed() and hovered:
+	if event is InputEventMouseButton and event.is_pressed() and is_object_hovered():
 		match event.button_index:
 			BUTTON_WHEEL_UP: # Mouse wheel up
 				object.parts += 1
@@ -486,6 +265,18 @@ func is_on_ground_layer() -> bool:
 	return level_layer_ref.get_ref() is LevelGroundLayer
 
 
+func is_enabled() -> bool:
+	return enabled
+
+
+func is_in_editor() -> bool:
+	return mode == Editor.mode
+
+
+func is_object_hovered() -> bool:
+	return is_in_editor() and editor_rect.has_point(get_local_mouse_position())
+
+
 func create_coin(coin_id, body, physics, velocity) -> void:
 	var object := ObjectData.new(ObjectMetadata.new(
 		body.global_position,
@@ -495,3 +286,17 @@ func create_coin(coin_id, body, physics, velocity) -> void:
 	object.set_property_by_name("physics", physics)
 	object.set_property_by_name("velocity", velocity)
 	get_parent().create_object(object)
+
+
+func create_object(pos: Vector2, object_id: int, palette: int):
+	var level_layer: LevelLayer = level_layer_ref.get_ref()
+	
+	return level_layer.add_object(
+		ObjectData.new(
+			ObjectMetadata.new(
+				pos,
+				object_id,
+				palette
+			)
+		)
+	)

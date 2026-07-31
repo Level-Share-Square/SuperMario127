@@ -52,27 +52,3 @@ func _test_load_in(layer_data: LayerData) -> void:
 	print("All time data (in microseconds): ", times)
 
 	assert(false)
-
-
-# tiles
-func place_tile(coords, tile_set, tile, palette, update_autotile, modify_data):
-	tile_map_manager.place_tile(coords, tile_set, tile, palette, update_autotile, modify_data)
-
-
-func erase_tile(to_remove: Vector2):
-	tile_map_manager.erase_tile(to_remove)
-
-
-# objects
-func add_object(to_add: ObjectData, modify_data: bool = false):
-	return object_manager.place_object(to_add, modify_data)
-
-
-func place_object(to_place: ObjectData, modify_data: bool = false):
-	return object_manager.place_object(to_place, modify_data)
-
-
-func erase_object(to_remove):
-	object_manager.erase_object(to_remove)
-
-

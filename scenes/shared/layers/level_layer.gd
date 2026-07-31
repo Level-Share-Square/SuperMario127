@@ -60,24 +60,24 @@ func find_objects_in_rect(rect: Rect2) -> Array:
 
 # Tiles
 func place_tile(coords, tile_set, tile, palette, update_autotile, modify_data):
-	pass
+	tile_map_manager.place_tile(coords, tile_set, tile, palette, update_autotile, modify_data)
 
 
 func erase_tile(to_remove: Vector2):
-	pass
+	tile_map_manager.erase_tile(to_remove)
 
 
 # Objects
 func add_object(to_add: ObjectData, modify_data: bool = false):
-	pass
+	return object_manager.place_object(to_add, modify_data)
 
 
 func place_object(to_place: ObjectData, modify_data: bool = false):
-	pass
+	return object_manager.place_object(to_place, modify_data)
 
 
 func erase_object(to_remove):
-	pass
+	object_manager.erase_object(to_remove)
 
 
 func get_object_at_position(position: Vector2):
