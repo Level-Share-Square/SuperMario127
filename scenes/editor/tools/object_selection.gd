@@ -80,7 +80,7 @@ func on_paste():
 		var data = JSON.parse(OS.get_clipboard()).result
 		editor.selected_objects = []
 		var objects: Array = LevelCodeDeserializer.deserialize_objects_code(data[0])
-		print(objects)
+
 		for object in objects:
 			object = object as ObjectData
 			object.metadata.position += camera.position - Vector2(data[1][0], data[1][1])

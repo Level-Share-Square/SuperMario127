@@ -149,7 +149,7 @@ static func serialize_layer(layer: LayerData) -> String:
 	)
 	
 	layer_code += serialize_layer_tile_data(layer.tile_data)
-	layer_code += serialize_objects(layer.object_data)
+	layer_code += wrap_code_in_brackets(serialize_objects(layer.object_data))
 	
 	return wrap_code_in_brackets(layer_code)
 
@@ -161,7 +161,7 @@ static func serialize_objects(object_data: Array) -> String:
 		var object_code: String = serialize_object(object)
 		code += wrap_code_in_brackets(object_code)
 	
-	return wrap_code_in_brackets(code)
+	return code
 
 
 static func serialize_object(object: ObjectData) -> String:
