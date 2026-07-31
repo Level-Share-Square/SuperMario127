@@ -6,8 +6,8 @@ func property_changed(key: String, new_value):
 	$X.value = new_value.x
 	$Y.value = new_value.y
 
-func load_property(_editor: Editor, init_value, _property: Array):
-	.load_property(_editor, init_value, _property)
+func load_property(_editor: Editor, init_value, _property: Array, property_name = null):
+	.load_property(_editor, init_value, _property, property_name)
 	
 	var property_info = property[2]
 	if property_info is PropertyInfo:

@@ -10,12 +10,12 @@ func set_properties(_object: GameObject, _original_properties: Dictionary, _chan
 		if _original_properties.empty():
 			_original_properties[property_name] = _object[property_name]
 		var new_value = _changed_properties[property_name]
-		_object.register_property(property_name, new_value, true)
+		_object.set_property(property_name, new_value, true)
 
 func restore_properties(_object: GameObject, _original_properties: Dictionary, _changed_properties: Dictionary):
 	for property_name in _original_properties.keys():
 		var original_value = _original_properties[property_name]
-		_object.register_property(property_name, original_value, true)
+		_object.set_property(property_name, original_value, true)
 
 ## note that this function is only needed for tools like move and rotate, which change
 ## object properties prior to setting them. if you're setting properties from say, the property

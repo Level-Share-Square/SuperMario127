@@ -29,56 +29,56 @@ func on_mission_selected(mission: MissionData):
 		"shine_name",
 		TYPE_STRING,
 		PropertyInfo.new(shine_name.hint_tooltip)
-	])
+	], "Shine Name")
 	connect_signals(shine_name)
 	
 	shine_description.load_property(editor, mission["shine_description"], [
 		"shine_description",
 		TYPE_STRING,
 		PropertyInfo.new(shine_description.hint_tooltip)
-	])
+	], "Shine Description")
 	connect_signals(shine_description)
 	
 	shine_sort_order.load_property(editor, mission["shine_sort_order"], [
 		"shine_sort_order",
 		TYPE_INT,
 		PropertyInfo.new(shine_sort_order.hint_tooltip)
-	])
+	], "Sort Order")
 	connect_signals(shine_sort_order)
 	
 	shine_color.load_property(editor, mission["shine_color"], [
 		"shine_color",
 		TYPE_COLOR,
 		PropertyInfo.new(shine_color.hint_tooltip)
-	])
+	], "Shine Color")
 	connect_signals(shine_color)
 	
 	shine_force_leave.load_property(editor, mission["shine_force_leave"], [
 		"shine_force_leave",
 		TYPE_BOOL,
 		PropertyInfo.new(shine_force_leave.hint_tooltip)
-	])
+	], "Kickout")
 	connect_signals(shine_force_leave)
 	
 	spawn_area_id.load_property(editor, mission["spawn_area_id"], [
 		"spawn_area_id",
 		TYPE_STRING,
 		PropertyInfo.new(spawn_area_id.hint_tooltip)
-	])
+	], "Spawn Area ID")
 	connect_signals(spawn_area_id)
 	
 	spawn_teleporter_tag.load_property(editor, mission["spawn_teleporter_tag"], [
 		"spawn_teleporter_tag",
 		TYPE_STRING,
 		PropertyInfo.new(spawn_teleporter_tag.hint_tooltip)
-	])
+	], "Spawn Teleporter Tag")
 	connect_signals(spawn_teleporter_tag)
 	
 	mission_show_in_menu.load_property(editor, mission["mission_show_in_menu"], [
 		"mission_show_in_menu",
 		TYPE_BOOL,
 		PropertyInfo.new(mission_show_in_menu.hint_tooltip)
-	])
+	], "Show in Menu")
 	connect_signals(mission_show_in_menu)
 	
 	selected_mission = mission
