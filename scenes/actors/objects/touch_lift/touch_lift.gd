@@ -34,34 +34,26 @@ var custom_path = Curve2D.new()
 
 var path_length : float = 0
 
-func _set_properties():
-	savable_properties = ["parts", "max_speed", "curve", "move_type", "touch_start", "color", "start_offset", "custom_path", "path_length"]
-	editable_properties = ["parts", "max_speed", "move_type", "touch_start", "color", "start_offset", "curve", "path_length"]
-	
+#func _set_properties():
+#	savable_properties = ["parts", "max_speed", "curve", "move_type", "touch_start", "color", "start_offset", "custom_path", "path_length"]
+#	editable_properties = ["parts", "max_speed", "move_type", "touch_start", "color", "start_offset", "curve", "path_length"]
+
+
 func _set_property_values():
-	set_property("parts", parts)
-	set_property("max_speed", max_speed)
-	set_property("curve", curve)
-	set_property("end_position", end_position)
-	set_property("move_type", move_type, true, null)
+	register_property(0, "parts", parts)
+	register_property(1, "max_speed", max_speed)
+	register_property(2, "curve", curve)
+	register_property(3, "end_position", end_position)
+	register_property(4, "move_type", move_type)
 	set_property_menu("move_type", ["option", 5, 0, ['Back and Forth', 'Reset', 'Once', 'Loop', 'Freeze']])
-	set_property("touch_start", touch_start)
-	set_property("color", color)
-	set_property("start_offset", start_offset)
-	set_property("custom_path", curve)
-	set_property("path_length", path_length, true)
+	register_property(5, "touch_start", touch_start)
+	register_property(6, "color", color)
+	register_property(7, "start_offset", start_offset)
+	register_property(8, "custom_path", curve)
+	register_property(9, "path_length", path_length)
 	set_property_menu("path_length", ["viewer"])
-	
-func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton and event.is_pressed() and hovered:
-		if event.button_index == 5: # Mouse wheel down
-			parts -= 1
-			if parts < 1:
-				parts = 1
-			set_property("parts", parts)
-		elif event.button_index == 4: # Mouse wheel up
-			parts += 1
-			set_property("parts", parts)
+
+
 # TODO:
 # Optimize the amount of nodes in the curve path.
 # Fix physics:

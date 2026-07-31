@@ -20,13 +20,10 @@ export var override_part_width := 0 # If this value is not equal to 0, this'll r
 export var parts := 1
 var last_parts := 1
 
-func _set_properties():
-	savable_properties = ["parts"]
-	editable_properties = ["parts"]
-	
+
 func _set_property_values():
-	set_property("parts", parts, 1)
-	
+	register_property(0, "parts", parts, 1)
+
 func _ready():
 	preview_position = custom_preview_position
 	if is_preview:

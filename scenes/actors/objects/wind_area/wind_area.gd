@@ -15,15 +15,11 @@ var triggerable := false
 var triggered := true
 var wind_angle_vector : Vector2
 
-func _set_properties():
-	savable_properties = ["size", "wind_power", "color", "triggerable"]
-	editable_properties = ["size", "wind_power", "color", "triggerable"]
-
 func _set_property_values():
-	set_property("size", size, true, null)
-	set_property("wind_power", wind_power, true, "Wind Strength")
-	set_property("color", color)
-	set_property("triggerable", triggerable)
+	register_property(0, "size", size)
+	register_property(1, "wind_power", wind_power)
+	register_property(2, "color", color)
+	register_property(3, "triggerable", triggerable)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

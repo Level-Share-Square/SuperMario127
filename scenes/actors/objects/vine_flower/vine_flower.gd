@@ -6,12 +6,9 @@ export(Array, Texture) var palette_textures
 
 var color := Color(1, 0, 0)
 
-func _set_properties():
-	savable_properties = ["color"]
-	editable_properties = ["color"]
-	
+
 func _set_property_values():
-	set_property("color", color, 1)
+	register_property(0, "color", color)
 
 func _ready():
 	collision_shape.disabled = !enabled

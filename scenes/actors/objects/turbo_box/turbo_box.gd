@@ -16,13 +16,10 @@ var loaded_activated = true
 
 var respawn_timer = 0.0
 
-func _set_properties():
-	savable_properties = ["activated"]
-	editable_properties = ["activated"]
-
 func _set_property_values():
-	set_property("activated", activated)
-	
+	register_property(0, "activated", activated)
+
+
 func _object_ready():
 	if is_preview:
 		z_index = 0

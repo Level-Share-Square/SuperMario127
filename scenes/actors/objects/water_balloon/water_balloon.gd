@@ -18,17 +18,13 @@ var color := Color(0, 0.7, 1)
 
 var timer = 0.0
 
-		
-		
-func _set_properties():
-	savable_properties = ["added_stamina", "added_water", "respawn_timer", "color"]
-	editable_properties = ["added_stamina", "added_water", "respawn_timer", "color"]
-	
+
 func _set_property_values():
-	set_property("added_stamina", added_stamina)
-	set_property("added_water", added_water)
-	set_property("respawn_timer", respawn_timer)
-	set_property("color", color)
+	register_property(0, "added_stamina", added_stamina)
+	register_property(1, "added_water", added_water)
+	register_property(2, "respawn_timer", respawn_timer)
+	register_property(3, "color", color)
+
 
 func collect(body):
 	if enabled and !collected and body.name.begins_with("Character") and !body.dead:
