@@ -101,9 +101,10 @@ static func deserialize_tile_code(tile_code: String) -> Array:
 static func deserialize_objects_code(objects_code: String) -> Array:
 	var objects_code_array = LevelCodeTokenizer.splice_objects(objects_code)
 	var objects = []
+
 	for object in objects_code_array:
 		objects.push_back(deserialize_object_code(object))
-	
+
 	return objects
 
 

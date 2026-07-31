@@ -16,6 +16,9 @@ var property_tallies: Dictionary
 
 func load_objects(_objects: Dictionary):
 	for game_object in objects.keys():
+		if !is_instance_valid(game_object):
+			objects.erase(game_object)
+			continue # IDK WHY IT SOMETIMES CRASHES HERE HELP PLS
 		game_object.disconnect("tree_exited", self, "close")
 	
 	objects = _objects

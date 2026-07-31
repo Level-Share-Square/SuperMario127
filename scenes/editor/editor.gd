@@ -16,7 +16,7 @@ var show_layers = false
 var layer: int = 0
 
 var hovered_objects: Dictionary = {}
-var selected_objects: Dictionary = {}
+var selected_objects: Array = []
 var selected_tiles: Dictionary = {}
 var selected_item: PlaceableItem
 
@@ -29,6 +29,7 @@ onready var item_actions = $"%Actions"
 onready var screen_manager = $"%ScreenManager"
 onready var save_manager = $"SaveManager"
 onready var object_settings_window = $"%ObjectSettingsWindow"
+onready var ui = $"%UI"
 
 onready var save_button = $UI/EditorUI/Utilities/Save
 onready var level_settings = $"%LevelSettingsWindow"

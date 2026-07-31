@@ -40,7 +40,7 @@ func select(object: GameObject):
 func action(objects: Dictionary = {}) -> void:
 	var action := SelectObjectsAction.new()
 	action.editor = editor
-	action.selected_objects = objects
+#	action.selected_objects = objects
 	editor.action_manager.commit_action(action)
 
 func place_object(pos: Vector2):

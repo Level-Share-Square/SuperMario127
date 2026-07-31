@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://scenes/editor/tools/tile_selection/selector.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/editor/tools/object_selection.gd" type="Script" id=2]
@@ -16,6 +16,19 @@
 [ext_resource path="res://scenes/editor/editor_theme.tres" type="Theme" id=14]
 [ext_resource path="res://scenes/oldeditor/sounds/click2.wav" type="AudioStream" id=15]
 [ext_resource path="res://scenes/oldeditor/sounds/hover.wav" type="AudioStream" id=16]
+[ext_resource path="res://scenes/editor/tools/pivot.gd" type="Script" id=17]
+[ext_resource path="res://scenes/editor/tools/selection_box/pivot_1.png" type="Texture" id=18]
+[ext_resource path="res://scenes/editor/tools/selection_box/pivot_2.png" type="Texture" id=19]
+[ext_resource path="res://scenes/editor/tools/selection_box/pivot.png" type="Texture" id=20]
+
+[sub_resource type="AnimatedTexture" id=4]
+frames = 3
+fps = 5.0
+frame_0/texture = ExtResource( 20 )
+frame_1/texture = ExtResource( 18 )
+frame_1/delay_sec = 0.0
+frame_2/texture = ExtResource( 19 )
+frame_2/delay_sec = 0.0
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 42.5, 10 )
@@ -28,7 +41,22 @@ extents = Vector2( 42.5, 10 )
 theme = ExtResource( 14 )
 script = ExtResource( 2 )
 
-[node name="SelectionArea" type="Area2D" parent="." index="1"]
+[node name="Pivot" type="TextureButton" parent="." index="1"]
+unique_name_in_owner = true
+anchor_left = 0.024
+anchor_top = 0.056
+anchor_right = 0.024
+anchor_bottom = 0.056
+margin_right = 8.0
+margin_bottom = 8.0
+rect_scale = Vector2( 2, 2 )
+rect_pivot_offset = Vector2( 4, 4 )
+texture_normal = SubResource( 4 )
+texture_pressed = SubResource( 4 )
+texture_hover = SubResource( 4 )
+script = ExtResource( 17 )
+
+[node name="SelectionArea" type="Area2D" parent="." index="2"]
 unique_name_in_owner = true
 position = Vector2( 220, 70 )
 collision_layer = 16777215
@@ -38,6 +66,12 @@ collision_mask = 16777215
 unique_name_in_owner = true
 position = Vector2( 204.5, 59 )
 shape = SubResource( 1 )
+
+[node name="SelectionBox" parent="." index="3"]
+margin_left = 0.0
+margin_top = 0.0
+margin_right = 164.0
+margin_bottom = 91.0
 
 [node name="WhiteHighlight" type="ReferenceRect" parent="SelectionBox" index="0"]
 unique_name_in_owner = true
@@ -195,13 +229,13 @@ icon_align = 1
 expand_icon = true
 script = ExtResource( 3 )
 
-[node name="HoverSound" type="AudioStreamPlayer" parent="." index="3"]
+[node name="HoverSound" type="AudioStreamPlayer" parent="." index="4"]
 unique_name_in_owner = true
 stream = ExtResource( 16 )
 volume_db = -10.0
 bus = "Sounds"
 
-[node name="ClickSound" type="AudioStreamPlayer" parent="." index="4"]
+[node name="ClickSound" type="AudioStreamPlayer" parent="." index="5"]
 unique_name_in_owner = true
 stream = ExtResource( 15 )
 volume_db = -10.0

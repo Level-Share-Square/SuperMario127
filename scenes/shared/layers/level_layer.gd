@@ -49,6 +49,14 @@ func _update_modulate() -> void:
 func _modulate_autoset() -> Color:
 	return Color.white
 
+func find_objects_in_rect(rect: Rect2) -> Array:
+	var found_objects: Array = []
+	
+	for object in object_manager.get_children():
+		if rect.has_point(object.global_position):
+			found_objects.append(object)
+			
+	return found_objects
 
 # Tiles
 func place_tile(coords, tile_set, tile, palette, update_autotile, modify_data):

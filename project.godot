@@ -754,6 +754,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://level/models/layer/object_metadata.gd"
 }, {
+"base": "Selector",
+"class": "ObjectSelector",
+"language": "GDScript",
+"path": "res://scenes/editor/tools/object_selection.gd"
+}, {
 "base": "Reference",
 "class": "OldAction",
 "language": "GDScript",
@@ -1369,6 +1374,7 @@ _global_script_class_icons={
 "ObjectDataOld": "",
 "ObjectManager": "",
 "ObjectMetadata": "",
+"ObjectSelector": "",
 "OldAction": "",
 "OldEditorWindow": "",
 "OptionBase": "",

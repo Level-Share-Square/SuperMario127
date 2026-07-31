@@ -1,67 +1,52 @@
 class_name RotateSelection
 extends SelectionTool
 
-var mode: String = "Global"
-var object_offsets: Dictionary = {}
-var object_rotations: Dictionary = {}
+enum Mode {LOCAL, GLOBAL}
+
+onready var pivot = $"%Pivot"
+
+var mode: int
 var action
-var base_rotation = 0
-var mouse_pivot_base_angle = 0
+var init_positions: Dictionary
+var init_rotations: Dictionary
 
 func clicked():
-	object_offsets = {}
-	if selection_box.selection_tools.pivot_toggle_button.pressed:
-		mode = "Global"
-	else:
-		mode = "Local"
-	_get_pivot_offset()
-	for object in editor.selected_objects:
-		var pivot = selection_box.pivot_position
-		object_offsets[object] = object.global_position - pivot
-		
-
+	init_positions.clear()
+	init_rotations.clear()
+	mode = int(pivot.pivot_toggle.pressed)
 	
 	action = ChangePropertyBulkAction.new()
 	action.affected_objects = setup_affected_objects()
 	action.bulk_store_original_properties()
 
-func _get_pivot_offset():
-	if mode == "Local":
-		selection_box.pivot.center_pivot()
-	mouse_pivot_base_angle = get_global_mouse_position().direction_to(selection_box.pivot.rect_global_position).angle()
-	for object in editor.selected_objects:
-		object_offsets[object] = object.global_position - selection_box.pivot.rect_global_position
-		object_rotations[object] = object.rotation
-		
 func update():
-	if selection_box.pivot.pressed:
-		_get_pivot_offset()
-	base_rotation = get_global_mouse_position().direction_to(selection_box.pivot_position).angle() - mouse_pivot_base_angle
 	for i in editor.selected_objects:
 		_rotate(i)
 
 func _rotate(object: GameObject):
-	var old_rotation = object_rotations[object]
-	var theta: float = base_rotation
-	if mode == "Global":
-		var pivot = selection_box.pivot_position + selection_box.pivot.rect_pivot_offset
-		var offset = object_offsets[object]
-
-		var rotated_offset = offset.rotated(theta)
-
-		object.global_position = pivot + rotated_offset
-		object.rotation = old_rotation + theta
-		if editor.pixel_lock:
-			object.rotation = stepify(object.rotation, deg2rad(15))
-			object.global_position = object.global_position.snapped(Vector2(8, 8))
-		
-		selection_box.snap_to_selected_size()
-	else:
-		object.rotation = old_rotation + theta
-		if editor.pixel_lock:
-			object.rotation = stepify(object.rotation, deg2rad(15))
-		
-		selection_box.snap_to_selected_size()
+	var mouse_pos: Vector2 = get_global_mouse_position()
+	match mode:
+		Mode.GLOBAL:
+			var init_pos: Vector2 = init_positions.get_or_add(object, object.global_position)
+			var init_rot: float = init_rotations.get_or_add(object, object.rotation)
+			
+			var mouse_angle: float = (mouse_pos - pivot.rect_global_position).angle() - PI/2
+			
+			object.rotation = init_rot + mouse_angle
+			object.global_position = pivot.rect_global_position + (init_pos - pivot.rect_global_position).rotated(mouse_angle)
+			
+			if editor.pixel_lock:
+				object.rotation = stepify(object.rotation, deg2rad(15))
+				object.global_position = object.global_position.snapped(Vector2(8, 8))
+	
+			selection_box.fit_to_bounding_rectangle()
+		Mode.LOCAL:
+			var angle: float = (mouse_pos - pivot.get_position_centered()).angle() - PI/2
+			object.rotation = angle
+			if editor.pixel_lock:
+				object.rotation = stepify(object.rotation, deg2rad(15))
+			
+			selection_box.fit_to_bounding_rectangle()
 		
 func commit_to_action():
 	for object in editor.selected_objects:

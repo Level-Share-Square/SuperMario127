@@ -19,6 +19,7 @@ func _ready():
 	for node in button_container.get_children():
 		if node is SelectionToolButton:
 			node.connect("button_down", self, "button_pressed", [node])
+	properties_button.connect("button_down", self, "properties_pressed")
 
 func _process(delta):
 	if is_instance_valid(active_tool):
@@ -44,3 +45,6 @@ func button_pressed(button: SelectionToolButton):
 		active_tool = button.associated_tool
 		active_tool.is_active = true
 		active_tool.clicked()
+
+func properties_pressed():
+	editor.open_object_properties(editor.selected_objects)

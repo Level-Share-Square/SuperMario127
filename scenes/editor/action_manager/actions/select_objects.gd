@@ -4,18 +4,19 @@ extends Action
 
 var editor: Editor
 var selection_box: NinePatchRect
-var selected_objects: Dictionary
-var old_selected_objects: Dictionary
+var selected_objects: Array
+var old_selected_objects: Array
 
 
-func select_objects(selected_dict: Dictionary):
+func select_objects(selected_array: Array):
 	for object in editor.selected_objects:
 		object.selected = false
-	editor.selected_objects = {}
-	for object in selected_dict:
-		editor.selected_objects[object] = selected_dict[object]
+
+	editor.selected_objects = selected_array
+	for object in editor.selected_objects:
 		object.selected = true
-	editor.open_object_properties(selected_dict)
+
+	editor.open_object_properties(selected_array)
 
 
 func _do() -> void:
