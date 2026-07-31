@@ -1,0 +1,17 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://scenes/editor/items/placeable_tile.gd" type="Script" id=1]
+[ext_resource path="res://assets/tiles/truss/icon.png" type="Texture" id=2]
+
+[resource]
+script = ExtResource( 1 )
+item_name = "Metal Truss"
+groups = PoolStringArray( "special" )
+change_to = ""
+items_in_sequence = 0
+index_in_sequence = 0
+icons = [ ExtResource( 2 ) ]
+previews = [ ExtResource( 2 ) ]
+priority = 0
+tileset_id = 41
+tile_id = 0
