@@ -12,13 +12,13 @@ var last_parts := 1
 
 var physics_enabled := true
 
-func _set_properties():
-	savable_properties = ["parts", "physics_enabled"]
-	editable_properties = ["parts", "physics_enabled"]
+#func _set_properties():
+#	savable_properties = ["parts", "physics_enabled"]
+#	editable_properties = ["parts", "physics_enabled"]
 	
-func _set_property_values():
-	set_property("parts", parts, 1)
-	set_property("physics_enabled", physics_enabled)
+func _register_properties():
+	register_property(4, "parts", parts, true)
+	register_property(5, "physics_enabled", physics_enabled, true)
 
 func _unhandled_input(event: InputEvent) -> void:
 	parts_input_handler(event,self)
@@ -61,7 +61,7 @@ func _ready():
 	
 	spawn_pos = global_position
 	
-	if !enabled:
+	if !is_enabled_and_on_ground():
 		collision_shape.disabled = true
 		
 	update_parts()

@@ -29,20 +29,20 @@ var color := Color(0, 1, 0)
 
 # overriding cos pipes can be recolored
 ### PROPERTIES
-func _set_properties() -> void:
-	savable_properties = ["target_area", "tag", "teleport_mode", "max_pan_distance", "level_path", "color"]
-	editable_properties = ["target_area", "tag", "teleport_mode", "max_pan_distance", "level_path", "color"]
+#func _set_properties() -> void:
+#	savable_properties = ["target_area", "tag", "teleport_mode", "max_pan_distance", "level_path", "color"]
+#	editable_properties = ["target_area", "tag", "teleport_mode", "max_pan_distance", "level_path", "color"]
 
 
-func _set_property_values() -> void:
-	set_property("target_area", target_area)
-	set_property("tag", tag)
-	set_property("teleport_mode", teleport_mode, true)
+func _register_properties() -> void:
+	register_property(4, "target_area", target_area)
+	register_property(5, "tag", tag)
+	register_property(6, "teleport_mode", teleport_mode, true)
 	set_property_menu("teleport_mode", ["option", 3, 0, ["Location", "Area", "Level"]])
 	set_bool_alias("teleportation_mode", "Remote", "Local")
-	set_property("max_pan_distance", max_pan_distance)
-	set_property("level_path", level_path)
-	set_property("color", color)
+	register_property(7, "max_pan_distance", max_pan_distance)
+	register_property(8, "level_path", level_path)
+	register_property(9, "color", color)
 
 
 func _on_property_changed(key, value):
@@ -164,7 +164,7 @@ func body_exited(body) -> void:
 
 ### INPUT
 func _physics_process(_delta: float) -> void:
-	if not enabled: return
+	if not is_enabled_and_on_ground(): return
 	if global_rotation != 0: return
 	if not is_instance_valid(stored_character): return
 	if not stored_character.is_grounded(): return

@@ -8,20 +8,20 @@ var last_parts := 1
 
 var can_rotate : bool = true
 
-func _set_properties():
-	savable_properties = ["parts", "can_rotate"]
-	editable_properties = ["parts", "can_rotate"]
+#func _set_properties():
+#	savable_properties = ["parts", "can_rotate"]
+#	editable_properties = ["parts", "can_rotate"]
 	
-func _set_property_values():
-	set_property("parts", parts, 1)
-	set_property("can_rotate", can_rotate, 1)
+func _register_properties():
+	register_property(4, "parts", parts, 1)
+	register_property(5, "can_rotate", can_rotate, 1)
 
 func _unhandled_input(event: InputEvent) -> void:
 	parts_input_handler(event,self)
 
 
 func update_property(key, value):
-	if key in savable_properties:
+	if is_savable_property(key):
 		update_parts()
 
 
@@ -53,7 +53,7 @@ var current_weights := []
 var scale_x : float
 
 func _ready():
-	if !enabled:
+	if !is_enabled_and_on_ground():
 		collision_shape.disabled = true
 		area_collision_shape.disabled = true
 		platform_area_collision_shape.disabled = true
@@ -78,7 +78,7 @@ func update_parts():
 
 
 func _physics_process(delta):
-	if mode == 1 or !enabled or !can_rotate: # dont do physics if in edit more or disabled
+	if mode == 1 or !is_enabled_and_on_ground() or !can_rotate: # dont do physics if in edit more or disabled
 		return
 	
 	# first, erase any potential null pointers

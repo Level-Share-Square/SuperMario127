@@ -28,19 +28,19 @@ var speed := 1.0
 
 var knockback_velocity : Vector2
 
-func _set_properties():
-	savable_properties = ["speed"]
-	editable_properties = ["speed"]
+#func _set_properties():
+#	savable_properties = ["speed"]
+#	editable_properties = ["speed"]
 
-func _set_property_values():
-	set_property("speed", speed, true)
+func _register_properties():
+	register_property(4, "speed", speed, true)
 
 func is_vanish(body):
 	if "Character" in body:
 		return body.powerup != null and body.powerup.id == "Vanish"
 
 func kill(body):
-	if dead or !(enabled and body.name.begins_with("Character") and !body.dead and body.controllable):
+	if dead or !(is_enabled_and_on_ground() and body.name.begins_with("Character") and !body.dead and body.controllable):
 		return
 	
 	if body.invincible:
@@ -56,14 +56,14 @@ func kill(body):
 			knockback(body.global_position)
 
 func attacked(new_area):
-	if !enabled: return
+	if !is_enabled_and_on_ground(): return
 
 	if new_area.has_method("is_hurt_area"):
 		knockback_velocity.y = -80
 		knockback(area.global_position)
 
 func stomp(body):
-	if !enabled: return
+	if !is_enabled_and_on_ground(): return
 	var body_cast = body as Character #this filters out any bodies other than the player from being used
 	if "Character" in str(body):
 		if body.invincible:
@@ -95,7 +95,7 @@ func undetect_player(body):
 		character = null
 
 func _physics_process(delta):
-	if !enabled: 
+	if !is_enabled_and_on_ground(): 
 		sprite.frame = 3
 
 	if mode == 1 or dead:
@@ -105,7 +105,7 @@ func _physics_process(delta):
 	global_position.y = middle_pos.y + sin(time_alive) * sine_amplitude
 	global_position.x = middle_pos.x
 	
-	if !enabled:
+	if !is_enabled_and_on_ground():
 		return
 	
 	var active_frame = 3

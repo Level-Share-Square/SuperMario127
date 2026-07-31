@@ -54,12 +54,12 @@ export  var top_point:Vector2
 
 var color: = Color(1, 0, 0)
 
-func _set_properties():
-	savable_properties = ["color"]
-	editable_properties = ["color"]
+#func _set_properties():
+#	savable_properties = ["color"]
+#	editable_properties = ["color"]
 	
-func _set_property_values():
-	set_property("color", color, true)
+func _register_properties():
+	register_property(4, "color", color, true)
 
 func jump()->void :
 	velocity.x = facing_direction * run_speed
@@ -68,7 +68,7 @@ func jump()->void :
 	position.y -= 2
 
 func detect_player(body:Character)->void :
-	if character == null and enabled and body != null and not dead:
+	if character == null and is_enabled_and_on_ground() and body != null and not dead:
 		character = body
 		
 		
@@ -130,7 +130,7 @@ func create_coin()->void :
 	get_parent().create_object(object, false)
 
 func kill(hit_pos:Vector2)->void :
-	if not hit and not dead and enabled:
+	if not hit and not dead and is_enabled_and_on_ground():
 		if is_instance_valid(kinematic_body):
 			hit = true
 			kinematic_body.set_collision_layer_bit(2, false)
@@ -179,7 +179,7 @@ func _process(_delta)->void :
 func _physics_process(delta:float)->void :
 	time_alive += delta
 	
-	if mode != 1 and enabled and loaded:
+	if mode != 1 and is_enabled_and_on_ground() and loaded:
 		var is_in_platform: = false
 		var platform_collision_enabled: = false
 		for platform_body in platform_detector.get_overlapping_areas():

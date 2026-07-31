@@ -32,16 +32,16 @@ var base_scale_factor : float = 0.0
 var spring_anim_power : float = 0.0
 
 
-func _set_properties():
-	savable_properties = ["color", "bouncy", "strong_bounce_power", "parts"]
-	editable_properties = ["parts", "color", "bouncy", "strong_bounce_power"]
+#func _set_properties():
+#	savable_properties = ["color", "bouncy", "strong_bounce_power", "parts"]
+#	editable_properties = ["parts", "color", "bouncy", "strong_bounce_power"]
 
 
-func _set_property_values():
-	set_property("color", color, true)
-	set_property("bouncy", bouncy, true)
-	set_property("strong_bounce_power", strong_bounce_power, true)
-	set_property("parts", parts, true)
+func _register_properties():
+	register_property(4, "color", color, true)
+	register_property(5, "bouncy", bouncy, true)
+	register_property(6, "strong_bounce_power", strong_bounce_power, true)
+	register_property(7, "parts", parts, true)
 
 
 func _ready():
@@ -114,7 +114,7 @@ func update_parts():
 
 
 func _input(event):
-	if event is InputEventMouseButton and event.is_pressed() and hovered:
+	if event is InputEventMouseButton and event.is_pressed() and is_object_hovered():
 		if event.button_index == 5: # Mouse wheel down
 			parts -= 1
 			if parts < 0:
@@ -146,7 +146,7 @@ func _physics_process(delta):
 			else:
 				blacklisted_bodies[object] = cooldown
 		
-	if bouncy and enabled and mode == 0:
+	if bouncy and is_enabled_and_on_ground() and mode == 0:
 		if area_2d.get_overlapping_bodies().size() > 0:
 			for body in area_2d.get_overlapping_bodies():
 					bounce(body)

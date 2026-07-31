@@ -19,13 +19,13 @@ var color: Color = Color.yellow
 var collected = false
 var character
 
-func _set_properties():
-	savable_properties = ["id", "color"]
-	editable_properties = ["id", "color"]
+#func _set_properties():
+#	savable_properties = ["id", "color"]
+#	editable_properties = ["id", "color"]
 
-func _set_property_values():
-	set_property("id", id)
-	set_property("color", color)
+func _register_properties():
+	register_property(4, "id", id)
+	register_property(5, "color", color)
 	
 func _physics_process(delta):
 	if collected:
@@ -33,7 +33,7 @@ func _physics_process(delta):
 			play_get_anim()
 
 func collect(body):
-	if enabled and body.name.begins_with("Character") and !body.dead:
+	if is_enabled_and_on_ground() and body.name.begins_with("Character") and !body.dead:
 		CurrentLevelData.vars.collect_local_key(id)
 		#print(CurrentLevelData.vars.local_keys_collected)
 		character = body

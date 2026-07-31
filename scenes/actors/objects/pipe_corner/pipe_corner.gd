@@ -19,5 +19,5 @@ func _process(_delta):
 #		print(body)
 
 func _ready():
-	if !enabled:
+	if !is_enabled_and_on_ground():
 		collision_shape.disabled = true

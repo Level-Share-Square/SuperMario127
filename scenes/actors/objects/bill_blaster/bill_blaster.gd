@@ -34,7 +34,7 @@ func _ready():
 
 
 func _object_ready():
-	collision_shape.disabled = !enabled
+	collision_shape.disabled = !is_enabled_and_on_ground()
 
 
 func _object_process(delta):

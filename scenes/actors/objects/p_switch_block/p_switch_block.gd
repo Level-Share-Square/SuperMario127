@@ -32,16 +32,16 @@ func _ready() -> void:
 func _object_ready():
 	._object_ready()
 	p.visible = enabled
-	collision_shape.disabled = !enabled
-	area_collision_shape.disabled = !enabled
+	collision_shape.disabled = !is_enabled_and_on_ground()
+	area_collision_shape.disabled = !is_enabled_and_on_ground()
 
 func _physics_process(delta):
-	if mode == 1 and activated and enabled:
+	if mode == 1 and activated and is_enabled_and_on_ground():
 		sprite.modulate = Color(1, 0.5, 0.5)
-	elif mode == 1 or !enabled:
+	elif mode == 1 or !is_enabled_and_on_ground():
 		sprite.modulate = Color(1, 1, 1)
 	
-	if !is_instance_valid(current_scene) or mode == 1 or !enabled: return
+	if !is_instance_valid(current_scene) or mode == 1 or !is_enabled_and_on_ground(): return
 	
 	var activated_color = Color(1, 1, 1, 1)
 	var deactivated_color = Color(1, 1, 1, 0)

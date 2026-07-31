@@ -62,14 +62,14 @@ var winged := false
 var shelled := false
 var attack_cooldown := 0.0 # Prevents the player from getting hurt right after stomping on a paratroopa
 
-func _set_properties():
-	savable_properties = ["color", "rainbow", "winged", "shelled"]
-	editable_properties = ["color", "rainbow", "shelled"]
+#func _set_properties():
+#	savable_properties = ["color", "rainbow", "winged", "shelled"]
+#	editable_properties = ["color", "rainbow", "shelled"]
 
-func _set_property_values():
-	set_property("color", color, true)
-	set_property("rainbow", rainbow, true)
-	set_property("winged", winged, true)
+func _register_properties():
+	register_property(4, "color", color, true)
+	register_property(5, "rainbow", rainbow, true)
+	register_property(6, "winged", winged, true)
 
 func on_visibility_changed(is_visible: bool) -> void:
 	for raycast in [left_check, right_check]:
@@ -97,7 +97,7 @@ func _ready() -> void:
 	sprite.frames = para_sprite if winged else normal_sprite
 	sprite_color.frames = para_color_sprite if winged else normal_color_sprite
 	
-	if scale.x < 0 and mode == 0 and enabled:
+	if scale.x < 0 and mode == 0 and is_enabled_and_on_ground():
 		facing_direction = sign(scale.x)
 		scale.x = abs(scale.x)
 		
@@ -192,7 +192,7 @@ func _object_ground_physics_process(delta):
 	
 	if !loaded and visibility_notifier and visibility_notifier.is_on_screen():
 		loaded = true
-	if mode != 1 and enabled and !dead and loaded:
+	if mode != 1 and is_enabled_and_on_ground() and !dead and loaded:
 		var level_bounds = CurrentLevelData.current_area.header.bounds
 		if !hit:
 			# Run the appropriate physics process function

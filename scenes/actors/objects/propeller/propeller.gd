@@ -10,12 +10,12 @@ const METAL_DOWNWARD_KNOCKBACK_LIMIT = 100
 
 var propeller_speed : int = 12
 
-func _set_properties():
-	savable_properties = ["propeller_speed"]
-	editable_properties = ["propeller_speed"]
+#func _set_properties():
+#	savable_properties = ["propeller_speed"]
+#	editable_properties = ["propeller_speed"]
 
-func _set_property_values():
-	set_property("propeller_speed", propeller_speed, true, null)
+func _register_properties():
+	register_property(5, "propeller_speed", propeller_speed, true)
 	
 	
 func is_vanish(body):
@@ -25,7 +25,7 @@ func is_metal_or_rainbow(body):
 	return body.powerup != null and (body.powerup.id == "Metal" or body.powerup.id == "Rainbow")
 
 func kill(body):
-	if !enabled and body.name.begins_with("Character") and !body.dead and body.controllable:
+	if !is_enabled_and_on_ground() and body.name.begins_with("Character") and !body.dead and body.controllable:
 		return
 	
 	if is_metal_or_rainbow(body):
@@ -52,7 +52,7 @@ func _ready():
 		var _connect = area.connect("body_entered", self, "kill")
 	else:
 		var _connect = connect("property_changed", self, "update_property")
-		area.get_child(0).disabled = !enabled
+		area.get_child(0).disabled = !is_enabled_and_on_ground()
 		if is_preview:
 			z_index = 0
 			sprite.z_index = 0

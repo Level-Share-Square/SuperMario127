@@ -10,7 +10,7 @@ var zoom_time : float = 1.0
 var parts := 1
 
 
-func _set_property_values():
+func _register_properties():
 	register_property(0, "target_zoom", target_zoom)
 	register_property(1, "zoom_time", zoom_time)
 	register_property(2, "parts", parts)
@@ -46,7 +46,7 @@ func _ready():
 
 
 func _body_entered(body):
-	if enabled and body.name.begins_with("Character"):
+	if is_enabled_and_on_ground() and body.name.begins_with("Character"):
 		#print("set tween")
 		if !is_equal_approx(body.camera.zoom.x, target_zoom):
 			body.camera.set_zoom_tween(Vector2(target_zoom, target_zoom), zoom_time, true)

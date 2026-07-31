@@ -26,17 +26,17 @@ onready var sprite = $ColorRect
 onready var waves = $TextureRect
 onready var color_sprite = $TextureRect/Recolorable
 
-func _set_properties():
-	savable_properties = ["width", "height", "color", "render_in_front", "tag", "tap_mode"]
-	editable_properties = ["width", "height", "color", "render_in_front", "tag", "tap_mode"]
+#func _set_properties():
+#	savable_properties = ["width", "height", "color", "render_in_front", "tag", "tap_mode"]
+#	editable_properties = ["width", "height", "color", "render_in_front", "tag", "tap_mode"]
 
-func _set_property_values():
-	set_property("width", width, true)
-	set_property("height", height, true)
-	set_property("color", color, true)
-	set_property("render_in_front", render_in_front, true)
-	set_property("tag", tag, true)
-	set_property("tap_mode", tap_mode, true)
+func _register_properties():
+	register_property(4, "width", width, true)
+	register_property(5, "height", height, true)
+	register_property(6, "color", color, true)
+	register_property(7, "render_in_front", render_in_front, true)
+	register_property(8, "tag", tag, true)
+	register_property(9, "tap_mode", tap_mode, true)
 	set_bool_alias("tap_mode", "Move", "Scale")
 
 func _ready():
@@ -52,8 +52,8 @@ func _ready():
 	change_size()
 	last_size = Vector2(width, height)
 
-	area_collision.disabled = !enabled
-	body_collision.disabled = !enabled
+	area_collision.disabled = !is_enabled_and_on_ground()
+	body_collision.disabled = !is_enabled_and_on_ground()
 	
 	CurrentLevelData.vars.liquids.append([tag.to_lower(), self])
 

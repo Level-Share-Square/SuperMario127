@@ -21,12 +21,12 @@ var last_parts := 1
 
 var cooldown = 0.0
 
-func _set_properties():
-	savable_properties = ["launch_power"]
-	editable_properties = ["launch_power"]
+#func _set_properties():
+#	savable_properties = ["launch_power"]
+#	editable_properties = ["launch_power"]
 	
-func _set_property_values():
-	set_property("launch_power", launch_power, 10)
+func _register_properties():
+	register_property(4, "launch_power", launch_power, 10)
 	
 func set_state(to:int):
 	match(to):
@@ -81,7 +81,7 @@ func _process(delta):
 	pass
 	
 func _physics_process(delta):
-	if enabled and mode == 0:
+	if is_enabled_and_on_ground() and mode == 0:
 		
 		match(state):
 			states.IDLE:

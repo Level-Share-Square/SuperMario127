@@ -37,7 +37,7 @@ func update():
 	pass
 
 func _ready():
-	liquid_area_collision.disabled = !enabled
+	liquid_area_collision.disabled = !is_enabled_and_on_ground()
 	
 	update_liquid_color(color)
 	update()

@@ -75,12 +75,12 @@ func on_hide()->void :
 func on_show()->void :
 	on_visibility_changed(true)
 
-func _set_properties():
-	savable_properties = ["squish"]
-	editable_properties = ["squish"]
+#func _set_properties():
+#	savable_properties = ["squish"]
+#	editable_properties = ["squish"]
 	
-func _set_property_values():
-	set_property("squish", squish, true)
+func _register_properties():
+	register_property(4, "squish", squish, true)
 
 func _ready():
 	visibility_enabler.connect("screen_exited", self, "on_hide")
@@ -104,7 +104,7 @@ func _ready():
 	
 	update_eyes()
 	
-	if mode == 1 or !enabled:
+	if mode == 1 or !is_enabled_and_on_ground():
 		sprite.animation = "default"
 		eye_sprite.animation = "default"
 
@@ -128,7 +128,7 @@ func steely_hit(hit_pos:Vector2)->void :
 
 
 func detect_player(body:Character)->void :
-	if character == null and enabled and body != null and not dead:
+	if character == null and is_enabled_and_on_ground() and body != null and not dead:
 		character = body
 		
 		facing_direction = sign(character.global_position.x - body.global_position.x)
@@ -136,7 +136,7 @@ func detect_player(body:Character)->void :
 			jump()
 
 func lose_player(body: Character):
-	if character != null and enabled and body != null and not dead:
+	if character != null and is_enabled_and_on_ground() and body != null and not dead:
 		character = null
 
 func on_visibility_changed(is_visible:bool)->void :
@@ -171,7 +171,7 @@ func update_eyes():
 	eye_sprite.offset = sprite.offset
 
 func kill(hit_pos:Vector2):
-	if not hit and not dead and enabled and inv_timer <= 0:
+	if not hit and not dead and is_enabled_and_on_ground() and inv_timer <= 0:
 		if is_instance_valid(kinematic_body):
 			kinematic_body.set_collision_layer_bit(2, false)
 			stomp_area.set_collision_layer_bit(2, false)
@@ -215,7 +215,7 @@ func _physics_process(delta:float)->void :
 	time_alive += delta
 	water_scale.x = 0.95 if water_detector.get_overlapping_areas().size() > 0 else 1
 	water_scale.y = 0.25 if water_detector.get_overlapping_areas().size() > 0 else 1
-	if mode != 1 and enabled:
+	if mode != 1 and is_enabled_and_on_ground():
 		sprite.animation = "walking" if not squish else "walking_squished"
 		update_eyes()
 	
@@ -292,7 +292,7 @@ func _physics_process(delta:float)->void :
 		elif (inv_timer <= 0 and collision_layer_area.get_overlapping_bodies().empty()):
 			reset_collision_layers()
 	
-	if mode != 1 and enabled and loaded:
+	if mode != 1 and is_enabled_and_on_ground() and loaded:
 		var is_in_platform: = false
 		var platform_collision_enabled: = false
 		for platform_body in platform_detector.get_overlapping_areas():

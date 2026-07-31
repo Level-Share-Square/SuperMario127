@@ -38,7 +38,7 @@ func on_place():
 	pass
 #	CurrentLevelData.set_star_coin_ids()
 #	id = object_data.properties[6]
-#	set_property("id", id)
+#	register_property("id", id)
 
 func update_color():
 	if !is_blue:
@@ -50,7 +50,7 @@ func update_color():
 
 
 func collect(body : PhysicsBody2D) -> void:
-	if enabled and !collected and (body is Character):
+	if is_enabled_and_on_ground() and !collected and (body is Character):
 #		if Singleton.ModeSwitcher.get_node("ModeSwitcherButton").invisible:
 #			CurrentLevelData.level_info.set_star_coin_collected(id, CurrentLevelData.selected_file > -2)
 

@@ -23,8 +23,8 @@ func load_in():
 #		create_object(object, false)
 
 
-func set_property(object_node: GameObject, property, value):
-	object_node.set_property(property, value, true)
+func register_property(object_node: GameObject, property, value):
+	object_node.register_property(property, value, true)
 
 
 func create_object(object, add_to_data):
@@ -54,7 +54,7 @@ func create_object(object, add_to_data):
 			object_node.set_property_by_index(index, true_value, false)
 			index += 1
 		
-		object_node._set_property_values()
+		object_node._register_properties()
 		
 		call_deferred("add_child", object_node)
 		

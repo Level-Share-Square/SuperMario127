@@ -52,8 +52,8 @@ func _ready():
 
 func _object_ready():
 	._object_ready()
-	collision_shape.disabled = !enabled
-	platform_area_collision_shape.disabled = !enabled
+	collision_shape.disabled = !is_enabled_and_on_ground()
+	platform_area_collision_shape.disabled = !is_enabled_and_on_ground()
 
 func update_parts():
 	sprite.rect_position.x = -(left_width + (part_width * parts) + right_width) / 2

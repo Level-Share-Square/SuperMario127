@@ -33,7 +33,7 @@ func _ready():
 	change_size()
 	last_radius = radius
 	
-	area_collision.disabled = !enabled
+	area_collision.disabled = !is_enabled_and_on_ground()
 	
 	CurrentLevelData.vars.liquids.append([tag.to_lower(), self])
 

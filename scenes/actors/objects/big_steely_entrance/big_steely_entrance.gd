@@ -12,20 +12,20 @@ onready var spawn_timer: Timer = $SpawnTimer
 onready var overlap_checker: Area2D = $OverlapChecker
 
 
-func _set_property_values():
+func _register_properties():
 	register_property(0, "spawn_interval", spawn_interval)
 	register_property(1, "steely_despawn_timer", steely_despawn_timer)
 
 
 func _object_ready():
-	if enabled:
+	if is_enabled_and_on_ground():
 		spawn_timer.wait_time = spawn_interval
 		spawn_timer.start()
 		spawn_timer.connect("timeout", self, "_on_spawn_timer_timeout")
 
 
 func _on_spawn_timer_timeout():
-	if overlap_checker.has_over and steely_nodes.size() < STEELY_SPAWN_LIMIT and enabled: 
+	if overlap_checker.has_over and steely_nodes.size() < STEELY_SPAWN_LIMIT and is_enabled_and_on_ground(): 
 		var steely_node = create_new_steely_object()
 		
 		if steely_despawn_timer > 0:

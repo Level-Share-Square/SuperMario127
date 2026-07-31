@@ -24,28 +24,28 @@ var platform_count := 4
 
 onready var hitbox = $EditorCircle
 
-func _set_properties():
-	savable_properties = ["parts", "speed", "radius", "platform_count", "color", "start_angle"]
-	editable_properties = ["parts", "speed", "radius", "platform_count", "color", "start_angle"]
-	
-func _set_property_values():
-	set_property("parts", parts)
-	set_property("speed", speed)
-	set_property("radius", radius)
-	set_property("platform_count", platform_count)
-	set_property("color", color)
-	set_property("start_angle", start_angle)
+#func _set_properties():
+#	savable_properties = ["parts", "speed", "radius", "platform_count", "color", "start_angle"]
+#	editable_properties = ["parts", "speed", "radius", "platform_count", "color", "start_angle"]
+#
+func _register_properties():
+	register_property(4, "parts", parts)
+	register_property(5, "speed", speed)
+	register_property(6, "radius", radius)
+	register_property(7, "platform_count", platform_count)
+	register_property(8, "color", color)
+	register_property(9, "start_angle", start_angle)
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton and event.is_pressed() and hovered:
+	if event is InputEventMouseButton and event.is_pressed() and is_object_hovered():
 		if event.button_index == 5: # Mouse wheel down
 			parts -= 1
 			if parts < 1:
 				parts = 1
-			set_property("parts", parts)
+			set_property("parts", parts, true)
 		elif event.button_index == 4: # Mouse wheel up
 			parts += 1
-			set_property("parts", parts)
+			set_property("parts", parts, true)
 
 func _process(_delta):
 	if parts != last_parts:
@@ -68,9 +68,9 @@ func _process(_delta):
 				add_child(instance)
 				instance.set_parts(parts)
 				
-				# Disable the collision if enabled = false
-				instance.collision_shape.disabled = !enabled
-				instance.platform_area_collision_shape.disabled = !enabled
+				# Disable the collision if is_enabled_and_on_ground() = false
+				instance.collision_shape.disabled = !is_enabled_and_on_ground()
+				instance.platform_area_collision_shape.disabled = !is_enabled_and_on_ground()
 				
 		elif platform_count<platforms.size():
 			var delta_count = platforms.size() - platform_count
@@ -116,9 +116,9 @@ func _ready():
 		add_child(instance)
 		instance.z_index = z_index
 		
-		# Disable the collision if enabled = false
-		instance.collision_shape.disabled = !enabled
-		instance.platform_area_collision_shape.disabled = !enabled
+		# Disable the collision if is_enabled_and_on_ground() = false
+		instance.collision_shape.disabled = !is_enabled_and_on_ground()
+		instance.platform_area_collision_shape.disabled = !is_enabled_and_on_ground()
 		
 func _physics_process(_delta):
 	time_alive += fps_util.PHYSICS_DELTA * speed

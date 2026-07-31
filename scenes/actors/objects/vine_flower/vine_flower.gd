@@ -8,10 +8,10 @@ var color := Color(1, 0, 0)
 
 
 func _register_properties():
-	register_property(0, "color", color)
+	register_property(4, "color", color)
 
 func _ready():
-	collision_shape.disabled = !enabled
+	collision_shape.disabled = !is_enabled_and_on_ground()
 	preview_position = custom_preview_position
 	if is_preview:
 		z_index = 0

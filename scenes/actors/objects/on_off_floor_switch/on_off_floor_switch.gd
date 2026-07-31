@@ -17,12 +17,12 @@ var switch_mode : bool = true
 
 var self_activated : bool = false
 
-func _set_properties():
-	savable_properties = ["switch_mode"]
-	editable_properties = ["switch_mode"]
+#func _set_properties():
+#	savable_properties = ["switch_mode"]
+#	editable_properties = ["switch_mode"]
 
-func _set_property_values():
-	set_property("switch_mode", switch_mode, true)
+func _register_properties():
+	register_property(4, "switch_mode", switch_mode, true)
 	set_bool_alias("switch_mode", "On", "Off")
 
 func _ready():
@@ -55,7 +55,7 @@ func press(hit_pos : Vector2) -> void:
 
 func _physics_process(delta):
 	if mode == 1: return
-	if enabled:
+	if is_enabled_and_on_ground():
 		if pressed and is_instance_valid(character) and !character.dead:
 			# Mario stepped on the switch (it broke, how will he play vidya game now)
 			if boost_timer > 0:

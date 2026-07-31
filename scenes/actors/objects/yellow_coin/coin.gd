@@ -31,7 +31,7 @@ func _register_properties():
 
 
 func collect(body, is_shell = false):
-	if enabled and !collected and (body and body.name.begins_with("Character") and !body.dead) or is_shell:
+	if is_enabled_and_on_ground() and !collected and (body and body.name.begins_with("Character") and !body.dead) or is_shell:
 		CurrentLevelData.vars.collect_coin(coins)
 		
 		if body:
@@ -55,7 +55,7 @@ func _object_ready():
 	var _connect = area.connect("body_entered", self, "collect")
 	
 	for body in area.get_overlapping_bodies():
-			if enabled and !collected and (body and body.name.begins_with("Character") and !body.dead):
+			if is_enabled_and_on_ground() and !collected and (body and body.name.begins_with("Character") and !body.dead):
 				collect(body)
 	
 	gravity = CurrentLevelData.current_area.header.gravity
@@ -73,7 +73,7 @@ func _object_process(delta):
 
 var prev_activate_shape = false
 func _object_physics_process(delta):
-	if not is_on_ground_layer() or not enabled:
+	if not is_on_ground_layer() or not is_enabled_and_on_ground():
 		return
 	
 	if !do_physics() or !visibility_enabler.is_on_screen():

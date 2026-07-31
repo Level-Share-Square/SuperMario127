@@ -5,12 +5,12 @@ onready var sprite = $Sprite
 var sway : bool = false
 var sway_offset : float = rand_range(-127, 127)
 
-func _set_properties():
-	savable_properties = ["sway"]
-	editable_properties = ["sway"]
+#func _set_properties():
+#	savable_properties = ["sway"]
+#	editable_properties = ["sway"]
 
-func _set_property_values():
-	set_property("sway", sway, true)
+func _register_properties():
+	register_property(4, "sway", sway, true)
 
 func _process(delta):
 	if sway:

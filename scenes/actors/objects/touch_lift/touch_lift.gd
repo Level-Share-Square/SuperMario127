@@ -40,17 +40,16 @@ var path_length : float = 0
 
 
 func _register_properties():
-	register_property(0, "parts", parts)
-	register_property(1, "max_speed", max_speed)
-	register_property(2, "curve", curve)
-	register_property(3, "end_position", end_position)
-	register_property(4, "move_type", move_type)
+	register_property(4, "parts", parts)
+	register_property(5, "max_speed", max_speed)
+	register_property(6, "curve", curve)
+	register_property(7, "move_type", move_type)
 	set_property_menu("move_type", ["option", 5, 0, ['Back and Forth', 'Reset', 'Once', 'Loop', 'Freeze']])
-	register_property(5, "touch_start", touch_start)
-	register_property(6, "color", color)
-	register_property(7, "start_offset", start_offset)
-	register_property(8, "custom_path", curve)
-	register_property(9, "path_length", path_length)
+	register_property(8, "touch_start", touch_start)
+	register_property(9, "color", color)
+	register_property(10, "start_offset", start_offset)
+	register_property(11, "custom_path", curve, false)
+	register_property(12, "path_length", path_length)
 	set_property_menu("path_length", ["viewer"])
 
 
@@ -116,8 +115,8 @@ onready var part_width = platform_sprite.texture.get_width() - left_width - righ
 func _ready():
 	activated = !touch_start
 	$TouchLiftPlatform/Area2D/CollisionShape2D.disabled = false
-	platform.collision_shape.disabled = !enabled
-	platform.platform_area_collision_shape.disabled = !enabled
+	platform.collision_shape.disabled = !is_enabled_and_on_ground()
+	platform.platform_area_collision_shape.disabled = !is_enabled_and_on_ground()
 	
 	platform.platform_area_collision_shape.get_parent().connect("body_entered", self, "_on_touch_area_entered")
 	if curve.get_point_count() == 0:

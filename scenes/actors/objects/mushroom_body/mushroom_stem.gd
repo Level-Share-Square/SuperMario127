@@ -9,12 +9,12 @@ onready var sprite : NinePatchRect = $Node2D/Sprite
 
 var parts : int = 1
 
-func _set_properties():
-	savable_properties = ["parts"]
-	editable_properties = ["parts"]
+#func _set_properties():
+#	savable_properties = ["parts"]
+#	editable_properties = ["parts"]
 	
-func _set_property_values():
-	set_property("parts", parts, true)
+func _register_properties():
+	register_property(4, "parts", parts, true)
 
 func _unhandled_input(event: InputEvent) -> void:
 	parts_input_handler(event,self)

@@ -32,35 +32,35 @@ var path_length : float = 0.0
 var disappears : bool = true
 var inverted : bool = false
 
-func _set_properties():
-	savable_properties = ["parts", "max_speed", "curve", "move_type", "touch_start", "start_offset", "disappears", "inverted", "custom_path", "path_length"]
-	editable_properties = ["parts", "max_speed", "move_type", "touch_start", "start_offset", "inverted", "curve", "path_length"]
-	
-func _set_property_values():
-	set_property("parts", parts)
-	set_property("max_speed", max_speed)
-	set_property("curve", curve)
-	set_property("end_position", end_position)
-	set_property("move_type", move_type)
+#func _set_properties():
+#	savable_properties = ["parts", "max_speed", "curve", "move_type", "touch_start", "start_offset", "disappears", "inverted", "custom_path", "path_length"]
+#	editable_properties = ["parts", "max_speed", "move_type", "touch_start", "start_offset", "inverted", "curve", "path_length"]
+#
+func _register_properties():
+	register_property(4, "parts", parts)
+	register_property(5, "max_speed", max_speed)
+	register_property(6, "curve", curve)
+	register_property(7, "end_position", end_position, false)
+	register_property(8, "move_type", move_type)
 	set_property_menu("move_type", ["option", 5, 0, ['Back and Forth', 'Reset', 'Once', 'Loop', 'Freeze']])
-	set_property("touch_start", touch_start)
-	set_property("start_offset", start_offset)
-	set_property("disappears", disappears)
-	set_property("inverted", inverted)
-	set_property("custom_path", curve)
-	set_property("path_length", path_length)
+	register_property(9, "touch_start", touch_start)
+	register_property(10, "start_offset", start_offset)
+	register_property(11, "disappears", disappears, false)
+	register_property(12, "inverted", inverted)
+	register_property(13, "custom_path", curve, false)
+	register_property(14, "path_length", path_length)
 	set_property_menu("path_length", ["viewer"])
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton and event.is_pressed() and hovered:
+	if event is InputEventMouseButton and event.is_pressed() and is_object_hovered():
 		if event.button_index == 5: # Mouse wheel down
 			parts -= 1
 			if parts < 1:
 				parts = 1
-			set_property("parts", parts)
+			set_property("parts", parts, true)
 		elif event.button_index == 4: # Mouse wheel up
 			parts += 1
-			set_property("parts", parts)
+			set_property("parts", parts, true)
 
 func _process(_delta):
 	if parts != last_parts:
@@ -120,11 +120,11 @@ func _ready():
 		path.curve.add_point(Vector2())
 		path.curve.add_point(Vector2(0,-64))
 		
-		set_property("curve", path.curve)
+		set_property("curve", path.curve, true)
 	elif path.curve == null:
 		path.curve = curve
 	elif curve == null:
-		set_property("curve", path.curve)
+		set_property("curve", path.curve, true)
 	
 	platform.set_parts(parts)
 	
@@ -149,7 +149,7 @@ func _ready():
 		end_sprite_node.modulate = transparent_color
 		add_child(end_sprite_node)
 		
-		set_property("end_position", path.curve.get_point_position(path.curve.get_point_count()-1)/32)
+		set_property("end_position", path.curve.get_point_position(path.curve.get_point_count()-1)/32, true)
 
 func _object_disabled_ready():
 	._object_disabled_ready()

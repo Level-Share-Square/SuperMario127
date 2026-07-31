@@ -14,27 +14,27 @@ var horizontal := false
 var cycle_timer := 0.0
 var cycle_offset := 0.0
 
-func _set_properties():
-	savable_properties = ["tag", "auto_activate", "move_speed", "offset", "horizontal", "cycle_timer", "cycle_offset"]
-	editable_properties = ["tag", "auto_activate", "move_speed", "offset", "horizontal", "cycle_timer", "cycle_offset"]
+#func _set_properties():
+#	savable_properties = ["tag", "auto_activate", "move_speed", "offset", "horizontal", "cycle_timer", "cycle_offset"]
+#	editable_properties = ["tag", "auto_activate", "move_speed", "offset", "horizontal", "cycle_timer", "cycle_offset"]
 
-func _set_property_values():
-	set_property("tag", tag)
-	set_property("auto_activate", auto_activate, true, "Activate on Start")
-	set_property("move_speed", move_speed)
-	set_property("offset", offset)
-	set_property("horizontal", horizontal)
-	set_property("cycle_timer", cycle_timer)
-	set_property("cycle_offset", cycle_offset)
+func _register_properties():
+	register_property(4, "tag", tag)
+	register_property(5, "auto_activate", auto_activate, true)
+	register_property(6, "move_speed", move_speed)
+	register_property(7, "offset", offset)
+	register_property(8, "horizontal", horizontal)
+	register_property(9, "cycle_timer", cycle_timer)
+	register_property(10, "cycle_offset", cycle_offset)
 
 func _input(event: InputEvent) -> void:
-	if event is InputEventMouseButton and event.is_pressed() and hovered:
+	if event is InputEventMouseButton and event.is_pressed() and is_object_hovered():
 		if event.button_index == 4: # Mouse wheel up
 			offset -= 8
-			set_property("offset", offset)
+			set_property("offset", offset, true)
 		elif event.button_index == 5: # Mouse wheel down
 			offset += 8
-			set_property("offset", offset)
+			set_property("offset", offset, true)
 
 func _ready():
 	get_parent().connect("objects_ready", self, "ready_synced")
@@ -51,7 +51,7 @@ func _ready():
 		offset_line.visible = true
 	
 func _object_ready():
-	if enabled:
+	if is_enabled_and_on_ground():
 		var _connect = use_area.connect("body_entered", self, "set_liquid_level")
 	
 

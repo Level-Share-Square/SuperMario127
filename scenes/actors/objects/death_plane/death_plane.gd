@@ -13,14 +13,14 @@ export var vertical := false
 
 var last_parts := 1
 
-func _set_properties():
-	savable_properties = ["parts", "stops_camera", "vertical"]
-	editable_properties = ["parts", "stops_camera", "vertical"]
+#func _set_properties():
+#	savable_properties = ["parts", "stops_camera", "vertical"]
+#	editable_properties = ["parts", "stops_camera", "vertical"]
 
-func _set_property_values():
-	set_property("parts", parts, 1)
-	set_property("stops_camera", stops_camera)
-	set_property("vertical", vertical)
+func _register_properties():
+	register_property(4, "parts", parts)
+	register_property(5, "stops_camera", stops_camera)
+	register_property(6, "vertical", vertical)
 	
 func _unhandled_input(event: InputEvent) -> void:
 	parts_input_handler(event,self)
@@ -77,7 +77,7 @@ func update_parts():
 		camera_stop_shape.shape.extents.x = collision_shape.shape.extents.x + 26
 		
 func kill(body):
-	if enabled and body.name.begins_with("Character") and !body.dead and body.controllable:
+	if is_enabled_and_on_ground() and body.name.begins_with("Character") and !body.dead and body.controllable:
 		if stops_camera:
 			body.sprite.visible = false
 			body.kill("fall")

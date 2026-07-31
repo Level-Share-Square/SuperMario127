@@ -24,24 +24,24 @@ signal stop_talking
 signal change_emote(expression, action)
 
 
-func _set_properties():
-	savable_properties = ["dialogue", "character_name", "autostart", "interactable", "bubble_text", "display_mode", "tag", "delegate_tag", "zoom_size"]
-	editable_properties = ["dialogue", "bubble_text", "character_name", "display_mode", "zoom_size", "tag", "delegate_tag", "autostart", "interactable"]
-	
-func _set_property_values():		
-	set_property("dialogue", dialogue, true)
-	set_property("character_name", character_name, true)
-	set_property("autostart", autostart, true)
+#func _set_properties():
+#	savable_properties = ["dialogue", "character_name", "autostart", "interactable", "bubble_text", "display_mode", "tag", "delegate_tag", "zoom_size"]
+#	editable_properties = ["dialogue", "bubble_text", "character_name", "display_mode", "zoom_size", "tag", "delegate_tag", "autostart", "interactable"]
+#
+func _register_properties():		
+	register_property(4, "dialogue", dialogue, true)
+	register_property(5, "character_name", character_name, true)
+	register_property(6, "autostart", autostart, true)
 	set_property_menu("autostart", ["option", 3, 0, ["Don't Autostart", "Autostart", "Autostart (Oneshot)"]])
-	set_property("interactable", interactable, true)
+	register_property(7, "interactable", interactable, true)
 	
-	set_property("bubble_text", bubble_text, true)
-	set_property("display_mode", display_mode, true)
+	register_property(8, "bubble_text", bubble_text, true)
+	register_property(9, "display_mode", display_mode, true)
 	set_property_menu("display_mode", ["option", 3, 0, ["Menu", "Speech Bubble", "Both"]])
 	
-	set_property("tag", tag, true)
-	set_property("delegate_tag", delegate_tag, true)
-	set_property("zoom_size", zoom_size, true, "Target Zoom")
+	register_property(10, "tag", tag, true)
+	register_property(11, "delegate_tag", delegate_tag, true)
+	register_property(12, "zoom_size", zoom_size, true)
 
 
 func _ready():

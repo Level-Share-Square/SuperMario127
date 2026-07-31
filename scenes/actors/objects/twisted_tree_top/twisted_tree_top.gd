@@ -8,7 +8,7 @@ export (Array, Texture) var palette_textures
 var color: = Color(1, 0, 0)
 
 func _register_properties():
-	register_property(0, "color", color, true)
+	register_property(4, "color", color, true)
 
 func _ready():
 	preview_position = custom_preview_position

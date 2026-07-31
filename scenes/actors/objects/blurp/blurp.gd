@@ -50,17 +50,17 @@ var character : Character
 
 export var top_point : Vector2
 
-func _set_properties():
-	savable_properties = ["color", "rainbow"]
-	editable_properties = ["color", "rainbow"]
-	
-func _set_property_values():
-	set_property("color", color, true)
-	set_property("rainbow", rainbow, true)
+#func _set_properties():
+#	savable_properties = ["color", "rainbow"]
+#	editable_properties = ["color", "rainbow"]
+#
+func _register_properties():
+	register_property(4, "color", color, true)
+	register_property(5, "rainbow", rainbow, true)
 
 
 func detect_player(body : Character) -> void:
-	if character == null and enabled and body != null and !dead:
+	if character == null and is_enabled_and_on_ground() and body != null and !dead:
 		character = body
 
 func remove_player(body : Character) -> void:
@@ -148,7 +148,7 @@ func _process(_delta) -> void:
 func _physics_process(delta : float) -> void:
 	time_alive += delta
 	
-	if mode != 1 and enabled and loaded:
+	if mode != 1 and is_enabled_and_on_ground() and loaded:
 		var is_in_platform := false
 		var platform_collision_enabled := false
 		for platform_body in platform_detector.get_overlapping_areas():

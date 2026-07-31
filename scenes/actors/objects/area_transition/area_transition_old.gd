@@ -21,21 +21,21 @@ var entering := false
 var players: Array = []
 
 var stored_characters : Array = [null, null]
-
-func _set_properties():
-	savable_properties = ["area_id", "destination_tag", "teleportation_mode", "vertical", "parts", "stops_camera", "force_fadeout"]
-	editable_properties = ["area_id", "destination_tag", "teleportation_mode", "vertical", "parts", "stops_camera", "force_fadeout"]
+#
+#func _set_properties():
+#	savable_properties = ["area_id", "destination_tag", "teleportation_mode", "vertical", "parts", "stops_camera", "force_fadeout"]
+#	editable_properties = ["area_id", "destination_tag", "teleportation_mode", "vertical", "parts", "stops_camera", "force_fadeout"]
 	
-func _set_property_values():
-	set_property("area_id", area_id, true, "Area Destination")
-	set_property("destination_tag", destination_tag, true)
-	set_property("teleportation_mode", teleportation_mode, true, "Teleport Mode")
+func _register_properties():
+	register_property(4, "area_id", area_id, true)
+	register_property(5, "destination_tag", destination_tag, true)
+	register_property(6, "teleportation_mode", teleportation_mode, true)
 	set_bool_alias("teleportation_mode", "Remote", "Local")
-	set_property("vertical", vertical)
-	set_property("parts", parts)
-	set_property("stops_camera", stops_camera)
-	set_property("force_fadeout", force_fadeout)
-#	set_property("instant", instant, true, "Instant (Local)")
+	register_property(7, "vertical", vertical)
+	register_property(8, "parts", parts)
+	register_property(9, "stops_camera", stops_camera)
+	register_property(10, "force_fadeout", force_fadeout)
+#	register_property("instant", instant, true, "Instant (Local)")
 	
 func _init():
 	teleportation_mode = true
@@ -138,7 +138,7 @@ func _physics_process(_delta : float) -> void:
 	if "\n" in destination_tag:
 		destination_tag = destination_tag.replace("\n", "")
 #	print("physics process, entering: ",entering)
-	if is_idle and enabled and !teleportation_mode and !entering:
+	if is_idle and is_enabled_and_on_ground() and !teleportation_mode and !entering:
 		#the area2d is set to only collide with characters, so we can (hopefully) safely assume if there 
 		#is a collision it's with a character
 		for body in area2d.get_overlapping_bodies():
@@ -156,7 +156,7 @@ func _physics_process(_delta : float) -> void:
 		#print(character.position)
 
 func _on_body_entered(body):
-	if enabled and is_idle and !entering and teleportation_mode:
+	if is_enabled_and_on_ground() and is_idle and !entering and teleportation_mode:
 		if body.name.begins_with("Character") and !body.dead:
 			players = get_tree().root.get_node("Player").get_characters()
 			for player in players:

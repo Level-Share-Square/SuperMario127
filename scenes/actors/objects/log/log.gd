@@ -21,12 +21,12 @@ var shake_amount := 1.0
 
 var fall_speed := 1.0
 
-func _set_properties():
-	savable_properties = ["fall_on_touch"]
-	editable_properties = ["fall_on_touch"]
+#func _set_properties():
+#	savable_properties = ["fall_on_touch"]
+#	editable_properties = ["fall_on_touch"]
 	
-func _set_property_values():
-	set_property("fall_on_touch", fall_on_touch, true)
+func _register_properties():
+	register_property(4, "fall_on_touch", fall_on_touch, true)
 	
 func can_collide_with(_character):
 	return true
@@ -35,7 +35,7 @@ func _ready():
 	if is_preview:
 		z_index = 0
 		sprite.z_index = 0
-	if !enabled:
+	if !is_enabled_and_on_ground():
 		collision_shape.disabled = true
 	orig_pos = position
 	if mode != 1:
@@ -44,7 +44,7 @@ func _ready():
 
 func fall_detector(body):
 
-	if character and enabled:
+	if character and is_enabled_and_on_ground():
 		var can_fall = false
 		var _direction = static_body.global_transform.y.normalized()
 		if character.velocity.y >= 0 and character.is_grounded():
@@ -111,7 +111,7 @@ func _physics_process(delta):
 			Tween.TRANS_QUART, Tween.EASE_OUT)
 			tween.start()
 		
-	if character != null and !falling and enabled:
+	if character != null and !falling and is_enabled_and_on_ground():
 		var direction = static_body.global_transform.y.normalized()
 		
 		if direction.y > 0.5:

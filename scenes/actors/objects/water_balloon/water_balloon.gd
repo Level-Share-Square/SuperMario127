@@ -20,14 +20,14 @@ var timer = 0.0
 
 
 func _register_properties():
-	register_property(0, "added_stamina", added_stamina)
-	register_property(1, "added_water", added_water)
-	register_property(2, "respawn_timer", respawn_timer)
-	register_property(3, "color", color)
+	register_property(4, "added_stamina", added_stamina)
+	register_property(5, "added_water", added_water)
+	register_property(6, "respawn_timer", respawn_timer)
+	register_property(7, "color", color)
 
 
 func collect(body):
-	if enabled and !collected and body.name.begins_with("Character") and !body.dead:
+	if is_enabled_and_on_ground() and !collected and body.name.begins_with("Character") and !body.dead:
 		$Particles2D.emitting = false
 		$Particles2D2.emitting = true
 		sound.play()

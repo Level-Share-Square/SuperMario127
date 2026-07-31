@@ -55,13 +55,13 @@ func _set_properties():
 		i += 1
 
 
-func _set_property_values():
+func _register_properties():
 	for spawner_property in spawner_properties:
-		set_property(spawner_property, self[spawner_property], true)
+		register_property(spawner_property, self[spawner_property], true)
 	set_property_menu("respawn_mode", ["option", 3, 0, ['Never', 'Offscreen', 'Onscreen']])
 	
 	for enemy_property in get_enemy_properties():
-		set_property(enemy_property, self[enemy_property], true)
+		register_property(enemy_property, self[enemy_property], true)
 	set_enemy_property_menus()
 
 
@@ -71,7 +71,7 @@ func instance_enemy(emit_particles: bool = true) -> EnemyBase:
 	
 	var spawned_enemy: EnemyBase = load(enemy_scene_path).instance()
 	# disable it if in editor
-	spawned_enemy.enabled = (enabled and mode != 1)
+	spawned_enemy.enabled = (is_enabled_and_on_ground() and mode != 1)
 	# hide it if invisible
 	spawned_enemy.visible = is_visible
 	
@@ -82,7 +82,7 @@ func instance_enemy(emit_particles: bool = true) -> EnemyBase:
 		spawned_enemy.scale = Vector2.ONE
 		spawned_enemy.facing_direction = -1
 	# and rotation
-	if enabled:
+	if is_enabled_and_on_ground():
 		rotation = 0
 	# and layer trol
 	spawned_enemy.layer_ref = level_layer_ref

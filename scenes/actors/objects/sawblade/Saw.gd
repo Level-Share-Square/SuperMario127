@@ -18,7 +18,7 @@ func kill(body):
 	
 	enabled = get_parent().get_parent().get_parent().enabled
 	
-	if !(enabled and body.name.begins_with("Character") and !body.dead and body.controllable):
+	if !(is_enabled_and_on_ground() and body.name.begins_with("Character") and !body.dead and body.controllable):
 		return
 	
 	

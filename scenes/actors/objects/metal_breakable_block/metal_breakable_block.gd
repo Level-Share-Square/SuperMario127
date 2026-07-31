@@ -17,12 +17,12 @@ var character = null
 var coins = 0
 var time_alive = 0.0
 
-func _set_properties():
-	savable_properties = ["coins"]
-	editable_properties = ["coins"]
+#func _set_properties():
+#	savable_properties = ["coins"]
+#	editable_properties = ["coins"]
 
-func _set_property_values(): 
-	set_property("coins", coins, true)
+func _register_properties(): 
+	register_property(4, "coins", coins, true)
 
 func _ready():
 	break_particle.hide()
@@ -43,21 +43,21 @@ func _object_ground_ready():
 
 func _object_disabled_ready():
 	._object_disabled_ready()
-	if !enabled:
+	if !is_enabled_and_on_ground():
 		collision_shape.disabled = true
 		for _area in [area, stomp_area, spin_area]:
 			_area.collision_layer = 0
 			_area.collision_mask = 0
 
 func detect_player(body):
-	if enabled and body.name.begins_with("Character") and !broken and character == null:
+	if is_enabled_and_on_ground() and body.name.begins_with("Character") and !broken and character == null:
 		character = body
 
 func is_metal(body):
 	return body.powerup != null and body.powerup.id == "Metal"
 
 func _physics_process(delta):
-	if mode != 1 and enabled:
+	if mode != 1 and is_enabled_and_on_ground():
 		time_alive += delta
 		
 		for hit_body in stomp_area.get_overlapping_bodies():

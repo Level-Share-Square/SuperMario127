@@ -48,26 +48,26 @@ var coll
 
 # overriding cos star doors have a bunch of unique properties that need accounting for
 ### PROPERTIES
-func _set_properties() -> void:
-	savable_properties = ["target_area", "tag", "teleport_mode", "max_pan_distance", "level_path", "collectible", "required_amount", "required_key", "insufficient_text", "is_single"]
-	editable_properties = ["target_area", "tag", "teleport_mode", "max_pan_distance", "level_path", "collectible", "required_amount", "required_key", "insufficient_text"]
+#func _set_properties() -> void:
+#	savable_properties = ["target_area", "tag", "teleport_mode", "max_pan_distance", "level_path", "collectible", "required_amount", "required_key", "insufficient_text", "is_single"]
+#	editable_properties = ["target_area", "tag", "teleport_mode", "max_pan_distance", "level_path", "collectible", "required_amount", "required_key", "insufficient_text"]
 
 
-func _set_property_values() -> void:
-	set_property("target_area", target_area)
-	set_property("tag", tag)
-	set_property("teleport_mode", teleport_mode, true)
+func _register_properties() -> void:
+	register_property(5, "target_area", target_area)
+	register_property(6, "tag", tag)
+	register_property(7, "teleport_mode", teleport_mode, true)
 	set_property_menu("teleport_mode", ["option", 3, 0, ["Location", "Area", "Level"]])
 	set_bool_alias("teleportation_mode", "Remote", "Local")
-	set_property("max_pan_distance", max_pan_distance)
-	set_property("level_path", level_path)
+	register_property(8, "max_pan_distance", max_pan_distance)
+	register_property(9, "level_path", level_path)
 
-	set_property("collectible", collectible)
+	register_property(10, "collectible", collectible)
 	set_property_menu("collectible", ["option_string", possible_coll, 0, ["Shines", "Star Coins", "Coins", "Star Bits", "Empty"]])
-	set_property("required_amount", required_amount)
-	set_property("required_key", required_key)
-	set_property("insufficient_text", insufficient_text)
-	set_property("is_single", is_single)
+	register_property(11, "required_amount", required_amount)
+	register_property(12, "required_key", required_key)
+	register_property(13, "insufficient_text", insufficient_text)
+	register_property(14, "is_single", is_single, false)
 
 
 func _on_property_changed(key, value):
@@ -204,7 +204,7 @@ func _ready() -> void:
 	# also reusing the paratroopa one cuz idk dont feel like making new script
 	var scene = get_tree().current_scene
 	if scene.mode == 1 and scene.placed_item_property == "Para":
-		set_property("is_single", true)
+		register_property("is_single", true)
 	
 	# set up single vs double doors
 	door_sprite.set_sprite_frames(single_door_frames if is_single else double_door_frames)

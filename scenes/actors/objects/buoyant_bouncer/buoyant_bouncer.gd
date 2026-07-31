@@ -11,13 +11,13 @@ var physics_enabled := true
 export(Array, Texture) var palette_textures
 
 
-func _set_properties():
-	savable_properties = ["strong_bounce_power", "physics_enabled"]
-	editable_properties = ["strong_bounce_power", "physics_enabled"]
+#func _set_properties():
+#	savable_properties = ["strong_bounce_power", "physics_enabled"]
+#	editable_properties = ["strong_bounce_power", "physics_enabled"]
 	
-func _set_property_values():
-	set_property("strong_bounce_power", strong_bounce_power, 650)
-	set_property("physics_enabled", physics_enabled)
+func _register_properties():
+	register_property(4, "strong_bounce_power", strong_bounce_power, true)
+	register_property(5, "physics_enabled", physics_enabled, true)
 
 
 
@@ -98,7 +98,7 @@ func _ready():
 	
 func _object_disabled_ready():
 	._object_disabled_ready()
-	if !enabled:
+	if !is_enabled_and_on_ground():
 		collision_shape.disabled = true
 
 func mario_entered(body):

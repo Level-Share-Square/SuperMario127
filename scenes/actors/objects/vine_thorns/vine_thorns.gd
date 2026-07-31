@@ -22,7 +22,7 @@ var last_parts := 1
 
 
 func _register_properties():
-	register_property(0, "parts", parts, 1)
+	register_property(4, "parts", parts, 1)
 
 func _ready():
 	preview_position = custom_preview_position
@@ -54,7 +54,7 @@ func is_vanish(body):
 	return body.powerup != null and (body.powerup.id == "Vanish" or body.powerup.id == "Metal" or body.powerup.id == "Rainbow")
 	
 func _physics_process(delta):
-	if !enabled:
+	if !is_enabled_and_on_ground():
 		return
 	for body in area.get_overlapping_bodies():
 		if !(body.name.begins_with("Character") and !body.dead and body.controllable):

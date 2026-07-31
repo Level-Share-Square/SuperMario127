@@ -19,7 +19,7 @@ var id : int
 export var anim_damp = 80
 
 func collect(body):
-	if enabled and !collected and body.name.begins_with("Character") and !body.dead:
+	if is_enabled_and_on_ground() and !collected and body.name.begins_with("Character") and !body.dead:
 		CurrentLevelData.vars.collect_shine_shard(id)
 		var player_id = 1
 		if body.name == "Character":
@@ -46,7 +46,7 @@ func _ready():
 		animation_player.play("RESET")
 		return
 	
-	if enabled:
+	if is_enabled_and_on_ground():
 		id = CurrentLevelData.vars.max_shine_shards
 		CurrentLevelData.vars.max_shine_shards += 1
 	

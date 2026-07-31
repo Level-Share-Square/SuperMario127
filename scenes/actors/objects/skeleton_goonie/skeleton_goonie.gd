@@ -50,14 +50,14 @@ var bombs: = false
 var dead: = false
 var hit: = false
 
-func _set_properties():
-	savable_properties = ["wingless", "speed", "bombs"]
-	editable_properties = ["wingless", "speed", "bombs"]
+#func _set_properties():
+#	savable_properties = ["wingless", "speed", "bombs"]
+#	editable_properties = ["wingless", "speed", "bombs"]
 
-func _set_property_values():
-	set_property("wingless", wingless, true)
-	set_property("speed", speed, true)
-	set_property("bombs", bombs, true)
+func _register_properties():
+	register_property(4, "wingless", wingless, true)
+	register_property(5, "speed", speed, true)
+	register_property(6, "bombs", bombs, true)
 
 func update_wingless():
 	if (wingless):
@@ -182,7 +182,7 @@ func drop_bomb():
 func goonie_physics_process(delta: float):
 	sprite.playing = true
 	
-	if not (mode != 1 and enabled):
+	if not (mode != 1 and is_enabled_and_on_ground()):
 		update_wingless()
 		if (wingless):
 			sprite.global_position = wingless_body.global_position

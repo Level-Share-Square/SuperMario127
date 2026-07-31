@@ -55,16 +55,16 @@ var stored_zoom: float = 1.0
 onready var cannon_move_noise : AudioStream = preload("res://scenes/actors/objects/cannon/crank.tres")
 onready var cannon_fire_noise : AudioStream = preload("res://scenes/actors/objects/cannon/nsmbwiiBobombCannon.wav")
 
-func _set_properties() -> void:
-	savable_properties = ["launch_power", "min_rotation", "max_rotation", "faces_right", "target_zoom"]
-	editable_properties = ["launch_power", "min_rotation", "max_rotation", "faces_right", "target_zoom"]
-	
-func _set_property_values() -> void:
-	set_property("launch_power", launch_power)
-	set_property("min_rotation", min_rotation)
-	set_property("max_rotation", max_rotation)
-	set_property("faces_right", faces_right)
-	set_property("target_zoom", target_zoom)
+#func _set_properties() -> void:
+#	savable_properties = ["launch_power", "min_rotation", "max_rotation", "faces_right", "target_zoom"]
+#	editable_properties = ["launch_power", "min_rotation", "max_rotation", "faces_right", "target_zoom"]
+#
+func _register_properties() -> void:
+	register_property(4, "launch_power", launch_power)
+	register_property(5, "min_rotation", min_rotation)
+	register_property(6, "max_rotation", max_rotation)
+	register_property(7, "faces_right", faces_right)
+	register_property(8, "target_zoom", target_zoom)
 	
 func _ready() -> void:
 	set_physics_process(false)

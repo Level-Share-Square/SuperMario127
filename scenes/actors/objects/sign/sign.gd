@@ -58,10 +58,10 @@ func _ready():
 		sprite.texture = palette_textures[palette - 1]
 		stick_sprite.texture = palette_textures_2[palette - 1]
 	
-	if !enabled:
+	if !is_enabled_and_on_ground():
 		interact_pop_up.visible = false
 	
-	if not enabled:
+	if not is_enabled_and_on_ground():
 		speech_bubble.hide()
 	if open_menu:
 		speech_bubble.hide()
@@ -79,7 +79,7 @@ func _ready():
 		var _connect2 = area.connect("body_exited", self, "exit_area")
 
 func enter_area(body):
-	if body.name.begins_with("Character") and character == null and enabled:
+	if body.name.begins_with("Character") and character == null and is_enabled_and_on_ground():
 		character = body
 		
 		if open_menu:
@@ -87,7 +87,7 @@ func enter_area(body):
 
 
 func exit_area(body):
-	if body == character and character.get_collision_layer_bit(1) and enabled:
+	if body == character and character.get_collision_layer_bit(1) and is_enabled_and_on_ground():
 		character = null
 		if reset_read_timer == 0 and open_menu:
 			message_disappear.play()

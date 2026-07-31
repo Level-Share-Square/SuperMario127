@@ -23,17 +23,17 @@ onready var area_collision = $Col/Shape
 onready var sprite = $Fill
 onready var waves = $Line
 
-func _set_properties():
-	savable_properties = ["radius", "color", "render_in_front", "tag", "toxicity", "tap_mode"]
-	editable_properties = ["radius", "color", "render_in_front", "tag", "toxicity", "tap_mode"]
+#func _set_properties():
+#	savable_properties = ["radius", "color", "render_in_front", "tag", "toxicity", "tap_mode"]
+#	editable_properties = ["radius", "color", "render_in_front", "tag", "toxicity", "tap_mode"]
 
-func _set_property_values():
-	set_property("radius", radius, true)
-	set_property("color", color, true)
-	set_property("render_in_front", render_in_front, true)
-	set_property("tag", tag, true)
-	set_property("toxicity", toxicity, true)
-	set_property("tap_mode", tap_mode, true)
+func _register_properties():
+	register_property(4, "radius", radius, true)
+	register_property(5, "color", color, true)
+	register_property(6, "render_in_front", render_in_front, true)
+	register_property(7, "tag", tag, true)
+	register_property(8, "toxicity", toxicity, true)
+	register_property(9, "tap_mode", tap_mode, true)
 	set_bool_alias("tap_mode", "Move", "Scale")
 
 func _ready():
@@ -50,7 +50,7 @@ func _ready():
 	change_size()
 	last_radius = radius
 	
-	area_collision.disabled = !enabled
+	area_collision.disabled = !is_enabled_and_on_ground()
 	
 	CurrentLevelData.vars.liquids.append([tag.to_lower(), self])
 

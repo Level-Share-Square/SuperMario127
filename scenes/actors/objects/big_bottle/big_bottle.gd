@@ -14,7 +14,7 @@ func _register_properties() -> void:
 
 
 func collect(body):
-	if enabled and !collected and body.name.begins_with("Character") and !body.dead:
+	if is_enabled_and_on_ground() and !collected and body.name.begins_with("Character") and !body.dead:
 		sound.play()
 		sprite.visible = false
 		if respawns:

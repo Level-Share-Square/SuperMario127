@@ -11,14 +11,13 @@ onready var sprite : AnimatedSprite = $AnimatedSprite
 onready var sprite2 : AnimatedSprite = $AnimatedSprite/RecolorableSprite
 
 
-func _set_properties():
-	savable_properties = ["color"]
-	editable_properties = ["color"]
+#func _set_properties():
+#	savable_properties = ["color"]
+#	editable_properties = ["color"]
 
 
-func _set_property_values(): 
-	set_property("is_background", is_background, true)
-	set_property("color", color, true)
+func _register_properties(): 
+	register_property(5, "color", color, true)
 
 
 func _ready():

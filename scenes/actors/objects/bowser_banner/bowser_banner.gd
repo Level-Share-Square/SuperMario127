@@ -10,14 +10,14 @@ export var custom_preview_position = Vector2(70, 170)
 var color := Color(1, 0, 0)
 var rainbow := false
 
-func _set_properties():
-	savable_properties = ["color", "rainbow"]
-	editable_properties = ["color", "rainbow"]
+#func _set_properties():
+#	savable_properties = ["color", "rainbow"]
+#	editable_properties = ["color", "rainbow"]
 
 
-func _set_property_values():
-	set_property("color", color, 1)
-	set_property("rainbow", rainbow, true)
+func _register_properties():
+	register_property(4, "color", color, true)
+	register_property(5, "rainbow", rainbow, true)
 
 
 func _ready():

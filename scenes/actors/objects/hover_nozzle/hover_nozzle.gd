@@ -24,7 +24,7 @@ func _register_properties():
 	register_property(4, "velocity", velocity, true)
 		
 func collect(body):
-	if enabled and !collected and body.name.begins_with("Character") and !body.dead:
+	if is_enabled_and_on_ground() and !collected and body.name.begins_with("Character") and !body.dead:
 		sound.play()
 		visible = false
 		run_physics = false
@@ -39,7 +39,7 @@ func _ready():
 	kinematic_body.get_node("Sprite_" + nozzle_type).visible = true
 	
 func _object_ready():
-	if enabled:
+	if is_enabled_and_on_ground():
 		var _connect = area.connect("body_entered", self, "collect")
 	
 func _process(delta):

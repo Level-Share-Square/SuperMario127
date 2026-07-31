@@ -24,7 +24,7 @@ func _register_properties():
 
 func _ready():
 	collision_shape.shape = collision_shape.shape.duplicate(true)
-	collision_shape.disabled = !enabled
+	collision_shape.disabled = !is_enabled_and_on_ground()
 		
 	update_parts()
 

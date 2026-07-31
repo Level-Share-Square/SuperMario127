@@ -468,19 +468,19 @@ func _process(delta : float) -> void:
 					rotating = true
 				
 				if Input.is_action_just_pressed("flip_object"):
-					hovered_object.set_property("scale", Vector2(-hovered_object.scale.x, hovered_object.scale.y), true)
+					hovered_object.register_property("scale", Vector2(-hovered_object.scale.x, hovered_object.scale.y), true)
 				
 				if Input.is_action_just_pressed("flip_object_v"):
-					hovered_object.set_property("scale", Vector2(hovered_object.scale.x, -hovered_object.scale.y), true)
+					hovered_object.register_property("scale", Vector2(hovered_object.scale.x, -hovered_object.scale.y), true)
 				
 				if Input.is_action_just_pressed("toggle_enabled"):
-					hovered_object.set_property("enabled", !hovered_object.enabled, true)
+					hovered_object.register_property("enabled", !hovered_object.enabled, true)
 				
 				if Input.is_action_just_pressed("minecraft_pick_block"):
 					pick_item(hovered_object)
 	#
 				if Input.is_mouse_button_pressed(4):
-					hovered_object.set_property("scale", Vector2(10, 10), true)
+					hovered_object.register_property("scale", Vector2(10, 10), true)
 			
 			
 			if left_held and selected_tool == 0 and Input.is_action_just_pressed("place") and !rotating and selected_box.item.is_object:
@@ -506,7 +506,7 @@ func _process(delta : float) -> void:
 					var obj_position := mouse_pos
 					if !Input.is_action_pressed("8_pixel_lock"):
 						obj_position = Vector2(stepify(obj_position.x, 8), stepify(obj_position.y, 8))
-					hovered_object.set_property("position", obj_position, true)
+					hovered_object.register_property("position", obj_position, true)
 			
 			if rotating:
 				hovered_object.rotation = deg2rad(-90) + hovered_object.position.angle_to_point(mouse_pos)
@@ -519,7 +519,7 @@ func _process(delta : float) -> void:
 			
 			if Input.is_action_just_released("place") and rotating:
 				rotating = false
-				hovered_object.set_property("rotation_degrees", fmod(hovered_object.rotation_degrees, 360), true)
+				hovered_object.register_property("rotation_degrees", fmod(hovered_object.rotation_degrees, 360), true)
 		
 		if selected_box and selected_box.item:
 			var last_object_pos : Vector2

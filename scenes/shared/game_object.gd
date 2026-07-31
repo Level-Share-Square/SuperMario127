@@ -185,7 +185,6 @@ func register_property(id: int, property: String, default_value, editable: bool 
 		printerr("Object ", name, " tried to register property \"" + property + "\", but the provided type does not match.")
 		return
 	
-	id += 4
 	
 	if id in property_ids.keys():
 		return

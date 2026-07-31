@@ -6,12 +6,6 @@ onready var hit_collider = $HitCollider
 onready var switch_sound = $SwitchSound
 onready var curve_tween = $Sprite/CurveTween
 
-func _set_properties():
-	savable_properties = ["palette"]
-
-func _set_property_values():
-	set_property("palette", palette, 0)
-
 
 func _ready():
 	
@@ -21,7 +15,7 @@ func _ready():
 		sprite.z_index = 0
 		
 #	if mode == 1:
-#			set_property("default_state", default_state, true)
+#			register_property("default_state", default_state, true)
 #
 	sprite.region_rect.position.x = int(!CurrentLevelData.vars.switch_state.has(palette)) * 32
 

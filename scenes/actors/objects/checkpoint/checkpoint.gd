@@ -28,7 +28,7 @@ func _register_properties():
 
 func _object_ready():
 	display.visible = false
-	if enabled:
+	if is_enabled_and_on_ground():
 		var _connect = use_area.connect("body_entered", self, "set_checkpoint")
 	
 #	CurrentLevelData.set_checkpoint_ids()
@@ -75,7 +75,7 @@ func update_ring_particles(delta: float):
 
 
 func set_checkpoint(body):
-	if is_used or !enabled:
+	if is_used or !is_enabled_and_on_ground():
 		return
 	
 	is_used = true

@@ -18,17 +18,17 @@ var start_offset = 0
 
 var baked_length : float = 0.0
 
-func _set_properties():
-	savable_properties = ["curve", "custom_path", "speed", "start_offset", "loops", "baked_length"]
-	editable_properties = ["curve", "speed", "start_offset", "baked_length", "loops"]
-	
-func _set_property_values():
-	set_property("curve", curve)
-	set_property("custom_path", curve)
-	set_property("speed", speed)
-	set_property("start_offset", start_offset)
-	set_property("loops", loops)
-	set_property("baked_length", baked_length)
+#func _set_properties():
+#	savable_properties = ["curve", "custom_path", "speed", "start_offset", "loops", "baked_length"]
+#	editable_properties = ["curve", "speed", "start_offset", "baked_length", "loops"]
+#
+func _register_properties():
+	register_property(4, "curve", curve)
+	register_property(5, "custom_path", curve, false)
+	register_property(6, "speed", speed)
+	register_property(7, "start_offset", start_offset)
+	register_property(8, "loops", loops)
+	register_property(9, "baked_length", baked_length)
 	set_property_menu("baked_length", ["viewer"])
 	
 func update_property(key, value):

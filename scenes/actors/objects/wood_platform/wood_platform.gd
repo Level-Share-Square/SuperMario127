@@ -61,7 +61,7 @@ func _ready():
 
 func _object_ready():
 	._object_ready()
-	if !enabled:
+	if !is_enabled_and_on_ground():
 		print("im disabled!")
 		collision_shape.disabled = true
 		platform_area_collision_shape.disabled = true

@@ -26,17 +26,17 @@ var on_cooldown := false
 var can_heal := true
 var player_speed_cap = 250
 
-func _set_properties():
-	savable_properties = ["health_given", "spin_time", "cooldown", "cooldown_time", "color", "rainbow"]
-	editable_properties = ["health_given", "spin_time", "cooldown", "cooldown_time", "color", "rainbow"]
-	
-func _set_property_values():
-	set_property("health_given", health_given, true, "Min Health / Second")
-	set_property("spin_time", spin_time, true, "Heal Duration")
-	set_property("cooldown", cooldown, true, "Has Cooldown?")
-	set_property("cooldown_time", cooldown_time, true, "Cooldown Time")
-	set_property("color", color, 1)
-	set_property("rainbow", rainbow, true)
+#func _set_properties():
+#	savable_properties = ["health_given", "spin_time", "cooldown", "cooldown_time", "color", "rainbow"]
+#	editable_properties = ["health_given", "spin_time", "cooldown", "cooldown_time", "color", "rainbow"]
+#
+func _register_properties():
+	register_property(4, "health_given", health_given, true)
+	register_property(5, "spin_time", spin_time, true)
+	register_property(6, "cooldown", cooldown, true)
+	register_property(7, "cooldown_time", cooldown_time, true)
+	register_property(8, "color", color, 1)
+	register_property(9, "rainbow", rainbow, true)
 
 func body_enter(body):
 	if body.name.begins_with("Character"):
@@ -48,7 +48,7 @@ func body_exit(body):
 
 func _physics_process(delta):
 	if charbody != null:
-		if enabled and !on_cooldown and charbody.name.begins_with("Character") and !charbody.dead:
+		if is_enabled_and_on_ground() and !on_cooldown and charbody.name.begins_with("Character") and !charbody.dead:
 			if cooldown:
 				timer.start()
 				on_cooldown = true
@@ -76,7 +76,7 @@ func _physics_process(delta):
 func _ready():
 	if spin_time <= 0:
 		spin_time = 1
-		set_property("spin_time", spin_time, true, "Full Spin Time")
+		set_property("spin_time", spin_time, true)
 	timer.wait_time = cooldown_time
 	timer.connect("timeout", self, "_on_timer_timeout")
 	if is_preview:

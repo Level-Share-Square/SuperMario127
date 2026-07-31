@@ -52,18 +52,18 @@ func _set_properties() -> void:
 	savable_properties = ["area_id", "destination_tag", "teleportation_mode", "collectible", "required_amount", "insufficient_text", "is_single"]
 	editable_properties = ["area_id", "destination_tag", "teleportation_mode", "collectible", "required_amount", "insufficient_text"]
 	
-func _set_property_values() -> void:
+func _register_properties() -> void:
 
-	set_property("area_id", area_id)
-	set_property("destination_tag", destination_tag)
-	set_property("teleportation_mode", teleportation_mode, true, "Teleport Mode")
+	register_property("area_id", area_id)
+	register_property("destination_tag", destination_tag)
+	register_property("teleportation_mode", teleportation_mode, true, "Teleport Mode")
 	set_bool_alias("teleportation_mode", "Remote", "Local")
-	set_property("collectible", collectible)
+	register_property("collectible", collectible)
 	set_property_menu("collectible", ["option_string", possible_coll, 0, ["Shines", "Star Coins", "Coins", "Star Bits", "Empty"]])
-	set_property("required_amount", required_amount)
-	set_property("force_fadeout", force_fadeout)
-	set_property("insufficient_text", insufficient_text)
-	set_property("is_single", is_single)
+	register_property("required_amount", required_amount)
+	register_property("force_fadeout", force_fadeout)
+	register_property("insufficient_text", insufficient_text)
+	register_property("is_single", is_single)
 
 
 func _init():
@@ -75,7 +75,7 @@ func _ready() -> void:
 	# also reusing the paratroopa one cuz idk dont feel like making new script
 	var scene = get_tree().current_scene
 	if scene.mode == 1 and scene.placed_item_property == "Para":
-		set_property("is_single", true)
+		register_property("is_single", true)
 	
 	# set up single vs double doors
 	door.frames = single_door_frames if is_single else double_door_frames

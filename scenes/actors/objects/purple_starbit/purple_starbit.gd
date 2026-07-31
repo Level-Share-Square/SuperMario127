@@ -20,7 +20,7 @@ export var anim_damp = 80
 
 
 func collect(body):
-	if enabled and !collected and collectable and body.name.begins_with("Character") and !body.dead:
+	if is_enabled_and_on_ground() and !collected and collectable and body.name.begins_with("Character") and !body.dead:
 		CurrentLevelData.vars.collect_purple_starbit(id)
 		var player_id = 1
 		if body.name == "Character":
@@ -32,7 +32,7 @@ func collect(body):
 
 func _ready():
 	if mode == 1: return
-	if enabled:
+	if is_enabled_and_on_ground():
 #		add_to_group("purple_starbits")
 		id = CurrentLevelData.vars.max_purple_starbits
 		CurrentLevelData.vars.max_purple_starbits += 1

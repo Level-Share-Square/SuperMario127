@@ -30,15 +30,15 @@ var custom_path = Curve2D.new()
 
 
 
+#
+#func _set_properties():
+#	savable_properties = ["curve", "custom_path", "speed"]
+#	editable_properties = ["curve", "speed"]
 
-func _set_properties():
-	savable_properties = ["curve", "custom_path", "speed"]
-	editable_properties = ["curve", "speed"]
-
-func _set_property_values():
-	set_property("curve", curve)
-	set_property("custom_path", curve)
-	set_property("speed", speed)
+func _register_properties():
+	register_property(4, "curve", curve)
+	register_property(5, "custom_path", curve, false)
+	register_property(6, "speed", speed)
 
 func invalid_curve(check : Curve2D):
 	if(!is_instance_valid(check) or check.get_point_count() == 0):
@@ -122,7 +122,7 @@ func _physics_process(delta):
 		player_detector.look_at(position + path.curve.get_point_position(1))
 		player_detector.rotation_degrees += 90
 		launch_particles.direction = Vector2.UP.rotated(deg2rad(star_container.rotation_degrees))
-	if enabled and mode == 0:
+	if is_enabled_and_on_ground() and mode == 0:
 		match(state):
 			states.IDLE:
 				physics_process_idle(delta)

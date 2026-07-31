@@ -3,12 +3,12 @@ extends GameObject
 var speed_threshold = 30
 onready var steely_detector = $Area2D
 
-func _set_properties():
-	savable_properties = ["speed_threshold"]
-	editable_properties = ["speed_threshold"]
+#func _set_properties():
+#	savable_properties = ["speed_threshold"]
+#	editable_properties = ["speed_threshold"]
 	
-func _set_property_values():
-	set_property("speed_threshold", speed_threshold)
+func _register_properties():
+	register_property(4, "speed_threshold", speed_threshold, true)
 	
 func _object_ground_physics_process(delta):
 	for body in steely_detector.get_overlapping_bodies():

@@ -8,15 +8,15 @@ var respawns := true
 var collected = false
 var respawn_timer = 0.0
 
-func _set_properties() -> void:
-	savable_properties = ["respawns"]
-	editable_properties = ["respawns"]
+#func _set_properties() -> void:
+#	savable_properties = ["respawns"]
+#	editable_properties = ["respawns"]
 	
-func _set_property_values() -> void:
-	set_property("respawns", respawns, true)
+func _register_properties() -> void:
+	register_property(4, "respawns", respawns, true)
 
 func collect(body):
-	if enabled and !collected and body.name.begins_with("Character") and !body.dead:
+	if is_enabled_and_on_ground() and !collected and body.name.begins_with("Character") and !body.dead:
 		sound.play()
 		sprite.visible = false
 		if respawns:

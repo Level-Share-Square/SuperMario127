@@ -9,17 +9,17 @@ var pan_offset : Vector2 = Vector2.ZERO
 var zoom_time : float = 1.0
 var parts := 1
 
-func _set_properties():
-	savable_properties = ["effect", "zoom_time", "parts"]
-	editable_properties = ["target_zoom", "zoom_time", "parts"]
+#func _set_properties():
+#	savable_properties = ["effect", "zoom_time", "parts"]
+#	editable_properties = ["target_zoom", "zoom_time", "parts"]
 	
-func _set_property_values():
-	set_property("target_zoom", target_zoom)
-	set_property("zoom_time", zoom_time, true, "Zoom Time")
-	set_property("parts", parts)
+func _register_properties():
+	register_property(4, "target_zoom", target_zoom)
+	register_property(5, "zoom_time", zoom_time, true)
+	register_property(6, "parts", parts)
 	
 func _input(event):
-	if event is InputEventMouseButton and event.is_pressed() and hovered:
+	if event is InputEventMouseButton and event.is_pressed() and is_object_hovered():
 		if event.button_index == 5: # Mouse wheel down
 			parts -= 1
 			if parts < 1:
@@ -45,7 +45,7 @@ func _ready():
 	update_parts()
 		
 func _body_entered(body):
-	if enabled and body.name.begins_with("Character"): #and !body.camera.zoom_tween.is_active():
+	if is_enabled_and_on_ground() and body.name.begins_with("Character"): #and !body.camera.zoom_tween.is_active():
 		#print("set tween")
 		if !is_equal_approx(body.camera.zoom.x, target_zoom):
 			body.camera.set_zoom_tween(Vector2(target_zoom, target_zoom), zoom_time, true)

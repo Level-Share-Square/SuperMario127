@@ -41,18 +41,18 @@ export var super_jump_height = 280
 export var walk_spd = 48
 export var max_fire_pause = 3.0
 
-func _set_properties():
-	savable_properties = ["wander", "fire", "color", "rainbow", "super_jump_height"]
-	editable_properties = ["wander", "super_jump_height", "fire", "color", "rainbow"]
-	
-func _set_property_values():
-	set_property("wander", wander, true)
-	set_property("fire", fire, true)
+#func _set_properties():
+#	savable_properties = ["wander", "fire", "color", "rainbow", "super_jump_height"]
+#	editable_properties = ["wander", "super_jump_height", "fire", "color", "rainbow"]
+#
+func _register_properties():
+	register_property(4, "wander", wander, true)
+	register_property(5, "fire", fire, true)
 	set_property_menu("fire", ["option", 3, 0, ["None", "Normal", "Bouncy"]])
-	set_property("color", color, true)
-	set_property("rainbow", rainbow, true)
-	set_property("bouncy_fire", bouncy_fire, true)
-	set_property("super_jump_height", super_jump_height, true, "Jump Height")
+	register_property(6, "color", color, true)
+	register_property(7, "rainbow", rainbow, true)
+	register_property(8, "bouncy_fire", bouncy_fire, true)
+	register_property(9, "super_jump_height", super_jump_height, true)
 
 func _ready():
 	gravity = CurrentLevelData.current_area.header.gravity
@@ -74,7 +74,7 @@ func _process(delta):
 	recolorable_sprite.visible = sprite.visible
 	recolorable_sprite.rotation = sprite.rotation
 	
-	if not (mode != 1 and enabled):
+	if not (mode != 1 and is_enabled_and_on_ground()):
 		return
 	
 	if (fire != 0):
@@ -114,7 +114,7 @@ func hit(hit_pos: Vector2):
 
 
 func _physics_process(delta):
-	if not (mode != 1 and enabled):
+	if not (mode != 1 and is_enabled_and_on_ground()):
 		return
 	
 	if (not hit):

@@ -13,13 +13,13 @@ func _set_properties():
 	savable_properties = ["area_id", "destination_tag", "color", "teleportation_mode", "force_fadeout"]
 	editable_properties = ["area_id", "destination_tag", "color", "teleportation_mode", "force_fadeout"]
 	
-func _set_property_values():
-	set_property("area_id", area_id, true, "Area Destination")
-	set_property("destination_tag", destination_tag, true)
-	set_property("color", color, true)
-	set_property("teleportation_mode", teleportation_mode, true, "Teleport Mode")
+func _register_properties():
+	register_property("area_id", area_id, true, "Area Destination")
+	register_property("destination_tag", destination_tag, true)
+	register_property("color", color, true)
+	register_property("teleportation_mode", teleportation_mode, true, "Teleport Mode")
 	set_bool_alias("teleportation_mode", "Remote", "Local")
-	set_property("force_fadeout", force_fadeout)
+	register_property("force_fadeout", force_fadeout)
 
 func _init():
 	teleportation_mode = true

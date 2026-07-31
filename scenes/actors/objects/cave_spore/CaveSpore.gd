@@ -12,4 +12,4 @@ func _ready():
 
 func _object_disabled_ready():
 	._object_disabled_ready()
-	$StaticBody2D/CollisionShape2D.disabled = !enabled
+	$StaticBody2D/CollisionShape2D.disabled = !is_enabled_and_on_ground()

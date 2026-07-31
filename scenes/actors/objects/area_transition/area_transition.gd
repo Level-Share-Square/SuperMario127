@@ -45,7 +45,7 @@ func _editor_ready():
 func _object_ready():
 	._object_ready()
 	sprite.visible = false
-	if !enabled:
+	if !is_enabled_and_on_ground():
 		camera_stopper.set_size(Vector2.ZERO)
 		camera_stopper.monitorable = false
 		camera_stopper.visible = false
@@ -93,7 +93,7 @@ func update_parts():
 ### AREA2D STUFF
 func body_entered(body) -> void:
 	if not body is Character or not body.movable or body.dead: return
-	if not enabled: return
+	if not is_enabled_and_on_ground(): return
 	if not is_idle: return
 	if entering: return
 	

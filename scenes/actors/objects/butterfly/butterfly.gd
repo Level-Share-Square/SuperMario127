@@ -19,7 +19,7 @@ func _object_parallax_ready():
 	pass
 	
 func _physics_process(delta):
-	if mode != 1 and enabled:
+	if mode != 1 and is_enabled_and_on_ground():
 		time += delta
 		sprite.position.x = sin(time * 2) * 30
 		sprite.position.y = sin(time * 1) * 30

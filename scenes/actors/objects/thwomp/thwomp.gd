@@ -31,7 +31,7 @@ var fall_direction: Vector2 = Vector2(0, -1)
 
 
 func _ready():
-	if not enabled or mode == 1:
+	if not is_enabled_and_on_ground() or mode == 1:
 		body.collision_layer = 0
 		body.collision_mask = 0
 	else:
@@ -63,7 +63,7 @@ func set_state(new_state: int):
 
 
 func _physics_process(delta):
-	if not enabled or mode == 1: return
+	if not is_enabled_and_on_ground() or mode == 1: return
 	
 	var rotated_pos: Vector2 = rotated_origin(body.global_position, global_position, -global_rotation)
 	var is_colliding: bool = is_instance_valid(collision_info)

@@ -106,8 +106,8 @@ func _object_ready():
 	
 	last_size = size
 	
-	liquid_area.monitoring = (enabled and mode != 1)
-	liquid_area.monitorable = (enabled and mode != 1)
+	liquid_area.monitoring = (is_enabled_and_on_ground() and mode != 1)
+	liquid_area.monitorable = (is_enabled_and_on_ground() and mode != 1)
 	
 	CurrentLevelData.vars.liquids.append([tag.to_lower(), self])
 

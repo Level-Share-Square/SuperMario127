@@ -17,12 +17,12 @@ var spreads_started = 0
 
 var facing_direction = 1
 
-func _set_properties():
-	savable_properties = ["speed"]
-	editable_properties = ["speed"]
+#func _set_properties():
+#	savable_properties = ["speed"]
+#	editable_properties = ["speed"]
 
-func _set_property_values():
-	set_property("speed", speed, true)
+func _register_properties():
+	register_property(4, "speed", speed, true)
 
 func set_position(new_position):
 	var movement = new_position - position
@@ -70,7 +70,7 @@ func goonie_physics_process(delta):
 	last_position = position
 	sprite.speed_scale = clamp(speed, 0.5, 3)
 	sprite.playing = true
-	if mode != 1 and enabled:
+	if mode != 1 and is_enabled_and_on_ground():
 		if spread_timer > 0:
 			spread_timer -= delta
 			if spread_timer <= 0:

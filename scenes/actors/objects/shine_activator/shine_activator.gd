@@ -15,16 +15,16 @@ var timer : TimerBase
 var timer_manager : TimerManager
 
 
-func _set_properties():
-	savable_properties = ["shine_tag", "time_limit", "one_shot", "parts"]
-	editable_properties = ["shine_tag", "time_limit", "one_shot", "parts"]
+#func _set_properties():
+#	savable_properties = ["shine_tag", "time_limit", "one_shot", "parts"]
+#	editable_properties = ["shine_tag", "time_limit", "one_shot", "parts"]
 
 
-func _set_property_values():
-	set_property("shine_tag", shine_tag)
-	set_property("time_limit", time_limit)
-	set_property("one_shot", one_shot)
-	set_property("parts", parts)
+func _register_properties():
+	register_property(4, "shine_tag", shine_tag)
+	register_property(5, "time_limit", time_limit)
+	register_property(6, "one_shot", one_shot)
+	register_property(7, "parts", parts)
 
 
 func _input(event):
@@ -72,7 +72,7 @@ func _body_entered(body):
 	var shines = get_tree().get_nodes_in_group("tag_shine_%s" % shine_tag.to_lower())
 	shines = remove_active_shines(shines)
 	
-	if enabled and body is Character:
+	if is_enabled_and_on_ground() and body is Character:
 		if time_limit <= 0:
 			if shines.size() <= 0:
 				return

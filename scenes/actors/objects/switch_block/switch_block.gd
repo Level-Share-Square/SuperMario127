@@ -9,19 +9,18 @@ onready var hit_collider = $HitCollider/CollisionShape2D
 
 var inverted : bool = false
 
-func _set_properties():
-	savable_properties = ["inverted", "palette"]
-	editable_properties = ["inverted"]
+#func _set_properties():
+#	savable_properties = ["inverted", "palette"]
+#	editable_properties = ["inverted"]
 
-func _set_property_values():
-	set_property("inverted", inverted, false)
-	set_property("palette", palette, 0)
+func _register_properties():
+	register_property(4, "inverted", inverted, false)
 
 func _ready():
 	init()
 	hit_bounce_enabled = false
 	connect("property_changed", self, "_on_property_changed")
-	if !enabled:
+	if !is_enabled_and_on_ground():
 		$StaticBody2D.set_collision_layer_bit(0, false)
 	if mode != 1:
 		hit_area.connect("body_entered", self, "_on_hit_body_entered")

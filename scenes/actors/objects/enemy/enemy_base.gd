@@ -23,7 +23,7 @@ export var float_accel: float = 4
 var level_bounds: Rect2
 # parent should set this to area gravity times two
 var gravity: float
-# if not enabled... enemy stops moving altogether (also used for editor)
+# if not is_enabled_and_on_ground()... enemy stops moving altogether (also used for editor)
 var enabled: bool
 # for wind
 var snap_enabled: bool = true

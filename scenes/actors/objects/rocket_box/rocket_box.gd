@@ -16,12 +16,12 @@ var loaded_activated = true
 
 var respawn_timer = 0.0
 
-func _set_properties():
-	savable_properties = ["activated"]
-	editable_properties = ["activated"]
+#func _set_properties():
+#	savable_properties = ["activated"]
+#	editable_properties = ["activated"]
 
-func _set_property_values():
-	set_property("activated", activated)
+func _register_properties():
+	register_property(4, "activated", activated)
 
 func _object_ready():
 	if is_preview:
@@ -51,7 +51,7 @@ func exit_area(body):
 func enter_detector(body):
 	if !loaded_activated:
 		return
-	if body.name.begins_with("Character") and respawn_timer == 0 and enabled and body.velocity.y > 0:
+	if body.name.begins_with("Character") and respawn_timer == 0 and is_enabled_and_on_ground() and body.velocity.y > 0:
 		respawn_timer = 10.0
 		if body.state != body.get_state_node("GroundPoundState"):
 			body.velocity.y = -230

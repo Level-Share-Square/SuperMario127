@@ -138,7 +138,7 @@ func _ready() -> void:
 #func on_place():
 #	CurrentLevelData.set_shine_ids()
 #	id = level_object.get_ref().properties[13]
-#	set_property("id", id)
+#	register_property("id", id)
 
 
 func update_color(key, value):
@@ -303,7 +303,7 @@ func update_ambient_noise() -> void:
 
 
 func collect(body: PhysicsBody2D) -> void:
-	if activated and enabled and !collected and body.name.begins_with("Character") and body.controllable:
+	if activated and is_enabled_and_on_ground() and !collected and body.name.begins_with("Character") and body.controllable:
 		
 		var timer_manager = get_node("/root").get_node("Player").get_timer_manager()
 		timer_manager.pause_resume_timer("area_timer", true)

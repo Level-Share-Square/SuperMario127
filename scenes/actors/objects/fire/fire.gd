@@ -15,16 +15,16 @@ var next_state_timer: float = 0
 var burning = true
 var reversed = false
 
-func _set_properties():
-	savable_properties = ["retracted_time", "burning_time", "color", "reversed", "offset"]
-	editable_properties = ["retracted_time", "burning_time", "color", "reversed", "offset"]
+#func _set_properties():
+#	savable_properties = ["retracted_time", "burning_time", "color", "reversed", "offset"]
+#	editable_properties = ["retracted_time", "burning_time", "color", "reversed", "offset"]
 
-func _set_property_values():
-	set_property("retracted_time", retracted_time, true)
-	set_property("burning_time", burning_time, true)
-	set_property("color", color, true)
-	set_property("reversed", reversed, true)
-	set_property("offset", offset, true)
+func _register_properties():
+	register_property(4, "retracted_time", retracted_time, true)
+	register_property(5, "burning_time", burning_time, true)
+	register_property(6, "color", color, true)
+	register_property(7, "reversed", reversed, true)
+	register_property(8, "offset", offset, true)
 
 func _object_ready():
 	burning = !reversed
@@ -44,7 +44,7 @@ func _object_physics_process(delta):
 			next_state_timer = retracted_time if burning else burning_time
 			burning = !burning
 	
-	area_shape.disabled = !burning or !enabled
+	area_shape.disabled = !burning or !is_enabled_and_on_ground()
 	
 	if burning:
 		sprite.position = lerp(sprite.position, Vector2(0, 0), delta * 8)

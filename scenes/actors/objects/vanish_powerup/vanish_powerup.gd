@@ -14,13 +14,13 @@ var powerup_music = true
 
 
 func _register_properties():
-	register_property(0, "duration", duration, true)
-	register_property(1, "can_respawn", can_respawn, true)
-	register_property(2, "powerup_music", powerup_music, true)
+	register_property(4, "duration", duration, true)
+	register_property(5, "can_respawn", can_respawn, true)
+	register_property(6, "powerup_music", powerup_music, true)
 
 
 func collect(body):
-	if enabled and !collected and body.name.begins_with("Character") and !body.dead:
+	if is_enabled_and_on_ground() and !collected and body.name.begins_with("Character") and !body.dead:
 		body.heal(5 * 8)
 		var powerup_node = body.get_powerup_node("VanishPowerup")
 		body.set_powerup(powerup_node, powerup_music, duration)
@@ -36,7 +36,7 @@ func _ready():
 	var _connect = area.connect("body_entered", self, "collect")
 	
 	for body in area.get_overlapping_bodies():
-			if enabled and !collected and (body and body.name.begins_with("Character") and !body.dead):
+			if is_enabled_and_on_ground() and !collected and (body and body.name.begins_with("Character") and !body.dead):
 				collect(body)
 
 
