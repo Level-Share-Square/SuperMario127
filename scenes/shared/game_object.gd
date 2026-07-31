@@ -12,7 +12,7 @@ enum BasePropertyIDs {
 }
 
 const EDITOR_INVISIBLE_ALPHA: float = 0.25
-const EDITOR_RECT_DRAW_COLOR: Color = Color(0.039216, 0.196078, 0.815686, 0.705882)
+const EDITOR_RECT_DRAW_COLOR: Color = Color(0.039216, 0.196078, 0.815686, 0.5)
 
 
 export var editor_rect: Rect2 = Rect2(-8, -8, 16, 16)
@@ -125,7 +125,7 @@ func _unhandled_input(event):
 
 func _draw() -> void:
 	if is_object_hovered():
-		draw_rect(editor_rect, EDITOR_RECT_DRAW_COLOR)
+		draw_rect(editor_rect.grow(1), EDITOR_RECT_DRAW_COLOR)
 
 
 ## Run when all objects are loaded.
@@ -184,6 +184,8 @@ func register_property(id: int, property: String, default_value, editable: bool 
 	if typeof(self[property]) != typeof(default_value):
 		printerr("Object ", name, " tried to register property \"" + property + "\", but the provided type does not match.")
 		return
+	
+	id += 4
 	
 	if id in property_ids.keys():
 		return
