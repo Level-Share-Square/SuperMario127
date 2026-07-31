@@ -16,7 +16,7 @@ var loaded_activated = true
 
 var respawn_timer = 0.0
 
-func _set_property_values():
+func _register_properties():
 	register_property(0, "activated", activated)
 
 

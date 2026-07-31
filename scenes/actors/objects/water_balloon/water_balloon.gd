@@ -19,7 +19,7 @@ var color := Color(0, 0.7, 1)
 var timer = 0.0
 
 
-func _set_property_values():
+func _register_properties():
 	register_property(0, "added_stamina", added_stamina)
 	register_property(1, "added_water", added_water)
 	register_property(2, "respawn_timer", respawn_timer)

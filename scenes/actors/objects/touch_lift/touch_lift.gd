@@ -39,7 +39,7 @@ var path_length : float = 0
 #	editable_properties = ["parts", "max_speed", "move_type", "touch_start", "color", "start_offset", "curve", "path_length"]
 
 
-func _set_property_values():
+func _register_properties():
 	register_property(0, "parts", parts)
 	register_property(1, "max_speed", max_speed)
 	register_property(2, "curve", curve)

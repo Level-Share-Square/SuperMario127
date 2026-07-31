@@ -13,7 +13,7 @@ var can_respawn = true
 var powerup_music = true
 
 
-func _set_property_values():
+func _register_properties():
 	register_property(0, "duration", duration, true)
 	register_property(1, "can_respawn", can_respawn, true)
 	register_property(2, "powerup_music", powerup_music, true)

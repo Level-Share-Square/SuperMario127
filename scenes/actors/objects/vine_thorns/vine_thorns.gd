@@ -21,7 +21,7 @@ export var parts := 1
 var last_parts := 1
 
 
-func _set_property_values():
+func _register_properties():
 	register_property(0, "parts", parts, 1)
 
 func _ready():

@@ -25,7 +25,7 @@ var physics_frame := true
 var physics_run := false
 
 
-func _set_property_values():
+func _register_properties():
 	register_property(0, "physics", physics)
 	register_property(1, "velocity", velocity)
 

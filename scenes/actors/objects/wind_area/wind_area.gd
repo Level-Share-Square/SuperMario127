@@ -15,7 +15,7 @@ var triggerable := false
 var triggered := true
 var wind_angle_vector : Vector2
 
-func _set_property_values():
+func _register_properties():
 	register_property(0, "size", size)
 	register_property(1, "wind_power", wind_power)
 	register_property(2, "color", color)

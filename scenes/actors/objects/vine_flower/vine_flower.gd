@@ -7,7 +7,7 @@ export(Array, Texture) var palette_textures
 var color := Color(1, 0, 0)
 
 
-func _set_property_values():
+func _register_properties():
 	register_property(0, "color", color)
 
 func _ready():
