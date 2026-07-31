@@ -130,15 +130,21 @@ func is_on_ground() -> bool:
 	return floor_detector.is_colliding()
 
 
-func create_coin(velocity: Vector2, offset: Vector2) -> GameObject:	
-	var object := ObjectData.new(ObjectMetadata.new(
-		global_position + offset,
-		1,
-		0
-	))
-	object.set_property_by_name("physics", true)
-	object.set_property_by_name("velocity", velocity)
+func create_coin(velocity: Vector2, offset: Vector2) -> void:
+	var object = create_object(global_position + offset, 1, 0)
+	object.set_property("physics", true)
+	object.set_property("velocity", velocity)
+
+
+func create_object(pos: Vector2, object_id: int, palette: int):
+	var level_layer: LevelLayer = layer_ref.get_ref()
 	
-	var shared = get_tree().current_scene.get_shared()
-	
-	return layer_ref.get_ref().place_object(object)
+	return level_layer.add_object(
+		ObjectData.new(
+			ObjectMetadata.new(
+				pos,
+				object_id,
+				palette
+			)
+		)
+	)

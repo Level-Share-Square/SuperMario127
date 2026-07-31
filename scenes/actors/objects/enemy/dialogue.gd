@@ -9,7 +9,7 @@ export var connected: bool
 
 
 func initialize() -> void:
-	if not is_enabled_and_on_ground() or enemy.enabled:
+	if not enabled or enemy.enabled:
 		queue_free()
 		return
 

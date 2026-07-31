@@ -185,7 +185,6 @@ func register_property(id: int, property: String, default_value, editable: bool 
 		printerr("Object ", name, " tried to register property \"" + property + "\", but the provided type does not match.")
 		return
 	
-	
 	if id in property_ids.keys():
 		return
 	
@@ -208,7 +207,8 @@ func set_object_data(data: ObjectData) -> void:
 
 
 func set_property_by_id(property_id: int, value, change_object_data: bool = false) -> void:
-	set_property(property_ids[property_id], value, change_object_data)
+	if property_ids.has(property_id):
+		set_property(property_ids[property_id], value, change_object_data)
 
 
 func set_property(property: String, value, change_object_data = false):
@@ -303,15 +303,10 @@ func is_object_hovered() -> bool:
 	return is_in_editor() and editor_rect.has_point(get_local_mouse_position())
 
 
-func create_coin(coin_id, body, physics, velocity) -> void:
-	var object := ObjectData.new(ObjectMetadata.new(
-		body.global_position,
-		coin_id,
-		0
-	))
-	object.set_property_by_name("physics", physics)
-	object.set_property_by_name("velocity", velocity)
-	get_parent().create_object(object)
+func create_coin(coin_id: int, body: Node2D, physics: bool, velocity: Vector2) -> void:
+	var object = create_object(body.global_position, coin_id, 0)
+	object.set_property("physics")
+	object.set_property("velocity")
 
 
 func create_object(pos: Vector2, object_id: int, palette: int):

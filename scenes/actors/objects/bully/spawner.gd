@@ -11,3 +11,9 @@ func get_enemy_properties() -> Array:
 		"horn_color",
 		"feet_color",
 	]
+
+
+func _register_enemy_properties() -> void:
+	register_property(9, "horn_color", horn_color)
+	register_property(10, "feet_color", feet_color)
+	register_property(11, "rainbow", rainbow)

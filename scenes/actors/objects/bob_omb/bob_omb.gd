@@ -41,11 +41,6 @@ var hit = false
 var snap := Vector2(0, 12)
 
 
-func _set_properties():
-	savable_properties = []
-	editable_properties = []
-
-
 func _register_properties():
 	pass
 

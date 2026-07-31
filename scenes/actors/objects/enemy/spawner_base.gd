@@ -31,38 +31,23 @@ var spawner_properties: Array = [
 ]
 
 
+func _register_enemy_properties() -> void:
+	pass
+
+
 func get_enemy_properties() -> Array:
 	return []
 
 
-func set_enemy_property_menus():
-	pass
-
-
-func _set_properties():
-	savable_properties = []
-	editable_properties = []
-	for spawner_property in spawner_properties:
-		savable_properties.append(spawner_property)
-		editable_properties.append(spawner_property)
+func _register_properties() -> void:
+	_register_enemy_properties()
 	
-	# for editable properties, we want to put enemy
-	# properties in front of spawner ones, but still in order
-	var i: int = 0
-	for enemy_property in get_enemy_properties():
-		savable_properties.append(enemy_property)
-		editable_properties.insert(i, enemy_property)
-		i += 1
-
-
-func _register_properties():
-	for spawner_property in spawner_properties:
-		register_property(spawner_property, self[spawner_property], true)
+	register_property(4, "respawn_time", respawn_time)
+	register_property(5, "respawn_mode", respawn_mode)
 	set_property_menu("respawn_mode", ["option", 3, 0, ['Never', 'Offscreen', 'Onscreen']])
-	
-	for enemy_property in get_enemy_properties():
-		register_property(enemy_property, self[enemy_property], true)
-	set_enemy_property_menus()
+	register_property(6, "max_enemies", max_enemies)
+	register_property(7, "initial_velocity", initial_velocity)
+	register_property(8, "spawn_offset", spawn_offset)
 
 
 func instance_enemy(emit_particles: bool = true) -> EnemyBase:
