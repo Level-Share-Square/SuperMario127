@@ -4,7 +4,6 @@ class_name LevelShared
 const GROUND_LAYER_SCENE_PATH: String = "res://scenes/shared/layers/ground_layer/ground_layer.tscn"
 const PARALLAX_LAYER_SCENE_PATH: String = "res://scenes/shared/layers/parallax_layer/parallax_layer.tscn"
 
-
 var ground_layer_scene: PackedScene = preload(GROUND_LAYER_SCENE_PATH)
 var parallax_layer_scene: PackedScene = preload(PARALLAX_LAYER_SCENE_PATH)
 
@@ -28,7 +27,8 @@ func load_in():
 	var tex = loaded_boo_texture
 	if get_tree().get_current_scene().mode == 0:
 		tex = loaded_boo_texture_invis
-	layers[0].tile_map_manager.tile_set.tile_set_texture(18, tex)
+	for i in [18, 118, 119]:
+		layers[0].tile_map_manager.tile_set.tile_set_texture(i, tex)
 
 func load_layers(layer_data_list: Array):
 	for layer_data in layer_data_list:
