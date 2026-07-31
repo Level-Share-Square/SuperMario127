@@ -17,11 +17,10 @@ var broken = false
 var coins := 0
 var time_alive := 0.0
 
-func _set_properties():
-	savable_properties = ["coins"]
-	editable_properties = ["coins"]
 
-func _set_property_values(): set_property("coins", coins, true)
+func _register_properties(): 
+	register_property(4, "coins", coins)
+
 
 func _ready():
 	if scale != Vector2.ONE: # Nothing to do on default scale

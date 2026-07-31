@@ -31,16 +31,15 @@ var cached_pos := Vector2()
 
 var cc = false
 
-func _set_properties():
-	savable_properties = ["chase", "chase_speed"]
-	editable_properties = ["chase", "chase_speed"]
-	
-func _set_property_values():
-	set_property("chase", chase, true)
-	set_property("chase_speed", chase_speed, true)
-	
+
+func _register_properties():
+	register_property(4, "chase", chase, true)
+	register_property(5, "chase_speed", chase_speed, true)
+
+
 func is_vanish(body):
 	return body.powerup != null and body.powerup.id == "Vanish"
+
 
 func kill(body):
 	if enabled and body.name.begins_with("Character") and !body.dead and body.controllable and !is_vanish(body):
