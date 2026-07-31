@@ -64,7 +64,7 @@ func create_tilemap_chunk(chunk_coord: Vector2, chunk_data: PoolIntArray):
 
 func place_tile(coords: Vector2, tileset: int, type: int, palette: int, update_autotile: bool = true, modify_data: bool = false):
 	set_cellv(coords, tile_util.get_real_tile_set_id(tileset, type, palette))
-	
+	print(tileset, type, palette)
 	if update_autotile:
 		update_autotile(coords)
 	

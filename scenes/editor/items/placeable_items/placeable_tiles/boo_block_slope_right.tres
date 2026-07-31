@@ -1,17 +1,17 @@
 [gd_resource type="Resource" load_steps=3 format=2]
 
 [ext_resource path="res://scenes/editor/items/placeable_tile.gd" type="Script" id=1]
-[ext_resource path="res://assets/tiles/boo_block/icon.png" type="Texture" id=2]
+[ext_resource path="res://assets/tiles/boo_block/icon_slope_r.png" type="Texture" id=2]
 
 [resource]
 script = ExtResource( 1 )
-item_name = "Boo Block"
+item_name = "Boo Block (Right Slope)"
 groups = PoolStringArray( "special" )
-change_to = "til_boo_block_slope_left"
+change_to = "til_boo_block"
 items_in_sequence = 3
-index_in_sequence = 0
+index_in_sequence = 2
 icons = [ ExtResource( 2 ) ]
 previews = [ ExtResource( 2 ) ]
 priority = 0
 tileset_id = 6
-tile_id = 0
+tile_id = 3

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=242 format=2]
+[gd_resource type="Resource" load_steps=244 format=2]
 
 [ext_resource path="res://scenes/editor/items/placeable_items.gd" type="Script" id=1]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/blue_coin.tres" type="Resource" id=2]
@@ -241,6 +241,8 @@
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/glass_slope_left.tres" type="Resource" id=239]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/barrel.tres" type="Resource" id=240]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/pendulum.tres" type="Resource" id=241]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/boo_block_slope_left.tres" type="Resource" id=242]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/boo_block_slope_right.tres" type="Resource" id=243]
 
 [resource]
 script = ExtResource( 1 )
@@ -396,6 +398,8 @@ placeable_items = {
 "til_black_granite_slope_left": ExtResource( 192 ),
 "til_black_granite_slope_right": ExtResource( 194 ),
 "til_boo_block": ExtResource( 147 ),
+"til_boo_block_slope_left": ExtResource( 242 ),
+"til_boo_block_slope_right": ExtResource( 243 ),
 "til_bookshelf": ExtResource( 173 ),
 "til_brick": ExtResource( 3 ),
 "til_brick_stairs_left": ExtResource( 148 ),

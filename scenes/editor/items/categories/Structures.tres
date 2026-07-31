@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=58 format=2]
+[gd_resource type="Resource" load_steps=60 format=2]
 
 [ext_resource path="res://scenes/editor/items/placeable_items.gd" type="Script" id=1]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/stone_bricks_stairs_left.tres" type="Resource" id=2]
@@ -27,6 +27,8 @@
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/color_tile_slope_left.tres" type="Resource" id=25]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/color_tile_slope_right.tres" type="Resource" id=26]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/color_tile.tres" type="Resource" id=27]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/boo_block_slope_right.tres" type="Resource" id=28]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/boo_block_slope_left.tres" type="Resource" id=29]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/bricks_stairs_left.tres" type="Resource" id=148]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/gem_block.tres" type="Resource" id=149]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/glass.tres" type="Resource" id=150]
@@ -62,6 +64,8 @@
 script = ExtResource( 1 )
 placeable_items = {
 "til_boo_block": ExtResource( 24 ),
+"til_boo_block_slope_left": ExtResource( 29 ),
+"til_boo_block_slope_right": ExtResource( 28 ),
 "til_bookshelf": ExtResource( 173 ),
 "til_bricks": ExtResource( 3 ),
 "til_bricks_stairs_left": ExtResource( 148 ),
