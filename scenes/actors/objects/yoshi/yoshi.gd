@@ -17,9 +17,9 @@ var rainbow: bool
 func _register_properites():
 	._register_properites()
 	
-	register_property(12, "skin_color", skin_color, true)
-	register_property(13, "shoe_color", shoe_color, true)
-	register_property(14, "rainbow", rainbow, true)
+	register_property(12, "skin_color", skin_color)
+	register_property(13, "shoe_color", shoe_color)
+	register_property(14, "rainbow", rainbow)
 
 
 func _process(delta):

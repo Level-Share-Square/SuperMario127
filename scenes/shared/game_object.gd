@@ -32,6 +32,8 @@ var in_front: bool = false
 var enabled: bool = true
 var palette: int = 0
 
+var is_on_ground = null setget ,is_on_ground_layer
+
 # true if creating a GameObject for the object settings preview
 var is_preview : bool = false
 
@@ -265,11 +267,30 @@ func parts_input_handler(event, object):
 
 
 func is_on_ground_layer() -> bool:
-	return level_layer_ref.get_ref() is LevelGroundLayer
+	if not typeof(is_on_ground) == TYPE_BOOL:
+		is_on_ground = level_layer_ref.get_ref() is LevelGroundLayer
+	
+	return is_on_ground
 
 
 func is_enabled() -> bool:
 	return enabled
+
+
+func is_enabled_and_on_parallax() -> bool:
+	return is_enabled() and not is_on_ground_layer()
+
+
+func is_enabled_and_on_ground() -> bool:
+	return is_enabled() and is_on_ground_layer()
+
+
+func is_disabled_and_on_ground() -> bool:
+	return not is_enabled() and is_on_ground_layer()
+
+
+func is_disabled_and_on_parallax() -> bool:
+	return not is_enabled() and not is_on_ground_layer()
 
 
 func is_in_editor() -> bool:
