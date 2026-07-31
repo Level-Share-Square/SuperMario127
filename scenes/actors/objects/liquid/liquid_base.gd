@@ -64,28 +64,31 @@ func update_property(key, value):
 	pass
 
 
-func _set_properties():
-	savable_properties = []
-	editable_properties = []
-	for liquid_property in liquid_properties:
-		savable_properties.append(liquid_property)
-		editable_properties.append(liquid_property)
-	
-	#extra liquid properties that a liquid might have
-	var i: int = 0
-	for liquid_property in get_liquid_properties():
-		savable_properties.append(liquid_property)
-		editable_properties.insert(i, liquid_property)
-		i += 1
+#func _set_properties():
+#	savable_properties = []
+#	editable_properties = []
+#	for liquid_property in liquid_properties:
+#		savable_properties.append(liquid_property)
+#		editable_properties.append(liquid_property)
+#
+#	#extra liquid properties that a liquid might have
+#	var i: int = 0
+#	for liquid_property in get_liquid_properties():
+#		savable_properties.append(liquid_property)
+#		editable_properties.insert(i, liquid_property)
+#		i += 1
 
 
-func _set_property_values():
+func _register_properties():
+	var id: int = 4
 	for liquid_property in liquid_properties:
-		set_property(liquid_property, self[liquid_property], true, null if liquid_property != "render_in_front" else "Next Layer")
+		register_property(id, liquid_property, self[liquid_property])
+		id += 1
 	set_bool_alias("crystal_tap_mode", "Move", "Grow/Shrink")
 	
 	for liquid_property in get_liquid_properties():
-		set_property(liquid_property, self[liquid_property], true)
+		register_property(id, liquid_property, self[liquid_property])
+		id += 1
 	set_liquid_property_menus()
 
 

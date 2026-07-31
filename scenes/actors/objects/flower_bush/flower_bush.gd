@@ -14,16 +14,20 @@ var flower_color: Color = Color.yellow
 var parts: int = 1
 
 
-func _set_properties():
-	savable_properties = ["flowers", "flower_color", "parts"]
-	editable_properties = ["flowers", "flower_color", "parts"]
+#func _set_properties():
+#	savable_properties = ["flowers", "flower_color", "parts"]
+#	editable_properties = ["flowers", "flower_color", "parts"]
 
+func _register_properties():
+	register_property(4, "flowers", flowers, true)
+	register_property(5, "flower_color", flower_color, true)
+	register_property(6, "parts", parts, true)
 
 func _object_ready():
 	interaction_area.connect("body_entered", self, "start_anim")
 
 
-func _object_ground_process(delta: float) -> void:
+func _object_process(delta: float) -> void:
 	if !is_equal_approx(displacement_spring_anim_power, 0):
 		update_displacement_spring(delta)
 	else:

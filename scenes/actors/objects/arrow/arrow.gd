@@ -15,10 +15,10 @@ onready var animationplayer = $AnimationPlayer
 
 
 func _register_properties(): 
-	register_property(1, "color", color)
-	register_property(2, "moves", moves)
-	register_property(3, "rainbow", rainbow)
-	register_property(4, "outline_color", outline_color)
+	register_property(4, "color", color)
+	register_property(5, "moves", moves)
+	register_property(6, "rainbow", rainbow)
+	register_property(7, "outline_color", outline_color)
 
 
 func _ready():

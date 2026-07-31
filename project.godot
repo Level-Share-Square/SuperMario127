@@ -229,10 +229,10 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://classes/curve_tween.gd"
 }, {
-"base": "GameObject",
+"base": "Reference",
 "class": "Decoration",
 "language": "GDScript",
-"path": "res://scenes/actors/objects/big_tree/Decoration.gd"
+"path": "res://scenes/actors/objects/big_tree/decoration.gd"
 }, {
 "base": "BaseLayerAction",
 "class": "DeleteLayerAction",

@@ -9,12 +9,12 @@ export(Array, Texture) var palette_textures
 export var parts := 9
 var last_parts := 1
 
-func _set_properties():
-	savable_properties = ["parts"]
-	editable_properties = ["parts"]
-	
-func _set_property_values():
-	set_property("parts", parts, 1)
+#func _set_properties():
+#	savable_properties = ["parts"]
+#	editable_properties = ["parts"]
+#
+func _register_properties():
+	register_property(4, "parts", parts, true)
 
 func _unhandled_input(event: InputEvent) -> void:
 	parts_input_handler(event,self)
@@ -50,10 +50,10 @@ func _ready():
 		
 	update_parts()
 
-func _object_disabled_ready():
-	._object_disabled_ready()
-	collision_shape.disabled = true
-	platform_area_collision_shape.disabled = true
+func _object_ready():
+	._object_ready()
+	collision_shape.disabled = !enabled
+	platform_area_collision_shape.disabled = !enabled
 
 func update_parts():
 	sprite.rect_position.x = -(left_width + (part_width * parts) + right_width) / 2

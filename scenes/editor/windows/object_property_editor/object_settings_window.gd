@@ -42,7 +42,7 @@ func load_objects(_objects: Dictionary):
 		
 		game_object.connect("tree_exited", self, "close")
 		var curve
-		for property in game_object.object_data_ref.get_ref().properties:
+		for property in game_object.object_data.properties:
 			if "Curve2D" in str(property):
 				curve = property
 		

@@ -14,13 +14,13 @@ var part_height = 16
 
 var last_parts := 2
 
-func _set_properties():
-	savable_properties = ["color", "parts"]
-	editable_properties = ["color", "parts"]
+#func _set_properties():
+#	savable_properties = ["color", "parts"]
+#	editable_properties = ["color", "parts"]
 	
-func _set_property_values():
-	set_property("color", color, true)
-	set_property("parts", parts, true)
+func _register_properties():
+	register_property(4, "color", color, true)
+	register_property(5, "parts", parts, true)
 
 func _ready():
 	collision_shape.shape = collision_shape.shape.duplicate(true)

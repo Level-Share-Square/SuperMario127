@@ -15,13 +15,13 @@ var gravity: = 0.0
 var gravity_scale: = 1.0
 
 var run_physics := true
-
-func _set_properties():
-	savable_properties = ["velocity", "nozzle_type"]
-	editable_properties = ["velocity", "nozzle_type"]
+#
+#func _set_properties():
+#	savable_properties = ["velocity", "nozzle_type"]
+#	editable_properties = ["velocity", "nozzle_type"]
 	
-func _set_property_values():
-	set_property("velocity", velocity, 1)
+func _register_properties():
+	register_property(4, "velocity", velocity, true)
 		
 func collect(body):
 	if enabled and !collected and body.name.begins_with("Character") and !body.dead:
@@ -39,7 +39,8 @@ func _ready():
 	kinematic_body.get_node("Sprite_" + nozzle_type).visible = true
 	
 func _object_ready():
-	var _connect = area.connect("body_entered", self, "collect")
+	if enabled:
+		var _connect = area.connect("body_entered", self, "collect")
 	
 func _process(delta):
 	if destroy_timer > 0:

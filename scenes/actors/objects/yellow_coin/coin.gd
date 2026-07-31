@@ -26,8 +26,8 @@ var physics_run := false
 
 
 func _register_properties():
-	register_property(0, "physics", physics)
-	register_property(1, "velocity", velocity)
+	register_property(4, "physics", physics)
+	register_property(5, "velocity", velocity)
 
 
 func collect(body, is_shell = false):
@@ -51,6 +51,7 @@ func collect(body, is_shell = false):
 
 
 func _object_ready():
+	._object_ready()
 	var _connect = area.connect("body_entered", self, "collect")
 	
 	for body in area.get_overlapping_bodies():

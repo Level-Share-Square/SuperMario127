@@ -19,19 +19,19 @@ var level_path: String = ""
 
 
 ### PROPERTIES
-func _set_properties() -> void:
-	savable_properties = ["target_area", "tag", "teleport_mode", "max_pan_distance", "level_path"]
-	editable_properties = ["target_area", "tag", "teleport_mode", "max_pan_distance", "level_path"]
+#func _set_properties() -> void:
+#	savable_properties = ["target_area", "tag", "teleport_mode", "max_pan_distance", "level_path"]
+#	editable_properties = ["target_area", "tag", "teleport_mode", "max_pan_distance", "level_path"]
 
 
-func _set_property_values() -> void:
-	set_property("target_area", target_area)
-	set_property("tag", tag)
-	set_property("teleport_mode", teleport_mode, true)
+func _register_properties() -> void:
+	register_property(4, "target_area", target_area)
+	register_property(5, "tag", tag)
+	register_property(6, "teleport_mode", teleport_mode, true)
 	set_property_menu("teleport_mode", ["option", 3, 0, ["Location", "Area", "Level"]])
 	set_bool_alias("teleportation_mode", "Remote", "Local")
-	set_property("max_pan_distance", max_pan_distance)
-	set_property("level_path", level_path)
+	register_property(7, "max_pan_distance", max_pan_distance)
+	register_property(8, "level_path", level_path)
 
 
 ### ANIMATION
@@ -61,6 +61,7 @@ func finish_exit_animation(character: Character) -> void:
 	# undo collision changes 
 	character.set_collision_layer_bit(1, true)
 	character.set_inter_player_collision(true)
+	character.z_index = level_layer_ref.get_ref().z_index
 
 
 
