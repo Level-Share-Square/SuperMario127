@@ -191,6 +191,9 @@ func register_property(id: int, property: String, default_value, editable: bool 
 	
 	property_ids.get_or_add(id, property)
 	property_defaults.get_or_add(property, default_value)
+	
+	if editable:
+		editable_properties.append(property)
 
 
 func set_object_data(data: ObjectData) -> void:
