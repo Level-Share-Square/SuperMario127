@@ -84,7 +84,7 @@ func quit():
 	var level_code: String = level_list_util.load_level_code_file(code_path)
 	
 	if Singleton.SceneSwitcher.menu_return_args.size() > 0:
-		Singleton.SceneSwitcher.menu_return_args = [CurrentLevelData.level_info, level_id, working_folder, true, is_campaign]
+		Singleton.SceneSwitcher.menu_return_args = [CurrentLevelData.level_metadata, level_id, working_folder, true, is_campaign]
 	
 	Singleton.Music.loop = 0
 	Singleton.Music.loop_end = 0
