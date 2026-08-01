@@ -1,9 +1,7 @@
 class_name ObjectManager
 extends Node2D
 
-
 var layer_data: LayerData
-
 
 func load_in(s_layer_data: LayerData):
 	layer_data = s_layer_data
@@ -34,7 +32,7 @@ func create_object(object_data: ObjectData):
 	game_object.level_layer_ref = weakref(owner)
 	game_object.palette = object_data.metadata.palette
 	game_object.position = object_data.metadata.position
-	
+
 	add_child(game_object)
 
 	

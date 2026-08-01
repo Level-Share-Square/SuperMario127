@@ -21,8 +21,10 @@ var variables: LevelVars
 
 func _ready():
 	hide()
-#	var shared_node: LevelShared = get_tree().get_current_scene().get_shared()
-#	shared_node.get_node("Objects").connect("objects_ready", self, "delayed_ready")
+	var player: LevelPlayer = get_tree().current_scene
+	var shared: LevelShared = player.get_shared()
+	yield(shared, "loaded_layers")
+	delayed_ready()
 
 func delayed_ready():
 	variables = CurrentLevelData.vars
@@ -56,7 +58,7 @@ func update_counter(new_coins: int):
 	max_label.text = "(" + str(max_purples) + ")"
 
 func update_required_purples():
-	var current_required_purples = variables.required_purple_starbits[CurrentLevelData.current_area]
+	var current_required_purples = variables.required_purple_starbits[CurrentLevelData.area_id]
 	if len(current_required_purples) > 0:
 		if len(current_required_purples) > 1:
 			if variables.purple_starbits_collected[CurrentLevelData.area_id][0] >= required_purples:

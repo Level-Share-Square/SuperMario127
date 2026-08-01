@@ -1,4 +1,4 @@
-extends GameObject
+extends Node2D
 
 onready var area = $Area2D
 onready var metal_bounce_noise = $AudioStreamPlayer2D
@@ -7,6 +7,8 @@ onready var sawblade = $"../../.."
 const METAL_KNOCKBACK = 400
 const METAL_KNOCKBACK_SPEED_LIMIT = 800
 const METAL_DOWNWARD_KNOCKBACK_LIMIT = 100
+
+var enabled: bool
 	
 func is_vanish(body):
 	return body.powerup != null and body.powerup.id == "Vanish"
@@ -18,7 +20,7 @@ func kill(body):
 	
 	enabled = get_parent().get_parent().get_parent().enabled
 	
-	if !(is_enabled_and_on_ground() and body.name.begins_with("Character") and !body.dead and body.controllable):
+	if !(enabled and body.name.begins_with("Character") and !body.dead and body.controllable):
 		return
 	
 	

@@ -11,8 +11,10 @@ var max_shards: int
 
 func _ready():
 	hide()
-#	var shared_node: LevelShared = get_tree().get_current_scene().get_shared_node()
-#	shared_node.get_node("Objects").connect("objects_ready", self, "delayed_ready")
+	var player: LevelPlayer = get_tree().current_scene
+	var shared: LevelShared = player.get_shared()
+	yield(shared, "loaded_layers")
+	delayed_ready()
 
 func delayed_ready():
 	var variables: LevelVars = CurrentLevelData.vars

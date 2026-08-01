@@ -20,7 +20,7 @@ func delayed_ready():
 	yield(get_tree(), "physics_frame")
 	
 	var variables: LevelVars = CurrentLevelData.vars
-	max_reds = variables.max_red_coins
+	max_reds = CurrentLevelData.level_metadata.collectible_data.red_coin_count
 	
 	if max_reds > 0:
 		show()

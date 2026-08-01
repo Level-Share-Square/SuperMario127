@@ -210,10 +210,10 @@ func _physics_process(_delta: float) -> void:
 			CurrentLevelData.vars.purple_starbits_collected.append([0, []])
 		
 		if red_coins_activate and !activated and CurrentLevelData.vars.max_red_coins > 0:
-			if CurrentLevelData.vars.red_coins_collected[0] == CurrentLevelData.vars.max_red_coins:
+			if CurrentLevelData.vars.red_coins_collected[0] == CurrentLevelData.level_metadata.collectible_data.red_coin_count:
 				activate_shine(ActivateAnimations.NORMAL if do_animation else ActivateAnimations.SKIP, false, true)
 		if shine_shards_activate and !activated and CurrentLevelData.vars.max_shine_shards > 0:
-			if CurrentLevelData.vars.shine_shards_collected[CurrentLevelData.area_id][0] == CurrentLevelData.vars.max_shine_shards:
+			if CurrentLevelData.vars.shine_shards_collected[CurrentLevelData.area_id][0] == CurrentLevelData.area_headers[CurrentLevelData.area_id].shine_shard_count:
 				activate_shine(ActivateAnimations.NORMAL if do_animation else ActivateAnimations.SKIP, false, true)
 		if purple_starbits_activate and !activated and CurrentLevelData.vars.max_purple_starbits > 0:
 			if CurrentLevelData.vars.purple_starbits_collected[CurrentLevelData.area_id][0] >= required_purples:

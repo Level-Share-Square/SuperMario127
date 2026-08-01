@@ -27,14 +27,15 @@ static func recalculate_level_collectible_counts(level_data_container) -> void:
 			for object in layer.object_data:
 				object = object as ObjectData
 				
-				if object.metadata.type_id == RED_COIN_ID and object.get_property(ENABLED_PROP_ID):
+				if object.metadata.type_id == RED_COIN_ID and object.get_property(ENABLED_PROP_ID) == null:
 					level_metadata.collectible_data.red_coin_count += 1
 				
-				if object.metadata.type_id == SHINE_SHARD_ID and object.get_property(ENABLED_PROP_ID):
+				if object.metadata.type_id == SHINE_SHARD_ID and object.get_property(ENABLED_PROP_ID) == null:
 					area.header.shine_shard_count += 1
 				
-				if object.metadata.type_id == PURPLE_COIN_ID and object.get_property(ENABLED_PROP_ID):
+				if object.metadata.type_id == PURPLE_COIN_ID and object.get_property(ENABLED_PROP_ID) == null:
 					area.header.max_purples_count += 1
-		
+					
+
 		area.header.area_code = LevelCodeSerializer.serialize_area(area)
 		area_headers[i] = area.header

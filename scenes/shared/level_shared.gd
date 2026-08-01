@@ -21,6 +21,7 @@ onready var loaded_boo_texture_invis = load(boo_block_texture_invis)
 
 signal layer_added(layer)
 signal found_origin
+signal loaded_layers
 
 func load_in():
 	load_layers(CurrentLevelData.current_area.layers)
@@ -29,6 +30,7 @@ func load_in():
 		tex = loaded_boo_texture_invis
 	for i in [18, 118, 119]:
 		layers[0].tile_map_manager.tile_set.tile_set_texture(i, tex)
+	emit_signal("loaded_layers")
 
 func load_layers(layer_data_list: Array):
 	for layer_data in layer_data_list:

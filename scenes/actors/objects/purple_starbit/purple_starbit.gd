@@ -33,7 +33,7 @@ func collect(body):
 func _ready():
 	if mode == 1: return
 	if is_enabled_and_on_ground():
-#		add_to_group("purple_starbits")
+		add_to_group("purple_starbits")
 		id = CurrentLevelData.vars.max_purple_starbits
 		CurrentLevelData.vars.max_purple_starbits += 1
 	
@@ -78,35 +78,35 @@ func _process(delta):
 	if !collected:
 		animated_sprite.frame = wrapi(OS.get_ticks_msec() / (1000/8), 0, 16)
 
-#func turn_off():
-#	var req_purples = CurrentLevelData.vars.required_purple_starbits[CurrentLevelData.current_area][0]
-#	if CurrentLevelData.vars.purple_starbits_collected[CurrentLevelData.current_area][0] < req_purples:
-#		CurrentLevelData.vars.purple_starbits_collected[CurrentLevelData.current_area] = [0, []]
-#		timed = true
-#		timer_on = false
-#		enabled = false
-#		collected = false
-#		animated_sprite.animation = "purple"
-#		tween.interpolate_property(animated_sprite, "self_modulate:A", 255, 0, 1)
-#		tween.start()
-#		yield(tween, "tween_all_completed")
-#		visible = false
-#		print("shut off")
-#	elif (CurrentLevelData.vars.purple_starbits_collected[CurrentLevelData.current_area][0] > req_purples) and (len(CurrentLevelData.vars.required_purple_starbits[CurrentLevelData.current_area]) > 1):
-#		CurrentLevelData.vars.purple_starbits_collected[CurrentLevelData.current_area][0] = req_purples
-#		for _i in range(req_purples, CurrentLevelData.vars.purple_starbits_collected[CurrentLevelData.current_area][0]):
-#			var popped_id = CurrentLevelData.vars.purple_starbits_collected[CurrentLevelData.current_area][1].pop_back()
-#			if id == popped_id:
-#				timed = true
-#				timer_on = false
-#				enabled = false
-#				collected = false
-#
-#
-#func turn_on():
-#	tween.interpolate_property(animated_sprite, "self_modulate:A", 0, 255, 1)
-#	tween.start()
-#	yield(tween, "tween_all_completed")
-#	visible = true
-#	timer_on = true
-#	enabled = true
+func turn_off():
+	var req_purples = CurrentLevelData.vars.required_purple_starbits[CurrentLevelData.area_id][0]
+	if CurrentLevelData.vars.purple_starbits_collected[CurrentLevelData.area_id][0] < req_purples:
+		CurrentLevelData.vars.purple_starbits_collected[CurrentLevelData.area_id] = [0, []]
+		timed = true
+		timer_on = false
+		enabled = false
+		collected = false
+		animated_sprite.animation = "purple"
+		tween.interpolate_property(animated_sprite, "self_modulate:A", 255, 0, 1)
+		tween.start()
+		yield(tween, "tween_all_completed")
+		visible = false
+		print("shut off")
+	elif (CurrentLevelData.vars.purple_starbits_collected[CurrentLevelData.area_id][0] > req_purples) and (len(CurrentLevelData.vars.required_purple_starbits[CurrentLevelData.area_id]) > 1):
+		CurrentLevelData.vars.purple_starbits_collected[CurrentLevelData.area_id][0] = req_purples
+		for _i in range(req_purples, CurrentLevelData.vars.purple_starbits_collected[CurrentLevelData.area_id][0]):
+			var popped_id = CurrentLevelData.vars.purple_starbits_collected[CurrentLevelData.area_id][1].pop_back()
+			if id == popped_id:
+				timed = true
+				timer_on = false
+				enabled = false
+				collected = false
+
+
+func turn_on():
+	tween.interpolate_property(animated_sprite, "self_modulate:A", 0, 255, 1)
+	tween.start()
+	yield(tween, "tween_all_completed")
+	visible = true
+	timer_on = true
+	enabled = true
