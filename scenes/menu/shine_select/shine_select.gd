@@ -17,8 +17,7 @@ onready var level_title_backing: Label = $"%LevelTitleBacking"
 onready var fludds = $"%FLUDD"
 
 ## level data
-onready var level_info: LevelInfo = CurrentLevelData.level_info
-onready var level_data: LevelDataOld = CurrentLevelData.level_data
+onready var level_metadata: LevelMetadata = CurrentLevelData.level_metadata
 
 # other
 var backing_out: bool = false
@@ -32,29 +31,29 @@ func back():
 
 
 func _ready():
-	for fludd in fludds.get_children():
-		if level_info.activated_fludds[fludd.get_index()]:
-			fludd.visible = true
-			fludd.connect("pressed", self, "_on_fludd_pressed", [fludd.name])
-		else:
-			fludd.visible = false
+#	for fludd in fludds.get_children():
+#		if CurrentLevelData..activated_fludds[fludd.get_index()]:
+#			fludd.visible = true
+#			fludd.connect("pressed", self, "_on_fludd_pressed", [fludd.name])
+#		else:
+#			fludd.visible = false
 	get_tree().paused = false
 	
 	mission_select_sfx.play()
 	
-	level_title.text = level_info.level_name
+	level_title.text = level_metadata.level_name
 	level_title_backing.text = level_title.text
 	
-	backgrounds.load_in(level_data, level_data.areas[0])
+	backgrounds.load_in()
 	backgrounds.do_auto_scroll = true
 	
 	anim_player.play_backwards("transition")
 
 func start_level():
-	var shine_details: Array = CurrentLevelData.level_info.shine_details
+	var mission_data: MissionData = CurrentLevelData.level_metadata.collectible_data.mission_data[shine_parent.selected_shine_index]
 	CurrentLevelData.level_transition_data = {
-		"target_area": shine_details[shine_parent.selected_shine_index].get("entrance_area", -1),
-		"target_tag": shine_details[shine_parent.selected_shine_index].get("entrance_tag", "_entrance")
+		"target_area": mission_data.spawn_area_id,
+		"target_tag": mission_data.spawn_teleporter_tag
 	} 
 #	print(CurrentLevelData.current_area)
 	
@@ -73,7 +72,8 @@ func start_level():
 	
 	get_tree().call_group("shine_sprites", "start_pressed_animation")
 	
-	CurrentLevelData.level_info.selected_shine = shine_parent.shine_details_indices[shine_parent.selected_shine_index]
+	CurrentLevelData.current_mission_id = mission_data.mission_uuid
+	CurrentLevelData.current_mission = mission_data
 	
 	# levels screen is supposed to set the CurrentLevelData before changing to the shine select screen
 	# so we'll assume it's safe to just go straight to the player scene 
@@ -84,5 +84,5 @@ func start_level():
 func animation_finished(_animation_name: String):
 	Singleton.SceneSwitcher.force_start_level()
 
-func _on_fludd_pressed(fludd: String):
-	level_info.chosen_fludd = fludd
+#func _on_fludd_pressed(fludd: String):
+#	level_info.chosen_fludd = fludd

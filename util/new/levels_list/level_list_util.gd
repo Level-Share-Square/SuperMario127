@@ -283,6 +283,9 @@ static func load_level_code_file(file_path: String) -> String:
 	
 	return level_code
 
+static func get_level_code_from_id(level_id: String, working_folder: String) -> String:
+	return load_level_code_file(get_level_file_path(level_id, working_folder))
+	
 static func save_level_code_file(level_code: String, file_path: String):
 	var file := File.new()
 	var err: int = file.open(file_path, File.WRITE)

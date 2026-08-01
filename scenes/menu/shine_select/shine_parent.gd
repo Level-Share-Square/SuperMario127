@@ -1,7 +1,7 @@
 extends Node2D
 
 ## level data
-onready var level_info: LevelInfo = CurrentLevelData.level_info
+onready var level_metadata: LevelMetadata = CurrentLevelData.level_metadata
 
 ## nodes
 onready var tween: Tween = $"%Tween"
@@ -41,14 +41,15 @@ var scrollable_shines: Array = []
 var selected_shine_index: int = -1
 
 func _ready():
-	shine_details = level_info.shine_details
+	shine_details = level_metadata.collectible_data.mission_data
 	
 	var shine_index: int = 0
-	var collected_shines = level_info.collected_shines
+	var collected_shines = []
 	var final_select_shine: bool = false
 	for shine in shine_details:
-		var shine_id: int = shine["id"]
-		var is_collected = collected_shines[str(shine_id)]
+		shine = shine as MissionData
+		var shine_id: String = shine["mission_uuid"]
+		var is_collected = false
 		if !is_collected && !final_select_shine && !shine_id in scrollable_shines:
 			scrollable_shines.append(shine_id)
 			final_select_shine = true
@@ -59,10 +60,10 @@ func _ready():
 	for i in range(shine_details.size()):
 		var end: bool = false
 		
-		var is_collected = collected_shines[str(shine_details[i]["id"])]
-		if used_shine_ids.has(shine_details[i]["id"]):
+		var is_collected = false
+		if used_shine_ids.has(shine_details[i]["mission_uuid"]):
 			continue
-		if !shine_details[i]["show_in_menu"]:
+		if !shine_details[i]["mission_show_in_menu"]:
 			continue
 		if CurrentLevelData.shine_progression:
 			if !is_collected && find_last_collected_shine() == i - 1:
@@ -71,15 +72,15 @@ func _ready():
 				else:
 					break
 
-		used_shine_ids.append(shine_details[i]["id"])
+		used_shine_ids.append(shine_details[i]["mission_uuid"])
 
 		var shine_sprite = SHINE_SPRITE_SCENE.instance()
 		shine_sprites.append(shine_sprite)
 		shine_details_indices.append(i)
 		
 		# make non-kickout shines turn the other way
-		if "do_kick_out" in shine_details[i]:
-			shine_sprite.is_flipped = !shine_details[i]["do_kick_out"]
+		if "shine_force_leave" in shine_details[i]:
+			shine_sprite.is_flipped = !shine_details[i]["shine_force_leave"]
 		
 		# place all the shines the correct distance away from the center shine
 		if i > 1:
@@ -99,7 +100,7 @@ func _ready():
 			shine_sprite.make_blue()
 		else:
 			# Shine color is stored as rgba32 from a json, and json converts stuff to float so it has to be converted twice
-			shine_sprite.set_color(Color(int(shine_details[i]["color"])))
+			shine_sprite.set_color(Color(int(shine_details[i]["shine_color"])))
 		
 		shine_index += 1
 		shine_sprite.add_to_group("shine_sprites")
@@ -189,15 +190,15 @@ func move_shine_sprites(instant: bool = false) -> void:
 
 func update_labels() -> void:
 	# this will assume the selected shine and the selected level are valid
-	shine_title.text = shine_details[shine_details_indices[selected_shine_index]]["title"]
+	shine_title.text = shine_details[shine_details_indices[selected_shine_index]]["shine_name"]
 	shine_description.bbcode_text = (
 		"[center]" +
-		shine_details[shine_details_indices[selected_shine_index]]["description"] +
+		shine_details[shine_details_indices[selected_shine_index]]["shine_description"] +
 		"[/center]"
 	)
 
 func find_last_collected_shine() -> int:
-	var collected_shines = level_info.collected_shines
+	var collected_shines = []
 	var shine_index = -1
 	for shine in collected_shines:
 		if collected_shines[shine]:

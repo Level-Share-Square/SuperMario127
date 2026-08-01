@@ -136,6 +136,21 @@ func deactivate_shine(id: int):
 	var index = activated_shine_ids.find(id)
 	activated_shine_ids.remove(index)
 
+func add_red_coin_id() -> int:
+	max_red_coins += 1
+	return max_red_coins
+	
+func init_red_coins() -> void:
+	for area_header in CurrentLevelData.area_headers:
+		var area: AreaData = LevelCodeDeserializer.deserialize_area_code(area_header.area_code)
+		for layer in area.layers:
+			if layer is LevelParallaxLayer: continue
+			
+			for object in layer.object_data:
+				object = object as ObjectData
+				
+				if object.metadata.type_id == 30 and object.get_property("enabled"):
+					max_red_coins += 1
 
 #func set_switch_state(var channel : int, value : bool):
 #	switch_state[channel] = value
