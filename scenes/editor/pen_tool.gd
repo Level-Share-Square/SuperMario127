@@ -45,7 +45,7 @@ func place_object(object_item: PlaceableObject):
 		shared.create_object(data, true)
 	elif Input.is_action_pressed("erase"):
 		for object in editor.hovered_objects.values():
-			editor.hovered_objects.erase(object.name)
+			editor.hovered_objects.erase(object.get_instance_id())
 			shared.destroy_object(object, true)
 			break
 
