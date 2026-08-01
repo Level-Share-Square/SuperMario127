@@ -19,11 +19,11 @@ var force_direction := 0
 func _register_properties():
 	register_property(4, "chase", chase)
 	register_property(5, "speed", speed)
-	register_property(6, "offset", offset)
-	register_property(7, "color", color)
-	register_property(8, "wait_time", wait_time)
-	register_property(9, "invincible", invincible)
-	register_property(10, "force_direction", force_direction)
+	register_property(10, "offset", offset)
+	register_property(6, "color", color)
+	register_property(7, "wait_time", wait_time)
+	register_property(8, "invincible", invincible)
+	register_property(9, "force_direction", force_direction)
 #	set_property_menu("force_direction", ["option", 3, -1, ['Face Player', 'Right', 'Left']])
 
 
