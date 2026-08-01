@@ -97,8 +97,8 @@ func toggle_state():
 
 func switch_state(new_state):
 		if(parent.disappears):
-			collision_shape.set_deferred("disabled", not enabled or not new_state)
-			platform_area_collision_shape.set_deferred("disabled", not enabled or not new_state)
+			collision_shape.set_deferred("disabled", not is_enabled_and_on_ground() or not new_state)
+			platform_area_collision_shape.set_deferred("disabled", not is_enabled_and_on_ground() or not new_state)
 			animation_player.play(str(new_state).to_lower())
 			sprite.visible = new_state
 			sprite2.visible = !new_state

@@ -79,12 +79,13 @@ func _ready():
 func object_hovered(object):
 	if tool_manager.current_tool.tool_type == EditorTool.Type.TileTool:
 		return
-	if get_shared_node().layers.find(object.level_layer_ref.get_ref()) != layer:
+	if get_shared_node().layers.find(object.level_layer_ref.get_ref()) 	!= layer:
 		return
 	
 	# Look you come up with a better object ID system when you have none
-	hovered_objects.get_or_add(object.get_instance_id(), object)
+	hovered_objects.get_or_add(object.name, object)
 	object.hovered = true
+	object.modulate_set()
 
 
 func object_unhovered(object):
@@ -93,7 +94,8 @@ func object_unhovered(object):
 	
 	hovered_objects.erase(object.name)
 	object.hovered = false
-
+	object.modulate_set()
+		
 
 func open_object_properties(selected_objects):
 	var objects: Dictionary
@@ -113,10 +115,9 @@ func switch_scenes():
 
 func get_shared_node() -> LevelShared:
 	return get_node(shared_path) as LevelShared
-
-
+	
 func get_hovered_objects():
 	hovered_objects.clear()
 	for object in get_shared_node().get_layer_at(layer).object_manager.get_children():
 		if object.is_object_hovered():
-			hovered_objects.get_or_add(object.get_instance_id(), object)
+			hovered_objects.get_or_add(object.name, object)
