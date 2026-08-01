@@ -1,16 +1,35 @@
 class_name LevelCodeSerializer
-extends LevelCodeHandler
+extends Reference
 
 
-static func serialize_level_data(var level_data: LevelDataContainer) -> String:
+const TYPE_CODE_STRING = "S" # String
+const TYPE_CODE_INT = "I" # int
+const TYPE_CODE_BOOL = "B" # bool
+const TYPE_CODE_FLOAT = "F" # float
+const TYPE_CODE_VECTOR2 = "V" # Vector2
+const TYPE_CODE_COLOR = "C" # Color
+const TYPE_CODE_ARRAY = "A" # Array
+const TYPE_CODE_DICTIONARY = "K" # Dictionary
+const TYPE_CODE_STRING_ARRAY = "aS" # PoolStringArray
+const TYPE_CODE_INT_ARRAY = "aI" # PoolIntArray
+const TYPE_CODE_FLOAT_ARRAY = "aF" # PoolRealArray; MAN I wish we had godot 4 for things like PackedFloat64Array
+const TYPE_CODE_VECTOR2_ARRAY = "aV" # PoolVector2Array
+const TYPE_CODE_BYTES = "Y" # PoolByteArray; (lacks the 'a' prefix due to not having a non-array equivalent)
+const TYPE_CODE_RECT2 = "R" # Rect2
+const TYPE_CODE_CURVE_2D = "U" # Curve2D
+const TYPE_CODE_TILE_DATA = "T" # TileData (wrapper for a PoolByteArray)
+const TYPE_CODE_DIALOGUE_DATA = "D" # DialogueData (wrapper for PoolStringArray)
+
+
+static func serialize_level_data(level_data) -> String:
 	var code = "["
-
+	
 	code += serialize_level_metadata(level_data.level_metadata)
 	code += serialize_areas(level_data.area_headers)
 	code += serialize_editor_data(level_data.editor_data)
-
+	
 	code += "]"
-
+	
 	return code
 
 
@@ -25,12 +44,14 @@ static func serialize_editor_data(editor_data: EditorData) -> String:
 	return wrap_code_in_brackets(code)
 
 
-
 static func serialize_collectible_data(collectible_data: CollectibleData) -> String:
 	var code: String = ""
 	
 	code += serialize_missions(collectible_data.mission_data)
 	code += serialize_star_coins(collectible_data.star_coin_data)
+	code += serialize_data_array([
+		collectible_data.red_coin_count
+	])
 	
 	return wrap_code_in_brackets(code)
 
@@ -309,7 +330,7 @@ static func serialize_data(value) -> String:
 		TYPE_STRING:
 			value = value as String
 #			data_code = LevelCodeHandler.TYPE_CODE_STRING + value
-			data_code = LevelCodeHandler.TYPE_CODE_STRING
+			data_code = TYPE_CODE_STRING
 			
 			if not value.empty():
 				var bytes: PoolByteArray = value.to_utf8().compress(File.COMPRESSION_DEFLATE)
@@ -322,40 +343,40 @@ static func serialize_data(value) -> String:
 				data_code = data_code.replace("=", "~")
 		TYPE_INT:
 			value = value as int
-			data_code = LevelCodeHandler.TYPE_CODE_INT + base64_encode_int(value)
+			data_code = TYPE_CODE_INT + base64_encode_int(value)
 		TYPE_BOOL:
 			value = value as bool
-			data_code = LevelCodeHandler.TYPE_CODE_BOOL + str(int(value))
+			data_code = TYPE_CODE_BOOL + str(int(value))
 		TYPE_REAL:
 			value = value as float
-			data_code = LevelCodeHandler.TYPE_CODE_FLOAT + base64_encode_float(value)
+			data_code = TYPE_CODE_FLOAT + base64_encode_float(value)
 		TYPE_VECTOR2:
 			value = value as Vector2
-			data_code = LevelCodeHandler.TYPE_CODE_VECTOR2 + serialize_data_array([value.x, value.y])
+			data_code = TYPE_CODE_VECTOR2 + serialize_data_array([value.x, value.y])
 		TYPE_COLOR:
 			value = value as Color
-			data_code = LevelCodeHandler.TYPE_CODE_COLOR + serialize_data_array([value.r, value.g, value.b, value.a])
+			data_code = TYPE_CODE_COLOR + serialize_data_array([value.r, value.g, value.b, value.a])
 		TYPE_ARRAY:
 			value = value as Array
-			data_code = LevelCodeHandler.TYPE_CODE_ARRAY + serialize_data_array(value)
+			data_code = TYPE_CODE_ARRAY + serialize_data_array(value)
 		TYPE_DICTIONARY:
 			value = value as Dictionary
-			data_code = LevelCodeHandler.TYPE_CODE_DICTIONARY + serialize_dictionary(value)
+			data_code = TYPE_CODE_DICTIONARY + serialize_dictionary(value)
 		TYPE_STRING_ARRAY:
 			value = value as PoolStringArray
-			data_code = LevelCodeHandler.TYPE_CODE_STRING_ARRAY + serialize_data_array(value)
+			data_code = TYPE_CODE_STRING_ARRAY + serialize_data_array(value)
 		TYPE_INT_ARRAY:
 			value = value as PoolIntArray
-			data_code = LevelCodeHandler.TYPE_CODE_INT_ARRAY + serialize_data_array(value)
+			data_code = TYPE_CODE_INT_ARRAY + serialize_data_array(value)
 		TYPE_REAL_ARRAY:
 			value = value as PoolRealArray
-			data_code = LevelCodeHandler.TYPE_CODE_FLOAT_ARRAY + serialize_data_array(value)
+			data_code = TYPE_CODE_FLOAT_ARRAY + serialize_data_array(value)
 		TYPE_VECTOR2_ARRAY:
 			value = value as PoolVector2Array
-			data_code = LevelCodeHandler.TYPE_CODE_VECTOR2_ARRAY + serialize_data_array(value)
+			data_code = TYPE_CODE_VECTOR2_ARRAY + serialize_data_array(value)
 		TYPE_RAW_ARRAY:
 			value = value as PoolByteArray
-			data_code = LevelCodeHandler.TYPE_CODE_BYTES
+			data_code = TYPE_CODE_BYTES
 			if not value.empty():
 				data_code += Marshalls.raw_to_base64(value)
 				# convert from Base64 to Base64URL
@@ -366,12 +387,12 @@ static func serialize_data(value) -> String:
 				data_code = data_code.replace("=", "~")
 		TYPE_RECT2:
 			value = value as Rect2
-			data_code = LevelCodeHandler.TYPE_CODE_RECT2 + serialize_data_array([value.position.x, value.position.y, value.size.x, value.size.y])
+			data_code = TYPE_CODE_RECT2 + serialize_data_array([value.position.x, value.position.y, value.size.x, value.size.y])
 		# Any type based on Object is encoded here
 		TYPE_OBJECT:
 			if value is Curve2D:
 				value = value as Curve2D
-				data_code = LevelCodeHandler.TYPE_CODE_CURVE_2D
+				data_code = TYPE_CODE_CURVE_2D
 				
 				var point_data: PoolVector2Array = PoolVector2Array()
 				for i in range(value.get_point_count()):
@@ -382,7 +403,7 @@ static func serialize_data(value) -> String:
 				data_code += serialize_data(point_data)
 			elif value is TileData:
 				value = value as TileData
-				data_code = LevelCodeHandler.TYPE_CODE_TILE_DATA
+				data_code = TYPE_CODE_TILE_DATA
 				
 				var tile_byte_data: PoolByteArray = tile_util.chunks_to_tile_bytes(value.chunks)
 				data_code += serialize_data_array([tile_byte_data])

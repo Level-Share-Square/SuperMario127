@@ -78,8 +78,10 @@ func autosave():
 	for area_id in CurrentLevelData.loaded_areas:
 		# should probably put this in CurrentLevelData
 		CurrentLevelData.area_headers[area_id].area_code = LevelCodeSerializer.serialize_area(CurrentLevelData.loaded_areas[area_id])
-
-	var level_code: String = LevelCodeSerializer.serialize_level_data(LevelDataContainer.new(CurrentLevelData.level_metadata, CurrentLevelData.editor_data, CurrentLevelData.area_headers))
+	
+	var container: LevelDataContainer = LevelDataContainer.new(CurrentLevelData.level_metadata, CurrentLevelData.editor_data, CurrentLevelData.area_headers)
+	LevelCodeHandler.recalculate_level_collectible_counts(container)
+	var level_code: String = LevelCodeSerializer.serialize_level_data(container)
 
 	file.store_string(level_code)
 	file.close()

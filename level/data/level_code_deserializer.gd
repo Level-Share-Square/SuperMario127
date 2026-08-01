@@ -1,8 +1,27 @@
 class_name LevelCodeDeserializer
-extends LevelCodeHandler
+extends Reference
 
 
-static func deserialize_level_code(code: String) -> LevelDataContainer:
+const TYPE_CODE_STRING = "S" # String
+const TYPE_CODE_INT = "I" # int
+const TYPE_CODE_BOOL = "B" # bool
+const TYPE_CODE_FLOAT = "F" # float
+const TYPE_CODE_VECTOR2 = "V" # Vector2
+const TYPE_CODE_COLOR = "C" # Color
+const TYPE_CODE_ARRAY = "A" # Array
+const TYPE_CODE_DICTIONARY = "K" # Dictionary
+const TYPE_CODE_STRING_ARRAY = "aS" # PoolStringArray
+const TYPE_CODE_INT_ARRAY = "aI" # PoolIntArray
+const TYPE_CODE_FLOAT_ARRAY = "aF" # PoolRealArray; MAN I wish we had godot 4 for things like PackedFloat64Array
+const TYPE_CODE_VECTOR2_ARRAY = "aV" # PoolVector2Array
+const TYPE_CODE_BYTES = "Y" # PoolByteArray; (lacks the 'a' prefix due to not having a non-array equivalent)
+const TYPE_CODE_RECT2 = "R" # Rect2
+const TYPE_CODE_CURVE_2D = "U" # Curve2D
+const TYPE_CODE_TILE_DATA = "T" # TileData (wrapper for a PoolByteArray)
+const TYPE_CODE_DIALOGUE_DATA = "D" # DialogueData (wrapper for PoolStringArray)
+
+
+static func deserialize_level_code(code: String):
 	var level_code = LevelCodeTokenizer.splice_level(code)
 	var metadata_code = LevelCodeTokenizer.splice_metadata(code)
 	var level_components_code = LevelCodeTokenizer.splice_level_components(level_code)
@@ -170,7 +189,9 @@ static func deserialize_collectible_data_code(code: String) -> CollectibleData:
 	var star_coin_data_code = components[1]
 	var star_coin_data: Array = deserialize_star_coin_datas_code(star_coin_data_code)
 	
-	return CollectibleData.new(mission_data, star_coin_data)
+	var red_coin_count: int = deserialize_datas_code(components[2])[0]
+	
+	return CollectibleData.new(mission_data, star_coin_data, red_coin_count)
 
 
 static func deserialize_mission_datas_code(code: String) -> Array:
@@ -233,6 +254,8 @@ static func deserialize_area_header_code(area_code: String) -> AreaHeader:
 	area_header.timer = set_or_use_default_value(vars, 7, area_header.timer)
 	area_header.music = set_or_use_default_value(vars, 8, area_header.music)
 	area_header.underwater_music = set_or_use_default_value(vars, 9, area_header.underwater_music)
+	area_header.shine_shard_count = set_or_use_default_value(vars, 10, area_header.shine_shard_count)
+	area_header.max_purples_count = set_or_use_default_value(vars, 11, area_header.max_purples_count)
 	
 	return area_header
 
@@ -372,7 +395,7 @@ static func deserialize_data_code(data_code: String):
 		data = data_code.substr(1)
 	
 	match type_code:
-		LevelCodeHandler.TYPE_CODE_STRING:
+		TYPE_CODE_STRING:
 #			return data
 #			
 			if data.empty():
@@ -384,52 +407,52 @@ static func deserialize_data_code(data_code: String):
 				data = data.replace("~", "=")
 				data = Marshalls.base64_to_raw(data)
 				return data.decompress_dynamic(-1, File.COMPRESSION_DEFLATE).get_string_from_utf8()
-		LevelCodeHandler.TYPE_CODE_INT:
+		TYPE_CODE_INT:
 			return base64_decode_int(data)
-		LevelCodeHandler.TYPE_CODE_BOOL:
+		TYPE_CODE_BOOL:
 			return int(data) != 0
-		LevelCodeHandler.TYPE_CODE_FLOAT:
+		TYPE_CODE_FLOAT:
 			return base64_decode_float(data)
-		LevelCodeHandler.TYPE_CODE_VECTOR2:
+		TYPE_CODE_VECTOR2:
 			data = LevelCodeTokenizer.splice_data_array(data)
 			var data_array = deserialize_datas_code(data)
 			return Vector2(data_array[0], data_array[1])
-		LevelCodeHandler.TYPE_CODE_COLOR:
+		TYPE_CODE_COLOR:
 			data = LevelCodeTokenizer.splice_data_array(data)
 			var data_array = deserialize_datas_code(data)
 			if(data_array.size() > 3):
 				return Color(data_array[0], data_array[1], data_array[2], data_array[3])
 			else:
 				return Color(data_array[0], data_array[1], data_array[2], 1)
-		LevelCodeHandler.TYPE_CODE_ARRAY:
+		TYPE_CODE_ARRAY:
 			data = LevelCodeTokenizer.splice_data_array(data)
 			return deserialize_datas_code(data)
-		LevelCodeHandler.TYPE_CODE_DICTIONARY:
+		TYPE_CODE_DICTIONARY:
 			data = LevelCodeTokenizer.splice_data_array(data)
 			var dictionary = deserialize_dictionary(data)
 			if null in dictionary.keys or null in dictionary.values: return null
 			return dictionary
-		LevelCodeHandler.TYPE_CODE_STRING_ARRAY:
+		TYPE_CODE_STRING_ARRAY:
 			data = LevelCodeTokenizer.splice_data_array(data)
 			var data_array = deserialize_datas_code(data)
 			if data_array == null: return null
 			return PoolStringArray(data_array)
-		LevelCodeHandler.TYPE_CODE_INT_ARRAY:
+		TYPE_CODE_INT_ARRAY:
 			data = LevelCodeTokenizer.splice_data_array(data)
 			var data_array = deserialize_datas_code(data)
 			if data_array == null: return null
 			return PoolIntArray(data_array)
-		LevelCodeHandler.TYPE_CODE_FLOAT_ARRAY:
+		TYPE_CODE_FLOAT_ARRAY:
 			data = LevelCodeTokenizer.splice_data_array(data)
 			var data_array = deserialize_datas_code(data)
 			if data_array == null: return null
 			return PoolRealArray(data_array)
-		LevelCodeHandler.TYPE_CODE_VECTOR2_ARRAY:
+		TYPE_CODE_VECTOR2_ARRAY:
 			data = LevelCodeTokenizer.splice_data_array(data)
 			var data_array = deserialize_datas_code(data)
 			if data_array == null: return null
 			return PoolVector2Array(data_array)
-		LevelCodeHandler.TYPE_CODE_BYTES:
+		TYPE_CODE_BYTES:
 			if data.empty():
 				return PoolByteArray()
 			
@@ -439,12 +462,12 @@ static func deserialize_data_code(data_code: String):
 			# undo the padding replacement
 			data = data.replace("~", "=")
 			return Marshalls.base64_to_raw(data)
-		LevelCodeHandler.TYPE_CODE_RECT2:
+		TYPE_CODE_RECT2:
 			data = LevelCodeTokenizer.splice_data_array(data)
 			var data_array = deserialize_datas_code(data)
 			if data_array == null: return null
 			return Rect2(data_array[0], data_array[1], data_array[2], data_array[3])
-		LevelCodeHandler.TYPE_CODE_CURVE_2D:
+		TYPE_CODE_CURVE_2D:
 			data = LevelCodeTokenizer.splice_data_array(data)
 			var data_array = deserialize_datas_code(data)
 			if data_array == null: return null
@@ -456,7 +479,7 @@ static func deserialize_data_code(data_code: String):
 			
 			return curve
 		# TileData
-		LevelCodeHandler.TYPE_CODE_TILE_DATA:
+		TYPE_CODE_TILE_DATA:
 			data = LevelCodeTokenizer.splice_data_array(data)
 			var data_array = deserialize_datas_code(data)
 			if data_array == null: return null
@@ -469,7 +492,7 @@ static func deserialize_data_code(data_code: String):
 			
 			return tile_data
 		# Dialogue; not implemented yet
-		LevelCodeHandler.TYPE_CODE_DIALOGUE_DATA:
+		TYPE_CODE_DIALOGUE_DATA:
 			data = data
 	
 	printerr("Could not decode data string \"%s\"!")

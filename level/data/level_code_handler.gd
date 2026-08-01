@@ -2,21 +2,39 @@ class_name LevelCodeHandler
 extends Reference
 
 
-const TYPE_CODE_STRING = "S" # String
-const TYPE_CODE_INT = "I" # int
-const TYPE_CODE_BOOL = "B" # bool
-const TYPE_CODE_FLOAT = "F" # float
-const TYPE_CODE_VECTOR2 = "V" # Vector2
-const TYPE_CODE_COLOR = "C" # Color
-const TYPE_CODE_ARRAY = "A" # Array
-const TYPE_CODE_DICTIONARY = "K" # Dictionary
-const TYPE_CODE_STRING_ARRAY = "aS" # PoolStringArray
-const TYPE_CODE_INT_ARRAY = "aI" # PoolIntArray
-const TYPE_CODE_FLOAT_ARRAY = "aF" # PoolRealArray; MAN I wish we had godot 4 for things like PackedFloat64Array
-const TYPE_CODE_VECTOR2_ARRAY = "aV" # PoolVector2Array
-const TYPE_CODE_BYTES = "Y" # PoolByteArray; (lacks the 'a' prefix due to not having a non-array equivalent)
-const TYPE_CODE_RECT2 = "R" # Rect2
-const TYPE_CODE_CURVE_2D = "U" # Curve2D
-const TYPE_CODE_TILE_DATA = "T" # TileData (wrapper for a PoolByteArray)
-const TYPE_CODE_DIALOGUE_DATA = "D" # DialogueData (wrapper for PoolStringArray)
+const RED_COIN_ID: int = 30
+const SHINE_SHARD_ID: int = 45
+const PURPLE_COIN_ID: int = 135
 
+const ENABLED_PROP_ID: int = 3
+
+
+static func recalculate_level_collectible_counts(level_data_container) -> void:
+	var level_metadata = level_data_container.level_metadata
+	var area_headers = level_data_container.area_headers
+	
+	level_metadata.collectible_data.red_coin_count = 0
+	
+	var area_header: AreaHeader
+	for i in range(area_headers.size()):
+		var area = LevelCodeDeserializer.deserialize_area_code(area_headers[i].area_code)
+		area.header.shine_shard_count = 0
+		area.header.max_purples_count = 0
+		for layer in area.layers:
+			if layer is LevelParallaxLayer: 
+				continue
+			
+			for object in layer.object_data:
+				object = object as ObjectData
+				
+				if object.metadata.type_id == RED_COIN_ID and object.get_property(ENABLED_PROP_ID):
+					level_metadata.collectible_data.red_coin_count += 1
+				
+				if object.metadata.type_id == SHINE_SHARD_ID and object.get_property(ENABLED_PROP_ID):
+					area.header.shine_shard_count += 1
+				
+				if object.metadata.type_id == PURPLE_COIN_ID and object.get_property(ENABLED_PROP_ID):
+					area.header.max_purples_count += 1
+		
+		area.header.area_code = LevelCodeSerializer.serialize_area(area)
+		area_headers[i] = area.header

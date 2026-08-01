@@ -181,6 +181,7 @@ func convert_old_code_to_new(code: String) -> String:
 #		return ""
 	
 	var container: LevelDataContainer = conversion_util.get_new_level_data_from_old_data(level_data)
+	LevelCodeHandler.recalculate_level_collectible_counts(container)
 	return LevelCodeSerializer.serialize_level_data(container)
 
 
