@@ -29,8 +29,10 @@ func kill(body):
 			body.sound_player.play_hit_sound()
 
 func _object_ready():
-	var _connect = area.connect("body_entered", self, "kill")
-	var _connect2 = delete_timer.connect("timeout", self, "queue_free")
+	if is_enabled_and_on_ground():
+		var _connect = area.connect("body_entered", self, "kill")
+		var _connect2 = delete_timer.connect("timeout", self, "queue_free")
+	area.get_node("CollisionShape2D").disabled = !is_enabled_and_on_ground()
 
 func is_middle(check: bool):
 	.is_middle(check)

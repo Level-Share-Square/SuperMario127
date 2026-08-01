@@ -76,10 +76,10 @@ func _ready() -> void:
 	# warning-ignore:return_value_discarded
 	pipe_enter_logic.connect("pipe_animation_finished", self, "_start_cannon_animation")
 
-func _object_parallax_ready():
-	._object_parallax_ready()
-	collision_shape_2d.disabled = true
-	collision_shape_2d_2.disabled = true
+func _object_ready():
+	._object_ready()
+	collision_shape_2d.disabled = !is_enabled_and_on_ground()
+	collision_shape_2d_2.disabled = !is_enabled_and_on_ground()
 
 #disabled by default until process is enabled, so this can assume the cannon is already in an active state
 func _physics_process(delta : float) -> void:

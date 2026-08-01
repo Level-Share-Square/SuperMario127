@@ -96,8 +96,8 @@ func _ready():
 	spawn_pos = position
 	update_parts()
 	
-func _object_disabled_ready():
-	._object_disabled_ready()
+func _object_ready():
+	._object_ready()
 	if !is_enabled_and_on_ground():
 		collision_shape.disabled = true
 

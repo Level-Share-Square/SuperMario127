@@ -12,6 +12,6 @@ func _ready():
 	if palette != 0:
 		$Sprite.texture = palette_textures[palette - 1]
 
-func _object_disabled_ready():
-	._object_disabled_ready()
-	$StaticBody2D.set_collision_layer_bit(0, false)
+func _object_ready():
+	._object_ready()
+	$StaticBody2D.set_collision_layer_bit(0, is_enabled_and_on_ground())

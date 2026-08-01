@@ -20,14 +20,13 @@ func _ready():
 	sprite.region_rect.position.x = int(!CurrentLevelData.vars.switch_state.has(palette)) * 32
 
 	sprite.region_rect.position.y = palette * 32
-
-func _object_disabled_ready():
-	._object_disabled_ready()
-	$StaticBody2D.set_collision_layer_bit(0, false)
 	
 func _object_ready():
 	._object_ready()
-	_connect()
+	if is_enabled_and_on_ground():
+		_connect()
+	else:
+		$StaticBody2D.set_collision_layer_bit(0, false)
 
 func _connect():
 	curve_tween.connect("curve_tween", self, "_on_curve_tween")

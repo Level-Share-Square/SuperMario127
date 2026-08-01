@@ -10,7 +10,7 @@ onready var steely_detector = $Area2D
 func _register_properties():
 	register_property(4, "speed_threshold", speed_threshold, true)
 	
-func _object_ground_physics_process(delta):
+func _object_physics_process(delta):
 	for body in steely_detector.get_overlapping_bodies():
 		if body.name.begins_with("Steely"):
 			var steely = body.get_parent()

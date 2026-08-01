@@ -8,8 +8,8 @@ func change_property(new_value):
 	var value = new_value.duplicate()
 	.change_property(value)
 
-func load_property(_editor: Editor, _objects: Dictionary, _property: Array):
-	.load_property(_editor, _objects, _property)
+func load_property(_editor: Editor, _objects: Dictionary, _property: Array, property_name = null):
+	.load_property(_editor, _objects, _property, property_name)
 	init_curve = old_value_util.decode_value(_property[2])
 	
 func begin_curve():

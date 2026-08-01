@@ -1,4 +1,4 @@
-extends Control
+extends VBoxContainer
 
 onready var editor = owner.owner
 onready var shared = editor.get_node("%Shared")

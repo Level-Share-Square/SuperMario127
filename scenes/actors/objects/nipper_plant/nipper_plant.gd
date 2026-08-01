@@ -258,12 +258,6 @@ func spawn_fireball():
 #	object.properties.append(calculate_fireball_velocity(body.global_position - Vector2(0, 8), character_position, gravity))
 #	object.properties.append(fire == 2)
 #	get_parent().create_object(object, false)
-	var data := ObjectData.new(ObjectMetadata.new(
-		body.global_position - Vector2(0, 8),
-		134,
-		0
-	))
-	
-	data.set_property_by_name("velocity", calculate_fireball_velocity(body.global_position - Vector2(0, 8), character_position, gravity))
-	data.set_property_by_name("bouncy", fire == 2)
-	get_parent().create_object(data)
+	var object = create_object(body.global_position - Vector2(0, 8), 134, 0)
+	object.set_property("velocity", calculate_fireball_velocity(body.global_position - Vector2(0, 8), character_position, gravity))
+	object.set_property("bouncy", fire == 2)

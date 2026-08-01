@@ -21,9 +21,9 @@ var rainbow: bool
 func _register_properties():
 	._register_properties()
 	
-	register_property(12, "spots_color", spots_color, true)
-	register_property(13, "coat_color", coat_color, true)
-	register_property(14, "rainbow", rainbow, true)
+	register_property(15, "spots_color", spots_color, true)
+	register_property(16, "coat_color", coat_color, true)
+	register_property(17, "rainbow", rainbow, true)
 
 
 func _process(delta):

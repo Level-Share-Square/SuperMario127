@@ -151,11 +151,11 @@ func _ready():
 		
 		set_property("end_position", path.curve.get_point_position(path.curve.get_point_count()-1)/32, true)
 
-func _object_disabled_ready():
-	._object_disabled_ready()
-	platform.collision_shape.disabled = true
-	platform.platform_area_collision_shape.disabled = true
-	platform.enabled = false
+func _object_ready():
+	._object_ready()
+	platform.collision_shape.disabled = !is_enabled_and_on_ground()
+	platform.platform_area_collision_shape.disabled = !is_enabled_and_on_ground()
+	platform.enabled = is_enabled_and_on_ground()
 	platform.switch_state(platform.sprite.visible)
 
 func set_sprite_parts(sprite):

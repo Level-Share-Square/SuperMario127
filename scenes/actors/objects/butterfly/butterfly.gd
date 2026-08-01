@@ -14,9 +14,6 @@ func _ready():
 	if is_preview:
 		z_index = 0
 		sprite.z_index = 0
-		
-func _object_parallax_ready():
-	pass
 	
 func _physics_process(delta):
 	if mode != 1 and is_enabled_and_on_ground():

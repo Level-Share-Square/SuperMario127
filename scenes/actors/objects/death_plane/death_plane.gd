@@ -13,10 +13,6 @@ export var vertical := false
 
 var last_parts := 1
 
-#func _set_properties():
-#	savable_properties = ["parts", "stops_camera", "vertical"]
-#	editable_properties = ["parts", "stops_camera", "vertical"]
-
 func _register_properties():
 	register_property(4, "parts", parts)
 	register_property(5, "stops_camera", stops_camera)
@@ -25,6 +21,13 @@ func _register_properties():
 func _unhandled_input(event: InputEvent) -> void:
 	parts_input_handler(event,self)
 
+func _object_ready():
+	._object_ready()
+	if !is_enabled_and_on_ground():
+		sprite.visible = true
+		camera_stopper.set_size(Vector2.ZERO)
+		camera_stopper.monitorable = false
+		camera_stopper.visible = false
 	
 func _ready():
 	if mode != 1:

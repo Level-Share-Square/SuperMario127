@@ -39,24 +39,24 @@ var dialogue_trigger: Node
 
 
 func _register_properties():
-	register_property(5, "idle_expression", idle_expression, true)
+	register_property(4, "idle_expression", idle_expression, true)
 	set_property_menu("idle_expression", ["option", expression_map.size(), 0, expression_map])
-	register_property(6, "idle_action", idle_action, true)
+	register_property(5, "idle_action", idle_action, true)
 	set_property_menu("idle_action", ["option", action_map.size(), 0, action_map])
 	
-	register_property(7, "speaking_expression", speaking_expression, true)
+	register_property(6, "speaking_expression", speaking_expression, true)
 	set_property_menu("speaking_expression", ["option", expression_map.size(), 0, expression_map])
-	register_property(8, "speaking_action", speaking_action, true)
+	register_property(7, "speaking_action", speaking_action, true)
 	set_property_menu("speaking_action", ["option", action_map.size(), 0, action_map])
 	
-	register_property(10, "tag_link", tag_link, true)
-	register_property(0, "curve", curve, true)
-	register_property(3, "walk_speed", walk_speed, true)
-	register_property(2, "move_type", move_type, true)
+	register_property(8, "tag_link", tag_link, true)
+	register_property(9, "curve", curve, true)
+	register_property(10, "walk_speed", walk_speed, true)
+	register_property(11, "move_type", move_type, true)
 	set_bool_alias("move_type", "Loop", "Reset")
-	register_property(4, "physics_enabled", physics_enabled, true)
-	register_property(11, "required_shines", required_shines, true)
-	register_property(9, "path_reference", path_reference, true)
+	register_property(12, "physics_enabled", physics_enabled, true)
+	register_property(13, "required_shines", required_shines, true)
+	register_property(14, "path_reference", path_reference, true)
 
 
 func get_dialogue_from_tag(tag: String) -> Node:

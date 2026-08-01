@@ -114,7 +114,8 @@ func update_property(key, value):
 func _object_ready():
 	if id in CurrentLevelData.checkpoint_data.current_local_keys:
 		queue_free()
-	var _connect = area.connect("body_entered", self, "collect")
+	if is_enabled_and_on_ground():
+		var _connect = area.connect("body_entered", self, "collect")
 	
 func _editor_ready():
 	var _connect = connect("property_changed", self, "update_property")

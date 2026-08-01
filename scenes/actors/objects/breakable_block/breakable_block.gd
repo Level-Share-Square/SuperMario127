@@ -37,8 +37,8 @@ func _ready():
 	break_particle.hide()
 	dust_particle.hide()
 	
-func _object_disabled_ready():
-	._object_disabled_ready()
+func _object_ready():
+	._object_ready()
 	if !is_enabled_and_on_ground():
 		collision_shape.disabled = true
 		for _area in [area, stomp_area, spin_area, turbo_spin_area]:

@@ -38,7 +38,8 @@ func collect(body):
 
 func _object_ready():
 	yield(get_tree().create_timer(0.2), "timeout")
-	var _connect = area.connect("body_entered", self, "collect")
+	if is_enabled_and_on_ground():
+		var _connect = area.connect("body_entered", self, "collect")
 	
 	for body in area.get_overlapping_bodies():
 			if is_enabled_and_on_ground() and !collected and (body and body.name.begins_with("Character") and !body.dead):

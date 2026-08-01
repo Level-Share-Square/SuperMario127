@@ -120,12 +120,12 @@ func _ready():
 	if(!disappears && inverted):
 		frozen = true
 
-func _object_disabled_ready():
-	._object_disabled_ready()
+func _object_ready():
+	._object_ready()
 	for instance in platforms:
-		instance.collision_shape.disabled = true
-		instance.platform_area_collision_shape.disabled = true
-		instance.enabled = false
+		instance.collision_shape.disabled = !is_enabled_and_on_ground()
+		instance.platform_area_collision_shape.disabled = !is_enabled_and_on_ground()
+		instance.enabled = is_enabled_and_on_ground()
 		instance.switch_state(instance.sprite.visible)
 
 func _physics_process(_delta):

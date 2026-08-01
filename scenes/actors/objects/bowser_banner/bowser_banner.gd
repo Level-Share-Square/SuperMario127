@@ -28,9 +28,9 @@ func _ready():
 	$AnimatedSprite.animation = String(palette)
 	$Color.animation = String(palette)
 	
-func _object_disabled_ready():
-	._object_disabled_ready()
-	collision_shape.disabled = true
+func _object_ready():
+	._object_ready()
+	collision_shape.disabled = !is_enabled_and_on_ground()
 
 
 func _process(delta):

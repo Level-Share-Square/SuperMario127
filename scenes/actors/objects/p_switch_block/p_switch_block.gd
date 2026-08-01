@@ -31,7 +31,7 @@ func _ready() -> void:
 
 func _object_ready():
 	._object_ready()
-	p.visible = enabled
+	p.visible = is_enabled_and_on_ground()
 	collision_shape.disabled = !is_enabled_and_on_ground()
 	area_collision_shape.disabled = !is_enabled_and_on_ground()
 

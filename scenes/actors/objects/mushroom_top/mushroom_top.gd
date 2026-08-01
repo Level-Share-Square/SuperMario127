@@ -49,7 +49,7 @@ func _ready():
 	
 	update_property("color", color)
 	update_parts()
-	collision_shape.disabled = bouncy
+	collision_shape.disabled = bouncy or !is_enabled_and_on_ground()
 	preview_position = custom_preview_position
 	if is_preview:
 		z_index = 0
@@ -58,13 +58,9 @@ func _ready():
 	if parts < 0:
 		parts = 0
 
-func _object_disabled_ready():
-	._object_disabled_ready()
-	collision_shape.disabled = true
-
 func _object_ready():
 	._object_ready()
-	if bouncy:
+	if bouncy and is_enabled_and_on_ground():
 		var _connect = timer.connect("timeout", self, "idle_bounce_anim")
 		_connect = area_2d.connect("body_entered", self, "bounce")
 

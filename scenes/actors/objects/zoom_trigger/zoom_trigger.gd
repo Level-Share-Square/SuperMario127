@@ -11,9 +11,9 @@ var parts := 1
 
 
 func _register_properties():
-	register_property(0, "target_zoom", target_zoom)
-	register_property(1, "zoom_time", zoom_time)
-	register_property(2, "parts", parts)
+	register_property(4, "target_zoom", target_zoom)
+	register_property(5, "zoom_time", zoom_time)
+	register_property(6, "parts", parts)
 
 
 func _unhandled_input(event: InputEvent) -> void:

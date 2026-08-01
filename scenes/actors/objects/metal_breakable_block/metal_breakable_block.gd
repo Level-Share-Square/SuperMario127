@@ -41,8 +41,8 @@ func _object_ground_ready():
 		collision_shape.shape.extents = Vector2(collision_shape.shape.extents.x * scale.x,\
 												collision_shape.shape.extents.y * scale.y)
 
-func _object_disabled_ready():
-	._object_disabled_ready()
+func _object_ready():
+	._object_ready()
 	if !is_enabled_and_on_ground():
 		collision_shape.disabled = true
 		for _area in [area, stomp_area, spin_area]:

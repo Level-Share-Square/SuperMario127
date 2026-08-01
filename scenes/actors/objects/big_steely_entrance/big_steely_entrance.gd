@@ -13,8 +13,8 @@ onready var overlap_checker: Area2D = $OverlapChecker
 
 
 func _register_properties():
-	register_property(0, "spawn_interval", spawn_interval)
-	register_property(1, "steely_despawn_timer", steely_despawn_timer)
+	register_property(4, "spawn_interval", spawn_interval)
+	register_property(5, "steely_despawn_timer", steely_despawn_timer)
 
 
 func _object_ready():

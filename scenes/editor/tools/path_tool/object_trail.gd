@@ -130,7 +130,7 @@ func update_objects_array() -> void:
 	for object in objects_array:
 		var preview = TextureRect.new()
 		preview.texture = editor.selected_item.previews[editor.selected_item.palette]
-		preview.rect_position = object.get_property(-2) - preview.texture.get_size()/2
+		preview.rect_position = object.metadata.position - preview.texture.get_size()/2
 		preview.modulate.a = 0.5
 		preview.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		previews.add_child(preview)

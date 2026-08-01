@@ -10,7 +10,7 @@ var respawn_timer = 0.0
 
 
 func _register_properties() -> void:
-	register_property(0, "respawns", respawns)
+	register_property(4, "respawns", respawns)
 
 
 func collect(body):
@@ -28,7 +28,8 @@ func collect(body):
 
 
 func _object_ready():
-	area.connect("body_entered", self, "collect")
+	if is_enabled_and_on_ground():
+		area.connect("body_entered", self, "collect")
 
 
 func _editor_ready():

@@ -25,7 +25,7 @@ func _object_ready():
 		z_index = 0
 		sprite.z_index = 0
 	rotation_degrees = 0
-	if mode != 1:
+	if mode != 1 and is_enabled_and_on_ground():
 		var _connect = area.connect("body_entered", self, "enter_area")
 		var _connect2 = area.connect("body_exited", self, "exit_area")
 		

@@ -13,6 +13,6 @@ func _ready():
 	if palette != 0:
 		$Sprite.texture = palette_textures[palette - 1]
 
-func _object_disabled_ready():
-	._object_disabled_ready()
-	collision_shape.disabled = true
+func _object_ready():
+	._object_ready()
+	collision_shape.disabled = !is_enabled_and_on_ground()

@@ -37,10 +37,10 @@ var roll_buffer: float = ROLL_BUFFER_DURATION
 
 
 func _register_properties():
-	register_property(0, "color", color)
-	register_property(1, "max_speed", max_speed)
-	register_property(2, "physics", physics)
-	register_property(3, "autoroll", autoroll)
+	register_property(4, "color", color)
+	register_property(5, "max_speed", max_speed)
+	register_property(6, "physics", physics)
+	register_property(7, "autoroll", autoroll)
 
 
 func _ready() -> void:
@@ -58,9 +58,13 @@ func _ready() -> void:
 		is_rolling = true
 		sprite.play("rolling")
 		sprite_color.play("rolling")
+		
+	collision_shape.disabled = !is_enabled_and_on_ground()
 
 
-func _object_ground_physics_process(delta):
+func _object_physics_process(delta):
+	if !is_enabled_and_on_ground(): return
+	
 	if roll_buffer >= 0:
 		roll_buffer -= 1
 		
@@ -81,10 +85,6 @@ func _object_ground_physics_process(delta):
 			rolling(delta)
 		else:
 			stationary(delta)
-
-
-func _object_disabled_ready():
-	collision_shape.disabled = true
 
 
 func stationary(delta):
