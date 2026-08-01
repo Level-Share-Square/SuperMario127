@@ -12,7 +12,10 @@ enum BasePropertyIDs {
 }
 
 const EDITOR_INVISIBLE_ALPHA: float = 0.25
-const EDITOR_RECT_DRAW_COLOR: Color = Color(0.039216, 0.196078, 0.815686, 0.5)
+const EDITOR_RECT_DRAW_COLOR: Color = Color(0.039216, 0.196078, 0.815686, 0.8)
+
+const EDITOR_HOVER_ALPHA: float = 0.5
+const EDITOR_SELECT_COLOR: Color = Color(0.6, 0.6, 1)
 
 
 export var editor_rect: Rect2 = Rect2(-8, -8, 16, 16)
@@ -92,8 +95,11 @@ func _ready():
 	load_placeable_item()
 	set_object_data(object_data)
 
+
 func _process(delta: float) -> void:
-	update()
+	if is_in_editor():
+		_update_modulate_editor(delta)
+		update()
 
 
 func _notification(what: int) -> void:
@@ -126,6 +132,22 @@ func _unhandled_input(event):
 func _draw() -> void:
 	if is_object_hovered():
 		draw_rect(editor_rect.grow(1), EDITOR_RECT_DRAW_COLOR)
+
+
+func _update_modulate_editor(delta: float) -> void:
+	if selected:
+		var alpha = modulate.a
+		modulate = modulate.linear_interpolate(EDITOR_SELECT_COLOR, delta * 16)
+		modulate.a = alpha
+	else:
+		var alpha = modulate.a
+		modulate = modulate.linear_interpolate(Color.white, delta * 16)
+		modulate.a = alpha
+	
+	if is_object_hovered():
+		modulate.a = lerp(modulate.a, EDITOR_HOVER_ALPHA, delta * 16)
+	else:
+		modulate.a = lerp(modulate.a, 1, delta * 16)
 
 
 ## Run when all objects are loaded.
