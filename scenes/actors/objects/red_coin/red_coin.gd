@@ -37,9 +37,8 @@ func collect(body):
 func _ready():
 	animation_player.play("RESET")
 	if mode == 1: return
-#	if is_enabled_and_on_ground():
-#		id = CurrentLevelData.vars.last_red_coin_id + CurrentLevelData.get_red_coins_before_area(CurrentLevelData.current_area)
-#		CurrentLevelData.vars.last_red_coin_id += 1
+	if is_enabled_and_on_ground():
+		id = CurrentLevelData.vars.add_red_coin_id()
 	
 	if id in CurrentLevelData.vars.red_coins_collected[1]:
 		queue_free()

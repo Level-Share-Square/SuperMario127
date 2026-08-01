@@ -17,23 +17,22 @@ onready var foreground := $"%Foreground"
 onready var name_label := $"%Name"
 
 ## external
-var level_info: LevelInfo
+var level_metadata: LevelMetadata
 
 
 func _ready():
-	level_info = level_card.level_info
-	name_label.text = level_info.level_name
+	level_metadata = level_card.level_metadata
 	
-	var is_valid: bool = level_info.validity_check.is_valid
-	
-	if (!is_valid):
-		level_info.level_name = "Invalid Level"
+	if (!level_card.is_valid):
+		level_metadata = LevelMetadata.new()
+		level_metadata.level_name = "Invalid Level"
 		name_label.text = "Invalid Level"
 		thumbnail.texture = default_thumbnail
 	else:
-		load_custom_thumbnail(level_info.thumbnail_url)
+		load_custom_thumbnail(level_metadata.level_thumbnail_url)
+		name_label.text = level_metadata.level_name
 	
-	if level_card.has_save and level_info.is_fully_completed():
+	if level_card.has_save and level_metadata.is_fully_completed():
 		activate_completion_style()
 	else:
 		star.call_deferred("hide")
@@ -46,10 +45,10 @@ func activate_completion_style():
 
 
 func load_default_thumbnail(_viewport: Viewport = null):
-	thumbnail.texture = level_info.get_level_background_texture()
+	thumbnail.texture = level_metadata.get_level_background_texture()
 	
-	foreground.modulate = level_info.get_level_background_modulate()
-	foreground.texture = level_info.get_level_foreground_texture()
+	foreground.modulate = level_metadata.get_level_background_modulate()
+	foreground.texture = level_metadata.get_level_foreground_texture()
 
 
 func load_custom_thumbnail(url: String):

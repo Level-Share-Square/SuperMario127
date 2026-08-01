@@ -33,7 +33,7 @@ var loaded_areas: Dictionary = {}
 var area_id: int = -1
 var current_area: AreaData
 
-var current_mission_id: int = -1
+var current_mission_id: String = ""
 var current_mission: MissionData
 
 var enemies_instanced: int = 0

@@ -38,7 +38,7 @@ func quit_level(do_transition: bool = true):
 		## this is getting to be too much boilerplate
 		var level_id: String = CurrentLevelData.hub_level
 		var working_folder: String = CurrentLevelData.working_folder
-		var level_info: LevelInfo = load_level_info(level_id, working_folder)
+		var level_metadata: LevelMetadata = CurrentLevelData.level_metadata
 		var hub_level: String = CurrentLevelData.hub_level
 		var selected_file: int = CurrentLevelData.selected_file
 		
@@ -47,11 +47,11 @@ func quit_level(do_transition: bool = true):
 		
 		if do_transition:
 			var _connect = SceneTransitions.connect("transition_finished", self, "start_level", 
-			[level_info, level_id, working_folder, false, true, hub_level, false, true, selected_file], CONNECT_ONESHOT)
+			[level_metadata, level_id, working_folder, false, true, hub_level, false, true, selected_file], CONNECT_ONESHOT)
 			SceneTransitions.do_transition_fade(SceneTransitions.DEFAULT_TRANSITION_TIME)
 		else:
 			yield(get_tree(), "physics_frame")
-			start_level(level_info, level_id, working_folder, false, true, hub_level, false, true, selected_file)
+			start_level(level_metadata, level_id, working_folder, false, true, hub_level, false, true, selected_file)
 	else:
 		CurrentLevelData.level_transition_data = {}
 		CurrentLevelData.hub_return_data = {}
@@ -74,11 +74,12 @@ func load_level_info(level_id: String, working_folder: String) -> LevelInfo:
 	return level_info
 
 
-func setup_level(level_info: LevelInfo, level_id: String, working_folder: String, hub_level: String = "", selected_file: int = -1):
+func setup_level(level_metadata: LevelMetadata, level_id: String, working_folder: String, hub_level: String = "", selected_file: int = -1):
 	# load save file, if it exists
 	var save_path: String = level_list_util.get_level_save_path(level_id, working_folder, selected_file)
 	if level_list_util.file_exists(save_path):
-		level_info.load_save_from_dictionary(level_list_util.load_level_save_file(save_path))
+#		level_info.load_save_from_dictionary(level_list_util.load_level_save_file(save_path))
+		pass
 	
 #	CurrentLevelData.level_info = level_info
 #	CurrentLevelData.level_data = level_info.level_data
@@ -90,13 +91,13 @@ func setup_level(level_info: LevelInfo, level_id: String, working_folder: String
 #	CurrentLevelData.selected_file = selected_file
 #
 #	CurrentLevelData.level_info.selected_shine = -1
-	CurrentLevelData.load_level_headers(level_info.level_code)
+	CurrentLevelData.load_level_headers(level_list_util.load_level_code_file(level_list_util.get_level_file_path(level_id, working_folder)))
 	CurrentLevelData.switch_to_area(0)
 	
 	for area_header in CurrentLevelData.area_headers:
 		if area_header.music is String and area_header.music:
 			yield(AssetHandler.fetch_asset_path(Singleton.Music.decode_music(area_header.music)[1], working_folder), "completed")
-		if area_header.underwater_music and area_header.underwater_music:
+		if area_header.underwater_music:
 			yield(AssetHandler.fetch_asset_path(Singleton.Music.decode_music(area_header.underwater_music)[1], working_folder), "completed")
 	
 	if not CurrentLevelData.level_transition_data.empty():
@@ -106,40 +107,44 @@ func setup_level(level_info: LevelInfo, level_id: String, working_folder: String
 
 ## loads shine select if there's more than 1 shine,
 ## else loads directly into level
-func start_level(level_info: LevelInfo, level_id: String, working_folder: String, start_in_edit_mode: bool, skip_shine_select: bool = false, hub_level: String = "", do_transition: bool = true, play_warp_sound: bool = true, selected_file: int = -1):
+func start_level(level_metadata: LevelMetadata, level_id: String, working_folder: String, start_in_edit_mode: bool, skip_shine_select: bool = false, hub_level: String = "", do_transition: bool = true, play_warp_sound: bool = true, selected_file: int = -1):
 	# if it's a multi-shine level, open the shine select screen, otherwise open the level directly 
 	# using collected_shines for the size check because there can only be one entry in collected shines per id, while shine_details can have multiple shines with the same id
 	var goal_scene = EDITOR_PATH if start_in_edit_mode else PLAYER_PATH
 	
 	# Get the shine count, only count shine sprites that have show_in_menu on
 	var total_shine_count := 0
-	for shine_details in level_info.shine_details:
-		if shine_details["show_in_menu"]:
+	for shine_details in level_metadata.collectible_data.mission_data:
+		if shine_details["mission_show_in_menu"]:
 			total_shine_count += 1
 	
 	# If there is more than 1, go to shine select screen
 	if total_shine_count > 1:
 		if start_in_edit_mode or skip_shine_select:
 			# just so the menu can work properly
-			level_info.selected_shine = 0
+			var mission: MissionData = level_metadata.collectible_data.mission_data[0]
+			CurrentLevelData.current_mission_id = mission.mission_uuid
+			CurrentLevelData.current_mission = mission
 		else:
 			Singleton.Music.change_song(Singleton.Music.last_song, 0)
 			goal_scene = SHINE_SELECT_PATH
 	
 	# not a multishine level, but if there's 1 shine we should set it as selected 
-	if level_info.shine_details.size() == 1:
-		level_info.selected_shine = 0
+	if level_metadata.collectible_data.mission_data.size() == 1:
+		var mission: MissionData = level_metadata.collectible_data.mission_data[0]
+		CurrentLevelData.current_mission_id = mission.mission_uuid
+		CurrentLevelData.current_mission = mission
 	
 	if do_transition:
 		# setup level when the transition finishes so music doesnt bug out
-		var _connect = SceneTransitions.connect("transition_finished", self, "setup_level", [level_info, level_id, working_folder, hub_level, selected_file], CONNECT_ONESHOT)
+		var _connect = SceneTransitions.connect("transition_finished", self, "setup_level", [level_metadata, level_id, working_folder, hub_level, selected_file], CONNECT_ONESHOT)
 		_connect = SceneTransitions.connect("transition_finished", get_tree(), "change_scene", [goal_scene], CONNECT_ONESHOT)
 		
 		if play_warp_sound:
 			SceneTransitions.play_transition_audio()
 		SceneTransitions.do_transition_fade(SceneTransitions.DEFAULT_TRANSITION_TIME)
 	else:
-		yield(setup_level(level_info, level_id, working_folder, hub_level, selected_file), "completed")
+		yield(setup_level(level_metadata, level_id, working_folder, hub_level, selected_file), "completed")
 		get_tree().change_scene(goal_scene)
 
 ## start level without setting any variables

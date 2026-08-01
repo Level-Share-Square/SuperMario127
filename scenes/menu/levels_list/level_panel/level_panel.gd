@@ -9,7 +9,7 @@ onready var default_thumbnail = preload("res://scenes/menu/level_portal/default_
 
 var working_folder: String
 var level_id: String
-var level_info: LevelInfo
+var level_metadata: LevelMetadata
 var can_edit: bool
 var is_campaign: bool
 var previous_number_of_players: int = 0
@@ -83,23 +83,19 @@ func load_collectibles_info(level_info: LevelInfo)-> void:
 		star_coin_label.text = str(collected_star_coin_count) + "/" + str(total_star_coin_count)
 		star_coin_label.modulate = completion_color if (collected_star_coin_count >= total_star_coin_count) else Color.white
 
-func load_level_info(_level_info: LevelInfo, _level_id: String, _working_folder: String, _can_edit: bool = true, _is_campaign: bool = false):
+func load_level_info(_level_metadata: LevelMetadata, _level_id: String, _working_folder: String, _can_edit: bool = true, _is_campaign: bool = false):
 	yield(get_parent(), "screen_opened")
 	
-	CurrentLevelData.load_level_metadata(_level_info.level_code)
+	CurrentLevelData.level_metadata = _level_metadata
 	CurrentLevelData.level_id = _level_id
-	level_info = _level_info
+	
+	level_metadata = CurrentLevelData.level_metadata
 	level_id = _level_id
 	working_folder = _working_folder
 	can_edit = _can_edit
 	is_campaign = _is_campaign
 	
-	var level_metadata: LevelMetadata = CurrentLevelData.level_metadata
-	
 	var current_number_of_players: int = Singleton.PlayerSettings.number_of_players
-	# load the real level data now
-	if (level_info.validity_check.is_valid or current_number_of_players != previous_number_of_players):
-		level_info.load_in()
 	
 	previous_number_of_players = int(current_number_of_players)
 	
@@ -165,24 +161,24 @@ func load_level_info(_level_info: LevelInfo, _level_id: String, _working_folder:
 	
 	# load save file
 	var save_path: String = level_list_util.get_level_save_path(level_id, working_folder, -1)
-	if level_list_util.file_exists(save_path):
-		level_info.load_save_from_dictionary(level_list_util.load_level_save_file(save_path))
-	load_time_scores()
-	
-	load_collectibles_info(level_info)
-	var collectible_counts = level_info.get_collectible_counts()
-	
-	# these are floats cuz they need to be divided for some calculations :)
-	var total_collectibles: float = collectible_counts["total_collectibles"]
-	var total_collected: float = collectible_counts["total_collected"]
-	if total_collectibles <= 0:
-		percentage_label.text = "100%"
-		percentage_label.modulate = completion_color
-		return # OTHERWISE THE UNIVERSE WILL EXPLODEEEE ZOMG
-	
-	var completion_percent: float = stepify(total_collected / total_collectibles, 0.01) * 100
-	percentage_label.modulate = completion_color if (completion_percent >= 100) else Color.white
-	percentage_label.text = str(completion_percent) + "%"
+#	if level_list_util.file_exists(save_path):
+#		level_info.load_save_from_dictionary(level_list_util.load_level_save_file(save_path))
+#	load_time_scores()
+#
+#	load_collectibles_info(level_info)
+#	var collectible_counts = level_info.get_collectible_counts()
+#
+#	# these are floats cuz they need to be divided for some calculations :)
+#	var total_collectibles: float = collectible_counts["total_collectibles"]
+#	var total_collected: float = collectible_counts["total_collected"]
+#	if total_collectibles <= 0:
+#		percentage_label.text = "100%"
+#		percentage_label.modulate = completion_color
+#		return # OTHERWISE THE UNIVERSE WILL EXPLODEEEE ZOMG
+#
+#	var completion_percent: float = stepify(total_collected / total_collectibles, 0.01) * 100
+#	percentage_label.modulate = completion_color if (completion_percent >= 100) else Color.white
+#	percentage_label.text = str(completion_percent) + "%"
 
 
 func load_time_scores():
@@ -190,17 +186,17 @@ func load_time_scores():
 		# go, my children, be free
 		child.queue_free()
 	
-	var time_scores = level_info.time_scores
-	var shine_details_sorted = ([] + level_info.shine_details)
-	shine_details_sorted.sort_custom(LevelInfo, "shine_sort")
-	
-	for shine_detail in shine_details_sorted:
-		var time_score = time_scores.get(str(shine_detail.id))
-		if time_score != null:
-			var time_score_node = TIME_SCORE_SCENE.instance()
-			time_score_node.shine_detail = shine_detail
-			time_score_node.time_score = time_score
-			time_scores_container.add_child(time_score_node)
+#	var time_scores = level_info.time_scores
+#	var shine_details_sorted = ([] + level_info.shine_details)
+#	shine_details_sorted.sort_custom(LevelInfo, "shine_sort")
+#
+#	for shine_detail in shine_details_sorted:
+#		var time_score = time_scores.get(str(shine_detail.id))
+#		if time_score != null:
+#			var time_score_node = TIME_SCORE_SCENE.instance()
+#			time_score_node.shine_detail = shine_detail
+#			time_score_node.time_score = time_score
+#			time_scores_container.add_child(time_score_node)
 
 ## button functions
 
@@ -210,16 +206,17 @@ func play_level():
 func edit_level():
 	# it's probably better that save data from playing
 	# doesn't leak into the editor (the file is left intact)
-	level_info.reset_save_data(false)
+#	level_info.reset_save_data(false)
 	start_level(true)
 
 func copy_code():
+	var code: String = level_list_util.get_level_code_from_id(level_id, working_folder)
 	if OS.has_feature("JavaScript"):
 		JavaScript.download_buffer(
-			level_info.level_code.to_utf8(), 
-			level_info.level_name + ".txt")
+			code.to_utf8(), 
+			code + ".txt")
 	else:
-		OS.clipboard = str(level_info.level_code)
+		OS.clipboard = code
 
 func view_scores():
 	var switch_to_scores: bool = (view_button.text == view_scores_text)
@@ -232,11 +229,11 @@ func view_scores():
 	view_info_icon.visible = switch_to_scores
 	scores_tab.visible = switch_to_scores
 
-func reset_save():
-	level_info.reset_save_data()
+#func reset_save():
+#	level_info.reset_save_data()
 
 func delete_level():
-	reset_save()
+#	reset_save()
 	list_handler.remove_level(level_id)
 
 
@@ -247,8 +244,8 @@ func start_level(start_in_edit_mode : bool):
 	var selected_file = -2 if is_campaign else -1
 	
 	Singleton.SceneSwitcher.menu_return_screen = "LevelsList"
-	Singleton.SceneSwitcher.menu_return_args = [level_info, level_id, working_folder, can_edit, is_campaign]
-	Singleton.SceneSwitcher.start_level(level_info, level_id, working_folder, start_in_edit_mode, false, get_hub_level(), true, true, selected_file)
+	Singleton.SceneSwitcher.menu_return_args = [level_metadata, level_id, working_folder, can_edit, is_campaign]
+	Singleton.SceneSwitcher.start_level(level_metadata, level_id, working_folder, start_in_edit_mode, false, get_hub_level(), true, true, selected_file)
 
 
 func get_hub_level() -> String:
