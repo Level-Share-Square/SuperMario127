@@ -40,15 +40,15 @@ func _register_properties():
 	register_property(10, "inverted", inverted)
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton and event.is_pressed() and hovered:
+	if event is InputEventMouseButton and event.is_pressed() and is_object_hovered():
 		if event.button_index == 5: # Mouse wheel down
 			parts -= 1
 			if parts < 1:
 				parts = 1
-			register_property("parts", parts)
+			set_property("parts", parts)
 		elif event.button_index == 4: # Mouse wheel up
 			parts += 1
-			register_property("parts", parts)
+			set_property("parts", parts)
 
 func _process(_delta):
 	if parts != last_parts:

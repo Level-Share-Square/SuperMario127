@@ -14,12 +14,12 @@ var property: Array
 
 signal property_edited(property, value, check_matches)
 
-func load_property(_editor: Editor, init_value, _property: Array):
+func load_property(_editor: Editor, init_value, _property: Array, property_name = null):
 	editor = _editor
 	property = _property
 	var property_id: String = property[0]
 	
-	get_node("%PropertyName").text = NAME_TEXT % property_id.capitalize()
+	get_node("%PropertyName").text = NAME_TEXT % property_id.capitalize() if !property_name else NAME_TEXT % property_name
 	
 	var property_info = property[2]
 	if property_info is PropertyInfo:
