@@ -2,9 +2,8 @@ class_name ObjectData
 extends LevelDataResource
 
 
-const PALETTE_PROP_ID: int = -3
-const POSITION_PROP_ID: int = -2
-const ENABLED_PROP_ID: int = -1
+const PALETTE_PROP_ID: int = -2
+const POSITION_PROP_ID: int = -1
 
 
 var metadata: ObjectMetadata
@@ -26,9 +25,6 @@ func set_property(property_id: int, value) -> void:
 		POSITION_PROP_ID:
 			if value is Vector2:
 				metadata.position = value
-		ENABLED_PROP_ID:
-			if value is bool:
-				metadata.enabled = value
 		_:
 			if properties.has(property_id):
 				properties[property_id] = value
@@ -42,7 +38,5 @@ func get_property(property_id: int):
 			return metadata.palette
 		POSITION_PROP_ID:
 			return metadata.position
-		ENABLED_PROP_ID:
-			return metadata.enabled
 		_:
 			properties.get(property_id)

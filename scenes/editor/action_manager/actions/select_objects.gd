@@ -16,8 +16,6 @@ func select_objects(selected_array: Array):
 	for object in editor.selected_objects:
 		object.selected = true
 
-	editor.open_object_properties(selected_array)
-
 
 func _do() -> void:
 	old_selected_objects = editor.selected_objects.duplicate()

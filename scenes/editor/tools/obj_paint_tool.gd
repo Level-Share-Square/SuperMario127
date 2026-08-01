@@ -3,6 +3,7 @@ extends EditorTool
 
 var last_mouse_tile: Vector2
 
+signal objects_selected(objects)
 
 func _click_left(_event: InputEvent, _world_pos: Vector2) -> void:
 	editor.get_hovered_objects()
@@ -17,34 +18,15 @@ func _click_left(_event: InputEvent, _world_pos: Vector2) -> void:
 				closest_object = object
 		if editor.show_layers:
 			if closest_object.layer == editor.layer:
-				select(closest_object)
+				emit_signal("objects_selected", [closest_object])
 			else:
 				return
 		else:
-			select(closest_object)
+			emit_signal("objects_selected", [closest_object])
 	else:
-#		editor.selection_box.get_parent().hide_selection_box()
-#		for object in editor.selected_objects:
-#			object.selected = false
-#		editor.selected_objects = {}
-#		action()
-#		editor.selection_box.get_parent().item_actions.hide_selection_actions()
-#		editor.selection_box.get_parent().pivot_toggle.show()
-#		editor.selection_box.get_parent().vseparator3.show()
+		emit_signal("objects_selected", [])
 		pass
 		
-#sorry lmao
-func select(object: GameObject):
-	editor.selected_objects = []
-	editor.selected_objects.append(object)
-	action(editor.selected_objects)
-	
-func action(objects: Array = []) -> void:
-	var action := SelectObjectsAction.new()
-	action.editor = editor
-	action.selected_objects = editor.selected_objects
-	editor.action_manager.commit_action(action)
-
 func place_object(pos: Vector2):
 	if shared.get_object_at_position(Vector2(round(pos.x), round(pos.y)), editor.layer):
 		return

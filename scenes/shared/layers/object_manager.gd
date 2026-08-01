@@ -41,7 +41,7 @@ func create_object(object_data: ObjectData):
 	return game_object
 
 
-func erase_object(game_object) -> void:
+func erase_object(game_object, free: bool = true) -> void:
 	var object_data: ObjectData = game_object.object_data
-	game_object.queue_free()
+	if free: game_object.queue_free()
 	layer_data.erase_object(object_data)
