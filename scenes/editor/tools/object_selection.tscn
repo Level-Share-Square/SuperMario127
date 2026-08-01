@@ -9,7 +9,7 @@
 [ext_resource path="res://scenes/editor/tools/selection_box/rotate.gd" type="Script" id=7]
 [ext_resource path="res://scenes/editor/tools/selection_box/tool_button.gd" type="Script" id=8]
 [ext_resource path="res://scenes/editor/tools/selection_box/selection_tools/move.gd" type="Script" id=9]
-[ext_resource path="res://scenes/editor/assets/PivotOn.svg" type="Texture" id=10]
+[ext_resource path="res://scenes/editor/assets/PivotOff.svg" type="Texture" id=10]
 [ext_resource path="res://scenes/editor/assets/Scale.svg" type="Texture" id=11]
 [ext_resource path="res://scenes/menu/levels_list/icons/reset_save.png" type="Texture" id=12]
 [ext_resource path="res://scenes/editor/assets/move_selection.png" type="Texture" id=13]
@@ -205,7 +205,6 @@ size_flags_vertical = 3
 theme_type_variation = "ButtonTransparent"
 custom_styles/pressed = SubResource( 3 )
 toggle_mode = true
-pressed = true
 icon = ExtResource( 10 )
 icon_align = 1
 expand_icon = true

@@ -8,7 +8,9 @@ func _ready():
 	
 	yield(editor, "ready")
 	editor.action_manager.connect("undo", self, "fit_to_bounding_rectangle")
+	editor.action_manager.connect("redo", self, "fit_to_bounding_rectangle")
 	editor.action_manager.connect("action", self, "fit_to_bounding_rectangle")
+	tool_manager.get_node("ObjectPaint").connect("objects_selected", self, "external_objects_selected")
 
 func get_adjusted_mouse_position():
 	return get_global_mouse_position()
@@ -28,32 +30,62 @@ func on_mouse_released():
 	if editor.selected_objects.empty():
 		reset_bounds()
 		return
+		
+	run_selection_behavior()
 	
+func external_objects_selected(objects: Array):
+	editor.selected_objects = objects
+	if editor.selected_objects.empty():
+		reset_bounds()
+		return
+	run_selection_behavior()
+	
+func run_selection_behavior():
 	fit_to_bounding_rectangle()
 	set_highlight_mode(false)
 	pivot.visible = pivot.pivot_toggle.pressed
 	pivot.rect_global_position = pivot.get_position_centered()
 	editor.item_actions.show_selection_actions()
+	action()
+	
+func action():
+	var action := SelectObjectsAction.new()
+	action.editor = editor
+	action.selected_objects = editor.selected_objects
+	editor.action_manager.commit_action(action)
 	
 func fit_to_bounding_rectangle():
 	fill_rect = get_bounding_rectangle()
 	if !fill_rect:
+		reset_bounds()
 		return
-	highlight.rect_global_position = fill_rect.position
-	highlight.rect_size = fill_rect.size
 	
-	selection_box.rect_global_position = fill_rect.position
-	selection_box.rect_size = fill_rect.size
+	var layer = shared.get_layer_at(editor.layer)
+	
+	var drag_rect = fill_rect
+	
+	if layer is LevelParallaxLayer:
+		drag_rect = layer.parallax_scroll.get_global_transform().xform(drag_rect)
+		
+	highlight.rect_global_position = drag_rect.position
+	highlight.rect_size = drag_rect.size
+	
+	selection_box.rect_global_position = drag_rect.position
+	selection_box.rect_size = drag_rect.size
 	
 
 func get_bounding_rectangle():
+	for object in editor.selected_objects.duplicate():
+		if !object.is_inside_tree():
+			editor.selected_objects.erase(object)
+			
 	if editor.selected_objects.empty():
 		return Rect2()
 		
 	var rect := Rect2(editor.selected_objects[0].position, Vector2(0, 0))
 	
 	for object in editor.selected_objects:
-		rect = rect.expand(object.position)
+		rect = rect.merge(object.get_global_editor_rect())
 		
 	return rect
 	
@@ -91,13 +123,13 @@ func on_paste():
 
 
 func on_delete():
-	if editor.tool_manager.current_tool == self:
+	if !editor.selected_objects.empty():
 		var action := EraseObjectBulkAction.new()
 		action.shared = shared
 		action.layer = editor.layer
 		action.objects = editor.selected_objects
-		editor.action_manager.commit_action(action)
 		editor.selected_objects = []
+		editor.action_manager.commit_action(action)
 		action.connect("delete_undo", self, "on_undid_delete")
 		
 func on_undid_delete(objects):

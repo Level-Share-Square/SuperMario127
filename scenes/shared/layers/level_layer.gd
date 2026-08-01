@@ -51,9 +51,9 @@ func _modulate_autoset() -> Color:
 
 func find_objects_in_rect(rect: Rect2) -> Array:
 	var found_objects: Array = []
-	
+	get_global_transform()
 	for object in object_manager.get_children():
-		if rect.has_point(object.global_position):
+		if rect.intersects(object.get_global_editor_rect()):
 			found_objects.append(object)
 			
 	return found_objects

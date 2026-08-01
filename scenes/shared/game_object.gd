@@ -237,14 +237,13 @@ func set_property(property: String, value, change_object_data = false):
 	if typeof(self[property]) != typeof(value):
 		print("Object ", name, " tried to set property \"" + property + "\", but the provided type does not match.")
 		return
-	
+
 	self[property] = value
 	
 	if change_object_data:
 		var id: int = property_ids.find_key(property)
-		
-		if value != property_defaults.get(property):
-			object_data.set_property(id, value)
+
+		object_data.set_property(id, value)
 		
 		if property == "visible":
 			if mode == 1:
@@ -324,6 +323,8 @@ func is_in_editor() -> bool:
 func is_object_hovered() -> bool:
 	return is_in_editor() and editor_rect.has_point(get_local_mouse_position())
 
+func get_global_editor_rect() -> Rect2:
+	return get_global_transform().xform(editor_rect)
 
 func create_coin(coin_id: int, body: Node2D, physics: bool, velocity: Vector2) -> void:
 	var object = create_object(body.global_position, coin_id, 0)
