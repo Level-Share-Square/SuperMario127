@@ -204,7 +204,7 @@ func _ready() -> void:
 	# also reusing the paratroopa one cuz idk dont feel like making new script
 	var scene = get_tree().current_scene
 	if scene.mode == 1 and scene.placed_item_property == "Para":
-		register_property("is_single", true)
+		set_property("is_single", true)
 	
 	# set up single vs double doors
 	door_sprite.set_sprite_frames(single_door_frames if is_single else double_door_frames)

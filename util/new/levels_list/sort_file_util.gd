@@ -3,7 +3,7 @@ class_name sort_file_util
 
 const EMPTY_DICTIONARY: Dictionary = {}
 const BASE_FOLDER: String = "user://level_list"
-const INTERNAL_SORT: String = "res://level/Developer Levels/sort.tres"
+const INTERNAL_SORT: String = "res://level/Developer Levels New/sort.tres"
 const LEVELS: String = "levels"
 const FOLDERS: String = "folders"
 const CAMPAIGNS: String = "campaigns"

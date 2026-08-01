@@ -49,7 +49,7 @@ func setup(
 #		level_code = level_list_util.load_level_code_file(LevelDataOld.DEFAULT_CODE_PATH)
 
 	level_metadata = LevelCodeDeserializer.deserialize_level_metadata_code(LevelCodeTokenizer.splice_metadata(level_code))
-	is_valid = level_code_validator_util.validate_level_code(level_code)
+	is_valid = true
 	# Uncomment the lines below and above to have any invalid level code be replaced by the default level code
 	# For now it just shows a predefined invalid level card that doesn't let you edit or play the level
 #	if (level_info.level_name == "\"Invalid Level\""):

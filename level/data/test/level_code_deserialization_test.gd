@@ -9,6 +9,7 @@ const EDITOR_PATH = preload("res://scenes/editor/editor.tscn")
 func _ready():
 #	test_level_code_validation()
 	convert_debug_level()
+#	convert_dev_levels()
 	
 #	instance_debug_level()
 	
@@ -94,6 +95,19 @@ func convert_debug_level():
 	file.store_string(new_code)
 	file.close()
 
+func convert_dev_levels():
+	var dir := Directory.new()
+	dir.open("res://level/Developer Levels/")
+	dir.list_dir_begin()
+	
+	while true:
+		var file_name: String = dir.get_next()
+		if file_name == "": break
+		if "tres" in file_name and not "sort" in file_name:
+			var new_code: String = CurrentLevelData.convert_old_code_to_new(load("res://level/Developer Levels/" + file_name).code)
+			var resource := LevelCodeContainer.new()
+			resource.code = new_code
+			ResourceSaver.save("res://level/Developer Levels New/" + file_name, resource)
 
 func tile_byte_test(tiles: Dictionary):
 	var tile_data: TileData = TileData.new()

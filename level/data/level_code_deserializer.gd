@@ -175,7 +175,7 @@ static func deserialize_level_metadata_code(level_metadata_code: String) -> Leve
 	metadata.level_thumbnail_background = set_or_use_default_value(vars, 5, metadata.level_thumbnail_background)
 	metadata.level_thumbnail_background_palette = set_or_use_default_value(vars, 6, metadata.level_thumbnail_background_palette)
 	metadata.level_version = set_or_use_default_value(vars, 7, metadata.level_version)
-	
+
 	metadata.collectible_data = deserialize_collectible_data_code(components[1])
 	
 	return metadata
@@ -183,14 +183,14 @@ static func deserialize_level_metadata_code(level_metadata_code: String) -> Leve
 
 static func deserialize_collectible_data_code(code: String) -> CollectibleData:
 	var components: Array = LevelCodeTokenizer.get_outermost_brackets(code)
-	
+
 	var mission_data_code = components[0]
 	var mission_data: Array = deserialize_mission_datas_code(mission_data_code)
 	var star_coin_data_code = components[1]
 	var star_coin_data: Array = deserialize_star_coin_datas_code(star_coin_data_code)
-	
+
 	var red_coin_count: int = deserialize_datas_code(components[2])[0]
-	
+
 	return CollectibleData.new(mission_data, star_coin_data, red_coin_count)
 
 

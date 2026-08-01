@@ -39,7 +39,12 @@ func load_sound(url: String, working_folder: String):
 	
 	
 
-func load_image(url: String, working_folder: String) -> ImageTexture:
+func load_image(url: String, working_folder: String, id: String = "") -> ImageTexture:
+	var old_level_thumbnail: String = level_list_util.get_level_thumbnail_path(id, working_folder)
+	if level_list_util.file_exists(old_level_thumbnail):
+		yield(get_tree(), "idle_frame")
+		return level_list_util.get_image_from_path(old_level_thumbnail)
+
 	var image_path: String = yield(fetch_asset_path(url, working_folder), "completed")
 	
 	if image_path == null:

@@ -52,12 +52,8 @@ func load_default_thumbnail(_viewport: Viewport = null):
 
 
 func load_custom_thumbnail(url: String):
-	var old_level_thumbnail: String = level_list_util.get_level_thumbnail_path(level_card.id, level_card.parent_folder)
-	if level_list_util.file_exists(old_level_thumbnail):
-		thumbnail.texture = level_list_util.get_image_from_path(old_level_thumbnail)
-		return
-
-	var thumbnail_texture: ImageTexture = yield(AssetHandler.load_image(url, CurrentLevelData.working_folder), "completed")
+	var folder = CurrentLevelData.working_folder if !level_list_util.file_exists(level_list_util.get_level_thumbnail_path(level_card.id, level_card.parent_folder)) else level_card.parent_folder 
+	var thumbnail_texture: ImageTexture = yield(AssetHandler.load_image(url, folder, level_card.id), "completed")
 	
 	if !thumbnail_texture:
 		load_default_thumbnail()

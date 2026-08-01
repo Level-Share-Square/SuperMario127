@@ -2,8 +2,8 @@ class_name level_list_util
 
 
 const BASE_FOLDER: String = "user://level_list"
-const DEV_FOLDER: String = BASE_FOLDER + "/Developer Levels"
-const INTERNAL_DEV_FOLDER: String = "res://level/Developer Levels/"
+const DEV_FOLDER: String = BASE_FOLDER + "/Developer Levels New"
+const INTERNAL_DEV_FOLDER: String = "res://level/Developer Levels New/"
 const ENCRYPTION_PASSWORD = "BadCode"
 
 

@@ -86,6 +86,8 @@ func insert_folder():
 
 func insert_level(level_code: String = "", folder: String = working_folder):
 	if level_code == "":
+		
+		
 		level_code = level_list_util.load_level_code_file(CurrentLevelData.DEFAULT_CODE_PATH)
 	
 	var level_id: String = level_list_util.generate_level_id()
