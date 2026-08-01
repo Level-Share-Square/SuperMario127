@@ -9,6 +9,7 @@ onready var shine_force_leave = $"%ForceLeave"
 onready var spawn_area_id = $"%SpawnArea"
 onready var spawn_teleporter_tag = $"%TeleporterTag"
 onready var mission_show_in_menu = $"%ShowInMenu"
+onready var new_mission = $"%NewMission"
 
 onready var editor: Editor = get_tree().current_scene
 
@@ -22,6 +23,7 @@ func _ready():
 	refresh_buttons()
 		
 	on_mission_selected(mission_data[0])
+	new_mission.connect("button_down", self, "on_new_mission_pressed")
 		
 func on_mission_selected(mission: MissionData):
 	
@@ -94,7 +96,7 @@ func change_property(key: String, value, check_matches):
 
 func refresh_buttons():
 	for child in mission_button_container.get_children():
-		child.queue_free()
+		if child != new_mission: child.queue_free()
 	for mission in mission_data:
 		mission = mission as MissionData
 		
@@ -105,3 +107,10 @@ func refresh_buttons():
 		
 		button_sound.connect("button_down", self, "on_mission_selected", [mission])
 		mission_button_container.add_child(button_sound)
+
+func on_new_mission_pressed():
+	var new_mission_data := MissionData.new()
+	CurrentLevelData.level_metadata.collectible_data.mission_data.append(new_mission_data)
+	on_mission_selected(new_mission_data)
+	refresh_buttons()
+	

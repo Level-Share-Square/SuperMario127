@@ -78,10 +78,10 @@ func _ready():
 		bright_color.v *= 1.15
 		sprite2.self_modulate = bright_color
 
-func _object_disabled_ready():
-	._object_disabled_ready()
-	collision_shape.disabled = true
-	platform_area_collision_shape.disabled = true
+func _object_ready():
+	._object_ready()
+	collision_shape.disabled = !enabled
+	platform_area_collision_shape.disabled = !enabled
 
 func update_parts():
 	sprite.rect_position.x = -(left_width + (part_width * parts) + right_width) / 2

@@ -566,8 +566,17 @@ scroll_horizontal_enabled = false
 [node name="MissionButtonContainer" type="VBoxContainer" parent="ContentDivider/ContentMat/Tabs/Missions/ScrollContainer" index="0"]
 unique_name_in_owner = true
 margin_right = 100.0
+margin_bottom = 19.0
 rect_min_size = Vector2( 100, 0 )
 size_flags_horizontal = 0
+
+[node name="NewMission" type="Button" parent="ContentDivider/ContentMat/Tabs/Missions/ScrollContainer/MissionButtonContainer" index="0"]
+unique_name_in_owner = true
+margin_right = 100.0
+margin_bottom = 19.0
+theme_type_variation = "ButtonPurple"
+text = "New Mission..."
+script = ExtResource( 6 )
 
 [node name="VSeparator" type="VSeparator" parent="ContentDivider/ContentMat/Tabs/Missions" index="1"]
 margin_left = 112.0
