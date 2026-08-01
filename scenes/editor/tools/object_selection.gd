@@ -25,8 +25,7 @@ func reset_bounds():
 	pivot.visible = false
 
 func on_mouse_released():
-	editor.selected_objects = shared.get_layer_at(editor.layer).find_objects_in_rect(fill_rect)
-	
+	select_objects(shared.get_layer_at(editor.layer).find_objects_in_rect(fill_rect))
 	if editor.selected_objects.empty():
 		reset_bounds()
 		return
@@ -34,7 +33,7 @@ func on_mouse_released():
 	run_selection_behavior()
 	
 func external_objects_selected(objects: Array):
-	editor.selected_objects = objects
+	select_objects(objects)
 	if editor.selected_objects.empty():
 		reset_bounds()
 		return
@@ -90,6 +89,7 @@ func get_bounding_rectangle():
 	return rect
 	
 func _click_left(event, mouse_position):
+	select_objects([])
 	if fill_rect.has_point(get_adjusted_mouse_position()):
 		fill_rect = Rect2()
 	._click_left(event, mouse_position)
@@ -134,3 +134,10 @@ func on_delete():
 		
 func on_undid_delete(objects):
 	editor.selected_objects = objects
+
+func select_objects(objects):
+	for object in editor.selected_objects:
+		object.selected = false
+	editor.selected_objects = objects
+	for object in objects:
+		object.selected = true
