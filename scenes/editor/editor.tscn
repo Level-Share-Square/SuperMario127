@@ -1,4 +1,4 @@
-[gd_scene load_steps=121 format=2]
+[gd_scene load_steps=122 format=2]
 
 [ext_resource path="res://scenes/menu/options/options.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/menu/menu_controller/screen_manager.gd" type="Script" id=2]
@@ -85,6 +85,7 @@
 [ext_resource path="res://scenes/editor/layers/max_height.gd" type="Script" id=83]
 [ext_resource path="res://scenes/editor/assets/PathTool.svg" type="Texture" id=84]
 [ext_resource path="res://scenes/editor/windows/autosave_window.tscn" type="PackedScene" id=85]
+[ext_resource path="res://scenes/editor/assets/BucketFill.svg" type="Texture" id=86]
 
 [sub_resource type="CanvasItemMaterial" id=176]
 blend_mode = 1
@@ -1178,9 +1179,9 @@ __meta__ = {
 
 [node name="Tools" type="PanelContainer" parent="UI/UIContainer/EditorUI/Middle"]
 margin_left = 718.0
-margin_top = 100.0
+margin_top = 114.0
 margin_right = 750.0
-margin_bottom = 316.0
+margin_bottom = 302.0
 mouse_filter = 2
 size_flags_vertical = 4
 theme_type_variation = "FlatPanel"
@@ -1191,7 +1192,7 @@ editor_path = NodePath("../../../../..")
 margin_left = 4.0
 margin_top = 4.0
 margin_right = 28.0
-margin_bottom = 212.0
+margin_bottom = 184.0
 mouse_filter = 2
 
 [node name="Object" type="VBoxContainer" parent="UI/UIContainer/EditorUI/Middle/Tools/VBoxContainer"]
@@ -1275,7 +1276,7 @@ margin_bottom = 104.0
 [node name="ItemTools" type="VBoxContainer" parent="UI/UIContainer/EditorUI/Middle/Tools/VBoxContainer"]
 unique_name_in_owner = true
 margin_right = 24.0
-margin_bottom = 208.0
+margin_bottom = 180.0
 mouse_filter = 2
 
 [node name="Paint" type="Button" parent="UI/UIContainer/EditorUI/Middle/Tools/VBoxContainer/ItemTools"]
@@ -1338,9 +1339,9 @@ script = ExtResource( 24 )
 
 [node name="VSeparator4" type="HSeparator" parent="UI/UIContainer/EditorUI/Middle/Tools/VBoxContainer/ItemTools"]
 visible = false
-margin_top = 108.0
+margin_top = 100.0
 margin_right = 24.0
-margin_bottom = 112.0
+margin_bottom = 104.0
 
 [node name="TileFill" type="Button" parent="UI/UIContainer/EditorUI/Middle/Tools/VBoxContainer/ItemTools"]
 unique_name_in_owner = true
@@ -1353,16 +1354,16 @@ size_flags_vertical = 3
 theme_type_variation = "ButtonTransparent"
 toggle_mode = true
 group = SubResource( 167 )
-icon = ExtResource( 46 )
+icon = ExtResource( 86 )
 icon_align = 1
 expand_icon = true
 script = ExtResource( 24 )
 
 [node name="VSeparator3" type="HSeparator" parent="UI/UIContainer/EditorUI/Middle/Tools/VBoxContainer/ItemTools"]
 visible = false
-margin_top = 100.0
+margin_top = 136.0
 margin_right = 24.0
-margin_bottom = 104.0
+margin_bottom = 140.0
 
 [node name="TileRectFill" type="Button" parent="UI/UIContainer/EditorUI/Middle/Tools/VBoxContainer/ItemTools"]
 unique_name_in_owner = true
@@ -1383,9 +1384,9 @@ script = ExtResource( 24 )
 
 [node name="VSeparator5" type="HSeparator" parent="UI/UIContainer/EditorUI/Middle/Tools/VBoxContainer/ItemTools"]
 visible = false
-margin_top = 108.0
+margin_top = 172.0
 margin_right = 24.0
-margin_bottom = 112.0
+margin_bottom = 176.0
 
 [node name="ObjectLock" type="Button" parent="UI/UIContainer/EditorUI/Middle/Tools/VBoxContainer/ItemTools"]
 unique_name_in_owner = true
@@ -1406,12 +1407,13 @@ script = ExtResource( 24 )
 
 [node name="VSeparator6" type="HSeparator" parent="UI/UIContainer/EditorUI/Middle/Tools/VBoxContainer/ItemTools"]
 visible = false
-margin_top = 108.0
+margin_top = 208.0
 margin_right = 24.0
-margin_bottom = 112.0
+margin_bottom = 212.0
 
 [node name="ObjectTrail" type="Button" parent="UI/UIContainer/EditorUI/Middle/Tools/VBoxContainer/ItemTools"]
 unique_name_in_owner = true
+visible = false
 margin_top = 184.0
 margin_right = 24.0
 margin_bottom = 208.0
