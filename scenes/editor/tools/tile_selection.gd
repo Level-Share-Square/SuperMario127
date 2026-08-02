@@ -7,8 +7,10 @@ func _ready():
 
 func on_mouse_released():
 	if !.on_mouse_released():
+		editor.item_actions.hide_selection_actions()
 		return
 	if fill_rect.has_point(get_adjusted_mouse_position()):
+		editor.item_actions.hide_selection_actions()
 		return
 		
 	select_tiles()

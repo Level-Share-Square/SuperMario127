@@ -20,7 +20,7 @@ func toggle_ui(value: bool):
 	
 func reset_bounds():
 	.reset_bounds()
-	
+	editor.item_actions.hide_selection_actions()
 	editor.selected_objects = []
 	pivot.visible = false
 
@@ -57,6 +57,7 @@ func fit_to_bounding_rectangle():
 	fill_rect = get_bounding_rectangle()
 	if !fill_rect:
 		reset_bounds()
+		editor.item_actions.hide_selection_actions()
 		return
 	
 	var layer = shared.get_layer(editor.layer)
