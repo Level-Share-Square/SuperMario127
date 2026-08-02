@@ -16,3 +16,6 @@ func _update_parallax(layer: int):
 	else:
 		set_parallax_distance(0)
 	_update_scroll()
+
+func layer_picked():
+	_update_parallax(0)
