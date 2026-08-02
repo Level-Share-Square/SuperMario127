@@ -2,14 +2,11 @@
 
 [ext_resource path="res://classes/camera_stopper.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/objects/layer_changer/layer_changer.gd" type="Script" id=2]
+[ext_resource path="res://scenes/actors/objects/layer_changer/layer_changer.png" type="Texture" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 resource_local_to_scene = true
 extents = Vector2( 16, 16 )
-
-[sub_resource type="StreamTexture" id=3]
-resource_local_to_scene = true
-load_path = "res://.import/death_plane.png-063ca5d276d6a22b00b0dffad627c315.stex"
 
 [sub_resource type="RectangleShape2D" id=2]
 resource_local_to_scene = true
@@ -31,7 +28,7 @@ margin_left = -16.0
 margin_top = -16.0
 margin_right = 16.0
 margin_bottom = 16.0
-texture = SubResource( 3 )
+texture = ExtResource( 3 )
 region_rect = Rect2( 0, 0, 32, 32 )
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1

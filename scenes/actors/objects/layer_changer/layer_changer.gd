@@ -104,6 +104,7 @@ func update_layer(body):
 		var layer: LevelLayer = shared.get_layer(layer_uuid)
 		if layer is LevelParallaxLayer:
 			layer.set_parallax_distance(parallax_distance)
+#		print(move_to_index)
 		layer.set_layer_modulate(Color.white, opacity)
 		if move_to_index != -1:
 			shared.move_layer(layer, move_to_index)
