@@ -13,14 +13,14 @@ var collected = false
 var physics = false
 var velocity : Vector2
 
-var id : int
+var id : Array
 
 export var anim_damp = 80
 
 func collect(body):
 	if is_enabled_and_on_ground() and !collected and body.name.begins_with("Character") and !body.dead:
 		CurrentLevelData.vars.collect_coin(2)
-		CurrentLevelData.vars.collect_red_coin(position)
+		CurrentLevelData.vars.collect_red_coin(id)
 		body.heal(5)
 		var player_id = 1
 		if body.name == "Character":
@@ -38,7 +38,8 @@ func _ready():
 	animation_player.play("RESET")
 	if mode == 1: return
 	if is_enabled_and_on_ground():
-		if position in CurrentLevelData.vars.red_coins_collected[1]:
+		id = [position, CurrentLevelData.area_id]
+		if id in CurrentLevelData.vars.red_coins_collected[1]:
 			queue_free()
 	
 	var _connect = area.connect("body_entered", self, "collect")
