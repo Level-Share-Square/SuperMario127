@@ -191,7 +191,7 @@ func _register_properties():
 
 
 func is_savable_property(key: String) -> bool:
-	for property in property_ids:
+	for property in property_ids.values():
 		if key == property:
 			return true
 	
