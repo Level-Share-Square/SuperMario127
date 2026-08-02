@@ -10,7 +10,6 @@ func change_property(property: String, new_value, check_matches):
 	var affected_objects: Dictionary = setup_affected_objects(property, new_value)
 	if check_matches and affected_objects["property_matches"] >= objects.size(): return
 	affected_objects.erase("property_matches")
-	print("le goat")
 	var action := ChangePropertyBulkAction.new()
 	action.affected_objects = affected_objects
 	action.bulk_store_original_properties()

@@ -23,6 +23,7 @@ func load_in(layer_data: LayerData):
 	# A value of layer tint should be 1-100
 	set_layer_modulate(tint, layer_data.layer_metadata.layer_opacity)
 	set_order(layer_data.layer_metadata.order)
+	visible = layer_data.layer_metadata.layer_visible
 	self.layer_data = layer_data
 
 

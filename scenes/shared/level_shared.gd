@@ -94,6 +94,7 @@ func layer_index_to_uuid(index: int):
 	return layer_dictionary.find_key(get_layer_at(index))
 		
 func edit_layer(uuid: String, property: String, value):
+	print(property)
 	var layer: LevelLayer = get_layer(uuid)
 	var layer_data: LayerData = layer.layer_data
 	
@@ -119,6 +120,7 @@ func load_layer_states(layer_states: Dictionary):
 		if layer is LevelParallaxLayer:
 			layer.set_parallax_distance(layer_state.parallax_distance)
 		layer.set_layer_modulate(Color.white, layer_state.opacity)
+		layer.visible = layer_state.is_visible
 		
 		if layer_state.order != -1:
 			layers_to_move.append([layer, layer_state.order])

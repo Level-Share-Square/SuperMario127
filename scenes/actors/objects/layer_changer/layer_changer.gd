@@ -15,6 +15,7 @@ var layer_uuid: String = ""
 var parallax_distance: float = 0
 var tint := Color(0.545098, 0.545098, 0.545098)
 var opacity: float = 1
+var is_visible: bool = true
 var move_to_index: int = -1
 var one_time: bool = false
 
@@ -29,8 +30,9 @@ func _register_properties():
 	register_property(8, "parallax_distance", parallax_distance)
 	register_property(9, "tint", tint)
 	register_property(10, "opacity", opacity)
-	register_property(11, "move_to_index", move_to_index)
-	register_property(12, "one_time", one_time)
+	register_property(11, "is_visible", is_visible)
+	register_property(12, "move_to_index", move_to_index)
+	register_property(13, "one_time", one_time)
 	
 func _unhandled_input(event: InputEvent) -> void:
 	parts_input_handler(event,self)
@@ -107,7 +109,8 @@ func update_layer(body):
 			move_to_index,
 			parallax_distance,
 			tint,
-			opacity
+			opacity,
+			is_visible
 		)
 		
 		shared.load_layer_states({layer_uuid: layer_state})
