@@ -95,9 +95,9 @@ func collect_coin(amount: int):
 	emit_signal("coin_collected", coins_collected)
 
 
-func collect_red_coin(pos: Vector2):
+func collect_red_coin(id: Array):
 	red_coins_collected[0] += 1
-	red_coins_collected[1].append(pos)
+	red_coins_collected[1].append(id)
 	emit_signal("red_coin_collected", red_coins_collected[0])
 
 
