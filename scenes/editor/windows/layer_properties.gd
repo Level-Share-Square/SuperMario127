@@ -5,12 +5,19 @@ onready var parallax = $"%Parallax"
 onready var is_ground = $"%IsGround"
 onready var tint = $"%Tint"
 onready var opacity = $"%Opacity"
+onready var uuid = $"%UUID"
 
 onready var editor: Editor = get_tree().current_scene
 onready var shared: LevelShared = editor.get_shared_node()
 onready var window = owner
 
 var layer_data: LayerData
+
+func _ready():
+	uuid.connect("pressed", self, "copy_uuid")
+	
+func copy_uuid():
+	OS.set_clipboard(shared.layer_index_to_uuid(window.layer_index))
 
 func change_property(property: String, new_value, check_matches):
 	var action := EditLayerAction.new()

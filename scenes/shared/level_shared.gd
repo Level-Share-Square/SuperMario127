@@ -55,7 +55,7 @@ func get_layer_at(index: int) -> LevelLayer:
 	return get_layer(layers[index])
 	
 func get_layer(uuid: String) -> LevelLayer:
-	return layer_dictionary[uuid]
+	return layer_dictionary.get(uuid)
 
 func add_layer(layer_data = null, add_to_data: bool = false, at: int = layers.size()) -> LevelLayer:
 	if not is_instance_valid(layer_data):
@@ -90,6 +90,9 @@ func remove_layer(uuid: String, remove_from_data: bool = false):
 	if remove_from_data:
 		CurrentLevelData.current_area.layers.remove(get_layer_index(removed))
 		
+func layer_index_to_uuid(index: int):
+	return layer_dictionary.find_key(get_layer_at(index))
+		
 func edit_layer(uuid: String, property: String, value):
 	var layer: LevelLayer = get_layer(uuid)
 	var layer_data: LayerData = layer.layer_data
@@ -97,6 +100,14 @@ func edit_layer(uuid: String, property: String, value):
 	layer_data.layer_metadata[property] = value
 	layer.load_in(layer_data)
 	CurrentLevelData.current_area.layers[get_layer_index(layer)] = layer_data
+	
+func move_layer(layer: LevelLayer, to: int, save_to_data: bool = false):
+	var from: int = layer.get_index()
+	move_child(layer, to)
+	for i in range(min(from, to), max(from, to) + 1):
+		get_child(i).set_order(i)
+		if save_to_data:
+			edit_layer(layer_index_to_uuid(i), "order", i)
 	
 func set_tile(x: int, y: int, uuid: String, tileset_id: int, tile_id: int, palette_id : int = 0):
 	layer_dictionary[uuid].place_tile(Vector2(x, y), tileset_id, tile_id, palette_id, true, true)

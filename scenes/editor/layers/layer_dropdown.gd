@@ -31,7 +31,7 @@ func select_layer(index: int, toggle_dropdown: bool = true) -> void:
 	layer_picker.text = layer_metadata.layer_name
 	
 	layer_picker.get_node("LayerColor").modulate = EditorLayerManager.get_band_color(layer_metadata.order, shared.origin.layer_data.layer_metadata.order)
-	editor.layer = shared.layer_dictionary.find_key(layer)
+	editor.layer = shared.layer_index_to_uuid(index)
 	
 	# to close the dropdown
 	if toggle_dropdown:

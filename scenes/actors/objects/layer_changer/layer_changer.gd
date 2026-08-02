@@ -11,10 +11,11 @@ var parts := 1
 export var stops_camera := false
 export var vertical := false
 
-var layer_index: int = 0
+var layer_uuid: String = ""
 var parallax_distance: int = 0
 var tint := Color(0.545098, 0.545098, 0.545098)
 var opacity: float = 1
+var move_to_index: int = -1
 var one_time: bool = false
 
 var last_parts := 1
@@ -24,11 +25,12 @@ func _register_properties():
 	register_property(4, "parts", parts)
 	register_property(5, "stops_camera", stops_camera)
 	register_property(6, "vertical", vertical)
-	register_property(7, "layer_index", layer_index)
+	register_property(7, "layer_uuid", layer_uuid)
 	register_property(8, "parallax_distance", parallax_distance)
 	register_property(9, "tint", tint)
 	register_property(10, "opacity", opacity)
-	register_property(11, "one_time", one_time)
+	register_property(11, "move_to_index", move_to_index)
+	register_property(12, "one_time", one_time)
 	
 func _unhandled_input(event: InputEvent) -> void:
 	parts_input_handler(event,self)
@@ -95,11 +97,18 @@ func update_layer(body):
 	if is_enabled_and_on_ground() and body.name.begins_with("Character") and !body.dead and body.controllable:
 		if used and one_time: return
 		
-		var player = get_tree().current_scene
-		var layer: LevelLayer = player.get_shared().get_layer(layer_index)
+		var shared: LevelShared = get_tree().current_scene.get_shared()
+		if !shared.get_layer(layer_uuid): return
+		if move_to_index < 0 or move_to_index > shared.layers.size() - 1: move_to_index = -1
+		
+		var layer: LevelLayer = shared.get_layer(layer_uuid)
 		if layer is LevelParallaxLayer:
 			layer.set_parallax_distance(parallax_distance)
-		layer.set_layer_modulate(tint, opacity)
+#		remove the comment once color properties are fixed @luci
+#		layer.set_layer_modulate(tint, opacity)
+		if move_to_index != -1:
+			shared.move_layer(layer, move_to_index)
+		
 		used = true
 		
 				
