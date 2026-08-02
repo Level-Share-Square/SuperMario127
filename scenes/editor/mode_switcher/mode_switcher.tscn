@@ -678,7 +678,8 @@ tracks/6/keys = {
 }
 
 [node name="ModeSwitcher" type="CanvasLayer"]
-layer = 128
+pause_mode = 2
+layer = 127
 script = ExtResource( 12 )
 grid_color_green = Color( 0.317647, 0.898039, 0.282353, 0.109804 )
 grid_color_red = Color( 0.901961, 0.278431, 0.764706, 0.109804 )

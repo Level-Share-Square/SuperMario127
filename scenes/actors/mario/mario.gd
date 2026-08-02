@@ -1284,8 +1284,8 @@ func kill(cause: String) -> void:
 
 func exit() -> void:
 	#if the mode switcher button is not invisible, we're in edit mode, switch back to that, but if we're in play mode then for now just reload the scene
-	if !Singleton.ModeSwitcher.get_node("ModeSwitcherButton").invisible:
-		Singleton.ModeSwitcher.get_node("ModeSwitcherButton").switch()
+	if !not Singleton.ModeSwitcher.visible:
+		Singleton.ModeSwitcher.switch()
 	else: 
 		# warning-ignore: return_value_discarded
 		get_tree().reload_current_scene()

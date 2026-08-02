@@ -94,7 +94,7 @@ func start_door_enter_animation(character : Character) -> void:
 		if collected < get_parent().required_amount:
 			can_enter = false
 	
-	if not Singleton.ModeSwitcher.get_node("ModeSwitcherButton").invisible and (
+	if Singleton.ModeSwitcher.visible and (
 		get_parent().collectible == "shine" or get_parent().collectible == "star coin"):
 		can_enter = true
 			

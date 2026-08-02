@@ -89,7 +89,7 @@ func _ready():
 
 
 func _unhandled_input(event):
-	if event.is_action_pressed("reload") or event.is_action_pressed("reload_from_start") and !SceneTransitions.transitioning and (!Singleton.ModeSwitcher.get_node("ModeSwitcherButton").switching_disabled or Singleton.ModeSwitcher.get_node("ModeSwitcherButton").invisible):
+	if event.is_action_pressed("reload") or event.is_action_pressed("reload_from_start") and !SceneTransitions.transitioning and (!Singleton.ModeSwitcher.is_switching or not Singleton.ModeSwitcher.visible):
 		if event.is_action_pressed("reload_from_start"):
 			CurrentLevelData.checkpoint_data.reset()
 		if !get_node(character).dead:

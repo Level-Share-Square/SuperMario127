@@ -906,26 +906,26 @@ script = ExtResource( 24 )
 
 [node name="Padding" type="Control" parent="UI/UIContainer/EditorUI/Top"]
 margin_left = 164.0
-margin_right = 619.0
+margin_right = 602.0
 margin_bottom = 416.0
 mouse_filter = 2
 size_flags_horizontal = 3
 
 [node name="Tools" type="HBoxContainer" parent="UI/UIContainer/EditorUI/Top"]
-margin_left = 623.0
+margin_left = 606.0
 margin_right = 750.0
 margin_bottom = 32.0
 size_flags_vertical = 0
 custom_constants/separation = 0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/UIContainer/EditorUI/Top/Tools"]
-margin_right = 127.0
+margin_right = 144.0
 margin_bottom = 32.0
 custom_constants/separation = 0
 
 [node name="Actions" type="PanelContainer" parent="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer"]
 unique_name_in_owner = true
-margin_right = 127.0
+margin_right = 144.0
 margin_bottom = 32.0
 size_flags_vertical = 3
 size_flags_stretch_ratio = 2.0
@@ -935,7 +935,7 @@ script = ExtResource( 16 )
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/Actions"]
 margin_left = 4.0
 margin_top = 4.0
-margin_right = 123.0
+margin_right = 140.0
 margin_bottom = 28.0
 
 [node name="SelectionActions" type="HBoxContainer" parent="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/Actions/HBoxContainer"]
@@ -1047,8 +1047,9 @@ margin_bottom = 24.0
 [node name="LayerPicker" type="Button" parent="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/Actions/HBoxContainer"]
 unique_name_in_owner = true
 margin_left = 72.0
-margin_right = 119.0
+margin_right = 136.0
 margin_bottom = 24.0
+rect_min_size = Vector2( 64, 0 )
 hint_tooltip = "Select Layer"
 focus_mode = 0
 size_flags_horizontal = 3
@@ -1071,7 +1072,7 @@ custom_styles/separator = SubResource( 194 )
 
 [node name="DropdownParent" type="Control" parent="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer"]
 margin_top = 32.0
-margin_right = 127.0
+margin_right = 144.0
 margin_bottom = 32.0
 script = ExtResource( 81 )
 

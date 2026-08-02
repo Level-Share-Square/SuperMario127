@@ -8,5 +8,5 @@ onready var options = $Options
 onready var options_icon = $Options/Icon
 
 func _ready():
-	quit.disabled = Singleton.ModeSwitcher.get_node("ModeSwitcherButton").visible
+	quit.disabled = Singleton.ModeSwitcher.visible
 	quit_countdown.countdown_style = quit_countdown.TextStyle.right

@@ -93,7 +93,7 @@ func _unhandled_input(event):
 func toggle_pause():
 	var is_not_transitioning : bool = !SceneTransitions.transitioning
 	# if the mode switcher button is invisible, then we're not in the editor at all
-	var is_not_switching_modes : bool = !Singleton.ModeSwitcher.get_node("ModeSwitcherButton").switching_disabled or Singleton.ModeSwitcher.get_node("ModeSwitcherButton").invisible
+	var is_not_switching_modes : bool = !Singleton.ModeSwitcher.is_switching or not Singleton.ModeSwitcher.visible
 	if is_not_transitioning and is_not_switching_modes and !Singleton.PhotoMode.is_enabled_and_on_ground() and paused == get_tree().paused and get_parent().get_node("SignText").modulate.a <= 0.005 and get_parent().get_node("DialogueText").modulate.a <= 0.005:
 		if !shine_info.visible:
 			$ControlsOptions.reset() # for resetting the Wait... state

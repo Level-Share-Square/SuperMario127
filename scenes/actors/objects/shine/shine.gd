@@ -36,7 +36,6 @@ onready var animation_player: AnimationPlayer = $AnimationPlayer
 onready var current_scene: Node = get_tree().current_scene
 onready var shine_get: Node = current_scene.get_node_or_null("%ShineGet")
 onready var transitions = SceneTransitions
-onready var mode_switcher_button: Node = Singleton.ModeSwitcher.get_node("ModeSwitcherButton")
 
 const UNPAUSE_TIMER_LENGTH = 3.35
 
@@ -118,7 +117,7 @@ func _ready() -> void:
 		
 		# if the shine is collected, make it blue 
 		# (collected_shines is a Dictionary where the key is the shine id and the value is a bool)
-#		if Singleton.ModeSwitcher.get_node("ModeSwitcherButton").invisible:
+#		if not Singleton.ModeSwitcher.visible:
 #			var collected_shines = CurrentLevelData.level_info.collected_shines
 #
 #			# Get the value, returning false if the key doesn't exist
@@ -339,7 +338,7 @@ func collect(body: PhysicsBody2D) -> void:
 		character.set_collision_layer_bit(1, false) # disable collisions w/ most things
 		character.set_inter_player_collision(false)
 
-		Singleton.ModeSwitcher.get_node("ModeSwitcherButton").switching_disabled = true
+		Singleton.ModeSwitcher.is_switching = true
 		CurrentLevelData.can_pause = false
 
 		# mute level music (gets un-muted after shine dance finishes)
@@ -350,7 +349,7 @@ func collect(body: PhysicsBody2D) -> void:
 		collected = true
 		visible = false
 
-#		if Singleton.ModeSwitcher.get_node("ModeSwitcherButton").invisible:
+#		if not Singleton.ModeSwitcher.visible:
 #			var is_new_record: bool = CurrentLevelData.level_info.is_new_record(id)
 #
 #			score_from_before = CurrentLevelData.time_score
@@ -401,7 +400,7 @@ func character_shine_dance_finished(_animation: Animation) -> void:
 	#bus is changed based on whether or not you are in the player, or editor, this makes sure music 
 	#fades to the correct volume in both situations
 	if do_kick_out:
-		if mode_switcher_button.invisible: #if not running through the editor, play the transition
+		if not Singleton.ModeSwitcher.visible: #if not running through the editor, play the transition
 			var _connect = SceneTransitions.connect("transition_finished", Singleton.SceneSwitcher, "quit_level", [false], CONNECT_ONESHOT)
 			SceneTransitions.do_transition_animation(
 				character.cutout_shine, 
@@ -417,8 +416,8 @@ func character_shine_dance_finished(_animation: Animation) -> void:
 		else:
 			# yes, another band aid
 			yield(get_tree().create_timer(0.75), "timeout")
-			mode_switcher_button.switching_disabled = false 
-			mode_switcher_button._pressed()
+			Singleton.ModeSwitcher.is_switching = false 
+			Singleton.ModeSwitcher.pressed(true)
 			
 			# pausing disabled for same reasons as mode switcher button
 			CurrentLevelData.can_pause = true
@@ -436,8 +435,8 @@ func restore_control(_animation: String, character) -> void:
 	yield(get_tree().create_timer(0.2), "timeout")
 
 	# re-enable mode switching if in the editor test mode
-	if !mode_switcher_button.invisible:
-		mode_switcher_button.switching_disabled = false 
+	if Singleton.ModeSwitcher.visible:
+		Singleton.ModeSwitcher.is_switching = false 
 
 	# pausing disabled for same reasons as mode switcher button
 	CurrentLevelData.can_pause = true

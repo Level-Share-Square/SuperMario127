@@ -23,8 +23,8 @@ func quit_to_menu(screen_to_open : String = ""): #switch this to use the enum an
 		if screen_to_open == "levels_screen":
 			screen_to_open = "main_menu"
 	# if the mode switcher button is visible (eg quitting from the editor), hide and disable it
-	Singleton.ModeSwitcher.get_node("ModeSwitcherButton").invisible = true
-	Singleton.ModeSwitcher.get_node("ModeSwitcherButton").switching_disabled = true
+	Singleton.ModeSwitcher.visible = false
+	Singleton.ModeSwitcher.is_switching = true
 
 	custom_open_screen_name = screen_to_open
 

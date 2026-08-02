@@ -16,8 +16,8 @@ func quit_to_menu(screen_to_open : String = ""):
 	CurrentLevelData.checkpoint_data.reset()
 	
 	# if the mode switcher button is visible (eg quitting from the editor), hide and disable it
-	Singleton.ModeSwitcher.get_node("ModeSwitcherButton").invisible = true
-	Singleton.ModeSwitcher.get_node("ModeSwitcherButton").switching_disabled = true
+	Singleton.ModeSwitcher.visible = false
+	Singleton.ModeSwitcher.is_switching = true
 	
 	var main_menu_controller_scene = ResourceLoader.load("res://scenes/menu/menu_controller/menu_controller.tscn")
 	# warning-ignore: return_value_discarded

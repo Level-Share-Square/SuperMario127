@@ -34,7 +34,7 @@ func _ready():
 		queue_free()
 		return
 	
-	if not Singleton.ModeSwitcher.get_node("ModeSwitcherButton").invisible:
+	if Singleton.ModeSwitcher.visible:
 		rect_position.x -= editor_offset
 	
 	character.connect("fludd_activated", self, "fludd_activated")

@@ -62,13 +62,11 @@ func _ready():
 	# if the mode switch button is invisible then the editor hasn't been readyed for the first time yet
 	# (editor _ready() gets called every time a mode switch happens)
 	# if the button is invisible and we're in the editor scene, we know it's time to setup the editor for the first time
-	if Singleton.ModeSwitcher.button.invisible:
+	if not Singleton.ModeSwitcher.visible:
 		# enable the mode switching button since we're using the editor
-		Singleton.ModeSwitcher.button.change_button_state(true)
+		Singleton.ModeSwitcher.visible = true
+		Singleton.ModeSwitcher.is_switching = false
 		Singleton.Music.play() # needed as the music no longer plays by default
-	
-		# make sure the mode switcher button is set to have the play button as it's visual
-		Singleton.ModeSwitcher.button.change_visuals(0)
 	
 		CurrentLevelData.unsaved_editor_changes = false
 		
