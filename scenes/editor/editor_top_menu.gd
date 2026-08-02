@@ -40,5 +40,5 @@ func on_button_pressed(button: Button):
 			autosave_window.toggle_window()
 		"Settings":
 			editor.screen_manager.screen_change("Options")
-		"Layer":
+		"AreaSettings":
 			get_node("%AreaSettingsWindow").toggle_window()

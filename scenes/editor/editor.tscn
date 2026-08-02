@@ -1,4 +1,4 @@
-[gd_scene load_steps=123 format=2]
+[gd_scene load_steps=124 format=2]
 
 [ext_resource path="res://scenes/menu/options/options.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/menu/menu_controller/screen_manager.gd" type="Script" id=2]
@@ -86,6 +86,7 @@
 [ext_resource path="res://scenes/editor/assets/PathTool.svg" type="Texture" id=84]
 [ext_resource path="res://scenes/editor/windows/autosave_window.tscn" type="PackedScene" id=85]
 [ext_resource path="res://scenes/editor/assets/BucketFill.svg" type="Texture" id=86]
+[ext_resource path="res://scenes/editor/assets/AreaSettings.svg" type="Texture" id=87]
 [ext_resource path="res://scenes/editor/assets/ArrowRight.svg" type="Texture" id=88]
 
 [sub_resource type="CanvasItemMaterial" id=176]
@@ -648,7 +649,7 @@ mouse_filter = 2
 script = ExtResource( 20 )
 
 [node name="Options" type="HBoxContainer" parent="UI/UIContainer/EditorUI/Top"]
-margin_right = 160.0
+margin_right = 196.0
 margin_bottom = 48.0
 size_flags_vertical = 0
 custom_constants/separation = 0
@@ -673,12 +674,12 @@ script = ExtResource( 24 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/UIContainer/EditorUI/Top/Options"]
 margin_left = 48.0
-margin_right = 160.0
+margin_right = 196.0
 margin_bottom = 48.0
 custom_constants/separation = 0
 
 [node name="PanelContainer" type="PanelContainer" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer"]
-margin_right = 112.0
+margin_right = 148.0
 margin_bottom = 32.0
 size_flags_vertical = 3
 size_flags_stretch_ratio = 2.0
@@ -688,16 +689,36 @@ theme_type_variation = "FlatPanel"
 unique_name_in_owner = true
 margin_left = 4.0
 margin_top = 4.0
-margin_right = 108.0
+margin_right = 144.0
 margin_bottom = 28.0
+rect_pivot_offset = Vector2( -240, 137 )
 
-[node name="VSeparator" type="VSeparator" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/PanelContainer/Settings"]
+[node name="VSeparator4" type="VSeparator" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/PanelContainer/Settings"]
 margin_right = 4.0
 margin_bottom = 24.0
 
-[node name="View" type="Button" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/PanelContainer/Settings"]
+[node name="AreaSettings" type="Button" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/PanelContainer/Settings"]
+unique_name_in_owner = true
 margin_left = 8.0
 margin_right = 32.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 0 )
+hint_tooltip = "Area Settings"
+size_flags_vertical = 3
+theme_type_variation = "ButtonTransparent"
+icon = ExtResource( 87 )
+icon_align = 1
+expand_icon = true
+script = ExtResource( 24 )
+
+[node name="VSeparator" type="VSeparator" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/PanelContainer/Settings"]
+margin_left = 36.0
+margin_right = 40.0
+margin_bottom = 24.0
+
+[node name="View" type="Button" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/PanelContainer/Settings"]
+margin_left = 44.0
+margin_right = 68.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 24, 0 )
 hint_tooltip = "Settings"
@@ -714,14 +735,14 @@ open_icon = ExtResource( 21 )
 close_icon = ExtResource( 15 )
 
 [node name="VSeparator2" type="VSeparator" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/PanelContainer/Settings"]
-margin_left = 36.0
-margin_right = 40.0
+margin_left = 72.0
+margin_right = 76.0
 margin_bottom = 24.0
 
 [node name="Save" type="Button" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/PanelContainer/Settings"]
 unique_name_in_owner = true
-margin_left = 44.0
-margin_right = 68.0
+margin_left = 80.0
+margin_right = 104.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 24, 0 )
 hint_tooltip = "Save Level"
@@ -734,14 +755,14 @@ expand_icon = true
 script = ExtResource( 24 )
 
 [node name="VSeparator3" type="VSeparator" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/PanelContainer/Settings"]
-margin_left = 72.0
-margin_right = 76.0
+margin_left = 108.0
+margin_right = 112.0
 margin_bottom = 24.0
 
 [node name="Quit" type="Button" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/PanelContainer/Settings"]
 unique_name_in_owner = true
-margin_left = 80.0
-margin_right = 104.0
+margin_left = 116.0
+margin_right = 140.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 24, 0 )
 hint_tooltip = "Quit to Menu"
@@ -755,7 +776,7 @@ script = ExtResource( 24 )
 
 [node name="Padding" type="Control" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer"]
 margin_top = 32.0
-margin_right = 112.0
+margin_right = 148.0
 margin_bottom = 48.0
 size_flags_vertical = 3
 
@@ -769,13 +790,13 @@ theme_type_variation = "FlatPanel2"
 unique_name_in_owner = true
 margin_left = 4.0
 margin_top = 4.0
-margin_right = 108.0
+margin_right = 144.0
 margin_bottom = 221.0
 rect_clip_content = true
 custom_constants/separation = 2
 
 [node name="Grid" type="CheckButton" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown"]
-margin_right = 104.0
+margin_right = 140.0
 margin_bottom = 17.0
 focus_mode = 0
 theme_type_variation = "CheckButtonTransparent"
@@ -786,12 +807,12 @@ script = ExtResource( 45 )
 
 [node name="HSeparator" type="HSeparator" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown"]
 margin_top = 19.0
-margin_right = 104.0
+margin_right = 140.0
 margin_bottom = 23.0
 
 [node name="Layers" type="CheckButton" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown"]
 margin_top = 25.0
-margin_right = 104.0
+margin_right = 140.0
 margin_bottom = 42.0
 focus_mode = 0
 theme_type_variation = "CheckButtonTransparent"
@@ -801,12 +822,12 @@ script = ExtResource( 45 )
 
 [node name="HSeparator2" type="HSeparator" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown"]
 margin_top = 44.0
-margin_right = 104.0
+margin_right = 140.0
 margin_bottom = 48.0
 
 [node name="PixelSnap" type="CheckButton" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown"]
 margin_top = 50.0
-margin_right = 104.0
+margin_right = 140.0
 margin_bottom = 67.0
 focus_mode = 0
 theme_type_variation = "CheckButtonTransparent"
@@ -817,12 +838,12 @@ script = ExtResource( 45 )
 
 [node name="HSeparator6" type="HSeparator" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown"]
 margin_top = 69.0
-margin_right = 104.0
+margin_right = 140.0
 margin_bottom = 73.0
 
 [node name="Layering" type="CheckButton" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown"]
 margin_top = 75.0
-margin_right = 104.0
+margin_right = 140.0
 margin_bottom = 92.0
 theme_type_variation = "CheckButtonTransparent"
 pressed = true
@@ -832,12 +853,12 @@ script = ExtResource( 45 )
 
 [node name="HSeparator3" type="HSeparator" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown"]
 margin_top = 94.0
-margin_right = 104.0
+margin_right = 140.0
 margin_bottom = 98.0
 
 [node name="ResetZoom" type="Button" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown"]
 margin_top = 100.0
-margin_right = 104.0
+margin_right = 140.0
 margin_bottom = 117.0
 focus_mode = 0
 theme_type_variation = "ButtonTransparent"
@@ -847,12 +868,12 @@ script = ExtResource( 24 )
 
 [node name="HSeparator4" type="HSeparator" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown"]
 margin_top = 119.0
-margin_right = 104.0
+margin_right = 140.0
 margin_bottom = 123.0
 
 [node name="Autosaves" type="Button" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown"]
 margin_top = 125.0
-margin_right = 104.0
+margin_right = 140.0
 margin_bottom = 142.0
 focus_mode = 0
 theme_type_variation = "ButtonTransparent"
@@ -862,12 +883,12 @@ script = ExtResource( 24 )
 
 [node name="HSeparator7" type="HSeparator" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown"]
 margin_top = 144.0
-margin_right = 104.0
+margin_right = 140.0
 margin_bottom = 148.0
 
 [node name="Help" type="Button" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown"]
 margin_top = 150.0
-margin_right = 104.0
+margin_right = 140.0
 margin_bottom = 167.0
 focus_mode = 0
 theme_type_variation = "ButtonTransparent"
@@ -877,12 +898,12 @@ script = ExtResource( 24 )
 
 [node name="HSeparator5" type="HSeparator" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown"]
 margin_top = 169.0
-margin_right = 104.0
+margin_right = 140.0
 margin_bottom = 173.0
 
 [node name="Settings" type="Button" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown"]
 margin_top = 175.0
-margin_right = 104.0
+margin_right = 140.0
 margin_bottom = 192.0
 focus_mode = 0
 theme_type_variation = "ButtonTransparent"
@@ -892,12 +913,12 @@ script = ExtResource( 24 )
 
 [node name="HSeparator8" type="HSeparator" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown"]
 margin_top = 194.0
-margin_right = 104.0
+margin_right = 140.0
 margin_bottom = 198.0
 
 [node name="Layer" type="Button" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown"]
 margin_top = 200.0
-margin_right = 104.0
+margin_right = 140.0
 margin_bottom = 217.0
 theme_type_variation = "ButtonTransparent"
 custom_colors/font_color = Color( 1, 1, 1, 1 )
@@ -905,7 +926,7 @@ text = "Linktober Aura"
 script = ExtResource( 24 )
 
 [node name="Padding" type="Control" parent="UI/UIContainer/EditorUI/Top"]
-margin_left = 164.0
+margin_left = 200.0
 margin_right = 602.0
 margin_bottom = 416.0
 mouse_filter = 2
