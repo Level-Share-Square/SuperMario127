@@ -14,7 +14,6 @@ signal rocket_fludd_activated
 
 var coins_collected := 0
 var red_coins_collected := [0, []]
-var max_red_coins := 0
 var shine_shards_collected := [[0, []]]
 var max_shine_shards := 0
 var purple_starbits_collected := [[0, []]]
@@ -50,7 +49,6 @@ func reload():
 	
 
 func reset_counters():
-	max_red_coins = 0
 	max_shine_shards = 0
 	max_purple_starbits = 0
 	teleporters = []
@@ -97,9 +95,9 @@ func collect_coin(amount: int):
 	emit_signal("coin_collected", coins_collected)
 
 
-func collect_red_coin(id: int):
+func collect_red_coin(pos: Vector2):
 	red_coins_collected[0] += 1
-	red_coins_collected[1].append(id)
+	red_coins_collected[1].append(pos)
 	emit_signal("red_coin_collected", red_coins_collected[0])
 
 
@@ -122,7 +120,7 @@ func collect_local_key(id: String):
 		emit_signal("local_key_collected", id)
 
 
-func activate_shine(id: int):
+func activate_shine(id: String):
 	if id in activated_shine_ids:
 		return
 	
@@ -135,10 +133,6 @@ func deactivate_shine(id: int):
 	
 	var index = activated_shine_ids.find(id)
 	activated_shine_ids.remove(index)
-
-func add_red_coin_id() -> int:
-	max_red_coins += 1
-	return max_red_coins
 
 #func set_switch_state(var channel : int, value : bool):
 #	switch_state[channel] = value

@@ -42,18 +42,17 @@ func _ready():
 		var _connect = connect("property_changed", self, "update_property")
 		sprite.visible = true
 	
-	tilemaps = shared.tilemaps_node
-	front_tilemap = tilemaps.get_node(tilemaps.front_tilemap)
+#	tilemaps = shared.tilemaps_node
+#	front_tilemap = tilemaps.get_node(tilemaps.front_tilemap)
 	
 	update_size()
 
 
 func _process(delta):
-	if is_preview or !get_parent().loaded or !is_enabled_and_on_ground():
-		return
+	return
 	
-	if layer != 3:
-		set_property("layer", 3, true)
+#	if layer != 3:
+#		set_property("layer", 3, true)
 	
 	if mode != 1:
 		for body in area.get_overlapping_bodies():

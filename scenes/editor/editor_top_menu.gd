@@ -41,4 +41,4 @@ func on_button_pressed(button: Button):
 		"Settings":
 			editor.screen_manager.screen_change("Options")
 		"Layer":
-			layer_adder.toggle_window()
+			get_node("%AreaSettingsWindow").toggle_window()

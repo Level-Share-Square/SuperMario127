@@ -210,7 +210,7 @@ func _physics_process(_delta: float) -> void:
 		while CurrentLevelData.vars.purple_starbits_collected.size() <= CurrentLevelData.area_id:
 			CurrentLevelData.vars.purple_starbits_collected.append([0, []])
 		
-		if red_coins_activate and !activated and CurrentLevelData.vars.max_red_coins > 0:
+		if red_coins_activate and !activated and CurrentLevelData.level_metadata.collectible_data.red_coin_count > 0:
 			if CurrentLevelData.vars.red_coins_collected[0] == CurrentLevelData.level_metadata.collectible_data.red_coin_count:
 				activate_shine(ActivateAnimations.NORMAL if do_animation else ActivateAnimations.SKIP, false, true)
 		if shine_shards_activate and !activated and CurrentLevelData.vars.max_shine_shards > 0:
@@ -281,8 +281,8 @@ func activate_shine(animation: int, temporary: bool = false, manual_start_cutsce
 	
 	activated = true
 	
-#	if !temporary:
-#		CurrentLevelData.vars.activate_shine(id)
+	if !temporary:
+		CurrentLevelData.vars.activate_shine(mission_uuid)
 	
 	if manual_start_cutscene:
 		camera.start_queue()
