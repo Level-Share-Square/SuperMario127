@@ -10,7 +10,7 @@ func change_property(property: String, new_value, check_matches):
 	var affected_objects: Dictionary = setup_affected_objects(property, new_value)
 	if check_matches and affected_objects["property_matches"] >= objects.size(): return
 	affected_objects.erase("property_matches")
-
+	print("le goat")
 	var action := ChangePropertyBulkAction.new()
 	action.affected_objects = affected_objects
 	action.bulk_store_original_properties()
@@ -32,7 +32,10 @@ func setup_affected_objects(property: String, new_value) -> Dictionary:
 	return affected_objects
 
 func get_property_value(object, property_id: String):
-	return object[property_id]
+	if !object[property_id] is Curve2D:
+		return object[property_id]
+	else:
+		return [object, LevelCodeSerializer.serialize_data(object[property_id])]
 
 func connect_signals(property_editor: PropertyEditor):
 	property_editor.connect("property_edited", self, "change_property")

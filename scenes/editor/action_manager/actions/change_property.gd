@@ -10,6 +10,7 @@ func set_properties(_object: GameObject, _original_properties: Dictionary, _chan
 		if _original_properties.empty():
 			_original_properties[property_name] = _object[property_name]
 		var new_value = _changed_properties[property_name]
+		print("he crazy", property_name)
 		_object.set_property(property_name, new_value, true)
 
 func restore_properties(_object: GameObject, _original_properties: Dictionary, _changed_properties: Dictionary):
