@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=2]
+[gd_scene load_steps=67 format=2]
 
 [ext_resource path="res://scenes/editor/mode_switcher/pipe_shine.tres" type="Texture" id=1]
 [ext_resource path="res://scenes/editor/mode_switcher/pipe_stylebox.tres" type="StyleBox" id=2]
@@ -12,6 +12,27 @@
 [ext_resource path="res://scenes/menu/button_scripts/button_sound.gd" type="Script" id=10]
 [ext_resource path="res://scenes/oldeditor/sounds/hover.wav" type="AudioStream" id=11]
 [ext_resource path="res://scenes/editor/mode_switcher/mode_switcher.gd" type="Script" id=12]
+[ext_resource path="res://scenes/oldmenu/shine_select_screen/letsa go/Luigi2.wav" type="AudioStream" id=13]
+[ext_resource path="res://scenes/oldmenu/shine_select_screen/letsa go/Mario1.wav" type="AudioStream" id=14]
+[ext_resource path="res://scenes/oldmenu/shine_select_screen/LetsaGo.gd" type="Script" id=15]
+[ext_resource path="res://scenes/oldmenu/shine_select_screen/letsa go/Mario2.wav" type="AudioStream" id=16]
+[ext_resource path="res://scenes/oldmenu/shine_select_screen/letsa go/Luigi1.wav" type="AudioStream" id=17]
+[ext_resource path="res://scenes/actors/objects/pipe/fast_sound.wav" type="AudioStream" id=18]
+[ext_resource path="res://scenes/editor/mode_switcher/pipe_gradient_red.tres" type="Gradient" id=19]
+[ext_resource path="res://scenes/editor/mode_switcher/pipe_flash_gradient_green.tres" type="Gradient" id=20]
+[ext_resource path="res://scenes/editor/mode_switcher/pipe_gradient_green.tres" type="Gradient" id=21]
+[ext_resource path="res://scenes/editor/mode_switcher/pipe_flash_gradient_red.tres" type="Gradient" id=22]
+[ext_resource path="res://scenes/editor/mode_switcher/pipe_flash_gradient_tex.tres" type="Texture" id=23]
+[ext_resource path="res://scenes/editor/mode_switcher/pipe_gradient_tex.tres" type="Texture" id=24]
+[ext_resource path="res://scenes/editor/mode_switcher/mario_copy.gd" type="Script" id=25]
+
+[sub_resource type="Gradient" id=35]
+offsets = PoolRealArray( -0.1, 0 )
+colors = PoolColorArray( 0, 0, 0, 1, 0, 0, 0, 0 )
+
+[sub_resource type="GradientTexture2D" id=36]
+gradient = SubResource( 35 )
+fill_to = Vector2( 0, 1 )
 
 [sub_resource type="CanvasItemMaterial" id=4]
 blend_mode = 1
@@ -164,17 +185,518 @@ animations = [ {
 "speed": 9.0
 } ]
 
+[sub_resource type="Animation" id=37]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("TransitionRect:texture:gradient:offsets")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ PoolRealArray( -0.1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("TransitionRect:flip_v")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("TransitionRect:flip_h")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=38]
+resource_name = "transition_in"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("TransitionRect:texture:gradient:offsets")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 0.5, 1 ),
+"update": 0,
+"values": [ PoolRealArray( -0.1, 0 ), PoolRealArray( 1, 1.1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("TransitionRect:flip_v")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("TransitionRect:flip_h")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=39]
+resource_name = "transition_out"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("TransitionRect:texture:gradient:offsets")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ PoolRealArray( 1, 1.1 ), PoolRealArray( -0.1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("TransitionRect:flip_v")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("TransitionRect:flip_h")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=40]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("RootContainer/VBoxContainer/BottomMargin/BottomOutline/OutlineMargin/BottomInner:rect_min_size:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 24.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("RootContainer/VBoxContainer/TopOutline/OutlineMargin/VBoxContainer/TopInner/MarioFront:show_behind_parent")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("RootContainer/VBoxContainer/TopOutline/OutlineMargin/VBoxContainer/TopInner/MarioFront:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 2, 2 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("RootContainer/VBoxContainer/TopOutline/OutlineMargin/VBoxContainer/TopInner/MarioFront:animation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "idle" ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("RootContainer/VBoxContainer/TopOutline/OutlineMargin/VBoxContainer/TopInner/MarioFront:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 34, 24 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("RootContainer/VBoxContainer/BottomMargin/BottomOutline/OutlineMargin/BottomInner:rect_min_size")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 24 ) ]
+}
+
+[sub_resource type="Animation" id=43]
+resource_name = "exit"
+tracks/0/type = "value"
+tracks/0/path = NodePath("RootContainer/VBoxContainer/TopOutline/OutlineMargin/VBoxContainer/TopInner/MarioFront:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "exit" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("RootContainer/VBoxContainer/TopOutline/OutlineMargin/VBoxContainer/TopInner/MarioFront:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.1, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0, 10 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("RootContainer/VBoxContainer/TopOutline/OutlineMargin/VBoxContainer/TopInner/MarioFront:position:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.4, 0.8 ),
+"transitions": PoolRealArray( 0.5, -2, 1 ),
+"update": 0,
+"values": [ 24.0, -64.0, -22.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("RootContainer/VBoxContainer/TopOutline/OutlineMargin/VBoxContainer/TopInner/MarioFront:show_behind_parent")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("RootContainer/VBoxContainer/TopOutline/OutlineMargin/VBoxContainer/TopInner/MarioFront:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("RootContainer/VBoxContainer/TopOutline/OutlineMargin/VBoxContainer/TopInner/MarioFront:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 0.4, 2.6 ),
+"update": 0,
+"values": [ Vector2( 1.5, 1.5 ), Vector2( 2, 2 ) ]
+}
+tracks/6/type = "audio"
+tracks/6/path = NodePath("PipeSound")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 18 )
+} ],
+"times": PoolRealArray( 0 )
+}
+
+[sub_resource type="Animation" id=41]
+resource_name = "hover"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("RootContainer/VBoxContainer/BottomMargin/BottomOutline/OutlineMargin/BottomInner:rect_min_size:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 0.5, 1 ),
+"update": 0,
+"values": [ 24.0, 32.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("RootContainer/VBoxContainer/TopOutline/OutlineMargin/VBoxContainer/TopInner/MarioFront:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 0.5, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0.501961 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("RootContainer/VBoxContainer/TopOutline/OutlineMargin/VBoxContainer/TopInner/MarioFront:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.25, 0.3, 0.301 ),
+"transitions": PoolRealArray( 0.5, 2, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 34, 24 ), Vector2( 34, -26 ), Vector2( 34, -22 ), Vector2( 34, -22 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("RootContainer/VBoxContainer/TopOutline/OutlineMargin/VBoxContainer/TopInner/MarioFront:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ 9, 10 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("RootContainer/VBoxContainer/TopOutline/OutlineMargin/VBoxContainer/TopInner/MarioFront:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("RootContainer/VBoxContainer/TopOutline/OutlineMargin/VBoxContainer/TopInner/MarioFront:show_behind_parent")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ true, false ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("RootContainer/VBoxContainer/TopOutline/OutlineMargin/VBoxContainer/TopInner/MarioFront:animation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "exit" ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("RootContainer/VBoxContainer/TopOutline/OutlineMargin/VBoxContainer/TopInner/MarioFront:scale")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 2, 2 ) ]
+}
+
+[sub_resource type="Animation" id=44]
+resource_name = "hover_marioless"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("RootContainer/VBoxContainer/BottomMargin/BottomOutline/OutlineMargin/BottomInner:rect_min_size:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 0.5, 1 ),
+"update": 0,
+"values": [ 24.0, 32.0 ]
+}
+
+[sub_resource type="Animation" id=42]
+resource_name = "press"
+length = 0.75
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("RootContainer/VBoxContainer/TopOutline/OutlineMargin/VBoxContainer/TopInner/MarioFront:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ "idle", "enter" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("RootContainer/VBoxContainer/TopOutline/OutlineMargin/VBoxContainer/TopInner/MarioFront:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0, 0, 1 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("RootContainer/VBoxContainer/TopOutline/OutlineMargin/VBoxContainer/TopInner/MarioFront:position:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.4, 0.75 ),
+"transitions": PoolRealArray( 0.4, 2, 1 ),
+"update": 0,
+"values": [ -22.0, -72.0, 24.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("RootContainer/VBoxContainer/TopOutline/OutlineMargin/VBoxContainer/TopInner/MarioFront:show_behind_parent")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("RootContainer/VBoxContainer/TopOutline/OutlineMargin/VBoxContainer/TopInner/MarioFront:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("RootContainer/VBoxContainer/TopOutline/OutlineMargin/VBoxContainer/TopInner/MarioFront:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.5, 0.75 ),
+"transitions": PoolRealArray( 1, 2, 2 ),
+"update": 0,
+"values": [ Vector2( 2, 2 ), Vector2( 2, 2 ), Vector2( 1.5, 1.5 ) ]
+}
+tracks/6/type = "method"
+tracks/6/path = NodePath("PipeSound")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0.6 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ 0.0 ],
+"method": "play"
+} ]
+}
+
 [node name="ModeSwitcher" type="CanvasLayer"]
 layer = 128
 script = ExtResource( 12 )
-bottom_height = 24.0
-bottom_height_hover = 28.0
-hover_duration = 0.1
-mario_idle_height = -22.0
-mario_hidden_height = 26.0
-mario_enter_height = -56.0
-mario_enter_jump_time = 0.4
-mario_enter_fall_time = 0.4
+grid_color_green = Color( 0.317647, 0.898039, 0.282353, 0.109804 )
+grid_color_red = Color( 0.901961, 0.278431, 0.764706, 0.109804 )
+pipe_gradient_tex_base = ExtResource( 24 )
+pipe_gradient_green = ExtResource( 21 )
+pipe_gradient_red = ExtResource( 19 )
+pipe_flash_gradient_tex_base = ExtResource( 23 )
+pipe_flash_gradient_green = ExtResource( 20 )
+pipe_flash_gradient_red = ExtResource( 22 )
+color_change_duration = 0.5
+
+[node name="TransitionRect" type="TextureRect" parent="."]
+unique_name_in_owner = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+texture = SubResource( 36 )
+expand = true
 
 [node name="RootContainer" type="MarginContainer" parent="."]
 unique_name_in_owner = true
@@ -227,7 +749,8 @@ rect_min_size = Vector2( 0, 24 )
 size_flags_vertical = 3
 custom_styles/panel = ExtResource( 2 )
 
-[node name="GridOverlay" type="TextureRect" parent="RootContainer/VBoxContainer/TopOutline/OutlineMargin/VBoxContainer/TopInner"]
+[node name="GridOverlay1" type="TextureRect" parent="RootContainer/VBoxContainer/TopOutline/OutlineMargin/VBoxContainer/TopInner"]
+unique_name_in_owner = true
 modulate = Color( 0.317647, 0.898039, 0.282353, 0.109804 )
 material = ExtResource( 6 )
 margin_right = 64.0
@@ -240,7 +763,7 @@ stretch_mode = 2
 material = SubResource( 4 )
 margin_right = 64.0
 margin_bottom = 24.0
-texture = ExtResource( 1 )
+texture = ExtResource( 23 )
 expand = true
 
 [node name="Shine2" type="TextureRect" parent="RootContainer/VBoxContainer/TopOutline/OutlineMargin/VBoxContainer/TopInner"]
@@ -278,24 +801,21 @@ stretch_mode = 6
 
 [node name="MarioFront" type="AnimatedSprite" parent="RootContainer/VBoxContainer/TopOutline/OutlineMargin/VBoxContainer/TopInner"]
 unique_name_in_owner = true
-modulate = Color( 1, 1, 1, 0.501961 )
-position = Vector2( 34, -22 )
+show_behind_parent = true
+position = Vector2( 34, 24 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 19 )
 animation = "idle"
-playing = true
 
 [node name="MarioBack" type="AnimatedSprite" parent="RootContainer/VBoxContainer/TopOutline/OutlineMargin/VBoxContainer/TopInner"]
-unique_name_in_owner = true
-modulate = Color( 1, 1, 1, 0.501961 )
 show_behind_parent = true
-position = Vector2( 34, -22 )
-scale = Vector2( 2, 2 )
+position = Vector2( 34, -40.6531 )
+scale = Vector2( 1.92, 1.92 )
 frames = SubResource( 34 )
-animation = "idle"
-playing = true
+animation = "enter"
+script = ExtResource( 25 )
 
-[node name="TopOutline" type="PanelContainer" parent="RootContainer/VBoxContainer/TopOutline/OutlineMargin/VBoxContainer"]
+[node name="MiddleOutline" type="PanelContainer" parent="RootContainer/VBoxContainer/TopOutline/OutlineMargin/VBoxContainer"]
 self_modulate = Color( 0.309804, 0.321569, 0.490196, 1 )
 margin_top = 24.0
 margin_right = 64.0
@@ -335,7 +855,8 @@ margin_bottom = 24.0
 rect_min_size = Vector2( 0, 24 )
 custom_styles/panel = ExtResource( 2 )
 
-[node name="GridOverlay" type="TextureRect" parent="RootContainer/VBoxContainer/BottomMargin/BottomOutline/OutlineMargin/BottomInner"]
+[node name="GridOverlay2" type="TextureRect" parent="RootContainer/VBoxContainer/BottomMargin/BottomOutline/OutlineMargin/BottomInner"]
+unique_name_in_owner = true
 modulate = Color( 0.317647, 0.898039, 0.282353, 0.109804 )
 material = ExtResource( 6 )
 margin_right = 52.0
@@ -360,6 +881,7 @@ texture = ExtResource( 4 )
 expand = true
 
 [node name="Button" type="Button" parent="RootContainer"]
+unique_name_in_owner = true
 margin_left = 680.0
 margin_top = 376.0
 margin_right = 752.0
@@ -370,6 +892,20 @@ size_flags_horizontal = 8
 size_flags_vertical = 8
 flat = true
 script = ExtResource( 10 )
+
+[node name="TransitionPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+anims/RESET = SubResource( 37 )
+anims/transition_in = SubResource( 38 )
+anims/transition_out = SubResource( 39 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+anims/RESET = SubResource( 40 )
+anims/exit = SubResource( 43 )
+anims/hover = SubResource( 41 )
+anims/hover_marioless = SubResource( 44 )
+anims/press = SubResource( 42 )
 
 [node name="HoverSound" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
@@ -382,6 +918,22 @@ unique_name_in_owner = true
 stream = ExtResource( 9 )
 volume_db = -10.0
 bus = "Sounds"
+
+[node name="PipeSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource( 18 )
+volume_db = -5.0
+bus = "Sounds"
+
+[node name="LetsaGo" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource( 15 )
+mario_voices = [ ExtResource( 14 ), ExtResource( 16 ) ]
+luigi_voices = [ ExtResource( 17 ), ExtResource( 13 ) ]
+
+[node name="LetsaGoPlayer" type="AudioStreamPlayer" parent="LetsaGo"]
+volume_db = -6.0
+bus = "Voices"
 
 [node name="Tween" type="Tween" parent="."]
 unique_name_in_owner = true

@@ -1,145 +1,145 @@
 extends CanvasLayer
 
 
-const HOVER_TRANS: int = Tween.TRANS_QUAD
-const HOVER_EASE: int = Tween.EASE_OUT
+const COLOR_TRANS: int = Tween.TRANS_CIRC
+const COLOR_EASE: int = Tween.EASE_IN
+const COLOR_DELAY: float = 0.5
 
-onready var root_container: MarginContainer = $"%RootContainer"
+onready var button: Button = $"%Button"
 onready var top_inner: PanelContainer = $"%TopInner"
 onready var bottom_inner: PanelContainer = $"%BottomInner"
+onready var grid_overlay_1 = $"%GridOverlay1"
+onready var grid_overlay_2 = $"%GridOverlay2"
 onready var mario_front: AnimatedSprite = $"%MarioFront"
-onready var mario_back: AnimatedSprite = $"%MarioBack"
+onready var pipe_sound: AudioStreamPlayer = $"%PipeSound"
+onready var letsa_go_sfx = $"%LetsaGo"
 
 onready var tween: Tween = $"%Tween"
-onready var tween_press: Tween = $"%TweenPress"
+onready var transition_player = $"%TransitionPlayer"
+onready var animation_player = $"%AnimationPlayer"
+onready var transition_rect = $"%TransitionRect"
 
-export var bottom_height: float
-export var bottom_height_hover: float
-export var hover_duration: float
+export var grid_color_green: Color
+export var grid_color_red: Color
+export var pipe_gradient_tex_base: GradientTexture2D
+export var pipe_gradient_green: Gradient
+export var pipe_gradient_red: Gradient
+export var pipe_flash_gradient_tex_base: GradientTexture2D
+export var pipe_flash_gradient_green: Gradient
+export var pipe_flash_gradient_red: Gradient
 
-export var mario_idle_height: float
-export var mario_hidden_height: float
-export var mario_enter_height: float
-export var mario_exit_height: float
+export var color_change_duration: float
 
-export var mario_enter_jump_time: float
-export var mario_enter_fall_time: float
+var is_hovered: bool
+var is_switching: bool
+var is_transitioning_to_red: bool
+## TEMP
+var TEMP_MODE_SWITCHED: bool = false
 
 
 func hovered() -> void:
-	tween.stop_all()
-	tween.interpolate_property(
-		bottom_inner,
-		"rect_min_size:y",
-		bottom_inner.rect_min_size.y,
-		bottom_height_hover,
-		hover_duration,
-		HOVER_TRANS,
-		HOVER_EASE
-	)
-	tween.interpolate_property(
-		mario_front,
-		"modulate:a",
-		mario_front.modulate.a,
-		1.0,
-		hover_duration,
-		HOVER_TRANS,
-		HOVER_EASE
-	)
-	tween.interpolate_property(
-		mario_back,
-		"modulate:a",
-		mario_back.modulate.a,
-		1.0,
-		hover_duration,
-		HOVER_TRANS,
-		HOVER_EASE
-	)
-	tween.start()
+	is_hovered = true
+	if is_switching: return
+	animation_player.play("hover_marioless" if TEMP_MODE_SWITCHED else "hover")
 
 
 func unhovered() -> void:
-	tween.stop_all()
-	tween.interpolate_property(
-		bottom_inner,
-		"rect_min_size:y",
-		bottom_inner.rect_min_size.y,
-		bottom_height,
-		hover_duration,
-		HOVER_TRANS,
-		HOVER_EASE
-	)
-	tween.interpolate_property(
-		mario_front,
-		"modulate:a",
-		mario_front.modulate.a,
-		0.5,
-		hover_duration,
-		HOVER_TRANS,
-		HOVER_EASE
-	)
-	tween.interpolate_property(
-		mario_back,
-		"modulate:a",
-		mario_back.modulate.a,
-		0.5,
-		hover_duration,
-		HOVER_TRANS,
-		HOVER_EASE
-	)
-	tween.start()
+	is_hovered = false
+	if is_switching: return
+	animation_player.play_backwards("hover_marioless" if TEMP_MODE_SWITCHED else "hover")
 
 
 func pressed() -> void:
-	root_container.mouse_filter = Control.MOUSE_FILTER_STOP
+	transition_rect.mouse_filter = Control.MOUSE_FILTER_STOP
+	is_switching = true
+	button.disabled = true
 	
-	mario_front.show_behind_parent = false
-	mario_front.play("enter")
-	mario_back.play("enter")
+	if not TEMP_MODE_SWITCHED:
+		letsa_go_sfx.play()
 	
-	tween_press.stop_all()
-	tween_press.interpolate_property(
-		mario_front,
-		"position:y",
-		mario_front.position.y,
-		mario_enter_height,
-		mario_enter_jump_time,
-		Tween.TRANS_QUART,
-		Tween.EASE_OUT
+	# pipe color tweens
+	is_transitioning_to_red = not TEMP_MODE_SWITCHED
+	tween.interpolate_property(
+		grid_overlay_1,
+		"modulate",
+		grid_overlay_1.modulate,
+		grid_color_red if is_transitioning_to_red else grid_color_green,
+		color_change_duration,
+		COLOR_TRANS,
+		COLOR_EASE,
+		COLOR_DELAY
 	)
-	tween_press.interpolate_property(
-		mario_back,
-		"position:y",
-		mario_back.position.y,
-		mario_enter_height,
-		mario_enter_jump_time,
-		Tween.TRANS_QUART,
-		Tween.EASE_OUT
+	tween.interpolate_property(
+		grid_overlay_2,
+		"modulate",
+		grid_overlay_2.modulate,
+		grid_color_red if is_transitioning_to_red else grid_color_green,
+		color_change_duration,
+		COLOR_TRANS,
+		COLOR_EASE,
+		COLOR_DELAY
 	)
-	tween_press.start()
-	
-	yield(tween_press, "tween_all_completed")
-	
-	mario_front.show_behind_parent = true
-	tween_press.interpolate_property(
-		mario_front,
-		"position:y",
-		mario_front.position.y,
-		mario_hidden_height,
-		mario_enter_fall_time,
-		Tween.TRANS_QUART,
-		Tween.EASE_IN
+	tween.interpolate_method(
+		self,
+		"interpolate_gradient",
+		0.0,
+		1.0,
+		color_change_duration,
+		COLOR_TRANS,
+		COLOR_EASE,
+		COLOR_DELAY
 	)
-	tween_press.interpolate_property(
-		mario_back,
-		"position:y",
-		mario_back.position.y,
-		mario_hidden_height,
-		mario_enter_fall_time,
-		Tween.TRANS_QUART,
-		Tween.EASE_IN
-	)
-	tween_press.start()
+	tween.start()
 	
-	yield(tween_press, "tween_all_completed")
-	root_container.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	if not TEMP_MODE_SWITCHED:
+		animation_player.play("press")
+		yield(animation_player, "animation_finished")
+		if not is_hovered:
+			animation_player.play_backwards("hover_marioless")
+	
+	transition_player.play("transition_in")
+	yield(transition_player, "animation_finished")
+	
+	if TEMP_MODE_SWITCHED:
+		animation_player.play("exit")
+		yield(animation_player, "animation_finished")
+		if not is_hovered:
+			animation_player.play_backwards("hover")
+	
+	TEMP_MODE_SWITCHED = not TEMP_MODE_SWITCHED
+	transition_player.play("transition_out")
+	yield(transition_player, "animation_finished")
+	
+	transition_rect.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	is_switching = false
+	button.disabled = false
+
+
+func interpolate_gradient(weight: float) -> void:
+	var gradient_tex_bases: Array = [
+		pipe_gradient_tex_base,
+		pipe_flash_gradient_tex_base
+	]
+	var gradient_origins: Array = [
+		pipe_gradient_red,
+		pipe_flash_gradient_red
+	]
+	var gradient_targets: Array = [
+		pipe_gradient_green,
+		pipe_flash_gradient_green
+	]
+	
+	if is_transitioning_to_red:
+		var swap: Array = gradient_targets
+		gradient_targets = gradient_origins
+		gradient_origins = swap
+	
+	for gradient_index in range(gradient_tex_bases.size()):
+		var gradient_origin: Gradient = gradient_origins[gradient_index]
+		var gradient_target: Gradient = gradient_targets[gradient_index]
+		for color_index in range(gradient_origin.colors.size()):
+			var color_a: Color = gradient_origin.colors[color_index]
+			var color_b: Color = gradient_target.colors[color_index]
+			var blended_color: Color = color_a.linear_interpolate(color_b, weight)
+			gradient_tex_bases[gradient_index].gradient.set_color(color_index, blended_color)
+			

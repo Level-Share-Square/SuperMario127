@@ -1,4 +1,4 @@
-extends AnimatedSprite
+extends Sprite
 
 onready var entrance_node = get_node("../")
 

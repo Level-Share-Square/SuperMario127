@@ -62,13 +62,6 @@ func start_level():
 	
 	transition_audio.play()
 	letsa_go_sfx.play()
-	if Singleton.PlayerSettings.number_of_players > 1:
-		# quick wait before playing P2's voice clip, to make it sound more natural
-		yield(get_tree().create_timer(0.035), "timeout")
-		
-		# we set the array index so the same voice is played for both, and it syncs
-		letsa_go_sfx_2.array_index = letsa_go_sfx.array_index
-		letsa_go_sfx_2.play()
 	
 	get_tree().call_group("shine_sprites", "start_pressed_animation")
 	
