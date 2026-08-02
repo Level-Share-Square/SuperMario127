@@ -9,8 +9,9 @@ var new_value
 var old_value
 
 func change_property(value) -> void:
-	old_value = shared.get_layer_at(layer_index).layer_data.layer_metadata[property]
-	shared.edit_layer(layer_index, property, value)
+	var metadata: LayerMetadata = shared.get_layer_at(layer_index).layer_data.layer_metadata
+	old_value = metadata[property]
+	shared.edit_layer(metadata.layer_uuid, property, value)
 	
 
 func _do():

@@ -3,7 +3,7 @@ extends Action
 
 
 var shared: LevelShared
-var layer: int
+var layer: String
 var object: GameObject
 var object_data: ObjectData
 var object_index: int

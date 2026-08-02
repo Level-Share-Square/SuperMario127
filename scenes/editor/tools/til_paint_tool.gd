@@ -12,7 +12,7 @@ func _click_left(_event: InputEvent, _world_pos: Vector2) -> void:
 	
 	if Input.is_action_just_pressed("place"):
 		last_mouse_tile = get_mouse_tile_pos()
-		editor.tile_buffer.modulate = shared.layers[editor.layer].layer_tint
+		editor.tile_buffer.modulate = shared.layer_dictionary[editor.layer].layer_tint
 		draw_tile(last_mouse_tile)
 		mouse_input = 0
 

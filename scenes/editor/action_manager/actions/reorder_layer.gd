@@ -16,7 +16,7 @@ func move_layers():
 	var end_pos: int = max(layer_index, final_layer_index)
 	
 	for i in range(start_pos, end_pos + 1):
-		shared.edit_layer(i, "order", i)
+		shared.edit_layer(shared.get_layer_at(i).layer_data.layer_metadata.layer_uuid, "order", i)
 
 	swap_indices()
 

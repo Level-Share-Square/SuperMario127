@@ -8,8 +8,8 @@ const EDITOR_PATH = preload("res://scenes/editor/editor.tscn")
 
 func _ready():
 #	test_level_code_validation()
-#	convert_debug_level()
-	convert_dev_levels()
+	convert_debug_level()
+#	convert_dev_levels()
 	
 #	instance_debug_level()
 	

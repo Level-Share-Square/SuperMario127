@@ -13,7 +13,7 @@ var pixel_lock = true
 var object_layering = true
 var show_layers = false
 
-var layer: int = 0
+var layer: String = ""
 
 var hovered_objects: Dictionary = {}
 var selected_objects: Array = []
@@ -75,26 +75,6 @@ func _ready():
 	item_actions.verify_clipboard()
 	item_preview.update_item(selected_item, selected_item.palette, selected_item is PlaceableObject)
 
-
-func object_hovered(object):
-	if tool_manager.current_tool.tool_type == EditorTool.Type.TileTool:
-		return
-	if get_shared_node().layers.find(object.level_layer_ref.get_ref()) 	!= layer:
-		return
-	
-	# Look you come up with a better object ID system when you have none
-	hovered_objects.get_or_add(object.name, object)
-	object.hovered = true
-	object.modulate_set()
-
-
-func object_unhovered(object):
-	if not object in hovered_objects.values():
-		return
-	
-	hovered_objects.erase(object.name)
-	object.hovered = false
-	object.modulate_set()
 		
 
 func open_object_properties(selected_objects):
@@ -118,6 +98,6 @@ func get_shared_node() -> LevelShared:
 	
 func get_hovered_objects():
 	hovered_objects.clear()
-	for object in get_shared_node().get_layer_at(layer).object_manager.get_children():
+	for object in get_shared_node().get_layer(layer).object_manager.get_children():
 		if object.is_object_hovered():
 			hovered_objects.get_or_add(object.name, object)

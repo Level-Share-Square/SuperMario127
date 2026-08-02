@@ -11,7 +11,7 @@ func add_layer(layer_data: LayerData, layer_index: int = -1, ground: bool = true
 			TileData.new(),
 			[]
 		)
-		layer_data.layer_metadata.order = shared.layers.back().layer_data.layer_metadata.order + 1
+		layer_data.layer_metadata.order = shared.get_layer(shared.layers.back()).layer_data.layer_metadata.order + 1
 		layer_data.layer_metadata.is_ground = ground
 		layer_data.layer_metadata.layer_name = layer_data.layer_metadata.layer_name % (shared.layers.size() + 1)
 	
@@ -19,4 +19,4 @@ func add_layer(layer_data: LayerData, layer_index: int = -1, ground: bool = true
 	layer = shared.add_layer(layer_data, true, layer_index)
 
 func remove_layer():
-	shared.remove_layer(shared.get_layer_index(layer), true)
+	shared.remove_layer(layer.layer_data.layer_metadata.layer_uuid, true)

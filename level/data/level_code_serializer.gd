@@ -168,6 +168,7 @@ static func serialize_layer(layer: LayerData) -> String:
 			layer.layer_metadata.layer_opacity,
 			layer.layer_metadata.layer_name,
 			layer.layer_metadata.is_origin,
+			layer.layer_metadata.layer_uuid,
 		]
 	)
 	

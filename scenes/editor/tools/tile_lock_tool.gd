@@ -17,7 +17,7 @@ func place_object(pos: Vector2):
 	object_preview.texture = editor.selected_item.previews[editor.selected_item.palette]
 	object_preview.rect_position = pos - object_preview.texture.get_size()/2
 	object_preview.modulate.a = 0.5
-	editor.object_buffer.modulate = shared.layers[editor.layer].layer_tint
+	editor.object_buffer.modulate = shared.layer_dictionary[editor.layer].layer_tint
 	editor.object_buffer.add_child(object_preview)
 
 func _unhandled_input(event):

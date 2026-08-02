@@ -25,7 +25,7 @@ func reset_bounds():
 	pivot.visible = false
 
 func on_mouse_released():
-	select_objects(shared.get_layer_at(editor.layer).find_objects_in_rect(fill_rect))
+	select_objects(shared.get_layer(editor.layer).find_objects_in_rect(fill_rect))
 	if editor.selected_objects.empty():
 		reset_bounds()
 		return
@@ -59,7 +59,7 @@ func fit_to_bounding_rectangle():
 		reset_bounds()
 		return
 	
-	var layer = shared.get_layer_at(editor.layer)
+	var layer = shared.get_layer(editor.layer)
 	
 	var drag_rect = fill_rect
 	

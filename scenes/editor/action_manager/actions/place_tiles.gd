@@ -4,7 +4,7 @@ extends Action
 var shared: LevelShared
 
 var do_tiles: PoolVector2Array
-var layer: int
+var layer: String
 var tileset_id: int
 var tile_id: int
 var palette: int
@@ -12,13 +12,13 @@ var palette: int
 
 class ActionTile:
 	var pos: Vector2
-	var lay: int
+	var lay: String
 	var tileset: int
 	var tile: int
 	var pal: int
 	
 	
-	func _init(position: Vector2, layer: int, tileset_id: int, tile_id: int, palette: int):
+	func _init(position: Vector2, layer: String, tileset_id: int, tile_id: int, palette: int):
 		pos = position
 		lay = layer
 		tileset = tileset_id

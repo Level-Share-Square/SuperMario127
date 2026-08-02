@@ -26,11 +26,12 @@ func _ready():
 	editor.action_manager.connect("action", self, "update_layers")
 
 func select_layer(index: int, toggle_dropdown: bool = true) -> void:
-	var layer_metadata: LayerMetadata = shared.get_layer_at(index).layer_data.layer_metadata
+	var layer = shared.get_layer_at(index)
+	var layer_metadata: LayerMetadata = layer.layer_data.layer_metadata
 	layer_picker.text = layer_metadata.layer_name
 	
 	layer_picker.get_node("LayerColor").modulate = EditorLayerManager.get_band_color(layer_metadata.order, shared.origin.layer_data.layer_metadata.order)
-	editor.layer = index
+	editor.layer = shared.layer_dictionary.find_key(layer)
 	
 	# to close the dropdown
 	if toggle_dropdown:
@@ -39,7 +40,7 @@ func select_layer(index: int, toggle_dropdown: bool = true) -> void:
 func add_layer(layer_data: LayerData) -> void:
 	var layer_info: LayerInfo = LAYER_INFO_SCENE.instance()
 	layer_info.shared = shared
-	layer_info.load_layer(layer_data, layer_data.layer_metadata.order == editor.layer)
+	layer_info.load_layer(layer_data, layer_data.layer_metadata.is_origin)
 	layer_info.connect("layer_selected", self, "select_layer")
 	layers.add_child(layer_info)
 
@@ -51,7 +52,7 @@ func update_layers() -> void:
 		layer.queue_free()
 		
 	for layer in shared.layers:
-		var layer_data = layer.layer_data
+		var layer_data = shared.get_layer(layer).layer_data
 		add_layer(layer_data)
 
 func new_layer(ground: bool = true) -> void:

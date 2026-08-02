@@ -3,6 +3,7 @@ extends LevelDataResource
 
 
 var layer_name: String = "Layer %s"
+var layer_uuid: String = ""
 # "distance" from the g layer, affects scroll speed
 var parallax_distance: float = 0
 var parallax_offset: Vector2 = Vector2.ZERO
@@ -33,7 +34,8 @@ func _init(
 		set_is_origin: bool = false,
 		set_activated_mission_ids: PoolIntArray = PoolIntArray(),
 		set_disabled: bool = false,
-		set_opacity: float = 1.0
+		set_opacity: float = 1.0,
+		set_layer_uuid = uuid_util.v4()
 	):
 	parallax_distance = set_parallax_distance
 	autoset_tint = set_autoset_tint
@@ -45,3 +47,4 @@ func _init(
 	layer_opacity = set_opacity
 	layer_name = set_name
 	is_origin = set_is_origin
+	layer_uuid = set_layer_uuid

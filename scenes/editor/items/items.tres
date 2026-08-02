@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=245 format=2]
+[gd_resource type="Resource" load_steps=246 format=2]
 
 [ext_resource path="res://scenes/editor/items/placeable_items.gd" type="Script" id=1]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/blue_coin.tres" type="Resource" id=2]
@@ -244,6 +244,7 @@
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/boo_block_slope_left.tres" type="Resource" id=242]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/boo_block_slope_right.tres" type="Resource" id=243]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/truss.tres" type="Resource" id=244]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/layer_changer.tres" type="Resource" id=245]
 
 [resource]
 script = ExtResource( 1 )
@@ -314,6 +315,7 @@ placeable_items = {
 "obj_large_snow_tree": ExtResource( 58 ),
 "obj_launch_star": ExtResource( 104 ),
 "obj_lava": ExtResource( 72 ),
+"obj_layer_changer": ExtResource( 245 ),
 "obj_log": ExtResource( 15 ),
 "obj_mario": ExtResource( 7 ),
 "obj_metal_breakable_block": ExtResource( 41 ),

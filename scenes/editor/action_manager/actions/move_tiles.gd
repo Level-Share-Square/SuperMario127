@@ -5,7 +5,7 @@ var shared: LevelShared
 
 var map_state_old: Dictionary = {}
 var map_state_new: Dictionary = {}
-var layer: int
+var layer: String
 
 func move_tiles(map_state):
 	for pos in map_state:

@@ -40,7 +40,7 @@ func on_selection_inside_clicked():
 	
 	for position in editor.selected_tiles:
 		shared.set_tile(position.x, position.y, editor.layer, 0, 0, 0)
-	editor.tile_buffer.modulate = shared.layers[editor.layer].layer_tint
+	editor.tile_buffer.modulate = shared.layer_dictionary[editor.layer].layer_tint
 	
 	while true:
 		var next_pos = yield(self, "mouse_motion")
@@ -90,7 +90,7 @@ func on_undo():
 func on_copy():
 	if editor.tool_manager.current_tool == self:
 		var tile_data := TileData.new()
-		var layer_chunks = CurrentLevelData.current_area.layers[editor.layer].tile_data.chunks
+		var layer_chunks = CurrentLevelData.current_area.layers[shared.layers.find(editor.layer)].tile_data.chunks
 		for position in editor.selected_tiles:
 			var chunk_pos = tile_data.get_chunk_coords(position)
 			
@@ -130,7 +130,7 @@ func on_paste():
 		selection_box.rect_global_position = fill_rect.position
 		selection_box.rect_size = fill_rect.size
 		selection_box.show()
-		editor.tile_buffer.modulate = shared.layers[editor.layer].layer_tint
+		editor.tile_buffer.modulate = shared.layer_dictionary[editor.layer].layer_tint
 		set_buffer()
 
 func on_delete():

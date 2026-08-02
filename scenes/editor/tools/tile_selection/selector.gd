@@ -92,7 +92,7 @@ func _process(delta):
 func box_expansion():
 	var drag_rect := Rect2(start_pos, get_adjusted_mouse_position() - start_pos).abs()
 	
-	var layer = shared.get_layer_at(editor.layer)
+	var layer = shared.get_layer(editor.layer)
 	
 	fill_rect = drag_rect
 	
