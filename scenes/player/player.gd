@@ -64,6 +64,7 @@ func _ready():
 		timer_manager.add_set_timer("area_timer", CurrentLevelData.current_area.header.timer, "death", true, true)
 #		vignette.visible = true
 	
+	get_node(shared).connect("loaded_layers", self, "assign_layer_ref")
 	load_in()
 	
 	Singleton.Music.character = get_node(character)
@@ -83,10 +84,12 @@ func _ready():
 	
 	Singleton.MiscShared.is_play_reload = true
 	get_tree().paused = false
-	
-	yield(get_tree(), "physics_frame")
-#	CurrentLevelData.vars.max_red_coins = CurrentLevelData.get_red_coins_before_area(CurrentLevelData.area_headers.size())
 
+func assign_layer_ref():
+	if CurrentLevelData.checkpoint_data.current_checkpoint_id != -1:
+		var player_char = get_node(character)
+		player_char.layer = weakref(get_node(shared).get_layer(CurrentLevelData.checkpoint_data.current_layer))
+		player_char.update_z_index()
 
 func _unhandled_input(event):
 	if event.is_action_pressed("reload") or event.is_action_pressed("reload_from_start") and !SceneTransitions.transitioning and (!Singleton.ModeSwitcher.is_switching or not Singleton.ModeSwitcher.visible):

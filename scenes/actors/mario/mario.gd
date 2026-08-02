@@ -191,6 +191,7 @@ var rainbow_stored := false
 var next_flash := 0.0
 var frames_until_flash := 3
 var metal_voice := false
+var layer: WeakRef
 var file = File.new()
 
 var can_heal : bool = true
@@ -1400,6 +1401,8 @@ func check_liquid(liquid_type) -> bool:
 	
 	return false
 
+func update_z_index():
+	z_index = layer.get_ref().z_index
 
 func handle_liquids(liquid_areas, delta):
 	if is_instance_valid(state):

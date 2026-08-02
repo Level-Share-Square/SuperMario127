@@ -61,8 +61,9 @@ func finish_exit_animation(character: Character) -> void:
 	# undo collision changes 
 	character.set_collision_layer_bit(1, true)
 	character.set_inter_player_collision(true)
-	character.z_index = level_layer_ref.get_ref().z_index
-
+	
+	character.layer = level_layer_ref
+	character.update_z_index()
 
 
 ### MISC

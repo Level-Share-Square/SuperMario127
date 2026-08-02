@@ -13,6 +13,7 @@ var liquid_positions := []
 var nozzles_collected := []
 var switch_state := []
 var activated_shine_ids := []
+var current_layer: String
 
 func reset():
 	current_checkpoint_id = -1
