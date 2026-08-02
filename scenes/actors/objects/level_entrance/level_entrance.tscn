@@ -1,22 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://scenes/actors/mario/mario.png" type="Texture" id=1]
+[ext_resource path="res://scenes/actors/objects/level_entrance/entrance.png" type="Texture" id=1]
 [ext_resource path="res://scenes/actors/objects/pipe/sound.wav" type="AudioStream" id=2]
 [ext_resource path="res://scenes/actors/objects/level_entrance/level_entrance.gd" type="Script" id=3]
 [ext_resource path="res://scenes/actors/objects/level_entrance/level_entrance_sprite.gd" type="Script" id=4]
 [ext_resource path="res://classes/teleport/warp_helper.gd" type="Script" id=5]
-
-[sub_resource type="AtlasTexture" id=2]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 0, 48, 48 )
-
-[sub_resource type="SpriteFrames" id=1]
-animations = [ {
-"frames": [ SubResource( 2 ) ],
-"loop": false,
-"name": "pipe",
-"speed": 0.0
-} ]
 
 [node name="tp_exit" type="Node2D"]
 z_index = -1
@@ -27,9 +15,8 @@ internal_id = "level_entrance"
 unique_name_in_owner = true
 script = ExtResource( 5 )
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-frames = SubResource( 1 )
-animation = "pipe"
+[node name="AnimatedSprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
 script = ExtResource( 4 )
 
 [node name="ReferenceRect" type="ReferenceRect" parent="AnimatedSprite"]
