@@ -234,7 +234,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://classes/curve_tween.gd"
 }, {
-"base": "Reference",
+"base": "GameObject",
 "class": "Decoration",
 "language": "GDScript",
 "path": "res://scenes/actors/objects/big_tree/decoration.gd"
@@ -704,7 +704,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/actors/mario/powerups/Metal.gd"
 }, {
-"base": "Reference",
+"base": "LevelDataResource",
 "class": "MissionData",
 "language": "GDScript",
 "path": "res://level/models/collectibles/mission_data.gd"
@@ -1481,7 +1481,7 @@ _global_script_class_icons={
 config/name="Super Mario 127"
 run/main_scene="res://scenes/menu/launcher/launcher.tscn"
 config/use_custom_user_dir=true
-config/custom_user_dir_name="dev"
+config/custom_user_dir_name="devdev"
 boot_splash/image="res://assets/misc/startup_new.png"
 boot_splash/bg_color=Color( 0.431373, 0.0352941, 0.34902, 1 )
 config/icon="res://assets/misc/icon.png"
