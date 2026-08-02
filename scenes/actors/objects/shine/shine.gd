@@ -35,7 +35,7 @@ onready var ambient_sound: AudioStreamPlayer2D = $AmbientSound
 onready var animation_player: AnimationPlayer = $AnimationPlayer
 onready var current_scene: Node = get_tree().current_scene
 onready var shine_get: Node = current_scene.get_node_or_null("%ShineGet")
-onready var transitions: Node = SceneTransitions
+onready var transitions = SceneTransitions
 onready var mode_switcher_button: Node = Singleton.ModeSwitcher.get_node("ModeSwitcherButton")
 
 const UNPAUSE_TIMER_LENGTH = 3.35
@@ -97,6 +97,7 @@ func _register_properties() -> void:
 
 func _ready() -> void:
 	send_score = true
+	
 	if mode != 1: # not in edit mode
 		if required_purples > 0:
 			purple_starbits_activate = true
@@ -200,8 +201,8 @@ func _physics_process(_delta: float) -> void:
 		animated_sprite.frame = wrapi(OS.get_ticks_msec() / (1000/8), 0, 16)
 		
 	if mode != 1:
-#		var do_animation: bool = not (id in CurrentLevelData.vars.activated_shine_ids)
-		var do_animation: bool = true
+		var do_animation: bool = not (mission_uuid in CurrentLevelData.vars.activated_shine_ids)
+#		var do_animation: bool = true
 		
 		# band aid crash fix
 		while CurrentLevelData.vars.shine_shards_collected.size() <= CurrentLevelData.area_id:

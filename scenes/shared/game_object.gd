@@ -328,8 +328,8 @@ func get_global_editor_rect() -> Rect2:
 
 func create_coin(coin_id: int, body: Node2D, physics: bool, velocity: Vector2) -> void:
 	var object = create_object(body.global_position, coin_id, 0)
-	object.set_property("physics")
-	object.set_property("velocity")
+	object.set_property("physics", physics)
+	object.set_property("velocity", velocity)
 
 
 func create_object(pos: Vector2, object_id: int, palette: int):
