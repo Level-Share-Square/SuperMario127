@@ -12,7 +12,7 @@ export var stops_camera := false
 export var vertical := false
 
 var layer_uuid: String = ""
-var parallax_distance: int = 0
+var parallax_distance: float = 0
 var tint := Color(0.545098, 0.545098, 0.545098)
 var opacity: float = 1
 var move_to_index: int = -1
@@ -98,19 +98,22 @@ func update_layer(body):
 		if used and one_time: return
 		
 		var player = get_tree().current_scene
-		var shared: LevelShared = player.get_shared()
+		var shared = player.get_shared()
 		var character = player.get_node(player.character)
 		if !shared.get_layer(layer_uuid): return
 		if move_to_index < 0 or move_to_index > shared.layers.size() - 1: move_to_index = -1
 		
-		var layer: LevelLayer = shared.get_layer(layer_uuid)
-		if layer is LevelParallaxLayer:
-			layer.set_parallax_distance(parallax_distance)
-#		print(move_to_index)
-		layer.set_layer_modulate(Color.white, opacity)
-		if move_to_index != -1:
-			shared.move_layer(layer, move_to_index)
-			character.update_z_index()
+		var layer_state := LayerState.new(
+			move_to_index,
+			parallax_distance,
+			tint,
+			opacity
+		)
+		
+		shared.load_layer_states({layer_uuid: layer_state})
+		CurrentLevelData.vars.layer_states[CurrentLevelData.area_id][layer_uuid] = layer_state
+	
+		character.update_z_index()
 		
 		used = true
 		

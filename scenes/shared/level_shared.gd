@@ -108,6 +108,29 @@ func move_layer(layer: LevelLayer, to: int, save_to_data: bool = false):
 		get_child(i).set_order(i)
 		if save_to_data:
 			edit_layer(layer_index_to_uuid(i), "order", i)
+			
+func load_layer_states(layer_states: Dictionary):
+	var layers_to_move: Array = []
+	
+	for layer_uuid in layer_states:
+		var layer: LevelLayer = get_layer(layer_uuid)
+		var layer_state: LayerState = layer_states[layer_uuid]
+		
+		if layer is LevelParallaxLayer:
+			layer.set_parallax_distance(layer_state.parallax_distance)
+		layer.set_layer_modulate(Color.white, layer_state.opacity)
+		
+		if layer_state.order != -1:
+			layers_to_move.append([layer, layer_state.order])
+		
+		layers_to_move.sort_custom(self, "sort_by_order")
+		
+		for layer_array in layers_to_move:
+			move_layer(layer_array[0], layer_array[1])
+			
+	
+func sort_by_order(a: Array, b: Array):
+	return a[1] < b[1]
 	
 func set_tile(x: int, y: int, uuid: String, tileset_id: int, tile_id: int, palette_id : int = 0):
 	layer_dictionary[uuid].place_tile(Vector2(x, y), tileset_id, tile_id, palette_id, true, true)

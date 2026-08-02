@@ -13,6 +13,7 @@ var liquid_positions := []
 var nozzles_collected := []
 var switch_state := []
 var activated_shine_ids := []
+var current_layer_states := []
 var current_layer: String
 
 func reset():
@@ -28,6 +29,7 @@ func reset():
 	nozzles_collected = ["null"]
 	switch_state = []
 	activated_shine_ids = []
+	current_layer_states = []
 	
 	for index in CurrentLevelData.area_headers.size():
 		current_shine_shards.append([0, []])
