@@ -29,7 +29,7 @@ func _get_editor_saved_settings() -> Node:
 
 var ModeSwitcher setget ,_get_mode_switcher
 func _get_mode_switcher() -> Node:
-	return lazy_get("ModeSwitcher", "res://scenes/actors/mode_switcher/mode_switcher.tscn", ModeSwitcher)
+	return lazy_get("ModeSwitcher", "res://scenes/actors/mode_switcher_old/mode_switcher.tscn", ModeSwitcher)
 
 var SceneSwitcher setget ,_get_scene_switcher
 func _get_scene_switcher() -> Node:

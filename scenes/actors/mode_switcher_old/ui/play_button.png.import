@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/play_button.png-15f8191edd1eaa28d1bb7b95e945146a.stex"
+path="res://.import/play_button.png-e230940599b92590805f58e2af95db81.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/actors/mode_switcher/ui/play_button.png"
-dest_files=[ "res://.import/play_button.png-15f8191edd1eaa28d1bb7b95e945146a.stex" ]
+source_file="res://scenes/actors/mode_switcher_old/ui/play_button.png"
+dest_files=[ "res://.import/play_button.png-e230940599b92590805f58e2af95db81.stex" ]
 
 [params]
 

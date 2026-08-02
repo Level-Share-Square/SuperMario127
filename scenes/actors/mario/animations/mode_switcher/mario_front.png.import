@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/stop_button.png-2b243a38b97601299ac3c235b752ec62.stex"
+path="res://.import/mario_front.png-549be7b9d5e28965d513cfe0a3675c95.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/actors/mode_switcher/ui/stop_button.png"
-dest_files=[ "res://.import/stop_button.png-2b243a38b97601299ac3c235b752ec62.stex" ]
+source_file="res://scenes/actors/mario/animations/mode_switcher/mario_front.png"
+dest_files=[ "res://.import/mario_front.png-549be7b9d5e28965d513cfe0a3675c95.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

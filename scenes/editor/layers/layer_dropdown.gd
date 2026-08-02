@@ -18,16 +18,14 @@ func _ready():
 	shared.connect("layer_added", self, "add_layer")
 	new_layer.connect("button_down", self, "new_layer", [true])
 	new_decor.connect("button_down", self, "new_layer", [false])
-	shared.connect("found_origin", self, "select_layer")
+	shared.connect("found_origin", self, "select_layer", [false])
 	
 	yield(editor, "ready")
 	editor.action_manager.connect("undo", self, "update_layers")
 	editor.action_manager.connect("redo", self, "update_layers")
 	editor.action_manager.connect("action", self, "update_layers")
 
-func select_layer(index: int) -> void:
-	print(index)
-	
+func select_layer(index: int, toggle_dropdown: bool = true) -> void:
 	var layer_metadata: LayerMetadata = shared.get_layer_at(index).layer_data.layer_metadata
 	layer_picker.text = layer_metadata.layer_name
 	
@@ -35,7 +33,8 @@ func select_layer(index: int) -> void:
 	editor.layer = index
 	
 	# to close the dropdown
-	layer_picker.emit_signal("pressed")
+	if toggle_dropdown:
+		layer_picker.emit_signal("pressed")
 
 func add_layer(layer_data: LayerData) -> void:
 	var layer_info: LayerInfo = LAYER_INFO_SCENE.instance()

@@ -1,0 +1,394 @@
+[gd_scene load_steps=44 format=2]
+
+[ext_resource path="res://scenes/editor/mode_switcher/pipe_shine.tres" type="Texture" id=1]
+[ext_resource path="res://scenes/editor/mode_switcher/pipe_stylebox.tres" type="StyleBox" id=2]
+[ext_resource path="res://scenes/menu/pause/pause_main/icons/resume.png" type="Texture" id=3]
+[ext_resource path="res://scenes/editor/mode_switcher/pipe_shine2.tres" type="Texture" id=4]
+[ext_resource path="res://scenes/editor/assets/CheckUnchecked.svg" type="Texture" id=5]
+[ext_resource path="res://scenes/editor/mode_switcher/grid_scroll.tres" type="Material" id=6]
+[ext_resource path="res://scenes/actors/mario/animations/mode_switcher/mario_front.png" type="Texture" id=7]
+[ext_resource path="res://scenes/actors/mario/animations/mode_switcher/mario_back.png" type="Texture" id=8]
+[ext_resource path="res://scenes/oldeditor/sounds/click2.wav" type="AudioStream" id=9]
+[ext_resource path="res://scenes/menu/button_scripts/button_sound.gd" type="Script" id=10]
+[ext_resource path="res://scenes/oldeditor/sounds/hover.wav" type="AudioStream" id=11]
+[ext_resource path="res://scenes/editor/mode_switcher/mode_switcher.gd" type="Script" id=12]
+
+[sub_resource type="CanvasItemMaterial" id=4]
+blend_mode = 1
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 7 )
+region = Rect2( 484, 0, 44, 54 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 7 )
+region = Rect2( 528, 0, 44, 54 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 7 )
+region = Rect2( 0, 0, 44, 54 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 7 )
+region = Rect2( 44, 0, 44, 54 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 7 )
+region = Rect2( 88, 0, 44, 54 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 7 )
+region = Rect2( 132, 0, 44, 54 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 7 )
+region = Rect2( 176, 0, 44, 54 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 7 )
+region = Rect2( 220, 0, 44, 54 )
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 7 )
+region = Rect2( 264, 0, 44, 54 )
+
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 7 )
+region = Rect2( 308, 0, 44, 54 )
+
+[sub_resource type="AtlasTexture" id=15]
+atlas = ExtResource( 7 )
+region = Rect2( 352, 0, 44, 54 )
+
+[sub_resource type="AtlasTexture" id=16]
+atlas = ExtResource( 7 )
+region = Rect2( 396, 0, 44, 54 )
+
+[sub_resource type="AtlasTexture" id=17]
+atlas = ExtResource( 7 )
+region = Rect2( 440, 0, 44, 54 )
+
+[sub_resource type="AtlasTexture" id=18]
+atlas = ExtResource( 7 )
+region = Rect2( 440, 0, 44, 54 )
+
+[sub_resource type="SpriteFrames" id=19]
+animations = [ {
+"frames": [ SubResource( 5 ), SubResource( 6 ) ],
+"loop": false,
+"name": "enter",
+"speed": 9.0
+}, {
+"frames": [ SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ) ],
+"loop": false,
+"name": "exit",
+"speed": 9.0
+}, {
+"frames": [ SubResource( 18 ) ],
+"loop": false,
+"name": "idle",
+"speed": 9.0
+} ]
+
+[sub_resource type="AtlasTexture" id=20]
+atlas = ExtResource( 8 )
+region = Rect2( 484, 0, 44, 54 )
+
+[sub_resource type="AtlasTexture" id=21]
+atlas = ExtResource( 8 )
+region = Rect2( 528, 0, 44, 54 )
+
+[sub_resource type="AtlasTexture" id=22]
+atlas = ExtResource( 8 )
+region = Rect2( 0, 0, 44, 54 )
+
+[sub_resource type="AtlasTexture" id=23]
+atlas = ExtResource( 8 )
+region = Rect2( 44, 0, 44, 54 )
+
+[sub_resource type="AtlasTexture" id=24]
+atlas = ExtResource( 8 )
+region = Rect2( 88, 0, 44, 54 )
+
+[sub_resource type="AtlasTexture" id=25]
+atlas = ExtResource( 8 )
+region = Rect2( 132, 0, 44, 54 )
+
+[sub_resource type="AtlasTexture" id=26]
+atlas = ExtResource( 8 )
+region = Rect2( 176, 0, 44, 54 )
+
+[sub_resource type="AtlasTexture" id=27]
+atlas = ExtResource( 8 )
+region = Rect2( 220, 0, 44, 54 )
+
+[sub_resource type="AtlasTexture" id=28]
+atlas = ExtResource( 8 )
+region = Rect2( 264, 0, 44, 54 )
+
+[sub_resource type="AtlasTexture" id=29]
+atlas = ExtResource( 8 )
+region = Rect2( 308, 0, 44, 54 )
+
+[sub_resource type="AtlasTexture" id=30]
+atlas = ExtResource( 8 )
+region = Rect2( 352, 0, 44, 54 )
+
+[sub_resource type="AtlasTexture" id=31]
+atlas = ExtResource( 8 )
+region = Rect2( 396, 0, 44, 54 )
+
+[sub_resource type="AtlasTexture" id=32]
+atlas = ExtResource( 8 )
+region = Rect2( 440, 0, 44, 54 )
+
+[sub_resource type="AtlasTexture" id=33]
+atlas = ExtResource( 8 )
+region = Rect2( 440, 0, 44, 54 )
+
+[sub_resource type="SpriteFrames" id=34]
+animations = [ {
+"frames": [ SubResource( 20 ), SubResource( 21 ) ],
+"loop": false,
+"name": "enter",
+"speed": 9.0
+}, {
+"frames": [ SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ) ],
+"loop": false,
+"name": "exit",
+"speed": 9.0
+}, {
+"frames": [ SubResource( 33 ) ],
+"loop": false,
+"name": "idle",
+"speed": 9.0
+} ]
+
+[node name="ModeSwitcher" type="CanvasLayer"]
+layer = 128
+script = ExtResource( 12 )
+bottom_height = 24.0
+bottom_height_hover = 28.0
+hover_duration = 0.1
+mario_idle_height = -22.0
+mario_hidden_height = 26.0
+mario_enter_height = -56.0
+mario_enter_jump_time = 0.4
+mario_enter_fall_time = 0.4
+
+[node name="RootContainer" type="MarginContainer" parent="."]
+unique_name_in_owner = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+custom_constants/margin_right = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="RootContainer"]
+margin_left = 680.0
+margin_top = 377.0
+margin_right = 752.0
+margin_bottom = 432.0
+grow_horizontal = 0
+grow_vertical = 0
+rect_min_size = Vector2( 72, 0 )
+size_flags_horizontal = 8
+size_flags_vertical = 8
+custom_constants/separation = 0
+alignment = 2
+
+[node name="TopOutline" type="PanelContainer" parent="RootContainer/VBoxContainer"]
+self_modulate = Color( 0.309804, 0.321569, 0.490196, 1 )
+margin_right = 72.0
+margin_bottom = 31.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = ExtResource( 2 )
+
+[node name="OutlineMargin" type="MarginContainer" parent="RootContainer/VBoxContainer/TopOutline"]
+margin_right = 72.0
+margin_bottom = 31.0
+custom_constants/margin_right = 4
+custom_constants/margin_top = 4
+custom_constants/margin_left = 4
+custom_constants/margin_bottom = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="RootContainer/VBoxContainer/TopOutline/OutlineMargin"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 68.0
+margin_bottom = 31.0
+custom_constants/separation = 0
+
+[node name="TopInner" type="PanelContainer" parent="RootContainer/VBoxContainer/TopOutline/OutlineMargin/VBoxContainer"]
+unique_name_in_owner = true
+margin_right = 64.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 0, 24 )
+size_flags_vertical = 3
+custom_styles/panel = ExtResource( 2 )
+
+[node name="GridOverlay" type="TextureRect" parent="RootContainer/VBoxContainer/TopOutline/OutlineMargin/VBoxContainer/TopInner"]
+modulate = Color( 0.317647, 0.898039, 0.282353, 0.109804 )
+material = ExtResource( 6 )
+margin_right = 64.0
+margin_bottom = 24.0
+texture = ExtResource( 5 )
+expand = true
+stretch_mode = 2
+
+[node name="Shine" type="TextureRect" parent="RootContainer/VBoxContainer/TopOutline/OutlineMargin/VBoxContainer/TopInner"]
+material = SubResource( 4 )
+margin_right = 64.0
+margin_bottom = 24.0
+texture = ExtResource( 1 )
+expand = true
+
+[node name="Shine2" type="TextureRect" parent="RootContainer/VBoxContainer/TopOutline/OutlineMargin/VBoxContainer/TopInner"]
+material = SubResource( 4 )
+margin_right = 64.0
+margin_bottom = 24.0
+texture = ExtResource( 4 )
+expand = true
+
+[node name="Icon" type="TextureRect" parent="RootContainer/VBoxContainer/TopOutline/OutlineMargin/VBoxContainer/TopInner"]
+margin_left = 20.0
+margin_top = 4.0
+margin_right = 44.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 24, 16 )
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource( 3 )
+expand = true
+stretch_mode = 6
+
+[node name="Shadow" type="TextureRect" parent="RootContainer/VBoxContainer/TopOutline/OutlineMargin/VBoxContainer/TopInner/Icon"]
+modulate = Color( 0, 0, 0, 0.376471 )
+show_behind_parent = true
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 22.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 24, 16 )
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource( 3 )
+expand = true
+stretch_mode = 6
+
+[node name="MarioFront" type="AnimatedSprite" parent="RootContainer/VBoxContainer/TopOutline/OutlineMargin/VBoxContainer/TopInner"]
+unique_name_in_owner = true
+modulate = Color( 1, 1, 1, 0.501961 )
+position = Vector2( 34, -22 )
+scale = Vector2( 2, 2 )
+frames = SubResource( 19 )
+animation = "idle"
+playing = true
+
+[node name="MarioBack" type="AnimatedSprite" parent="RootContainer/VBoxContainer/TopOutline/OutlineMargin/VBoxContainer/TopInner"]
+unique_name_in_owner = true
+modulate = Color( 1, 1, 1, 0.501961 )
+show_behind_parent = true
+position = Vector2( 34, -22 )
+scale = Vector2( 2, 2 )
+frames = SubResource( 34 )
+animation = "idle"
+playing = true
+
+[node name="TopOutline" type="PanelContainer" parent="RootContainer/VBoxContainer/TopOutline/OutlineMargin/VBoxContainer"]
+self_modulate = Color( 0.309804, 0.321569, 0.490196, 1 )
+margin_top = 24.0
+margin_right = 64.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 0, 3 )
+size_flags_horizontal = 3
+size_flags_vertical = 0
+custom_styles/panel = ExtResource( 2 )
+
+[node name="BottomMargin" type="MarginContainer" parent="RootContainer/VBoxContainer"]
+margin_top = 31.0
+margin_right = 72.0
+margin_bottom = 55.0
+custom_constants/margin_right = 6
+custom_constants/margin_left = 6
+
+[node name="BottomOutline" type="PanelContainer" parent="RootContainer/VBoxContainer/BottomMargin"]
+self_modulate = Color( 0.309804, 0.321569, 0.490196, 1 )
+margin_left = 6.0
+margin_right = 66.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+custom_styles/panel = ExtResource( 2 )
+
+[node name="OutlineMargin" type="MarginContainer" parent="RootContainer/VBoxContainer/BottomMargin/BottomOutline"]
+margin_right = 60.0
+margin_bottom = 24.0
+custom_constants/margin_right = 4
+custom_constants/margin_left = 4
+custom_constants/margin_bottom = 0
+
+[node name="BottomInner" type="PanelContainer" parent="RootContainer/VBoxContainer/BottomMargin/BottomOutline/OutlineMargin"]
+unique_name_in_owner = true
+margin_left = 4.0
+margin_right = 56.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 0, 24 )
+custom_styles/panel = ExtResource( 2 )
+
+[node name="GridOverlay" type="TextureRect" parent="RootContainer/VBoxContainer/BottomMargin/BottomOutline/OutlineMargin/BottomInner"]
+modulate = Color( 0.317647, 0.898039, 0.282353, 0.109804 )
+material = ExtResource( 6 )
+margin_right = 52.0
+margin_bottom = 24.0
+texture = ExtResource( 5 )
+expand = true
+stretch_mode = 2
+
+[node name="Shine" type="TextureRect" parent="RootContainer/VBoxContainer/BottomMargin/BottomOutline/OutlineMargin/BottomInner"]
+self_modulate = Color( 1, 1, 1, 0.376471 )
+material = SubResource( 4 )
+margin_right = 52.0
+margin_bottom = 24.0
+texture = ExtResource( 1 )
+expand = true
+
+[node name="Shine2" type="TextureRect" parent="RootContainer/VBoxContainer/BottomMargin/BottomOutline/OutlineMargin/BottomInner"]
+material = SubResource( 4 )
+margin_right = 52.0
+margin_bottom = 24.0
+texture = ExtResource( 4 )
+expand = true
+
+[node name="Button" type="Button" parent="RootContainer"]
+margin_left = 680.0
+margin_top = 376.0
+margin_right = 752.0
+margin_bottom = 432.0
+rect_min_size = Vector2( 72, 56 )
+focus_mode = 0
+size_flags_horizontal = 8
+size_flags_vertical = 8
+flat = true
+script = ExtResource( 10 )
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource( 11 )
+volume_db = -10.0
+bus = "Sounds"
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource( 9 )
+volume_db = -10.0
+bus = "Sounds"
+
+[node name="Tween" type="Tween" parent="."]
+unique_name_in_owner = true
+
+[node name="TweenPress" type="Tween" parent="."]
+unique_name_in_owner = true
+
+[connection signal="mouse_entered" from="RootContainer/Button" to="." method="hovered"]
+[connection signal="mouse_exited" from="RootContainer/Button" to="." method="unhovered"]
+[connection signal="pressed" from="RootContainer/Button" to="." method="pressed"]
