@@ -1,4 +1,4 @@
-[gd_scene load_steps=67 format=2]
+[gd_scene load_steps=68 format=2]
 
 [ext_resource path="res://scenes/editor/mode_switcher/pipe_shine.tres" type="Texture" id=1]
 [ext_resource path="res://scenes/editor/mode_switcher/pipe_stylebox.tres" type="StyleBox" id=2]
@@ -25,6 +25,7 @@
 [ext_resource path="res://scenes/editor/mode_switcher/pipe_flash_gradient_tex.tres" type="Texture" id=23]
 [ext_resource path="res://scenes/editor/mode_switcher/pipe_gradient_tex.tres" type="Texture" id=24]
 [ext_resource path="res://scenes/editor/mode_switcher/mario_copy.gd" type="Script" id=25]
+[ext_resource path="res://scenes/editor/assets/stop.svg" type="Texture" id=26]
 
 [sub_resource type="Gradient" id=35]
 offsets = PoolRealArray( -0.1, 0 )
@@ -378,6 +379,30 @@ tracks/5/keys = {
 "update": 0,
 "values": [ Vector2( 0, 24 ) ]
 }
+tracks/6/type = "value"
+tracks/6/path = NodePath("RootContainer/VBoxContainer/TopOutline/OutlineMargin/VBoxContainer/TopInner/Icon:texture")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 3 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("RootContainer/VBoxContainer/TopOutline/OutlineMargin/VBoxContainer/TopInner/Icon/Shadow:texture")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 3 ) ]
+}
 
 [sub_resource type="Animation" id=43]
 resource_name = "exit"
@@ -466,6 +491,30 @@ tracks/6/keys = {
 "stream": ExtResource( 18 )
 } ],
 "times": PoolRealArray( 0 )
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("RootContainer/VBoxContainer/TopOutline/OutlineMargin/VBoxContainer/TopInner/Icon:texture")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 3 ) ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("RootContainer/VBoxContainer/TopOutline/OutlineMargin/VBoxContainer/TopInner/Icon/Shadow:texture")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 3 ) ]
 }
 
 [sub_resource type="Animation" id=41]
@@ -676,6 +725,30 @@ tracks/6/keys = {
 "method": "play"
 } ]
 }
+tracks/7/type = "value"
+tracks/7/path = NodePath("RootContainer/VBoxContainer/TopOutline/OutlineMargin/VBoxContainer/TopInner/Icon:texture")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 3 ), ExtResource( 26 ) ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("RootContainer/VBoxContainer/TopOutline/OutlineMargin/VBoxContainer/TopInner/Icon/Shadow:texture")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 3 ), ExtResource( 26 ) ]
+}
 
 [node name="ModeSwitcher" type="CanvasLayer"]
 pause_mode = 2
@@ -810,10 +883,10 @@ animation = "idle"
 
 [node name="MarioBack" type="AnimatedSprite" parent="RootContainer/VBoxContainer/TopOutline/OutlineMargin/VBoxContainer/TopInner"]
 show_behind_parent = true
-position = Vector2( 34, -40.6531 )
-scale = Vector2( 1.92, 1.92 )
+position = Vector2( 34, 24 )
+scale = Vector2( 2, 2 )
 frames = SubResource( 34 )
-animation = "enter"
+animation = "idle"
 script = ExtResource( 25 )
 
 [node name="MiddleOutline" type="PanelContainer" parent="RootContainer/VBoxContainer/TopOutline/OutlineMargin/VBoxContainer"]
