@@ -33,6 +33,7 @@ var current_liquid_id = 0
 var last_red_coin_id = 0
 var switch_state : Array = []
 var activated_shine_ids := []
+var layer_states := []
 
 func reload():
 	coins_collected = CurrentLevelData.checkpoint_data.current_coins
@@ -43,9 +44,12 @@ func reload():
 	liquid_positions = CurrentLevelData.checkpoint_data.liquid_positions.duplicate(true)
 	switch_state = CurrentLevelData.checkpoint_data.switch_state.duplicate(true)
 	activated_shine_ids = CurrentLevelData.checkpoint_data.activated_shine_ids.duplicate(true)
+	layer_states = CurrentLevelData.checkpoint_data.current_layer_states.duplicate(true)
 	required_purple_starbits = []
 	for area in CurrentLevelData.area_headers:
 		required_purple_starbits.append([0])
+		if layer_states.size() != CurrentLevelData.area_headers.size():
+			layer_states.append({})
 	
 
 func reset_counters():
@@ -133,6 +137,21 @@ func deactivate_shine(id: int):
 	
 	var index = activated_shine_ids.find(id)
 	activated_shine_ids.remove(index)
+	
+func set_layer_states(area_id: int, layers: Array):
+	layer_states.clear()
+	
+	for layer in layers:
+		var layer_metadata: LayerMetadata = layer.layer_data.layer_metadata
+		
+		var layer_state := LayerState.new(
+			layer_metadata.order,
+			layer_metadata.parallax_distance,
+			layer_metadata.layer_tint,
+			layer_metadata.layer_opacity
+		)
+		
+		layer_states[area_id][layer_metadata.layer_uuid] = layer_state
 
 #func set_switch_state(var channel : int, value : bool):
 #	switch_state[channel] = value

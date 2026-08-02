@@ -73,7 +73,8 @@ func _ready():
 		Singleton.Music.play() # make sure the music will play even if it's stopped prior to loading the player
 	
 	can_collect_coins.append(get_node(character))
-	
+		
+	get_shared().load_layer_states(CurrentLevelData.vars.layer_states[CurrentLevelData.area_id])
 	
 	var player_char = get_node(character)
 	player_char.character = Singleton.PlayerSettings.player1_character
@@ -89,7 +90,7 @@ func assign_layer_ref():
 	if CurrentLevelData.checkpoint_data.current_checkpoint_id != -1:
 		var player_char = get_node(character)
 		player_char.layer = weakref(get_node(shared).get_layer(CurrentLevelData.checkpoint_data.current_layer))
-		player_char.update_z_index()
+		if player_char.layer.get_ref(): player_char.update_z_index()
 
 func _unhandled_input(event):
 	if event.is_action_pressed("reload") or event.is_action_pressed("reload_from_start") and !SceneTransitions.transitioning and (!Singleton.ModeSwitcher.is_switching or not Singleton.ModeSwitcher.visible):
