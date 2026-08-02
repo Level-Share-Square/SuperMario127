@@ -89,7 +89,7 @@ func set_checkpoint(body):
 	CurrentLevelData.checkpoint_data.current_shine_shards = CurrentLevelData.vars.shine_shards_collected.duplicate(true)
 	CurrentLevelData.checkpoint_data.current_purple_starbits = CurrentLevelData.vars.purple_starbits_collected.duplicate(true)
 	CurrentLevelData.checkpoint_data.current_local_keys = CurrentLevelData.vars.local_keys_collected.duplicate(true)
-	
+	CurrentLevelData.checkpoint_data.current_layer = level_layer_ref.get_ref().layer_data.layer_metadata.layer_uuid
 	while CurrentLevelData.vars.liquid_positions.size() <= CurrentLevelData.area_id:
 		CurrentLevelData.vars.liquid_positions.append([])
 	

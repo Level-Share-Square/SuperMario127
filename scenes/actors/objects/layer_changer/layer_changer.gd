@@ -97,7 +97,9 @@ func update_layer(body):
 	if is_enabled_and_on_ground() and body.name.begins_with("Character") and !body.dead and body.controllable:
 		if used and one_time: return
 		
-		var shared: LevelShared = get_tree().current_scene.get_shared()
+		var player = get_tree().current_scene
+		var shared: LevelShared = player.get_shared()
+		var character = player.get_node(player.character)
 		if !shared.get_layer(layer_uuid): return
 		if move_to_index < 0 or move_to_index > shared.layers.size() - 1: move_to_index = -1
 		
@@ -108,6 +110,7 @@ func update_layer(body):
 		layer.set_layer_modulate(Color.white, opacity)
 		if move_to_index != -1:
 			shared.move_layer(layer, move_to_index)
+			character.update_z_index()
 		
 		used = true
 		
