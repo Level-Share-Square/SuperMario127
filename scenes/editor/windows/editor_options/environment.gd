@@ -43,9 +43,13 @@ func _ready():
 #	area = CurrentLevelData.current_area.header
 	
 	autoscroll_pick.connect("value_changed", self, "_on_autoscroll_change")
-	connect("update_background", owner, "update_background")
+	connect("update_background", self, "update_background")
 	
 	load_settings()
+
+
+func update_background():
+	owner.owner.backgrounds.update_background_area(CurrentLevelData.current_area.header)
 
 
 func load_settings():
