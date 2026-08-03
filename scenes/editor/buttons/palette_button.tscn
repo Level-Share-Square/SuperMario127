@@ -60,35 +60,12 @@ custom_constants/margin_bottom = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Clip/MarginContainer"]
 margin_left = 1.0
-margin_top = 21.0
+margin_top = 23.0
 margin_right = 23.0
 margin_bottom = 23.0
 mouse_filter = 2
 size_flags_vertical = 8
 custom_constants/separation = 1
-
-[node name="ColorRect" type="ColorRect" parent="Clip/MarginContainer/HBoxContainer"]
-margin_right = 2.0
-margin_bottom = 2.0
-rect_min_size = Vector2( 2, 2 )
-mouse_filter = 2
-color = Color( 0.75, 0.75, 0.75, 1 )
-
-[node name="ColorRect2" type="ColorRect" parent="Clip/MarginContainer/HBoxContainer"]
-margin_left = 3.0
-margin_right = 5.0
-margin_bottom = 2.0
-rect_min_size = Vector2( 2, 2 )
-mouse_filter = 2
-color = Color( 0.75, 0.75, 0.75, 1 )
-
-[node name="ColorRect3" type="ColorRect" parent="Clip/MarginContainer/HBoxContainer"]
-margin_left = 6.0
-margin_right = 8.0
-margin_bottom = 2.0
-rect_min_size = Vector2( 2, 2 )
-mouse_filter = 2
-color = Color( 0.75, 0.75, 0.75, 1 )
 
 [node name="Grid" type="TextureRect" parent="Clip"]
 visible = false

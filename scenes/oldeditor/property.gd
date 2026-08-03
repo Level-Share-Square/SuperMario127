@@ -60,4 +60,4 @@ func get_value():
 	return property_type.get_value()
 
 func update_value(value):
-	object.register_property(key, value, true)
+	object.set_property(key, value, true)

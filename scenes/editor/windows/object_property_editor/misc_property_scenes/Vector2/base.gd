@@ -18,6 +18,12 @@ func load_property(_editor: Editor, init_value, _property: Array, property_name 
 		$Y.min_value = property_info.min_value
 		$Y.max_value = property_info.max_value
 		$Y.custom_arrow_step = property_info.step
+		
+		$X.prefix = property_info.prefix[0]
+		$X.suffix = property_info.suffix[0]
+		
+		$Y.prefix = property_info.prefix[1]
+		$Y.suffix = property_info.suffix[1]
 
 func change_property(_new_value = null):
 	var new_value := Vector2(

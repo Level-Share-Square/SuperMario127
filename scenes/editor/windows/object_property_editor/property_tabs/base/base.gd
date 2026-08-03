@@ -19,20 +19,24 @@ func load_base_properties(_editor: Editor, _objects: Dictionary):
 #				base_hidden_properties.append(hidden_property)
 	
 	if not "position" in base_hidden_properties:
+		var property_info := PropertyInfo.new(position_property.hint_tooltip)
+		property_info.prefix = ["X", "Y"]
 		position_property.load_property(editor, get_property_value(objects.keys()[0], "position"), [
 			"position",
 			TYPE_VECTOR2,
-			PropertyInfo.new(position_property.hint_tooltip)
+			property_info
 		])
 		connect_signals(position_property)
 	else:
 		position_property.hide()
 
 	if not "scale" in base_hidden_properties:
+		var property_info := PropertyInfo.new(scale_property.hint_tooltip)
+		property_info.prefix = ["X", "Y"]
 		scale_property.load_property(editor, get_property_value(objects.keys()[0], "scale"), [
 			"scale",
 			TYPE_VECTOR2,
-			PropertyInfo.new(scale_property.hint_tooltip, 0.05)
+			property_info
 		])
 		connect_signals(scale_property)
 	else:
