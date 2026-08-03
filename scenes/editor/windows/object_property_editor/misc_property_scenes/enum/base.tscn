@@ -1,9 +1,10 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scenes/editor/editor_theme.tres" type="Theme" id=1]
-[ext_resource path="res://scenes/editor/windows/object_property_editor/misc_property_scenes/dropdown/base.gd" type="Script" id=2]
+[ext_resource path="res://scenes/editor/windows/object_property_editor/misc_property_scenes/enum/base.gd" type="Script" id=2]
+[ext_resource path="res://scenes/menu/button_scripts/button_sound.gd" type="Script" id=3]
 
-[node name="Dropdown" type="HBoxContainer"]
+[node name="Enum" type="HBoxContainer"]
 margin_top = 26.0
 margin_right = 232.0
 margin_bottom = 43.0
@@ -22,15 +23,14 @@ text = "Property:"
 
 [node name="Padding" type="Control" parent="."]
 margin_left = 66.0
-margin_right = 128.0
+margin_right = 220.0
 margin_bottom = 19.0
 size_flags_horizontal = 3
 
-[node name="OptionButton" type="OptionButton" parent="."]
-margin_left = 132.0
+[node name="ButtonSound" type="Button" parent="."]
+margin_left = 224.0
 margin_right = 232.0
 margin_bottom = 19.0
-rect_min_size = Vector2( 100, 0 )
-size_flags_horizontal = 0
+script = ExtResource( 3 )
 
-[connection signal="item_selected" from="OptionButton" to="." method="item_selected"]
+[connection signal="pressed" from="ButtonSound" to="." method="pressed"]

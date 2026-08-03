@@ -53,7 +53,7 @@ func _register_properties():
 	register_property(9, "curve", curve, true)
 	register_property(10, "walk_speed", walk_speed, true)
 	register_property(11, "move_type", move_type, true)
-	set_bool_alias("move_type", "Loop", "Reset")
+	set_property_override("move_type", PropertyTab.OverrideTypes.BOOL_ALIAS, {true: "Loop", false: "Reset"})
 	register_property(12, "physics_enabled", physics_enabled, true)
 	register_property(13, "required_shines", required_shines, true)
 	register_property(14, "path_reference", path_reference, true)

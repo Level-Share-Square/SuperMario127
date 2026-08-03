@@ -4,7 +4,7 @@
 [ext_resource path="res://scenes/editor/windows/object_property_editor/misc_property_scenes/bool_alias/base.gd" type="Script" id=2]
 [ext_resource path="res://scenes/menu/button_scripts/button_sound.gd" type="Script" id=3]
 
-[node name="Bool" type="HBoxContainer"]
+[node name="BoolAlias" type="HBoxContainer"]
 margin_top = 26.0
 margin_right = 232.0
 margin_bottom = 43.0
@@ -31,7 +31,6 @@ size_flags_horizontal = 3
 margin_left = 224.0
 margin_right = 232.0
 margin_bottom = 19.0
-toggle_mode = true
 script = ExtResource( 3 )
 
-[connection signal="toggled" from="ButtonSound" to="." method="toggled"]
+[connection signal="pressed" from="ButtonSound" to="." method="pressed"]
