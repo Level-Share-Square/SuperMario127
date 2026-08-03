@@ -16,7 +16,7 @@ const BACKGROUNDS := [
 	[8, 18, 0, 260],
 	[7, 21, 0, 64],
 	[10, 1, 1, 160],
-	[6, 16, 2, 72]
+	[6, 20, 5, 72]
 ]
 
 var current_star_coins: int = 0

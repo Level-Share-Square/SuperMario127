@@ -119,3 +119,7 @@ func resize_window(event):
 	
 	if not window_rect.intersects(get_viewport_rect()):
 		hide()
+
+
+func play(tab):
+	pass # Replace with function body.

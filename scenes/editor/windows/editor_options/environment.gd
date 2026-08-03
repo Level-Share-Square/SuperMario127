@@ -1,4 +1,4 @@
-extends ScrollContainer
+extends VBoxContainer
 
 
 export(Resource) var backgrounds

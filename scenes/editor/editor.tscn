@@ -1,4 +1,4 @@
-[gd_scene load_steps=124 format=2]
+[gd_scene load_steps=128 format=2]
 
 [ext_resource path="res://scenes/menu/options/options.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/menu/menu_controller/screen_manager.gd" type="Script" id=2]
@@ -176,6 +176,22 @@ fill_to = Vector2( 0, 1 )
 
 [sub_resource type="StyleBoxTexture" id=184]
 texture = SubResource( 183 )
+region_rect = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="StreamTexture" id=201]
+load_path = "res://.import/settings.svg-87e90ab21405900cba0a61861af9f664.stex"
+
+[sub_resource type="Gradient" id=202]
+interpolation_mode = 2
+offsets = PoolRealArray( 0, 0.5, 1 )
+colors = PoolColorArray( 1, 1, 1, 0.19, 1, 1, 1, 0, 1, 1, 1, 0.19 )
+
+[sub_resource type="GradientTexture2D" id=203]
+gradient = SubResource( 202 )
+fill_to = Vector2( 0, 1 )
+
+[sub_resource type="StyleBoxTexture" id=204]
+texture = SubResource( 203 )
 region_rect = Rect2( 0, 0, 64, 64 )
 
 [sub_resource type="Gradient" id=185]
@@ -1817,10 +1833,13 @@ margin_top = 97.0
 margin_right = 496.0
 margin_bottom = 339.0
 custom_styles/panel = SubResource( 184 )
+icon = SubResource( 201 )
 
 [node name="AreaSettingsWindow" parent="UI" instance=ExtResource( 68 )]
 unique_name_in_owner = true
 visible = false
+custom_styles/panel = SubResource( 204 )
+icon = SubResource( 201 )
 
 [node name="ObjectSettingsWindow" parent="UI" instance=ExtResource( 67 )]
 unique_name_in_owner = true
@@ -1829,6 +1848,7 @@ margin_top = 120.0
 margin_right = 512.0
 margin_bottom = 312.0
 custom_styles/panel = SubResource( 187 )
+icon = SubResource( 201 )
 
 [node name="HelpWindow" parent="UI" instance=ExtResource( 75 )]
 visible = false
@@ -1847,6 +1867,7 @@ custom_styles/panel = SubResource( 193 )
 unique_name_in_owner = true
 visible = false
 custom_styles/panel = SubResource( 200 )
+icon = SubResource( 201 )
 
 [node name="LayerEditor" parent="UI" instance=ExtResource( 79 )]
 unique_name_in_owner = true

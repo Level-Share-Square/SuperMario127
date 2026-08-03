@@ -7,6 +7,7 @@ onready var use_song = $"%UseSong"
 
 onready var icon_select = $"%IconSelect"
 onready var icon_current = $"%IconCurrent"
+onready var selected_gradient = $"%SelectedGradient"
 
 var id: int
 
@@ -22,3 +23,4 @@ func disable_button(value: bool):
 	use_song.disabled = value
 	icon_select.visible = not value
 	icon_current.visible = value
+	selected_gradient.visible = value

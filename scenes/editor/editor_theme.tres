@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=77 format=2]
+[gd_resource type="Theme" load_steps=81 format=2]
 
 [ext_resource path="res://assets/fonts/delfino_small.tres" type="DynamicFont" id=1]
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://assets/misc/checkbox.png" type="Texture" id=5]
 [ext_resource path="res://assets/icons/text_clear.svg" type="Texture" id=6]
 [ext_resource path="res://assets/icons/CheckChecked.svg" type="Texture" id=7]
+[ext_resource path="res://assets/fonts/delfino_tiny.tres" type="DynamicFont" id=8]
 [ext_resource path="res://assets/fonts/DelfinoFont16.tres" type="DynamicFont" id=9]
 
 [sub_resource type="StyleBoxFlat" id=113]
@@ -281,6 +282,19 @@ margin_right = 4.0
 margin_top = 4.0
 margin_bottom = 4.0
 
+[sub_resource type="Gradient" id=2]
+offsets = PoolRealArray( 0.636872, 1 )
+colors = PoolColorArray( 0.533333, 0.203922, 0.701961, 0, 0.533333, 0.203922, 0.701961, 0.501961 )
+
+[sub_resource type="GradientTexture2D" id=186]
+gradient = SubResource( 2 )
+fill_to = Vector2( 0, 0.9 )
+repeat = 2
+
+[sub_resource type="StyleBoxTexture" id=185]
+texture = SubResource( 186 )
+region_rect = Rect2( 0, 0, 64, 64 )
+
 [sub_resource type="StyleBoxFlat" id=147]
 bg_color = Color( 1, 1, 1, 1 )
 border_width_top = 1
@@ -428,7 +442,7 @@ content_margin_left = 6.0
 content_margin_right = 6.0
 content_margin_top = 6.0
 content_margin_bottom = 6.0
-bg_color = Color( 0.09, 0.09, 0.09, 1 )
+bg_color = Color( 0.0901961, 0.0901961, 0.0901961, 1 )
 border_width_left = 4
 border_width_top = 4
 border_width_right = 4
@@ -712,6 +726,8 @@ FlatPanel/base_type = "Panel"
 FlatPanel/styles/panel = SubResource( 167 )
 FlatPanel2/base_type = "Panel"
 FlatPanel2/styles/panel = SubResource( 178 )
+GradientPanel/base_type = "PanelContainer"
+GradientPanel/styles/panel = SubResource( 185 )
 HScrollBar/styles/grabber = SubResource( 147 )
 HScrollBar/styles/grabber_highlight = SubResource( 149 )
 HScrollBar/styles/grabber_pressed = SubResource( 150 )
@@ -736,6 +752,8 @@ OptionButton/icons/arrow = ExtResource( 3 )
 Panel/styles/panel = SubResource( 143 )
 PanelContainer/styles/panel = SubResource( 143 )
 PopupMenu/colors/font_color_hover = Color( 1, 1, 1, 1 )
+PopupMenu/fonts/font = ExtResource( 8 )
+PopupMenu/fonts/font_separator = ExtResource( 8 )
 PopupMenu/icons/checked = ExtResource( 4 )
 PopupMenu/icons/radio_checked = SubResource( 133 )
 PopupMenu/icons/radio_unchecked = SubResource( 134 )

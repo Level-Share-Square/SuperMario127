@@ -1,4 +1,4 @@
-extends ScrollContainer
+extends VBoxContainer
 
 onready var custom_music = $"%CustomMusic"
 onready var preset_music = $"%PresetMusic"

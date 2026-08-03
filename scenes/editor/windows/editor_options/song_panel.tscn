@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scenes/menu/button_scripts/button_sound.gd" type="Script" id=1]
 [ext_resource path="res://assets/fonts/DelfinoFont10.tres" type="DynamicFont" id=2]
@@ -8,6 +8,18 @@
 [ext_resource path="res://scenes/oldeditor/sounds/click2.wav" type="AudioStream" id=6]
 [ext_resource path="res://assets/icons/play.png" type="Texture" id=7]
 [ext_resource path="res://assets/icons/shine.png" type="Texture" id=8]
+
+[sub_resource type="CanvasItemMaterial" id=4]
+blend_mode = 1
+
+[sub_resource type="Gradient" id=5]
+offsets = PoolRealArray( 0.636872, 1 )
+colors = PoolColorArray( 0.533333, 0.203922, 0.701961, 0.25098, 0.533333, 0.203922, 0.701961, 0.501961 )
+
+[sub_resource type="GradientTexture2D" id=6]
+gradient = SubResource( 5 )
+fill_to = Vector2( 0, 0.9 )
+repeat = 2
 
 [node name="SongContainer" type="PanelContainer"]
 margin_right = 364.0
@@ -80,6 +92,7 @@ stretch_mode = 6
 [node name="IconCurrent" type="TextureRect" parent="Song/UseSong"]
 unique_name_in_owner = true
 visible = false
+modulate = Color( 1, 1, 1, 0.501961 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -90,6 +103,32 @@ mouse_filter = 2
 texture = ExtResource( 8 )
 expand = true
 stretch_mode = 6
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+margin_left = 6.0
+margin_top = 6.0
+margin_right = 358.0
+margin_bottom = 39.0
+mouse_filter = 2
+custom_constants/margin_right = -4
+custom_constants/margin_top = -4
+custom_constants/margin_left = -4
+custom_constants/margin_bottom = -4
+
+[node name="SelectedGradient" type="TextureRect" parent="MarginContainer"]
+unique_name_in_owner = true
+visible = false
+material = SubResource( 4 )
+margin_left = -4.0
+margin_top = -4.0
+margin_right = 356.0
+margin_bottom = 37.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = SubResource( 6 )
+expand = true
+flip_v = true
 
 [node name="HoverSound" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
