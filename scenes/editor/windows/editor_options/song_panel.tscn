@@ -1,9 +1,13 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scenes/menu/button_scripts/button_sound.gd" type="Script" id=1]
 [ext_resource path="res://assets/fonts/DelfinoFont10.tres" type="DynamicFont" id=2]
 [ext_resource path="res://scenes/editor/editor_theme.tres" type="Theme" id=3]
 [ext_resource path="res://scenes/editor/windows/editor_options/song_panel.gd" type="Script" id=4]
+[ext_resource path="res://scenes/oldeditor/sounds/hover.wav" type="AudioStream" id=5]
+[ext_resource path="res://scenes/oldeditor/sounds/click2.wav" type="AudioStream" id=6]
+[ext_resource path="res://assets/icons/play.png" type="Texture" id=7]
+[ext_resource path="res://assets/icons/shine.png" type="Texture" id=8]
 
 [node name="SongContainer" type="PanelContainer"]
 margin_right = 364.0
@@ -15,43 +19,86 @@ script = ExtResource( 4 )
 margin_left = 6.0
 margin_top = 6.0
 margin_right = 358.0
-margin_bottom = 36.0
+margin_bottom = 39.0
 theme = ExtResource( 3 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Song"]
-margin_right = 136.0
-margin_bottom = 30.0
+margin_right = 315.0
+margin_bottom = 33.0
+size_flags_horizontal = 3
 custom_constants/separation = -1
 
 [node name="SongName" type="Label" parent="Song/VBoxContainer"]
 unique_name_in_owner = true
-margin_right = 136.0
+margin_right = 315.0
 margin_bottom = 17.0
 text = "Super Mario 127 Song"
 
+[node name="HSeparator" type="HSeparator" parent="Song/VBoxContainer"]
+margin_top = 16.0
+margin_right = 315.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+
 [node name="SongArtist" type="Label" parent="Song/VBoxContainer"]
 unique_name_in_owner = true
-margin_top = 16.0
+margin_top = 19.0
 margin_right = 60.0
-margin_bottom = 30.0
+margin_bottom = 33.0
 size_flags_horizontal = 2
+custom_colors/font_color = Color( 0.533333, 0.533333, 0.533333, 1 )
 custom_fonts/font = ExtResource( 2 )
 text = "SM127 Team"
 
 [node name="UseSong" type="Button" parent="Song"]
 unique_name_in_owner = true
-margin_left = 285.0
+margin_left = 319.0
 margin_right = 352.0
-margin_bottom = 30.0
-size_flags_horizontal = 10
+margin_bottom = 33.0
+rect_min_size = Vector2( 33, 33 )
+size_flags_horizontal = 8
+size_flags_vertical = 4
 theme_type_variation = "ButtonPurple"
-text = "Use Song"
+expand_icon = true
 script = ExtResource( 1 )
 hover_override = "HoverSound"
 click_override = "ClickSound"
 
+[node name="IconSelect" type="TextureRect" parent="Song/UseSong"]
+unique_name_in_owner = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = 8.0
+margin_right = -8.0
+margin_bottom = -8.0
+mouse_filter = 2
+texture = ExtResource( 7 )
+expand = true
+stretch_mode = 6
+
+[node name="IconCurrent" type="TextureRect" parent="Song/UseSong"]
+unique_name_in_owner = true
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+mouse_filter = 2
+texture = ExtResource( 8 )
+expand = true
+stretch_mode = 6
+
 [node name="HoverSound" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
+stream = ExtResource( 5 )
+volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
+stream = ExtResource( 6 )
+volume_db = -10.0
+bus = "Sounds"

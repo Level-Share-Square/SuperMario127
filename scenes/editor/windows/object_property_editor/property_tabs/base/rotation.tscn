@@ -2,7 +2,7 @@
 
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://scenes/menu/line_edit_unfocus.gd" type="Script" id=2]
-[ext_resource path="res://scenes/editor/assets/RotateArrow.svg" type="Texture" id=3]
+[ext_resource path="res://assets/icons/RotateArrow.svg" type="Texture" id=3]
 [ext_resource path="res://scenes/editor/windows/object_property_editor/property_tabs/base/rotation.gd" type="Script" id=4]
 [ext_resource path="res://scenes/editor/windows/object_property_editor/property_tabs/base/rotation_anim.gd" type="Script" id=5]
 

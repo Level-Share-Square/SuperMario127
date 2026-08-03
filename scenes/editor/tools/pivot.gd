@@ -3,8 +3,8 @@ extends TextureButton
 onready var pivot_toggle = $"%PivotToggleButton"
 onready var selector: ObjectSelector = owner
 
-onready var pivot_off_icon: StreamTexture = preload("res://scenes/editor/assets/PivotOff.svg")
-onready var pivot_on_icon: StreamTexture = preload("res://scenes/editor/assets/PivotOn.svg")
+onready var pivot_off_icon: StreamTexture = preload("res://assets/icons/PivotOff.svg")
+onready var pivot_on_icon: StreamTexture = preload("res://assets/icons/PivotOn.svg")
 
 func get_position_centered(position: Vector2 = selector.fill_rect.get_center()) -> Vector2:
 	return position - rect_size/2

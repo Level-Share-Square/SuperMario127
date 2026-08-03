@@ -4,8 +4,8 @@ onready var selection_box = get_parent()
 onready var actual_box = selection_box.get_node("%SelectionBox")
 onready var pivot_toggle = $"%PivotToggleButton"
 
-onready var pivot_off_icon: StreamTexture = preload("res://scenes/editor/assets/PivotOff.svg")
-onready var pivot_on_icon: StreamTexture = preload("res://scenes/editor/assets/PivotOn.svg")
+onready var pivot_off_icon: StreamTexture = preload("res://assets/icons/PivotOff.svg")
+onready var pivot_on_icon: StreamTexture = preload("res://assets/icons/PivotOn.svg")
 
 func _process(delta):
 	if pressed:

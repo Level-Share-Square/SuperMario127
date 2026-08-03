@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://scenes/editor/windows/editor_window.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/editor/windows/editor_options/area_settings.gd" type="Script" id=2]
@@ -7,9 +7,11 @@
 [ext_resource path="res://scenes/menu/button_scripts/button_sound.gd" type="Script" id=5]
 [ext_resource path="res://scenes/shared/background/backgrounds/ids.tres" type="Resource" id=6]
 [ext_resource path="res://scenes/shared/background/foregrounds/ids.tres" type="Resource" id=7]
-[ext_resource path="res://scenes/editor/assets/palette.svg" type="Texture" id=8]
+[ext_resource path="res://assets/icons/palette.svg" type="Texture" id=8]
 [ext_resource path="res://scenes/shared/background/foregrounds/forest/preview.png" type="Texture" id=9]
 [ext_resource path="res://scenes/shared/background/backgrounds/day/day.png" type="Texture" id=10]
+[ext_resource path="res://scenes/editor/windows/editor_options/music_panel.tscn" type="PackedScene" id=11]
+[ext_resource path="res://scenes/editor/windows/editor_options/music_manager.gd" type="Script" id=12]
 
 [node name="AreaSettingsWindow" instance=ExtResource( 1 )]
 margin_right = 391.0
@@ -74,8 +76,8 @@ backgrounds = ExtResource( 6 )
 foregrounds = ExtResource( 7 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ContentDivider/ContentMat/Tabs/Background" index="0"]
-margin_right = 375.0
-margin_bottom = 166.0
+margin_right = 367.0
+margin_bottom = 161.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -270,7 +272,101 @@ margin_bottom = 40.0
 rect_min_size = Vector2( 120, 0 )
 script = ExtResource( 5 )
 
-[node name="Settings" type="ScrollContainer" parent="ContentDivider/ContentMat/Tabs" index="1"]
+[node name="Music" type="ScrollContainer" parent="ContentDivider/ContentMat/Tabs" index="1"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 27.0
+margin_right = -4.0
+margin_bottom = -4.0
+scroll_horizontal_enabled = false
+scroll_deadzone = 7
+script = ExtResource( 12 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ContentDivider/ContentMat/Tabs/Music" index="0"]
+margin_right = 375.0
+margin_bottom = 166.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ContentDivider/ContentMat/Tabs/Music/VBoxContainer" index="0"]
+margin_right = 372.0
+margin_bottom = 19.0
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Padding" type="Control" parent="ContentDivider/ContentMat/Tabs/Music/VBoxContainer/HBoxContainer" index="0"]
+margin_bottom = 19.0
+
+[node name="SongType" type="Label" parent="ContentDivider/ContentMat/Tabs/Music/VBoxContainer/HBoxContainer" index="1"]
+unique_name_in_owner = true
+margin_left = 4.0
+margin_right = 88.0
+margin_bottom = 17.0
+size_flags_vertical = 2
+text = "Preset Music"
+
+[node name="Padding2" type="Control" parent="ContentDivider/ContentMat/Tabs/Music/VBoxContainer/HBoxContainer" index="2"]
+margin_left = 92.0
+margin_right = 285.0
+margin_bottom = 19.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Switch" type="Button" parent="ContentDivider/ContentMat/Tabs/Music/VBoxContainer/HBoxContainer" index="3"]
+unique_name_in_owner = true
+margin_left = 289.0
+margin_right = 372.0
+margin_bottom = 19.0
+size_flags_horizontal = 8
+size_flags_vertical = 0
+text = "Use Custom"
+script = ExtResource( 5 )
+
+[node name="CustomMusic" type="VBoxContainer" parent="ContentDivider/ContentMat/Tabs/Music/VBoxContainer" index="1"]
+unique_name_in_owner = true
+visible = false
+margin_top = 23.0
+margin_right = 372.0
+margin_bottom = 173.0
+
+[node name="Label" type="Label" parent="ContentDivider/ContentMat/Tabs/Music/VBoxContainer/CustomMusic" index="0"]
+margin_right = 372.0
+margin_bottom = 17.0
+text = "Background Music:"
+align = 1
+
+[node name="BGMPanel" parent="ContentDivider/ContentMat/Tabs/Music/VBoxContainer/CustomMusic" index="1" instance=ExtResource( 11 )]
+
+[node name="Label2" type="Label" parent="ContentDivider/ContentMat/Tabs/Music/VBoxContainer/CustomMusic" index="2"]
+margin_top = 77.0
+margin_right = 372.0
+margin_bottom = 94.0
+text = "Underwater Music:"
+align = 1
+
+[node name="UWMPanel" parent="ContentDivider/ContentMat/Tabs/Music/VBoxContainer/CustomMusic" index="3" instance=ExtResource( 11 )]
+margin_top = 98.0
+margin_bottom = 150.0
+music_type = 1
+
+[node name="PresetMusic" type="ScrollContainer" parent="ContentDivider/ContentMat/Tabs/Music/VBoxContainer" index="2"]
+unique_name_in_owner = true
+margin_top = 23.0
+margin_right = 372.0
+margin_bottom = 167.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="SongContainer" type="VBoxContainer" parent="ContentDivider/ContentMat/Tabs/Music/VBoxContainer/PresetMusic" index="0"]
+unique_name_in_owner = true
+margin_right = 364.0
+margin_bottom = 144.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Settings" type="ScrollContainer" parent="ContentDivider/ContentMat/Tabs" index="2"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0

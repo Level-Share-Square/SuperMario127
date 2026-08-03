@@ -18,10 +18,10 @@
 [ext_resource path="res://scenes/menu/button_scripts/press_countdown.gd" type="Script" id=16]
 [ext_resource path="res://scenes/menu/button_scripts/icon_helper.gd" type="Script" id=17]
 [ext_resource path="res://scenes/actors/objects/pipe/pipe.png" type="Texture" id=18]
-[ext_resource path="res://scenes/menu/pause/pause_main/icons/settings.svg" type="Texture" id=19]
+[ext_resource path="res://assets/icons/settings.svg" type="Texture" id=19]
 [ext_resource path="res://scenes/menu/main_menu/discord-mark-white.svg" type="Texture" id=20]
-[ext_resource path="res://scenes/menu/level_portal/icons/author.png" type="Texture" id=22]
-[ext_resource path="res://scenes/menu/pause/pause_main/icons/quit.png" type="Texture" id=23]
+[ext_resource path="res://assets/icons/author.png" type="Texture" id=22]
+[ext_resource path="res://assets/icons/quit.png" type="Texture" id=23]
 
 [sub_resource type="Gradient" id=11]
 offsets = PoolRealArray( 0.0502793, 0.944134, 1 )

@@ -5,8 +5,8 @@ onready var edit = $"%Edit"
 onready var select = $"%Select"
 onready var show_hide = $"%ShowHide"
 
-onready var eye_open = preload("res://scenes/editor/assets/EyeOpen.svg")
-onready var eye_closed = preload("res://scenes/editor/assets/EyeClosed.svg")
+onready var eye_open = preload("res://assets/icons/EyeOpen.svg")
+onready var eye_closed = preload("res://assets/icons/EyeClosed.svg")
 
 var shared: LevelShared
 var layer_data: LayerData

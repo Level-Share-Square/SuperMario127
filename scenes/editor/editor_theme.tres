@@ -1,13 +1,12 @@
-[gd_resource type="Theme" load_steps=76 format=2]
+[gd_resource type="Theme" load_steps=77 format=2]
 
 [ext_resource path="res://assets/fonts/delfino_small.tres" type="DynamicFont" id=1]
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://assets/misc/dropdown_arrow.png" type="Texture" id=3]
 [ext_resource path="res://assets/misc/checkbox_filled.png" type="Texture" id=4]
 [ext_resource path="res://assets/misc/checkbox.png" type="Texture" id=5]
-[ext_resource path="res://scenes/editor/assets/CheckUnchecked.svg" type="Texture" id=6]
-[ext_resource path="res://scenes/editor/assets/CheckChecked.svg" type="Texture" id=7]
-[ext_resource path="res://scenes/editor/assets/text_clear.svg" type="Texture" id=8]
+[ext_resource path="res://assets/icons/text_clear.svg" type="Texture" id=6]
+[ext_resource path="res://assets/icons/CheckChecked.svg" type="Texture" id=7]
 [ext_resource path="res://assets/fonts/DelfinoFont16.tres" type="DynamicFont" id=9]
 
 [sub_resource type="StyleBoxFlat" id=113]
@@ -107,6 +106,19 @@ content_margin_top = 1.0
 content_margin_bottom = 1.0
 bg_color = Color( 0.588235, 0.631373, 0.921569, 1 )
 corner_radius_bottom_right = 4
+
+[sub_resource type="StyleBoxFlat" id=183]
+content_margin_left = 4.0
+content_margin_right = 4.0
+content_margin_top = 1.0
+content_margin_bottom = 1.0
+bg_color = Color( 0.26832, 0.1568, 0.32, 1 )
+skew = Vector2( 0.1, 0 )
+border_color = Color( 0.358767, 0.1363, 0.47, 1 )
+corner_radius_top_left = 4
+corner_radius_top_right = 2
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 2
 
 [sub_resource type="StyleBoxFlat" id=120]
 content_margin_left = 4.0
@@ -230,6 +242,9 @@ corner_radius_bottom_left = 128
 anti_aliasing = false
 
 [sub_resource type="StyleBoxEmpty" id=163]
+
+[sub_resource type="StreamTexture" id=184]
+load_path = "res://.import/CheckUnchecked.svg-7e98a7ce413890c81c4f04b189f01fa3.stex"
 
 [sub_resource type="StyleBoxEmpty" id=171]
 
@@ -637,6 +652,7 @@ ButtonPurple/colors/font_color_focus = Color( 1, 1, 1, 1 )
 ButtonPurple/colors/font_color_hover = Color( 1, 1, 1, 1 )
 ButtonPurple/colors/font_color_hover_pressed = Color( 1, 1, 1, 1 )
 ButtonPurple/colors/font_color_pressed = Color( 1, 1, 1, 1 )
+ButtonPurple/styles/disabled = SubResource( 183 )
 ButtonPurple/styles/normal = SubResource( 120 )
 ButtonPurple/styles/pressed = null
 ButtonRectangle/base_type = "Button"
@@ -684,7 +700,7 @@ CheckButtonTransparent/colors/font_color_focus = Color( 1, 1, 1, 1 )
 CheckButtonTransparent/colors/font_color_hover = Color( 1, 1, 1, 1 )
 CheckButtonTransparent/colors/font_color_hover_pressed = Color( 1, 1, 1, 1 )
 CheckButtonTransparent/colors/font_color_pressed = Color( 1, 1, 1, 1 )
-CheckButtonTransparent/icons/off = ExtResource( 6 )
+CheckButtonTransparent/icons/off = SubResource( 184 )
 CheckButtonTransparent/icons/on = ExtResource( 7 )
 CheckButtonTransparent/styles/disabled = SubResource( 171 )
 CheckButtonTransparent/styles/focus = SubResource( 172 )
@@ -706,12 +722,12 @@ ImageBorder/styles/panel = SubResource( 157 )
 LineEdit/colors/cursor_color = Color( 0, 0, 0, 1 )
 LineEdit/colors/font_color = Color( 0, 0, 0, 1 )
 LineEdit/colors/font_color_uneditable = Color( 0, 0, 0, 0.501961 )
-LineEdit/icons/clear = ExtResource( 8 )
+LineEdit/icons/clear = ExtResource( 6 )
 LineEdit/styles/focus = SubResource( 155 )
 LineEdit/styles/normal = SubResource( 156 )
 LineEdit/styles/read_only = SubResource( 113 )
 LineEditStraight/base_type = "LineEdit"
-LineEditStraight/icons/clear = ExtResource( 8 )
+LineEditStraight/icons/clear = ExtResource( 6 )
 LineEditStraight/styles/normal = SubResource( 181 )
 LineEditStraight/styles/read_only = SubResource( 182 )
 MenuPanel/base_type = "Panel"
