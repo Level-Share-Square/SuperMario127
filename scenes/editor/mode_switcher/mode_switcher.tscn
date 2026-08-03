@@ -2,7 +2,7 @@
 
 [ext_resource path="res://scenes/editor/mode_switcher/pipe_shine.tres" type="Texture" id=1]
 [ext_resource path="res://scenes/editor/mode_switcher/pipe_stylebox.tres" type="StyleBox" id=2]
-[ext_resource path="res://scenes/menu/pause/pause_main/icons/resume.png" type="Texture" id=3]
+[ext_resource path="res://scenes/menu/levels_list/icons/play.png" type="Texture" id=3]
 [ext_resource path="res://scenes/editor/mode_switcher/pipe_shine2.tres" type="Texture" id=4]
 [ext_resource path="res://scenes/editor/assets/CheckUnchecked.svg" type="Texture" id=5]
 [ext_resource path="res://scenes/editor/mode_switcher/grid_scroll.tres" type="Material" id=6]
