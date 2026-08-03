@@ -30,8 +30,4 @@ func _ready():
 	_connect = area.connect("body_exited", self, "body_exited")
 	if palette != 0:
 		sprite.texture = palette_textures[palette - 1]
-		
-func is_middle(check: bool):
-	.is_middle(check)
-	
-	$StaticBody2D/CollisionShape2D.disabled = !check
+	$StaticBody2D/CollisionShape2D.disabled = !is_enabled_and_on_ground()
