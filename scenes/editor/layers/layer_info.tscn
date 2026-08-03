@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://assets/icons/settings.svg" type="Texture" id=1]
 [ext_resource path="res://scenes/menu/button_scripts/button_sound.gd" type="Script" id=2]
@@ -6,23 +6,63 @@
 [ext_resource path="res://scenes/editor/layers/sound_proxy.gd" type="Script" id=4]
 [ext_resource path="res://assets/icons/delete.svg" type="Texture" id=5]
 [ext_resource path="res://scenes/editor/layers/layer_info.gd" type="Script" id=6]
+[ext_resource path="res://assets/icons/HamburgerMenu.svg" type="Texture" id=7]
 [ext_resource path="res://scenes/editor/editor_theme.tres" type="Theme" id=9]
+
+[sub_resource type="StyleBoxEmpty" id=2]
 
 [sub_resource type="StyleBoxLine" id=1]
 color = Color( 1, 1, 1, 1 )
 grow_begin = -1.0
 grow_end = -1.0
 
-[node name="LayerInfo" type="HBoxContainer"]
-margin_right = 196.0
-margin_bottom = 17.0
-theme = ExtResource( 9 )
-custom_constants/separation = 5
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 81, 10.5 )
+
+[node name="LayerInfo" type="VBoxContainer"]
+margin_right = 162.0
+margin_bottom = 29.0
 script = ExtResource( 6 )
 
-[node name="Select" type="Button" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="."]
 unique_name_in_owner = true
-margin_right = 106.0
+margin_right = 162.0
+margin_bottom = 21.0
+custom_styles/panel = SubResource( 2 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer"]
+margin_right = 162.0
+margin_bottom = 21.0
+theme = ExtResource( 9 )
+custom_constants/separation = 5
+
+[node name="Dragger" type="Button" parent="PanelContainer/HBoxContainer"]
+unique_name_in_owner = true
+modulate = Color( 1, 1, 1, 0.627451 )
+margin_right = 20.0
+margin_bottom = 21.0
+rect_min_size = Vector2( 20, 0 )
+focus_mode = 0
+icon = ExtResource( 7 )
+flat = true
+icon_align = 1
+expand_icon = true
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/HBoxContainer"]
+margin_left = 25.0
+margin_right = 72.0
+margin_bottom = 21.0
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/HBoxContainer/MarginContainer"]
+margin_right = 47.0
+margin_bottom = 21.0
+size_flags_horizontal = 3
+custom_constants/separation = 0
+
+[node name="Select" type="Button" parent="PanelContainer/HBoxContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+margin_right = 47.0
 margin_bottom = 17.0
 rect_min_size = Vector2( 24, 16 )
 focus_mode = 0
@@ -35,25 +75,24 @@ icon_align = 1
 expand_icon = true
 script = ExtResource( 2 )
 
-[node name="LayerColor" type="HSeparator" parent="Select"]
+[node name="LayerColor" type="HSeparator" parent="PanelContainer/HBoxContainer/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 modulate = Color( 1, 0, 0, 1 )
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = 1.0
+margin_top = 17.0
+margin_right = 47.0
+margin_bottom = 21.0
 custom_styles/separator = SubResource( 1 )
 
-[node name="VSeparator" type="VSeparator" parent="."]
-margin_left = 111.0
-margin_right = 115.0
-margin_bottom = 17.0
+[node name="VSeparator" type="VSeparator" parent="PanelContainer/HBoxContainer"]
+margin_left = 77.0
+margin_right = 81.0
+margin_bottom = 21.0
 
-[node name="ShowHide" type="Button" parent="."]
+[node name="ShowHide" type="Button" parent="PanelContainer/HBoxContainer"]
 unique_name_in_owner = true
-margin_left = 120.0
-margin_right = 136.0
-margin_bottom = 17.0
+margin_left = 86.0
+margin_right = 102.0
+margin_bottom = 21.0
 rect_min_size = Vector2( 16, 16 )
 hint_tooltip = "Toggle Layer Visibility"
 focus_mode = 0
@@ -66,16 +105,16 @@ icon_align = 1
 expand_icon = true
 script = ExtResource( 2 )
 
-[node name="VSeparator2" type="VSeparator" parent="."]
-margin_left = 141.0
-margin_right = 145.0
-margin_bottom = 17.0
+[node name="VSeparator2" type="VSeparator" parent="PanelContainer/HBoxContainer"]
+margin_left = 107.0
+margin_right = 111.0
+margin_bottom = 21.0
 
-[node name="Edit" type="Button" parent="."]
+[node name="Edit" type="Button" parent="PanelContainer/HBoxContainer"]
 unique_name_in_owner = true
-margin_left = 150.0
-margin_right = 166.0
-margin_bottom = 17.0
+margin_left = 116.0
+margin_right = 132.0
+margin_bottom = 21.0
 rect_min_size = Vector2( 16, 16 )
 hint_tooltip = "Layer Settings"
 focus_mode = 0
@@ -88,16 +127,16 @@ icon_align = 1
 expand_icon = true
 script = ExtResource( 2 )
 
-[node name="VSeparator3" type="VSeparator" parent="."]
-margin_left = 171.0
-margin_right = 175.0
-margin_bottom = 17.0
+[node name="VSeparator3" type="VSeparator" parent="PanelContainer/HBoxContainer"]
+margin_left = 137.0
+margin_right = 141.0
+margin_bottom = 21.0
 
-[node name="Delete" type="Button" parent="."]
+[node name="Delete" type="Button" parent="PanelContainer/HBoxContainer"]
 unique_name_in_owner = true
-margin_left = 180.0
-margin_right = 196.0
-margin_bottom = 17.0
+margin_left = 146.0
+margin_right = 162.0
+margin_bottom = 21.0
 rect_min_size = Vector2( 16, 16 )
 hint_tooltip = "Delete Layer"
 focus_mode = 0
@@ -110,16 +149,36 @@ icon_align = 1
 expand_icon = true
 script = ExtResource( 2 )
 
-[node name="HoverSound" type="AudioStreamPlayer" parent="."]
+[node name="HoverSound" type="AudioStreamPlayer" parent="PanelContainer/HBoxContainer"]
 unique_name_in_owner = true
 volume_db = -10.0
 bus = "Sounds"
 script = ExtResource( 4 )
 
-[node name="ClickSound" type="AudioStreamPlayer" parent="."]
+[node name="ClickSound" type="AudioStreamPlayer" parent="PanelContainer/HBoxContainer"]
 unique_name_in_owner = true
 volume_db = -10.0
 bus = "Sounds"
 script = ExtResource( 4 )
 
-[connection signal="pressed" from="Delete" to="." method="delete_layer"]
+[node name="Area2D" type="Area2D" parent="PanelContainer"]
+collision_layer = 131072
+collision_mask = 131072
+input_pickable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PanelContainer/Area2D"]
+unique_name_in_owner = true
+position = Vector2( 81, 10.5 )
+shape = SubResource( 3 )
+
+[node name="HSeparator" type="HSeparator" parent="."]
+margin_top = 25.0
+margin_right = 162.0
+margin_bottom = 29.0
+
+[connection signal="resized" from="PanelContainer" to="." method="panel_resized"]
+[connection signal="button_down" from="PanelContainer/HBoxContainer/Dragger" to="." method="dragger_down"]
+[connection signal="button_up" from="PanelContainer/HBoxContainer/Dragger" to="." method="dragger_up"]
+[connection signal="pressed" from="PanelContainer/HBoxContainer/Delete" to="." method="delete_layer"]
+[connection signal="area_entered" from="PanelContainer/Area2D" to="." method="area_entered"]
+[connection signal="area_exited" from="PanelContainer/Area2D" to="." method="area_exited"]

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/tilelock.svg-40ed323207bb8019d13d58122a8a9d9a.stex"
+path="res://.import/grabber_highlight.png-5a9682124f55175e54019bd5c7ea5248.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/editor/tools/tilelock.svg"
-dest_files=[ "res://.import/tilelock.svg-40ed323207bb8019d13d58122a8a9d9a.stex" ]
+source_file="res://scenes/editor/assets/grabber_highlight.png"
+dest_files=[ "res://.import/grabber_highlight.png-5a9682124f55175e54019bd5c7ea5248.stex" ]
 
 [params]
 

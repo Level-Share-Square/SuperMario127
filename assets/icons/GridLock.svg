@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 419.73 419.73">
+  <g id="Layer_50" data-name="Layer 50">
+    <g>
+      <rect x="112.79" y="218.81" width="92.08" height="88.14" style="fill: #fff;"/>
+      <rect x="214.87" y="218.81" width="92.08" height="88.14" style="fill: #fff;"/>
+      <rect x="163.44" y="112.79" width="92.08" height="97.08" style="fill: #fff;"/>
+      <rect x="112.79" y="112.79" width="41.8" height="97.08" style="fill: #fff;"/>
+      <rect x="265.15" y="112.79" width="41.8" height="97.08" style="fill: #fff;"/>
+      <polyline points="0 112.79 97.08 112.79 97.08 306.94 0 306.94 0 294.06 84.19 294.06 84.19 125.67 0 125.67" style="fill: #fff;"/>
+      <polyline points="419.73 306.94 322.65 306.94 322.65 112.79 419.73 112.79 419.73 125.67 335.54 125.67 335.54 294.06 419.73 294.06" style="fill: #fff;"/>
+      <polyline points="306.94 0 306.94 97.08 112.79 97.08 112.79 0 125.67 0 125.67 84.19 294.06 84.19 294.06 0" style="fill: #fff;"/>
+      <polyline points="112.79 419.73 112.79 322.65 306.94 322.65 306.94 419.73 294.06 419.73 294.06 335.54 125.67 335.54 125.67 419.73" style="fill: #fff;"/>
+    </g>
+  </g>
+</svg>

@@ -1,3 +1,4 @@
+class_name LayerDropdown
 extends VBoxContainer
 
 
@@ -10,6 +11,9 @@ onready var new_layer = $"%NewLayer"
 onready var new_decor = $"%NewDecor"
 onready var layer_picker = $"%LayerPicker"
 onready var parallax_scroll = $"%ParallaxScroll"
+onready var drag_area = $"%DragArea"
+
+var is_dragging: bool
 
 
 func _ready():
@@ -25,17 +29,20 @@ func _ready():
 	editor.action_manager.connect("redo", self, "update_layers")
 	editor.action_manager.connect("action", self, "update_layers")
 
+
 func select_layer(index: int, toggle_dropdown: bool = true) -> void:
 	var layer = shared.get_layer_at(index)
 	var layer_metadata: LayerMetadata = layer.layer_data.layer_metadata
 	layer_picker.text = layer_metadata.layer_name
 	
-	layer_picker.get_node("LayerColor").modulate = EditorLayerManager.get_band_color(layer_metadata.order, shared.origin.layer_data.layer_metadata.order)
+	layer_picker.get_node("LayerColor").modulate = EditorLayerManager.get_band_color(
+		layer_metadata.order, shared.origin.layer_data.layer_metadata.order
+	)
 	editor.layer = shared.layer_index_to_uuid(index)
 	
-	# to close the dropdown
 	if toggle_dropdown:
 		layer_picker.emit_signal("pressed")
+
 
 func add_layer(layer_data: LayerData) -> void:
 	var layer_info: LayerInfo = LAYER_INFO_SCENE.instance()
@@ -44,8 +51,6 @@ func add_layer(layer_data: LayerData) -> void:
 	layer_info.connect("layer_selected", self, "select_layer")
 	layers.add_child(layer_info)
 
-	var h_separator := HSeparator.new()
-	layers.add_child(h_separator)
 
 func update_layers() -> void:
 	for layer in layers.get_children():
@@ -55,9 +60,21 @@ func update_layers() -> void:
 		var layer_data = shared.get_layer(layer).layer_data
 		add_layer(layer_data)
 
+
 func new_layer(ground: bool = true) -> void:
-	print(ground)
 	var action := AddLayerAction.new()
 	action.shared = shared
 	action.ground = ground
 	editor.action_manager.commit_action(action)
+
+
+func _process(_delta: float) -> void:
+	if not is_dragging: return
+	drag_area.position = get_global_mouse_position()
+
+
+func layer_moved():
+	var cur_layer_metadata = shared.get_layer(editor.layer)
+	layer_picker.get_node("LayerColor").modulate = EditorLayerManager.get_band_color(
+		cur_layer_metadata.order, shared.origin.layer_data.layer_metadata.order
+	)
