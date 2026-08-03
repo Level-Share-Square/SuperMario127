@@ -14,14 +14,17 @@ static func validate_level_code(code: String):
 		if character == '[' or character == ']' or character == '{' or character=='}':
 			if character=='[': bracket_stack += 1
 			elif character==']':
-				if bracket_stack <= 0: return false
+				if bracket_stack <= 0: 
+					return false
 				bracket_stack -= 1
 			elif character=='{':
-				if character[i-1] != '[' or in_curly_braces: return false
+				if code[i-1] != '[' or in_curly_braces: 
+					return false
 				in_curly_braces = true
 			elif character=='}':
-				if !in_curly_braces: return false
+				if !in_curly_braces: 
+					return false
 				in_curly_braces = false
-	if bracket_stack != 0: return false
+	if bracket_stack != 0: 
+		return false
 	return true
-

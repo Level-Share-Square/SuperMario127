@@ -7,8 +7,8 @@ const EDITOR_PATH = preload("res://scenes/editor/editor.tscn")
 
 
 func _ready():
-#	test_level_code_validation()
-	convert_debug_level()
+	test_level_code_validation()
+	#convert_debug_level()
 #	convert_dev_levels()
 	
 #	instance_debug_level()
@@ -58,9 +58,16 @@ func test_level_code_validation():
 	var invalid_1 = get_path_as_text("res://level/data/test/invalid_level_1.txt")
 	var invalid_2 = get_path_as_text("res://level/data/test/invalid_level_2.txt")
 	var invalid_3 = get_path_as_text("res://level/data/test/invalid_level_3.txt")
+	var valid = get_path_as_text("res://level/data/test/tabs_awesome_level.txt")
+	var invalid_area = get_path_as_text("res://level/data/test/invalid_area.txt")
+	var valid_area = get_path_as_text("res://level/data/test/valid_area.txt")
 	print(level_code_validator_util.validate_level_code(invalid_1))
 	print(level_code_validator_util.validate_level_code(invalid_2))
 	print(level_code_validator_util.validate_level_code(invalid_3))
+	print(level_code_validator_util.validate_level_code(valid))
+	print("areas")
+	print(level_code_validator_util.validate_level_code(invalid_area))
+	print(level_code_validator_util.validate_level_code(valid_area))
 	pass
 
 
