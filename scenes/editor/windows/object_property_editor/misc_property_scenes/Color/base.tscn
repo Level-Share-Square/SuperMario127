@@ -961,6 +961,7 @@ size_flags_vertical = 3
 margin_left = 4.0
 margin_right = 229.0
 margin_bottom = 199.0
+rect_min_size = Vector2( 0, 199 )
 rect_clip_content = true
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -1037,26 +1038,20 @@ stretch_mode = 5
 margin_top = 111.0
 margin_right = 217.0
 margin_bottom = 128.0
+alignment = 1
 
 [node name="Label" type="Label" parent="VBoxContainer/Expanded/Revealer/MarginContainer/VBoxContainer/SliderR"]
-margin_right = 17.0
+margin_left = 65.0
+margin_right = 82.0
 margin_bottom = 17.0
 rect_min_size = Vector2( 17, 0 )
 text = "R"
 align = 1
 
-[node name="HSlider" type="HSlider" parent="VBoxContainer/Expanded/Revealer/MarginContainer/VBoxContainer/SliderR"]
-margin_left = 21.0
-margin_right = 147.0
-margin_bottom = 16.0
-size_flags_horizontal = 3
-max_value = 255.0
-rounded = true
-
 [node name="R" type="SpinBox" parent="VBoxContainer/Expanded/Revealer/MarginContainer/VBoxContainer/SliderR"]
 unique_name_in_owner = true
-margin_left = 151.0
-margin_right = 217.0
+margin_left = 86.0
+margin_right = 152.0
 margin_bottom = 17.0
 max_value = 255.0
 allow_greater = true
@@ -1067,26 +1062,20 @@ script = ExtResource( 12 )
 margin_top = 132.0
 margin_right = 217.0
 margin_bottom = 149.0
+alignment = 1
 
 [node name="Label" type="Label" parent="VBoxContainer/Expanded/Revealer/MarginContainer/VBoxContainer/SliderG"]
-margin_right = 17.0
+margin_left = 65.0
+margin_right = 82.0
 margin_bottom = 17.0
 rect_min_size = Vector2( 17, 0 )
 text = "G"
 align = 1
 
-[node name="HSlider" type="HSlider" parent="VBoxContainer/Expanded/Revealer/MarginContainer/VBoxContainer/SliderG"]
-margin_left = 21.0
-margin_right = 147.0
-margin_bottom = 16.0
-size_flags_horizontal = 3
-max_value = 255.0
-rounded = true
-
 [node name="G" type="SpinBox" parent="VBoxContainer/Expanded/Revealer/MarginContainer/VBoxContainer/SliderG"]
 unique_name_in_owner = true
-margin_left = 151.0
-margin_right = 217.0
+margin_left = 86.0
+margin_right = 152.0
 margin_bottom = 17.0
 max_value = 255.0
 allow_greater = true
@@ -1098,26 +1087,20 @@ component = 1
 margin_top = 153.0
 margin_right = 217.0
 margin_bottom = 170.0
+alignment = 1
 
 [node name="Label" type="Label" parent="VBoxContainer/Expanded/Revealer/MarginContainer/VBoxContainer/SliderB"]
-margin_right = 17.0
+margin_left = 65.0
+margin_right = 82.0
 margin_bottom = 17.0
 rect_min_size = Vector2( 17, 0 )
 text = "B"
 align = 1
 
-[node name="HSlider" type="HSlider" parent="VBoxContainer/Expanded/Revealer/MarginContainer/VBoxContainer/SliderB"]
-margin_left = 21.0
-margin_right = 147.0
-margin_bottom = 16.0
-size_flags_horizontal = 3
-max_value = 255.0
-rounded = true
-
 [node name="B" type="SpinBox" parent="VBoxContainer/Expanded/Revealer/MarginContainer/VBoxContainer/SliderB"]
 unique_name_in_owner = true
-margin_left = 151.0
-margin_right = 217.0
+margin_left = 86.0
+margin_right = 152.0
 margin_bottom = 17.0
 max_value = 255.0
 allow_greater = true
@@ -1129,26 +1112,20 @@ component = 2
 margin_top = 174.0
 margin_right = 217.0
 margin_bottom = 191.0
+alignment = 1
 
 [node name="Label" type="Label" parent="VBoxContainer/Expanded/Revealer/MarginContainer/VBoxContainer/SliderA"]
-margin_right = 17.0
+margin_left = 65.0
+margin_right = 82.0
 margin_bottom = 17.0
 rect_min_size = Vector2( 17, 0 )
 text = "A"
 align = 1
 
-[node name="HSlider" type="HSlider" parent="VBoxContainer/Expanded/Revealer/MarginContainer/VBoxContainer/SliderA"]
-margin_left = 21.0
-margin_right = 147.0
-margin_bottom = 16.0
-size_flags_horizontal = 3
-max_value = 255.0
-rounded = true
-
 [node name="A" type="SpinBox" parent="VBoxContainer/Expanded/Revealer/MarginContainer/VBoxContainer/SliderA"]
 unique_name_in_owner = true
-margin_left = 151.0
-margin_right = 217.0
+margin_left = 86.0
+margin_right = 152.0
 margin_bottom = 17.0
 max_value = 255.0
 allow_greater = true

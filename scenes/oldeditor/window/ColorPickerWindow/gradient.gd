@@ -23,6 +23,10 @@ func _input(event):
 		pressed = event.pressed && get_local_mouse_position().x < 18 && get_local_mouse_position().y < 120 && get_local_mouse_position() > Vector2.ZERO
 	
 	if !pressed:
+		if event is InputEventMouseButton && event.button_index == BUTTON_LEFT && get_local_mouse_position().x < 18 && get_local_mouse_position().y < 120 && get_local_mouse_position() > Vector2.ZERO:
+			var new_color = color_wheel.base_color
+			new_color.v = value
+			color_wheel.emit_signal("updated", new_color, true)
 		return
 	
 	gradient_selector.rect_position.y = clamp(get_local_mouse_position().y, whiteY, blackY)
@@ -32,7 +36,7 @@ func _input(event):
 	modulate.v = value
 	var new_color = color_wheel.base_color
 	new_color.v = value
-	color_wheel.emit_signal("updated", new_color)
+	color_wheel.emit_signal("updated", new_color, false)
 
 func set_brightness(brightness):
 	gradient_selector.rect_position.y = lerp(blackY, whiteY, brightness)

@@ -14,7 +14,7 @@ onready var a = $"%A"
 var property_node : Node
 var base_color : Color # color without transparency
 
-signal updated(color)
+signal updated(color, save)
 
 func _ready():
 	var colors = [r, g, b, a]
@@ -28,11 +28,14 @@ func _input(event):
 	var center = get_rect().size / 2
 	var mouse_pos = get_local_mouse_position() - center
 	var normal_coordinates = ((mouse_pos) / get_rect().size.x * 2)
-	
+
 	if event is InputEventMouseButton && event.button_index == BUTTON_LEFT:
+
 		pressed = event.pressed && normal_coordinates.length() <= 1
 	
+	
 	if !pressed:
+		if event is InputEventMouseButton && event.button_index == BUTTON_LEFT && normal_coordinates.length() <= 1: emit_signal("updated", base_color, true)
 		return
 	
 	normal_coordinates = normal_coordinates.normalized() * min(normal_coordinates.length(), 1)
@@ -42,7 +45,8 @@ func _input(event):
 	base_color = Color.from_hsv((atan2(-normal_coordinates.x, -normal_coordinates.y) / (2*PI)) + 0.5, normal_coordinates.length(), gradient_selector.value)
 	gradient_selector.modulate = base_color
 	gradient_selector.modulate.a = 255
-	emit_signal("updated", base_color)
+
+	emit_signal("updated", base_color, false)
 	
 func update_value(color: Color, notify_manager: bool = true):
 	var length := get_rect().size.x * color.s / 2
