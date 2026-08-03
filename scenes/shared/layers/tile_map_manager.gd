@@ -96,7 +96,7 @@ func update_autotile(coords: Vector2, use_godot_autotile: bool = true):
 # tile data literally anywhere now
 func _add_margins():
 	var bounds: Rect2 = CurrentLevelData.current_area.header.bounds
-	var tile: int = tile_set.find_tile_by_name("LevelMargin")
+	var tile: int = tile_set.find_tile_by_name("OutOfBounds")
 	
 	var left: int = bounds.position.x - 1
 	var top: int = bounds.position.y - 1

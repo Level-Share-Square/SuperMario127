@@ -9,9 +9,6 @@ func load_in(layer_data: LayerData):
 	.load_in(layer_data)
 	
 	parallax_scroll.set_parallax_distance(layer_data.layer_metadata.parallax_distance)
-	
-	tile_map_manager.load_in(layer_data)
-	object_manager.load_in(layer_data)
 
 
 func set_parallax_distance(s_parallax_distance: float) -> void:

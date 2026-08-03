@@ -1,15 +1,6 @@
 class_name LevelGroundLayer
 extends LevelLayer
 
-
-func load_in(layer_data: LayerData) -> void:
-	.load_in(layer_data)
-	
-	tile_map_manager.load_in(layer_data)
-	object_manager.load_in(layer_data)
-	
-#	_test_load_in(layer_data)
-
 # used for testing load times
 func _test_load_in(layer_data: LayerData) -> void:
 	# tile loading

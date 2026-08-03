@@ -25,6 +25,9 @@ func load_in(layer_data: LayerData):
 	set_order(layer_data.layer_metadata.order)
 	visible = layer_data.layer_metadata.layer_visible
 	self.layer_data = layer_data
+	
+	tile_map_manager.load_in(layer_data)
+	object_manager.load_in(layer_data)
 
 
 func set_order(s_order: int) -> void:

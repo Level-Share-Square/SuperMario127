@@ -154,3 +154,7 @@ func get_tile_map_manager(uuid: String):
 	
 func get_object_at_position(pos: Vector2, uuid: String):
 	return layer_dictionary[uuid].get_object_at_position(pos)
+
+func update_tilemaps():
+	for layer in layer_dictionary.values():
+		layer.tile_map_manager.load_in(layer.layer_data)

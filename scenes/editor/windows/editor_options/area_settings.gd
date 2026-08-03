@@ -1,7 +1,7 @@
 extends VBoxContainer
 
-onready var editor = owner.owner
-onready var shared = editor.get_node("%Shared")
+onready var editor = get_tree().current_scene
+onready var shared = editor.get_shared_node()
 onready var camera = editor.get_node("%EditorCamera")
 
 onready var size_x = $"%SizeX"
@@ -33,5 +33,5 @@ func value_changed(value, changed_value):
 	area.header.gravity = gravity.value
 	area.header.timer = mins.value*60 + sec.value
 	if "Size" in changed_value.name:
-#		shared.update_tilemaps()
+		shared.update_tilemaps()
 		camera.update_limits(area.header)
