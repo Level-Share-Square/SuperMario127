@@ -103,10 +103,11 @@ func check_items():
 
 
 func _on_loadout_pressed(loadout_button):
+	update_level_data()
 	var loadout_palette: Array = []
 	for buttons in bottom_row.get_children():
 		loadout_palette.append(buttons.palette)
-	loadout_palettes[selected_loadout] = loadout_palette
+		loadout_palettes[selected_loadout] = loadout_palette
 	match loadout_button.name:
 		"LoadoutA":
 			selected_loadout = 0
@@ -118,6 +119,7 @@ func _on_loadout_pressed(loadout_button):
 			selected_loadout = 3
 	refresh_loadout()
 	check_items()
+	update_level_data()
 
 
 func new_favorite_selected(placeable_item: Resource, index: int):
@@ -130,6 +132,7 @@ func new_favorite_selected(placeable_item: Resource, index: int):
 		fav_items[selected_loadout].erase(item_name)
 		items_favorited[selected_loadout] -= 1
 		refresh_loadout()
+		update_level_data()
 		return
 	
 	fav_items[selected_loadout].append(item_name)
@@ -138,6 +141,7 @@ func new_favorite_selected(placeable_item: Resource, index: int):
 	bottom_row.move_child(boxes[index], items_favorited[selected_loadout])
 	items_favorited[selected_loadout] += 1
 	refresh_loadout()
+	update_level_data()
 
 
 func on_item_selected(item: PlaceableItem):
@@ -151,6 +155,7 @@ func on_item_selected(item: PlaceableItem):
 	loadouts[selected_loadout].insert(start_index, loadouts[selected_loadout].pop_back())
 	loadouts[selected_loadout][start_index] = placeable_items.placeable_items.find_key(item)
 	refresh_loadout()
+	update_level_data()
 	_on_item_button_pressed(boxes[9])
 
 	boxes[9].set_deferred("pressed", true)
@@ -163,7 +168,6 @@ func refresh_loadout():
 		item_button.set_favorite(favs_amount > 0)
 		item_button.change_item(placeable_items.placeable_items[item])
 		favs_amount -= 1
-	update_level_data()
 
 
 func _on_palettes_pressed():

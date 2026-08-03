@@ -84,7 +84,7 @@ func change_variant():
 		var old_item = item
 		var new_item = hotbar.placeable_items.placeable_items[item.change_to]
 		change_item(new_item)
-		var index = hotbar.loadouts[hotbar.selected_loadout].find(hotbar.placeable_items.placeable_items.find_key(old_item))
+		var index = get_index()
 		hotbar.loadouts[hotbar.selected_loadout].pop_at(index)
 		hotbar.loadouts[hotbar.selected_loadout].insert(index, hotbar.placeable_items.placeable_items.find_key(new_item))
 #		print(hotbar.loadouts[hotbar.selected_loadout])
