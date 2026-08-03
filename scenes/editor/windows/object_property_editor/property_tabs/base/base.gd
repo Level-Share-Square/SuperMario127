@@ -49,7 +49,7 @@ func load_base_properties(_editor: Editor, _objects: Dictionary):
 		rotation_property.hide()
 
 	if not "visible" in base_hidden_properties:
-		visible_property.load_property(editor, get_property_value(objects.keys()[0], "visible"), [
+		visible_property.load_property(editor, get_property_value(objects.keys()[0], "visibility"), [
 			"visible",
 			TYPE_BOOL,
 			PropertyInfo.new(visible_property.hint_tooltip)

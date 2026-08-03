@@ -883,7 +883,7 @@ animation = "idle"
 
 [node name="MarioBack" type="AnimatedSprite" parent="RootContainer/VBoxContainer/TopOutline/OutlineMargin/VBoxContainer/TopInner"]
 show_behind_parent = true
-position = Vector2( 34, 24 )
+position = Vector2( 34, -22 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 34 )
 animation = "idle"

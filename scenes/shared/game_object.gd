@@ -94,6 +94,10 @@ func _ready():
 	_register_properties()
 	load_placeable_item()
 	set_object_data(object_data)
+	
+	if not visible and mode == Editor.mode:
+		visible = true
+		visibility = false
 
 
 func _process(delta: float) -> void:
@@ -146,6 +150,11 @@ func _update_modulate_editor(delta: float) -> void:
 	
 	if is_object_hovered():
 		modulate.a = lerp(modulate.a, EDITOR_HOVER_ALPHA, delta * 16)
+	else:
+		modulate.a = lerp(modulate.a, 1, delta * 16)
+		
+	if not visibility:
+		modulate.a = lerp(modulate.a, EDITOR_INVISIBLE_ALPHA, delta * 16)
 	else:
 		modulate.a = lerp(modulate.a, 1, delta * 16)
 

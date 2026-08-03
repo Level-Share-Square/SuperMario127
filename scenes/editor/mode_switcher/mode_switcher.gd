@@ -108,7 +108,6 @@ func pressed(force: bool = false) -> void:
 	
 	if not playtesting:
 		animation_player.play("press")
-		yield(animation_player, "animation_finished")
 		if not is_hovered:
 			animation_player.play_backwards("hover_marioless")
 	
