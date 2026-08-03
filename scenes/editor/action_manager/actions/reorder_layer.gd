@@ -7,9 +7,10 @@ var final_layer_index: int
 
 func move_layers():
 	var layer_to_move: LevelLayer = shared.get_layer_at(layer_index)
+	var layer_uuid: String = shared.layer_index_to_uuid(layer_index)
 	
-	shared.layers.erase(layer_to_move)
-	shared.layers.insert(final_layer_index, layer_to_move)
+	shared.layers.erase(layer_uuid)
+	shared.layers.insert(final_layer_index, layer_uuid)
 	
 	shared.move_layer(layer_to_move, final_layer_index, true)
 
