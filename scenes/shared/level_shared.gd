@@ -22,6 +22,7 @@ onready var loaded_boo_texture = load(boo_block_texture)
 onready var loaded_boo_texture_invis = load(boo_block_texture_invis)
 
 signal layer_added(layer)
+signal layer_moved
 signal found_origin
 signal loaded_layers
 
@@ -94,7 +95,6 @@ func layer_index_to_uuid(index: int):
 	return layer_dictionary.find_key(get_layer_at(index))
 		
 func edit_layer(uuid: String, property: String, value):
-	print(property)
 	var layer: LevelLayer = get_layer(uuid)
 	var layer_data: LayerData = layer.layer_data
 	
@@ -109,6 +109,7 @@ func move_layer(layer: LevelLayer, to: int, save_to_data: bool = false):
 		get_child(i).set_order(i)
 		if save_to_data:
 			edit_layer(layer_index_to_uuid(i), "order", i)
+	emit_signal("layer_moved")
 			
 func load_layer_states(layer_states: Dictionary):
 	var layers_to_move: Array = []

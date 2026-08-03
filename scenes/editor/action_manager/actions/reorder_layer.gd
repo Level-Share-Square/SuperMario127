@@ -13,7 +13,7 @@ func move_layers():
 	shared.layers.insert(final_layer_index, layer_uuid)
 	
 	shared.move_layer(layer_to_move, final_layer_index, true)
-
+	
 	swap_indices()
 
 func _do():

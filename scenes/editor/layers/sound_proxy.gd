@@ -7,5 +7,4 @@ onready var owner_parent = owner.get_parent()
 onready var owner_sound = owner_parent.get_node("%" + name)
 
 func play(position: float = 0) -> void:
-	print(owner_sound)
 	owner_sound.play(position)

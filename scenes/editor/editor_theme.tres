@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=81 format=2]
+[gd_resource type="Theme" load_steps=84 format=2]
 
 [ext_resource path="res://assets/fonts/delfino_small.tres" type="DynamicFont" id=1]
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=2]
@@ -9,6 +9,8 @@
 [ext_resource path="res://assets/icons/CheckChecked.svg" type="Texture" id=7]
 [ext_resource path="res://assets/fonts/delfino_tiny.tres" type="DynamicFont" id=8]
 [ext_resource path="res://assets/fonts/DelfinoFont16.tres" type="DynamicFont" id=9]
+[ext_resource path="res://scenes/editor/assets/grabber_highlight.png" type="Texture" id=10]
+[ext_resource path="res://scenes/editor/assets/grabber.png" type="Texture" id=11]
 
 [sub_resource type="StyleBoxFlat" id=113]
 content_margin_left = 4.0
@@ -345,6 +347,13 @@ corner_radius_bottom_left = 2
 color = Color( 1, 1, 1, 0.470588 )
 grow_begin = 0.0
 grow_end = 0.0
+
+[sub_resource type="StyleBoxFlat" id=187]
+bg_color = Color( 0, 0.0431373, 0.313726, 1 )
+corner_radius_top_left = 32
+corner_radius_bottom_right = 32
+expand_margin_top = 4.0
+expand_margin_bottom = 4.0
 
 [sub_resource type="StyleBoxFlat" id=157]
 content_margin_left = 2.0
@@ -733,6 +742,9 @@ HScrollBar/styles/grabber_highlight = SubResource( 149 )
 HScrollBar/styles/grabber_pressed = SubResource( 150 )
 HScrollBar/styles/scroll = SubResource( 148 )
 HSeparator/styles/separator = SubResource( 96 )
+HSlider/icons/grabber = ExtResource( 11 )
+HSlider/icons/grabber_highlight = ExtResource( 10 )
+HSlider/styles/slider = SubResource( 187 )
 ImageBorder/base_type = "PanelContainer"
 ImageBorder/styles/panel = SubResource( 157 )
 LineEdit/colors/cursor_color = Color( 0, 0, 0, 1 )
