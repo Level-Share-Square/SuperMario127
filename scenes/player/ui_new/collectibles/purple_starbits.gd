@@ -22,7 +22,7 @@ var variables: LevelVars
 func _ready():
 	hide()
 	var player: LevelPlayer = get_tree().current_scene
-	var shared: LevelShared = player.get_shared()
+	var shared: LevelShared = player.get_shared_node()
 	yield(shared, "loaded_layers")
 	delayed_ready()
 

@@ -74,7 +74,7 @@ func _ready():
 	
 	can_collect_coins.append(get_node(character))
 		
-	get_shared().load_layer_states(CurrentLevelData.vars.layer_states[CurrentLevelData.area_id])
+	get_shared_node().load_layer_states(CurrentLevelData.vars.layer_states[CurrentLevelData.area_id])
 	
 	var player_char = get_node(character)
 	player_char.character = Singleton.PlayerSettings.player1_character
@@ -117,7 +117,7 @@ func update_activity() -> void:
 	Discord.set_playing("Editing a level")
 
 
-func get_shared() -> LevelShared:
+func get_shared_node() -> LevelShared:
 	return get_node(shared) as LevelShared
 
 

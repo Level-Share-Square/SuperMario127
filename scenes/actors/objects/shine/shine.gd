@@ -92,7 +92,14 @@ func _register_properties() -> void:
 	register_property(8, "mission_uuid", mission_uuid, true)
 	register_property(9, "required_purples", required_purples, true)
 	register_property(10, "activation_tag", activation_tag, true)
+	
+	set_property_override("mission_uuid", PropertyTab.OverrideTypes.DROPDOWN, [self, "get_mission_args"])
 
+func get_mission_args() -> Dictionary:
+	var args: Dictionary
+	for mission_data in CurrentLevelData.level_metadata.collectible_data.mission_data:
+		args.get_or_add(mission_data.shine_name, mission_data.mission_uuid)
+	return args
 
 func _ready() -> void:
 	send_score = true

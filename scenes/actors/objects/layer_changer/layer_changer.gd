@@ -33,7 +33,16 @@ func _register_properties():
 	register_property(11, "is_visible", is_visible)
 	register_property(12, "move_to_index", move_to_index)
 	register_property(13, "one_time", one_time)
+	set_property_override("layer_uuid", PropertyTab.OverrideTypes.DROPDOWN, [self, "get_layer_args"])
 	
+func get_layer_args() -> Dictionary:
+	var args: Dictionary = {}
+	
+	var shared = get_tree().current_scene.get_shared_node()
+	for layer in shared.layers:
+		args[shared.get_layer(layer).layer_data.layer_metadata.layer_name] = layer
+	return args
+
 func _unhandled_input(event: InputEvent) -> void:
 	parts_input_handler(event,self)
 
@@ -100,7 +109,7 @@ func update_layer(body):
 		if used and one_time: return
 		
 		var player = get_tree().current_scene
-		var shared = player.get_shared()
+		var shared = player.get_shared_node()
 		var character = player.get_node(player.character)
 		if !shared.get_layer(layer_uuid): return
 		if move_to_index < 0 or move_to_index > shared.layers.size() - 1: move_to_index = -1

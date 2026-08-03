@@ -1,0 +1,34 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/editor/editor_theme.tres" type="Theme" id=1]
+[ext_resource path="res://scenes/editor/windows/object_property_editor/misc_property_scenes/dropdown/base.gd" type="Script" id=2]
+
+[node name="Bool" type="HBoxContainer"]
+margin_top = 26.0
+margin_right = 232.0
+margin_bottom = 43.0
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+
+[node name="PropertyName" type="Label" parent="."]
+unique_name_in_owner = true
+margin_top = 1.0
+margin_right = 62.0
+margin_bottom = 18.0
+rect_min_size = Vector2( 60, 0 )
+mouse_filter = 1
+mouse_default_cursor_shape = 16
+text = "Property:"
+
+[node name="Padding" type="Control" parent="."]
+margin_left = 66.0
+margin_right = 206.0
+margin_bottom = 19.0
+size_flags_horizontal = 3
+
+[node name="OptionButton" type="OptionButton" parent="."]
+margin_left = 210.0
+margin_right = 232.0
+margin_bottom = 19.0
+
+[connection signal="item_selected" from="OptionButton" to="." method="item_selected"]

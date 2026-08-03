@@ -11,7 +11,9 @@ onready var property_groups = $"%PropertyGroups"
 var objects: Dictionary
 var common_properties: Array
 var common_property_tabs: Array
+var common_property_overrides: Array
 var property_tallies: Dictionary
+var property_overrides_tally: Dictionary
 
 
 func load_objects(_objects: Dictionary):
@@ -25,6 +27,7 @@ func load_objects(_objects: Dictionary):
 	
 	common_properties = []
 	common_property_tabs = []
+	common_property_overrides = []
 	property_tallies = {}
 	for child in property_groups.get_children():
 		child.queue_free()
@@ -57,16 +60,26 @@ func load_objects(_objects: Dictionary):
 				property_tallies[property] = 0
 			property_tallies[property] += 1
 			index += 1
+			
+		for property in game_object.property_overrides:
+			if not property in common_property_overrides:
+				common_property_overrides.append(property)
+				property_overrides_tally[property] = 0
+			property_overrides_tally[property] += 1
 	
 	for property in common_properties.duplicate():
 		if property_tallies[property] < objects.size():
 			common_properties.erase(property)
 	
+	for property in common_property_overrides.duplicate():
+		if property_overrides_tally[property] < objects.size():
+			common_property_overrides.erase(property)
+	
 	if common_properties.size() > 0:
 		var misc_tab: PropertyTab = preload(
 			"res://scenes/editor/windows/object_property_editor/property_tabs/misc/misc.tscn"
 		).instance()
-		misc_tab.load_misc_properties(editor, objects, common_properties)
+		misc_tab.load_misc_properties(editor, objects, common_properties, common_property_overrides)
 		property_groups.add_child(misc_tab)
 		property_groups.move_child(misc_tab, 0)
 	

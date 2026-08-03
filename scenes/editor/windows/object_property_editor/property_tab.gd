@@ -1,6 +1,8 @@
 class_name PropertyTab
 extends PanelContainer
 
+enum OverrideTypes {BOOL_ALIAS, ENUM, DROPDOWN}
+
 var editor: Editor
 var objects: Dictionary
 

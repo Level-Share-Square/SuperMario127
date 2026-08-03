@@ -491,7 +491,7 @@ func load_in():
 		target_tag = "_entrance"
 	
 	if do_teleport:
-		var shared_node: LevelShared = get_tree().get_current_scene().get_shared()
+		var shared_node: LevelShared = get_tree().get_current_scene().get_shared_node()
 #		var objects_node: Node = shared_node.get_objects_node()
 #		if not objects_node.loaded:
 #			yield(objects_node, "objects_ready")

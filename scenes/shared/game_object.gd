@@ -44,8 +44,7 @@ var visibility: bool = true # for modulate
 
 var property_info: PoolStringArray = []
 
-var property_value_to_name := {}
-var property_value_menus := {}
+var property_overrides: Dictionary
 
 var property_ids: Dictionary = {
 	BasePropertyIDs.IN_FRONT: "in_front",
@@ -269,17 +268,22 @@ func set_property(property: String, value, change_object_data = false):
 
 
 func set_bool_alias(key, true_alias, false_alias):
-	if true_alias != null && false_alias != null:
-		property_value_to_name[key] = {true: true_alias, false: false_alias}
-	else:
-		printerr("Bool aliases for %s was not set!" % key)
+#	if true_alias != null && false_alias != null:
+#		property_value_to_name[key] = {true: true_alias, false: false_alias}
+#	else:
+#		printerr("Bool aliases for %s was not set!" % key)
+	pass
 
 
 func set_property_menu(key, menu_array: Array):
-	if menu_array != null:
-		property_value_menus[key] = menu_array
-	else:
-		printerr("Property menu for %s was not set!" % key)
+#	if menu_array != null:
+#		property_value_menus[key] = menu_array
+#	else:
+#		printerr("Property menu for %s was not set!" % key)
+	pass
+		
+func set_property_override(property: String, type: int, args):
+	property_overrides.get_or_add(property, [type, [property, args]])
 
 
 func parts_input_handler(event, object):

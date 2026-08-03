@@ -42,4 +42,5 @@ func calculate_coin_velocity(source_position: Vector2, target_position: Vector2,
 		new_velocity.x = displacement.x / (time_up+time_down)
 	
 	#for some reason dividing by .13 makes the code work perfectly, so we're going to roll with it
+	#divide by 0.125... or multiply by 8? truly a question for the elite
 	return new_velocity/.125
