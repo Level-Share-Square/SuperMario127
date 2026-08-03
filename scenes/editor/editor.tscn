@@ -1802,6 +1802,7 @@ custom_colors/font_color = Color( 1, 1, 1, 1 )
 icon = ExtResource( 82 )
 expand_icon = true
 script = ExtResource( 44 )
+click_override = "DropdownSound"
 menu_path = NodePath("../../Middle")
 blocker_path = NodePath("../../Middle/MouseBlocker")
 open_icon = ExtResource( 88 )

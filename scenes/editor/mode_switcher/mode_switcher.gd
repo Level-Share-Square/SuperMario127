@@ -5,6 +5,7 @@ const COLOR_TRANS: int = Tween.TRANS_CIRC
 const COLOR_EASE: int = Tween.EASE_IN
 const COLOR_DELAY: float = 0.5
 
+onready var root_container = $"%RootContainer"
 onready var button: Button = $"%Button"
 onready var top_inner: PanelContainer = $"%TopInner"
 onready var bottom_inner: PanelContainer = $"%BottomInner"
@@ -29,6 +30,7 @@ export var pipe_flash_gradient_green: Gradient
 export var pipe_flash_gradient_red: Gradient
 
 export var color_change_duration: float
+export var pipe_juice_duration: float
 
 var is_hovered: bool
 var is_switching: bool
@@ -72,6 +74,25 @@ func pressed(force: bool = false) -> void:
 	if not playtesting:
 		letsa_go_sfx.play()
 	
+	# juice tweens
+	tween.interpolate_property(
+		root_container,
+		"modulate",
+		Color(1.5, 1.5, 1.5),
+		Color.white,
+		pipe_juice_duration,
+		Tween.TRANS_CIRC,
+		Tween.EASE_IN
+	)
+	tween.interpolate_property(
+		bottom_inner,
+		"rect_min_size:y",
+		40,
+		32,
+		pipe_juice_duration,
+		Tween.TRANS_CIRC,
+		Tween.EASE_IN_OUT
+	)
 	# pipe color tweens
 	is_transitioning_to_red = not playtesting
 	tween.interpolate_property(
@@ -107,7 +128,8 @@ func pressed(force: bool = false) -> void:
 	tween.start()
 	
 	if not playtesting:
-		animation_player.play("press")
+		animation_player.play("press_fast" if Input.is_action_pressed("skip_count") else "press")
+		yield(animation_player, "animation_finished")
 		if not is_hovered:
 			animation_player.play_backwards("hover_marioless")
 	
