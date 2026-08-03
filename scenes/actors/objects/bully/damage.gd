@@ -11,7 +11,6 @@ func stomp(body: PhysicsBody2D = null) -> void:
 	if is_instance_valid(body):
 		var direction: float = (enemy.global_position - body.global_position).sign().x
 		enemy.velocity = Vector2(direction * bully_jump_knockback.x, bully_jump_knockback.y)
-	
 	enemy.set_state_by_name("KnockbackState")
 
 
@@ -42,8 +41,10 @@ func ground_pound(body: PhysicsBody2D = null) -> void:
 
 
 func magicked(body: PhysicsBody2D = null) -> void:
-	enemy.animation_player.play("die")
-	enemy.set_state_by_name("DieState")
+	if is_instance_valid(body):
+		var direction: float = (enemy.global_position - body.global_position).sign().x
+		enemy.velocity = Vector2(direction * bully_jump_knockback.x, bully_jump_knockback.y)
+	enemy.set_state_by_name("KnockbackState")
 
 
 func dived(player: Character):

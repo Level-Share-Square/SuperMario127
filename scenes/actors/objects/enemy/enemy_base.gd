@@ -130,10 +130,11 @@ func is_on_ground() -> bool:
 	return floor_detector.is_colliding()
 
 
-func create_coin(velocity: Vector2, offset: Vector2) -> void:
+func create_coin(velocity: Vector2, offset: Vector2):
 	var object = create_object(global_position + offset, 1, 0)
 	object.set_property("physics", true)
 	object.set_property("velocity", velocity)
+	return object
 
 
 func create_object(pos: Vector2, object_id: int, palette: int):
