@@ -1101,13 +1101,13 @@ anims/press_fast = SubResource( 45 )
 [node name="HoverSound" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource( 11 )
-volume_db = -8.5
+volume_db = -9.0
 bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource( 9 )
-volume_db = -6.0
+volume_db = -7.5
 bus = "Sounds"
 
 [node name="PipeSound" type="AudioStreamPlayer" parent="."]
