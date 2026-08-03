@@ -68,6 +68,7 @@ margin_left = 319.0
 margin_right = 352.0
 margin_bottom = 33.0
 rect_min_size = Vector2( 33, 33 )
+focus_mode = 0
 size_flags_horizontal = 8
 size_flags_vertical = 4
 theme_type_variation = "ButtonPurple"

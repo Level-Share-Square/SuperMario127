@@ -56,6 +56,7 @@ margin_left = 335.0
 margin_right = 354.0
 margin_bottom = 19.0
 rect_min_size = Vector2( 19, 0 )
+focus_mode = 0
 size_flags_horizontal = 12
 theme_type_variation = "ButtonPurple"
 icon = ExtResource( 3 )

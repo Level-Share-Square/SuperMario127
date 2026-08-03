@@ -184,6 +184,7 @@ margin_left = 4.0
 margin_top = 4.0
 margin_right = 24.0
 margin_bottom = 24.0
+focus_mode = 0
 theme_type_variation = "ButtonTransparent"
 icon = ExtResource( 8 )
 expand_icon = true
@@ -264,6 +265,7 @@ margin_top = 21.0
 margin_right = 137.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 120, 0 )
+focus_mode = 0
 script = ExtResource( 5 )
 
 [node name="Foreground" type="VBoxContainer" parent="ContentDivider/ContentMat/Tabs/Background/HBoxContainer/MarginContainer/VBoxContainer" index="1"]
@@ -283,6 +285,7 @@ margin_top = 21.0
 margin_right = 137.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 120, 0 )
+focus_mode = 0
 script = ExtResource( 5 )
 
 [node name="Music" type="VBoxContainer" parent="ContentDivider/ContentMat/Tabs" index="1"]

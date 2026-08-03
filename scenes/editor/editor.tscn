@@ -467,6 +467,7 @@ margin_left = 105.0
 margin_right = 124.0
 margin_bottom = 19.0
 rect_min_size = Vector2( 19, 0 )
+focus_mode = 0
 theme_type_variation = "ButtonTransparent"
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 icon = ExtResource( 62 )
@@ -874,6 +875,7 @@ margin_bottom = 73.0
 margin_top = 75.0
 margin_right = 140.0
 margin_bottom = 92.0
+focus_mode = 0
 theme_type_variation = "CheckButtonTransparent"
 pressed = true
 text = "Obj. Layering"
@@ -949,6 +951,7 @@ margin_bottom = 198.0
 margin_top = 200.0
 margin_right = 140.0
 margin_bottom = 217.0
+focus_mode = 0
 theme_type_variation = "ButtonTransparent"
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "Linktober Aura"
@@ -1251,7 +1254,7 @@ mouse_filter = 2
 [node name="Object" type="VBoxContainer" parent="UI/UIContainer/EditorUI/Middle/Tools/VBoxContainer"]
 visible = false
 margin_right = 24.0
-margin_bottom = 132.0
+margin_bottom = 104.0
 mouse_filter = 2
 
 [node name="Paint" type="Button" parent="UI/UIContainer/EditorUI/Middle/Tools/VBoxContainer/Object"]
@@ -1268,15 +1271,6 @@ group = SubResource( 167 )
 icon = ExtResource( 49 )
 icon_align = 1
 expand_icon = true
-script = ExtResource( 24 )
-
-[node name="Autosaves" type="Button" parent="UI/UIContainer/EditorUI/Middle/Tools/VBoxContainer/Object/Paint"]
-margin_top = 100.0
-margin_right = 104.0
-margin_bottom = 117.0
-theme_type_variation = "ButtonTransparent"
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-text = "Autosaves"
 script = ExtResource( 24 )
 
 [node name="VSeparator" type="HSeparator" parent="UI/UIContainer/EditorUI/Middle/Tools/VBoxContainer/Object"]
@@ -1403,6 +1397,7 @@ margin_right = 24.0
 margin_bottom = 124.0
 rect_min_size = Vector2( 24, 24 )
 hint_tooltip = "Fill Tool"
+focus_mode = 0
 size_flags_vertical = 3
 theme_type_variation = "ButtonTransparent"
 toggle_mode = true
@@ -1472,6 +1467,7 @@ margin_right = 24.0
 margin_bottom = 208.0
 rect_min_size = Vector2( 24, 24 )
 hint_tooltip = "Trail Tool"
+focus_mode = 0
 size_flags_vertical = 3
 theme_type_variation = "ButtonTransparent"
 toggle_mode = true

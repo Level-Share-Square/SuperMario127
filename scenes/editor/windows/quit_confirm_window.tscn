@@ -13,7 +13,6 @@ close_button_path = NodePath("")
 resize_control_path = NodePath("")
 title = ""
 icon = null
-icon_tooltip = ""
 
 [node name="Background" parent="." index="0"]
 margin_right = 250.0
@@ -99,6 +98,7 @@ margin_bottom = 22.0
 grow_horizontal = 2
 grow_vertical = 2
 rect_min_size = Vector2( 90, 0 )
+focus_mode = 0
 size_flags_vertical = 4
 theme_type_variation = "ButtonRed"
 text = "Confirm"
@@ -116,6 +116,7 @@ margin_bottom = 22.0
 grow_horizontal = 2
 grow_vertical = 2
 rect_min_size = Vector2( 90, 0 )
+focus_mode = 0
 size_flags_vertical = 4
 text = "Cancel"
 
