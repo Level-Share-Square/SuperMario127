@@ -24,7 +24,7 @@ func _register_properties():
 	register_property(7, "wait_time", wait_time)
 	register_property(8, "invincible", invincible)
 	register_property(9, "force_direction", force_direction)
-#	set_property_menu("force_direction", ["option", 3, -1, ['Face Player', 'Right', 'Left']])
+	set_property_override("force_direction", PropertyTab.OverrideTypes.ENUM, ["Face Player", "Right", "Left"])
 
 
 func _ready():

@@ -23,7 +23,7 @@ var self_activated : bool = false
 
 func _register_properties():
 	register_property(4, "switch_mode", switch_mode, true)
-	set_bool_alias("switch_mode", "On", "Off")
+	set_property_override("switch_mode", PropertyTab.OverrideTypes.BOOL_ALIAS, {true: "On", false: "Off"})
 
 func _ready():
 	beep_sound.volume_db = -80

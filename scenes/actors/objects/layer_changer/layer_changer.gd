@@ -40,7 +40,7 @@ func get_layer_args() -> Dictionary:
 	
 	var shared = get_tree().current_scene.get_shared_node()
 	for layer in shared.layers:
-		args[shared.get_layer(layer).layer_data.layer_metadata.layer_name] = layer
+		args[layer] = shared.get_layer(layer).layer_data.layer_metadata.layer_name
 	return args
 
 func _unhandled_input(event: InputEvent) -> void:

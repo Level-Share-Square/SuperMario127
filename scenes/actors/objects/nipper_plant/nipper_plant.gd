@@ -48,7 +48,7 @@ export var max_fire_pause = 3.0
 func _register_properties():
 	register_property(4, "wander", wander, true)
 	register_property(5, "fire", fire, true)
-	set_property_menu("fire", ["option", 3, 0, ["None", "Normal", "Bouncy"]])
+	set_property_override("fire", PropertyTab.OverrideTypes.ENUM, ["None", "Normal", "Bouncy"])
 	register_property(6, "color", color, true)
 	register_property(7, "rainbow", rainbow, true)
 	register_property(8, "bouncy_fire", bouncy_fire, true)

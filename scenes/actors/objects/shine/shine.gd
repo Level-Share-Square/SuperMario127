@@ -98,7 +98,7 @@ func _register_properties() -> void:
 func get_mission_args() -> Dictionary:
 	var args: Dictionary
 	for mission_data in CurrentLevelData.level_metadata.collectible_data.mission_data:
-		args.get_or_add(mission_data.shine_name, mission_data.mission_uuid)
+		args.get_or_add(mission_data.mission_uuid, mission_data.shine_name)
 	return args
 
 func _ready() -> void:

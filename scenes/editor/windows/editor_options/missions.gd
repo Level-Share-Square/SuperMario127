@@ -64,8 +64,7 @@ func on_mission_selected(mission: MissionData):
 	
 	spawn_area_id.load_property(editor, mission["spawn_area_id"], [
 		"spawn_area_id",
-		TYPE_STRING,
-		PropertyInfo.new(spawn_area_id.hint_tooltip)
+		[CurrentLevelData, "get_area_args"]
 	], "Spawn Area ID")
 	connect_signals(spawn_area_id)
 	

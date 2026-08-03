@@ -145,6 +145,13 @@ func unload_all_but_current_area() -> void:
 		if loaded_area_id != area_id:
 			loaded_areas.erase(loaded_area_id)
 
+func get_area_args() -> Dictionary:
+	var args: Dictionary = {}
+	for area_header in area_headers:
+		area_header = area_header as AreaHeader
+		
+		args[area_headers.find(area_header)] = area_header.name
+	return args
 
 func load_level_area(load_area_id: int, always_reload: bool = false) -> AreaData:
 	if not always_reload:

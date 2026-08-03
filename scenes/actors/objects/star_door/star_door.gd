@@ -55,15 +55,15 @@ var coll
 
 func _register_properties() -> void:
 	register_property(5, "target_area", target_area)
+	set_property_override("target_area", PropertyTab.OverrideTypes.DROPDOWN, [CurrentLevelData, "get_area_args"])
 	register_property(6, "tag", tag)
 	register_property(7, "teleport_mode", teleport_mode, true)
-	set_property_menu("teleport_mode", ["option", 3, 0, ["Location", "Area", "Level"]])
-	set_bool_alias("teleportation_mode", "Remote", "Local")
+	set_property_override("teleport_mode", PropertyTab.OverrideTypes.ENUM, ["Location", "Area", "Level"])
 	register_property(8, "max_pan_distance", max_pan_distance)
 	register_property(9, "level_path", level_path)
 
 	register_property(10, "collectible", collectible)
-	set_property_menu("collectible", ["option_string", possible_coll, 0, ["Shines", "Star Coins", "Coins", "Star Bits", "Empty"]])
+	set_property_override("collectible", PropertyTab.OverrideTypes.ENUM, ["Shines", "Star Coins", "Coins", "Star Bits", "Key", "Empty"])
 	register_property(11, "required_amount", required_amount)
 	register_property(12, "required_key", required_key)
 	register_property(13, "insufficient_text", insufficient_text)

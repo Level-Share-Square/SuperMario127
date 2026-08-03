@@ -34,7 +34,7 @@ func _register_properties():
 	register_property(7, "tag", tag, true)
 	register_property(8, "toxicity", toxicity, true)
 	register_property(9, "tap_mode", tap_mode, true)
-	set_bool_alias("tap_mode", "Move", "Scale")
+	set_property_override("tap_mode", PropertyTab.OverrideTypes.BOOL_ALIAS, {true: "Move", false: "Scale"})
 
 func _ready():
 	var id = CurrentLevelData.vars.current_liquid_id

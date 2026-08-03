@@ -40,14 +40,14 @@ var dialogue_trigger: Node
 
 func _register_properties():
 	register_property(4, "idle_expression", idle_expression, true)
-	set_property_menu("idle_expression", ["option", expression_map.size(), 0, expression_map])
+	set_property_override("idle_expression", PropertyTab.OverrideTypes.ENUM, expression_map)
 	register_property(5, "idle_action", idle_action, true)
-	set_property_menu("idle_action", ["option", action_map.size(), 0, action_map])
+	set_property_override("idle_action", PropertyTab.OverrideTypes.ENUM, action_map)
 	
 	register_property(6, "speaking_expression", speaking_expression, true)
-	set_property_menu("speaking_expression", ["option", expression_map.size(), 0, expression_map])
+	set_property_override("idle_expression", PropertyTab.OverrideTypes.ENUM, expression_map)
 	register_property(7, "speaking_action", speaking_action, true)
-	set_property_menu("speaking_action", ["option", action_map.size(), 0, action_map])
+	set_property_override("idle_action", PropertyTab.OverrideTypes.ENUM, action_map)
 	
 	register_property(8, "tag_link", tag_link, true)
 	register_property(9, "curve", curve, true)

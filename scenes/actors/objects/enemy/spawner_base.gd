@@ -44,7 +44,7 @@ func _register_properties() -> void:
 	
 	register_property(4, "respawn_time", respawn_time)
 	register_property(5, "respawn_mode", respawn_mode)
-	set_property_menu("respawn_mode", ["option", 3, 0, ['Never', 'Offscreen', 'Onscreen']])
+	set_property_override("respawn_mode", PropertyTab.OverrideTypes.ENUM, ["Never", "Offscreen", "Onscreen"])
 	register_property(6, "max_enemies", max_enemies)
 	register_property(7, "initial_velocity", initial_velocity)
 	register_property(8, "spawn_offset", spawn_offset)

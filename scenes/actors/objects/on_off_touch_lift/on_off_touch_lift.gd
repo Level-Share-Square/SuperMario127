@@ -42,7 +42,7 @@ func _register_properties():
 	register_property(6, "curve", curve)
 	register_property(7, "end_position", end_position, false)
 	register_property(8, "move_type", move_type)
-	set_property_menu("move_type", ["option", 5, 0, ['Back and Forth', 'Reset', 'Once', 'Loop', 'Freeze']])
+	set_property_override("move_type", PropertyTab.OverrideTypes.ENUM, ["Back and Forth", "Reset", "Once", "Loop", "Freeze"])
 	register_property(9, "touch_start", touch_start)
 	register_property(10, "start_offset", start_offset)
 	register_property(11, "disappears", disappears, false)

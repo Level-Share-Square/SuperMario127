@@ -1,9 +1,10 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://scenes/editor/buttons/tab_changed_sound.gd" type="Script" id=1]
 [ext_resource path="res://scenes/menu/line_edit_unfocus.gd" type="Script" id=2]
 [ext_resource path="res://scenes/editor/windows/editor_window.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/editor/windows/editor_options/area_panel.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/editor/windows/object_property_editor/misc_property_scenes/dropdown/base.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/menu/button_scripts/button_sound.gd" type="Script" id=6]
 [ext_resource path="res://assets/fonts/DelfinoFont10.tres" type="DynamicFont" id=7]
 [ext_resource path="res://scenes/shared/background/backgrounds/day/day.png" type="Texture" id=8]
@@ -279,7 +280,7 @@ scroll_horizontal_enabled = false
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ContentDivider/ContentMat/Tabs/Missions/ScrollContainer2" index="0"]
 margin_right = 232.0
-margin_bottom = 176.0
+margin_bottom = 178.0
 custom_constants/separation = 5
 
 [node name="ShineName" parent="ContentDivider/ContentMat/Tabs/Missions/ScrollContainer2/VBoxContainer" index="0" instance=ExtResource( 22 )]
@@ -308,20 +309,20 @@ unique_name_in_owner = true
 margin_top = 300.0
 margin_bottom = 317.0
 
-[node name="SpawnArea" parent="ContentDivider/ContentMat/Tabs/Missions/ScrollContainer2/VBoxContainer" index="5" instance=ExtResource( 12 )]
+[node name="SpawnArea" parent="ContentDivider/ContentMat/Tabs/Missions/ScrollContainer2/VBoxContainer" index="5" instance=ExtResource( 5 )]
 unique_name_in_owner = true
 margin_top = 322.0
-margin_bottom = 339.0
+margin_bottom = 341.0
 
 [node name="TeleporterTag" parent="ContentDivider/ContentMat/Tabs/Missions/ScrollContainer2/VBoxContainer" index="6" instance=ExtResource( 22 )]
 unique_name_in_owner = true
-margin_top = 344.0
-margin_bottom = 361.0
+margin_top = 346.0
+margin_bottom = 363.0
 
 [node name="ShowInMenu" parent="ContentDivider/ContentMat/Tabs/Missions/ScrollContainer2/VBoxContainer" index="7" instance=ExtResource( 21 )]
 unique_name_in_owner = true
-margin_top = 366.0
-margin_bottom = 383.0
+margin_top = 368.0
+margin_bottom = 385.0
 
 [node name="Border" parent="." index="2"]
 margin_right = 400.0

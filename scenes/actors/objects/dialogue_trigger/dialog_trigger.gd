@@ -32,12 +32,12 @@ func _register_properties():
 	register_property(4, "dialogue", dialogue, true)
 	register_property(5, "character_name", character_name, true)
 	register_property(6, "autostart", autostart, true)
-	set_property_menu("autostart", ["option", 3, 0, ["Don't Autostart", "Autostart", "Autostart (Oneshot)"]])
+	set_property_override("autostart", PropertyTab.OverrideTypes.ENUM, ["Don't Autostart", "Autostart", "Autostart (Oneshot)"])
 	register_property(7, "interactable", interactable, true)
 	
 	register_property(8, "bubble_text", bubble_text, true)
 	register_property(9, "display_mode", display_mode, true)
-	set_property_menu("display_mode", ["option", 3, 0, ["Menu", "Speech Bubble", "Both"]])
+	set_property_override("display_mode", PropertyTab.OverrideTypes.ENUM, ["Menu", "Speech Bubble", "Both"])
 	
 	register_property(10, "tag", tag, true)
 	register_property(11, "delegate_tag", delegate_tag, true)

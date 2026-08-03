@@ -18,6 +18,7 @@ static func recalculate_level_collectible_counts(level_data_container) -> void:
 	var area_header: AreaHeader
 	for i in range(area_headers.size()):
 		var area = LevelCodeDeserializer.deserialize_area_code(area_headers[i].area_code)
+		area.header = area_headers[i]
 		area.header.shine_shard_count = 0
 		area.header.max_purples_count = 0
 		for layer in area.layers:

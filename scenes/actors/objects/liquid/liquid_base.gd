@@ -84,7 +84,7 @@ func _register_properties():
 	for liquid_property in liquid_properties:
 		register_property(id, liquid_property, self[liquid_property])
 		id += 1
-	set_bool_alias("crystal_tap_mode", "Move", "Grow/Shrink")
+	set_property_override("crystal_tap_mode", PropertyTab.OverrideTypes.BOOL_ALIAS, {true: "Move", false: "Grow/Shrink"})
 	
 	for liquid_property in get_liquid_properties():
 		register_property(id, liquid_property, self[liquid_property])
