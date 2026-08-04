@@ -90,19 +90,7 @@ func on_undo():
 
 func on_copy():
 	if editor.tool_manager.current_tool == self:
-		var tile_data := TileData.new()
-		var layer_chunks = CurrentLevelData.current_area.layers[shared.layers.find(editor.layer)].tile_data.chunks
-		for position in editor.selected_tiles:
-			var chunk_pos = tile_data.get_chunk_coords(position)
-			
-			if !tile_data.chunks.has(chunk_pos):
-				var chunk = PoolIntArray()
-				chunk.resize(TileData.TILE_CHUNK_SIZE * TileData.TILE_CHUNK_SIZE)
-				chunk.fill(0)
-				tile_data.chunks[chunk_pos] = chunk
-				
-			var tile_index: int = posmod(position.x, TileData.TILE_CHUNK_SIZE) + posmod(position.y, TileData.TILE_CHUNK_SIZE) * TileData.TILE_CHUNK_SIZE
-			tile_data.chunks[chunk_pos][tile_index] = layer_chunks[chunk_pos][tile_index]
+		var tile_data: TileData = LayerData.tiles_to_tile_data(editor.selected_tiles, CurrentLevelData.current_area.layers[shared.layers.find(editor.layer)].tile_data.chunks)
 		OS.set_clipboard(JSON.print([LevelCodeSerializer.serialize_data(tile_data), [camera.position.x, camera.position.y]]))
 		editor.item_actions.show_selection_actions()
 

@@ -9,8 +9,9 @@ var parallax_layer_scene: PackedScene = preload(PARALLAX_LAYER_SCENE_PATH)
 
 var layers: Array
 var origin: LevelGroundLayer
-
 var layer_dictionary: Dictionary = {}
+
+var tile_objects: Array = []
 
 const layer_index_offset: int = -2
 const layer_spacing: int = 16

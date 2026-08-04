@@ -24,7 +24,11 @@ func place_object(object_data: ObjectData, add_to_data: bool = false):
 
 func create_object(object_data: ObjectData):
 	var mode = get_tree().get_current_scene().mode
-	var object_scene = CurrentLevelData.get_cached_object(object_data.metadata.type_id)
+	var object_scene
+	if object_data.metadata.type_id != -1:
+		object_scene = CurrentLevelData.get_cached_object(object_data.metadata.type_id)
+	else:
+		object_scene = load("res://scenes/actors/objects/tile_object/tile_object.tscn")
 	
 	var game_object = object_scene.instance()
 	game_object.mode = mode
@@ -37,7 +41,6 @@ func create_object(object_data: ObjectData):
 
 	
 	return game_object
-
 
 func erase_object(game_object, free: bool = true) -> void:
 	var object_data: ObjectData = game_object.object_data

@@ -60,8 +60,8 @@ func set_chunk_data(chunk_coords: Vector2, chunk_data: PoolIntArray) -> void:
 	else:
 		chunks.get_or_add(chunk_coords, chunk_data)
 	
-	for x in range(tile_util.TILE_CHUNK_SIZE):
-		for y in range(tile_util.TILE_CHUNK_SIZE):
+	for x in range(TILE_CHUNK_SIZE):
+		for y in range(TILE_CHUNK_SIZE):
 			if chunk_data[x + y * TILE_CHUNK_SIZE] > 0:
 				used_tiles.append(chunk_coords * 16 + Vector2(x, y))
 

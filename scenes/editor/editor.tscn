@@ -1887,6 +1887,15 @@ unique_name_in_owner = true
 visible = false
 custom_styles/panel = SubResource( 197 )
 
+[node name="Button" type="Button" parent="UI"]
+margin_left = 539.0
+margin_top = 349.0
+margin_right = 706.0
+margin_bottom = 369.0
+focus_mode = 0
+theme = ExtResource( 4 )
+text = "LINKTOBER AURA"
+
 [node name="Options" type="CanvasLayer" parent="."]
 layer = 128
 
@@ -1943,9 +1952,6 @@ stream = ExtResource( 55 )
 volume_db = -7.5
 bus = "Sounds"
 
-[connection signal="tool_changed" from="ZIndex/Tools" to="ZIndex/Tools/ObjectTrail" method="_on_Tools_tool_changed"]
-[connection signal="tool_changed" from="ZIndex/Tools" to="ParallaxScroll/ItemPreview" method="_on_Tools_tool_changed"]
-[connection signal="tool_changed" from="ZIndex/Tools" to="UI/UIContainer/EditorUI/Middle/Tools" method="_on_Tools_tool_changed"]
 [connection signal="action" from="ActionManager" to="SaveManager" method="_on_ActionManager_action"]
 [connection signal="text_entered" from="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/SearchBar" to="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/ScrollContainer/CenterContainer/ItemsGrid" method="_on_search"]
 [connection signal="pressed" from="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/Search" to="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/ScrollContainer/CenterContainer/ItemsGrid" method="_on_search"]
@@ -1966,3 +1972,4 @@ bus = "Sounds"
 [connection signal="pressed" from="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/Actions/HBoxContainer/LayerPicker" to="UI/UIContainer/EditorUI/Middle/Tools" method="toggle_visible"]
 [connection signal="tool_picked" from="UI/UIContainer/EditorUI/Middle/Tools" to="ZIndex/Tools" method="_on_Tools_tool_picked"]
 [connection signal="pressed" from="UI/UIContainer/EditorUI/Bottom/Hotbar/ItemPickerButton/Button" to="UI/UIContainer/ItemPickerPanel" method="toggle"]
+[connection signal="pressed" from="UI/Button" to="." method="_on_Button_pressed"]
