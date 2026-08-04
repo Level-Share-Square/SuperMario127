@@ -9,6 +9,11 @@ onready var click_sound: AudioStreamPlayer = get_parent().get_node("%ClickSound"
 export var hover_override: String
 export var click_override: String
 
+func _process(delta):
+	if get_child_count() > 0:
+		for child in get_children():
+			if "@@" in child.name and child is Control:
+				child.mouse_filter = Control.MOUSE_FILTER_IGNORE
 
 func _ready() -> void:
 	if hover_override != "":
