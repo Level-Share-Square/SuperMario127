@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scenes/editor/tools/selection_box/selection_border.png" type="Texture" id=1]
 [ext_resource path="res://scenes/editor/tools/tile_selection/selector.gd" type="Script" id=2]
@@ -6,13 +6,6 @@
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 1 )
 region = Rect2( 0, 0, 28, 28 )
-
-[sub_resource type="Gradient" id=2]
-
-[sub_resource type="GradientTexture2D" id=3]
-gradient = SubResource( 2 )
-width = 8
-height = 8
 
 [node name="Selector" type="Control"]
 mouse_filter = 2
@@ -43,7 +36,3 @@ patch_margin_right = 4
 patch_margin_bottom = 4
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
-
-[node name="Debug" type="Sprite" parent="."]
-unique_name_in_owner = true
-texture = SubResource( 3 )

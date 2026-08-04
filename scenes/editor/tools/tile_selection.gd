@@ -49,13 +49,12 @@ func on_selection_inside_clicked():
 		
 		if !next_pos:
 			break
-			
-		var delta_mouse_position: Vector2 =  next_pos - active_mouse_position
-		
-		selection_box.rect_global_position += delta_mouse_position
-		fill_rect.position += delta_mouse_position
 		
 		set_buffer(get_tile_grid_position(next_pos - initial_mouse_position))
+		
+		var delta_mouse_position: Vector2 = next_pos - active_mouse_position
+		selection_box.rect_position += delta_mouse_position
+		fill_rect.position += delta_mouse_position
 		
 		active_mouse_position = next_pos
 			
