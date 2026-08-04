@@ -60,12 +60,11 @@ func fit_to_bounding_rectangle():
 		editor.item_actions.hide_selection_actions()
 		return
 	
-	var layer = shared.get_layer(editor.layer)
-	
 	var drag_rect = fill_rect
-	
+	var layer = shared.get_layer(editor.layer)
 	if layer is LevelParallaxLayer:
 		drag_rect = layer.parallax_scroll.get_global_transform().xform(drag_rect)
+		drag_rect.size /= layer.parallax_scroll.scale
 		
 	highlight.rect_global_position = drag_rect.position
 	highlight.rect_size = drag_rect.size

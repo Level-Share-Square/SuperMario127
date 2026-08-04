@@ -8,6 +8,7 @@ export var animation_delay: float = 6
 export var frame_count: int = 5
 
 onready var parallax_scroll = $"%ParallaxScroll"
+onready var debug = $"%Debug"
 onready var highlight = get_node("%Highlight")
 onready var selection_box = get_node("%SelectionBox")
 onready var camera = $"%EditorCamera"
@@ -28,6 +29,9 @@ func _ready():
 	
 	yield(editor, "ready")
 	editor.tool_manager.connect("tool_changed", self, "on_tool_changed")
+	
+	remove_child(debug)
+	editor.add_child(debug)
 
 func get_tile_grid_position(vector: Vector2):
 	return vector.snapped(TILE) / TILE_SIZE
@@ -91,14 +95,15 @@ func _process(delta):
 		timer = animation_delay
 
 func box_expansion():
-	var drag_rect := Rect2(start_pos, get_adjusted_mouse_position() - start_pos).abs()
-	
 	var layer = shared.get_layer(editor.layer)
 	
+	var mouse_pos: Vector2 = get_adjusted_mouse_position()
+	var drag_rect := Rect2(start_pos, mouse_pos - start_pos).abs()
 	fill_rect = drag_rect
 	
 	if layer is LevelParallaxLayer:
 		drag_rect = layer.parallax_scroll.get_global_transform().xform(drag_rect)
+		drag_rect.size /= layer.parallax_scroll.scale
 	
 	highlight.rect_global_position = drag_rect.position
 	highlight.rect_size = drag_rect.size
