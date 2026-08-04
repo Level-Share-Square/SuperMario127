@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://scenes/editor/windows/editor_window.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/editor/windows/editor_options/area_settings.gd" type="Script" id=2]
@@ -13,6 +13,8 @@
 [ext_resource path="res://scenes/editor/windows/editor_options/music_panel.tscn" type="PackedScene" id=11]
 [ext_resource path="res://scenes/editor/windows/editor_options/music_manager.gd" type="Script" id=12]
 [ext_resource path="res://scenes/editor/buttons/tab_changed_sound.gd" type="Script" id=13]
+[ext_resource path="res://assets/icons/add.png" type="Texture" id=14]
+[ext_resource path="res://scenes/editor/windows/editor_options/bounds.gd" type="Script" id=15]
 
 [sub_resource type="CanvasItemMaterial" id=1]
 blend_mode = 1
@@ -423,93 +425,288 @@ custom_constants/margin_top = 1
 custom_constants/margin_left = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer" index="0"]
-margin_left = 61.0
+margin_left = 57.0
 margin_top = 1.0
-margin_right = 301.0
+margin_right = 305.0
 margin_bottom = 165.0
 size_flags_horizontal = 4
 size_flags_vertical = 3
-alignment = 1
 script = ExtResource( 2 )
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer" index="0"]
-margin_top = 44.0
-margin_right = 240.0
-margin_bottom = 61.0
+[node name="Filler2" type="Control" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer" index="0"]
+margin_right = 248.0
+margin_bottom = 9.0
+size_flags_vertical = 3
+
+[node name="Bounds" type="HBoxContainer" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer" index="1"]
+margin_top = 13.0
+margin_right = 248.0
+margin_bottom = 101.0
+script = ExtResource( 15 )
+
+[node name="Buttons" type="VBoxContainer" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Bounds" index="0"]
+margin_right = 95.0
+margin_bottom = 88.0
+
+[node name="Top" type="HBoxContainer" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Bounds/Buttons" index="0"]
+unique_name_in_owner = true
+margin_right = 95.0
+margin_bottom = 19.0
+alignment = 1
+
+[node name="Add" type="Button" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Bounds/Buttons/Top" index="0"]
+margin_left = 26.0
+margin_right = 45.0
+margin_bottom = 19.0
+text = "--"
+flat = true
+script = ExtResource( 5 )
+
+[node name="TextureRect" type="TextureRect" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Bounds/Buttons/Top/Add" index="0"]
+margin_right = 25.0
+margin_bottom = 19.0
+texture = ExtResource( 14 )
+expand = true
+stretch_mode = 5
+
+[node name="Subtract" type="Button" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Bounds/Buttons/Top" index="1"]
+margin_left = 49.0
+margin_right = 68.0
+margin_bottom = 19.0
+text = "--"
+flat = true
+script = ExtResource( 5 )
+
+[node name="TextureRect" type="TextureRect" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Bounds/Buttons/Top/Subtract" index="0"]
+margin_right = 25.0
+margin_bottom = 19.0
+texture = ExtResource( 14 )
+expand = true
+stretch_mode = 5
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Bounds/Buttons" index="1"]
+margin_top = 23.0
+margin_right = 95.0
+margin_bottom = 65.0
+custom_constants/separation = 12
+alignment = 1
+
+[node name="Left" type="VBoxContainer" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Bounds/Buttons/HBoxContainer2" index="0"]
+unique_name_in_owner = true
+margin_right = 19.0
+margin_bottom = 42.0
+alignment = 1
+
+[node name="Add" type="Button" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Bounds/Buttons/HBoxContainer2/Left" index="0"]
+margin_right = 19.0
+margin_bottom = 19.0
+size_flags_horizontal = 5
+size_flags_vertical = 4
+text = "--"
+flat = true
+script = ExtResource( 5 )
+
+[node name="TextureRect" type="TextureRect" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Bounds/Buttons/HBoxContainer2/Left/Add" index="0"]
+margin_right = 25.0
+margin_bottom = 19.0
+texture = ExtResource( 14 )
+expand = true
+stretch_mode = 5
+
+[node name="Subtract" type="Button" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Bounds/Buttons/HBoxContainer2/Left" index="1"]
+margin_top = 23.0
+margin_right = 19.0
+margin_bottom = 42.0
+size_flags_horizontal = 5
+size_flags_vertical = 4
+text = "--"
+flat = true
+script = ExtResource( 5 )
+
+[node name="TextureRect" type="TextureRect" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Bounds/Buttons/HBoxContainer2/Left/Subtract" index="0"]
+margin_right = 25.0
+margin_bottom = 19.0
+texture = ExtResource( 14 )
+expand = true
+stretch_mode = 5
+
+[node name="Labels" type="VBoxContainer" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Bounds/Buttons/HBoxContainer2" index="1"]
+margin_left = 31.0
+margin_right = 64.0
+margin_bottom = 42.0
+
+[node name="XLabel" type="Label" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Bounds/Buttons/HBoxContainer2/Labels" index="0"]
+unique_name_in_owner = true
+margin_right = 33.0
+margin_bottom = 17.0
+text = "X: 22"
+
+[node name="YLabel" type="Label" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Bounds/Buttons/HBoxContainer2/Labels" index="1"]
+unique_name_in_owner = true
+margin_top = 21.0
+margin_right = 33.0
+margin_bottom = 38.0
+text = "Y: 22"
+
+[node name="Right" type="VBoxContainer" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Bounds/Buttons/HBoxContainer2" index="2"]
+unique_name_in_owner = true
+margin_left = 76.0
+margin_right = 95.0
+margin_bottom = 42.0
+alignment = 1
+
+[node name="Add" type="Button" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Bounds/Buttons/HBoxContainer2/Right" index="0"]
+margin_right = 19.0
+margin_bottom = 19.0
+size_flags_horizontal = 5
+size_flags_vertical = 4
+text = "--"
+flat = true
+script = ExtResource( 5 )
+
+[node name="TextureRect" type="TextureRect" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Bounds/Buttons/HBoxContainer2/Right/Add" index="0"]
+margin_right = 25.0
+margin_bottom = 19.0
+texture = ExtResource( 14 )
+expand = true
+stretch_mode = 5
+
+[node name="Subtract" type="Button" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Bounds/Buttons/HBoxContainer2/Right" index="1"]
+margin_top = 23.0
+margin_right = 19.0
+margin_bottom = 42.0
+size_flags_horizontal = 5
+size_flags_vertical = 4
+text = "--"
+flat = true
+script = ExtResource( 5 )
+
+[node name="TextureRect" type="TextureRect" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Bounds/Buttons/HBoxContainer2/Right/Subtract" index="0"]
+margin_right = 25.0
+margin_bottom = 19.0
+texture = ExtResource( 14 )
+expand = true
+stretch_mode = 5
+
+[node name="Bottom" type="HBoxContainer" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Bounds/Buttons" index="2"]
+unique_name_in_owner = true
+margin_top = 69.0
+margin_right = 95.0
+margin_bottom = 88.0
+alignment = 1
+
+[node name="Add" type="Button" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Bounds/Buttons/Bottom" index="0"]
+margin_left = 26.0
+margin_right = 45.0
+margin_bottom = 19.0
+size_flags_horizontal = 5
+size_flags_vertical = 4
+text = "--"
+flat = true
+script = ExtResource( 5 )
+
+[node name="TextureRect" type="TextureRect" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Bounds/Buttons/Bottom/Add" index="0"]
+margin_right = 25.0
+margin_bottom = 19.0
+texture = ExtResource( 14 )
+expand = true
+stretch_mode = 5
+
+[node name="Subtract" type="Button" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Bounds/Buttons/Bottom" index="1"]
+margin_left = 49.0
+margin_right = 68.0
+margin_bottom = 19.0
+size_flags_horizontal = 5
+size_flags_vertical = 4
+text = "--"
+flat = true
+script = ExtResource( 5 )
+
+[node name="TextureRect" type="TextureRect" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Bounds/Buttons/Bottom/Subtract" index="0"]
+margin_right = 25.0
+margin_bottom = 19.0
+texture = ExtResource( 14 )
+expand = true
+stretch_mode = 5
+
+[node name="VSeparator" type="VSeparator" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Bounds" index="1"]
+margin_left = 99.0
+margin_right = 103.0
+margin_bottom = 88.0
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Bounds" index="2"]
+margin_left = 107.0
+margin_right = 248.0
+margin_bottom = 88.0
 custom_constants/separation = 10
 alignment = 1
 
-[node name="Label" type="Label" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/HBoxContainer" index="0"]
-margin_right = 88.0
-margin_bottom = 17.0
-text = "Level Bounds:"
+[node name="Label" type="Label" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Bounds/HBoxContainer2" index="0"]
+margin_top = 35.0
+margin_right = 65.0
+margin_bottom = 52.0
+text = "Increment:"
 
-[node name="SizeX" type="SpinBox" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/HBoxContainer" index="1"]
+[node name="Increment" type="SpinBox" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Bounds/HBoxContainer2" index="1"]
 unique_name_in_owner = true
-margin_left = 98.0
-margin_right = 164.0
-margin_bottom = 17.0
-max_value = 999.0
-prefix = "X"
+margin_left = 75.0
+margin_top = 35.0
+margin_right = 141.0
+margin_bottom = 52.0
+size_flags_horizontal = 0
+size_flags_vertical = 4
+value = 10.0
 script = ExtResource( 4 )
 
-[node name="SizeY" type="SpinBox" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/HBoxContainer" index="2"]
-unique_name_in_owner = true
-margin_left = 174.0
-margin_right = 240.0
-margin_bottom = 17.0
-max_value = 999.0
-prefix = "Y"
-script = ExtResource( 4 )
+[node name="Filler" type="Control" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer" index="2"]
+margin_top = 105.0
+margin_right = 248.0
+margin_bottom = 114.0
+size_flags_vertical = 3
 
-[node name="HSeparator" type="HSeparator" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer" index="1"]
-margin_top = 65.0
-margin_right = 240.0
-margin_bottom = 69.0
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer" index="2"]
-margin_top = 73.0
-margin_right = 240.0
-margin_bottom = 90.0
+[node name="HBoxContainer2" type="HBoxContainer" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer" index="3"]
+margin_top = 118.0
+margin_right = 248.0
+margin_bottom = 135.0
 custom_constants/separation = 10
 alignment = 1
 
 [node name="Label" type="Label" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/HBoxContainer2" index="0"]
-margin_left = 57.0
-margin_right = 107.0
+margin_left = 61.0
+margin_right = 111.0
 margin_bottom = 17.0
 text = "Gravity:"
 
 [node name="Gravity" type="SpinBox" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/HBoxContainer2" index="1"]
 unique_name_in_owner = true
-margin_left = 117.0
-margin_right = 183.0
+margin_left = 121.0
+margin_right = 187.0
 margin_bottom = 17.0
 step = 0.01
 script = ExtResource( 4 )
 
-[node name="HSeparator2" type="HSeparator" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer" index="3"]
-margin_top = 94.0
-margin_right = 240.0
-margin_bottom = 98.0
+[node name="HSeparator2" type="HSeparator" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer" index="4"]
+margin_top = 139.0
+margin_right = 248.0
+margin_bottom = 143.0
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer" index="4"]
-margin_top = 102.0
-margin_right = 240.0
-margin_bottom = 119.0
+[node name="HBoxContainer3" type="HBoxContainer" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer" index="5"]
+margin_top = 147.0
+margin_right = 248.0
+margin_bottom = 164.0
 custom_constants/separation = 10
 alignment = 1
 
 [node name="Label" type="Label" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/HBoxContainer3" index="0"]
-margin_left = 25.0
-margin_right = 62.0
+margin_left = 29.0
+margin_right = 66.0
 margin_bottom = 17.0
 text = "Timer:"
 
 [node name="Mins" type="SpinBox" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/HBoxContainer3" index="1"]
 unique_name_in_owner = true
-margin_left = 72.0
-margin_right = 138.0
+margin_left = 76.0
+margin_right = 142.0
 margin_bottom = 17.0
 max_value = 999.0
 suffix = "m"
@@ -517,8 +714,8 @@ script = ExtResource( 4 )
 
 [node name="Sec" type="SpinBox" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/HBoxContainer3" index="2"]
 unique_name_in_owner = true
-margin_left = 148.0
-margin_right = 214.0
+margin_left = 152.0
+margin_right = 218.0
 margin_bottom = 17.0
 max_value = 60.0
 step = 0.01
