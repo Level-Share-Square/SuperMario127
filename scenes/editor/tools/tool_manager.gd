@@ -69,7 +69,7 @@ func _on_Tools_tool_picked(tool_name):
 				change_tool("TileErase")
 		"Select":
 			if editor.selected_item is PlaceableObject:
-				change_tool("ObjectSelection")
+				change_tool("%ObjectSelection")
 			else:
 				change_tool("TileSelection")
 		"TileFill":

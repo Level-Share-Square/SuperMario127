@@ -323,12 +323,17 @@ tool_type = 1
 [node name="ObjectTrail" parent="ZIndex/Tools" instance=ExtResource( 72 )]
 tool_type = 1
 
-[node name="ObjectSelection" parent="ZIndex/Tools" instance=ExtResource( 34 )]
-tool_type = 1
-
 [node name="ParallaxScroll" type="Node2D" parent="."]
 unique_name_in_owner = true
 script = ExtResource( 77 )
+
+[node name="ZIndex" type="Node2D" parent="ParallaxScroll"]
+z_index = 128
+z_as_relative = false
+
+[node name="ObjectSelection" parent="ParallaxScroll/ZIndex" instance=ExtResource( 34 )]
+unique_name_in_owner = true
+tool_type = 1
 
 [node name="Grid" type="ParallaxBackground" parent="ParallaxScroll"]
 unique_name_in_owner = true
@@ -1949,11 +1954,11 @@ bus = "Sounds"
 [connection signal="button_down" from="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown/ResetZoom" to="EditorCamera" method="_on_ResetZoom_button_down"]
 [connection signal="button_down" from="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown/Help" to="UI/HelpWindow" method="toggle_window"]
 [connection signal="button_down" from="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/Actions/HBoxContainer/SelectionActions/Delete" to="ZIndex/Tools/TileSelection" method="on_delete"]
-[connection signal="button_down" from="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/Actions/HBoxContainer/SelectionActions/Delete" to="ZIndex/Tools/ObjectSelection" method="on_delete"]
+[connection signal="button_down" from="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/Actions/HBoxContainer/SelectionActions/Delete" to="ParallaxScroll/ZIndex/ObjectSelection" method="on_delete"]
 [connection signal="button_down" from="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/Actions/HBoxContainer/SelectionActions/Copy" to="ZIndex/Tools/TileSelection" method="on_copy"]
-[connection signal="button_down" from="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/Actions/HBoxContainer/SelectionActions/Copy" to="ZIndex/Tools/ObjectSelection" method="on_copy"]
+[connection signal="button_down" from="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/Actions/HBoxContainer/SelectionActions/Copy" to="ParallaxScroll/ZIndex/ObjectSelection" method="on_copy"]
 [connection signal="button_down" from="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/Actions/HBoxContainer/PasteAction/Paste" to="ZIndex/Tools/TileSelection" method="on_paste"]
-[connection signal="button_down" from="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/Actions/HBoxContainer/PasteAction/Paste" to="ZIndex/Tools/ObjectSelection" method="on_paste"]
+[connection signal="button_down" from="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/Actions/HBoxContainer/PasteAction/Paste" to="ParallaxScroll/ZIndex/ObjectSelection" method="on_paste"]
 [connection signal="pressed" from="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/Actions/HBoxContainer/Undo" to="ActionManager" method="undo"]
 [connection signal="pressed" from="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/Actions/HBoxContainer/Redo" to="ActionManager" method="redo"]
 [connection signal="pressed" from="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/Actions/HBoxContainer/LayerPicker" to="ParallaxScroll" method="layer_picked"]
