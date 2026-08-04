@@ -29,6 +29,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/editor/action_manager/actions/add_layer.gd"
 }, {
+"base": "HBoxContainer",
+"class": "AreaBoundsEditor",
+"language": "GDScript",
+"path": "res://scenes/editor/windows/editor_options/bounds.gd"
+}, {
 "base": "LevelDataResource",
 "class": "AreaData",
 "language": "GDScript",
@@ -148,6 +153,11 @@ _global_script_classes=[ {
 "class": "CampaignCard",
 "language": "GDScript",
 "path": "res://scenes/menu/levels_list/cards/campaign/campaign_card.gd"
+}, {
+"base": "Action",
+"class": "ChangeAreaAction",
+"language": "GDScript",
+"path": "res://scenes/editor/action_manager/actions/change_area.gd"
 }, {
 "base": "Action",
 "class": "ChangePropertyAction",
@@ -1244,6 +1254,7 @@ _global_script_class_icons={
 "Action": "",
 "ActionManager": "",
 "AddLayerAction": "",
+"AreaBoundsEditor": "",
 "AreaData": "",
 "AreaDataOld": "",
 "AreaHeader": "",
@@ -1268,6 +1279,7 @@ _global_script_class_icons={
 "CameraCutscene": "",
 "CameraStopper": "",
 "CampaignCard": "",
+"ChangeAreaAction": "",
 "ChangePropertyAction": "",
 "ChangePropertyBulkAction": "",
 "Character": "",
