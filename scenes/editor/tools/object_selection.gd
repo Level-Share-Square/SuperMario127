@@ -12,6 +12,12 @@ func _ready():
 	editor.action_manager.connect("action", self, "fit_to_bounding_rectangle")
 	tool_manager.get_node("ObjectPaint").connect("objects_selected", self, "external_objects_selected")
 
+func _draw():
+	draw_rect(fill_rect, Color.webmaroon)
+
+func _process(_delta):
+	update()
+
 func get_adjusted_mouse_position():
 	return get_mouse_pos()
 	
@@ -25,7 +31,8 @@ func reset_bounds():
 	pivot.visible = false
 
 func on_mouse_released():
-	select_objects(shared.get_layer(editor.layer).find_objects_in_rect(fill_rect))
+	select_objects(shared.get_layer(editor.layer).find_objects_in_rect(
+		parallax_scroll.get_global_transform().xform(fill_rect)))
 	if editor.selected_objects.empty():
 		reset_bounds()
 		return
@@ -63,8 +70,8 @@ func fit_to_bounding_rectangle():
 	var drag_rect = fill_rect
 	var layer = shared.get_layer(editor.layer)
 	if layer is LevelParallaxLayer:
-		drag_rect = layer.parallax_scroll.get_global_transform().xform(drag_rect)
-		drag_rect.size /= layer.parallax_scroll.scale
+		drag_rect = parallax_scroll.get_global_transform().xform(drag_rect)
+		drag_rect.size /= parallax_scroll.scale
 		
 	highlight.rect_global_position = drag_rect.position
 	highlight.rect_size = drag_rect.size
@@ -82,10 +89,13 @@ func get_bounding_rectangle():
 		return Rect2()
 		
 	var rect := Rect2(editor.selected_objects[0].position, Vector2(0, 0))
+	rect = parallax_scroll.get_global_transform().affine_inverse().xform(rect)
 	
 	for object in editor.selected_objects:
-		rect = rect.merge(object.get_global_editor_rect())
-		
+		var new_rect: Rect2 = object.get_global_editor_rect()
+		new_rect = parallax_scroll.get_global_transform().affine_inverse().xform(new_rect)
+		rect = rect.merge(new_rect)
+	
 	return rect
 	
 func _click_left(event, mouse_position):

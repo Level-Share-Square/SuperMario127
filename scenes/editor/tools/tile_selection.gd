@@ -51,7 +51,7 @@ func on_selection_inside_clicked():
 			break
 			
 		var delta_mouse_position: Vector2 =  next_pos - active_mouse_position
-
+		
 		selection_box.rect_global_position += delta_mouse_position
 		fill_rect.position += delta_mouse_position
 		

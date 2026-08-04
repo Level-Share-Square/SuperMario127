@@ -99,8 +99,8 @@ func box_expansion():
 	
 	var mouse_pos: Vector2 = get_adjusted_mouse_position()
 	var drag_rect := Rect2(start_pos, mouse_pos - start_pos).abs()
-	fill_rect = drag_rect
 	
+	fill_rect = drag_rect
 	if layer is LevelParallaxLayer:
 		drag_rect = layer.parallax_scroll.get_global_transform().xform(drag_rect)
 		drag_rect.size /= layer.parallax_scroll.scale
