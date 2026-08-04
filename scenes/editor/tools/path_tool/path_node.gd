@@ -67,7 +67,7 @@ func _on_PathNodeButton_gui_input(event):
 		elif event.pressed and event.button_index == BUTTON_LEFT && ui.get_ref().delete == true:
 			delete()
 	if held && event is InputEventMouseMotion:
-		position = ui.get_ref().path_node_container.get_global_transform().xform_inv(ui.get_ref().editor.get_global_mouse_position())
+		position = ui.get_ref().path_node_container.get_global_transform().xform_inv(ui.get_mouse_pos())
 		if ui.get_ref().editor.pixel_lock:
 			position = position.snapped(Vector2(8, 8))
 		ui.get_ref().update_node_position(self)
@@ -80,7 +80,7 @@ func _on_left_handle_gui_input(event):
 		elif !event.pressed && event.button_index == BUTTON_LEFT:
 			left_handle_held = false
 	if left_handle_held && event is InputEventMouseMotion:
-		move_handle(HANDLE_LEFT, ui.get_ref().path_node_container.get_global_transform().xform_inv(ui.get_ref().editor.get_global_mouse_position()) - position, true)
+		move_handle(HANDLE_LEFT, ui.get_ref().path_node_container.get_global_transform().xform_inv(ui.get_mouse_pos()) - position, true)
 
 
 func _on_right_handle_gui_input(event):
@@ -91,7 +91,7 @@ func _on_right_handle_gui_input(event):
 		elif !event.pressed && event.button_index == BUTTON_LEFT:
 			right_handle_held = false
 	if right_handle_held && event is InputEventMouseMotion:
-		move_handle(HANDLE_RIGHT, ui.get_ref().path_node_container.get_global_transform().xform_inv(ui.get_ref().editor.get_global_mouse_position()) - position, true)
+		move_handle(HANDLE_RIGHT, ui.get_ref().path_node_container.get_global_transform().xform_inv(ui.get_mouse_pos()) - position, true)
 
 
 func move_handle(handle: int, new_pos: Vector2, moved_by_user: bool = false):

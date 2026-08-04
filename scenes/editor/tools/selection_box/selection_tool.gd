@@ -13,3 +13,6 @@ func commit_to_action():
 
 func update():
 	pass
+
+func get_mouse_pos() -> Vector2:
+	return editor.parallax_scroll.corrected_mouse_position()

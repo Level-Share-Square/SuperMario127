@@ -60,6 +60,6 @@ func finalize_erase() -> void:
 
 # Mouse coords to tile grid coords
 func get_mouse_tile_pos() -> Vector2:
-	return (get_global_mouse_position() / editor.TILE_SIZE).floor()
+	return (get_mouse_pos() / editor.TILE_SIZE).floor()
 	
 	

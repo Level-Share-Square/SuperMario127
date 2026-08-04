@@ -19,3 +19,6 @@ func _update_parallax(layer: int):
 
 func layer_picked():
 	_update_parallax(0)
+
+func corrected_mouse_position() -> Vector2:
+	return get_local_mouse_position()

@@ -13,7 +13,7 @@ func _ready():
 	tool_manager.get_node("ObjectPaint").connect("objects_selected", self, "external_objects_selected")
 
 func get_adjusted_mouse_position():
-	return get_global_mouse_position()
+	return get_mouse_pos()
 	
 func toggle_ui(value: bool):
 	editor.ui.visible = value

@@ -20,6 +20,7 @@ var selected_objects: Array = []
 var selected_tiles: Dictionary = {}
 var selected_item: PlaceableItem
 
+onready var parallax_scroll = $"%ParallaxScroll"
 onready var editor_camera: Camera2D = $"%EditorCamera"
 onready var tool_manager: ToolManager = $"%Tools"
 onready var tile_buffer: TileMap = $"%TileBuffer"

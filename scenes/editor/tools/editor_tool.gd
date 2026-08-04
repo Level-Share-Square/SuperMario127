@@ -35,3 +35,7 @@ func _click_right_released(_event: InputEvent, _world_pos: Vector2) -> void:
 
 func _mouse_movement(_event: InputEvent, _world_pos: Vector2) -> void:
 	pass
+
+
+func get_mouse_pos() -> Vector2:
+	return editor.parallax_scroll.corrected_mouse_position()

@@ -23,7 +23,7 @@ func _click(_event: InputEvent, _world_pos: Vector2) -> void:
 
 func _update(delta: float) -> void:
 	if editor.selected_item is PlaceableTile:
-		var mouse_tile: Vector2 = (get_global_mouse_position() / editor.TILE_SIZE).floor()
+		var mouse_tile: Vector2 = (get_mouse_pos() / editor.TILE_SIZE).floor()
 		
 		var line: = line_util.get_line(last_mouse_tile, mouse_tile)
 		

@@ -5,12 +5,6 @@ extends TileMap
 var layer_data: LayerData
 
 
-#func _unhandled_input(event):
-#	if event.is_action_pressed("LMB"):
-#		place_tile(get_global_mouse_position() / 32, 1, 0, 0, true)
-#	elif event.is_action_pressed("RMB"):
-#		erase_tile(get_global_mouse_position() / 32, true)
-
 func load_in(s_layer_data: LayerData):
 	layer_data = s_layer_data
 	
