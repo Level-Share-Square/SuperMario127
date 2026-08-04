@@ -110,4 +110,6 @@ func create_new_bill(chase, speed, color, facing_direction, invincible) -> Node:
 	object.set_property("facing_direction", facing_direction)
 	object.set_property("invincible", invincible)
 	
+	object.set_init_rotations()
+	
 	return object
