@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=84 format=2]
+[gd_resource type="Theme" load_steps=87 format=2]
 
 [ext_resource path="res://assets/fonts/delfino_small.tres" type="DynamicFont" id=1]
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=2]
@@ -586,6 +586,21 @@ grow_begin = 0.0
 grow_end = 0.0
 vertical = true
 
+[sub_resource type="StreamTexture" id=188]
+load_path = "res://.import/grabber.png-c5dc799fb1845827e1c93bb2b92dffa7.stex"
+
+[sub_resource type="StreamTexture" id=189]
+load_path = "res://.import/grabber_highlight.png-5a9682124f55175e54019bd5c7ea5248.stex"
+
+[sub_resource type="StyleBoxFlat" id=190]
+bg_color = Color( 0, 0.0431373, 0.313726, 1 )
+corner_radius_top_left = 306
+corner_radius_top_right = 309
+expand_margin_left = 4.0
+expand_margin_right = 4.0
+expand_margin_top = 4.0
+expand_margin_bottom = 4.0
+
 [sub_resource type="Gradient" id=137]
 colors = PoolColorArray( 0.012, 0.0272, 0.24, 1, 0.0585, 0.14985, 0.45, 1 )
 
@@ -796,6 +811,9 @@ VScrollBar/styles/grabber_highlight = SubResource( 126 )
 VScrollBar/styles/grabber_pressed = SubResource( 127 )
 VScrollBar/styles/scroll = SubResource( 123 )
 VSeparator/styles/separator = SubResource( 1 )
+VSlider/icons/grabber = SubResource( 188 )
+VSlider/icons/grabber_highlight = SubResource( 189 )
+VSlider/styles/slider = SubResource( 190 )
 WindowBack/base_type = "PanelContainer"
 WindowBack/styles/panel = SubResource( 139 )
 WindowBorder/base_type = "PanelContainer"

@@ -12,9 +12,12 @@ func update_color(color: Color, save: bool = false):
 
 func load_property(_editor: Editor, init_value, _property: Array, property_name = null):
 	.load_property(_editor, init_value, _property, property_name)
+	print(init_value)
 	var color = init_value
 	var color_panel = $"%Color"
-	color_panel.get_stylebox("panel").bg_color = color #replace this with the actual color once luci fixes it
+	color_panel.get_stylebox("panel").bg_color = init_value
+	var manager = $"%Expanded"
+	manager.color = init_value
 	
 
 func property_changed(key: String, new_value):

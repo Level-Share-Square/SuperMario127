@@ -8,11 +8,12 @@ onready var slider_r = $"%SliderR"
 onready var slider_g = $"%SliderG"
 onready var slider_b = $"%SliderB"
 onready var slider_a = $"%SliderA"
+onready var slider_i = $"%SliderI"
 onready var expand_button = $"%ExpandButton"
 onready var hex_code = $"%HexCode"
 onready var property_editor = owner
 
-onready var sliders: Array = [slider_r, slider_g, slider_b, slider_a]
+onready var sliders: Array = [slider_r, slider_g, slider_b, slider_a, slider_i]
 
 var color: Color
 
@@ -20,11 +21,13 @@ var move_wheel: bool = false
 var move_gradient: bool = false
 var move_slider: bool = false
 
+var intensity: float = 0
+
 func _ready():
 	for slider in sliders:
 		slider.get_node("HSlider").share(slider.get_node("Spinbox"))
 		slider.get_node("Spinbox").connect("value_changed", self, "component_changed", [slider.component])
-		slider.get_node("Spinbox").max_value = 255
+		slider.get_node("Spinbox").max_value = 255 if slider.component != ColorComponents.Component.INTENSITY else 100
 	hex_code.get_node("LineEdit").connect("focus_exited", self, "hex_code_entered")
 	hex_code.get_node("LineEdit").connect("text_entered", self, "text_entered")
 	
@@ -83,7 +86,7 @@ func update_color() -> void:
 	
 func update_nodes() -> void:
 	for slider in sliders:
-		slider.set_block_signals(true)
+		slider.get_node("Spinbox").set_block_signals(true)
 	
 	wheel.self_modulate = Color(color.v, color.v, color.v)
 	gradient.self_modulate = color
@@ -91,6 +94,7 @@ func update_nodes() -> void:
 	slider_g.get_node("Spinbox").value = color.g * 255.0
 	slider_b.get_node("Spinbox").value = color.b * 255.0
 	slider_a.get_node("Spinbox").value = color.a * 255.0
+	slider_i.get_node("Spinbox").value = max(color.r, max(color.g, color.b))
 	hex_code.get_node("LineEdit").text = "#" + color.to_html(false)
 	
 	if !(move_wheel or move_gradient):
@@ -100,11 +104,9 @@ func update_nodes() -> void:
 		color_selector.rect_position = wheel.rect_pivot_offset + local_center_pos
 		
 	for slider in sliders:
-		slider.set_block_signals(false)
+		slider.get_node("Spinbox").set_block_signals(false)
 		
 	property_editor.update_color(color, false)
-		
-
 	
 func component_changed(value: float, component: int):
 	if !(move_wheel or move_gradient): move_slider = true
@@ -117,6 +119,8 @@ func component_changed(value: float, component: int):
 			color.b = value/255.0
 		ColorComponents.Component.ALPHA:
 			color.a = value/255.0
+		ColorComponents.Component.INTENSITY:
+			color.v = min(max(color.r, max(color.g, color.b)), 1) * value
 	update_nodes()
 
 func hex_code_entered():
@@ -124,7 +128,7 @@ func hex_code_entered():
 	if new_code.is_valid_hex_number():
 		color = Color(new_code)
 	finish_color()
-	update_nodes()
+	update_nodes() 
 
 func text_entered(new_text: String):
 	hex_code.get_node("LineEdit").release_focus()

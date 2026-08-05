@@ -9,7 +9,6 @@ func on_pressed():
 	.on_pressed()
 
 	if !active:
-		color_manager.color = $Color.get_stylebox("panel").bg_color
 		color_manager.update_nodes()
 		var tween = get_tree().create_tween()
 		tween.tween_property(owner, "self_modulate:a", 1.0, 0.3).set_trans(Tween.TRANS_CUBIC)
