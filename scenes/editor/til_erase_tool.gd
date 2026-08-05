@@ -34,10 +34,6 @@ func _mouse_movement(_event: InputEvent, world_pos: Vector2) -> void:
 
 
 func erase_tile(pos: Vector2) -> void:
-	var level_bounds: Rect2 = CurrentLevelData.current_area.header.bounds
-	if not level_bounds.has_point(pos):
-		return
-	
 	var item = editor.selected_item
 	var visual = tile_util.get_real_tile_set_id(21, 0, 2)
 	

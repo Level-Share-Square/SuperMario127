@@ -15,10 +15,6 @@ func on_mouse_released():
 	reset_bounds()
 	
 func draw_tile(pos: Vector2) -> void:
-	var level_bounds: Rect2 = CurrentLevelData.current_area.header.bounds
-	if not level_bounds.has_point(pos):
-		return
-	
 	var item = editor.selected_item
 	var cache_tile = tile_util.get_real_tile_set_id(item.tileset_id, item.tile_id, item.palette)
 	
