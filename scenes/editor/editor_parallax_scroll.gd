@@ -1,5 +1,7 @@
 extends ParallaxScroll
 
+signal update_parallax
+
 onready var editor = owner
 onready var shared = editor.get_shared_node()
 
@@ -16,6 +18,7 @@ func _update_parallax():
 	else:
 		set_parallax_distance(0)
 	_update_scroll()
+	emit_signal("update_parallax")
 
 func layer_picked():
 	_update_parallax()

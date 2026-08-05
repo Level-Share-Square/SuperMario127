@@ -7,6 +7,8 @@ onready var grid_texture = $"%GridTexture"
 var hidden: bool = false
 var camera_zoom_level: float = 1.0
 
+const DEFAULT_MIRRORING = Vector2(3072, 1664)
+
 
 # Called when the node enters the scene tree for the first time.
 func _unhandled_input(event):
@@ -29,5 +31,6 @@ func update_visibility(zoom_level: float):
 
 func _process(delta):
 	grid_repeat.motion_offset = parallax_scroll.position
-#	grid_repeat.scale = parallax_scroll.scale
+	grid_repeat.motion_mirroring = DEFAULT_MIRRORING * parallax_scroll.scale
 	grid_texture.rect_scale = parallax_scroll.scale
+
