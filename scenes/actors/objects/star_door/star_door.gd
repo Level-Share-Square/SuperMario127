@@ -176,25 +176,26 @@ func open_menu_ui(character):
 	get_tree().get_current_scene().get_node("%SignText").open(text, self, character)
 
 func update_collectible_counts():
-	current_level_info = CurrentLevelData.level_info
-	match(collectible):
-		"shine":
-			collectible_count = current_level_info.collected_shines.values().count(true)
-		"star coin":
-			collectible_count = current_level_info.collected_star_coins.values().count(true)
-		"coin":
-			pass
-		"star bit":
-			pass
-		_:
-			collectible_count = current_level_info.collected_shines.values().count(true)
-	
-	if collectible == "shine" or "star coin" and CurrentLevelData.is_playing_hub_level():
-		var total_dict: Dictionary = CurrentLevelData.get_meta_collectibles()
-		if collectible == "shine":
-			collectible_count = total_dict.get("collected_shines", 0)
-		elif collectible == "star_coin":
-			collectible_count = total_dict.get("collected_star_coins", 0)
+#	current_level_info = CurrentLevelData.level_info
+#	match(collectible):
+#		"shine":
+#			collectible_count = current_level_info.collected_shines.values().count(true)
+#		"star coin":
+#			collectible_count = current_level_info.collected_star_coins.values().count(true)
+#		"coin":
+#			pass
+#		"star bit":
+#			pass
+#		_:
+#			collectible_count = current_level_info.collected_shines.values().count(true)
+#
+#	if collectible == "shine" or "star coin" and CurrentLevelData.is_playing_hub_level():
+#		var total_dict: Dictionary = CurrentLevelData.get_meta_collectibles()
+#		if collectible == "shine":
+#			collectible_count = total_dict.get("collected_shines", 0)
+#		elif collectible == "star_coin":
+#			collectible_count = total_dict.get("collected_star_coins", 0)
+	pass
 
 func _ready() -> void:
 	._ready()

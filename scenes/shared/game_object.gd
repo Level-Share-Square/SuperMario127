@@ -233,7 +233,6 @@ func register_property(id: int, property: String, default_value, editable: bool 
 func set_object_data(data: ObjectData) -> void:
 	object_data = data
 	for id in object_data.properties:
-		print(self[property_ids[id]], typeof(object_data.properties[id]))
 		set_property_by_id(id, object_data.properties[id], false)
 
 
