@@ -12,7 +12,7 @@ export var click_override: String
 func _process(delta):
 	if get_child_count() > 0:
 		for child in get_children():
-			if "@@" in child.name and child is Control:
+			if "TooltipPanel" in str(child.get_class()):
 				child.mouse_filter = Control.MOUSE_FILTER_IGNORE
 
 func _ready() -> void:
