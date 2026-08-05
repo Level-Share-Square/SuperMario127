@@ -33,6 +33,7 @@ func _ready():
 
 func selected():
 	emit_signal("layer_selected", layer_data.layer_metadata.order)
+	shared.focus_layer(shared.get_parent().show_layers, layer_data.layer_metadata.layer_uuid)
 
 
 func load_layer(_layer_data: LayerData, _can_delete: bool) -> void:
@@ -66,6 +67,7 @@ func show_layer_editor() -> void:
 
 
 func toggle_visibility() -> void:
+	if shared.get_parent().show_layers: return
 	var action := EditLayerAction.new()
 	action.layer_index = layer_data.layer_metadata.order
 	action.shared = shared

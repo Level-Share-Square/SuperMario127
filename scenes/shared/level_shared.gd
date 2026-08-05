@@ -160,3 +160,11 @@ func get_object_at_position(pos: Vector2, uuid: String):
 func update_tilemaps():
 	for layer in layer_dictionary.values():
 		layer.tile_map_manager.load_in(layer.layer_data)
+
+func focus_layer(focus: bool, focus_layer: String):
+	for layer_uuid in layers:
+		var layer = get_layer(layer_uuid)
+		if focus:
+			layer.visible = layer_uuid == focus_layer
+		else:
+			layer.visible = layer.layer_data.layer_metadata.layer_visible
