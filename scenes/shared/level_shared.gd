@@ -91,6 +91,8 @@ func remove_layer(uuid: String, remove_from_data: bool = false):
 	removed.queue_free()
 	if remove_from_data:
 		CurrentLevelData.current_area.layers.remove(get_layer_index(removed))
+		for i in range(0, CurrentLevelData.current_area.layers.size()):
+			CurrentLevelData.current_area.layers[i].layer_metadata.order = i
 		
 func layer_index_to_uuid(index: int):
 	return layer_dictionary.find_key(get_layer_at(index))

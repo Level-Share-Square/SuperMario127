@@ -55,6 +55,10 @@ func load_layer(_layer_data: LayerData, _can_delete: bool) -> void:
 
 
 func delete_layer() -> void:
+	var editor = layer_dropdown.editor
+	if(layer_data.layer_metadata.layer_uuid == editor.layer):
+		emit_signal("layer_selected", shared.origin.layer_data.layer_metadata.order)
+		shared.focus_layer(shared.get_parent().show_layers, shared.origin.layer_data.layer_metadata.layer_uuid)
 	var action := DeleteLayerAction.new()
 	action.shared = shared
 	action.layer_index = layer_data.layer_metadata.order
