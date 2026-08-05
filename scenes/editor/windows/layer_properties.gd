@@ -3,6 +3,7 @@ extends VBoxContainer
 onready var layer_name = $"%LayerName"
 onready var parallax = $"%Parallax"
 onready var is_ground = $"%IsGround"
+onready var autoset_tint = $"%AutosetTint"
 onready var tint = $"%Tint"
 onready var opacity = $"%Opacity"
 onready var uuid = $"%UUID"
@@ -54,6 +55,13 @@ func load_base_properties():
 		PropertyInfo.new(is_ground.hint_tooltip)
 	])
 	connect_signals(is_ground)
+	
+	autoset_tint.load_property(autoset_tint, get_property_value("autoset_tint"), [
+		"autoset_tint",
+		TYPE_BOOL,
+		PropertyInfo.new(autoset_tint.hint_tooltip)
+	])
+	connect_signals(autoset_tint)
 	
 	tint.load_property(tint, get_property_value("layer_tint"), [
 		"layer_tint",
