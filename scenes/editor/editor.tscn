@@ -181,7 +181,6 @@ texture = SubResource( 183 )
 region_rect = Rect2( 0, 0, 64, 64 )
 
 [sub_resource type="StreamTexture" id=201]
-load_path = "res://.import/settings.svg-87e90ab21405900cba0a61861af9f664.stex"
 
 [sub_resource type="Gradient" id=202]
 interpolation_mode = 2
@@ -1925,6 +1924,7 @@ bus = "Sounds"
 [connection signal="text_entered" from="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/SearchBar" to="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/ScrollContainer/CenterContainer/ItemsGrid" method="_on_search"]
 [connection signal="pressed" from="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/Search" to="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/ScrollContainer/CenterContainer/ItemsGrid" method="_on_search"]
 [connection signal="pressed" from="UI/UIContainer/EditorUI/Top/Options/PanelContainer/Settings" to="UI/LevelSettingsWindow" method="toggle_window"]
+[connection signal="pressed" from="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/PanelContainer/Settings/AreaSettings" to="UI/AreaSettingsWindow" method="toggle_window"]
 [connection signal="button_down" from="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/PanelContainer/Settings/Save" to="SaveManager" method="_on_Save_button_down"]
 [connection signal="button_down" from="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/PanelContainer/Settings/Quit" to="SaveManager" method="_on_Quit_button_down"]
 [connection signal="button_down" from="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown/ResetZoom" to="EditorCamera" method="_on_ResetZoom_button_down"]
