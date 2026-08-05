@@ -3,7 +3,7 @@ extends TileMap
 
 
 var layer_data: LayerData
-
+var has_margins: bool = true
 
 func load_in(s_layer_data: LayerData):
 	layer_data = s_layer_data
@@ -13,8 +13,9 @@ func load_in(s_layer_data: LayerData):
 	if not layer_data.layer_metadata.is_ground:
 		collision_layer = 0
 		collision_mask = 0
-	
+
 	var packed_tile: int = 0
+	var area_rect: Rect2 = CurrentLevelData.current_area.header.bounds
 	for coord in layer_data.tile_data.used_tiles:
 		packed_tile = layer_data.tile_data.get_packed_tile_at(coord)
 		place_tile(
@@ -24,7 +25,9 @@ func load_in(s_layer_data: LayerData):
 			tile_util.get_palette_id_from_packed(packed_tile),
 			false
 		)
-	
+		if !area_rect.has_point(coord): has_margins = false
+
+	if has_margins: _add_margins("LevelMargin")
 #	for chunk in layer_data.tile_data.chunks:
 #		create_tilemap_chunk(chunk, layer_data.tile_data.chunks[chunk])
 	
@@ -87,9 +90,9 @@ func update_autotile(coords: Vector2, use_godot_autotile: bool = true):
 # this is so the autotiling actually extends correctly. we only need this for
 # ground layers (and maybe even temporarily for that considering you can store
 # tile data literally anywhere now
-func _add_margins():
+func _add_margins(tile_name: String):
 	var bounds: Rect2 = CurrentLevelData.current_area.header.bounds
-	var tile: int = tile_set.find_tile_by_name("OutOfBounds")
+	var tile: int = tile_set.find_tile_by_name(tile_name)
 	
 	var left: int = bounds.position.x - 1
 	var top: int = bounds.position.y - 1

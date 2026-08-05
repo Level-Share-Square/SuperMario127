@@ -50,6 +50,7 @@ func finalize_erase() -> void:
 	action.tile_id = 0
 	action.palette = 0
 	action.do_tiles = editor.tile_buffer.get_used_cells()
+	action.has_margins = shared.get_layer(editor.layer).tile_map_manager.has_margins
 	editor.action_manager.commit_action(action)
 	
 	editor.tile_buffer.clear()

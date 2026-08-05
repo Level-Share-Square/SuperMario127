@@ -280,7 +280,7 @@ limit_top = -10000000
 smoothing_enabled = false
 
 [node name="ZIndex" type="Node2D" parent="."]
-z_index = 128
+z_index = 4096
 z_as_relative = false
 
 [node name="Tools" type="Control" parent="ZIndex"]
