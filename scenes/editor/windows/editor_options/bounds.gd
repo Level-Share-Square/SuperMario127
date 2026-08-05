@@ -29,13 +29,14 @@ func _ready():
 		
 	area = CurrentLevelData.current_area
 	area_rect = area.header.bounds
-	update_values()
 	
 	yield(editor, "ready")
 	editor.action_manager.connect("action", self, "update_values")
 	editor.action_manager.connect("undo", self, "update_values")
 	editor.action_manager.connect("redo", self, "update_values")
-		
+	
+	update_values()
+	
 func change_bounds(side: String, type: int):
 	var amount = increment.value
 	if type == ChangeType.SUBTRACT: amount *= -1
@@ -52,7 +53,6 @@ func change_bounds(side: String, type: int):
 			area_rect = area_rect.grow_individual(0, 0, 0, amount)
 			
 	action()
-	editor.oob_overlay.set_bounds(Rect2(area_rect.position*32, area_rect.size*32))
 	
 	update_values()
 	
@@ -69,3 +69,4 @@ func update_values():
 	y_label.text = Y_LABEL_PREFIX % area_rect.size.y
 	shared.update_tilemaps()
 	camera.update_limits(area.header)
+	editor.oob_overlay.set_bounds(Rect2(area_rect.position*32, area_rect.size*32))

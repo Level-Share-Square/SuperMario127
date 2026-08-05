@@ -292,10 +292,12 @@ script = ExtResource( 8 )
 [node name="TilePaint" type="Control" parent="ZIndex/Tools"]
 mouse_filter = 2
 script = ExtResource( 27 )
+inverse_tool_name = "ObjectPaint"
 
 [node name="TileErase" type="Control" parent="ZIndex/Tools"]
 mouse_filter = 2
 script = ExtResource( 12 )
+inverse_tool_name = "ObjectErase"
 
 [node name="TileFill" type="Control" parent="ZIndex/Tools"]
 mouse_filter = 2
@@ -307,11 +309,13 @@ script = ExtResource( 69 )
 mouse_filter = 2
 script = ExtResource( 25 )
 tool_type = 1
+inverse_tool_name = "TilePaint"
 
 [node name="ObjectErase" type="Control" parent="ZIndex/Tools"]
 mouse_filter = 2
 script = ExtResource( 11 )
 tool_type = 1
+inverse_tool_name = "TileErase"
 
 [node name="ObjectTileLock" type="Control" parent="ZIndex/Tools"]
 mouse_filter = 2
@@ -332,9 +336,11 @@ z_as_relative = false
 [node name="ObjectSelection" parent="ParallaxScroll/ZIndex" instance=ExtResource( 34 )]
 unique_name_in_owner = true
 tool_type = 1
+inverse_tool_name = "%TileSelection"
 
 [node name="TileSelection" parent="ParallaxScroll/ZIndex" instance=ExtResource( 74 )]
 unique_name_in_owner = true
+inverse_tool_name = "%ObjectSelection"
 
 [node name="Grid" type="ParallaxBackground" parent="ParallaxScroll"]
 unique_name_in_owner = true
@@ -1926,6 +1932,7 @@ stream = ExtResource( 55 )
 volume_db = -7.5
 bus = "Sounds"
 
+[connection signal="tool_changed" from="ZIndex/Tools" to="UI/UIContainer/EditorUI/Middle/Tools" method="_on_Tools_tool_changed"]
 [connection signal="action" from="ActionManager" to="SaveManager" method="_on_ActionManager_action"]
 [connection signal="text_entered" from="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/SearchBar" to="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/ScrollContainer/CenterContainer/ItemsGrid" method="_on_search"]
 [connection signal="pressed" from="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/Search" to="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/ScrollContainer/CenterContainer/ItemsGrid" method="_on_search"]

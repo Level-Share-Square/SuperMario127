@@ -70,12 +70,11 @@ func _on_item_button_pressed(item_button):
 	editor.selected_item.palette = item_button.palette
 	match item_name.substr(0, 3):
 		"obj":
-			editor.tool_manager.change_tool("ObjectPaint")
 			item_preview.update_item(associated_item, associated_item.palette, true)
 		"til":
-			editor.tool_manager.change_tool("TilePaint")
 			item_preview.update_item(associated_item, associated_item.palette, false)
 	
+	editor.emit_signal("item_changed", associated_item)
 	update_level_data()
 
 

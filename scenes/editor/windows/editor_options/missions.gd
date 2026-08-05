@@ -23,6 +23,7 @@ func _ready():
 	refresh_buttons()
 		
 	on_mission_selected(mission_data[0])
+	
 	new_mission.connect("button_down", self, "on_new_mission_pressed")
 		
 func on_mission_selected(mission: MissionData):

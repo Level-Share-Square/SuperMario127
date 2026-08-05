@@ -15,6 +15,7 @@ func _ready():
 		change_tool("ObjectPaint")
 	else:
 		change_tool("TilePaint")
+	editor.connect("item_changed", self, "item_changed")
 
 func _unhandled_input(event: InputEvent) -> void:
 	mouse_position = parallax_scroll.corrected_mouse_position()
@@ -40,20 +41,20 @@ func _process(_delta: float):
 		var event := InputEventMouseMotion.new()
 		current_tool._mouse_movement(event, parallax_scroll.corrected_mouse_position())
 
-
 func change_tool(tool_name: String) -> void:
 	current_tool = get_node(tool_name)
 	emit_signal("tool_changed")
-
 
 func item_changed(placeable_item: PlaceableItem):
 	match current_tool.tool_type:
 		EditorTool.Type.TileTool:
 			if placeable_item is PlaceableObject:
-				change_tool(current_tool.inverse_tool_name)
+				var new_tool: String = current_tool.inverse_tool_name if current_tool.inverse_tool_name else "ObjectPaint"
+				change_tool(new_tool)
 		EditorTool.Type.ObjectTool:
 			if placeable_item is PlaceableTile:
-				change_tool(current_tool.inverse_tool_name)
+				var new_tool: String = current_tool.inverse_tool_name if current_tool.inverse_tool_name else "TilePaint"
+				change_tool(new_tool)
 
 func _on_Tools_tool_picked(tool_name):
 	match tool_name:
