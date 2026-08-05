@@ -15,6 +15,9 @@ signal updated
 func _input(event):
 	if get_parent().get_parent().get_parent().rect_min_size.y == 0:
 		return
+		
+	var property_editor = owner
+	if !property_editor.expand_button.active: return
 	 
 	var center = get_rect().size/2
 	var is_in_rect = get_rect().has_point(get_local_mouse_position())

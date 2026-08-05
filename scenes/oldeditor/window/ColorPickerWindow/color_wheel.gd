@@ -57,3 +57,5 @@ func update_value(color: Color, notify_manager: bool = true):
 	self_modulate = Color(color.v, color.v, color.v)
 	gradient_selector.set_brightness(color.v)
 	base_color = color
+	
+	emit_signal("updated", base_color, false)

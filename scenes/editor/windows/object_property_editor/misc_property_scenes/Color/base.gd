@@ -1,10 +1,9 @@
 extends PropertyEditor
 
-func _ready():
-	var wheel = $"%Wheel"
-	wheel.connect("updated", self, "_on_wheel_updated")
+onready var expand_button = $"%ExpandButton"
+onready var color_manager = $"%Expanded"
 	
-func _on_wheel_updated(color: Color, save: bool = false):
+func update_color(color: Color, save: bool = false):
 	var color_panel = $"%Color"
 	color_panel.get_stylebox("panel").bg_color = color
 	if save and property:
@@ -26,4 +25,5 @@ func property_changed(key: String, new_value):
 
 	if not stylebox is StyleBoxFlat: return
 	stylebox.bg_color = new_value
+	color_manager.update_nodes()
 
