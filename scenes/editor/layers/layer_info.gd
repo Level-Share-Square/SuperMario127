@@ -8,6 +8,7 @@ onready var collision_shape = $"%CollisionShape2D"
 onready var edit = $"%Edit"
 onready var select = $"%Select"
 onready var show_hide = $"%ShowHide"
+onready var delete = $"%Delete"
 
 onready var hover_sound = $"%HoverSound"
 onready var click_sound = $"%ClickSound"
@@ -33,7 +34,7 @@ func _ready():
 
 func selected():
 	emit_signal("layer_selected", layer_data.layer_metadata.order)
-	shared.focus_layer(shared.get_parent().show_layers, layer_data.layer_metadata.layer_uuid)
+	shared.focus_layer(shared.get_parent().focus_layer, layer_data.layer_metadata.layer_uuid)
 
 
 func load_layer(_layer_data: LayerData, _can_delete: bool) -> void:
@@ -52,13 +53,14 @@ func load_layer(_layer_data: LayerData, _can_delete: bool) -> void:
 		yield(self, "ready")
 	
 	show_hide.icon = eye_open if layer_metadata.layer_visible else eye_closed
-
+	
+	delete.disabled = can_delete
 
 func delete_layer() -> void:
 	var editor = layer_dropdown.editor
 	if(layer_data.layer_metadata.layer_uuid == editor.layer):
 		emit_signal("layer_selected", shared.origin.layer_data.layer_metadata.order)
-		shared.focus_layer(shared.get_parent().show_layers, shared.origin.layer_data.layer_metadata.layer_uuid)
+		shared.focus_layer(shared.get_parent().focus_layer, shared.origin.layer_data.layer_metadata.layer_uuid)
 	var action := DeleteLayerAction.new()
 	action.shared = shared
 	action.layer_index = layer_data.layer_metadata.order
@@ -71,7 +73,7 @@ func show_layer_editor() -> void:
 
 
 func toggle_visibility() -> void:
-	if shared.get_parent().show_layers: return
+	if shared.get_parent().focus_layer: return
 	var action := EditLayerAction.new()
 	action.layer_index = layer_data.layer_metadata.order
 	action.shared = shared

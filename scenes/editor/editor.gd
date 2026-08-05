@@ -11,7 +11,7 @@ export(NodePath) var shared_path
 var placed_item_property = null
 var pixel_lock = true
 var object_layering = true
-var show_layers = false
+var focus_layer = false
 
 var layer: String = ""
 

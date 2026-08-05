@@ -7,8 +7,8 @@ var tint := Color.white
 
 func load_placeable_item():
 	placeable_item = PlaceableItem.new()
-	placeable_item.item_name = "Tile Object"
-	placeable_item.icons.append(load("res://assets/misc/gear.svg"))
+	placeable_item.item_name = "Tile Stamp"
+	placeable_item.icons.append(load("res://assets/icons/settings.svg"))
 
 func _ready():
 	set_tiles()

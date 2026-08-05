@@ -20,7 +20,7 @@ func pressed() -> void:
 	editor.layer = cur_layer
 	layer_picker.text = str(shared.layers[editor.layer].order)
 #	for tilemap in shared.tilemaps_node.get_children():
-#		if editor.show_layers:
+#		if editor.focus_layer:
 #			if tilemap.layer != editor.layer:
 #				tilemap.transparent = true
 #			else:

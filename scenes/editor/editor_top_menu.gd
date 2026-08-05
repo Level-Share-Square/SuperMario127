@@ -22,8 +22,8 @@ func on_button_pressed(button: Button):
 		"Grid":
 			grid.toggle_grid(!button.pressed)
 		"Layers":
-			editor.show_layers = !button.pressed
-			shared.focus_layer(editor.show_layers, editor.layer)
+			editor.focus_layer = !button.pressed
+			shared.focus_layer(editor.focus_layer, editor.layer)
 		"PixelSnap":
 			editor.pixel_lock = !button.pressed
 		"Autosaves":

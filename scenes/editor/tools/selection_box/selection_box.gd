@@ -132,7 +132,7 @@ func _process(delta):
 
 func _on_object_entered(area, object):
 	if expand == true:
-		if editor.show_layers:
+		if editor.focus_layer:
 			if editor.layer == object.layer:
 				selected_dict.get_or_add(object, object.name)
 				object.selected = true
@@ -144,7 +144,7 @@ func _on_object_entered(area, object):
 
 func _on_object_exited(area, object):
 	if erase == true:
-		if editor.show_layers:
+		if editor.focus_layer:
 			if editor.layer == object.layer:
 				selected_dict.erase(object)
 				object.selected = false
