@@ -26,11 +26,7 @@ func on_button_pressed(button: Button):
 			shared.focus_layer(editor.show_layers, editor.layer)
 		"PixelSnap":
 			editor.pixel_lock = !button.pressed
-		"Layering":
-			editor.object_layering = !button.pressed
 		"Autosaves":
 			autosave_window.toggle_window()
 		"Settings":
 			editor.screen_manager.screen_change("Options")
-		"AreaSettings":
-			get_node("%AreaSettingsWindow").toggle_window()

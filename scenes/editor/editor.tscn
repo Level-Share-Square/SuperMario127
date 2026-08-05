@@ -826,7 +826,7 @@ unique_name_in_owner = true
 margin_left = 4.0
 margin_top = 4.0
 margin_right = 144.0
-margin_bottom = 221.0
+margin_bottom = 171.0
 rect_clip_content = true
 custom_constants/separation = 2
 
@@ -876,26 +876,10 @@ margin_top = 69.0
 margin_right = 140.0
 margin_bottom = 73.0
 
-[node name="Layering" type="CheckButton" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown"]
+[node name="ResetZoom" type="Button" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown"]
 margin_top = 75.0
 margin_right = 140.0
 margin_bottom = 92.0
-focus_mode = 0
-theme_type_variation = "CheckButtonTransparent"
-pressed = true
-text = "Obj. Layering"
-align = 1
-script = ExtResource( 45 )
-
-[node name="HSeparator3" type="HSeparator" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown"]
-margin_top = 94.0
-margin_right = 140.0
-margin_bottom = 98.0
-
-[node name="ResetZoom" type="Button" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown"]
-margin_top = 100.0
-margin_right = 140.0
-margin_bottom = 117.0
 focus_mode = 0
 theme_type_variation = "ButtonTransparent"
 custom_colors/font_color = Color( 1, 1, 1, 1 )
@@ -903,14 +887,14 @@ text = "Reset Zoom"
 script = ExtResource( 24 )
 
 [node name="HSeparator4" type="HSeparator" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown"]
-margin_top = 119.0
+margin_top = 94.0
 margin_right = 140.0
-margin_bottom = 123.0
+margin_bottom = 98.0
 
 [node name="Autosaves" type="Button" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown"]
-margin_top = 125.0
+margin_top = 100.0
 margin_right = 140.0
-margin_bottom = 142.0
+margin_bottom = 117.0
 focus_mode = 0
 theme_type_variation = "ButtonTransparent"
 custom_colors/font_color = Color( 1, 1, 1, 1 )
@@ -918,14 +902,14 @@ text = "Autosaves"
 script = ExtResource( 24 )
 
 [node name="HSeparator7" type="HSeparator" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown"]
-margin_top = 144.0
+margin_top = 119.0
 margin_right = 140.0
-margin_bottom = 148.0
+margin_bottom = 123.0
 
 [node name="Help" type="Button" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown"]
-margin_top = 150.0
+margin_top = 125.0
 margin_right = 140.0
-margin_bottom = 167.0
+margin_bottom = 142.0
 focus_mode = 0
 theme_type_variation = "ButtonTransparent"
 custom_colors/font_color = Color( 1, 1, 1, 1 )
@@ -933,33 +917,18 @@ text = "Help"
 script = ExtResource( 24 )
 
 [node name="HSeparator5" type="HSeparator" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown"]
-margin_top = 169.0
+margin_top = 144.0
 margin_right = 140.0
-margin_bottom = 173.0
+margin_bottom = 148.0
 
 [node name="Settings" type="Button" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown"]
-margin_top = 175.0
+margin_top = 150.0
 margin_right = 140.0
-margin_bottom = 192.0
+margin_bottom = 167.0
 focus_mode = 0
 theme_type_variation = "ButtonTransparent"
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "Settings"
-script = ExtResource( 24 )
-
-[node name="HSeparator8" type="HSeparator" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown"]
-margin_top = 194.0
-margin_right = 140.0
-margin_bottom = 198.0
-
-[node name="Layer" type="Button" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown"]
-margin_top = 200.0
-margin_right = 140.0
-margin_bottom = 217.0
-focus_mode = 0
-theme_type_variation = "ButtonTransparent"
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-text = "Linktober Aura"
 script = ExtResource( 24 )
 
 [node name="Padding" type="Control" parent="UI/UIContainer/EditorUI/Top"]
