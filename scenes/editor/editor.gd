@@ -31,6 +31,7 @@ onready var screen_manager = $"%ScreenManager"
 onready var save_manager = $"SaveManager"
 onready var object_settings_window = $"%ObjectSettingsWindow"
 onready var ui = $"%UI"
+onready var oob_overlay = $"%OOBOverlay"
 
 onready var save_button = $UI/EditorUI/Utilities/Save
 onready var level_settings = $"%LevelSettingsWindow"
@@ -73,7 +74,8 @@ func _ready():
 		
 	item_actions.verify_clipboard()
 	item_preview.update_item(selected_item, selected_item.palette, selected_item is PlaceableObject)
-
+	var rect := CurrentLevelData.current_area.header.bounds
+	oob_overlay.set_bounds(Rect2(rect.position*32, rect.size*32))
 		
 
 func open_object_properties(selected_objects):
