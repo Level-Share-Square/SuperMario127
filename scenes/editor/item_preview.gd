@@ -16,8 +16,8 @@ func _process(delta):
 			mouse_pos = Vector2(stepify(mouse_pos.x, 8), stepify(mouse_pos.y, 8))
 	else:
 		mouse_pos = Vector2(
-			int(parallax_scroll.corrected_mouse_position().x / 32) * 32, 
-			int(parallax_scroll.corrected_mouse_position().y / 32) * 32
+			floor(parallax_scroll.corrected_mouse_position().x / 32) * 32, 
+			floor(parallax_scroll.corrected_mouse_position().y / 32) * 32
 		)
 	rect_position = mouse_pos
 
