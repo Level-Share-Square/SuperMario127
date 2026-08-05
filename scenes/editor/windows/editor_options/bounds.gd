@@ -51,8 +51,8 @@ func change_bounds(side: String, type: int):
 		"bottom":
 			area_rect = area_rect.grow_individual(0, 0, 0, amount)
 			
-	print(area_rect)
 	action()
+	editor.oob_overlay.set_bounds(Rect2(area_rect.position*32, area_rect.size*32))
 	
 	update_values()
 	

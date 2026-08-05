@@ -247,7 +247,6 @@ anti_aliasing = false
 [sub_resource type="StyleBoxEmpty" id=163]
 
 [sub_resource type="StreamTexture" id=184]
-load_path = "res://.import/CheckUnchecked.svg-7e98a7ce413890c81c4f04b189f01fa3.stex"
 
 [sub_resource type="StyleBoxEmpty" id=171]
 

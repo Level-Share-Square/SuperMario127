@@ -1,4 +1,4 @@
-[gd_scene load_steps=128 format=2]
+[gd_scene load_steps=129 format=2]
 
 [ext_resource path="res://scenes/menu/options/options.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/menu/menu_controller/screen_manager.gd" type="Script" id=2]
@@ -75,6 +75,7 @@
 [ext_resource path="res://scenes/editor/save_manager.gd" type="Script" id=73]
 [ext_resource path="res://scenes/editor/tools/tile_selection.tscn" type="PackedScene" id=74]
 [ext_resource path="res://scenes/editor/windows/help.tscn" type="PackedScene" id=75]
+[ext_resource path="res://scenes/editor/oob_overlay.gd" type="Script" id=76]
 [ext_resource path="res://scenes/editor/editor_parallax_scroll.gd" type="Script" id=77]
 [ext_resource path="res://scenes/editor/windows/quit_confirm_window.tscn" type="PackedScene" id=78]
 [ext_resource path="res://scenes/editor/windows/layer_editor.tscn" type="PackedScene" id=79]
@@ -1883,6 +1884,11 @@ __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": true
 }
+
+[node name="OOBOverlay" type="Node2D" parent="."]
+unique_name_in_owner = true
+z_index = 10
+script = ExtResource( 76 )
 
 [node name="HoverSound" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true

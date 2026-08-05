@@ -13,7 +13,6 @@ func load_in(s_layer_data: LayerData):
 	if not layer_data.layer_metadata.is_ground:
 		collision_layer = 0
 		collision_mask = 0
-	_add_margins()
 	
 	var packed_tile: int = 0
 	for coord in layer_data.tile_data.used_tiles:
