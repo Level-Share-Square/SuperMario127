@@ -2,9 +2,9 @@ class_name BaseObjectAction
 extends Action
 
 
-var shared: LevelShared
+var shared
 var layer: String
-var object: GameObject
+var object
 var object_data: ObjectData
 var object_index: int
 

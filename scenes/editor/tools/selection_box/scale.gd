@@ -8,8 +8,7 @@ var action
 var init_mouse: Vector2
 
 func clicked():
-	init_mouse = get_global_mouse_position()
-	
+	init_mouse = get_mouse_pos()
 	
 	action = ChangePropertyBulkAction.new()
 	action.affected_objects = setup_affected_objects()
@@ -19,7 +18,7 @@ func clicked():
 		object_scales[object] = object.scale
 
 func update():
-	var scale_factor = (get_global_mouse_position() - init_mouse)/SCALE_DISTANCE
+	var scale_factor = (get_mouse_pos() - init_mouse)/SCALE_DISTANCE
 	for object in editor.selected_objects:
 		object.scale = object_scales[object] + scale_factor
 	

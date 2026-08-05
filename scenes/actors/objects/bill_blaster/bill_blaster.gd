@@ -43,12 +43,13 @@ func _object_process(delta):
 	else:
 		sprite.scale = sprite.scale.linear_interpolate(Vector2(1, 1), delta * 7)
 
+func _physics_process(delta):
+	var final_color: Color = color
+	if invincible:
+		final_color.h = float(wrapi(OS.get_ticks_msec(), 0, 500)) / 500
+	color_sprite.modulate = final_color
 
 func _object_physics_process(delta):
-	if invincible:
-		color.h = float(wrapi(OS.get_ticks_msec(), 0, 500)) / 500
-	#rotation_degrees = 0
-	color_sprite.modulate = color
 		
 	if mode != 1:
 		spawn_timer -= delta
@@ -108,5 +109,7 @@ func create_new_bill(chase, speed, color, facing_direction, invincible) -> Node:
 	object.set_property("color", color)
 	object.set_property("facing_direction", facing_direction)
 	object.set_property("invincible", invincible)
+	
+	object.set_init_rotations()
 	
 	return object

@@ -16,7 +16,7 @@ func _ready():
 	
 func _process(delta):
 	if pressed:
-		rect_global_position = get_position_centered(get_global_mouse_position())
+		rect_global_position = get_position_centered(selector.get_mouse_pos)
 
 func toggle_pivot():
 	if visible:

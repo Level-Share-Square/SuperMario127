@@ -42,7 +42,7 @@ theme = ExtResource( 3 )
 margin_left = 6.0
 margin_top = 6.0
 margin_right = 285.0
-margin_bottom = 46.0
+margin_bottom = 42.0
 custom_constants/separation = 5
 
 [node name="HBoxContainer" type="HBoxContainer" parent="WidgetContainer/VBoxContainer"]
@@ -85,7 +85,7 @@ text = "Confirm"
 unique_name_in_owner = true
 margin_top = 24.0
 margin_right = 279.0
-margin_bottom = 40.0
+margin_bottom = 36.0
 focus_mode = 0
 theme = ExtResource( 4 )
 min_value = 1.0

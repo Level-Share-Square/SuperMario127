@@ -14,7 +14,7 @@ var right_held: bool
 
 onready var editor = get_owner()
 onready var shared: LevelShared = editor.get_shared_node()
-onready var tool_manager = get_parent()
+onready var tool_manager = editor.get_node("%Tools")
 
 
 func _click_left(_event: InputEvent, _world_pos: Vector2) -> void:
@@ -35,3 +35,7 @@ func _click_right_released(_event: InputEvent, _world_pos: Vector2) -> void:
 
 func _mouse_movement(_event: InputEvent, _world_pos: Vector2) -> void:
 	pass
+
+
+func get_mouse_pos() -> Vector2:
+	return editor.parallax_scroll.corrected_mouse_position()

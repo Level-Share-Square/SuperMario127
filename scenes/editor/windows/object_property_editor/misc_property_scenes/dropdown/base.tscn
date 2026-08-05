@@ -31,6 +31,7 @@ margin_left = 132.0
 margin_right = 232.0
 margin_bottom = 19.0
 rect_min_size = Vector2( 100, 0 )
+focus_mode = 0
 size_flags_horizontal = 0
 
 [connection signal="item_selected" from="OptionButton" to="." method="item_selected"]

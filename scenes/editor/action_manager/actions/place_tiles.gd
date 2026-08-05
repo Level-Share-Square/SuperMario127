@@ -1,7 +1,7 @@
 class_name PlaceTilesAction
 extends Action
 
-var shared: LevelShared
+var shared
 
 var do_tiles: PoolVector2Array
 var layer: String

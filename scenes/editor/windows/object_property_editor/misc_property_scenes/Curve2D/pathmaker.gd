@@ -46,12 +46,12 @@ func _unhandled_input(event):
 	if Input.is_action_just_pressed("LMB"):
 		get_tree().set_input_as_handled()
 		widget_container.show()
-		line.get_node("path").curve.add_point(get_global_mouse_position() - object.position)
+		line.get_node("path").curve.add_point(get_mouse_pos() - object.position)
 		update_line()
 		var texture_node = VERTEX_PATH.instance()
 		nodes.append(texture_node)
 		texture_node.ui = weakref(self)
-		texture_node.position = get_global_mouse_position() - object.position
+		texture_node.position = get_mouse_pos() - object.position
 		path_node_container.add_child(texture_node)
 		widget_move_to(texture_node)
 		if handle.pressed:
@@ -118,4 +118,5 @@ func _on_Handle_button_down():
 func widget_move_to(node: Node):
 	widget_container.rect_global_position = node.position + object.position + Vector2(-140, 16)
 		
-
+func get_mouse_pos() -> Vector2:
+	return editor.parallax_scroll.corrected_mouse_position()

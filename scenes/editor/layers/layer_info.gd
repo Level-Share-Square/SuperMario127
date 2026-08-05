@@ -9,6 +9,9 @@ onready var edit = $"%Edit"
 onready var select = $"%Select"
 onready var show_hide = $"%ShowHide"
 
+onready var hover_sound = $"%HoverSound"
+onready var click_sound = $"%ClickSound"
+
 onready var eye_open = preload("res://assets/icons/EyeOpen.svg")
 onready var eye_closed = preload("res://assets/icons/EyeClosed.svg")
 
@@ -30,6 +33,7 @@ func _ready():
 
 func selected():
 	emit_signal("layer_selected", layer_data.layer_metadata.order)
+	shared.focus_layer(shared.get_parent().show_layers, layer_data.layer_metadata.layer_uuid)
 
 
 func load_layer(_layer_data: LayerData, _can_delete: bool) -> void:
@@ -63,6 +67,7 @@ func show_layer_editor() -> void:
 
 
 func toggle_visibility() -> void:
+	if shared.get_parent().show_layers: return
 	var action := EditLayerAction.new()
 	action.layer_index = layer_data.layer_metadata.order
 	action.shared = shared
@@ -103,11 +108,13 @@ func dragger_up() -> void:
 			action.layer_index = layer_data.layer_metadata.order
 			action.final_layer_index = target_layer_info.layer_data.layer_metadata.order
 			layer_dropdown.editor.action_manager.commit_action(action)
+			click_sound.play()
 
 
 func area_entered(_area: Area2D):
 	if is_dragging: return
 	modulate.a = 0.75
+	hover_sound.play()
 
 
 func area_exited(_area: Area2D):

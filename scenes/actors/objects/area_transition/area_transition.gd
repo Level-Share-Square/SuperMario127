@@ -48,6 +48,8 @@ func _object_ready():
 		camera_stopper.set_size(Vector2.ZERO)
 		camera_stopper.monitorable = false
 		camera_stopper.visible = false
+	else:
+		sprite.visible = false
 
 func _unhandled_input(event: InputEvent) -> void:
 	parts_input_handler(event,self)

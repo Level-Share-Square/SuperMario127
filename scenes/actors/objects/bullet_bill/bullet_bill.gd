@@ -69,14 +69,16 @@ func detect_stomp(body):
 
 func _ready():
 	CurrentLevelData.enemies_instanced += 1
-	sprite.rotation = PI if chase and facing_direction == -1 else 0.0
-	sprite.flip_h = true if facing_direction == 1 or (chase and facing_direction == -1) else false
-	colored_sprite.flip_h = true if facing_direction == 1 or (chase and facing_direction == -1) else false
 	if mode != 1 and is_enabled_and_on_ground():
 		var _connect = area.connect("body_entered", self, "detect_spin")
 		var _connect2 = area.connect("area_entered", self, "detect_spin")
 		var _connect3 = stomp_detector.connect("body_entered", self, "detect_stomp")
 		
+func set_init_rotations():
+	sprite.rotation = PI if chase and facing_direction == -1 else 0.0
+	sprite.flip_h = true if facing_direction == 1 or (chase and facing_direction == -1) else false
+	colored_sprite.flip_h = true if facing_direction == 1 or (chase and facing_direction == -1) else false
+
 func _process(_delta):
 	colored_sprite.modulate = color
 	colored_sprite.frame = sprite.frame

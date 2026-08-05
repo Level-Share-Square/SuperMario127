@@ -5,11 +5,11 @@ onready var shared = editor.get_shared_node()
 
 func _ready():
 	yield(editor, "ready")
-	editor.action_manager.connect("action", self, "_update_parallax", [editor.layer])
-	editor.action_manager.connect("do", self, "_update_parallax", [editor.layer])
-	editor.action_manager.connect("undo", self, "_update_parallax", [editor.layer])
+	editor.action_manager.connect("action", self, "_update_parallax")
+	editor.action_manager.connect("undo", self, "_update_parallax")
+	editor.action_manager.connect("redo", self, "_update_parallax")
 
-func _update_parallax(layer: int):
+func _update_parallax():
 	var cur_layer = shared.layer_dictionary[editor.layer]
 	if cur_layer is LevelParallaxLayer:
 		set_parallax_distance(shared.layer_dictionary[editor.layer].parallax_scroll.parallax_distance)
@@ -18,4 +18,7 @@ func _update_parallax(layer: int):
 	_update_scroll()
 
 func layer_picked():
-	_update_parallax(0)
+	_update_parallax()
+
+func corrected_mouse_position() -> Vector2:
+	return get_local_mouse_position()

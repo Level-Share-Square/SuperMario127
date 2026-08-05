@@ -33,7 +33,7 @@ func _click_left(_event: InputEvent, _world_pos: Vector2):
 	var texture_node = VERTEX_PATH.instance()
 	nodes.append(texture_node)
 	texture_node.ui = weakref(self)
-	texture_node.position = get_global_mouse_position()
+	texture_node.position = get_mouse_pos()
 	path_node_container.add_child(texture_node)
 	widget_move_to(texture_node)
 	if handle.pressed:

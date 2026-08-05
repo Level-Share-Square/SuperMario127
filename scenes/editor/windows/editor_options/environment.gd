@@ -23,6 +23,8 @@ onready var palette_menu_button = $"%PaletteMenuButton"
 onready var palettes_container = $"%PalettesContainer"
 onready var palette_menu = $"%PalettesGrid"
 
+onready var editor = get_tree().current_scene
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -102,7 +104,7 @@ func _on_palette_selected(event: InputEvent, index: int):
 		
 		# Note: This should probably be in the save function instead.
 #		CurrentLevelData.level_info.thumbnail_background_palette = current_palette
-		CurrentLevelData.current_area.header.background_palette = current_palette
+		action("background_palette", current_palette)
 		update_background()
 
 		bg_container.show()
@@ -115,7 +117,7 @@ func _on_bg_selected(index: int):
 	# Note: This should probably be in the save function instead.
 #	CurrentLevelData.level_info.thumbnail_sky = index
 	foreground.modulate = resource.parallax_modulate
-	CurrentLevelData.current_area.header.sky = index
+	action("sky", index)
 	bg_index = index
 	_init_palette_dropdown()
 	update_background()
@@ -127,8 +129,8 @@ func _on_fg_selected(index: int):
 	foreground.texture = resource.preview
 	# Note: This should probably be in the save function instead.
 #	CurrentLevelData.level_info.thumbnail_background = index
-	CurrentLevelData.current_area.header.background = index
-	CurrentLevelData.current_area.header.background_palette = 0
+	action("background_palette", 0)
+	action("background", index)
 	fg_index = index
 	_init_palette_dropdown()
 	update_background()
@@ -141,5 +143,12 @@ func _on_palette_menu_opened():
 
 
 func _on_autoscroll_change(value):
-	CurrentLevelData.current_area.header.bg_autoscroll_speed = value
+	action("bg_autoscroll_speed", value)
 	update_background()
+
+func action(property: String, new_value) -> void:
+	var action := ChangeAreaAction.new()
+	action.property = property
+	action.id = CurrentLevelData.area_id
+	action.new_value = new_value
+	editor.action_manager.commit_action(action)

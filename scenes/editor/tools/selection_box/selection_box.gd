@@ -85,7 +85,7 @@ func _unhandled_input(event):
 				
 				edit_selection.hide()
 				selection_box.rect_size = Vector2(0, 0)
-				start_pos = get_global_mouse_position()
+				start_pos = get_mouse_pos()
 				selection_box.rect_position = start_pos
 				
 				white_highlight.visible = true
@@ -156,13 +156,13 @@ func _on_object_exited(area, object):
 
 
 func box_expansion():
-	selection_box.rect_size.x = abs(start_pos.x - get_global_mouse_position().x)
-	selection_box.rect_size.y = abs(start_pos.y - get_global_mouse_position().y)
+	selection_box.rect_size.x = abs(start_pos.x - get_mouse_pos().x)
+	selection_box.rect_size.y = abs(start_pos.y - get_mouse_pos().y)
 	
 	selection_shape.position = Vector2(selection_box.rect_size.x/2, selection_box.rect_size.y/2)
 	selection_shape.shape.extents = Vector2(selection_box.rect_size.x/2, selection_box.rect_size.y/2)
 	
-	if start_pos.x - get_global_mouse_position().x > 0:
+	if start_pos.x - get_mouse_pos().x > 0:
 		selection_box.rect_rotation = 180
 		selection_box.rect_scale.y = -1
 		selection_box.rect_scale.x = 1
@@ -171,11 +171,11 @@ func box_expansion():
 		selection_box.rect_scale.y = 1
 		selection_box.rect_scale.x = 1
 		
-	if start_pos.y - get_global_mouse_position().y > 0:
-		selection_box.rect_rotation = 180 if start_pos.x - get_global_mouse_position().x < 0 else 0
+	if start_pos.y - get_mouse_pos().y > 0:
+		selection_box.rect_rotation = 180 if start_pos.x - get_mouse_pos().x < 0 else 0
 		selection_box.rect_scale.x = -1
 	else:
-		selection_box.rect_rotation = 0 if start_pos.x - get_global_mouse_position().x < 0 else 180
+		selection_box.rect_rotation = 0 if start_pos.x - get_mouse_pos().x < 0 else 180
 		selection_box.rect_scale.x = 1
 
 

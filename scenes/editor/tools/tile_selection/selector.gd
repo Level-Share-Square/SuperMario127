@@ -7,6 +7,7 @@ const TILE := Vector2(TILE_SIZE, TILE_SIZE)
 export var animation_delay: float = 6
 export var frame_count: int = 5
 
+onready var parallax_scroll = $"%ParallaxScroll"
 onready var highlight = get_node("%Highlight")
 onready var selection_box = get_node("%SelectionBox")
 onready var camera = $"%EditorCamera"
@@ -32,10 +33,10 @@ func get_tile_grid_position(vector: Vector2):
 	return vector.snapped(TILE) / TILE_SIZE
 	
 func get_mouse_grid_position():
-	return get_tile_grid_position(get_global_mouse_position())
+	return get_tile_grid_position(get_mouse_pos())
 	
 func get_adjusted_mouse_position():
-	return get_global_mouse_position().snapped(TILE)
+	return get_mouse_pos().snapped(TILE)
 	
 func _click_left(event, mouse_position):
 	var adjusted_mouse_position = get_adjusted_mouse_position()
@@ -90,14 +91,15 @@ func _process(delta):
 		timer = animation_delay
 
 func box_expansion():
-	var drag_rect := Rect2(start_pos, get_adjusted_mouse_position() - start_pos).abs()
-	
 	var layer = shared.get_layer(editor.layer)
 	
-	fill_rect = drag_rect
+	var mouse_pos: Vector2 = get_adjusted_mouse_position()
+	var drag_rect := Rect2(start_pos, mouse_pos - start_pos).abs()
 	
+	fill_rect = drag_rect
 	if layer is LevelParallaxLayer:
 		drag_rect = layer.parallax_scroll.get_global_transform().xform(drag_rect)
+		drag_rect.size /= layer.parallax_scroll.scale
 	
 	highlight.rect_global_position = drag_rect.position
 	highlight.rect_size = drag_rect.size

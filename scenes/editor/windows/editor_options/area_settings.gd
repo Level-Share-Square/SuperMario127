@@ -1,37 +1,45 @@
 extends VBoxContainer
 
 onready var editor = get_tree().current_scene
-onready var shared = editor.get_shared_node()
-onready var camera = editor.get_node("%EditorCamera")
 
-onready var size_x = $"%SizeX"
-onready var size_y = $"%SizeY"
 onready var gravity = $"%Gravity"
 onready var mins = $"%Mins"
 onready var sec = $"%Sec"
 
 
 func _ready():
-	var alterables: Array = [size_x, size_y, gravity, mins, sec]
+	gravity.connect("value_changed", self, "gravity_changed")
+	mins.connect("value_changed", self, "time_changed")
+	sec.connect("value_changed", self, "time_changed")
 	load_settings()
-	for value in alterables:
-		value.connect("value_changed", self, "value_changed", [value])
+	
+	yield(editor, "ready")
+	editor.action_manager.connect("action", self, "load_settings")
+	editor.action_manager.connect("undo", self, "load_settings")
+	editor.action_manager.connect("redo", self, "load_settings")
 	
 func load_settings():
 	var area = CurrentLevelData.current_area
-	size_x.value = area.header.bounds.size.x
-	size_y.value = area.header.bounds.size.y
-	gravity.value = area.header.gravity
-	mins.value = int(area.header.timer/60)
-	sec.value = fmod(area.header.timer, 60.0) 
+	
+	gravity.set_value_no_signal(area.header.gravity)
+	mins.set_value_no_signal(int(area.header.timer/60))
+	sec.set_value_no_signal(fmod(area.header.timer, 60.0))
+	
+	gravity.get_line_edit().text = str(gravity.value)
+	mins.get_line_edit().text = str(mins.value) + " m"
+	sec.get_line_edit().text = str(sec.value) + " s"
+	
 
-func value_changed(value, changed_value):
-	var area =  CurrentLevelData.current_area
+func gravity_changed(new_value) -> void:
+	var action := ChangeAreaAction.new()
+	action.property = "gravity"
+	action.id = CurrentLevelData.area_id
+	action.new_value = new_value
+	editor.action_manager.commit_action(action)
 
-	area.header.bounds.size.x = size_x.value
-	area.header.bounds.size.y = size_y.value
-	area.header.gravity = gravity.value
-	area.header.timer = mins.value*60 + sec.value
-	if "Size" in changed_value.name:
-		shared.update_tilemaps()
-		camera.update_limits(area.header)
+func time_changed(new_value) -> void:
+	var action := ChangeAreaAction.new()
+	action.property = "timer"
+	action.id = CurrentLevelData.area_id
+	action.new_value = mins.value*60 + sec.value
+	editor.action_manager.commit_action(action)

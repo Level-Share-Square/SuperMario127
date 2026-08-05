@@ -1,6 +1,7 @@
 extends TextureRect
 
 onready var editor = owner
+onready var parallax_scroll = $"%ParallaxScroll"
 
 var offset := Vector2(16, 16)
 var is_object: bool
@@ -9,12 +10,15 @@ func _ready():
 	is_object = editor.selected_item is PlaceableObject
 
 func _process(delta):
-	var mouse_pos = get_global_mouse_position() - offset
+	var mouse_pos = parallax_scroll.corrected_mouse_position() - offset
 	if is_object:
 		if editor.pixel_lock:
 			mouse_pos = Vector2(stepify(mouse_pos.x, 8), stepify(mouse_pos.y, 8))
 	else:
-		mouse_pos = Vector2(int(get_global_mouse_position().x / 32) * 32, int(get_global_mouse_position().y / 32) * 32)
+		mouse_pos = Vector2(
+			int(parallax_scroll.corrected_mouse_position().x / 32) * 32, 
+			int(parallax_scroll.corrected_mouse_position().y / 32) * 32
+		)
 	rect_position = mouse_pos
 
 func update_item(item, palette, is_obj):

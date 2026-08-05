@@ -33,3 +33,6 @@ func set_palette(value: int):
 	
 	icon = icons[palette]
 	preview = previews[palette]
+	
+func add_child(node):
+	return

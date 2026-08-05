@@ -1,4 +1,4 @@
-[gd_scene load_steps=129 format=2]
+[gd_scene load_steps=128 format=2]
 
 [ext_resource path="res://scenes/menu/options/options.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/menu/menu_controller/screen_manager.gd" type="Script" id=2]
@@ -75,7 +75,6 @@
 [ext_resource path="res://scenes/editor/save_manager.gd" type="Script" id=73]
 [ext_resource path="res://scenes/editor/tools/tile_selection.tscn" type="PackedScene" id=74]
 [ext_resource path="res://scenes/editor/windows/help.tscn" type="PackedScene" id=75]
-[ext_resource path="res://assets/icons/GridLock.svg" type="Texture" id=76]
 [ext_resource path="res://scenes/editor/editor_parallax_scroll.gd" type="Script" id=77]
 [ext_resource path="res://scenes/editor/windows/quit_confirm_window.tscn" type="PackedScene" id=78]
 [ext_resource path="res://scenes/editor/windows/layer_editor.tscn" type="PackedScene" id=79]
@@ -302,8 +301,6 @@ script = ExtResource( 12 )
 mouse_filter = 2
 script = ExtResource( 69 )
 
-[node name="TileSelection" parent="ZIndex/Tools" instance=ExtResource( 74 )]
-
 [node name="TileRectFill" parent="ZIndex/Tools" instance=ExtResource( 70 )]
 
 [node name="ObjectPaint" type="Control" parent="ZIndex/Tools"]
@@ -324,12 +321,20 @@ tool_type = 1
 [node name="ObjectTrail" parent="ZIndex/Tools" instance=ExtResource( 72 )]
 tool_type = 1
 
-[node name="ObjectSelection" parent="ZIndex/Tools" instance=ExtResource( 34 )]
-tool_type = 1
-
 [node name="ParallaxScroll" type="Node2D" parent="."]
 unique_name_in_owner = true
 script = ExtResource( 77 )
+
+[node name="ZIndex" type="Node2D" parent="ParallaxScroll"]
+z_index = 128
+z_as_relative = false
+
+[node name="ObjectSelection" parent="ParallaxScroll/ZIndex" instance=ExtResource( 34 )]
+unique_name_in_owner = true
+tool_type = 1
+
+[node name="TileSelection" parent="ParallaxScroll/ZIndex" instance=ExtResource( 74 )]
+unique_name_in_owner = true
 
 [node name="Grid" type="ParallaxBackground" parent="ParallaxScroll"]
 unique_name_in_owner = true
@@ -467,6 +472,7 @@ margin_left = 105.0
 margin_right = 124.0
 margin_bottom = 19.0
 rect_min_size = Vector2( 19, 0 )
+focus_mode = 0
 theme_type_variation = "ButtonTransparent"
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 icon = ExtResource( 62 )
@@ -820,7 +826,7 @@ unique_name_in_owner = true
 margin_left = 4.0
 margin_top = 4.0
 margin_right = 144.0
-margin_bottom = 221.0
+margin_bottom = 171.0
 rect_clip_content = true
 custom_constants/separation = 2
 
@@ -870,25 +876,10 @@ margin_top = 69.0
 margin_right = 140.0
 margin_bottom = 73.0
 
-[node name="Layering" type="CheckButton" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown"]
+[node name="ResetZoom" type="Button" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown"]
 margin_top = 75.0
 margin_right = 140.0
 margin_bottom = 92.0
-theme_type_variation = "CheckButtonTransparent"
-pressed = true
-text = "Obj. Layering"
-align = 1
-script = ExtResource( 45 )
-
-[node name="HSeparator3" type="HSeparator" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown"]
-margin_top = 94.0
-margin_right = 140.0
-margin_bottom = 98.0
-
-[node name="ResetZoom" type="Button" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown"]
-margin_top = 100.0
-margin_right = 140.0
-margin_bottom = 117.0
 focus_mode = 0
 theme_type_variation = "ButtonTransparent"
 custom_colors/font_color = Color( 1, 1, 1, 1 )
@@ -896,14 +887,14 @@ text = "Reset Zoom"
 script = ExtResource( 24 )
 
 [node name="HSeparator4" type="HSeparator" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown"]
-margin_top = 119.0
+margin_top = 94.0
 margin_right = 140.0
-margin_bottom = 123.0
+margin_bottom = 98.0
 
 [node name="Autosaves" type="Button" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown"]
-margin_top = 125.0
+margin_top = 100.0
 margin_right = 140.0
-margin_bottom = 142.0
+margin_bottom = 117.0
 focus_mode = 0
 theme_type_variation = "ButtonTransparent"
 custom_colors/font_color = Color( 1, 1, 1, 1 )
@@ -911,14 +902,14 @@ text = "Autosaves"
 script = ExtResource( 24 )
 
 [node name="HSeparator7" type="HSeparator" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown"]
-margin_top = 144.0
+margin_top = 119.0
 margin_right = 140.0
-margin_bottom = 148.0
+margin_bottom = 123.0
 
 [node name="Help" type="Button" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown"]
-margin_top = 150.0
+margin_top = 125.0
 margin_right = 140.0
-margin_bottom = 167.0
+margin_bottom = 142.0
 focus_mode = 0
 theme_type_variation = "ButtonTransparent"
 custom_colors/font_color = Color( 1, 1, 1, 1 )
@@ -926,32 +917,18 @@ text = "Help"
 script = ExtResource( 24 )
 
 [node name="HSeparator5" type="HSeparator" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown"]
-margin_top = 169.0
+margin_top = 144.0
 margin_right = 140.0
-margin_bottom = 173.0
+margin_bottom = 148.0
 
 [node name="Settings" type="Button" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown"]
-margin_top = 175.0
+margin_top = 150.0
 margin_right = 140.0
-margin_bottom = 192.0
+margin_bottom = 167.0
 focus_mode = 0
 theme_type_variation = "ButtonTransparent"
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "Settings"
-script = ExtResource( 24 )
-
-[node name="HSeparator8" type="HSeparator" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown"]
-margin_top = 194.0
-margin_right = 140.0
-margin_bottom = 198.0
-
-[node name="Layer" type="Button" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown"]
-margin_top = 200.0
-margin_right = 140.0
-margin_bottom = 217.0
-theme_type_variation = "ButtonTransparent"
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-text = "Linktober Aura"
 script = ExtResource( 24 )
 
 [node name="Padding" type="Control" parent="UI/UIContainer/EditorUI/Top"]
@@ -1251,7 +1228,7 @@ mouse_filter = 2
 [node name="Object" type="VBoxContainer" parent="UI/UIContainer/EditorUI/Middle/Tools/VBoxContainer"]
 visible = false
 margin_right = 24.0
-margin_bottom = 132.0
+margin_bottom = 104.0
 mouse_filter = 2
 
 [node name="Paint" type="Button" parent="UI/UIContainer/EditorUI/Middle/Tools/VBoxContainer/Object"]
@@ -1268,15 +1245,6 @@ group = SubResource( 167 )
 icon = ExtResource( 49 )
 icon_align = 1
 expand_icon = true
-script = ExtResource( 24 )
-
-[node name="Autosaves" type="Button" parent="UI/UIContainer/EditorUI/Middle/Tools/VBoxContainer/Object/Paint"]
-margin_top = 100.0
-margin_right = 104.0
-margin_bottom = 117.0
-theme_type_variation = "ButtonTransparent"
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-text = "Autosaves"
 script = ExtResource( 24 )
 
 [node name="VSeparator" type="HSeparator" parent="UI/UIContainer/EditorUI/Middle/Tools/VBoxContainer/Object"]
@@ -1403,6 +1371,7 @@ margin_right = 24.0
 margin_bottom = 124.0
 rect_min_size = Vector2( 24, 24 )
 hint_tooltip = "Fill Tool"
+focus_mode = 0
 size_flags_vertical = 3
 theme_type_variation = "ButtonTransparent"
 toggle_mode = true
@@ -1453,7 +1422,6 @@ size_flags_vertical = 3
 theme_type_variation = "ButtonTransparent"
 toggle_mode = true
 group = SubResource( 167 )
-icon = ExtResource( 76 )
 icon_align = 1
 expand_icon = true
 script = ExtResource( 24 )
@@ -1472,6 +1440,7 @@ margin_right = 24.0
 margin_bottom = 208.0
 rect_min_size = Vector2( 24, 24 )
 hint_tooltip = "Trail Tool"
+focus_mode = 0
 size_flags_vertical = 3
 theme_type_variation = "ButtonTransparent"
 toggle_mode = true
@@ -1887,6 +1856,15 @@ unique_name_in_owner = true
 visible = false
 custom_styles/panel = SubResource( 197 )
 
+[node name="Button" type="Button" parent="UI"]
+margin_left = 539.0
+margin_top = 349.0
+margin_right = 706.0
+margin_bottom = 369.0
+focus_mode = 0
+theme = ExtResource( 4 )
+text = "LINKTOBER AURA"
+
 [node name="Options" type="CanvasLayer" parent="."]
 layer = 128
 
@@ -1943,10 +1921,6 @@ stream = ExtResource( 55 )
 volume_db = -7.5
 bus = "Sounds"
 
-[connection signal="layer_moved" from="LevelShared" to="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/DropdownParent/LayerMenu/MarginContainer/LayerDropdown" method="layer_moved"]
-[connection signal="tool_changed" from="ZIndex/Tools" to="ZIndex/Tools/ObjectTrail" method="_on_Tools_tool_changed"]
-[connection signal="tool_changed" from="ZIndex/Tools" to="ParallaxScroll/ItemPreview" method="_on_Tools_tool_changed"]
-[connection signal="tool_changed" from="ZIndex/Tools" to="UI/UIContainer/EditorUI/Middle/Tools" method="_on_Tools_tool_changed"]
 [connection signal="action" from="ActionManager" to="SaveManager" method="_on_ActionManager_action"]
 [connection signal="text_entered" from="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/SearchBar" to="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/ScrollContainer/CenterContainer/ItemsGrid" method="_on_search"]
 [connection signal="pressed" from="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/Search" to="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/ScrollContainer/CenterContainer/ItemsGrid" method="_on_search"]
@@ -1955,15 +1929,16 @@ bus = "Sounds"
 [connection signal="button_down" from="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/PanelContainer/Settings/Quit" to="SaveManager" method="_on_Quit_button_down"]
 [connection signal="button_down" from="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown/ResetZoom" to="EditorCamera" method="_on_ResetZoom_button_down"]
 [connection signal="button_down" from="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown/Help" to="UI/HelpWindow" method="toggle_window"]
-[connection signal="button_down" from="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/Actions/HBoxContainer/SelectionActions/Delete" to="ZIndex/Tools/TileSelection" method="on_delete"]
-[connection signal="button_down" from="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/Actions/HBoxContainer/SelectionActions/Delete" to="ZIndex/Tools/ObjectSelection" method="on_delete"]
-[connection signal="button_down" from="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/Actions/HBoxContainer/SelectionActions/Copy" to="ZIndex/Tools/TileSelection" method="on_copy"]
-[connection signal="button_down" from="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/Actions/HBoxContainer/SelectionActions/Copy" to="ZIndex/Tools/ObjectSelection" method="on_copy"]
-[connection signal="button_down" from="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/Actions/HBoxContainer/PasteAction/Paste" to="ZIndex/Tools/TileSelection" method="on_paste"]
-[connection signal="button_down" from="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/Actions/HBoxContainer/PasteAction/Paste" to="ZIndex/Tools/ObjectSelection" method="on_paste"]
+[connection signal="button_down" from="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/Actions/HBoxContainer/SelectionActions/Delete" to="ParallaxScroll/ZIndex/ObjectSelection" method="on_delete"]
+[connection signal="button_down" from="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/Actions/HBoxContainer/SelectionActions/Delete" to="ParallaxScroll/ZIndex/TileSelection" method="on_delete"]
+[connection signal="button_down" from="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/Actions/HBoxContainer/SelectionActions/Copy" to="ParallaxScroll/ZIndex/ObjectSelection" method="on_copy"]
+[connection signal="button_down" from="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/Actions/HBoxContainer/SelectionActions/Copy" to="ParallaxScroll/ZIndex/TileSelection" method="on_copy"]
+[connection signal="button_down" from="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/Actions/HBoxContainer/PasteAction/Paste" to="ParallaxScroll/ZIndex/ObjectSelection" method="on_paste"]
+[connection signal="button_down" from="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/Actions/HBoxContainer/PasteAction/Paste" to="ParallaxScroll/ZIndex/TileSelection" method="on_paste"]
 [connection signal="pressed" from="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/Actions/HBoxContainer/Undo" to="ActionManager" method="undo"]
 [connection signal="pressed" from="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/Actions/HBoxContainer/Redo" to="ActionManager" method="redo"]
 [connection signal="pressed" from="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/Actions/HBoxContainer/LayerPicker" to="ParallaxScroll" method="layer_picked"]
 [connection signal="pressed" from="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/Actions/HBoxContainer/LayerPicker" to="UI/UIContainer/EditorUI/Middle/Tools" method="toggle_visible"]
 [connection signal="tool_picked" from="UI/UIContainer/EditorUI/Middle/Tools" to="ZIndex/Tools" method="_on_Tools_tool_picked"]
 [connection signal="pressed" from="UI/UIContainer/EditorUI/Bottom/Hotbar/ItemPickerButton/Button" to="UI/UIContainer/ItemPickerPanel" method="toggle"]
+[connection signal="pressed" from="UI/Button" to="." method="_on_Button_pressed"]

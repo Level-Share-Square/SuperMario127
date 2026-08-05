@@ -24,7 +24,7 @@ func update():
 		_rotate(i)
 
 func _rotate(object: GameObject):
-	var mouse_pos: Vector2 = get_global_mouse_position()
+	var mouse_pos: Vector2 = get_mouse_pos()
 	match mode:
 		Mode.GLOBAL:
 			var init_pos: Vector2 = init_positions.get_or_add(object, object.global_position)

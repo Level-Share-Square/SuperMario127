@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://generation/generated_tiles.res" type="TileSet" id=1]
+[ext_resource path="res://scenes/actors/objects/tile_object/tile_object.gd" type="Script" id=3]
+
+[node name="TileObject" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="TileMap" type="TileMap" parent="."]
+unique_name_in_owner = true
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 32, 32 )
+cell_custom_transform = Transform2D( 32, 0, 0, 32, 0, 0 )
+show_collision = true
+format = 1

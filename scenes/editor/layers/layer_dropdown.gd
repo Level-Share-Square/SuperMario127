@@ -10,7 +10,6 @@ onready var layers: Container = $"%Layers"
 onready var new_layer = $"%NewLayer"
 onready var new_decor = $"%NewDecor"
 onready var layer_picker = $"%LayerPicker"
-onready var parallax_scroll = $"%ParallaxScroll"
 onready var drag_area = $"%DragArea"
 
 var is_dragging: bool

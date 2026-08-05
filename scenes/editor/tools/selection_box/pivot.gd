@@ -9,13 +9,12 @@ onready var pivot_on_icon: StreamTexture = preload("res://assets/icons/PivotOn.s
 
 func _process(delta):
 	if pressed:
-		rect_global_position = get_global_mouse_position()
+		rect_global_position = selection_box.get_mouse_pos()
 		selection_box.pivot_position = rect_global_position
 	elif selection_box.pivot_position != Vector2(0, 0):
 		rect_global_position = selection_box.pivot_position
 
 func on_toggle():
-	#print([rect_global_position, get_global_mouse_position()])
 	var pivot_toggle = selection_box.pivot_toggle
 	if not pivot_toggle.pressed:
 		hide()

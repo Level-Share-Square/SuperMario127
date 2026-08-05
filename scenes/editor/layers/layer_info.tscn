@@ -149,18 +149,6 @@ icon_align = 1
 expand_icon = true
 script = ExtResource( 2 )
 
-[node name="HoverSound" type="AudioStreamPlayer" parent="PanelContainer/HBoxContainer"]
-unique_name_in_owner = true
-volume_db = -10.0
-bus = "Sounds"
-script = ExtResource( 4 )
-
-[node name="ClickSound" type="AudioStreamPlayer" parent="PanelContainer/HBoxContainer"]
-unique_name_in_owner = true
-volume_db = -10.0
-bus = "Sounds"
-script = ExtResource( 4 )
-
 [node name="Area2D" type="Area2D" parent="PanelContainer"]
 collision_layer = 131072
 collision_mask = 131072
@@ -175,6 +163,18 @@ shape = SubResource( 3 )
 margin_top = 25.0
 margin_right = 162.0
 margin_bottom = 29.0
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+volume_db = -10.0
+bus = "Sounds"
+script = ExtResource( 4 )
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+volume_db = -10.0
+bus = "Sounds"
+script = ExtResource( 4 )
 
 [connection signal="resized" from="PanelContainer" to="." method="panel_resized"]
 [connection signal="button_down" from="PanelContainer/HBoxContainer/Dragger" to="." method="dragger_down"]

@@ -32,3 +32,17 @@ func erase_object(data) -> void:
 func place_object(position: Vector2, data: ObjectData):
 	data.metadata.position = position
 	add_object(data)
+
+static func tiles_to_tile_data(tiles: Dictionary, chunks: Dictionary) -> TileData:
+	var tile_data := TileData.new()
+	for position in tiles:
+		var chunk_pos = tile_data.get_chunk_coords(position)
+		
+		if !tile_data.chunks.has(chunk_pos):
+			var chunk = PoolIntArray()
+			chunk.resize(TileData.TILE_CHUNK_SIZE * TileData.TILE_CHUNK_SIZE)
+			chunk.fill(0)
+			tile_data.set_chunk_data(chunk_pos, chunk)
+			
+		tile_data.set_tile(position, tiles[position][0], tiles[position][1], tiles[position][2])
+	return tile_data

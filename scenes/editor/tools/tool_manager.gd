@@ -1,11 +1,11 @@
 class_name ToolManager
 extends Control
 
-
-var mouse_position: Vector2 = get_global_mouse_position()
-
 onready var editor = owner
+onready var parallax_scroll = $"%ParallaxScroll"
 onready var current_tool: EditorTool = $ObjectPaint
+
+var mouse_position: Vector2
 
 signal tool_changed()
 
@@ -17,7 +17,7 @@ func _ready():
 		change_tool("TilePaint")
 
 func _unhandled_input(event: InputEvent) -> void:
-	mouse_position = get_global_mouse_position()
+	mouse_position = parallax_scroll.corrected_mouse_position()
 	
 	if event is InputEventMouseButton:
 		if Input.is_action_just_pressed("place") :
@@ -38,7 +38,7 @@ func _unhandled_input(event: InputEvent) -> void:
 func _process(_delta: float):
 	if owner.editor_camera.is_moving():
 		var event := InputEventMouseMotion.new()
-		current_tool._mouse_movement(event, get_global_mouse_position())
+		current_tool._mouse_movement(event, parallax_scroll.corrected_mouse_position())
 
 
 func change_tool(tool_name: String) -> void:
@@ -69,9 +69,9 @@ func _on_Tools_tool_picked(tool_name):
 				change_tool("TileErase")
 		"Select":
 			if editor.selected_item is PlaceableObject:
-				change_tool("ObjectSelection")
+				change_tool("%ObjectSelection")
 			else:
-				change_tool("TileSelection")
+				change_tool("%TileSelection")
 		"TileFill":
 			change_tool("TileFill")
 		"TileRectFill":

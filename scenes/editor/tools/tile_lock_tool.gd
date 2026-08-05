@@ -35,7 +35,7 @@ func _unhandled_input(event):
 					preview.queue_free()
 				objects.clear()
 				positions.clear()
-	mouse_pos = Vector2(int(get_global_mouse_position().x / 32) * 32, int(get_global_mouse_position().y / 32) * 32) + Vector2(16, 16)
+	mouse_pos = Vector2(int(get_mouse_pos().x / 32) * 32, int(get_mouse_pos().y / 32) * 32) + Vector2(16, 16)
 
 func create_object_data(position: Vector2, object_id: int, palette: int) -> ObjectData:
 	var metadata := ObjectMetadata.new(position, object_id, palette)

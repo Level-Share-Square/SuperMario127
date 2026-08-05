@@ -48,6 +48,7 @@ func start_entrance_animation(character: Character) -> void:
 
 
 func start_exit_animation(character: Character) -> void:
+	set_transition_character_data(character)
 	connect("exit_completed", self, "finish_exit_animation", [character], CONNECT_ONESHOT)
 
 
@@ -65,6 +66,22 @@ func finish_exit_animation(character: Character) -> void:
 	character.layer = level_layer_ref
 	character.update_z_index()
 
+func set_transition_character_data(character: Character):
+	var transition_character_data = CurrentLevelData.vars.transition_character_data
+	
+	if transition_character_data.size() > 0:
+		character.health = transition_character_data[0]
+		character.health_shards = transition_character_data[1]
+		character.emit_signal("health_changed", character.health, character.health_shards)
+		
+		if transition_character_data[2] != null:
+			character.set_nozzle(transition_character_data[2])
+		character.fuel = transition_character_data[3]
+		if transition_character_data[4][0] != null:
+			var powerup_node: Powerup = character.get_powerup_node(transition_character_data[4][0])
+			character.set_powerup(powerup_node, transition_character_data[4][2], transition_character_data[4][1])
+		
+		get_tree().get_current_scene().set_switch_timer(transition_character_data[5])
 
 ### MISC
 func _ready():
@@ -75,13 +92,11 @@ func _ready():
 	CurrentLevelData.vars.teleporters.append([tag.to_lower(), self])
 
 func begin_warp(character: Character) -> void:
-	print(teleport_mode)
 	match teleport_mode:
 		TeleportMode.Location:
 			warp_helper.location_warp(character, tag, max_pan_distance)
 		
 		TeleportMode.Area:
-			print(target_area)
 			warp_helper.area_warp(character, tag, target_area)
 		
 		TeleportMode.Level:
