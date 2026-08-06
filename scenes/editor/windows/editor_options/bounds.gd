@@ -62,11 +62,12 @@ func action() -> void:
 	action.id = CurrentLevelData.area_id
 	action.new_value = area_rect
 	editor.action_manager.commit_action(action)
-	
+
 func update_values():
-	area_rect = area.header.bounds
-	x_label.text = X_LABEL_PREFIX % area_rect.size.x
-	y_label.text = Y_LABEL_PREFIX % area_rect.size.y
-	shared.update_tilemaps()
-	camera.update_limits(area.header)
-	editor.oob_overlay.set_bounds(Rect2(area_rect.position*32, area_rect.size*32))
+	if editor.action_manager.undo_stack.back() is ChangeAreaAction or editor.action_manager.redo_stack.back() is ChangeAreaAction:
+		shared.update_tilemaps()
+		camera.update_limits(area.header)
+		editor.oob_overlay.set_bounds(Rect2(area_rect.position*32, area_rect.size*32))
+		area_rect = area.header.bounds
+		x_label.text = X_LABEL_PREFIX % area_rect.size.x
+		y_label.text = Y_LABEL_PREFIX % area_rect.size.y

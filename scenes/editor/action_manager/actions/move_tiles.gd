@@ -52,3 +52,4 @@ func set_margin(value: bool):
 	tilemap_manager._add_margins("INVALID_CELL" if !value else "LevelMargin")
 	has_margins = value
 	tilemap_manager.has_margins = value
+	shared.update_tilemaps()
