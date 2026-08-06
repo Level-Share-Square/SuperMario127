@@ -26,7 +26,7 @@ onready var tool_manager: ToolManager = $"%Tools"
 onready var tile_buffer: TileMap = $"%TileBuffer"
 onready var object_buffer = $"%ObjectBuffer"
 onready var action_manager: ActionManager = $"%ActionManager"
-onready var item_actions = $"%Actions"
+onready var item_actions: ItemActionsManager = $"%ItemActionsManager"
 onready var screen_manager = $"%ScreenManager"
 onready var save_manager = $"SaveManager"
 onready var object_settings_window = $"%ObjectSettingsWindow"
@@ -72,7 +72,7 @@ func _ready():
 	
 		CurrentLevelData.unsaved_editor_changes = false
 		
-	item_actions.verify_clipboard()
+	item_actions.handle_selection()
 	item_preview.update_item(selected_item, selected_item.palette, selected_item is PlaceableObject)
 	var rect := CurrentLevelData.current_area.header.bounds
 	oob_overlay.set_bounds(Rect2(rect.position*32, rect.size*32))

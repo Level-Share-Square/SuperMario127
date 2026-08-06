@@ -58,8 +58,7 @@ func _click_left_released(event, mouse_position):
 	
 	
 func _click_right(_event: InputEvent, _world_pos: Vector2) -> void:
-	editor.item_actions.hide_selection_actions()
-	editor.item_actions.hide_tile_selection_actions()
+	editor.item_actions.handle_selection()
 	reset_bounds()
 	
 	

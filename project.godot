@@ -529,6 +529,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://classes/IdMapResource.gd"
 }, {
+"base": "Node",
+"class": "ItemActionsManager",
+"language": "GDScript",
+"path": "res://scenes/editor/item_actions_manager.gd"
+}, {
 "base": "State",
 "class": "JumpState",
 "language": "GDScript",
@@ -1374,6 +1379,7 @@ _global_script_class_icons={
 "HelpPage": "",
 "HoverNozzle": "",
 "IdMap": "",
+"ItemActionsManager": "",
 "JumpState": "",
 "KeybindButton": "",
 "KnockbackState": "",

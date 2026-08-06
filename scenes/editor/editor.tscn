@@ -11,10 +11,10 @@
 [ext_resource path="res://assets/icons/palette.svg" type="Texture" id=9]
 [ext_resource path="res://scenes/editor/tool_selector.gd" type="Script" id=10]
 [ext_resource path="res://scenes/editor/obj_erase_tool.gd" type="Script" id=11]
+[ext_resource path="res://scenes/editor/item_actions_manager.gd" type="Script" id=12]
 [ext_resource path="res://scenes/editor/buttons/palette_button.tscn" type="PackedScene" id=13]
 [ext_resource path="res://scenes/editor/windows/editor_options/editor_options_window.tscn" type="PackedScene" id=14]
 [ext_resource path="res://assets/icons/DropdownFlipped.svg" type="Texture" id=15]
-[ext_resource path="res://scenes/editor/selection_actions.gd" type="Script" id=16]
 [ext_resource path="res://scenes/editor/item_hotbar.gd" type="Script" id=17]
 [ext_resource path="res://scenes/oldeditor/sounds/click2.wav" type="AudioStream" id=18]
 [ext_resource path="res://scenes/oldeditor/sounds/hover.wav" type="AudioStream" id=19]
@@ -398,6 +398,10 @@ script = ExtResource( 73 )
 [node name="ActionManager" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource( 22 )
+
+[node name="ItemActionsManager" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource( 12 )
 
 [node name="UI" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
@@ -981,7 +985,6 @@ margin_bottom = 32.0
 size_flags_vertical = 3
 size_flags_stretch_ratio = 2.0
 theme_type_variation = "FlatPanel"
-script = ExtResource( 16 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/Actions"]
 margin_left = 4.0
@@ -1977,13 +1980,10 @@ bus = "Sounds"
 [connection signal="button_down" from="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/PanelContainer/Settings/Quit" to="SaveManager" method="_on_Quit_button_down"]
 [connection signal="button_down" from="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown/ResetZoom" to="EditorCamera" method="_on_ResetZoom_button_down"]
 [connection signal="button_down" from="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown/Help" to="UI/HelpWindow" method="toggle_window"]
-[connection signal="button_down" from="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/Actions/HBoxContainer/SelectionActions/Delete" to="ParallaxScroll/ObjectSelection" method="on_delete"]
-[connection signal="button_down" from="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/Actions/HBoxContainer/SelectionActions/Delete" to="ParallaxScroll/TileSelection" method="on_delete"]
-[connection signal="button_down" from="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/Actions/HBoxContainer/SelectionActions/Copy" to="ParallaxScroll/ObjectSelection" method="on_copy"]
-[connection signal="button_down" from="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/Actions/HBoxContainer/SelectionActions/Copy" to="ParallaxScroll/TileSelection" method="on_copy"]
+[connection signal="pressed" from="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/Actions/HBoxContainer/SelectionActions/Delete" to="ItemActionsManager" method="handle_delete"]
+[connection signal="pressed" from="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/Actions/HBoxContainer/SelectionActions/Copy" to="ItemActionsManager" method="handle_copy"]
 [connection signal="pressed" from="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/Actions/HBoxContainer/SelectionActions/TileSelectionActions/MakeStamp" to="." method="selection_to_stamp"]
-[connection signal="button_down" from="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/Actions/HBoxContainer/PasteAction/Paste" to="ParallaxScroll/ObjectSelection" method="on_paste"]
-[connection signal="button_down" from="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/Actions/HBoxContainer/PasteAction/Paste" to="ParallaxScroll/TileSelection" method="on_paste"]
+[connection signal="pressed" from="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/Actions/HBoxContainer/PasteAction/Paste" to="ItemActionsManager" method="handle_paste"]
 [connection signal="pressed" from="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/Actions/HBoxContainer/Undo" to="ActionManager" method="undo"]
 [connection signal="pressed" from="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/Actions/HBoxContainer/Redo" to="ActionManager" method="redo"]
 [connection signal="pressed" from="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/Actions/HBoxContainer/LayerPicker" to="ParallaxScroll" method="layer_picked"]

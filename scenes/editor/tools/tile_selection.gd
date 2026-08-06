@@ -6,20 +6,18 @@ var is_copied: bool = false
 func _ready():
 	yield(._ready(), "completed")
 	editor.action_manager.connect("undo", self, "on_undo")
+	editor.item_actions.connect("tiles_pasted", self, "on_paste")
 
 func on_mouse_released():
 	if !.on_mouse_released():
-		editor.item_actions.hide_selection_actions()
-		editor.item_actions.hide_tile_selection_actions()
+		editor.item_actions.handle_selection()
 		return
 	if fill_rect.has_point(get_adjusted_mouse_position()):
-		editor.item_actions.show_selection_actions()
-		editor.item_actions.show_tile_selection_actions()
+		editor.item_actions.handle_selection()
 		return
 		
 	select_tiles()
-	editor.item_actions.show_selection_actions()
-	editor.item_actions.show_tile_selection_actions()
+	editor.item_actions.handle_selection()
 	
 func on_selection_outside_clicked():
 	editor.tile_buffer.clear()
@@ -98,16 +96,8 @@ func on_undo():
 		reset_bounds()
 		hide_visuals()
 
-func on_copy():
+func on_paste(data: Array):
 	if editor.tool_manager.current_tool == self:
-		var tile_data: TileData = LayerData.tiles_to_tile_data(editor.selected_tiles, CurrentLevelData.current_area.layers[shared.layers.find(editor.layer)].tile_data.chunks)
-		OS.set_clipboard(JSON.print([LevelCodeSerializer.serialize_data(tile_data), [camera.position.x, camera.position.y]]))
-		editor.item_actions.show_selection_actions()
-		editor.item_actions.show_tile_selection_actions()
-
-func on_paste():
-	if editor.tool_manager.current_tool == self:
-		var data = JSON.parse(OS.get_clipboard()).result
 		var tiledata: TileData = LevelCodeDeserializer.deserialize_data_code(data[0]) as TileData
 		var camera_offset: Vector2 = camera.position - Vector2(data[1][0], data[1][1])
 		var new_selection: Dictionary = {}
@@ -133,16 +123,3 @@ func on_paste():
 		editor.tile_buffer.modulate = shared.layer_dictionary[editor.layer].layer_tint
 		is_copied = true
 		set_buffer()
-
-func on_delete():
-	if editor.tool_manager.current_tool == self and !editor.selected_tiles.empty():
-		var action := PlaceTilesAction.new()
-		action.shared = shared
-		action.layer = editor.layer
-		action.tileset_id = 0
-		action.tile_id = 0
-		action.palette = 0
-		action.do_tiles = editor.selected_tiles.keys()
-		editor.action_manager.commit_action(action)
-		editor.selected_tiles = {}
-		reset_bounds()
