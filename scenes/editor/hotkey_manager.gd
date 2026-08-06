@@ -9,7 +9,9 @@ var action_signal_array: Array = [
 	"choose_palette",
 	"pick_focused_item",
 	"rotate_object",
-	"scale_object"
+	"scale_object",
+	"mirror_h",
+	"mirror_v",
 ]
 
 signal grid_toggle
@@ -20,6 +22,8 @@ signal choose_palette
 signal pick_focused_item
 signal rotate_object
 signal scale_object
+signal mirror_h
+signal mirror_v
 
 func _unhandled_input(event: InputEvent) -> void:
 	for action_name in action_signal_array:

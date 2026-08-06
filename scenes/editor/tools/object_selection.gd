@@ -2,6 +2,7 @@ extends Selector
 class_name ObjectSelector
 
 onready var pivot = $"%Pivot"
+onready var selection_tools = $"%SelectionTools"
 
 func _ready():
 	._ready()
@@ -11,9 +12,6 @@ func _ready():
 	editor.action_manager.connect("redo", self, "fit_to_bounding_rectangle")
 	editor.action_manager.connect("action", self, "fit_to_bounding_rectangle")
 	tool_manager.get_node("ObjectPaint").connect("objects_selected", self, "external_objects_selected")
-
-func _draw():
-	draw_rect(fill_rect, Color.webmaroon)
 
 func _process(_delta):
 	update()

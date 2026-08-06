@@ -162,6 +162,7 @@ margin_right = 25.0
 margin_bottom = 18.0
 
 [node name="RotateSelection" type="Button" parent="SelectionBox/Align/EditSelection/ButtonContainer" index="2"]
+unique_name_in_owner = true
 margin_left = 29.0
 margin_right = 46.0
 margin_bottom = 18.0
@@ -181,6 +182,7 @@ margin_right = 54.0
 margin_bottom = 18.0
 
 [node name="ScaleSelection" type="Button" parent="SelectionBox/Align/EditSelection/ButtonContainer" index="4"]
+unique_name_in_owner = true
 margin_left = 58.0
 margin_right = 75.0
 margin_bottom = 18.0

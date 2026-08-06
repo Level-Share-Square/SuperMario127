@@ -36,6 +36,7 @@ func set_tiles():
 
 	editor_rect = Rect2(Vector2.ZERO, used_rect.size*32)
 	tile_map.modulate = tint
+	
 
 func is_air(tile_data: Array):
 	return tile_data[0] <= 0 or tile_data[1] < 0 or tile_data[2] < 0
