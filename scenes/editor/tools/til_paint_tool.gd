@@ -29,6 +29,14 @@ func _mouse_movement(_event: InputEvent, world_pos: Vector2) -> void:
 	if editor.selected_item is PlaceableTile:
 		var mouse_tile: Vector2 = get_mouse_tile_pos()
 		
+#		var line: = line_util.get_line(last_mouse_tile, mouse_tile)
+#
+#		if Input.is_action_pressed("place") and mouse_input == 0:
+#			for point in line:
+#				draw_tile(point)
+#
+#		last_mouse_tile = mouse_tile
+		
 		if Input.is_action_pressed("place") and mouse_input == 0 and mouse_tile != last_mouse_tile:
 			draw_tile(mouse_tile)
 			last_mouse_tile = mouse_tile

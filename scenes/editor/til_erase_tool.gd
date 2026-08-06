@@ -27,6 +27,14 @@ func _mouse_movement(_event: InputEvent, world_pos: Vector2) -> void:
 	if editor.selected_item is PlaceableTile:
 		var mouse_tile: Vector2 = get_mouse_tile_pos()
 		
+#		var line: = line_util.get_line(last_mouse_tile, mouse_tile)
+#
+#		if Input.is_action_pressed("LMB") and mouse_input == 1:
+#			for point in line:
+#				erase_tile(point)
+#
+#		last_mouse_tile = mouse_tile
+		
 		if Input.is_action_pressed("LMB") and mouse_input == 1 and mouse_tile != last_mouse_tile:
 			erase_tile(mouse_tile)
 			last_mouse_tile = mouse_tile
