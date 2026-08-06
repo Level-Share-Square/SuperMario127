@@ -32,6 +32,7 @@ func _ready():
 	hex_code.get_node("LineEdit").connect("text_entered", self, "text_entered")
 	
 func _input(event):
+	if !get_tree().current_scene.get_node("%ObjectSettingsWindow").visible: expand_button.active = false
 	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT and event.pressed:
 		var mouse_pos: Vector2 = get_global_mouse_position()
 		
@@ -44,6 +45,7 @@ func circle_has_point(center: Vector2, radius: float, point: Vector2) -> bool:
 	return center.distance_squared_to(point) <= (radius * radius)
 
 func _process(delta):
+	if !expand_button.active: return
 	if move_wheel:
 		var mouse_pos: Vector2 = get_global_mouse_position()
 		if Input.is_action_pressed("LMB"):
@@ -83,6 +85,7 @@ func update_color() -> void:
 	var black_y: float = gradient.get_rect().size.y
 	
 	color.v = clamp((gradient_selector.rect_position.y - black_y) / (white_y - black_y), 0.0, 1.0)
+	component_changed(slider_i.get_node("Spinbox").value, ColorComponents.Component.INTENSITY)
 	
 func update_nodes() -> void:
 	for slider in sliders:
@@ -94,7 +97,6 @@ func update_nodes() -> void:
 	slider_g.get_node("Spinbox").value = color.g * 255.0
 	slider_b.get_node("Spinbox").value = color.b * 255.0
 	slider_a.get_node("Spinbox").value = color.a * 255.0
-	slider_i.get_node("Spinbox").value = max(color.r, max(color.g, color.b))
 	hex_code.get_node("LineEdit").text = "#" + color.to_html(false)
 	
 	if !(move_wheel or move_gradient):
@@ -107,6 +109,9 @@ func update_nodes() -> void:
 		slider.get_node("Spinbox").set_block_signals(false)
 		
 	property_editor.update_color(color, false)
+	
+func read_intensity():
+	slider_i.get_node("Spinbox").value = max(color.r, max(color.g, color.b))
 	
 func component_changed(value: float, component: int):
 	if !(move_wheel or move_gradient): move_slider = true

@@ -25,6 +25,9 @@ func _ready():
 func reload_areas():
 	# child die funny
 	# that wasn't really funny. 127 is problematic media.
+	var actions: Array = [editor.action_manager.undo_stack.back(), editor.action_manager.redo_stack.back()]
+	if !(BaseAreaAction in actions or ChangeAreaAction in actions): return
+	
 	for child in v_box_container.get_children():
 		if !"HBoxContainer" in child.name:
 			child.queue_free()

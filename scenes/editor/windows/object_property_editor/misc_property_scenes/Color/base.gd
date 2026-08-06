@@ -12,11 +12,12 @@ func update_color(color: Color, save: bool = false):
 
 func load_property(_editor: Editor, init_value, _property: Array, property_name = null):
 	.load_property(_editor, init_value, _property, property_name)
-	print("ee", init_value)
 	var color = init_value
 	var color_panel = $"%Color"
 	color_panel.add_stylebox_override("panel", color_panel.get_stylebox("panel").duplicate(true))
 	color_panel.get_stylebox("panel").bg_color = init_value
+	
+	#idk man
 	var manager = $"%Expanded"
 	manager.color = init_value
 	

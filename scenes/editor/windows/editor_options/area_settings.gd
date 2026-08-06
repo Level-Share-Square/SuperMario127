@@ -11,12 +11,12 @@ func _ready():
 	gravity.connect("value_changed", self, "gravity_changed")
 	mins.connect("value_changed", self, "time_changed")
 	sec.connect("value_changed", self, "time_changed")
-	load_settings()
 	
 	yield(editor, "ready")
 	editor.action_manager.connect("action", self, "load_settings")
 	editor.action_manager.connect("undo", self, "load_settings")
 	editor.action_manager.connect("redo", self, "load_settings")
+	load_settings()
 	
 func load_settings():
 	var area = CurrentLevelData.current_area
