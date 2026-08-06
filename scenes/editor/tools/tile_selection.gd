@@ -1,6 +1,8 @@
 extends Selector
 class_name TileSelector
 
+var is_copied: bool = false
+
 func _ready():
 	yield(._ready(), "completed")
 	editor.action_manager.connect("undo", self, "on_undo")
@@ -43,8 +45,9 @@ func on_selection_inside_clicked():
 	
 	set_buffer()
 	
-	for position in editor.selected_tiles:
-		shared.set_tile(position.x, position.y, editor.layer, 0, 0, 0)
+	if !is_copied:
+		for position in editor.selected_tiles:
+			shared.set_tile(position.x, position.y, editor.layer, 0, 0, 0)
 	editor.tile_buffer.modulate = shared.layer_dictionary[editor.layer].layer_tint
 	
 	while true:
@@ -62,7 +65,7 @@ func on_selection_inside_clicked():
 		active_mouse_position = next_pos
 			
 	var final_offset = get_tile_grid_position(get_adjusted_mouse_position() - initial_mouse_position)
-	var old_positions: Dictionary = editor.selected_tiles
+	var old_positions: Dictionary = editor.selected_tiles if !is_copied else {}
 	var new_positions: Dictionary = {}
 	
 	for position in editor.selected_tiles:
@@ -70,6 +73,8 @@ func on_selection_inside_clicked():
 	
 	editor.selected_tiles = {}
 	move_action(old_positions, new_positions)
+	
+	is_copied = false
 		
 func set_buffer(offset := Vector2.ZERO):
 	editor.tile_buffer.clear()
@@ -125,6 +130,7 @@ func on_paste():
 		selection_box.rect_size = fill_rect.size
 		selection_box.show()
 		editor.tile_buffer.modulate = shared.layer_dictionary[editor.layer].layer_tint
+		is_copied = true
 		set_buffer()
 
 func on_delete():
