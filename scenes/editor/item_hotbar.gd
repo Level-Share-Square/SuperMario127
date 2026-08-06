@@ -58,7 +58,7 @@ func _ready():
 	refresh_loadout()
 	check_items()
 	
-	editor.selected_item = bottom_row.get_children()[0].item
+	_on_item_button_pressed(bottom_row.get_children()[0])
 
 
 func _on_item_button_pressed(item_button):
