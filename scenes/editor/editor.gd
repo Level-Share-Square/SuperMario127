@@ -103,22 +103,8 @@ func get_hovered_objects():
 		if object.is_object_hovered():
 			hovered_objects.get_or_add(object.name, object)
 
+
 func create_tile_object(cells: Dictionary) -> ObjectData:
-#	var viewport := Viewport.new()
-#	var tiles := TileMap.new()
-#
-#	add_child(viewport)
-#	viewport.add_child(tiles)
-#
-#	viewport.render_target_update_mode = Viewport.UPDATE_ALWAYS
-#	viewport.usage = Viewport.USAGE_2D 
-#	viewport.transparent_bg = true
-#	viewport.render_target_v_flip = true
-#
-#	tiles.tile_set = load("res://generation/generated_tiles.res")
-#	tiles.cell_size = Vector2(32, 32)
-#	tiles.cell_custom_transform = Transform2D(Vector2(32, 0), Vector2(0, 32), Vector2.ZERO)
-	
 	var positions: Array = cells.keys()
 	var min_x: int = positions[0].x
 	var min_y: int = positions[0].y
@@ -131,32 +117,8 @@ func create_tile_object(cells: Dictionary) -> ObjectData:
 
 	var shifted_cells: Dictionary = {}
 	for cell in cells:
-#		tiles.set_cellv(cell - offset, tile_util.get_real_tile_set_id(cells[cell][0], cells[cell][1], cells[cell][2]))
-#		tiles.update_bitmask_area(cell - offset)
-#		tiles.update_bitmask_region()
-#		tiles.update_dirty_quadrants()
 		shifted_cells[cell - offset] = cells[cell]
 	cells = shifted_cells
-
-#	var used_rect: Rect2 = tiles.get_used_rect()
-#
-#	var tiles_size: Vector2 = used_rect.size * 32
-#	viewport.size = tiles_size
-#
-#	yield(get_tree(), "idle_frame")
-#	yield(get_tree(), "idle_frame")
-#	yield(get_tree(), "idle_frame")
-#
-#	var image := ImageTexture.new()
-#	var image_data: Image = viewport.get_texture().get_data()
-#
-#	var resized_image_data: Image = image_data.duplicate()
-#	if image_data != null and !image_data.is_empty():
-#		resized_image_data.resize(32, 32, Image.INTERPOLATE_BILINEAR)
-#	else:
-#		printerr("Error in creating tile object image!")
-#
-#	image.create_from_image(resized_image_data, 0)
 
 	var tile_data: TileData = LayerData.tiles_to_tile_data(shifted_cells, CurrentLevelData.current_area.layers[get_shared_node().layers.find(layer)].tile_data.chunks)
 	var object_data := ObjectData.new(ObjectMetadata.new(offset*32, -1, 0), {4: tile_data})
@@ -181,7 +143,6 @@ func create_tile_object(cells: Dictionary) -> ObjectData:
 	get_node("%TileSelection").reset_bounds()
 	return object_data
 
-
-
-func _on_Button_pressed():
+func selection_to_stamp():
+	if selected_tiles.empty(): return
 	create_tile_object(selected_tiles)

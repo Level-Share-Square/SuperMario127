@@ -49,6 +49,8 @@ func start_entrance_animation(character: Character) -> void:
 
 func start_exit_animation(character: Character) -> void:
 	set_transition_character_data(character)
+	character.layer = level_layer_ref
+	character.update_layer_info()
 	connect("exit_completed", self, "finish_exit_animation", [character], CONNECT_ONESHOT)
 
 
@@ -62,9 +64,12 @@ func finish_exit_animation(character: Character) -> void:
 	# undo collision changes 
 	character.set_collision_layer_bit(1, true)
 	character.set_inter_player_collision(true)
-	
+
+	# This is is called twice (once in start_exit_animation and
+	# once here) because for some reason tint data is not
+	# updated yet on start_exit_animation sooo shrug
 	character.layer = level_layer_ref
-	character.update_z_index()
+	character.update_layer_info()
 
 func set_transition_character_data(character: Character):
 	var transition_character_data = CurrentLevelData.vars.transition_character_data

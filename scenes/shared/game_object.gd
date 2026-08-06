@@ -98,7 +98,6 @@ func _ready():
 		visible = true
 		visibility = false
 
-
 func _process(delta: float) -> void:
 	if is_in_editor():
 		_update_modulate_editor(delta)

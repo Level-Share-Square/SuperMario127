@@ -29,15 +29,10 @@ func get_liquid_properties():
 
 func update_property(key, value):
 	update()
-	update_layer()
 	visual = $New if !use_old_lava else $Old
 	match(key):
 		"color" or "surface_color":
 			update_liquid_color(value)
-
-
-func update_layer():
-	.update_layer()
 
 
 func update_liquid_color(color):
@@ -148,13 +143,8 @@ func _ready():
 
 func _object_ready():
 	._object_ready()
-	liquid_area.monitoring = true
-	liquid_area.monitorable = true
-
-func _object_disabled_ready() -> void:
-	._object_disabled_ready()
-	liquid_area.monitoring = false
-	liquid_area.monitorable = false
+	liquid_area.monitoring = is_enabled_and_on_ground()
+	liquid_area.monitorable = is_enabled_and_on_ground()
 
 
 func _editor_ready() -> void:

@@ -1,0 +1,578 @@
+[gd_scene load_steps=32 format=2]
+
+[ext_resource path="res://scenes/menu/art_assets/art_assets.gd" type="Script" id=1]
+[ext_resource path="res://scenes/menu/background_scroll/background.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/shared/background/foregrounds/mountain_edge/palettes/5/back.png" type="Texture" id=3]
+[ext_resource path="res://scenes/shared/background/foregrounds/mountain_edge/palettes/5/middle.png" type="Texture" id=4]
+[ext_resource path="res://scenes/shared/background/backgrounds/cloudy/cloudy.png" type="Texture" id=5]
+[ext_resource path="res://scenes/shared/background/foregrounds/mountain_edge/palettes/5/preview.png" type="Texture" id=6]
+[ext_resource path="res://assets/artwork/steam/logo.png" type="Texture" id=7]
+[ext_resource path="res://assets/artwork/icon_transparent.png" type="Texture" id=8]
+[ext_resource path="res://assets/artwork/icon_transparent_shadow.png" type="Texture" id=9]
+[ext_resource path="res://assets/artwork/logo_shadowed.png" type="Texture" id=10]
+[ext_resource path="res://assets/artwork/icon_colorless.png" type="Texture" id=11]
+[ext_resource path="res://scenes/menu/art_assets/gayshine.gd" type="Script" id=12]
+
+[sub_resource type="Shader" id=26]
+code = "shader_type canvas_item;
+
+uniform float u_amount = 0.1;
+
+float get_noise(vec2 uv) {
+	return fract(sin(dot(uv ,vec2(12.9898,78.233))) * 43758.5453);
+}
+
+void fragment() {
+	vec4 screen_sample = texture(SCREEN_TEXTURE, SCREEN_UV);
+	
+	float n = 2.0 * get_noise(UV + vec2(TIME, 0.0)) - 1.0;
+	COLOR = (texture(TEXTURE, UV) + n * u_amount);
+}"
+
+[sub_resource type="ShaderMaterial" id=36]
+shader = SubResource( 26 )
+shader_param/u_amount = 1.75
+
+[sub_resource type="CanvasItemMaterial" id=19]
+blend_mode = 1
+
+[sub_resource type="Gradient" id=15]
+offsets = PoolRealArray( 0.0502793, 1 )
+colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 0.831373 )
+
+[sub_resource type="GradientTexture2D" id=20]
+gradient = SubResource( 15 )
+fill_from = Vector2( 0.5, 0.1 )
+fill_to = Vector2( 0.5, 1 )
+
+[sub_resource type="StyleBoxEmpty" id=21]
+
+[sub_resource type="Shader" id=3]
+code = "shader_type canvas_item;
+render_mode unshaded;
+ 
+uniform sampler2D gradient : hint_black;
+uniform float mix_amount = 1.0;
+
+void fragment()
+{
+	vec4 input_color = texture(TEXTURE, UV);
+
+	float grayscale_value = dot(input_color.rgb, vec3(0.299, 0.587, 0.114));
+	vec3 sampled_color = texture(gradient, vec2(grayscale_value, 0.0)).rgb;
+
+	COLOR.rgb = mix(input_color.rgb, sampled_color, mix_amount);
+	COLOR.a = input_color.a;
+}"
+
+[sub_resource type="Gradient" id=31]
+offsets = PoolRealArray( 0, 0.75, 1 )
+colors = PoolColorArray( 0.25098, 0, 0, 1, 1, 0, 0, 1, 1, 1, 1, 1 )
+
+[sub_resource type="GradientTexture" id=32]
+resource_local_to_scene = true
+gradient = SubResource( 31 )
+
+[sub_resource type="ShaderMaterial" id=33]
+shader = SubResource( 3 )
+shader_param/mix_amount = 1.0
+shader_param/gradient = SubResource( 32 )
+
+[sub_resource type="CanvasItemMaterial" id=22]
+blend_mode = 1
+
+[sub_resource type="Gradient" id=34]
+colors = PoolColorArray( 0.25098, 0, 0, 1, 0.25098, 0, 0, 0 )
+
+[sub_resource type="GradientTexture2D" id=35]
+gradient = SubResource( 34 )
+fill = 1
+fill_from = Vector2( 0.5, 0.5 )
+fill_to = Vector2( 0.5, 0 )
+
+[sub_resource type="GradientTexture2D" id=18]
+gradient = SubResource( 15 )
+fill_from = Vector2( 0.5, 0.2 )
+fill_to = Vector2( 0.5, 1 )
+
+[sub_resource type="ShaderMaterial" id=37]
+shader = SubResource( 26 )
+shader_param/u_amount = 1.75
+
+[sub_resource type="ShaderMaterial" id=38]
+shader = SubResource( 26 )
+shader_param/u_amount = 1.75
+
+[sub_resource type="Gradient" id=23]
+colors = PoolColorArray( 0.32549, 0.235294, 0.0980392, 0.627451, 0.32549, 0.235294, 0.0980392, 0 )
+
+[sub_resource type="GradientTexture2D" id=24]
+gradient = SubResource( 23 )
+fill = 1
+fill_from = Vector2( 0.5, 0.5 )
+fill_to = Vector2( 0.5, 0 )
+
+[sub_resource type="ShaderMaterial" id=39]
+shader = SubResource( 26 )
+shader_param/u_amount = 1.75
+
+[node name="ArtAssets" type="VBoxContainer"]
+script = ExtResource( 1 )
+
+[node name="DiscordIcon" type="ViewportContainer" parent="."]
+unique_name_in_owner = true
+margin_right = 512.0
+margin_bottom = 512.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="Viewport" type="Viewport" parent="DiscordIcon"]
+size = Vector2( 512, 512 )
+handle_input_locally = false
+render_target_update_mode = 3
+
+[node name="Background" parent="DiscordIcon/Viewport" instance=ExtResource( 2 )]
+rect_scale = Vector2( 3, 3 )
+
+[node name="Overlay" parent="DiscordIcon/Viewport/Background" index="3"]
+material = SubResource( 36 )
+
+[node name="WhiteGradient" type="TextureRect" parent="DiscordIcon/Viewport"]
+modulate = Color( 0.752941, 0.752941, 1, 0.486275 )
+material = SubResource( 19 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = SubResource( 20 )
+expand = true
+
+[node name="HBoxContainer" type="PanelContainer" parent="DiscordIcon/Viewport"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_styles/panel = SubResource( 21 )
+script = ExtResource( 12 )
+
+[node name="Icon" type="TextureRect" parent="DiscordIcon/Viewport/HBoxContainer"]
+material = SubResource( 33 )
+margin_right = 512.0
+margin_bottom = 512.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 11 )
+expand = true
+stretch_mode = 6
+
+[node name="Shadow" type="TextureRect" parent="DiscordIcon/Viewport/HBoxContainer/Icon"]
+modulate = Color( 1, 1, 1, 0.376471 )
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 32.0
+margin_top = 24.0
+margin_right = 32.0
+margin_bottom = 24.0
+texture = ExtResource( 9 )
+expand = true
+stretch_mode = 6
+
+[node name="Glow" type="TextureRect" parent="DiscordIcon/Viewport/HBoxContainer"]
+material = SubResource( 22 )
+margin_right = 512.0
+margin_bottom = 512.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = SubResource( 35 )
+expand = true
+stretch_mode = 6
+
+[node name="Capsule" type="ViewportContainer" parent="."]
+unique_name_in_owner = true
+margin_top = 516.0
+margin_right = 600.0
+margin_bottom = 1416.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="Viewport" type="Viewport" parent="Capsule"]
+size = Vector2( 600, 900 )
+handle_input_locally = false
+render_target_update_mode = 3
+
+[node name="BG" type="Sprite" parent="Capsule/Viewport"]
+position = Vector2( -806.4, 0 )
+scale = Vector2( 2.1, 2.1 )
+z_index = -512
+z_as_relative = false
+texture = ExtResource( 5 )
+centered = false
+
+[node name="FG" type="Sprite" parent="Capsule/Viewport"]
+position = Vector2( -848, 104 )
+scale = Vector2( 2.1, 2.1 )
+z_index = -512
+z_as_relative = false
+texture = ExtResource( 6 )
+centered = false
+
+[node name="WhiteGradient" type="TextureRect" parent="Capsule/Viewport"]
+modulate = Color( 1, 1, 1, 0.501961 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -6.10352e-05
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = SubResource( 18 )
+expand = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Capsule/Viewport"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="CenterContainer" type="CenterContainer" parent="Capsule/Viewport/VBoxContainer"]
+margin_right = 600.0
+margin_bottom = 900.0
+size_flags_vertical = 3
+
+[node name="Logo" type="TextureRect" parent="Capsule/Viewport/VBoxContainer/CenterContainer"]
+margin_top = 276.0
+margin_right = 600.0
+margin_bottom = 624.0
+rect_min_size = Vector2( 600, 348 )
+texture = ExtResource( 10 )
+expand = true
+stretch_mode = 6
+
+[node name="Header" type="ViewportContainer" parent="."]
+unique_name_in_owner = true
+margin_top = 1420.0
+margin_right = 920.0
+margin_bottom = 1850.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="Viewport" type="Viewport" parent="Header"]
+size = Vector2( 920, 430 )
+handle_input_locally = false
+render_target_update_mode = 3
+
+[node name="BG" type="Sprite" parent="Header/Viewport"]
+scale = Vector2( 1.2, 1.2 )
+z_index = -512
+z_as_relative = false
+texture = ExtResource( 5 )
+centered = false
+
+[node name="FG2" type="Sprite" parent="Header/Viewport"]
+position = Vector2( -264, 72 )
+scale = Vector2( 1.2, 1.2 )
+z_index = -512
+z_as_relative = false
+texture = ExtResource( 6 )
+centered = false
+
+[node name="FG2" type="Sprite" parent="Header/Viewport/FG2"]
+position = Vector2( 544, -64 )
+z_index = -512
+z_as_relative = false
+texture = ExtResource( 3 )
+centered = false
+
+[node name="FG3" type="Sprite" parent="Header/Viewport/FG2"]
+position = Vector2( 512, 0 )
+z_index = -512
+z_as_relative = false
+texture = ExtResource( 4 )
+centered = false
+
+[node name="WhiteGradient" type="TextureRect" parent="Header/Viewport"]
+modulate = Color( 1, 1, 1, 0.501961 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -6.10352e-05
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = SubResource( 18 )
+expand = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Header/Viewport"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 920, 430 )
+
+[node name="CenterContainer" type="CenterContainer" parent="Header/Viewport/HBoxContainer"]
+margin_right = 920.0
+margin_bottom = 430.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Logo" type="TextureRect" parent="Header/Viewport/HBoxContainer/CenterContainer"]
+margin_left = 172.0
+margin_right = 748.0
+margin_bottom = 430.0
+rect_min_size = Vector2( 576, 430 )
+texture = ExtResource( 10 )
+expand = true
+stretch_mode = 6
+
+[node name="DiscordBanner" type="ViewportContainer" parent="."]
+unique_name_in_owner = true
+margin_top = 1854.0
+margin_right = 960.0
+margin_bottom = 2394.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="Viewport" type="Viewport" parent="DiscordBanner"]
+size = Vector2( 960, 540 )
+handle_input_locally = false
+render_target_update_mode = 3
+
+[node name="BG" type="Sprite" parent="DiscordBanner/Viewport"]
+scale = Vector2( 1.3, 1.3 )
+z_index = -512
+z_as_relative = false
+texture = ExtResource( 5 )
+centered = false
+
+[node name="FG2" type="Sprite" parent="DiscordBanner/Viewport"]
+position = Vector2( -288, 96 )
+scale = Vector2( 1.3, 1.3 )
+z_index = -512
+z_as_relative = false
+texture = ExtResource( 6 )
+centered = false
+
+[node name="FG2" type="Sprite" parent="DiscordBanner/Viewport/FG2"]
+position = Vector2( 544, -64 )
+z_index = -512
+z_as_relative = false
+texture = ExtResource( 3 )
+centered = false
+
+[node name="FG3" type="Sprite" parent="DiscordBanner/Viewport/FG2"]
+position = Vector2( 512, 0 )
+z_index = -512
+z_as_relative = false
+texture = ExtResource( 4 )
+centered = false
+
+[node name="WhiteGradient" type="TextureRect" parent="DiscordBanner/Viewport"]
+modulate = Color( 1, 1, 1, 0.501961 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = SubResource( 18 )
+expand = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="DiscordBanner/Viewport"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 920, 430 )
+
+[node name="CenterContainer" type="CenterContainer" parent="DiscordBanner/Viewport/HBoxContainer"]
+margin_right = 960.0
+margin_bottom = 540.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Logo" type="TextureRect" parent="DiscordBanner/Viewport/HBoxContainer/CenterContainer"]
+margin_left = 192.0
+margin_right = 768.0
+margin_bottom = 540.0
+rect_min_size = Vector2( 576, 540 )
+texture = ExtResource( 10 )
+expand = true
+stretch_mode = 6
+
+[node name="DiscordInvite" type="ViewportContainer" parent="."]
+unique_name_in_owner = true
+margin_top = 2398.0
+margin_right = 1920.0
+margin_bottom = 3478.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="Viewport" type="Viewport" parent="DiscordInvite"]
+size = Vector2( 1920, 1080 )
+handle_input_locally = false
+render_target_update_mode = 3
+
+[node name="Background" parent="DiscordInvite/Viewport" instance=ExtResource( 2 )]
+rect_scale = Vector2( 3, 3 )
+
+[node name="Overlay" parent="DiscordInvite/Viewport/Background" index="3"]
+material = SubResource( 37 )
+
+[node name="WhiteGradient" type="TextureRect" parent="DiscordInvite/Viewport"]
+modulate = Color( 0.752941, 0.752941, 1, 0.486275 )
+material = SubResource( 19 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = SubResource( 20 )
+expand = true
+
+[node name="SplashScreen" type="ViewportContainer" parent="."]
+unique_name_in_owner = true
+margin_top = 3482.0
+margin_right = 1536.0
+margin_bottom = 4346.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="Viewport" type="Viewport" parent="SplashScreen"]
+size = Vector2( 1536, 864 )
+handle_input_locally = false
+render_target_update_mode = 3
+
+[node name="Background" parent="SplashScreen/Viewport" instance=ExtResource( 2 )]
+rect_scale = Vector2( 3, 3 )
+
+[node name="Scroll" parent="SplashScreen/Viewport/Background" index="2"]
+visible = false
+
+[node name="Overlay" parent="SplashScreen/Viewport/Background" index="3"]
+material = SubResource( 38 )
+
+[node name="WhiteGradient" type="TextureRect" parent="SplashScreen/Viewport"]
+modulate = Color( 0.752941, 0.752941, 1, 0.486275 )
+material = SubResource( 19 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = SubResource( 20 )
+expand = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SplashScreen/Viewport"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 920, 430 )
+
+[node name="CenterContainer" type="CenterContainer" parent="SplashScreen/Viewport/HBoxContainer"]
+margin_right = 1536.0
+margin_bottom = 864.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Logo" type="TextureRect" parent="SplashScreen/Viewport/HBoxContainer/CenterContainer"]
+visible = false
+margin_left = 384.0
+margin_right = 1152.0
+margin_bottom = 864.0
+rect_min_size = Vector2( 768, 864 )
+texture = ExtResource( 7 )
+expand = true
+stretch_mode = 6
+
+[node name="Icon" type="TextureRect" parent="SplashScreen/Viewport/HBoxContainer/CenterContainer"]
+margin_left = 544.0
+margin_top = 208.0
+margin_right = 992.0
+margin_bottom = 656.0
+rect_min_size = Vector2( 448, 448 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 8 )
+expand = true
+stretch_mode = 6
+
+[node name="Shadow" type="TextureRect" parent="SplashScreen/Viewport/HBoxContainer/CenterContainer/Icon"]
+modulate = Color( 1, 1, 1, 0.376471 )
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 16.0
+margin_top = 12.0
+margin_right = 16.0
+margin_bottom = 12.0
+texture = ExtResource( 9 )
+expand = true
+stretch_mode = 6
+
+[node name="Glow" type="TextureRect" parent="SplashScreen/Viewport/HBoxContainer/CenterContainer"]
+material = SubResource( 22 )
+margin_left = 544.0
+margin_top = 208.0
+margin_right = 992.0
+margin_bottom = 656.0
+rect_min_size = Vector2( 448, 448 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = SubResource( 24 )
+expand = true
+stretch_mode = 6
+
+[node name="Icon" type="ViewportContainer" parent="."]
+unique_name_in_owner = true
+margin_top = 4350.0
+margin_right = 512.0
+margin_bottom = 4862.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="Viewport" type="Viewport" parent="Icon"]
+size = Vector2( 512, 512 )
+handle_input_locally = false
+render_target_update_mode = 3
+
+[node name="Background" parent="Icon/Viewport" instance=ExtResource( 2 )]
+rect_scale = Vector2( 3, 3 )
+
+[node name="Overlay" parent="Icon/Viewport/Background" index="3"]
+material = SubResource( 39 )
+
+[node name="WhiteGradient" type="TextureRect" parent="Icon/Viewport"]
+modulate = Color( 0.752941, 0.752941, 1, 0.486275 )
+material = SubResource( 19 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = SubResource( 20 )
+expand = true
+
+[node name="HBoxContainer" type="PanelContainer" parent="Icon/Viewport"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_styles/panel = SubResource( 21 )
+
+[node name="Icon" type="TextureRect" parent="Icon/Viewport/HBoxContainer"]
+margin_right = 512.0
+margin_bottom = 512.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 8 )
+expand = true
+stretch_mode = 6
+
+[node name="Shadow" type="TextureRect" parent="Icon/Viewport/HBoxContainer/Icon"]
+modulate = Color( 1, 1, 1, 0.376471 )
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 32.0
+margin_top = 24.0
+margin_right = 32.0
+margin_bottom = 24.0
+texture = ExtResource( 9 )
+expand = true
+stretch_mode = 6
+
+[node name="Glow" type="TextureRect" parent="Icon/Viewport/HBoxContainer"]
+material = SubResource( 22 )
+margin_right = 512.0
+margin_bottom = 512.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = SubResource( 24 )
+expand = true
+stretch_mode = 6
+
+[editable path="DiscordIcon/Viewport/Background"]
+[editable path="DiscordInvite/Viewport/Background"]
+[editable path="SplashScreen/Viewport/Background"]
+[editable path="Icon/Viewport/Background"]
