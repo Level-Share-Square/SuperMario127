@@ -39,6 +39,7 @@ func _update_scroll() -> void:
 	var canvas_scale: Vector2 = get_canvas_transform().get_scale()
 	var canvas_offset: Vector2 = screen_offset / (canvas_scale)
 	var scroll_scale: float = parallax_distance / DISTANCE_SCALE * canvas_scale.x
+	scroll_scale = min(scroll_scale, 1)
 	
 	position = (canvas_offset + scroll_offset) * scroll_scale
 	scale = Vector2(1 - scroll_scale, 1 - scroll_scale)
