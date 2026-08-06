@@ -278,6 +278,7 @@ static func deserialize_layer_metadata_code(layer_metadata_code: String) -> Laye
 	layer_metadata.layer_name = set_or_use_default_value(vars, 8, layer_metadata.layer_name)
 	layer_metadata.is_origin = set_or_use_default_value(vars, 9, layer_metadata.is_origin)
 	layer_metadata.layer_uuid = set_or_use_default_value(vars, 10, layer_metadata.layer_uuid)
+	layer_metadata.layer_visible = set_or_use_default_value(vars, 11, layer_metadata.layer_visible)
 	
 	return layer_metadata
 

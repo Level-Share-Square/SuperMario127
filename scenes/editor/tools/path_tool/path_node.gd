@@ -35,6 +35,7 @@ func delete():
 	if !first:
 		ui.get_ref().delete_node(self)
 		queue_free()
+	ui.get_ref().update_objects_array()
 		
 
 func _process(delta):
@@ -67,7 +68,7 @@ func _on_PathNodeButton_gui_input(event):
 		elif event.pressed and event.button_index == BUTTON_LEFT && ui.get_ref().delete == true:
 			delete()
 	if held && event is InputEventMouseMotion:
-		position = ui.get_ref().path_node_container.get_global_transform().xform_inv(ui.get_mouse_pos())
+		position = ui.get_ref().path_node_container.get_global_transform().xform_inv(ui.get_ref().get_mouse_pos())
 		if ui.get_ref().editor.pixel_lock:
 			position = position.snapped(Vector2(8, 8))
 		ui.get_ref().update_node_position(self)
