@@ -148,13 +148,8 @@ func _ready():
 
 func _object_ready():
 	._object_ready()
-	liquid_area.monitoring = true
-	liquid_area.monitorable = true
-
-func _object_disabled_ready() -> void:
-	._object_disabled_ready()
-	liquid_area.monitoring = false
-	liquid_area.monitorable = false
+	liquid_area.monitoring = is_enabled_and_on_ground()
+	liquid_area.monitorable = is_enabled_and_on_ground()
 
 
 func _editor_ready() -> void:
