@@ -62,7 +62,7 @@ extents = Vector2( 11, 10 )
 [node name="Barrel" type="Node2D"]
 z_index = -2
 script = ExtResource( 1 )
-internal_id = "151"
+internal_id = "barrel"
 
 [node name="BarrelBody" type="KinematicBody2D" parent="."]
 collision_layer = 69
