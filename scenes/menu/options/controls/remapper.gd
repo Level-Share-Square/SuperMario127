@@ -4,7 +4,7 @@ export (Array, NodePath) var category_paths
 
 const INPUT_WAIT_TEXT: String = "Waiting..."
 
-onready var current_category: Control = $Player1
+onready var current_category: Control = $Gameplay
 var listening_keybind: VBoxContainer
 var is_controller: bool = false
 
