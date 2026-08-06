@@ -92,6 +92,8 @@ func _ready() -> void:
 	if scale.x < 0:
 		scale.x = abs(scale.x)
 		facing_direction = -facing_direction
+		
+	loaded = true
 
 func shell_hit(shell_pos : Vector2) -> void:
 	if !hit:

@@ -60,7 +60,6 @@ func _register_properties():
 	register_property(4, "color", color, true)
 	register_property(5, "rainbow", rainbow, true)
 
-
 func detect_player(body : Character) -> void:
 	if character == null and is_enabled_and_on_ground() and body != null and !dead:
 		character = body
@@ -94,6 +93,8 @@ func _ready() -> void:
 	if scale.x < 0 and is_enabled_and_on_ground() and mode != 1:
 		scale.x = abs(scale.x)
 		facing_direction = -facing_direction
+		
+	loaded = true
 
 func shell_hit(shell_pos : Vector2) -> void:
 	if !hit:
