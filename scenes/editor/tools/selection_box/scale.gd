@@ -18,7 +18,7 @@ func clicked():
 		object_scales[object] = object.scale
 
 func update():
-	var scale_factor = (((get_mouse_pos() - init_mouse)/SCALE_DISTANCE)*4).round() / 4.0
+	var scale_factor = (((get_mouse_pos() - init_mouse)/SCALE_DISTANCE)*4).round() / 4.0 if editor.pixel_lock else (get_mouse_pos() - init_mouse)/SCALE_DISTANCE
 	for object in editor.selected_objects:
 		object.scale = object_scales[object] + scale_factor
 	
