@@ -1,4 +1,4 @@
-[gd_scene load_steps=131 format=2]
+[gd_scene load_steps=130 format=2]
 
 [ext_resource path="res://scenes/menu/options/options.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/menu/menu_controller/screen_manager.gd" type="Script" id=2]
@@ -89,7 +89,6 @@
 [ext_resource path="res://assets/icons/AreaSettings.svg" type="Texture" id=87]
 [ext_resource path="res://assets/icons/ArrowRight.svg" type="Texture" id=88]
 [ext_resource path="res://assets/icons/GridLock.svg" type="Texture" id=89]
-[ext_resource path="res://assets/icons/TileStamp.svg" type="Texture" id=90]
 
 [sub_resource type="RectangleShape2D" id=205]
 extents = Vector2( 2, 2 )
@@ -1029,7 +1028,6 @@ hint_tooltip = "Make Tile Stamp"
 focus_mode = 0
 size_flags_vertical = 3
 theme_type_variation = "ButtonTransparent"
-icon = ExtResource( 90 )
 icon_align = 1
 expand_icon = true
 script = ExtResource( 24 )

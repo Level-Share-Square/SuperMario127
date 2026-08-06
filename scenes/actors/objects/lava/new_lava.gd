@@ -29,15 +29,10 @@ func get_liquid_properties():
 
 func update_property(key, value):
 	update()
-	update_layer()
 	visual = $New if !use_old_lava else $Old
 	match(key):
 		"color" or "surface_color":
 			update_liquid_color(value)
-
-
-func update_layer():
-	.update_layer()
 
 
 func update_liquid_color(color):

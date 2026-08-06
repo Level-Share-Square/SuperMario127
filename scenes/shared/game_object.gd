@@ -97,7 +97,13 @@ func _ready():
 	if not visible and mode == Editor.mode:
 		visible = true
 		visibility = false
+		
+	print("color" in self)
+	if "color" in self:
+		connect("property_changed", self, "update_color")
 
+func update_color(key, value):
+	self_modulate *= value
 
 func _process(delta: float) -> void:
 	if is_in_editor():
