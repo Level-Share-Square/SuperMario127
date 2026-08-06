@@ -23,6 +23,9 @@ func draw_tile(pos: Vector2) -> void:
 		editor.tile_buffer.update_bitmask_area(pos)
 
 func finalize_placement() -> void:
+	var undo_tiles: Dictionary = {}
+	for pos in editor.tile_buffer.get_used_cells():
+		undo_tiles.get_or_add(pos, shared.get_tile(pos.x, pos.y, editor.layer))
 	var action := PlaceTilesAction.new()
 	action.shared = shared
 	action.layer = editor.layer
@@ -30,6 +33,7 @@ func finalize_placement() -> void:
 	action.tile_id = editor.selected_item.tile_id
 	action.palette = editor.selected_item.palette
 	action.do_tiles = editor.tile_buffer.get_used_cells()
+	action.undo_tiles = undo_tiles
 	editor.action_manager.commit_action(action)
 	
 	editor.tile_buffer.clear()
