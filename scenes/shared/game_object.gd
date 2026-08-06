@@ -102,7 +102,6 @@ func _ready():
 func _process(delta: float) -> void:
 	if is_in_editor():
 		_update_modulate_editor(delta)
-		update()
 
 
 func _notification(what: int) -> void:
@@ -130,11 +129,6 @@ func _unhandled_input(event):
 		var editor = get_tree().current_scene
 		connect("object_clicked", editor, "object_clicked", [self])
 		emit_signal("object_clicked")
-
-
-func _draw() -> void:
-	if is_object_hovered():
-		draw_rect(editor_rect.grow(1), EDITOR_RECT_DRAW_COLOR)
 
 
 func _update_modulate_editor(delta: float) -> void:
@@ -332,9 +326,12 @@ func is_disabled_and_on_parallax() -> bool:
 func is_in_editor() -> bool:
 	return mode == Editor.mode
 
-
 func is_object_hovered() -> bool:
-	return is_in_editor() and editor_rect.has_point(get_local_mouse_position())
+	if is_in_editor():
+		var editor = get_tree().current_scene
+		if editor.layer == level_layer_ref.get_ref().layer_data.layer_metadata.layer_uuid and editor.selected_item is PlaceableObject and editor_rect.has_point(get_local_mouse_position()):
+			return true
+	return false
 
 func get_global_editor_rect() -> Rect2:
 	return get_global_transform().xform(editor_rect)
