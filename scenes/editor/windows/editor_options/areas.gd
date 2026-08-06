@@ -13,20 +13,28 @@ func _ready():
 	_connect = new_area.connect("pressed", self, "create_area")
 	if CurrentLevelData.area_headers.size() >= 32:
 		new_area.disabled = true
-	reload_areas()
 	
 	yield(editor, "ready")
-	editor.action_manager.connect("action", self, "reload_areas")
-	editor.action_manager.connect("undo", self, "reload_areas")
-	editor.action_manager.connect("redo", self, "reload_areas")
+	editor.action_manager.connect("action", self, "action_taken")
+	editor.action_manager.connect("undo", self, "action_taken")
+	editor.action_manager.connect("redo", self, "action_taken")
+	reload_areas()
 	
 
+func action_taken():
+	var actions: Array = [editor.action_manager.undo_stack.back(), editor.action_manager.redo_stack.back()]
+	var found_action: bool = false
+	for action in actions:
+		if (action is BaseAreaAction or action is ChangeAreaAction):
+			found_action = true
+	if !found_action: return
+	
+	reload_areas()
 
 func reload_areas():
 	# child die funny
 	# that wasn't really funny. 127 is problematic media.
 	var actions: Array = [editor.action_manager.undo_stack.back(), editor.action_manager.redo_stack.back()]
-	if !(BaseAreaAction in actions or ChangeAreaAction in actions): return
 	
 	for child in v_box_container.get_children():
 		if !"HBoxContainer" in child.name:
