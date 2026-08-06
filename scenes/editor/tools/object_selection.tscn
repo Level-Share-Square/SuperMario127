@@ -114,19 +114,21 @@ mouse_filter = 2
 script = ExtResource( 5 )
 
 [node name="Align" type="PanelContainer" parent="SelectionBox" index="2"]
+unique_name_in_owner = true
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 margin_left = -70.5
-margin_right = 70.5
-margin_bottom = 25.0
+margin_right = 71.5
+margin_bottom = 26.0
+rect_pivot_offset = Vector2( 71, 0 )
 custom_styles/panel = SubResource( 2 )
 
 [node name="EditSelection" type="PanelContainer" parent="SelectionBox/Align" index="0"]
 unique_name_in_owner = true
 margin_right = 141.0
-margin_bottom = 25.0
+margin_bottom = 26.0
 size_flags_horizontal = 4
 size_flags_stretch_ratio = 2.0
 theme_type_variation = "FlatPanel"
@@ -136,14 +138,14 @@ unique_name_in_owner = true
 margin_left = 4.0
 margin_top = 4.0
 margin_right = 137.0
-margin_bottom = 21.0
+margin_bottom = 22.0
 grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
 [node name="MoveSelection" type="Button" parent="SelectionBox/Align/EditSelection/ButtonContainer" index="0"]
 margin_right = 17.0
-margin_bottom = 17.0
+margin_bottom = 18.0
 rect_min_size = Vector2( 17, 17 )
 focus_mode = 0
 size_flags_vertical = 3
@@ -157,12 +159,12 @@ associated_tool_path = NodePath("../../../../SelectionTools/Move")
 [node name="VSeparator" type="VSeparator" parent="SelectionBox/Align/EditSelection/ButtonContainer" index="1"]
 margin_left = 21.0
 margin_right = 25.0
-margin_bottom = 17.0
+margin_bottom = 18.0
 
 [node name="RotateSelection" type="Button" parent="SelectionBox/Align/EditSelection/ButtonContainer" index="2"]
 margin_left = 29.0
 margin_right = 46.0
-margin_bottom = 17.0
+margin_bottom = 18.0
 rect_min_size = Vector2( 17, 17 )
 focus_mode = 0
 size_flags_vertical = 3
@@ -176,12 +178,12 @@ associated_tool_path = NodePath("../../../../SelectionTools/Rotate")
 [node name="VSeparator2" type="VSeparator" parent="SelectionBox/Align/EditSelection/ButtonContainer" index="3"]
 margin_left = 50.0
 margin_right = 54.0
-margin_bottom = 17.0
+margin_bottom = 18.0
 
 [node name="ScaleSelection" type="Button" parent="SelectionBox/Align/EditSelection/ButtonContainer" index="4"]
 margin_left = 58.0
 margin_right = 75.0
-margin_bottom = 17.0
+margin_bottom = 18.0
 rect_min_size = Vector2( 17, 17 )
 focus_mode = 0
 size_flags_vertical = 3
@@ -196,13 +198,13 @@ associated_tool_path = NodePath("../../../../SelectionTools/Scale")
 unique_name_in_owner = true
 margin_left = 79.0
 margin_right = 83.0
-margin_bottom = 17.0
+margin_bottom = 18.0
 
 [node name="PivotToggleButton" type="Button" parent="SelectionBox/Align/EditSelection/ButtonContainer" index="6"]
 unique_name_in_owner = true
 margin_left = 87.0
 margin_right = 104.0
-margin_bottom = 17.0
+margin_bottom = 18.0
 rect_min_size = Vector2( 17, 17 )
 focus_mode = 0
 size_flags_vertical = 3
@@ -217,13 +219,13 @@ script = ExtResource( 3 )
 [node name="VSeparator4" type="VSeparator" parent="SelectionBox/Align/EditSelection/ButtonContainer" index="7"]
 margin_left = 108.0
 margin_right = 112.0
-margin_bottom = 17.0
+margin_bottom = 18.0
 
 [node name="PropertiesButton" type="Button" parent="SelectionBox/Align/EditSelection/ButtonContainer" index="8"]
 unique_name_in_owner = true
 margin_left = 116.0
 margin_right = 133.0
-margin_bottom = 17.0
+margin_bottom = 18.0
 rect_min_size = Vector2( 17, 17 )
 focus_mode = 0
 size_flags_vertical = 3

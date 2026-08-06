@@ -5,6 +5,7 @@ onready var parallax_scroll = $"%ParallaxScroll"
 
 var offset := Vector2(16, 16)
 var is_object: bool
+var position_override: bool = false
 
 func _ready():
 	is_object = editor.selected_item is PlaceableObject
@@ -19,7 +20,7 @@ func _process(delta):
 			floor(parallax_scroll.corrected_mouse_position().x / 32) * 32, 
 			floor(parallax_scroll.corrected_mouse_position().y / 32) * 32
 		)
-	rect_position = mouse_pos
+	if !position_override: rect_position = mouse_pos
 
 func update_item(item, palette, is_obj):
 	is_object = is_obj

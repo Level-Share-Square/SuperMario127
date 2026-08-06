@@ -39,6 +39,9 @@ func _mouse_movement(event: InputEvent, world_pos: Vector2) -> void:
 	if editor.selected_item is PlaceableObject:
 		var mouse_tile: Vector2 = get_mouse_snapped_pos()
 		var line: = line_util.get_line(last_mouse_tile, mouse_tile)
+	
+		get_node("%ItemPreview").position_override = true
+		get_node("%ItemPreview").rect_global_position = get_mouse_snapped_pos() - Vector2(24, 24)
 
 		if mouse_input == 0:
 			for point in line:

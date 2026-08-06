@@ -44,6 +44,10 @@ func _process(_delta: float):
 
 func change_tool(tool_name: String) -> void:
 	current_tool = get_node(tool_name)
+	var item_preview = get_node("%ItemPreview")
+	item_preview.position_override = false
+	
+	item_preview.visible = !"Selection" in tool_name
 	emit_signal("tool_changed")
 
 func item_changed(placeable_item: PlaceableItem):
