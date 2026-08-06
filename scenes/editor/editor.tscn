@@ -1545,6 +1545,7 @@ icon = ExtResource( 51 )
 icon_align = 1
 expand_icon = true
 script = ExtResource( 24 )
+click_override = "DropdownSound"
 
 [node name="Middle" type="Control" parent="UI/UIContainer/EditorUI/Bottom/Hotbar"]
 margin_left = 52.0
@@ -1970,6 +1971,11 @@ stream = ExtResource( 55 )
 volume_db = -7.5
 bus = "Sounds"
 
+[connection signal="choose_palette" from="HotkeyManager" to="UI/UIContainer/EditorUI/Bottom/Hotbar" method="_on_palettes_pressed"]
+[connection signal="grid_toggle" from="HotkeyManager" to="ParallaxScroll/Grid" method="toggle_grid"]
+[connection signal="hide_hotbar" from="HotkeyManager" to="UI/UIContainer/EditorUI/Bottom/Hotbar/Collapse/Button" method="emit_signal" binds= [ "pressed" ]]
+[connection signal="item_picker" from="HotkeyManager" to="UI/UIContainer/EditorUI/Bottom/Hotbar/ItemPickerButton/Button" method="emit_signal" binds= [ "pressed" ]]
+[connection signal="layer_menu" from="HotkeyManager" to="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/Actions/HBoxContainer/LayerPicker" method="emit_signal" binds= [ "pressed" ]]
 [connection signal="tool_changed" from="ZIndex/Tools" to="UI/UIContainer/EditorUI/Middle/Tools" method="_on_Tools_tool_changed"]
 [connection signal="action" from="ActionManager" to="SaveManager" method="_on_ActionManager_action"]
 [connection signal="text_entered" from="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/SearchBar" to="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/ScrollContainer/CenterContainer/ItemsGrid" method="_on_search"]
@@ -1990,3 +1996,4 @@ bus = "Sounds"
 [connection signal="pressed" from="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/Actions/HBoxContainer/LayerPicker" to="UI/UIContainer/EditorUI/Middle/Tools" method="toggle_visible"]
 [connection signal="tool_picked" from="UI/UIContainer/EditorUI/Middle/Tools" to="ZIndex/Tools" method="_on_Tools_tool_picked"]
 [connection signal="pressed" from="UI/UIContainer/EditorUI/Bottom/Hotbar/ItemPickerButton/Button" to="UI/UIContainer/ItemPickerPanel" method="toggle"]
+[connection signal="screen_opened" from="Options/ScreenManager/Options" to="Options/ScreenManager/Options/Subscreens/Controls/VBoxContainer/Devices" method="screen_opened"]
