@@ -11,6 +11,7 @@
 [ext_resource path="res://assets/fonts/DelfinoFont16.tres" type="DynamicFont" id=9]
 [ext_resource path="res://scenes/editor/assets/grabber_highlight.png" type="Texture" id=10]
 [ext_resource path="res://scenes/editor/assets/grabber.png" type="Texture" id=11]
+[ext_resource path="res://assets/icons/CheckUnchecked.svg" type="Texture" id=12]
 
 [sub_resource type="StyleBoxFlat" id=113]
 content_margin_left = 4.0
@@ -245,8 +246,6 @@ corner_radius_bottom_left = 128
 anti_aliasing = false
 
 [sub_resource type="StyleBoxEmpty" id=163]
-
-[sub_resource type="StreamTexture" id=184]
 
 [sub_resource type="StyleBoxEmpty" id=171]
 
@@ -737,7 +736,7 @@ CheckButtonTransparent/colors/font_color_focus = Color( 1, 1, 1, 1 )
 CheckButtonTransparent/colors/font_color_hover = Color( 1, 1, 1, 1 )
 CheckButtonTransparent/colors/font_color_hover_pressed = Color( 1, 1, 1, 1 )
 CheckButtonTransparent/colors/font_color_pressed = Color( 1, 1, 1, 1 )
-CheckButtonTransparent/icons/off = SubResource( 184 )
+CheckButtonTransparent/icons/off = ExtResource( 12 )
 CheckButtonTransparent/icons/on = ExtResource( 7 )
 CheckButtonTransparent/styles/disabled = SubResource( 171 )
 CheckButtonTransparent/styles/focus = SubResource( 172 )
