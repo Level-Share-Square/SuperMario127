@@ -12,6 +12,7 @@ onready var bottom_inner: PanelContainer = $"%BottomInner"
 onready var grid_overlay_1 = $"%GridOverlay1"
 onready var grid_overlay_2 = $"%GridOverlay2"
 onready var mario_front: AnimatedSprite = $"%MarioFront"
+onready var mario_back: AnimatedSprite = $"%MarioBack"
 onready var pipe_sound: AudioStreamPlayer = $"%PipeSound"
 onready var letsa_go_sfx = $"%LetsaGo"
 
@@ -29,6 +30,11 @@ export var pipe_flash_gradient_tex_base: GradientTexture2D
 export var pipe_flash_gradient_green: Gradient
 export var pipe_flash_gradient_red: Gradient
 
+export var mario_back_frames: SpriteFrames
+export var mario_front_frames: SpriteFrames
+export var luigi_back_frames: SpriteFrames
+export var luigi_front_frames: SpriteFrames
+
 export var color_change_duration: float
 export var pipe_juice_duration: float
 
@@ -36,6 +42,21 @@ var is_hovered: bool
 var is_switching: bool
 var is_transitioning_to_red: bool
 var playtesting: bool
+
+
+func update_character() -> void:
+	var palette_material: ShaderMaterial = preload("res://scenes/actors/mario/materials/palette_swap.tres").duplicate()
+	var cur_char: int = Singleton.PlayerSettings.player1_character
+	var char_folder: String = Character.CHAR_NAMES[cur_char].to_lower()
+	var cur_palette: String = LocalSettings.load_setting("General", "char_palette", "default")
+	palette_material.set_shader_param("palette_in", load(Character.PALETTES_PATH % [char_folder, "default"]))
+	palette_material.set_shader_param("palette_out", load(Character.PALETTES_PATH % [char_folder, cur_palette]))
+	
+	mario_back.frames = mario_back_frames if cur_char == 0 else luigi_back_frames
+	mario_front.frames = mario_front_frames if cur_char == 0 else luigi_front_frames
+	
+	mario_back.material = palette_material
+	mario_front.material = palette_material
 
 
 # wish i could use a signal, but no such thing exists!! :(
@@ -56,6 +77,7 @@ func _unhandled_input(event):
 func hovered() -> void:
 	is_hovered = true
 	if is_switching: return
+	update_character()
 	animation_player.play("hover_marioless" if playtesting else "hover")
 
 
@@ -73,6 +95,7 @@ func pressed(force: bool = false, play_sound: bool = false) -> void:
 		if SceneTransitions.transitioning: return
 	
 	if play_sound:
+		update_character()
 		button.on_pressed()
 	
 	transition_rect.mouse_filter = Control.MOUSE_FILTER_STOP

@@ -64,6 +64,10 @@ func _ready():
 		timer_manager.add_set_timer("area_timer", CurrentLevelData.current_area.header.timer, "death", true, true)
 #		vignette.visible = true
 	
+	var player_char = get_node(character)
+	player_char.character = Singleton.PlayerSettings.player1_character
+	player_char.number_of_players = Singleton.PlayerSettings.number_of_players
+	
 	get_node(shared).connect("loaded_layers", self, "assign_layer_ref")
 	load_in()
 	
@@ -76,9 +80,6 @@ func _ready():
 		
 	get_shared_node().load_layer_states(CurrentLevelData.vars.layer_states[CurrentLevelData.area_id])
 	
-	var player_char = get_node(character)
-	player_char.character = Singleton.PlayerSettings.player1_character
-	player_char.number_of_players = Singleton.PlayerSettings.number_of_players
 	for object in CurrentLevelData.current_area.get_objects_on_ground():
 		if object.metadata.type_id == 0:
 			player_char.spawn_pos = object.metadata.position

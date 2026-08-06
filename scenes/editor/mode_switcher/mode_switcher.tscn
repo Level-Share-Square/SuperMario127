@@ -1,12 +1,13 @@
-[gd_scene load_steps=68 format=2]
+[gd_scene load_steps=40 format=2]
 
+[ext_resource path="res://scenes/editor/mode_switcher/mario_frames_front.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/editor/mode_switcher/pipe_stylebox.tres" type="StyleBox" id=2]
 [ext_resource path="res://assets/icons/play.png" type="Texture" id=3]
 [ext_resource path="res://scenes/editor/mode_switcher/pipe_shine2.tres" type="Texture" id=4]
 [ext_resource path="res://assets/icons/CheckUnchecked.svg" type="Texture" id=5]
 [ext_resource path="res://scenes/editor/mode_switcher/grid_scroll.tres" type="Material" id=6]
-[ext_resource path="res://scenes/actors/mario/animations/mode_switcher/mario_front.png" type="Texture" id=7]
-[ext_resource path="res://scenes/actors/mario/animations/mode_switcher/mario_back.png" type="Texture" id=8]
+[ext_resource path="res://scenes/editor/mode_switcher/mario_frames_back.tres" type="SpriteFrames" id=7]
+[ext_resource path="res://scenes/editor/mode_switcher/luigi_frames_front.tres" type="SpriteFrames" id=8]
 [ext_resource path="res://scenes/editor/mode_switcher/mode_switch.wav" type="AudioStream" id=9]
 [ext_resource path="res://scenes/menu/button_scripts/button_sound.gd" type="Script" id=10]
 [ext_resource path="res://scenes/editor/mode_switcher/mode_switch_hover.wav" type="AudioStream" id=11]
@@ -25,6 +26,7 @@
 [ext_resource path="res://scenes/editor/mode_switcher/pipe_gradient_tex.tres" type="Texture" id=24]
 [ext_resource path="res://scenes/editor/mode_switcher/mario_copy.gd" type="Script" id=25]
 [ext_resource path="res://assets/icons/stop.svg" type="Texture" id=26]
+[ext_resource path="res://scenes/editor/mode_switcher/luigi_frames_back.tres" type="SpriteFrames" id=27]
 
 [sub_resource type="Gradient" id=35]
 offsets = PoolRealArray( -0.1, 0 )
@@ -36,154 +38,6 @@ fill_to = Vector2( 0, 1 )
 
 [sub_resource type="CanvasItemMaterial" id=4]
 blend_mode = 1
-
-[sub_resource type="AtlasTexture" id=5]
-atlas = ExtResource( 7 )
-region = Rect2( 484, 0, 44, 54 )
-
-[sub_resource type="AtlasTexture" id=6]
-atlas = ExtResource( 7 )
-region = Rect2( 528, 0, 44, 54 )
-
-[sub_resource type="AtlasTexture" id=7]
-atlas = ExtResource( 7 )
-region = Rect2( 0, 0, 44, 54 )
-
-[sub_resource type="AtlasTexture" id=8]
-atlas = ExtResource( 7 )
-region = Rect2( 44, 0, 44, 54 )
-
-[sub_resource type="AtlasTexture" id=9]
-atlas = ExtResource( 7 )
-region = Rect2( 88, 0, 44, 54 )
-
-[sub_resource type="AtlasTexture" id=10]
-atlas = ExtResource( 7 )
-region = Rect2( 132, 0, 44, 54 )
-
-[sub_resource type="AtlasTexture" id=11]
-atlas = ExtResource( 7 )
-region = Rect2( 176, 0, 44, 54 )
-
-[sub_resource type="AtlasTexture" id=12]
-atlas = ExtResource( 7 )
-region = Rect2( 220, 0, 44, 54 )
-
-[sub_resource type="AtlasTexture" id=13]
-atlas = ExtResource( 7 )
-region = Rect2( 264, 0, 44, 54 )
-
-[sub_resource type="AtlasTexture" id=14]
-atlas = ExtResource( 7 )
-region = Rect2( 308, 0, 44, 54 )
-
-[sub_resource type="AtlasTexture" id=15]
-atlas = ExtResource( 7 )
-region = Rect2( 352, 0, 44, 54 )
-
-[sub_resource type="AtlasTexture" id=16]
-atlas = ExtResource( 7 )
-region = Rect2( 396, 0, 44, 54 )
-
-[sub_resource type="AtlasTexture" id=17]
-atlas = ExtResource( 7 )
-region = Rect2( 440, 0, 44, 54 )
-
-[sub_resource type="AtlasTexture" id=18]
-atlas = ExtResource( 7 )
-region = Rect2( 440, 0, 44, 54 )
-
-[sub_resource type="SpriteFrames" id=19]
-animations = [ {
-"frames": [ SubResource( 5 ), SubResource( 6 ) ],
-"loop": false,
-"name": "enter",
-"speed": 9.0
-}, {
-"frames": [ SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ) ],
-"loop": false,
-"name": "exit",
-"speed": 9.0
-}, {
-"frames": [ SubResource( 18 ) ],
-"loop": false,
-"name": "idle",
-"speed": 9.0
-} ]
-
-[sub_resource type="AtlasTexture" id=20]
-atlas = ExtResource( 8 )
-region = Rect2( 484, 0, 44, 54 )
-
-[sub_resource type="AtlasTexture" id=21]
-atlas = ExtResource( 8 )
-region = Rect2( 528, 0, 44, 54 )
-
-[sub_resource type="AtlasTexture" id=22]
-atlas = ExtResource( 8 )
-region = Rect2( 0, 0, 44, 54 )
-
-[sub_resource type="AtlasTexture" id=23]
-atlas = ExtResource( 8 )
-region = Rect2( 44, 0, 44, 54 )
-
-[sub_resource type="AtlasTexture" id=24]
-atlas = ExtResource( 8 )
-region = Rect2( 88, 0, 44, 54 )
-
-[sub_resource type="AtlasTexture" id=25]
-atlas = ExtResource( 8 )
-region = Rect2( 132, 0, 44, 54 )
-
-[sub_resource type="AtlasTexture" id=26]
-atlas = ExtResource( 8 )
-region = Rect2( 176, 0, 44, 54 )
-
-[sub_resource type="AtlasTexture" id=27]
-atlas = ExtResource( 8 )
-region = Rect2( 220, 0, 44, 54 )
-
-[sub_resource type="AtlasTexture" id=28]
-atlas = ExtResource( 8 )
-region = Rect2( 264, 0, 44, 54 )
-
-[sub_resource type="AtlasTexture" id=29]
-atlas = ExtResource( 8 )
-region = Rect2( 308, 0, 44, 54 )
-
-[sub_resource type="AtlasTexture" id=30]
-atlas = ExtResource( 8 )
-region = Rect2( 352, 0, 44, 54 )
-
-[sub_resource type="AtlasTexture" id=31]
-atlas = ExtResource( 8 )
-region = Rect2( 396, 0, 44, 54 )
-
-[sub_resource type="AtlasTexture" id=32]
-atlas = ExtResource( 8 )
-region = Rect2( 440, 0, 44, 54 )
-
-[sub_resource type="AtlasTexture" id=33]
-atlas = ExtResource( 8 )
-region = Rect2( 440, 0, 44, 54 )
-
-[sub_resource type="SpriteFrames" id=34]
-animations = [ {
-"frames": [ SubResource( 20 ), SubResource( 21 ) ],
-"loop": false,
-"name": "enter",
-"speed": 9.0
-}, {
-"frames": [ SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ) ],
-"loop": false,
-"name": "exit",
-"speed": 9.0
-}, {
-"frames": [ SubResource( 33 ) ],
-"loop": false,
-"name": "idle",
-"speed": 9.0
-} ]
 
 [sub_resource type="Animation" id=37]
 length = 0.001
@@ -364,7 +218,7 @@ tracks/4/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 34, 26 ) ]
+"values": [ Vector2( 34, 32 ) ]
 }
 tracks/5/type = "value"
 tracks/5/path = NodePath("RootContainer/VBoxContainer/BottomMargin/BottomOutline/OutlineMargin/BottomInner:rect_min_size")
@@ -439,7 +293,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0, 0.4, 0.8 ),
 "transitions": PoolRealArray( 0.5, -2, 1 ),
 "update": 0,
-"values": [ 26.0, -64.0, -22.0 ]
+"values": [ 32.0, -64.0, -22.0 ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("RootContainer/VBoxContainer/TopOutline/OutlineMargin/VBoxContainer/TopInner/MarioFront:show_behind_parent")
@@ -554,7 +408,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0, 0.25, 0.3, 0.301 ),
 "transitions": PoolRealArray( 0.5, 2, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 34, 26 ), Vector2( 34, -26 ), Vector2( 34, -22 ), Vector2( 34, -22 ) ]
+"values": [ Vector2( 34, 32 ), Vector2( 34, -26 ), Vector2( 34, -22 ), Vector2( 34, -22 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("RootContainer/VBoxContainer/TopOutline/OutlineMargin/VBoxContainer/TopInner/MarioFront:frame")
@@ -672,7 +526,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0, 0.4, 0.75 ),
 "transitions": PoolRealArray( 0.4, 2, 1 ),
 "update": 0,
-"values": [ -22.0, -72.0, 26.0 ]
+"values": [ -22.0, -72.0, 32.0 ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("RootContainer/VBoxContainer/TopOutline/OutlineMargin/VBoxContainer/TopInner/MarioFront:show_behind_parent")
@@ -787,7 +641,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0, 0.2 ),
 "transitions": PoolRealArray( -2, 2 ),
 "update": 0,
-"values": [ -22.0, 26.0 ]
+"values": [ -22.0, 32.0 ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("RootContainer/VBoxContainer/TopOutline/OutlineMargin/VBoxContainer/TopInner/MarioFront:show_behind_parent")
@@ -876,6 +730,10 @@ pipe_gradient_red = ExtResource( 19 )
 pipe_flash_gradient_tex_base = ExtResource( 23 )
 pipe_flash_gradient_green = ExtResource( 20 )
 pipe_flash_gradient_red = ExtResource( 22 )
+mario_back_frames = ExtResource( 7 )
+mario_front_frames = ExtResource( 1 )
+luigi_back_frames = ExtResource( 27 )
+luigi_front_frames = ExtResource( 8 )
 color_change_duration = 0.5
 pipe_juice_duration = 0.4
 
@@ -991,16 +849,17 @@ stretch_mode = 6
 [node name="MarioFront" type="AnimatedSprite" parent="RootContainer/VBoxContainer/TopOutline/OutlineMargin/VBoxContainer/TopInner"]
 unique_name_in_owner = true
 show_behind_parent = true
-position = Vector2( 34, 26 )
+position = Vector2( 34, 32 )
 scale = Vector2( 2, 2 )
-frames = SubResource( 19 )
+frames = ExtResource( 1 )
 animation = "idle"
 
 [node name="MarioBack" type="AnimatedSprite" parent="RootContainer/VBoxContainer/TopOutline/OutlineMargin/VBoxContainer/TopInner"]
+unique_name_in_owner = true
 show_behind_parent = true
-position = Vector2( 34, 26 )
+position = Vector2( 34, 32 )
 scale = Vector2( 2, 2 )
-frames = SubResource( 34 )
+frames = ExtResource( 7 )
 animation = "idle"
 script = ExtResource( 25 )
 

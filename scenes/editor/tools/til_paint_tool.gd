@@ -75,9 +75,6 @@ func draw_tile(pos: Vector2) -> void:
 
 
 func finalize_placement() -> void:
-	for tile in used_tiles:
-		shared.set_tile(tile.x, tile.y, editor.layer, 0, 0, 0)
-
 	var action := PlaceTilesAction.new()
 	action.shared = shared
 	action.layer = editor.layer
