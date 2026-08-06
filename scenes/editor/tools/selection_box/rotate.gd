@@ -10,6 +10,8 @@ var action
 var init_positions: Dictionary
 var init_rotations: Dictionary
 
+var pivot_center: Vector2
+
 func clicked():
 	init_positions.clear()
 	init_rotations.clear()
@@ -18,6 +20,8 @@ func clicked():
 	action = ChangePropertyBulkAction.new()
 	action.affected_objects = setup_affected_objects()
 	action.bulk_store_original_properties()
+	
+	pivot_center = pivot.get_position_centered()
 
 func update():
 	for i in editor.selected_objects:
@@ -41,7 +45,7 @@ func _rotate(object: GameObject):
 	
 			selection_box.fit_to_bounding_rectangle()
 		Mode.LOCAL:
-			var angle: float = (mouse_pos - pivot.get_position_centered()).angle() - PI/2
+			var angle: float = (mouse_pos - pivot_center).angle() - PI/2
 			object.rotation = angle
 			if editor.pixel_lock:
 				object.rotation = stepify(object.rotation, deg2rad(15))
