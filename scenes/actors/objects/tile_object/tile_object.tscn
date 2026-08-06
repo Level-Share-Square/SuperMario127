@@ -11,5 +11,4 @@ unique_name_in_owner = true
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 32, 32 )
 cell_custom_transform = Transform2D( 32, 0, 0, 32, 0, 0 )
-show_collision = true
 format = 1

@@ -4,6 +4,7 @@ onready var tile_map = $"%TileMap"
 
 var tile_data := TileData.new()
 var tint := Color.white
+var editor_border_color := Color(0.2, 0.2, 0.8, 0.5)
 
 func load_placeable_item():
 	placeable_item = PlaceableItem.new()
@@ -17,6 +18,9 @@ func _ready():
 func _register_properties():
 	register_property(4, "tile_data", tile_data, false)
 	register_property(5, "tint", tint, true)
+
+func _draw() -> void:
+	draw_rect(editor_rect.grow(1), editor_border_color, false, 2)
 
 func set_tiles():
 	for pos in tile_data.used_tiles:

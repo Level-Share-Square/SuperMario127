@@ -1,5 +1,30 @@
 extends Selector
 
+var is_erasing: bool
+
+func _click_left(event, mouse_position):
+	._click_left(event, mouse_position)
+	is_erasing = tool_manager.is_erasing
+		
+func _click_left_released(event, mouse_position):
+	._click_left_released(event, mouse_position)
+	is_erasing = tool_manager.is_erasing
+	
+func _click_right(_event, _world_pos) -> void:
+	is_dragging = true
+	set_highlight_mode(true)
+	reset_bounds()
+	start_pos = get_adjusted_mouse_position()
+	on_selection_outside_clicked()
+	
+	is_erasing = not tool_manager.is_erasing
+	
+func _click_right_released(event, mouse_position) -> void:
+	is_dragging = false
+	set_highlight_mode(false)
+	on_mouse_released()
+	is_erasing = not tool_manager.is_erasing
+
 func on_mouse_released():
 	if !.on_mouse_released():
 		return
@@ -29,9 +54,9 @@ func finalize_placement() -> void:
 	var action := PlaceTilesAction.new()
 	action.shared = shared
 	action.layer = editor.layer
-	action.tileset_id = editor.selected_item.tileset_id
-	action.tile_id = editor.selected_item.tile_id
-	action.palette = editor.selected_item.palette
+	action.tileset_id = editor.selected_item.tileset_id if not is_erasing else 0
+	action.tile_id = editor.selected_item.tile_id if not is_erasing else 0
+	action.palette = editor.selected_item.palette if not is_erasing else 0
 	action.do_tiles = editor.tile_buffer.get_used_cells()
 	action.undo_tiles = undo_tiles
 	editor.action_manager.commit_action(action)
