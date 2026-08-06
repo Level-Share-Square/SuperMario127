@@ -8,13 +8,16 @@ func _ready():
 func on_mouse_released():
 	if !.on_mouse_released():
 		editor.item_actions.hide_selection_actions()
+		editor.item_actions.hide_tile_selection_actions()
 		return
 	if fill_rect.has_point(get_adjusted_mouse_position()):
 		editor.item_actions.hide_selection_actions()
+		editor.item_actions.hide_tile_selection_actions()
 		return
 		
 	select_tiles()
 	editor.item_actions.show_selection_actions()
+	editor.item_actions.show_tile_selection_actions()
 	
 func on_selection_outside_clicked():
 	editor.tile_buffer.clear()
@@ -94,6 +97,7 @@ func on_copy():
 		var tile_data: TileData = LayerData.tiles_to_tile_data(editor.selected_tiles, CurrentLevelData.current_area.layers[shared.layers.find(editor.layer)].tile_data.chunks)
 		OS.set_clipboard(JSON.print([LevelCodeSerializer.serialize_data(tile_data), [camera.position.x, camera.position.y]]))
 		editor.item_actions.show_selection_actions()
+		editor.item_actions.show_tile_selection_actions()
 
 func on_paste():
 	if editor.tool_manager.current_tool == self:

@@ -24,8 +24,8 @@
 [ext_resource path="res://scenes/actors/objects/sign/palettes/9/sign.png" type="Texture" id=24]
 [ext_resource path="res://scenes/actors/objects/sign/palettes/6/sign.png" type="Texture" id=25]
 [ext_resource path="res://scenes/actors/objects/sign/palettes/8/sign.png" type="Texture" id=26]
-[ext_resource path="res://assets/misc/interaction_marker.png" type="Texture" id=27]
-[ext_resource path="res://assets/misc/interaction_marker_outline.png" type="Texture" id=29]
+[ext_resource path="res://assets/icons/interaction_marker.png" type="Texture" id=27]
+[ext_resource path="res://assets/icons/interaction_marker_outline.png" type="Texture" id=29]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 80, 60 )

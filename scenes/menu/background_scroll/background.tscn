@@ -16,12 +16,12 @@ void fragment () {
 
 [sub_resource type="ShaderMaterial" id=24]
 shader = SubResource( 23 )
-shader_param/speed = 0.02
+shader_param/speed = 0.22
 shader_param/direction = 1.0
 
 [sub_resource type="ShaderMaterial" id=25]
 shader = SubResource( 23 )
-shader_param/speed = 0.04
+shader_param/speed = 0.24
 shader_param/direction = -1.0
 
 [sub_resource type="Shader" id=26]

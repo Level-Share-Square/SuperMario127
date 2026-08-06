@@ -1,1 +1,0 @@
- copy this folder to the export folder when doing a new release! and then delete the import files and this txt file, ofc :D
