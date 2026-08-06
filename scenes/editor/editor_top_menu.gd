@@ -13,6 +13,8 @@ func _ready():
 	for button in view_dropdown.get_children():
 		if !"Separator" in button.name:
 			button.connect("button_down", self, "on_button_pressed", [button])
+			if button.name == "FastTest":
+				button.pressed = LocalSettings.load_setting("Editor", "fast_test", false)
 	for button in settings.get_children():
 		if !"Separator" in button.name:
 			button.connect("button_down", self, "on_button_pressed", [button])
@@ -26,6 +28,8 @@ func on_button_pressed(button: Button):
 			shared.focus_layer(editor.focus_layer, editor.layer)
 		"PixelSnap":
 			editor.pixel_lock = !button.pressed
+		"FastTest":
+			LocalSettings.change_setting("Editor", "fast_test", !button.pressed)
 		"Autosaves":
 			autosave_window.toggle_window()
 		"Settings":

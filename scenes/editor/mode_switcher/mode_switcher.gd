@@ -136,7 +136,7 @@ func pressed(force: bool = false, play_sound: bool = false) -> void:
 	tween.start()
 	
 	if not playtesting:
-		animation_player.play("press_fast" if Input.is_action_pressed("skip_count") else "press")
+		animation_player.play("press_fast" if do_fast_test() else "press")
 		yield(animation_player, "animation_finished")
 		if not is_hovered:
 			animation_player.play_backwards("hover_marioless")
@@ -208,3 +208,7 @@ func switch() -> void:
 	
 	var new_scene_mode = get_tree().get_current_scene().mode
 	playtesting = (new_scene_mode == 1)
+
+
+func do_fast_test() -> bool:
+	return Input.is_action_pressed("skip_count") or LocalSettings.load_setting("Editor", "fast_test", false)
