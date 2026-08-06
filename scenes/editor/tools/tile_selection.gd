@@ -23,6 +23,7 @@ func on_mouse_released():
 	
 func on_selection_outside_clicked():
 	editor.tile_buffer.clear()
+	is_copied = false
 	
 func select_tiles():
 	var tile_fill_rect := Rect2(get_tile_grid_position(fill_rect.position), get_tile_grid_position(fill_rect.size))
