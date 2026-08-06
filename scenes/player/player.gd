@@ -90,7 +90,7 @@ func assign_layer_ref():
 	if CurrentLevelData.checkpoint_data.current_checkpoint_id != -1:
 		var player_char = get_node(character)
 		player_char.layer = weakref(get_node(shared).get_layer(CurrentLevelData.checkpoint_data.current_layer))
-		if player_char.layer.get_ref(): player_char.update_z_index()
+		if player_char.layer.get_ref(): player_char.update_layer_info()
 
 func _unhandled_input(event):
 	if event.is_action_pressed("reload") or event.is_action_pressed("reload_from_start") and !SceneTransitions.transitioning and (!Singleton.ModeSwitcher.is_switching or not Singleton.ModeSwitcher.visible):
