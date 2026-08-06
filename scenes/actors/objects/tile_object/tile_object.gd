@@ -45,3 +45,7 @@ func property_changed(key, value):
 	print(key, value)
 	if key == "tint":
 		tile_map.modulate = value
+
+func instance_disabled_icon():
+	yield(self, "ready")
+	.instance_disabled_icon()

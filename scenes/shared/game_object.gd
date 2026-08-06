@@ -30,6 +30,7 @@ var translucent: bool = false
 
 var loaded: bool = false
 var palettes: int = 0
+var disabled_icon: TextureRect
 
 var in_front: bool = false
 var enabled: bool = true
@@ -94,6 +95,7 @@ func _ready():
 	_register_properties()
 	load_placeable_item()
 	set_object_data(object_data)
+	instance_disabled_icon()
 	
 	if not visible and mode == Editor.mode:
 		visible = true
@@ -150,6 +152,9 @@ func _update_modulate_editor(delta: float) -> void:
 		modulate.a = lerp(modulate.a, EDITOR_INVISIBLE_ALPHA, delta * 16)
 	else:
 		modulate.a = lerp(modulate.a, 1, delta * 16)
+		
+	disabled_icon.visible = (!enabled and is_in_editor())
+	if disabled_icon.visible: disabled_icon.rect_position = Vector2((global_transform.xform(editor_rect)).size.x + (global_transform.xform(editor_rect)).position.x, (global_transform.xform(editor_rect)).position.y) - disabled_icon.texture.get_size()/2
 
 
 ## Run when all objects are loaded.
@@ -354,3 +359,11 @@ func create_object(pos: Vector2, object_id: int, palette: int):
 			)
 		)
 	)
+
+func instance_disabled_icon():
+	disabled_icon = TextureRect.new()
+	disabled_icon.texture = Singleton.MiscCache.disabled_icon
+	disabled_icon.rect_position = Vector2(editor_rect.size.x + editor_rect.position.x, editor_rect.position.y) - disabled_icon.texture.get_size()/2
+	disabled_icon.set_as_toplevel(true)
+	disabled_icon.hide()
+	add_child(disabled_icon)

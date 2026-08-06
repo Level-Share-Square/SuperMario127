@@ -22,10 +22,12 @@ var music_nodes = [
 
 var music_ids
 var property_type_ids
+var disabled_icon
 
 func _init():
 	music_ids = preload("res://assets/music/ids.tres").ids
 	property_type_ids = preload("res://scenes/oldeditor/property_type_scenes/property_types.tres").ids
+	disabled_icon = preload("res://assets/icons/text_clear.svg")
 	
 	music_nodes.resize(music_ids.size())
 

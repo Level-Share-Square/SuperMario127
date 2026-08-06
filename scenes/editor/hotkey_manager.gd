@@ -12,6 +12,7 @@ var action_signal_array: Array = [
 	"scale_object",
 	"mirror_h",
 	"mirror_v",
+	"disable_object",
 ]
 
 signal grid_toggle
@@ -24,6 +25,7 @@ signal rotate_object
 signal scale_object
 signal mirror_h
 signal mirror_v
+signal disable_object
 
 func _unhandled_input(event: InputEvent) -> void:
 	for action_name in action_signal_array:

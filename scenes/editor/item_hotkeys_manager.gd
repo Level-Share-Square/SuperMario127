@@ -43,6 +43,23 @@ func setup_flipped_objects(multiplier: Vector2, objects) -> Dictionary:
 			"original_properties": {}
 		}
 	return affected_objects
+	
+func disable_objects(objects: Array): # Hello everybody my name is
+	var action := ChangePropertyBulkAction.new()
+	action.affected_objects = setup_disabled_objects(objects)
+	action.bulk_store_original_properties()
+	editor.action_manager.commit_action(action)
+
+func setup_disabled_objects(objects) -> Dictionary:
+	var affected_objects: Dictionary
+	for object in objects:
+		affected_objects[object] = {
+			"changed_properties": {
+				"enabled": !object.enabled
+			},
+			"original_properties": {}
+		}
+	return affected_objects
 
 
 func mirror_h():
@@ -63,3 +80,13 @@ func mirror_v():
 		flip_objects(Vector2(1, -1), editor.selected_objects)
 		return
 	flip_objects(Vector2(1, -1), hovered_objects.values())
+
+
+func disable_object():
+	var hovered_objects: Dictionary = editor.get_hovered_objects()
+	if !(editor.get_hovered_objects() or editor.selected_objects): return
+	
+	if editor.selected_objects:
+		disable_objects(editor.selected_objects)
+		return
+	disable_objects(hovered_objects.values())

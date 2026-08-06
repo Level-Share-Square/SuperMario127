@@ -1976,6 +1976,7 @@ stream = ExtResource( 55 )
 volume_db = -7.5
 bus = "Sounds"
 
+[connection signal="disable_object" from="HotkeyManager" to="HotkeyManager/ItemHotkeysManager" method="disable_object"]
 [connection signal="mirror_h" from="HotkeyManager" to="HotkeyManager/ItemHotkeysManager" method="mirror_h"]
 [connection signal="mirror_v" from="HotkeyManager" to="HotkeyManager/ItemHotkeysManager" method="mirror_v"]
 [connection signal="rotate_object" from="HotkeyManager" to="HotkeyManager/ItemHotkeysManager" method="rotate_object"]
