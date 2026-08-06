@@ -20,6 +20,7 @@ func _register_properties():
 	register_property(9, "vertical", vertical)
 	register_property(10, "parts", parts)
 	register_property(11, "stops_camera", stops_camera)
+	base_hidden_properties.append("rotation_degrees")
 
 
 ### AREA TRANSITION STUFF

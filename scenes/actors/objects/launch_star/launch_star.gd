@@ -39,6 +39,7 @@ func _register_properties():
 	register_property(4, "curve", curve)
 	register_property(5, "custom_path", curve, false)
 	register_property(6, "speed", speed)
+	base_hidden_properties.append("rotation_degrees")
 
 func invalid_curve(check : Curve2D):
 	if(!is_instance_valid(check) or check.get_point_count() == 0):
