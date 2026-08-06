@@ -56,6 +56,13 @@ func _click_left_released(event, mouse_position):
 	set_highlight_mode(false)
 	on_mouse_released()
 	
+	
+func _click_right(_event: InputEvent, _world_pos: Vector2) -> void:
+	editor.item_actions.hide_selection_actions()
+	editor.item_actions.hide_tile_selection_actions()
+	reset_bounds()
+	
+	
 func _mouse_movement(event, mouse_position):
 	var adjusted_mouse_position = get_adjusted_mouse_position()
 	if mouse_pos != adjusted_mouse_position:

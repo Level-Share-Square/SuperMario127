@@ -48,6 +48,11 @@ func _physics_process(_delta) -> void:
 	last_paused = get_tree().paused
 
 
+func _unhandled_input(event):
+	if event.is_action_pressed("switch_modes"):
+		pressed(false, true)
+
+
 func hovered() -> void:
 	is_hovered = true
 	if is_switching: return
@@ -60,12 +65,15 @@ func unhovered() -> void:
 	animation_player.play_backwards("hover_marioless" if playtesting else "hover")
 
 
-func pressed(force: bool = false) -> void:
+func pressed(force: bool = false, play_sound: bool = false) -> void:
 	if not force:
 		if is_switching: return
 		if not button.is_visible_in_tree(): return
 		if get_tree().paused: return
 		if SceneTransitions.transitioning: return
+	
+	if play_sound:
+		button.on_pressed()
 	
 	transition_rect.mouse_filter = Control.MOUSE_FILTER_STOP
 	is_switching = true

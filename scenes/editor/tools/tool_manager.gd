@@ -6,6 +6,7 @@ onready var parallax_scroll = $"%ParallaxScroll"
 onready var current_tool: EditorTool = $ObjectPaint
 
 var mouse_position: Vector2
+var is_erasing: bool
 
 signal tool_changed()
 
@@ -21,7 +22,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	mouse_position = parallax_scroll.corrected_mouse_position()
 	
 	if event is InputEventMouseButton:
-		if Input.is_action_just_pressed("place") :
+		if Input.is_action_just_pressed("place"):
 			current_tool._click_left(event, mouse_position)
 
 		if Input.is_action_just_pressed("erase"):
@@ -64,10 +65,7 @@ func _on_Tools_tool_picked(tool_name):
 			else:
 				change_tool("TilePaint")
 		"Erase":
-			if editor.selected_item is PlaceableObject:
-				change_tool("ObjectErase")
-			else:
-				change_tool("TileErase")
+			is_erasing = not is_erasing
 		"Select":
 			if editor.selected_item is PlaceableObject:
 				change_tool("%ObjectSelection")
