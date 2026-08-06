@@ -301,7 +301,6 @@ margin_bottom = 61.0
 [node name="Color" parent="ContentDivider/ContentMat/Tabs/Missions/ScrollContainer2/VBoxContainer" index="3" instance=ExtResource( 24 )]
 unique_name_in_owner = true
 margin_top = 66.0
-margin_right = 232.0
 margin_bottom = 295.0
 
 [node name="ForceLeave" parent="ContentDivider/ContentMat/Tabs/Missions/ScrollContainer2/VBoxContainer" index="4" instance=ExtResource( 21 )]

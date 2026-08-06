@@ -168,7 +168,7 @@ func load_level_area(load_area_id: int, always_reload: bool = false) -> AreaData
 
 
 func unload_level_area(unload_area_id: int) -> void:
-	loaded_areas.erase(area_id)
+	loaded_areas.erase(unload_area_id)
 
 
 # conversion

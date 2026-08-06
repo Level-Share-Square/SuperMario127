@@ -3,7 +3,7 @@ extends ScrollContainer
 
 onready var v_box_container = $VBoxContainer
 onready var new_area = $VBoxContainer/HBoxContainer/Add
-
+onready var editor = get_tree().current_scene
 
 const AREA_PANEL_SCENE = "res://scenes/editor/windows/editor_options/area_panel.tscn"
 
@@ -14,6 +14,12 @@ func _ready():
 	if CurrentLevelData.area_headers.size() >= 32:
 		new_area.disabled = true
 	reload_areas()
+	
+	yield(editor, "ready")
+	editor.action_manager.connect("action", self, "reload_areas")
+	editor.action_manager.connect("undo", self, "reload_areas")
+	editor.action_manager.connect("redo", self, "reload_areas")
+	
 
 
 func reload_areas():
@@ -50,7 +56,10 @@ func create_area():
 	if CurrentLevelData.area_headers.size() != 32:
 		var area_code = level_list_util.load_level_code_file(CurrentLevelData.DEFAULT_AREA_PATH)
 		var area = LevelCodeDeserializer.deserialize_area_header_code(area_code)
-		CurrentLevelData.area_headers.append(area)
+		
+		var action := AddAreaAction.new()
+		action.area_header = area
+		editor.action_manager.commit_action(action)
 		reload_areas()
 
 	new_area.disabled = (CurrentLevelData.area_headers.size() == 32)
@@ -58,16 +67,21 @@ func create_area():
 
 func paste_area():
 	var area_code: String = OS.get_clipboard()
+	var area_header
 	if area_code.substr(0, 9) == "AreaData":
 		var validity_checker = ValidityChecker.new()
 		area_code.erase(0, 10)
 		var area = validity_checker.decode_area(area_code)
 		for i in area.objects:
 			i["properties"].append(i["properties"].pop_front())
-		area = conversion_util.get_area_data_from_old_data(area)
-		CurrentLevelData.area_headers.append(area.header)
-	elif level_code_validator_util.validate_level_code(area_code):
-		CurrentLevelData.area_headers.append(LevelCodeDeserializer.deserialize_area_code(area_code).header)
+		area_header = conversion_util.get_area_data_from_old_data(area).header
+	elif true:
+		area_header = LevelCodeDeserializer.deserialize_area_code(area_code).header
 	else:
 		printerr("Invalid area code: ", area_code)
-	reload_areas()
+		
+	if area_header:
+		var action := AddAreaAction.new()
+		action.area_header = area_header
+		editor.action_manager.commit_action(action)
+		reload_areas()

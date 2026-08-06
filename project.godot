@@ -24,6 +24,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/editor/action_manager/action_manager.gd"
 }, {
+"base": "BaseAreaAction",
+"class": "AddAreaAction",
+"language": "GDScript",
+"path": "res://scenes/editor/action_manager/actions/add_area.gd"
+}, {
 "base": "BaseLayerAction",
 "class": "AddLayerAction",
 "language": "GDScript",
@@ -78,6 +83,11 @@ _global_script_classes=[ {
 "class": "Barrel",
 "language": "GDScript",
 "path": "res://scenes/actors/objects/barrel/barrel.gd"
+}, {
+"base": "Action",
+"class": "BaseAreaAction",
+"language": "GDScript",
+"path": "res://scenes/editor/action_manager/actions/base_area.gd"
 }, {
 "base": "BaseButton",
 "class": "BaseButtonSound",
@@ -248,6 +258,11 @@ _global_script_classes=[ {
 "class": "Decoration",
 "language": "GDScript",
 "path": "res://scenes/actors/objects/big_tree/decoration.gd"
+}, {
+"base": "BaseAreaAction",
+"class": "DeleteAreaAction",
+"language": "GDScript",
+"path": "res://scenes/editor/action_manager/actions/delete_area.gd"
 }, {
 "base": "BaseLayerAction",
 "class": "DeleteLayerAction",
@@ -1258,6 +1273,7 @@ _global_script_class_icons={
 "AccountInfo": "",
 "Action": "",
 "ActionManager": "",
+"AddAreaAction": "",
 "AddLayerAction": "",
 "AreaBoundsEditor": "",
 "AreaData": "",
@@ -1269,6 +1285,7 @@ _global_script_class_icons={
 "BGPaletteButton": "",
 "BackflipState": "",
 "Barrel": "",
+"BaseAreaAction": "",
 "BaseButtonSound": "",
 "BaseCard": "",
 "BaseLayerAction": "",
@@ -1303,6 +1320,7 @@ _global_script_class_icons={
 "CrushedState": "",
 "CurveTween": "",
 "Decoration": "",
+"DeleteAreaAction": "",
 "DeleteLayerAction": "",
 "Dialog": "",
 "DiscordActivity": "",

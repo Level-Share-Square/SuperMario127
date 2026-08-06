@@ -13,6 +13,8 @@ const foreground_id_mapper = "res://scenes/shared/background/foregrounds/ids.tre
 onready var background_preview = $"%Background"
 onready var foreground_preview = $"%Foreground"
 
+onready var area_settings = get_parent().get_parent()
+
 var id
 var area_names: Array = []
 
@@ -69,10 +71,13 @@ func switch_to_area():
 
 func delete_area():
 	if id != CurrentLevelData.area_id:
-		CurrentLevelData.area_headers.remove(id)
+		var action := DeleteAreaAction.new()
+		action.area_id = id
+		print(id)
+		area_settings.editor.action_manager.commit_action(action)
 		if CurrentLevelData.area_id > id:
 			CurrentLevelData.area_id -= 1
-		get_parent().get_parent().reload_areas()
+		area_settings.reload_areas()
 
 
 func area_renamed(new_text: String):
@@ -84,9 +89,15 @@ func area_renamed(new_text: String):
 
 func duplicate_area():
 	if CurrentLevelData.area_headers.size() != 32:
-		var area_id = CurrentLevelData.area_headers[id].duplicate(true)
-		CurrentLevelData.area_headers.append(area_id)
-		get_parent().get_parent().reload_areas()
+		var area_header = CurrentLevelData.area_headers[id].duplicate()
+		# the following line is necessary because music
+		# can't be an export var (it has 2 different types)
+		area_header.music = CurrentLevelData.area_headers[id].music
+		print(area_header.music, CurrentLevelData.area_headers[id].music)
+		var action := AddAreaAction.new()
+		action.area_header = area_header
+		area_settings.editor.action_manager.commit_action(action)
+		area_settings.reload_areas()
 
 
 func move_area_down():
@@ -104,7 +115,7 @@ func move_area_down():
 			CurrentLevelData.area_id -= 1
 			
 		# Don't re-assign the current area_id if it isn't next to the area_id we're moving.
-		get_parent().get_parent().reload_areas()
+		area_settings.reload_areas()
 
 
 func move_area_up():
@@ -120,7 +131,7 @@ func move_area_up():
 			
 			CurrentLevelData.area_id += 1
 			
-		get_parent().get_parent().reload_areas()
+		area_settings.reload_areas()
 
 
 func copy_area():

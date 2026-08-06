@@ -12,25 +12,25 @@ const DEFAULT_GRAVITY: float = 7.82
 const DEFAULT_TIMER: float = 0.0 
 
 
-var name: String
-var bounds: Rect2
+export var name: String
+export var bounds: Rect2
 
-var sky: int
-var background: int
-var background_palette: int
-var bg_autoscroll_speed: float
+export var sky: int
+export var background: int
+export var background_palette: int
+export var bg_autoscroll_speed: float
 
 # can hold either the ID for music in the files or a link to custom music
 var music
-var underwater_music: String
+export var underwater_music: String
 
-var gravity: float
-var timer: float
+export var gravity: float
+export var timer: float
 # holds the code for the entire area, so that an area can be loaded with just its metadata 
-var area_code: String
+export var area_code: String
 
-var shine_shard_count: int = 0
-var max_purples_count: int = 0
+export var shine_shard_count: int = 0
+export var max_purples_count: int = 0
 
 
 func _init(set_area_code = "", set_bounds = DEFAULT_AREA_BOUNDS, set_name = DEFAULT_AREA_NAME, set_sky = DEFAULT_AREA_SKY, set_background = DEFAULT_AREA_BACKGROUND, set_background_palette = DEFAULT_AREA_BACKGROUND_PALETTE, set_bg_autoscroll_speed = DEFAULT_BG_AUTOSCROLL_SPEED, set_gravity = DEFAULT_GRAVITY, set_timer = DEFAULT_TIMER, set_music = DEFAULT_MUSIC, set_underwater_music = "", set_shine_shard_count: int = 0, set_max_purples_count: int = 0):

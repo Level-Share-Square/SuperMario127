@@ -57,6 +57,7 @@ func on_switch():
 
 func on_used(panel: SongPanel):
 	CurrentLevelData.current_area.header.music = panel.id
+	CurrentLevelData.area_headers[CurrentLevelData.area_id].music = panel.id
 
 	if song_in_use:
 		song_in_use.disable_button(false)
