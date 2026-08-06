@@ -286,7 +286,7 @@ func set_playing(state: String) -> void:
 	activity.set_state(state)
 	var assets = activity.get_assets()
 	assets.set_large_image("sm127")
-	assets.set_large_text("0.9.0")
+	assets.set_large_text("0.10.0")
 	assets.set_small_image("capsule_main")
 	assets.set_small_text("ZONE 2 WOOO")
 	var timestamps = activity.get_timestamps()

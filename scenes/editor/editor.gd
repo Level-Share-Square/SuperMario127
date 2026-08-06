@@ -102,6 +102,7 @@ func get_hovered_objects():
 	for object in get_shared_node().get_layer(layer).object_manager.get_children():
 		if object.is_object_hovered():
 			hovered_objects.get_or_add(object.name, object)
+	return hovered_objects
 
 
 func create_tile_object(cells: Dictionary) -> ObjectData:
