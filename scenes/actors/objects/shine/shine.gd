@@ -427,7 +427,7 @@ func character_shine_dance_finished(_animation: Animation) -> void:
 			# yes, another band aid
 			yield(get_tree().create_timer(0.75), "timeout")
 			Singleton.ModeSwitcher.is_switching = false 
-			Singleton.ModeSwitcher.pressed(true)
+			Singleton.ModeSwitcher.pressed(true, true)
 			
 			# pausing disabled for same reasons as mode switcher button
 			CurrentLevelData.can_pause = true

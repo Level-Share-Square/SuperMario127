@@ -112,8 +112,8 @@ const JOY_BUTTONS: Array = [
 	"RB",
 	"LT",
 	"RT",
-	"LS",
-	"RS",
+	"LS Click",
+	"RS Click",
 	"Select",
 	"Start",
 	"Up",
@@ -127,6 +127,40 @@ const JOY_BUTTONS: Array = [
 	"Paddle 3",
 	"Paddle 4",
 	"Touchpad"
+]
+const JOY_AXIS: Array = [
+	"LS Left",
+	"LS Right",
+	
+	"LS Up",
+	"LS Down",
+	
+	"RS Left",
+	"RS Right",
+	
+	"RS Up",
+	"RS Down",
+	
+	"Axis 4-",
+	"Axis 4+",
+
+	"Axis 5-",
+	"Axis 5+",
+	
+	"LT Release",
+	"LT",
+	
+	"RT Release",
+	"RT",
+
+	"Axis 8-",
+	"Axis 8+",
+
+	"Axis 9-",
+	"Axis 9+",
+
+	"Axis 10-",
+	"Axis 10+",
 ]
 
 
@@ -149,8 +183,10 @@ static func get_singular_human_name(event: Dictionary) -> String:
 				string += UNKNOWN
 		
 		JOYPAD_MOTION:
-			var suffix = "+" if event.axis_value > 0 else "-"
-			string += "Axis " + str(event.axis) + suffix
+			var event_index: int = event.axis*2
+			if event.axis_value > 0:
+				event_index += 1
+			string += JOY_AXIS[event_index]
 	
 	return string
 

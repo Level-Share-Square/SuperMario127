@@ -13,7 +13,7 @@ onready var update_layer = $"%UpdateLayer"
 var shared
 
 func _ready():
-	update_layer.connect("button_down", self, "update_layer")
+	update_layer.connect("pressed", self, "update_layer")
 	index.connect("text_changed", self, "on_new_index")
 	shared = get_tree().current_scene.get_shared_node()
 

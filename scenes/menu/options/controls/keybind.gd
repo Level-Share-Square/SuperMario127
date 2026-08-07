@@ -8,6 +8,7 @@ onready var remapper: Control = get_node(remapper_path)
 
 ## consts
 const UNBOUND_TEXT: String = "Unbound"
+const CTRL_PREFIX: String = "Ctrl+"
 
 onready var label: Label = $HBoxContainer/Label
 onready var button: Button = $Button
@@ -17,6 +18,7 @@ onready var reset_button = $Button/Reset
 export var input_group: String
 export var input_key: String
 export var player_id: int = -1
+export var force_ctrl: bool = false
 var is_controller: bool
 
 ## visuals
@@ -53,7 +55,11 @@ func return_default_text() -> String:
 func change_button_text(new_text: String = ""):
 	if new_text == "": 
 		new_text = return_default_text()
-	button.text = new_text
+	
+	if force_ctrl and new_text != UNBOUND_TEXT and new_text != remapper.INPUT_WAIT_TEXT:
+		button.text = CTRL_PREFIX + new_text
+	else:
+		button.text = new_text
 
 
 ## label and sprite styling

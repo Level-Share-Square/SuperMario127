@@ -43,7 +43,7 @@ func _ready():
 		widget_container.hide()
 
 func _unhandled_input(event):
-	if Input.is_action_just_pressed("LMB"):
+	if Input.is_action_just_pressed("click"):
 		get_tree().set_input_as_handled()
 		widget_container.show()
 		line.get_node("path").curve.add_point(get_mouse_pos() - object.position)

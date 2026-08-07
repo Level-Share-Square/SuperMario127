@@ -8,7 +8,8 @@ onready var current_tool: EditorTool = $ObjectPaint
 var mouse_position: Vector2
 var is_erasing: bool
 
-signal tool_changed()
+signal tool_changed
+signal eraser_toggled(new_value)
 
 func _ready():
 	yield(editor, "ready")
@@ -69,7 +70,7 @@ func _on_Tools_tool_picked(tool_name):
 			else:
 				change_tool("TilePaint")
 		"Erase":
-			is_erasing = not is_erasing
+			toggle_eraser()
 		"Select":
 			if editor.selected_item is PlaceableObject:
 				change_tool("%ObjectSelection")
@@ -83,4 +84,8 @@ func _on_Tools_tool_picked(tool_name):
 			change_tool("ObjectTileLock")
 		"ObjectTrail":
 			change_tool("ObjectTrail")
-		
+
+
+func toggle_eraser():
+	is_erasing = not is_erasing
+	emit_signal("eraser_toggled", is_erasing)

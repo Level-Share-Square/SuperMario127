@@ -42,9 +42,9 @@ func toggle():
 func _ready():
 	item_label.text = ""
 	for tile_group in tiles.get_children():
-		tile_group.connect("button_down", self, "_on_group_pressed", [tile_group])
+		tile_group.connect("pressed", self, "_on_group_pressed", [tile_group])
 	for object_group in objects.get_children():
-		object_group.connect("button_down", self, "_on_group_pressed", [object_group])
+		object_group.connect("pressed", self, "_on_group_pressed", [object_group])
 	item_palettes.pressed = CurrentLevelData.editor_data.show_palettes
 				
 func _on_group_pressed(group):

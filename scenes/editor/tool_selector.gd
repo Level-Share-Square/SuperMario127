@@ -23,7 +23,7 @@ func _ready():
 	for button in item_tools.get_children():
 		if button is Button:
 			detect_tool_buttons(button)
-			button.connect("button_down", self, "on_button_pressed", [button])
+			button.connect("pressed", self, "on_button_pressed", [button])
 
 
 func on_button_pressed(button):
@@ -46,7 +46,7 @@ func detect_tool_buttons(button: Button):
 
 func _on_Tools_tool_changed():
 	for button in item_tools.get_children():
-		if button is Button:
+		if button is Button and button.name != "Erase":
 			detect_tool_buttons(button)
 			if button.name in editor.tool_manager.current_tool.name:
 				button.pressed = true

@@ -49,7 +49,7 @@ func _process(delta):
 	if !expand_button.active: return
 	if move_wheel:
 		var mouse_pos: Vector2 = get_global_mouse_position()
-		if Input.is_action_pressed("LMB"):
+		if Input.is_action_pressed("click"):
 			if circle_has_point(wheel.rect_global_position + wheel.rect_pivot_offset, wheel.rect_pivot_offset.x, mouse_pos):
 				color_selector.rect_global_position = mouse_pos - (color_selector.rect_size * color_selector.rect_scale)/2
 				update_color()
@@ -60,7 +60,7 @@ func _process(delta):
 			
 	if move_gradient:
 		var mouse_pos: Vector2 = get_global_mouse_position()
-		if Input.is_action_pressed("LMB"):
+		if Input.is_action_pressed("click"):
 			if gradient.get_global_rect().has_point(mouse_pos):
 				gradient_selector.rect_global_position.y = mouse_pos.y
 				update_color()
@@ -69,7 +69,7 @@ func _process(delta):
 			move_gradient = false
 			finish_color()
 	
-	if move_slider and Input.is_action_just_released("LMB"):
+	if move_slider and Input.is_action_just_released("click"):
 		move_slider = false
 		finish_color()
 

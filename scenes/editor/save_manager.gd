@@ -27,14 +27,14 @@ func _on_ActionManager_action():
 		tween.tween_property(save, "self_modulate", Color("ffffff"), 0.5)
 
 
-func _on_Quit_button_down():
+func quit_pressed():
 	if !unsaved_changes:
 		quit()
 	else:
 		$"%QuitConfirmWindow".toggle_window()
 
 
-func _on_Save_button_down():
+func save_pressed():
 #	CurrentLevelData.level_info.level_name = level_settings.level_name.text
 #	CurrentLevelData.level_info.level_author = level_settings.author.text
 #	CurrentLevelData.level_info.level_description = level_settings.description.text

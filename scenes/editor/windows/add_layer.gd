@@ -11,7 +11,7 @@ onready var tint = $"%Tint"
 var shared
 
 func _ready():
-	add_layer.connect("button_down", self, "add_layer")
+	add_layer.connect("pressed", self, "add_layer")
 	shared = get_tree().current_scene.get_shared_node()
 
 func add_layer():

@@ -5,7 +5,7 @@ export (Array, NodePath) var category_paths
 const INPUT_WAIT_TEXT: String = "Waiting..."
 
 onready var current_category: Control = $Gameplay
-var listening_keybind: VBoxContainer
+var listening_keybind: KeybindButton
 var is_controller: bool = false
 
 
@@ -16,6 +16,8 @@ func _ready():
 func _input(event: InputEvent):
 	if not is_instance_valid(listening_keybind): return
 	if not input_event_util.is_valid_input_event(event.get_class(), is_controller): return
+	if listening_keybind.force_ctrl and event is InputEventKey:
+		if OS.get_scancode_string(event.scancode) == "Control": return
 	
 	var action: Dictionary = input_event_util.decode_event(event)
 	if action == input_event_util.EMPTY_DICTIONARY:
@@ -57,7 +59,7 @@ func load_category(category: Container):
 			keybind.change_button_text()
 
 
-func start_listening(keybind: VBoxContainer, parent: GridContainer):
+func start_listening(keybind: KeybindButton, parent: GridContainer):
 	for child in parent.get_children():
 		if child is KeybindButton:
 			child.change_button_text()

@@ -4,6 +4,7 @@ extends Node2D
 var action_signal_array: Array = [
 	"grid_toggle",
 	"hide_hotbar",
+	"show_options",
 	"layer_menu",
 	"item_picker",
 	"choose_palette",
@@ -15,10 +16,25 @@ var action_signal_array: Array = [
 	"disable_object",
 	"last_object",
 	"last_tile",
+	"toggle_eraser",
+	"paint_tool",
+	"selection_tool",
+	"fill_tool",
+	"rect_fill_tool"
+]
+
+var modifier_action_signal_array: Array = [
+	"copy_selection",
+	"cut_selection",
+	"paste_clipboard",
+	"undo_action",
+	"redo_action",
+	"save_level"
 ]
 
 signal grid_toggle
 signal hide_hotbar
+signal show_options
 signal layer_menu
 signal item_picker
 signal choose_palette
@@ -30,9 +46,31 @@ signal mirror_v
 signal disable_object
 signal last_object
 signal last_tile
+signal toggle_eraser
+signal paint_tool
+signal selection_tool
+signal fill_tool
+signal rect_fill_tool
+
+signal copy_selection
+signal cut_selection
+signal paste_clipboard
+signal undo_action
+signal redo_action
+signal save_level
+
 
 func _unhandled_input(event: InputEvent) -> void:
 	for action_name in action_signal_array:
-		if event.is_action_pressed(action_name):
+		if not Input.is_action_pressed("ctrl_modifier") and event.is_action_pressed(action_name):
 			emit_signal(action_name)
+			get_tree().set_input_as_handled()
+			prints(action_name, "emitted")
+			break
+	
+	for action_name in modifier_action_signal_array:
+		if Input.is_action_pressed("ctrl_modifier") and event.is_action_pressed(action_name):
+			emit_signal(action_name)
+			get_tree().set_input_as_handled()
+			prints(action_name, "emitted")
 			break

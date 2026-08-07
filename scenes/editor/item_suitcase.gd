@@ -26,7 +26,7 @@ var loadouts: Dictionary = {
 func _ready():
 	selected_loadout = "A"
 	for item_button in button_container.get_children():
-		item_button.connect("button_down", self, "_on_item_button_pressed", [item_button])
+		item_button.connect("pressed", self, "_on_item_button_pressed", [item_button])
 		item_button.item = placeable_items.placeable_items[loadouts[selected_loadout][item_button.get_index()]]
 #func _process(delta):
 #	print(editor)

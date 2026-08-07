@@ -3,6 +3,7 @@ extends Node
 onready var editor = owner
 onready var shared = $"%LevelShared"
 onready var object_selection = $"%ObjectSelection"
+onready var hotbar = $"%Hotbar"
 
 func rotate_object():
 	var hovered_objects: Dictionary = editor.get_hovered_objects()
@@ -93,9 +94,11 @@ func disable_object():
 
 
 func last_object():
-	get_node("%Hotbar").select_last_object()
+	hotbar.hide_palettes()
+	hotbar.select_last_object()
 
 
 func last_tile():
-	get_node("%Hotbar").select_last_tile()
+	hotbar.hide_palettes()
+	hotbar.select_last_tile()
 

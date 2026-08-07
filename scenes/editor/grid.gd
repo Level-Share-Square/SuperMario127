@@ -21,7 +21,7 @@ func update_visibility(zoom_level: float):
 	if zoom_level > 4:
 		visible = false
 	else:
-		visible = hidden
+		visible = not hidden
 
 func _process(delta):
 	grid_repeat.motion_offset = parallax_scroll.position

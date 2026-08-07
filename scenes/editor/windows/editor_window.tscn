@@ -145,6 +145,17 @@ custom_constants/margin_top = 1
 custom_constants/margin_left = 0
 custom_constants/margin_bottom = 2
 
+[node name="WindowCorner" type="PanelContainer" parent="."]
+margin_left = 289.0
+margin_top = 188.0
+margin_right = 299.0
+margin_bottom = 198.0
+rect_min_size = Vector2( 10, 10 )
+mouse_filter = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_type_variation = "WindowCorner"
+
 [node name="Border" type="PanelContainer" parent="."]
 margin_right = 299.0
 margin_bottom = 198.0
@@ -159,12 +170,6 @@ custom_constants/margin_right = 4
 custom_constants/margin_top = 4
 custom_constants/margin_left = 4
 custom_constants/margin_bottom = 4
-
-[node name="WindowCorner" type="PanelContainer" parent="."]
-margin_right = 299.0
-margin_bottom = 198.0
-mouse_filter = 2
-theme_type_variation = "WindowCorner"
 
 [node name="Control" type="Control" parent="."]
 margin_right = 299.0

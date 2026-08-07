@@ -25,7 +25,7 @@ func _ready():
 		
 	on_mission_selected(mission_data[0])
 	
-	new_mission.connect("button_down", self, "on_new_mission_pressed")
+	new_mission.connect("pressed", self, "on_new_mission_pressed")
 	if mission_data.size() == 1: erase.disabled = true
 		
 func on_mission_selected(mission: MissionData):
@@ -107,7 +107,7 @@ func refresh_buttons():
 		button_sound.hint_tooltip = button_sound.text
 		button_sound.clip_text = true
 		
-		button_sound.connect("button_down", self, "on_mission_selected", [mission])
+		button_sound.connect("pressed", self, "on_mission_selected", [mission])
 		mission_button_container.add_child(button_sound)
 
 func on_new_mission_pressed():

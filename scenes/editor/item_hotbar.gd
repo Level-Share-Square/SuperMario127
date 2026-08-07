@@ -42,14 +42,14 @@ func _ready():
 	bottom_row.get_children()[0].pressed = true
 	
 	for item_button in button_container.get_children():
-		item_button.connect("button_down", self, "_on_item_button_pressed", [item_button])
+		item_button.connect("pressed", self, "_on_item_button_pressed", [item_button])
 		item_button.change_item(placeable_items.placeable_items[loadouts[selected_loadout][item_button.get_index()]])
 	
 	for loadout_button in loadout_container.get_children():
 		if "Loadout" in loadout_button.name:
-			loadout_button.connect("button_down", self, "_on_loadout_pressed", [loadout_button])
+			loadout_button.connect("pressed", self, "_on_loadout_pressed", [loadout_button])
 		else:
-			loadout_button.connect("button_down", self, "_on_palettes_pressed")
+			loadout_button.connect("pressed", self, "_on_palettes_pressed")
 	
 	if CurrentLevelData.editor_data.loadouts != []:
 		loadouts = CurrentLevelData.editor_data.loadouts
@@ -172,8 +172,7 @@ func select_last_object():
 	if editor.selected_item is PlaceableObject: return
 	for button in bottom_row.get_children():
 		if button.item == last_selected_object:
-			button.emit_signal("button_down")
-			button.emit_signal("button_up")
+			button.emit_signal("pressed")
 			button.pressed = true
 			return
 	on_item_selected(last_selected_object)
@@ -182,8 +181,7 @@ func select_last_tile():
 	if editor.selected_item is PlaceableTile: return
 	for button in bottom_row.get_children():
 		if button.item == last_selected_tile:
-			button.emit_signal("button_down")
-			button.emit_signal("button_up")
+			button.emit_signal("pressed")
 			button.pressed = true
 			return
 	on_item_selected(last_selected_tile)
@@ -222,10 +220,14 @@ func _on_palettes_pressed():
 			palette_button.hide()
 
 
-func palette_selected(palette):
+func hide_palettes():
 	bottom_row.show()
 	palette_container.hide()
 	palettes.pressed = false
+
+
+func palette_selected(palette):
+	hide_palettes()
 	
 	for item_button in bottom_row.get_children():
 		if item_button.pressed:

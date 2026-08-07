@@ -1,6 +1,5 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://scenes/actors/mario/animation_frames.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://assets/sounds/hover.wav" type="AudioStream" id=3]
 [ext_resource path="res://scenes/menu/button_scripts/button_hover-vertical.gd" type="Script" id=4]
@@ -61,9 +60,7 @@ rect_min_size = Vector2( 24, 0 )
 [node name="Sprite" type="AnimatedSprite" parent="HBoxContainer/Action"]
 position = Vector2( 12, -2 )
 scale = Vector2( 0.75, 0.75 )
-frames = ExtResource( 1 )
 animation = "movingIn"
-frame = 11
 playing = true
 
 [node name="Button" type="Button" parent="."]

@@ -19,8 +19,8 @@ func _ready():
 	for layer_data in shared.layers:
 		add_layer(layer_data)
 	shared.connect("layer_added", self, "add_layer")
-	new_layer.connect("button_down", self, "new_layer", [true])
-	new_decor.connect("button_down", self, "new_layer", [false])
+	new_layer.connect("pressed", self, "new_layer", [true])
+	new_decor.connect("pressed", self, "new_layer", [false])
 	shared.connect("found_origin", self, "select_default")
 	
 	yield(editor, "ready")

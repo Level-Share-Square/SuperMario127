@@ -34,7 +34,7 @@ func _ready():
 		panel.connect_use_button(self)
 
 	set_preset(is_preset)
-	switch_button.connect("button_down", self, "on_switch")
+	switch_button.connect("pressed", self, "on_switch")
 		
 func set_preset(value: bool) -> void:
 	if value:

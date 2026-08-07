@@ -13,8 +13,20 @@ var sim_pos: Vector2
 
 signal zoom_changed(zoom_level)
 
+var held_actions: Dictionary = {
+	"editor_left": "left_held",
+	"editor_right": "right_held",
+	"editor_up": "up_held",
+	"editor_down": "down_held",
+	"speed_up_camera": "speedup_held"
+}
+
+var left_held: bool
+var right_held: bool
+var up_held: bool
+var down_held: bool
 var speedup_held: bool
-var is_moving: bool
+
 
 func _ready():
 	position = Vector2(288, 840)
@@ -30,10 +42,11 @@ func _unhandled_input(event):
 	elif event.is_action_pressed("zoom_in"):
 		add_zoom_level(-zoom_amount)
 	
-	if event.is_action_pressed("speed_up_camera"):
-		speedup_held = true
-	if event.is_action_released("speed_up_camera"):
-		speedup_held = false
+	for held_action in held_actions.keys():
+		if event.is_action_pressed(held_action):
+			self[held_actions[held_action]] = true
+		if event.is_action_released(held_action):
+			self[held_actions[held_action]] = false
 
 
 func _physics_process(delta):
@@ -54,11 +67,10 @@ func camera_movement(delta: float):
 	var editor_ui: Control = get_node("%EditorUI")
 	
 	var move_speed = speed * 2 if speedup_held else speed
-	var direction := Input.get_vector("editor_left", "editor_right", "editor_up", "editor_down")
-	
-	if is_instance_valid(editor_ui.get_focus_owner()):
-		move_speed = 0
-	
+	var direction = Vector2.ZERO
+	direction.x = int(right_held) - int(left_held)
+	direction.y = int(down_held) - int(up_held)
+	direction = direction.normalized()
 	
 	last_pos = position
 	sim_pos += direction * move_speed * 60 * delta
