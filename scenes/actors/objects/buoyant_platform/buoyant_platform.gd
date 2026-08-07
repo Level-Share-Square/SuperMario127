@@ -64,6 +64,7 @@ func _ready():
 	if !is_enabled_and_on_ground():
 		collision_shape.disabled = true
 		
+	rigidbody.init_physics()
 	update_parts()
 
 

@@ -11,10 +11,10 @@ var num_shapes = 0
 export var float_force : float = 400.0
 
 
-func _ready():
+func init_physics():
 	shape = collision.shape
 	var parent = get_parent()
-	if parent.mode != 1 and parent.physics_enabled:
+	if parent.mode != 1 and parent.physics_enabled and parent.is_on_ground_layer():
 		num_shapes = parent.parts + 1
 		sleeping = false
 		point_area = buoyancy_point.instance()
@@ -27,8 +27,8 @@ func _ready():
 		
 	else:
 		mode = MODE_STATIC
-	
-		
+
+
 func _integrate_forces(state):
 	#if linear_velocity == Vector2.ZERO:
 		#linear_velocity = Vector2(0, 98)
