@@ -1977,6 +1977,8 @@ bus = "Sounds"
 [connection signal="scale_object" from="HotkeyManager" to="HotkeyManager/ItemHotkeysManager" method="scale_object"]
 [connection signal="selection_tool" from="HotkeyManager" to="UI/UIContainer/EditorUI/Middle/Tools/VBoxContainer/ItemTools/Select" method="emit_signal" binds= [ "pressed" ]]
 [connection signal="show_options" from="HotkeyManager" to="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/PanelContainer/Settings/View" method="emit_signal" binds= [ "pressed" ]]
+[connection signal="switch_item" from="HotkeyManager" to="HotkeyManager/ItemHotkeysManager" method="switch_item"]
+[connection signal="switch_loadout" from="HotkeyManager" to="HotkeyManager/ItemHotkeysManager" method="switch_loadout"]
 [connection signal="toggle_eraser" from="HotkeyManager" to="UI/UIContainer/EditorUI/Middle/Tools/VBoxContainer/ItemTools/Erase" method="emit_signal" binds= [ "pressed" ]]
 [connection signal="undo_action" from="HotkeyManager" to="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/Actions/HBoxContainer/Undo" method="emit_signal" binds= [ "pressed" ]]
 [connection signal="eraser_toggled" from="ZIndex/Tools" to="UI/UIContainer/EditorUI/Middle/Tools/VBoxContainer/ItemTools/Erase" method="update_button"]
@@ -2002,4 +2004,3 @@ bus = "Sounds"
 [connection signal="pressed" from="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/Actions/HBoxContainer/LayerPicker" to="UI/UIContainer/EditorUI/Middle/Tools" method="toggle_visible"]
 [connection signal="tool_picked" from="UI/UIContainer/EditorUI/Middle/Tools" to="ZIndex/Tools" method="_on_Tools_tool_picked"]
 [connection signal="pressed" from="UI/UIContainer/EditorUI/Bottom/Hotbar/ItemPickerButton/Button" to="UI/UIContainer/ItemPickerPanel" method="toggle"]
-[connection signal="screen_opened" from="Options/ScreenManager/Options" to="Options/ScreenManager/Options/Subscreens/Controls/VBoxContainer/Devices" method="screen_opened"]

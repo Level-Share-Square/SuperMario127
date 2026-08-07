@@ -20,7 +20,7 @@ var active_tool_hotkey: String
 func _ready():
 	for node in button_container.get_children():
 		if node is SelectionToolButton:
-			node.connect("pressed", self, "button_pressed", [node])
+			node.connect("button_down", self, "button_pressed", [node])
 	properties_button.connect("pressed", self, "properties_pressed")
 
 func start_tool_hotkey(action_name: String):
