@@ -20,7 +20,8 @@ func _register_properties():
 	register_property(5, "tint", tint, true)
 
 func _draw() -> void:
-	draw_rect(editor_rect.grow(1), editor_border_color, false, 2)
+	if get_tree().current_scene.mode == 1:
+		draw_rect(editor_rect.grow(1), editor_border_color, false, 2)
 
 func set_tiles():
 	for pos in tile_data.used_tiles:
@@ -29,7 +30,7 @@ func set_tiles():
 		if is_air(tile):
 			continue
 		tile_map.set_cellv(pos, tile_util.get_real_tile_set_id(tile[0], tile[1], tile[2]))
-		print(tile_map.get_cellv(pos))
+
 	tile_map.update_bitmask_region()
 	tile_map.update_dirty_quadrants()
 	var used_rect: Rect2 = tile_map.get_used_rect()
@@ -42,7 +43,6 @@ func is_air(tile_data: Array):
 	return tile_data[0] <= 0 or tile_data[1] < 0 or tile_data[2] < 0
 
 func property_changed(key, value):
-	print(key, value)
 	if key == "tint":
 		tile_map.modulate = value
 

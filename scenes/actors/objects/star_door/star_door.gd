@@ -31,7 +31,6 @@ var palette_dict = {
 	4: "plank"
 }
 
-var current_level_info : LevelInfo
 var required_amount := 1
 var required_key: String
 var collectible := "shine"
@@ -63,12 +62,18 @@ func _register_properties() -> void:
 	register_property(9, "level_path", level_path)
 
 	register_property(10, "collectible", collectible)
-	set_property_override("collectible", PropertyTab.OverrideTypes.ENUM, ["Shines", "Star Coins", "Coins", "Star Bits", "Key", "Empty"])
+	set_property_override("collectible", PropertyTab.OverrideTypes.DROPDOWN, [self, "get_collectible_args"])
 	register_property(11, "required_amount", required_amount)
 	register_property(12, "required_key", required_key)
 	register_property(13, "insufficient_text", insufficient_text)
 	register_property(14, "is_single", is_single, false)
 
+func get_collectible_args():
+	var collectible_names: Array = ["Shines", "Star Coins", "Coins", "Star Bits", "Key", "Empty"]
+	var collectibles: Dictionary = {}
+	for i in collectible_names.size():
+		collectibles[possible_coll[i]] = collectible_names[i]
+	return collectibles
 
 func _on_property_changed(key, value):
 	if key == "collectible":
@@ -176,25 +181,25 @@ func open_menu_ui(character):
 	get_tree().get_current_scene().get_node("%SignText").open(text, self, character)
 
 func update_collectible_counts():
-#	current_level_info = CurrentLevelData.level_info
-#	match(collectible):
-#		"shine":
-#			collectible_count = current_level_info.collected_shines.values().count(true)
-#		"star coin":
-#			collectible_count = current_level_info.collected_star_coins.values().count(true)
-#		"coin":
-#			pass
-#		"star bit":
-#			pass
-#		_:
-#			collectible_count = current_level_info.collected_shines.values().count(true)
-#
-#	if collectible == "shine" or "star coin" and CurrentLevelData.is_playing_hub_level():
-#		var total_dict: Dictionary = CurrentLevelData.get_meta_collectibles()
-#		if collectible == "shine":
-#			collectible_count = total_dict.get("collected_shines", 0)
-#		elif collectible == "star_coin":
-#			collectible_count = total_dict.get("collected_star_coins", 0)
+	var save_data: LevelSaveData = CurrentLevelData.save_data
+	match(collectible):
+		"shine":
+			collectible_count = save_data.get_completed_mission_count()
+		"star coin":
+			collectible_count = save_data.get_collected_star_coin_count()
+		"coin":
+			pass
+		"star bit":
+			pass
+		_:
+			collectible_count = save_data.get_completed_mission_count()
+
+	if collectible == "shine" or "star coin" and CurrentLevelData.is_playing_hub_level():
+		var total_dict: Dictionary = CurrentLevelData.get_meta_collectibles()
+		if collectible == "shine":
+			collectible_count = total_dict.get("collected_shines", 0)
+		elif collectible == "star_coin":
+			collectible_count = total_dict.get("collected_star_coins", 0)
 	pass
 
 func _ready() -> void:

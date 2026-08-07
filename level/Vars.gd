@@ -131,7 +131,7 @@ func activate_shine(id: String):
 	activated_shine_ids.append(id)
 
 
-func deactivate_shine(id: int):
+func deactivate_shine(id: String):
 	if !(id in activated_shine_ids):
 		return
 	

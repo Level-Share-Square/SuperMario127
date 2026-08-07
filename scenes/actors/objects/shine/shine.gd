@@ -88,10 +88,9 @@ func _register_properties() -> void:
 	register_property(4, "activated", activated, true)
 	register_property(5, "red_coins_activate", red_coins_activate, true)
 	register_property(6, "shine_shards_activate", shine_shards_activate, true)
-	register_property(7, "color", color, true)
-	register_property(8, "mission_uuid", mission_uuid, true)
-	register_property(9, "required_purples", required_purples, true)
-	register_property(10, "activation_tag", activation_tag, true)
+	register_property(7, "mission_uuid", mission_uuid, true)
+	register_property(8, "required_purples", required_purples, true)
+	register_property(9, "activation_tag", activation_tag, true)
 	
 	set_property_override("mission_uuid", PropertyTab.OverrideTypes.DROPDOWN, [self, "get_mission_args"])
 
@@ -103,7 +102,7 @@ func get_mission_args() -> Dictionary:
 
 func _ready() -> void:
 	send_score = true
-	
+	if mission_uuid: update_shine_properties("mission_uuid", mission_uuid)
 	if mode != 1: # not in edit mode
 		if required_purples > 0:
 			purple_starbits_activate = true
@@ -116,6 +115,8 @@ func _ready() -> void:
 			activated = false
 		unpause_timer.wait_time = UNPAUSE_TIMER_LENGTH
 		
+		var _connect = area.connect("body_entered", self, "collect")
+		
 		if activated:
 			animation_player.play("active")
 			ambient_sound.playing = !is_blue
@@ -124,22 +125,27 @@ func _ready() -> void:
 		
 		# if the shine is collected, make it blue 
 		# (collected_shines is a Dictionary where the key is the shine id and the value is a bool)
-#		if not Singleton.ModeSwitcher.visible:
-#			var collected_shines = CurrentLevelData.level_info.collected_shines
-#
-#			# Get the value, returning false if the key doesn't exist
-#			is_blue = collected_shines.get(str(id), false)
+		if not Singleton.ModeSwitcher.visible:
+
+			# Get the value, returning false if the key doesn't exist
+			is_blue = CurrentLevelData.save_data.is_mission_complete(mission_uuid)
 		if is_blue:
 			vector_rays.color = Color.blue
 	else:
 		animation_player.play("RESET")
 	
 	vector_rays.visible = do_kick_out and !is_blue
-	var _connect = connect("property_changed", self, "update_color")
-	update_color("color", color)
-	
+	var _connect = connect("property_changed", self, "update_shine_properties")
 	if activation_tag != "":
 		add_to_group("tag_shine_%s" % activation_tag.to_lower())
+
+func update_shine_properties(key: String, value) -> void:
+	if key == "mission_uuid":
+		var mission_data: MissionData = CurrentLevelData.level_metadata.collectible_data.get_mission_by_uuid(value)
+
+		do_kick_out = mission_data.shine_force_leave
+		update_color("color", mission_data.shine_color)
+		title = mission_data.shine_name
 
 #
 #func on_place():
@@ -150,6 +156,7 @@ func _ready() -> void:
 
 func update_color(key, value):
 	if key == "color":
+		color = value
 		if !is_blue:
 			animated_sprite.frames = normal_frames if do_kick_out else pocket_frames
 			animated_sprite.self_modulate = WHITE_COLOR
@@ -301,7 +308,7 @@ func deactivate_shine(do_animation: bool) -> void:
 	animation_player.play("disappear")
 	
 	activated = false
-#	CurrentLevelData.vars.deactivate_shine(id)
+	CurrentLevelData.vars.deactivate_shine(mission_uuid)
 
 
 # Updates the ambient noise appropriately depending on if the shine is active and not collected prior.
@@ -356,25 +363,21 @@ func collect(body: PhysicsBody2D) -> void:
 		collected = true
 		visible = false
 
-#		if not Singleton.ModeSwitcher.visible:
-#			var is_new_record: bool = CurrentLevelData.level_info.is_new_record(id)
-#
-#			score_from_before = CurrentLevelData.time_score
-#			CurrentLevelData.level_info.set_shine_collected(id, false)
-#			CurrentLevelData.level_info.update_time_and_coin_score(id, CurrentLevelData.selected_file > -2)
-#			CurrentLevelData.stop_tracking_time_score()
-#			if !do_kick_out:
-#				var level_info = CurrentLevelData.level_info
-#				var new_shine_id = level_info.selected_shine + 1
-#				if new_shine_id < level_info.shine_details.size():
-#					level_info.selected_shine = new_shine_id
-#				get_tree().get_current_scene().get_node("%PauseController").emit_signal("shine_collected")
-#			elif CurrentLevelData.is_playing_campaign():
-#				CurrentLevelData.shine_kickout_data = {
-#					"title": title,
-#					"time_score": score_from_before,
-#					"new_record": is_new_record
-#				}
+		if not Singleton.ModeSwitcher.visible:
+			var is_new_record: bool = CurrentLevelData.save_data.is_new_record(mission_uuid)
+
+			score_from_before = CurrentLevelData.time_score
+			CurrentLevelData.save_data.set_mission_complete(mission_uuid, title, false)
+			CurrentLevelData.save_data.update_time_and_coin_score(mission_uuid, CurrentLevelData.selected_file > -2)
+			CurrentLevelData.pause_time_score()
+			if !do_kick_out:
+				get_tree().get_current_scene().get_node("%PauseController").emit_signal("shine_collected")
+			elif CurrentLevelData.is_playing_campaign():
+				CurrentLevelData.shine_kickout_data = {
+					"title": title,
+					"time_score": score_from_before,
+					"new_record": is_new_record
+				}
 
 func start_shine_dance() -> void:
 	character.set_state_by_name("NoActionState", get_physics_process_delta_time())
@@ -470,7 +473,7 @@ func restore_control(_animation: String, character) -> void:
 	timer_manager.pause_resume_timer("area_timer", false)
 	
 	# to prevent cheese on other shine time scores
-	CurrentLevelData.start_tracking_time_score()
+	CurrentLevelData.unpause_time_score()
 	CurrentLevelData.time_score = score_from_before
 	
 	Singleton.Music.stop_temporary_music()

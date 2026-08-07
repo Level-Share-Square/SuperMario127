@@ -49,7 +49,7 @@ func _ready():
 	for shine in shine_details:
 		shine = shine as MissionData
 		var shine_id: String = shine["mission_uuid"]
-		var is_collected = false
+		var is_collected = CurrentLevelData.save_data.is_mission_complete(shine_id)
 		if !is_collected && !final_select_shine && !shine_id in scrollable_shines:
 			scrollable_shines.append(shine_id)
 			final_select_shine = true
@@ -60,7 +60,7 @@ func _ready():
 	for i in range(shine_details.size()):
 		var end: bool = false
 		
-		var is_collected = false
+		var is_collected = CurrentLevelData.save_data.is_mission_complete(shine_details[i]["mission_uuid"])
 		if used_shine_ids.has(shine_details[i]["mission_uuid"]):
 			continue
 		if !shine_details[i]["mission_show_in_menu"]:
@@ -77,6 +77,7 @@ func _ready():
 		var shine_sprite = SHINE_SPRITE_SCENE.instance()
 		shine_sprites.append(shine_sprite)
 		shine_details_indices.append(i)
+		add_child(shine_sprite)
 		
 		# make non-kickout shines turn the other way
 		if "shine_force_leave" in shine_details[i]:
@@ -100,11 +101,10 @@ func _ready():
 			shine_sprite.make_blue()
 		else:
 			# Shine color is stored as rgba32 from a json, and json converts stuff to float so it has to be converted twice
-			shine_sprite.set_color(Color(int(shine_details[i]["shine_color"])))
+			shine_sprite.set_color(shine_details[i]["shine_color"])
 		
 		shine_index += 1
 		shine_sprite.add_to_group("shine_sprites")
-		add_child(shine_sprite)
 		
 		if end:
 			break

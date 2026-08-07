@@ -224,12 +224,12 @@ static func deserialize_mission_datas_code(code: String) -> Array:
 
 static func deserialize_star_coin_datas_code(code: String) -> Array:
 	var star_coin_codes = LevelCodeTokenizer.get_outermost_brackets(code)
-	
+	print(star_coin_codes)
 	var star_coin_datas: Array = []
 	for star_coin_code in star_coin_codes:
 		var star_coin_data: StarCoinData = StarCoinData.new()
 		var vars: Array = deserialize_datas_code(star_coin_code)
-		
+
 		star_coin_data.star_coin_uuid = set_or_use_default_value(vars, 0, star_coin_data.star_coin_uuid)
 		star_coin_data.star_coin_hint = set_or_use_default_value(vars, 1, star_coin_data.star_coin_hint)
 		star_coin_data.star_coin_color = set_or_use_default_value(vars, 2, star_coin_data.star_coin_color)

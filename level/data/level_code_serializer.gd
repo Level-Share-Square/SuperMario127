@@ -100,7 +100,6 @@ static func serialize_star_coins(star_coin_data: Array) -> String:
 		)
 		
 		code += star_coin_code
-	
 	return wrap_code_in_brackets(code)
 
 

@@ -10,6 +10,7 @@ onready var spawn_area_id = $"%SpawnArea"
 onready var spawn_teleporter_tag = $"%TeleporterTag"
 onready var mission_show_in_menu = $"%ShowInMenu"
 onready var new_mission = $"%NewMission"
+onready var erase = $"%Erase"
 
 onready var editor: Editor = get_tree().current_scene
 
@@ -25,6 +26,7 @@ func _ready():
 	on_mission_selected(mission_data[0])
 	
 	new_mission.connect("button_down", self, "on_new_mission_pressed")
+	if mission_data.size() == 1: erase.disabled = true
 		
 func on_mission_selected(mission: MissionData):
 	
@@ -113,4 +115,11 @@ func on_new_mission_pressed():
 	CurrentLevelData.level_metadata.collectible_data.mission_data.append(new_mission_data)
 	on_mission_selected(new_mission_data)
 	refresh_buttons()
+	erase.disabled = false
 	
+func erase_mission():
+	if mission_data.size() == 1: return
+	mission_data.erase(selected_mission)
+	on_mission_selected(mission_data[0])
+	refresh_buttons()
+	if mission_data.size() == 1: erase.disabled = true

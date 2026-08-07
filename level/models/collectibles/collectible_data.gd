@@ -22,3 +22,14 @@ func get_shine_count() -> int:
 
 func get_star_coin_count() -> int:
 	return star_coin_data.size()
+
+func get_mission_by_uuid(uuid: String) -> MissionData:
+	for mission in mission_data:
+		if mission.mission_uuid == uuid:
+			return mission
+	return null
+	
+func add_star_coin() -> String:
+	var data := StarCoinData.new(uuid_util.v4(), "", Color.white)
+	star_coin_data.append(data)
+	return data.star_coin_uuid

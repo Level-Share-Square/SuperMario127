@@ -11,34 +11,31 @@ onready var area : Area2D = $Area2D
 onready var audio_player : AudioStreamPlayer = $AudioStreamPlayer
 onready var animation_player : AnimationPlayer = $AnimationPlayer
 
-var id : int = 0
+var uuid: String = ""
 var collected := false
 var is_blue := false
 
 #func _set_properties():
-#	savable_properties = ["id"]
+#	savable_properties = ["uuid"]
 #	editable_properties = []
 
 func _register_properties():
-	register_property(4, "id", id, false)
+	register_property(4, "uuid", uuid, false)
 
 func _ready() -> void:
-#	if layer == middle:
-#		var _connect = area.connect("body_entered", self, "collect")
-
-#	if not Singleton.ModeSwitcher.visible:
-#		var collected_star_coins = CurrentLevelData.level_info.collected_star_coins
-#		# Get the value, returning false if the key doesn't exist
-#		is_blue = collected_star_coins.get(str(id), false)
+	if not Singleton.ModeSwitcher.visible:
+		# Get the value, returning false if the key doesn't exist
+		is_blue = CurrentLevelData.save_data.is_star_coin_collected(uuid)
 
 	update_color()
 	anim_sprite.play("default")
+	if not uuid:
+		uuid = CurrentLevelData.level_metadata.collectible_data.add_star_coin()
+		set_property("uuid", uuid, true)
 
-func on_place():
-	pass
-#	CurrentLevelData.set_star_coin_ids()
-#	id = object_data.properties[6]
-#	register_property("id", id)
+func _object_ready():
+	._object_ready()
+	var _connect = area.connect("body_entered", self, "collect")
 
 func update_color():
 	if !is_blue:
@@ -51,8 +48,8 @@ func update_color():
 
 func collect(body : PhysicsBody2D) -> void:
 	if is_enabled_and_on_ground() and !collected and (body is Character):
-#		if not Singleton.ModeSwitcher.visible:
-#			CurrentLevelData.level_info.set_star_coin_collected(id, CurrentLevelData.selected_file > -2)
+		if not Singleton.ModeSwitcher.visible:
+			CurrentLevelData.save_data.set_star_coin_collected(uuid, CurrentLevelData.selected_file > -2)
 
 		collected = true
 

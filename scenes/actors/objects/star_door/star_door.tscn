@@ -39,6 +39,3 @@ animation = "wood_shine"
 
 [node name="VisibilityEnabler2D" parent="." index="7"]
 pause_animated_sprites = false
-
-[connection signal="body_entered" from="Area2D" to="." method="body_entered"]
-[connection signal="body_exited" from="Area2D" to="." method="body_exited"]
