@@ -117,7 +117,8 @@ func play_custom_underwater(song_stream):
 		underwater_timer.connect("timeout", self, "on_underwater_loop_end_reached")
 	else:
 		underwater_timer.stop()
-		
+
+
 func play_custom_normal(song_stream):
 	if get_tree().get_current_scene().mode != 2:
 		self.stream = song_stream
@@ -268,13 +269,15 @@ func on_loop_end_reached():
 	timer.start()
 	stop()
 	play(loop)
-	
+
+
 func on_underwater_loop_end_reached():
 	underwater_timer.wait_time = underwater_loop_end - underwater_loop
 	underwater_timer.stop()
 	underwater_timer.start()
 	water_music_player.stop()
 	water_music_player.play(underwater_loop)
+
 
 func change_song(old_setting, music_setting) -> void:
 	var song
