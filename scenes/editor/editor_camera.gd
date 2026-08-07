@@ -37,13 +37,33 @@ func _ready():
 
 func _unhandled_input(event: InputEvent):
 	var zoom_amount = 0.25
+	var scroll_zoom_amount = 0.125
 	if Input.is_action_pressed("8_pixel_lock"):
-		zoom_amount = 0.05
+		zoom_amount = 0.15
 	
 	if event.is_action_pressed("zoom_out"):
 		add_zoom_level(zoom_amount)
 	elif event.is_action_pressed("zoom_in"):
 		add_zoom_level(-zoom_amount)
+	
+	if Input.is_action_pressed("ctrl_modifier"):
+		var is_zooming: bool
+		var working_zoom: float
+		if event.is_action_pressed("scroll_down"):
+			is_zooming = true
+			working_zoom = scroll_zoom_amount
+		if event.is_action_pressed("scroll_up"):
+			is_zooming = true
+			working_zoom = -scroll_zoom_amount
+		
+		if is_zooming:
+			var mouse_pos_before: Vector2 = get_global_mouse_position()
+			add_zoom_level(working_zoom)
+			# sorry silver, this really doesn't work with tweens
+			zoom = Vector2(zoom_level, zoom_level)
+			sim_pos += mouse_pos_before - get_global_mouse_position()
+			position = sim_pos
+	
 	
 	for held_action in held_actions.keys():
 		if event.is_action_pressed(held_action):
