@@ -27,7 +27,7 @@ func init_physics():
 		
 	else:
 		mode = MODE_STATIC
-
+	
 
 func _integrate_forces(state):
 	#if linear_velocity == Vector2.ZERO:
