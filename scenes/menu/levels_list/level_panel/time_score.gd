@@ -26,7 +26,7 @@ func _ready():
 	
 	# Shine color is stored as rgba32 from a json, and json converts stuff to float so it has to be converted twice
 	shine_sprite.frames = FRAMES_NORMAL if shine_detail.do_kick_out else FRAMES_POCKET
-	var shine_color: Color = Color(int(shine_detail.color))
+	var shine_color: Color = shine_detail.color
 	if shine_color != Color.yellow:
 		shine_recolorable.frames = FRAMES_RECOLORABLE if shine_detail.do_kick_out else FRAMES_POCKET_RECOLORABLE
 		shine_recolorable.self_modulate = shine_color

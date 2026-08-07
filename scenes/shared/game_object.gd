@@ -193,6 +193,14 @@ func _editor_physics_process(delta: float) -> void:
 	pass
 
 
+func _object_removed(free: bool) -> void:
+	pass
+
+
+func _object_restored() -> void:
+	pass
+
+
 func _register_properties():
 	pass
 

@@ -328,6 +328,7 @@ static func get_level_metadata_from_old_data(level_data) -> LevelMetadata:
 static func get_collectible_data_from_old_data(level_data) -> CollectibleData:
 	var mission_datas: Array = []
 	var star_coin_datas: Array = []
+	var used_mission_datas: Array = []
 	
 	var SHINE_ID: int = 2
 	var STAR_COIN_ID: int = 52
@@ -356,12 +357,12 @@ static func get_collectible_data_from_old_data(level_data) -> CollectibleData:
 				object.properties[6] = properties[9]
 				object.properties[7] = properties[10]
 				object.properties[8] = properties[11]
-				object.properties[9] = properties[12]
-				object.properties[10] = mission_data.mission_uuid
-				object.properties[11] = 0 if properties.size() <= 15 else properties[15]
-				object.properties[12] = ""
+				object.properties[9] = mission_data.mission_uuid
+				object.properties[10] = 0 if properties.size() <= 15 else properties[15]
+				object.properties[11] = ""
 				
 				mission_datas.append(mission_data)
+				used_mission_datas.append(mission_data.mission_uuid)
 			elif object.type_id == STAR_COIN_ID:
 				var star_coin_data: StarCoinData = StarCoinData.new(
 					uuid_util.v4(),
@@ -373,7 +374,7 @@ static func get_collectible_data_from_old_data(level_data) -> CollectibleData:
 				
 				star_coin_datas.append(star_coin_data)
 	
-	return CollectibleData.new(mission_datas, star_coin_datas)
+	return CollectibleData.new(mission_datas, star_coin_datas, 0, used_mission_datas)
 
 
 static func get_area_data_from_old_data(old_area: AreaDataOld) -> AreaData:
@@ -454,9 +455,9 @@ static func get_new_area_code(header: AreaHeader, old_area: AreaDataOld) -> Area
 		var object_layer: int = object_layer_map[old_object.properties.pop_at(5)]
 		var position: Vector2 = old_object.properties.pop_at(0)
 		
-#		if old_object.type_id == 14: # sign
-#			if old_object.properties[5] == true: # is background
-#				object_layer = 0
+		if old_object.type_id == 14: # sign
+			if old_object.properties[5] == true: # is background
+				object_layer = 0
 		
 		var property_dictionary: Dictionary = {}
 		for i in old_object.properties.size():

@@ -10,7 +10,7 @@ var level_folder: String
 
 var _total_mission_count: int = -1
 var _total_star_coins: int = -1
-var _completed_missions: Dictionary = {} # Mission ID: Mission name
+var _completed_missions: Array = []
 var _collected_star_coins: PoolStringArray = [] # element is the star coin uuid
 var _time_scores: Dictionary = {} # time_scores should probably be stored as the sum of delta while playing, keys are same as completed_missions
 var _activated_fludds: Array = [false, false, false]
@@ -28,7 +28,7 @@ func _init(s_level_id: String, s_level_folder: String) -> void:
 	load_save_from_dictionary(level_list_util.load_level_save_file(get_save_path()))
 
 func reset_save_data():
-	_completed_missions = {}
+	_completed_missions = []
 	_collected_star_coins = []
 	_time_scores = {}
 	_activated_fludds = [false, false, false]
@@ -56,8 +56,8 @@ func load_save_from_dictionary(save_dictionary: Dictionary):
 		load_save_0_1_0(convert_save_to_0_1_0(save_dictionary))
 
 
-func set_mission_complete(mission_uuid: String, mission_name: String, save_to_disk: bool = true) -> void:
-	_completed_missions[mission_uuid] = mission_name
+func set_mission_complete(mission_uuid: String, save_to_disk: bool = true) -> void:
+	_completed_missions.append(mission_uuid)
 	if save_to_disk:
 		level_list_util.save_level_save_file(get_save_file_dictionary(), get_save_path())
 
@@ -86,7 +86,7 @@ func get_time_score_dictionary() -> Dictionary:
 	return _time_scores
 	
 func get_time_score(mission_uuid: String):
-	return _time_scores[mission_uuid]
+	return _time_scores.get(mission_uuid, 0)
 
 func update_time_and_coin_score(mission_uuid: String, save_to_disk: bool = true):
 	var new_time_score = CurrentLevelData.time_score
@@ -141,7 +141,7 @@ func all_star_coins_collected() -> bool:
 	return _collected_star_coins.size() == get_total_star_coin_count()
 	
 
-func get_completed_missions() -> Dictionary:
+func get_completed_missions() -> Array:
 	return _completed_missions
 
 

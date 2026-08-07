@@ -56,6 +56,7 @@ static func serialize_collectible_data(collectible_data: CollectibleData) -> Str
 	code += serialize_data_array([
 		collectible_data.red_coin_count
 	])
+	code += serialize_data_array(collectible_data.used_mission_data)
 	
 	return wrap_code_in_brackets(code)
 
