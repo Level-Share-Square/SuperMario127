@@ -379,7 +379,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/oldeditor/editor_hitbox.gd"
 }, {
-"base": "Node2D",
+"base": "Reference",
 "class": "EditorLayerManager",
 "language": "GDScript",
 "path": "res://scenes/editor/layers/editor_layers_manager.gd"
@@ -569,7 +569,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/actors/mario/states/LaunchStar.gd"
 }, {
-"base": "LiquidBase",
+"base": "LiquidRect",
 "class": "Lava",
 "language": "GDScript",
 "path": "res://scenes/actors/objects/lava/new_lava.gd"
@@ -589,7 +589,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/editor/layers/layer_dropdown.gd"
 }, {
-"base": "VBoxContainer",
+"base": "HBoxContainer",
 "class": "LayerInfo",
 "language": "GDScript",
 "path": "res://scenes/editor/layers/layer_info.gd"
@@ -738,6 +738,16 @@ _global_script_classes=[ {
 "class": "LiquidBase",
 "language": "GDScript",
 "path": "res://scenes/actors/objects/liquid/liquid_base.gd"
+}, {
+"base": "LiquidBase",
+"class": "LiquidCircle",
+"language": "GDScript",
+"path": "res://scenes/actors/objects/liquid_bubble/liquid_bubble.gd"
+}, {
+"base": "LiquidBase",
+"class": "LiquidRect",
+"language": "GDScript",
+"path": "res://scenes/actors/objects/liquid_rect/liquid_rect.gd"
 }, {
 "base": "Resource",
 "class": "Member",
@@ -919,7 +929,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/editor/windows/object_property_editor/property_tab.gd"
 }, {
-"base": "LiquidBase",
+"base": "LiquidRect",
 "class": "Quicksand",
 "language": "GDScript",
 "path": "res://scenes/actors/objects/quicksand/quicksand.gd"
@@ -1134,7 +1144,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/player/ui_new/touch/checks/touch_check.gd"
 }, {
-"base": "LiquidBase",
+"base": "LiquidRect",
 "class": "ToxicGas",
 "language": "GDScript",
 "path": "res://scenes/actors/objects/toxic_gas/toxic_gas.gd"
@@ -1169,7 +1179,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://classes/teleport/warp_helper.gd"
 }, {
-"base": "LiquidBase",
+"base": "LiquidRect",
 "class": "Water",
 "language": "GDScript",
 "path": "res://scenes/actors/objects/water/new_water.gd"
@@ -1426,6 +1436,8 @@ _global_script_class_icons={
 "LevelTileset": "",
 "LevelVars": "",
 "LiquidBase": "",
+"LiquidCircle": "",
+"LiquidRect": "",
 "Member": "",
 "MetalPowerup": "",
 "MissionData": "",
@@ -1968,6 +1980,16 @@ undo={
  ]
 }
 redo={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":89,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+flip_object={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":70,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+flip_object_v={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":89,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]

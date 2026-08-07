@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://scenes/menu/button_scripts/button_sound.gd" type="Script" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://assets/icons/settings.svg" type="Texture" id=7]
 [ext_resource path="res://scenes/menu/background_scroll/background.tscn" type="PackedScene" id=8]
 [ext_resource path="res://assets/fonts/DelfinoFont16.tres" type="DynamicFont" id=9]
+[ext_resource path="res://scenes/editor/windows/window_corner_drawer.gd" type="Script" id=10]
 
 [sub_resource type="Gradient" id=173]
 interpolation_mode = 2
@@ -145,16 +146,18 @@ custom_constants/margin_top = 1
 custom_constants/margin_left = 0
 custom_constants/margin_bottom = 2
 
-[node name="WindowCorner" type="PanelContainer" parent="."]
-margin_left = 289.0
-margin_top = 188.0
+[node name="WindowCorner" type="Control" parent="."]
+margin_left = 287.0
+margin_top = 186.0
 margin_right = 299.0
 margin_bottom = 198.0
-rect_min_size = Vector2( 10, 10 )
+rect_min_size = Vector2( 12, 12 )
+rect_clip_content = true
 mouse_filter = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
 theme_type_variation = "WindowCorner"
+script = ExtResource( 10 )
 
 [node name="Border" type="PanelContainer" parent="."]
 margin_right = 299.0
