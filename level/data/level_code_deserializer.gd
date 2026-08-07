@@ -193,10 +193,11 @@ static func deserialize_collectible_data_code(code: String) -> CollectibleData:
 	var mission_data: Array = deserialize_mission_datas_code(mission_data_code)
 	var star_coin_data_code = components[1]
 	var star_coin_data: Array = deserialize_star_coin_datas_code(star_coin_data_code)
-
 	var red_coin_count: int = deserialize_datas_code(components[2])[0]
+	if components.size() == 3: return CollectibleData.new(mission_data, star_coin_data, red_coin_count)
+	var used_mission_data: Array = deserialize_datas_code(components[3])
 
-	return CollectibleData.new(mission_data, star_coin_data, red_coin_count)
+	return CollectibleData.new(mission_data, star_coin_data, red_coin_count, used_mission_data)
 
 
 static func deserialize_mission_datas_code(code: String) -> Array:
@@ -224,7 +225,7 @@ static func deserialize_mission_datas_code(code: String) -> Array:
 
 static func deserialize_star_coin_datas_code(code: String) -> Array:
 	var star_coin_codes = LevelCodeTokenizer.get_outermost_brackets(code)
-	print(star_coin_codes)
+
 	var star_coin_datas: Array = []
 	for star_coin_code in star_coin_codes:
 		var star_coin_data: StarCoinData = StarCoinData.new()

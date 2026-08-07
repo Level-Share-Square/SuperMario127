@@ -33,6 +33,7 @@ func _ready() -> void:
 		uuid = CurrentLevelData.level_metadata.collectible_data.add_star_coin()
 		set_property("uuid", uuid, true)
 
+
 func _object_ready():
 	._object_ready()
 	var _connect = area.connect("body_entered", self, "collect")
@@ -58,3 +59,16 @@ func collect(body : PhysicsBody2D) -> void:
 
 		audio_player.play()
 
+
+func _object_removed(free: bool) -> void:
+	._object_removed(free)
+	
+	var data_array = CurrentLevelData.level_metadata.collectible_data.star_coin_data
+	for data in data_array:
+		if data.star_coin_uuid == uuid:
+			data_array.erase(data)
+	
+func _object_restored() -> void:
+	._object_restored()
+	
+	CurrentLevelData.level_metadata.collectible_data.add_star_coin(uuid)
