@@ -67,10 +67,17 @@ func action() -> void:
 	CurrentLevelData.editor_data.area_bounds_increment = increment.value
 
 func update_values():
-	if editor.action_manager.undo_stack.back() is ChangeAreaAction or editor.action_manager.redo_stack.back() is ChangeAreaAction:
-		shared.update_tilemaps()
-		camera.update_limits(area.header)
-		editor.oob_overlay.set_bounds(Rect2(area_rect.position*32, area_rect.size*32))
-		area_rect = area.header.bounds
-		x_label.text = X_LABEL_PREFIX % area_rect.size.x
-		y_label.text = Y_LABEL_PREFIX % area_rect.size.y
+	var update_values: bool = false
+	var actions: Array = [editor.action_manager.undo_stack.back(), editor.action_manager.redo_stack.back()]
+	for action in actions:
+		if action is ChangeAreaAction and action.property == "bounds":
+			update_values = true
+			break
+	if !update_values: return
+
+	shared.update_tilemaps()
+	camera.update_limits(area.header)
+	editor.oob_overlay.set_bounds(Rect2(area_rect.position*32, area_rect.size*32))
+	area_rect = area.header.bounds
+	x_label.text = X_LABEL_PREFIX % area_rect.size.x
+	y_label.text = Y_LABEL_PREFIX % area_rect.size.y
