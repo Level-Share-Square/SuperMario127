@@ -1669,12 +1669,13 @@ shader = ExtResource( 86 )
 shader_param/ray_count = 4
 shader_param/ray_distance = 0.4
 shader_param/ray_seperation_degrees = 22.0
-shader_param/rotation = 5.14999
+shader_param/rotation = 4.67458
 
 [sub_resource type="RectangleShape2D" id=85]
 extents = Vector2( 8, 18 )
 
 [node name="Character" type="KinematicBody2D"]
+z_index = -9
 collision_layer = 2
 collision_mask = 81
 collision/safe_margin = 0.5
@@ -1923,8 +1924,11 @@ texture = ExtResource( 15 )
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
 unique_name_in_owner = true
+modulate = Color( 0.857143, 0.857143, 0.857143, 0.857143 )
 material = ExtResource( 89 )
+position = Vector2( 0, 0.266667 )
 rotation = 6.28319
+scale = Vector2( 0.98, 0.98 )
 frames = ExtResource( 1 )
 animation = "idleRight"
 playing = true
@@ -1955,8 +1959,7 @@ y_offset = -6
 opacity = Color( 0, 0, 0, 0.741176 )
 
 [node name="Fludd" type="AnimatedSprite" parent="Sprite"]
-visible = false
-frames = ExtResource( 23 )
+frames = ExtResource( 48 )
 animation = "idleRight"
 script = ExtResource( 63 )
 
@@ -2484,16 +2487,14 @@ anims/triple_jump_right = SubResource( 94 )
 
 [node name="CollectedShine" type="AnimatedSprite" parent="."]
 visible = false
-position = Vector2( -1, 20 )
-scale = Vector2( 0.1, 0.1 )
-z_index = -5
+position = Vector2( -1, -70 )
 frames = ExtResource( 55 )
+speed_scale = 3.0
 playing = true
 
 [node name="Recolorable" type="AnimatedSprite" parent="CollectedShine"]
-visible = false
 frames = ExtResource( 61 )
-centered = false
+frame = 14
 script = ExtResource( 63 )
 
 [node name="ShineParticles" type="Particles2D" parent="CollectedShine"]

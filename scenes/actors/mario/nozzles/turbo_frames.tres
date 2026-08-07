@@ -127,37 +127,37 @@ region = Rect2( 528, 624, 48, 48 )
 atlas = ExtResource( 1 )
 region = Rect2( 528, 672, 48, 48 )
 
-[sub_resource type="AtlasTexture" id=281]
+[sub_resource type="AtlasTexture" id=355]
 atlas = ExtResource( 10 )
-region = Rect2( 0, 0, 32, 48 )
+region = Rect2( 0, 0, 40, 48 )
 
-[sub_resource type="AtlasTexture" id=282]
+[sub_resource type="AtlasTexture" id=356]
 atlas = ExtResource( 10 )
-region = Rect2( 32, 0, 32, 48 )
+region = Rect2( 40, 0, 40, 48 )
 
-[sub_resource type="AtlasTexture" id=283]
+[sub_resource type="AtlasTexture" id=357]
 atlas = ExtResource( 10 )
-region = Rect2( 64, 0, 32, 48 )
+region = Rect2( 80, 0, 40, 48 )
 
-[sub_resource type="AtlasTexture" id=284]
+[sub_resource type="AtlasTexture" id=358]
 atlas = ExtResource( 10 )
-region = Rect2( 96, 0, 32, 48 )
+region = Rect2( 120, 0, 40, 48 )
 
-[sub_resource type="AtlasTexture" id=285]
+[sub_resource type="AtlasTexture" id=359]
 atlas = ExtResource( 10 )
-region = Rect2( 128, 0, 32, 48 )
+region = Rect2( 160, 0, 40, 48 )
 
-[sub_resource type="AtlasTexture" id=286]
+[sub_resource type="AtlasTexture" id=360]
 atlas = ExtResource( 10 )
-region = Rect2( 160, 0, 32, 48 )
+region = Rect2( 200, 0, 40, 48 )
 
-[sub_resource type="AtlasTexture" id=287]
+[sub_resource type="AtlasTexture" id=361]
 atlas = ExtResource( 10 )
-region = Rect2( 192, 0, 32, 48 )
+region = Rect2( 240, 0, 40, 48 )
 
-[sub_resource type="AtlasTexture" id=288]
+[sub_resource type="AtlasTexture" id=362]
 atlas = ExtResource( 10 )
-region = Rect2( 224, 0, 32, 48 )
+region = Rect2( 280, 0, 40, 48 )
 
 [sub_resource type="AtlasTexture" id=179]
 atlas = ExtResource( 1 )
@@ -1135,7 +1135,7 @@ animations = [ {
 "name": "deathFall",
 "speed": 0.0
 }, {
-"frames": [ SubResource( 281 ), SubResource( 282 ), SubResource( 283 ), SubResource( 284 ), SubResource( 285 ), SubResource( 286 ), SubResource( 287 ), SubResource( 288 ) ],
+"frames": [ SubResource( 355 ), SubResource( 356 ), SubResource( 357 ), SubResource( 358 ), SubResource( 359 ), SubResource( 360 ), SubResource( 361 ), SubResource( 362 ) ],
 "loop": true,
 "name": "disagree",
 "speed": 12.0
