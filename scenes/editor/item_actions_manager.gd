@@ -162,3 +162,7 @@ func show_selection_actions():
 	
 func hide_selection_actions():
 	selection_actions.hide()
+
+func clear_selection():
+	editor.selected_objects = []
+	editor.selected_tiles = {}

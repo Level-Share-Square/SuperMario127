@@ -46,10 +46,19 @@ func _process(_delta: float):
 
 func change_tool(tool_name: String) -> void:
 	current_tool = get_node(tool_name)
+	
 	var item_preview = get_node("%ItemPreview")
 	item_preview.position_override = false
-	
 	item_preview.visible = !"Selection" in tool_name
+	
+	for texture in get_node("%ObjectBuffer").get_children():
+		texture.queue_free()
+	get_node("%TileBuffer").clear()
+	
+	var item_actions_manager = get_node("%ItemActionsManager")
+	item_actions_manager.handle_selection()
+	item_actions_manager.clear_selection()
+	
 	emit_signal("tool_changed")
 
 func item_changed(placeable_item: PlaceableItem):

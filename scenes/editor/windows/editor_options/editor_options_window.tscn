@@ -77,7 +77,6 @@ use_hidden_tabs_for_min_size = true
 script = ExtResource( 1 )
 
 [node name="Level" type="MarginContainer" parent="ContentDivider/ContentMat/Tabs" index="0"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -239,6 +238,7 @@ margin_right = 372.0
 margin_bottom = 75.0
 
 [node name="Missions" type="HBoxContainer" parent="ContentDivider/ContentMat/Tabs" index="2"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
