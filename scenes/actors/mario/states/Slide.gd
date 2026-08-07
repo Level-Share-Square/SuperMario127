@@ -70,10 +70,10 @@ func _stop(delta):
 	character.particles.emitting = false
 	character.friction = character.real_friction
 	if character.is_grounded() and character.velocity.x < 5 and character.velocity.x > -5:
-		character.set_state_by_name("SlideStopState", delta)
+		character.set_state_by_name("SlideStopState", delta, self)
 	else:
 		character.position.y -= 5
-		character.set_state_by_name("DiveState", delta)
+		character.set_state_by_name("DiveState", delta, self)
 	stop = false
 	
 func change_to_getup(delta):

@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=2]
+[gd_scene load_steps=65 format=2]
 
 [ext_resource path="res://addons/mixing-desk/sound/nonspatial/ran_cont.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/mario/sounds.gd" type="Script" id=2]
@@ -61,6 +61,9 @@
 [ext_resource path="res://scenes/actors/mario/sounds_luigi/talk/STRM_L21_OK.wav" type="AudioStream" id=59]
 [ext_resource path="res://scenes/actors/mario/sounds_luigi/Timeout1.wav" type="AudioStream" id=60]
 [ext_resource path="res://scenes/actors/mario/sounds_misc/bonk.ogg" type="AudioStream" id=61]
+[ext_resource path="res://scenes/actors/mario/sounds_misc/perfect.wav" type="AudioStream" id=62]
+[ext_resource path="res://scenes/actors/mario/sounds_misc/getup.wav" type="AudioStream" id=63]
+[ext_resource path="res://scenes/actors/mario/sounds_misc/dive.wav" type="AudioStream" id=64]
 
 [node name="Sounds" type="Node"]
 script = ExtResource( 2 )
@@ -411,4 +414,20 @@ bus = "Sounds"
 stream = ExtResource( 61 )
 volume_db = -7.75
 pitch_scale = 1.15
+bus = "Sounds"
+
+[node name="Dive" type="AudioStreamPlayer" parent="OtherSounds"]
+stream = ExtResource( 64 )
+volume_db = -12.5
+bus = "Sounds"
+
+[node name="Getup" type="AudioStreamPlayer" parent="OtherSounds"]
+stream = ExtResource( 63 )
+volume_db = -12.5
+pitch_scale = 0.75
+bus = "Sounds"
+
+[node name="Perfect" type="AudioStreamPlayer" parent="OtherSounds"]
+stream = ExtResource( 62 )
+volume_db = -17.5
 bus = "Sounds"

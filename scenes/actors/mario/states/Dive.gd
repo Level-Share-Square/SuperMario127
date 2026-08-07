@@ -37,7 +37,39 @@ func _start(_delta : float) -> void:
 			character.velocity.x = character.velocity.x - (character.velocity.x - (dive_power_luigi.x * \
 					character.facing_direction)) / 5
 			character.velocity.y += dive_power_luigi.y
-		sound_player.play_dive_sound()
+		
+		## super dive recover/quick ledgedrop
+		if character.state_set_from and character.state_set_from.name == "SlideState":
+			sound_player.play_perfect_sound()
+			
+			character.sprite.modulate = Color(2, 2, 2)
+			
+			var tween: SceneTreeTween = create_tween()
+			tween.set_trans(Tween.TRANS_CIRC)
+			tween.set_ease(Tween.EASE_OUT)
+			tween.tween_property(character.sprite, "modulate", Color.white, 1.0)
+			
+			for i in range(3):
+				var target_lag: float = (float(i+1) / 3) * 3
+				var trail: AnimatedSprite = character.sprite.duplicate()
+				trail.show_behind_parent = true
+				trail.modulate = Color(1, 1, 1, 0.5)
+				trail.set_script(preload("res://scenes/actors/mario/FluddAnimSync.gd"))
+				trail.lag_behind = true
+				trail.lag_amount = 0.0
+				trail.mario_sprite = character.sprite
+				for child in trail.get_children():
+					child.queue_free()
+				character.sprite.add_child(trail)
+				
+				var trail_tween: SceneTreeTween = create_tween()
+				trail_tween.set_parallel(true)
+				trail_tween.tween_property(trail, "modulate", Color(1, 1.5, 1.5, 0), 0.5)
+				trail_tween.tween_property(trail, "lag_amount", target_lag, 0.5)
+				trail_tween.set_parallel(false)
+				trail_tween.tween_callback(trail, "queue_free")
+		else:
+			sound_player.play_dive_sound()
 	character.position.y += 4
 	character.rotating = true
 	character.ground_shape.disabled = true
@@ -65,6 +97,7 @@ func _update(_delta) -> void:
 		sprite.rotation_degrees += 0.15 * character.facing_direction
 		last_above_rot_limit = true
 
+
 func _stop(delta : float) -> void:
 	var sprite : AnimatedSprite = character.sprite
 	if !character.test_move(character.transform, Vector2(0, 8)) and character.test_move(character.transform, Vector2(0.1 * character.facing_direction, -15)) and !character.test_move(character.transform, Vector2(0, -16)) and !character.is_grounded():
@@ -88,6 +121,7 @@ func _stop(delta : float) -> void:
 	elif !character.check_liquid(LiquidBase.LiquidType.Water):
 		sprite.rotation_degrees = 0
 	character.ground_shape.disabled = true
+	
 	
 	if character.is_grounded() or character.check_liquid(LiquidBase.LiquidType.Quicksand):
 		character.facing_direction = start_facing

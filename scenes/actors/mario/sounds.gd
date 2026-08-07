@@ -38,6 +38,9 @@ onready var spin_water_sound = $OtherSounds/SpinWater
 onready var powerup_sound_voiceless = $OtherSounds/Powerup
 onready var burn_sound = $OtherSounds/Burn
 onready var bonk_sound = $OtherSounds/Bonk
+onready var dive_sound = $OtherSounds/Dive
+onready var getup_sound = $OtherSounds/Getup
+onready var perfect_sound = $OtherSounds/Perfect
 
 onready var footsteps_default = $Footsteps/Default
 onready var footsteps_metal = $Footsteps/Metal
@@ -111,6 +114,20 @@ func play_wall_jump_sound_voiceless():
 func play_dive_sound():
 	if ready:
 		dive_sounds.play()
+		dive_sound.play()
+	
+func play_dive_sound_voiceless():
+	if ready:
+		dive_sound.play()
+
+func play_getup_sound():
+	if ready:
+		dive_sounds.play()
+		getup_sound.play()
+
+func play_getup_sound_voiceless():
+	if ready:
+		getup_sound.play()
 	
 func play_fall_sound():
 	if ready:
@@ -180,6 +197,10 @@ func play_bonk_sound():
 	if ready:
 		hit_sounds.play()
 		bonk_sound.play()
+
+func play_perfect_sound():
+	if ready:
+		perfect_sound.play()
 
 func play_gp_windup_sound():
 	if ready:

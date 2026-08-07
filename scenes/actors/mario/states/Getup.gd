@@ -5,6 +5,8 @@ class_name GetupState
 export var get_up_power = 360
 export var get_up_power_luigi = 360
 
+var last_getup: int = 0
+
 func _ready():
 	priority = 1
 	disable_turning = true
@@ -13,7 +15,7 @@ func _ready():
 func _start(_delta):
 	var sprite = character.sprite
 	var sound_player = character.sound_player
-	sound_player.play_dive_sound()
+	sound_player.play_getup_sound()
 	character.velocity.y = -get_up_power
 	character.position.y -= 7
 	character.friction = character.real_friction
@@ -21,6 +23,7 @@ func _start(_delta):
 	sprite.rotation_degrees = 1
 	character.dive_cooldown = 0.15
 	character.stamina = 100
+
 	
 func _update(_delta):
 	var sprite = character.sprite

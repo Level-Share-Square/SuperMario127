@@ -163,8 +163,9 @@ export var player_id := 0
 
 # States. Couldn't set static type due to circle reference
 var switched = false
-var state : State = null
-var last_state : State = null
+var state: State = null
+var last_state: State = null
+var state_set_from: State = null
 var switching_state := false
 export var controllable := true
 export var shine_cutscene: bool = false
@@ -570,12 +571,13 @@ func show() -> void:
 	visible = true
 
 # new_state is of type State, however adding static typing would cause a cyclic dependency
-func set_state(new_state: Node, delta: float) -> void:
+func set_state(new_state: Node, delta: float, called_from: State = null) -> void:
 	if dead: return
 	
 	if(is_instance_valid(state)):
 		if(state.name=="LaunchStarState"):
 			return
+	state_set_from = called_from
 	last_state = state
 	state = null
 	if is_instance_valid(last_state):
@@ -616,9 +618,9 @@ func set_powerup(powerup_node: Node, set_temporary_music: bool, duration = -1) -
 	else:
 		sprite.material = PALETTE_SWAP_MAT
 
-func set_state_by_name(name: String, delta: float = 0.0001) -> void:
+func set_state_by_name(name: String, delta: float = 0.0001, called_from: State = null) -> void:
 	if is_instance_valid(get_state_node(name)):
-		set_state(get_state_node(name), delta)
+		set_state(get_state_node(name), delta, called_from)
 		
 func add_nozzle(new_nozzle: String) -> void:
 	if !new_nozzle in CurrentLevelData.vars.nozzles_collected:

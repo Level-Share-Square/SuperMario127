@@ -1669,7 +1669,7 @@ shader = ExtResource( 86 )
 shader_param/ray_count = 4
 shader_param/ray_distance = 0.4
 shader_param/ray_seperation_degrees = 22.0
-shader_param/rotation = 2.60753
+shader_param/rotation = 5.55637
 
 [sub_resource type="RectangleShape2D" id=85]
 extents = Vector2( 8, 18 )
@@ -1924,7 +1924,6 @@ texture = ExtResource( 15 )
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
 unique_name_in_owner = true
-modulate = Color( 0.857143, 0.857143, 0.857143, 0.857143 )
 material = ExtResource( 89 )
 position = Vector2( 0, 0.266667 )
 rotation = 6.28319
