@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=87 format=2]
+[gd_resource type="Theme" load_steps=89 format=2]
 
 [ext_resource path="res://assets/fonts/delfino_small.tres" type="DynamicFont" id=1]
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://scenes/editor/assets/grabber_highlight.png" type="Texture" id=10]
 [ext_resource path="res://scenes/editor/assets/grabber.png" type="Texture" id=11]
 [ext_resource path="res://assets/icons/CheckUnchecked.svg" type="Texture" id=12]
+[ext_resource path="res://scenes/editor/assets/window_corner.png" type="Texture" id=13]
 
 [sub_resource type="StyleBoxFlat" id=113]
 content_margin_left = 4.0
@@ -647,6 +648,12 @@ fill_to = Vector2( 0, 0 )
 texture = SubResource( 94 )
 region_rect = Rect2( 0, 0, 32, 32 )
 
+[sub_resource type="StyleBoxTexture" id=191]
+texture = ExtResource( 13 )
+region_rect = Rect2( 0, 0, 100, 100 )
+margin_right = 13.8798
+margin_bottom = 18.4796
+
 [resource]
 default_font = ExtResource( 1 )
 Button/colors/font_color = Color( 0, 0, 0, 1 )
@@ -819,5 +826,7 @@ WindowBorder/base_type = "PanelContainer"
 WindowBorder/styles/panel = SubResource( 104 )
 WindowContent/base_type = "PanelContainer"
 WindowContent/styles/panel = SubResource( 95 )
+WindowCorner/base_type = "PanelContainer"
+WindowCorner/styles/panel = SubResource( 191 )
 WindowTitle/base_type = "RichTextLabel"
 WindowTitle/fonts/normal_font = ExtResource( 9 )

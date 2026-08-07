@@ -35,6 +35,7 @@ func _ready():
 	editor.action_manager.connect("undo", self, "update_values")
 	editor.action_manager.connect("redo", self, "update_values")
 	
+	increment.value = CurrentLevelData.editor_data.area_bounds_increment
 	update_values()
 	
 func change_bounds(side: String, type: int):
@@ -62,6 +63,8 @@ func action() -> void:
 	action.id = CurrentLevelData.area_id
 	action.new_value = area_rect
 	editor.action_manager.commit_action(action)
+	
+	CurrentLevelData.editor_data.area_bounds_increment = increment.value
 
 func update_values():
 	if editor.action_manager.undo_stack.back() is ChangeAreaAction or editor.action_manager.redo_stack.back() is ChangeAreaAction:

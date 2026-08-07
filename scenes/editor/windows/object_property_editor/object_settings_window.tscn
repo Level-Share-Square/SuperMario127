@@ -73,6 +73,10 @@ margin_bottom = 192.0
 margin_right = 256.0
 margin_bottom = 192.0
 
-[node name="Control" parent="." index="4"]
+[node name="WindowCorner" parent="." index="4"]
+margin_right = 256.0
+margin_bottom = 192.0
+
+[node name="Control" parent="." index="5"]
 margin_right = 256.0
 margin_bottom = 192.0

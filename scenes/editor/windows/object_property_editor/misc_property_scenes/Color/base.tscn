@@ -929,7 +929,7 @@ margin_top = 22.0
 margin_right = 232.0
 margin_bottom = 264.0
 rect_clip_content = true
-size_flags_horizontal = 3
+size_flags_horizontal = 7
 size_flags_vertical = 3
 script = ExtResource( 12 )
 
@@ -937,7 +937,7 @@ script = ExtResource( 12 )
 margin_right = 232.0
 margin_bottom = 242.0
 rect_min_size = Vector2( 0, 242 )
-size_flags_horizontal = 3
+size_flags_horizontal = 7
 size_flags_vertical = 3
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/Expanded/Revealer"]
@@ -946,7 +946,7 @@ margin_right = 229.0
 margin_bottom = 199.0
 rect_min_size = Vector2( 0, 242 )
 rect_clip_content = true
-size_flags_horizontal = 3
+size_flags_horizontal = 7
 size_flags_vertical = 3
 custom_constants/margin_right = 4
 custom_constants/margin_top = 4
@@ -958,6 +958,7 @@ margin_left = 4.0
 margin_top = 4.0
 margin_right = 221.0
 margin_bottom = 238.0
+size_flags_horizontal = 7
 
 [node name="Spacing" type="Control" parent="VBoxContainer/Expanded/Revealer/MarginContainer/VBoxContainer"]
 margin_right = 217.0

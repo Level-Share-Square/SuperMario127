@@ -29,8 +29,8 @@ use_filter = true
 font_data = ExtResource( 1 )
 
 [node name="EditorWindow" type="PanelContainer"]
-margin_right = 272.0
-margin_bottom = 165.0
+margin_right = 299.0
+margin_bottom = 198.0
 focus_mode = 1
 theme = ExtResource( 4 )
 theme_type_variation = "WindowBack"
@@ -47,25 +47,25 @@ modulate = Color( 1, 1, 1.1, 1 )
 show_behind_parent = true
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 272.0
-margin_bottom = 165.0
+margin_right = 299.0
+margin_bottom = 198.0
 overlay_tint = Color( 0.084, 0.0898, 0.2, 0.133333 )
 
 [node name="ContentDivider" type="VBoxContainer" parent="."]
-margin_right = 272.0
-margin_bottom = 165.0
+margin_right = 299.0
+margin_bottom = 198.0
 mouse_filter = 0
 custom_constants/separation = 0
 
 [node name="Header" type="PanelContainer" parent="ContentDivider"]
-margin_right = 272.0
+margin_right = 299.0
 margin_bottom = 31.0
 theme_type_variation = "FlatPanel"
 
 [node name="HeaderMat" type="MarginContainer" parent="ContentDivider/Header"]
 margin_left = 4.0
 margin_top = 4.0
-margin_right = 268.0
+margin_right = 295.0
 margin_bottom = 27.0
 custom_constants/margin_right = 6
 custom_constants/margin_top = 1
@@ -75,7 +75,7 @@ custom_constants/margin_bottom = 0
 [node name="HeaderBox" type="HBoxContainer" parent="ContentDivider/Header/HeaderMat"]
 margin_left = 6.0
 margin_top = 1.0
-margin_right = 258.0
+margin_right = 285.0
 margin_bottom = 23.0
 custom_constants/separation = 1
 
@@ -99,7 +99,7 @@ mouse_filter = 2
 [node name="WindowTitle" type="RichTextLabel" parent="ContentDivider/Header/HeaderMat/HeaderBox"]
 unique_name_in_owner = true
 margin_left = 25.0
-margin_right = 229.0
+margin_right = 256.0
 margin_bottom = 21.0
 rect_min_size = Vector2( 128, 0 )
 mouse_filter = 2
@@ -114,8 +114,8 @@ text = "Title Font"
 fit_content_height = true
 
 [node name="WindowClose" type="Button" parent="ContentDivider/Header/HeaderMat/HeaderBox"]
-margin_left = 230.0
-margin_right = 252.0
+margin_left = 257.0
+margin_right = 279.0
 margin_bottom = 22.0
 rect_min_size = Vector2( 22, 22 )
 hint_tooltip = "Close"
@@ -131,14 +131,14 @@ script = ExtResource( 2 )
 [node name="HSeparator" type="HSeparator" parent="ContentDivider"]
 modulate = Color( 0, 0, 0, 1 )
 margin_top = 31.0
-margin_right = 272.0
+margin_right = 299.0
 margin_bottom = 31.0
 custom_constants/separation = 0
 
 [node name="ContentMat" type="MarginContainer" parent="ContentDivider"]
 margin_top = 31.0
-margin_right = 272.0
-margin_bottom = 165.0
+margin_right = 299.0
+margin_bottom = 198.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/margin_top = 1
@@ -146,23 +146,29 @@ custom_constants/margin_left = 0
 custom_constants/margin_bottom = 2
 
 [node name="Border" type="PanelContainer" parent="."]
-margin_right = 272.0
-margin_bottom = 165.0
+margin_right = 299.0
+margin_bottom = 198.0
 mouse_filter = 2
 theme_type_variation = "WindowBorder"
 
 [node name="WindowMat" type="MarginContainer" parent="."]
-margin_right = 272.0
-margin_bottom = 165.0
+margin_right = 299.0
+margin_bottom = 198.0
 mouse_filter = 2
 custom_constants/margin_right = 4
 custom_constants/margin_top = 4
 custom_constants/margin_left = 4
 custom_constants/margin_bottom = 4
 
+[node name="WindowCorner" type="PanelContainer" parent="."]
+margin_right = 299.0
+margin_bottom = 198.0
+mouse_filter = 2
+theme_type_variation = "WindowCorner"
+
 [node name="Control" type="Control" parent="."]
-margin_right = 272.0
-margin_bottom = 165.0
+margin_right = 299.0
+margin_bottom = 198.0
 mouse_filter = 2
 
 [node name="ResizeHandle" type="Control" parent="Control"]

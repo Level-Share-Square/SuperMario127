@@ -26,11 +26,11 @@ title = "Area Settings"
 
 [node name="Background" parent="." index="0"]
 margin_right = 391.0
-margin_bottom = 239.0
+margin_bottom = 240.0
 
 [node name="ContentDivider" parent="." index="1"]
 margin_right = 391.0
-margin_bottom = 239.0
+margin_bottom = 240.0
 
 [node name="Header" parent="ContentDivider" index="0"]
 margin_right = 391.0
@@ -53,7 +53,7 @@ margin_right = 391.0
 
 [node name="ContentMat" parent="ContentDivider" index="2"]
 margin_right = 391.0
-margin_bottom = 239.0
+margin_bottom = 240.0
 custom_constants/margin_right = 6
 custom_constants/margin_top = 6
 custom_constants/margin_left = 6
@@ -63,7 +63,7 @@ custom_constants/margin_bottom = 6
 margin_left = 6.0
 margin_top = 6.0
 margin_right = 385.0
-margin_bottom = 202.0
+margin_bottom = 203.0
 rect_pivot_offset = Vector2( -131, 46 )
 mouse_filter = 1
 size_flags_stretch_ratio = 2.5
@@ -89,13 +89,13 @@ foregrounds = ExtResource( 7 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ContentDivider/ContentMat/Tabs/Background" index="0"]
 margin_right = 371.0
-margin_bottom = 165.0
+margin_bottom = 166.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ContentDivider/ContentMat/Tabs/Background/HBoxContainer" index="0"]
 margin_right = 220.0
-margin_bottom = 165.0
+margin_bottom = 166.0
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 1.5
 custom_constants/separation = 1
@@ -103,14 +103,14 @@ custom_constants/separation = 1
 [node name="PalettesContainer" type="ScrollContainer" parent="ContentDivider/ContentMat/Tabs/Background/HBoxContainer/VBoxContainer" index="0"]
 unique_name_in_owner = true
 visible = false
-margin_right = 220.0
+margin_right = 361.0
 margin_bottom = 122.0
 rect_min_size = Vector2( 0, 122 )
 size_flags_horizontal = 3
 scroll_horizontal_enabled = false
 
 [node name="GridMat" type="MarginContainer" parent="ContentDivider/ContentMat/Tabs/Background/HBoxContainer/VBoxContainer/PalettesContainer" index="0"]
-margin_right = 212.0
+margin_right = 353.0
 size_flags_horizontal = 3
 custom_constants/margin_right = -6
 custom_constants/margin_left = 2
@@ -118,7 +118,7 @@ custom_constants/margin_left = 2
 [node name="PalettesGrid" type="GridContainer" parent="ContentDivider/ContentMat/Tabs/Background/HBoxContainer/VBoxContainer/PalettesContainer/GridMat" index="0"]
 unique_name_in_owner = true
 margin_left = 2.0
-margin_right = 218.0
+margin_right = 359.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/vseparation = 5
@@ -128,6 +128,7 @@ columns = 2
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="ContentDivider/ContentMat/Tabs/Background/HBoxContainer/VBoxContainer" index="1"]
 margin_right = 220.0
 margin_bottom = 122.0
+size_flags_horizontal = 3
 ratio = 1.7778
 
 [node name="BGContainer" type="MarginContainer" parent="ContentDivider/ContentMat/Tabs/Background/HBoxContainer/VBoxContainer/AspectRatioContainer" index="0"]
@@ -192,10 +193,16 @@ icon = ExtResource( 8 )
 expand_icon = true
 script = ExtResource( 5 )
 
-[node name="MarginContainer" type="MarginContainer" parent="ContentDivider/ContentMat/Tabs/Background/HBoxContainer/VBoxContainer" index="2"]
+[node name="Control" type="Control" parent="ContentDivider/ContentMat/Tabs/Background/HBoxContainer/VBoxContainer" index="2"]
 margin_top = 123.0
 margin_right = 220.0
-margin_bottom = 165.0
+margin_bottom = 123.0
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="ContentDivider/ContentMat/Tabs/Background/HBoxContainer/VBoxContainer" index="3"]
+margin_top = 124.0
+margin_right = 220.0
+margin_bottom = 166.0
 custom_constants/margin_right = -2
 custom_constants/margin_top = 2
 custom_constants/margin_left = 4
@@ -226,14 +233,14 @@ script = ExtResource( 4 )
 
 [node name="VSeparator" type="VSeparator" parent="ContentDivider/ContentMat/Tabs/Background/HBoxContainer" index="1"]
 visible = false
-margin_left = 217.0
-margin_right = 221.0
-margin_bottom = 142.0
+margin_left = 413.0
+margin_right = 417.0
+margin_bottom = 278.0
 
 [node name="MarginContainer" type="MarginContainer" parent="ContentDivider/ContentMat/Tabs/Background/HBoxContainer" index="2"]
 margin_left = 224.0
 margin_right = 371.0
-margin_bottom = 165.0
+margin_bottom = 166.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/margin_right = 6
@@ -245,15 +252,15 @@ custom_constants/margin_bottom = 2
 margin_left = 4.0
 margin_top = 4.0
 margin_right = 141.0
-margin_bottom = 163.0
+margin_bottom = 164.0
 size_flags_horizontal = 3
 custom_constants/separation = 8
 alignment = 2
 
 [node name="Background" type="VBoxContainer" parent="ContentDivider/ContentMat/Tabs/Background/HBoxContainer/MarginContainer/VBoxContainer" index="0"]
-margin_top = 71.0
+margin_top = 72.0
 margin_right = 137.0
-margin_bottom = 111.0
+margin_bottom = 112.0
 
 [node name="Label" type="Label" parent="ContentDivider/ContentMat/Tabs/Background/HBoxContainer/MarginContainer/VBoxContainer/Background" index="0"]
 margin_right = 137.0
@@ -271,9 +278,9 @@ focus_mode = 0
 script = ExtResource( 5 )
 
 [node name="Foreground" type="VBoxContainer" parent="ContentDivider/ContentMat/Tabs/Background/HBoxContainer/MarginContainer/VBoxContainer" index="1"]
-margin_top = 119.0
+margin_top = 120.0
 margin_right = 137.0
-margin_bottom = 159.0
+margin_bottom = 160.0
 
 [node name="Label" type="Label" parent="ContentDivider/ContentMat/Tabs/Background/HBoxContainer/MarginContainer/VBoxContainer/Foreground" index="0"]
 margin_right = 137.0
@@ -301,20 +308,20 @@ margin_bottom = -4.0
 script = ExtResource( 12 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ContentDivider/ContentMat/Tabs/Music" index="0"]
-margin_right = 371.0
-margin_bottom = 165.0
+margin_right = 537.0
+margin_bottom = 343.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="PanelContainer" type="PanelContainer" parent="ContentDivider/ContentMat/Tabs/Music/VBoxContainer" index="0"]
 material = SubResource( 1 )
-margin_right = 371.0
+margin_right = 537.0
 margin_bottom = 23.0
 size_flags_horizontal = 3
 theme_type_variation = "GradientPanel"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ContentDivider/ContentMat/Tabs/Music/VBoxContainer/PanelContainer" index="0"]
-margin_right = 371.0
+margin_right = 537.0
 margin_bottom = 23.0
 size_flags_horizontal = 3
 alignment = 1
@@ -332,14 +339,14 @@ text = "Preset Music"
 
 [node name="Padding2" type="Control" parent="ContentDivider/ContentMat/Tabs/Music/VBoxContainer/PanelContainer/HBoxContainer" index="2"]
 margin_left = 92.0
-margin_right = 276.0
+margin_right = 442.0
 margin_bottom = 23.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="MarginContainer" type="MarginContainer" parent="ContentDivider/ContentMat/Tabs/Music/VBoxContainer/PanelContainer/HBoxContainer" index="3"]
-margin_left = 280.0
-margin_right = 371.0
+margin_left = 446.0
+margin_right = 537.0
 margin_bottom = 23.0
 custom_constants/margin_right = 4
 custom_constants/margin_top = 2
@@ -361,46 +368,51 @@ script = ExtResource( 5 )
 unique_name_in_owner = true
 visible = false
 margin_top = 27.0
-margin_right = 372.0
-margin_bottom = 177.0
+margin_right = 537.0
+margin_bottom = 185.0
 custom_constants/separation = 0
 
 [node name="Label" type="Label" parent="ContentDivider/ContentMat/Tabs/Music/VBoxContainer/CustomMusic" index="0"]
-margin_right = 372.0
+margin_right = 537.0
 margin_bottom = 17.0
 text = "Background Music:"
 align = 1
 
 [node name="BGMPanel" parent="ContentDivider/ContentMat/Tabs/Music/VBoxContainer/CustomMusic" index="1" instance=ExtResource( 11 )]
+margin_top = 17.0
+margin_right = 537.0
+margin_bottom = 77.0
 
 [node name="HSeparator" type="HSeparator" parent="ContentDivider/ContentMat/Tabs/Music/VBoxContainer/CustomMusic" index="2"]
-margin_right = 40.0
-margin_bottom = 4.0
+margin_top = 77.0
+margin_right = 537.0
+margin_bottom = 81.0
 
 [node name="Label2" type="Label" parent="ContentDivider/ContentMat/Tabs/Music/VBoxContainer/CustomMusic" index="3"]
-margin_top = 77.0
-margin_right = 372.0
-margin_bottom = 94.0
+margin_top = 81.0
+margin_right = 537.0
+margin_bottom = 98.0
 text = "Underwater Music:"
 align = 1
 
 [node name="UWMPanel" parent="ContentDivider/ContentMat/Tabs/Music/VBoxContainer/CustomMusic" index="4" instance=ExtResource( 11 )]
 margin_top = 98.0
-margin_bottom = 150.0
+margin_right = 537.0
+margin_bottom = 158.0
 music_type = 1
 
 [node name="PresetMusic" type="ScrollContainer" parent="ContentDivider/ContentMat/Tabs/Music/VBoxContainer" index="2"]
 unique_name_in_owner = true
 margin_top = 27.0
-margin_right = 371.0
-margin_bottom = 165.0
+margin_right = 537.0
+margin_bottom = 343.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="SongContainer" type="VBoxContainer" parent="ContentDivider/ContentMat/Tabs/Music/VBoxContainer/PresetMusic" index="0"]
 unique_name_in_owner = true
-margin_right = 363.0
-margin_bottom = 138.0
+margin_right = 529.0
+margin_bottom = 316.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -417,7 +429,7 @@ scroll_deadzone = 7
 
 [node name="MarginContainer" type="MarginContainer" parent="ContentDivider/ContentMat/Tabs/Settings" index="0"]
 margin_right = 363.0
-margin_bottom = 165.0
+margin_bottom = 166.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/margin_right = 2
@@ -428,7 +440,7 @@ custom_constants/margin_left = 2
 margin_left = 57.0
 margin_top = 1.0
 margin_right = 305.0
-margin_bottom = 165.0
+margin_bottom = 166.0
 size_flags_horizontal = 4
 size_flags_vertical = 3
 script = ExtResource( 2 )
@@ -669,13 +681,13 @@ script = ExtResource( 4 )
 [node name="Filler" type="Control" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer" index="2"]
 margin_top = 105.0
 margin_right = 248.0
-margin_bottom = 114.0
+margin_bottom = 115.0
 size_flags_vertical = 3
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer" index="3"]
-margin_top = 118.0
+margin_top = 119.0
 margin_right = 248.0
-margin_bottom = 135.0
+margin_bottom = 136.0
 custom_constants/separation = 10
 alignment = 1
 
@@ -694,14 +706,14 @@ step = 0.01
 script = ExtResource( 4 )
 
 [node name="HSeparator2" type="HSeparator" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer" index="4"]
-margin_top = 139.0
+margin_top = 140.0
 margin_right = 248.0
-margin_bottom = 143.0
+margin_bottom = 144.0
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer" index="5"]
-margin_top = 147.0
+margin_top = 148.0
 margin_right = 248.0
-margin_bottom = 164.0
+margin_bottom = 165.0
 custom_constants/separation = 10
 alignment = 1
 
@@ -732,12 +744,12 @@ script = ExtResource( 4 )
 
 [node name="Border" parent="." index="2"]
 margin_right = 391.0
-margin_bottom = 239.0
+margin_bottom = 240.0
 
 [node name="WindowMat" parent="." index="3"]
 margin_right = 391.0
-margin_bottom = 239.0
+margin_bottom = 240.0
 
 [node name="Control" parent="." index="4"]
 margin_right = 391.0
-margin_bottom = 239.0
+margin_bottom = 240.0
