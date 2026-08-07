@@ -25,3 +25,4 @@ func restore_object():
 	objects_node.add_child(object)
 	objects_node.move_child(object, object_index)
 	objects_node.layer_data.place_object(object.position, object_data)
+	object._object_restored()

@@ -61,7 +61,9 @@ onready var delete_button = $Buttons/DeleteLevel
 
 func load_collectibles_info(save_data: LevelSaveData)-> void:
 	
-	var total_shine_count: int = save_data.get_total_mission_count()
+	var collectibledata: CollectibleData = CurrentLevelData.level_metadata.collectible_data
+	
+	var total_shine_count: int = collectibledata.used_mission_data.size()
 	var collected_shine_count: int = save_data.get_completed_mission_count()
 	
 	if is_campaign:
@@ -71,7 +73,7 @@ func load_collectibles_info(save_data: LevelSaveData)-> void:
 		shine_label.text = str(collected_shine_count) + "/" + str(total_shine_count)
 		shine_label.modulate = completion_color if (collected_shine_count >= total_shine_count) else Color.white
 	
-	var total_star_coin_count: int = save_data.get_total_star_coin_count()
+	var total_star_coin_count: int = collectibledata.star_coin_data.size()
 	var collected_star_coin_count: int = save_data.get_collected_star_coin_count()
 	
 	if is_campaign:
@@ -164,10 +166,11 @@ func load_level_info(_level_metadata: LevelMetadata, _level_id: String, _working
 
 
 	var save_data: LevelSaveData = CurrentLevelData.save_data
+	var collectibledata: CollectibleData = CurrentLevelData.level_metadata.collectible_data
 	load_collectibles_info(save_data)
 
 	# these are floats cuz they need to be divided for some calculations :)
-	var total_collectibles: float = save_data.get_total_mission_count() + save_data.get_total_star_coin_count()
+	var total_collectibles: float = collectibledata.used_mission_data.size() + collectibledata.star_coin_data.size()
 	var total_collected: float = save_data.get_completed_mission_count() + save_data.get_collected_star_coin_count()
 	if total_collectibles <= 0:
 		percentage_label.text = "100%"
@@ -184,16 +187,22 @@ func load_time_scores():
 		# go, my children, be free
 		child.queue_free()
 	
-#	var save_data: LevelSaveData = CurrentLevelData.save_data
-#	var mission_ids = save_data.get_completed_missions()
-#
-#	for mission_id in mission_ids:
-#		var time_score = save_data.get_time_score(mission_id)
-#		if time_score != null:
-#			var time_score_node = TIME_SCORE_SCENE.instance()
-#			time_score_node.shine_detail = mission_ids[mission_id]
-#			time_score_node.time_score = time_score
-#			time_scores_container.add_child(time_score_node)
+	var save_data: LevelSaveData = CurrentLevelData.save_data
+	var collectible_data: CollectibleData = CurrentLevelData.level_metadata.collectible_data
+	var mission_ids = collectible_data.mission_data
+	for mission in mission_ids:
+		if not mission.mission_uuid in collectible_data.used_mission_data: continue
+		
+		var time_score = save_data.get_time_score(mission.mission_uuid)
+
+		if time_score != null:
+			var time_score_node = TIME_SCORE_SCENE.instance()
+			print(mission.shine_name, mission.shine_color)
+			time_score_node.shine_detail = {"title": mission.shine_name, 
+			"color": mission.shine_color,
+			"do_kick_out": mission.shine_force_leave}
+			time_score_node.time_score = time_score
+			time_scores_container.add_child(time_score_node)
 
 ## button functions
 

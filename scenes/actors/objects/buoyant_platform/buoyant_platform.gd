@@ -36,12 +36,12 @@ func _process(_delta):
 
 #-------------------------------- platform logic -----------------------
 	
-onready var sprite = $RigidBody2D/Sprite
-onready var static_body = $RigidBody2D/StaticBody2D
-onready var platform_area = $RigidBody2D/StaticBody2D/Area2D
-onready var platform_area_collision_shape = $RigidBody2D/StaticBody2D/Area2D/CollisionShape2D
-onready var collision_shape = $RigidBody2D/StaticBody2D/CollisionShape2D
-onready var rigidbody = $RigidBody2D
+onready var sprite = $BuoyancyController/Sprite
+onready var static_body = $BuoyancyController/StaticBody2D
+onready var platform_area = $BuoyancyController/StaticBody2D/Area2D
+onready var platform_area_collision_shape = $BuoyancyController/StaticBody2D/Area2D/CollisionShape2D
+onready var collision_shape = $BuoyancyController/StaticBody2D/CollisionShape2D
+onready var buoyancy_controller = $"%BuoyancyController"
 
 onready var left_width = sprite.patch_margin_left
 onready var right_width = sprite.patch_margin_right
@@ -64,11 +64,12 @@ func _ready():
 	if !is_enabled_and_on_ground():
 		collision_shape.disabled = true
 		
+	buoyancy_controller.init_physics()
 	update_parts()
 
-
+	
 func _physics_process(delta):
-	static_body.constant_linear_velocity = rigidbody.linear_velocity
+	static_body.constant_linear_velocity = buoyancy_controller.linear_velocity
 
 
 func platform_area_entered(area):
@@ -83,7 +84,7 @@ func update_parts():
 
 	platform_area_collision_shape.shape.extents.x = (left_width + (part_width * parts) + right_width) / 2 + 20
 	collision_shape.shape.extents.x = (left_width + (part_width * parts) + right_width) / 2
-	rigidbody.shape.extents.x = collision_shape.shape.extents.x
+	buoyancy_controller.shape.extents.x = collision_shape.shape.extents.x
 	#calculate the total platform scale
 	scale_x = scale.x * (left_width + right_width + part_width * parts) / (left_width + right_width + part_width)
 

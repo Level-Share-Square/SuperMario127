@@ -38,7 +38,8 @@ func _click(world_pos: Vector2) -> void:
 			if !Input.is_action_pressed("shift_modifier"): hovered_object = closest_object
 			else: 
 				editor.selected_item = closest_object.placeable_item
-				hovered_object = place_object(world_pos)
+				var copied_data = deep_copy(closest_object)
+				hovered_object = place_object(world_pos, copied_data)
 				is_copied = true
 
 			old_pos = hovered_object.global_position
@@ -49,6 +50,18 @@ func _click(world_pos: Vector2) -> void:
 	else:
 		for object in editor.hovered_objects.values():
 			erase_object(object)
+			
+func deep_copy(game_object: GameObject) -> ObjectData:
+	var object_data = game_object.object_data
+	var copied_metadata := ObjectMetadata.new(object_data.metadata.position, object_data.metadata.type_id, object_data.metadata.palette)
+	var properties: Dictionary = object_data.properties.duplicate(true)
+	
+	for property in properties.keys():
+		if !game_object.property_ids[property] in game_object.editable_properties:
+			properties.erase(property)
+
+	var copied_data := ObjectData.new(copied_metadata, properties)
+	return copied_data
 			
 func _mouse_movement(event, mouse_pos):
 	if hovered_object:
@@ -87,13 +100,14 @@ func find_closest_object(objects: Array) -> GameObject:
 
 	return closest_object
 
-func place_object(pos: Vector2):
+func place_object(pos: Vector2, data = null):
 	if shared.get_object_at_position(Vector2(round(pos.x), round(pos.y)), editor.layer):
 		return
 	
 	var object_item: PlaceableObject = editor.selected_item
-	var data = create_object_data(Vector2(round(pos.x), round(pos.y)) if editor.pixel_lock == false else pos.snapped(Vector2(8, 8)), object_item.object_id, object_item.palette)
-	
+	if not data:
+		data = create_object_data(Vector2(round(pos.x), round(pos.y)) if editor.pixel_lock == false else pos.snapped(Vector2(8, 8)), object_item.object_id, object_item.palette)
+
 	var action := PlaceObjectAction.new()
 	action.shared = shared
 	action.layer = editor.layer

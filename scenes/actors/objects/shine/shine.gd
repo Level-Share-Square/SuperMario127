@@ -72,8 +72,10 @@ var required_purples: int = 0
 var color: Color = Color(1, 1, 0)
 var mission_uuid: String = ""
 var activation_tag: String = ""
+var added_to_data: bool = false
 
 var score_from_before = 0 # haha that rhymes
+var mission_from_before = "" # haha that's the same as the above variable
 
 signal shine_collected
 signal shine_dance_end
@@ -91,6 +93,7 @@ func _register_properties() -> void:
 	register_property(7, "mission_uuid", mission_uuid, true)
 	register_property(8, "required_purples", required_purples, true)
 	register_property(9, "activation_tag", activation_tag, true)
+	register_property(10, "added_to_data", added_to_data, false)
 	
 	set_property_override("mission_uuid", PropertyTab.OverrideTypes.DROPDOWN, [self, "get_mission_args"])
 
@@ -102,7 +105,9 @@ func get_mission_args() -> Dictionary:
 
 func _ready() -> void:
 	send_score = true
-	if mission_uuid: update_shine_properties("mission_uuid", mission_uuid)
+	if mission_uuid: 
+		mission_from_before = mission_uuid
+		update_shine_properties("mission_uuid", mission_uuid)
 	if mode != 1: # not in edit mode
 		if required_purples > 0:
 			purple_starbits_activate = true
@@ -141,17 +146,33 @@ func _ready() -> void:
 
 func update_shine_properties(key: String, value) -> void:
 	if key == "mission_uuid":
-		var mission_data: MissionData = CurrentLevelData.level_metadata.collectible_data.get_mission_by_uuid(value)
-
+		var collectible_data = CurrentLevelData.level_metadata.collectible_data
+		var mission_data: MissionData = collectible_data.get_mission_by_uuid(value)
+		
+		if added_to_data and mission_uuid != mission_from_before and mission_from_before != "":
+			collectible_data.used_mission_data.erase(mission_from_before)
+		
+		if not added_to_data or mission_from_before != mission_uuid: 
+			collectible_data.used_mission_data.append(mission_uuid)
+			set_property("added_to_data", true, true)
+			added_to_data = true
+		
+		mission_from_before = value
+		
 		do_kick_out = mission_data.shine_force_leave
 		update_color("color", mission_data.shine_color)
 		title = mission_data.shine_name
 
-#
-#func on_place():
-#	CurrentLevelData.set_shine_ids()
-#	id = level_object.get_ref().properties[13]
-#	register_property("id", id)
+func _object_removed(free: bool) -> void:
+	._object_removed(free)
+	
+	CurrentLevelData.level_metadata.collectible_data.used_mission_data.erase(mission_uuid)
+	
+	
+func _object_restored() -> void:
+	._object_restored()
+	
+	CurrentLevelData.level_metadata.collectible_data.used_mission_data.append(mission_uuid)
 
 
 func update_color(key, value):
@@ -367,7 +388,7 @@ func collect(body: PhysicsBody2D) -> void:
 			var is_new_record: bool = CurrentLevelData.save_data.is_new_record(mission_uuid)
 
 			score_from_before = CurrentLevelData.time_score
-			CurrentLevelData.save_data.set_mission_complete(mission_uuid, title, false)
+			CurrentLevelData.save_data.set_mission_complete(mission_uuid, false)
 			CurrentLevelData.save_data.update_time_and_coin_score(mission_uuid, CurrentLevelData.selected_file > -2)
 			CurrentLevelData.pause_time_score()
 			if !do_kick_out:

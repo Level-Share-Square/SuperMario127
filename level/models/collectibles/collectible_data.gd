@@ -6,14 +6,17 @@ extends LevelDataResource
 var mission_data: Array
 # Array of StarCoinData
 var star_coin_data: Array
+# This is the total_shine_count
+var used_mission_data: Array
 
 var red_coin_count: int = 0
 
 
-func _init(s_mission_data: Array = [], s_star_coin_data: Array = [], s_red_coin_count: int = 0) -> void:
+func _init(s_mission_data: Array = [], s_star_coin_data: Array = [], s_red_coin_count: int = 0, s_used_mission_data: Array = []) -> void:
 	mission_data = s_mission_data
 	star_coin_data = s_star_coin_data
 	red_coin_count = s_red_coin_count
+	used_mission_data = s_used_mission_data
 
 
 func get_shine_count() -> int:
@@ -29,7 +32,8 @@ func get_mission_by_uuid(uuid: String) -> MissionData:
 			return mission
 	return null
 	
-func add_star_coin() -> String:
-	var data := StarCoinData.new(uuid_util.v4(), "", Color.white)
+func add_star_coin(uuid: String = "") -> String:
+	var data := StarCoinData.new(uuid_util.v4() if not uuid else uuid, "", Color.white)
+
 	star_coin_data.append(data)
 	return data.star_coin_uuid
