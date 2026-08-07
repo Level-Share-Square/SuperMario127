@@ -18,12 +18,14 @@ onready var name_label := $"%Name"
 
 ## external
 var level_metadata: LevelMetadata
+var level_save_data: LevelSaveData
 
 
 func _ready():
 	level_metadata = level_card.level_metadata
+	level_save_data = level_card.level_save_data
 	
-	if (!level_card.is_valid):
+	if not level_card.is_valid:
 		level_metadata = LevelMetadata.new()
 		level_metadata.level_name = "Invalid Level"
 		name_label.text = "Invalid Level"
@@ -32,7 +34,7 @@ func _ready():
 		load_custom_thumbnail(level_metadata.level_thumbnail_url)
 		name_label.text = level_metadata.level_name
 	
-	if level_card.has_save and level_metadata.is_fully_completed():
+	if level_card.has_save and level_save_data.is_fully_completed():
 		activate_completion_style()
 	else:
 		star.call_deferred("hide")

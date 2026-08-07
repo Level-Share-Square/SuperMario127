@@ -13,13 +13,11 @@ var level_id: String
 var working_folder: String = level_list_util.BASE_FOLDER
 var hub_level: String = ""
 var is_campaign: bool = false
-var selected_file: int = -1
 
 var level_transition_data: Dictionary
 var hub_return_data: Dictionary
 var shine_kickout_data: Dictionary
 
-## Level header data
 var level_metadata: LevelMetadata
 # Editor Data
 var editor_data: EditorData
@@ -27,6 +25,10 @@ var editor_data: EditorData
 var area_headers: Array
 # Array of MissionData
 var mission_data: Array
+
+# Save file
+var selected_file: int = -1
+var save_data: LevelSaveData
 
 var loaded_areas: Dictionary = {}
 
@@ -99,6 +101,7 @@ func load_level_metadata(code: String) -> void:
 	code = LevelCodeTokenizer.splice_level(code)
 	code = LevelCodeTokenizer.splice_metadata(code)
 	level_metadata = LevelCodeDeserializer.deserialize_level_metadata_code(code)
+	save_data = LevelSaveData.new(level_id, working_folder, level_metadata.collectible_data)
 
 
 func load_level_headers(code: String) -> void:
@@ -121,17 +124,9 @@ func load_level_headers(code: String) -> void:
 	for area_code in area_codes:
 		var area_header: AreaHeader = LevelCodeDeserializer.deserialize_area_header_code(area_code)
 		area_headers.append(area_header)
-	
-#	mission_data.clear()
-#	# load mission data
-#	var mission_codes: PoolStringArray = LevelCodeTokenizer.get_outermost_brackets(components_code[1])
-#	for mission_code in mission_codes:
-#		var mission_data: MissionData = MissionData.new()
-#		mission_data.append(mission_data)
 
 
 func switch_to_area(new_area_id: int, always_reload: bool = true, keep_old_loaded: bool = false) -> void:
-	
 	if not keep_old_loaded:
 		unload_level_area(area_id)
 	
