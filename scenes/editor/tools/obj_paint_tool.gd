@@ -11,6 +11,7 @@ var old_pos: Vector2
 var pos_offset: Vector2
 
 var hovered_object: GameObject
+var is_copied: bool = false
 
 signal objects_selected(objects)
 
@@ -32,7 +33,14 @@ func _click(world_pos: Vector2) -> void:
 		if editor.selected_objects.empty() && editor.hovered_objects.empty():
 			place_object(world_pos)
 		elif !editor.hovered_objects.empty():
-			hovered_object = find_closest_object(editor.hovered_objects.values())
+			var closest_object = find_closest_object(editor.hovered_objects.values())
+			
+			if !Input.is_action_pressed("shift_modifier"): hovered_object = closest_object
+			else: 
+				editor.selected_item = closest_object.placeable_item
+				hovered_object = place_object(world_pos)
+				is_copied = true
+
 			old_pos = hovered_object.global_position
 			pos_offset = old_pos - get_mouse_pos()
 		else:
@@ -53,11 +61,16 @@ func _process(delta):
 			
 func _click_left_released(event, mouse_pos):
 	if hovered_object:
+		
 		if is_dragging:
+			if is_copied: hovered_object.set_property("position", hovered_object.global_position, true)
+			else: change_property(hovered_object, "position", hovered_object.global_position, old_pos)
+			is_copied = false
 			is_dragging = false
-			change_property(hovered_object, "position", hovered_object.global_position, old_pos)
+			
 		else:
 			emit_signal("objects_selected", [hovered_object])
+			
 		hovered_object = null
 
 func find_closest_object(objects: Array) -> GameObject:
@@ -86,6 +99,8 @@ func place_object(pos: Vector2):
 	action.layer = editor.layer
 	action.object_data = data
 	editor.action_manager.commit_action(action)
+	
+	return action.object
 
 
 func create_object_data(position: Vector2, object_id: int, palette: int) -> ObjectData:
@@ -103,6 +118,7 @@ func erase_object(object: GameObject):
 	editor.action_manager.commit_action(action)
 	
 func change_property(object, property: String, new_value, old_value):
+	print("bepis")
 	var properties: Dictionary = setup_properties(property, new_value, old_value)
 	var action := ChangePropertyAction.new()
 	action.object = object

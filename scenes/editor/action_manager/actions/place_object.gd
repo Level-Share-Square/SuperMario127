@@ -3,7 +3,10 @@ extends BaseObjectAction
 
 
 func _do() -> void:
-	create_new_object()
+	if is_instance_valid(object):
+		restore_object()
+	else:
+		create_new_object()
 
 func _undo() -> void:
 	if is_instance_valid(object):
