@@ -622,7 +622,7 @@ margin_bottom = 113.0
 [node name="ScrollContainer" type="ScrollContainer" parent="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer"]
 margin_top = 117.0
 margin_right = 124.0
-margin_bottom = 363.0
+margin_bottom = 334.0
 size_flags_vertical = 3
 scroll_horizontal_enabled = false
 
@@ -652,14 +652,14 @@ categories = {
 }
 
 [node name="HSeparator2" type="HSeparator" parent="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer"]
-margin_top = 367.0
+margin_top = 338.0
 margin_right = 124.0
-margin_bottom = 371.0
+margin_bottom = 342.0
 
 [node name="MarginContainer" type="MarginContainer" parent="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer"]
-margin_top = 375.0
+margin_top = 346.0
 margin_right = 124.0
-margin_bottom = 412.0
+margin_bottom = 383.0
 custom_constants/margin_right = 6
 
 [node name="ItemLabel" type="Label" parent="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/MarginContainer"]
@@ -670,6 +670,35 @@ rect_min_size = Vector2( 0, 37 )
 text = "121 Garden Half Tile"
 align = 1
 autowrap = true
+
+[node name="HSeparator4" type="HSeparator" parent="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer"]
+margin_top = 387.0
+margin_right = 124.0
+margin_bottom = 391.0
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer"]
+margin_top = 395.0
+margin_right = 124.0
+margin_bottom = 412.0
+
+[node name="Label" type="Label" parent="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer2"]
+margin_right = 90.0
+margin_bottom = 17.0
+text = "Show Palettes"
+
+[node name="Filler" type="Control" parent="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer2"]
+margin_left = 94.0
+margin_right = 103.0
+margin_bottom = 17.0
+size_flags_horizontal = 3
+
+[node name="ItemPalettes" type="CheckButton" parent="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+margin_left = 107.0
+margin_right = 124.0
+margin_bottom = 17.0
+theme_type_variation = "CheckButtonTransparent"
+script = ExtResource( 45 )
 
 [node name="VSeparator" type="VSeparator" parent="UI/UIContainer"]
 margin_left = 144.0
@@ -1977,6 +2006,8 @@ volume_db = -7.5
 bus = "Sounds"
 
 [connection signal="disable_object" from="HotkeyManager" to="HotkeyManager/ItemHotkeysManager" method="disable_object"]
+[connection signal="last_object" from="HotkeyManager" to="HotkeyManager/ItemHotkeysManager" method="last_object"]
+[connection signal="last_tile" from="HotkeyManager" to="HotkeyManager/ItemHotkeysManager" method="last_tile"]
 [connection signal="mirror_h" from="HotkeyManager" to="HotkeyManager/ItemHotkeysManager" method="mirror_h"]
 [connection signal="mirror_v" from="HotkeyManager" to="HotkeyManager/ItemHotkeysManager" method="mirror_v"]
 [connection signal="rotate_object" from="HotkeyManager" to="HotkeyManager/ItemHotkeysManager" method="rotate_object"]
@@ -1985,6 +2016,7 @@ bus = "Sounds"
 [connection signal="action" from="ActionManager" to="SaveManager" method="_on_ActionManager_action"]
 [connection signal="text_entered" from="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/SearchBar" to="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/ScrollContainer/CenterContainer/ItemsGrid" method="_on_search"]
 [connection signal="pressed" from="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/Search" to="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/ScrollContainer/CenterContainer/ItemsGrid" method="_on_search"]
+[connection signal="pressed" from="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer2/ItemPalettes" to="UI/UIContainer/ItemPickerPanel" method="toggle_palettes"]
 [connection signal="pressed" from="UI/UIContainer/EditorUI/Top/Options/PanelContainer/Settings" to="UI/LevelSettingsWindow" method="toggle_window"]
 [connection signal="pressed" from="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/PanelContainer/Settings/AreaSettings" to="UI/AreaSettingsWindow" method="toggle_window"]
 [connection signal="button_down" from="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/PanelContainer/Settings/Save" to="SaveManager" method="_on_Save_button_down"]

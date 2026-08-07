@@ -25,7 +25,7 @@ func load_items(items: Array, priority_sort: bool):
 		var item_button = item_button_scene.instance()
 		item_button.placeable_item = item
 		add_child(item_button)
-		
+		item_picker_panel.connect("toggle_palettes", item_button, "set_texture")
 		var item_id: String
 		var item_name: String
 		if "object_id" in item:

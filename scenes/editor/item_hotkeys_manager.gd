@@ -90,3 +90,12 @@ func disable_object():
 		disable_objects(editor.selected_objects)
 		return
 	disable_objects(hovered_objects.values())
+
+
+func last_object():
+	get_node("%Hotbar").select_last_object()
+
+
+func last_tile():
+	get_node("%Hotbar").select_last_tile()
+

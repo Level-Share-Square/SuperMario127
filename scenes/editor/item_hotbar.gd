@@ -33,6 +33,8 @@ var loadout_palettes: Array = [
 
 var selected_loadout: int = 0
 
+var last_selected_tile: PlaceableTile
+var last_selected_object: PlaceableObject
 
 func _ready():
 	bottom_row.show()
@@ -54,6 +56,10 @@ func _ready():
 		fav_items = CurrentLevelData.editor_data.fav_items
 		loadout_palettes = CurrentLevelData.editor_data.palettes
 		items_favorited = CurrentLevelData.editor_data.fav_counts
+		selected_loadout = CurrentLevelData.editor_data.selected_loadout
+		
+	last_selected_tile = placeable_items.placeable_items["til_grass"]
+	last_selected_object = placeable_items.placeable_items["obj_coin"]
 	
 	refresh_loadout()
 	check_items()
@@ -71,8 +77,10 @@ func _on_item_button_pressed(item_button):
 	match item_name.substr(0, 3):
 		"obj":
 			item_preview.update_item(associated_item, associated_item.palette, true)
+			last_selected_object = associated_item
 		"til":
 			item_preview.update_item(associated_item, associated_item.palette, false)
+			last_selected_tile = associated_item
 	
 	editor.emit_signal("item_changed", associated_item)
 	update_level_data()
@@ -88,6 +96,7 @@ func update_level_data():
 	CurrentLevelData.editor_data.palettes = loadout_palettes
 	CurrentLevelData.editor_data.fav_items = fav_items
 	CurrentLevelData.editor_data.fav_counts = items_favorited
+	CurrentLevelData.editor_data.selected_loadout = selected_loadout
 
 
 func check_items():
@@ -159,6 +168,25 @@ func on_item_selected(item: PlaceableItem):
 
 	boxes[9].set_deferred("pressed", true)
 
+func select_last_object():
+	if editor.selected_item is PlaceableObject: return
+	for button in bottom_row.get_children():
+		if button.item == last_selected_object:
+			button.emit_signal("button_down")
+			button.emit_signal("button_up")
+			button.pressed = true
+			return
+	on_item_selected(last_selected_object)
+	
+func select_last_tile():
+	if editor.selected_item is PlaceableTile: return
+	for button in bottom_row.get_children():
+		if button.item == last_selected_tile:
+			button.emit_signal("button_down")
+			button.emit_signal("button_up")
+			button.pressed = true
+			return
+	on_item_selected(last_selected_tile)
 
 func refresh_loadout():
 	var favs_amount: int = fav_items[selected_loadout].size()
@@ -167,6 +195,16 @@ func refresh_loadout():
 		item_button.set_favorite(favs_amount > 0)
 		item_button.change_item(placeable_items.placeable_items[item])
 		favs_amount -= 1
+		
+	match selected_loadout:
+		0:
+			loadout_container.get_node("LoadoutA").pressed = true
+		1:
+			loadout_container.get_node("LoadoutB").pressed = true
+		2:
+			loadout_container.get_node("LoadoutC").pressed = true
+		3:
+			loadout_container.get_node("LoadoutD").pressed = true
 
 
 func _on_palettes_pressed():

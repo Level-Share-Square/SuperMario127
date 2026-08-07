@@ -40,6 +40,10 @@ static func serialize_editor_data(editor_data: EditorData) -> String:
 	code += serialize_data_array(editor_data.palettes)
 	code += serialize_data_array(editor_data.fav_items)
 	code += serialize_data_array(editor_data.fav_counts)
+	code += serialize_data_array([editor_data.selected_loadout])
+	code += serialize_data_array([editor_data.selected_layer])
+	code += serialize_data_array([editor_data.show_palettes])
+	code += serialize_data_array([editor_data.area_bounds_increment])
 	
 	return wrap_code_in_brackets(code)
 

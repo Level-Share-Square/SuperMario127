@@ -21,13 +21,16 @@ func _ready():
 	shared.connect("layer_added", self, "add_layer")
 	new_layer.connect("button_down", self, "new_layer", [true])
 	new_decor.connect("button_down", self, "new_layer", [false])
-	shared.connect("found_origin", self, "select_layer", [false])
+	shared.connect("found_origin", self, "select_default")
 	
 	yield(editor, "ready")
 	editor.action_manager.connect("undo", self, "update_layers")
 	editor.action_manager.connect("redo", self, "update_layers")
 	editor.action_manager.connect("action", self, "update_layers")
 
+func select_default(index: int):
+	if !editor.layer and index != -1:
+		select_layer(index, false)
 
 func select_layer(index: int, toggle_dropdown: bool = true) -> void:
 	var layer = shared.get_layer_at(index)
@@ -37,7 +40,9 @@ func select_layer(index: int, toggle_dropdown: bool = true) -> void:
 	layer_picker.get_node("LayerColor").modulate = EditorLayerManager.get_band_color(
 		layer_metadata.order, shared.origin.layer_data.layer_metadata.order
 	)
+	
 	editor.layer = shared.layer_index_to_uuid(index)
+	CurrentLevelData.editor_data.selected_layer = editor.layer
 	
 	if toggle_dropdown:
 		layer_picker.emit_signal("pressed")

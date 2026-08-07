@@ -59,8 +59,13 @@ static func deserialize_editor_data(editor_data_code: String) -> EditorData:
 	var palettes: Array = deserialize_datas_code(components[1])
 	var fav_items: Array = deserialize_datas_code(components[2])
 	var fav_count: Array = deserialize_datas_code(components[3])
+	if components.size() <= 4: return EditorData.new(layouts, palettes, fav_items, fav_count)
+	var selected_loadout: int = deserialize_datas_code(components[4])[0]
+	var selected_layer: String = deserialize_datas_code(components[5])[0]
+	var show_palettes: bool = deserialize_datas_code(components[6])[0]
+	var area_bounds_increment: int = deserialize_datas_code(components[7])[0]
 	
-	return EditorData.new(layouts, palettes, fav_items, fav_count)
+	return EditorData.new(layouts, palettes, fav_items, fav_count, selected_loadout, selected_layer, show_palettes, area_bounds_increment)
 
 
 static func deserialize_area_code(area_code: String) -> AreaData:

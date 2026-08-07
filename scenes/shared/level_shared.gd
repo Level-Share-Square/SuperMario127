@@ -43,21 +43,30 @@ func load_layers(layer_data_list: Array):
 		
 		if layer.layer_data.layer_metadata.is_origin:
 			origin = layer
-			emit_signal("found_origin", origin.layer_data.layer_metadata.order)
 			
 	# This is a failsafe in case none of the layers are origin
 	if !origin:
 		origin = get_layer(layers[2])
-		emit_signal("found_origin", origin.layer_data.layer_metadata.order)
+		
+	if get_tree().get_current_scene().mode == 1: 
+		get_node("%LayerDropdown").select_layer(layer_uuid_to_index(CurrentLevelData.editor_data.selected_layer), false)
+		get_node("%ParallaxScroll")._update_parallax()
+	emit_signal("found_origin", origin.layer_data.layer_metadata.order)
 
 func get_layer_index(layer: LevelLayer):
-	return layer.layer_data.layer_metadata.order
+	return layer.layer_data.layer_metadata.order if layer else -1
 	
 func get_layer_at(index: int) -> LevelLayer:
 	return get_layer(layers[index])
 	
 func get_layer(uuid: String) -> LevelLayer:
 	return layer_dictionary.get(uuid)
+	
+func layer_index_to_uuid(index: int):
+	return layer_dictionary.find_key(get_layer_at(index))
+	
+func layer_uuid_to_index(uuid: String):
+	return get_layer_index(get_layer(uuid))
 
 func add_layer(layer_data = null, add_to_data: bool = false, at: int = layers.size()) -> LevelLayer:
 	if not is_instance_valid(layer_data):
@@ -93,9 +102,6 @@ func remove_layer(uuid: String, remove_from_data: bool = false):
 		CurrentLevelData.current_area.layers.remove(get_layer_index(removed))
 		for i in range(0, CurrentLevelData.current_area.layers.size()):
 			CurrentLevelData.current_area.layers[i].layer_metadata.order = i
-		
-func layer_index_to_uuid(index: int):
-	return layer_dictionary.find_key(get_layer_at(index))
 		
 func edit_layer(uuid: String, property: String, value):
 	var layer: LevelLayer = get_layer(uuid)
@@ -170,3 +176,6 @@ func focus_layer(focus: bool, focus_layer: String):
 			layer.visible = layer_uuid == focus_layer
 		else:
 			layer.visible = layer.layer_data.layer_metadata.layer_visible
+#
+#func _process(delta):
+#	print(CurrentLevelData.editor_data.selected_layer)

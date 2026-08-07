@@ -1361,7 +1361,7 @@ margin_right = 516.0
 margin_bottom = 164.0
 custom_constants/vseparation = 24
 custom_constants/hseparation = 32
-columns = 4
+columns = 5
 
 [node name="Pause" parent="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys" instance=ExtResource( 12 )]
 margin_right = 104.0
@@ -1439,9 +1439,9 @@ sprite_visible = false
 
 [node name="Editor" type="GridContainer" parent="Subscreens/Controls/VBoxContainer/Remapper"]
 visible = false
-margin_left = 21.0
+margin_left = 19.0
 margin_top = 2.0
-margin_right = 523.0
+margin_right = 525.0
 margin_bottom = 226.0
 custom_constants/vseparation = 24
 custom_constants/hseparation = 32
@@ -1588,6 +1588,18 @@ margin_bottom = 224.0
 remapper_path = NodePath("../..")
 input_group = "Controls (Editor)"
 input_key = "disable_object"
+sprite_visible = false
+
+[node name="LastObject" parent="Subscreens/Controls/VBoxContainer/Remapper/Editor" instance=ExtResource( 12 )]
+remapper_path = NodePath("../..")
+input_group = "Controls (Editor)"
+input_key = "last_object"
+sprite_visible = false
+
+[node name="LastTile" parent="Subscreens/Controls/VBoxContainer/Remapper/Editor" instance=ExtResource( 12 )]
+remapper_path = NodePath("../..")
+input_group = "Controls (Editor)"
+input_key = "last_tile"
 sprite_visible = false
 
 [node name="EditorOld" type="GridContainer" parent="Subscreens/Controls/VBoxContainer/Remapper"]
@@ -1939,10 +1951,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 710.0
-margin_top = 448.0
-margin_right = 761.0
-margin_bottom = 473.0
+margin_left = -58.0
+margin_top = 16.0
+margin_right = -7.0
+margin_bottom = 41.0
 grow_horizontal = 0
 grow_vertical = 0
 text = "v0.9.1"

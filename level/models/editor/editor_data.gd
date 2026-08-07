@@ -17,13 +17,19 @@ var fav_items: Array = []
 var fav_counts: Array = []
 var selected_loadout: int = 0
 
+var selected_layer: String = ""
+var show_palettes: bool = true
+var area_bounds_increment: float = 10
 
 func _init(
 		s_loadouts: Array = [], 
 		s_palettes: Array = [], 
 		s_fav_items: Array = [], 
 		s_fav_counts: Array = [], 
-		s_selected_loadout: int = 0
+		s_selected_loadout: int = 0,
+		s_selected_layer: String = "",
+		s_show_palettes: bool = true,
+		s_area_bounds_increment: float = 10
 	) -> void:
 	loadouts = s_loadouts
 	palettes = s_palettes
@@ -47,3 +53,7 @@ func _init(
 	while i < MAX_LOADOUTS - 1:
 		fav_counts.append(0)
 		i += 1
+	
+	selected_layer = s_selected_layer
+	show_palettes = s_show_palettes
+	area_bounds_increment = s_area_bounds_increment

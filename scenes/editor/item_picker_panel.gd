@@ -15,8 +15,11 @@ onready var item_label = $"%ItemLabel"
 onready var tiles = $"%Tiles"
 onready var objects = $"%Objects"
 onready var hotbar = $"%Hotbar"
+onready var item_palettes = $"%ItemPalettes"
 
 var bar_shown = false
+
+signal toggle_palettes(value)
 
 func toggle():
 	is_shown = not is_shown
@@ -42,6 +45,7 @@ func _ready():
 		tile_group.connect("button_down", self, "_on_group_pressed", [tile_group])
 	for object_group in objects.get_children():
 		object_group.connect("button_down", self, "_on_group_pressed", [object_group])
+	item_palettes.pressed = CurrentLevelData.editor_data.show_palettes
 				
 func _on_group_pressed(group):
 	if not group.pressed:
@@ -57,3 +61,7 @@ func reset():
 func item_selected(item):
 	hotbar.on_item_selected(item)
 	
+	
+func toggle_palettes():
+	CurrentLevelData.editor_data.show_palettes = !CurrentLevelData.editor_data.show_palettes
+	emit_signal("toggle_palettes", CurrentLevelData.editor_data.show_palettes)

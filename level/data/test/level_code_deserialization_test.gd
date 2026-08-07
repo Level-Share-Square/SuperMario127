@@ -1,16 +1,16 @@
 extends Node2D
 
 
-const TEST_CODE_PATH = "res://level/data/test/test_code.txt"
+const TEST_CODE_PATH = "res://New Text Document.txt"
 const PLAYER_PATH = preload("res://scenes/player/player.tscn")
 const EDITOR_PATH = preload("res://scenes/editor/editor.tscn")
 
 
 func _ready():
 #	test_level_code_validation()
-	convert_debug_level()
+#	convert_debug_level()
 #	convert_dev_levels()
-	
+	test()
 #	instance_debug_level()
 	
 #	tile_byte_test(
@@ -53,6 +53,9 @@ func load_file():
 	file.close()
 	return content
 
+func test():
+	var data: LevelDataContainer = LevelCodeDeserializer.deserialize_level_code(load_file())
+	print(data.editor_data.selected_layer)
 
 func test_level_code_validation():
 	var invalid_1 = get_path_as_text("res://level/data/test/invalid_level_1.txt")
