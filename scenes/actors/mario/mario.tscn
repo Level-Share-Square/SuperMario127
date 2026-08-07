@@ -1669,7 +1669,7 @@ shader = ExtResource( 86 )
 shader_param/ray_count = 4
 shader_param/ray_distance = 0.4
 shader_param/ray_seperation_degrees = 22.0
-shader_param/rotation = 2.10815
+shader_param/rotation = 5.14999
 
 [sub_resource type="RectangleShape2D" id=85]
 extents = Vector2( 8, 18 )
@@ -2360,8 +2360,6 @@ position = Vector2( 0, 6 )
 collision_layer = 2
 collision_mask = 17
 script = ExtResource( 58 )
-character_path = NodePath("..")
-normal_shape = NodePath("CollisionShape2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SpinArea"]
 modulate = Color( 0.839216, 0.345098, 0.345098, 1 )
@@ -2374,8 +2372,6 @@ position = Vector2( 0, 6 )
 collision_layer = 2
 collision_mask = 17
 script = ExtResource( 58 )
-character_path = NodePath("..")
-normal_shape = NodePath("CollisionShape2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SpinSwimArea"]
 modulate = Color( 0.839216, 0.345098, 0.345098, 1 )
@@ -2498,6 +2494,7 @@ playing = true
 visible = false
 frames = ExtResource( 61 )
 centered = false
+script = ExtResource( 63 )
 
 [node name="ShineParticles" type="Particles2D" parent="CollectedShine"]
 show_behind_parent = true
