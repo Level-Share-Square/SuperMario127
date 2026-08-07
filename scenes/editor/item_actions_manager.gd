@@ -38,12 +38,26 @@ func handle_selection():
 		
 	if !is_any_selected: hide_selection_actions()
 
+func handle_cut():
+    if editor.selected_objects:
+	    copy_objects()
+		delete_objects()
+		return 
+
+	if editor.selected_tiles:
+	    copy_tiles()
+		delete_tiles()
+		return
+
+
 func handle_copy():
 	if editor.selected_objects:
 		copy_objects()
+		return
 		
 	if editor.selected_tiles:
 		copy_tiles()
+		return
 	
 func handle_paste():
 	var clipboard = JSON.parse(OS.get_clipboard()).result
@@ -57,9 +71,11 @@ func handle_paste():
 func handle_delete():
 	if editor.selected_objects:
 		delete_objects()
+		return
 		
 	if editor.selected_tiles:
 		delete_tiles()
+		return
 
 func copy_objects():
 	var objects: Array = []
