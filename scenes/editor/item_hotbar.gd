@@ -206,8 +206,8 @@ func refresh_loadout():
 
 
 func _on_palettes_pressed():
-	bottom_row.visible = palettes.pressed
-	palette_container.visible = !palettes.pressed
+	bottom_row.visible = not palettes.pressed
+	palette_container.visible = palettes.pressed
 	var palette_count: int = editor.selected_item.icons.size() - 1
 	var item_palettes: Array = editor.selected_item.icons
 

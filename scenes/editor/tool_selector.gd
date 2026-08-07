@@ -4,7 +4,7 @@ extends PanelContainer
 export(NodePath) var editor_path
 onready var editor = get_node(editor_path)
 
-onready var tile_lock: Button = $"%ObjectLock"
+onready var tile_lock: Button = $"%ObjectTileLock"
 onready var rectangle_fill: Button = $"%TileFill"
 onready var tile_rect_fill = $"%TileRectFill"
 onready var object_trail = $"%ObjectTrail"

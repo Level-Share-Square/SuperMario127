@@ -4,6 +4,7 @@ extends Control
 onready var editor = owner
 onready var parallax_scroll = $"%ParallaxScroll"
 onready var current_tool: EditorTool = $ObjectPaint
+onready var click_sound = $"%ClickSound"
 
 var mouse_position: Vector2
 var is_erasing: bool
@@ -80,10 +81,26 @@ func _on_Tools_tool_picked(tool_name):
 			change_tool("TileFill")
 		"TileRectFill":
 			change_tool("TileRectFill")
-		"ObjectLock":
+		"ObjectTileLock":
 			change_tool("ObjectTileLock")
 		"ObjectTrail":
 			change_tool("ObjectTrail")
+
+
+func pick_fill_or_lock() -> void:
+	click_sound.play()
+	if editor.selected_item is PlaceableObject:
+		change_tool("ObjectTileLock")
+	else:
+		change_tool("TileFill")
+
+
+func pick_rect_or_path() -> void:
+	click_sound.play()
+	if editor.selected_item is PlaceableObject:
+		change_tool("ObjectTrail")
+	else:
+		change_tool("TileRectFill")
 
 
 func toggle_eraser():

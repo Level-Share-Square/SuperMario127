@@ -7,6 +7,7 @@ onready var shared = $"%LevelShared"
 onready var selection_actions = $"%SelectionActions"
 onready var tile_selection_actions = $"%TileSelectionActions"
 onready var paste_action = $"%PasteAction"
+onready var item_hotkeys_manager = $"%ItemHotkeysManager"
 
 signal objects_copied(text)
 signal tiles_copied(text)
@@ -39,13 +40,13 @@ func handle_selection():
 	if !is_any_selected: hide_selection_actions()
 
 func handle_cut():
-    if editor.selected_objects:
-	    copy_objects()
+	if editor.selected_objects:
+		copy_objects()
 		delete_objects()
 		return 
 
 	if editor.selected_tiles:
-	    copy_tiles()
+		copy_tiles()
 		delete_tiles()
 		return
 
@@ -61,10 +62,15 @@ func handle_copy():
 	
 func handle_paste():
 	var clipboard = JSON.parse(OS.get_clipboard()).result
+	if not clipboard: return
 	
 	if clipboard[0].substr(0, 1) == "T":
+		if not editor.selected_item is PlaceableTile:
+			item_hotkeys_manager.last_tile()
 		paste_tiles(clipboard)
 	else:
+		if not editor.selected_item is PlaceableObject:
+			item_hotkeys_manager.last_object()
 		paste_objects(clipboard)
 	
 	
