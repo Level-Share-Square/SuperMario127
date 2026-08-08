@@ -148,17 +148,28 @@ func update_shine_properties(key: String, value) -> void:
 	if key == "mission_uuid":
 		var collectible_data = CurrentLevelData.level_metadata.collectible_data
 		var mission_data: MissionData = collectible_data.get_mission_by_uuid(value)
+		var used_mission_data: Dictionary = collectible_data.used_mission_data
 		
 		if added_to_data and mission_uuid != mission_from_before and mission_from_before != "":
-			collectible_data.used_mission_data.erase(mission_from_before)
-		
-		if not added_to_data or mission_from_before != mission_uuid: 
-			collectible_data.used_mission_data.append(mission_uuid)
+			if used_mission_data.has(mission_from_before):
+				used_mission_data[mission_from_before] -= 1
+				
+				if used_mission_data[mission_from_before] <= 0:
+					used_mission_data.erase(mission_from_before)
+
+		if not added_to_data or mission_from_before != mission_uuid:
+			if used_mission_data.has(mission_uuid): 
+				used_mission_data[mission_uuid] += 1
+			else: 
+				used_mission_data[mission_uuid] = 1 
+				
 			set_property("added_to_data", true, true)
 			added_to_data = true
 		
+		# 3. Update shadows and visuals
 		mission_from_before = value
 		
+		is_blue = mission_uuid in CurrentLevelData.save_data.get_completed_missions()
 		do_kick_out = mission_data.shine_force_leave
 		update_color("color", mission_data.shine_color)
 		title = mission_data.shine_name
@@ -166,13 +177,20 @@ func update_shine_properties(key: String, value) -> void:
 func _object_removed(free: bool) -> void:
 	._object_removed(free)
 	
-	CurrentLevelData.level_metadata.collectible_data.used_mission_data.erase(mission_uuid)
-	
+	var dict = CurrentLevelData.level_metadata.collectible_data.used_mission_data
+	if dict.has(mission_uuid):
+		dict[mission_uuid] -= 1
+		if dict[mission_uuid] <= 0:
+			dict.erase(mission_uuid)
 	
 func _object_restored() -> void:
 	._object_restored()
 	
-	CurrentLevelData.level_metadata.collectible_data.used_mission_data.append(mission_uuid)
+	var dict = CurrentLevelData.level_metadata.collectible_data.used_mission_data
+	if dict.has(mission_uuid):
+		dict[mission_uuid] += 1
+	else:
+		dict[mission_uuid] = 1
 
 
 func update_color(key, value):

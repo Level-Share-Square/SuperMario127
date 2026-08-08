@@ -96,6 +96,8 @@ func _ready():
 	load_placeable_item()
 	set_object_data(object_data)
 	instance_disabled_icon()
+	if internal_id == "level_entrance_luigi":
+		queue_free()
 	
 	if not visible and mode == Editor.mode:
 		visible = true

@@ -195,8 +195,11 @@ static func deserialize_collectible_data_code(code: String) -> CollectibleData:
 	var star_coin_data: Array = deserialize_star_coin_datas_code(star_coin_data_code)
 	var red_coin_count: int = deserialize_datas_code(components[2])[0]
 	if components.size() == 3: return CollectibleData.new(mission_data, star_coin_data, red_coin_count)
-	var used_mission_data: Array = deserialize_datas_code(components[3])
-
+	var used_mission_data_keys: Array = deserialize_datas_code(components[3])[0]
+	var used_mission_data_values: Array = deserialize_datas_code(components[3])[1]
+	var used_mission_data: Dictionary = {}
+	for i in used_mission_data_keys.size():
+		used_mission_data[used_mission_data_keys[i]] = used_mission_data_values[i]
 	return CollectibleData.new(mission_data, star_coin_data, red_coin_count, used_mission_data)
 
 

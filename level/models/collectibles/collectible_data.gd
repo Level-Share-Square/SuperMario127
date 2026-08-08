@@ -7,12 +7,12 @@ var mission_data: Array
 # Array of StarCoinData
 var star_coin_data: Array
 # This is the total_shine_count
-var used_mission_data: Array
+var used_mission_data: Dictionary
 
 var red_coin_count: int = 0
 
 
-func _init(s_mission_data: Array = [], s_star_coin_data: Array = [], s_red_coin_count: int = 0, s_used_mission_data: Array = []) -> void:
+func _init(s_mission_data: Array = [], s_star_coin_data: Array = [], s_red_coin_count: int = 0, s_used_mission_data: Dictionary = {}) -> void:
 	mission_data = s_mission_data
 	star_coin_data = s_star_coin_data
 	red_coin_count = s_red_coin_count

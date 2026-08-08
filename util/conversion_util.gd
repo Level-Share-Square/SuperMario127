@@ -328,7 +328,7 @@ static func get_level_metadata_from_old_data(level_data) -> LevelMetadata:
 static func get_collectible_data_from_old_data(level_data) -> CollectibleData:
 	var mission_datas: Array = []
 	var star_coin_datas: Array = []
-	var used_mission_datas: Array = []
+	var used_mission_datas: Dictionary = {}
 	
 	var SHINE_ID: int = 2
 	var STAR_COIN_ID: int = 52
@@ -362,7 +362,7 @@ static func get_collectible_data_from_old_data(level_data) -> CollectibleData:
 				object.properties[11] = ""
 				
 				mission_datas.append(mission_data)
-				used_mission_datas.append(mission_data.mission_uuid)
+				used_mission_datas[mission_data.mission_uuid] = 1
 			elif object.type_id == STAR_COIN_ID:
 				var star_coin_data: StarCoinData = StarCoinData.new(
 					uuid_util.v4(),

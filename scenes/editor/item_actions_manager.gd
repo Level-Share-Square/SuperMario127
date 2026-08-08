@@ -86,7 +86,7 @@ func handle_delete():
 func copy_objects():
 	var objects: Array = []
 	for object in editor.selected_objects:
-		objects.append(object.object_data)
+		objects.append(ObjectManager.object_data_deep_copy(object))
 
 	var text: String = JSON.print([LevelCodeSerializer.serialize_objects(objects), [editor_camera.position.x, editor_camera.position.y]])
 	OS.set_clipboard(text)
@@ -102,17 +102,19 @@ func copy_tiles():
 	emit_signal("tiles_copied", text)
 	
 func paste_objects(data: Array):
-	editor.selected_objects = []
+	var object_selection = get_node("%ObjectSelection")
+	object_selection.external_objects_selected([])
 	var objects: Array = LevelCodeDeserializer.deserialize_objects_code(data[0])
 
+	var objects_to_select: Array = []
 	for object in objects:
 		object = object as ObjectData
 		object.metadata.position += editor_camera.position - Vector2(data[1][0], data[1][1])
-		
-		editor.selected_objects.append(shared.create_object(object, editor.layer, true))
+
+		objects_to_select.append(shared.create_object(object, editor.layer, true))
 	
 	editor.tool_manager.change_tool("%ObjectSelection")
-	get_node("%ObjectSelection").fit_to_bounding_rectangle()
+	object_selection.external_objects_selected(objects_to_select)
 	emit_signal("objects_pasted", data)
 	
 func paste_tiles(data: Array):

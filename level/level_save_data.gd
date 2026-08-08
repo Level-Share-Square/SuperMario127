@@ -32,6 +32,8 @@ func reset_save_data():
 	_collected_star_coins = []
 	_time_scores = {}
 	_activated_fludds = [false, false, false]
+	_total_mission_count = -1
+	_total_star_coins = -1
 	level_list_util.save_level_save_file(get_save_file_dictionary(), get_save_path())
 
 func get_save_file_dictionary() -> Dictionary:

@@ -63,7 +63,7 @@ func load_collectibles_info(save_data: LevelSaveData)-> void:
 	
 	var collectibledata: CollectibleData = CurrentLevelData.level_metadata.collectible_data
 	
-	var total_shine_count: int = collectibledata.used_mission_data.size()
+	var total_shine_count: int = min(collectibledata.mission_data.size(), collectibledata.used_mission_data.size())
 	var collected_shine_count: int = save_data.get_completed_mission_count()
 	
 	if is_campaign:
@@ -95,7 +95,7 @@ func load_level_info(_level_metadata: LevelMetadata, _level_id: String, _working
 	working_folder = _working_folder
 	can_edit = _can_edit
 	is_campaign = _is_campaign
-	
+	print(level_metadata.level_name)
 	var current_number_of_players: int = Singleton.PlayerSettings.number_of_players
 	
 	previous_number_of_players = int(current_number_of_players)
@@ -170,7 +170,7 @@ func load_level_info(_level_metadata: LevelMetadata, _level_id: String, _working
 	load_collectibles_info(save_data)
 
 	# these are floats cuz they need to be divided for some calculations :)
-	var total_collectibles: float = collectibledata.used_mission_data.size() + collectibledata.star_coin_data.size()
+	var total_collectibles: float = min(collectibledata.mission_data.size(), collectibledata.used_mission_data.size()) + collectibledata.star_coin_data.size()
 	var total_collected: float = save_data.get_completed_mission_count() + save_data.get_collected_star_coin_count()
 	if total_collectibles <= 0:
 		percentage_label.text = "100%"
@@ -180,7 +180,6 @@ func load_level_info(_level_metadata: LevelMetadata, _level_id: String, _working
 	var completion_percent: float = stepify(total_collected / total_collectibles, 0.01) * 100
 	percentage_label.modulate = completion_color if (completion_percent >= 100) else Color.white
 	percentage_label.text = str(completion_percent) + "%"
-
 
 func load_time_scores():
 	for child in time_scores_container.get_children():
@@ -198,7 +197,8 @@ func load_time_scores():
 		if time_score != null:
 			var time_score_node = TIME_SCORE_SCENE.instance()
 			print(mission.shine_name, mission.shine_color)
-			time_score_node.shine_detail = {"title": mission.shine_name, 
+			time_score_node.shine_detail = {
+			"title": mission.shine_name, 
 			"color": mission.shine_color,
 			"do_kick_out": mission.shine_force_leave}
 			time_score_node.time_score = time_score
