@@ -165,3 +165,4 @@ script = ExtResource( 5 )
 [connection signal="pressed" from="Modifiers/HBoxContainer/Shake" to="TextEditor" method="add_bbcode" binds= [ "shake" ]]
 [connection signal="pressed" from="Modifiers/HBoxContainer/Rainbow" to="TextEditor" method="add_bbcode" binds= [ "rainbow" ]]
 [connection signal="pressed" from="Modifiers/HBoxContainer/Char" to="TextEditor" method="add_string" binds= [ ":Char:" ]]
+[connection signal="focus_exited" from="TextEditor" to="." method="emit_signal" binds= [ "focus_exited" ]]
