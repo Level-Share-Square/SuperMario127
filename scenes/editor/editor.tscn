@@ -1971,6 +1971,8 @@ bus = "Sounds"
 [connection signal="mirror_v" from="HotkeyManager" to="HotkeyManager/ItemHotkeysManager" method="mirror_v"]
 [connection signal="paint_tool" from="HotkeyManager" to="UI/UIContainer/EditorUI/Middle/Tools/VBoxContainer/ItemTools/Paint" method="emit_signal" binds= [ "pressed" ]]
 [connection signal="paste_clipboard" from="HotkeyManager" to="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/Actions/HBoxContainer/PasteAction/Paste" method="emit_signal" binds= [ "pressed" ]]
+[connection signal="pick_focused_item" from="HotkeyManager" to="HotkeyManager/ItemHotkeysManager" method="pick_focused_item"]
+[connection signal="pick_focused_item_released" from="HotkeyManager" to="HotkeyManager/ItemHotkeysManager" method="pick_focused_item_released"]
 [connection signal="rect_fill_tool" from="HotkeyManager" to="ZIndex/Tools" method="pick_rect_or_path"]
 [connection signal="redo_action" from="HotkeyManager" to="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/Actions/HBoxContainer/Redo" method="emit_signal" binds= [ "pressed" ]]
 [connection signal="rotate_object" from="HotkeyManager" to="HotkeyManager/ItemHotkeysManager" method="rotate_object"]

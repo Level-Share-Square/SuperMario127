@@ -86,7 +86,7 @@ func handle_delete():
 func copy_objects():
 	var objects: Array = []
 	for object in editor.selected_objects:
-		objects.append(ObjectManager.object_data_deep_copy(object))
+		objects.append(objects_util.object_data_deep_copy(object))
 
 	var text: String = JSON.print([LevelCodeSerializer.serialize_objects(objects), [editor_camera.position.x, editor_camera.position.y]])
 	OS.set_clipboard(text)

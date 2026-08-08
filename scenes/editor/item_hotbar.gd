@@ -173,21 +173,19 @@ func on_item_selected(item: PlaceableItem):
 
 func select_last_object():
 	if editor.selected_item is PlaceableObject: return
-	for button in bottom_row.get_children():
-		if button.item == last_selected_object:
-			button.emit_signal("pressed")
-			button.pressed = true
-			return
-	on_item_selected(last_selected_object)
+	select_item_from_placeable(last_selected_object)
 	
 func select_last_tile():
 	if editor.selected_item is PlaceableTile: return
+	select_item_from_placeable(last_selected_tile)
+
+func select_item_from_placeable(item):
 	for button in bottom_row.get_children():
-		if button.item == last_selected_tile:
+		if button.item == item:
 			button.emit_signal("pressed")
 			button.pressed = true
 			return
-	on_item_selected(last_selected_tile)
+	on_item_selected(item)
 
 func refresh_loadout():
 	var favs_amount: int = fav_items[selected_loadout].size()

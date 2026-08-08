@@ -4,6 +4,9 @@ onready var editor = owner
 onready var shared = $"%LevelShared"
 onready var object_selection = $"%ObjectSelection"
 onready var hotbar = $"%Hotbar"
+onready var tools = $"%Tools"
+
+var mouse_moved: bool = false
 
 var key_to_loadout_map: Dictionary = {
 	0: 3,
@@ -33,6 +36,9 @@ func scale_object():
 	object_selection.external_objects_selected(hovered_objects.values())
 	object_selection.selection_tools.call_deferred("start_tool_hotkey", "scale_object")
 
+func _unhandled_input(event):
+	if event is InputEventMouseMotion and event.relative != Vector2.ZERO: 
+		mouse_moved = true
 
 
 func flip_objects(multiplier: Vector2, objects: Array): # Hello everybody my name is
@@ -125,3 +131,27 @@ func switch_loadout(key):
 	var button = hotbar.loadout_container.get_child((2*key) + 3)
 	button.emit_signal("pressed")
 	
+
+
+func pick_focused_item():
+	mouse_moved = false
+
+
+func pick_focused_item_released():
+	if mouse_moved == true: return
+
+	var hovered_objects = editor.get_hovered_objects().values()
+	var mouse_pos = get_node("%ParallaxScroll").corrected_mouse_position()
+	var tile = shared.get_tile((mouse_pos/editor.TILE_SIZE).x, (mouse_pos/editor.TILE_SIZE).y, editor.layer)
+	
+	if "Object" in tools.current_tool.name and hovered_objects:
+		var object = objects_util.find_closest_object(hovered_objects, mouse_pos)
+		if hotbar.selected_button.item == object.placeable_item: return
+		tools.change_tool("ObjectPaint")
+		hotbar.select_item_from_placeable(object.placeable_item)
+		
+	if "Tile" in tools.current_tool.name and not shared.is_air(tile):
+		var item = tile_util.get_placeable_from_tile(tile, editor.placeable_items)
+		if hotbar.selected_button.item == item: return
+		tools.change_tool("TilePaint")
+		hotbar.select_item_from_placeable(item)

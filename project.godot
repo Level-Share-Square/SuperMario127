@@ -1249,6 +1249,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://util/new/levels_list/lss_link_util.gd"
 }, {
+"base": "Node",
+"class": "objects_util",
+"language": "GDScript",
+"path": "res://util/new/objects_util.gd"
+}, {
 "base": "Object",
 "class": "old_value_util",
 "language": "GDScript",
@@ -1528,6 +1533,7 @@ _global_script_class_icons={
 "level_list_util": "",
 "line_util": "",
 "lss_link_util": "",
+"objects_util": "",
 "old_value_util": "",
 "save_meta_util": "",
 "sort_file_util": "",

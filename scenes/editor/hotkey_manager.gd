@@ -39,6 +39,7 @@ signal layer_menu
 signal item_picker
 signal choose_palette
 signal pick_focused_item
+signal pick_focused_item_released
 signal rotate_object
 signal scale_object
 signal mirror_h
@@ -76,6 +77,12 @@ func _unhandled_input(event: InputEvent) -> void:
 			emit_signal(action_name)
 			get_tree().set_input_as_handled()
 			#prints(action_name, "emitted")
+			break
+			
+	for action_name in action_signal_array:
+		if not Input.is_action_pressed("ctrl_modifier") and event.is_action_released(action_name):
+			if has_signal(action_name + "_released"):
+				emit_signal(action_name + "_released")
 			break
 
 	if event is InputEventKey and event.is_pressed():
