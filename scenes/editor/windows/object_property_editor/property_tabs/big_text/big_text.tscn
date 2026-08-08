@@ -1,11 +1,14 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scenes/editor/editor_theme.tres" type="Theme" id=1]
-[ext_resource path="res://scenes/actors/mario/icon2.png" type="Texture" id=2]
-[ext_resource path="res://assets/icons/EyeOpen.svg" type="Texture" id=3]
+[ext_resource path="res://scenes/oldeditor/sounds/hover.wav" type="AudioStream" id=2]
+[ext_resource path="res://scenes/oldeditor/sounds/click2.wav" type="AudioStream" id=3]
 [ext_resource path="res://assets/icons/palette.svg" type="Texture" id=4]
 [ext_resource path="res://scenes/editor/windows/object_property_editor/property_tabs/big_text/text_editor.gd" type="Script" id=5]
 [ext_resource path="res://scenes/editor/windows/object_property_editor/property_tabs/big_text/big_text.gd" type="Script" id=6]
+[ext_resource path="res://scenes/menu/button_scripts/button_sound.gd" type="Script" id=7]
+[ext_resource path="res://scenes/actors/mario/icon2.png" type="Texture" id=8]
+[ext_resource path="res://assets/icons/EyeOpen.svg" type="Texture" id=9]
 
 [node name="BigText" type="VBoxContainer"]
 margin_right = 256.0
@@ -33,8 +36,9 @@ margin_bottom = 17.0
 rect_min_size = Vector2( 17, 0 )
 focus_mode = 0
 theme_type_variation = "ButtonTransparent"
-icon = ExtResource( 3 )
+icon = ExtResource( 9 )
 expand_icon = true
+script = ExtResource( 7 )
 
 [node name="VSeparator" type="VSeparator" parent="Modifiers/HBoxContainer"]
 margin_left = 21.0
@@ -48,8 +52,9 @@ margin_bottom = 17.0
 rect_min_size = Vector2( 17, 0 )
 focus_mode = 0
 theme_type_variation = "ButtonTransparent"
-icon = ExtResource( 3 )
+icon = ExtResource( 9 )
 expand_icon = true
+script = ExtResource( 7 )
 
 [node name="VSeparator2" type="VSeparator" parent="Modifiers/HBoxContainer"]
 margin_left = 50.0
@@ -63,8 +68,9 @@ margin_bottom = 17.0
 rect_min_size = Vector2( 17, 0 )
 focus_mode = 0
 theme_type_variation = "ButtonTransparent"
-icon = ExtResource( 3 )
+icon = ExtResource( 9 )
 expand_icon = true
+script = ExtResource( 7 )
 
 [node name="VSeparator3" type="VSeparator" parent="Modifiers/HBoxContainer"]
 margin_left = 79.0
@@ -80,6 +86,7 @@ focus_mode = 0
 theme_type_variation = "ButtonTransparent"
 icon = ExtResource( 4 )
 expand_icon = true
+script = ExtResource( 7 )
 
 [node name="VSeparator4" type="VSeparator" parent="Modifiers/HBoxContainer"]
 margin_left = 108.0
@@ -93,8 +100,9 @@ margin_bottom = 17.0
 rect_min_size = Vector2( 17, 0 )
 focus_mode = 0
 theme_type_variation = "ButtonTransparent"
-icon = ExtResource( 3 )
+icon = ExtResource( 9 )
 expand_icon = true
+script = ExtResource( 7 )
 
 [node name="VSeparator5" type="VSeparator" parent="Modifiers/HBoxContainer"]
 margin_left = 137.0
@@ -108,8 +116,9 @@ margin_bottom = 17.0
 rect_min_size = Vector2( 17, 0 )
 focus_mode = 0
 theme_type_variation = "ButtonTransparent"
-icon = ExtResource( 3 )
+icon = ExtResource( 9 )
 expand_icon = true
+script = ExtResource( 7 )
 
 [node name="VSeparator6" type="VSeparator" parent="Modifiers/HBoxContainer"]
 margin_left = 166.0
@@ -123,8 +132,9 @@ margin_bottom = 17.0
 rect_min_size = Vector2( 17, 0 )
 focus_mode = 0
 theme_type_variation = "ButtonTransparent"
-icon = ExtResource( 3 )
+icon = ExtResource( 9 )
 expand_icon = true
+script = ExtResource( 7 )
 
 [node name="VSeparator7" type="VSeparator" parent="Modifiers/HBoxContainer"]
 margin_left = 195.0
@@ -138,8 +148,9 @@ margin_bottom = 17.0
 rect_min_size = Vector2( 17, 0 )
 focus_mode = 0
 theme_type_variation = "ButtonTransparent"
-icon = ExtResource( 2 )
+icon = ExtResource( 8 )
 expand_icon = true
+script = ExtResource( 7 )
 
 [node name="TextEditor" type="TextEdit" parent="."]
 unique_name_in_owner = true
@@ -156,6 +167,18 @@ v_scroll_speed = 0.0
 wrap_enabled = true
 caret_blink = true
 script = ExtResource( 5 )
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource( 2 )
+volume_db = -10.0
+bus = "Sounds"
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource( 3 )
+volume_db = -10.0
+bus = "Sounds"
 
 [connection signal="pressed" from="Modifiers/HBoxContainer/Underline" to="TextEditor" method="add_bbcode" binds= [ "u" ]]
 [connection signal="pressed" from="Modifiers/HBoxContainer/Strikethrough" to="TextEditor" method="add_bbcode" binds= [ "s" ]]
