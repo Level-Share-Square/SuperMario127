@@ -88,6 +88,8 @@ func load_level_info(_level_metadata: LevelMetadata, _level_id: String, _working
 	
 	CurrentLevelData.level_metadata = _level_metadata
 	CurrentLevelData.level_id = _level_id
+	CurrentLevelData.working_folder = _working_folder
+	CurrentLevelData.is_campaign = _is_campaign
 	CurrentLevelData.load_save_data()
 	
 	level_metadata = CurrentLevelData.level_metadata
@@ -95,7 +97,6 @@ func load_level_info(_level_metadata: LevelMetadata, _level_id: String, _working
 	working_folder = _working_folder
 	can_edit = _can_edit
 	is_campaign = _is_campaign
-	print(level_metadata.level_name)
 	var current_number_of_players: int = Singleton.PlayerSettings.number_of_players
 	
 	previous_number_of_players = int(current_number_of_players)
@@ -196,7 +197,6 @@ func load_time_scores():
 
 		if time_score != null:
 			var time_score_node = TIME_SCORE_SCENE.instance()
-			print(mission.shine_name, mission.shine_color)
 			time_score_node.shine_detail = {
 			"title": mission.shine_name, 
 			"color": mission.shine_color,
