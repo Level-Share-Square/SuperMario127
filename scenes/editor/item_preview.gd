@@ -23,10 +23,7 @@ func _process(delta):
 			floor(parallax_scroll.corrected_mouse_position().y / 32) * 32
 		)
 	
-	if is_visible_in_tree():
-		editor.get_hovered_objects()
-		modulate.a = 0.5 if editor.hovered_objects.empty() else 0
-	
+	visible = should_show_preview()
 	if !position_override: rect_position = mouse_pos
 
 
@@ -39,8 +36,6 @@ func update_item(item, palette, is_obj):
 	offset = texture.get_size()/2
 
 
-func _on_Tools_tool_changed():
-	if !"Paint" in editor.tool_manager.current_tool.name:
-		hide()
-	else:
-		show()
+func should_show_preview() -> bool:
+	editor.get_hovered_objects()
+	return "Paint" in editor.tool_manager.current_tool.name and editor.hovered_objects.empty() and editor.ui.visible

@@ -8,7 +8,11 @@
 script = ExtResource( 1 )
 stream = ExtResource( 2 )
 underwater_stream = ExtResource( 3 )
+stream_link = ""
+underwater_stream_link = ""
+timer_stream_link = ""
 volume_db = 0
 pitch_scale = 1
 title = "Beach"
-note = "From Captain Toad"
+note = "From Captain Toad: Treasure Tracker"
+type = 0
