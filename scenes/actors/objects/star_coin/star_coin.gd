@@ -1,5 +1,8 @@
 extends GameObject
 
+const DEFAULT_HINT: String = "Here's a hint on how to get me!"
+const DEFAULT_COLOR := Color.white
+
 export var normal_frames : SpriteFrames
 export var collected_frames : SpriteFrames
 export var normal_particles : StreamTexture
@@ -15,24 +18,40 @@ var uuid: String = ""
 var collected := false
 var is_blue := false
 
+var hint := DEFAULT_HINT
+var color := DEFAULT_COLOR
+
+var data: StarCoinData
+
 #func _set_properties():
 #	savable_properties = ["uuid"]
 #	editable_properties = []
 
 func _register_properties():
 	register_property(4, "uuid", uuid, false)
+	register_property(5, "hint", hint, true)
+	register_property(6, "color", color, true)
 
 func _ready() -> void:
 	if not Singleton.ModeSwitcher.visible:
 		# Get the value, returning false if the key doesn't exist
 		is_blue = CurrentLevelData.save_data.is_star_coin_collected(uuid)
-
+	
 	update_color()
 	anim_sprite.play("default")
 	if not uuid:
-		uuid = CurrentLevelData.level_metadata.collectible_data.add_star_coin()
-		set_property("uuid", uuid, true)
+		data = CurrentLevelData.level_metadata.collectible_data.add_star_coin()
+		set_property("uuid", data.star_coin_uuid, true)
+		set_property("hint", DEFAULT_HINT, true)
+		set_property("color", DEFAULT_COLOR, true)
+		
+	connect("property_changed", self, "on_property_changed")
 
+func on_property_changed(key, value):
+	if key == "color":
+		data.star_coin_color = color
+	if key == "hint":
+		data.star_coin_hint = hint
 
 func _object_ready():
 	._object_ready()
@@ -62,13 +81,10 @@ func collect(body : PhysicsBody2D) -> void:
 
 func _object_removed(free: bool) -> void:
 	._object_removed(free)
-	
-	var data_array = CurrentLevelData.level_metadata.collectible_data.star_coin_data
-	for data in data_array:
-		if data.star_coin_uuid == uuid:
-			data_array.erase(data)
+
+	CurrentLevelData.level_metadata.collectible_data.star_coin_data.erase(data)
 	
 func _object_restored() -> void:
 	._object_restored()
 	
-	CurrentLevelData.level_metadata.collectible_data.add_star_coin(uuid)
+	CurrentLevelData.level_metadata.collectible_data.star_coin_data.append(data)

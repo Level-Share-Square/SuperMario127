@@ -120,7 +120,6 @@ func erase_object(object: GameObject):
 	editor.action_manager.commit_action(action)
 	
 func change_property(object, property: String, new_value, old_value):
-	print("bepis")
 	var properties: Dictionary = setup_properties(property, new_value, old_value)
 	var action := ChangePropertyAction.new()
 	action.object = object
