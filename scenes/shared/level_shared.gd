@@ -168,7 +168,6 @@ func get_object_at_position(pos: Vector2, uuid: String):
 func update_tilemaps():
 	for layer in layer_dictionary.values():
 		var tilemap: TileMapManager = layer.tile_map_manager
-		print(tilemap)
 		tilemap.update_bitmask_region()
 		tilemap.update_dirty_quadrants()
 
@@ -179,6 +178,30 @@ func focus_layer(focus: bool, focus_layer: String):
 			layer.visible = layer_uuid == focus_layer
 		else:
 			layer.visible = layer.layer_data.layer_metadata.layer_visible
-#
-#func _process(delta):
-#	print(CurrentLevelData.editor_data.selected_layer)
+
+func change_layer_type(layer: LevelLayer):
+	var new_layer_data := layer.layer_data
+	
+	var new_layer: LevelLayer
+	if !new_layer_data.layer_metadata.is_ground:
+		new_layer = ground_layer_scene.instance()
+		new_layer_data.layer_metadata.is_ground = true
+	else:
+		new_layer = parallax_layer_scene.instance()
+		new_layer_data.layer_metadata.is_ground = false
+			
+	var old_layer_index = layer.get_index()
+			
+	new_layer.layer_data = new_layer_data
+	layer.queue_free()
+	
+	yield(self, "child_order_changed")
+	
+	add_child(new_layer)
+	layer_dictionary[new_layer_data.layer_metadata.layer_uuid] = new_layer
+	print(layer_dictionary[new_layer_data.layer_metadata.layer_uuid])
+	move_layer(new_layer, old_layer_index, true)
+	new_layer.load_in(new_layer_data)
+	
+	return new_layer_data
+	
