@@ -17,6 +17,6 @@ items_in_sequence = 4
 index_in_sequence = 0
 icons = [ ExtResource( 7 ), ExtResource( 2 ), ExtResource( 6 ), ExtResource( 5 ), ExtResource( 3 ), ExtResource( 4 ) ]
 previews = [ ExtResource( 7 ) ]
-priority = 0
+priority = 29
 tileset_id = 7
 tile_id = 0
