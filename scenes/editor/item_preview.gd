@@ -25,7 +25,7 @@ func _process(delta):
 	
 	if is_visible_in_tree():
 		editor.get_hovered_objects()
-		modulate.a = 1 if editor.hovered_objects.empty() else 0
+		modulate.a = 0.5 if editor.hovered_objects.empty() else 0
 	
 	if !position_override: rect_position = mouse_pos
 

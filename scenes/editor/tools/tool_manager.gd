@@ -45,6 +45,7 @@ func _process(_delta: float):
 		current_tool._mouse_movement(event, parallax_scroll.corrected_mouse_position())
 
 func change_tool(tool_name: String) -> void:
+	print(tool_name)
 	current_tool = get_node(tool_name)
 	
 	var item_preview = get_node("%ItemPreview")
@@ -92,8 +93,8 @@ func _on_Tools_tool_picked(tool_name):
 			change_tool("TileRectFill")
 		"ObjectTileLock":
 			change_tool("ObjectTileLock")
-		"ObjectTrail":
-			change_tool("ObjectTrail")
+		"ObjectTrailTool":
+			change_tool("%ObjectTrail")
 
 
 func pick_fill_or_lock() -> void:
@@ -107,7 +108,7 @@ func pick_fill_or_lock() -> void:
 func pick_rect_or_path() -> void:
 	click_sound.play()
 	if editor.selected_item is PlaceableObject:
-		change_tool("ObjectTrail")
+		change_tool("%ObjectTrail")
 	else:
 		change_tool("TileRectFill")
 

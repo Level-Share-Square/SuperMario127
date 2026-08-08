@@ -1037,6 +1037,7 @@ margin_right = 147.0
 margin_bottom = 12.0
 focus_mode = 0
 size_flags_horizontal = 3
+theme_type_variation = "HSliderWhite"
 max_value = 255.0
 rounded = true
 
@@ -1069,6 +1070,7 @@ margin_left = 21.0
 margin_right = 147.0
 margin_bottom = 12.0
 size_flags_horizontal = 3
+theme_type_variation = "HSliderWhite"
 rounded = true
 
 [node name="Spinbox" type="SpinBox" parent="VBoxContainer/Expanded/Revealer/MarginContainer/VBoxContainer/SliderG"]
@@ -1100,6 +1102,7 @@ margin_left = 21.0
 margin_right = 147.0
 margin_bottom = 12.0
 size_flags_horizontal = 3
+theme_type_variation = "HSliderWhite"
 rounded = true
 
 [node name="Spinbox" type="SpinBox" parent="VBoxContainer/Expanded/Revealer/MarginContainer/VBoxContainer/SliderB"]
@@ -1131,6 +1134,7 @@ margin_left = 21.0
 margin_right = 147.0
 margin_bottom = 12.0
 size_flags_horizontal = 3
+theme_type_variation = "HSliderWhite"
 rounded = true
 
 [node name="Spinbox" type="SpinBox" parent="VBoxContainer/Expanded/Revealer/MarginContainer/VBoxContainer/SliderA"]
@@ -1162,6 +1166,7 @@ margin_left = 21.0
 margin_right = 147.0
 margin_bottom = 12.0
 size_flags_horizontal = 3
+theme_type_variation = "HSliderWhite"
 min_value = 1.0
 value = 1.0
 rounded = true

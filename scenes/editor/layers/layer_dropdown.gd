@@ -48,6 +48,8 @@ func select_layer(index: int, toggle_dropdown: bool = true) -> void:
 		layer_picker.emit_signal("pressed")
 		
 	get_node("%ParallaxScroll")._update_parallax()
+	get_node("%TileSelection").reset_bounds()
+	get_node("%ObjectSelection").external_objects_selected([])
 
 
 func add_layer(layer_data: LayerData) -> void:

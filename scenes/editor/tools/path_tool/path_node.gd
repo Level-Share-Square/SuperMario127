@@ -20,6 +20,8 @@ var handles_active: bool = false setget set_handles_active
 ## (vectors will be equal and inverse to each other)
 var handles_linked: bool
 
+var is_object: bool = false
+
 onready var left_handle: Node2D = $HandleL
 onready var right_handle: Node2D = $HandleR
 onready var handle_positions_before_link: PoolVector2Array = [left_handle.position, right_handle.position]
@@ -28,14 +30,13 @@ func _ready():
 	set_handles_active(false)
 
 func delete():
-	if get_index() == ui.get_ref().line.get_node("path").curve.get_point_count() - 1:
-		ui.get_ref().widget_move_to(ui.get_ref().nodes[ui.get_ref().line.get_node("path").curve.get_point_count() - 2])
 	if ui.get_ref().line.get_node("path").curve.get_point_count() == 1:
 		ui.get_ref().widget_container.hide()
 	if !first:
 		ui.get_ref().delete_node(self)
 		queue_free()
-	ui.get_ref().update_objects_array()
+	if ui.get_ref().has_method("update_objects_array"):
+		ui.get_ref().update_objects_array()
 		
 
 func _process(delta):
@@ -68,7 +69,7 @@ func _on_PathNodeButton_gui_input(event):
 		elif event.pressed and event.button_index == BUTTON_LEFT && ui.get_ref().delete == true:
 			delete()
 	if held && event is InputEventMouseMotion:
-		position = ui.get_ref().path_node_container.get_global_transform().xform_inv(ui.get_ref().get_mouse_pos())
+		position = ui.get_ref().get_mouse_pos() if !is_object else ui.get_ref().path_node_container.get_global_transform().xform_inv(ui.get_ref().get_mouse_pos())
 		if ui.get_ref().editor.pixel_lock:
 			position = position.snapped(Vector2(8, 8))
 		ui.get_ref().update_node_position(self)
@@ -81,7 +82,7 @@ func _on_left_handle_gui_input(event):
 		elif !event.pressed && event.button_index == BUTTON_LEFT:
 			left_handle_held = false
 	if left_handle_held && event is InputEventMouseMotion:
-		move_handle(HANDLE_LEFT, ui.get_ref().path_node_container.get_global_transform().xform_inv(ui.get_ref().get_mouse_pos()) - position, true)
+		move_handle(HANDLE_LEFT, ui.get_ref().get_mouse_pos() - position if !is_object else ui.get_ref().get_local_mouse_position() - position, true)
 
 
 func _on_right_handle_gui_input(event):
@@ -92,7 +93,7 @@ func _on_right_handle_gui_input(event):
 		elif !event.pressed && event.button_index == BUTTON_LEFT:
 			right_handle_held = false
 	if right_handle_held && event is InputEventMouseMotion:
-		move_handle(HANDLE_RIGHT, ui.get_ref().path_node_container.get_global_transform().xform_inv(ui.get_ref().get_mouse_pos()) - position, true)
+		move_handle(HANDLE_RIGHT, ui.get_ref().get_mouse_pos() - position if !is_object else ui.get_ref().get_local_mouse_position() - position, true)
 
 
 func move_handle(handle: int, new_pos: Vector2, moved_by_user: bool = false):
