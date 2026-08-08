@@ -25,7 +25,7 @@ func toggle_ui(value: bool):
 func reset_bounds():
 	.reset_bounds()
 	editor.item_actions.handle_selection()
-	editor.selected_objects = []
+	editor.deselect_objects()
 	pivot.visible = false
 
 func on_mouse_released():

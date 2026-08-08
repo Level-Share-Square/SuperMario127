@@ -142,6 +142,13 @@ func create_tile_object(cells: Dictionary) -> ObjectData:
 	get_node("%TileSelection").reset_bounds()
 	return object_data
 
-func selection_to_stamp():
+
+func selection_to_stamp() -> void:
 	if selected_tiles.empty(): return
 	create_tile_object(selected_tiles)
+
+
+func deselect_objects() -> void:
+	for object in selected_objects:
+		object.selected = false
+	selected_objects = []

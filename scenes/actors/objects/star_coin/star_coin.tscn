@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://scenes/actors/objects/star_coin/regular_frames.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/actors/objects/star_coin/collect.wav" type="AudioStream" id=2]
@@ -6,6 +6,10 @@
 [ext_resource path="res://assets/particles/shiny_particle_material.tres" type="Material" id=4]
 [ext_resource path="res://scenes/actors/mario/particles/shine_sparkles.png" type="Texture" id=5]
 [ext_resource path="res://scenes/actors/objects/star_coin/collected_frames.tres" type="SpriteFrames" id=6]
+[ext_resource path="res://scenes/actors/objects/star_coin/recolorable_frames.tres" type="SpriteFrames" id=7]
+[ext_resource path="res://scenes/actors/mario/FluddAnimSync.gd" type="Script" id=8]
+[ext_resource path="res://scenes/actors/mario/particles/recolorable_sparkles.png" type="Texture" id=9]
+[ext_resource path="res://scenes/actors/objects/star_coin/outline_frames.tres" type="SpriteFrames" id=10]
 
 [sub_resource type="StreamTexture" id=1]
 
@@ -74,13 +78,21 @@ tracks/3/keys = {
 script = ExtResource( 3 )
 internal_id = "star_coin"
 normal_frames = ExtResource( 1 )
+outline_frames = ExtResource( 10 )
 collected_frames = ExtResource( 6 )
 normal_particles = ExtResource( 5 )
+recolorable_particles = ExtResource( 9 )
 collected_particles = SubResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
 playing = true
+
+[node name="Recolorable" type="AnimatedSprite" parent="AnimatedSprite"]
+visible = false
+frames = ExtResource( 7 )
+playing = true
+script = ExtResource( 8 )
 
 [node name="Particles2D" type="Particles2D" parent="AnimatedSprite"]
 show_behind_parent = true

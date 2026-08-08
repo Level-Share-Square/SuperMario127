@@ -1,14 +1,17 @@
 extends GameObject
 
-const DEFAULT_HINT: String = "Here's a hint on how to get me!"
-const DEFAULT_COLOR := Color.white
+const DEFAULT_HINT: String = "This Star Coin doesn't have a hint."
+const DEFAULT_COLOR := Color.yellow
 
 export var normal_frames : SpriteFrames
+export var outline_frames : SpriteFrames
 export var collected_frames : SpriteFrames
 export var normal_particles : StreamTexture
+export var recolorable_particles: StreamTexture
 export var collected_particles : StreamTexture
 
 onready var anim_sprite : AnimatedSprite = $AnimatedSprite
+onready var recolorable : AnimatedSprite = $AnimatedSprite/Recolorable
 onready var particles : Particles2D = $AnimatedSprite/Particles2D
 onready var area : Area2D = $Area2D
 onready var audio_player : AudioStreamPlayer = $AudioStreamPlayer
@@ -50,6 +53,7 @@ func _ready() -> void:
 func on_property_changed(key, value):
 	if key == "color":
 		data.star_coin_color = color
+		update_color()
 	if key == "hint":
 		data.star_coin_hint = hint
 
@@ -59,8 +63,15 @@ func _object_ready():
 
 func update_color():
 	if !is_blue:
-		anim_sprite.frames = normal_frames
-		particles.texture = normal_particles
+		if color != DEFAULT_COLOR:
+			anim_sprite.frames = outline_frames
+			recolorable.modulate = color
+			recolorable.show()
+			particles.texture = recolorable_particles
+		else:
+			anim_sprite.frames = normal_frames
+			recolorable.hide()
+			particles.texture = normal_particles
 	else:
 		anim_sprite.frames = collected_frames
 		particles.texture = collected_particles
