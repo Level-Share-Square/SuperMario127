@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://scenes/oldeditor/sounds/hover.wav" type="AudioStream" id=2]
@@ -9,6 +9,8 @@
 [ext_resource path="res://assets/styles/ButtonStyleDisabled.tres" type="StyleBox" id=7]
 [ext_resource path="res://scenes/oldeditor/window/option_icon.gd" type="Script" id=8]
 [ext_resource path="res://scenes/editor/windows/object_property_editor/misc_property_scenes/property_editor.gd" type="Script" id=9]
+[ext_resource path="res://scenes/editor/editor_theme.tres" type="Theme" id=10]
+[ext_resource path="res://scenes/editor/windows/object_property_editor/property_tabs/big_text/big_text.tscn" type="PackedScene" id=11]
 
 [sub_resource type="DynamicFont" id=2]
 size = 13
@@ -31,49 +33,45 @@ corner_radius_bottom_left = 64
 [node name="Dialogue" type="HBoxContainer"]
 margin_right = 256.0
 margin_bottom = 206.0
+theme = ExtResource( 10 )
 script = ExtResource( 9 )
 
 [node name="Container" type="VBoxContainer" parent="."]
 margin_right = 256.0
-margin_bottom = 206.0
+margin_bottom = 227.0
 custom_constants/separation = 8
 
 [node name="DialogueEditor" type="VBoxContainer" parent="Container"]
 margin_right = 256.0
-margin_bottom = 146.0
+margin_bottom = 175.0
 custom_constants/separation = 2
 
 [node name="Label" type="Label" parent="Container/DialogueEditor"]
 margin_right = 256.0
-margin_bottom = 14.0
+margin_bottom = 17.0
 text = "Text:"
 
-[node name="DialogueEditor" type="TextEdit" parent="Container/DialogueEditor"]
-margin_top = 16.0
+[node name="BigText" parent="Container/DialogueEditor" instance=ExtResource( 11 )]
+margin_top = 19.0
+margin_bottom = 148.0
+
+[node name="HSeparator" type="HSeparator" parent="Container/DialogueEditor"]
+margin_top = 150.0
 margin_right = 256.0
-margin_bottom = 124.0
-rect_min_size = Vector2( 256, 108 )
-size_flags_horizontal = 3
-size_flags_vertical = 3
-text = "Hello, how are you doing on this fine day?
-I'm doing splendid!"
-smooth_scrolling = true
-v_scroll_speed = 0.0
-wrap_enabled = true
-caret_blink = true
+margin_bottom = 154.0
 
 [node name="Pages" type="HBoxContainer" parent="Container/DialogueEditor"]
-margin_left = 7.0
-margin_top = 126.0
-margin_right = 248.0
-margin_bottom = 146.0
+margin_left = 9.0
+margin_top = 156.0
+margin_right = 247.0
+margin_bottom = 175.0
 size_flags_horizontal = 6
 size_flags_vertical = 2
 custom_constants/separation = 6
 
 [node name="Remove" type="Button" parent="Container/DialogueEditor/Pages"]
 margin_right = 64.0
-margin_bottom = 20.0
+margin_bottom = 19.0
 rect_min_size = Vector2( 64, 0 )
 focus_mode = 0
 size_flags_vertical = 3
@@ -83,7 +81,7 @@ text = "Erase"
 [node name="Add" type="Button" parent="Container/DialogueEditor/Pages"]
 margin_left = 70.0
 margin_right = 134.0
-margin_bottom = 20.0
+margin_bottom = 19.0
 rect_min_size = Vector2( 64, 19 )
 focus_mode = 0
 size_flags_vertical = 3
@@ -94,7 +92,7 @@ text = "Add"
 [node name="Back" type="Button" parent="Container/DialogueEditor/Pages"]
 margin_left = 140.0
 margin_right = 170.0
-margin_bottom = 20.0
+margin_bottom = 19.0
 rect_min_size = Vector2( 30, 0 )
 focus_mode = 0
 size_flags_horizontal = 5
@@ -105,17 +103,17 @@ text = "<"
 
 [node name="IndexDisplay" type="Label" parent="Container/DialogueEditor/Pages"]
 margin_left = 176.0
-margin_right = 205.0
-margin_bottom = 20.0
+margin_right = 202.0
+margin_bottom = 19.0
 size_flags_vertical = 3
 text = "0/10"
 align = 1
 valign = 1
 
 [node name="Next" type="Button" parent="Container/DialogueEditor/Pages"]
-margin_left = 211.0
-margin_right = 241.0
-margin_bottom = 20.0
+margin_left = 208.0
+margin_right = 238.0
+margin_bottom = 19.0
 rect_min_size = Vector2( 30, 0 )
 focus_mode = 0
 size_flags_vertical = 3
@@ -124,9 +122,9 @@ text = ">"
 
 [node name="FacingDir" type="Button" parent="Container"]
 visible = false
-margin_top = 76.0
-margin_right = 717.0
-margin_bottom = 91.0
+margin_top = 195.0
+margin_right = 256.0
+margin_bottom = 210.0
 rect_min_size = Vector2( 96, 0 )
 focus_mode = 0
 custom_fonts/font = SubResource( 2 )
@@ -148,21 +146,20 @@ volume_db = -10.0
 bus = "Sounds"
 
 [node name="RemoteTagEditor" type="HBoxContainer" parent="Container"]
-margin_top = 154.0
+margin_top = 183.0
 margin_right = 256.0
-margin_bottom = 178.0
+margin_bottom = 200.0
 custom_constants/separation = 8
 
 [node name="Label" type="Label" parent="Container/RemoteTagEditor"]
-margin_top = 5.0
 margin_right = 62.0
-margin_bottom = 19.0
+margin_bottom = 17.0
 text = "Switch to:"
 
 [node name="RemoteTag" type="LineEdit" parent="Container/RemoteTagEditor"]
 margin_left = 70.0
 margin_right = 256.0
-margin_bottom = 24.0
+margin_bottom = 17.0
 rect_min_size = Vector2( 96, 0 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -173,16 +170,16 @@ placeholder_text = "(leave empty for next page)"
 placeholder_alpha = 0.4
 
 [node name="EmoteOptions" type="HBoxContainer" parent="Container"]
-margin_top = 186.0
+margin_top = 208.0
 margin_right = 256.0
-margin_bottom = 206.0
+margin_bottom = 227.0
 rect_min_size = Vector2( 114, 0 )
 alignment = 1
 
 [node name="ExpressionOption" type="OptionButton" parent="Container/EmoteOptions"]
 unique_name_in_owner = true
 margin_right = 82.0
-margin_bottom = 20.0
+margin_bottom = 19.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 1.6
@@ -195,7 +192,7 @@ textures = ExtResource( 5 )
 unique_name_in_owner = true
 margin_left = 86.0
 margin_right = 169.0
-margin_bottom = 20.0
+margin_bottom = 19.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 1.6
@@ -208,7 +205,7 @@ textures = ExtResource( 4 )
 unique_name_in_owner = true
 margin_left = 173.0
 margin_right = 256.0
-margin_bottom = 20.0
+margin_bottom = 19.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 1.6
