@@ -36,6 +36,8 @@ var selected_loadout: int = 0
 var last_selected_tile: PlaceableTile
 var last_selected_object: PlaceableObject
 
+var selected_button
+
 func _ready():
 	bottom_row.show()
 	palette_container.hide()
@@ -84,6 +86,7 @@ func _on_item_button_pressed(item_button):
 	
 	editor.emit_signal("item_changed", associated_item)
 	update_level_data()
+	selected_button = item_button
 
 
 func update_level_data():
@@ -235,3 +238,15 @@ func palette_selected(palette):
 			editor.selected_item.palette = palette
 			item_button.icon_node.texture = editor.selected_item.icons[palette]
 			_on_item_button_pressed(item_button)
+
+func _unhandled_input(event):
+	if not (Input.is_action_pressed("alt_modifier") or Input.is_action_pressed("ctrl_modifier")):
+		if event.is_action_pressed("scroll_down"):
+			var new_button = bottom_row.get_child(wrapi((selected_button.get_index() + 1), 0, 9))
+			new_button.emit_signal("pressed")
+			new_button.pressed = true
+			
+		if event.is_action_pressed("scroll_up"):
+			var new_button = bottom_row.get_child(wrapi((selected_button.get_index() - 1), 0, 9))
+			new_button.emit_signal("pressed")
+			new_button.pressed = true

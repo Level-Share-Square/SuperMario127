@@ -46,6 +46,8 @@ func select_layer(index: int, toggle_dropdown: bool = true) -> void:
 	
 	if toggle_dropdown:
 		layer_picker.emit_signal("pressed")
+		
+	get_node("%ParallaxScroll")._update_parallax()
 
 
 func add_layer(layer_data: LayerData) -> void:
@@ -82,3 +84,15 @@ func layer_moved():
 	layer_picker.get_node("LayerColor").modulate = EditorLayerManager.get_band_color(
 		cur_layer_metadata.order, shared.origin.layer_data.layer_metadata.order
 	)
+
+func _unhandled_input(event):
+	if not Input.is_action_pressed("ctrl_modifier") and Input.is_action_pressed("alt_modifier"):
+		var layer_index: int = shared.get_layer(editor.layer).layer_data.layer_metadata.order
+		
+		if event.is_action_pressed("scroll_up"):
+			select_layer(wrapi(layer_index + 1, 0, shared.layers.size()), false)
+			get_node("%ClickSound").play()
+		if event.is_action_pressed("scroll_down"):
+			select_layer(wrapi(layer_index - 1, 0, shared.layers.size()), false)
+			get_node("%ClickSound").play()
+		
