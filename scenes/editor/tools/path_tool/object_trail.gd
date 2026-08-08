@@ -1,6 +1,7 @@
 extends EditorTool
 
 const VERTEX_PATH = preload("res://scenes/editor/tools/path_tool/path_node.tscn")
+const DELETE_COLOR := Color("ff6060")
 
 onready var line = $"%Line"
 onready var path_node_container = $"%Icons"
@@ -62,7 +63,7 @@ func _on_Tools_tool_changed():
 	widget_container.hide()
 
 
-func _on_Check_button_down():
+func confirm():
 	update_objects_array()
 	var action := PlaceObjectBulkAction.new()
 	action.shared = shared
@@ -98,18 +99,20 @@ func update_line():
 	line.points = line.get_node("path").curve.get_baked_points()
 
 
-func _on_Delete_button_down():
-	delete = !delete_button.pressed
+func toggle_delete():
+	delete = delete_button.pressed
+	var tween: SceneTreeTween = create_tween()
+	tween.tween_property(delete_button, "self_modulate", DELETE_COLOR if delete else Color.white, 0.2)
 
 
-func _on_HandleLink_button_down():
+func toggle_handle_link():
 	for node in nodes:
 		node._toggle_handle_link()
 
 
-func _on_Handle_button_down():
+func toggle_handles():
 	for node in nodes:
-		node.set_handles_active(!handle.pressed)
+		node.set_handles_active(handle.pressed)
 
 func update_objects_array() -> void:
 	objects_array = []

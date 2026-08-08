@@ -92,7 +92,7 @@
 [ext_resource path="res://scenes/editor/hotkey_manager.gd" type="Script" id=90]
 [ext_resource path="res://assets/icons/TileStamp.svg" type="Texture" id=91]
 [ext_resource path="res://scenes/editor/buttons/eraser_button.gd" type="Script" id=92]
-[ext_resource path="res://assets/icons/interaction_marker.png" type="Texture" id=93]
+[ext_resource path="res://assets/icons/Cut.svg" type="Texture" id=93]
 
 [sub_resource type="RectangleShape2D" id=205]
 extents = Vector2( 2, 2 )

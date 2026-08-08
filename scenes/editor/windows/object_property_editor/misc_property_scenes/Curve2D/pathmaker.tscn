@@ -1,9 +1,16 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://scenes/editor/windows/object_property_editor/misc_property_scenes/Curve2D/pathmaker.gd" type="Script" id=1]
 [ext_resource path="res://scenes/oldeditor/property_type_scenes/Path/base/dash1.png" type="Texture" id=2]
 [ext_resource path="res://scenes/editor/editor_theme.tres" type="Theme" id=3]
+[ext_resource path="res://assets/icons/Link.svg" type="Texture" id=4]
 [ext_resource path="res://scenes/editor/tools/path_tool/previews.gd" type="Script" id=5]
+[ext_resource path="res://scenes/menu/button_scripts/button_sound.gd" type="Script" id=6]
+[ext_resource path="res://assets/icons/delete.svg" type="Texture" id=7]
+[ext_resource path="res://assets/icons/Confirm.svg" type="Texture" id=8]
+[ext_resource path="res://assets/icons/Handle.svg" type="Texture" id=9]
+[ext_resource path="res://scenes/oldeditor/sounds/click2.wav" type="AudioStream" id=10]
+[ext_resource path="res://scenes/oldeditor/sounds/hover.wav" type="AudioStream" id=11]
 
 [sub_resource type="Curve2D" id=1]
 _data = {
@@ -40,60 +47,141 @@ script = ExtResource( 5 )
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 4
 
-[node name="WidgetContainer" type="PanelContainer" parent="CanvasLayer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/HBoxContainer"]
+margin_left = 304.0
+margin_right = 464.0
+margin_bottom = 432.0
+mouse_filter = 2
+size_flags_vertical = 3
+
+[node name="Padding" type="Control" parent="CanvasLayer/HBoxContainer/VBoxContainer"]
+margin_right = 160.0
+margin_bottom = 329.0
+mouse_filter = 2
+size_flags_vertical = 3
+
+[node name="WidgetContainer" type="PanelContainer" parent="CanvasLayer/HBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
-margin_left = 225.0
-margin_top = 320.0
-margin_right = 516.0
-margin_bottom = 351.0
+margin_top = 333.0
+margin_right = 160.0
+margin_bottom = 362.0
 theme = ExtResource( 3 )
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/WidgetContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/HBoxContainer/VBoxContainer/WidgetContainer"]
 margin_left = 6.0
 margin_top = 6.0
-margin_right = 285.0
-margin_bottom = 25.0
+margin_right = 154.0
+margin_bottom = 23.0
+custom_constants/margin_right = 4
+custom_constants/margin_left = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/HBoxContainer/VBoxContainer/WidgetContainer/MarginContainer"]
+margin_left = 4.0
+margin_right = 144.0
+margin_bottom = 17.0
 custom_constants/separation = 5
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/WidgetContainer/VBoxContainer"]
-margin_right = 279.0
-margin_bottom = 19.0
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/HBoxContainer/VBoxContainer/WidgetContainer/MarginContainer/VBoxContainer"]
+margin_right = 140.0
+margin_bottom = 17.0
 
-[node name="Handle" type="Button" parent="CanvasLayer/WidgetContainer/VBoxContainer/HBoxContainer"]
+[node name="Handle" type="Button" parent="CanvasLayer/HBoxContainer/VBoxContainer/WidgetContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
-margin_right = 58.0
-margin_bottom = 19.0
-focus_mode = 0
+margin_right = 48.0
+margin_bottom = 17.0
+rect_min_size = Vector2( 48, 0 )
+hint_tooltip = "Show Handles"
+theme_type_variation = "ButtonTransparent"
 toggle_mode = true
-text = "Handles"
+icon = ExtResource( 9 )
+icon_align = 1
+expand_icon = true
+script = ExtResource( 6 )
 
-[node name="HandleLink" type="Button" parent="CanvasLayer/WidgetContainer/VBoxContainer/HBoxContainer"]
+[node name="VSeparator" type="VSeparator" parent="CanvasLayer/HBoxContainer/VBoxContainer/WidgetContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+margin_left = 52.0
+margin_right = 56.0
+margin_bottom = 17.0
+
+[node name="HandleLink" type="Button" parent="CanvasLayer/HBoxContainer/VBoxContainer/WidgetContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
-margin_left = 62.0
-margin_right = 161.0
-margin_bottom = 19.0
-focus_mode = 0
+margin_left = 60.0
+margin_right = 84.0
+margin_bottom = 17.0
+rect_min_size = Vector2( 24, 0 )
+hint_tooltip = "Handle Linking"
+theme_type_variation = "ButtonTransparent"
 toggle_mode = true
-text = "Handle Linking"
+icon = ExtResource( 4 )
+icon_align = 1
+expand_icon = true
+script = ExtResource( 6 )
 
-[node name="Delete" type="Button" parent="CanvasLayer/WidgetContainer/VBoxContainer/HBoxContainer"]
+[node name="VSeparator2" type="VSeparator" parent="CanvasLayer/HBoxContainer/VBoxContainer/WidgetContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+margin_left = 88.0
+margin_right = 92.0
+margin_bottom = 17.0
+
+[node name="Delete" type="Button" parent="CanvasLayer/HBoxContainer/VBoxContainer/WidgetContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
-margin_left = 165.0
-margin_right = 217.0
-margin_bottom = 19.0
-focus_mode = 0
+margin_left = 96.0
+margin_right = 111.0
+margin_bottom = 17.0
+rect_min_size = Vector2( 15, 0 )
+hint_tooltip = "Delete Points"
+theme_type_variation = "ButtonTransparent"
 toggle_mode = true
-text = "Delete"
+icon = ExtResource( 7 )
+icon_align = 1
+expand_icon = true
+script = ExtResource( 6 )
 
-[node name="Confirm" type="Button" parent="CanvasLayer/WidgetContainer/VBoxContainer/HBoxContainer"]
+[node name="VSeparator3" type="VSeparator" parent="CanvasLayer/HBoxContainer/VBoxContainer/WidgetContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+margin_left = 115.0
+margin_right = 119.0
+margin_bottom = 17.0
+
+[node name="Confirm" type="Button" parent="CanvasLayer/HBoxContainer/VBoxContainer/WidgetContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
-margin_left = 221.0
-margin_right = 279.0
-margin_bottom = 19.0
-focus_mode = 0
-text = "Confirm"
+self_modulate = Color( 0.376471, 1, 0.376471, 1 )
+margin_left = 123.0
+margin_right = 140.0
+margin_bottom = 17.0
+rect_min_size = Vector2( 17, 0 )
+hint_tooltip = "Confirm"
+theme_type_variation = "ButtonTransparent"
+icon = ExtResource( 8 )
+icon_align = 1
+expand_icon = true
+script = ExtResource( 6 )
 
-[connection signal="button_down" from="CanvasLayer/WidgetContainer/VBoxContainer/HBoxContainer/Handle" to="." method="_on_Handle_button_down"]
-[connection signal="button_down" from="CanvasLayer/WidgetContainer/VBoxContainer/HBoxContainer/HandleLink" to="." method="_on_HandleLink_button_down"]
-[connection signal="button_down" from="CanvasLayer/WidgetContainer/VBoxContainer/HBoxContainer/Delete" to="." method="_on_Delete_button_down"]
-[connection signal="button_down" from="CanvasLayer/WidgetContainer/VBoxContainer/HBoxContainer/Confirm" to="." method="_on_Check_button_down"]
+[node name="Padding2" type="Control" parent="CanvasLayer/HBoxContainer/VBoxContainer"]
+margin_top = 366.0
+margin_right = 160.0
+margin_bottom = 432.0
+mouse_filter = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource( 11 )
+volume_db = -10.0
+bus = "Sounds"
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource( 10 )
+volume_db = -10.0
+bus = "Sounds"
+
+[connection signal="pressed" from="CanvasLayer/HBoxContainer/VBoxContainer/WidgetContainer/MarginContainer/VBoxContainer/HBoxContainer/Handle" to="." method="toggle_handles"]
+[connection signal="pressed" from="CanvasLayer/HBoxContainer/VBoxContainer/WidgetContainer/MarginContainer/VBoxContainer/HBoxContainer/HandleLink" to="." method="toggle_handle_link"]
+[connection signal="pressed" from="CanvasLayer/HBoxContainer/VBoxContainer/WidgetContainer/MarginContainer/VBoxContainer/HBoxContainer/Delete" to="." method="toggle_delete"]
+[connection signal="pressed" from="CanvasLayer/HBoxContainer/VBoxContainer/WidgetContainer/MarginContainer/VBoxContainer/HBoxContainer/Confirm" to="." method="confirm"]
