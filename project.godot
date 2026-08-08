@@ -109,10 +109,10 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/editor/action_manager/actions/base_object.gd"
 }, {
-"base": "VBoxContainer",
+"base": "PropertyEditor",
 "class": "BigText",
 "language": "GDScript",
-"path": "res://scenes/editor/windows/object_property_editor/property_tabs/big_text/big_text.gd"
+"path": "res://scenes/editor/windows/big_text/big_text.gd"
 }, {
 "base": "GameObject",
 "class": "Block",

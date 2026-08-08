@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=89 format=2]
+[gd_resource type="Theme" load_steps=90 format=2]
 
 [ext_resource path="res://assets/fonts/delfino_small.tres" type="DynamicFont" id=1]
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=2]
@@ -515,6 +515,8 @@ border_color = Color( 0.34902, 0.572549, 0.709804, 0 )
 corner_radius_top_left = 2
 corner_radius_top_right = 2
 
+[sub_resource type="StyleBoxEmpty" id=193]
+
 [sub_resource type="StyleBoxFlat" id=130]
 content_margin_left = 6.0
 content_margin_right = 6.0
@@ -817,6 +819,7 @@ TabContainer/styles/panel = SubResource( 178 )
 TabContainer/styles/tab_bg = SubResource( 141 )
 TabContainer/styles/tab_disabled = SubResource( 142 )
 TabContainer/styles/tab_fg = SubResource( 140 )
+TextEdit/styles/focus = SubResource( 193 )
 TextEdit/styles/normal = SubResource( 130 )
 TooltipLabel/colors/font_color = Color( 1, 1, 1, 1 )
 TooltipLabel/fonts/font = SubResource( 131 )

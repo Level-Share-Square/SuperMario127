@@ -15,10 +15,14 @@ func add_bbcode(bbcode: String, arguments: String = "") -> void:
 	else:
 		var wrapped_text: String = wrap_in_bbcode("", bbcode, arguments)
 		insert_text_at_cursor(wrapped_text)
+	if get_focus_owner() != self:
+		emit_signal("focus_exited")
 
 
 func add_string(string: String) -> void:
 	insert_text_at_cursor(string)
+	if get_focus_owner() != self:
+		emit_signal("focus_exited")
 
 
 func _is_pos_in(check_pos : Vector2):

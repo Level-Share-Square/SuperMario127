@@ -10,10 +10,10 @@
 [ext_resource path="res://scenes/shared/background/backgrounds/day/day.png" type="Texture" id=8]
 [ext_resource path="res://scenes/editor/windows/editor_options/editor_options_window.gd" type="Script" id=9]
 [ext_resource path="res://scenes/actors/objects/painting/border.png" type="Texture" id=10]
+[ext_resource path="res://scenes/editor/windows/big_text/big_text.tscn" type="PackedScene" id=11]
 [ext_resource path="res://scenes/editor/windows/object_property_editor/misc_property_scenes/int/base.tscn" type="PackedScene" id=12]
 [ext_resource path="res://scenes/editor/windows/editor_options/areas.gd" type="Script" id=13]
 [ext_resource path="res://scenes/editor/windows/editor_options/level.gd" type="Script" id=15]
-[ext_resource path="res://scenes/menu/text_edit_unfocus.gd" type="Script" id=20]
 [ext_resource path="res://scenes/editor/windows/object_property_editor/misc_property_scenes/bool/base.tscn" type="PackedScene" id=21]
 [ext_resource path="res://scenes/editor/windows/object_property_editor/misc_property_scenes/String/base.tscn" type="PackedScene" id=22]
 [ext_resource path="res://scenes/editor/windows/object_property_editor/misc_property_scenes/Color/base.tscn" type="PackedScene" id=24]
@@ -26,35 +26,35 @@ script = ExtResource( 9 )
 title = "Level Settings"
 
 [node name="Background" parent="." index="0"]
-margin_right = 400.0
+margin_right = 413.0
 margin_bottom = 241.0
 
 [node name="ContentDivider" parent="." index="1"]
-margin_right = 400.0
+margin_right = 413.0
 margin_bottom = 241.0
 
 [node name="Header" parent="ContentDivider" index="0"]
-margin_right = 400.0
+margin_right = 413.0
 
 [node name="HeaderMat" parent="ContentDivider/Header" index="0"]
-margin_right = 396.0
+margin_right = 409.0
 
 [node name="HeaderBox" parent="ContentDivider/Header/HeaderMat" index="0"]
-margin_right = 386.0
+margin_right = 399.0
 
 [node name="WindowTitle" parent="ContentDivider/Header/HeaderMat/HeaderBox" index="2"]
-margin_right = 357.0
+margin_right = 370.0
 
 [node name="WindowClose" parent="ContentDivider/Header/HeaderMat/HeaderBox" index="3"]
-margin_left = 358.0
-margin_right = 380.0
+margin_left = 371.0
+margin_right = 393.0
 
 [node name="HSeparator" parent="ContentDivider" index="1"]
 modulate = Color( 1, 1, 1, 1 )
-margin_right = 400.0
+margin_right = 413.0
 
 [node name="ContentMat" parent="ContentDivider" index="2"]
-margin_right = 400.0
+margin_right = 413.0
 margin_bottom = 241.0
 custom_constants/margin_right = 6
 custom_constants/margin_top = 6
@@ -64,7 +64,7 @@ custom_constants/margin_bottom = 6
 [node name="Tabs" type="TabContainer" parent="ContentDivider/ContentMat" index="0"]
 margin_left = 6.0
 margin_top = 6.0
-margin_right = 394.0
+margin_right = 407.0
 margin_bottom = 204.0
 rect_pivot_offset = Vector2( -131, 46 )
 mouse_filter = 1
@@ -92,19 +92,19 @@ script = ExtResource( 15 )
 [node name="HBoxContainer" type="HBoxContainer" parent="ContentDivider/ContentMat/Tabs/Level" index="0"]
 margin_left = 5.0
 margin_top = 5.0
-margin_right = 375.0
+margin_right = 388.0
 margin_bottom = 162.0
 custom_constants/separation = 10
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ContentDivider/ContentMat/Tabs/Level/HBoxContainer" index="0"]
-margin_right = 175.0
+margin_right = 135.0
 margin_bottom = 157.0
 size_flags_horizontal = 3
 custom_constants/separation = 4
 
 [node name="AspectContainer" type="AspectRatioContainer" parent="ContentDivider/ContentMat/Tabs/Level/HBoxContainer/VBoxContainer" index="0"]
 unique_name_in_owner = true
-margin_right = 175.0
+margin_right = 135.0
 margin_bottom = 92.0
 rect_min_size = Vector2( 0, 92 )
 size_flags_horizontal = 3
@@ -112,9 +112,9 @@ ratio = 1.7778
 
 [node name="Border" type="NinePatchRect" parent="ContentDivider/ContentMat/Tabs/Level/HBoxContainer/VBoxContainer/AspectContainer" index="0"]
 unique_name_in_owner = true
-margin_left = 5.7212
-margin_right = 169.279
-margin_bottom = 92.0
+margin_top = 6.0
+margin_right = 135.0
+margin_bottom = 86.0
 rect_min_size = Vector2( 0, 80 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -138,7 +138,7 @@ stretch_mode = 6
 [node name="ThumbnailURL" type="LineEdit" parent="ContentDivider/ContentMat/Tabs/Level/HBoxContainer/VBoxContainer" index="1"]
 unique_name_in_owner = true
 margin_top = 96.0
-margin_right = 175.0
+margin_right = 135.0
 margin_bottom = 110.0
 custom_fonts/font = ExtResource( 7 )
 align = 1
@@ -147,13 +147,13 @@ script = ExtResource( 2 )
 
 [node name="HSeparator" type="HSeparator" parent="ContentDivider/ContentMat/Tabs/Level/HBoxContainer/VBoxContainer" index="2"]
 margin_top = 114.0
-margin_right = 175.0
+margin_right = 135.0
 margin_bottom = 118.0
 
 [node name="Level Name" type="LineEdit" parent="ContentDivider/ContentMat/Tabs/Level/HBoxContainer/VBoxContainer" index="3"]
 unique_name_in_owner = true
 margin_top = 122.0
-margin_right = 175.0
+margin_right = 135.0
 margin_bottom = 139.0
 align = 1
 placeholder_text = "Level Name"
@@ -161,9 +161,8 @@ script = ExtResource( 2 )
 
 [node name="Author" type="LineEdit" parent="ContentDivider/ContentMat/Tabs/Level/HBoxContainer/VBoxContainer" index="4"]
 unique_name_in_owner = true
-margin_left = 20.0
 margin_top = 143.0
-margin_right = 155.0
+margin_right = 135.0
 margin_bottom = 157.0
 rect_min_size = Vector2( 135, 0 )
 size_flags_horizontal = 6
@@ -173,26 +172,25 @@ placeholder_text = "Author"
 script = ExtResource( 2 )
 
 [node name="VSeparator" type="VSeparator" parent="ContentDivider/ContentMat/Tabs/Level/HBoxContainer" index="1"]
-margin_left = 185.0
-margin_right = 185.0
+margin_left = 145.0
+margin_right = 145.0
 margin_bottom = 157.0
 custom_constants/separation = 0
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="ContentDivider/ContentMat/Tabs/Level/HBoxContainer" index="2"]
-margin_left = 195.0
-margin_right = 370.0
+margin_left = 155.0
+margin_right = 383.0
 margin_bottom = 157.0
 size_flags_horizontal = 3
 
-[node name="Description" type="TextEdit" parent="ContentDivider/ContentMat/Tabs/Level/HBoxContainer/VBoxContainer2" index="0"]
+[node name="Description" parent="ContentDivider/ContentMat/Tabs/Level/HBoxContainer/VBoxContainer2" index="0" instance=ExtResource( 11 )]
 unique_name_in_owner = true
-margin_right = 175.0
+margin_right = 228.0
 margin_bottom = 157.0
 size_flags_vertical = 3
-custom_fonts/font = ExtResource( 7 )
-text = "Write a description of your level here."
-wrap_enabled = true
-script = ExtResource( 20 )
+show_char = false
+is_small = true
+holds_property = false
 
 [node name="Areas" type="ScrollContainer" parent="ContentDivider/ContentMat/Tabs" index="1"]
 unique_name_in_owner = true
@@ -207,7 +205,7 @@ scroll_horizontal_enabled = false
 script = ExtResource( 13 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ContentDivider/ContentMat/Tabs/Areas" index="0"]
-margin_right = 372.0
+margin_right = 385.0
 margin_bottom = 19.0
 size_flags_horizontal = 3
 
@@ -281,8 +279,8 @@ size_flags_horizontal = 3
 scroll_horizontal_enabled = false
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ContentDivider/ContentMat/Tabs/Missions/ScrollContainer2" index="0"]
-margin_right = 244.0
-margin_bottom = 444.0
+margin_right = 252.0
+margin_bottom = 329.0
 size_flags_horizontal = 3
 custom_constants/separation = 5
 
@@ -292,71 +290,76 @@ margin_top = 0.0
 margin_right = 244.0
 margin_bottom = 17.0
 
-[node name="ShineDescription" parent="ContentDivider/ContentMat/Tabs/Missions/ScrollContainer2/VBoxContainer" index="1" instance=ExtResource( 22 )]
+[node name="ShineDescription" parent="ContentDivider/ContentMat/Tabs/Missions/ScrollContainer2/VBoxContainer" index="1" instance=ExtResource( 11 )]
 unique_name_in_owner = true
 margin_top = 22.0
 margin_right = 244.0
-margin_bottom = 39.0
+margin_bottom = 51.0
+rect_min_size = Vector2( 0, 144 )
+show_name = true
+show_char = false
 
 [node name="SortOrder" parent="ContentDivider/ContentMat/Tabs/Missions/ScrollContainer2/VBoxContainer" index="2" instance=ExtResource( 12 )]
 unique_name_in_owner = true
-margin_top = 44.0
+margin_top = 56.0
 margin_right = 244.0
-margin_bottom = 61.0
+margin_bottom = 73.0
 
 [node name="Color" parent="ContentDivider/ContentMat/Tabs/Missions/ScrollContainer2/VBoxContainer" index="3" instance=ExtResource( 24 )]
 unique_name_in_owner = true
-margin_top = 66.0
+margin_top = 78.0
 margin_right = 244.0
-margin_bottom = 330.0
+margin_bottom = 342.0
 
 [node name="ForceLeave" parent="ContentDivider/ContentMat/Tabs/Missions/ScrollContainer2/VBoxContainer" index="4" instance=ExtResource( 21 )]
 unique_name_in_owner = true
-margin_top = 335.0
+margin_top = 347.0
 margin_right = 244.0
-margin_bottom = 352.0
+margin_bottom = 364.0
 
 [node name="SpawnArea" parent="ContentDivider/ContentMat/Tabs/Missions/ScrollContainer2/VBoxContainer" index="5" instance=ExtResource( 5 )]
 unique_name_in_owner = true
-margin_top = 357.0
+margin_top = 369.0
 margin_right = 244.0
-margin_bottom = 376.0
+margin_bottom = 388.0
 
 [node name="TeleporterTag" parent="ContentDivider/ContentMat/Tabs/Missions/ScrollContainer2/VBoxContainer" index="6" instance=ExtResource( 22 )]
 unique_name_in_owner = true
-margin_top = 381.0
+margin_top = 393.0
 margin_right = 244.0
-margin_bottom = 398.0
+margin_bottom = 410.0
 
 [node name="ShowInMenu" parent="ContentDivider/ContentMat/Tabs/Missions/ScrollContainer2/VBoxContainer" index="7" instance=ExtResource( 21 )]
 unique_name_in_owner = true
-margin_top = 403.0
+margin_top = 415.0
 margin_right = 244.0
-margin_bottom = 420.0
+margin_bottom = 432.0
 
 [node name="Erase" type="Button" parent="ContentDivider/ContentMat/Tabs/Missions/ScrollContainer2/VBoxContainer" index="8"]
 unique_name_in_owner = true
-margin_top = 425.0
+margin_top = 437.0
 margin_right = 244.0
-margin_bottom = 444.0
+margin_bottom = 456.0
 theme_type_variation = "ButtonRed"
 text = "Delete Mission"
 script = ExtResource( 6 )
 
-[node name="Border" parent="." index="2"]
-margin_right = 400.0
+[node name="WindowCorner" parent="." index="2"]
+margin_left = 401.0
+margin_top = 229.0
+margin_right = 413.0
 margin_bottom = 241.0
 
-[node name="WindowMat" parent="." index="3"]
-margin_right = 400.0
+[node name="Border" parent="." index="3"]
+margin_right = 413.0
 margin_bottom = 241.0
 
-[node name="WindowCorner" parent="." index="4"]
-margin_right = 400.0
+[node name="WindowMat" parent="." index="4"]
+margin_right = 413.0
 margin_bottom = 241.0
 
 [node name="Control" parent="." index="5"]
-margin_right = 400.0
+margin_right = 413.0
 margin_bottom = 241.0
 
 [connection signal="button_down" from="ContentDivider/ContentMat/Tabs/Areas/VBoxContainer/HBoxContainer/Paste" to="ContentDivider/ContentMat/Tabs/Areas" method="paste_area"]

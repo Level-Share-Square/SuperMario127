@@ -1,0 +1,228 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://scenes/oldeditor/sounds/click2.wav" type="AudioStream" id=1]
+[ext_resource path="res://scenes/menu/button_scripts/button_sound.gd" type="Script" id=2]
+[ext_resource path="res://scenes/editor/editor_theme.tres" type="Theme" id=3]
+[ext_resource path="res://scenes/editor/windows/big_text/big_text.gd" type="Script" id=4]
+[ext_resource path="res://assets/icons/palette.svg" type="Texture" id=5]
+[ext_resource path="res://scenes/oldeditor/sounds/hover.wav" type="AudioStream" id=6]
+[ext_resource path="res://scenes/editor/windows/big_text/text_editor.gd" type="Script" id=7]
+[ext_resource path="res://scenes/actors/mario/icon2.png" type="Texture" id=8]
+[ext_resource path="res://assets/icons/EyeOpen.svg" type="Texture" id=9]
+
+[sub_resource type="DynamicFont" id=1]
+
+[node name="BigText" type="VBoxContainer"]
+margin_right = 256.0
+margin_bottom = 206.0
+theme = ExtResource( 3 )
+custom_constants/separation = -4
+script = ExtResource( 4 )
+
+[node name="PropertyName" type="Label" parent="."]
+unique_name_in_owner = true
+visible = false
+margin_right = 256.0
+margin_bottom = 17.0
+rect_min_size = Vector2( 60, 0 )
+mouse_filter = 1
+mouse_default_cursor_shape = 16
+text = "Property:"
+
+[node name="Padding" type="Control" parent="."]
+margin_right = 256.0
+margin_bottom = 10.0
+rect_min_size = Vector2( 0, 10 )
+
+[node name="Modifiers" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+margin_top = 6.0
+margin_right = 256.0
+margin_bottom = 31.0
+theme_type_variation = "FlatPanel2"
+
+[node name="ModifierButtons" type="HBoxContainer" parent="Modifiers"]
+unique_name_in_owner = true
+margin_left = 18.0
+margin_top = 4.0
+margin_right = 238.0
+margin_bottom = 21.0
+size_flags_horizontal = 4
+
+[node name="Underline" type="Button" parent="Modifiers/ModifierButtons"]
+margin_right = 17.0
+margin_bottom = 17.0
+rect_min_size = Vector2( 17, 17 )
+hint_tooltip = "Underline"
+focus_mode = 0
+theme_type_variation = "ButtonTransparent"
+custom_fonts/font = SubResource( 1 )
+icon = ExtResource( 9 )
+expand_icon = true
+script = ExtResource( 2 )
+
+[node name="VSeparator" type="VSeparator" parent="Modifiers/ModifierButtons"]
+margin_left = 21.0
+margin_right = 25.0
+margin_bottom = 17.0
+
+[node name="Strikethrough" type="Button" parent="Modifiers/ModifierButtons"]
+margin_left = 29.0
+margin_right = 46.0
+margin_bottom = 17.0
+rect_min_size = Vector2( 17, 17 )
+hint_tooltip = "Strikethrough"
+focus_mode = 0
+theme_type_variation = "ButtonTransparent"
+custom_fonts/font = SubResource( 1 )
+icon = ExtResource( 9 )
+expand_icon = true
+script = ExtResource( 2 )
+
+[node name="VSeparator2" type="VSeparator" parent="Modifiers/ModifierButtons"]
+margin_left = 50.0
+margin_right = 54.0
+margin_bottom = 17.0
+
+[node name="Center" type="Button" parent="Modifiers/ModifierButtons"]
+margin_left = 58.0
+margin_right = 75.0
+margin_bottom = 17.0
+rect_min_size = Vector2( 17, 17 )
+hint_tooltip = "Center"
+focus_mode = 0
+theme_type_variation = "ButtonTransparent"
+custom_fonts/font = SubResource( 1 )
+icon = ExtResource( 9 )
+expand_icon = true
+script = ExtResource( 2 )
+
+[node name="VSeparator3" type="VSeparator" parent="Modifiers/ModifierButtons"]
+margin_left = 79.0
+margin_right = 83.0
+margin_bottom = 17.0
+
+[node name="Color" type="Button" parent="Modifiers/ModifierButtons"]
+margin_left = 87.0
+margin_right = 104.0
+margin_bottom = 17.0
+rect_min_size = Vector2( 17, 17 )
+hint_tooltip = "Color"
+focus_mode = 0
+theme_type_variation = "ButtonTransparent"
+custom_fonts/font = SubResource( 1 )
+icon = ExtResource( 5 )
+expand_icon = true
+script = ExtResource( 2 )
+
+[node name="VSeparator4" type="VSeparator" parent="Modifiers/ModifierButtons"]
+margin_left = 108.0
+margin_right = 112.0
+margin_bottom = 17.0
+
+[node name="Wave" type="Button" parent="Modifiers/ModifierButtons"]
+margin_left = 116.0
+margin_right = 133.0
+margin_bottom = 17.0
+rect_min_size = Vector2( 17, 17 )
+hint_tooltip = "Wave"
+focus_mode = 0
+theme_type_variation = "ButtonTransparent"
+custom_fonts/font = SubResource( 1 )
+icon = ExtResource( 9 )
+expand_icon = true
+script = ExtResource( 2 )
+
+[node name="VSeparator5" type="VSeparator" parent="Modifiers/ModifierButtons"]
+margin_left = 137.0
+margin_right = 141.0
+margin_bottom = 17.0
+
+[node name="Shake" type="Button" parent="Modifiers/ModifierButtons"]
+margin_left = 145.0
+margin_right = 162.0
+margin_bottom = 17.0
+rect_min_size = Vector2( 17, 17 )
+hint_tooltip = "Shake"
+focus_mode = 0
+theme_type_variation = "ButtonTransparent"
+custom_fonts/font = SubResource( 1 )
+icon = ExtResource( 9 )
+expand_icon = true
+script = ExtResource( 2 )
+
+[node name="VSeparator6" type="VSeparator" parent="Modifiers/ModifierButtons"]
+margin_left = 166.0
+margin_right = 170.0
+margin_bottom = 17.0
+
+[node name="Rainbow" type="Button" parent="Modifiers/ModifierButtons"]
+margin_left = 174.0
+margin_right = 191.0
+margin_bottom = 17.0
+rect_min_size = Vector2( 17, 17 )
+hint_tooltip = "Rainbow"
+focus_mode = 0
+theme_type_variation = "ButtonTransparent"
+custom_fonts/font = SubResource( 1 )
+icon = ExtResource( 9 )
+expand_icon = true
+script = ExtResource( 2 )
+
+[node name="CharVSeparator" type="VSeparator" parent="Modifiers/ModifierButtons"]
+unique_name_in_owner = true
+margin_left = 195.0
+margin_right = 199.0
+margin_bottom = 17.0
+
+[node name="Char" type="Button" parent="Modifiers/ModifierButtons"]
+unique_name_in_owner = true
+margin_left = 203.0
+margin_right = 220.0
+margin_bottom = 17.0
+rect_min_size = Vector2( 17, 17 )
+hint_tooltip = "Character Name"
+focus_mode = 0
+theme_type_variation = "ButtonTransparent"
+custom_fonts/font = SubResource( 1 )
+icon = ExtResource( 8 )
+expand_icon = true
+script = ExtResource( 2 )
+
+[node name="TextEditor" type="TextEdit" parent="."]
+unique_name_in_owner = true
+margin_top = 27.0
+margin_right = 256.0
+margin_bottom = 206.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Hello, how are you doing on this fine day?
+I'm doing splendid!"
+smooth_scrolling = true
+v_scroll_speed = 0.0
+wrap_enabled = true
+caret_blink = true
+script = ExtResource( 7 )
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource( 6 )
+volume_db = -10.0
+bus = "Sounds"
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource( 1 )
+volume_db = -10.0
+bus = "Sounds"
+
+[connection signal="pressed" from="Modifiers/ModifierButtons/Underline" to="TextEditor" method="add_bbcode" binds= [ "u" ]]
+[connection signal="pressed" from="Modifiers/ModifierButtons/Strikethrough" to="TextEditor" method="add_bbcode" binds= [ "s" ]]
+[connection signal="pressed" from="Modifiers/ModifierButtons/Center" to="TextEditor" method="add_bbcode" binds= [ "center" ]]
+[connection signal="pressed" from="Modifiers/ModifierButtons/Color" to="TextEditor" method="add_bbcode" binds= [ "color", "=#00aeff" ]]
+[connection signal="pressed" from="Modifiers/ModifierButtons/Wave" to="TextEditor" method="add_bbcode" binds= [ "wave" ]]
+[connection signal="pressed" from="Modifiers/ModifierButtons/Shake" to="TextEditor" method="add_bbcode" binds= [ "shake" ]]
+[connection signal="pressed" from="Modifiers/ModifierButtons/Rainbow" to="TextEditor" method="add_bbcode" binds= [ "rainbow" ]]
+[connection signal="pressed" from="Modifiers/ModifierButtons/Char" to="TextEditor" method="add_string" binds= [ ":Char:" ]]
+[connection signal="focus_exited" from="TextEditor" to="." method="done_editing"]
+[connection signal="text_changed" from="TextEditor" to="." method="emit_signal" binds= [ "text_changed" ]]
