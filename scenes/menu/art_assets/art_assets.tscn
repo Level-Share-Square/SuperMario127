@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=37 format=2]
 
 [ext_resource path="res://scenes/menu/art_assets/art_assets.gd" type="Script" id=1]
 [ext_resource path="res://scenes/menu/background_scroll/background.tscn" type="PackedScene" id=2]
@@ -12,6 +12,8 @@
 [ext_resource path="res://assets/artwork/logo_shadowed.png" type="Texture" id=10]
 [ext_resource path="res://assets/artwork/icon_colorless.png" type="Texture" id=11]
 [ext_resource path="res://scenes/menu/art_assets/gayshine.gd" type="Script" id=12]
+[ext_resource path="res://scenes/shared/background/foregrounds/mountain_edge/palettes/5/front.png" type="Texture" id=13]
+[ext_resource path="res://assets/artwork/twitter/progress_pride.svg" type="Texture" id=14]
 
 [sub_resource type="Shader" id=26]
 code = "shader_type canvas_item;
@@ -95,6 +97,11 @@ gradient = SubResource( 15 )
 fill_from = Vector2( 0.5, 0.2 )
 fill_to = Vector2( 0.5, 1 )
 
+[sub_resource type="GradientTexture2D" id=40]
+gradient = SubResource( 15 )
+fill_from = Vector2( 0.5, 0.2 )
+fill_to = Vector2( 0.5, 0.8 )
+
 [sub_resource type="ShaderMaterial" id=37]
 shader = SubResource( 26 )
 shader_param/u_amount = 1.75
@@ -115,6 +122,15 @@ fill_to = Vector2( 0.5, 0 )
 [sub_resource type="ShaderMaterial" id=39]
 shader = SubResource( 26 )
 shader_param/u_amount = 1.75
+
+[sub_resource type="Gradient" id=41]
+offsets = PoolRealArray( 0.0502793, 1 )
+colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 0.501961 )
+
+[sub_resource type="GradientTexture2D" id=42]
+gradient = SubResource( 41 )
+fill_from = Vector2( 0.5, 0 )
+fill_to = Vector2( 0.5, 1 )
 
 [node name="ArtAssets" type="VBoxContainer"]
 script = ExtResource( 1 )
@@ -315,11 +331,82 @@ texture = ExtResource( 10 )
 expand = true
 stretch_mode = 6
 
-[node name="DiscordBanner" type="ViewportContainer" parent="."]
+[node name="DiscordHeader" type="ViewportContainer" parent="."]
 unique_name_in_owner = true
 margin_top = 1854.0
 margin_right = 960.0
 margin_bottom = 2394.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="Viewport" type="Viewport" parent="DiscordHeader"]
+size = Vector2( 960, 540 )
+handle_input_locally = false
+render_target_update_mode = 3
+
+[node name="BG" type="Sprite" parent="DiscordHeader/Viewport"]
+scale = Vector2( 1.3, 1.3 )
+z_index = -512
+z_as_relative = false
+texture = ExtResource( 5 )
+centered = false
+
+[node name="FG2" type="Sprite" parent="DiscordHeader/Viewport"]
+position = Vector2( -288, 96 )
+scale = Vector2( 1.3, 1.3 )
+z_index = -512
+z_as_relative = false
+texture = ExtResource( 6 )
+centered = false
+
+[node name="FG2" type="Sprite" parent="DiscordHeader/Viewport/FG2"]
+position = Vector2( 544, -64 )
+z_index = -512
+z_as_relative = false
+texture = ExtResource( 3 )
+centered = false
+
+[node name="FG3" type="Sprite" parent="DiscordHeader/Viewport/FG2"]
+position = Vector2( 512, 0 )
+z_index = -512
+z_as_relative = false
+texture = ExtResource( 4 )
+centered = false
+
+[node name="WhiteGradient" type="TextureRect" parent="DiscordHeader/Viewport"]
+modulate = Color( 1, 1, 1, 0.501961 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = SubResource( 18 )
+expand = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="DiscordHeader/Viewport"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 920, 430 )
+
+[node name="CenterContainer" type="CenterContainer" parent="DiscordHeader/Viewport/HBoxContainer"]
+margin_right = 960.0
+margin_bottom = 540.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Logo" type="TextureRect" parent="DiscordHeader/Viewport/HBoxContainer/CenterContainer"]
+margin_left = 192.0
+margin_right = 768.0
+margin_bottom = 540.0
+rect_min_size = Vector2( 576, 540 )
+texture = ExtResource( 10 )
+expand = true
+stretch_mode = 6
+
+[node name="DiscordBanner" type="ViewportContainer" parent="."]
+unique_name_in_owner = true
+margin_top = 2398.0
+margin_right = 960.0
+margin_bottom = 2938.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
@@ -366,31 +453,178 @@ size_flags_vertical = 3
 texture = SubResource( 18 )
 expand = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="DiscordBanner/Viewport"]
+[node name="YoutubeBanner" type="ViewportContainer" parent="."]
+unique_name_in_owner = true
+margin_top = 2942.0
+margin_right = 2560.0
+margin_bottom = 4382.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="Viewport" type="Viewport" parent="YoutubeBanner"]
+size = Vector2( 2560, 1440 )
+handle_input_locally = false
+render_target_update_mode = 3
+
+[node name="BG" type="Sprite" parent="YoutubeBanner/Viewport"]
+position = Vector2( 0, -128 )
+scale = Vector2( 4, 4 )
+z_as_relative = false
+texture = ExtResource( 5 )
+centered = false
+
+[node name="ColorRect" type="ColorRect" parent="YoutubeBanner/Viewport"]
+anchor_top = 0.759
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.0627451, 0.0509804, 0.0470588, 1 )
+
+[node name="FG" type="Sprite" parent="YoutubeBanner/Viewport"]
+position = Vector2( 96, 288 )
+scale = Vector2( 2, 2 )
+z_as_relative = false
+texture = ExtResource( 3 )
+centered = false
+
+[node name="FG4" type="Sprite" parent="YoutubeBanner/Viewport/FG"]
+position = Vector2( 1024, 0 )
+z_as_relative = false
+texture = ExtResource( 3 )
+centered = false
+
+[node name="FG2" type="Sprite" parent="YoutubeBanner/Viewport"]
+position = Vector2( -384, 416 )
+scale = Vector2( 2, 2 )
+z_as_relative = false
+texture = ExtResource( 4 )
+centered = false
+
+[node name="FG4" type="Sprite" parent="YoutubeBanner/Viewport/FG2"]
+position = Vector2( 1024, 0 )
+z_as_relative = false
+texture = ExtResource( 4 )
+centered = false
+
+[node name="FG3" type="Sprite" parent="YoutubeBanner/Viewport"]
+position = Vector2( -96, 416 )
+scale = Vector2( 2, 2 )
+z_as_relative = false
+texture = ExtResource( 13 )
+centered = false
+
+[node name="FG" type="Sprite" parent="YoutubeBanner/Viewport/FG3"]
+position = Vector2( 1024, 0 )
+z_as_relative = false
+texture = ExtResource( 13 )
+centered = false
+
+[node name="WhiteGradient" type="TextureRect" parent="YoutubeBanner/Viewport"]
+modulate = Color( 1, 1, 1, 0.501961 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = SubResource( 40 )
+expand = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="YoutubeBanner/Viewport"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_min_size = Vector2( 920, 430 )
 
-[node name="CenterContainer" type="CenterContainer" parent="DiscordBanner/Viewport/HBoxContainer"]
-margin_right = 960.0
-margin_bottom = 540.0
+[node name="CenterContainer" type="CenterContainer" parent="YoutubeBanner/Viewport/HBoxContainer"]
+margin_top = 536.0
+margin_right = 2560.0
+margin_bottom = 904.0
+size_flags_horizontal = 3
+size_flags_vertical = 4
+
+[node name="Logo" type="TextureRect" parent="YoutubeBanner/Viewport/HBoxContainer/CenterContainer"]
+margin_left = 955.0
+margin_right = 1605.0
+margin_bottom = 368.0
+rect_min_size = Vector2( 650, 368 )
+texture = ExtResource( 10 )
+expand = true
+stretch_mode = 6
+
+[node name="BlueskyBanner" type="ViewportContainer" parent="."]
+unique_name_in_owner = true
+margin_top = 4386.0
+margin_right = 1500.0
+margin_bottom = 4886.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="Viewport" type="Viewport" parent="BlueskyBanner"]
+size = Vector2( 1500, 500 )
+handle_input_locally = false
+render_target_update_mode = 3
+
+[node name="BG" type="Sprite" parent="BlueskyBanner/Viewport"]
+position = Vector2( 0, -120 )
+scale = Vector2( 2, 2 )
+z_index = -512
+z_as_relative = false
+texture = ExtResource( 5 )
+centered = false
+
+[node name="FG2" type="Sprite" parent="BlueskyBanner/Viewport"]
+position = Vector2( -48, 128 )
+scale = Vector2( 1.3, 1.3 )
+z_index = -512
+z_as_relative = false
+texture = ExtResource( 6 )
+centered = false
+
+[node name="FG2" type="Sprite" parent="BlueskyBanner/Viewport/FG2"]
+position = Vector2( 544, -64 )
+z_index = -512
+z_as_relative = false
+texture = ExtResource( 3 )
+centered = false
+
+[node name="FG3" type="Sprite" parent="BlueskyBanner/Viewport/FG2"]
+position = Vector2( 512, 0 )
+z_index = -512
+z_as_relative = false
+texture = ExtResource( 4 )
+centered = false
+
+[node name="WhiteGradient" type="TextureRect" parent="BlueskyBanner/Viewport"]
+modulate = Color( 1, 1, 1, 0.501961 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = SubResource( 18 )
+expand = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="BlueskyBanner/Viewport"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 920, 430 )
+
+[node name="CenterContainer" type="CenterContainer" parent="BlueskyBanner/Viewport/HBoxContainer"]
+margin_right = 1500.0
+margin_bottom = 500.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Logo" type="TextureRect" parent="DiscordBanner/Viewport/HBoxContainer/CenterContainer"]
-margin_left = 192.0
-margin_right = 768.0
-margin_bottom = 540.0
-rect_min_size = Vector2( 576, 540 )
+[node name="Logo" type="TextureRect" parent="BlueskyBanner/Viewport/HBoxContainer/CenterContainer"]
+margin_left = 462.0
+margin_right = 1038.0
+margin_bottom = 500.0
+rect_min_size = Vector2( 576, 500 )
 texture = ExtResource( 10 )
 expand = true
 stretch_mode = 6
 
 [node name="DiscordInvite" type="ViewportContainer" parent="."]
 unique_name_in_owner = true
-margin_top = 2398.0
+margin_top = 4890.0
 margin_right = 1920.0
-margin_bottom = 3478.0
+margin_bottom = 5970.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
@@ -417,9 +651,9 @@ expand = true
 
 [node name="SplashScreen" type="ViewportContainer" parent="."]
 unique_name_in_owner = true
-margin_top = 3482.0
+margin_top = 5974.0
 margin_right = 1536.0
-margin_bottom = 4346.0
+margin_bottom = 6838.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
@@ -508,9 +742,9 @@ stretch_mode = 6
 
 [node name="Icon" type="ViewportContainer" parent="."]
 unique_name_in_owner = true
-margin_top = 4350.0
+margin_top = 6842.0
 margin_right = 512.0
-margin_bottom = 4862.0
+margin_bottom = 7354.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
@@ -563,6 +797,72 @@ expand = true
 stretch_mode = 6
 
 [node name="Glow" type="TextureRect" parent="Icon/Viewport/HBoxContainer"]
+material = SubResource( 22 )
+margin_right = 512.0
+margin_bottom = 512.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = SubResource( 24 )
+expand = true
+stretch_mode = 6
+
+[node name="TwitterIcon" type="ViewportContainer" parent="."]
+unique_name_in_owner = true
+margin_top = 7358.0
+margin_right = 512.0
+margin_bottom = 7870.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="Viewport" type="Viewport" parent="TwitterIcon"]
+size = Vector2( 512, 512 )
+handle_input_locally = false
+render_target_update_mode = 3
+
+[node name="TextureRect" type="TextureRect" parent="TwitterIcon/Viewport"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 294.597
+texture = ExtResource( 14 )
+expand = true
+stretch_mode = 1
+
+[node name="WhiteGradient" type="TextureRect" parent="TwitterIcon/Viewport"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = SubResource( 42 )
+expand = true
+
+[node name="HBoxContainer" type="PanelContainer" parent="TwitterIcon/Viewport"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_styles/panel = SubResource( 21 )
+
+[node name="Icon" type="TextureRect" parent="TwitterIcon/Viewport/HBoxContainer"]
+margin_right = 512.0
+margin_bottom = 512.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 8 )
+expand = true
+stretch_mode = 6
+
+[node name="Shadow" type="TextureRect" parent="TwitterIcon/Viewport/HBoxContainer/Icon"]
+modulate = Color( 1, 1, 1, 0.376471 )
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 32.0
+margin_top = 24.0
+margin_right = 32.0
+margin_bottom = 24.0
+texture = ExtResource( 9 )
+expand = true
+stretch_mode = 6
+
+[node name="Glow" type="TextureRect" parent="TwitterIcon/Viewport/HBoxContainer"]
 material = SubResource( 22 )
 margin_right = 512.0
 margin_bottom = 512.0

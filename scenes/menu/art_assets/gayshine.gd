@@ -21,6 +21,7 @@ func _ready():
 
 
 func _process(delta):
+	if true: return
 	if frames_rendered >= TOTAL_FRAMES: return
 	
 	cur_hue += 1.0 / float(TOTAL_FRAMES)
