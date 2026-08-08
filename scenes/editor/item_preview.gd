@@ -38,4 +38,4 @@ func update_item(item, palette, is_obj):
 
 func should_show_preview() -> bool:
 	editor.get_hovered_objects()
-	return "Paint" in editor.tool_manager.current_tool.name and editor.hovered_objects.empty() and editor.ui.visible
+	return ("Paint" in editor.tool_manager.current_tool.name or "TileLock" in editor.tool_manager.current_tool.name) and editor.hovered_objects.empty() and editor.ui.visible
