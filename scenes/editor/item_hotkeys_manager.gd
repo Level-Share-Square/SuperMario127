@@ -8,13 +8,6 @@ onready var tools = $"%Tools"
 
 var mouse_moved: bool = false
 
-var key_to_loadout_map: Dictionary = {
-	0: 3,
-	1: 5,
-	2: 7,
-	3: 9,
-}
-
 func rotate_object():
 	var hovered_objects: Dictionary = editor.get_hovered_objects()
 	if !(editor.get_hovered_objects() or editor.selected_objects): return

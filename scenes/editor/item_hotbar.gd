@@ -44,7 +44,7 @@ func _ready():
 	bottom_row.get_children()[0].pressed = true
 	
 	for item_button in button_container.get_children():
-		item_button.connect("pressed", self, "_on_item_button_pressed", [item_button])
+		item_button.connect("button_down", self, "_on_item_button_pressed", [item_button])
 		item_button.change_item(placeable_items.placeable_items[loadouts[selected_loadout][item_button.get_index()]])
 	
 	for loadout_button in loadout_container.get_children():
@@ -87,7 +87,6 @@ func _on_item_button_pressed(item_button):
 	editor.emit_signal("item_changed", associated_item)
 	update_level_data()
 	selected_button = item_button
-
 
 func update_level_data():
 	CurrentLevelData.editor_data.loadouts = loadouts
