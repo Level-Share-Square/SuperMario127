@@ -48,9 +48,8 @@ func _ready():
 	item_palettes.pressed = CurrentLevelData.editor_data.show_palettes
 				
 func _on_group_pressed(group):
-	if not group.pressed:
-		search_bar.text = ""
-		items_grid.load_items(items_grid.get_items_by_group(group.name), true)
+	search_bar.text = ""
+	items_grid.load_items(items_grid.get_items_by_group(group.name), true)
 		
 func reset():
 	for tile_group in tiles.get_children():
