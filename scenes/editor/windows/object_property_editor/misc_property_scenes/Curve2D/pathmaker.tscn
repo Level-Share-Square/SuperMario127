@@ -31,24 +31,35 @@ unique_name_in_owner = true
 margin_right = 40.0
 margin_bottom = 40.0
 
-[node name="WidgetContainer" type="PanelContainer" parent="."]
+[node name="Previews" type="Control" parent="."]
 unique_name_in_owner = true
-margin_right = 36.0
-margin_bottom = 35.0
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 5 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 4
+
+[node name="WidgetContainer" type="PanelContainer" parent="CanvasLayer"]
+unique_name_in_owner = true
+margin_left = 225.0
+margin_top = 320.0
+margin_right = 516.0
+margin_bottom = 351.0
 theme = ExtResource( 3 )
 
-[node name="VBoxContainer" type="VBoxContainer" parent="WidgetContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/WidgetContainer"]
 margin_left = 6.0
 margin_top = 6.0
 margin_right = 285.0
-margin_bottom = 29.0
+margin_bottom = 25.0
 custom_constants/separation = 5
 
-[node name="HBoxContainer" type="HBoxContainer" parent="WidgetContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/WidgetContainer/VBoxContainer"]
 margin_right = 279.0
 margin_bottom = 19.0
 
-[node name="Handle" type="Button" parent="WidgetContainer/VBoxContainer/HBoxContainer"]
+[node name="Handle" type="Button" parent="CanvasLayer/WidgetContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 margin_right = 58.0
 margin_bottom = 19.0
@@ -56,7 +67,7 @@ focus_mode = 0
 toggle_mode = true
 text = "Handles"
 
-[node name="HandleLink" type="Button" parent="WidgetContainer/VBoxContainer/HBoxContainer"]
+[node name="HandleLink" type="Button" parent="CanvasLayer/WidgetContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 margin_left = 62.0
 margin_right = 161.0
@@ -65,7 +76,8 @@ focus_mode = 0
 toggle_mode = true
 text = "Handle Linking"
 
-[node name="Delete" type="Button" parent="WidgetContainer/VBoxContainer/HBoxContainer"]
+[node name="Delete" type="Button" parent="CanvasLayer/WidgetContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
 margin_left = 165.0
 margin_right = 217.0
 margin_bottom = 19.0
@@ -73,20 +85,15 @@ focus_mode = 0
 toggle_mode = true
 text = "Delete"
 
-[node name="Confirm" type="Button" parent="WidgetContainer/VBoxContainer/HBoxContainer"]
+[node name="Confirm" type="Button" parent="CanvasLayer/WidgetContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
 margin_left = 221.0
 margin_right = 279.0
 margin_bottom = 19.0
 focus_mode = 0
 text = "Confirm"
 
-[node name="Previews" type="Control" parent="."]
-unique_name_in_owner = true
-margin_right = 40.0
-margin_bottom = 40.0
-script = ExtResource( 5 )
-
-[connection signal="button_down" from="WidgetContainer/VBoxContainer/HBoxContainer/Handle" to="." method="_on_Handle_button_down"]
-[connection signal="button_down" from="WidgetContainer/VBoxContainer/HBoxContainer/HandleLink" to="." method="_on_HandleLink_button_down"]
-[connection signal="button_down" from="WidgetContainer/VBoxContainer/HBoxContainer/Delete" to="." method="_on_Delete_button_down"]
-[connection signal="button_down" from="WidgetContainer/VBoxContainer/HBoxContainer/Confirm" to="." method="_on_Check_button_down"]
+[connection signal="button_down" from="CanvasLayer/WidgetContainer/VBoxContainer/HBoxContainer/Handle" to="." method="_on_Handle_button_down"]
+[connection signal="button_down" from="CanvasLayer/WidgetContainer/VBoxContainer/HBoxContainer/HandleLink" to="." method="_on_HandleLink_button_down"]
+[connection signal="button_down" from="CanvasLayer/WidgetContainer/VBoxContainer/HBoxContainer/Delete" to="." method="_on_Delete_button_down"]
+[connection signal="button_down" from="CanvasLayer/WidgetContainer/VBoxContainer/HBoxContainer/Confirm" to="." method="_on_Check_button_down"]

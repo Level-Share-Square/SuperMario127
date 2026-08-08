@@ -26,4 +26,4 @@ func begin_curve():
 	pathmaker.init_curve = init_curve if init_curve else Curve2D.new()
 	pathmaker.object = curve_info[0]
 	pathmaker.rect_position = curve_info[0].position
-	editor.add_child(pathmaker)
+	editor.parallax_scroll.add_child(pathmaker)

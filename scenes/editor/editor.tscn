@@ -333,9 +333,6 @@ mouse_filter = 2
 script = ExtResource( 71 )
 tool_type = 1
 
-[node name="ObjectTrail" parent="ZIndex/Tools" instance=ExtResource( 72 )]
-tool_type = 1
-
 [node name="ParallaxScroll" type="Node2D" parent="."]
 unique_name_in_owner = true
 z_index = 4096
@@ -388,6 +385,10 @@ unique_name_in_owner = true
 margin_right = 40.0
 margin_bottom = 40.0
 mouse_filter = 2
+
+[node name="ObjectTrail" parent="ParallaxScroll" instance=ExtResource( 72 )]
+unique_name_in_owner = true
+tool_type = 1
 
 [node name="ObjectSelection" parent="ParallaxScroll" instance=ExtResource( 34 )]
 unique_name_in_owner = true
@@ -1468,7 +1469,7 @@ margin_top = 208.0
 margin_right = 24.0
 margin_bottom = 212.0
 
-[node name="ObjectTrail" type="Button" parent="UI/UIContainer/EditorUI/Middle/Tools/VBoxContainer/ItemTools"]
+[node name="ObjectTrailTool" type="Button" parent="UI/UIContainer/EditorUI/Middle/Tools/VBoxContainer/ItemTools"]
 unique_name_in_owner = true
 visible = false
 margin_top = 184.0
@@ -1982,6 +1983,7 @@ bus = "Sounds"
 [connection signal="toggle_eraser" from="HotkeyManager" to="UI/UIContainer/EditorUI/Middle/Tools/VBoxContainer/ItemTools/Erase" method="emit_signal" binds= [ "pressed" ]]
 [connection signal="undo_action" from="HotkeyManager" to="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/Actions/HBoxContainer/Undo" method="emit_signal" binds= [ "pressed" ]]
 [connection signal="eraser_toggled" from="ZIndex/Tools" to="UI/UIContainer/EditorUI/Middle/Tools/VBoxContainer/ItemTools/Erase" method="update_button"]
+[connection signal="tool_changed" from="ZIndex/Tools" to="ParallaxScroll/ObjectTrail" method="_on_Tools_tool_changed"]
 [connection signal="tool_changed" from="ZIndex/Tools" to="UI/UIContainer/EditorUI/Middle/Tools" method="_on_Tools_tool_changed"]
 [connection signal="action" from="ActionManager" to="SaveManager" method="_on_ActionManager_action"]
 [connection signal="text_entered" from="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/SearchBar" to="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/ScrollContainer/CenterContainer/ItemsGrid" method="_on_search"]
