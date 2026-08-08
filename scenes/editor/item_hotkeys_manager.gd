@@ -111,13 +111,7 @@ func last_tile():
 func switch_item(key):
 	var button = hotbar.bottom_row.get_child(key)
 	
-	button.emit_signal("pressed")
-	button.emit_signal("button_down")
-	
-	yield(button.tween, "tween_completed")
-	
-	button.emit_signal("button_up")
-	button.pressed = true
+	hotbar.manual_button_click(button)
 
 
 func switch_loadout(key):

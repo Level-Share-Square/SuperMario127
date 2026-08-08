@@ -181,8 +181,7 @@ func select_last_tile():
 func select_item_from_placeable(item):
 	for button in bottom_row.get_children():
 		if button.item == item:
-			button.emit_signal("pressed")
-			button.pressed = true
+			manual_button_click(button)
 			return
 	on_item_selected(item)
 
@@ -240,10 +239,17 @@ func _unhandled_input(event):
 	if not (Input.is_action_pressed("alt_modifier") or Input.is_action_pressed("ctrl_modifier")):
 		if event.is_action_pressed("scroll_down"):
 			var new_button = bottom_row.get_child(wrapi((selected_button.get_index() + 1), 0, 9))
-			new_button.emit_signal("pressed")
-			new_button.pressed = true
+			manual_button_click(new_button)
 			
 		if event.is_action_pressed("scroll_up"):
 			var new_button = bottom_row.get_child(wrapi((selected_button.get_index() - 1), 0, 9))
-			new_button.emit_signal("pressed")
-			new_button.pressed = true
+			manual_button_click(new_button)
+
+func manual_button_click(button):
+	button.emit_signal("pressed")
+	button.emit_signal("button_down")
+
+	yield(button.tween, "tween_completed")
+
+	button.emit_signal("button_up")
+	button.pressed = true
