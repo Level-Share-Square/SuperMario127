@@ -33,12 +33,12 @@ func _click(world_pos: Vector2) -> void:
 		if editor.selected_objects.empty() && editor.hovered_objects.empty():
 			place_object(world_pos)
 		elif !editor.hovered_objects.empty():
-			var closest_object = find_closest_object(editor.hovered_objects.values())
+			var closest_object = objects_util.find_closest_object(editor.hovered_objects.values(), get_mouse_pos())
 			
 			if !Input.is_action_pressed("shift_modifier"): hovered_object = closest_object
 			else: 
 				editor.selected_item = closest_object.placeable_item
-				var copied_data = ObjectManager.object_data_deep_copy(closest_object)
+				var copied_data = objects_util.object_data_deep_copy(closest_object)
 				hovered_object = place_object(world_pos, copied_data)
 				is_copied = true
 
@@ -73,20 +73,6 @@ func _click_left_released(event, mouse_pos):
 			emit_signal("objects_selected", [hovered_object])
 			
 		hovered_object = null
-
-func find_closest_object(objects: Array) -> GameObject:
-	var closest_object: GameObject = objects[0]
-	var mouse_pos: Vector2 = get_mouse_pos()
-	var min_dist: float = INF
-	
-	for object in objects:
-		var dist: float = mouse_pos.distance_squared_to(object.global_position)
-		
-		if dist < min_dist:
-			closest_object = object
-			min_dist = dist
-
-	return closest_object
 
 func place_object(pos: Vector2, data = null):
 	if shared.get_object_at_position(Vector2(round(pos.x), round(pos.y)), editor.layer):

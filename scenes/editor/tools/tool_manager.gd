@@ -45,7 +45,6 @@ func _process(_delta: float):
 		current_tool._mouse_movement(event, parallax_scroll.corrected_mouse_position())
 
 func change_tool(tool_name: String) -> void:
-	print(tool_name)
 	current_tool = get_node(tool_name)
 	
 	var item_preview = get_node("%ItemPreview")

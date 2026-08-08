@@ -7,7 +7,7 @@ onready var editor = get_node(editor_path)
 onready var tile_lock: Button = $"%ObjectTileLock"
 onready var rectangle_fill: Button = $"%TileFill"
 onready var tile_rect_fill = $"%TileRectFill"
-onready var object_trail = $"%ObjectTrail"
+onready var object_trail = $"%ObjectTrailTool"
 onready var item_tools: VBoxContainer = $"%ItemTools"
 onready var tween = $Tween
 
@@ -27,6 +27,7 @@ func _ready():
 
 
 func on_button_pressed(button):
+	print(button.name)
 	emit_signal("tool_picked", button.name)
 
 

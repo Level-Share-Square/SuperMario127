@@ -126,3 +126,10 @@ static func tile_bytes_to_chunks(tile_bytes: PoolByteArray) -> Dictionary:
 		chunk_start += CHUNK_HEADER_SIZE + chunk_size
 	
 	return chunks
+
+static func get_placeable_from_tile(tile_data: Array, placeable_items):
+	for item in placeable_items.placeable_items.values():
+		if item is PlaceableObject: continue
+		if item.tileset_id == tile_data[0] and item.tile_id == tile_data[1]:
+			return item
+	return null

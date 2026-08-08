@@ -33,8 +33,8 @@ func _ready():
 		nodes.append(texture_node)
 		texture_node.ui = weakref(self)
 		texture_node.position = line.get_node("path").curve.get_point_position(point)
+		texture_node.is_object = true
 		path_node_container.add_child(texture_node)
-		widget_move_to(texture_node)
 		if handle.pressed:
 			texture_node.set_handles_active(true)
 		if handle_link.pressed:
@@ -51,9 +51,9 @@ func _unhandled_input(event):
 		var texture_node = VERTEX_PATH.instance()
 		nodes.append(texture_node)
 		texture_node.ui = weakref(self)
+		texture_node.is_object = true
 		texture_node.position = get_mouse_pos() - object.position
 		path_node_container.add_child(texture_node)
-		widget_move_to(texture_node)
 		if handle.pressed:
 			texture_node.set_handles_active(true)
 		if handle_link.pressed:
@@ -80,8 +80,6 @@ func update_node_position(node: Node2D):
 	if index != -1:
 		line.get_node("path").curve.set_point_position(index, node.position)
 		update_line()
-		if index == line.get_node("path").curve.get_point_count() - 1:
-			widget_move_to(nodes.back())
 		
 func update_node_handles(node: Node2D):
 	var index = nodes.find(node, 0)
@@ -103,7 +101,7 @@ func update_line():
 
 
 func _on_Delete_button_down():
-	delete = !$WidgetContainer/VBoxContainer/HBoxContainer/Delete.pressed
+	delete = !$CanvasLayer/WidgetContainer/VBoxContainer/HBoxContainer/Delete.pressed
 
 
 func _on_HandleLink_button_down():
@@ -113,10 +111,11 @@ func _on_HandleLink_button_down():
 
 func _on_Handle_button_down():
 	for node in nodes:
-		node.set_handles_active(!$WidgetContainer/VBoxContainer/HBoxContainer/Handle.pressed)
+		print(node)
+		node.set_handles_active(!$CanvasLayer/WidgetContainer/VBoxContainer/HBoxContainer/Handle.pressed)
 
 func widget_move_to(node: Node):
 	widget_container.rect_global_position = node.position + object.position + Vector2(-140, 16)
 		
 func get_mouse_pos() -> Vector2:
-	return editor.parallax_scroll.corrected_mouse_position()
+	return editor.corrected_mouse_position()

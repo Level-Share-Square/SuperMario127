@@ -47,15 +47,3 @@ func erase_object(game_object, free: bool = true) -> void:
 	game_object._object_removed(free)
 	if free: game_object.queue_free()
 	layer_data.erase_object(object_data)
-
-static func object_data_deep_copy(game_object):
-	var object_data = game_object.object_data
-	var copied_metadata := ObjectMetadata.new(object_data.metadata.position, object_data.metadata.type_id, object_data.metadata.palette)
-	var properties: Dictionary = object_data.properties.duplicate(true)
-	
-	for property in properties.keys():
-		if !game_object.property_ids[property] in game_object.editable_properties:
-			properties.erase(property)
-
-	var copied_data := ObjectData.new(copied_metadata, properties)
-	return copied_data

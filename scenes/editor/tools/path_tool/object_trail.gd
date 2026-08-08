@@ -9,6 +9,8 @@ onready var dist = $"%HSlider"
 onready var handle = $"%Handle"
 onready var handle_link = $"%HandleLink"
 onready var previews = $"%Previews"
+onready var delete_button = $"%Delete"
+onready var confirm_button = $"%Confirm"
 
 enum {MODE_PLACE, MODE_SELECT}
 
@@ -35,7 +37,6 @@ func _click_left(_event: InputEvent, _world_pos: Vector2):
 	texture_node.ui = weakref(self)
 	texture_node.position = get_mouse_pos()
 	path_node_container.add_child(texture_node)
-	widget_move_to(texture_node)
 	if handle.pressed:
 		texture_node.set_handles_active(true)
 	if handle_link.pressed:
@@ -75,8 +76,6 @@ func update_node_position(node: Node2D):
 	if index != -1:
 		line.get_node("path").curve.set_point_position(index, node.position)
 		update_line()
-		if index == line.get_node("path").curve.get_point_count() - 1:
-			widget_container.rect_global_position = Array(line.points).back() + Vector2(-140, 16)
 		update_objects_array()
 		
 func update_node_handles(node: Node2D):
@@ -100,7 +99,7 @@ func update_line():
 
 
 func _on_Delete_button_down():
-	delete = !$WidgetContainer/VBoxContainer/HBoxContainer/Delete.pressed
+	delete = !delete_button.pressed
 
 
 func _on_HandleLink_button_down():
@@ -110,10 +109,7 @@ func _on_HandleLink_button_down():
 
 func _on_Handle_button_down():
 	for node in nodes:
-		node.set_handles_active(!$WidgetContainer/VBoxContainer/HBoxContainer/Handle.pressed)
-
-func widget_move_to(node: Node):
-	widget_container.rect_global_position = node.position + Vector2(-140, 16)
+		node.set_handles_active(!handle.pressed)
 
 func update_objects_array() -> void:
 	objects_array = []
