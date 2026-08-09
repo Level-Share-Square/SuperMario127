@@ -12,3 +12,5 @@ smoothing_enabled = true
 smoothing_speed = 12.5
 editor_draw_screen = false
 script = ExtResource( 1 )
+
+[node name="Tween" type="Tween" parent="."]
