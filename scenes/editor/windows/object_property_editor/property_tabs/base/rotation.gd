@@ -9,8 +9,8 @@ func property_changed(key: String, new_value):
 func load_property(_editor: Editor, init_value, _property: Array, property_name = null):
 	.load_property(_editor, init_value, _property, property_name)
 
-func change_property(new_value):
-	.change_property(wrapf(new_value, 0, 360))
+func change_property(new_value, save_to_data: bool = true):
+	.change_property(wrapf(new_value, 0, 360), save_to_data)
 
 func done_editing(_val: String):
 	change_property(float($"%LineEdit".text))

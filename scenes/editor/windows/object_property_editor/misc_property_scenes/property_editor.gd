@@ -12,7 +12,7 @@ export var check_matches: bool = true
 var editor: Editor
 var property: Array
 
-signal property_edited(property, value, check_matches)
+signal property_edited(property, value, check_matches, save_to_data)
 
 func load_property(_editor: Editor, init_value, _property: Array, property_name = null):
 	editor = _editor
@@ -43,7 +43,7 @@ func property_changed(key: String, new_value):
 	if key != property[0]: return
 
 
-func change_property(new_value):
+func change_property(new_value, save_to_data: bool = true):
 #	var affected_objects: Dictionary = setup_affected_objects(new_value)
 #	if check_matches and affected_objects["property_matches"] >= objects.size(): return
 #	affected_objects.erase("property_matches")
@@ -52,7 +52,7 @@ func change_property(new_value):
 #	action.affected_objects = affected_objects
 #	action.bulk_store_original_properties()
 #	editor.action_manager.commit_action(action)
-	emit_signal("property_edited", property[0], new_value, check_matches)
+	emit_signal("property_edited", property[0], new_value, check_matches, save_to_data)
 
 
 #func setup_affected_objects(new_value) -> Dictionary:

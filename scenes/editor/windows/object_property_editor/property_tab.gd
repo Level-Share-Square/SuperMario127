@@ -8,14 +8,22 @@ var objects: Dictionary
 
 export var affected_properties: PoolStringArray
 
-func change_property(property: String, new_value, check_matches):
+func change_property(property: String, new_value, check_matches, save_to_data):
 	var affected_objects: Dictionary = setup_affected_objects(property, new_value)
 	if check_matches and affected_objects["property_matches"] >= objects.size(): return
 	affected_objects.erase("property_matches")
-	var action := ChangePropertyBulkAction.new()
-	action.affected_objects = affected_objects
-	action.bulk_store_original_properties()
-	editor.action_manager.commit_action(action)
+	if save_to_data:
+		var action := ChangePropertyBulkAction.new()
+		action.affected_objects = affected_objects
+		action.bulk_store_original_properties()
+		editor.action_manager.commit_action(action)
+	else:
+		for object in affected_objects:
+			var properties = affected_objects[object]["changed_properties"]
+			for property in properties:
+				object[property] = properties[property]
+				object.emit_signal("property_changed", property, properties[property])
+			
 
 
 func setup_affected_objects(property: String, new_value) -> Dictionary:

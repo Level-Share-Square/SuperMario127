@@ -25,9 +25,9 @@ func load_property(_editor: Editor, init_value, _property: Array, property_name 
 		$Y.prefix = property_info.prefix[1]
 		$Y.suffix = property_info.suffix[1]
 
-func change_property(_new_value = null):
+func change_property(_new_value = null, save_to_data: bool = true):
 	var new_value := Vector2(
 		float($X.value),
 		float($Y.value)
 	)
-	.change_property(new_value)
+	.change_property(new_value, save_to_data)

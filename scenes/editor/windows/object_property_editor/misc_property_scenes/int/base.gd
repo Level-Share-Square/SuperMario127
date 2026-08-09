@@ -13,5 +13,5 @@ func load_property(_editor: Editor, init_value, _property: Array, property_name 
 		$SpinBox.max_value = property_info.max_value
 		$SpinBox.custom_arrow_step = property_info.step
 
-func change_property(new_value):
-	.change_property(int(new_value))
+func change_property(new_value, save_to_data = true):
+	.change_property(int(new_value), save_to_data)

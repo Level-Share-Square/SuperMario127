@@ -91,7 +91,7 @@ func connect_signals(property_editor: PropertyEditor):
 	if !property_editor.is_connected("property_edited", self, "change_property"):
 		property_editor.connect("property_edited", self, "change_property")
 
-func change_property(key: String, value, check_matches):
+func change_property(key: String, value, check_matches, save_to_data):
 	selected_mission[key] = value
 	if key == "shine_name":
 		refresh_buttons()
@@ -106,6 +106,7 @@ func refresh_buttons():
 		button_sound.text = mission.shine_name
 		button_sound.hint_tooltip = button_sound.text
 		button_sound.clip_text = true
+		button_sound.focus_mode = Control.FOCUS_NONE
 		
 		button_sound.connect("pressed", self, "on_mission_selected", [mission])
 		mission_button_container.add_child(button_sound)

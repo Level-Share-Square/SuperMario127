@@ -17,7 +17,7 @@ var layer_data: LayerData
 func copy_uuid():
 	OS.set_clipboard(shared.layer_index_to_uuid(window.layer_index))
 
-func change_property(property: String, new_value, check_matches):
+func change_property(property: String, new_value, check_matches, save_to_data):
 	var action := EditLayerAction.new()
 	action.shared = shared
 	action.layer_index = window.layer_index

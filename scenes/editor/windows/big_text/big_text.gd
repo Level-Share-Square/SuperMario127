@@ -42,9 +42,9 @@ func property_changed(key: String, new_value):
 	if key != property[0]: return
 	$"%TextEditor".text = str(new_value)
 
-func change_property(new_value):
+func change_property(new_value, save_to_data: bool = true):
 	if not holds_property: return
-	.change_property(str(new_value))
+	.change_property(str(new_value), save_to_data)
 
 func done_editing():
 	if holds_property:

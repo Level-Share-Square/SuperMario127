@@ -7,7 +7,7 @@ func update_color(color: Color, save: bool = false):
 	var color_panel = $"%Color"
 	color_panel.get_stylebox("panel").bg_color = color
 	if save and property:
-		change_property(color)
+		change_property(color, false)
 	
 
 func load_property(_editor: Editor, init_value, _property: Array, property_name = null):
