@@ -9,6 +9,7 @@ var last_mouse_tile: Vector2
 var mouse_input: int = -1
 var objects: Dictionary = {}
 var is_erasing: bool = false
+onready var item_preview = $"%ItemPreview"
 
 
 func _click_left(_event: InputEvent, _world_pos: Vector2) -> void:
@@ -40,8 +41,8 @@ func _mouse_movement(event: InputEvent, world_pos: Vector2) -> void:
 		var mouse_tile: Vector2 = get_mouse_snapped_pos()
 		var line: = line_util.get_line(last_mouse_tile, mouse_tile)
 	
-		get_node("%ItemPreview").position_override = true
-		get_node("%ItemPreview").rect_global_position = get_mouse_snapped_pos() - Vector2(24, 24)
+		item_preview.position_override = true
+		item_preview.rect_global_position = get_mouse_snapped_pos() - item_preview.texture.get_size()/2
 
 		if mouse_input == 0:
 			for point in line:
@@ -77,7 +78,7 @@ func draw_object(pos: Vector2) -> void:
 	
 	var buffer_texture := TextureRect.new()
 	buffer_texture.texture = item.previews[item.palette]
-	buffer_texture.rect_global_position = pos - Vector2(24, 24)
+	buffer_texture.rect_global_position = get_mouse_snapped_pos() - item_preview.texture.get_size()/2
 	buffer_texture.modulate = REGULAR_MODULATE if not is_erasing else ERASE_MODULATE
 	object_buffer.add_child(buffer_texture)
 
@@ -107,7 +108,7 @@ func finalize_placement() -> void:
 
 # Mouse coords to tile grid coords
 func get_mouse_snapped_pos() -> Vector2:
-	return  Vector2(int(get_mouse_pos().x / 32) * 32, int(get_mouse_pos().y / 32) * 32) + Vector2(16, 16)
+	return Vector2(int(get_mouse_pos().x / 32) * 32, int(get_mouse_pos().y / 32) * 32) + Vector2(16, 16)
 
 func create_object_data(position: Vector2, object_id: int, palette: int) -> ObjectData:
 	var metadata := ObjectMetadata.new(position, object_id, palette)

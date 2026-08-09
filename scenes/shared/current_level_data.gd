@@ -89,7 +89,7 @@ func _init() -> void:
 	#thread.start(self, "create_cache")
 
 
-# for now, process is disabled by default, so the timer needs to be started manually, if process here is ever needed for something else, create a bool for this
+
 func _process(delta: float) -> void:
 	if not time_score_paused:
 		time_score += delta
