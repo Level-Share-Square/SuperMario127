@@ -1,8 +1,5 @@
 extends GameObject
 
-const DEFAULT_HINT: String = "This Star Coin doesn't have a hint."
-const DEFAULT_COLOR := Color.yellow
-
 export var normal_frames : SpriteFrames
 export var outline_frames : SpriteFrames
 export var collected_frames : SpriteFrames
@@ -21,8 +18,8 @@ var uuid: String = ""
 var collected := false
 var is_blue := false
 
-var hint := DEFAULT_HINT
-var color := DEFAULT_COLOR
+var hint := StarCoinData.DEFAULT_HINT
+var color := StarCoinData.DEFAULT_COLOR
 
 var data: StarCoinData
 
@@ -40,14 +37,16 @@ func _ready() -> void:
 		# Get the value, returning false if the key doesn't exist
 		is_blue = CurrentLevelData.save_data.is_star_coin_collected(uuid)
 	
-	update_color()
 	anim_sprite.play("default")
 	if not uuid:
 		data = CurrentLevelData.level_metadata.collectible_data.add_star_coin()
 		set_property("uuid", data.star_coin_uuid, true)
-		set_property("hint", DEFAULT_HINT, true)
-		set_property("color", DEFAULT_COLOR, true)
+	else:
+		data = CurrentLevelData.level_metadata.collectible_data.get_star_coin_by_uuid(uuid)
+	set_property("hint", data.star_coin_hint, true)
+	set_property("color", data.star_coin_color, true)
 		
+	update_color()
 	connect("property_changed", self, "on_property_changed")
 
 func on_property_changed(key, value):
@@ -63,7 +62,7 @@ func _object_ready():
 
 func update_color():
 	if !is_blue:
-		if color != DEFAULT_COLOR:
+		if color != StarCoinData.DEFAULT_COLOR:
 			anim_sprite.frames = outline_frames
 			recolorable.modulate = color
 			recolorable.show()

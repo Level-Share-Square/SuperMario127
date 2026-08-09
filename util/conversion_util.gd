@@ -367,7 +367,7 @@ static func get_collectible_data_from_old_data(level_data) -> CollectibleData:
 				var star_coin_data: StarCoinData = StarCoinData.new(
 					uuid_util.v4(),
 					"",
-					Color.white
+					Color.yellow
 				)
 				
 				object.properties[6] = star_coin_data.star_coin_uuid

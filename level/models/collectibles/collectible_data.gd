@@ -37,3 +37,9 @@ func add_star_coin(uuid: String = "") -> StarCoinData:
 
 	star_coin_data.append(data)
 	return data
+
+func get_star_coin_by_uuid(uuid: String) -> StarCoinData:
+	for star_coin in star_coin_data:
+		if star_coin.star_coin_uuid == uuid:
+			return star_coin
+	return null

@@ -26,24 +26,15 @@ func update_counters():
 
 
 func update_shine_counter():
-	pass
-#	var level_info = CurrentLevelData.level_info
-#
-#	# Only count shine sprites that have show_in_menu on
-#	var total_shine_count := 0
-#	var collected_shine_count := 0
-#
-#	for shine_details in level_info.shine_details:
-#		total_shine_count += 1
-#		if level_info.collected_shines[str(shine_details["id"])]:
-#			collected_shine_count += 1
-#
-#	shine_counter.text = "%s/%s" % [collected_shine_count, total_shine_count]
+	var collectible_data = CurrentLevelData.level_metadata.collectible_data
+	var save_data = CurrentLevelData.save_data
+
+	shine_counter.text = "%s/%s" % [save_data.get_completed_mission_count(), collectible_data.used_mission_data.size()]
 
 
 func update_star_coin_counter():
-	pass
-#	var level_info = CurrentLevelData.level_info
-#
-#	var collected_star_coin_count = level_info.collected_star_coins.values().count(true)
-#	star_coin_counter.text = "%s/%s" % [collected_star_coin_count, level_info.collected_star_coins.size()]
+	var collectible_data = CurrentLevelData.level_metadata.collectible_data
+	var save_data = CurrentLevelData.save_data
+
+	var collected_star_coin_count = collectible_data.star_coin_data.size()
+	star_coin_counter.text = "%s/%s" % [save_data.get_collected_star_coin_count(), collectible_data.star_coin_data.size()]
