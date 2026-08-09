@@ -65,15 +65,17 @@ tab_align = 0
 all_tabs_in_front = true
 use_hidden_tabs_for_min_size = true
 
-[node name="Border" parent="." index="2"]
+[node name="WindowCorner" parent="." index="2"]
+margin_left = 244.0
+margin_top = 180.0
 margin_right = 256.0
 margin_bottom = 192.0
 
-[node name="WindowMat" parent="." index="3"]
+[node name="Border" parent="." index="3"]
 margin_right = 256.0
 margin_bottom = 192.0
 
-[node name="WindowCorner" parent="." index="4"]
+[node name="WindowMat" parent="." index="4"]
 margin_right = 256.0
 margin_bottom = 192.0
 

@@ -7,6 +7,7 @@ onready var editor: Editor = get_owner()
 onready var window_title = $"%WindowTitle"
 onready var window_icon = $"%WindowIcon"
 onready var property_groups = $"%PropertyGroups"
+onready var click_sound = $"%ClickSound"
 
 var objects: Dictionary
 var common_properties: Array
@@ -103,3 +104,11 @@ func load_objects(_objects: Dictionary):
 		property_groups.move_child(extra_tab, 0)
 	
 	popup_centered(rect_size)
+
+
+func _ready() -> void:
+	property_groups.connect("tab_changed", self, "play_click")
+
+
+func play_click(_tab: int = -1) -> void:
+	click_sound.play()

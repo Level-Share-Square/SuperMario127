@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/player_preview.png-2a30844db647c00dc3a1340494db71e0.stex"
+path="res://.import/head_preview_small.png-422194e4842ba5164e13a1e78cf87d3d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/oldeditor/property_type_scenes/PoolStringArray/base/player_preview.png"
-dest_files=[ "res://.import/player_preview.png-2a30844db647c00dc3a1340494db71e0.stex" ]
+source_file="res://scenes/editor/windows/object_property_editor/property_tabs/dialogue/head_preview_small.png"
+dest_files=[ "res://.import/head_preview_small.png-422194e4842ba5164e13a1e78cf87d3d.stex" ]
 
 [params]
 

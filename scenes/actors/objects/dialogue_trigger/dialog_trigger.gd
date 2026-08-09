@@ -27,21 +27,23 @@ signal change_emote(expression, action)
 #func _set_properties():
 #	savable_properties = ["dialogue", "character_name", "autostart", "interactable", "bubble_text", "display_mode", "tag", "delegate_tag", "zoom_size"]
 #	editable_properties = ["dialogue", "bubble_text", "character_name", "display_mode", "zoom_size", "tag", "delegate_tag", "autostart", "interactable"]
-#
-func _register_properties():		
-	register_property(4, "dialogue", dialogue, true)
+
+func _register_properties():
+	register_property(4, "dialogue", dialogue, false)
 	register_property(5, "character_name", character_name, true)
 	register_property(6, "autostart", autostart, true)
 	set_property_override("autostart", PropertyTab.OverrideTypes.ENUM, ["Don't Autostart", "Autostart", "Autostart (Oneshot)"])
 	register_property(7, "interactable", interactable, true)
 	
-	register_property(8, "bubble_text", bubble_text, true)
+	register_property(8, "bubble_text", bubble_text, false)
 	register_property(9, "display_mode", display_mode, true)
 	set_property_override("display_mode", PropertyTab.OverrideTypes.ENUM, ["Menu", "Speech Bubble", "Both"])
 	
 	register_property(10, "tag", tag, true)
 	register_property(11, "delegate_tag", delegate_tag, true)
 	register_property(12, "zoom_size", zoom_size, true)
+	
+	property_tabs.append("dialogue")
 
 
 func _ready():
