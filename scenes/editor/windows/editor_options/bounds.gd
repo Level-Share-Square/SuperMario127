@@ -36,7 +36,7 @@ func _ready():
 	editor.action_manager.connect("redo", self, "update_values")
 	
 	increment.value = CurrentLevelData.editor_data.area_bounds_increment
-	update_values()
+	update_values(true)
 	
 func change_bounds(side: String, type: int):
 	var amount = increment.value
@@ -66,14 +66,15 @@ func action() -> void:
 	
 	CurrentLevelData.editor_data.area_bounds_increment = increment.value
 
-func update_values():
-	var update_values: bool = false
-	var actions: Array = [editor.action_manager.undo_stack.back(), editor.action_manager.redo_stack.back()]
-	for action in actions:
-		if action is ChangeAreaAction and action.property == "bounds":
-			update_values = true
-			break
-	if !update_values: return
+func update_values(bypass_checks: bool = false):
+	if !bypass_checks:
+		var update_values: bool = false
+		var actions: Array = [editor.action_manager.undo_stack.back(), editor.action_manager.redo_stack.back()]
+		for action in actions:
+			if action is ChangeAreaAction and action.property == "bounds":
+				update_values = true
+				break
+		if !update_values: return
 
 	shared.update_tilemaps()
 	camera.update_limits(area.header)
