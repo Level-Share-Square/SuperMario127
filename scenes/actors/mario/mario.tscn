@@ -1669,7 +1669,7 @@ shader = ExtResource( 86 )
 shader_param/ray_count = 4
 shader_param/ray_distance = 0.4
 shader_param/ray_seperation_degrees = 22.0
-shader_param/rotation = 5.55637
+shader_param/rotation = 3.68557
 
 [sub_resource type="RectangleShape2D" id=85]
 extents = Vector2( 8, 18 )
@@ -2485,7 +2485,6 @@ anims/triple_jump = SubResource( 92 )
 anims/triple_jump_right = SubResource( 94 )
 
 [node name="CollectedShine" type="AnimatedSprite" parent="."]
-visible = false
 position = Vector2( -1, -70 )
 frames = ExtResource( 55 )
 speed_scale = 3.0
@@ -2493,6 +2492,7 @@ playing = true
 
 [node name="Recolorable" type="AnimatedSprite" parent="CollectedShine"]
 frames = ExtResource( 61 )
+frame = 4
 script = ExtResource( 63 )
 
 [node name="ShineParticles" type="Particles2D" parent="CollectedShine"]

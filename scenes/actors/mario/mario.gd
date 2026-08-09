@@ -704,7 +704,7 @@ func _process(delta: float) -> void:
 		position = position.linear_interpolate(next_position, fps_util.PHYSICS_DELTA * sync_interpolation_speed)
 	
 	collected_shine_recolorable.frame = collected_shine.frame
-	collected_shine_recolorable.position = collected_shine.position
+	collected_shine_recolorable.position = Vector2.ZERO
 	collected_shine_recolorable.scale = collected_shine.scale
 	collected_shine_recolorable.visible = collected_shine.visible
 	collected_shine_recolorable.z_index = collected_shine.z_index
