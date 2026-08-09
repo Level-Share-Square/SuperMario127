@@ -6,7 +6,7 @@ onready var editor = get_node(editor_path)
 
 onready var tile_lock: Button = $"%ObjectTileLock"
 onready var rectangle_fill: Button = $"%TileFill"
-onready var tile_rect_fill = $"%TileRectFill"
+onready var tile_rect_fill = $"%TileRectFillTool"
 onready var object_trail = $"%ObjectTrailTool"
 onready var item_tools: VBoxContainer = $"%ItemTools"
 onready var tween = $Tween

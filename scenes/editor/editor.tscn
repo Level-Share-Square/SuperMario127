@@ -312,8 +312,6 @@ inverse_tool_name = "ObjectPaint"
 mouse_filter = 2
 script = ExtResource( 69 )
 
-[node name="TileRectFill" parent="ZIndex/Tools" instance=ExtResource( 70 )]
-
 [node name="ObjectPaint" type="Control" parent="ZIndex/Tools"]
 unique_name_in_owner = true
 mouse_filter = 2
@@ -398,6 +396,9 @@ inverse_tool_name = "%TileSelection"
 [node name="TileSelection" parent="ParallaxScroll" instance=ExtResource( 74 )]
 unique_name_in_owner = true
 inverse_tool_name = "%ObjectSelection"
+
+[node name="TileRectFill" parent="ParallaxScroll" instance=ExtResource( 70 )]
+unique_name_in_owner = true
 
 [node name="SaveManager" type="Node" parent="."]
 script = ExtResource( 73 )
@@ -1415,7 +1416,7 @@ margin_top = 136.0
 margin_right = 24.0
 margin_bottom = 140.0
 
-[node name="TileRectFill" type="Button" parent="UI/UIContainer/EditorUI/Middle/Tools/VBoxContainer/ItemTools"]
+[node name="TileRectFillTool" type="Button" parent="UI/UIContainer/EditorUI/Middle/Tools/VBoxContainer/ItemTools"]
 unique_name_in_owner = true
 margin_top = 128.0
 margin_right = 24.0

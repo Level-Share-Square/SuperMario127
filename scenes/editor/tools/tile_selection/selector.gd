@@ -36,7 +36,7 @@ func get_mouse_grid_position():
 	return get_tile_grid_position(get_mouse_pos())
 	
 func get_adjusted_mouse_position():
-	return get_mouse_pos().snapped(TILE)
+	return (get_mouse_pos()/TILE).floor() * TILE
 	
 func _click_left(event, mouse_position):
 	var adjusted_mouse_position = get_adjusted_mouse_position()

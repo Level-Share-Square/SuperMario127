@@ -88,8 +88,8 @@ func _on_Tools_tool_picked(tool_name):
 				change_tool("%TileSelection")
 		"TileFill":
 			change_tool("TileFill")
-		"TileRectFill":
-			change_tool("TileRectFill")
+		"TileRectFillTool":
+			change_tool("%TileRectFill")
 		"ObjectTileLock":
 			change_tool("ObjectTileLock")
 		"ObjectTrailTool":
@@ -109,7 +109,7 @@ func pick_rect_or_path() -> void:
 	if editor.selected_item is PlaceableObject:
 		change_tool("%ObjectTrail")
 	else:
-		change_tool("TileRectFill")
+		change_tool("%TileRectFill")
 
 
 func toggle_eraser():
