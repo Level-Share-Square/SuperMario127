@@ -73,10 +73,12 @@ func get_interacting_character()-> Character:
 	
 	return null
 
-func _ready():
+func initialize():
 	parent = get_parent()
+	
 	assert("dialogue" in parent, "Improper use of Dialogue prefab! Must have a dialogue variable")
 	assert("character_name" in parent, "Improper use of Dialogue prefab! Must have a character_name variable")
+	
 	dialogue = parent.dialogue
 	character_name = parent.character_name
 	

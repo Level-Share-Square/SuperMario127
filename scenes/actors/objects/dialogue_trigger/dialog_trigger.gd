@@ -51,6 +51,7 @@ func _ready():
 	
 	dialogue_prefab.connect("message_changed", self, "change_emote")
 	dialogue_prefab.connect("message_disappear", self, "emit_signal", ["stop_talking"])
+	dialogue_prefab.initialize()
 	
 	bubble_prefab.connect("message_appear", self, "emit_signal", ["start_talking"])
 	bubble_prefab.connect("message_disappear", self, "emit_signal", ["stop_talking"])
