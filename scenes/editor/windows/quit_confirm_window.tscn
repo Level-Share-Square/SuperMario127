@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/editor/windows/quit_confirm_window.gd" type="Script" id=1]
 [ext_resource path="res://scenes/editor/windows/editor_window.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/menu/button_scripts/press_countdown.gd" type="Script" id=3]
+[ext_resource path="res://scenes/menu/button_scripts/button_sound.gd" type="Script" id=4]
 
 [node name="QuitConfirmWindow" instance=ExtResource( 2 )]
 margin_right = 250.0
@@ -102,6 +103,7 @@ focus_mode = 0
 size_flags_vertical = 4
 theme_type_variation = "ButtonRed"
 text = "Confirm"
+script = ExtResource( 4 )
 
 [node name="Countdown" type="Node" parent="ContentDivider/ContentMat/VBoxContainer/HBoxContainer/Confirm" index="0"]
 script = ExtResource( 3 )
@@ -119,6 +121,7 @@ rect_min_size = Vector2( 90, 0 )
 focus_mode = 0
 size_flags_vertical = 4
 text = "Cancel"
+script = ExtResource( 4 )
 
 [node name="WindowCorner" parent="." index="2"]
 visible = false
