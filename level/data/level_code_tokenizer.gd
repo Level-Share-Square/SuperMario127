@@ -23,6 +23,11 @@ static func splice_editor_data_components(code: String):
 	return get_outermost_brackets(code)
 
 
+# genuinely why
+static func splice_level_tags_components(code: String):
+	return get_outermost_brackets(code)
+
+
 # takes list of area codes
 static func splice_areas(code: String):
 	return get_outermost_brackets(code)

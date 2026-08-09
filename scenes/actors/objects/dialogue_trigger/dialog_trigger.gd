@@ -40,7 +40,9 @@ func _register_properties():
 	set_property_override("display_mode", PropertyTab.OverrideTypes.ENUM, ["Menu", "Speech Bubble", "Both"])
 	
 	register_property(10, "tag", tag, true)
+	set_property_override("tag", PropertyTab.OverrideTypes.DROPDOWN, [CurrentLevelData.level_tags, "get_dialogue_args", [CurrentLevelData.level_tags, "dialogue_tags"]])
 	register_property(11, "delegate_tag", delegate_tag, true)
+	set_property_override("delegate_tag", PropertyTab.OverrideTypes.DROPDOWN, [CurrentLevelData.level_tags, "get_dialogue_args", [CurrentLevelData.level_tags, "dialogue_tags"]])
 	register_property(12, "zoom_size", zoom_size, true)
 	
 	property_tabs.append("dialogue")

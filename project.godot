@@ -729,6 +729,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://level/Song.gd"
 }, {
+"base": "LevelDataResource",
+"class": "LevelTags",
+"language": "GDScript",
+"path": "res://level/level_tags.gd"
+}, {
 "base": "Resource",
 "class": "LevelTileset",
 "language": "GDScript",
@@ -1439,6 +1444,7 @@ _global_script_class_icons={
 "LevelSaveData": "",
 "LevelShared": "",
 "LevelSong": "",
+"LevelTags": "",
 "LevelTileset": "",
 "LevelVars": "",
 "LiquidBase": "",

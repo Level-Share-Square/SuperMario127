@@ -32,6 +32,7 @@ func _register_properties():
 	register_property(5, "color", color, true)
 	register_property(6, "render_in_front", render_in_front, true)
 	register_property(7, "tag", tag, true)
+	set_property_override("tag", PropertyTab.OverrideTypes.DROPDOWN, [CurrentLevelData.level_tags, "get_liquid_args", [CurrentLevelData.level_tags, "liquid_tags"]])
 	register_property(8, "toxicity", toxicity, true)
 	register_property(9, "tap_mode", tap_mode, true)
 	set_property_override("tap_mode", PropertyTab.OverrideTypes.BOOL_ALIAS, {true: "Move", false: "Scale"})

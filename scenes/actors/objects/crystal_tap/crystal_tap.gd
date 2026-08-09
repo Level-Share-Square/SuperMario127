@@ -20,6 +20,7 @@ var cycle_offset := 0.0
 
 func _register_properties():
 	register_property(4, "tag", tag)
+	set_property_override("tag", PropertyTab.OverrideTypes.DROPDOWN, [CurrentLevelData.level_tags, "get_liquid_args", [CurrentLevelData.level_tags, "liquid_tags"]])
 	register_property(5, "auto_activate", auto_activate, true)
 	register_property(6, "move_speed", move_speed)
 	register_property(7, "offset", offset)

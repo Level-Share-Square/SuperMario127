@@ -94,14 +94,14 @@ func instance_debug_level():
 
 
 func convert_debug_level():
-	var TEST_CODE_PATH = "res://level/data/test/magobo_old.txt"
+	var TEST_CODE_PATH = "res://level/data/test/archipelago_old.txt"
 	var file = File.new()
 	file.open(TEST_CODE_PATH, File.READ)
 	var content = file.get_as_text()
 	file.close()
 	var new_code: String = CurrentLevelData.convert_old_code_to_new(content)
 	
-	file.open("res://level/data/test/magobo_old.txt", File.WRITE)
+	file.open("res://level/data/test/archipelago_new.txt", File.WRITE)
 	file.store_string(new_code)
 	file.close()
 

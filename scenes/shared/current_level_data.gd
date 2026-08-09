@@ -42,6 +42,7 @@ var enemies_instanced: int = 0
 
 var vars: LevelVars = LevelVars.new()
 var checkpoint_data: CheckpointData = CheckpointData.new()
+var level_tags := LevelTags.new()
 
 var time_score_paused: bool
 var time_score: float = 0
@@ -120,8 +121,10 @@ func load_level_headers(code: String) -> void:
 	
 	var components_code = LevelCodeTokenizer.splice_level_components(code)
 	var editor_data_code = components_code[1]
+	var level_tags_code = components_code[2] if components_code.size() == 3 else ""
 	
 	editor_data = LevelCodeDeserializer.deserialize_editor_data(editor_data_code)
+	level_tags = LevelCodeDeserializer.deserialize_level_tags(level_tags_code)
 	
 	area_headers.clear()
 	# load area headers

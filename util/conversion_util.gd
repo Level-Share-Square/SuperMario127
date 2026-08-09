@@ -501,11 +501,39 @@ static func get_new_level_data_from_old_data(level_data) -> LevelDataContainer:
 	var container: LevelDataContainer = LevelDataContainer.new(
 		get_level_metadata_from_old_data(level_data),
 		EditorData.new(),
-		get_area_headers_from_old_data(level_data)
+		get_area_headers_from_old_data(level_data),
+		get_level_tags_from_old_data(level_data)
 	)
 	
 	return container
 
+static func get_level_tags_from_old_data(level_data) -> LevelTags:
+	var level_tags := LevelTags.new()
+	for area in level_data.areas:
+		for object in area.objects:
+			if (object.type_id == 23 or
+				object.type_id == 48 or
+				object.type_id == 112 or
+				object.type_id == 113): # Door, Pipe, Area Transition, and Star Door
+				if not object.properties[5] in level_tags.teleport_tags:
+					level_tags.teleport_tags.append(object.properties[5])
+			if (object.type_id == 72 or
+				object.type_id == 75): # Water and Lava
+				if not object.properties[8] in level_tags.liquid_tags:
+					level_tags.liquid_tags.append(object.properties[8])
+			if object.type_id == 81: # Crystal Tap
+				if not object.properties[3] in level_tags.liquid_tags:
+					level_tags.liquid_tags.append(object.properties[3])
+			if (object.type_id == 127 or
+				object.type_id == 137 or
+				object.type_id == 138 or
+				object.type_id == 139): # Toad, Peach, Yoshi, and Red Bob-omb
+				if not object.properties[13] in level_tags.dialogue_tags:
+					level_tags.dialogue_tags.append(object.properties[13])
+			if object.type_id == 128: # Dialogue Trigger
+				if not object.properties[9] in level_tags.dialogue_tags:
+					level_tags.dialogue_tags.append(object.properties[9])
+	return level_tags
 
 static func compare_versions(version, other) -> int:
 	var v = version.split(".")

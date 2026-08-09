@@ -28,6 +28,7 @@ func _register_properties() -> void:
 	register_property(4, "target_area", target_area)
 	set_property_override("target_area", PropertyTab.OverrideTypes.DROPDOWN, [CurrentLevelData, "get_area_args"])
 	register_property(5, "tag", tag)
+	set_property_override("tag", PropertyTab.OverrideTypes.DROPDOWN, [CurrentLevelData.level_tags, "get_teleport_args", [CurrentLevelData.level_tags, "teleport_tags"]])
 	register_property(6, "teleport_mode", teleport_mode, true)
 	set_property_override("teleport_mode", PropertyTab.OverrideTypes.ENUM, ["Location", "Area", "Level"])
 	register_property(7, "max_pan_distance", max_pan_distance)

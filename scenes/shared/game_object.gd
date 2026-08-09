@@ -293,6 +293,7 @@ func set_property_menu(key, menu_array: Array):
 	pass
 		
 func set_property_override(property: String, type: int, args):
+	print(property)
 	property_overrides.get_or_add(property, [type, [property, args]])
 
 

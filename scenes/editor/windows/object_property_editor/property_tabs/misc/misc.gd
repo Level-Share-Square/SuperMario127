@@ -24,7 +24,7 @@ func load_misc_properties(_editor: Editor, _objects: Dictionary, common_properti
 				common_properties.erase(property)
 		
 		var override_data = objects.keys()[0].property_overrides[override]
-		
+
 		load_property_override(override, OverrideTypes.keys()[override_data[0]], override_data)
 	
 	for property in common_properties:

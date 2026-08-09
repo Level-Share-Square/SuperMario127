@@ -50,6 +50,7 @@ func _register_properties():
 	set_property_override("idle_action", PropertyTab.OverrideTypes.ENUM, action_map)
 	
 	register_property(8, "tag_link", tag_link, true)
+	set_property_override("tag_link", PropertyTab.OverrideTypes.DROPDOWN, [CurrentLevelData.level_tags, "get_dialogue_args", [CurrentLevelData.level_tags, "dialogue_tags"]])
 	register_property(9, "curve", curve, true)
 	register_property(10, "walk_speed", walk_speed, true)
 	register_property(11, "move_type", move_type, true)
