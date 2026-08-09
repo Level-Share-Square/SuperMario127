@@ -36,7 +36,7 @@ func setup_affected_objects(property: String, new_value) -> Dictionary:
 			},
 			"original_properties": {}
 		}
-		if object[property_id] == new_value:
+		if object.get_data_property(property_id) == new_value:
 			affected_objects["property_matches"] += 1
 	return affected_objects
 

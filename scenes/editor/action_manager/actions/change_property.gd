@@ -8,7 +8,7 @@ var changed_properties: Dictionary
 func set_properties(_object: GameObject, _original_properties: Dictionary, _changed_properties: Dictionary):
 	for property_name in _changed_properties.keys():
 		if _original_properties.empty():
-			_original_properties[property_name] = _object[property_name]
+			_original_properties[property_name] = _object.get_data_property(property_name)
 		var new_value = _changed_properties[property_name]
 		_object.set_property(property_name, new_value, true)
 
@@ -22,7 +22,7 @@ func restore_properties(_object: GameObject, _original_properties: Dictionary, _
 ## menu, then you can just call set_properties directly and itll handle this for you
 func store_original_properties(_object: GameObject, _original_properties: Dictionary, _changed_properties: Dictionary):
 	for property_name in _changed_properties.keys():
-		_original_properties[property_name] = _object[property_name]
+		_original_properties[property_name] = _object.get_data_property(property_name)
 
 func _do():
 	set_properties(object, original_properties, changed_properties)
