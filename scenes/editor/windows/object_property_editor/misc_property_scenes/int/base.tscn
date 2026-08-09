@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://scenes/editor/windows/object_property_editor/misc_property_scenes/int/base.gd" type="Script" id=1]
-[ext_resource path="res://scenes/menu/spinbox_unfocus.gd" type="Script" id=2]
+[ext_resource path="res://scenes/editor/windows/object_property_editor/misc_property_scenes/property_spinbox.gd" type="Script" id=2]
 
 [node name="Int" type="HBoxContainer"]
 margin_top = 26.0
@@ -33,4 +33,5 @@ max_value = inf
 custom_arrow_step = 1.0
 script = ExtResource( 2 )
 
-[connection signal="value_changed" from="SpinBox" to="." method="change_property"]
+[connection signal="done_editing" from="SpinBox" to="." method="done_editing"]
+[connection signal="value_changed" from="SpinBox" to="." method="change_property" binds= [ false ]]

@@ -24,7 +24,8 @@ func on_focus_entered() -> void:
 	hover_sound.play()
 
 func play_sound(val) -> void:
-	click_sound.pitch_scale = map(val, min_value, max_value, 0.5, 2.0)
+	var new_pitch_scale: float = map(val, min_value, max_value, 0.5, 2.0)
+	click_sound.pitch_scale = new_pitch_scale if new_pitch_scale > 0 else 1
 	click_sound.play()
 	yield(click_sound, "finished")
 	click_sound.pitch_scale = 1.0

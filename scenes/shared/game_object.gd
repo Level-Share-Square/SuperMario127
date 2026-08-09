@@ -61,7 +61,7 @@ var property_defaults: Dictionary = {
 	"in_front": false,
 	"palette": 0,
 	"scale": Vector2.ONE,
-	"rotation_degrees": 0,
+	"rotation_degrees": 0.0,
 	"enabled": true,
 	"visible": true
 }
@@ -218,6 +218,13 @@ func is_savable_property(key: String) -> bool:
 
 func get_property_index(property: String) -> int:
 	return property_ids.find_key(property)
+
+
+func get_data_property(property: String):
+	var data_property = object_data.get_property(get_property_index(property))
+	if data_property == null:
+		data_property = property_defaults.get(property)
+	return data_property
 
 
 func register_property(id: int, property: String, default_value, editable: bool = true) -> void:

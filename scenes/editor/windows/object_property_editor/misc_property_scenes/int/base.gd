@@ -15,3 +15,6 @@ func load_property(_editor: Editor, init_value, _property: Array, property_name 
 
 func change_property(new_value, save_to_data = true):
 	.change_property(int(new_value), save_to_data)
+
+func done_editing():
+	change_property($SpinBox.value)

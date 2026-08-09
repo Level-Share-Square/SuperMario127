@@ -12,9 +12,10 @@ func load_property(_editor: Editor, init_value, _property: Array, property_name 
 func change_property(new_value, save_to_data: bool = true):
 	.change_property(wrapf(new_value, 0, 360), save_to_data)
 
-func done_editing(_val: String):
+func done_editing(_val: String = ""):
 	change_property(float($"%LineEdit".text))
 
 func increment_property(step: float):
 	var cur_rot := float($"%LineEdit".text)
-	change_property(cur_rot + step)
+	$"%LineEdit".text = str(cur_rot + step)
+	change_property(cur_rot + step, false)
