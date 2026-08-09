@@ -33,7 +33,7 @@ func get_mission_by_uuid(uuid: String) -> MissionData:
 	return null
 	
 func add_star_coin(uuid: String = "") -> StarCoinData:
-	var data := StarCoinData.new(uuid_util.v4() if not uuid else uuid, "", Color.white)
+	var data := StarCoinData.new(uuid_util.v4() if not uuid else uuid)
 
 	star_coin_data.append(data)
 	return data

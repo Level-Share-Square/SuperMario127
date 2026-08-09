@@ -18,8 +18,8 @@ var uuid: String = ""
 var collected := false
 var is_blue := false
 
-var hint := StarCoinData.DEFAULT_HINT
-var color := StarCoinData.DEFAULT_COLOR
+var hint: String = StarCoinData.DEFAULT_HINT
+var color: Color = StarCoinData.DEFAULT_COLOR
 
 var data: StarCoinData
 

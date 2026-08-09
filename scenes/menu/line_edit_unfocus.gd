@@ -10,3 +10,11 @@ func _is_pos_in(check_pos : Vector2):
 func _input(event):
 	if event is InputEventMouseButton and not _is_pos_in(event.position):
 		release_focus()
+
+
+func _ready():
+	connect("text_entered", self, "text_entered")
+
+
+func text_entered(_new_text: String = "") -> void:
+	release_focus()

@@ -15,7 +15,6 @@ unique_name_in_owner = true
 margin_top = 1.0
 margin_right = 62.0
 margin_bottom = 18.0
-rect_min_size = Vector2( 60, 0 )
 mouse_filter = 1
 mouse_default_cursor_shape = 16
 text = "Property:"

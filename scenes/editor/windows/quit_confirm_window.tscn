@@ -121,8 +121,9 @@ size_flags_vertical = 4
 text = "Cancel"
 
 [node name="WindowCorner" parent="." index="2"]
-margin_left = 240.0
-margin_top = 71.0
+visible = false
+margin_left = 238.0
+margin_top = 69.0
 margin_right = 250.0
 margin_bottom = 81.0
 

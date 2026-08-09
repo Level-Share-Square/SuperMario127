@@ -1,5 +1,5 @@
 class_name CollapsibleContainer
-extends Button
+extends ButtonSound
 
 
 export(NodePath) var selected_revealer_path
@@ -15,6 +15,8 @@ func _ready():
 	
 	
 func on_pressed():
+	.on_pressed()
+	
 	if !toggled:
 		var tween = get_tree().create_tween()
 		tween.tween_property(selected_revealer, "rect_min_size:y", revealer_child.rect_min_size.y, 0.3).set_trans(Tween.TRANS_CUBIC)
