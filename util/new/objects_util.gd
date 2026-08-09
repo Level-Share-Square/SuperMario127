@@ -7,9 +7,9 @@ static func object_data_deep_copy(game_object):
 	var properties: Dictionary = object_data.properties.duplicate(true)
 	
 	for property in properties.keys():
+		if game_object.property_ids[property] in game_object.property_defaults.keys(): continue
 		if !game_object.property_ids[property] in game_object.editable_properties:
 			properties.erase(property)
-
 	var copied_data := ObjectData.new(copied_metadata, properties)
 	return copied_data
 

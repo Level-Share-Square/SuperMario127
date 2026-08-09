@@ -21,7 +21,7 @@ func _init(
 		s_shine_name: String = "Shine Name", 
 		s_shine_description: String = "Description", 
 		s_shine_sort_order: int = 0,
-		s_shine_color: Color = Color.white,
+		s_shine_color: Color = Color.yellow,
 		s_shine_force_leave: bool = true,
 		s_spawn_area_id: int = 0,
 		s_spawn_teleporter_tag: String = "spawn"
