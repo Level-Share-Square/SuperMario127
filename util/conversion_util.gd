@@ -358,7 +358,7 @@ static func get_collectible_data_from_old_data(level_data) -> CollectibleData:
 				object.properties[7] = properties[10]
 				object.properties[8] = properties[11]
 				object.properties[9] = mission_data.mission_uuid
-				object.properties[10] = 0 if properties.size() <= 15 else properties[15]
+				object.properties[10] = 0 if properties.size() <= 16 else properties[16]
 				object.properties[11] = ""
 				
 				mission_datas.append(mission_data)
