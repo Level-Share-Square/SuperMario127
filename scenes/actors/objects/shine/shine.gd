@@ -24,6 +24,7 @@ onready var animated_sprite: AnimatedSprite = $AnimatedSprite
 onready var recolorable_sprite: AnimatedSprite = $AnimatedSprite/AnimatedSpriteRecolorable
 onready var vector_rays: ColorRect = $RaysContainer/VectorRays
 onready var vector_rays_small: ColorRect = $RaysContainer/VectorRaysSmall
+onready var glow = $RaysContainer/Glow
 onready var particles: Particles2D = $AnimatedSprite/Particles2D
 onready var spawn_particles: Particles2D = $SpawnParticles
 onready var ghost: Sprite = $Ghost
@@ -69,7 +70,7 @@ var activated: bool = true
 var red_coins_activate: bool = false
 var shine_shards_activate: bool = false
 var required_purples: int = 0
-var color: Color = Color(1, 1, 0)
+var color := Color.yellow
 var mission_uuid: String = ""
 var activation_tag: String = ""
 var added_to_data: bool = false
@@ -136,10 +137,17 @@ func _ready() -> void:
 			is_blue = CurrentLevelData.save_data.is_mission_complete(mission_uuid)
 		if is_blue:
 			vector_rays.color = Color.blue
+		else:
+			vector_rays.color = color
+			vector_rays.color.s *= 3
+			vector_rays_small.color = vector_rays.color
+		vector_rays_small.color = vector_rays.color
 	else:
 		animation_player.play("RESET")
 	
 	vector_rays.visible = do_kick_out and !is_blue
+	glow.visible = !is_blue
+	
 	var _connect = connect("property_changed", self, "update_shine_properties")
 	if activation_tag != "":
 		add_to_group("tag_shine_%s" % activation_tag.to_lower())
@@ -244,6 +252,9 @@ func update_color(key, value):
 			vector_rays.color = color
 		else:
 			vector_rays.color = NORMAL_RAY_COLOR
+	
+	glow.visible = !is_blue
+	vector_rays_small.color = vector_rays.color
 
 
 func _physics_process(_delta: float) -> void:
@@ -426,7 +437,7 @@ func start_shine_dance() -> void:
 	
 	character.collected_shine_recolorable.frames = recolorable_sprite.frames
 	character.collected_shine_recolorable.self_modulate = recolorable_sprite.self_modulate
-	character.collected_shine.visible = recolorable_sprite.visible
+	character.collected_shine_recolorable.visible = recolorable_sprite.visible
 	
 	character.collected_shine_particles.texture = particles.texture
 	character.collected_shine_particles.self_modulate = particles.self_modulate

@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=2]
+[gd_scene load_steps=65 format=2]
 
 [ext_resource path="res://scenes/menu/options/controls/preset_loader.gd" type="Script" id=1]
 [ext_resource path="res://scenes/menu/theme.tres" type="Theme" id=2]
@@ -21,6 +21,7 @@
 [ext_resource path="res://scenes/menu/button_scripts/button_hover-vertical.gd" type="Script" id=19]
 [ext_resource path="res://scenes/actors/mario/animation_frames.tres" type="SpriteFrames" id=20]
 [ext_resource path="res://scenes/menu/background_scroll/background.tscn" type="PackedScene" id=21]
+[ext_resource path="res://scenes/menu/options/buttons/enum_option.tscn" type="PackedScene" id=22]
 [ext_resource path="res://scenes/menu/options/mod_loader.gd" type="Script" id=23]
 [ext_resource path="res://scenes/menu/button_scripts/press_countdown.gd" type="Script" id=24]
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=25]
@@ -385,9 +386,9 @@ margin_bottom = 432.0
 alignment = 1
 
 [node name="Back" type="Button" parent="BlackBar/MarginContainer/VBoxContainer"]
-margin_top = 87.0
+margin_top = 112.0
 margin_right = 192.0
-margin_bottom = 120.0
+margin_bottom = 145.0
 focus_neighbour_top = NodePath("../Storage")
 focus_neighbour_bottom = NodePath("../General")
 theme_type_variation = "Red"
@@ -411,14 +412,14 @@ patch_margin_right = 11
 patch_margin_bottom = 11
 
 [node name="Padding" type="Control" parent="BlackBar/MarginContainer/VBoxContainer"]
-margin_top = 136.0
+margin_top = 161.0
 margin_right = 192.0
-margin_bottom = 136.0
+margin_bottom = 161.0
 
 [node name="General" type="Button" parent="BlackBar/MarginContainer/VBoxContainer"]
-margin_top = 152.0
+margin_top = 177.0
 margin_right = 192.0
-margin_bottom = 185.0
+margin_bottom = 210.0
 focus_neighbour_top = NodePath("../Back")
 focus_neighbour_bottom = NodePath("../Character")
 text = "General"
@@ -441,6 +442,7 @@ patch_margin_right = 11
 patch_margin_bottom = 11
 
 [node name="Character" type="Button" parent="BlackBar/MarginContainer/VBoxContainer"]
+visible = false
 margin_top = 201.0
 margin_right = 192.0
 margin_bottom = 234.0
@@ -465,9 +467,9 @@ patch_margin_right = 11
 patch_margin_bottom = 11
 
 [node name="Controls" type="Button" parent="BlackBar/MarginContainer/VBoxContainer"]
-margin_top = 250.0
+margin_top = 226.0
 margin_right = 192.0
-margin_bottom = 283.0
+margin_bottom = 259.0
 focus_neighbour_top = NodePath("../General")
 text = "Controls"
 align = 2
@@ -489,9 +491,9 @@ patch_margin_right = 11
 patch_margin_bottom = 11
 
 [node name="Storage" type="Button" parent="BlackBar/MarginContainer/VBoxContainer"]
-margin_top = 299.0
+margin_top = 275.0
 margin_right = 192.0
-margin_bottom = 332.0
+margin_bottom = 308.0
 focus_neighbour_bottom = NodePath("../Back")
 text = "Storage"
 align = 2
@@ -650,6 +652,15 @@ setting_section = "General"
 setting_key = "fps_cap"
 default_value = 3
 options = [ "30", "40", "50", "60" ]
+
+[node name="Character" parent="Subscreens/General/VBoxContainer/GridContainer" instance=ExtResource( 22 )]
+margin_left = 476.0
+margin_top = 59.0
+margin_right = 570.0
+margin_bottom = 98.0
+setting_section = "General"
+setting_key = "first_player"
+options = [ "Mario", "Luigi" ]
 
 [node name="Character" type="MarginContainer" parent="Subscreens"]
 visible = false

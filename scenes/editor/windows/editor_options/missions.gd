@@ -11,6 +11,7 @@ onready var spawn_teleporter_tag = $"%TeleporterTag"
 onready var mission_show_in_menu = $"%ShowInMenu"
 onready var new_mission = $"%NewMission"
 onready var erase = $"%Erase"
+onready var mission_container = $"%MissionContainer"
 
 onready var editor: Editor = get_tree().current_scene
 
@@ -26,9 +27,9 @@ func _ready():
 	on_mission_selected(mission_data[0])
 	
 	new_mission.connect("pressed", self, "on_new_mission_pressed")
-	if mission_data.size() == 1: erase.disabled = true
 		
 func on_mission_selected(mission: MissionData):
+	mission_container.show()
 	
 	shine_name.load_property(editor, mission["shine_name"], [
 		"shine_name",
@@ -119,8 +120,9 @@ func on_new_mission_pressed():
 	erase.disabled = false
 	
 func erase_mission():
-	if mission_data.size() == 1: return
 	mission_data.erase(selected_mission)
-	on_mission_selected(mission_data[0])
+	if mission_data.size() > 0:
+		on_mission_selected(mission_data[0])
+	else:
+		mission_container.hide()
 	refresh_buttons()
-	if mission_data.size() == 1: erase.disabled = true

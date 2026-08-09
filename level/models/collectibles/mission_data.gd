@@ -18,8 +18,8 @@ var spawn_teleporter_tag: String
 func _init(
 		s_mission_uuid: String = uuid_util.v4(),
 		s_mission_show_in_menu: bool = true,
-		s_shine_name: String = "Shine Name", 
-		s_shine_description: String = "Description", 
+		s_shine_name: String = "Unnamed Shine", 
+		s_shine_description: String = "", 
 		s_shine_sort_order: int = 0,
 		s_shine_color: Color = Color.yellow,
 		s_shine_force_leave: bool = true,

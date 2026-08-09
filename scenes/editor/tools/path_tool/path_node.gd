@@ -25,6 +25,7 @@ var is_object: bool = false
 onready var left_handle: Node2D = $HandleL
 onready var right_handle: Node2D = $HandleR
 onready var handle_positions_before_link: PoolVector2Array = [left_handle.position, right_handle.position]
+onready var editor = get_tree().get_current_scene()
 
 func _ready():
 	set_handles_active(false)
@@ -70,7 +71,7 @@ func _on_PathNodeButton_gui_input(event):
 			delete()
 	if held && event is InputEventMouseMotion:
 		position = ui.get_ref().get_mouse_pos() if !is_object else ui.get_ref().path_node_container.get_global_transform().xform_inv(ui.get_ref().get_mouse_pos())
-		if ui.get_ref().editor.owner.pixel_lock:
+		if editor.pixel_lock:
 			position = position.snapped(Vector2(8, 8))
 		ui.get_ref().update_node_position(self)
 

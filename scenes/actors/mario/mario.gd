@@ -440,6 +440,7 @@ func load_in():
 			printerr("Illegal character loaded: " + str(character) + " REEEEEE")
 	
 	## palettes
+	LocalSettings.change_setting("General", "char_palette", "default") ## temp until 1.0 release
 	var char_folder: String = CHAR_NAMES[character].to_lower()
 	cur_palette = LocalSettings.load_setting("General", "char_palette", "default")
 	PALETTE_SWAP_MAT.set_shader_param("palette_in", load(PALETTES_PATH % [char_folder, "default"]))
@@ -702,12 +703,6 @@ func _process(delta: float) -> void:
 	
 	if next_position:
 		position = position.linear_interpolate(next_position, fps_util.PHYSICS_DELTA * sync_interpolation_speed)
-	
-	collected_shine_recolorable.frame = collected_shine.frame
-	collected_shine_recolorable.position = Vector2.ZERO
-	collected_shine_recolorable.scale = collected_shine.scale
-	collected_shine_recolorable.visible = collected_shine.visible
-	collected_shine_recolorable.z_index = collected_shine.z_index
 	
 	if state == get_state_node("NoActionState"):
 		return
