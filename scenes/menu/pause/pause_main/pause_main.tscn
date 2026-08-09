@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=38 format=2]
 
 [ext_resource path="res://scenes/menu/theme.tres" type="Theme" id=1]
 [ext_resource path="res://scenes/menu/ui_focus.gd" type="Script" id=2]
@@ -24,6 +24,8 @@
 [ext_resource path="res://assets/icons/shine.png" type="Texture" id=22]
 [ext_resource path="res://scenes/menu/pause/pause_main/counters.gd" type="Script" id=23]
 [ext_resource path="res://assets/icons/ratings.png" type="Texture" id=24]
+[ext_resource path="res://assets/icons/ArrowRight.svg" type="Texture" id=25]
+[ext_resource path="res://assets/icons/ArrowLeft.svg" type="Texture" id=26]
 
 [sub_resource type="Gradient" id=25]
 offsets = PoolRealArray( 0.0502793, 0.944134, 1 )
@@ -500,10 +502,10 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-margin_left = -384.0
-margin_top = -248.0
-margin_right = 120.001
-margin_bottom = 184.0
+margin_left = 384.0
+margin_top = -32.0
+margin_right = 888.001
+margin_bottom = 400.0
 rect_min_size = Vector2( 504, 0 )
 script = ExtResource( 12 )
 
@@ -659,20 +661,88 @@ margin_right = 64.0
 margin_bottom = 19.0
 rect_min_size = Vector2( 64, 0 )
 
-[node name="Left" type="Button" parent="ShineInfo/CenterContainer/ShineDetails/Buttons"]
+[node name="CenterContainer" type="CenterContainer" parent="ShineInfo/CenterContainer/ShineDetails/Buttons"]
 margin_left = 88.0
-margin_right = 140.0
+margin_right = 114.0
+margin_bottom = 19.0
+size_flags_horizontal = 3
+
+[node name="SwitchCollectible" type="Button" parent="ShineInfo/CenterContainer/ShineDetails/Buttons/CenterContainer"]
+unique_name_in_owner = true
+margin_top = 1.0
+margin_right = 26.0
+margin_bottom = 18.0
+rect_min_size = Vector2( 26, 0 )
+theme_type_variation = "OptionsToggle"
+custom_fonts/font = ExtResource( 8 )
+script = ExtResource( 14 )
+extend_amount = 2
+
+[node name="StarCoin" type="TextureRect" parent="ShineInfo/CenterContainer/ShineDetails/Buttons/CenterContainer/SwitchCollectible"]
+visible = false
+modulate = Color( 0.0431373, 0.290196, 0.427451, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 2.0
+margin_top = 2.0
+margin_right = -2.0
+margin_bottom = -2.0
+mouse_filter = 2
+texture = ExtResource( 21 )
+expand = true
+stretch_mode = 6
+
+[node name="Shine" type="TextureRect" parent="ShineInfo/CenterContainer/ShineDetails/Buttons/CenterContainer/SwitchCollectible"]
+modulate = Color( 0.0431373, 0.290196, 0.427451, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 1.0
+margin_top = 1.0
+margin_right = -1.0
+margin_bottom = -1.0
+mouse_filter = 2
+texture = ExtResource( 22 )
+expand = true
+stretch_mode = 6
+
+[node name="Hideable" type="HBoxContainer" parent="ShineInfo/CenterContainer/ShineDetails/Buttons"]
+unique_name_in_owner = true
+margin_left = 138.0
+margin_right = 264.0
+margin_bottom = 19.0
+rect_pivot_offset = Vector2( 695, 414 )
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 20.0
+custom_constants/separation = 24
+
+[node name="Left" type="Button" parent="ShineInfo/CenterContainer/ShineDetails/Buttons/Hideable"]
+unique_name_in_owner = true
+margin_right = 27.0
 margin_bottom = 19.0
 size_flags_horizontal = 3
 theme_type_variation = "OptionsToggle"
 custom_fonts/font = ExtResource( 8 )
-text = "<-"
+expand_icon = true
 script = ExtResource( 14 )
 extend_amount = 2
 
-[node name="Index" type="Label" parent="ShineInfo/CenterContainer/ShineDetails/Buttons"]
-margin_left = 164.0
-margin_right = 187.0
+[node name="Icon" type="TextureRect" parent="ShineInfo/CenterContainer/ShineDetails/Buttons/Hideable/Left"]
+modulate = Color( 0.0431373, 0.290196, 0.427451, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 3.0
+margin_top = 3.0
+margin_right = -3.0
+margin_bottom = -3.0
+mouse_filter = 2
+texture = ExtResource( 26 )
+expand = true
+stretch_mode = 6
+
+[node name="Index" type="Label" parent="ShineInfo/CenterContainer/ShineDetails/Buttons/Hideable"]
+unique_name_in_owner = true
+margin_left = 51.0
+margin_right = 74.0
 margin_bottom = 19.0
 custom_colors/font_color_shadow = Color( 0, 0, 0, 0.501961 )
 custom_constants/shadow_offset_x = 0
@@ -680,16 +750,29 @@ custom_constants/shadow_offset_y = 2
 custom_fonts/font = SubResource( 19 )
 text = "0/3"
 
-[node name="Right" type="Button" parent="ShineInfo/CenterContainer/ShineDetails/Buttons"]
-margin_left = 211.0
-margin_right = 264.0
+[node name="Right" type="Button" parent="ShineInfo/CenterContainer/ShineDetails/Buttons/Hideable"]
+unique_name_in_owner = true
+margin_left = 98.0
+margin_right = 126.0
 margin_bottom = 19.0
 size_flags_horizontal = 3
 theme_type_variation = "OptionsToggle"
 custom_fonts/font = ExtResource( 8 )
-text = "->"
 script = ExtResource( 14 )
 extend_amount = 2
+
+[node name="Icon" type="TextureRect" parent="ShineInfo/CenterContainer/ShineDetails/Buttons/Hideable/Right"]
+modulate = Color( 0.0431373, 0.290196, 0.427451, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 3.0
+margin_top = 3.0
+margin_right = -3.0
+margin_bottom = -3.0
+mouse_filter = 2
+texture = ExtResource( 25 )
+expand = true
+stretch_mode = 6
 
 [node name="Padding2" type="Control" parent="ShineInfo/CenterContainer/ShineDetails/Buttons"]
 margin_left = 288.0
@@ -703,10 +786,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -72.0
-margin_top = -40.0
-margin_right = 88.0
-margin_bottom = 8.0
+margin_left = 696.0
+margin_top = 392.0
+margin_right = 856.0
+margin_bottom = 440.0
 rect_scale = Vector2( 0.9, 0.9 )
 rect_pivot_offset = Vector2( 160, 0 )
 script = ExtResource( 23 )
@@ -837,5 +920,6 @@ anims/transition = SubResource( 6 )
 [connection signal="text_changed" from="Buttons/VBoxContainer/HBoxContainer/Quit/Countdown" to="Buttons/VBoxContainer/HBoxContainer/Quit/Icon" method="update_offset"]
 [connection signal="pressed" from="Buttons/VBoxContainer/HBoxContainer/Options" to="." method="transition" binds= [ "Options" ]]
 [connection signal="pressed" from="Buttons/VBoxContainer/HBoxContainer/Options" to="Focus" method="set_default_focus" binds= [ "%Options" ]]
-[connection signal="pressed" from="ShineInfo/CenterContainer/ShineDetails/Buttons/Left" to="ShineInfo" method="prev_shine"]
-[connection signal="pressed" from="ShineInfo/CenterContainer/ShineDetails/Buttons/Right" to="ShineInfo" method="next_shine"]
+[connection signal="pressed" from="ShineInfo/CenterContainer/ShineDetails/Buttons/CenterContainer/SwitchCollectible" to="ShineInfo" method="switch_collectible_type"]
+[connection signal="pressed" from="ShineInfo/CenterContainer/ShineDetails/Buttons/Hideable/Left" to="ShineInfo" method="prev_shine"]
+[connection signal="pressed" from="ShineInfo/CenterContainer/ShineDetails/Buttons/Hideable/Right" to="ShineInfo" method="next_shine"]

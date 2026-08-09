@@ -1,6 +1,7 @@
 extends CanvasLayer
 
 signal shine_collected
+signal star_coin_collected
 
 onready var cooldown = $Cooldown
 onready var blur = $Blur/Shader

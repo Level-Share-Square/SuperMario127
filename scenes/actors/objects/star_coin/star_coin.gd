@@ -82,6 +82,7 @@ func collect(body : PhysicsBody2D) -> void:
 			CurrentLevelData.save_data.set_star_coin_collected(uuid, CurrentLevelData.selected_file > -2)
 
 		collected = true
+		get_tree().get_current_scene().get_node("%PauseController").emit_signal("star_coin_collected")
 
 		animation_player.play("collect")
 		var _connect = animation_player.connect("animation_finished", self, "queue_free")
