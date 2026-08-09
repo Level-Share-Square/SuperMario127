@@ -147,4 +147,3 @@ visible = false
 [connection signal="screen_opened" from="Screens/MainMenu" to="Screens/MainMenu/Counters" method="screen_opened"]
 [connection signal="start_transition" from="Screens/MainMenu" to="Cooldown" method="start"]
 [connection signal="start_transition" from="Screens/Options" to="Cooldown" method="start"]
-[connection signal="screen_opened" from="Screens/ShineMap" to="Screens/ShineMap/MarginContainer/Panel/MarginContainer/ScrollContainer/CenterContainer/Levels" method="screen_opened"]

@@ -14,7 +14,6 @@ func _ready():
 	CurrentLevelData.can_pause = true
 
 func set_tree_paused(value: bool):
-	CurrentLevelData.set_process(!value)
 	get_tree().paused = value
 
 func can_pause() -> bool:

@@ -76,7 +76,6 @@ signal finished(result)
 func _init() -> void:
 	# since the time score is incremented here, it must keep incrementing while paused
 	pause_mode = PAUSE_MODE_PROCESS
-	set_process(false)
 	
 	object_id_map = preload("res://scenes/actors/objects/ids.tres")
 	background_id_mapper = preload("res://scenes/shared/background/backgrounds/ids.tres")
@@ -93,8 +92,8 @@ func _init() -> void:
 # for now, process is disabled by default, so the timer needs to be started manually, if process here is ever needed for something else, create a bool for this
 func _process(delta: float) -> void:
 	if not time_score_paused:
+		prints("RUN", time_score)
 		time_score += delta
-
 
 ## loading
 func load_level_metadata(code: String) -> void:

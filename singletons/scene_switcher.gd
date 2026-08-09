@@ -114,8 +114,9 @@ func start_level(level_metadata: LevelMetadata, level_id: String, working_folder
 	
 	# Get the shine count, only count shine sprites that have show_in_menu on
 	var total_shine_count := 0
-	for shine_details in level_metadata.collectible_data.mission_data:
-		if shine_details["mission_show_in_menu"]:
+	for mission_uuid in level_metadata.collectible_data.used_mission_data:
+		var mission = level_metadata.collectible_data.get_mission_by_uuid(mission_uuid)
+		if mission["mission_show_in_menu"]:
 			total_shine_count += 1
 	
 	# If there is more than 1, go to shine select screen

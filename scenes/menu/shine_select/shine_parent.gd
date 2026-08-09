@@ -41,7 +41,8 @@ var scrollable_shines: Array = []
 var selected_shine_index: int = -1
 
 func _ready():
-	shine_details = level_metadata.collectible_data.mission_data
+	for mission in level_metadata.collectible_data.used_mission_data:
+		shine_details.append(level_metadata.collectible_data.get_mission_by_uuid(mission))
 	
 	var shine_index: int = 0
 	var collected_shines = []

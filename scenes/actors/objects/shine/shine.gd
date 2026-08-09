@@ -449,6 +449,7 @@ func character_shine_dance_finished(_animation: Animation) -> void:
 	#bus is changed based on whether or not you are in the player, or editor, this makes sure music 
 	#fades to the correct volume in both situations
 	if do_kick_out:
+		CurrentLevelData.unpause_time_score()
 		if not Singleton.ModeSwitcher.visible: #if not running through the editor, play the transition
 			var _connect = SceneTransitions.connect("transition_finished", Singleton.SceneSwitcher, "quit_level", [false], CONNECT_ONESHOT)
 			SceneTransitions.do_transition_animation(

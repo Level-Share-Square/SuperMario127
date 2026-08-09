@@ -59,6 +59,7 @@ func load_save_from_dictionary(save_dictionary: Dictionary):
 
 
 func set_mission_complete(mission_uuid: String, save_to_disk: bool = true) -> void:
+	if mission_uuid in _completed_missions: return
 	_completed_missions.append(mission_uuid)
 	if save_to_disk:
 		level_list_util.save_level_save_file(get_save_file_dictionary(), get_save_path())
