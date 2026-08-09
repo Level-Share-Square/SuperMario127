@@ -6,7 +6,7 @@ onready var is_ground = $"%IsGround"
 onready var autoset_tint = $"%AutosetTint"
 onready var tint = $"%Tint"
 onready var opacity = $"%Opacity"
-onready var uuid = $"%UUID"
+onready var switch_layer = $"%SwitchLayer"
 
 onready var editor: Editor = get_tree().current_scene
 onready var shared: LevelShared = editor.get_shared_node()
@@ -14,9 +14,6 @@ onready var window = owner
 
 var layer_data: LayerData
 
-func _ready():
-	uuid.connect("pressed", self, "copy_uuid")
-	
 func copy_uuid():
 	OS.set_clipboard(shared.layer_index_to_uuid(window.layer_index))
 
@@ -48,13 +45,7 @@ func load_base_properties():
 		PropertyInfo.new(parallax.hint_tooltip, 1, -1000, 1000)
 	])
 	connect_signals(parallax)
-	
-	is_ground.load_property(is_ground, get_property_value("is_ground"), [
-		"is_ground",
-		TYPE_BOOL,
-		PropertyInfo.new(is_ground.hint_tooltip)
-	])
-	connect_signals(is_ground)
+	parallax.visible = not layer_data.layer_metadata.is_ground
 	
 	autoset_tint.load_property(autoset_tint, get_property_value("autoset_tint"), [
 		"autoset_tint",
@@ -76,3 +67,9 @@ func load_base_properties():
 		PropertyInfo.new(opacity.hint_tooltip, 0.25, 0, 1)
 	])
 	connect_signals(opacity)
+
+
+func switch_layer():
+	layer_data = yield(shared.change_layer_type(shared.get_layer_at(layer_data.layer_metadata.order)), "completed")
+	window.toggle_window()
+	editor.get_node("%ParallaxScroll")._update_parallax()

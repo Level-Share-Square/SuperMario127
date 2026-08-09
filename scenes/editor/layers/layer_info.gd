@@ -1,6 +1,9 @@
 class_name LayerInfo
 extends VBoxContainer
 
+const GROUND_TEXT: String = "Make Decor"
+const PARALLAX_TEXT: String = "Make Ground"
+
 onready var layer_dropdown = get_parent().get_node("%LayerDropdown")
 
 onready var panel_container = $"%PanelContainer"
@@ -69,6 +72,7 @@ func delete_layer() -> void:
 
 func show_layer_editor() -> void:
 	var layer_editor = shared.get_node("%LayerEditor")
+	layer_editor.layer_properties.switch_layer.text = GROUND_TEXT if layer_data.layer_metadata.is_ground else PARALLAX_TEXT
 	layer_editor.populate_window(layer_data)
 
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://scenes/oldeditor/sounds/click2.wav" type="AudioStream" id=1]
 [ext_resource path="res://scenes/menu/button_scripts/button_sound.gd" type="Script" id=2]
@@ -8,7 +8,12 @@
 [ext_resource path="res://scenes/oldeditor/sounds/hover.wav" type="AudioStream" id=6]
 [ext_resource path="res://scenes/editor/windows/big_text/text_editor.gd" type="Script" id=7]
 [ext_resource path="res://scenes/actors/mario/icon2.png" type="Texture" id=8]
-[ext_resource path="res://assets/icons/EyeOpen.svg" type="Texture" id=9]
+[ext_resource path="res://assets/icons/Center.svg" type="Texture" id=9]
+[ext_resource path="res://assets/icons/Underline.svg" type="Texture" id=10]
+[ext_resource path="res://assets/icons/Strikethrough.svg" type="Texture" id=11]
+[ext_resource path="res://assets/icons/Wave.svg" type="Texture" id=12]
+[ext_resource path="res://assets/icons/Shake.svg" type="Texture" id=13]
+[ext_resource path="res://assets/icons/Rainbow.svg" type="Texture" id=14]
 
 [sub_resource type="DynamicFont" id=1]
 
@@ -57,7 +62,7 @@ hint_tooltip = "Underline"
 focus_mode = 0
 theme_type_variation = "ButtonTransparent"
 custom_fonts/font = SubResource( 1 )
-icon = ExtResource( 9 )
+icon = ExtResource( 10 )
 expand_icon = true
 script = ExtResource( 2 )
 
@@ -75,7 +80,7 @@ hint_tooltip = "Strikethrough"
 focus_mode = 0
 theme_type_variation = "ButtonTransparent"
 custom_fonts/font = SubResource( 1 )
-icon = ExtResource( 9 )
+icon = ExtResource( 11 )
 expand_icon = true
 script = ExtResource( 2 )
 
@@ -129,7 +134,7 @@ hint_tooltip = "Wave"
 focus_mode = 0
 theme_type_variation = "ButtonTransparent"
 custom_fonts/font = SubResource( 1 )
-icon = ExtResource( 9 )
+icon = ExtResource( 12 )
 expand_icon = true
 script = ExtResource( 2 )
 
@@ -147,7 +152,7 @@ hint_tooltip = "Shake"
 focus_mode = 0
 theme_type_variation = "ButtonTransparent"
 custom_fonts/font = SubResource( 1 )
-icon = ExtResource( 9 )
+icon = ExtResource( 13 )
 expand_icon = true
 script = ExtResource( 2 )
 
@@ -165,7 +170,8 @@ hint_tooltip = "Rainbow"
 focus_mode = 0
 theme_type_variation = "ButtonTransparent"
 custom_fonts/font = SubResource( 1 )
-icon = ExtResource( 9 )
+icon = ExtResource( 14 )
+icon_align = 1
 expand_icon = true
 script = ExtResource( 2 )
 

@@ -97,7 +97,10 @@ func get_shared_node() -> LevelShared:
 	
 func get_hovered_objects():
 	hovered_objects.clear()
-	for object in get_shared_node().get_layer(layer).object_manager.get_children():
+	var check_layer = get_shared_node().get_layer(layer)
+	if not is_instance_valid(check_layer): return
+	
+	for object in check_layer.object_manager.get_children():
 		if object.is_object_hovered():
 			hovered_objects.get_or_add(object.name, object)
 	return hovered_objects

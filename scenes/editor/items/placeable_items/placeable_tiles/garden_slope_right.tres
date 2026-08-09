@@ -1,17 +1,16 @@
-[gd_resource type="Resource" load_steps=13 format=2]
+[gd_resource type="Resource" load_steps=12 format=2]
 
 [ext_resource path="res://scenes/editor/items/placeable_tile.gd" type="Script" id=1]
-[ext_resource path="res://assets/tiles/garden/icon.png" type="Texture" id=2]
-[ext_resource path="res://assets/tiles/garden/palette_icons/icon_8.png" type="Texture" id=3]
-[ext_resource path="res://assets/tiles/garden/palette_icons/icon_2.png" type="Texture" id=4]
-[ext_resource path="res://assets/tiles/garden/palette_icons/icon_1.png" type="Texture" id=5]
+[ext_resource path="res://assets/tiles/garden/palette_icons/5_slopeR.png" type="Texture" id=2]
+[ext_resource path="res://assets/tiles/garden/palette_icons/0_slopeR.png" type="Texture" id=3]
+[ext_resource path="res://assets/tiles/garden/palette_icons/1_slopeR.png" type="Texture" id=4]
+[ext_resource path="res://assets/tiles/garden/palette_icons/3_slopeR.png" type="Texture" id=5]
 [ext_resource path="res://assets/tiles/garden/icon_slope_right.png" type="Texture" id=6]
-[ext_resource path="res://assets/tiles/garden/palette_icons/icon_6.png" type="Texture" id=7]
-[ext_resource path="res://assets/tiles/garden/palette_icons/icon_4.png" type="Texture" id=8]
-[ext_resource path="res://assets/tiles/garden/palette_icons/icon_5.png" type="Texture" id=9]
-[ext_resource path="res://assets/tiles/garden/palette_icons/icon_3.png" type="Texture" id=10]
-[ext_resource path="res://assets/tiles/garden/palette_icons/icon_7.png" type="Texture" id=11]
-[ext_resource path="res://assets/tiles/garden/palette_icons/icon_0.png" type="Texture" id=12]
+[ext_resource path="res://assets/tiles/garden/palette_icons/6_slopeR.png" type="Texture" id=7]
+[ext_resource path="res://assets/tiles/garden/palette_icons/4_slopeR.png" type="Texture" id=8]
+[ext_resource path="res://assets/tiles/garden/palette_icons/8_slopeR.png" type="Texture" id=9]
+[ext_resource path="res://assets/tiles/garden/palette_icons/7_slopeR.png" type="Texture" id=10]
+[ext_resource path="res://assets/tiles/garden/palette_icons/2_slopeR.png" type="Texture" id=11]
 
 [resource]
 script = ExtResource( 1 )
@@ -20,8 +19,8 @@ groups = PoolStringArray( "special" )
 change_to = "til_garden"
 items_in_sequence = 4
 index_in_sequence = 3
-icons = [ ExtResource( 2 ), ExtResource( 12 ), ExtResource( 5 ), ExtResource( 4 ), ExtResource( 10 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 7 ), ExtResource( 11 ), ExtResource( 3 ) ]
+icons = [ ExtResource( 6 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 11 ), ExtResource( 5 ), ExtResource( 8 ), ExtResource( 2 ), ExtResource( 7 ), ExtResource( 10 ), ExtResource( 9 ) ]
 previews = [ ExtResource( 6 ) ]
-priority = 0
+priority = 30
 tileset_id = 34
 tile_id = 3

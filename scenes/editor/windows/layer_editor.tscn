@@ -49,7 +49,7 @@ scroll_horizontal_enabled = false
 [node name="LayerProperties" type="VBoxContainer" parent="ContentDivider/ContentMat/VBoxContainer/Panel/ScrollContainer" index="0"]
 unique_name_in_owner = true
 margin_right = 259.0
-margin_bottom = 392.0
+margin_bottom = 371.0
 size_flags_horizontal = 3
 script = ExtResource( 6 )
 
@@ -65,36 +65,44 @@ margin_top = 21.0
 margin_right = 259.0
 margin_bottom = 38.0
 
-[node name="IsGround" parent="ContentDivider/ContentMat/VBoxContainer/Panel/ScrollContainer/LayerProperties" index="2" instance=ExtResource( 4 )]
+[node name="AutosetTint" parent="ContentDivider/ContentMat/VBoxContainer/Panel/ScrollContainer/LayerProperties" index="2" instance=ExtResource( 4 )]
 unique_name_in_owner = true
 margin_top = 42.0
 margin_right = 259.0
 margin_bottom = 59.0
 
-[node name="AutosetTint" parent="ContentDivider/ContentMat/VBoxContainer/Panel/ScrollContainer/LayerProperties" index="3" instance=ExtResource( 4 )]
+[node name="Tint" parent="ContentDivider/ContentMat/VBoxContainer/Panel/ScrollContainer/LayerProperties" index="3" instance=ExtResource( 5 )]
 unique_name_in_owner = true
 margin_top = 63.0
 margin_right = 259.0
-margin_bottom = 80.0
+margin_bottom = 327.0
 
-[node name="Tint" parent="ContentDivider/ContentMat/VBoxContainer/Panel/ScrollContainer/LayerProperties" index="4" instance=ExtResource( 5 )]
+[node name="Opacity" parent="ContentDivider/ContentMat/VBoxContainer/Panel/ScrollContainer/LayerProperties" index="4" instance=ExtResource( 9 )]
 unique_name_in_owner = true
-margin_top = 84.0
+margin_top = 331.0
 margin_right = 259.0
 margin_bottom = 348.0
 
-[node name="Opacity" parent="ContentDivider/ContentMat/VBoxContainer/Panel/ScrollContainer/LayerProperties" index="5" instance=ExtResource( 9 )]
-unique_name_in_owner = true
+[node name="HBoxContainer" type="HBoxContainer" parent="ContentDivider/ContentMat/VBoxContainer/Panel/ScrollContainer/LayerProperties" index="5"]
 margin_top = 352.0
 margin_right = 259.0
-margin_bottom = 369.0
+margin_bottom = 371.0
+alignment = 1
 
-[node name="UUID" type="Button" parent="ContentDivider/ContentMat/VBoxContainer/Panel/ScrollContainer/LayerProperties" index="6"]
-unique_name_in_owner = true
-margin_top = 373.0
-margin_right = 259.0
-margin_bottom = 392.0
+[node name="UUID" type="Button" parent="ContentDivider/ContentMat/VBoxContainer/Panel/ScrollContainer/LayerProperties/HBoxContainer" index="0"]
+margin_left = 26.0
+margin_right = 104.0
+margin_bottom = 19.0
 text = "Copy UUID"
+script = ExtResource( 2 )
+
+[node name="SwitchLayer" type="Button" parent="ContentDivider/ContentMat/VBoxContainer/Panel/ScrollContainer/LayerProperties/HBoxContainer" index="1"]
+unique_name_in_owner = true
+margin_left = 108.0
+margin_right = 232.0
+margin_bottom = 19.0
+theme_type_variation = "ButtonPurple"
+text = "Switch Layer Type"
 script = ExtResource( 2 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ContentDivider/ContentMat/VBoxContainer" index="1"]
@@ -102,15 +110,19 @@ margin_top = 162.0
 margin_right = 283.0
 margin_bottom = 162.0
 
-[node name="Border" parent="." index="2"]
+[node name="WindowCorner" parent="." index="2"]
+margin_top = 197.0
 margin_bottom = 209.0
 
-[node name="WindowMat" parent="." index="3"]
+[node name="Border" parent="." index="3"]
+margin_bottom = 209.0
+
+[node name="WindowMat" parent="." index="4"]
 margin_bottom = 209.0
 theme_type_variation = "WindowContent"
 
-[node name="WindowCorner" parent="." index="4"]
-margin_bottom = 209.0
-
 [node name="Control" parent="." index="5"]
 margin_bottom = 209.0
+
+[connection signal="pressed" from="ContentDivider/ContentMat/VBoxContainer/Panel/ScrollContainer/LayerProperties/HBoxContainer/UUID" to="ContentDivider/ContentMat/VBoxContainer/Panel/ScrollContainer/LayerProperties" method="copy_uuid"]
+[connection signal="pressed" from="ContentDivider/ContentMat/VBoxContainer/Panel/ScrollContainer/LayerProperties/HBoxContainer/SwitchLayer" to="ContentDivider/ContentMat/VBoxContainer/Panel/ScrollContainer/LayerProperties" method="switch_layer"]
