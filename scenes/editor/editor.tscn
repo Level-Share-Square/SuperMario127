@@ -874,8 +874,7 @@ margin_right = 140.0
 margin_bottom = 17.0
 focus_mode = 0
 theme_type_variation = "CheckButtonTransparent"
-pressed = true
-text = "Show Grid"
+text = "Hide Grid"
 align = 1
 script = ExtResource( 45 )
 

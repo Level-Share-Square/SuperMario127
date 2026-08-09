@@ -22,14 +22,14 @@ func _ready():
 func on_button_pressed(button: Button):
 	match button.name:
 		"Grid":
-			grid.toggle_grid(!button.pressed)
+			grid.toggle_grid(button.pressed)
 		"Layers":
-			editor.focus_layer = !button.pressed
+			editor.focus_layer = button.pressed
 			shared.focus_layer(editor.focus_layer, editor.layer)
 		"PixelSnap":
-			editor.pixel_lock = !button.pressed
+			editor.pixel_lock = button.pressed
 		"FastTest":
-			LocalSettings.change_setting("Editor", "fast_test", !button.pressed)
+			LocalSettings.change_setting("Editor", "fast_test", button.pressed)
 		"Autosaves":
 			autosave_window.toggle_window()
 		"Settings":

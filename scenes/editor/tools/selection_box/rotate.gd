@@ -39,16 +39,31 @@ func _rotate(object: GameObject):
 			object.rotation = init_rot + mouse_angle
 			object.global_position = pivot.rect_global_position + (init_pos - pivot.rect_global_position).rotated(mouse_angle)
 			
-			if editor.pixel_lock:
-				object.rotation = stepify(object.rotation, deg2rad(15))
-				object.global_position = object.global_position.snapped(Vector2(8, 8))
+			var angle_step: float = 0
+			var snap := Vector2.ZERO
+			if editor.pixel_lock or Input.is_action_pressed("shift_modifier"):
+				angle_step = deg2rad(15)
+				snap = Vector2(16, 16)
+			if editor.pixel_lock and Input.is_action_pressed("shift_modifier"):
+				angle_step = deg2rad(45)
+				snap = Vector2(32, 32)
+				
+				
+			object.rotation = stepify(object.rotation, angle_step)
+			object.global_position = object.global_position.snapped(snap)
 	
 			selection_box.fit_to_bounding_rectangle()
 		Mode.LOCAL:
 			var angle: float = (mouse_pos - pivot_center).angle() - PI/2
+			var angle_step: float = 0
 			object.rotation = angle
-			if editor.pixel_lock:
-				object.rotation = stepify(object.rotation, deg2rad(15))
+			
+			if editor.pixel_lock or Input.is_action_pressed("shift_modifier"):
+				angle_step = deg2rad(15)
+			if editor.pixel_lock and Input.is_action_pressed("shift_modifier"):
+				angle_step = deg2rad(45)
+
+			object.rotation = stepify(object.rotation, angle_step)
 			
 			selection_box.fit_to_bounding_rectangle()
 		

@@ -20,6 +20,9 @@ func clicked():
 func update():
 	var scale_factor = (((get_mouse_pos() - init_mouse)/SCALE_DISTANCE)*4).round() / 4.0 if editor.pixel_lock else (get_mouse_pos() - init_mouse)/SCALE_DISTANCE
 	for object in editor.selected_objects:
+		var aspect_ratio: float = object.scale.x/object.scale.y
+		if Input.is_action_pressed("shift_modifier"):
+			scale_factor.y = scale_factor.x * aspect_ratio
 		object.scale = object_scales[object] + scale_factor
 	
 		
