@@ -29,9 +29,9 @@ func _register_properties() -> void:
 	set_property_override("target_area", PropertyTab.OverrideTypes.DROPDOWN, [CurrentLevelData, "get_area_args"])
 	register_property(5, "tag", tag)
 	register_property(6, "teleport_mode", teleport_mode, true)
-	set_property_override("teleport_mode", PropertyTab.OverrideTypes.ENUM, ["Location", "Area", "Level"])
+	set_property_override("teleport_mode", PropertyTab.OverrideTypes.ENUM, ["Local", "Area", "Level"] if CurrentLevelData.is_campaign else ["Local", "Area"])
 	register_property(7, "max_pan_distance", max_pan_distance)
-	register_property(8, "level_path", level_path)
+	register_property(8, "level_path", level_path, CurrentLevelData.is_campaign)
 
 
 ### ANIMATION
