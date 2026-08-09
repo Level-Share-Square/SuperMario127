@@ -10,7 +10,6 @@ func load_base_properties(_editor: Editor, _objects: Dictionary):
 	var visible_property: PropertyEditor = $"%Visible"
 	var enabled_property: PropertyEditor = $"%Enabled"
 	var palette_property: PropertyEditor = $"%Palette"
-	var layer_property: PropertyEditor = $"%Layer"
 
 	var base_hidden_properties: PoolStringArray = []
 	for game_object in _objects.keys():
@@ -104,3 +103,11 @@ func setup_flipped_objects(multiplier: Vector2) -> Dictionary:
 			"original_properties": {}
 		}
 	return affected_objects
+
+func get_layer_args() -> Dictionary:
+	var args: Dictionary = {}
+	
+	var shared = get_tree().current_scene.get_shared_node()
+	for layer in shared.layers:
+		args[layer] = shared.get_layer(layer).layer_data.layer_metadata.layer_name
+	return args

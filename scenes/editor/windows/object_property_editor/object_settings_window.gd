@@ -14,6 +14,7 @@ var common_property_tabs: Array
 var common_property_overrides: Array
 var property_tallies: Dictionary
 var property_overrides_tally: Dictionary
+var property_tabs_tally: Dictionary
 
 
 func load_objects(_objects: Dictionary):
@@ -66,6 +67,12 @@ func load_objects(_objects: Dictionary):
 				common_property_overrides.append(property)
 				property_overrides_tally[property] = 0
 			property_overrides_tally[property] += 1
+		
+		for tab in game_object.property_tabs:
+			if not tab in common_property_tabs:
+				common_property_tabs.append(tab)
+				property_tabs_tally[tab] = 0
+			property_tabs_tally[tab] += 1
 	
 	for property in common_properties.duplicate():
 		if property_tallies[property] < objects.size():
@@ -74,6 +81,10 @@ func load_objects(_objects: Dictionary):
 	for property in common_property_overrides.duplicate():
 		if property_overrides_tally[property] < objects.size():
 			common_property_overrides.erase(property)
+
+	for tab in common_property_tabs.duplicate():
+		if property_tabs_tally[tab] < objects.size():
+			common_property_tabs.erase(tab)
 	
 	if common_properties.size() > 0:
 		var misc_tab: PropertyTab = preload(
@@ -82,5 +93,13 @@ func load_objects(_objects: Dictionary):
 		misc_tab.load_misc_properties(editor, objects, common_properties, common_property_overrides)
 		property_groups.add_child(misc_tab)
 		property_groups.move_child(misc_tab, 0)
+	
+	for tab in common_property_tabs:
+		var extra_tab: PropertyTab = load(
+			"res://scenes/editor/windows/object_property_editor/property_tabs/%s/%s.tscn" % [tab, tab]
+		).instance()
+		extra_tab.load_properties(editor, objects)
+		property_groups.add_child(extra_tab)
+		property_groups.move_child(extra_tab, 0)
 	
 	popup_centered(rect_size)

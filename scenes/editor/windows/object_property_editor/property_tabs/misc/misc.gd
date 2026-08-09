@@ -35,7 +35,7 @@ func load_misc_properties(_editor: Editor, _objects: Dictionary, common_properti
 		get_node("%Properties").add_child(property_scene)
 
 func load_property_override(override: String, override_name: String, override_data):
-	var property_scene: PropertyEditor = load("res://scenes/editor/windows/object_property_editor/misc_property_scenes/" + override_name + "/base.tscn").instance()
+	var property_scene: PropertyEditor = load("res://scenes/editor/windows/object_property_editor/misc_property_scenes/" + override_name.to_lower() + "/base.tscn").instance()
 	property_scene.load_property(editor, get_property_value(objects.keys()[0], override), override_data[1])
 	connect_signals(property_scene)
 	get_node("%Properties").add_child(property_scene)

@@ -1,7 +1,7 @@
 extends PropertyTab
 
 
-func load_text_properties(_editor: Editor, _objects: Dictionary):
+func load_properties(_editor: Editor, _objects: Dictionary):
 	editor = _editor
 	objects = _objects
 	

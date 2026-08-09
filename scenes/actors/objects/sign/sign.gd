@@ -40,9 +40,10 @@ export(Array, Texture) var palette_textures_2
 #	editable_properties = ["text", "open_menu", "on_wall"]
 	
 func _register_properties():
-	register_property(4, "text", text, true)
+	register_property(4, "text", text, false)
 	register_property(5, "open_menu", open_menu, true)
 	register_property(6, "on_wall", on_wall, true)
+	property_tabs.append("sign")
 
 func _ready():
 	if is_preview:
@@ -55,8 +56,7 @@ func _ready():
 		sprite.visible = false
 	
 	if palette != 0:
-		sprite.texture = palette_textures[palette - 1]
-		stick_sprite.texture = palette_textures_2[palette - 1]
+		update_palette()
 	
 	if !is_enabled_and_on_ground():
 		interact_pop_up.visible = false
@@ -77,6 +77,12 @@ func _ready():
 	if mode != 1:
 		var _connect = area.connect("body_entered", self, "enter_area")
 		var _connect2 = area.connect("body_exited", self, "exit_area")
+
+	connect("property_changed", self, "on_property_changed")
+
+func on_property_changed(key, value):
+	if key == "palette":
+		update_palette()
 
 func enter_area(body):
 	if body.name.begins_with("Character") and character == null and is_enabled_and_on_ground():
@@ -183,6 +189,11 @@ func _physics_process(delta):
 		
 		if !has_char and is_instance_valid(character):
 			exit_area(character)
+
+
+func update_palette() -> void:
+	sprite.texture = palette_textures[palette - 1]
+	stick_sprite.texture = palette_textures_2[palette - 1]
 
 
 ## compatibility w/ pop-up prefab
