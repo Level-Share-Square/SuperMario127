@@ -73,6 +73,7 @@ func _ready():
 		var _connect = area.connect("body_entered", self, "detect_spin")
 		var _connect2 = area.connect("area_entered", self, "detect_spin")
 		var _connect3 = stomp_detector.connect("body_entered", self, "detect_stomp")
+	set_init_rotations()
 		
 func set_init_rotations():
 	sprite.rotation = PI if chase and facing_direction == -1 else 0.0

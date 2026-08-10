@@ -361,15 +361,17 @@ func get_global_editor_rect() -> Rect2:
 	return get_global_transform().xform(editor_rect)
 
 func create_coin(coin_id: int, body: Node2D, physics: bool, velocity: Vector2) -> void:
-	var object = create_object(body.global_position, coin_id, 0)
+	var object_setup = create_object(body.global_position, coin_id, 0)
+	var object = object_setup[0]
 	object.set_property("physics", physics)
 	object.set_property("velocity", velocity)
+	object_setup[1].call_func(object)
 
 
 func create_object(pos: Vector2, object_id: int, palette: int):
 	var level_layer: LevelLayer = level_layer_ref.get_ref()
 	
-	return level_layer.add_object(
+	return level_layer.setup_object(
 		ObjectData.new(
 			ObjectMetadata.new(
 				pos,

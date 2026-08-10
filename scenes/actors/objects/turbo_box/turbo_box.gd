@@ -77,9 +77,11 @@ func _on_fludd_activated():
 	loaded_activated = true
 	
 func create_nozzle(nozzle: String):
-	var object = create_object(position + Vector2(0, 4), 20, 0)
+	var object_setup = create_object(position + Vector2(0, 4), 20, 0)
+	var object = object_setup[0]
 	object.set_property("velocity", Vector2(0, -250))
 	object.set_property("nozzle_type", nozzle)
+	object_setup[1].call_func(object)
 		
 func _physics_process(delta):
 	if respawn_timer > 0:

@@ -53,21 +53,21 @@ var coll
 
 
 func _register_properties() -> void:
-	register_property(5, "target_area", target_area)
+	register_property(4, "target_area", target_area)
 	set_property_override("target_area", PropertyTab.OverrideTypes.DROPDOWN, [CurrentLevelData, "get_area_args"])
-	register_property(6, "tag", tag)
+	register_property(5, "tag", tag)
 	set_property_override("tag", PropertyTab.OverrideTypes.DROPDOWN, [CurrentLevelData.level_tags, "get_teleport_args", [CurrentLevelData.level_tags, "teleport_tags"]])
-	register_property(7, "teleport_mode", teleport_mode, true)
+	register_property(6, "teleport_mode", teleport_mode, true)
 	set_property_override("teleport_mode", PropertyTab.OverrideTypes.ENUM, ["Local", "Area", "Level"] if CurrentLevelData.is_campaign else ["Local", "Area"])
-	register_property(8, "max_pan_distance", max_pan_distance)
-	register_property(9, "level_path", level_path, CurrentLevelData.is_campaign)
+	register_property(7, "max_pan_distance", max_pan_distance)
+	register_property(8, "level_path", level_path, CurrentLevelData.is_campaign)
 
-	register_property(10, "collectible", collectible)
+	register_property(9, "collectible", collectible)
 	set_property_override("collectible", PropertyTab.OverrideTypes.DROPDOWN, [self, "get_collectible_args"])
-	register_property(11, "required_amount", required_amount)
-	register_property(12, "required_key", required_key)
-	register_property(13, "insufficient_text", insufficient_text)
-	register_property(14, "is_single", is_single, false)
+	register_property(10, "required_amount", required_amount)
+	register_property(11, "required_key", required_key)
+	register_property(12, "insufficient_text", insufficient_text)
+	register_property(13, "is_single", is_single, false)
 
 func get_collectible_args():
 	var collectible_names: Array = ["Shines", "Star Coins", "Coins", "Star Bits", "Key", "Empty"]

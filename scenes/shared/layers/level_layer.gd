@@ -79,6 +79,8 @@ func add_object(to_add: ObjectData, modify_data: bool = false):
 func place_object(to_place: ObjectData, modify_data: bool = false):
 	return object_manager.place_object(to_place, modify_data)
 
+func setup_object(to_place: ObjectData):
+	return [object_manager.create_object(to_place), funcref(object_manager, "add_child")]
 
 func erase_object(to_remove):
 	object_manager.erase_object(to_remove)

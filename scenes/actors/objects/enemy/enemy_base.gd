@@ -131,16 +131,18 @@ func is_on_ground() -> bool:
 
 
 func create_coin(velocity: Vector2, offset: Vector2):
-	var object = create_object(global_position + offset, 1, 0)
+	var object_setup = create_object(global_position + offset, 1, 0)
+	var object = object_setup[0]
 	object.set_property("physics", true)
 	object.set_property("velocity", velocity)
+	object_setup[1].call_func(object)
 	return object
 
 
 func create_object(pos: Vector2, object_id: int, palette: int):
 	var level_layer: LevelLayer = layer_ref.get_ref()
 	
-	return level_layer.add_object(
+	return level_layer.setup_object(
 		ObjectData.new(
 			ObjectMetadata.new(
 				pos,
