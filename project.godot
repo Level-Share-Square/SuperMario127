@@ -1569,7 +1569,7 @@ config/custom_user_dir_name="dev"
 boot_splash/image="res://assets/artwork/splash_screen.png"
 boot_splash/bg_color=Color( 0.243137, 0.243137, 0.615686, 1 )
 config/icon="res://assets/artwork/icon.png"
-config/windows_native_icon="res://assets/misc/icon.ico"
+config/windows_native_icon="res://assets/artwork/icon.ico"
 
 [autoload]
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=45 format=2]
 
 [ext_resource path="res://scenes/menu/art_assets/art_assets.gd" type="Script" id=1]
 [ext_resource path="res://scenes/menu/background_scroll/background.tscn" type="PackedScene" id=2]
@@ -31,7 +31,7 @@ void fragment() {
 	COLOR = (texture(TEXTURE, UV) + n * u_amount);
 }"
 
-[sub_resource type="ShaderMaterial" id=45]
+[sub_resource type="ShaderMaterial" id=57]
 shader = SubResource( 26 )
 shader_param/u_amount = 1.75
 
@@ -106,24 +106,72 @@ gradient = SubResource( 15 )
 fill_from = Vector2( 0.5, 0.2 )
 fill_to = Vector2( 0.5, 0.8 )
 
-[sub_resource type="ShaderMaterial" id=46]
+[sub_resource type="ShaderMaterial" id=58]
 shader = SubResource( 26 )
 shader_param/u_amount = 1.75
 
-[sub_resource type="ShaderMaterial" id=47]
-shader = SubResource( 26 )
+[sub_resource type="Shader" id=23]
+code = "shader_type canvas_item;
+
+uniform float speed;
+uniform float direction = 1;
+
+void fragment () {
+	COLOR = texture(TEXTURE, vec2(UV.x + TIME * speed * direction, UV.y + TIME * speed * direction));
+}"
+
+[sub_resource type="ShaderMaterial" id=49]
+shader = SubResource( 23 )
+shader_param/speed = 0.22
+shader_param/direction = 1.0
+
+[sub_resource type="ShaderMaterial" id=50]
+shader = SubResource( 23 )
+shader_param/speed = 0.24
+shader_param/direction = -1.0
+
+[sub_resource type="Shader" id=51]
+code = "shader_type canvas_item;
+
+uniform float u_amount = 0.1;
+
+float get_noise(vec2 uv) {
+	return fract(sin(dot(uv ,vec2(12.9898,78.233))) * 43758.5453);
+}
+
+void fragment() {
+	vec4 screen_sample = texture(SCREEN_TEXTURE, SCREEN_UV);
+	
+	float n = 2.0 * get_noise(UV + vec2(TIME, 0.0)) - 1.0;
+	COLOR = (texture(TEXTURE, UV) + n * u_amount);
+}"
+
+[sub_resource type="ShaderMaterial" id=59]
+shader = SubResource( 51 )
 shader_param/u_amount = 1.75
 
-[sub_resource type="Gradient" id=23]
+[sub_resource type="CanvasItemMaterial" id=53]
+blend_mode = 1
+
+[sub_resource type="Gradient" id=54]
+offsets = PoolRealArray( 0.0502793, 1 )
+colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 0.643137 )
+
+[sub_resource type="GradientTexture2D" id=55]
+gradient = SubResource( 54 )
+fill_from = Vector2( 0.5, 0.1 )
+fill_to = Vector2( 0.5, 1 )
+
+[sub_resource type="Gradient" id=56]
 colors = PoolColorArray( 0.32549, 0.235294, 0.0980392, 0.627451, 0.32549, 0.235294, 0.0980392, 0 )
 
 [sub_resource type="GradientTexture2D" id=24]
-gradient = SubResource( 23 )
+gradient = SubResource( 56 )
 fill = 1
 fill_from = Vector2( 0.5, 0.5 )
 fill_to = Vector2( 0.5, 0 )
 
-[sub_resource type="ShaderMaterial" id=48]
+[sub_resource type="ShaderMaterial" id=60]
 shader = SubResource( 26 )
 shader_param/u_amount = 1.75
 
@@ -155,7 +203,7 @@ render_target_update_mode = 3
 rect_scale = Vector2( 3, 3 )
 
 [node name="Overlay" parent="DiscordIcon/Viewport/Background" index="3"]
-material = SubResource( 45 )
+material = SubResource( 57 )
 
 [node name="WhiteGradient" type="TextureRect" parent="DiscordIcon/Viewport"]
 modulate = Color( 0.752941, 0.752941, 1, 0.486275 )
@@ -641,7 +689,7 @@ render_target_update_mode = 3
 rect_scale = Vector2( 3, 3 )
 
 [node name="Overlay" parent="DiscordInvite/Viewport/Background" index="3"]
-material = SubResource( 46 )
+material = SubResource( 58 )
 
 [node name="WhiteGradient" type="TextureRect" parent="DiscordInvite/Viewport"]
 modulate = Color( 0.752941, 0.752941, 1, 0.486275 )
@@ -667,22 +715,34 @@ handle_input_locally = false
 render_target_update_mode = 3
 
 [node name="Background" parent="SplashScreen/Viewport" instance=ExtResource( 2 )]
-rect_scale = Vector2( 3, 3 )
+overlay_tint = Color( 0.054902, 0.0117647, 0.152941, 0.270588 )
+
+[node name="ColorRect" parent="SplashScreen/Viewport/Background" index="0"]
+color = Color( 0, 0, 0, 1 )
+
+[node name="Stripes" parent="SplashScreen/Viewport/Background" index="1"]
+self_modulate = Color( 0.186813, 0.1932, 0.621094, 1 )
+material = SubResource( 49 )
+rect_scale = Vector2( 0.2, 0.2 )
 
 [node name="Scroll" parent="SplashScreen/Viewport/Background" index="2"]
 visible = false
+modulate = Color( 0.560784, 0.380392, 0.678431, 1 )
+material = SubResource( 50 )
+rect_scale = Vector2( 0.225, 0.225 )
 
 [node name="Overlay" parent="SplashScreen/Viewport/Background" index="3"]
-material = SubResource( 47 )
+modulate = Color( 0.054902, 0.0117647, 0.152941, 0.270588 )
+material = SubResource( 59 )
 
-[node name="WhiteGradient" type="TextureRect" parent="SplashScreen/Viewport"]
+[node name="Overlay" type="TextureRect" parent="SplashScreen/Viewport"]
 modulate = Color( 0.752941, 0.752941, 1, 0.486275 )
-material = SubResource( 19 )
+material = SubResource( 53 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-texture = SubResource( 20 )
+texture = SubResource( 55 )
 expand = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="SplashScreen/Viewport"]
@@ -761,7 +821,7 @@ render_target_update_mode = 3
 rect_scale = Vector2( 3, 3 )
 
 [node name="Overlay" parent="Icon/Viewport/Background" index="3"]
-material = SubResource( 48 )
+material = SubResource( 60 )
 
 [node name="WhiteGradient" type="TextureRect" parent="Icon/Viewport"]
 modulate = Color( 0.752941, 0.752941, 1, 0.486275 )

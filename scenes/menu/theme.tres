@@ -750,7 +750,7 @@ margin_right = 4.0
 margin_top = 4.0
 margin_bottom = 4.0
 axis_stretch_horizontal = 1
-modulate_color = Color( 0.411765, 1, 0.270588, 1 )
+modulate_color = Color( 0.427451, 0.870588, 0.662745, 1 )
 
 [sub_resource type="StyleBoxEmpty" id=33]
 
