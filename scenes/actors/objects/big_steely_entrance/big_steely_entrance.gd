@@ -25,7 +25,7 @@ func _object_ready():
 
 
 func _on_spawn_timer_timeout():
-	if overlap_checker.has_over and steely_nodes.size() < STEELY_SPAWN_LIMIT and is_enabled_and_on_ground(): 
+	if overlap_checker.get_overlapping_bodies() and steely_nodes.size() < STEELY_SPAWN_LIMIT and is_enabled_and_on_ground(): 
 		var steely_node = create_new_steely_object()
 		
 		if steely_despawn_timer > 0:
