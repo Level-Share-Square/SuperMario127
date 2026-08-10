@@ -38,7 +38,7 @@ func _start(_delta : float) -> void:
 					character.facing_direction)) / 5
 			character.velocity.y += dive_power_luigi.y
 		
-		## super dive recover/quick ledgedrop
+		## super dive recover/slide dive
 		if character.state_set_from and character.state_set_from.name == "SlideState":
 			sound_player.play_perfect_sound()
 			

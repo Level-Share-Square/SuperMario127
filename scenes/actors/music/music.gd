@@ -9,7 +9,7 @@ onready var http_request = $HTTPRequest
 
 onready var temporary_music_player : AudioStreamPlayer = $TemporaryMusicPlayer
 onready var water_music_player : AudioStreamPlayer = $WaterMusicPlayer
-onready var timer_music_player : AudioStreamPlayer = $TimerMusicPlayer
+onready var blended_music_player : AudioStreamPlayer = $BlendedMusicPlayer
 onready var tween : Tween = $Tween
 onready var timer: Timer = $Timer
 onready var underwater_timer: Timer = $UnderwaterTimer
@@ -33,6 +33,8 @@ var underwater_loop_end: float = 0.0
 var play_music := true
 var play_water := false
 var has_water := false
+var play_blended := false
+var has_blended := false
 var temp_music := false
 
 const MUSIC_FADE_LENGTH = 0.75
@@ -296,6 +298,19 @@ func change_song(old_setting, music_setting) -> void:
 		base_volume = song.volume_db
 		play()
 		
+		if song.blended_stream != null:
+			blended_music_player.stream = song.blended_stream
+			blended_music_player.play()
+			blended_music_player.volume_db = -80
+			has_blended = true
+			play_blended = true
+		else:
+			blended_music_player.stream = stream
+			blended_music_player.play()
+			blended_music_player.volume_db = -80
+			has_blended = false
+			play_blended = false
+		
 		if song.underwater_stream != null:
 			water_music_player.stream = song.underwater_stream
 			water_music_player.play()
@@ -318,15 +333,23 @@ func change_song(old_setting, music_setting) -> void:
 		bus = play_bus # perhaps we should define a general bus or a menu bus later # FUCKIGN YES WWE SHOULD
 
 
-func toggle_underwater_music(state):
+func toggle_underwater_music(state: bool):
 	if has_water:
 		play_water = state
 	else:
 		play_water = false
 
 
+func toggle_blended_music(state: bool):
+	if has_blended:
+		play_blended = state
+	else:
+		play_blended = false
+
+
 func reset_music():
 	toggle_underwater_music(false)
+	toggle_blended_music(false)
 
 
 func _process(delta) -> void:
@@ -351,11 +374,21 @@ func _process(delta) -> void:
 	if play_water and !is_instance_valid(character):
 		play_water = false
 	
+	if play_blended and !is_instance_valid(character):
+		play_blended = false
+	
 	var target_volume = (db2linear(base_volume) * volume_multiplier) if !get_tree().paused else 0
-	volume_db = linear2db(lerp(db2linear(volume_db), target_volume if !play_water else 0, delta * 3))
-	water_music_player.volume_db = linear2db(lerp(db2linear(water_music_player.volume_db), target_volume if play_water else 0, delta * 3))
+	volume_db = linear2db(lerp(db2linear(volume_db), target_volume if !play_water and !play_blended else 0, delta * 3))
+	water_music_player.volume_db = linear2db(lerp(db2linear(water_music_player.volume_db), target_volume if play_water and !play_blended else 0, delta * 3))
+	if not temp_music:
+		blended_music_player.volume_db = linear2db(lerp(db2linear(blended_music_player.volume_db), target_volume if play_blended else 0, delta * 3))
+	
 	if temp_music:
 		var target_temp_volume = db2linear(base_volume) if !get_tree().paused else 0
+		blended_music_player.volume_db = linear2db(lerp(db2linear(blended_music_player.volume_db), target_temp_volume if play_blended else 0, delta * 3))
+		
+		if has_blended:
+			target_temp_volume = target_temp_volume if !play_blended else -0
 		temporary_music_player.volume_db = linear2db(lerp(db2linear(temporary_music_player.volume_db), target_temp_volume, delta * 3))
 	else:
 		temporary_music_player.volume_db = linear2db(lerp(db2linear(temporary_music_player.volume_db), 0, delta * 3))
@@ -367,15 +400,31 @@ func play_temporary_music(temp_song_id : int = 0, temp_song_volume : float = 0) 
 	volume_multiplier = 0
 	volume_db = -80.0
 	water_music_player.volume_db = -80.0
+	blended_music_player.volume_db = -80.0
 
 	#var _tween = tween.stop_all()
 	#temporary_music_player.volume_db = temp_song_volume if !muted else -80.0
 
-	var stream = get_song(temp_song_id).stream
+	var song = get_song(temp_song_id)
+	var stream = song.stream
 	if temporary_music_player.stream != stream or temporary_music_player.volume_db < -70:
 		temporary_music_player.volume_db = 0
 		temporary_music_player.stream = stream
 		temporary_music_player.play()
+	
+	if song.blended_stream != null:
+		blended_music_player.stream = song.blended_stream
+		blended_music_player.play()
+		blended_music_player.volume_db = -80
+		has_blended = true
+		play_blended = true
+	else:
+		blended_music_player.stream = stream
+		blended_music_player.play()
+		blended_music_player.volume_db = -80
+		has_blended = false
+		play_blended = false
+	
 	temp_music = true
 
 # returns the id of the temporary song
@@ -386,3 +435,4 @@ func is_temporary_music_playing() -> bool:
 func stop_temporary_music(volume_multiplier_target = 1, music_fade_length = MUSIC_FADE_LENGTH) -> void:
 	volume_multiplier = 1
 	temp_music = false
+	play_blended = false

@@ -19,7 +19,7 @@ bus = "Music"
 volume_db = -80.0
 bus = "WaterMusicFilters"
 
-[node name="TimerMusicPlayer" type="AudioStreamPlayer" parent="."]
+[node name="BlendedMusicPlayer" type="AudioStreamPlayer" parent="."]
 volume_db = -80.0
 bus = "Music"
 
