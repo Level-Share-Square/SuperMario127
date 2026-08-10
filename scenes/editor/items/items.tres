@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=246 format=2]
+[gd_resource type="Resource" load_steps=251 format=2]
 
 [ext_resource path="res://scenes/editor/items/placeable_items.gd" type="Script" id=1]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/blue_coin.tres" type="Resource" id=2]
@@ -245,6 +245,11 @@
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/boo_block_slope_right.tres" type="Resource" id=243]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/truss.tres" type="Resource" id=244]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/layer_changer.tres" type="Resource" id=245]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/big_barrel.tres" type="Resource" id=246]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/big_net.tres" type="Resource" id=247]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/crate.tres" type="Resource" id=248]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/net.tres" type="Resource" id=249]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/big_crate.tres" type="Resource" id=250]
 
 [resource]
 script = ExtResource( 1 )
@@ -254,8 +259,11 @@ placeable_items = {
 "obj_arrow": ExtResource( 53 ),
 "obj_barrel": ExtResource( 240 ),
 "obj_barrel_cactus": ExtResource( 75 ),
+"obj_big_barrel": ExtResource( 246 ),
 "obj_big_bottle": ExtResource( 25 ),
 "obj_big_bush": ExtResource( 16 ),
+"obj_big_crate": ExtResource( 250 ),
+"obj_big_net": ExtResource( 247 ),
 "obj_big_steely_despawner": ExtResource( 110 ),
 "obj_big_steely_entrance": ExtResource( 42 ),
 "obj_big_tree": ExtResource( 10 ),
@@ -285,6 +293,7 @@ placeable_items = {
 "obj_coral": ExtResource( 89 ),
 "obj_coral_large": ExtResource( 99 ),
 "obj_coral_small": ExtResource( 109 ),
+"obj_crate": ExtResource( 248 ),
 "obj_crystal": ExtResource( 103 ),
 "obj_crystal_large": ExtResource( 106 ),
 "obj_crystal_small": ExtResource( 102 ),
@@ -325,6 +334,7 @@ placeable_items = {
 "obj_mushroom_body": ExtResource( 9 ),
 "obj_mushroom_curve": ExtResource( 12 ),
 "obj_mushroom_top": ExtResource( 11 ),
+"obj_net": ExtResource( 249 ),
 "obj_nipper_plant": ExtResource( 131 ),
 "obj_note_block": ExtResource( 57 ),
 "obj_on_off_floor_switch": ExtResource( 93 ),

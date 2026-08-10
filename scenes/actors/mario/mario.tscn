@@ -2494,7 +2494,7 @@ playing = true
 [node name="Recolorable" type="AnimatedSprite" parent="CollectedShine"]
 visible = false
 frames = ExtResource( 61 )
-frame = 15
+frame = 6
 script = ExtResource( 63 )
 
 [node name="ShineParticles" type="Particles2D" parent="CollectedShine"]
