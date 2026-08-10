@@ -21,7 +21,8 @@ func _register_properties():
 
 func _draw() -> void:
 	if get_tree().current_scene.mode == 1:
-		draw_rect(editor_rect.grow(1), editor_border_color, false, 2)
+		draw_set_transform(Vector2.ZERO, 0.0, Vector2.ONE / global_scale)
+		draw_rect(Rect2(editor_rect.position*global_scale, editor_rect.size*global_scale).grow(1), editor_border_color, false, 2)
 
 func set_tiles():
 	for pos in tile_data.used_tiles:
@@ -49,6 +50,7 @@ func is_air(tile_data: Array):
 func property_changed(key, value):
 	if key == "tint":
 		tile_map.modulate = value
+	update()
 
 func instance_disabled_icon():
 	yield(self, "ready")
