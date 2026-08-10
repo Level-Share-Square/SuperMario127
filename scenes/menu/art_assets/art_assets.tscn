@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=2]
+[gd_scene load_steps=38 format=2]
 
 [ext_resource path="res://scenes/menu/art_assets/art_assets.gd" type="Script" id=1]
 [ext_resource path="res://scenes/menu/background_scroll/background.tscn" type="PackedScene" id=2]
@@ -31,19 +31,19 @@ void fragment() {
 	COLOR = (texture(TEXTURE, UV) + n * u_amount);
 }"
 
-[sub_resource type="ShaderMaterial" id=36]
+[sub_resource type="ShaderMaterial" id=43]
 shader = SubResource( 26 )
 shader_param/u_amount = 1.75
 
 [sub_resource type="CanvasItemMaterial" id=19]
 blend_mode = 1
 
-[sub_resource type="Gradient" id=15]
+[sub_resource type="Gradient" id=44]
 offsets = PoolRealArray( 0.0502793, 1 )
 colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 0.831373 )
 
 [sub_resource type="GradientTexture2D" id=20]
-gradient = SubResource( 15 )
+gradient = SubResource( 44 )
 fill_from = Vector2( 0.5, 0.1 )
 fill_to = Vector2( 0.5, 1 )
 
@@ -92,6 +92,10 @@ fill = 1
 fill_from = Vector2( 0.5, 0.5 )
 fill_to = Vector2( 0.5, 0 )
 
+[sub_resource type="Gradient" id=15]
+offsets = PoolRealArray( 0.0502793, 1 )
+colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 0.831373 )
+
 [sub_resource type="GradientTexture2D" id=18]
 gradient = SubResource( 15 )
 fill_from = Vector2( 0.5, 0.2 )
@@ -102,11 +106,11 @@ gradient = SubResource( 15 )
 fill_from = Vector2( 0.5, 0.2 )
 fill_to = Vector2( 0.5, 0.8 )
 
-[sub_resource type="ShaderMaterial" id=37]
+[sub_resource type="ShaderMaterial" id=45]
 shader = SubResource( 26 )
 shader_param/u_amount = 1.75
 
-[sub_resource type="ShaderMaterial" id=38]
+[sub_resource type="ShaderMaterial" id=46]
 shader = SubResource( 26 )
 shader_param/u_amount = 1.75
 
@@ -119,7 +123,7 @@ fill = 1
 fill_from = Vector2( 0.5, 0.5 )
 fill_to = Vector2( 0.5, 0 )
 
-[sub_resource type="ShaderMaterial" id=39]
+[sub_resource type="ShaderMaterial" id=47]
 shader = SubResource( 26 )
 shader_param/u_amount = 1.75
 
@@ -151,7 +155,7 @@ render_target_update_mode = 3
 rect_scale = Vector2( 3, 3 )
 
 [node name="Overlay" parent="DiscordIcon/Viewport/Background" index="3"]
-material = SubResource( 36 )
+material = SubResource( 43 )
 
 [node name="WhiteGradient" type="TextureRect" parent="DiscordIcon/Viewport"]
 modulate = Color( 0.752941, 0.752941, 1, 0.486275 )
@@ -637,7 +641,7 @@ render_target_update_mode = 3
 rect_scale = Vector2( 3, 3 )
 
 [node name="Overlay" parent="DiscordInvite/Viewport/Background" index="3"]
-material = SubResource( 37 )
+material = SubResource( 45 )
 
 [node name="WhiteGradient" type="TextureRect" parent="DiscordInvite/Viewport"]
 modulate = Color( 0.752941, 0.752941, 1, 0.486275 )
@@ -669,7 +673,7 @@ rect_scale = Vector2( 3, 3 )
 visible = false
 
 [node name="Overlay" parent="SplashScreen/Viewport/Background" index="3"]
-material = SubResource( 38 )
+material = SubResource( 46 )
 
 [node name="WhiteGradient" type="TextureRect" parent="SplashScreen/Viewport"]
 modulate = Color( 0.752941, 0.752941, 1, 0.486275 )
@@ -757,7 +761,7 @@ render_target_update_mode = 3
 rect_scale = Vector2( 3, 3 )
 
 [node name="Overlay" parent="Icon/Viewport/Background" index="3"]
-material = SubResource( 39 )
+material = SubResource( 47 )
 
 [node name="WhiteGradient" type="TextureRect" parent="Icon/Viewport"]
 modulate = Color( 0.752941, 0.752941, 1, 0.486275 )

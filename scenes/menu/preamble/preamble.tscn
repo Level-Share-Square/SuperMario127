@@ -1,72 +1,17 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://scenes/menu/theme.tres" type="Theme" id=1]
-[ext_resource path="res://assets/fonts/DelfinoFont16.tres" type="DynamicFont" id=2]
+[ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://scenes/menu/screen.gd" type="Script" id=3]
-[ext_resource path="res://scenes/menu/preamble/preamble.gd" type="Script" id=4]
+[ext_resource path="res://scenes/menu/ui_focus.gd" type="Script" id=4]
+[ext_resource path="res://scenes/menu/background_scroll/background.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/menu/button_scripts/button_hover-scale.gd" type="Script" id=6]
+[ext_resource path="res://assets/sounds/click2.wav" type="AudioStream" id=7]
+[ext_resource path="res://assets/sounds/hover.wav" type="AudioStream" id=8]
+[ext_resource path="res://assets/artwork/splash_screen.png" type="Texture" id=9]
 
-[sub_resource type="Gradient" id=1]
-colors = PoolColorArray( 0, 0, 0, 1, 0.1297, 0, 0.195313, 1 )
-
-[sub_resource type="GradientTexture2D" id=2]
-gradient = SubResource( 1 )
-fill_to = Vector2( 0, 1 )
-
-[sub_resource type="Animation" id=4]
-resource_name = "presents"
-length = 2.5
-tracks/0/type = "value"
-tracks/0/path = NodePath("Presents:percent_visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.5 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 0.0, 1.0 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath(".:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 1.9, 2.5 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 0, 0, 0, 1 ) ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("Presents:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("ScenePuppeteer:get_outta_here")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0, 2.5 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ false, true ]
-}
-
-[sub_resource type="Animation" id=3]
-resource_name = "transition"
-length = 6.0
+[sub_resource type="Animation" id=11]
+length = 0.001
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:modulate")
 tracks/0/interp = 1
@@ -74,37 +19,37 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.7 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Color( 0, 0, 0, 1 ), Color( 1, 1, 1, 1 ) ]
+"values": [ Color( 1, 1, 1, 0 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Disclaimer:percent_visible")
+tracks/1/path = NodePath("./Container:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 2 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ 0.0, 1.0 ]
+"values": [ Color( 1, 1, 1, 1 ) ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("Indicator:modulate")
+tracks/2/path = NodePath("./SplashScreen:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 5.5, 6 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+"values": [ Color( 1, 1, 1, 1 ) ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("Disclaimer:visible")
+tracks/3/path = NodePath("SplashScreen:mouse_filter")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -113,10 +58,10 @@ tracks/3/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ true ]
+"values": [ 2 ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("Indicator:visible")
+tracks/4/path = NodePath("Container/HBoxContainer/VBoxContainer/ButtonSound:disabled")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
@@ -125,90 +70,290 @@ tracks/4/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ true ]
-}
-tracks/5/type = "value"
-tracks/5/path = NodePath("Presents:visible")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
 "values": [ false ]
 }
 
-[node name="Preamble" type="TextureRect"]
+[sub_resource type="Animation" id=4]
+resource_name = "end"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("./Container:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( -2, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0, 0, 1, 0 ) ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.6 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ "MainMenu" ],
+"method": "transition"
+} ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Container/HBoxContainer/VBoxContainer/ButtonSound:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=12]
+resource_name = "show"
+length = 8.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("./SplashScreen:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.2, 0.8 ),
+"transitions": PoolRealArray( -2, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("Container/HBoxContainer/VBoxContainer/ButtonSound")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
+"values": [  ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath("AnimationPlayer")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 8 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ "end", -1, 1.0, false ],
+"method": "play"
+} ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "transition"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("./Container/Disclaimer:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.4 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( -2, -2 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="CanvasItemMaterial" id=16]
+blend_mode = 1
+
+[sub_resource type="Gradient" id=15]
+offsets = PoolRealArray( 0.0502793, 1 )
+colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 0.831373 )
+
+[sub_resource type="GradientTexture2D" id=17]
+gradient = SubResource( 15 )
+fill_from = Vector2( 0.5, 0.1 )
+fill_to = Vector2( 0.5, 1 )
+
+[sub_resource type="DynamicFont" id=8]
+size = 20
+outline_size = 1
+outline_color = Color( 0, 0.0431373, 0.313726, 1 )
+use_filter = true
+extra_spacing_bottom = -4
+extra_spacing_char = -2
+extra_spacing_space = 2
+font_data = ExtResource( 2 )
+
+[sub_resource type="CanvasItemMaterial" id=9]
+blend_mode = 2
+
+[sub_resource type="DynamicFont" id=10]
+size = 24
+outline_color = Color( 0, 0, 0, 1 )
+use_filter = true
+extra_spacing_char = -1
+font_data = ExtResource( 2 )
+
+[node name="Preamble" type="ColorRect"]
+modulate = Color( 1, 1, 1, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0
-texture = SubResource( 2 )
-expand = true
+theme = ExtResource( 1 )
+color = Color( 0, 0, 0, 1 )
 script = ExtResource( 3 )
 
-[node name="ScenePuppeteer" type="Control" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
+[node name="Focus" type="Control" parent="."]
 script = ExtResource( 4 )
-get_outta_here = true
+default_focus_path = NodePath("../Container/HBoxContainer/VBoxContainer/ButtonSound")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
 autoplay = "transition"
-anims/presents = SubResource( 4 )
+anims/RESET = SubResource( 11 )
+anims/end = SubResource( 4 )
+anims/show = SubResource( 12 )
 anims/transition = SubResource( 3 )
 
-[node name="Disclaimer" type="Label" parent="."]
+[node name="Container" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Background" parent="Container" instance=ExtResource( 5 )]
+
+[node name="Overlay" type="TextureRect" parent="Container"]
+modulate = Color( 0.752941, 0.752941, 1, 0.486275 )
+material = SubResource( 16 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = SubResource( 17 )
+expand = true
+
+[node name="Disclaimer" type="Label" parent="Container"]
 unique_name_in_owner = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource( 1 )
-text = "DISCLAIMER:
+custom_colors/font_color_shadow = Color( 0, 0.0431373, 0.313726, 1 )
+custom_constants/shadow_offset_x = 0
+custom_constants/shadow_offset_y = 2
+custom_fonts/font = SubResource( 8 )
+text = "Super Mario 127 is a non-profit fangame inspired by
+the 2009 fangame Super Mario 63. It uses graphics,
+characters, and audio that are subject to copyright
+by Nintendo Co., Ltd.
 
-Super Mario 127 is a non-profit fangame
-that uses graphics, characters, and audio that are subject to
-copyright by Nintendo Company LTD., HAL Lab, and Sora LTD.
+This game is created by a team of passionate fans and is 
+not affiliated with, endorsed, or sponsored by Nintendo.
+It will never be commercialized or sold.
 
-However, this game is not officially endorsed by them.
-
-"
+If you enjoy this fangame, please show your support to
+Nintendo and buy a Nintendo Switch 2."
 align = 1
 valign = 1
 
-[node name="Indicator" type="Label" parent="."]
+[node name="Shadow" type="Label" parent="Container/Disclaimer"]
 unique_name_in_owner = true
-modulate = Color( 1, 1, 1, 0 )
-anchor_left = 0.5
-anchor_top = 0.85
-anchor_right = 0.5
-anchor_bottom = 0.85
-margin_left = -20.0
-margin_top = -14.0
-margin_right = 20.0
+modulate = Color( 0.32549, 0.364706, 0.188235, 0.376471 )
+show_behind_parent = true
+material = SubResource( 9 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 2.0
+margin_top = 3.0
+margin_right = 2.0
+margin_bottom = 3.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource( 1 )
-custom_fonts/font = ExtResource( 2 )
-text = "Press any button to continue."
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 1, 1, 1, 1 )
+custom_colors/font_color_shadow = Color( 1, 1, 1, 1 )
+custom_constants/shadow_offset_x = 0
+custom_constants/shadow_offset_y = 2
+custom_fonts/font = SubResource( 8 )
+text = "Super Mario 127 is a non-profit fangame inspired by
+the 2009 fangame Super Mario 63. It uses graphics,
+characters, and audio that are subject to copyright
+by Nintendo Co., Ltd.
 
-[node name="Presents" type="Label" parent="."]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -20.0
-margin_top = -7.0
-margin_right = 20.0
-margin_bottom = 7.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource( 1 )
-text = "Solarshine Studios
-presents..."
+This game is created by a team of passionate fans and is 
+not affiliated with, endorsed, or sponsored by Nintendo.
+It will never be commercialized or sold.
+
+If you enjoy this fangame, please show your support to
+Nintendo and buy a Nintendo Switch 2."
 align = 1
 valign = 1
 
-[connection signal="screen_change" from="." to="." method="_on_Preamble_screen_change" binds= [ "MainScreen" ]]
+[node name="HBoxContainer" type="HBoxContainer" parent="Container"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+alignment = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Container/HBoxContainer"]
+margin_left = 696.0
+margin_right = 768.0
+margin_bottom = 432.0
+size_flags_horizontal = 8
+alignment = 2
+
+[node name="ButtonSound" type="Button" parent="Container/HBoxContainer/VBoxContainer"]
+margin_top = 396.0
+margin_right = 72.0
+margin_bottom = 432.0
+rect_min_size = Vector2( 72, 0 )
+rect_pivot_offset = Vector2( 72, 36 )
+custom_fonts/font = SubResource( 10 )
+text = "Skip"
+script = ExtResource( 6 )
+target_scale = Vector2( 1.1, 1.1 )
+
+[node name="SplashScreen" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+texture = ExtResource( 9 )
+expand = true
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource( 8 )
+volume_db = -10.0
+bus = "Sounds"
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource( 7 )
+volume_db = -10.0
+bus = "Sounds"
+
+[connection signal="screen_opened" from="." to="Focus" method="focus_node" flags=3]
+[connection signal="screen_opened" from="." to="AnimationPlayer" method="play" binds= [ "show" ]]
+[connection signal="back_press" from="Focus" to="AnimationPlayer" method="play" binds= [ "end" ]]
+[connection signal="pressed" from="Container/HBoxContainer/VBoxContainer/ButtonSound" to="AnimationPlayer" method="play" binds= [ "end" ]]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://scenes/shared/backgrounds.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/menu/main_menu/main_menu.tscn" type="PackedScene" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://scenes/menu/menu_controller/return_args.gd" type="Script" id=10]
 [ext_resource path="res://scenes/menu/menu_controller/menu_controller.gd" type="Script" id=11]
 [ext_resource path="res://scenes/menu/file_select/file_select.tscn" type="PackedScene" id=12]
+[ext_resource path="res://scenes/menu/preamble/preamble.tscn" type="PackedScene" id=13]
 
 [sub_resource type="GDScript" id=11]
 resource_name = "secret"
@@ -70,14 +71,23 @@ script/source = "extends Node
 
 export var main_menu_path: NodePath
 onready var main_menu = get_node(main_menu_path)
+onready var screens: Control = $\"%Screens\"
 
 func _ready():
 	toggle_secret(\"secret\", LocalSettings.load_setting(\"General\", \"secret\", false))
 	LocalSettings.connect(\"setting_changed\", self, \"toggle_secret\")
+	screens.connect(\"screen_changed\", self, \"screen_changed\")
+
+
+func screen_changed() -> void:
+	call_deferred(\"toggle_secret\", \"secret\", LocalSettings.load_setting(\"General\", \"secret\", false))
+
 
 func toggle_secret(key: String, secret_enabled):
 	if key != \"secret\": return
 	if not secret_enabled is bool: return
+	while not screens.current_screen: yield(get_tree(), \"idle_frame\")
+	if screens.current_screen.music_id != -1: return
 	
 	main_menu.music_id = 67 if secret_enabled else 31
 	Singleton.Music.change_song(Singleton.Music.last_song, main_menu.music_id)
@@ -157,10 +167,16 @@ anchor_bottom = 1.0
 color = Color( 1, 1, 1, 0 )
 
 [node name="Screens" type="Control" parent="UI"]
+unique_name_in_owner = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 3 )
 default_screen = NodePath("MainMenu")
+
+[node name="Preamble" parent="UI/Screens" instance=ExtResource( 13 )]
+unique_name_in_owner = true
+visible = false
+music_id = 0
 
 [node name="MainMenu" parent="UI/Screens" instance=ExtResource( 2 )]
 unique_name_in_owner = true
@@ -185,3 +201,5 @@ visible = false
 [node name="FileSelect" parent="UI/Screens" instance=ExtResource( 12 )]
 unique_name_in_owner = true
 visible = false
+
+[connection signal="screen_opened" from="UI/Screens/Options" to="UI/Screens/Options/Subscreens/Controls/VBoxContainer/Devices" method="screen_opened"]
