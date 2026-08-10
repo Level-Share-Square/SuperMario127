@@ -8,7 +8,7 @@ const EDITOR_PATH = preload("res://scenes/editor/editor.tscn")
 
 func _ready():	
 #	test_level_code_validation()
-#	convert_debug_level()
+	convert_debug_level()
 #	convert_dev_levels()
 #	test()
 #	instance_debug_level()
@@ -94,14 +94,27 @@ func instance_debug_level():
 
 
 func convert_debug_level():
+	var TEST_CODE_PATH = "res://level/data/test/ultimate_object_old.txt"
+	var file = File.new()
+	file.open(TEST_CODE_PATH, File.READ)
+	var content = file.get_as_text()
+	file.close()
+
+	var new_code: String = CurrentLevelData.convert_old_code_to_new(content)
+
+	file.open("res://level/data/test/ultimate_object_new.txt", File.WRITE)
+	file.store_string(new_code)
+	file.close()
+
+func convert_default_level():
 	var TEST_CODE_PATH = "res://level/data/test/old_default.txt"
 	var file = File.new()
 	file.open(TEST_CODE_PATH, File.READ)
 	var content = file.get_as_text()
 	file.close()
-	print(content)
+
 	var new_code: String = CurrentLevelData.convert_old_code_to_new(content)
-	print(new_code)
+
 	file.open("res://level/data/test/new_default.txt", File.WRITE)
 	file.store_string(new_code)
 	file.close()

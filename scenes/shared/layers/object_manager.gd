@@ -10,7 +10,7 @@ func load_in(s_layer_data: LayerData):
 		child.queue_free()
 	
 	for object_data in layer_data.object_data:
-		create_object(object_data)
+		add_child(create_object(object_data))
 
 func place_object(object_data: ObjectData, add_to_data: bool = false):
 	var s_position = object_data.metadata.position
@@ -18,6 +18,8 @@ func place_object(object_data: ObjectData, add_to_data: bool = false):
 		layer_data.place_object(s_position, object_data)
 	
 	var game_object = create_object(object_data)
+
+	add_child(game_object)
 	
 	return game_object
 
@@ -36,9 +38,6 @@ func create_object(object_data: ObjectData):
 	game_object.level_layer_ref = weakref(owner)
 	game_object.palette = object_data.metadata.palette
 	game_object.position = object_data.metadata.position
-
-	add_child(game_object)
-
 	
 	return game_object
 

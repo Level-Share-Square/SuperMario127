@@ -22,7 +22,6 @@ var rainbow: = false
 var wander: = false
 var fire: = 0
 var hit: = false
-var bouncy_fire := false
 
 var gravity: = 0.0
 var gravit_scale: = 2.0
@@ -51,8 +50,7 @@ func _register_properties():
 	set_property_override("fire", PropertyTab.OverrideTypes.ENUM, ["None", "Normal", "Bouncy"])
 	register_property(6, "color", color, true)
 	register_property(7, "rainbow", rainbow, true)
-	register_property(8, "bouncy_fire", bouncy_fire, true)
-	register_property(9, "super_jump_height", super_jump_height, true)
+	register_property(8, "super_jump_height", super_jump_height, true)
 
 func _ready():
 	gravity = CurrentLevelData.current_area.header.gravity
@@ -116,7 +114,7 @@ func hit(hit_pos: Vector2):
 func _physics_process(delta):
 	if not (mode != 1 and is_enabled_and_on_ground()):
 		return
-	
+
 	if (not hit):
 		sprite.playing = true
 		
@@ -258,6 +256,9 @@ func spawn_fireball():
 #	object.properties.append(calculate_fireball_velocity(body.global_position - Vector2(0, 8), character_position, gravity))
 #	object.properties.append(fire == 2)
 #	get_parent().create_object(object, false)
-	var object = create_object(body.global_position - Vector2(0, 8), 134, 0)
+	var object_setup = create_object(body.global_position - Vector2(0, 8), 134, 0)
+	var object = object_setup[0]
 	object.set_property("velocity", calculate_fireball_velocity(body.global_position - Vector2(0, 8), character_position, gravity))
 	object.set_property("bouncy", fire == 2)
+	
+	object_setup[1].call_func(object)

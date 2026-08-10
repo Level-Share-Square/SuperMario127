@@ -131,9 +131,11 @@ func is_on_ground() -> bool:
 
 
 func create_coin(velocity: Vector2, offset: Vector2):
-	var object = create_object(global_position + offset, 1, 0)
+	var object_setup = create_object(global_position + offset, 1, 0)
+	var object = object_setup[0]
 	object.set_property("physics", true)
 	object.set_property("velocity", velocity)
+	object_setup[1].call_func(object)
 	return object
 
 

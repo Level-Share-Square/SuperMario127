@@ -58,6 +58,7 @@ func reset_counters():
 	teleporters = []
 	liquids = []
 	checkpoints = []
+	nozzles_collected = []
 	current_liquid_id = 0
 	last_red_coin_id = 0
 	for area in CurrentLevelData.area_headers:
