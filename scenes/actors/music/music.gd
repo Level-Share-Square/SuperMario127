@@ -298,19 +298,6 @@ func change_song(old_setting, music_setting) -> void:
 		base_volume = song.volume_db
 		play()
 		
-		if song.blended_stream != null:
-			blended_music_player.stream = song.blended_stream
-			blended_music_player.play()
-			blended_music_player.volume_db = -80
-			has_blended = true
-			play_blended = true
-		else:
-			blended_music_player.stream = stream
-			blended_music_player.play()
-			blended_music_player.volume_db = -80
-			has_blended = false
-			play_blended = false
-		
 		if song.underwater_stream != null:
 			water_music_player.stream = song.underwater_stream
 			water_music_player.play()
@@ -380,8 +367,6 @@ func _process(delta) -> void:
 	var target_volume = (db2linear(base_volume) * volume_multiplier) if !get_tree().paused else 0
 	volume_db = linear2db(lerp(db2linear(volume_db), target_volume if !play_water and !play_blended else 0, delta * 3))
 	water_music_player.volume_db = linear2db(lerp(db2linear(water_music_player.volume_db), target_volume if play_water and !play_blended else 0, delta * 3))
-	if not temp_music:
-		blended_music_player.volume_db = linear2db(lerp(db2linear(blended_music_player.volume_db), target_volume if play_blended else 0, delta * 3))
 	
 	if temp_music:
 		var target_temp_volume = db2linear(base_volume) if !get_tree().paused else 0
@@ -391,6 +376,7 @@ func _process(delta) -> void:
 			target_temp_volume = target_temp_volume if !play_blended else -0
 		temporary_music_player.volume_db = linear2db(lerp(db2linear(temporary_music_player.volume_db), target_temp_volume, delta * 3))
 	else:
+		blended_music_player.volume_db = linear2db(lerp(db2linear(blended_music_player.volume_db), 0, delta * 3))
 		temporary_music_player.volume_db = linear2db(lerp(db2linear(temporary_music_player.volume_db), 0, delta * 3))
 		temporary_music_player.volume_db = linear2db(lerp(db2linear(temporary_music_player.volume_db), 0, delta * 3))
 
@@ -412,18 +398,15 @@ func play_temporary_music(temp_song_id : int = 0, temp_song_volume : float = 0) 
 		temporary_music_player.stream = stream
 		temporary_music_player.play()
 	
-	if song.blended_stream != null:
-		blended_music_player.stream = song.blended_stream
-		blended_music_player.play()
-		blended_music_player.volume_db = -80
-		has_blended = true
-		play_blended = true
-	else:
-		blended_music_player.stream = stream
-		blended_music_player.play()
-		blended_music_player.volume_db = -80
-		has_blended = false
-		play_blended = false
+		if song.blended_stream != null:
+			blended_music_player.volume_db = -80
+			blended_music_player.stream = song.blended_stream
+			blended_music_player.play()
+			has_blended = true
+			play_blended = true
+		else:
+			has_blended = false
+			play_blended = false
 	
 	temp_music = true
 
