@@ -458,6 +458,23 @@ static func get_new_area_code(header: AreaHeader, old_area: AreaDataOld) -> Area
 		if old_object.type_id == 14: # sign
 			if old_object.properties[5] == true: # is background
 				object_layer = 0
+		if old_object.type_id == 29: # goomba
+			old_object.properties.resize(10)
+			var color = old_object.properties[4]
+			old_object.properties[4] = float(15)
+			old_object.properties[5] = 0
+			old_object.properties[6] = 1
+			old_object.properties[7] = Vector2.ZERO
+			old_object.properties[8] = float(0)
+			old_object.properties[9] = color
+		if old_object.type_id == 49: # touch lift
+			if old_object.properties.size() == 10:
+				old_object.properties.resize(13)
+				old_object.properties[10] = int(0)
+				old_object.properties[11] = old_object.properties[6].duplicate(true)
+				old_object.properties[12] = float(0)
+		if old_object.type_id == 113: # star door
+			old_object.properties.insert(11, "")
 		
 		var property_dictionary: Dictionary = {}
 		for i in old_object.properties.size():
