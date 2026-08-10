@@ -142,7 +142,7 @@ func create_coin(velocity: Vector2, offset: Vector2):
 func create_object(pos: Vector2, object_id: int, palette: int):
 	var level_layer: LevelLayer = layer_ref.get_ref()
 	
-	return level_layer.add_object(
+	return level_layer.setup_object(
 		ObjectData.new(
 			ObjectMetadata.new(
 				pos,
