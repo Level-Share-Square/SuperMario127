@@ -19,11 +19,13 @@ var rainbow: bool
 
 
 func _register_properties():
+	add_required_shines = false
 	._register_properties()
 	
 	register_property(15, "color", color, true)
 	register_property(16, "rainbow", rainbow, true)
 	register_property(17, "eye_color", eye_color, true)
+	register_property(18, "required_shines", required_shines, true)
 
 
 func _process(delta):

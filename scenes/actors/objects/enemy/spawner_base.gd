@@ -32,7 +32,10 @@ var spawner_properties: Array = [
 
 
 func _register_enemy_properties() -> void:
-	pass
+	var index: int = 4 + spawner_properties.size()
+	for property in get_enemy_properties():
+		register_property(index, property, self[property])
+		index += 1
 
 
 func get_enemy_properties() -> Array:

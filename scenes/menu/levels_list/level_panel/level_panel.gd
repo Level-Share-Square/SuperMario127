@@ -108,7 +108,7 @@ func load_level_info(_level_metadata: LevelMetadata, _level_id: String, _working
 		title.text = "Invalid Level"
 		author.text = ""
 		title_shadow.text = title.text
-		description.bbcode_text = "[center]" + "I'm gay." + "[/center]"
+		description.bbcode_text = "[center]" + "Have you copied the code correctly?" + "[/center]"
 		back_button.focus_neighbour_top = back_button.get_path_to(reset_button)
 		reset_button.focus_neighbour_bottom = reset_button.get_path_to(back_button)
 

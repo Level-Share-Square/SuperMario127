@@ -80,12 +80,14 @@ var last_non_full_scale: int = 0
 func _unhandled_input(event):
 	if event.is_action_pressed("fullscreen"):
 		LocalSettings.change_setting("General", "window_scale", 3 if not OS.window_fullscreen else last_non_full_scale)
-
-	if event.is_action_pressed("volume_up"):
-		LocalSettings.change_setting("Audio", "master_volume", last_master_volume + 5)
-	if event.is_action_pressed("volume_down"):
-		LocalSettings.change_setting("Audio", "master_volume", last_master_volume - 5)
 	
+	var current_scene = get_tree().get_current_scene()
+	if not "mode" in current_scene or current_scene.mode != 1:
+		if event.is_action_pressed("volume_up"):
+			LocalSettings.change_setting("Audio", "master_volume", last_master_volume + 5)
+		if event.is_action_pressed("volume_down"):
+			LocalSettings.change_setting("Audio", "master_volume", last_master_volume - 5)
+		
 	if event.is_action_pressed("mute"):
 		var current_vol = LocalSettings.load_setting("Audio", "bgm_volume", 100)
 		LocalSettings.change_setting("Audio", "bgm_volume", 0 if current_vol > 0 else last_non_muted_bgm)

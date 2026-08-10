@@ -83,7 +83,7 @@ func update_shine_info():
 func update_scoin_info():
 	var selected_scoin_data: StarCoinData = level_metadata.collectible_data.star_coin_data[selected_scoin_index]
 	
-	if selected_shine_id == "": # This can happen if there are no star coins in the level
+	if total_scoins <= 0:
 		shine_name.text = "No star coin selected"
 		shine_description.bbcode_text = "[center]There are no star coins in this level.[/center]"
 	else:

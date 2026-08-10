@@ -18,12 +18,7 @@ var fav_items: Array = [
 	Array([]),
 	Array([]),
 ]
-var loadouts: Array = [
-	Array(["obj_coin", "obj_mario", "til_grass", "til_brick", "obj_shine", "obj_star_coin", "obj_red_coin", "obj_blue_coin", "obj_barrel_cactus", "til_cabin_window"]),
-	Array(["obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus"]),
-	Array(["obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus"]),
-	Array(["obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus", "obj_barrel_cactus"]),
-]
+var loadouts: Array = EditorData.DEFAULT_ITEMS
 var loadout_palettes: Array = [
 	PoolIntArray([0, 0, 0, 0, 0, 0, 0, 0, 0, 0]),
 	PoolIntArray([0, 0, 0, 0, 0, 0, 0, 0, 0, 0]),

@@ -17,6 +17,7 @@ func import_level_code():
 	if level_code == "" and not OS.has_feature("JavaScript"):
 		level_code = OS.clipboard
 	
+	level_code = level_code.strip_escapes().strip_edges()
 	list_handler.insert_level(level_code)
 	
 	level_code_edit.text = ""

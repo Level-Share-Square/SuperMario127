@@ -223,7 +223,9 @@ static func serialize_object(object: ObjectData) -> String:
 			properties_code += ";"
 #			print("data: ", serialize_data(object.properties[property_id]))
 		
-		object_code += wrap_code_in_brackets(properties_code)
+		if not object.properties.empty():
+			properties_code.erase(properties_code.length() - 1, 1)
+			object_code += wrap_code_in_brackets(properties_code)
 		
 		return object_code
 
@@ -263,6 +265,8 @@ static func serialize_metadata(values: Array) -> String:
 		metadata_code += serialize_data(value)
 		metadata_code += ","
 	
+	if not values.empty():
+		metadata_code.erase(metadata_code.length() - 1, 1)
 	metadata_code += "}"
 	
 	return metadata_code
@@ -275,6 +279,8 @@ static func serialize_data_array(values: Array) -> String:
 		data_array_code += serialize_data(value)
 		data_array_code += ","
 	
+	if not values.empty():
+		data_array_code.erase(data_array_code.length() - 1, 1)
 	return wrap_code_in_brackets(data_array_code)
 
 
@@ -356,14 +362,15 @@ static func serialize_data(value) -> String:
 			data_code = TYPE_CODE_STRING
 			
 			if not value.empty():
-				var bytes: PoolByteArray = value.to_utf8().compress(File.COMPRESSION_DEFLATE)
-				data_code += Marshalls.raw_to_base64(bytes)
-				# convert from Base64 to Base64URL
-				data_code = data_code.replace("+", "-")
-				data_code = data_code.replace("/", "_")
-				# padding in Base64 isn't URI encoding safe, so we replace "="
-				# with "~" while serializing
-				data_code = data_code.replace("=", "~")
+				data_code += value.percent_encode()
+#				var bytes: PoolByteArray = value.to_utf8().compress(File.COMPRESSION_DEFLATE)
+#				data_code += Marshalls.raw_to_base64(bytes)
+#				# convert from Base64 to Base64URL
+#				data_code = data_code.replace("+", "-")
+#				data_code = data_code.replace("/", "_")
+#				# padding in Base64 isn't URI encoding safe, so we replace "="
+#				# with "~" while serializing
+#				data_code = data_code.replace("=", "~")
 		TYPE_INT:
 			value = value as int
 			data_code = TYPE_CODE_INT + base64_encode_int(value)

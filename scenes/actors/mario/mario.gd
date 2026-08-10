@@ -1343,7 +1343,6 @@ func update_collision(enabled: bool) -> void:
 
 func hide_shine_dance_shine():
 	$CollectedShine.visible = false
-	$CollectedShineOutline.visible = false
 	
 func _connect_signals():
 	for i in $Powerups.get_children():

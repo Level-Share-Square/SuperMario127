@@ -3,10 +3,10 @@ extends PropertyEditor
 onready var pathmaker_file = preload("res://scenes/editor/windows/object_property_editor/misc_property_scenes/Curve2D/pathmaker.tscn")
 var curve_info: Array
 
-func change_property(new_value):
+func change_property(new_value, save_to_data: bool = true):
 	editor.get_node("%UI").visible = true
 	var value = new_value.duplicate()
-	.change_property(value)
+	.change_property(value, save_to_data)
 
 func load_property(_editor: Editor, init_value, _property: Array, property_name = null):
 	.load_property(_editor, init_value, _property, property_name)

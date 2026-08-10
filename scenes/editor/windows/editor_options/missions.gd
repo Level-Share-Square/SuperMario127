@@ -23,8 +23,11 @@ func _ready():
 	
 	mission_data = CurrentLevelData.level_metadata.collectible_data.mission_data
 	refresh_buttons()
-		
-	on_mission_selected(mission_data[0])
+	
+	if mission_data.size() > 0:
+		on_mission_selected(mission_data[0])
+	else:
+		mission_container.hide()
 	
 	new_mission.connect("pressed", self, "on_new_mission_pressed")
 		

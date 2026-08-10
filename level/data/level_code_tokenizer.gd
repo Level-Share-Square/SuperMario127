@@ -60,7 +60,11 @@ static func splice_objects(code: String):
 
 # takes code of one object
 static func splice_object(code: String):
-	return get_outermost_brackets(code)[0]
+	var outermost_brackets: Array = get_outermost_brackets(code)
+	if outermost_brackets.empty():
+		return []
+	else:
+		return outermost_brackets[0]
 
 
 # Pass any type into this to get its metadata.

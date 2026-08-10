@@ -11,5 +11,5 @@ dest_files=[ "res://.import/course_clear_pocket.ogg-ad52d55e240c8beff6db7e1c6fe5
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

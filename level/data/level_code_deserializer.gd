@@ -72,7 +72,7 @@ static func deserialize_editor_data(editor_data_code: String) -> EditorData:
 static func deserialize_level_tags(level_tags_code: String) -> LevelTags:
 	if level_tags_code.empty():
 		return LevelTags.new()
-		
+	
 	var components: Array = LevelCodeTokenizer.splice_level_tags_components(level_tags_code)
 	
 	var teleport_tags: Array =  deserialize_datas_code(components[0])
@@ -110,7 +110,10 @@ static func deserialize_layer_code(layer_code: String) -> LayerData:
 	var tile_data: TileData
 	var deserialized_tile_data = deserialize_datas_code(tiles_code)
 	tile_data = TileData.new() if deserialized_tile_data == null else deserialized_tile_data[0]
-	var objects: Array = deserialize_objects_code(objects_code)
+	
+	var objects: Array
+	if objects_code != "":
+		objects = deserialize_objects_code(objects_code)
 	
 	return LayerData.new(layer_metadata, tile_data, objects)
 
@@ -151,12 +154,13 @@ static func deserialize_object_code(object_code: String) -> ObjectData:
 	
 	var object_metadata = deserialize_object_metadata_code(object_metadata_code)
 	var object_data = ObjectData.new(object_metadata)
-	var object_vars = deserialize_object_properties(object_var_code)
-	for vars in object_vars:
-		if object_vars[vars] == null:
-			object_vars.erase(vars)
-			object_data.mark_as_faulty("Invalid property in object")
-	object_data.properties = object_vars
+	if not object_var_code.empty():
+		var object_vars = deserialize_object_properties(object_var_code)
+		for vars in object_vars:
+			if object_vars[vars] == null:
+				object_vars.erase(vars)
+				object_data.mark_as_faulty("Invalid property in object")
+		object_data.properties = object_vars
 	return object_data
 
 
@@ -174,7 +178,6 @@ static func deserialize_object_properties(code: String) -> Dictionary:
 
 			properties.get_or_add(key, value)
 	return properties
-	
 
 
 static func deserialize_level_metadata_code(level_metadata_code: String) -> LevelMetadata:
@@ -420,17 +423,17 @@ static func deserialize_data_code(data_code: String):
 	
 	match type_code:
 		TYPE_CODE_STRING:
-#			return data
+			return data.percent_decode()
 #			
-			if data.empty():
-				return ""
-			else:
-				data = data.replace("-", "+")
-				data = data.replace("_", "/")
-				# undo the padding replacement
-				data = data.replace("~", "=")
-				data = Marshalls.base64_to_raw(data)
-				return data.decompress_dynamic(-1, File.COMPRESSION_DEFLATE).get_string_from_utf8()
+#			if data.empty():
+#				return ""
+#			else:
+#				data = data.replace("-", "+")
+#				data = data.replace("_", "/")
+#				# undo the padding replacement
+#				data = data.replace("~", "=")
+#				data = Marshalls.base64_to_raw(data)
+#				return data.decompress_dynamic(-1, File.COMPRESSION_DEFLATE).get_string_from_utf8()
 		TYPE_CODE_INT:
 			return base64_decode_int(data)
 		TYPE_CODE_BOOL:

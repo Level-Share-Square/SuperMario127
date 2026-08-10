@@ -519,20 +519,20 @@ static func get_level_tags_from_old_data(level_data) -> LevelTags:
 					level_tags.teleport_tags.append(object.properties[5])
 			if (object.type_id == 72 or
 				object.type_id == 75): # Water and Lava
-				if not object.properties[8] in level_tags.liquid_tags:
-					level_tags.liquid_tags.append(object.properties[8])
+				if not object.properties[7] in level_tags.liquid_tags:
+					level_tags.liquid_tags.append(object.properties[7])
 			if object.type_id == 81: # Crystal Tap
-				if not object.properties[3] in level_tags.liquid_tags:
-					level_tags.liquid_tags.append(object.properties[3])
+				if not object.properties[4] in level_tags.liquid_tags:
+					level_tags.liquid_tags.append(object.properties[4])
 			if (object.type_id == 127 or
 				object.type_id == 137 or
 				object.type_id == 138 or
 				object.type_id == 139): # Toad, Peach, Yoshi, and Red Bob-omb
-				if not object.properties[13] in level_tags.dialogue_tags:
-					level_tags.dialogue_tags.append(object.properties[13])
+				if not object.properties[14] in level_tags.dialogue_tags:
+					level_tags.dialogue_tags.append(object.properties[14])
 			if object.type_id == 128: # Dialogue Trigger
-				if not object.properties[9] in level_tags.dialogue_tags:
-					level_tags.dialogue_tags.append(object.properties[9])
+				if not object.properties[10] in level_tags.dialogue_tags:
+					level_tags.dialogue_tags.append(object.properties[10])
 	return level_tags
 
 static func compare_versions(version, other) -> int:

@@ -36,28 +36,33 @@ var last_position: float = 0
 var working_speed: float = 0
 
 var dialogue_trigger: Node
+var add_required_shines: bool = true
 
 
 func _register_properties():
-	register_property(4, "idle_expression", idle_expression, true)
-	set_property_override("idle_expression", PropertyTab.OverrideTypes.ENUM, expression_map)
-	register_property(5, "idle_action", idle_action, true)
-	set_property_override("idle_action", PropertyTab.OverrideTypes.ENUM, action_map)
-	
-	register_property(6, "speaking_expression", speaking_expression, true)
-	set_property_override("idle_expression", PropertyTab.OverrideTypes.ENUM, expression_map)
-	register_property(7, "speaking_action", speaking_action, true)
-	set_property_override("idle_action", PropertyTab.OverrideTypes.ENUM, action_map)
-	
-	register_property(8, "tag_link", tag_link, true)
-	set_property_override("tag_link", PropertyTab.OverrideTypes.DROPDOWN, [CurrentLevelData.level_tags, "get_dialogue_args", [CurrentLevelData.level_tags, "dialogue_tags"]])
-	register_property(9, "curve", curve, true)
-	register_property(10, "walk_speed", walk_speed, true)
-	register_property(11, "move_type", move_type, true)
+	register_property(4, "curve", curve, false)
+	register_property(5, "curve", curve, true)
+	register_property(6, "move_type", move_type, true)
 	set_property_override("move_type", PropertyTab.OverrideTypes.BOOL_ALIAS, {true: "Loop", false: "Reset"})
-	register_property(12, "physics_enabled", physics_enabled, true)
-	register_property(13, "required_shines", required_shines, true)
-	register_property(14, "path_reference", path_reference, true)
+	register_property(7, "walk_speed", walk_speed, true)
+	register_property(8, "physics_enabled", physics_enabled, true)
+	
+	register_property(9, "idle_expression", idle_expression, true)
+	set_property_override("idle_expression", PropertyTab.OverrideTypes.ENUM, expression_map)
+	register_property(10, "idle_action", idle_action, true)
+	set_property_override("idle_action", PropertyTab.OverrideTypes.ENUM, action_map)
+	
+	register_property(11, "speaking_expression", speaking_expression, true)
+	set_property_override("idle_expression", PropertyTab.OverrideTypes.ENUM, expression_map)
+	register_property(12, "speaking_action", speaking_action, true)
+	set_property_override("idle_action", PropertyTab.OverrideTypes.ENUM, action_map)
+	
+	register_property(13, "path_reference", path_reference, true)
+	register_property(14, "tag_link", tag_link, true)
+	set_property_override("tag_link", PropertyTab.OverrideTypes.DROPDOWN, [CurrentLevelData.level_tags, "get_dialogue_args", [CurrentLevelData.level_tags, "dialogue_tags"]])
+	
+	if add_required_shines:
+		register_property(15, "required_shines", required_shines, true)
 
 
 func get_dialogue_from_tag(tag: String) -> Node:

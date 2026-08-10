@@ -200,6 +200,11 @@ static func decode(code: String)-> Dictionary:
 		full_result.layout_ids = layout_ids
 		full_result.layout_palettes = layout_palettes
 		full_result.pinned_items = pinned_items
+	
+	else:
+		full_result.layout_ids = []
+		full_result.layout_palettes = []
+		full_result.pinned_items = []
 
 	var areas = code_array.size() - (2 + add_amount)
 	full_result.areas = []
