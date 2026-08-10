@@ -310,7 +310,7 @@ static func base64_encode_int(number: int) -> String:
 	while number:
 		digits.append(int(number % 64))
 		number = floor(number / 64)
-	
+
 	var string = ""
 	if is_negative:
 		string = "~"
@@ -325,8 +325,13 @@ static func base64_encode_float(number: float) -> String:
 		is_negative = true
 		number = abs(number)
 	
-	var number_components: PoolRealArray = str(number).split_floats(".")
+	var number_components: PoolRealArray
+	var string_components = str(number).split(".")
 	
+	number_components.append(float(string_components[0]))
+	if string_components.size() == 2:
+		number_components.append(float(string_components[1].insert(0, "1")))
+
 	var string = ""
 	if is_negative:
 		string = "~"
@@ -373,6 +378,7 @@ static func serialize_data(value) -> String:
 			data_code = TYPE_CODE_VECTOR2 + serialize_data_array([value.x, value.y])
 		TYPE_COLOR:
 			value = value as Color
+			print(typeof(value.r))
 			data_code = TYPE_CODE_COLOR + serialize_data_array([value.r, value.g, value.b, value.a])
 		TYPE_ARRAY:
 			value = value as Array

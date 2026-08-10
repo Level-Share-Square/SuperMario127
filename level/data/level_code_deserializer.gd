@@ -395,12 +395,12 @@ static func base64_decode_float(number: String):
 		fract = base64_decode_int(components[1])
 		if whole == null or fract == null: return null
 	
-	var fract_string = "0." + str(fract)
-	
+	var fract_string = "0." + str(fract).substr(1)
+
 	if not is_negative:
 		return float(whole) + fract_string.to_float()
 	else:
-		return -float(whole) + fract_string.to_float()
+		return -(float(whole) + fract_string.to_float())
 		
 static func set_or_use_default_value(vars: Array, index: int, default_value):
 	if(index >= vars.size()):
