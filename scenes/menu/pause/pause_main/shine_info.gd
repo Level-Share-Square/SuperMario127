@@ -67,12 +67,11 @@ func update_info():
 
 
 func update_shine_info():
-	var selected_shine_info = level_metadata.collectible_data.mission_data[selected_shine_index + shine_offset]
-	
-	if selected_shine_id == "": # This can happen if there are no shine sprites in the level
+	if total_shines <= 0: # This can happen if there are no shine sprites in the level
 		shine_name.text = "No shine sprite selected"
 		shine_description.bbcode_text = "[center]There are no shine sprites in this level.[/center]"
 	else:
+		var selected_shine_info = level_metadata.collectible_data.mission_data[selected_shine_index + shine_offset]
 		shine_name.text = selected_shine_info.shine_name
 		shine_description.bbcode_text = "[center]%s[/center]" % selected_shine_info.shine_description
 		star.visible = CurrentLevelData.save_data.is_mission_complete(selected_shine_info.mission_uuid)
@@ -81,12 +80,11 @@ func update_shine_info():
 
 
 func update_scoin_info():
-	var selected_scoin_data: StarCoinData = level_metadata.collectible_data.star_coin_data[selected_scoin_index]
-	
 	if total_scoins <= 0:
 		shine_name.text = "No star coin selected"
 		shine_description.bbcode_text = "[center]There are no star coins in this level.[/center]"
 	else:
+		var selected_scoin_data: StarCoinData = level_metadata.collectible_data.star_coin_data[selected_scoin_index]
 		shine_name.text = "Star Coin %s" % (selected_scoin_index + 1)
 		shine_description.bbcode_text = "[center]%s[/center]" % selected_scoin_data.star_coin_hint
 		star.visible = CurrentLevelData.save_data.is_star_coin_collected(selected_scoin_data.star_coin_uuid)

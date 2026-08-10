@@ -6,6 +6,8 @@ onready var current_mod = $VBoxContainer/CurrentMod
 
 
 func _ready():
+	OS.current_screen = 0
+	
 	if ModLoader.active:
 		current_mod.text = "Current Mod: " + ModLoader.path.get_file().get_basename()
 		yield(timer, "timeout")
