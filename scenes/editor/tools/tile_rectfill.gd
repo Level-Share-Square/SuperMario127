@@ -30,22 +30,41 @@ func on_mouse_released():
 		return
 		
 	hide_visuals()
-	
-	var tile_fill_rect := Rect2(get_tile_grid_position(fill_rect.position), get_tile_grid_position(fill_rect.size))
-	
-	for x in range(tile_fill_rect.position.x, tile_fill_rect.position.x + tile_fill_rect.size.x):
-		for y in range(tile_fill_rect.position.y, tile_fill_rect.position.y + tile_fill_rect.size.y):
-			draw_tile(Vector2(x, y))
 	finalize_placement()
 	reset_bounds()
 	
-func draw_tile(pos: Vector2) -> void:
+func box_expansion():
+	.box_expansion()
+	var tile_fill_rect := Rect2(get_tile_grid_position(fill_rect.position), get_tile_grid_position(fill_rect.size))
+	
+	var update_bitmask: bool = false
+	
+	for cell in editor.tile_buffer.get_used_cells():
+		if not tile_fill_rect.has_point(cell):
+			editor.tile_buffer.set_cellv(cell, -1)
+			update_bitmask = true
+	
+	for x in range(tile_fill_rect.position.x, tile_fill_rect.position.x + tile_fill_rect.size.x):
+		for y in range(tile_fill_rect.position.y, tile_fill_rect.position.y + tile_fill_rect.size.y):
+			var pos := Vector2(x, y)
+			
+			if not is_tile_cached(pos):
+				cache_tile(pos)
+				update_bitmask = true
+				
+	if update_bitmask:
+		editor.tile_buffer.update_bitmask_region()
+	
+func cache_tile(pos: Vector2) -> void:
 	var item = editor.selected_item
 	var cache_tile = tile_util.get_real_tile_set_id(item.tileset_id, item.tile_id, item.palette)
 	
 	if editor.tile_buffer.get_cell(pos.x, pos.y) == TileMap.INVALID_CELL:
 		editor.tile_buffer.set_cellv(pos, cache_tile)
 		editor.tile_buffer.update_bitmask_area(pos)
+		
+func is_tile_cached(pos: Vector2) -> bool:
+	return editor.tile_buffer.get_cellv(pos) != -1
 
 func finalize_placement() -> void:
 	var undo_tiles: Dictionary = {}
