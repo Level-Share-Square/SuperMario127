@@ -366,8 +366,8 @@ static func get_collectible_data_from_old_data(level_data) -> CollectibleData:
 			elif object.type_id == STAR_COIN_ID:
 				var star_coin_data: StarCoinData = StarCoinData.new(
 					uuid_util.v4(),
-					"",
-					Color.yellow
+					StarCoinData.DEFAULT_HINT,
+					StarCoinData.DEFAULT_COLOR
 				)
 				
 				object.properties[6] = star_coin_data.star_coin_uuid
