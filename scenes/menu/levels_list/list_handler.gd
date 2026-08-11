@@ -93,6 +93,9 @@ func insert_level(level_code: String = "", folder: String = working_folder):
 	var level_id: String = level_list_util.generate_level_id()
 	var file_path: String = level_list_util.get_level_file_path(level_id, folder)
 	
+	if conversion_util.is_pre_100(level_code):
+		level_code = CurrentLevelData.convert_old_code_to_new(level_code)
+	
 	level_list_util.save_level_code_file(level_code, file_path)
 	sort_file_util.add_to_sort(level_id, folder, sort_file_util.LEVELS)
 	loader.add_level_card(level_id, folder, true, true, level_code, is_campaign)

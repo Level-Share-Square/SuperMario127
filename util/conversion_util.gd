@@ -309,6 +309,8 @@ static func convert_054_to_055(result):
 			area_result.objects = new_objects
 	return result
 
+static func is_pre_100(level_code: String) -> bool:
+	return level_code.begins_with("0")
 
 static func get_level_metadata_from_old_data(level_data) -> LevelMetadata:
 	var starting_area: AreaDataOld = level_data.areas[0]
