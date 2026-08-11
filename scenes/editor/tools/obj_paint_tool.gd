@@ -41,9 +41,9 @@ func _click(world_pos: Vector2) -> void:
 				var copied_data = objects_util.object_data_deep_copy(closest_object)
 				hovered_object = place_object(world_pos, copied_data)
 				is_copied = true
-
-			old_pos = hovered_object.global_position
-			pos_offset = old_pos - get_node("%ParallaxScroll").get_transform().xform(get_mouse_pos())
+			if !hovered_object: return
+			old_pos = hovered_object.position
+			pos_offset = old_pos - get_mouse_pos()
 		else:
 			emit_signal("objects_selected", [])
 			pass
@@ -58,14 +58,14 @@ func _mouse_movement(event, mouse_pos):
 func _process(delta):
 	if is_dragging and hovered_object:
 		if get_mouse_pos().is_equal_approx(old_pos): return
-		hovered_object.global_position = get_node("%ParallaxScroll").get_transform().xform(get_mouse_pos()) + pos_offset
+		hovered_object.global_position = (get_node("%ParallaxScroll").get_transform().xform(get_mouse_pos()) + pos_offset).snapped(Vector2(8, 8)) if editor.pixel_lock else get_node("%ParallaxScroll").get_transform().xform(get_mouse_pos()) + pos_offset
 			
 func _click_left_released(event, mouse_pos):
 	if hovered_object:
 		
 		if is_dragging:
-			if is_copied: hovered_object.set_property("position", hovered_object.global_position, true)
-			else: change_property(hovered_object, "position", get_mouse_pos(), old_pos)
+			if is_copied: hovered_object.set_property("position", hovered_object.position, true)
+			else: change_property(hovered_object, "position", hovered_object.position, old_pos)
 			is_copied = false
 			is_dragging = false
 			
