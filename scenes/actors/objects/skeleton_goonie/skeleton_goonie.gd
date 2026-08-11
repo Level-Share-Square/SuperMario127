@@ -130,7 +130,7 @@ func hurt(hit_pos:Vector2):
 		head_particle.emitting = true
 		head_particle.restart()
 		var velocity_x = - 80 if randi() % 2 == 0 else 80
-		create_coin(1, wingless_body.global_position, true, Vector2(velocity_x, -300))
+		create_coin(1, wingless_body, true, Vector2(velocity_x, -300))
 	bones_sfx.play()
 	hit_sfx.play()
 	poof.emitting = true
