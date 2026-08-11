@@ -54,42 +54,29 @@ func handle_character_exception(character: Character):
 		static_body.remove_collision_exception_with(character)
 
 func _physics_process(delta):
-	pass
-#		if mode != 1 and is_enabled_and_on_ground():
-#			time_alive += delta
-#
-#			for hit_body in stomp_area.get_overlapping_bodies():
-#				if !broken and hit_body.name.begins_with("Character"): if is_rainbow(hit_body):
-#					broken = true
-#					if not broken_sound.is_playing(): 
-#						for i in(coins): create_coin()
-#						break_particle.show()
-#						break_particle.set_emitting(true)
-#						broken_sound.play()
-#						yield(get_tree().create_timer(3.0), "timeout")
-#						queue_free() # die
-#			for hit_body in spin_area.get_overlapping_bodies():
-#				if !broken and hit_body.name.begins_with("Character"): if is_rainbow(hit_body):
-#					broken = true
-#					if not broken_sound.is_playing(): 
-#						for i in(coins): create_coin()
-#						break_particle.show()
-#						break_particle.set_emitting(true)
-#					broken_sound.play()
-#					yield(get_tree().create_timer(3.0), "timeout")
-#					queue_free() # die
-#
-#		var scene : Node = get_tree().current_scene
-#		if scene.has_node(scene.character):
-#			handle_character_exception(scene.get_node(scene.character))
-#		if scene.has_node(scene.character2):
-#			handle_character_exception(scene.get_node(scene.character2))
-#
-#		if broken:
-#			sprite.visible = false
-#			static_body.set_collision_layer_bit(0, false)
-#			static_body.set_collision_mask_bit(1, false)
-#			stomp_area.set_collision_layer_bit(0, false)
+	if mode != 1 and is_enabled_and_on_ground():
+		time_alive += delta
+
+		for hit_body in area.get_overlapping_bodies():
+			if !broken and hit_body.name.begins_with("Character"): if is_rainbow(hit_body):
+				broken = true
+				if not broken_sound.is_playing(): 
+					for i in(coins): create_coin()
+					break_particle.show()
+					break_particle.set_emitting(true)
+				broken_sound.play()
+				yield(get_tree().create_timer(3.0), "timeout")
+				queue_free() # die
+
+	var scene : Node = get_tree().current_scene
+	if scene.has_node(scene.character):
+		handle_character_exception(scene.get_node(scene.character))
+
+	if broken:
+		sprite.visible = false
+		static_body.set_collision_layer_bit(0, false)
+		static_body.set_collision_mask_bit(1, false)
+		area.set_collision_layer_bit(0, false)
 
 func create_coin(coin_id = 1, body = static_body, physics = true, velocity = null): #creates a coin
 	var power = int(time_alive*100) % 80
