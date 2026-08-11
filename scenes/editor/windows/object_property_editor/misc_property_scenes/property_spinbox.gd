@@ -26,6 +26,7 @@ func _input(event):
 	if event is InputEventMouseButton:
 		if event.pressed and not _is_pos_in_line_edit(event.position) and get_focus_owner() == get_line_edit():
 			get_line_edit().release_focus()
+			value = float(get_line_edit().text)
 			emit_signal("done_editing")
 		
 		if event.pressed and _is_pos_in_spinbox(event.position):
