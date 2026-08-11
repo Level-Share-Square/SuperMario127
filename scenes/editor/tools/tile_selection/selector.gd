@@ -100,7 +100,11 @@ func box_expansion():
 	var layer = shared.get_layer(editor.layer)
 	
 	var mouse_pos: Vector2 = get_adjusted_mouse_position()
-	var drag_rect := Rect2(start_pos, mouse_pos - start_pos).abs()
+	
+	var start_rect := Rect2(start_pos, TILE)
+	var mouse_rect := Rect2(mouse_pos, TILE)
+	
+	var drag_rect := start_rect.merge(mouse_rect)
 	
 	fill_rect = drag_rect
 	if layer is LevelParallaxLayer:
