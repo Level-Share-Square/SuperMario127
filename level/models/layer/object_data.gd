@@ -39,4 +39,4 @@ func get_property(property_id: int):
 		POSITION_PROP_ID:
 			return metadata.position
 		_:
-			return properties.get(property_id)
+			properties.get(property_id)

@@ -17,7 +17,6 @@ var tint := Color(0.545098, 0.545098, 0.545098)
 var opacity: float = 1
 var is_visible: bool = true
 var move_to_index: int = -1
-var switch_layer_type: int = 0
 var one_time: bool = false
 
 var last_parts := 1
@@ -34,9 +33,7 @@ func _register_properties():
 	register_property(11, "is_visible", is_visible)
 	register_property(12, "move_to_index", move_to_index)
 	register_property(13, "one_time", one_time)
-	register_property(14, "switch_layer_type", switch_layer_type)
 	set_property_override("layer_uuid", PropertyTab.OverrideTypes.DROPDOWN, [self, "get_layer_args"])
-	set_property_override("switch_layer_type", PropertyTab.OverrideTypes.ENUM, ["None", "Ground", "Decor"])
 	
 func get_layer_args() -> Dictionary:
 	var args: Dictionary = {}
@@ -56,7 +53,6 @@ func _object_ready():
 		camera_stopper.set_size(Vector2.ZERO)
 		camera_stopper.monitorable = false
 		camera_stopper.visible = false
-
 	
 func _ready():
 	if mode != 1:
@@ -117,19 +113,6 @@ func update_layer(body):
 		var character = player.get_node(player.character)
 		if !shared.get_layer(layer_uuid): return
 		if move_to_index < 0 or move_to_index > shared.layers.size() - 1: move_to_index = -1
-		
-		var switch: bool = false
-		if switch_layer_type == 1 and shared.get_layer(layer_uuid) is LevelParallaxLayer:
-			switch = true
-		if switch_layer_type == 2 and shared.get_layer(layer_uuid) is LevelGroundLayer:
-			switch = true
-		
-		if switch:
-			var layer = shared.get_layer(layer_uuid)
-			var preserved_state: bool = layer.layer_data.layer_metadata.is_ground
-			yield(shared.change_layer_type(shared.get_layer(layer_uuid), false), "completed")
-			layer = shared.get_layer(layer_uuid)
-			layer.layer_data.layer_metadata.is_ground = preserved_state
 		
 		var layer_state := LayerState.new(
 			move_to_index,
