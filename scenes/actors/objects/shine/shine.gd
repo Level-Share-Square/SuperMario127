@@ -110,6 +110,9 @@ func _ready() -> void:
 		set_property("mission_uuid", CurrentLevelData.level_metadata.collectible_data.mission_data[0].mission_uuid, true)
 		mission_from_before = mission_uuid
 		update_shine_properties("mission_uuid", mission_uuid)
+	elif mission_uuid:
+		mission_from_before = mission_uuid
+		update_shine_properties("mission_uuid", mission_uuid)
 	if mode != 1: # not in edit mode
 		if required_purples > 0:
 			purple_starbits_activate = true
