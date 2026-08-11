@@ -17,17 +17,12 @@ const FALLBACK_TYPE: String = "fallback"
 func load_misc_properties(_editor: Editor, _objects: Dictionary, common_properties: Array, common_property_overrides: Array):
 	editor = _editor
 	objects = _objects
-	for override in common_property_overrides:
-		
-		for property in common_properties:
-			if property[0] == override:
-				common_properties.erase(property)
-		
-		var override_data = objects.keys()[0].property_overrides[override]
 
-		load_property_override(override, OverrideTypes.keys()[override_data[0]], override_data)
-	
 	for property in common_properties:
+		if property[0] in common_property_overrides:
+			var override_data = objects.keys()[0].property_overrides[property[0]]
+			load_property_override(property[0], OverrideTypes.keys()[override_data[0]], override_data)
+			continue
 		var property_type: String = TYPE_LOOKUP.get(property[1], FALLBACK_TYPE)
 		var property_scene: PropertyEditor = load(TAB_SCENE_PATH % property_type).instance()
 		property_scene.load_property(editor, get_property_value(objects.keys()[0], property[0]), property)
