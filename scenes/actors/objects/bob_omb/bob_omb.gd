@@ -80,6 +80,8 @@ func _ready() -> void:
 	if !is_enabled_and_on_ground():
 		kinematic_body.set_collision_mask_bit(3, false)
 		kinematic_body.set_collision_layer_bit(3, false)
+		
+	loaded = true
 	
 func _process(_delta):
 	fuse.frame = sprite.frame
