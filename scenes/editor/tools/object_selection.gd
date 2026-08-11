@@ -79,6 +79,7 @@ func fit_to_bounding_rectangle():
 	
 func get_bounding_rectangle() -> Rect2:
 	for object in editor.selected_objects.duplicate():
+		if not is_instance_valid(object): continue
 		if !object.is_inside_tree():
 			editor.selected_objects.erase(object)
 	
