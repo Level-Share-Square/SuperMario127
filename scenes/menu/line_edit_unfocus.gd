@@ -8,7 +8,7 @@ func _is_pos_in(check_pos : Vector2):
 
 
 func _input(event):
-	if get_focus_owner() == self and event is InputEventMouseButton and not _is_pos_in(event.position):
+	if get_focus_owner() == self and event is InputEventMouseButton and event.pressed and not _is_pos_in(event.position):
 		release_focus()
 
 
