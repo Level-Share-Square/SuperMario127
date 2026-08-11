@@ -179,11 +179,11 @@ func focus_layer(focus: bool, focus_layer: String):
 		else:
 			layer.visible = layer.layer_data.layer_metadata.layer_visible
 
-func change_layer_type(layer: LevelLayer):
+func change_layer_type(layer: LevelLayer, save_to_data: bool = true):
 	var new_layer_data := layer.layer_data
-	
+
 	var new_layer: LevelLayer
-	if !new_layer_data.layer_metadata.is_ground:
+	if layer is LevelParallaxLayer:
 		new_layer = ground_layer_scene.instance()
 		new_layer_data.layer_metadata.is_ground = true
 	else:
@@ -200,7 +200,7 @@ func change_layer_type(layer: LevelLayer):
 	add_child(new_layer)
 	layer_dictionary[new_layer_data.layer_metadata.layer_uuid] = new_layer
 
-	move_layer(new_layer, old_layer_index, true)
+	move_layer(new_layer, old_layer_index, save_to_data)
 	new_layer.load_in(new_layer_data)
 	
 	return new_layer_data
