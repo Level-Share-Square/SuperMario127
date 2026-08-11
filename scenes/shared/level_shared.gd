@@ -168,8 +168,8 @@ func get_object_at_position(pos: Vector2, uuid: String):
 func update_tilemaps():
 	for layer in layer_dictionary.values():
 		var tilemap: TileMapManager = layer.tile_map_manager
-		tilemap.update_bitmask_region()
-		tilemap.update_dirty_quadrants()
+		for used_tile in tilemap.get_used_cells():
+			tilemap.update_bitmask_area(used_tile)
 
 func focus_layer(focus: bool, focus_layer: String):
 	for layer_uuid in layers:
@@ -199,7 +199,7 @@ func change_layer_type(layer: LevelLayer):
 	
 	add_child(new_layer)
 	layer_dictionary[new_layer_data.layer_metadata.layer_uuid] = new_layer
-	print(layer_dictionary[new_layer_data.layer_metadata.layer_uuid])
+
 	move_layer(new_layer, old_layer_index, true)
 	new_layer.load_in(new_layer_data)
 	
