@@ -176,7 +176,8 @@ func _physics_process(_delta: float) -> void:
 		is_instance_valid(stored_character.state) and 
 		(stored_character.state.name == "GroundPoundState" or stored_character.state.name == "GroundPoundEndState")
 	)
-	if stored_character.get_input(Character.input_names.crouch, true) or is_ground_pound and stored_character.get_input(Character.input_names.gp, false):
+	if (stored_character.get_input(Character.input_names.crouch, true) or is_ground_pound and stored_character.get_input(Character.input_names.gp, false)) and target_area != -1:
+		print(target_area)
 		start_entrance_animation(stored_character, is_ground_pound)
 
 

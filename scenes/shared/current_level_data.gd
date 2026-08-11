@@ -154,6 +154,7 @@ func get_area_args() -> Dictionary:
 		area_header = area_header as AreaHeader
 		
 		args[area_headers.find(area_header)] = area_header.name
+	args[-1] = "None"
 	return args
 
 func load_level_area(load_area_id: int, always_reload: bool = false) -> AreaData:
