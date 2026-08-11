@@ -3,7 +3,6 @@ extends TileMap
 
 
 var layer_data: LayerData
-var has_margins: bool = true
 
 func load_in(s_layer_data: LayerData):
 	layer_data = s_layer_data
@@ -25,9 +24,6 @@ func load_in(s_layer_data: LayerData):
 			tile_util.get_palette_id_from_packed(packed_tile),
 			false
 		)
-		if !area_rect.has_point(coord): has_margins = false
-
-	if has_margins: _add_margins("LevelMargin")
 #	for chunk in layer_data.tile_data.chunks:
 #		create_tilemap_chunk(chunk, layer_data.tile_data.chunks[chunk])
 	
@@ -79,30 +75,9 @@ func erase_tile(coords: Vector2, modify_data: bool = false):
 	
 	layer_data.tile_data.set_tile(coords, -1, -1, -1)
 
-
 func update_autotile(coords: Vector2, use_godot_autotile: bool = true):
 	if use_godot_autotile:
 		update_bitmask_area(coords)
 	else:
 		# Custom autotile logic goes here
 		pass
-
-# this is so the autotiling actually extends correctly. we only need this for
-# ground layers (and maybe even temporarily for that considering you can store
-# tile data literally anywhere now
-func _add_margins(tile_name: String):
-	var bounds: Rect2 = CurrentLevelData.current_area.header.bounds
-	var tile: int = tile_set.find_tile_by_name(tile_name)
-	
-	var left: int = bounds.position.x - 1
-	var top: int = bounds.position.y - 1
-	var right: int = bounds.end.x
-	var bottom: int = bounds.end.y
-	
-	for x in range(left, right + 1): 
-		set_cell(x, top, tile)
-		set_cell(x, bottom, tile)
-
-	for y in range(top, bottom + 1):
-		set_cell(left, y, tile)
-		set_cell(right, y, tile)

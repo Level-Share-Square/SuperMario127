@@ -1124,7 +1124,7 @@ func _physics_process(delta: float) -> void:
 			collided_last_frame = slide_count > 0
 	else:
 		collided_last_frame = false
-	
+		
 	# fix ground magnet mario
 	if is_grounded() and last_velocity.y < 0 and !is_on_ceiling() and !is_in_platform:
 		velocity.y = last_velocity.y * 0.95
@@ -1138,8 +1138,8 @@ func _physics_process(delta: float) -> void:
 		if (Singleton.PlayerSettings.other_player_id == -1 or Singleton.PlayerSettings.my_player_index == player_id)\
 		and controllable: # If not controllable, the player is (likely) collecting a shine
 			kill("fall")
-	if position.x < level_bounds.position.x * 32:
-		position.x = level_bounds.position.x * 32
+	if position.x < level_bounds.position.x * 32 + 10:
+		position.x = level_bounds.position.x * 32 + 10
 		velocity.x = 0
 	if position.x > level_bounds.end.x * 32 -1:
 		position.x = level_bounds.end.x * 32 -1
