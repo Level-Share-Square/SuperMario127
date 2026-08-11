@@ -6,13 +6,23 @@ func property_changed(key: String, new_value):
 
 func load_property(_editor: Editor, init_value, _property: Array, property_name = null):
 	.load_property(_editor, init_value, _property, property_name)
-	
 	var property_info = property[2]
+	$HSlider.share($SpinBox)
+	
+	$HSlider.hide()
+	$Padding.show()
 	if property_info is PropertyInfo:
+
+		if not is_inf(property_info.max_value) and not is_inf(property_info.max_value):
+			$HSlider.show()
+			$Padding.hide()
+
 		$SpinBox.min_value = property_info.min_value
 		$SpinBox.max_value = property_info.max_value
 		$SpinBox.custom_arrow_step = property_info.step
 		$SpinBox.step = property_info.step
+
+	property_changed(property[0], init_value)
 
 func change_property(new_value, save_to_data: bool = true):
 	.change_property(float(new_value), save_to_data)

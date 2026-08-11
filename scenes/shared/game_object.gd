@@ -43,7 +43,7 @@ var is_preview : bool = false
 
 var visibility: bool = true # for modulate
 
-var property_info: PoolStringArray = []
+var property_info: Dictionary = {}
 
 var property_overrides: Dictionary
 
@@ -301,7 +301,6 @@ func set_property_menu(key, menu_array: Array):
 	pass
 		
 func set_property_override(property: String, type: int, args):
-	print(property)
 	property_overrides.get_or_add(property, [type, [property, args]])
 
 
@@ -360,6 +359,9 @@ func is_object_hovered() -> bool:
 
 func get_global_editor_rect() -> Rect2:
 	return get_global_transform().xform(editor_rect)
+	
+func set_property_info(property: String, info: PropertyInfo):
+	property_info[property] = info
 
 func create_coin(coin_id: int, body: Node2D, physics: bool, velocity: Vector2) -> void:
 	var object_setup = create_object(body.global_position, coin_id, 0)

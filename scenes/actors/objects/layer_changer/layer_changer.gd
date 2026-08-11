@@ -28,8 +28,20 @@ func _register_properties():
 	register_property(6, "vertical", vertical)
 	register_property(7, "layer_uuid", layer_uuid)
 	register_property(8, "parallax_distance", parallax_distance)
+	set_property_info("parallax_distance", PropertyInfo.new(
+		"How far away this layer will be. Negative values are closer.",
+		1,
+		-1000,
+		1000
+	))
 	register_property(9, "tint", tint)
 	register_property(10, "opacity", opacity)
+	set_property_info("opacity", PropertyInfo.new(
+		"How transparent this layer will be.",
+		0.05,
+		0,
+		1
+	))
 	register_property(11, "is_visible", is_visible)
 	register_property(12, "move_to_index", move_to_index)
 	register_property(13, "one_time", one_time)

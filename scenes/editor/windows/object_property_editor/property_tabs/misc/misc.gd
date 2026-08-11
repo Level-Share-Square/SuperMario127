@@ -25,7 +25,11 @@ func load_misc_properties(_editor: Editor, _objects: Dictionary, common_properti
 			continue
 		var property_type: String = TYPE_LOOKUP.get(property[1], FALLBACK_TYPE)
 		var property_scene: PropertyEditor = load(TAB_SCENE_PATH % property_type).instance()
-		property_scene.load_property(editor, get_property_value(objects.keys()[0], property[0]), property)
+
+		if property[0] in objects.keys()[0].property_info:
+			property_scene.load_property(editor, property[2], [property[0], property[1], objects.keys()[0].property_info[property[0]]])
+		else:
+			property_scene.load_property(editor, property[2], property)
 		connect_signals(property_scene)
 		get_node("%Properties").add_child(property_scene)
 

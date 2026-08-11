@@ -64,7 +64,7 @@ func load_base_properties():
 	opacity.load_property(opacity, get_property_value("layer_opacity"), [
 		"layer_opacity",
 		TYPE_COLOR,
-		PropertyInfo.new(opacity.hint_tooltip, 0.25, 0, 1)
+		PropertyInfo.new(opacity.hint_tooltip, 0.1, 0, 1)
 	])
 	connect_signals(opacity)
 
