@@ -65,6 +65,7 @@ func _register_properties():
 		register_property(15, "required_shines", required_shines, true)
 
 
+
 func get_dialogue_from_tag(tag: String) -> Node:
 	if tag == "": return null
 	for node in get_tree().get_nodes_in_group("TaggedDialogue"):

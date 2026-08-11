@@ -92,7 +92,6 @@ func _register_properties():
 	set_property_override("tag", PropertyTab.OverrideTypes.DROPDOWN, [CurrentLevelData.level_tags, "get_liquid_args", [CurrentLevelData.level_tags, "liquid_tags"]])
 	set_liquid_property_menus()
 
-
 func _object_ready():
 	connect("transform_changed", self, "update")
 	connect("ready", self, "change_size")

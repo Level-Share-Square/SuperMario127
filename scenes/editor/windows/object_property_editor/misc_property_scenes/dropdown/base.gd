@@ -23,7 +23,12 @@ func load_property(_editor: Editor, init_value, _property: Array, property_name 
 	get_node("%PropertyName").text = NAME_TEXT % property_id.capitalize() if !property_name else NAME_TEXT % property_name
 	if dropdown_args.size() == 3:
 		add_option = true
-		
+
+	if property.size() > 2:
+		var property_info = property[2]
+		if property_info is PropertyInfo:
+			hint_tooltip = property_info.hint
+
 	yield(self, "ready")
 	reload_lookup_table()
 	

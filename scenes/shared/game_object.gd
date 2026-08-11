@@ -94,6 +94,7 @@ func _init():
 
 func _ready():
 	_register_properties()
+	_register_property_info()
 	load_placeable_item()
 	set_object_data(object_data)
 	instance_disabled_icon()
@@ -205,6 +206,9 @@ func _object_restored() -> void:
 
 
 func _register_properties():
+	pass
+	
+func _register_property_info():
 	pass
 
 
