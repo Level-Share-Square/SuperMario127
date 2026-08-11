@@ -130,7 +130,7 @@ func _ready():
 				var total_dict: Dictionary = CurrentLevelData.get_meta_collectibles()
 				collected_shines = total_dict.get("collected_shines", 0)
 			else:
-				collected_shines = CurrentLevelData.level_info.collected_shines.values().count(true)
+				collected_shines = CurrentLevelData.save_data.get_completed_mission_count()
 			
 			if collected_shines < required_shines:
 				queue_free()
