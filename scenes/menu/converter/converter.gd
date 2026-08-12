@@ -57,6 +57,7 @@ func on_conversion_finished():
 		conversion_thread.wait_to_finish()
 	print("Conversion complete.")
 	
+	LocalSettings.change_setting("Meta", "game_version", Singleton.PlayerSettings.game_version)
 	owner.transition("MainMenu")
 
 func get_files_for_conversion():

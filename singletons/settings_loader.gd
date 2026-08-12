@@ -17,7 +17,7 @@ func _init():
 	# we can initialize this here for now i suppose
 	if not config.has_section_key("Meta", "game_version"):
 		LocalSettings.change_setting("Meta", "game_version", Singleton.PlayerSettings.game_version)
-		handle_version_upgrade()
+
 
 func load_category(category: String, config: ConfigFile):
 	for key in config.get_section_keys(category):
@@ -69,7 +69,7 @@ func change_setting(key: String, new_value):
 		# Meta
 		"game_version":
 			if new_value != Singleton.PlayerSettings.game_version:
-				handle_version_upgrade()
+				handle_version_upgrade(new_value)
 
 
 ## related to various hotkeys
@@ -93,7 +93,7 @@ func _unhandled_input(event):
 		LocalSettings.change_setting("Audio", "bgm_volume", 0 if current_vol > 0 else last_non_muted_bgm)
 
 
-
 ## when you come from a version that's lower or higher than your current one
-func handle_version_upgrade():
-	print("Version mismatch! This currently does not do anything...")
+func handle_version_upgrade(old_version: String):
+	print("Version mismatch detected! Old version: %s, New version: %s" % [old_version, Singleton.PlayerSettings.game_version])
+	Singleton.PlayerSettings.game_version_mismatch = true

@@ -11,4 +11,5 @@ export var connect_to_ip = "127.0.0.1"
 
 #export var keybindings : Array = SettingsSaver.get_keybindings()
 export var legacy_wing_cap = false 
-export var game_version = "0.8.0"
+export var game_version = "0.10.0"
+export var game_version_mismatch: bool = false
