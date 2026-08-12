@@ -79,6 +79,7 @@ use_hidden_tabs_for_min_size = true
 script = ExtResource( 13 )
 
 [node name="Background" type="VBoxContainer" parent="ContentDivider/ContentMat/Tabs" index="0"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -405,7 +406,6 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Settings" type="ScrollContainer" parent="ContentDivider/ContentMat/Tabs" index="2"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -434,15 +434,15 @@ size_flags_vertical = 3
 script = ExtResource( 2 )
 
 [node name="Bounds" type="HBoxContainer" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer" index="0"]
-margin_top = 6.0
 margin_right = 308.0
-margin_bottom = 83.0
+margin_bottom = 89.0
 size_flags_vertical = 3
 script = ExtResource( 15 )
 
 [node name="Buttons" type="VBoxContainer" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Bounds" index="0"]
+margin_top = 5.0
 margin_right = 155.0
-margin_bottom = 77.0
+margin_bottom = 84.0
 size_flags_horizontal = 3
 size_flags_vertical = 4
 custom_constants/separation = -1
@@ -450,33 +450,33 @@ custom_constants/separation = -1
 [node name="Top" type="HBoxContainer" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Bounds/Buttons" index="0"]
 unique_name_in_owner = true
 margin_right = 155.0
-margin_bottom = 19.0
-custom_constants/separation = -1
+margin_bottom = 17.0
+custom_constants/separation = 0
 alignment = 1
 
 [node name="Add" type="Button" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Bounds/Buttons/Top" index="0"]
-margin_left = 59.0
-margin_right = 78.0
-margin_bottom = 19.0
+margin_left = 60.0
+margin_right = 77.0
+margin_bottom = 17.0
+rect_min_size = Vector2( 17, 0 )
 focus_mode = 0
-text = "--"
-flat = true
+theme_type_variation = "ButtonTransparent"
 script = ExtResource( 5 )
 
 [node name="IconMargin" type="MarginContainer" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Bounds/Buttons/Top/Add" index="0"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
-custom_constants/margin_right = 3
-custom_constants/margin_top = 3
-custom_constants/margin_left = 3
-custom_constants/margin_bottom = 3
+custom_constants/margin_right = 2
+custom_constants/margin_top = 2
+custom_constants/margin_left = 2
+custom_constants/margin_bottom = 2
 
 [node name="Icon" type="TextureRect" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Bounds/Buttons/Top/Add/IconMargin" index="0"]
-margin_left = 3.0
-margin_top = 3.0
-margin_right = 16.0
-margin_bottom = 16.0
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 15.0
+margin_bottom = 15.0
 mouse_filter = 2
 texture = ExtResource( 16 )
 expand = true
@@ -484,121 +484,131 @@ stretch_mode = 6
 
 [node name="Subtract" type="Button" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Bounds/Buttons/Top" index="1"]
 margin_left = 77.0
-margin_right = 96.0
-margin_bottom = 19.0
+margin_right = 94.0
+margin_bottom = 17.0
+rect_min_size = Vector2( 17, 0 )
 focus_mode = 0
-text = "--"
-flat = true
+theme_type_variation = "ButtonTransparent"
 script = ExtResource( 5 )
 
 [node name="IconMargin" type="MarginContainer" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Bounds/Buttons/Top/Subtract" index="0"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
-custom_constants/margin_right = 3
-custom_constants/margin_top = 3
-custom_constants/margin_left = 3
-custom_constants/margin_bottom = 3
+custom_constants/margin_right = 2
+custom_constants/margin_top = 2
+custom_constants/margin_left = 2
+custom_constants/margin_bottom = 2
 
 [node name="Icon" type="TextureRect" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Bounds/Buttons/Top/Subtract/IconMargin" index="0"]
-margin_left = 3.0
-margin_top = 3.0
-margin_right = 16.0
-margin_bottom = 16.0
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 15.0
+margin_bottom = 15.0
 mouse_filter = 2
 texture = ExtResource( 14 )
 expand = true
 stretch_mode = 6
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Bounds/Buttons" index="1"]
-margin_top = 18.0
+margin_top = 16.0
 margin_right = 155.0
-margin_bottom = 59.0
-custom_constants/separation = 3
+margin_bottom = 63.0
+custom_constants/separation = 0
 alignment = 1
 
 [node name="Left" type="VBoxContainer" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Bounds/Buttons/HBoxContainer2" index="0"]
 unique_name_in_owner = true
-margin_left = 35.0
-margin_right = 54.0
-margin_bottom = 41.0
-custom_constants/separation = 3
+margin_left = 36.0
+margin_right = 53.0
+margin_bottom = 47.0
+custom_constants/separation = 5
 alignment = 1
 
 [node name="Add" type="Button" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Bounds/Buttons/HBoxContainer2/Left" index="0"]
-margin_right = 19.0
-margin_bottom = 19.0
+margin_top = 4.0
+margin_right = 17.0
+margin_bottom = 21.0
+rect_min_size = Vector2( 17, 0 )
 focus_mode = 0
 size_flags_horizontal = 5
 size_flags_vertical = 4
-text = "--"
-flat = true
+theme_type_variation = "ButtonTransparent"
 script = ExtResource( 5 )
 
 [node name="IconMargin" type="MarginContainer" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Bounds/Buttons/HBoxContainer2/Left/Add" index="0"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
-custom_constants/margin_right = 3
-custom_constants/margin_top = 3
-custom_constants/margin_left = 3
-custom_constants/margin_bottom = 3
+custom_constants/margin_right = 2
+custom_constants/margin_top = 2
+custom_constants/margin_left = 2
+custom_constants/margin_bottom = 2
 
 [node name="Icon" type="TextureRect" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Bounds/Buttons/HBoxContainer2/Left/Add/IconMargin" index="0"]
-margin_left = 3.0
-margin_top = 3.0
-margin_right = 16.0
-margin_bottom = 16.0
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 15.0
+margin_bottom = 15.0
 mouse_filter = 2
-texture = ExtResource( 17 )
+texture = ExtResource( 18 )
 expand = true
 stretch_mode = 6
 
 [node name="Subtract" type="Button" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Bounds/Buttons/HBoxContainer2/Left" index="1"]
-margin_top = 22.0
-margin_right = 19.0
-margin_bottom = 41.0
+margin_top = 26.0
+margin_right = 17.0
+margin_bottom = 43.0
+rect_min_size = Vector2( 17, 0 )
 focus_mode = 0
 size_flags_horizontal = 5
 size_flags_vertical = 4
-text = "--"
-flat = true
+theme_type_variation = "ButtonTransparent"
 script = ExtResource( 5 )
 
 [node name="IconMargin" type="MarginContainer" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Bounds/Buttons/HBoxContainer2/Left/Subtract" index="0"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
-custom_constants/margin_right = 3
-custom_constants/margin_top = 3
-custom_constants/margin_left = 3
-custom_constants/margin_bottom = 3
+custom_constants/margin_right = 2
+custom_constants/margin_top = 2
+custom_constants/margin_left = 2
+custom_constants/margin_bottom = 2
 
 [node name="Icon" type="TextureRect" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Bounds/Buttons/HBoxContainer2/Left/Subtract/IconMargin" index="0"]
-margin_left = 3.0
-margin_top = 3.0
-margin_right = 16.0
-margin_bottom = 16.0
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 15.0
+margin_bottom = 15.0
 mouse_filter = 2
 texture = ExtResource( 17 )
 expand = true
 stretch_mode = 6
 
-[node name="Labels" type="VBoxContainer" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Bounds/Buttons/HBoxContainer2" index="1"]
-margin_left = 57.0
-margin_right = 98.0
-margin_bottom = 41.0
-custom_constants/separation = 3
+[node name="MarginContainer" type="MarginContainer" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Bounds/Buttons/HBoxContainer2" index="1"]
+margin_left = 53.0
+margin_right = 102.0
+margin_bottom = 47.0
+custom_constants/margin_right = 4
+custom_constants/margin_top = 4
+custom_constants/margin_left = 4
+custom_constants/margin_bottom = 4
+
+[node name="Labels" type="VBoxContainer" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Bounds/Buttons/HBoxContainer2/MarginContainer" index="0"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 45.0
+margin_bottom = 43.0
+custom_constants/separation = 5
 alignment = 1
 
-[node name="XLabel" type="Label" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Bounds/Buttons/HBoxContainer2/Labels" index="0"]
+[node name="XLabel" type="Label" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Bounds/Buttons/HBoxContainer2/MarginContainer/Labels" index="0"]
 unique_name_in_owner = true
-margin_top = 2.0
 margin_right = 41.0
-margin_bottom = 19.0
+margin_bottom = 17.0
 text = "Y: 220"
 
-[node name="YLabel" type="Label" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Bounds/Buttons/HBoxContainer2/Labels" index="1"]
+[node name="YLabel" type="Label" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Bounds/Buttons/HBoxContainer2/MarginContainer/Labels" index="1"]
 unique_name_in_owner = true
 margin_top = 22.0
 margin_right = 41.0
@@ -607,66 +617,67 @@ text = "Y: 220"
 
 [node name="Right" type="VBoxContainer" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Bounds/Buttons/HBoxContainer2" index="2"]
 unique_name_in_owner = true
-margin_left = 101.0
-margin_right = 120.0
-margin_bottom = 41.0
-custom_constants/separation = 3
+margin_left = 102.0
+margin_right = 119.0
+margin_bottom = 47.0
+custom_constants/separation = 5
 alignment = 1
 
 [node name="Add" type="Button" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Bounds/Buttons/HBoxContainer2/Right" index="0"]
-margin_right = 19.0
-margin_bottom = 19.0
+margin_top = 4.0
+margin_right = 17.0
+margin_bottom = 21.0
+rect_min_size = Vector2( 17, 0 )
 focus_mode = 0
 size_flags_horizontal = 5
 size_flags_vertical = 4
-text = "--"
-flat = true
+theme_type_variation = "ButtonTransparent"
 script = ExtResource( 5 )
 
 [node name="IconMargin" type="MarginContainer" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Bounds/Buttons/HBoxContainer2/Right/Add" index="0"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
-custom_constants/margin_right = 3
-custom_constants/margin_top = 3
-custom_constants/margin_left = 3
-custom_constants/margin_bottom = 3
+custom_constants/margin_right = 2
+custom_constants/margin_top = 2
+custom_constants/margin_left = 2
+custom_constants/margin_bottom = 2
 
 [node name="Icon" type="TextureRect" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Bounds/Buttons/HBoxContainer2/Right/Add/IconMargin" index="0"]
-margin_left = 3.0
-margin_top = 3.0
-margin_right = 16.0
-margin_bottom = 16.0
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 15.0
+margin_bottom = 15.0
 mouse_filter = 2
 texture = ExtResource( 17 )
 expand = true
 stretch_mode = 6
 
 [node name="Subtract" type="Button" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Bounds/Buttons/HBoxContainer2/Right" index="1"]
-margin_top = 22.0
-margin_right = 19.0
-margin_bottom = 41.0
+margin_top = 26.0
+margin_right = 17.0
+margin_bottom = 43.0
+rect_min_size = Vector2( 17, 0 )
 focus_mode = 0
 size_flags_horizontal = 5
 size_flags_vertical = 4
-text = "--"
-flat = true
+theme_type_variation = "ButtonTransparent"
 script = ExtResource( 5 )
 
 [node name="IconMargin" type="MarginContainer" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Bounds/Buttons/HBoxContainer2/Right/Subtract" index="0"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
-custom_constants/margin_right = 3
-custom_constants/margin_top = 3
-custom_constants/margin_left = 3
-custom_constants/margin_bottom = 3
+custom_constants/margin_right = 2
+custom_constants/margin_top = 2
+custom_constants/margin_left = 2
+custom_constants/margin_bottom = 2
 
 [node name="Icon" type="TextureRect" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Bounds/Buttons/HBoxContainer2/Right/Subtract/IconMargin" index="0"]
-margin_left = 3.0
-margin_top = 3.0
-margin_right = 16.0
-margin_bottom = 16.0
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 15.0
+margin_bottom = 15.0
 mouse_filter = 2
 texture = ExtResource( 18 )
 expand = true
@@ -674,37 +685,37 @@ stretch_mode = 6
 
 [node name="Bottom" type="HBoxContainer" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Bounds/Buttons" index="2"]
 unique_name_in_owner = true
-margin_top = 58.0
+margin_top = 62.0
 margin_right = 155.0
-margin_bottom = 77.0
-custom_constants/separation = -1
+margin_bottom = 79.0
+custom_constants/separation = 0
 alignment = 1
 
 [node name="Add" type="Button" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Bounds/Buttons/Bottom" index="0"]
-margin_left = 59.0
-margin_right = 78.0
-margin_bottom = 19.0
+margin_left = 60.0
+margin_right = 77.0
+margin_bottom = 17.0
+rect_min_size = Vector2( 17, 0 )
 focus_mode = 0
 size_flags_horizontal = 5
 size_flags_vertical = 4
-text = "--"
-flat = true
+theme_type_variation = "ButtonTransparent"
 script = ExtResource( 5 )
 
 [node name="IconMargin" type="MarginContainer" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Bounds/Buttons/Bottom/Add" index="0"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
-custom_constants/margin_right = 3
-custom_constants/margin_top = 3
-custom_constants/margin_left = 3
-custom_constants/margin_bottom = 3
+custom_constants/margin_right = 2
+custom_constants/margin_top = 2
+custom_constants/margin_left = 2
+custom_constants/margin_bottom = 2
 
 [node name="Icon" type="TextureRect" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Bounds/Buttons/Bottom/Add/IconMargin" index="0"]
-margin_left = 3.0
-margin_top = 3.0
-margin_right = 16.0
-margin_bottom = 16.0
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 15.0
+margin_bottom = 15.0
 mouse_filter = 2
 texture = ExtResource( 14 )
 expand = true
@@ -712,30 +723,29 @@ stretch_mode = 6
 
 [node name="Subtract" type="Button" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Bounds/Buttons/Bottom" index="1"]
 margin_left = 77.0
-margin_right = 96.0
-margin_bottom = 19.0
+margin_right = 94.0
+margin_bottom = 17.0
+rect_min_size = Vector2( 17, 0 )
 focus_mode = 0
-mouse_filter = 2
 size_flags_horizontal = 5
 size_flags_vertical = 4
-text = "--"
-flat = true
+theme_type_variation = "ButtonTransparent"
 script = ExtResource( 5 )
 
 [node name="IconMargin" type="MarginContainer" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Bounds/Buttons/Bottom/Subtract" index="0"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
-custom_constants/margin_right = 3
-custom_constants/margin_top = 3
-custom_constants/margin_left = 3
-custom_constants/margin_bottom = 3
+custom_constants/margin_right = 2
+custom_constants/margin_top = 2
+custom_constants/margin_left = 2
+custom_constants/margin_bottom = 2
 
 [node name="Icon" type="TextureRect" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Bounds/Buttons/Bottom/Subtract/IconMargin" index="0"]
-margin_left = 3.0
-margin_top = 3.0
-margin_right = 16.0
-margin_bottom = 16.0
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 15.0
+margin_bottom = 15.0
 mouse_filter = 2
 texture = ExtResource( 16 )
 expand = true
@@ -744,28 +754,28 @@ stretch_mode = 6
 [node name="VSeparator" type="VSeparator" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Bounds" index="1"]
 margin_left = 159.0
 margin_right = 163.0
-margin_bottom = 77.0
+margin_bottom = 89.0
 size_flags_vertical = 3
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Bounds" index="2"]
 margin_left = 167.0
 margin_right = 308.0
-margin_bottom = 77.0
+margin_bottom = 89.0
 custom_constants/separation = 10
 alignment = 1
 
 [node name="Label" type="Label" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Bounds/HBoxContainer2" index="0"]
-margin_top = 30.0
+margin_top = 36.0
 margin_right = 65.0
-margin_bottom = 47.0
+margin_bottom = 53.0
 text = "Increment:"
 
 [node name="Increment" type="SpinBox" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Bounds/HBoxContainer2" index="1"]
 unique_name_in_owner = true
 margin_left = 75.0
-margin_top = 30.0
+margin_top = 36.0
 margin_right = 141.0
-margin_bottom = 47.0
+margin_bottom = 53.0
 size_flags_horizontal = 0
 size_flags_vertical = 4
 value = 10.0
