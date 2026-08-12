@@ -43,5 +43,6 @@ max_value = inf
 custom_arrow_step = 1.0
 script = ExtResource( 2 )
 
+[connection signal="drag_ended" from="HSlider" to="." method="done_editing"]
 [connection signal="done_editing" from="SpinBox" to="." method="done_editing"]
 [connection signal="value_changed" from="SpinBox" to="." method="change_property" binds= [ false ]]

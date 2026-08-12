@@ -45,5 +45,7 @@ step = 0.001
 custom_arrow_step = 1.0
 script = ExtResource( 2 )
 
+[connection signal="drag_ended" from="HSlider" to="." method="done_editing"]
+[connection signal="value_changed" from="HSlider" to="." method="change_value_no_signal" flags=3]
 [connection signal="done_editing" from="SpinBox" to="." method="done_editing"]
 [connection signal="value_changed" from="SpinBox" to="." method="change_property" binds= [ false ]]

@@ -21,6 +21,16 @@ func _is_pos_in_line_edit(check_pos : Vector2):
 		and check_pos.x < gr.end.x and check_pos.y < gr.end.y)
 
 
+func _ready():
+	get_line_edit().connect("text_entered", self, "text_entered")
+
+
+func text_entered(new_text: String = "") -> void:
+	get_line_edit().release_focus()
+	value = float(get_line_edit().text)
+	emit_signal("done_editing")
+
+
 func _input(event):
 	if not is_visible_in_tree(): return
 	if event is InputEventMouseButton:
@@ -34,3 +44,4 @@ func _input(event):
 		elif not event.pressed and is_dragging:
 			is_dragging = false
 			emit_signal("done_editing")
+	
