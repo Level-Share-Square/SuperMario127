@@ -14,6 +14,7 @@ onready var sprite = $"%Sprite"
 
 
 func _ready():
+	if not "mode" in get_tree().get_current_scene(): return
 	gravity = CurrentLevelData.current_area.header.gravity
 
 

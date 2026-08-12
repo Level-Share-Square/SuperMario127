@@ -16,6 +16,9 @@ export var play_temp_music : bool
 export var display_icon: Texture
 
 func _ready():
+	if not "mode" in get_tree().get_current_scene():
+		queue_free()
+		return
 	character = get_parent().get_parent() # This really isn't a great idea
 	timer_manager = character.get_owner().get_timer_manager()
 

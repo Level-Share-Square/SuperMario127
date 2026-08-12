@@ -11,6 +11,7 @@ onready var bluesky_banner = $"%BlueskyBanner"
 onready var splash_screen = $"%SplashScreen"
 onready var icon = $"%Icon"
 onready var twitter_icon = $"%TwitterIcon"
+onready var end_cards = $"%EndCards"
 
 func _ready():
 	#return
@@ -46,9 +47,9 @@ func _ready():
 #	bluesky_banner_img.flip_y()
 #	bluesky_banner_img.save_png("res://assets/artwork/bluesky/banner.png")
 
-	var splash_img: Image = splash_screen.get_node("Viewport").get_texture().get_data()
-	splash_img.flip_y()
-	splash_img.save_png("res://assets/artwork/splash_screen.png")
+#	var splash_img: Image = splash_screen.get_node("Viewport").get_texture().get_data()
+#	splash_img.flip_y()
+#	splash_img.save_png("res://assets/artwork/splash_screen.png")
 
 #	var icon_img: Image = icon.get_node("Viewport").get_texture().get_data()
 #	icon_img.flip_y()
@@ -57,3 +58,8 @@ func _ready():
 #	var twitter_icon_img: Image = twitter_icon.get_node("Viewport").get_texture().get_data()
 #	twitter_icon_img.flip_y()
 #	twitter_icon_img.save_png("res://assets/artwork/twitter/twitter_icon.png")
+
+	var end_cards_img: Image = end_cards.get_node("Viewport").get_texture().get_data()
+	end_cards_img.convert(Image.FORMAT_RGBA8)
+	end_cards_img.flip_y()
+	end_cards_img.save_png("res://assets/artwork/youtube/end_cards_1.png")

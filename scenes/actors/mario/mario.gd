@@ -146,7 +146,7 @@ export var direction_on_stick := 1
 export var rotating := true
 export var swimming := false
 export var spawn_pos := Vector2(0, 0)
-export var gravity : float
+export var gravity : float 
 
 export var disable_movement := false
 export var disable_turning := false
@@ -246,7 +246,7 @@ export var inputs : Array
 export var controlled_locally = true
 export var rotating_jump = false
 
-var level_bounds = Rect2(0, 0, 80, 30)
+export var level_bounds = Rect2(0, 0, 80, 30)
 var number_of_players = 2
 
 var squish_lerp: bool = false
@@ -413,7 +413,11 @@ func play_shine_sound() -> void:
 
 # warning-ignore: unused_argument
 func load_in():
-	level_bounds = CurrentLevelData.current_area.header.bounds
+	if "mode" in get_tree().get_current_scene():
+		level_bounds = CurrentLevelData.current_area.header.bounds
+	else:
+		level_bounds = Rect2(-INF, -INF, INF, INF)
+	
 	for exception in collision_exceptions:
 		add_collision_exception_with(get_node(exception))
 	var _connect = player_collision.connect("body_entered", self, "player_hit")
@@ -456,7 +460,10 @@ func load_in():
 	collision_raycast.disabled = false
 	left_collision.disabled = false
 	right_collision.disabled = false
-	gravity = CurrentLevelData.current_area.header.gravity
+	if "mode" in get_tree().get_current_scene():
+		gravity = CurrentLevelData.current_area.header.gravity
+	else:
+		gravity = 7.82
 	
 	# reset some stuff that can be changed by accident when using the editor
 	sprite.playing = true
@@ -464,7 +471,7 @@ func load_in():
 	collected_shine.get_node("ShineParticles").emitting = false
 	
 	# the ghost of player 2 shall not haunt my teleporter code,,,
-	if player_id != 0:
+	if player_id != 0 or not "mode" in get_tree().get_current_scene():
 		return
 	
 	# time score
@@ -981,10 +988,11 @@ func _physics_process(delta: float) -> void:
 			state_node.handle_update(delta)
 		for nozzle_node in nozzles_node.get_children():
 			nozzle_node.handle_update(delta)
-		for powerup_node in powerups_node.get_children():
-			powerup_node.handle_update(delta)
-		
-		handle_liquids(liquid_detector.get_overlapping_areas(), delta)
+			
+		if "mode" in get_tree().get_current_scene():
+			for powerup_node in powerups_node.get_children():
+				powerup_node.handle_update(delta)
+			handle_liquids(liquid_detector.get_overlapping_areas(), delta)
 	
 	# Handle powerup
 	if is_instance_valid(powerup):
@@ -1155,6 +1163,8 @@ func _physics_process(delta: float) -> void:
 	last_velocity = velocity
 	last_move_direction = move_direction
 	
+	if not "mode" in get_tree().get_current_scene(): return
+		
 	if get_tree().get_current_scene().switch_timer < 0.2 and get_tree().get_current_scene().switch_timer > 0:
 		if p_block_detector.get_overlapping_areas().size() > 0:
 			get_tree().get_current_scene().switch_timer = 0.2

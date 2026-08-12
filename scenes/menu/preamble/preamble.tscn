@@ -184,7 +184,7 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
-[sub_resource type="Shader" id=37]
+[sub_resource type="Shader" id=40]
 code = "shader_type canvas_item;
 
 uniform float u_amount = 0.1;
@@ -200,19 +200,19 @@ void fragment() {
 	COLOR = (texture(TEXTURE, UV) + n * u_amount);
 }"
 
-[sub_resource type="ShaderMaterial" id=36]
-shader = SubResource( 37 )
+[sub_resource type="ShaderMaterial" id=42]
+shader = SubResource( 40 )
 shader_param/u_amount = 1.75
 
 [sub_resource type="CanvasItemMaterial" id=32]
 blend_mode = 1
 
-[sub_resource type="Gradient" id=38]
+[sub_resource type="Gradient" id=41]
 offsets = PoolRealArray( 0.0502793, 1 )
 colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 0.643137 )
 
 [sub_resource type="GradientTexture2D" id=29]
-gradient = SubResource( 38 )
+gradient = SubResource( 41 )
 fill_from = Vector2( 0.5, 0.1 )
 fill_to = Vector2( 0.5, 1 )
 
@@ -276,7 +276,7 @@ rect_scale = Vector2( 0.225, 0.225 )
 
 [node name="Overlay" parent="Container/Background" index="3"]
 modulate = Color( 0.054902, 0.0117647, 0.152941, 0.270588 )
-material = SubResource( 36 )
+material = SubResource( 42 )
 
 [node name="Overlay" type="TextureRect" parent="Container"]
 modulate = Color( 0.752941, 0.752941, 1, 0.486275 )
