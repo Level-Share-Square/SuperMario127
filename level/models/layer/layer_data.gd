@@ -13,6 +13,21 @@ func _init(set_layer_metadata: LayerMetadata, set_tile_data: TileData, set_objec
 	object_data = set_object_data
 	tile_data = set_tile_data
 
+static func duplicate_metadata(other: LayerMetadata) -> LayerMetadata:
+	return LayerMetadata.new(
+		other.parallax_distance,
+		other.parallax_offset,
+		other.autoset_tint,
+		other.layer_tint,
+		other.order,
+		other.is_ground,
+		other.layer_name,
+		other.is_origin,
+		other.activated_mission_ids,
+		other.disabled,
+		other.layer_opacity,
+		other.layer_uuid
+	)
 
 func place_tile(coords: Vector2, tileset: int, type: int, palette: int = 0) -> void:
 	tile_data.set_tile(coords, tileset, type, palette)

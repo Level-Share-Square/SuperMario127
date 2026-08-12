@@ -2,7 +2,7 @@ class_name BaseLayerAction
 extends Action
 
 var shared: LevelShared
-var layer: LevelLayer
+var layer_uuid: String
 
 func add_layer(layer_data: LayerData, layer_index: int = -1, ground: bool = true):
 	if !layer_data:
@@ -16,7 +16,7 @@ func add_layer(layer_data: LayerData, layer_index: int = -1, ground: bool = true
 		layer_data.layer_metadata.layer_name = layer_data.layer_metadata.layer_name % (shared.layers.size() + 1)
 	
 	layer_index = layer_index if layer_index != -1 else shared.layers.size()
-	layer = shared.add_layer(layer_data, true, layer_index)
+	layer_uuid = shared.add_layer(layer_data, true, layer_index).layer_data.layer_metadata.layer_uuid
 
 func remove_layer():
-	shared.remove_layer(layer.layer_data.layer_metadata.layer_uuid, true)
+	shared.remove_layer(layer_uuid, true)

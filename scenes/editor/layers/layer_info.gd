@@ -12,6 +12,7 @@ onready var edit = $"%Edit"
 onready var select = $"%Select"
 onready var show_hide = $"%ShowHide"
 onready var delete = $"%Delete"
+onready var merge = $"%Merge"
 
 onready var hover_sound = $"%HoverSound"
 onready var click_sound = $"%ClickSound"
@@ -58,6 +59,7 @@ func load_layer(_layer_data: LayerData, _can_delete: bool) -> void:
 	show_hide.icon = eye_open if layer_metadata.layer_visible else eye_closed
 	
 	delete.disabled = can_delete
+	merge.disabled = layer_data.layer_metadata.order == shared.layers.size() - 1
 
 func delete_layer() -> void:
 	var editor = layer_dropdown.editor
@@ -129,3 +131,11 @@ func area_entered(_area: Area2D):
 
 func area_exited(_area: Area2D):
 	modulate.a = 1.0
+
+
+func merge_layer():
+	var action := MergeLayerAction.new()
+	action.layer_id = layer_data.layer_metadata.layer_uuid
+	action.other_layer_id = shared.get_layer_at(layer_data.layer_metadata.order + 1).layer_data.layer_metadata.layer_uuid
+	action.shared = shared
+	layer_dropdown.editor.action_manager.commit_action(action)
