@@ -12,7 +12,7 @@ func _ready():
 	editor.action_manager.connect("redo", self, "_update_parallax")
 
 func _update_parallax():
-	var cur_layer = shared.layer_dictionary[editor.layer]
+	var cur_layer = shared.layer_dictionary.get(editor.layer)
 	if cur_layer is LevelParallaxLayer:
 		set_parallax_distance(shared.layer_dictionary[editor.layer].parallax_scroll.parallax_distance)
 	else:
