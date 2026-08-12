@@ -23,29 +23,29 @@ func draw_tile(pos: Vector2) -> void:
 func fill_place(pos_x, pos_y):
 	var level_bounds: Rect2 = CurrentLevelData.current_area.header.bounds
 	var item = editor.selected_item
-	var empty_tile = [0,0,0]
+	var tile_to_fill = shared.get_tile(pos_x, pos_y, editor.layer)
 	var selected_tile = [item.tileset_id, item.tile_id, item.palette]
 	var cells := [Vector2(pos_x, pos_y)]
 	while cells:
 		var current_cell: Vector2 = cells.pop_back()
 		
 		var first_tile = shared.get_tile(current_cell.x - 1, current_cell.y, editor.layer)
-		if (first_tile == empty_tile and not is_erasing or first_tile == selected_tile and is_erasing) && editor.tile_buffer.get_cell(current_cell.x - 1, current_cell.y) == TileMap.INVALID_CELL && level_bounds.has_point(Vector2(current_cell.x - 1, current_cell.y)):
+		if (first_tile == tile_to_fill and not is_erasing or first_tile != [0, 0, 0] and is_erasing) && editor.tile_buffer.get_cell(current_cell.x - 1, current_cell.y) == TileMap.INVALID_CELL && level_bounds.has_point(Vector2(current_cell.x - 1, current_cell.y)):
 			cache_tile(current_cell.x - 1, current_cell.y)
 			cells.append( Vector2(current_cell.x - 1, current_cell.y) )
 	
 		var second_tile = shared.get_tile(current_cell.x + 1, current_cell.y, editor.layer)
-		if (second_tile == empty_tile and not is_erasing or second_tile == selected_tile and is_erasing) && editor.tile_buffer.get_cell(current_cell.x + 1, current_cell.y) == TileMap.INVALID_CELL && level_bounds.has_point(Vector2(current_cell.x + 1, current_cell.y)):
+		if (second_tile == tile_to_fill and not is_erasing or second_tile != [0, 0, 0] and is_erasing) && editor.tile_buffer.get_cell(current_cell.x + 1, current_cell.y) == TileMap.INVALID_CELL && level_bounds.has_point(Vector2(current_cell.x + 1, current_cell.y)):
 			cache_tile(current_cell.x + 1, current_cell.y)
 			cells.append( Vector2(current_cell.x + 1, current_cell.y) )
 
 		var third_tile = shared.get_tile(current_cell.x, current_cell.y - 1, editor.layer)
-		if (third_tile == empty_tile and not is_erasing or third_tile == selected_tile and is_erasing) && editor.tile_buffer.get_cell(current_cell.x, current_cell.y - 1) == TileMap.INVALID_CELL && level_bounds.has_point(Vector2(current_cell.x, current_cell.y - 1)):
+		if (third_tile == tile_to_fill and not is_erasing or third_tile != [0, 0, 0] and is_erasing) && editor.tile_buffer.get_cell(current_cell.x, current_cell.y - 1) == TileMap.INVALID_CELL && level_bounds.has_point(Vector2(current_cell.x, current_cell.y - 1)):
 			cache_tile(current_cell.x, current_cell.y - 1)
 			cells.append( Vector2(current_cell.x, current_cell.y - 1) )
 
 		var fourth_tile = shared.get_tile(current_cell.x, current_cell.y + 1, editor.layer)
-		if (fourth_tile == empty_tile and not is_erasing or fourth_tile == selected_tile and is_erasing) && editor.tile_buffer.get_cell(current_cell.x, current_cell.y + 1) == TileMap.INVALID_CELL && level_bounds.has_point(Vector2(current_cell.x, current_cell.y + 1)):
+		if (fourth_tile == tile_to_fill and not is_erasing or fourth_tile != [0, 0, 0] and is_erasing) && editor.tile_buffer.get_cell(current_cell.x, current_cell.y + 1) == TileMap.INVALID_CELL && level_bounds.has_point(Vector2(current_cell.x, current_cell.y + 1)):
 			cache_tile(current_cell.x, current_cell.y + 1)
 			cells.append( Vector2(current_cell.x, current_cell.y + 1))
 		
