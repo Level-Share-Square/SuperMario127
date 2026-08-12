@@ -78,6 +78,8 @@ func create_area():
 
 func paste_area():
 	var area_code: String = OS.get_clipboard()
+	area_code = area_code.strip_edges().strip_escapes()
+	
 	var area_header
 	if area_code.substr(0, 9) == "AreaData":
 		var validity_checker = ValidityChecker.new()
@@ -86,7 +88,7 @@ func paste_area():
 		for i in area.objects:
 			i["properties"].append(i["properties"].pop_front())
 		area_header = conversion_util.get_area_data_from_old_data(area).header
-	elif true:
+	elif level_code_validator_util.validate_area_code(area_code):
 		area_header = LevelCodeDeserializer.deserialize_area_code(area_code).header
 	else:
 		printerr("Invalid area code: ", area_code)
