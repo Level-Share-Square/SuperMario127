@@ -6,6 +6,7 @@ var other_layer_id
 var shared: LevelShared
 
 var old_data: Array
+var old_orders: Array
 var new_data
 
 func _do():
@@ -37,13 +38,16 @@ func _do():
 		new_layer_data.layer_metadata.is_ground = true
 		
 	old_data = [layer.layer_data, other_layer.layer_data]
-	new_layer_data.layer_metadata.order = layer.layer_data.layer_metadata.order
+	old_orders = [layer.layer_data.layer_metadata.order, other_layer.layer_data.layer_metadata.order]
+	new_layer_data.layer_metadata.order -= 1
 	
 	var editor = shared.get_parent()
 		
 	shared.remove_layer(layer_id, true)
 	shared.remove_layer(other_layer_id, true)
+	yield(shared, "child_order_changed")
 	var new_layer = shared.add_layer(new_layer_data, true, new_layer_data.layer_metadata.order)
+	
 	
 	if new_layer_data.layer_metadata.is_origin:
 		shared.origin = new_layer
@@ -53,11 +57,15 @@ func _do():
 	if (editor.layer == layer_id or editor.layer == other_layer_id):
 		editor.get_node("%LayerDropdown").select_layer(new_layer_data.layer_metadata.order, false)
 	
+	editor.get_node("%LayerDropdown").update_layers()
+	
+
 func _undo():
-	prints(old_data[0].layer_metadata.layer_name, old_data[1].layer_metadata.layer_name)
+
 	shared.remove_layer(new_data.layer_metadata.layer_uuid, true)
-	var layer_one = shared.add_layer(old_data[0], true, old_data[0].layer_metadata.order)
-	var layer_two = shared.add_layer(old_data[1], true, old_data[1].layer_metadata.order)
+	yield(shared, "child_order_changed")
+	var layer_one = shared.add_layer(old_data[0], true, old_orders[0])
+	var layer_two = shared.add_layer(old_data[1], true, old_orders[1])
 
 	if layer_one.layer_data.layer_metadata.is_origin: shared.origin = layer_one
 	if layer_two.layer_data.layer_metadata.is_origin: shared.origin = layer_two
@@ -65,3 +73,5 @@ func _undo():
 	var editor = shared.get_parent()
 	if editor.layer == new_data.layer_metadata.layer_uuid:
 		editor.get_node("%LayerDropdown").select_layer(old_data[1].layer_metadata.order, false)
+
+	editor.get_node("%LayerDropdown").update_layers()

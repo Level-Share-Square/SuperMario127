@@ -81,17 +81,20 @@ func add_layer(layer_data = null, add_to_data: bool = false, at: int = layers.si
 		new_layer = parallax_layer_scene.instance()
 	
 	add_child(new_layer)
-	move_child(new_layer, at)
 	
 	var uuid: String = layer_data.layer_metadata.layer_uuid
-	
+
 	new_layer.load_in(layer_data)
 	layers.insert(at, uuid)
 	layer_dictionary.get_or_add(uuid, new_layer)
+
 	emit_signal("layer_added", layer_data)
 	
 	if add_to_data:
 		CurrentLevelData.current_area.layers.insert(at, layer_data)
+
+	if at != layers.size():
+		move_layer(new_layer, at, true)
 
 	return new_layer
 
