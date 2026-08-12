@@ -21,7 +21,8 @@ func load_misc_properties(_editor: Editor, _objects: Dictionary, common_properti
 	for property in common_properties:
 		if property[0] in common_property_overrides:
 			var override_data = objects.keys()[0].property_overrides[property[0]].duplicate(true)
-			override_data[1].append(_objects.keys()[0].property_info[property[0]])
+			if _objects.keys()[0].property_info.has(property[0]):
+				override_data[1].append(_objects.keys()[0].property_info[property[0]])
 			load_property_override(property[0], OverrideTypes.keys()[override_data[0]], override_data)
 			continue
 		var property_type: String = TYPE_LOOKUP.get(property[1], FALLBACK_TYPE)

@@ -35,6 +35,17 @@ func _register_properties() -> void:
 	register_property(8, "level_path", level_path, CurrentLevelData.is_campaign)
 
 
+func _register_property_info() -> void:
+	set_property_info("target_area", PropertyInfo.new("The name of the area to teleport to.", 1, -INF, INF, ["", ""], ["", ""]))
+	set_property_info("tag", PropertyInfo.new("The tag this object will teleport to and from.", 1, -INF, INF, ["", ""], ["", ""]))
+	var teleport_mode_hint: String = "Whether this object should teleport locally, to a different area, or to a diferent level."
+	if not CurrentLevelData.is_campaign:
+		teleport_mode_hint = "Whether this object should teleport locally, or to a different area."
+	set_property_info("teleport_mode", PropertyInfo.new(teleport_mode_hint, 1, -INF, INF, ["", ""], ["", ""]))
+	set_property_info("max_pan_distance", PropertyInfo.new("The max length to pan the camera before fading out.", 1, 0, INF, ["", ""], [" Tile(s)", ""]))
+	set_property_info("level_path", PropertyInfo.new("The relative path of the level to teleport to.", 1, -INF, INF, ["", ""], ["", ""]))
+
+
 ### ANIMATION
 func start_entrance_animation(character: Character) -> void:
 	character.set_dive_collision(false)
