@@ -66,6 +66,14 @@ func _register_properties() -> void:
 	register_property(7, "faces_right", faces_right)
 	register_property(8, "target_zoom", target_zoom)
 	
+func _register_property_info() -> void:
+	set_property_info("launch_power", PropertyInfo.new("The velocity at which this object launches the player.", 1, 0, INF, ["", ""], ["", ""]))
+	set_property_info("min_rotation", PropertyInfo.new("The minimum radius in degrees you can aim this cannon from the center.\nMake sure this number is less than or equal to Max Rotation!", 1, -360, 360, ["", ""], ["", ""]))
+	set_property_info("max_rotation", PropertyInfo.new("The maximum radius in degrees you can aim this cannon from the center.", 1, -360, 360, ["", ""], ["", ""]))
+	set_property_info("faces_right", PropertyInfo.new("Determines if this cannon pivots left or right from it's center while aiming.", 1, -INF, INF, ["", ""], ["", ""]))
+	set_property_info("target_zoom", PropertyInfo.new("Multiplier of the camera's zoom while aiming.", 0.1, 0, INF, ["", ""], ["", ""]))
+
+
 func _ready() -> void:
 	set_physics_process(false)
 

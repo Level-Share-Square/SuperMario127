@@ -42,6 +42,12 @@ func _register_properties():
 	register_property(6, "physics", physics)
 	register_property(7, "autoroll", autoroll)
 
+func _register_property_info():
+	set_property_info("color", PropertyInfo.new("The color of the object.", 1, -INF, INF, ["", ""], ["", ""]))
+	set_property_info("max_speed", PropertyInfo.new("The max speed of the barrel while rolling.", 1, 50, INF, ["", ""], ["", ""]))
+	set_property_info("physics", PropertyInfo.new("Have the object interact with the world.", 1, -INF, INF, ["", ""], ["", ""]))
+	set_property_info("autoroll", PropertyInfo.new("Have the barrel start on its side, in a rolling state.", 1, -INF, INF, ["", ""], ["", ""]))
+
 
 func _ready() -> void:
 	CurrentLevelData.enemies_instanced += 1

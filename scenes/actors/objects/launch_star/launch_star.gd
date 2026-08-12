@@ -41,6 +41,12 @@ func _register_properties():
 	register_property(6, "speed", speed)
 	base_hidden_properties.append("rotation_degrees")
 
+
+func _register_property_info() -> void:
+	set_property_info("curve", PropertyInfo.new("Determines the path the player will travel while flying.", 1, -INF, INF, ["", ""], ["", ""]))
+	set_property_info("speed", PropertyInfo.new("The velocity at which the player travels while flying.", 1, -INF, INF, ["", ""], ["", ""]))
+
+
 func invalid_curve(check : Curve2D):
 	if(!is_instance_valid(check) or check.get_point_count() == 0):
 		return true

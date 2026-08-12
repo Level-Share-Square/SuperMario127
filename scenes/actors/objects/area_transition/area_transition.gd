@@ -22,6 +22,12 @@ func _register_properties():
 	register_property(11, "stops_camera", stops_camera)
 	base_hidden_properties.append("rotation_degrees")
 
+func _register_property_info():
+	._register_property_info()
+	set_property_info("vertical", PropertyInfo.new("Whether this object is oriented vertically.", 1, -INF, INF, ["", ""], ["", ""]))
+	set_property_info("parts", PropertyInfo.new("How long this object should extend.", 1, 1, INF, ["", ""], ["", ""]))
+	set_property_info("stops_camera", PropertyInfo.new("Stop the camera from moving past this object.", 1, -INF, INF, ["", ""], ["", ""]))
+
 
 ### AREA TRANSITION STUFF
 func _ready():

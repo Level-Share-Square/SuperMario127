@@ -27,7 +27,11 @@ var cooldown = 0.0
 	
 func _register_properties():
 	register_property(4, "launch_power", launch_power, 10)
-	
+
+func _register_property_info() -> void:
+	set_property_info("launch_power", PropertyInfo.new("The velocity at which this object slings the player.", 1, -INF, INF, ["", ""], ["", ""]))
+
+
 func set_state(to:int):
 	match(to):
 		states.IDLE:

@@ -34,7 +34,7 @@ func _register_properties():
 	register_property(12, "move_to_index", move_to_index)
 	register_property(13, "one_time", one_time)
 	set_property_override("layer_uuid", PropertyTab.OverrideTypes.DROPDOWN, [self, "get_layer_args"])
-	
+
 func _register_property_info():
 	set_property_info("parts", PropertyInfo.new("How long this object should extend.", 1, 1, INF, ["", ""], ["", ""]))
 	set_property_info("stops_camera", PropertyInfo.new("Whether or not this object should stop the camera.\nDepends on parts.", 1, -INF, INF, ["", ""], ["", ""]))

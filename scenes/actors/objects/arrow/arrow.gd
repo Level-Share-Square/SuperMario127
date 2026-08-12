@@ -16,9 +16,15 @@ onready var animationplayer = $AnimationPlayer
 
 func _register_properties(): 
 	register_property(5, "color", color)
+	register_property(8, "outline_color", outline_color)
 	register_property(6, "moves", moves)
 	register_property(7, "rainbow", rainbow)
-	register_property(8, "outline_color", outline_color)
+
+func _register_property_info():
+	set_property_info("color", PropertyInfo.new("The color of the object.", 1, -INF, INF, ["", ""], ["", ""]))
+	set_property_info("moves", PropertyInfo.new("Move the object back and forth.", 1, -INF, INF, ["", ""], ["", ""]))
+	set_property_info("rainbow", PropertyInfo.new("Steadily shift color along the rainbow.", 1, -INF, INF, ["", ""], ["", ""]))
+	set_property_info("outline_color", PropertyInfo.new("The color of the object's outline.", 1, -INF, INF, ["", ""], ["", ""]))
 
 
 func _ready():
