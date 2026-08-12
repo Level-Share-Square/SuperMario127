@@ -58,55 +58,12 @@ func _unhandled_input(event: InputEvent):
 			working_zoom = -scroll_zoom_amount
 		
 		if is_zooming:
-			var prev_zoom: Vector2 = Vector2(zoom_level, zoom_level)
-			zoom = prev_zoom
 			var mouse_pos_before: Vector2 = get_global_mouse_position()
 			add_zoom_level(working_zoom)
 			zoom = Vector2(zoom_level, zoom_level)
-			var new_zoom: float = zoom_level
 			var new_pos: Vector2 = position + (mouse_pos_before - get_global_mouse_position())
-			
-			tween.stop_all()
-			tween.interpolate_property(
-				self,
-				"zoom",
-				prev_zoom,
-				new_zoom,
-				0.2,
-				Tween.TRANS_CIRC,
-				Tween.EASE_OUT
-			)
-			tween.interpolate_property(
-				self,
-				"zoom_level",
-				prev_zoom.x,
-				new_zoom,
-				0.2,
-				Tween.TRANS_CIRC,
-				Tween.EASE_OUT
-			)
-			tween.interpolate_property(
-				self,
-				"position",
-				position,
-				new_pos,
-				0.2,
-				Tween.TRANS_QUAD,
-				Tween.EASE_OUT
-			)
-			tween.interpolate_property(
-				self,
-				"sim_pos",
-				position,
-				new_pos,
-				0.2,
-				Tween.TRANS_QUAD,
-				Tween.EASE_OUT
-			)
-			tween.start()
-			
-			zoom_level = prev_zoom.x
-			zoom = prev_zoom
+			position = new_pos
+			sim_pos = position
 	
 	
 	for held_action in held_actions.keys():
