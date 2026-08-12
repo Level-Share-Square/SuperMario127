@@ -40,7 +40,8 @@ func select_layer(index: int, toggle_dropdown: bool = true) -> void:
 	var layer = shared.get_layer_at(index)
 	var layer_metadata: LayerMetadata = layer.layer_data.layer_metadata
 	layer_name.text = layer_metadata.layer_name
-	
+	if layer_name.text.length() > 15:
+		layer_name.text = layer_name.text.left(15) + "..."
 	
 	layer_color.modulate = EditorLayerManager.get_band_color(
 		layer_metadata.order, shared.origin.layer_data.layer_metadata.order

@@ -57,6 +57,9 @@ func load_layer(_layer_data: LayerData, _can_delete: bool) -> void:
 	
 	rect_size.x = 0
 	$"%LayerName".text = layer_metadata.layer_name
+	if layer_metadata.layer_name.length() > 15:
+		$"%LayerName".text = layer_metadata.layer_name.left(15) + "..."
+		
 	$"%LayerColor".modulate = EditorLayerManager.get_band_color(layer_metadata.order, shared.origin.layer_data.layer_metadata.order)
 	$"%LayerType".modulate = GROUND_COLOR if layer_metadata.is_ground else PARALLAX_COLOR
 	$"%LayerType".texture = GROUND_ICON if layer_metadata.is_ground else PARALLAX_ICON
