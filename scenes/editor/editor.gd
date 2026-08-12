@@ -152,6 +152,4 @@ func selection_to_stamp() -> void:
 
 
 func deselect_objects() -> void:
-	for object in selected_objects:
-		object.selected = false
-	selected_objects = []
+	get_node("%ObjectSelection").external_objects_selected([])

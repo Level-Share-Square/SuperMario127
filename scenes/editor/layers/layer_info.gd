@@ -81,6 +81,9 @@ func delete_layer() -> void:
 	action.shared = shared
 	action.layer_index = layer_data.layer_metadata.order
 	shared.get_parent().action_manager.commit_action(action)
+	
+	editor.get_node("%ObjectSettingsWindow").close()
+	editor.deselect_objects()
 
 
 func show_layer_editor() -> void:
