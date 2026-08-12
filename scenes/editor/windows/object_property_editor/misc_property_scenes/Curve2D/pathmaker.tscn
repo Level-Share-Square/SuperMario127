@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://scenes/editor/windows/object_property_editor/misc_property_scenes/Curve2D/pathmaker.gd" type="Script" id=1]
 [ext_resource path="res://scenes/oldeditor/property_type_scenes/Path/base/dash1.png" type="Texture" id=2]
@@ -11,6 +11,8 @@
 [ext_resource path="res://assets/icons/Handle.svg" type="Texture" id=9]
 [ext_resource path="res://scenes/oldeditor/sounds/click2.wav" type="AudioStream" id=10]
 [ext_resource path="res://scenes/oldeditor/sounds/hover.wav" type="AudioStream" id=11]
+[ext_resource path="res://assets/icons/copy.png" type="Texture" id=12]
+[ext_resource path="res://assets/icons/import_from_code.png" type="Texture" id=13]
 
 [sub_resource type="Curve2D" id=1]
 _data = {
@@ -62,29 +64,29 @@ size_flags_vertical = 3
 
 [node name="Padding" type="Control" parent="CanvasLayer/HBoxContainer/VBoxContainer"]
 margin_right = 162.0
-margin_bottom = 329.0
+margin_bottom = 303.0
 mouse_filter = 2
 size_flags_vertical = 3
 
 [node name="WidgetContainer" type="PanelContainer" parent="CanvasLayer/HBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
-margin_top = 333.0
+margin_top = 307.0
 margin_right = 162.0
-margin_bottom = 362.0
+margin_bottom = 367.0
 theme = ExtResource( 3 )
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/HBoxContainer/VBoxContainer/WidgetContainer"]
 margin_left = 6.0
 margin_top = 6.0
 margin_right = 156.0
-margin_bottom = 23.0
+margin_bottom = 54.0
 custom_constants/margin_right = 4
 custom_constants/margin_left = 4
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/HBoxContainer/VBoxContainer/WidgetContainer/MarginContainer"]
 margin_left = 4.0
 margin_right = 146.0
-margin_bottom = 17.0
+margin_bottom = 48.0
 custom_constants/separation = 5
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/HBoxContainer/VBoxContainer/WidgetContainer/MarginContainer/VBoxContainer"]
@@ -161,8 +163,50 @@ icon_align = 1
 expand_icon = true
 script = ExtResource( 6 )
 
+[node name="HSeparator" type="HSeparator" parent="CanvasLayer/HBoxContainer/VBoxContainer/WidgetContainer/MarginContainer/VBoxContainer"]
+margin_top = 22.0
+margin_right = 142.0
+margin_bottom = 26.0
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/HBoxContainer/VBoxContainer/WidgetContainer/MarginContainer/VBoxContainer"]
+margin_top = 31.0
+margin_right = 142.0
+margin_bottom = 48.0
+alignment = 1
+
+[node name="Copy" type="Button" parent="CanvasLayer/HBoxContainer/VBoxContainer/WidgetContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+margin_left = 48.0
+margin_right = 65.0
+margin_bottom = 17.0
+rect_min_size = Vector2( 17, 0 )
+hint_tooltip = "Confirm"
+theme_type_variation = "ButtonTransparent"
+icon = ExtResource( 12 )
+icon_align = 1
+expand_icon = true
+script = ExtResource( 6 )
+
+[node name="VSeparator5" type="VSeparator" parent="CanvasLayer/HBoxContainer/VBoxContainer/WidgetContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
+margin_left = 69.0
+margin_right = 73.0
+margin_bottom = 17.0
+
+[node name="Paste" type="Button" parent="CanvasLayer/HBoxContainer/VBoxContainer/WidgetContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+margin_left = 77.0
+margin_right = 94.0
+margin_bottom = 17.0
+rect_min_size = Vector2( 17, 0 )
+hint_tooltip = "Confirm"
+theme_type_variation = "ButtonTransparent"
+icon = ExtResource( 13 )
+icon_align = 1
+expand_icon = true
+script = ExtResource( 6 )
+
 [node name="Padding2" type="Control" parent="CanvasLayer/HBoxContainer/VBoxContainer"]
-margin_top = 366.0
+margin_top = 371.0
 margin_right = 162.0
 margin_bottom = 432.0
 mouse_filter = 2
@@ -185,3 +229,5 @@ bus = "Sounds"
 [connection signal="pressed" from="CanvasLayer/HBoxContainer/VBoxContainer/WidgetContainer/MarginContainer/VBoxContainer/HBoxContainer/HandleLink" to="." method="toggle_handle_link"]
 [connection signal="pressed" from="CanvasLayer/HBoxContainer/VBoxContainer/WidgetContainer/MarginContainer/VBoxContainer/HBoxContainer/Delete" to="." method="toggle_delete"]
 [connection signal="pressed" from="CanvasLayer/HBoxContainer/VBoxContainer/WidgetContainer/MarginContainer/VBoxContainer/HBoxContainer/Confirm" to="." method="confirm"]
+[connection signal="pressed" from="CanvasLayer/HBoxContainer/VBoxContainer/WidgetContainer/MarginContainer/VBoxContainer/HBoxContainer2/Copy" to="." method="copy"]
+[connection signal="pressed" from="CanvasLayer/HBoxContainer/VBoxContainer/WidgetContainer/MarginContainer/VBoxContainer/HBoxContainer2/Paste" to="." method="paste"]

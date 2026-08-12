@@ -121,3 +121,19 @@ func widget_move_to(node: Node):
 		
 func get_mouse_pos() -> Vector2:
 	return editor.corrected_mouse_position()
+
+
+func copy():
+	OS.set_clipboard("c" + LevelCodeSerializer.serialize_data(line.get_node("path").curve))
+	
+func paste():
+	var clipboard: String = OS.get_clipboard()
+	if not clipboard.begins_with("c"): return
+	
+	clipboard = clipboard.substr(1)
+	init_curve = LevelCodeDeserializer.deserialize_data_code(clipboard)
+	
+	for node in path_node_container.get_children():
+		node.queue_free()
+		
+	_ready()
