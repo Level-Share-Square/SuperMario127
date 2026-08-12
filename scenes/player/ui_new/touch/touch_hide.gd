@@ -16,3 +16,8 @@ func update_visibility(input_type: int):
 	visible = (input_type == LastInputDevice.InputType.Touch)
 	if force_show:
 		visible = true
+
+
+## can't check for paused any other way sadly
+func _process(delta):
+	modulate.a = lerp(modulate.a, 0 if get_tree().paused else 1, delta * 8)

@@ -24,6 +24,7 @@ onready var loaded_boo_texture_invis = load(boo_block_texture_invis)
 
 signal layer_added(layer)
 signal layer_moved
+signal layer_type_changed
 signal found_origin
 signal loaded_layers
 
@@ -203,5 +204,6 @@ func change_layer_type(layer: LevelLayer):
 	move_layer(new_layer, old_layer_index, true)
 	new_layer.load_in(new_layer_data)
 	
+	call_deferred("emit_signal", "layer_type_changed")
 	return new_layer_data
 	

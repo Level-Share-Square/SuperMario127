@@ -191,12 +191,12 @@ gradient = SubResource( 41 )
 fill_from = Vector2( 0.5, 0 )
 fill_to = Vector2( 0.5, 1 )
 
-[sub_resource type="Gradient" id=38]
+[sub_resource type="Gradient" id=237]
 offsets = PoolRealArray( 0.0502793, 1 )
 colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 0.643137 )
 
 [sub_resource type="GradientTexture2D" id=220]
-gradient = SubResource( 38 )
+gradient = SubResource( 237 )
 fill_from = Vector2( 0.5, 0.1 )
 fill_to = Vector2( 0.5, 1 )
 
@@ -224,7 +224,7 @@ font_data = ExtResource( 17 )
 offsets = PoolRealArray( 0.782427, 1 )
 colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
 
-[sub_resource type="GradientTexture2D" id=224]
+[sub_resource type="GradientTexture2D" id=238]
 gradient = SubResource( 229 )
 width = 128
 height = 128
@@ -233,7 +233,7 @@ fill_from = Vector2( 0.5, 0.5 )
 fill_to = Vector2( 0.5, 0 )
 
 [sub_resource type="StyleBoxTexture" id=230]
-texture = SubResource( 224 )
+texture = SubResource( 238 )
 region_rect = Rect2( 0, 0, 128, 128 )
 margin_left = 6.0
 margin_right = 6.0
@@ -250,13 +250,13 @@ shader_param/rounded_corner_bottom_right = true
 shader_param/width = 1.0
 shader_param/height = 1.0
 
-[sub_resource type="Gradient" id=225]
+[sub_resource type="Gradient" id=239]
 offsets = PoolRealArray( 0, 0.384937, 0.912134, 1 )
 colors = PoolColorArray( 0.227451, 0.109804, 0.0117647, 1, 0.281001, 0.145098, 0.0348884, 1, 0.4, 0.223529, 0.0862745, 1, 0.576471, 0.388235, 0.160784, 1 )
 
 [sub_resource type="GradientTexture2D" id=232]
 flags = 0
-gradient = SubResource( 225 )
+gradient = SubResource( 239 )
 width = 51
 height = 51
 fill_to = Vector2( 0, 1 )

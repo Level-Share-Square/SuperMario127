@@ -1,7 +1,7 @@
 extends Control
 
 
-const FAKE_PLAYER_SCENE: PackedScene = preload("res://scenes/menu/converter/fake_player.tscn")
+const FAKE_PLAYER_SCENE: PackedScene = preload("res://scenes/menu/converter/minigames/fake_player.tscn")
 var player: Node2D
 
 
@@ -10,4 +10,5 @@ func start_playing() -> void:
 	call_deferred("add_child", player)
 
 func stop_playing(scene_name: String = "") -> void:
-	player.queue_free()
+	if is_instance_valid(player):
+		player.queue_free()

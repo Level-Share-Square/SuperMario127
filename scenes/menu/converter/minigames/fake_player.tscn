@@ -1,28 +1,32 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=26 format=2]
 
-[ext_resource path="res://scenes/actors/mario/mario.tscn" type="PackedScene" id=3]
-[ext_resource path="res://scenes/menu/converter/camera.gd" type="Script" id=7]
-[ext_resource path="res://assets/sounds/death.wav" type="AudioStream" id=11]
-[ext_resource path="res://scenes/menu/converter/fireball.gd" type="Script" id=12]
-[ext_resource path="res://scenes/actors/objects/bullet_bill/sound.wav" type="AudioStream" id=13]
-[ext_resource path="res://scenes/menu/converter/fake_player.gd" type="Script" id=14]
-[ext_resource path="res://scenes/actors/objects/metal_platform/texture.png" type="Texture" id=15]
-[ext_resource path="res://scenes/actors/objects/nipper_fireball/fireball.png" type="Texture" id=16]
+[ext_resource path="res://scenes/actors/mario/mario.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/menu/converter/minigames/fake_player.gd" type="Script" id=2]
+[ext_resource path="res://scenes/menu/converter/minigames/fireball.gd" type="Script" id=3]
+[ext_resource path="res://scenes/actors/objects/metal_platform/texture.png" type="Texture" id=4]
+[ext_resource path="res://scenes/actors/objects/nipper_fireball/fireball.png" type="Texture" id=5]
+[ext_resource path="res://scenes/actors/objects/bullet_bill/sound.wav" type="AudioStream" id=6]
+[ext_resource path="res://assets/sounds/death.wav" type="AudioStream" id=7]
+[ext_resource path="res://scenes/menu/converter/camera.gd" type="Script" id=8]
+[ext_resource path="res://scenes/menu/converter/minigames/breakout/breakout.gd" type="Script" id=9]
+
+[sub_resource type="RectangleShape2D" id=54]
+extents = Vector2( 224, 184 )
 
 [sub_resource type="AtlasTexture" id=6]
-atlas = ExtResource( 16 )
+atlas = ExtResource( 5 )
 region = Rect2( 0, 0, 17, 17 )
 
 [sub_resource type="AtlasTexture" id=7]
-atlas = ExtResource( 16 )
+atlas = ExtResource( 5 )
 region = Rect2( 17, 0, 17, 17 )
 
 [sub_resource type="AtlasTexture" id=8]
-atlas = ExtResource( 16 )
+atlas = ExtResource( 5 )
 region = Rect2( 34, 0, 17, 17 )
 
 [sub_resource type="AtlasTexture" id=9]
-atlas = ExtResource( 16 )
+atlas = ExtResource( 5 )
 region = Rect2( 51, 0, 17, 17 )
 
 [sub_resource type="SpriteFrames" id=51]
@@ -69,45 +73,8 @@ extents = Vector2( 128, 1536 )
 physics_interpolation_mode = 2
 z_index = 10
 z_as_relative = false
-script = ExtResource( 14 )
+script = ExtResource( 2 )
 player_pos = Vector2( 384, 344 )
-
-[node name="Node2D" type="Node2D" parent="."]
-z_index = 1
-z_as_relative = false
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Node2D"]
-margin_right = 768.0
-margin_bottom = 432.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_constants/separation = 0
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Node2D/VBoxContainer"]
-margin_right = 768.0
-margin_bottom = 368.0
-size_flags_vertical = 3
-alignment = 1
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="ColorRect" type="ColorRect" parent="Node2D/VBoxContainer/HBoxContainer"]
-margin_left = 160.0
-margin_right = 608.0
-margin_bottom = 368.0
-rect_min_size = Vector2( 448, 0 )
-size_flags_vertical = 3
-color = Color( 0, 0, 0, 0.376471 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="Control" type="Control" parent="Node2D/VBoxContainer"]
-margin_top = 368.0
-margin_right = 768.0
-margin_bottom = 432.0
-rect_min_size = Vector2( 0, 64 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 384, 216 )
@@ -120,42 +87,89 @@ drag_margin_left = 0.0
 drag_margin_top = 0.0
 drag_margin_right = 0.0
 drag_margin_bottom = 0.0
-script = ExtResource( 7 )
+script = ExtResource( 8 )
 
-[node name="Fireball" type="KinematicBody2D" parent="."]
+[node name="Breakout" type="Node2D" parent="."]
+z_index = 1
+z_as_relative = false
+script = ExtResource( 9 )
+
+[node name="PlayableRect" type="Area2D" parent="Breakout"]
+position = Vector2( 384, 184 )
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Breakout/PlayableRect"]
+shape = SubResource( 54 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Breakout"]
+margin_right = 768.0
+margin_bottom = 432.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Breakout/VBoxContainer"]
+margin_right = 768.0
+margin_bottom = 368.0
+size_flags_vertical = 3
+alignment = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ColorRect" type="ColorRect" parent="Breakout/VBoxContainer/HBoxContainer"]
+margin_left = 160.0
+margin_right = 608.0
+margin_bottom = 368.0
+rect_min_size = Vector2( 448, 0 )
+size_flags_vertical = 3
+color = Color( 0, 0, 0, 0.376471 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Control" type="Control" parent="Breakout/VBoxContainer"]
+margin_top = 368.0
+margin_right = 768.0
+margin_bottom = 432.0
+rect_min_size = Vector2( 0, 64 )
+
+[node name="Fireball" type="KinematicBody2D" parent="Breakout"]
 position = Vector2( 384, 178 )
 collision_layer = 0
-script = ExtResource( 12 )
+script = ExtResource( 3 )
 play_width = 216.0
 
-[node name="Sprite" type="AnimatedSprite" parent="Fireball"]
+[node name="Sprite" type="AnimatedSprite" parent="Breakout/Fireball"]
 frames = SubResource( 51 )
 playing = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Fireball"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Breakout/Fireball"]
 shape = SubResource( 52 )
 
-[node name="Area2D" type="Area2D" parent="Fireball"]
+[node name="Area2D" type="Area2D" parent="Breakout/Fireball"]
 collision_layer = 0
 collision_mask = 8388608
 monitorable = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Fireball/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Breakout/Fireball/Area2D"]
 shape = SubResource( 52 )
 
-[node name="Hit" type="AudioStreamPlayer2D" parent="Fireball"]
-stream = ExtResource( 13 )
+[node name="Hit" type="AudioStreamPlayer2D" parent="Breakout/Fireball"]
+stream = ExtResource( 6 )
 volume_db = -10.0
 max_distance = 1000.0
 bus = "Sounds"
 
-[node name="LastHit" type="AudioStreamPlayer2D" parent="Fireball"]
-stream = ExtResource( 11 )
+[node name="LastHit" type="AudioStreamPlayer2D" parent="Breakout/Fireball"]
+stream = ExtResource( 7 )
 volume_db = -0.75
 max_distance = 1000.0
 bus = "Sounds"
 
-[node name="Character" parent="." instance=ExtResource( 3 )]
+[node name="Character" parent="." instance=ExtResource( 1 )]
 position = Vector2( 384, 344 )
 __meta__ = {
 "_edit_lock_": true
@@ -165,23 +179,24 @@ mario_dive_collision = SubResource( 2 )
 luigi_collision = SubResource( 1 )
 luigi_dive_collision = SubResource( 3 )
 
-[node name="Area2D" type="Area2D" parent="Character"]
+[node name="Paddle" type="Area2D" parent="Character"]
+unique_name_in_owner = true
 position = Vector2( 0, -16 )
 collision_layer = 8388608
 collision_mask = 0
 monitoring = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Character/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Character/Paddle"]
 visible = false
 position = Vector2( 0, 86 )
 shape = SubResource( 49 )
 
-[node name="Sprite" type="NinePatchRect" parent="Character/Area2D"]
+[node name="Sprite" type="NinePatchRect" parent="Character/Paddle"]
 margin_left = -41.0
 margin_top = -7.0
 margin_right = 41.0
 margin_bottom = 1.0
-texture = ExtResource( 15 )
+texture = ExtResource( 4 )
 region_rect = Rect2( 0, 0, 21, 8 )
 patch_margin_left = 8
 patch_margin_right = 7
@@ -234,4 +249,4 @@ visible = false
 position = Vector2( 896, 480 )
 shape = SubResource( 45 )
 
-[connection signal="area_entered" from="Fireball/Area2D" to="Fireball" method="area_entered"]
+[connection signal="area_entered" from="Breakout/Fireball/Area2D" to="Breakout/Fireball" method="area_entered"]

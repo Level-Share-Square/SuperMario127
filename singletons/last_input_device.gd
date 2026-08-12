@@ -8,11 +8,11 @@ signal mouse_changed(is_mouse)
 var class_type_map: Dictionary = {
 	"InputEventKey": InputType.Keyboard,
 	"InputEventJoypadButton": InputType.Controller,
-	"InputEventJoypadMotion": InputType.Controller
-#	"InputEventScreenTouch": InputType.Touch,
-#	"InputEventScreenDrag": InputType.Touch,
-#	"InputEventGesture": InputType.Touch,
-#	"InputEventPanGesture": InputType.Touch
+	"InputEventJoypadMotion": InputType.Controller,
+	"InputEventScreenTouch": InputType.Touch,
+	"InputEventScreenDrag": InputType.Touch,
+	"InputEventGesture": InputType.Touch,
+	"InputEventPanGesture": InputType.Touch
 }
 
 enum InputType {Keyboard, Controller, Touch}

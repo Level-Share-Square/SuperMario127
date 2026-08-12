@@ -7,14 +7,7 @@ var files_to_convert: Array
 var saves_to_convert: Array
 var thumbnails_to_convert: Array
 
-func _ready():
-	var dir := Directory.new()
-	
-	if dir.file_exists("user://level_list/converted"):
-		yield(get_tree().create_timer(1), "timeout")
-		owner.transition("MainMenu")
-		return
-		
+func start():
 	conversion()
 
 func conversion():

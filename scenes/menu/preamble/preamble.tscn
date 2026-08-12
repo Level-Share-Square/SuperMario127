@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://scenes/menu/theme.tres" type="Theme" id=1]
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://assets/sounds/click2.wav" type="AudioStream" id=7]
 [ext_resource path="res://assets/sounds/hover.wav" type="AudioStream" id=8]
 [ext_resource path="res://assets/artwork/splash_screen.png" type="Texture" id=9]
+[ext_resource path="res://scenes/menu/preamble/conditional_trans.gd" type="Script" id=10]
 
 [sub_resource type="Animation" id=11]
 length = 0.001
@@ -88,31 +89,31 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 0, 0, 1, 0 ) ]
 }
-tracks/1/type = "method"
-tracks/1/path = NodePath(".")
+tracks/1/type = "value"
+tracks/1/path = NodePath("Container/HBoxContainer/VBoxContainer/ButtonSound:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.6 ),
+"times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [ "MainMenu" ],
-"method": "transition"
-} ]
+"update": 1,
+"values": [ true ]
 }
-tracks/2/type = "value"
-tracks/2/path = NodePath("Container/HBoxContainer/VBoxContainer/ButtonSound:disabled")
+tracks/2/type = "method"
+tracks/2/path = NodePath("ConditionalTrans")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0 ),
+"times": PoolRealArray( 0.6 ),
 "transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
+"values": [ {
+"args": [  ],
+"method": "transition"
+} ]
 }
 
 [sub_resource type="Animation" id=12]
@@ -247,6 +248,11 @@ script = ExtResource( 3 )
 [node name="Focus" type="Control" parent="."]
 script = ExtResource( 4 )
 default_focus_path = NodePath("../Container/HBoxContainer/VBoxContainer/ButtonSound")
+
+[node name="ConditionalTrans" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 10 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true

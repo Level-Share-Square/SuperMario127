@@ -11,6 +11,9 @@ onready var new_layer = $"%NewLayer"
 onready var new_decor = $"%NewDecor"
 onready var layer_picker = $"%LayerPicker"
 onready var drag_area = $"%DragArea"
+onready var layer_type = $"%LayerType"
+onready var layer_name = $"%LayerName"
+onready var layer_color = $"%LayerColor"
 
 var is_dragging: bool
 
@@ -22,6 +25,7 @@ func _ready():
 	new_layer.connect("pressed", self, "new_layer", [true])
 	new_decor.connect("pressed", self, "new_layer", [false])
 	shared.connect("found_origin", self, "select_default")
+	shared.connect("layer_type_changed", self, "update_layer_type")
 	
 	yield(editor, "ready")
 	editor.action_manager.connect("undo", self, "update_layers")
@@ -35,11 +39,14 @@ func select_default(index: int):
 func select_layer(index: int, toggle_dropdown: bool = true) -> void:
 	var layer = shared.get_layer_at(index)
 	var layer_metadata: LayerMetadata = layer.layer_data.layer_metadata
-	layer_picker.text = layer_metadata.layer_name
+	layer_name.text = layer_metadata.layer_name
 	
-	layer_picker.get_node("LayerColor").modulate = EditorLayerManager.get_band_color(
+	
+	layer_color.modulate = EditorLayerManager.get_band_color(
 		layer_metadata.order, shared.origin.layer_data.layer_metadata.order
 	)
+	layer_type.modulate = LayerInfo.GROUND_COLOR if layer_metadata.is_ground else LayerInfo.PARALLAX_COLOR
+	layer_type.texture = LayerInfo.GROUND_ICON if layer_metadata.is_ground else LayerInfo.PARALLAX_ICON
 	
 	editor.layer = shared.layer_index_to_uuid(index)
 	CurrentLevelData.editor_data.selected_layer = editor.layer
@@ -82,10 +89,13 @@ func _process(_delta: float) -> void:
 
 
 func layer_moved():
-	var cur_layer_metadata = shared.get_layer(editor.layer)
-	layer_picker.get_node("LayerColor").modulate = EditorLayerManager.get_band_color(
+	var cur_layer = shared.get_layer(editor.layer)
+	var cur_layer_metadata = cur_layer.layer_data.layer_metadata
+	$"%LayerColor".modulate = EditorLayerManager.get_band_color(
 		cur_layer_metadata.order, shared.origin.layer_data.layer_metadata.order
 	)
+	$"%LayerType".modulate = LayerInfo.GROUND_COLOR if cur_layer_metadata.is_ground else LayerInfo.PARALLAX_COLOR
+	$"%LayerType".texture = LayerInfo.GROUND_ICON if cur_layer_metadata.is_ground else LayerInfo.PARALLAX_ICON
 
 func _unhandled_input(event):
 	if not Input.is_action_pressed("ctrl_modifier") and Input.is_action_pressed("alt_modifier"):
@@ -97,4 +107,9 @@ func _unhandled_input(event):
 		if event.is_action_pressed("scroll_down"):
 			select_layer(wrapi(layer_index - 1, 0, shared.layers.size()), false)
 			get_node("%ClickSound").play()
-		
+
+func update_layer_type():
+	var cur_layer = shared.get_layer(editor.layer)
+	var cur_layer_metadata = cur_layer.layer_data.layer_metadata
+	$"%LayerType".modulate = LayerInfo.GROUND_COLOR if cur_layer_metadata.is_ground else LayerInfo.PARALLAX_COLOR
+	$"%LayerType".texture = LayerInfo.GROUND_ICON if cur_layer_metadata.is_ground else LayerInfo.PARALLAX_ICON

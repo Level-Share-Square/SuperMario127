@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://scenes/player/ui_new/touch/touch_button.gd" type="Script" id=1]
 [ext_resource path="res://scenes/player/ui_new/touch/touch_input.gd" type="Script" id=2]
@@ -11,6 +11,8 @@
 [ext_resource path="res://scenes/player/ui_new/touch/checks/can_swipe_spin_check.gd" type="Script" id=9]
 [ext_resource path="res://scenes/player/ui_new/touch/checks/can_use_fludd.gd" type="Script" id=10]
 [ext_resource path="res://scenes/player/ui_new/touch/checks/equipped_nozzle_show.gd" type="Script" id=11]
+[ext_resource path="res://scenes/menu/theme.tres" type="Theme" id=12]
+[ext_resource path="res://assets/icons/HamburgerMenu.svg" type="Texture" id=13]
 
 [sub_resource type="ShaderMaterial" id=4]
 shader = ExtResource( 4 )
@@ -52,6 +54,7 @@ fill_from = Vector2( 0.5, 1 )
 [node name="GestureControls" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+theme = ExtResource( 12 )
 script = ExtResource( 5 )
 
 [node name="Checks" type="Node" parent="."]
@@ -109,7 +112,7 @@ margin_right = 131.0
 margin_bottom = 131.0
 
 [node name="Pause" type="Button" parent="."]
-modulate = Color( 1, 1, 1, 0.501961 )
+self_modulate = Color( 1, 1, 1, 0.501961 )
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -12.0
@@ -117,6 +120,7 @@ margin_top = 8.0
 margin_right = 12.0
 margin_bottom = 32.0
 focus_mode = 0
+theme_type_variation = "TransparentButton"
 action_mode = 0
 enabled_focus_mode = 0
 keep_pressed_outside = true
@@ -124,8 +128,28 @@ script = ExtResource( 1 )
 action = "pause"
 player_id = -1
 
+[node name="MarginContainer" type="MarginContainer" parent="Pause"]
+margin_right = 24.0
+margin_bottom = 24.0
+mouse_filter = 2
+custom_constants/margin_right = 4
+custom_constants/margin_top = 4
+custom_constants/margin_left = 4
+custom_constants/margin_bottom = 4
+
+[node name="TextureRect" type="TextureRect" parent="Pause/MarginContainer"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 20.0
+margin_bottom = 20.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 13 )
+expand = true
+
 [node name="SwitchNozzles" type="Button" parent="."]
-modulate = Color( 1, 1, 1, 0.501961 )
+self_modulate = Color( 1, 1, 1, 0.501961 )
 margin_left = 457.728
 margin_top = 357.264
 margin_right = 518.728
@@ -133,6 +157,7 @@ margin_bottom = 431.264
 focus_mode = 0
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.25
+theme_type_variation = "TransparentButton"
 action_mode = 0
 enabled_focus_mode = 0
 keep_pressed_outside = true
@@ -141,13 +166,14 @@ action = "nozzles"
 
 [node name="Fludd" type="Button" parent="."]
 visible = false
-modulate = Color( 1, 1, 1, 0.501961 )
+self_modulate = Color( 1, 1, 1, 0.501961 )
 margin_left = 519.0
 margin_top = 357.0
 margin_right = 768.0
 margin_bottom = 431.0
 focus_mode = 0
 size_flags_horizontal = 3
+theme_type_variation = "TransparentButton"
 toggle_mode = true
 action_mode = 0
 enabled_focus_mode = 0

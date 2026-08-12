@@ -73,6 +73,8 @@ func save_pressed():
 	level_settings.get_node("%Areas").reload_areas()
 	initial_hash = get_hash()
 	unsaved_changes = false
+	
+	save.self_modulate = Color("60ff60")
 	var tween = get_tree().create_tween()
 	tween.tween_property(save, "self_modulate", Color("ffffff"), 0.5)
 

@@ -2,7 +2,12 @@ class_name LayerInfo
 extends VBoxContainer
 
 const GROUND_TEXT: String = "Make Decor"
+const GROUND_ICON: StreamTexture = preload("res://assets/icons/GroundLayer.svg")
+const GROUND_COLOR := Color("ff6060")
+
 const PARALLAX_TEXT: String = "Make Ground"
+const PARALLAX_ICON: StreamTexture = preload("res://assets/icons/DecorationLayer.svg")
+const PARALLAX_COLOR := Color("60ff60")
 
 onready var layer_dropdown = get_parent().get_node("%LayerDropdown")
 
@@ -33,6 +38,7 @@ func _ready():
 	select.connect("pressed", self, "selected")
 	edit.connect("pressed", self, "show_layer_editor")
 	show_hide.connect("pressed", self, "toggle_visibility")
+	shared.connect("layer_type_changed", self, "update_layer_type")
 	panel_resized()
 
 
@@ -46,12 +52,14 @@ func load_layer(_layer_data: LayerData, _can_delete: bool) -> void:
 	can_delete = _can_delete
 	var layer_metadata: LayerMetadata = _layer_data.layer_metadata
 	
-	$"%Select".text = layer_metadata.layer_name
-	
 	if !is_instance_valid(shared.origin):
 		yield(shared, "found_origin")
 	
+	rect_size.x = 0
+	$"%LayerName".text = layer_metadata.layer_name
 	$"%LayerColor".modulate = EditorLayerManager.get_band_color(layer_metadata.order, shared.origin.layer_data.layer_metadata.order)
+	$"%LayerType".modulate = GROUND_COLOR if layer_metadata.is_ground else PARALLAX_COLOR
+	$"%LayerType".texture = GROUND_ICON if layer_metadata.is_ground else PARALLAX_ICON
 	
 	if !is_node_ready():
 		yield(self, "ready")
@@ -139,3 +147,8 @@ func merge_layer():
 	action.other_layer_id = shared.get_layer_at(layer_data.layer_metadata.order + 1).layer_data.layer_metadata.layer_uuid
 	action.shared = shared
 	layer_dropdown.editor.action_manager.commit_action(action)
+
+
+func update_layer_type():
+	$"%LayerType".modulate = GROUND_COLOR if layer_data.layer_metadata.is_ground else PARALLAX_COLOR
+	$"%LayerType".texture = GROUND_ICON if layer_data.layer_metadata.is_ground else PARALLAX_ICON

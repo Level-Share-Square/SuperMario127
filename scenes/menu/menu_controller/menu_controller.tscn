@@ -181,9 +181,11 @@ music_id = 0
 
 [node name="Converter" parent="UI/Screens" instance=ExtResource( 14 )]
 unique_name_in_owner = true
+visible = false
 
 [node name="MainMenu" parent="UI/Screens" instance=ExtResource( 2 )]
 unique_name_in_owner = true
+visible = false
 
 [node name="Credits" parent="UI/Screens" instance=ExtResource( 4 )]
 unique_name_in_owner = true
