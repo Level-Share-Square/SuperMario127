@@ -81,6 +81,7 @@ func add_layer(layer_data = null, add_to_data: bool = false, at: int = layers.si
 		new_layer = parallax_layer_scene.instance()
 	
 	add_child(new_layer)
+	move_child(new_layer, at)
 	
 	var uuid: String = layer_data.layer_metadata.layer_uuid
 	
@@ -103,6 +104,7 @@ func remove_layer(uuid: String, remove_from_data: bool = false):
 		CurrentLevelData.current_area.layers.remove(get_layer_index(removed))
 		for i in range(0, CurrentLevelData.current_area.layers.size()):
 			CurrentLevelData.current_area.layers[i].layer_metadata.order = i
+			get_layer_at(i).order = i
 		
 func edit_layer(uuid: String, property: String, value):
 	var layer: LevelLayer = get_layer(uuid)
@@ -115,6 +117,8 @@ func edit_layer(uuid: String, property: String, value):
 func move_layer(layer: LevelLayer, to: int, save_to_data: bool = false):
 	var from: int = layer.get_index()
 	move_child(layer, to)
+	layers.erase(layer.layer_data.layer_metadata.layer_uuid)
+	layers.insert(to, layer.layer_data.layer_metadata.layer_uuid)
 	for i in range(min(from, to), max(from, to) + 1):
 		get_child(i).set_order(i)
 		if save_to_data:

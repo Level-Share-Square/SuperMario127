@@ -54,9 +54,10 @@ func _do():
 		editor.get_node("%LayerDropdown").select_layer(new_layer_data.layer_metadata.order, false)
 	
 func _undo():
+	prints(old_data[0].layer_metadata.layer_name, old_data[1].layer_metadata.layer_name)
 	shared.remove_layer(new_data.layer_metadata.layer_uuid, true)
-	var layer_two = shared.add_layer(old_data[1], true, old_data[1].layer_metadata.order)
 	var layer_one = shared.add_layer(old_data[0], true, old_data[0].layer_metadata.order)
+	var layer_two = shared.add_layer(old_data[1], true, old_data[1].layer_metadata.order)
 
 	if layer_one.layer_data.layer_metadata.is_origin: shared.origin = layer_one
 	if layer_two.layer_data.layer_metadata.is_origin: shared.origin = layer_two
