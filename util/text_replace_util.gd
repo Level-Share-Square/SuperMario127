@@ -26,8 +26,11 @@ const CHARACTER_NAMES: Array = [
 ]
 
 
-static func input_to_text(input_key: String, player_id: int) -> String:
-	var input_group: String = "Controls (Player " + str(player_id + 1) + ")"
+static func input_to_text(input_key: String, player_id: int = 0, override_subgroup: String = "") -> String:
+	var subgroup: String = "Player " + str(player_id + 1)
+	if override_subgroup != "":
+		subgroup = override_subgroup
+	var input_group: String = "Controls (%s)" % subgroup
 	var is_controller: bool = (LastInputDevice.last_input_type == LastInputDevice.InputType.Controller)
 	
 	var action = input_settings_util.get_setting_partial(input_group, input_key, is_controller)

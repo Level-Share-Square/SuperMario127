@@ -91,6 +91,7 @@ expand = true
 stretch_mode = 7
 
 [node name="IconSpacer" type="Control" parent="ContentDivider/Header/HeaderMat/HeaderBox"]
+unique_name_in_owner = true
 margin_left = 22.0
 margin_right = 24.0
 margin_bottom = 22.0

@@ -15,6 +15,9 @@ var drag_position: Vector2
 
 onready var title_node: RichTextLabel = $"%WindowTitle"
 onready var icon_node: TextureRect = $"%WindowIcon"
+onready var icon_spacer: Control = $"%IconSpacer"
+
+signal window_opened
 
 
 func set_title(val: String):
@@ -24,6 +27,9 @@ func set_title(val: String):
 
 func set_icon(val):
 	icon_node.texture = val
+	if not val:
+		icon_node.hide()
+		icon_spacer.hide()
 
 
 func set_tooltip(val):
@@ -67,6 +73,8 @@ func popup(rect: Rect2) -> void:
 	tween.set_ease(Tween.EASE_OUT)
 	tween.set_trans(Tween.TRANS_CUBIC)
 	tween.tween_property(self, "rect_scale", Vector2.ONE, popup_anim_duration)
+	
+	emit_signal("window_opened")
 
 
 func popup_centered(size: Vector2) -> void:
