@@ -27,5 +27,5 @@ func adjust_visibility(_working_folder: String) -> void:
 	var is_campaign: bool = list_handler.is_campaign
 	var is_base_folder: bool = list_handler.working_folder == list_handler.BASE_FOLDER
 	new_folder.visible = not is_campaign
-	new_campaign.visible = not is_campaign and is_base_folder
+	new_campaign.visible = false
 	padding_2.visible = not is_campaign

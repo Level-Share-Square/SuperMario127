@@ -23,10 +23,12 @@ func conversion():
 	thumbnails_to_convert = data[2]
 	
 	progress_bar.max_value = files_to_convert.size()
-	print(files_to_convert)
-	if not files_to_convert.empty():
+	
+	if not (files_to_convert.empty() and saves_to_convert.empty()):
 		conversion_thread = Thread.new()
 		conversion_thread.start(self, "convert_thread", files_to_convert)
+	else:
+		on_conversion_finished()
 
 func convert_thread(files: Array):
 	var dir := Directory.new()
@@ -59,6 +61,8 @@ func on_conversion_finished():
 	
 	LocalSettings.change_setting("Meta", "game_version", Singleton.PlayerSettings.game_version)
 	owner.transition("MainMenu")
+	
+	level_list_util.init_levels_list()
 
 func get_files_for_conversion():
 	var dir := Directory.new()
@@ -105,7 +109,7 @@ func get_files_for_conversion():
 
 func convert_inner(data: Array):
 	var dir := Directory.new()
-	
+
 	for old in data:
 		old = old as String
 		var new: String = old.replace("level_list_old", "level_list")
@@ -117,6 +121,7 @@ func convert_inner(data: Array):
 			var file_name: String = dir.get_next()
 			
 			while file_name != "":
+
 				dir.copy(old.plus_file(file_name), new.plus_file(file_name))
 				file_name = dir.get_next()
 				

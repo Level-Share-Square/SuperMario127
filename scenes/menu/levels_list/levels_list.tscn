@@ -1976,6 +1976,7 @@ script = ExtResource( 29 )
 offset = Vector2( -75, 0 )
 
 [node name="NewCampaign" type="Button" parent="Panel/Subscreens/AddElement/Control/ElementAddButtons"]
+visible = false
 margin_top = 174.0
 margin_right = 163.0
 margin_bottom = 194.0

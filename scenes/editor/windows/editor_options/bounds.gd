@@ -31,9 +31,9 @@ func _ready():
 	area_rect = area.header.bounds
 	
 	yield(editor, "ready")
-	editor.action_manager.connect("action", self, "update_values")
-	editor.action_manager.connect("undo", self, "update_values")
-	editor.action_manager.connect("redo", self, "update_values")
+	editor.action_manager.connect("action", self, "update_values", [true])
+	editor.action_manager.connect("undo", self, "update_values", [true])
+	editor.action_manager.connect("redo", self, "update_values", [true])
 	
 	increment.value = CurrentLevelData.editor_data.area_bounds_increment
 	update_values(true)
@@ -43,19 +43,28 @@ func change_bounds(side: String, type: int):
 	if type == ChangeType.SUBTRACT: amount *= -1
 	
 	area_rect = area.header.bounds
+	var orig_end: Vector2 = area_rect.end
+	
 	match side:
 		"top":
-			area_rect = area_rect.grow_individual(0, amount, 0, 0)
+			var new_top = min(area_rect.position.y - amount, orig_end.y - 14)
+			area_rect.position.y = new_top
+			area_rect.size.y = orig_end.y - new_top
+			
 		"left":
-			area_rect = area_rect.grow_individual(amount, 0, 0, 0)
+			var new_left = min(area_rect.position.x - amount, orig_end.x - 24)
+			area_rect.position.x = new_left
+			area_rect.size.x = orig_end.x - new_left
+			
 		"right":
-			area_rect = area_rect.grow_individual(0, 0, amount, 0)
+			area_rect.size.x = max(24, area_rect.size.x + amount)
+			
 		"bottom":
-			area_rect = area_rect.grow_individual(0, 0, 0, amount)
+			area_rect.size.y = max(14, area_rect.size.y + amount)
 			
 	action()
 	
-	update_values()
+	update_values(true)
 	
 func action() -> void:
 	var action := ChangeAreaAction.new()
@@ -71,6 +80,7 @@ func update_values(bypass_checks: bool = false):
 		var update_values: bool = false
 		var actions: Array = [editor.action_manager.undo_stack.back(), editor.action_manager.redo_stack.back()]
 		for action in actions:
+			print(action.get_class())
 			if action is ChangeAreaAction and action.property == "bounds":
 				update_values = true
 				break
@@ -78,7 +88,7 @@ func update_values(bypass_checks: bool = false):
 
 	shared.update_tilemaps()
 	camera.update_limits(area.header)
-	editor.oob_overlay.set_bounds(Rect2(area_rect.position*32, area_rect.size*32))
+	editor.oob_overlay.set_bounds(Rect2(area.header.bounds.position*32, area.header.bounds.size*32))
 	area_rect = area.header.bounds
 	x_label.text = X_LABEL_PREFIX % area_rect.size.x
 	y_label.text = Y_LABEL_PREFIX % area_rect.size.y
