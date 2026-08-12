@@ -26,35 +26,35 @@ script = ExtResource( 9 )
 title = "Level Settings"
 
 [node name="Background" parent="." index="0"]
-margin_right = 413.0
+margin_right = 453.0
 margin_bottom = 241.0
 
 [node name="ContentDivider" parent="." index="1"]
-margin_right = 413.0
+margin_right = 453.0
 margin_bottom = 241.0
 
 [node name="Header" parent="ContentDivider" index="0"]
-margin_right = 413.0
+margin_right = 453.0
 
 [node name="HeaderMat" parent="ContentDivider/Header" index="0"]
-margin_right = 409.0
+margin_right = 449.0
 
 [node name="HeaderBox" parent="ContentDivider/Header/HeaderMat" index="0"]
-margin_right = 399.0
+margin_right = 439.0
 
 [node name="WindowTitle" parent="ContentDivider/Header/HeaderMat/HeaderBox" index="2"]
-margin_right = 370.0
+margin_right = 410.0
 
 [node name="WindowClose" parent="ContentDivider/Header/HeaderMat/HeaderBox" index="3"]
-margin_left = 371.0
-margin_right = 393.0
+margin_left = 411.0
+margin_right = 433.0
 
 [node name="HSeparator" parent="ContentDivider" index="1"]
 modulate = Color( 1, 1, 1, 1 )
-margin_right = 413.0
+margin_right = 453.0
 
 [node name="ContentMat" parent="ContentDivider" index="2"]
-margin_right = 413.0
+margin_right = 453.0
 margin_bottom = 241.0
 custom_constants/margin_right = 6
 custom_constants/margin_top = 6
@@ -64,7 +64,7 @@ custom_constants/margin_bottom = 6
 [node name="Tabs" type="TabContainer" parent="ContentDivider/ContentMat" index="0"]
 margin_left = 6.0
 margin_top = 6.0
-margin_right = 407.0
+margin_right = 447.0
 margin_bottom = 204.0
 rect_pivot_offset = Vector2( -131, 46 )
 mouse_filter = 1
@@ -92,19 +92,19 @@ script = ExtResource( 15 )
 [node name="HBoxContainer" type="HBoxContainer" parent="ContentDivider/ContentMat/Tabs/Level" index="0"]
 margin_left = 5.0
 margin_top = 5.0
-margin_right = 388.0
+margin_right = 428.0
 margin_bottom = 162.0
 custom_constants/separation = 10
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ContentDivider/ContentMat/Tabs/Level/HBoxContainer" index="0"]
-margin_right = 135.0
+margin_right = 175.0
 margin_bottom = 157.0
-size_flags_horizontal = 3
+rect_min_size = Vector2( 175, 0 )
 custom_constants/separation = 4
 
 [node name="AspectContainer" type="AspectRatioContainer" parent="ContentDivider/ContentMat/Tabs/Level/HBoxContainer/VBoxContainer" index="0"]
 unique_name_in_owner = true
-margin_right = 135.0
+margin_right = 175.0
 margin_bottom = 92.0
 rect_min_size = Vector2( 0, 92 )
 size_flags_horizontal = 3
@@ -112,9 +112,9 @@ ratio = 1.7778
 
 [node name="Border" type="NinePatchRect" parent="ContentDivider/ContentMat/Tabs/Level/HBoxContainer/VBoxContainer/AspectContainer" index="0"]
 unique_name_in_owner = true
-margin_top = 6.0
-margin_right = 135.0
-margin_bottom = 86.0
+margin_left = 5.7212
+margin_right = 169.279
+margin_bottom = 92.0
 rect_min_size = Vector2( 0, 80 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -138,7 +138,7 @@ stretch_mode = 6
 [node name="ThumbnailURL" type="LineEdit" parent="ContentDivider/ContentMat/Tabs/Level/HBoxContainer/VBoxContainer" index="1"]
 unique_name_in_owner = true
 margin_top = 96.0
-margin_right = 135.0
+margin_right = 175.0
 margin_bottom = 110.0
 custom_fonts/font = ExtResource( 7 )
 align = 1
@@ -147,13 +147,13 @@ script = ExtResource( 2 )
 
 [node name="HSeparator" type="HSeparator" parent="ContentDivider/ContentMat/Tabs/Level/HBoxContainer/VBoxContainer" index="2"]
 margin_top = 114.0
-margin_right = 135.0
+margin_right = 175.0
 margin_bottom = 118.0
 
 [node name="Level Name" type="LineEdit" parent="ContentDivider/ContentMat/Tabs/Level/HBoxContainer/VBoxContainer" index="3"]
 unique_name_in_owner = true
 margin_top = 122.0
-margin_right = 135.0
+margin_right = 175.0
 margin_bottom = 139.0
 align = 1
 placeholder_text = "Level Name"
@@ -161,8 +161,9 @@ script = ExtResource( 2 )
 
 [node name="Author" type="LineEdit" parent="ContentDivider/ContentMat/Tabs/Level/HBoxContainer/VBoxContainer" index="4"]
 unique_name_in_owner = true
+margin_left = 20.0
 margin_top = 143.0
-margin_right = 135.0
+margin_right = 155.0
 margin_bottom = 157.0
 rect_min_size = Vector2( 135, 0 )
 size_flags_horizontal = 6
@@ -172,14 +173,14 @@ placeholder_text = "Author"
 script = ExtResource( 2 )
 
 [node name="VSeparator" type="VSeparator" parent="ContentDivider/ContentMat/Tabs/Level/HBoxContainer" index="1"]
-margin_left = 145.0
-margin_right = 145.0
+margin_left = 185.0
+margin_right = 185.0
 margin_bottom = 157.0
 custom_constants/separation = 0
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="ContentDivider/ContentMat/Tabs/Level/HBoxContainer" index="2"]
-margin_left = 155.0
-margin_right = 383.0
+margin_left = 195.0
+margin_right = 423.0
 margin_bottom = 157.0
 size_flags_horizontal = 3
 
@@ -205,7 +206,7 @@ scroll_horizontal_enabled = false
 script = ExtResource( 13 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ContentDivider/ContentMat/Tabs/Areas" index="0"]
-margin_right = 385.0
+margin_right = 425.0
 margin_bottom = 19.0
 size_flags_horizontal = 3
 
@@ -346,21 +347,21 @@ text = "Delete Mission"
 script = ExtResource( 6 )
 
 [node name="WindowCorner" parent="." index="2"]
-margin_left = 401.0
+margin_left = 441.0
 margin_top = 229.0
-margin_right = 413.0
+margin_right = 453.0
 margin_bottom = 241.0
 
 [node name="Border" parent="." index="3"]
-margin_right = 413.0
+margin_right = 453.0
 margin_bottom = 241.0
 
 [node name="WindowMat" parent="." index="4"]
-margin_right = 413.0
+margin_right = 453.0
 margin_bottom = 241.0
 
 [node name="Control" parent="." index="5"]
-margin_right = 413.0
+margin_right = 453.0
 margin_bottom = 241.0
 
 [connection signal="button_down" from="ContentDivider/ContentMat/Tabs/Areas/VBoxContainer/HBoxContainer/Paste" to="ContentDivider/ContentMat/Tabs/Areas" method="paste_area"]
