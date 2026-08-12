@@ -2441,7 +2441,6 @@ layer = 60
 [node name="Stamina" parent="CanvasLayer2" instance=ExtResource( 24 )]
 character_path = NodePath("../../Area/Character")
 camera_path = NodePath("../../CameraP1")
-viewport_offset = Vector2( 192, 216 )
 
 [node name="SharedSounds" type="Node" parent="."]
 unique_name_in_owner = true

@@ -274,7 +274,7 @@ bus = "Voices"
 
 [node name="Powerup3" type="AudioStreamPlayer" parent="VoiceEffects/PowerupSounds"]
 stream = ExtResource( 27 )
-volume_db = 4.0
+volume_db = 1.0
 bus = "Voices"
 
 [node name="LavaHurtSounds" type="Node" parent="VoiceEffects"]

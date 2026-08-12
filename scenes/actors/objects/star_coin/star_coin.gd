@@ -11,7 +11,8 @@ onready var anim_sprite : AnimatedSprite = $AnimatedSprite
 onready var recolorable : AnimatedSprite = $AnimatedSprite/Recolorable
 onready var particles : Particles2D = $AnimatedSprite/Particles2D
 onready var area : Area2D = $Area2D
-onready var audio_player : AudioStreamPlayer = $AudioStreamPlayer
+onready var audio_player = $Collect
+onready var audio_player_complete = $Complete
 onready var animation_player : AnimationPlayer = $AnimationPlayer
 
 var uuid: String = ""
@@ -87,7 +88,10 @@ func collect(body : PhysicsBody2D) -> void:
 		animation_player.play("collect")
 		var _connect = animation_player.connect("animation_finished", self, "queue_free")
 
-		audio_player.play()
+		if not Singleton.ModeSwitcher.visible and CurrentLevelData.save_data.get_collected_star_coin_count() >= CurrentLevelData.level_metadata.collectible_data.get_star_coin_count():
+			audio_player_complete.play()
+		else:
+			audio_player.play()
 
 
 func _object_removed(free: bool) -> void:
