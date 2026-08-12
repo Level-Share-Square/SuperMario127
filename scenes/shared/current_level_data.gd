@@ -103,7 +103,7 @@ func load_level_metadata(code: String) -> void:
 	load_save_data()
 	
 func load_save_data() -> void:
-	save_data = LevelSaveData.new(level_id, working_folder)
+	save_data = LevelSaveData.new(level_id, working_folder, level_metadata.collectible_data)
 	
 	if (save_data.get_total_mission_count() == -1 or save_data.get_total_star_coin_count() == -1):
 		save_data.set_total_mission_count(min(level_metadata.collectible_data.mission_data.size(), level_metadata.collectible_data.used_mission_data.size()))

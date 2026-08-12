@@ -15,6 +15,7 @@ var _collected_star_coins: PoolStringArray = [] # element is the star coin uuid
 var _time_scores: Dictionary = {} # time_scores should probably be stored as the sum of delta while playing, keys are same as completed_missions
 var _activated_fludds: Array = [false, false, false]
 
+var collectible_data: CollectibleData # only for use in conversion
 
 func get_save_path(selected_file: int = -3) -> String:
 	if selected_file == -3:
@@ -22,9 +23,10 @@ func get_save_path(selected_file: int = -3) -> String:
 	return level_list_util.get_level_save_path(level_id, level_folder, selected_file)
 
 
-func _init(s_level_id: String, s_level_folder: String) -> void:
+func _init(s_level_id: String, s_level_folder: String, s_collectible_data: CollectibleData = null) -> void:
 	level_id = s_level_id
 	level_folder = s_level_folder
+	collectible_data = s_collectible_data
 	load_save_from_dictionary(level_list_util.load_level_save_file(get_save_path()))
 
 func reset_save_data():
@@ -158,37 +160,38 @@ func load_save_0_1_0(save_dictionary: Dictionary):
 
 
 func convert_save_to_0_1_0(save_dictionary: Dictionary) -> Dictionary:
-#	var new_save_dict: Dictionary = {}
-#
-#	# Shine data to mission completion data
-#	var mission_array: Array = []
-#	for shine in save_dictionary["collected_shines"]:
-#		var shine_id: int = int(shine)
-#		if save_dictionary.get("collected_shines", {}).get(shine_id, false):
-#			var mission_uuid: String = collectible_data.mission_data[shine_id].mission_uuid
-#			mission_array.append(mission_uuid)
-#
-#	new_save_dict.get_or_add("completed_missions", mission_array)
-#
-#	# star coin data
-#	var star_coin_array: Array = []
-#	for star_coin in save_dictionary["collected_star_coins"]:
-#		var star_coin_id: int = int(star_coin)
-#		if save_dictionary.get("collected_star_coins", {}).get(star_coin_id, false):
-#			var star_coin_uuid: String = collectible_data.star_coin_data[star_coin_id].star_coin_uuid
-#			star_coin_array.append(star_coin_uuid)
-#
-#	new_save_dict.get_or_add("collected_star_coins", star_coin_array)
-#
-#	# time scores
-#	var time_score_dict: Dictionary = {}
-#	for shine in save_dictionary["time_scores"]:
-#		var shine_id: int = int(shine)
-#		var mission_uuid: String = collectible_data.star_coin_data[shine_id].mission_uuid
-#		time_score_dict.get_or_add(mission_uuid, save_dictionary.get("time_scores", {}).get(shine_id, -1))
-#
-#	new_save_dict.get_or_add("time_scores", time_score_dict)
-#	new_save_dict.get_or_add("activated_fludds", save_dictionary.get("activated_fludds", [false, false, false])) 
-#
-#	return new_save_dict
-	return {}
+	var new_save_dict: Dictionary = {}
+
+	# Shine data to mission completion data
+	var mission_array: Array = []
+	for shine in save_dictionary["collected_shines"]:
+		var shine_id: int = int(shine)
+		if save_dictionary.get("collected_shines", {}).get(shine, false):
+			var mission_uuid: String = collectible_data.mission_data[shine_id].mission_uuid
+			mission_array.append(mission_uuid)
+
+	new_save_dict.get_or_add("completed_missions", mission_array)
+
+	# star coin data
+	var star_coin_array: Array = []
+	for star_coin in save_dictionary["collected_star_coins"]:
+		var star_coin_id: int = int(star_coin)
+		if save_dictionary.get("collected_star_coins", {}).get(star_coin, false):
+			var star_coin_uuid: String = collectible_data.star_coin_data[star_coin_id].star_coin_uuid
+			star_coin_array.append(star_coin_uuid)
+
+	new_save_dict.get_or_add("collected_star_coins", star_coin_array)
+
+	# time scores
+	var time_score_dict: Dictionary = {}
+	for shine in save_dictionary["time_scores"]:
+		var shine_id: int = int(shine)
+		var mission_uuid: String = collectible_data.mission_data[shine_id].mission_uuid
+		time_score_dict.get_or_add(mission_uuid, save_dictionary.get("time_scores", {}).get(shine, -1))
+
+	new_save_dict.get_or_add("time_scores", time_score_dict)
+	new_save_dict.get_or_add("activated_fludds", save_dictionary.get("activated_fludds", [false, false, false])) 
+	new_save_dict.get_or_add("total_missions", collectible_data.mission_data.size())
+	new_save_dict.get_or_add("total_star_coins", collectible_data.star_coin_data.size())
+
+	return new_save_dict

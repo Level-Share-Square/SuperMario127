@@ -61,7 +61,7 @@ func setup(
 	if is_campaign: return
 	
 	# load save file
-	level_save_data = LevelSaveData.new(id, parent_folder)
+	level_save_data = LevelSaveData.new(id, parent_folder, level_metadata.collectible_data)
 	var save_path: String = level_list_util.get_level_save_path(id, parent_folder, -1)
 	if level_list_util.file_exists(save_path):
 		has_save = true

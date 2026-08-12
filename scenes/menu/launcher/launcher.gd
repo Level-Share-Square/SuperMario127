@@ -12,7 +12,7 @@ func _ready():
 		current_mod.text = "Current Mod: " + ModLoader.path.get_file().get_basename()
 		yield(timer, "timeout")
 	
-	Singleton.SceneSwitcher.menu_return_screen = "Preamble"
+	Singleton.SceneSwitcher.menu_return_screen = "Converter"
 	Singleton.SceneSwitcher.quit_to_menu()
 
 
