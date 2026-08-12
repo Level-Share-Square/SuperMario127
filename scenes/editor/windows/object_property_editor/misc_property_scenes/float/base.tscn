@@ -26,6 +26,7 @@ size_flags_horizontal = 3
 theme_type_variation = "HSliderWhite"
 min_value = inf_neg
 max_value = inf
+step = 0.001
 
 [node name="Padding" type="Control" parent="."]
 visible = false

@@ -22,7 +22,6 @@ func load_property(_editor: Editor, init_value, _property: Array, property_name 
 		$SpinBox.custom_arrow_step = property_info.step
 		$SpinBox.step = property_info.step
 		
-	prints(property[0], init_value)
 	property_changed(property[0], init_value)
 
 func change_property(new_value, save_to_data = true):
