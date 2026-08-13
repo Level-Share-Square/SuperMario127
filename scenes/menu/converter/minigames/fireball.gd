@@ -15,6 +15,8 @@ export var hit_damp: float = 0.85
 export var play_width: float
 var velocity : Vector2
 
+signal life_lost
+
 
 func _physics_process(delta):
 	shape_cast.target_position = velocity * delta
@@ -28,14 +30,15 @@ func _physics_process(delta):
 			velocity.x = 250
 		
 		velocity = velocity.bounce(collision.get_normal())
-		if velocity.length() > 200:
+		if velocity.length() > 250:
 			velocity *= hit_damp
 		
 		var collider = collision.get_collider()
 		if collider.name == "Ground":
-			position = initial_pos
-			velocity = Vector2.ZERO
+			to_spawn()
 			last_hit.play()
+			emit_signal("life_lost")
+			
 		elif collider.name.find("Box") > -1:
 			collider.hit(self)
 			hit.play()
@@ -61,18 +64,23 @@ func _physics_process(delta):
 		velocity.y = 0.1
 
 
+func to_spawn():
+	position = initial_pos
+	velocity = Vector2.ZERO
+
+
 func paddle_hit(paddle: Area2D):
 	if velocity.y > -50 and global_position.y < paddle.global_position.y:
 		var character: Character = paddle.character
-		var altered_char_vel: Vector2 = Vector2(-character.velocity.x, min(character.velocity.y, 0))/3
+		var altered_char_vel: Vector2 = Vector2(-character.velocity.x, min(character.velocity.y, -1))/3
 		
 		var bounce_normal: Vector2 = Vector2.UP
-		bounce_normal.x = (global_position.x - paddle.global_position.x) / 82
+		bounce_normal.x = clamp((global_position.x - paddle.global_position.x) / 100, -0.75, 0.75)
 		bounce_normal = bounce_normal.normalized()
 		
 		var relative_velocity: Vector2 = velocity - altered_char_vel
 		var bounced_velocity: Vector2 = relative_velocity.bounce(bounce_normal)
-		velocity = bounced_velocity + altered_char_vel/2
+		velocity = bounced_velocity + altered_char_vel
 		
 		hit.play()
 		

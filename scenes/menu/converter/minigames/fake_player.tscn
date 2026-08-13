@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=2]
+[gd_scene load_steps=59 format=2]
 
 [ext_resource path="res://scenes/actors/mario/mario.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/menu/converter/minigames/fake_player.gd" type="Script" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://assets/sounds/death.wav" type="AudioStream" id=7]
 [ext_resource path="res://scenes/menu/converter/camera.gd" type="Script" id=8]
 [ext_resource path="res://scenes/menu/converter/minigames/breakout/breakout.gd" type="Script" id=9]
+[ext_resource path="res://scenes/player/ui_new/ui/shine_shards.png" type="Texture" id=10]
 [ext_resource path="res://assets/icons/Pause.svg" type="Texture" id=11]
 [ext_resource path="res://assets/fonts/super-mario-script-3-1402.ttf" type="DynamicFontData" id=12]
 [ext_resource path="res://scenes/menu/theme.tres" type="Theme" id=13]
@@ -16,6 +17,8 @@
 [ext_resource path="res://assets/fonts/marioscript_ui.tres" type="DynamicFont" id=15]
 [ext_resource path="res://scenes/actors/objects/star_coin/collect_complete.wav" type="AudioStream" id=16]
 [ext_resource path="res://scenes/menu/converter/minigames/breakout/follow_player.gd" type="Script" id=17]
+[ext_resource path="res://scenes/menu/converter/minigames/breakout/1up.png" type="Texture" id=18]
+[ext_resource path="res://shaders/outline2.shader" type="Shader" id=19]
 
 [sub_resource type="RectangleShape2D" id=54]
 extents = Vector2( 240, 184 )
@@ -168,7 +171,7 @@ tracks/0/keys = {
 "values": [ 0.0 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("HBoxContainer/HighScoreCounter:custom_colors/font_color")
+tracks/1/path = NodePath("HBoxContainer/HighScoreCounter:rect_scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -177,10 +180,10 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Color( 1, 1, 1, 1 ) ]
+"values": [ Vector2( 1, 1 ) ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("HBoxContainer/HighScoreCounter:rect_scale")
+tracks/2/path = NodePath("HBoxContainer/HighScoreCounter:custom_colors/font_color")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -189,7 +192,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 1, 1 ) ]
+"values": [ Color( 0.513726, 0.72549, 1, 1 ) ]
 }
 
 [sub_resource type="Animation" id=60]
@@ -220,6 +223,409 @@ tracks/1/keys = {
 "update": 0,
 "values": [ Vector2( 1, 1.1 ), Vector2( 1, 1 ) ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("HBoxContainer/HighScoreCounter:custom_colors/font_color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ Color( 1, 0.922089, 0.566406, 1 ), Color( 0.513726, 0.72549, 1, 1 ) ]
+}
+
+[sub_resource type="DynamicFont" id=257]
+size = 24
+outline_size = 2
+use_filter = true
+extra_spacing_char = -2
+font_data = ExtResource( 12 )
+
+[sub_resource type="Animation" id=249]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Resizable:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -2, -2 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Resizable:rect_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0.9, 0.9 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Resizable:rect_rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Resizable:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=250]
+resource_name = "collect"
+length = 0.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Resizable:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.499984 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0.9, 0.9 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Resizable:rect_rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 0.5, 1 ),
+"update": 0,
+"values": [ 5.0, 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Resizable:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1.25, 1.25, 1.25, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="DynamicFont" id=251]
+size = 14
+outline_size = 2
+use_filter = true
+extra_spacing_char = -2
+font_data = ExtResource( 12 )
+
+[sub_resource type="GDScript" id=252]
+resource_name = "circle"
+script/source = "extends Control
+tool
+
+export var color := Color.white
+
+func _draw():
+	draw_circle(rect_size/2, min(rect_size.x, rect_size.y) / 2, color)
+"
+
+[sub_resource type="Shader" id=247]
+code = "shader_type canvas_item;
+render_mode blend_mix;
+uniform sampler2D gradient;
+
+void fragment(){
+	COLOR.a=texture(TEXTURE,UV).a;
+	vec2 my_uv=vec2(UV.y,0.0);
+	COLOR.rgb=COLOR.rgb*texture(gradient,my_uv).rgb;
+}"
+
+[sub_resource type="Gradient" id=253]
+offsets = PoolRealArray( 0.473373, 0.715976 )
+colors = PoolColorArray( 1, 0.992157, 0.894118, 1, 1, 0.670588, 0.286275, 1 )
+
+[sub_resource type="GradientTexture" id=248]
+gradient = SubResource( 253 )
+
+[sub_resource type="ShaderMaterial" id=254]
+shader = SubResource( 247 )
+shader_param/gradient = SubResource( 248 )
+
+[sub_resource type="DynamicFont" id=255]
+size = 18
+outline_size = 1
+use_filter = true
+extra_spacing_top = 5
+extra_spacing_char = -2
+font_data = ExtResource( 12 )
+
+[sub_resource type="ShaderMaterial" id=256]
+shader = ExtResource( 19 )
+shader_param/Smooth = true
+shader_param/width = 6.0
+shader_param/outline_color = Color( 0.34902, 0.694118, 0.529412, 1 )
+shader_param/pixel_size = 4
+
+[sub_resource type="Animation" id=262]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rect_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:rect_rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[sub_resource type="Animation" id=263]
+resource_name = "hide"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( -2, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0, 1, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rect_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.5 ),
+"transitions": PoolRealArray( 0.5, 2, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.5, 1.5 ), Vector2( 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:rect_rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 0.5 ),
+"transitions": PoolRealArray( 2, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 5.0, 15.0 ]
+}
+
+[sub_resource type="Animation" id=260]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rect_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:rect_rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[sub_resource type="Animation" id=261]
+resource_name = "hide"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( -2, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0, 1, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rect_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.5 ),
+"transitions": PoolRealArray( 0.5, 2, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.5, 1.5 ), Vector2( 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:rect_rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 0.5 ),
+"transitions": PoolRealArray( 2, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 5.0, 15.0 ]
+}
+
+[sub_resource type="Animation" id=258]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rect_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:rect_rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[sub_resource type="Animation" id=259]
+resource_name = "hide"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( -2, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0, 1, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rect_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.5 ),
+"transitions": PoolRealArray( 0.5, 2, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.5, 1.5 ), Vector2( 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:rect_rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 0.5 ),
+"transitions": PoolRealArray( 2, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 5.0, 15.0 ]
+}
 
 [node name="FakePlayer" type="Node2D"]
 physics_interpolation_mode = 2
@@ -248,7 +654,7 @@ script = ExtResource( 9 )
 
 [node name="AllHit" type="AudioStreamPlayer" parent="Breakout"]
 stream = ExtResource( 16 )
-volume_db = -5.0
+volume_db = -7.0
 bus = "Sounds"
 
 [node name="Tween" type="Tween" parent="Breakout"]
@@ -299,6 +705,7 @@ rect_min_size = Vector2( 0, 64 )
 position = Vector2( 144, 32 )
 
 [node name="Fireball" type="KinematicBody2D" parent="Breakout"]
+unique_name_in_owner = true
 position = Vector2( 384, 240 )
 collision_layer = 1048576
 script = ExtResource( 3 )
@@ -349,23 +756,28 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 color = Color( 0, 0, 0, 0.501961 )
 
+[node name="CenterContainer" type="CenterContainer" parent="Breakout/PauseContainer/VBoxContainer/Darken"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="PauseIcon" type="TextureRect" parent="Breakout/PauseContainer/VBoxContainer/Darken/CenterContainer"]
+margin_left = 224.0
+margin_top = 166.0
+margin_right = 256.0
+margin_bottom = 198.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 11 )
+expand = true
+stretch_mode = 6
+
 [node name="Padding" type="Control" parent="Breakout/PauseContainer/VBoxContainer"]
 margin_top = 368.0
 margin_right = 480.0
 margin_bottom = 432.0
 rect_min_size = Vector2( 0, 64 )
 
-[node name="PauseIcon" type="TextureRect" parent="Breakout/PauseContainer"]
-margin_left = 368.0
-margin_top = 200.0
-margin_right = 400.0
-margin_bottom = 232.0
-rect_min_size = Vector2( 32, 32 )
-texture = ExtResource( 11 )
-expand = true
-stretch_mode = 6
-
 [node name="Character" parent="." instance=ExtResource( 1 )]
+unique_name_in_owner = true
 position = Vector2( 384, 344 )
 __meta__ = {
 "_edit_lock_": true
@@ -457,48 +869,48 @@ margin_right = 768.0
 margin_bottom = 432.0
 mouse_filter = 2
 theme = ExtResource( 13 )
-custom_constants/margin_right = 16
-custom_constants/margin_top = 24
+custom_constants/margin_right = 14
+custom_constants/margin_top = 16
 custom_constants/margin_left = 12
 custom_constants/margin_bottom = 16
 
-[node name="Collectibles" type="VBoxContainer" parent="HUD"]
+[node name="Counters" type="VBoxContainer" parent="HUD"]
 margin_left = 12.0
-margin_top = 24.0
-margin_right = 752.0
+margin_top = 16.0
+margin_right = 754.0
 margin_bottom = 416.0
 custom_constants/separation = 16
 
-[node name="Score" type="Control" parent="HUD/Collectibles"]
-margin_right = 740.0
+[node name="Score" type="Control" parent="HUD/Counters"]
+margin_right = 742.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 0, 24 )
 
-[node name="PolygonSwatch" parent="HUD/Collectibles/Score" instance=ExtResource( 14 )]
+[node name="PolygonSwatch" parent="HUD/Counters/Score" instance=ExtResource( 14 )]
 modulate = Color( 0.247059, 0.27451, 0.737255, 0.752941 )
-position = Vector2( 0, 12 )
+position = Vector2( 0, 24 )
 rotation = 0.1309
 
-[node name="ScoreAnimPlayer" type="AnimationPlayer" parent="HUD/Collectibles/Score"]
+[node name="ScoreAnimPlayer" type="AnimationPlayer" parent="HUD/Counters/Score"]
 unique_name_in_owner = true
 anims/RESET = SubResource( 56 )
 anims/collect = SubResource( 57 )
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HUD/Collectibles/Score"]
-margin_left = 0.90909
-margin_top = 5.63636
-margin_right = 91.9091
-margin_bottom = 29.6364
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/Counters/Score"]
+margin_left = 0.909
+margin_top = 15.636
+margin_right = 91.909
+margin_bottom = 39.636
 rect_rotation = -7.0
 rect_pivot_offset = Vector2( 1.61605, 4.58981 )
 custom_constants/separation = 6
 
-[node name="Padding" type="Control" parent="HUD/Collectibles/Score/HBoxContainer"]
+[node name="Padding" type="Control" parent="HUD/Counters/Score/HBoxContainer"]
 margin_right = 4.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 4, 0 )
 
-[node name="ScoreCounter" type="Label" parent="HUD/Collectibles/Score/HBoxContainer"]
+[node name="ScoreCounter" type="Label" parent="HUD/Counters/Score/HBoxContainer"]
 unique_name_in_owner = true
 margin_left = 10.0
 margin_right = 90.0
@@ -509,7 +921,7 @@ custom_colors/font_outline_modulate = Color( 0.105882, 0.145098, 0.478431, 0.650
 custom_fonts/font = ExtResource( 15 )
 text = "000000"
 
-[node name="ScoreLabel" type="Label" parent="HUD/Collectibles/Score/HBoxContainer/ScoreCounter"]
+[node name="ScoreLabel" type="Label" parent="HUD/Counters/Score/HBoxContainer/ScoreCounter"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = -10.0
@@ -519,37 +931,37 @@ custom_fonts/font = SubResource( 58 )
 text = "SCORE"
 align = 1
 
-[node name="HighScore" type="Control" parent="HUD/Collectibles"]
+[node name="HighScore" type="Control" parent="HUD/Counters"]
 margin_top = 40.0
-margin_right = 740.0
+margin_right = 742.0
 margin_bottom = 64.0
 rect_min_size = Vector2( 0, 24 )
 
-[node name="PolygonSwatch" parent="HUD/Collectibles/HighScore" instance=ExtResource( 14 )]
+[node name="PolygonSwatch" parent="HUD/Counters/HighScore" instance=ExtResource( 14 )]
 modulate = Color( 0.247059, 0.27451, 0.737255, 0.752941 )
-position = Vector2( 0, 12 )
+position = Vector2( 0, 24 )
 rotation = 0.1309
 
-[node name="HighScoreAnimPlayer" type="AnimationPlayer" parent="HUD/Collectibles/HighScore"]
+[node name="HighScoreAnimPlayer" type="AnimationPlayer" parent="HUD/Counters/HighScore"]
 unique_name_in_owner = true
 anims/RESET = SubResource( 59 )
 anims/collect = SubResource( 60 )
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HUD/Collectibles/HighScore"]
-margin_left = 0.90909
-margin_top = 5.63636
-margin_right = 91.9091
-margin_bottom = 29.6364
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/Counters/HighScore"]
+margin_left = 0.909
+margin_top = 15.636
+margin_right = 91.909
+margin_bottom = 39.636
 rect_rotation = -7.0
 rect_pivot_offset = Vector2( 1.61605, 4.58981 )
 custom_constants/separation = 6
 
-[node name="Padding" type="Control" parent="HUD/Collectibles/HighScore/HBoxContainer"]
+[node name="Padding" type="Control" parent="HUD/Counters/HighScore/HBoxContainer"]
 margin_right = 4.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 4, 0 )
 
-[node name="HighScoreCounter" type="Label" parent="HUD/Collectibles/HighScore/HBoxContainer"]
+[node name="HighScoreCounter" type="Label" parent="HUD/Counters/HighScore/HBoxContainer"]
 unique_name_in_owner = true
 margin_left = 10.0
 margin_right = 90.0
@@ -557,10 +969,10 @@ margin_bottom = 24.0
 rect_pivot_offset = Vector2( 0, 16 )
 custom_colors/font_color = Color( 0.513726, 0.72549, 1, 1 )
 custom_colors/font_outline_modulate = Color( 0.105882, 0.145098, 0.478431, 0.65098 )
-custom_fonts/font = ExtResource( 15 )
+custom_fonts/font = SubResource( 257 )
 text = "000000"
 
-[node name="ScoreLabel" type="Label" parent="HUD/Collectibles/HighScore/HBoxContainer/HighScoreCounter"]
+[node name="ScoreLabel" type="Label" parent="HUD/Counters/HighScore/HBoxContainer/HighScoreCounter"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = -10.0
@@ -573,3 +985,305 @@ align = 1
 __meta__ = {
 "_edit_use_anchors_": true
 }
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD"]
+margin_left = 642.0
+margin_top = 16.0
+margin_right = 754.0
+margin_bottom = 416.0
+rect_min_size = Vector2( 112, 0 )
+size_flags_horizontal = 8
+custom_constants/separation = 2
+
+[node name="Padding" type="Control" parent="HUD/VBoxContainer"]
+margin_right = 112.0
+margin_bottom = 12.0
+rect_min_size = Vector2( 0, 12 )
+
+[node name="CenterContainer" type="CenterContainer" parent="HUD/VBoxContainer"]
+margin_left = 36.0
+margin_top = 14.0
+margin_right = 112.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 76, 36 )
+size_flags_horizontal = 8
+
+[node name="LevelCounter" type="Control" parent="HUD/VBoxContainer/CenterContainer"]
+margin_left = 20.0
+margin_right = 56.0
+margin_bottom = 36.0
+rect_min_size = Vector2( 36, 36 )
+rect_pivot_offset = Vector2( -491, 176 )
+size_flags_horizontal = 8
+
+[node name="Paint" type="Polygon2D" parent="HUD/VBoxContainer/CenterContainer/LevelCounter"]
+position = Vector2( 19.8, 21.6 )
+scale = Vector2( 0.6525, 0.6525 )
+color = Color( 0.247059, 0.27451, 0.737255, 0.752941 )
+polygon = PoolVector2Array( 19, -16, 14, -21, 7, -24, -2, -24, -9, -21, -10, -20, -12, -20, -18, -15, -22, -9, -24, -3, -24, 5, -21, 13, -14, 20, -7, 23, 0, 24, 7, 23, 15, 19, 20, 13, 22, 7, 22, -1, 19, -8, 15, -14, 12, -17, 15, -16, 17, -14, 21, -8, 22, -4, 23, -2, 23, 5, 23, 8, 22, 9, 23, 10, 24, 8, 24, 0, 23, -4, 22, -8, 17, -15, 17, -16, 13, -18, 9, -19, 5, -21, 9, -21, 14, -19 )
+
+[node name="LevelAnimPlayer" type="AnimationPlayer" parent="HUD/VBoxContainer/CenterContainer/LevelCounter"]
+unique_name_in_owner = true
+anims/RESET = SubResource( 249 )
+anims/collect = SubResource( 250 )
+
+[node name="Level" type="Label" parent="HUD/VBoxContainer/CenterContainer/LevelCounter"]
+margin_top = -14.0
+margin_right = 37.0
+custom_colors/font_outline_modulate = Color( 0.105882, 0.145098, 0.478431, 0.65098 )
+custom_fonts/font = SubResource( 251 )
+text = "LEVEL"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Resizable" type="Control" parent="HUD/VBoxContainer/CenterContainer/LevelCounter"]
+margin_left = -2.0
+margin_top = -2.0
+margin_right = 38.0
+margin_bottom = 38.0
+rect_min_size = Vector2( 40, 40 )
+rect_scale = Vector2( 0.9, 0.9 )
+rect_pivot_offset = Vector2( 20, 20 )
+
+[node name="Polygon" type="Control" parent="HUD/VBoxContainer/CenterContainer/LevelCounter/Resizable"]
+margin_left = -4.0
+margin_top = -4.0
+margin_right = 60.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 64, 64 )
+rect_rotation = -3.5
+rect_scale = Vector2( 0.75, 0.75 )
+
+[node name="Border" type="Control" parent="HUD/VBoxContainer/CenterContainer/LevelCounter/Resizable/Polygon"]
+modulate = Color( 0.105882, 0.145098, 0.478431, 0.65098 )
+margin_left = -5.0
+margin_top = -5.0
+margin_right = 35.0
+margin_bottom = 35.0
+rect_scale = Vector2( 1.15, 1.15 )
+
+[node name="Polygon2D" type="Polygon2D" parent="HUD/VBoxContainer/CenterContainer/LevelCounter/Resizable/Polygon/Border"]
+position = Vector2( 32, 36 )
+polygon = PoolVector2Array( -6, 14, 0.00768089, 15, 6, 14, 3, 20, 0, 25, -3, 20 )
+
+[node name="Polygon2D2" type="Polygon2D" parent="HUD/VBoxContainer/CenterContainer/LevelCounter/Resizable/Polygon/Border"]
+position = Vector2( 32, 36 )
+rotation = 1.5708
+polygon = PoolVector2Array( -6, 14, 0.00768089, 15, 6, 14, 3, 20, 0, 25, -3, 20 )
+
+[node name="Polygon2D3" type="Polygon2D" parent="HUD/VBoxContainer/CenterContainer/LevelCounter/Resizable/Polygon/Border"]
+position = Vector2( 32, 36 )
+rotation = -3.14159
+polygon = PoolVector2Array( -6, 14, 0.00768089, 15, 6, 14, 3, 20, 0, 25, -3, 20 )
+
+[node name="Polygon2D4" type="Polygon2D" parent="HUD/VBoxContainer/CenterContainer/LevelCounter/Resizable/Polygon/Border"]
+position = Vector2( 32, 36 )
+rotation = -1.5708
+polygon = PoolVector2Array( -6, 14, 0.00768089, 15, 6, 14, 3, 20, 0, 25, -3, 20 )
+
+[node name="Polygon2D5" type="Polygon2D" parent="HUD/VBoxContainer/CenterContainer/LevelCounter/Resizable/Polygon/Border"]
+position = Vector2( 32, 36 )
+rotation = 0.785397
+polygon = PoolVector2Array( -6, 14, 0.00768089, 15, 6, 14, 3, 20, 0, 25, -3, 20 )
+
+[node name="Polygon2D6" type="Polygon2D" parent="HUD/VBoxContainer/CenterContainer/LevelCounter/Resizable/Polygon/Border"]
+position = Vector2( 32, 36 )
+rotation = 2.35619
+polygon = PoolVector2Array( -6, 14, 0.00768089, 15, 6, 14, 3, 20, 0, 25, -3, 20 )
+
+[node name="Polygon2D7" type="Polygon2D" parent="HUD/VBoxContainer/CenterContainer/LevelCounter/Resizable/Polygon/Border"]
+position = Vector2( 32, 36 )
+rotation = -2.3562
+polygon = PoolVector2Array( -6, 14, 0.00768089, 15, 6, 14, 3, 20, 0, 25, -3, 20 )
+
+[node name="Polygon2D8" type="Polygon2D" parent="HUD/VBoxContainer/CenterContainer/LevelCounter/Resizable/Polygon/Border"]
+position = Vector2( 32, 36 )
+rotation = -0.785406
+polygon = PoolVector2Array( -6, 14, 0.00768089, 15, 6, 14, 3, 20, 0, 25, -3, 20 )
+
+[node name="Circle" type="Control" parent="HUD/VBoxContainer/CenterContainer/LevelCounter/Resizable/Polygon/Border"]
+margin_left = 26.0
+margin_top = 7.0
+margin_right = 38.0
+margin_bottom = 19.0
+script = SubResource( 252 )
+
+[node name="Circle2" type="Control" parent="HUD/VBoxContainer/CenterContainer/LevelCounter/Resizable/Polygon/Border"]
+margin_left = 42.0
+margin_top = 13.0
+margin_right = 54.0
+margin_bottom = 25.0
+script = SubResource( 252 )
+
+[node name="Circle3" type="Control" parent="HUD/VBoxContainer/CenterContainer/LevelCounter/Resizable/Polygon/Border"]
+margin_left = 10.0
+margin_top = 13.0
+margin_right = 22.0
+margin_bottom = 25.0
+script = SubResource( 252 )
+
+[node name="Circle4" type="Control" parent="HUD/VBoxContainer/CenterContainer/LevelCounter/Resizable/Polygon/Border"]
+margin_left = 16.0
+margin_top = 20.0
+margin_right = 48.0
+margin_bottom = 52.0
+script = SubResource( 252 )
+
+[node name="Fill" type="Control" parent="HUD/VBoxContainer/CenterContainer/LevelCounter/Resizable/Polygon"]
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="Polygon2D" type="Polygon2D" parent="HUD/VBoxContainer/CenterContainer/LevelCounter/Resizable/Polygon/Fill"]
+position = Vector2( 32, 36 )
+polygon = PoolVector2Array( -6, 14, 0.00768089, 15, 6, 14, 3, 20, 0, 25, -3, 20 )
+
+[node name="Polygon2D2" type="Polygon2D" parent="HUD/VBoxContainer/CenterContainer/LevelCounter/Resizable/Polygon/Fill"]
+position = Vector2( 32, 36 )
+rotation = 1.5708
+polygon = PoolVector2Array( -6, 14, 0.00768089, 15, 6, 14, 3, 20, 0, 25, -3, 20 )
+
+[node name="Polygon2D3" type="Polygon2D" parent="HUD/VBoxContainer/CenterContainer/LevelCounter/Resizable/Polygon/Fill"]
+position = Vector2( 32, 36 )
+rotation = -3.14159
+polygon = PoolVector2Array( -6, 14, 0.00768089, 15, 6, 14, 3, 20, 0, 25, -3, 20 )
+
+[node name="Polygon2D4" type="Polygon2D" parent="HUD/VBoxContainer/CenterContainer/LevelCounter/Resizable/Polygon/Fill"]
+position = Vector2( 32, 36 )
+rotation = -1.5708
+polygon = PoolVector2Array( -6, 14, 0.00768089, 15, 6, 14, 3, 20, 0, 25, -3, 20 )
+
+[node name="Polygon2D5" type="Polygon2D" parent="HUD/VBoxContainer/CenterContainer/LevelCounter/Resizable/Polygon/Fill"]
+position = Vector2( 32, 36 )
+rotation = 0.785397
+polygon = PoolVector2Array( -6, 14, 0.00768089, 15, 6, 14, 3, 20, 0, 25, -3, 20 )
+
+[node name="Polygon2D6" type="Polygon2D" parent="HUD/VBoxContainer/CenterContainer/LevelCounter/Resizable/Polygon/Fill"]
+position = Vector2( 32, 36 )
+rotation = 2.35619
+polygon = PoolVector2Array( -6, 14, 0.00768089, 15, 6, 14, 3, 20, 0, 25, -3, 20 )
+
+[node name="Polygon2D7" type="Polygon2D" parent="HUD/VBoxContainer/CenterContainer/LevelCounter/Resizable/Polygon/Fill"]
+position = Vector2( 32, 36 )
+rotation = -2.3562
+polygon = PoolVector2Array( -6, 14, 0.00768089, 15, 6, 14, 3, 20, 0, 25, -3, 20 )
+
+[node name="Polygon2D8" type="Polygon2D" parent="HUD/VBoxContainer/CenterContainer/LevelCounter/Resizable/Polygon/Fill"]
+position = Vector2( 32, 36 )
+rotation = -0.785406
+polygon = PoolVector2Array( -6, 14, 0.00768089, 15, 6, 14, 3, 20, 0, 25, -3, 20 )
+
+[node name="Circle" type="Control" parent="HUD/VBoxContainer/CenterContainer/LevelCounter/Resizable/Polygon/Fill"]
+margin_left = 27.0
+margin_top = 5.0
+margin_right = 37.0
+margin_bottom = 15.0
+script = SubResource( 252 )
+
+[node name="Circle2" type="Control" parent="HUD/VBoxContainer/CenterContainer/LevelCounter/Resizable/Polygon/Fill"]
+margin_left = 45.0
+margin_top = 12.0
+margin_right = 55.0
+margin_bottom = 22.0
+script = SubResource( 252 )
+
+[node name="Circle3" type="Control" parent="HUD/VBoxContainer/CenterContainer/LevelCounter/Resizable/Polygon/Fill"]
+margin_left = 9.0
+margin_top = 12.0
+margin_right = 19.0
+margin_bottom = 22.0
+script = SubResource( 252 )
+
+[node name="Circle4" type="Control" parent="HUD/VBoxContainer/CenterContainer/LevelCounter/Resizable/Polygon/Fill"]
+margin_left = 16.0
+margin_top = 20.0
+margin_right = 48.0
+margin_bottom = 52.0
+script = SubResource( 252 )
+
+[node name="FillUnder" type="TextureProgress" parent="HUD/VBoxContainer/CenterContainer/LevelCounter/Resizable"]
+material = SubResource( 254 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_rotation = -3.5
+texture_under = ExtResource( 10 )
+texture_progress = ExtResource( 10 )
+fill_mode = 4
+tint_under = Color( 0.776471, 0.541176, 0.423529, 1 )
+nine_patch_stretch = true
+
+[node name="Fill" type="TextureProgress" parent="HUD/VBoxContainer/CenterContainer/LevelCounter/Resizable"]
+material = SubResource( 254 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_rotation = -3.5
+max_value = 5.0
+value = 5.0
+texture_under = ExtResource( 10 )
+texture_progress = ExtResource( 10 )
+fill_mode = 4
+tint_under = Color( 0.776471, 0.541176, 0.423529, 1 )
+nine_patch_stretch = true
+
+[node name="LevelLabel" type="Label" parent="HUD/VBoxContainer/CenterContainer/LevelCounter/Resizable"]
+unique_name_in_owner = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_rotation = -3.5
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 0.105882, 0.145098, 0.478431, 1 )
+custom_colors/font_color_shadow = Color( 0.247059, 0.27451, 0.737255, 0.752941 )
+custom_constants/shadow_offset_x = 0
+custom_constants/shadow_offset_y = 1
+custom_fonts/font = SubResource( 255 )
+text = "1"
+align = 1
+valign = 1
+
+[node name="LivesContainer" type="HBoxContainer" parent="HUD/VBoxContainer"]
+unique_name_in_owner = true
+margin_left = 40.0
+margin_top = 52.0
+margin_right = 112.0
+margin_bottom = 76.0
+rect_min_size = Vector2( 72, 0 )
+size_flags_horizontal = 8
+custom_constants/separation = 0
+alignment = 2
+
+[node name="Life3" type="TextureRect" parent="HUD/VBoxContainer/LivesContainer"]
+material = SubResource( 256 )
+margin_right = 24.0
+margin_bottom = 24.0
+rect_pivot_offset = Vector2( 12, 12 )
+texture = ExtResource( 18 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HUD/VBoxContainer/LivesContainer/Life3"]
+anims/RESET = SubResource( 262 )
+anims/hide = SubResource( 263 )
+
+[node name="Life2" type="TextureRect" parent="HUD/VBoxContainer/LivesContainer"]
+material = SubResource( 256 )
+margin_left = 24.0
+margin_right = 48.0
+margin_bottom = 24.0
+rect_pivot_offset = Vector2( 12, 12 )
+texture = ExtResource( 18 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HUD/VBoxContainer/LivesContainer/Life2"]
+anims/RESET = SubResource( 260 )
+anims/hide = SubResource( 261 )
+
+[node name="Life1" type="TextureRect" parent="HUD/VBoxContainer/LivesContainer"]
+material = SubResource( 256 )
+margin_left = 48.0
+margin_right = 72.0
+margin_bottom = 24.0
+rect_pivot_offset = Vector2( 12, 12 )
+texture = ExtResource( 18 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HUD/VBoxContainer/LivesContainer/Life1"]
+anims/RESET = SubResource( 258 )
+anims/hide = SubResource( 259 )

@@ -16,13 +16,14 @@ onready var hit = $Hit
 onready var hit_break = $HitBreak
 onready var color_index: int = sprite.region_rect.position.y / 24
 
-const MAX_HP: int = 350
+const MAX_HP: int = 250
 var hp: int = MAX_HP
 
 var shake_strength: float = 0.0
 var shake: bool = false
 
 signal award_points(amount, color)
+signal box_broken
 
 func _ready():
 	sprite.material = sprite.material.duplicate()
@@ -35,6 +36,8 @@ func hit(fireball: KinematicBody2D) -> void:
 	
 	sprite.material.set_shader_param("opacity", clamp(float(hp) / float(MAX_HP), 0.0, 1.0))
 	if hp <= 0:
+		emit_signal("box_broken")
+		
 		sprite.hide()
 		impact.show()
 		hit_break.play()
