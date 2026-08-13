@@ -33,7 +33,7 @@ func _ready():
 	
 func _input(event):
 	var editor = get_tree().current_scene
-	if !(editor.get_node("%ObjectSettingsWindow").visible or editor.get_node("%LayerEditor")): expand_button.active = false
+	if !(editor.get_node("%ObjectSettingsWindow").visible or editor.get_node("%LayerEditor").visible): expand_button.active = false
 	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT and event.pressed:
 		var mouse_pos: Vector2 = get_global_mouse_position()
 		
