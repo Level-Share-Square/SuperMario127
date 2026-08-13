@@ -385,7 +385,6 @@ static func serialize_data(value) -> String:
 			data_code = TYPE_CODE_VECTOR2 + serialize_data_array([value.x, value.y])
 		TYPE_COLOR:
 			value = value as Color
-			print(typeof(value.r))
 			data_code = TYPE_CODE_COLOR + serialize_data_array([value.r, value.g, value.b, value.a])
 		TYPE_ARRAY:
 			value = value as Array

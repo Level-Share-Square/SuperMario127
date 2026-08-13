@@ -67,8 +67,8 @@ func get_area(result) -> AreaDataOld:
 
 	for object_result in result.objects:
 		var object = get_object(object_result)
-		if object.properties.size() < 6:
-			print(object)
+#		if object.properties.size() < 6:
+#			print(object)
 		area.objects.append(object)
 	return area
 

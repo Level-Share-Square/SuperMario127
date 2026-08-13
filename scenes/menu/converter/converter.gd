@@ -2,10 +2,20 @@ extends Node
 
 onready var progress_bar = $"%ProgressBar"
 
+const TIMEOUT_FACTOR: float = 10000.0
+
 var conversion_thread: Thread
 var files_to_convert: Array
 var saves_to_convert: Array
 var thumbnails_to_convert: Array
+
+var thread_timer: float = 0.0
+var thread_timeout: float = -1.0
+var thread_timer_on: bool = false
+
+var failed_files: Array
+var failed_threads: Array
+var current_file: String = ""
 
 func start():
 	conversion()
@@ -27,13 +37,35 @@ func conversion():
 	if not (files_to_convert.empty() and saves_to_convert.empty()):
 		conversion_thread = Thread.new()
 		conversion_thread.start(self, "convert_thread", files_to_convert)
+		thread_timer_on = true
 	else:
 		on_conversion_finished()
+
+func _process(delta):
+	if current_file and thread_timer_on:
+		thread_timer += delta
+		prints("CURRENT THREAD TIMER:", thread_timer, "\nTIMEOUT:", thread_timeout)
+			
+		if thread_timer > thread_timeout:
+			printerr("Failed to convert: ", current_file)
+			failed_files.append(current_file)
+			failed_threads.append(conversion_thread)
+			
+			files_to_convert.erase(current_file)
+			current_file = ""
+			
+			if not files_to_convert.empty():
+				conversion_thread = Thread.new()
+				conversion_thread.start(self, "convert_thread", files_to_convert)
+			else:
+				on_conversion_finished()
 
 func convert_thread(files: Array):
 	var dir := Directory.new()
 	
 	for old_file_path in files:
+		call_deferred("start_file_timer", old_file_path)
+		
 		var new_file_path: String = old_file_path.replace("level_list_old", "level_list")
 		var working_folder: String = new_file_path.get_base_dir()
 		
@@ -42,8 +74,9 @@ func convert_thread(files: Array):
 		var old_level_code: String = level_list_util.load_level_code_file(old_file_path)
 		var new_level_code: String = CurrentLevelData.convert_old_code_to_new(old_level_code)
 		
-		progress_bar.value += 1
 		level_list_util.save_level_code_file(new_level_code, new_file_path)
+		
+		call_deferred("finish_file", old_file_path)
 		
 	convert_inner(saves_to_convert)
 	convert_inner(thumbnails_to_convert)
@@ -53,11 +86,28 @@ func convert_thread(files: Array):
 	file.close()
 		
 	call_deferred("on_conversion_finished")
+	
+func start_file_timer(file_path: String):
+	current_file = file_path
+	thread_timer = 0.0
+	
+	var file := File.new()
+	if file.open(file_path, File.READ) == OK:
+		var length: float = file.get_len()
+		thread_timeout = 2.0 + (length / TIMEOUT_FACTOR)
+		file.close()
+	else:
+		thread_timeout = 2.0
+
+func finish_file(file_path: String):
+	progress_bar.value += 1
+	files_to_convert.erase(file_path)
 
 func on_conversion_finished():
 	if conversion_thread and conversion_thread.is_active():
 		conversion_thread.wait_to_finish()
-	print("Conversion complete.")
+	prints("Conversion complete. Files that failed:", failed_files)
+	thread_timer_on = false
 	
 	LocalSettings.change_setting("Meta", "game_version", Singleton.PlayerSettings.game_version)
 	owner.transition("MainMenu")

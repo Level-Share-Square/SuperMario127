@@ -174,7 +174,8 @@ margin_left = -6.0
 margin_right = 774.0
 margin_bottom = 17.0
 theme = ExtResource( 3 )
-step = 1.0
+max_value = 9000.0
+step = 0.05
 
 [connection signal="screen_change" from="." to="MinigameFuncs" method="stop_playing"]
 [connection signal="screen_opened" from="." to="MinigameFuncs" method="start_playing"]
