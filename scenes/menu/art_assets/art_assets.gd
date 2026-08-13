@@ -12,6 +12,8 @@ onready var splash_screen = $"%SplashScreen"
 onready var icon = $"%Icon"
 onready var twitter_icon = $"%TwitterIcon"
 onready var end_cards = $"%EndCards"
+onready var shorts_template = $"%ShortsTemplate"
+
 
 func _ready():
 	#return
@@ -58,8 +60,20 @@ func _ready():
 #	var twitter_icon_img: Image = twitter_icon.get_node("Viewport").get_texture().get_data()
 #	twitter_icon_img.flip_y()
 #	twitter_icon_img.save_png("res://assets/artwork/twitter/twitter_icon.png")
+	
+	var shorts_template_img: Image = shorts_template.get_node("Viewport").get_texture().get_data()
+	shorts_template_img.convert(Image.FORMAT_RGBA8)
+	shorts_template_img.flip_y()
+	fix_transparency(shorts_template_img)
+	shorts_template_img.save_png("res://assets/artwork/youtube/shorts_template.png")
 
-	var end_cards_img: Image = end_cards.get_node("Viewport").get_texture().get_data()
-	end_cards_img.convert(Image.FORMAT_RGBA8)
-	end_cards_img.flip_y()
-	end_cards_img.save_png("res://assets/artwork/youtube/end_cards_1.png")
+
+func fix_transparency(image_data: Image) -> void:
+	for j in image_data.get_height():
+		for i in image_data.get_width():
+			var c = image_data.get_pixel(i, j)
+			if c.a > 0:
+				c.r /= c.a
+				c.g /= c.a
+				c.b /= c.a
+			image_data.set_pixel(i, j, c)
