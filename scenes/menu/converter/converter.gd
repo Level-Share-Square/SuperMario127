@@ -18,7 +18,9 @@ var failed_threads: Array
 var current_file: String = ""
 
 func start():
-	conversion()
+	var dir := Directory.new()
+	if Singleton.PlayerSettings.game_version_mismatch and not dir.file_exists("user://level_list/converted"):
+		conversion()
 
 func conversion():
 	var dir := Directory.new()
