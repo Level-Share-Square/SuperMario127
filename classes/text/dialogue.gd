@@ -177,15 +177,11 @@ func body_entered(body):
 		timer.start()
 
 func body_exited(body):
-	if not interactable: return
-	if not is_visible_in_tree(): return
-	if not parent.enabled: return
 	if being_read: return
 	for character in characters:
-		if (body == character and character.get_collision_layer_bit(1)):
-			if (body_overlapping and reset_read_timer == 0 and len(characters) == 1):
-				message_disappear.play()
-				body_overlapping = false
+		if character.get_collision_layer_bit(1):
+			message_disappear.play()
+			body_overlapping = false
 			remove_character(body)
 			timer.stop()
 
@@ -293,11 +289,17 @@ func _physics_process(delta):
 		
 		# :/
 		var character_interacting: Character = get_interacting_character()
-		if (is_instance_valid(character_interacting)):
+		if (is_instance_valid(character_interacting) and character_interacting in area.get_overlapping_bodies()):
 			if delegate_tag == "" or delegate_tag == tag:
 				open_menu(character_interacting)
 			else:
 				open_remote_menu(character_interacting)
+		else:
+			if is_instance_valid(character_interacting):
+				message_disappear.play()
+				body_overlapping = false
+				remove_character(character_interacting)
+				timer.stop()
 		
 		# message appear signal was removed from here, made
 		# redundant by the message changed signal
