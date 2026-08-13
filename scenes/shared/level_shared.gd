@@ -94,7 +94,7 @@ func add_layer(layer_data = null, add_to_data: bool = false, at: int = layers.si
 		CurrentLevelData.current_area.layers.insert(at, layer_data)
 
 	if at != layers.size():
-		move_layer(new_layer, at, true)
+		move_layer(new_layer, at, add_to_data)
 
 	return new_layer
 
