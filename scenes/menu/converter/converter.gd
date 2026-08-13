@@ -1,8 +1,13 @@
 extends Node
 
+onready var status_label = $"%StatusLabel"
 onready var progress_bar = $"%ProgressBar"
+onready var progress_label = $"%ProgressLabel"
 
 const TIMEOUT_FACTOR: float = 10000.0
+
+export var status_converting: String
+export var status_done: String
 
 var conversion_thread: Thread
 var files_to_convert: Array
@@ -21,6 +26,10 @@ func start():
 	var dir := Directory.new()
 	if Singleton.PlayerSettings.game_version_mismatch and not dir.file_exists("user://level_list/converted"):
 		conversion()
+	else:
+		progress_bar.hide()
+		progress_label.hide()
+		status_label.text = status_done
 
 func conversion():
 	var dir := Directory.new()
@@ -34,6 +43,7 @@ func conversion():
 	saves_to_convert = data[1]
 	thumbnails_to_convert = data[2]
 	
+	status_label.text = status_converting
 	progress_bar.max_value = files_to_convert.size()
 	
 	if not (files_to_convert.empty() and saves_to_convert.empty()):
@@ -103,6 +113,7 @@ func start_file_timer(file_path: String):
 
 func finish_file(file_path: String):
 	progress_bar.value += 1
+	progress_label.text = str(stepify(progress_bar.value / progress_bar.max_value, 0.01)).pad_decimals(2)
 	files_to_convert.erase(file_path)
 
 func on_conversion_finished():
@@ -111,8 +122,11 @@ func on_conversion_finished():
 	prints("Conversion complete. Files that failed:", failed_files)
 	thread_timer_on = false
 	
+	progress_label.text = "Done!"
+	status_label.text = status_done
+	
 	LocalSettings.change_setting("Meta", "game_version", Singleton.PlayerSettings.game_version)
-	owner.transition("MainMenu")
+	#owner.transition("MainMenu")
 	
 	level_list_util.init_levels_list()
 

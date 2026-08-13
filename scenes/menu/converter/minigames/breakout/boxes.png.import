@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/exclamation_mark.png-7751c522c5f64d0bc4bd69e983b0a871.stex"
+path="res://.import/boxes.png-2531a8dfc8c56f748230e2a94e7105d1.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://classes/exclamation_mark.png"
-dest_files=[ "res://.import/exclamation_mark.png-7751c522c5f64d0bc4bd69e983b0a871.stex" ]
+source_file="res://scenes/menu/converter/minigames/breakout/boxes.png"
+dest_files=[ "res://.import/boxes.png-2531a8dfc8c56f748230e2a94e7105d1.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

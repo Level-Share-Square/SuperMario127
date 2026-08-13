@@ -1,0 +1,78 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://scenes/menu/converter/minigames/breakout/boxes.png" type="Texture" id=1]
+[ext_resource path="res://scenes/menu/converter/minigames/breakout/box.gd" type="Script" id=2]
+[ext_resource path="res://scenes/actors/objects/block/block_hit.wav" type="AudioStream" id=3]
+[ext_resource path="res://scenes/actors/objects/sawblade/metal_bounce.ogg" type="AudioStream" id=4]
+
+[sub_resource type="Shader" id=2]
+code = "shader_type canvas_item;
+
+uniform float opacity : hint_range(0.0, 1.0, 0.1) = 1;
+
+void fragment() {
+	float factor = mix(1.0, 1000.0, step(1.0, opacity));
+	float o = opacity * 2.0 * factor;
+	float a = fract(sin(dot(UV, vec2(12.9898, 78.233) * TIME)) * 438.5453) * (o + 1.0);
+	vec4 col = texture(TEXTURE, UV);
+	
+	col.a *= pow(a, 50.0);
+	col.a = clamp(col.a, 0.0, 1.0);
+	COLOR = col;
+}"
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = SubResource( 2 )
+shader_param/opacity = 1.0
+
+[sub_resource type="CanvasItemMaterial" id=5]
+blend_mode = 1
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 1, 1, 1, 1 )
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color( 1, 1, 1, 0 )
+border_blend = true
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 24, 12 )
+
+[node name="Box" type="StaticBody2D"]
+collision_mask = 0
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+material = SubResource( 3 )
+texture = ExtResource( 1 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 48, 24 )
+
+[node name="Impact" type="Panel" parent="."]
+visible = false
+material = SubResource( 5 )
+margin_right = 48.0
+margin_bottom = 24.0
+custom_styles/panel = SubResource( 4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2( 24, 12 )
+shape = SubResource( 1 )
+
+[node name="Hit" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+volume_db = -12.0
+bus = "Sounds"
+
+[node name="HitBreak" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+volume_db = -4.0
+bus = "Sounds"

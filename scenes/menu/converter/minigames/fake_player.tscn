@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://scenes/actors/mario/mario.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/menu/converter/minigames/fake_player.gd" type="Script" id=2]
@@ -9,9 +9,16 @@
 [ext_resource path="res://assets/sounds/death.wav" type="AudioStream" id=7]
 [ext_resource path="res://scenes/menu/converter/camera.gd" type="Script" id=8]
 [ext_resource path="res://scenes/menu/converter/minigames/breakout/breakout.gd" type="Script" id=9]
+[ext_resource path="res://assets/icons/Pause.svg" type="Texture" id=11]
+[ext_resource path="res://assets/fonts/super-mario-script-3-1402.ttf" type="DynamicFontData" id=12]
+[ext_resource path="res://scenes/menu/theme.tres" type="Theme" id=13]
+[ext_resource path="res://scenes/player/ui_new/polygon_swatch.tscn" type="PackedScene" id=14]
+[ext_resource path="res://assets/fonts/marioscript_ui.tres" type="DynamicFont" id=15]
+[ext_resource path="res://scenes/actors/objects/star_coin/collect_complete.wav" type="AudioStream" id=16]
+[ext_resource path="res://scenes/menu/converter/minigames/breakout/follow_player.gd" type="Script" id=17]
 
 [sub_resource type="RectangleShape2D" id=54]
-extents = Vector2( 224, 184 )
+extents = Vector2( 240, 184 )
 
 [sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 5 )
@@ -38,6 +45,9 @@ animations = [ {
 } ]
 
 [sub_resource type="CircleShape2D" id=52]
+radius = 8.0
+
+[sub_resource type="CircleShape2D" id=55]
 radius = 8.0
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -69,6 +79,148 @@ extents = Vector2( 1536, 128 )
 [sub_resource type="RectangleShape2D" id=45]
 extents = Vector2( 128, 1536 )
 
+[sub_resource type="Animation" id=56]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("HBoxContainer/ScoreCounter:rect_position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("HBoxContainer/ScoreCounter:custom_colors/font_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("HBoxContainer/ScoreCounter:rect_scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=57]
+resource_name = "collect"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("HBoxContainer/ScoreCounter:rect_position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.25 ),
+"transitions": PoolRealArray( 3.605, 1 ),
+"update": 0,
+"values": [ -3.0, 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("HBoxContainer/ScoreCounter:rect_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 0.5, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1.1 ), Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="DynamicFont" id=58]
+outline_size = 2
+use_filter = true
+extra_spacing_char = -2
+font_data = ExtResource( 12 )
+
+[sub_resource type="Animation" id=59]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("HBoxContainer/HighScoreCounter:rect_position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("HBoxContainer/HighScoreCounter:custom_colors/font_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("HBoxContainer/HighScoreCounter:rect_scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=60]
+resource_name = "collect"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("HBoxContainer/HighScoreCounter:rect_position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.25 ),
+"transitions": PoolRealArray( 3.605, 1 ),
+"update": 0,
+"values": [ -3.0, 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("HBoxContainer/HighScoreCounter:rect_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 0.5, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1.1 ), Vector2( 1, 1 ) ]
+}
+
 [node name="FakePlayer" type="Node2D"]
 physics_interpolation_mode = 2
 z_index = 10
@@ -93,6 +245,13 @@ script = ExtResource( 8 )
 z_index = 1
 z_as_relative = false
 script = ExtResource( 9 )
+
+[node name="AllHit" type="AudioStreamPlayer" parent="Breakout"]
+stream = ExtResource( 16 )
+volume_db = -5.0
+bus = "Sounds"
+
+[node name="Tween" type="Tween" parent="Breakout"]
 
 [node name="PlayableRect" type="Area2D" parent="Breakout"]
 position = Vector2( 384, 184 )
@@ -120,10 +279,10 @@ __meta__ = {
 }
 
 [node name="ColorRect" type="ColorRect" parent="Breakout/VBoxContainer/HBoxContainer"]
-margin_left = 160.0
-margin_right = 608.0
+margin_left = 144.0
+margin_right = 624.0
 margin_bottom = 368.0
-rect_min_size = Vector2( 448, 0 )
+rect_min_size = Vector2( 480, 0 )
 size_flags_vertical = 3
 color = Color( 0, 0, 0, 0.376471 )
 __meta__ = {
@@ -136,25 +295,20 @@ margin_right = 768.0
 margin_bottom = 432.0
 rect_min_size = Vector2( 0, 64 )
 
+[node name="Boxes" type="Node2D" parent="Breakout"]
+position = Vector2( 144, 32 )
+
 [node name="Fireball" type="KinematicBody2D" parent="Breakout"]
-position = Vector2( 384, 178 )
-collision_layer = 0
+position = Vector2( 384, 240 )
+collision_layer = 1048576
 script = ExtResource( 3 )
-play_width = 216.0
+play_width = 240.0
 
 [node name="Sprite" type="AnimatedSprite" parent="Breakout/Fireball"]
 frames = SubResource( 51 )
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Breakout/Fireball"]
-shape = SubResource( 52 )
-
-[node name="Area2D" type="Area2D" parent="Breakout/Fireball"]
-collision_layer = 0
-collision_mask = 8388608
-monitorable = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Breakout/Fireball/Area2D"]
 shape = SubResource( 52 )
 
 [node name="Hit" type="AudioStreamPlayer2D" parent="Breakout/Fireball"]
@@ -169,6 +323,48 @@ volume_db = -0.75
 max_distance = 1000.0
 bus = "Sounds"
 
+[node name="ShapeCast2D" type="ShapeCast2D" parent="Breakout/Fireball"]
+shape = SubResource( 55 )
+collision_mask = 8388608
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="PauseContainer" type="CenterContainer" parent="Breakout"]
+unique_name_in_owner = true
+modulate = Color( 1, 1, 1, 0 )
+margin_right = 768.0
+margin_bottom = 432.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Breakout/PauseContainer"]
+margin_left = 144.0
+margin_right = 624.0
+margin_bottom = 432.0
+rect_min_size = Vector2( 0, 432 )
+
+[node name="Darken" type="ColorRect" parent="Breakout/PauseContainer/VBoxContainer"]
+margin_right = 480.0
+margin_bottom = 364.0
+rect_min_size = Vector2( 480, 0 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color( 0, 0, 0, 0.501961 )
+
+[node name="Padding" type="Control" parent="Breakout/PauseContainer/VBoxContainer"]
+margin_top = 368.0
+margin_right = 480.0
+margin_bottom = 432.0
+rect_min_size = Vector2( 0, 64 )
+
+[node name="PauseIcon" type="TextureRect" parent="Breakout/PauseContainer"]
+margin_left = 368.0
+margin_top = 200.0
+margin_right = 400.0
+margin_bottom = 232.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 11 )
+expand = true
+stretch_mode = 6
+
 [node name="Character" parent="." instance=ExtResource( 1 )]
 position = Vector2( 384, 344 )
 __meta__ = {
@@ -179,19 +375,24 @@ mario_dive_collision = SubResource( 2 )
 luigi_collision = SubResource( 1 )
 luigi_dive_collision = SubResource( 3 )
 
-[node name="Paddle" type="Area2D" parent="Character"]
+[node name="Paddle" type="Area2D" parent="."]
 unique_name_in_owner = true
-position = Vector2( 0, -16 )
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 384, 328 )
 collision_layer = 8388608
 collision_mask = 0
 monitoring = false
+script = ExtResource( 17 )
+lerp_speed = 40.0
+offset = Vector2( 0, -16 )
+char_path = NodePath("../Character")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Character/Paddle"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Paddle"]
 visible = false
 position = Vector2( 0, 86 )
 shape = SubResource( 49 )
 
-[node name="Sprite" type="NinePatchRect" parent="Character/Paddle"]
+[node name="Sprite" type="NinePatchRect" parent="Paddle"]
 margin_left = -41.0
 margin_top = -7.0
 margin_right = 41.0
@@ -249,4 +450,126 @@ visible = false
 position = Vector2( 896, 480 )
 shape = SubResource( 45 )
 
-[connection signal="area_entered" from="Breakout/Fireball/Area2D" to="Breakout/Fireball" method="area_entered"]
+[node name="HUD" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 768.0
+margin_bottom = 432.0
+mouse_filter = 2
+theme = ExtResource( 13 )
+custom_constants/margin_right = 16
+custom_constants/margin_top = 24
+custom_constants/margin_left = 12
+custom_constants/margin_bottom = 16
+
+[node name="Collectibles" type="VBoxContainer" parent="HUD"]
+margin_left = 12.0
+margin_top = 24.0
+margin_right = 752.0
+margin_bottom = 416.0
+custom_constants/separation = 16
+
+[node name="Score" type="Control" parent="HUD/Collectibles"]
+margin_right = 740.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 0, 24 )
+
+[node name="PolygonSwatch" parent="HUD/Collectibles/Score" instance=ExtResource( 14 )]
+modulate = Color( 0.247059, 0.27451, 0.737255, 0.752941 )
+position = Vector2( 0, 12 )
+rotation = 0.1309
+
+[node name="ScoreAnimPlayer" type="AnimationPlayer" parent="HUD/Collectibles/Score"]
+unique_name_in_owner = true
+anims/RESET = SubResource( 56 )
+anims/collect = SubResource( 57 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/Collectibles/Score"]
+margin_left = 0.90909
+margin_top = 5.63636
+margin_right = 91.9091
+margin_bottom = 29.6364
+rect_rotation = -7.0
+rect_pivot_offset = Vector2( 1.61605, 4.58981 )
+custom_constants/separation = 6
+
+[node name="Padding" type="Control" parent="HUD/Collectibles/Score/HBoxContainer"]
+margin_right = 4.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 4, 0 )
+
+[node name="ScoreCounter" type="Label" parent="HUD/Collectibles/Score/HBoxContainer"]
+unique_name_in_owner = true
+margin_left = 10.0
+margin_right = 90.0
+margin_bottom = 24.0
+rect_pivot_offset = Vector2( 0, 16 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 0.105882, 0.145098, 0.478431, 0.65098 )
+custom_fonts/font = ExtResource( 15 )
+text = "000000"
+
+[node name="ScoreLabel" type="Label" parent="HUD/Collectibles/Score/HBoxContainer/ScoreCounter"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -10.0
+margin_bottom = -10.0
+custom_colors/font_outline_modulate = Color( 0.105882, 0.145098, 0.478431, 0.65098 )
+custom_fonts/font = SubResource( 58 )
+text = "SCORE"
+align = 1
+
+[node name="HighScore" type="Control" parent="HUD/Collectibles"]
+margin_top = 40.0
+margin_right = 740.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 0, 24 )
+
+[node name="PolygonSwatch" parent="HUD/Collectibles/HighScore" instance=ExtResource( 14 )]
+modulate = Color( 0.247059, 0.27451, 0.737255, 0.752941 )
+position = Vector2( 0, 12 )
+rotation = 0.1309
+
+[node name="HighScoreAnimPlayer" type="AnimationPlayer" parent="HUD/Collectibles/HighScore"]
+unique_name_in_owner = true
+anims/RESET = SubResource( 59 )
+anims/collect = SubResource( 60 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/Collectibles/HighScore"]
+margin_left = 0.90909
+margin_top = 5.63636
+margin_right = 91.9091
+margin_bottom = 29.6364
+rect_rotation = -7.0
+rect_pivot_offset = Vector2( 1.61605, 4.58981 )
+custom_constants/separation = 6
+
+[node name="Padding" type="Control" parent="HUD/Collectibles/HighScore/HBoxContainer"]
+margin_right = 4.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 4, 0 )
+
+[node name="HighScoreCounter" type="Label" parent="HUD/Collectibles/HighScore/HBoxContainer"]
+unique_name_in_owner = true
+margin_left = 10.0
+margin_right = 90.0
+margin_bottom = 24.0
+rect_pivot_offset = Vector2( 0, 16 )
+custom_colors/font_color = Color( 0.513726, 0.72549, 1, 1 )
+custom_colors/font_outline_modulate = Color( 0.105882, 0.145098, 0.478431, 0.65098 )
+custom_fonts/font = ExtResource( 15 )
+text = "000000"
+
+[node name="ScoreLabel" type="Label" parent="HUD/Collectibles/HighScore/HBoxContainer/HighScoreCounter"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -10.0
+margin_bottom = -10.0
+custom_colors/font_color = Color( 0.513726, 0.72549, 1, 1 )
+custom_colors/font_outline_modulate = Color( 0.105882, 0.145098, 0.478431, 0.65098 )
+custom_fonts/font = SubResource( 58 )
+text = "BEST"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": true
+}
