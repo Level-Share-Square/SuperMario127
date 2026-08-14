@@ -39,6 +39,9 @@ export(Array, Texture) var palette_textures_2
 #	savable_properties = ["text", "open_menu", "on_wall"]
 #	editable_properties = ["text", "open_menu", "on_wall"]
 	
+func _object_ready():
+	pass
+	
 func _register_properties():
 	register_property(4, "text", text, false)
 	register_property(5, "open_menu", open_menu, true)
@@ -58,11 +61,6 @@ func _ready():
 	if palette != 0:
 		update_palette()
 	
-	if !is_enabled_and_on_ground():
-		interact_pop_up.visible = false
-	
-	if not is_enabled_and_on_ground():
-		speech_bubble.hide()
 	if open_menu:
 		speech_bubble.hide()
 		exclamation_mark.visible = true
@@ -85,15 +83,17 @@ func on_property_changed(key, value):
 		update_palette()
 
 func enter_area(body):
-	if body.name.begins_with("Character") and character == null and is_enabled_and_on_ground():
+	print(enabled)
+	if body.name.begins_with("Character") and character == null and enabled:
+		print("goofy goober")
 		character = body
-		
 		if open_menu:
+			print("yeah")
 			message_appear.play()
 
 
 func exit_area(body):
-	if body == character and character.get_collision_layer_bit(1) and is_enabled_and_on_ground():
+	if body == character and character.get_collision_layer_bit(1) and enabled:
 		character = null
 		if reset_read_timer == 0 and open_menu:
 			message_disappear.play()
