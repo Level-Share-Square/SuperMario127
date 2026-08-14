@@ -79,6 +79,7 @@ use_hidden_tabs_for_min_size = true
 script = ExtResource( 13 )
 
 [node name="Background" type="VBoxContainer" parent="ContentDivider/ContentMat/Tabs" index="0"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -296,20 +297,20 @@ margin_bottom = -4.0
 script = ExtResource( 12 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ContentDivider/ContentMat/Tabs/Music" index="0"]
-margin_right = 537.0
-margin_bottom = 343.0
+margin_right = 320.0
+margin_bottom = 140.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="PanelContainer" type="PanelContainer" parent="ContentDivider/ContentMat/Tabs/Music/VBoxContainer" index="0"]
 material = SubResource( 1 )
-margin_right = 537.0
+margin_right = 320.0
 margin_bottom = 23.0
 size_flags_horizontal = 3
 theme_type_variation = "GradientPanel"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ContentDivider/ContentMat/Tabs/Music/VBoxContainer/PanelContainer" index="0"]
-margin_right = 537.0
+margin_right = 320.0
 margin_bottom = 23.0
 size_flags_horizontal = 3
 alignment = 1
@@ -327,14 +328,14 @@ text = "Preset Music"
 
 [node name="Padding2" type="Control" parent="ContentDivider/ContentMat/Tabs/Music/VBoxContainer/PanelContainer/HBoxContainer" index="2"]
 margin_left = 92.0
-margin_right = 442.0
+margin_right = 225.0
 margin_bottom = 23.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="MarginContainer" type="MarginContainer" parent="ContentDivider/ContentMat/Tabs/Music/VBoxContainer/PanelContainer/HBoxContainer" index="3"]
-margin_left = 446.0
-margin_right = 537.0
+margin_left = 229.0
+margin_right = 320.0
 margin_bottom = 23.0
 custom_constants/margin_right = 4
 custom_constants/margin_top = 2
@@ -392,20 +393,19 @@ music_type = 1
 [node name="PresetMusic" type="ScrollContainer" parent="ContentDivider/ContentMat/Tabs/Music/VBoxContainer" index="2"]
 unique_name_in_owner = true
 margin_top = 27.0
-margin_right = 537.0
-margin_bottom = 343.0
+margin_right = 320.0
+margin_bottom = 140.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="SongContainer" type="VBoxContainer" parent="ContentDivider/ContentMat/Tabs/Music/VBoxContainer/PresetMusic" index="0"]
 unique_name_in_owner = true
-margin_right = 529.0
-margin_bottom = 316.0
+margin_right = 312.0
+margin_bottom = 113.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Settings" type="ScrollContainer" parent="ContentDivider/ContentMat/Tabs" index="2"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0

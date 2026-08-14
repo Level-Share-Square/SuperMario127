@@ -17,7 +17,8 @@ func load_property(_editor: Editor, init_value, _property: Array, property_name 
 	color_panel.add_stylebox_override("panel", color_panel.get_stylebox("panel").duplicate(true))
 	color_panel.get_stylebox("panel").bg_color = init_value
 
-	yield(self, "ready")
+	if not color_manager:
+		yield(self, "ready")
 	color_manager.color = init_value
 	color_manager.update_nodes()
 	color_manager.read_intensity()
