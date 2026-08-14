@@ -31,9 +31,9 @@ func _ready():
 	area_rect = area.header.bounds
 	
 	yield(editor, "ready")
-	editor.action_manager.connect("action", self, "update_values", [true])
-	editor.action_manager.connect("undo", self, "update_values", [true])
-	editor.action_manager.connect("redo", self, "update_values", [true])
+	editor.action_manager.connect("action", self, "update_values", [false])
+	editor.action_manager.connect("undo", self, "update_values", [false])
+	editor.action_manager.connect("redo", self, "update_values", [false])
 	
 	increment.value = CurrentLevelData.editor_data.area_bounds_increment
 	update_values(true)
@@ -80,7 +80,6 @@ func update_values(bypass_checks: bool = false):
 		var update_values: bool = false
 		var actions: Array = [editor.action_manager.undo_stack.back(), editor.action_manager.redo_stack.back()]
 		for action in actions:
-			print(action.get_class())
 			if action is ChangeAreaAction and action.property == "bounds":
 				update_values = true
 				break

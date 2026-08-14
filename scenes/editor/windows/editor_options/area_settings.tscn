@@ -79,7 +79,6 @@ use_hidden_tabs_for_min_size = true
 script = ExtResource( 13 )
 
 [node name="Background" type="VBoxContainer" parent="ContentDivider/ContentMat/Tabs" index="0"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -406,6 +405,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Settings" type="ScrollContainer" parent="ContentDivider/ContentMat/Tabs" index="2"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
