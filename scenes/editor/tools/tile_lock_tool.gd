@@ -42,7 +42,7 @@ func _mouse_movement(event: InputEvent, world_pos: Vector2) -> void:
 		var line: = line_util.get_line(last_mouse_tile, mouse_tile)
 	
 		item_preview.position_override = true
-		item_preview.rect_global_position = get_mouse_snapped_pos() - item_preview.texture.get_size()/2
+		item_preview.rect_global_position = (get_node("%ParallaxScroll").get_transform().xform(get_mouse_snapped_pos() - item_preview.texture.get_size()/2))
 
 		if mouse_input == 0:
 			for point in line:
