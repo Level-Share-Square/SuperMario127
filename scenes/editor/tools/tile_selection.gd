@@ -12,9 +12,6 @@ func on_mouse_released():
 	if !.on_mouse_released():
 		editor.item_actions.handle_selection()
 		return
-	if fill_rect.has_point(get_adjusted_mouse_position()):
-		editor.item_actions.handle_selection()
-		return
 		
 	select_tiles()
 	editor.item_actions.handle_selection()
@@ -116,7 +113,7 @@ func on_paste(data: Array):
 		
 		fill_rect.size += TILE
 			
-		selection_box.rect_global_position = fill_rect.position
+		selection_box.rect_position = fill_rect.position
 		selection_box.rect_size = fill_rect.size
 		selection_box.show()
 		editor.tile_buffer.modulate = shared.layer_dictionary[editor.layer].layer_tint
