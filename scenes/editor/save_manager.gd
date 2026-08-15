@@ -7,19 +7,20 @@ onready var level_settings = $"%LevelSettingsWindow"
 onready var save = $"%Save"
 
 var initial_hash: int
-var unsaved_changes: bool = false
 
 
 func _ready():
-	initial_hash = get_hash()
+	if not CurrentLevelData.unsaved_editor_changes:
+		initial_hash = get_hash()
+	_on_ActionManager_action()
 
 func get_hash() -> int:
 	return hash([action_manager.undo_stack, action_manager.redo_stack])
 
 
 func _on_ActionManager_action():
-	unsaved_changes = !(initial_hash == get_hash())
-	if unsaved_changes:
+	CurrentLevelData.unsaved_editor_changes = !(initial_hash == get_hash())
+	if CurrentLevelData.unsaved_editor_changes:
 		var tween = get_tree().create_tween()
 		tween.tween_property(save, "self_modulate", UNSAVED_COLOR, 0.5)
 	else:
@@ -28,7 +29,7 @@ func _on_ActionManager_action():
 
 
 func quit_pressed():
-	if !unsaved_changes:
+	if !CurrentLevelData.unsaved_editor_changes:
 		quit()
 	else:
 		$"%QuitConfirmWindow".toggle_window()
@@ -72,7 +73,6 @@ func save_pressed():
 	CurrentLevelData.unsaved_editor_changes = false
 	level_settings.get_node("%Areas").reload_areas()
 	initial_hash = get_hash()
-	unsaved_changes = false
 	
 	save.self_modulate = Color("60ff60")
 	var tween = get_tree().create_tween()
