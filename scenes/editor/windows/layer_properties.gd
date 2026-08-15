@@ -68,6 +68,8 @@ func load_base_properties():
 	])
 	connect_signals(opacity)
 
+	if layer_data.layer_metadata.is_origin:
+		switch_layer.disabled = true
 
 func switch_layer():
 	layer_data = yield(shared.change_layer_type(shared.get_layer_at(layer_data.layer_metadata.order)), "completed")

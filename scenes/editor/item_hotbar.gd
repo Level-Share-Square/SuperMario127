@@ -124,6 +124,7 @@ func _on_loadout_pressed(loadout_button):
 			selected_loadout = 3
 	refresh_loadout()
 	check_items()
+	manual_button_click(bottom_row.get_child(0))
 	update_level_data()
 
 
