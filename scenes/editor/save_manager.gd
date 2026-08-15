@@ -44,6 +44,7 @@ func save_pressed():
 	
 	var level_id: String = CurrentLevelData.level_id
 	var working_folder: String = CurrentLevelData.working_folder
+	get_node("%EditorCamera").save_position()
 	for area_id in CurrentLevelData.loaded_areas:
 		# should probably put this in CurrentLevelData
 		CurrentLevelData.area_headers[area_id] = CurrentLevelData.loaded_areas[area_id].header

@@ -109,6 +109,10 @@ func load_objects(_objects: Dictionary):
 func _ready() -> void:
 	property_groups.connect("tab_changed", self, "play_click")
 
+func close():
+	.close()
+	for child in property_groups.get_children():
+		child.queue_free()
 
 func play_click(_tab: int = -1) -> void:
 	click_sound.play()

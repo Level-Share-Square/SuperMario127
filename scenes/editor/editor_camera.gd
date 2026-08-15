@@ -11,7 +11,6 @@ onready var editor: Editor = get_owner()
 var last_pos: Vector2
 var sim_pos: Vector2
 
-
 signal zoom_changed(zoom_level)
 
 var held_actions: Dictionary = {
@@ -32,8 +31,13 @@ var pan_held: bool
 
 
 func _ready():
-	position = Vector2(288, 840)
+	if CurrentLevelData.editor_data.camera_positions.size() <= CurrentLevelData.area_id:
+		position = Vector2(288, 840)
+	else:
+		position = CurrentLevelData.editor_data.camera_positions[CurrentLevelData.area_id]
 	sim_pos = position
+	Singleton.ModeSwitcher.connect("mode_switched", self, "save_position")
+	save_position()
 
 
 func _unhandled_input(event: InputEvent):
@@ -110,6 +114,16 @@ func camera_movement(delta: float):
 	
 	position = lerp(position, sim_pos, 12.5 * delta)
 	position = resolve_limit_collisions(position)
+	
+func save_position(mode = 0):
+	if CurrentLevelData.area_id >= CurrentLevelData.editor_data.camera_positions.size():
+		CurrentLevelData.editor_data.camera_positions.resize(CurrentLevelData.area_id + 1)
+		var i: int = 0
+		for pos in CurrentLevelData.editor_data.camera_positions:
+			if not pos:
+				CurrentLevelData.editor_data.camera_positions[i] = Vector2(288, 840)
+			i += 1
+	CurrentLevelData.editor_data.camera_positions[CurrentLevelData.area_id] = position
 	
 
 
