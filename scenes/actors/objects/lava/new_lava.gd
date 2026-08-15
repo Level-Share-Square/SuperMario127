@@ -12,7 +12,7 @@ onready var old_waves = $Old/Waves
 onready var old_waves_recolorable = $Old/Waves/WavesRecolorable
 onready var old_lava_fill = $Old/Body
 
-var use_old_lava: bool = true
+var use_old_lava: bool = false
 var lighting: bool = true
 var surface_color: Color = Color8(255, 195, 0, 255)
 

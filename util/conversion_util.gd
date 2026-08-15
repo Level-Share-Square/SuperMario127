@@ -502,6 +502,9 @@ static func get_new_area_code(header: AreaHeader, old_area: AreaDataOld) -> Area
 		
 		property_dictionary.get_or_add(-3, object_layer == 0 or object_layer == 3) # in front
 		
+		if old_object.type_id == 75: # Lava
+			property_dictionary.get_or_add(10, true) # use old lava
+		
 		var new_object: ObjectData = ObjectData.new(
 			ObjectMetadata.new(
 				position,
