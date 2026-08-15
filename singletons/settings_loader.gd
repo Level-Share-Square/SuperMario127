@@ -19,7 +19,9 @@ func _init():
 		var dir := Directory.new()
 		if dir.dir_exists("user://levels"):
 			Singleton.PlayerSettings.game_version_mismatch = true
-		LocalSettings.change_setting("Meta", "game_version", Singleton.PlayerSettings.game_version)
+			LocalSettings.change_setting("Meta", "game_version", "0.7.0")
+		else:
+			LocalSettings.change_setting("Meta", "game_version", Singleton.PlayerSettings.game_version)
 	
 	cursor_setter_util.init_mouse_cursor()
 
@@ -102,3 +104,6 @@ func _unhandled_input(event):
 func handle_version_upgrade(old_version: String):
 	print("Version mismatch detected! Old version: %s, New version: %s" % [old_version, Singleton.PlayerSettings.game_version])
 	Singleton.PlayerSettings.game_version_mismatch = true
+	var dir := Directory.new()
+	if dir.file_exists("user://level_list/converted"):
+		LocalSettings.change_setting("Meta", "game_version", Singleton.PlayerSettings.game_version)
