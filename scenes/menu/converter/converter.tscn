@@ -173,7 +173,7 @@ __meta__ = {
 }
 
 [node name="Scroll" parent="Background" index="2"]
-modulate = Color( 0.560784, 0.380392, 0.678431, 1 )
+modulate = Color( 0.560784, 0.380392, 0.678431, 0 )
 rect_scale = Vector2( 0.225, 0.225 )
 __meta__ = {
 "_edit_lock_": true

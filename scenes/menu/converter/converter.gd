@@ -51,7 +51,7 @@ func start():
 func conversion():
 	var dir := Directory.new()
 	
-	if not dir.file_exists("user://level_list/converted"): remove_recursive("user://level_list")
+	if not dir.file_exists("user://level_list/converted") and dir.dir_exists("user://level_list_old"): remove_recursive("user://level_list")
 	dir.rename("user://level_list", "user://level_list_old")
 	if not dir.dir_exists("user://level_list"): dir.make_dir("user://level_list")
 	
@@ -130,7 +130,7 @@ func start_file_timer(file_path: String):
 
 func finish_file(file_path: String):
 	progress_bar.value += 1
-	progress_label.text = str(stepify(progress_bar.value / progress_bar.max_value, 0.01)).pad_decimals(2)
+	progress_label.text = str(stepify(progress_bar.value / progress_bar.max_value, 0.01) * 100).pad_decimals(2) + "%"
 	files_to_convert.erase(file_path)
 
 func on_conversion_finished():
