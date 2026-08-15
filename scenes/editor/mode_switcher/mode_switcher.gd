@@ -43,6 +43,7 @@ var is_switching: bool
 var is_transitioning_to_red: bool
 var playtesting: bool
 
+signal mode_switched(mode)
 
 func update_character() -> void:
 	var palette_material: ShaderMaterial = preload("res://scenes/actors/mario/materials/palette_swap.tres").duplicate()
@@ -231,6 +232,7 @@ func switch() -> void:
 	
 	var new_scene_mode = get_tree().get_current_scene().mode
 	playtesting = (new_scene_mode == 1)
+	emit_signal("mode_switched", new_scene_mode)
 
 
 func do_fast_test() -> bool:

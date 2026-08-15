@@ -126,6 +126,7 @@ func switch() -> void:
 		
 		get_tree().get_current_scene().switch_scenes()
 		var new_scene_mode = get_tree().get_current_scene().mode
+		emit_signal("mode_switched", new_scene_mode)
 		if new_scene_mode == 0:
 			playtesting = false
 		elif new_scene_mode == 1:

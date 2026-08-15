@@ -309,7 +309,7 @@ _global_script_classes=[ {
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_activity_timestamps.gdns"
 }, {
-"base": "Reference",
+"base": "",
 "class": "DiscordCore",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_core.gdns"
@@ -324,7 +324,7 @@ _global_script_classes=[ {
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_lobby_manager.gdns"
 }, {
-"base": "Reference",
+"base": "",
 "class": "DiscordLobbyTransaction",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_lobby_transaction.gdns"

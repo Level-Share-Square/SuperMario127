@@ -20,6 +20,8 @@ var selected_loadout: int = 0
 var selected_layer: String = ""
 var show_palettes: bool = true
 var area_bounds_increment: float = 10
+var camera_positions: Array = [Vector2(288, 840)]
+var last_area: int = 0
 
 func _init(
 		s_loadouts: Array = [], 
@@ -29,7 +31,9 @@ func _init(
 		s_selected_loadout: int = 0,
 		s_selected_layer: String = "",
 		s_show_palettes: bool = true,
-		s_area_bounds_increment: float = 10
+		s_area_bounds_increment: float = 10,
+		s_camera_positions: Array = [Vector2(288, 840)],
+		s_last_area: int = 0
 	) -> void:
 	loadouts = s_loadouts
 	palettes = s_palettes
@@ -59,3 +63,5 @@ func _init(
 	selected_layer = s_selected_layer
 	show_palettes = s_show_palettes
 	area_bounds_increment = s_area_bounds_increment
+	camera_positions = s_camera_positions
+	last_area = s_last_area

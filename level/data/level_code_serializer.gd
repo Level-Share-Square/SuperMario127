@@ -45,6 +45,8 @@ static func serialize_editor_data(editor_data: EditorData) -> String:
 	code += serialize_data_array([editor_data.selected_layer])
 	code += serialize_data_array([editor_data.show_palettes])
 	code += serialize_data_array([editor_data.area_bounds_increment])
+	code += serialize_data_array(editor_data.camera_positions)
+	code += serialize_data_array([editor_data.last_area])
 	
 	return wrap_code_in_brackets(code)
 

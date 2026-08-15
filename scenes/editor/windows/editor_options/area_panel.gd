@@ -65,7 +65,11 @@ func _ready():
 
 func switch_to_area():
 	if id != CurrentLevelData.area_id:
+		var editor = get_tree().current_scene
+		editor.get_node("%EditorCamera").save_position()
 		CurrentLevelData.switch_to_area(id, false, true)
+		CurrentLevelData.editor_data.last_area = id
+		
 		SceneTransitions.reload_scene()
 
 
@@ -73,7 +77,6 @@ func delete_area():
 	if id != CurrentLevelData.area_id:
 		var action := DeleteAreaAction.new()
 		action.area_id = id
-		print(id)
 		area_settings.editor.action_manager.commit_action(action)
 		if CurrentLevelData.area_id > id:
 			CurrentLevelData.area_id -= 1

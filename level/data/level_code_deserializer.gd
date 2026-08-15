@@ -66,8 +66,10 @@ static func deserialize_editor_data(editor_data_code: String) -> EditorData:
 	var selected_layer: String = deserialize_datas_code(components[5])[0]
 	var show_palettes: bool = deserialize_datas_code(components[6])[0]
 	var area_bounds_increment: int = deserialize_datas_code(components[7])[0]
-	
-	return EditorData.new(layouts, palettes, fav_items, fav_count, selected_loadout, selected_layer, show_palettes, area_bounds_increment)
+	if components.size() <= 8: return EditorData.new(layouts, palettes, fav_items, fav_count, selected_loadout, selected_layer, show_palettes, area_bounds_increment)
+	var camera_positions: Array = deserialize_datas_code(components[8])
+	var last_area: int = deserialize_datas_code(components[9])[0]
+	return EditorData.new(layouts, palettes, fav_items, fav_count, selected_loadout, selected_layer, show_palettes, area_bounds_increment, camera_positions, last_area)
 
 static func deserialize_level_tags(level_tags_code: String) -> LevelTags:
 	if level_tags_code.empty():
