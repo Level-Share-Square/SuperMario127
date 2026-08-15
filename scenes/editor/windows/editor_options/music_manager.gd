@@ -18,10 +18,11 @@ func get_resource_path(song_id: String) -> String:
 func _ready():
 	var area_header: AreaHeader = CurrentLevelData.current_area.header
 	var ids: PoolStringArray = Singleton.Music.level_songs.ids
+	var sort_order: PoolStringArray = preload("res://assets/music/sort_order.tres").ids
 
 	is_preset = !area_header.music is String
 
-	for id in ids:
+	for id in sort_order:
 		var index = ids.find(id)
 		var panel = SONG_PANEL.instance()
 		song_container.add_child(panel)

@@ -1,0 +1,16 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://level/Song.gd" type="Script" id=1]
+[ext_resource path="res://assets/music/cursed_cathedral.ogg" type="AudioStream" id=2]
+
+[resource]
+script = ExtResource( 1 )
+stream = ExtResource( 2 )
+stream_link = ""
+underwater_stream_link = ""
+blended_stream_link = ""
+volume_db = 0
+pitch_scale = 1
+title = "Cursed Cathedral"
+note = "By RednGreen, Súper M 795"
+type = 0
