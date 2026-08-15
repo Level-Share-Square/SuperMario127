@@ -218,3 +218,5 @@ visible = false
 [node name="FileSelect" parent="UI/Screens" instance=ExtResource( 12 )]
 unique_name_in_owner = true
 visible = false
+
+[connection signal="screen_opened" from="UI/Screens/Options" to="UI/Screens/Options/Subscreens/Controls/VBoxContainer/Devices" method="screen_opened"]

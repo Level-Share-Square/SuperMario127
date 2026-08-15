@@ -1,8 +1,8 @@
-[gd_scene load_steps=59 format=2]
+[gd_scene load_steps=72 format=2]
 
 [ext_resource path="res://scenes/actors/mario/mario.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/menu/converter/minigames/fake_player.gd" type="Script" id=2]
-[ext_resource path="res://scenes/menu/converter/minigames/fireball.gd" type="Script" id=3]
+[ext_resource path="res://scenes/menu/converter/minigames/breakout/fireball.gd" type="Script" id=3]
 [ext_resource path="res://scenes/actors/objects/metal_platform/texture.png" type="Texture" id=4]
 [ext_resource path="res://scenes/actors/objects/nipper_fireball/fireball.png" type="Texture" id=5]
 [ext_resource path="res://scenes/actors/objects/bullet_bill/sound.wav" type="AudioStream" id=6]
@@ -19,6 +19,15 @@
 [ext_resource path="res://scenes/menu/converter/minigames/breakout/follow_player.gd" type="Script" id=17]
 [ext_resource path="res://scenes/menu/converter/minigames/breakout/1up.png" type="Texture" id=18]
 [ext_resource path="res://shaders/outline2.shader" type="Shader" id=19]
+[ext_resource path="res://scenes/menu/converter/minigames/pipe.gd" type="Script" id=20]
+[ext_resource path="res://scenes/actors/objects/pipe/recolorable_texture_2.png" type="Texture" id=21]
+[ext_resource path="res://scenes/actors/objects/pipe/pipe.png" type="Texture" id=22]
+[ext_resource path="res://scenes/actors/objects/pipe/fast_sound.wav" type="AudioStream" id=23]
+[ext_resource path="res://scenes/actors/objects/pipe/recolorable_texture.png" type="Texture" id=24]
+[ext_resource path="res://scenes/actors/objects/pipe/sound.wav" type="AudioStream" id=25]
+[ext_resource path="res://assets/fonts/delfino_medium.tres" type="DynamicFont" id=26]
+[ext_resource path="res://scenes/actors/objects/pipe_body/recolorable_texture_2.png" type="Texture" id=27]
+[ext_resource path="res://scenes/actors/objects/pipe_body/recolorable_texture.png" type="Texture" id=28]
 
 [sub_resource type="RectangleShape2D" id=54]
 extents = Vector2( 240, 184 )
@@ -62,18 +71,102 @@ extents = Vector2( 15, 5 )
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 17, 5 )
 
+[sub_resource type="RectangleShape2D" id=264]
+extents = Vector2( 16, 8 )
+
+[sub_resource type="RectangleShape2D" id=265]
+extents = Vector2( 14.5, 20 )
+
+[sub_resource type="Animation" id=268]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 463.5 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:enabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../ExitPipeLabel:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=269]
+resource_name = "appear"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( -2, 1 ),
+"update": 0,
+"values": [ 463.5, 367.5 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:enabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../ExitPipeLabel:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( -2, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
 [sub_resource type="RectangleShape2D" id=49]
 extents = Vector2( 41, 92.5 )
 
 [sub_resource type="CanvasItemMaterial" id=42]
 blend_mode = 1
 
-[sub_resource type="Gradient" id=43]
-offsets = PoolRealArray( 0, 0.430328, 1 )
-colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0.344262, 1, 1, 1, 0 )
+[sub_resource type="Gradient" id=266]
+offsets = PoolRealArray( 0, 0.275, 1 )
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0.6375, 1, 1, 1, 0 )
 
-[sub_resource type="GradientTexture2D" id=44]
-gradient = SubResource( 43 )
+[sub_resource type="GradientTexture2D" id=267]
+gradient = SubResource( 266 )
 fill_to = Vector2( 0, 1 )
 
 [sub_resource type="RectangleShape2D" id=53]
@@ -787,6 +880,117 @@ mario_dive_collision = SubResource( 2 )
 luigi_collision = SubResource( 1 )
 luigi_dive_collision = SubResource( 3 )
 
+[node name="ExitPipe" type="Node2D" parent="."]
+position = Vector2( 696, 463.5 )
+script = ExtResource( 20 )
+normal_texture = ExtResource( 22 )
+recolorable_texture = ExtResource( 24 )
+
+[node name="Tween" type="Tween" parent="ExitPipe"]
+
+[node name="Area2D" type="Area2D" parent="ExitPipe"]
+position = Vector2( 0, -27 )
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExitPipe/Area2D"]
+position = Vector2( 0, -6 )
+shape = SubResource( 264 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="ExitPipe"]
+stream = ExtResource( 25 )
+bus = "Sounds"
+
+[node name="AudioFast" type="AudioStreamPlayer" parent="ExitPipe"]
+stream = ExtResource( 23 )
+bus = "Sounds"
+
+[node name="Sprite" type="Sprite" parent="ExitPipe"]
+self_modulate = Color( 1, 0, 0.283333, 1 )
+position = Vector2( 0, -4 )
+texture = ExtResource( 24 )
+
+[node name="Sprite2" type="Sprite" parent="ExitPipe/Sprite"]
+self_modulate = Color( 1, 0.501961, 0.592157, 1 )
+texture = ExtResource( 21 )
+
+[node name="Sprite" type="Sprite" parent="ExitPipe/Sprite"]
+self_modulate = Color( 1, 0, 0.282353, 1 )
+position = Vector2( -0.5, 60 )
+scale = Vector2( 1, 80 )
+texture = ExtResource( 28 )
+
+[node name="Sprite2" type="Sprite" parent="ExitPipe/Sprite/Sprite"]
+self_modulate = Color( 1, 0.501961, 0.592157, 1 )
+texture = ExtResource( 27 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="ExitPipe"]
+visible = false
+position = Vector2( 0, -4 )
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExitPipe/StaticBody2D"]
+position = Vector2( -0.5, 0 )
+shape = SubResource( 265 )
+
+[node name="ExitPipeAnim" type="AnimationPlayer" parent="ExitPipe"]
+anims/RESET = SubResource( 268 )
+anims/appear = SubResource( 269 )
+
+[node name="SettingsPipe" type="Node2D" parent="."]
+position = Vector2( 72, 367.5 )
+script = ExtResource( 20 )
+enabled = true
+normal_texture = ExtResource( 22 )
+recolorable_texture = ExtResource( 24 )
+
+[node name="Tween" type="Tween" parent="SettingsPipe"]
+
+[node name="Area2D" type="Area2D" parent="SettingsPipe"]
+position = Vector2( 0, -27 )
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SettingsPipe/Area2D"]
+position = Vector2( 0, -6 )
+shape = SubResource( 264 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="SettingsPipe"]
+stream = ExtResource( 25 )
+bus = "Sounds"
+
+[node name="AudioFast" type="AudioStreamPlayer" parent="SettingsPipe"]
+stream = ExtResource( 23 )
+bus = "Sounds"
+
+[node name="Sprite" type="Sprite" parent="SettingsPipe"]
+self_modulate = Color( 0.4, 0, 1, 1 )
+position = Vector2( 0, -4 )
+texture = ExtResource( 24 )
+
+[node name="Sprite2" type="Sprite" parent="SettingsPipe/Sprite"]
+self_modulate = Color( 0.7, 0.5, 1, 1 )
+texture = ExtResource( 21 )
+
+[node name="Sprite" type="Sprite" parent="SettingsPipe/Sprite"]
+self_modulate = Color( 0.4, 0, 1, 1 )
+position = Vector2( -0.5, 60 )
+scale = Vector2( 1, 80 )
+texture = ExtResource( 28 )
+
+[node name="Sprite2" type="Sprite" parent="SettingsPipe/Sprite/Sprite"]
+self_modulate = Color( 0.7, 0.5, 1, 1 )
+texture = ExtResource( 27 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="SettingsPipe"]
+visible = false
+position = Vector2( 0, -4 )
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SettingsPipe/StaticBody2D"]
+position = Vector2( -0.5, 0 )
+shape = SubResource( 265 )
+
 [node name="Paddle" type="Area2D" parent="."]
 unique_name_in_owner = true
 modulate = Color( 1, 1, 1, 0 )
@@ -834,12 +1038,79 @@ margin_top = 368.0
 margin_right = 768.0
 margin_bottom = 432.0
 rect_min_size = Vector2( 0, 64 )
-texture = SubResource( 44 )
+texture = SubResource( 267 )
 expand = true
 stretch_mode = 1
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="ExitPipeLabel" type="PanelContainer" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+self_modulate = Color( 0, 0, 0, 0.501961 )
+margin_left = 676.0
+margin_top = 368.0
+margin_right = 716.0
+margin_bottom = 399.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_pivot_offset = Vector2( 24, 15.5 )
+theme = ExtResource( 13 )
+
+[node name="MarginContainer" type="MarginContainer" parent="ExitPipeLabel"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 36.0
+margin_bottom = 27.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_constants/margin_right = 2
+custom_constants/margin_top = 2
+custom_constants/margin_left = 2
+custom_constants/margin_bottom = 2
+
+[node name="Label" type="Label" parent="ExitPipeLabel/MarginContainer"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 30.0
+margin_bottom = 21.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_fonts/font = ExtResource( 26 )
+text = "Exit"
+
+[node name="SettingsPipeLabel" type="PanelContainer" parent="."]
+self_modulate = Color( 0, 0, 0, 0.501961 )
+margin_left = 48.0
+margin_top = 368.0
+margin_right = 97.0
+margin_bottom = 399.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_pivot_offset = Vector2( 24, 15.5 )
+theme = ExtResource( 13 )
+
+[node name="MarginContainer" type="MarginContainer" parent="SettingsPipeLabel"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 66.0
+margin_bottom = 27.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_constants/margin_right = 2
+custom_constants/margin_top = 2
+custom_constants/margin_left = 2
+custom_constants/margin_bottom = 2
+
+[node name="Label" type="Label" parent="SettingsPipeLabel/MarginContainer"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 60.0
+margin_bottom = 21.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_fonts/font = ExtResource( 26 )
+text = "Settings"
 
 [node name="Ground" type="StaticBody2D" parent="."]
 
@@ -1287,3 +1558,13 @@ texture = ExtResource( 18 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="HUD/VBoxContainer/LivesContainer/Life1"]
 anims/RESET = SubResource( 258 )
 anims/hide = SubResource( 259 )
+
+[connection signal="conversion_done" from="." to="ExitPipe/ExitPipeAnim" method="play" binds= [ "appear" ]]
+[connection signal="entrance_completed" from="ExitPipe" to="." method="restart_game" flags=3]
+[connection signal="entrance_completed" from="ExitPipe" to="Breakout" method="update_high_score"]
+[connection signal="body_entered" from="ExitPipe/Area2D" to="ExitPipe" method="body_entered"]
+[connection signal="body_exited" from="ExitPipe/Area2D" to="ExitPipe" method="body_exited"]
+[connection signal="entrance_completed" from="SettingsPipe" to="." method="open_settings" flags=3]
+[connection signal="entrance_completed" from="SettingsPipe" to="Breakout" method="update_high_score"]
+[connection signal="body_entered" from="SettingsPipe/Area2D" to="SettingsPipe" method="body_entered"]
+[connection signal="body_exited" from="SettingsPipe/Area2D" to="SettingsPipe" method="body_exited"]

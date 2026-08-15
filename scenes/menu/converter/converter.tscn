@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://scenes/menu/converter/minigame_funcs.gd" type="Script" id=1]
 [ext_resource path="res://scenes/menu/screen.gd" type="Script" id=2]
@@ -7,13 +7,10 @@
 [ext_resource path="res://scenes/menu/background_scroll/background.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/fonts/delfino_medium.tres" type="DynamicFont" id=6]
 [ext_resource path="res://assets/fonts/delfino_small.tres" type="DynamicFont" id=7]
+[ext_resource path="res://scenes/menu/levels_list/old_levels.gd" type="Script" id=8]
 
 [sub_resource type="Animation" id=47]
 length = 0.001
-
-[sub_resource type="Animation" id=2]
-resource_name = "transition"
-length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:modulate")
 tracks/0/interp = 1
@@ -21,10 +18,62 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.4 ),
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Background:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "transition"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.8 ),
 "transitions": PoolRealArray( -2, -2 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 0, 0, 0, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:modulate:a")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( -2, 1 ),
+"update": 0,
+"values": [ 1.0, 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Background:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( -2, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0, 0, 1, 0 ) ]
 }
 
 [sub_resource type="Shader" id=54]
@@ -43,7 +92,7 @@ void fragment() {
 	COLOR = (texture(TEXTURE, UV) + n * u_amount);
 }"
 
-[sub_resource type="ShaderMaterial" id=56]
+[sub_resource type="ShaderMaterial" id=58]
 shader = SubResource( 54 )
 shader_param/u_amount = 1.75
 
@@ -62,6 +111,7 @@ fill_to = Vector2( 0.5, 1 )
 [sub_resource type="DynamicFont" id=57]
 
 [node name="Converter" type="Control"]
+modulate = Color( 1, 1, 1, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 2 )
@@ -77,17 +127,33 @@ anims/RESET = SubResource( 47 )
 anims/transition = SubResource( 2 )
 
 [node name="MinigameFuncs" type="Control" parent="."]
+unique_name_in_owner = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 script = ExtResource( 1 )
 
 [node name="Conversion" type="Node" parent="."]
+unique_name_in_owner = true
 script = ExtResource( 4 )
 status_converting = "Converting levels list, please wait..."
-status_done = "Enter the pipe on your right to exit..."
+status_done_default = "Enter the pipe on your right to exit..."
+status_done_js = "Restart the page to continue..."
+
+[node name="OldLevels" type="VBoxContainer" parent="Conversion"]
+script = ExtResource( 8 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Conversion/OldLevels"]
+visible = false
+margin_right = 40.0
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 1 )
 
 [node name="Background" parent="." instance=ExtResource( 5 )]
+modulate = Color( 0, 0, 1, 0 )
 mouse_filter = 2
 __meta__ = {
 "_edit_lock_": true
@@ -115,7 +181,7 @@ __meta__ = {
 
 [node name="Overlay" parent="Background" index="3"]
 modulate = Color( 0.054902, 0.0117647, 0.152941, 0.270588 )
-material = SubResource( 56 )
+material = SubResource( 58 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -197,5 +263,6 @@ align = 1
 [connection signal="screen_change" from="." to="MinigameFuncs" method="stop_playing"]
 [connection signal="screen_opened" from="." to="MinigameFuncs" method="start_playing"]
 [connection signal="screen_opened" from="." to="Conversion" method="start"]
+[connection signal="conversion_done" from="Conversion" to="MinigameFuncs" method="conversion_done"]
 
 [editable path="Background"]

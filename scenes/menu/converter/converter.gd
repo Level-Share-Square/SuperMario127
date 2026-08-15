@@ -3,11 +3,14 @@ extends Node
 onready var status_label = $"%StatusLabel"
 onready var progress_bar = $"%ProgressBar"
 onready var progress_label = $"%ProgressLabel"
+onready var old_levels = $OldLevels
 
 const TIMEOUT_FACTOR: float = 10000.0
 
 export var status_converting: String
-export var status_done: String
+export var status_done_default: String
+export var status_done_js: String
+var status_done: String
 
 var conversion_thread: Thread
 var files_to_convert: Array
@@ -22,21 +25,35 @@ var failed_files: Array
 var failed_threads: Array
 var current_file: String = ""
 
+var started_converting: bool
+
+signal conversion_done
+
 func start():
+	if started_converting: return
+	started_converting = true
+	
+	status_done = status_done_js if OS.has_feature("JavaScript") else status_done_default
 	var dir := Directory.new()
 	if Singleton.PlayerSettings.game_version_mismatch and not dir.file_exists("user://level_list/converted"):
+		if dir.dir_exists("user://levels"):
+			status_label.text = status_converting
+			old_levels.start(level_list_util.BASE_FOLDER)
+			yield(old_levels, "conversion_complete")
 		conversion()
 	else:
 		progress_bar.hide()
 		progress_label.hide()
 		status_label.text = status_done
+		if not OS.has_feature("JavaScript"):
+			call_deferred("emit_signal", "conversion_done")
 
 func conversion():
 	var dir := Directory.new()
 	
+	if not dir.file_exists("user://level_list/converted"): remove_recursive("user://level_list")
 	dir.rename("user://level_list", "user://level_list_old")
 	if not dir.dir_exists("user://level_list"): dir.make_dir("user://level_list")
-	if not dir.file_exists("user://level_list/converted"): remove_recursive("user://level_list")
 	
 	var data: Array = get_files_for_conversion()
 	files_to_convert = data[0]
@@ -48,7 +65,7 @@ func conversion():
 	
 	if not (files_to_convert.empty() and saves_to_convert.empty()):
 		conversion_thread = Thread.new()
-		conversion_thread.start(self, "convert_thread", files_to_convert)
+		conversion_thread.start(self, "convert_thread", files_to_convert, Thread.PRIORITY_HIGH)
 		thread_timer_on = true
 	else:
 		on_conversion_finished()
@@ -68,7 +85,7 @@ func _process(delta):
 			
 			if not files_to_convert.empty():
 				conversion_thread = Thread.new()
-				conversion_thread.start(self, "convert_thread", files_to_convert)
+				conversion_thread.start(self, "convert_thread", files_to_convert, Thread.PRIORITY_HIGH)
 			else:
 				on_conversion_finished()
 
@@ -124,6 +141,8 @@ func on_conversion_finished():
 	
 	progress_label.text = "Done!"
 	status_label.text = status_done
+	if not OS.has_feature("JavaScript"):
+		call_deferred("emit_signal", "conversion_done")
 	
 	LocalSettings.change_setting("Meta", "game_version", Singleton.PlayerSettings.game_version)
 	#owner.transition("MainMenu")

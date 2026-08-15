@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=2]
+[gd_scene load_steps=66 format=2]
 
 [ext_resource path="res://scenes/menu/options/controls/preset_loader.gd" type="Script" id=1]
 [ext_resource path="res://scenes/menu/theme.tres" type="Theme" id=2]
@@ -33,6 +33,7 @@
 [ext_resource path="res://scenes/menu/options/character/character_sprite.gd" type="Script" id=31]
 [ext_resource path="res://scenes/menu/options/character/character_button.gd" type="Script" id=32]
 [ext_resource path="res://scenes/menu/options/assets/mario_orb.png" type="Texture" id=33]
+[ext_resource path="res://scenes/menu/options/exit_controller.gd" type="Script" id=34]
 [ext_resource path="res://scenes/menu/options/character/palettes.gd" type="Script" id=36]
 [ext_resource path="res://scenes/menu/options/assets/luigi_orb.png" type="Texture" id=37]
 
@@ -328,6 +329,16 @@ rect_clip_content = true
 theme = ExtResource( 2 )
 script = ExtResource( 8 )
 
+[node name="Black" type="ColorRect" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color( 0, 0, 0, 1 )
+
+[node name="ExitController" type="Node" parent="."]
+script = ExtResource( 34 )
+
 [node name="Focus" type="Control" parent="."]
 margin_right = 40.0
 margin_bottom = 40.0
@@ -421,7 +432,7 @@ margin_top = 177.0
 margin_right = 192.0
 margin_bottom = 210.0
 focus_neighbour_top = NodePath("../Back")
-focus_neighbour_bottom = NodePath("../Character")
+focus_neighbour_bottom = NodePath("../Controls")
 text = "General"
 align = 2
 script = ExtResource( 3 )
@@ -471,6 +482,7 @@ margin_top = 226.0
 margin_right = 192.0
 margin_bottom = 259.0
 focus_neighbour_top = NodePath("../General")
+focus_neighbour_bottom = NodePath("../Storage")
 text = "Controls"
 align = 2
 script = ExtResource( 3 )
@@ -494,6 +506,7 @@ patch_margin_bottom = 11
 margin_top = 275.0
 margin_right = 192.0
 margin_bottom = 308.0
+focus_neighbour_top = NodePath("../Controls")
 focus_neighbour_bottom = NodePath("../Back")
 text = "Storage"
 align = 2
@@ -2060,14 +2073,15 @@ script = ExtResource( 19 )
 script = ExtResource( 24 )
 
 [node name="Label" type="Label" parent="."]
+modulate = Color( 1, 1, 1, 0.954246 )
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 710.0
-margin_top = 448.0
-margin_right = 761.0
-margin_bottom = 473.0
+margin_left = -58.0
+margin_top = 16.0
+margin_right = -7.0
+margin_bottom = 41.0
 grow_horizontal = 0
 grow_vertical = 0
 text = "v0.9.1"
@@ -2086,8 +2100,8 @@ anims/transition = SubResource( 1 )
 
 [connection signal="screen_opened" from="." to="Focus" method="focus_node" flags=3]
 [connection signal="screen_opened" from="." to="Subscreens/Controls/VBoxContainer/Devices" method="screen_opened"]
-[connection signal="back_press" from="Focus" to="." method="transition" binds= [ "MainMenu" ]]
-[connection signal="pressed" from="BlackBar/MarginContainer/VBoxContainer/Back" to="." method="transition" binds= [ "MainMenu" ]]
+[connection signal="back_press" from="Focus" to="ExitController" method="exit"]
+[connection signal="pressed" from="BlackBar/MarginContainer/VBoxContainer/Back" to="ExitController" method="exit"]
 [connection signal="pressed" from="BlackBar/MarginContainer/VBoxContainer/General" to="Subscreens" method="change_subscreen" binds= [ "General" ]]
 [connection signal="pressed" from="BlackBar/MarginContainer/VBoxContainer/Character" to="Subscreens" method="change_subscreen" binds= [ "Character" ]]
 [connection signal="pressed" from="BlackBar/MarginContainer/VBoxContainer/Controls" to="Subscreens" method="change_subscreen" binds= [ "Controls" ]]

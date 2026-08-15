@@ -70,10 +70,12 @@ func to_spawn():
 
 
 func paddle_hit(paddle: Area2D):
-	if velocity.y > -50 and global_position.y < paddle.global_position.y:
+	if velocity.y > -100 and global_position.y < paddle.global_position.y:
 		var character: Character = paddle.character
 		var altered_char_vel: Vector2 = Vector2(-character.velocity.x, min(character.velocity.y, -1))/3
 		
+		if velocity.y < 0:
+			velocity.y = -velocity.y
 		var bounce_normal: Vector2 = Vector2.UP
 		bounce_normal.x = clamp((global_position.x - paddle.global_position.x) / 100, -0.75, 0.75)
 		bounce_normal = bounce_normal.normalized()

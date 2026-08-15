@@ -16,6 +16,9 @@ func _init():
 	
 	# we can initialize this here for now i suppose
 	if not config.has_section_key("Meta", "game_version"):
+		var dir := Directory.new()
+		if dir.dir_exists("user://levels"):
+			Singleton.PlayerSettings.game_version_mismatch = true
 		LocalSettings.change_setting("Meta", "game_version", Singleton.PlayerSettings.game_version)
 	
 	cursor_setter_util.init_mouse_cursor()
