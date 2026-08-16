@@ -34,6 +34,7 @@ var last_red_coin_id = 0
 var switch_state : Array = []
 var activated_shine_ids := []
 var layer_states := []
+var died : bool = false
 
 func reload():
 	coins_collected = CurrentLevelData.checkpoint_data.current_coins
@@ -50,6 +51,7 @@ func reload():
 		required_purple_starbits.append([0])
 		if layer_states.size() != CurrentLevelData.area_headers.size():
 			layer_states.append({})
+	died = true
 	
 
 func reset_counters():

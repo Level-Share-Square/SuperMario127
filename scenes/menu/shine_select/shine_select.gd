@@ -71,7 +71,7 @@ func start_level():
 	# levels screen is supposed to set the CurrentLevelData before changing to the shine select screen
 	# so we'll assume it's safe to just go straight to the player scene 
 	anim_player.play("transition")
-	anim_player.connect("animation_finished", self, "animation_finished", [], CONNECT_ONESHOT)
+	anim_player.connect("animation_finished", self, "animation_finished", [], CONNECT_DEFERRED | CONNECT_ONESHOT)
 
 # kinda lame that you HAVE to use the arguments a signal gives always 
 func animation_finished(_animation_name: String):

@@ -283,7 +283,10 @@ static func deserialize_area_header_code(area_code: String) -> AreaHeader:
 	area_header.underwater_music = set_or_use_default_value(vars, 9, area_header.underwater_music)
 	area_header.shine_shard_count = set_or_use_default_value(vars, 10, area_header.shine_shard_count)
 	area_header.max_purples_count = set_or_use_default_value(vars, 11, area_header.max_purples_count)
-
+	area_header.show_name = set_or_use_default_value(vars, 12, area_header.show_name)
+	area_header.custom_music_name = set_or_use_default_value(vars, 13, area_header.custom_music_name)
+	area_header.custom_music_author = set_or_use_default_value(vars, 14, area_header.custom_music_author)
+	
 	return area_header
 
 

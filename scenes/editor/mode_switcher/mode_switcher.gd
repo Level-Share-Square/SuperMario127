@@ -224,6 +224,7 @@ func switch() -> void:
 	CurrentLevelData.enemies_instanced = 0
 	Singleton.MiscShared.is_play_reload = true
 	
+	CurrentLevelData.is_new_area = true
 	CurrentLevelData.vars = LevelVars.new()
 	CurrentLevelData.vars.init()
 	

@@ -1,4 +1,4 @@
-[gd_scene load_steps=98 format=2]
+[gd_scene load_steps=114 format=2]
 
 [ext_resource path="res://scenes/player/player.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/level_shared.tscn" type="PackedScene" id=2]
@@ -11,9 +11,11 @@
 [ext_resource path="res://scenes/actors/objects/purple_starbit/purple_collect.wav" type="AudioStream" id=9]
 [ext_resource path="res://scenes/player/ui_new/ui/shine_shards.png" type="Texture" id=10]
 [ext_resource path="res://assets/fonts/super-mario-script-3-1402.ttf" type="DynamicFontData" id=11]
+[ext_resource path="res://scenes/player/ui_new/black_panel_align.gd" type="Script" id=12]
 [ext_resource path="res://scenes/shared/backgrounds.tscn" type="PackedScene" id=13]
 [ext_resource path="res://scenes/player/ui_new/polygon_swatch.tscn" type="PackedScene" id=14]
 [ext_resource path="res://assets/fonts/marioscript_ui.tres" type="DynamicFont" id=15]
+[ext_resource path="res://assets/icons/Music.svg" type="Texture" id=16]
 [ext_resource path="res://scenes/player/ui_new/health/health.tscn" type="PackedScene" id=17]
 [ext_resource path="res://scenes/player/ui_new/collectibles/coins.gd" type="Script" id=18]
 [ext_resource path="res://scenes/player/ui_new/collectibles/red_coins.gd" type="Script" id=19]
@@ -43,6 +45,7 @@
 [ext_resource path="res://scenes/player/ui_new/shine/new_record.gd" type="Script" id=43]
 [ext_resource path="res://scenes/player/ui_new/shine/127tally_drum.wav" type="AudioStream" id=44]
 [ext_resource path="res://scenes/player/ui_new/key_get.gd" type="Script" id=45]
+[ext_resource path="res://scenes/player/ui_new/area_info.gd" type="Script" id=46]
 [ext_resource path="res://scenes/actors/objects/p_switch/tick.wav" type="AudioStream" id=58]
 [ext_resource path="res://scenes/actors/objects/p_switch/tick_end.wav" type="AudioStream" id=59]
 [ext_resource path="res://scenes/actors/objects/boo/laugh.wav" type="AudioStream" id=60]
@@ -781,6 +784,404 @@ tracks/3/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 0, 0, 0.752941, 1 ) ]
+}
+
+[sub_resource type="StyleBoxEmpty" id=250]
+
+[sub_resource type="Gradient" id=24]
+colors = PoolColorArray( 0, 0.0431373, 0.313726, 0.878431, 0.0392157, 0.282353, 0.423529, 0.25098 )
+
+[sub_resource type="GradientTexture2D" id=249]
+gradient = SubResource( 24 )
+fill = 1
+fill_from = Vector2( 0, 1 )
+
+[sub_resource type="DynamicFont" id=251]
+size = 24
+outline_size = 2
+outline_color = Color( 0, 0.0431373, 0.313726, 1 )
+use_filter = true
+extra_spacing_char = -1
+font_data = ExtResource( 27 )
+
+[sub_resource type="DynamicFont" id=260]
+size = 24
+outline_size = 2
+use_filter = true
+extra_spacing_char = -1
+font_data = ExtResource( 27 )
+
+[sub_resource type="Animation" id=262]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("MarginContainer/AreaName:rect_rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -3.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("MarginContainer/AreaName:percent_visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("MarginContainer/AreaName/AreaNameBack1:percent_visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("MarginContainer/AreaName/AreaNameBack2:percent_visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath(".:rect_scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0.8, 0.8 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath(".:rect_position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 241, 4 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath(".:modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=261]
+resource_name = "appear"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 0.5, 2 ),
+"update": 0,
+"values": [ 4.0, -5.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("MarginContainer/AreaName:percent_visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( -2, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("MarginContainer/AreaName/AreaNameBack1:percent_visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( -2, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("MarginContainer/AreaName/AreaNameBack2:percent_visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( -2, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath(".:rect_scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 0.5, 1 ),
+"update": 0,
+"values": [ Vector2( 0.6, 0.9 ), Vector2( 1, 1 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath(".:rect_position:y")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 0.5, 1 ),
+"update": 0,
+"values": [ -8.0, 0.0 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath(".:modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.4, 3.5, 4 ),
+"transitions": PoolRealArray( 1, -2, -2, 1 ),
+"update": 0,
+"values": [ Color( 0, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 0, 0, 1, 0 ) ]
+}
+
+[sub_resource type="StyleBoxEmpty" id=255]
+
+[sub_resource type="StyleBoxFlat" id=256]
+bg_color = Color( 0, 0, 0, 0.627451 )
+skew = Vector2( 0.2, 0 )
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 48
+corner_radius_bottom_left = 64
+
+[sub_resource type="DynamicFont" id=252]
+size = 14
+use_filter = true
+extra_spacing_char = -1
+font_data = ExtResource( 26 )
+
+[sub_resource type="DynamicFont" id=257]
+size = 9
+use_filter = true
+extra_spacing_char = -1
+extra_spacing_space = 1
+font_data = ExtResource( 26 )
+
+[sub_resource type="Animation" id=258]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("VBoxContainer:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("VBoxContainer/PanelContainer/HBoxContainer/SongName:percent_visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("VBoxContainer/PanelContainer2/AuthorName:percent_visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("VBoxContainer/PanelContainer2:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 1, 0 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath(".:rect_scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 0.8 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("VBoxContainer/PanelContainer2:rect_scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 0.8 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath(".:rect_rotation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 3.0 ]
+}
+
+[sub_resource type="Animation" id=259]
+resource_name = "appear"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/path = NodePath("VBoxContainer:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 0.5, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("VBoxContainer/PanelContainer/HBoxContainer/SongName:percent_visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("VBoxContainer/PanelContainer2/AuthorName:percent_visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3, 0.8 ),
+"transitions": PoolRealArray( 1, -2, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 1.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("VBoxContainer/PanelContainer2:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.3, 0.8 ),
+"transitions": PoolRealArray( 1, 0.5, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 1, 0 ), Color( 0, 0, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath(".:rect_scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( -2, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 0.8 ), Vector2( 1, 1 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("VBoxContainer/PanelContainer2:rect_scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.3, 0.8 ),
+"transitions": PoolRealArray( 1, -2, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 0.8 ), Vector2( 1, 0.8 ), Vector2( 1, 1 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath(".:rect_rotation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 4.11831e-05, 0.6 ),
+"transitions": PoolRealArray( -2, 1 ),
+"update": 0,
+"values": [ 3.0, 0.0 ]
 }
 
 [sub_resource type="Animation" id=206]
@@ -1775,6 +2176,292 @@ rect_min_size = Vector2( 0, 16 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="UIUnder/HUD/Control/KeyGet"]
 anims/RESET = SubResource( 242 )
 anims/transition = SubResource( 243 )
+
+[node name="AreaInfo" type="MarginContainer" parent="UIUnder/HUD/Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_top = 40
+custom_constants/margin_bottom = 10
+script = ExtResource( 46 )
+area_start_delay = 0.5
+song_start_delay = 1.0
+song_end_delay = 3.5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UIUnder/HUD/Control/AreaInfo"]
+margin_left = 12.0
+margin_top = 40.0
+margin_right = 720.0
+margin_bottom = 398.0
+
+[node name="AreaContainer" type="PanelContainer" parent="UIUnder/HUD/Control/AreaInfo/VBoxContainer"]
+self_modulate = Color( 1, 1, 1, 0 )
+margin_left = 241.0
+margin_top = 4.0
+margin_right = 466.0
+margin_bottom = 38.0
+rect_rotation = -5.0
+rect_scale = Vector2( 0.8, 0.8 )
+size_flags_horizontal = 4
+size_flags_vertical = 0
+custom_styles/panel = SubResource( 250 )
+
+[node name="MissionBackground" type="TextureRect" parent="UIUnder/HUD/Control/AreaInfo/VBoxContainer/AreaContainer"]
+visible = false
+margin_right = 225.0
+margin_bottom = 34.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = SubResource( 249 )
+expand = true
+
+[node name="Glow" type="TextureRect" parent="UIUnder/HUD/Control/AreaInfo/VBoxContainer/AreaContainer/MissionBackground"]
+modulate = Color( 1, 1, 1, 0.501961 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -4.0
+margin_top = -4.0
+margin_right = 4.0
+margin_bottom = 4.0
+rect_rotation = -3.0
+texture = SubResource( 249 )
+expand = true
+
+[node name="Glow2" type="TextureRect" parent="UIUnder/HUD/Control/AreaInfo/VBoxContainer/AreaContainer/MissionBackground/Glow"]
+modulate = Color( 1, 1, 1, 0.501961 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -4.0
+margin_top = -4.0
+margin_right = 4.0
+margin_bottom = 4.0
+rect_rotation = 4.0
+texture = SubResource( 249 )
+expand = true
+
+[node name="MarginContainer" type="MarginContainer" parent="UIUnder/HUD/Control/AreaInfo/VBoxContainer/AreaContainer"]
+margin_right = 225.0
+margin_bottom = 34.0
+custom_constants/margin_right = 8
+custom_constants/margin_top = 4
+custom_constants/margin_left = 8
+custom_constants/margin_bottom = 4
+
+[node name="AreaName" type="Label" parent="UIUnder/HUD/Control/AreaInfo/VBoxContainer/AreaContainer/MarginContainer"]
+unique_name_in_owner = true
+margin_left = 8.0
+margin_top = 4.0
+margin_right = 217.0
+margin_bottom = 30.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_rotation = -3.0
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 0.501961 )
+custom_constants/shadow_offset_x = 0
+custom_constants/shadow_offset_y = 2
+custom_fonts/font = SubResource( 251 )
+text = "Grassy Grasslands"
+align = 1
+valign = 1
+percent_visible = 0.0
+
+[node name="AreaNameBack1" type="Label" parent="UIUnder/HUD/Control/AreaInfo/VBoxContainer/AreaContainer/MarginContainer/AreaName"]
+unique_name_in_owner = true
+modulate = Color( 0.247059, 0.27451, 0.737255, 0.376471 )
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -4.0
+margin_top = -2.0
+margin_right = -4.0
+margin_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_colors/font_color_shadow = Color( 0, 0, 0, 0.501961 )
+custom_constants/shadow_offset_x = 0
+custom_constants/shadow_offset_y = 2
+custom_fonts/font = SubResource( 260 )
+text = "Grassy Grasslands"
+align = 1
+valign = 1
+percent_visible = 0.0
+
+[node name="AreaNameBack2" type="Label" parent="UIUnder/HUD/Control/AreaInfo/VBoxContainer/AreaContainer/MarginContainer/AreaName"]
+unique_name_in_owner = true
+modulate = Color( 0.247059, 0.27451, 0.737255, 0.376471 )
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 2.0
+margin_right = 4.0
+margin_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_colors/font_color_shadow = Color( 0, 0, 0, 0.501961 )
+custom_constants/shadow_offset_x = 0
+custom_constants/shadow_offset_y = 2
+custom_fonts/font = SubResource( 260 )
+text = "Grassy Grasslands"
+align = 1
+valign = 1
+percent_visible = 0.0
+
+[node name="AreaNameAnim" type="AnimationPlayer" parent="UIUnder/HUD/Control/AreaInfo/VBoxContainer/AreaContainer"]
+unique_name_in_owner = true
+anims/RESET = SubResource( 262 )
+anims/appear = SubResource( 261 )
+
+[node name="Padding" type="Control" parent="UIUnder/HUD/Control/AreaInfo/VBoxContainer"]
+margin_top = 50.0
+margin_right = 708.0
+margin_bottom = 313.0
+size_flags_vertical = 3
+
+[node name="SongContainer" type="PanelContainer" parent="UIUnder/HUD/Control/AreaInfo/VBoxContainer"]
+self_modulate = Color( 1, 1, 1, 0 )
+margin_left = 292.0
+margin_top = 329.0
+margin_right = 416.0
+margin_bottom = 358.0
+rect_rotation = 3.0
+rect_scale = Vector2( 1, 0.8 )
+rect_pivot_offset = Vector2( 0, 29 )
+size_flags_horizontal = 4
+size_flags_vertical = 0
+custom_styles/panel = SubResource( 250 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UIUnder/HUD/Control/AreaInfo/VBoxContainer/SongContainer"]
+modulate = Color( 0, 0, 1, 0 )
+margin_right = 124.0
+margin_bottom = 29.0
+custom_constants/separation = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="UIUnder/HUD/Control/AreaInfo/VBoxContainer/SongContainer/VBoxContainer"]
+margin_right = 124.0
+margin_bottom = 16.0
+custom_styles/panel = SubResource( 255 )
+
+[node name="MarginContainer" type="MarginContainer" parent="UIUnder/HUD/Control/AreaInfo/VBoxContainer/SongContainer/VBoxContainer/PanelContainer"]
+margin_right = 124.0
+margin_bottom = 16.0
+custom_constants/margin_right = -6
+custom_constants/margin_top = -3
+custom_constants/margin_left = -6
+custom_constants/margin_bottom = -3
+
+[node name="Panel" type="Panel" parent="UIUnder/HUD/Control/AreaInfo/VBoxContainer/SongContainer/VBoxContainer/PanelContainer/MarginContainer"]
+margin_left = -6.0
+margin_top = -3.0
+margin_right = 130.0
+margin_bottom = 19.0
+custom_styles/panel = SubResource( 256 )
+
+[node name="Panel" type="Panel" parent="UIUnder/HUD/Control/AreaInfo/VBoxContainer/SongContainer/VBoxContainer/PanelContainer/MarginContainer/Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -136.0
+margin_right = -136.0
+rect_rotation = 1.0
+rect_scale = Vector2( -1, 1 )
+rect_pivot_offset = Vector2( 136, 0 )
+custom_styles/panel = SubResource( 256 )
+script = ExtResource( 12 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UIUnder/HUD/Control/AreaInfo/VBoxContainer/SongContainer/VBoxContainer/PanelContainer"]
+margin_right = 124.0
+margin_bottom = 16.0
+custom_constants/separation = 0
+
+[node name="SongName" type="Label" parent="UIUnder/HUD/Control/AreaInfo/VBoxContainer/SongContainer/VBoxContainer/PanelContainer/HBoxContainer"]
+unique_name_in_owner = true
+margin_right = 109.0
+margin_bottom = 16.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 0.027451, 0.054902, 0.278431, 0.65098 )
+custom_fonts/font = SubResource( 252 )
+text = "Cursed Cathedral"
+align = 1
+valign = 1
+percent_visible = 0.0
+
+[node name="MarginContainer" type="MarginContainer" parent="UIUnder/HUD/Control/AreaInfo/VBoxContainer/SongContainer/VBoxContainer/PanelContainer/HBoxContainer"]
+margin_left = 109.0
+margin_right = 124.0
+margin_bottom = 16.0
+custom_constants/margin_right = 1
+custom_constants/margin_top = 1
+custom_constants/margin_left = 1
+custom_constants/margin_bottom = 1
+
+[node name="MusicIcon" type="TextureRect" parent="UIUnder/HUD/Control/AreaInfo/VBoxContainer/SongContainer/VBoxContainer/PanelContainer/HBoxContainer/MarginContainer"]
+margin_left = 1.0
+margin_top = 1.0
+margin_right = 14.0
+margin_bottom = 15.0
+rect_min_size = Vector2( 13, 0 )
+size_flags_vertical = 3
+texture = ExtResource( 16 )
+expand = true
+stretch_mode = 6
+
+[node name="HSeparator" type="HSeparator" parent="UIUnder/HUD/Control/AreaInfo/VBoxContainer/SongContainer/VBoxContainer"]
+visible = false
+margin_top = 16.0
+margin_right = 141.0
+margin_bottom = 20.0
+
+[node name="PanelContainer2" type="PanelContainer" parent="UIUnder/HUD/Control/AreaInfo/VBoxContainer/SongContainer/VBoxContainer"]
+modulate = Color( 0, 0, 1, 0 )
+margin_left = 9.0
+margin_top = 18.0
+margin_right = 114.0
+margin_bottom = 29.0
+rect_scale = Vector2( 1, 0.8 )
+size_flags_horizontal = 4
+custom_styles/panel = SubResource( 255 )
+
+[node name="MarginContainer" type="MarginContainer" parent="UIUnder/HUD/Control/AreaInfo/VBoxContainer/SongContainer/VBoxContainer/PanelContainer2"]
+margin_right = 105.0
+margin_bottom = 11.0
+custom_constants/margin_right = -6
+custom_constants/margin_top = 0
+custom_constants/margin_left = -6
+custom_constants/margin_bottom = -3
+
+[node name="Panel" type="Panel" parent="UIUnder/HUD/Control/AreaInfo/VBoxContainer/SongContainer/VBoxContainer/PanelContainer2/MarginContainer"]
+margin_left = -6.0
+margin_right = 111.0
+margin_bottom = 14.0
+custom_styles/panel = SubResource( 256 )
+
+[node name="Panel" type="Panel" parent="UIUnder/HUD/Control/AreaInfo/VBoxContainer/SongContainer/VBoxContainer/PanelContainer2/MarginContainer/Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -117.0
+margin_right = -117.0
+rect_rotation = 1.0
+rect_scale = Vector2( -1, 1 )
+rect_pivot_offset = Vector2( 117, 0 )
+custom_styles/panel = SubResource( 256 )
+script = ExtResource( 12 )
+
+[node name="AuthorName" type="Label" parent="UIUnder/HUD/Control/AreaInfo/VBoxContainer/SongContainer/VBoxContainer/PanelContainer2"]
+unique_name_in_owner = true
+margin_right = 105.0
+margin_bottom = 11.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 0.027451, 0.054902, 0.278431, 0.65098 )
+custom_fonts/font = SubResource( 257 )
+text = "By RednGreen, Súper M 795"
+align = 1
+valign = 1
+percent_visible = 0.0
+
+[node name="SongNameAnim" type="AnimationPlayer" parent="UIUnder/HUD/Control/AreaInfo/VBoxContainer/SongContainer"]
+unique_name_in_owner = true
+anims/RESET = SubResource( 258 )
+anims/appear = SubResource( 259 )
 
 [node name="SignText" parent="UIUnder" instance=ExtResource( 25 )]
 unique_name_in_owner = true

@@ -69,6 +69,7 @@ var object_cache := []
 var background_cache := []
 var foreground_cache := []
 
+var is_new_area: bool
 
 signal finished(result)
 
@@ -139,7 +140,6 @@ func switch_to_area(new_area_id: int, always_reload: bool = true, keep_old_loade
 		unload_level_area(area_id)
 	
 	area_id = new_area_id
-	
 	current_area = load_level_area(area_id, always_reload)
 
 

@@ -36,6 +36,7 @@ var has_water := false
 var play_blended := false
 var has_blended := false
 var temp_music := false
+var song_switched := false
 
 const MUSIC_FADE_LENGTH = 0.75
 
@@ -144,15 +145,13 @@ func decode_music(raw_music: String) -> Array:
 		return [0, raw_music, 0, ""]
 	var loop_start
 	var loop_end
-	var song_name
 	var url
 	if !"|" in raw_music:
 		var trimmed_url = raw_music.trim_prefix("LP").split("=")
 		loop_start = float(trimmed_url[0])
 		url = trimmed_url[1]
 		loop_end = 0
-		song_name = ""
-		return [loop_start, url, loop_end, song_name]
+		return [loop_start, url, loop_end]
 	var loop_start_string = raw_music.substr(0, raw_music.find("="))
 	loop_start_string.erase(0, 2)
 	if float(loop_start_string) == 0:
@@ -166,9 +165,8 @@ func decode_music(raw_music: String) -> Array:
 		url = raw_music.substr(0, raw_music.find("|"))
 	else:
 		url = raw_music
-		song_name = ""
 		loop_end = 0
-		return [loop_start, url, loop_end, song_name]
+		return [loop_start, url, loop_end]
 		
 	raw_music.erase(0, raw_music.find("|") + 1)
 	
@@ -179,14 +177,7 @@ func decode_music(raw_music: String) -> Array:
 	else:
 		loop_end = float(loop_end_string)
 	
-	raw_music.erase(0, raw_music.find("N"))
-	
-	if raw_music == "N=":
-		song_name = ""
-	else:
-		raw_music.erase(0, 2)
-		song_name = raw_music
-	return [loop_start, url, loop_end, song_name]
+	return [loop_start, url, loop_end]
 #
 #func save_ogg(url: String, level_id: String, area: int, working_folder: String, underwater: bool = false) -> void:
 #	var file_path: String = level_list_util.get_level_music_path(
@@ -292,6 +283,8 @@ func change_song(old_setting, music_setting) -> void:
 			handle_custom_song(music_setting)
 	else:
 		song = get_song(music_setting)
+	
+	song_switched = true
 	
 	if song != null and stream != song.stream:
 		stream = song.stream

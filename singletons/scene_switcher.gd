@@ -119,6 +119,8 @@ func start_level(level_metadata: LevelMetadata, level_id: String, working_folder
 		if mission["mission_show_in_menu"]:
 			total_shine_count += 1
 	
+	CurrentLevelData.is_new_area = true
+	
 	# If there is more than 1, go to shine select screen
 	if total_shine_count > 1:
 		if start_in_edit_mode or skip_shine_select:
@@ -139,7 +141,7 @@ func start_level(level_metadata: LevelMetadata, level_id: String, working_folder
 	if do_transition:
 		# setup level when the transition finishes so music doesnt bug out
 		var _connect = SceneTransitions.connect("transition_finished", self, "setup_level", [level_metadata, level_id, working_folder, hub_level, selected_file], CONNECT_ONESHOT)
-		_connect = SceneTransitions.connect("transition_finished", get_tree(), "change_scene", [goal_scene], CONNECT_ONESHOT)
+		_connect = SceneTransitions.connect("transition_finished", get_tree(), "change_scene", [goal_scene], CONNECT_DEFERRED | CONNECT_ONESHOT)
 		
 		if play_warp_sound:
 			SceneTransitions.play_transition_audio()
@@ -151,6 +153,8 @@ func start_level(level_metadata: LevelMetadata, level_id: String, working_folder
 ## start level without setting any variables
 ## or doing any shine select screen checks
 func force_start_level():
-	var _connect = SceneTransitions.connect("transition_finished", get_tree(), "change_scene", [PLAYER_PATH], CONNECT_ONESHOT)
-	
+	if SceneTransitions.transitioning:
+		yield(SceneTransitions, "transition_finished")
+		
+	var _connect = SceneTransitions.connect("transition_finished", get_tree(), "change_scene", [PLAYER_PATH], CONNECT_DEFERRED | CONNECT_ONESHOT)
 	SceneTransitions.do_transition_fade(SceneTransitions.DEFAULT_TRANSITION_TIME)

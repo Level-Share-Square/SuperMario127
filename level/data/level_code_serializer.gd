@@ -150,6 +150,9 @@ static func serialize_area(area: AreaData) -> String:
 			header.underwater_music,
 			header.shine_shard_count,
 			header.max_purples_count,
+			header.show_name,
+			header.custom_music_name,
+			header.custom_music_author
 		]
 	)
 	

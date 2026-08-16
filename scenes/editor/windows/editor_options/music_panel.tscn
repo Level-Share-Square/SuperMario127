@@ -76,16 +76,29 @@ alignment = 1
 
 [node name="SongName" type="LineEdit" parent="MarginContainer/VBoxContainer/InfoContainer"]
 unique_name_in_owner = true
+margin_right = 87.0
+margin_bottom = 17.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+align = 1
+placeholder_text = "Song Title"
+caret_blink = true
+caret_blink_speed = 0.5
+
+[node name="SongAuthor" type="LineEdit" parent="MarginContainer/VBoxContainer/InfoContainer"]
+unique_name_in_owner = true
+margin_left = 91.0
 margin_right = 178.0
 margin_bottom = 17.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 align = 1
-placeholder_text = "Song Name"
+placeholder_text = "By Author"
 caret_blink = true
 caret_blink_speed = 0.5
 
-[node name="VSeparator" type="VSeparator" parent="MarginContainer/VBoxContainer/InfoContainer"]
+[node name="InfoSeparator" type="VSeparator" parent="MarginContainer/VBoxContainer/InfoContainer"]
+unique_name_in_owner = true
 margin_left = 182.0
 margin_right = 186.0
 margin_bottom = 17.0

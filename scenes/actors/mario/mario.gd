@@ -1192,6 +1192,7 @@ func encode_int_bytes(val: int, num: int) -> PoolByteArray:
 	return output
 	
 func switch_areas(area_id, transition_time):
+	CurrentLevelData.is_new_area = true
 	SceneTransitions.reload_scene(cutout_circle, cutout_circle, transition_time, area_id, false)
 	if !switched:
 		if Singleton.PlayerSettings.other_player_id != -1:
@@ -1287,7 +1288,9 @@ func kill(cause: String) -> void:
 				yield(get_tree().create_timer(0.55), "timeout")
 				sound_player.play_death_sound()
 				yield(get_tree().create_timer(0.75), "timeout")
-				
+		
+		if CurrentLevelData.area_id != CurrentLevelData.checkpoint_data.current_area:
+			CurrentLevelData.is_new_area = true
 		SceneTransitions.reload_scene(cutout_in, cutout_out, transition_time, 0, true)
 
 func exit() -> void:

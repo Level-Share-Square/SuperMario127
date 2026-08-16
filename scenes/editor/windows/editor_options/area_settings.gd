@@ -5,6 +5,7 @@ onready var editor = get_tree().current_scene
 onready var gravity = $"%Gravity"
 onready var mins = $"%Mins"
 onready var sec = $"%Sec"
+onready var show_name = $"%ShowName"
 
 
 func _ready():
@@ -29,6 +30,13 @@ func load_settings():
 	mins.get_line_edit().text = str(mins.value) + " m"
 	sec.get_line_edit().text = str(sec.value) + " s"
 	
+	show_name.load_property(editor, get_property_value("show_name"), [
+		"show_name",
+		TYPE_BOOL,
+		PropertyInfo.new(show_name.hint_tooltip)
+	])
+	connect_signals(show_name)
+	
 
 func gravity_changed(new_value) -> void:
 	var action := ChangeAreaAction.new()
@@ -43,3 +51,18 @@ func time_changed(new_value) -> void:
 	action.id = CurrentLevelData.area_id
 	action.new_value = mins.value*60 + sec.value
 	editor.action_manager.commit_action(action)
+
+
+func change_property(property: String, new_value, check_matches, save_to_data):
+	var action := ChangeAreaAction.new()
+	action.property = property
+	action.id = CurrentLevelData.area_id
+	action.new_value = new_value
+	editor.action_manager.commit_action(action)
+
+func get_property_value(property_id: String):
+	return CurrentLevelData.current_area.header[property_id]
+
+
+func connect_signals(property_editor: PropertyEditor):
+	property_editor.connect("property_edited", self, "change_property")
