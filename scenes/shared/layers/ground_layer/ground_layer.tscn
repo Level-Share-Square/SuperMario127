@@ -25,3 +25,6 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="BackBufferCopy" type="BackBufferCopy" parent="."]
+copy_mode = 2

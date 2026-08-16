@@ -30,3 +30,6 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="BackBufferCopy" type="BackBufferCopy" parent="ParallaxScroll"]
+copy_mode = 2
