@@ -814,7 +814,7 @@ font_data = ExtResource( 27 )
 [sub_resource type="Animation" id=262]
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("MarginContainer/AreaName:rect_rotation")
+tracks/0/path = NodePath("MarginContainer/AreaName:percent_visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -823,10 +823,10 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ -3.0 ]
+"values": [ 0.0 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("MarginContainer/AreaName:percent_visible")
+tracks/1/path = NodePath("MarginContainer/AreaName/AreaNameBack1:percent_visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -838,7 +838,7 @@ tracks/1/keys = {
 "values": [ 0.0 ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("MarginContainer/AreaName/AreaNameBack1:percent_visible")
+tracks/2/path = NodePath("MarginContainer/AreaName/AreaNameBack2:percent_visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -850,7 +850,7 @@ tracks/2/keys = {
 "values": [ 0.0 ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("MarginContainer/AreaName/AreaNameBack2:percent_visible")
+tracks/3/path = NodePath(".:rect_scale")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -859,10 +859,10 @@ tracks/3/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ 0.0 ]
+"values": [ Vector2( 0.8, 0.8 ) ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath(".:rect_scale")
+tracks/4/path = NodePath(".:rect_position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
@@ -871,10 +871,10 @@ tracks/4/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 0.8, 0.8 ) ]
+"values": [ Vector2( 241, 4 ) ]
 }
 tracks/5/type = "value"
-tracks/5/path = NodePath(".:rect_position")
+tracks/5/path = NodePath(".:modulate")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
@@ -883,19 +883,7 @@ tracks/5/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 241, 4 ) ]
-}
-tracks/6/type = "value"
-tracks/6/path = NodePath(".:modulate")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ) ]
+"values": [ Color( 0, 1, 1, 0 ) ]
 }
 
 [sub_resource type="Animation" id=261]
@@ -2194,19 +2182,19 @@ margin_right = 720.0
 margin_bottom = 398.0
 
 [node name="AreaContainer" type="PanelContainer" parent="UIUnder/HUD/Control/AreaInfo/VBoxContainer"]
+modulate = Color( 0, 1, 1, 0 )
 self_modulate = Color( 1, 1, 1, 0 )
 margin_left = 241.0
 margin_top = 4.0
 margin_right = 466.0
 margin_bottom = 38.0
-rect_rotation = -5.0
+rect_rotation = 4.0
 rect_scale = Vector2( 0.8, 0.8 )
 size_flags_horizontal = 4
 size_flags_vertical = 0
 custom_styles/panel = SubResource( 250 )
 
 [node name="MissionBackground" type="TextureRect" parent="UIUnder/HUD/Control/AreaInfo/VBoxContainer/AreaContainer"]
-visible = false
 margin_right = 225.0
 margin_bottom = 34.0
 size_flags_horizontal = 3
@@ -2254,7 +2242,6 @@ margin_right = 217.0
 margin_bottom = 30.0
 grow_horizontal = 2
 grow_vertical = 2
-rect_rotation = -3.0
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 0.501961 )
 custom_constants/shadow_offset_x = 0
@@ -2267,7 +2254,7 @@ percent_visible = 0.0
 
 [node name="AreaNameBack1" type="Label" parent="UIUnder/HUD/Control/AreaInfo/VBoxContainer/AreaContainer/MarginContainer/AreaName"]
 unique_name_in_owner = true
-modulate = Color( 0.247059, 0.27451, 0.737255, 0.376471 )
+modulate = Color( 0, 0, 0, 0.12549 )
 show_behind_parent = true
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -2288,7 +2275,7 @@ percent_visible = 0.0
 
 [node name="AreaNameBack2" type="Label" parent="UIUnder/HUD/Control/AreaInfo/VBoxContainer/AreaContainer/MarginContainer/AreaName"]
 unique_name_in_owner = true
-modulate = Color( 0.247059, 0.27451, 0.737255, 0.376471 )
+modulate = Color( 0, 0, 0, 0.12549 )
 show_behind_parent = true
 anchor_right = 1.0
 anchor_bottom = 1.0
