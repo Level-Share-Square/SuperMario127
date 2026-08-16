@@ -30,10 +30,11 @@ func _ready():
 		slider.get_node("Spinbox").max_value = 255 if slider.component != ColorComponents.Component.INTENSITY else 100
 	hex_code.get_node("LineEdit").connect("focus_exited", self, "hex_code_entered")
 	hex_code.get_node("LineEdit").connect("text_entered", self, "text_entered")
-	
-func _input(event):
+	wheel.connect("gui_input", self, "gui_input")
+	gradient.connect("gui_input", self, "gui_input")
+
+func gui_input(event):
 	var editor = get_tree().current_scene
-	expand_button.active = editor.get_node("%ObjectSettingsWindow").visible or editor.get_node("%LayerEditor").visible
 	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT and event.pressed:
 		var mouse_pos: Vector2 = get_global_mouse_position()
 		

@@ -4,6 +4,7 @@ extends PanelContainer
 enum OverrideTypes {BOOL_ALIAS, ENUM, DROPDOWN}
 
 var editor: Editor
+var window: EditorWindow
 var objects: Dictionary
 
 export var affected_properties: PoolStringArray

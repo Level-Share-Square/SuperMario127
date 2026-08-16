@@ -32,6 +32,7 @@ func connect_signals(property_editor: PropertyEditor):
 	property_editor.connect("property_edited", self, "change_property")
 
 func load_base_properties():
+	layer_name.window = window
 	layer_name.load_property(editor, get_property_value("layer_name"), [
 		"layer_name",
 		TYPE_STRING,
@@ -39,6 +40,7 @@ func load_base_properties():
 	])
 	connect_signals(layer_name)
 	
+	parallax.window = window
 	parallax.load_property(editor, get_property_value("parallax_distance"), [
 		"parallax_distance",
 		TYPE_REAL,
@@ -47,6 +49,7 @@ func load_base_properties():
 	connect_signals(parallax)
 	parallax.visible = not layer_data.layer_metadata.is_ground
 	
+	autoset_tint.window = window
 	autoset_tint.load_property(autoset_tint, get_property_value("autoset_tint"), [
 		"autoset_tint",
 		TYPE_BOOL,
@@ -54,6 +57,7 @@ func load_base_properties():
 	])
 	connect_signals(autoset_tint)
 	
+	tint.window = window
 	tint.load_property(tint, get_property_value("layer_tint"), [
 		"layer_tint",
 		TYPE_COLOR,
@@ -61,6 +65,7 @@ func load_base_properties():
 	])
 	connect_signals(tint)
 
+	opacity.window = window
 	opacity.load_property(opacity, get_property_value("layer_opacity"), [
 		"layer_opacity",
 		TYPE_COLOR,

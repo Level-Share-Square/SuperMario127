@@ -39,6 +39,7 @@ func load_objects(_objects: Dictionary):
 	var base_tab: PropertyTab = preload(
 		"res://scenes/editor/windows/object_property_editor/property_tabs/base/base.tscn"
 	).instance()
+	base_tab.window = self
 	base_tab.load_base_properties(editor, objects)
 	property_groups.add_child(base_tab)
 	
@@ -91,6 +92,7 @@ func load_objects(_objects: Dictionary):
 		var misc_tab: PropertyTab = preload(
 			"res://scenes/editor/windows/object_property_editor/property_tabs/misc/misc.tscn"
 		).instance()
+		misc_tab.window = self
 		misc_tab.load_misc_properties(editor, objects, common_properties, common_property_overrides)
 		property_groups.add_child(misc_tab)
 		property_groups.move_child(misc_tab, 0)
@@ -99,6 +101,7 @@ func load_objects(_objects: Dictionary):
 		var extra_tab: PropertyTab = load(
 			"res://scenes/editor/windows/object_property_editor/property_tabs/%s/%s.tscn" % [tab, tab]
 		).instance()
+		extra_tab.window = self
 		extra_tab.load_properties(editor, objects)
 		property_groups.add_child(extra_tab)
 		property_groups.move_child(extra_tab, 0)

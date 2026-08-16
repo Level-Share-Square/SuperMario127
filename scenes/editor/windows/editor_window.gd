@@ -18,6 +18,7 @@ onready var icon_node: TextureRect = $"%WindowIcon"
 onready var icon_spacer: Control = $"%IconSpacer"
 
 signal window_opened
+signal window_closed
 
 
 func set_title(val: String):
@@ -95,6 +96,7 @@ func close():
 		yield(tween, "finished")
 
 	hide()
+	emit_signal("window_closed")
 
 
 func toggle_window(size: Vector2 = rect_size) -> void:

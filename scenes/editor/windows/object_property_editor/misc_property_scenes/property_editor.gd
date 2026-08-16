@@ -10,6 +10,7 @@ const NAME_TEXT: String = "%s: "
 export var check_matches: bool = true
 
 var editor: Editor
+var window: EditorWindow
 var property: Array
 
 signal property_edited(property, value, check_matches, save_to_data)

@@ -18,5 +18,10 @@ func on_pressed():
 		active = false
 
 
+func collapse():
+	active = true
+	on_pressed()
+
+
 func tween_finished(tween):
 	tween.kill()

@@ -991,6 +991,7 @@ unique_name_in_owner = true
 margin_right = 48.0
 margin_bottom = 48.0
 rect_scale = Vector2( 0.2, 0.2 )
+mouse_filter = 2
 texture = ExtResource( 13 )
 stretch_mode = 5
 
@@ -1011,6 +1012,7 @@ anchor_bottom = 1.0
 margin_left = -1.5
 margin_right = 74.5
 margin_bottom = -98.0
+mouse_filter = 2
 texture = ExtResource( 14 )
 expand = true
 stretch_mode = 5
