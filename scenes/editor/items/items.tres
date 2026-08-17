@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=251 format=2]
+[gd_resource type="Resource" load_steps=252 format=2]
 
 [ext_resource path="res://scenes/editor/items/placeable_items.gd" type="Script" id=1]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/blue_coin.tres" type="Resource" id=2]
@@ -250,6 +250,7 @@
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/crate.tres" type="Resource" id=248]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/net.tres" type="Resource" id=249]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/big_crate.tres" type="Resource" id=250]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/chain.tres" type="Resource" id=251]
 
 [resource]
 script = ExtResource( 1 )
@@ -285,6 +286,7 @@ placeable_items = {
 "obj_cave_plant": ExtResource( 63 ),
 "obj_cave_spore": ExtResource( 68 ),
 "obj_cave_tree": ExtResource( 54 ),
+"obj_chain": ExtResource( 251 ),
 "obj_checkpoint": ExtResource( 100 ),
 "obj_cheep_cheep": ExtResource( 74 ),
 "obj_cloud_platform": ExtResource( 13 ),
