@@ -52,7 +52,7 @@ func collect(body):
 		body.set_collision_layer_bit(1, false)
 		body.set_inter_player_collision(false)
 		
-		Singleton.Music.volume_multiplier = 0.33
+		Singleton.Music.volume_multiplier = 0
 		visible = false
 		
 func play_get_anim():

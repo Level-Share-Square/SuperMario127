@@ -13,7 +13,7 @@ onready var icon = $"%Icon"
 onready var twitter_icon = $"%TwitterIcon"
 onready var end_cards = $"%EndCards"
 onready var shorts_template = $"%ShortsTemplate"
-
+onready var coin_hud = $"%CoinHUD"
 
 func _ready():
 	#return
@@ -61,11 +61,17 @@ func _ready():
 #	twitter_icon_img.flip_y()
 #	twitter_icon_img.save_png("res://assets/artwork/twitter/twitter_icon.png")
 	
-	var shorts_template_img: Image = shorts_template.get_node("Viewport").get_texture().get_data()
-	shorts_template_img.convert(Image.FORMAT_RGBA8)
-	shorts_template_img.flip_y()
-	fix_transparency(shorts_template_img)
-	shorts_template_img.save_png("res://assets/artwork/youtube/shorts_template.png")
+#	var shorts_template_img: Image = shorts_template.get_node("Viewport").get_texture().get_data()
+#	shorts_template_img.convert(Image.FORMAT_RGBA8)
+#	shorts_template_img.flip_y()
+#	fix_transparency(shorts_template_img)
+#	shorts_template_img.save_png("res://assets/artwork/youtube/shorts_template.png")
+
+	var coin_hud_img: Image = coin_hud.get_node("Viewport").get_texture().get_data()
+	coin_hud_img.convert(Image.FORMAT_RGBA8)
+	coin_hud_img.flip_y()
+	fix_transparency(coin_hud_img)
+	coin_hud_img.save_png("res://assets/artwork/coin_hud.png")
 
 
 func fix_transparency(image_data: Image) -> void:
