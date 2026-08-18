@@ -70,7 +70,7 @@ func _register_properties():
 	register_property(4, "color", color, true)
 	register_property(5, "rainbow", rainbow, true)
 	register_property(6, "winged", winged, true)
-	register_property(7, "shelled", shelled, false)
+	register_property(7, "shelled", shelled, true)
 
 func on_visibility_changed(is_visible: bool) -> void:
 	for raycast in [left_check, right_check]:
