@@ -15,6 +15,7 @@ var layer_uuid: String = ""
 var parallax_distance: float = 0
 var tint := Color(0.545098, 0.545098, 0.545098)
 var opacity: float = 1
+var lock_axis: int = LayerMetadata.LockAxis.None
 var is_visible: bool = true
 var move_to_index: int = -1
 var one_time: bool = false
@@ -32,6 +33,7 @@ func _register_properties():
 	register_property(10, "opacity", opacity)
 	register_property(11, "is_visible", is_visible)
 	register_property(12, "move_to_index", move_to_index)
+	register_property(14, "lock_axis", lock_axis)
 	register_property(13, "one_time", one_time)
 	set_property_override("layer_uuid", PropertyTab.OverrideTypes.DROPDOWN, [self, "get_layer_args"])
 
@@ -45,6 +47,7 @@ func _register_property_info():
 	set_property_info("opacity", PropertyInfo.new("How transparent this layer will be.", 0.05, 0, 1, ["", ""], ["", ""]))
 	set_property_info("is_visible", PropertyInfo.new("Whether or not to hide this layer after interacting.", 1, -INF, INF, ["", ""], ["", ""]))
 	set_property_info("move_to_index", PropertyInfo.new("Where to move this layer in the layer order, counted from 0 as you move down,", 1, -INF, INF, ["", ""], ["", ""]))
+	set_property_info("lock_axis", PropertyInfo.new("Whether to stop the layer from scrolling, on one or both axes.", 1, -INF, INF, ["", ""], ["", ""]))
 	set_property_info("one_time", PropertyInfo.new("Whether or not to repeat this trigger's actions.", 1, -INF, INF, ["", ""], ["", ""]))
 
 func get_layer_args() -> Dictionary:
@@ -131,7 +134,8 @@ func update_layer(body):
 			parallax_distance,
 			tint,
 			opacity,
-			is_visible
+			is_visible,
+			lock_axis
 		)
 		
 		shared.load_layer_states({layer_uuid: layer_state})

@@ -6,6 +6,7 @@ onready var is_ground = $"%IsGround"
 onready var autoset_tint = $"%AutosetTint"
 onready var tint = $"%Tint"
 onready var opacity = $"%Opacity"
+onready var lock_axis = $"%LockAxis"
 onready var switch_layer = $"%SwitchLayer"
 
 onready var editor: Editor = get_tree().current_scene
@@ -72,6 +73,14 @@ func load_base_properties():
 		PropertyInfo.new(opacity.hint_tooltip, 0.1, 0, 1)
 	])
 	connect_signals(opacity)
+	
+	lock_axis.window = window
+	lock_axis.load_property(lock_axis, get_property_value("lock_axis"), [
+		"lock_axis",
+		["None", "Vertical", "Horizontal", "Both"],
+		PropertyInfo.new(lock_axis.hint_tooltip)
+	])
+	connect_signals(lock_axis)
 
 	if layer_data.layer_metadata.is_origin:
 		switch_layer.disabled = true

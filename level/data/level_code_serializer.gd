@@ -189,6 +189,7 @@ static func serialize_layer(layer: LayerData) -> String:
 			layer.layer_metadata.is_origin,
 			layer.layer_metadata.layer_uuid,
 			layer.layer_metadata.layer_visible,
+			layer.layer_metadata.lock_axis
 		]
 	)
 	

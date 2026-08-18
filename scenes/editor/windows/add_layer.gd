@@ -25,8 +25,7 @@ func add_layer():
 		"New Layer",
 		false,
 		PoolIntArray(),
-		false,
-		float(opacity.text)
+		false
 	)
 	
 	var data := LayerData.new(metadata, TileData.new(), [])

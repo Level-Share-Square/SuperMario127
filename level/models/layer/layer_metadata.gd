@@ -1,6 +1,12 @@
 class_name LayerMetadata
 extends LevelDataResource
 
+enum LockAxis {
+	None,
+	Vertical,
+	Horizontal,
+	Both
+}
 
 var layer_name: String = "Layer %s"
 var layer_uuid: String = ""
@@ -12,6 +18,7 @@ var layer_tint: Color = Color.white
 var layer_opacity: float = 1.0
 # saved separately to layer opacity
 var layer_visible: bool = true
+var lock_axis: int = LockAxis.None
 
 var order: int
 var is_ground: bool
@@ -35,6 +42,7 @@ func _init(
 		set_activated_mission_ids: PoolIntArray = PoolIntArray(),
 		set_disabled: bool = false,
 		set_opacity: float = 1.0,
+		set_lock_axis: int = LockAxis.None,
 		set_layer_uuid = uuid_util.v4()
 	):
 	parallax_distance = set_parallax_distance
@@ -47,4 +55,5 @@ func _init(
 	layer_opacity = set_opacity
 	layer_name = set_name
 	is_origin = set_is_origin
+	lock_axis = set_lock_axis
 	layer_uuid = set_layer_uuid

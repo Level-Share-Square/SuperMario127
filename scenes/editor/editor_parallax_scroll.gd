@@ -15,8 +15,10 @@ func _update_parallax():
 	var cur_layer = shared.layer_dictionary.get(editor.layer)
 	if cur_layer is LevelParallaxLayer:
 		set_parallax_distance(shared.layer_dictionary[editor.layer].parallax_scroll.parallax_distance)
+		set_lock_axis(shared.layer_dictionary[editor.layer].parallax_scroll.lock_axis)
 	else:
 		set_parallax_distance(0)
+		set_lock_axis(LayerMetadata.LockAxis.None)
 	_update_scroll()
 	emit_signal("update_parallax")
 

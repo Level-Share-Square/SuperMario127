@@ -137,6 +137,7 @@ func load_layer_states(layer_states: Dictionary):
 		
 		if layer is LevelParallaxLayer:
 			layer.set_parallax_distance(layer_state.parallax_distance)
+			layer.set_lock_axis(layer_state.lock_axis)
 		layer.set_layer_modulate(layer_state.tint, layer_state.opacity)
 		layer.visible = layer_state.is_visible
 		

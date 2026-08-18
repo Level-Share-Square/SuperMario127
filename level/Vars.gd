@@ -152,7 +152,8 @@ func set_layer_states(area_id: int, layers: Array):
 			layer_metadata.parallax_distance,
 			layer_metadata.layer_tint,
 			layer_metadata.layer_opacity,
-			layer_metadata.is_visible
+			layer_metadata.is_visible,
+			layer_metadata.lock_axis
 		)
 		
 		layer_states[area_id][layer_metadata.layer_uuid] = layer_state
