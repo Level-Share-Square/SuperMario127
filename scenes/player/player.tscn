@@ -1,4 +1,4 @@
-[gd_scene load_steps=114 format=2]
+[gd_scene load_steps=115 format=2]
 
 [ext_resource path="res://scenes/player/player.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/level_shared.tscn" type="PackedScene" id=2]
@@ -888,7 +888,7 @@ tracks/5/keys = {
 
 [sub_resource type="Animation" id=261]
 resource_name = "appear"
-length = 4.0
+length = 3.5
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:rect_rotation")
 tracks/0/interp = 1
@@ -968,10 +968,40 @@ tracks/6/loop_wrap = true
 tracks/6/imported = false
 tracks/6/enabled = true
 tracks/6/keys = {
-"times": PoolRealArray( 0, 0.4, 3.5, 4 ),
-"transitions": PoolRealArray( 1, -2, -2, 1 ),
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, -2 ),
 "update": 0,
-"values": [ Color( 0, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 0, 0, 1, 0 ) ]
+"values": [ Color( 0, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/7/type = "method"
+tracks/7/path = NodePath("AreaNameAnim")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 3.5 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ "hide", -1, 1.0, false ],
+"method": "play"
+} ]
+}
+
+[sub_resource type="Animation" id=263]
+resource_name = "hide"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( -2, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0, 0, 1, 0 ) ]
 }
 
 [sub_resource type="StyleBoxEmpty" id=255]
@@ -1000,7 +1030,7 @@ font_data = ExtResource( 26 )
 [sub_resource type="Animation" id=258]
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("VBoxContainer:modulate")
+tracks/0/path = NodePath(".:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -1088,7 +1118,7 @@ tracks/6/keys = {
 resource_name = "appear"
 length = 0.8
 tracks/0/type = "value"
-tracks/0/path = NodePath("VBoxContainer:modulate")
+tracks/0/path = NodePath(".:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -2182,12 +2212,14 @@ margin_right = 720.0
 margin_bottom = 398.0
 
 [node name="AreaContainer" type="PanelContainer" parent="UIUnder/HUD/Control/AreaInfo/VBoxContainer"]
+unique_name_in_owner = true
 modulate = Color( 0, 1, 1, 0 )
 self_modulate = Color( 1, 1, 1, 0 )
 margin_left = 241.0
 margin_top = 4.0
 margin_right = 466.0
 margin_bottom = 38.0
+rect_rotation = -5.0
 rect_scale = Vector2( 0.8, 0.8 )
 size_flags_horizontal = 4
 size_flags_vertical = 0
@@ -2297,6 +2329,7 @@ percent_visible = 0.0
 unique_name_in_owner = true
 anims/RESET = SubResource( 262 )
 anims/appear = SubResource( 261 )
+anims/hide = SubResource( 263 )
 
 [node name="Padding" type="Control" parent="UIUnder/HUD/Control/AreaInfo/VBoxContainer"]
 margin_top = 50.0
@@ -2305,6 +2338,8 @@ margin_bottom = 313.0
 size_flags_vertical = 3
 
 [node name="SongContainer" type="PanelContainer" parent="UIUnder/HUD/Control/AreaInfo/VBoxContainer"]
+unique_name_in_owner = true
+modulate = Color( 0, 0, 1, 0 )
 self_modulate = Color( 1, 1, 1, 0 )
 margin_left = 292.0
 margin_top = 329.0
@@ -2318,7 +2353,6 @@ size_flags_vertical = 0
 custom_styles/panel = SubResource( 250 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UIUnder/HUD/Control/AreaInfo/VBoxContainer/SongContainer"]
-modulate = Color( 0, 0, 1, 0 )
 margin_right = 124.0
 margin_bottom = 29.0
 custom_constants/separation = 2
@@ -3162,9 +3196,11 @@ stream = ExtResource( 59 )
 bus = "Sounds"
 
 [connection signal="child_entered_tree" from="UIUnder/HUD/Control/TimerManager/RadialTimers" to="UIUnder/HUD/Control/TimerManager/RadialTimers/PurpleStarbits" method="child_entered_tree"]
+[connection signal="appearing" from="UIUnder/HUD/Control/ShineGet" to="UIUnder/HUD/Control/AreaInfo" method="hide_info"]
 [connection signal="timeout" from="UIUnder/HUD/Control/ShineResults/ShowTimer" to="UIUnder/HUD/Control/ShineResults" method="start"]
 [connection signal="timeout" from="UIUnder/HUD/Control/ShineResults/HideTimer" to="UIUnder/HUD/Control/ShineResults" method="hide_ui"]
 [connection signal="timeout" from="UIUnder/HUD/Control/ShineResults/RecordTimer" to="UIUnder/HUD/Control/ShineResults" method="hide_ui"]
 [connection signal="resized" from="UIUnder/HUD/Control/ShineResults/VBoxContainer/NewRecord" to="UIUnder/HUD/Control/ShineResults/VBoxContainer/NewRecord" method="resized"]
+[connection signal="appearing" from="UIUnder/HUD/Control/KeyGet" to="UIUnder/HUD/Control/AreaInfo" method="hide_info"]
 
 [editable path="UIUnder/HUD/Control/TimerManager"]

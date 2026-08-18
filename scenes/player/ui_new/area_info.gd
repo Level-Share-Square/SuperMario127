@@ -4,6 +4,9 @@ extends MarginContainer
 onready var area_name_anim = $"%AreaNameAnim"
 onready var song_name_anim = $"%SongNameAnim"
 
+onready var area_container = $"%AreaContainer"
+onready var song_container = $"%SongContainer"
+
 onready var area_name = $"%AreaName"
 onready var area_name_back_1 = $"%AreaNameBack1"
 onready var area_name_back_2 = $"%AreaNameBack2"
@@ -15,8 +18,14 @@ export var area_start_delay: float
 export var song_start_delay: float
 export var song_end_delay: float
 
+var area_tween: SceneTreeTween
+var song_tween: SceneTreeTween
+
 func _ready():
 	yield(owner, "loaded")
+	
+	if CurrentLevelData.is_hub_level() and not CurrentLevelData.shine_kickout_data.empty():
+		yield(get_tree().create_timer(6), "timeout")
 	
 	var header: AreaHeader = CurrentLevelData.current_area.header
 	
@@ -28,9 +37,9 @@ func _ready():
 			area_name_back_1.text = area_name.text
 			area_name_back_2.text = area_name.text
 			
-			var tween: SceneTreeTween = create_tween()
-			tween.tween_interval(area_start_delay)
-			tween.tween_callback(area_name_anim, "play", ["appear"])
+			area_tween = create_tween()
+			area_tween.tween_interval(area_start_delay)
+			area_tween.tween_callback(area_name_anim, "play", ["appear"])
 	
 	yield(get_tree().create_timer(song_start_delay), "timeout")
 	
@@ -46,7 +55,19 @@ func _ready():
 			song_name.text = header.custom_music_name
 			author_name.text = header.custom_music_author
 		
-		var tween: SceneTreeTween = create_tween()
-		tween.tween_callback(song_name_anim, "play", ["appear"])
-		tween.tween_interval(song_end_delay)
-		tween.tween_callback(song_name_anim, "play_backwards", ["appear"])
+		song_tween = create_tween()
+		song_tween.tween_callback(song_name_anim, "play", ["appear"])
+		song_tween.tween_interval(song_end_delay)
+		song_tween.tween_callback(song_name_anim, "play_backwards", ["appear"])
+
+
+func hide_info() -> void:
+	if area_container.modulate.a <= 0 and song_container.modulate.a <= 0: return
+	if is_instance_valid(area_tween):
+		area_tween.kill()
+	if is_instance_valid(song_tween):
+		song_tween.kill()
+	if area_name_anim.current_animation != "hide":
+		area_name_anim.play("hide")
+	if song_name_anim.playback_speed > 0:
+		song_name_anim.play_backwards("appear")
