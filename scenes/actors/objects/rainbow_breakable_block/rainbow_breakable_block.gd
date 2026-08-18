@@ -68,9 +68,9 @@ func _physics_process(delta):
 				yield(get_tree().create_timer(3.0), "timeout")
 				queue_free() # die
 
-	var scene : Node = get_tree().current_scene
-	if scene.has_node(scene.character):
-		handle_character_exception(scene.get_node(scene.character))
+		var scene : Node = get_tree().current_scene
+		if scene.has_node(scene.character):
+			handle_character_exception(scene.get_node(scene.character))
 
 	if broken:
 		sprite.visible = false
