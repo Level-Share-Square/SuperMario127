@@ -15,6 +15,7 @@ onready var key_get : Node = current_scene.get_node_or_null("%KeyGet")
 
 var id: String
 var color: Color = Color.yellow
+var collect_text: String = "You got the {key}!"
 var was_visible: bool
 
 var collected = false
@@ -27,6 +28,7 @@ var character
 func _register_properties():
 	register_property(4, "id", id)
 	register_property(5, "color", color)
+	register_property(6, "collect_text", collect_text)
 	
 func _physics_process(delta):
 	if collected:
@@ -60,7 +62,7 @@ func collect(body):
 func play_get_anim():
 	character.set_state_by_name("NoActionState", get_physics_process_delta_time())
 	
-	key_get.appear(id, was_visible)
+	key_get.appear(id, collect_text, was_visible)
 	
 	collect_jingle.play()
 	
