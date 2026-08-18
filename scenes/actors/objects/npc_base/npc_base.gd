@@ -53,9 +53,9 @@ func _register_properties():
 	set_property_override("idle_action", PropertyTab.OverrideTypes.ENUM, action_map)
 	
 	register_property(11, "speaking_expression", speaking_expression, true)
-	set_property_override("idle_expression", PropertyTab.OverrideTypes.ENUM, expression_map)
+	set_property_override("speaking_expression", PropertyTab.OverrideTypes.ENUM, expression_map)
 	register_property(12, "speaking_action", speaking_action, true)
-	set_property_override("idle_action", PropertyTab.OverrideTypes.ENUM, action_map)
+	set_property_override("speaking_action", PropertyTab.OverrideTypes.ENUM, action_map)
 	
 	register_property(13, "path_reference", path_reference, true)
 	register_property(14, "tag_link", tag_link, true)
