@@ -15,6 +15,7 @@ onready var key_get : Node = current_scene.get_node_or_null("%KeyGet")
 
 var id: String
 var color: Color = Color.yellow
+var was_visible: bool
 
 var collected = false
 var character
@@ -53,12 +54,13 @@ func collect(body):
 		body.set_inter_player_collision(false)
 		
 		Singleton.Music.volume_multiplier = 0
+		was_visible = visible
 		visible = false
 		
 func play_get_anim():
 	character.set_state_by_name("NoActionState", get_physics_process_delta_time())
 	
-	key_get.appear(id)
+	key_get.appear(id, was_visible)
 	
 	collect_jingle.play()
 	
@@ -66,6 +68,8 @@ func play_get_anim():
 	character.collected_key.self_modulate = sprite.self_modulate
 	character.collected_key.texture = sprite.texture
 	character.collected_key_rays.color = color
+	# hacky way to hide the key in the animation LMAO
+	character.collected_key.scale = Vector2.ONE if was_visible else Vector2.ZERO
 	
 	character.anim_player.play("key_dance")
 	# warning-ignore: return_value_discarded
@@ -114,6 +118,7 @@ func update_property(key, value):
 func _object_ready():
 	if id in CurrentLevelData.checkpoint_data.current_local_keys:
 		queue_free()
+	update_property("color", color)
 	if is_enabled_and_on_ground():
 		var _connect = area.connect("body_entered", self, "collect")
 	

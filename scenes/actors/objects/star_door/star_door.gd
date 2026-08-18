@@ -242,7 +242,7 @@ func _ready() -> void:
 	update_collectible_counts()
 
 	var collectible_text: String = collectible
-	if required_amount != 1: collectible_text += "s"
+	if required_amount != 1 and collectible != "key": collectible_text += "s"
 	text = insufficient_text.format({
 		"num": required_amount if collectible != "key" else "the %s" % [required_key],
 		"col": collectible_text
