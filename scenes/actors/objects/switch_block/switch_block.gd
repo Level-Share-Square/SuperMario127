@@ -14,7 +14,7 @@ var inverted : bool = false
 #	editable_properties = ["inverted"]
 
 func _register_properties():
-	register_property(4, "inverted", inverted, false)
+	register_property(4, "inverted", inverted, true)
 
 func _ready():
 	init()
