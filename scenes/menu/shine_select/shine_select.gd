@@ -2,6 +2,14 @@ extends CanvasLayer
 
 
 const SCROLL_SPEED: float = 200.0
+const MARIO_FRAMES: SpriteFrames = preload("res://scenes/actors/mario/animation_frames.tres")
+const LUIGI_FRAMES: SpriteFrames = preload("res://scenes/actors/mario/luigi_frames.tres")
+const MARIO_HOVER_FRAMES: SpriteFrames = preload("res://scenes/actors/mario/nozzles/hover_frames.tres")
+const LUIGI_HOVER_FRAMES: SpriteFrames = preload("res://scenes/actors/mario/nozzles/hover_frames_luigi.tres")
+const MARIO_ROCKET_FRAMES: SpriteFrames = preload("res://scenes/actors/mario/nozzles/rocket_frames.tres")
+const LUIGI_ROCKET_FRAMES: SpriteFrames = preload("res://scenes/actors/mario/nozzles/rocket_frames_luigi.tres")
+const MARIO_TURBO_FRAMES: SpriteFrames = preload("res://scenes/actors/mario/nozzles/turbo_frames.tres")
+const LUIGI_TURBO_FRAMES: SpriteFrames = preload("res://scenes/actors/mario/nozzles/turbo_frames_luigi.tres")
 
 ## nodes
 onready var shine_parent: Node2D = $ShineParent
@@ -19,6 +27,12 @@ onready var level_title_backing: Label = $"%LevelTitleBacking"
 
 onready var player_anim_player = $"%PlayerAnimPlayer"
 onready var fludds = $"%FLUDD"
+
+onready var player_sprite = $"%PlayerSprite"
+onready var player_shadow = $"%PlayerSprite/Shadow"
+onready var player_fludd = $"%PlayerSprite/Fludd"
+onready var player_fludd_shadow = $"%PlayerSprite/Fludd/Shadow"
+
 
 ## level data
 onready var level_metadata: LevelMetadata = CurrentLevelData.level_metadata
@@ -41,6 +55,8 @@ func _ready():
 #			fludd.connect("pressed", self, "_on_fludd_pressed", [fludd.name])
 #		else:
 #			fludd.visible = false
+	
+	update_character()
 	get_tree().paused = false
 	
 	mission_select_sfx.play()
@@ -85,3 +101,16 @@ func animation_finished(_animation_name: String):
 
 #func _on_fludd_pressed(fludd: String):
 #	level_info.chosen_fludd = fludd
+
+func update_character() -> void:
+	var palette_material: ShaderMaterial = preload("res://scenes/actors/mario/materials/palette_swap.tres").duplicate()
+	var cur_char: int = Singleton.PlayerSettings.player1_character
+	var char_folder: String = Character.CHAR_NAMES[cur_char].to_lower()
+	var cur_palette: String = LocalSettings.load_setting("General", "char_palette", "default")
+	palette_material.set_shader_param("palette_in", load(Character.PALETTES_PATH % [char_folder, "default"]))
+	palette_material.set_shader_param("palette_out", load(Character.PALETTES_PATH % [char_folder, cur_palette]))
+	
+	player_sprite.material = palette_material
+	player_sprite.frames = MARIO_FRAMES if cur_char == 0 else LUIGI_FRAMES
+	player_shadow.frames = MARIO_FRAMES if cur_char == 0 else LUIGI_FRAMES
+	player_fludd.hide()
