@@ -18,6 +18,11 @@ onready var window = owner
 
 var layer_data: LayerData
 
+signal property_changed(key, new_value)
+
+func _ready():
+	shared.connect("layer_edited", self, "layer_edited")
+
 func copy_uuid():
 	OS.set_clipboard(shared.layer_index_to_uuid(window.layer_index))
 
@@ -32,8 +37,13 @@ func change_property(property: String, new_value, check_matches, save_to_data):
 func get_property_value(property_id: String):
 	return layer_data.layer_metadata[property_id]
 
+func layer_edited(uuid: String, key: String, new_value):
+	if uuid != shared.layer_index_to_uuid(window.layer_index): return
+	emit_signal("property_changed", key, new_value)
+
 func connect_signals(property_editor: PropertyEditor):
 	property_editor.connect("property_edited", self, "change_property")
+	connect("property_changed", property_editor, "property_changed")
 
 func load_base_properties():
 	layer_name.window = window

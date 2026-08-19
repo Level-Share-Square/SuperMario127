@@ -157,7 +157,8 @@ func merge_layer():
 	layer_dropdown.editor.action_manager.commit_action(action)
 
 
-func properties_updated():
+func properties_updated(layer_uuid: String, key: String, new_value):
+	if layer_uuid != layer_data.layer_metadata.layer_uuid: return
 	$"%MissionLayer".visible = layer_data.layer_metadata.is_mission_layer()
 
 

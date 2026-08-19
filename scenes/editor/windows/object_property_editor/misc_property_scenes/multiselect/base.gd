@@ -43,8 +43,6 @@ func item_selected(is_toggled: bool, layer_uuid: String):
 		new_property.append(layer_uuid)
 	elif not is_toggled and layer_uuid in new_property:
 		new_property.remove(new_property.find(layer_uuid))
-	prints(stored_property, new_property)
-	stored_property = new_property
 	change_property(new_property)
 
 func reload_lookup_table():

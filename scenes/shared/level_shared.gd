@@ -124,7 +124,7 @@ func edit_layer(uuid: String, property: String, value):
 	layer_data.layer_metadata[property] = value
 	layer.load_in(layer_data)
 	CurrentLevelData.current_area.layers[get_layer_index(layer)] = layer_data
-	emit_signal("layer_edited")
+	emit_signal("layer_edited", uuid, property, value)
 	
 func move_layer(layer: LevelLayer, to: int, save_to_data: bool = false):
 	var from: int = layer.get_index()
