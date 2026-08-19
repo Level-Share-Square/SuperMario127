@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=45 format=2]
 
 [ext_resource path="res://scenes/menu/theme.tres" type="Theme" id=1]
 [ext_resource path="res://assets/fonts/New Super Mario Font U.ttf" type="DynamicFontData" id=2]
@@ -17,10 +17,17 @@
 [ext_resource path="res://assets/sounds/hover.wav" type="AudioStream" id=15]
 [ext_resource path="res://scenes/menu/box_shadow.png" type="Texture" id=16]
 [ext_resource path="res://scenes/menu/shine_select/shine_parent.gd" type="Script" id=17]
-[ext_resource path="res://assets/fonts/DelfinoFont20.tres" type="DynamicFont" id=18]
+[ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=18]
 [ext_resource path="res://scenes/actors/objects/hover_box/hover_box.png" type="Texture" id=19]
 [ext_resource path="res://scenes/actors/objects/rocket_box/rocket_box.png" type="Texture" id=20]
 [ext_resource path="res://scenes/actors/objects/turbo_box/turbo_box.png" type="Texture" id=21]
+[ext_resource path="res://assets/icons/quit.png" type="Texture" id=22]
+[ext_resource path="res://scenes/menu/button_scripts/icon_helper.gd" type="Script" id=23]
+[ext_resource path="res://scenes/menu/shine_select/nozzle_graphic.tscn" type="PackedScene" id=24]
+[ext_resource path="res://scenes/actors/mario/materials/palette_swap.tres" type="Material" id=25]
+[ext_resource path="res://scenes/actors/mario/animation_frames.tres" type="SpriteFrames" id=26]
+[ext_resource path="res://scenes/actors/mario/FluddAnimSync.gd" type="Script" id=27]
+[ext_resource path="res://scenes/actors/mario/nozzles/hover_frames.tres" type="SpriteFrames" id=28]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -75,6 +82,93 @@ Button/styles/focus = SubResource( 6 )
 Button/styles/hover = SubResource( 7 )
 Button/styles/normal = SubResource( 8 )
 Button/styles/pressed = SubResource( 9 )
+
+[sub_resource type="Animation" id=23]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("PlayerSprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "idleRight" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("PlayerSprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("PlayerSprite:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=24]
+resource_name = "start"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("PlayerSprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "keyDance" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("PlayerSprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 11, 12 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("PlayerSprite:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -4 ), Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="DynamicFont" id=22]
+outline_color = Color( 0, 0, 0, 1 )
+use_filter = true
+extra_spacing_top = 1
+extra_spacing_char = -1
+extra_spacing_space = 2
+font_data = ExtResource( 18 )
 
 [sub_resource type="Animation" id=13]
 length = 0.001
@@ -134,6 +228,9 @@ tracks/1/keys = {
 [node name="ShineSelect" type="CanvasLayer"]
 layer = 96
 script = ExtResource( 5 )
+__meta__ = {
+"_edit_vertical_guides_": [  ]
+}
 
 [node name="Backgrounds" parent="." instance=ExtResource( 3 )]
 
@@ -294,45 +391,92 @@ texture = SubResource( 12 )
 expand = true
 flip_v = true
 
-[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/BottomBar"]
-margin_right = 768.0
-margin_bottom = 128.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_constants/margin_right = 8
-custom_constants/margin_top = 24
-custom_constants/margin_left = 8
-custom_constants/margin_bottom = 8
-
-[node name="ShineDescription" type="RichTextLabel" parent="VBoxContainer/BottomBar/MarginContainer2"]
-unique_name_in_owner = true
-margin_left = 8.0
-margin_top = 24.0
-margin_right = 760.0
-margin_bottom = 120.0
-custom_colors/default_color = Color( 0, 0, 0, 1 )
-custom_fonts/normal_font = ExtResource( 18 )
-bbcode_enabled = true
-bbcode_text = "[center]This is a description get stick bugged lol[/center]"
-text = "This is a description get stick bugged lol"
-
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/BottomBar"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/BottomBar"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = 72.0
+margin_left = 4.0
+margin_top = 16.0
+margin_right = -4.0
+custom_constants/separation = 0
 
-[node name="Back" type="Button" parent="VBoxContainer/BottomBar/MarginContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/BottomBar/HBoxContainer"]
+margin_right = 94.0
+margin_bottom = 112.0
+custom_constants/margin_top = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/BottomBar/HBoxContainer/MarginContainer"]
 margin_left = 12.0
-margin_top = 12.0
-margin_right = 62.0
-margin_bottom = 45.0
+margin_right = 82.0
+margin_bottom = 100.0
+custom_constants/separation = 4
+alignment = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer/BottomBar/HBoxContainer/MarginContainer/VBoxContainer"]
+margin_right = 70.0
+margin_bottom = 55.0
+size_flags_vertical = 3
+
+[node name="Control" type="Control" parent="VBoxContainer/BottomBar/HBoxContainer/MarginContainer/VBoxContainer/CenterContainer"]
+margin_left = 35.0
+margin_top = 27.0
+margin_right = 35.0
+margin_bottom = 27.0
+
+[node name="PlayerSprite" type="AnimatedSprite" parent="VBoxContainer/BottomBar/HBoxContainer/MarginContainer/VBoxContainer/CenterContainer/Control"]
+unique_name_in_owner = true
+material = ExtResource( 25 )
+z_index = 2
+frames = ExtResource( 26 )
+animation = "idleRight"
+
+[node name="Shadow" type="AnimatedSprite" parent="VBoxContainer/BottomBar/HBoxContainer/MarginContainer/VBoxContainer/CenterContainer/Control/PlayerSprite"]
+modulate = Color( 0, 0, 0, 0.376471 )
+show_behind_parent = true
+position = Vector2( 2, 3 )
+z_index = -1
+frames = ExtResource( 26 )
+animation = "idleRight"
+script = ExtResource( 27 )
+
+[node name="Fludd" type="AnimatedSprite" parent="VBoxContainer/BottomBar/HBoxContainer/MarginContainer/VBoxContainer/CenterContainer/Control/PlayerSprite"]
+material = ExtResource( 25 )
+frames = ExtResource( 28 )
+animation = "idleRight"
+script = ExtResource( 27 )
+
+[node name="Shadow" type="AnimatedSprite" parent="VBoxContainer/BottomBar/HBoxContainer/MarginContainer/VBoxContainer/CenterContainer/Control/PlayerSprite/Fludd"]
+modulate = Color( 0, 0, 0, 0.376471 )
+show_behind_parent = true
+position = Vector2( 2, 3 )
+z_index = -1
+frames = ExtResource( 28 )
+animation = "idleRight"
+script = ExtResource( 27 )
+
+[node name="PlayerAnimPlayer" type="AnimationPlayer" parent="VBoxContainer/BottomBar/HBoxContainer/MarginContainer/VBoxContainer/CenterContainer/Control"]
+unique_name_in_owner = true
+anims/RESET = SubResource( 23 )
+anims/start = SubResource( 24 )
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer/BottomBar/HBoxContainer/MarginContainer/VBoxContainer"]
+modulate = Color( 0, 0, 0, 0.501961 )
+margin_top = 59.0
+margin_right = 70.0
+margin_bottom = 63.0
+
+[node name="Back" type="Button" parent="VBoxContainer/BottomBar/HBoxContainer/MarginContainer/VBoxContainer"]
+margin_top = 67.0
+margin_right = 70.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 70, 0 )
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme_type_variation = "Red"
 text = "Back"
+align = 2
 script = ExtResource( 4 )
 
-[node name="Shadow" type="NinePatchRect" parent="VBoxContainer/BottomBar/MarginContainer/Back"]
+[node name="Shadow" type="NinePatchRect" parent="VBoxContainer/BottomBar/HBoxContainer/MarginContainer/VBoxContainer/Back"]
 modulate = Color( 1, 1, 1, 0.25098 )
 show_behind_parent = true
 anchor_right = 1.0
@@ -347,37 +491,105 @@ patch_margin_top = 11
 patch_margin_right = 11
 patch_margin_bottom = 11
 
-[node name="MarginContainer3" type="MarginContainer" parent="VBoxContainer/BottomBar"]
-margin_left = 575.0
-margin_top = 56.0
-margin_right = 709.0
-margin_bottom = 112.0
-rect_scale = Vector2( 1.5, 1.5 )
+[node name="Icon" type="TextureRect" parent="VBoxContainer/BottomBar/HBoxContainer/MarginContainer/VBoxContainer/Back"]
+margin_left = 4.0
+margin_top = 4.5
+margin_right = 24.0
+margin_bottom = 24.5
+mouse_filter = 2
+texture = ExtResource( 22 )
+expand = true
+script = ExtResource( 23 )
+countdown_path = NodePath("../Countdown")
+disabled_color = Color( 0.341176, 0.223529, 0.337255, 1 )
+count_offsets = [ 16, 16, 12, 12, 13, 13 ]
+offset = Vector2( -46, -2 )
 
-[node name="FLUDD" type="HBoxContainer" parent="VBoxContainer/BottomBar/MarginContainer3"]
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer/BottomBar/HBoxContainer"]
+modulate = Color( 0, 0, 0, 0.501961 )
+margin_left = 94.0
+margin_right = 98.0
+margin_bottom = 112.0
+
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/BottomBar/HBoxContainer"]
+margin_left = 98.0
+margin_right = 652.0
+margin_bottom = 112.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 8
+custom_constants/margin_top = 8
+custom_constants/margin_left = 8
+custom_constants/margin_bottom = 8
+
+[node name="ShineDescription" type="RichTextLabel" parent="VBoxContainer/BottomBar/HBoxContainer/MarginContainer2"]
+unique_name_in_owner = true
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 546.0
+margin_bottom = 104.0
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+custom_fonts/normal_font = SubResource( 22 )
+bbcode_enabled = true
+bbcode_text = "[center]This is a description get stick bugged lol[/center]"
+text = "This is a description get stick bugged lol"
+
+[node name="VSeparator2" type="VSeparator" parent="VBoxContainer/BottomBar/HBoxContainer"]
+modulate = Color( 0, 0, 0, 0.501961 )
+margin_left = 652.0
+margin_right = 656.0
+margin_bottom = 112.0
+
+[node name="MarginContainer3" type="MarginContainer" parent="VBoxContainer/BottomBar/HBoxContainer"]
+margin_left = 656.0
+margin_right = 760.0
+margin_bottom = 112.0
+
+[node name="FLUDD" type="GridContainer" parent="VBoxContainer/BottomBar/HBoxContainer/MarginContainer3"]
 unique_name_in_owner = true
 margin_left = 12.0
 margin_top = 12.0
-margin_right = 122.0
-margin_bottom = 44.0
-custom_constants/separation = 4
+margin_right = 92.0
+margin_bottom = 100.0
+custom_constants/vseparation = 16
+custom_constants/hseparation = 8
+columns = 2
 
-[node name="HoverNozzle" type="TextureButton" parent="VBoxContainer/BottomBar/MarginContainer3/FLUDD"]
+[node name="HoverNozzle" type="TextureButton" parent="VBoxContainer/BottomBar/HBoxContainer/MarginContainer3/FLUDD"]
+visible = false
 margin_right = 34.0
-margin_bottom = 32.0
+margin_bottom = 36.0
 texture_normal = ExtResource( 19 )
 
-[node name="RocketNozzle" type="TextureButton" parent="VBoxContainer/BottomBar/MarginContainer3/FLUDD"]
-margin_left = 38.0
-margin_right = 72.0
+[node name="RocketNozzle" type="TextureButton" parent="VBoxContainer/BottomBar/HBoxContainer/MarginContainer3/FLUDD"]
+visible = false
+margin_left = 40.0
+margin_right = 74.0
 margin_bottom = 32.0
 texture_normal = ExtResource( 20 )
 
-[node name="TurboNozzle" type="TextureButton" parent="VBoxContainer/BottomBar/MarginContainer3/FLUDD"]
-margin_left = 76.0
-margin_right = 110.0
-margin_bottom = 32.0
+[node name="TurboNozzle" type="TextureButton" parent="VBoxContainer/BottomBar/HBoxContainer/MarginContainer3/FLUDD"]
+visible = false
+margin_top = 36.0
+margin_right = 34.0
+margin_bottom = 72.0
 texture_normal = ExtResource( 21 )
+
+[node name="Nozzle" parent="VBoxContainer/BottomBar/HBoxContainer/MarginContainer3/FLUDD" instance=ExtResource( 24 )]
+
+[node name="Nozzle2" parent="VBoxContainer/BottomBar/HBoxContainer/MarginContainer3/FLUDD" instance=ExtResource( 24 )]
+margin_left = 44.0
+margin_right = 80.0
+
+[node name="Nozzle3" parent="VBoxContainer/BottomBar/HBoxContainer/MarginContainer3/FLUDD" instance=ExtResource( 24 )]
+margin_top = 52.0
+margin_bottom = 88.0
+
+[node name="Nozzle4" parent="VBoxContainer/BottomBar/HBoxContainer/MarginContainer3/FLUDD" instance=ExtResource( 24 )]
+margin_left = 44.0
+margin_top = 52.0
+margin_right = 80.0
+margin_bottom = 88.0
 
 [node name="ShineParent" type="Node2D" parent="."]
 position = Vector2( 384, 216 )
@@ -392,4 +604,4 @@ anims/transition = SubResource( 14 )
 [connection signal="pressed" from="VBoxContainer/Buttons/ButtonMoveLeft" to="ShineParent" method="attempt_increment_selected_shine_index" binds= [ -1 ]]
 [connection signal="pressed" from="VBoxContainer/Buttons/ButtonSelectShine" to="." method="start_level"]
 [connection signal="pressed" from="VBoxContainer/Buttons/ButtonMoveRight" to="ShineParent" method="attempt_increment_selected_shine_index" binds= [ 1 ]]
-[connection signal="pressed" from="VBoxContainer/BottomBar/MarginContainer/Back" to="." method="back"]
+[connection signal="pressed" from="VBoxContainer/BottomBar/HBoxContainer/MarginContainer/VBoxContainer/Back" to="." method="back"]

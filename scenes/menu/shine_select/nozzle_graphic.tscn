@@ -1,0 +1,146 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://shaders/rounded_corners.gdshader" type="Shader" id=1]
+[ext_resource path="res://assets/icons/Fludd.svg" type="Texture" id=2]
+
+[sub_resource type="ShaderMaterial" id=23]
+shader = ExtResource( 1 )
+shader_param/radius_scale = 0.5
+shader_param/rounded_corner_top_left = true
+shader_param/rounded_corner_top_right = true
+shader_param/rounded_corner_bottom_left = true
+shader_param/rounded_corner_bottom_right = true
+shader_param/width = 1.0
+shader_param/height = 1.0
+
+[sub_resource type="Gradient" id=24]
+colors = PoolColorArray( 1, 0, 0, 1, 0.509804, 0, 0.313726, 1 )
+
+[sub_resource type="GradientTexture2D" id=25]
+gradient = SubResource( 24 )
+fill_to = Vector2( 0, 1 )
+
+[sub_resource type="StyleBoxTexture" id=26]
+texture = SubResource( 25 )
+region_rect = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="StyleBoxFlat" id=29]
+content_margin_left = 2.0
+bg_color = Color( 0, 0, 0, 0.376471 )
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+anti_aliasing_size = 4.0
+
+[sub_resource type="StyleBoxFlat" id=28]
+bg_color = Color( 1, 1, 1, 1 )
+border_blend = true
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+expand_margin_left = 2.0
+expand_margin_right = 2.0
+expand_margin_top = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id=27]
+bg_color = Color( 1, 1, 1, 1 )
+draw_center = false
+border_width_left = 2
+border_width_top = 6
+border_width_right = 2
+border_width_bottom = 1
+border_color = Color( 0.945313, 0.657128, 0.657128, 1 )
+border_blend = true
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="Gradient" id=30]
+colors = PoolColorArray( 1, 1, 1, 0, 1, 0.831373, 0.698039, 0.752941 )
+
+[sub_resource type="GradientTexture2D" id=31]
+gradient = SubResource( 30 )
+fill_from = Vector2( 0, 0.7 )
+fill_to = Vector2( 0, 0 )
+repeat = 2
+
+[node name="Nozzle" type="PanelContainer"]
+material = SubResource( 23 )
+margin_right = 36.0
+margin_bottom = 36.0
+rect_min_size = Vector2( 36, 36 )
+size_flags_horizontal = 0
+size_flags_vertical = 0
+custom_styles/panel = SubResource( 26 )
+
+[node name="MarginContainer3" type="MarginContainer" parent="."]
+show_behind_parent = true
+margin_right = 36.0
+margin_bottom = 36.0
+custom_constants/margin_right = -1
+custom_constants/margin_top = 10
+custom_constants/margin_left = 8
+custom_constants/margin_bottom = -2
+
+[node name="Shadow" type="Panel" parent="MarginContainer3"]
+margin_left = 8.0
+margin_top = 10.0
+margin_right = 37.0
+margin_bottom = 38.0
+custom_styles/panel = SubResource( 29 )
+
+[node name="MarginContainer2" type="MarginContainer" parent="."]
+margin_right = 36.0
+margin_bottom = 36.0
+custom_constants/margin_right = 6
+custom_constants/margin_top = 6
+custom_constants/margin_left = 6
+custom_constants/margin_bottom = 6
+
+[node name="Panel" type="Panel" parent="MarginContainer2"]
+margin_left = 6.0
+margin_top = 6.0
+margin_right = 30.0
+margin_bottom = 30.0
+custom_styles/panel = SubResource( 28 )
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+margin_right = 36.0
+margin_bottom = 36.0
+
+[node name="Icon" type="TextureRect" parent="CenterContainer"]
+modulate = Color( 0.776471, 0, 0.137255, 1 )
+margin_left = 9.0
+margin_top = 8.0
+margin_right = 27.0
+margin_bottom = 28.0
+rect_min_size = Vector2( 18, 20 )
+texture = ExtResource( 2 )
+expand = true
+stretch_mode = 6
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+margin_right = 36.0
+margin_bottom = 36.0
+custom_constants/margin_right = 6
+custom_constants/margin_top = 6
+custom_constants/margin_left = 6
+custom_constants/margin_bottom = 6
+
+[node name="Panel" type="Panel" parent="MarginContainer"]
+margin_left = 6.0
+margin_top = 6.0
+margin_right = 30.0
+margin_bottom = 30.0
+custom_styles/panel = SubResource( 27 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+use_parent_material = true
+margin_right = 36.0
+margin_bottom = 36.0
+texture = SubResource( 31 )
+expand = true

@@ -14,6 +14,7 @@ onready var back = $VBoxContainer/BottomBar/MarginContainer/Back
 onready var level_title: Label = $"%LevelTitle"
 onready var level_title_backing: Label = $"%LevelTitleBacking"
 
+onready var player_anim_player = $"%PlayerAnimPlayer"
 onready var fludds = $"%FLUDD"
 
 ## level data
@@ -60,6 +61,7 @@ func start_level():
 	if not shine_parent.can_interact: return
 	shine_parent.can_interact = false
 	
+	player_anim_player.play("start")
 	transition_audio.play()
 	letsa_go_sfx.play()
 	

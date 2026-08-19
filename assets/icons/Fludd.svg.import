@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/ArrowLeft.svg-c2b4a2f3d67a298b3612ec432ca7c232.stex"
+path="res://.import/Fludd.svg-fb2633eb282e51a6b245db6a10fda7cb.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/icons/ArrowLeft.svg"
-dest_files=[ "res://.import/ArrowLeft.svg-c2b4a2f3d67a298b3612ec432ca7c232.stex" ]
+source_file="res://assets/icons/Fludd.svg"
+dest_files=[ "res://.import/Fludd.svg-fb2633eb282e51a6b245db6a10fda7cb.stex" ]
 
 [params]
 
