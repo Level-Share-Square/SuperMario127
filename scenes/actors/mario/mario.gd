@@ -980,7 +980,7 @@ func _physics_process(delta: float) -> void:
 		sprite.position = sprite.position.linear_interpolate(sprite_offset, fps_util.PHYSICS_DELTA * rotation_interpolation_speed)
 		sprite.rotation = lerp_angle(sprite.rotation, sprite_rotation, fps_util.PHYSICS_DELTA * rotation_interpolation_speed)
 		sprite.rotation_degrees = wrapf(sprite.rotation_degrees, -180, 180)
-		sprite.reset_physics_interpolation()
+		#sprite.reset_physics_interpolation()
 	
 	# Update all states, nozzles, powerups, and liquid-dependant physics
 	if Singleton.PlayerSettings.other_player_id == -1 or Singleton.PlayerSettings.my_player_index == player_id and !dead:

@@ -2136,6 +2136,7 @@ limits/debugger_stdout/max_messages_per_frame=100
 [physics]
 
 2d/use_bvh=false
+common/physics_interpolation=true
 
 [rendering]
 
