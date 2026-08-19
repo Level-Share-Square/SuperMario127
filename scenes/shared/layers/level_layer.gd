@@ -14,11 +14,16 @@ var layer_tint: Color = Color.white
 var autoset_tint: bool = false
 var order: int = 0 setget set_order
 # Empty means always active
-var activated_mission_ids: PoolIntArray = []
+var activated_mission_ids: PoolStringArray = []
+# if set to -1, there is no minimum/maximum amount
+var min_shines: int = -1
+var max_shines: int = -1
 
 func load_in(layer_data: LayerData):
 	autoset_tint = layer_data.layer_metadata.autoset_tint
 	activated_mission_ids = layer_data.layer_metadata.activated_mission_ids
+	min_shines = layer_data.layer_metadata.min_shines
+	max_shines = layer_data.layer_metadata.max_shines
 	var tint = layer_data.layer_metadata.layer_tint
 	# A value of layer tint should be 1-100
 	set_layer_modulate(tint, layer_data.layer_metadata.layer_opacity)

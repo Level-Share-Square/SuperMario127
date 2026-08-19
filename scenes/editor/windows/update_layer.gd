@@ -30,7 +30,7 @@ func update_layer():
 		ground.pressed,
 		"New Layer",
 		false,
-		PoolIntArray(),
+		PoolStringArray(),
 		false,
 		float(opacity.text)
 	)

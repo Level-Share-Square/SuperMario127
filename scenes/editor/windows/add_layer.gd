@@ -24,7 +24,7 @@ func add_layer():
 		ground.pressed,
 		"New Layer",
 		false,
-		PoolIntArray(),
+		PoolStringArray(),
 		false
 	)
 	

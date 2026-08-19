@@ -27,6 +27,8 @@ static func duplicate_metadata(other: LayerMetadata) -> LayerMetadata:
 		other.disabled,
 		other.layer_opacity,
 		other.lock_axis,
+		other.min_shines,
+		other.max_shines,
 		other.layer_uuid
 	)
 

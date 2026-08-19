@@ -24,7 +24,10 @@ var order: int
 var is_ground: bool
 var is_origin: bool = false
 # empty means always activated unless disabled is set to true
-var activated_mission_ids: PoolIntArray = PoolIntArray()
+var activated_mission_ids: PoolStringArray = PoolStringArray()
+# if set to -1, there is no minimum/maximum amount
+var min_shines: int = -1
+var max_shines: int = -1
 # for a layer to be permanently unloaded, if this is true
 # it should be stripped from the final exported level code for LSS
 var disabled: bool = false
@@ -39,10 +42,12 @@ func _init(
 		set_is_ground: bool = true,
 		set_name: String = "Layer %s",
 		set_is_origin: bool = false,
-		set_activated_mission_ids: PoolIntArray = PoolIntArray(),
+		set_activated_mission_ids: PoolStringArray = PoolStringArray(),
 		set_disabled: bool = false,
 		set_opacity: float = 1.0,
 		set_lock_axis: int = LockAxis.None,
+		set_min_shines: int = -1,
+		set_max_shines: int = -1,
 		set_layer_uuid = uuid_util.v4()
 	):
 	parallax_distance = set_parallax_distance
@@ -56,4 +61,6 @@ func _init(
 	layer_name = set_name
 	is_origin = set_is_origin
 	lock_axis = set_lock_axis
+	min_shines = set_min_shines
+	max_shines = set_max_shines
 	layer_uuid = set_layer_uuid
