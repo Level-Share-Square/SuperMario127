@@ -19,15 +19,13 @@ func on_pressed():
 	
 	if !toggled:
 		var tween = get_tree().create_tween()
-		tween.tween_property(selected_revealer, "rect_min_size:y", revealer_child.rect_min_size.y, 0.3).set_trans(Tween.TRANS_CUBIC)
-		tween.connect("finished", self, "tween_finished", [tween])
+		tween.tween_property(selected_revealer, "rect_min_size:y", revealer_child.rect_size.y, 0.3).set_trans(Tween.TRANS_CUBIC)
 		toggled = true
 		text = text.replace(">", "V")
 		return
 	else:
 		var tween = get_tree().create_tween()
 		tween.tween_property(selected_revealer, "rect_min_size:y", 0, 0.3).set_trans(Tween.TRANS_CUBIC)
-		tween.connect("finished", self, "tween_finished", [tween])
 		toggled = false
 		text = text.replace("V", ">")
 		return

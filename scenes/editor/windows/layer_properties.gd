@@ -7,6 +7,9 @@ onready var autoset_tint = $"%AutosetTint"
 onready var tint = $"%Tint"
 onready var opacity = $"%Opacity"
 onready var lock_axis = $"%LockAxis"
+onready var enabled_missions = $"%EnabledMissions"
+onready var min_shines = $"%MinShines"
+onready var max_shines = $"%MaxShines"
 onready var switch_layer = $"%SwitchLayer"
 
 onready var editor: Editor = get_tree().current_scene
@@ -81,6 +84,30 @@ func load_base_properties():
 		PropertyInfo.new(lock_axis.hint_tooltip)
 	])
 	connect_signals(lock_axis)
+	
+	enabled_missions.window = window
+	enabled_missions.load_property(enabled_missions, get_property_value("activated_mission_ids"), [
+		"activated_mission_ids",
+		[self, "get_mission_args"],
+		PropertyInfo.new(enabled_missions.hint_tooltip)
+	], "Enabled Missions")
+	connect_signals(enabled_missions)
+	
+	min_shines.window = window
+	min_shines.load_property(min_shines, get_property_value("min_shines"), [
+		"min_shines",
+		TYPE_INT,
+		PropertyInfo.new(min_shines.hint_tooltip, 1, -1, CurrentLevelData.level_metadata.collectible_data.mission_data.size())
+	])
+	connect_signals(min_shines)
+	
+	max_shines.window = window
+	max_shines.load_property(max_shines, get_property_value("max_shines"), [
+		"max_shines",
+		TYPE_INT,
+		PropertyInfo.new(max_shines.hint_tooltip, 1, -1, CurrentLevelData.level_metadata.collectible_data.mission_data.size())
+	])
+	connect_signals(max_shines)
 
 	if layer_data.layer_metadata.is_origin:
 		switch_layer.disabled = true
@@ -89,3 +116,9 @@ func switch_layer():
 	layer_data = yield(shared.change_layer_type(shared.get_layer_at(layer_data.layer_metadata.order)), "completed")
 	window.toggle_window()
 	editor.get_node("%ParallaxScroll")._update_parallax()
+
+func get_mission_args() -> Dictionary:
+	var args: Dictionary
+	for mission_data in CurrentLevelData.level_metadata.collectible_data.mission_data:
+		args.get_or_add(mission_data.mission_uuid, mission_data.shine_name)
+	return args

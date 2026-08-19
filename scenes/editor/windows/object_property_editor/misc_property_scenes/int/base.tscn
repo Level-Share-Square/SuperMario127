@@ -22,6 +22,7 @@ text = "Property:"
 margin_left = 62.0
 margin_right = 154.0
 margin_bottom = 16.0
+focus_mode = 0
 size_flags_horizontal = 3
 theme_type_variation = "HSliderWhite"
 min_value = inf_neg

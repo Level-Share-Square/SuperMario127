@@ -64,3 +64,7 @@ func _init(
 	min_shines = set_min_shines
 	max_shines = set_max_shines
 	layer_uuid = set_layer_uuid
+
+
+func is_mission_layer() -> bool:
+	return min_shines != -1 or max_shines != -1 or not activated_mission_ids.empty()

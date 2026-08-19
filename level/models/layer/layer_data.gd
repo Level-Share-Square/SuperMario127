@@ -35,10 +35,8 @@ static func duplicate_metadata(other: LayerMetadata) -> LayerMetadata:
 func place_tile(coords: Vector2, tileset: int, type: int, palette: int = 0) -> void:
 	tile_data.set_tile(coords, tileset, type, palette)
 
-
 func erase_tile(coords: Vector2) -> void:
 	tile_data.erase_tile(coords)
-
 
 func add_object(data) -> void:
 	object_data.append(data)
@@ -46,10 +44,21 @@ func add_object(data) -> void:
 func erase_object(data) -> void:
 	object_data.erase(data)
 
-
-func place_object(position: Vector2, data: ObjectData):
+func place_object(position: Vector2, data: ObjectData) -> void:
 	data.metadata.position = position
 	add_object(data)
+
+func can_spawn_layer(save_data: LevelSaveData, selected_mission_id: String) -> bool:
+	if layer_metadata.min_shines > -1:
+		if save_data._completed_missions.size() < layer_metadata.min_shines:
+			return false
+	if layer_metadata.max_shines > -1:
+		if save_data._completed_missions.size() > layer_metadata.max_shines:
+			return false
+	if not layer_metadata.activated_mission_ids.empty():
+		return selected_mission_id in layer_metadata.activated_mission_ids
+	return true
+
 
 static func tiles_to_tile_data(tiles: Dictionary, chunks: Dictionary) -> TileData:
 	var tile_data := TileData.new()

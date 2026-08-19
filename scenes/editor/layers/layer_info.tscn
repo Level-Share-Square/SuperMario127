@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://assets/icons/settings.svg" type="Texture" id=1]
 [ext_resource path="res://scenes/menu/button_scripts/button_sound.gd" type="Script" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://assets/icons/GroundLayer.svg" type="Texture" id=8]
 [ext_resource path="res://scenes/editor/editor_theme.tres" type="Theme" id=9]
 [ext_resource path="res://assets/icons/MergeLayer.svg" type="Texture" id=10]
+[ext_resource path="res://assets/icons/shine.png" type="Texture" id=11]
 
 [sub_resource type="StyleBoxEmpty" id=2]
 
@@ -78,6 +79,18 @@ margin_right = 71.0
 margin_bottom = 17.0
 mouse_filter = 2
 size_flags_horizontal = 4
+
+[node name="MissionLayer" type="TextureRect" parent="PanelContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+visible = false
+modulate = Color( 1, 1, 0.376471, 1 )
+margin_right = 15.0
+margin_bottom = 17.0
+rect_min_size = Vector2( 15, 17 )
+mouse_filter = 2
+texture = ExtResource( 11 )
+expand = true
+stretch_mode = 7
 
 [node name="LayerType" type="TextureRect" parent="PanelContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true

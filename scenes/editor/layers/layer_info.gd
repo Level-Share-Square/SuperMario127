@@ -39,6 +39,7 @@ func _ready():
 	edit.connect("pressed", self, "show_layer_editor")
 	show_hide.connect("pressed", self, "toggle_visibility")
 	shared.connect("layer_type_changed", self, "update_layer_type")
+	shared.connect("layer_edited", self, "properties_updated")
 	panel_resized()
 
 
@@ -59,7 +60,8 @@ func load_layer(_layer_data: LayerData, _can_delete: bool) -> void:
 	$"%LayerName".text = layer_metadata.layer_name
 	if layer_metadata.layer_name.length() > 15:
 		$"%LayerName".text = layer_metadata.layer_name.left(15) + "..."
-		
+	
+	$"%MissionLayer".visible = layer_metadata.is_mission_layer()
 	$"%LayerColor".modulate = EditorLayerManager.get_band_color(layer_metadata.order, shared.origin.layer_data.layer_metadata.order)
 	$"%LayerType".modulate = GROUND_COLOR if layer_metadata.is_ground else PARALLAX_COLOR
 	$"%LayerType".texture = GROUND_ICON if layer_metadata.is_ground else PARALLAX_ICON
@@ -153,6 +155,10 @@ func merge_layer():
 	action.other_layer_id = shared.get_layer_at(layer_data.layer_metadata.order + 1).layer_data.layer_metadata.layer_uuid
 	action.shared = shared
 	layer_dropdown.editor.action_manager.commit_action(action)
+
+
+func properties_updated():
+	$"%MissionLayer".visible = layer_data.layer_metadata.is_mission_layer()
 
 
 func update_layer_type():

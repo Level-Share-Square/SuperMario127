@@ -1,0 +1,87 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://scenes/editor/editor_theme.tres" type="Theme" id=1]
+[ext_resource path="res://scenes/editor/windows/object_property_editor/misc_property_scenes/multiselect/base.gd" type="Script" id=2]
+[ext_resource path="res://scenes/editor/windows/editor_options/collapsible_container.gd" type="Script" id=3]
+[ext_resource path="res://scenes/oldeditor/sounds/hover.wav" type="AudioStream" id=4]
+[ext_resource path="res://scenes/oldeditor/sounds/click2.wav" type="AudioStream" id=5]
+
+[node name="MultiSelect" type="VBoxContainer"]
+margin_top = 26.0
+margin_right = 232.0
+margin_bottom = 43.0
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+
+[node name="Base" type="HBoxContainer" parent="."]
+margin_right = 232.0
+margin_bottom = 19.0
+
+[node name="PropertyName" type="Label" parent="Base"]
+unique_name_in_owner = true
+margin_top = 1.0
+margin_right = 62.0
+margin_bottom = 18.0
+mouse_filter = 1
+mouse_default_cursor_shape = 16
+text = "Property:"
+
+[node name="Padding" type="Control" parent="Base"]
+margin_left = 66.0
+margin_right = 193.0
+margin_bottom = 19.0
+size_flags_horizontal = 3
+
+[node name="ExpandButton" type="Button" parent="Base"]
+unique_name_in_owner = true
+margin_left = 197.0
+margin_right = 232.0
+margin_bottom = 19.0
+focus_mode = 0
+mouse_filter = 1
+mouse_default_cursor_shape = 16
+custom_colors/icon_color_pressed = Color( 0, 0, 0, 1 )
+custom_colors/icon_color_disabled = Color( 0, 0, 0, 1 )
+custom_colors/icon_color_focus = Color( 0, 0, 0, 1 )
+custom_colors/icon_color_hover_pressed = Color( 0, 0, 0, 1 )
+custom_colors/icon_color_normal = Color( 0, 0, 0, 1 )
+custom_colors/icon_color_hover = Color( 0, 0, 0, 1 )
+text = "> All"
+script = ExtResource( 3 )
+selected_revealer_path = NodePath("../../HBoxContainer/Expanded/Revealer")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_top = 23.0
+margin_right = 232.0
+margin_bottom = 23.0
+rect_clip_content = true
+custom_constants/separation = 0
+
+[node name="Padding" type="Control" parent="HBoxContainer"]
+margin_right = 8.0
+rect_min_size = Vector2( 8, 0 )
+
+[node name="Expanded" type="VBoxContainer" parent="HBoxContainer"]
+margin_left = 8.0
+margin_right = 232.0
+size_flags_horizontal = 3
+
+[node name="Revealer" type="Control" parent="HBoxContainer/Expanded"]
+margin_right = 224.0
+
+[node name="Options" type="VBoxContainer" parent="HBoxContainer/Expanded/Revealer"]
+unique_name_in_owner = true
+anchor_right = 1.0
+size_flags_horizontal = 3
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource( 4 )
+volume_db = -10.0
+bus = "Sounds"
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource( 5 )
+volume_db = -10.0
+bus = "Sounds"

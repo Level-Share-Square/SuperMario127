@@ -14,14 +14,9 @@ func on_pressed():
 	else:
 		var tween = get_tree().create_tween()
 		tween.tween_property(owner, "self_modulate:a", 0.0, 0.3).set_trans(Tween.TRANS_CUBIC)
-		tween.connect("finished", self, "tween_finished", [tween])
 		active = false
 
 
 func collapse():
 	active = true
 	on_pressed()
-
-
-func tween_finished(tween):
-	tween.kill()

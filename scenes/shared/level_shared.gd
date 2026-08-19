@@ -25,6 +25,7 @@ onready var loaded_boo_texture_invis = load(boo_block_texture_invis)
 signal layer_added(layer)
 signal layer_moved
 signal layer_type_changed
+signal layer_edited
 signal found_origin
 signal loaded_layers
 
@@ -40,10 +41,17 @@ func load_in():
 func load_layers(layer_data_list: Array):
 	for layer_data in layer_data_list:
 		layer_data = layer_data
-		var layer: LevelLayer = add_layer(layer_data)
-		
-		if layer.layer_data.layer_metadata.is_origin:
-			origin = layer
+		var can_load: bool = layer_data.can_spawn_layer(CurrentLevelData.save_data, CurrentLevelData.current_mission_id)
+		# it should always load in the editor
+		if get_tree().get_current_scene().mode == 1:
+			can_load = true
+		# ...or while playtesting
+		if Singleton.ModeSwitcher.visible:
+			can_load = true
+		if can_load:
+			var layer: LevelLayer = add_layer(layer_data)
+			if layer.layer_data.layer_metadata.is_origin:
+				origin = layer
 			
 	# This is a failsafe in case none of the layers are origin
 	if !origin:
@@ -116,6 +124,7 @@ func edit_layer(uuid: String, property: String, value):
 	layer_data.layer_metadata[property] = value
 	layer.load_in(layer_data)
 	CurrentLevelData.current_area.layers[get_layer_index(layer)] = layer_data
+	emit_signal("layer_edited")
 	
 func move_layer(layer: LevelLayer, to: int, save_to_data: bool = false):
 	var from: int = layer.get_index()
