@@ -1,5 +1,8 @@
 extends CanvasLayer
 
+
+const SCROLL_SPEED: float = 200.0
+
 ## nodes
 onready var shine_parent: Node2D = $ShineParent
 onready var anim_player: AnimationPlayer = $AnimationPlayer
@@ -45,8 +48,9 @@ func _ready():
 	level_title.text = level_metadata.level_name
 	level_title_backing.text = level_title.text
 	
+	backgrounds.auto_scroll_override = true
+	backgrounds.auto_scroll_speed = SCROLL_SPEED
 	backgrounds.load_in()
-	backgrounds.do_auto_scroll = true
 	
 	anim_player.play_backwards("transition")
 

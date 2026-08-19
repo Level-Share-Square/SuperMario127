@@ -1,7 +1,8 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://shaders/rounded_corners.gdshader" type="Shader" id=1]
 [ext_resource path="res://assets/icons/Fludd.svg" type="Texture" id=2]
+[ext_resource path="res://scenes/menu/shine_select/nozzle_graphic.gd" type="Script" id=3]
 
 [sub_resource type="ShaderMaterial" id=23]
 shader = ExtResource( 1 )
@@ -13,16 +14,135 @@ shader_param/rounded_corner_bottom_right = true
 shader_param/width = 1.0
 shader_param/height = 1.0
 
-[sub_resource type="Gradient" id=24]
-colors = PoolColorArray( 1, 0, 0, 1, 0.509804, 0, 0.313726, 1 )
+[sub_resource type="Gradient" id=49]
+colors = PoolColorArray( 0, 0, 0, 0.627451, 0, 0, 0, 0.627451 )
 
-[sub_resource type="GradientTexture2D" id=25]
-gradient = SubResource( 24 )
+[sub_resource type="GradientTexture2D" id=50]
+gradient = SubResource( 49 )
 fill_to = Vector2( 0, 1 )
 
-[sub_resource type="StyleBoxTexture" id=26]
-texture = SubResource( 25 )
+[sub_resource type="StyleBoxTexture" id=51]
+texture = SubResource( 50 )
 region_rect = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="Gradient" id=35]
+colors = PoolColorArray( 0, 0.419608, 1, 1, 0.266667, 0, 0.509804, 1 )
+
+[sub_resource type="GradientTexture2D" id=36]
+gradient = SubResource( 35 )
+fill_to = Vector2( 0, 1 )
+
+[sub_resource type="StyleBoxTexture" id=37]
+texture = SubResource( 36 )
+region_rect = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="Gradient" id=52]
+colors = PoolColorArray( 1, 0, 0, 1, 0.509804, 0, 0.313726, 1 )
+
+[sub_resource type="GradientTexture2D" id=38]
+gradient = SubResource( 52 )
+fill_to = Vector2( 0, 1 )
+
+[sub_resource type="StyleBoxTexture" id=39]
+texture = SubResource( 38 )
+region_rect = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="Gradient" id=43]
+colors = PoolColorArray( 0.657227, 0.657227, 0.657227, 1, 0.227451, 0.196078, 0.317647, 1 )
+
+[sub_resource type="GradientTexture2D" id=44]
+gradient = SubResource( 43 )
+fill_to = Vector2( 0, 1 )
+
+[sub_resource type="StyleBoxTexture" id=45]
+texture = SubResource( 44 )
+region_rect = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="StyleBoxFlat" id=53]
+bg_color = Color( 1, 1, 1, 1 )
+draw_center = false
+border_width_left = 2
+border_width_top = 6
+border_width_right = 2
+border_width_bottom = 1
+border_color = Color( 0.513726, 0.513726, 0.513726, 1 )
+border_blend = true
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id=40]
+bg_color = Color( 1, 1, 1, 1 )
+draw_center = false
+border_width_left = 2
+border_width_top = 6
+border_width_right = 2
+border_width_bottom = 1
+border_color = Color( 0.658824, 0.764706, 0.945098, 1 )
+border_blend = true
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id=32]
+bg_color = Color( 1, 1, 1, 1 )
+draw_center = false
+border_width_left = 2
+border_width_top = 6
+border_width_right = 2
+border_width_bottom = 1
+border_color = Color( 0.945313, 0.657128, 0.657128, 1 )
+border_blend = true
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id=46]
+bg_color = Color( 1, 1, 1, 1 )
+draw_center = false
+border_width_left = 2
+border_width_top = 6
+border_width_right = 2
+border_width_bottom = 1
+border_color = Color( 0.678431, 0.658824, 0.741176, 1 )
+border_blend = true
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="Gradient" id=47]
+offsets = PoolRealArray( 0.544304, 1 )
+colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 0.564706 )
+
+[sub_resource type="GradientTexture2D" id=48]
+gradient = SubResource( 47 )
+fill_from = Vector2( 0, 0.8 )
+fill_to = Vector2( 0, 0.2 )
+repeat = 2
+
+[sub_resource type="Gradient" id=41]
+offsets = PoolRealArray( 0.544304, 1 )
+colors = PoolColorArray( 1, 1, 1, 0, 0.854902, 0.94902, 1, 0.752941 )
+
+[sub_resource type="GradientTexture2D" id=42]
+gradient = SubResource( 41 )
+fill_from = Vector2( 0, 0.8 )
+fill_to = Vector2( 0, 0.2 )
+repeat = 2
+
+[sub_resource type="Gradient" id=33]
+offsets = PoolRealArray( 0.544304, 1 )
+colors = PoolColorArray( 1, 1, 1, 0, 1, 0.831373, 0.698039, 0.752941 )
+
+[sub_resource type="GradientTexture2D" id=34]
+gradient = SubResource( 33 )
+fill_from = Vector2( 0, 0.8 )
+fill_to = Vector2( 0, 0.2 )
+repeat = 2
 
 [sub_resource type="StyleBoxFlat" id=29]
 content_margin_left = 2.0
@@ -45,42 +165,40 @@ expand_margin_right = 2.0
 expand_margin_top = 2.0
 expand_margin_bottom = 2.0
 
-[sub_resource type="StyleBoxFlat" id=27]
-bg_color = Color( 1, 1, 1, 1 )
-draw_center = false
-border_width_left = 2
-border_width_top = 6
-border_width_right = 2
-border_width_bottom = 1
-border_color = Color( 0.945313, 0.657128, 0.657128, 1 )
-border_blend = true
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
-
-[sub_resource type="Gradient" id=30]
-colors = PoolColorArray( 1, 1, 1, 0, 1, 0.831373, 0.698039, 0.752941 )
-
-[sub_resource type="GradientTexture2D" id=31]
-gradient = SubResource( 30 )
-fill_from = Vector2( 0, 0.7 )
-fill_to = Vector2( 0, 0 )
-repeat = 2
-
 [node name="Nozzle" type="PanelContainer"]
 material = SubResource( 23 )
 margin_right = 36.0
 margin_bottom = 36.0
 rect_min_size = Vector2( 36, 36 )
+rect_rotation = 5.0
+rect_pivot_offset = Vector2( 18, 18 )
+mouse_filter = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
-custom_styles/panel = SubResource( 26 )
+custom_styles/panel = SubResource( 51 )
+script = ExtResource( 3 )
+panel_empty = SubResource( 51 )
+panel_hover = SubResource( 37 )
+panel_rocket = SubResource( 39 )
+panel_turbo = SubResource( 45 )
+inner_panel_empty = SubResource( 53 )
+inner_panel_hover = SubResource( 40 )
+inner_panel_rocket = SubResource( 32 )
+inner_panel_turbo = SubResource( 46 )
+shine_empty = SubResource( 48 )
+shine_hover = SubResource( 42 )
+shine_rocket = SubResource( 34 )
+shine_turbo = SubResource( 48 )
+color_empty = Color( 1, 1, 1, 0 )
+color_hover = Color( 0.266667, 0.388235, 0.839216, 1 )
+color_rocket = Color( 0.776471, 0, 0.137255, 1 )
+color_turbo = Color( 0.494118, 0.47451, 0.545098, 1 )
 
 [node name="MarginContainer3" type="MarginContainer" parent="."]
 show_behind_parent = true
 margin_right = 36.0
 margin_bottom = 36.0
+mouse_filter = 2
 custom_constants/margin_right = -1
 custom_constants/margin_top = 10
 custom_constants/margin_left = 8
@@ -91,11 +209,13 @@ margin_left = 8.0
 margin_top = 10.0
 margin_right = 37.0
 margin_bottom = 38.0
+mouse_filter = 2
 custom_styles/panel = SubResource( 29 )
 
 [node name="MarginContainer2" type="MarginContainer" parent="."]
 margin_right = 36.0
 margin_bottom = 36.0
+mouse_filter = 2
 custom_constants/margin_right = 6
 custom_constants/margin_top = 6
 custom_constants/margin_left = 6
@@ -106,19 +226,23 @@ margin_left = 6.0
 margin_top = 6.0
 margin_right = 30.0
 margin_bottom = 30.0
+mouse_filter = 2
 custom_styles/panel = SubResource( 28 )
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 margin_right = 36.0
 margin_bottom = 36.0
+mouse_filter = 2
 
 [node name="Icon" type="TextureRect" parent="CenterContainer"]
-modulate = Color( 0.776471, 0, 0.137255, 1 )
+unique_name_in_owner = true
+modulate = Color( 1, 1, 1, 0 )
 margin_left = 9.0
 margin_top = 8.0
 margin_right = 27.0
 margin_bottom = 28.0
 rect_min_size = Vector2( 18, 20 )
+mouse_filter = 2
 texture = ExtResource( 2 )
 expand = true
 stretch_mode = 6
@@ -126,21 +250,29 @@ stretch_mode = 6
 [node name="MarginContainer" type="MarginContainer" parent="."]
 margin_right = 36.0
 margin_bottom = 36.0
+mouse_filter = 2
 custom_constants/margin_right = 6
 custom_constants/margin_top = 6
 custom_constants/margin_left = 6
 custom_constants/margin_bottom = 6
 
-[node name="Panel" type="Panel" parent="MarginContainer"]
+[node name="InnerPanel" type="Panel" parent="MarginContainer"]
+unique_name_in_owner = true
 margin_left = 6.0
 margin_top = 6.0
 margin_right = 30.0
 margin_bottom = 30.0
-custom_styles/panel = SubResource( 27 )
+mouse_filter = 2
+custom_styles/panel = SubResource( 53 )
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="Shine" type="TextureRect" parent="."]
+unique_name_in_owner = true
 use_parent_material = true
 margin_right = 36.0
 margin_bottom = 36.0
-texture = SubResource( 31 )
+mouse_filter = 2
+texture = SubResource( 48 )
 expand = true
+
+[node name="Tween" type="Tween" parent="."]
+unique_name_in_owner = true

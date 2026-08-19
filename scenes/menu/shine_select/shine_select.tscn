@@ -1,9 +1,9 @@
-[gd_scene load_steps=45 format=2]
+[gd_scene load_steps=57 format=2]
 
 [ext_resource path="res://scenes/menu/theme.tres" type="Theme" id=1]
 [ext_resource path="res://assets/fonts/New Super Mario Font U.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://scenes/shared/backgrounds.tscn" type="PackedScene" id=3]
-[ext_resource path="res://scenes/menu/button_scripts/button_hover-vertical.gd" type="Script" id=4]
+[ext_resource path="res://scenes/menu/shine_select/stripes.png" type="Texture" id=4]
 [ext_resource path="res://scenes/menu/shine_select/shine_select.gd" type="Script" id=5]
 [ext_resource path="res://scenes/oldmenu/shine_select_screen/LetsaGo.gd" type="Script" id=6]
 [ext_resource path="res://scenes/oldmenu/shine_select_screen/letsa go/Mario1.wav" type="AudioStream" id=7]
@@ -18,9 +18,7 @@
 [ext_resource path="res://scenes/menu/box_shadow.png" type="Texture" id=16]
 [ext_resource path="res://scenes/menu/shine_select/shine_parent.gd" type="Script" id=17]
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=18]
-[ext_resource path="res://scenes/actors/objects/hover_box/hover_box.png" type="Texture" id=19]
-[ext_resource path="res://scenes/actors/objects/rocket_box/rocket_box.png" type="Texture" id=20]
-[ext_resource path="res://scenes/actors/objects/turbo_box/turbo_box.png" type="Texture" id=21]
+[ext_resource path="res://scenes/menu/ui_focus.gd" type="Script" id=19]
 [ext_resource path="res://assets/icons/quit.png" type="Texture" id=22]
 [ext_resource path="res://scenes/menu/button_scripts/icon_helper.gd" type="Script" id=23]
 [ext_resource path="res://scenes/menu/shine_select/nozzle_graphic.tscn" type="PackedScene" id=24]
@@ -28,6 +26,7 @@
 [ext_resource path="res://scenes/actors/mario/animation_frames.tres" type="SpriteFrames" id=26]
 [ext_resource path="res://scenes/actors/mario/FluddAnimSync.gd" type="Script" id=27]
 [ext_resource path="res://scenes/actors/mario/nozzles/hover_frames.tres" type="SpriteFrames" id=28]
+[ext_resource path="res://scenes/menu/button_scripts/button_hover-scale.gd" type="Script" id=29]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -43,9 +42,12 @@ void fragment() {
 shader = SubResource( 1 )
 shader_param/blur_amount = 1.0
 
+[sub_resource type="CanvasItemMaterial" id=25]
+blend_mode = 1
+
 [sub_resource type="Gradient" id=11]
 offsets = PoolRealArray( 0, 0.865922, 1 )
-colors = PoolColorArray( 1, 1, 1, 0.752941, 1, 1, 1, 1, 1, 1, 1, 0 )
+colors = PoolColorArray( 1, 1, 1, 0.564706, 1, 1, 1, 1, 1, 1, 1, 0 )
 
 [sub_resource type="GradientTexture2D" id=12]
 gradient = SubResource( 11 )
@@ -53,12 +55,29 @@ width = 2
 height = 32
 fill_to = Vector2( 0, 1 )
 
+[sub_resource type="Shader" id=23]
+code = "shader_type canvas_item;
+
+uniform float speed;
+uniform float direction = 1;
+
+void fragment () {
+	COLOR = texture(TEXTURE, vec2(UV.x + TIME * speed * direction, UV.y + TIME * speed * direction));
+}"
+
+[sub_resource type="ShaderMaterial" id=26]
+shader = SubResource( 23 )
+shader_param/speed = 0.22
+shader_param/direction = 1.0
+
 [sub_resource type="DynamicFont" id=21]
 size = 28
 outline_size = 3
 outline_color = Color( 0, 0, 0, 1 )
 extra_spacing_char = -1
 font_data = ExtResource( 2 )
+
+[sub_resource type="StyleBoxEmpty" id=53]
 
 [sub_resource type="StyleBoxEmpty" id=5]
 
@@ -83,7 +102,7 @@ Button/styles/hover = SubResource( 7 )
 Button/styles/normal = SubResource( 8 )
 Button/styles/pressed = SubResource( 9 )
 
-[sub_resource type="Animation" id=23]
+[sub_resource type="Animation" id=27]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/path = NodePath("PlayerSprite:animation")
@@ -124,7 +143,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id=24]
 resource_name = "start"
-length = 0.1
+length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("PlayerSprite:animation")
 tracks/0/interp = 1
@@ -135,31 +154,19 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ "keyDance" ]
+"values": [ "jumpRight" ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("PlayerSprite:frame")
+tracks/1/path = NodePath("PlayerSprite:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.1 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 0.5, 2, 1 ),
 "update": 0,
-"values": [ 11, 12 ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("PlayerSprite:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 0.1 ),
-"transitions": PoolRealArray( 2, 1 ),
-"update": 0,
-"values": [ Vector2( 0, -4 ), Vector2( 0, 0 ) ]
+"values": [ Vector2( 0, 0 ), Vector2( 0, -48 ), Vector2( 0, 0 ) ]
 }
 
 [sub_resource type="DynamicFont" id=22]
@@ -169,6 +176,39 @@ extra_spacing_top = 1
 extra_spacing_char = -1
 extra_spacing_space = 2
 font_data = ExtResource( 18 )
+
+[sub_resource type="Gradient" id=35]
+colors = PoolColorArray( 0, 0.419608, 1, 1, 0.266667, 0, 0.509804, 1 )
+
+[sub_resource type="GradientTexture2D" id=36]
+gradient = SubResource( 35 )
+fill_to = Vector2( 0, 1 )
+
+[sub_resource type="StyleBoxTexture" id=37]
+texture = SubResource( 36 )
+region_rect = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="Gradient" id=52]
+colors = PoolColorArray( 1, 0, 0, 1, 0.509804, 0, 0.313726, 1 )
+
+[sub_resource type="GradientTexture2D" id=38]
+gradient = SubResource( 52 )
+fill_to = Vector2( 0, 1 )
+
+[sub_resource type="StyleBoxTexture" id=39]
+texture = SubResource( 38 )
+region_rect = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="Gradient" id=43]
+colors = PoolColorArray( 0.657227, 0.657227, 0.657227, 1, 0.227451, 0.196078, 0.317647, 1 )
+
+[sub_resource type="GradientTexture2D" id=44]
+gradient = SubResource( 43 )
+fill_to = Vector2( 0, 1 )
+
+[sub_resource type="StyleBoxTexture" id=45]
+texture = SubResource( 44 )
+region_rect = Rect2( 0, 0, 64, 64 )
 
 [sub_resource type="Animation" id=13]
 length = 0.001
@@ -237,6 +277,10 @@ __meta__ = {
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
 
+[node name="Focus" type="Control" parent="."]
+script = ExtResource( 19 )
+default_focus_path = NodePath("../VBoxContainer/PanelContainer/ShineFocus")
+
 [node name="Blur" type="ColorRect" parent="."]
 material = SubResource( 2 )
 anchor_right = 1.0
@@ -294,11 +338,32 @@ theme = ExtResource( 1 )
 custom_constants/separation = 0
 
 [node name="TopBar" type="TextureRect" parent="VBoxContainer"]
+material = SubResource( 25 )
 margin_right = 768.0
 margin_bottom = 128.0
 rect_min_size = Vector2( 0, 128 )
 texture = SubResource( 12 )
 expand = true
+
+[node name="Copy" type="TextureRect" parent="VBoxContainer/TopBar"]
+modulate = Color( 1, 1, 1, 0.25098 )
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 0, 128 )
+texture = SubResource( 12 )
+expand = true
+
+[node name="Stripes" type="TextureRect" parent="VBoxContainer/TopBar"]
+modulate = Color( 1, 1, 1, 0.0627451 )
+material = SubResource( 26 )
+anchor_right = 7.144
+anchor_bottom = 7.144
+margin_bottom = -128.0
+rect_scale = Vector2( 0.14, 0.14 )
+texture = ExtResource( 4 )
+expand = true
+stretch_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/TopBar"]
 anchor_right = 1.0
@@ -348,33 +413,43 @@ align = 1
 valign = 1
 clip_text = true
 
-[node name="Buttons" type="HBoxContainer" parent="VBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
 margin_top = 128.0
 margin_right = 768.0
 margin_bottom = 304.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 53 )
+
+[node name="Buttons" type="HBoxContainer" parent="VBoxContainer/PanelContainer"]
+margin_right = 768.0
+margin_bottom = 176.0
 mouse_filter = 2
 size_flags_vertical = 3
 custom_constants/separation = 0
 
-[node name="ButtonMoveLeft" type="Button" parent="VBoxContainer/Buttons"]
+[node name="ButtonMoveLeft" type="Button" parent="VBoxContainer/PanelContainer/Buttons"]
 margin_right = 304.0
 margin_bottom = 176.0
+focus_mode = 0
 size_flags_horizontal = 3
 theme = SubResource( 10 )
 flat = true
 
-[node name="ButtonSelectShine" type="Button" parent="VBoxContainer/Buttons"]
+[node name="ButtonSelectShine" type="Button" parent="VBoxContainer/PanelContainer/Buttons"]
 margin_left = 304.0
 margin_right = 464.0
 margin_bottom = 176.0
 rect_min_size = Vector2( 160, 0 )
+focus_mode = 0
 theme = SubResource( 10 )
 flat = true
 
-[node name="ButtonMoveRight" type="Button" parent="VBoxContainer/Buttons"]
+[node name="ButtonMoveRight" type="Button" parent="VBoxContainer/PanelContainer/Buttons"]
 margin_left = 464.0
 margin_right = 768.0
 margin_bottom = 176.0
+focus_mode = 0
 size_flags_horizontal = 3
 theme = SubResource( 10 )
 flat = true
@@ -382,7 +457,15 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="ShineFocus" type="Button" parent="VBoxContainer/PanelContainer"]
+unique_name_in_owner = true
+margin_right = 768.0
+margin_bottom = 176.0
+mouse_filter = 2
+flat = true
+
 [node name="BottomBar" type="TextureRect" parent="VBoxContainer"]
+material = SubResource( 25 )
 margin_top = 304.0
 margin_right = 768.0
 margin_bottom = 432.0
@@ -390,6 +473,29 @@ rect_min_size = Vector2( 0, 128 )
 texture = SubResource( 12 )
 expand = true
 flip_v = true
+
+[node name="Copy" type="TextureRect" parent="VBoxContainer/BottomBar"]
+modulate = Color( 1, 1, 1, 0.25098 )
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 0, 128 )
+texture = SubResource( 12 )
+expand = true
+flip_v = true
+
+[node name="Stripes" type="TextureRect" parent="VBoxContainer/BottomBar"]
+modulate = Color( 1, 1, 1, 0.0627451 )
+material = SubResource( 26 )
+anchor_right = 7.144
+anchor_bottom = 7.144
+margin_top = 16.0
+margin_right = 0.408203
+margin_bottom = -98.432
+rect_scale = Vector2( 0.14, 0.14 )
+texture = ExtResource( 4 )
+expand = true
+stretch_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/BottomBar"]
 anchor_right = 1.0
@@ -435,13 +541,13 @@ show_behind_parent = true
 position = Vector2( 2, 3 )
 z_index = -1
 frames = ExtResource( 26 )
-animation = "idleRight"
+animation = "jumpRight"
 script = ExtResource( 27 )
 
 [node name="Fludd" type="AnimatedSprite" parent="VBoxContainer/BottomBar/HBoxContainer/MarginContainer/VBoxContainer/CenterContainer/Control/PlayerSprite"]
 material = ExtResource( 25 )
 frames = ExtResource( 28 )
-animation = "idleRight"
+animation = "jumpRight"
 script = ExtResource( 27 )
 
 [node name="Shadow" type="AnimatedSprite" parent="VBoxContainer/BottomBar/HBoxContainer/MarginContainer/VBoxContainer/CenterContainer/Control/PlayerSprite/Fludd"]
@@ -450,12 +556,12 @@ show_behind_parent = true
 position = Vector2( 2, 3 )
 z_index = -1
 frames = ExtResource( 28 )
-animation = "idleRight"
+animation = "jumpRight"
 script = ExtResource( 27 )
 
 [node name="PlayerAnimPlayer" type="AnimationPlayer" parent="VBoxContainer/BottomBar/HBoxContainer/MarginContainer/VBoxContainer/CenterContainer/Control"]
 unique_name_in_owner = true
-anims/RESET = SubResource( 23 )
+anims/RESET = SubResource( 27 )
 anims/start = SubResource( 24 )
 
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer/BottomBar/HBoxContainer/MarginContainer/VBoxContainer"]
@@ -469,12 +575,15 @@ margin_top = 67.0
 margin_right = 70.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 70, 0 )
+rect_pivot_offset = Vector2( 35, 16 )
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme_type_variation = "Red"
 text = "Back"
 align = 2
-script = ExtResource( 4 )
+script = ExtResource( 29 )
+lerp_speed = 18.0
+target_scale = Vector2( 1.05, 1.05 )
 
 [node name="Shadow" type="NinePatchRect" parent="VBoxContainer/BottomBar/HBoxContainer/MarginContainer/VBoxContainer/Back"]
 modulate = Color( 1, 1, 1, 0.25098 )
@@ -555,41 +664,59 @@ custom_constants/vseparation = 16
 custom_constants/hseparation = 8
 columns = 2
 
-[node name="HoverNozzle" type="TextureButton" parent="VBoxContainer/BottomBar/HBoxContainer/MarginContainer3/FLUDD"]
-visible = false
-margin_right = 34.0
+[node name="ButtonEmpty" type="Button" parent="VBoxContainer/BottomBar/HBoxContainer/MarginContainer3/FLUDD"]
+margin_right = 36.0
 margin_bottom = 36.0
-texture_normal = ExtResource( 19 )
+rect_min_size = Vector2( 36, 36 )
+rect_pivot_offset = Vector2( 18, 18 )
+flat = true
+script = ExtResource( 29 )
+target_scale = Vector2( 1.05, 1.05 )
 
-[node name="RocketNozzle" type="TextureButton" parent="VBoxContainer/BottomBar/HBoxContainer/MarginContainer3/FLUDD"]
-visible = false
-margin_left = 40.0
-margin_right = 74.0
-margin_bottom = 32.0
-texture_normal = ExtResource( 20 )
+[node name="Nozzle" parent="VBoxContainer/BottomBar/HBoxContainer/MarginContainer3/FLUDD/ButtonEmpty" instance=ExtResource( 24 )]
 
-[node name="TurboNozzle" type="TextureButton" parent="VBoxContainer/BottomBar/HBoxContainer/MarginContainer3/FLUDD"]
-visible = false
-margin_top = 36.0
-margin_right = 34.0
-margin_bottom = 72.0
-texture_normal = ExtResource( 21 )
-
-[node name="Nozzle" parent="VBoxContainer/BottomBar/HBoxContainer/MarginContainer3/FLUDD" instance=ExtResource( 24 )]
-
-[node name="Nozzle2" parent="VBoxContainer/BottomBar/HBoxContainer/MarginContainer3/FLUDD" instance=ExtResource( 24 )]
+[node name="ButtonHover" type="Button" parent="VBoxContainer/BottomBar/HBoxContainer/MarginContainer3/FLUDD"]
 margin_left = 44.0
 margin_right = 80.0
+margin_bottom = 36.0
+rect_min_size = Vector2( 36, 36 )
+rect_pivot_offset = Vector2( 18, 18 )
+flat = true
+script = ExtResource( 29 )
+target_scale = Vector2( 1.05, 1.05 )
 
-[node name="Nozzle3" parent="VBoxContainer/BottomBar/HBoxContainer/MarginContainer3/FLUDD" instance=ExtResource( 24 )]
+[node name="Nozzle" parent="VBoxContainer/BottomBar/HBoxContainer/MarginContainer3/FLUDD/ButtonHover" instance=ExtResource( 24 )]
+custom_styles/panel = SubResource( 37 )
+box_type = 1
+
+[node name="ButtonRocket" type="Button" parent="VBoxContainer/BottomBar/HBoxContainer/MarginContainer3/FLUDD"]
 margin_top = 52.0
+margin_right = 36.0
 margin_bottom = 88.0
+rect_min_size = Vector2( 36, 36 )
+rect_pivot_offset = Vector2( 18, 18 )
+flat = true
+script = ExtResource( 29 )
+target_scale = Vector2( 1.05, 1.05 )
 
-[node name="Nozzle4" parent="VBoxContainer/BottomBar/HBoxContainer/MarginContainer3/FLUDD" instance=ExtResource( 24 )]
+[node name="Nozzle" parent="VBoxContainer/BottomBar/HBoxContainer/MarginContainer3/FLUDD/ButtonRocket" instance=ExtResource( 24 )]
+custom_styles/panel = SubResource( 39 )
+box_type = 2
+
+[node name="ButtonTurbo" type="Button" parent="VBoxContainer/BottomBar/HBoxContainer/MarginContainer3/FLUDD"]
 margin_left = 44.0
 margin_top = 52.0
 margin_right = 80.0
 margin_bottom = 88.0
+rect_min_size = Vector2( 36, 36 )
+rect_pivot_offset = Vector2( 18, 18 )
+flat = true
+script = ExtResource( 29 )
+target_scale = Vector2( 1.05, 1.05 )
+
+[node name="Nozzle" parent="VBoxContainer/BottomBar/HBoxContainer/MarginContainer3/FLUDD/ButtonTurbo" instance=ExtResource( 24 )]
+custom_styles/panel = SubResource( 45 )
+box_type = 3
 
 [node name="ShineParent" type="Node2D" parent="."]
 position = Vector2( 384, 216 )
@@ -601,7 +728,14 @@ anims/transition = SubResource( 14 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[connection signal="pressed" from="VBoxContainer/Buttons/ButtonMoveLeft" to="ShineParent" method="attempt_increment_selected_shine_index" binds= [ -1 ]]
-[connection signal="pressed" from="VBoxContainer/Buttons/ButtonSelectShine" to="." method="start_level"]
-[connection signal="pressed" from="VBoxContainer/Buttons/ButtonMoveRight" to="ShineParent" method="attempt_increment_selected_shine_index" binds= [ 1 ]]
+[connection signal="ready" from="Focus" to="Focus" method="focus_node" flags=3]
+[connection signal="pressed" from="VBoxContainer/PanelContainer/Buttons/ButtonMoveLeft" to="ShineParent" method="attempt_increment_selected_shine_index" binds= [ -1 ]]
+[connection signal="pressed" from="VBoxContainer/PanelContainer/Buttons/ButtonSelectShine" to="." method="start_level"]
+[connection signal="pressed" from="VBoxContainer/PanelContainer/Buttons/ButtonMoveRight" to="ShineParent" method="attempt_increment_selected_shine_index" binds= [ 1 ]]
+[connection signal="focus_entered" from="VBoxContainer/PanelContainer/ShineFocus" to="ShineParent" method="move_shine_sprites" flags=3]
+[connection signal="focus_exited" from="VBoxContainer/PanelContainer/ShineFocus" to="ShineParent" method="move_shine_sprites" flags=3]
 [connection signal="pressed" from="VBoxContainer/BottomBar/HBoxContainer/MarginContainer/VBoxContainer/Back" to="." method="back"]
+[connection signal="pressed" from="VBoxContainer/BottomBar/HBoxContainer/MarginContainer3/FLUDD/ButtonEmpty" to="VBoxContainer/BottomBar/HBoxContainer/MarginContainer3/FLUDD/ButtonEmpty/Nozzle" method="animate"]
+[connection signal="pressed" from="VBoxContainer/BottomBar/HBoxContainer/MarginContainer3/FLUDD/ButtonHover" to="VBoxContainer/BottomBar/HBoxContainer/MarginContainer3/FLUDD/ButtonHover/Nozzle" method="animate"]
+[connection signal="pressed" from="VBoxContainer/BottomBar/HBoxContainer/MarginContainer3/FLUDD/ButtonRocket" to="VBoxContainer/BottomBar/HBoxContainer/MarginContainer3/FLUDD/ButtonRocket/Nozzle" method="animate"]
+[connection signal="pressed" from="VBoxContainer/BottomBar/HBoxContainer/MarginContainer3/FLUDD/ButtonTurbo" to="VBoxContainer/BottomBar/HBoxContainer/MarginContainer3/FLUDD/ButtonTurbo/Nozzle" method="animate"]

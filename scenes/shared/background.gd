@@ -7,6 +7,7 @@ onready var background_node = $Background/Sprite
 var ready = false
 var do_auto_scroll = false
 var auto_scroll_speed := 0.0
+var auto_scroll_override: float = 0
 
 
 func _ready():
@@ -15,11 +16,11 @@ func _ready():
 
 func load_in():
 	var area_header: AreaHeader = CurrentLevelData.area_headers[CurrentLevelData.area_id]
-	update_background(area_header.sky, area_header.background, area_header.bounds, 0, area_header.background_palette, area_header.bg_autoscroll_speed)
+	update_background(area_header.sky, area_header.background, area_header.bounds, 0, area_header.background_palette, area_header.bg_autoscroll_speed if not auto_scroll_override else auto_scroll_speed)
 
 
 func update_background_area(area_header: AreaHeader):
-	update_background(area_header.sky, area_header.background, area_header.bounds, 0, area_header.background_palette, area_header.bg_autoscroll_speed)
+	update_background(area_header.sky, area_header.background, area_header.bounds, 0, area_header.background_palette, area_header.bg_autoscroll_speed if not auto_scroll_override else auto_scroll_speed)
 
 
 func update_background(sky : int = 1, background : int = 1, bounds : Rect2 = Rect2(0, 0, 0, 0), extra_y_offset : float = 0, background_palette : int = 0, speed_override: float = 0):

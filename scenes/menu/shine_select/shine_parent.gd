@@ -7,6 +7,7 @@ onready var level_metadata: LevelMetadata = CurrentLevelData.level_metadata
 onready var tween: Tween = $"%Tween"
 onready var shine_title: Label = $"%ShineTitle"
 onready var shine_description: RichTextLabel = $"%ShineDescription"
+onready var shine_focus = $"%ShineFocus"
 
 onready var mission_focus_sfx: AudioStreamPlayer = $"%MissionFocus"
 
@@ -22,7 +23,9 @@ const SHINE_FIRST_OFFSET_DIFFERENCE: float = SHINE_FIRST_POSITION_OFFSET - SHINE
 
 # size of the shine at different points
 const SHINE_CENTER_SIZE: float = 4.0
-const SHINE_BESIDE_CENTER_SIZE: float = 2.0
+const SHINE_CENTER_UNFOCUS_SIZE: float = 3.0
+const SHINE_BESIDE_CENTER_SIZE: float = 2.75
+const SHINE_BESIDE_CENTER_UNFOCUS_SIZE: float = 2.5
 const SHINE_DEFAULT_SIZE: float = 2.0
 
 ## vars
@@ -117,6 +120,8 @@ func _ready():
 	update_labels()
 
 func _input(event):
+	if shine_focus.get_focus_owner() != shine_focus: return
+	
 	if Input.is_action_just_pressed("ui_right"):
 		if CurrentLevelData.shine_progression:
 			if scrollable_shines.size() > 1:
@@ -143,7 +148,7 @@ func _input(event):
 func attempt_increment_selected_shine_index(increment : int) -> void:
 	if !can_interact:
 		return
-
+	
 	var previous_selected_shine_index = selected_shine_index
 	# warning-ignore:narrowing_conversion
 	selected_shine_index = clamp(selected_shine_index + increment, 0, shine_sprites.size() - 1 if !CurrentLevelData.shine_progression else scrollable_shines.back())
@@ -168,9 +173,16 @@ func move_shine_sprites(instant: bool = false) -> void:
 
 		# based on the position of the shine relative to the center, set the scale and position
 		if i == selected_shine_index:
-			shine_size = SHINE_CENTER_SIZE
+			if shine_focus.get_focus_owner() == shine_focus or not is_instance_valid(shine_focus.get_focus_owner()):
+				shine_size = SHINE_CENTER_SIZE
+			else:
+				shine_size = SHINE_CENTER_UNFOCUS_SIZE
 			target_position_x = 0 
 		elif abs(i - selected_shine_index) == 1:
+			if shine_focus.get_focus_owner() == shine_focus or not is_instance_valid(shine_focus.get_focus_owner()):
+				shine_size = SHINE_BESIDE_CENTER_SIZE
+			else:
+				shine_size = SHINE_BESIDE_CENTER_UNFOCUS_SIZE
 			target_position_x = SHINE_FIRST_POSITION_OFFSET * sign(i - selected_shine_index)
 		elif abs(i - selected_shine_index) > 1:
 			# this comment won't make sense if the values change, current values are first offset 125 then increment 100
