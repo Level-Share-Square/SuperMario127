@@ -46,9 +46,6 @@ const COURSE_CLEAR_MUSIC_VOLUME:= -2.25
 const SHINE_DANCE_END_DELAY:= 0.65
 const MUSIC_TRANSITION_TIME_PLAY_MODE:= 0.5
 
-const SINE_AMOUNT: float = 2.0
-const SINE_SPEED: float = 1.5
-
 enum ActivateAnimations {NORMAL, SKIP, SHORT}
 
 var collected:= false
@@ -299,12 +296,6 @@ func _physics_process(_delta: float) -> void:
 		if character.is_grounded():
 			start_shine_dance() #shine dance setup also disables physics process, so it's only called once
 
-	if do_kick_out:
-		animated_sprite.offset = Vector2.ZERO
-		recolorable_sprite.offset = Vector2.ZERO
-	else:
-		animated_sprite.offset.y = sin(Time.get_unix_time_from_system() * SINE_SPEED) * SINE_AMOUNT
-		recolorable_sprite.offset = animated_sprite.offset
 
 func activate_shine(animation: int, temporary: bool = false, manual_start_cutscene: bool = false) -> void:
 	pause_mode = PAUSE_MODE_INHERIT
