@@ -112,7 +112,7 @@ func _ready():
 	update_labels()
 
 func _input(event):
-	if shine_focus.get_focus_owner() != shine_focus: return
+	if shine_focus.get_focus_owner() != shine_focus and shine_focus.get_focus_owner() != null: return
 	
 	if Input.is_action_just_pressed("ui_right"):
 		attempt_increment_selected_shine_index(1)
