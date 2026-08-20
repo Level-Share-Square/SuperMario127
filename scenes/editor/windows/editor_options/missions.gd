@@ -9,19 +9,24 @@ onready var shine_force_leave = $"%ForceLeave"
 onready var spawn_area_id = $"%SpawnArea"
 onready var spawn_teleporter_tag = $"%TeleporterTag"
 onready var mission_show_in_menu = $"%ShowInMenu"
+onready var globals = $"%Globals"
 onready var new_mission = $"%NewMission"
 onready var erase = $"%Erase"
 onready var mission_container = $"%MissionContainer"
+onready var globals_container = $"%GlobalsContainer"
+onready var linear_progression = $"%LinearProgression"
 
 onready var editor: Editor = get_tree().current_scene
 
 var mission_data: Array
 var selected_mission: MissionData
+var collectible_data: CollectibleData
 
 func _ready():
 	yield(editor, "ready")
 	
 	mission_data = CurrentLevelData.level_metadata.collectible_data.mission_data
+	collectible_data = CurrentLevelData.level_metadata.collectible_data
 	refresh_buttons()
 	
 	if mission_data.size() > 0:
@@ -29,10 +34,19 @@ func _ready():
 	else:
 		mission_container.hide()
 	
+	linear_progression.load_property(editor, collectible_data["linear_progression"], [
+		"linear_progression",
+		TYPE_BOOL,
+		PropertyInfo.new(linear_progression.hint_tooltip)
+	])
+	connect_global_signals(linear_progression)
+	
+	globals.connect("pressed", self, "on_globals_pressed")
 	new_mission.connect("pressed", self, "on_new_mission_pressed")
-		
+
 func on_mission_selected(mission: MissionData):
 	mission_container.show()
+	globals_container.hide()
 	
 	shine_name.load_property(editor, mission["shine_name"], [
 		"shine_name",
@@ -100,9 +114,16 @@ func change_property(key: String, value, check_matches, save_to_data):
 	if key == "shine_name":
 		refresh_buttons()
 
+func connect_global_signals(property_editor: PropertyEditor):
+	if !property_editor.is_connected("property_edited", self, "change_global_property"):
+		property_editor.connect("property_edited", self, "change_global_property")
+
+func change_global_property(key: String, value, check_matches, save_to_data):
+	collectible_data[key] = value
+
 func refresh_buttons():
 	for child in mission_button_container.get_children():
-		if child != new_mission: child.queue_free()
+		if child != new_mission and child != globals: child.queue_free()
 	for mission in mission_data:
 		mission = mission as MissionData
 		
@@ -121,6 +142,8 @@ func on_new_mission_pressed():
 	on_mission_selected(new_mission_data)
 	refresh_buttons()
 	erase.disabled = false
+	mission_container.show()
+	globals_container.hide()
 	
 func erase_mission():
 	mission_data.erase(selected_mission)
@@ -129,3 +152,7 @@ func erase_mission():
 	else:
 		mission_container.hide()
 	refresh_buttons()
+
+func on_globals_pressed():
+	mission_container.hide()
+	globals_container.show()

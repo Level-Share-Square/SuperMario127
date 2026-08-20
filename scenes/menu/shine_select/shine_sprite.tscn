@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/actors/objects/shine/frames_recolorable.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/actors/objects/shine/frames_normal.tres" type="SpriteFrames" id=2]
 [ext_resource path="res://scenes/menu/shine_select/shine_sprite.gd" type="Script" id=3]
+[ext_resource path="res://scenes/actors/objects/shine/ghost.png" type="Texture" id=4]
 
 [sub_resource type="Animation" id=1]
 resource_name = "disappear"
@@ -66,6 +67,10 @@ script = ExtResource( 3 )
 [node name="ShineRecolorable" type="AnimatedSprite" parent="."]
 visible = false
 frames = ExtResource( 1 )
+
+[node name="Ghost" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 4 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/disappear = SubResource( 1 )

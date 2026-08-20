@@ -8,15 +8,24 @@ var mission_data: Array
 var star_coin_data: Array
 # This is the total_shine_count
 var used_mission_data: Dictionary
+# Whether mission progression is linear or open
+var linear_progression: bool = false
 
 var red_coin_count: int = 0
 
 
-func _init(s_mission_data: Array = [], s_star_coin_data: Array = [], s_red_coin_count: int = 0, s_used_mission_data: Dictionary = {}) -> void:
+func _init(
+	s_mission_data: Array = [], 
+	s_star_coin_data: Array = [], 
+	s_red_coin_count: int = 0, 
+	s_used_mission_data: Dictionary = {}, 
+	s_linear_progression: bool = false
+) -> void:
 	mission_data = s_mission_data
 	star_coin_data = s_star_coin_data
 	red_coin_count = s_red_coin_count
 	used_mission_data = s_used_mission_data
+	linear_progression = s_linear_progression
 
 
 func get_shine_count() -> int:

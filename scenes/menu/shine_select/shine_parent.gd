@@ -38,7 +38,7 @@ var used_shine_ids: Array = []
 var shine_details_indices: Array = []
 # contains an array that stores dictionaries containing all the information needed to populate the shine select screen
 var shine_details: Array = []
-
+# first value is uuid, second value is overall index
 var scrollable_shines: Array = []
 
 var selected_shine_index: int = -1
@@ -48,19 +48,7 @@ func _ready():
 		shine_details.append(level_metadata.collectible_data.get_mission_by_uuid(mission))
 	
 	var shine_index: int = 0
-	var collected_shines = []
-	var final_select_shine: bool = false
-	for shine in shine_details:
-		shine = shine as MissionData
-		var shine_id: String = shine["mission_uuid"]
-		var is_collected = CurrentLevelData.save_data.is_mission_complete(shine_id)
-		if !is_collected && !final_select_shine && !shine_id in scrollable_shines:
-			scrollable_shines.append(shine_id)
-			final_select_shine = true
-		if is_collected:
-			scrollable_shines.append(shine_id)
-	
-	
+	var found_uncollected: bool = false
 	for i in range(shine_details.size()):
 		var end: bool = false
 		
@@ -69,12 +57,6 @@ func _ready():
 			continue
 		if !shine_details[i]["mission_show_in_menu"]:
 			continue
-		if CurrentLevelData.shine_progression:
-			if !is_collected && find_last_collected_shine() == i - 1:
-				if scrollable_shines[0] + scrollable_shines.back() == scrollable_shines.size() - 1:
-					end = true
-				else:
-					break
 
 		used_shine_ids.append(shine_details[i]["mission_uuid"])
 
@@ -82,6 +64,16 @@ func _ready():
 		shine_sprites.append(shine_sprite)
 		shine_details_indices.append(i)
 		add_child(shine_sprite)
+		
+		if CurrentLevelData.level_metadata.collectible_data.linear_progression:
+			if !is_collected:
+				if found_uncollected:
+					shine_sprite.make_disabled()
+				found_uncollected = true
+		
+		if not shine_sprite.disabled:
+			var uuid: String = shine_details[i]["mission_uuid"]
+			scrollable_shines.append([uuid, i])
 		
 		# make non-kickout shines turn the other way
 		if "shine_force_leave" in shine_details[i]:
@@ -123,20 +115,8 @@ func _input(event):
 	if shine_focus.get_focus_owner() != shine_focus: return
 	
 	if Input.is_action_just_pressed("ui_right"):
-		if CurrentLevelData.shine_progression:
-			if scrollable_shines.size() > 1:
-				var scrollable_index: int = scrollable_shines.find(selected_shine_index)
-				var scroll_amount = scrollable_shines[scrollable_index + 1] - scrollable_shines[scrollable_index] if scrollable_index + 1 < scrollable_shines.size() else 1
-				attempt_increment_selected_shine_index(scroll_amount if scroll_amount != 0 else 1)
-			return
 		attempt_increment_selected_shine_index(1)
 	elif Input.is_action_just_pressed("ui_left"):
-		if CurrentLevelData.shine_progression:
-			if scrollable_shines.size() > 1:
-				var scrollable_index: int = scrollable_shines.find(selected_shine_index)
-				var scroll_amount = scrollable_shines[scrollable_index - 1] - scrollable_shines[scrollable_index]
-				attempt_increment_selected_shine_index(scroll_amount if selected_shine_index != 0 else 0)
-			return
 		attempt_increment_selected_shine_index(-1)
 	elif Input.is_action_just_pressed("ui_accept"):
 		get_parent().start_level()
@@ -149,9 +129,17 @@ func attempt_increment_selected_shine_index(increment : int) -> void:
 	if !can_interact:
 		return
 	
+	var scrollable_index: int
+	for scrollable in scrollable_shines:
+		if scrollable[1] == selected_shine_index:
+			break 
+		scrollable_index += 1
+	var target_index: int = clamp(scrollable_index + increment, 0, scrollable_shines.size() - 1)
+	var real_index: int = scrollable_shines[target_index][1]
+	
 	var previous_selected_shine_index = selected_shine_index
 	# warning-ignore:narrowing_conversion
-	selected_shine_index = clamp(selected_shine_index + increment, 0, shine_sprites.size() - 1 if !CurrentLevelData.shine_progression else scrollable_shines.back())
+	selected_shine_index = real_index
 	# no point in doing anything if the value didn't actually change
 	if selected_shine_index == previous_selected_shine_index:
 		return
@@ -210,10 +198,3 @@ func update_labels() -> void:
 		"[/center]"
 	)
 
-func find_last_collected_shine() -> int:
-	var collected_shines = []
-	var shine_index = -1
-	for shine in collected_shines:
-		if collected_shines[shine]:
-			shine_index = shine
-	return int(shine_index)

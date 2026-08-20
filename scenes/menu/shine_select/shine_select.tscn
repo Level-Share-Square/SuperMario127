@@ -541,12 +541,12 @@ show_behind_parent = true
 position = Vector2( 2, 3 )
 z_index = -1
 frames = ExtResource( 26 )
-animation = "jumpRight"
+animation = "idleRight"
 script = ExtResource( 27 )
 
 [node name="Fludd" type="AnimatedSprite" parent="VBoxContainer/BottomBar/HBoxContainer/MarginContainer/VBoxContainer/CenterContainer/Control/PlayerSprite"]
 frames = ExtResource( 28 )
-animation = "jumpRight"
+animation = "idleRight"
 script = ExtResource( 27 )
 
 [node name="Shadow" type="AnimatedSprite" parent="VBoxContainer/BottomBar/HBoxContainer/MarginContainer/VBoxContainer/CenterContainer/Control/PlayerSprite/Fludd"]
@@ -555,7 +555,7 @@ show_behind_parent = true
 position = Vector2( 2, 3 )
 z_index = -1
 frames = ExtResource( 28 )
-animation = "jumpRight"
+animation = "idleRight"
 script = ExtResource( 27 )
 
 [node name="PlayerAnimPlayer" type="AnimationPlayer" parent="VBoxContainer/BottomBar/HBoxContainer/MarginContainer/VBoxContainer/CenterContainer/Control"]
