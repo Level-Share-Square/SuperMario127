@@ -111,7 +111,7 @@ func animation_finished(_animation_name: String):
 	Singleton.SceneSwitcher.force_start_level()
 
 func select_nozzle(nozzle: String):
-	if nozzle != CurrentLevelData.starting_nozzle:
+	if nozzle != "" and nozzle != CurrentLevelData.starting_nozzle:
 		nozzle_switch_sound.play()
 	CurrentLevelData.starting_nozzle = nozzle
 	update_character()
