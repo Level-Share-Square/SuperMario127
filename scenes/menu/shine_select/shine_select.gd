@@ -16,6 +16,7 @@ onready var shine_parent: Node2D = $ShineParent
 onready var anim_player: AnimationPlayer = $AnimationPlayer
 onready var backgrounds: Node2D = $Backgrounds
 
+onready var nozzle_switch_sound = $"%NozzleSwitchSound"
 onready var mission_select_sfx: AudioStreamPlayer = $Sounds/MissionSelect
 onready var transition_audio: AudioStreamPlayer = $Sounds/TransitionAudio
 onready var letsa_go_sfx: Node = $Sounds/LetsaGo
@@ -52,15 +53,18 @@ func _ready():
 	var fludd_index: int = 0
 	for fludd in fludds.get_children():
 		if fludd.name == "Empty":
+			fludd.connect("pressed", self, "select_nozzle", [""])
 			continue
 		
-		if not fludd.name in CurrentLevelData.level_metadata.collectible_data:
+		if not fludd.name in CurrentLevelData.level_metadata.collectible_data.persistent_nozzles:
 			fludd.disabled = true
 			fludd.get_node("Nozzle").modulate.a = 0.5
 			fludd.get_node("Corruption").show()
 		elif not CurrentLevelData.save_data._activated_fludds[fludd_index]:
 			fludd.disabled = true
 			fludd.get_node("Nozzle").modulate.a = 0.5
+		else:
+			fludd.connect("pressed", self, "select_nozzle", [fludd.name])
 		
 		fludd_index += 1
 	
@@ -106,8 +110,11 @@ func start_level():
 func animation_finished(_animation_name: String):
 	Singleton.SceneSwitcher.force_start_level()
 
-#func _on_fludd_pressed(fludd: String):
-#	level_info.chosen_fludd = fludd
+func select_nozzle(nozzle: String):
+	if nozzle != CurrentLevelData.starting_nozzle:
+		nozzle_switch_sound.play()
+	CurrentLevelData.starting_nozzle = nozzle
+	update_character()
 
 func update_character() -> void:
 	var palette_material: ShaderMaterial = preload("res://scenes/actors/mario/materials/palette_swap.tres").duplicate()
@@ -120,4 +127,12 @@ func update_character() -> void:
 	player_sprite.material = palette_material
 	player_sprite.frames = MARIO_FRAMES if cur_char == 0 else LUIGI_FRAMES
 	player_shadow.frames = MARIO_FRAMES if cur_char == 0 else LUIGI_FRAMES
-	player_fludd.hide()
+	
+	if CurrentLevelData.starting_nozzle == "":
+		player_fludd.hide()
+	else:
+		var char_name: String = "MARIO" if cur_char == 0 else "LUIGI"
+		var nozzle_name: String = CurrentLevelData.starting_nozzle.replace("Nozzle", "").to_upper()
+		player_fludd.frames = self["%s_%s_FRAMES" % [char_name, nozzle_name]]
+		player_fludd.show()
+		player_fludd_shadow.frames = player_fludd.frames

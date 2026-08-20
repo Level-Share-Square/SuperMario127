@@ -70,7 +70,7 @@ static func serialize_collectible_data(collectible_data: CollectibleData) -> Str
 
 	code += serialize_data_array([collectible_data.used_mission_data.keys(), collectible_data.used_mission_data.values()])
 	code += serialize_data_array([collectible_data.linear_progression])
-	code += serialize_data_array([collectible_data.persistent_nozzles])
+	code += serialize_data_array(collectible_data.persistent_nozzles)
 	
 	return wrap_code_in_brackets(code)
 

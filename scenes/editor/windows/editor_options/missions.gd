@@ -15,12 +15,15 @@ onready var erase = $"%Erase"
 onready var mission_container = $"%MissionContainer"
 onready var globals_container = $"%GlobalsContainer"
 onready var linear_progression = $"%LinearProgression"
+onready var persistent_nozzles = $"%PersistentNozzles"
 
 onready var editor: Editor = get_tree().current_scene
 
 var mission_data: Array
 var selected_mission: MissionData
 var collectible_data: CollectibleData
+
+signal collectible_data_changed(key, new_value)
 
 func _ready():
 	yield(editor, "ready")
@@ -40,6 +43,14 @@ func _ready():
 		PropertyInfo.new(linear_progression.hint_tooltip)
 	])
 	connect_global_signals(linear_progression)
+	
+	var nozzle_array := PoolStringArray(collectible_data["persistent_nozzles"])
+	persistent_nozzles.load_property(persistent_nozzles, nozzle_array, [
+		"persistent_nozzles",
+		[self, "get_nozzle_args"],
+		PropertyInfo.new(persistent_nozzles.hint_tooltip)
+	])
+	connect_global_signals(persistent_nozzles)
 	
 	globals.connect("pressed", self, "on_globals_pressed")
 	new_mission.connect("pressed", self, "on_new_mission_pressed")
@@ -117,9 +128,12 @@ func change_property(key: String, value, check_matches, save_to_data):
 func connect_global_signals(property_editor: PropertyEditor):
 	if !property_editor.is_connected("property_edited", self, "change_global_property"):
 		property_editor.connect("property_edited", self, "change_global_property")
+	if !is_connected("collectible_data_changed", property_editor, "property_changed"):
+		connect("collectible_data_changed", property_editor, "property_changed")
 
 func change_global_property(key: String, value, check_matches, save_to_data):
 	collectible_data[key] = value
+	emit_signal("collectible_data_changed", key, value)
 
 func refresh_buttons():
 	for child in mission_button_container.get_children():
@@ -156,3 +170,11 @@ func erase_mission():
 func on_globals_pressed():
 	mission_container.hide()
 	globals_container.show()
+
+func get_nozzle_args() -> Dictionary:
+	var args: Dictionary = {
+		"HoverNozzle": "Hover",
+		"RocketNozzle": "Rocket",
+		"TurboNozzle": "Turbo"
+	}
+	return args

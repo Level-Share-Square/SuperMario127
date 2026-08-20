@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://scenes/editor/buttons/tab_changed_sound.gd" type="Script" id=1]
 [ext_resource path="res://scenes/menu/line_edit_unfocus.gd" type="Script" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://scenes/editor/windows/big_text/big_text.tscn" type="PackedScene" id=11]
 [ext_resource path="res://scenes/editor/windows/object_property_editor/misc_property_scenes/int/base.tscn" type="PackedScene" id=12]
 [ext_resource path="res://scenes/editor/windows/editor_options/areas.gd" type="Script" id=13]
+[ext_resource path="res://scenes/editor/windows/object_property_editor/misc_property_scenes/multiselect/base.tscn" type="PackedScene" id=14]
 [ext_resource path="res://scenes/editor/windows/editor_options/level.gd" type="Script" id=15]
 [ext_resource path="res://scenes/editor/windows/object_property_editor/misc_property_scenes/bool/base.tscn" type="PackedScene" id=21]
 [ext_resource path="res://scenes/editor/windows/object_property_editor/misc_property_scenes/String/base.tscn" type="PackedScene" id=22]
@@ -301,6 +302,10 @@ margin_top = 0.0
 margin_right = 252.0
 margin_bottom = 17.0
 hint_tooltip = "Forces the player to do the missions in order."
+
+[node name="PersistentNozzles" parent="ContentDivider/ContentMat/Tabs/Missions/GlobalsContainer/VBoxContainer" index="1" instance=ExtResource( 14 )]
+unique_name_in_owner = true
+none_is_all = false
 
 [node name="MissionContainer" type="ScrollContainer" parent="ContentDivider/ContentMat/Tabs/Missions" index="3"]
 unique_name_in_owner = true

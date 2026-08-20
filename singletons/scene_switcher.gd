@@ -119,6 +119,7 @@ func start_level(level_metadata: LevelMetadata, level_id: String, working_folder
 		if mission["mission_show_in_menu"]:
 			total_shine_count += 1
 	
+	CurrentLevelData.starting_nozzle = ""
 	CurrentLevelData.is_new_area = true
 	
 	# If there is more than 1, go to shine select screen

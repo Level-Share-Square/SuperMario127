@@ -348,13 +348,6 @@ func _ready():
 	Singleton.Music.toggle_underwater_music(false)
 	for input in input_names.keys():
 		inputs.append([false, false, str(input)])
-#	var level_info: LevelInfo = CurrentLevelData.level_info
-#	var fludd_array: Array = ["HoverNozzle", "RocketNozzle", "TurboNozzle"]
-#	for fludd_index in level_info.activated_fludds.size():
-#		if level_info.activated_fludds[fludd_index]:
-#			add_nozzle(fludd_array[fludd_index])
-#	if level_info.chosen_fludd != "null":
-#		set_nozzle(CurrentLevelData.level_info.chosen_fludd)
 
 func _update_player_framerate():
 	fps_util._update_framerate(false)
@@ -469,6 +462,18 @@ func load_in():
 	sprite.playing = true
 	collected_shine.visible = false
 	collected_shine.get_node("ShineParticles").emitting = false
+	
+	# fludd persistence
+	var fludd_array: Array = ["HoverNozzle", "RocketNozzle", "TurboNozzle"]
+	for fludd_index in CurrentLevelData.save_data._activated_fludds.size():
+		if (
+			fludd_array[fludd_index] in CurrentLevelData.level_metadata.collectible_data.persistent_nozzles
+			and CurrentLevelData.save_data._activated_fludds[fludd_index]
+		):
+			add_nozzle(fludd_array[fludd_index])
+	
+	if CurrentLevelData.starting_nozzle != "":
+		set_nozzle(CurrentLevelData.starting_nozzle)
 	
 	# the ghost of player 2 shall not haunt my teleporter code,,,
 	if player_id != 0 or not "mode" in get_tree().get_current_scene():

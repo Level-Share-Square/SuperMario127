@@ -1,11 +1,14 @@
 extends PropertyEditor
 
 
-const EXPAND_NONE: String = "> All"
+const EXPAND_NONE: String = "> None"
 const EXPAND_SOME: String = "> Some"
+const EXPAND_ALL: String = "> All"
 
 onready var options = $"%Options"
 onready var expand_button = $"%ExpandButton"
+
+export var none_is_all: bool = true
 
 var lookup_table: Dictionary
 var stored_property: PoolStringArray
@@ -13,10 +16,22 @@ var dropdown_args: Array
 
 func property_changed(key: String, new_value):
 	if key != property[0]: return
-	expand_button.text = EXPAND_NONE if new_value.empty() else EXPAND_SOME
+	
+	if new_value.empty():
+		expand_button.text = EXPAND_ALL if none_is_all else EXPAND_NONE
+	elif new_value.size() == lookup_table.size():
+		expand_button.text = EXPAND_ALL
+	else:
+		expand_button.text = EXPAND_SOME
+	
 	if expand_button.toggled:
 		expand_button.text = expand_button.text.replace(">", "V")
+	
 	stored_property = new_value
+	for index in range(new_value.size()):
+		if not new_value[index] in lookup_table.keys():
+			stored_property.remove(index)
+
 	reload_lookup_table()
 
 func load_property(_editor: Editor, init_value, _property: Array, property_name = null):

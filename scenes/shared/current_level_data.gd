@@ -38,6 +38,8 @@ var current_area: AreaData
 var current_mission_id: String = ""
 var current_mission: MissionData
 
+var starting_nozzle: String = ""
+
 var enemies_instanced: int = 0
 
 var vars: LevelVars = LevelVars.new()
