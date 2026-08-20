@@ -49,12 +49,20 @@ func back():
 
 
 func _ready():
-#	for fludd in fludds.get_children():
-#		if CurrentLevelData..activated_fludds[fludd.get_index()]:
-#			fludd.visible = true
-#			fludd.connect("pressed", self, "_on_fludd_pressed", [fludd.name])
-#		else:
-#			fludd.visible = false
+	var fludd_index: int = 0
+	for fludd in fludds.get_children():
+		if fludd.name == "Empty":
+			continue
+		
+		if not fludd.name in CurrentLevelData.level_metadata.collectible_data:
+			fludd.disabled = true
+			fludd.get_node("Nozzle").modulate.a = 0.5
+			fludd.get_node("Corruption").show()
+		elif not CurrentLevelData.save_data._activated_fludds[fludd_index]:
+			fludd.disabled = true
+			fludd.get_node("Nozzle").modulate.a = 0.5
+		
+		fludd_index += 1
 	
 	update_character()
 	get_tree().paused = false
@@ -75,8 +83,7 @@ func start_level():
 	CurrentLevelData.level_transition_data = {
 		"target_area": mission_data.spawn_area_id,
 		"target_tag": mission_data.spawn_teleporter_tag
-	} 
-#	print(CurrentLevelData.current_area)
+	}
 	
 	if not shine_parent.can_interact: return
 	shine_parent.can_interact = false

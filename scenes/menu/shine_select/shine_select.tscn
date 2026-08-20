@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=2]
+[gd_scene load_steps=63 format=2]
 
 [ext_resource path="res://scenes/menu/theme.tres" type="Theme" id=1]
 [ext_resource path="res://assets/fonts/New Super Mario Font U.ttf" type="DynamicFontData" id=2]
@@ -19,6 +19,7 @@
 [ext_resource path="res://scenes/menu/shine_select/shine_parent.gd" type="Script" id=17]
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=18]
 [ext_resource path="res://scenes/menu/ui_focus.gd" type="Script" id=19]
+[ext_resource path="res://shaders/rounded_corners.gdshader" type="Shader" id=20]
 [ext_resource path="res://assets/icons/quit.png" type="Texture" id=22]
 [ext_resource path="res://scenes/menu/button_scripts/icon_helper.gd" type="Script" id=23]
 [ext_resource path="res://scenes/menu/shine_select/nozzle_graphic.tscn" type="PackedScene" id=24]
@@ -187,6 +188,89 @@ fill_to = Vector2( 0, 1 )
 [sub_resource type="StyleBoxTexture" id=37]
 texture = SubResource( 36 )
 region_rect = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="ShaderMaterial" id=59]
+shader = ExtResource( 20 )
+shader_param/radius_scale = 0.5
+shader_param/rounded_corner_top_left = true
+shader_param/rounded_corner_top_right = true
+shader_param/rounded_corner_bottom_left = true
+shader_param/rounded_corner_bottom_right = true
+shader_param/width = 1.0
+shader_param/height = 1.0
+
+[sub_resource type="Gradient" id=57]
+offsets = PoolRealArray( 0, 0.323529, 0.536765, 0.580882, 0.830882 )
+colors = PoolColorArray( 1, 0, 0, 0, 0.783698, 0, 0, 0.284179, 0.313477, 0, 0, 0.901961, 1, 0, 0, 0.737255, 0, 0, 0, 1 )
+
+[sub_resource type="GradientTexture2D" id=58]
+gradient = SubResource( 57 )
+fill = 1
+fill_from = Vector2( 0.5, 0.5 )
+fill_to = Vector2( 0, 0 )
+
+[sub_resource type="Shader" id=54]
+code = "/*
+	Glitch Effect Shader by Yui Kinomoto @arlez80
+
+	MIT License
+*/
+
+shader_type canvas_item;
+
+// 振動の強さ
+uniform float shake_power = 0.03;
+// 振動率
+uniform float shake_rate : hint_range( 0.0, 1.0 ) = 0.2;
+// 振動速度
+uniform float shake_speed = 5.0;
+// 振動ブロックサイズ
+uniform float shake_block_size = 30.5;
+// 色の分離率
+uniform float shake_color_rate : hint_range( 0.0, 1.0 ) = 0.01;
+
+float random( float seed )
+{
+	return fract( 543.2543 * sin( dot( vec2( seed, seed ), vec2( 3525.46, -54.3415 ) ) ) );
+}
+
+void fragment( )
+{
+	float enable_shift = float(
+		random( trunc( TIME * shake_speed ) )
+	<	shake_rate
+	);
+
+	vec2 fixed_uv = SCREEN_UV;
+	fixed_uv.x += (
+		random(
+			( trunc( SCREEN_UV.y * shake_block_size ) / shake_block_size )
+		+	TIME
+		) - 0.5
+	) * shake_power * enable_shift;
+
+	vec4 pixel_color = textureLod( SCREEN_TEXTURE, fixed_uv, 0.0 );
+	pixel_color.r = mix(
+		pixel_color.r
+	,	textureLod( SCREEN_TEXTURE, fixed_uv + vec2( shake_color_rate, 0.0 ), 0.0 ).r
+	,	enable_shift
+	);
+	pixel_color.b = mix(
+		pixel_color.b
+	,	textureLod( SCREEN_TEXTURE, fixed_uv + vec2( -shake_color_rate, 0.0 ), 0.0 ).b
+	,	enable_shift
+	);
+	COLOR = pixel_color;
+}
+"
+
+[sub_resource type="ShaderMaterial" id=55]
+shader = SubResource( 54 )
+shader_param/shake_power = 0.003
+shader_param/shake_rate = 0.086
+shader_param/shake_speed = 5.0
+shader_param/shake_block_size = 45.0
+shader_param/shake_color_rate = 0.002
 
 [sub_resource type="Gradient" id=52]
 colors = PoolColorArray( 1, 0, 0, 1, 0.509804, 0, 0.313726, 1 )
@@ -575,6 +659,8 @@ margin_right = 70.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 70, 0 )
 rect_pivot_offset = Vector2( 35, 16 )
+focus_neighbour_top = NodePath("../../../../../PanelContainer/ShineFocus")
+focus_neighbour_right = NodePath("../../../MarginContainer3/FLUDD/Empty")
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme_type_variation = "Red"
@@ -663,59 +749,158 @@ custom_constants/vseparation = 16
 custom_constants/hseparation = 8
 columns = 2
 
-[node name="ButtonEmpty" type="Button" parent="VBoxContainer/BottomBar/HBoxContainer/MarginContainer3/FLUDD"]
+[node name="Empty" type="Button" parent="VBoxContainer/BottomBar/HBoxContainer/MarginContainer3/FLUDD"]
 margin_right = 36.0
 margin_bottom = 36.0
 rect_min_size = Vector2( 36, 36 )
 rect_pivot_offset = Vector2( 18, 18 )
+focus_neighbour_left = NodePath("../../../MarginContainer/VBoxContainer/Back")
+focus_neighbour_top = NodePath("../../../../../PanelContainer/ShineFocus")
+focus_neighbour_right = NodePath("../HoverNozzle")
+focus_neighbour_bottom = NodePath("../RocketNozzle")
 flat = true
 script = ExtResource( 29 )
 target_scale = Vector2( 1.05, 1.05 )
 
-[node name="Nozzle" parent="VBoxContainer/BottomBar/HBoxContainer/MarginContainer3/FLUDD/ButtonEmpty" instance=ExtResource( 24 )]
+[node name="Nozzle" parent="VBoxContainer/BottomBar/HBoxContainer/MarginContainer3/FLUDD/Empty" instance=ExtResource( 24 )]
 
-[node name="ButtonHover" type="Button" parent="VBoxContainer/BottomBar/HBoxContainer/MarginContainer3/FLUDD"]
+[node name="HoverNozzle" type="Button" parent="VBoxContainer/BottomBar/HBoxContainer/MarginContainer3/FLUDD"]
 margin_left = 44.0
 margin_right = 80.0
 margin_bottom = 36.0
 rect_min_size = Vector2( 36, 36 )
 rect_pivot_offset = Vector2( 18, 18 )
+focus_neighbour_left = NodePath("../Empty")
+focus_neighbour_top = NodePath("../../../../../PanelContainer/ShineFocus")
+focus_neighbour_bottom = NodePath("../TurboNozzle")
 flat = true
 script = ExtResource( 29 )
 target_scale = Vector2( 1.05, 1.05 )
 
-[node name="Nozzle" parent="VBoxContainer/BottomBar/HBoxContainer/MarginContainer3/FLUDD/ButtonHover" instance=ExtResource( 24 )]
+[node name="Nozzle" parent="VBoxContainer/BottomBar/HBoxContainer/MarginContainer3/FLUDD/HoverNozzle" instance=ExtResource( 24 )]
 custom_styles/panel = SubResource( 37 )
 box_type = 1
 
-[node name="ButtonRocket" type="Button" parent="VBoxContainer/BottomBar/HBoxContainer/MarginContainer3/FLUDD"]
+[node name="Corruption" type="MarginContainer" parent="VBoxContainer/BottomBar/HBoxContainer/MarginContainer3/FLUDD/HoverNozzle"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_rotation = 5.0
+rect_pivot_offset = Vector2( 18, 18 )
+custom_constants/margin_right = 0
+custom_constants/margin_top = 0
+custom_constants/margin_left = 0
+custom_constants/margin_bottom = 0
+
+[node name="Magic" type="TextureRect" parent="VBoxContainer/BottomBar/HBoxContainer/MarginContainer3/FLUDD/HoverNozzle/Corruption"]
+material = SubResource( 59 )
+margin_right = 36.0
+margin_bottom = 36.0
+rect_pivot_offset = Vector2( 22, 22 )
+texture = SubResource( 58 )
+expand = true
+
+[node name="BackBufferCopy" type="BackBufferCopy" parent="VBoxContainer/BottomBar/HBoxContainer/MarginContainer3/FLUDD/HoverNozzle/Corruption"]
+position = Vector2( -4, -56 )
+copy_mode = 2
+
+[node name="Corruption" type="ColorRect" parent="VBoxContainer/BottomBar/HBoxContainer/MarginContainer3/FLUDD/HoverNozzle/Corruption"]
+material = SubResource( 55 )
+margin_right = 36.0
+margin_bottom = 36.0
+rect_pivot_offset = Vector2( 16, 16 )
+
+[node name="RocketNozzle" type="Button" parent="VBoxContainer/BottomBar/HBoxContainer/MarginContainer3/FLUDD"]
 margin_top = 52.0
 margin_right = 36.0
 margin_bottom = 88.0
 rect_min_size = Vector2( 36, 36 )
 rect_pivot_offset = Vector2( 18, 18 )
+focus_neighbour_left = NodePath("../../../MarginContainer/VBoxContainer/Back")
+focus_neighbour_top = NodePath("../Empty")
+focus_neighbour_right = NodePath("../TurboNozzle")
 flat = true
 script = ExtResource( 29 )
 target_scale = Vector2( 1.05, 1.05 )
 
-[node name="Nozzle" parent="VBoxContainer/BottomBar/HBoxContainer/MarginContainer3/FLUDD/ButtonRocket" instance=ExtResource( 24 )]
+[node name="Nozzle" parent="VBoxContainer/BottomBar/HBoxContainer/MarginContainer3/FLUDD/RocketNozzle" instance=ExtResource( 24 )]
 custom_styles/panel = SubResource( 39 )
 box_type = 2
 
-[node name="ButtonTurbo" type="Button" parent="VBoxContainer/BottomBar/HBoxContainer/MarginContainer3/FLUDD"]
+[node name="Corruption" type="MarginContainer" parent="VBoxContainer/BottomBar/HBoxContainer/MarginContainer3/FLUDD/RocketNozzle"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_rotation = 5.0
+rect_pivot_offset = Vector2( 18, 18 )
+custom_constants/margin_right = 0
+custom_constants/margin_top = 0
+custom_constants/margin_left = 0
+custom_constants/margin_bottom = 0
+
+[node name="Magic" type="TextureRect" parent="VBoxContainer/BottomBar/HBoxContainer/MarginContainer3/FLUDD/RocketNozzle/Corruption"]
+material = SubResource( 59 )
+margin_right = 36.0
+margin_bottom = 36.0
+rect_pivot_offset = Vector2( 22, 22 )
+texture = SubResource( 58 )
+expand = true
+
+[node name="BackBufferCopy" type="BackBufferCopy" parent="VBoxContainer/BottomBar/HBoxContainer/MarginContainer3/FLUDD/RocketNozzle/Corruption"]
+position = Vector2( -4, -56 )
+copy_mode = 2
+
+[node name="Corruption" type="ColorRect" parent="VBoxContainer/BottomBar/HBoxContainer/MarginContainer3/FLUDD/RocketNozzle/Corruption"]
+material = SubResource( 55 )
+margin_right = 36.0
+margin_bottom = 36.0
+rect_pivot_offset = Vector2( 16, 16 )
+
+[node name="TurboNozzle" type="Button" parent="VBoxContainer/BottomBar/HBoxContainer/MarginContainer3/FLUDD"]
 margin_left = 44.0
 margin_top = 52.0
 margin_right = 80.0
 margin_bottom = 88.0
 rect_min_size = Vector2( 36, 36 )
 rect_pivot_offset = Vector2( 18, 18 )
+focus_neighbour_left = NodePath("../RocketNozzle")
+focus_neighbour_top = NodePath("../HoverNozzle")
 flat = true
 script = ExtResource( 29 )
 target_scale = Vector2( 1.05, 1.05 )
 
-[node name="Nozzle" parent="VBoxContainer/BottomBar/HBoxContainer/MarginContainer3/FLUDD/ButtonTurbo" instance=ExtResource( 24 )]
+[node name="Nozzle" parent="VBoxContainer/BottomBar/HBoxContainer/MarginContainer3/FLUDD/TurboNozzle" instance=ExtResource( 24 )]
 custom_styles/panel = SubResource( 45 )
 box_type = 3
+
+[node name="Corruption" type="MarginContainer" parent="VBoxContainer/BottomBar/HBoxContainer/MarginContainer3/FLUDD/TurboNozzle"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_rotation = 5.0
+rect_pivot_offset = Vector2( 18, 18 )
+custom_constants/margin_right = 0
+custom_constants/margin_top = 0
+custom_constants/margin_left = 0
+custom_constants/margin_bottom = 0
+
+[node name="Magic" type="TextureRect" parent="VBoxContainer/BottomBar/HBoxContainer/MarginContainer3/FLUDD/TurboNozzle/Corruption"]
+material = SubResource( 59 )
+margin_right = 36.0
+margin_bottom = 36.0
+rect_pivot_offset = Vector2( 22, 22 )
+texture = SubResource( 58 )
+expand = true
+
+[node name="BackBufferCopy" type="BackBufferCopy" parent="VBoxContainer/BottomBar/HBoxContainer/MarginContainer3/FLUDD/TurboNozzle/Corruption"]
+position = Vector2( -4, -56 )
+copy_mode = 2
+
+[node name="Corruption" type="ColorRect" parent="VBoxContainer/BottomBar/HBoxContainer/MarginContainer3/FLUDD/TurboNozzle/Corruption"]
+material = SubResource( 55 )
+margin_right = 36.0
+margin_bottom = 36.0
+rect_pivot_offset = Vector2( 16, 16 )
 
 [node name="ShineParent" type="Node2D" parent="."]
 position = Vector2( 384, 216 )
@@ -727,6 +912,7 @@ anims/transition = SubResource( 14 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
+[connection signal="back_press" from="Focus" to="." method="back"]
 [connection signal="ready" from="Focus" to="Focus" method="focus_node" flags=3]
 [connection signal="pressed" from="VBoxContainer/PanelContainer/Buttons/ButtonMoveLeft" to="ShineParent" method="attempt_increment_selected_shine_index" binds= [ -1 ]]
 [connection signal="pressed" from="VBoxContainer/PanelContainer/Buttons/ButtonSelectShine" to="." method="start_level"]
@@ -734,7 +920,7 @@ anims/transition = SubResource( 14 )
 [connection signal="focus_entered" from="VBoxContainer/PanelContainer/ShineFocus" to="ShineParent" method="move_shine_sprites" flags=3]
 [connection signal="focus_exited" from="VBoxContainer/PanelContainer/ShineFocus" to="ShineParent" method="move_shine_sprites" flags=3]
 [connection signal="pressed" from="VBoxContainer/BottomBar/HBoxContainer/MarginContainer/VBoxContainer/Back" to="." method="back"]
-[connection signal="pressed" from="VBoxContainer/BottomBar/HBoxContainer/MarginContainer3/FLUDD/ButtonEmpty" to="VBoxContainer/BottomBar/HBoxContainer/MarginContainer3/FLUDD/ButtonEmpty/Nozzle" method="animate"]
-[connection signal="pressed" from="VBoxContainer/BottomBar/HBoxContainer/MarginContainer3/FLUDD/ButtonHover" to="VBoxContainer/BottomBar/HBoxContainer/MarginContainer3/FLUDD/ButtonHover/Nozzle" method="animate"]
-[connection signal="pressed" from="VBoxContainer/BottomBar/HBoxContainer/MarginContainer3/FLUDD/ButtonRocket" to="VBoxContainer/BottomBar/HBoxContainer/MarginContainer3/FLUDD/ButtonRocket/Nozzle" method="animate"]
-[connection signal="pressed" from="VBoxContainer/BottomBar/HBoxContainer/MarginContainer3/FLUDD/ButtonTurbo" to="VBoxContainer/BottomBar/HBoxContainer/MarginContainer3/FLUDD/ButtonTurbo/Nozzle" method="animate"]
+[connection signal="pressed" from="VBoxContainer/BottomBar/HBoxContainer/MarginContainer3/FLUDD/Empty" to="VBoxContainer/BottomBar/HBoxContainer/MarginContainer3/FLUDD/Empty/Nozzle" method="animate"]
+[connection signal="pressed" from="VBoxContainer/BottomBar/HBoxContainer/MarginContainer3/FLUDD/HoverNozzle" to="VBoxContainer/BottomBar/HBoxContainer/MarginContainer3/FLUDD/HoverNozzle/Nozzle" method="animate"]
+[connection signal="pressed" from="VBoxContainer/BottomBar/HBoxContainer/MarginContainer3/FLUDD/RocketNozzle" to="VBoxContainer/BottomBar/HBoxContainer/MarginContainer3/FLUDD/RocketNozzle/Nozzle" method="animate"]
+[connection signal="pressed" from="VBoxContainer/BottomBar/HBoxContainer/MarginContainer3/FLUDD/TurboNozzle" to="VBoxContainer/BottomBar/HBoxContainer/MarginContainer3/FLUDD/TurboNozzle/Nozzle" method="animate"]

@@ -81,8 +81,8 @@ func toggle_switch_state(var channel : int):
 
 
 func activate_fludd(var type : int):
-#	if not Singleton.ModeSwitcher.visible:
-#		CurrentLevelData.level_info.set_fludd_activated(type, CurrentLevelData.selected_file > -2)
+	if not Singleton.ModeSwitcher.visible:
+		CurrentLevelData.save_data.set_fludd_activated(type, CurrentLevelData.selected_file > -2)
 	match(type):
 		0:
 			emit_signal("hover_fludd_activated")

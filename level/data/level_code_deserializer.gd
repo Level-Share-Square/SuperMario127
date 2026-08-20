@@ -221,7 +221,10 @@ static func deserialize_collectible_data_code(code: String) -> CollectibleData:
 	var linear_progression: bool = false
 	if components.size() > 4:
 		linear_progression = deserialize_datas_code(components[4])[0]
-	return CollectibleData.new(mission_data, star_coin_data, red_coin_count, used_mission_data, linear_progression)
+	var persistent_nozzles: Array = []
+	if components.size() > 5:
+		persistent_nozzles = deserialize_datas_code(components[5])
+	return CollectibleData.new(mission_data, star_coin_data, red_coin_count, used_mission_data, linear_progression, persistent_nozzles)
 
 
 static func deserialize_mission_datas_code(code: String) -> Array:

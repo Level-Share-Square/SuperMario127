@@ -71,11 +71,9 @@ func enter_detector(body):
 		sprite.visible = false
 		sound.play()
 		
-
-		
 		# activates all deactivated hover fludds loaded in the level
 		CurrentLevelData.vars.activate_fludd(0)
-		
+
 func _on_fludd_activated():
 	sprite.modulate.a = 1
 	loaded_activated = true

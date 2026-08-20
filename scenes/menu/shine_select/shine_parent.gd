@@ -120,8 +120,6 @@ func _input(event):
 		attempt_increment_selected_shine_index(-1)
 	elif Input.is_action_just_pressed("ui_accept"):
 		get_parent().start_level()
-	elif Input.is_action_just_pressed("ui_cancel"):
-		get_parent().back()
 
 
 # this will try to change the selected shine, but won't if you're already at the first or last shine

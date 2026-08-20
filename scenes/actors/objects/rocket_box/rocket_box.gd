@@ -75,7 +75,7 @@ func enter_detector(body):
 		
 		# activates all deactivated rocket turbo loaded in the level
 		CurrentLevelData.vars.activate_fludd(2)
-		
+
 func _on_fludd_activated():
 	sprite.modulate.a = 1
 	loaded_activated = true

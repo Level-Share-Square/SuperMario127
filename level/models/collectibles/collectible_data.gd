@@ -10,6 +10,12 @@ var star_coin_data: Array
 var used_mission_data: Dictionary
 # Whether mission progression is linear or open
 var linear_progression: bool = false
+# A list of nozzles that can be saved between playthroughs
+var persistent_nozzles: Array = [
+	"HoverNozzle",
+	"RocketNozzle",
+	"TurboNozzle"
+]
 
 var red_coin_count: int = 0
 
@@ -19,13 +25,15 @@ func _init(
 	s_star_coin_data: Array = [], 
 	s_red_coin_count: int = 0, 
 	s_used_mission_data: Dictionary = {}, 
-	s_linear_progression: bool = false
+	s_linear_progression: bool = false,
+	s_persistent_nozzles: Array = persistent_nozzles
 ) -> void:
 	mission_data = s_mission_data
 	star_coin_data = s_star_coin_data
 	red_coin_count = s_red_coin_count
 	used_mission_data = s_used_mission_data
 	linear_progression = s_linear_progression
+	persistent_nozzles = s_persistent_nozzles
 
 
 func get_shine_count() -> int:
