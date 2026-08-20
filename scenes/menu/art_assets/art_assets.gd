@@ -8,6 +8,8 @@ onready var discord_banner = $"%DiscordBanner"
 onready var discord_invite = $"%DiscordInvite"
 onready var youtube_banner = $"%YoutubeBanner"
 onready var bluesky_banner = $"%BlueskyBanner"
+onready var itch_profile_banner = $"%ItchProfileBanner"
+onready var itch_profile_bg = $"%ItchProfileBG"
 onready var splash_screen = $"%SplashScreen"
 onready var icon = $"%Icon"
 onready var twitter_icon = $"%TwitterIcon"
@@ -49,6 +51,14 @@ func _ready():
 #	bluesky_banner_img.flip_y()
 #	bluesky_banner_img.save_png("res://assets/artwork/bluesky/banner.png")
 
+	var itch_profile_banner_img: Image = itch_profile_banner.get_node("Viewport").get_texture().get_data()
+	itch_profile_banner_img.flip_y()
+	itch_profile_banner_img.save_png("res://assets/artwork/itch/profile_banner.png")
+
+#	var itch_profile_bg_img: Image = itch_profile_bg.get_node("Viewport").get_texture().get_data()
+#	itch_profile_bg_img.flip_y()
+#	itch_profile_bg_img.save_png("res://assets/artwork/itch/profile_bg.png")
+
 #	var splash_img: Image = splash_screen.get_node("Viewport").get_texture().get_data()
 #	splash_img.flip_y()
 #	splash_img.save_png("res://assets/artwork/splash_screen.png")
@@ -67,11 +77,11 @@ func _ready():
 #	fix_transparency(shorts_template_img)
 #	shorts_template_img.save_png("res://assets/artwork/youtube/shorts_template.png")
 
-	var coin_hud_img: Image = coin_hud.get_node("Viewport").get_texture().get_data()
-	coin_hud_img.convert(Image.FORMAT_RGBA8)
-	coin_hud_img.flip_y()
-	fix_transparency(coin_hud_img)
-	coin_hud_img.save_png("res://assets/artwork/coin_hud.png")
+#	var coin_hud_img: Image = coin_hud.get_node("Viewport").get_texture().get_data()
+#	coin_hud_img.convert(Image.FORMAT_RGBA8)
+#	coin_hud_img.flip_y()
+#	fix_transparency(coin_hud_img)
+#	coin_hud_img.save_png("res://assets/artwork/coin_hud.png")
 
 
 func fix_transparency(image_data: Image) -> void:

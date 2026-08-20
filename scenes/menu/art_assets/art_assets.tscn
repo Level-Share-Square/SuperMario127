@@ -1,4 +1,4 @@
-[gd_scene load_steps=90 format=2]
+[gd_scene load_steps=103 format=2]
 
 [ext_resource path="res://scenes/menu/art_assets/art_assets.gd" type="Script" id=1]
 [ext_resource path="res://scenes/menu/background_scroll/background.tscn" type="PackedScene" id=2]
@@ -30,6 +30,8 @@
 [ext_resource path="res://scenes/player/ui_new/polygon_swatch.tscn" type="PackedScene" id=28]
 [ext_resource path="res://assets/fonts/marioscript_ui.tres" type="DynamicFont" id=29]
 [ext_resource path="res://scenes/player/ui_new/collectibles/coins.gd" type="Script" id=30]
+[ext_resource path="res://scenes/shared/background/backgrounds/aurora/aurorabor1.png" type="Texture" id=31]
+[ext_resource path="res://scenes/menu/shine_select/stripes.png" type="Texture" id=32]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -364,7 +366,75 @@ gradient = SubResource( 15 )
 fill_from = Vector2( 0.5, 0.2 )
 fill_to = Vector2( 0.5, 0.8 )
 
-[sub_resource type="ShaderMaterial" id=272]
+[sub_resource type="GradientTexture2D" id=280]
+gradient = SubResource( 15 )
+fill_from = Vector2( 0.5, 0.2 )
+fill_to = Vector2( 0.5, 1 )
+
+[sub_resource type="Gradient" id=281]
+offsets = PoolRealArray( 0.770115, 0.793103, 0.934866, 1 )
+colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 0.261012, 1, 1, 1, 0.623529, 0.105882, 0.129412, 0.423529, 1 )
+
+[sub_resource type="GradientTexture2D" id=282]
+gradient = SubResource( 281 )
+width = 256
+height = 256
+fill = 1
+fill_from = Vector2( 0.5, 0.5 )
+fill_to = Vector2( 0.5, 0 )
+
+[sub_resource type="DynamicFont" id=272]
+size = 144
+outline_color = Color( 0, 0, 0, 1 )
+use_mipmaps = true
+use_filter = true
+extra_spacing_top = -16
+extra_spacing_bottom = -16
+extra_spacing_char = -3
+font_data = ExtResource( 26 )
+
+[sub_resource type="DynamicFont" id=273]
+size = 144
+outline_size = 12
+outline_color = Color( 0, 0, 0, 1 )
+use_mipmaps = true
+use_filter = true
+extra_spacing_top = -16
+extra_spacing_bottom = -16
+extra_spacing_char = -3
+font_data = ExtResource( 26 )
+
+[sub_resource type="CanvasItemMaterial" id=277]
+blend_mode = 1
+
+[sub_resource type="DynamicFont" id=278]
+size = 144
+outline_size = 18
+use_mipmaps = true
+use_filter = true
+extra_spacing_top = -16
+extra_spacing_bottom = -16
+extra_spacing_char = -3
+font_data = ExtResource( 26 )
+
+[sub_resource type="CanvasItemMaterial" id=279]
+blend_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id=285]
+blend_mode = 1
+
+[sub_resource type="Gradient" id=286]
+offsets = PoolRealArray( 0.727969, 0.785441, 1 )
+colors = PoolColorArray( 0, 0, 0, 0, 0, 0, 0, 0.188235, 0, 0, 0, 0 )
+
+[sub_resource type="GradientTexture2D" id=287]
+gradient = SubResource( 286 )
+width = 32
+height = 32
+fill = 1
+fill_from = Vector2( 0.5, 0.5 )
+
+[sub_resource type="ShaderMaterial" id=274]
 shader = SubResource( 26 )
 shader_param/u_amount = 1.75
 
@@ -404,7 +474,7 @@ void fragment() {
 	COLOR = (texture(TEXTURE, UV) + n * u_amount);
 }"
 
-[sub_resource type="ShaderMaterial" id=273]
+[sub_resource type="ShaderMaterial" id=275]
 shader = SubResource( 51 )
 shader_param/u_amount = 1.75
 
@@ -429,7 +499,7 @@ fill = 1
 fill_from = Vector2( 0.5, 0.5 )
 fill_to = Vector2( 0.5, 0 )
 
-[sub_resource type="ShaderMaterial" id=274]
+[sub_resource type="ShaderMaterial" id=276]
 shader = SubResource( 26 )
 shader_param/u_amount = 1.75
 
@@ -1550,11 +1620,316 @@ texture = ExtResource( 10 )
 expand = true
 stretch_mode = 6
 
-[node name="DiscordInvite" type="ViewportContainer" parent="."]
+[node name="ItchProfileBanner" type="ViewportContainer" parent="."]
 unique_name_in_owner = true
 margin_top = 6914.0
+margin_right = 1500.0
+margin_bottom = 7247.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="Viewport" type="Viewport" parent="ItchProfileBanner"]
+size = Vector2( 1500, 333 )
+handle_input_locally = false
+render_target_update_mode = 3
+
+[node name="BG" type="Sprite" parent="ItchProfileBanner/Viewport"]
+position = Vector2( 0, -96 )
+scale = Vector2( 2, 2 )
+z_index = -512
+z_as_relative = false
+texture = ExtResource( 31 )
+centered = false
+
+[node name="WhiteGradient" type="TextureRect" parent="ItchProfileBanner/Viewport"]
+modulate = Color( 1, 0.482353, 0.984314, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = SubResource( 280 )
+expand = true
+
+[node name="Vignette" type="NinePatchRect" parent="ItchProfileBanner/Viewport"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = SubResource( 282 )
+patch_margin_left = 96
+patch_margin_right = 96
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ItchProfileBanner/Viewport"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -12.0
+margin_top = 32.0
+margin_right = 288.0
+margin_bottom = 99.0
+rect_rotation = -3.0
+rect_scale = Vector2( 0.833, 0.833 )
+
+[node name="CenterContainer" type="CenterContainer" parent="ItchProfileBanner/Viewport/HBoxContainer"]
+margin_right = 1800.0
+margin_bottom = 400.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="RichTextLabel" parent="ItchProfileBanner/Viewport/HBoxContainer/CenterContainer"]
+margin_left = 150.0
+margin_top = 80.0
+margin_right = 1650.0
+margin_bottom = 320.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 1500, 0 )
+theme = ExtResource( 18 )
+custom_fonts/normal_font = SubResource( 272 )
+bbcode_enabled = true
+bbcode_text = "[center][color=#ff4444]S[color=#ffff44]o[color=#44ff44]l[color=#44ffff]a[color=#4444ff]r[color=#ff4444]s[color=#ffff44]h[color=#44ff44]i[color=#44ffff]n[color=#4444ff]e
+[color=#aaccff]Studios[/color]"
+text = "Solarshine
+Studios"
+fit_content_height = true
+
+[node name="Label5" type="RichTextLabel" parent="ItchProfileBanner/Viewport/HBoxContainer/CenterContainer/Label"]
+modulate = Color( 0, 0, 0, 0.376471 )
+show_behind_parent = true
+margin_left = 8.0
+margin_top = 16.0
+margin_right = 1508.0
+margin_bottom = 320.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 1500, 0 )
+rect_pivot_offset = Vector2( 750, 0 )
+theme = ExtResource( 18 )
+custom_fonts/normal_font = SubResource( 273 )
+bbcode_enabled = true
+bbcode_text = "[center][color=#ff4444]S[color=#ffff44]o[color=#44ff44]l[color=#44ffff]a[color=#4444ff]r[color=#ff4444]s[color=#ffff44]h[color=#44ff44]i[color=#44ffff]n[color=#4444ff]e
+[color=#aaccff]Studios[/color]"
+text = "Solarshine
+Studios"
+fit_content_height = true
+
+[node name="Label4" type="RichTextLabel" parent="ItchProfileBanner/Viewport/HBoxContainer/CenterContainer/Label"]
+modulate = Color( 1, 1, 1, 0.376471 )
+show_behind_parent = true
+material = SubResource( 277 )
+margin_top = 2.0
+margin_right = 1500.0
+margin_bottom = 306.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 1500, 0 )
+rect_pivot_offset = Vector2( 750, 0 )
+theme = ExtResource( 18 )
+custom_fonts/normal_font = SubResource( 278 )
+bbcode_enabled = true
+bbcode_text = "[center][color=#ff4444]S[color=#ffff44]o[color=#44ff44]l[color=#44ffff]a[color=#4444ff]r[color=#ff4444]s[color=#ffff44]h[color=#44ff44]i[color=#44ffff]n[color=#4444ff]e
+[color=#aaccff]Studios[/color]"
+text = "Solarshine
+Studios"
+fit_content_height = true
+
+[node name="Label3" type="RichTextLabel" parent="ItchProfileBanner/Viewport/HBoxContainer/CenterContainer/Label"]
+modulate = Color( 0.552941, 0.533333, 1, 1 )
+show_behind_parent = true
+margin_top = 2.0
+margin_right = 1500.0
+margin_bottom = 306.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 1500, 0 )
+rect_pivot_offset = Vector2( 750, 0 )
+theme = ExtResource( 18 )
+custom_fonts/normal_font = SubResource( 273 )
+bbcode_enabled = true
+bbcode_text = "[center][color=#ff4444]S[color=#ffff44]o[color=#44ff44]l[color=#44ffff]a[color=#4444ff]r[color=#ff4444]s[color=#ffff44]h[color=#44ff44]i[color=#44ffff]n[color=#4444ff]e
+[color=#aaccff]Studios[/color]"
+text = "Solarshine
+Studios"
+fit_content_height = true
+
+[node name="Label2" type="RichTextLabel" parent="ItchProfileBanner/Viewport/HBoxContainer/CenterContainer/Label"]
+modulate = Color( 2, 2, 2, 0.294118 )
+material = SubResource( 279 )
+margin_top = -2.0
+margin_right = 1500.0
+margin_bottom = 302.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 1500, 0 )
+rect_scale = Vector2( 0.995, 0.98 )
+rect_pivot_offset = Vector2( 750, 0 )
+theme = ExtResource( 18 )
+custom_fonts/normal_font = SubResource( 272 )
+bbcode_enabled = true
+bbcode_text = "[center][color=#ff4444]S[color=#ffff44]o[color=#44ff44]l[color=#44ffff]a[color=#4444ff]r[color=#ff4444]s[color=#ffff44]h[color=#44ff44]i[color=#44ffff]n[color=#4444ff]e
+[color=#aaccff]Studios[/color]"
+text = "Solarshine
+Studios"
+fit_content_height = true
+
+[node name="ItchProfileBG" type="ViewportContainer" parent="."]
+unique_name_in_owner = true
+margin_top = 7251.0
+margin_right = 96.0
+margin_bottom = 7347.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="Viewport" type="Viewport" parent="ItchProfileBG"]
+size = Vector2( 96, 96 )
+handle_input_locally = false
+render_target_update_mode = 3
+
+[node name="GridContainer" type="GridContainer" parent="ItchProfileBG/Viewport"]
+margin_right = 40.0
+margin_bottom = 40.0
+custom_constants/vseparation = 0
+custom_constants/hseparation = 0
+columns = 2
+
+[node name="BG" type="ColorRect" parent="ItchProfileBG/Viewport/GridContainer"]
+margin_right = 48.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 48, 48 )
+color = Color( 0.141176, 0.192157, 0.490196, 1 )
+
+[node name="Icon" type="TextureRect" parent="ItchProfileBG/Viewport/GridContainer/BG"]
+modulate = Color( 0.498039, 0.654902, 1, 0.0392157 )
+material = SubResource( 285 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 24 )
+expand = true
+stretch_mode = 6
+
+[node name="Stripe" type="TextureRect" parent="ItchProfileBG/Viewport/GridContainer/BG"]
+visible = false
+modulate = Color( 0, 0, 0, 0.0392157 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 32 )
+expand = true
+stretch_mode = 2
+
+[node name="Vignette" type="NinePatchRect" parent="ItchProfileBG/Viewport/GridContainer/BG"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = SubResource( 287 )
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="BG2" type="ColorRect" parent="ItchProfileBG/Viewport/GridContainer"]
+margin_left = 48.0
+margin_right = 96.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 48, 48 )
+color = Color( 0.101961, 0.145098, 0.396078, 1 )
+
+[node name="Icon" type="TextureRect" parent="ItchProfileBG/Viewport/GridContainer/BG2"]
+modulate = Color( 0.498039, 0.654902, 1, 0.054902 )
+material = SubResource( 285 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 25 )
+expand = true
+stretch_mode = 6
+
+[node name="Stripe" type="TextureRect" parent="ItchProfileBG/Viewport/GridContainer/BG2"]
+visible = false
+modulate = Color( 0, 0, 0, 0.054902 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 32 )
+expand = true
+stretch_mode = 2
+
+[node name="Vignette" type="NinePatchRect" parent="ItchProfileBG/Viewport/GridContainer/BG2"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = SubResource( 287 )
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="BG3" type="ColorRect" parent="ItchProfileBG/Viewport/GridContainer"]
+margin_top = 48.0
+margin_right = 48.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 48, 48 )
+color = Color( 0.101961, 0.145098, 0.396078, 1 )
+
+[node name="Icon" type="TextureRect" parent="ItchProfileBG/Viewport/GridContainer/BG3"]
+modulate = Color( 0.498039, 0.654902, 1, 0.054902 )
+material = SubResource( 285 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 25 )
+expand = true
+stretch_mode = 6
+
+[node name="Stripe" type="TextureRect" parent="ItchProfileBG/Viewport/GridContainer/BG3"]
+visible = false
+modulate = Color( 0, 0, 0, 0.054902 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 32 )
+expand = true
+stretch_mode = 2
+
+[node name="Vignette" type="NinePatchRect" parent="ItchProfileBG/Viewport/GridContainer/BG3"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = SubResource( 287 )
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="BG4" type="ColorRect" parent="ItchProfileBG/Viewport/GridContainer"]
+margin_left = 48.0
+margin_top = 48.0
+margin_right = 96.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 48, 48 )
+color = Color( 0.141176, 0.192157, 0.490196, 1 )
+
+[node name="Icon" type="TextureRect" parent="ItchProfileBG/Viewport/GridContainer/BG4"]
+modulate = Color( 0.498039, 0.654902, 1, 0.0392157 )
+material = SubResource( 285 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 24 )
+expand = true
+stretch_mode = 6
+
+[node name="Stripe" type="TextureRect" parent="ItchProfileBG/Viewport/GridContainer/BG4"]
+visible = false
+modulate = Color( 0, 0, 0, 0.0392157 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 32 )
+expand = true
+stretch_mode = 2
+
+[node name="Vignette" type="NinePatchRect" parent="ItchProfileBG/Viewport/GridContainer/BG4"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = SubResource( 287 )
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="DiscordInvite" type="ViewportContainer" parent="."]
+unique_name_in_owner = true
+margin_top = 7351.0
 margin_right = 1920.0
-margin_bottom = 7994.0
+margin_bottom = 8431.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
@@ -1567,7 +1942,7 @@ render_target_update_mode = 3
 rect_scale = Vector2( 3, 3 )
 
 [node name="Overlay" parent="DiscordInvite/Viewport/Background" index="3"]
-material = SubResource( 272 )
+material = SubResource( 274 )
 
 [node name="WhiteGradient" type="TextureRect" parent="DiscordInvite/Viewport"]
 modulate = Color( 0.752941, 0.752941, 1, 0.486275 )
@@ -1581,9 +1956,9 @@ expand = true
 
 [node name="SplashScreen" type="ViewportContainer" parent="."]
 unique_name_in_owner = true
-margin_top = 7998.0
+margin_top = 8435.0
 margin_right = 1536.0
-margin_bottom = 8862.0
+margin_bottom = 9299.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
@@ -1611,7 +1986,7 @@ rect_scale = Vector2( 0.225, 0.225 )
 
 [node name="Overlay" parent="SplashScreen/Viewport/Background" index="3"]
 modulate = Color( 0.054902, 0.0117647, 0.152941, 0.270588 )
-material = SubResource( 273 )
+material = SubResource( 275 )
 
 [node name="Overlay" type="TextureRect" parent="SplashScreen/Viewport"]
 modulate = Color( 0.752941, 0.752941, 1, 0.486275 )
@@ -1684,9 +2059,9 @@ stretch_mode = 6
 
 [node name="Icon" type="ViewportContainer" parent="."]
 unique_name_in_owner = true
-margin_top = 8866.0
+margin_top = 9303.0
 margin_right = 512.0
-margin_bottom = 9378.0
+margin_bottom = 9815.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
@@ -1699,7 +2074,7 @@ render_target_update_mode = 3
 rect_scale = Vector2( 3, 3 )
 
 [node name="Overlay" parent="Icon/Viewport/Background" index="3"]
-material = SubResource( 274 )
+material = SubResource( 276 )
 
 [node name="WhiteGradient" type="TextureRect" parent="Icon/Viewport"]
 modulate = Color( 0.752941, 0.752941, 1, 0.486275 )
@@ -1750,9 +2125,9 @@ stretch_mode = 6
 
 [node name="TwitterIcon" type="ViewportContainer" parent="."]
 unique_name_in_owner = true
-margin_top = 9382.0
+margin_top = 9819.0
 margin_right = 512.0
-margin_bottom = 9894.0
+margin_bottom = 10331.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
@@ -1816,9 +2191,9 @@ stretch_mode = 6
 
 [node name="EndCards" type="ViewportContainer" parent="."]
 unique_name_in_owner = true
-margin_top = 9898.0
+margin_top = 10335.0
 margin_right = 1920.0
-margin_bottom = 10978.0
+margin_bottom = 11415.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
