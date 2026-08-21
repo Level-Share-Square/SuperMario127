@@ -103,7 +103,7 @@ const MOUSE_BUTTONS: Array = [
 	"Click 4",
 	"Click 5"
 ]
-const JOY_BUTTONS: Array = [
+const JOY_BUTTONS_XBOX: Array = [
 	"A",
 	"B",
 	"X",
@@ -114,8 +114,8 @@ const JOY_BUTTONS: Array = [
 	"RT",
 	"LS Click",
 	"RS Click",
-	"Select",
-	"Start",
+	"View",
+	"Menu",
 	"Up",
 	"Down",
 	"Left",
@@ -128,7 +128,57 @@ const JOY_BUTTONS: Array = [
 	"Paddle 4",
 	"Touchpad"
 ]
-const JOY_AXIS: Array = [
+const JOY_BUTTONS_NINTENDO: Array = [
+	"B",
+	"A",
+	"Y",
+	"X",
+	"L",
+	"R",
+	"ZL",
+	"ZR",
+	"LS Click",
+	"RS Click",
+	"Minus",
+	"Plus",
+	"Up",
+	"Down",
+	"Left",
+	"Right",
+	"Home",
+	"Capture",
+	"Paddle 1",
+	"Paddle 2",
+	"Paddle 3",
+	"Paddle 4",
+	"Touchpad"
+]
+const JOY_BUTTONS_PS: Array = [
+	"Cross",
+	"Circle",
+	"Square",
+	"Triangle",
+	"L1",
+	"R1",
+	"L2",
+	"R2",
+	"L3",
+	"R3",
+	"Create",
+	"Options",
+	"Up",
+	"Down",
+	"Left",
+	"Right",
+	"Logo",
+	"Misc",
+	"Paddle 1",
+	"Paddle 2",
+	"Paddle 3",
+	"Paddle 4",
+	"Touchpad"
+]
+const JOY_AXIS_XBOX: Array = [
 	"LS Left",
 	"LS Right",
 	
@@ -162,6 +212,74 @@ const JOY_AXIS: Array = [
 	"Axis 10-",
 	"Axis 10+",
 ]
+const JOY_AXIS_NINTENDO: Array = [
+	"LS Left",
+	"LS Right",
+	
+	"LS Up",
+	"LS Down",
+	
+	"RS Left",
+	"RS Right",
+	
+	"RS Up",
+	"RS Down",
+	
+	"Axis 4-",
+	"Axis 4+",
+
+	"Axis 5-",
+	"Axis 5+",
+	
+	"ZL Release",
+	"ZL",
+	
+	"ZR Release",
+	"ZR",
+
+	"Axis 8-",
+	"Axis 8+",
+
+	"Axis 9-",
+	"Axis 9+",
+
+	"Axis 10-",
+	"Axis 10+",
+]
+const JOY_AXIS_PS: Array = [
+	"LS Left",
+	"LS Right",
+	
+	"LS Up",
+	"LS Down",
+	
+	"RS Left",
+	"RS Right",
+	
+	"RS Up",
+	"RS Down",
+	
+	"Axis 4-",
+	"Axis 4+",
+
+	"Axis 5-",
+	"Axis 5+",
+	
+	"L2 Release",
+	"L2",
+	
+	"R2 Release",
+	"R2",
+
+	"Axis 8-",
+	"Axis 8+",
+
+	"Axis 9-",
+	"Axis 9+",
+
+	"Axis 10-",
+	"Axis 10+",
+]
 
 
 static func get_singular_human_name(event: Dictionary) -> String:
@@ -177,8 +295,17 @@ static func get_singular_human_name(event: Dictionary) -> String:
 				string += UNKNOWN
 		
 		JOYPAD_BUTTON:
-			if event.button_index < JOY_BUTTONS.size():
-				string += JOY_BUTTONS[event.button_index]
+			var chosen_array: Array
+			match LastInputDevice.last_layout_type:
+				LastInputDevice.LayoutType.Xbox:
+					chosen_array = JOY_BUTTONS_XBOX
+				LastInputDevice.LayoutType.Nintendo:
+					chosen_array = JOY_BUTTONS_NINTENDO
+				LastInputDevice.LayoutType.PlayStation:
+					chosen_array = JOY_BUTTONS_PS
+			
+			if event.button_index < chosen_array.size():
+				string += chosen_array[event.button_index]
 			else:
 				string += UNKNOWN
 		
@@ -186,7 +313,17 @@ static func get_singular_human_name(event: Dictionary) -> String:
 			var event_index: int = event.axis*2
 			if event.axis_value > 0:
 				event_index += 1
-			string += JOY_AXIS[event_index]
+
+			var chosen_array: Array
+			match LastInputDevice.last_layout_type:
+				LastInputDevice.LayoutType.Xbox:
+					chosen_array = JOY_AXIS_XBOX
+				LastInputDevice.LayoutType.Nintendo:
+					chosen_array = JOY_AXIS_NINTENDO
+				LastInputDevice.LayoutType.PlayStation:
+					chosen_array = JOY_AXIS_PS
+			
+			string += chosen_array[event_index]
 	
 	return string
 

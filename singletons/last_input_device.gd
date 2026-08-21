@@ -16,9 +16,19 @@ var class_type_map: Dictionary = {
 }
 
 enum InputType {Keyboard, Controller, Touch}
+enum LayoutType {Xbox, Nintendo, PlayStation}
 var last_input_type: int = InputType.Keyboard
+var last_layout_type: int = LayoutType.Xbox
 var is_mouse: bool
 
+var layouts_regex: Dictionary = {
+	LayoutType.Nintendo: [
+		"(?i)Wii", "(?i)S?NES", "(?i)Switch", "(?i)Joy[- ]Con"
+	],
+	LayoutType.PlayStation: [
+		".*PS\\d.*", "(?i)Sony.*", "(?i)Play[Ss]tation"
+	]
+}
 
 func _input(event):
 	if not "device" in event or event.device != -1:
@@ -31,6 +41,17 @@ func _input(event):
 	var class_string: String = event.get_class()
 	if class_string in class_type_map.keys():
 		var new_input_type: int = class_type_map.get(event.get_class(), InputType.Keyboard)
+		
+		if new_input_type == InputType.Controller:
+			var new_layout_type: int = LayoutType.Xbox
+			for layout_type in layouts_regex.keys():
+				for regex_string in layouts_regex[layout_type]:
+					var regex := RegEx.new()
+					regex.compile(regex_string)
+					var result: RegExMatch = regex.search(Input.get_joy_name(event.device))
+					if result:
+						new_layout_type = layout_type
+			last_layout_type = new_layout_type
 		
 		if new_input_type != last_input_type:
 			emit_signal("input_type_changed", new_input_type)

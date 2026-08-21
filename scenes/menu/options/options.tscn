@@ -936,7 +936,8 @@ margin_left = 145.0
 margin_right = 225.0
 margin_bottom = 25.0
 rect_min_size = Vector2( 80, 0 )
-focus_neighbour_left = NodePath("../Hotkeys")
+focus_neighbour_left = NodePath("../Editor")
+focus_neighbour_right = NodePath("../Interface")
 theme_type_variation = "OptionsToggleSelect"
 text = "Gameplay"
 script = ExtResource( 19 )
@@ -947,6 +948,8 @@ margin_left = 237.0
 margin_right = 317.0
 margin_bottom = 25.0
 rect_min_size = Vector2( 80, 0 )
+focus_neighbour_left = NodePath("../Gameplay")
+focus_neighbour_right = NodePath("../Hotkeys")
 theme_type_variation = "OptionsToggle"
 text = "Interface"
 script = ExtResource( 19 )
@@ -957,7 +960,8 @@ margin_left = 329.0
 margin_right = 409.0
 margin_bottom = 25.0
 rect_min_size = Vector2( 80, 0 )
-focus_neighbour_right = NodePath("../Gameplay")
+focus_neighbour_left = NodePath("../Interface")
+focus_neighbour_right = NodePath("../Editor")
 theme_type_variation = "OptionsToggle"
 text = "Hotkeys"
 script = ExtResource( 19 )
@@ -968,6 +972,8 @@ margin_left = 421.0
 margin_right = 501.0
 margin_bottom = 25.0
 rect_min_size = Vector2( 80, 0 )
+focus_neighbour_left = NodePath("../Hotkeys")
+focus_neighbour_right = NodePath("../Gameplay")
 theme_type_variation = "OptionsToggle"
 text = "Editor"
 script = ExtResource( 19 )
@@ -985,7 +991,7 @@ buttons_by_screen = {
 "Editor": [ NodePath("Keyboard/DefaultEditor"), NodePath("Controller/DefaultEditor") ],
 "Gameplay": [ NodePath("Keyboard/Default"), NodePath("Keyboard/Mario63"), NodePath("Keyboard/WASD"), NodePath("Keyboard/KBM"), NodePath("Controller/None"), NodePath("Controller/Default"), NodePath("Controller/SNES") ],
 "Hotkeys": [ NodePath("Keyboard/DefaultHotkeys"), NodePath("Controller/DefaultHotkeys") ],
-"Interface": [ NodePath("Keyboard/DefaultInterface"), NodePath("Controller/DefaultInterface") ]
+"Interface": [ NodePath("Keyboard/DefaultInterface"), NodePath("Controller/DefaultInterface"), NodePath("Controller/DefaultInterfaceNintendo") ]
 }
 category_init = [ [ "Controls (Player 1)", "res://scenes/menu/options/controls/presets/default.cfg" ], [ "Controls (Interface)", "res://scenes/menu/options/controls/presets/interface.cfg" ], [ "Controls (Hotkeys)", "res://scenes/menu/options/controls/presets/hotkeys.cfg" ], [ "Controls (Editor)", "res://scenes/menu/options/controls/presets/editor.cfg" ], [ "Controls (Player 1) (Controller)", "res://scenes/menu/options/controls/presets/controller/default.cfg" ], [ "Controls (Interface) (Controller)", "res://scenes/menu/options/controls/presets/controller/interface.cfg" ], [ "Controls (Hotkeys) (Controller)", "res://scenes/menu/options/controls/presets/controller/hotkeys.cfg" ] ]
 
@@ -1135,10 +1141,23 @@ margin_left = 276.0
 margin_right = 402.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 80, 0 )
-focus_neighbour_left = NodePath("../Default")
-focus_neighbour_top = NodePath("../../../Category/Gameplay")
+focus_neighbour_left = NodePath("../DefaultInterfaceNintendo")
+focus_neighbour_top = NodePath("../DefaultInterfaceNintendo")
 theme_type_variation = "OptionsToggle"
-text = "Reset to Default"
+text = "Xbox"
+script = ExtResource( 19 )
+extend_amount = 2
+
+[node name="DefaultInterfaceNintendo" type="Button" parent="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset/Controller"]
+visible = false
+margin_left = 276.0
+margin_right = 402.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 80, 0 )
+focus_neighbour_left = NodePath("../DefaultInterface")
+focus_neighbour_right = NodePath("../DefaultInterface")
+theme_type_variation = "OptionsToggle"
+text = "Nintendo"
 script = ExtResource( 19 )
 extend_amount = 2
 
@@ -2099,6 +2118,7 @@ anims/RESET = SubResource( 4 )
 anims/transition = SubResource( 1 )
 
 [connection signal="screen_opened" from="." to="Focus" method="focus_node" flags=3]
+[connection signal="screen_opened" from="." to="Subscreens/Controls/VBoxContainer/Remapper" method="screen_opened"]
 [connection signal="screen_opened" from="." to="Subscreens/Controls/VBoxContainer/Devices" method="screen_opened"]
 [connection signal="back_press" from="Focus" to="ExitController" method="exit"]
 [connection signal="pressed" from="BlackBar/MarginContainer/VBoxContainer/Back" to="ExitController" method="exit"]
@@ -2129,6 +2149,7 @@ anims/transition = SubResource( 1 )
 [connection signal="pressed" from="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset/Controller/Default" to="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset" method="load_preset" binds= [ "res://scenes/menu/options/controls/presets/controller/default.cfg", true ]]
 [connection signal="pressed" from="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset/Controller/SNES" to="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset" method="load_preset" binds= [ "res://scenes/menu/options/controls/presets/controller/snes.cfg", true ]]
 [connection signal="pressed" from="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset/Controller/DefaultInterface" to="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset" method="load_preset" binds= [ "res://scenes/menu/options/controls/presets/controller/interface.cfg", true ]]
+[connection signal="pressed" from="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset/Controller/DefaultInterfaceNintendo" to="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset" method="load_preset" binds= [ "res://scenes/menu/options/controls/presets/controller/interface_nintendo.cfg", true ]]
 [connection signal="pressed" from="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset/Controller/DefaultHotkeys" to="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset" method="load_preset" binds= [ "res://scenes/menu/options/controls/presets/controller/hotkeys.cfg", true ]]
 [connection signal="pressed" from="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset/Controller/DefaultEditor" to="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset" method="load_preset" binds= [ "res://scenes/menu/options/controls/presets/controller/editor.cfg", true ]]
 [connection signal="pressed" from="Subscreens/Controls/VBoxContainer/Remapper/Editor/Tab1/SwitchTabs/Button" to="Subscreens/Controls/VBoxContainer/Remapper/Editor" method="set_current_tab" binds= [ 1 ]]

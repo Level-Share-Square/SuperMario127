@@ -10,6 +10,7 @@ var is_controller: bool = false
 
 
 func _ready():
+	is_controller = LastInputDevice.last_input_type == LastInputDevice.InputType.Controller
 	load_all_keybinds()
 
 
