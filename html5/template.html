@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html xmlns='http://www.w3.org/1999/xhtml' lang='' xml:lang=''>
+<head>
+	<meta charset='utf-8' />
+	<meta name='viewport' content='width=device-width, user-scalable=no' />
+	<title>Super Mario 127</title>
+	<style type='text/css'>
+
+		@font-face {
+			font-family: 'Super Mario Script 3';
+			src: url('assets/super-mario-script-3-1402.ttf');
+			font-weight: normal;
+			font-style: normal;
+		}
+
+		body {
+			touch-action: none;
+			margin: 0;
+			border: 0 none;
+			padding: 0;
+			text-align: center;
+			background-color: black;
+		}
+
+		#canvas {
+			display: block;
+			margin: 0;
+			color: white;
+		}
+
+		#canvas:focus {
+			outline: none;
+		}
+
+		.godot {
+			font-family: 'Noto Sans', 'Droid Sans', Arial, sans-serif;
+			color: #e0e0e0;
+			background-color: #3b3943;
+			background-image: linear-gradient(to bottom, #403e48, #35333c);
+			border: 1px solid #45434e;
+			box-shadow: 0 0 1px 1px #2f2d35;
+		}
+
+
+		/* Status display
+		 * ============== */
+
+		#status {
+			position: absolute;
+			left: 0;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			/* don't consume click events - make children visible explicitly */
+			visibility: hidden;
+		}
+
+		#status-progress {
+			width: 366px;
+			height: 7px;
+			background-color: #38363A;
+			border: 1px solid #444246;
+			padding: 1px;
+			box-shadow: 0 0 2px 1px #1B1C22;
+			border-radius: 2px;
+			visibility: visible;
+		}
+
+		@media only screen and (orientation:portrait) {
+			#status-progress {
+				width: 61.8%;
+			}
+		}
+
+		#status-progress-inner {
+			height: 100%;
+			width: 0;
+			box-sizing: border-box;
+			transition: width 0.5s linear;
+			background-color: #202020;
+			border: 1px solid #222223;
+			box-shadow: 0 0 1px 1px #27282E;
+			border-radius: 3px;
+		}
+
+		#status-indeterminate {
+			height: 42px;
+			visibility: visible;
+			position: relative;
+		}
+
+		#status-indeterminate > div {
+			width: 4.5px;
+			height: 0;
+			border-style: solid;
+			border-width: 9px 3px 0 3px;
+			border-color: #2b2b2b transparent transparent transparent;
+			transform-origin: center 21px;
+			position: absolute;
+		}
+
+		#status-indeterminate > div:nth-child(1) { transform: rotate( 22.5deg); }
+		#status-indeterminate > div:nth-child(2) { transform: rotate( 67.5deg); }
+		#status-indeterminate > div:nth-child(3) { transform: rotate(112.5deg); }
+		#status-indeterminate > div:nth-child(4) { transform: rotate(157.5deg); }
+		#status-indeterminate > div:nth-child(5) { transform: rotate(202.5deg); }
+		#status-indeterminate > div:nth-child(6) { transform: rotate(247.5deg); }
+		#status-indeterminate > div:nth-child(7) { transform: rotate(292.5deg); }
+		#status-indeterminate > div:nth-child(8) { transform: rotate(337.5deg); }
+
+		#status-notice {
+			margin: 0 100px;
+			line-height: 1.3;
+			visibility: visible;
+			padding: 4px 6px;
+			visibility: visible;
+		}
+
+		/* Animation */
+		#splash-screen {
+			position: absolute;
+			width: 768px;
+			height: 432px;
+			transform-origin: center center;
+			pointer-events: none;
+			overflow: hidden;
+			background-image: url("index.png");
+			background-size: contain;
+		}
+
+		#viewport {
+			position: absolute;
+			width: 768px;
+			height: 432px;
+			transform-origin: center center;
+			pointer-events: none;
+			overflow: hidden;
+			z-index: 5;
+			background-image: linear-gradient(white 347px, #aaaaaa);
+			transition: opacity 1s ease-in-out;
+			opacity: 1;
+		}
+
+		#hud {
+			position: absolute;
+			top: 12px;
+			left: 12px;
+			width: 160px;
+			height: 40px;
+			background-image: url("assets/coin_hud.png");
+			background-size: cover;
+		}
+
+		#hud-label {
+			font-family: "Super Mario Script 3", sans-serif;
+			font-size: 20px;
+			text-align: left;
+			transform: rotate(-7deg) translateX(64px) translateY(4px);
+			color: white;
+			-webkit-text-stroke: 5px #1b257aa6;
+			paint-order: stroke fill;
+		}
+
+		#mario {
+			position: absolute;
+			top: calc(347px - 32px);
+			left: -48px;
+			width: 48px;
+			height: 48px;
+			background-image: url("assets/mario.png");
+			background-size: calc(48px * 14) 48px;
+			background-repeat: no-repeat;
+			image-rendering: pixelated;
+		}
+		#mario::after {
+			content: "";
+			position: absolute;
+			left: 0;
+			top: 75%;
+			width: 100%;
+			height: 100%;
+			
+			background-image: inherit;
+			background-size: inherit;
+			background-repeat: inherit;
+			background-position: inherit;
+			image-rendering: pixelated;
+
+			transform: scaleY(-0.65) translateY(var(--reflection-offset, 0px));
+			mask-image: linear-gradient(#00000080, #00000000);
+			-webkit-mask-image: linear-gradient(#00000080, #00000000);
+		}
+
+		.coin {
+			position: absolute;
+			top: calc(347px - 6px);
+			left: calc(768px + 24px);
+			width: 24px;
+			height: 24px;
+			background-image: url("assets/coin.png");
+			background-size: calc(24px * 6) calc(24px * 2);
+			background-repeat: no-repeat;
+			image-rendering: pixelated;
+		}
+		.coin::after {
+			content: "";
+			position: absolute;
+			left: 0;
+			top: 55%;
+			width: 100%;
+			height: 100%;
+
+			background-image: inherit;
+			background-size: inherit;
+			background-repeat: inherit;
+			background-position: inherit;
+			image-rendering: pixelated;
+
+			transform: scaleY(-0.65);
+			mask-image: linear-gradient(#00000080, #00000000);
+			-webkit-mask-image: linear-gradient(#00000080, #00000000);
+		}
+
+		.block-container {
+			display: flex;
+			position: absolute;
+			top: calc(347px - 112px);
+			width: 100%;
+			justify-content: center;
+			gap: 128px;
+		}
+
+		.question-block {
+			display: block;
+			width: 32px;
+			height: 32px;
+			background-image: url("assets/question_block.png");
+			background-repeat: no-repeat;
+			image-rendering: pixelated;
+		}
+
+		.question-block.hit {
+			background-image: url("assets/hit_question_block.png");
+			transform: translateY(-8px) scaleY(1.1) scaleX(0.9);
+			filter: brightness(2) saturate(1.5);
+		}
+
+		.question-block.hit-endless {
+			transform: translateY(-8px) scaleY(1.1) scaleX(0.9);
+			filter: brightness(2) saturate(1.5);
+		}
+
+		.block-coin {
+			position: absolute;
+			left: 4px;
+			top: -20px;
+			width: 24px;
+			height: 24px;
+			background-image: url("assets/coin.png");
+			background-size: calc(24px * 6) calc(24px * 2);
+			background-repeat: no-repeat;
+			image-rendering: pixelated;
+			transition: transform 0.4s ease-out, filter 0.4s ease-in-out;
+			transform: scaleX(1) scaleY(1);
+		}
+
+		.block-coin.hit {
+			transform: translateY(-48px) scaleX(0.5) scaleY(0.5);
+			filter: opacity(0);
+		}
+
+		#done-loading {
+			position: absolute;
+
+			display: flex;
+			justify-content: center;
+			align-items: center;
+
+			background-color: white;
+			width: 100%;
+			height: 100%;
+			
+			z-index: 10;
+			
+			transition: filter 2.5s ease-in-out;
+			filter: opacity(0);
+		}
+
+		#done-loading-text {
+			font-family: "Super Mario Script 3", sans-serif;
+			font-size: 48px;
+			color: white;
+			-webkit-text-stroke: 8px #1b257a;
+			paint-order: stroke fill;
+
+			transform: rotate(-3deg);
+			transform-origin: center center;
+		}
+
+	</style>
+<link id='-gd-engine-icon' rel='icon' type='image/png' href='index.icon.png' />
+<link rel='apple-touch-icon' href='index.apple-touch-icon.png'/>
+
+</head>
+<body>
+	<div id="splash-screen"></div>
+	<canvas id='canvas'>
+		HTML5 canvas appears to be unsupported in the current browser.<br />
+		Please try updating or use a different browser.
+	</canvas>
+	<div id="viewport">
+		<div id="hud">
+			<div id="hud-label">
+				0/100
+			</div>
+		</div>
+		<div id="mario"></div>
+		<div class="block-container">
+			<div class="question-block" id="block0"></div>
+			<div class="question-block" id="block1"></div>
+			<div class="question-block" id="block2"></div>
+		</div>
+		<div id="done-loading">
+			<div id="done-loading-text">Done Loading!</div>
+		</div>
+	</div>
+
+	<script type='text/javascript' src='index.js'></script>
+	<script type='text/javascript'>//<![CDATA[
+		var GODOT_CONFIG = $GODOT_CONFIG;
+		const coinAnimSpeed = 0.015;
+		const minCoinSpeed = 100;
+		const maxCoinSpeed = 200;
+		var activeCoins = [];
+		function spawnCoin() {
+			const coinElem = document.createElement('div');
+			coinElem.className = 'coin';
+			viewport.appendChild(coinElem);
+			activeCoins.push({
+				element: coinElem,
+				x: 768 + 24,
+				xSpeed: -(Math.random() * (maxCoinSpeed - minCoinSpeed) + minCoinSpeed),
+				collectTimer: null,
+			})
+		}
+		
+		const splashScreen = document.getElementById("splash-screen")
+		const viewport = document.getElementById("viewport");
+		const marioSprite = document.getElementById("mario");
+		const hudLabel = document.getElementById("hud-label");
+		const doneLoading = document.getElementById("done-loading");
+
+		const block0 = document.getElementById("block0");
+		const block1 = document.getElementById("block1");
+		const block2 = document.getElementById("block2");
+
+		const marioSpeed = 168;
+		const walkAnimSpeed = 0.03;
+
+		var marioX = -48;
+		var frameIndex = 0;
+
+		var collectedCoins = 0;
+		var intPercent = 0;
+		var lastIntPercent = 0;
+		var engineStarted = false;
+	
+		var blockStates = [
+			{ threshold: 168, requiredPercent: 33, hit: false, type: 'jumping', element: block0 },
+			{ threshold: 328, requiredPercent: 66, hit: false, type: 'jumping', element: block1 },
+			{ threshold: 518, requiredPercent: 100, hit: false, type: 'endless', element: block2 }
+		];
+		var nextBlockData = {};
+		var initialHitState = {};
+
+		var marioState = 'walking'; // 'walking', 'jumping', 'endless'
+		var jumpY = 0;
+		var jumpVel = 0;
+		var endlessHitTimer = 0;
+
+		GODOT_CONFIG.onProgress = function(current, total) {
+			if (total > 0) {
+				let newIntPercent = Math.floor(current / total * 100);
+				if (newIntPercent > intPercent) {
+					for (let i = intPercent; i < newIntPercent; i++) {
+						if (i != 33 && i != 66 && i < 95) {
+							spawnCoin();
+						}
+					}
+				}
+				intPercent = newIntPercent;
+			}
+		}
+		GODOT_CONFIG.args.push('--main-pack', GODOT_CONFIG.executable + '.pck');
+
+		var engine = new Engine(GODOT_CONFIG);
+
+		(function() {
+			const INDETERMINATE_STATUS_STEP_MS = 100;
+
+			function updateViewportScale() {
+				const windowWidth = window.innerWidth;
+				const windowHeight = window.innerHeight;
+				
+				const scaleX = windowWidth / 768;
+				const scaleY = windowHeight / 432;
+				const scale = Math.min(scaleX, scaleY);
+
+				viewport.style.transform = `scale(${scale})`;
+				viewport.style.left = `${(windowWidth - 768) / 2}px`;
+				viewport.style.top = `${(windowHeight - 432) / 2}px`;
+
+				splashScreen.style.transform = viewport.style.transform;
+				splashScreen.style.left = viewport.style.left;
+				splashScreen.style.top = viewport.style.top;
+			}
+			window.addEventListener('resize', updateViewportScale);
+			updateViewportScale();
+
+
+			var animationCallbacks = [animateMario, moveCoins];
+            var lastFrameTime = performance.now();
+
+            function animate(currentTime) {
+				if (engineStarted)
+					return;
+
+                var deltaTime = Math.min((currentTime - lastFrameTime) / 1000, 0.1);
+                lastFrameTime = currentTime;
+
+                animationCallbacks.forEach(callback => callback(currentTime, deltaTime));
+                requestAnimationFrame(animate);
+            }
+            requestAnimationFrame(animate);
+
+            function animateMario(time, deltaTime) {
+				if (marioState === 'walking' | marioState === 'jumping') {
+                	marioX += marioSpeed * deltaTime;
+					marioSprite.style.left = marioX + "px";
+
+					if (marioX >= 768 + 48)
+						marioX = -48;
+				}
+
+				if (marioState == 'walking') {
+					frameIndex = Math.floor(time * walkAnimSpeed) % 12;
+					const bgPositionPx = frameIndex * 48;
+					marioSprite.style.backgroundPosition = `-${bgPositionPx}px 0px`;
+
+					blockStates.forEach((blockData, index) => {
+						if (!blockData.hit && marioX >= blockData.threshold && marioX <= blockData.threshold + 64) {
+							if (intPercent >= blockData.requiredPercent) {
+								nextBlockData = blockData;
+								marioState = blockData.type;
+								jumpY = 0;
+								jumpVel = -500;
+
+								if (blockData.type == 'endless') {
+									doneLoading.style.filter = 'opacity(1)';
+									setTimeout(() => {
+										viewport.style.opacity = 0;
+									}, 4500);
+									setTimeout(() => {
+										engineStarted = true;
+										engine.start({
+											args: GODOT_CONFIG.args,
+											canvas: document.getElementById('canvas')
+										}).catch(displayFailureNotice);
+										viewport.remove();
+									}, 5500);
+								}
+							}
+						}
+					});
+				}
+				else if (marioState === 'jumping' | marioState == 'endless') {
+					jumpVel += 1000 * deltaTime;
+					jumpY += jumpVel * deltaTime;
+					marioSprite.style.transform = `translateY(${jumpY}px)`;
+					marioSprite.style.setProperty('--reflection-offset', `${jumpY * 2.5}px`);
+					
+					if (jumpY <= -64 && jumpVel < 50) {
+						jumpVel = 50;
+
+						collectedCoins += 1;
+						hudLabel.textContent = collectedCoins + "/100"; 
+						playCoinSound();
+						
+						if (marioState != 'endless') {
+							nextBlockData.hit = true;
+							nextBlockData.element.classList.add('hit');
+							spawnBlockCoin(nextBlockData.element);
+						}
+						else {
+							nextBlockData.element.classList.add('hit-endless');
+							spawnBlockCoin(nextBlockData.element);
+							if (Object.keys(initialHitState).length === 0) {
+								initialHitState = {
+									transition: nextBlockData.element.style.transition,
+									transform: nextBlockData.element.style.transform,
+									filter: nextBlockData.element.style.filter
+								};
+							}
+							else {
+								nextBlockData.element.style.transition = initialHitState.transition;
+								nextBlockData.element.style.transform = initialHitState.transform;
+								nextBlockData.element.style.filter = initialHitState.filter;
+							}
+						}
+                        setTimeout(() => {
+							nextBlockData.element.style.transition = 'transform 0.15s ease-in, filter 0.25s ease-in';
+							nextBlockData.element.style.transform = 'translateY(0px) scaleY(1) scaleX(1)';
+							nextBlockData.element.style.filter = 'brightness(1) saturate(1)';
+						}, 5);
+					}
+
+					if (jumpY >= 0) {
+						jumpY = 0;
+						marioSprite.style.transform = `translateY(0px)`;
+						marioSprite.style.setProperty('--reflection-offset', `0px`);
+
+						if (marioState != 'endless') {
+							marioState = 'walking';
+						}
+						else if (collectedCoins < 100) {
+							jumpVel = -500; 
+						}
+					}
+
+					if (jumpVel < 0) {
+						marioSprite.style.backgroundPosition = `-576px 0px`;
+					}
+					else {
+						marioSprite.style.backgroundPosition = `-624px 0px`;
+					}
+				}
+			}
+
+			function spawnBlockCoin(block) {
+				const coinElem = document.createElement('div');
+				coinElem.className = 'block-coin';
+				block.appendChild(coinElem);
+				setTimeout(() => {
+					coinElem.classList.add('hit');
+				}, 5);
+			}
+
+			function moveCoins(time, deltaTime) {
+				let coinsToRemove = [];
+
+				for (let i = activeCoins.length - 1; i >= 0; i--) {
+					let coinDict = activeCoins[i];
+
+					if (coinDict.collectTimer == null) {
+						coinDict.x += coinDict.xSpeed * deltaTime;
+						coinDict.element.style.left = coinDict.x + "px";
+
+						let coinFrameIndex = Math.floor(time * coinAnimSpeed) % 4;
+						const bgPositionPx = coinFrameIndex * 24;
+						coinDict.element.style.backgroundPosition = `-${bgPositionPx}px 0px`;
+
+						if (coinDict.x < marioX + 32) {
+							coinDict.collectTimer = 1.0;
+							collectedCoins += 1;
+							hudLabel.textContent = collectedCoins + "/100"; 
+							playCoinSound();
+						}
+					}
+					else {
+						coinDict.collectTimer -= deltaTime
+
+						let coinFrameIndex = 6 - Math.floor(coinDict.collectTimer * 6);
+						const bgPositionPx = coinFrameIndex * 24;
+						coinDict.element.style.backgroundPosition = `-${bgPositionPx}px -24px`;
+
+						if (coinDict.collectTimer <= 0) {
+							coinDict.element.remove();
+							coinsToRemove.push(coinDict);
+						}
+					}
+				}
+
+				if (coinsToRemove.length > 0) {
+					activeCoins = activeCoins.filter(c => !coinsToRemove.includes(c));
+				}
+			}
+
+			// 1. Initialize the Audio Context
+			const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+			let audioBuffer = null;
+			let activeSource = null;
+
+			// 2. Load and decode the sound into memory immediately
+			async function loadSound(url) {
+				try {
+					const response = await fetch(url);
+					const arrayBuffer = await response.arrayBuffer();
+					audioBuffer = await audioCtx.decodeAudioData(arrayBuffer);
+				} catch (e) {
+					console.error("Error loading audio:", e);
+				}
+			}
+
+			// Call this during your loading screen setup
+			loadSound('assets/sound.mp3');
+
+			// 3. Play the sound with zero delay, cutting off the previous one
+			function playCoinSound() {
+				if (!audioBuffer) return; // Not loaded yet
+
+				// If a sound is already playing, stop it immediately (cuts it off)
+				if (activeSource) {
+					try {
+						activeSource.stop();
+					} catch (e) {
+						// Ignore if it already finished
+					}
+				}
+
+				// Create a fresh source node from the pre-decoded buffer
+				activeSource = audioCtx.createBufferSource();
+				activeSource.buffer = audioBuffer;
+				activeSource.connect(audioCtx.destination);
+				
+				// Play instantly
+				activeSource.start(0);
+			}
+
+
+			function displayFailureNotice(err) {
+				var msg = err.message || err;
+				console.error(msg);
+				doneLoading.style.filter = 'opacity(1)';
+				doneLoading.textContent = msg;
+			};
+
+			if (!Engine.isWebGLAvailable()) {
+				displayFailureNotice('WebGL not available');
+			} else {
+				engine.init(GODOT_CONFIG.executable).then(() => {
+					return engine.preloadFile(GODOT_CONFIG.executable + '.pck');
+				}).then(() => {
+					initializing = false;
+				}).catch(displayFailureNotice);
+			}
+		})();
+	//]]></script>
+</body>
+</html>
+
+

@@ -1,0 +1,1 @@
+When exporting an HTML5 build of the game, drag and drop the assets folder into the same folder as the export. These assets are used for the preloader.
