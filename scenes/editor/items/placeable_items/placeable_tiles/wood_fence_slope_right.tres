@@ -2,13 +2,13 @@
 
 [ext_resource path="res://scenes/editor/items/placeable_tile.gd" type="Script" id=1]
 [ext_resource path="res://assets/tiles/wood_fence/icon_slopeR.png" type="Texture" id=2]
-[ext_resource path="res://assets/tiles/wood_fence/palletes/1_slopeR.png" type="Texture" id=3]
-[ext_resource path="res://assets/tiles/wood_fence/palletes/2_slopeR.png" type="Texture" id=4]
-[ext_resource path="res://assets/tiles/wood_fence/palletes/3_slopeR.png" type="Texture" id=5]
-[ext_resource path="res://assets/tiles/wood_fence/palletes/7_slopeR.png" type="Texture" id=6]
-[ext_resource path="res://assets/tiles/wood_fence/palletes/4_slopeR.png" type="Texture" id=7]
-[ext_resource path="res://assets/tiles/wood_fence/palletes/5_slopeR.png" type="Texture" id=8]
-[ext_resource path="res://assets/tiles/wood_fence/palletes/6_slopeR.png" type="Texture" id=9]
+[ext_resource path="res://assets/tiles/wood_fence/palettes/1_slopeR.png" type="Texture" id=3]
+[ext_resource path="res://assets/tiles/wood_fence/palettes/2_slopeR.png" type="Texture" id=4]
+[ext_resource path="res://assets/tiles/wood_fence/palettes/3_slopeR.png" type="Texture" id=5]
+[ext_resource path="res://assets/tiles/wood_fence/palettes/7_slopeR.png" type="Texture" id=6]
+[ext_resource path="res://assets/tiles/wood_fence/palettes/4_slopeR.png" type="Texture" id=7]
+[ext_resource path="res://assets/tiles/wood_fence/palettes/5_slopeR.png" type="Texture" id=8]
+[ext_resource path="res://assets/tiles/wood_fence/palettes/6_slopeR.png" type="Texture" id=9]
 
 [resource]
 script = ExtResource( 1 )

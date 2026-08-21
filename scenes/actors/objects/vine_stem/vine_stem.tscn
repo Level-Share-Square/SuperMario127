@@ -2,11 +2,11 @@
 
 [ext_resource path="res://scenes/actors/objects/vine_stem/vine_stem.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/objects/vine_stem/vine_stem.png" type="Texture" id=2]
-[ext_resource path="res://scenes/actors/objects/vine_stem/palletes/vine_stem2.png" type="Texture" id=3]
-[ext_resource path="res://scenes/actors/objects/vine_stem/palletes/vine_stem3.png" type="Texture" id=4]
-[ext_resource path="res://scenes/actors/objects/vine_stem/palletes/vine_stem4.png" type="Texture" id=5]
-[ext_resource path="res://scenes/actors/objects/vine_stem/palletes/vine_stem5.png" type="Texture" id=6]
-[ext_resource path="res://scenes/actors/objects/vine_stem/palletes/vine_stem1.png" type="Texture" id=7]
+[ext_resource path="res://scenes/actors/objects/vine_stem/palettes/vine_stem2.png" type="Texture" id=3]
+[ext_resource path="res://scenes/actors/objects/vine_stem/palettes/vine_stem3.png" type="Texture" id=4]
+[ext_resource path="res://scenes/actors/objects/vine_stem/palettes/vine_stem4.png" type="Texture" id=5]
+[ext_resource path="res://scenes/actors/objects/vine_stem/palettes/vine_stem5.png" type="Texture" id=6]
+[ext_resource path="res://scenes/actors/objects/vine_stem/palettes/vine_stem1.png" type="Texture" id=7]
 
 [node name="vine" type="Node2D"]
 z_index = -2

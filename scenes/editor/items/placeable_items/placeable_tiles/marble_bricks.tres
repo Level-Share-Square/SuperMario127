@@ -1,13 +1,13 @@
 [gd_resource type="Resource" load_steps=9 format=2]
 
 [ext_resource path="res://scenes/editor/items/placeable_tile.gd" type="Script" id=1]
-[ext_resource path="res://assets/tiles/marble_bricks/pallete_icons/2_block.png" type="Texture" id=2]
-[ext_resource path="res://assets/tiles/marble_bricks/pallete_icons/1_block.png" type="Texture" id=3]
+[ext_resource path="res://assets/tiles/marble_bricks/palette_icons/2_block.png" type="Texture" id=2]
+[ext_resource path="res://assets/tiles/marble_bricks/palette_icons/1_block.png" type="Texture" id=3]
 [ext_resource path="res://assets/tiles/marble_bricks/icon.png" type="Texture" id=4]
-[ext_resource path="res://assets/tiles/marble_bricks/pallete_icons/6Blue-marble_brick_icon.png" type="Texture" id=5]
-[ext_resource path="res://assets/tiles/marble_bricks/pallete_icons/4Brown-marble_brick_icon.png" type="Texture" id=6]
-[ext_resource path="res://assets/tiles/marble_bricks/pallete_icons/5Yellow-marble_brick_icon.png" type="Texture" id=7]
-[ext_resource path="res://assets/tiles/marble_bricks/pallete_icons/3Purple-marble_brick_icon.png" type="Texture" id=8]
+[ext_resource path="res://assets/tiles/marble_bricks/palette_icons/6Blue-marble_brick_icon.png" type="Texture" id=5]
+[ext_resource path="res://assets/tiles/marble_bricks/palette_icons/4Brown-marble_brick_icon.png" type="Texture" id=6]
+[ext_resource path="res://assets/tiles/marble_bricks/palette_icons/5Yellow-marble_brick_icon.png" type="Texture" id=7]
+[ext_resource path="res://assets/tiles/marble_bricks/palette_icons/3Purple-marble_brick_icon.png" type="Texture" id=8]
 
 [resource]
 script = ExtResource( 1 )

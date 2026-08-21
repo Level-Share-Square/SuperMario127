@@ -1,14 +1,14 @@
 [gd_resource type="Resource" load_steps=10 format=2]
 
 [ext_resource path="res://scenes/editor/items/placeable_tile.gd" type="Script" id=1]
-[ext_resource path="res://assets/tiles/castle_wall/pallete_icons/7icon.png" type="Texture" id=2]
-[ext_resource path="res://assets/tiles/castle_wall/pallete_icons/4icon.png" type="Texture" id=3]
-[ext_resource path="res://assets/tiles/castle_wall/pallete_icons/5icon.png" type="Texture" id=4]
-[ext_resource path="res://assets/tiles/castle_wall/pallete_icons/2icon.png" type="Texture" id=5]
-[ext_resource path="res://assets/tiles/castle_wall/pallete_icons/1icon.png" type="Texture" id=6]
-[ext_resource path="res://assets/tiles/castle_wall/pallete_icons/6icon.png" type="Texture" id=7]
+[ext_resource path="res://assets/tiles/castle_wall/palette_icons/7icon.png" type="Texture" id=2]
+[ext_resource path="res://assets/tiles/castle_wall/palette_icons/4icon.png" type="Texture" id=3]
+[ext_resource path="res://assets/tiles/castle_wall/palette_icons/5icon.png" type="Texture" id=4]
+[ext_resource path="res://assets/tiles/castle_wall/palette_icons/2icon.png" type="Texture" id=5]
+[ext_resource path="res://assets/tiles/castle_wall/palette_icons/1icon.png" type="Texture" id=6]
+[ext_resource path="res://assets/tiles/castle_wall/palette_icons/6icon.png" type="Texture" id=7]
 [ext_resource path="res://assets/tiles/castle_wall/icon.png" type="Texture" id=8]
-[ext_resource path="res://assets/tiles/castle_wall/pallete_icons/3icon.png" type="Texture" id=9]
+[ext_resource path="res://assets/tiles/castle_wall/palette_icons/3icon.png" type="Texture" id=9]
 
 [resource]
 script = ExtResource( 1 )

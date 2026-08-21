@@ -2,11 +2,11 @@
 
 [ext_resource path="res://scenes/editor/items/placeable_tile.gd" type="Script" id=1]
 [ext_resource path="res://assets/tiles/snow/slab_icon.png" type="Texture" id=2]
-[ext_resource path="res://assets/tiles/snow/pallete_icons/2_slab.png" type="Texture" id=3]
-[ext_resource path="res://assets/tiles/snow/pallete_icons/3_slab.png" type="Texture" id=4]
-[ext_resource path="res://assets/tiles/snow/pallete_icons/4_slab.png" type="Texture" id=5]
-[ext_resource path="res://assets/tiles/snow/pallete_icons/1_slab.png" type="Texture" id=6]
-[ext_resource path="res://assets/tiles/snow/pallete_icons/5_slab.png" type="Texture" id=7]
+[ext_resource path="res://assets/tiles/snow/palette_icons/2_slab.png" type="Texture" id=3]
+[ext_resource path="res://assets/tiles/snow/palette_icons/3_slab.png" type="Texture" id=4]
+[ext_resource path="res://assets/tiles/snow/palette_icons/4_slab.png" type="Texture" id=5]
+[ext_resource path="res://assets/tiles/snow/palette_icons/1_slab.png" type="Texture" id=6]
+[ext_resource path="res://assets/tiles/snow/palette_icons/5_slab.png" type="Texture" id=7]
 
 [resource]
 script = ExtResource( 1 )

@@ -1,15 +1,15 @@
 [gd_resource type="Resource" load_steps=11 format=2]
 
 [ext_resource path="res://scenes/editor/items/placeable_tile.gd" type="Script" id=1]
-[ext_resource path="res://assets/tiles/log/palletes/5_slope_L.png" type="Texture" id=2]
-[ext_resource path="res://assets/tiles/log/palletes/4_slope_L.png" type="Texture" id=3]
-[ext_resource path="res://assets/tiles/log/palletes/2_slope_L.png" type="Texture" id=4]
-[ext_resource path="res://assets/tiles/log/palletes/3_slope_L.png" type="Texture" id=5]
-[ext_resource path="res://assets/tiles/log/palletes/6_slopeL.png" type="Texture" id=6]
-[ext_resource path="res://assets/tiles/log/palletes/7_slopeL.png" type="Texture" id=7]
-[ext_resource path="res://assets/tiles/log/palletes/8_slopeL.png" type="Texture" id=8]
+[ext_resource path="res://assets/tiles/log/palettes/5_slope_L.png" type="Texture" id=2]
+[ext_resource path="res://assets/tiles/log/palettes/4_slope_L.png" type="Texture" id=3]
+[ext_resource path="res://assets/tiles/log/palettes/2_slope_L.png" type="Texture" id=4]
+[ext_resource path="res://assets/tiles/log/palettes/3_slope_L.png" type="Texture" id=5]
+[ext_resource path="res://assets/tiles/log/palettes/6_slopeL.png" type="Texture" id=6]
+[ext_resource path="res://assets/tiles/log/palettes/7_slopeL.png" type="Texture" id=7]
+[ext_resource path="res://assets/tiles/log/palettes/8_slopeL.png" type="Texture" id=8]
 [ext_resource path="res://assets/tiles/log/icon_slope_left.png" type="Texture" id=9]
-[ext_resource path="res://assets/tiles/log/palletes/1_slope_L.png" type="Texture" id=10]
+[ext_resource path="res://assets/tiles/log/palettes/1_slope_L.png" type="Texture" id=10]
 
 [resource]
 script = ExtResource( 1 )
