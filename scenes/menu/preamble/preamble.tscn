@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://scenes/menu/theme.tres" type="Theme" id=1]
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://assets/sounds/hover.wav" type="AudioStream" id=8]
 [ext_resource path="res://assets/artwork/splash_screen.png" type="Texture" id=9]
 [ext_resource path="res://scenes/menu/preamble/conditional_trans.gd" type="Script" id=10]
+[ext_resource path="res://assets/icons/Controller.svg" type="Texture" id=11]
 
 [sub_resource type="Animation" id=11]
 length = 0.001
@@ -72,6 +73,30 @@ tracks/4/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ false ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Container/Disclaimer:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Container/IPadKidDisclaimer:modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0.627451, 0.501961, 1, 0 ) ]
 }
 
 [sub_resource type="Animation" id=4]
@@ -157,6 +182,71 @@ tracks/2/keys = {
 } ]
 }
 
+[sub_resource type="Animation" id=42]
+resource_name = "show_mobile"
+length = 14.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("./SplashScreen:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.2, 0.8 ),
+"transitions": PoolRealArray( -2, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("Container/HBoxContainer/VBoxContainer/ButtonSound")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
+"values": [  ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath("AnimationPlayer")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 14 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ "end", -1, 1.0, false ],
+"method": "play"
+} ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Container/Disclaimer:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 7, 8 ),
+"transitions": PoolRealArray( 1, 1, -2 ),
+"update": 0,
+"values": [ Color( 0.627451, 0.501961, 1, 0 ), Color( 0.627451, 0.501961, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Container/IPadKidDisclaimer:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 6, 7 ),
+"transitions": PoolRealArray( 1, 1, -2 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 0.627451, 0.501961, 1, 0 ) ]
+}
+
 [sub_resource type="Animation" id=3]
 resource_name = "transition"
 length = 0.4
@@ -201,7 +291,7 @@ void fragment() {
 	COLOR = (texture(TEXTURE, UV) + n * u_amount);
 }"
 
-[sub_resource type="ShaderMaterial" id=42]
+[sub_resource type="ShaderMaterial" id=43]
 shader = SubResource( 40 )
 shader_param/u_amount = 1.75
 
@@ -229,6 +319,9 @@ font_data = ExtResource( 2 )
 
 [sub_resource type="CanvasItemMaterial" id=9]
 blend_mode = 2
+
+[sub_resource type="CanvasItemMaterial" id=44]
+blend_mode = 1
 
 [sub_resource type="DynamicFont" id=10]
 size = 24
@@ -260,6 +353,7 @@ autoplay = "transition"
 anims/RESET = SubResource( 11 )
 anims/end = SubResource( 4 )
 anims/show = SubResource( 12 )
+anims/show_mobile = SubResource( 42 )
 anims/transition = SubResource( 3 )
 
 [node name="Container" type="Control" parent="."]
@@ -282,7 +376,7 @@ rect_scale = Vector2( 0.225, 0.225 )
 
 [node name="Overlay" parent="Container/Background" index="3"]
 modulate = Color( 0.054902, 0.0117647, 0.152941, 0.270588 )
-material = SubResource( 42 )
+material = SubResource( 43 )
 
 [node name="Overlay" type="TextureRect" parent="Container"]
 modulate = Color( 0.752941, 0.752941, 1, 0.486275 )
@@ -353,6 +447,101 @@ Nintendo and buy a Nintendo Switch 2."
 align = 1
 valign = 1
 
+[node name="IPadKidDisclaimer" type="VBoxContainer" parent="Container"]
+modulate = Color( 0.627451, 0.501961, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+alignment = 1
+
+[node name="PICKITUP" type="TextureRect" parent="Container/IPadKidDisclaimer"]
+modulate = Color( 1, 1, 1, 0.501961 )
+material = SubResource( 44 )
+margin_left = 272.0
+margin_top = 83.0
+margin_right = 496.0
+margin_bottom = 243.0
+rect_min_size = Vector2( 224, 160 )
+size_flags_horizontal = 4
+texture = ExtResource( 11 )
+expand = true
+stretch_mode = 6
+
+[node name="Glow" type="TextureRect" parent="Container/IPadKidDisclaimer/PICKITUP"]
+modulate = Color( 1, 1, 1, 0.25098 )
+material = SubResource( 44 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -8.0
+margin_top = -8.0
+margin_right = 8.0
+margin_bottom = 8.0
+rect_min_size = Vector2( 224, 160 )
+size_flags_horizontal = 4
+texture = ExtResource( 11 )
+expand = true
+stretch_mode = 6
+
+[node name="Shadow" type="TextureRect" parent="Container/IPadKidDisclaimer/PICKITUP"]
+modulate = Color( 1, 1, 1, 0.25098 )
+material = SubResource( 44 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 224, 160 )
+size_flags_horizontal = 4
+texture = ExtResource( 11 )
+expand = true
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="Container/IPadKidDisclaimer"]
+unique_name_in_owner = true
+margin_top = 259.0
+margin_right = 768.0
+margin_bottom = 348.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource( 1 )
+custom_colors/font_color_shadow = Color( 0, 0.0431373, 0.313726, 1 )
+custom_constants/shadow_offset_x = 0
+custom_constants/shadow_offset_y = 2
+custom_fonts/font = SubResource( 8 )
+text = "This game is best played with a controller!
+Use touch controls only if absolutely necessary.
+
+A beefy phone is recommended for the best experience."
+align = 1
+valign = 1
+
+[node name="Shadow" type="Label" parent="Container/IPadKidDisclaimer/Label"]
+modulate = Color( 0.32549, 0.364706, 0.188235, 0.376471 )
+show_behind_parent = true
+material = SubResource( 9 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 2.0
+margin_top = 3.0
+margin_right = 2.0
+margin_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource( 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 1, 1, 1, 1 )
+custom_colors/font_color_shadow = Color( 1, 1, 1, 1 )
+custom_constants/shadow_offset_x = 0
+custom_constants/shadow_offset_y = 2
+custom_fonts/font = SubResource( 8 )
+text = "This game is best played with a controller!
+Use touch controls only if absolutely necessary.
+
+A beefy phone is recommended for the best experience."
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
 [node name="HBoxContainer" type="HBoxContainer" parent="Container"]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -404,7 +593,7 @@ volume_db = -10.0
 bus = "Sounds"
 
 [connection signal="screen_opened" from="." to="Focus" method="focus_node" flags=3]
-[connection signal="screen_opened" from="." to="AnimationPlayer" method="play" binds= [ "show" ]]
+[connection signal="screen_opened" from="." to="ConditionalTrans" method="start"]
 [connection signal="back_press" from="Focus" to="AnimationPlayer" method="play" binds= [ "end" ]]
 [connection signal="pressed" from="Container/HBoxContainer/VBoxContainer/ButtonSound" to="AnimationPlayer" method="play" binds= [ "end" ]]
 

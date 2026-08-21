@@ -3,6 +3,9 @@ extends Control
 
 onready var animation_player: AnimationPlayer = $"%AnimationPlayer"
 
+func start():
+	animation_player.play("show_mobile" if OS.has_feature("mobile") else "show")
+
 func transition():
 	var dir := Directory.new()
 	if not Singleton.PlayerSettings.game_version_mismatch or dir.file_exists("user://level_list/converted"):
