@@ -3,9 +3,9 @@ extends EditorTool
 var last_mouse_tile: Vector2
 
 
-func _click_left(_event: InputEvent, _world_pos: Vector2) -> void:
+func _click_left(event: InputEvent, _world_pos: Vector2) -> void:
 	editor.get_hovered_objects()
-	if Input.is_action_just_pressed("click"):
+	if event is InputEventMouseButton and not event.pressed and event.button_index == BUTTON_LEFT:
 		for object in editor.hovered_objects.values():
 			erase_object(object)
 			break
@@ -13,7 +13,7 @@ func _click_left(_event: InputEvent, _world_pos: Vector2) -> void:
 
 func _mouse_movement(_event: InputEvent, _world_pos: Vector2) -> void:
 	editor.get_hovered_objects()
-	if Input.is_action_pressed("click"):
+	if Input.is_mouse_button_pressed(BUTTON_LEFT):
 		for object in editor.hovered_objects.values():
 			erase_object(object)
 

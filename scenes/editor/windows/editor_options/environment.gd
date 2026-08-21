@@ -93,7 +93,7 @@ func _on_palette_selected(event: InputEvent, index: int):
 	if not event is InputEventMouseButton:
 		return
 	
-	if event.is_action_pressed("click"):
+	if event is InputEventMouseButton and not event.pressed and event.button_index == BUTTON_LEFT:
 		var resource = load("res://scenes/shared/background/foregrounds/%s/resource.tres" % foregrounds.ids[fg_index])
 		var palettes = resource.palettes
 		current_palette = index

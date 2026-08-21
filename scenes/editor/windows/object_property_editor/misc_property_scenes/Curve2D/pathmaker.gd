@@ -46,7 +46,7 @@ func _ready():
 		widget_container.hide()
 
 func _unhandled_input(event):
-	if Input.is_action_just_pressed("click"):
+	if event is InputEventMouseButton and not event.pressed and event.button_index == BUTTON_LEFT:
 		get_tree().set_input_as_handled()
 		widget_container.show()
 		line.get_node("path").curve.add_point(get_mouse_pos() - object.position)

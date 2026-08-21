@@ -5,14 +5,14 @@ var last_mouse_tile: Vector2
 var mouse_input: int = -1
 
 
-func _click(_event: InputEvent, _world_pos: Vector2) -> void:
+func _click(event: InputEvent, _world_pos: Vector2) -> void:
 	if mouse_input > -1:
 		return
 	
-	if Input.is_action_just_pressed("place"):
+	if event is InputEventMouseButton and event.pressed and event.button_index == BUTTON_LEFT:
 		draw_tile(last_mouse_tile)
 		mouse_input = 0
-	if Input.is_action_just_pressed("erase"):
+	if event is InputEventMouseButton and event.pressed and event.button_index == BUTTON_RIGHT:
 		erase_tile(last_mouse_tile)
 		mouse_input = 1
 #	elif editor.selected_item is PlaceableObject:
@@ -35,11 +35,11 @@ func _update(delta: float) -> void:
 			for point in line:
 				erase_tile(point)
 		
-		if Input.is_action_just_released("place") and mouse_input == 0:
+		if not Input.is_mouse_button_pressed(BUTTON_LEFT) and mouse_input == 0:
 			finalize_placement()
 			mouse_input = -1
 		
-		if Input.is_action_just_released("erase") and mouse_input == 1:
+		if not Input.is_mouse_button_pressed(BUTTON_RIGHT) and mouse_input == 1:
 			finalize_erase()
 			mouse_input = -1
 	

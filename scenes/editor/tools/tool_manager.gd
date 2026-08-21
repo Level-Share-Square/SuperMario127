@@ -24,16 +24,16 @@ func _unhandled_input(event: InputEvent) -> void:
 	mouse_position = parallax_scroll.corrected_mouse_position()
 	
 	if event is InputEventMouseButton:
-		if Input.is_action_just_pressed("place"):
+		if event is InputEventMouseButton and event.pressed and event.button_index == BUTTON_LEFT:
 			current_tool._click_left(event, mouse_position)
 
-		if Input.is_action_just_pressed("erase"):
+		if event is InputEventMouseButton and event.pressed and event.button_index == BUTTON_RIGHT:
 			current_tool._click_right(event, mouse_position)
 
-		if Input.is_action_just_released("place"):
+		if event is InputEventMouseButton and not event.pressed and event.button_index == BUTTON_LEFT:
 			current_tool._click_left_released(event, mouse_position)
 
-		if Input.is_action_just_released("erase"):
+		if event is InputEventMouseButton and not event.pressed and event.button_index == BUTTON_RIGHT:
 			current_tool._click_right_released(event, mouse_position)
 	elif event is InputEventMouseMotion:
 		current_tool._mouse_movement(event, mouse_position)

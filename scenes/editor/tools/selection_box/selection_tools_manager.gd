@@ -16,6 +16,7 @@ onready var editor = get_tree().get_current_scene()
 onready var selection_box = get_owner()
 
 var active_tool_hotkey: String
+var last_click: bool
 
 func _ready():
 	for node in button_container.get_children():
@@ -36,13 +37,14 @@ func _process(delta):
 		active_tool.update()
 		
 	if active_tool != null and active_tool.is_active == true:
-		if Input.is_action_just_released("click") or (active_tool_hotkey and Input.is_action_just_released(active_tool_hotkey)):
+		if last_click and not Input.is_mouse_button_pressed(BUTTON_LEFT) or (active_tool_hotkey and Input.is_action_just_released(active_tool_hotkey)):
 			selection_box.toggle_ui(true)
 			active_tool.commit_to_action()
 			active_tool.is_active = false
 			active_tool = null
 			active_tool_hotkey = ""
 	align.rect_scale = editor.get_node("EditorCamera").zoom
+	last_click = Input.is_mouse_button_pressed(BUTTON_LEFT)
 
 func button_pressed(button: SelectionToolButton):
 	if active_tool == button.associated_tool:

@@ -70,7 +70,7 @@ func show_selection_box():
 func _unhandled_input(event):
 	if editor.tool_manager.current_tool == self:
 		if selection_tools.active_tool == null:
-			if event.is_action_pressed("click") and editor.hovered_objects.empty():
+			if event is InputEventMouseButton and event.pressed and event.button_index == BUTTON_LEFT and editor.hovered_objects.empty():
 				pivot_toggle.pressed = false
 				pivot.hide()
 				pivot_position = Vector2.ZERO
@@ -95,7 +95,7 @@ func _unhandled_input(event):
 				selection_area.monitorable = true
 #				print(editor.selected_objects)
 			
-			elif event.is_action_released("click"):
+			elif event is InputEventMouseButton and not event.pressed and event.button_index == BUTTON_LEFT:
 				if start_pos != null:
 					white_highlight.visible = false
 					expand = false

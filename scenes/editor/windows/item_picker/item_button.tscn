@@ -31,3 +31,4 @@ expand = true
 
 [connection signal="button_down" from="." to="ClipBox" method="_button_down"]
 [connection signal="button_up" from="." to="ClipBox" method="_button_up"]
+[connection signal="pressed" from="." to="ClipBox" method="_pressed"]
