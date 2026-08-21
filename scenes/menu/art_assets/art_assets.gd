@@ -51,13 +51,13 @@ func _ready():
 #	bluesky_banner_img.flip_y()
 #	bluesky_banner_img.save_png("res://assets/artwork/bluesky/banner.png")
 
-	var itch_profile_banner_img: Image = itch_profile_banner.get_node("Viewport").get_texture().get_data()
-	itch_profile_banner_img.flip_y()
-	itch_profile_banner_img.save_png("res://assets/artwork/itch/profile_banner.png")
+#	var itch_profile_banner_img: Image = itch_profile_banner.get_node("Viewport").get_texture().get_data()
+#	itch_profile_banner_img.flip_y()
+#	itch_profile_banner_img.save_png("res://assets/artwork/itch/profile_banner.png")
 
-#	var itch_profile_bg_img: Image = itch_profile_bg.get_node("Viewport").get_texture().get_data()
-#	itch_profile_bg_img.flip_y()
-#	itch_profile_bg_img.save_png("res://assets/artwork/itch/profile_bg.png")
+	var itch_profile_bg_img: Image = itch_profile_bg.get_node("Viewport").get_texture().get_data()
+	itch_profile_bg_img.flip_y()
+	itch_profile_bg_img.save_png("res://assets/artwork/itch/profile_bg.png")
 
 #	var splash_img: Image = splash_screen.get_node("Viewport").get_texture().get_data()
 #	splash_img.flip_y()
