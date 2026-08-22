@@ -1,5 +1,7 @@
 extends State
 
+# warnings-disable
+
 class_name SpinningState
 
 export var boost_power: float = 175
