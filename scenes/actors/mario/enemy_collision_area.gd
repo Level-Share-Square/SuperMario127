@@ -8,7 +8,7 @@ export(NodePath) var normal_shape
 export(NodePath) var dive_shape
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if not is_instance_valid(get_node_or_null(dive_shape)):
 		return
 	
