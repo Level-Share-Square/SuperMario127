@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/1.png-58dd5ef8e3058e5dabcaed74ffe5a44c.stex"
+path="res://.import/7.png-10dc627d77615d9820a42a27b42f4b9e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/tiles/castle_pillar/palette_icons/1.png"
-dest_files=[ "res://.import/1.png-58dd5ef8e3058e5dabcaed74ffe5a44c.stex" ]
+source_file="res://assets/tiles/castle_pillar/7.png"
+dest_files=[ "res://.import/7.png-10dc627d77615d9820a42a27b42f4b9e.stex" ]
 
 [params]
 
