@@ -377,7 +377,7 @@ static func get_collectible_data_from_old_data(level_data) -> CollectibleData:
 				
 				star_coin_datas.append(star_coin_data)
 	
-	return CollectibleData.new(mission_datas, star_coin_datas, 0, used_mission_datas)
+	return CollectibleData.new(mission_datas, star_coin_datas, 0, used_mission_datas, false, [])
 
 
 static func get_area_data_from_old_data(old_area: AreaDataOld) -> AreaData:

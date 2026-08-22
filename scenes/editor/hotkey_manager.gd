@@ -1,5 +1,6 @@
 extends Node2D
 
+onready var editor: Editor = owner
 
 var action_signal_array: Array = [
 	"grid_toggle",
@@ -90,3 +91,9 @@ func _unhandled_input(event: InputEvent) -> void:
 			emit_signal("switch_item", event.physical_scancode - KEY_0 - 1)
 		if event.physical_scancode >= KEY_F1 and event.physical_scancode <= KEY_F4:
 			emit_signal("switch_loadout", event.physical_scancode - KEY_F1)
+	
+	if event.is_action_pressed("8_pixel_lock"):
+		editor.pixel_lock = true if editor.invert_pixel_lock else false
+	
+	if event.is_action_released("8_pixel_lock"):
+		editor.pixel_lock = false if editor.invert_pixel_lock else true

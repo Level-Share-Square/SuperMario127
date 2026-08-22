@@ -27,7 +27,10 @@ func on_button_pressed(button: Button):
 			editor.focus_layer = button.pressed
 			shared.focus_layer(editor.focus_layer, editor.layer)
 		"PixelSnap":
-			editor.pixel_lock = button.pressed
+			editor.invert_pixel_lock = button.pressed
+			editor.pixel_lock = Input.is_action_pressed("8_pixel_lock")
+			if button.pressed:
+				editor.pixel_lock = not editor.pixel_lock
 		"FastTest":
 			LocalSettings.change_setting("Editor", "fast_test", button.pressed)
 		"Autosaves":
