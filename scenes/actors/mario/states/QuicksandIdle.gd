@@ -16,7 +16,7 @@ func _start_check(_delta):
 		if liquid.liquid_type == liquid.LiquidType.Quicksand:
 			return true
 
-func _start(delta):
+func _start(_delta):
 	pass
 
 func _update(delta):
