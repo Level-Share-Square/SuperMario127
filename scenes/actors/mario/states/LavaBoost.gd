@@ -20,7 +20,7 @@ func _ready():
 	override_rotation = true
 
 func _start_check(_delta):
-	false
+	pass
 	
 func _start(_delta):
 	liquid_areas = character.liquid_detector.get_overlapping_areas()
