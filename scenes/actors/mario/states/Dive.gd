@@ -1,6 +1,6 @@
 extends State
 
-# warning-ignore-all:shadowed_variable
+# warnings-disable
 
 class_name DiveState
 

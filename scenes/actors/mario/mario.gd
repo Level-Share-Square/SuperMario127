@@ -1,8 +1,7 @@
 class_name Character
 extends KinematicBody2D
 
-# warning-ignore-all:unused_signal
-# warning-ignore-all:unused_variable
+# warnings-disable
 
 signal state_changed
 signal health_changed(new_health, new_shards)
