@@ -1,5 +1,7 @@
 extends State
 
+# warning-ignore-all:shadowed_variable
+
 class_name DiveState
 
 const LAND_SQUISH := Vector2(1.15, 0.85)
