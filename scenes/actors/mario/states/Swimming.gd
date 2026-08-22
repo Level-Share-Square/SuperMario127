@@ -1,5 +1,7 @@
 extends State
 
+# warnings-disable
+
 class_name SwimmingState
 
 const JUMP_SQUISH := Vector2(0.8, 1.2)
