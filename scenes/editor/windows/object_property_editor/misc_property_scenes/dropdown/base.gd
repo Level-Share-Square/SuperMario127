@@ -28,8 +28,9 @@ func load_property(_editor: Editor, init_value, _property: Array, property_name 
 		var property_info = property[2]
 		if property_info is PropertyInfo:
 			hint_tooltip = property_info.hint
-
-	yield(self, "ready")
+	
+	if not ready:
+		yield(self, "ready")
 	reload_lookup_table()
 	
 	property_changed(property_id, init_value)

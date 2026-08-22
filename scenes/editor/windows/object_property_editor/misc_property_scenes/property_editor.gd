@@ -12,6 +12,7 @@ export var check_matches: bool = true
 var editor: Editor
 var window: EditorWindow
 var property: Array
+var ready: bool = false
 
 signal property_edited(property, value, check_matches, save_to_data)
 
@@ -38,6 +39,7 @@ func _ready():
 		if "hover_sound" in node:
 			node.hover_sound = hover_sound
 			node.click_sound = click_sound
+	ready = true
 
 
 func property_changed(key: String, new_value):
