@@ -83,14 +83,15 @@ func _ready():
 	anim_player.play_backwards("transition")
 
 func start_level():
+	if not shine_parent.can_interact: return
+	shine_parent.can_interact = false
+	
 	var mission_data: MissionData = CurrentLevelData.level_metadata.collectible_data.mission_data[shine_parent.selected_shine_index]
 	CurrentLevelData.level_transition_data = {
 		"target_area": mission_data.spawn_area_id,
 		"target_tag": mission_data.spawn_teleporter_tag
 	}
-	
-	if not shine_parent.can_interact: return
-	shine_parent.can_interact = false
+	CurrentLevelData.switch_to_area(CurrentLevelData.level_transition_data.get("target_area", 0))
 	
 	player_anim_player.play("start")
 	transition_audio.play()
