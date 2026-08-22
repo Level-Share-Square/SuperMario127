@@ -20,7 +20,7 @@ func _start_check(_delta):
 		if liquid.liquid_type == liquid.LiquidType.Quicksand:
 			return (jump_buffer > 0 or (dive_buffer > 0 and abs(character.velocity.x) > 50 and !character.test_move(character.transform, Vector2(8 * character.facing_direction, 0))))
 
-func _start(delta):
+func _start(_delta):
 	length_remaining = jump_length
 	
 	character.quicksand_particles.set_particles_emitting(true)
@@ -31,7 +31,7 @@ func _start(delta):
 	character.jump_animation = 0
 	character.current_jump = 1
 
-func _update(delta):
+func _update(_delta):
 	if character.facing_direction == 1:
 		if character.jump_animation == 0:
 			character.sprite.animation = "jumpRight"
