@@ -10,7 +10,7 @@ var character
 func _ready():
 	character = get_node("../..")
 	
-func _process(delta):
+func _process(_delta):
 	if character.state == $"../../States/GroundPoundState":
 		material = character.sprite.material
 		frames = character.sprite.frames
