@@ -279,6 +279,9 @@ shared_path = NodePath("LevelShared")
 
 [node name="LevelShared" parent="." instance=ExtResource( 5 )]
 unique_name_in_owner = true
+nodes_to_load = null
+boo_block_texture = null
+boo_block_texture_invis = null
 
 [node name="EditorCamera" parent="." instance=ExtResource( 7 )]
 unique_name_in_owner = true

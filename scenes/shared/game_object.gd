@@ -264,7 +264,7 @@ func set_property_by_id(property_id: int, value, change_object_data: bool = fals
 
 func set_property(property: String, value, change_object_data = false):
 	if typeof(self[property]) != typeof(value):
-		prints(self.object_data.properties, property, property_ids, typeof(value), typeof(self[property]))
+		# prints(self.object_data.properties, property, property_ids, typeof(value), typeof(self[property]))
 		printerr("Object ", name, " tried to set property \"" + property + "\", but the provided type does not match.")
 		return
 

@@ -51,7 +51,7 @@ func load_layers(layer_data_list: Array):
 		if can_load:
 			var layer: LevelLayer = add_layer(layer_data)
 			if layer.layer_data.layer_metadata.is_origin:
-				origin = layer
+				origin = layer if layer is LevelGroundLayer else null
 			
 	# This is a failsafe in case none of the layers are origin
 	if !origin:

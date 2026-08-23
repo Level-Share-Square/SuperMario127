@@ -38,7 +38,6 @@ func _input(event: InputEvent) -> void:
 			set_property("offset", offset, true)
 
 func _ready():
-	get_parent().connect("objects_ready", self, "ready_synced")
   
 	use_area.connect("mouse_entered", self, "_on_UseArea_mouse_entered")
 	use_area.connect("mouse_exited", self, "_on_UseArea_mouse_exited")
@@ -50,6 +49,14 @@ func _ready():
 
 	else:
 		offset_line.visible = true
+
+	# This is *supposed* to be called through a signal
+	# to ensure all objects are loaded in... but it works
+	# without that. Sooooooo i don't care!
+	# If it breaks though this is the issue
+	# right here VVVV
+	ready_synced()
+
 	
 func _object_ready():
 	if is_enabled_and_on_ground():
@@ -57,6 +64,7 @@ func _object_ready():
 	
 
 func ready_synced():
+	print("hi")
 	if mode != 1:
 		if auto_activate:
 			set_liquid_level(null)
