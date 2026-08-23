@@ -1,134 +1,36 @@
-extends GameObject
+extends BoxBase
 
-onready var sprite = $Sprite
-onready var area = $Area2D
-onready var static_body = $StaticBody2D
-onready var collision_shape = $StaticBody2D/CollisionShape2D
-onready var stomp_area = $StompArea
-onready var spin_area = $SpinArea
-onready var turbo_spin_area = $TurboSpinArea
-onready var player_detector = $PlayerStompDetector
-onready var player_spin_detector = $PlayerSpinDetector
-onready var broken_sound = $Broken
-onready var break_particle = $BreakParticle
-onready var dust_particle = $DustParticle
-var broken = false
 
-var coins := 0
-var time_alive := 0.0
+const INITIAL_VEL: float = 150.0
+const DEFAULT_SIZE := Vector2(32, 32)
 
-#func _set_properties():
-#	savable_properties = ["coins"]
-#	editable_properties = ["coins"]
+onready var sprite = $"%Sprite"
+onready var break_particles = $"%BreakParticles"
 
-func _register_properties(): register_property(4, "coins", coins, true)
+var coins: int = 0
+var size := DEFAULT_SIZE
+
+
+func _register_properties(): 
+	register_property(4, "coins", coins, true)
+	register_property(5, "size", size, true)
+
 
 func _ready():
-	if scale != Vector2.ONE: # Nothing to do on default scale
-		# Set inverse scale on the body so its overall scale is identity.
-		# For whatever reason, division doesn't work on vectors, soo
-		static_body.scale = Vector2(1.0 / scale.x, 1.0 / scale.y)
-		# So it doesn't modify all other boxes
-		collision_shape.shape = collision_shape.shape.duplicate()
-		# Modify the extents by the scale to get the desired collision shape
-		collision_shape.shape.extents = Vector2(collision_shape.shape.extents.x * scale.x,\
-												collision_shape.shape.extents.y * scale.y)
+	var _connect = connect("property_changed", self, "update_property")
+	update_property("size", size)
+
+
+func update_property(key: String, value):
+	if key == "size":
+		sprite.rect_size = value
+		sprite.rect_pivot_offset = sprite.rect_size / 2
+		sprite.rect_position = -value / 2
 		
-	break_particle.hide()
-	dust_particle.hide()
-	
-func _object_ready():
-	._object_ready()
-	if !is_enabled_and_on_ground():
-		collision_shape.disabled = true
-		for _area in [area, stomp_area, spin_area, turbo_spin_area]:
-			_area.collision_layer = 0
-			_area.collision_mask = 0
-	
-#warning-ignore:unused_argument
-func exploded(hit_pos):
-	if !broken:
-		break_box()
-
-#warning-ignore:unused_argument
-func steely_hit(hit_pos):
-	if !broken:
-		break_box()
-
-func break_box():
-	if !broken:
-		broken = true
-		if !broken_sound.is_playing(): 
-			var velocity_x = -80 if int(time_alive * 10) % 2 == 0 else 80
-			for i in(coins): create_coin(1, static_body, true, Vector2(velocity_x, -300))
-			break_particle.show()
-			dust_particle.show()
-			break_particle.set_emitting(true)
-			dust_particle.set_emitting(true)
-			broken_sound.play()
-			sprite.visible = false
-			static_body.set_collision_layer_bit(0, false)
-			static_body.set_collision_mask_bit(1, false)
-			stomp_area.set_collision_layer_bit(0, false)
-			yield(get_tree().create_timer(3.0), "timeout")
-			queue_free() # die
-
-func top_breakable(hit_body):
-	if hit_body.name == "Steely" and hit_body.get_parent().should_hit:
-		return true
-	return hit_body.name.begins_with("Character") and (hit_body.velocity.y > 0 and !hit_body.is_grounded()) and (hit_body.big_attack or hit_body.invincible)
-
-func side_breakable(hit_body):
-	if hit_body.name == "Steely" and hit_body.get_parent().should_hit:
-		return true
-	elif hit_body.has_method("is_hurt_area"):
-		return true
-	return hit_body.name.begins_with("Character") and ((hit_body.attacking and !hit_body.big_attack) or hit_body.invincible)
-
-func turbo_breakable(hit_body):
-	return hit_body.name.begins_with("Character") and hit_body.using_turbo
-
-func is_rainbow(body):
-	return body.powerup != null and body.powerup.id == "Rainbow"
-
-func is_metal(body):
-	return body.powerup != null and body.powerup.id == "Metal"
-
-func handle_character_exception(character: Character):
-	if !is_instance_valid(character): return
-	
-	if (is_rainbow(character) or is_metal(character)) or\
-	player_spin_detector.overlaps_body(character) and (side_breakable(character) or turbo_breakable(character))\
-	or player_detector.overlaps_body(character) and top_breakable(character):
-		static_body.add_collision_exception_with(character)
-	else:
-		static_body.remove_collision_exception_with(character)
-
-func _physics_process(delta):
-	if mode != 1 and is_enabled_and_on_ground(): 
-		time_alive += delta
+		var scale_factor: Vector2 = sprite.rect_size / DEFAULT_SIZE
+		break_particles.process_material = break_particles.process_material.duplicate()
+		break_particles.process_material.initial_velocity = INITIAL_VEL * (scale_factor.x + scale_factor.y)/2
 		
-		for hit_body in stomp_area.get_overlapping_bodies():
-			if !broken and top_breakable(hit_body):
-				break_box()
-		for hit_body in spin_area.get_overlapping_bodies():
-			if !broken and side_breakable(hit_body):
-				break_box()
-		for hit_area in spin_area.get_overlapping_areas():
-			if !broken and side_breakable(hit_area):
-				break_box()
-		for hit_body in turbo_spin_area.get_overlapping_bodies():
-			if !broken and turbo_breakable(hit_body):
-				break_box()
-		
-		var scene : Node = get_tree().current_scene
-		if scene.has_node(scene.character):
-			handle_character_exception(scene.get_node(scene.character))
-
-func is_middle(check):
-	.is_middle(check)
-	if !check:
-		collision_shape.disabled = true
-		for _area in [area, stomp_area, spin_area, turbo_spin_area]:
-			_area.collision_layer = 0
-			_area.collision_mask = 0
+		box_collision.shape = box_collision.shape.duplicate()
+		editor_collision.shape = box_collision.shape
+		box_collision.shape.extents = value / 2

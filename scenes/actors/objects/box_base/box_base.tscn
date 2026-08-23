@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/actors/objects/box_base/box_base.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/objects/breakable_block/breakable_block.png" type="Texture" id=2]
@@ -7,10 +7,7 @@
 extents = Vector2( 16, 16 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 2, 11.5 )
-
-[sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 13, 1.5 )
+extents = Vector2( 40, 40 )
 
 [node name="BoxBase" type="Node2D"]
 script = ExtResource( 1 )
@@ -18,33 +15,38 @@ script = ExtResource( 1 )
 [node name="Box" type="StaticBody2D" parent="."]
 unique_name_in_owner = true
 
-[node name="Sprite" type="Sprite" parent="Box"]
+[node name="Sprite" type="TextureRect" parent="Box"]
 unique_name_in_owner = true
+margin_left = -16.0
+margin_top = -16.0
+margin_right = 16.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 32, 32 )
+mouse_filter = 2
 texture = ExtResource( 2 )
+expand = true
+stretch_mode = 2
 
 [node name="BoxCollision" type="CollisionShape2D" parent="Box"]
 unique_name_in_owner = true
+visible = false
+shape = SubResource( 1 )
+
+[node name="EditorHitbox" type="Area2D" parent="."]
+visible = false
+position = Vector2( -16, -16 )
+
+[node name="EditorCollision" type="CollisionShape2D" parent="EditorHitbox"]
+unique_name_in_owner = true
+position = Vector2( 16, 16 )
 shape = SubResource( 1 )
 
 [node name="PlayerDetector" type="Area2D" parent="."]
 unique_name_in_owner = true
-collision_layer = 0
-collision_mask = 2
+visible = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
-position = Vector2( -0.5, 27.5 )
+[node name="BoxCollision" type="CollisionShape2D" parent="PlayerDetector"]
 shape = SubResource( 2 )
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="PlayerDetector"]
-position = Vector2( 29, -0.5 )
-shape = SubResource( 3 )
-
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="PlayerDetector"]
-position = Vector2( -29, 0 )
-shape = SubResource( 3 )
-
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="PlayerDetector"]
-position = Vector2( 0, -27 )
-shape = SubResource( 2 )
-
-[connection signal="body_entered" from="PlayerDetector" to="." method="player_entered"]
+[node name="BreakAnimation" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
