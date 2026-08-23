@@ -51,7 +51,7 @@ void fragment() {
 	if (UV.y < sine_height) {
 		color.a = 0.0;
 	} else {
-		float gradient_pos = round(((UV.y * 2.0) - (sine_height * 2.0)) * 3.0) / 3.0;
+		float gradient_pos = (UV.y * 2.0) - (sine_height * 2.0);
 		float mix_amount = clamp(1.0 - gradient_pos, 0.0, 1.0);
 		color.rgb = mix(color.rgb, vec3(1), mix_amount);
 	}
