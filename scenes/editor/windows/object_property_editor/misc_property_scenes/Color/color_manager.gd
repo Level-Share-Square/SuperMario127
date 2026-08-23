@@ -34,7 +34,6 @@ func _ready():
 	gradient.connect("gui_input", self, "gui_input")
 
 func gui_input(event):
-	var editor = get_tree().current_scene
 	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT and event.pressed:
 		var mouse_pos: Vector2 = get_global_mouse_position()
 		
@@ -46,7 +45,7 @@ func gui_input(event):
 func circle_has_point(center: Vector2, radius: float, point: Vector2) -> bool:
 	return center.distance_squared_to(point) <= (radius * radius)
 
-func _process(delta):
+func _process(_delta):
 	if !expand_button.active: return
 	if move_wheel:
 		var mouse_pos: Vector2 = get_global_mouse_position()
@@ -76,7 +75,6 @@ func _process(delta):
 
 func update_color() -> void:
 	var selector_center: Vector2 = color_selector.rect_global_position
-	var wheel_center: Vector2 = wheel.rect_global_position + wheel.rect_size/2
 	
 	var offset: Vector2 = selector_center - wheel.get_global_rect().get_center()
 	
@@ -132,12 +130,13 @@ func component_changed(value: float, component: int):
 
 func hex_code_entered():
 	var new_code: String = hex_code.get_node("LineEdit").text
+	if new_code.begins_with("#"): new_code = new_code.substr(1)
 	if new_code.is_valid_hex_number():
 		color = Color(new_code)
 	finish_color()
 	update_nodes() 
 
-func text_entered(new_text: String):
+func text_entered(_new_text: String):
 	hex_code.get_node("LineEdit").release_focus()
 
 func finish_color():

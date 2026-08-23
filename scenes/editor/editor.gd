@@ -77,9 +77,9 @@ func _ready():
 	oob_overlay.set_bounds(Rect2(rect.position*32, rect.size*32))
 		
 
-func open_object_properties(selected_objects):
-	var objects: Dictionary
-	for selected_object in selected_objects:
+func open_object_properties(new_selected_objects):
+	var objects: Dictionary = {}
+	for selected_object in new_selected_objects:
 		objects[selected_object] = selected_object.placeable_item
 	object_settings_window.load_objects(objects)
 

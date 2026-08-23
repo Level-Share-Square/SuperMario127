@@ -35,3 +35,4 @@ addons/godot_editor_discord_presence/README.md
 scenes/menu/loading/loading.tscn
 scenes/actors/mario/materials/palette_swap.tres
 .vscode/settings.json
+.vscode/launch.json

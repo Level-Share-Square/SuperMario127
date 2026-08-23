@@ -56,7 +56,7 @@ func _update_modulate() -> void:
 
 
 func _modulate_autoset() -> Color:
-	return Color.white
+	return layer_tint
 
 func find_objects_in_rect(rect: Rect2) -> Array:
 	var found_objects: Array = []

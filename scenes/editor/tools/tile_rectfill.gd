@@ -19,7 +19,7 @@ func _click_right(_event, _world_pos) -> void:
 	
 	is_erasing = not tool_manager.is_erasing
 	
-func _click_right_released(event, mouse_position) -> void:
+func _click_right_released(_event, _mouse_position) -> void:
 	is_dragging = false
 	set_highlight_mode(false)
 	on_mouse_released()
