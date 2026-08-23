@@ -56,6 +56,7 @@ static func serialize_level_tags(level_tags: LevelTags) -> String:
 	code += serialize_data_array(level_tags.teleport_tags)
 	code += serialize_data_array(level_tags.dialogue_tags)
 	code += serialize_data_array(level_tags.liquid_tags)
+	code += serialize_data_array(level_tags.key_tags)
 	
 	return wrap_code_in_brackets(code)
 

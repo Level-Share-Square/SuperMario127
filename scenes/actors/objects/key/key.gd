@@ -20,6 +20,7 @@ var was_visible: bool
 
 var collected = false
 var character
+var key_data: KeyData
 
 #func _set_properties():
 #	savable_properties = ["id", "color"]
@@ -27,10 +28,14 @@ var character
 
 func _register_properties():
 	register_property(4, "id", id)
+	set_property_override("id", PropertyTab.OverrideTypes.DROPDOWN, [CurrentLevelData.level_tags, "get_key_args", [CurrentLevelData.level_tags, "key_tags"]])
 	register_property(5, "color", color)
 	register_property(6, "collect_text", collect_text)
+
+func _ready(): 
+	key_data = KeyData.new(id, color, visible)
 	
-func _physics_process(delta):
+func _physics_process(_delta):
 	if collected:
 		if character.is_grounded(): #character isnt defined until later
 			play_get_anim()
@@ -107,7 +112,7 @@ func restore_control(_animation : String, character : Character) -> void:
 	character.shine_cutscene = false
 	queue_free()
 
-func update_property(key, value):
+func update_property(key, _value):
 	if key == "color":
 		vector_rays.color = color
 		if color == DEFAULT_COLOR:
@@ -116,6 +121,31 @@ func update_property(key, value):
 		else:
 			sprite.texture = RECOLORABLE_TEXTURE
 			sprite.self_modulate = color
+
+	if is_instance_valid(key_data):
+		if CurrentLevelData.level_tags.key_object_map.has(key_data.tag):
+			var i: int = CurrentLevelData.level_tags.find_key_index(key_data.tag, key_data)
+			if i != -1:
+				CurrentLevelData.level_tags.key_object_map[key_data.tag].remove(i)
+
+		key_data = KeyData.new(id, color, visible if mode == 0 else visibility)
+
+		if not CurrentLevelData.level_tags.key_object_map.has(id):
+			CurrentLevelData.level_tags.key_object_map.get_or_add(id, [key_data])
+		else:
+			CurrentLevelData.level_tags.key_object_map[id].append(key_data)
+
+func _object_removed(free: bool) -> void:
+	._object_removed(free)
+
+	var index = CurrentLevelData.level_tags.find_key_index(id, key_data)
+	if index != -1: CurrentLevelData.level_tags.key_object_map[id].remove(index)
+	
+func _object_restored() -> void:
+	._object_restored()
+	
+	CurrentLevelData.level_tags.key_object_map[id].append(key_data)
+
 
 func _object_ready():
 	if id in CurrentLevelData.checkpoint_data.current_local_keys:

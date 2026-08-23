@@ -80,8 +80,10 @@ static func deserialize_level_tags(level_tags_code: String) -> LevelTags:
 	var teleport_tags: Array =  deserialize_datas_code(components[0])
 	var dialogue_tags: Array =  deserialize_datas_code(components[1])
 	var liquid_tags: Array =  deserialize_datas_code(components[2])
+	if components.size() <= 3: return LevelTags.new(teleport_tags, dialogue_tags, liquid_tags)
+	var key_tags: Array =  deserialize_datas_code(components[3])
 	
-	return LevelTags.new(teleport_tags, dialogue_tags, liquid_tags)
+	return LevelTags.new(teleport_tags, dialogue_tags, liquid_tags, key_tags)
 
 static func deserialize_area_code(area_code: String) -> AreaData:
 	var area_components_code = LevelCodeTokenizer.splice_area_components(area_code)

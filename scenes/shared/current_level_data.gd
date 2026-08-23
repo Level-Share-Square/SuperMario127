@@ -134,6 +134,28 @@ func load_level_headers(code: String) -> void:
 		var area_header: AreaHeader = LevelCodeDeserializer.deserialize_area_header_code(area_code)
 		area_headers.append(area_header)
 
+	populate_keys()
+
+func populate_keys() -> void:
+	level_tags.key_object_map.clear()
+	for area_header in area_headers:
+		var area = LevelCodeDeserializer.deserialize_area_code(area_header.area_code)
+		for layer in area.layers:
+			for object in layer.object_data:
+				if object.metadata.type_id == 149 and object.properties.get(4):
+					var object_properties: Dictionary = object.properties
+					var key_data := KeyData.new()
+					# PLEASE GIVE ME CONSTRUCTOR OVERLOADINGGGGGGGGGGGG
+					if object_properties.has(4): key_data.tag = object_properties[4]
+					if object_properties.has(5): key_data.color = object_properties[5] 
+					if object_properties.has(3): key_data.visible = object_properties[3]
+
+					var index = level_tags.find_key_index(key_data.tag, key_data)
+
+					if index == -1:
+						level_tags.key_object_map.get_or_add(key_data.tag, [key_data])
+						continue
+					level_tags.key_object_map[key_data.tag].append(key_data)
 
 func switch_to_area(new_area_id: int, always_reload: bool = true, keep_old_loaded: bool = false) -> void:
 	if not keep_old_loaded:
