@@ -463,6 +463,7 @@ static func get_new_area_code(header: AreaHeader, old_area: AreaDataOld) -> Area
 		if old_object.type_id == 29: # goomba
 			old_object.properties.resize(10)
 			var color = old_object.properties[4]
+			position += Vector2(0, -3)
 			old_object.properties[4] = float(15)
 			old_object.properties[5] = 0
 			old_object.properties[6] = 1
