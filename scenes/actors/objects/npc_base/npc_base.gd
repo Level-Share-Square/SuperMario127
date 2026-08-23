@@ -62,7 +62,7 @@ func _register_properties():
 	set_property_override("tag_link", PropertyTab.OverrideTypes.DROPDOWN, [CurrentLevelData.level_tags, "get_dialogue_args", [CurrentLevelData.level_tags, "dialogue_tags"]])
 	
 	if add_required_shines:
-		register_property(15, "required_shines", required_shines, true)
+		register_property(15, "required_shines", required_shines, false)
 
 
 
