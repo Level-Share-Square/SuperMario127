@@ -257,8 +257,7 @@ static func convert_054_to_055(result):
 						var teleport_mode = object.properties[9]
 						var force_fadeout = object.properties[10]
 						object.properties[11] = color
-						if not object.properties[8] is Color: # hacky fix cuz this was crashing on lethal lava land
-							object.properties[8] = int(teleport_mode) # true = remote, false = local (why was it that way :/)
+						object.properties[8] = int(teleport_mode) # true = remote, false = local (why was it that way :/)
 						object.properties[9] = 0 if force_fadeout == true else 800 # setting max pan distance to 0 acts the same as force fadeout
 						object.properties[10] = ""
 					
@@ -464,6 +463,7 @@ static func get_new_area_code(header: AreaHeader, old_area: AreaDataOld) -> Area
 		if old_object.type_id == 29: # goomba
 			old_object.properties.resize(10)
 			var color = old_object.properties[4]
+			position += Vector2(0, -3)
 			old_object.properties[4] = float(15)
 			old_object.properties[5] = 0
 			old_object.properties[6] = 1
