@@ -38,6 +38,10 @@ func box_expansion():
 	var tile_fill_rect := Rect2(get_tile_grid_position(fill_rect.position), get_tile_grid_position(fill_rect.size))
 	
 	var update_bitmask: bool = false
+
+	var layer = shared.get_layer(editor.layer)
+	editor.tile_buffer.z_index = layer.z_index
+	editor.tile_buffer.modulate = layer.layer_tint
 	
 	for cell in editor.tile_buffer.get_used_cells():
 		if not tile_fill_rect.has_point(cell):
