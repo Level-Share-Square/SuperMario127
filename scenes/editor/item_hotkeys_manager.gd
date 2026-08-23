@@ -41,7 +41,7 @@ func flip_objects(multiplier: Vector2, objects: Array): # Hello everybody my nam
 	editor.action_manager.commit_action(action)
 
 func setup_flipped_objects(multiplier: Vector2, objects) -> Dictionary:
-	var affected_objects: Dictionary
+	var affected_objects: Dictionary = {}
 	for object in objects:
 		affected_objects[object] = {
 			"changed_properties": {
@@ -58,7 +58,7 @@ func disable_objects(objects: Array): # Hello everybody my name is
 	editor.action_manager.commit_action(action)
 
 func setup_disabled_objects(objects) -> Dictionary:
-	var affected_objects: Dictionary
+	var affected_objects: Dictionary = {}
 	for object in objects:
 		affected_objects[object] = {
 			"changed_properties": {
