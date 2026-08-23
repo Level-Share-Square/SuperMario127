@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=252 format=2]
+[gd_resource type="Resource" load_steps=253 format=2]
 
 [ext_resource path="res://scenes/editor/items/placeable_items.gd" type="Script" id=1]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/blue_coin.tres" type="Resource" id=2]
@@ -251,6 +251,7 @@
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/net.tres" type="Resource" id=249]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/big_crate.tres" type="Resource" id=250]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/chain.tres" type="Resource" id=251]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/box_test.tres" type="Resource" id=252]
 
 [resource]
 script = ExtResource( 1 )
@@ -275,6 +276,7 @@ placeable_items = {
 "obj_bone_platform": ExtResource( 20 ),
 "obj_boo": ExtResource( 97 ),
 "obj_bowser_banner": ExtResource( 105 ),
+"obj_box_test": ExtResource( 252 ),
 "obj_breakable_block": ExtResource( 35 ),
 "obj_bridge_cobweb": ExtResource( 117 ),
 "obj_bully": ExtResource( 123 ),
