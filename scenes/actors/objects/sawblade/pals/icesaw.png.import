@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/icon_1.png-0568366d20943e46c29887b528c500fd.stex"
+path="res://.import/icesaw.png-8058f062c1d192a7926b4d4543342b5d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/actors/objects/sawblade/pals/icon_1.png"
-dest_files=[ "res://.import/icon_1.png-0568366d20943e46c29887b528c500fd.stex" ]
+source_file="res://scenes/actors/objects/sawblade/pals/icesaw.png"
+dest_files=[ "res://.import/icesaw.png-8058f062c1d192a7926b4d4543342b5d.stex" ]
 
 [params]
 

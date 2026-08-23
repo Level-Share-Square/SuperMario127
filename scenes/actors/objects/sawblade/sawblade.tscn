@@ -1,52 +1,20 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://scenes/actors/objects/sawblade/sawblade.gd" type="Script" id=1]
-[ext_resource path="res://scenes/actors/objects/sawblade/pals/rustsaw2.png" type="Texture" id=2]
+[ext_resource path="res://scenes/actors/objects/sawblade/sawblade.png" type="Texture" id=2]
 [ext_resource path="res://scenes/actors/objects/sawblade/Saw.gd" type="Script" id=3]
 [ext_resource path="res://scenes/actors/objects/sawblade/circle.png" type="Texture" id=4]
 [ext_resource path="res://scenes/actors/objects/sawblade/metal_bounce.ogg" type="AudioStream" id=5]
-[ext_resource path="res://scenes/actors/objects/sawblade/pals/icesaw1.png" type="Texture" id=6]
-[ext_resource path="res://scenes/actors/objects/sawblade/pals/goldsaw2.png" type="Texture" id=7]
-[ext_resource path="res://scenes/actors/objects/sawblade/pals/icesaw2.png" type="Texture" id=8]
-[ext_resource path="res://scenes/actors/objects/sawblade/sawblade2.png" type="Texture" id=9]
-[ext_resource path="res://scenes/actors/objects/sawblade/pals/darksaw2.png" type="Texture" id=10]
-[ext_resource path="res://scenes/actors/objects/sawblade/pals/darksaw1.png" type="Texture" id=11]
-[ext_resource path="res://scenes/actors/objects/sawblade/pals/goldsaw1.png" type="Texture" id=12]
-[ext_resource path="res://scenes/actors/objects/sawblade/sawblade1.png" type="Texture" id=13]
-[ext_resource path="res://scenes/actors/objects/sawblade/pals/rustsaw1.png" type="Texture" id=14]
+[ext_resource path="res://scenes/actors/objects/sawblade/pals/goldsaw.png" type="Texture" id=6]
+[ext_resource path="res://scenes/actors/objects/sawblade/pals/icesaw.png" type="Texture" id=7]
+[ext_resource path="res://scenes/actors/objects/sawblade/pals/darksaw.png" type="Texture" id=8]
+[ext_resource path="res://scenes/actors/objects/sawblade/pals/rustsaw.png" type="Texture" id=9]
+[ext_resource path="res://scenes/actors/objects/sawblade/sprite_rot.gd" type="Script" id=17]
 
 [sub_resource type="Curve2D" id=4]
 _data = {
 "points": PoolVector2Array(  )
 }
-
-[sub_resource type="SpriteFrames" id=5]
-animations = [ {
-"frames": [ ExtResource( 13 ), ExtResource( 9 ) ],
-"loop": true,
-"name": "0",
-"speed": 8.0
-}, {
-"frames": [ ExtResource( 12 ), ExtResource( 7 ) ],
-"loop": true,
-"name": "1",
-"speed": 8.0
-}, {
-"frames": [ ExtResource( 14 ), ExtResource( 2 ) ],
-"loop": true,
-"name": "2",
-"speed": 8.0
-}, {
-"frames": [ ExtResource( 6 ), ExtResource( 8 ) ],
-"loop": true,
-"name": "3",
-"speed": 8.0
-}, {
-"frames": [ ExtResource( 11 ), ExtResource( 10 ) ],
-"loop": true,
-"name": "4",
-"speed": 8.0
-} ]
 
 [sub_resource type="CircleShape2D" id=3]
 radius = 23.0
@@ -58,6 +26,7 @@ radius = 27.0185
 script = ExtResource( 1 )
 internal_id = "sawblade"
 circle_texture = ExtResource( 4 )
+palette_textures = [ ExtResource( 2 ), ExtResource( 8 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 9 ) ]
 
 [node name="Path2D" type="Path2D" parent="."]
 curve = SubResource( 4 )
@@ -68,16 +37,46 @@ rotate = false
 [node name="Saw" type="Node2D" parent="Path2D/PathFollow2D" groups=["sawblades"]]
 script = ExtResource( 3 )
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="Path2D/PathFollow2D/Saw"]
-frames = SubResource( 5 )
-animation = "4"
-playing = true
+[node name="AnimatedSprite" type="Sprite" parent="Path2D/PathFollow2D/Saw"]
+modulate = Color( 1, 1, 1, 0 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 144, 0, 48, 48 )
+
+[node name="Sprite3" type="Sprite" parent="Path2D/PathFollow2D/Saw/AnimatedSprite"]
+show_behind_parent = true
+rotation = 4.14925
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 48, 0, 48, 48 )
+script = ExtResource( 17 )
+rot_speed = 150.0
+
+[node name="Sprite2" type="Sprite" parent="Path2D/PathFollow2D/Saw/AnimatedSprite"]
+show_behind_parent = true
+rotation = -3.8746
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 48, 0, 48, 48 )
+script = ExtResource( 17 )
+begin_rot = 22.5
+rot_speed = 300.0
+
+[node name="Sprite" type="Sprite" parent="Path2D/PathFollow2D/Saw/AnimatedSprite"]
+show_behind_parent = true
+rotation = -4.26728
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 0, 48, 48 )
+script = ExtResource( 17 )
+rot_speed = 300.0
 
 [node name="Area2D" type="Area2D" parent="Path2D/PathFollow2D/Saw"]
 collision_layer = 4
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Path2D/PathFollow2D/Saw/Area2D"]
+visible = false
 shape = SubResource( 3 )
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Path2D/PathFollow2D/Saw"]
@@ -85,10 +84,38 @@ stream = ExtResource( 5 )
 volume_db = 7.0
 bus = "Sounds"
 
-[node name="EditorSprite" type="AnimatedSprite" parent="."]
-frames = SubResource( 5 )
-animation = "4"
-playing = true
+[node name="EditorSprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 144, 0, 48, 48 )
+
+[node name="Sprite3" type="Sprite" parent="EditorSprite"]
+show_behind_parent = true
+rotation = -5.75534
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 48, 0, 48, 48 )
+script = ExtResource( 17 )
+rot_speed = 150.0
+
+[node name="Sprite2" type="Sprite" parent="EditorSprite"]
+show_behind_parent = true
+rotation = 1.44959
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 48, 0, 48, 48 )
+script = ExtResource( 17 )
+begin_rot = 22.5
+rot_speed = 300.0
+
+[node name="Sprite" type="Sprite" parent="EditorSprite"]
+show_behind_parent = true
+rotation = -3.05179
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 0, 48, 48 )
+script = ExtResource( 17 )
+rot_speed = 300.0
 
 [node name="EditorArea" type="Area2D" parent="."]
 visible = false

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/darksaw1.png-fc4591b1028aaf03244e642fd9788dc7.stex"
+path="res://.import/darksaw.png-10022f68f4e432f4f6e4f5254a5dc9f7.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/actors/objects/sawblade/pals/darksaw1.png"
-dest_files=[ "res://.import/darksaw1.png-fc4591b1028aaf03244e642fd9788dc7.stex" ]
+source_file="res://scenes/actors/objects/sawblade/pals/darksaw.png"
+dest_files=[ "res://.import/darksaw.png-10022f68f4e432f4f6e4f5254a5dc9f7.stex" ]
 
 [params]
 

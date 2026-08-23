@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/rustsaw2.png-9a82db2714514dcbdec83c0ea53f301a.stex"
+path="res://.import/preview.png-0b2c2ab4ce6d80ec21c52f70858b81e9.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/actors/objects/sawblade/pals/rustsaw2.png"
-dest_files=[ "res://.import/rustsaw2.png-9a82db2714514dcbdec83c0ea53f301a.stex" ]
+source_file="res://scenes/actors/objects/sawblade/preview.png"
+dest_files=[ "res://.import/preview.png-0b2c2ab4ce6d80ec21c52f70858b81e9.stex" ]
 
 [params]
 

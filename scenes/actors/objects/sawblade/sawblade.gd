@@ -8,6 +8,7 @@ onready var sprite = $Path2D/PathFollow2D/Saw/AnimatedSprite
 onready var editor_sprite = $EditorSprite
 
 export var circle_texture : Texture
+export(Array, StreamTexture) var palette_textures: Array
 
 var custom_path = Curve2D.new()
 var curve = Curve2D.new()
@@ -33,6 +34,13 @@ func _register_properties():
 	
 func update_property(key, value):
 	match(key):
+		"palette":
+			sprite.texture = palette_textures[palette]
+			for subsprite in sprite.get_children():
+				subsprite.texture = palette_textures[palette]
+			editor_sprite.texture = palette_textures[palette]
+			for subsprite in editor_sprite.get_children():
+				subsprite.texture = palette_textures[palette]
 		"speed":
 			working_speed = value
 		"loops":
@@ -71,13 +79,13 @@ func _ready():
 	
 	if mode == 0:
 		editor_sprite.visible = false
-		sprite.self_modulate = Color(1, 1, 1, 1)
+		sprite.modulate = Color(1, 1, 1, 1)
 	else:
 		editor_sprite.visible = true
-		sprite.self_modulate = Color(1, 1, 1, 0.5)
-		var _connect = connect("property_changed", self, "update_property")
-	sprite.animation = String(palette)
-	editor_sprite.animation = String(palette)
+		sprite.modulate = Color(1, 1, 1, 0.5)
+	
+	var _connect = connect("property_changed", self, "update_property")
+	update_property("palette", palette)
 
 
 func _process(_delta):
