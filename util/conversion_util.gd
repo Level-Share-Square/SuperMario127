@@ -257,8 +257,7 @@ static func convert_054_to_055(result):
 						var teleport_mode = object.properties[9]
 						var force_fadeout = object.properties[10]
 						object.properties[11] = color
-						if not object.properties[8] is Color: # hacky fix cuz this was crashing on lethal lava land
-							object.properties[8] = int(teleport_mode) # true = remote, false = local (why was it that way :/)
+						object.properties[8] = int(teleport_mode) # true = remote, false = local (why was it that way :/)
 						object.properties[9] = 0 if force_fadeout == true else 800 # setting max pan distance to 0 acts the same as force fadeout
 						object.properties[10] = ""
 					
