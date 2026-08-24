@@ -83,7 +83,6 @@ func reset_custom_song() -> void:
 
 
 func handle_custom_song(url: String, underwater: bool = false) -> void:
-	loop = 0.0
 	if url.begins_with("LP"):
 		var variables = decode_music(url)
 		if underwater:
