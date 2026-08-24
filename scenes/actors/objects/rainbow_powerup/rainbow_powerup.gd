@@ -1,7 +1,5 @@
 extends GameObject
 
-const HUE_SHIFT: float = 0.006
-
 onready var animated_sprite = $AnimatedSprite
 onready var sound = $AudioStreamPlayer
 onready var area = $Area2D
@@ -54,7 +52,7 @@ func _process(delta):
 			animation_player.play("respawn")
 	
 	
-	hue += HUE_SHIFT
+	hue += RainbowPowerup.HUE_SHIFT
 	gradient.offsets = PoolRealArray([0.15, 1])
 	gradient.colors = PoolColorArray([Color.from_hsv(hue, 1, 1), Color(1, 1, 1)])
 	gradient_texture.gradient = gradient

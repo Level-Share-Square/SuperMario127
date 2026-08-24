@@ -3,7 +3,7 @@ extends AnimatedSprite
 var hue = 0
 
 func _process(_delta):
-	hue += 0.015
+	hue += RainbowPowerup.HUE_SHIFT
 	var gradient_texture = GradientTexture.new()
 	var gradient = Gradient.new()
 	gradient.offsets = PoolRealArray([0.15, 1])

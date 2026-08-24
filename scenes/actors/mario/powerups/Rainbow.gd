@@ -1,6 +1,8 @@
 extends Powerup
 class_name RainbowPowerup
 
+const HUE_SHIFT: float = 0.006
+
 var hue = 0
 var rainbow_trails = []
 var trail_timer = 0.075
@@ -34,7 +36,7 @@ func create_trail():
 
 func _process(delta):
 	if character.sprite.material == material:
-		hue += 0.015
+		hue += HUE_SHIFT
 		var gradient_texture = GradientTexture.new()
 		var gradient = Gradient.new()
 		gradient.offsets = PoolRealArray([0.15, 1])

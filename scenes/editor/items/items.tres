@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=253 format=2]
+[gd_resource type="Resource" load_steps=249 format=2]
 
 [ext_resource path="res://scenes/editor/items/placeable_items.gd" type="Script" id=1]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/blue_coin.tres" type="Resource" id=2]
@@ -121,9 +121,7 @@
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/vine_bulb.tres" type="Resource" id=119]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/vine_stem.tres" type="Resource" id=120]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/toxic_gas.tres" type="Resource" id=121]
-[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/fg_hider.tres" type="Resource" id=122]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/bully.tres" type="Resource" id=123]
-[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/painting.tres" type="Resource" id=124]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/shine_activator.tres" type="Resource" id=125]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/quicksand.tres" type="Resource" id=126]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/moss_rock.tres" type="Resource" id=127]
@@ -240,7 +238,6 @@
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/glass_slope_right.tres" type="Resource" id=238]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/glass_slope_left.tres" type="Resource" id=239]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/barrel.tres" type="Resource" id=240]
-[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/pendulum.tres" type="Resource" id=241]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/boo_block_slope_left.tres" type="Resource" id=242]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/boo_block_slope_right.tres" type="Resource" id=243]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/truss.tres" type="Resource" id=244]
@@ -251,7 +248,6 @@
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/net.tres" type="Resource" id=249]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/big_crate.tres" type="Resource" id=250]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/chain.tres" type="Resource" id=251]
-[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/box_test.tres" type="Resource" id=252]
 
 [resource]
 script = ExtResource( 1 )
@@ -276,7 +272,6 @@ placeable_items = {
 "obj_bone_platform": ExtResource( 20 ),
 "obj_boo": ExtResource( 97 ),
 "obj_bowser_banner": ExtResource( 105 ),
-"obj_box_test": ExtResource( 252 ),
 "obj_breakable_block": ExtResource( 35 ),
 "obj_bridge_cobweb": ExtResource( 117 ),
 "obj_bully": ExtResource( 123 ),
@@ -308,7 +303,6 @@ placeable_items = {
 "obj_door": ExtResource( 44 ),
 "obj_droopy_cobweb": ExtResource( 115 ),
 "obj_dry_bones": ExtResource( 142 ),
-"obj_fg_hider": ExtResource( 122 ),
 "obj_fire": ExtResource( 101 ),
 "obj_flat_cobweb": ExtResource( 118 ),
 "obj_flower_bush": ExtResource( 79 ),
@@ -347,10 +341,8 @@ placeable_items = {
 "obj_on_off_touch_lift": ExtResource( 92 ),
 "obj_p_switch": ExtResource( 81 ),
 "obj_p_switch_block": ExtResource( 76 ),
-"obj_painting": ExtResource( 124 ),
 "obj_palm_tree": ExtResource( 69 ),
 "obj_pearl_platform": ExtResource( 46 ),
-"obj_pendulum": ExtResource( 241 ),
 "obj_pine_tree": ExtResource( 62 ),
 "obj_pipe": ExtResource( 27 ),
 "obj_pipe_body": ExtResource( 85 ),
