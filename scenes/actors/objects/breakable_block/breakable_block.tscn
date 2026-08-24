@@ -1,8 +1,32 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://scenes/actors/objects/box_base/box_base.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/actors/objects/breakable_block/breakable_block.gd" type="Script" id=2]
 [ext_resource path="res://scenes/actors/objects/breakable_block/break.wav" type="AudioStream" id=3]
+[ext_resource path="res://scenes/actors/objects/breakable_block/breakable_block.png" type="Texture" id=4]
+[ext_resource path="res://scenes/actors/objects/breakable_block/particles.png" type="Texture" id=5]
+[ext_resource path="res://scenes/actors/objects/breakable_block/palettes/4_outline.png" type="Texture" id=6]
 [ext_resource path="res://scenes/actors/objects/breakable_block/breakable_block_outline.png" type="Texture" id=7]
+[ext_resource path="res://scenes/actors/objects/breakable_block/palettes/5_outline.png" type="Texture" id=8]
+[ext_resource path="res://scenes/actors/objects/breakable_block/palettes/6_outline.png" type="Texture" id=9]
+[ext_resource path="res://scenes/actors/objects/breakable_block/palettes/7_outline.png" type="Texture" id=10]
+[ext_resource path="res://scenes/actors/objects/breakable_block/palettes/1_particles.png" type="Texture" id=11]
+[ext_resource path="res://scenes/actors/objects/breakable_block/palettes/6_particles.png" type="Texture" id=12]
+[ext_resource path="res://scenes/actors/objects/breakable_block/palettes/4_particles.png" type="Texture" id=13]
+[ext_resource path="res://scenes/actors/objects/breakable_block/palettes/3_particles.png" type="Texture" id=14]
+[ext_resource path="res://scenes/actors/objects/breakable_block/palettes/5_particles.png" type="Texture" id=15]
+[ext_resource path="res://scenes/actors/objects/breakable_block/palettes/2_particles.png" type="Texture" id=16]
+[ext_resource path="res://scenes/actors/objects/breakable_block/palettes/7_particles.png" type="Texture" id=17]
+[ext_resource path="res://scenes/actors/objects/breakable_block/palettes/1.png" type="Texture" id=18]
+[ext_resource path="res://scenes/actors/objects/breakable_block/palettes/2.png" type="Texture" id=19]
+[ext_resource path="res://scenes/actors/objects/breakable_block/palettes/3.png" type="Texture" id=20]
+[ext_resource path="res://scenes/actors/objects/breakable_block/palettes/6.png" type="Texture" id=21]
+[ext_resource path="res://scenes/actors/objects/breakable_block/palettes/5.png" type="Texture" id=22]
+[ext_resource path="res://scenes/actors/objects/breakable_block/palettes/7.png" type="Texture" id=23]
+[ext_resource path="res://scenes/actors/objects/breakable_block/palettes/4.png" type="Texture" id=24]
+[ext_resource path="res://scenes/actors/objects/breakable_block/palettes/2_outline.png" type="Texture" id=25]
+[ext_resource path="res://scenes/actors/objects/breakable_block/palettes/1_outline.png" type="Texture" id=26]
+[ext_resource path="res://scenes/actors/objects/breakable_block/palettes/3_outline.png" type="Texture" id=27]
 
 [sub_resource type="Animation" id=2]
 length = 0.001
@@ -44,7 +68,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.3 ),
 "transitions": PoolRealArray( 0.5, 1 ),
 "update": 0,
-"values": [ Color( 1.25, 1.25, 1.25, 1 ), Color( 1.5, 1, 0.5, 0 ) ]
+"values": [ Color( 1.25, 1.25, 1.25, 1 ), Color( 1.50196, 1, 1, 0 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Box/Sprite:rect_scale")
@@ -100,7 +124,7 @@ tracks/4/keys = {
 }
 
 [sub_resource type="Gradient" id=7]
-colors = PoolColorArray( 1, 1, 1, 1, 1, 0.501961, 0, 0 )
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
 
 [sub_resource type="GradientTexture" id=5]
 gradient = SubResource( 7 )
@@ -119,15 +143,20 @@ damping = 300.0
 color_ramp = SubResource( 5 )
 
 [node name="BreakableBlock" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
 internal_id = "breakable_block"
 top_states = PoolStringArray( "GroundPoundState", "SwimmingState" )
 side_states = PoolStringArray( "DiveState", "SlideState", "SpinningState", "SwimmingState" )
 overkill_powerups = PoolStringArray( "MetalPowerup", "RainbowPowerup" )
+inner_textures = [ ExtResource( 4 ), ExtResource( 18 ), ExtResource( 19 ), ExtResource( 20 ), ExtResource( 24 ), ExtResource( 22 ), ExtResource( 21 ), ExtResource( 23 ) ]
+outer_textures = [ ExtResource( 7 ), ExtResource( 26 ), ExtResource( 25 ), ExtResource( 27 ), ExtResource( 6 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ) ]
+particle_textures = [ ExtResource( 5 ), ExtResource( 11 ), ExtResource( 16 ), ExtResource( 14 ), ExtResource( 13 ), ExtResource( 15 ), ExtResource( 12 ), ExtResource( 17 ) ]
 
 [node name="Sprite" parent="Box" index="0"]
 rect_pivot_offset = Vector2( 16, 16 )
 
 [node name="Outline" type="NinePatchRect" parent="Box/Sprite" index="0"]
+unique_name_in_owner = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 texture = ExtResource( 7 )

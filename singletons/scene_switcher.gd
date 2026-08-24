@@ -101,7 +101,7 @@ func setup_level(level_metadata: LevelMetadata, level_id: String, working_folder
 			yield(AssetHandler.fetch_asset_path(Singleton.Music.decode_music(area_header.underwater_music)[1], working_folder), "completed")
 	
 	if not CurrentLevelData.level_transition_data.empty():
-		CurrentLevelData.current_area = CurrentLevelData.level_transition_data.get("target_area", 0)
+		CurrentLevelData.switch_to_area(CurrentLevelData.level_transition_data.get("target_area", 0))
 	
 	CurrentLevelData.checkpoint_data.reset()
 

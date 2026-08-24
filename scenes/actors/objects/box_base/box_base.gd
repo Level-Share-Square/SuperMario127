@@ -108,9 +108,9 @@ func area_exited(area):
 			if overlapping_area != area:
 				area_entered(overlapping_area)
 	else:
+		if area.get_parent() is PhysicsBody2D and area.get_parent() in box.get_collision_exceptions():
+			box.remove_collision_exception_with(area.get_parent())
 		if area.get_child(0) in misc_colliders:
-			if area.get_parent() is PhysicsBody2D and area.get_parent() in box.get_collision_exceptions():
-				box.remove_collision_exception_with(area.get_parent())
 			misc_colliders.erase(area.get_child(0))
 
 
@@ -139,9 +139,10 @@ func try_break() -> void:
 	if broken: return
 	
 	for collider in misc_colliders:
-		hit_rect = rect_from_shape(collider, true)
-		if hit_rect.intersects(box_rect):
-			break_box()
+		if is_instance_valid(collider):
+			hit_rect = rect_from_shape(collider, true)
+			if hit_rect.intersects(box_rect):
+				break_box()
 
 
 func get_rect_dir(hit_rect: Rect2) -> int:
