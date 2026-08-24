@@ -1,4 +1,4 @@
-[gd_scene load_steps=202 format=2]
+[gd_scene load_steps=205 format=2]
 
 [ext_resource path="res://scenes/actors/mario/animation_frames.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/actors/mario/states/Bounce.gd" type="Script" id=2]
@@ -587,8 +587,17 @@ extents = Vector2( 7, 8 )
 [sub_resource type="RectangleShape2D" id=31]
 extents = Vector2( 4, 15.7 )
 
+[sub_resource type="RectangleShape2D" id=144]
+extents = Vector2( 5.5, 18.25 )
+
+[sub_resource type="RectangleShape2D" id=145]
+extents = Vector2( 5.5, 6.25 )
+
 [sub_resource type="RectangleShape2D" id=32]
-extents = Vector2( 24, 16 )
+extents = Vector2( 24, 11 )
+
+[sub_resource type="RectangleShape2D" id=146]
+extents = Vector2( 18, 18 )
 
 [sub_resource type="Animation" id=93]
 length = 0.001
@@ -1669,7 +1678,7 @@ shader = ExtResource( 86 )
 shader_param/ray_count = 4
 shader_param/ray_distance = 0.4
 shader_param/ray_seperation_degrees = 22.0
-shader_param/rotation = 0.150086
+shader_param/rotation = 4.17466
 
 [sub_resource type="RectangleShape2D" id=85]
 extents = Vector2( 8, 18 )
@@ -2356,28 +2365,48 @@ modulate = Color( 0.839216, 0.345098, 0.345098, 1 )
 position = Vector2( 0.5, 5 )
 shape = SubResource( 31 )
 
+[node name="BoxPwner" type="Area2D" parent="."]
+modulate = Color( 1, 0.470588, 0, 1 )
+collision_layer = 131072
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BoxPwner"]
+modulate = Color( 0.839216, 0.345098, 0.345098, 1 )
+position = Vector2( 0.5, 5.75 )
+shape = SubResource( 144 )
+
+[node name="BoxPwnerDive" type="Area2D" parent="."]
+modulate = Color( 1, 0.470588, 0, 1 )
+collision_layer = 131072
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BoxPwnerDive"]
+modulate = Color( 0.839216, 0.345098, 0.345098, 1 )
+position = Vector2( 0.5, -6.25 )
+shape = SubResource( 145 )
+
 [node name="SpinArea" type="Area2D" parent="."]
-visible = false
 position = Vector2( 0, 6 )
-collision_layer = 2
+collision_layer = 131074
 collision_mask = 17
 script = ExtResource( 58 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SpinArea"]
 modulate = Color( 0.839216, 0.345098, 0.345098, 1 )
+position = Vector2( 0, 1 )
 shape = SubResource( 32 )
 disabled = true
 
 [node name="SpinSwimArea" type="Area2D" parent="."]
-visible = false
 position = Vector2( 0, 6 )
-collision_layer = 2
+collision_layer = 131074
 collision_mask = 17
 script = ExtResource( 58 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SpinSwimArea"]
 modulate = Color( 0.839216, 0.345098, 0.345098, 1 )
-shape = SubResource( 32 )
+position = Vector2( 0, -6 )
+shape = SubResource( 146 )
 disabled = true
 
 [node name="PBlockDetector" type="Area2D" parent="."]
@@ -2494,7 +2523,7 @@ playing = true
 [node name="Recolorable" type="AnimatedSprite" parent="CollectedShine"]
 visible = false
 frames = ExtResource( 61 )
-frame = 12
+frame = 9
 script = ExtResource( 63 )
 
 [node name="ShineParticles" type="Particles2D" parent="CollectedShine"]

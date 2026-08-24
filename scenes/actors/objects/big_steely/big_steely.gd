@@ -5,6 +5,8 @@ onready var shape = $Steely/Area2D/CollisionShape2D2
 onready var break_detector = $Steely/BreakDetector
 onready var platform_detector = $Steely/PlatformDetector
 onready var water_detector = $Steely/WaterDetector
+onready var box_pwn_collider = $Steely/BoxPwnCollider
+
 onready var body = $Steely
 onready var sound = $Steely/AudioStreamPlayer
 onready var sprite = $Steely/Sprite
@@ -115,6 +117,7 @@ func _physics_process(delta):
 		prev_pos = new_pos
 		
 		should_hit = actual_velocity.length_squared() > 0.25
+		box_pwn_collider.set_collision_layer_bit(17, should_hit)
 		
 		var platform_collision_enabled = false
 		for platform_body in platform_detector.get_overlapping_areas():

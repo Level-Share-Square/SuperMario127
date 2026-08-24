@@ -1,9 +1,7 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scenes/actors/objects/box_base/box_base.tscn" type="PackedScene" id=1]
-[ext_resource path="res://scenes/actors/objects/breakable_block/breakable_block.gd" type="Script" id=2]
 [ext_resource path="res://scenes/actors/objects/breakable_block/break.wav" type="AudioStream" id=3]
-[ext_resource path="res://scenes/actors/objects/breakable_block/particles.png" type="Texture" id=5]
 [ext_resource path="res://scenes/actors/objects/breakable_block/breakable_block_outline.png" type="Texture" id=7]
 
 [sub_resource type="Animation" id=2]
@@ -46,7 +44,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.3 ),
 "transitions": PoolRealArray( 0.5, 1 ),
 "update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 1, 0.501961, 0, 0 ) ]
+"values": [ Color( 1.25, 1.25, 1.25, 1 ), Color( 1.5, 1, 0.5, 0 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Box/Sprite:rect_scale")
@@ -56,12 +54,12 @@ tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
 "times": PoolRealArray( 0, 0.3 ),
-"transitions": PoolRealArray( 2, 1 ),
+"transitions": PoolRealArray( 0.5, 1 ),
 "update": 0,
-"values": [ Vector2( 1, 1 ), Vector2( 1.75, 1.75 ) ]
+"values": [ Vector2( 1, 1 ), Vector2( 1.5, 1.5 ) ]
 }
-tracks/2/type = "value"
-tracks/2/path = NodePath("BreakParticles:emitting")
+tracks/2/type = "method"
+tracks/2/path = NodePath("BreakSound")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -69,30 +67,18 @@ tracks/2/enabled = true
 tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-tracks/3/type = "method"
-tracks/3/path = NodePath("BreakSound")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [ 0.0 ],
 "method": "play"
 } ]
 }
-tracks/4/type = "method"
-tracks/4/path = NodePath(".")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
+tracks/3/type = "method"
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
 "times": PoolRealArray( 0.7 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
@@ -100,20 +86,26 @@ tracks/4/keys = {
 "method": "queue_free"
 } ]
 }
+tracks/4/type = "value"
+tracks/4/path = NodePath("BreakParticles:emitting")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 
-[sub_resource type="CanvasItemMaterial" id=3]
-particles_animation = true
-particles_anim_h_frames = 3
-particles_anim_v_frames = 1
-particles_anim_loop = false
-
-[sub_resource type="Gradient" id=4]
+[sub_resource type="Gradient" id=7]
 colors = PoolColorArray( 1, 1, 1, 1, 1, 0.501961, 0, 0 )
 
 [sub_resource type="GradientTexture" id=5]
-gradient = SubResource( 4 )
+gradient = SubResource( 7 )
 
-[sub_resource type="ParticlesMaterial" id=6]
+[sub_resource type="ParticlesMaterial" id=8]
 flag_disable_z = true
 spread = 180.0
 gravity = Vector3( 0, 98, 0 )
@@ -127,8 +119,10 @@ damping = 300.0
 color_ramp = SubResource( 5 )
 
 [node name="BreakableBlock" instance=ExtResource( 1 )]
-script = ExtResource( 2 )
 internal_id = "breakable_block"
+top_states = PoolStringArray( "GroundPoundState", "SwimmingState" )
+side_states = PoolStringArray( "DiveState", "SlideState", "SpinningState", "SwimmingState" )
+overkill_powerups = PoolStringArray( "MetalPowerup", "RainbowPowerup" )
 
 [node name="Sprite" parent="Box" index="0"]
 rect_pivot_offset = Vector2( 16, 16 )
@@ -148,19 +142,13 @@ axis_stretch_vertical = 1
 anims/RESET = SubResource( 2 )
 anims/break = SubResource( 1 )
 
-[node name="BreakParticles" type="Particles2D" parent="." index="4"]
-unique_name_in_owner = true
-material = SubResource( 3 )
-z_index = -1
-emitting = false
-amount = 12
-lifetime = 0.5
-one_shot = true
-explosiveness = 1.0
-process_material = SubResource( 6 )
-texture = ExtResource( 5 )
-
-[node name="BreakSound" type="AudioStreamPlayer" parent="." index="5"]
+[node name="BreakSound" type="AudioStreamPlayer" parent="." index="4"]
 stream = ExtResource( 3 )
 volume_db = -10.0
 bus = "Sounds"
+
+[node name="BreakParticles" parent="." index="5"]
+process_material = SubResource( 8 )
+
+[connection signal="area_entered" from="PlayerDetector" to="." method="area_entered"]
+[connection signal="area_exited" from="PlayerDetector" to="." method="area_exited"]

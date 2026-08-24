@@ -228,6 +228,7 @@ func _physics_process(delta):
 					particles.emitting = true
 					sprite.visible = false
 					fuse.visible = false
+					damage_area.monitorable = true
 					dead = true
 					damage_timer = 0.35
 					delete_timer = 3.0

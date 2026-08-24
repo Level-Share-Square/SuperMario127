@@ -20,13 +20,15 @@ func load_property(_editor: Editor, init_value, _property: Array, property_name 
 	editor = _editor
 	property = _property
 	var property_id: String = property[0]
-
-	get_node("%PropertyName").text = NAME_TEXT % property_id.capitalize() if !property_name else NAME_TEXT % property_name
 	
 	if property.size() > 2:
 		var property_info = property[2]
 		if property_info is PropertyInfo:
 			hint_tooltip = property_info.hint
+			if !property_name and property_info.property_name != "":
+				property_name = property_info.property_name
+	
+	get_node("%PropertyName").text = NAME_TEXT % property_id.capitalize() if !property_name else NAME_TEXT % property_name
 	
 	property_changed(property_id, init_value)
 #

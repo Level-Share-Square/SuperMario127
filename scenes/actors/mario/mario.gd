@@ -63,6 +63,8 @@ onready var spin_swim_area : Area2D = $SpinSwimArea
 onready var player_collision_shape : CollisionShape2D = $PlayerCollision/CollisionShape2D
 onready var spin_area_shape : CollisionShape2D = $SpinArea/CollisionShape2D
 onready var spin_swim_area_shape : CollisionShape2D = $SpinSwimArea/CollisionShape2D
+onready var box_pwner = $BoxPwner
+onready var box_pwner_dive = $BoxPwnerDive
 onready var fludd_sound : AudioStreamPlayer = $FluddSound
 onready var turbo_sound : AudioStreamPlayer = $TurboFluddSound
 onready var fludd_boost_sound : AudioStreamPlayer = $FluddBoostSound
@@ -561,7 +563,7 @@ func is_grounded() -> bool:
 	return prev_is_grounded
 
 func is_ceiling() -> bool:
-	return test_move(self.transform, Vector2(0, -0.1)) and collided_last_frame
+	return test_move(self.transform, Vector2(0, -0.5)) and collided_last_frame
 
 func is_walled() -> bool:
 	return (is_walled_left() or is_walled_right()) and collided_last_frame
@@ -1353,6 +1355,9 @@ func set_dive_collision(is_dive : bool, force_disabled: bool = crush_disable, se
 	
 	crushed_collision.disabled = is_dive or !force_disabled
 	crushed_collision_dive.disabled = !is_dive or !force_disabled
+	
+	box_pwner.get_child(0).disabled = is_dive or force_disabled
+	box_pwner_dive.get_child(0).disabled = !is_dive or force_disabled
 
 
 func update_collision(enabled: bool) -> void:

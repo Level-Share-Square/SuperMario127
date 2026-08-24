@@ -123,8 +123,9 @@ texture = ExtResource( 6 )
 [node name="DamageArea" type="Area2D" parent="KinematicBody2D"]
 visible = false
 position = Vector2( 0, -3 )
-collision_layer = 4
+collision_layer = 131076
 collision_mask = 6
+monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D/DamageArea"]
 shape = SubResource( 6 )
