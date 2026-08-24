@@ -49,6 +49,8 @@ func set_parts(parts: int):
 
 func _ready():
 	parent = get_parent()
+	if not parent.is_node_ready():
+		yield(parent, "ready")
 
 	sprite.region_rect.position.y = int(parent.palette) * 13
 
