@@ -1422,7 +1422,7 @@ func check_liquid(liquid_type) -> bool:
 	return false
 
 func update_layer_info():
-	z_index = layer.get_ref().z_index
+	z_index = layer.get_ref().z_index - 9
 	modulate = layer.get_ref().layer_tint
 
 func handle_liquids(liquid_areas, delta):
