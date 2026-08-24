@@ -1,4 +1,4 @@
-[gd_scene load_steps=136 format=2]
+[gd_scene load_steps=137 format=2]
 
 [ext_resource path="res://scenes/menu/options/options.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/menu/menu_controller/screen_manager.gd" type="Script" id=2]
@@ -94,6 +94,7 @@
 [ext_resource path="res://scenes/editor/buttons/eraser_button.gd" type="Script" id=92]
 [ext_resource path="res://assets/icons/Cut.svg" type="Texture" id=93]
 [ext_resource path="res://assets/icons/GroundLayer.svg" type="Texture" id=94]
+[ext_resource path="res://scenes/editor/assets/editor_Save.wav" type="AudioStream" id=95]
 
 [sub_resource type="RectangleShape2D" id=205]
 extents = Vector2( 2, 2 )
@@ -834,6 +835,7 @@ icon = ExtResource( 38 )
 icon_align = 1
 expand_icon = true
 script = ExtResource( 24 )
+click_override = "SaveSound"
 
 [node name="VSeparator3" type="VSeparator" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/PanelContainer/Settings"]
 margin_left = 108.0
@@ -1996,6 +1998,12 @@ bus = "Sounds"
 [node name="RedoSound" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource( 55 )
+volume_db = -7.5
+bus = "Sounds"
+
+[node name="SaveSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource( 95 )
 volume_db = -7.5
 bus = "Sounds"
 

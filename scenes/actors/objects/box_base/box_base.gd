@@ -2,6 +2,8 @@ extends GameObject
 class_name BoxBase
 
 const INITIAL_VEL: float = 150.0
+const INITIAL_VEL_RANDOM: float = 0.3
+const INITAL_PARTICLES: int = 12
 const DEFAULT_SIZE := Vector2(32, 32)
 const DRAW_DEBUG_RECT: bool = false
 
@@ -72,9 +74,12 @@ func update_property(key: String, value):
 		sprite.rect_pivot_offset = sprite.rect_size / 2
 		sprite.rect_position = -value / 2
 		
-		var scale_factor: Vector2 = sprite.rect_size / DEFAULT_SIZE
+		var scale_vector: Vector2 = sprite.rect_size / DEFAULT_SIZE
+		var scale_factor: float = (scale_vector.x + scale_vector.y)/2
 		break_particles.process_material = break_particles.process_material.duplicate()
-		break_particles.process_material.initial_velocity = INITIAL_VEL * (scale_factor.x + scale_factor.y)/2
+		break_particles.process_material.initial_velocity = INITIAL_VEL * clamp(scale_factor / 1.25, 1, INF)
+		break_particles.process_material.initial_velocity_random = INITIAL_VEL_RANDOM * scale_factor
+		break_particles.amount = int(float(INITAL_PARTICLES) * scale_factor)
 		
 		box_collision.shape = box_collision.shape.duplicate()
 		editor_collision.shape = box_collision.shape

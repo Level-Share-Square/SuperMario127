@@ -145,8 +145,8 @@ color_ramp = SubResource( 5 )
 [node name="BreakableBlock" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 internal_id = "breakable_block"
-top_states = PoolStringArray( "GroundPoundState", "SwimmingState" )
-side_states = PoolStringArray( "DiveState", "SlideState", "SpinningState", "SwimmingState" )
+top_states = PoolStringArray( "GroundPoundState", "SwimmingState", "GroundPoundStartState" )
+side_states = PoolStringArray( "DiveState", "SlideState", "SpinningState", "SwimmingState", "WingMarioState" )
 overkill_powerups = PoolStringArray( "MetalPowerup", "RainbowPowerup" )
 inner_textures = [ ExtResource( 4 ), ExtResource( 18 ), ExtResource( 19 ), ExtResource( 20 ), ExtResource( 24 ), ExtResource( 22 ), ExtResource( 21 ), ExtResource( 23 ) ]
 outer_textures = [ ExtResource( 7 ), ExtResource( 26 ), ExtResource( 25 ), ExtResource( 27 ), ExtResource( 6 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ) ]
