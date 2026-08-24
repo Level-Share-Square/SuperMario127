@@ -54,6 +54,8 @@ func _ready():
 	var _connect = connect("property_changed", self, "update_property")
 	if resizable:
 		update_property("size", size)
+	if not is_enabled_and_on_ground():
+		box.collision_layer = 0
 
 
 func _physics_process(_delta):
@@ -120,7 +122,7 @@ func area_exited(area):
 
 
 func try_break() -> void:
-	if !is_enabled_and_on_ground(): return
+	if not is_enabled_and_on_ground(): return
 	if broken: return
 	
 	var hit_flag: int = 0

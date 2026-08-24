@@ -22,6 +22,7 @@ script = ExtResource( 1 )
 [node name="Box" type="StaticBody2D" parent="."]
 unique_name_in_owner = true
 show_behind_parent = true
+collision_mask = 0
 
 [node name="Sprite" type="TextureRect" parent="Box"]
 unique_name_in_owner = true
