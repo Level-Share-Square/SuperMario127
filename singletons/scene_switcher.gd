@@ -74,7 +74,7 @@ func load_level_info(level_id: String, working_folder: String) -> LevelInfo:
 	return level_info
 
 
-func setup_level(level_metadata: LevelMetadata, level_id: String, working_folder: String, hub_level: String = "", selected_file: int = -1):
+func setup_level(level_metadata: LevelMetadata, level_id: String, working_folder: String, hub_level: String = "", selected_file: int = -1, start_in_edit_mode: bool = false):
 	# load save file, if it exists
 	var save_path: String = level_list_util.get_level_save_path(level_id, working_folder, selected_file)
 	if level_list_util.file_exists(save_path):
@@ -101,8 +101,10 @@ func setup_level(level_metadata: LevelMetadata, level_id: String, working_folder
 	
 	if not CurrentLevelData.level_transition_data.empty():
 		CurrentLevelData.switch_to_area(CurrentLevelData.level_transition_data.get("target_area", 0))
-	else:
+	elif start_in_edit_mode:
 		CurrentLevelData.switch_to_area(CurrentLevelData.editor_data.last_area)
+	else:
+		CurrentLevelData.switch_to_area(0)
 	
 	CurrentLevelData.checkpoint_data.reset()
 
@@ -142,15 +144,22 @@ func start_level(level_metadata: LevelMetadata, level_id: String, working_folder
 	
 	if do_transition:
 		# setup level when the transition finishes so music doesnt bug out
-		var _connect = SceneTransitions.connect("transition_finished", self, "setup_level", [level_metadata, level_id, working_folder, hub_level, selected_file], CONNECT_ONESHOT)
-		_connect = SceneTransitions.connect("transition_finished", get_tree(), "change_scene", [goal_scene], CONNECT_DEFERRED | CONNECT_ONESHOT)
+		var _connect = SceneTransitions.connect("transition_finished", self, "level_scene_switch", [goal_scene, level_metadata, level_id, working_folder, start_in_edit_mode, skip_shine_select, hub_level, selected_file, start_in_edit_mode], CONNECT_ONESHOT)
 		
 		if play_warp_sound:
 			SceneTransitions.play_transition_audio()
 		SceneTransitions.do_transition_fade(SceneTransitions.DEFAULT_TRANSITION_TIME)
 	else:
-		yield(setup_level(level_metadata, level_id, working_folder, hub_level, selected_file), "completed")
-		get_tree().change_scene(goal_scene)
+		level_scene_switch(goal_scene, level_metadata, level_id, working_folder, start_in_edit_mode, skip_shine_select, hub_level, selected_file, start_in_edit_mode)
+
+
+## the final stretch...
+func level_scene_switch(goal_scene: String, level_metadata: LevelMetadata, level_id: String, working_folder: String, start_in_edit_mode: bool, skip_shine_select: bool = false, hub_level: String = "", do_transition: bool = true, play_warp_sound: bool = true, selected_file: int = -1):
+	var setup_result = setup_level(level_metadata, level_id, working_folder, hub_level, selected_file, start_in_edit_mode)
+	if setup_result is GDScriptFunctionState:
+		yield(setup_result, "completed")
+	get_tree().change_scene(goal_scene)
+
 
 ## start level without setting any variables
 ## or doing any shine select screen checks
