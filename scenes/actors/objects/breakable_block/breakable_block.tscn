@@ -178,6 +178,3 @@ bus = "Sounds"
 
 [node name="BreakParticles" parent="." index="5"]
 process_material = SubResource( 8 )
-
-[connection signal="area_entered" from="PlayerDetector" to="." method="area_entered"]
-[connection signal="area_exited" from="PlayerDetector" to="." method="area_exited"]

@@ -92,7 +92,6 @@ func setup_level(level_metadata: LevelMetadata, level_id: String, working_folder
 #
 #	CurrentLevelData.level_info.selected_shine = -1
 	CurrentLevelData.load_level_headers(level_list_util.load_level_code_file(level_list_util.get_level_file_path(level_id, working_folder)))
-	CurrentLevelData.switch_to_area(CurrentLevelData.editor_data.last_area)
 	
 	for area_header in CurrentLevelData.area_headers:
 		if area_header.music is String and area_header.music:
@@ -102,6 +101,8 @@ func setup_level(level_metadata: LevelMetadata, level_id: String, working_folder
 	
 	if not CurrentLevelData.level_transition_data.empty():
 		CurrentLevelData.switch_to_area(CurrentLevelData.level_transition_data.get("target_area", 0))
+	else:
+		CurrentLevelData.switch_to_area(CurrentLevelData.editor_data.last_area)
 	
 	CurrentLevelData.checkpoint_data.reset()
 

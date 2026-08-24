@@ -3,7 +3,7 @@ class_name BoxBase
 
 const INITIAL_VEL: float = 150.0
 const INITIAL_VEL_RANDOM: float = 0.3
-const INITAL_PARTICLES: int = 12
+const INITAL_PARTICLES: int = 24
 const DEFAULT_SIZE := Vector2(32, 32)
 const DRAW_DEBUG_RECT: bool = false
 
@@ -120,6 +120,7 @@ func area_exited(area):
 
 
 func try_break() -> void:
+	if !is_enabled_and_on_ground(): return
 	if broken: return
 	
 	var hit_flag: int = 0
