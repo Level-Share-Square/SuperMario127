@@ -344,6 +344,14 @@ script = ExtResource( 77 )
 z_index = 4096
 z_as_relative = false
 
+[node name="ItemPreview" type="TextureRect" parent="ParallaxScroll/ZIndex"]
+unique_name_in_owner = true
+modulate = Color( 1, 1, 1, 0.368627 )
+margin_right = 40.0
+margin_bottom = 40.0
+mouse_filter = 2
+script = ExtResource( 66 )
+
 [node name="Grid" type="ParallaxBackground" parent="ParallaxScroll/ZIndex"]
 unique_name_in_owner = true
 layer = -1
@@ -385,14 +393,6 @@ collision_mask = 0
 navigation_layers = 0
 occluder_light_mask = 0
 format = 1
-
-[node name="ItemPreview" type="TextureRect" parent="ParallaxScroll"]
-unique_name_in_owner = true
-modulate = Color( 1, 1, 1, 0.368627 )
-margin_right = 40.0
-margin_bottom = 40.0
-mouse_filter = 2
-script = ExtResource( 66 )
 
 [node name="ObjectBuffer" type="Control" parent="ParallaxScroll"]
 unique_name_in_owner = true
