@@ -27,7 +27,6 @@ func _ready():
 
 
 func on_button_pressed(button):
-	print(button.name)
 	emit_signal("tool_picked", button.name)
 
 
@@ -49,7 +48,7 @@ func _on_Tools_tool_changed():
 	for button in item_tools.get_children():
 		if button is Button and button.name != "Erase":
 			detect_tool_buttons(button)
-			if button.name in editor.tool_manager.current_tool.name:
+			if editor.tool_manager.current_tool.name in button.name or button.name in editor.tool_manager.current_tool.name:
 				button.pressed = true
 			else:
 				button.pressed = false
