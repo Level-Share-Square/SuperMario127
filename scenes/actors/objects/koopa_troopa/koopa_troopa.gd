@@ -103,6 +103,22 @@ func _ready() -> void:
 		scale.x = abs(scale.x)
 		
 
+func _object_ready():
+	._object_ready()
+	for child in body.get_children():
+		if "CollisionShape" in child.name:
+			child.disabled = not is_enabled_and_on_ground()
+			
+func _editor_ready():
+	._editor_ready()
+	
+	connect("property_changed", self, "update_property")
+	
+func update_property(key, value):
+	if key == "winged":
+		sprite.frames = para_sprite if winged else normal_sprite
+		sprite_color.frames = para_color_sprite if winged else normal_color_sprite
+
 func delete_wings():
 	if !rainbow:
 		winged = false
