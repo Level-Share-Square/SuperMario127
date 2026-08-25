@@ -13,9 +13,10 @@
 [node name="Large Crystal" type="Node2D"]
 script = ExtResource( 1 )
 internal_id = "crystal_large"
-palette_textures = [ ExtResource( 2 ), ExtResource( 4 ), ExtResource( 8 ), ExtResource( 6 ), ExtResource( 9 ), ExtResource( 7 ), ExtResource( 5 ) ]
+palette_textures = [ ExtResource( 3 ), ExtResource( 2 ), ExtResource( 4 ), ExtResource( 8 ), ExtResource( 6 ), ExtResource( 9 ), ExtResource( 7 ), ExtResource( 5 ) ]
+zero_is_default = true
 
 [node name="Sprite" type="Sprite" parent="."]
-self_modulate = Color( 1, 1, 1, 0.74902 )
+self_modulate = Color( 1, 1, 1, 0.752941 )
 z_index = -4
 texture = ExtResource( 3 )
