@@ -10,10 +10,10 @@ var conversion_thread: Thread
 func _ready():	
 #	test_level_code_validation()
 #	convert_debug_level()
-#	convert_dev_levels()
+	convert_dev_levels()
 #	test()
 #	instance_debug_level()
-	pass
+#	pass
 	
 #	tile_byte_test(
 #		{
@@ -123,7 +123,7 @@ func convert_default_level():
 
 func convert_dev_levels():
 	var dir := Directory.new()
-	dir.open("res://level/Developer Levels/")
+	dir.open("res://level/Developer Levels Old/")
 	dir.list_dir_begin()
 	
 	while true:
@@ -131,7 +131,7 @@ func convert_dev_levels():
 		if file_name == "": break
 		if "tres" in file_name and not "sort" in file_name:
 			print(file_name)
-			var new_code: String = CurrentLevelData.convert_old_code_to_new(load("res://level/Developer Levels/" + file_name).code)
+			var new_code: String = CurrentLevelData.convert_old_code_to_new(load("res://level/Developer Levels Old/" + file_name).code)
 			var resource := LevelCodeContainer.new()
 			resource.code = new_code
 			ResourceSaver.save("res://level/Developer Levels/" + file_name, resource)

@@ -6,7 +6,7 @@ const RED_COIN_ID: int = 30
 const SHINE_SHARD_ID: int = 45
 const PURPLE_COIN_ID: int = 135
 
-const ENABLED_PROP_ID: int = 3
+const ENABLED_PROP_ID: int = 2
 
 
 static func recalculate_level_collectible_counts(level_data_container) -> void:
@@ -28,13 +28,13 @@ static func recalculate_level_collectible_counts(level_data_container) -> void:
 			for object in layer.object_data:
 				object = object as ObjectData
 				
-				if object.metadata.type_id == RED_COIN_ID and object.get_property(ENABLED_PROP_ID) == null:
+				if object.metadata.type_id == RED_COIN_ID and (object.get_property(ENABLED_PROP_ID) == null or object.get_property(ENABLED_PROP_ID) == true):
 					level_metadata.collectible_data.red_coin_count += 1
 				
-				if object.metadata.type_id == SHINE_SHARD_ID and object.get_property(ENABLED_PROP_ID) == null:
+				if object.metadata.type_id == SHINE_SHARD_ID and (object.get_property(ENABLED_PROP_ID) == null or object.get_property(ENABLED_PROP_ID) == true):
 					area.header.shine_shard_count += 1
 				
-				if object.metadata.type_id == PURPLE_COIN_ID and object.get_property(ENABLED_PROP_ID) == null:
+				if object.metadata.type_id == PURPLE_COIN_ID and (object.get_property(ENABLED_PROP_ID) == null or object.get_property(ENABLED_PROP_ID) == true):
 					area.header.max_purples_count += 1
 					
 
