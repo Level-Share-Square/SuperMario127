@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/preview.png-1430a5481970ad37ca05430ae787e73a.stex"
+path="res://.import/rainbow_breakable_block.png-4530949289943fe5232368898401af29.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/actors/objects/rainbow_breakable_block/preview.png"
-dest_files=[ "res://.import/preview.png-1430a5481970ad37ca05430ae787e73a.stex" ]
+source_file="res://scenes/actors/objects/rainbow_breakable_block_old/rainbow_breakable_block.png"
+dest_files=[ "res://.import/rainbow_breakable_block.png-4530949289943fe5232368898401af29.stex" ]
 
 [params]
 
