@@ -319,7 +319,7 @@ _global_script_classes=[ {
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_activity_timestamps.gdns"
 }, {
-"base": "Reference",
+"base": "",
 "class": "DiscordCore",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_core.gdns"
@@ -334,7 +334,7 @@ _global_script_classes=[ {
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_lobby_manager.gdns"
 }, {
-"base": "Reference",
+"base": "",
 "class": "DiscordLobbyTransaction",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_lobby_transaction.gdns"
@@ -798,6 +798,11 @@ _global_script_classes=[ {
 "class": "MusicDownloader",
 "language": "GDScript",
 "path": "res://classes/MusicDownloader.gd"
+}, {
+"base": "Node",
+"class": "MusicLoader",
+"language": "GDScript",
+"path": "res://scenes/actors/scene_transitions/music_loader.gd"
 }, {
 "base": "GameObject",
 "class": "NPCBase",
@@ -1483,6 +1488,7 @@ _global_script_class_icons={
 "MoveSelection": "",
 "MoveTilesAction": "",
 "MusicDownloader": "",
+"MusicLoader": "",
 "NPCBase": "",
 "NoActionState": "",
 "Nozzle": "",
