@@ -44,74 +44,74 @@ z_index = -2
 script = ExtResource( 2 )
 internal_id = "bob_omb"
 
-[node name="KinematicBody2D" type="KinematicBody2D" parent="."]
+[node name="BobOmb" type="KinematicBody2D" parent="."]
 collision_layer = 4
 collision_mask = 85
 script = ExtResource( 8 )
 
-[node name="Sprites" type="Node2D" parent="KinematicBody2D"]
+[node name="Sprites" type="Node2D" parent="BobOmb"]
 
-[node name="Sprite" type="AnimatedSprite" parent="KinematicBody2D/Sprites"]
+[node name="Sprite" type="AnimatedSprite" parent="BobOmb/Sprites"]
 frames = ExtResource( 1 )
 playing = true
 
-[node name="Fuse" type="AnimatedSprite" parent="KinematicBody2D/Sprites"]
+[node name="Fuse" type="AnimatedSprite" parent="BobOmb/Sprites"]
 visible = false
 position = Vector2( 0, -4 )
 frames = ExtResource( 4 )
 playing = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BobOmb"]
 visible = false
 position = Vector2( -4.5, -1 )
 shape = SubResource( 1 )
 
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="KinematicBody2D"]
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="BobOmb"]
 visible = false
 position = Vector2( 4.5, -1 )
 shape = SubResource( 1 )
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="KinematicBody2D"]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="BobOmb"]
 visible = false
 position = Vector2( 0, -4 )
 shape = SubResource( 2 )
 
-[node name="FuseSound" type="AudioStreamPlayer2D" parent="KinematicBody2D"]
+[node name="FuseSound" type="AudioStreamPlayer2D" parent="BobOmb"]
 stream = ExtResource( 3 )
 volume_db = -10.0
 max_distance = 1000.0
 bus = "Sounds"
 
-[node name="FuseSound2" type="AudioStreamPlayer2D" parent="KinematicBody2D"]
+[node name="FuseSound2" type="AudioStreamPlayer2D" parent="BobOmb"]
 stream = ExtResource( 5 )
 volume_db = -10.0
 bus = "Sounds"
 
-[node name="ExplosionSound" type="AudioStreamPlayer2D" parent="KinematicBody2D"]
+[node name="ExplosionSound" type="AudioStreamPlayer2D" parent="BobOmb"]
 stream = ExtResource( 7 )
 volume_db = -5.0
 max_distance = 1000.0
 bus = "Sounds"
 
-[node name="PlayerDetector" type="Area2D" parent="KinematicBody2D"]
+[node name="PlayerDetector" type="Area2D" parent="BobOmb"]
 visible = false
 position = Vector2( 0, -3 )
 collision_layer = 0
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D/PlayerDetector"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BobOmb/PlayerDetector"]
 shape = SubResource( 3 )
 
-[node name="PlatformDetector" type="Area2D" parent="KinematicBody2D"]
+[node name="PlatformDetector" type="Area2D" parent="BobOmb"]
 visible = false
 position = Vector2( 0, -3 )
 collision_layer = 0
 collision_mask = 16
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D/PlatformDetector"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BobOmb/PlatformDetector"]
 shape = SubResource( 3 )
 
-[node name="Particles2D" type="Particles2D" parent="KinematicBody2D"]
+[node name="Particles2D" type="Particles2D" parent="BobOmb"]
 material = SubResource( 4 )
 emitting = false
 amount = 1
@@ -120,44 +120,44 @@ local_coords = false
 process_material = SubResource( 5 )
 texture = ExtResource( 6 )
 
-[node name="DamageArea" type="Area2D" parent="KinematicBody2D"]
+[node name="DamageArea" type="Area2D" parent="BobOmb"]
 visible = false
 position = Vector2( 0, -3 )
 collision_layer = 131076
 collision_mask = 6
 monitorable = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D/DamageArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BobOmb/DamageArea"]
 shape = SubResource( 6 )
 
-[node name="AttackArea" type="Area2D" parent="KinematicBody2D"]
+[node name="AttackArea" type="Area2D" parent="BobOmb"]
 visible = false
 position = Vector2( 0, -3 )
 collision_layer = 4
 collision_mask = 6
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D/AttackArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BobOmb/AttackArea"]
 position = Vector2( 0, 4 )
 shape = SubResource( 7 )
 
-[node name="WaterDetector" type="Area2D" parent="KinematicBody2D"]
+[node name="WaterDetector" type="Area2D" parent="BobOmb"]
 visible = false
 position = Vector2( 0, -3 )
 collision_layer = 0
 collision_mask = 128
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D/WaterDetector"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BobOmb/WaterDetector"]
 position = Vector2( 0, 4 )
 shape = SubResource( 7 )
 
-[node name="RayCast2D" type="RayCast2D" parent="KinematicBody2D"]
+[node name="RayCast2D" type="RayCast2D" parent="BobOmb"]
 visible = false
 position = Vector2( 0, -3 )
 enabled = true
 cast_to = Vector2( 0, 16 )
 collision_mask = 81
 
-[node name="BottomPos" type="Node2D" parent="KinematicBody2D"]
+[node name="BottomPos" type="Node2D" parent="BobOmb"]
 position = Vector2( 0, 4 )
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]

@@ -1,19 +1,19 @@
 extends GameObject
 
-onready var sprite_container = $KinematicBody2D/Sprites
-onready var sprite = $KinematicBody2D/Sprites/Sprite
-onready var fuse = $KinematicBody2D/Sprites/Fuse
-onready var fuse_sound = $KinematicBody2D/FuseSound
-onready var fuse_sound_2 = $KinematicBody2D/FuseSound2
-onready var explosion_sound = $KinematicBody2D/ExplosionSound
-onready var kinematic_body = $KinematicBody2D
-onready var player_detector = $KinematicBody2D/PlayerDetector
-onready var particles = $KinematicBody2D/Particles2D
-onready var damage_area = $KinematicBody2D/DamageArea
-onready var attack_area = $KinematicBody2D/AttackArea
-onready var grounded_check = $KinematicBody2D/RayCast2D
-onready var platform_detector = $KinematicBody2D/PlatformDetector
-onready var water_detector = $KinematicBody2D/WaterDetector
+onready var sprite_container = $BobOmb/Sprites
+onready var sprite = $BobOmb/Sprites/Sprite
+onready var fuse = $BobOmb/Sprites/Fuse
+onready var fuse_sound = $BobOmb/FuseSound
+onready var fuse_sound_2 = $BobOmb/FuseSound2
+onready var explosion_sound = $BobOmb/ExplosionSound
+onready var kinematic_body = $BobOmb
+onready var player_detector = $BobOmb/PlayerDetector
+onready var particles = $BobOmb/Particles2D
+onready var damage_area = $BobOmb/DamageArea
+onready var attack_area = $BobOmb/AttackArea
+onready var grounded_check = $BobOmb/RayCast2D
+onready var platform_detector = $BobOmb/PlatformDetector
+onready var water_detector = $BobOmb/WaterDetector
 
 onready var visibility_enabler = $VisibilityEnabler2D
 onready var raycasts = [grounded_check]

@@ -588,10 +588,10 @@ extents = Vector2( 7, 8 )
 extents = Vector2( 4, 15.7 )
 
 [sub_resource type="RectangleShape2D" id=144]
-extents = Vector2( 5.5, 18.25 )
+extents = Vector2( 7.5, 18.25 )
 
 [sub_resource type="RectangleShape2D" id=145]
-extents = Vector2( 5.5, 6.25 )
+extents = Vector2( 7.5, 6.25 )
 
 [sub_resource type="RectangleShape2D" id=32]
 extents = Vector2( 24, 11 )
@@ -1678,7 +1678,7 @@ shader = ExtResource( 86 )
 shader_param/ray_count = 4
 shader_param/ray_distance = 0.4
 shader_param/ray_seperation_degrees = 22.0
-shader_param/rotation = 4.63639
+shader_param/rotation = 0.893351
 
 [sub_resource type="RectangleShape2D" id=85]
 extents = Vector2( 8, 18 )
@@ -2523,7 +2523,7 @@ playing = true
 [node name="Recolorable" type="AnimatedSprite" parent="CollectedShine"]
 visible = false
 frames = ExtResource( 61 )
-frame = 13
+frame = 14
 script = ExtResource( 63 )
 
 [node name="ShineParticles" type="Particles2D" parent="CollectedShine"]

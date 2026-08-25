@@ -1,15 +1,15 @@
 extends GameObject
 class_name BoxBase
 
-const INITIAL_VEL: float = 150.0
-const INITIAL_VEL_RANDOM: float = 0.3
-const INITAL_PARTICLES: int = 24
-const DEFAULT_SIZE := Vector2(32, 32)
 const DRAW_DEBUG_RECT: bool = false
+
+export var initial_vel: float = 150.0
+export var initial_vel_random: float = 0.3
+export var initial_particles: int = 24
+export var default_size := Vector2(32, 32)
 
 enum Sides {TOP = 1, BOTTOM = 2, LEFT = 4, RIGHT = 8}
 
-export(int, FLAGS, "Top", "Bottom", "Left", "Right") var breakable_sides = 15
 export var top_states: PoolStringArray
 export var side_states: PoolStringArray
 export var bottom_states: PoolStringArray
@@ -36,7 +36,7 @@ var last_non_intersecting_rect: Rect2
 
 ## properties
 var coins: int = 0
-var size := DEFAULT_SIZE
+var size := default_size
 
 
 func _register_properties(): 
@@ -76,12 +76,12 @@ func update_property(key: String, value):
 		sprite.rect_pivot_offset = sprite.rect_size / 2
 		sprite.rect_position = -value / 2
 		
-		var scale_vector: Vector2 = sprite.rect_size / DEFAULT_SIZE
+		var scale_vector: Vector2 = sprite.rect_size / default_size
 		var scale_factor: float = (scale_vector.x + scale_vector.y)/2
 		break_particles.process_material = break_particles.process_material.duplicate()
-		break_particles.process_material.initial_velocity = INITIAL_VEL * clamp(scale_factor / 1.25, 1, INF)
-		break_particles.process_material.initial_velocity_random = INITIAL_VEL_RANDOM * scale_factor
-		break_particles.amount = int(float(INITAL_PARTICLES) * scale_factor)
+		break_particles.process_material.initial_velocity = initial_vel * clamp(scale_factor / 1.25, 1, INF)
+		break_particles.process_material.initial_velocity_random = initial_vel_random * scale_factor
+		break_particles.amount = int(float(initial_particles) * scale_factor)
 		
 		box_collision.shape = box_collision.shape.duplicate()
 		editor_collision.shape = box_collision.shape
@@ -98,7 +98,7 @@ func area_entered(area):
 		if not is_instance_valid(char_collider) or char_collider.get_parent().name.find("Spin") == -1:
 			character = area.owner
 			char_collider = area.get_child(0)
-	else:
+	elif area.get_parent().name in breakable_objects:
 		if area.get_parent() is PhysicsBody2D:
 			box.add_collision_exception_with(area.get_parent())
 		misc_colliders.append(area.get_child(0))
