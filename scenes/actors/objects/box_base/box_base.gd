@@ -52,8 +52,9 @@ func _register_property_info():
 
 func _ready():
 	var _connect = connect("property_changed", self, "update_property")
-	if resizable:
-		update_property("size", size)
+	if not resizable:
+		size = default_size
+	update_property("size", size)
 	if not is_enabled_and_on_ground():
 		box.collision_layer = 0
 
@@ -200,8 +201,10 @@ func break_box() -> void:
 	box_collision.queue_free()
 	break_animation.play("break")
 	for i in range(coins):
-		var velocity_x: float = -80 if i % 2 == 0 else 80
-		create_coin(1, box, true, Vector2(velocity_x, -300))
+		# the weird algorithms i create to not add randomness to 127 LOL
+		var velocity_x: float = ((float(i) - (float(coins)/2)) / float(coins)) * 80
+		var velocity_y: float = -150 - (sin(wrapf(float(i) / float(coins) * 2.34, 0, 1)) * 150)
+		create_coin(1, box, true, Vector2(velocity_x, velocity_y))
 
 
 func rect_from_shape(collider: CollisionShape2D, scale_compensation: bool = false) -> Rect2:

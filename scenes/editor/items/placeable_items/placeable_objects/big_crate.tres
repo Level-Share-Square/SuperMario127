@@ -1,6 +1,7 @@
-[gd_resource type="Resource" load_steps=3 format=2]
+[gd_resource type="Resource" load_steps=4 format=2]
 
 [ext_resource path="res://scenes/actors/objects/big_crate/big_crate.png" type="Texture" id=1]
+[ext_resource path="res://scenes/actors/objects/big_crate/icon.png" type="Texture" id=2]
 [ext_resource path="res://scenes/editor/items/placeable_object.gd" type="Script" id=3]
 
 [resource]
@@ -10,7 +11,7 @@ groups = PoolStringArray( "warp" )
 change_to = ""
 items_in_sequence = 0
 index_in_sequence = 0
-icons = [ ExtResource( 1 ) ]
+icons = [ ExtResource( 2 ) ]
 previews = [ ExtResource( 1 ) ]
 priority = 182
 object_id = 154

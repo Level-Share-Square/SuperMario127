@@ -1,22 +1,155 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://scenes/actors/objects/big_crate/big_crate.gd" type="Script" id=1]
+[ext_resource path="res://scenes/actors/objects/breakable_block/break.wav" type="AudioStream" id=1]
 [ext_resource path="res://scenes/actors/objects/big_crate/big_crate.png" type="Texture" id=2]
+[ext_resource path="res://scenes/actors/objects/box_base/box_base.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/actors/objects/crate/particles.png" type="Texture" id=4]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 31, 30.5 )
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Box/Sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Box/Sprite:rect_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
 
-[node name="BigCrate" type="Node2D"]
-z_index = -2
-script = ExtResource( 1 )
+[sub_resource type="Animation" id=1]
+resource_name = "break"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/path = NodePath("Box/Sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 0.5, 1 ),
+"update": 0,
+"values": [ Color( 1.25, 1.25, 1.25, 1 ), Color( 1.5, 1.5, 1.5, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Box/Sprite:rect_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 0.5, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.5, 1.5 ) ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath("BreakSound")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ 0.0 ],
+"method": "play"
+} ]
+}
+tracks/3/type = "method"
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.7 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "queue_free"
+} ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("BreakParticles:emitting")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Gradient" id=7]
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=5]
+gradient = SubResource( 7 )
+
+[sub_resource type="ParticlesMaterial" id=8]
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 98, 0 )
+initial_velocity = 150.0
+initial_velocity_random = 0.3
+angular_velocity = 253.52
+angular_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+damping = 300.0
+color_ramp = SubResource( 5 )
+
+[node name="BreakableBlock" instance=ExtResource( 3 )]
 internal_id = "big_crate"
+initial_vel = 240.0
+initial_vel_random = 0.6
+initial_particles = 48
+default_size = Vector2( 64, 64 )
+top_states = PoolStringArray( "GroundPoundState", "SwimmingState", "GroundPoundStartState" )
+side_states = PoolStringArray( "DiveState", "SlideState", "SpinningState", "SwimmingState", "WingMarioState" )
+breakable_objects = PoolStringArray( "Steely", "BobOmb", "Shell" )
+overkill_powerups = PoolStringArray( "MetalPowerup", "RainbowPowerup" )
+resizable = false
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="Sprite" parent="Box" index="0"]
+margin_left = -32.0
+margin_top = -32.0
+margin_right = 32.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 64, 64 )
+rect_pivot_offset = Vector2( 32, 32 )
 texture = ExtResource( 2 )
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-collision_mask = 0
+[node name="BreakAnimation" parent="." index="3"]
+anims/RESET = SubResource( 2 )
+anims/break = SubResource( 1 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2( 0, 0.5 )
-shape = SubResource( 1 )
+[node name="BreakSound" type="AudioStreamPlayer" parent="." index="4"]
+stream = ExtResource( 1 )
+volume_db = -10.0
+bus = "Sounds"
+
+[node name="BreakParticles" parent="." index="5"]
+amount = 24
+process_material = SubResource( 8 )
+texture = ExtResource( 4 )
