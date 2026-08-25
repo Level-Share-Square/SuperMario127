@@ -22,6 +22,10 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func update_property(_key, _value):
 	update_parts()
+	
+func _object_ready():
+	._object_ready()
+	sprite.visible = not is_on_ground_layer()
 
 
 func update_parts():

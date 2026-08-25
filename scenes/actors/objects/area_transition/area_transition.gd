@@ -51,12 +51,12 @@ func _editor_ready():
 
 func _object_ready():
 	._object_ready()
-	if !is_enabled_and_on_ground():
+	if not is_enabled():
 		camera_stopper.set_size(Vector2.ZERO)
 		camera_stopper.monitorable = false
 		camera_stopper.visible = false
-	else:
-		sprite.visible = false
+		
+	sprite.visible = not is_on_ground_layer()
 
 func _unhandled_input(event: InputEvent) -> void:
 	parts_input_handler(event,self)
