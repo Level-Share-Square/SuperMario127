@@ -93,7 +93,9 @@ func _unhandled_input(event: InputEvent) -> void:
 			emit_signal("switch_loadout", event.physical_scancode - KEY_F1)
 	
 	if event.is_action_pressed("8_pixel_lock"):
-		editor.pixel_lock = true if editor.invert_pixel_lock else false
+#		editor.pixel_lock = true if editor.invert_pixel_lock else false
+		editor.pixel_lock = !editor.pixel_lock
 	
 	if event.is_action_released("8_pixel_lock"):
-		editor.pixel_lock = false if editor.invert_pixel_lock else true
+#		editor.pixel_lock = false if editor.invert_pixel_lock else true
+		editor.pixel_lock = !editor.pixel_lock
