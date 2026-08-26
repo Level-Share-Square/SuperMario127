@@ -124,6 +124,9 @@ func update_objects_array() -> void:
 			counter += 1
 			if counter == dist.value:
 				var data = create_object_data(point, editor.selected_item.object_id, editor.selected_item.palette)
+				for property in editor.selected_item.property_overrides:
+					if data.get_property(property) != null: continue
+					data.set_property(property, editor.selected_item.property_overrides[property])
 				objects_array.append(data)
 				counter = 0
 	for object in objects_array:

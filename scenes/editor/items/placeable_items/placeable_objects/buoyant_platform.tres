@@ -28,3 +28,5 @@ object_id = 124
 object_center = Vector2( 0, 0 )
 tile_mode_offset = Vector2( 0, 0 )
 tile_mode_step = 32
+property_overrides = {
+}

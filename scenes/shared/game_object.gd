@@ -85,7 +85,6 @@ func load_placeable_item():
 	if ResourceLoader.exists(PLACEABLE_ITEM_PATH % internal_id):
 		placeable_item = ResourceLoader.load(PLACEABLE_ITEM_PATH % internal_id)
 
-
 func _init():
 	property_ids = property_ids.duplicate()
 	

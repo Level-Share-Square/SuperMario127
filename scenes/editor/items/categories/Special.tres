@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=54 format=2]
+[gd_resource type="Resource" load_steps=55 format=2]
 
 [ext_resource path="res://scenes/editor/items/placeable_items.gd" type="Script" id=1]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/blue_coin.tres" type="Resource" id=2]
@@ -21,6 +21,7 @@
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/on_off_switch.tres" type="Resource" id=19]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/on_off_touch_lift.tres" type="Resource" id=20]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/key.tres" type="Resource" id=21]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/star_door_single.tres" type="Resource" id=22]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/hover_box.tres" type="Resource" id=24]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/big_bottle.tres" type="Resource" id=25]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/pipe.tres" type="Resource" id=27]
@@ -99,7 +100,7 @@ placeable_items = {
 "obj_sponge": ExtResource( 95 ),
 "obj_star_coin": ExtResource( 49 ),
 "obj_star_door": ExtResource( 113 ),
-"obj_star_door_single": ExtResource( 113 ),
+"obj_star_door_single": ExtResource( 22 ),
 "obj_switch_block": ExtResource( 16 ),
 "obj_toxic_gas": ExtResource( 10 ),
 "obj_turbo_box": ExtResource( 40 ),

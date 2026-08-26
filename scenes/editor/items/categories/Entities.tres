@@ -1,6 +1,7 @@
-[gd_resource type="Resource" load_steps=26 format=2]
+[gd_resource type="Resource" load_steps=27 format=2]
 
 [ext_resource path="res://scenes/editor/items/placeable_items.gd" type="Script" id=1]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/paratroopa.tres" type="Resource" id=2]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/green_demon.tres" type="Resource" id=17]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/sign.tres" type="Resource" id=19]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/bill_blaster.tres" type="Resource" id=30]
@@ -46,7 +47,7 @@ placeable_items = {
 "obj_jelectro": ExtResource( 80 ),
 "obj_koopa_troopa": ExtResource( 38 ),
 "obj_nipper_plant": ExtResource( 131 ),
-"obj_paratroopa": ExtResource( 38 ),
+"obj_paratroopa": ExtResource( 2 ),
 "obj_princess_peach": ExtResource( 136 ),
 "obj_red_bob_omb": ExtResource( 141 ),
 "obj_rex": ExtResource( 134 ),
