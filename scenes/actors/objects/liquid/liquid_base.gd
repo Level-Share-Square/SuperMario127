@@ -57,12 +57,12 @@ func update_liquid_color(color : Color):
 
 
 func update():
-	pass
+	update_liquid_color(color)
+	z_index = -1 if !render_in_front else 1024 #Same as BackBufferCopy z-index to prevent transparency issues
 
 
 func update_property(key, value):
 	pass
-
 
 #func _set_properties():
 #	savable_properties = []
@@ -86,9 +86,9 @@ func _register_properties():
 		id += 1
 	set_property_override("crystal_tap_mode", PropertyTab.OverrideTypes.BOOL_ALIAS, {true: "Move", false: "Grow/Shrink"})
 	
-	for liquid_property in get_liquid_properties():
-		register_property(id, liquid_property, self[liquid_property])
-		id += 1
+#	for liquid_property in get_liquid_properties():
+#		register_property(id, liquid_property, self[liquid_property])
+#		id += 1
 	set_property_override("tag", PropertyTab.OverrideTypes.DROPDOWN, [CurrentLevelData.level_tags, "get_liquid_args", [CurrentLevelData.level_tags, "liquid_tags"]])
 	set_liquid_property_menus()
 

@@ -28,11 +28,13 @@ func get_liquid_properties():
 
 
 func update_property(key, value):
-	update()
 	visual = $New if !use_old_lava else $Old
 	match(key):
 		"color" or "surface_color":
 			update_liquid_color(value)
+		"render_in_front":
+				z_index = -1 if !value else 1024 #Same as layer BackBufferCopy z-index to prevent transparency issues
+	update()
 
 
 func update_liquid_color(color):
@@ -88,7 +90,8 @@ func update():
 		waves.material.set_shader_param("offset", Vector2(position.x, 0))
 	else:
 		waves.visible = false
-	
+	z_index = -1 if !render_in_front else 1024 #Same as layer BackBufferCopy z-index to prevent transparency issues
+
 	#update new stuff
 	liquid_body.rect_position.y = 0
 	liquid_body.rect_size = size

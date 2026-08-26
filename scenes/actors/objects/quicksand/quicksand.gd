@@ -57,7 +57,9 @@ func update():
 		liquid_body.rect_size = size
 		threshold_gradient.rect_position = liquid_body.rect_position
 		threshold_gradient.rect_size = size
-	
+	update_liquid_color(color)
+	z_index = -1 if !render_in_front else 1024 #Same as layer BackBufferCopy z-index to prevent transparency issues
+
 	var gradient_position = max(death_threshold, 18)/size.y
 	var gradient : GradientTexture2D = threshold_gradient.texture
 	gradient.fill_from.y = 0
