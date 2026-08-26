@@ -84,7 +84,7 @@ func delete_layer() -> void:
 	action.layer_index = layer_data.layer_metadata.order
 	shared.get_parent().action_manager.commit_action(action)
 	
-	editor.get_node("%ObjectSettingsWindow").close()
+	editor.get_node("%LayerEditor").close()
 	editor.deselect_objects()
 
 
@@ -95,13 +95,16 @@ func show_layer_editor() -> void:
 
 
 func toggle_visibility() -> void:
-	if shared.get_parent().focus_layer: return
 	var action := EditLayerAction.new()
 	action.layer_index = layer_data.layer_metadata.order
 	action.shared = shared
 	action.property = "layer_visible"
 	action.new_value = !layer_data.layer_metadata.layer_visible
 	shared.get_parent().action_manager.commit_action(action)
+	
+	if shared.get_parent().focus_layer:
+		if layer_data.layer_metadata.layer_uuid != shared.get_parent().layer:
+			shared.get_layer(layer_data.layer_metadata.layer_uuid).modulate.a *= 0.5
 
 	layer_data = shared.get_layer_at(layer_data.layer_metadata.order).layer_data
 	show_hide.icon = eye_open if layer_data.layer_metadata.layer_visible else eye_closed
@@ -131,12 +134,17 @@ func dragger_up() -> void:
 	if not drag_area.get_overlapping_areas().empty():
 		var target_layer_info: LayerInfo = drag_area.get_overlapping_areas()[0].owner
 		if target_layer_info != self:
+			var editor = layer_dropdown.editor
+			
 			var action := ReorderLayerAction.new()
 			action.shared = shared
 			action.layer_index = layer_data.layer_metadata.order
 			action.final_layer_index = target_layer_info.layer_data.layer_metadata.order
-			layer_dropdown.editor.action_manager.commit_action(action)
+			editor.action_manager.commit_action(action)
 			click_sound.play()
+			editor.get_node("%LayerEditor").close()
+			editor.get_node("%ObjectSettingsWindow").close()
+			editor.deselect_objects()
 
 
 func area_entered(_area: Area2D):
@@ -150,11 +158,13 @@ func area_exited(_area: Area2D):
 
 
 func merge_layer():
+	var editor = layer_dropdown.editor
 	var action := MergeLayerAction.new()
 	action.layer_id = layer_data.layer_metadata.layer_uuid
 	action.other_layer_id = shared.get_layer_at(layer_data.layer_metadata.order + 1).layer_data.layer_metadata.layer_uuid
 	action.shared = shared
-	layer_dropdown.editor.action_manager.commit_action(action)
+	editor.action_manager.commit_action(action)
+	editor.get_node("%LayerEditor").close()
 
 
 func properties_updated(layer_uuid: String, key: String, new_value):

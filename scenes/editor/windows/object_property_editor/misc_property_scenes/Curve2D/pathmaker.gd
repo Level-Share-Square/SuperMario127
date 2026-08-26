@@ -31,6 +31,7 @@ var objects_array: Array
 func _ready():
 	line.get_node("path").curve = init_curve
 	update_line()
+	get_tree().current_scene.tool_manager.change_tool("%ObjectSelection")
 	for point in line.get_node("path").curve.get_point_count():
 		var texture_node = VERTEX_PATH.instance()
 		nodes.append(texture_node)
@@ -46,7 +47,7 @@ func _ready():
 		widget_container.hide()
 
 func _unhandled_input(event):
-	if event is InputEventMouseButton and not event.pressed and event.button_index == BUTTON_LEFT:
+	if event is InputEventMouseButton and event.pressed and event.button_index == BUTTON_LEFT:
 		get_tree().set_input_as_handled()
 		widget_container.show()
 		line.get_node("path").curve.add_point(get_mouse_pos() - object.position)

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=250 format=2]
+[gd_resource type="Resource" load_steps=252 format=2]
 
 [ext_resource path="res://scenes/editor/items/placeable_items.gd" type="Script" id=1]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/blue_coin.tres" type="Resource" id=2]
@@ -121,8 +121,9 @@
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/vine_bulb.tres" type="Resource" id=119]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/vine_stem.tres" type="Resource" id=120]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/toxic_gas.tres" type="Resource" id=121]
-[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/forcefield.tres" type="Resource" id=122]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/paratroopa.tres" type="Resource" id=122]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/bully.tres" type="Resource" id=123]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/star_door_single.tres" type="Resource" id=124]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/shine_activator.tres" type="Resource" id=125]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/quicksand.tres" type="Resource" id=126]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/moss_rock.tres" type="Resource" id=127]
@@ -249,6 +250,7 @@
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/net.tres" type="Resource" id=249]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/big_crate.tres" type="Resource" id=250]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/chain.tres" type="Resource" id=251]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/forcefield.tres" type="Resource" id=252]
 
 [resource]
 script = ExtResource( 1 )
@@ -307,7 +309,7 @@ placeable_items = {
 "obj_fire": ExtResource( 101 ),
 "obj_flat_cobweb": ExtResource( 118 ),
 "obj_flower_bush": ExtResource( 79 ),
-"obj_forcefield": ExtResource( 122 ),
+"obj_forcefield": ExtResource( 252 ),
 "obj_goomba": ExtResource( 34 ),
 "obj_goonie": ExtResource( 70 ),
 "obj_green_demon": ExtResource( 17 ),
@@ -344,6 +346,7 @@ placeable_items = {
 "obj_p_switch": ExtResource( 81 ),
 "obj_p_switch_block": ExtResource( 76 ),
 "obj_palm_tree": ExtResource( 69 ),
+"obj_paratroopa": ExtResource( 122 ),
 "obj_pearl_platform": ExtResource( 46 ),
 "obj_pine_tree": ExtResource( 62 ),
 "obj_pipe": ExtResource( 27 ),
@@ -380,6 +383,7 @@ placeable_items = {
 "obj_sponge": ExtResource( 95 ),
 "obj_star_coin": ExtResource( 49 ),
 "obj_star_door": ExtResource( 113 ),
+"obj_star_door_single": ExtResource( 124 ),
 "obj_switch_block": ExtResource( 91 ),
 "obj_toad": ExtResource( 145 ),
 "obj_torch": ExtResource( 98 ),

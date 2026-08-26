@@ -232,7 +232,7 @@ modulate = Color( 1, 1, 1, 0 )
 anchor_bottom = 1.0
 margin_top = 432.0
 margin_right = 768.0
-margin_bottom = 11008.0
+margin_bottom = 11440.0
 custom_fonts/normal_font = ExtResource( 9 )
 bbcode_enabled = true
 bbcode_text = "[center]Super Mario 127
@@ -242,146 +242,130 @@ Super Mario 63:
 Robert \"runouw\" Hewitt
 Steven \"runouw\" Hewitt
 
-Campaign Lead:
-\"Samitizer\"
+-
 
-Programming Lead:
-Jake \"PlugAndPlay\"
-\"Dignity\"
-
-Sound Design Lead:
-Arin \"ArieJuice\" Milan
-
-Creative Lead:
-Charlotte \"Charpurrr\" Fox
-
-Team Lead:
-\"MrGerund\" (Resigned)
-\"Flarewire\" (Resigned)
-Charlotte \"Charpurr\" Fox
-
-Level Editor Lead:
-Brian \"Linktober\"
-
-Promotional Lead:
-\"FastMario\"
-
-
+Developers
 
 Audio Engineer:
 Gale \"goatsoup\" Sosa (Resigned)
-Arin \"ArieJuice\" Milan
+Arin \"ArieJuice\" Milan (Resigned)
 
 Composer:
+\"laith\"
+\"AM4\"
+Jake \"PlugAndPlay\"
 Gale \"goatsoup\" Sosa (Resigned)
 \"AquaDoesStuff\" (Resigned)
-Mason \"RetroReboot\" Jackson
-Jake \"PlugAndPlay\"
-\"FastMario\"
-\"pyrule\"
-\"AM4\"
+Mason \"RetroReboot\" Jackson (Resigned)
+\"FastMario\" (Resigned)
 
 Programmer:
+Abdelrahman \"Dignity\" Essam
+\"laith\"
+\"tabs\"
+Jake \"PlugAndPlay\"
+\"met3o\"
+\"aloelucidity\"
 \"TrafficConeGod\" (Resigned)
 \"skeletontourguide\" (Resigned)
 \"JuPaHe64\" (Resigned)
 \"Flarewire\" (Resigned)
 \"Entiss\" (Resigned)
 \"certi\" (Resigned)
-Jake \"PlugAndPlay\"
-\"SilvererCoin\"
-\"Chlorobyte\"
-\"Dignity\"
-\"met3o\"
-\"pyrule\"
-\"tabs\"
+\"SilvererCoin\" (Resigned)
+\"Chlorobyte\" (Resigned)
 
 Sprite Artist:
-\"KrystalPhantasm\" (Resigned)
-\"Reshi\" (Resigned)
-Doram \"DoramB\" Baramour
 Charlotte \"Charpurrr\" Fox
-Mack \"masterminer176\"
-Antonio \"Antonio4444\"
-\"CyanHyprPsychic\"
+\"KrystalPhantasm\"
 Brian \"Linktober\"
-\"ChoosingBerry\"
-\"AquaDoesStuff\"
-Hrasyurr \"Azzy\"
-\"PumpkinVolt\"
-\"NanTheDark\"
-\"E_WOLFFE\"
-\"AstraSpec\"
-\"le_kappa\"
-\"Saneko\"
-\"wad\"
+Mack \"masterminer176\"
+\"aloelucidity\"
+\"wad\" (Resigned)
+\"Reshi\" (Resigned)
+Doram \"DoramB\" Baramour (Resigned)
+Antonio \"Antonio4444\" (Resigned)
+\"CyanHyprPsychic\" (Resigned)
+\"ChoosingBerry\" (Resigned)
+\"AquaDoesStuff\" (Resigned)
+Hrasyurr \"Azzy\" (Resigned)
+\"PumpkinVolt\" (Resigned)
+\"NanTheDark\" (Resigned)
+\"E_WOLFFE\" (Resigned)
+\"AstraSpec\" (Resigned)
+\"le_kappa\" (Resigned)
+\"Saneko\" (Resigned)
 
 Animator:
 Charlotte \"Charpurrr\" Fox
 Mack \"masterminer176\"
-\"CyanHyprPsychic\"
-\"PumpkinVolt\"
+\"CyanHyprPsychic\" (Resigned)
+\"PumpkinVolt\" (Resigned)
 
 Level Designer:
 Rudy \"Rudy12345mc\" Mueller
 Christian \"Chri_ti_03\"
 Brian \"Linktober\"
-\"Samitizer\"
 \"tabs\"
+\"Samitizer\" (Resigned)
 
 UI Design:
 \"AgentOGames\"
-Tee \"teebeeYT\"
 \"Refusion\"
 \"AM4\"
+Tee \"teebeeYT\" (Resigned)
 
 QA Tester:
-\"GreenStarStudios\"
 Brian \"Linktober\"
-\"E_WOLFFE\"
-\"Samitizer\"
-\"Vexxter\"
+\"GreenStarStudios\" (Resigned)
+\"E_WOLFFE\" (Resigned)
+\"Samitizer\" (Resigned)
+\"Vexxter\" (Resigned)
 
-Marketing:
-Charlotte \"Charpurrr\" Fox
-\"FastMario\"
-\"Dignity\"
-\"tabs\"
+Public Relations:
+Abdelrahman \"Dignity\" Essam
+\"aloelucidity\"
+Tali \"nbsurprise\" Wiltshire
+\"FastMario\" (Resigned)
 
 Promotional Artist:
+\"KrystalPhantasm\"
+\"AgentOGames\"
+\"aloelucidity\"
 \"T4ctical\" (Resigned)
-Carlos \"The Painted\"
-\"axelorca\"
 
 Concept Artist:
-Mason \"RetroReboot\" Jackson
-\"CyanHyprPsychic\"
-\"GreenStarStudios\"
-\"15 Minute Gamer\"
-\"E_WOLFFE\"
-\"Alkalide\"
+\"KrystalPhantasm\"
+\"CyanHyprPsychic\" (Resigned)
+\"GreenStarStudios\" (Resigned)
+\"15 Minute Gamer\" (Resigned)
+\"E_WOLFFE\" (Resigned)
+\"Alkalide\" (Resigned)
 
 Discord Server Staff:
-Rudy \"Rudy12345mc\" Mueller
-\"That's Mama Luigi To You\"
 Charlotte \"Charpurrr\" Fox
-Christian \"Chri_ti_03\"
-\"PumpkinVolt\"
-\"GateTheCat\"
-\"Luigibonus\"
-\"FastMario\"
-\"Samitizer\"
+Abdelrahman \"Dignity\" Essam
+Rudy \"Rudy12345mc\" Mueller
 \"Linktober\"
-\"Kommult\"
 \"Vexxter\"
-\"Dignity\"
+\"Luigibonus\"
+\"Kommult\"
+Christian \"Chri_ti_03\"
+\"Samitizer\"
+\"That's Mama Luigi To You\"
+\"iZePlayz\"
+\"PumpkinVolt\" (Resigned)
+\"GateTheCat\" (Resigned)
+\"FastMario\" (Resigned)
 
 Designer Contest Hosts:
 Rudy \"Rudy12345mc\" Mueller
 Brian \"Linktober\"
 \"tabs\"
 
-Level Share Square:
+-
+
+Level Share Square
 
 Administration:
 \"Luigibonus\"
@@ -398,6 +382,7 @@ Rudy \"Rudy12345mc\" Mueller
 \"Vortoxium\"
 \"Skopler\"
 
+-
 
 Inspiration and Reference:
 \"Greiga Master\"
@@ -440,146 +425,130 @@ Super Mario 63:
 Robert \"runouw\" Hewitt
 Steven \"runouw\" Hewitt
 
-Campaign Lead:
-\"Samitizer\"
+-
 
-Programming Lead:
-Jake \"PlugAndPlay\"
-\"Dignity\"
-
-Sound Design Lead:
-Arin \"ArieJuice\" Milan
-
-Creative Lead:
-Charlotte \"Charpurrr\" Fox
-
-Team Lead:
-\"MrGerund\" (Resigned)
-\"Flarewire\" (Resigned)
-Charlotte \"Charpurr\" Fox
-
-Level Editor Lead:
-Brian \"Linktober\"
-
-Promotional Lead:
-\"FastMario\"
-
-
+Developers
 
 Audio Engineer:
 Gale \"goatsoup\" Sosa (Resigned)
-Arin \"ArieJuice\" Milan
+Arin \"ArieJuice\" Milan (Resigned)
 
 Composer:
+\"laith\"
+\"AM4\"
+Jake \"PlugAndPlay\"
 Gale \"goatsoup\" Sosa (Resigned)
 \"AquaDoesStuff\" (Resigned)
-Mason \"RetroReboot\" Jackson
-Jake \"PlugAndPlay\"
-\"FastMario\"
-\"pyrule\"
-\"AM4\"
+Mason \"RetroReboot\" Jackson (Resigned)
+\"FastMario\" (Resigned)
 
 Programmer:
+Abdelrahman \"Dignity\" Essam
+\"laith\"
+\"tabs\"
+Jake \"PlugAndPlay\"
+\"met3o\"
+\"aloelucidity\"
 \"TrafficConeGod\" (Resigned)
 \"skeletontourguide\" (Resigned)
 \"JuPaHe64\" (Resigned)
 \"Flarewire\" (Resigned)
 \"Entiss\" (Resigned)
 \"certi\" (Resigned)
-Jake \"PlugAndPlay\"
-\"SilvererCoin\"
-\"Chlorobyte\"
-\"Dignity\"
-\"met3o\"
-\"pyrule\"
-\"tabs\"
+\"SilvererCoin\" (Resigned)
+\"Chlorobyte\" (Resigned)
 
 Sprite Artist:
-\"KrystalPhantasm\" (Resigned)
-\"Reshi\" (Resigned)
-Doram \"DoramB\" Baramour
 Charlotte \"Charpurrr\" Fox
-Mack \"masterminer176\"
-Antonio \"Antonio4444\"
-\"CyanHyprPsychic\"
+\"KrystalPhantasm\"
 Brian \"Linktober\"
-\"ChoosingBerry\"
-\"AquaDoesStuff\"
-Hrasyurr \"Azzy\"
-\"PumpkinVolt\"
-\"NanTheDark\"
-\"E_WOLFFE\"
-\"AstraSpec\"
-\"le_kappa\"
-\"Saneko\"
-\"wad\"
+Mack \"masterminer176\"
+\"aloelucidity\"
+\"wad\" (Resigned)
+\"Reshi\" (Resigned)
+Doram \"DoramB\" Baramour (Resigned)
+Antonio \"Antonio4444\" (Resigned)
+\"CyanHyprPsychic\" (Resigned)
+\"ChoosingBerry\" (Resigned)
+\"AquaDoesStuff\" (Resigned)
+Hrasyurr \"Azzy\" (Resigned)
+\"PumpkinVolt\" (Resigned)
+\"NanTheDark\" (Resigned)
+\"E_WOLFFE\" (Resigned)
+\"AstraSpec\" (Resigned)
+\"le_kappa\" (Resigned)
+\"Saneko\" (Resigned)
 
 Animator:
 Charlotte \"Charpurrr\" Fox
 Mack \"masterminer176\"
-\"CyanHyprPsychic\"
-\"PumpkinVolt\"
+\"CyanHyprPsychic\" (Resigned)
+\"PumpkinVolt\" (Resigned)
 
 Level Designer:
 Rudy \"Rudy12345mc\" Mueller
 Christian \"Chri_ti_03\"
 Brian \"Linktober\"
-\"Samitizer\"
 \"tabs\"
+\"Samitizer\" (Resigned)
 
 UI Design:
 \"AgentOGames\"
-Tee \"teebeeYT\"
 \"Refusion\"
 \"AM4\"
+Tee \"teebeeYT\" (Resigned)
 
 QA Tester:
-\"GreenStarStudios\"
 Brian \"Linktober\"
-\"E_WOLFFE\"
-\"Samitizer\"
-\"Vexxter\"
+\"GreenStarStudios\" (Resigned)
+\"E_WOLFFE\" (Resigned)
+\"Samitizer\" (Resigned)
+\"Vexxter\" (Resigned)
 
-Marketing:
-Charlotte \"Charpurrr\" Fox
-\"FastMario\"
-\"Dignity\"
-\"tabs\"
+Public Relations:
+Abdelrahman \"Dignity\" Essam
+\"aloelucidity\"
+Tali \"nbsurprise\" Wiltshire
+\"FastMario\" (Resigned)
 
 Promotional Artist:
+\"KrystalPhantasm\"
+\"AgentOGames\"
+\"aloelucidity\"
 \"T4ctical\" (Resigned)
-Carlos \"The Painted\"
-\"axelorca\"
 
 Concept Artist:
-Mason \"RetroReboot\" Jackson
-\"CyanHyprPsychic\"
-\"GreenStarStudios\"
-\"15 Minute Gamer\"
-\"E_WOLFFE\"
-\"Alkalide\"
+\"KrystalPhantasm\"
+\"CyanHyprPsychic\" (Resigned)
+\"GreenStarStudios\" (Resigned)
+\"15 Minute Gamer\" (Resigned)
+\"E_WOLFFE\" (Resigned)
+\"Alkalide\" (Resigned)
 
 Discord Server Staff:
-Rudy \"Rudy12345mc\" Mueller
-\"That's Mama Luigi To You\"
 Charlotte \"Charpurrr\" Fox
-Christian \"Chri_ti_03\"
-\"PumpkinVolt\"
-\"GateTheCat\"
-\"Luigibonus\"
-\"FastMario\"
-\"Samitizer\"
+Abdelrahman \"Dignity\" Essam
+Rudy \"Rudy12345mc\" Mueller
 \"Linktober\"
-\"Kommult\"
 \"Vexxter\"
-\"Dignity\"
+\"Luigibonus\"
+\"Kommult\"
+Christian \"Chri_ti_03\"
+\"Samitizer\"
+\"That's Mama Luigi To You\"
+\"iZePlayz\"
+\"PumpkinVolt\" (Resigned)
+\"GateTheCat\" (Resigned)
+\"FastMario\" (Resigned)
 
 Designer Contest Hosts:
 Rudy \"Rudy12345mc\" Mueller
 Brian \"Linktober\"
 \"tabs\"
 
-Level Share Square:
+-
+
+Level Share Square
 
 Administration:
 \"Luigibonus\"
@@ -596,6 +565,7 @@ Rudy \"Rudy12345mc\" Mueller
 \"Vortoxium\"
 \"Skopler\"
 
+-
 
 Inspiration and Reference:
 \"Greiga Master\"

@@ -28,9 +28,9 @@ func _ready():
 	shared.connect("layer_type_changed", self, "update_layer_type")
 	
 	yield(editor, "ready")
-	editor.action_manager.connect("undo", self, "update_layers")
-	editor.action_manager.connect("redo", self, "update_layers")
-	editor.action_manager.connect("action", self, "update_layers")
+	editor.action_manager.connect("undo", self, "check_action")
+	editor.action_manager.connect("redo", self, "check_action")
+	editor.action_manager.connect("action", self, "check_action")
 
 func select_default(index: int):
 	if !editor.layer and index != -1:
@@ -67,6 +67,18 @@ func add_layer(layer_data: LayerData) -> void:
 	layer_info.connect("layer_selected", self, "select_layer")
 	layers.add_child(layer_info)
 
+func check_action():
+	var actions: Array = [editor.action_manager.undo_stack.back(), editor.action_manager.redo_stack.back()]
+	var found_action: bool = false
+	for action in actions:
+		if (action is BaseLayerAction or
+		action is EditLayerAction or
+		action is MergeLayerAction or
+		action is ReorderLayerAction):
+			found_action = true
+	if !found_action: return
+	
+	update_layers()
 
 func update_layers() -> void:
 	for layer in layers.get_children():
@@ -75,6 +87,8 @@ func update_layers() -> void:
 	for layer in shared.layers:
 		var layer_data = shared.get_layer(layer).layer_data
 		add_layer(layer_data)
+		
+	select_layer(shared.layer_uuid_to_index(editor.layer), false)
 
 
 func new_layer(ground: bool = true) -> void:

@@ -74,7 +74,11 @@ func click_released() -> void:
 
 func draw_object(pos: Vector2) -> void:
 	var item = editor.selected_item
-	objects.get_or_add(pos, create_object_data(pos, item.object_id, item.palette))
+	var data = create_object_data(pos, item.object_id, item.palette)
+	for property in item.property_overrides:
+		if data.get_property(property) != null: continue
+		data.set_property(property, item.property_overrides[property])
+	objects.get_or_add(pos, data)
 	
 	var buffer_texture := TextureRect.new()
 	buffer_texture.texture = item.previews[item.palette]

@@ -142,7 +142,6 @@ func create_tile_object(cells: Dictionary) -> ObjectData:
 	action.do_tiles = selected_tiles.keys()
 	action_manager.commit_action(action)
 	selected_tiles = {}
-	action_manager.commit_action(action)
 	get_node("%TileSelection").reset_bounds()
 	return object_data
 
