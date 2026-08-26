@@ -8,6 +8,10 @@
 [node name="Layer" type="Node2D"]
 script = ExtResource( 2 )
 
+[node name="BackBufferCopy" type="BackBufferCopy" parent="."]
+z_index = 4096
+copy_mode = 2
+
 [node name="ObjectManager" type="Node2D" parent="."]
 unique_name_in_owner = true
 script = ExtResource( 3 )
@@ -25,6 +29,3 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_lock_": true
 }
-
-[node name="BackBufferCopy" type="BackBufferCopy" parent="."]
-copy_mode = 2
