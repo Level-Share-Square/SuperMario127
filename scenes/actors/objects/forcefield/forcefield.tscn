@@ -1,0 +1,549 @@
+[gd_scene load_steps=23 format=2]
+
+[ext_resource path="res://scenes/actors/objects/box_base/box_base.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/actors/objects/forcefield/break.wav" type="AudioStream" id=2]
+[ext_resource path="res://scenes/actors/objects/forcefield/forcefield.gd" type="Script" id=3]
+[ext_resource path="res://scenes/actors/objects/forcefield/break2.wav" type="AudioStream" id=4]
+
+[sub_resource type="Gradient" id=22]
+offsets = PoolRealArray( 0.774809, 1 )
+colors = PoolColorArray( 0.501961, 0, 1, 0, 0.239216, 0, 0.47451, 0.552941 )
+
+[sub_resource type="GradientTexture2D" id=9]
+gradient = SubResource( 22 )
+fill = 1
+fill_from = Vector2( 0.5, 0.5 )
+fill_to = Vector2( 0.7, 0 )
+
+[sub_resource type="CanvasItemMaterial" id=17]
+blend_mode = 1
+
+[sub_resource type="Gradient" id=23]
+offsets = PoolRealArray( 0, 0.171756, 0.30916, 0.461832, 0.969466 )
+colors = PoolColorArray( 1, 1, 1, 1, 0.901961, 0.4, 1, 0.403922, 0.235294, 0, 1, 0.243137, 0.529412, 0.0588235, 1, 0.0588235, 0.533333, 0, 1, 0.0745098 )
+
+[sub_resource type="GradientTexture2D" id=5]
+gradient = SubResource( 23 )
+width = 16
+height = 16
+fill_from = Vector2( 0.5, 0.1 )
+fill_to = Vector2( 0.5, 0.5 )
+
+[sub_resource type="GradientTexture2D" id=12]
+gradient = SubResource( 23 )
+width = 16
+height = 16
+fill_from = Vector2( 0.5, 0.9 )
+fill_to = Vector2( 0.5, 0.5 )
+
+[sub_resource type="GradientTexture2D" id=13]
+gradient = SubResource( 23 )
+width = 16
+height = 16
+fill_from = Vector2( 0.1, 0.5 )
+fill_to = Vector2( 0.5, 0.5 )
+
+[sub_resource type="GradientTexture2D" id=6]
+gradient = SubResource( 23 )
+width = 16
+height = 16
+fill_from = Vector2( 0.9, 0.5 )
+fill_to = Vector2( 0.5, 0.5 )
+
+[sub_resource type="CanvasItemMaterial" id=18]
+blend_mode = 1
+
+[sub_resource type="Gradient" id=24]
+colors = PoolColorArray( 0, 0.682353, 1, 0.458824, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture2D" id=11]
+gradient = SubResource( 24 )
+fill = 1
+fill_from = Vector2( 0.5, 0.5 )
+fill_to = Vector2( 0.5, 0 )
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Box/Sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Box/Sprite:rect_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Box/Sprite/Inner/Top:texture:gradient:offsets")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ PoolRealArray( 0, 0.171756, 0.30916, 0.461832, 0.969466 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Box/Sprite:self_modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Box/Sprite/Glow:texture:gradient:offsets")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ PoolRealArray( 0, 1 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Box/Sprite:texture:gradient:offsets")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ PoolRealArray( 0.774809, 1 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Shockwave/Effect:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("Shockwave/Effect:material:shader_param/size")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("Shockwave/Effect:material:shader_param/force")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("Shockwave/Effect:material:shader_param/opacity")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("Shockwave/Effect:material:shader_param/thickness")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[sub_resource type="Animation" id=1]
+resource_name = "break"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Box/Sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 0.5, 1 ),
+"update": 0,
+"values": [ Color( 1.25, 1.25, 1.25, 1 ), Color( 2.00392, 1.50196, 2.00392, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Box/Sprite:rect_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 0.5, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.5, 1.5 ) ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath("BreakSound")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ 0.0 ],
+"method": "play"
+} ]
+}
+tracks/3/type = "method"
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 1.5 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "queue_free"
+} ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("BreakParticles:emitting")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Shockwave/Effect:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Shockwave/Effect:material:shader_param/size")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.9, 1.5 ),
+"transitions": PoolRealArray( 0.5, 2, 1 ),
+"update": 0,
+"values": [ 0.0, 0.25, 0.3 ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("Shockwave/Effect:material:shader_param/force")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 1.4, 1.5 ),
+"transitions": PoolRealArray( 2, 0.5, 1 ),
+"update": 0,
+"values": [ 0.0, 0.5, 0.0 ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("Shockwave/Effect:material:shader_param/opacity")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 0.2, 0.9, 1.4 ),
+"transitions": PoolRealArray( -2, -2, 2, -2 ),
+"update": 0,
+"values": [ 0.0, 1.0, 1.0, 0.0 ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("Shockwave/Effect:material:shader_param/thickness")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0, 0.9, 1.4 ),
+"transitions": PoolRealArray( -2, -2, 1 ),
+"update": 0,
+"values": [ 0.0, 0.11, 0.0 ]
+}
+tracks/10/type = "method"
+tracks/10/path = NodePath("BreakSound2")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ 0.0 ],
+"method": "play"
+} ]
+}
+
+[sub_resource type="Animation" id=15]
+resource_name = "pulse"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Box/Sprite/Inner/Top:texture:gradient:offsets")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.9 ),
+"transitions": PoolRealArray( -2, -2 ),
+"update": 0,
+"values": [ PoolRealArray( 0, 0.171756, 0.30916, 0.461832, 0.969466 ), PoolRealArray( 0, 0.478, 0.779, 0.985, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Box/Sprite:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1.1 ),
+"transitions": PoolRealArray( -2, -2 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Box/Sprite:texture:gradient:offsets")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1.1 ),
+"transitions": PoolRealArray( -2, -2 ),
+"update": 0,
+"values": [ PoolRealArray( 0.774809, 1 ), PoolRealArray( 0.438931, 0.671756 ) ]
+}
+
+[sub_resource type="ParticlesMaterial" id=16]
+flag_disable_z = true
+gravity = Vector3( 0, 98, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+
+[sub_resource type="Shader" id=19]
+code = "shader_type canvas_item;
+
+uniform vec2 global_position;
+uniform vec2 screen_size;
+uniform float force;
+uniform float size;
+uniform float thickness;
+uniform float opacity = 1.0;
+uniform float scale = 1.0;
+
+void fragment() {
+	vec2 center = global_position;
+	float ratio = SCREEN_PIXEL_SIZE.x / SCREEN_PIXEL_SIZE.y;
+	center.x = center.x / screen_size.x;
+	center.x = (center.x - 0.5) / ratio + 0.5;
+	center.y = (screen_size.y - center.y) / screen_size.y;
+	vec2 scaledUV = (SCREEN_UV - vec2(0.5, 0.0) ) / vec2(ratio, 1.0) + vec2(0.5, 0.0);
+	
+	float final_size = size + (0.1 * (scale - 1.0));
+	float mask = (1.0 - smoothstep(final_size-0.1, final_size, length(scaledUV - center))) * smoothstep(final_size-thickness-0.1, final_size-thickness, length(scaledUV - center));
+	float inner_mask = 1.0 - smoothstep(final_size - 0.1, final_size, length(scaledUV - center));
+	vec2 disp = normalize(SCREEN_UV - center) * force * mask;
+	
+	vec4 screen_color = texture(SCREEN_TEXTURE, SCREEN_UV - disp);
+	vec3 inverted_color = vec3(1.0) - screen_color.rgb;
+	vec3 base_color = mix(screen_color.rgb, inverted_color, inner_mask);
+	COLOR = vec4(mix(screen_color.rgb, base_color.rgb, opacity), COLOR.a);
+}"
+
+[sub_resource type="ShaderMaterial" id=20]
+shader = SubResource( 19 )
+shader_param/global_position = Vector2( 432, 256 )
+shader_param/screen_size = Vector2( 768, 432 )
+shader_param/force = 0.0
+shader_param/size = 0.0
+shader_param/thickness = 0.0
+shader_param/opacity = 0.0
+shader_param/scale = 1.0
+
+[sub_resource type="GradientTexture2D" id=21]
+
+[node name="Forcefield" instance=ExtResource( 1 )]
+script = ExtResource( 3 )
+internal_id = "forcefield"
+top_states = PoolStringArray( "GroundPoundState", "SwimmingState", "GroundPoundStartState" )
+side_states = PoolStringArray( "DiveState", "SlideState", "SpinningState", "SwimmingState", "WingMarioState" )
+breakable_objects = PoolStringArray( "Steely", "BobOmb", "Shell" )
+overkill_powerups = PoolStringArray( "MetalPowerup", "RainbowPowerup" )
+
+[node name="Sprite" parent="Box" index="0"]
+rect_pivot_offset = Vector2( 16, 16 )
+texture = SubResource( 9 )
+stretch_mode = 1
+
+[node name="Inner" type="Control" parent="Box/Sprite" index="0"]
+material = SubResource( 17 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 2.0
+margin_top = 2.0
+margin_right = -2.0
+margin_bottom = -2.0
+mouse_filter = 2
+
+[node name="Top" type="NinePatchRect" parent="Box/Sprite/Inner" index="0"]
+use_parent_material = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 4, 4 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.25
+texture = SubResource( 5 )
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="Bottom" type="NinePatchRect" parent="Box/Sprite/Inner" index="1"]
+use_parent_material = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 4, 4 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.25
+texture = SubResource( 12 )
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="Left" type="NinePatchRect" parent="Box/Sprite/Inner" index="2"]
+use_parent_material = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 4, 4 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.25
+texture = SubResource( 13 )
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="Right" type="NinePatchRect" parent="Box/Sprite/Inner" index="3"]
+use_parent_material = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 4, 4 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.25
+texture = SubResource( 6 )
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="Glow" type="TextureRect" parent="Box/Sprite" index="1"]
+material = SubResource( 18 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 1.0
+margin_top = 1.0
+margin_right = -1.0
+margin_bottom = -1.0
+mouse_filter = 2
+texture = SubResource( 11 )
+expand = true
+
+[node name="BreakAnimation" parent="." index="3"]
+anims/RESET = SubResource( 2 )
+anims/break = SubResource( 1 )
+anims/pulse = SubResource( 15 )
+
+[node name="BreakSound" type="AudioStreamPlayer" parent="." index="4"]
+stream = ExtResource( 2 )
+volume_db = -4.0
+bus = "Sounds"
+
+[node name="BreakSound2" type="AudioStreamPlayer" parent="." index="5"]
+stream = ExtResource( 4 )
+volume_db = 2.0
+bus = "Sounds"
+
+[node name="BreakParticles" parent="." index="6"]
+process_material = SubResource( 16 )
+
+[node name="Shockwave" type="CanvasLayer" parent="." index="7"]
+layer = 10
+
+[node name="Effect" type="TextureRect" parent="Shockwave" index="0"]
+visible = false
+material = SubResource( 20 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = SubResource( 21 )
+expand = true

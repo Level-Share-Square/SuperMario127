@@ -1,4 +1,4 @@
-[gd_scene load_steps=103 format=2]
+[gd_scene load_steps=114 format=2]
 
 [ext_resource path="res://scenes/menu/art_assets/art_assets.gd" type="Script" id=1]
 [ext_resource path="res://scenes/menu/background_scroll/background.tscn" type="PackedScene" id=2]
@@ -581,6 +581,63 @@ gradient = SubResource( 239 )
 width = 51
 height = 51
 fill_to = Vector2( 0, 1 )
+
+[sub_resource type="Gradient" id=8]
+offsets = PoolRealArray( 0.774809, 1 )
+colors = PoolColorArray( 0.501961, 0, 1, 0, 0.239216, 0, 0.47451, 0.552941 )
+
+[sub_resource type="GradientTexture2D" id=292]
+gradient = SubResource( 8 )
+fill = 1
+fill_from = Vector2( 0.5, 0.5 )
+fill_to = Vector2( 0.7, 0 )
+
+[sub_resource type="CanvasItemMaterial" id=293]
+blend_mode = 1
+
+[sub_resource type="Gradient" id=4]
+offsets = PoolRealArray( 0, 0.171756, 0.30916, 0.461832, 0.969466 )
+colors = PoolColorArray( 1, 1, 1, 1, 0.901961, 0.4, 1, 0.403922, 0.235294, 0, 1, 0.243137, 0.529412, 0.0588235, 1, 0.0588235, 0.533333, 0, 1, 0.0745098 )
+
+[sub_resource type="GradientTexture2D" id=294]
+gradient = SubResource( 4 )
+width = 16
+height = 16
+fill_from = Vector2( 0.5, 0.1 )
+fill_to = Vector2( 0.5, 0.5 )
+
+[sub_resource type="GradientTexture2D" id=295]
+gradient = SubResource( 4 )
+width = 16
+height = 16
+fill_from = Vector2( 0.5, 0.9 )
+fill_to = Vector2( 0.5, 0.5 )
+
+[sub_resource type="GradientTexture2D" id=296]
+gradient = SubResource( 4 )
+width = 16
+height = 16
+fill_from = Vector2( 0.1, 0.5 )
+fill_to = Vector2( 0.5, 0.5 )
+
+[sub_resource type="GradientTexture2D" id=297]
+gradient = SubResource( 4 )
+width = 16
+height = 16
+fill_from = Vector2( 0.9, 0.5 )
+fill_to = Vector2( 0.5, 0.5 )
+
+[sub_resource type="CanvasItemMaterial" id=298]
+blend_mode = 1
+
+[sub_resource type="Gradient" id=10]
+colors = PoolColorArray( 0, 0.682353, 1, 0.458824, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture2D" id=299]
+gradient = SubResource( 10 )
+fill = 1
+fill_from = Vector2( 0.5, 0.5 )
+fill_to = Vector2( 0.5, 0 )
 
 [node name="ArtAssets" type="VBoxContainer"]
 script = ExtResource( 1 )
@@ -2435,6 +2492,110 @@ size_flags_vertical = 3
 texture = SubResource( 232 )
 expand = true
 stretch_mode = 1
+
+[node name="ForcefieldIcon" type="ViewportContainer" parent="."]
+unique_name_in_owner = true
+margin_top = 11419.0
+margin_right = 32.0
+margin_bottom = 11451.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="Viewport" type="Viewport" parent="ForcefieldIcon"]
+size = Vector2( 32, 32 )
+transparent_bg = true
+handle_input_locally = false
+render_target_update_mode = 3
+
+[node name="Sprite" type="TextureRect" parent="ForcefieldIcon/Viewport"]
+unique_name_in_owner = true
+modulate = Color( 1.25, 1.25, 1.25, 1 )
+margin_right = 32.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+rect_pivot_offset = Vector2( 16, 16 )
+mouse_filter = 2
+texture = SubResource( 292 )
+expand = true
+stretch_mode = 1
+
+[node name="Inner" type="Control" parent="ForcefieldIcon/Viewport/Sprite"]
+material = SubResource( 293 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 2.0
+margin_top = 2.0
+margin_right = -2.0
+margin_bottom = -2.0
+mouse_filter = 2
+
+[node name="Top" type="NinePatchRect" parent="ForcefieldIcon/Viewport/Sprite/Inner"]
+use_parent_material = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 4, 4 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.25
+texture = SubResource( 294 )
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="Bottom" type="NinePatchRect" parent="ForcefieldIcon/Viewport/Sprite/Inner"]
+use_parent_material = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 4, 4 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.25
+texture = SubResource( 295 )
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="Left" type="NinePatchRect" parent="ForcefieldIcon/Viewport/Sprite/Inner"]
+use_parent_material = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 4, 4 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.25
+texture = SubResource( 296 )
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="Right" type="NinePatchRect" parent="ForcefieldIcon/Viewport/Sprite/Inner"]
+use_parent_material = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 4, 4 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.25
+texture = SubResource( 297 )
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="Glow" type="TextureRect" parent="ForcefieldIcon/Viewport/Sprite"]
+material = SubResource( 298 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 1.0
+margin_top = 1.0
+margin_right = -1.0
+margin_bottom = -1.0
+mouse_filter = 2
+texture = SubResource( 299 )
+expand = true
 
 [editable path="DiscordIcon/Viewport/Background"]
 [editable path="DiscordInvite/Viewport/Background"]

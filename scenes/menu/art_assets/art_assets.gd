@@ -16,6 +16,8 @@ onready var twitter_icon = $"%TwitterIcon"
 onready var end_cards = $"%EndCards"
 onready var shorts_template = $"%ShortsTemplate"
 onready var coin_hud = $"%CoinHUD"
+## bro thinks he's on the team :sob:
+onready var forcefield_icon = $"%ForcefieldIcon"
 
 func _ready():
 	#return
@@ -82,6 +84,12 @@ func _ready():
 #	coin_hud_img.flip_y()
 #	fix_transparency(coin_hud_img)
 #	coin_hud_img.save_png("res://assets/artwork/coin_hud.png")
+
+	var forcefield_img: Image = forcefield_icon.get_node("Viewport").get_texture().get_data()
+	forcefield_img.convert(Image.FORMAT_RGBA8)
+	forcefield_img.flip_y()
+	fix_transparency(forcefield_img)
+	forcefield_img.save_png("res://scenes/actors/objects/forcefield/icon.png")
 
 
 func fix_transparency(image_data: Image) -> void:
