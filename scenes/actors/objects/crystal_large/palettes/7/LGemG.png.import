@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/MGemOIcon.png-fb1f0251e5e74d618d402e1872844a53.stex"
+path="res://.import/LGemG.png-6b7ef3d60b68ba94b78517a39bb075c2.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/actors/objects/crystal_medium/palettes/7/MGemOIcon.png"
-dest_files=[ "res://.import/MGemOIcon.png-fb1f0251e5e74d618d402e1872844a53.stex" ]
+source_file="res://scenes/actors/objects/crystal_large/palettes/7/LGemG.png"
+dest_files=[ "res://.import/LGemG.png-6b7ef3d60b68ba94b78517a39bb075c2.stex" ]
 
 [params]
 

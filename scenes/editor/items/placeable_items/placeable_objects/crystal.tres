@@ -1,22 +1,26 @@
-[gd_resource type="Resource" load_steps=18 format=2]
+[gd_resource type="Resource" load_steps=22 format=2]
 
 [ext_resource path="res://scenes/actors/objects/crystal_medium/palettes/1/MGemRIcon.png" type="Texture" id=1]
-[ext_resource path="res://scenes/actors/objects/crystal_medium/palettes/5/MGemMIcon.png" type="Texture" id=2]
+[ext_resource path="res://scenes/actors/objects/crystal_medium/palettes/5/MGemPIcon.png" type="Texture" id=2]
 [ext_resource path="res://scenes/actors/objects/crystal_medium/palettes/2/MGemYIcon.png" type="Texture" id=3]
 [ext_resource path="res://scenes/actors/objects/crystal_medium/palettes/3/MGemWIcon.png" type="Texture" id=4]
 [ext_resource path="res://scenes/actors/objects/crystal_medium/palettes/6/MGemBPIcon.png" type="Texture" id=5]
 [ext_resource path="res://scenes/actors/objects/crystal_medium/palettes/2/MGemY.png" type="Texture" id=6]
 [ext_resource path="res://scenes/actors/objects/crystal_medium/palettes/3/MGemW.png" type="Texture" id=7]
-[ext_resource path="res://scenes/actors/objects/crystal_medium/palettes/5/MGemM.png" type="Texture" id=8]
+[ext_resource path="res://scenes/actors/objects/crystal_medium/palettes/5/MGemP.png" type="Texture" id=8]
 [ext_resource path="res://scenes/actors/objects/crystal_medium/palettes/6/MGemBP.png" type="Texture" id=9]
-[ext_resource path="res://scenes/actors/objects/crystal_medium/palettes/7/MGemO.png" type="Texture" id=10]
+[ext_resource path="res://scenes/actors/objects/crystal_medium/palettes/7/MGemG.png" type="Texture" id=10]
 [ext_resource path="res://scenes/actors/objects/crystal_medium/palettes/4/MGemGIcon.png" type="Texture" id=11]
 [ext_resource path="res://scenes/actors/objects/crystal_medium/MGemB.png" type="Texture" id=12]
 [ext_resource path="res://scenes/actors/objects/crystal_medium/palettes/1/MGemR.png" type="Texture" id=13]
 [ext_resource path="res://scenes/actors/objects/crystal_medium/palettes/4/MGemG.png" type="Texture" id=14]
-[ext_resource path="res://scenes/actors/objects/crystal_medium/palettes/7/MGemOIcon.png" type="Texture" id=15]
+[ext_resource path="res://scenes/actors/objects/crystal_medium/palettes/7/MGemGIcon.png" type="Texture" id=15]
 [ext_resource path="res://scenes/actors/objects/crystal_medium/MGemBIcon.png" type="Texture" id=16]
 [ext_resource path="res://scenes/editor/items/placeable_object.gd" type="Script" id=17]
+[ext_resource path="res://scenes/actors/objects/crystal_medium/palettes/9/MGemO.png" type="Texture" id=18]
+[ext_resource path="res://scenes/actors/objects/crystal_medium/palettes/9/MGemOIcon.png" type="Texture" id=19]
+[ext_resource path="res://scenes/actors/objects/crystal_medium/palettes/8/MGemMIcon.png" type="Texture" id=20]
+[ext_resource path="res://scenes/actors/objects/crystal_medium/palettes/8/MGemM.png" type="Texture" id=21]
 
 [resource]
 script = ExtResource( 17 )
@@ -25,8 +29,8 @@ groups = PoolStringArray( "decoration" )
 change_to = ""
 items_in_sequence = 0
 index_in_sequence = 0
-icons = [ ExtResource( 16 ), ExtResource( 1 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 11 ), ExtResource( 2 ), ExtResource( 5 ), ExtResource( 15 ) ]
-previews = [ ExtResource( 12 ), ExtResource( 13 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 14 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ) ]
+icons = [ ExtResource( 16 ), ExtResource( 1 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 11 ), ExtResource( 2 ), ExtResource( 5 ), ExtResource( 15 ), ExtResource( 20 ), ExtResource( 19 ) ]
+previews = [ ExtResource( 12 ), ExtResource( 13 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 14 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 21 ), ExtResource( 18 ) ]
 priority = 110
 object_id = 106
 object_center = Vector2( 0, 0 )

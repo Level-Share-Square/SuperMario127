@@ -1,6 +1,6 @@
-[gd_resource type="Resource" load_steps=18 format=2]
+[gd_resource type="Resource" load_steps=22 format=2]
 
-[ext_resource path="res://scenes/actors/objects/crystal_small/palettes/7/SGemOIcon.png" type="Texture" id=1]
+[ext_resource path="res://scenes/actors/objects/crystal_small/palettes/7/SGemGIcon.png" type="Texture" id=1]
 [ext_resource path="res://scenes/actors/objects/crystal_small/palettes/3/SGemW.png" type="Texture" id=2]
 [ext_resource path="res://scenes/actors/objects/crystal_small/palettes/2/SGemY.png" type="Texture" id=3]
 [ext_resource path="res://scenes/actors/objects/crystal_small/palettes/3/SGemWIcon.png" type="Texture" id=4]
@@ -9,14 +9,18 @@
 [ext_resource path="res://scenes/actors/objects/crystal_small/icon.png" type="Texture" id=7]
 [ext_resource path="res://scenes/actors/objects/crystal_small/palettes/4/SGemGIcon.png" type="Texture" id=8]
 [ext_resource path="res://scenes/actors/objects/crystal_small/palettes/1/SGemR.png" type="Texture" id=9]
-[ext_resource path="res://scenes/actors/objects/crystal_small/palettes/7/SGemO.png" type="Texture" id=10]
+[ext_resource path="res://scenes/actors/objects/crystal_small/palettes/7/SGemG.png" type="Texture" id=10]
 [ext_resource path="res://scenes/actors/objects/crystal_small/palettes/4/SGemG.png" type="Texture" id=11]
 [ext_resource path="res://scenes/actors/objects/crystal_small/crystal.png" type="Texture" id=12]
-[ext_resource path="res://scenes/actors/objects/crystal_small/palettes/5/SGemMIcon.png" type="Texture" id=13]
+[ext_resource path="res://scenes/actors/objects/crystal_small/palettes/5/SGemPIcon.png" type="Texture" id=13]
 [ext_resource path="res://scenes/actors/objects/crystal_small/palettes/1/SGemRIcon.png" type="Texture" id=14]
-[ext_resource path="res://scenes/actors/objects/crystal_small/palettes/5/SGemM.png" type="Texture" id=15]
+[ext_resource path="res://scenes/actors/objects/crystal_small/palettes/5/SGemP.png" type="Texture" id=15]
 [ext_resource path="res://scenes/actors/objects/crystal_small/palettes/6/SGemBPIcon.png" type="Texture" id=16]
 [ext_resource path="res://scenes/editor/items/placeable_object.gd" type="Script" id=17]
+[ext_resource path="res://scenes/actors/objects/crystal_small/palettes/8/SGemMIcon.png" type="Texture" id=18]
+[ext_resource path="res://scenes/actors/objects/crystal_small/palettes/9/SGemOIcon.png" type="Texture" id=19]
+[ext_resource path="res://scenes/actors/objects/crystal_small/palettes/9/SGemO.png" type="Texture" id=20]
+[ext_resource path="res://scenes/actors/objects/crystal_small/palettes/8/SGemM.png" type="Texture" id=21]
 
 [resource]
 script = ExtResource( 17 )
@@ -25,8 +29,8 @@ groups = PoolStringArray( "decoration" )
 change_to = ""
 items_in_sequence = 0
 index_in_sequence = 0
-icons = [ ExtResource( 7 ), ExtResource( 14 ), ExtResource( 6 ), ExtResource( 4 ), ExtResource( 8 ), ExtResource( 13 ), ExtResource( 16 ), ExtResource( 1 ) ]
-previews = [ ExtResource( 12 ), ExtResource( 9 ), ExtResource( 3 ), ExtResource( 2 ), ExtResource( 11 ), ExtResource( 15 ), ExtResource( 5 ), ExtResource( 10 ) ]
+icons = [ ExtResource( 7 ), ExtResource( 14 ), ExtResource( 6 ), ExtResource( 4 ), ExtResource( 8 ), ExtResource( 13 ), ExtResource( 16 ), ExtResource( 1 ), ExtResource( 18 ), ExtResource( 19 ) ]
+previews = [ ExtResource( 12 ), ExtResource( 9 ), ExtResource( 3 ), ExtResource( 2 ), ExtResource( 11 ), ExtResource( 15 ), ExtResource( 5 ), ExtResource( 10 ), ExtResource( 21 ), ExtResource( 20 ) ]
 priority = 115
 object_id = 105
 object_center = Vector2( 0, 0 )
