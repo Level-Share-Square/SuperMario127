@@ -66,6 +66,7 @@ func get_layer_index(layer: LevelLayer):
 	return layer.layer_data.layer_metadata.order if layer else -1
 	
 func get_layer_at(index: int) -> LevelLayer:
+	if layers.size() <= index: return null
 	return get_layer(layers[index])
 	
 func get_layer(uuid: String) -> LevelLayer:
