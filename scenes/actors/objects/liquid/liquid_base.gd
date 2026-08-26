@@ -82,6 +82,10 @@ func update_property(key, value):
 func _register_properties():
 	var id: int = 4
 	for liquid_property in liquid_properties:
+		if liquid_property == "render_in_front":
+			register_property(id, liquid_property, self[liquid_property], false)
+			id += 1
+			continue
 		register_property(id, liquid_property, self[liquid_property])
 		id += 1
 	set_property_override("crystal_tap_mode", PropertyTab.OverrideTypes.BOOL_ALIAS, {true: "Move", false: "Grow/Shrink"})
