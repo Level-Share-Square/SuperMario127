@@ -35,7 +35,7 @@ func _click(world_pos: Vector2) -> void:
 		elif !editor.hovered_objects.empty():
 			var closest_object = objects_util.find_closest_object(editor.hovered_objects.values(), get_mouse_pos())
 			
-			if !Input.is_action_pressed("ctrl_modifier"): hovered_object = closest_object
+			if !Input.is_action_pressed("shift_modifier"): hovered_object = closest_object
 			else: 
 				editor.selected_item = closest_object.placeable_item
 				var copied_data = objects_util.object_data_deep_copy(closest_object)
