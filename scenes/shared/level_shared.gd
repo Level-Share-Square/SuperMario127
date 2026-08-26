@@ -194,7 +194,9 @@ func focus_layer(focus: bool, focus_layer: String):
 	for layer_uuid in layers:
 		var layer = get_layer(layer_uuid)
 		if focus:
-			if not layer_uuid == focus_layer: layer.modulate.a *= 0.5
+			layer.modulate.a = layer.layer_data.layer_metadata.layer_opacity
+			if not layer_uuid == focus_layer: 
+				layer.modulate.a *= 0.5
 		else:
 			layer.modulate.a = layer.layer_data.layer_metadata.layer_opacity
 
