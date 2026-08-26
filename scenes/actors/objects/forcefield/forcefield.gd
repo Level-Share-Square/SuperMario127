@@ -5,6 +5,7 @@ onready var effect = $Shockwave/Effect
 
 func _ready():
 	break_animation.play("pulse")
+	effect.material = effect.material.duplicate()
 
 
 func _process(delta):
