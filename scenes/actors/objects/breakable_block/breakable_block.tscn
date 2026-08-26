@@ -147,6 +147,7 @@ script = ExtResource( 2 )
 internal_id = "breakable_block"
 top_states = PoolStringArray( "GroundPoundState", "SwimmingState", "GroundPoundStartState" )
 side_states = PoolStringArray( "DiveState", "SlideState", "SpinningState", "SwimmingState", "WingMarioState" )
+side_fludds = PoolStringArray( "TurboNozzle" )
 breakable_objects = PoolStringArray( "Steely", "BobOmb", "Shell" )
 overkill_powerups = PoolStringArray( "MetalPowerup", "RainbowPowerup" )
 inner_textures = [ ExtResource( 4 ), ExtResource( 18 ), ExtResource( 19 ), ExtResource( 20 ), ExtResource( 24 ), ExtResource( 22 ), ExtResource( 21 ), ExtResource( 23 ) ]

@@ -126,6 +126,7 @@ internal_id = "metal_breakable_block"
 initial_particles = 12
 top_states = PoolStringArray( "GroundPoundState", "SwimmingState", "GroundPoundStartState" )
 side_states = PoolStringArray( "DiveState", "SlideState", "SpinningState", "SwimmingState", "WingMarioState" )
+side_fludds = PoolStringArray( "TurboNozzle" )
 breakable_objects = PoolStringArray( "Steely" )
 required_powerups = PoolStringArray( "MetalPowerup" )
 

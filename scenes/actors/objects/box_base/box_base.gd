@@ -13,6 +13,9 @@ enum Sides {TOP = 1, BOTTOM = 2, LEFT = 4, RIGHT = 8}
 export var top_states: PoolStringArray
 export var side_states: PoolStringArray
 export var bottom_states: PoolStringArray
+export var top_fludds: PoolStringArray
+export var side_fludds: PoolStringArray
+export var bottom_fludds: PoolStringArray
 export var breakable_objects: PoolStringArray
 export var required_powerups: PoolStringArray
 export var overkill_powerups: PoolStringArray
@@ -176,22 +179,33 @@ func char_can_hit(char_direction: int, char_rect: Rect2) -> bool:
 			return true 
 	elif not required_powerups.empty():
 		return false
-	if not is_instance_valid(character.state): return false
+		
+	var has_fludd: bool = is_instance_valid(character.nozzle)
+	var has_state: bool = is_instance_valid(character.state)
+	if not has_fludd and not has_state: return false
 	## hacky but i really don't have another way to do this :(
-	if character.state.name == "SwimmingState" and character.state.boost_time_left <= 0: return false
+	if has_state and character.state.name == "SwimmingState" and character.state.boost_time_left <= 0: return false
 	
 	match char_direction:
 		Sides.TOP:
-			if not character.state.name in top_states: return false
+			var fludd_condition: bool = not has_fludd or not (character.nozzle.name in top_fludds and character.nozzle.activated)
+			var state_condition: bool = not has_state or not (character.state.name in top_states)
+			if state_condition and fludd_condition: return false
 			if get_rect_dir(last_non_intersecting_rect) != Sides.TOP: return false
 		Sides.LEFT:
-			if not character.state.name in side_states: return false
+			var fludd_condition: bool = not has_fludd or not (character.nozzle.name in side_fludds and character.nozzle.activated)
+			var state_condition: bool = not has_state or not (character.state.name in side_states)
+			if state_condition and fludd_condition: return false
 			if get_rect_dir(last_non_intersecting_rect) != Sides.LEFT: return false
 		Sides.RIGHT:
-			if not character.state.name in side_states: return false
+			var fludd_condition: bool = not has_fludd or not (character.nozzle.name in side_fludds and character.nozzle.activated)
+			var state_condition: bool = not has_state or not (character.state.name in side_states)
+			if state_condition and fludd_condition: return false
 			if get_rect_dir(last_non_intersecting_rect) != Sides.RIGHT: return false
 		Sides.BOTTOM:
-			if not character.state.name in bottom_states: return false
+			var fludd_condition: bool = not has_fludd or not (character.nozzle.name in bottom_fludds and character.nozzle.activated)
+			var state_condition: bool = not has_state or not (character.state.name in bottom_states)
+			if state_condition and fludd_condition: return false
 			if get_rect_dir(last_non_intersecting_rect) != Sides.BOTTOM: return false
 	return true
 
