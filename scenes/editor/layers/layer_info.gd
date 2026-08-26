@@ -95,13 +95,16 @@ func show_layer_editor() -> void:
 
 
 func toggle_visibility() -> void:
-	if shared.get_parent().focus_layer: return
 	var action := EditLayerAction.new()
 	action.layer_index = layer_data.layer_metadata.order
 	action.shared = shared
 	action.property = "layer_visible"
 	action.new_value = !layer_data.layer_metadata.layer_visible
 	shared.get_parent().action_manager.commit_action(action)
+	
+	if shared.get_parent().focus_layer:
+		if layer_data.layer_metadata.layer_uuid != shared.get_parent().layer:
+			shared.get_layer(layer_data.layer_metadata.layer_uuid).modulate.a *= 0.5
 
 	layer_data = shared.get_layer_at(layer_data.layer_metadata.order).layer_data
 	show_hide.icon = eye_open if layer_data.layer_metadata.layer_visible else eye_closed
