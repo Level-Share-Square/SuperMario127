@@ -80,6 +80,7 @@ func set_dialogue(dialogue_trigger: Node):
 	dialogue_trigger.position -= position
 	dialogue_trigger.position *= scale.sign()
 	dialogue_trigger.scale = scale.sign()
+	dialogue_trigger.scale = Vector2(1/scale.x, 1/scale.y)
 	
 	dialogue_trigger.connect("start_talking", self, "start_talking")
 	dialogue_trigger.connect("stop_talking", self, "stop_talking")

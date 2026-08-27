@@ -35,7 +35,6 @@ func _register_properties():
 
 
 func _ready():
-	._ready()
 	var _connect = connect("property_changed", self, "update_property")
 	update_property("palette", palette)
 	update_property("base_color", base_color)
