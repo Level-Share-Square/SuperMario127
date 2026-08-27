@@ -14,7 +14,7 @@
 
 [resource]
 script = ExtResource( 1 )
-item_name = "Black Granite Slope Right"
+item_name = "Black Granite (Right Slope)"
 groups = PoolStringArray( "special" )
 change_to = "til_black_granite"
 items_in_sequence = 4

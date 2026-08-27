@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=252 format=2]
+[gd_resource type="Resource" load_steps=268 format=2]
 
 [ext_resource path="res://scenes/editor/items/placeable_items.gd" type="Script" id=1]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/blue_coin.tres" type="Resource" id=2]
@@ -240,6 +240,7 @@
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/glass_slope_right.tres" type="Resource" id=238]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/glass_slope_left.tres" type="Resource" id=239]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/barrel.tres" type="Resource" id=240]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/clock_tile_slope_right.tres" type="Resource" id=241]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/boo_block_slope_left.tres" type="Resource" id=242]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/boo_block_slope_right.tres" type="Resource" id=243]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/truss.tres" type="Resource" id=244]
@@ -251,6 +252,21 @@
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/big_crate.tres" type="Resource" id=250]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/chain.tres" type="Resource" id=251]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/forcefield.tres" type="Resource" id=252]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/clock_tile.tres" type="Resource" id=253]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/clock_tile_slope_left.tres" type="Resource" id=254]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/battery.tres" type="Resource" id=255]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/battery_stairs_right.tres" type="Resource" id=256]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/battery_stairs_left.tres" type="Resource" id=257]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/waffle_tile.tres" type="Resource" id=258]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/waffle_tile_stairs_right.tres" type="Resource" id=259]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/waffle_tile_stairs_left.tres" type="Resource" id=260]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/twisted_wire.tres" type="Resource" id=261]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/metal_mesh.tres" type="Resource" id=262]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/metal_mesh_stairs_right.tres" type="Resource" id=263]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/metal_mesh_stairs_left.tres" type="Resource" id=264]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/awkward_wall.tres" type="Resource" id=265]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/awkward_wall_stairs_right.tres" type="Resource" id=266]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/awkward_wall_stairs_left.tres" type="Resource" id=267]
 
 [resource]
 script = ExtResource( 1 )
@@ -408,6 +424,12 @@ placeable_items = {
 "obj_wood_platform": ExtResource( 56 ),
 "obj_yoshi": ExtResource( 140 ),
 "obj_zoom_trigger": ExtResource( 139 ),
+"til_awkward_wall": ExtResource( 265 ),
+"til_awkward_wall_stairs_left": ExtResource( 267 ),
+"til_awkward_wall_stairs_right": ExtResource( 266 ),
+"til_battery": ExtResource( 255 ),
+"til_battery_stairs_left": ExtResource( 257 ),
+"til_battery_stairs_right": ExtResource( 256 ),
 "til_black_granite": ExtResource( 154 ),
 "til_black_granite_half_tile": ExtResource( 193 ),
 "til_black_granite_slope_left": ExtResource( 192 ),
@@ -428,6 +450,9 @@ placeable_items = {
 "til_castle_wood": ExtResource( 158 ),
 "til_castle_wood_slope_left": ExtResource( 195 ),
 "til_castle_wood_slope_right": ExtResource( 198 ),
+"til_clock_tile": ExtResource( 253 ),
+"til_clock_tile_slope_left": ExtResource( 254 ),
+"til_clock_tile_slope_right": ExtResource( 241 ),
 "til_clouds": ExtResource( 178 ),
 "til_clouds_half_tile": ExtResource( 203 ),
 "til_cobblestone": ExtResource( 171 ),
@@ -473,6 +498,9 @@ placeable_items = {
 "til_marble_brick": ExtResource( 153 ),
 "til_marble_brick_stairs_left": ExtResource( 186 ),
 "til_marble_brick_stairs_right": ExtResource( 187 ),
+"til_metal_mesh": ExtResource( 262 ),
+"til_metal_mesh_stairs_left": ExtResource( 264 ),
+"til_metal_mesh_stairs_right": ExtResource( 263 ),
 "til_negative_rock": ExtResource( 157 ),
 "til_negative_rock_half_tile": ExtResource( 223 ),
 "til_negative_rock_slope_left": ExtResource( 222 ),
@@ -499,6 +527,10 @@ placeable_items = {
 "til_toy_blocks_stairs_left": ExtResource( 231 ),
 "til_toy_blocks_stairs_right": ExtResource( 233 ),
 "til_truss": ExtResource( 244 ),
+"til_twisted_wire": ExtResource( 261 ),
+"til_waffle_tile": ExtResource( 258 ),
+"til_waffle_tile_stairs_left": ExtResource( 260 ),
+"til_waffle_tile_stairs_right": ExtResource( 259 ),
 "til_wood": ExtResource( 151 ),
 "til_wood_fence": ExtResource( 167 ),
 "til_wood_fence_slope_left": ExtResource( 234 ),
