@@ -61,7 +61,7 @@ func goonie_ready():
 	scale.x = abs(scale.x)
 	sprite.flip_h = true if facing_direction == 1 else false
 	
-	rotation_degrees = 0
+	if is_enabled_and_on_ground(): rotation_degrees = 0
 
 func _object_physics_process(delta):
 	goonie_physics_process(delta)
