@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource( 1 )
-item_name = "Clock Tile (Right Slope)"
+item_name = "Clockwork Tile (Right Slope)"
 groups = PoolStringArray(  )
 change_to = "til_clock_tile"
 items_in_sequence = 3
