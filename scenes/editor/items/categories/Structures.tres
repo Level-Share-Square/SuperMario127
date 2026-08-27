@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=77 format=2]
+[gd_resource type="Resource" load_steps=78 format=2]
 
 [ext_resource path="res://scenes/editor/items/placeable_items.gd" type="Script" id=1]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/stone_bricks_stairs_left.tres" type="Resource" id=2]
@@ -33,6 +33,7 @@
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/clock_tile_slope_right.tres" type="Resource" id=31]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/clock_tile.tres" type="Resource" id=32]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/clock_tile_slope_left.tres" type="Resource" id=33]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/castle_pillar_horizontal.tres" type="Resource" id=34]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/bricks_stairs_left.tres" type="Resource" id=148]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/gem_block.tres" type="Resource" id=149]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/glass.tres" type="Resource" id=150]
@@ -98,6 +99,7 @@ placeable_items = {
 "til_carpet_stairs_left": ExtResource( 11 ),
 "til_carpet_stairs_right": ExtResource( 12 ),
 "til_castle_pillar": ExtResource( 165 ),
+"til_castle_pillar_horizontal": ExtResource( 34 ),
 "til_castle_walls": ExtResource( 168 ),
 "til_castle_wood": ExtResource( 158 ),
 "til_castle_wood_slope_left": ExtResource( 10 ),
