@@ -43,6 +43,7 @@ func update_mission(mission):
 	if mission == selected_mission:
 		mission_prefab.load_properties(self, selected_mission)
 		self.mission.property_changed("mission_uuid", selected_mission.mission_uuid)
+		on_property_changed("mission_uuid", selected_mission.mission_uuid)
 
 func load_properties(_editor, _objects):
 	editor = _editor

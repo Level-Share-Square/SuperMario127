@@ -60,7 +60,7 @@ func on_mission_selected(mission: MissionData):
 	
 func update_mission(mission):
 	refresh_buttons()
-	on_mission_selected(selected_mission)
+	on_mission_selected(mission)
 
 func change_property(key: String, value, check_matches, save_to_data):
 	var old_val = selected_mission[key]
