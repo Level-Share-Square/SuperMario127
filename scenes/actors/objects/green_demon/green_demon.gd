@@ -1,7 +1,7 @@
 extends GameObject
 
-const IDLE_PATH = "res://scenes/actors/objects/green_demon/new_idle.png"
-const CHASE_PATH = "res://scenes/actors/objects/green_demon/new_moving.png"
+export var idle_texture: StreamTexture
+export var chase_texture: StreamTexture
 
 onready var area = $Area2D
 onready var sprite = $Sprite
@@ -145,9 +145,9 @@ func _object_physics_process(delta):
 
 func update_sprite():
 	if chase:
-		sprite.texture = level_list_util.get_image_from_path(CHASE_PATH)
+		sprite.texture = chase_texture
 	else:
-		sprite.texture = level_list_util.get_image_from_path(IDLE_PATH)
+		sprite.texture = idle_texture
 
 func on_property_changed(key, value):
 	update_sprite()
