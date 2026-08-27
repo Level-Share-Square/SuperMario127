@@ -88,13 +88,12 @@ func _register_properties() -> void:
 	register_property(4, "activated", activated, true)
 	register_property(5, "red_coins_activate", red_coins_activate, true)
 	register_property(6, "shine_shards_activate", shine_shards_activate, true)
-	register_property(7, "mission_uuid", mission_uuid, true)
+	register_property(7, "mission_uuid", mission_uuid, false)
 	register_property(8, "required_purples", required_purples, true)
 	register_property(9, "activation_tag", activation_tag, true)
 	register_property(10, "added_to_data", added_to_data, false)
+	property_tabs.append("mission")
 	
-	set_property_override("mission_uuid", PropertyTab.OverrideTypes.DROPDOWN, [self, "get_mission_args"])
-
 func get_mission_args() -> Dictionary:
 	var args: Dictionary
 	for mission_data in CurrentLevelData.level_metadata.collectible_data.mission_data:
@@ -103,11 +102,7 @@ func get_mission_args() -> Dictionary:
 
 func _ready() -> void:
 	send_score = true
-	if not mission_uuid and CurrentLevelData.level_metadata.collectible_data.mission_data.size() > 0: 
-		set_property("mission_uuid", CurrentLevelData.level_metadata.collectible_data.mission_data[0].mission_uuid, true)
-		mission_from_before = mission_uuid
-		update_shine_properties("mission_uuid", mission_uuid)
-	elif mission_uuid:
+	if mission_uuid:
 		mission_from_before = mission_uuid
 		update_shine_properties("mission_uuid", mission_uuid)
 	if mode != 1: # not in edit mode
@@ -145,6 +140,7 @@ func _ready() -> void:
 		vector_rays_small.color = vector_rays.color
 	else:
 		animation_player.play("RESET")
+		CurrentLevelData.level_metadata.collectible_data.connect("data_changed", self, "on_mission_changed")
 	
 	vector_rays.visible = do_kick_out and !is_blue
 	glow.visible = !is_blue
@@ -152,6 +148,11 @@ func _ready() -> void:
 	var _connect = connect("property_changed", self, "update_shine_properties")
 	if activation_tag != "":
 		add_to_group("tag_shine_%s" % activation_tag.to_lower())
+		
+
+func on_mission_changed(mission):
+	if mission.mission_uuid == mission_uuid:
+		update_shine_properties("mission_uuid", mission.mission_uuid)
 
 func update_shine_properties(key: String, value) -> void:
 	if key == "mission_uuid":

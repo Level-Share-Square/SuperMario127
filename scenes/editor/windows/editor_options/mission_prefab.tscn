@@ -1,0 +1,81 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://scenes/editor/editor_theme.tres" type="Theme" id=1]
+[ext_resource path="res://scenes/editor/windows/editor_options/mission_prefab.gd" type="Script" id=2]
+[ext_resource path="res://scenes/menu/button_scripts/button_sound.gd" type="Script" id=3]
+[ext_resource path="res://scenes/editor/windows/object_property_editor/misc_property_scenes/int/base.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/editor/windows/object_property_editor/misc_property_scenes/dropdown/base.tscn" type="PackedScene" id=10]
+[ext_resource path="res://scenes/editor/windows/object_property_editor/misc_property_scenes/bool/base.tscn" type="PackedScene" id=11]
+[ext_resource path="res://scenes/editor/windows/big_text/big_text.tscn" type="PackedScene" id=12]
+[ext_resource path="res://scenes/editor/windows/object_property_editor/misc_property_scenes/String/base.tscn" type="PackedScene" id=13]
+[ext_resource path="res://scenes/editor/windows/object_property_editor/misc_property_scenes/Color/base.tscn" type="PackedScene" id=14]
+
+[sub_resource type="StyleBoxEmpty" id=191]
+
+[node name="MissionPrefab" type="VBoxContainer"]
+margin_right = 240.0
+margin_bottom = 329.0
+size_flags_horizontal = 3
+theme = ExtResource( 1 )
+custom_constants/separation = 5
+script = ExtResource( 2 )
+
+[node name="ShineName" parent="." instance=ExtResource( 13 )]
+unique_name_in_owner = true
+margin_top = 0.0
+margin_right = 240.0
+margin_bottom = 17.0
+
+[node name="ShineDescription" parent="." instance=ExtResource( 12 )]
+unique_name_in_owner = true
+margin_top = 22.0
+margin_right = 240.0
+margin_bottom = 166.0
+rect_min_size = Vector2( 0, 144 )
+show_name = true
+show_char = false
+
+[node name="SortOrder" parent="." instance=ExtResource( 9 )]
+unique_name_in_owner = true
+margin_top = 171.0
+margin_right = 240.0
+margin_bottom = 188.0
+
+[node name="Color" parent="." instance=ExtResource( 14 )]
+unique_name_in_owner = true
+margin_top = 193.0
+margin_right = 240.0
+margin_bottom = 457.0
+custom_styles/panel = SubResource( 191 )
+
+[node name="ForceLeave" parent="." instance=ExtResource( 11 )]
+unique_name_in_owner = true
+margin_top = 462.0
+margin_right = 240.0
+margin_bottom = 479.0
+
+[node name="SpawnArea" parent="." instance=ExtResource( 10 )]
+unique_name_in_owner = true
+margin_top = 484.0
+margin_right = 240.0
+margin_bottom = 503.0
+
+[node name="TeleporterTag" parent="." instance=ExtResource( 13 )]
+unique_name_in_owner = true
+margin_top = 508.0
+margin_right = 240.0
+margin_bottom = 525.0
+
+[node name="ShowInMenu" parent="." instance=ExtResource( 11 )]
+unique_name_in_owner = true
+margin_top = 530.0
+margin_right = 240.0
+margin_bottom = 547.0
+
+[node name="Erase" type="Button" parent="."]
+margin_top = 552.0
+margin_right = 240.0
+margin_bottom = 571.0
+theme_type_variation = "ButtonRed"
+text = "Delete Mission"
+script = ExtResource( 3 )

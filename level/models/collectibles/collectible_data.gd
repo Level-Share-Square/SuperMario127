@@ -19,6 +19,11 @@ var persistent_nozzles: Array = [
 
 var red_coin_count: int = 0
 
+# This is the easiest way to bridge the
+# gap between the shines' mission tab and
+# the level settings mission tab.
+signal data_changed(data)
+
 
 func _init(
 	s_mission_data: Array = [], 
