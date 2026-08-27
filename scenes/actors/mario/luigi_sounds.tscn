@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=2]
+[gd_scene load_steps=66 format=2]
 
 [ext_resource path="res://addons/mixing-desk/sound/nonspatial/ran_cont.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/mario/sounds.gd" type="Script" id=2]
@@ -64,6 +64,7 @@
 [ext_resource path="res://scenes/actors/mario/sounds_misc/perfect.wav" type="AudioStream" id=62]
 [ext_resource path="res://scenes/actors/mario/sounds_misc/getup.wav" type="AudioStream" id=63]
 [ext_resource path="res://scenes/actors/mario/sounds_misc/dive.wav" type="AudioStream" id=64]
+[ext_resource path="res://scenes/actors/mario/sounds_misc/powerdown.wav" type="AudioStream" id=65]
 
 [node name="Sounds" type="Node"]
 script = ExtResource( 2 )
@@ -387,7 +388,12 @@ bus = "Sounds"
 
 [node name="Powerup" type="AudioStreamPlayer" parent="OtherSounds"]
 stream = ExtResource( 37 )
-volume_db = -6.0
+volume_db = -9.0
+bus = "Sounds"
+
+[node name="Powerdown" type="AudioStreamPlayer" parent="OtherSounds"]
+stream = ExtResource( 65 )
+volume_db = -9.0
 bus = "Sounds"
 
 [node name="WaterSplash" type="AudioStreamPlayer" parent="OtherSounds"]

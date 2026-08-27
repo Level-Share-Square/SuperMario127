@@ -1,11 +1,12 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://scenes/actors/objects/rainbow_breakable_block/set_gradient.gd" type="Script" id=1]
-[ext_resource path="res://scenes/actors/objects/big_steely/break.wav" type="AudioStream" id=2]
+[ext_resource path="res://scenes/actors/objects/rainbow_breakable_block/break.wav" type="AudioStream" id=2]
 [ext_resource path="res://scenes/actors/objects/metal_breakable_block/metal_breakable_block_outline.png" type="Texture" id=3]
 [ext_resource path="res://scenes/actors/objects/metal_breakable_block/metal_breakable_block.png" type="Texture" id=4]
 [ext_resource path="res://scenes/actors/objects/rainbow_breakable_block/particles.png" type="Texture" id=5]
 [ext_resource path="res://scenes/actors/objects/box_base/box_base.tscn" type="PackedScene" id=6]
+[ext_resource path="res://classes/sound_pitcher.gd" type="Script" id=7]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -103,7 +104,7 @@ tracks/2/keys = {
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [ 0.0 ],
-"method": "play"
+"method": "play_rand_pitch"
 } ]
 }
 tracks/3/type = "method"
@@ -184,11 +185,15 @@ axis_stretch_vertical = 1
 anims/RESET = SubResource( 10 )
 anims/break = SubResource( 9 )
 
-[node name="BreakSound" type="AudioStreamPlayer" parent="." index="4"]
+[node name="BreakSound" type="AudioStreamPlayer2D" parent="." index="4"]
 stream = ExtResource( 2 )
-volume_db = -8.5
+volume_db = 1.0
 bus = "Sounds"
+script = ExtResource( 7 )
 
 [node name="BreakParticles" parent="." index="5"]
 process_material = SubResource( 11 )
 texture = ExtResource( 5 )
+
+[connection signal="area_entered" from="PlayerDetector" to="." method="area_entered"]
+[connection signal="area_exited" from="PlayerDetector" to="." method="area_exited"]

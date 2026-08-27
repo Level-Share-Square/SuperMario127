@@ -4,6 +4,7 @@ onready var sprite = $Sprite
 onready var drop = $Sprite/Sprite2
 onready var area = $Area2D
 onready var sound = $AudioStreamPlayer
+onready var animation_player = $AnimationPlayer
 
 export var normal_texture : Texture
 export var recolorable_texture : Texture 
@@ -28,9 +29,7 @@ func _register_properties():
 
 func collect(body):
 	if is_enabled_and_on_ground() and !collected and body.name.begins_with("Character") and !body.dead:
-		$Particles2D.emitting = false
-		$Particles2D2.emitting = true
-		sound.play()
+		animation_player.play("pop")
 		sprite.visible = false
 		timer = respawn_timer
 		body.fuel += added_water
@@ -46,7 +45,7 @@ func collect(body):
 			body.velocity.y = BOUNCE_POWER
 
 func _ready():
-	$AnimationPlayer.play("bpb")
+	animation_player.play("bpb")
 	connect("property_changed", self, "_on_property_changed")
 	if is_preview:
 		z_index = 0
@@ -71,8 +70,8 @@ func _process(delta):
 		timer -= delta
 		if timer <= 0:
 			timer = 0
+			animation_player.play("respawn")
 			sprite.visible = true
-			$Particles2D.emitting = true
 			collected = false
 			
 func _on_property_changed(key, value):

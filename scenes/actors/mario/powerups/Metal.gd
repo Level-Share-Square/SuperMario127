@@ -16,6 +16,7 @@ func _start(_delta, play_temp_music: bool):
 		Singleton.Music.play_temporary_music(music_id)
 
 func _stop(_delta):
+	character.sound_player.play_powerdown_jingle()
 	emit_signal("powerup_state_changed", "Normal")
 	character.metal_voice = false
 	Singleton.Music.stop_temporary_music()

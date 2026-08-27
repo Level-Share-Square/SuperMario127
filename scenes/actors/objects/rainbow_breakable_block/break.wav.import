@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/break.wav-0cb996cac39c75683141101e9e61d1c2.sample"
+path="res://.import/break.wav-bb8181de3c50b75683986acb90d107a3.sample"
 
 [deps]
 
-source_file="res://scenes/actors/objects/crate/break.wav"
-dest_files=[ "res://.import/break.wav-0cb996cac39c75683141101e9e61d1c2.sample" ]
+source_file="res://scenes/actors/objects/rainbow_breakable_block/break.wav"
+dest_files=[ "res://.import/break.wav-bb8181de3c50b75683986acb90d107a3.sample" ]
 
 [params]
 

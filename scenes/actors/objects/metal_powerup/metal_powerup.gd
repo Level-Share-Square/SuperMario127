@@ -30,8 +30,9 @@ func collect(body):
 		body.heal(5 * 8)
 		var powerup_node = body.get_powerup_node("MetalPowerup")
 		body.set_powerup(powerup_node, powerup_music, duration)
-		body.sound_player.play_powerup_sound()
-		body.sound_player.play_powerup_jingle()
+		if duration > 0.5:
+			body.sound_player.play_powerup_sound()
+			body.sound_player.play_powerup_jingle()
 		animation_player.play("collect", -1, 2)
 		respawn_timer = 10.0
 		collected = true

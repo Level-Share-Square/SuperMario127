@@ -36,6 +36,7 @@ onready var splash_sound = $OtherSounds/WaterSplash
 onready var swim_sound = $OtherSounds/Swim
 onready var spin_water_sound = $OtherSounds/SpinWater
 onready var powerup_sound_voiceless = $OtherSounds/Powerup
+onready var powerdown_sound_voiceless = $OtherSounds/Powerdown
 onready var burn_sound = $OtherSounds/Burn
 onready var bonk_sound = $OtherSounds/Bonk
 onready var dive_sound = $OtherSounds/Dive
@@ -192,6 +193,10 @@ func play_angry_sound():
 func play_powerup_jingle():
 	if ready:
 		powerup_sound_voiceless.play()
+
+func play_powerdown_jingle():
+	if ready:
+		powerdown_sound_voiceless.play()
 	
 func play_bonk_sound():
 	if ready:

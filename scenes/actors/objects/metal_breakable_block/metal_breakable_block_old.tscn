@@ -112,7 +112,7 @@ visible = false
 process_parent = true
 physics_process_parent = true
 
-[node name="Broken" type="AudioStreamPlayer" parent="."]
+[node name="Broken" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 3 )
 volume_db = -10.0
 bus = "Sounds"

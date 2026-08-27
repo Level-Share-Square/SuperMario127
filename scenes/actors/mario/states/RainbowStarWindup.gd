@@ -3,6 +3,8 @@ extends State
 class_name RainbowStarWindupState
 
 # Is this state even used?
+# ^ no, it was a scrapped mechanic where the player could "charge up"
+# their star before dashing
 
 var time_charging = 0.0
 

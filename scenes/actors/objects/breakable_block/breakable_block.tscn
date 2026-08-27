@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://scenes/actors/objects/box_base/box_base.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/actors/objects/breakable_block/breakable_block.gd" type="Script" id=2]
@@ -27,6 +27,7 @@
 [ext_resource path="res://scenes/actors/objects/breakable_block/palettes/2_outline.png" type="Texture" id=25]
 [ext_resource path="res://scenes/actors/objects/breakable_block/palettes/1_outline.png" type="Texture" id=26]
 [ext_resource path="res://scenes/actors/objects/breakable_block/palettes/3_outline.png" type="Texture" id=27]
+[ext_resource path="res://classes/sound_pitcher.gd" type="Script" id=28]
 
 [sub_resource type="Animation" id=2]
 length = 0.001
@@ -83,26 +84,12 @@ tracks/1/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( 1.5, 1.5 ) ]
 }
 tracks/2/type = "method"
-tracks/2/path = NodePath("BreakSound")
+tracks/2/path = NodePath(".")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [ 0.0 ],
-"method": "play"
-} ]
-}
-tracks/3/type = "method"
-tracks/3/path = NodePath(".")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
 "times": PoolRealArray( 0.7 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
@@ -110,8 +97,20 @@ tracks/3/keys = {
 "method": "queue_free"
 } ]
 }
-tracks/4/type = "value"
-tracks/4/path = NodePath("BreakParticles:emitting")
+tracks/3/type = "value"
+tracks/3/path = NodePath("BreakParticles:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/4/type = "method"
+tracks/4/path = NodePath("BreakSound")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
@@ -119,8 +118,10 @@ tracks/4/enabled = true
 tracks/4/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
+"values": [ {
+"args": [ 0.0 ],
+"method": "play_rand_pitch"
+} ]
 }
 
 [sub_resource type="Gradient" id=7]
@@ -173,11 +174,16 @@ axis_stretch_vertical = 1
 anims/RESET = SubResource( 2 )
 anims/break = SubResource( 1 )
 
-[node name="BreakSound" type="AudioStreamPlayer" parent="." index="4"]
-stream = ExtResource( 3 )
-volume_db = -10.0
-bus = "Sounds"
-
-[node name="BreakParticles" parent="." index="5"]
+[node name="BreakParticles" parent="." index="4"]
 amount = 24
 process_material = SubResource( 8 )
+
+[node name="BreakSound" type="AudioStreamPlayer2D" parent="." index="5"]
+unique_name_in_owner = true
+stream = ExtResource( 3 )
+volume_db = 2.0
+bus = "Sounds"
+script = ExtResource( 28 )
+
+[connection signal="area_entered" from="PlayerDetector" to="." method="area_entered"]
+[connection signal="area_exited" from="PlayerDetector" to="." method="area_exited"]
