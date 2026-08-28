@@ -145,6 +145,6 @@ texture = ExtResource( 4 )
 [node name="BreakSound" type="AudioStreamPlayer2D" parent="." index="5"]
 unique_name_in_owner = true
 stream = ExtResource( 1 )
-volume_db = 4.0
+volume_db = 6.0
 bus = "Sounds"
 script = ExtResource( 2 )

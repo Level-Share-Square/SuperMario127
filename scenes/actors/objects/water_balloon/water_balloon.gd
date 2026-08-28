@@ -3,7 +3,7 @@ extends GameObject
 onready var sprite = $Sprite
 onready var drop = $Sprite/Sprite2
 onready var area = $Area2D
-onready var sound = $AudioStreamPlayer
+onready var refill_sound = $Refill
 onready var animation_player = $AnimationPlayer
 
 export var normal_texture : Texture
@@ -33,6 +33,8 @@ func collect(body):
 		timer = respawn_timer
 		body.fuel += added_water
 		body.stamina += added_stamina
+		if added_water > 0:
+			refill_sound.play()
 		if body.fuel > 100:
 			body.fuel = 100
 		if body.stamina > 100:

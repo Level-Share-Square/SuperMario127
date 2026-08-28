@@ -1,12 +1,14 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://scenes/actors/objects/water_balloon/water_balloon.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/objects/water_balloon/2.png" type="Texture" id=2]
-[ext_resource path="res://scenes/actors/objects/water_balloon/balloonpopping.wav" type="AudioStream" id=3]
+[ext_resource path="res://scenes/actors/objects/water_balloon/3W_SeEmFugumannenExplode.wav" type="AudioStream" id=3]
 [ext_resource path="res://scenes/actors/mario/particles/metal_sparkles.png" type="Texture" id=4]
 [ext_resource path="res://scenes/actors/mario/nozzles/water_particle.png" type="Texture" id=5]
 [ext_resource path="res://scenes/actors/objects/water_balloon/1.png" type="Texture" id=6]
 [ext_resource path="res://scenes/actors/objects/water_balloon/recolorable_texture.png" type="Texture" id=7]
+[ext_resource path="res://classes/sound_pitcher.gd" type="Script" id=8]
+[ext_resource path="res://scenes/actors/objects/hover_nozzle/sound.wav" type="AudioStream" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 14, 16 )
@@ -228,7 +230,7 @@ tracks/6/keys = {
 "values": [ false ]
 }
 tracks/7/type = "method"
-tracks/7/path = NodePath("AudioStreamPlayer")
+tracks/7/path = NodePath("Pop")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/imported = false
@@ -237,7 +239,7 @@ tracks/7/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
-"args": [ 0.0 ],
+"args": [ 0.25 ],
 "method": "play"
 } ]
 }
@@ -374,9 +376,15 @@ internal_id = "water_balloon"
 normal_texture = ExtResource( 2 )
 recolorable_texture = ExtResource( 7 )
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer2D" parent="."]
+[node name="Pop" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 3 )
-volume_db = -3.0
+volume_db = 6.0
+bus = "Sounds"
+script = ExtResource( 8 )
+
+[node name="Refill" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 9 )
+volume_db = -5.0
 bus = "Sounds"
 
 [node name="Sprite" type="Sprite" parent="."]
