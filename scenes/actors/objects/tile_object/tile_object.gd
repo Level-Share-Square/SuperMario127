@@ -7,8 +7,9 @@ var tint := Color.white
 var editor_border_color := Color(0.2, 0.2, 0.8, 0.5)
 
 func load_placeable_item():
-	placeable_item = PlaceableItem.new()
+	placeable_item = PlaceableObject.new()
 	placeable_item.item_name = "Tile Stamp"
+	placeable_item.object_id = -1
 	placeable_item.icons.append(load("res://assets/icons/settings.svg"))
 
 func _ready():

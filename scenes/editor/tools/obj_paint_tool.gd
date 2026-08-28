@@ -86,7 +86,6 @@ func place_object(pos: Vector2, data = null):
 		data = create_object_data(Vector2(round(pos.x), round(pos.y)) if editor.pixel_lock == false else pos.snapped(Vector2(8, 8)), object_item.object_id, object_item.palette)
 
 	for property in object_item.property_overrides:
-		print(property)
 		if data.get_property(property) != null: continue
 		
 		data.set_property(property, object_item.property_overrides[property])
