@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/break.wav-4ed7d01dafb4ccaead8e94ff478fe1f0.sample"
+path="res://.import/3W_SeOjKeyAppear.wav-e5641b3c39ad43b5a3122b9eacda9202.sample"
 
 [deps]
 
-source_file="res://scenes/actors/objects/metal_breakable_block/break.wav"
-dest_files=[ "res://.import/break.wav-4ed7d01dafb4ccaead8e94ff478fe1f0.sample" ]
+source_file="res://scenes/actors/objects/shine_shard/3W_SeOjKeyAppear.wav"
+dest_files=[ "res://.import/3W_SeOjKeyAppear.wav-e5641b3c39ad43b5a3122b9eacda9202.sample" ]
 
 [params]
 

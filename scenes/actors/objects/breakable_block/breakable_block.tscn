@@ -181,9 +181,6 @@ process_material = SubResource( 8 )
 [node name="BreakSound" type="AudioStreamPlayer2D" parent="." index="5"]
 unique_name_in_owner = true
 stream = ExtResource( 3 )
-volume_db = 2.0
+volume_db = 4.0
 bus = "Sounds"
 script = ExtResource( 28 )
-
-[connection signal="area_entered" from="PlayerDetector" to="." method="area_entered"]
-[connection signal="area_exited" from="PlayerDetector" to="." method="area_exited"]

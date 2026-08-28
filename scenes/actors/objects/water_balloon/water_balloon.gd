@@ -30,7 +30,6 @@ func _register_properties():
 func collect(body):
 	if is_enabled_and_on_ground() and !collected and body.name.begins_with("Character") and !body.dead:
 		animation_player.play("pop")
-		sprite.visible = false
 		timer = respawn_timer
 		body.fuel += added_water
 		body.stamina += added_stamina
@@ -71,7 +70,6 @@ func _process(delta):
 		if timer <= 0:
 			timer = 0
 			animation_player.play("respawn")
-			sprite.visible = true
 			collected = false
 			
 func _on_property_changed(key, value):

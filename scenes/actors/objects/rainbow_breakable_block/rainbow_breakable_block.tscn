@@ -187,13 +187,10 @@ anims/break = SubResource( 9 )
 
 [node name="BreakSound" type="AudioStreamPlayer2D" parent="." index="4"]
 stream = ExtResource( 2 )
-volume_db = 1.0
+volume_db = 3.0
 bus = "Sounds"
 script = ExtResource( 7 )
 
 [node name="BreakParticles" parent="." index="5"]
 process_material = SubResource( 11 )
 texture = ExtResource( 5 )
-
-[connection signal="area_entered" from="PlayerDetector" to="." method="area_entered"]
-[connection signal="area_exited" from="PlayerDetector" to="." method="area_exited"]

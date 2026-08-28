@@ -4,7 +4,7 @@
 [ext_resource path="res://scenes/actors/objects/metal_breakable_block/metal_breakable_block.png" type="Texture" id=2]
 [ext_resource path="res://scenes/actors/objects/metal_breakable_block/metal_breakable_block_outline.png" type="Texture" id=3]
 [ext_resource path="res://scenes/actors/objects/metal_breakable_block/particles.png" type="Texture" id=4]
-[ext_resource path="res://scenes/actors/objects/big_steely/break.wav" type="AudioStream" id=5]
+[ext_resource path="res://scenes/actors/objects/rainbow_breakable_block/break.wav" type="AudioStream" id=5]
 [ext_resource path="res://classes/sound_pitcher.gd" type="Script" id=6]
 
 [sub_resource type="Animation" id=10]
@@ -153,13 +153,10 @@ anims/break = SubResource( 9 )
 
 [node name="BreakSound" type="AudioStreamPlayer2D" parent="." index="4"]
 stream = ExtResource( 5 )
-volume_db = -8.5
+volume_db = 3.0
 bus = "Sounds"
 script = ExtResource( 6 )
 
 [node name="BreakParticles" parent="." index="5"]
 process_material = SubResource( 8 )
 texture = ExtResource( 4 )
-
-[connection signal="area_entered" from="PlayerDetector" to="." method="area_entered"]
-[connection signal="area_exited" from="PlayerDetector" to="." method="area_exited"]

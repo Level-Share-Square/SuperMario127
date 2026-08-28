@@ -1,7 +1,8 @@
 extends GameObject
 
 onready var animated_sprite = $AnimatedSprite
-onready var sound = $AudioStreamPlayer
+onready var sound = $Collect
+onready var last_sound = $CollectLast
 onready var area = $Area2D
 onready var visibility_enabler = $VisibilityEnabler2D
 onready var label = $Label
@@ -21,12 +22,12 @@ export var anim_damp = 80
 func collect(body):
 	if is_enabled_and_on_ground() and !collected and body.name.begins_with("Character") and !body.dead:
 		CurrentLevelData.vars.collect_shine_shard(id)
-		var player_id = 1
-		if body.name == "Character":
-			player_id = 0
-		if Singleton.PlayerSettings.other_player_id == -1 or Singleton.PlayerSettings.my_player_index == player_id:
-			sound.play()
 		collected = true
+		
+		if CurrentLevelData.vars.shine_shards_collected[CurrentLevelData.area_id][0] != CurrentLevelData.vars.max_shine_shards:
+			sound.play()
+		else:
+			last_sound.play()
 		
 		label.text = str(CurrentLevelData.vars.shine_shards_collected[CurrentLevelData.area_id][0])
 		
