@@ -38,8 +38,8 @@ func _ready():
 	goonie_ready()
 	
 func _object_ready():
-	._object_ready()
 	collision_shape.disabled = !is_enabled_and_on_ground()
+	platform_area_collision_shape.disabled = !is_enabled_and_on_ground()
 
 func goonie_ready():
 	if speed == 0:
