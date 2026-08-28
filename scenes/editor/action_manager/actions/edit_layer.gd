@@ -18,7 +18,7 @@ func change_property(value) -> void:
 		if(layer_tint_and_autoset_tint_toggled):
 			shared.edit_layer(metadata.layer_uuid, "autoset_tint", true)
 			layer_tint_and_autoset_tint_toggled = false
-		else:
+		elif metadata.autoset_tint:
 			shared.edit_layer(metadata.layer_uuid, "autoset_tint", false)
 			layer_tint_and_autoset_tint_toggled = true
 
