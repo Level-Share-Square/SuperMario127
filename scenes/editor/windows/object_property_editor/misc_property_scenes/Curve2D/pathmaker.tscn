@@ -22,7 +22,11 @@ _data = {
 [node name="ObjectTrail" type="Control"]
 script = ExtResource( 1 )
 
-[node name="Line" type="Line2D" parent="."]
+[node name="ZIndex" type="Node2D" parent="."]
+z_index = 4096
+z_as_relative = false
+
+[node name="Line" type="Line2D" parent="ZIndex"]
 unique_name_in_owner = true
 position = Vector2( 1, -6 )
 width = 8.0
@@ -32,15 +36,15 @@ texture_mode = 1
 sharp_limit = 1.0
 antialiased = true
 
-[node name="path" type="Path2D" parent="Line"]
+[node name="path" type="Path2D" parent="ZIndex/Line"]
 curve = SubResource( 1 )
 
-[node name="Icons" type="Control" parent="."]
+[node name="Icons" type="Control" parent="ZIndex"]
 unique_name_in_owner = true
 margin_right = 40.0
 margin_bottom = 40.0
 
-[node name="Previews" type="Control" parent="."]
+[node name="Previews" type="Control" parent="ZIndex"]
 unique_name_in_owner = true
 margin_right = 40.0
 margin_bottom = 40.0
