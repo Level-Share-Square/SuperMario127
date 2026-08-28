@@ -14,7 +14,7 @@
 
 [node name="Medium Crystal" type="Node2D"]
 script = ExtResource( 1 )
-internal_id = "crystal_medium"
+internal_id = "crystal"
 palette_textures = [ ExtResource( 4 ), ExtResource( 8 ), ExtResource( 5 ), ExtResource( 3 ), ExtResource( 6 ), ExtResource( 2 ), ExtResource( 7 ), ExtResource( 9 ), ExtResource( 11 ), ExtResource( 10 ) ]
 zero_is_default = true
 
