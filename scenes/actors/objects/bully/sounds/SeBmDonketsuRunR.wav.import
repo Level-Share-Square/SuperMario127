@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/stomp.wav-163104de0aa1da775264b0d8e920e526.sample"
+path="res://.import/SeBmDonketsuRunR.wav-07f4c189658ecfe814e42feac5e5b44e.sample"
 
 [deps]
 
-source_file="res://scenes/actors/objects/bully/sounds/stomp.wav"
-dest_files=[ "res://.import/stomp.wav-163104de0aa1da775264b0d8e920e526.sample" ]
+source_file="res://scenes/actors/objects/bully/sounds/SeBmDonketsuRunR.wav"
+dest_files=[ "res://.import/SeBmDonketsuRunR.wav-07f4c189658ecfe814e42feac5e5b44e.sample" ]
 
 [params]
 

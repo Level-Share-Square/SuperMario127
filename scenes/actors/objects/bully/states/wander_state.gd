@@ -1,6 +1,10 @@
 extends EnemyWanderState
 
 
+onready var walk_sound = $"%Walk"
+var footstep_interval := 0.0
+
+
 func _start() -> void:
 	._start()
 	
@@ -15,6 +19,12 @@ func _update(delta: float) -> void:
 	
 	if enemy.is_on_ground():
 		enemy.sprite.play("walk")
+		
+		if footstep_interval <= 0:
+			walk_sound.play()
+			footstep_interval = 0.4
+		footstep_interval -= delta
+		
 	else:
 		if enemy.velocity.y > 0:
 			enemy.sprite.play("fall")

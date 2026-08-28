@@ -1,0 +1,23 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/SeBmDonketsuStep_Big.wav-c919b46b808021c28eefa4098defff89.sample"
+
+[deps]
+
+source_file="res://scenes/actors/objects/bully/sounds/SeBmDonketsuStep_Big.wav"
+dest_files=[ "res://.import/SeBmDonketsuStep_Big.wav-c919b46b808021c28eefa4098defff89.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

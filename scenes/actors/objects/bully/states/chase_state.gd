@@ -6,10 +6,12 @@ export var chase_speed: float = 24
 export var accel: float = 2
 
 var target_player: Character
+var footstep_interval := 0.0
 
 onready var player_detector: Area2D = get_node("%PlayerDetector")
 onready var ledge_detector: RayCast2D = get_node_or_null("Ledge")
 onready var wall_detector: RayCast2D = get_node_or_null("Wall")
+onready var run_sound = $"%Run"
 
 
 func _start() -> void:
@@ -37,6 +39,12 @@ func _update(delta: float) -> void:
 	
 	if enemy.is_on_ground():
 		enemy.sprite.play("run")
+		
+		if footstep_interval <= 0:
+			run_sound.play()
+			footstep_interval = 0.2
+		footstep_interval -= delta
+		
 	else:
 		if enemy.velocity.y > 0:
 			enemy.sprite.play("fall")

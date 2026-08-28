@@ -1,8 +1,14 @@
 extends EnemyState
 
 
+onready var hit_sound = $"%Hit"
+
+
 func _start() -> void:
 	._start()
+	hit_sound.play()
+	enemy.sprite.scale *= 1.15
+	enemy.sprite.modulate *= 1.15
 	enemy.sprite.play("knockback")
 
 

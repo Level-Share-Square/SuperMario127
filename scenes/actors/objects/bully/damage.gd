@@ -2,6 +2,7 @@ extends EnemyDamage
 
 
 onready var grunt_sound = $"%Grunt"
+onready var bonk_sound = $"%Bonk"
 
 export var bully_jump_knockback: Vector2 = Vector2(150, 0)
 export var bully_spin_knockback: Vector2 = Vector2(84, -150)
@@ -13,7 +14,10 @@ export var player_spin_knockback_mult := Vector2(1, 0.75)
 
 
 func stomp(body: PhysicsBody2D = null) -> void:
-	if enemy.rainbow: return
+	if enemy.rainbow: 
+		bonk_sound.play()
+		enemy.sprite.modulate = Color(2, 2, 2)
+		return
 	if is_instance_valid(body):
 		var direction: float = (enemy.global_position - body.global_position).sign().x
 		enemy.velocity = Vector2(direction * bully_jump_knockback.x, bully_jump_knockback.y)
@@ -21,7 +25,7 @@ func stomp(body: PhysicsBody2D = null) -> void:
 
 
 func spin_attacked(body: PhysicsBody2D = null) -> void:
-	if enemy.rainbow: 
+	if enemy.rainbow:
 		if is_instance_valid(body) and body is Character:
 			damage_player(body)
 		return
@@ -42,7 +46,7 @@ func spin_attacked(body: PhysicsBody2D = null) -> void:
 
 
 func ground_pound(body: PhysicsBody2D = null) -> void:
-	if enemy.rainbow: 
+	if enemy.rainbow:
 		if is_instance_valid(body) and body is Character:
 			damage_player(body)
 		return
@@ -68,7 +72,9 @@ func damage_player(player: Character, knockback: Vector2 = player_knockback, mak
 	knockback_power = knockback
 	.damage_player(player)
 	if make_bonked:
+		bonk_sound.play()
 		grunt_sound.play()
+		enemy.sprite.modulate = Color(2, 2, 2)
 		player.set_state_by_name("BonkedState")
 	
 	if enemy.rainbow: return

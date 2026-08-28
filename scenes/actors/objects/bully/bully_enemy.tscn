@@ -1,4 +1,4 @@
-[gd_scene load_steps=67 format=2]
+[gd_scene load_steps=74 format=2]
 
 [ext_resource path="res://scenes/actors/objects/enemy/enemy_base.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/actors/objects/bully/states/knockback_state.gd" type="Script" id=2]
@@ -11,8 +11,8 @@
 [ext_resource path="res://scenes/actors/objects/bully/bully_enemy.gd" type="Script" id=9]
 [ext_resource path="res://scenes/actors/objects/bully/states/chase_state.gd" type="Script" id=10]
 [ext_resource path="res://scenes/actors/mario/SpriteAnimSync.gd" type="Script" id=11]
-[ext_resource path="res://scenes/actors/objects/goomba/sounds/poof.wav" type="AudioStream" id=12]
-[ext_resource path="res://scenes/actors/objects/goomba/sounds/stomp.wav" type="AudioStream" id=13]
+[ext_resource path="res://scenes/actors/objects/bully/sounds/3W_SeEm_Lavasplash_Small01.wav" type="AudioStream" id=12]
+[ext_resource path="res://scenes/actors/objects/bully/sounds/3W_SeEm_Lavasplash_Sink.wav" type="AudioStream" id=13]
 [ext_resource path="res://scenes/actors/objects/goomba/animations/poof.png" type="Texture" id=14]
 [ext_resource path="res://scenes/actors/objects/bully/animations/normal_horns_recolorable.tres" type="SpriteFrames" id=15]
 [ext_resource path="res://scenes/actors/objects/bully/kill_particles.tscn" type="PackedScene" id=16]
@@ -20,6 +20,13 @@
 [ext_resource path="res://classes/sound_pitcher.gd" type="Script" id=18]
 [ext_resource path="res://scenes/actors/objects/thwomp/SM64_Thwomp_Grunt.ogg" type="AudioStream" id=19]
 [ext_resource path="res://scenes/actors/objects/bully/states/ram_knockback_state.gd" type="Script" id=20]
+[ext_resource path="res://scenes/actors/objects/bully/sounds/SeEmDonketsuFallLv.wav" type="AudioStream" id=21]
+[ext_resource path="res://scenes/actors/objects/bully/sounds/SeEmDonketsuPushed.wav" type="AudioStream" id=22]
+[ext_resource path="res://scenes/actors/objects/bully/sounds/SeEmDonketsuHit.wav" type="AudioStream" id=23]
+[ext_resource path="res://scenes/actors/objects/bully/sounds/SeBmDonketsuRunR.wav" type="AudioStream" id=24]
+[ext_resource path="res://scenes/actors/objects/bully/sounds/SeBmDonketsuStepR.wav" type="AudioStream" id=25]
+[ext_resource path="res://scenes/actors/objects/bully/sounds/3W_SeEmDonketsuKouraHit.wav" type="AudioStream" id=26]
+[ext_resource path="res://scenes/actors/objects/bully/bully_juice.gd" type="Script" id=27]
 
 [sub_resource type="CapsuleShape2D" id=64]
 height = 2.0
@@ -291,6 +298,30 @@ tracks/5/keys = {
 "update": 1,
 "values": [ true ]
 }
+tracks/6/type = "value"
+tracks/6/path = NodePath("Sounds/Sink:volume_db")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("AnimatedSprite/Overlay:modulate")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
 
 [sub_resource type="Animation" id=76]
 resource_name = "die"
@@ -298,54 +329,25 @@ resource_name = "die"
 [sub_resource type="Animation" id=68]
 resource_name = "incinerated"
 length = 1.75
-step = 0.001
-tracks/0/type = "audio"
-tracks/0/path = NodePath("Sounds/Stomp")
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"clips": [ {
-"end_offset": 0.0,
-"start_offset": 0.0,
-"stream": ExtResource( 13 )
-} ],
-"times": PoolRealArray( 0.75 )
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("AnimatedSprite:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
 "times": PoolRealArray( 0, 0.754 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ true, false ]
 }
-tracks/2/type = "audio"
-tracks/2/path = NodePath("Sounds/Poof")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"clips": [ {
-"end_offset": 0.0,
-"start_offset": 0.0,
-"stream": ExtResource( 12 )
-} ],
-"times": PoolRealArray( 1.085 )
-}
-tracks/3/type = "method"
-tracks/3/path = NodePath("States/DieState")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
+tracks/1/type = "method"
+tracks/1/path = NodePath("States/DieState")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
 "times": PoolRealArray( 0.753 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
@@ -353,54 +355,75 @@ tracks/3/keys = {
 "method": "spawn_coin"
 } ]
 }
-tracks/4/type = "value"
-tracks/4/path = NodePath("AnimatedSprite:animation")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
+tracks/2/type = "value"
+tracks/2/path = NodePath("AnimatedSprite:animation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ "burn" ]
 }
-tracks/5/type = "value"
-tracks/5/path = NodePath("AnimatedSprite/Overlay:modulate:a")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
-"times": PoolRealArray( 0.002, 0.5 ),
+tracks/3/type = "value"
+tracks/3/path = NodePath("AnimatedSprite/Overlay:modulate:a")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ 0.0, 1.0 ]
 }
-tracks/6/type = "value"
-tracks/6/path = NodePath("Poof:emitting")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/keys = {
+tracks/4/type = "value"
+tracks/4/path = NodePath("Poof:emitting")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
 "times": PoolRealArray( 0.75 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ true ]
 }
-
-[sub_resource type="Animation" id=58]
-resource_name = "pit"
-length = 0.9
-step = 0.001
-tracks/0/type = "audio"
-tracks/0/path = NodePath("Sounds/Stomp")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
+tracks/5/type = "method"
+tracks/5/path = NodePath("Sounds/Burn")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ 0.0 ],
+"method": "play"
+} ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Sounds/Sink:volume_db")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 1.7 ),
+"transitions": PoolRealArray( 3.86374, 1 ),
+"update": 0,
+"values": [ -4.0, -80.0 ]
+}
+tracks/7/type = "audio"
+tracks/7/path = NodePath("Sounds/Sink")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
 "clips": [ {
 "end_offset": 0.0,
 "start_offset": 0.0,
@@ -408,56 +431,63 @@ tracks/0/keys = {
 } ],
 "times": PoolRealArray( 0 )
 }
-tracks/1/type = "value"
-tracks/1/path = NodePath("Poof:emitting")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.3 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ false, true ]
+tracks/8/type = "method"
+tracks/8/path = NodePath("Sounds/Poof")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0.7 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ 0.0 ],
+"method": "play"
+} ]
 }
-tracks/2/type = "value"
-tracks/2/path = NodePath("AnimatedSprite:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
+
+[sub_resource type="Animation" id=58]
+resource_name = "pit"
+length = 0.9
+step = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
 "times": PoolRealArray( 0, 0.333333 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ true, false ]
 }
-tracks/3/type = "audio"
-tracks/3/path = NodePath("Sounds/Poof")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"clips": [ {
-"end_offset": 0.0,
-"start_offset": 0.0,
-"stream": ExtResource( 12 )
-} ],
-"times": PoolRealArray( 0.3 )
-}
-tracks/4/type = "method"
-tracks/4/path = NodePath("States/DieState")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
+tracks/1/type = "method"
+tracks/1/path = NodePath("States/DieState")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
 "times": PoolRealArray( 0.301 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
 "method": "spawn_coin"
+} ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath("Sounds/Fall")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.007 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ 0.0 ],
+"method": "play"
 } ]
 }
 
@@ -634,27 +664,33 @@ frames = ExtResource( 4 )
 animation = "idle"
 playing = true
 offset = Vector2( 0, -7 )
+script = ExtResource( 27 )
+lerp_speed = 4.0
+color_lerp_speed = 3.0
 
 [node name="RecolorSpriteHorns" type="AnimatedSprite" parent="AnimatedSprite" index="0"]
 self_modulate = Color( 0, 0.929412, 1, 1 )
 frames = ExtResource( 15 )
-animation = "idle"
+animation = "burn"
+frame = 3
 offset = Vector2( 0, -7 )
 script = ExtResource( 11 )
 
 [node name="RecolorSpriteFeet" type="AnimatedSprite" parent="AnimatedSprite" index="1"]
 self_modulate = Color( 0, 0.415686, 1, 1 )
 frames = SubResource( 75 )
-animation = "idle"
+animation = "burn"
+frame = 3
 offset = Vector2( 0, -7 )
 script = ExtResource( 11 )
 
 [node name="Overlay" type="AnimatedSprite" parent="AnimatedSprite" index="2"]
-modulate = Color( 1, 1, 1, 0.0240964 )
+modulate = Color( 1, 1, 1, 0 )
 self_modulate = Color( 1, 0, 0, 1 )
 material = SubResource( 70 )
 frames = ExtResource( 4 )
-animation = "idle"
+animation = "burn"
+frame = 3
 offset = Vector2( 0, -7 )
 script = ExtResource( 11 )
 
@@ -694,24 +730,68 @@ anim_speed = 2.0
 [node name="VisibilityEnabler2D" parent="." index="10"]
 position = Vector2( 0, -20 )
 
-[node name="Stomp" type="AudioStreamPlayer2D" parent="Sounds" index="0"]
-stream = ExtResource( 13 )
-bus = "Sounds"
-
-[node name="Poof" type="AudioStreamPlayer2D" parent="Sounds" index="1"]
-stream = ExtResource( 12 )
-bus = "Sounds"
-
-[node name="Grunt" type="AudioStreamPlayer2D" parent="Sounds" index="2"]
+[node name="Grunt" type="AudioStreamPlayer2D" parent="Sounds" index="0"]
 unique_name_in_owner = true
 stream = ExtResource( 19 )
+volume_db = -2.0
 bus = "Sounds"
 script = ExtResource( 18 )
 min_pitch = 1.1
 max_pitch = 1.4
+
+[node name="Fall" type="AudioStreamPlayer2D" parent="Sounds" index="1"]
+stream = ExtResource( 21 )
+volume_db = -2.0
+bus = "Sounds"
+
+[node name="Burn" type="AudioStreamPlayer2D" parent="Sounds" index="2"]
+stream = ExtResource( 12 )
+volume_db = -2.0
+bus = "Sounds"
+script = ExtResource( 18 )
+
+[node name="Sink" type="AudioStreamPlayer2D" parent="Sounds" index="3"]
+stream = ExtResource( 13 )
+bus = "Sounds"
+
+[node name="Poof" type="AudioStreamPlayer2D" parent="Sounds" index="4"]
+stream = ExtResource( 22 )
+volume_db = -4.0
+bus = "Sounds"
+script = ExtResource( 18 )
+
+[node name="Hit" type="AudioStreamPlayer2D" parent="Sounds" index="5"]
+unique_name_in_owner = true
+stream = ExtResource( 23 )
+volume_db = -4.0
+bus = "Sounds"
+script = ExtResource( 18 )
+
+[node name="Bonk" type="AudioStreamPlayer2D" parent="Sounds" index="6"]
+unique_name_in_owner = true
+stream = ExtResource( 26 )
+volume_db = -6.0
+bus = "Sounds"
+script = ExtResource( 18 )
+
+[node name="Run" type="AudioStreamPlayer2D" parent="Sounds" index="7"]
+unique_name_in_owner = true
+stream = ExtResource( 24 )
+volume_db = -4.0
+bus = "Sounds"
+script = ExtResource( 18 )
+
+[node name="Walk" type="AudioStreamPlayer2D" parent="Sounds" index="8"]
+unique_name_in_owner = true
+stream = ExtResource( 25 )
+volume_db = -12.0
+bus = "Sounds"
+script = ExtResource( 18 )
 
 [node name="BullyKillParticles" parent="." index="13" instance=ExtResource( 16 )]
 
 [node name="SpawnParticles" parent="." index="14"]
 position = Vector2( 0, -9 )
 process_material = SubResource( 50 )
+
+[connection signal="area_entered" from="AnimatedSprite/DialogueDetector" to="AnimatedSprite/DialogueDetector" method="area_entered"]

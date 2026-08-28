@@ -1,0 +1,23 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/3W_SeEm_Lavasplash_Small01.wav-29ce1c182a59aeb952702da6e76894d2.sample"
+
+[deps]
+
+source_file="res://scenes/actors/objects/bully/sounds/3W_SeEm_Lavasplash_Small01.wav"
+dest_files=[ "res://.import/3W_SeEm_Lavasplash_Small01.wav-29ce1c182a59aeb952702da6e76894d2.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

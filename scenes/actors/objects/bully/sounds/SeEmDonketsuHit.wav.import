@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/poof.wav-f08838d9489d93abc935d817d522a524.sample"
+path="res://.import/SeEmDonketsuHit.wav-70a042980a7e20d93584e1d08ae1e7c4.sample"
 
 [deps]
 
-source_file="res://scenes/actors/objects/bully/sounds/poof.wav"
-dest_files=[ "res://.import/poof.wav-f08838d9489d93abc935d817d522a524.sample" ]
+source_file="res://scenes/actors/objects/bully/sounds/SeEmDonketsuHit.wav"
+dest_files=[ "res://.import/SeEmDonketsuHit.wav-70a042980a7e20d93584e1d08ae1e7c4.sample" ]
 
 [params]
 
