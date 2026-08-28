@@ -56,7 +56,7 @@ func _start(_delta : float) -> void:
 				var trail: AnimatedSprite = character.sprite.duplicate()
 				trail.show_behind_parent = true
 				trail.modulate = Color(1, 1, 1, 0.5)
-				trail.set_script(preload("res://scenes/actors/mario/FluddAnimSync.gd"))
+				trail.set_script(preload("res://scenes/actors/mario/SpriteAnimSync.gd"))
 				trail.lag_behind = true
 				trail.lag_amount = 0.0
 				trail.mario_sprite = character.sprite

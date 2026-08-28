@@ -8,7 +8,7 @@
 [ext_resource path="res://scenes/actors/objects/koopa_troopa/para_regular_frames.tres" type="SpriteFrames" id=6]
 [ext_resource path="res://scenes/actors/objects/koopa_troopa/body.gd" type="Script" id=7]
 [ext_resource path="res://scenes/actors/objects/koopa_troopa/shell.tscn" type="PackedScene" id=8]
-[ext_resource path="res://scenes/actors/mario/FluddAnimSync.gd" type="Script" id=9]
+[ext_resource path="res://scenes/actors/mario/SpriteAnimSync.gd" type="Script" id=9]
 
 [sub_resource type="RayShape2D" id=1]
 length = 16.0

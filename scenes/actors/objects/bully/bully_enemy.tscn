@@ -10,7 +10,7 @@
 [ext_resource path="res://scenes/actors/objects/bully/states/die_state.gd" type="Script" id=8]
 [ext_resource path="res://scenes/actors/objects/bully/bully_enemy.gd" type="Script" id=9]
 [ext_resource path="res://scenes/actors/objects/bully/states/chase_state.gd" type="Script" id=10]
-[ext_resource path="res://scenes/actors/mario/FluddAnimSync.gd" type="Script" id=11]
+[ext_resource path="res://scenes/actors/mario/SpriteAnimSync.gd" type="Script" id=11]
 [ext_resource path="res://scenes/actors/objects/goomba/sounds/poof.wav" type="AudioStream" id=12]
 [ext_resource path="res://scenes/actors/objects/goomba/sounds/stomp.wav" type="AudioStream" id=13]
 [ext_resource path="res://scenes/actors/objects/goomba/animations/poof.png" type="Texture" id=14]
@@ -598,8 +598,10 @@ spring_bounce_windup_length = 0.125
 spring_bounce_depth = 8.0
 bully_jump_knockback = Vector2( 150, 0 )
 bully_spin_knockback = Vector2( 72, -150 )
-bully_gp_knockback = Vector2( 250, 0 )
+bully_gp_knockback = Vector2( 200, 0 )
 bully_ram_knockback = Vector2( 115, 0 )
+player_knockback = Vector2( 225, 235 )
+player_spin_knockback_mult = Vector2( 1, 0.75 )
 
 [node name="Crush" parent="Damage" index="0"]
 position = Vector2( 0, -1 )

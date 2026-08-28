@@ -141,6 +141,7 @@ shape = SubResource( 15 )
 visible = false
 position = Vector2( 0, -32 )
 rect = Rect2( -256, -256, 512, 512 )
+pause_particles = false
 process_parent = true
 physics_process_parent = true
 

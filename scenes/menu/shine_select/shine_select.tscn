@@ -26,7 +26,7 @@
 [ext_resource path="res://scenes/menu/shine_select/nozzle_graphic.tscn" type="PackedScene" id=24]
 [ext_resource path="res://scenes/actors/mario/materials/palette_swap.tres" type="Material" id=25]
 [ext_resource path="res://scenes/actors/mario/animation_frames.tres" type="SpriteFrames" id=26]
-[ext_resource path="res://scenes/actors/mario/FluddAnimSync.gd" type="Script" id=27]
+[ext_resource path="res://scenes/actors/mario/SpriteAnimSync.gd" type="Script" id=27]
 [ext_resource path="res://scenes/actors/mario/nozzles/hover_frames.tres" type="SpriteFrames" id=28]
 [ext_resource path="res://scenes/menu/button_scripts/button_hover-scale.gd" type="Script" id=29]
 

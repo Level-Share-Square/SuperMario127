@@ -8,7 +8,7 @@
 [ext_resource path="res://scenes/actors/objects/goomba/sounds/poof.wav" type="AudioStream" id=6]
 [ext_resource path="res://scenes/actors/objects/old_goomba/body.gd" type="Script" id=7]
 [ext_resource path="res://scenes/actors/objects/cheep_cheep/recolorable.png" type="Texture" id=8]
-[ext_resource path="res://scenes/actors/mario/FluddAnimSync.gd" type="Script" id=9]
+[ext_resource path="res://scenes/actors/mario/SpriteAnimSync.gd" type="Script" id=9]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 2 )

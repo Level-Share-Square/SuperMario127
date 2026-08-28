@@ -19,6 +19,7 @@ export var cur_state: String
 export var float_in_liquids: bool
 export var float_speed: float = 32
 export var float_accel: float = 4
+export var coin_id: int = 1
 
 var level_bounds: Rect2
 # parent should set this to area gravity times two
@@ -131,7 +132,7 @@ func is_on_ground() -> bool:
 
 
 func create_coin(velocity: Vector2, offset: Vector2):
-	var object_setup = create_object(global_position + offset, 1, 0)
+	var object_setup = create_object(global_position + offset, coin_id, 0)
 	var object = object_setup[0]
 	object.set_property("physics", true)
 	object.set_property("velocity", velocity)
