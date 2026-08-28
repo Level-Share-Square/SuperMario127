@@ -2,6 +2,7 @@ class_name level_code_validator_util
 
 # This is to be used for quick level code validation. More accurate validation is done during the decoding step 
 static func validate_code(code: String) -> bool:
+	if not code: return false
 	var bracket_stack: int = 0
 	# Currently nested curly braces aren't possible so we just keep track of one pair.
 	var in_curly_braces: bool = false
@@ -27,12 +28,14 @@ static func validate_code(code: String) -> bool:
 
 static func validate_level_code(code: String) -> bool:
 	# stop little timmy from pasting in the wrong thing to the level code entry
+	if not code: return false
 	if code[0] != '[' and code[code.length()-1] != ']':
 		return false
 	return validate_code(code)
 
 static func validate_area_code(code: String) -> bool:
 	# stop little timmy from pasting in the wrong thing to the areas window
+	if not code: return false
 	if code[0] != '{' and code[code.length()-1] != ']':
 		return false
 	return validate_code(code)
