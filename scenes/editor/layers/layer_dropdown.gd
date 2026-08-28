@@ -11,6 +11,7 @@ onready var new_layer = $"%NewLayer"
 onready var new_decor = $"%NewDecor"
 onready var layer_picker = $"%LayerPicker"
 onready var drag_area = $"%DragArea"
+onready var mission_layer = $"%MissionLayer"
 onready var layer_type = $"%LayerType"
 onready var layer_name = $"%LayerName"
 onready var layer_color = $"%LayerColor"
@@ -46,6 +47,7 @@ func select_layer(index: int, toggle_dropdown: bool = true) -> void:
 	layer_color.modulate = EditorLayerManager.get_band_color(
 		layer_metadata.order, shared.origin.layer_data.layer_metadata.order
 	)
+	mission_layer.visible = layer_metadata.is_mission_layer()
 	layer_type.modulate = LayerInfo.GROUND_COLOR if layer_metadata.is_ground else LayerInfo.PARALLAX_COLOR
 	layer_type.texture = LayerInfo.GROUND_ICON if layer_metadata.is_ground else LayerInfo.PARALLAX_ICON
 	
