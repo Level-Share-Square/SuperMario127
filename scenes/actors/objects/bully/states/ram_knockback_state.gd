@@ -3,7 +3,7 @@ extends EnemyState
 
 func _start() -> void:
 	._start()
-	enemy.sprite.play("knockback")
+	enemy.sprite.play("jump")
 
 
 func _update(delta: float):

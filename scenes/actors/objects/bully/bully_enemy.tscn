@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=2]
+[gd_scene load_steps=67 format=2]
 
 [ext_resource path="res://scenes/actors/objects/enemy/enemy_base.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/actors/objects/bully/states/knockback_state.gd" type="Script" id=2]
@@ -17,6 +17,9 @@
 [ext_resource path="res://scenes/actors/objects/bully/animations/normal_horns_recolorable.tres" type="SpriteFrames" id=15]
 [ext_resource path="res://scenes/actors/objects/bully/kill_particles.tscn" type="PackedScene" id=16]
 [ext_resource path="res://scenes/actors/objects/bully/animations/bully_feet_recolorable.png" type="Texture" id=17]
+[ext_resource path="res://classes/sound_pitcher.gd" type="Script" id=18]
+[ext_resource path="res://scenes/actors/objects/thwomp/SM64_Thwomp_Grunt.ogg" type="AudioStream" id=19]
+[ext_resource path="res://scenes/actors/objects/bully/states/ram_knockback_state.gd" type="Script" id=20]
 
 [sub_resource type="CapsuleShape2D" id=64]
 height = 2.0
@@ -581,7 +584,12 @@ script = ExtResource( 2 )
 can_attack = false
 can_be_hurt = false
 
-[node name="DieState" type="Node2D" parent="States" index="4"]
+[node name="RamKnockbackState" type="Node2D" parent="States" index="4"]
+script = ExtResource( 20 )
+can_attack = false
+can_be_hurt = false
+
+[node name="DieState" type="Node2D" parent="States" index="5"]
 script = ExtResource( 8 )
 can_attack = false
 can_be_hurt = false
@@ -631,7 +639,6 @@ offset = Vector2( 0, -7 )
 self_modulate = Color( 0, 0.929412, 1, 1 )
 frames = ExtResource( 15 )
 animation = "idle"
-frame = 1
 offset = Vector2( 0, -7 )
 script = ExtResource( 11 )
 
@@ -639,7 +646,6 @@ script = ExtResource( 11 )
 self_modulate = Color( 0, 0.415686, 1, 1 )
 frames = SubResource( 75 )
 animation = "idle"
-frame = 1
 offset = Vector2( 0, -7 )
 script = ExtResource( 11 )
 
@@ -649,7 +655,6 @@ self_modulate = Color( 1, 0, 0, 1 )
 material = SubResource( 70 )
 frames = ExtResource( 4 )
 animation = "idle"
-frame = 1
 offset = Vector2( 0, -7 )
 script = ExtResource( 11 )
 
@@ -691,9 +696,19 @@ position = Vector2( 0, -20 )
 
 [node name="Stomp" type="AudioStreamPlayer2D" parent="Sounds" index="0"]
 stream = ExtResource( 13 )
+bus = "Sounds"
 
 [node name="Poof" type="AudioStreamPlayer2D" parent="Sounds" index="1"]
 stream = ExtResource( 12 )
+bus = "Sounds"
+
+[node name="Grunt" type="AudioStreamPlayer2D" parent="Sounds" index="2"]
+unique_name_in_owner = true
+stream = ExtResource( 19 )
+bus = "Sounds"
+script = ExtResource( 18 )
+min_pitch = 1.1
+max_pitch = 1.4
 
 [node name="BullyKillParticles" parent="." index="13" instance=ExtResource( 16 )]
 

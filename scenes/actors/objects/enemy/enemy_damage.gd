@@ -108,6 +108,11 @@ func damage_player(character: Character) -> void:
 			character.knockback(global_position, knockback_power, set_player_knockback_state)
 
 
+func knock_player(character: Character) -> void:
+	if enemy.enabled:
+		character.knockback(global_position, knockback_power, set_player_knockback_state, false)
+
+
 func bounce_player(character: Character) -> void:
 	match(bounce_type):
 		BounceType.NORMAL:

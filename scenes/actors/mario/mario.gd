@@ -389,7 +389,7 @@ func damage_with_knockback(hit_pos : Vector2, amount : int = 1, cause : String =
 		damage(amount, cause, frames)
 
 
-func knockback(hit_pos: Vector2, power := Vector2(235, 225), set_state: bool = true):
+func knockback(hit_pos: Vector2, power := Vector2(235, 225), set_state: bool = true, play_hit_sound: bool = true):
 	if is_instance_valid(state) and state.disable_knockback: return
 	
 	var direction := sign((global_position - hit_pos).normalized().x)
@@ -399,8 +399,8 @@ func knockback(hit_pos: Vector2, power := Vector2(235, 225), set_state: bool = t
 	if set_state:
 		set_state_by_name("KnockbackState", 0)
 	else:
-#		if sound_player.hit_sounds
-		sound_player.play_hit_sound()
+		if play_hit_sound:
+			sound_player.play_hit_sound()
 
 
 func play_shine_sound() -> void:
