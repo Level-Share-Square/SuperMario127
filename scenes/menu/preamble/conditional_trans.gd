@@ -3,7 +3,26 @@ extends Control
 
 onready var animation_player: AnimationPlayer = $"%AnimationPlayer"
 
+var product = "Nintendo Switch 2"
+
 func start():
+	#:trollege:
+	randomize()
+	var luck = randi() % 255
+	if luck == 127:
+		product = [
+			"Ultra Hand", "Game & Watch",
+			"NES", "SNES",
+			"Game Boy", "Game Boy Advance",
+			"Game Boy Micro", "Game Boy Color",
+			"Nintendo 64", "Nintendo Gamecube",
+			"Nintendo DS", "Nintendo DSi",
+			"Nintendo 3DS", "Nintendo Wii",
+			"Nintendo Wii Mini", "Nintendo Wii U",
+			"copy of Chibi Robo! Zip Lash",
+			"copy of Mario Tennis: Ultra Smash"].pick_random()
+	$"%Disclaimer".text = $"%Disclaimer".text % product
+	$"%Shadow".text = $"%Shadow".text % product
 	animation_player.play("show_mobile" if OS.has_feature("mobile") else "show")
 
 func transition():

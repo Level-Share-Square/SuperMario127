@@ -291,7 +291,7 @@ void fragment() {
 	COLOR = (texture(TEXTURE, UV) + n * u_amount);
 }"
 
-[sub_resource type="ShaderMaterial" id=43]
+[sub_resource type="ShaderMaterial" id=45]
 shader = SubResource( 40 )
 shader_param/u_amount = 1.75
 
@@ -376,7 +376,7 @@ rect_scale = Vector2( 0.225, 0.225 )
 
 [node name="Overlay" parent="Container/Background" index="3"]
 modulate = Color( 0.054902, 0.0117647, 0.152941, 0.270588 )
-material = SubResource( 43 )
+material = SubResource( 45 )
 
 [node name="Overlay" type="TextureRect" parent="Container"]
 modulate = Color( 0.752941, 0.752941, 1, 0.486275 )
@@ -409,7 +409,7 @@ not affiliated with, endorsed, or sponsored by Nintendo.
 It will never be commercialized or sold.
 
 If you enjoy this fangame, please show your support to
-Nintendo and buy a Nintendo Switch 2."
+Nintendo and buy a %s."
 align = 1
 valign = 1
 
@@ -443,7 +443,7 @@ not affiliated with, endorsed, or sponsored by Nintendo.
 It will never be commercialized or sold.
 
 If you enjoy this fangame, please show your support to
-Nintendo and buy a Nintendo Switch 2."
+Nintendo and buy a %s."
 align = 1
 valign = 1
 
