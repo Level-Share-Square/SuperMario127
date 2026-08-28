@@ -27,7 +27,7 @@
 [ext_resource path="res://scenes/actors/objects/breakable_block/palettes/2_outline.png" type="Texture" id=25]
 [ext_resource path="res://scenes/actors/objects/breakable_block/palettes/1_outline.png" type="Texture" id=26]
 [ext_resource path="res://scenes/actors/objects/breakable_block/palettes/3_outline.png" type="Texture" id=27]
-[ext_resource path="res://classes/sound_pitcher.gd" type="Script" id=28]
+[ext_resource path="res://classes/sound_pitcher_directional.gd" type="Script" id=28]
 
 [sub_resource type="Animation" id=2]
 length = 0.001

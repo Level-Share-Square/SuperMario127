@@ -5,7 +5,7 @@
 [ext_resource path="res://scenes/actors/objects/metal_breakable_block/metal_breakable_block_outline.png" type="Texture" id=3]
 [ext_resource path="res://scenes/actors/objects/metal_breakable_block/particles.png" type="Texture" id=4]
 [ext_resource path="res://scenes/actors/objects/rainbow_breakable_block/break.wav" type="AudioStream" id=5]
-[ext_resource path="res://classes/sound_pitcher.gd" type="Script" id=6]
+[ext_resource path="res://classes/sound_pitcher_directional.gd" type="Script" id=6]
 
 [sub_resource type="Animation" id=10]
 resource_name = "RESET"
@@ -153,7 +153,7 @@ anims/break = SubResource( 9 )
 
 [node name="BreakSound" type="AudioStreamPlayer2D" parent="." index="4"]
 stream = ExtResource( 5 )
-volume_db = 3.0
+volume_db = 4.0
 bus = "Sounds"
 script = ExtResource( 6 )
 

@@ -26,6 +26,7 @@ func kill(body):
 		if !body.invulnerable:
 			body.damage()
 		else:
+			body.sound_player.play_damage_sound()
 			body.sound_player.play_hit_sound()
 
 func _object_ready():

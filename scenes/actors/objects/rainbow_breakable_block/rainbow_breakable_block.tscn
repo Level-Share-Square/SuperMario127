@@ -6,7 +6,7 @@
 [ext_resource path="res://scenes/actors/objects/metal_breakable_block/metal_breakable_block.png" type="Texture" id=4]
 [ext_resource path="res://scenes/actors/objects/rainbow_breakable_block/particles.png" type="Texture" id=5]
 [ext_resource path="res://scenes/actors/objects/box_base/box_base.tscn" type="PackedScene" id=6]
-[ext_resource path="res://classes/sound_pitcher.gd" type="Script" id=7]
+[ext_resource path="res://classes/sound_pitcher_directional.gd" type="Script" id=7]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -187,7 +187,7 @@ anims/break = SubResource( 9 )
 
 [node name="BreakSound" type="AudioStreamPlayer2D" parent="." index="4"]
 stream = ExtResource( 2 )
-volume_db = 3.0
+volume_db = 4.0
 bus = "Sounds"
 script = ExtResource( 7 )
 

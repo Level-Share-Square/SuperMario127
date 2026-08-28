@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scenes/actors/objects/breakable_block/break.wav" type="AudioStream" id=1]
-[ext_resource path="res://classes/sound_pitcher.gd" type="Script" id=2]
+[ext_resource path="res://classes/sound_pitcher_directional.gd" type="Script" id=2]
 [ext_resource path="res://scenes/actors/objects/box_base/box_base.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/actors/objects/crate/particles.png" type="Texture" id=4]
 [ext_resource path="res://scenes/actors/objects/crate/crate.png" type="Texture" id=28]

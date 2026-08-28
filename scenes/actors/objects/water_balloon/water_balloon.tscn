@@ -7,7 +7,7 @@
 [ext_resource path="res://scenes/actors/mario/nozzles/water_particle.png" type="Texture" id=5]
 [ext_resource path="res://scenes/actors/objects/water_balloon/1.png" type="Texture" id=6]
 [ext_resource path="res://scenes/actors/objects/water_balloon/recolorable_texture.png" type="Texture" id=7]
-[ext_resource path="res://classes/sound_pitcher.gd" type="Script" id=8]
+[ext_resource path="res://classes/sound_pitcher_directional.gd" type="Script" id=8]
 [ext_resource path="res://scenes/actors/objects/hover_nozzle/sound.wav" type="AudioStream" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]

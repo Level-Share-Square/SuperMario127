@@ -39,6 +39,7 @@ onready var powerup_sound_voiceless = $OtherSounds/Powerup
 onready var powerdown_sound_voiceless = $OtherSounds/Powerdown
 onready var burn_sound = $OtherSounds/Burn
 onready var bonk_sound = $OtherSounds/Bonk
+onready var damage_sound = $OtherSounds/Damage
 onready var dive_sound = $OtherSounds/Dive
 onready var getup_sound = $OtherSounds/Getup
 onready var perfect_sound = $OtherSounds/Perfect
@@ -202,6 +203,11 @@ func play_bonk_sound():
 	if ready:
 		hit_sounds.play()
 		bonk_sound.play()
+		damage_sound.play()
+
+func play_damage_sound():
+	if ready:
+		damage_sound.play()
 
 func play_perfect_sound():
 	if ready:

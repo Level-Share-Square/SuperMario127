@@ -4,7 +4,7 @@
 [ext_resource path="res://scenes/actors/objects/sawblade/sawblade.png" type="Texture" id=2]
 [ext_resource path="res://scenes/actors/objects/sawblade/Saw.gd" type="Script" id=3]
 [ext_resource path="res://scenes/actors/objects/sawblade/circle.png" type="Texture" id=4]
-[ext_resource path="res://scenes/actors/objects/sawblade/metal_bounce.ogg" type="AudioStream" id=5]
+[ext_resource path="res://scenes/actors/objects/sawblade/metal_bounce.wav" type="AudioStream" id=5]
 [ext_resource path="res://scenes/actors/objects/sawblade/pals/goldsaw.png" type="Texture" id=6]
 [ext_resource path="res://scenes/actors/objects/sawblade/pals/icesaw.png" type="Texture" id=7]
 [ext_resource path="res://scenes/actors/objects/sawblade/pals/darksaw.png" type="Texture" id=8]
@@ -45,7 +45,7 @@ region_rect = Rect2( 144, 0, 48, 48 )
 
 [node name="Sprite3" type="Sprite" parent="Path2D/PathFollow2D/Saw/AnimatedSprite"]
 show_behind_parent = true
-rotation = 4.14925
+rotation = -6.09324
 texture = ExtResource( 2 )
 region_enabled = true
 region_rect = Rect2( 48, 0, 48, 48 )
@@ -54,7 +54,7 @@ rot_speed = 150.0
 
 [node name="Sprite2" type="Sprite" parent="Path2D/PathFollow2D/Saw/AnimatedSprite"]
 show_behind_parent = true
-rotation = -3.8746
+rotation = 0.772636
 texture = ExtResource( 2 )
 region_enabled = true
 region_rect = Rect2( 48, 0, 48, 48 )
@@ -64,7 +64,7 @@ rot_speed = 300.0
 
 [node name="Sprite" type="Sprite" parent="Path2D/PathFollow2D/Saw/AnimatedSprite"]
 show_behind_parent = true
-rotation = -4.26728
+rotation = 0.379946
 texture = ExtResource( 2 )
 region_enabled = true
 region_rect = Rect2( 96, 0, 48, 48 )
@@ -81,7 +81,7 @@ shape = SubResource( 3 )
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Path2D/PathFollow2D/Saw"]
 stream = ExtResource( 5 )
-volume_db = 7.0
+volume_db = 5.0
 bus = "Sounds"
 
 [node name="EditorSprite" type="Sprite" parent="."]
@@ -91,7 +91,7 @@ region_rect = Rect2( 144, 0, 48, 48 )
 
 [node name="Sprite3" type="Sprite" parent="EditorSprite"]
 show_behind_parent = true
-rotation = -5.75534
+rotation = -6.09324
 texture = ExtResource( 2 )
 region_enabled = true
 region_rect = Rect2( 48, 0, 48, 48 )
@@ -100,7 +100,7 @@ rot_speed = 150.0
 
 [node name="Sprite2" type="Sprite" parent="EditorSprite"]
 show_behind_parent = true
-rotation = 1.44959
+rotation = 0.772636
 texture = ExtResource( 2 )
 region_enabled = true
 region_rect = Rect2( 48, 0, 48, 48 )
@@ -110,7 +110,7 @@ rot_speed = 300.0
 
 [node name="Sprite" type="Sprite" parent="EditorSprite"]
 show_behind_parent = true
-rotation = -3.05179
+rotation = 0.379946
 texture = ExtResource( 2 )
 region_enabled = true
 region_rect = Rect2( 96, 0, 48, 48 )

@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=2]
+[gd_scene load_steps=47 format=2]
 
 [ext_resource path="res://addons/mixing-desk/sound/nonspatial/ran_cont.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/mario/sounds.gd" type="Script" id=2]
@@ -19,31 +19,17 @@
 [ext_resource path="res://scenes/actors/mario/sounds_luigi/DoubleJump1.wav" type="AudioStream" id=17]
 [ext_resource path="res://scenes/actors/mario/sounds_luigi/Dive3.wav" type="AudioStream" id=18]
 [ext_resource path="res://scenes/actors/mario/sounds_luigi/DoubleJump2.wav" type="AudioStream" id=19]
-[ext_resource path="res://scenes/actors/mario/sounds_misc/pound_hit.wav" type="AudioStream" id=20]
-[ext_resource path="res://scenes/actors/mario/sounds_misc/pound_windup.wav" type="AudioStream" id=21]
-[ext_resource path="res://scenes/actors/mario/sounds_misc/skid.wav" type="AudioStream" id=22]
-[ext_resource path="res://scenes/actors/mario/sounds_misc/double_jump.wav" type="AudioStream" id=23]
-[ext_resource path="res://scenes/actors/mario/sounds_misc/high_jump.wav" type="AudioStream" id=24]
-[ext_resource path="res://scenes/actors/mario/sounds_misc/jump.wav" type="AudioStream" id=25]
+[ext_resource path="res://scenes/actors/mario/misc_sounds.tscn" type="PackedScene" id=20]
 [ext_resource path="res://scenes/actors/mario/sounds_misc/footsteps/default1.wav" type="AudioStream" id=26]
-[ext_resource path="res://scenes/actors/mario/sounds_misc/duck.wav" type="AudioStream" id=27]
-[ext_resource path="res://scenes/actors/mario/sounds_misc/spin.wav" type="AudioStream" id=28]
-[ext_resource path="res://scenes/actors/mario/sounds_misc/wall_jump.wav" type="AudioStream" id=29]
 [ext_resource path="res://scenes/actors/mario/sounds_misc/footsteps/default2.wav" type="AudioStream" id=30]
 [ext_resource path="res://scenes/actors/mario/sounds_luigi/Death1.wav" type="AudioStream" id=31]
-[ext_resource path="res://assets/sounds/death.wav" type="AudioStream" id=32]
 [ext_resource path="res://scenes/actors/mario/sounds_luigi/LastHit1.wav" type="AudioStream" id=33]
 [ext_resource path="res://scenes/actors/mario/sounds_luigi/Powerup2.wav" type="AudioStream" id=34]
 [ext_resource path="res://scenes/actors/mario/sounds_luigi/Powerup1.wav" type="AudioStream" id=35]
 [ext_resource path="res://scenes/actors/mario/sounds_luigi/Powerup3.wav" type="AudioStream" id=36]
-[ext_resource path="res://scenes/actors/mario/sounds_misc/powerup.wav" type="AudioStream" id=37]
 [ext_resource path="res://scenes/actors/mario/sounds_luigi/Shine2.wav" type="AudioStream" id=38]
 [ext_resource path="res://scenes/actors/mario/sounds_luigi/Shine1.wav" type="AudioStream" id=39]
-[ext_resource path="res://scenes/actors/mario/sounds_misc/water_splash.wav" type="AudioStream" id=40]
-[ext_resource path="res://scenes/actors/mario/sounds_misc/swim.ogg" type="AudioStream" id=41]
-[ext_resource path="res://scenes/actors/mario/sounds_misc/spin_water.wav" type="AudioStream" id=42]
 [ext_resource path="res://scenes/actors/mario/sounds_luigi/Lava2.wav" type="AudioStream" id=43]
-[ext_resource path="res://scenes/actors/mario/sounds_misc/burn.wav" type="AudioStream" id=44]
 [ext_resource path="res://scenes/actors/mario/sounds_luigi/Lava1.wav" type="AudioStream" id=45]
 [ext_resource path="res://classes/BusGroup.gd" type="Script" id=46]
 [ext_resource path="res://classes/SoundGroup.gd" type="Script" id=47]
@@ -60,11 +46,6 @@
 [ext_resource path="res://scenes/actors/mario/sounds_luigi/talk/STRM_L43_HUNNN2.wav" type="AudioStream" id=58]
 [ext_resource path="res://scenes/actors/mario/sounds_luigi/talk/STRM_L21_OK.wav" type="AudioStream" id=59]
 [ext_resource path="res://scenes/actors/mario/sounds_luigi/Timeout1.wav" type="AudioStream" id=60]
-[ext_resource path="res://scenes/actors/mario/sounds_misc/bonk.ogg" type="AudioStream" id=61]
-[ext_resource path="res://scenes/actors/mario/sounds_misc/perfect.wav" type="AudioStream" id=62]
-[ext_resource path="res://scenes/actors/mario/sounds_misc/getup.wav" type="AudioStream" id=63]
-[ext_resource path="res://scenes/actors/mario/sounds_misc/dive.wav" type="AudioStream" id=64]
-[ext_resource path="res://scenes/actors/mario/sounds_misc/powerdown.wav" type="AudioStream" id=65]
 
 [node name="Sounds" type="Node"]
 script = ExtResource( 2 )
@@ -331,109 +312,4 @@ stream = ExtResource( 48 )
 volume_db = -7.0
 bus = "Sounds"
 
-[node name="OtherSounds" type="Node" parent="."]
-
-[node name="GPHit" type="AudioStreamPlayer" parent="OtherSounds"]
-stream = ExtResource( 20 )
-volume_db = -7.5
-bus = "Sounds"
-
-[node name="GPWindup" type="AudioStreamPlayer" parent="OtherSounds"]
-stream = ExtResource( 21 )
-volume_db = -7.5
-bus = "Sounds"
-
-[node name="Skid" type="AudioStreamPlayer" parent="OtherSounds"]
-stream = ExtResource( 22 )
-volume_db = -7.5
-bus = "Sounds"
-
-[node name="Spin" type="AudioStreamPlayer" parent="OtherSounds"]
-stream = ExtResource( 28 )
-volume_db = -7.5
-bus = "Sounds"
-
-[node name="Duck" type="AudioStreamPlayer" parent="OtherSounds"]
-stream = ExtResource( 27 )
-volume_db = -7.5
-bus = "Sounds"
-
-[node name="Jump" type="AudioStreamPlayer" parent="OtherSounds"]
-stream = ExtResource( 25 )
-volume_db = -7.5
-pitch_scale = 1.15
-bus = "Sounds"
-
-[node name="WallJump" type="AudioStreamPlayer" parent="OtherSounds"]
-stream = ExtResource( 29 )
-volume_db = -7.5
-bus = "Sounds"
-
-[node name="DoubleJump" type="AudioStreamPlayer" parent="OtherSounds"]
-stream = ExtResource( 23 )
-volume_db = -7.5
-pitch_scale = 1.15
-bus = "Sounds"
-
-[node name="TripleJump" type="AudioStreamPlayer" parent="OtherSounds"]
-stream = ExtResource( 24 )
-volume_db = -7.5
-pitch_scale = 1.15
-bus = "Sounds"
-
-[node name="LastHit8Bit" type="AudioStreamPlayer" parent="OtherSounds"]
-stream = ExtResource( 32 )
-volume_db = -0.75
-bus = "Sounds"
-
-[node name="Powerup" type="AudioStreamPlayer" parent="OtherSounds"]
-stream = ExtResource( 37 )
-volume_db = -9.0
-bus = "Sounds"
-
-[node name="Powerdown" type="AudioStreamPlayer" parent="OtherSounds"]
-stream = ExtResource( 65 )
-volume_db = -9.0
-bus = "Sounds"
-
-[node name="WaterSplash" type="AudioStreamPlayer" parent="OtherSounds"]
-stream = ExtResource( 40 )
-volume_db = -14.0
-bus = "Sounds"
-
-[node name="Swim" type="AudioStreamPlayer" parent="OtherSounds"]
-stream = ExtResource( 41 )
-volume_db = -15.0
-bus = "Sounds"
-
-[node name="SpinWater" type="AudioStreamPlayer" parent="OtherSounds"]
-stream = ExtResource( 42 )
-volume_db = 5.0
-bus = "Sounds"
-
-[node name="Burn" type="AudioStreamPlayer" parent="OtherSounds"]
-stream = ExtResource( 44 )
-volume_db = -7.0
-bus = "Sounds"
-
-[node name="Bonk" type="AudioStreamPlayer" parent="OtherSounds"]
-stream = ExtResource( 61 )
-volume_db = -7.75
-pitch_scale = 1.15
-bus = "Sounds"
-
-[node name="Dive" type="AudioStreamPlayer" parent="OtherSounds"]
-stream = ExtResource( 64 )
-volume_db = -12.5
-bus = "Sounds"
-
-[node name="Getup" type="AudioStreamPlayer" parent="OtherSounds"]
-stream = ExtResource( 63 )
-volume_db = -12.5
-pitch_scale = 0.75
-bus = "Sounds"
-
-[node name="Perfect" type="AudioStreamPlayer" parent="OtherSounds"]
-stream = ExtResource( 62 )
-volume_db = -17.5
-bus = "Sounds"
+[node name="OtherSounds" parent="." instance=ExtResource( 20 )]

@@ -813,13 +813,13 @@ shape = SubResource( 52 )
 
 [node name="Hit" type="AudioStreamPlayer2D" parent="Breakout/Fireball"]
 stream = ExtResource( 6 )
-volume_db = -10.0
+volume_db = -6.0
 max_distance = 1000.0
 bus = "Sounds"
 
 [node name="LastHit" type="AudioStreamPlayer2D" parent="Breakout/Fireball"]
 stream = ExtResource( 7 )
-volume_db = -0.75
+volume_db = 2.0
 max_distance = 1000.0
 bus = "Sounds"
 

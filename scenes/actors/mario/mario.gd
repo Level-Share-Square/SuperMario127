@@ -400,6 +400,7 @@ func knockback(hit_pos: Vector2, power := Vector2(235, 225), set_state: bool = t
 		set_state_by_name("KnockbackState", 0)
 	else:
 		if play_hit_sound:
+			sound_player.play_damage_sound()
 			sound_player.play_hit_sound()
 
 
@@ -467,16 +468,17 @@ func load_in():
 	collected_shine.get_node("ShineParticles").emitting = false
 	
 	# fludd persistence
-	var fludd_array: Array = ["HoverNozzle", "RocketNozzle", "TurboNozzle"]
-	for fludd_index in CurrentLevelData.save_data._activated_fludds.size():
-		if (
-			fludd_array[fludd_index] in CurrentLevelData.level_metadata.collectible_data.persistent_nozzles
-			and CurrentLevelData.save_data._activated_fludds[fludd_index]
-		):
-			add_nozzle(fludd_array[fludd_index])
-	
-	if CurrentLevelData.starting_nozzle != "":
-		set_nozzle(CurrentLevelData.starting_nozzle)
+	if "mode" in get_tree().get_current_scene():
+		var fludd_array: Array = ["HoverNozzle", "RocketNozzle", "TurboNozzle"]
+		for fludd_index in CurrentLevelData.save_data._activated_fludds.size():
+			if (
+				fludd_array[fludd_index] in CurrentLevelData.level_metadata.collectible_data.persistent_nozzles
+				and CurrentLevelData.save_data._activated_fludds[fludd_index]
+			):
+				add_nozzle(fludd_array[fludd_index])
+		
+		if CurrentLevelData.starting_nozzle != "":
+			set_nozzle(CurrentLevelData.starting_nozzle)
 	
 	# the ghost of player 2 shall not haunt my teleporter code,,,
 	if player_id != 0 or not "mode" in get_tree().get_current_scene():
@@ -632,6 +634,7 @@ func set_powerup(powerup_node: Node, set_temporary_music: bool, duration = -1) -
 		powerup._start(0, set_temporary_music)
 		powerup.apply_visuals()
 	else:
+		sound_player.play_powerdown_jingle()
 		sprite.material = PALETTE_SWAP_MAT
 
 func set_state_by_name(name: String, delta: float = 0.0001, called_from: State = null) -> void:
@@ -698,6 +701,7 @@ func player_hit(body : Node) -> void:
 					velocity.x = 205 * mul_sign
 					velocity.y = -175
 					set_state_by_name("KnockbackState", 0)
+					sound_player.play_damage_sound()
 					sound_player.play_hit_sound()
 				elif !attacking or (body.attacking and attacking):
 					velocity.x = 250 * mul_sign
@@ -753,6 +757,7 @@ func damage(amount : int = 1, cause : String = "hit", frames : int = 180) -> voi
 			if cause == "crushed":
 				sound_player.play_last_hit_voice_sound()
 			elif cause != "lava":
+				sound_player.play_damage_sound()
 				sound_player.play_hit_sound()
 				
 
