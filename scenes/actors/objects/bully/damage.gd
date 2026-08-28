@@ -16,7 +16,7 @@ export var player_spin_knockback_mult := Vector2(1, 0.75)
 func stomp(body: PhysicsBody2D = null) -> void:
 	if enemy.rainbow: 
 		bonk_sound.play()
-		enemy.sprite.modulate = Color(2, 2, 2)
+		enemy.sprite.modulate = Color.white * 2
 		return
 	if is_instance_valid(body):
 		var direction: float = (enemy.global_position - body.global_position).sign().x
@@ -74,7 +74,7 @@ func damage_player(player: Character, knockback: Vector2 = player_knockback, mak
 	if make_bonked:
 		bonk_sound.play()
 		grunt_sound.play()
-		enemy.sprite.modulate = Color(2, 2, 2)
+		enemy.sprite.modulate = Color.white * 2
 		player.set_state_by_name("BonkedState")
 	
 	if enemy.rainbow: return

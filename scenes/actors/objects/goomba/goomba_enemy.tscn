@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=2]
+[gd_scene load_steps=59 format=2]
 
 [ext_resource path="res://scenes/actors/objects/enemy/enemy_base.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/actors/objects/goomba/goomba_enemy.gd" type="Script" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://scenes/actors/objects/goomba/animations/poof.png" type="Texture" id=14]
 [ext_resource path="res://scenes/actors/objects/goomba/states/chase_state.gd" type="Script" id=15]
 [ext_resource path="res://scenes/actors/objects/bullet_bill/sound.wav" type="AudioStream" id=16]
+[ext_resource path="res://scenes/actors/objects/enemy/enemy_bouncer.gd" type="Script" id=17]
 
 [sub_resource type="CapsuleShape2D" id=36]
 radius = 7.0
@@ -31,9 +32,6 @@ extents = Vector2( 100, 100 )
 
 [sub_resource type="CircleShape2D" id=63]
 radius = 256.0
-
-[sub_resource type="RectangleShape2D" id=62]
-extents = Vector2( 7, 9.5 )
 
 [sub_resource type="CircleShape2D" id=53]
 resource_local_to_scene = true
@@ -422,6 +420,9 @@ scale = 0.75
 color_ramp = SubResource( 35 )
 anim_speed = 0.8
 
+[sub_resource type="RectangleShape2D" id=62]
+extents = Vector2( 7, 9.5 )
+
 [node name="GoombaEnemy" instance=ExtResource( 1 )]
 collision_mask = 17
 script = ExtResource( 2 )
@@ -478,14 +479,6 @@ collision_mask = 17
 position = Vector2( 0, -10 )
 cast_to = Vector2( -12, 0 )
 collision_mask = 21
-
-[node name="Enemy" type="Area2D" parent="States/WanderState" index="2"]
-collision_layer = 4
-collision_mask = 4
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="States/WanderState/Enemy" index="0"]
-position = Vector2( 0, -9.5 )
-shape = SubResource( 62 )
 
 [node name="ChaseState" type="Node2D" parent="States" index="2"]
 script = ExtResource( 15 )
@@ -549,6 +542,7 @@ visible = false
 self_modulate = Color( 1, 0.4, 0.333333, 1 )
 frames = ExtResource( 11 )
 animation = "idle"
+frame = 2
 offset = Vector2( 0, -7 )
 script = ExtResource( 10 )
 
@@ -599,4 +593,21 @@ stream = ExtResource( 12 )
 position = Vector2( 0, -9 )
 process_material = SubResource( 50 )
 
+[node name="EnemyBouncer" type="Area2D" parent="." index="14"]
+unique_name_in_owner = true
+collision_layer = 4
+collision_mask = 4
+script = ExtResource( 17 )
+blacklisted_states = PoolStringArray( "KnockbackState", "DieState" )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyBouncer" index="0"]
+position = Vector2( 0, -9.5 )
+shape = SubResource( 62 )
+
+[node name="CollisionCheck" type="Timer" parent="EnemyBouncer" index="1"]
+autostart = true
+
+[connection signal="state_changed" from="." to="EnemyBouncer" method="state_changed"]
 [connection signal="area_entered" from="AnimatedSprite/DialogueDetector" to="AnimatedSprite/DialogueDetector" method="area_entered"]
+[connection signal="area_entered" from="EnemyBouncer" to="EnemyBouncer" method="area_entered"]
+[connection signal="timeout" from="EnemyBouncer/CollisionCheck" to="EnemyBouncer" method="check_collisions"]

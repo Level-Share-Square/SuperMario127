@@ -19,7 +19,6 @@
 [ext_resource path="res://scenes/actors/objects/bully/animations/bully_feet_recolorable.png" type="Texture" id=17]
 [ext_resource path="res://classes/sound_pitcher.gd" type="Script" id=18]
 [ext_resource path="res://scenes/actors/objects/thwomp/SM64_Thwomp_Grunt.ogg" type="AudioStream" id=19]
-[ext_resource path="res://scenes/actors/objects/bully/states/ram_knockback_state.gd" type="Script" id=20]
 [ext_resource path="res://scenes/actors/objects/bully/sounds/SeEmDonketsuFallLv.wav" type="AudioStream" id=21]
 [ext_resource path="res://scenes/actors/objects/bully/sounds/SeEmDonketsuPushed.wav" type="AudioStream" id=22]
 [ext_resource path="res://scenes/actors/objects/bully/sounds/SeEmDonketsuHit.wav" type="AudioStream" id=23]
@@ -27,6 +26,7 @@
 [ext_resource path="res://scenes/actors/objects/bully/sounds/SeBmDonketsuStepR.wav" type="AudioStream" id=25]
 [ext_resource path="res://scenes/actors/objects/bully/sounds/3W_SeEmDonketsuKouraHit.wav" type="AudioStream" id=26]
 [ext_resource path="res://scenes/actors/objects/bully/bully_juice.gd" type="Script" id=27]
+[ext_resource path="res://scenes/actors/objects/enemy/enemy_bouncer.gd" type="Script" id=28]
 
 [sub_resource type="CapsuleShape2D" id=64]
 height = 2.0
@@ -41,9 +41,6 @@ extents = Vector2( 100, 100 )
 
 [sub_resource type="CircleShape2D" id=63]
 radius = 256.0
-
-[sub_resource type="RectangleShape2D" id=62]
-extents = Vector2( 7, 9.5 )
 
 [sub_resource type="CircleShape2D" id=53]
 resource_local_to_scene = true
@@ -517,6 +514,9 @@ scale = 0.75
 color_ramp = SubResource( 78 )
 anim_speed = 0.8
 
+[sub_resource type="RectangleShape2D" id=101]
+extents = Vector2( 11, 13 )
+
 [node name="BullyEnemy" instance=ExtResource( 1 )]
 collision_mask = 17
 script = ExtResource( 9 )
@@ -583,14 +583,6 @@ position = Vector2( 0, -10 )
 cast_to = Vector2( -12, 0 )
 collision_mask = 21
 
-[node name="Enemy" type="Area2D" parent="States/WanderState" index="2"]
-collision_layer = 4
-collision_mask = 4
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="States/WanderState/Enemy" index="0"]
-position = Vector2( 0, -9.5 )
-shape = SubResource( 62 )
-
 [node name="ChaseState" type="Node2D" parent="States" index="2"]
 script = ExtResource( 10 )
 move_speed = 32.0
@@ -614,12 +606,19 @@ script = ExtResource( 2 )
 can_attack = false
 can_be_hurt = false
 
-[node name="RamKnockbackState" type="Node2D" parent="States" index="4"]
-script = ExtResource( 20 )
+[node name="BumpKnockbackState" type="Node2D" parent="States" index="4"]
+script = ExtResource( 2 )
 can_attack = false
 can_be_hurt = false
+velocity_threshold = 10000
 
-[node name="DieState" type="Node2D" parent="States" index="5"]
+[node name="RamKnockbackState" type="Node2D" parent="States" index="5"]
+script = ExtResource( 2 )
+can_attack = false
+can_be_hurt = false
+anim_name = "jump"
+
+[node name="DieState" type="Node2D" parent="States" index="6"]
 script = ExtResource( 8 )
 can_attack = false
 can_be_hurt = false
@@ -671,16 +670,16 @@ color_lerp_speed = 3.0
 [node name="RecolorSpriteHorns" type="AnimatedSprite" parent="AnimatedSprite" index="0"]
 self_modulate = Color( 0, 0.929412, 1, 1 )
 frames = ExtResource( 15 )
-animation = "burn"
-frame = 3
+animation = "idle"
+frame = 1
 offset = Vector2( 0, -7 )
 script = ExtResource( 11 )
 
 [node name="RecolorSpriteFeet" type="AnimatedSprite" parent="AnimatedSprite" index="1"]
 self_modulate = Color( 0, 0.415686, 1, 1 )
 frames = SubResource( 75 )
-animation = "burn"
-frame = 3
+animation = "idle"
+frame = 1
 offset = Vector2( 0, -7 )
 script = ExtResource( 11 )
 
@@ -689,8 +688,8 @@ modulate = Color( 1, 1, 1, 0 )
 self_modulate = Color( 1, 0, 0, 1 )
 material = SubResource( 70 )
 frames = ExtResource( 4 )
-animation = "burn"
-frame = 3
+animation = "idle"
+frame = 1
 offset = Vector2( 0, -7 )
 script = ExtResource( 11 )
 
@@ -794,4 +793,22 @@ script = ExtResource( 18 )
 position = Vector2( 0, -9 )
 process_material = SubResource( 50 )
 
+[node name="EnemyBouncer" type="Area2D" parent="." index="15"]
+unique_name_in_owner = true
+collision_layer = 4
+collision_mask = 4
+script = ExtResource( 28 )
+blacklisted_states = PoolStringArray( "DieState" )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyBouncer" index="0"]
+position = Vector2( 0, -13 )
+shape = SubResource( 101 )
+
+[node name="CollisionCheck" type="Timer" parent="EnemyBouncer" index="1"]
+autostart = true
+
+[connection signal="state_changed" from="." to="EnemyBouncer" method="state_changed"]
 [connection signal="area_entered" from="AnimatedSprite/DialogueDetector" to="AnimatedSprite/DialogueDetector" method="area_entered"]
+[connection signal="area_entered" from="EnemyBouncer" to="EnemyBouncer" method="area_entered"]
+[connection signal="bounced" from="EnemyBouncer" to="." method="set_state_by_name" binds= [ "BumpKnockbackState" ]]
+[connection signal="timeout" from="EnemyBouncer/CollisionCheck" to="EnemyBouncer" method="check_collisions"]

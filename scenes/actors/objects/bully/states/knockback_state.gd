@@ -2,18 +2,20 @@ extends EnemyState
 
 
 onready var hit_sound = $"%Hit"
+export var anim_name: String = "knockback"
+export var velocity_threshold = 2500 
 
 
 func _start() -> void:
 	._start()
 	hit_sound.play()
-	enemy.sprite.scale *= 1.15
-	enemy.sprite.modulate *= 1.15
-	enemy.sprite.play("knockback")
+	enemy.sprite.scale = Vector2.ONE * 1.15
+	enemy.sprite.modulate = Color.white * 1.25
+	enemy.sprite.play(anim_name)
 
 
 func _update(delta: float):
-	if enemy.velocity.length_squared() < 2500 and enemy.is_on_floor():
+	if enemy.velocity.length_squared() < velocity_threshold and enemy.is_on_floor():
 		enemy.sprite.rotation = 0
 		enemy.set_state_by_name("IdleState")
 	

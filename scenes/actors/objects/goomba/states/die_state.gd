@@ -6,7 +6,6 @@ onready var animation_player = get_node("%AnimationPlayer")
 
 func _start():
 	enemy.velocity = Vector2.ZERO
-	
 	animation_player.play("squish")
 	
 	yield(animation_player, "animation_finished")
