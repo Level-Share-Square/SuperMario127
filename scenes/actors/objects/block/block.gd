@@ -6,7 +6,7 @@ enum LayoutOrientation {HORIZONTAL, VERTICAL}
 
 export var blocks: int = 1
 export(LayoutOrientation) var orientation = 0
-export var hit_sound: AudioStream = preload("res://scenes/actors/objects/block/block_hit.wav")
+export var hit_sound: AudioStream = preload("res://assets/sounds/block_hit.wav")
 export var hit_bounce_enabled : bool = true
 
 var hit_sound_player = AudioStreamPlayer2D.new()

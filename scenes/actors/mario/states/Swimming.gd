@@ -40,7 +40,7 @@ func _start(_delta):
 	if abs(character.sprite.rotation) > PI:
 		character.sprite.rotation = 0
 	
-	character.sound_player.play_splash_sound()
+	character.sound_player.play_water_enter_sound()
 	character.jump_animation = 0
 	
 	old_gravity_scale = character.gravity_scale
@@ -166,7 +166,7 @@ func _stop(delta):
 	character.sprite.speed_scale = 1
 	character.gravity_scale = 1
 	character.swimming = false
-	character.sound_player.play_splash_sound()
+	character.sound_player.play_water_exit_sound()
 	character.sound_player.set_swim_playing(false)
 	character.spin_swim_area_shape.disabled = true
 	character.bubble_particles_left.emitting = false

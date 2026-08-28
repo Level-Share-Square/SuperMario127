@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/swim.ogg-99b916256a702000f712e87d952adcb6.oggstr"
+
+[deps]
+
+source_file="res://assets/sounds/swim.ogg"
+dest_files=[ "res://.import/swim.ogg-99b916256a702000f712e87d952adcb6.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

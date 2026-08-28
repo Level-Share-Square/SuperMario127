@@ -2,8 +2,8 @@
 
 [ext_resource path="res://scenes/menu/converter/minigames/breakout/boxes.png" type="Texture" id=1]
 [ext_resource path="res://scenes/menu/converter/minigames/breakout/box.gd" type="Script" id=2]
-[ext_resource path="res://scenes/actors/objects/block/block_hit.wav" type="AudioStream" id=3]
-[ext_resource path="res://scenes/actors/objects/sawblade/metal_bounce.wav" type="AudioStream" id=4]
+[ext_resource path="res://assets/sounds/block_hit.wav" type="AudioStream" id=3]
+[ext_resource path="res://assets/sounds/sawblade_bounce.wav" type="AudioStream" id=4]
 
 [sub_resource type="Shader" id=2]
 code = "shader_type canvas_item;

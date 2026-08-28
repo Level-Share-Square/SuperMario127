@@ -1,0 +1,23 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/sawblade_bounce.wav-c8e3c4a76734aa476c25104157fe9549.sample"
+
+[deps]
+
+source_file="res://assets/sounds/sawblade_bounce.wav"
+dest_files=[ "res://.import/sawblade_bounce.wav-c8e3c4a76734aa476c25104157fe9549.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

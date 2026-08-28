@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/double_door_open.ogg-4920a7df89900a8ed5a7932146f9671b.oggstr"
+
+[deps]
+
+source_file="res://assets/sounds/double_door_open.ogg"
+dest_files=[ "res://.import/double_door_open.ogg-4920a7df89900a8ed5a7932146f9671b.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

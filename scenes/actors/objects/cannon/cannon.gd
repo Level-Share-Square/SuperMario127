@@ -52,8 +52,8 @@ var target_zoom: float = 1.5
 var stored_zoom: float = 1.0
 
 # the audio files used in the code for some of the cannons movements
-onready var cannon_move_noise : AudioStream = preload("res://scenes/actors/objects/cannon/crank.tres")
-onready var cannon_fire_noise : AudioStream = preload("res://scenes/actors/objects/cannon/nsmbwiiBobombCannon.wav")
+onready var cannon_move_noise : AudioStream = preload("res://assets/sounds/cannon_crank.tres")
+onready var cannon_fire_noise : AudioStream = preload("res://assets/sounds/cannon_shoot.wav")
 
 #func _set_properties() -> void:
 #	savable_properties = ["launch_power", "min_rotation", "max_rotation", "faces_right", "target_zoom"]

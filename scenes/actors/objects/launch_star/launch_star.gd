@@ -11,9 +11,9 @@ onready var animation_player = $AnimationPlayer
 onready var audio_player : AudioStreamPlayer2D = $AudioStreamPlayer2D
 onready var fly_noise_player : AudioStreamPlayer2D = $AudioStreamPlayer2D2
 onready var player_detector = $PlayerDetector
-onready var launch_noise : AudioStream = preload("res://scenes/actors/objects/launch_star/sfx/launch.wav")
-onready var flying_noise : AudioStream = preload("res://scenes/actors/objects/launch_star/sfx/flying.wav")
-onready var windup_noise : AudioStream = preload("res://scenes/actors/objects/launch_star/sfx/windup.wav")
+onready var launch_noise : AudioStream = preload("res://assets/sounds/launch_star/launch.wav")
+onready var flying_noise : AudioStream = preload("res://assets/sounds/launch_star/flying.wav")
+onready var windup_noise : AudioStream = preload("res://assets/sounds/launch_star/windup.wav")
 onready var launch_particles : CPUParticles2D = $LaunchParticles
 
 enum states {IDLE, HOLDING, WINDUP, LAUNCH}

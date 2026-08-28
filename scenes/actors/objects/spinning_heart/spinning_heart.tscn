@@ -2,7 +2,7 @@
 
 [ext_resource path="res://scenes/actors/objects/spinning_heart/spinning_heart.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/objects/spinning_heart/spinning_heart.png" type="Texture" id=2]
-[ext_resource path="res://scenes/actors/objects/spinning_heart/sm64_spinning_heart.ogg" type="AudioStream" id=3]
+[ext_resource path="res://assets/sounds/spinning_heart.ogg" type="AudioStream" id=3]
 [ext_resource path="res://scenes/actors/objects/spinning_heart/color.png" type="Texture" id=4]
 
 [sub_resource type="AtlasTexture" id=1]

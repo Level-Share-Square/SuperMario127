@@ -18,8 +18,8 @@
 [ext_resource path="res://assets/icons/PivotOn.svg" type="Texture" id=16]
 [ext_resource path="res://assets/icons/Scale.svg" type="Texture" id=17]
 [ext_resource path="res://assets/icons/move_selection.png" type="Texture" id=18]
-[ext_resource path="res://scenes/oldeditor/sounds/hover.wav" type="AudioStream" id=19]
-[ext_resource path="res://scenes/oldeditor/sounds/click2.wav" type="AudioStream" id=20]
+[ext_resource path="res://assets/sounds/hover.wav" type="AudioStream" id=19]
+[ext_resource path="res://assets/sounds/click2.wav" type="AudioStream" id=20]
 
 [sub_resource type="AnimatedTexture" id=3]
 frames = 3

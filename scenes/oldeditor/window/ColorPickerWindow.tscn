@@ -2,7 +2,7 @@
 
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://scenes/oldeditor/window.gd" type="Script" id=2]
-[ext_resource path="res://scenes/oldeditor/sounds/hover.wav" type="AudioStream" id=3]
+[ext_resource path="res://assets/sounds/hover.wav" type="AudioStream" id=3]
 [ext_resource path="res://scenes/oldeditor/window/ColorPickerWindow/Wheel.png" type="Texture" id=4]
 [ext_resource path="res://scenes/oldeditor/window/ColorPickerWindow/color_wheel.gd" type="Script" id=5]
 [ext_resource path="res://scenes/oldeditor/window/ColorPickerWindow/HSV Color Selector.png" type="Texture" id=6]
@@ -11,7 +11,7 @@
 [ext_resource path="res://scenes/oldeditor/window/ColorPickerWindow/WhiteGradient.png" type="Texture" id=9]
 [ext_resource path="res://scenes/oldeditor/window/ColorPickerWindow/Gradient Selector.png" type="Texture" id=10]
 [ext_resource path="res://scenes/oldeditor/assets/window_close_hover.png" type="Texture" id=11]
-[ext_resource path="res://scenes/oldeditor/sounds/click2.wav" type="AudioStream" id=12]
+[ext_resource path="res://assets/sounds/click2.wav" type="AudioStream" id=12]
 [ext_resource path="res://scenes/oldeditor/window/ColorPickerWindow/gradient.gd" type="Script" id=13]
 [ext_resource path="res://scenes/oldeditor/window/ColorPickerWindow/ColorBorder.png" type="Texture" id=15]
 

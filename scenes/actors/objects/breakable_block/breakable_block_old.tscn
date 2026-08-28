@@ -2,7 +2,7 @@
 
 [ext_resource path="res://scenes/actors/objects/breakable_block/block_material.tres" type="Material" id=1]
 [ext_resource path="res://scenes/actors/objects/breakable_block/breakable_block.png" type="Texture" id=2]
-[ext_resource path="res://scenes/actors/objects/breakable_block/break.wav" type="AudioStream" id=3]
+[ext_resource path="res://assets/sounds/wood_break.wav" type="AudioStream" id=3]
 [ext_resource path="res://scenes/actors/mario/particles/dust.png" type="Texture" id=4]
 [ext_resource path="res://scenes/actors/objects/breakable_block/breakable_block_old.gd" type="Script" id=5]
 [ext_resource path="res://scenes/actors/objects/breakable_block/breakable_block_outline.png" type="Texture" id=6]

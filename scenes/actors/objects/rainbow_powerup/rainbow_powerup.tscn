@@ -1,6 +1,6 @@
 [gd_scene load_steps=23 format=2]
 
-[ext_resource path="res://scenes/actors/objects/rainbow_powerup/collect.wav" type="AudioStream" id=1]
+[ext_resource path="res://assets/sounds/powerup_collect.wav" type="AudioStream" id=1]
 [ext_resource path="res://scenes/actors/objects/rainbow_powerup/star.png" type="Texture" id=2]
 [ext_resource path="res://scenes/actors/objects/rainbow_powerup/rainbow_powerup.gd" type="Script" id=3]
 [ext_resource path="res://scenes/actors/mario/particles/sparkles.png" type="Texture" id=4]

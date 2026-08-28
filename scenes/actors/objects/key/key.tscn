@@ -5,8 +5,8 @@
 [ext_resource path="res://scenes/actors/objects/shine/shine_rays.gdshader" type="Shader" id=3]
 [ext_resource path="res://scenes/actors/objects/shine/shine_rays.gd" type="Script" id=4]
 [ext_resource path="res://scenes/actors/objects/key/key_outline.png" type="Texture" id=5]
-[ext_resource path="res://scenes/actors/objects/shine/collect.wav" type="AudioStream" id=6]
-[ext_resource path="res://scenes/actors/objects/key/jingle.wav" type="AudioStream" id=7]
+[ext_resource path="res://assets/sounds/collect_glisten.wav" type="AudioStream" id=6]
+[ext_resource path="res://assets/sounds/key_jingle.wav" type="AudioStream" id=7]
 
 [sub_resource type="ShaderMaterial" id=9]
 resource_local_to_scene = true
@@ -14,7 +14,7 @@ shader = ExtResource( 3 )
 shader_param/ray_count = 4
 shader_param/ray_distance = 0.4
 shader_param/ray_seperation_degrees = 22.0
-shader_param/rotation = 3.80954
+shader_param/rotation = 3.01698
 
 [sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 14, 16.5 )

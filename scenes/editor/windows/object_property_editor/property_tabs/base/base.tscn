@@ -9,8 +9,8 @@
 [ext_resource path="res://scenes/editor/windows/object_property_editor/misc_property_scenes/int/base.tscn" type="PackedScene" id=7]
 [ext_resource path="res://assets/icons/FlipY.svg" type="Texture" id=8]
 [ext_resource path="res://assets/icons/FlipX.svg" type="Texture" id=10]
-[ext_resource path="res://scenes/oldeditor/sounds/click2.wav" type="AudioStream" id=12]
-[ext_resource path="res://scenes/oldeditor/sounds/hover.wav" type="AudioStream" id=13]
+[ext_resource path="res://assets/sounds/click2.wav" type="AudioStream" id=12]
+[ext_resource path="res://assets/sounds/hover.wav" type="AudioStream" id=13]
 [ext_resource path="res://scenes/editor/windows/object_property_editor/misc_property_scenes/Vector2/base.tscn" type="PackedScene" id=14]
 [ext_resource path="res://scenes/editor/windows/object_property_editor/misc_property_scenes/bool/base.tscn" type="PackedScene" id=15]
 

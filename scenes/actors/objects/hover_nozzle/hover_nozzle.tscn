@@ -2,7 +2,7 @@
 
 [ext_resource path="res://scenes/actors/objects/hover_nozzle/hover_nozzle.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/objects/hover_nozzle/hover_nozzle.png" type="Texture" id=2]
-[ext_resource path="res://scenes/actors/objects/hover_nozzle/sound.wav" type="AudioStream" id=3]
+[ext_resource path="res://assets/sounds/fludd_refill.wav" type="AudioStream" id=3]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/turbo_nozzle.png-e4fdae774c5fa77bc2ebfcd9ed684d54.stex"

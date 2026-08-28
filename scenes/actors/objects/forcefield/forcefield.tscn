@@ -1,9 +1,9 @@
 [gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://scenes/actors/objects/box_base/box_base.tscn" type="PackedScene" id=1]
-[ext_resource path="res://scenes/actors/objects/forcefield/break.wav" type="AudioStream" id=2]
+[ext_resource path="res://assets/sounds/electric_depower.wav" type="AudioStream" id=2]
 [ext_resource path="res://scenes/actors/objects/forcefield/forcefield.gd" type="Script" id=3]
-[ext_resource path="res://scenes/actors/objects/forcefield/break2.wav" type="AudioStream" id=4]
+[ext_resource path="res://assets/sounds/glass_break.wav" type="AudioStream" id=4]
 
 [sub_resource type="Gradient" id=22]
 offsets = PoolRealArray( 0.774809, 1 )

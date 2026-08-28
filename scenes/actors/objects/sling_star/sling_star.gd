@@ -4,8 +4,8 @@ onready var speed_tween = $Tween
 onready var audio_player : AudioStreamPlayer2D = $AudioStreamPlayer2D
 onready var player_detector = $PlayerDetector
 onready var animation_player = $AnimationPlayer
-onready var launch_noise : AudioStream = preload("res://scenes/actors/objects/sling_star/sfx/launch.wav")
-onready var windup_noise : AudioStream = preload("res://scenes/actors/objects/sling_star/sfx/windup.wav")
+onready var launch_noise : AudioStream = preload("res://assets/sounds/sling_star/launch.wav")
+onready var windup_noise : AudioStream = preload("res://assets/sounds/sling_star/windup.wav")
 onready var star = $Star
 
 enum states {IDLE, HOLDING, WINDUP, LAUNCH}

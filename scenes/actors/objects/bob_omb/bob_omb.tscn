@@ -2,11 +2,11 @@
 
 [ext_resource path="res://scenes/actors/objects/bob_omb/regular_frames.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/actors/objects/bob_omb/bob_omb.gd" type="Script" id=2]
-[ext_resource path="res://scenes/actors/objects/bob_omb/fuse1.wav" type="AudioStream" id=3]
+[ext_resource path="res://assets/sounds/bob_omb_fuse1.wav" type="AudioStream" id=3]
 [ext_resource path="res://scenes/actors/objects/bob_omb/fuse_frames.tres" type="SpriteFrames" id=4]
-[ext_resource path="res://scenes/actors/objects/bob_omb/fuse2.wav" type="AudioStream" id=5]
+[ext_resource path="res://assets/sounds/bob_omb_fuse2.wav" type="AudioStream" id=5]
 [ext_resource path="res://scenes/actors/objects/bob_omb/explosion.png" type="Texture" id=6]
-[ext_resource path="res://scenes/actors/objects/bob_omb/explosion_sound.wav" type="AudioStream" id=7]
+[ext_resource path="res://assets/sounds/explosion_sound.wav" type="AudioStream" id=7]
 [ext_resource path="res://scenes/actors/objects/old_goomba/body.gd" type="Script" id=8]
 
 [sub_resource type="RayShape2D" id=1]

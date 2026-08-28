@@ -34,8 +34,8 @@ onready var left_width = sprite.patch_margin_left
 onready var right_width = sprite.patch_margin_right
 onready var part_width = sprite.texture.get_width() - left_width - right_width
 
-onready var strong_bounce = preload("res://scenes/actors/objects/note_block/strong_bounce.wav")
-onready var weak_bounce = preload("res://scenes/actors/objects/note_block/weak_bounce.wav")
+onready var strong_bounce = preload("res://assets/sounds/note_block_strong.wav")
+onready var weak_bounce = preload("res://assets/sounds/note_block_weak.wav")
 
 onready var sound = $AudioStreamPlayer2D
 

@@ -2,7 +2,7 @@
 
 [ext_resource path="res://scenes/actors/objects/bullet_bill/bullet_bill.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/objects/bullet_bill/texture.png" type="Texture" id=2]
-[ext_resource path="res://scenes/actors/objects/bullet_bill/sound.wav" type="AudioStream" id=3]
+[ext_resource path="res://assets/sounds/enemy_hit.wav" type="AudioStream" id=3]
 [ext_resource path="res://scenes/actors/objects/bullet_bill/colored.png" type="Texture" id=4]
 
 [sub_resource type="AtlasTexture" id=1]

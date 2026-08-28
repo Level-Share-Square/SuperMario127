@@ -2,8 +2,8 @@
 
 [ext_resource path="res://scenes/player/ui_new/text/sign_text.gd" type="Script" id=1]
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=2]
-[ext_resource path="res://scenes/actors/objects/sign/menu_open.wav" type="AudioStream" id=3]
-[ext_resource path="res://scenes/actors/objects/sign/menu_close.wav" type="AudioStream" id=4]
+[ext_resource path="res://assets/sounds/dialogue_open.wav" type="AudioStream" id=3]
+[ext_resource path="res://assets/sounds/dialogue_close.wav" type="AudioStream" id=4]
 [ext_resource path="res://scenes/menu/theme.tres" type="Theme" id=5]
 
 [sub_resource type="Gradient" id=6]

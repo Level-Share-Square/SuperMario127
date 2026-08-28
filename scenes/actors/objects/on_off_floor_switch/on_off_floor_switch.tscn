@@ -1,9 +1,9 @@
 [gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scenes/actors/objects/p_switch/base.png" type="Texture" id=1]
-[ext_resource path="res://scenes/actors/objects/p_switch/press.wav" type="AudioStream" id=2]
+[ext_resource path="res://assets/sounds/switch_press.wav" type="AudioStream" id=2]
 [ext_resource path="res://scenes/actors/objects/on_off_floor_switch/switch.png" type="Texture" id=3]
-[ext_resource path="res://scenes/actors/objects/on_off_switch/Switch.wav" type="AudioStream" id=4]
+[ext_resource path="res://assets/sounds/on_off_switch.wav" type="AudioStream" id=4]
 [ext_resource path="res://scenes/actors/objects/on_off_floor_switch/on_off_floor_switch.gd" type="Script" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]

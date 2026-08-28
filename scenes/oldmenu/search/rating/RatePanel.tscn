@@ -4,8 +4,8 @@
 [ext_resource path="res://scenes/oldeditor/assets/clickable_arrow_hover.png" type="Texture" id=2]
 [ext_resource path="res://scenes/oldeditor/assets/clickable_arrow.png" type="Texture" id=3]
 [ext_resource path="res://scenes/oldmenu/127Button.tscn" type="PackedScene" id=4]
-[ext_resource path="res://scenes/oldeditor/sounds/hover.wav" type="AudioStream" id=5]
-[ext_resource path="res://scenes/oldeditor/sounds/click2.wav" type="AudioStream" id=6]
+[ext_resource path="res://assets/sounds/hover.wav" type="AudioStream" id=5]
+[ext_resource path="res://assets/sounds/click2.wav" type="AudioStream" id=6]
 [ext_resource path="res://scenes/oldmenu/search/rating/ratepanel.gd" type="Script" id=7]
 [ext_resource path="res://scenes/oldmenu/127Button.gd" type="Script" id=10]
 

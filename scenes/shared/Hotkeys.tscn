@@ -4,8 +4,8 @@
 [ext_resource path="res://scenes/oldeditor/window/hotkeys.gd" type="Script" id=2]
 [ext_resource path="res://scenes/oldmenu/127Button.tscn" type="PackedScene" id=7]
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=8]
-[ext_resource path="res://scenes/oldeditor/sounds/hover.wav" type="AudioStream" id=9]
-[ext_resource path="res://scenes/oldeditor/sounds/click2.wav" type="AudioStream" id=10]
+[ext_resource path="res://assets/sounds/hover.wav" type="AudioStream" id=9]
+[ext_resource path="res://assets/sounds/click2.wav" type="AudioStream" id=10]
 
 [sub_resource type="DynamicFont" id=14]
 size = 50

@@ -24,9 +24,9 @@
 [ext_resource path="res://scenes/actors/mario/nozzles/Hover.gd" type="Script" id=22]
 [ext_resource path="res://scenes/actors/mario/nozzles/hover_frames.tres" type="SpriteFrames" id=23]
 [ext_resource path="res://scenes/actors/mario/nozzles/water_frames.tres" type="SpriteFrames" id=24]
-[ext_resource path="res://scenes/actors/mario/nozzles/spray.wav" type="AudioStream" id=25]
+[ext_resource path="res://assets/sounds/fludd/spray.wav" type="AudioStream" id=25]
 [ext_resource path="res://scenes/actors/mario/nozzles/hover_frames_luigi.tres" type="SpriteFrames" id=26]
-[ext_resource path="res://scenes/actors/mario/nozzles/switch.wav" type="AudioStream" id=27]
+[ext_resource path="res://assets/sounds/fludd/switch.wav" type="AudioStream" id=27]
 [ext_resource path="res://scenes/actors/mario/states/SlideStop.gd" type="Script" id=28]
 [ext_resource path="res://scenes/actors/mario/states/Backflip.gd" type="Script" id=29]
 [ext_resource path="res://scenes/actors/mario/particles/dust.png" type="Texture" id=30]
@@ -41,7 +41,7 @@
 [ext_resource path="res://scenes/actors/mario/powerups/Rainbow.gd" type="Script" id=39]
 [ext_resource path="res://scenes/actors/mario/states/RainbowStarWindup.gd" type="Script" id=40]
 [ext_resource path="res://scenes/actors/mario/particles/sparkles.png" type="Texture" id=41]
-[ext_resource path="res://scenes/actors/mario/nozzles/fludd_charge.wav" type="AudioStream" id=42]
+[ext_resource path="res://assets/sounds/fludd/fludd_charge.wav" type="AudioStream" id=42]
 [ext_resource path="res://scenes/actors/mario/nozzles/rocket_frames_luigi.tres" type="SpriteFrames" id=43]
 [ext_resource path="res://scenes/actors/mario/nozzles/rocket_frames.tres" type="SpriteFrames" id=44]
 [ext_resource path="res://scenes/actors/mario/nozzles/Rocket.gd" type="Script" id=45]
@@ -59,14 +59,14 @@
 [ext_resource path="res://scenes/actors/mario/this_shouldnt_be_necessary.gd" type="Script" id=57]
 [ext_resource path="res://scenes/actors/mario/is_hurt_area.gd" type="Script" id=58]
 [ext_resource path="res://scenes/actors/mario/particles/area_of_attack_ring.png" type="Texture" id=59]
-[ext_resource path="res://scenes/actors/objects/cannon/nsmbwiiBobombCannon.wav" type="AudioStream" id=60]
+[ext_resource path="res://assets/sounds/cannon_shoot.wav" type="AudioStream" id=60]
 [ext_resource path="res://scenes/actors/objects/shine/frames_recolorable.tres" type="SpriteFrames" id=61]
 [ext_resource path="res://scenes/actors/mario/powerups/Wing.gd" type="Script" id=62]
 [ext_resource path="res://scenes/actors/mario/SpriteAnimSync.gd" type="Script" id=63]
 [ext_resource path="res://scenes/actors/mario/wing_frames_luigi.tres" type="SpriteFrames" id=64]
 [ext_resource path="res://scenes/actors/mario/wing_frames.tres" type="SpriteFrames" id=65]
 [ext_resource path="res://scenes/actors/mario/nozzles/water_particle.png" type="Texture" id=66]
-[ext_resource path="res://scenes/actors/mario/nozzles/turbo_spray.wav" type="AudioStream" id=67]
+[ext_resource path="res://assets/sounds/fludd/turbo_spray.wav" type="AudioStream" id=67]
 [ext_resource path="res://scenes/actors/mario/TurboParticles.gd" type="Script" id=68]
 [ext_resource path="res://scenes/actors/mario/states/Swimming.gd" type="Script" id=69]
 [ext_resource path="res://scenes/actors/mario/states/LavaBoost.gd" type="Script" id=70]
@@ -1678,7 +1678,7 @@ shader = ExtResource( 86 )
 shader_param/ray_count = 4
 shader_param/ray_distance = 0.4
 shader_param/ray_seperation_degrees = 22.0
-shader_param/rotation = 2.122
+shader_param/rotation = 2.4705
 
 [sub_resource type="RectangleShape2D" id=85]
 extents = Vector2( 8, 18 )
@@ -2529,7 +2529,7 @@ playing = true
 [node name="Recolorable" type="AnimatedSprite" parent="CollectedShine"]
 visible = false
 frames = ExtResource( 61 )
-frame = 10
+frame = 4
 script = ExtResource( 63 )
 
 [node name="ShineParticles" type="Particles2D" parent="CollectedShine"]

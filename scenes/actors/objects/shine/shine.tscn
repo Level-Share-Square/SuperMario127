@@ -1,21 +1,19 @@
-[gd_scene load_steps=39 format=2]
+[gd_scene load_steps=37 format=2]
 
 [ext_resource path="res://scenes/actors/objects/shine/frames_normal.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://assets/particles/shiny_particle_material.tres" type="Material" id=2]
 [ext_resource path="res://scenes/actors/objects/shine/shine.gd" type="Script" id=3]
 [ext_resource path="res://scenes/actors/mario/particles/shine_sparkles.png" type="Texture" id=4]
 [ext_resource path="res://scenes/actors/objects/shine/ghost.png" type="Texture" id=5]
-[ext_resource path="res://scenes/actors/objects/shine/appear.wav" type="AudioStream" id=6]
-[ext_resource path="res://scenes/actors/objects/shine/shine_ambient.wav" type="AudioStream" id=7]
+[ext_resource path="res://assets/sounds/shine_appear_jingle.wav" type="AudioStream" id=6]
+[ext_resource path="res://assets/sounds/shine_ambient.wav" type="AudioStream" id=7]
 [ext_resource path="res://scenes/actors/objects/shine/frames_pocket.tres" type="SpriteFrames" id=8]
 [ext_resource path="res://scenes/actors/mario/particles/recolorable_sparkles.png" type="Texture" id=9]
 [ext_resource path="res://scenes/actors/objects/shine/frames_recolorable.tres" type="SpriteFrames" id=10]
 [ext_resource path="res://scenes/actors/objects/shine/frames_collected.tres" type="SpriteFrames" id=11]
-[ext_resource path="res://scenes/actors/objects/shine/collect.wav" type="AudioStream" id=12]
-[ext_resource path="res://scenes/actors/objects/shine/shine_appear_short_bad.wav" type="AudioStream" id=13]
+[ext_resource path="res://assets/sounds/collect_glisten.wav" type="AudioStream" id=12]
 [ext_resource path="res://scenes/actors/mario/SpriteAnimSync.gd" type="Script" id=14]
 [ext_resource path="res://scenes/actors/objects/shine/shine_rays.gd" type="Script" id=15]
-[ext_resource path="res://scenes/actors/objects/shine/shine_appear_sound_bad.wav" type="AudioStream" id=16]
 [ext_resource path="res://scenes/actors/objects/shine/shine_rays.gdshader" type="Shader" id=17]
 [ext_resource path="res://scenes/actors/objects/shine/glow_effect.gd" type="Script" id=18]
 [ext_resource path="res://scenes/actors/objects/shine/frames_pocket_recolorable.tres" type="SpriteFrames" id=19]
@@ -47,7 +45,7 @@ shader = ExtResource( 17 )
 shader_param/ray_count = 4
 shader_param/ray_distance = 0.45
 shader_param/ray_seperation_degrees = 22.0
-shader_param/rotation = 1.42322
+shader_param/rotation = 0.916382
 
 [sub_resource type="ShaderMaterial" id=41]
 resource_local_to_scene = true
@@ -55,7 +53,7 @@ shader = ExtResource( 17 )
 shader_param/ray_count = 4
 shader_param/ray_distance = 0.275
 shader_param/ray_seperation_degrees = 27.243
-shader_param/rotation = 4.85996
+shader_param/rotation = 5.3668
 
 [sub_resource type="CanvasItemMaterial" id=21]
 particles_animation = true
@@ -463,147 +461,133 @@ tracks/2/keys = {
 "update": 1,
 "values": [ true ]
 }
-tracks/3/type = "audio"
-tracks/3/path = NodePath("AppearSound")
+tracks/3/type = "value"
+tracks/3/path = NodePath("RaysContainer:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"clips": [ {
-"end_offset": 0.0,
-"start_offset": 0.0,
-"stream": ExtResource( 6 )
-} ],
-"times": PoolRealArray( 1.4 )
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath("RaysContainer:position")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
 "times": PoolRealArray( 0, 1, 1.5, 2.1, 2.7 ),
 "transitions": PoolRealArray( 1, 1, 0.5, 2, 1 ),
 "update": 0,
 "values": [ Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, -64 ), Vector2( 0, 0 ) ]
 }
-tracks/5/type = "value"
-tracks/5/path = NodePath("RaysContainer:modulate")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
+tracks/4/type = "value"
+tracks/4/path = NodePath("RaysContainer:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
 "times": PoolRealArray( 0, 0.5, 1, 2.7 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ) ]
 }
-tracks/6/type = "value"
-tracks/6/path = NodePath("AnimatedSprite:frame")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/keys = {
+tracks/5/type = "value"
+tracks/5/path = NodePath("AnimatedSprite:frame")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ 0 ]
 }
-tracks/7/type = "value"
-tracks/7/path = NodePath("RaysContainer:modulate:a")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/keys = {
+tracks/6/type = "value"
+tracks/6/path = NodePath("RaysContainer:modulate:a")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
 "times": PoolRealArray( 0, 0.5, 1, 1.5, 2.7 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 0,
 "values": [ 0.0, 0.0, 4.0, 4.0, 1.0 ]
 }
-tracks/8/type = "value"
-tracks/8/path = NodePath("RaysContainer/VectorRays:ray_rotation_speed")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/keys = {
+tracks/7/type = "value"
+tracks/7/path = NodePath("RaysContainer/VectorRays:ray_rotation_speed")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
 "times": PoolRealArray( 0, 1.5, 2.7 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ 9.5, 9.5, 0.6 ]
 }
-tracks/9/type = "value"
-tracks/9/path = NodePath("SpawnParticles:emitting")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/keys = {
+tracks/8/type = "value"
+tracks/8/path = NodePath("SpawnParticles:emitting")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
 "times": PoolRealArray( 0, 0.6 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ true, false ]
 }
-tracks/10/type = "value"
-tracks/10/path = NodePath("AnimatedSprite:visible")
-tracks/10/interp = 1
-tracks/10/loop_wrap = true
-tracks/10/imported = false
-tracks/10/enabled = true
-tracks/10/keys = {
+tracks/9/type = "value"
+tracks/9/path = NodePath("AnimatedSprite:visible")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ true ]
 }
-tracks/11/type = "value"
-tracks/11/path = NodePath("Ghost:visible")
-tracks/11/interp = 1
-tracks/11/loop_wrap = true
-tracks/11/imported = false
-tracks/11/enabled = true
-tracks/11/keys = {
+tracks/10/type = "value"
+tracks/10/path = NodePath("Ghost:visible")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
 "times": PoolRealArray( 0, 0.8 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ true, false ]
 }
-tracks/12/type = "value"
-tracks/12/path = NodePath("SpawnParticles:preprocess")
-tracks/12/interp = 1
-tracks/12/loop_wrap = true
-tracks/12/imported = false
-tracks/12/enabled = true
-tracks/12/keys = {
+tracks/11/type = "value"
+tracks/11/path = NodePath("SpawnParticles:preprocess")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ 0.1 ]
 }
-tracks/13/type = "value"
-tracks/13/path = NodePath("SpawnParticles:visible")
-tracks/13/interp = 1
-tracks/13/loop_wrap = true
-tracks/13/imported = false
-tracks/13/enabled = true
-tracks/13/keys = {
+tracks/12/type = "value"
+tracks/12/path = NodePath("SpawnParticles:visible")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
 "times": PoolRealArray( 0, 2.7 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ true, false ]
 }
-tracks/14/type = "method"
-tracks/14/path = NodePath("AnimationPlayer")
-tracks/14/interp = 1
-tracks/14/loop_wrap = true
-tracks/14/imported = false
-tracks/14/enabled = true
-tracks/14/keys = {
+tracks/13/type = "method"
+tracks/13/path = NodePath("AnimationPlayer")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
 "times": PoolRealArray( 4.8 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
@@ -611,90 +595,90 @@ tracks/14/keys = {
 "method": "play"
 } ]
 }
-tracks/15/type = "audio"
-tracks/15/path = NodePath("AppearSFX")
-tracks/15/interp = 1
-tracks/15/loop_wrap = true
-tracks/15/imported = false
-tracks/15/enabled = false
-tracks/15/keys = {
-"clips": [ {
-"end_offset": 0.0,
-"start_offset": 0.0,
-"stream": ExtResource( 16 )
-} ],
-"times": PoolRealArray( 0.1 )
-}
-tracks/16/type = "value"
-tracks/16/path = NodePath("AnimatedSprite:modulate:a")
-tracks/16/interp = 1
-tracks/16/loop_wrap = true
-tracks/16/imported = false
-tracks/16/enabled = true
-tracks/16/keys = {
+tracks/14/type = "value"
+tracks/14/path = NodePath("AnimatedSprite:modulate:a")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
 "times": PoolRealArray( 0, 0.5, 0.8 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ 0.0, 0.0, 1.0 ]
 }
-tracks/17/type = "value"
-tracks/17/path = NodePath("Ghost:modulate:a")
-tracks/17/interp = 1
-tracks/17/loop_wrap = true
-tracks/17/imported = false
-tracks/17/enabled = true
-tracks/17/keys = {
+tracks/15/type = "value"
+tracks/15/path = NodePath("Ghost:modulate:a")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/keys = {
 "times": PoolRealArray( 0, 0.5, 0.9 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ 1.0, 1.0, 1.0 ]
 }
-tracks/18/type = "value"
-tracks/18/path = NodePath("SpawnParticles:modulate")
-tracks/18/interp = 1
-tracks/18/loop_wrap = true
-tracks/18/imported = false
-tracks/18/enabled = true
-tracks/18/keys = {
+tracks/16/type = "value"
+tracks/16/path = NodePath("SpawnParticles:modulate")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/keys = {
 "times": PoolRealArray( 0, 0.6, 1.5 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
-tracks/19/type = "method"
-tracks/19/path = NodePath(".")
-tracks/19/interp = 1
-tracks/19/loop_wrap = true
-tracks/19/imported = false
-tracks/19/enabled = true
-tracks/19/keys = {
+tracks/17/type = "method"
+tracks/17/path = NodePath(".")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/keys = {
 "times": PoolRealArray(  ),
 "transitions": PoolRealArray(  ),
 "values": [  ]
 }
-tracks/20/type = "value"
-tracks/20/path = NodePath("RaysContainer/VectorRaysSmall:ray_rotation_speed")
-tracks/20/interp = 1
-tracks/20/loop_wrap = true
-tracks/20/imported = false
-tracks/20/enabled = true
-tracks/20/keys = {
+tracks/18/type = "value"
+tracks/18/path = NodePath("RaysContainer/VectorRaysSmall:ray_rotation_speed")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/keys = {
 "times": PoolRealArray( 0, 1.5, 2.7 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ -9.5, -9.5, -0.6 ]
 }
-tracks/21/type = "value"
-tracks/21/path = NodePath("RaysContainer/Glow:self_modulate")
-tracks/21/interp = 1
-tracks/21/loop_wrap = true
-tracks/21/imported = false
-tracks/21/enabled = true
-tracks/21/keys = {
+tracks/19/type = "value"
+tracks/19/path = NodePath("RaysContainer/Glow:self_modulate")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/keys = {
 "times": PoolRealArray( 0, 0.5, 2.7 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 0.996078, 0.996078, 0.996078, 1 ) ]
+}
+tracks/20/type = "method"
+tracks/20/path = NodePath("AppearSound")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/keys = {
+"times": PoolRealArray( 1.4 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ 0.0 ],
+"method": "play"
+} ]
 }
 
 [sub_resource type="Animation" id=37]
@@ -844,22 +828,20 @@ tracks/11/keys = {
 "method": "play"
 } ]
 }
-tracks/12/type = "audio"
-tracks/12/path = NodePath("AppearSFX")
+tracks/12/type = "value"
+tracks/12/path = NodePath("AnimatedSprite:modulate:a")
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/imported = false
 tracks/12/enabled = true
 tracks/12/keys = {
-"clips": [ {
-"end_offset": 0.0,
-"start_offset": 0.0,
-"stream": ExtResource( 13 )
-} ],
-"times": PoolRealArray( 0 )
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0 ]
 }
 tracks/13/type = "value"
-tracks/13/path = NodePath("AnimatedSprite:modulate:a")
+tracks/13/path = NodePath("Ghost:modulate:a")
 tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/imported = false
@@ -868,39 +850,27 @@ tracks/13/keys = {
 "times": PoolRealArray( 0, 0.5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ 0.0, 1.0 ]
+"values": [ 1.0, 0.0 ]
 }
 tracks/14/type = "value"
-tracks/14/path = NodePath("Ghost:modulate:a")
+tracks/14/path = NodePath("SpawnParticles:modulate")
 tracks/14/interp = 1
 tracks/14/loop_wrap = true
 tracks/14/imported = false
 tracks/14/enabled = true
 tracks/14/keys = {
-"times": PoolRealArray( 0, 0.5 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 1.0, 0.0 ]
-}
-tracks/15/type = "value"
-tracks/15/path = NodePath("SpawnParticles:modulate")
-tracks/15/interp = 1
-tracks/15/loop_wrap = true
-tracks/15/imported = false
-tracks/15/enabled = true
-tracks/15/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ) ]
 }
-tracks/16/type = "method"
-tracks/16/path = NodePath(".")
-tracks/16/interp = 1
-tracks/16/loop_wrap = true
-tracks/16/imported = false
-tracks/16/enabled = true
-tracks/16/keys = {
+tracks/15/type = "method"
+tracks/15/path = NodePath(".")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/keys = {
 "times": PoolRealArray(  ),
 "transitions": PoolRealArray(  ),
 "values": [  ]
@@ -1257,11 +1227,7 @@ bus = "Sounds"
 [node name="AppearSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
 volume_db = -8.0
-bus = "Sounds"
-
-[node name="AppearSFX" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 13 )
-bus = "Sounds"
+bus = "Music"
 
 [node name="AmbientSound" type="AudioStreamPlayer2D" parent="."]
 pause_mode = 1
@@ -1287,7 +1253,7 @@ texture = ExtResource( 5 )
 [node name="Glow" type="Sprite" parent="RaysContainer"]
 self_modulate = Color( 0.996078, 0.996078, 0.996078, 1 )
 material = SubResource( 38 )
-scale = Vector2( 1.09831, 1.09831 )
+scale = Vector2( 1.09199, 1.09199 )
 texture = SubResource( 40 )
 script = ExtResource( 18 )
 min_scale = 1.0
@@ -1331,7 +1297,7 @@ playing = true
 [node name="AnimatedSpriteRecolorable" type="AnimatedSprite" parent="AnimatedSprite"]
 visible = false
 frames = ExtResource( 10 )
-frame = 6
+frame = 15
 script = ExtResource( 14 )
 
 [node name="Particles2D" type="Particles2D" parent="AnimatedSprite"]
@@ -1346,7 +1312,6 @@ __meta__ = {
 
 [node name="SpawnParticles" type="Particles2D" parent="."]
 visible = false
-modulate = Color( 1, 1, 1, 0 )
 material = SubResource( 33 )
 position = Vector2( 0, 4 )
 emitting = false

@@ -2,10 +2,10 @@
 
 [ext_resource path="res://scenes/actors/objects/rex/rex.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/actors/objects/rex/rex.gd" type="Script" id=2]
-[ext_resource path="res://scenes/actors/objects/goomba/sounds/stomp.wav" type="AudioStream" id=3]
-[ext_resource path="res://scenes/actors/objects/bullet_bill/sound.wav" type="AudioStream" id=4]
+[ext_resource path="res://assets/sounds/goomba_stomp.wav" type="AudioStream" id=3]
+[ext_resource path="res://assets/sounds/enemy_hit.wav" type="AudioStream" id=4]
 [ext_resource path="res://scenes/actors/objects/goomba/animations/poof.png" type="Texture" id=5]
-[ext_resource path="res://scenes/actors/objects/goomba/sounds/poof.wav" type="AudioStream" id=6]
+[ext_resource path="res://assets/sounds/goomba_poof.wav" type="AudioStream" id=6]
 [ext_resource path="res://scenes/actors/objects/rex/body.gd" type="Script" id=7]
 [ext_resource path="res://scenes/actors/objects/rex/rexnormal_eyes.png" type="Texture" id=8]
 [ext_resource path="res://scenes/actors/objects/rex/rexangry_eyes.png" type="Texture" id=9]

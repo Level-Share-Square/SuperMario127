@@ -4,7 +4,7 @@
 [ext_resource path="res://scenes/actors/objects/cannon/cannon.png" type="Texture" id=2]
 [ext_resource path="res://scenes/actors/objects/cannon/cannon_sprite_body.gd" type="Script" id=3]
 [ext_resource path="res://scenes/actors/objects/cannon/cannon.gd" type="Script" id=4]
-[ext_resource path="res://scenes/actors/objects/cannon/nsmbwiiCannon2.wav" type="AudioStream" id=5]
+[ext_resource path="res://assets/sounds/cannon_open.wav" type="AudioStream" id=5]
 [ext_resource path="res://scenes/actors/objects/cannon/dust.png" type="Texture" id=6]
 [ext_resource path="res://scenes/actors/objects/cannon/cannon_audio_stream_player.gd" type="Script" id=7]
 

@@ -1,11 +1,11 @@
 [gd_scene load_steps=16 format=2]
 
-[ext_resource path="res://scenes/oldeditor/sounds/click2.wav" type="AudioStream" id=1]
+[ext_resource path="res://assets/sounds/click2.wav" type="AudioStream" id=1]
 [ext_resource path="res://scenes/menu/button_scripts/button_sound.gd" type="Script" id=2]
 [ext_resource path="res://scenes/editor/editor_theme.tres" type="Theme" id=3]
 [ext_resource path="res://scenes/editor/windows/big_text/big_text.gd" type="Script" id=4]
 [ext_resource path="res://assets/icons/palette.svg" type="Texture" id=5]
-[ext_resource path="res://scenes/oldeditor/sounds/hover.wav" type="AudioStream" id=6]
+[ext_resource path="res://assets/sounds/hover.wav" type="AudioStream" id=6]
 [ext_resource path="res://scenes/editor/windows/big_text/text_editor.gd" type="Script" id=7]
 [ext_resource path="res://scenes/actors/mario/icon2.png" type="Texture" id=8]
 [ext_resource path="res://assets/icons/Center.svg" type="Texture" id=9]

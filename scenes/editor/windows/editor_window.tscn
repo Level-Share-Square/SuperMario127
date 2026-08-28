@@ -2,9 +2,9 @@
 
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://scenes/menu/button_scripts/button_sound.gd" type="Script" id=2]
-[ext_resource path="res://scenes/oldeditor/sounds/click2.wav" type="AudioStream" id=3]
+[ext_resource path="res://assets/sounds/click2.wav" type="AudioStream" id=3]
 [ext_resource path="res://scenes/editor/editor_theme.tres" type="Theme" id=4]
-[ext_resource path="res://scenes/oldeditor/sounds/hover.wav" type="AudioStream" id=5]
+[ext_resource path="res://assets/sounds/hover.wav" type="AudioStream" id=5]
 [ext_resource path="res://scenes/editor/windows/editor_window.gd" type="Script" id=6]
 [ext_resource path="res://assets/icons/settings.svg" type="Texture" id=7]
 [ext_resource path="res://scenes/menu/background_scroll/background.tscn" type="PackedScene" id=8]

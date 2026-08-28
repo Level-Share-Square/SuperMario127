@@ -3,8 +3,8 @@
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://assets/particles/shiny_particle_material.tres" type="Material" id=2]
 [ext_resource path="res://scenes/actors/objects/shine_shard/shard.png" type="Texture" id=3]
-[ext_resource path="res://scenes/actors/objects/shine_shard/3W_SeOjKeyAppear.wav" type="AudioStream" id=4]
-[ext_resource path="res://scenes/actors/objects/shine_shard/3W_SeOjKeyGet.wav" type="AudioStream" id=5]
+[ext_resource path="res://assets/sounds/shine_shard_last.wav" type="AudioStream" id=4]
+[ext_resource path="res://assets/sounds/shine_shard.wav" type="AudioStream" id=5]
 [ext_resource path="res://scenes/actors/objects/shine_shard/shine_shard.gd" type="Script" id=6]
 [ext_resource path="res://scenes/actors/mario/particles/shine_sparkles.png" type="Texture" id=7]
 
@@ -270,10 +270,10 @@ stream = ExtResource( 5 )
 volume_db = -1.0
 bus = "Sounds"
 
-[node name="CollectLast" type="AudioStreamPlayer2D" parent="."]
+[node name="CollectLast" type="AudioStreamPlayer" parent="."]
 pause_mode = 2
 stream = ExtResource( 4 )
-volume_db = -1.0
+volume_db = -4.0
 bus = "Sounds"
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
