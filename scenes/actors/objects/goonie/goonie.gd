@@ -71,7 +71,7 @@ func goonie_physics_process(delta):
 	last_position = position
 	sprite.speed_scale = clamp(speed, 0.5, 3)
 	sprite.playing = true
-	if mode != 1 and is_enabled_and_on_ground():
+	if mode != 1 and is_enabled():
 		if spread_timer > 0:
 			spread_timer -= delta
 			if spread_timer <= 0:
