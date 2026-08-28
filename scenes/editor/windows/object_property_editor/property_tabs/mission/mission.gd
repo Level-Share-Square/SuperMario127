@@ -86,3 +86,4 @@ func add_mission():
 	CurrentLevelData.level_metadata.collectible_data.mission_data.append(new_mission_data)
 	selected_mission = new_mission_data
 	CurrentLevelData.level_metadata.collectible_data.emit_signal("data_changed", new_mission_data)
+	change_property("mission_uuid", new_mission_data.mission_uuid, true, true)
