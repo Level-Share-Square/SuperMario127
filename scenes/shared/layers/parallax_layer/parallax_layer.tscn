@@ -14,7 +14,8 @@ unique_name_in_owner = true
 script = ExtResource( 5 )
 
 [node name="BackBufferCopy" type="BackBufferCopy" parent="ParallaxScroll"]
-z_index = 4096
+z_index = 1024
+z_as_relative = false
 copy_mode = 2
 
 [node name="ObjectManager" type="Node2D" parent="ParallaxScroll"]
