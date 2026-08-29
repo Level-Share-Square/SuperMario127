@@ -60,5 +60,3 @@ func _update_scroll() -> void:
 	var scroll_scale_vector: Vector2 = Vector2(scroll_scale if cur_lock_mask.x < 1 else 1, scroll_scale if cur_lock_mask.y < 1 else 1)
 	position = (canvas_offset + scroll_offset) * scroll_scale_vector
 	scale = Vector2(1 - scroll_scale, 1 - scroll_scale)
-	print("SCROLL SCALE: " + str(scroll_scale))
-	print("SCALE: " + str(scale))
