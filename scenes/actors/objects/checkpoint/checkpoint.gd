@@ -31,8 +31,7 @@ func _object_ready():
 	if is_enabled_and_on_ground():
 		var _connect = use_area.connect("body_entered", self, "set_checkpoint")
 	
-#	CurrentLevelData.set_checkpoint_ids()
-#	id = level_object.get_ref().properties[9]
+	id = CurrentLevelData.set_checkpoint_ids()
 	if CurrentLevelData.checkpoint_data.current_checkpoint_id == id:
 		is_used = true
 	

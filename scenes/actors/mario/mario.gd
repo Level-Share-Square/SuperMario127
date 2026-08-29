@@ -1432,6 +1432,7 @@ func update_layer_info():
 	
 	var player = get_tree().current_scene
 	player.character = player.get_path_to(self)
+	player.nodes_to_load[1] = player.get_path_to(self)
 
 func handle_liquids(liquid_areas, delta):
 	if is_instance_valid(state):

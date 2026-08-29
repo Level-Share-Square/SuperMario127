@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://scenes/actors/objects/sawblade/metal_bounce.ogg" type="AudioStream" id=1]
+[ext_resource path="res://assets/sounds/sawblade_bounce.wav" type="AudioStream" id=1]
 [ext_resource path="res://scenes/actors/objects/propeller/propeller.gd" type="Script" id=2]
 [ext_resource path="res://scenes/actors/objects/propeller/propeller_frames.tres" type="SpriteFrames" id=3]
 
