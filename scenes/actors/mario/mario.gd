@@ -1429,6 +1429,9 @@ func check_liquid(liquid_type) -> bool:
 func update_layer_info():
 	get_parent().remove_child(self)
 	layer.get_ref().add_child(self)
+	
+	var player = get_tree().current_scene
+	player.character = player.get_path_to(self)
 
 func handle_liquids(liquid_areas, delta):
 	if is_instance_valid(state):
