@@ -341,7 +341,7 @@ shape = SubResource( 1 )
 script = ExtResource( 2 )
 
 [node name="Upper" type="AnimatedSprite" parent="Star"]
-z_index = -2
+z_index = -10
 frames = SubResource( 26 )
 playing = true
 
