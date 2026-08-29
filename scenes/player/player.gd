@@ -6,8 +6,8 @@ const coin_anim_fps = 12
 
 onready var tick_sound = $SharedSounds/TickSound
 onready var tick_end_sound = $SharedSounds/TickEndSound
+onready var character_node = $"%Character"
 
-export var character: NodePath
 export var camera: NodePath
 export var shared: NodePath
 export var backgrounds: NodePath
@@ -64,19 +64,19 @@ func _ready():
 		timer_manager.add_set_timer("area_timer", CurrentLevelData.current_area.header.timer, "death", true, true)
 #		vignette.visible = true
 	
-	var player_char = get_node(character)
+	var player_char = character_node
 	player_char.character = Singleton.PlayerSettings.player1_character
 	player_char.number_of_players = Singleton.PlayerSettings.number_of_players
 	
 	get_node(shared).connect("loaded_layers", self, "assign_layer_ref")
 	load_in()
 	
-	Singleton.Music.character = get_node(character)
+	Singleton.Music.character = character_node
 	#Singleton.Music.reset_music()
 	if !Singleton.Music.playing:
 		Singleton.Music.play() # make sure the music will play even if it's stopped prior to loading the player
 	
-	can_collect_coins.append(get_node(character))
+	can_collect_coins.append(character_node)
 		
 	get_shared_node().load_layer_states(CurrentLevelData.vars.layer_states[CurrentLevelData.area_id])
 	
@@ -89,7 +89,7 @@ func _ready():
 
 func assign_layer_ref():
 	if CurrentLevelData.checkpoint_data.current_checkpoint_id != -1:
-		var player_char = get_node(character)
+		var player_char = character_node
 		player_char.layer = weakref(get_node(shared).get_layer(CurrentLevelData.checkpoint_data.current_layer))
 		if player_char.layer.get_ref(): player_char.update_layer_info()
 
@@ -97,8 +97,8 @@ func _unhandled_input(event):
 	if event.is_action_pressed("reload") or event.is_action_pressed("reload_from_start") and !SceneTransitions.transitioning and (!Singleton.ModeSwitcher.is_switching or not Singleton.ModeSwitcher.visible):
 		if event.is_action_pressed("reload_from_start"):
 			CurrentLevelData.checkpoint_data.reset()
-		if !get_node(character).dead:
-			get_node(character).kill("reload")
+		if !character_node.dead:
+			character_node.kill("reload")
 		if Singleton.PlayerSettings.other_player_id != -1:
 			var _send_bytes = get_tree().multiplayer.send_bytes(JSON.print(["reload"]).to_ascii())
 
@@ -123,7 +123,7 @@ func get_shared_node() -> LevelShared:
 
 
 func get_characters() -> Array:
-	var array: Array = [get_node(character)]
+	var array: Array = [character_node]
 	return array
 
 

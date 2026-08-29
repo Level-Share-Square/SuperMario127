@@ -11,7 +11,7 @@ func _ready():
 
 func _input(event):
 	var player = get_tree().get_current_scene()
-	var character_node = player.get_node(player.character)
+	var character_node = player.character_node
 	var character2_node 
 	if Singleton.PlayerSettings.number_of_players != 1:
 		character2_node = player.get_node(player.character2)

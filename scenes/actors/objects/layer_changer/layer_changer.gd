@@ -126,7 +126,7 @@ func update_layer(body):
 		
 		var player = get_tree().current_scene
 		var shared = player.get_shared_node()
-		var character = player.get_node(player.character)
+		var character = player.character_node
 		if !shared.get_layer(layer_uuid): return
 		if move_to_index < 0 or move_to_index > shared.layers.size() - 1: move_to_index = -1
 		

@@ -1658,7 +1658,6 @@ extents = Vector2( 393, 216 )
 [node name="Player" type="Node2D"]
 script = ExtResource( 1 )
 nodes_to_load = [ NodePath("Area/LevelShared"), NodePath("Area/Character"), NodePath("CameraP1"), NodePath("Backgrounds") ]
-character = NodePath("Area/Character")
 camera = NodePath("CameraP1")
 shared = NodePath("Area/LevelShared")
 backgrounds = NodePath("Backgrounds")
@@ -2219,7 +2218,6 @@ margin_left = 241.0
 margin_top = 4.0
 margin_right = 466.0
 margin_bottom = 38.0
-rect_rotation = -5.0
 rect_scale = Vector2( 0.8, 0.8 )
 size_flags_horizontal = 4
 size_flags_vertical = 0
@@ -3112,6 +3110,7 @@ shape = SubResource( 18 )
 script = ExtResource( 21 )
 
 [node name="Character" parent="Area" instance=ExtResource( 3 )]
+unique_name_in_owner = true
 collision_exceptions = [ NodePath("") ]
 
 [node name="LevelShared" parent="Area" instance=ExtResource( 2 )]
