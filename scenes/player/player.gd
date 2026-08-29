@@ -69,6 +69,7 @@ func _ready():
 	player_char.number_of_players = Singleton.PlayerSettings.number_of_players
 	
 	get_node(shared).connect("loaded_layers", self, "assign_layer_ref")
+
 	load_in()
 	
 	Singleton.Music.character = get_node(character)

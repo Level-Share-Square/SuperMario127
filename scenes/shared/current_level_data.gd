@@ -248,7 +248,7 @@ func get_cached_object(index: int):
 	
 	var key: String = object_id_map.ids[index]
 	var path: String = "res://scenes/actors/objects/" + key + "/" + key + ".tscn"
-	
+
 	object_cache[index] = ResourceLoader.load(path)
 	return object_cache[index]
 
@@ -311,13 +311,8 @@ func get_new_star_coin_id() -> int:
 #				last_star_coin_id += 1
 #	return last_star_coin_id
 
+var seen_checkpoints: int = 0
 
 func set_checkpoint_ids():
-	var checkpoint_id = 0
-#	for area in CurrentLevelData.level_data.areas:
-#		for object in area.objects:
-#			if object.type_id == 82:
-#				object.properties.resize(10)
-#				object.properties[9] = checkpoint_id
-#				checkpoint_id += 1
-	return checkpoint_id
+	seen_checkpoints += 1
+	return seen_checkpoints

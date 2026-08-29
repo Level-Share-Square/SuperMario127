@@ -73,6 +73,8 @@ func finish_exit_animation(character: Character) -> void:
 	if not character.dead:
 		character.toggle_movement(true)
 	character.velocity = Vector2.ZERO
+	character.sprite.modulate = Color.white
+	
 	# undo collision changes 
 	character.set_collision_layer_bit(1, true)
 	character.set_inter_player_collision(true)

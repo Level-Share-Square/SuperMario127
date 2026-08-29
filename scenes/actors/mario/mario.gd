@@ -1427,8 +1427,12 @@ func check_liquid(liquid_type) -> bool:
 	return false
 
 func update_layer_info():
-	z_index = layer.get_ref().z_index - 9
-	modulate = layer.get_ref().layer_tint
+	get_parent().remove_child(self)
+	layer.get_ref().add_child(self)
+	
+	var player = get_tree().current_scene
+	player.character = player.get_path_to(self)
+	player.nodes_to_load[1] = player.get_path_to(self)
 
 func handle_liquids(liquid_areas, delta):
 	if is_instance_valid(state):

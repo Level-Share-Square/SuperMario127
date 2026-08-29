@@ -4,7 +4,7 @@ extends LevelLayer
 
 onready var parallax_scroll: ParallaxScroll = $"%ParallaxScroll"
 
-const AUTOSET_DARKEN_GROWTH = 0.003
+const AUTOSET_DARKEN_GROWTH = 0.01
 
 func load_in(layer_data: LayerData):
 	parallax_scroll.set_parallax_distance(layer_data.layer_metadata.parallax_distance)
@@ -28,6 +28,6 @@ func set_lock_axis(s_lock_axis: int) -> void:
 
 func _modulate_autoset() -> Color:
 	if parallax_scroll.parallax_distance >= 0:
-		return Color.white.darkened(0.5 + 0.45 * (1 - pow(exp(1), (- AUTOSET_DARKEN_GROWTH * parallax_scroll.parallax_distance))))
+		return Color.white.darkened(0.95 * (1 - exp(- AUTOSET_DARKEN_GROWTH * parallax_scroll.parallax_distance)))
 	else:
 		return Color.white
