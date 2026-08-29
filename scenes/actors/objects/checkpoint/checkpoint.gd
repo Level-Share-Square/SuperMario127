@@ -31,11 +31,12 @@ func _object_ready():
 	if is_enabled_and_on_ground():
 		var _connect = use_area.connect("body_entered", self, "set_checkpoint")
 	
-	id = CurrentLevelData.set_checkpoint_ids()
+	id = hash([position, CurrentLevelData.area_id])
 	if CurrentLevelData.checkpoint_data.current_checkpoint_id == id:
 		is_used = true
 	
 	CurrentLevelData.vars.checkpoints.append([id, self])
+	
 
 
 func _editor_ready():
