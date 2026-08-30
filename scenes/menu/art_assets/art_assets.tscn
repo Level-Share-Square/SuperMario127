@@ -22,7 +22,7 @@
 [ext_resource path="res://shaders/rounded_corners.gdshader" type="Shader" id=20]
 [ext_resource path="res://scenes/shared/background/foregrounds/silhouette/preview.png" type="Texture" id=21]
 [ext_resource path="res://assets/fonts/super-mario-script-3-1402.ttf" type="DynamicFontData" id=22]
-[ext_resource path="res://scenes/menu/art_assets/thumbnails/neweditor.png" type="Texture" id=23]
+[ext_resource path="res://scenes/menu/art_assets/thumbnails/bullies.png" type="Texture" id=23]
 [ext_resource path="res://assets/icons/shine.png" type="Texture" id=24]
 [ext_resource path="res://assets/icons/star_coin.png" type="Texture" id=25]
 [ext_resource path="res://assets/fonts/New Super Mario Font U.ttf" type="DynamicFontData" id=26]

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/neweditor.png-db3b23da81e37ae0b0c6110ce447b7aa.stex"
+path="res://.import/thumbnail.png-5e651d0217f5bea33c45537a67e1f5dc.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/menu/art_assets/thumbnails/neweditor.png"
-dest_files=[ "res://.import/neweditor.png-db3b23da81e37ae0b0c6110ce447b7aa.stex" ]
+source_file="res://assets/artwork/youtube/thumbnails/thumbnail.png"
+dest_files=[ "res://.import/thumbnail.png-5e651d0217f5bea33c45537a67e1f5dc.stex" ]
 
 [params]
 

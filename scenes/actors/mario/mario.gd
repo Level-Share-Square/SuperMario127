@@ -958,7 +958,7 @@ func _physics_process(delta: float) -> void:
 			sprite.animation = "idleRight" if facing_direction == 1 else "idleLeft"
 		if footstep_interval <= 0 and sprite.speed_scale > 0:
 			sound_player.play_footsteps()
-			footstep_interval = clamp(0.8 - (sprite.speed_scale / 2.5), 0.1, 1)
+			footstep_interval = clamp(0.66 - (sprite.speed_scale / 2.5), 0.1, 1)
 		footstep_interval -= delta
 	elif is_grounded():
 		if !disable_animation and movable and controlled_locally:

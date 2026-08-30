@@ -29,6 +29,7 @@ func _stop(_delta):
 	if round(character.velocity.y) == 0 and character.is_grounded():
 		character.dust_land_particles.restart()
 		character.dust_land_particles.emitting = true
+		character.sound_player.play_land_step_sound()
 		character.sprite.scale = LAND_SQUISH
 		character.squish_lerp = true
 

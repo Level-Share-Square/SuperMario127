@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/default2.wav-b72a87101e9cb7b3f033d59aaa49ef8f.sample"
+path="res://.import/SePfJumpStone_02.wav-76b31ee9257dfe0cd10003a8adbaa635.sample"
 
 [deps]
 
-source_file="res://assets/sounds/footsteps/default2.wav"
-dest_files=[ "res://.import/default2.wav-b72a87101e9cb7b3f033d59aaa49ef8f.sample" ]
+source_file="res://assets/sounds/footsteps/SePfJumpStone_02.wav"
+dest_files=[ "res://.import/SePfJumpStone_02.wav-76b31ee9257dfe0cd10003a8adbaa635.sample" ]
 
 [params]
 

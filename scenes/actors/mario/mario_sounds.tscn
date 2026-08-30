@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=2]
+[gd_scene load_steps=51 format=2]
 
 [ext_resource path="res://classes/BusGroup.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/mario/sounds.gd" type="Script" id=2]
@@ -9,8 +9,7 @@
 [ext_resource path="res://scenes/actors/mario/sounds_mario/Damage2.wav" type="AudioStream" id=7]
 [ext_resource path="res://scenes/actors/mario/sounds_mario/Stomped2.wav" type="AudioStream" id=8]
 [ext_resource path="res://scenes/actors/mario/misc_sounds.tscn" type="PackedScene" id=9]
-[ext_resource path="res://assets/sounds/footsteps/default1.wav" type="AudioStream" id=16]
-[ext_resource path="res://assets/sounds/footsteps/default2.wav" type="AudioStream" id=17]
+[ext_resource path="res://scenes/actors/mario/footstep_sounds.tscn" type="PackedScene" id=10]
 [ext_resource path="res://scenes/actors/mario/sounds_mario/Death1.wav" type="AudioStream" id=20]
 [ext_resource path="res://scenes/actors/mario/sounds_mario/LastHit2.wav" type="AudioStream" id=21]
 [ext_resource path="res://scenes/actors/mario/sounds_mario/LastHit1.wav" type="AudioStream" id=22]
@@ -23,7 +22,6 @@
 [ext_resource path="res://scenes/actors/mario/sounds_mario/Lava3.wav" type="AudioStream" id=34]
 [ext_resource path="res://scenes/actors/mario/sounds_mario/Lava1.wav" type="AudioStream" id=35]
 [ext_resource path="res://scenes/actors/mario/sounds_mario/Lava2.wav" type="AudioStream" id=36]
-[ext_resource path="res://assets/sounds/footsteps/CLANG.wav" type="AudioStream" id=38]
 [ext_resource path="res://classes/SoundGroup.gd" type="Script" id=39]
 [ext_resource path="res://scenes/actors/mario/sounds_mario/talk/STRM_M37_OHYEAR.wav" type="AudioStream" id=40]
 [ext_resource path="res://scenes/actors/mario/sounds_mario/talk/STRM_M43_TALK4.wav" type="AudioStream" id=41]
@@ -376,29 +374,6 @@ stream = ExtResource( 51 )
 volume_db = -4.0
 bus = "Voices"
 
-[node name="Footsteps" type="Node" parent="."]
-
-[node name="Default" type="Node" parent="Footsteps"]
-script = ExtResource( 39 )
-bus = "Sounds"
-
-[node name="Step1" type="AudioStreamPlayer" parent="Footsteps/Default"]
-stream = ExtResource( 16 )
-volume_db = -2.5
-bus = "Sounds"
-
-[node name="Step2" type="AudioStreamPlayer" parent="Footsteps/Default"]
-stream = ExtResource( 17 )
-volume_db = -2.5
-bus = "Sounds"
-
-[node name="Metal" type="Node" parent="Footsteps"]
-script = ExtResource( 39 )
-bus = "Sounds"
-
-[node name="Step1" type="AudioStreamPlayer" parent="Footsteps/Metal"]
-stream = ExtResource( 38 )
-volume_db = -7.0
-bus = "Sounds"
+[node name="Footsteps" parent="." instance=ExtResource( 10 )]
 
 [node name="OtherSounds" parent="." instance=ExtResource( 9 )]

@@ -22,12 +22,16 @@ func state_changed(new_state: EnemyState) -> void:
 
 func area_entered(colliding_area: Area2D) -> void:
 	var bounce_dir: int = sign(global_position.x - colliding_area.global_position.x)
-	enemy.velocity = bounce_velocity * Vector2(bounce_dir, 1)
+	var x_vel: float = bounce_velocity.x * bounce_dir
+	if is_instance_valid(colliding_area.owner) and colliding_area.owner is EnemyBase:
+		if abs(colliding_area.owner.velocity.x) > abs(enemy.velocity.x):
+			x_vel += colliding_area.owner.velocity.x
+		else:
+			x_vel += enemy.velocity.x
+	enemy.set_deferred("velocity", Vector2(x_vel, bounce_velocity.y))
 	emit_signal("bounced")
 	
-	if is_instance_valid(colliding_area.owner) and colliding_area.owner is EnemyBase:
-		if abs(colliding_area.owner.velocity.x) > enemy.velocity.x:
-			enemy.velocity.x += colliding_area.owner.velocity.x
+
 
 
 func check_collisions() -> void:

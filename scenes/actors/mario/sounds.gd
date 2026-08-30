@@ -25,6 +25,8 @@ onready var angry_sounds = $VoiceEffects/AngrySounds
 onready var gp_hit = $OtherSounds/GPHit
 onready var gp_windup = $OtherSounds/GPWindup
 onready var skid = $OtherSounds/Skid
+onready var jump_step = $OtherSounds/JumpStep
+onready var land_step = $OtherSounds/LandStep
 onready var jump_voiceless = $OtherSounds/Jump
 onready var double_jump_voiceless = $OtherSounds/DoubleJump
 onready var triple_jump_voiceless = $OtherSounds/TripleJump
@@ -94,6 +96,14 @@ func play_jump_sound():
 func play_jump_sound_voiceless():
 	if ready:
 		jump_voiceless.play()
+
+func play_jump_step_sound():
+	if ready:
+		jump_step.play()
+
+func play_land_step_sound():
+	if ready:
+		land_step.play()
 
 func play_double_jump_sound():
 	if ready:

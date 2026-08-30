@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://classes/SoundGroup.gd" type="Script" id=1]
+[ext_resource path="res://assets/sounds/footsteps/CLANG.wav" type="AudioStream" id=2]
+[ext_resource path="res://assets/sounds/footsteps/SePfStepStone02.wav" type="AudioStream" id=3]
+[ext_resource path="res://assets/sounds/footsteps/SePfStepStone01.wav" type="AudioStream" id=4]
+[ext_resource path="res://classes/sound_pitcher.gd" type="Script" id=5]
+
+[node name="Footsteps" type="Node"]
+
+[node name="Default" type="Node" parent="."]
+script = ExtResource( 1 )
+bus = "Sounds"
+
+[node name="Step1" type="AudioStreamPlayer" parent="Default"]
+stream = ExtResource( 4 )
+volume_db = -2.5
+bus = "Sounds"
+script = ExtResource( 5 )
+
+[node name="Step2" type="AudioStreamPlayer" parent="Default"]
+stream = ExtResource( 3 )
+volume_db = -2.5
+bus = "Sounds"
+script = ExtResource( 5 )
+
+[node name="Metal" type="Node" parent="."]
+script = ExtResource( 1 )
+bus = "Sounds"
+
+[node name="Step1" type="AudioStreamPlayer" parent="Metal"]
+stream = ExtResource( 2 )
+volume_db = -7.0
+bus = "Sounds"
+script = ExtResource( 5 )
+min_pitch = 0.9
+max_pitch = 1.1

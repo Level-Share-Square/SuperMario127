@@ -66,6 +66,7 @@ func _start(delta):
 		if character.current_jump == 0:
 			if !dive_buffer > 0:
 				sound_player.play_jump_sound()
+				sound_player.play_jump_step_sound()
 			if character.character == 0:
 				character.velocity.y = -jump_power
 			else:
@@ -75,6 +76,7 @@ func _start(delta):
 			character.current_jump = 1
 		elif character.current_jump == 1:
 			sound_player.play_double_jump_sound()
+			sound_player.play_jump_step_sound()
 			if character.character == 0:
 				character.velocity.y = -double_jump_power
 			else:
@@ -84,6 +86,7 @@ func _start(delta):
 			character.current_jump = 2
 		elif character.current_jump == 2:
 			sound_player.play_triple_jump_sound()
+			sound_player.play_jump_step_sound()
 			if character.character == 0:
 				character.velocity.y = -triple_jump_power
 			else:

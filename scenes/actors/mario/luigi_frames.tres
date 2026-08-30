@@ -1178,7 +1178,7 @@ animations = [ {
 "frames": [ SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ), SubResource( 30 ) ],
 "loop": true,
 "name": "movingLeft",
-"speed": 18.0
+"speed": 34.0
 }, {
 "frames": [ SubResource( 96 ), SubResource( 97 ), SubResource( 98 ), SubResource( 98 ), SubResource( 98 ), SubResource( 99 ), SubResource( 100 ), SubResource( 101 ), SubResource( 102 ), SubResource( 102 ), SubResource( 102 ), SubResource( 103 ) ],
 "loop": true,
@@ -1188,7 +1188,7 @@ animations = [ {
 "frames": [ SubResource( 31 ), SubResource( 32 ), SubResource( 33 ), SubResource( 34 ), SubResource( 35 ), SubResource( 36 ), SubResource( 37 ), SubResource( 38 ), SubResource( 39 ), SubResource( 40 ), SubResource( 41 ), SubResource( 42 ) ],
 "loop": true,
 "name": "movingRight",
-"speed": 18.0
+"speed": 34.0
 }, {
 "frames": [ SubResource( 191 ), SubResource( 192 ), SubResource( 193 ), SubResource( 194 ), SubResource( 195 ), SubResource( 196 ), SubResource( 197 ), SubResource( 198 ), SubResource( 199 ), SubResource( 200 ), SubResource( 201 ), SubResource( 202 ), SubResource( 203 ) ],
 "loop": false,

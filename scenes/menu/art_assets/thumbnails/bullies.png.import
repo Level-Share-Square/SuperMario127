@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/neweditor.png-94d9aadfac27a187b5a01791375905ba.stex"
+path="res://.import/bullies.png-b8d024c540d56a4a97532140c1ad5be4.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/artwork/youtube/thumbnails/neweditor.png"
-dest_files=[ "res://.import/neweditor.png-94d9aadfac27a187b5a01791375905ba.stex" ]
+source_file="res://scenes/menu/art_assets/thumbnails/bullies.png"
+dest_files=[ "res://.import/bullies.png-b8d024c540d56a4a97532140c1ad5be4.stex" ]
 
 [params]
 
