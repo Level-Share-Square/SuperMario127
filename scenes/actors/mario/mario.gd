@@ -48,6 +48,7 @@ onready var ground_check_dive : RayCast2D = $GroundCheckDive
 onready var left_check : RayCast2D = $LeftCheck
 onready var right_check : RayCast2D = $RightCheck
 onready var slope_stop_check : RayCast2D = $SlopeStopCheck
+onready var slope_angle_check : RayCast2D = $SlopeAngleCheck
 onready var player_collision : Area2D = $PlayerCollision
 onready var enemy_collision: Area2D = $EnemyCollision
 onready var water_detector : Area2D = $WaterDetector
@@ -91,7 +92,7 @@ onready var collected_key_rays : ColorRect = $CollectedKey/VectorRays # same as 
 onready var death_sprite : AnimatedSprite = $DeathSprite
 onready var death_fludd_sprite : AnimatedSprite = $DeathSprite/Fludd
 onready var vanish_detector : Area2D = $VanishDetector
-onready var raycasts = [ground_check, ground_check_dive, left_check, right_check, slope_stop_check]
+onready var raycasts = [ground_check, ground_check_dive, left_check, right_check, slope_stop_check, slope_angle_check]
 onready var heal_timer = $HealTimer
 onready var heal_tick_timer = $HealTickTimer
 onready var ground_collider_enable_timer = $GroundColliderEnableTimer
@@ -855,7 +856,7 @@ func _physics_process(delta: float) -> void:
 	
 	# Gravity
 	# Twice to work the same as 120fps
-	if movable:
+	if movable and not is_grounded():
 		velocity.y += gravity * gravity_scale
 		velocity.y += gravity * gravity_scale
 	
@@ -989,11 +990,11 @@ func _physics_process(delta: float) -> void:
 			sprite_offset = Vector2(rad2deg(sprite_rotation) / 10, -abs(rad2deg(sprite_rotation) / 10))
 
 			# Translate velocity X to Y
-			if normal.y != 0: # Avoid division by zero (what)
-				var add = (velocity.x * normal.x / normal.y) * -1
-				if add < 0: # upwards velocity, don't allow that
-					add = 0
-				velocity.y += add
+#			if normal.y != 0: # Avoid division by zero (what)
+#				var add = (velocity.x * normal.x / normal.y) * -1
+#				if add < 0: # upwards velocity, don't allow that
+#					add = 0
+#				velocity.y += add
 			
 			if abs(sprite_rotation) >= 80:
 				sprite_rotation = 0
@@ -1051,13 +1052,16 @@ func _physics_process(delta: float) -> void:
 			sprite.flip_h = false
 	
 	# Set up snap
+	slope_angle_check.position.x = velocity.x * delta * 2
+	slope_angle_check.force_raycast_update()
+	
+	snap = Vector2.ZERO
 	if is_instance_valid(state) and state.disable_snap:
 		snap = Vector2.ZERO
-	elif (left_check.is_colliding() or right_check.is_colliding()) and velocity.y > 0:
-		var normal = ground_check.get_collision_normal()
-		snap = Vector2(0, 6 if normal.x == 0 else 12)
-	else:
-		snap = Vector2.ZERO
+	elif slope_angle_check.is_colliding() and velocity.y >= -10:
+		var normal = slope_angle_check.get_collision_normal()
+		var should_snap: bool = abs(normal.x) < deg2rad(46)
+		snap = Vector2(0, 6 if should_snap else 0)
 	
 	# Switch nozzle
 	if (inputs[8][1] and CurrentLevelData.vars.nozzles_collected.size() > 1
@@ -1145,6 +1149,9 @@ func _physics_process(delta: float) -> void:
 		update_collision(crusher_detector.get_overlapping_bodies().size() <= 0)
 		
 		velocity = move_and_slide_with_snap(velocity, snap, Vector2.UP, true, 4, deg2rad(46))
+		if is_grounded():
+			velocity.y = min(0, velocity.y)
+		
 		## CLIPPING CODE
 		var ray_check: Dictionary = get_world_2d().direct_space_state.intersect_ray(last_position, global_position, [self], 1)
 		var ray_colliding: bool = not ray_check.empty()
@@ -1158,10 +1165,6 @@ func _physics_process(delta: float) -> void:
 			collided_last_frame = slide_count > 0
 	else:
 		collided_last_frame = false
-		
-	# fix ground magnet mario
-	if is_grounded() and last_velocity.y < 0 and !is_on_ceiling() and !is_in_platform:
-		velocity.y = last_velocity.y * 0.95
 	
 	# check if mario will collide w/ anything if he continues moving
 	var motion: Vector2 = global_position - last_position

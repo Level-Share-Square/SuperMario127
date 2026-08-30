@@ -1678,7 +1678,7 @@ shader = ExtResource( 86 )
 shader_param/ray_count = 4
 shader_param/ray_distance = 0.4
 shader_param/ray_seperation_degrees = 22.0
-shader_param/rotation = 0.906321
+shader_param/rotation = 0.421906
 
 [sub_resource type="RectangleShape2D" id=85]
 extents = Vector2( 8, 18 )
@@ -1687,7 +1687,6 @@ extents = Vector2( 8, 18 )
 z_index = -9
 collision_layer = 2
 collision_mask = 81
-collision/safe_margin = 0.5
 script = ExtResource( 3 )
 bottom_pos_offset = Vector2( 0, 20 )
 bottom_pos_dive_offset = Vector2( 0, 3 )
@@ -1968,15 +1967,13 @@ opacity = Color( 0, 0, 0, 0.741176 )
 
 [node name="Fludd" type="AnimatedSprite" parent="Sprite"]
 frames = ExtResource( 48 )
-animation = "movingRight"
-frame = 3
+animation = "idleRight"
 script = ExtResource( 63 )
 
 [node name="Wings" type="AnimatedSprite" parent="Sprite"]
 visible = false
 frames = ExtResource( 65 )
-animation = "movingRight"
-frame = 3
+animation = "idleRight"
 script = ExtResource( 63 )
 
 [node name="Water2" type="AnimatedSprite" parent="Sprite"]
@@ -2097,6 +2094,7 @@ shape = SubResource( 107 )
 
 [node name="FallState" type="Node" parent="States"]
 script = ExtResource( 4 )
+disable_snap = false
 
 [node name="JumpState" type="Node" parent="States"]
 script = ExtResource( 5 )
@@ -2453,6 +2451,14 @@ enabled = true
 cast_to = Vector2( 0, 7.5 )
 collision_mask = 65617
 
+[node name="SlopeAngleCheck" type="RayCast2D" parent="."]
+modulate = Color( 0.247059, 0.0666667, 1, 1 )
+position = Vector2( 0, 21 )
+z_index = 126
+enabled = true
+cast_to = Vector2( 0, 48 )
+collision_mask = 65617
+
 [node name="LeftCheck" type="RayCast2D" parent="."]
 visible = false
 position = Vector2( -8, 0 )
@@ -2533,7 +2539,7 @@ playing = true
 [node name="Recolorable" type="AnimatedSprite" parent="CollectedShine"]
 visible = false
 frames = ExtResource( 61 )
-frame = 4
+frame = 1
 script = ExtResource( 63 )
 
 [node name="ShineParticles" type="Particles2D" parent="CollectedShine"]
