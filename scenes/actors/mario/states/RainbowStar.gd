@@ -36,6 +36,8 @@ func _start(_delta):
 
 func _update(delta):
 	if character.is_grounded():
+		if override_rotation:
+			character.sound_player.play_land_step_sound()
 		override_rotation = false
 		if character.facing_direction == 1:
 			character.sprite.animation = "starRunRight"
@@ -57,13 +59,17 @@ func _update(delta):
 		character.position.x += character.facing_direction * 3
 		if !character.is_grounded() and had_jumped:
 			character.sound_player.play_wall_jump_sound_voiceless()
+			character.sound_player.play_wall_jump_step_sound()
 			character.position.y -= 3
 			character.velocity.y = -wall_jump_power
 			jumping = false
 			current_speed = run_speed * 1.3
+		elif !character.is_grounded():
+			character.sound_player.play_wall_jump_step_sound()
 	
 	if jump_buffer > 0 and ledge_buffer > 0:
 		character.sound_player.play_dive_sound()
+		character.sound_player.play_jump_step_sound()
 		jump_buffer = 0
 		character.velocity.y = -jump_power
 		character.position.y -= 3

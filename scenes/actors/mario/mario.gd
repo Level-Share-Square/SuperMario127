@@ -749,6 +749,22 @@ func damage(amount : int = 1, cause : String = "hit", frames : int = 180) -> voi
 		
 		invulnerable = true if frames != 0 else false
 		invulnerable_frames = frames
+		
+		if cause != "lava":
+			match cause:
+				"zap":
+					sound_player.play_zap_damage_sound()
+					sound_player.play_damage_sound()
+				"sharp":
+					sound_player.play_sharp_damage_sound()
+					sound_player.play_damage_sound()
+				"saw":
+					sound_player.play_saw_damage_sound()
+					sound_player.play_damage_sound()
+				_:
+					sound_player.play_damage_sound()
+			sound_player.play_hit_sound()
+		
 		if health <= 0:
 			health = 0 # Fix -1 bug
 			sound_player.play_last_hit_sound()
@@ -756,9 +772,6 @@ func damage(amount : int = 1, cause : String = "hit", frames : int = 180) -> voi
 		else:
 			if cause == "crushed":
 				sound_player.play_last_hit_voice_sound()
-			elif cause != "lava":
-				sound_player.play_damage_sound()
-				sound_player.play_hit_sound()
 				
 
 func slow_heal(shards : int = 1, tick : float = 1, time : float = 1, can_overheal : bool = false) -> void:
@@ -1245,27 +1258,6 @@ func kill(cause: String) -> void:
 				yield(get_tree().create_timer(0.55), "timeout")
 				sound_player.play_death_sound()
 				yield(get_tree().create_timer(0.75), "timeout")
-			"hit", "lava", "crushed":
-				toggle_movement(false)
-				cutout_in = cutout_death
-				sprite.visible = false
-				death_sprite.z_index = 127
-				death_sprite.global_position = sprite.global_position
-				death_sprite.reset_physics_interpolation()
-				
-				if cause == "lava":
-					burn_particles.z_index = 127
-					burn_particles.global_position = Vector2(sprite.global_position.x, sprite.global_position.y)
-					burn_particles.reset_physics_interpolation()
-					burn_particles.emitting = true
-				
-				death_sprite.play_anim()
-				yield(get_tree().create_timer(0.55), "timeout")
-				if cause != "lava":
-					sound_player.play_death_sound()
-				else:
-					sound_player.play_lava_hurt_sound()
-				yield(get_tree().create_timer(0.75), "timeout")
 			"timer":
 				sound_player.play_last_hit_sound()
 				toggle_movement(false)
@@ -1300,6 +1292,27 @@ func kill(cause: String) -> void:
 				death_sprite.play_anim()
 				yield(get_tree().create_timer(0.55), "timeout")
 				sound_player.play_death_sound()
+				yield(get_tree().create_timer(0.75), "timeout")
+			_:
+				toggle_movement(false)
+				cutout_in = cutout_death
+				sprite.visible = false
+				death_sprite.z_index = 127
+				death_sprite.global_position = sprite.global_position
+				death_sprite.reset_physics_interpolation()
+				
+				if cause == "lava":
+					burn_particles.z_index = 127
+					burn_particles.global_position = Vector2(sprite.global_position.x, sprite.global_position.y)
+					burn_particles.reset_physics_interpolation()
+					burn_particles.emitting = true
+				
+				death_sprite.play_anim()
+				yield(get_tree().create_timer(0.55), "timeout")
+				if cause != "lava":
+					sound_player.play_death_sound()
+				else:
+					sound_player.play_lava_hurt_sound()
 				yield(get_tree().create_timer(0.75), "timeout")
 		
 		if CurrentLevelData.area_id != CurrentLevelData.checkpoint_data.current_area:

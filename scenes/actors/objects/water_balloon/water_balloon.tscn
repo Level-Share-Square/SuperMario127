@@ -378,13 +378,13 @@ recolorable_texture = ExtResource( 7 )
 
 [node name="Pop" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 3 )
-volume_db = 6.0
+volume_db = 4.5
 bus = "Sounds"
 script = ExtResource( 8 )
 
 [node name="Refill" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 9 )
-volume_db = -5.0
+volume_db = -3.5
 bus = "Sounds"
 
 [node name="Sprite" type="Sprite" parent="."]

@@ -53,6 +53,7 @@ func _start(_delta):
 	character.position.y -= 3
 	disable_turning = true
 	sound_player.play_double_jump_sound()
+	sound_player.play_backflip_sound()
 	if character.facing_direction == -1:
 		character.anim_player.play("backflip")
 	else:

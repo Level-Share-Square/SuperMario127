@@ -1678,7 +1678,7 @@ shader = ExtResource( 86 )
 shader_param/ray_count = 4
 shader_param/ray_distance = 0.4
 shader_param/ray_seperation_degrees = 22.0
-shader_param/rotation = 2.3647
+shader_param/rotation = 0.906321
 
 [sub_resource type="RectangleShape2D" id=85]
 extents = Vector2( 8, 18 )
@@ -1969,12 +1969,14 @@ opacity = Color( 0, 0, 0, 0.741176 )
 [node name="Fludd" type="AnimatedSprite" parent="Sprite"]
 frames = ExtResource( 48 )
 animation = "movingRight"
+frame = 3
 script = ExtResource( 63 )
 
 [node name="Wings" type="AnimatedSprite" parent="Sprite"]
 visible = false
 frames = ExtResource( 65 )
 animation = "movingRight"
+frame = 3
 script = ExtResource( 63 )
 
 [node name="Water2" type="AnimatedSprite" parent="Sprite"]
@@ -2389,6 +2391,7 @@ shape = SubResource( 145 )
 position = Vector2( 0, 6 )
 collision_layer = 131074
 collision_mask = 17
+priority = 1.0
 script = ExtResource( 58 )
 character_path = NodePath("..")
 normal_shape = NodePath("../EnemyCollision/Normal")
@@ -2404,6 +2407,7 @@ disabled = true
 position = Vector2( 0, 6 )
 collision_layer = 131074
 collision_mask = 17
+priority = 1.0
 script = ExtResource( 58 )
 character_path = NodePath("..")
 normal_shape = NodePath("../EnemyCollision/Normal")
@@ -2529,7 +2533,7 @@ playing = true
 [node name="Recolorable" type="AnimatedSprite" parent="CollectedShine"]
 visible = false
 frames = ExtResource( 61 )
-frame = 8
+frame = 4
 script = ExtResource( 63 )
 
 [node name="ShineParticles" type="Particles2D" parent="CollectedShine"]

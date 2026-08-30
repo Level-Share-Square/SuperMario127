@@ -43,8 +43,9 @@ func kill(body):
 		if body.global_position.y > (global_position.y - 4):
 			body.velocity.y = 55
 		if !body.invulnerable:
-			body.damage()
+			body.damage(1, "sharp")
 		else:
+			body.sound_player.play_sharp_damage_sound()
 			body.sound_player.play_damage_sound()
 			body.sound_player.play_hit_sound()
 

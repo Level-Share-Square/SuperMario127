@@ -4,6 +4,7 @@ onready var area = $Area2D
 onready var sprite = $AnimatedSprite
 onready var animation_player = $AnimationPlayer
 onready var delete_timer = $DeleteTimer
+onready var zap_sound = $Zap
 
 var dead
 	
@@ -24,8 +25,9 @@ func kill(body):
 		if body.global_position.y > (global_position.y - 4):
 			body.velocity.y = 55
 		if !body.invulnerable:
-			body.damage()
+			body.damage(1, "zap")
 		else:
+			body.sound_player.play_zap_damage_sound()
 			body.sound_player.play_damage_sound()
 			body.sound_player.play_hit_sound()
 

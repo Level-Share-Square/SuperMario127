@@ -10,6 +10,9 @@ onready var detect_area = $PlayerDetectArea
 onready var undetect_area = $PlayerUndetectArea
 
 onready var knockback_sound = $Knockback
+onready var appear_sound = $Appear
+onready var hide_sound = $Hide
+
 
 var character : Character
 var facing_direction := 1
@@ -123,14 +126,19 @@ func _physics_process(delta):
 		shy = false
 	
 	if shy:
+		if not last_shy:
+			hide_sound.play()
+			
 		frame = increment_towards(frame, 0, 0.5)
 		sprite.self_modulate = lerp(sprite.self_modulate, Color(1, 1, 1, 0.5), delta * 8)
 		sine_speed = lerp(sine_speed, 2.0, delta * 8)
 		follow_speed = lerp(follow_speed, 0.0, delta * 8)
 	else:
 		var laugh_sound = get_tree().current_scene.get_node("SharedSounds").get_node("LaughSound")
-		if last_shy and !laugh_sound.playing and randi() % 15 == 2:
-			get_tree().current_scene.get_node("SharedSounds").PlaySound("LaughSound")
+		if last_shy:
+			appear_sound.play()
+			if !laugh_sound.playing and randi() % 15 == 2:
+				play_shared_sound("LaughSound")
 		
 		frame = increment_towards(frame, active_frame, 0.5)
 		sprite.self_modulate = lerp(sprite.self_modulate, Color(1, 1, 1, 1), delta * 8)

@@ -131,7 +131,7 @@ func get_completed_mission_count() -> int:
 
 
 func all_missions_completed() -> bool:
-	return _completed_missions.size() == get_total_mission_count()
+	return _completed_missions.size() >= get_total_mission_count()
 
 
 func get_total_star_coin_count() -> int:
@@ -143,7 +143,7 @@ func get_collected_star_coin_count() -> int:
 
 
 func all_star_coins_collected() -> bool:
-	return _collected_star_coins.size() == get_total_star_coin_count()
+	return _collected_star_coins.size() >= get_total_star_coin_count()
 	
 
 func get_completed_missions() -> Array:

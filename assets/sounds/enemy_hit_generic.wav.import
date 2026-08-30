@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/enemy_hit.wav-678f843e85152be3da86943cf523fd4e.sample"
+path="res://.import/enemy_hit_generic.wav-444cdc4fa588e2d6384f091821b126c4.sample"
 
 [deps]
 
-source_file="res://assets/sounds/enemy_hit.wav"
-dest_files=[ "res://.import/enemy_hit.wav-678f843e85152be3da86943cf523fd4e.sample" ]
+source_file="res://assets/sounds/enemy_hit_generic.wav"
+dest_files=[ "res://.import/enemy_hit_generic.wav-444cdc4fa588e2d6384f091821b126c4.sample" ]
 
 [params]
 

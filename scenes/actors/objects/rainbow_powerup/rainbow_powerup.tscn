@@ -1,6 +1,5 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=22 format=2]
 
-[ext_resource path="res://assets/sounds/powerup_collect.wav" type="AudioStream" id=1]
 [ext_resource path="res://scenes/actors/objects/rainbow_powerup/star.png" type="Texture" id=2]
 [ext_resource path="res://scenes/actors/objects/rainbow_powerup/rainbow_powerup.gd" type="Script" id=3]
 [ext_resource path="res://scenes/actors/mario/particles/sparkles.png" type="Texture" id=4]
@@ -222,11 +221,6 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource( 16 )
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 1 )
-volume_db = -7.0
-bus = "Sounds"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/collect = SubResource( 17 )

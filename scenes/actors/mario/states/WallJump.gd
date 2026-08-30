@@ -57,6 +57,7 @@ func _start(_delta):
 	direction_on_wj = -character.direction_on_stick
 	wall_jump_timer = 0.45
 	sound_player.play_wall_jump_sound()
+	sound_player.play_wall_jump_step_sound()
 	character.jump_animation = 0
 	character.is_wj_chained = true
 

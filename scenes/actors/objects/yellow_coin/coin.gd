@@ -12,6 +12,7 @@ onready var visibility_enabler: VisibilityEnabler2D = $VisibilityEnabler2D
 onready var bottom_pos = $KinematicBody2D/BottomPos
 
 export var coins : int = 1
+export var sound_name: String = "CoinSound"
 
 var collected := false
 var physics := false
@@ -37,7 +38,7 @@ func collect(body, is_shell = false):
 		if body:
 			body.heal(1 if coins == 1 else 15)
 		
-		get_tree().current_scene.get_node("SharedSounds").PlaySound("CoinSound")
+		play_shared_sound(sound_name)
 		
 		collected = true
 		physics = false

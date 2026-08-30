@@ -1,17 +1,21 @@
+class_name SharedSounds
 extends Node
 
 onready var play_sounds = [
 	["CoinSound", $CoinSound, false],
+	["BlueCoinSound", $BlueCoinSound, false],
 	["PurpleSound", $PurpleSound, false],
 	["LaughSound", $LaughSound, false],
 	["BlastLaunchSound", $BlastSound, false],
-	["BlastSeekSound", $BlastSeekSound, false]
+	["BlastSeekSound", $BlastSeekSound, false],
+	["SwitchOnSound", $SwitchOnSound, false],
+	["SwitchOffSound", $SwitchOffSound, false]
 ]
 
 onready var saw_sound : AudioStreamPlayer2D = $SawSound
 onready var blaster_sound : AudioStreamPlayer2D = $BlastSound
 
-func PlaySound(sound_name):
+func play_sound(sound_name):
 	for array in play_sounds:
 		if array[0] == sound_name:
 			array[2] = true

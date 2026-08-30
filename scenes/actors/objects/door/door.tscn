@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scenes/actors/objects/door/palettes/2/doorframes.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/actors/objects/door/door.gd" type="Script" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://scenes/actors/objects/door/palettes/3/doorframes.tres" type="SpriteFrames" id=6]
 [ext_resource path="res://scenes/actors/objects/door/palettes/4/doorframes.tres" type="SpriteFrames" id=7]
 [ext_resource path="res://scenes/actors/objects/door/palettes/1/doorframes.tres" type="SpriteFrames" id=8]
+[ext_resource path="res://classes/sound_pitcher_directional.gd" type="Script" id=9]
 [ext_resource path="res://scenes/actors/objects/star_door/single_enter_area.tres" type="Shape2D" id=10]
 [ext_resource path="res://classes/teleport/warp_helper.gd" type="Script" id=11]
 
@@ -29,10 +30,11 @@ script = ExtResource( 11 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = ExtResource( 10 )
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 5 )
-volume_db = -8.0
+volume_db = 4.0
 bus = "Sounds"
+script = ExtResource( 9 )
 
 [node name="ZIndex" type="Node2D" parent="."]
 z_index = -10

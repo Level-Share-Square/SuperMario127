@@ -5,6 +5,9 @@ onready var area_shape = $Area2D/CollisionShape2D
 onready var sprite = $AnimatedSprite
 onready var sprite_1 = $AnimatedSprite/Color1
 onready var sprite_2 = $AnimatedSprite/Color2
+onready var flame_sound = $Flame
+onready var flame_volume: float = flame_sound.volume_db
+onready var sound_tween = $SoundTween
 
 var retracted_time = 2.5
 var burning_time = 2.5
@@ -27,6 +30,8 @@ func _register_properties():
 	register_property(8, "offset", offset, true)
 
 func _object_ready():
+	flame_sound.volume_db = -80
+	
 	burning = !reversed
 	next_state_timer = burning_time if !reversed else retracted_time
 	
@@ -43,6 +48,15 @@ func _object_physics_process(delta):
 		if next_state_timer <= 0:
 			next_state_timer = retracted_time if burning else burning_time
 			burning = !burning
+			sound_tween.stop_all()
+			sound_tween.interpolate_property(flame_sound, "volume_db",
+				flame_sound.volume_db,
+				flame_volume if burning else -80,
+				1.0, 
+				Tween.TRANS_QUAD,
+				Tween.EASE_OUT
+			)
+			sound_tween.start()
 	
 	area_shape.disabled = !burning or !is_enabled_and_on_ground()
 	

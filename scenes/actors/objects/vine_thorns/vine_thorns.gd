@@ -64,8 +64,4 @@ func _physics_process(delta):
 			body.knockback(global_position)
 			if body.global_position.y > (global_position.y - 4):
 				body.velocity.y = 55
-			body.damage()
-			body.sound_player.play_damage_sound()
-			body.sound_player.play_hit_sound()
-	
-	
+			body.damage(1, "sharp")

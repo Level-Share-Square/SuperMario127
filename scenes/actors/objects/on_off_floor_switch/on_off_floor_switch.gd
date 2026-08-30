@@ -10,7 +10,6 @@ export var top_point : Vector2
 onready var switch = $Switch
 onready var anim_player = $AnimationPlayer
 onready var press_area = $PressArea
-onready var beep_sound = $Beep
 onready var press_sound = $Press
 
 var switch_mode : bool = true
@@ -26,11 +25,10 @@ func _register_properties():
 	set_property_override("switch_mode", PropertyTab.OverrideTypes.BOOL_ALIAS, {true: "On", false: "Off"})
 
 func _ready():
-	beep_sound.volume_db = -80
 	if mode == 1:
 		press_sound.volume_db = -80
 	else:
-		press_sound.volume_db = 0
+		press_sound.volume_db = -8
 
 	rotation = 0
 	switch.region_rect.position.y = palette * 21
@@ -49,7 +47,9 @@ func press(hit_pos : Vector2) -> void:
 		pressed = true
 		anim_player.play("press", -1, 2.0)
 		self_activated = true
-		beep_sound.volume_db = 0
+		
+		play_shared_sound("SwitchOnSound")
+		
 		CurrentLevelData.vars.toggle_switch_state(palette)#set_switch_state(palette, switch_mode)
 		boost_timer = 0.175
 

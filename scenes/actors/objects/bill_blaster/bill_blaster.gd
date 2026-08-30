@@ -90,9 +90,9 @@ func _object_physics_process(delta):
 			scale.x = prev_scale_x
 			
 			if visibility_notifier.is_on_screen():
-				get_tree().current_scene.get_node("SharedSounds").PlaySound("BlastLaunchSound")
+				play_shared_sound("BlastLaunchSound")
 				if chase:
-					get_tree().current_scene.get_node("SharedSounds").PlaySound("BlastSeekSound")
+					play_shared_sound("BlastSeekSound")
 			
 		elif spawn_timer <= 0:
 			spawn_timer = wait_time

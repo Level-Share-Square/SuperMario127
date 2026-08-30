@@ -25,7 +25,7 @@ func collect(body):
 		var player_id = 1
 		if body.name == "Character":
 			player_id = 0
-		get_tree().current_scene.get_node("SharedSounds").PlaySound("PurpleSound")
+		play_shared_sound("PurpleSound")
 		collected = true
 		animation_player.play("collect")
 

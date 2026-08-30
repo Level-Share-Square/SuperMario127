@@ -32,6 +32,7 @@ resource_local_to_scene = true
 [node name="BlueCoin" instance=ExtResource( 1 )]
 internal_id = "blue_coin"
 coins = 5
+sound_name = "BlueCoinSound"
 
 [node name="Particles" parent="KinematicBody2D" index="0"]
 frames = ExtResource( 2 )

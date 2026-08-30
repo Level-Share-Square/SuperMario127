@@ -81,7 +81,7 @@ func change_setting(key: String, new_value):
 
 ## related to various hotkeys
 var last_master_volume: float = 75
-var last_non_muted_bgm: float = 100
+var last_non_muted_bgm: float = 70
 var last_non_full_scale: int = 0
 
 func _unhandled_input(event):
@@ -96,7 +96,7 @@ func _unhandled_input(event):
 			LocalSettings.change_setting("Audio", "master_volume", last_master_volume - 5)
 		
 	if event.is_action_pressed("mute"):
-		var current_vol = LocalSettings.load_setting("Audio", "bgm_volume", 100)
+		var current_vol = LocalSettings.load_setting("Audio", "bgm_volume", 70)
 		LocalSettings.change_setting("Audio", "bgm_volume", 0 if current_vol > 0 else last_non_muted_bgm)
 
 

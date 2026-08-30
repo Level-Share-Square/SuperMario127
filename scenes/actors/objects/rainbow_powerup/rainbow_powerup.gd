@@ -1,7 +1,6 @@
 extends GameObject
 
 onready var animated_sprite = $AnimatedSprite
-onready var sound = $AudioStreamPlayer
 onready var area = $Area2D
 onready var animation_player = $AnimationPlayer
 onready var particles = $Particles2D
@@ -35,7 +34,7 @@ func collect(body):
 		body.set_powerup(powerup_node, powerup_music, duration)
 		if duration > 0.5:
 			body.sound_player.play_powerup_sound()
-			body.sound_player.play_powerup_jingle()
+			body.sound_player.play_rainbow_star_sound()
 		animation_player.play("collect", -1, 2)
 		respawn_timer = 10.0
 		collected = true

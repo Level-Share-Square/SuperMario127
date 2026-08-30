@@ -4,7 +4,7 @@ extends Teleporter
 
 onready var tween : Tween = $Tween
 onready var door_sprite : AnimatedSprite = $DoorSprite
-onready var audio_player : AudioStreamPlayer = $AudioStreamPlayer
+onready var audio_player = $AudioStreamPlayer
 onready var collision_width : float = $Area2D/CollisionShape2D.shape.extents.x
 
 export var open_audio : AudioStream

@@ -1,10 +1,14 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://scenes/actors/objects/boo/boo.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/objects/boo/boo.png" type="Texture" id=2]
-[ext_resource path="res://assets/sounds/enemy_hit.wav" type="AudioStream" id=3]
+[ext_resource path="res://assets/sounds/koopa_hit.wav" type="AudioStream" id=3]
 [ext_resource path="res://scenes/actors/mario/particles/shine_sparkles.png" type="Texture" id=4]
 [ext_resource path="res://assets/sounds/bump.wav" type="AudioStream" id=5]
+[ext_resource path="res://assets/sounds/enemy_hit_generic.wav" type="AudioStream" id=6]
+[ext_resource path="res://assets/sounds/boo_appear.wav" type="AudioStream" id=7]
+[ext_resource path="res://assets/sounds/boo_hide.wav" type="AudioStream" id=8]
+[ext_resource path="res://classes/sound_pitcher_directional.gd" type="Script" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 12, 8 )
@@ -173,15 +177,29 @@ frames = SubResource( 10 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/die = SubResource( 11 )
 
-[node name="Knockback" type="AudioStreamPlayer" parent="."]
+[node name="Knockback" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 5 )
-volume_db = -18.0
-bus = "Sounds"
-
-[node name="Die" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 3 )
 volume_db = -10.0
 bus = "Sounds"
+script = ExtResource( 9 )
+
+[node name="Die" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 6 )
+volume_db = -5.0
+bus = "Sounds"
+script = ExtResource( 9 )
+
+[node name="Appear" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 7 )
+volume_db = -5.0
+bus = "Sounds"
+script = ExtResource( 9 )
+
+[node name="Hide" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 8 )
+volume_db = -10.0
+bus = "Sounds"
+script = ExtResource( 9 )
 
 [node name="DeleteTimer" type="Timer" parent="."]
 wait_time = 3.0

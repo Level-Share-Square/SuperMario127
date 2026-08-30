@@ -1,9 +1,10 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://scenes/actors/objects/fire/recolorable_1.png" type="Texture" id=1]
 [ext_resource path="res://scenes/actors/objects/fire/fire.gd" type="Script" id=2]
 [ext_resource path="res://scenes/actors/objects/fire/recolorable_2.png" type="Texture" id=3]
 [ext_resource path="res://scenes/actors/objects/fire/normal.tres" type="SpriteFrames" id=4]
+[ext_resource path="res://assets/sounds/flame.wav" type="AudioStream" id=5]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 1 )
@@ -97,3 +98,10 @@ rect = Rect2( -128, -128, 256, 256 )
 pause_particles = false
 pause_animated_sprites = false
 process_parent = true
+
+[node name="Flame" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 5 )
+autoplay = true
+max_distance = 500.0
+
+[node name="SoundTween" type="Tween" parent="."]

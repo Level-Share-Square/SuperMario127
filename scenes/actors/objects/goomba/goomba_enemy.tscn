@@ -15,7 +15,7 @@
 [ext_resource path="res://assets/sounds/goomba_stomp.wav" type="AudioStream" id=13]
 [ext_resource path="res://scenes/actors/objects/goomba/animations/poof.png" type="Texture" id=14]
 [ext_resource path="res://scenes/actors/objects/goomba/states/chase_state.gd" type="Script" id=15]
-[ext_resource path="res://assets/sounds/enemy_hit.wav" type="AudioStream" id=16]
+[ext_resource path="res://assets/sounds/koopa_hit.wav" type="AudioStream" id=16]
 [ext_resource path="res://scenes/actors/objects/enemy/enemy_bouncer.gd" type="Script" id=17]
 
 [sub_resource type="CapsuleShape2D" id=36]

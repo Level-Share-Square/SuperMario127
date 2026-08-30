@@ -1,4 +1,4 @@
-[gd_scene load_steps=115 format=2]
+[gd_scene load_steps=118 format=2]
 
 [ext_resource path="res://scenes/player/player.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/level_shared.tscn" type="PackedScene" id=2]
@@ -46,6 +46,9 @@
 [ext_resource path="res://assets/sounds/shine_results/127tally_drum.wav" type="AudioStream" id=44]
 [ext_resource path="res://scenes/player/ui_new/key_get.gd" type="Script" id=45]
 [ext_resource path="res://scenes/player/ui_new/area_info.gd" type="Script" id=46]
+[ext_resource path="res://assets/sounds/switch_on.wav" type="AudioStream" id=47]
+[ext_resource path="res://assets/sounds/switch_off.wav" type="AudioStream" id=48]
+[ext_resource path="res://assets/sounds/blue_coin.wav" type="AudioStream" id=49]
 [ext_resource path="res://assets/sounds/p_switch_tick.wav" type="AudioStream" id=58]
 [ext_resource path="res://assets/sounds/p_switch_end.wav" type="AudioStream" id=59]
 [ext_resource path="res://assets/sounds/boo_laugh.wav" type="AudioStream" id=60]
@@ -3173,12 +3176,21 @@ stream = ExtResource( 38 )
 bus = "Sounds"
 
 [node name="CoinSound" type="AudioStreamPlayer" parent="SharedSounds"]
+pause_mode = 2
 stream = ExtResource( 39 )
 volume_db = -9.0
 bus = "Sounds"
 
+[node name="BlueCoinSound" type="AudioStreamPlayer" parent="SharedSounds"]
+pause_mode = 2
+stream = ExtResource( 49 )
+volume_db = -5.5
+bus = "Sounds"
+
 [node name="PurpleSound" type="AudioStreamPlayer" parent="SharedSounds"]
+pause_mode = 2
 stream = ExtResource( 9 )
+volume_db = -2.5
 bus = "Sounds"
 
 [node name="LaughSound" type="AudioStreamPlayer" parent="SharedSounds"]
@@ -3192,6 +3204,16 @@ bus = "Sounds"
 
 [node name="TickEndSound" type="AudioStreamPlayer" parent="SharedSounds"]
 stream = ExtResource( 59 )
+bus = "Sounds"
+
+[node name="SwitchOnSound" type="AudioStreamPlayer" parent="SharedSounds"]
+stream = ExtResource( 47 )
+volume_db = 2.0
+bus = "Sounds"
+
+[node name="SwitchOffSound" type="AudioStreamPlayer" parent="SharedSounds"]
+stream = ExtResource( 48 )
+volume_db = 2.0
 bus = "Sounds"
 
 [connection signal="child_entered_tree" from="UIUnder/HUD/Control/TimerManager/RadialTimers" to="UIUnder/HUD/Control/TimerManager/RadialTimers/PurpleStarbits" method="child_entered_tree"]

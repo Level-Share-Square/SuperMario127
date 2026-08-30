@@ -1,4 +1,4 @@
-[gd_scene load_steps=166 format=2]
+[gd_scene load_steps=170 format=2]
 
 [ext_resource path="res://scenes/actors/objects/launch_star/launch_star.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/objects/launch_star/launch_star_animatior.gd" type="Script" id=2]
@@ -9,6 +9,10 @@
 [ext_resource path="res://scenes/actors/objects/launch_star/sprites/OuterTop.png" type="Texture" id=7]
 [ext_resource path="res://scenes/actors/objects/launch_star/sprites/OuterBottom.png" type="Texture" id=8]
 [ext_resource path="res://scenes/actors/objects/launch_star/sparkle.png" type="Texture" id=9]
+[ext_resource path="res://assets/sounds/launch_star/launch.wav" type="AudioStream" id=10]
+[ext_resource path="res://assets/sounds/launch_star/flying.wav" type="AudioStream" id=11]
+[ext_resource path="res://assets/sounds/launch_star/windup.wav" type="AudioStream" id=12]
+[ext_resource path="res://classes/sound_pitcher_directional.gd" type="Script" id=13]
 
 [sub_resource type="Curve2D" id=1]
 bake_interval = 200.0
@@ -798,6 +802,9 @@ colors = PoolColorArray( 1, 1, 1, 1, 0, 0, 0, 0 )
 z_index = -9
 script = ExtResource( 1 )
 internal_id = "launch_star"
+launch_noise = ExtResource( 10 )
+windup_noise = ExtResource( 12 )
+flying_noise = ExtResource( 11 )
 
 [node name="Path2D" type="Path2D" parent="."]
 curve = SubResource( 1 )
@@ -815,12 +822,15 @@ shape = SubResource( 2 )
 [node name="SpeedTween" type="Tween" parent="."]
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-volume_db = 15.0
+volume_db = 10.0
 attenuation = 1e-05
 bus = "Sounds"
+script = ExtResource( 13 )
+min_pitch = 0.95
+max_pitch = 1.1
 
 [node name="AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="."]
-volume_db = 15.0
+volume_db = 10.0
 max_distance = 9.22337e+18
 attenuation = 2.23403e-05
 bus = "Sounds"

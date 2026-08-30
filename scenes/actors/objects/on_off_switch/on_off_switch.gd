@@ -3,7 +3,6 @@ extends Block
 onready var sprite = $Sprite
 onready var block = $StaticBody2D
 onready var hit_collider = $HitCollider
-onready var switch_sound = $SwitchSound
 onready var curve_tween = $Sprite/CurveTween
 
 
@@ -47,7 +46,11 @@ func _on_switch_state_changed(channel):
 			sprite.region_rect.position.x = 32
 
 func _on_hit():
-	switch_sound.play()
+	var sound_name = "SwitchOffSound"
+	if palette in CurrentLevelData.vars.switch_state:
+		sound_name = "SwitchOnSound"
+	play_shared_sound(sound_name)
+	
 	CurrentLevelData.vars.toggle_switch_state(palette)
 
 func _on_curve_tween(value):

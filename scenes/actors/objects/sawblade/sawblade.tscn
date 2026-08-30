@@ -45,7 +45,7 @@ region_rect = Rect2( 144, 0, 48, 48 )
 
 [node name="Sprite3" type="Sprite" parent="Path2D/PathFollow2D/Saw/AnimatedSprite"]
 show_behind_parent = true
-rotation = -6.09324
+rotation = -2.65853
 texture = ExtResource( 2 )
 region_enabled = true
 region_rect = Rect2( 48, 0, 48, 48 )
@@ -54,7 +54,7 @@ rot_speed = 150.0
 
 [node name="Sprite2" type="Sprite" parent="Path2D/PathFollow2D/Saw/AnimatedSprite"]
 show_behind_parent = true
-rotation = 0.772636
+rotation = -4.92442
 texture = ExtResource( 2 )
 region_enabled = true
 region_rect = Rect2( 48, 0, 48, 48 )
@@ -64,7 +64,7 @@ rot_speed = 300.0
 
 [node name="Sprite" type="Sprite" parent="Path2D/PathFollow2D/Saw/AnimatedSprite"]
 show_behind_parent = true
-rotation = 0.379946
+rotation = -5.31712
 texture = ExtResource( 2 )
 region_enabled = true
 region_rect = Rect2( 96, 0, 48, 48 )
@@ -91,7 +91,7 @@ region_rect = Rect2( 144, 0, 48, 48 )
 
 [node name="Sprite3" type="Sprite" parent="EditorSprite"]
 show_behind_parent = true
-rotation = -6.09324
+rotation = -2.65853
 texture = ExtResource( 2 )
 region_enabled = true
 region_rect = Rect2( 48, 0, 48, 48 )
@@ -100,7 +100,7 @@ rot_speed = 150.0
 
 [node name="Sprite2" type="Sprite" parent="EditorSprite"]
 show_behind_parent = true
-rotation = 0.772636
+rotation = -4.92442
 texture = ExtResource( 2 )
 region_enabled = true
 region_rect = Rect2( 48, 0, 48, 48 )
@@ -110,7 +110,7 @@ rot_speed = 300.0
 
 [node name="Sprite" type="Sprite" parent="EditorSprite"]
 show_behind_parent = true
-rotation = 0.379946
+rotation = -5.31712
 texture = ExtResource( 2 )
 region_enabled = true
 region_rect = Rect2( 96, 0, 48, 48 )

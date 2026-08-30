@@ -1064,6 +1064,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/actors/objects/metal_platform/semi_solid_platform.gd"
 }, {
+"base": "Node",
+"class": "SharedSounds",
+"language": "GDScript",
+"path": "res://scenes/player/shared_sounds.gd"
+}, {
 "base": "Resource",
 "class": "SkyResource",
 "language": "GDScript",
@@ -1541,6 +1546,7 @@ _global_script_class_icons={
 "SelectionToolButton": "",
 "Selector": "",
 "SemiSolidPlatform": "",
+"SharedSounds": "",
 "SkyResource": "",
 "SlideState": "",
 "SlideStopState": "",

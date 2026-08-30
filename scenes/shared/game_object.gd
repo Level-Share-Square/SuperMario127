@@ -394,3 +394,7 @@ func instance_disabled_icon():
 	disabled_icon.set_as_toplevel(true)
 	disabled_icon.hide()
 	add_child(disabled_icon)
+
+
+func play_shared_sound(sound_name: String) -> void:
+	get_tree().current_scene.get_node("%SharedSounds").play_sound(sound_name)

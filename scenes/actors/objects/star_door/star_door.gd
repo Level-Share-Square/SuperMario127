@@ -1,7 +1,7 @@
 extends DoorTeleport
 
 
-const SINGLE_VOLUME: float = -8.0
+const SINGLE_VOLUME: float = 4.0
 const DOUBLE_VOLUME: float = 6.0
 
 onready var icon_sprite = $IconSprite
@@ -151,7 +151,7 @@ func animate_door(is_backwards: bool) -> void:
 		palette_dict[palette] + "_" + collectible,
 		is_backwards)
 	audio_player.stream = open_audio if not is_backwards else close_audio
-	audio_player.play()
+	audio_player.play(0.0, is_single)
 
 
 # i probably could do this cleaner but eh
