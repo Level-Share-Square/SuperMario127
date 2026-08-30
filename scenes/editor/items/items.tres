@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=269 format=2]
+[gd_resource type="Resource" load_steps=270 format=2]
 
 [ext_resource path="res://scenes/editor/items/placeable_items.gd" type="Script" id=1]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/blue_coin.tres" type="Resource" id=2]
@@ -268,6 +268,7 @@
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/awkward_wall_stairs_right.tres" type="Resource" id=266]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/awkward_wall_stairs_left.tres" type="Resource" id=267]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/castle_pillar_horizontal.tres" type="Resource" id=268]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/small_chain.tres" type="Resource" id=269]
 
 [resource]
 script = ExtResource( 1 )
@@ -391,6 +392,7 @@ placeable_items = {
 "obj_sling_star": ExtResource( 107 ),
 "obj_small_bottle": ExtResource( 29 ),
 "obj_small_bush": ExtResource( 22 ),
+"obj_small_chain": ExtResource( 269 ),
 "obj_snow_log": ExtResource( 67 ),
 "obj_snow_pillar": ExtResource( 60 ),
 "obj_snow_platform": ExtResource( 33 ),

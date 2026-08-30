@@ -1,0 +1,34 @@
+[gd_resource type="Resource" load_steps=16 format=2]
+
+[ext_resource path="res://scenes/editor/items/placeable_object.gd" type="Script" id=1]
+[ext_resource path="res://scenes/actors/objects/small_chain/mini_chain_icon.png" type="Texture" id=2]
+[ext_resource path="res://scenes/actors/objects/small_chain/palletes/mini_chain_icon_5.png" type="Texture" id=3]
+[ext_resource path="res://scenes/actors/objects/small_chain/mini_chain_preview.png" type="Texture" id=4]
+[ext_resource path="res://scenes/actors/objects/small_chain/palletes/mini_chain_icon_4.png" type="Texture" id=5]
+[ext_resource path="res://scenes/actors/objects/small_chain/palletes/mini_chain_2_preview.png" type="Texture" id=6]
+[ext_resource path="res://scenes/actors/objects/small_chain/palletes/mini_chain_6_preview.png" type="Texture" id=7]
+[ext_resource path="res://scenes/actors/objects/small_chain/palletes/mini_chain_icon_1.png" type="Texture" id=8]
+[ext_resource path="res://scenes/actors/objects/small_chain/palletes/mini_chain_icon_6.png" type="Texture" id=9]
+[ext_resource path="res://scenes/actors/objects/small_chain/palletes/mini_chain_4_preview.png" type="Texture" id=10]
+[ext_resource path="res://scenes/actors/objects/small_chain/palletes/mini_chain_icon_3.png" type="Texture" id=11]
+[ext_resource path="res://scenes/actors/objects/small_chain/palletes/mini_chain_icon_2.png" type="Texture" id=12]
+[ext_resource path="res://scenes/actors/objects/small_chain/palletes/mini_chain_3_preview.png" type="Texture" id=13]
+[ext_resource path="res://scenes/actors/objects/small_chain/palletes/mini_chain_5_preview.png" type="Texture" id=14]
+[ext_resource path="res://scenes/actors/objects/small_chain/palletes/mini_chain_1_preview.png" type="Texture" id=15]
+
+[resource]
+script = ExtResource( 1 )
+item_name = "Small Chain"
+groups = PoolStringArray( "decoration" )
+change_to = "Small Chain"
+items_in_sequence = 2
+index_in_sequence = 0
+icons = [ ExtResource( 2 ), ExtResource( 8 ), ExtResource( 12 ), ExtResource( 11 ), ExtResource( 5 ), ExtResource( 3 ), ExtResource( 9 ) ]
+previews = [ ExtResource( 4 ), ExtResource( 15 ), ExtResource( 6 ), ExtResource( 13 ), ExtResource( 10 ), ExtResource( 14 ), ExtResource( 7 ) ]
+priority = 104
+object_id = 160
+object_center = Vector2( 0, 0 )
+tile_mode_offset = Vector2( 0, 0 )
+tile_mode_step = 32
+property_overrides = {
+}
