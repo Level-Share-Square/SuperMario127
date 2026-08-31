@@ -83,12 +83,9 @@ func on_property_changed(key, value):
 		update_palette()
 
 func enter_area(body):
-	print(enabled)
 	if body.name.begins_with("Character") and character == null and enabled:
-		print("goofy goober")
 		character = body
 		if open_menu:
-			print("yeah")
 			message_appear.play()
 
 

@@ -7,6 +7,7 @@ onready var level_settings = $"%LevelSettingsWindow"
 onready var save = $"%Save"
 
 var initial_hash: int
+var tween: SceneTreeTween
 
 
 func _ready():
@@ -21,10 +22,14 @@ func get_hash() -> int:
 func _on_ActionManager_action():
 	CurrentLevelData.unsaved_editor_changes = !(initial_hash == get_hash())
 	if CurrentLevelData.unsaved_editor_changes:
-		var tween = get_tree().create_tween()
+		if is_instance_valid(tween):
+			tween.kill()
+		tween = get_tree().create_tween()
 		tween.tween_property(save, "self_modulate", UNSAVED_COLOR, 0.5)
 	else:
-		var tween = get_tree().create_tween()
+		if is_instance_valid(tween):
+			tween.kill()
+		tween = get_tree().create_tween()
 		tween.tween_property(save, "self_modulate", Color("ffffff"), 0.5)
 
 
@@ -75,9 +80,13 @@ func save_pressed():
 	level_settings.get_node("%Areas").reload_areas()
 	initial_hash = get_hash()
 	
+	if is_instance_valid(tween):
+		tween.kill()
 	save.self_modulate = Color("60ff60")
-	var tween = get_tree().create_tween()
-	tween.tween_property(save, "self_modulate", Color("ffffff"), 0.5)
+	tween = get_tree().create_tween()
+	tween.set_ease(Tween.EASE_IN)
+	tween.set_trans(Tween.TRANS_QUAD)
+	tween.tween_property(save, "self_modulate", Color("ffffff"), 1.0)
 
 
 func quit():
