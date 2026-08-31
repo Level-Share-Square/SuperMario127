@@ -192,6 +192,7 @@ bus = "Sounds"
 
 [node name="Backflip" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 28 )
+volume_db = -1.0
 bus = "Sounds"
 
 [node name="Perfect" type="AudioStreamPlayer" parent="."]
