@@ -10,8 +10,8 @@ const PARALLAX_OFFSET: int = 65
 const SCROLL_SPEED: float = 300.0
 
 const BACKGROUNDS := [
-	[1, 13, 0, 64],
-	[2, 1, 0, 160],
+	[1, 1, 0, 128],
+	[2, 1, 0, 128],
 	[4, 8, 0, 96],
 	[8, 18, 0, 260],
 	[7, 21, 0, 64],
