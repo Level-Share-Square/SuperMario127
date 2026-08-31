@@ -1,7 +1,16 @@
-[gd_resource type="Resource" load_steps=3 format=2]
+[gd_resource type="Resource" load_steps=12 format=2]
 
 [ext_resource path="res://scenes/editor/items/placeable_tile.gd" type="Script" id=1]
 [ext_resource path="res://assets/tiles/awkward_wall/icon.png" type="Texture" id=2]
+[ext_resource path="res://assets/tiles/awkward_wall/palettes/6_icon.png" type="Texture" id=3]
+[ext_resource path="res://assets/tiles/awkward_wall/palettes/7_icon.png" type="Texture" id=4]
+[ext_resource path="res://assets/tiles/awkward_wall/palettes/1_icon.png" type="Texture" id=5]
+[ext_resource path="res://assets/tiles/awkward_wall/palettes/2_icon.png" type="Texture" id=6]
+[ext_resource path="res://assets/tiles/awkward_wall/palettes/3_icon.png" type="Texture" id=7]
+[ext_resource path="res://assets/tiles/awkward_wall/palettes/5_icon.png" type="Texture" id=8]
+[ext_resource path="res://assets/tiles/awkward_wall/palettes/4_icon.png" type="Texture" id=9]
+[ext_resource path="res://assets/tiles/awkward_wall/palettes/9_icon.png" type="Texture" id=10]
+[ext_resource path="res://assets/tiles/awkward_wall/palettes/8_icon.png" type="Texture" id=11]
 
 [resource]
 script = ExtResource( 1 )
@@ -10,7 +19,7 @@ groups = PoolStringArray(  )
 change_to = "til_awkward_wall_stairs_left"
 items_in_sequence = 3
 index_in_sequence = 0
-icons = [ ExtResource( 2 ) ]
+icons = [ ExtResource( 2 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 9 ), ExtResource( 8 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 11 ), ExtResource( 10 ) ]
 previews = [ ExtResource( 2 ) ]
 priority = 41
 tileset_id = 47
