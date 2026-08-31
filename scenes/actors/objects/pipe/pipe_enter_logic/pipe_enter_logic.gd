@@ -177,7 +177,7 @@ func _tween_all_completed() -> void:
 
 
 func reset_sprite(character : Character): #This is here in case Mario came from a door to a pipe
-	character.z_index = -1
+	character.z_index = -9
 	character.sprite.modulate = Color(1.0, 1.0, 1.0, 1.0)
 	character.sprite.scale = Vector2(1.0, 1.0)
 	character.sprite.position = Vector2.ZERO
