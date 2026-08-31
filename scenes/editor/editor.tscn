@@ -96,7 +96,7 @@
 [ext_resource path="res://assets/icons/GroundLayer.svg" type="Texture" id=94]
 [ext_resource path="res://assets/sounds/editor_Save.wav" type="AudioStream" id=95]
 [ext_resource path="res://assets/icons/shine.png" type="Texture" id=96]
-[ext_resource path="res://scenes/actors/mario/icon2.png" type="Texture" id=97]
+[ext_resource path="res://assets/icons/Lock.svg" type="Texture" id=97]
 
 [sub_resource type="RectangleShape2D" id=205]
 extents = Vector2( 2, 2 )
@@ -1243,14 +1243,15 @@ stretch_mode = 7
 [node name="OriginLayer" type="TextureRect" parent="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/Actions/HBoxContainer/LayerPickerContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 visible = false
+modulate = Color( 0.752941, 0.752941, 1, 1 )
 margin_left = 24.0
-margin_right = 42.0
+margin_right = 39.0
 margin_bottom = 17.0
-rect_min_size = Vector2( 18, 17 )
+rect_min_size = Vector2( 15, 17 )
 mouse_filter = 2
 texture = ExtResource( 97 )
 expand = true
-stretch_mode = 7
+stretch_mode = 6
 
 [node name="LayerName" type="Label" parent="UI/UIContainer/EditorUI/Top/Tools/VBoxContainer/Actions/HBoxContainer/LayerPickerContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true

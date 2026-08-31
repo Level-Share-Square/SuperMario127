@@ -11,7 +11,7 @@
 [ext_resource path="res://scenes/editor/editor_theme.tres" type="Theme" id=9]
 [ext_resource path="res://assets/icons/MergeLayer.svg" type="Texture" id=10]
 [ext_resource path="res://assets/icons/shine.png" type="Texture" id=11]
-[ext_resource path="res://scenes/actors/mario/icon2.png" type="Texture" id=12]
+[ext_resource path="res://assets/icons/Lock.svg" type="Texture" id=12]
 
 [sub_resource type="StyleBoxEmpty" id=2]
 
@@ -32,12 +32,12 @@ script = ExtResource( 6 )
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 unique_name_in_owner = true
-margin_right = 238.0
+margin_right = 235.0
 margin_bottom = 21.0
 custom_styles/panel = SubResource( 2 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer"]
-margin_right = 238.0
+margin_right = 235.0
 margin_bottom = 21.0
 theme = ExtResource( 9 )
 custom_constants/separation = 5
@@ -56,27 +56,27 @@ expand_icon = true
 
 [node name="PanelContainer" type="PanelContainer" parent="PanelContainer/HBoxContainer"]
 margin_left = 25.0
-margin_right = 118.0
+margin_right = 115.0
 margin_bottom = 21.0
 mouse_filter = 2
 size_flags_horizontal = 3
 custom_styles/panel = SubResource( 5 )
 
 [node name="MarginContainer" type="MarginContainer" parent="PanelContainer/HBoxContainer/PanelContainer"]
-margin_right = 93.0
+margin_right = 90.0
 margin_bottom = 21.0
 mouse_filter = 2
 size_flags_horizontal = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/HBoxContainer/PanelContainer/MarginContainer"]
-margin_right = 93.0
+margin_right = 90.0
 margin_bottom = 21.0
 mouse_filter = 2
 size_flags_horizontal = 3
 custom_constants/separation = 0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
-margin_right = 93.0
+margin_right = 90.0
 margin_bottom = 17.0
 mouse_filter = 2
 size_flags_horizontal = 4
@@ -106,19 +106,20 @@ stretch_mode = 7
 
 [node name="OriginLayer" type="TextureRect" parent="PanelContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
+modulate = Color( 0.752941, 0.752941, 1, 1 )
 margin_left = 24.0
-margin_right = 42.0
+margin_right = 39.0
 margin_bottom = 17.0
-rect_min_size = Vector2( 18, 17 )
+rect_min_size = Vector2( 15, 17 )
 mouse_filter = 2
 texture = ExtResource( 12 )
 expand = true
-stretch_mode = 7
+stretch_mode = 6
 
 [node name="LayerName" type="Label" parent="PanelContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
-margin_left = 46.0
-margin_right = 93.0
+margin_left = 43.0
+margin_right = 90.0
 margin_bottom = 17.0
 rect_min_size = Vector2( 24, 16 )
 size_flags_horizontal = 3
@@ -130,14 +131,14 @@ text = "Ground"
 unique_name_in_owner = true
 modulate = Color( 1, 0, 0, 1 )
 margin_top = 17.0
-margin_right = 93.0
+margin_right = 90.0
 margin_bottom = 21.0
 mouse_filter = 2
 custom_styles/separator = SubResource( 4 )
 
 [node name="Select" type="Button" parent="PanelContainer/HBoxContainer/PanelContainer"]
 unique_name_in_owner = true
-margin_right = 93.0
+margin_right = 90.0
 margin_bottom = 21.0
 focus_mode = 0
 size_flags_horizontal = 3
@@ -146,14 +147,14 @@ theme_type_variation = "ButtonTransparent"
 script = ExtResource( 2 )
 
 [node name="VSeparator" type="VSeparator" parent="PanelContainer/HBoxContainer"]
-margin_left = 123.0
-margin_right = 127.0
+margin_left = 120.0
+margin_right = 124.0
 margin_bottom = 21.0
 
 [node name="ShowHide" type="Button" parent="PanelContainer/HBoxContainer"]
 unique_name_in_owner = true
-margin_left = 132.0
-margin_right = 148.0
+margin_left = 129.0
+margin_right = 145.0
 margin_bottom = 21.0
 rect_min_size = Vector2( 16, 16 )
 hint_tooltip = "Toggle Layer Visibility"
@@ -168,14 +169,14 @@ expand_icon = true
 script = ExtResource( 2 )
 
 [node name="VSeparator2" type="VSeparator" parent="PanelContainer/HBoxContainer"]
-margin_left = 153.0
-margin_right = 157.0
+margin_left = 150.0
+margin_right = 154.0
 margin_bottom = 21.0
 
 [node name="Edit" type="Button" parent="PanelContainer/HBoxContainer"]
 unique_name_in_owner = true
-margin_left = 162.0
-margin_right = 178.0
+margin_left = 159.0
+margin_right = 175.0
 margin_bottom = 21.0
 rect_min_size = Vector2( 16, 16 )
 hint_tooltip = "Layer Settings"
@@ -190,14 +191,14 @@ expand_icon = true
 script = ExtResource( 2 )
 
 [node name="VSeparator4" type="VSeparator" parent="PanelContainer/HBoxContainer"]
-margin_left = 183.0
-margin_right = 187.0
+margin_left = 180.0
+margin_right = 184.0
 margin_bottom = 21.0
 
 [node name="Merge" type="Button" parent="PanelContainer/HBoxContainer"]
 unique_name_in_owner = true
-margin_left = 192.0
-margin_right = 208.0
+margin_left = 189.0
+margin_right = 205.0
 margin_bottom = 21.0
 rect_min_size = Vector2( 16, 16 )
 hint_tooltip = "Merge Layer"
@@ -212,14 +213,14 @@ expand_icon = true
 script = ExtResource( 2 )
 
 [node name="VSeparator3" type="VSeparator" parent="PanelContainer/HBoxContainer"]
-margin_left = 213.0
-margin_right = 217.0
+margin_left = 210.0
+margin_right = 214.0
 margin_bottom = 21.0
 
 [node name="Delete" type="Button" parent="PanelContainer/HBoxContainer"]
 unique_name_in_owner = true
-margin_left = 222.0
-margin_right = 238.0
+margin_left = 219.0
+margin_right = 235.0
 margin_bottom = 21.0
 rect_min_size = Vector2( 16, 16 )
 hint_tooltip = "Delete Layer"
@@ -245,7 +246,7 @@ shape = SubResource( 3 )
 
 [node name="HSeparator" type="HSeparator" parent="."]
 margin_top = 25.0
-margin_right = 238.0
+margin_right = 235.0
 margin_bottom = 29.0
 
 [node name="HoverSound" type="AudioStreamPlayer" parent="."]
