@@ -96,7 +96,7 @@ func animate_door(is_backwards: bool) -> void:
 
 func reset_sprite(character: Character): #This is here in case Mario came from a painting to a door
 	character.show()
-	character.z_index = -1
+	character.z_index = -9
 	character.sprite.modulate = Color(1.0, 1.0, 1.0, 1.0)
 	character.sprite.scale = Vector2(1.0, 1.0)
 	character.sprite.position = Vector2.ZERO

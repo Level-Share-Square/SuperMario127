@@ -93,6 +93,5 @@ func quit():
 	
 	Singleton.Music.loop = 0
 	Singleton.Music.loop_end = 0
-	Singleton.Music.timer.stop()
 	
 	Singleton.SceneSwitcher.quit_to_menu_with_transition("levels_screen")

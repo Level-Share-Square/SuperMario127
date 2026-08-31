@@ -11,8 +11,6 @@ onready var temporary_music_player : AudioStreamPlayer = $TemporaryMusicPlayer
 onready var water_music_player : AudioStreamPlayer = $WaterMusicPlayer
 onready var blended_music_player : AudioStreamPlayer = $BlendedMusicPlayer
 onready var tween : Tween = $Tween
-onready var timer: Timer = $Timer
-onready var underwater_timer: Timer = $UnderwaterTimer
 
 export var volume_multiplier := 1.0
 export var loading := false
@@ -41,6 +39,7 @@ var song_switched := false
 const MUSIC_FADE_LENGTH = 0.75
 
 var level_songs : IdMap
+
 
 func get_song(song_id : int):
 	if song_cache[song_id] == null:
@@ -113,24 +112,12 @@ func play_custom_underwater(song_stream):
 		water_music_player.volume_db = -80
 		has_water = CurrentLevelData.current_area.header.music is String and CurrentLevelData.current_area.header.music != CurrentLevelData.current_area.header.underwater_music
 		play_water = false
-	if underwater_loop_end != 0.0:
-		underwater_timer.wait_time = underwater_loop_end
-		underwater_timer.start()
-		underwater_timer.connect("timeout", self, "on_underwater_loop_end_reached")
-	else:
-		underwater_timer.stop()
 
 
 func play_custom_normal(song_stream):
 	if get_tree().get_current_scene().mode != 2:
 		self.stream = song_stream
 		play()
-	if loop_end != 0.0:
-		timer.wait_time = loop_end
-		timer.start()
-		timer.connect("timeout", self, "on_loop_end_reached")
-	else:
-		timer.stop()
 
 	var underwater_raw = CurrentLevelData.current_area.header.underwater_music
 	if underwater_raw == "":
@@ -177,98 +164,6 @@ func decode_music(raw_music: String) -> Array:
 		loop_end = float(loop_end_string)
 	
 	return [loop_start, url, loop_end]
-#
-#func save_ogg(url: String, level_id: String, area: int, working_folder: String, underwater: bool = false) -> void:
-#	var file_path: String = level_list_util.get_level_music_path(
-#		level_id, 
-#		area,
-#		working_folder,
-#		underwater)
-#
-#	#http_request.download_file = file_path
-#	http_request.request(url)
-#
-#	# warning-ignore:return_value_discarded
-#	http_request.connect("request_completed", self, "request_completed", [file_path, underwater], CONNECT_ONESHOT)
-#
-#
-#func request_completed(result: int, response_code: int, headers: PoolStringArray, body: PoolByteArray, file_path: String, underwater: bool = false):
-#	var ogg_file := File.new()
-#	var err: int = ogg_file.open(file_path, File.WRITE)
-#	if err != OK:
-#		printerr("Error saving custom music file. Error code: " + str(err) + "\nFile path: " + file_path)
-#		return
-#
-#	ogg_file.store_buffer(body)
-#	ogg_file.close()
-#	if !underwater:
-#		load_ogg(body)
-#	else:
-#		load_underwater_ogg(body)
-#
-#
-#func load_ogg(bytes: PoolByteArray) -> void:
-#	var stream := AudioStreamOGGVorbis.new()
-#	stream.data = bytes
-#	stream.loop = true
-#	stream.loop_offset = loop
-#	if stream.data == null:
-#		return
-#
-#	if get_tree().get_current_scene().mode != 2:
-#		self.stream = stream
-#		play()
-#	if loop_end != 0.0:
-#		timer.wait_time = loop_end
-#		timer.start()
-#		timer.connect("timeout", self, "on_loop_end_reached")
-#	else:
-#		timer.stop()
-#
-#	var underwater_raw = CurrentLevelData.current_area.header.underwater_music
-#	if underwater_raw == "":
-#		has_water = false
-#	else:
-#		handle_custom_song(underwater_raw, true)
-#
-#	print("OGG file loaded.")
-#
-#func load_underwater_ogg(bytes: PoolByteArray) -> void:
-#	var new_stream := AudioStreamOGGVorbis.new()
-#	new_stream.data = bytes
-#	new_stream.loop = true
-#	new_stream.loop_offset = underwater_loop
-#	if new_stream.data == null:
-#		return
-#
-#	if get_tree().get_current_scene().mode != 2:
-#		water_music_player.stream = new_stream
-#		water_music_player.play()
-#		water_music_player.volume_db = -80
-#		has_water = true
-#		play_water = false
-#	if underwater_loop_end != 0.0:
-#		underwater_timer.wait_time = underwater_loop_end
-#		underwater_timer.start()
-#		underwater_timer.connect("timeout", self, "on_underwater_loop_end_reached")
-#	else:
-#		underwater_timer.stop()
-#######
-
-func on_loop_end_reached():
-	timer.wait_time = loop_end - loop
-	timer.stop()
-	timer.start()
-	stop()
-	play(loop)
-
-
-func on_underwater_loop_end_reached():
-	underwater_timer.wait_time = underwater_loop_end - underwater_loop
-	underwater_timer.stop()
-	underwater_timer.start()
-	water_music_player.stop()
-	water_music_player.play(underwater_loop)
 
 
 func change_song(old_setting, music_setting) -> void:
@@ -372,6 +267,9 @@ func _process(delta) -> void:
 		temporary_music_player.volume_db = linear2db(lerp(db2linear(temporary_music_player.volume_db), 0, delta * 3))
 		temporary_music_player.volume_db = linear2db(lerp(db2linear(temporary_music_player.volume_db), 0, delta * 3))
 
+	check_loop(self, loop, loop_end)
+	check_loop(water_music_player, underwater_loop, underwater_loop_end)
+
 
 # the plan for this is to mute the current bgm, play the temp song, and then fade the current bgm back in
 func play_temporary_music(temp_song_id : int = 0, temp_song_volume : float = 0) -> void:
@@ -411,3 +309,19 @@ func stop_temporary_music(volume_multiplier_target = 1, music_fade_length = MUSI
 	volume_multiplier = 1
 	temp_music = false
 	play_blended = false
+
+func get_precise_position(player: AudioStreamPlayer) -> float:
+	if !player.playing:
+		return 0.0
+	return player.get_playback_position() + AudioServer.get_time_since_last_mix() - AudioServer.get_output_latency()
+
+func check_loop(player: AudioStreamPlayer, loop_point_start: float, loop_point_end: float) -> void:
+	if loop_point_end == 0.0 or !player.playing:
+		return
+	var pos: float = get_precise_position(player)
+	if pos >= loop_point_end:
+		var overshoot: float = pos - loop_point_end
+		var seg_len: float = loop_point_end - loop_point_start
+		if seg_len > 0.0:
+			overshoot = fmod(overshoot, seg_len)
+		player.seek(loop_point_start + overshoot)

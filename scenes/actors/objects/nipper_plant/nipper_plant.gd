@@ -109,6 +109,10 @@ func hit(hit_pos: Vector2):
 	velocity = Vector2(normal * 225, - 225)
 	hide_timer = 3.0
 	position.y -= 2
+	
+func _object_ready():
+	._object_ready()
+	get_node("Body/CollisionShape2D").disabled = not is_enabled_and_on_ground()
 
 
 func _physics_process(delta):
