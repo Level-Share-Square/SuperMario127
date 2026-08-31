@@ -25,6 +25,7 @@ func _ready():
 	disable_animation = true
 	override_rotation = true
 	use_dive_collision = true
+	force_cam_follow_y = true
 
 func _start_check(_delta):
 	return (character.rotating_jump or character.state == character.get_state_node("DiveState")) and character.velocity.y > 0 and (character.powerup != null and character.powerup.id == "Wing")

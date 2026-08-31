@@ -1,5 +1,24 @@
 extends Camera2D
 
+
+const CENTER_OFFSET: float = 160.0
+const GROUND_MILD_OFFSET: float = -32.0
+const GROUND_OFFSET: float = -72.0
+const CROUCH_OFFSET: float = 72.0
+
+const X_MARGIN: float = 64.0
+const X_FOLLOW_SPEED: float = 0.8
+
+const Y_FOLLOW_SPEED: float = 3.0
+const Y_FAST_FOLLOW_SPEED: float = 5.0
+const Y_DESPERATE_FOLLOW_SPEED: float = 6.0
+
+const Y_SLOW_CORRECT_SPEED: float = 2.0
+const Y_CORRECT_SPEED: float = 8.0
+const Y_DESPERATE_CORRECT_SPEED: float = 12.0
+
+const Y_OFFSET_SPEED: float = 4.0
+
 export var character : NodePath
 export var background : NodePath
 export var character2_cam_collider : NodePath
@@ -10,7 +29,8 @@ var focus_zoom := 1.0
 var current_zoom := Vector2(1.0, 1.0)
 var last_position = Vector2(0,0)
 var size = Vector2(0,0)
-var base_size = Vector2(393, 216)
+var base_size = Vector2(384, 216)
+var level_bounds: Rect2
 var area
 var shape
 var in_cutscene: bool = false
@@ -25,7 +45,7 @@ var disable_gp_zoom: bool = false
 var cutscene_queue: Array
 var current_cutscene: CameraCutscene
 
-onready var character_node = get_node(character)
+onready var character_node: Character = get_node(character)
 onready var bg = get_node(background)
 onready var zoom_tween: Tween = $ZoomTween
 onready var cutscene_tween: Tween = $CutsceneTween
@@ -33,6 +53,8 @@ onready var cutscene_tween: Tween = $CutsceneTween
 onready var viewport
 
 var character_vel = Vector2(0, 0)
+var y_baseline: float = 0
+var y_offset: float = 0
 
 func _ready():
 	in_cutscene = false
@@ -45,86 +67,149 @@ func _ready():
 		shape = $Area2D/CollisionShape2D
 		area = $Area2D
 	area.connect("area_entered", self, "_on_area_entered")
+	
+	if is_instance_valid(character_node):
+		yield(character_node, "loaded")
+		global_position = character_node.global_position
+		last_position = global_position
+		y_baseline = global_position.y
+		y_offset = GROUND_MILD_OFFSET
 
 
-func _physics_process(delta):
-	if !auto_move: 
-		return
+func _process(delta):
+	var level_total_bounds := Vector2(level_bounds.position.x + level_bounds.size.x, level_bounds.position.y + level_bounds.size.y)
+	var max_zoom: float = min(level_total_bounds.x / (base_size.x*2), level_total_bounds.y / (base_size.y*2))
+	zoom.x = min(zoom.y, max_zoom)
+	zoom.y = min(zoom.y, max_zoom)
 	
-	if focus_on != null:
-		position = position.linear_interpolate(focus_on.global_position, fps_util.PHYSICS_DELTA * 3)
-		#reset_physics_interpolation()
-		bg.parallax_node.scroll_base_scale.y = zoom.y
-	
-	elif is_instance_valid(character_node):
-		if !character_node.dead and !get_tree().paused:
-			if character_node.controllable:
-				character_vel = character_vel.linear_interpolate(character_node.velocity * 15.5 * delta, fps_util.PHYSICS_DELTA * 2)
-			else:
-				character_vel = Vector2()
-			if is_instance_valid(bg):
-				bg.parallax_node.scroll_base_scale.y = zoom.y
-			if skip_to_player:
-				reset_smoothing()
-				skip_to_player = false
-			shape.shape.extents = base_size * zoom.y
-			size = shape.shape.extents
-			last_position = global_position
-			global_position = character_node.global_position + character_vel
-			
-			for stopper in area.get_overlapping_areas():
-#				if global_position.y < stopper.top_bound.y + size.length().y * 1.2 or global_position.y > stopper.bottom_bound.y + size.length().y * 1.2 or global_position.x < stopper.left_bound.x + size.length().x * 1.2 or global_position.x > stopper.right_bound.x + size.length().x * 1.2:
-				# this calculates if the camera is too far away from a horizontal or vertical edge and takes resized bounds into account
-				# the same as what the code commented out above does
+	if auto_move:
+		if focus_on != null:
+			position = position.linear_interpolate(focus_on.global_position, fps_util.PHYSICS_DELTA * 3)
+			#reset_physics_interpolation()
+			bg.parallax_node.scroll_base_scale.y = zoom.y
+		
+		elif is_instance_valid(character_node):
+			if !character_node.dead and !get_tree().paused:
+				if is_instance_valid(bg):
+					bg.parallax_node.scroll_base_scale.y = zoom.y
 				
-				if abs(global_position.y - stopper.global_position.y) < size.y * 1.2 + abs(stopper.top_bound.y - stopper.global_position.y) or abs(global_position.x - stopper.global_position.x) < size.x * 1.2 + abs(stopper.left_bound.x - stopper.global_position.x):
-					var overlapX = min(abs(last_position.x + size.x - stopper.left_bound.x), abs(last_position.x - size.x - stopper.right_bound.x))
-					var overlapY = min(abs(last_position.y + size.y - stopper.top_bound.y), abs(last_position.y - size.y - stopper.bottom_bound.y))
+				if skip_to_player:
+					global_position = character_node.global_position
+					last_position = global_position
+					y_baseline = global_position.y
+					y_offset = GROUND_MILD_OFFSET
+					skip_to_player = false
+				
+				var char_screen_pos: Vector2 = character_node.get_canvas_transform().xform(character_node.global_position)
+				var char_center_distance: Vector2 = char_screen_pos - (base_size * zoom.y)
+				var lookahead: float = CENTER_OFFSET * character_node.facing_direction
+				
+				last_position = global_position
+				
+				#if char_center_distance.x + lookahead < -X_MARGIN or char_center_distance.x + lookahead > X_MARGIN:
+				#	global_position.x = lerp(global_position.x, character_node.global_position.x + lookahead, delta * X_FOLLOW_SPEED)
+				global_position.x = character_node.global_position.x
+				
+				if abs(char_center_distance.y) > abs(size.y/4) and not character_node.is_grounded():
+					var correct_speed: float = Y_SLOW_CORRECT_SPEED
+					if abs(char_center_distance.y) > abs(size.y):
+						correct_speed = Y_DESPERATE_CORRECT_SPEED
+					elif abs(char_center_distance.y) > abs(size.y/1.65):
+						correct_speed = Y_CORRECT_SPEED
 					
+					y_baseline = lerp(y_baseline, character_node.global_position.y, delta * correct_speed)
+					y_offset = lerp(y_offset, 0, delta * Y_OFFSET_SPEED)
 				
-					if overlapX < overlapY:
+				elif is_instance_valid(character_node.state) and character_node.state.force_cam_follow_y:
+					y_baseline = character_node.global_position.y
+					y_offset = lerp(y_offset, 0, delta * Y_OFFSET_SPEED)
+					
+				elif character_node.is_grounded():
+					var translated_transform: Transform2D = character_node.transform.translated(Vector2(0, 96))
+					if character_node.inputs[9][0] and abs(character_node.velocity.x) < 10:
+						y_offset = lerp(y_offset, CROUCH_OFFSET, delta * Y_OFFSET_SPEED)
+					elif character_node.test_move(translated_transform, Vector2(0, 0.5)):
+						y_offset = lerp(y_offset, GROUND_OFFSET, delta * Y_OFFSET_SPEED)
+					else:
+						y_offset = lerp(y_offset, GROUND_MILD_OFFSET, delta * Y_OFFSET_SPEED)
+					y_baseline = character_node.global_position.y
+				
+				var y_follow: float = Y_FOLLOW_SPEED 
+				if abs(char_center_distance.y) < size.y:
+					y_follow = Y_DESPERATE_FOLLOW_SPEED
+				elif abs(char_center_distance.y) < size.y/1.35:
+					y_follow = Y_FAST_FOLLOW_SPEED
+				global_position.y = lerp(global_position.y - y_offset, y_baseline, delta * y_follow)
+				global_position.y += y_offset
+		
+		if !zoom.is_equal_approx(old_zoom):
+			zoom = lerp(zoom, old_zoom, 0.08)
+		if shake == true:
+			if round(shake_strength) > 0:
+				shake_strength = lerp(shake_strength, 0, 0.2)
+				offset = _get_random_offset()
+			else:
+				shake = false
+	
+	shape.shape.extents = base_size * zoom.y
+	size = shape.shape.extents
+	
+	# level bounds
+	if global_position.x - size.x < level_bounds.position.x:
+		global_position.x = level_bounds.position.x + size.x
+	if global_position.x + size.x > level_bounds.size.x:
+		global_position.x = level_bounds.size.x - size.x
+		
+	if global_position.y - size.y < level_bounds.position.y:
+		global_position.y = level_bounds.position.y + size.y
+	if global_position.y + size.y > level_bounds.size.y:
+		global_position.y = level_bounds.size.y - size.y
+	
+	for stopper in area.get_overlapping_areas():
+#				if global_position.y < stopper.top_bound.y + size.length().y * 1.2 or global_position.y > stopper.bottom_bound.y + size.length().y * 1.2 or global_position.x < stopper.left_bound.x + size.length().x * 1.2 or global_position.x > stopper.right_bound.x + size.length().x * 1.2:
+		# this calculates if the camera is too far away from a horizontal or vertical edge and takes resized bounds into account
+		# the same as what the code commented out above does
+		
+		if abs(global_position.y - stopper.global_position.y) < size.y * 1.2 + abs(stopper.top_bound.y - stopper.global_position.y) or abs(global_position.x - stopper.global_position.x) < size.x * 1.2 + abs(stopper.left_bound.x - stopper.global_position.x):
+			var overlapX = min(abs(last_position.x + size.x - stopper.left_bound.x), abs(last_position.x - size.x - stopper.right_bound.x))
+			var overlapY = min(abs(last_position.y + size.y - stopper.top_bound.y), abs(last_position.y - size.y - stopper.bottom_bound.y))
+			
+		
+			if overlapX < overlapY:
 #						print(overlapX)
 #						print(overlapY)
-						
-						if last_position.x < stopper.global_position.x and global_position.x > last_position.x:
-							global_position.x = stopper.left_bound.x - size.x + 1
-						elif last_position.x > stopper.global_position.x and global_position.x < last_position.x:
-							global_position.x = stopper.right_bound.x + size.x - 1
-						else:
-							pass
-					else:
+				
+				if last_position.x < stopper.global_position.x and global_position.x > last_position.x:
+					global_position.x = stopper.left_bound.x - size.x + 1
+				elif last_position.x > stopper.global_position.x and global_position.x < last_position.x:
+					global_position.x = stopper.right_bound.x + size.x - 1
+				else:
+					pass
+			else:
 #						print(overlapX)
 #						print(overlapY)
 #						print(global_position.y > last_position.y)
-						# top bound of stopper
-						if last_position.y < stopper.global_position.y and global_position.y > last_position.y:
-							global_position.y = stopper.top_bound.y - size.y + 1
-						# bottom bound of stopper
-						elif last_position.y > stopper.global_position.y and global_position.y < last_position.y:
-							#print("botttom")
-							#print(stopper.top_bound.y)
-							#print(stopper.bottom_bound.y)
-							global_position.y = stopper.bottom_bound.y + size.y - 1
-						else:
-							pass
+				# top bound of stopper
+				if last_position.y < stopper.global_position.y and global_position.y > last_position.y:
+					global_position.y = stopper.top_bound.y - size.y + 1
+				# bottom bound of stopper
+				elif last_position.y > stopper.global_position.y and global_position.y < last_position.y:
+					#print("botttom")
+					#print(stopper.top_bound.y)
+					#print(stopper.bottom_bound.y)
+					global_position.y = stopper.bottom_bound.y + size.y - 1
 				else:
-					print("ESCAPED")
-			
-			if Singleton.PlayerSettings.player2_character == character_node.player_id:
-						area.global_position = global_position
-						
-						
-	if !zoom.is_equal_approx(old_zoom):
-		zoom = lerp(zoom, old_zoom, 0.08)
-	if shake == true:
-		if round(shake_strength) > 0:
-			shake_strength = lerp(shake_strength, 0, 0.2)
-			offset = _get_random_offset()
+					pass
 		else:
-			shake = false
+			print("ESCAPED")
 
 
 func set_zoom_tween(target : Vector2, time : float, override = false):
+	var level_total_bounds := Vector2(level_bounds.position.x + level_bounds.size.x, level_bounds.position.y + level_bounds.size.y)
+	var max_zoom: float = min(level_total_bounds.x / (base_size.x*2), level_total_bounds.y / (base_size.y*2))
+	target.x = min(target.x, max_zoom)
+	target.y = min(target.y, max_zoom)
+	
 	old_zoom = target
 	current_zoom = target
 	zoom_tween.remove_all()
@@ -155,12 +240,9 @@ func on_zoom_tween_zoomed():
 	disable_gp_zoom = false
 
 func load_in():
-	var level_bounds = CurrentLevelData.current_area.header.bounds
-	limit_left = level_bounds.position.x * 32
-	limit_top = level_bounds.position.y * 32
-	limit_right = level_bounds.end.x * 32
-	limit_bottom = level_bounds.end.y * 32
-	
+	level_bounds = CurrentLevelData.current_area.header.bounds
+	level_bounds.position *= 32
+	level_bounds.size *= 32
 	
 	if focus_on != null:
 		position = focus_on.global_position

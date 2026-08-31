@@ -13,6 +13,8 @@ signal fludd_deactivated
 signal start_moving
 signal stop_moving
 
+signal loaded
+
 # Child nodes
 onready var states_node = $States
 onready var nozzles_node = $Nozzles
@@ -534,6 +536,8 @@ func load_in():
 		else:
 			show()
 			toggle_movement(true)
+	
+	emit_signal("loaded")
 
 
 func find_teleporter(target_tag: String) -> GameObject:
@@ -861,7 +865,7 @@ func _physics_process(delta: float) -> void:
 		velocity.y += gravity * gravity_scale
 	
 	if !swimming:
-		velocity.y = clamp(velocity.y, velocity.y, max_aerial_velocity)
+		velocity.y = min(velocity.y, max_aerial_velocity)
 	
 	if is_instance_valid(state):
 		disable_movement = state.disable_movement or (nozzle != null and (nozzle.name == "TurboNozzle" and nozzle.activated))
@@ -1148,9 +1152,13 @@ func _physics_process(delta: float) -> void:
 		# if crushers detected, disable all collision and enable singular "crushed" collider
 		update_collision(crusher_detector.get_overlapping_bodies().size() <= 0)
 		
+		var old_y_vel: float = velocity.y
 		velocity = move_and_slide_with_snap(velocity, snap, Vector2.UP, true, 4, deg2rad(46))
+		velocity.y = old_y_vel
 		if is_grounded():
 			velocity.y = min(0, velocity.y)
+		if is_ceiling():
+			velocity.y = max(0, velocity.y)
 		
 		## CLIPPING CODE
 		var ray_check: Dictionary = get_world_2d().direct_space_state.intersect_ray(last_position, global_position, [self], 1)

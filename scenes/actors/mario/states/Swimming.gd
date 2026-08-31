@@ -31,6 +31,7 @@ func _ready():
 	override_rotation = true
 	use_dive_collision = true
 	auto_flip = true
+	force_cam_follow_y = true
 
 func _start_check(_delta):
 	return character.check_liquid(LiquidBase.LiquidType.Water) and !(character.powerup != null and character.powerup.id == "Metal")

@@ -15,6 +15,7 @@ func _ready():
 	override_rotation = true
 	use_dive_collision = true
 	auto_flip = true
+	force_cam_follow_y = true
 	attack_tier = 2
 
 func _start_check(_delta):
