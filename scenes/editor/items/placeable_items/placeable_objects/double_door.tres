@@ -1,0 +1,32 @@
+[gd_resource type="Resource" load_steps=12 format=2]
+
+[ext_resource path="res://scenes/editor/items/placeable_object.gd" type="Script" id=1]
+[ext_resource path="res://scenes/actors/objects/star_door/Editor/double/metal_door_double_empty_preview.png" type="Texture" id=2]
+[ext_resource path="res://scenes/actors/objects/star_door/Editor/double/planks_door_double_empty_preview.png" type="Texture" id=3]
+[ext_resource path="res://scenes/actors/objects/star_door/Editor/double/rusty_door_double_empty_preview.png" type="Texture" id=4]
+[ext_resource path="res://scenes/actors/objects/star_door/Editor/double/spooky_door_double_empty_preview.png" type="Texture" id=5]
+[ext_resource path="res://scenes/actors/objects/star_door/Editor/double/standard_door_double_empty_preview.png" type="Texture" id=6]
+[ext_resource path="res://scenes/actors/objects/star_door/Editor/double/planks_door_double_empty_icon.png" type="Texture" id=7]
+[ext_resource path="res://scenes/actors/objects/star_door/Editor/double/rusty_door_double_empty_icon.png" type="Texture" id=8]
+[ext_resource path="res://scenes/actors/objects/star_door/Editor/double/standard_door_double_empty_icon.png" type="Texture" id=9]
+[ext_resource path="res://scenes/actors/objects/star_door/Editor/double/metal_door_double_empty_icon.png" type="Texture" id=10]
+[ext_resource path="res://scenes/actors/objects/star_door/Editor/double/spooky_door_double_empty_icon.png" type="Texture" id=11]
+
+[resource]
+script = ExtResource( 1 )
+item_name = "Double Door"
+groups = PoolStringArray( "warp" )
+change_to = "obj_door"
+items_in_sequence = 2
+index_in_sequence = 1
+icons = [ ExtResource( 9 ), ExtResource( 10 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 11 ) ]
+previews = [ ExtResource( 6 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ) ]
+priority = 48
+object_id = 113
+object_center = Vector2( 0, 0 )
+tile_mode_offset = Vector2( 0, 0 )
+tile_mode_step = 32
+property_overrides = {
+9: "Empty",
+10: 0
+}

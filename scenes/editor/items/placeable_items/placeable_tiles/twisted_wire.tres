@@ -1,7 +1,14 @@
-[gd_resource type="Resource" load_steps=3 format=2]
+[gd_resource type="Resource" load_steps=10 format=2]
 
 [ext_resource path="res://scenes/editor/items/placeable_tile.gd" type="Script" id=1]
 [ext_resource path="res://assets/tiles/twisted_wire/icon.png" type="Texture" id=2]
+[ext_resource path="res://assets/tiles/twisted_wire/palettes/1_icon.png" type="Texture" id=3]
+[ext_resource path="res://assets/tiles/twisted_wire/palettes/2_icon.png" type="Texture" id=4]
+[ext_resource path="res://assets/tiles/twisted_wire/palettes/3_icon.png" type="Texture" id=5]
+[ext_resource path="res://assets/tiles/twisted_wire/palettes/4_icon.png" type="Texture" id=6]
+[ext_resource path="res://assets/tiles/twisted_wire/palettes/6_icon.png" type="Texture" id=7]
+[ext_resource path="res://assets/tiles/twisted_wire/palettes/5_icon.png" type="Texture" id=8]
+[ext_resource path="res://assets/tiles/twisted_wire/palettes/7_icon.png" type="Texture" id=9]
 
 [resource]
 script = ExtResource( 1 )
@@ -10,7 +17,7 @@ groups = PoolStringArray(  )
 change_to = ""
 items_in_sequence = 0
 index_in_sequence = 0
-icons = [ ExtResource( 2 ) ]
+icons = [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 8 ), ExtResource( 7 ), ExtResource( 9 ) ]
 previews = [ ExtResource( 2 ) ]
 priority = 41
 tileset_id = 45

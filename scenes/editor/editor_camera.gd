@@ -103,6 +103,8 @@ func camera_movement(delta: float):
 	var editor_ui: Control = get_node("%EditorUI")
 	
 	var move_speed = speed * 2 if speedup_held else speed
+	move_speed *= zoom
+	
 	var direction = Vector2.ZERO
 	direction.x = int(right_held) - int(left_held)
 	direction.y = int(down_held) - int(up_held)

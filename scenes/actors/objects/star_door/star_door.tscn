@@ -1,14 +1,17 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://scenes/actors/objects/door/door.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/actors/objects/star_door/star_door.gd" type="Script" id=2]
 [ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/frames_emblem_double.tres" type="SpriteFrames" id=3]
 [ext_resource path="res://scenes/actors/objects/star_door/Door Textures/frames_double.tres" type="SpriteFrames" id=4]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/frames_emblem_double_recolorable.tres" type="SpriteFrames" id=5]
 [ext_resource path="res://scenes/actors/objects/star_door/double_enter_area.tres" type="Shape2D" id=6]
 [ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/frames_emblem_single.tres" type="SpriteFrames" id=7]
 [ext_resource path="res://scenes/actors/objects/star_door/single_enter_area.tres" type="Shape2D" id=8]
 [ext_resource path="res://assets/sounds/single_door_close.wav" type="AudioStream" id=9]
 [ext_resource path="res://assets/sounds/single_door_open.wav" type="AudioStream" id=10]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/frames_emblem_single_recolorable.tres" type="SpriteFrames" id=11]
+[ext_resource path="res://scenes/actors/mario/SpriteAnimSync.gd" type="Script" id=12]
 [ext_resource path="res://scenes/actors/objects/star_door/Door Textures/frames_single.tres" type="SpriteFrames" id=16]
 [ext_resource path="res://assets/sounds/double_door_open.ogg" type="AudioStream" id=17]
 [ext_resource path="res://assets/sounds/double_door_close.ogg" type="AudioStream" id=18]
@@ -20,6 +23,8 @@ double_door_frames = ExtResource( 4 )
 single_door_frames = ExtResource( 16 )
 double_icon_frames = ExtResource( 3 )
 single_icon_frames = ExtResource( 7 )
+double_icon_recolorable_frames = ExtResource( 5 )
+single_icon_recolorable_frames = ExtResource( 11 )
 double_area_shape = ExtResource( 6 )
 single_area_shape = ExtResource( 8 )
 double_open_audio = ExtResource( 17 )
@@ -36,6 +41,12 @@ frame = 0
 z_index = -2
 frames = ExtResource( 3 )
 animation = "wood_shine"
+
+[node name="RecolorableSprite" type="AnimatedSprite" parent="IconSprite" index="0"]
+visible = false
+frames = ExtResource( 5 )
+animation = "wood_shine"
+script = ExtResource( 12 )
 
 [node name="VisibilityEnabler2D" parent="." index="7"]
 pause_animated_sprites = false

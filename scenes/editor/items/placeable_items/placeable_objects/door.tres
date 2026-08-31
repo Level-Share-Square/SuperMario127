@@ -16,8 +16,8 @@
 script = ExtResource( 1 )
 item_name = "Door"
 groups = PoolStringArray( "warp" )
-change_to = ""
-items_in_sequence = 0
+change_to = "obj_double_door"
+items_in_sequence = 2
 index_in_sequence = 0
 icons = [ ExtResource( 3 ), ExtResource( 5 ), ExtResource( 4 ), ExtResource( 10 ), ExtResource( 6 ) ]
 previews = [ ExtResource( 2 ), ExtResource( 7 ), ExtResource( 11 ), ExtResource( 8 ), ExtResource( 9 ) ]

@@ -10,7 +10,7 @@ export(NodePath) var shared_path
 
 var placed_item_property = null
 var pixel_lock = true
-var invert_pixel_lock = false
+var invert_pixel_lock = true
 var object_layering = true
 var focus_layer = false
 

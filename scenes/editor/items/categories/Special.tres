@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=55 format=2]
+[gd_resource type="Resource" load_steps=58 format=2]
 
 [ext_resource path="res://scenes/editor/items/placeable_items.gd" type="Script" id=1]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/blue_coin.tres" type="Resource" id=2]
@@ -54,6 +54,9 @@
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/wind_area.tres" type="Resource" id=129]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/purple_starbit.tres" type="Resource" id=137]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/zoom_trigger.tres" type="Resource" id=139]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/locked_door_single.tres" type="Resource" id=270]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/locked_door.tres" type="Resource" id=271]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/double_door.tres" type="Resource" id=272]
 
 [resource]
 script = ExtResource( 1 )
@@ -68,12 +71,15 @@ placeable_items = {
 "obj_crystal_tap": ExtResource( 12 ),
 "obj_death_plane": ExtResource( 111 ),
 "obj_door": ExtResource( 44 ),
+"obj_double_door": ExtResource( 272 ),
 "obj_hover_box": ExtResource( 24 ),
 "obj_hover_nozzle": ExtResource( 28 ),
 "obj_key": ExtResource( 21 ),
 "obj_launch_star": ExtResource( 104 ),
 "obj_lava": ExtResource( 9 ),
 "obj_level_entrance": ExtResource( 4 ),
+"obj_locked_door": ExtResource( 271 ),
+"obj_locked_door_single": ExtResource( 270 ),
 "obj_metal_breakable_block": ExtResource( 41 ),
 "obj_metal_powerup": ExtResource( 32 ),
 "obj_on_off_floor_switch": ExtResource( 15 ),
