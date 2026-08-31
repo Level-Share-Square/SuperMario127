@@ -113,8 +113,8 @@ position = Vector2( 0, -16 )
 margin_right = 32.0
 margin_bottom = 32.0
 texture = ExtResource( 1 )
-patch_margin_left = 8
-patch_margin_right = 8
+patch_margin_left = 9
+patch_margin_right = 9
 axis_stretch_horizontal = 1
 
 [node name="Note" type="Sprite" parent="Visual/NinePatchRect"]
@@ -126,6 +126,7 @@ anims/bounce = SubResource( 1 )
 anims/bounce_weak = SubResource( 2 )
 
 [node name="Area2D" type="Area2D" parent="."]
+visible = false
 position = Vector2( 0, -16 )
 collision_layer = 0
 collision_mask = 16422
@@ -135,6 +136,7 @@ position = Vector2( 0, 15 )
 shape = SubResource( 3 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
+visible = false
 position = Vector2( 0, 17 )
 rotation = 3.14159
 collision_layer = 16
@@ -159,6 +161,7 @@ stream = ExtResource( 4 )
 bus = "Sounds"
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+self_modulate = Color( 1, 1, 1, 0 )
 rect = Rect2( -128, -128, 256, 256 )
 pause_animations = false
 physics_process_parent = true
