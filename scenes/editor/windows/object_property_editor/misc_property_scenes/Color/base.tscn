@@ -1,4 +1,4 @@
-[gd_scene load_steps=95 format=2]
+[gd_scene load_steps=96 format=2]
 
 [ext_resource path="res://scenes/editor/windows/object_property_editor/misc_property_scenes/Color/base.gd" type="Script" id=1]
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=2]
@@ -19,6 +19,7 @@
 [ext_resource path="res://assets/sounds/hover.wav" type="AudioStream" id=17]
 [ext_resource path="res://assets/sounds/click2.wav" type="AudioStream" id=18]
 [ext_resource path="res://scenes/editor/windows/object_property_editor/misc_property_scenes/Color/color_component.gd" type="Script" id=19]
+[ext_resource path="res://scenes/menu/spinbox_unfocus.gd" type="Script" id=20]
 
 [sub_resource type="StyleBoxEmpty" id=191]
 
@@ -1052,6 +1053,7 @@ margin_bottom = 17.0
 max_value = 255.0
 allow_greater = true
 allow_lesser = true
+script = ExtResource( 20 )
 
 [node name="SliderG" type="HBoxContainer" parent="VBoxContainer/Expanded/Revealer/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
@@ -1084,6 +1086,7 @@ margin_bottom = 17.0
 max_value = 255.0
 allow_greater = true
 allow_lesser = true
+script = ExtResource( 20 )
 
 [node name="SliderB" type="HBoxContainer" parent="VBoxContainer/Expanded/Revealer/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
@@ -1116,6 +1119,7 @@ margin_bottom = 17.0
 max_value = 255.0
 allow_greater = true
 allow_lesser = true
+script = ExtResource( 20 )
 
 [node name="SliderA" type="HBoxContainer" parent="VBoxContainer/Expanded/Revealer/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
@@ -1148,6 +1152,7 @@ margin_bottom = 17.0
 max_value = 255.0
 allow_greater = true
 allow_lesser = true
+script = ExtResource( 20 )
 
 [node name="SliderI" type="HBoxContainer" parent="VBoxContainer/Expanded/Revealer/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
@@ -1181,6 +1186,7 @@ margin_right = 217.0
 margin_bottom = 17.0
 min_value = 1.0
 value = 1.0
+script = ExtResource( 20 )
 
 [node name="HexCode" type="HBoxContainer" parent="VBoxContainer/Expanded/Revealer/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
