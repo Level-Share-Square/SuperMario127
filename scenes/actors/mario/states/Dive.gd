@@ -59,7 +59,7 @@ func _start(_delta : float) -> void:
 				trail.set_script(preload("res://scenes/actors/mario/SpriteAnimSync.gd"))
 				trail.lag_behind = true
 				trail.lag_amount = 0.0
-				trail.mario_sprite = character.sprite
+				trail.parent_sprite = character.sprite
 				for child in trail.get_children():
 					child.queue_free()
 				character.sprite.add_child(trail)

@@ -5,6 +5,8 @@ const SINGLE_VOLUME: float = 4.0
 const DOUBLE_VOLUME: float = 6.0
 
 onready var icon_sprite = $IconSprite
+onready var recolorable_sprite = $IconSprite/RecolorableSprite
+
 onready var collision_shape = $Area2D/CollisionShape2D
 onready var door_background = $ZIndex/DoorBackground
 
@@ -13,6 +15,9 @@ export var single_door_frames: SpriteFrames
 
 export var double_icon_frames: SpriteFrames
 export var single_icon_frames: SpriteFrames
+
+export var double_icon_recolorable_frames: SpriteFrames
+export var single_icon_recolorable_frames: SpriteFrames
 
 export var double_area_shape: Shape2D
 export var single_area_shape: Shape2D
@@ -39,6 +44,7 @@ var text := ""
 var prev_coll
 var insufficient_text: String = "Sorry! You need {num} {col} to open this door!"
 var is_single: bool = false
+var add_suffix: bool = true
 var reset_read_timer := 0.0
 
 var possible_coll = ["shine", "star coin", "coin", "star bit", "key", "unknown"]
@@ -84,7 +90,34 @@ func _on_property_changed(key, value):
 				icon_sprite.animation = palette_dict[palette] + "_" + collectible
 			else:
 				icon_sprite.animation = "null"
+		
+		add_suffix = true
+		recolorable_sprite.visible = false
+		if recolorable_sprite.frames.has_animation(icon_sprite.animation):
+			if collectible == "key":
+				var key_data_array: Array = CurrentLevelData.level_tags.key_object_map.get(required_key, [])
+				var key_data: KeyData = null
+				if not key_data_array.empty():
+					key_data = key_data_array[0]
+				
+				if is_instance_valid(key_data):
+					add_suffix = key_data.visible
+					if key_data.color != Color.yellow:
+						recolorable_sprite.visible = true
+						recolorable_sprite.self_modulate = key_data.color
 		coll = collectible
+		
+		var collectible_text: String = collectible
+		if required_amount != 1 and collectible != "key": collectible_text += "s"
+		text = insufficient_text
+		if not add_suffix:
+			text = text.replace(" {col}", "")
+			text = text.replace("{col} ", "")
+			text = text.replace("{col}", "")
+		text = text.format({
+			"num": required_amount if collectible != "key" else "the %s" % [required_key],
+			"col": collectible_text
+		})
 
 
 ## ANIMATION
@@ -216,6 +249,7 @@ func _ready() -> void:
 	# set up single vs double doors
 	door_sprite.set_sprite_frames(single_door_frames if is_single else double_door_frames)
 	icon_sprite.set_sprite_frames(single_icon_frames if is_single else double_icon_frames)
+	recolorable_sprite.set_sprite_frames(single_icon_recolorable_frames if is_single else double_icon_recolorable_frames)
 	collision_shape.shape = single_area_shape if is_single else double_area_shape
 	
 	open_audio = single_open_audio if is_single else double_open_audio
@@ -233,20 +267,9 @@ func _ready() -> void:
 		icon_sprite.z_index = 0
 		door_sprite.z_index = 0
 	
-	if collectible != "unknown" and possible_coll.has(collectible):
-		icon_sprite.animation = palette_dict[palette] + "_" + collectible
-	else:
-		icon_sprite.animation = "null"
-	door_sprite.animation = palette_dict[palette]
-	
 	update_collectible_counts()
-
-	var collectible_text: String = collectible
-	if required_amount != 1 and collectible != "key": collectible_text += "s"
-	text = insufficient_text.format({
-		"num": required_amount if collectible != "key" else "the %s" % [required_key],
-		"col": collectible_text
-	})
 	
+	# force it to update
+	coll = ""
 	_on_property_changed("collectible", collectible)
 	connect("property_changed", self, "_on_property_changed")

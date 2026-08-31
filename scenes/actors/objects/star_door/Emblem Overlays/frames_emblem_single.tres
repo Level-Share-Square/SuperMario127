@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=101 format=2]
+[gd_resource type="SpriteFrames" load_steps=126 format=2]
 
 [ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/single/planks_door_coin_anim_overlay.png" type="Texture" id=1]
 [ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/single/standard_door_star_anim_overlay.png" type="Texture" id=2]
@@ -19,6 +19,11 @@
 [ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/single/spooky_door_starbit_anim_overlay.png" type="Texture" id=17]
 [ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/single/planks_door_starbit_anim_overlay.png" type="Texture" id=18]
 [ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/single/rusty_door_starbit_anim_overlay.png" type="Texture" id=19]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/single/planks_door_key_anim_overlay.png" type="Texture" id=20]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/single/spooky_door_key_anim_overlay.png" type="Texture" id=21]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/single/metal_door_key_anim_overlay.png" type="Texture" id=22]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/single/standard_door_key_anim_overlay.png" type="Texture" id=23]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/single/rusty_door_key_anim_overlay.png" type="Texture" id=24]
 [ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/single/metal_door_coin_anim_overlay.png" type="Texture" id=69]
 
 [sub_resource type="AtlasTexture" id=1]
@@ -35,6 +40,22 @@ region = Rect2( 48, 0, 24, 40 )
 
 [sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 69 )
+region = Rect2( 72, 0, 24, 40 )
+
+[sub_resource type="AtlasTexture" id=81]
+atlas = ExtResource( 22 )
+region = Rect2( 0, 0, 24, 40 )
+
+[sub_resource type="AtlasTexture" id=82]
+atlas = ExtResource( 22 )
+region = Rect2( 24, 0, 24, 40 )
+
+[sub_resource type="AtlasTexture" id=83]
+atlas = ExtResource( 22 )
+region = Rect2( 48, 0, 24, 40 )
+
+[sub_resource type="AtlasTexture" id=84]
+atlas = ExtResource( 22 )
 region = Rect2( 72, 0, 24, 40 )
 
 [sub_resource type="AtlasTexture" id=5]
@@ -101,6 +122,22 @@ region = Rect2( 48, 0, 24, 40 )
 atlas = ExtResource( 1 )
 region = Rect2( 72, 0, 24, 40 )
 
+[sub_resource type="AtlasTexture" id=85]
+atlas = ExtResource( 20 )
+region = Rect2( 0, 0, 24, 40 )
+
+[sub_resource type="AtlasTexture" id=86]
+atlas = ExtResource( 20 )
+region = Rect2( 24, 0, 24, 40 )
+
+[sub_resource type="AtlasTexture" id=87]
+atlas = ExtResource( 20 )
+region = Rect2( 48, 0, 24, 40 )
+
+[sub_resource type="AtlasTexture" id=88]
+atlas = ExtResource( 20 )
+region = Rect2( 72, 0, 24, 40 )
+
 [sub_resource type="AtlasTexture" id=17]
 atlas = ExtResource( 15 )
 region = Rect2( 0, 0, 24, 40 )
@@ -163,6 +200,22 @@ region = Rect2( 48, 0, 24, 40 )
 
 [sub_resource type="AtlasTexture" id=28]
 atlas = ExtResource( 12 )
+region = Rect2( 72, 0, 24, 40 )
+
+[sub_resource type="AtlasTexture" id=89]
+atlas = ExtResource( 24 )
+region = Rect2( 0, 0, 24, 40 )
+
+[sub_resource type="AtlasTexture" id=90]
+atlas = ExtResource( 24 )
+region = Rect2( 24, 0, 24, 40 )
+
+[sub_resource type="AtlasTexture" id=91]
+atlas = ExtResource( 24 )
+region = Rect2( 48, 0, 24, 40 )
+
+[sub_resource type="AtlasTexture" id=92]
+atlas = ExtResource( 24 )
 region = Rect2( 72, 0, 24, 40 )
 
 [sub_resource type="AtlasTexture" id=29]
@@ -229,6 +282,22 @@ region = Rect2( 48, 0, 24, 40 )
 atlas = ExtResource( 9 )
 region = Rect2( 72, 0, 24, 40 )
 
+[sub_resource type="AtlasTexture" id=93]
+atlas = ExtResource( 21 )
+region = Rect2( 0, 0, 24, 40 )
+
+[sub_resource type="AtlasTexture" id=94]
+atlas = ExtResource( 21 )
+region = Rect2( 24, 0, 24, 40 )
+
+[sub_resource type="AtlasTexture" id=95]
+atlas = ExtResource( 21 )
+region = Rect2( 48, 0, 24, 40 )
+
+[sub_resource type="AtlasTexture" id=96]
+atlas = ExtResource( 21 )
+region = Rect2( 72, 0, 24, 40 )
+
 [sub_resource type="AtlasTexture" id=41]
 atlas = ExtResource( 7 )
 region = Rect2( 0, 0, 24, 40 )
@@ -293,6 +362,22 @@ region = Rect2( 48, 0, 24, 40 )
 atlas = ExtResource( 13 )
 region = Rect2( 72, 0, 24, 40 )
 
+[sub_resource type="AtlasTexture" id=97]
+atlas = ExtResource( 23 )
+region = Rect2( 0, 0, 24, 40 )
+
+[sub_resource type="AtlasTexture" id=98]
+atlas = ExtResource( 23 )
+region = Rect2( 24, 0, 24, 40 )
+
+[sub_resource type="AtlasTexture" id=99]
+atlas = ExtResource( 23 )
+region = Rect2( 48, 0, 24, 40 )
+
+[sub_resource type="AtlasTexture" id=100]
+atlas = ExtResource( 23 )
+region = Rect2( 72, 0, 24, 40 )
+
 [sub_resource type="AtlasTexture" id=53]
 atlas = ExtResource( 4 )
 region = Rect2( 0, 0, 24, 40 )
@@ -348,6 +433,11 @@ animations = [ {
 "name": "metal_coin",
 "speed": 24.0
 }, {
+"frames": [ SubResource( 81 ), SubResource( 82 ), SubResource( 83 ), SubResource( 84 ) ],
+"loop": false,
+"name": "metal_key",
+"speed": 24.0
+}, {
 "frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
 "loop": false,
 "name": "metal_shine",
@@ -373,6 +463,11 @@ animations = [ {
 "name": "plank_coin",
 "speed": 24.0
 }, {
+"frames": [ SubResource( 85 ), SubResource( 86 ), SubResource( 87 ), SubResource( 88 ) ],
+"loop": false,
+"name": "plank_key",
+"speed": 24.0
+}, {
 "frames": [ SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ) ],
 "loop": false,
 "name": "plank_shine",
@@ -391,6 +486,11 @@ animations = [ {
 "frames": [ SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ) ],
 "loop": false,
 "name": "rusty_coin",
+"speed": 24.0
+}, {
+"frames": [ SubResource( 89 ), SubResource( 90 ), SubResource( 91 ), SubResource( 92 ) ],
+"loop": false,
+"name": "rusty_key",
 "speed": 24.0
 }, {
 "frames": [ SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ) ],
@@ -413,6 +513,11 @@ animations = [ {
 "name": "spooky_coin",
 "speed": 24.0
 }, {
+"frames": [ SubResource( 93 ), SubResource( 94 ), SubResource( 95 ), SubResource( 96 ) ],
+"loop": false,
+"name": "spooky_key",
+"speed": 24.0
+}, {
 "frames": [ SubResource( 41 ), SubResource( 42 ), SubResource( 43 ), SubResource( 44 ) ],
 "loop": false,
 "name": "spooky_shine",
@@ -431,6 +536,11 @@ animations = [ {
 "frames": [ SubResource( 49 ), SubResource( 50 ), SubResource( 51 ), SubResource( 52 ) ],
 "loop": false,
 "name": "wood_coin",
+"speed": 24.0
+}, {
+"frames": [ SubResource( 97 ), SubResource( 98 ), SubResource( 99 ), SubResource( 100 ) ],
+"loop": false,
+"name": "wood_key",
 "speed": 24.0
 }, {
 "frames": [ SubResource( 53 ), SubResource( 54 ), SubResource( 55 ), SubResource( 56 ) ],

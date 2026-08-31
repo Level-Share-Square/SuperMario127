@@ -1,22 +1,23 @@
 tool
 extends AnimatedSprite
 
-onready var mario_sprite : AnimatedSprite = get_parent()
+onready var parent_sprite : AnimatedSprite = get_parent()
 var lag_behind: bool = false
 var lag_amount: float = 1
 var last_sprite_pos
 
 func _process(_delta):
-	if not mario_sprite: return
+	if not parent_sprite: return
+	if not frames.has_animation(parent_sprite.animation): return
 	
-	animation = mario_sprite.animation
-	frame = mario_sprite.frame
-	flip_h = mario_sprite.flip_h
-	flip_v = mario_sprite.flip_v
-	offset = mario_sprite.offset
+	animation = parent_sprite.animation
+	frame = parent_sprite.frame
+	flip_h = parent_sprite.flip_h
+	flip_v = parent_sprite.flip_v
+	offset = parent_sprite.offset
 	
 	if lag_behind:
-		if last_sprite_pos and last_sprite_pos != mario_sprite.global_position:
-			global_position = mario_sprite.global_position - (mario_sprite.global_position - last_sprite_pos)*lag_amount
-			global_rotation = mario_sprite.global_rotation
-		last_sprite_pos = mario_sprite.global_position
+		if last_sprite_pos and last_sprite_pos != parent_sprite.global_position:
+			global_position = parent_sprite.global_position - (parent_sprite.global_position - last_sprite_pos)*lag_amount
+			global_rotation = parent_sprite.global_rotation
+		last_sprite_pos = parent_sprite.global_position
