@@ -10,12 +10,15 @@ export var volume_range : float
 export var pitch_range : float
 export var sound_number : int
 export var bus : String
+var next_index: int = 0
 
 func _ready():
+	randomize()
 	for i in get_children():
 		dvols.append(i.volume_db)
 		dpitches.append(i.pitch_scale)
 		soundlist.append(i)
+	soundlist.shuffle()
 	if spawn_node:
 		if typeof(spawn_node) == TYPE_NODE_PATH:
 			root = get_node(spawn_node)
@@ -51,8 +54,10 @@ func play(num=0, ran=true):
 		_iplay(ransnd)
 		
 func _get_ransnd(ran=true):
-	var chance = randi() % soundlist.size()
-	var ransnd = soundlist[chance]
+	var ransnd = soundlist[next_index]
+	if next_index + 1 == soundlist.size():
+		soundlist.shuffle()
+	next_index = wrapi(next_index + 1, 0, soundlist.size())
 	ransnd.bus = bus if bus != null else ransnd.bus
 	if ran:
 		_randomise_pitch_and_vol(ransnd)
