@@ -74,6 +74,14 @@ func _activated_update(delta):
 		character.squish_lerp = true
 		character.velocity.y -= accel * normal.y
 	
+	if is_instance_valid(character.camera):
+		var tween: SceneTreeTween = create_tween()
+		tween.tween_property(
+			character.camera, "y_baseline", 
+			character.global_position.y - (character.camera.size.y * normal.y * 1.5),
+			0.5
+		)
+	
 	if character.fuel > 0 and !character.swimming:
 		character.fuel -= fuel_depletion
 		if character.fuel <= 0:

@@ -1,20 +1,27 @@
 extends Camera2D
 
 
-const CENTER_OFFSET: float = 160.0
+const CENTER_OFFSET: float = 96.0
 const GROUND_OFFSET: float = -48.0
 const CROUCH_OFFSET: float = 80.0
 
-const X_MARGIN: float = 64.0
-const X_FOLLOW_SPEED: float = 0.8
+const X_MARGIN: float = 32.0
+const X_FULL_MARGIN: float = 144.0
+
+const X_SLOW_FOLLOW_SPEED: float = 2.0
+const X_FOLLOW_SPEED: float = 6.0
+
+const X_SPEED_THRESHOLD: float = 120.0
+const X_MAX_SPEED: float = 500.0
+const X_MAX_LEAD_DISTANCE: float = 256.0
 
 const Y_FOLLOW_SPEED: float = 3.0
 const Y_FAST_FOLLOW_SPEED: float = 5.0
 const Y_DESPERATE_FOLLOW_SPEED: float = 6.0
 
 const Y_SLOW_CORRECT_SPEED: float = 2.0
-const Y_CORRECT_SPEED: float = 6.0
-const Y_DESPERATE_CORRECT_SPEED: float = 11.0
+const Y_CORRECT_SPEED: float = 9.0
+const Y_DESPERATE_CORRECT_SPEED: float = 24.0
 
 const Y_OFFSET_SPEED: float = 4.0
 
@@ -52,8 +59,10 @@ onready var cutscene_tween: Tween = $CutsceneTween
 onready var viewport
 
 var character_vel = Vector2(0, 0)
-var y_baseline: float = 0
-var y_offset: float = 0
+var current_lead_offset: float = 0.0
+var y_baseline: float = 0.0
+var y_offset: float = 0.0
+var cur_baseline: float = 0.0
 
 func _ready():
 	in_cutscene = false
@@ -72,10 +81,13 @@ func _ready():
 		global_position = character_node.global_position
 		last_position = global_position
 		y_baseline = global_position.y
+		cur_baseline = y_baseline
 		y_offset = GROUND_OFFSET
 
 
 func _physics_process(delta):
+	last_position = global_position
+	
 	var level_total_bounds := Vector2(level_bounds.position.x + level_bounds.size.x, level_bounds.position.y + level_bounds.size.y)
 	var max_zoom: float = min(level_total_bounds.x / (base_size.x*2), level_total_bounds.y / (base_size.y*2))
 	zoom.x = min(zoom.y, max_zoom)
@@ -84,7 +96,6 @@ func _physics_process(delta):
 	if auto_move:
 		if focus_on != null:
 			position = position.linear_interpolate(focus_on.global_position, fps_util.PHYSICS_DELTA * 3)
-			#reset_physics_interpolation()
 			bg.parallax_node.scroll_base_scale.y = zoom.y
 		
 		elif is_instance_valid(character_node):
@@ -96,21 +107,42 @@ func _physics_process(delta):
 					global_position = character_node.global_position
 					last_position = global_position
 					y_baseline = global_position.y
+					cur_baseline = y_baseline
 					y_offset = GROUND_OFFSET
 					skip_to_player = false
 				
 				var char_screen_pos: Vector2 = character_node.get_canvas_transform().xform(character_node.global_position)
 				var char_center_distance: Vector2 = char_screen_pos - (base_size * zoom.y)
+				
+				## x axis
+				var char_velocity_x: float = character_node.velocity.x
+				var char_speed_x: float = abs(char_velocity_x)
+				
+				var target_lead_offset: float = 0.0
+				if char_speed_x > X_SPEED_THRESHOLD:
+					var speed_factor: float = clamp((char_speed_x - X_SPEED_THRESHOLD) / (X_MAX_SPEED - X_SPEED_THRESHOLD), 0.0, 1.0)
+					target_lead_offset = X_MAX_LEAD_DISTANCE * zoom.y * speed_factor * sign(char_velocity_x)
+				
+				current_lead_offset = lerp(current_lead_offset, target_lead_offset, delta * 1.0)
+				
+				var target_x: float = character_node.global_position.x + current_lead_offset
+				var x_delta: float = target_x - global_position.x
+				
+				if abs(x_delta) > X_MARGIN:
+					var clamped_delta: float = x_delta - (sign(x_delta) * X_MARGIN)
+					var follow_speed: float = X_FOLLOW_SPEED
+					if abs(x_delta) < X_FULL_MARGIN:
+						var diff: float = X_FOLLOW_SPEED - X_SLOW_FOLLOW_SPEED
+						var margin_diff: float = X_FULL_MARGIN - X_MARGIN
+						var distance_to_edge: float = (abs(x_delta) - X_MARGIN) / margin_diff
+						follow_speed = X_SLOW_FOLLOW_SPEED + (diff*distance_to_edge)
+					global_position.x = lerp(global_position.x, global_position.x + clamped_delta, delta * follow_speed)
+				
+				## y axis
 				var y_dist_abs: float = abs(char_center_distance.y)
-				var lookahead: float = CENTER_OFFSET * character_node.facing_direction
-				
-				last_position = global_position
-				
-				#if char_center_distance.x + lookahead < -X_MARGIN or char_center_distance.x + lookahead > X_MARGIN:
-				#	global_position.x = lerp(global_position.x, character_node.global_position.x + lookahead, delta * X_FOLLOW_SPEED)
-				global_position.x = character_node.global_position.x
-				
 				if y_dist_abs > abs(size.y/4) and not character_node.is_grounded():
+					var target_y: float = character_node.global_position.y
+					
 					var t: float = clamp(y_dist_abs / abs(size.y), 0.0, 2.0)
 					var correct_speed: float = smoothstep(Y_SLOW_CORRECT_SPEED, Y_DESPERATE_CORRECT_SPEED, t * Y_DESPERATE_CORRECT_SPEED)
 					if t < 1.0:
@@ -118,8 +150,13 @@ func _physics_process(delta):
 					else:
 						correct_speed = lerp(Y_CORRECT_SPEED, Y_DESPERATE_CORRECT_SPEED, ease(min((t - 1.0), 1.0), 0.5))
 					
-					y_baseline = lerp(y_baseline, character_node.global_position.y, delta * correct_speed)
+					var normalized_t: float = clamp(t / 2.0, 0.0, 1.0)
+					var eased_t: float = ease(t, 5.0)
+					target_y += pow(512.0, eased_t * 2) * sign(char_center_distance.y)
+					
+					y_baseline = lerp(y_baseline, target_y, delta * correct_speed)
 					y_offset = lerp(y_offset, 0, delta * Y_OFFSET_SPEED)
+					cur_baseline = y_baseline
 				
 				elif is_instance_valid(character_node.state) and character_node.state.force_cam_follow_y:
 					y_baseline = character_node.global_position.y
@@ -138,7 +175,15 @@ func _physics_process(delta):
 				if follow_t > 1.0:
 					y_follow = lerp(Y_FOLLOW_SPEED, Y_FAST_FOLLOW_SPEED, ease(min(follow_t - 1.0, 1.0), 0.5))
 				
-				global_position.y = lerp(global_position.y - y_offset, y_baseline, delta * y_follow)
+				var t: float = clamp(y_dist_abs / (abs(size.y) + 0.0001), 0.0, 2.0)
+				var update_speed: float = smoothstep(Y_SLOW_CORRECT_SPEED, Y_DESPERATE_CORRECT_SPEED, t * Y_DESPERATE_CORRECT_SPEED)
+				if t < 1.0:
+					update_speed = lerp(Y_SLOW_CORRECT_SPEED, Y_CORRECT_SPEED, ease(t, 2.0))
+				else:
+					update_speed = lerp(Y_CORRECT_SPEED, Y_DESPERATE_CORRECT_SPEED, ease(min((t - 1.0), 1.0), 0.5))
+				
+				cur_baseline = lerp(cur_baseline, y_baseline, delta * update_speed)
+				global_position.y = lerp(global_position.y - y_offset, cur_baseline, delta * y_follow)
 				global_position.y += y_offset
 		
 		if !zoom.is_equal_approx(old_zoom):
@@ -165,19 +210,11 @@ func _physics_process(delta):
 		global_position.y = level_bounds.size.y - size.y
 	
 	for stopper in area.get_overlapping_areas():
-#				if global_position.y < stopper.top_bound.y + size.length().y * 1.2 or global_position.y > stopper.bottom_bound.y + size.length().y * 1.2 or global_position.x < stopper.left_bound.x + size.length().x * 1.2 or global_position.x > stopper.right_bound.x + size.length().x * 1.2:
-		# this calculates if the camera is too far away from a horizontal or vertical edge and takes resized bounds into account
-		# the same as what the code commented out above does
-		
 		if abs(global_position.y - stopper.global_position.y) < size.y * 1.2 + abs(stopper.top_bound.y - stopper.global_position.y) or abs(global_position.x - stopper.global_position.x) < size.x * 1.2 + abs(stopper.left_bound.x - stopper.global_position.x):
 			var overlapX = min(abs(last_position.x + size.x - stopper.left_bound.x), abs(last_position.x - size.x - stopper.right_bound.x))
 			var overlapY = min(abs(last_position.y + size.y - stopper.top_bound.y), abs(last_position.y - size.y - stopper.bottom_bound.y))
 			
-		
 			if overlapX < overlapY:
-#						print(overlapX)
-#						print(overlapY)
-				
 				if last_position.x < stopper.global_position.x and global_position.x > last_position.x:
 					global_position.x = stopper.left_bound.x - size.x + 1
 				elif last_position.x > stopper.global_position.x and global_position.x < last_position.x:
@@ -185,17 +222,11 @@ func _physics_process(delta):
 				else:
 					pass
 			else:
-#						print(overlapX)
-#						print(overlapY)
-#						print(global_position.y > last_position.y)
 				# top bound of stopper
 				if last_position.y < stopper.global_position.y and global_position.y > last_position.y:
 					global_position.y = stopper.top_bound.y - size.y + 1
 				# bottom bound of stopper
 				elif last_position.y > stopper.global_position.y and global_position.y < last_position.y:
-					#print("botttom")
-					#print(stopper.top_bound.y)
-					#print(stopper.bottom_bound.y)
 					global_position.y = stopper.bottom_bound.y + size.y - 1
 				else:
 					pass
@@ -227,7 +258,6 @@ func set_zoom_tween(target : Vector2, time : float, override = false):
 	var max_size = level_size.y/divide
 	
 	if intended_zoom.x > level_size.x:
-		#target.x = clamp(target.x, target.x, level_size.x/size.x)
 		max_size = (level_size.x/size.x)
 	target = Vector2(min(target.x, max_size), min(target.y, max_size))
 	zoom_tween.interpolate_property(self, "zoom", zoom, target, time, 1, 0)
@@ -256,10 +286,6 @@ func load_in():
 
 func queue_cutscene(cutscene : CameraCutscene):
 	cutscene_queue.append(cutscene)
-	
-#	print(cutscene_queue)
-#	print(cutscene.owner.pause_mode)
-
 
 func start_queue():
 	if cutscene_queue.size() == 0:
@@ -270,8 +296,6 @@ func start_queue():
 		in_cutscene = true
 		play_cutscene(cutscene_queue[0])
 		print("queue started!")
-	
-
 
 func play_cutscene(cutscene : CameraCutscene, reverse: bool = false):
 	current_cutscene = cutscene
