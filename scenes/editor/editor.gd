@@ -121,26 +121,25 @@ func create_tile_object(cells: Dictionary) -> ObjectData:
 	var shifted_cells: Dictionary = {}
 	for cell in cells:
 		shifted_cells[cell - offset] = cells[cell]
-	cells = shifted_cells
 
 	var tile_data: TileData = LayerData.tiles_to_tile_data(shifted_cells, CurrentLevelData.current_area.layers[get_shared_node().layers.find(layer)].tile_data.chunks)
 	var object_data := ObjectData.new(ObjectMetadata.new(offset*32, -1, 0), {4: tile_data})
 	
-	var action = PlaceObjectAction.new()
-	action.shared = get_shared_node()
-	action.object_data = object_data
-	action.layer = layer
+	var object_action = PlaceObjectAction.new()
+	object_action.shared = get_shared_node()
+	object_action.object_data = object_data
+	object_action.layer = layer
 	
-	action_manager.commit_action([action])
+	var tile_action = PlaceTilesAction.new()
+	tile_action.shared = get_shared_node()
+	tile_action.layer = layer
+	tile_action.tileset_id = 0
+	tile_action.tile_id = 0
+	tile_action.palette = 0
+	tile_action.do_tiles = selected_tiles.keys()
+	tile_action.undo_tiles = cells
 	
-	action = PlaceTilesAction.new()
-	action.shared = get_shared_node()
-	action.layer = layer
-	action.tileset_id = 0
-	action.tile_id = 0
-	action.palette = 0
-	action.do_tiles = selected_tiles.keys()
-	action_manager.commit_action([action])
+	action_manager.commit_action([object_action, tile_action])
 	selected_tiles = {}
 	get_node("%TileSelection").reset_bounds()
 	return object_data
