@@ -92,6 +92,11 @@ func handle_custom_song(url: String, underwater: bool = false) -> void:
 			loop_end = variables[2]
 		url = variables[1]
 			
+	if !underwater:
+		stop()
+	else:
+		water_music_player.stop()
+			
 	var song_stream = yield(AssetHandler.load_sound(url, CurrentLevelData.working_folder), "completed")
 	
 	if song_stream == null:
