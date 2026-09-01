@@ -15,6 +15,9 @@ var switch_state := []
 var activated_shine_ids := []
 var current_layer_states := []
 var current_layer: String
+var nozzle_name: String
+var water_left: float = 0
+var area_time_left: float = -1
 
 func reset():
 	current_checkpoint_id = -1
@@ -30,6 +33,9 @@ func reset():
 	switch_state = []
 	activated_shine_ids = []
 	current_layer_states = []
+	nozzle_name = ""
+	water_left = 100
+	area_time_left = -1
 	
 	for index in CurrentLevelData.area_headers.size():
 		current_shine_shards.append([0, []])

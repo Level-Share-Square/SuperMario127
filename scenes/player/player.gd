@@ -61,7 +61,10 @@ func _ready():
 	
 	if CurrentLevelData.current_area.header.timer > 0.00:
 		var timer_manager = get_timer_manager()
-		timer_manager.add_set_timer("area_timer", CurrentLevelData.current_area.header.timer, "death", true, true)
+		var timer: float = CurrentLevelData.current_area.header.timer
+		if CurrentLevelData.checkpoint_data.current_checkpoint_id != -1 and CurrentLevelData.checkpoint_data.area_time_left != -1:
+			timer = CurrentLevelData.checkpoint_data.area_time_left
+		timer_manager.add_set_timer("area_timer", timer, "death", true, true)
 #		vignette.visible = true
 	
 	var player_char = get_node(character)

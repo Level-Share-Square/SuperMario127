@@ -91,6 +91,18 @@ func set_checkpoint(body):
 	CurrentLevelData.checkpoint_data.current_local_keys = CurrentLevelData.vars.local_keys_collected.duplicate(true)
 	CurrentLevelData.checkpoint_data.current_layer = level_layer_ref.get_ref().layer_data.layer_metadata.layer_uuid
 	CurrentLevelData.checkpoint_data.current_layer_states = CurrentLevelData.vars.layer_states.duplicate(true)
+	CurrentLevelData.checkpoint_data.nozzle_name = ""
+	if is_instance_valid(body.nozzle):
+		CurrentLevelData.checkpoint_data.nozzle_name = body.nozzle.name
+	CurrentLevelData.checkpoint_data.water_left = body.fuel
+	CurrentLevelData.checkpoint_data.area_time_left = -1
+	
+	var timer_manager = get_node("/root").get_node("Player").get_timer_manager()
+	if is_instance_valid(timer_manager):
+		var area_timer: Control = timer_manager.get_timer("area_timer")
+		if is_instance_valid(area_timer):
+			CurrentLevelData.checkpoint_data.area_time_left = area_timer.time
+	
 	while CurrentLevelData.vars.liquid_positions.size() <= CurrentLevelData.area_id:
 		CurrentLevelData.vars.liquid_positions.append([])
 	

@@ -502,6 +502,8 @@ func load_in():
 		do_teleport = true
 	elif CurrentLevelData.checkpoint_data.current_checkpoint_id != -1:
 		position = CurrentLevelData.checkpoint_data.current_spawn_pos
+		set_nozzle(CurrentLevelData.checkpoint_data.nozzle_name)
+		fuel = CurrentLevelData.checkpoint_data.water_left
 		reset_physics_interpolation()
 		toggle_movement(true)
 		show()

@@ -25,6 +25,9 @@ var right_default_poly: PoolVector2Array
 
 
 func _ready():
+	left_default_poly = tank_left.polygon
+	right_default_poly = tank_right.polygon
+	
 	# waiting for things to ready themselves yada yada
 	yield(get_tree(), "physics_frame")
 	yield(get_tree(), "physics_frame")
@@ -42,9 +45,6 @@ func _ready():
 	character.connect("nozzle_changed", self, "nozzle_changed")
 	if is_instance_valid(character.nozzle):
 		nozzle_changed(character.nozzle.name)
-	
-	left_default_poly = tank_left.polygon
-	right_default_poly = tank_right.polygon
 	
 	display_fuel = character.fuel
 	update_visuals(display_fuel)
