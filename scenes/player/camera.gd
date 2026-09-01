@@ -262,7 +262,7 @@ func set_zoom_tween(target : Vector2, time : float, override = false):
 	target = Vector2(min(target.x, max_size), min(target.y, max_size))
 	zoom_tween.interpolate_property(self, "zoom", zoom, target, time, 1, 0)
 	disable_gp_zoom = true
-	print(zoom_tween.connect("tween_all_completed", self, "on_zoom_tween_zoomed"))
+	#print(zoom_tween.connect("tween_all_completed", self, "on_zoom_tween_zoomed"))
 	zoom_tween.start()
 
 func on_zoom_tween_zoomed():

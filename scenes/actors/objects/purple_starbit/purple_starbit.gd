@@ -91,7 +91,6 @@ func turn_off():
 		tween.start()
 		yield(tween, "tween_all_completed")
 		visible = false
-		print("shut off")
 	elif (CurrentLevelData.vars.purple_starbits_collected[CurrentLevelData.area_id][0] > req_purples) and (len(CurrentLevelData.vars.required_purple_starbits[CurrentLevelData.area_id]) > 1):
 		CurrentLevelData.vars.purple_starbits_collected[CurrentLevelData.area_id][0] = req_purples
 		for _i in range(req_purples, CurrentLevelData.vars.purple_starbits_collected[CurrentLevelData.area_id][0]):

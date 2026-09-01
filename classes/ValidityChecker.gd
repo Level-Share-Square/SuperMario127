@@ -547,8 +547,6 @@ func load_in(code: String)-> void:
 					printerr("Found invalid area while parsing level code, area will be skipped.")
 			else:
 				printerr("Found invalid area while parsing level code, area will be skipped.")
-
-			print(area_result.size())
 	else:
 		print("Outdated format version. Current version is " \
 		+ current_format_version + ", but course uses version " + format_version + ".")
