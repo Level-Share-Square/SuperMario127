@@ -2,9 +2,8 @@ extends Camera2D
 
 
 const CENTER_OFFSET: float = 160.0
-const GROUND_MILD_OFFSET: float = -32.0
-const GROUND_OFFSET: float = -72.0
-const CROUCH_OFFSET: float = 72.0
+const GROUND_OFFSET: float = -48.0
+const CROUCH_OFFSET: float = 80.0
 
 const X_MARGIN: float = 64.0
 const X_FOLLOW_SPEED: float = 0.8
@@ -14,8 +13,8 @@ const Y_FAST_FOLLOW_SPEED: float = 5.0
 const Y_DESPERATE_FOLLOW_SPEED: float = 6.0
 
 const Y_SLOW_CORRECT_SPEED: float = 2.0
-const Y_CORRECT_SPEED: float = 8.0
-const Y_DESPERATE_CORRECT_SPEED: float = 12.0
+const Y_CORRECT_SPEED: float = 6.0
+const Y_DESPERATE_CORRECT_SPEED: float = 11.0
 
 const Y_OFFSET_SPEED: float = 4.0
 
@@ -73,10 +72,10 @@ func _ready():
 		global_position = character_node.global_position
 		last_position = global_position
 		y_baseline = global_position.y
-		y_offset = GROUND_MILD_OFFSET
+		y_offset = GROUND_OFFSET
 
 
-func _process(delta):
+func _physics_process(delta):
 	var level_total_bounds := Vector2(level_bounds.position.x + level_bounds.size.x, level_bounds.position.y + level_bounds.size.y)
 	var max_zoom: float = min(level_total_bounds.x / (base_size.x*2), level_total_bounds.y / (base_size.y*2))
 	zoom.x = min(zoom.y, max_zoom)
@@ -97,11 +96,12 @@ func _process(delta):
 					global_position = character_node.global_position
 					last_position = global_position
 					y_baseline = global_position.y
-					y_offset = GROUND_MILD_OFFSET
+					y_offset = GROUND_OFFSET
 					skip_to_player = false
 				
 				var char_screen_pos: Vector2 = character_node.get_canvas_transform().xform(character_node.global_position)
 				var char_center_distance: Vector2 = char_screen_pos - (base_size * zoom.y)
+				var y_dist_abs: float = abs(char_center_distance.y)
 				var lookahead: float = CENTER_OFFSET * character_node.facing_direction
 				
 				last_position = global_position
@@ -110,12 +110,13 @@ func _process(delta):
 				#	global_position.x = lerp(global_position.x, character_node.global_position.x + lookahead, delta * X_FOLLOW_SPEED)
 				global_position.x = character_node.global_position.x
 				
-				if abs(char_center_distance.y) > abs(size.y/4) and not character_node.is_grounded():
-					var correct_speed: float = Y_SLOW_CORRECT_SPEED
-					if abs(char_center_distance.y) > abs(size.y):
-						correct_speed = Y_DESPERATE_CORRECT_SPEED
-					elif abs(char_center_distance.y) > abs(size.y/1.65):
-						correct_speed = Y_CORRECT_SPEED
+				if y_dist_abs > abs(size.y/4) and not character_node.is_grounded():
+					var t: float = clamp(y_dist_abs / abs(size.y), 0.0, 2.0)
+					var correct_speed: float = smoothstep(Y_SLOW_CORRECT_SPEED, Y_DESPERATE_CORRECT_SPEED, t * Y_DESPERATE_CORRECT_SPEED)
+					if t < 1.0:
+						correct_speed = lerp(Y_SLOW_CORRECT_SPEED, Y_CORRECT_SPEED, ease(t, 2.0))
+					else:
+						correct_speed = lerp(Y_CORRECT_SPEED, Y_DESPERATE_CORRECT_SPEED, ease(min((t - 1.0), 1.0), 0.5))
 					
 					y_baseline = lerp(y_baseline, character_node.global_position.y, delta * correct_speed)
 					y_offset = lerp(y_offset, 0, delta * Y_OFFSET_SPEED)
@@ -128,17 +129,15 @@ func _process(delta):
 					var translated_transform: Transform2D = character_node.transform.translated(Vector2(0, 96))
 					if character_node.inputs[9][0] and abs(character_node.velocity.x) < 10:
 						y_offset = lerp(y_offset, CROUCH_OFFSET, delta * Y_OFFSET_SPEED)
-					elif character_node.test_move(translated_transform, Vector2(0, 0.5)):
-						y_offset = lerp(y_offset, GROUND_OFFSET, delta * Y_OFFSET_SPEED)
 					else:
-						y_offset = lerp(y_offset, GROUND_MILD_OFFSET, delta * Y_OFFSET_SPEED)
+						y_offset = lerp(y_offset, GROUND_OFFSET, delta * Y_OFFSET_SPEED)
 					y_baseline = character_node.global_position.y
 				
-				var y_follow: float = Y_FOLLOW_SPEED 
-				if abs(char_center_distance.y) < size.y:
-					y_follow = Y_DESPERATE_FOLLOW_SPEED
-				elif abs(char_center_distance.y) < size.y/1.35:
-					y_follow = Y_FAST_FOLLOW_SPEED
+				var follow_t: float = clamp(y_dist_abs / max(size.y, 0.0001), 0.0, 2.0)
+				var y_follow: float = lerp(Y_DESPERATE_FOLLOW_SPEED, Y_FOLLOW_SPEED, ease(min(follow_t, 1.0), 1.5))
+				if follow_t > 1.0:
+					y_follow = lerp(Y_FOLLOW_SPEED, Y_FAST_FOLLOW_SPEED, ease(min(follow_t - 1.0, 1.0), 0.5))
+				
 				global_position.y = lerp(global_position.y - y_offset, y_baseline, delta * y_follow)
 				global_position.y += y_offset
 		
