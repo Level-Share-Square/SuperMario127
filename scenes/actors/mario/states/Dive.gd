@@ -102,7 +102,14 @@ func _update(_delta) -> void:
 
 func _stop(delta : float) -> void:
 	var sprite : AnimatedSprite = character.sprite
-	if !character.test_move(character.transform, Vector2(0, 8)) and character.test_move(character.transform, Vector2(0.1 * character.facing_direction, -15)) and !character.test_move(character.transform, Vector2(0, -16)) and !character.is_grounded():
+	if character.is_on_wall():
+		character.velocity.x = 150 * -character.facing_direction
+		character.velocity.y = -200
+		character.position.x -= 4 * character.facing_direction
+		character.position.y -= 16
+		character.set_state_by_name("BonkedState", delta)
+		character.sound_player.play_bonk_sound()
+	elif !character.test_move(character.transform, Vector2(0, 8)) and character.test_move(character.transform, Vector2(0.1 * character.facing_direction, -15)) and !character.test_move(character.transform, Vector2(0, -16)) and !character.is_grounded():
 		character.velocity.x = bonk_power * -character.facing_direction
 		character.velocity.y = -65
 		character.position.x -= 2 * character.facing_direction
@@ -110,12 +117,6 @@ func _stop(delta : float) -> void:
 		character.set_state_by_name("BonkedState", delta)
 		character.sound_player.play_bonk_sound()
 		sprite.rotation_degrees = 0
-	if character.is_on_wall():
-		character.velocity.x = 150 * -character.facing_direction
-		character.velocity.y = -200
-		character.position.x -= 2 * character.facing_direction
-		character.set_state_by_name("BonkedState", delta)
-		character.sound_player.play_bonk_sound()
 	if character.is_grounded():
 		character.set_state_by_name("SlideState", delta)
 		character.sprite.scale = LAND_SQUISH
