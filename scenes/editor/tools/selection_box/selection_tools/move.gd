@@ -26,7 +26,7 @@ func clicked():
 func commit_to_action():
 	for object in editor.selected_objects:
 		action.affected_objects[object]["changed_properties"]["position"] = object.position
-	editor.action_manager.commit_action(action)
+	editor.action_manager.commit_action([action])
 
 
 ## for the bulk action

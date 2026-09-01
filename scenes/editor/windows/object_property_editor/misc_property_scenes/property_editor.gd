@@ -56,7 +56,7 @@ func change_property(new_value, save_to_data: bool = true):
 #	var action := ChangePropertyBulkAction.new()
 #	action.affected_objects = affected_objects
 #	action.bulk_store_original_properties()
-#	editor.action_manager.commit_action(action)
+#	editor.action_manager.commit_action([action])
 	emit_signal("property_edited", property[0], new_value, check_matches, save_to_data)
 
 

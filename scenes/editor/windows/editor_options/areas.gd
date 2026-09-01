@@ -70,7 +70,7 @@ func create_area():
 		
 		var action := AddAreaAction.new()
 		action.area_header = area
-		editor.action_manager.commit_action(action)
+		editor.action_manager.commit_action([action])
 		reload_areas()
 
 	new_area.disabled = (CurrentLevelData.area_headers.size() == 32)
@@ -96,5 +96,5 @@ func paste_area():
 	if area_header:
 		var action := AddAreaAction.new()
 		action.area_header = area_header
-		editor.action_manager.commit_action(action)
+		editor.action_manager.commit_action([action])
 		reload_areas()

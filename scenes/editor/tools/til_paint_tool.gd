@@ -83,7 +83,7 @@ func finalize_placement() -> void:
 	action.palette = 0 if is_erasing else editor.selected_item.palette
 	action.do_tiles = used_tiles
 	action.undo_tiles = undo_tiles.duplicate()
-	editor.action_manager.commit_action(action)
+	editor.action_manager.commit_action([action])
 	
 	used_tiles.clear()
 	undo_tiles.clear()

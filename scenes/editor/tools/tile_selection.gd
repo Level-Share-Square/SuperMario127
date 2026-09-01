@@ -83,7 +83,7 @@ func move_action(old_tiles, new_tiles):
 	action.shared = shared
 	action.layer = editor.layer
 	action.find_map_state(old_tiles, new_tiles)
-	editor.action_manager.commit_action(action)
+	editor.action_manager.commit_action([action])
 	editor.tile_buffer.clear()
 	select_tiles()
 	

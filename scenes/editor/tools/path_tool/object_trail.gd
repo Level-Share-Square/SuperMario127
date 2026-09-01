@@ -69,7 +69,7 @@ func confirm():
 	action.shared = shared
 	action.objects = objects_array
 	action.layer = editor.layer
-	editor.action_manager.commit_action(action)
+	editor.action_manager.commit_action([action])
 	_on_Tools_tool_changed()
 
 func update_node_position(node: Node2D):

@@ -79,7 +79,7 @@ func _unhandled_input(event):
 					action.editor = editor
 					action.selection_box = selection_box
 					action.selected_objects = {}
-					editor.action_manager.commit_action(action)
+					editor.action_manager.commit_action([action])
 				else:
 					hide_selection_box()
 				
@@ -106,7 +106,7 @@ func _unhandled_input(event):
 						action.editor = editor
 						action.selection_box = selection_box
 						action.selected_objects = selected_dict
-						editor.action_manager.commit_action(action)
+						editor.action_manager.commit_action([action])
 					else:
 						hide_selection_box()
 						item_actions.hide_selection_actions()
@@ -276,7 +276,7 @@ func paste():
 			var action = PlaceObjectBulkAction.new()
 			action.shared = shared
 			action.objects = object_data
-			editor.action_manager.commit_action(action)
+			editor.action_manager.commit_action([action])
 			while action.new_objects == {}:
 				pass
 			editor.selected_objects = action.new_objects
@@ -292,7 +292,7 @@ func _on_Delete_button_down():
 		var action = EraseObjectBulkAction.new()
 		action.shared = shared
 		action.objects = editor.selected_objects.keys()
-		editor.action_manager.commit_action(action)
+		editor.action_manager.commit_action([action])
 
 		editor.selected_objects = {}
 		selected_dict = {}

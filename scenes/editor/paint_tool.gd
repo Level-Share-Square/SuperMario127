@@ -81,7 +81,7 @@ func finalize_placement() -> void:
 	action.tile_id = editor.selected_item.tile_id
 	action.palette = editor.selected_item.palette
 	action.do_tiles = editor.tile_buffer.get_used_cells()
-	editor.action_manager.commit_action(action)
+	editor.action_manager.commit_action([action])
 	
 	editor.tile_buffer.clear()
 
@@ -94,7 +94,7 @@ func finalize_erase() -> void:
 	action.tile_id = 0
 	action.palette = 0
 	action.do_tiles = editor.tile_buffer.get_used_cells()
-	editor.action_manager.commit_action(action)
+	editor.action_manager.commit_action([action])
 	
 	editor.tile_buffer.clear()
 
@@ -106,7 +106,7 @@ func place_object(pos: Vector2):
 	var action := PlaceObjectAction.new()
 	action.shared = shared
 	action.object_data = data
-	editor.action_manager.commit_action(action)
+	editor.action_manager.commit_action([action])
 	
 	
 #	elif Input.is_action_pressed("erase"):

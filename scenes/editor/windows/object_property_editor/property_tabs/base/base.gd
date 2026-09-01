@@ -91,7 +91,7 @@ func flip_objects(multiplier: Vector2): # Hello everybody my name is
 	var action := ChangePropertyBulkAction.new()
 	action.affected_objects = setup_flipped_objects(multiplier)
 	action.bulk_store_original_properties()
-	editor.action_manager.commit_action(action)
+	editor.action_manager.commit_action([action])
 
 func setup_flipped_objects(multiplier: Vector2) -> Dictionary:
 	var affected_objects: Dictionary

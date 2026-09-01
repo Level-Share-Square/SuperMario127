@@ -32,7 +32,7 @@ func change_property(property: String, new_value, check_matches, save_to_data):
 	action.layer_index = window.layer_index
 	action.property = property
 	action.new_value = new_value
-	editor.action_manager.commit_action(action)
+	editor.action_manager.commit_action([action])
 
 func get_property_value(property_id: String):
 	return layer_data.layer_metadata[property_id]

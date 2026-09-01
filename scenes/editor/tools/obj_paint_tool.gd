@@ -95,7 +95,7 @@ func place_object(pos: Vector2, data = null):
 	action.shared = shared
 	action.layer = editor.layer
 	action.object_data = data
-	editor.action_manager.commit_action(action)
+	editor.action_manager.commit_action([action])
 	
 	return action.object
 
@@ -112,7 +112,7 @@ func erase_object(object: GameObject):
 	action.shared = shared
 	action.layer = editor.layer
 	action.object = object
-	editor.action_manager.commit_action(action)
+	editor.action_manager.commit_action([action])
 	
 func change_property(object, property: String, new_value, old_value):
 	var properties: Dictionary = setup_properties(property, new_value, old_value)
@@ -120,7 +120,7 @@ func change_property(object, property: String, new_value, old_value):
 	action.object = object
 	action.changed_properties = properties["changed_properties"]
 	action.original_properties = properties["original_properties"]
-	editor.action_manager.commit_action(action)
+	editor.action_manager.commit_action([action])
 
 func setup_properties(property: String, new_value, old_value) -> Dictionary:
 	var properties: Dictionary = {

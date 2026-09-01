@@ -43,14 +43,14 @@ func gravity_changed(new_value) -> void:
 	action.property = "gravity"
 	action.id = CurrentLevelData.area_id
 	action.new_value = new_value
-	editor.action_manager.commit_action(action)
+	editor.action_manager.commit_action([action])
 
 func time_changed(new_value) -> void:
 	var action := ChangeAreaAction.new()
 	action.property = "timer"
 	action.id = CurrentLevelData.area_id
 	action.new_value = mins.value*60 + sec.value
-	editor.action_manager.commit_action(action)
+	editor.action_manager.commit_action([action])
 
 
 func change_property(property: String, new_value, check_matches, save_to_data):
@@ -58,7 +58,7 @@ func change_property(property: String, new_value, check_matches, save_to_data):
 	action.property = property
 	action.id = CurrentLevelData.area_id
 	action.new_value = new_value
-	editor.action_manager.commit_action(action)
+	editor.action_manager.commit_action([action])
 
 func get_property_value(property_id: String):
 	return CurrentLevelData.current_area.header[property_id]

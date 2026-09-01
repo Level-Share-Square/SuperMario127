@@ -29,7 +29,7 @@ func update():
 func commit_to_action():
 	for object in editor.selected_objects:
 		action.affected_objects[object]["changed_properties"]["scale"] = object.scale
-	editor.action_manager.commit_action(action)
+	editor.action_manager.commit_action([action])
 
 func setup_affected_objects() -> Dictionary:
 	var affected_objects: Dictionary

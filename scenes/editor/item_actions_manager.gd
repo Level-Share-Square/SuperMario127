@@ -128,7 +128,7 @@ func delete_objects():
 	action.shared = shared
 	action.layer = editor.layer
 	action.objects = editor.selected_objects
-	editor.action_manager.commit_action(action)
+	editor.action_manager.commit_action([action])
 	
 	action.connect("delete_undo", get_node("%ObjectSelection"), "on_undid_delete")
 	emit_signal("objects_deleted", editor.selected_objects)
@@ -149,7 +149,7 @@ func delete_tiles():
 	action.palette = 0
 	action.do_tiles = editor.selected_tiles.keys()
 	action.undo_tiles = undo_tiles.duplicate(true)
-	editor.action_manager.commit_action(action)
+	editor.action_manager.commit_action([action])
 
 	get_node("%TileSelection").reset_bounds()
 	emit_signal("tiles_deleted", editor.selected_tiles)

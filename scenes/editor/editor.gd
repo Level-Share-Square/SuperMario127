@@ -131,7 +131,7 @@ func create_tile_object(cells: Dictionary) -> ObjectData:
 	action.object_data = object_data
 	action.layer = layer
 	
-	action_manager.commit_action(action)
+	action_manager.commit_action([action])
 	
 	action = PlaceTilesAction.new()
 	action.shared = get_shared_node()
@@ -140,7 +140,7 @@ func create_tile_object(cells: Dictionary) -> ObjectData:
 	action.tile_id = 0
 	action.palette = 0
 	action.do_tiles = selected_tiles.keys()
-	action_manager.commit_action(action)
+	action_manager.commit_action([action])
 	selected_tiles = {}
 	get_node("%TileSelection").reset_bounds()
 	return object_data

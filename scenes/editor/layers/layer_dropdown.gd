@@ -99,7 +99,7 @@ func new_layer(ground: bool = true) -> void:
 	var action := AddLayerAction.new()
 	action.shared = shared
 	action.ground = ground
-	editor.action_manager.commit_action(action)
+	editor.action_manager.commit_action([action])
 
 
 func _process(_delta: float) -> void:

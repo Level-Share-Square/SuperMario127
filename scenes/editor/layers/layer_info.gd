@@ -83,7 +83,7 @@ func delete_layer() -> void:
 	var action := DeleteLayerAction.new()
 	action.shared = shared
 	action.layer_index = layer_data.layer_metadata.order
-	shared.get_parent().action_manager.commit_action(action)
+	shared.get_parent().action_manager.commit_action([action])
 	
 	editor.get_node("%LayerEditor").close()
 	editor.deselect_objects()
@@ -101,7 +101,7 @@ func toggle_visibility() -> void:
 	action.shared = shared
 	action.property = "layer_visible"
 	action.new_value = !layer_data.layer_metadata.layer_visible
-	shared.get_parent().action_manager.commit_action(action)
+	shared.get_parent().action_manager.commit_action([action])
 	
 	if shared.get_parent().focus_layer:
 		if layer_data.layer_metadata.layer_uuid != shared.get_parent().layer:
@@ -141,7 +141,7 @@ func dragger_up() -> void:
 			action.shared = shared
 			action.layer_index = layer_data.layer_metadata.order
 			action.final_layer_index = target_layer_info.layer_data.layer_metadata.order
-			editor.action_manager.commit_action(action)
+			editor.action_manager.commit_action([action])
 			click_sound.play()
 			editor.get_node("%LayerEditor").close()
 			editor.get_node("%ObjectSettingsWindow").close()
@@ -164,7 +164,7 @@ func merge_layer():
 	action.layer_id = layer_data.layer_metadata.layer_uuid
 	action.other_layer_id = shared.get_layer_at(layer_data.layer_metadata.order + 1).layer_data.layer_metadata.layer_uuid
 	action.shared = shared
-	editor.action_manager.commit_action(action)
+	editor.action_manager.commit_action([action])
 	editor.get_node("%LayerEditor").close()
 
 

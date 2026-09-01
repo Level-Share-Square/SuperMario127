@@ -77,7 +77,7 @@ func delete_area():
 	if id != CurrentLevelData.area_id:
 		var action := DeleteAreaAction.new()
 		action.area_id = id
-		area_settings.editor.action_manager.commit_action(action)
+		area_settings.editor.action_manager.commit_action([action])
 		if CurrentLevelData.area_id > id:
 			CurrentLevelData.area_id -= 1
 		area_settings.reload_areas()
@@ -99,7 +99,7 @@ func duplicate_area():
 		print(area_header.music, CurrentLevelData.area_headers[id].music)
 		var action := AddAreaAction.new()
 		action.area_header = area_header
-		area_settings.editor.action_manager.commit_action(action)
+		area_settings.editor.action_manager.commit_action([action])
 		area_settings.reload_areas()
 
 

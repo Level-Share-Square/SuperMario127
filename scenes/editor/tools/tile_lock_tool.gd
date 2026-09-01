@@ -92,7 +92,7 @@ func finalize_placement() -> void:
 		action.shared = shared
 		action.objects = objects.values().duplicate(true)
 		action.layer = editor.layer
-		editor.action_manager.commit_action(action)
+		editor.action_manager.commit_action([action])
 		for preview in editor.object_buffer.get_children():
 			preview.queue_free()
 	else:
@@ -105,7 +105,7 @@ func finalize_placement() -> void:
 		action.shared = shared
 		action.objects = delete_objects.values().duplicate(true)
 		action.layer = editor.layer
-		editor.action_manager.commit_action(action)
+		editor.action_manager.commit_action([action])
 		for preview in editor.object_buffer.get_children():
 			preview.queue_free()
 	objects.clear()

@@ -82,6 +82,6 @@ func finalize_placement() -> void:
 	action.palette = editor.selected_item.palette if not is_erasing else 0
 	action.do_tiles = editor.tile_buffer.get_used_cells()
 	action.undo_tiles = undo_tiles
-	editor.action_manager.commit_action(action)
+	editor.action_manager.commit_action([action])
 	
 	editor.tile_buffer.clear()

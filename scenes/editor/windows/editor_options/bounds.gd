@@ -71,7 +71,7 @@ func action() -> void:
 	action.property = "bounds"
 	action.id = CurrentLevelData.area_id
 	action.new_value = area_rect
-	editor.action_manager.commit_action(action)
+	editor.action_manager.commit_action([action])
 	
 	CurrentLevelData.editor_data.area_bounds_increment = increment.value
 

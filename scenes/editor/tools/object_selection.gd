@@ -56,7 +56,7 @@ func action():
 	var action := SelectObjectsAction.new()
 	action.editor = editor
 	action.selected_objects = editor.selected_objects
-	editor.action_manager.commit_action(action)
+	editor.action_manager.commit_action([action])
 	
 func fit_to_bounding_rectangle():
 	fill_rect = get_bounding_rectangle()

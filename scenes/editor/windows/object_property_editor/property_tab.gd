@@ -17,7 +17,7 @@ func change_property(property: String, new_value, check_matches, save_to_data):
 		var action := ChangePropertyBulkAction.new()
 		action.affected_objects = affected_objects
 		action.bulk_store_original_properties()
-		editor.action_manager.commit_action(action)
+		editor.action_manager.commit_action([action])
 	else:
 		for object in affected_objects:
 			var properties = affected_objects[object]["changed_properties"]

@@ -71,7 +71,7 @@ func commit_to_action():
 	for object in editor.selected_objects:
 		action.affected_objects[object]["changed_properties"]["position"] = object.position
 		action.affected_objects[object]["changed_properties"]["rotation_degrees"] = object.rotation_degrees
-	editor.action_manager.commit_action(action)
+	editor.action_manager.commit_action([action])
 	action = null
 
 func setup_affected_objects() -> Dictionary:
