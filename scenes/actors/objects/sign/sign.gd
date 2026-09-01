@@ -61,6 +61,10 @@ func _ready():
 	if palette != 0:
 		update_palette()
 	
+	if not enabled:
+		interact_pop_up.visible = false
+		speech_bubble.hide()
+	
 	if open_menu:
 		speech_bubble.hide()
 		exclamation_mark.visible = true
@@ -157,7 +161,7 @@ func _physics_process(delta):
 			being_read = false
 	
 	
-	if character == null or being_read: 
+	if not is_instance_valid(character) or being_read: 
 		interact_pop_up.position = lerp(interact_pop_up.position, Vector2(normal_pos.x * 0.8, normal_pos.y * 0.9), delta * transition_speed)
 		interact_pop_up.scale = lerp(interact_pop_up.scale, Vector2(0.8, 0.8), delta * transition_speed)
 		interact_pop_up.modulate = lerp(interact_pop_up.modulate, Color(1, 1, 1, 0), delta * transition_speed)

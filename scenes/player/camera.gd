@@ -13,7 +13,8 @@ const X_FOLLOW_SPEED: float = 6.0
 
 const X_SPEED_THRESHOLD: float = 120.0
 const X_MAX_SPEED: float = 500.0
-const X_MAX_LEAD_DISTANCE: float = 256.0
+const X_MAX_LEAD_DISTANCE: float = 320.0
+const X_LEAD_SPEED: float = 1.0
 
 const Y_FOLLOW_SPEED: float = 3.0
 const Y_FAST_FOLLOW_SPEED: float = 5.0
@@ -123,7 +124,7 @@ func _physics_process(delta):
 					var speed_factor: float = clamp((char_speed_x - X_SPEED_THRESHOLD) / (X_MAX_SPEED - X_SPEED_THRESHOLD), 0.0, 1.0)
 					target_lead_offset = X_MAX_LEAD_DISTANCE * zoom.y * speed_factor * sign(char_velocity_x)
 				
-				current_lead_offset = lerp(current_lead_offset, target_lead_offset, delta * 1.0)
+				current_lead_offset = lerp(current_lead_offset, target_lead_offset, delta * X_LEAD_SPEED)
 				
 				var target_x: float = character_node.global_position.x + current_lead_offset
 				var x_delta: float = target_x - global_position.x
