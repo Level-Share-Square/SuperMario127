@@ -16,6 +16,9 @@ var activated = false
 
 func _register_properties():
 	register_property(4, "activated", activated, true)
+	
+func _register_property_info():
+	set_property_info("activated", PropertyInfo.new("If true, this block exists unless a P-Switch is active.\nIf false, vice versa.", 1, -INF, INF, ["", ""], ["", ""], false, "Activated"))
 
 func _ready() -> void:
 	current_scene = get_tree().get_current_scene()

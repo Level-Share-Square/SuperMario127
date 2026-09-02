@@ -96,6 +96,14 @@ func _register_properties():
 	set_property_override("tag", PropertyTab.OverrideTypes.DROPDOWN, [CurrentLevelData.level_tags, "get_liquid_args", [CurrentLevelData.level_tags, "liquid_tags"]])
 	set_liquid_property_menus()
 
+func _register_property_info():
+	set_property_info("size", PropertyInfo.new("Dimensions of this object", 1, 0, INF, ["X", "Y"], ["", ""], false, "Size"))
+	set_property_info("color", PropertyInfo.new("The color of this object.", 1, -INF, INF, ["", ""], ["", ""], false, "Color"))
+	set_property_info("tag", PropertyInfo.new("This is affected by Crystal Taps with the same Tag as this.", 1, -INF, INF, ["", ""], ["", ""], false, "Tag"))
+	set_property_info("crystal_tap_mode", PropertyInfo.new("Dictates if a vertically moving liquid moves to it's destination\nor prioritizes expanding and retracting in height.", 1, -INF, INF, ["", ""], ["", ""], false, "Crystal Tap Mode"))
+	set_property_info("waves_enable", PropertyInfo.new("Waves appear at the liquid's surface.", 1, -INF, INF, ["", ""], ["", ""], false, "Waves Enabled"))
+	set_property_info("toxicity", PropertyInfo.new("Drains health from the player at a rate of approximately this/6.5s\nIf this is above 255, this will instantly kill the player.", 1, -INF, INF, ["", ""], ["", ""], false, "Toxicity"))
+
 func _object_ready():
 	connect("transform_changed", self, "update")
 	connect("ready", self, "change_size")

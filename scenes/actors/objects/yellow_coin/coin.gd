@@ -29,6 +29,10 @@ var physics_run := false
 func _register_properties():
 	register_property(4, "physics", physics)
 	register_property(5, "velocity", velocity)
+	
+func _register_property_info():
+	set_property_info("physics", PropertyInfo.new("This coin will obey gravity and disappear after a few seconds.", 1, -INF, INF, ["", ""], ["", ""], false, "Physics"))
+	set_property_info("velocity", PropertyInfo.new("The velocity at which this travels when spawned in.", 1, -INF, INF, ["X", "Y"], ["", ""], false, "Velocity"))
 
 
 func collect(body, is_shell = false):

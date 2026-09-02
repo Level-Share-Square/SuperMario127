@@ -94,6 +94,14 @@ func _register_properties() -> void:
 	register_property(10, "added_to_data", added_to_data, false)
 	property_tabs.append("mission")
 	
+func _register_property_info() -> void:
+	set_property_info("activated", PropertyInfo.new("Determines if the Shine Sprite is activated by default.\nWhen deactivated, this Shine Sprite appears as a Shine Marker\nuntil any activation condition is met.", 1, -INF, INF, ["", ""], ["", ""], false, ""))
+	set_property_info("red_coins_activate", PropertyInfo.new("This Shine Sprite activates once every Red Coin in the level is collected.\nRed Coins are tracked across all areas of a level.", 1, -INF, INF, ["", ""], ["", ""], false, ""))
+	set_property_info("shine_shards_activate", PropertyInfo.new("This Shine Sprite activates once every Shine Shard in this area is collected.\nShine Shards are local to the current area.", 1, -INF, INF, ["", ""], ["", ""], false, ""))
+	set_property_info("mission_uuid", PropertyInfo.new("Determines what Mission this Shine Sprite corralates to.\nMissions determine how many Shine Sprite objectives there are in the level,\nand dictate things such as their Names, Descriptions, and Shine Color.", 1, -INF, INF, ["", ""], ["", ""], false, "Mission"))
+	set_property_info("required_purples", PropertyInfo.new("This Shine Sprite activates once the\nstated number of Purple Starbits in this area are collected.\nPurple Starbits are local to the current area.", 1, 0, INF, ["", ""], ["", ""], false, ""))
+	set_property_info("activation_tag", PropertyInfo.new("Used by the 'Shine Tag' property of Shine Activators to activate this Shine Sprite.", 1, -INF, INF, ["", ""], ["", ""], false, ""))
+	
 func get_mission_args() -> Dictionary:
 	var args: Dictionary
 	for mission_data in CurrentLevelData.level_metadata.collectible_data.mission_data:

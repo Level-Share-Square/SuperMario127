@@ -14,6 +14,9 @@ var respawn_timer = 0.0
 	
 func _register_properties() -> void:
 	register_property(4, "respawns", respawns, true)
+	
+func _register_property_info():
+	set_property_info("respawns", PropertyInfo.new("This will respawn 40 seconds after being collected.", 1, -INF, INF, ["", ""], ["", ""], false, "Respawns"))
 
 func collect(body):
 	if is_enabled_and_on_ground() and !collected and body.name.begins_with("Character") and !body.dead:

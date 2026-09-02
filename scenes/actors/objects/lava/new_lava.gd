@@ -25,6 +25,12 @@ func get_liquid_properties():
 		"lighting",
 		"surface_color"
 	]
+	
+func _register_property_info():
+	._register_property_info()
+	set_property_info("use_old_lava", PropertyInfo.new("Uses the pre 0.10 lava texture", 1, -INF, INF, ["", ""], ["", ""], false, "Use Old Lava"))
+	set_property_info("lighting", PropertyInfo.new("Light is emitted from the lava's surface", 1, -INF, INF, ["", ""], ["", ""], false, "Lighting"))
+	set_property_info("surface_color", PropertyInfo.new("The color of the lava's surface.", 1, -INF, INF, ["", ""], ["", ""], false, "Surface Color"))
 
 
 func update_property(key, value):
