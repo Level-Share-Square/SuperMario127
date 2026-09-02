@@ -118,14 +118,13 @@ func start_entrance_animation(character: Character) -> void:
 	entering = true
 	character.camera.set_zoom_tween(Vector2(1, 1), 0.5)
 	
-	if teleport_mode == TeleportMode.Location:
-		CurrentLevelData.vars.area_transition_helper = AreaTransitionHelper.new(
-			character.velocity, 
-			character.state, 
-			character.facing_direction, 
-			to_local(character.position), 
-			vertical
-		)
+	CurrentLevelData.vars.area_transition_helper = AreaTransitionHelper.new(
+		character.velocity, 
+		character.state.name, 
+		character.facing_direction, 
+		to_local(character.position), 
+		vertical
+	)
 	
 	var sprite_rotation: float = character.sprite.rotation
 	.start_entrance_animation(character)
@@ -146,7 +145,7 @@ func start_exit_animation(character: Character) -> void:
 	
 	if is_instance_valid(helper):
 		character.velocity = helper.velocity
-		character.state = helper.state
+		character.set_state_by_name(helper.state)
 		character.facing_direction = helper.facing_direction
 		character.position = global_position + helper.find_exit_offset(vertical, parts * 32)
 	else:
