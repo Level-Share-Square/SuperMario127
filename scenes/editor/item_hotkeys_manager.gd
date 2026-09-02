@@ -110,6 +110,10 @@ func last_tile():
 
 func switch_item(key):
 	var button = hotbar.bottom_row.get_child(key)
+	if hotbar.palette_container.visible:
+		button = hotbar.palette_container.get_child(key)
+		if not button.visible:
+			return
 	
 	hotbar.manual_button_click(button)
 

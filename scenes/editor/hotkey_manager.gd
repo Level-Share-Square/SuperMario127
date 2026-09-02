@@ -89,6 +89,8 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.is_pressed():
 		if event.physical_scancode >= KEY_1 and event.physical_scancode <= KEY_9:
 			emit_signal("switch_item", event.physical_scancode - KEY_0 - 1)
+		if event.physical_scancode == KEY_0:
+			emit_signal("switch_item", 9)
 		if event.physical_scancode >= KEY_F1 and event.physical_scancode <= KEY_F4:
 			emit_signal("switch_loadout", event.physical_scancode - KEY_F1)
 	
