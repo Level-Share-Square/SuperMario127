@@ -74,12 +74,14 @@ func add_layer(layer_data: LayerData) -> void:
 func check_action():
 	var actions: Array = [editor.action_manager.undo_stack.back(), editor.action_manager.redo_stack.back()]
 	var found_action: bool = false
-	for action in actions:
-		if (action is BaseLayerAction or
-		action is EditLayerAction or
-		action is MergeLayerAction or
-		action is ReorderLayerAction):
-			found_action = true
+	for action_array in actions:
+		if not action_array: continue
+		for action in action_array:
+			if (action is BaseLayerAction or
+			action is EditLayerAction or
+			action is MergeLayerAction or
+			action is ReorderLayerAction):
+				found_action = true
 	if !found_action: return
 	
 	update_layers()

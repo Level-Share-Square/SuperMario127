@@ -79,10 +79,12 @@ func update_values(bypass_checks: bool = false):
 	if !bypass_checks:
 		var update_values: bool = false
 		var actions: Array = [editor.action_manager.undo_stack.back(), editor.action_manager.redo_stack.back()]
-		for action in actions:
-			if action is ChangeAreaAction and action.property == "bounds":
-				update_values = true
-				break
+		for action_array in actions:
+			if not action_array: continue
+			for action in action_array:
+				if action is ChangeAreaAction and action.property == "bounds":
+					update_values = true
+					break
 		if !update_values: return
 
 	shared.update_tilemaps()
