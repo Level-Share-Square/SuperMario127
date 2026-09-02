@@ -294,6 +294,8 @@ static func deserialize_area_header_code(area_code: String) -> AreaHeader:
 	area_header.show_name = set_or_use_default_value(vars, 12, area_header.show_name)
 	area_header.custom_music_name = set_or_use_default_value(vars, 13, area_header.custom_music_name)
 	area_header.custom_music_author = set_or_use_default_value(vars, 14, area_header.custom_music_author)
+	area_header.show_song = set_or_use_default_value(vars, 15, area_header.show_song)
+	area_header.minimum_timer = set_or_use_default_value(vars, 16, area_header.minimum_timer)
 	
 	return area_header
 

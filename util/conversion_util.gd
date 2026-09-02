@@ -394,6 +394,10 @@ static func get_area_data_from_old_data(old_area: AreaDataOld) -> AreaData:
 		old_area.underwater_music
 	)
 	
+	area_header.show_name = false
+	area_header.show_song = false
+	area_header.minimum_timer = -1
+	
 	return get_new_area_code(area_header, old_area)
 
 static func get_area_headers_from_old_data(level_data) -> Array:
@@ -416,6 +420,9 @@ static func get_area_headers_from_old_data(level_data) -> Array:
 			old_area.underwater_music
 		)
 		
+		area_header.show_name = false
+		area_header.show_song = false
+		area_header.minimum_timer = -1
 		area_header.area_code = LevelCodeSerializer.serialize_area(get_new_area_code(area_header, old_area))
 		
 		area_headers.append(area_header)

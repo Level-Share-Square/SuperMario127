@@ -62,8 +62,10 @@ func _ready():
 	if CurrentLevelData.current_area.header.timer > 0.00:
 		var timer_manager = get_timer_manager()
 		var timer: float = CurrentLevelData.current_area.header.timer
-		if CurrentLevelData.checkpoint_data.current_checkpoint_id != -1 and CurrentLevelData.checkpoint_data.area_time_left != -1:
-			timer = CurrentLevelData.checkpoint_data.area_time_left
+		if CurrentLevelData.current_area.header.minimum_timer != -1:
+			if CurrentLevelData.checkpoint_data.current_checkpoint_id != -1 and CurrentLevelData.checkpoint_data.area_time_left != -1:
+				timer = max(CurrentLevelData.checkpoint_data.area_time_left, CurrentLevelData.current_area.header.minimum_timer)
+		
 		timer_manager.add_set_timer("area_timer", timer, "death", true, true)
 #		vignette.visible = true
 	

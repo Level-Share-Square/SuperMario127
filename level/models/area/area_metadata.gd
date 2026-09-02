@@ -17,6 +17,7 @@ const DEFAULT_CUSTOM_MUSIC_AUTHOR: String = "Unknown Author"
 export var name: String
 export var bounds: Rect2
 export var show_name: bool = true
+export var show_song: bool = true
 
 export var sky: int
 export var background: int
@@ -32,6 +33,7 @@ var custom_music_author: String = "Unknown Author"
 
 export var gravity: float
 export var timer: float
+export var minimum_timer: float = 15
 # holds the code for the entire area, so that an area can be loaded with just its metadata 
 export var area_code: String
 
@@ -55,7 +57,9 @@ func _init(
 	set_max_purples_count: int = 0,
 	set_show_name: bool = true,
 	set_custom_music_name: String = DEFAULT_CUSTOM_MUSIC_NAME,
-	set_custom_music_author: String = DEFAULT_CUSTOM_MUSIC_AUTHOR
+	set_custom_music_author: String = DEFAULT_CUSTOM_MUSIC_AUTHOR,
+	set_show_song: bool = true,
+	set_minimum_timer: float = 15
 ):
 	area_code = set_area_code
 	bounds = set_bounds
@@ -73,3 +77,5 @@ func _init(
 	show_name = set_show_name
 	custom_music_name = set_custom_music_name
 	custom_music_author = set_custom_music_author
+	show_song = set_show_song
+	minimum_timer = set_minimum_timer

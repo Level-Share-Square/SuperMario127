@@ -6,6 +6,8 @@ onready var gravity = $"%Gravity"
 onready var mins = $"%Mins"
 onready var sec = $"%Sec"
 onready var show_name = $"%ShowName"
+onready var show_song = $"%ShowSong"
+onready var min_time = $"%MinTime"
 
 
 func _ready():
@@ -36,6 +38,18 @@ func load_settings():
 		PropertyInfo.new(show_name.hint_tooltip)
 	])
 	connect_signals(show_name)
+	show_song.load_property(editor, get_property_value("show_song"), [
+		"show_song",
+		TYPE_BOOL,
+		PropertyInfo.new(show_song.hint_tooltip)
+	])
+	connect_signals(show_song)
+	min_time.load_property(editor, get_property_value("minimum_timer"), [
+		"minimum_timer",
+		TYPE_REAL,
+		PropertyInfo.new(min_time.hint_tooltip, 1, -1, INF)
+	])
+	connect_signals(min_time)
 	
 
 func gravity_changed(new_value) -> void:

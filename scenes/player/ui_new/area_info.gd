@@ -46,19 +46,20 @@ func _ready():
 	if Singleton.Music.song_switched:
 		Singleton.Music.song_switched = false
 		
-		var song_id = header.music
-		if song_id is int:
-			var song_data: LevelSong = Singleton.Music.get_song(song_id)
-			song_name.text = song_data.title
-			author_name.text = song_data.note
-		else:
-			song_name.text = header.custom_music_name
-			author_name.text = header.custom_music_author
-		
-		song_tween = create_tween()
-		song_tween.tween_callback(song_name_anim, "play", ["appear"])
-		song_tween.tween_interval(song_end_delay)
-		song_tween.tween_callback(song_name_anim, "play_backwards", ["appear"])
+		if header.show_song:
+			var song_id = header.music
+			if song_id is int:
+				var song_data: LevelSong = Singleton.Music.get_song(song_id)
+				song_name.text = song_data.title
+				author_name.text = song_data.note
+			else:
+				song_name.text = header.custom_music_name
+				author_name.text = header.custom_music_author
+			
+			song_tween = create_tween()
+			song_tween.tween_callback(song_name_anim, "play", ["appear"])
+			song_tween.tween_interval(song_end_delay)
+			song_tween.tween_callback(song_name_anim, "play_backwards", ["appear"])
 
 
 func hide_info() -> void:
