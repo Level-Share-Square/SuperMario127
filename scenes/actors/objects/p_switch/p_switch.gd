@@ -19,6 +19,10 @@ var pressed_time := 20.0
 
 func _register_properties():
 	register_property(4, "pressed_time", pressed_time, true)
+	
+
+func _register_property_info():
+	set_property_info("pressed time", PropertyInfo.new("How long in seconds this P-Switch inverts the state of P-Switch Blocks for.", 1, -1, INF, ["", ""], ["", ""], false, "Pressed Time"))
 
 func _ready():
 	rotation = 0

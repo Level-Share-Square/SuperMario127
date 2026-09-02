@@ -19,6 +19,10 @@ var last_range : int
 func _register_properties():
 	register_property(4, "water_drain_speed", water_drain_speed, true)
 	register_property(5, "water_drain_range", water_drain_range, true)
+
+func _register_property_info():
+	set_property_info("water_drain_speed", PropertyInfo.new("If the player is in range, their F.L.U.D.D. tank will drain at a rate of this%/sec", 1, -INF, INF, ["", ""], ["", ""], false, "Water Drain Speed"))
+	set_property_info("water_drain_range", PropertyInfo.new("Effective radius from this.", 1, -INF, INF, ["", ""], ["", ""], false, "Water Drain Range"))
 	
 func change_size():
 	var area_shape = area_collision.get_shape()

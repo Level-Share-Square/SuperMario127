@@ -8,6 +8,10 @@ func get_liquid_properties() -> Array:
 
 func update_property(key, value):
 	update()
+	
+func _register_property_info():
+	._register_property_info()
+	set_property_info("toxicity", PropertyInfo.new("Drains health from the player at a rate of approximately this/6.5s\nIf this is above 255, this will instantly kill the player.", 1, -INF, INF, ["", ""], ["", ""], false, "Toxicity"))
 
 func update_liquid_color(new_color):
 	waves.get_material().set_shader_param("color_tint", new_color)

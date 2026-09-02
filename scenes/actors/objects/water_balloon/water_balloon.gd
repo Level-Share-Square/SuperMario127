@@ -26,6 +26,12 @@ func _register_properties():
 	register_property(6, "respawn_timer", respawn_timer)
 	register_property(7, "color", color)
 
+func _register_property_info():
+	set_property_info("added_stamina", PropertyInfo.new("How much of the F.L.U.D.D's Stamina Wheel is regained upon touching this.", 1, -100, 100, ["", ""], ["", ""], false, "Added Stamina"))
+	set_property_info("added_water", PropertyInfo.new("How much % of water is given to the player's F.L.U.D.D. tank upon touching this.\nIf this is 0, the balloon's icon will disappear.", 1, -100, 100, ["", ""], ["", ""], false, "Added Water"))
+	set_property_info("respawn_timer", PropertyInfo.new("How many seconds after use this respawns.\nIf set to 0, this won't respawn.", 1, 0, INF, ["", ""], ["", ""], false, "Respawn Timer"))
+	set_property_info("color", PropertyInfo.new("The color of this object.", 1, -INF, INF, ["", ""], ["", ""], false, "Color"))
+
 
 func collect(body):
 	if is_enabled_and_on_ground() and !collected and body.name.begins_with("Character") and !body.dead:

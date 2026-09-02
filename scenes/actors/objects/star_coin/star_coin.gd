@@ -32,6 +32,10 @@ func _register_properties():
 	register_property(4, "uuid", uuid, false)
 	register_property(5, "hint", hint, true)
 	register_property(6, "color", color, true)
+	
+func _register_property_info():
+	set_property_info("hint", PropertyInfo.new("Gives a hint for finding this Star Coin, found in the pause menu.", 1, -INF, INF, ["", ""], ["", ""], false, "Hint"))
+	set_property_info("color", PropertyInfo.new("The color of this object.", 1, -INF, INF, ["", ""], ["", ""], false, "Color"))
 
 func _ready() -> void:
 	if not Singleton.ModeSwitcher.visible:

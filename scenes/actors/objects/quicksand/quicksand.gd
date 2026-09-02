@@ -20,6 +20,12 @@ func get_liquid_properties():
 		"sinking_speed",
 		"death_threshold",
 	]
+	
+func _register_property_info():
+	._register_property_info()
+	set_property_info("sinking_speed", PropertyInfo.new("The speed at which the player sinks in this quicksand.", 1, -INF, INF, ["", ""], ["", ""], false, "Sinking Speed"))
+	set_property_info("death_threshold", PropertyInfo.new("How far beneath the surface the player can go before dying\nIf this is 0, the surface will bubble, indicating instant death.", 1, 0, INF, ["", ""], ["", ""], false, "Death Threshold"))
+
 
 func update_property(key, value):
 	update()

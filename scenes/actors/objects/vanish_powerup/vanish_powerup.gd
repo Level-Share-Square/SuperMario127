@@ -17,6 +17,12 @@ func _register_properties():
 	register_property(4, "duration", duration, true)
 	register_property(5, "can_respawn", can_respawn, true)
 	register_property(6, "powerup_music", powerup_music, true)
+	
+func _register_property_info():
+	set_property_info("duration", PropertyInfo.new("How long the powerup lasts in seconds.", 1, 0, INF, ["", ""], ["", ""], false, "Duration"))
+	set_property_info("can_respawn", PropertyInfo.new("This will respawn 10 seconds after being collected.", 1, -INF, INF, ["", ""], ["", ""], false, "Can Respawn"))
+	set_property_info("powerup_music", PropertyInfo.new("This will override the current music with powerup music.", 1, -INF, INF, ["", ""], ["", ""], false, "Powerup Music"))
+
 
 
 func collect(body):

@@ -26,6 +26,11 @@ func _register_properties():
 	register_property(6, "one_shot", one_shot)
 	register_property(7, "parts", parts)
 
+func _register_property_info():
+	set_property_info("shine_tag", PropertyInfo.new("Non-Activated Shine Sprites with the same Activation Tag as this\nwill be activated upon touching this.", 1, -INF, INF, ["", ""], ["", ""], false, ""))
+	set_property_info("time_limit", PropertyInfo.new("How long in seconds the Shine specified will stay activated for.\nIf set to 0, this Shine will be activated indefinitely.", 1, 0, INF, ["", ""], ["", ""], false, ""))
+	set_property_info("one_shot", PropertyInfo.new("If true, this object can only be used once.", 1, -INF, INF, ["", ""], ["", ""], false, ""))
+	set_property_info("parts", PropertyInfo.new("How long this object should extend.", 1, -INF, INF, ["", ""], ["", ""], false, ""))
 
 func _input(event):
 	parts_input_handler(event,self)
