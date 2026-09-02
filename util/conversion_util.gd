@@ -403,6 +403,7 @@ static func get_area_data_from_old_data(old_area: AreaDataOld) -> AreaData:
 static func get_area_headers_from_old_data(level_data) -> Array:
 	var area_headers: Array = []
 	
+	var middle_layer_id: String
 	var area_header: AreaHeader
 	for old_area in level_data.areas:
 		old_area = old_area as AreaDataOld
@@ -423,11 +424,16 @@ static func get_area_headers_from_old_data(level_data) -> Array:
 		area_header.show_name = false
 		area_header.show_song = false
 		area_header.minimum_timer = -1
-		area_header.area_code = LevelCodeSerializer.serialize_area(get_new_area_code(area_header, old_area))
+		
+		var area_data: AreaData = get_new_area_code(area_header, old_area)
+		if middle_layer_id == "":
+			middle_layer_id = area_data.layers[2].layer_metadata.layer_uuid
+		
+		area_header.area_code = LevelCodeSerializer.serialize_area(area_data)
 		
 		area_headers.append(area_header)
 	
-	return area_headers
+	return [middle_layer_id] + area_headers
 
 
 static func get_new_area_code(header: AreaHeader, old_area: AreaDataOld) -> AreaData:
@@ -528,11 +534,18 @@ static func get_new_area_code(header: AreaHeader, old_area: AreaDataOld) -> Area
 
 
 static func get_new_level_data_from_old_data(level_data) -> LevelDataContainer:
+	var level_metadata: LevelMetadata = get_level_metadata_from_old_data(level_data)
+	var editor_data := EditorData.new()
+	var area_headers: Array = get_area_headers_from_old_data(level_data)
+	var level_tags: LevelTags = get_level_tags_from_old_data(level_data)
+	
+	editor_data.selected_layer = area_headers.pop_front()
+	
 	var container: LevelDataContainer = LevelDataContainer.new(
-		get_level_metadata_from_old_data(level_data),
-		EditorData.new(),
-		get_area_headers_from_old_data(level_data),
-		get_level_tags_from_old_data(level_data)
+		level_metadata,
+		editor_data,
+		area_headers,
+		level_tags
 	)
 	
 	return container
