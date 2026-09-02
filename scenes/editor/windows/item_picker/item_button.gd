@@ -22,7 +22,7 @@ func set_texture(show_palettes: bool = true):
 	if placeable_item.icons.size() > 1 and show_palettes:
 		icon_display.texture = create_cycling_icon(placeable_item.icons)
 	else:
-		icon_display.texture = placeable_item.icons[placeable_item.palette]
+		icon_display.texture = placeable_item.icons[0]
 
 func create_cycling_icon(icons: Array) -> AnimatedTexture:
 	var final_icon := AnimatedTexture.new()
