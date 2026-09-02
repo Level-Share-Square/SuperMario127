@@ -72,6 +72,7 @@ onready var fludd_sound : AudioStreamPlayer = $FluddSound
 onready var turbo_sound : AudioStreamPlayer = $TurboFluddSound
 onready var fludd_boost_sound : AudioStreamPlayer = $FluddBoostSound
 onready var fludd_charge_sound : AudioStreamPlayer = $FluddChargeSound
+onready var stamina_recharge_sound = $StaminaRechargeSound
 onready var nozzle_switch_sound : AudioStreamPlayer = $NozzleSwitchSound
 onready var particles : Particles2D = $Particles/Particles2D
 onready var slide_particles : Particles2D = $Particles/SlideParticles
@@ -191,6 +192,7 @@ var turbo_nerf := false
 
 var fuel := 100.0
 var stamina := 100.0
+var last_stamina := 100.0
 var breath := 100.0
 var nozzles_list_index := 0
 var powerup : Node = null # Couldn't set static type due to circle reference
@@ -1028,6 +1030,9 @@ func _physics_process(delta: float) -> void:
 			for powerup_node in powerups_node.get_children():
 				powerup_node.handle_update(delta)
 			handle_liquids(liquid_detector.get_overlapping_areas(), delta)
+	if last_stamina < 100 and stamina >= 100:
+		stamina_recharge_sound.play()
+	last_stamina = stamina
 	
 	# Handle powerup
 	if is_instance_valid(powerup):
