@@ -1,4 +1,4 @@
-[gd_scene load_steps=206 format=2]
+[gd_scene load_steps=207 format=2]
 
 [ext_resource path="res://scenes/actors/mario/animation_frames.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/actors/mario/states/Bounce.gd" type="Script" id=2]
@@ -90,6 +90,7 @@
 [ext_resource path="res://scenes/actors/objects/key/key_outline.png" type="Texture" id=88]
 [ext_resource path="res://scenes/actors/mario/materials/palette_swap.tres" type="Material" id=89]
 [ext_resource path="res://assets/sounds/stamina_recharge.wav" type="AudioStream" id=90]
+[ext_resource path="res://assets/sounds/fludd_empty.wav" type="AudioStream" id=91]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 5.5, 4 )
@@ -1679,7 +1680,7 @@ shader = ExtResource( 86 )
 shader_param/ray_count = 4
 shader_param/ray_distance = 0.4
 shader_param/ray_seperation_degrees = 22.0
-shader_param/rotation = 2.2758
+shader_param/rotation = 3.09293
 
 [sub_resource type="RectangleShape2D" id=85]
 extents = Vector2( 8, 18 )
@@ -2507,6 +2508,12 @@ bus = "Sounds"
 stream = ExtResource( 90 )
 bus = "Sounds"
 
+[node name="StaminaEmptySound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 91 )
+volume_db = -11.0
+pitch_scale = 0.75
+bus = "Sounds"
+
 [node name="NozzleSwitchSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 27 )
 volume_db = -5.0
@@ -2545,7 +2552,7 @@ playing = true
 [node name="Recolorable" type="AnimatedSprite" parent="CollectedShine"]
 visible = false
 frames = ExtResource( 61 )
-frame = 7
+frame = 14
 script = ExtResource( 63 )
 
 [node name="ShineParticles" type="Particles2D" parent="CollectedShine"]
