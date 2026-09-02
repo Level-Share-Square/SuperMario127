@@ -46,7 +46,7 @@ func _ready():
 	if Singleton.Music.song_switched:
 		Singleton.Music.song_switched = false
 		
-		if header.show_song:
+		if header.show_song and not Singleton.ModeSwitcher.visible:
 			var song_id = header.music
 			if song_id is int:
 				var song_data: LevelSong = Singleton.Music.get_song(song_id)
