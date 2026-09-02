@@ -9,11 +9,13 @@ func _do() -> void:
 		for new_object in new_objects:
 			object = new_object
 			object_index = new_objects[new_object]
+			object.selected = false
 			restore_object()
 		return
 	for i in objects:
 		object_data = i
 		var new_object = shared.create_object(object_data, layer, true)
+		new_object.selected = false
 		new_objects[new_object] = new_object.get_index()
 		
 

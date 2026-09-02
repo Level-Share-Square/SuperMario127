@@ -106,15 +106,18 @@ func paste_objects(data: Array):
 	object_selection.external_objects_selected([])
 	var objects: Array = LevelCodeDeserializer.deserialize_objects_code(data[0])
 
-	var objects_to_select: Array = []
 	for object in objects:
 		object = object as ObjectData
 		object.metadata.position += editor_camera.position - Vector2(data[1][0], data[1][1])
-
-		objects_to_select.append(shared.create_object(object, editor.layer, true))
+	
+	var action := PlaceObjectBulkAction.new()
+	action.shared = shared
+	action.objects = objects
+	action.layer = editor.layer
+	editor.action_manager.commit_action([action])
 	
 	editor.tool_manager.change_tool("%ObjectSelection")
-	object_selection.external_objects_selected(objects_to_select)
+	object_selection.external_objects_selected(action.new_objects.keys())
 	emit_signal("objects_pasted", data)
 	
 func paste_tiles(data: Array):
