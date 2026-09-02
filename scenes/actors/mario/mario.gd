@@ -360,7 +360,7 @@ func _ready():
 
 func _update_player_framerate():
 	fps_util._update_framerate(false)
-#	get_tree().create_timer(1.0).connect("timeout", self, "_update_player_framerate")
+	get_tree().create_timer(1.0).connect("timeout", self, "_update_player_framerate")
 
 #slavery in super mario 127 :flushed:
 puppet func sync(pos, vel, sprite_frame, sprite_animation, sprite_rotation, is_attacking, is_big_attacking, is_heavy, is_dead, is_controllable): # Ok slave
