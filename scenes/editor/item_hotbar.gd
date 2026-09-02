@@ -28,8 +28,8 @@ var loadout_palettes: Array = [
 
 var selected_loadout: int = 0
 
-var last_selected_tile: PlaceableTile
-var last_selected_object: PlaceableObject
+var last_selected_tile: Array
+var last_selected_object: Array
 
 var selected_button
 
@@ -55,8 +55,8 @@ func _ready():
 		items_favorited = CurrentLevelData.editor_data.fav_counts
 		selected_loadout = CurrentLevelData.editor_data.selected_loadout
 		
-	last_selected_tile = placeable_items.placeable_items["til_grass"]
-	last_selected_object = placeable_items.placeable_items["obj_coin"]
+	last_selected_tile = [placeable_items.placeable_items["til_grass"], 0]
+	last_selected_object = [placeable_items.placeable_items["obj_coin"], 0]
 	
 	refresh_loadout()
 	check_items()
@@ -67,17 +67,17 @@ func _ready():
 func _on_item_button_pressed(item_button):
 	var item_name: String = loadouts[selected_loadout][item_button.get_index()]
 	var associated_item = placeable_items.placeable_items[loadouts[selected_loadout][item_button.get_index()]]
-	if associated_item == editor.selected_item:
+	if associated_item == editor.selected_item and item_button.palette == editor.selected_item.palette:
 		item_button.timer_start = true
 	editor.selected_item = associated_item
 	editor.selected_item.palette = item_button.palette
 	match item_name.substr(0, 3):
 		"obj":
 			item_preview.update_item(associated_item, associated_item.palette, true)
-			last_selected_object = associated_item
+			last_selected_object = [associated_item, 0]
 		"til":
 			item_preview.update_item(associated_item, associated_item.palette, false)
-			last_selected_tile = associated_item
+			last_selected_tile = [associated_item, 0]
 	
 	editor.emit_signal("item_changed", associated_item)
 	update_level_data()
@@ -168,18 +168,30 @@ func on_item_selected(item: PlaceableItem):
 
 func select_last_object():
 	if editor.selected_item is PlaceableObject: return
-	select_item_from_placeable(last_selected_object)
+	select_item_from_placeable(last_selected_object[0], last_selected_object[1])
 	
 func select_last_tile():
 	if editor.selected_item is PlaceableTile: return
-	select_item_from_placeable(last_selected_tile)
+	select_item_from_placeable(last_selected_tile[0], last_selected_tile[1])
+	
+func select_object_from_other(object):
+	select_item_from_placeable(object.placeable_item, object.object_data.metadata.palette)
+	
+func select_tile_from_other(tile):
+	var item = tile_util.get_placeable_from_tile(tile, placeable_items)
+	select_item_from_placeable(item, tile[2])
 
-func select_item_from_placeable(item):
+
+func select_item_from_placeable(item, palette):
 	for button in bottom_row.get_children():
-		if button.item == item:
+		if button.item == item and button.palette == palette:
 			manual_button_click(button)
 			return
+	
 	on_item_selected(item)
+	yield(get_tree(), "idle_frame")
+	var button = bottom_row.get_children()[0]
+	palette_selected(palette)
 
 func refresh_loadout():
 	var favs_amount: int = fav_items[selected_loadout].size()

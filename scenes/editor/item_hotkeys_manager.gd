@@ -137,12 +137,12 @@ func pick_focused_item_released():
 	
 	if "Object" in tools.current_tool.name and hovered_objects:
 		var object = objects_util.find_closest_object(hovered_objects, mouse_pos)
-		if hotbar.selected_button.item == object.placeable_item: return
+		if hotbar.selected_button.item == object.placeable_item and hotbar.selected_button.palette == object.object_data.metadata.palette: return
 		tools.change_tool("ObjectPaint")
-		hotbar.select_item_from_placeable(object.placeable_item)
+		hotbar.select_object_from_other(object)
 		
 	if "Tile" in tools.current_tool.name and not shared.is_air(tile):
 		var item = tile_util.get_placeable_from_tile(tile, editor.placeable_items)
-		if hotbar.selected_button.item == item: return
+		if hotbar.selected_button.item == item and hotbar.selected_button.palette == tile[2]: return
 		tools.change_tool("TilePaint")
-		hotbar.select_item_from_placeable(item)
+		hotbar.select_tile_from_other(tile)
