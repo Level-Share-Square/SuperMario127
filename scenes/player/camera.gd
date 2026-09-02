@@ -151,10 +151,6 @@ func _physics_process(delta):
 					else:
 						correct_speed = lerp(Y_CORRECT_SPEED, Y_DESPERATE_CORRECT_SPEED, ease(min((t - 1.0), 1.0), 0.5))
 					
-					var normalized_t: float = clamp(t / 2.0, 0.0, 1.0)
-					var eased_t: float = ease(t, 5.0)
-					target_y += pow(512.0, eased_t * 2) * sign(char_center_distance.y)
-					
 					y_baseline = lerp(y_baseline, target_y, delta * correct_speed)
 					y_offset = lerp(y_offset, 0, delta * Y_OFFSET_SPEED)
 					cur_baseline = y_baseline
