@@ -188,7 +188,7 @@ func update_tilemaps():
 	for layer in layer_dictionary.values():
 		var tilemap: TileMapManager = layer.tile_map_manager
 		for used_tile in tilemap.get_used_cells():
-			tilemap.update_bitmask_area(used_tile)
+			tilemap.update_autotile(Vector2(used_tile.x, used_tile.y))
 
 func focus_layer(focus: bool, focus_layer: String):
 	for layer_uuid in layers:

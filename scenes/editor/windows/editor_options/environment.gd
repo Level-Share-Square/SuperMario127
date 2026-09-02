@@ -150,5 +150,6 @@ func action(property: String, new_value) -> void:
 	var action := ChangeAreaAction.new()
 	action.property = property
 	action.id = CurrentLevelData.area_id
+	action.shared = editor.get_shared_node()
 	action.new_value = new_value
 	editor.action_manager.commit_action([action])

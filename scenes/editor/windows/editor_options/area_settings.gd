@@ -5,6 +5,7 @@ onready var editor = get_tree().current_scene
 onready var gravity = $"%Gravity"
 onready var mins = $"%Mins"
 onready var sec = $"%Sec"
+onready var tile_with_edges = $"%TileWithEdges"
 onready var show_name = $"%ShowName"
 onready var show_song = $"%ShowSong"
 onready var min_time = $"%MinTime"
@@ -32,6 +33,12 @@ func load_settings():
 	mins.get_line_edit().text = str(mins.value) + " m"
 	sec.get_line_edit().text = str(sec.value) + " s"
 	
+	tile_with_edges.load_property(editor, get_property_value("tile_with_edges"), [
+		"tile_with_edges",
+		TYPE_BOOL,
+		PropertyInfo.new(tile_with_edges.hint_tooltip)
+	])
+	connect_signals(tile_with_edges)
 	show_name.load_property(editor, get_property_value("show_name"), [
 		"show_name",
 		TYPE_BOOL,
@@ -57,6 +64,7 @@ func gravity_changed(new_value) -> void:
 	action.property = "gravity"
 	action.id = CurrentLevelData.area_id
 	action.new_value = new_value
+	action.shared = editor.get_shared_node()
 	editor.action_manager.commit_action([action])
 
 func time_changed(new_value) -> void:
@@ -64,6 +72,7 @@ func time_changed(new_value) -> void:
 	action.property = "timer"
 	action.id = CurrentLevelData.area_id
 	action.new_value = mins.value*60 + sec.value
+	action.shared = editor.get_shared_node()
 	editor.action_manager.commit_action([action])
 
 
@@ -72,6 +81,7 @@ func change_property(property: String, new_value, check_matches, save_to_data):
 	action.property = property
 	action.id = CurrentLevelData.area_id
 	action.new_value = new_value
+	action.shared = editor.get_shared_node()
 	editor.action_manager.commit_action([action])
 
 func get_property_value(property_id: String):

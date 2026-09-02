@@ -16,6 +16,7 @@ const DEFAULT_CUSTOM_MUSIC_AUTHOR: String = "Unknown Author"
 
 export var name: String
 export var bounds: Rect2
+export var tile_with_edges: bool = false
 export var show_name: bool = true
 export var show_song: bool = true
 
@@ -59,7 +60,8 @@ func _init(
 	set_custom_music_name: String = DEFAULT_CUSTOM_MUSIC_NAME,
 	set_custom_music_author: String = DEFAULT_CUSTOM_MUSIC_AUTHOR,
 	set_show_song: bool = true,
-	set_minimum_timer: float = 15
+	set_minimum_timer: float = 15,
+	set_tile_with_edges: bool = false
 ):
 	area_code = set_area_code
 	bounds = set_bounds
@@ -79,3 +81,4 @@ func _init(
 	custom_music_author = set_custom_music_author
 	show_song = set_show_song
 	minimum_timer = set_minimum_timer
+	tile_with_edges = set_tile_with_edges

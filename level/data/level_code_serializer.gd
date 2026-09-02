@@ -157,7 +157,8 @@ static func serialize_area(area: AreaData) -> String:
 			header.custom_music_name,
 			header.custom_music_author,
 			header.show_song,
-			header.minimum_timer
+			header.minimum_timer,
+			header.tile_with_edges
 		]
 	)
 	

@@ -2,7 +2,9 @@ class_name TileMapManager
 extends TileMap
 
 
+const OOB_TILE: int = 26
 var layer_data: LayerData
+
 
 func load_in(s_layer_data: LayerData):
 	layer_data = s_layer_data
@@ -15,6 +17,7 @@ func load_in(s_layer_data: LayerData):
 
 	var packed_tile: int = 0
 	var area_rect: Rect2 = CurrentLevelData.current_area.header.bounds
+	var tile_with_edges: bool = CurrentLevelData.current_area.header.tile_with_edges
 	for coord in layer_data.tile_data.used_tiles:
 		packed_tile = layer_data.tile_data.get_packed_tile_at(coord)
 		place_tile(
@@ -26,8 +29,26 @@ func load_in(s_layer_data: LayerData):
 		)
 #	for chunk in layer_data.tile_data.chunks:
 #		create_tilemap_chunk(chunk, layer_data.tile_data.chunks[chunk])
+
+	var border_coords: PoolVector2Array
+	if tile_with_edges:
+		for x in range(area_rect.position.x - 1, area_rect.position.x + area_rect.size.x):
+			border_coords.append(Vector2(x, area_rect.position.y - 1))
+			border_coords.append(Vector2(x, area_rect.position.y + area_rect.size.y))
+		for y in range(area_rect.position.y - 1, area_rect.position.y + area_rect.size.y):
+			border_coords.append(Vector2(area_rect.position.x - 1, y))
+			border_coords.append(Vector2(area_rect.position.x + area_rect.size.x, y))
+		
+		for coord in border_coords:
+			if get_cellv(coord) == TileMap.INVALID_CELL:
+				set_cellv(coord, OOB_TILE)
 	
 	update_bitmask_region()
+	
+	for coord in border_coords:
+		if get_cellv(coord) == OOB_TILE:
+			set_cellv(coord, TileMap.INVALID_CELL)
+	
 	update_dirty_quadrants()
 
 
@@ -77,7 +98,24 @@ func erase_tile(coords: Vector2, modify_data: bool = false):
 
 func update_autotile(coords: Vector2, use_godot_autotile: bool = true):
 	if use_godot_autotile:
+		var area_rect: Rect2 = CurrentLevelData.current_area.header.bounds
+		var tile_with_edges: bool = CurrentLevelData.current_area.header.tile_with_edges
+		var border_coords: PoolVector2Array
+		if tile_with_edges and is_zero_approx(layer_data.layer_metadata.parallax_distance):
+			for x in range(coords.x - 3, coords.x + 3):
+				for y in range(coords.y - 3, coords.y + 3):
+					if not area_rect.has_point(Vector2(x, y)):
+						border_coords.append(Vector2(x, y))
+			
+			for coord in border_coords:
+				if get_cellv(coord) == TileMap.INVALID_CELL:
+					set_cellv(coord, OOB_TILE)
+		
 		update_bitmask_area(coords)
+		
+		for coord in border_coords:
+			if get_cellv(coord) == OOB_TILE:
+				set_cellv(coord, TileMap.INVALID_CELL)
 	else:
 		# Custom autotile logic goes here
 		pass

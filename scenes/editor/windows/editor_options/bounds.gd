@@ -70,6 +70,7 @@ func action() -> void:
 	var action := ChangeAreaAction.new()
 	action.property = "bounds"
 	action.id = CurrentLevelData.area_id
+	action.shared = editor.get_shared_node()
 	action.new_value = area_rect
 	editor.action_manager.commit_action([action])
 	
