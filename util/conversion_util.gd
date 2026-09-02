@@ -394,6 +394,7 @@ static func get_area_data_from_old_data(old_area: AreaDataOld) -> AreaData:
 		old_area.underwater_music
 	)
 	
+	area_header.tile_with_edges = true
 	area_header.show_name = false
 	area_header.show_song = false
 	area_header.minimum_timer = -1
@@ -421,6 +422,7 @@ static func get_area_headers_from_old_data(level_data) -> Array:
 			old_area.underwater_music
 		)
 		
+		area_header.tile_with_edges = true
 		area_header.show_name = false
 		area_header.show_song = false
 		area_header.minimum_timer = -1

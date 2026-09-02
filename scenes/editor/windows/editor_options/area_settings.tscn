@@ -81,6 +81,7 @@ use_hidden_tabs_for_min_size = true
 script = ExtResource( 13 )
 
 [node name="Background" type="VBoxContainer" parent="ContentDivider/ContentMat/Tabs" index="0"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -407,7 +408,6 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Settings" type="ScrollContainer" parent="ContentDivider/ContentMat/Tabs" index="2"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -792,11 +792,37 @@ margin_bottom = 85.0
 size_flags_horizontal = 3
 alignment = 1
 
-[node name="ShowName" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Bounds/VBoxContainer2" index="0" instance=ExtResource( 19 )]
+[node name="TileWithEdges" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Bounds/VBoxContainer2" index="0" instance=ExtResource( 19 )]
 unique_name_in_owner = true
-margin_top = 13.0
+margin_top = 2.0
 margin_right = 126.0
-margin_bottom = 30.0
+margin_bottom = 19.0
+hint_tooltip = "Whether tiles near the border of the level should connect with the border, even if there are no tiles in it.
+Having this off is best for performance."
+size_flags_horizontal = 7
+size_flags_vertical = 4
+alignment = 1
+
+[node name="PropertyName" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Bounds/VBoxContainer2/TileWithEdges" index="0"]
+margin_top = 0.0
+margin_right = 62.0
+margin_bottom = 17.0
+
+[node name="Padding" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Bounds/VBoxContainer2/TileWithEdges" index="1"]
+margin_left = 66.0
+margin_right = 105.0
+margin_bottom = 17.0
+
+[node name="CheckButton" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Bounds/VBoxContainer2/TileWithEdges" index="2"]
+margin_left = 109.0
+margin_right = 126.0
+margin_bottom = 17.0
+
+[node name="ShowName" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Bounds/VBoxContainer2" index="1" instance=ExtResource( 19 )]
+unique_name_in_owner = true
+margin_top = 23.0
+margin_right = 126.0
+margin_bottom = 40.0
 hint_tooltip = "Whether to show the name of this area upon entering it."
 size_flags_horizontal = 7
 size_flags_vertical = 4
@@ -817,11 +843,11 @@ margin_left = 109.0
 margin_right = 126.0
 margin_bottom = 17.0
 
-[node name="ShowSong" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Bounds/VBoxContainer2" index="1" instance=ExtResource( 19 )]
+[node name="ShowSong" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Bounds/VBoxContainer2" index="2" instance=ExtResource( 19 )]
 unique_name_in_owner = true
-margin_top = 34.0
+margin_top = 44.0
 margin_right = 126.0
-margin_bottom = 51.0
+margin_bottom = 61.0
 hint_tooltip = "Whether to show the name of this area's song upon entering it."
 size_flags_horizontal = 7
 size_flags_vertical = 4
@@ -842,10 +868,10 @@ margin_left = 109.0
 margin_right = 126.0
 margin_bottom = 17.0
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Bounds/VBoxContainer2" index="2"]
-margin_top = 55.0
+[node name="HBoxContainer2" type="HBoxContainer" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Bounds/VBoxContainer2" index="3"]
+margin_top = 65.0
 margin_right = 126.0
-margin_bottom = 72.0
+margin_bottom = 82.0
 custom_constants/separation = 10
 alignment = 1
 
@@ -951,6 +977,7 @@ margin_bottom = 214.0
 margin_right = 350.0
 margin_bottom = 214.0
 
+[editable path="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Bounds/VBoxContainer2/TileWithEdges"]
 [editable path="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Bounds/VBoxContainer2/ShowName"]
 [editable path="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Bounds/VBoxContainer2/ShowSong"]
 [editable path="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/MinTime"]

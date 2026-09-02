@@ -28,6 +28,7 @@ size_flags_horizontal = 3
 margin_left = 156.0
 margin_right = 232.0
 margin_bottom = 40.0
+focus_mode = 0
 theme_type_variation = "CheckButtonTransparent"
 script = ExtResource( 2 )
 
