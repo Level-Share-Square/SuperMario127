@@ -44,6 +44,7 @@ func _activated_update(delta):
 	charge = 0
 	if !character.swimming:
 		character.stamina = 0
+		empty_cooldown = 0.75
 	character.get_state_node("JumpState").ledge_buffer = 0 # Disable coyote time, which allowed for a "double jump" that was weaker than the actual blast
 	deactivate_frames = 30
 		

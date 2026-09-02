@@ -13,6 +13,8 @@ var last_state = null
 var display_stamina: bool
 var stamina_value: float 
 
+var empty_cooldown: float = 0.0
+
 export var frames : SpriteFrames
 export var frames_luigi : SpriteFrames
 
@@ -31,15 +33,23 @@ func handle_update(delta: float):
 	if character.nozzle == self:
 		_update(delta)
 		if character.controllable:
-			if character.inputs[7][0] and !character.inputs[4][0] and _activate_check(delta) and character.fuel > 0 and character.stamina > 0:
-				var can_activate = true
-				for state in blacklisted_states:
-					if character.state == character.get_state_node(state):
-						can_activate = false
-				if can_activate:
-					activated = true
-					_activated_update(delta)
+			if character.inputs[7][0] and !character.inputs[4][0] and _activate_check(delta):
+				if character.fuel > 0 and character.stamina > 0:
+					empty_cooldown = 0.0
+					var can_activate = true
+					for state in blacklisted_states:
+						if character.state == character.get_state_node(state):
+							can_activate = false
+					if can_activate:
+						activated = true
+						_activated_update(delta)
+					else:
+						activated = false
 				else:
+					if character.inputs[7][0] and !character.inputs[4][0]:
+						if empty_cooldown <= 0 and not character.stamina_empty_sound.playing:
+							character.stamina_empty_sound.play()
+							empty_cooldown = 0.75
 					activated = false
 			else:
 				activated = false
@@ -47,6 +57,9 @@ func handle_update(delta: float):
 			activated = false
 	else:
 		activated = false
+	
+	if empty_cooldown > 0:
+		empty_cooldown -= delta
 	_general_update(delta)
 	
 func _activate_check(_delta: float):
