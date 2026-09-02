@@ -557,6 +557,7 @@ func is_grounded() -> bool:
 	
 	var raycast_node := ground_check
 	raycast_node.cast_to = Vector2(0, raycast_length) #26 or 30
+	
 	if using_dive_collision:
 		raycast_node = ground_check_dive
 		raycast_node.cast_to = Vector2(0, 7.5)
@@ -826,12 +827,13 @@ func _physics_process(delta: float) -> void:
 			if body.get_parent() is PhysicsBody2D:
 				if state == $States/SlideStopState or body.get_parent().can_collide_with(self):
 					remove_collision_exception_with(body.get_parent())
-					for raycast in raycasts:
-						raycast.remove_exception(body.get_parent())
 				else:
 					add_collision_exception_with(body.get_parent())
-					for raycast in raycasts:
-						raycast.add_exception(body.get_parent())
+	
+	for raycast_node in raycasts:
+		raycast_node.clear_exceptions()
+		for collision_exception in get_collision_exceptions():
+			raycast_node.add_exception(collision_exception)
 	
 	invulnerable = invulnerable_frames > 0
 	if invulnerable_frames > 0:

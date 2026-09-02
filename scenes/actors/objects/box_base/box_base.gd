@@ -111,6 +111,7 @@ func area_entered(area):
 func area_exited(area):
 	if is_instance_valid(area.owner) and area.owner is Character:
 		if character in box.get_collision_exceptions():
+			character.remove_collision_exception_with(box)
 			box.remove_collision_exception_with(character)
 		character = null
 		char_collider = null
@@ -138,10 +139,12 @@ func try_break() -> void:
 		var hit_dir: int = get_rect_dir(last_hit_rect)
 		if char_can_hit(hit_dir, last_hit_rect):
 			if not character in box.get_collision_exceptions():
+				character.add_collision_exception_with(box)
 				box.add_collision_exception_with(character)
 			if hit_rect.intersects(box_rect):
 				break_box()
 		elif character in box.get_collision_exceptions():
+			character.remove_collision_exception_with(box)
 			box.remove_collision_exception_with(character)
 	
 	last_hit_rect = hit_rect
