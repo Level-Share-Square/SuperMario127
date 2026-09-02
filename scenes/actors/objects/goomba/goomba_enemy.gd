@@ -8,6 +8,7 @@ export var color := Color.red
 onready var recolor_sprite: AnimatedSprite = $AnimatedSprite/RecolorSprite
 onready var player_detector: Area2D = $PlayerDetector
 
+
 func set_color(value: Color) -> void:
 	color = value
 	

@@ -10,3 +10,14 @@ func get_enemy_properties() -> Array:
 		"color", 
 #		"rainbow",
 	]
+
+
+func _ready():
+	._ready()
+	connect("property_changed", self, "update_property")
+
+
+func update_property(key: String, value):
+	if key == "color":
+		for enemy in spawned_enemies:
+			enemy.set_color(value)
