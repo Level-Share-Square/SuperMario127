@@ -90,6 +90,14 @@ func update():
 	liquid_body.material.set_shader_param("rotation", rotation)
 	liquid_body.material.set_shader_param("offset", -position)
 	
+	#update sinking speed to match property
+	liquid_body.material.set_shader_param("noise_speed_1", Vector2(-sinking_speed * 0.0004, 0))
+	liquid_body.material.set_shader_param("noise_speed_2", Vector2(0, -sinking_speed * 0.0083))
+	liquid_body.material.set_shader_param("noise_speed_3", Vector2(sinking_speed * 0.0033, -sinking_speed * 0.0033))
+	waves.material.set_shader_param("noise_speed_1", Vector2(-sinking_speed * 0.0004, 0))
+	waves.material.set_shader_param("noise_speed_2", Vector2(0, -sinking_speed * 0.0083))
+	waves.material.set_shader_param("noise_speed_3", Vector2(sinking_speed * 0.0033, -sinking_speed * 0.0033))
+	
 	waves.material.set_shader_param("position", Vector2(0, 32))
 	waves.material.set_shader_param("size", waves.rect_size)
 	waves.material.set_shader_param("rotation", rotation)
