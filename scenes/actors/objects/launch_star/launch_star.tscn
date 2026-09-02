@@ -799,7 +799,7 @@ offsets = PoolRealArray( 0.753351, 1 )
 colors = PoolColorArray( 1, 1, 1, 1, 0, 0, 0, 0 )
 
 [node name="LaunchStar" type="Node2D"]
-z_index = -9
+z_index = -1
 script = ExtResource( 1 )
 internal_id = "launch_star"
 launch_noise = ExtResource( 10 )

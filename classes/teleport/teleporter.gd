@@ -73,7 +73,7 @@ func finish_exit_animation(character: Character) -> void:
 	if not character.dead:
 		character.toggle_movement(true)
 	character.velocity = Vector2.ZERO
-	character.sprite.modulate = Color.white
+	reset_sprite(character)
 	
 	# undo collision changes 
 	character.set_collision_layer_bit(1, true)
@@ -123,3 +123,10 @@ func begin_warp(character: Character) -> void:
 				warp_helper.level_warp(character, level_path, tag, target_area)
 			else:
 				warp_helper.location_warp(character, "", max_pan_distance)
+
+func reset_sprite(character: Character): #This is here in case Mario came from a painting to a door
+	character.show()
+	character.z_index = -1
+	character.sprite.modulate = Color(1.0, 1.0, 1.0, 1.0)
+	character.sprite.scale = Vector2(1.0, 1.0)
+	character.sprite.position = Vector2.ZERO

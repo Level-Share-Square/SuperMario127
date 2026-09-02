@@ -114,7 +114,6 @@ func _ready():
 			instance.set_sync_to_physics(false)
 		platforms.append(instance)
 		add_child(instance)
-		instance.z_index = -z_index
 		
 		# Disable the collision if is_enabled_and_on_ground() = false
 		instance.collision_shape.disabled = !is_enabled_and_on_ground()

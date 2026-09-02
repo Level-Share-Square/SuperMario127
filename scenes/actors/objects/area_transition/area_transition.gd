@@ -120,7 +120,7 @@ func start_entrance_animation(character: Character) -> void:
 	
 	CurrentLevelData.vars.area_transition_helper = AreaTransitionHelper.new(
 		character.velocity, 
-		character.state.name, 
+		character.state.name if character.state else "",
 		character.facing_direction, 
 		to_local(character.position), 
 		vertical

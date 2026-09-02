@@ -1680,13 +1680,13 @@ shader = ExtResource( 86 )
 shader_param/ray_count = 4
 shader_param/ray_distance = 0.4
 shader_param/ray_seperation_degrees = 22.0
-shader_param/rotation = 3.09293
+shader_param/rotation = 3.39048
 
 [sub_resource type="RectangleShape2D" id=85]
 extents = Vector2( 8, 18 )
 
 [node name="Character" type="KinematicBody2D"]
-z_index = -9
+z_index = -1
 collision_layer = 2
 collision_mask = 81
 script = ExtResource( 3 )
@@ -2552,7 +2552,7 @@ playing = true
 [node name="Recolorable" type="AnimatedSprite" parent="CollectedShine"]
 visible = false
 frames = ExtResource( 61 )
-frame = 14
+frame = 3
 script = ExtResource( 63 )
 
 [node name="ShineParticles" type="Particles2D" parent="CollectedShine"]
