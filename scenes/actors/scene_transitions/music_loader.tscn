@@ -1,6 +1,73 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scenes/actors/scene_transitions/music_loader.gd" type="Script" id=1]
+[ext_resource path="res://scenes/menu/button_scripts/button_sound.gd" type="Script" id=2]
+[ext_resource path="res://scenes/editor/editor_theme.tres" type="Theme" id=3]
+[ext_resource path="res://assets/sounds/click2.wav" type="AudioStream" id=4]
+[ext_resource path="res://assets/sounds/hover.wav" type="AudioStream" id=5]
 
-[node name="MusicLoader" type="Node"]
+[node name="MusicLoader" type="Control"]
+anchor_right = 0.402344
+anchor_bottom = 0.261574
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Panel" type="Panel" parent="."]
+margin_right = 309.0
+margin_bottom = 113.0
+theme = ExtResource( 3 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+margin_right = 309.0
+margin_bottom = 114.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer"]
+unique_name_in_owner = true
+margin_top = 17.0
+margin_right = 309.0
+margin_bottom = 74.0
+text = "This level contains custom music.
+Do you wish to load it now?
+(This requires an internet connection.)"
+align = 1
+
+[node name="ChoiceContainer" type="HBoxContainer" parent="Panel/VBoxContainer"]
+unique_name_in_owner = true
+margin_top = 78.0
+margin_right = 309.0
+margin_bottom = 97.0
+alignment = 1
+
+[node name="Yes" type="Button" parent="Panel/VBoxContainer/ChoiceContainer"]
+margin_left = 123.0
+margin_right = 155.0
+margin_bottom = 19.0
+text = "Yes"
+script = ExtResource( 2 )
+
+[node name="No" type="Button" parent="Panel/VBoxContainer/ChoiceContainer"]
+margin_left = 159.0
+margin_right = 186.0
+margin_bottom = 19.0
+text = "No"
+script = ExtResource( 2 )
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource( 5 )
+volume_db = -10.0
+bus = "Sounds"
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource( 4 )
+volume_db = -10.0
+bus = "Sounds"
+
+[connection signal="pressed" from="Panel/VBoxContainer/ChoiceContainer/Yes" to="." method="cache_music"]
+[connection signal="pressed" from="Panel/VBoxContainer/ChoiceContainer/No" to="." method="skip"]

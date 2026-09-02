@@ -2,6 +2,16 @@ extends Node
 
 signal file_loaded(err)
 
+func is_cached(url: String, working_folder: String):
+	var url_hash: String = url.md5_text()
+	var assets_dir: String = working_folder + "/assets"
+	var path: String = assets_dir + "/" + url_hash + "." + url.get_extension()
+	
+	var dir := Directory.new()
+	
+	return dir.dir_exists(path)
+		
+		
 func load_sound(url: String, working_folder: String):
 	var sound_path: String = yield(fetch_asset_path(url, working_folder), "completed")
 	
@@ -14,8 +24,6 @@ func load_sound(url: String, working_folder: String):
 	
 	if err != OK:
 		printerr("Failed to open sound", sound_path, " with error code ", err, ".")
-		var dir := Directory.new()
-		dir.remove(sound_path)
 		return null
 		
 	var bytes: PoolByteArray = file.get_buffer(file.get_len())

@@ -92,13 +92,7 @@ func setup_level(level_metadata: LevelMetadata, level_id: String, working_folder
 #
 #	CurrentLevelData.level_info.selected_shine = -1
 	CurrentLevelData.load_level_headers(level_list_util.load_level_code_file(level_list_util.get_level_file_path(level_id, working_folder)))
-	
-	for area_header in CurrentLevelData.area_headers:
-		if area_header.music is String and area_header.music:
-			AssetHandler.fetch_asset_path(Singleton.Music.decode_music(area_header.music)[1], working_folder)
-		if area_header.underwater_music:
-			AssetHandler.fetch_asset_path(Singleton.Music.decode_music(area_header.underwater_music)[1], working_folder)
-	
+
 	if not CurrentLevelData.level_transition_data.empty():
 		CurrentLevelData.switch_to_area(CurrentLevelData.level_transition_data.get("target_area", 0))
 	elif start_in_edit_mode:
@@ -158,6 +152,8 @@ func level_scene_switch(goal_scene: String, level_metadata: LevelMetadata, level
 	var setup_result = setup_level(level_metadata, level_id, working_folder, hub_level, selected_file, start_in_edit_mode)
 	if setup_result is GDScriptFunctionState:
 		yield(setup_result, "completed")
+
+	
 	get_tree().change_scene(goal_scene)
 
 
