@@ -50,7 +50,7 @@ func update_panel():
 	song_url_line.text = url
 	loop_end_line.text = str(loop_end)
 	song_name_line.text = area.header.custom_music_name
-	song_name_line.text = area.header.custom_music_author
+	song_author_line.text = area.header.custom_music_author
 
 
 func save_song() -> String:
