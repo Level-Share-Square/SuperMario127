@@ -55,6 +55,8 @@ onready var time_scores_container: VBoxContainer = $ScoresTab/Panel/ScrollContai
 onready var play_button = $Buttons/PlayLevel
 onready var back_button = $Buttons/Return
 onready var edit_button = $Buttons/EditLevel
+onready var copy_button = $Buttons/CopyCode
+onready var download_button = $Buttons/DownloadCode
 onready var view_tab = $Buttons/ViewTab
 onready var reset_button = $Buttons/ResetSave
 onready var delete_button = $Buttons/DeleteLevel
@@ -100,6 +102,9 @@ func load_level_info(_level_metadata: LevelMetadata, _level_id: String, _working
 	var current_number_of_players: int = Singleton.PlayerSettings.number_of_players
 	
 	previous_number_of_players = int(current_number_of_players)
+	
+	copy_button.visible = not OS.has_feature("JavaScript")
+	download_button.visible = not copy_button.visible
 	
 	if not level_code_validator_util.validate_level_code(level_list_util.get_level_code_from_id(level_id, working_folder)):
 		# Invalid level detected!

@@ -1,4 +1,4 @@
-[gd_scene load_steps=90 format=2]
+[gd_scene load_steps=91 format=2]
 
 [ext_resource path="res://scenes/menu/theme.tres" type="Theme" id=1]
 [ext_resource path="res://scenes/actors/objects/cloud_platform/texture.png" type="Texture" id=2]
@@ -57,6 +57,7 @@
 [ext_resource path="res://scenes/menu/text_edit_unfocus.gd" type="Script" id=55]
 [ext_resource path="res://scenes/menu/levels_list/campaign_panel.gd" type="Script" id=56]
 [ext_resource path="res://scenes/menu/levels_list/campaign_settings.gd" type="Script" id=57]
+[ext_resource path="res://assets/icons/EditorSave.svg" type="Texture" id=58]
 
 [sub_resource type="CanvasItemMaterial" id=22]
 blend_mode = 1
@@ -1451,6 +1452,30 @@ expand = true
 script = ExtResource( 29 )
 offset = Vector2( 71, 0 )
 
+[node name="DownloadCode" type="Button" parent="Panel/Subscreens/LevelInfo/LevelPanel/Buttons"]
+visible = false
+margin_top = 170.0
+margin_right = 157.0
+margin_bottom = 190.0
+rect_min_size = Vector2( 0, 20 )
+theme_type_variation = "AlternateButton"
+text = "Download"
+align = 0
+script = ExtResource( 14 )
+direction = 1
+
+[node name="Icon" type="TextureRect" parent="Panel/Subscreens/LevelInfo/LevelPanel/Buttons/DownloadCode"]
+modulate = Color( 0.0431373, 0.290196, 0.427451, 1 )
+margin_left = 68.0
+margin_top = 3.0
+margin_right = 82.0
+margin_bottom = 17.0
+mouse_filter = 2
+texture = ExtResource( 58 )
+expand = true
+script = ExtResource( 29 )
+offset = Vector2( 68, 0 )
+
 [node name="ViewTab" type="Button" parent="Panel/Subscreens/LevelInfo/LevelPanel/Buttons"]
 margin_top = 200.0
 margin_right = 157.0
@@ -2786,6 +2811,7 @@ script = ExtResource( 15 )
 [connection signal="pressed" from="Panel/Subscreens/LevelInfo/LevelPanel/Buttons/EditLevel" to="Panel/Subscreens/LevelView/ScrollContainer/MarginContainer/Loader" method="clear_level_queue"]
 [connection signal="pressed" from="Panel/Subscreens/LevelInfo/LevelPanel/Buttons/EditLevel" to="Panel/Subscreens/LevelInfo/LevelPanel" method="edit_level"]
 [connection signal="pressed" from="Panel/Subscreens/LevelInfo/LevelPanel/Buttons/CopyCode" to="Panel/Subscreens/LevelInfo/LevelPanel" method="copy_code"]
+[connection signal="pressed" from="Panel/Subscreens/LevelInfo/LevelPanel/Buttons/DownloadCode" to="Panel/Subscreens/LevelInfo/LevelPanel" method="copy_code"]
 [connection signal="pressed" from="Panel/Subscreens/LevelInfo/LevelPanel/Buttons/ViewTab" to="Panel/Subscreens/LevelInfo/LevelPanel" method="view_scores"]
 [connection signal="pressed" from="Panel/Subscreens/LevelInfo/LevelPanel/Buttons/ResetSave/PressCountdown" to="Panel/Subscreens/LevelInfo" method="transition" binds= [ "LevelView" ]]
 [connection signal="pressed" from="Panel/Subscreens/LevelInfo/LevelPanel/Buttons/ResetSave/PressCountdown" to="Panel/Subscreens/LevelInfo/LevelPanel" method="reset_save"]
