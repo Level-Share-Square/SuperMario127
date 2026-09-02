@@ -1,4 +1,4 @@
-[gd_scene load_steps=118 format=2]
+[gd_scene load_steps=121 format=2]
 
 [ext_resource path="res://scenes/player/player.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/level_shared.tscn" type="PackedScene" id=2]
@@ -49,6 +49,7 @@
 [ext_resource path="res://assets/sounds/switch_on.wav" type="AudioStream" id=47]
 [ext_resource path="res://assets/sounds/switch_off.wav" type="AudioStream" id=48]
 [ext_resource path="res://assets/sounds/blue_coin.wav" type="AudioStream" id=49]
+[ext_resource path="res://scenes/player/ui_new/health/hit_vignette.gd" type="Script" id=50]
 [ext_resource path="res://assets/sounds/p_switch_tick.wav" type="AudioStream" id=58]
 [ext_resource path="res://assets/sounds/p_switch_end.wav" type="AudioStream" id=59]
 [ext_resource path="res://assets/sounds/boo_laugh.wav" type="AudioStream" id=60]
@@ -77,6 +78,15 @@ gradient = SubResource( 231 )
 width = 1
 height = 6
 fill_from = Vector2( 1, 1 )
+
+[sub_resource type="Gradient" id=264]
+offsets = PoolRealArray( 0, 0.372093, 0.697674, 1.5 )
+colors = PoolColorArray( 1, 0, 0, 0, 1, 0, 0, 0.0542636, 1, 0, 0, 0.14767, 1, 0, 0, 1 )
+
+[sub_resource type="GradientTexture2D" id=265]
+gradient = SubResource( 264 )
+fill = 1
+fill_from = Vector2( 0.5, 0.5 )
 
 [sub_resource type="Animation" id=216]
 length = 0.001
@@ -1690,6 +1700,19 @@ texture = SubResource( 232 )
 pause_mode = 2
 layer = 61
 script = ExtResource( 32 )
+
+[node name="HitVignette" type="NinePatchRect" parent="UIUnder"]
+unique_name_in_owner = true
+modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = SubResource( 265 )
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+script = ExtResource( 50 )
+character_path = NodePath("../../Area/Character")
 
 [node name="HUD" type="MarginContainer" parent="UIUnder"]
 anchor_right = 1.0

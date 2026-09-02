@@ -109,6 +109,8 @@ func _stop(delta : float) -> void:
 		character.position.y -= 16
 		character.set_state_by_name("BonkedState", delta)
 		character.sound_player.play_bonk_sound()
+		character.camera.shake_strength = 2
+		character.camera.shake = true
 	elif !character.test_move(character.transform, Vector2(0, 8)) and character.test_move(character.transform, Vector2(0.1 * character.facing_direction, -15)) and !character.test_move(character.transform, Vector2(0, -16)) and !character.is_grounded():
 		character.velocity.x = bonk_power * -character.facing_direction
 		character.velocity.y = -65
@@ -116,6 +118,8 @@ func _stop(delta : float) -> void:
 		character.position.y -= 16
 		character.set_state_by_name("BonkedState", delta)
 		character.sound_player.play_bonk_sound()
+		character.camera.shake_strength = 2
+		character.camera.shake = true
 		sprite.rotation_degrees = 0
 	if character.is_grounded():
 		character.set_state_by_name("SlideState", delta)

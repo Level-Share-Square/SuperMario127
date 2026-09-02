@@ -22,7 +22,7 @@ func _start(_delta):
 	particle_timer = 0.2
 	character.camera.shake_strength = 4
 	character.camera.shake = true
-	if !character.camera.disable_gp_zoom:
+	if !character.camera.disable_zoom_effect:
 		character.camera.old_zoom  = character.camera.zoom
 		character.camera.zoom -= character.camera.GP_ZOOM_IN
 	character.gp_particles1.restart()

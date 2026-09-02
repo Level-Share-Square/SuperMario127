@@ -3,7 +3,7 @@ extends Camera2D
 
 const GP_ZOOM_IN = Vector2(0.025, 0.025)
 var old_zoom: Vector2
-var disable_gp_zoom: bool = false
+var disable_zoom_effect: bool = false
 var shake_strength: float = 0.0
 var shake: bool = false
 

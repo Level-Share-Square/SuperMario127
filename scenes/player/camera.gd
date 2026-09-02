@@ -46,8 +46,9 @@ var shake_strength: float = 0.0
 var shake = false
 
 const GP_ZOOM_IN = Vector2(0.025, 0.025)
+const HURT_ZOOM_IN = Vector2(0.025, 0.025)
 var old_zoom: Vector2
-var disable_gp_zoom: bool = false
+var disable_zoom_effect: bool = false
 
 var cutscene_queue: Array
 var current_cutscene: CameraCutscene
@@ -243,7 +244,7 @@ func set_zoom_tween(target : Vector2, time : float, override = false):
 	# overrides level boundary safety check
 	if override:
 		zoom_tween.interpolate_property(self, "zoom", zoom, target, time, 1, 0)
-		disable_gp_zoom = true
+		disable_zoom_effect = true
 		print(zoom_tween.connect("tween_all_completed", self, "on_zoom_tween_zoomed"))
 		zoom_tween.start()
 		return
@@ -258,12 +259,12 @@ func set_zoom_tween(target : Vector2, time : float, override = false):
 		max_size = (level_size.x/size.x)
 	target = Vector2(min(target.x, max_size), min(target.y, max_size))
 	zoom_tween.interpolate_property(self, "zoom", zoom, target, time, 1, 0)
-	disable_gp_zoom = true
+	disable_zoom_effect = true
 	#print(zoom_tween.connect("tween_all_completed", self, "on_zoom_tween_zoomed"))
 	zoom_tween.start()
 
 func on_zoom_tween_zoomed():
-	disable_gp_zoom = false
+	disable_zoom_effect = false
 
 func load_in():
 	level_bounds = CurrentLevelData.current_area.header.bounds

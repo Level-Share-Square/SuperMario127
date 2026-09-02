@@ -756,6 +756,11 @@ func damage(amount : int = 1, cause : String = "hit", frames : int = 180) -> voi
 			frames = 4
 		else:
 			health -= amount
+			camera.shake_strength = 4
+			camera.shake = true
+			if !camera.disable_zoom_effect:
+				camera.old_zoom  = camera.zoom
+				camera.zoom -= camera.HURT_ZOOM_IN
 			emit_signal("health_changed", health, health_shards)
 		
 		invulnerable = true if frames != 0 else false
@@ -1166,9 +1171,9 @@ func _physics_process(delta: float) -> void:
 		velocity = move_and_slide_with_snap(velocity, snap, Vector2.UP, true, 4, deg2rad(46))
 		velocity.y = old_y_vel
 		if is_grounded():
-			velocity.y = min(0, velocity.y)
+			velocity.y = min(5, velocity.y)
 		if is_ceiling():
-			velocity.y = max(0, velocity.y)
+			velocity.y = max(5, velocity.y)
 		
 		## CLIPPING CODE
 		var ray_check: Dictionary = get_world_2d().direct_space_state.intersect_ray(last_position, global_position, [self], 1)
