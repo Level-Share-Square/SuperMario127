@@ -124,6 +124,7 @@ func set_checkpoint(body):
 	
 	if visible:
 		sound.play()
+		body.sound_player.play_checkpoint_sound()
 
 func unset_checkpoint():
 	is_used = false

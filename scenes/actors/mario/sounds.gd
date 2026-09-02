@@ -14,6 +14,7 @@ onready var stomped_sounds = $VoiceEffects/StompedSounds
 onready var powerup_sounds = $VoiceEffects/PowerupSounds
 onready var lava_hurt_sounds = $VoiceEffects/LavaHurtSounds
 onready var shine_sounds = $VoiceEffects/ShineSounds
+onready var checkpoint_sounds = $VoiceEffects/CheckpointSounds
 onready var speak_sounds = $VoiceEffects/SpeakSounds
 onready var happy_sounds = $VoiceEffects/HappySounds
 onready var shocked_sounds = $VoiceEffects/ShockedSounds
@@ -190,6 +191,10 @@ func play_rainbow_star_sound():
 func play_shine_sound():
 	if ready:
 		shine_sounds.play()
+
+func play_checkpoint_sound():
+	if ready:
+		checkpoint_sounds.play()
 
 func play_speak_sound():
 	if ready:

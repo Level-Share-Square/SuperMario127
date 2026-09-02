@@ -1,0 +1,23 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Checkpoint1.wav-bd55eb2de8a7b5c30fb21357f7e4472e.sample"
+
+[deps]
+
+source_file="res://scenes/actors/mario/sounds_mario/Checkpoint1.wav"
+dest_files=[ "res://.import/Checkpoint1.wav-bd55eb2de8a7b5c30fb21357f7e4472e.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

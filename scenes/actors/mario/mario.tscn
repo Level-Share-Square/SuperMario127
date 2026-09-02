@@ -24,7 +24,7 @@
 [ext_resource path="res://scenes/actors/mario/nozzles/Hover.gd" type="Script" id=22]
 [ext_resource path="res://scenes/actors/mario/nozzles/hover_frames.tres" type="SpriteFrames" id=23]
 [ext_resource path="res://scenes/actors/mario/nozzles/water_frames.tres" type="SpriteFrames" id=24]
-[ext_resource path="res://assets/sounds/fludd/spray.wav" type="AudioStream" id=25]
+[ext_resource path="res://assets/sounds/fludd_water.wav" type="AudioStream" id=25]
 [ext_resource path="res://scenes/actors/mario/nozzles/hover_frames_luigi.tres" type="SpriteFrames" id=26]
 [ext_resource path="res://assets/sounds/fludd/switch.wav" type="AudioStream" id=27]
 [ext_resource path="res://scenes/actors/mario/states/SlideStop.gd" type="Script" id=28]
@@ -1678,7 +1678,7 @@ shader = ExtResource( 86 )
 shader_param/ray_count = 4
 shader_param/ray_distance = 0.4
 shader_param/ray_seperation_degrees = 22.0
-shader_param/rotation = 0.228065
+shader_param/rotation = 5.50547
 
 [sub_resource type="RectangleShape2D" id=85]
 extents = Vector2( 8, 18 )
@@ -2483,7 +2483,8 @@ collision_mask = 65617
 [node name="FluddSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 25 )
 volume_db = -15.0
-bus = "Sounds"
+pitch_scale = 1.5
+bus = "FluddSound"
 
 [node name="TurboFluddSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 67 )
@@ -2539,7 +2540,7 @@ playing = true
 [node name="Recolorable" type="AnimatedSprite" parent="CollectedShine"]
 visible = false
 frames = ExtResource( 61 )
-frame = 3
+frame = 10
 script = ExtResource( 63 )
 
 [node name="ShineParticles" type="Particles2D" parent="CollectedShine"]

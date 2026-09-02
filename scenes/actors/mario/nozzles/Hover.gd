@@ -6,6 +6,7 @@ export var boost_power := 170
 export var depletion := 1.1
 export var fuel_depletion := 0.035
 
+var max_cutoff = 2500
 var accel = 30
 var rotation_interpolation_speed = 35
 var preservation_factor = 0
@@ -76,6 +77,10 @@ func _update(_delta):
 
 	if !activated:
 		override_rotation = false
+	else:
+		var bus_index: int = AudioServer.get_bus_index("FluddSound")
+		var bus_effect: AudioEffectFilter = AudioServer.get_bus_effect(bus_index, 0)
+		bus_effect.cutoff_hz = max(max_cutoff * (1.0 - (character.stamina / 100.0)), 100.0)
 
 	last_state = character.state
 
@@ -99,7 +104,7 @@ func _general_update(_delta):
 		character.water_particles_2.emitting = true
 		#character.water_sprite.animation = "out"
 		character.water_sprite.frame = 0
-		character.fludd_sound.play(((100 - character.stamina) / 100) * 2.79)
+		character.fludd_sound.play(((100 - character.stamina) / 100))
 		
 		if character.velocity.y < 0 and character.stamina == 100:
 			preservation_factor = character.velocity.y / 96

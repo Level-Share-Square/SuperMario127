@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=2]
+[gd_scene load_steps=62 format=2]
 
 [ext_resource path="res://scenes/actors/mario/footstep_sounds.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/actors/mario/sounds.gd" type="Script" id=2]
@@ -60,6 +60,7 @@
 [ext_resource path="res://scenes/actors/mario/sounds_luigi/talk/STRM_L43_HUNNN2.wav" type="AudioStream" id=58]
 [ext_resource path="res://scenes/actors/mario/sounds_luigi/talk/STRM_L21_OK.wav" type="AudioStream" id=59]
 [ext_resource path="res://scenes/actors/mario/sounds_luigi/Timeout1.wav" type="AudioStream" id=60]
+[ext_resource path="res://scenes/actors/mario/sounds_luigi/Checkpoint1.wav" type="AudioStream" id=61]
 
 [node name="Sounds" type="Node"]
 script = ExtResource( 2 )
@@ -297,6 +298,13 @@ bus = "Voices"
 [node name="Shine2" type="AudioStreamPlayer" parent="VoiceEffects/ShineSounds"]
 stream = ExtResource( 38 )
 volume_db = 4.5
+bus = "Voices"
+
+[node name="CheckpointSounds" type="Node" parent="VoiceEffects"]
+script = ExtResource( 47 )
+
+[node name="Checkpoint1" type="AudioStreamPlayer" parent="VoiceEffects/CheckpointSounds"]
+stream = ExtResource( 61 )
 bus = "Voices"
 
 [node name="SpeakSounds" type="Node" parent="VoiceEffects"]
