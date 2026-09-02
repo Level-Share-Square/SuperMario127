@@ -76,7 +76,12 @@ func _unhandled_input(event: InputEvent) -> void:
 			break
 	
 	for action_name in modifier_action_signal_array:
-		if Input.is_action_pressed("ctrl_modifier") and event.is_action_pressed(action_name):
+		var ctrl_modifier = Input.is_action_pressed("ctrl_modifier")
+		var input_type: int = LastInputDevice.class_type_map.get(event.get_class(), LastInputDevice.InputType.Keyboard)
+		if input_type == LastInputDevice.InputType.Controller:
+			ctrl_modifier = true
+		
+		if ctrl_modifier and event.is_action_pressed(action_name):
 			emit_signal(action_name)
 			get_tree().set_input_as_handled()
 			#prints(action_name, "emitted")
