@@ -1507,7 +1507,7 @@ func handle_liquids(liquid_areas, delta):
 						damage(1, "hit", 0)
 
 			liquid.LiquidType.Lava:
-				if powerup != get_powerup_node("MetalPowerup"):
+				if powerup != get_powerup_node("MetalPowerup") and powerup != get_powerup_node("RainbowPowerup"):
 					set_state_by_name("LavaBoostState", delta)
 
 			liquid.LiquidType.Quicksand:

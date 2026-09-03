@@ -7,6 +7,7 @@ var hue = 0
 var rainbow_trails = []
 var trail_timer = 0.075
 var has_landed = false
+var last_active = false
 
 onready var trail_script = load("res://scenes/actors/mario/powerups/rainbow_trail.gd")
 
@@ -35,6 +36,14 @@ func create_trail():
 	add_child(trail)
 
 func _process(delta):
+	if character.powerup == self:
+		if !last_active:
+			character.set_all_collision_masks(8, true)
+	else:
+		if last_active:
+			character.set_all_collision_masks(8, false)
+	
+	last_active = (character.powerup == self)
 	if character.sprite.material == material:
 		hue += HUE_SHIFT
 		var gradient_texture = GradientTexture.new()

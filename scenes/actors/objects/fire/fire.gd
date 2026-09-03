@@ -90,6 +90,6 @@ func burn_player(body):
 	#putting this here instead of the lava boost state or mario.gd 
 	#bc I don't know how to do it better frankly
 	if body is Character:
-		if body.powerup != body.get_powerup_node("MetalPowerup"):
+		if body.powerup != body.get_powerup_node("MetalPowerup") and body.powerup != body.get_powerup_node("RainbowPowerup"):
 			body.set_state_by_name("LavaBoostState", get_physics_process_delta_time())
 			body.velocity.y = -body.get_state_node("LavaBoostState").boost_velocity
