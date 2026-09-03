@@ -43,7 +43,7 @@ func _ready():
 	pause_controller.connect("star_coin_collected", self, "update_info")
 	
 #	level_info = CurrentLevelData.level_info
-	get_show_in_menu_mission()
+	get_show_in_menu_missions()
 	
 	if is_instance_valid(level_metadata):
 		var collectible_data: CollectibleData = level_metadata.collectible_data
@@ -58,7 +58,7 @@ func _ready():
 		update_info()
 		scrollcheck()
 
-func get_show_in_menu_mission():
+func get_show_in_menu_missions():
 	show_in_menu_missions.clear()
 	for mission in level_metadata.collectible_data.used_mission_data:
 		if level_metadata.collectible_data.get_mission_by_uuid(mission).mission_show_in_menu: show_in_menu_missions.append(mission)
