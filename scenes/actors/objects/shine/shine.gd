@@ -184,7 +184,6 @@ func update_shine_properties(key: String, value) -> void:
 			set_property("added_to_data", true, true)
 			added_to_data = true
 		
-		# 3. Update shadows and visuals
 		mission_from_before = value
 		
 		is_blue = mission_uuid in CurrentLevelData.save_data.get_completed_missions()
@@ -323,7 +322,7 @@ func activate_shine(animation: int, temporary: bool = false, manual_start_cutsce
 		yield(get_tree(), "idle_frame")
 		camera = current_scene.get_node(current_scene.camera)
 	
-	if animation == ActivateAnimations.NORMAL:
+	if animation == ActivateAnimations.NORMAL and !activated:
 		var cutscene: CameraCutscene = CameraCutscene.new()
 		cutscene.cutscene_type = cutscene.Type.AUTO
 		cutscene.tween_ease = Tween.EASE_IN_OUT
@@ -332,7 +331,7 @@ func activate_shine(animation: int, temporary: bool = false, manual_start_cutsce
 		cutscene.animation = "appear"
 		cutscene.set_up(self, global_position)
 		camera.queue_cutscene(cutscene)
-	elif animation == ActivateAnimations.SHORT:
+	elif animation == ActivateAnimations.SHORT and !activated:
 		var cutscene: CameraCutscene = CameraCutscene.new()
 		cutscene.cutscene_type = cutscene.Type.AUTO
 		cutscene.tween_ease = Tween.EASE_IN_OUT
@@ -341,7 +340,7 @@ func activate_shine(animation: int, temporary: bool = false, manual_start_cutsce
 		cutscene.animation = "appear_short"
 		cutscene.set_up(self, global_position)
 		camera.queue_cutscene(cutscene)
-	else:
+	elif !activated:
 		yield(get_tree(), "idle_frame")
 		appear_sound.volume_db = -80
 		animation_player.play("active", -1, INF)

@@ -32,34 +32,34 @@ title = "Area Settings"
 icon_tooltip = "Tweak area settings!"
 
 [node name="Background" parent="." index="0"]
-margin_right = 358.0
+margin_right = 350.0
 margin_bottom = 214.0
 
 [node name="ContentDivider" parent="." index="1"]
-margin_right = 358.0
+margin_right = 350.0
 margin_bottom = 214.0
 
 [node name="Header" parent="ContentDivider" index="0"]
-margin_right = 358.0
+margin_right = 350.0
 
 [node name="HeaderMat" parent="ContentDivider/Header" index="0"]
-margin_right = 354.0
+margin_right = 346.0
 
 [node name="HeaderBox" parent="ContentDivider/Header/HeaderMat" index="0"]
-margin_right = 344.0
+margin_right = 336.0
 
 [node name="WindowTitle" parent="ContentDivider/Header/HeaderMat/HeaderBox" index="2"]
-margin_right = 315.0
+margin_right = 307.0
 
 [node name="WindowClose" parent="ContentDivider/Header/HeaderMat/HeaderBox" index="3"]
-margin_left = 316.0
-margin_right = 338.0
+margin_left = 308.0
+margin_right = 330.0
 
 [node name="HSeparator" parent="ContentDivider" index="1"]
-margin_right = 358.0
+margin_right = 350.0
 
 [node name="ContentMat" parent="ContentDivider" index="2"]
-margin_right = 358.0
+margin_right = 350.0
 margin_bottom = 214.0
 custom_constants/margin_right = 6
 custom_constants/margin_top = 6
@@ -69,7 +69,7 @@ custom_constants/margin_bottom = 6
 [node name="Tabs" type="TabContainer" parent="ContentDivider/ContentMat" index="0"]
 margin_left = 6.0
 margin_top = 6.0
-margin_right = 352.0
+margin_right = 344.0
 margin_bottom = 177.0
 rect_pivot_offset = Vector2( -131, 46 )
 mouse_filter = 1
@@ -82,7 +82,6 @@ use_hidden_tabs_for_min_size = true
 script = ExtResource( 13 )
 
 [node name="Background" type="VBoxContainer" parent="ContentDivider/ContentMat/Tabs" index="0"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -409,6 +408,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Settings" type="ScrollContainer" parent="ContentDivider/ContentMat/Tabs" index="2"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -898,6 +898,8 @@ unique_name_in_owner = true
 margin_top = 92.0
 margin_right = 318.0
 margin_bottom = 109.0
+hint_tooltip = "The name of the area.
+Also editable from the area selector."
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer" index="3"]
 margin_top = 113.0
@@ -961,21 +963,21 @@ margin_right = 318.0
 margin_bottom = 17.0
 
 [node name="WindowCorner" parent="." index="2"]
-margin_left = 346.0
+margin_left = 338.0
 margin_top = 202.0
-margin_right = 358.0
+margin_right = 350.0
 margin_bottom = 214.0
 
 [node name="Border" parent="." index="3"]
-margin_right = 358.0
+margin_right = 350.0
 margin_bottom = 214.0
 
 [node name="WindowMat" parent="." index="4"]
-margin_right = 358.0
+margin_right = 350.0
 margin_bottom = 214.0
 
 [node name="Control" parent="." index="5"]
-margin_right = 358.0
+margin_right = 350.0
 margin_bottom = 214.0
 
 [editable path="ContentDivider/ContentMat/Tabs/Settings/MarginContainer/VBoxContainer/Bounds/VBoxContainer2/TileWithEdges"]
