@@ -9,6 +9,7 @@ onready var tile_with_edges = $"%TileWithEdges"
 onready var show_name = $"%ShowName"
 onready var show_song = $"%ShowSong"
 onready var min_time = $"%MinTime"
+onready var area_name = $"%Name"
 
 
 func _ready():
@@ -57,6 +58,12 @@ func load_settings():
 		PropertyInfo.new(min_time.hint_tooltip, 1, -1, INF)
 	])
 	connect_signals(min_time)
+	area_name.load_property(editor, get_property_value("name"), [
+		"name",
+		TYPE_STRING,
+		PropertyInfo.new(min_time.hint_tooltip)
+	])
+	connect_signals(area_name)
 	
 
 func gravity_changed(new_value) -> void:
