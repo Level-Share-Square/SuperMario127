@@ -158,4 +158,7 @@ func start_exit_animation(character: Character) -> void:
 	yield(get_tree().create_timer(0.1), "timeout")
 	is_idle = true
 	
-	character.toggle_movement(true)
+	if not is_instance_valid(character.camera):
+		yield(get_tree(), "idle_frame")
+	
+	character.toggle_movement(not character.camera.in_cutscene)

@@ -126,6 +126,9 @@ func update_activity() -> void:
 
 func get_shared_node() -> LevelShared:
 	return get_node(shared) as LevelShared
+	
+func get_camera_node():
+	return get_node(camera)
 
 
 func get_characters() -> Array:

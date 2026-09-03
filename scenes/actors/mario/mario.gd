@@ -508,7 +508,9 @@ func load_in():
 		set_nozzle(CurrentLevelData.checkpoint_data.nozzle_name)
 		fuel = CurrentLevelData.checkpoint_data.water_left
 		reset_physics_interpolation()
-		toggle_movement(true)
+		if not is_instance_valid(camera):
+			yield(get_tree(), "idle_frame")
+		toggle_movement(not camera.in_cutscene)
 		show()
 	elif level_target_tag != "":
 		do_teleport = true
@@ -540,7 +542,9 @@ func load_in():
 			teleporter.start_exit_animation(self)
 		else:
 			show()
-			toggle_movement(true)
+			if not is_instance_valid(camera):
+				yield(get_tree(), "idle_frame")
+			toggle_movement(not camera.in_cutscene)
 	
 	emit_signal("loaded")
 

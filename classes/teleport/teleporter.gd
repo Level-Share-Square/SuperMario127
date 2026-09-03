@@ -71,7 +71,10 @@ func finish_exit_animation(character: Character) -> void:
 	CurrentLevelData.vars.transition_data = {}
 	CurrentLevelData.vars.area_transition_helper = null
 	if not character.dead:
-		character.toggle_movement(true)
+		if not is_instance_valid(character.camera):
+			yield(get_tree(), "idle_frame")
+		
+		character.toggle_movement(not character.camera.in_cutscene)
 	character.velocity = Vector2.ZERO
 	reset_sprite(character)
 	

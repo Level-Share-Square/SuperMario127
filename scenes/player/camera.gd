@@ -86,14 +86,16 @@ func _ready():
 		cur_baseline = y_baseline
 		y_offset = GROUND_OFFSET
 
-
 func _physics_process(delta):
 	last_position = global_position
-	
+
 	var level_total_bounds := Vector2(level_bounds.position.x + level_bounds.size.x, level_bounds.position.y + level_bounds.size.y)
 	var max_zoom: float = min(level_total_bounds.x / (base_size.x*2), level_total_bounds.y / (base_size.y*2))
 	zoom.x = min(zoom.y, max_zoom)
 	zoom.y = min(zoom.y, max_zoom)
+	
+	shape.shape.extents = base_size * zoom.y
+	size = shape.shape.extents
 	
 	if auto_move:
 		if focus_on != null:
@@ -193,25 +195,24 @@ func _physics_process(delta):
 			else:
 				shake = false
 	
-	shape.shape.extents = base_size * zoom.y
-	size = shape.shape.extents
-	
 	# level bounds
-	if global_position.x - size.x < level_bounds.position.x:
-		global_position.x = level_bounds.position.x + size.x
-	if global_position.x + size.x > level_bounds.size.x:
-		global_position.x = level_bounds.size.x - size.x
-		
-	if global_position.y - size.y < level_bounds.position.y:
-		global_position.y = level_bounds.position.y + size.y
-	if global_position.y + size.y > level_bounds.size.y:
-		global_position.y = level_bounds.size.y - size.y
+	if not in_cutscene and not get_tree().paused:
+#		if global_position.x - size.x < level_bounds.position.x:
+#			global_position.x = level_bounds.position.x + size.x
+#		if global_position.x + size.x > level_bounds.size.x:
+#			global_position.x = level_bounds.size.x - size.x
+
+#		if global_position.y - size.y < level_bounds.position.y:
+#			global_position.y = level_bounds.position.y + size.y
+#		if global_position.y + size.y > level_bounds.size.y:
+#			global_position.y = level_bounds.size.y - size.y
+		pass
 	
 	for stopper in area.get_overlapping_areas():
 		if abs(global_position.y - stopper.global_position.y) < size.y * 1.2 + abs(stopper.top_bound.y - stopper.global_position.y) or abs(global_position.x - stopper.global_position.x) < size.x * 1.2 + abs(stopper.left_bound.x - stopper.global_position.x):
 			var overlapX = min(abs(last_position.x + size.x - stopper.left_bound.x), abs(last_position.x - size.x - stopper.right_bound.x))
 			var overlapY = min(abs(last_position.y + size.y - stopper.top_bound.y), abs(last_position.y - size.y - stopper.bottom_bound.y))
-			
+
 			if overlapX < overlapY:
 				if last_position.x < stopper.global_position.x and global_position.x > last_position.x:
 					global_position.x = stopper.left_bound.x - size.x + 1
@@ -272,10 +273,10 @@ func load_in():
 	level_bounds.size *= 32
 	
 	if focus_on != null:
-		position = focus_on.global_position
+#		position = focus_on.global_position
 		reset_physics_interpolation()
 	elif character_node != null:
-		position = character_node.global_position
+#		position = character_node.global_position
 		reset_physics_interpolation()
 		character_node.camera = self
 	if Singleton.PlayerSettings.number_of_players == 2:
@@ -303,12 +304,14 @@ func play_cutscene(cutscene : CameraCutscene, reverse: bool = false):
 	get_tree().paused = true
 	character_node.toggle_movement(false)
 	CurrentLevelData.can_pause = false
+	auto_move = false
 	
 	
 	var new_position = cutscene.to if !reverse else character_node.position
 	var camera_distance = position.distance_to(new_position)
 	
 	if cutscene.cutscene_type == cutscene.Type.AUTO:
+		prints(position.distance_to(new_position), position)
 		if position.distance_to(new_position) <= 800:
 			cutscene.cutscene_type = cutscene.Type.PAN
 			cutscene.time = cutscene.time * (camera_distance/800)
@@ -324,9 +327,20 @@ func play_cutscene(cutscene : CameraCutscene, reverse: bool = false):
 			new_position, 
 			cutscene.time, 
 			cutscene.transition_type, 
+			cutscene.tween_ease	
+			)
+		cutscene_tween.interpolate_property(
+			self, 
+			"last_position", 
+			last_position, 
+			new_position, 
+			cutscene.time, 
+			cutscene.transition_type, 
 			cutscene.tween_ease
 			)
+		print("me start :3")
 		cutscene_tween.start()
+
 		yield(cutscene_tween, "tween_completed")
 
 		if cutscene.animation != "" and !reverse:
@@ -369,3 +383,4 @@ func update_cutscene_queue():
 		character_node.toggle_movement(true)
 		smoothing_enabled = true
 		CurrentLevelData.can_pause = true
+		auto_move = true
