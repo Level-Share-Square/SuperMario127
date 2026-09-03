@@ -27,6 +27,9 @@ var color := Color(1, 0, 0)
 func _register_properties():
 	register_property(4, "parts", parts, true)
 	register_property(5, "color", color, 1)
+	
+func _register_property_info():
+	set_property_info("parts", PropertyInfo.new("Amount of parts on this object.", 1, 1, INF, ["", ""], ["", ""], true, "Parts"))
 		
 func _ready():
 	preview_position = custom_preview_position
