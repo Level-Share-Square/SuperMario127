@@ -47,6 +47,7 @@ func _process(delta):
 	last_click = Input.is_mouse_button_pressed(BUTTON_LEFT)
 
 func button_pressed(button: SelectionToolButton):
+	if not button.associated_tool: return
 	if active_tool == button.associated_tool:
 		selection_box.toggle_ui(true)
 		active_tool.commit_to_action()
