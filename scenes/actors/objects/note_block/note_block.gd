@@ -13,7 +13,7 @@ onready var platform_area_shape : CollisionShape2D = $StaticBody2D/Area2D/Collis
 
 onready var left_width = sprite.patch_margin_left
 onready var right_width = sprite.patch_margin_right
-onready var part_width = sprite.texture.get_width() - left_width - right_width
+export var part_width: float
 
 export var weak_bounce_sound : AudioStream
 export var bounce_sound : AudioStream
