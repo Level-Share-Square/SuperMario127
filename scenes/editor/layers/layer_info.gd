@@ -121,8 +121,10 @@ func panel_resized() -> void:
 func dragger_down() -> void:
 	is_dragging = true
 	layer_dropdown.is_dragging = true
-	modulate = Color(0.75, 1, 2)
+	highlight_spot(Color(0.75, 1, 2))
 
+func highlight_spot(color) -> void:
+	modulate = color
 
 func dragger_up() -> void:
 	var drag_area: Area2D = layer_dropdown.drag_area
@@ -130,7 +132,7 @@ func dragger_up() -> void:
 	is_dragging = false
 	layer_dropdown.is_dragging = false
 	drag_area.position = Vector2.ZERO
-	modulate = Color.white
+	highlight_spot(Color.white)
 	
 	if not drag_area.get_overlapping_areas().empty():
 		var target_layer_info: LayerInfo = drag_area.get_overlapping_areas()[0].owner
@@ -150,12 +152,13 @@ func dragger_up() -> void:
 
 func area_entered(_area: Area2D):
 	if is_dragging: return
-	modulate.a = 0.75
+	highlight_spot(Color(0.5, 1, 0.5))
 	hover_sound.play()
 
 
 func area_exited(_area: Area2D):
-	modulate.a = 1.0
+	if is_dragging: return
+	highlight_spot(Color.white)
 
 
 func merge_layer():
