@@ -13,10 +13,10 @@ var tween: SceneTreeTween
 
 func _ready():
 	# waiting for things to ready themselves yada yada
-	yield(get_tree(), "physics_frame")
-	yield(get_tree(), "physics_frame")
+	yield(character, "loaded")
 	
 	character.connect("health_changed", self, "health_changed")
+	last_health = character.health
 	health_changed(character.health)
 
 

@@ -197,16 +197,15 @@ func _physics_process(delta):
 	
 	# level bounds
 	if not in_cutscene and not get_tree().paused:
-#		if global_position.x - size.x < level_bounds.position.x:
-#			global_position.x = level_bounds.position.x + size.x
-#		if global_position.x + size.x > level_bounds.size.x:
-#			global_position.x = level_bounds.size.x - size.x
+		if global_position.x - size.x < level_bounds.position.x:
+			global_position.x = level_bounds.position.x + size.x
+		if global_position.x + size.x > level_bounds.size.x:
+			global_position.x = level_bounds.size.x - size.x
 
-#		if global_position.y - size.y < level_bounds.position.y:
-#			global_position.y = level_bounds.position.y + size.y
-#		if global_position.y + size.y > level_bounds.size.y:
-#			global_position.y = level_bounds.size.y - size.y
-		pass
+		if global_position.y - size.y < level_bounds.position.y:
+			global_position.y = level_bounds.position.y + size.y
+		if global_position.y + size.y > level_bounds.size.y:
+			global_position.y = level_bounds.size.y - size.y
 	
 	for stopper in area.get_overlapping_areas():
 		if abs(global_position.y - stopper.global_position.y) < size.y * 1.2 + abs(stopper.top_bound.y - stopper.global_position.y) or abs(global_position.x - stopper.global_position.x) < size.x * 1.2 + abs(stopper.left_bound.x - stopper.global_position.x):
