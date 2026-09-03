@@ -292,17 +292,18 @@ func start_queue():
 	
 	if !in_cutscene:
 		in_cutscene = true
-		play_cutscene(cutscene_queue[0])
+		play_cutscene(cutscene_queue.pop_front())
 		print("queue started!")
 
 func play_cutscene(cutscene : CameraCutscene, reverse: bool = false):
 	current_cutscene = cutscene
-	
+
 	pause_mode = PAUSE_MODE_PROCESS
 	cutscene.owner.pause_mode = PAUSE_MODE_PROCESS
 	get_tree().paused = true
 	character_node.toggle_movement(false)
 	CurrentLevelData.can_pause = false
+	
 	
 	var new_position = cutscene.to if !reverse else character_node.position
 	var camera_distance = position.distance_to(new_position)
@@ -327,7 +328,7 @@ func play_cutscene(cutscene : CameraCutscene, reverse: bool = false):
 			)
 		cutscene_tween.start()
 		yield(cutscene_tween, "tween_completed")
-		
+
 		if cutscene.animation != "" and !reverse:
 			cutscene.owner.animation_player.play(cutscene.animation)
 			yield(cutscene.owner.animation_player, "animation_finished")
@@ -346,6 +347,10 @@ func play_cutscene(cutscene : CameraCutscene, reverse: bool = false):
 			cutscene.owner.animation_player.play(cutscene.animation)
 			yield(cutscene.owner.animation_player, "animation_finished")
 		
+	if cutscene_queue.empty() and not reverse:
+		play_cutscene(cutscene, true)
+		return
+		
 	update_cutscene_queue()
 
 func _get_random_offset() -> Vector2:
@@ -355,10 +360,8 @@ func _get_random_offset() -> Vector2:
 func update_cutscene_queue():
 	var last_cutscene: CameraCutscene = cutscene_queue.pop_front()
 	
-	if cutscene_queue.size() > 0:
-		play_cutscene(cutscene_queue[0])
-	elif is_instance_valid(last_cutscene):
-		play_cutscene(last_cutscene, true)
+	if is_instance_valid(last_cutscene):
+		play_cutscene(last_cutscene)
 	else:
 		in_cutscene = false
 		pause_mode = PAUSE_MODE_INHERIT

@@ -5,6 +5,16 @@ var autosave_interval: int = 108000
 var disable_hotkeys: bool = false
 var time: float = 0
 
+# this is literally just here cuz
+# this is a singleton and i can
+# check get_tree().paused through
+# the remote inspector at runtime
+# lol
+# kill me
+var is_tree_paused setget , get_tree_paused
+func get_tree_paused(): return get_tree().paused
+
+
 signal autosave
 
 func _ready():

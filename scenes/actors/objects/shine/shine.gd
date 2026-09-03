@@ -309,6 +309,8 @@ func activate_shine(animation: int, temporary: bool = false, manual_start_cutsce
 	pause_mode = PAUSE_MODE_INHERIT
 	if activated:
 		return
+		
+	activated = true
 	
 	yield(get_tree(), "idle_frame")
 	
@@ -322,7 +324,7 @@ func activate_shine(animation: int, temporary: bool = false, manual_start_cutsce
 		yield(get_tree(), "idle_frame")
 		camera = current_scene.get_node(current_scene.camera)
 	
-	if animation == ActivateAnimations.NORMAL and !activated:
+	if animation == ActivateAnimations.NORMAL:
 		var cutscene: CameraCutscene = CameraCutscene.new()
 		cutscene.cutscene_type = cutscene.Type.AUTO
 		cutscene.tween_ease = Tween.EASE_IN_OUT
@@ -331,7 +333,7 @@ func activate_shine(animation: int, temporary: bool = false, manual_start_cutsce
 		cutscene.animation = "appear"
 		cutscene.set_up(self, global_position)
 		camera.queue_cutscene(cutscene)
-	elif animation == ActivateAnimations.SHORT and !activated:
+	elif animation == ActivateAnimations.SHORT:
 		var cutscene: CameraCutscene = CameraCutscene.new()
 		cutscene.cutscene_type = cutscene.Type.AUTO
 		cutscene.tween_ease = Tween.EASE_IN_OUT
@@ -340,12 +342,11 @@ func activate_shine(animation: int, temporary: bool = false, manual_start_cutsce
 		cutscene.animation = "appear_short"
 		cutscene.set_up(self, global_position)
 		camera.queue_cutscene(cutscene)
-	elif !activated:
+	else:
 		yield(get_tree(), "idle_frame")
 		appear_sound.volume_db = -80
 		animation_player.play("active", -1, INF)
 	
-	activated = true
 	
 	if !temporary:
 		CurrentLevelData.vars.activate_shine(mission_uuid)
