@@ -125,5 +125,6 @@ stretch_mode = 2
 
 [connection signal="button_down" from="." to="." method="button_down"]
 [connection signal="button_up" from="." to="." method="button_up"]
+[connection signal="gui_input" from="." to="." method="gui_input"]
 [connection signal="mouse_entered" from="." to="." method="mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="mouse_exited"]

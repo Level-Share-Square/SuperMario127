@@ -190,8 +190,7 @@ func select_item_from_placeable(item, palette):
 	
 	on_item_selected(item)
 	yield(get_tree(), "idle_frame")
-	var button = bottom_row.get_children()[0]
-	palette_selected(palette)
+	palette_selected(palette, bottom_row.get_child(0))
 
 func refresh_loadout():
 	var favs_amount: int = fav_items[selected_loadout].size()
@@ -233,15 +232,14 @@ func hide_palettes():
 	palettes.pressed = false
 
 
-func palette_selected(palette):
+func palette_selected(palette, item_button):
 	hide_palettes()
 	
-	for item_button in bottom_row.get_children():
-		if item_button.pressed:
-			item_button.palette = palette
-			editor.selected_item.palette = palette
-			item_button.icon_node.texture = editor.selected_item.icons[palette]
-			_on_item_button_pressed(item_button)
+	item_button.palette = palette
+	item_button.icon_node.texture = item_button.item.icons[palette]
+	if item_button == selected_button:
+		editor.selected_item.palette = palette
+		_on_item_button_pressed(item_button)
 
 func _unhandled_input(event):
 	if not (Input.is_action_pressed("alt_modifier") or Input.is_action_pressed("ctrl_modifier")):

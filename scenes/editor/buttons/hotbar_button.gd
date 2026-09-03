@@ -103,3 +103,26 @@ func mouse_exited():
 		icon_offset.rect_position.y, 0, 0.075,
 		Tween.TRANS_CIRC, Tween.EASE_OUT)
 	tween_hover.start()
+
+
+func gui_input(event):
+	if event is InputEventMouseButton:
+		if event.button_index == BUTTON_RIGHT and event.pressed:
+			hotbar.palette_selected(wrapi(palette + 1, 0, item.icons.size() - 1), self)
+			play_bounce_anim()
+		if event.button_index == BUTTON_MIDDLE and event.pressed:
+			hotbar.new_favorite_selected(item, get_index())
+			play_bounce_anim()
+
+func play_bounce_anim():
+	tween.stop_all()
+	tween.interpolate_property(icon_node, "rect_position:y",
+		icon_node.rect_position.y, -3, 0.075,
+		Tween.TRANS_CIRC, Tween.EASE_OUT)
+	tween.start()
+	yield(tween, "tween_completed")
+	tween.stop_all()
+	tween.interpolate_property(icon_node, "rect_position:y",
+		icon_node.rect_position.y, 1, 0.15,
+		Tween.TRANS_BOUNCE, Tween.EASE_IN)
+	tween.start()

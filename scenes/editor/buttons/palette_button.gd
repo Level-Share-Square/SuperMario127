@@ -23,7 +23,7 @@ func button_down():
 		icon_node.rect_position.y, -3, 0.075,
 		Tween.TRANS_CIRC, Tween.EASE_OUT)
 	tween.start()
-	hotbar.palette_selected(get_index())
+	hotbar.palette_selected(get_index(), hotbar.selected_button)
 
 func button_up():
 	tween.stop_all()
