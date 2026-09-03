@@ -122,9 +122,17 @@ func load_base_properties():
 	switch_layer.disabled = layer_data.layer_metadata.is_origin
 
 func switch_layer():
-	layer_data = yield(shared.change_layer_type(shared.get_layer_at(layer_data.layer_metadata.order)), "completed")
+	var action := ChangeLayerAction.new()
+	action.shared = shared
+	action.layer_uuid = layer_data.layer_metadata.layer_uuid
+	shared.connect("layer_type_changed", self, "layer_type_changed")
+	editor.action_manager.commit_action([action])
+	
+func layer_type_changed(new_data):
+	layer_data = new_data
 	window.toggle_window()
 	editor.get_node("%ParallaxScroll")._update_parallax()
+	shared.disconnect("layer_type_changed", self, "layer_type_changed")
 
 func get_mission_args() -> Dictionary:
 	var args: Dictionary

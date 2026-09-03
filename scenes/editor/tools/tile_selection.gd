@@ -44,7 +44,11 @@ func on_selection_inside_clicked():
 	if !is_copied:
 		for position in editor.selected_tiles:
 			shared.set_tile(position.x, position.y, editor.layer, 0, 0, 0)
-	editor.tile_buffer.modulate = shared.layer_dictionary[editor.layer].layer_tint
+			
+	var layer = shared.layer_dictionary[editor.layer]
+	if layer is LevelParallaxLayer and layer.autoset_tint:
+		editor.tile_buffer.modulate = layer._modulate_autoset()
+	else: editor.tile_buffer.modulate = layer.layer_tint
 	
 	while true:
 		var next_pos = yield(self, "mouse_motion")
@@ -116,6 +120,11 @@ func on_paste(data: Array):
 		selection_box.rect_position = fill_rect.position
 		selection_box.rect_size = fill_rect.size
 		selection_box.show()
-		editor.tile_buffer.modulate = shared.layer_dictionary[editor.layer].layer_tint
+		
+		var layer = shared.layer_dictionary[editor.layer]
+		if layer is LevelParallaxLayer and layer.autoset_tint:
+			editor.tile_buffer.modulate = layer._modulate_autoset()
+		else: editor.tile_buffer.modulate = layer.layer_tint
+		editor.tile_buffer.modulate.a *= 0.5
 		is_copied = true
 		set_buffer()

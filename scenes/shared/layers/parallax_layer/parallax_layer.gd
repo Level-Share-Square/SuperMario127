@@ -4,7 +4,7 @@ extends LevelLayer
 
 onready var parallax_scroll: ParallaxScroll = $"%ParallaxScroll"
 
-const AUTOSET_DARKEN_GROWTH = 0.01
+const AUTOSET_DARKEN_GROWTH = 0.006
 
 func load_in(layer_data: LayerData):
 	parallax_scroll.set_parallax_distance(layer_data.layer_metadata.parallax_distance)
