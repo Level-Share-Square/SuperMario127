@@ -935,7 +935,7 @@ func _physics_process(delta: float) -> void:
 		if abs(velocity.x) > 0:
 			if abs(velocity.x) > 15:
 				var new_velocity
-				if is_on_floor():
+				if is_grounded():
 #					new_velocity = 
 #					if abs(new_velocity) > 0:
 					velocity.x -= sign(velocity.x) * friction
@@ -1171,9 +1171,9 @@ func _physics_process(delta: float) -> void:
 		velocity = move_and_slide_with_snap(velocity, snap, Vector2.UP, true, 4, deg2rad(46))
 		velocity.y = old_y_vel
 		if is_grounded():
-			velocity.y = min(5, velocity.y)
+			velocity.y = min(0, velocity.y)
 		if is_ceiling():
-			velocity.y = max(5, velocity.y)
+			velocity.y = max(0, velocity.y)
 		
 		## CLIPPING CODE
 		var ray_check: Dictionary = get_world_2d().direct_space_state.intersect_ray(last_position, global_position, [self], 1)

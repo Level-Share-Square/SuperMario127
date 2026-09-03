@@ -33,6 +33,7 @@ onready var break_particles = $"%BreakParticles"
 var broken: bool = false
 var character: Character
 var char_collider: CollisionShape2D
+var char_dir_check_collider: CollisionShape2D
 var misc_colliders: Array
 var last_hit_rect: Rect2
 var last_non_intersecting_rect: Rect2
@@ -99,9 +100,9 @@ func update_property(key: String, value):
 
 func area_entered(area):
 	if is_instance_valid(area.owner) and area.owner is Character:
-		if not is_instance_valid(char_collider) or char_collider.get_parent().name.find("Spin") == -1:
-			character = area.owner
-			char_collider = area.get_child(0)
+		character = area.owner
+		char_collider = area.get_child(0)
+		char_dir_check_collider = area.get_child(1)
 	elif area.get_parent().name in breakable_objects:
 		if area.get_parent() is PhysicsBody2D:
 			box.add_collision_exception_with(area.get_parent())
@@ -115,6 +116,7 @@ func area_exited(area):
 			box.remove_collision_exception_with(character)
 		character = null
 		char_collider = null
+		char_dir_check_collider = null
 		# in case there's another overlapping character area still
 		for overlapping_area in player_detector.get_overlapping_areas():
 			if overlapping_area != area:
@@ -132,10 +134,12 @@ func try_break() -> void:
 	
 	var hit_flag: int = 0
 	var hit_rect: Rect2
+	var compare_hit_rect: Rect2
 	var box_rect: Rect2 = rect_from_shape(box_collision)
 	
 	if is_instance_valid(character) and is_instance_valid(char_collider):
 		hit_rect = rect_from_shape(char_collider, true)
+		compare_hit_rect = rect_from_shape(char_dir_check_collider, true)
 		var hit_dir: int = get_rect_dir(last_hit_rect)
 		if char_can_hit(hit_dir, last_hit_rect):
 			if not character in box.get_collision_exceptions():
@@ -147,10 +151,10 @@ func try_break() -> void:
 			character.remove_collision_exception_with(box)
 			box.remove_collision_exception_with(character)
 	
-	last_hit_rect = hit_rect
-	if not last_hit_rect.intersects(box_rect):
-		last_non_intersecting_rect = last_hit_rect
-	
+		last_hit_rect = hit_rect
+		if not compare_hit_rect.intersects(box_rect):
+			last_non_intersecting_rect = compare_hit_rect
+		
 	if broken: return
 	
 	for collider in misc_colliders:
