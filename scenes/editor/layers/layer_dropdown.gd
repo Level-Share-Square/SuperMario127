@@ -103,6 +103,8 @@ func new_layer(ground: bool = true) -> void:
 	action.ground = ground
 	editor.action_manager.commit_action([action])
 
+	select_layer(shared.layer_uuid_to_index(action.layer_uuid), false)
+
 
 func _process(_delta: float) -> void:
 	if not is_dragging: return
