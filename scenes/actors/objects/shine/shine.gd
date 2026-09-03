@@ -30,6 +30,7 @@ onready var spawn_particles: Particles2D = $SpawnParticles
 onready var ghost: Sprite = $Ghost
 onready var area: Area2D = $Area2D
 onready var unpause_timer: Timer = $UnpauseTimer
+onready var allow_cutscene_timer: Timer = $AllowCutsceneTimer
 onready var collect_sound: AudioStreamPlayer = $CollectSound
 onready var appear_sound = $AppearSound
 onready var ambient_sound: AudioStreamPlayer2D = $AmbientSound
@@ -282,15 +283,16 @@ func _physics_process(_delta: float) -> void:
 		while CurrentLevelData.vars.purple_starbits_collected.size() <= CurrentLevelData.area_id:
 			CurrentLevelData.vars.purple_starbits_collected.append([0, []])
 		
-		if red_coins_activate and !activated and CurrentLevelData.level_metadata.collectible_data.red_coin_count > 0:
-			if CurrentLevelData.vars.red_coins_collected[0] == CurrentLevelData.level_metadata.collectible_data.red_coin_count:
-				activate_shine(ActivateAnimations.NORMAL if do_animation else ActivateAnimations.SKIP, false, true)
-		if shine_shards_activate and !activated and CurrentLevelData.vars.max_shine_shards > 0:
-			if CurrentLevelData.vars.shine_shards_collected[CurrentLevelData.area_id][0] == CurrentLevelData.area_headers[CurrentLevelData.area_id].shine_shard_count:
-				activate_shine(ActivateAnimations.NORMAL if do_animation else ActivateAnimations.SKIP, false, true)
-		if purple_starbits_activate and !activated and CurrentLevelData.vars.max_purple_starbits > 0:
-			if CurrentLevelData.vars.purple_starbits_collected[CurrentLevelData.area_id][0] >= required_purples:
-				activate_shine(ActivateAnimations.NORMAL if do_animation else ActivateAnimations.SKIP, false, true)
+		if allow_cutscene_timer.is_stopped():
+			if red_coins_activate and !activated and CurrentLevelData.level_metadata.collectible_data.red_coin_count > 0:
+				if CurrentLevelData.vars.red_coins_collected[0] == CurrentLevelData.level_metadata.collectible_data.red_coin_count:
+					activate_shine(ActivateAnimations.NORMAL if do_animation else ActivateAnimations.SKIP, false, true)
+			if shine_shards_activate and !activated and CurrentLevelData.vars.max_shine_shards > 0:
+				if CurrentLevelData.vars.shine_shards_collected[CurrentLevelData.area_id][0] == CurrentLevelData.area_headers[CurrentLevelData.area_id].shine_shard_count:
+					activate_shine(ActivateAnimations.NORMAL if do_animation else ActivateAnimations.SKIP, false, true)
+			if purple_starbits_activate and !activated and CurrentLevelData.vars.max_purple_starbits > 0:
+				if CurrentLevelData.vars.purple_starbits_collected[CurrentLevelData.area_id][0] >= required_purples:
+					activate_shine(ActivateAnimations.NORMAL if do_animation else ActivateAnimations.SKIP, false, true)
 	
 	if collected:
 		if send_score == true:
