@@ -41,7 +41,10 @@ func box_expansion():
 
 	var layer = shared.get_layer(editor.layer)
 	editor.tile_buffer.z_index = layer.z_index
-	editor.tile_buffer.modulate = layer.layer_tint
+	if layer is LevelParallaxLayer and layer.autoset_tint:
+		editor.tile_buffer.modulate = layer._modulate_autoset()
+	else: editor.tile_buffer.modulate = layer.layer_tint
+	editor.tile_buffer.modulate.a *= 0.5
 	
 	for cell in editor.tile_buffer.get_used_cells():
 		if not tile_fill_rect.has_point(cell):
