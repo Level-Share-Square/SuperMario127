@@ -103,6 +103,7 @@ extents = Vector2( 48, 28 )
 z_index = -1
 script = ExtResource( 2 )
 internal_id = "note_block"
+part_width = 16.0
 weak_bounce_sound = ExtResource( 4 )
 bounce_sound = ExtResource( 3 )
 
