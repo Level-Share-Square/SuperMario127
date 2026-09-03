@@ -42,6 +42,7 @@ func change_item(new_item: PlaceableItem):
 				indicator.show()
 			else:
 				indicator.hide()
+		hint_tooltip = item.item_name
 
 func _physics_process(delta):
 	if timer_start == true:
