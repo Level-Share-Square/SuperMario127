@@ -42,8 +42,14 @@ func _init(
 
 
 func get_shine_count() -> int:
-	return mission_data.size()
+	return used_mission_data.size()
 
+func get_menu_shine_count() -> int:
+	var count: int = 0
+	for mission in used_mission_data:
+		if get_mission_by_uuid(mission).mission_show_in_menu: count += 1
+		
+	return count
 
 func get_star_coin_count() -> int:
 	return star_coin_data.size()
