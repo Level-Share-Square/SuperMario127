@@ -1,6 +1,8 @@
 class_name QuicksandHopState
 extends State
 
+const JUMP_DECAY_RATE: float = 1.2
+
 export var jump_strength : float = 100.0
 export var jump_length : int = 5
 
@@ -25,9 +27,9 @@ func _start(_delta):
 	
 	character.quicksand_particles.set_particles_emitting(true)
 	
+	working_jump_strength /= JUMP_DECAY_RATE
 	character.sound_player.play_jump_sound()
 	character.velocity.y = -working_jump_strength
-	character.position.y -= 3
 	character.jump_animation = 0
 	character.current_jump = 1
 
