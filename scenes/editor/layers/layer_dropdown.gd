@@ -101,8 +101,12 @@ func new_layer(ground: bool = true) -> void:
 	var action := AddLayerAction.new()
 	action.shared = shared
 	action.ground = ground
+	
+	var current_index: int = shared.layer_uuid_to_index(editor.layer)
+	if current_index != -1:
+		action.insert_index = current_index + 1
+	
 	editor.action_manager.commit_action([action])
-
 	select_layer(shared.layer_uuid_to_index(action.layer_uuid), false)
 
 
