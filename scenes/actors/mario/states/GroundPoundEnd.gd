@@ -37,6 +37,7 @@ func _start(_delta):
 	else:
 		sprite.animation = "groundPoundEndLeft"
 	character.sound_player.play_gp_hit_sound()
+	LastInputDevice.rumble(0.5, 0.8, 0.2)
 
 func _stop(delta):
 	particle_timer = 0

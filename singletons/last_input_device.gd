@@ -57,3 +57,7 @@ func _input(event):
 			emit_signal("input_type_changed", new_input_type)
 		
 		last_input_type = new_input_type
+
+static func rumble(weak_power: int, strong_power: int, time: int):
+	Input.start_joy_vibration(0, weak_power, strong_power, time)
+	
