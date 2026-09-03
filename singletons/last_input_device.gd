@@ -20,6 +20,7 @@ enum LayoutType {Xbox, Nintendo, PlayStation}
 var last_input_type: int = InputType.Keyboard
 var last_layout_type: int = LayoutType.Xbox
 var is_mouse: bool
+var last_controller: int = 0
 
 var layouts_regex: Dictionary = {
 	LayoutType.Nintendo: [
@@ -37,6 +38,7 @@ func _input(event):
 		if is_mouse != last_mouse:
 			emit_signal("mouse_changed", is_mouse)
 	
+	if event.device != -1 and (event is InputEventJoypadButton or event is InputEventJoypadMotion): last_controller = event.device
 	
 	var class_string: String = event.get_class()
 	if class_string in class_type_map.keys():
@@ -58,6 +60,5 @@ func _input(event):
 		
 		last_input_type = new_input_type
 
-static func rumble(weak_power: int, strong_power: int, time: int):
-	Input.start_joy_vibration(0, weak_power, strong_power, time)
-	
+func rumble(weak_power: float, strong_power: float, time: float):
+	Input.start_joy_vibration(last_controller, weak_power, strong_power, time)
