@@ -394,6 +394,7 @@ func collect(body: PhysicsBody2D) -> void:
 
 		Singleton.Music.stop_temporary_music()
 
+		LastInputDevice.rumble(0.5, 0.8, 0.2)
 		character.anim_player.stop()
 		character.set_state_by_name("FallState", get_physics_process_delta_time())
 		character.velocity.x = 0

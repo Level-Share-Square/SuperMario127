@@ -45,7 +45,13 @@ static func parse_text(text: String, character: Character) -> String:
 	text = text.replace(":Char:", CHARACTER_NAMES[character.character])
 	text = text.replace(":CHAR:", CHARACTER_NAMES[character.character].to_upper())
 	
-	text = text.replace(":winginputs:", ":leftinput: and :rightinput:" if !Singleton.PlayerSettings.legacy_wing_cap else ":upinput: and :downinput:")
+	var is_controller: bool = LastInputDevice.last_input_type == LastInputDevice.InputType.Controller
+	var legacy_wing_cap: bool = LocalSettings.load_setting(
+		"Controls (Player 1)" + input_settings_util.get_group_suffix(is_controller), 
+		"63_wing_cap",
+		false
+	)
+	text = text.replace(":winginputs:", ":leftinput: and :rightinput:" if !legacy_wing_cap else ":upinput: and :downinput:")
 	
 	var player = character.player_id
 	for action in KEYBINDS:

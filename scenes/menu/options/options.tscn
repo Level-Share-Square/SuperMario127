@@ -1372,6 +1372,16 @@ margin_bottom = 225.0
 setting_section = "Controls (Player 1)"
 setting_key = "63_wing_cap"
 
+[node name="Rumble" parent="Subscreens/Controls/VBoxContainer/Remapper/Gameplay" instance=ExtResource( 10 )]
+visible = false
+margin_left = 128.0
+margin_top = 186.0
+margin_right = 226.0
+margin_bottom = 225.0
+setting_section = "Controls (Player 1)"
+setting_key = "rumble"
+default_value = true
+
 [node name="Interface" type="GridContainer" parent="Subscreens/Controls/VBoxContainer/Remapper"]
 visible = false
 margin_left = 32.0
@@ -2170,11 +2180,13 @@ anims/transition = SubResource( 1 )
 [connection signal="pressed" from="Subscreens/Controls/VBoxContainer/Devices/HBoxContainer/Keyboard" to="Subscreens/Controls/VBoxContainer/Remapper" method="switch_device_type" binds= [ false ]]
 [connection signal="pressed" from="Subscreens/Controls/VBoxContainer/Devices/HBoxContainer/Keyboard" to="Subscreens/Controls/VBoxContainer/Devices" method="switch_device_type" binds= [ false ]]
 [connection signal="pressed" from="Subscreens/Controls/VBoxContainer/Devices/HBoxContainer/Keyboard" to="Subscreens/Controls/VBoxContainer/Devices/HBoxContainer/Controller" method="set_focus_neighbour" binds= [ 2, "../Keyboard" ]]
+[connection signal="pressed" from="Subscreens/Controls/VBoxContainer/Devices/HBoxContainer/Keyboard" to="Subscreens/Controls/VBoxContainer/Remapper/Gameplay/Rumble" method="hide"]
 [connection signal="pressed" from="Subscreens/Controls/VBoxContainer/Devices/HBoxContainer/Controller" to="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset/Keyboard" method="hide"]
 [connection signal="pressed" from="Subscreens/Controls/VBoxContainer/Devices/HBoxContainer/Controller" to="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset/Controller" method="show"]
 [connection signal="pressed" from="Subscreens/Controls/VBoxContainer/Devices/HBoxContainer/Controller" to="Subscreens/Controls/VBoxContainer/Remapper" method="switch_device_type" binds= [ true ]]
 [connection signal="pressed" from="Subscreens/Controls/VBoxContainer/Devices/HBoxContainer/Controller" to="Subscreens/Controls/VBoxContainer/Devices" method="switch_device_type" binds= [ true ]]
 [connection signal="pressed" from="Subscreens/Controls/VBoxContainer/Devices/HBoxContainer/Controller" to="Subscreens/Controls/VBoxContainer/Devices/HBoxContainer/Controller" method="set_focus_neighbour" binds= [ 2, "../Device" ]]
+[connection signal="pressed" from="Subscreens/Controls/VBoxContainer/Devices/HBoxContainer/Controller" to="Subscreens/Controls/VBoxContainer/Remapper/Gameplay/Rumble" method="show"]
 [connection signal="pressed" from="Subscreens/Controls/VBoxContainer/Devices/HBoxContainer/Device" to="Subscreens/Controls/VBoxContainer/Devices" method="switch_device"]
 [connection signal="ready" from="Subscreens/Storage/ModLoader" to="Subscreens/Storage/ModLoader" method="check_old_data" binds= [ false ]]
 [connection signal="pressed" from="Subscreens/Storage/VBoxContainer/OpenAppdata" to="Subscreens/Storage/ModLoader" method="open_appdata"]

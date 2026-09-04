@@ -31,6 +31,8 @@ func kill(body):
 		added_speed.y = stepify(added_speed.y, 0.5)
 		added_speed *= METAL_KNOCKBACK
 		
+		LastInputDevice.rumble(0.2, 0.2, 0.2)
+		
 		body.velocity.x += added_speed.x
 		body.velocity.y = added_speed.y
 		body.velocity.limit_length(METAL_KNOCKBACK_SPEED_LIMIT)

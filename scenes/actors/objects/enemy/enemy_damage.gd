@@ -13,7 +13,7 @@ export var knockback_power := Vector2(225, 235)
 export var set_player_knockback_state: bool = true
 
 export(BounceType) var bounce_type: int = 0
-export var bounce_power: float = 330
+export var bounce_power: float = 275
 export var big_bounce_power: float = 400
 export var spring_bounce_windup_length: float = 0.15
 export var spring_bounce_depth: float = 14

@@ -392,7 +392,7 @@ func damage_with_knockback(hit_pos : Vector2, amount : int = 1, cause : String =
 		# Mario shouldn't take damage with the vanish cap*
 		if amount > 0 and is_instance_valid(powerup) and powerup.get_name() == "VanishPowerup":
 			return
-		knockback(hit_pos, power, true)
+		knockback(hit_pos, power, true, false)
 		damage(amount, cause, frames)
 
 
@@ -791,10 +791,12 @@ func damage(amount : int = 1, cause : String = "hit", frames : int = 180) -> voi
 			sound_player.play_hit_sound()
 		
 		if health <= 0:
+			LastInputDevice.rumble(0.5, 1.0, 0.5)
 			health = 0 # Fix -1 bug
 			sound_player.play_last_hit_sound()
 			kill(cause)
 		else:
+			LastInputDevice.rumble(0.5, 0.8, 0.2)
 			if cause == "crushed":
 				sound_player.play_last_hit_voice_sound()
 				
@@ -1089,7 +1091,7 @@ func _physics_process(delta: float) -> void:
 	elif slope_angle_check.is_colliding() and velocity.y >= -10:
 		var normal = slope_angle_check.get_collision_normal()
 		var should_snap: bool = abs(normal.x) < deg2rad(46)
-		snap = Vector2(0, 6 if should_snap else 0)
+		snap = Vector2(0, 9 if should_snap else 3)
 	
 	# Switch nozzle
 	if (inputs[8][1] and CurrentLevelData.vars.nozzles_collected.size() > 1

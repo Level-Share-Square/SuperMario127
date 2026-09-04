@@ -27,6 +27,7 @@ func _stop(_delta):
 	character.jump_animation = 0
 	yield(get_tree(), "physics_frame")
 	if round(character.velocity.y) == 0 and character.is_grounded():
+		LastInputDevice.rumble(0.5, 0.0, 0.05)
 		character.dust_land_particles.restart()
 		character.dust_land_particles.emitting = true
 		character.sound_player.play_land_step_sound()

@@ -55,6 +55,8 @@ func change_setting(key: String, new_value):
 			Singleton.PlayerSettings.player1_character = new_value
 		"second_player":
 			Singleton.PlayerSettings.player2_character = new_value
+		"rumble":
+			Singleton.PlayerSettings.rumble = new_value
 		
 		"master_volume":
 			var bus_index: int = AudioServer.get_bus_index("Master")

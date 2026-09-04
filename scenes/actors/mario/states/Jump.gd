@@ -57,6 +57,7 @@ func _start(delta):
 	ground_buffer = 0
 	jump_playing = true
 	if ledge_buffer > 0:
+		LastInputDevice.rumble(0.5, 0.0, 0.05)
 		if dive_buffer > 0:
 			character.current_jump = 0
 		if character.current_jump == 2 and abs(character.velocity.x) < 80:

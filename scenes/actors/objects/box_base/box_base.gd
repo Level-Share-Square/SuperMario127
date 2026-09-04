@@ -147,6 +147,7 @@ func try_break() -> void:
 				box.add_collision_exception_with(character)
 			if hit_rect.intersects(box_rect):
 				break_box()
+				LastInputDevice.rumble(0.5, 0.0, 0.05)
 		elif character in box.get_collision_exceptions():
 			character.remove_collision_exception_with(box)
 			box.remove_collision_exception_with(character)
@@ -154,7 +155,7 @@ func try_break() -> void:
 		last_hit_rect = hit_rect
 		if not compare_hit_rect.intersects(box_rect):
 			last_non_intersecting_rect = compare_hit_rect
-		
+	
 	if broken: return
 	
 	for collider in misc_colliders:

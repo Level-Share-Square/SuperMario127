@@ -244,7 +244,7 @@ tracks/6/keys = {
 "times": PoolRealArray( 0, 1.475, 1.8 ),
 "transitions": PoolRealArray( 1, 2, 1 ),
 "update": 0,
-"values": [ 0.0, 0.0, -80.0 ]
+"values": [ -5.0, -5.0, -80.0 ]
 }
 tracks/7/type = "audio"
 tracks/7/path = NodePath("AudioStreamPlayer2")
@@ -270,7 +270,7 @@ tracks/8/keys = {
 "times": PoolRealArray( 0.11, 0.32, 1.31 ),
 "transitions": PoolRealArray( 1, 2, 1 ),
 "update": 0,
-"values": [ -80.0, -8.0, -80.0 ]
+"values": [ -80.0, -10.0, -80.0 ]
 }
 
 [sub_resource type="Shader" id=3]

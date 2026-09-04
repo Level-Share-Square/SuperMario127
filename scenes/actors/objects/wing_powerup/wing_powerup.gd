@@ -28,6 +28,7 @@ func collect(body):
 		var powerup_node = body.get_powerup_node("WingPowerup")
 		body.set_powerup(powerup_node, powerup_music, duration)
 		if duration > 0.5:
+			LastInputDevice.rumble(0.5, 0.8, 0.2)
 			body.sound_player.play_powerup_sound()
 			body.sound_player.play_powerup_jingle()
 		animation_player.play("collect")

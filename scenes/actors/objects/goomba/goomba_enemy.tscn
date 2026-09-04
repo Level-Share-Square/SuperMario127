@@ -751,7 +751,7 @@ visible = false
 self_modulate = Color( 1, 0.4, 0.333333, 1 )
 frames = ExtResource( 11 )
 animation = "idle"
-frame = 6
+frame = 3
 offset = Vector2( 0, -15 )
 script = ExtResource( 10 )
 

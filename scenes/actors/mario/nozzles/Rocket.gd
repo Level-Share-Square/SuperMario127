@@ -35,7 +35,8 @@ func _activated_update(delta):
 		character.fludd_sprite.modulate = Color(1, 1 - (charge * 1.4), 1 - (charge * 1.4))
 		character.fludd_sprite.offset = Vector2(rand_range(-1, 1), rand_range(-1, 1)) * charge
 		return
-		
+	
+	LastInputDevice.rumble(0.5, 0.8, 0.2)
 	cooldown_time = 0.2
 	character.fludd_sprite.offset = Vector2(0, 0)
 	character.fludd_sprite.modulate = Color(1, 1, 1)

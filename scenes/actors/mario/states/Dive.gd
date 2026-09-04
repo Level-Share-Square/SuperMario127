@@ -43,6 +43,7 @@ func _start(_delta : float) -> void:
 		## super dive recover/slide dive
 		if character.state_set_from and character.state_set_from.name == "SlideState":
 			sound_player.play_perfect_sound()
+			LastInputDevice.rumble(0.2, 0.2, 0.2)
 			
 			character.sprite.modulate = Color(2, 2, 2)
 			
@@ -122,6 +123,7 @@ func _stop(delta : float) -> void:
 		character.camera.shake = true
 		sprite.rotation_degrees = 0
 	if character.is_grounded():
+		LastInputDevice.rumble(0.5, 0.0, 0.05)
 		character.set_state_by_name("SlideState", delta)
 		character.sprite.scale = LAND_SQUISH
 		character.squish_lerp = true
