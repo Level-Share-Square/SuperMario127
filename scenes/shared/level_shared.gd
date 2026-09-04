@@ -140,7 +140,7 @@ func move_layer(layer: LevelLayer, to: int, save_to_data: bool = false):
 			
 func load_layer_states(layer_states: Dictionary):
 	var layers_to_move: Array = []
-	
+
 	for layer_uuid in layer_states:
 		var layer: LevelLayer = get_layer(layer_uuid)
 		var layer_state: LayerState = layer_states[layer_uuid]
@@ -156,8 +156,8 @@ func load_layer_states(layer_states: Dictionary):
 		
 		layers_to_move.sort_custom(self, "sort_by_order")
 		
-		for layer_array in layers_to_move:
-			move_layer(layer_array[0], layer_array[1])
+	for layer_array in layers_to_move:
+		move_layer(layer_array[0], layer_array[1])
 			
 	
 func sort_by_order(a: Array, b: Array):
