@@ -61,6 +61,7 @@ func _start(_delta):
 	boost_disable_time = 0.14
 
 func _update(delta):
+	if not character.gravity_scale == 0: character.gravity_scale = 0
 	var move_vector = Vector2()
 	var sprite = character.sprite
 	

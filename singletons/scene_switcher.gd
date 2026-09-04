@@ -92,7 +92,6 @@ func setup_level(level_metadata: LevelMetadata, level_id: String, working_folder
 #
 #	CurrentLevelData.level_info.selected_shine = -1
 	CurrentLevelData.load_level_headers(level_list_util.load_level_code_file(level_list_util.get_level_file_path(level_id, working_folder)))
-
 	if not CurrentLevelData.level_transition_data.empty():
 		CurrentLevelData.switch_to_area(CurrentLevelData.level_transition_data.get("target_area", 0))
 	elif start_in_edit_mode:
@@ -123,18 +122,12 @@ func start_level(level_metadata: LevelMetadata, level_id: String, working_folder
 		if start_in_edit_mode or skip_shine_select:
 			# just so the menu can work properly
 			var mission: MissionData = level_metadata.collectible_data.mission_data[0]
-			CurrentLevelData.current_mission_id = mission.mission_uuid
-			CurrentLevelData.current_mission = mission
-			CurrentLevelData.level_transition_data = {
-				"target_area": mission.spawn_area_id,
-				"target_tag": mission.spawn_teleporter_tag
-			}
 		else:
 			Singleton.Music.change_song(Singleton.Music.last_song, 0)
 			goal_scene = SHINE_SELECT_PATH
 	
 	# not a multishine level, but if there's 1 shine we should set it as selected 
-	if total_shine_count == 1:
+	if total_shine_count == 1 and not start_in_edit_mode:
 		var mission: MissionData = level_metadata.collectible_data.mission_data[0]
 		CurrentLevelData.current_mission_id = mission.mission_uuid
 		CurrentLevelData.current_mission = mission
