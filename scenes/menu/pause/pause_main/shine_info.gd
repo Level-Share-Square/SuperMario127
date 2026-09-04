@@ -50,7 +50,7 @@ func _ready():
 		
 		total_shines = collectible_data.get_menu_shine_count()
 		selected_shine_id = CurrentLevelData.current_mission_id
-		selected_shine_index = show_in_menu_missions.find(selected_shine_id)
+		selected_shine_index = find(selected_shine_id)
 		
 		total_scoins = collectible_data.get_star_coin_count()
 		selected_scoin_index = 0
@@ -60,9 +60,18 @@ func _ready():
 
 func get_show_in_menu_missions():
 	show_in_menu_missions.clear()
-	for mission in level_metadata.collectible_data.used_mission_data:
-		if level_metadata.collectible_data.get_mission_by_uuid(mission).mission_show_in_menu: show_in_menu_missions.append(mission)
-
+	for mission_uuid in level_metadata.collectible_data.used_mission_data:
+		var mission = level_metadata.collectible_data.get_mission_by_uuid(mission_uuid)
+		if mission.mission_show_in_menu: show_in_menu_missions.append(mission)
+	show_in_menu_missions.sort_custom(MissionData, "sort_by_order")
+	
+func find(id):
+	var index: int = 0
+	for mission in show_in_menu_missions:
+		if mission.mission_uuid == id: return index
+		index += 1
+	return -1
+	
 func update_info():
 	star.visible = false
 	level_name.text = CurrentLevelData.level_metadata.level_name
@@ -78,7 +87,7 @@ func update_shine_info():
 		shine_name.text = "No shine sprite selected"
 		shine_description.bbcode_text = "[center]There are no shine sprites in this level.[/center]"
 	else:
-		var selected_shine_info = level_metadata.collectible_data.get_mission_by_uuid(show_in_menu_missions[selected_shine_index + shine_offset])
+		var selected_shine_info = show_in_menu_missions[selected_shine_index + shine_offset]
 		shine_name.text = selected_shine_info.shine_name
 		shine_description.bbcode_text = "[center]%s[/center]" % selected_shine_info.shine_description
 		star.visible = CurrentLevelData.save_data.is_mission_complete(selected_shine_info.mission_uuid)

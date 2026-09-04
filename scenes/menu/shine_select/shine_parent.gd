@@ -47,6 +47,8 @@ func _ready():
 	for mission in level_metadata.collectible_data.used_mission_data:
 		shine_details.append(level_metadata.collectible_data.get_mission_by_uuid(mission))
 	
+	shine_details.sort_custom(MissionData, "sort_by_order")
+	
 	var shine_index: int = 0
 	var found_uncollected: bool = false
 	for i in range(shine_details.size()):
