@@ -62,4 +62,4 @@ func _update(delta: float) -> void:
 		move_speed * enemy.facing_direction, delta * accel * 60)
 	
 	# otherwise they turn when the floor disappears
-	was_grounded = enemy.is_on_floor()
+	was_grounded = enemy.is_on_ground()

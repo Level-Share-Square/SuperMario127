@@ -23,6 +23,7 @@ func _register_enemy_properties() -> void:
 func _ready():
 	._ready()
 	connect("property_changed", self, "update_property")
+	update_property("rainbow", rainbow)
 
 
 func update_property(key: String, value):
@@ -35,8 +36,9 @@ func update_property(key: String, value):
 			enemy.set_feet_color(value)
 	
 	if key == "rainbow":
+		coin_id = 40 if value else 1
 		for enemy in spawned_enemies:
-			enemy.coin_id = 40 if value else 1
+			enemy.coin_id = coin_id
 			enemy.rainbow = rainbow
 		update_property("horn_color", horn_color)
 		update_property("feet_color", feet_color)

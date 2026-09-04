@@ -17,5 +17,6 @@ func _update(_delta: float) -> void:
 		else:
 			enemy.sprite.play("jump")
 	
-	if is_instance_valid(enemy.player_detector.get_player()):
+	var player: Character = enemy.player_detector.get_player()
+	if is_instance_valid(player) and not player.dead:
 		enemy.set_state_by_name("ChaseState")

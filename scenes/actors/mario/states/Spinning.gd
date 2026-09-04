@@ -6,7 +6,7 @@ class_name SpinningState
 
 export var boost_power: float = 175
 export var gravity_scale: float = 0.5
-export var attack_time: float = 0.5
+export var attack_time: float = 0.3
 var old_gravity_scale = 1
 var spin_timer := 0.0
 var boost_cooldown_timer := 0.0

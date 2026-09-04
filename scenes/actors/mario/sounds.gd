@@ -52,6 +52,7 @@ onready var dive_sound = $OtherSounds/Dive
 onready var getup_sound = $OtherSounds/Getup
 onready var backflip_sound = $OtherSounds/Backflip
 onready var perfect_sound = $OtherSounds/Perfect
+onready var spring_sound = $OtherSounds/Spring
 
 onready var footsteps_default = $Footsteps/Default
 onready var footsteps_metal = $Footsteps/Metal
@@ -257,6 +258,10 @@ func play_saw_damage_sound():
 func play_perfect_sound():
 	if ready:
 		perfect_sound.play()
+
+func play_spring_sound():
+	if ready:
+		spring_sound.play()
 
 func play_gp_windup_sound():
 	if ready:

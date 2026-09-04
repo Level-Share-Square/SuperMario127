@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://classes/sound_pitcher.gd" type="Script" id=1]
 [ext_resource path="res://assets/sounds/high_jump.wav" type="AudioStream" id=2]
@@ -30,6 +30,7 @@
 [ext_resource path="res://assets/sounds/backflip.wav" type="AudioStream" id=28]
 [ext_resource path="res://assets/sounds/sharp_1.wav" type="AudioStream" id=29]
 [ext_resource path="res://assets/sounds/sawblade_damage.wav" type="AudioStream" id=30]
+[ext_resource path="res://assets/sounds/spring.wav" type="AudioStream" id=31]
 
 [node name="OtherSounds" type="Node"]
 
@@ -198,4 +199,9 @@ bus = "Sounds"
 [node name="Perfect" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 19 )
 volume_db = -17.5
+bus = "Sounds"
+
+[node name="Spring" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 31 )
+volume_db = -2.0
 bus = "Sounds"

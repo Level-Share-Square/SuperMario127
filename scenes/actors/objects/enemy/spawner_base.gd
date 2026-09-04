@@ -21,6 +21,7 @@ export(RespawnMode) var respawn_mode
 export var max_enemies: int = 1
 export var initial_velocity: Vector2
 export var spawn_offset: float = 0
+export var coin_id: int = 1
 
 var spawner_properties: Array = [
 	"respawn_time",
@@ -77,6 +78,7 @@ func instance_enemy(emit_particles: bool = true) -> EnemyBase:
 	
 	spawned_enemy.velocity = initial_velocity
 	spawned_enemy.spawn_effect = emit_particles
+	spawned_enemy.coin_id = coin_id
 	for enemy_property in get_enemy_properties():
 		spawned_enemy[enemy_property] = self[enemy_property]
 	

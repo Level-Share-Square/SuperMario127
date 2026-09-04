@@ -15,6 +15,7 @@ export var max_gravity_factor: float = 20
 export var facing_direction: int = -1
 export var velocity: Vector2
 export var cur_state: String
+export var enemy_size: Vector2
 
 export var float_in_liquids: bool
 export var float_speed: float = 32
@@ -128,7 +129,7 @@ func _physics_process(delta):
 
 
 func is_on_ground() -> bool:
-	return floor_detector.is_colliding()
+	return test_move(global_transform, Vector2(0, 0.5))
 
 
 func create_coin(velocity: Vector2, offset: Vector2):

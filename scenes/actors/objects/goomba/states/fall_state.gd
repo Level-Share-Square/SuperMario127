@@ -9,5 +9,5 @@ func _start() -> void:
 
 
 func _update(delta: float) -> void:
-	if enemy.is_on_floor():
+	if enemy.is_on_ground():
 		enemy.set_state_by_name("IdleState")

@@ -13,7 +13,7 @@ onready var player_detector: Area2D = $PlayerDetector
 onready var animation_player = get_node("%AnimationPlayer")
 
 var rainbow: bool
-var rainbow_color := Color.red
+var rainbow_color := Color(0.999, 0, 0) # so that it doesn't ever snap to the default color
 
 
 func set_horn_color(value: Color) -> void:

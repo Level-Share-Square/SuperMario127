@@ -209,6 +209,7 @@ var healing_timer_enabled := false
 var overheal_enabled := false
 
 # Collision vars
+export var foot_offset: float = 24
 var collision_down
 var collision_up
 var collision_left
@@ -404,10 +405,10 @@ func knockback(hit_pos: Vector2, power := Vector2(235, 225), set_state: bool = t
 	
 	if set_state:
 		set_state_by_name("KnockbackState", 0)
-	else:
-		if play_hit_sound:
-			sound_player.play_damage_sound()
-			sound_player.play_hit_sound()
+	
+	if play_hit_sound and not sound_player.damage_sound.playing:
+		sound_player.play_damage_sound()
+		sound_player.play_hit_sound()
 
 
 func play_shine_sound() -> void:

@@ -3,31 +3,40 @@ extends EnemyState
 
 export var move_speed: float = 16
 export var chase_speed: float = 24
-export var accel: float = 2
+export var accel: float = 8
 
 var target_player: Character
+var footstep_interval := 0.0
 
 onready var player_detector: Area2D = get_node("%PlayerDetector")
 onready var ledge_detector: RayCast2D = get_node_or_null("Ledge")
 onready var wall_detector: RayCast2D = get_node_or_null("Wall")
+onready var animation_player = $"%AnimationPlayer"
+onready var run_sound = $"%Run"
 
 
 func _start() -> void:
 	enable_raycasts(true)
-	
-	jump()
+	if enemy.is_on_ground():
+		jump()
+	animation_player.play("alert")
 
 
 func _update(delta: float) -> void:
 	target_player = player_detector.get_player()
 	
 	if not is_instance_valid(target_player) or target_player.dead:
-		enemy.set_state_by_name("WanderState")
+		enemy.set_state_by_name("IdleState")
 		enemy.sprite.speed_scale = 1
 		return
 	
 	if enemy.is_on_ground():
 		enemy.sprite.play("run")
+		
+		if footstep_interval <= 0:
+			run_sound.play()
+			footstep_interval = 0.3 / enemy.sprite.speed_scale
+		footstep_interval -= delta
 		
 		if is_instance_valid(ledge_detector):
 			ledge_detector.position.x = abs(ledge_detector.position.x) * enemy.facing_direction
@@ -37,11 +46,15 @@ func _update(delta: float) -> void:
 	else:
 		if enemy.velocity.y > 0:
 			enemy.sprite.play("run_fall")
-		else:
+		elif enemy.sprite.animation != "alert":
 			enemy.sprite.play("run_jump")
 	
+	if enemy.sprite.animation == "run":
+		enemy.sprite.speed_scale = move_toward(enemy.sprite.speed_scale, chase_speed / move_speed, delta * accel * 60)
+	else:
+		enemy.sprite.speed_scale = 1
+	
 	enemy.facing_direction = sign(target_player.global_position.x - enemy.global_position.x)
-	enemy.sprite.speed_scale = move_toward(enemy.sprite.speed_scale, chase_speed / move_speed, delta * accel * 60)
 	enemy.velocity.x = move_toward(enemy.velocity.x, enemy.facing_direction * chase_speed, delta * accel * 60)
 	
 	if is_instance_valid(wall_detector):
@@ -62,3 +75,4 @@ func enable_raycasts(is_enabled: bool) -> void:
 
 func jump() -> void:
 	enemy.velocity.y = -225
+	enemy.position.y -= 1

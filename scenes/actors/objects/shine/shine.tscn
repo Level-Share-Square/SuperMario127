@@ -45,7 +45,7 @@ shader = ExtResource( 17 )
 shader_param/ray_count = 4
 shader_param/ray_distance = 0.45
 shader_param/ray_seperation_degrees = 22.0
-shader_param/rotation = 3.21882
+shader_param/rotation = 1.20571
 
 [sub_resource type="ShaderMaterial" id=41]
 resource_local_to_scene = true
@@ -53,7 +53,7 @@ shader = ExtResource( 17 )
 shader_param/ray_count = 4
 shader_param/ray_distance = 0.275
 shader_param/ray_seperation_degrees = 27.243
-shader_param/rotation = 3.06436
+shader_param/rotation = 5.07752
 
 [sub_resource type="CanvasItemMaterial" id=21]
 particles_animation = true
@@ -1232,7 +1232,7 @@ bus = "Music"
 [node name="AmbientSound" type="AudioStreamPlayer2D" parent="."]
 pause_mode = 1
 stream = ExtResource( 7 )
-volume_db = -16.0
+volume_db = -20.0
 max_distance = 1000.0
 attenuation = 1.51572
 bus = "Sounds"
@@ -1253,7 +1253,7 @@ texture = ExtResource( 5 )
 [node name="Glow" type="Sprite" parent="RaysContainer"]
 self_modulate = Color( 0.996078, 0.996078, 0.996078, 1 )
 material = SubResource( 38 )
-scale = Vector2( 1.08007, 1.08007 )
+scale = Vector2( 1.02114, 1.02114 )
 texture = SubResource( 40 )
 script = ExtResource( 18 )
 min_scale = 1.0
@@ -1297,7 +1297,7 @@ playing = true
 [node name="AnimatedSpriteRecolorable" type="AnimatedSprite" parent="AnimatedSprite"]
 visible = false
 frames = ExtResource( 10 )
-frame = 8
+frame = 10
 script = ExtResource( 14 )
 
 [node name="Particles2D" type="Particles2D" parent="AnimatedSprite"]
