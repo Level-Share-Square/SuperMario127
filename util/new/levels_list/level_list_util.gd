@@ -287,6 +287,9 @@ static func get_level_code_from_id(level_id: String, working_folder: String) -> 
 	return load_level_code_file(get_level_file_path(level_id, working_folder))
 	
 static func save_level_code_file(level_code: String, file_path: String):
+	var dir := Directory.new()
+	if not dir.dir_exists(file_path.get_base_dir()) and file_path.get_base_dir(): dir.make_dir_recursive(file_path.get_base_dir())
+	
 	var file := File.new()
 	var err: int = file.open(file_path, File.WRITE)
 	if err != OK:
@@ -326,6 +329,8 @@ static func load_level_save_file(file_path: String) -> Dictionary:
 
 static func save_level_save_file(level_save: Dictionary, file_path: String):
 	var save_json: String = JSON.print(level_save)
+	var dir := Directory.new()
+	if not dir.dir_exists(file_path.get_base_dir()) and file_path.get_base_dir(): dir.make_dir_recursive(file_path.get_base_dir())
 	
 	var file := File.new()
 	var err: int = file.open_encrypted_with_pass(file_path, File.WRITE, ENCRYPTION_PASSWORD)
@@ -370,6 +375,9 @@ static func get_level_music_folder(working_folder: String) -> String:
 
 ## AUTOSAVES
 static func autosave_level_to_disk(level_code: String, level_path: String):
+	var dir := Directory.new()
+	if not dir.dir_exists(level_path.get_base_dir()) and level_path.get_base_dir(): dir.make_dir_recursive(level_path.get_base_dir())
+	
 	var file := File.new()
 	var err: int = file.open(level_path, File.WRITE)
 	if err != OK: 
