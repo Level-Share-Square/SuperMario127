@@ -192,6 +192,7 @@ func attack_body_entered(body) -> void:
 
 
 func attack_area_entered(area):
+	if not enemy.enabled: return
 	if area.has_method("is_hurt_area"):
 		spin_attacked(area.get_character())
 	elif area is CharacterHitbox:
@@ -206,10 +207,10 @@ func attack_area_entered(area):
 			
 		if not is_instance_valid(enemy.state) or enemy.state.can_attack:
 			# lets not hurt the player if theyre stomping,,
-			if character.velocity.y > 0 or character.attacking: 
+			if character.velocity.y > 0 or character.attacking:
 				return
-			
-			damage_player(character)
+			else:
+				damage_player(character)
 
 
 func stomp_area_entered(area: Area2D) -> void:

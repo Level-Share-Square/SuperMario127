@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/pound_windup_old.wav-5b14512a348d6e7d4e06072e288bdccf.sample"
+path="res://.import/fludd_refill.wav-e877f4838e27cd8d8ef0d9bcdfdcc115.sample"
 
 [deps]
 
-source_file="res://assets/sounds/pound_windup_old.wav"
-dest_files=[ "res://.import/pound_windup_old.wav-5b14512a348d6e7d4e06072e288bdccf.sample" ]
+source_file="res://assets/sounds/fludd/fludd_refill.wav"
+dest_files=[ "res://.import/fludd_refill.wav-e877f4838e27cd8d8ef0d9bcdfdcc115.sample" ]
 
 [params]
 

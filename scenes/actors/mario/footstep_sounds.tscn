@@ -30,7 +30,7 @@ bus = "Sounds"
 
 [node name="Step1" type="AudioStreamPlayer" parent="Metal"]
 stream = ExtResource( 2 )
-volume_db = -7.0
+volume_db = -11.0
 bus = "Sounds"
 script = ExtResource( 5 )
 min_pitch = 0.9

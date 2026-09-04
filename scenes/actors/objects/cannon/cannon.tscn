@@ -1,12 +1,66 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://scenes/actors/objects/pipe/pipe_enter_logic/pipe_enter_logic.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/actors/objects/cannon/cannon.png" type="Texture" id=2]
 [ext_resource path="res://scenes/actors/objects/cannon/cannon_sprite_body.gd" type="Script" id=3]
 [ext_resource path="res://scenes/actors/objects/cannon/cannon.gd" type="Script" id=4]
-[ext_resource path="res://assets/sounds/cannon_open.wav" type="AudioStream" id=5]
 [ext_resource path="res://scenes/actors/objects/cannon/dust.png" type="Texture" id=6]
-[ext_resource path="res://scenes/actors/objects/cannon/cannon_audio_stream_player.gd" type="Script" id=7]
+[ext_resource path="res://assets/sounds/cannon/appear_start.wav" type="AudioStream" id=8]
+[ext_resource path="res://assets/sounds/cannon/appear_loop.wav" type="AudioStream" id=9]
+[ext_resource path="res://assets/sounds/cannon/appear_end.wav" type="AudioStream" id=10]
+
+[sub_resource type="Animation" id=16]
+resource_name = "RESET"
+length = 0.001
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("CannonMoveable:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = false
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 30 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("CannonMoveable/SpriteBodyReverser/SpriteBody:rotation_degrees")
+tracks/1/interp = 2
+tracks/1/loop_wrap = false
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1e-05 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("CannonMoveable/SpriteBodyReverser/SpriteBody:position")
+tracks/2/interp = 2
+tracks/2/loop_wrap = false
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
+"update": 0,
+"values": [  ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AudioStreamPlayer:volume_db")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -30.0 ]
+}
 
 [sub_resource type="Animation" id=1]
 resource_name = "cannon_retract"
@@ -49,15 +103,11 @@ tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
 "clips": [ {
-"end_offset": 0.79,
+"end_offset": 0.320109,
 "start_offset": 0.0,
-"stream": ExtResource( 5 )
-}, {
-"end_offset": 0.0,
-"start_offset": 1.11,
-"stream": ExtResource( 5 )
+"stream": ExtResource( 10 )
 } ],
-"times": PoolRealArray( 0, 0.436638 )
+"times": PoolRealArray( 0 )
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("AudioStreamPlayer:pitch_scale")
@@ -85,10 +135,22 @@ tracks/4/keys = {
 "method": "set_current_volume"
 } ]
 }
+tracks/5/type = "value"
+tracks/5/path = NodePath("AudioStreamPlayer:volume_db")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -30.0 ]
+}
 
 [sub_resource type="Animation" id=2]
-length = 1.67
-step = 0.025
+length = 1.8
+step = 0.01
 tracks/0/type = "value"
 tracks/0/path = NodePath("CannonMoveable:position")
 tracks/0/interp = 2
@@ -150,19 +212,15 @@ tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
 "clips": [ {
-"end_offset": 0.59,
+"end_offset": 0.0,
 "start_offset": 0.0,
-"stream": ExtResource( 5 )
+"stream": ExtResource( 8 )
 }, {
 "end_offset": 0.0,
-"start_offset": 1.1,
-"stream": ExtResource( 5 )
-}, {
-"end_offset": 0.653511,
 "start_offset": 0.0,
-"stream": ExtResource( 5 )
+"stream": ExtResource( 10 )
 } ],
-"times": PoolRealArray( 0, 0.65, 1.05 )
+"times": PoolRealArray( 0, 1.06 )
 }
 tracks/5/type = "value"
 tracks/5/path = NodePath("AudioStreamPlayer:pitch_scale")
@@ -171,10 +229,10 @@ tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"times": PoolRealArray( 0, 1, 1.675 ),
+"times": PoolRealArray( 0, 1, 1.79 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
-"values": [ 1.0, 0.8, 1.0 ]
+"values": [ 1.0, 1.0, 1.0 ]
 }
 tracks/6/type = "value"
 tracks/6/path = NodePath("AudioStreamPlayer:volume_db")
@@ -183,10 +241,36 @@ tracks/6/loop_wrap = true
 tracks/6/imported = false
 tracks/6/enabled = true
 tracks/6/keys = {
-"times": PoolRealArray( 0, 1.475, 1.66 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 1.475, 1.8 ),
+"transitions": PoolRealArray( 1, 2, 1 ),
 "update": 0,
-"values": [ 0.0, 0.0, -30.0 ]
+"values": [ 0.0, 0.0, -80.0 ]
+}
+tracks/7/type = "audio"
+tracks/7/path = NodePath("AudioStreamPlayer2")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"clips": [ {
+"end_offset": 9.30935,
+"start_offset": 0.0,
+"stream": ExtResource( 9 )
+} ],
+"times": PoolRealArray( 0.11 )
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("AudioStreamPlayer2:volume_db")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0.11, 0.32, 1.31 ),
+"transitions": PoolRealArray( 1, 2, 1 ),
+"update": 0,
+"values": [ -80.0, -8.0, -80.0 ]
 }
 
 [sub_resource type="Shader" id=3]
@@ -283,6 +367,7 @@ visible = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 method_call_mode = 1
+anims/RESET = SubResource( 16 )
 anims/cannon_retract = SubResource( 1 )
 anims/cannon_startup = SubResource( 2 )
 
@@ -304,7 +389,7 @@ position = Vector2( 0, 30 )
 
 [node name="SpriteBody" type="Sprite" parent="CannonMoveable/SpriteBodyReverser"]
 material = SubResource( 4 )
-position = Vector2( 0, -20.3125 )
+position = Vector2( 0, -22 )
 texture = ExtResource( 2 )
 offset = Vector2( 0, -6.301 )
 region_enabled = true
@@ -380,10 +465,15 @@ visible = false
 position = Vector2( 0, -22 )
 shape = SubResource( 15 )
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 5 )
+[node name="AudioStreamPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 10 )
+volume_db = -30.0
 bus = "Sounds"
-script = ExtResource( 7 )
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 9 )
+volume_db = -80.0
+bus = "Sounds"
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_finished"]
 [connection signal="tween_all_completed" from="Tween" to="." method="_on_tween_all_completed"]

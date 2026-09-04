@@ -297,4 +297,5 @@ func play_water_exit_sound():
 
 func set_swim_playing(value):
 	if ready:
-		swim_sound.playing = value
+		if swim_sound.playing != value:
+			swim_sound.playing = value

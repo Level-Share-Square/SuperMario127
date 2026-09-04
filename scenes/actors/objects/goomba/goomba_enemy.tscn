@@ -50,7 +50,7 @@ extents = Vector2( 12, 2 )
 
 [sub_resource type="RectangleShape2D" id=59]
 resource_local_to_scene = true
-extents = Vector2( 10, 6 )
+extents = Vector2( 10, 9.5 )
 
 [sub_resource type="CircleShape2D" id=56]
 resource_local_to_scene = true
@@ -618,7 +618,6 @@ anim_speed = 0.8
 extents = Vector2( 10, 13 )
 
 [node name="GoombaEnemy" instance=ExtResource( 1 )]
-z_index = -1
 collision_mask = 17
 script = ExtResource( 2 )
 max_gravity_factor = 30.0
@@ -679,7 +678,7 @@ collision_mask = 17
 
 [node name="Wall" type="RayCast2D" parent="States/WanderState" index="1"]
 position = Vector2( 0, -10 )
-cast_to = Vector2( -16, 0 )
+cast_to = Vector2( -12, 0 )
 collision_mask = 21
 
 [node name="ChaseState" type="Node2D" parent="States" index="2"]
@@ -698,7 +697,7 @@ collision_mask = 17
 [node name="Wall" type="RayCast2D" parent="States/ChaseState" index="1"]
 position = Vector2( 0, -10 )
 enabled = true
-cast_to = Vector2( -16, 0 )
+cast_to = Vector2( -12, 0 )
 collision_mask = 17
 
 [node name="KnockbackState" type="Node2D" parent="States" index="3"]
@@ -726,19 +725,15 @@ position = Vector2( 0, -1 )
 position = Vector2( 0, -10 )
 shape = SubResource( 53 )
 
-[node name="Stomp" parent="Damage" index="1"]
-visible = false
-
 [node name="CollisionShape2D" parent="Damage/Stomp" index="0"]
 position = Vector2( 0, -25 )
 shape = SubResource( 54 )
 
 [node name="Attack" parent="Damage" index="2"]
-visible = false
 z_index = 1
 
 [node name="CollisionShape2D" parent="Damage/Attack" index="0"]
-position = Vector2( 0, -7 )
+position = Vector2( 0, -10.5 )
 shape = SubResource( 59 )
 
 [node name="AnimatedSprite" parent="." index="7"]
@@ -756,7 +751,7 @@ visible = false
 self_modulate = Color( 1, 0.4, 0.333333, 1 )
 frames = ExtResource( 11 )
 animation = "idle"
-frame = 1
+frame = 6
 offset = Vector2( 0, -15 )
 script = ExtResource( 10 )
 
@@ -777,7 +772,6 @@ offset = Vector2( 0, -384 )
 
 [node name="AlertOutline" type="Sprite" parent="Alert" index="0"]
 show_behind_parent = true
-scale = Vector2( 1, 1 )
 texture = ExtResource( 21 )
 offset = Vector2( 0, -384 )
 
@@ -813,6 +807,7 @@ position = Vector2( 0, -20 )
 [node name="Stomp" type="AudioStreamPlayer2D" parent="Sounds" index="0"]
 stream = ExtResource( 13 )
 volume_db = 2.0
+bus = "Sounds"
 script = ExtResource( 18 )
 min_pitch = 0.9
 max_pitch = 1.1
@@ -821,17 +816,20 @@ max_pitch = 1.1
 unique_name_in_owner = true
 stream = ExtResource( 16 )
 volume_db = -3.5
+bus = "Sounds"
 script = ExtResource( 18 )
 
 [node name="Poof" type="AudioStreamPlayer2D" parent="Sounds" index="2"]
 stream = ExtResource( 12 )
 volume_db = 2.0
+bus = "Sounds"
 script = ExtResource( 18 )
 min_pitch = 0.9
 max_pitch = 1.1
 
 [node name="Alert" type="AudioStreamPlayer2D" parent="Sounds" index="3"]
 stream = ExtResource( 19 )
+bus = "Sounds"
 script = ExtResource( 18 )
 min_pitch = 0.9
 max_pitch = 1.1
@@ -840,6 +838,7 @@ max_pitch = 1.1
 unique_name_in_owner = true
 stream = ExtResource( 24 )
 volume_db = -20.0
+bus = "Sounds"
 script = ExtResource( 18 )
 min_pitch = 0.9
 max_pitch = 1.1
@@ -848,6 +847,7 @@ max_pitch = 1.1
 unique_name_in_owner = true
 stream = ExtResource( 20 )
 volume_db = -3.0
+bus = "Sounds"
 script = ExtResource( 18 )
 min_pitch = 0.9
 max_pitch = 1.1
@@ -856,6 +856,7 @@ max_pitch = 1.1
 unique_name_in_owner = true
 stream = ExtResource( 25 )
 volume_db = -7.5
+bus = "Sounds"
 script = ExtResource( 18 )
 
 [node name="SpawnParticles" parent="." index="14"]
@@ -878,6 +879,5 @@ shape = SubResource( 62 )
 autostart = true
 
 [connection signal="state_changed" from="." to="EnemyBouncer" method="state_changed"]
-[connection signal="area_entered" from="AnimatedSprite/DialogueDetector" to="AnimatedSprite/DialogueDetector" method="area_entered"]
 [connection signal="area_entered" from="EnemyBouncer" to="EnemyBouncer" method="area_entered"]
 [connection signal="timeout" from="EnemyBouncer/CollisionCheck" to="EnemyBouncer" method="check_collisions"]

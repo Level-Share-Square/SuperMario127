@@ -7,15 +7,18 @@ enum LayoutOrientation {HORIZONTAL, VERTICAL}
 export var blocks: int = 1
 export(LayoutOrientation) var orientation = 0
 export var hit_sound: AudioStream = preload("res://assets/sounds/block_hit.wav")
+export var sound_pitcher: Script = preload("res://classes/sound_pitcher_directional.gd")
 export var hit_bounce_enabled : bool = true
 
 var hit_sound_player = AudioStreamPlayer2D.new()
 
 
 func init():
+	hit_sound_player.set_script(sound_pitcher)
 	add_child(hit_sound_player)
 	hit_sound_player.stream = hit_sound
 	hit_sound_player.volume_db = 2.5
+	hit_sound_player.bus = "Sounds"
 
 
 func block_hit(var hit_direction : Vector2):

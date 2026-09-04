@@ -49,7 +49,7 @@ func _on_hit():
 	var sound_name = "SwitchOffSound"
 	if palette in CurrentLevelData.vars.switch_state:
 		sound_name = "SwitchOnSound"
-	play_shared_sound(sound_name)
+	#play_shared_sound(sound_name)
 	
 	CurrentLevelData.vars.toggle_switch_state(palette)
 

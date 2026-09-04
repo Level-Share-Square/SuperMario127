@@ -15,7 +15,7 @@ onready var animation_player : AnimationPlayer = $AnimationPlayer
 onready var tween : Tween = $Tween 
 onready var timer : Timer = $Timer
 onready var invuln_timer = $InvulnTimer
-onready var audio_player : AudioStreamPlayer = $AudioStreamPlayer
+onready var audio_player : AudioStreamPlayer2D = $AudioStreamPlayer
 onready var particles : Particles2D = $CannonMoveable/SpriteBodyReverser/SpriteBody/Particles2D
 onready var nearby_character_detection : Area2D = $NearbyCharacterDetection
 onready var collision_shape_2d = $RingCollision/CollisionShape2D
@@ -52,8 +52,8 @@ var target_zoom: float = 1.5
 var stored_zoom: float = 1.0
 
 # the audio files used in the code for some of the cannons movements
-onready var cannon_move_noise : AudioStream = preload("res://assets/sounds/cannon_crank.tres")
-onready var cannon_fire_noise : AudioStream = preload("res://assets/sounds/cannon_shoot.wav")
+onready var cannon_move_noise : AudioStream = preload("res://assets/sounds/cannon/crank.wav")
+onready var cannon_fire_noise : AudioStream = preload("res://assets/sounds/cannon/shoot.wav")
 
 #func _set_properties() -> void:
 #	savable_properties = ["launch_power", "min_rotation", "max_rotation", "faces_right", "target_zoom"]
@@ -159,7 +159,7 @@ func _on_animation_finished(anim_name : String) -> void:
 		sprite_fuse.visible = true
 
 		#normally we would change current volume, but process for the audio stream player is disabled until the cannon fires
-		audio_player.volume_db = -10 #needs to be a bit quieter to sound right
+		audio_player.volume_db = -7 #needs to be a bit quieter to sound right
 		audio_player.stream = cannon_move_noise
 		audio_player.play()
 		audio_player.stream_paused = true #pause it so we can unpause it when the cannon is moving
@@ -196,7 +196,7 @@ func fire_cannon() -> void:
 
 	#play cannon fire sound
 	audio_player.stream = cannon_fire_noise
-	audio_player.current_volume = 10 # use current_volume since the audio_players process will be enabled now
+	audio_player.volume_db = 10
 	audio_player.stream_paused = false #the cannon aiming sfx uses the pause feature to play it properly, so no audio will play unless we set this
 	audio_player.play()
 	
