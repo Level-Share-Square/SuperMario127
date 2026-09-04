@@ -58,6 +58,7 @@ func _start(_delta):
 	wall_jump_timer = 0.45
 	sound_player.play_wall_jump_sound()
 	sound_player.play_wall_jump_step_sound()
+	LastInputDevice.rumble(0.5, 0.0, 0.05)
 	character.jump_animation = 0
 	character.is_wj_chained = true
 

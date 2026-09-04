@@ -100,6 +100,7 @@ func _general_update(_delta):
 		if abs(character.velocity.x) < abs(power * normal.x) * 8:
 			character.velocity.x -= accel * normal.x
 
+		LastInputDevice.rumble(0.1, 0.0, 0.0)
 		character.water_particles.emitting = true
 		character.water_particles_2.emitting = true
 		#character.water_sprite.animation = "out"
@@ -113,6 +114,7 @@ func _general_update(_delta):
 	elif !activated and last_activated:
 		character.emit_signal("fludd_deactivated")
 		
+		LastInputDevice.stop_rumble()
 		character.water_particles.emitting = false
 		character.water_particles_2.emitting = false
 		#character.water_sprite.animation = "in"

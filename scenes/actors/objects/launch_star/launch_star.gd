@@ -100,6 +100,7 @@ func set_state(to:int):
 			fly_noise_player.stream = flying_noise
 			fly_noise_player.play()
 			speed_tween.remove_all()
+			LastInputDevice.rumble(0.25, 0.4, 0.3)
 			mario.sound_player.play_triple_jump_sound()
 			mario.sprite.speed_scale = 1.5
 			mario.camera.auto_move = false

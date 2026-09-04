@@ -88,7 +88,8 @@ func collect(body : PhysicsBody2D) -> void:
 
 		collected = true
 		get_tree().get_current_scene().get_node("%PauseController").emit_signal("star_coin_collected")
-
+		
+		LastInputDevice.rumble(0.5, 0.8, 0.2)
 		animation_player.play("collect")
 		var _connect = animation_player.connect("animation_finished", self, "queue_free")
 

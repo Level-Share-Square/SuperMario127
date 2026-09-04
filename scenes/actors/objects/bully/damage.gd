@@ -37,7 +37,7 @@ func spin_attacked(body: PhysicsBody2D = null) -> void:
 			if body.state == body.get_state_node("DiveState") or body.state == body.get_state_node("SlideState"):
 				dived(body)
 				return
-			knock_player(body, player_knockback * player_spin_knockback_mult)
+			knock_player(body, false, player_knockback * player_spin_knockback_mult)
 		
 		var direction: float = (enemy.global_position - body.global_position).sign().x
 		enemy.velocity = Vector2(direction * bully_spin_knockback.x, bully_spin_knockback.y)
@@ -88,9 +88,9 @@ func damage_player(player: Character, knockback: Vector2 = player_knockback, mak
 		enemy.set_state_by_name("KnockbackState")
 
 
-func knock_player(player: Character, knockback: Vector2 = player_knockback) -> void:
+func knock_player(player: Character, play_hit_sound: bool = false, knockback: Vector2 = player_knockback) -> void:
 	knockback_power = knockback
-	.knock_player(player)
+	.knock_player(player, play_hit_sound)
 
 
 

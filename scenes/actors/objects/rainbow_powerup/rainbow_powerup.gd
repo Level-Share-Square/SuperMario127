@@ -39,6 +39,7 @@ func collect(body):
 		var powerup_node = body.get_powerup_node("RainbowPowerup")
 		body.set_powerup(powerup_node, powerup_music, duration)
 		if duration > 0.5:
+			LastInputDevice.rumble(0.5, 0.8, 0.2)
 			body.sound_player.play_powerup_sound()
 			body.sound_player.play_rainbow_star_sound()
 		animation_player.play("collect", -1, 2)

@@ -42,7 +42,7 @@ func _update(delta):
 	# Set control mode
 	var is_controller: bool = LastInputDevice.last_input_type == LastInputDevice.InputType.Controller
 	up_down_controls = LocalSettings.load_setting(
-		"Controls (Player " + str(character.player_id + 1) + ")" + input_settings_util.get_group_suffix(is_controller), 
+		"Controls (Player 1)" + input_settings_util.get_group_suffix(is_controller), 
 		"63_wing_cap",
 		false
 	)

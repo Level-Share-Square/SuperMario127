@@ -113,7 +113,7 @@ bus = "Sounds"
 
 [node name="RainbowStar" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
-volume_db = -8.0
+volume_db = -10.0
 bus = "Sounds"
 
 [node name="Powerdown" type="AudioStreamPlayer" parent="."]

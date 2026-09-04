@@ -61,5 +61,13 @@ func _input(event):
 		last_input_type = new_input_type
 
 func rumble(weak_power: float, strong_power: float, time: float):
+	if not Singleton.PlayerSettings.rumble: return
 	if not last_input_type == InputType.Controller: return
+	Input.stop_joy_vibration(last_controller)
 	Input.start_joy_vibration(last_controller, weak_power, strong_power, time)
+
+
+func stop_rumble():
+	if not Singleton.PlayerSettings.rumble: return
+	if not last_input_type == InputType.Controller: return
+	Input.stop_joy_vibration(last_controller)

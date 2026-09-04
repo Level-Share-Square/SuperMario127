@@ -65,7 +65,7 @@ func open_autosave(time):
 	
 
 	CurrentLevelData.load_level_headers(level_code)
-	CurrentLevelData.switch_to_area(CurrentLevelData.area_id)
+	CurrentLevelData.switch_to_area(0)
 
 	SceneTransitions.reload_scene()
 

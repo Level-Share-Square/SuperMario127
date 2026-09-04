@@ -103,6 +103,7 @@ func _general_update(_delta):
 	if activated and !last_activated:
 		character.emit_signal("fludd_activated")
 		
+		LastInputDevice.rumble(0.4, 0.0, 0.0)
 		character.turbo_particles.emitting = true
 		character.water_sprite.frame = 0
 		character.turbo_sound.play()
@@ -110,6 +111,7 @@ func _general_update(_delta):
 	elif !activated and last_activated:
 		character.emit_signal("fludd_deactivated")
 		
+		LastInputDevice.stop_rumble()
 		character.turbo_particles.emitting = false
 		character.water_sprite.frame = 0
 		character.turbo_sound.stop()

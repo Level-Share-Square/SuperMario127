@@ -22,6 +22,7 @@ func _start_check(_delta):
 	return false
 	
 func _start(_delta):
+	LastInputDevice.rumble(0.5, 0.8, 0.2)
 	character.sprite.scale = LAND_SQUISH
 	character.bonk_particles.restart()
 	character.bonk_particles.emitting = true

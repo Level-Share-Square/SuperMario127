@@ -71,6 +71,7 @@ func set_state(to:int):
 			speed_tween.remove_all()
 			if is_instance_valid(mario.state):
 				mario.state._stop(fps_util.PHYSICS_DELTA)
+			LastInputDevice.rumble(0.25, 0.4, 0.2)
 			mario.velocity = Vector2(1, -launch_power * 80).rotated(rotation)
 			mario.sound_player.play_double_jump_sound()
 			state = states.LAUNCH

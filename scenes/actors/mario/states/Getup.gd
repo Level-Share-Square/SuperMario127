@@ -16,6 +16,8 @@ func _start(_delta):
 	var sprite = character.sprite
 	var sound_player = character.sound_player
 	sound_player.play_getup_sound()
+	if character.get_state_node("DiveState").dive_buffer <= 0:
+		LastInputDevice.rumble(0.5, 0.0, 0.05)
 	character.velocity.y = -get_up_power
 	character.position.y -= 7
 	character.friction = character.real_friction

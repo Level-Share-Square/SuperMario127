@@ -70,7 +70,7 @@ func _click_left_released(event, mouse_pos):
 			is_dragging = false
 			
 		else:
-			if not Input.is_action_pressed("shift_modifier"):
+			if not Input.is_action_pressed("ctrl_modifier"):
 				emit_signal("objects_selected", [hovered_object])
 			else:
 				emit_signal("objects_selected", editor.selected_objects + [hovered_object])
