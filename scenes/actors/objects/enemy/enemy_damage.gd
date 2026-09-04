@@ -63,6 +63,12 @@ func strong_hurt(body: PhysicsBody2D = null) -> void:
 	hurt(body)
 
 
+func strong_hurt_at(pos: Vector2) -> void:
+	var normal: float = (enemy.global_position - pos).sign().x
+	enemy.velocity = Vector2(normal * knockback_power.x, -knockback_power.y)
+	enemy.set_state_by_name("KnockbackState")
+
+
 ## being jumped on
 func stomp(body: PhysicsBody2D = null) -> void:
 	hurt(body)

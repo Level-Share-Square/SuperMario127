@@ -117,9 +117,8 @@ position = Vector2( 0, -24 )
 shape = SubResource( 13 )
 
 [node name="Attack" type="Area2D" parent="Damage"]
-collision_layer = 0
+collision_layer = 4
 collision_mask = 8482
-monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Damage/Attack"]
 position = Vector2( 0, -8 )

@@ -22,7 +22,7 @@ extents = Vector2( 13.5, 9 )
 [node name="Shell" type="KinematicBody2D"]
 position = Vector2( 0, -4 )
 collision_layer = 4
-collision_mask = 21
+collision_mask = 17
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
@@ -70,7 +70,7 @@ shape = SubResource( 4 )
 [node name="DestroyArea" type="Area2D" parent="."]
 visible = false
 collision_layer = 2
-collision_mask = 10
+collision_mask = 14
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DestroyArea"]
 position = Vector2( 0, 3 )
