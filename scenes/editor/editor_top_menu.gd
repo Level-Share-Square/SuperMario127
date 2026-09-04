@@ -8,6 +8,8 @@ onready var editor = owner
 onready var shared = editor.get_shared_node()
 onready var layer_adder = $"%LayerAdder"
 onready var autosave_window = $"%AutosaveWindow"
+onready var snap_value = $"%SnapValue"
+onready var pixel_snap = $"%PixelSnap"
 
 func _ready():
 	for button in view_dropdown.get_children():
@@ -18,6 +20,8 @@ func _ready():
 	for button in settings.get_children():
 		if !"Separator" in button.name:
 			button.connect("pressed", self, "on_button_pressed", [button])
+	pixel_snap.connect("pressed", self, "on_button_pressed", [pixel_snap])
+	snap_value.value = CurrentLevelData.editor_data.pixel_snap.x
 			
 func on_button_pressed(button: Button):
 	match button.name:
@@ -37,3 +41,7 @@ func on_button_pressed(button: Button):
 			autosave_window.toggle_window()
 		"Settings":
 			editor.screen_manager.screen_change("Options")
+
+
+func new_snap_value(value):
+	CurrentLevelData.editor_data.pixel_snap = Vector2(round(value), round(value))

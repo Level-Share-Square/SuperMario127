@@ -40,7 +40,7 @@ func update_item_preview_position():
 				position = mouse_grid_pos + item.tile_mode_offset
 			else:
 				if !Input.is_action_pressed("8_pixel_lock"):
-					mouse_pos = Vector2(stepify(mouse_pos.x, 8), stepify(mouse_pos.y, 8))
+					mouse_pos = Vector2(stepify(mouse_pos.x, CurrentLevelData.editor_data.pixel_snap.x), stepify(mouse_pos.y, CurrentLevelData.editor_data.pixel_snap.y))
 				if editor.surface_snap:
 					var object_bottom = mouse_pos + Vector2(0, item.object_size.y)
 					var space_state = get_world_2d().direct_space_state
