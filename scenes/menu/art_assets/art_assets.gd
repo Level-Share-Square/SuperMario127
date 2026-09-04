@@ -8,6 +8,8 @@ onready var discord_banner = $"%DiscordBanner"
 onready var discord_invite = $"%DiscordInvite"
 onready var youtube_banner = $"%YoutubeBanner"
 onready var bluesky_banner = $"%BlueskyBanner"
+onready var itch_header = $"%ItchHeader"
+onready var itch_cover = $"%ItchCover"
 onready var itch_profile_banner = $"%ItchProfileBanner"
 onready var itch_profile_bg = $"%ItchProfileBG"
 onready var splash_screen = $"%SplashScreen"
@@ -53,13 +55,21 @@ func _ready():
 #	bluesky_banner_img.flip_y()
 #	bluesky_banner_img.save_png("res://assets/artwork/bluesky/banner.png")
 
+#	var itch_header_img: Image = itch_header.get_node("Viewport").get_texture().get_data()
+#	itch_header_img.flip_y()
+#	itch_header_img.save_png("res://assets/artwork/itch/header.png")
+
+	var itch_cover_img: Image = itch_cover.get_node("Viewport").get_texture().get_data()
+	itch_cover_img.flip_y()
+	itch_cover_img.save_png("res://assets/artwork/itch/cover.png")
+
 #	var itch_profile_banner_img: Image = itch_profile_banner.get_node("Viewport").get_texture().get_data()
 #	itch_profile_banner_img.flip_y()
 #	itch_profile_banner_img.save_png("res://assets/artwork/itch/profile_banner.png")
 
-	var itch_profile_bg_img: Image = itch_profile_bg.get_node("Viewport").get_texture().get_data()
-	itch_profile_bg_img.flip_y()
-	itch_profile_bg_img.save_png("res://assets/artwork/itch/profile_bg.png")
+#	var itch_profile_bg_img: Image = itch_profile_bg.get_node("Viewport").get_texture().get_data()
+#	itch_profile_bg_img.flip_y()
+#	itch_profile_bg_img.save_png("res://assets/artwork/itch/profile_bg.png")
 
 #	var splash_img: Image = splash_screen.get_node("Viewport").get_texture().get_data()
 #	splash_img.flip_y()
@@ -85,11 +95,11 @@ func _ready():
 #	fix_transparency(coin_hud_img)
 #	coin_hud_img.save_png("res://assets/artwork/coin_hud.png")
 
-	var forcefield_img: Image = forcefield_icon.get_node("Viewport").get_texture().get_data()
-	forcefield_img.convert(Image.FORMAT_RGBA8)
-	forcefield_img.flip_y()
-	fix_transparency(forcefield_img)
-	forcefield_img.save_png("res://scenes/actors/objects/forcefield/icon.png")
+#	var forcefield_img: Image = forcefield_icon.get_node("Viewport").get_texture().get_data()
+#	forcefield_img.convert(Image.FORMAT_RGBA8)
+#	forcefield_img.flip_y()
+#	fix_transparency(forcefield_img)
+#	forcefield_img.save_png("res://scenes/actors/objects/forcefield/icon.png")
 
 
 func fix_transparency(image_data: Image) -> void:
