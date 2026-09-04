@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/pound_hit_old.wav-97bc7e7e6a8498939cec9b9077eed062.sample"
+path="res://.import/fludd_box.wav-9bf20e6855218c0fc51da199f6820ee8.sample"
 
 [deps]
 
-source_file="res://assets/sounds/pound_hit_old.wav"
-dest_files=[ "res://.import/pound_hit_old.wav-97bc7e7e6a8498939cec9b9077eed062.sample" ]
+source_file="res://assets/sounds/fludd/fludd_box.wav"
+dest_files=[ "res://.import/fludd_box.wav-9bf20e6855218c0fc51da199f6820ee8.sample" ]
 
 [params]
 

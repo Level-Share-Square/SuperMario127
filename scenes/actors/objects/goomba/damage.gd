@@ -29,6 +29,7 @@ func strong_hurt(body: PhysicsBody2D = null) -> void:
 func spin_attacked(body: PhysicsBody2D = null) -> void:
 	if enemy.rainbow:
 		knock_player(body, true)
+		body.invulnerable_frames = 30
 		return
 	if not enemy.state == enemy.get_state_by_name("DieState"):
 		strong_hurt(body)

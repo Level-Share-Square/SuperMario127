@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/actors/objects/rocket_box/rocket_box.gd" type="Script" id=1]
-[ext_resource path="res://assets/sounds/fludd_refill.wav" type="AudioStream" id=2]
-[ext_resource path="res://assets/sounds/fludd_box.wav" type="AudioStream" id=3]
+[ext_resource path="res://assets/sounds/fludd/fludd_refill.wav" type="AudioStream" id=2]
+[ext_resource path="res://assets/sounds/fludd/fludd_box.wav" type="AudioStream" id=3]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/rocket_box.png-ec204761d41d07c85beacca4836ca4eb.stex"

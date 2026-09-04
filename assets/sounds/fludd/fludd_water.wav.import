@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/fludd_empty.wav-fa96576d2a1df52bf808f33b82579950.sample"
+path="res://.import/fludd_water.wav-eca995848d8ac609bde1ab307064990e.sample"
 
 [deps]
 
-source_file="res://assets/sounds/fludd_empty.wav"
-dest_files=[ "res://.import/fludd_empty.wav-fa96576d2a1df52bf808f33b82579950.sample" ]
+source_file="res://assets/sounds/fludd/fludd_water.wav"
+dest_files=[ "res://.import/fludd_water.wav-eca995848d8ac609bde1ab307064990e.sample" ]
 
 [params]
 

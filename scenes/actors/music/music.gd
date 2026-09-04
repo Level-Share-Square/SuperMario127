@@ -202,7 +202,7 @@ func change_song(old_setting, music_setting) -> void:
 			water_music_player.play()
 			water_music_player.volume_db = -80
 			water_music_player.bus = "WaterMusicFilters"
-			has_water = false
+			has_water = true
 			play_water = false
 	
 	

@@ -1,4 +1,4 @@
-extends AudioStreamPlayer
+extends AudioStreamPlayer2D
 
 onready var current_scene : Node = get_tree().current_scene
 onready var cannon_position : Vector2 = get_parent().global_position

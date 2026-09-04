@@ -8,7 +8,7 @@
 [ext_resource path="res://scenes/actors/objects/water_balloon/1.png" type="Texture" id=6]
 [ext_resource path="res://scenes/actors/objects/water_balloon/recolorable_texture.png" type="Texture" id=7]
 [ext_resource path="res://classes/sound_pitcher_directional.gd" type="Script" id=8]
-[ext_resource path="res://assets/sounds/fludd_refill.wav" type="AudioStream" id=9]
+[ext_resource path="res://assets/sounds/fludd/fludd_refill.wav" type="AudioStream" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 14, 16 )

@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/cannon_shoot.wav-68020389c8856f5a93f5f8e615465b84.sample"
+path="res://.import/appear_loop.wav-c82d1d166447f23dfb7de5537e620888.sample"
 
 [deps]
 
-source_file="res://assets/sounds/cannon_shoot.wav"
-dest_files=[ "res://.import/cannon_shoot.wav-68020389c8856f5a93f5f8e615465b84.sample" ]
+source_file="res://assets/sounds/cannon/appear_loop.wav"
+dest_files=[ "res://.import/appear_loop.wav-c82d1d166447f23dfb7de5537e620888.sample" ]
 
 [params]
 

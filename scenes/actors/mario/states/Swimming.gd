@@ -37,11 +37,11 @@ func _start_check(_delta):
 	return character.check_liquid(LiquidBase.LiquidType.Water) and !(character.powerup != null and character.powerup.id == "Metal")
 
 func _start(_delta):
-	
 	if abs(character.sprite.rotation) > PI:
 		character.sprite.rotation = 0
 	
 	character.sound_player.play_water_enter_sound()
+	character.sound_player.set_swim_playing(true)
 	character.jump_animation = 0
 	
 	old_gravity_scale = character.gravity_scale
@@ -87,7 +87,6 @@ func _update(delta):
 		boost_buffer = 0
 		boost_time_left = 0.75
 		character.spin_swim_area_shape.disabled = false
-		character.sound_player.set_swim_playing(false)
 		character.bubble_particles_left.emitting = true
 		character.bubble_particles_right.emitting = true
 		character.sound_player.play_spin_water_sound()
@@ -116,7 +115,6 @@ func _update(delta):
 			boost_time_left = 0
 			sprite.speed_scale = 1
 			character.spin_swim_area_shape.disabled = true
-			character.sound_player.set_swim_playing(true)
 			character.bubble_particles_left.emitting = false
 			character.bubble_particles_right.emitting = false
 			swim_speed = base_swim_speed
@@ -130,7 +128,6 @@ func _update(delta):
 		boost_disable_time -= delta
 		if boost_disable_time <= 0:
 			boost_disable_time = 0
-			character.sound_player.set_swim_playing(true)
 			
 	var lerp_speed = 480
 	if boost_time_left > 0:

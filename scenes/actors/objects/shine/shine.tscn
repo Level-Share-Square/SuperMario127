@@ -45,7 +45,7 @@ shader = ExtResource( 17 )
 shader_param/ray_count = 4
 shader_param/ray_distance = 0.45
 shader_param/ray_seperation_degrees = 22.0
-shader_param/rotation = 1.20571
+shader_param/rotation = 2.6189
 
 [sub_resource type="ShaderMaterial" id=41]
 resource_local_to_scene = true
@@ -53,7 +53,7 @@ shader = ExtResource( 17 )
 shader_param/ray_count = 4
 shader_param/ray_distance = 0.275
 shader_param/ray_seperation_degrees = 27.243
-shader_param/rotation = 5.07752
+shader_param/rotation = 5.24819
 
 [sub_resource type="CanvasItemMaterial" id=21]
 particles_animation = true
@@ -1219,9 +1219,10 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource( 2 )
 
-[node name="CollectSound" type="AudioStreamPlayer" parent="."]
+[node name="CollectSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 12 )
-pitch_scale = 1.5
+volume_db = -7.0
+pitch_scale = 1.25
 bus = "Sounds"
 
 [node name="AppearSound" type="AudioStreamPlayer" parent="."]
@@ -1253,7 +1254,7 @@ texture = ExtResource( 5 )
 [node name="Glow" type="Sprite" parent="RaysContainer"]
 self_modulate = Color( 0.996078, 0.996078, 0.996078, 1 )
 material = SubResource( 38 )
-scale = Vector2( 1.02114, 1.02114 )
+scale = Vector2( 1.05997, 1.05997 )
 texture = SubResource( 40 )
 script = ExtResource( 18 )
 min_scale = 1.0
@@ -1297,7 +1298,7 @@ playing = true
 [node name="AnimatedSpriteRecolorable" type="AnimatedSprite" parent="AnimatedSprite"]
 visible = false
 frames = ExtResource( 10 )
-frame = 10
+frame = 14
 script = ExtResource( 14 )
 
 [node name="Particles2D" type="Particles2D" parent="AnimatedSprite"]

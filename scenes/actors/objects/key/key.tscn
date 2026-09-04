@@ -14,7 +14,7 @@ shader = ExtResource( 3 )
 shader_param/ray_count = 4
 shader_param/ray_distance = 0.4
 shader_param/ray_seperation_degrees = 22.0
-shader_param/rotation = 3.01698
+shader_param/rotation = 2.409
 
 [sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 14, 16.5 )
@@ -26,9 +26,10 @@ extents = Vector2( 9.5, 12 )
 script = ExtResource( 2 )
 internal_id = "key"
 
-[node name="CollectSound" type="AudioStreamPlayer" parent="."]
+[node name="CollectSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 6 )
-pitch_scale = 1.5
+volume_db = -7.0
+pitch_scale = 1.25
 bus = "Sounds"
 
 [node name="CollectJingle" type="AudioStreamPlayer" parent="."]
