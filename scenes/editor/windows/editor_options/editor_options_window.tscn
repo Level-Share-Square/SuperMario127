@@ -315,6 +315,7 @@ scroll_horizontal_enabled = false
 
 [node name="MissionPrefab" parent="ContentDivider/ContentMat/Tabs/Missions/MissionContainer" index="0" instance=ExtResource( 5 )]
 unique_name_in_owner = true
+margin_bottom = 331.0
 
 [node name="WindowCorner" parent="." index="2"]
 margin_left = 441.0
