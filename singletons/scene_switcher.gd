@@ -108,14 +108,13 @@ func start_level(level_metadata: LevelMetadata, level_id: String, working_folder
 	# if it's a multi-shine level, open the shine select screen, otherwise open the level directly 
 	# using collected_shines for the size check because there can only be one entry in collected shines per id, while shine_details can have multiple shines with the same id
 	var goal_scene = EDITOR_PATH if start_in_edit_mode else PLAYER_PATH
-	
 	# Get the shine count, only count shine sprites that have show_in_menu on
 	var total_shine_count := 0
 	for mission_uuid in level_metadata.collectible_data.used_mission_data:
 		var mission = level_metadata.collectible_data.get_mission_by_uuid(mission_uuid)
 		if mission["mission_show_in_menu"]:
 			total_shine_count += 1
-	
+			
 	CurrentLevelData.starting_nozzle = ""
 	CurrentLevelData.is_new_area = true
 	
@@ -126,15 +125,24 @@ func start_level(level_metadata: LevelMetadata, level_id: String, working_folder
 			var mission: MissionData = level_metadata.collectible_data.mission_data[0]
 			CurrentLevelData.current_mission_id = mission.mission_uuid
 			CurrentLevelData.current_mission = mission
+			CurrentLevelData.level_transition_data = {
+				"target_area": mission.spawn_area_id,
+				"target_tag": mission.spawn_teleporter_tag
+			}
 		else:
 			Singleton.Music.change_song(Singleton.Music.last_song, 0)
 			goal_scene = SHINE_SELECT_PATH
 	
 	# not a multishine level, but if there's 1 shine we should set it as selected 
-	if level_metadata.collectible_data.mission_data.size() == 1:
+	if total_shine_count == 1:
 		var mission: MissionData = level_metadata.collectible_data.mission_data[0]
 		CurrentLevelData.current_mission_id = mission.mission_uuid
 		CurrentLevelData.current_mission = mission
+		print(mission.spawn_teleporter_tag)
+		CurrentLevelData.level_transition_data = {
+			"target_area": mission.spawn_area_id,
+			"target_tag": mission.spawn_teleporter_tag
+		}
 	
 	if do_transition:
 		# setup level when the transition finishes so music doesnt bug out

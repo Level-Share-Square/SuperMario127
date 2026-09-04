@@ -501,7 +501,7 @@ func load_in():
 	var do_teleport: bool = false
 	var target_tag: String = CurrentLevelData.vars.transition_data.get("target_tag", "")
 	var level_target_tag: String = CurrentLevelData.level_transition_data.get("target_tag", "")
-	
+
 	if target_tag != "":
 		do_teleport = true
 	elif CurrentLevelData.checkpoint_data.current_checkpoint_id != -1:
@@ -546,6 +546,10 @@ func load_in():
 			if not is_instance_valid(camera):
 				yield(get_tree(), "idle_frame")
 			toggle_movement(not camera.in_cutscene)
+			
+			if not shared_node.origin: yield(shared_node, "found_origin")
+			layer = weakref(shared_node.origin)
+			update_layer_info()
 	
 	emit_signal("loaded")
 
@@ -1530,12 +1534,9 @@ func handle_liquids(liquid_areas, delta):
 				if !dead:
 					match(liquid.depth_check(bottom_pos.global_position)):
 						Quicksand.DepthResults.Surface:
-							hop_state.working_jump_strength = get_state_node("JumpState").jump_power*.9
 							idle_state.move_speed_modifier = .9
 
 						Quicksand.DepthResults.Sinking:
-							if hop_state.working_jump_strength == get_state_node("JumpState").jump_power*.9:
-								hop_state.working_jump_strength = get_state_node("QuicksandHopState").jump_strength
 							idle_state.move_speed_modifier = min(1-(((bottom_pos.global_position.y-liquid.global_position.y)/death_threshold)/1.75), .75)
 
 						Quicksand.DepthResults.Death:

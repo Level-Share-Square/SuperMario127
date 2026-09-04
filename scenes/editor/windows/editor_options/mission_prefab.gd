@@ -54,13 +54,14 @@ func load_properties(to: Node, mission: MissionData):
 	
 	spawn_area_id.load_property(editor, mission["spawn_area_id"], [
 		"spawn_area_id",
-		[CurrentLevelData, "get_area_args"]
+		[CurrentLevelData, "get_area_args"],
+		PropertyInfo.new(spawn_area_id.hint_tooltip)
 	], "Spawn Area ID")
 	connect_signals(spawn_area_id, to)
 	
 	spawn_teleporter_tag.load_property(editor, mission["spawn_teleporter_tag"], [
 		"spawn_teleporter_tag",
-		TYPE_STRING,
+		[CurrentLevelData.level_tags, "get_teleport_args", [CurrentLevelData.level_tags, "teleport_tags"]],
 		PropertyInfo.new(spawn_teleporter_tag.hint_tooltip)
 	], "Spawn Teleporter Tag")
 	connect_signals(spawn_teleporter_tag, to)

@@ -141,8 +141,6 @@ func update_layer(body):
 		
 		shared.load_layer_states({layer_uuid: layer_state})
 		CurrentLevelData.vars.layer_states[CurrentLevelData.area_id][layer_uuid] = layer_state
-	
-		character.update_layer_info()
 		
 		used = true
 		
