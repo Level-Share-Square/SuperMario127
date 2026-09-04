@@ -21,7 +21,13 @@ func update_level_info():
 	CurrentLevelData.level_metadata.level_author = author.text
 	CurrentLevelData.level_metadata.level_description = description.text
 	CurrentLevelData.level_metadata.level_thumbnail_url = thumbnail_url.text
-	
+	CurrentLevelData.level_metadata.level_thumbnail_sky = CurrentLevelData.area_headers[0].sky
+	CurrentLevelData.level_metadata.level_thumbnail_background = CurrentLevelData.area_headers[0].background
+	CurrentLevelData.level_metadata.level_thumbnail_background_palette = CurrentLevelData.area_headers[0].background_palette
+	print(CurrentLevelData.level_metadata.get_level_background_texture())
+	thumbnail.texture = CurrentLevelData.level_metadata.get_level_background_texture()
+		
+		
 func on_level_name_changed(new_text):
 	update_level_info()
 	
@@ -36,3 +42,5 @@ func on_thumbnail_changed(new_text):
 	
 	if new_thumbnail:
 		thumbnail.texture = new_thumbnail
+		
+	update_level_info()

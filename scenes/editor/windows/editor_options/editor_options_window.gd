@@ -16,6 +16,8 @@ func _ready():
 	var new_thumbnail: ImageTexture = yield(AssetHandler.load_image(thumbnail_url.text, CurrentLevelData.working_folder), "completed")
 	if new_thumbnail:
 		thumbnail.texture = new_thumbnail
+	else:
+		thumbnail.texture = CurrentLevelData.level_metadata.get_level_background_texture()
 func on_editor_settings_pressed():
 	hide()
 	emit_signal("open_editor_settings")
