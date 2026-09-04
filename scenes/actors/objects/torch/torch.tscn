@@ -78,7 +78,7 @@ script = ExtResource( 1 )
 internal_id = "torch"
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-z_index = -2
+z_index = 1
 frames = SubResource( 7 )
 playing = true
 

@@ -26,7 +26,7 @@ func _ready():
 		connect("property_changed", self, "update_property")
 	
 	update_light_layer()
-
+	update()
 
 func update_property(key: String, value):
 	match key:
@@ -63,5 +63,5 @@ func update():
 
 
 func update_light_layer():
-	light.range_z_max = z_index
-	light.range_z_min = light.range_z_max - (LevelLayer.LAYER_Z_SPACING * 1.5)
+	light.range_z_max = level_layer_ref.get_ref().z_index
+	light.range_z_min = level_layer_ref.get_ref().z_index
