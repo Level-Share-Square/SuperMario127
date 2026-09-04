@@ -309,6 +309,7 @@ func set_property_override(property: String, type: int, args):
 
 func parts_input_handler(event, object):
 	if event is InputEventMouseButton and event.is_pressed() and is_object_hovered():
+		get_viewport().set_input_as_handled()
 		match event.button_index:
 			BUTTON_WHEEL_UP: # Mouse wheel up
 				object.parts += 1

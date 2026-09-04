@@ -121,7 +121,7 @@ func layer_moved():
 	$"%LayerType".texture = LayerInfo.GROUND_ICON if cur_layer_metadata.is_ground else LayerInfo.PARALLAX_ICON
 
 func _unhandled_input(event):
-	if not Input.is_action_pressed("ctrl_modifier") and Input.is_action_pressed("alt_modifier"):
+	if not Input.is_action_pressed("ctrl_modifier") and Input.is_action_pressed("alt_modifier") and not editor.get_hovered_objects():
 		var layer_index: int = shared.get_layer(editor.layer).layer_data.layer_metadata.order
 		
 		if event.is_action_pressed("scroll_up"):
