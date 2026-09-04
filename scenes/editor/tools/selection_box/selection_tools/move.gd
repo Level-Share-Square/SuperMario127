@@ -10,7 +10,7 @@ var action: ChangePropertyBulkAction
 func _input(event):
 	if is_active:
 		for object in editor.selected_objects:
-			object.global_position = (get_mouse_pos() + object_offsets[object]).snapped(Vector2(8, 8)) if editor.pixel_lock else get_mouse_pos() + object_offsets[object]
+			object.global_position = (get_mouse_pos() + object_offsets[object]).snapped(CurrentLevelData.editor_data.pixel_snap) if editor.pixel_lock else get_mouse_pos() + object_offsets[object]
 		selection_box.fit_to_bounding_rectangle()
 
 

@@ -242,7 +242,7 @@ func palette_selected(palette, item_button):
 		_on_item_button_pressed(item_button)
 
 func _unhandled_input(event):
-	if not (Input.is_action_pressed("alt_modifier") or Input.is_action_pressed("ctrl_modifier")):
+	if (not (Input.is_action_pressed("alt_modifier") or Input.is_action_pressed("ctrl_modifier"))) and not editor.get_hovered_objects():
 		if event.is_action_pressed("scroll_down"):
 			var new_button = bottom_row.get_child(wrapi((selected_button.get_index() + 1), 0, 9))
 			manual_button_click(new_button)

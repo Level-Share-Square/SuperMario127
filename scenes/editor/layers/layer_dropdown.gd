@@ -101,12 +101,8 @@ func new_layer(ground: bool = true) -> void:
 	var action := AddLayerAction.new()
 	action.shared = shared
 	action.ground = ground
-	
-	var current_index: int = shared.layer_uuid_to_index(editor.layer)
-	if current_index != -1:
-		action.insert_index = current_index + 1
-	
 	editor.action_manager.commit_action([action])
+
 	select_layer(shared.layer_uuid_to_index(action.layer_uuid), false)
 
 
@@ -125,7 +121,7 @@ func layer_moved():
 	$"%LayerType".texture = LayerInfo.GROUND_ICON if cur_layer_metadata.is_ground else LayerInfo.PARALLAX_ICON
 
 func _unhandled_input(event):
-	if not Input.is_action_pressed("ctrl_modifier") and Input.is_action_pressed("alt_modifier"):
+	if not Input.is_action_pressed("ctrl_modifier") and Input.is_action_pressed("alt_modifier") and not editor.get_hovered_objects():
 		var layer_index: int = shared.get_layer(editor.layer).layer_data.layer_metadata.order
 		
 		if event.is_action_pressed("scroll_up"):

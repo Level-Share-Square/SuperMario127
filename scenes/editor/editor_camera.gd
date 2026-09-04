@@ -51,7 +51,7 @@ func _unhandled_input(event: InputEvent):
 	elif event.is_action_pressed("zoom_in"):
 		add_zoom_level(-zoom_amount)
 	
-	if Input.is_action_pressed("ctrl_modifier") and not Input.is_action_pressed("alt_modifier"):
+	if Input.is_action_pressed("ctrl_modifier") and not Input.is_action_pressed("alt_modifier") and not editor.get_hovered_objects():
 		var is_zooming: bool
 		var working_zoom: float
 		if event.is_action_pressed("scroll_down"):

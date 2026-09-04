@@ -1333,10 +1333,11 @@ func kill(cause: String) -> void:
 				death_sprite.reset_physics_interpolation()
 				
 				if cause == "lava":
-					burn_particles.z_index = 127
+					burn_particles.z_index = 50
 					burn_particles.global_position = Vector2(sprite.global_position.x, sprite.global_position.y)
 					burn_particles.reset_physics_interpolation()
 					burn_particles.emitting = true
+					
 				
 				death_sprite.play_anim()
 				yield(get_tree().create_timer(0.55), "timeout")

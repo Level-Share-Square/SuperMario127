@@ -29,9 +29,13 @@ func _register_properties():
 	register_property(7, "reversed", reversed, true)
 	register_property(8, "offset", offset, true)
 
+func _editor_ready():
+	._editor_ready()
+	flame_sound.playing = false
+
 func _object_ready():
 	flame_sound.volume_db = -80
-	
+	flame_sound.playing = true
 	burning = !reversed
 	next_state_timer = burning_time if !reversed else retracted_time
 	

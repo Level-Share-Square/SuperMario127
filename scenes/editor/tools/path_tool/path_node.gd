@@ -72,7 +72,7 @@ func _on_PathNodeButton_gui_input(event):
 	if held && event is InputEventMouseMotion:
 		position = ui.get_ref().get_mouse_pos() if !is_object else ui.get_ref().path_node_container.get_global_transform().xform_inv(ui.get_ref().get_mouse_pos())
 		if editor.pixel_lock:
-			position = position.snapped(Vector2(8, 8))
+			position = position.snapped(CurrentLevelData.editor_data.pixel_snap)
 		ui.get_ref().update_node_position(self)
 
 func _on_left_handle_gui_input(event):

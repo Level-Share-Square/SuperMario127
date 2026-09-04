@@ -37,3 +37,6 @@ func _init(
 	
 	spawn_area_id = s_spawn_area_id
 	spawn_teleporter_tag = s_spawn_teleporter_tag
+
+static func sort_by_order(a: MissionData, b: MissionData):
+	return a.shine_sort_order < b.shine_sort_order

@@ -43,10 +43,10 @@ func _rotate(object: GameObject):
 			var snap := Vector2.ZERO
 			if editor.pixel_lock or Input.is_action_pressed("shift_modifier"):
 				angle_step = deg2rad(15)
-				snap = Vector2(16, 16)
+				snap = CurrentLevelData.editor_data.pixel_snap
 			if editor.pixel_lock and Input.is_action_pressed("shift_modifier"):
 				angle_step = deg2rad(45)
-				snap = Vector2(32, 32)
+				snap = CurrentLevelData.editor_data.pixel_snap
 				
 				
 			object.rotation = stepify(object.rotation, angle_step)

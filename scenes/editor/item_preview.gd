@@ -16,7 +16,7 @@ func _process(delta):
 	var mouse_pos = parallax_scroll.corrected_mouse_position() - offset
 	if is_object:
 		if editor.pixel_lock:
-			mouse_pos = Vector2(stepify(mouse_pos.x, 8), stepify(mouse_pos.y, 8))
+			mouse_pos = Vector2(stepify(mouse_pos.x, CurrentLevelData.editor_data.pixel_snap.x), stepify(mouse_pos.y, CurrentLevelData.editor_data.pixel_snap.y))
 	else:
 		mouse_pos = Vector2(
 			floor(parallax_scroll.corrected_mouse_position().x / 32) * 32, 

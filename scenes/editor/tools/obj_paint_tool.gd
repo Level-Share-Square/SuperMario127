@@ -58,7 +58,7 @@ func _mouse_movement(event, mouse_pos):
 func _process(delta):
 	if is_dragging and hovered_object:
 		if get_mouse_pos().is_equal_approx(old_pos): return
-		hovered_object.global_position = (get_node("%ParallaxScroll").get_transform().xform(get_mouse_pos()) + pos_offset).snapped(Vector2(8, 8)) if editor.pixel_lock else get_node("%ParallaxScroll").get_transform().xform(get_mouse_pos()) + pos_offset
+		hovered_object.global_position = (get_node("%ParallaxScroll").get_transform().xform(get_mouse_pos()) + pos_offset).snapped(CurrentLevelData.editor_data.pixel_snap) if editor.pixel_lock else get_node("%ParallaxScroll").get_transform().xform(get_mouse_pos()) + pos_offset
 			
 func _click_left_released(event, mouse_pos):
 	if hovered_object:
@@ -83,7 +83,7 @@ func place_object(pos: Vector2, data = null):
 	
 	var object_item: PlaceableObject = editor.selected_item
 	if not data:
-		data = create_object_data(Vector2(round(pos.x), round(pos.y)) if editor.pixel_lock == false else pos.snapped(Vector2(8, 8)), object_item.object_id, object_item.palette)
+		data = create_object_data(Vector2(round(pos.x), round(pos.y)) if editor.pixel_lock == false else pos.snapped(CurrentLevelData.editor_data.pixel_snap), object_item.object_id, object_item.palette)
 
 	for property in object_item.property_overrides:
 		if data.get_property(property) != null: continue
