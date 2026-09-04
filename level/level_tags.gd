@@ -41,7 +41,7 @@ func find_key_index(id: String, key_data: KeyData) -> int:
 	return -1
 
 func _init(_teleport_tags: Array = [], _dialogue_tags: Array = [], _liquid_tags: Array = [], _key_tags: Array = []):
-	teleport_tags = _teleport_tags
+	teleport_tags = ["_entrance", "default_teleporter"] + _teleport_tags
 	dialogue_tags = _dialogue_tags
 	liquid_tags = _liquid_tags
 	key_tags = _key_tags

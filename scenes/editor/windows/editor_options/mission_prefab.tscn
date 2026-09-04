@@ -60,22 +60,23 @@ margin_top = 484.0
 margin_right = 240.0
 margin_bottom = 503.0
 
-[node name="TeleporterTag" parent="." instance=ExtResource( 13 )]
+[node name="TeleporterTag" parent="." instance=ExtResource( 10 )]
 unique_name_in_owner = true
 margin_top = 508.0
 margin_right = 240.0
-margin_bottom = 525.0
+margin_bottom = 527.0
+hint_tooltip = "The tag at which the player will spawn at."
 
 [node name="ShowInMenu" parent="." instance=ExtResource( 11 )]
 unique_name_in_owner = true
-margin_top = 530.0
+margin_top = 532.0
 margin_right = 240.0
-margin_bottom = 547.0
+margin_bottom = 549.0
 
 [node name="Erase" type="Button" parent="."]
-margin_top = 552.0
+margin_top = 554.0
 margin_right = 240.0
-margin_bottom = 571.0
+margin_bottom = 573.0
 theme_type_variation = "ButtonRed"
 text = "Delete Mission"
 script = ExtResource( 3 )
