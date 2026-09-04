@@ -174,6 +174,7 @@ func bounce_player(character: Character) -> void:
 			
 			yield(tween, "finished")
 			
+			LastInputDevice.rumble(0.5, 0.0, 0.05)
 			character.enemy_collision.set_deferred("monitorable", true)
 			character.movable = true
 			character.get_state_node("BounceState").auto_flip = false
