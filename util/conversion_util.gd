@@ -475,6 +475,10 @@ static func get_new_area_code(header: AreaHeader, old_area: AreaDataOld) -> Area
 		if old_object.type_id == 14: # sign
 			if old_object.properties[5] == true: # is background
 				object_layer = 0
+		if old_object.type_id == 87: # airship window
+			if old_object.properties[4] == true: # is background
+				object_layer = 0
+				
 		if old_object.type_id == 29: # goomba
 			old_object.properties.resize(10)
 			var color = old_object.properties[4]
