@@ -2,8 +2,9 @@ class_name QuicksandHopState
 extends State
 
 const JUMP_DECAY_RATE: float = 1.2
+const RESET_TIME: float = 3.0
 
-export var jump_strength : float = 100.0
+export var jump_strength : float = 150.0
 export var jump_length : int = 5
 
 var length_remaining : int = jump_length
@@ -11,6 +12,8 @@ var working_jump_strength : float = jump_strength
 
 var jump_buffer : float = 0
 var dive_buffer : float = 0
+
+var reset_timer: float = 0.0
 
 func _ready():
 	priority = 6
@@ -26,7 +29,6 @@ func _start(_delta):
 	length_remaining = jump_length
 	
 	character.quicksand_particles.set_particles_emitting(true)
-	
 	working_jump_strength /= JUMP_DECAY_RATE
 	character.sound_player.play_jump_sound()
 	character.velocity.y = -working_jump_strength
@@ -49,6 +51,15 @@ func _stop_check(_delta):
 	return check
 
 func _general_update(delta):
+	if reset_timer > 0:
+		reset_timer -= delta
+	if reset_timer <= 0:
+		reset_timer = RESET_TIME
+		for area in character.liquid_detector.get_overlapping_areas():
+			var liquid: LiquidBase = area.get_parent()
+			if liquid.liquid_type == LiquidBase.LiquidType.Quicksand: return
+		
+		working_jump_strength = jump_strength
 	if jump_buffer > 0:
 		jump_buffer -= delta
 		if jump_buffer < 0:

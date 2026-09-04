@@ -1534,12 +1534,9 @@ func handle_liquids(liquid_areas, delta):
 				if !dead:
 					match(liquid.depth_check(bottom_pos.global_position)):
 						Quicksand.DepthResults.Surface:
-							hop_state.working_jump_strength = get_state_node("JumpState").jump_power*.9
 							idle_state.move_speed_modifier = .9
 
 						Quicksand.DepthResults.Sinking:
-							if hop_state.working_jump_strength == get_state_node("JumpState").jump_power*.9:
-								hop_state.working_jump_strength = get_state_node("QuicksandHopState").jump_strength
 							idle_state.move_speed_modifier = min(1-(((bottom_pos.global_position.y-liquid.global_position.y)/death_threshold)/1.75), .75)
 
 						Quicksand.DepthResults.Death:
