@@ -25,7 +25,7 @@ var original_position
 
 var chase := false
 var chase_speed := 1.0
-var chase_turn_speed := 10.0
+var chase_turn_speed := 17.0
 var current_speed = 2.5
 
 var update_timer = 0.0
