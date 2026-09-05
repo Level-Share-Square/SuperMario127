@@ -40,6 +40,8 @@ func _ready():
 			area_tween = create_tween()
 			area_tween.tween_interval(area_start_delay)
 			area_tween.tween_callback(area_name_anim, "play", ["appear"])
+		else:
+			area_name_anim.playback_speed = 0
 	
 	yield(get_tree().create_timer(song_start_delay), "timeout")
 	
@@ -60,6 +62,8 @@ func _ready():
 			song_tween.tween_callback(song_name_anim, "play", ["appear"])
 			song_tween.tween_interval(song_end_delay)
 			song_tween.tween_callback(song_name_anim, "play_backwards", ["appear"])
+		else:
+			song_name_anim.playback_speed = 0
 
 
 func hide_info() -> void:
@@ -68,7 +72,7 @@ func hide_info() -> void:
 		area_tween.kill()
 	if is_instance_valid(song_tween):
 		song_tween.kill()
-	if area_name_anim.current_animation != "hide":
+	if area_name_anim.playback_speed > 0 and area_name_anim.current_animation != "hide":
 		area_name_anim.play("hide")
 	if song_name_anim.playback_speed > 0:
 		song_name_anim.play_backwards("appear")
