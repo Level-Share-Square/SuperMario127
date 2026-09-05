@@ -309,6 +309,26 @@ static func convert_054_to_055(result):
 			area_result.objects = new_objects
 	return result
 
+static func convert_055_to_056(result):
+	result.format_version = "0.5.6"
+	for area_result in result.areas:
+		if typeof(area_result) == TYPE_DICTIONARY:
+			
+			if !area_result.has("objects"):
+				break
+			
+			var new_objects : Array = []
+			for object_result in area_result.objects:
+				var object = object_result
+
+				match(object.type_id):
+					29: #goomba
+						object.properties[0] -= Vector2(0, 13)
+
+				new_objects.append(object)
+			area_result.objects = new_objects
+	return result
+
 static func is_pre_100(level_code: String) -> bool:
 	return level_code.begins_with("0")
 

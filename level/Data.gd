@@ -9,7 +9,7 @@ const DEFAULT_AUTHOR: String = "Unknown"
 const DEFAULT_DESCRIPTION: String = "This level has no description."
 const DEFAULT_THUMBNAIL_URL: String = ""
  
-const current_format_version := "0.5.5"
+const current_format_version := "0.5.6"
 
 var name := DEFAULT_NAME
 var author := DEFAULT_AUTHOR
@@ -219,6 +219,9 @@ func load_in(code):
 
 	if result.format_version == "0.5.4":
 		result = conversion_util.convert_054_to_055(result)
+
+	if result.format_version == "0.5.5":
+		result = conversion_util.convert_055_to_056(result)
 
 	assert(result.format_version)
 	var version_int = result.format_version.replace(".","")

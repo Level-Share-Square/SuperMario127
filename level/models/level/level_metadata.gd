@@ -11,7 +11,7 @@ const DEFAULT_THUMBNAIL_URL: String = ""
 const DEFAULT_THUMBNAIL_SKY: int = 0
 const DEFAULT_THUMBNAIL_BACKGROUND: int = 0
 const DEFAULT_THUMBNAIL_BACKGROUND_PALETTE: int = 0
-const current_format_version := "0.5.5"
+const current_format_version := "0.5.6"
 
 var level_name := DEFAULT_NAME
 var level_author := DEFAULT_AUTHOR
