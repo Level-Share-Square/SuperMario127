@@ -59,9 +59,9 @@ func _ready():
 #	itch_header_img.flip_y()
 #	itch_header_img.save_png("res://assets/artwork/itch/header.png")
 
-	var itch_cover_img: Image = itch_cover.get_node("Viewport").get_texture().get_data()
-	itch_cover_img.flip_y()
-	itch_cover_img.save_png("res://assets/artwork/itch/cover.png")
+#	var itch_cover_img: Image = itch_cover.get_node("Viewport").get_texture().get_data()
+#	itch_cover_img.flip_y()
+#	itch_cover_img.save_png("res://assets/artwork/itch/cover.png")
 
 #	var itch_profile_banner_img: Image = itch_profile_banner.get_node("Viewport").get_texture().get_data()
 #	itch_profile_banner_img.flip_y()
@@ -83,11 +83,11 @@ func _ready():
 #	twitter_icon_img.flip_y()
 #	twitter_icon_img.save_png("res://assets/artwork/twitter/twitter_icon.png")
 	
-#	var shorts_template_img: Image = shorts_template.get_node("Viewport").get_texture().get_data()
-#	shorts_template_img.convert(Image.FORMAT_RGBA8)
-#	shorts_template_img.flip_y()
-#	fix_transparency(shorts_template_img)
-#	shorts_template_img.save_png("res://assets/artwork/youtube/shorts_template.png")
+	var shorts_template_img: Image = shorts_template.get_node("Viewport").get_texture().get_data()
+	shorts_template_img.convert(Image.FORMAT_RGBA8)
+	shorts_template_img.flip_y()
+	fix_transparency(shorts_template_img)
+	shorts_template_img.save_png("res://assets/artwork/youtube/shorts_template.png")
 
 #	var coin_hud_img: Image = coin_hud.get_node("Viewport").get_texture().get_data()
 #	coin_hud_img.convert(Image.FORMAT_RGBA8)

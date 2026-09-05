@@ -61,8 +61,9 @@ func update():
 	z_index = -1 if !render_in_front else 1024 #Same as BackBufferCopy z-index to prevent transparency issues
 
 
-func update_property(key, value):
-	pass
+func update_property(key: String, value):
+	if key == "size":
+		change_size()
 
 #func _set_properties():
 #	savable_properties = []
@@ -105,7 +106,10 @@ func _register_property_info():
 	set_property_info("toxicity", PropertyInfo.new("Drains health from the player at a rate of approximately this/6.5s\nIf this is above 255, this will instantly kill the player.", 1, -INF, INF, ["", ""], ["", ""], false, "Toxicity"))
 
 func _object_ready():
-	connect("transform_changed", self, "update")
+	if mode == 1:
+		connect("property_changed", self, "update_property")
+	else:
+		connect("transform_changed", self, "update")
 	connect("ready", self, "change_size")
 	
 	var id = CurrentLevelData.vars.current_liquid_id
@@ -135,6 +139,9 @@ func change_size():
 	preview_position = -size/2
 	liquid_area_collision.position = size/2
 	liquid_area_collision.shape.extents = liquid_area_collision.position
+	
+	editor_rect.position = Vector2.ZERO
+	editor_rect.size = size
 	
 	last_size = size
 	last_color = color

@@ -34,12 +34,13 @@ func _register_property_info():
 
 
 func update_property(key, value):
+	.update_property(key, value)
 	visual = $New if !use_old_lava else $Old
 	match(key):
 		"color" or "surface_color":
 			update_liquid_color(value)
 		"render_in_front":
-				z_index = -1 if !value else 1024 #Same as layer BackBufferCopy z-index to prevent transparency issues
+			z_index = -1 if !value else 1024 #Same as layer BackBufferCopy z-index to prevent transparency issues
 	update()
 
 
@@ -139,7 +140,6 @@ func update():
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	
 	#gets the correct nodes for the waves and liquid body
 	waves = $New/Waves
 	liquid_body = $New/Body

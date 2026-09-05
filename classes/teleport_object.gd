@@ -123,7 +123,7 @@ func change_areas(entering_character : Character, entering, force_fadeout):
 			powerup_array[1] = character.powerup.time_left
 			powerup_array[2] = character.powerup.play_temp_music
 		
-		var nozzle_name = null
+		var nozzle_name: String = "null"
 		if character.nozzle != null:
 			nozzle_name = character.nozzle.name
 		if !is_instance_valid(character.state):

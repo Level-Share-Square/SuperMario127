@@ -7,6 +7,7 @@ func get_liquid_properties() -> Array:
 	return ["toxicity"]
 
 func update_property(key, value):
+	.update_property(key, value)
 	update()
 	
 func _register_property_info():
@@ -35,11 +36,6 @@ func update():
 	liquid_body.get_material().set_shader_param("color_tint", color)
 
 func _ready():
-	if mode == 1:
-		connect("property_changed", self, "update_property")
-	else:
-		connect("transform_changed", self, "update")
-	
 	liquid_area_collision.disabled = !is_enabled_and_on_ground()
 	
 	update_liquid_color(color)

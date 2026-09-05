@@ -12,6 +12,7 @@ func _register_property_info():
 
 
 func update_property(key, value):
+	.update_property(key, value)
 	update()
 
 func update():

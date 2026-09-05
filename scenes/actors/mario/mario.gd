@@ -664,7 +664,7 @@ func set_state_by_name(name: String, delta: float = 0.0001, called_from: State =
 func add_nozzle(new_nozzle: String) -> void:
 	if !new_nozzle in CurrentLevelData.vars.nozzles_collected:
 		CurrentLevelData.vars.nozzles_collected.append(new_nozzle)
-	#print(CurrentLevelData.vars.nozzles_collected)
+	print(CurrentLevelData.vars.nozzles_collected)
 
 func get_nozzle_node(name: String) -> Node:
 	if nozzles_node.has_node(name):
@@ -1105,7 +1105,8 @@ func _physics_process(delta: float) -> void:
 		set_nozzle(new_nozzle, false)
 		
 		nozzle_switch_sound.play()
-		#print(CurrentLevelData.vars.nozzles_collected)
+	elif inputs[8][1]:
+		print(CurrentLevelData.vars.nozzles_collected)
 	
 	# Handle nozzle
 	if is_instance_valid(nozzle):
