@@ -7,8 +7,8 @@
 [resource]
 script = ExtResource( 1 )
 item_name = "Shine Activator"
-change_to = ""
-items_in_sequence = 0
+change_to = "obj_zoom_trigger"
+items_in_sequence = 5
 index_in_sequence = 0
 icons = [ ExtResource( 2 ) ]
 previews = [ ExtResource( 3 ) ]

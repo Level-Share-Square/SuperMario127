@@ -7,9 +7,9 @@
 [resource]
 script = ExtResource( 1 )
 item_name = "Layer Changer"
-change_to = ""
-items_in_sequence = 0
-index_in_sequence = 0
+change_to = "obj_area_transition"
+items_in_sequence = 5
+index_in_sequence = 2
 icons = [ ExtResource( 2 ) ]
 previews = [ ExtResource( 3 ) ]
 priority = 36

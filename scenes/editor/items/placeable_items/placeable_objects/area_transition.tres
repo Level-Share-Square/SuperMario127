@@ -7,9 +7,9 @@
 [resource]
 script = ExtResource( 1 )
 item_name = "Area Transition"
-change_to = ""
-items_in_sequence = 0
-index_in_sequence = 0
+change_to = "obj_death_plane"
+items_in_sequence = 5
+index_in_sequence = 3
 icons = [ ExtResource( 3 ) ]
 previews = [ ExtResource( 2 ) ]
 priority = 27

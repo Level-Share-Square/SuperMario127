@@ -7,9 +7,9 @@
 [resource]
 script = ExtResource( 3 )
 item_name = "Pipe Corner"
-change_to = ""
-items_in_sequence = 0
-index_in_sequence = 0
+change_to = "obj_pipe"
+items_in_sequence = 3
+index_in_sequence = 2
 icons = [ ExtResource( 1 ) ]
 previews = [ ExtResource( 2 ) ]
 priority = 57

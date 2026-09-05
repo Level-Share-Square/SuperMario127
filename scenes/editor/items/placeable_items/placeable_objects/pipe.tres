@@ -7,8 +7,8 @@
 [resource]
 script = ExtResource( 1 )
 item_name = "Pipe"
-change_to = ""
-items_in_sequence = 0
+change_to = "obj_pipe_body"
+items_in_sequence = 3
 index_in_sequence = 0
 icons = [ ExtResource( 3 ) ]
 previews = [ ExtResource( 2 ) ]

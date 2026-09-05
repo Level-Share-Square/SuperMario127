@@ -7,9 +7,9 @@
 [resource]
 script = ExtResource( 1 )
 item_name = "Zoom Trigger"
-change_to = ""
-items_in_sequence = 0
-index_in_sequence = 0
+change_to = "obj_layer_changer"
+items_in_sequence = 5
+index_in_sequence = 1
 icons = [ ExtResource( 3 ) ]
 previews = [ ExtResource( 2 ) ]
 priority = 30
