@@ -6,9 +6,9 @@
 [resource]
 script = ExtResource( 1 )
 item_name = "Ghost Pepper"
-change_to = ""
-items_in_sequence = 0
-index_in_sequence = 0
+change_to = "obj_rainbow_star"
+items_in_sequence = 4
+index_in_sequence = 2
 icons = [ ExtResource( 2 ) ]
 previews = [ ExtResource( 2 ) ]
 priority = 123

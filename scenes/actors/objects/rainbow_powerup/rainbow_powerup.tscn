@@ -201,6 +201,7 @@ tracks/3/keys = {
 
 [node name="RainbowPowerup" type="Node2D"]
 script = ExtResource( 3 )
+editor_rect = Rect2( -13, -13, 26, 26 )
 internal_id = "rainbow_powerup"
 
 [node name="Particles2D" type="Particles2D" parent="."]
