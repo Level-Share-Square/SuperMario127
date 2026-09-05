@@ -48,6 +48,7 @@ func _editor_ready():
 	._editor_ready()
 	var _connect2 = connect("property_changed", self, "update_property")
 	sprite.visible = true
+	update_parts()
 
 func _object_ready():
 	._object_ready()
@@ -96,7 +97,7 @@ func update_parts():
 		sprite.rect_position.x = (-16 * parts)
 		collision_shape.shape.extents.x = 16 * parts
 		camera_stop_shape.shape.extents.x = collision_shape.shape.extents.x + 26
-
+	editor_rect = Rect2(sprite.rect_position, sprite.rect_size)
 
 ### AREA2D STUFF
 func body_entered(body) -> void:

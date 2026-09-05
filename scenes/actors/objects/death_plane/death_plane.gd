@@ -41,6 +41,7 @@ func _ready():
 		parts = 1
 	update_property("vertical", vertical)
 	camera_stopper.set_size(camera_stop_shape.shape.extents)
+	update_parts()
 	
 	
 func update_property(key, value):
@@ -78,6 +79,7 @@ func update_parts():
 		sprite.rect_position.x = (-16 * parts)
 		collision_shape.shape.extents.x = 16 * parts
 		camera_stop_shape.shape.extents.x = collision_shape.shape.extents.x + 26
+	editor_rect = Rect2(sprite.rect_position, sprite.rect_size)
 		
 func kill(body):
 	if is_enabled_and_on_ground() and body.name.begins_with("Character") and !body.dead and body.controllable:
