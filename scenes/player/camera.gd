@@ -41,8 +41,8 @@ var level_bounds: Rect2
 var area
 var shape
 var in_cutscene: bool = false
-var did_pause: bool = false
-var locked_movement: bool = false
+var did_pause: bool = true
+var locked_movement: bool = true
 
 var shake_strength: float = 0.0
 var shake = false
@@ -307,6 +307,8 @@ func start_queue():
 func play_cutscene(cutscene : CameraCutscene, reverse: bool = false):
 	current_cutscene = cutscene
 
+	did_pause = false
+	locked_movement = false
 	if cutscene.lock_movement:
 		locked_movement = true
 		character_node.toggle_movement(false)
@@ -395,7 +397,6 @@ func play_cutscene(cutscene : CameraCutscene, reverse: bool = false):
 		global_position = new_position
 		if cutscene.from_character:
 			SceneTransitions.canvas_mask.global_position = get_character_screen_position()
-		yield(SceneTransitions, "transition_finished")
 		
 		if cutscene.animation != "" and !reverse:
 			cutscene.owner.animation_player.play(cutscene.animation)
