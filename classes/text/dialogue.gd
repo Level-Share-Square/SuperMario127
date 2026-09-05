@@ -237,7 +237,6 @@ func setup_char(character: Character):
 	character.velocity = Vector2.ZERO
 #	character.set_collision_layer_bit(1, false) # disable collisions w/ most things
 	character.set_inter_player_collision(false)
-	character.camera.smoothing_enabled = true # Re-enable camera smoothing
 	
 	character.camera.set_zoom_tween(Vector2(zoom_size, zoom_size), 1)
 	character.camera.focus_on = camera_focus

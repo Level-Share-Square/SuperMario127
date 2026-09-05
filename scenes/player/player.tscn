@@ -3114,10 +3114,12 @@ character = NodePath("../Area/Character")
 background = NodePath("../Backgrounds")
 
 [node name="ZoomTween" type="Tween" parent="CameraP1"]
+process_priority = -3
 playback_process_mode = 0
 
 [node name="CutsceneTween" type="Tween" parent="CameraP1"]
 pause_mode = 2
+process_priority = -3
 playback_process_mode = 0
 
 [node name="Area2D" type="Area2D" parent="CameraP1"]
