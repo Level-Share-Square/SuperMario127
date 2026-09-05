@@ -1,6 +1,6 @@
 [gd_resource type="Resource" load_steps=4 format=2]
 
-[ext_resource path="res://scenes/actors/objects/pipe_body/pipe.png" type="Texture" id=1]
+[ext_resource path="res://scenes/actors/objects/pipe_body/preview.png" type="Texture" id=1]
 [ext_resource path="res://scenes/actors/objects/pipe_body/icon.png" type="Texture" id=2]
 [ext_resource path="res://scenes/editor/items/placeable_object.gd" type="Script" id=3]
 
