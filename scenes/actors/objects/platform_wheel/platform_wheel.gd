@@ -94,6 +94,9 @@ func _draw():
 	if(radius == 0):
 		return
 	var radius_vector = Vector2(radius*32, 0.0)
+	var working_radius: float = (radius+3) * 32
+	
+	editor_rect = Rect2(-working_radius/2, -working_radius/2, working_radius, working_radius)
 	
 	var delta_rad = 2*PI/ceil(radius*32*2*PI/20.0) #so the points are at most 20 curve pixels appart
 	var rad := 0.0
