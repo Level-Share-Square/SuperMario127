@@ -104,7 +104,7 @@ func reorder_objects(to: int):
 		SendTo.BACK:
 			action.new_index = 0
 		SendTo.FRONT:
-			action.new_index = editor.get_shared_node().get_layer(editor.layer).object_manager.get_child_count() - 1
+			action.new_index = editor.get_shared_node().get_layer(editor.layer).object_manager.get_child_count()
 	
 	editor.action_manager.commit_action([action])
 
