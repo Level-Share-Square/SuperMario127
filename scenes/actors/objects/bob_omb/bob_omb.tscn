@@ -42,6 +42,7 @@ extents = Vector2( 9, 12 )
 [node name="BobOmb" type="Node2D"]
 z_index = -2
 script = ExtResource( 2 )
+editor_rect = Rect2( -8, -12, 16, 20 )
 internal_id = "bob_omb"
 
 [node name="BobOmb" type="KinematicBody2D" parent="."]

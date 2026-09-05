@@ -75,7 +75,7 @@ func update_parts():
 	
 	screw.position = -sprite.rect_position
 	screw.visible = can_rotate
-
+	editor_rect = Rect2(sprite.rect_position, sprite.rect_size)
 
 func _physics_process(delta):
 	if mode == 1 or !is_enabled_and_on_ground() or !can_rotate: # dont do physics if in edit more or disabled
