@@ -67,7 +67,7 @@ func switch_to_area():
 	if id != CurrentLevelData.area_id:
 		var editor = get_tree().current_scene
 		editor.get_node("%EditorCamera").save_position()
-		CurrentLevelData.switch_to_area(id, false, true)
+		CurrentLevelData.switch_to_area(id)
 		CurrentLevelData.editor_data.last_area = id
 		
 		SceneTransitions.reload_scene()

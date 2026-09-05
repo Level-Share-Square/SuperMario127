@@ -157,7 +157,7 @@ func populate_keys() -> void:
 						continue
 					level_tags.key_object_map[key_data.tag].append(key_data)
 
-func switch_to_area(new_area_id: int, always_reload: bool = true, keep_old_loaded: bool = false) -> void:
+func switch_to_area(new_area_id: int, always_reload: bool = false, keep_old_loaded: bool = true) -> void:
 	if not keep_old_loaded:
 		unload_level_area(area_id)
 	
