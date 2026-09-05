@@ -153,8 +153,3 @@ func create_object(pos: Vector2, object_id: int, palette: int):
 			)
 		)
 	)
-
-
-func shell_hit(shell_pos: Vector2) -> void:
-	if is_instance_valid(damage):
-		damage.strong_hurt_at(shell_pos)

@@ -265,6 +265,9 @@ func physics_process_shell(delta, _level_bounds):
 		var hit_parent = hit_area.get_parent()
 		var hit_parent_parent = hit_parent.get_parent()
 		
+		if hit_area.get_collision_layer_bit(2) == true and hit_parent.has_method("shelled"):
+			hit_parent.shelled(shell)
+		
 		if hit_area.get_collision_layer_bit(2) == true and hit_parent_parent.has_method("shell_hit") and hit_parent_parent != self and abs(velocity.x) > 15:
 			hit_parent_parent.shell_hit(shell.global_position)
 			if hit_parent_parent.name.begins_with("Rex"):

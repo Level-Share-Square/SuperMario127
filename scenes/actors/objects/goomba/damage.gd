@@ -7,7 +7,7 @@ var hit_position: Vector2
 
 
 func hurt(body: PhysicsBody2D = null) -> void:
-	if enemy.rainbow:
+	if enemy.rainbow and is_instance_valid(body):
 		if not bump_sound.playing:
 			bump_sound.play()
 			enemy.sprite.modulate = Color.white * 1.5
@@ -49,5 +49,9 @@ func ground_pound(body: PhysicsBody2D = null) -> void:
 	hurt(body)
 
 
+func shelled(body: PhysicsBody2D) -> void:
+	strong_hurt(body)
+
+
 func incinerated() -> void:
-	pass
+	hurt()
