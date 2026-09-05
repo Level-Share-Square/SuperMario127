@@ -13,6 +13,6 @@ icons = [ ExtResource( 2 ) ]
 previews = [ ExtResource( 2 ) ]
 priority = 35
 object_id = 53
-preview_offset = Vector2( 0, 0 )
+preview_offset = Vector2( 1, 0 )
 property_overrides = {
 }

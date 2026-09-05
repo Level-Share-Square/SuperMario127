@@ -6,6 +6,7 @@
 [node name="LargeCaveTree" type="Node2D"]
 z_index = -1
 script = ExtResource( 2 )
+editor_rect = Rect2( -32, -72, 64, 76 )
 internal_id = "large_cave_tree"
 
 [node name="Sprite" type="Sprite" parent="."]

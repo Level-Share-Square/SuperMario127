@@ -801,6 +801,7 @@ colors = PoolColorArray( 1, 1, 1, 1, 0, 0, 0, 0 )
 [node name="LaunchStar" type="Node2D"]
 z_index = -1
 script = ExtResource( 1 )
+editor_rect = Rect2( -50, -12, 100, 60 )
 internal_id = "launch_star"
 launch_noise = ExtResource( 10 )
 windup_noise = ExtResource( 12 )

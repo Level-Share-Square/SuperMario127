@@ -46,6 +46,8 @@ func _ready():
 		sprite2.visible = true
 
 		sprite2.self_modulate = color
+		
+	update_parts()
 				
 func _unhandled_input(event: InputEvent) -> void:
 	parts_input_handler(event,self)
@@ -74,3 +76,4 @@ func update_parts():
 
 	#calculate the total platform scale
 	scale_y = scale.y * (left_width + right_width + part_width * parts) / (left_width + right_width + part_width)
+	editor_rect = Rect2(sprite.rect_position, sprite.rect_size)

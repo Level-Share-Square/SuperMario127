@@ -12,7 +12,7 @@ var collected = false
 var destroy_timer = 0.0
 
 var nozzle_map: Array = ["HoverNozzle", "RocketNozzle", "TurboNozzle"]
-var rect_map: Array = [Rect2(-12, -7, 24, 14), Rect2(-5, -8, 10, 16), Rect2(-8, -6, 16, 12)]
+var rect_map: Array = [Rect2(-12, -7, 24, 14), Rect2(-5, -8, 10, 16), Rect2(-10, -4, 20, 14)]
 
 var gravity: = 0.0
 var gravity_scale: = 1.0

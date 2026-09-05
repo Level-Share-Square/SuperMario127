@@ -6,6 +6,7 @@
 [node name="BigNet" type="Node2D"]
 z_index = -1
 script = ExtResource( 1 )
+editor_rect = Rect2( -48, -33, 96, 65 )
 internal_id = "big_net"
 
 [node name="Sprite" type="Sprite" parent="."]

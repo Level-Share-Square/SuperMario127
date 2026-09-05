@@ -10,6 +10,7 @@
 
 [node name="vine" type="Node2D"]
 script = ExtResource( 1 )
+editor_rect = Rect2( -32, -32, 64, 64 )
 internal_id = "vine_bend"
 palette_textures = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 6 ), ExtResource( 5 ), ExtResource( 4 ) ]
 

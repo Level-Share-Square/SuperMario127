@@ -9,6 +9,7 @@ radius = 27.1451
 [node name="BigSteelyObject" type="Node2D"]
 z_index = -6
 script = ExtResource( 1 )
+editor_rect = Rect2( -24, -24, 48, 48 )
 internal_id = "big_steely_entrance"
 
 [node name="Sprite" type="Sprite" parent="."]

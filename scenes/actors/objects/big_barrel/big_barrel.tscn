@@ -9,6 +9,7 @@ extents = Vector2( 27.5, 32.5 )
 [node name="BigBarrel" type="Node2D"]
 z_index = -2
 script = ExtResource( 2 )
+editor_rect = Rect2( -32, -32, 64, 64 )
 internal_id = "big_barrel"
 
 [node name="Sprite" type="Sprite" parent="."]

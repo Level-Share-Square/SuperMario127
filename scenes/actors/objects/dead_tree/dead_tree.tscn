@@ -13,7 +13,7 @@
 
 [node name="DeadTree" type="Node2D"]
 script = ExtResource( 2 )
-generate_editor_hitbox = true
+editor_rect = Rect2( -34, -110, 69, 111 )
 internal_id = "dead_tree"
 palette_textures = [ ExtResource( 6 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 9 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 3 ), ExtResource( 10 ) ]
 

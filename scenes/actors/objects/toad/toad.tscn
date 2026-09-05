@@ -24,6 +24,7 @@
 
 [node name="Toad" instance=ExtResource( 6 )]
 script = ExtResource( 3 )
+editor_rect = Rect2( -10, -12, 20, 29 )
 internal_id = "toad"
 body_palettes = [ ExtResource( 19 ), ExtResource( 15 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 16 ), ExtResource( 2 ), ExtResource( 18 ) ]
 head_palettes = [ ExtResource( 20 ), ExtResource( 17 ), ExtResource( 21 ), ExtResource( 14 ), ExtResource( 13 ), ExtResource( 12 ), ExtResource( 1 ) ]

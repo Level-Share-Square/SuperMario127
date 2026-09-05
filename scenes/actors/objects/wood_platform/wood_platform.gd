@@ -34,6 +34,7 @@ func _process(_delta):
 		sprite2.visible = true
 
 		sprite2.self_modulate = color
+		
 
 
 #-------------------------------- platform logic -----------------------
@@ -75,6 +76,7 @@ func update_parts():
 	
 	#calculate the total platform scale
 	scale_x = scale.x * (left_width + right_width + part_width * parts) / (left_width + right_width + part_width)
+	editor_rect = Rect2(sprite.rect_position, sprite.rect_size)
 
 func is_middle(check):
 	.is_middle(check)

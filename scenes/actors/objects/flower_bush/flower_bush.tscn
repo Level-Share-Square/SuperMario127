@@ -21,6 +21,7 @@ extents = Vector2( 17, 8.5 )
 
 [node name="FlowerBush" type="Node2D"]
 script = ExtResource( 2 )
+editor_rect = Rect2( -20, -12, 40, 24 )
 internal_id = "flower_bush"
 palette_textures = [ ExtResource( 6 ), ExtResource( 9 ), ExtResource( 7 ), ExtResource( 5 ), ExtResource( 3 ), ExtResource( 1 ) ]
 

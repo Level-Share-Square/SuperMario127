@@ -75,6 +75,7 @@ animations = [ {
 
 [node name="Torch" type="Node2D"]
 script = ExtResource( 1 )
+editor_rect = Rect2( -8, -10, 16, 27 )
 internal_id = "torch"
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]

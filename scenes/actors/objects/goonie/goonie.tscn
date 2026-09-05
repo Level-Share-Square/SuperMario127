@@ -100,6 +100,7 @@ tracks/0/keys = {
 [node name="Goonie" type="Node2D"]
 z_index = 1
 script = ExtResource( 1 )
+editor_rect = Rect2( -24, -16, 42, 32 )
 internal_id = "goonie"
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
