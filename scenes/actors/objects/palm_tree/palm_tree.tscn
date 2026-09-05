@@ -9,6 +9,7 @@
 [node name="PalmTree" type="Node2D"]
 z_index = -1
 script = ExtResource( 2 )
+editor_rect = Rect2( -26, -62, 56, 62 )
 internal_id = "palm_tree"
 palette_textures = [ ExtResource( 5 ), ExtResource( 4 ), ExtResource( 3 ) ]
 
