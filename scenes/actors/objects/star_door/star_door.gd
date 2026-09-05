@@ -72,6 +72,7 @@ func _register_properties() -> void:
 	set_property_override("collectible", PropertyTab.OverrideTypes.DROPDOWN, [self, "get_collectible_args"])
 	register_property(10, "required_amount", required_amount)
 	register_property(11, "required_key", required_key)
+	set_property_override("required_key", PropertyTab.OverrideTypes.DROPDOWN, [CurrentLevelData.level_tags, "get_key_args", [CurrentLevelData.level_tags, "key_tags"]])
 	register_property(12, "insufficient_text", insufficient_text)
 	register_property(13, "is_single", is_single, false)
 
@@ -91,20 +92,7 @@ func _on_property_changed(key, value):
 			else:
 				icon_sprite.animation = "null"
 		
-		add_suffix = true
-		recolorable_sprite.visible = false
-		if recolorable_sprite.frames.has_animation(icon_sprite.animation):
-			if collectible == "key":
-				var key_data_array: Array = CurrentLevelData.level_tags.key_object_map.get(required_key, [])
-				var key_data: KeyData = null
-				if not key_data_array.empty():
-					key_data = key_data_array[0]
-				
-				if is_instance_valid(key_data):
-					add_suffix = key_data.visible
-					if key_data.color != Color.yellow:
-						recolorable_sprite.visible = true
-						recolorable_sprite.self_modulate = key_data.color
+		update_key_color()
 		coll = collectible
 		
 		var collectible_text: String = collectible
@@ -118,7 +106,24 @@ func _on_property_changed(key, value):
 			"num": required_amount if collectible != "key" else "the %s" % [required_key],
 			"col": collectible_text
 		})
+	if key == "required_key":
+		update_key_color()
 
+func update_key_color():
+	add_suffix = true
+	recolorable_sprite.visible = false
+	if recolorable_sprite.frames.has_animation(icon_sprite.animation):
+		if collectible == "key":
+			var key_data_array: Array = CurrentLevelData.level_tags.key_object_map.get(required_key, [])
+			var key_data: KeyData = null
+			if not key_data_array.empty():
+				key_data = key_data_array[0]
+			
+			if is_instance_valid(key_data):
+				add_suffix = key_data.visible
+				if key_data.color != Color.yellow:
+					recolorable_sprite.visible = true
+					recolorable_sprite.self_modulate = key_data.color
 
 ## ANIMATION
 func start_entrance_animation(character: Character, open_door: bool = true) -> void:
