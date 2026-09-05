@@ -31,6 +31,13 @@ func _ready():
 	preview_position = Vector2(70, 85)
 	if is_preview:
 		return
+		
+func _editor_ready():
+	connect("property_changed", self, "property_changed")
+		
+func property_changed(key, value):
+	if key == "moves" and value == false:
+		animationplayer.play("RESET")
 
 func _process(delta):
 	if rainbow:

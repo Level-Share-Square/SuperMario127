@@ -16,7 +16,7 @@ func _ready():
 	
 func on_pressed():
 	.on_pressed()
-	
+	if not is_inside_tree(): return
 	if !toggled:
 		var tween = get_tree().create_tween()
 		tween.tween_property(selected_revealer, "rect_min_size:y", revealer_child.rect_size.y, 0.3).set_trans(Tween.TRANS_CUBIC)

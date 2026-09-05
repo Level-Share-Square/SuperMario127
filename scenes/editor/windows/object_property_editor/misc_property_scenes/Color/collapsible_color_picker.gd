@@ -6,7 +6,7 @@ var active = false
 
 func on_pressed():
 	.on_pressed()
-
+	if not is_inside_tree(): return
 	if !active:
 		var tween = get_tree().create_tween()
 		tween.tween_property(owner, "self_modulate:a", 1.0, 0.3).set_trans(Tween.TRANS_CUBIC)
