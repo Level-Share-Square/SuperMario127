@@ -14,8 +14,8 @@ var shoe_color := Color.orangered
 var rainbow: bool
 
 
-func _register_properites():
-	._register_properites()
+func _register_properties():
+	._register_properties()
 	
 	register_property(16, "skin_color", skin_color)
 	register_property(17, "shoe_color", shoe_color)
