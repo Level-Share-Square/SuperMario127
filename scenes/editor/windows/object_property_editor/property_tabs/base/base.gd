@@ -1,5 +1,7 @@
 extends PropertyTab
 
+enum SendTo {BACK, FRONT}
+
 func load_base_properties(_editor: Editor, _objects: Dictionary):
 	editor = _editor
 	objects = _objects
@@ -91,6 +93,19 @@ func flip_objects(multiplier: Vector2): # Hello everybody my name is
 	var action := ChangePropertyBulkAction.new()
 	action.affected_objects = setup_flipped_objects(multiplier)
 	action.bulk_store_original_properties()
+	editor.action_manager.commit_action([action])
+	
+func reorder_objects(to: int):
+	var action := ReorderObjectsAction.new()
+	action.shared = editor.get_shared_node()
+	action.layer_uuid = editor.layer
+	action.objects = objects.keys()
+	match to:
+		SendTo.BACK:
+			action.new_index = 0
+		SendTo.FRONT:
+			action.new_index = editor.get_shared_node().get_layer(editor.layer).object_manager.get_child_count() - 1
+	
 	editor.action_manager.commit_action([action])
 
 func setup_flipped_objects(multiplier: Vector2) -> Dictionary:

@@ -46,3 +46,11 @@ func erase_object(game_object, free: bool = true) -> void:
 	game_object._object_removed(free)
 	if free: game_object.queue_free()
 	layer_data.erase_object(object_data)
+
+func reorder_object(game_object, index: int) -> void:
+	move_child(game_object, index)
+	var object_data: ObjectData = game_object.object_data
+	
+	layer_data.object_data.erase(object_data)
+	layer_data.object_data.insert(index, object_data)
+	

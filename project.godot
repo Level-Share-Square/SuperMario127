@@ -1004,6 +1004,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/editor/action_manager/actions/reorder_layer.gd"
 }, {
+"base": "Action",
+"class": "ReorderObjectsAction",
+"language": "GDScript",
+"path": "res://scenes/editor/action_manager/actions/reorder_object.gd"
+}, {
 "base": "GameObject",
 "class": "ResizableSemisolid",
 "language": "GDScript",
@@ -1539,6 +1544,7 @@ _global_script_class_icons={
 "RainbowStarWindupState": "",
 "RangeSound": "",
 "ReorderLayerAction": "",
+"ReorderObjectsAction": "",
 "ResizableSemisolid": "",
 "ResizeAreaAction": "",
 "RocketNozzle": "",
