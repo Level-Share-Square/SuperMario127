@@ -169,6 +169,10 @@ func unload_all_but_current_area() -> void:
 	for loaded_area_id in loaded_areas.keys():
 		if loaded_area_id != area_id:
 			loaded_areas.erase(loaded_area_id)
+			
+func unload_all_areas() -> void:
+	for loaded_area_id in loaded_areas.keys():
+		loaded_areas.erase(loaded_area_id)
 
 func get_area_args() -> Dictionary:
 	var args: Dictionary = {}

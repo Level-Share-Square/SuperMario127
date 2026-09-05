@@ -93,6 +93,7 @@ func load_level_info(_level_metadata: LevelMetadata, _level_id: String, _working
 	CurrentLevelData.working_folder = _working_folder
 	CurrentLevelData.is_campaign = _is_campaign
 	CurrentLevelData.load_save_data()
+	CurrentLevelData.unload_all_areas()
 	
 	level_metadata = CurrentLevelData.level_metadata
 	level_id = _level_id
