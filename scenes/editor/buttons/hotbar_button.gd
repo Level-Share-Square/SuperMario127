@@ -109,7 +109,7 @@ func mouse_exited():
 func gui_input(event):
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_RIGHT and event.pressed:
-			hotbar.palette_selected(wrapi(palette + 1, 0, item.icons.size() - 1), self)
+			hotbar.palette_selected(wrapi(palette + 1, 0, item.icons.size()), self)
 			play_bounce_anim()
 		if event.button_index == BUTTON_MIDDLE and event.pressed:
 			hotbar.new_favorite_selected(item, get_index())

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=10 format=2]
+[gd_resource type="Resource" load_steps=11 format=2]
 
 [ext_resource path="res://scenes/editor/items/placeable_tile.gd" type="Script" id=1]
 [ext_resource path="res://assets/tiles/twisted_wire/icon.png" type="Texture" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://assets/tiles/twisted_wire/palettes/6_icon.png" type="Texture" id=7]
 [ext_resource path="res://assets/tiles/twisted_wire/palettes/5_icon.png" type="Texture" id=8]
 [ext_resource path="res://assets/tiles/twisted_wire/palettes/7_icon.png" type="Texture" id=9]
+[ext_resource path="res://assets/tiles/twisted_wire/palettes/8_icon.png" type="Texture" id=10]
 
 [resource]
 script = ExtResource( 1 )
@@ -16,7 +17,7 @@ item_name = "Twisted Wire"
 change_to = ""
 items_in_sequence = 0
 index_in_sequence = 0
-icons = [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 8 ), ExtResource( 7 ), ExtResource( 9 ) ]
+icons = [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 8 ), ExtResource( 7 ), ExtResource( 9 ), ExtResource( 10 ) ]
 previews = [ ExtResource( 2 ) ]
 priority = 41
 tileset_id = 45

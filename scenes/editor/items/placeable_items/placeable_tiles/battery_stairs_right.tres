@@ -1,7 +1,16 @@
-[gd_resource type="Resource" load_steps=3 format=2]
+[gd_resource type="Resource" load_steps=12 format=2]
 
 [ext_resource path="res://scenes/editor/items/placeable_tile.gd" type="Script" id=1]
 [ext_resource path="res://assets/tiles/battery/icon_slope_right.png" type="Texture" id=2]
+[ext_resource path="res://assets/tiles/battery/palettes/5_icon_slope_right.png" type="Texture" id=3]
+[ext_resource path="res://assets/tiles/battery/palettes/8_icon_slope_right.png" type="Texture" id=4]
+[ext_resource path="res://assets/tiles/battery/palettes/6_icon_slope_right.png" type="Texture" id=5]
+[ext_resource path="res://assets/tiles/battery/palettes/2_icon_slope_right.png" type="Texture" id=6]
+[ext_resource path="res://assets/tiles/battery/palettes/3_icon_slope_right.png" type="Texture" id=7]
+[ext_resource path="res://assets/tiles/battery/palettes/1_icon_slope_right.png" type="Texture" id=8]
+[ext_resource path="res://assets/tiles/battery/palettes/7_icon_slope_right.png" type="Texture" id=9]
+[ext_resource path="res://assets/tiles/battery/palettes/4_icon_slope_right.png" type="Texture" id=10]
+[ext_resource path="res://assets/tiles/battery/palettes/9_icon_slope_right.png" type="Texture" id=11]
 
 [resource]
 script = ExtResource( 1 )
@@ -9,8 +18,8 @@ item_name = "Battery (Right Stairs)"
 change_to = "til_battery"
 items_in_sequence = 3
 index_in_sequence = 2
-icons = [ ExtResource( 2 ) ]
-previews = [ ExtResource( 2 ) ]
+icons = [ ExtResource( 2 ), ExtResource( 8 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 10 ), ExtResource( 3 ), ExtResource( 5 ), ExtResource( 9 ), ExtResource( 4 ), ExtResource( 11 ) ]
+previews = [ ExtResource( 2 ), ExtResource( 8 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 10 ), ExtResource( 3 ), ExtResource( 5 ), ExtResource( 9 ), ExtResource( 4 ), ExtResource( 11 ) ]
 priority = 41
 tileset_id = 43
 tile_id = 3
