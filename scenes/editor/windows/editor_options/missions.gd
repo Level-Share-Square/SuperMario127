@@ -53,16 +53,14 @@ func _ready():
 func on_mission_selected(mission: MissionData):
 	mission_container.show()
 	globals_container.hide()
-
+	selected_mission = mission
+	
 	CurrentLevelData.level_metadata.collectible_data.set_block_signals(true)
 	mission_prefab.load_properties(self, mission)
 	CurrentLevelData.level_metadata.collectible_data.set_block_signals(false)
 	
-	selected_mission = mission
-	
 func update_mission(mission):
 	refresh_buttons()
-	print("bai")
 	on_mission_selected(mission)
 
 func change_property(key: String, value, check_matches, save_to_data):
