@@ -7,13 +7,13 @@
 [resource]
 script = ExtResource( 1 )
 item_name = "Toxic Gas"
-change_to = ""
-items_in_sequence = 0
-index_in_sequence = 0
+change_to = "obj_water"
+items_in_sequence = 4
+index_in_sequence = 3
 icons = [ ExtResource( 3 ) ]
 previews = [ ExtResource( 2 ) ]
 priority = 90
 object_id = 144
-preview_offset = Vector2( 0, 0 )
+preview_offset = Vector2( 16, 8 )
 property_overrides = {
 }

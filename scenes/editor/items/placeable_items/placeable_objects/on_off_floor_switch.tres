@@ -19,13 +19,13 @@
 [resource]
 script = ExtResource( 3 )
 item_name = "On/Off Floor Switch"
-change_to = ""
-items_in_sequence = 0
-index_in_sequence = 0
+change_to = "obj_on_off_touch_lift"
+items_in_sequence = 5
+index_in_sequence = 2
 icons = [ ExtResource( 2 ), ExtResource( 4 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 12 ), ExtResource( 14 ), ExtResource( 15 ) ]
 previews = [ ExtResource( 1 ), ExtResource( 5 ), ExtResource( 13 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 11 ) ]
 priority = 72
 object_id = 95
-preview_offset = Vector2( 0, 0 )
+preview_offset = Vector2( 0, -1 )
 property_overrides = {
 }

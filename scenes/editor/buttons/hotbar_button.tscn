@@ -64,7 +64,7 @@ custom_constants/margin_bottom = 1
 unique_name_in_owner = true
 margin_left = 1.0
 margin_top = 21.0
-margin_right = 23.0
+margin_right = 24.0
 margin_bottom = 23.0
 mouse_filter = 2
 size_flags_vertical = 8
@@ -96,6 +96,38 @@ color = Color( 0.75, 0.75, 0.75, 1 )
 [node name="ColorRect4" type="ColorRect" parent="Clip/MarginContainer/SeriesContainer"]
 margin_left = 9.0
 margin_right = 11.0
+margin_bottom = 2.0
+rect_min_size = Vector2( 2, 2 )
+mouse_filter = 2
+color = Color( 0.75, 0.75, 0.75, 1 )
+
+[node name="ColorRect5" type="ColorRect" parent="Clip/MarginContainer/SeriesContainer"]
+margin_left = 12.0
+margin_right = 14.0
+margin_bottom = 2.0
+rect_min_size = Vector2( 2, 2 )
+mouse_filter = 2
+color = Color( 0.75, 0.75, 0.75, 1 )
+
+[node name="ColorRect6" type="ColorRect" parent="Clip/MarginContainer/SeriesContainer"]
+margin_left = 15.0
+margin_right = 17.0
+margin_bottom = 2.0
+rect_min_size = Vector2( 2, 2 )
+mouse_filter = 2
+color = Color( 0.75, 0.75, 0.75, 1 )
+
+[node name="ColorRect7" type="ColorRect" parent="Clip/MarginContainer/SeriesContainer"]
+margin_left = 18.0
+margin_right = 20.0
+margin_bottom = 2.0
+rect_min_size = Vector2( 2, 2 )
+mouse_filter = 2
+color = Color( 0.75, 0.75, 0.75, 1 )
+
+[node name="ColorRect8" type="ColorRect" parent="Clip/MarginContainer/SeriesContainer"]
+margin_left = 21.0
+margin_right = 23.0
 margin_bottom = 2.0
 rect_min_size = Vector2( 2, 2 )
 mouse_filter = 2

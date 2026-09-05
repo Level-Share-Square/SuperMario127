@@ -1,17 +1,29 @@
-[gd_resource type="Resource" load_steps=4 format=2]
+[gd_resource type="Resource" load_steps=16 format=2]
 
 [ext_resource path="res://scenes/actors/objects/on_off_touch_lift/icon.png" type="Texture" id=1]
 [ext_resource path="res://scenes/actors/objects/on_off_touch_lift/preview.png" type="Texture" id=2]
 [ext_resource path="res://scenes/editor/items/placeable_object.gd" type="Script" id=3]
+[ext_resource path="res://scenes/actors/objects/on_off_touch_lift/palettes/3/icon.png" type="Texture" id=4]
+[ext_resource path="res://scenes/actors/objects/on_off_touch_lift/palettes/4/icon.png" type="Texture" id=5]
+[ext_resource path="res://scenes/actors/objects/on_off_touch_lift/palettes/2/icon.png" type="Texture" id=6]
+[ext_resource path="res://scenes/actors/objects/on_off_touch_lift/palettes/1/preview.png" type="Texture" id=7]
+[ext_resource path="res://scenes/actors/objects/on_off_touch_lift/palettes/6/preview.png" type="Texture" id=8]
+[ext_resource path="res://scenes/actors/objects/on_off_touch_lift/palettes/5/icon.png" type="Texture" id=9]
+[ext_resource path="res://scenes/actors/objects/on_off_touch_lift/palettes/4/preview.png" type="Texture" id=10]
+[ext_resource path="res://scenes/actors/objects/on_off_touch_lift/palettes/3/preview.png" type="Texture" id=11]
+[ext_resource path="res://scenes/actors/objects/on_off_touch_lift/palettes/6/icon.png" type="Texture" id=12]
+[ext_resource path="res://scenes/actors/objects/on_off_touch_lift/palettes/1/icon.png" type="Texture" id=13]
+[ext_resource path="res://scenes/actors/objects/on_off_touch_lift/palettes/5/preview.png" type="Texture" id=14]
+[ext_resource path="res://scenes/actors/objects/on_off_touch_lift/palettes/2/preview.png" type="Texture" id=15]
 
 [resource]
 script = ExtResource( 3 )
 item_name = "On/Off Touch Lift"
-change_to = ""
-items_in_sequence = 0
-index_in_sequence = 0
-icons = [ ExtResource( 1 ) ]
-previews = [ ExtResource( 2 ) ]
+change_to = "obj_on_off_platform_wheel"
+items_in_sequence = 5
+index_in_sequence = 3
+icons = [ ExtResource( 1 ), ExtResource( 13 ), ExtResource( 6 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 9 ), ExtResource( 12 ) ]
+previews = [ ExtResource( 2 ), ExtResource( 7 ), ExtResource( 15 ), ExtResource( 11 ), ExtResource( 10 ), ExtResource( 14 ), ExtResource( 8 ) ]
 priority = 69
 object_id = 94
 preview_offset = Vector2( 0, 0 )

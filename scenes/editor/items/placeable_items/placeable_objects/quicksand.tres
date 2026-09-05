@@ -6,13 +6,13 @@
 [resource]
 script = ExtResource( 1 )
 item_name = "Quicksand"
-change_to = ""
-items_in_sequence = 0
-index_in_sequence = 0
+change_to = "obj_toxic_gas"
+items_in_sequence = 4
+index_in_sequence = 2
 icons = [ ExtResource( 2 ) ]
 previews = [ ExtResource( 2 ) ]
 priority = 93
 object_id = 142
-preview_offset = Vector2( 0, 0 )
+preview_offset = Vector2( 16, 8 )
 property_overrides = {
 }
