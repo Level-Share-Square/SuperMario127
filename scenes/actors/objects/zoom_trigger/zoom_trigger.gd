@@ -36,6 +36,7 @@ func update_parts():
 	sprite.rect_size.y = parts * 32
 	sprite.rect_position.y = (-16 * parts)
 	area_shape.shape.extents.y = 16 * parts
+	editor_rect = Rect2(sprite.rect_position, sprite.rect_size)
 
 
 func _ready():
