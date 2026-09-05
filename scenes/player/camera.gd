@@ -41,6 +41,8 @@ var level_bounds: Rect2
 var area
 var shape
 var in_cutscene: bool = false
+var did_pause: bool = false
+var locked_movement: bool = false
 
 var shake_strength: float = 0.0
 var shake = false
@@ -195,41 +197,47 @@ func _physics_process(delta):
 			else:
 				shake = false
 	
+	global_position = clamp_position(global_position, last_position, size)
+
+
+func clamp_position(new_pos: Vector2, last_pos: Vector2, cur_size: Vector2, exclude_areas: Array = []) -> Vector2:
 	# level bounds
-	if not in_cutscene and not get_tree().paused:
-		if global_position.x - size.x < level_bounds.position.x:
-			global_position.x = level_bounds.position.x + size.x
-		if global_position.x + size.x > level_bounds.size.x:
-			global_position.x = level_bounds.size.x - size.x
+	if new_pos.x - cur_size.x < level_bounds.position.x:
+		new_pos.x = level_bounds.position.x + cur_size.x
+	if new_pos.x + cur_size.x > level_bounds.size.x:
+		new_pos.x = level_bounds.size.x - cur_size.x
 
-		if global_position.y - size.y < level_bounds.position.y:
-			global_position.y = level_bounds.position.y + size.y
-		if global_position.y + size.y > level_bounds.size.y:
-			global_position.y = level_bounds.size.y - size.y
+	if new_pos.y - cur_size.y < level_bounds.position.y:
+		new_pos.y = level_bounds.position.y + cur_size.y
+	if new_pos.y + cur_size.y > level_bounds.size.y:
+		new_pos.y = level_bounds.size.y - cur_size.y
 	
-	for stopper in area.get_overlapping_areas():
-		if abs(global_position.y - stopper.global_position.y) < size.y * 1.2 + abs(stopper.top_bound.y - stopper.global_position.y) or abs(global_position.x - stopper.global_position.x) < size.x * 1.2 + abs(stopper.left_bound.x - stopper.global_position.x):
-			var overlapX = min(abs(last_position.x + size.x - stopper.left_bound.x), abs(last_position.x - size.x - stopper.right_bound.x))
-			var overlapY = min(abs(last_position.y + size.y - stopper.top_bound.y), abs(last_position.y - size.y - stopper.bottom_bound.y))
-
+	# stoppers
+	var compare_areas: Array = area.get_overlapping_areas()
+	for exclude_area in exclude_areas:
+		if exclude_area in compare_areas:
+			compare_areas.erase(exclude_area)
+	for stopper in compare_areas:
+		if abs(new_pos.y - stopper.global_position.y) < cur_size.y * 1.2 + abs(stopper.top_bound.y - stopper.global_position.y) or abs(new_pos.x - stopper.global_position.x) < cur_size.x * 1.2 + abs(stopper.left_bound.x - stopper.global_position.x):
+			var overlapX = min(abs(last_pos.x + cur_size.x - stopper.left_bound.x), abs(last_pos.x - cur_size.x - stopper.right_bound.x))
+			var overlapY = min(abs(last_pos.y + cur_size.y - stopper.top_bound.y), abs(last_pos.y - cur_size.y - stopper.bottom_bound.y))
+			
 			if overlapX < overlapY:
-				if last_position.x < stopper.global_position.x and global_position.x > last_position.x:
-					global_position.x = stopper.left_bound.x - size.x + 1
-				elif last_position.x > stopper.global_position.x and global_position.x < last_position.x:
-					global_position.x = stopper.right_bound.x + size.x - 1
-				else:
-					pass
+				if last_pos.x < stopper.global_position.x and new_pos.x > last_pos.x:
+					new_pos.x = stopper.left_bound.x - cur_size.x + 1
+				elif last_pos.x > stopper.global_position.x and new_pos.x < last_pos.x:
+					new_pos.x = stopper.right_bound.x + cur_size.x - 1
 			else:
 				# top bound of stopper
-				if last_position.y < stopper.global_position.y and global_position.y > last_position.y:
-					global_position.y = stopper.top_bound.y - size.y + 1
+				if last_pos.y < stopper.global_position.y and new_pos.y > last_pos.y:
+					new_pos.y = stopper.top_bound.y - cur_size.y + 1
 				# bottom bound of stopper
-				elif last_position.y > stopper.global_position.y and global_position.y < last_position.y:
-					global_position.y = stopper.bottom_bound.y + size.y - 1
-				else:
-					pass
+				elif last_pos.y > stopper.global_position.y and new_pos.y < last_pos.y:
+					new_pos.y = stopper.bottom_bound.y + cur_size.y - 1
 		else:
 			print("ESCAPED")
+	
+	return new_pos
 
 
 func set_zoom_tween(target : Vector2, time : float, override = false):
@@ -245,7 +253,7 @@ func set_zoom_tween(target : Vector2, time : float, override = false):
 	if override:
 		zoom_tween.interpolate_property(self, "zoom", zoom, target, time, 1, 0)
 		disable_zoom_effect = true
-		print(zoom_tween.connect("tween_all_completed", self, "on_zoom_tween_zoomed"))
+		zoom_tween.connect("tween_all_completed", self, "on_zoom_tween_zoomed")
 		zoom_tween.start()
 		return
 	var level_size : Vector2 = CurrentLevelData.current_area.header.bounds.size * 16
@@ -260,7 +268,7 @@ func set_zoom_tween(target : Vector2, time : float, override = false):
 	target = Vector2(min(target.x, max_size), min(target.y, max_size))
 	zoom_tween.interpolate_property(self, "zoom", zoom, target, time, 1, 0)
 	disable_zoom_effect = true
-	#print(zoom_tween.connect("tween_all_completed", self, "on_zoom_tween_zoomed"))
+	zoom_tween.connect("tween_all_completed", self, "on_zoom_tween_zoomed")
 	zoom_tween.start()
 
 func on_zoom_tween_zoomed():
@@ -285,6 +293,7 @@ func load_in():
 func queue_cutscene(cutscene : CameraCutscene):
 	cutscene_queue.append(cutscene)
 
+
 func start_queue():
 	if cutscene_queue.size() == 0:
 		push_warning("No cutscene queue to start, queue a cutscene then call start_queue()!")
@@ -293,27 +302,34 @@ func start_queue():
 	if !in_cutscene:
 		in_cutscene = true
 		play_cutscene(cutscene_queue.pop_front())
-		print("queue started!")
 
 func play_cutscene(cutscene : CameraCutscene, reverse: bool = false):
 	current_cutscene = cutscene
 
-	pause_mode = PAUSE_MODE_PROCESS
-	cutscene.owner.pause_mode = PAUSE_MODE_PROCESS
-	get_tree().paused = true
-	character_node.toggle_movement(false)
-	CurrentLevelData.can_pause = false
+	if cutscene.lock_movement:
+		locked_movement = true
+		character_node.toggle_movement(false)
+	if cutscene.do_pause:
+		did_pause = true
+		pause_mode = PAUSE_MODE_PROCESS
+		cutscene.owner.pause_mode = PAUSE_MODE_PROCESS
+		get_tree().paused = true
+		CurrentLevelData.can_pause = false
 	auto_move = false
 	
-	
 	var new_position = cutscene.to if !reverse else character_node.position
-	var camera_distance = position.distance_to(new_position)
+	new_position = clamp_position(new_position, last_position, size, cutscene.exclude_stoppers)
 	
+	var compare_position: Vector2 = global_position
+	if cutscene.from != Vector2.INF:
+		compare_position = cutscene.from
+	
+	var camera_distance = compare_position.distance_to(new_position)
 	if cutscene.cutscene_type == cutscene.Type.AUTO:
-		prints(position.distance_to(new_position), position)
-		if position.distance_to(new_position) <= 800:
+		if compare_position.distance_to(new_position) <= cutscene.max_pan_distance:
 			cutscene.cutscene_type = cutscene.Type.PAN
-			cutscene.time = cutscene.time * (camera_distance/800)
+			if cutscene.do_time_scaling:
+				cutscene.time = cutscene.time * (camera_distance/cutscene.max_pan_distance)
 		else:
 			cutscene.cutscene_type = cutscene.Type.TRANSITION
 	
@@ -321,8 +337,8 @@ func play_cutscene(cutscene : CameraCutscene, reverse: bool = false):
 		cutscene_tween.remove_all()
 		cutscene_tween.interpolate_property(
 			self, 
-			"position", 
-			position, 
+			"global_position", 
+			global_position, 
 			new_position, 
 			cutscene.time, 
 			cutscene.transition_type, 
@@ -337,7 +353,25 @@ func play_cutscene(cutscene : CameraCutscene, reverse: bool = false):
 			cutscene.transition_type, 
 			cutscene.tween_ease
 			)
-		print("me start :3")
+		if abs(global_position.y - new_position.y) > 50:
+			cutscene_tween.interpolate_property(
+				self, 
+				"y_baseline", 
+				y_baseline, 
+				new_position.y, 
+				cutscene.time, 
+				cutscene.transition_type, 
+				cutscene.tween_ease
+				)
+			cutscene_tween.interpolate_property(
+				self, 
+				"cur_baseline", 
+				cur_baseline, 
+				new_position.y, 
+				cutscene.time, 
+				cutscene.transition_type, 
+				cutscene.tween_ease
+				)
 		cutscene_tween.start()
 
 		yield(cutscene_tween, "tween_completed")
@@ -347,20 +381,26 @@ func play_cutscene(cutscene : CameraCutscene, reverse: bool = false):
 			yield(cutscene.owner.animation_player, "animation_finished")
 	
 	elif cutscene.cutscene_type == cutscene.Type.TRANSITION:
-		smoothing_enabled = false
+		if cutscene.from_character:
+			SceneTransitions.canvas_mask.global_position = get_character_screen_position()
 		SceneTransitions.do_transition_animation(
 			SceneTransitions.cutout_circle, 
 			cutscene.time
 			)
 		yield(SceneTransitions, "transition_finished")
-		position = new_position
+		y_baseline = new_position.y
+		cur_baseline = new_position.y
+		last_position = new_position
+		global_position = new_position
+		if cutscene.from_character:
+			SceneTransitions.canvas_mask.global_position = get_character_screen_position()
 		yield(SceneTransitions, "transition_finished")
 		
 		if cutscene.animation != "" and !reverse:
 			cutscene.owner.animation_player.play(cutscene.animation)
 			yield(cutscene.owner.animation_player, "animation_finished")
 		
-	if cutscene_queue.empty() and not reverse:
+	if cutscene.do_reverse and cutscene_queue.empty() and not reverse:
 		play_cutscene(cutscene, true)
 		return
 		
@@ -377,9 +417,14 @@ func update_cutscene_queue():
 		play_cutscene(last_cutscene)
 	else:
 		in_cutscene = false
-		pause_mode = PAUSE_MODE_INHERIT
-		get_tree().paused = false
-		character_node.toggle_movement(true)
-		smoothing_enabled = true
-		CurrentLevelData.can_pause = true
+		if did_pause:
+			pause_mode = PAUSE_MODE_INHERIT
+			get_tree().paused = false
+			CurrentLevelData.can_pause = true
+		if locked_movement:
+			character_node.toggle_movement(true)
 		auto_move = true
+
+func get_character_screen_position() -> Vector2:
+	if not is_instance_valid(character_node): return global_position
+	return character_node.global_position - global_position + size

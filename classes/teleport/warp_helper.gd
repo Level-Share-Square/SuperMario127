@@ -17,27 +17,36 @@ export var set_position: bool = true
 func location_warp(character: Character, target_tag: String, max_pan_distance: int) -> void:
 	var target_teleporter: GameObject = find_teleporter(target_tag)
 	var tween: Tween
-	var do_pan: bool = teleporter.global_position.distance_to(target_teleporter.global_position) < max_pan_distance
-	if do_pan:
-		character.camera.auto_move = false
-		
-		var end_point: Vector2 = target_teleporter.global_position
-		if CurrentLevelData.vars.area_transition_helper != null and target_teleporter is AreaTransition:
-			end_point = CurrentLevelData.vars.area_transition_helper.find_camera_position(
-				target_teleporter.vertical, 
-				target_teleporter.global_position, 
-				character.camera.base_size, 
-				target_teleporter.parts * 32
-			)
-		
-		tween = Tween.new()
-		add_child(tween)
-		
-		tween.interpolate_property(character.camera, "position", null, end_point, CAMERA_TWEEN_TIME, Tween.TRANS_LINEAR, Tween.EASE_IN)
-		tween.start()
-	else:
-		transition_in(character)
-		yield(SceneTransitions, "transition_finished")
+	
+	var end_point: Vector2 = target_teleporter.global_position
+	if CurrentLevelData.vars.area_transition_helper != null and target_teleporter is AreaTransition:
+		end_point = CurrentLevelData.vars.area_transition_helper.find_camera_position(
+			target_teleporter.vertical, 
+			target_teleporter.global_position,
+			character.camera.base_size, 
+			target_teleporter.parts * 32
+		)
+	
+	var cutscene: CameraCutscene = CameraCutscene.new()
+	cutscene.cutscene_type = cutscene.Type.AUTO
+	cutscene.tween_ease = Tween.EASE_IN_OUT
+	cutscene.transition_type = Tween.TRANS_LINEAR
+	cutscene.time = CAMERA_TWEEN_TIME
+	cutscene.max_pan_distance = max_pan_distance
+	cutscene.do_time_scaling = false
+	cutscene.do_pause = false
+	cutscene.do_reverse = false
+	cutscene.lock_movement = false
+	cutscene.from_character = true
+	cutscene.set_up(teleporter, end_point, teleporter.global_position)
+	
+	if teleporter is AreaTransition:
+		cutscene.exclude_stoppers.append(teleporter.camera_stopper)
+	if target_teleporter is AreaTransition:
+		cutscene.exclude_stoppers.append(target_teleporter.camera_stopper)
+	
+	character.camera.queue_cutscene(cutscene)
+	character.camera.call_deferred("start_queue")
 	
 	yield(get_tree().create_timer(WAIT_TIME), "timeout")
 	
@@ -47,17 +56,6 @@ func location_warp(character: Character, target_tag: String, max_pan_distance: i
 		character.global_position = target_teleporter.global_position
 		character.reset_physics_interpolation()
 	
-	if do_pan:
-		yield(tween, "tween_all_completed")
-		tween.queue_free()
-		character.camera.last_position = character.camera.position
-		character.camera.auto_move = true
-	else:
-		character.camera.auto_move = true
-		character.camera.skip_to_player = true
-		character.camera.global_position = character.global_position
-		transition_out(character)
-		
 	target_teleporter.start_exit_animation(character)
 
 
@@ -154,24 +152,3 @@ func find_teleporter(target_tag: String) -> GameObject:
 		if i[0] == target_tag.to_lower() && i[1] != teleporter:
 			return i[1]
 	return teleporter
-
-
-func transition_in(character: Character) -> void:
-	# sets the transition center to Mario's position
-	SceneTransitions.canvas_mask.global_position = get_character_screen_position(character)
-	SceneTransitions.do_transition_animation(SceneTransitions.cutout_circle, SceneTransitions.DEFAULT_TRANSITION_TIME, SceneTransitions.TRANSITION_SCALE_UNCOVER, SceneTransitions.TRANSITION_SCALE_COVERED, -1, -1, false)
-
-
-func transition_out(character: Character) -> void:
-	# sets the transition center to Mario's position
-	SceneTransitions.canvas_mask.global_position = get_character_screen_position(character)
-	SceneTransitions.do_transition_animation(SceneTransitions.cutout_circle, SceneTransitions.DEFAULT_TRANSITION_TIME, SceneTransitions.TRANSITION_SCALE_COVERED, SceneTransitions.TRANSITION_SCALE_UNCOVER, -1, -1, false)
-
-
-func get_character_screen_position(character : Character) -> Vector2:
-	# Find the camera pos, clamped to its limits
-	var camera_pos = character.camera.global_position
-	camera_pos.x = clamp(camera_pos.x, character.camera.limit_left + 384, character.camera.limit_right - 216)
-	camera_pos.y = clamp(camera_pos.y, character.camera.limit_top + 384, character.camera.limit_bottom - 216)
-	# Return relative screen position
-	return character.global_position - camera_pos + Vector2(384, 216)

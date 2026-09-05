@@ -120,7 +120,7 @@ func start_entrance_animation(character: Character) -> void:
 	
 	CurrentLevelData.vars.area_transition_helper = AreaTransitionHelper.new(
 		character.velocity, 
-		character.state.name if character.state else "",
+		character.state.name if character.state and teleport_mode != TeleportMode.Location else "",
 		character.facing_direction, 
 		to_local(character.position), 
 		vertical
@@ -145,7 +145,8 @@ func start_exit_animation(character: Character) -> void:
 	
 	if is_instance_valid(helper):
 		character.velocity = helper.velocity
-		character.set_state_by_name(helper.state)
+		if helper.state != "":
+			character.set_state_by_name(helper.state)
 		character.facing_direction = helper.facing_direction
 		character.position = global_position + helper.find_exit_offset(vertical, parts * 32)
 	else:
@@ -161,4 +162,4 @@ func start_exit_animation(character: Character) -> void:
 	if not is_instance_valid(character.camera):
 		yield(get_tree(), "idle_frame")
 	
-	character.toggle_movement(not character.camera.in_cutscene)
+	character.toggle_movement(true)
