@@ -20,6 +20,8 @@ onready var shorts_template = $"%ShortsTemplate"
 onready var coin_hud = $"%CoinHUD"
 ## bro thinks he's on the team :sob:
 onready var forcefield_icon = $"%ForcefieldIcon"
+## oh shoot bro's growing his own team now
+onready var water_icon = $"%WaterIcon"
 
 func _ready():
 	#return
@@ -83,11 +85,11 @@ func _ready():
 #	twitter_icon_img.flip_y()
 #	twitter_icon_img.save_png("res://assets/artwork/twitter/twitter_icon.png")
 	
-	var shorts_template_img: Image = shorts_template.get_node("Viewport").get_texture().get_data()
-	shorts_template_img.convert(Image.FORMAT_RGBA8)
-	shorts_template_img.flip_y()
-	fix_transparency(shorts_template_img)
-	shorts_template_img.save_png("res://assets/artwork/youtube/shorts_template.png")
+#	var shorts_template_img: Image = shorts_template.get_node("Viewport").get_texture().get_data()
+#	shorts_template_img.convert(Image.FORMAT_RGBA8)
+#	shorts_template_img.flip_y()
+#	fix_transparency(shorts_template_img)
+#	shorts_template_img.save_png("res://assets/artwork/youtube/shorts_template.png")
 
 #	var coin_hud_img: Image = coin_hud.get_node("Viewport").get_texture().get_data()
 #	coin_hud_img.convert(Image.FORMAT_RGBA8)
@@ -100,6 +102,12 @@ func _ready():
 #	forcefield_img.flip_y()
 #	fix_transparency(forcefield_img)
 #	forcefield_img.save_png("res://scenes/actors/objects/forcefield/icon.png")
+
+	var water_img: Image = water_icon.get_node("Viewport").get_texture().get_data()
+	water_img.convert(Image.FORMAT_RGBA8)
+	water_img.flip_y()
+	fix_transparency(water_img)
+	water_img.save_png("res://scenes/actors/objects/water/icon.png")
 
 
 func fix_transparency(image_data: Image) -> void:

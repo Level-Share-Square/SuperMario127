@@ -1,4 +1,4 @@
-[gd_scene load_steps=115 format=2]
+[gd_scene load_steps=119 format=2]
 
 [ext_resource path="res://scenes/menu/art_assets/art_assets.gd" type="Script" id=1]
 [ext_resource path="res://scenes/menu/background_scroll/background.tscn" type="PackedScene" id=2]
@@ -299,7 +299,7 @@ void fragment() {
 	COLOR = (texture(TEXTURE, UV) + n * u_amount);
 }"
 
-[sub_resource type="ShaderMaterial" id=300]
+[sub_resource type="ShaderMaterial" id=306]
 shader = SubResource( 26 )
 shader_param/u_amount = 1.75
 
@@ -439,7 +439,7 @@ height = 32
 fill = 1
 fill_from = Vector2( 0.5, 0.5 )
 
-[sub_resource type="ShaderMaterial" id=301]
+[sub_resource type="ShaderMaterial" id=307]
 shader = SubResource( 26 )
 shader_param/u_amount = 1.75
 
@@ -479,7 +479,7 @@ void fragment() {
 	COLOR = (texture(TEXTURE, UV) + n * u_amount);
 }"
 
-[sub_resource type="ShaderMaterial" id=302]
+[sub_resource type="ShaderMaterial" id=308]
 shader = SubResource( 51 )
 shader_param/u_amount = 1.75
 
@@ -504,7 +504,7 @@ fill = 1
 fill_from = Vector2( 0.5, 0.5 )
 fill_to = Vector2( 0.5, 0 )
 
-[sub_resource type="ShaderMaterial" id=303]
+[sub_resource type="ShaderMaterial" id=309]
 shader = SubResource( 26 )
 shader_param/u_amount = 1.75
 
@@ -643,6 +643,64 @@ gradient = SubResource( 10 )
 fill = 1
 fill_from = Vector2( 0.5, 0.5 )
 fill_to = Vector2( 0.5, 0 )
+
+[sub_resource type="Shader" id=310]
+code = "shader_type canvas_item;
+
+uniform vec4 color_tint : hint_color;
+
+void fragment() {
+	vec4 screen = textureLod(SCREEN_TEXTURE, SCREEN_UV, 0.0);
+
+	screen = mix(screen, color_tint, 0.4);
+	screen.rgb = mix(vec3(0.5), screen.rgb, 1.4);
+	
+	COLOR = screen;
+}"
+
+[sub_resource type="ShaderMaterial" id=311]
+resource_local_to_scene = true
+shader = SubResource( 310 )
+shader_param/color_tint = Color( 0.278431, 0.662745, 0.85098, 1 )
+
+[sub_resource type="Shader" id=312]
+code = "shader_type canvas_item;
+
+uniform vec4 color_tint : hint_color;
+uniform float x_size;
+
+float rand(vec2 co){
+    return fract(sin(dot(co.xy ,vec2(12.9898,78.233))) * 43758.5453);
+}
+
+float sine(vec2 uv_coords, float time, float arg1, float arg2) {
+	return sin((uv_coords.x * arg1 * (x_size / 1500.0)) + time * arg2);
+}
+
+void fragment() {
+	vec4 color = textureLod(SCREEN_TEXTURE, SCREEN_UV, 0.0);
+	
+	color = mix(color, color_tint, 0.4);
+	color.rgb = mix(vec3(0.5), color.rgb, 1.4);
+	
+	float final_sine = sine(UV, TIME / 2.0f, 20.5f, 5.5f) * sine(UV, TIME / 2.0f, 15.5f, 5.5f) * sine(UV, TIME / 2.0f, 30.5f, 5.5f);
+	float sine_height = (final_sine / 5.0f) + 0.25f;
+	if (UV.y < sine_height) {
+		color.a = 0.0;
+	} else {
+		float gradient_pos = (UV.y * 2.0) - (sine_height * 2.0);
+		float mix_amount = clamp(1.0 - gradient_pos, 0.0, 1.0);
+		color.rgb = mix(color.rgb, vec3(1), mix_amount);
+	}
+	
+	COLOR = color;
+}"
+
+[sub_resource type="ShaderMaterial" id=313]
+resource_local_to_scene = true
+shader = SubResource( 312 )
+shader_param/color_tint = Color( 0.278431, 0.662745, 0.85098, 1 )
+shader_param/x_size = 1800.0
 
 [node name="ArtAssets" type="VBoxContainer"]
 script = ExtResource( 1 )
@@ -1221,7 +1279,7 @@ render_target_update_mode = 3
 rect_scale = Vector2( 3, 3 )
 
 [node name="Overlay" parent="DiscordIcon/Viewport/Background" index="3"]
-material = SubResource( 300 )
+material = SubResource( 306 )
 
 [node name="WhiteGradient" type="TextureRect" parent="DiscordIcon/Viewport"]
 modulate = Color( 0.752941, 0.752941, 1, 0.486275 )
@@ -2191,7 +2249,7 @@ render_target_update_mode = 3
 rect_scale = Vector2( 3, 3 )
 
 [node name="Overlay" parent="DiscordInvite/Viewport/Background" index="3"]
-material = SubResource( 301 )
+material = SubResource( 307 )
 
 [node name="WhiteGradient" type="TextureRect" parent="DiscordInvite/Viewport"]
 modulate = Color( 0.752941, 0.752941, 1, 0.486275 )
@@ -2235,7 +2293,7 @@ rect_scale = Vector2( 0.225, 0.225 )
 
 [node name="Overlay" parent="SplashScreen/Viewport/Background" index="3"]
 modulate = Color( 0.054902, 0.0117647, 0.152941, 0.270588 )
-material = SubResource( 302 )
+material = SubResource( 308 )
 
 [node name="Overlay" type="TextureRect" parent="SplashScreen/Viewport"]
 modulate = Color( 0.752941, 0.752941, 1, 0.486275 )
@@ -2323,7 +2381,7 @@ render_target_update_mode = 3
 rect_scale = Vector2( 3, 3 )
 
 [node name="Overlay" parent="Icon/Viewport/Background" index="3"]
-material = SubResource( 303 )
+material = SubResource( 309 )
 
 [node name="WhiteGradient" type="TextureRect" parent="Icon/Viewport"]
 modulate = Color( 0.752941, 0.752941, 1, 0.486275 )
@@ -2772,6 +2830,47 @@ margin_bottom = -1.0
 mouse_filter = 2
 texture = SubResource( 299 )
 expand = true
+
+[node name="WaterIcon" type="ViewportContainer" parent="."]
+unique_name_in_owner = true
+margin_top = 12213.0
+margin_right = 32.0
+margin_bottom = 12245.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="Viewport" type="Viewport" parent="WaterIcon"]
+size = Vector2( 32, 32 )
+handle_input_locally = false
+render_target_update_mode = 3
+
+[node name="Sprite" type="Control" parent="WaterIcon/Viewport"]
+modulate = Color( 1.25, 1.25, 1.25, 1 )
+margin_left = -16.0
+margin_right = 16.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+rect_scale = Vector2( 0.25, 0.5 )
+rect_pivot_offset = Vector2( 16, 16 )
+mouse_filter = 2
+
+[node name="Body" type="ColorRect" parent="WaterIcon/Viewport/Sprite"]
+material = SubResource( 311 )
+margin_left = -32.0
+margin_top = 15.0
+margin_right = 1768.0
+margin_bottom = 600.0
+mouse_filter = 2
+color = Color( 0.192157, 0.52549, 1, 0.47451 )
+
+[node name="Waves" type="ColorRect" parent="WaterIcon/Viewport/Sprite"]
+material = SubResource( 313 )
+margin_left = -32.0
+margin_top = -15.0
+margin_right = 1768.0
+margin_bottom = 15.0
+mouse_filter = 2
+color = Color( 0.192157, 0.52549, 1, 0.47451 )
 
 [editable path="DiscordIcon/Viewport/Background"]
 [editable path="DiscordInvite/Viewport/Background"]

@@ -7,7 +7,7 @@
 resource_local_to_scene = true
 extents = Vector2( 900, 300 )
 
-[sub_resource type="Shader" id=2]
+[sub_resource type="Shader" id=8]
 code = "shader_type canvas_item;
 
 uniform vec4 color_tint : hint_color;
@@ -23,10 +23,10 @@ void fragment() {
 
 [sub_resource type="ShaderMaterial" id=5]
 resource_local_to_scene = true
-shader = SubResource( 2 )
+shader = SubResource( 8 )
 shader_param/color_tint = Color( 0.278431, 0.662745, 0.85098, 1 )
 
-[sub_resource type="Shader" id=4]
+[sub_resource type="Shader" id=9]
 code = "shader_type canvas_item;
 
 uniform vec4 color_tint : hint_color;
@@ -61,7 +61,7 @@ void fragment() {
 
 [sub_resource type="ShaderMaterial" id=6]
 resource_local_to_scene = true
-shader = SubResource( 4 )
+shader = SubResource( 9 )
 shader_param/color_tint = Color( 0.278431, 0.662745, 0.85098, 1 )
 shader_param/x_size = 1800.0
 
