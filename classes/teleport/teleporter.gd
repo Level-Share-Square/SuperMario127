@@ -101,9 +101,9 @@ func set_transition_character_data(character: Character):
 		character.fuel = transition_character_data[3]
 		if transition_character_data[4][0] != null:
 			var powerup_node: Powerup = character.get_powerup_node(transition_character_data[4][0])
-			character.set_powerup(powerup_node, transition_character_data[4][2], transition_character_data[4][1])
-		
 		get_tree().get_current_scene().set_switch_timer(transition_character_data[5])
+		
+	CurrentLevelData.vars.transition_character_data.clear()
 
 ### MISC
 func _ready():
