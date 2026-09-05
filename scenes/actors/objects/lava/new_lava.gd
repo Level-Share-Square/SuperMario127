@@ -37,8 +37,10 @@ func update_property(key, value):
 	.update_property(key, value)
 	visual = $New if !use_old_lava else $Old
 	match(key):
-		"color" or "surface_color":
+		"color":
 			update_liquid_color(value)
+		"surface_color":
+			update_liquid_color(color)
 		"render_in_front":
 			z_index = -1 if !value else 1024 #Same as layer BackBufferCopy z-index to prevent transparency issues
 	update()
@@ -149,6 +151,7 @@ func _ready():
 
 	update_liquid_color(color)
 	update()
+
 
 func _object_ready():
 	._object_ready()
