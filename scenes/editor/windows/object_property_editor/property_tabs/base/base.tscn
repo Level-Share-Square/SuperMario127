@@ -164,5 +164,7 @@ stream = ExtResource( 12 )
 volume_db = -10.0
 bus = "Sounds"
 
+[connection signal="pressed" from="Properties/Ordering/Back" to="." method="reorder_objects" binds= [ 0 ]]
+[connection signal="pressed" from="Properties/Ordering/Front" to="." method="reorder_objects" binds= [ 1 ]]
 [connection signal="pressed" from="Properties/Ordering/FlipX" to="." method="flip_objects" binds= [ Vector2( -1, 1 ) ]]
 [connection signal="pressed" from="Properties/Ordering/FlipY" to="." method="flip_objects" binds= [ Vector2( 1, -1 ) ]]
