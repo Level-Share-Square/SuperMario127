@@ -53,6 +53,7 @@ func location_warp(character: Character, target_tag: String, max_pan_distance: i
 		character.camera.last_position = character.camera.position
 		character.camera.auto_move = true
 	else:
+		character.camera.auto_move = true
 		character.camera.skip_to_player = true
 		character.camera.global_position = character.global_position
 		transition_out(character)
