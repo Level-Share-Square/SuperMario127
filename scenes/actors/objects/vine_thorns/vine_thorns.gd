@@ -31,6 +31,7 @@ func _ready():
 	
 	if palette != 0:
 		$Sprite.texture = palette_textures[palette - 1]
+	update_parts()
 		
 func _unhandled_input(event: InputEvent) -> void:
 	parts_input_handler(event,self)
@@ -49,6 +50,7 @@ func update_parts():
 	
 	#calculate the total platform scale
 	scale_y = scale.y * (left_width + right_width + part_width * parts) / (left_width + right_width + part_width)
+	editor_rect = Rect2(sprite.rect_position, sprite.rect_size)
 
 func is_vanish(body):
 	return body.powerup != null and (body.powerup.id == "Vanish" or body.powerup.id == "Metal" or body.powerup.id == "Rainbow")

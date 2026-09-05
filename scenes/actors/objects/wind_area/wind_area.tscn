@@ -32,6 +32,7 @@ fill_to = Vector2( 0, 0 )
 [node name="Wind Area" type="Node2D"]
 z_index = 2
 script = ExtResource( 2 )
+editor_rect = Rect2( -16, -16, 32, 32 )
 internal_id = "wind_area"
 
 [node name="Sprite" type="Sprite" parent="."]

@@ -18,6 +18,7 @@
 
 [node name="StarDoor" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
+editor_rect = Rect2( -24, -20, 48, 40 )
 internal_id = "star_door"
 double_door_frames = ExtResource( 4 )
 single_door_frames = ExtResource( 16 )
@@ -45,7 +46,6 @@ animation = "wood_shine"
 [node name="RecolorableSprite" type="AnimatedSprite" parent="IconSprite" index="0"]
 visible = false
 frames = ExtResource( 5 )
-animation = "wood_shine"
 script = ExtResource( 12 )
 
 [node name="VisibilityEnabler2D" parent="." index="7"]

@@ -121,6 +121,7 @@ damping = 300.0
 color_ramp = SubResource( 5 )
 
 [node name="BreakableBlock" instance=ExtResource( 3 )]
+editor_rect = Rect2( -32, -32, 64, 64 )
 internal_id = "big_crate"
 initial_vel = 240.0
 initial_vel_random = 0.6
@@ -142,16 +143,16 @@ rect_min_size = Vector2( 64, 64 )
 rect_pivot_offset = Vector2( 32, 32 )
 texture = ExtResource( 2 )
 
-[node name="BreakAnimation" parent="." index="3"]
+[node name="BreakAnimation" parent="." index="2"]
 anims/RESET = SubResource( 2 )
 anims/break = SubResource( 1 )
 
-[node name="BreakParticles" parent="." index="4"]
+[node name="BreakParticles" parent="." index="3"]
 amount = 24
 process_material = SubResource( 8 )
 texture = ExtResource( 4 )
 
-[node name="BreakSound" type="AudioStreamPlayer2D" parent="." index="5"]
+[node name="BreakSound" type="AudioStreamPlayer2D" parent="." index="4"]
 unique_name_in_owner = true
 stream = ExtResource( 1 )
 volume_db = 6.0

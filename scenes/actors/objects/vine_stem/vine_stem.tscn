@@ -11,6 +11,7 @@
 [node name="vine" type="Node2D"]
 z_index = -2
 script = ExtResource( 1 )
+editor_rect = Rect2( -18, -32, 34, 64 )
 internal_id = "vine_stem"
 palette_textures = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ) ]
 

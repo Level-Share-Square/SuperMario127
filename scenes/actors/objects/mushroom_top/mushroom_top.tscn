@@ -179,6 +179,7 @@ extents = Vector2( 29, 9 )
 [node name="MushroomTop" type="Node2D"]
 z_index = -1
 script = ExtResource( 5 )
+editor_rect = Rect2( -32, -16, 64, 32 )
 internal_id = "mushroom_top"
 weak_bounce_sound = ExtResource( 8 )
 bounce_sound = ExtResource( 7 )

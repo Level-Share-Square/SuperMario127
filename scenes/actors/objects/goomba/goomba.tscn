@@ -5,6 +5,7 @@
 
 [node name="Goomba" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
+editor_rect = Rect2( -14, -28, 28, 28 )
 internal_id = "goomba"
 enemy_scene_path = "res://scenes/actors/objects/goomba/goomba_enemy.tscn"
 color = Color( 1, 0, 0, 1 )

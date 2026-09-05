@@ -6,6 +6,7 @@
 [node name="Net" type="Node2D"]
 z_index = -1
 script = ExtResource( 1 )
+editor_rect = Rect2( -18, -22, 36, 44 )
 internal_id = "net"
 
 [node name="Sprite" type="Sprite" parent="."]

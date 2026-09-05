@@ -332,6 +332,7 @@ tracks/2/keys = {
 
 [node name="SlingStar" type="Node2D"]
 script = ExtResource( 1 )
+editor_rect = Rect2( -24, 0, 50, 32 )
 internal_id = "sling_star"
 launch_noise = ExtResource( 5 )
 windup_noise = ExtResource( 6 )

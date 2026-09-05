@@ -27,6 +27,7 @@ func update_parts():
 		parts = 1
 	
 	sprite.rect_size.y = texture_size.y * parts
+	editor_rect = Rect2(sprite.rect_position, sprite.rect_size)
 
 func _ready():
 	if mode == 1:

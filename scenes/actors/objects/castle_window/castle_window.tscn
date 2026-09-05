@@ -7,4 +7,5 @@
 z_index = 9
 texture = ExtResource( 1 )
 script = ExtResource( 2 )
+editor_rect = Rect2( -10, -14, 20, 28 )
 internal_id = "castle_window"

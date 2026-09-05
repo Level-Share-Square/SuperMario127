@@ -5,6 +5,7 @@
 
 [node name="Bully" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
+editor_rect = Rect2( -16, -32, 32, 32 )
 internal_id = "bully"
 enemy_scene_path = "res://scenes/actors/objects/bully/bully_enemy.tscn"
 horn_color = Color( 1, 1, 0, 1 )

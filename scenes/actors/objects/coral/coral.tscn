@@ -10,6 +10,7 @@
 [node name="Coral" type="Node2D"]
 z_index = -1
 script = ExtResource( 1 )
+editor_rect = Rect2( -35, -50, 68, 54 )
 internal_id = "coral"
 palette_textures = [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 3 ), ExtResource( 6 ) ]
 

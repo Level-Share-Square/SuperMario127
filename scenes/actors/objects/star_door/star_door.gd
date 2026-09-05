@@ -108,6 +108,8 @@ func _on_property_changed(key, value):
 		})
 	if key == "required_key":
 		update_key_color()
+		
+	editor_rect = Rect2(-12, -20, 24, 40) if is_single else Rect2(-24, -20, 48, 40)
 
 func update_key_color():
 	add_suffix = true
@@ -278,3 +280,5 @@ func _ready() -> void:
 	coll = ""
 	_on_property_changed("collectible", collectible)
 	connect("property_changed", self, "_on_property_changed")
+	
+	editor_rect = Rect2(-12, -20, 24, 40) if is_single else Rect2(-24, -20, 48, 40)

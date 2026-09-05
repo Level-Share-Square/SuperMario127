@@ -539,6 +539,7 @@ extents = Vector2( 48, 28 )
 [node name="Bowser Banner" type="Node2D"]
 position = Vector2( 0, 90 )
 script = ExtResource( 3 )
+editor_rect = Rect2( -45, -93, 90, 126 )
 internal_id = "bowser_banner"
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]

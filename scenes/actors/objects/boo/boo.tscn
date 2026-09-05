@@ -137,6 +137,7 @@ radius = 17.0
 [node name="Boo" type="Node2D"]
 z_index = 12
 script = ExtResource( 1 )
+editor_rect = Rect2( -16, -16, 32, 32 )
 internal_id = "boo"
 
 [node name="AttackArea" type="Area2D" parent="."]

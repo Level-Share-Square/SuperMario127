@@ -141,6 +141,7 @@ func update_parts():
 	$VisibilityEnabler2D.rect.size.x = part_width + 224
 	
 	note.position.x = sprite.rect_size.x / 2
+	editor_rect = Rect2(sprite.rect_position + Vector2(0, -16), sprite.rect_size)
 
 func add_body_to_bounce(body):
 	blacklisted_bodies.get_or_add(body, 0.1)
