@@ -29,6 +29,7 @@ func _ready():
 	
 	var header: AreaHeader = CurrentLevelData.current_area.header
 	
+	area_name_anim.playback_speed = 0
 	if CurrentLevelData.is_new_area:
 		CurrentLevelData.is_new_area = false
 		
@@ -37,14 +38,14 @@ func _ready():
 			area_name_back_1.text = area_name.text
 			area_name_back_2.text = area_name.text
 			
+			area_name_anim.playback_speed = 1
 			area_tween = create_tween()
 			area_tween.tween_interval(area_start_delay)
 			area_tween.tween_callback(area_name_anim, "play", ["appear"])
-		else:
-			area_name_anim.playback_speed = 0
 	
 	yield(get_tree().create_timer(song_start_delay), "timeout")
 	
+	song_name_anim.playback_speed = 0
 	if Singleton.Music.song_switched:
 		Singleton.Music.song_switched = false
 		
@@ -58,12 +59,11 @@ func _ready():
 				song_name.text = header.custom_music_name
 				author_name.text = header.custom_music_author
 			
+			song_name_anim.playback_speed = 1
 			song_tween = create_tween()
 			song_tween.tween_callback(song_name_anim, "play", ["appear"])
 			song_tween.tween_interval(song_end_delay)
 			song_tween.tween_callback(song_name_anim, "play_backwards", ["appear"])
-		else:
-			song_name_anim.playback_speed = 0
 
 
 func hide_info() -> void:
