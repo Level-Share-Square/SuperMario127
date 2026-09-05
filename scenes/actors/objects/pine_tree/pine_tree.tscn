@@ -17,6 +17,7 @@ shader_param/center = Vector2( 0.5, 0.98 )
 
 [node name="PineTree" type="Node2D"]
 script = ExtResource( 8 )
+editor_rect = Rect2( -26, -74, 51, 79 )
 internal_id = "pine_tree"
 palette_textures = [ ExtResource( 5 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 6 ), ExtResource( 7 ) ]
 
