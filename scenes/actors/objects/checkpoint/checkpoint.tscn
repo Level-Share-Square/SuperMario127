@@ -22,6 +22,7 @@ height = 42.0
 [node name="Checkpoint" type="Node2D"]
 z_index = 1
 script = ExtResource( 2 )
+editor_rect = Rect2( -16, -16, 32, 32 )
 internal_id = "checkpoint"
 normal_sparkles = ExtResource( 1 )
 used_sparkles = ExtResource( 4 )

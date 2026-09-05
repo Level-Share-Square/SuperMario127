@@ -15,7 +15,6 @@
 [resource]
 script = ExtResource( 1 )
 item_name = "Awkward Wall (Right Stairs)"
-groups = PoolStringArray(  )
 change_to = "til_awkward_wall"
 items_in_sequence = 3
 index_in_sequence = 2

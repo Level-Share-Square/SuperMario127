@@ -17,7 +17,6 @@
 [resource]
 script = ExtResource( 1 )
 item_name = "Vine Stem End"
-groups = PoolStringArray( "decoration" )
 change_to = ""
 items_in_sequence = 0
 index_in_sequence = 0
@@ -25,8 +24,6 @@ icons = [ ExtResource( 12 ), ExtResource( 8 ), ExtResource( 11 ), ExtResource( 9
 previews = [ ExtResource( 7 ), ExtResource( 6 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 2 ), ExtResource( 3 ) ]
 priority = 86
 object_id = 123
-object_center = Vector2( 0, 0 )
-tile_mode_offset = Vector2( 0, 0 )
-tile_mode_step = 32
+preview_offset = Vector2( 0, 0 )
 property_overrides = {
 }

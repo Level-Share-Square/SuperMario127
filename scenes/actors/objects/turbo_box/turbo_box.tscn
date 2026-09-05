@@ -15,6 +15,7 @@ extents = Vector2( 24, 12 )
 
 [node name="TurboBox" type="Node2D"]
 script = ExtResource( 1 )
+editor_rect = Rect2( -16, -16, 32, 32 )
 internal_id = "turbo_box"
 
 [node name="Sprite" type="Sprite" parent="."]

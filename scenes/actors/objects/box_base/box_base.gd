@@ -23,7 +23,6 @@ export var resizable: bool = true
 
 onready var box = $"%Box"
 onready var box_collision = $"%BoxCollision"
-onready var editor_collision = $"%EditorCollision"
 onready var player_detector = $"%PlayerDetector"
 onready var player_collision = $"%PlayerCollision"
 onready var break_animation = $"%BreakAnimation"
@@ -89,8 +88,10 @@ func update_property(key: String, value):
 		break_particles.amount = int(float(initial_particles) * scale_factor)
 		
 		box_collision.shape = box_collision.shape.duplicate()
-		editor_collision.shape = box_collision.shape
 		box_collision.shape.extents = value / 2
+		
+		editor_rect.position = -value / 2
+		editor_rect.size = value
 	
 		# inverse scaling
 		player_detector.scale = Vector2.ONE / scale

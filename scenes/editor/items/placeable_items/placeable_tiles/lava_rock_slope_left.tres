@@ -11,7 +11,6 @@
 [resource]
 script = ExtResource( 1 )
 item_name = "Lava Rock (Left Slope)"
-groups = PoolStringArray( "special" )
 change_to = "til_lava_rock_slope_right"
 items_in_sequence = 4
 index_in_sequence = 2

@@ -23,7 +23,7 @@ func _register_properties():
 	register_property(4, "activated", activated)
 	
 func _register_property_info():
-	set_property_info("activated", PropertyInfo.new("If false, this box will be a hologram until a F.L.U.D.D. of it's type is found.\nThis information persists across level loads.", 1, -INF, INF, ["", ""], ["", ""], false, "Activated"))
+	set_property_info("activated", PropertyInfo.new("If false, this box will be a hologram until a F.L.U.D.D. nozzle of its type is found.\nThis information persists across level loads.", 1, -INF, INF, ["", ""], ["", ""], false, "Activated"))
 
 func _object_ready():
 	._object_ready()

@@ -15,7 +15,6 @@
 [resource]
 script = ExtResource( 1 )
 item_name = "Clouds (Half Tile)"
-groups = PoolStringArray( "special" )
 change_to = "til_clouds"
 items_in_sequence = 2
 index_in_sequence = 1

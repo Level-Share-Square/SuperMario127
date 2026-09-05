@@ -10,7 +10,6 @@
 [resource]
 script = ExtResource( 1 )
 item_name = "Sand (Half Tile)"
-groups = PoolStringArray( "special" )
 change_to = "til_sand_slope_left"
 items_in_sequence = 4
 index_in_sequence = 1

@@ -17,7 +17,6 @@
 [resource]
 script = ExtResource( 3 )
 item_name = "Large Snow Pillar"
-groups = PoolStringArray( "warp" )
 change_to = ""
 items_in_sequence = 0
 index_in_sequence = 0
@@ -25,8 +24,6 @@ icons = [ ExtResource( 5 ), ExtResource( 7 ), ExtResource( 6 ), ExtResource( 2 )
 previews = [ ExtResource( 1 ), ExtResource( 10 ), ExtResource( 13 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 9 ) ]
 priority = 170
 object_id = 61
-object_center = Vector2( 0, 0 )
-tile_mode_offset = Vector2( 0, 0 )
-tile_mode_step = 32
+preview_offset = Vector2( 0, 0 )
 property_overrides = {
 }

@@ -12,7 +12,6 @@
 [resource]
 script = ExtResource( 1 )
 item_name = "Cobblestone (Right Stairs)"
-groups = PoolStringArray( "special" )
 change_to = "til_cobblestone"
 items_in_sequence = 3
 index_in_sequence = 2

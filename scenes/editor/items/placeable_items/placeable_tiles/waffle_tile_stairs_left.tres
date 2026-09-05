@@ -6,7 +6,6 @@
 [resource]
 script = ExtResource( 1 )
 item_name = "Waffle Tile (Left Stairs)"
-groups = PoolStringArray(  )
 change_to = "til_waffle_tile_stairs_right"
 items_in_sequence = 3
 index_in_sequence = 1

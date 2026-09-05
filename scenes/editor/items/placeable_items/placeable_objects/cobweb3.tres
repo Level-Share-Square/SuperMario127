@@ -23,7 +23,6 @@
 [resource]
 script = ExtResource( 1 )
 item_name = "Droopy Cobweb"
-groups = PoolStringArray( "decoration" )
 change_to = ""
 items_in_sequence = 0
 index_in_sequence = 0
@@ -31,8 +30,6 @@ icons = [ ExtResource( 12 ), ExtResource( 11 ), ExtResource( 9 ), ExtResource( 1
 previews = [ ExtResource( 4 ), ExtResource( 6 ), ExtResource( 13 ), ExtResource( 7 ), ExtResource( 5 ), ExtResource( 8 ), ExtResource( 15 ), ExtResource( 19 ), ExtResource( 16 ) ]
 priority = 45
 object_id = 116
-object_center = Vector2( 0, 0 )
-tile_mode_offset = Vector2( 0, 0 )
-tile_mode_step = 32
+preview_offset = Vector2( 0, 0 )
 property_overrides = {
 }

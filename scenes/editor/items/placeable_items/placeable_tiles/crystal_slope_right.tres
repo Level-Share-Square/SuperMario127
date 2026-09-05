@@ -15,7 +15,6 @@
 [resource]
 script = ExtResource( 1 )
 item_name = "Crystal (Right Slope)"
-groups = PoolStringArray( "special" )
 change_to = "til_crystal"
 items_in_sequence = 4
 index_in_sequence = 3

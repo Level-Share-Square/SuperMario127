@@ -7,16 +7,13 @@
 [resource]
 script = ExtResource( 1 )
 item_name = "Blue Coin"
-groups = PoolStringArray( "collectables" )
-change_to = ""
+change_to = "obj_coin"
 items_in_sequence = 2
 index_in_sequence = 1
 icons = [ ExtResource( 2 ) ]
 previews = [ ExtResource( 3 ) ]
 priority = 165
 object_id = 40
-object_center = Vector2( 0, 0 )
-tile_mode_offset = Vector2( 0, 0 )
-tile_mode_step = 32
+preview_offset = Vector2( 0, 0 )
 property_overrides = {
 }

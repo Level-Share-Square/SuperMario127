@@ -15,7 +15,6 @@
 [resource]
 script = ExtResource( 1 )
 item_name = "Collectible Door"
-groups = PoolStringArray( "decoration" )
 change_to = "obj_star_door"
 items_in_sequence = 2
 index_in_sequence = 1
@@ -23,9 +22,7 @@ icons = [ ExtResource( 4 ), ExtResource( 6 ), ExtResource( 2 ), ExtResource( 3 )
 previews = [ ExtResource( 11 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 7 ), ExtResource( 8 ) ]
 priority = 51
 object_id = 113
-object_center = Vector2( 0, 0 )
-tile_mode_offset = Vector2( 0, 0 )
-tile_mode_step = 32
+preview_offset = Vector2( 0, 0 )
 property_overrides = {
 13: true
 }

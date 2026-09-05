@@ -7,16 +7,13 @@
 [resource]
 script = ExtResource( 1 )
 item_name = "Small Bottle"
-groups = PoolStringArray( "warp" )
-change_to = ""
-items_in_sequence = 0
+change_to = "obj_big_bottle"
+items_in_sequence = 2
 index_in_sequence = 0
 icons = [ ExtResource( 2 ) ]
 previews = [ ExtResource( 3 ) ]
 priority = 141
 object_id = 21
-object_center = Vector2( 0, 0 )
-tile_mode_offset = Vector2( 0, 0 )
-tile_mode_step = 32
+preview_offset = Vector2( -1, 0 )
 property_overrides = {
 }

@@ -116,13 +116,13 @@ func gui_input(event):
 			play_bounce_anim()
 
 func play_bounce_anim():
+	click_sound.play()
 	tween.stop_all()
 	tween.interpolate_property(icon_node, "rect_position:y",
 		icon_node.rect_position.y, -3, 0.075,
 		Tween.TRANS_CIRC, Tween.EASE_OUT)
 	tween.start()
 	yield(tween, "tween_completed")
-	tween.stop_all()
 	tween.interpolate_property(icon_node, "rect_position:y",
 		icon_node.rect_position.y, 1, 0.15,
 		Tween.TRANS_BOUNCE, Tween.EASE_IN)

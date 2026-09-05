@@ -17,7 +17,6 @@
 [resource]
 script = ExtResource( 1 )
 item_name = "Vine Thorns"
-groups = PoolStringArray( "decoration" )
 change_to = ""
 items_in_sequence = 0
 index_in_sequence = 0
@@ -25,8 +24,6 @@ icons = [ ExtResource( 11 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 3 
 previews = [ ExtResource( 10 ), ExtResource( 5 ), ExtResource( 4 ), ExtResource( 2 ), ExtResource( 13 ), ExtResource( 6 ) ]
 priority = 98
 object_id = 121
-object_center = Vector2( 0, 0 )
-tile_mode_offset = Vector2( 0, 0 )
-tile_mode_step = 32
+preview_offset = Vector2( 0, 0 )
 property_overrides = {
 }

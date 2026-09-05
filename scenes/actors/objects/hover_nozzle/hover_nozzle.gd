@@ -12,6 +12,7 @@ var collected = false
 var destroy_timer = 0.0
 
 var nozzle_map: Array = ["HoverNozzle", "RocketNozzle", "TurboNozzle"]
+var rect_map: Array = [Rect2(-12, -7, 24, 14), Rect2(-5, -8, 10, 16), Rect2(-8, -6, 16, 12)]
 
 var gravity: = 0.0
 var gravity_scale: = 1.0
@@ -24,7 +25,7 @@ var run_physics := true
 	
 func _register_properties():
 	register_property(4, "velocity", velocity, true)
-	register_property(5, "nozzle_type", nozzle_type, true)
+	register_property(5, "nozzle_type", nozzle_type, false)
 	set_property_override("nozzle_type", PropertyTab.OverrideTypes.ENUM, nozzle_map)
 	
 func _register_property_info():
@@ -46,6 +47,7 @@ func collect(body):
 func _ready():
 	gravity = CurrentLevelData.current_area.header.gravity
 	kinematic_body.get_node("Sprite_" + nozzle_map[nozzle_type]).visible = true
+	editor_rect = rect_map[nozzle_type]
 	
 func _object_ready():
 	if is_enabled_and_on_ground():

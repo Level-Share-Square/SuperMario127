@@ -15,7 +15,6 @@
 [resource]
 script = ExtResource( 1 )
 item_name = "Grass"
-groups = PoolStringArray( "special" )
 change_to = "til_grass_half_tile"
 items_in_sequence = 4
 index_in_sequence = 0

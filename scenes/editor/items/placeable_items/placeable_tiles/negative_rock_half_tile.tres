@@ -9,7 +9,6 @@
 [resource]
 script = ExtResource( 1 )
 item_name = "Negative Rock (Half Tile)"
-groups = PoolStringArray( "special" )
 change_to = "til_negative_rock_slope_left"
 items_in_sequence = 4
 index_in_sequence = 1

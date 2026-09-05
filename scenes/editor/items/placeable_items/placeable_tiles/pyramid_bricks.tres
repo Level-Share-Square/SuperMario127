@@ -12,7 +12,6 @@
 [resource]
 script = ExtResource( 1 )
 item_name = "Pyramid Bricks"
-groups = PoolStringArray( "special" )
 change_to = "til_pyramid_brick_stairs_left"
 items_in_sequence = 3
 index_in_sequence = 0

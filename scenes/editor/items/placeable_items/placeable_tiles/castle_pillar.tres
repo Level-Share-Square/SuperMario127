@@ -13,7 +13,6 @@
 [resource]
 script = ExtResource( 1 )
 item_name = "Castle Pillar"
-groups = PoolStringArray( "special" )
 change_to = "til_castle_pillar_horizontal"
 items_in_sequence = 2
 index_in_sequence = 0

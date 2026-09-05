@@ -10,7 +10,6 @@
 [resource]
 script = ExtResource( 1 )
 item_name = "Cabin Window"
-groups = PoolStringArray( "special" )
 change_to = ""
 items_in_sequence = 0
 index_in_sequence = 0

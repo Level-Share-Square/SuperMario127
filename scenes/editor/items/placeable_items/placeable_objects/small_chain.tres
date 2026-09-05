@@ -19,7 +19,6 @@
 [resource]
 script = ExtResource( 1 )
 item_name = "Small Chain"
-groups = PoolStringArray( "decoration" )
 change_to = "Small Chain"
 items_in_sequence = 2
 index_in_sequence = 0
@@ -27,8 +26,6 @@ icons = [ ExtResource( 2 ), ExtResource( 8 ), ExtResource( 12 ), ExtResource( 11
 previews = [ ExtResource( 4 ), ExtResource( 15 ), ExtResource( 6 ), ExtResource( 13 ), ExtResource( 10 ), ExtResource( 14 ), ExtResource( 7 ) ]
 priority = 104
 object_id = 160
-object_center = Vector2( 0, 0 )
-tile_mode_offset = Vector2( 0, 0 )
-tile_mode_step = 32
+preview_offset = Vector2( 0, 0 )
 property_overrides = {
 }

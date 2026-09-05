@@ -13,7 +13,6 @@
 [resource]
 script = ExtResource( 1 )
 item_name = "Wood Fence (Right Slope)"
-groups = PoolStringArray( "special" )
 change_to = "til_wood_fence"
 items_in_sequence = 3
 index_in_sequence = 2

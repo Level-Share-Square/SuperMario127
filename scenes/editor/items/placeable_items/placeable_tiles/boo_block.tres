@@ -6,7 +6,6 @@
 [resource]
 script = ExtResource( 1 )
 item_name = "Boo Block"
-groups = PoolStringArray( "special" )
 change_to = "til_boo_block_slope_left"
 items_in_sequence = 3
 index_in_sequence = 0

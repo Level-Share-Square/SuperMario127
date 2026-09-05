@@ -15,7 +15,6 @@
 [resource]
 script = ExtResource( 1 )
 item_name = "Locked Double Door"
-groups = PoolStringArray( "decoration" )
 change_to = "obj_locked_door_single"
 items_in_sequence = 2
 index_in_sequence = 0
@@ -23,9 +22,7 @@ icons = [ ExtResource( 2 ), ExtResource( 4 ), ExtResource( 3 ), ExtResource( 5 )
 previews = [ ExtResource( 11 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ) ]
 priority = 48
 object_id = 113
-object_center = Vector2( 0, 0 )
-tile_mode_offset = Vector2( 0, 0 )
-tile_mode_step = 32
+preview_offset = Vector2( 0, 0 )
 property_overrides = {
 9: "key"
 }

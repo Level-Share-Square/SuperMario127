@@ -70,8 +70,6 @@ var editable_properties: PoolStringArray = []
 var base_hidden_properties: PoolStringArray = []
 var property_tabs: PoolStringArray = []
 
-onready var editor_hitbox: Area2D = get_node_or_null("EditorHitbox")
-
 
 signal property_changed(key, value)
 signal object_clicked(object)

@@ -3,9 +3,6 @@ extends Resource
 
 
 export var item_name: String
-
-export var groups := PoolStringArray()
-
 export var change_to: String = self.item_name
 
 export var items_in_sequence: int = 0

@@ -7,7 +7,6 @@
 [resource]
 script = ExtResource( 1 )
 item_name = "Mushroom Body"
-groups = PoolStringArray( "warp" )
 change_to = ""
 items_in_sequence = 0
 index_in_sequence = 0
@@ -15,8 +14,6 @@ icons = [ ExtResource( 2 ) ]
 previews = [ ExtResource( 3 ) ]
 priority = 128
 object_id = 7
-object_center = Vector2( 0, 0 )
-tile_mode_offset = Vector2( 0, 0 )
-tile_mode_step = 32
+preview_offset = Vector2( 0, 0 )
 property_overrides = {
 }

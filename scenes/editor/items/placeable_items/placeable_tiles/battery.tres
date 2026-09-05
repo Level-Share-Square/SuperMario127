@@ -6,7 +6,6 @@
 [resource]
 script = ExtResource( 1 )
 item_name = "Battery"
-groups = PoolStringArray(  )
 change_to = "til_battery_stairs_left"
 items_in_sequence = 3
 index_in_sequence = 0

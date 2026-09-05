@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=273 format=2]
+[gd_resource type="Resource" load_steps=275 format=2]
 
 [ext_resource path="res://scenes/editor/items/placeable_items.gd" type="Script" id=1]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/blue_coin.tres" type="Resource" id=2]
@@ -272,6 +272,8 @@
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/locked_door_single.tres" type="Resource" id=270]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/locked_door.tres" type="Resource" id=271]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/double_door.tres" type="Resource" id=272]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/rocket_nozzle.tres" type="Resource" id=273]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/turbo_nozzle.tres" type="Resource" id=274]
 
 [resource]
 script = ExtResource( 1 )
@@ -388,6 +390,7 @@ placeable_items = {
 "obj_rex": ExtResource( 134 ),
 "obj_rock": ExtResource( 71 ),
 "obj_rocket_box": ExtResource( 39 ),
+"obj_rocket_nozzle": ExtResource( 273 ),
 "obj_sawblade": ExtResource( 114 ),
 "obj_seesaw": ExtResource( 50 ),
 "obj_shine": ExtResource( 8 ),
@@ -415,6 +418,7 @@ placeable_items = {
 "obj_touch_lift": ExtResource( 48 ),
 "obj_toxic_gas": ExtResource( 121 ),
 "obj_turbo_box": ExtResource( 40 ),
+"obj_turbo_nozzle": ExtResource( 274 ),
 "obj_twisted_tree_angle": ExtResource( 23 ),
 "obj_twisted_tree_body": ExtResource( 21 ),
 "obj_twisted_tree_top": ExtResource( 18 ),

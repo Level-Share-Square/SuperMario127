@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=58 format=2]
+[gd_resource type="Resource" load_steps=60 format=2]
 
 [ext_resource path="res://scenes/editor/items/placeable_items.gd" type="Script" id=1]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/blue_coin.tres" type="Resource" id=2]
@@ -22,8 +22,10 @@
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/on_off_touch_lift.tres" type="Resource" id=20]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/key.tres" type="Resource" id=21]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/star_door_single.tres" type="Resource" id=22]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/rocket_nozzle.tres" type="Resource" id=23]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/hover_box.tres" type="Resource" id=24]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/big_bottle.tres" type="Resource" id=25]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/turbo_nozzle.tres" type="Resource" id=26]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/pipe.tres" type="Resource" id=27]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/hover_nozzle.tres" type="Resource" id=28]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/small_bottle.tres" type="Resource" id=29]
@@ -97,6 +99,7 @@ placeable_items = {
 "obj_rainbow_powerup": ExtResource( 43 ),
 "obj_red_coin": ExtResource( 6 ),
 "obj_rocket_box": ExtResource( 39 ),
+"obj_rocket_nozzle": ExtResource( 23 ),
 "obj_shine": ExtResource( 3 ),
 "obj_shine_activator": ExtResource( 125 ),
 "obj_shine_shard": ExtResource( 8 ),
@@ -110,6 +113,7 @@ placeable_items = {
 "obj_switch_block": ExtResource( 16 ),
 "obj_toxic_gas": ExtResource( 10 ),
 "obj_turbo_box": ExtResource( 40 ),
+"obj_turbo_nozzle": ExtResource( 26 ),
 "obj_vanish_passthrough_block": ExtResource( 45 ),
 "obj_vanish_pepper": ExtResource( 36 ),
 "obj_water": ExtResource( 13 ),
