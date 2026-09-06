@@ -133,7 +133,7 @@ func interact():
 	last_player = int(page_text.substr(2, 1))
 	dialogue_obj.emit_signal("message_changed", expression, action)
 	
-	label.bbcode_text = text_replace_util.parse_text(cur_text, character)
+	label.bbcode_text = text_replace_util.parse_text(cur_text, character, CurrentLevelData.save_data, CurrentLevelData.vars, CurrentLevelData.area_id)
 	if not tween.is_active():
 		if cur_text.length() > 0: 
 			typing.play()

@@ -12,6 +12,11 @@ export var is_small: bool = false setget set_is_small
 export var holds_property: bool = true
 var text setget set_text, get_text
 
+onready var shortcut = $"%Shortcut"
+
+var cursor_line: int
+var cursor_column: int
+
 signal text_changed
 
 var text_shortcut_map: Dictionary = {
@@ -37,8 +42,13 @@ func _ready():
 	var working_map: Dictionary = text_shortcut_map.duplicate()
 	if CurrentLevelData.is_campaign: working_map.merge(campaign_text_shortcut_map)
 	
-	for shortcut in working_map:
-		$"%Shortcut".add_item(shortcut)
+	for shortcut_string in working_map:
+		shortcut.add_item(shortcut_string)
+		
+	var popup: PopupMenu = shortcut.get_popup()
+	popup.connect("id_pressed", self, "shortcut_selected")
+	popup.connect("about_to_show", self, "popup_shown")
+	popup.focus_mode = Control.FOCUS_NONE
 
 func set_text(new_value: String) -> void:
 	$"%TextEditor".text = new_value
@@ -78,8 +88,15 @@ func done_editing():
 		emit_signal("focus_exited")
 
 
+func popup_shown():
+	cursor_line = $"%TextEditor".cursor_get_line()
+	cursor_column = $"%TextEditor".cursor_get_column()
+
 func shortcut_selected(index):
+	index = shortcut.get_item_index(index)
 	var working_map: Dictionary = text_shortcut_map.duplicate()
 	if CurrentLevelData.is_campaign: working_map.merge(campaign_text_shortcut_map)
 	
+	$"%TextEditor".cursor_set_line(cursor_line)
+	$"%TextEditor".cursor_set_column(cursor_column)
 	$"%TextEditor".add_string(working_map.values()[index])

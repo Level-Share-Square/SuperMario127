@@ -232,6 +232,5 @@ bus = "Sounds"
 [connection signal="pressed" from="Modifiers/ModifierButtons/Wave" to="TextEditor" method="add_bbcode" binds= [ "wave" ]]
 [connection signal="pressed" from="Modifiers/ModifierButtons/Shake" to="TextEditor" method="add_bbcode" binds= [ "shake" ]]
 [connection signal="pressed" from="Modifiers/ModifierButtons/Rainbow" to="TextEditor" method="add_bbcode" binds= [ "rainbow" ]]
-[connection signal="item_selected" from="Modifiers/ModifierButtons/Shortcut" to="." method="shortcut_selected"]
 [connection signal="focus_exited" from="TextEditor" to="." method="done_editing"]
 [connection signal="text_changed" from="TextEditor" to="." method="emit_signal" binds= [ "text_changed" ]]
