@@ -27,7 +27,22 @@ func set_lock_axis(s_lock_axis: int) -> void:
 
 
 func _modulate_autoset() -> Color:
+	var shared = get_tree().current_scene.get_shared_node()
+	var is_beyond_frontmost: bool = false
+	
+	for i in range(shared.layers.size() -1, -1, -1):
+		var layer = shared.get_layer(shared.layers[i])
+		if layer is LevelGroundLayer:
+			break
+			
+		if layer == self:
+			is_beyond_frontmost = true
+			break
+	
+	if parallax_scroll.parallax_distance == 0 and is_beyond_frontmost:
+		return Color.white
+	
 	if parallax_scroll.parallax_distance >= 0:
-		return Color.white.darkened(0.5 + 0.45 * (1 - exp(-AUTOSET_DARKEN_GROWTH * parallax_scroll.parallax_distance)))
+		return Color.white.darkened(0.5 + 0.45 * (1 - exp(- AUTOSET_DARKEN_GROWTH * parallax_scroll.parallax_distance)))
 	else:
 		return Color.white

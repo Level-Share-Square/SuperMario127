@@ -104,6 +104,9 @@ func add_layer(layer_data = null, add_to_data: bool = false, at: int = layers.si
 
 	if at != layers.size():
 		move_layer(new_layer, at, add_to_data)
+		
+	for layer in layer_dictionary.values():
+		layer._update_modulate()
 
 	return new_layer
 
@@ -116,6 +119,7 @@ func remove_layer(uuid: String, remove_from_data: bool = false):
 		CurrentLevelData.current_area.layers.remove(get_layer_index(removed))
 		for i in range(0, CurrentLevelData.current_area.layers.size()):
 			CurrentLevelData.current_area.layers[i].layer_metadata.order = i
+			get_layer_at(i)._update_modulate()
 			get_layer_at(i).order = i
 		
 func edit_layer(uuid: String, property: String, value):
@@ -134,6 +138,7 @@ func move_layer(layer: LevelLayer, to: int, save_to_data: bool = false):
 	layers.insert(to, layer.layer_data.layer_metadata.layer_uuid)
 	for i in range(min(from, to), max(from, to) + 1):
 		get_child(i).set_order(i)
+		get_child(i)._update_modulate()
 		if save_to_data:
 			edit_layer(layer_index_to_uuid(i), "order", i)
 	emit_signal("layer_moved")
