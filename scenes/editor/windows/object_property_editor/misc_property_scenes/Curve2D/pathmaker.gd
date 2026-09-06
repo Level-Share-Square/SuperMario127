@@ -45,6 +45,7 @@ func _ready():
 			texture_node._toggle_handle_link()
 	if line.get_node("path").curve.get_point_count() < 1:
 		widget_container.hide()
+	get_tree().current_scene.path_tool_active = true
 
 func _unhandled_input(event):
 	if event is InputEventMouseButton and event.pressed and event.button_index == BUTTON_LEFT:
@@ -77,6 +78,7 @@ func _on_Tools_tool_changed():
 
 func confirm():
 	property_editor.change_property(line.get_node("path").curve)
+	get_tree().current_scene.path_tool_active = false
 	queue_free()
 
 func update_node_position(node: Node2D):

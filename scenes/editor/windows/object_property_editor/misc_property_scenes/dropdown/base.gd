@@ -41,8 +41,8 @@ func item_selected(index: int):
 		option_button.hide()
 		line_edit.show()
 		return
-	
-	change_property(lookup_table.find_key(option_button.get_item_text(index)))
+
+	change_property(lookup_table.keys()[index])
 
 func reload_lookup_table():
 	lookup_table = dropdown_args[0].call(dropdown_args[1])

@@ -61,7 +61,7 @@ scroll_horizontal_enabled = false
 [node name="MissionPrefab" parent="VBoxContainer/ScrollContainer" instance=ExtResource( 2 )]
 unique_name_in_owner = true
 margin_right = 232.0
-margin_bottom = 571.0
+margin_bottom = 573.0
 erase_disabled = true
 
 [node name="HoverSound" type="AudioStreamPlayer" parent="."]

@@ -42,6 +42,7 @@ func _click_left(_event: InputEvent, _world_pos: Vector2):
 		texture_node.set_handles_active(true)
 	if handle_link.pressed:
 		texture_node._toggle_handle_link()
+	editor.path_tool_active = true
 	update_objects_array()
 
 
@@ -61,6 +62,7 @@ func _on_Tools_tool_changed():
 	for preview in previews.get_children():
 		preview.queue_free()
 	widget_container.hide()
+	editor.path_tool_active = false
 
 
 func confirm():
@@ -70,6 +72,7 @@ func confirm():
 	action.objects = objects_array
 	action.layer = editor.layer
 	editor.action_manager.commit_action([action])
+	editor.path_tool_active = false
 	_on_Tools_tool_changed()
 
 func update_node_position(node: Node2D):
@@ -94,6 +97,7 @@ func delete_node(node : Node):
 		line.get_node("path").curve.remove_point(node_index)
 		nodes.remove(node_index)
 		update_line()
+	editor.path_tool_active = not nodes.empty()
 
 func update_line():
 	line.points = line.get_node("path").curve.get_baked_points()

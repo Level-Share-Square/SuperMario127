@@ -58,7 +58,9 @@ func on_property_changed(key, value):
 		no_mission.hide()
 
 func change_property(property: String, new_value, check_matches, save_to_data):
-	if property == "mission_uuid": .change_property(property, new_value, check_matches, save_to_data)
+	if property == "mission_uuid": 
+		.change_property(property, new_value, check_matches, save_to_data)
+		
 	
 	var old_val = selected_mission[property]
 	selected_mission[property] = new_value
@@ -83,6 +85,8 @@ func load_mission_property(object, init_val):
 
 func add_mission():
 	var new_mission_data := MissionData.new()
+	new_mission_data.shine_sort_order = CurrentLevelData.level_metadata.collectible_data.get_new_mission_sort()
+	
 	CurrentLevelData.level_metadata.collectible_data.mission_data.append(new_mission_data)
 	selected_mission = new_mission_data
 	CurrentLevelData.level_metadata.collectible_data.emit_signal("data_changed", new_mission_data)

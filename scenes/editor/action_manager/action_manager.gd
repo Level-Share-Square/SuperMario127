@@ -21,6 +21,7 @@ func commit_action(actions: Array) -> void:
 
 func undo() -> void:
 	if undo_stack.empty(): return
+	if get_tree().current_scene.path_tool_active: return
 	
 	var actions: Array = undo_stack.pop_back()
 	for action in actions:
@@ -31,6 +32,7 @@ func undo() -> void:
 
 func redo() -> void:
 	if redo_stack.empty(): return
+	if get_tree().current_scene.path_tool_active: return
 	
 	var actions: Array = redo_stack.pop_back()
 	for action in actions:
