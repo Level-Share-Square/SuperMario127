@@ -13,6 +13,7 @@ var pixel_lock = true
 var invert_pixel_lock = true
 var object_layering = true
 var focus_layer = false
+var path_tool_active = false
 
 var layer: String = ""
 
