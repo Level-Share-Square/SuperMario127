@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=11 format=2]
+[gd_resource type="Resource" load_steps=12 format=2]
 
 [ext_resource path="res://scenes/editor/items/placeable_tile.gd" type="Script" id=1]
 [ext_resource path="res://assets/tiles/log/icon.png" type="Texture" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://assets/tiles/log/palettes/5_block.png" type="Texture" id=8]
 [ext_resource path="res://assets/tiles/log/palettes/7_block.png" type="Texture" id=9]
 [ext_resource path="res://assets/tiles/log/palettes/8_block.png" type="Texture" id=10]
+[ext_resource path="res://assets/tiles/log/palettes/9_block.png" type="Texture" id=11]
 
 [resource]
 script = ExtResource( 1 )
@@ -17,7 +18,7 @@ item_name = "Log"
 change_to = "til_log_half_tile"
 items_in_sequence = 4
 index_in_sequence = 0
-icons = [ ExtResource( 2 ), ExtResource( 7 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 8 ), ExtResource( 6 ), ExtResource( 9 ), ExtResource( 10 ) ]
+icons = [ ExtResource( 2 ), ExtResource( 7 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 8 ), ExtResource( 6 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ) ]
 previews = [ ExtResource( 2 ) ]
 priority = 3
 tileset_id = 38
