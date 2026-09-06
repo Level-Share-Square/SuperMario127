@@ -500,6 +500,10 @@ static func get_new_area_code(header: AreaHeader, old_area: AreaDataOld) -> Area
 				object_layer = 0
 			else:
 				object_layer = 2
+		if (old_object.type_id == 68 ||
+			old_object.type_id == 100): # castle window, torch
+				if old_object.properties[4] == true: # is background
+					object_layer = 0
 				
 		if old_object.type_id == 29: # goomba
 			old_object.properties.resize(10)
