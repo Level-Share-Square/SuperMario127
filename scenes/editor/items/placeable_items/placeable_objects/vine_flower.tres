@@ -17,8 +17,8 @@
 [resource]
 script = ExtResource( 1 )
 item_name = "Vine Flower"
-change_to = ""
-items_in_sequence = 0
+change_to = "obj_vine_bulb"
+items_in_sequence = 6
 index_in_sequence = 0
 icons = [ ExtResource( 9 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 13 ), ExtResource( 6 ) ]
 previews = [ ExtResource( 2 ), ExtResource( 8 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 7 ), ExtResource( 10 ) ]

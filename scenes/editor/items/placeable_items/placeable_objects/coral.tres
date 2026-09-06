@@ -15,9 +15,9 @@
 [resource]
 script = ExtResource( 3 )
 item_name = "Coral"
-change_to = ""
-items_in_sequence = 0
-index_in_sequence = 0
+change_to = "obj_coral_large"
+items_in_sequence = 3
+index_in_sequence = 1
 icons = [ ExtResource( 2 ), ExtResource( 4 ), ExtResource( 11 ), ExtResource( 6 ), ExtResource( 5 ) ]
 previews = [ ExtResource( 1 ), ExtResource( 7 ), ExtResource( 9 ), ExtResource( 8 ), ExtResource( 10 ) ]
 priority = 140

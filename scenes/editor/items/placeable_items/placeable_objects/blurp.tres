@@ -7,9 +7,9 @@
 [resource]
 script = ExtResource( 1 )
 item_name = "Blurp"
-change_to = ""
-items_in_sequence = 0
-index_in_sequence = 0
+change_to = "obj_cheep_cheep"
+items_in_sequence = 2
+index_in_sequence = 1
 icons = [ ExtResource( 2 ) ]
 previews = [ ExtResource( 3 ) ]
 priority = 79

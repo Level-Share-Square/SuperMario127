@@ -15,9 +15,9 @@
 [resource]
 script = ExtResource( 1 )
 item_name = "Propeller"
-change_to = ""
-items_in_sequence = 0
-index_in_sequence = 0
+change_to = "obj_spike_trap"
+items_in_sequence = 3
+index_in_sequence = 2
 icons = [ ExtResource( 5 ), ExtResource( 9 ), ExtResource( 8 ), ExtResource( 10 ), ExtResource( 11 ) ]
 previews = [ ExtResource( 2 ), ExtResource( 4 ), ExtResource( 6 ), ExtResource( 3 ), ExtResource( 7 ) ]
 priority = 68

@@ -84,6 +84,7 @@ func change_variant():
 	if item.change_to != "":
 		var old_item = item
 		var new_item = hotbar.placeable_items.placeable_items[item.change_to]
+		hotbar.palette_selected(wrapi(palette, 0, new_item.icons.size()), self)
 		change_item(new_item)
 		var index = get_index()
 		hotbar.loadouts[hotbar.selected_loadout].pop_at(index)

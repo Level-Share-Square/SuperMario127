@@ -15,8 +15,8 @@
 [resource]
 script = ExtResource( 2 )
 item_name = "Spike Trap"
-change_to = ""
-items_in_sequence = 0
+change_to = "obj_sawblade"
+items_in_sequence = 3
 index_in_sequence = 0
 icons = [ ExtResource( 8 ), ExtResource( 9 ), ExtResource( 7 ), ExtResource( 10 ), ExtResource( 11 ) ]
 previews = [ ExtResource( 1 ), ExtResource( 3 ), ExtResource( 6 ), ExtResource( 4 ), ExtResource( 5 ) ]

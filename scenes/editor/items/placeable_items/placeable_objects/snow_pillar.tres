@@ -17,8 +17,8 @@
 [resource]
 script = ExtResource( 1 )
 item_name = "Snow Pillar"
-change_to = ""
-items_in_sequence = 0
+change_to = "obj_large_snow_pillar"
+items_in_sequence = 2
 index_in_sequence = 0
 icons = [ ExtResource( 9 ), ExtResource( 3 ), ExtResource( 7 ), ExtResource( 12 ), ExtResource( 10 ), ExtResource( 11 ) ]
 previews = [ ExtResource( 2 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 13 ), ExtResource( 8 ) ]

@@ -17,9 +17,9 @@
 [resource]
 script = ExtResource( 1 )
 item_name = "Vine Stem End"
-change_to = ""
-items_in_sequence = 0
-index_in_sequence = 0
+change_to = "obj_vine_flower"
+items_in_sequence = 6
+index_in_sequence = 5
 icons = [ ExtResource( 12 ), ExtResource( 8 ), ExtResource( 11 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 13 ) ]
 previews = [ ExtResource( 7 ), ExtResource( 6 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 2 ), ExtResource( 3 ) ]
 priority = 86
