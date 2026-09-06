@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=279 format=2]
+[gd_resource type="Resource" load_steps=280 format=2]
 
 [ext_resource path="res://scenes/editor/items/placeable_items.gd" type="Script" id=1]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/blue_coin.tres" type="Resource" id=2]
@@ -278,6 +278,7 @@
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/floral_garden_half_tile.tres" type="Resource" id=276]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/floral_garden_slope_left.tres" type="Resource" id=277]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/floral_garden_slope_right.tres" type="Resource" id=278]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/dead_tree_small.tres" type="Resource" id=279]
 
 [resource]
 script = ExtResource( 1 )
@@ -328,6 +329,7 @@ placeable_items = {
 "obj_crystal_small": ExtResource( 102 ),
 "obj_crystal_tap": ExtResource( 77 ),
 "obj_dead_tree": ExtResource( 82 ),
+"obj_dead_tree_small": ExtResource( 279 ),
 "obj_death_plane": ExtResource( 111 ),
 "obj_dialogue_trigger": ExtResource( 128 ),
 "obj_door": ExtResource( 44 ),

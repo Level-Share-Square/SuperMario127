@@ -12,7 +12,7 @@
 
 [resource]
 script = ExtResource( 1 )
-item_name = "Wood Fence (Left Slope)"
+item_name = "Picket Fence (Left Slope)"
 change_to = "til_wood_fence_slope_right"
 items_in_sequence = 3
 index_in_sequence = 1

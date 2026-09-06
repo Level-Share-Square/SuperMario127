@@ -1,8 +1,9 @@
-[gd_resource type="Resource" load_steps=36 format=2]
+[gd_resource type="Resource" load_steps=37 format=2]
 
 [ext_resource path="res://scenes/editor/items/placeable_items.gd" type="Script" id=1]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/big_net.tres" type="Resource" id=2]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/net.tres" type="Resource" id=3]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/dead_tree_small.tres" type="Resource" id=4]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/big_tree.tres" type="Resource" id=10]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/big_bush.tres" type="Resource" id=16]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/twisted_tree_top.tres" type="Resource" id=18]
@@ -57,6 +58,7 @@ placeable_items = {
 "obj_crystal_large": ExtResource( 106 ),
 "obj_crystal_small": ExtResource( 102 ),
 "obj_dead_tree": ExtResource( 82 ),
+"obj_dead_tree_small": ExtResource( 4 ),
 "obj_droopy_cobweb": ExtResource( 115 ),
 "obj_flat_cobweb": ExtResource( 118 ),
 "obj_flower_bush": ExtResource( 79 ),
