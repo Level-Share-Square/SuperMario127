@@ -1,0 +1,25 @@
+[gd_resource type="Resource" load_steps=12 format=2]
+
+[ext_resource path="res://scenes/editor/items/placeable_tile.gd" type="Script" id=1]
+[ext_resource path="res://assets/tiles/floral_garden/icons/slopeL_8.png" type="Texture" id=2]
+[ext_resource path="res://assets/tiles/floral_garden/icons/slopeL_5.png" type="Texture" id=3]
+[ext_resource path="res://assets/tiles/floral_garden/icons/slopeL_3.png" type="Texture" id=4]
+[ext_resource path="res://assets/tiles/floral_garden/icons/slopeL_2.png" type="Texture" id=5]
+[ext_resource path="res://assets/tiles/floral_garden/icons/slopeL_9.png" type="Texture" id=6]
+[ext_resource path="res://assets/tiles/floral_garden/icons/slopeL_1.png" type="Texture" id=7]
+[ext_resource path="res://assets/tiles/floral_garden/icons/slopeL_6.png" type="Texture" id=8]
+[ext_resource path="res://assets/tiles/floral_garden/icons/slopeL_7.png" type="Texture" id=9]
+[ext_resource path="res://assets/tiles/floral_garden/icons/slopeL_4.png" type="Texture" id=10]
+[ext_resource path="res://assets/tiles/floral_garden/icons/slopeL_0.png" type="Texture" id=11]
+
+[resource]
+script = ExtResource( 1 )
+item_name = "Floral Garden (Left Slope)"
+change_to = "til_floral_garden_slope_right"
+items_in_sequence = 4
+index_in_sequence = 2
+icons = [ ExtResource( 11 ), ExtResource( 7 ), ExtResource( 5 ), ExtResource( 4 ), ExtResource( 10 ), ExtResource( 3 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 2 ), ExtResource( 6 ) ]
+previews = [ ExtResource( 11 ) ]
+priority = 31
+tileset_id = 49
+tile_id = 2

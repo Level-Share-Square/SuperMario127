@@ -24,6 +24,10 @@ func update_property(key, value):
 	if is_savable_property(key):
 		update_parts()
 
+	if key == "palette":
+		sprite.texture = platform_palette_textures[value]
+		screw.texture = screw_palette_textures[value]
+
 
 
 #-------------------------------- platform logic -----------------------
@@ -36,6 +40,9 @@ onready var area = $FloorTouchArea
 onready var platform_area_collision_shape = $KinematicBody2D/Area2D/CollisionShape2D
 onready var area_collision_shape = $FloorTouchArea/CollisionShape2D
 onready var collision_shape = $KinematicBody2D/CollisionShape2D
+
+export(Array, Texture) var platform_palette_textures
+export(Array, Texture) var screw_palette_textures
 
 var buffer := -5
 

@@ -274,6 +274,10 @@
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/double_door.tres" type="Resource" id=272]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/rocket_nozzle.tres" type="Resource" id=273]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/turbo_nozzle.tres" type="Resource" id=274]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/floral_garden.tres" type="Resource" id=275]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/floral_garden_half_tile.tres" type="Resource" id=276]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/floral_garden_slope_left.tres" type="Resource" id=277]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/floral_garden_slope_right.tres" type="Resource" id=278]
 
 [resource]
 script = ExtResource( 1 )
@@ -493,6 +497,10 @@ placeable_items = {
 "til_garden_half_tile": ExtResource( 209 ),
 "til_garden_slope_left": ExtResource( 214 ),
 "til_garden_slope_right": ExtResource( 210 ),
+"til_floral_garden": ExtResource( 275 ),
+"til_floral_garden_half_tile": ExtResource( 276 ),
+"til_floral_garden_slope_left": ExtResource( 277 ),
+"til_floral_garden_slope_right": ExtResource( 278 ),
 "til_gem_block": ExtResource( 149 ),
 "til_glass": ExtResource( 150 ),
 "til_glass_slope_left": ExtResource( 239 ),

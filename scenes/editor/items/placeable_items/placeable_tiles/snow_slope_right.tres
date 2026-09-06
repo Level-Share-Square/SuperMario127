@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=8 format=2]
+[gd_resource type="Resource" load_steps=9 format=2]
 
 [ext_resource path="res://scenes/editor/items/placeable_tile.gd" type="Script" id=1]
 [ext_resource path="res://assets/tiles/snow/palette_icons/5_slopeR.png" type="Texture" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://assets/tiles/snow/right_slope_icon.png" type="Texture" id=5]
 [ext_resource path="res://assets/tiles/snow/palette_icons/2_slopeR.png" type="Texture" id=6]
 [ext_resource path="res://assets/tiles/snow/palette_icons/1_slopeR.png" type="Texture" id=7]
+[ext_resource path="res://assets/tiles/snow/palette_icons/6_slopeR.png" type="Texture" id=8]
 
 [resource]
 script = ExtResource( 1 )
@@ -14,7 +15,7 @@ item_name = "Snow (Right Slope)"
 change_to = "til_snow"
 items_in_sequence = 4
 index_in_sequence = 3
-icons = [ ExtResource( 5 ), ExtResource( 7 ), ExtResource( 6 ), ExtResource( 4 ), ExtResource( 3 ), ExtResource( 2 ) ]
+icons = [ ExtResource( 5 ), ExtResource( 7 ), ExtResource( 6 ), ExtResource( 4 ), ExtResource( 3 ), ExtResource( 2 ), ExtResource( 8 ) ]
 previews = [ ExtResource( 5 ) ]
 priority = 26
 tileset_id = 7

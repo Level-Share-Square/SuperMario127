@@ -7,6 +7,8 @@ onready var collision_shape = $StaticBody2D/CollisionShape2D
 onready var tween = $Tween
 onready var sprite = $Sprite
 
+export(Array, Texture) var palette_textures
+
 var buffer := -5
 var character = null
 var fall_on_touch := false
@@ -41,6 +43,13 @@ func _ready():
 	if mode != 1:
 		var _connect = area.connect("body_entered", self, "enter_area")
 		var _connect2 = area.connect("body_exited", self, "exit_area")
+
+	var _connect = connect("property_changed", self, "update_property")
+	update_property("palette", palette)
+
+func update_property(key: String, value):
+	if key == "palette":
+		sprite.texture = palette_textures[value]
 
 func fall_detector(body):
 

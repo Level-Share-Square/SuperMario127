@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=8 format=2]
+[gd_resource type="Resource" load_steps=9 format=2]
 
 [ext_resource path="res://scenes/editor/items/placeable_tile.gd" type="Script" id=1]
 [ext_resource path="res://assets/tiles/snow/slab_icon.png" type="Texture" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://assets/tiles/snow/palette_icons/4_slab.png" type="Texture" id=5]
 [ext_resource path="res://assets/tiles/snow/palette_icons/1_slab.png" type="Texture" id=6]
 [ext_resource path="res://assets/tiles/snow/palette_icons/5_slab.png" type="Texture" id=7]
+[ext_resource path="res://assets/tiles/snow/palette_icons/6_slab.png" type="Texture" id=8]
 
 [resource]
 script = ExtResource( 1 )
@@ -14,7 +15,7 @@ item_name = "Snow (Half Tile)"
 change_to = "til_snow_slope_left"
 items_in_sequence = 4
 index_in_sequence = 1
-icons = [ ExtResource( 2 ), ExtResource( 6 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 7 ) ]
+icons = [ ExtResource( 2 ), ExtResource( 6 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 7 ), ExtResource( 8 ) ]
 previews = [ ExtResource( 2 ) ]
 priority = 28
 tileset_id = 7

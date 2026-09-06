@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scenes/actors/objects/big_bush/big_bush.png" type="Texture" id=1]
 [ext_resource path="res://scenes/actors/objects/big_tree/decoration.gd" type="Script" id=2]
@@ -8,6 +8,9 @@
 [ext_resource path="res://scenes/actors/objects/big_bush/palettes/1/big_bush.png" type="Texture" id=6]
 [ext_resource path="res://scenes/actors/objects/big_bush/palettes/4/big_bush.png" type="Texture" id=7]
 [ext_resource path="res://scenes/actors/objects/big_bush/palettes/6/big_bush.png" type="Texture" id=8]
+[ext_resource path="res://scenes/actors/objects/big_bush/palettes/9/big_bush.png" type="Texture" id=9]
+[ext_resource path="res://scenes/actors/objects/big_bush/palettes/8/big_bush.png" type="Texture" id=10]
+[ext_resource path="res://scenes/actors/objects/big_bush/palettes/7/big_bush.png" type="Texture" id=11]
 
 [node name="BigBush" type="Node2D"]
 z_index = -1
@@ -15,9 +18,9 @@ script = ExtResource( 2 )
 editor_rect = Rect2( -44, -48, 87, 98 )
 internal_id = "big_bush"
 custom_preview_position = Vector2( 75, 145 )
-palette_textures = [ ExtResource( 6 ), ExtResource( 3 ), ExtResource( 5 ), ExtResource( 7 ), ExtResource( 4 ), ExtResource( 8 ) ]
+palette_textures = [ ExtResource( 6 ), ExtResource( 3 ), ExtResource( 5 ), ExtResource( 7 ), ExtResource( 4 ), ExtResource( 8 ), ExtResource( 11 ), ExtResource( 10 ), ExtResource( 9 ) ]
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 0, 1 )
+position = Vector2( -0.5, 1 )
 z_index = -9
 texture = ExtResource( 1 )

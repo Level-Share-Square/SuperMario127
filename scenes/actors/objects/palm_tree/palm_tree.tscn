@@ -1,17 +1,23 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scenes/actors/objects/palm_tree/palm_tree.png" type="Texture" id=1]
 [ext_resource path="res://scenes/actors/objects/big_tree/decoration.gd" type="Script" id=2]
 [ext_resource path="res://scenes/actors/objects/palm_tree/palettes/3/palm_tree.png" type="Texture" id=3]
 [ext_resource path="res://scenes/actors/objects/palm_tree/palettes/2/palm_tree.png" type="Texture" id=4]
 [ext_resource path="res://scenes/actors/objects/palm_tree/palettes/1/palm_tree.png" type="Texture" id=5]
+[ext_resource path="res://scenes/actors/objects/palm_tree/palettes/5/palm_tree.png" type="Texture" id=6]
+[ext_resource path="res://scenes/actors/objects/palm_tree/palettes/6/palm_tree.png" type="Texture" id=7]
+[ext_resource path="res://scenes/actors/objects/palm_tree/palettes/4/palm_tree.png" type="Texture" id=8]
+[ext_resource path="res://scenes/actors/objects/palm_tree/palettes/7/palm_tree.png" type="Texture" id=9]
+[ext_resource path="res://scenes/actors/objects/palm_tree/palettes/9/palm_tree.png" type="Texture" id=10]
+[ext_resource path="res://scenes/actors/objects/palm_tree/palettes/8/palm_tree.png" type="Texture" id=11]
 
 [node name="PalmTree" type="Node2D"]
 z_index = -1
 script = ExtResource( 2 )
 editor_rect = Rect2( -26, -62, 56, 62 )
 internal_id = "palm_tree"
-palette_textures = [ ExtResource( 5 ), ExtResource( 4 ), ExtResource( 3 ) ]
+palette_textures = [ ExtResource( 5 ), ExtResource( 4 ), ExtResource( 3 ), ExtResource( 8 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 9 ), ExtResource( 11 ), ExtResource( 10 ) ]
 
 [node name="Sprite" type="Sprite" parent="."]
 z_index = -9
