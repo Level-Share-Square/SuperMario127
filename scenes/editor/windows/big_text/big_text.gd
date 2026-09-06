@@ -14,6 +14,31 @@ var text setget set_text, get_text
 
 signal text_changed
 
+var text_shortcut_map: Dictionary = {
+	"character": ":char:",
+	"Character": ":Shortcut:",
+	"CHARACTER": ":CHAR:",
+	"Shine Count": ":shinecount:",
+	"Star Coin Count": ":starcoincount:",
+	"Coin Count": ":coincount:",
+	"Red Coin Count": ":redcoincount:",
+	"Shine Shard Count": ":shineshardcount:",
+	"Purple Starbit Count": ":starbitcount:",
+	"Wing Inputs": ":winginputs:",
+	"Jump Input": ":jumpinput:"
+}
+
+var campaign_text_shortcut_map: Dictionary = {
+	"Total Shine Count": ":tshinecount:",
+	"Total Star Coin Count": ":tstarcoincount:"
+}
+
+func _ready():
+	var working_map: Dictionary = text_shortcut_map.duplicate()
+	if CurrentLevelData.is_campaign: working_map.merge(campaign_text_shortcut_map)
+	
+	for shortcut in working_map:
+		$"%Shortcut".add_item(shortcut)
 
 func set_text(new_value: String) -> void:
 	$"%TextEditor".text = new_value
@@ -27,8 +52,8 @@ func set_show_name(new_value: bool) -> void:
 
 func set_show_char(new_value: bool) -> void:
 	show_char = new_value
-	get_node("%Char").visible = new_value
-	get_node("%CharVSeparator").visible = new_value
+	get_node("%Shortcut").visible = new_value
+	get_node("%ShortcutVSeparator").visible = new_value
 
 func set_is_small(new_value: bool) -> void:
 	is_small = new_value
@@ -51,3 +76,10 @@ func done_editing():
 		change_property($"%TextEditor".text)
 	else:
 		emit_signal("focus_exited")
+
+
+func shortcut_selected(index):
+	var working_map: Dictionary = text_shortcut_map.duplicate()
+	if CurrentLevelData.is_campaign: working_map.merge(campaign_text_shortcut_map)
+	
+	$"%TextEditor".add_string(working_map.values()[index])
