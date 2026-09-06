@@ -60,6 +60,12 @@ func get_mission_by_uuid(uuid: String) -> MissionData:
 			return mission
 	return null
 	
+func get_new_mission_sort() -> int:
+	if mission_data.empty(): return 0
+	var sorted_mission_data: Array = mission_data.duplicate()
+	sorted_mission_data.sort_custom(MissionData, "sort_by_order")
+	return sorted_mission_data.back().shine_sort_order + 1
+	
 func add_star_coin(uuid: String = "") -> StarCoinData:
 	var data := StarCoinData.new(uuid_util.v4() if not uuid else uuid)
 

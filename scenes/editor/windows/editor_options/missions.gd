@@ -102,6 +102,8 @@ func refresh_buttons():
 
 func on_new_mission_pressed():
 	var new_mission_data := MissionData.new()
+	new_mission_data.shine_sort_order = CurrentLevelData.level_metadata.collectible_data.get_new_mission_sort()
+	
 	CurrentLevelData.level_metadata.collectible_data.mission_data.append(new_mission_data)
 	on_mission_selected(new_mission_data)
 	refresh_buttons()
