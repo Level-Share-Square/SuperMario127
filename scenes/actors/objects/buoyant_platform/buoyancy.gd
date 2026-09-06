@@ -8,14 +8,14 @@ var buoyancy_point:= preload("res://scenes/actors/objects/buoyant_platform/Buoya
 var point_area : Area2D
 var num_shapes = 0
 
-export var float_force : float = 400.0
+export var float_force : float = 270.0
 
 
 func init_physics():
 	shape = collision.shape
 	var parent = get_parent()
 	if parent.mode != 1 and parent.physics_enabled and parent.is_on_ground_layer():
-		num_shapes = parent.parts + 1
+		num_shapes = (parent.parts + 1) * 2
 		sleeping = false
 		point_area = buoyancy_point.instance()
 		add_child(point_area)
@@ -44,7 +44,8 @@ func buoyancy_point_submerged(area_rid: RID, area: Area, area_shape_index: int, 
 	var dif = local_shape_node.position
 	add_force(dif, Vector2(0, -float_force/num_shapes))
 	dif = local_shape_node.global_position - global_position
-	linear_velocity += Vector2(rotation_degrees/90 * abs(dif.x), 0)/num_shapes
+	linear_velocity += Vector2(rotation_degrees/90 * abs(dif.x) * 10, 0)/num_shapes
+	#gravity_scale = 1
 	pass
 	
 func buoyancy_point_surfaced(area_rid: RID, area: Area, area_shape_index: int, local_shape_index: int):
@@ -54,5 +55,6 @@ func buoyancy_point_surfaced(area_rid: RID, area: Area, area_shape_index: int, l
 	var dif = local_shape_node.global_position - global_position
 	dif = local_shape_node.position
 	add_force(dif, Vector2(0, float_force/num_shapes))
+	#gravity_scale = 7
 		
 	

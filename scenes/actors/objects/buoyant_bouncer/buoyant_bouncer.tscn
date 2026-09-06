@@ -31,9 +31,9 @@ unique_name_in_owner = true
 
 [node name="Sprite" type="NinePatchRect" parent="BuoyancyController"]
 margin_left = -28.0001
-margin_top = -18.9999
+margin_top = -23.9999
 margin_right = 35.9999
-margin_bottom = 15.0001
+margin_bottom = 10.0001
 texture = ExtResource( 6 )
 
 [node name="bouncecol" type="Area2D" parent="BuoyancyController"]
