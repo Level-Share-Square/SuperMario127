@@ -37,9 +37,15 @@ func _start_check(_delta):
 	return character.check_liquid(LiquidBase.LiquidType.Water) and !(character.powerup != null and character.powerup.id == "Metal")
 
 func _start(_delta):
+	if character.anim_player.is_playing(): #fix for launch star causing swimming rotation to bug out.
+		if character.anim_player.current_animation == "triple_jump" or character.anim_player.current_animation == "triple_jump_right":
+			character.anim_player.stop(false)
+	if character.sprite.rotation == 0:
+		character.sprite.rotation = 0.01 * character.facing_direction
+
 	if abs(character.sprite.rotation) > PI:
 		character.sprite.rotation = 0
-	
+
 	LastInputDevice.rumble(0.25, 0.4, 0.2)
 	character.sound_player.play_water_enter_sound()
 	character.sound_player.set_swim_playing(true)
@@ -151,9 +157,10 @@ func _update(delta):
 	else:
 		character.velocity = character.velocity.move_toward(Vector2(), fps_util.PHYSICS_DELTA * (240 if (abs(character.velocity.x) <= base_swim_speed and abs(character.velocity.y) <= base_swim_speed) else 480))
 
-	if abs(sprite.rotation) > PI:
+	if abs(sprite.rotation) > PI + 0.01: #account for floating point error to prevent rapid flipping
 		sprite.rotation = -sprite.rotation
-
+	sprite.rotation = clamp(sprite.rotation, -PI, PI)
+	#print(sprite.rotation)
 	character.facing_direction = sign(sprite.rotation)
 	sprite.animation = "swimming" if boost_time_left <= 0 else "spinning" 
 
