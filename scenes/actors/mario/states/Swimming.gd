@@ -40,6 +40,8 @@ func _start(_delta):
 	if character.anim_player.is_playing(): #fix for launch star causing swimming rotation to bug out.
 		if character.anim_player.current_animation == "triple_jump" or character.anim_player.current_animation == "triple_jump_right":
 			character.anim_player.stop(false)
+			character.sprite.rotation = character.velocity.angle() + (PI / 2)
+	
 	if character.sprite.rotation == 0:
 		character.sprite.rotation = 0.01 * character.facing_direction
 
