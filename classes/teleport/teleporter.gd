@@ -90,7 +90,7 @@ func finish_exit_animation(character: Character) -> void:
 
 func set_transition_character_data(character: Character):
 	var transition_character_data = CurrentLevelData.vars.transition_character_data
-	
+
 	if transition_character_data.size() > 0:
 		character.health = transition_character_data[0]
 		character.health_shards = transition_character_data[1]
@@ -101,6 +101,7 @@ func set_transition_character_data(character: Character):
 		character.fuel = transition_character_data[3]
 		if transition_character_data[4][0] != null:
 			var powerup_node: Powerup = character.get_powerup_node(transition_character_data[4][0])
+			character.set_powerup(powerup_node, transition_character_data[4][2], transition_character_data[4][1])
 		get_tree().get_current_scene().set_switch_timer(transition_character_data[5])
 		
 	CurrentLevelData.vars.transition_character_data.clear()

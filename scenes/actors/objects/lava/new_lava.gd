@@ -157,6 +157,7 @@ func _object_ready():
 	._object_ready()
 	liquid_area.monitoring = is_enabled_and_on_ground()
 	liquid_area.monitorable = is_enabled_and_on_ground()
+	body_collision.disabled = not is_enabled_and_on_ground()
 
 
 func _editor_ready() -> void:
