@@ -5,7 +5,7 @@ const PLAYER_ID: int = 0
 
 onready var bg := $BG
 onready var stick_container := $StickContainer
-onready var bounds: float = (rect_size.x / 2) - margin_left
+onready var bounds: float = (rect_size.x / 2) - margin_left - $StickContainer/Stick.rect_min_size.x/2
 
 export var opacity: float = 160
 export var pressed_opacity: float = 128

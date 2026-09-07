@@ -163,6 +163,7 @@ stretch_mode = 6
 flip_v = true
 
 [node name="Fludd" type="TouchScreenButton" parent="."]
+visible = false
 position = Vector2( 676, 226 )
 scale = Vector2( 0.6, 0.6 )
 normal = SubResource( 9 )
