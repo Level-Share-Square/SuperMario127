@@ -500,10 +500,16 @@ static func get_new_area_code(header: AreaHeader, old_area: AreaDataOld) -> Area
 				object_layer = 0
 			else:
 				object_layer = 2
-		if (old_object.type_id == 68 ||
-			old_object.type_id == 100): # castle window, torch
-				if old_object.properties[4] == true: # is background
-					object_layer = 0
+		if old_object.type_id == 68:
+			if old_object.properties[4] == true: # is background
+				object_layer = 0
+		if old_object.type_id == 100: # castle window, torch
+			if old_object.properties[4] is bool and old_object.properties[4] == true: # is background
+				object_layer = 0
+				old_object.properties[4] = 3
+				old_area.objects.append(old_object)
+			elif old_object.properties[4] is int:
+				object_layer = 3
 				
 		if old_object.type_id == 29: # goomba
 			old_object.properties.resize(10)
@@ -559,6 +565,10 @@ static func get_new_area_code(header: AreaHeader, old_area: AreaDataOld) -> Area
 			property_dictionary
 		)
 		layers[object_layer].object_data.append(new_object)
+		
+		if old_object.type_id == 100:
+			old_object.properties.insert(5, object_layer)
+			old_object.properties.push_front(position)
 	
 	area_data.layers = layers.values()
 	
