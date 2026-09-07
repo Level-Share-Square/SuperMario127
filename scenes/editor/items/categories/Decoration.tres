@@ -1,9 +1,11 @@
-[gd_resource type="Resource" load_steps=37 format=2]
+[gd_resource type="Resource" load_steps=39 format=2]
 
 [ext_resource path="res://scenes/editor/items/placeable_items.gd" type="Script" id=1]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/big_net.tres" type="Resource" id=2]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/net.tres" type="Resource" id=3]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/dead_tree_small.tres" type="Resource" id=4]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/small_chain.tres" type="Resource" id=5]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/chain.tres" type="Resource" id=6]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/big_tree.tres" type="Resource" id=10]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/big_bush.tres" type="Resource" id=16]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/twisted_tree_top.tres" type="Resource" id=18]
@@ -50,6 +52,7 @@ placeable_items = {
 "obj_castle_window": ExtResource( 65 ),
 "obj_cave_plant": ExtResource( 63 ),
 "obj_cave_tree": ExtResource( 54 ),
+"obj_chain": ExtResource( 6 ),
 "obj_cobweb": ExtResource( 108 ),
 "obj_coral": ExtResource( 89 ),
 "obj_coral_large": ExtResource( 99 ),
@@ -70,6 +73,7 @@ placeable_items = {
 "obj_palm_tree": ExtResource( 69 ),
 "obj_pine_tree": ExtResource( 62 ),
 "obj_small_bush": ExtResource( 22 ),
+"obj_small_chain": ExtResource( 5 ),
 "obj_snow_tree": ExtResource( 26 ),
 "obj_torch": ExtResource( 98 ),
 "obj_twisted_tree_angle": ExtResource( 23 ),

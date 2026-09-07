@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=41 format=2]
+[gd_resource type="Resource" load_steps=42 format=2]
 
 [ext_resource path="res://scenes/editor/items/placeable_items.gd" type="Script" id=1]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/big_barrel.tres" type="Resource" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/big_crate.tres" type="Resource" id=5]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/barrel.tres" type="Resource" id=6]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/forcefield.tres" type="Resource" id=7]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/breakable_block.tres" type="Resource" id=8]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/mushroom_body.tres" type="Resource" id=9]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/mushroom_top.tres" type="Resource" id=11]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/mushroom_curve.tres" type="Resource" id=12]
@@ -49,6 +50,7 @@ placeable_items = {
 "obj_big_crate": ExtResource( 5 ),
 "obj_bone_platform": ExtResource( 20 ),
 "obj_bowser_banner": ExtResource( 105 ),
+"obj_breakable_block": ExtResource( 8 ),
 "obj_buoyant_bouncer": ExtResource( 146 ),
 "obj_buoyant_platform": ExtResource( 144 ),
 "obj_cave_spore": ExtResource( 68 ),

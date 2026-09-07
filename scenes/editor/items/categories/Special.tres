@@ -29,9 +29,9 @@
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/pipe.tres" type="Resource" id=27]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/hover_nozzle.tres" type="Resource" id=28]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/small_bottle.tres" type="Resource" id=29]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/layer_changer.tres" type="Resource" id=30]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/rainbow_breakable_block.tres" type="Resource" id=31]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/metal_powerup.tres" type="Resource" id=32]
-[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/breakable_block.tres" type="Resource" id=35]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/vanish_pepper.tres" type="Resource" id=36]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/rocket_box.tres" type="Resource" id=39]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/turbo_box.tres" type="Resource" id=40]
@@ -66,7 +66,6 @@ placeable_items = {
 "obj_area_transition": ExtResource( 112 ),
 "obj_big_bottle": ExtResource( 25 ),
 "obj_blue_coin": ExtResource( 2 ),
-"obj_breakable_block": ExtResource( 35 ),
 "obj_cannon": ExtResource( 7 ),
 "obj_checkpoint": ExtResource( 100 ),
 "obj_coin": ExtResource( 5 ),
@@ -79,6 +78,7 @@ placeable_items = {
 "obj_key": ExtResource( 21 ),
 "obj_launch_star": ExtResource( 104 ),
 "obj_lava": ExtResource( 9 ),
+"obj_layer_changer": ExtResource( 30 ),
 "obj_level_entrance": ExtResource( 4 ),
 "obj_locked_door": ExtResource( 271 ),
 "obj_locked_door_single": ExtResource( 270 ),
