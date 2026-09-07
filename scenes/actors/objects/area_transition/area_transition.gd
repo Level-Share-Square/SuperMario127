@@ -136,7 +136,6 @@ func start_entrance_animation(character: Character) -> void:
 
 func start_exit_animation(character: Character) -> void:
 	.start_exit_animation(character)
-	disconnect("exit_completed", self, "finish_exit_animation")
 	
 	is_idle = false
 	entering = false
