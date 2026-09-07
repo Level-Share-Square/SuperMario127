@@ -44,7 +44,7 @@ func check_validity()-> void:
 
 		ValidityCheckTypes.INIT: # For initialisation cases
 			vars = LevelVars.new()
-			level_code = level_list_util.load_level_code_file(DEFAULT_CODE_PATH)
+			level_code = load(CurrentLevelData.DEFAULT_CODE_PATH).contents
 			full_check()
 
 		ValidityCheckTypes.NONE:
@@ -557,7 +557,7 @@ func load_in(code: String)-> void:
 func full_check()-> void:
 
 	if level_code == "":
-		level_code = level_list_util.load_level_code_file(DEFAULT_CODE_PATH)
+		level_code = load(CurrentLevelData.DEFAULT_CODE_PATH).contents
 
 	load_in(level_code)
 

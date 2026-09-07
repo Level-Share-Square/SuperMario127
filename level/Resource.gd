@@ -3,3 +3,4 @@ extends Resource
 
 
 export var contents : String
+

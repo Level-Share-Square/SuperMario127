@@ -37,7 +37,7 @@ func _init(code: String = "", skip: bool = false):
 	if (skip):
 		return
 	if code == "":
-		code = level_list_util.load_level_code_file(DEFAULT_CODE_PATH)
+		code = load(CurrentLevelData.DEFAULT_CODE_PATH).contents
 
 
 func get_area(result) -> AreaDataOld:

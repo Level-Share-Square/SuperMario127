@@ -65,7 +65,7 @@ func reload_areas():
 
 func create_area():
 	if CurrentLevelData.area_headers.size() != 32:
-		var area_code = level_list_util.load_level_code_file(CurrentLevelData.DEFAULT_AREA_PATH)
+		var area_code = load(CurrentLevelData.DEFAULT_AREA_PATH).contents
 		var area = LevelCodeDeserializer.deserialize_area_header_code(area_code)
 		
 		var action := AddAreaAction.new()
