@@ -115,6 +115,9 @@ func _ready():
 	CurrentLevelData.vars.teleporters.append([tag.to_lower(), self])
 
 func begin_warp(character: Character) -> void:
+	timer_manager = get_node("/root").get_node("Player").get_timer_manager()
+	warp_helper.timer_manager = timer_manager
+	
 	match teleport_mode:
 		TeleportMode.Location:
 			warp_helper.location_warp(character, tag, max_pan_distance)

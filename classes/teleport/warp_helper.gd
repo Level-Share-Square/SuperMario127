@@ -60,20 +60,10 @@ func location_warp(character: Character, target_tag: String, max_pan_distance: i
 
 
 func area_warp(character: Character, target_tag: String, target_area: int) -> void:
-#	if is_instance_valid(timer_manager):
-#		if (area_id == CurrentLevelData.current_area):
-#
-#			var area_timer: Control = timer_manager.get_timer("area_timer")
-#
-#			if (is_instance_valid(area_timer) && area_timer.time < .65):
-#				# Don't chage the area if the area timer is too low.
-#				# Ideally the time left would just be carried over after reloading the area.
-#				# This only happens when the player teleports from and to the same area.
-#				return
-#		else:
-#			timer_manager.remove_timer("area_timer")
-#	else:
-#		printerr("Couldn't find timer manager node!")
+	if is_instance_valid(timer_manager):
+		timer_manager.remove_timer("area_timer")
+	else:
+		printerr("Couldn't find timer manager node!")
 	
 	# band aid crash fix
 	while CurrentLevelData.vars.liquid_positions.size() <= CurrentLevelData.area_id:

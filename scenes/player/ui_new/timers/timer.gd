@@ -59,8 +59,9 @@ func _physics_process(delta):
 	
 	var player = get_node("/root").get_node("Player").get_node(get_node("/root").get_node("Player").character)
 	# justt in case the timer is set again right after running out
-	if not is_counting and time > 0 && !player.shine_cutscene:
-		cancel_time_over()
+	# causing some issues with area changes, re-enable if need be
+	#if not is_counting and time > 0 && !player.shine_cutscene:
+	#	cancel_time_over()
 	
 	if is_counting:
 		death_sound_timer.paused = false
