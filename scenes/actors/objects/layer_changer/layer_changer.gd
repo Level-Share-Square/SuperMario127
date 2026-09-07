@@ -42,7 +42,7 @@ func _register_property_info():
 	set_property_info("stops_camera", PropertyInfo.new("Whether or not this object should stop the camera.\nDepends on parts.", 1, -INF, INF, ["", ""], ["", ""]))
 	set_property_info("vertical", PropertyInfo.new("Whether or not the object should extend vertically.", 1, -INF, INF, ["", ""], ["", ""]))
 	set_property_info("layer_uuid", PropertyInfo.new("The layer that will be affected by this object.", 1, -INF, INF, ["", ""], ["", ""]))
-	set_property_info("parallax_distance", PropertyInfo.new("How far away this layer will be. Negative values are closer.", 1, -1000, 1000, ["", ""], ["", ""]))
+	set_property_info("parallax_distance", PropertyInfo.new("How far away this layer will be. Negative values are closer.", 1, -4000, 4000, ["", ""], ["", ""]))
 	set_property_info("tint", PropertyInfo.new("The color modulation of this layer.", 1, -INF, INF, ["", ""], ["", ""]))
 	set_property_info("opacity", PropertyInfo.new("How transparent this layer will be.", 0.05, 0, 1, ["", ""], ["", ""]))
 	set_property_info("is_visible", PropertyInfo.new("Whether or not to hide this layer after interacting.", 1, -INF, INF, ["", ""], ["", ""]))

@@ -58,7 +58,7 @@ func load_base_properties():
 	parallax.load_property(editor, get_property_value("parallax_distance"), [
 		"parallax_distance",
 		TYPE_REAL,
-		PropertyInfo.new(parallax.hint_tooltip, 1, -1000, 1000)
+		PropertyInfo.new(parallax.hint_tooltip, 1, -4000, 4000)
 	])
 	connect_signals(parallax)
 	parallax.visible = not layer_data.layer_metadata.is_ground

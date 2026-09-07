@@ -53,8 +53,8 @@ func set_lock_axis(s_lock_axis: int) -> void:
 func _update_scroll() -> void:
 	var canvas_scale: Vector2 = get_canvas_transform().get_scale()
 	var canvas_offset: Vector2 = screen_offset / (canvas_scale)
-	var scroll_scale: float = (parallax_distance / DISTANCE_SCALE) * canvas_scale.x
-	scroll_scale = min(1.0 - exp(-scroll_scale), lerp(1.0 - exp(-scroll_scale), exp(-scroll_scale) / 4, 0.5))
+	var scroll_scale: float = (parallax_distance / DISTANCE_SCALE)# * (1.0 / canvas_scale.x)
+	scroll_scale = 1.0 - exp(-scroll_scale)
 
 	
 	var cur_lock_mask: Vector2 = LOCK_MASKS[lock_axis]
