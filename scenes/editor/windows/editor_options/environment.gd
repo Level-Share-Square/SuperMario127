@@ -153,3 +153,11 @@ func action(property: String, new_value) -> void:
 	action.shared = editor.get_shared_node()
 	action.new_value = new_value
 	editor.action_manager.commit_action([action])
+	
+	if (property == "sky" or
+		property == "background" or
+		property == "background_palette") and CurrentLevelData.area_id == 0:
+			CurrentLevelData.level_metadata.level_thumbnail_sky = CurrentLevelData.area_headers[0].sky
+			CurrentLevelData.level_metadata.level_thumbnail_background = CurrentLevelData.area_headers[0].background
+			CurrentLevelData.level_metadata.level_thumbnail_background_palette = CurrentLevelData.area_headers[0].background_palette
+			editor.get_node("%LevelSettingsWindow").update_thumb_texture()
