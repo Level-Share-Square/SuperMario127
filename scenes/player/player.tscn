@@ -29,7 +29,7 @@
 [ext_resource path="res://assets/fonts/New Super Mario Font U.ttf" type="DynamicFontData" id=27]
 [ext_resource path="res://scenes/player/ui_new/shine/shine_get.gd" type="Script" id=28]
 [ext_resource path="res://scenes/player/ui_new/collectibles/purple_starbits.gd" type="Script" id=29]
-[ext_resource path="res://scenes/player/ui_new/touch/gesture_controls.tscn" type="PackedScene" id=30]
+[ext_resource path="res://scenes/player/ui_new/touch/touch_controls.tscn" type="PackedScene" id=30]
 [ext_resource path="res://scenes/player/ui_new/collectibles/show_max_purples.gd" type="Script" id=31]
 [ext_resource path="res://scenes/player/photo_mode_updater.gd" type="Script" id=32]
 [ext_resource path="res://scenes/player/photo_mode.gd" type="Script" id=33]
@@ -3092,7 +3092,7 @@ text = "0"
 align = 1
 valign = 1
 
-[node name="GestureControls" parent="UIOver" instance=ExtResource( 30 )]
+[node name="TouchControls" parent="UIOver" instance=ExtResource( 30 )]
 visible = false
 __meta__ = {
 "_edit_lock_": true
