@@ -25,7 +25,7 @@ onready var loaded_boo_texture_invis = load(boo_block_texture_invis)
 signal layer_added(layer)
 signal layer_moved
 signal layer_type_changed(layer_data)
-signal layer_edited
+signal layer_edited(uuid, property, value)
 signal found_origin
 signal loaded_layers
 
