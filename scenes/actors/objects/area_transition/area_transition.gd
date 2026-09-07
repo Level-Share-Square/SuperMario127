@@ -132,6 +132,8 @@ func start_entrance_animation(character: Character) -> void:
 	character.sprite.rotation = sprite_rotation
 	
 	begin_warp(character)
+	
+	is_idle = true
 
 
 func start_exit_animation(character: Character) -> void:
