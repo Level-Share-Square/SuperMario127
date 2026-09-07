@@ -1,14 +1,15 @@
-extends Control
+extends MarginContainer
+
 
 const PLAYER_ID: int = 0
 
+onready var bg := $BG
+onready var stick_container := $StickContainer
+onready var bounds: float = (rect_size.x / 2) - margin_left
+
 export var opacity: float = 160
-export var pressed_opacity: float = 64
-
+export var pressed_opacity: float = 128
 export var lerp_speed: float = 32.0
-export var bounds: float
-export var touch_grace: float
-
 
 export var x_threshold: float = 0.35
 export var y_threshold: float = 0.35
@@ -17,21 +18,20 @@ export var y_threshold: float = 0.35
 export var x_actions: Array
 export var y_actions: Array
 
-
-onready var bg := $BG
-onready var stick := $Stick
-
-
 var visual_pos: Vector2
 var input_pos: Vector2
 var start_finger: int
 var pressed: bool
 
 
-func _input(event):
+func _gui_input(event):
 	if event is InputEventScreenTouch:
+		var true_bounds: float = bounds * ((rect_scale.x + rect_scale.y)/2)
+		var center_position: Vector2 = rect_size / 2
+		
 		if event.pressed:
-			if not pressed and rect_position.distance_to(event.position) < bounds + touch_grace:
+			prints((rect_size.x / 2) - margin_left)
+			if not pressed:
 				start_finger = event.index
 				pressed = true
 		else:
@@ -42,8 +42,7 @@ func _input(event):
 			if pressed:
 				move_stick(event.position)
 			else:
-				move_stick(rect_position)
-	
+				move_stick(center_position)
 	
 	if event is InputEventScreenDrag:
 		if pressed and event.index == start_finger:
@@ -51,11 +50,8 @@ func _input(event):
 
 
 func move_stick(pos: Vector2):
-	input_pos = pos - rect_position
-	input_pos = input_pos.limit_length(bounds)
-	
-	visual_pos = input_pos
-	visual_pos -= stick.rect_size / 2
+	input_pos = (pos - rect_size/2).limit_length(bounds)
+	visual_pos = input_pos + rect_size/2
 
 
 func commit_action(action_name: String, is_pressed: bool):
@@ -67,17 +63,16 @@ func commit_action(action_name: String, is_pressed: bool):
 
 
 func _ready():
-	move_stick(rect_position)
+	move_stick(rect_size / 2)
 
 
 var last_input_dir: Vector2
 func _process(delta):
-	stick.rect_position = stick.rect_position.linear_interpolate(visual_pos, delta * lerp_speed)
-	modulate.a = lerp(modulate.a, (pressed_opacity / 256) if pressed else (opacity / 256), delta * lerp_speed)
+	stick_container.rect_position = stick_container.rect_position.linear_interpolate(visual_pos, delta * lerp_speed)
+	modulate.a = lerp(modulate.a, (pressed_opacity / 256) if pressed else 1.0, delta * lerp_speed)
 	
-	
-	
-	var normalized_input = input_pos / bounds
+	var true_bounds: float = bounds * ((rect_scale.x + rect_scale.y)/2)
+	var normalized_input = input_pos / true_bounds
 	var input_dir: Vector2
 	
 	input_dir.x -= int(normalized_input.x < -x_threshold)
