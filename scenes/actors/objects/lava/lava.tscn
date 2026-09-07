@@ -271,7 +271,6 @@ texture = ExtResource( 9 )
 
 [node name="Old" type="Node2D" parent="." index="3"]
 visible = false
-z_index = -1
 
 [node name="Body" type="ColorRect" parent="Old" index="0"]
 light_mask = 0
