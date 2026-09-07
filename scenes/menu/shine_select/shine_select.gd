@@ -66,6 +66,8 @@ func _ready():
 		else:
 			fludd.connect("pressed", self, "select_nozzle", [fludd.name])
 		
+		prints(fludd.name, fludd_index)
+		
 		fludd_index += 1
 	
 	update_character()

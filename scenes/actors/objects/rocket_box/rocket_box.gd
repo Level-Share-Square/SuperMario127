@@ -38,7 +38,7 @@ func _object_ready():
 		
 		var _connect3 = detector.connect("body_entered", self, "enter_detector")
 		
-	if !activated and !CurrentLevelData.vars.is_fludd_activated(2):
+		if !activated and !CurrentLevelData.vars.is_fludd_activated(1):
 			CurrentLevelData.vars.connect("rocket_fludd_activated", self, "_on_fludd_activated", [], CONNECT_ONESHOT)
 			sprite.modulate.a = 0.2
 			loaded_activated = false
@@ -77,8 +77,8 @@ func enter_detector(body):
 		sprite.visible = false
 		sound.play()
 		
-		# activates all deactivated rocket turbo loaded in the level
-		CurrentLevelData.vars.activate_fludd(2)
+		# activates all deactivated rocket fludds loaded in the level
+		CurrentLevelData.vars.activate_fludd(1)
 
 func _on_fludd_activated():
 	sprite.modulate.a = 1

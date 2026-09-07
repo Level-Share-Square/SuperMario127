@@ -93,8 +93,7 @@ func activate_fludd(var type : int):
 
 
 func is_fludd_activated(var type : int):
-#	return CurrentLevelData.activated_fludds[type]
-	return false
+	return CurrentLevelData.save_data._activated_fludds[type]
 
 
 func collect_coin(amount: int):
