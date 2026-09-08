@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/talk2.png-bc5dc8605adc224857710ba64769e3c6.stex"
+path="res://.import/switch_nozzles.png-876bcff6fedf65d7537234c983f156d2.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/player/ui_new/touch/icons/talk2.png"
-dest_files=[ "res://.import/talk2.png-bc5dc8605adc224857710ba64769e3c6.stex" ]
+source_file="res://scenes/player/ui_new/touch/icons/switch_nozzles.png"
+dest_files=[ "res://.import/switch_nozzles.png-876bcff6fedf65d7537234c983f156d2.stex" ]
 
 [params]
 

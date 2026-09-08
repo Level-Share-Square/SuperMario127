@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/talk1.png-3f31a8ab7dcb4bb1dc5632cb6a78451a.stex"
+path="res://.import/dive.png-4f729c747bbea193e240e4d4f10b5c81.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/player/ui_new/touch/icons/talk1.png"
-dest_files=[ "res://.import/talk1.png-3f31a8ab7dcb4bb1dc5632cb6a78451a.stex" ]
+source_file="res://scenes/player/ui_new/touch/icons/dive.png"
+dest_files=[ "res://.import/dive.png-4f729c747bbea193e240e4d4f10b5c81.stex" ]
 
 [params]
 

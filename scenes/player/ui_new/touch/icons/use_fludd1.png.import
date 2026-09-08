@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/interact1.png-d2e7db09019a22b837e318a876b129a8.stex"
+path="res://.import/use_fludd1.png-9e95eb95795f7f0202c65ebb736246a1.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/player/ui_new/touch/icons/interact1.png"
-dest_files=[ "res://.import/interact1.png-d2e7db09019a22b837e318a876b129a8.stex" ]
+source_file="res://scenes/player/ui_new/touch/icons/use_fludd1.png"
+dest_files=[ "res://.import/use_fludd1.png-9e95eb95795f7f0202c65ebb736246a1.stex" ]
 
 [params]
 

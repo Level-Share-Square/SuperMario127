@@ -66,6 +66,15 @@ func _ready():
 	move_stick(rect_size / 2)
 
 
+func _exit_tree():
+	for action_array in x_actions:
+		for action in action_array:
+			commit_action(action, false)
+	for action_array in y_actions:
+		for action in action_array:
+			commit_action(action, false)
+
+
 var last_input_dir: Vector2
 func _physics_process(delta: float):
 	stick_container.rect_position = stick_container.rect_position.linear_interpolate(visual_pos, delta * lerp_speed)

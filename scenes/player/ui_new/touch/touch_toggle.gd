@@ -25,3 +25,7 @@ func commit_action(action_name: String, is_pressed: bool):
 	event_action.action = action_name
 	event_action.pressed = is_pressed
 	Input.parse_input_event(event_action)
+
+
+func _exit_tree():
+	commit_action(toggle_action, false)

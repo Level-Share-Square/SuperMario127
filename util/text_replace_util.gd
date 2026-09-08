@@ -94,7 +94,7 @@ static func parse_text(text: String, character: Character, save: LevelSaveData =
 		false
 	)
 	if LastInputDevice.last_input_type == LastInputDevice.InputType.Touch:
-		legacy_wing_cap = false
+		legacy_wing_cap = true
 	
 	text = text.replace(":winginputs:", ":leftinput: and :rightinput:" if !legacy_wing_cap else ":upinput: and :downinput:")
 	
