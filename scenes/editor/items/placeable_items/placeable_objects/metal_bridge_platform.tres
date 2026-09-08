@@ -1,0 +1,31 @@
+[gd_resource type="Resource" load_steps=16 format=2]
+
+[ext_resource path="res://scenes/editor/items/placeable_object.gd" type="Script" id=1]
+[ext_resource path="res://scenes/actors/objects/metal_bridge_platform/icon_1.png" type="Texture" id=2]
+[ext_resource path="res://scenes/actors/objects/metal_bridge_platform/1_preview.png" type="Texture" id=3]
+[ext_resource path="res://scenes/actors/objects/metal_bridge_platform/palettes/icon_4.png" type="Texture" id=4]
+[ext_resource path="res://scenes/actors/objects/metal_bridge_platform/palettes/icon_2.png" type="Texture" id=5]
+[ext_resource path="res://scenes/actors/objects/metal_bridge_platform/palettes/icon_3.png" type="Texture" id=6]
+[ext_resource path="res://scenes/actors/objects/metal_bridge_platform/palettes/icon_5.png" type="Texture" id=7]
+[ext_resource path="res://scenes/actors/objects/metal_bridge_platform/palettes/6_preview.png" type="Texture" id=8]
+[ext_resource path="res://scenes/actors/objects/metal_bridge_platform/palettes/2_preview.png" type="Texture" id=9]
+[ext_resource path="res://scenes/actors/objects/metal_bridge_platform/palettes/3_preview.png" type="Texture" id=10]
+[ext_resource path="res://scenes/actors/objects/metal_bridge_platform/palettes/4_preview.png" type="Texture" id=11]
+[ext_resource path="res://scenes/actors/objects/metal_bridge_platform/palettes/5_preview.png" type="Texture" id=12]
+[ext_resource path="res://scenes/actors/objects/metal_bridge_platform/palettes/icon_6.png" type="Texture" id=13]
+[ext_resource path="res://scenes/actors/objects/metal_bridge_platform/palettes/icon_1.png" type="Texture" id=14]
+[ext_resource path="res://scenes/actors/objects/metal_bridge_platform/palettes/1_preview.png" type="Texture" id=15]
+
+[resource]
+script = ExtResource( 1 )
+item_name = "Metal Bridge Platform"
+change_to = ""
+items_in_sequence = 0
+index_in_sequence = 0
+icons = [ ExtResource( 2 ), ExtResource( 14 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 4 ), ExtResource( 7 ), ExtResource( 13 ) ]
+previews = [ ExtResource( 3 ), ExtResource( 15 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 8 ) ]
+priority = 241
+object_id = 163
+preview_offset = Vector2( 0, 0 )
+property_overrides = {
+}
