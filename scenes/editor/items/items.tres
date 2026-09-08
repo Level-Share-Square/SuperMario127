@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=282 format=2]
+[gd_resource type="Resource" load_steps=283 format=2]
 
 [ext_resource path="res://scenes/editor/items/placeable_items.gd" type="Script" id=1]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/blue_coin.tres" type="Resource" id=2]
@@ -281,6 +281,7 @@
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/dead_tree_small.tres" type="Resource" id=279]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/bush.tres" type="Resource" id=280]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/hedge.tres" type="Resource" id=281]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/metal_bridge_platform.tres" type="Resource" id=282]
 
 [resource]
 script = ExtResource( 1 )
@@ -366,6 +367,7 @@ placeable_items = {
 "obj_log": ExtResource( 15 ),
 "obj_mario": ExtResource( 7 ),
 "obj_metal_breakable_block": ExtResource( 41 ),
+"obj_metal_bridge_platform": ExtResource( 282 ),
 "obj_metal_gear": ExtResource( 32 ),
 "obj_metal_platform": ExtResource( 4 ),
 "obj_moss_rock": ExtResource( 127 ),
