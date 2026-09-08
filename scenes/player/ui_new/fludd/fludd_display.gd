@@ -37,7 +37,7 @@ func _ready():
 		queue_free()
 		return
 	
-	if Singleton.ModeSwitcher.visible:
+	if Singleton.ModeSwitcher.visible and LastInputDevice.last_input_type != LastInputDevice.InputType.Touch:
 		rect_position.x -= editor_offset
 	
 	character.connect("fludd_activated", self, "fludd_activated")

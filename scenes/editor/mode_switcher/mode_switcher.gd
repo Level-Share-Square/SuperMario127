@@ -67,6 +67,10 @@ func _physics_process(_delta) -> void:
 		visible = false
 	if not get_tree().paused and last_paused and playtesting:
 		visible = true
+	
+	var is_touch: bool = LastInputDevice.last_input_type == LastInputDevice.InputType.Touch 
+	root_container.modulate.a = 0.0 if is_touch and playtesting else 1.0
+	button.disabled = is_touch and playtesting
 	last_paused = get_tree().paused
 
 
@@ -106,25 +110,27 @@ func pressed(force: bool = false, play_sound: bool = false) -> void:
 	if not playtesting:
 		letsa_go_sfx.play()
 	
+	var is_touch: bool = LastInputDevice.last_input_type == LastInputDevice.InputType.Touch 
 	# juice tweens
-	tween.interpolate_property(
-		root_container,
-		"modulate",
-		Color(1.5, 1.5, 1.5),
-		Color.white,
-		pipe_juice_duration,
-		Tween.TRANS_CIRC,
-		Tween.EASE_IN
-	)
-	tween.interpolate_property(
-		bottom_inner,
-		"rect_min_size:y",
-		40,
-		32,
-		pipe_juice_duration,
-		Tween.TRANS_CIRC,
-		Tween.EASE_IN_OUT
-	)
+	if not is_touch:
+		tween.interpolate_property(
+			root_container,
+			"modulate",
+			Color(1.5, 1.5, 1.5),
+			Color.white,
+			pipe_juice_duration,
+			Tween.TRANS_CIRC,
+			Tween.EASE_IN
+		)
+		tween.interpolate_property(
+			bottom_inner,
+			"rect_min_size:y",
+			40,
+			32,
+			pipe_juice_duration,
+			Tween.TRANS_CIRC,
+			Tween.EASE_IN_OUT
+		)
 	# pipe color tweens
 	is_transitioning_to_red = not playtesting
 	tween.interpolate_property(
