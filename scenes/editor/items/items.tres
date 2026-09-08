@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=280 format=2]
+[gd_resource type="Resource" load_steps=282 format=2]
 
 [ext_resource path="res://scenes/editor/items/placeable_items.gd" type="Script" id=1]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/blue_coin.tres" type="Resource" id=2]
@@ -279,6 +279,8 @@
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/floral_garden_slope_left.tres" type="Resource" id=277]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/floral_garden_slope_right.tres" type="Resource" id=278]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/dead_tree_small.tres" type="Resource" id=279]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/bush.tres" type="Resource" id=280]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/hedge.tres" type="Resource" id=281]
 
 [resource]
 script = ExtResource( 1 )
@@ -308,6 +310,7 @@ placeable_items = {
 "obj_bully": ExtResource( 123 ),
 "obj_buoyant_bouncer": ExtResource( 146 ),
 "obj_buoyant_platform": ExtResource( 144 ),
+"obj_bush": ExtResource( 280 ),
 "obj_butterfly": ExtResource( 78 ),
 "obj_cannon": ExtResource( 51 ),
 "obj_castle_window": ExtResource( 65 ),
@@ -343,6 +346,7 @@ placeable_items = {
 "obj_goomba": ExtResource( 34 ),
 "obj_goonie": ExtResource( 70 ),
 "obj_green_demon": ExtResource( 17 ),
+"obj_hedge": ExtResource( 281 ),
 "obj_hover_box": ExtResource( 24 ),
 "obj_hover_nozzle": ExtResource( 28 ),
 "obj_jelectro": ExtResource( 80 ),

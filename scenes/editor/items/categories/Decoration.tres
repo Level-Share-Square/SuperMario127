@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=39 format=2]
+[gd_resource type="Resource" load_steps=41 format=2]
 
 [ext_resource path="res://scenes/editor/items/placeable_items.gd" type="Script" id=1]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/big_net.tres" type="Resource" id=2]
@@ -6,6 +6,8 @@
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/dead_tree_small.tres" type="Resource" id=4]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/small_chain.tres" type="Resource" id=5]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/chain.tres" type="Resource" id=6]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/bush.tres" type="Resource" id=7]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/hedge.tres" type="Resource" id=8]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/big_tree.tres" type="Resource" id=10]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/big_bush.tres" type="Resource" id=16]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/twisted_tree_top.tres" type="Resource" id=18]
@@ -49,6 +51,7 @@ placeable_items = {
 "obj_big_net": ExtResource( 2 ),
 "obj_big_tree": ExtResource( 10 ),
 "obj_bridge_cobweb": ExtResource( 117 ),
+"obj_bush": ExtResource( 7 ),
 "obj_castle_window": ExtResource( 65 ),
 "obj_cave_plant": ExtResource( 63 ),
 "obj_cave_tree": ExtResource( 54 ),
@@ -65,6 +68,7 @@ placeable_items = {
 "obj_droopy_cobweb": ExtResource( 115 ),
 "obj_flat_cobweb": ExtResource( 118 ),
 "obj_flower_bush": ExtResource( 79 ),
+"obj_hedge": ExtResource( 8 ),
 "obj_large_cave_tree": ExtResource( 55 ),
 "obj_large_palm_tree": ExtResource( 96 ),
 "obj_large_pine_tree": ExtResource( 61 ),
