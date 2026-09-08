@@ -1,8 +1,8 @@
 [gd_resource type="Resource" load_steps=16 format=2]
 
 [ext_resource path="res://scenes/editor/items/placeable_object.gd" type="Script" id=1]
-[ext_resource path="res://scenes/actors/objects/metal_bridge_platform/icon_1.png" type="Texture" id=2]
-[ext_resource path="res://scenes/actors/objects/metal_bridge_platform/1_preview.png" type="Texture" id=3]
+[ext_resource path="res://scenes/actors/objects/metal_bridge_platform/icon.png" type="Texture" id=2]
+[ext_resource path="res://scenes/actors/objects/metal_bridge_platform/preview.png" type="Texture" id=3]
 [ext_resource path="res://scenes/actors/objects/metal_bridge_platform/palettes/icon_4.png" type="Texture" id=4]
 [ext_resource path="res://scenes/actors/objects/metal_bridge_platform/palettes/icon_2.png" type="Texture" id=5]
 [ext_resource path="res://scenes/actors/objects/metal_bridge_platform/palettes/icon_3.png" type="Texture" id=6]
