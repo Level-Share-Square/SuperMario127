@@ -100,6 +100,7 @@ func update_layers() -> void:
 func new_layer(ground: bool = true) -> void:
 	var action := AddLayerAction.new()
 	action.shared = shared
+	action.insert_index = shared.layer_uuid_to_index(editor.layer) + 1
 	action.ground = ground
 	editor.action_manager.commit_action([action])
 

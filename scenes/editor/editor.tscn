@@ -443,7 +443,7 @@ custom_constants/separation = 0
 [node name="ItemPickerPanel" type="PanelContainer" parent="UI/UIContainer"]
 unique_name_in_owner = true
 material = SubResource( 176 )
-margin_right = 144.0
+margin_right = 178.0
 margin_bottom = 432.0
 theme = ExtResource( 4 )
 custom_styles/panel = SubResource( 175 )
@@ -456,12 +456,12 @@ modulate = Color( 1, 1, 1.1, 1 )
 show_behind_parent = true
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 144.0
+margin_right = 178.0
 margin_bottom = 432.0
 overlay_tint = Color( 0.084, 0.0898, 0.2, 0.133333 )
 
 [node name="MarginContainer" type="MarginContainer" parent="UI/UIContainer/ItemPickerPanel"]
-margin_right = 144.0
+margin_right = 178.0
 margin_bottom = 432.0
 custom_constants/margin_right = 6
 custom_constants/margin_top = 6
@@ -471,25 +471,25 @@ custom_constants/margin_bottom = 6
 [node name="PanelContainer" type="PanelContainer" parent="UI/UIContainer/ItemPickerPanel/MarginContainer"]
 margin_left = 6.0
 margin_top = 6.0
-margin_right = 138.0
+margin_right = 172.0
 margin_bottom = 426.0
 theme_type_variation = "FlatPanel2"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer"]
 margin_left = 4.0
 margin_top = 4.0
-margin_right = 128.0
+margin_right = 162.0
 margin_bottom = 416.0
 rect_min_size = Vector2( 124, 0 )
 custom_constants/separation = 4
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer"]
-margin_right = 124.0
+margin_right = 158.0
 margin_bottom = 19.0
 
 [node name="SearchBar" type="LineEdit" parent="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
-margin_right = 101.0
+margin_right = 135.0
 margin_bottom = 19.0
 size_flags_horizontal = 3
 theme_type_variation = "LineEditStraight"
@@ -499,8 +499,8 @@ script = ExtResource( 63 )
 
 [node name="Search" type="Button" parent="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
-margin_left = 105.0
-margin_right = 124.0
+margin_left = 139.0
+margin_right = 158.0
 margin_bottom = 19.0
 rect_min_size = Vector2( 19, 0 )
 focus_mode = 0
@@ -512,24 +512,24 @@ script = ExtResource( 24 )
 
 [node name="HSeparator3" type="HSeparator" parent="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer"]
 margin_top = 23.0
-margin_right = 124.0
+margin_right = 158.0
 margin_bottom = 27.0
 
 [node name="Groups" type="VBoxContainer" parent="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer"]
 margin_top = 31.0
-margin_right = 124.0
+margin_right = 158.0
 margin_bottom = 105.0
 alignment = 1
 
 [node name="Tiles" type="GridContainer" parent="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/Groups"]
 unique_name_in_owner = true
-margin_right = 124.0
+margin_right = 158.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
 columns = 2
 
 [node name="Terrain" type="Button" parent="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/Groups/Tiles"]
-margin_right = 60.0
+margin_right = 77.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 0, 24 )
 focus_mode = 0
@@ -542,8 +542,8 @@ text = "Terrain"
 script = ExtResource( 24 )
 
 [node name="Structures" type="Button" parent="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/Groups/Tiles"]
-margin_left = 64.0
-margin_right = 124.0
+margin_left = 81.0
+margin_right = 158.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 0, 24 )
 focus_mode = 0
@@ -557,19 +557,19 @@ script = ExtResource( 24 )
 
 [node name="HSeparator" type="HSeparator" parent="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/Groups"]
 margin_top = 28.0
-margin_right = 124.0
+margin_right = 158.0
 margin_bottom = 32.0
 
 [node name="Objects" type="GridContainer" parent="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/Groups"]
 unique_name_in_owner = true
 margin_top = 36.0
-margin_right = 124.0
+margin_right = 158.0
 margin_bottom = 74.0
 size_flags_horizontal = 3
 columns = 2
 
 [node name="Special" type="Button" parent="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/Groups/Objects"]
-margin_right = 58.0
+margin_right = 77.0
 margin_bottom = 17.0
 focus_mode = 0
 size_flags_horizontal = 3
@@ -581,8 +581,8 @@ text = "Special"
 script = ExtResource( 24 )
 
 [node name="Obstacles" type="Button" parent="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/Groups/Objects"]
-margin_left = 62.0
-margin_right = 124.0
+margin_left = 81.0
+margin_right = 158.0
 margin_bottom = 17.0
 focus_mode = 0
 size_flags_horizontal = 3
@@ -595,7 +595,7 @@ script = ExtResource( 24 )
 
 [node name="Entities" type="Button" parent="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/Groups/Objects"]
 margin_top = 21.0
-margin_right = 58.0
+margin_right = 77.0
 margin_bottom = 38.0
 focus_mode = 0
 size_flags_horizontal = 3
@@ -607,9 +607,9 @@ text = "Entities"
 script = ExtResource( 24 )
 
 [node name="Decoration" type="Button" parent="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/Groups/Objects"]
-margin_left = 62.0
+margin_left = 81.0
 margin_top = 21.0
-margin_right = 124.0
+margin_right = 158.0
 margin_bottom = 38.0
 focus_mode = 0
 size_flags_horizontal = 3
@@ -622,24 +622,24 @@ script = ExtResource( 24 )
 
 [node name="HSeparator" type="HSeparator" parent="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer"]
 margin_top = 109.0
-margin_right = 124.0
+margin_right = 158.0
 margin_bottom = 113.0
 
 [node name="ScrollContainer" type="ScrollContainer" parent="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer"]
 margin_top = 117.0
-margin_right = 124.0
-margin_bottom = 334.0
+margin_right = 158.0
+margin_bottom = 319.0
 size_flags_vertical = 3
 scroll_horizontal_enabled = false
 
 [node name="CenterContainer" type="CenterContainer" parent="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/ScrollContainer"]
-margin_right = 116.0
+margin_right = 150.0
 size_flags_horizontal = 3
 
 [node name="ItemsGrid" type="GridContainer" parent="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/ScrollContainer/CenterContainer"]
 unique_name_in_owner = true
-margin_left = 58.0
-margin_right = 58.0
+margin_left = 75.0
+margin_right = 75.0
 size_flags_horizontal = 3
 custom_constants/vseparation = 6
 custom_constants/hseparation = 6
@@ -658,19 +658,19 @@ categories = {
 }
 
 [node name="HSeparator2" type="HSeparator" parent="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer"]
-margin_top = 338.0
-margin_right = 124.0
-margin_bottom = 342.0
+margin_top = 323.0
+margin_right = 158.0
+margin_bottom = 327.0
 
 [node name="MarginContainer" type="MarginContainer" parent="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer"]
-margin_top = 346.0
-margin_right = 124.0
-margin_bottom = 383.0
+margin_top = 331.0
+margin_right = 158.0
+margin_bottom = 368.0
 custom_constants/margin_right = 6
 
 [node name="ItemLabel" type="Label" parent="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/MarginContainer"]
 unique_name_in_owner = true
-margin_right = 118.0
+margin_right = 152.0
 margin_bottom = 37.0
 rect_min_size = Vector2( 0, 37 )
 text = "121 Garden Half Tile"
@@ -678,40 +678,41 @@ align = 1
 autowrap = true
 
 [node name="HSeparator4" type="HSeparator" parent="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer"]
-margin_top = 387.0
-margin_right = 124.0
-margin_bottom = 391.0
+margin_top = 372.0
+margin_right = 158.0
+margin_bottom = 376.0
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer"]
-margin_top = 395.0
-margin_right = 124.0
+margin_top = 380.0
+margin_right = 158.0
 margin_bottom = 412.0
 
 [node name="Label" type="Label" parent="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer2"]
-margin_right = 103.0
-margin_bottom = 17.0
+margin_top = 7.0
+margin_right = 90.0
+margin_bottom = 24.0
 size_flags_horizontal = 3
 text = "Show Palettes"
 align = 1
 
 [node name="ItemPalettes" type="CheckButton" parent="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer2"]
 unique_name_in_owner = true
-margin_left = 107.0
-margin_right = 124.0
-margin_bottom = 17.0
+margin_left = 94.0
+margin_right = 158.0
+margin_bottom = 32.0
 focus_mode = 0
 theme_type_variation = "CheckButtonTransparent"
 script = ExtResource( 45 )
 
 [node name="VSeparator" type="VSeparator" parent="UI/UIContainer"]
-margin_left = 144.0
-margin_right = 148.0
+margin_left = 178.0
+margin_right = 182.0
 margin_bottom = 432.0
 custom_styles/separator = SubResource( 177 )
 
 [node name="EditorUI" type="MarginContainer" parent="UI/UIContainer"]
 unique_name_in_owner = true
-margin_left = 148.0
+margin_left = 182.0
 margin_right = 914.0
 margin_bottom = 432.0
 rect_clip_content = true
@@ -727,7 +728,7 @@ custom_constants/margin_bottom = 8
 [node name="Top" type="HBoxContainer" parent="UI/UIContainer/EditorUI"]
 margin_left = 8.0
 margin_top = 8.0
-margin_right = 758.0
+margin_right = 724.0
 margin_bottom = 424.0
 mouse_filter = 2
 script = ExtResource( 20 )
@@ -876,14 +877,14 @@ theme_type_variation = "FlatPanel2"
 unique_name_in_owner = true
 margin_left = 4.0
 margin_top = 4.0
-margin_right = 144.0
-margin_bottom = 196.0
+margin_right = 186.0
+margin_bottom = 256.0
 rect_clip_content = true
 custom_constants/separation = 2
 
 [node name="Grid" type="CheckButton" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown"]
-margin_right = 140.0
-margin_bottom = 17.0
+margin_right = 182.0
+margin_bottom = 32.0
 focus_mode = 0
 theme_type_variation = "CheckButtonTransparent"
 text = "Hide Grid"
@@ -891,14 +892,14 @@ align = 1
 script = ExtResource( 45 )
 
 [node name="HSeparator" type="HSeparator" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown"]
-margin_top = 19.0
-margin_right = 140.0
-margin_bottom = 23.0
+margin_top = 34.0
+margin_right = 182.0
+margin_bottom = 38.0
 
 [node name="Layers" type="CheckButton" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown"]
-margin_top = 25.0
-margin_right = 140.0
-margin_bottom = 42.0
+margin_top = 40.0
+margin_right = 182.0
+margin_bottom = 72.0
 focus_mode = 0
 theme_type_variation = "CheckButtonTransparent"
 text = "Focus Layer"
@@ -906,22 +907,21 @@ align = 1
 script = ExtResource( 45 )
 
 [node name="HSeparator2" type="HSeparator" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown"]
-margin_top = 44.0
-margin_right = 140.0
-margin_bottom = 48.0
+margin_top = 74.0
+margin_right = 182.0
+margin_bottom = 78.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown"]
-margin_top = 50.0
-margin_right = 140.0
-margin_bottom = 67.0
+margin_top = 80.0
+margin_right = 182.0
+margin_bottom = 112.0
 custom_constants/separation = 0
 alignment = 2
 
 [node name="SnapValue" type="SpinBox" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown/HBoxContainer"]
 unique_name_in_owner = true
-margin_left = 5.0
-margin_right = 71.0
-margin_bottom = 17.0
+margin_right = 66.0
+margin_bottom = 32.0
 mouse_filter = 2
 min_value = 1.0
 max_value = inf
@@ -931,9 +931,9 @@ script = ExtResource( 98 )
 
 [node name="PixelSnap" type="CheckButton" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown/HBoxContainer"]
 unique_name_in_owner = true
-margin_left = 71.0
-margin_right = 140.0
-margin_bottom = 17.0
+margin_left = 66.0
+margin_right = 182.0
+margin_bottom = 32.0
 focus_mode = 0
 theme_type_variation = "CheckButtonTransparent"
 pressed = true
@@ -942,14 +942,14 @@ align = 1
 script = ExtResource( 45 )
 
 [node name="HSeparator6" type="HSeparator" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown"]
-margin_top = 69.0
-margin_right = 140.0
-margin_bottom = 73.0
+margin_top = 114.0
+margin_right = 182.0
+margin_bottom = 118.0
 
 [node name="FastTest" type="CheckButton" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown"]
-margin_top = 75.0
-margin_right = 140.0
-margin_bottom = 92.0
+margin_top = 120.0
+margin_right = 182.0
+margin_bottom = 152.0
 focus_mode = 0
 theme_type_variation = "CheckButtonTransparent"
 text = "Quick Test"
@@ -957,14 +957,14 @@ align = 1
 script = ExtResource( 45 )
 
 [node name="HSeparator8" type="HSeparator" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown"]
-margin_top = 94.0
-margin_right = 140.0
-margin_bottom = 98.0
+margin_top = 154.0
+margin_right = 182.0
+margin_bottom = 158.0
 
 [node name="ResetZoom" type="Button" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown"]
-margin_top = 100.0
-margin_right = 140.0
-margin_bottom = 117.0
+margin_top = 160.0
+margin_right = 182.0
+margin_bottom = 177.0
 focus_mode = 0
 theme_type_variation = "ButtonTransparent"
 custom_colors/font_color = Color( 1, 1, 1, 1 )
@@ -972,14 +972,14 @@ text = "Reset Zoom"
 script = ExtResource( 24 )
 
 [node name="HSeparator4" type="HSeparator" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown"]
-margin_top = 119.0
-margin_right = 140.0
-margin_bottom = 123.0
+margin_top = 179.0
+margin_right = 182.0
+margin_bottom = 183.0
 
 [node name="Autosaves" type="Button" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown"]
-margin_top = 125.0
-margin_right = 140.0
-margin_bottom = 142.0
+margin_top = 185.0
+margin_right = 182.0
+margin_bottom = 202.0
 focus_mode = 0
 theme_type_variation = "ButtonTransparent"
 custom_colors/font_color = Color( 1, 1, 1, 1 )
@@ -987,14 +987,14 @@ text = "Autosaves"
 script = ExtResource( 24 )
 
 [node name="HSeparator7" type="HSeparator" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown"]
-margin_top = 144.0
-margin_right = 140.0
-margin_bottom = 148.0
+margin_top = 204.0
+margin_right = 182.0
+margin_bottom = 208.0
 
 [node name="Help" type="Button" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown"]
-margin_top = 150.0
-margin_right = 140.0
-margin_bottom = 167.0
+margin_top = 210.0
+margin_right = 182.0
+margin_bottom = 227.0
 focus_mode = 0
 theme_type_variation = "ButtonTransparent"
 custom_colors/font_color = Color( 1, 1, 1, 1 )
@@ -1002,14 +1002,14 @@ text = "Help"
 script = ExtResource( 24 )
 
 [node name="HSeparator5" type="HSeparator" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown"]
-margin_top = 169.0
-margin_right = 140.0
-margin_bottom = 173.0
+margin_top = 229.0
+margin_right = 182.0
+margin_bottom = 233.0
 
 [node name="Settings" type="Button" parent="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown"]
-margin_top = 175.0
-margin_right = 140.0
-margin_bottom = 192.0
+margin_top = 235.0
+margin_right = 182.0
+margin_bottom = 252.0
 focus_mode = 0
 theme_type_variation = "ButtonTransparent"
 custom_colors/font_color = Color( 1, 1, 1, 1 )
@@ -1018,14 +1018,14 @@ script = ExtResource( 24 )
 
 [node name="Padding" type="Control" parent="UI/UIContainer/EditorUI/Top"]
 margin_left = 200.0
-margin_right = 595.0
+margin_right = 561.0
 margin_bottom = 416.0
 mouse_filter = 2
 size_flags_horizontal = 3
 
 [node name="Tools" type="HBoxContainer" parent="UI/UIContainer/EditorUI/Top"]
-margin_left = 599.0
-margin_right = 750.0
+margin_left = 565.0
+margin_right = 716.0
 margin_bottom = 32.0
 size_flags_vertical = 0
 custom_constants/separation = 0
@@ -1389,7 +1389,7 @@ script = ExtResource( 24 )
 [node name="Middle" type="HBoxContainer" parent="UI/UIContainer/EditorUI"]
 margin_left = 8.0
 margin_top = 8.0
-margin_right = 758.0
+margin_right = 724.0
 margin_bottom = 424.0
 mouse_filter = 2
 __meta__ = {
@@ -1397,7 +1397,7 @@ __meta__ = {
 }
 
 [node name="Padding" type="Control" parent="UI/UIContainer/EditorUI/Middle"]
-margin_right = 714.0
+margin_right = 680.0
 margin_bottom = 416.0
 mouse_filter = 2
 size_flags_horizontal = 3
@@ -1406,9 +1406,9 @@ __meta__ = {
 }
 
 [node name="Tools" type="PanelContainer" parent="UI/UIContainer/EditorUI/Middle"]
-margin_left = 718.0
+margin_left = 684.0
 margin_top = 114.0
-margin_right = 750.0
+margin_right = 716.0
 margin_bottom = 302.0
 mouse_filter = 2
 size_flags_vertical = 4
@@ -1587,7 +1587,7 @@ script = ExtResource( 24 )
 [node name="Bottom" type="HBoxContainer" parent="UI/UIContainer/EditorUI"]
 margin_left = 8.0
 margin_top = 8.0
-margin_right = 758.0
+margin_right = 724.0
 margin_bottom = 424.0
 mouse_filter = 2
 size_flags_vertical = 3
