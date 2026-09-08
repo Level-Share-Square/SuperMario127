@@ -10,7 +10,11 @@ var movement := Vector2.ZERO
 func can_collide_with(character):
 	var direction = global_transform.y.normalized()
 	
-	var is_grounded = character.is_grounded() if character.has_method("is_grounded") else true
+	var is_grounded : bool 
+
+	if character.has_method("is_grounded"):
+		is_grounded = character.is_grounded()
+	
 	var line_center = global_position + (direction * buffer)
 	var line_direction = Vector2(-direction.y, direction.x)
 	var p1 = line_center + line_direction
@@ -36,7 +40,7 @@ func can_collide_with(character):
 			#self.apply_velocity = false
 			pass
 		return false
-	
+
 	if "apply_velocity" in self and correct_side:
 		self.apply_velocity = true
 	return correct_side

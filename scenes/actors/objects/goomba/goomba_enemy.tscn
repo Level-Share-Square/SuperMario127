@@ -639,9 +639,6 @@ monitoring = true
 position = Vector2( 0, -13 )
 shape = SubResource( 57 )
 
-[node name="PlatformDetector" parent="." index="2"]
-visible = false
-
 [node name="CollisionShape2D" parent="PlatformDetector" index="0"]
 shape = SubResource( 52 )
 
@@ -658,7 +655,6 @@ position = Vector2( 0, -5 )
 enabled = true
 
 [node name="FloorDetector" parent="." index="4"]
-visible = false
 cast_to = Vector2( 0, 6 )
 
 [node name="IdleState" type="Node2D" parent="States" index="0"]
@@ -751,6 +747,7 @@ visible = false
 self_modulate = Color( 1, 0.4, 0.333333, 1 )
 frames = ExtResource( 11 )
 animation = "idle"
+frame = 3
 offset = Vector2( 0, -15 )
 script = ExtResource( 10 )
 
@@ -878,5 +875,6 @@ shape = SubResource( 62 )
 autostart = true
 
 [connection signal="state_changed" from="." to="EnemyBouncer" method="state_changed"]
+[connection signal="area_entered" from="AnimatedSprite/DialogueDetector" to="AnimatedSprite/DialogueDetector" method="area_entered"]
 [connection signal="area_entered" from="EnemyBouncer" to="EnemyBouncer" method="area_entered"]
 [connection signal="timeout" from="EnemyBouncer/CollisionCheck" to="EnemyBouncer" method="check_collisions"]

@@ -22,7 +22,7 @@ func state_changed(new_state: EnemyState) -> void:
 
 func area_entered(colliding_area: Area2D) -> void:
 	if colliding_area.owner == enemy: return
-	
+	if colliding_area.has_method("is_platform_area"): return
 	var bounce_dir: int = sign(global_position.x - colliding_area.global_position.x)
 	var x_vel: float = bounce_velocity.x * bounce_dir
 	if is_instance_valid(colliding_area.owner) and colliding_area.owner is EnemyBase:

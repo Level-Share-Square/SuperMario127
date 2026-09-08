@@ -116,9 +116,11 @@ func _physics_process(delta):
 			if body.can_collide_with(self):
 				remove_collision_exception_with(body)
 				floor_detector.remove_exception(body)
+				_on_collision_exception_removed(body)
 			else:
 				add_collision_exception_with(body)
 				floor_detector.add_exception(body)
+				_on_collision_exception_added(body)
 	
 	if is_on_ceiling() and velocity.y < 0:
 		velocity.y = -velocity.y
@@ -131,6 +133,26 @@ func _physics_process(delta):
 func is_on_ground() -> bool:
 	return test_move(global_transform, Vector2(0, 0.5))
 
+var prev_is_grounded := false
+
+#Needed for semisolid platforms
+func is_grounded() -> bool:
+	# "Death barrier", can only be reached by collecting a shine sprite
+	if position.y > (level_bounds.end.y * 32) + 256:
+		return true
+	
+	var raycast_node := floor_detector
+	raycast_node.cast_to = Vector2(0, 30) #26 or 30
+	
+	var normal = Vector2.UP
+	if raycast_node.is_colliding():
+		normal = raycast_node.get_collision_normal()
+	
+	var is_downward: bool = velocity.y > -1
+	var new_is_grounded := (raycast_node.is_colliding() or is_on_floor()) and is_downward
+	
+	prev_is_grounded = new_is_grounded
+	return prev_is_grounded
 
 func create_coin(velocity: Vector2, offset: Vector2):
 	var object_setup = create_object(global_position + offset, coin_id, 0)
@@ -153,3 +175,11 @@ func create_object(pos: Vector2, object_id: int, palette: int):
 			)
 		)
 	)
+
+# override on child enemies for updating auxillary collision shapes when an exception is added
+func _on_collision_exception_added(body):
+	pass
+
+# override on child enemies for updating auxillary collision shapes when an exception is removed
+func _on_collision_exception_removed(body):
+	pass
