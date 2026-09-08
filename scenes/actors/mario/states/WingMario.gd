@@ -47,6 +47,9 @@ func _update(delta):
 		false
 	)
 	
+	if LastInputDevice.last_input_type == LastInputDevice.InputType.Touch:
+		up_down_controls = false
+	
 	# Capping rotation
 	var clamp_max : float = lerp(rotation_down, 220 - momentum / 1.5, fps_util.PHYSICS_DELTA * 4)
 	clamp_max = clamp(clamp_max, 0, 180)

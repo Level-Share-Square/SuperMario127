@@ -50,11 +50,15 @@ static func input_to_text(input_key: String, player_id: int = 0, override_subgro
 	var input_group: String = "Controls (%s)" % subgroup
 	var is_controller: bool = (LastInputDevice.last_input_type == LastInputDevice.InputType.Controller)
 	
-	var action = input_settings_util.get_setting_partial(input_group, input_key, is_controller)
-	if action.size() > 0:
-		return COLOR_OPENING + input_event_util.get_singular_human_name(action[0]) + COLOR_CLOSING
+	if LastInputDevice.last_input_type != LastInputDevice.InputType.Touch:
+		var action = input_settings_util.get_setting_partial(input_group, input_key, is_controller)
+		if action.size() > 0:
+			return COLOR_OPENING + input_event_util.get_singular_human_name(action[0]) + COLOR_CLOSING
+	else:
+		return COLOR_OPENING + input_event_util.get_touch_name(input_key) + COLOR_CLOSING
 	
 	return COLOR_OPENING + "Unbound" + COLOR_CLOSING
+
 
 static func input_to_collectible_value(input_key: String, save: LevelSaveData = null, vars: LevelVars = null, current_area: int = 0) -> String:
 	if input_key in SAVE_COLLECTIBLE_DICT.keys():
@@ -89,6 +93,9 @@ static func parse_text(text: String, character: Character, save: LevelSaveData =
 		"63_wing_cap",
 		false
 	)
+	if LastInputDevice.last_input_type == LastInputDevice.InputType.Touch:
+		legacy_wing_cap = false
+	
 	text = text.replace(":winginputs:", ":leftinput: and :rightinput:" if !legacy_wing_cap else ":upinput: and :downinput:")
 	
 	var player = character.player_id

@@ -280,6 +280,25 @@ const JOY_AXIS_PS: Array = [
 	"Axis 10-",
 	"Axis 10+",
 ]
+const TOUCH_NAMES: Dictionary = {
+	"left": "Left",
+	"right": "Right",
+	"up": "Up",
+	"down": "Down",
+	"jump": "Jump",
+	"spin": "Spin",
+	"dive": "Dive",
+	"gp": "Ground Pound",
+	"gpcancel": "Ground Pound Cancel",
+	"fludd": "Use F.L.U.D.D",
+	"nozzles": "Switch Nozzles",
+	"crouch": "Down",
+	"interact": "Up",
+}
+
+
+static func get_touch_name(action: String) -> String:
+	return TOUCH_NAMES.get(action, "Unknown")
 
 
 static func get_singular_human_name(event: Dictionary) -> String:
