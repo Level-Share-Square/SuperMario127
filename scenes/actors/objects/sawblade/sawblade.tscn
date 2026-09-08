@@ -27,7 +27,7 @@ script = ExtResource( 1 )
 editor_rect = Rect2( -24, -24, 48, 48 )
 internal_id = "sawblade"
 circle_texture = ExtResource( 4 )
-palette_textures = [ ExtResource( 2 ), ExtResource( 8 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 9 ) ]
+palette_textures = [ ExtResource( 2 ), ExtResource( 6 ), ExtResource( 9 ), ExtResource( 7 ), ExtResource( 8 ) ]
 
 [node name="Path2D" type="Path2D" parent="."]
 curve = SubResource( 4 )
@@ -46,7 +46,7 @@ region_rect = Rect2( 144, 0, 48, 48 )
 
 [node name="Sprite3" type="Sprite" parent="Path2D/PathFollow2D/Saw/AnimatedSprite"]
 show_behind_parent = true
-rotation = -3.22088
+rotation = -0.0284011
 texture = ExtResource( 2 )
 region_enabled = true
 region_rect = Rect2( 48, 0, 48, 48 )
@@ -55,7 +55,7 @@ rot_speed = 150.0
 
 [node name="Sprite2" type="Sprite" parent="Path2D/PathFollow2D/Saw/AnimatedSprite"]
 show_behind_parent = true
-rotation = -6.04869
+rotation = 0.336041
 texture = ExtResource( 2 )
 region_enabled = true
 region_rect = Rect2( 48, 0, 48, 48 )
@@ -65,7 +65,7 @@ rot_speed = 300.0
 
 [node name="Sprite" type="Sprite" parent="Path2D/PathFollow2D/Saw/AnimatedSprite"]
 show_behind_parent = true
-rotation = 6.12497
+rotation = -0.0566595
 texture = ExtResource( 2 )
 region_enabled = true
 region_rect = Rect2( 96, 0, 48, 48 )
@@ -92,7 +92,7 @@ region_rect = Rect2( 144, 0, 48, 48 )
 
 [node name="Sprite3" type="Sprite" parent="EditorSprite"]
 show_behind_parent = true
-rotation = -3.22088
+rotation = -0.0284011
 texture = ExtResource( 2 )
 region_enabled = true
 region_rect = Rect2( 48, 0, 48, 48 )
@@ -101,7 +101,7 @@ rot_speed = 150.0
 
 [node name="Sprite2" type="Sprite" parent="EditorSprite"]
 show_behind_parent = true
-rotation = -6.04869
+rotation = 0.336041
 texture = ExtResource( 2 )
 region_enabled = true
 region_rect = Rect2( 48, 0, 48, 48 )
@@ -111,7 +111,7 @@ rot_speed = 300.0
 
 [node name="Sprite" type="Sprite" parent="EditorSprite"]
 show_behind_parent = true
-rotation = 6.12497
+rotation = -0.0566595
 texture = ExtResource( 2 )
 region_enabled = true
 region_rect = Rect2( 96, 0, 48, 48 )
