@@ -67,7 +67,7 @@ func _ready():
 
 
 var last_input_dir: Vector2
-func _process(delta):
+func _physics_process(delta: float):
 	stick_container.rect_position = stick_container.rect_position.linear_interpolate(visual_pos, delta * lerp_speed)
 	modulate.a = lerp(modulate.a, (pressed_opacity / 256) if pressed else 1.0, delta * lerp_speed)
 	
