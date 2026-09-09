@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=2671 format=2]
+[gd_resource type="TileSet" load_steps=2673 format=2]
 
 [ext_resource path="res://assets/tiles/bricks/bricks.png" type="Texture" id=1]
 [ext_resource path="res://assets/tiles/grass/grass.png" type="Texture" id=2]
@@ -53,6 +53,7 @@
 [ext_resource path="res://assets/tiles/castle_pillar_horizontal/castle_pillar_horizontal.png" type="Texture" id=51]
 [ext_resource path="res://assets/tiles/floral_garden/floral_garden_0.png" type="Texture" id=52]
 [ext_resource path="res://assets/tiles/cork_tile/cork_tile.png" type="Texture" id=53]
+[ext_resource path="res://assets/tiles/bookshelf/5.png" type="Texture" id=54]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 32, 32, 0, 32, 0, 0, 32, 0 )
@@ -5470,6 +5471,9 @@ points = PoolVector2Array( 0, 0, 16, 8, 32, 0, 32, 32, 0, 32 )
 
 [sub_resource type="ConvexPolygonShape2D" id=2794]
 points = PoolVector2Array( 0, 0, 16, 8, 32, 0, 32, 32, 0, 32 )
+
+[sub_resource type="ConvexPolygonShape2D" id=2795]
+points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 
 [sub_resource type="ConvexPolygonShape2D" id=2320]
 points = PoolVector2Array( 32, 32, 0, 32, 0, 0, 32, 0 )
@@ -49146,4 +49150,25 @@ points = PoolVector2Array( 8, 0, 32, 0, 32, 32, 0, 16, 0, 0 )
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 145/z_index = 0
+146/name = "5.png 146"
+146/texture = ExtResource( 54 )
+146/tex_offset = Vector2( 0, 0 )
+146/modulate = Color( 1, 1, 1, 1 )
+146/region = Rect2( 0, 0, 32, 32 )
+146/tile_mode = 0
+146/occluder_offset = Vector2( 0, 0 )
+146/navigation_offset = Vector2( 0, 0 )
+146/shape_offset = Vector2( 0, 0 )
+146/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+146/shape = SubResource( 2795 )
+146/shape_one_way = false
+146/shape_one_way_margin = 1.0
+146/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 2795 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+146/z_index = 0
 script = ExtResource( 3 )

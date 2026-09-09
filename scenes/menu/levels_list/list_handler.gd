@@ -93,6 +93,8 @@ func insert_level(level_code: String = "", folder: String = working_folder):
 	
 	if conversion_util.is_pre_100(level_code):
 		level_code = CurrentLevelData.convert_old_code_to_new(level_code)
+		
+	level_code = CurrentLevelData.check_and_convert_new_level(level_code).level_code
 	
 	level_list_util.save_level_code_file(level_code, file_path)
 	sort_file_util.add_to_sort(level_id, folder, sort_file_util.LEVELS)

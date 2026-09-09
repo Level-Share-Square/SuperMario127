@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=78 format=2]
+[gd_resource type="Resource" load_steps=81 format=2]
 
 [ext_resource path="res://scenes/editor/items/placeable_items.gd" type="Script" id=1]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/stone_bricks_stairs_left.tres" type="Resource" id=2]
@@ -120,6 +120,9 @@ placeable_items = {
 "til_columns_half_tile": ExtResource( 6 ),
 "til_columns_slope_left": ExtResource( 9 ),
 "til_columns_slope_right": ExtResource( 5 ),
+"til_cork_tile": ExtResource( 285 ),
+"til_cork_tile_slope_left": ExtResource( 284 ),
+"til_cork_tile_slope_right": ExtResource( 283 ),
 "til_dark_bricks": ExtResource( 172 ),
 "til_dark_bricks_stairs_left": ExtResource( 180 ),
 "til_dark_bricks_stairs_right": ExtResource( 181 ),
@@ -159,8 +162,5 @@ placeable_items = {
 "til_wood_fence_slope_left": ExtResource( 15 ),
 "til_wood_fence_slope_right": ExtResource( 22 ),
 "til_wood_stairs_left": ExtResource( 17 ),
-"til_wood_stairs_right": ExtResource( 16 ),
-"til_cork_tile": ExtResource( 285 ),
-"til_cork_tile_slope_left": ExtResource( 284 ),
-"til_cork_tile_slope_right": ExtResource( 283 )
+"til_wood_stairs_right": ExtResource( 16 )
 }

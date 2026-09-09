@@ -45,7 +45,7 @@ func _init(_teleport_tags: Array = [],
 		_liquid_tags: Array = [], 
 		_key_tags: Array = []):
 		
-	teleport_tags = _teleport_tags if has_all_elements(teleport_tags, ["_entrance", "_default_teleporter"]) else ["_entrance", "default_teleporter"] + _teleport_tags
+	teleport_tags = _teleport_tags if has_all_elements(_teleport_tags, ["_entrance", "_default_teleporter"]) else ["_entrance", "default_teleporter"] + _teleport_tags
 	dialogue_tags = _dialogue_tags
 	liquid_tags = _liquid_tags
 	key_tags = _key_tags
@@ -53,5 +53,6 @@ func _init(_teleport_tags: Array = [],
 func has_all_elements(array: Array, subarray: Array) -> bool:
 	for element in subarray:
 		if not array.has(element):
+			prints(array, subarray)
 			return false
 	return true

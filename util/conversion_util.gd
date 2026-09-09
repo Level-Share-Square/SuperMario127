@@ -1,4 +1,5 @@
 class_name conversion_util
+extends Reference
 
 
 static func convert_040_to_041(result):
@@ -328,6 +329,44 @@ static func convert_055_to_056(result):
 				new_objects.append(object)
 			area_result.objects = new_objects
 	return result
+	
+static func generate_data_container(level_code: String) -> LevelDataContainer:
+	level_code = LevelCodeTokenizer.splice_level(level_code)
+	var level_metadata_code: String = LevelCodeTokenizer.splice_metadata(level_code)
+	var level_metadata = LevelCodeDeserializer.deserialize_level_metadata_code(level_metadata_code)
+	
+	var components_code = LevelCodeTokenizer.splice_level_components(level_code)
+	var editor_data_code = components_code[1]
+	var level_tags_code = components_code[2] if components_code.size() == 3 else ""
+	
+	var editor_data = LevelCodeDeserializer.deserialize_editor_data(editor_data_code)
+	var level_tags = LevelCodeDeserializer.deserialize_level_tags(level_tags_code)
+	var area_headers: Array
+	
+	# load area headers
+	var area_codes: PoolStringArray = LevelCodeTokenizer.splice_areas(components_code[0])
+	for area_code in area_codes:
+		var area_header: AreaHeader = LevelCodeDeserializer.deserialize_area_header_code(area_code)
+		area_headers.append(area_header)
+	
+	return LevelDataContainer.new(level_metadata, editor_data, area_headers, level_tags)
+	
+static func convert_100_to_101(data_container: LevelDataContainer):
+	for area_header in data_container.area_headers:
+		var area: AreaData = LevelCodeDeserializer.deserialize_area_code(area_header.area_code)
+		for layer in area.layers:
+			var tile_data: TileData = layer.tile_data
+			for used_tile in tile_data.used_tiles:
+				var tile: Array = tile_data.get_tile_data_at(used_tile)
+				if tile[0] == 36:
+					# tile[2] % 2 checks whether or not this
+					# tile should belong to bookshelf or
+					# empty bookshelf
+					tile_data.set_tile(used_tile, 36 if tile[2] % 2 == 0 else 51, 0, tile[2]/2)
+				layer.tile_data = tile_data
+		area_header.area_code = LevelCodeSerializer.serialize_area(area)
+	
+	return data_container
 
 static func is_pre_100(level_code: String) -> bool:
 	return level_code.begins_with("0")
