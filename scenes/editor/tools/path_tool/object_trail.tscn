@@ -37,11 +37,13 @@ curve = SubResource( 1 )
 unique_name_in_owner = true
 margin_right = 40.0
 margin_bottom = 40.0
+mouse_filter = 2
 
 [node name="Previews" type="Control" parent="."]
 unique_name_in_owner = true
 margin_right = 40.0
 margin_bottom = 40.0
+mouse_filter = 2
 script = ExtResource( 5 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
