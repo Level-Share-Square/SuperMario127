@@ -243,7 +243,6 @@ func check_and_convert_new_level(level_code: String):
 		level_version += 1
 			
 	level_code = LevelCodeSerializer.serialize_level_data(data_container)
-	print(level_code)
 	return {"has_converted": true, "level_code": level_code}
 
 ## campaign
