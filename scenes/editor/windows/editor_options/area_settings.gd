@@ -61,7 +61,7 @@ func load_settings():
 	area_name.load_property(editor, get_property_value("name"), [
 		"name",
 		TYPE_STRING,
-		PropertyInfo.new(min_time.hint_tooltip)
+		PropertyInfo.new(area_name.hint_tooltip)
 	])
 	connect_signals(area_name)
 	
