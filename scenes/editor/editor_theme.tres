@@ -1,9 +1,17 @@
-[gd_resource type="Theme" load_steps=82 format=2]
+[gd_resource type="Theme" load_steps=90 format=2]
 
 [ext_resource path="res://assets/fonts/delfino_small.tres" type="DynamicFont" id=1]
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://assets/icons/dropdown_arrow.png" type="Texture" id=3]
+[ext_resource path="res://assets/misc/checkbox_filled.png" type="Texture" id=4]
+[ext_resource path="res://assets/misc/checkbox.png" type="Texture" id=5]
+[ext_resource path="res://assets/icons/text_clear.svg" type="Texture" id=6]
+[ext_resource path="res://assets/icons/CheckChecked.svg" type="Texture" id=7]
 [ext_resource path="res://assets/fonts/delfino_tiny.tres" type="DynamicFont" id=8]
 [ext_resource path="res://assets/fonts/DelfinoFont16.tres" type="DynamicFont" id=9]
+[ext_resource path="res://scenes/editor/assets/grabber_highlight.png" type="Texture" id=10]
+[ext_resource path="res://scenes/editor/assets/grabber.png" type="Texture" id=11]
+[ext_resource path="res://assets/icons/CheckUnchecked.svg" type="Texture" id=12]
 
 [sub_resource type="StyleBoxFlat" id=113]
 content_margin_left = 4.0
@@ -587,8 +595,10 @@ grow_end = 0.0
 vertical = true
 
 [sub_resource type="StreamTexture" id=188]
+load_path = "res://.import/grabber.png-c5dc799fb1845827e1c93bb2b92dffa7.stex"
 
 [sub_resource type="StreamTexture" id=189]
+load_path = "res://.import/grabber_highlight.png-5a9682124f55175e54019bd5c7ea5248.stex"
 
 [sub_resource type="StyleBoxFlat" id=190]
 bg_color = Color( 0, 0.0431373, 0.313726, 1 )
@@ -723,10 +733,10 @@ ButtonTransparent/styles/hover = SubResource( 162 )
 ButtonTransparent/styles/hover_pressed = SubResource( 177 )
 ButtonTransparent/styles/normal = SubResource( 163 )
 ButtonTransparent/styles/pressed = SubResource( 177 )
-CheckBox/icons/checked = null
-CheckBox/icons/unchecked = null
-CheckButton/icons/off = null
-CheckButton/icons/on = null
+CheckBox/icons/checked = ExtResource( 4 )
+CheckBox/icons/unchecked = ExtResource( 5 )
+CheckButton/icons/off = ExtResource( 5 )
+CheckButton/icons/on = ExtResource( 4 )
 CheckButton/styles/hover_pressed = SubResource( 118 )
 CheckButton2/base_type = "CheckButton"
 CheckButton2/colors/font_color = Color( 0, 0, 0, 1 )
@@ -742,8 +752,8 @@ CheckButtonTransparent/colors/font_color_focus = Color( 1, 1, 1, 1 )
 CheckButtonTransparent/colors/font_color_hover = Color( 1, 1, 1, 1 )
 CheckButtonTransparent/colors/font_color_hover_pressed = Color( 1, 1, 1, 1 )
 CheckButtonTransparent/colors/font_color_pressed = Color( 1, 1, 1, 1 )
-CheckButtonTransparent/icons/off = null
-CheckButtonTransparent/icons/on = null
+CheckButtonTransparent/icons/off = ExtResource( 12 )
+CheckButtonTransparent/icons/on = ExtResource( 7 )
 CheckButtonTransparent/styles/disabled = SubResource( 171 )
 CheckButtonTransparent/styles/focus = SubResource( 172 )
 CheckButtonTransparent/styles/hover = SubResource( 162 )
@@ -761,8 +771,8 @@ HScrollBar/styles/grabber_highlight = SubResource( 149 )
 HScrollBar/styles/grabber_pressed = SubResource( 150 )
 HScrollBar/styles/scroll = SubResource( 148 )
 HSeparator/styles/separator = SubResource( 96 )
-HSlider/icons/grabber = null
-HSlider/icons/grabber_highlight = null
+HSlider/icons/grabber = ExtResource( 11 )
+HSlider/icons/grabber_highlight = ExtResource( 10 )
 HSlider/styles/slider = SubResource( 187 )
 HSliderWhite/base_type = "HSlider"
 HSliderWhite/styles/slider = SubResource( 192 )
@@ -771,26 +781,26 @@ ImageBorder/styles/panel = SubResource( 157 )
 LineEdit/colors/cursor_color = Color( 0, 0, 0, 1 )
 LineEdit/colors/font_color = Color( 0, 0, 0, 1 )
 LineEdit/colors/font_color_uneditable = Color( 0, 0, 0, 0.501961 )
-LineEdit/icons/clear = null
+LineEdit/icons/clear = ExtResource( 6 )
 LineEdit/styles/focus = SubResource( 155 )
 LineEdit/styles/normal = SubResource( 156 )
 LineEdit/styles/read_only = SubResource( 113 )
 LineEditStraight/base_type = "LineEdit"
-LineEditStraight/icons/clear = null
+LineEditStraight/icons/clear = ExtResource( 6 )
 LineEditStraight/styles/normal = SubResource( 181 )
 LineEditStraight/styles/read_only = SubResource( 182 )
 MenuPanel/base_type = "Panel"
 MenuPanel/styles/panel = SubResource( 159 )
-OptionButton/icons/arrow = null
+OptionButton/icons/arrow = ExtResource( 3 )
 Panel/styles/panel = SubResource( 143 )
 PanelContainer/styles/panel = SubResource( 143 )
 PopupMenu/colors/font_color_hover = Color( 1, 1, 1, 1 )
 PopupMenu/fonts/font = ExtResource( 8 )
 PopupMenu/fonts/font_separator = ExtResource( 8 )
-PopupMenu/icons/checked = null
+PopupMenu/icons/checked = ExtResource( 4 )
 PopupMenu/icons/radio_checked = SubResource( 133 )
 PopupMenu/icons/radio_unchecked = SubResource( 134 )
-PopupMenu/icons/unchecked = null
+PopupMenu/icons/unchecked = ExtResource( 5 )
 PopupMenu/styles/hover = SubResource( 116 )
 PopupMenu/styles/panel = SubResource( 135 )
 PopupMenu/styles/separator = SubResource( 96 )

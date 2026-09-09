@@ -13,6 +13,7 @@
 [ext_resource path="res://scenes/actors/objects/flower_bush/textures/bush_icon_5.png" type="Texture" id=11]
 
 [sub_resource type="StreamTexture" id=1]
+load_path = "res://.import/flower_bush.png-616b400b6b714d756d8cfddf202a4e51.stex"
 
 [resource]
 script = ExtResource( 3 )
