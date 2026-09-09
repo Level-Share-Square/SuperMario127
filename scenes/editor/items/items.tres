@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=283 format=2]
+[gd_resource type="Resource" load_steps=286 format=2]
 
 [ext_resource path="res://scenes/editor/items/placeable_items.gd" type="Script" id=1]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/blue_coin.tres" type="Resource" id=2]
@@ -282,6 +282,9 @@
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/bush.tres" type="Resource" id=280]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/hedge.tres" type="Resource" id=281]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/metal_bridge_platform.tres" type="Resource" id=282]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/cork_tile_slope_right.tres" type="Resource" id=283]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/cork_tile_slope_left.tres" type="Resource" id=284]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/cork_tile.tres" type="Resource" id=285]
 
 [resource]
 script = ExtResource( 1 )
@@ -491,6 +494,9 @@ placeable_items = {
 "til_columns_half_tile": ExtResource( 204 ),
 "til_columns_slope_left": ExtResource( 208 ),
 "til_columns_slope_right": ExtResource( 201 ),
+"til_cork_tile": ExtResource( 285 ),
+"til_cork_tile_slope_left": ExtResource( 284 ),
+"til_cork_tile_slope_right": ExtResource( 283 ),
 "til_crystal": ExtResource( 166 ),
 "til_crystal_half_tile": ExtResource( 199 ),
 "til_crystal_slope_left": ExtResource( 207 ),

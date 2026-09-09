@@ -77,6 +77,9 @@
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/awkward_wall.tres" type="Resource" id=265]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/awkward_wall_stairs_right.tres" type="Resource" id=266]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/awkward_wall_stairs_left.tres" type="Resource" id=267]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/cork_tile_slope_right.tres" type="Resource" id=283]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/cork_tile_slope_left.tres" type="Resource" id=284]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/cork_tile.tres" type="Resource" id=285]
 
 [resource]
 script = ExtResource( 1 )
@@ -156,5 +159,8 @@ placeable_items = {
 "til_wood_fence_slope_left": ExtResource( 15 ),
 "til_wood_fence_slope_right": ExtResource( 22 ),
 "til_wood_stairs_left": ExtResource( 17 ),
-"til_wood_stairs_right": ExtResource( 16 )
+"til_wood_stairs_right": ExtResource( 16 ),
+"til_cork_tile": ExtResource( 285 ),
+"til_cork_tile_slope_left": ExtResource( 284 ),
+"til_cork_tile_slope_right": ExtResource( 283 )
 }
