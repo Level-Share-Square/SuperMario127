@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=10 format=2]
+[gd_resource type="Resource" load_steps=12 format=2]
 
 [ext_resource path="res://scenes/editor/items/placeable_object.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/objects/breakable_block/icon.png" type="Texture" id=2]
@@ -9,6 +9,8 @@
 [ext_resource path="res://scenes/actors/objects/breakable_block/palettes/5_icon.png" type="Texture" id=7]
 [ext_resource path="res://scenes/actors/objects/breakable_block/palettes/3_icon.png" type="Texture" id=8]
 [ext_resource path="res://scenes/actors/objects/breakable_block/palettes/4_icon.png" type="Texture" id=9]
+[ext_resource path="res://scenes/actors/objects/breakable_block/palettes/8_icon.png" type="Texture" id=10]
+[ext_resource path="res://scenes/actors/objects/breakable_block/palettes/9_icon.png" type="Texture" id=11]
 
 [resource]
 script = ExtResource( 1 )
@@ -16,8 +18,8 @@ item_name = "Breakable Block"
 change_to = ""
 items_in_sequence = 0
 index_in_sequence = 0
-icons = [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 7 ), ExtResource( 6 ), ExtResource( 5 ) ]
-previews = [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 7 ), ExtResource( 6 ), ExtResource( 5 ) ]
+icons = [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 7 ), ExtResource( 6 ), ExtResource( 5 ), ExtResource( 10 ), ExtResource( 11 ) ]
+previews = [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 7 ), ExtResource( 6 ), ExtResource( 5 ), ExtResource( 10 ), ExtResource( 11 ) ]
 priority = 192
 object_id = 33
 preview_offset = Vector2( 0, 0 )

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=10 format=2]
+[gd_resource type="Resource" load_steps=12 format=2]
 
 [ext_resource path="res://scenes/editor/items/placeable_tile.gd" type="Script" id=1]
 [ext_resource path="res://assets/tiles/cork_tile/icon_slope_right.png" type="Texture" id=2]
@@ -9,6 +9,8 @@
 [ext_resource path="res://assets/tiles/cork_tile/palettes/7_icon_slope_right.png" type="Texture" id=7]
 [ext_resource path="res://assets/tiles/cork_tile/palettes/1_icon_slope_right.png" type="Texture" id=8]
 [ext_resource path="res://assets/tiles/cork_tile/palettes/3_icon_slope_right.png" type="Texture" id=9]
+[ext_resource path="res://assets/tiles/cork_tile/palettes/8_icon_slope_right.png" type="Texture" id=10]
+[ext_resource path="res://assets/tiles/cork_tile/palettes/9_icon_slope_right.png" type="Texture" id=11]
 
 [resource]
 script = ExtResource( 1 )
@@ -16,8 +18,8 @@ item_name = "Cork Tile (Right Stairs)"
 change_to = "til_cork_tile"
 items_in_sequence = 3
 index_in_sequence = 2
-icons = [ ExtResource( 2 ), ExtResource( 8 ), ExtResource( 5 ), ExtResource( 9 ), ExtResource( 6 ), ExtResource( 4 ), ExtResource( 3 ), ExtResource( 7 ) ]
-previews = [ ExtResource( 2 ), ExtResource( 8 ), ExtResource( 5 ), ExtResource( 9 ), ExtResource( 6 ), ExtResource( 4 ), ExtResource( 3 ), ExtResource( 7 ) ]
+icons = [ ExtResource( 2 ), ExtResource( 8 ), ExtResource( 5 ), ExtResource( 9 ), ExtResource( 6 ), ExtResource( 4 ), ExtResource( 3 ), ExtResource( 7 ), ExtResource( 10 ), ExtResource( 11 ) ]
+previews = [ ExtResource( 2 ), ExtResource( 8 ), ExtResource( 5 ), ExtResource( 9 ), ExtResource( 6 ), ExtResource( 4 ), ExtResource( 3 ), ExtResource( 7 ), ExtResource( 10 ), ExtResource( 11 ) ]
 priority = 463
 tileset_id = 50
 tile_id = 3

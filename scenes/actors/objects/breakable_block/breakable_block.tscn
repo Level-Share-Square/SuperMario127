@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=40 format=2]
 
 [ext_resource path="res://scenes/actors/objects/box_base/box_base.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/actors/objects/breakable_block/breakable_block.gd" type="Script" id=2]
@@ -28,6 +28,12 @@
 [ext_resource path="res://scenes/actors/objects/breakable_block/palettes/1_outline.png" type="Texture" id=26]
 [ext_resource path="res://scenes/actors/objects/breakable_block/palettes/3_outline.png" type="Texture" id=27]
 [ext_resource path="res://classes/sound_pitcher_directional.gd" type="Script" id=28]
+[ext_resource path="res://scenes/actors/objects/breakable_block/palettes/8.png" type="Texture" id=29]
+[ext_resource path="res://scenes/actors/objects/breakable_block/palettes/9.png" type="Texture" id=30]
+[ext_resource path="res://scenes/actors/objects/breakable_block/palettes/8_outline.png" type="Texture" id=31]
+[ext_resource path="res://scenes/actors/objects/breakable_block/palettes/8_particles.png" type="Texture" id=32]
+[ext_resource path="res://scenes/actors/objects/breakable_block/palettes/9_outline.png" type="Texture" id=33]
+[ext_resource path="res://scenes/actors/objects/breakable_block/palettes/9_particles.png" type="Texture" id=34]
 
 [sub_resource type="Animation" id=2]
 length = 0.001
@@ -151,9 +157,9 @@ side_states = PoolStringArray( "DiveState", "SlideState", "SpinningState", "Swim
 side_fludds = PoolStringArray( "TurboNozzle" )
 breakable_objects = PoolStringArray( "Steely", "BobOmb", "Shell" )
 overkill_powerups = PoolStringArray( "MetalPowerup", "RainbowPowerup" )
-inner_textures = [ ExtResource( 4 ), ExtResource( 18 ), ExtResource( 19 ), ExtResource( 20 ), ExtResource( 24 ), ExtResource( 22 ), ExtResource( 21 ), ExtResource( 23 ) ]
-outer_textures = [ ExtResource( 7 ), ExtResource( 26 ), ExtResource( 25 ), ExtResource( 27 ), ExtResource( 6 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ) ]
-particle_textures = [ ExtResource( 5 ), ExtResource( 11 ), ExtResource( 16 ), ExtResource( 14 ), ExtResource( 13 ), ExtResource( 15 ), ExtResource( 12 ), ExtResource( 17 ) ]
+inner_textures = [ ExtResource( 4 ), ExtResource( 18 ), ExtResource( 19 ), ExtResource( 20 ), ExtResource( 24 ), ExtResource( 22 ), ExtResource( 21 ), ExtResource( 23 ), ExtResource( 29 ), ExtResource( 30 ) ]
+outer_textures = [ ExtResource( 7 ), ExtResource( 26 ), ExtResource( 25 ), ExtResource( 27 ), ExtResource( 6 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 31 ), ExtResource( 33 ) ]
+particle_textures = [ ExtResource( 5 ), ExtResource( 11 ), ExtResource( 16 ), ExtResource( 14 ), ExtResource( 13 ), ExtResource( 15 ), ExtResource( 12 ), ExtResource( 17 ), ExtResource( 32 ), ExtResource( 34 ) ]
 
 [node name="Sprite" parent="Box" index="0"]
 rect_pivot_offset = Vector2( 16, 16 )
@@ -170,15 +176,15 @@ patch_margin_bottom = 16
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
-[node name="BreakAnimation" parent="." index="3"]
+[node name="BreakAnimation" parent="." index="2"]
 anims/RESET = SubResource( 2 )
 anims/break = SubResource( 1 )
 
-[node name="BreakParticles" parent="." index="4"]
+[node name="BreakParticles" parent="." index="3"]
 amount = 24
 process_material = SubResource( 8 )
 
-[node name="BreakSound" type="AudioStreamPlayer2D" parent="." index="5"]
+[node name="BreakSound" type="AudioStreamPlayer2D" parent="." index="4"]
 unique_name_in_owner = true
 stream = ExtResource( 3 )
 volume_db = 6.0
