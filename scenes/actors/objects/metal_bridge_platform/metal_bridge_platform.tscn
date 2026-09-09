@@ -4,7 +4,7 @@
 [ext_resource path="res://scenes/actors/objects/metal_platform/is_platform_area.gd" type="Script" id=2]
 [ext_resource path="res://scenes/actors/objects/wood_platform/wood_platform.gd" type="Script" id=3]
 [ext_resource path="res://scenes/actors/objects/metal_bridge_platform/recolour.png" type="Texture" id=4]
-[ext_resource path="res://scenes/actors/objects/metal_bridge_platform/1.png" type="Texture" id=5]
+[ext_resource path="res://scenes/actors/objects/metal_bridge_platform/metal_bridge_platform.png" type="Texture" id=5]
 [ext_resource path="res://scenes/actors/objects/metal_bridge_platform/palettes/2.png" type="Texture" id=6]
 [ext_resource path="res://scenes/actors/objects/metal_bridge_platform/palettes/3.png" type="Texture" id=7]
 [ext_resource path="res://scenes/actors/objects/metal_bridge_platform/palettes/4.png" type="Texture" id=8]
@@ -22,7 +22,7 @@ extents = Vector2( 48, 28 )
 z_index = -1
 script = ExtResource( 3 )
 internal_id = "metal_bridge_platform"
-palette_textures = [ ExtResource( 5 ), ExtResource( 11 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ) ]
+palette_textures = [ null, ExtResource( 11 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ) ]
 parts = 3
 
 [node name="Sprite" type="NinePatchRect" parent="."]
