@@ -200,7 +200,6 @@ patch_margin_right = 32
 axis_stretch_horizontal = 1
 
 [node name="ResizableColor" type="NinePatchRect" parent="Node2D/Resizeable"]
-visible = false
 margin_right = 96.0
 margin_bottom = 32.0
 texture = ExtResource( 10 )
@@ -209,7 +208,6 @@ patch_margin_right = 32
 axis_stretch_horizontal = 1
 
 [node name="ResizableColorSpots" type="NinePatchRect" parent="Node2D/Resizeable"]
-visible = false
 modulate = Color( 0.8, 0.8, 0.8, 1 )
 margin_right = 96.0
 margin_bottom = 32.0
@@ -218,8 +216,7 @@ patch_margin_left = 32
 patch_margin_right = 32
 axis_stretch_horizontal = 1
 
-[node name="Modulate" type="NinePatchRect" parent="Node2D/Resizeable/ResizableColorSpots"]
-visible = false
+[node name="ResizableColorSpotsModulate" type="NinePatchRect" parent="Node2D/Resizeable"]
 modulate = Color( 0, 1, 0, 1 )
 material = SubResource( 6 )
 margin_right = 96.0
@@ -236,28 +233,22 @@ texture = ExtResource( 1 )
 offset = Vector2( 0, -6 )
 
 [node name="Color" type="Sprite" parent="Sprite"]
-visible = false
 modulate = Color( 0, 1, 0, 1 )
 position = Vector2( 0, -1 )
-z_index = -8
-z_as_relative = false
 texture = ExtResource( 4 )
 offset = Vector2( 0, 1 )
 
 [node name="ColorSpots" type="Sprite" parent="Sprite"]
-visible = false
 modulate = Color( 0.8, 0.8, 0.8, 1 )
 position = Vector2( 0, -1 )
-z_index = -8
-z_as_relative = false
+z_index = 1
 texture = ExtResource( 12 )
 offset = Vector2( 0, 1 )
 
 [node name="Modulate" type="Sprite" parent="Sprite/ColorSpots"]
 modulate = Color( 0, 1, 0, 1 )
 material = SubResource( 6 )
-z_index = -8
-z_as_relative = false
+z_index = 1
 texture = ExtResource( 12 )
 offset = Vector2( 0, 1 )
 
@@ -297,6 +288,7 @@ shape = SubResource( 2 )
 [node name="Tween" type="Tween" parent="."]
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+visible = false
 rect = Rect2( -64, -64, 128, 128 )
 process_parent = true
 physics_process_parent = true

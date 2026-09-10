@@ -12,7 +12,7 @@ onready var mushroom_spots_color_modulate : Sprite = $Sprite/ColorSpots/Modulate
 onready var resizeable_cap : NinePatchRect = $Node2D/Resizeable
 onready var resizeable_cap_color : NinePatchRect = $Node2D/Resizeable/ResizableColor
 onready var resizeable_spots_color : NinePatchRect = $Node2D/Resizeable/ResizableColorSpots
-onready var resizeable_spots_color_modulate : NinePatchRect = $Node2D/Resizeable/ResizableColorSpots/Modulate
+onready var resizeable_spots_color_modulate : NinePatchRect = $Node2D/Resizeable/ResizableColorSpotsModulate
 onready var sound : AudioStreamPlayer = $AudioStreamPlayer
 onready var visibility_enabler : VisibilityEnabler2D = $VisibilityEnabler2D
 onready var timer : Timer = $IdleBounceTimer
@@ -98,13 +98,17 @@ func update_parts():
 	
 	resizeable_cap.rect_size.x = 64 + (32 * parts)
 	resizeable_cap_color.rect_size.x = 64 + (32 * parts)
-	
+	resizeable_spots_color.rect_size.x  = 64 + (32 * parts)
+	resizeable_spots_color_modulate.rect_size.x  = 64 + (32 * parts)
+
 	resizeable_cap.rect_position.x = -resizeable_cap.rect_size.x/2
 	resizeable_cap_color.rect_position.x = 0
 	
 	resizeable_cap.rect_pivot_offset.x = resizeable_cap.rect_size.x/2
 	resizeable_cap_color.rect_pivot_offset.x = resizeable_cap.rect_size.x/2
-	
+	resizeable_spots_color.rect_pivot_offset.x = resizeable_cap.rect_size.x/2
+	resizeable_spots_color_modulate.rect_pivot_offset.x = resizeable_cap.rect_size.x/2
+
 	visibility_enabler.rect.size.x = 128 + (32 * parts)
 	visibility_enabler.rect.position.x = -visibility_enabler.rect.size.x/2
 
