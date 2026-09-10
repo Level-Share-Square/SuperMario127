@@ -102,6 +102,7 @@ func load_base_properties():
 		PropertyInfo.new(enabled_missions.hint_tooltip)
 	], "Enabled Missions")
 	connect_signals(enabled_missions)
+	if layer_data.layer_metadata.is_origin: enabled_missions.hide()
 	
 	min_shines.window = window
 	min_shines.load_property(min_shines, get_property_value("min_shines"), [
@@ -110,6 +111,7 @@ func load_base_properties():
 		PropertyInfo.new(min_shines.hint_tooltip, 1, -1, CurrentLevelData.level_metadata.collectible_data.mission_data.size())
 	])
 	connect_signals(min_shines)
+	if layer_data.layer_metadata.is_origin: min_shines.hide()
 	
 	max_shines.window = window
 	max_shines.load_property(max_shines, get_property_value("max_shines"), [
@@ -118,6 +120,7 @@ func load_base_properties():
 		PropertyInfo.new(max_shines.hint_tooltip, 1, -1, CurrentLevelData.level_metadata.collectible_data.mission_data.size())
 	])
 	connect_signals(max_shines)
+	if layer_data.layer_metadata.is_origin: max_shines.hide()
 
 	switch_layer.disabled = layer_data.layer_metadata.is_origin
 
