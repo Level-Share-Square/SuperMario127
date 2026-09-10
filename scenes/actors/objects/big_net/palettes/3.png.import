@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/cobweb.png-d6bdbcdf4f694237117f3c587ebe777c.stex"
+path="res://.import/3.png-349099ef9387b34eb3a378ae9133bfe6.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/actors/objects/net/cobweb.png"
-dest_files=[ "res://.import/cobweb.png-d6bdbcdf4f694237117f3c587ebe777c.stex" ]
+source_file="res://scenes/actors/objects/big_net/palettes/3.png"
+dest_files=[ "res://.import/3.png-349099ef9387b34eb3a378ae9133bfe6.stex" ]
 
 [params]
 

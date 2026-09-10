@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/cobweb.png-66997fcdefdd9b2bbbac7d885c42b25b.stex"
+path="res://.import/icon_8.png-c46339a654685a43a8e7a301361aa5ce.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/actors/objects/big_net/cobweb.png"
-dest_files=[ "res://.import/cobweb.png-66997fcdefdd9b2bbbac7d885c42b25b.stex" ]
+source_file="res://scenes/actors/objects/net/palettes/icon_8.png"
+dest_files=[ "res://.import/icon_8.png-c46339a654685a43a8e7a301361aa5ce.stex" ]
 
 [params]
 
