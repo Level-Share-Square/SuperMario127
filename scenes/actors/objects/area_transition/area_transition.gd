@@ -52,10 +52,6 @@ func _editor_ready():
 
 func _object_ready():
 	._object_ready()
-	if not is_enabled():
-		camera_stopper.set_size(Vector2.ZERO)
-		camera_stopper.monitorable = false
-		camera_stopper.visible = false
 		
 	sprite.visible = not is_on_ground_layer()
 
@@ -119,9 +115,13 @@ func start_entrance_animation(character: Character) -> void:
 	entering = true
 	character.camera.set_zoom_tween(Vector2(1, 1), 0.5)
 	
+	var state_name: String = ""
+	if character.state and teleport_mode != TeleportMode.Location: state_name = character.state.name
+	if state_name == "LaunchStarState": state_name = "FallState"
+	
 	CurrentLevelData.vars.area_transition_helper = AreaTransitionHelper.new(
 		character.velocity, 
-		character.state.name if character.state and teleport_mode != TeleportMode.Location else "",
+		state_name,
 		character.facing_direction, 
 		to_local(character.position), 
 		vertical
