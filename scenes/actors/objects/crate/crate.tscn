@@ -1,9 +1,28 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://assets/sounds/wood_break.wav" type="AudioStream" id=1]
 [ext_resource path="res://classes/sound_pitcher_directional.gd" type="Script" id=2]
 [ext_resource path="res://scenes/actors/objects/box_base/box_base.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/actors/objects/crate/particles.png" type="Texture" id=4]
+[ext_resource path="res://scenes/actors/objects/box_base/paletted_box_base.gd" type="Script" id=5]
+[ext_resource path="res://scenes/actors/objects/crate/palettes/1.png" type="Texture" id=6]
+[ext_resource path="res://scenes/actors/objects/crate/palettes/2.png" type="Texture" id=7]
+[ext_resource path="res://scenes/actors/objects/crate/palettes/8.png" type="Texture" id=8]
+[ext_resource path="res://scenes/actors/objects/crate/palettes/9.png" type="Texture" id=9]
+[ext_resource path="res://scenes/actors/objects/crate/palettes/4.png" type="Texture" id=10]
+[ext_resource path="res://scenes/actors/objects/crate/palettes/7.png" type="Texture" id=11]
+[ext_resource path="res://scenes/actors/objects/crate/palettes/3.png" type="Texture" id=12]
+[ext_resource path="res://scenes/actors/objects/crate/palettes/5.png" type="Texture" id=13]
+[ext_resource path="res://scenes/actors/objects/crate/palettes/6.png" type="Texture" id=14]
+[ext_resource path="res://scenes/actors/objects/crate/palettes/4_particles.png" type="Texture" id=15]
+[ext_resource path="res://scenes/actors/objects/crate/palettes/5_particles.png" type="Texture" id=16]
+[ext_resource path="res://scenes/actors/objects/crate/palettes/6_particles.png" type="Texture" id=17]
+[ext_resource path="res://scenes/actors/objects/crate/palettes/9_particles.png" type="Texture" id=18]
+[ext_resource path="res://scenes/actors/objects/crate/palettes/3_particles.png" type="Texture" id=19]
+[ext_resource path="res://scenes/actors/objects/crate/palettes/2_particles.png" type="Texture" id=20]
+[ext_resource path="res://scenes/actors/objects/crate/palettes/7_particles.png" type="Texture" id=21]
+[ext_resource path="res://scenes/actors/objects/crate/palettes/1_particles.png" type="Texture" id=22]
+[ext_resource path="res://scenes/actors/objects/crate/palettes/8_particles.png" type="Texture" id=23]
 [ext_resource path="res://scenes/actors/objects/crate/crate.png" type="Texture" id=28]
 
 [sub_resource type="Animation" id=2]
@@ -101,6 +120,12 @@ tracks/4/keys = {
 } ]
 }
 
+[sub_resource type="CanvasItemMaterial" id=9]
+particles_animation = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 4
+particles_anim_loop = false
+
 [sub_resource type="Gradient" id=7]
 colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
 
@@ -119,8 +144,11 @@ orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 damping = 300.0
 color_ramp = SubResource( 5 )
+anim_offset = 1.0
+anim_offset_random = 1.0
 
-[node name="BreakableBlock" instance=ExtResource( 3 )]
+[node name="Crate" instance=ExtResource( 3 )]
+script = ExtResource( 5 )
 internal_id = "crate"
 top_states = PoolStringArray( "GroundPoundState", "SwimmingState", "GroundPoundStartState" )
 side_states = PoolStringArray( "DiveState", "SlideState", "SpinningState", "SwimmingState", "WingMarioState" )
@@ -128,23 +156,30 @@ side_fludds = PoolStringArray( "TurboNozzle" )
 breakable_objects = PoolStringArray( "Steely", "BobOmb", "Shell" )
 overkill_powerups = PoolStringArray( "MetalPowerup", "RainbowPowerup" )
 resizable = false
+inner_textures = [ ExtResource( 28 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 12 ), ExtResource( 10 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 11 ), ExtResource( 8 ), ExtResource( 9 ) ]
+outer_textures = [  ]
+particle_textures = [ ExtResource( 4 ), ExtResource( 22 ), ExtResource( 20 ), ExtResource( 19 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 17 ), ExtResource( 21 ), ExtResource( 23 ), ExtResource( 18 ) ]
 
 [node name="Sprite" parent="Box" index="0"]
 rect_pivot_offset = Vector2( 16, 16 )
 texture = ExtResource( 28 )
 
-[node name="BreakAnimation" parent="." index="3"]
+[node name="BreakAnimation" parent="." index="2"]
 anims/RESET = SubResource( 2 )
 anims/break = SubResource( 1 )
 
-[node name="BreakParticles" parent="." index="4"]
+[node name="BreakParticles" parent="." index="3"]
+material = SubResource( 9 )
 amount = 24
 process_material = SubResource( 8 )
 texture = ExtResource( 4 )
 
-[node name="BreakSound" type="AudioStreamPlayer2D" parent="." index="5"]
+[node name="BreakSound" type="AudioStreamPlayer2D" parent="." index="4"]
 unique_name_in_owner = true
 stream = ExtResource( 1 )
 volume_db = 6.0
 bus = "Sounds"
 script = ExtResource( 2 )
+
+[connection signal="area_entered" from="PlayerDetector" to="." method="area_entered"]
+[connection signal="area_exited" from="PlayerDetector" to="." method="area_exited"]

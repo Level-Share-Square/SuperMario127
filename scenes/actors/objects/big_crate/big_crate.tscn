@@ -1,10 +1,39 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=44 format=2]
 
 [ext_resource path="res://assets/sounds/wood_break.wav" type="AudioStream" id=1]
 [ext_resource path="res://scenes/actors/objects/big_crate/big_crate.png" type="Texture" id=2]
 [ext_resource path="res://scenes/actors/objects/box_base/box_base.tscn" type="PackedScene" id=3]
-[ext_resource path="res://scenes/actors/objects/crate/particles.png" type="Texture" id=4]
+[ext_resource path="res://scenes/actors/objects/big_crate/particles.png" type="Texture" id=4]
 [ext_resource path="res://classes/sound_pitcher_directional.gd" type="Script" id=5]
+[ext_resource path="res://scenes/actors/objects/big_crate/sticker.png" type="Texture" id=6]
+[ext_resource path="res://scenes/actors/objects/big_crate/big_crate.gd" type="Script" id=7]
+[ext_resource path="res://scenes/actors/objects/big_crate/palettes/3.png" type="Texture" id=8]
+[ext_resource path="res://scenes/actors/objects/big_crate/palettes/1_sticker.png" type="Texture" id=9]
+[ext_resource path="res://scenes/actors/objects/big_crate/palettes/3_sticker.png" type="Texture" id=10]
+[ext_resource path="res://scenes/actors/objects/big_crate/palettes/6_sticker.png" type="Texture" id=11]
+[ext_resource path="res://scenes/actors/objects/big_crate/palettes/6_particles.png" type="Texture" id=12]
+[ext_resource path="res://scenes/actors/objects/big_crate/palettes/7_particles.png" type="Texture" id=13]
+[ext_resource path="res://scenes/actors/objects/big_crate/palettes/5_sticker.png" type="Texture" id=14]
+[ext_resource path="res://scenes/actors/objects/big_crate/palettes/8_sticker.png" type="Texture" id=15]
+[ext_resource path="res://scenes/actors/objects/big_crate/palettes/2.png" type="Texture" id=16]
+[ext_resource path="res://scenes/actors/objects/big_crate/palettes/4.png" type="Texture" id=17]
+[ext_resource path="res://scenes/actors/objects/big_crate/palettes/8.png" type="Texture" id=18]
+[ext_resource path="res://scenes/actors/objects/big_crate/palettes/2_particles.png" type="Texture" id=19]
+[ext_resource path="res://scenes/actors/objects/big_crate/palettes/3_particles.png" type="Texture" id=20]
+[ext_resource path="res://scenes/actors/objects/big_crate/palettes/4_particles.png" type="Texture" id=21]
+[ext_resource path="res://scenes/actors/objects/big_crate/palettes/8_particles.png" type="Texture" id=22]
+[ext_resource path="res://scenes/actors/objects/big_crate/palettes/9_particles.png" type="Texture" id=23]
+[ext_resource path="res://scenes/actors/objects/big_crate/palettes/7_sticker.png" type="Texture" id=24]
+[ext_resource path="res://scenes/actors/objects/big_crate/palettes/1.png" type="Texture" id=25]
+[ext_resource path="res://scenes/actors/objects/big_crate/palettes/7.png" type="Texture" id=26]
+[ext_resource path="res://scenes/actors/objects/big_crate/palettes/5_particles.png" type="Texture" id=27]
+[ext_resource path="res://scenes/actors/objects/big_crate/palettes/9.png" type="Texture" id=28]
+[ext_resource path="res://scenes/actors/objects/big_crate/palettes/6.png" type="Texture" id=29]
+[ext_resource path="res://scenes/actors/objects/big_crate/palettes/1_particles.png" type="Texture" id=30]
+[ext_resource path="res://scenes/actors/objects/big_crate/palettes/5.png" type="Texture" id=31]
+[ext_resource path="res://scenes/actors/objects/big_crate/palettes/2_sticker.png" type="Texture" id=32]
+[ext_resource path="res://scenes/actors/objects/big_crate/palettes/4_sticker.png" type="Texture" id=33]
+[ext_resource path="res://scenes/actors/objects/big_crate/palettes/9_sticker.png" type="Texture" id=34]
 
 [sub_resource type="Animation" id=2]
 length = 0.001
@@ -32,10 +61,22 @@ tracks/1/keys = {
 "update": 0,
 "values": [ Vector2( 1, 1 ) ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sticker:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
 
 [sub_resource type="Animation" id=1]
 resource_name = "break"
-length = 0.7
+length = 1.25
 tracks/0/type = "value"
 tracks/0/path = NodePath("Box/Sprite:modulate")
 tracks/0/interp = 1
@@ -67,7 +108,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0.7 ),
+"times": PoolRealArray( 1.25 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
@@ -100,6 +141,24 @@ tracks/4/keys = {
 "method": "play_rand_pitch"
 } ]
 }
+tracks/5/type = "value"
+tracks/5/path = NodePath("Sticker:emitting")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="CanvasItemMaterial" id=9]
+particles_animation = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 4
+particles_anim_loop = false
 
 [sub_resource type="Gradient" id=7]
 colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
@@ -119,8 +178,32 @@ orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 damping = 300.0
 color_ramp = SubResource( 5 )
+anim_offset = 1.0
+anim_offset_random = 1.0
 
-[node name="BreakableBlock" instance=ExtResource( 3 )]
+[sub_resource type="Gradient" id=11]
+offsets = PoolRealArray( 0.679245, 1 )
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=12]
+gradient = SubResource( 11 )
+
+[sub_resource type="ParticlesMaterial" id=10]
+flag_disable_z = true
+direction = Vector3( 0.511, -1, 0 )
+spread = 90.0
+flatness = 1.0
+gravity = Vector3( 0, 98, 0 )
+initial_velocity = 40.0
+angular_velocity = -25.0
+angular_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = -38.94
+color_ramp = SubResource( 12 )
+
+[node name="BigCrate" instance=ExtResource( 3 )]
+script = ExtResource( 7 )
 editor_rect = Rect2( -32, -32, 64, 64 )
 internal_id = "big_crate"
 initial_vel = 240.0
@@ -133,6 +216,9 @@ side_fludds = PoolStringArray( "TurboNozzle" )
 breakable_objects = PoolStringArray( "Steely", "BobOmb", "Shell" )
 overkill_powerups = PoolStringArray( "MetalPowerup", "RainbowPowerup" )
 resizable = false
+inner_textures = [ ExtResource( 2 ), ExtResource( 25 ), ExtResource( 16 ), ExtResource( 8 ), ExtResource( 17 ), ExtResource( 31 ), ExtResource( 29 ), ExtResource( 26 ), ExtResource( 18 ), ExtResource( 28 ) ]
+particle_textures = [ ExtResource( 4 ), ExtResource( 30 ), ExtResource( 19 ), ExtResource( 20 ), ExtResource( 21 ), ExtResource( 27 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 22 ), ExtResource( 23 ) ]
+sticker_textures = [ ExtResource( 6 ), ExtResource( 9 ), ExtResource( 32 ), ExtResource( 10 ), ExtResource( 33 ), ExtResource( 14 ), ExtResource( 11 ), ExtResource( 24 ), ExtResource( 15 ), ExtResource( 34 ) ]
 
 [node name="Sprite" parent="Box" index="0"]
 margin_left = -32.0
@@ -148,13 +234,28 @@ anims/RESET = SubResource( 2 )
 anims/break = SubResource( 1 )
 
 [node name="BreakParticles" parent="." index="3"]
+material = SubResource( 9 )
 amount = 24
 process_material = SubResource( 8 )
 texture = ExtResource( 4 )
 
-[node name="BreakSound" type="AudioStreamPlayer2D" parent="." index="4"]
+[node name="Sticker" type="Particles2D" parent="." index="4"]
+unique_name_in_owner = true
+position = Vector2( -10, 3 )
+emitting = false
+amount = 1
+lifetime = 1.25
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource( 10 )
+texture = ExtResource( 6 )
+
+[node name="BreakSound" type="AudioStreamPlayer2D" parent="." index="5"]
 unique_name_in_owner = true
 stream = ExtResource( 1 )
 volume_db = 6.0
 bus = "Sounds"
 script = ExtResource( 5 )
+
+[connection signal="area_entered" from="PlayerDetector" to="." method="area_entered"]
+[connection signal="area_exited" from="PlayerDetector" to="." method="area_exited"]
