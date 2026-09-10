@@ -52,10 +52,6 @@ func _editor_ready():
 
 func _object_ready():
 	._object_ready()
-	if not is_enabled():
-		camera_stopper.set_size(Vector2.ZERO)
-		camera_stopper.monitorable = false
-		camera_stopper.visible = false
 		
 	sprite.visible = not is_on_ground_layer()
 
