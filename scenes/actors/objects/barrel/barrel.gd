@@ -10,7 +10,6 @@ const HOP_HEIGHT := 100
 const ROLL_BUFFER_DURATION := 10
 
 onready var sprite : AnimatedSprite = $BarrelBody/Sprite
-onready var sprite_color : AnimatedSprite = $BarrelBody/Sprite/Color
 onready var attack_area : Area2D = $BarrelBody/AttackArea
 onready var stomp_area : Area2D = $BarrelBody/StompArea
 onready var water_detector : Area2D = $BarrelBody/WaterDetector
@@ -19,8 +18,9 @@ onready var collision_shape = $BarrelBody/CollisionShape2D
 onready var dust = $"%DustLandParticles"
 onready var hop_sound = $"%HopSound"
 
-
 onready var body : KinematicBody2D = $BarrelBody
+
+export(Array, SpriteFrames) var palette_frames
 
 var gravity : float
 var gravity_scale : float
@@ -37,7 +37,7 @@ var roll_buffer: float = ROLL_BUFFER_DURATION
 
 
 func _register_properties():
-	register_property(4, "color", color)
+	register_property(4, "color", color, false)
 	register_property(5, "max_speed", max_speed)
 	register_property(6, "physics", physics)
 	register_property(7, "autoroll", autoroll)
@@ -52,9 +52,7 @@ func _register_property_info():
 func _ready() -> void:
 	CurrentLevelData.enemies_instanced += 1
 	gravity = CurrentLevelData.current_area.header.gravity*100
-	sprite_color.modulate = color
 	sprite.play("default")
-	sprite_color.play("default")
 	water_detector.connect("area_entered", self, "on_water_entered")
 	water_detector.connect("area_exited", self, "on_water_exited")
 	
@@ -63,9 +61,15 @@ func _ready() -> void:
 	if autoroll:
 		is_rolling = true
 		sprite.play("rolling")
-		sprite_color.play("rolling")
 		
 	collision_shape.disabled = !is_enabled_and_on_ground()
+	var _connect = connect("property_changed", self, "update_property")
+	update_property("palette", palette)
+
+
+func update_property(key: String, value):
+	if key == "palette":
+		$BarrelBody/Sprite.frames = palette_frames[value]
 
 
 func _object_physics_process(delta):
@@ -75,13 +79,11 @@ func _object_physics_process(delta):
 		roll_buffer -= 1
 		
 	sprite.scale = sprite.scale.move_toward(Vector2(1, 1), LERP_STRENGTH)
-	sprite_color.scale = sprite.scale.move_toward(Vector2(1, 1), LERP_STRENGTH)
 		
 	dust.global_position = body.global_position
 		
 		
 	sprite.speed_scale = abs(10*velocity.x) / max_speed
-	sprite_color.speed_scale = abs(10*velocity.x) / max_speed
 	if physics:
 		if velocity.y < max_speed:
 			velocity.y += gravity*delta
@@ -117,7 +119,6 @@ func move_body(entered_body):
 	velocity.x += PUSH_VEL * sign(entered_body.velocity.x)
 	velocity.x = clamp(velocity.x, -max_speed, max_speed)
 	sprite.scale = Vector2(SQUISH_STRENGTH, SQUISH_STRENGTH)
-	sprite_color.scale = Vector2(SQUISH_STRENGTH, SQUISH_STRENGTH)
 
 
 func on_body_entered(entered_body):
@@ -144,9 +145,7 @@ func roll(entered_body):
 	velocity.y = -HOP_HEIGHT
 	
 	sprite.scale = Vector2(SQUISH_STRENGTH, SQUISH_STRENGTH)
-	sprite_color.scale = Vector2(SQUISH_STRENGTH, SQUISH_STRENGTH)
 	sprite.play("rolling")
-	sprite_color.play("rolling")
 	
 	dust.restart()
 	dust.emitting = true

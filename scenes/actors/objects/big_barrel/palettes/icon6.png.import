@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/rock.png-b579c7c075f7f4c61e998a96078c0064.stex"
+path="res://.import/icon6.png-ae1bc1f01feb1266451020bba742bd72.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/actors/objects/big_barrel/rock.png"
-dest_files=[ "res://.import/rock.png-b579c7c075f7f4c61e998a96078c0064.stex" ]
+source_file="res://scenes/actors/objects/big_barrel/palettes/icon6.png"
+dest_files=[ "res://.import/icon6.png-ae1bc1f01feb1266451020bba742bd72.stex" ]
 
 [params]
 

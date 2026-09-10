@@ -1,11 +1,19 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://scenes/actors/objects/barrel/barrel.gd" type="Script" id=1]
-[ext_resource path="res://scenes/actors/objects/barrel/color_spriteframes.tres" type="SpriteFrames" id=2]
+[ext_resource path="res://scenes/actors/objects/barrel/palettes/4_frames.tres" type="SpriteFrames" id=2]
 [ext_resource path="res://assets/sounds/koopa_hit.wav" type="AudioStream" id=3]
 [ext_resource path="res://scenes/actors/mario/particles/dust.png" type="Texture" id=4]
+[ext_resource path="res://scenes/actors/objects/barrel/palettes/1_frames.tres" type="SpriteFrames" id=5]
+[ext_resource path="res://scenes/actors/objects/barrel/palettes/2_frames.tres" type="SpriteFrames" id=6]
 [ext_resource path="res://scenes/actors/objects/koopa_troopa/body.gd" type="Script" id=7]
+[ext_resource path="res://scenes/actors/objects/barrel/palettes/5_frames.tres" type="SpriteFrames" id=8]
 [ext_resource path="res://scenes/actors/objects/barrel/regular_frames.tres" type="SpriteFrames" id=9]
+[ext_resource path="res://scenes/actors/objects/barrel/palettes/7_frames.tres" type="SpriteFrames" id=10]
+[ext_resource path="res://scenes/actors/objects/barrel/palettes/3_frames.tres" type="SpriteFrames" id=11]
+[ext_resource path="res://scenes/actors/objects/barrel/palettes/6_frames.tres" type="SpriteFrames" id=12]
+[ext_resource path="res://scenes/actors/objects/barrel/palettes/8_frames.tres" type="SpriteFrames" id=13]
+[ext_resource path="res://scenes/actors/objects/barrel/palettes/9_frames.tres" type="SpriteFrames" id=14]
 
 [sub_resource type="CanvasItemMaterial" id=133]
 particles_animation = true
@@ -64,6 +72,7 @@ z_index = -2
 script = ExtResource( 1 )
 editor_rect = Rect2( -12, -12, 24, 28 )
 internal_id = "barrel"
+palette_frames = [ ExtResource( 9 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 11 ), ExtResource( 2 ), ExtResource( 8 ), ExtResource( 12 ), ExtResource( 10 ), ExtResource( 13 ), ExtResource( 14 ) ]
 
 [node name="BarrelBody" type="KinematicBody2D" parent="."]
 collision_layer = 69
@@ -89,10 +98,6 @@ texture = ExtResource( 4 )
 frames = ExtResource( 9 )
 animation = "rolling"
 playing = true
-
-[node name="Color" type="AnimatedSprite" parent="BarrelBody/Sprite"]
-frames = ExtResource( 2 )
-animation = "rolling"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BarrelBody"]
 position = Vector2( 0, 2 )

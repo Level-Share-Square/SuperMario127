@@ -1,8 +1,26 @@
-[gd_resource type="Resource" load_steps=4 format=2]
+[gd_resource type="Resource" load_steps=22 format=2]
 
 [ext_resource path="res://scenes/editor/items/placeable_object.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/objects/barrel/icon.png" type="Texture" id=2]
 [ext_resource path="res://scenes/actors/objects/barrel/default.png" type="Texture" id=3]
+[ext_resource path="res://scenes/actors/objects/barrel/palettes/icon_6.png" type="Texture" id=4]
+[ext_resource path="res://scenes/actors/objects/barrel/palettes/icon_8.png" type="Texture" id=5]
+[ext_resource path="res://scenes/actors/objects/barrel/palettes/default8.png" type="Texture" id=6]
+[ext_resource path="res://scenes/actors/objects/barrel/palettes/default2.png" type="Texture" id=7]
+[ext_resource path="res://scenes/actors/objects/barrel/palettes/default7.png" type="Texture" id=8]
+[ext_resource path="res://scenes/actors/objects/barrel/palettes/default5.png" type="Texture" id=9]
+[ext_resource path="res://scenes/actors/objects/barrel/palettes/icon_2.png" type="Texture" id=10]
+[ext_resource path="res://scenes/actors/objects/barrel/palettes/default3.png" type="Texture" id=11]
+[ext_resource path="res://scenes/actors/objects/barrel/palettes/default1.png" type="Texture" id=12]
+[ext_resource path="res://scenes/actors/objects/barrel/palettes/default4.png" type="Texture" id=13]
+[ext_resource path="res://scenes/actors/objects/barrel/palettes/default6.png" type="Texture" id=14]
+[ext_resource path="res://scenes/actors/objects/barrel/palettes/icon_5.png" type="Texture" id=15]
+[ext_resource path="res://scenes/actors/objects/barrel/palettes/default9.png" type="Texture" id=16]
+[ext_resource path="res://scenes/actors/objects/barrel/palettes/icon_1.png" type="Texture" id=17]
+[ext_resource path="res://scenes/actors/objects/barrel/palettes/icon_3.png" type="Texture" id=18]
+[ext_resource path="res://scenes/actors/objects/barrel/palettes/icon_4.png" type="Texture" id=19]
+[ext_resource path="res://scenes/actors/objects/barrel/palettes/icon_7.png" type="Texture" id=20]
+[ext_resource path="res://scenes/actors/objects/barrel/palettes/icon_9.png" type="Texture" id=21]
 
 [resource]
 script = ExtResource( 1 )
@@ -10,8 +28,8 @@ item_name = "Barrel"
 change_to = "obj_big_barrel"
 items_in_sequence = 2
 index_in_sequence = 0
-icons = [ ExtResource( 2 ) ]
-previews = [ ExtResource( 3 ) ]
+icons = [ ExtResource( 2 ), ExtResource( 17 ), ExtResource( 10 ), ExtResource( 18 ), ExtResource( 19 ), ExtResource( 15 ), ExtResource( 4 ), ExtResource( 20 ), ExtResource( 5 ), ExtResource( 21 ) ]
+previews = [ ExtResource( 3 ), ExtResource( 12 ), ExtResource( 7 ), ExtResource( 11 ), ExtResource( 13 ), ExtResource( 9 ), ExtResource( 14 ), ExtResource( 8 ), ExtResource( 6 ), ExtResource( 16 ) ]
 priority = 200
 object_id = 151
 preview_offset = Vector2( 0, 0 )
