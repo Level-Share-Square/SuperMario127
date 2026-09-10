@@ -1,4 +1,4 @@
-[gd_scene load_steps=211 format=2]
+[gd_scene load_steps=210 format=2]
 
 [ext_resource path="res://scenes/actors/mario/animation_frames.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/actors/mario/states/Bounce.gd" type="Script" id=2]
@@ -100,9 +100,6 @@ extents = Vector2( 15, 5 )
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 17, 5 )
-
-[sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 5.5, 1 )
 
 [sub_resource type="RayShape2D" id=5]
 length = 24.0
@@ -1692,7 +1689,7 @@ shader = ExtResource( 86 )
 shader_param/ray_count = 4
 shader_param/ray_distance = 0.4
 shader_param/ray_seperation_degrees = 22.0
-shader_param/rotation = 3.5849
+shader_param/rotation = 0.477766
 
 [sub_resource type="RectangleShape2D" id=85]
 extents = Vector2( 8, 18 )
@@ -1726,16 +1723,15 @@ luigi_accel = 10.5
 luigi_fric = 13.5
 luigi_speed = 216.0
 
-[node name="Collision" type="CollisionShape2D" parent="."]
-modulate = Color( 1, 0, 0, 1 )
+[node name="Collision" type="CollisionPolygon2D" parent="."]
 position = Vector2( 0.5, -4 )
 z_index = 2
-shape = SubResource( 1 )
+polygon = PoolVector2Array( -5.5, -4, 5.5, -4, 5.5, 4, -0.5, 16, -5.5, 4 )
 
-[node name="CollisionDive" type="CollisionShape2D" parent="."]
+[node name="CollisionDive" type="CollisionPolygon2D" parent="."]
 position = Vector2( 0.5, -7 )
 z_index = 2
-shape = SubResource( 4 )
+polygon = PoolVector2Array( -5.5, -1, 5.5, -1, 5.5, 1, 0, 8, -5.5, 1 )
 disabled = true
 
 [node name="GroundCollision" type="CollisionShape2D" parent="."]
@@ -1750,6 +1746,7 @@ position = Vector2( -1, 16 )
 polygon = PoolVector2Array( -3, -6, 0, 1, 2, 1, 5, -6 )
 
 [node name="LeftCollision" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2( 0.5, 8 )
 rotation = -1.5708
 shape = SubResource( 6 )
@@ -1953,6 +1950,9 @@ scale = Vector2( 0.98, 0.98 )
 frames = ExtResource( 1 )
 animation = "idleRight"
 playing = true
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="SpriteBlur" type="AnimatedSprite" parent="Sprite"]
 visible = false
@@ -1963,6 +1963,9 @@ frames = ExtResource( 1 )
 animation = "groundPoundLeft"
 playing = true
 script = ExtResource( 16 )
+__meta__ = {
+"_edit_lock_": true
+}
 y_offset = -3
 opacity = Color( 0, 0, 0, 0.34902 )
 
@@ -1976,6 +1979,9 @@ frames = ExtResource( 1 )
 animation = "groundPoundLeft"
 playing = true
 script = ExtResource( 16 )
+__meta__ = {
+"_edit_lock_": true
+}
 y_offset = -6
 opacity = Color( 0, 0, 0, 0.741176 )
 
@@ -1983,12 +1989,18 @@ opacity = Color( 0, 0, 0, 0.741176 )
 frames = ExtResource( 48 )
 animation = "idleRight"
 script = ExtResource( 63 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Wings" type="AnimatedSprite" parent="Sprite"]
 visible = false
 frames = ExtResource( 65 )
 animation = "idleRight"
 script = ExtResource( 63 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Water2" type="AnimatedSprite" parent="Sprite"]
 visible = false
@@ -1999,6 +2011,9 @@ frames = ExtResource( 24 )
 animation = "in"
 playing = true
 centered = false
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Water" type="AnimatedSprite" parent="Sprite"]
 visible = false
@@ -2008,6 +2023,9 @@ frames = ExtResource( 24 )
 animation = "out"
 playing = true
 centered = false
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Particles2D" type="Particles2D" parent="Sprite"]
 material = SubResource( 8 )
@@ -2018,6 +2036,9 @@ fixed_fps = 60
 local_coords = false
 process_material = SubResource( 13 )
 texture = ExtResource( 66 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Particles2DBack" type="Particles2D" parent="Sprite"]
 show_behind_parent = true
@@ -2029,6 +2050,9 @@ fixed_fps = 60
 local_coords = false
 process_material = SubResource( 13 )
 texture = ExtResource( 66 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="BubblesLeft" type="Particles2D" parent="Sprite"]
 material = SubResource( 8 )
@@ -2040,6 +2064,9 @@ fixed_fps = 60
 local_coords = false
 process_material = SubResource( 17 )
 texture = ExtResource( 71 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="BubblesRight" type="Particles2D" parent="Sprite"]
 material = SubResource( 8 )
@@ -2051,6 +2078,9 @@ fixed_fps = 60
 local_coords = false
 process_material = SubResource( 17 )
 texture = ExtResource( 71 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="TurboParticles" type="Particles2D" parent="Sprite"]
 material = SubResource( 8 )
@@ -2063,6 +2093,9 @@ local_coords = false
 process_material = SubResource( 18 )
 texture = ExtResource( 66 )
 script = ExtResource( 68 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="RocketParticles" type="Particles2D" parent="Sprite"]
 material = SubResource( 19 )
@@ -2076,6 +2109,9 @@ fixed_fps = 60
 local_coords = false
 process_material = SubResource( 129 )
 texture = ExtResource( 30 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="IsCrushedDetector" type="Area2D" parent="."]
 visible = false
@@ -2296,6 +2332,7 @@ position = Vector2( 0.5, 4 )
 shape = SubResource( 27 )
 
 [node name="EnemyCollision" type="Area2D" parent="."]
+visible = false
 collision_layer = 2
 collision_mask = 0
 monitoring = false
@@ -2380,6 +2417,7 @@ position = Vector2( 0.5, 5 )
 shape = SubResource( 31 )
 
 [node name="SpinArea" type="Area2D" parent="."]
+visible = false
 position = Vector2( 0, 6 )
 collision_layer = 131074
 collision_mask = 17
@@ -2402,6 +2440,7 @@ shape = SubResource( 147 )
 disabled = true
 
 [node name="SpinSwimArea" type="Area2D" parent="."]
+visible = false
 position = Vector2( 0, 6 )
 collision_layer = 131074
 collision_mask = 17
@@ -2423,6 +2462,7 @@ shape = SubResource( 148 )
 disabled = true
 
 [node name="BoxPwner" type="Area2D" parent="."]
+visible = false
 modulate = Color( 1, 0.470588, 0, 1 )
 collision_layer = 131072
 collision_mask = 0
@@ -2439,6 +2479,7 @@ shape = SubResource( 149 )
 disabled = true
 
 [node name="BoxPwnerDive" type="Area2D" parent="."]
+visible = false
 modulate = Color( 1, 0.470588, 0, 1 )
 collision_layer = 131072
 collision_mask = 0
@@ -2587,7 +2628,7 @@ playing = true
 [node name="Recolorable" type="AnimatedSprite" parent="CollectedShine"]
 visible = false
 frames = ExtResource( 61 )
-frame = 10
+frame = 13
 script = ExtResource( 63 )
 
 [node name="ShineParticles" type="Particles2D" parent="CollectedShine"]

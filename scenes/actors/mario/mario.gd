@@ -37,8 +37,8 @@ onready var dust_land_particles : Particles2D = $Particles/DustLandParticles
 onready var dust_jump_particles : Particles2D = $Particles/DustJumpParticles
 onready var bonk_particles : Particles2D = $Particles/BonkParticles
 
-onready var collision_shape : CollisionShape2D = $Collision
-onready var dive_collision_shape : CollisionShape2D = $CollisionDive
+onready var collision_shape : CollisionPolygon2D = $Collision
+onready var dive_collision_shape : CollisionPolygon2D = $CollisionDive
 onready var collision_raycast : CollisionShape2D = $GroundCollision
 onready var ground_shape : CollisionPolygon2D = $GroundShape
 onready var left_collision : CollisionShape2D = $LeftCollision
