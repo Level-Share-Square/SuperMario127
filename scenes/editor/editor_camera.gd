@@ -91,9 +91,10 @@ func _input(event: InputEvent):
 		ignore_wrap = false
 		
 		## screen wrapping
-		var window_size: Vector2 = get_viewport().size
+		var window_size: Vector2 = ScreenSizeUtil.DEFAULT_SIZE
 		var pos: Vector2 = event.position
 		var new_pos: Vector2 = pos
+		prints(window_size, "|", event.position)
 		
 		new_pos.x = wrapf(new_pos.x, 0, window_size.x)
 		new_pos.y = wrapf(new_pos.y, 0, window_size.y)
