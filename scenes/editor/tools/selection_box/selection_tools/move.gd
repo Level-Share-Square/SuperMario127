@@ -8,9 +8,10 @@ var action: ChangePropertyBulkAction
 
 
 func _input(event):
+	var scroll: Node2D = get_tree().current_scene.get_node("%ParallaxScroll")
 	if is_active:
 		for object in editor.selected_objects:
-			object.global_position = (get_mouse_pos() + object_offsets[object]).snapped(CurrentLevelData.editor_data.pixel_snap) if editor.pixel_lock else get_mouse_pos() + object_offsets[object]
+			object.global_position = scroll.get_transform().xform((get_mouse_pos() + object_offsets[object]).snapped(CurrentLevelData.editor_data.pixel_snap)) if editor.pixel_lock else scroll.get_transform().xform(get_mouse_pos() + object_offsets[object])
 		selection_box.fit_to_bounding_rectangle()
 
 

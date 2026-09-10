@@ -80,7 +80,7 @@ func _mouse_movement(event, mouse_pos):
 func _process(delta):
 	if is_dragging and hovered_object:
 		if get_mouse_pos().is_equal_approx(old_pos): return
-		hovered_object.global_position = (get_node("%ParallaxScroll").get_transform().xform(get_mouse_pos()) + pos_offset).snapped(CurrentLevelData.editor_data.pixel_snap) if editor.pixel_lock else get_node("%ParallaxScroll").get_transform().xform(get_mouse_pos()) + pos_offset
+		hovered_object.global_position = get_node("%ParallaxScroll").get_transform().xform((get_mouse_pos() + pos_offset).snapped(CurrentLevelData.editor_data.pixel_snap)) if editor.pixel_lock else get_node("%ParallaxScroll").get_transform().xform((get_mouse_pos() + pos_offset))
 
 
 func _click_released(event, mouse_pos):
