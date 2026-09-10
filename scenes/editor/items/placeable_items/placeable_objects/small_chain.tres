@@ -19,9 +19,9 @@
 [resource]
 script = ExtResource( 1 )
 item_name = "Small Chain"
-change_to = "Small Chain"
+change_to = "obj_chain"
 items_in_sequence = 2
-index_in_sequence = 0
+index_in_sequence = 1
 icons = [ ExtResource( 2 ), ExtResource( 8 ), ExtResource( 12 ), ExtResource( 11 ), ExtResource( 5 ), ExtResource( 3 ), ExtResource( 9 ) ]
 previews = [ ExtResource( 4 ), ExtResource( 15 ), ExtResource( 6 ), ExtResource( 13 ), ExtResource( 10 ), ExtResource( 14 ), ExtResource( 7 ) ]
 priority = 81

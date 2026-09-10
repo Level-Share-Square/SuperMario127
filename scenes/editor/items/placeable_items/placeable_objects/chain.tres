@@ -19,7 +19,7 @@
 [resource]
 script = ExtResource( 1 )
 item_name = "Chain"
-change_to = "Small Chain"
+change_to = "obj_small_chain"
 items_in_sequence = 2
 index_in_sequence = 0
 icons = [ ExtResource( 2 ), ExtResource( 6 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 8 ), ExtResource( 7 ), ExtResource( 9 ) ]
