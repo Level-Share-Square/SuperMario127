@@ -219,31 +219,8 @@ func convert_old_code_to_new(code: String) -> String:
 	
 	var container: LevelDataContainer = conversion_util.get_new_level_data_from_old_data(level_data)
 	LevelCodeHandler.recalculate_level_collectible_counts(container)
+	LevelCodeHandler.check_and_convert_new_level("", container)
 	return LevelCodeSerializer.serialize_level_data(container)
-
-func check_and_convert_new_level(level_code: String):
-	var spliced_level_code = LevelCodeTokenizer.splice_level(level_code)
-	var metadata_code = LevelCodeTokenizer.splice_metadata(spliced_level_code)
-	var level_metadata = LevelCodeDeserializer.deserialize_level_metadata_code(metadata_code)
-	var current_level_version: int = ProjectSettings.get_setting("global/level_code_version")
-	var level_version: int = level_metadata.level_version
-	
-	if current_level_version == level_version: return {"has_converted": false, "level_code": level_code}
-	
-	var data_container = conversion_util.generate_data_container(level_code)
-	# mandatory because .call() is not static
-	var conversion_script = load("res://util/conversion_util.gd")
-	
-	while level_version < current_level_version:
-		print("Converting level from code ", str(level_version), " to ", str(level_version + 1))
-		var method: String = "convert_" + str(level_version) + "_to_" + str(level_version + 1)
-
-		data_container = conversion_script.call(method, data_container)
-			
-		level_version += 1
-			
-	level_code = LevelCodeSerializer.serialize_level_data(data_container)
-	return {"has_converted": true, "level_code": level_code}
 
 ## campaign
 func is_hub_level() -> bool:
