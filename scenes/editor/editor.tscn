@@ -99,7 +99,7 @@
 [ext_resource path="res://assets/icons/Lock.svg" type="Texture" id=97]
 [ext_resource path="res://scenes/menu/spinbox_unfocus.gd" type="Script" id=98]
 [ext_resource path="res://assets/icons/move_selection.png" type="Texture" id=99]
-[ext_resource path="res://assets/cursors/arrow.svg" type="Texture" id=100]
+[ext_resource path="res://assets/icons/Cursor.svg" type="Texture" id=100]
 [ext_resource path="res://scenes/editor/tools/obj_cursor_tool.gd" type="Script" id=101]
 [ext_resource path="res://scenes/editor/tools/cam_move_tool.gd" type="Script" id=103]
 
