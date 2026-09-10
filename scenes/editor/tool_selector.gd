@@ -4,6 +4,7 @@ extends PanelContainer
 export(NodePath) var editor_path
 onready var editor = get_node(editor_path)
 
+onready var cursor = $"%Cursor"
 onready var tile_lock: Button = $"%ObjectTileLock"
 onready var rectangle_fill: Button = $"%TileFill"
 onready var tile_rect_fill = $"%TileRectFillTool"
@@ -33,11 +34,13 @@ func on_button_pressed(button):
 func detect_tool_buttons(button: Button):
 	yield(get_tree(), "idle_frame")
 	if "Object" in editor.tool_manager.current_tool.name:
+		cursor.show()
 		tile_lock.show()
 		rectangle_fill.hide()
 		tile_rect_fill.hide()
 		object_trail.show()
 	else:
+		cursor.hide()
 		tile_lock.hide()
 		rectangle_fill.show()
 		tile_rect_fill.show()

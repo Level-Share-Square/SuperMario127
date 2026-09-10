@@ -15,7 +15,7 @@ signal eraser_toggled(new_value)
 func _ready():
 	yield(editor, "ready")
 	if editor.selected_item is PlaceableObject:
-		change_tool("ObjectPaint")
+		change_tool("ObjectCursor")
 	else:
 		change_tool("TilePaint")
 	editor.connect("item_changed", self, "item_changed")
@@ -74,6 +74,13 @@ func item_changed(placeable_item: PlaceableItem):
 
 func _on_Tools_tool_picked(tool_name):
 	match tool_name:
+		"Cursor":
+			change_tool("ObjectCursor")
+		"Move":
+			if editor.selected_item is PlaceableObject:
+				change_tool("ObjectMove")
+			else:
+				change_tool("TileMove")
 		"Paint":
 			if editor.selected_item is PlaceableObject:
 				change_tool("ObjectPaint")

@@ -29,6 +29,9 @@ var down_held: bool
 var speedup_held: bool
 var pan_held: bool
 
+var move_override: bool
+var ignore_wrap: bool
+
 
 func _ready():
 	if CurrentLevelData.editor_data.camera_positions.size() <= CurrentLevelData.area_id:
@@ -69,7 +72,6 @@ func _unhandled_input(event: InputEvent):
 			position = new_pos
 			sim_pos = position
 	
-	
 	for held_action in held_actions.keys():
 		if event.is_action_pressed(held_action):
 			self[held_actions[held_action]] = true
@@ -79,10 +81,26 @@ func _unhandled_input(event: InputEvent):
 			self[held_actions[held_action]] = false
 			if held_action == "pan_camera":
 				Input.set_default_cursor_shape(Input.CURSOR_ARROW)
-	
-	if event is InputEventMouseMotion and pan_held:
-		sim_pos -= event.relative * zoom
-		position = position.linear_interpolate(sim_pos, 50 * (1 / Engine.get_frames_per_second()))
+
+
+func _input(event: InputEvent):
+	if event is InputEventMouseMotion and (pan_held or move_override):
+		if not ignore_wrap:
+			sim_pos -= event.relative * zoom
+			position = position.linear_interpolate(sim_pos, 50 * (1 / Engine.get_frames_per_second()))
+		ignore_wrap = false
+		
+		## screen wrapping
+		var window_size: Vector2 = get_viewport().size
+		var pos: Vector2 = event.position
+		var new_pos: Vector2 = pos
+		
+		new_pos.x = wrapf(new_pos.x, 0, window_size.x)
+		new_pos.y = wrapf(new_pos.y, 0, window_size.y)
+		
+		if new_pos != pos:
+			Input.warp_mouse_position(new_pos)
+			ignore_wrap = true
 
 
 func _physics_process(delta):
