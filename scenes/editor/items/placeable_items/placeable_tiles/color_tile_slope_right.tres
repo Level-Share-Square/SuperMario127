@@ -14,10 +14,10 @@
 script = ExtResource( 1 )
 item_name = "Color Tile (Right Slope)"
 change_to = "til_color_tile"
-items_in_sequence = 3
-index_in_sequence = 2
+items_in_sequence = 4
+index_in_sequence = 3
 icons = [ ExtResource( 3 ), ExtResource( 2 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ) ]
 previews = [ ExtResource( 3 ) ]
-priority = 368
+priority = 358
 tileset_id = 21
 tile_id = 3

@@ -6,11 +6,11 @@
 [resource]
 script = ExtResource( 1 )
 item_name = "Boo Block"
-change_to = "til_boo_block_slope_left"
-items_in_sequence = 3
+change_to = "til_boo_block_half_tile"
+items_in_sequence = 4
 index_in_sequence = 0
 icons = [ ExtResource( 2 ) ]
 previews = [ ExtResource( 2 ) ]
-priority = 350
+priority = 351
 tileset_id = 6
 tile_id = 0
