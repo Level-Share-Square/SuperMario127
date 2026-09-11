@@ -25,6 +25,7 @@ var stored_character : Character
 export var normal_texture : Texture
 export var recolorable_texture : Texture 
 var color := Color(0, 1, 0)
+var disable_collision: bool = false
 
 
 # overriding cos pipes can be recolored
@@ -37,6 +38,7 @@ var color := Color(0, 1, 0)
 func _register_properties() -> void:
 	._register_properties()
 	register_property(9, "color", color)
+	register_property(10, "disable_collision", disable_collision)
 
 
 func _on_property_changed(key, value):
@@ -179,7 +181,7 @@ func _ready():
 	
 	_on_property_changed("color", color)
 	connect("property_changed", self, "_on_property_changed")
-	get_node("StaticBody2D/CollisionShape2D").disabled = !is_enabled_and_on_ground()
+	get_node("StaticBody2D/CollisionShape2D").disabled = disable_collision
 
 func is_rainbow(body) -> bool:
 	return body.powerup != null and body.powerup.id == "Rainbow"
