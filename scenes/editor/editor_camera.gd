@@ -29,6 +29,7 @@ var down_held: bool
 var speedup_held: bool
 var pan_held: bool
 
+var allow_magnify: bool
 var move_override: bool
 var ignore_wrap: bool
 
@@ -53,6 +54,15 @@ func _unhandled_input(event: InputEvent):
 		add_zoom_level(zoom_amount)
 	elif event.is_action_pressed("zoom_in"):
 		add_zoom_level(-zoom_amount)
+	
+	if allow_magnify and event is InputEventMagnifyGesture:
+		var mouse_pos_before: Vector2 = get_global_mouse_position()
+		add_zoom_level(1.0 - event.factor)
+		zoom = Vector2(zoom_level, zoom_level)
+		var new_pos: Vector2 = position + (mouse_pos_before - get_global_mouse_position())
+		position = new_pos
+		sim_pos = position
+		get_tree().set_input_as_handled()
 	
 	if Input.is_action_pressed("ctrl_modifier") and not Input.is_action_pressed("alt_modifier") and not editor.get_hovered_objects():
 		var is_zooming: bool

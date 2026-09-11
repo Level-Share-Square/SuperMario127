@@ -17,6 +17,14 @@ onready var shared: LevelShared = editor.get_shared_node()
 onready var tool_manager = editor.get_node("%Tools")
 
 
+func _tool_selected() -> void:
+	pass
+
+
+func _tool_deselected() -> void:
+	pass
+
+
 func _click_left(_event: InputEvent, _world_pos: Vector2) -> void:
 	pass
 

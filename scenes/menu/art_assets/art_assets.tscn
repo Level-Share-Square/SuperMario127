@@ -1,4 +1,4 @@
-[gd_scene load_steps=119 format=2]
+[gd_scene load_steps=120 format=2]
 
 [ext_resource path="res://scenes/menu/art_assets/art_assets.gd" type="Script" id=1]
 [ext_resource path="res://scenes/menu/background_scroll/background.tscn" type="PackedScene" id=2]
@@ -299,7 +299,7 @@ void fragment() {
 	COLOR = (texture(TEXTURE, UV) + n * u_amount);
 }"
 
-[sub_resource type="ShaderMaterial" id=306]
+[sub_resource type="ShaderMaterial" id=314]
 shader = SubResource( 26 )
 shader_param/u_amount = 1.75
 
@@ -439,7 +439,7 @@ height = 32
 fill = 1
 fill_from = Vector2( 0.5, 0.5 )
 
-[sub_resource type="ShaderMaterial" id=307]
+[sub_resource type="ShaderMaterial" id=315]
 shader = SubResource( 26 )
 shader_param/u_amount = 1.75
 
@@ -479,7 +479,7 @@ void fragment() {
 	COLOR = (texture(TEXTURE, UV) + n * u_amount);
 }"
 
-[sub_resource type="ShaderMaterial" id=308]
+[sub_resource type="ShaderMaterial" id=316]
 shader = SubResource( 51 )
 shader_param/u_amount = 1.75
 
@@ -504,7 +504,11 @@ fill = 1
 fill_from = Vector2( 0.5, 0.5 )
 fill_to = Vector2( 0.5, 0 )
 
-[sub_resource type="ShaderMaterial" id=309]
+[sub_resource type="ShaderMaterial" id=317]
+shader = SubResource( 26 )
+shader_param/u_amount = 1.75
+
+[sub_resource type="ShaderMaterial" id=318]
 shader = SubResource( 26 )
 shader_param/u_amount = 1.75
 
@@ -1279,7 +1283,7 @@ render_target_update_mode = 3
 rect_scale = Vector2( 3, 3 )
 
 [node name="Overlay" parent="DiscordIcon/Viewport/Background" index="3"]
-material = SubResource( 306 )
+material = SubResource( 314 )
 
 [node name="WhiteGradient" type="TextureRect" parent="DiscordIcon/Viewport"]
 modulate = Color( 0.752941, 0.752941, 1, 0.486275 )
@@ -1911,11 +1915,92 @@ texture = ExtResource( 10 )
 expand = true
 stretch_mode = 6
 
-[node name="ItchProfileBanner" type="ViewportContainer" parent="."]
+[node name="LSSThumbnail" type="ViewportContainer" parent="."]
 unique_name_in_owner = true
 margin_top = 7672.0
+margin_right = 1920.0
+margin_bottom = 8752.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="Viewport" type="Viewport" parent="LSSThumbnail"]
+size = Vector2( 1920, 1080 )
+handle_input_locally = false
+render_target_update_mode = 3
+
+[node name="BG" type="Sprite" parent="LSSThumbnail/Viewport"]
+scale = Vector2( 3, 3 )
+z_index = -512
+z_as_relative = false
+texture = ExtResource( 5 )
+centered = false
+
+[node name="FG2" type="Sprite" parent="LSSThumbnail/Viewport"]
+position = Vector2( -848, 160 )
+scale = Vector2( 3, 3 )
+z_index = -512
+texture = ExtResource( 6 )
+centered = false
+
+[node name="FG2" type="Sprite" parent="LSSThumbnail/Viewport/FG2"]
+position = Vector2( 544, -64 )
+z_index = -512
+z_as_relative = false
+texture = ExtResource( 3 )
+centered = false
+
+[node name="FG3" type="Sprite" parent="LSSThumbnail/Viewport/FG2"]
+position = Vector2( 512, 0 )
+z_index = -512
+z_as_relative = false
+texture = ExtResource( 4 )
+centered = false
+
+[node name="WhiteGradient" type="TextureRect" parent="LSSThumbnail/Viewport"]
+modulate = Color( 1, 1, 1, 0.501961 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -6.10352e-05
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = SubResource( 18 )
+expand = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="LSSThumbnail/Viewport"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 630, 500 )
+
+[node name="CenterContainer" type="CenterContainer" parent="LSSThumbnail/Viewport/HBoxContainer"]
+margin_right = 1920.0
+margin_bottom = 1080.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LSSThumbnail/Viewport/HBoxContainer/CenterContainer"]
+margin_left = 320.0
+margin_top = 172.0
+margin_right = 1600.0
+margin_bottom = 908.0
+custom_constants/separation = 16
+
+[node name="Control" type="Control" parent="LSSThumbnail/Viewport/HBoxContainer/CenterContainer/VBoxContainer"]
+margin_right = 1280.0
+
+[node name="Logo" type="TextureRect" parent="LSSThumbnail/Viewport/HBoxContainer/CenterContainer/VBoxContainer"]
+margin_top = 16.0
+margin_right = 1280.0
+margin_bottom = 736.0
+rect_min_size = Vector2( 1280, 720 )
+texture = ExtResource( 10 )
+expand = true
+stretch_mode = 6
+
+[node name="ItchProfileBanner" type="ViewportContainer" parent="."]
+unique_name_in_owner = true
+margin_top = 8756.0
 margin_right = 1500.0
-margin_bottom = 8005.0
+margin_bottom = 9089.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
@@ -2062,9 +2147,9 @@ fit_content_height = true
 
 [node name="ItchProfileBG" type="ViewportContainer" parent="."]
 unique_name_in_owner = true
-margin_top = 8009.0
+margin_top = 9093.0
 margin_right = 96.0
-margin_bottom = 8105.0
+margin_bottom = 9189.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
@@ -2234,9 +2319,9 @@ patch_margin_bottom = 8
 
 [node name="DiscordInvite" type="ViewportContainer" parent="."]
 unique_name_in_owner = true
-margin_top = 8109.0
+margin_top = 9193.0
 margin_right = 1920.0
-margin_bottom = 9189.0
+margin_bottom = 10273.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
@@ -2249,7 +2334,7 @@ render_target_update_mode = 3
 rect_scale = Vector2( 3, 3 )
 
 [node name="Overlay" parent="DiscordInvite/Viewport/Background" index="3"]
-material = SubResource( 307 )
+material = SubResource( 315 )
 
 [node name="WhiteGradient" type="TextureRect" parent="DiscordInvite/Viewport"]
 modulate = Color( 0.752941, 0.752941, 1, 0.486275 )
@@ -2263,9 +2348,9 @@ expand = true
 
 [node name="SplashScreen" type="ViewportContainer" parent="."]
 unique_name_in_owner = true
-margin_top = 9193.0
+margin_top = 10277.0
 margin_right = 1536.0
-margin_bottom = 10057.0
+margin_bottom = 11141.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
@@ -2293,7 +2378,7 @@ rect_scale = Vector2( 0.225, 0.225 )
 
 [node name="Overlay" parent="SplashScreen/Viewport/Background" index="3"]
 modulate = Color( 0.054902, 0.0117647, 0.152941, 0.270588 )
-material = SubResource( 308 )
+material = SubResource( 316 )
 
 [node name="Overlay" type="TextureRect" parent="SplashScreen/Viewport"]
 modulate = Color( 0.752941, 0.752941, 1, 0.486275 )
@@ -2366,9 +2451,9 @@ stretch_mode = 6
 
 [node name="Icon" type="ViewportContainer" parent="."]
 unique_name_in_owner = true
-margin_top = 10061.0
+margin_top = 11145.0
 margin_right = 512.0
-margin_bottom = 10573.0
+margin_bottom = 11657.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
@@ -2381,7 +2466,7 @@ render_target_update_mode = 3
 rect_scale = Vector2( 3, 3 )
 
 [node name="Overlay" parent="Icon/Viewport/Background" index="3"]
-material = SubResource( 309 )
+material = SubResource( 317 )
 
 [node name="WhiteGradient" type="TextureRect" parent="Icon/Viewport"]
 modulate = Color( 0.752941, 0.752941, 1, 0.486275 )
@@ -2430,11 +2515,98 @@ texture = SubResource( 250 )
 expand = true
 stretch_mode = 6
 
+[node name="AndroidIconBG" type="ViewportContainer" parent="."]
+unique_name_in_owner = true
+margin_top = 11661.0
+margin_right = 432.0
+margin_bottom = 12093.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="Viewport" type="Viewport" parent="AndroidIconBG"]
+size = Vector2( 432, 432 )
+handle_input_locally = false
+render_target_update_mode = 3
+
+[node name="Background" parent="AndroidIconBG/Viewport" instance=ExtResource( 2 )]
+rect_scale = Vector2( 3, 3 )
+
+[node name="Overlay" parent="AndroidIconBG/Viewport/Background" index="3"]
+material = SubResource( 318 )
+
+[node name="WhiteGradient" type="TextureRect" parent="AndroidIconBG/Viewport"]
+modulate = Color( 0.752941, 0.752941, 1, 0.486275 )
+material = SubResource( 19 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = SubResource( 20 )
+expand = true
+
+[node name="AndroidIconFG" type="ViewportContainer" parent="."]
+unique_name_in_owner = true
+margin_top = 12097.0
+margin_right = 432.0
+margin_bottom = 12529.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="Viewport" type="Viewport" parent="AndroidIconFG"]
+size = Vector2( 432, 432 )
+transparent_bg = true
+handle_input_locally = false
+render_target_update_mode = 3
+
+[node name="CenterContainer" type="CenterContainer" parent="AndroidIconFG/Viewport"]
+margin_right = 432.0
+margin_bottom = 432.0
+
+[node name="HBoxContainer" type="PanelContainer" parent="AndroidIconFG/Viewport/CenterContainer"]
+margin_left = 84.0
+margin_top = 84.0
+margin_right = 348.0
+margin_bottom = 348.0
+rect_min_size = Vector2( 264, 264 )
+custom_styles/panel = SubResource( 21 )
+
+[node name="Icon" type="TextureRect" parent="AndroidIconFG/Viewport/CenterContainer/HBoxContainer"]
+margin_right = 264.0
+margin_bottom = 264.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 8 )
+expand = true
+stretch_mode = 6
+
+[node name="Shadow" type="TextureRect" parent="AndroidIconFG/Viewport/CenterContainer/HBoxContainer/Icon"]
+modulate = Color( 1, 1, 1, 0.376471 )
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 24.0
+margin_top = 16.0
+margin_right = 24.0
+margin_bottom = 16.0
+texture = ExtResource( 9 )
+expand = true
+stretch_mode = 6
+
+[node name="Glow" type="TextureRect" parent="AndroidIconFG/Viewport/CenterContainer/HBoxContainer"]
+material = SubResource( 22 )
+margin_right = 264.0
+margin_bottom = 264.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = SubResource( 250 )
+expand = true
+stretch_mode = 6
+
 [node name="TwitterIcon" type="ViewportContainer" parent="."]
 unique_name_in_owner = true
-margin_top = 10577.0
+margin_top = 12533.0
 margin_right = 512.0
-margin_bottom = 11089.0
+margin_bottom = 13045.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
@@ -2498,9 +2670,9 @@ stretch_mode = 6
 
 [node name="EndCards" type="ViewportContainer" parent="."]
 unique_name_in_owner = true
-margin_top = 11093.0
+margin_top = 13049.0
 margin_right = 1920.0
-margin_bottom = 12173.0
+margin_bottom = 14129.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
@@ -2729,9 +2901,9 @@ stretch_mode = 1
 
 [node name="ForcefieldIcon" type="ViewportContainer" parent="."]
 unique_name_in_owner = true
-margin_top = 12177.0
+margin_top = 14133.0
 margin_right = 32.0
-margin_bottom = 12209.0
+margin_bottom = 14165.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
@@ -2833,9 +3005,9 @@ expand = true
 
 [node name="WaterIcon" type="ViewportContainer" parent="."]
 unique_name_in_owner = true
-margin_top = 12213.0
+margin_top = 14169.0
 margin_right = 32.0
-margin_bottom = 12245.0
+margin_bottom = 14201.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
@@ -2876,3 +3048,4 @@ color = Color( 0.192157, 0.52549, 1, 0.47451 )
 [editable path="DiscordInvite/Viewport/Background"]
 [editable path="SplashScreen/Viewport/Background"]
 [editable path="Icon/Viewport/Background"]
+[editable path="AndroidIconBG/Viewport/Background"]

@@ -298,4 +298,4 @@ func set_playing(state: String) -> void:
 
 func _sdk_supported() -> bool:
 	# Discord's SDK ships no arm64 macOS native lib, so it can't load on Apple Silicon.
-	return not (OS.get_name() == "OSX" and "Apple" in OS.get_processor_name())
+	return not (OS.get_name() == "OSX" and "Apple" in OS.get_processor_name()) and not OS.get_name() == "Android"

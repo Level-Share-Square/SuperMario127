@@ -20,6 +20,9 @@ static func add_input(action: String, player_id: int, event_dict: Dictionary, in
 		input_event.device = input_settings_util.get_device(input_group)
 	
 	InputMap.action_add_event(input_name, input_event)
+	## fix triggers not working...
+	if OS.get_name() == "Android":
+		InputMap.action_set_deadzone(input_name, 0.6)
 
 
 static func clear_input(action: String, player_id: int):

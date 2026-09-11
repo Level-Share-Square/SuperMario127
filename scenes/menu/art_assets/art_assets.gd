@@ -12,6 +12,11 @@ onready var itch_header = $"%ItchHeader"
 onready var itch_cover = $"%ItchCover"
 onready var itch_profile_banner = $"%ItchProfileBanner"
 onready var itch_profile_bg = $"%ItchProfileBG"
+
+onready var lss_thumbnail = $"%LSSThumbnail"
+onready var android_icon_bg = $"%AndroidIconBG"
+onready var android_icon_fg = $"%AndroidIconFG"
+
 onready var splash_screen = $"%SplashScreen"
 onready var icon = $"%Icon"
 onready var twitter_icon = $"%TwitterIcon"
@@ -72,6 +77,20 @@ func _ready():
 #	var itch_profile_bg_img: Image = itch_profile_bg.get_node("Viewport").get_texture().get_data()
 #	itch_profile_bg_img.flip_y()
 #	itch_profile_bg_img.save_png("res://assets/artwork/itch/profile_bg.png")
+
+	var lss_thumbnail_img: Image = lss_thumbnail.get_node("Viewport").get_texture().get_data()
+	lss_thumbnail_img.flip_y()
+	lss_thumbnail_img.save_png("res://assets/artwork/lss/thumbnail.png")
+
+	var android_icon_bg_img: Image = android_icon_bg.get_node("Viewport").get_texture().get_data()
+	android_icon_bg_img.flip_y()
+	android_icon_bg_img.save_png("res://assets/artwork/android_icon_bg.png")
+
+	var android_icon_fg_img: Image = android_icon_fg.get_node("Viewport").get_texture().get_data()
+	android_icon_fg_img.convert(Image.FORMAT_RGBA8)
+	android_icon_fg_img.flip_y()
+	fix_transparency(android_icon_fg_img)
+	android_icon_fg_img.save_png("res://assets/artwork/android_icon_fg.png")
 
 #	var splash_img: Image = splash_screen.get_node("Viewport").get_texture().get_data()
 #	splash_img.flip_y()

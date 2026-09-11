@@ -362,7 +362,7 @@ static func get_image_from_path(file_path: String) -> ImageTexture:
 		printerr("Error loading image at path " + file_path + ". Error code: " + str(err))
 	
 	else:
-		texture.create_from_image(image)
+		texture.create_from_image(image, Texture.FLAG_FILTER)
 	return texture
 
 

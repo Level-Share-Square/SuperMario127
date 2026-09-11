@@ -45,6 +45,7 @@ func _process(_delta: float):
 		current_tool._mouse_movement(event, parallax_scroll.corrected_mouse_position())
 
 func change_tool(tool_name: String) -> void:
+	current_tool._tool_deselected()
 	current_tool = get_node(tool_name)
 	
 	var item_preview = get_node("%ItemPreview")
@@ -59,6 +60,7 @@ func change_tool(tool_name: String) -> void:
 	item_actions_manager.handle_selection()
 	item_actions_manager.clear_selection()
 	
+	current_tool._tool_selected()
 	emit_signal("tool_changed")
 
 func item_changed(placeable_item: PlaceableItem):

@@ -60,7 +60,7 @@ static func decode_event(event: InputEvent) -> Dictionary:
 			if abs(event.axis_value) > DEADZONE:
 				dictionary["input_type"] = JOYPAD_MOTION
 				dictionary["axis"] = event.axis
-				dictionary["axis_value"] = sign(event.axis_value + 0.001)
+				dictionary["axis_value"] = 1.0
 			else:
 				return EMPTY_DICTIONARY
 	

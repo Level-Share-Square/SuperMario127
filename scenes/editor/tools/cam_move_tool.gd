@@ -5,6 +5,14 @@ onready var editor_camera = $"%EditorCamera"
 var mouse_input: int = -1
 
 
+func _tool_selected() -> void:
+	editor_camera.allow_magnify = true
+
+
+func _tool_deselected() -> void:
+	editor_camera.allow_magnify = false
+
+
 func _click_left(_event: InputEvent, _world_pos: Vector2) -> void:
 	if mouse_input > -1:
 		return

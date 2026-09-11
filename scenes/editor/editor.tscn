@@ -290,6 +290,7 @@ unique_name_in_owner = true
 
 [node name="EditorCamera" parent="." instance=ExtResource( 7 )]
 unique_name_in_owner = true
+process_priority = -1
 limit_left = -10000000
 limit_top = -10000000
 smoothing_enabled = false
