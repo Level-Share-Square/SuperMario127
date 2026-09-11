@@ -131,9 +131,8 @@ func _process(_delta):
 	if color != Color(1, 1, 0):
 		for child in $StarContainer.get_children():
 			for grandchild in child.get_children():
-				if grandchild is AnimatedSprite:
-					grandchild.animation = "recolor"
-					grandchild.modulate = color
+				grandchild.animation = "recolor"
+				grandchild.modulate = color
 		
 	if rainbow:
 		# Hue rotation
