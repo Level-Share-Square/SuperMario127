@@ -1,6 +1,6 @@
 extends GameObject
 
-
+const rainbow_animation_speed := 2500
 
 onready var path : Path2D = $Path2D
 onready var pathfollow = $Path2D/PathFollow2D
@@ -27,6 +27,8 @@ var last_position
 var speed = 10
 var curve = Curve2D.new()
 var custom_path = Curve2D.new()
+var color := Color(1, 1, 0)
+var rainbow := false
 
 
 
@@ -40,6 +42,8 @@ func _register_properties():
 	register_property(4, "curve", curve)
 	register_property(5, "custom_path", curve, false)
 	register_property(6, "speed", speed)
+	register_property(7, "color", color, true)
+	register_property(8, "rainbow", rainbow, true)
 	base_hidden_properties.append("rotation_degrees")
 
 
@@ -124,6 +128,17 @@ func _ready():
 func _process(_delta):
 	if curve != path.curve:
 		path.curve = curve		
+	if color != Color(1, 1, 0):
+		for child in $StarContainer.get_children():
+			for grandchild in child.get_children():
+				if grandchild is AnimatedSprite:
+					grandchild.animation = "recolor"
+					grandchild.modulate = color
+		
+	if rainbow:
+		# Hue rotation
+		color.h = float(OS.get_ticks_msec() % rainbow_animation_speed) / rainbow_animation_speed
+		
 func _physics_process(delta):
 	if mode != 0:
 		star_container.look_at(position + path.curve.get_point_position(1))

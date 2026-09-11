@@ -1,5 +1,7 @@
 extends GameObject
 
+const rainbow_animation_speed := 2500
+
 onready var speed_tween = $Tween
 onready var audio_player : AudioStreamPlayer2D = $AudioStreamPlayer2D
 onready var player_detector = $PlayerDetector
@@ -17,6 +19,8 @@ var mario : Character
 var float_timer = 4
 
 var launch_power : float = 10.0
+var color := Color(1, 1, 0)
+var rainbow := false
 
 var parts := 1
 var last_parts := 1
@@ -29,6 +33,8 @@ var cooldown = 0.0
 	
 func _register_properties():
 	register_property(4, "launch_power", launch_power, 10)
+	register_property(5, "color", color, true)
+	register_property(6, "rainbow", rainbow, true)
 
 func _register_property_info() -> void:
 	set_property_info("launch_power", PropertyInfo.new("The velocity at which this object slings the player.", 1, -INF, INF, ["", ""], ["", ""]))
@@ -85,7 +91,14 @@ func _input(event):
 	pass
 
 func _process(delta):
-	pass
+	if color != Color(1, 1, 0):
+		for child in $Star.get_children():
+			child.animation = "recolor"
+			child.modulate = color
+	
+	if rainbow:
+		# Hue rotation
+		color.h = float(OS.get_ticks_msec() % rainbow_animation_speed) / rainbow_animation_speed
 	
 func _physics_process(delta):
 	if is_enabled_and_on_ground() and mode == 0:
