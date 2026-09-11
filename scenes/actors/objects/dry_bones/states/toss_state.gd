@@ -16,7 +16,9 @@ func _start() -> void:
 
 func toss_bone() -> void:
 	var bone: Area2D = BONE_STATE.instance()
-	bone.position = enemy.position
-	bone.position += toss_offset * Vector2(enemy.facing_direction, 1)
+	#bone.position = enemy.position
+	#bone.position += toss_offset * Vector2(enemy.facing_direction, 1)
 	bone.velocity.x = bone_speed * enemy.facing_direction
-	enemy.get_parent().call_deferred("add_child", bone)
+	enemy.get_parent().get_parent().call_deferred("add_child", bone) # Parent's parent so the bone is a separated entity and therefore it's not invisible along with Dry Bones
+	bone.global_position = enemy.global_position
+	bone.position += toss_offset * Vector2(enemy.facing_direction, 1)
