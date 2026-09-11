@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=287 format=2]
+[gd_resource type="Resource" load_steps=290 format=2]
 
 [ext_resource path="res://scenes/editor/items/placeable_items.gd" type="Script" id=1]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/blue_coin.tres" type="Resource" id=2]
@@ -286,6 +286,9 @@
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/cork_tile_slope_left.tres" type="Resource" id=284]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/cork_tile.tres" type="Resource" id=285]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/cork_tile_slope_right.tres" type="Resource" id=286]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/breakable_brick.tres" type="Resource" id=287]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/breakable_dark_brick.tres" type="Resource" id=288]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/breakable_fire_brick.tres" type="Resource" id=289]
 
 [resource]
 script = ExtResource( 1 )
@@ -311,6 +314,9 @@ placeable_items = {
 "obj_boo": ExtResource( 97 ),
 "obj_bowser_banner": ExtResource( 105 ),
 "obj_breakable_block": ExtResource( 35 ),
+"obj_breakable_brick": ExtResource( 287 ),
+"obj_breakable_dark_brick": ExtResource( 288 ),
+"obj_breakable_fire_brick": ExtResource( 289 ),
 "obj_bridge_cobweb": ExtResource( 117 ),
 "obj_bully": ExtResource( 123 ),
 "obj_buoyant_bouncer": ExtResource( 146 ),

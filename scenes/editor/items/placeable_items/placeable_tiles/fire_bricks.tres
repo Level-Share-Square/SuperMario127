@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=11 format=2]
+[gd_resource type="Resource" load_steps=12 format=2]
 
 [ext_resource path="res://scenes/editor/items/placeable_tile.gd" type="Script" id=1]
 [ext_resource path="res://assets/tiles/fire_bricks/palette_icons/4_block.png" type="Texture" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://assets/tiles/fire_bricks/palette_icons/5Yellow-magma_brick_icon.png" type="Texture" id=8]
 [ext_resource path="res://assets/tiles/fire_bricks/palette_icons/7Extra-magma_brick_icon.png" type="Texture" id=9]
 [ext_resource path="res://assets/tiles/fire_bricks/palette_icons/6Purple-magma_brick_icon.png" type="Texture" id=10]
+[ext_resource path="res://assets/tiles/fire_bricks/palette_icons/8_block.png" type="Texture" id=11]
 
 [resource]
 script = ExtResource( 1 )
@@ -17,7 +18,7 @@ item_name = "Fire Bricks"
 change_to = "til_fire_brick_stairs_left"
 items_in_sequence = 3
 index_in_sequence = 0
-icons = [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 3 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 2 ), ExtResource( 8 ), ExtResource( 10 ), ExtResource( 9 ) ]
+icons = [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 3 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 2 ), ExtResource( 8 ), ExtResource( 10 ), ExtResource( 9 ), ExtResource( 11 ) ]
 previews = [ ExtResource( 4 ) ]
 priority = 570
 tileset_id = 31

@@ -1,0 +1,25 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://scenes/actors/objects/breakable_brick/breakable_brick.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/actors/objects/breakable_dark_brick/breakable_dark_brick_outline.png" type="Texture" id=2]
+[ext_resource path="res://scenes/actors/objects/breakable_dark_brick/breakable_dark_brick.png" type="Texture" id=3]
+[ext_resource path="res://scenes/actors/objects/breakable_dark_brick/palettes/5.png" type="Texture" id=4]
+[ext_resource path="res://scenes/actors/objects/breakable_dark_brick/palettes/3.png" type="Texture" id=5]
+[ext_resource path="res://scenes/actors/objects/breakable_dark_brick/palettes/9.png" type="Texture" id=6]
+[ext_resource path="res://scenes/actors/objects/breakable_dark_brick/palettes/8.png" type="Texture" id=7]
+[ext_resource path="res://scenes/actors/objects/breakable_dark_brick/palettes/6.png" type="Texture" id=8]
+[ext_resource path="res://scenes/actors/objects/breakable_dark_brick/palettes/7.png" type="Texture" id=9]
+[ext_resource path="res://scenes/actors/objects/breakable_dark_brick/palettes/1.png" type="Texture" id=10]
+[ext_resource path="res://scenes/actors/objects/breakable_dark_brick/palettes/4.png" type="Texture" id=11]
+[ext_resource path="res://scenes/actors/objects/breakable_dark_brick/palettes/2.png" type="Texture" id=12]
+
+[node name="BreakableDarkBrick" instance=ExtResource( 1 )]
+internal_id = "breakable_dark_brick"
+inner_textures = [ ExtResource( 3 ), ExtResource( 10 ), ExtResource( 12 ), ExtResource( 5 ), ExtResource( 11 ), ExtResource( 4 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 7 ), ExtResource( 6 ) ]
+outer_textures = [ ExtResource( 2 ), ExtResource( 2 ), ExtResource( 2 ), ExtResource( 2 ), ExtResource( 2 ), ExtResource( 2 ), ExtResource( 2 ), ExtResource( 2 ), ExtResource( 2 ), ExtResource( 2 ) ]
+
+[node name="Sprite" parent="Box" index="0"]
+texture = ExtResource( 3 )
+
+[node name="Outline" parent="Box/Sprite" index="0"]
+texture = ExtResource( 2 )

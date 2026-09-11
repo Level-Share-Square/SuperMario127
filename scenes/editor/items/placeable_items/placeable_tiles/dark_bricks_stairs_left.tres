@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=12 format=2]
+[gd_resource type="Resource" load_steps=13 format=2]
 
 [ext_resource path="res://scenes/editor/items/placeable_tile.gd" type="Script" id=1]
 [ext_resource path="res://assets/tiles/dark_bricks/palette_icons/3_slopeL.png" type="Texture" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://assets/tiles/dark_bricks/palette_icons/6Extra-neon_brick_slope_l_icon.png" type="Texture" id=9]
 [ext_resource path="res://assets/tiles/dark_bricks/palette_icons/5Brown-neon_brick_slope_l_icon.png" type="Texture" id=10]
 [ext_resource path="res://assets/tiles/dark_bricks/palette_icons/7White-neon_brick_slope_l_icon.png" type="Texture" id=11]
+[ext_resource path="res://assets/tiles/dark_bricks/palette_icons/8_slopeL.png" type="Texture" id=12]
 
 [resource]
 script = ExtResource( 1 )
@@ -18,7 +19,7 @@ item_name = "Dark Bricks (Left Stairs)"
 change_to = "til_dark_brick_stairs_right"
 items_in_sequence = 3
 index_in_sequence = 1
-icons = [ ExtResource( 6 ), ExtResource( 5 ), ExtResource( 4 ), ExtResource( 8 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 10 ), ExtResource( 9 ), ExtResource( 11 ) ]
+icons = [ ExtResource( 6 ), ExtResource( 5 ), ExtResource( 4 ), ExtResource( 8 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 10 ), ExtResource( 9 ), ExtResource( 11 ), ExtResource( 12 ) ]
 previews = [ ExtResource( 7 ) ]
 priority = 579
 tileset_id = 32

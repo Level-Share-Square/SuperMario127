@@ -42,6 +42,9 @@
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/vine_bend.tres" type="Resource" id=143]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/buoyant_platform.tres" type="Resource" id=144]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/buoyant_bouncer.tres" type="Resource" id=146]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/breakable_brick.tres" type="Resource" id=287]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/breakable_dark_brick.tres" type="Resource" id=288]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/breakable_fire_brick.tres" type="Resource" id=289]
 
 [resource]
 script = ExtResource( 1 )
@@ -52,6 +55,9 @@ placeable_items = {
 "obj_bone_platform": ExtResource( 20 ),
 "obj_bowser_banner": ExtResource( 105 ),
 "obj_breakable_block": ExtResource( 8 ),
+"obj_breakable_brick": ExtResource( 287 ),
+"obj_breakable_dark_brick": ExtResource( 288 ),
+"obj_breakable_fire_brick": ExtResource( 289 ),
 "obj_buoyant_bouncer": ExtResource( 146 ),
 "obj_buoyant_platform": ExtResource( 144 ),
 "obj_cave_spore": ExtResource( 68 ),
