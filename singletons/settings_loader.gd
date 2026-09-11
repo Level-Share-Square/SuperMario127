@@ -39,7 +39,7 @@ func change_setting(key: String, new_value):
 	match key:
 		# General
 		"window_scale":
-			if OS.has_feature("JavaScript"): return
+			if OS.has_feature("JavaScript") or OS.has_feature("mobile"): return
 			
 			ScreenSizeUtil.set_screen_size(new_value)
 			if not OS.window_fullscreen:
