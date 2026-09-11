@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=43 format=2]
+[gd_resource type="Resource" load_steps=48 format=2]
 
 [ext_resource path="res://scenes/editor/items/placeable_items.gd" type="Script" id=1]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/big_barrel.tres" type="Resource" id=2]

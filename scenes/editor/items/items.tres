@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=292 format=2]
+[gd_resource type="Resource" load_steps=294 format=2]
 
 [ext_resource path="res://scenes/editor/items/placeable_items.gd" type="Script" id=1]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/blue_coin.tres" type="Resource" id=2]
@@ -291,6 +291,8 @@
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/breakable_fire_brick.tres" type="Resource" id=289]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/breakable_pillar.tres" type="Resource" id=290]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/breakable_marble_brick.tres" type="Resource" id=291]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/boo_block_half_tile.tres" type="Resource" id=292]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/color_tile_half_tile.tres" type="Resource" id=293]
 
 [resource]
 script = ExtResource( 1 )
@@ -474,6 +476,7 @@ placeable_items = {
 "til_black_granite_slope_left": ExtResource( 192 ),
 "til_black_granite_slope_right": ExtResource( 194 ),
 "til_boo_block": ExtResource( 147 ),
+"til_boo_block_half_tile": ExtResource( 292 ),
 "til_boo_block_slope_left": ExtResource( 242 ),
 "til_boo_block_slope_right": ExtResource( 243 ),
 "til_bookshelf": ExtResource( 173 ),
@@ -499,6 +502,7 @@ placeable_items = {
 "til_cobblestone_stairs_left": ExtResource( 205 ),
 "til_cobblestone_stairs_right": ExtResource( 206 ),
 "til_color_tile": ExtResource( 174 ),
+"til_color_tile_half_tile": ExtResource( 293 ),
 "til_color_tile_slope_left": ExtResource( 212 ),
 "til_color_tile_slope_right": ExtResource( 200 ),
 "til_columns": ExtResource( 177 ),
