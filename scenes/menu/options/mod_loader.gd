@@ -11,7 +11,7 @@ onready var none_button = $"%NoMods"
 
 
 func _ready():
-	if OS.has_feature("JavaScript"):
+	if OS.has_feature("JavaScript") or OS.has_feature("mobile"):
 		mods_container.hide()
 		return
 	
