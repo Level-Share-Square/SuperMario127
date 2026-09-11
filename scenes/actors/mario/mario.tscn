@@ -102,7 +102,7 @@ extents = Vector2( 15, 5 )
 extents = Vector2( 17, 5 )
 
 [sub_resource type="RayShape2D" id=5]
-length = 24.0
+length = 23.0
 
 [sub_resource type="RayShape2D" id=6]
 length = 6.0
@@ -599,10 +599,10 @@ extents = Vector2( 18, 18 )
 extents = Vector2( 5, 12 )
 
 [sub_resource type="RectangleShape2D" id=144]
-extents = Vector2( 9.5, 17.25 )
+extents = Vector2( 9.5, 14.5 )
 
 [sub_resource type="RectangleShape2D" id=149]
-extents = Vector2( 5, 17.25 )
+extents = Vector2( 5, 14.5 )
 
 [sub_resource type="RectangleShape2D" id=145]
 extents = Vector2( 9.5, 6.25 )
@@ -1689,7 +1689,7 @@ shader = ExtResource( 86 )
 shader_param/ray_count = 4
 shader_param/ray_distance = 0.4
 shader_param/ray_seperation_degrees = 22.0
-shader_param/rotation = 0.477766
+shader_param/rotation = 0.162617
 
 [sub_resource type="RectangleShape2D" id=85]
 extents = Vector2( 8, 18 )
@@ -1724,12 +1724,12 @@ luigi_fric = 13.5
 luigi_speed = 216.0
 
 [node name="Collision" type="CollisionPolygon2D" parent="."]
-position = Vector2( 0.5, -4 )
+position = Vector2( 0.5, -2 )
 z_index = 2
 polygon = PoolVector2Array( -5.5, -4, 5.5, -4, 5.5, 4, -0.5, 16, -5.5, 4 )
 
 [node name="CollisionDive" type="CollisionPolygon2D" parent="."]
-position = Vector2( 0.5, -7 )
+position = Vector2( 0.5, -5 )
 z_index = 2
 polygon = PoolVector2Array( -5.5, -1, 5.5, -1, 5.5, 1, 0, 8, -5.5, 1 )
 disabled = true
@@ -2462,24 +2462,22 @@ shape = SubResource( 148 )
 disabled = true
 
 [node name="BoxPwner" type="Area2D" parent="."]
-visible = false
 modulate = Color( 1, 0.470588, 0, 1 )
 collision_layer = 131072
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BoxPwner"]
 modulate = Color( 0.839216, 0.345098, 0.345098, 1 )
-position = Vector2( 0.5, 4.75 )
+position = Vector2( 0.5, 7.5 )
 shape = SubResource( 144 )
 
 [node name="DirCheck" type="CollisionShape2D" parent="BoxPwner"]
 modulate = Color( 0.839216, 0.345098, 0.345098, 1 )
-position = Vector2( 0, 4.75 )
+position = Vector2( 0, 7.5 )
 shape = SubResource( 149 )
 disabled = true
 
 [node name="BoxPwnerDive" type="Area2D" parent="."]
-visible = false
 modulate = Color( 1, 0.470588, 0, 1 )
 collision_layer = 131072
 collision_mask = 0
@@ -2628,7 +2626,6 @@ playing = true
 [node name="Recolorable" type="AnimatedSprite" parent="CollectedShine"]
 visible = false
 frames = ExtResource( 61 )
-frame = 13
 script = ExtResource( 63 )
 
 [node name="ShineParticles" type="Particles2D" parent="CollectedShine"]
