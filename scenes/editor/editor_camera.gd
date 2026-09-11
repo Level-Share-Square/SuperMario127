@@ -91,16 +91,17 @@ func _input(event: InputEvent):
 		ignore_wrap = false
 		
 		## screen wrapping
-		var window_size: Vector2 = ScreenSizeUtil.DEFAULT_SIZE
-		var pos: Vector2 = event.position
-		var new_pos: Vector2 = pos
-		
-		new_pos.x = wrapf(new_pos.x, 0, window_size.x)
-		new_pos.y = wrapf(new_pos.y, 0, window_size.y)
-		
-		if new_pos != pos:
-			Input.warp_mouse_position(new_pos)
-			ignore_wrap = true
+		if not OS.window_fullscreen:
+			var window_size: Vector2 = ScreenSizeUtil.DEFAULT_SIZE
+			var pos: Vector2 = event.position
+			var new_pos: Vector2 = pos
+			
+			new_pos.x = wrapf(new_pos.x, 0, window_size.x)
+			new_pos.y = wrapf(new_pos.y, 0, window_size.y)
+			
+			if new_pos != pos:
+				Input.warp_mouse_position(new_pos)
+				ignore_wrap = true
 
 
 func _physics_process(delta):
