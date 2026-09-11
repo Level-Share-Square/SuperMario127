@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=294 format=2]
+[gd_resource type="Resource" load_steps=293 format=2]
 
 [ext_resource path="res://scenes/editor/items/placeable_items.gd" type="Script" id=1]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/blue_coin.tres" type="Resource" id=2]
@@ -120,7 +120,6 @@
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/cobweb2.tres" type="Resource" id=118]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/vine_bulb.tres" type="Resource" id=119]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/vine_stem.tres" type="Resource" id=120]
-[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/toxic_gas.tres" type="Resource" id=121]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/paratroopa.tres" type="Resource" id=122]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/bully.tres" type="Resource" id=123]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/star_door_single.tres" type="Resource" id=124]
@@ -444,7 +443,6 @@ placeable_items = {
 "obj_toad": ExtResource( 145 ),
 "obj_torch": ExtResource( 98 ),
 "obj_touch_lift": ExtResource( 48 ),
-"obj_toxic_gas": ExtResource( 121 ),
 "obj_turbo_box": ExtResource( 40 ),
 "obj_turbo_nozzle": ExtResource( 274 ),
 "obj_twisted_tree_angle": ExtResource( 23 ),

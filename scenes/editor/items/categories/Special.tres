@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=60 format=2]
+[gd_resource type="Resource" load_steps=59 format=2]
 
 [ext_resource path="res://scenes/editor/items/placeable_items.gd" type="Script" id=1]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/blue_coin.tres" type="Resource" id=2]
@@ -9,7 +9,6 @@
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/cannon.tres" type="Resource" id=7]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/shine_shard.tres" type="Resource" id=8]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/lava.tres" type="Resource" id=9]
-[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/toxic_gas.tres" type="Resource" id=10]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/quicksand.tres" type="Resource" id=11]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/crystal_tap.tres" type="Resource" id=12]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/water.tres" type="Resource" id=13]
@@ -111,7 +110,6 @@ placeable_items = {
 "obj_star_door": ExtResource( 113 ),
 "obj_star_door_single": ExtResource( 22 ),
 "obj_switch_block": ExtResource( 16 ),
-"obj_toxic_gas": ExtResource( 10 ),
 "obj_turbo_box": ExtResource( 40 ),
 "obj_turbo_nozzle": ExtResource( 26 ),
 "obj_vanish_passthrough_block": ExtResource( 45 ),
