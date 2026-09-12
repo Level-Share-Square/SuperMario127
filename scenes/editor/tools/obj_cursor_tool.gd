@@ -96,7 +96,7 @@ func _click_released(event, mouse_pos):
 			
 		else:
 			if not Input.is_action_pressed("ctrl_modifier"):
-				if !editor.hovered_objects.empty() && !editor.selected_objects.empty() && editor.hovered_objects.values() == editor.selected_objects:
+				if !editor.hovered_objects.empty() && !editor.selected_objects.empty() && hovered_object in editor.selected_objects:
 					editor.open_object_properties(editor.selected_objects)
 				emit_signal("objects_selected", [hovered_object])
 			else:
