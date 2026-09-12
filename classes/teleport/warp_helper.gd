@@ -50,13 +50,14 @@ func location_warp(character: Character, target_tag: String, max_pan_distance: i
 	
 	yield(get_tree().create_timer(WAIT_TIME), "timeout")
 	
-	if hide_character:
+	if target_teleporter.warp_helper.hide_character:
 		character.hide()
-	if set_position:
+	if target_teleporter.warp_helper.set_position:
 		character.global_position = target_teleporter.global_position
 		character.reset_physics_interpolation()
 	
 	target_teleporter.start_exit_animation(character)
+		
 
 
 func area_warp(character: Character, target_tag: String, target_area: int) -> void:

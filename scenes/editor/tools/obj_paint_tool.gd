@@ -35,8 +35,12 @@ func _click(world_pos: Vector2) -> void:
 
 
 func place_object(pos: Vector2, data = null):
-	if shared.get_object_at_position(Vector2(round(pos.x), round(pos.y)), editor.layer):
-		return
+	if editor.pixel_lock:
+		if shared.get_object_at_position(pos.snapped(CurrentLevelData.editor_data.pixel_snap), editor.layer):
+			return
+	else:
+		if shared.get_object_at_position(Vector2(round(pos.x), round(pos.y)), editor.layer):
+			return
 	
 	var object_item: PlaceableObject = editor.selected_item
 	if not data:
