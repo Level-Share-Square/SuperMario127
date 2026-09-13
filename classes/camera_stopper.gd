@@ -34,3 +34,25 @@ func set_size(size):
 	bottom_bound = global_transform.xform(Vector2(0, size.y))
 	left_bound = global_transform.xform(Vector2(-size.x, 0))
 	right_bound = global_transform.xform(Vector2(size.x, 0))
+
+func get_valid_corners(hit_normal: Vector2, padding: float = 15.0) -> Array:
+	var ext = shape.shape.extents
+	var corners = []
+
+	if hit_normal.x < 0:
+		corners.append(global_position + Vector2(-ext.x - padding, -ext.y - padding))
+		corners.append(global_position + Vector2(-ext.x - padding, ext.y + padding))
+
+	elif hit_normal.x > 0:
+		corners.append(global_position + Vector2(ext.x + padding, -ext.y - padding))
+		corners.append(global_position + Vector2(ext.x + padding, ext.y + padding))
+
+	elif hit_normal.y < 0:
+		corners.append(global_position + Vector2(-ext.x - padding, -ext.y - padding))
+		corners.append(global_position + Vector2(ext.x + padding, -ext.y - padding)) 
+
+	elif hit_normal.y > 0:
+		corners.append(global_position + Vector2(-ext.x - padding, ext.y + padding))
+		corners.append(global_position + Vector2(ext.x + padding, ext.y + padding))
+		
+	return corners
