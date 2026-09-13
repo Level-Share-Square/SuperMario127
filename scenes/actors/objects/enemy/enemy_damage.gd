@@ -139,7 +139,7 @@ func bounce_player(character: Character) -> void:
 			character.velocity.y = -bounce_power
 		
 		BounceType.SPRING:
-			var top_y: float = global_position.y - enemy.enemy_size.y - character.foot_offset
+			var top_y: float = global_position.y - (enemy.enemy_size.y * enemy.scale.y) - character.foot_offset
 			if character.state != character.get_state_node("DiveState"):
 				character.set_state_by_name("BounceState", 0)
 			else:
@@ -202,7 +202,8 @@ func attack_body_entered(body) -> void:
 func attack_area_entered(area):
 	if not enemy.enabled: return
 	if area.has_method("is_hurt_area"):
-		spin_attacked(area.get_character())
+		if not is_instance_valid(enemy.state) or enemy.state.can_be_hurt:
+			spin_attacked(area.get_character())
 	elif area is CharacterHitbox:
 		var character: Character = area.get_character()
 		

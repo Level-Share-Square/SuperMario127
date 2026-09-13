@@ -420,7 +420,6 @@ func bonk(hit_pos: Vector2, power := Vector2(235, 225), set_state: bool = true, 
 	if set_state:
 		set_state_by_name("BonkedState", 0)
 	if play_hit_sound and not sound_player.damage_sound.playing:
-		sound_player.play_hit_sound()
 		sound_player.play_bonk_sound()
 
 func play_shine_sound() -> void:

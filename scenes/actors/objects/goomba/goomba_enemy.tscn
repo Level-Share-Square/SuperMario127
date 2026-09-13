@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=2]
+[gd_scene load_steps=45 format=2]
 
 [ext_resource path="res://scenes/actors/objects/enemy/enemy_base.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/actors/objects/goomba/goomba_enemy.gd" type="Script" id=2]
@@ -25,6 +25,7 @@
 [ext_resource path="res://scenes/actors/objects/goomba/goomba_juice.gd" type="Script" id=23]
 [ext_resource path="res://assets/sounds/goomba/3W_SeEmKuriboWalk.wav" type="AudioStream" id=24]
 [ext_resource path="res://assets/sounds/bump.wav" type="AudioStream" id=25]
+[ext_resource path="res://scenes/actors/objects/goomba/player_forgetter.gd" type="Script" id=26]
 
 [sub_resource type="CapsuleShape2D" id=36]
 radius = 11.0
@@ -40,6 +41,9 @@ extents = Vector2( 100, 100 )
 
 [sub_resource type="CircleShape2D" id=63]
 radius = 192.0
+
+[sub_resource type="CircleShape2D" id=66]
+radius = 384.0
 
 [sub_resource type="CircleShape2D" id=53]
 resource_local_to_scene = true
@@ -654,7 +658,15 @@ shape = SubResource( 63 )
 position = Vector2( 0, -5 )
 enabled = true
 
-[node name="FloorDetector" parent="." index="4"]
+[node name="PlayerForgetter" type="Area2D" parent="." index="4"]
+unique_name_in_owner = true
+position = Vector2( 0, -13 )
+script = ExtResource( 26 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerForgetter" index="0"]
+shape = SubResource( 66 )
+
+[node name="FloorDetector" parent="." index="5"]
 cast_to = Vector2( 0, 6 )
 
 [node name="IdleState" type="Node2D" parent="States" index="0"]
@@ -706,7 +718,7 @@ script = ExtResource( 8 )
 can_attack = false
 can_be_hurt = false
 
-[node name="Damage" parent="." index="6"]
+[node name="Damage" parent="." index="7"]
 position = Vector2( 0, 1 )
 script = ExtResource( 6 )
 bounce_type = 1
@@ -731,7 +743,7 @@ z_index = 1
 position = Vector2( 0, -10.5 )
 shape = SubResource( 59 )
 
-[node name="AnimatedSprite" parent="." index="7"]
+[node name="AnimatedSprite" parent="." index="8"]
 position = Vector2( 0, -9 )
 frames = ExtResource( 4 )
 animation = "idle"
@@ -746,7 +758,7 @@ visible = false
 self_modulate = Color( 1, 0.4, 0.333333, 1 )
 frames = ExtResource( 11 )
 animation = "idle"
-frame = 7
+frame = 6
 offset = Vector2( 0, -15 )
 script = ExtResource( 10 )
 
@@ -757,7 +769,7 @@ visible = false
 position = Vector2( 0, 6 )
 shape = SubResource( 56 )
 
-[node name="Alert" type="Sprite" parent="." index="8"]
+[node name="Alert" type="Sprite" parent="." index="9"]
 modulate = Color( 1, 1, 1, 0 )
 self_modulate = Color( 1, 0.376471, 0.376471, 1 )
 position = Vector2( 0, -23 )
@@ -770,14 +782,14 @@ show_behind_parent = true
 texture = ExtResource( 21 )
 offset = Vector2( 0, -384 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="9"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="10"]
 unique_name_in_owner = true
 anims/RESET = SubResource( 61 )
 anims/alert = SubResource( 65 )
 anims/pound_squish = SubResource( 64 )
 anims/squish = SubResource( 58 )
 
-[node name="Poof" type="CPUParticles2D" parent="." index="10"]
+[node name="Poof" type="CPUParticles2D" parent="." index="11"]
 material = SubResource( 60 )
 position = Vector2( -2.84217e-14, -9 )
 emitting = false
@@ -794,7 +806,7 @@ initial_velocity = 20.0
 initial_velocity_random = 1.0
 anim_speed = 2.0
 
-[node name="VisibilityEnabler2D" parent="." index="11"]
+[node name="VisibilityEnabler2D" parent="." index="12"]
 visible = true
 show_behind_parent = true
 position = Vector2( 0, -20 )
@@ -854,11 +866,11 @@ volume_db = -7.5
 bus = "Sounds"
 script = ExtResource( 18 )
 
-[node name="SpawnParticles" parent="." index="14"]
+[node name="SpawnParticles" parent="." index="15"]
 position = Vector2( 0, -9 )
 process_material = SubResource( 50 )
 
-[node name="EnemyBouncer" type="Area2D" parent="." index="15"]
+[node name="EnemyBouncer" type="Area2D" parent="." index="16"]
 unique_name_in_owner = true
 visible = false
 collision_layer = 4

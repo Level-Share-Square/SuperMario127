@@ -93,8 +93,6 @@ func _ready():
 func _physics_process(delta):
 	if not enabled: return
 	
-	sprite.flip_h = (facing_direction > 0)
-	
 	var working_snap_vector: Vector2 = SNAP_VECTOR if snap_enabled else Vector2.ZERO
 	
 	var gravity_multiplier: float = 1
@@ -133,6 +131,8 @@ func _physics_process(delta):
 	velocity = move_and_slide_with_snap(velocity, 
 		working_snap_vector if velocity.y >= 0 else Vector2.ZERO, 
 		UP_DIR, true, 4, FLOOR_MAX_ANGLE)
+	
+	sprite.flip_h = (facing_direction > 0)
 
 
 func is_on_ground() -> bool:

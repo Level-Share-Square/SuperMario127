@@ -3,7 +3,8 @@ extends EnemyStopState
 onready var animation_player = $"%AnimationPlayer"
 
 func _start() -> void:
-
+	enemy.velocity = Vector2.ZERO
+	
 	animation_player.play("squish_0")
 	yield(animation_player, "animation_finished")
 	

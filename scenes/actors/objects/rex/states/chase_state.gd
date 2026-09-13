@@ -1,20 +1,23 @@
 extends EnemyState
 
 
-export var move_speed: float = 24
-export var squished_move_speed = 64
-export var chase_speed: float = 55
-export var squished_chase_speed = 72
-export var accel: float = 1
-export var squished_accel: float = 8
+export var alert_speed_scale: float = 3.5
+export var chase_speed_scale: float = 2.25
+export var squished_chase_speed_scale: float = 3.25
+export var chase_speed: float = 110
+export var squished_chase_speed = 160
+export var accel: float = 3
+export var squished_accel: float = 9
 
 var target_player: Character
 var footstep_interval := 0.0
+var is_alert: bool = false
 
-onready var player_detector: Area2D = get_node("%PlayerDetector")
+onready var player_forgetter: Area2D = get_node("%PlayerForgetter")
 onready var wall_detector: RayCast2D = get_node_or_null("Wall")
 onready var animation_player = $"%AnimationPlayer"
 onready var run_sound = $"%Run"
+onready var skid_sound = $"%Skid"
 
 
 func _start() -> void:
@@ -25,14 +28,18 @@ func _start() -> void:
 		return
 	if enemy.is_on_ground():
 		jump()
+	
+	gravity_multiplier = 1.5
+	is_alert = true
+	enemy.sprite.play("walking")
 	animation_player.play("alert")
 
 func _update(delta: float) -> void:
-	var accel = self.accel if not enemy.squished else squished_accel
-	var move_speed = self.move_speed if not enemy.squished else squished_move_speed
-	var chase_speed = self.chase_speed if not enemy.squished else squished_chase_speed
+	var cur_accel: float = accel if not enemy.squished else squished_accel
+	var cur_chase_speed: float = chase_speed if not enemy.squished else squished_chase_speed
+	var cur_speed_scale: float = chase_speed_scale if not enemy.squished else squished_chase_speed_scale
 	
-	target_player = player_detector.get_player()
+	target_player = player_forgetter.get_player()
 	
 	if not is_instance_valid(target_player) or target_player.dead:
 		enemy.set_state_by_name("IdleState")
@@ -40,26 +47,37 @@ func _update(delta: float) -> void:
 		return
 	
 	if enemy.is_on_ground():
-		enemy.sprite.play("walking" if not enemy.squished else "walking_squished")
+		gravity_multiplier = 1.0
+		is_alert = false
+		if enemy.sprite.animation != "skid" or not should_skid():
+			enemy.sprite.play("walking")
 		
-		if footstep_interval <= 0:
-			run_sound.play()
-			footstep_interval = 0.3 / enemy.sprite.speed_scale
-		footstep_interval -= delta
-		
+			if footstep_interval <= 0:
+				run_sound.play()
+				footstep_interval = 0.6 / enemy.sprite.speed_scale
+			footstep_interval -= delta
 	else:
-		if enemy.velocity.y > 0:
-			enemy.sprite.play("walking" if not enemy.squished else "walking_squished")
-		elif enemy.sprite.animation != "alert":
-			enemy.sprite.play("walking" if not enemy.squished else "walking_squished")
+		if enemy.sprite.animation != "skid" or not should_skid():
+			if not is_alert:
+				enemy.sprite.play("airborne")
 	
-	if enemy.sprite.animation == "walking" or enemy.sprite.animation == "walking_squished":
-		enemy.sprite.speed_scale = move_toward(enemy.sprite.speed_scale, chase_speed / move_speed, delta * accel * 60)
+	if is_alert:
+		enemy.sprite.speed_scale = alert_speed_scale
+	elif enemy.sprite.animation == "walking":
+		enemy.sprite.speed_scale = move_toward(enemy.sprite.speed_scale, cur_speed_scale, delta * cur_accel * 60)
 	else:
 		enemy.sprite.speed_scale = 1
 	
+	var last_facing_dir: int = enemy.facing_direction
 	enemy.facing_direction = sign(target_player.global_position.x - enemy.global_position.x)
-	enemy.velocity.x = move_toward(enemy.velocity.x, enemy.facing_direction * chase_speed, delta * accel * 60)
+	
+	if not is_alert:
+		enemy.velocity.x = move_toward(enemy.velocity.x, enemy.facing_direction * cur_chase_speed, delta * cur_accel * 60)
+	
+	if enemy.is_on_ground() and enemy.facing_direction != last_facing_dir and enemy.sprite.animation == "walking":
+		if abs(enemy.velocity.x) > 70 and should_skid():
+			skid_sound.play()
+			enemy.sprite.play("skid")
 	
 	if is_instance_valid(wall_detector):
 		wall_detector.cast_to.x = abs(wall_detector.cast_to.x) * enemy.facing_direction
@@ -82,3 +100,7 @@ func enable_raycasts(is_enabled: bool) -> void:
 func jump() -> void:
 	enemy.velocity.y = -225
 	enemy.position.y -= 1
+
+
+func should_skid() -> bool:
+	return not is_zero_approx(enemy.velocity.x) and sign(enemy.velocity.x) != enemy.facing_direction

@@ -34,4 +34,4 @@ func update_property(key: String, value):
 
 	if key == "squished":
 		for enemy in spawned_enemies:
-			enemy.squished = value
+			enemy.set_squished(value, true)

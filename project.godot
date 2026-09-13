@@ -939,6 +939,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/editor/items/placeable_tile_object.gd"
 }, {
+"base": "Area2D",
+"class": "PlayerDetector",
+"language": "GDScript",
+"path": "res://scenes/actors/objects/goomba/player_detector.gd"
+}, {
 "base": "Button",
 "class": "PlayerSelector",
 "language": "GDScript",
@@ -1536,6 +1541,7 @@ _global_script_class_icons={
 "PlaceableObject": "",
 "PlaceableTile": "",
 "PlaceableTileObject": "",
+"PlayerDetector": "",
 "PlayerSelector": "",
 "Powerup": "",
 "PropertyEditor": "",

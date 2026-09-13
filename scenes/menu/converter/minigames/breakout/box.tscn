@@ -69,7 +69,7 @@ shape = SubResource( 1 )
 
 [node name="Hit" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
-volume_db = -8.0
+volume_db = -13.0
 bus = "Sounds"
 
 [node name="HitBreak" type="AudioStreamPlayer" parent="."]

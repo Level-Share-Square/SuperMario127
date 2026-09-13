@@ -8,7 +8,7 @@ export var accel: float = 8
 var target_player: Character
 var footstep_interval := 0.0
 
-onready var player_detector: Area2D = get_node("%PlayerDetector")
+onready var player_forgetter: Area2D = get_node("%PlayerForgetter")
 onready var ledge_detector: RayCast2D = get_node_or_null("Ledge")
 onready var wall_detector: RayCast2D = get_node_or_null("Wall")
 onready var animation_player = $"%AnimationPlayer"
@@ -23,7 +23,7 @@ func _start() -> void:
 
 
 func _update(delta: float) -> void:
-	target_player = player_detector.get_player()
+	target_player = player_forgetter.get_player()
 	
 	if not is_instance_valid(target_player) or target_player.dead:
 		enemy.set_state_by_name("IdleState")

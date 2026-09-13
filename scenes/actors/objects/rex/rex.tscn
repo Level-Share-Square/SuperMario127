@@ -5,7 +5,7 @@
 
 [node name="Rex" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
-editor_rect = Rect2( -8, -32, 16, 32 )
+editor_rect = Rect2( -15, -46, 31, 46 )
 internal_id = "rex"
 enemy_scene_path = "res://scenes/actors/objects/rex/rex_enemy.tscn"
 color = Color( 0.282353, 0.239216, 0.545098, 1 )

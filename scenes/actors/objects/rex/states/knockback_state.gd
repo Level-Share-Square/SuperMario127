@@ -10,7 +10,7 @@ func _start() -> void:
 	hit_sound.play()
 	enemy.sprite.scale = Vector2.ONE * 1.15
 	enemy.sprite.modulate = Color.white * 1.25
-	enemy.sprite.play("default" if not enemy.squished else "squished")
+	enemy.sprite.play("airborne")
 
 func _stop() -> void:
 	enemy.last_state = self
