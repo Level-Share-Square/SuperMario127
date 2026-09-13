@@ -16,7 +16,7 @@ func _update(_delta: float) -> void:
 	._update(_delta)
 	
 	if enemy.is_on_ground():
-		enemy.sprite.play("default")
+		enemy.sprite.play("default" if not enemy.squished else "squished")
 	
 	var player: Character = enemy.player_detector.get_player()
 	if is_instance_valid(player) and not player.dead:
