@@ -39,12 +39,12 @@ var campaign_text_shortcut_map: Dictionary = {
 }
 
 func _ready():
+
 	var working_map: Dictionary = text_shortcut_map.duplicate()
 	if CurrentLevelData.is_campaign: working_map.merge(campaign_text_shortcut_map)
 	
 	for shortcut_string in working_map:
 		shortcut.add_item(shortcut_string)
-		
 	var popup: PopupMenu = shortcut.get_popup()
 	popup.connect("id_pressed", self, "shortcut_selected")
 	popup.connect("about_to_show", self, "popup_shown")

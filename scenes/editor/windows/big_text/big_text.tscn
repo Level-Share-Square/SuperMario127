@@ -17,7 +17,7 @@
 
 [sub_resource type="DynamicFont" id=1]
 
-[sub_resource type="AnimatedTexture" id=2]
+[sub_resource type="AtlasTexture" id=2]
 
 [node name="BigText" type="VBoxContainer"]
 margin_right = 256.0
@@ -191,12 +191,17 @@ margin_bottom = 17.0
 rect_min_size = Vector2( 17, 17 )
 hint_tooltip = "Character Name"
 focus_mode = 0
+size_flags_horizontal = 0
+size_flags_vertical = 0
 theme_type_variation = "ButtonTransparent"
 custom_fonts/font = SubResource( 1 )
 custom_icons/arrow = SubResource( 2 )
-icon = ExtResource( 8 )
-expand_icon = true
 script = ExtResource( 2 )
+
+[node name="TextureRect" type="TextureRect" parent="Modifiers/ModifierButtons/Shortcut"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 8 )
 
 [node name="TextEditor" type="TextEdit" parent="."]
 unique_name_in_owner = true
@@ -205,8 +210,7 @@ margin_right = 256.0
 margin_bottom = 206.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-text = "Hello, how are you doing on this fine day?
-I'm doing splendid!"
+text = "The Mario knows where it is at all times. It knows this because it knows where it isn't, by subtracting where it is from where it isn't, or where it isn't from where it is, whichever is greater, it obtains a difference, or deviation. The guidance sub-system uses deviations to generate corrective commands to drive the Mario from a position where it is, to a position where it isn't, and arriving at a position where it wasn't, it now is. Consequently, the position where it is, is now the position that it wasn't, and it follows that the position where it was, is now the position that it isn't. In the event of the position that it is in is not the position that it wasn't, the system has required a variation. The variation being the difference between where the Mario is, and where it wasn't. If variation is considered to be a significant factor, it too, may be corrected by the player. However, the Mario must also know where it was. The Mario guidance computance scenario works as follows: Because a variation has modified some of the information the Mario has obtained, it is not sure just where it is, however it is sure where it isn't, within reason, and it knows where it was. It now subracts where it should be, from where it wasn't, or vice versa. By differentiating this from the algebraic sum of where it shouldn't be, and where it was. It is able to obtain a deviation, and a variation, which is called \"air\""
 smooth_scrolling = true
 v_scroll_speed = 0.0
 wrap_enabled = true
