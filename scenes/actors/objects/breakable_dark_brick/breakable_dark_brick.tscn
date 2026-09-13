@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://scenes/actors/objects/breakable_brick/breakable_brick.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/actors/objects/breakable_dark_brick/breakable_dark_brick_outline.png" type="Texture" id=2]
@@ -12,11 +12,22 @@
 [ext_resource path="res://scenes/actors/objects/breakable_dark_brick/palettes/1.png" type="Texture" id=10]
 [ext_resource path="res://scenes/actors/objects/breakable_dark_brick/palettes/4.png" type="Texture" id=11]
 [ext_resource path="res://scenes/actors/objects/breakable_dark_brick/palettes/2.png" type="Texture" id=12]
+[ext_resource path="res://scenes/actors/objects/breakable_dark_brick/palettes/particles_6.png" type="Texture" id=13]
+[ext_resource path="res://scenes/actors/objects/breakable_dark_brick/particles.png" type="Texture" id=14]
+[ext_resource path="res://scenes/actors/objects/breakable_dark_brick/palettes/particles_3.png" type="Texture" id=15]
+[ext_resource path="res://scenes/actors/objects/breakable_dark_brick/palettes/particles_9.png" type="Texture" id=16]
+[ext_resource path="res://scenes/actors/objects/breakable_dark_brick/palettes/particles_7.png" type="Texture" id=17]
+[ext_resource path="res://scenes/actors/objects/breakable_dark_brick/palettes/particles_4.png" type="Texture" id=18]
+[ext_resource path="res://scenes/actors/objects/breakable_dark_brick/palettes/particles_8.png" type="Texture" id=19]
+[ext_resource path="res://scenes/actors/objects/breakable_dark_brick/palettes/particles_2.png" type="Texture" id=20]
+[ext_resource path="res://scenes/actors/objects/breakable_dark_brick/palettes/particles_1.png" type="Texture" id=21]
+[ext_resource path="res://scenes/actors/objects/breakable_dark_brick/palettes/particles_5.png" type="Texture" id=22]
 
 [node name="BreakableDarkBrick" instance=ExtResource( 1 )]
 internal_id = "breakable_dark_brick"
 inner_textures = [ ExtResource( 3 ), ExtResource( 10 ), ExtResource( 12 ), ExtResource( 5 ), ExtResource( 11 ), ExtResource( 4 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 7 ), ExtResource( 6 ) ]
 outer_textures = [ ExtResource( 2 ), ExtResource( 2 ), ExtResource( 2 ), ExtResource( 2 ), ExtResource( 2 ), ExtResource( 2 ), ExtResource( 2 ), ExtResource( 2 ), ExtResource( 2 ), ExtResource( 2 ) ]
+particle_textures = [ ExtResource( 14 ), ExtResource( 21 ), ExtResource( 20 ), ExtResource( 15 ), ExtResource( 18 ), ExtResource( 22 ), ExtResource( 13 ), ExtResource( 17 ), ExtResource( 19 ), ExtResource( 16 ) ]
 
 [node name="Sprite" parent="Box" index="0"]
 texture = ExtResource( 3 )

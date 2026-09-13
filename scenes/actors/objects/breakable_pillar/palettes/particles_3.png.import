@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/rexnormal_eyes.png-335eb963d8ad608170dd508a1c155923.stex"
+path="res://.import/particles_3.png-2e4f381b860206ea3b385a0978152754.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/actors/objects/rex/rexnormal_eyes.png"
-dest_files=[ "res://.import/rexnormal_eyes.png-335eb963d8ad608170dd508a1c155923.stex" ]
+source_file="res://scenes/actors/objects/breakable_pillar/palettes/particles_3.png"
+dest_files=[ "res://.import/particles_3.png-2e4f381b860206ea3b385a0978152754.stex" ]
 
 [params]
 

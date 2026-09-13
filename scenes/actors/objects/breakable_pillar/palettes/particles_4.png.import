@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/rexangry_eyes.png-46435f67b8b9e11c75ba7779cb92aba4.stex"
+path="res://.import/particles_4.png-4c798222d0809cefd9b48fbb4a3e0096.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/actors/objects/rex/rexangry_eyes.png"
-dest_files=[ "res://.import/rexangry_eyes.png-46435f67b8b9e11c75ba7779cb92aba4.stex" ]
+source_file="res://scenes/actors/objects/breakable_pillar/palettes/particles_4.png"
+dest_files=[ "res://.import/particles_4.png-4c798222d0809cefd9b48fbb4a3e0096.stex" ]
 
 [params]
 
