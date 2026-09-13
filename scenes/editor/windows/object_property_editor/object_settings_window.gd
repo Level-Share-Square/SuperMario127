@@ -24,7 +24,6 @@ func load_objects(_objects: Dictionary):
 			objects.erase(game_object)
 			continue # IDK WHY IT SOMETIMES CRASHES HERE HELP PLS
 		game_object.disconnect("tree_exited", self, "close")
-	
 	objects = _objects
 	
 	common_properties = []

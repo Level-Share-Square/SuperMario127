@@ -9,6 +9,7 @@ const UP_DIR := Vector2.UP
 const SNAP_VECTOR := Vector2(0, 12)
 const FLOOR_MAX_ANGLE: float = deg2rad(67)
 
+
 # the enemy cant fall faster than gravity times this
 export var max_gravity_factor: float = 20
 
@@ -21,6 +22,7 @@ export var float_in_liquids: bool
 export var float_speed: float = 32
 export var float_accel: float = 4
 export var coin_id: int = 1
+
 
 var level_bounds: Rect2
 # parent should set this to area gravity times two
@@ -96,8 +98,11 @@ func _physics_process(delta):
 	var working_snap_vector: Vector2 = SNAP_VECTOR if snap_enabled else Vector2.ZERO
 	
 	var gravity_multiplier: float = 1
-	if is_instance_valid(state):
+	if is_instance_valid(state) and "gravity_multiplier" in state:
+		var first_value = state
 		state._update(delta)
+		if state == null:
+			print(first_value)
 		gravity_multiplier *= state.gravity_multiplier
 	
 	# gravity and floating in liquids

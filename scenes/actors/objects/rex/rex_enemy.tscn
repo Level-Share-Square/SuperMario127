@@ -1,61 +1,65 @@
-[gd_scene load_steps=43 format=2]
+[gd_scene load_steps=41 format=2]
 
-[ext_resource path="res://scenes/actors/objects/enemy/enemy_base.tscn" type="PackedScene" id=1]
-[ext_resource path="res://scenes/actors/objects/goomba/goomba_enemy.gd" type="Script" id=2]
-[ext_resource path="res://scenes/actors/objects/goomba/states/idle_state.gd" type="Script" id=3]
-[ext_resource path="res://scenes/actors/objects/goomba/frames.tres" type="SpriteFrames" id=4]
-[ext_resource path="res://scenes/actors/objects/goomba/states/wander_state.gd" type="Script" id=5]
-[ext_resource path="res://scenes/actors/objects/goomba/damage.gd" type="Script" id=6]
-[ext_resource path="res://scenes/actors/objects/goomba/player_detector.gd" type="Script" id=7]
-[ext_resource path="res://scenes/actors/objects/goomba/states/die_state.gd" type="Script" id=8]
-[ext_resource path="res://scenes/actors/objects/goomba/states/knockback_state.gd" type="Script" id=9]
-[ext_resource path="res://scenes/actors/mario/SpriteAnimSync.gd" type="Script" id=10]
-[ext_resource path="res://scenes/actors/objects/goomba/recolorable_frames.tres" type="SpriteFrames" id=11]
-[ext_resource path="res://assets/sounds/goomba_poof.wav" type="AudioStream" id=12]
-[ext_resource path="res://assets/sounds/goomba_stomp.wav" type="AudioStream" id=13]
-[ext_resource path="res://scenes/actors/objects/goomba/animations/poof.png" type="Texture" id=14]
-[ext_resource path="res://scenes/actors/objects/goomba/states/chase_state.gd" type="Script" id=15]
-[ext_resource path="res://assets/sounds/enemy_hit_generic.wav" type="AudioStream" id=16]
-[ext_resource path="res://scenes/actors/objects/enemy/enemy_bouncer.gd" type="Script" id=17]
-[ext_resource path="res://classes/sound_pitcher_directional.gd" type="Script" id=18]
-[ext_resource path="res://assets/sounds/goomba/3W_SeEmKuriboFind.wav" type="AudioStream" id=19]
-[ext_resource path="res://assets/sounds/goomba/3W_SeEmKuriboRun.wav" type="AudioStream" id=20]
-[ext_resource path="res://assets/icons/interaction_marker_outline.png" type="Texture" id=21]
-[ext_resource path="res://assets/icons/interaction_marker.png" type="Texture" id=22]
-[ext_resource path="res://scenes/actors/objects/goomba/goomba_juice.gd" type="Script" id=23]
-[ext_resource path="res://assets/sounds/goomba/3W_SeEmKuriboWalk.wav" type="AudioStream" id=24]
-[ext_resource path="res://assets/sounds/bump.wav" type="AudioStream" id=25]
+[ext_resource path="res://scenes/actors/objects/rex/rex.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://scenes/actors/objects/enemy/enemy_base.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/actors/objects/rex/states/idle_state.gd" type="Script" id=3]
+[ext_resource path="res://scenes/actors/objects/rex/states/squish_stun_state.gd" type="Script" id=4]
+[ext_resource path="res://scenes/actors/objects/goomba/player_detector.gd" type="Script" id=5]
+[ext_resource path="res://scenes/actors/objects/rex/rex_enemy.gd" type="Script" id=6]
+[ext_resource path="res://assets/sounds/goomba_stomp.wav" type="AudioStream" id=7]
+[ext_resource path="res://assets/sounds/enemy_hit_generic.wav" type="AudioStream" id=8]
+[ext_resource path="res://assets/sounds/goomba_poof.wav" type="AudioStream" id=9]
+[ext_resource path="res://assets/sounds/goomba/3W_SeEmKuriboFind.wav" type="AudioStream" id=10]
+[ext_resource path="res://assets/sounds/goomba/3W_SeEmKuriboRun.wav" type="AudioStream" id=11]
+[ext_resource path="res://assets/sounds/goomba/3W_SeEmKuriboWalk.wav" type="AudioStream" id=12]
+[ext_resource path="res://assets/sounds/bump.wav" type="AudioStream" id=13]
+[ext_resource path="res://classes/sound_pitcher_directional.gd" type="Script" id=14]
+[ext_resource path="res://scenes/actors/objects/goomba/animations/poof.png" type="Texture" id=15]
+[ext_resource path="res://assets/icons/interaction_marker.png" type="Texture" id=16]
+[ext_resource path="res://assets/icons/interaction_marker_outline.png" type="Texture" id=17]
+[ext_resource path="res://scenes/actors/objects/rex/damage.gd" type="Script" id=18]
+[ext_resource path="res://scenes/actors/objects/rex/states/die_state.gd" type="Script" id=19]
+[ext_resource path="res://scenes/actors/objects/rex/states/chase_state.gd" type="Script" id=20]
+[ext_resource path="res://scenes/actors/objects/rex/rex_juice.gd" type="Script" id=21]
+[ext_resource path="res://scenes/actors/objects/rex/states/knockback_state.gd" type="Script" id=22]
+[ext_resource path="res://scenes/actors/objects/enemy/enemy_bouncer.gd" type="Script" id=23]
 
-[sub_resource type="CapsuleShape2D" id=36]
-radius = 11.0
-height = 4.0
+[sub_resource type="CircleShape2D" id=11]
+radius = 7.07107
 
-[sub_resource type="RectangleShape2D" id=57]
+[sub_resource type="RectangleShape2D" id=12]
 resource_local_to_scene = true
-extents = Vector2( 12, 13 )
+extents = Vector2( 8, 16 )
 
-[sub_resource type="RectangleShape2D" id=52]
+[sub_resource type="RectangleShape2D" id=13]
 resource_local_to_scene = true
 extents = Vector2( 100, 100 )
 
-[sub_resource type="CircleShape2D" id=63]
-radius = 192.0
-
-[sub_resource type="CircleShape2D" id=53]
+[sub_resource type="CircleShape2D" id=14]
 resource_local_to_scene = true
 radius = 3.0
 
-[sub_resource type="RectangleShape2D" id=54]
-extents = Vector2( 12, 2 )
-
-[sub_resource type="RectangleShape2D" id=59]
+[sub_resource type="RectangleShape2D" id=15]
 resource_local_to_scene = true
-extents = Vector2( 10, 9.5 )
+extents = Vector2( 11.5, 2 )
 
-[sub_resource type="CircleShape2D" id=56]
+[sub_resource type="RectangleShape2D" id=2]
 resource_local_to_scene = true
+extents = Vector2( 11.5, 2 )
 
-[sub_resource type="Animation" id=61]
+[sub_resource type="RectangleShape2D" id=16]
+resource_local_to_scene = true
+extents = Vector2( 6, 8 )
+
+[sub_resource type="RectangleShape2D" id=1]
+resource_local_to_scene = true
+extents = Vector2( 8, 7.75 )
+
+[sub_resource type="CapsuleShape2D" id=4]
+radius = 9.0
+height = 13.5
+
+[sub_resource type="Animation" id=6]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimatedSprite:position")
@@ -67,7 +71,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 0, -9 ) ]
+"values": [ Vector2( 0, 0 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("AnimatedSprite:offset")
@@ -79,7 +83,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 0, -15 ) ]
+"values": [ Vector2( 0, -16 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("AnimatedSprite:scale")
@@ -103,7 +107,7 @@ tracks/3/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ "idle" ]
+"values": [ "default" ]
 }
 tracks/4/type = "value"
 tracks/4/path = NodePath("Poof:emitting")
@@ -190,7 +194,7 @@ tracks/10/keys = {
 "values": [ Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=65]
+[sub_resource type="Animation" id=7]
 resource_name = "alert"
 length = 0.7
 tracks/0/type = "value"
@@ -256,7 +260,7 @@ tracks/4/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=64]
+[sub_resource type="Animation" id=8]
 resource_name = "pound_squish"
 step = 0.0333333
 tracks/0/type = "value"
@@ -281,7 +285,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 0, -24 ) ]
+"values": [ Vector2( 0, -16 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("AnimatedSprite:scale:x")
@@ -293,7 +297,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0, 0.0716734, 0.0728645, 0.311919 ),
 "transitions": PoolRealArray( -2, 0, 0.5, 1 ),
 "update": 0,
-"values": [ 1.0, 1.75, 1.0, 1.5 ]
+"values": [ 1.0, 1.25, 1.0, 1.5 ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("AnimatedSprite:scale:y")
@@ -302,10 +306,10 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 0.0716155, 0.0726702, 0.0727483, 0.312106 ),
-"transitions": PoolRealArray( 0.5, 0, 2, 2, 1 ),
+"times": PoolRealArray( 0, 0.0716155, 0.0729225, 0.312106 ),
+"transitions": PoolRealArray( 0.5, 0, 2, 1 ),
 "update": 0,
-"values": [ 1.0, 0.2, 1.0, 1.0, 0.75 ]
+"values": [ 1.2, 0.2, 0.2, 1.0 ]
 }
 tracks/4/type = "value"
 tracks/4/path = NodePath("AnimatedSprite:animation")
@@ -317,7 +321,7 @@ tracks/4/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ "stomped" ]
+"values": [ "squished" ]
 }
 tracks/5/type = "value"
 tracks/5/path = NodePath("Poof:emitting")
@@ -364,10 +368,10 @@ tracks/8/loop_wrap = true
 tracks/8/imported = false
 tracks/8/enabled = true
 tracks/8/keys = {
-"times": PoolRealArray( 0, 0.07265 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 0, 1 ]
+"values": [ 0 ]
 }
 tracks/9/type = "method"
 tracks/9/path = NodePath("Sounds/Stomp")
@@ -422,8 +426,9 @@ tracks/12/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 0 ) ]
 }
 
-[sub_resource type="Animation" id=58]
-resource_name = "squish"
+[sub_resource type="Animation" id=10]
+resource_name = "squish_0"
+length = 0.4
 step = 0.01
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimatedSprite:position")
@@ -447,7 +452,146 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 0, -24 ) ]
+"values": [ Vector2( 0, -16 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AnimatedSprite:scale:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.0475462, 0.209383, 0.302354, 0.349271, 0.388803 ),
+"transitions": PoolRealArray( -2, -0.5, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 1.0, 1.5, 1.4, 0.8, 1.2, 1.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AnimatedSprite:scale:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.0468898, 0.0475565, 0.208981, 0.305829, 0.35876, 0.397857 ),
+"transitions": PoolRealArray( 0.5, 1e+06, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 1.0, 0.2, 0.4, 0.5, 1.2, 0.8, 1.0 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("AnimatedSprite:animation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.0470047 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ "default", "squished" ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("AnimatedSprite:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("AnimatedSprite:frame")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.0470026 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 0 ]
+}
+tracks/7/type = "method"
+tracks/7/path = NodePath("Sounds/Stomp")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ 0.0 ],
+"method": "play"
+} ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("Alert:modulate")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("AnimatedSprite:modulate")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0, 0.119755 ),
+"transitions": PoolRealArray( 1, -2 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath(".:squished")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0.0543358 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=9]
+resource_name = "squish_1"
+length = 2.0
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimatedSprite:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, -16 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("AnimatedSprite:scale:x")
@@ -456,8 +600,8 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.0691764, 0.0700059, 0.198, 0.199, 0.404034 ),
-"transitions": PoolRealArray( -2, 0, 2, 0, 0.5, 1 ),
+"times": PoolRealArray( 0, 0.245832, 0.258636, 0.375511, 0.376511, 0.414189 ),
+"transitions": PoolRealArray( -2, -0.5, 2, 0, 0.5, 1 ),
 "update": 0,
 "values": [ 1.0, 1.75, 1.0, 1.75, 2.5, 0.0 ]
 }
@@ -468,10 +612,10 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 0.0691867, 0.0700704, 0.198009, 0.199, 0.404148 ),
-"transitions": PoolRealArray( 0.5, 0, 1, 0, -2, 1 ),
+"times": PoolRealArray( 0, 0.245842, 0.258415, 0.376511, 0.414303 ),
+"transitions": PoolRealArray( 0.5, 1, 1, -2, 1 ),
 "update": 0,
-"values": [ 1.0, 0.2, 1.0, 1.0, 0.3, 1.5 ]
+"values": [ 1.0, 0.2, 1.0, 0.3, 1.5 ]
 }
 tracks/4/type = "value"
 tracks/4/path = NodePath("AnimatedSprite:animation")
@@ -483,7 +627,7 @@ tracks/4/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ "stomped" ]
+"values": [ "squished" ]
 }
 tracks/5/type = "value"
 tracks/5/path = NodePath("Poof:emitting")
@@ -492,7 +636,7 @@ tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"times": PoolRealArray( 0, 0.3 ),
+"times": PoolRealArray( 0, 0.380399 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ false, true ]
@@ -516,7 +660,7 @@ tracks/7/loop_wrap = true
 tracks/7/imported = false
 tracks/7/enabled = true
 tracks/7/keys = {
-"times": PoolRealArray( 0.301 ),
+"times": PoolRealArray( 0.465189 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
@@ -530,10 +674,10 @@ tracks/8/loop_wrap = true
 tracks/8/imported = false
 tracks/8/enabled = true
 tracks/8/keys = {
-"times": PoolRealArray( 0, 0.07, 0.199023 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 0, 1, 0 ]
+"values": [ 0 ]
 }
 tracks/9/type = "method"
 tracks/9/path = NodePath("Sounds/Stomp")
@@ -588,204 +732,149 @@ tracks/12/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 0 ) ]
 }
 
-[sub_resource type="CanvasItemMaterial" id=60]
+[sub_resource type="CanvasItemMaterial" id=5]
 light_mode = 1
 particles_animation = true
 particles_anim_h_frames = 5
 particles_anim_v_frames = 1
 particles_anim_loop = false
 
-[sub_resource type="Gradient" id=34]
-colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
+[sub_resource type="CircleShape2D" id=3]
+radius = 192.0
 
-[sub_resource type="GradientTexture" id=35]
-gradient = SubResource( 34 )
+[sub_resource type="RectangleShape2D" id=17]
+extents = Vector2( 11, 13 )
 
-[sub_resource type="ParticlesMaterial" id=50]
-emission_shape = 2
-emission_box_extents = Vector3( 8, 8, 1 )
-flag_disable_z = true
-direction = Vector3( 0, -1, 0 )
-spread = 0.0
-gravity = Vector3( 0, 0, 0 )
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-scale = 0.75
-color_ramp = SubResource( 35 )
-anim_speed = 0.8
-
-[sub_resource type="RectangleShape2D" id=62]
-extents = Vector2( 10, 13 )
-
-[node name="GoombaEnemy" instance=ExtResource( 1 )]
+[node name="Rex" instance=ExtResource( 2 )]
 collision_mask = 17
-script = ExtResource( 2 )
-max_gravity_factor = 30.0
+script = ExtResource( 6 )
 cur_state = "IdleState"
-enemy_size = Vector2( 24, 26 )
-color = Color( 1, 0, 0, 1 )
+enemy_size = Vector2( 20, 30 )
+color = Color( 0.282353, 0.239216, 0.545098, 1 )
+squished = true
+unsquished_size = Vector2( 20, 30 )
+squished_size = Vector2( 20, 16 )
+unsquished_spring_depth = 22
+squished_spring_depth = 14
 
 [node name="TerrainCollider" parent="." index="0"]
-visible = false
-position = Vector2( 0, -13 )
-shape = SubResource( 36 )
-
-[node name="LiquidsDetector" parent="." index="1"]
-visible = false
-z_index = 1
-monitoring = true
+position = Vector2( 0, -7 )
+shape = SubResource( 11 )
 
 [node name="CollisionShape2D" parent="LiquidsDetector" index="0"]
-position = Vector2( 0, -13 )
-shape = SubResource( 57 )
+position = Vector2( 0, -15.5 )
+shape = SubResource( 12 )
 
 [node name="CollisionShape2D" parent="PlatformDetector" index="0"]
-shape = SubResource( 52 )
-
-[node name="PlayerDetector" type="Area2D" parent="." index="3"]
-unique_name_in_owner = true
-position = Vector2( 0, -13 )
-script = ExtResource( 7 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector" index="0"]
-shape = SubResource( 63 )
-
-[node name="SightRay" type="RayCast2D" parent="PlayerDetector" index="1"]
-position = Vector2( 0, -5 )
-enabled = true
-
-[node name="FloorDetector" parent="." index="4"]
-cast_to = Vector2( 0, 6 )
+shape = SubResource( 13 )
 
 [node name="IdleState" type="Node2D" parent="States" index="0"]
 script = ExtResource( 3 )
-friction = 2.5
+friction = 4.0
 
-[node name="WanderState" type="Node2D" parent="States" index="1"]
-script = ExtResource( 5 )
-move_speed = 16.0
-ledge_turning = true
+[node name="ChaseState" type="Node2D" parent="States" index="1"]
+script = ExtResource( 20 )
 
-[node name="Ledge" type="RayCast2D" parent="States/WanderState" index="0"]
-visible = false
-position = Vector2( -12, -2 )
-cast_to = Vector2( 0, 64 )
-collision_mask = 17
-
-[node name="Wall" type="RayCast2D" parent="States/WanderState" index="1"]
-position = Vector2( 0, -10 )
-cast_to = Vector2( -12, 0 )
-collision_mask = 21
-
-[node name="ChaseState" type="Node2D" parent="States" index="2"]
-script = ExtResource( 15 )
-move_speed = 32.0
-chase_speed = 64.0
-accel = 4.0
-
-[node name="Ledge" type="RayCast2D" parent="States/ChaseState" index="0"]
-visible = false
-position = Vector2( -12, -2 )
-enabled = true
-cast_to = Vector2( 0, 32 )
-collision_mask = 17
-
-[node name="Wall" type="RayCast2D" parent="States/ChaseState" index="1"]
+[node name="Wall" type="RayCast2D" parent="States/ChaseState" index="0"]
 position = Vector2( 0, -10 )
 enabled = true
 cast_to = Vector2( -12, 0 )
 collision_mask = 17
 
-[node name="KnockbackState" type="Node2D" parent="States" index="3"]
-script = ExtResource( 9 )
+[node name="DieState" type="Node2D" parent="States" index="2"]
+script = ExtResource( 19 )
 can_attack = false
 can_be_hurt = false
 
-[node name="DieState" type="Node2D" parent="States" index="4"]
-script = ExtResource( 8 )
+[node name="SquishStunState" type="Node2D" parent="States" index="3"]
+script = ExtResource( 4 )
+can_attack = false
+can_be_hurt = false
+air_friction = 2.0
+
+[node name="KnockbackState" type="Node2D" parent="States" index="4"]
+script = ExtResource( 22 )
 can_attack = false
 can_be_hurt = false
 
-[node name="Damage" parent="." index="6"]
-position = Vector2( 0, 1 )
-script = ExtResource( 6 )
+[node name="Damage" parent="." index="5"]
+script = ExtResource( 18 )
+health = 2
+knockback_power = Vector2( 32, 15 )
 bounce_type = 1
-spring_bounce_depth = 16.0
-spring_bounce_pause_length = 0.1
-
-[node name="Crush" parent="Damage" index="0"]
-position = Vector2( 0, -1 )
+spring_bounce_windup_length = 0.1
+spring_bounce_depth = 22.0
+spring_bounce_pause_length = 0.2
 
 [node name="CollisionShape2D" parent="Damage/Crush" index="0"]
-position = Vector2( 0, -10 )
-shape = SubResource( 53 )
+shape = SubResource( 14 )
+
+[node name="Stomp" parent="Damage" index="1"]
+position = Vector2( 0, -29 )
 
 [node name="CollisionShape2D" parent="Damage/Stomp" index="0"]
-position = Vector2( 0, -25 )
-shape = SubResource( 54 )
+position = Vector2( 0, 0 )
+shape = SubResource( 15 )
 
-[node name="Attack" parent="Damage" index="2"]
-z_index = 1
+[node name="Squished" type="CollisionShape2D" parent="Damage/Stomp" index="1"]
+position = Vector2( 0, 15 )
+shape = SubResource( 2 )
+disabled = true
 
 [node name="CollisionShape2D" parent="Damage/Attack" index="0"]
-position = Vector2( 0, -10.5 )
-shape = SubResource( 59 )
+position = Vector2( 0, -15.5 )
+shape = SubResource( 16 )
 
-[node name="AnimatedSprite" parent="." index="7"]
-position = Vector2( 0, -9 )
-frames = ExtResource( 4 )
-animation = "idle"
+[node name="Squished" type="CollisionShape2D" parent="Damage/Attack" index="1"]
+position = Vector2( 0, -8.25 )
+shape = SubResource( 1 )
+disabled = true
+
+[node name="AnimatedSprite" parent="." index="6"]
+position = Vector2( 0, 0 )
+frames = ExtResource( 1 )
 playing = true
-offset = Vector2( 0, -15 )
-script = ExtResource( 23 )
-lerp_speed = 2.0
-color_lerp_speed = 2.0
+offset = Vector2( 0, -16 )
+script = ExtResource( 21 )
+lerp_speed = 4.0
+color_lerp_speed = 4.0
 
-[node name="RecolorSprite" type="AnimatedSprite" parent="AnimatedSprite" index="0"]
-visible = false
-self_modulate = Color( 1, 0.4, 0.333333, 1 )
-frames = ExtResource( 11 )
-animation = "idle"
-frame = 7
-offset = Vector2( 0, -15 )
-script = ExtResource( 10 )
-
-[node name="DialogueDetector" parent="AnimatedSprite" index="1"]
-visible = false
+[node name="DialogueDetector" parent="AnimatedSprite" index="0"]
+position = Vector2( 0, -14.5 )
 
 [node name="CollisionShape2D" parent="AnimatedSprite/DialogueDetector" index="0"]
-position = Vector2( 0, 6 )
-shape = SubResource( 56 )
+shape = SubResource( 4 )
 
-[node name="Alert" type="Sprite" parent="." index="8"]
+[node name="Alert" type="Sprite" parent="." index="7"]
 modulate = Color( 1, 1, 1, 0 )
 self_modulate = Color( 1, 0.376471, 0.376471, 1 )
 position = Vector2( 0, -23 )
 scale = Vector2( 1e-05, 1e-05 )
-texture = ExtResource( 22 )
+texture = ExtResource( 16 )
 offset = Vector2( 0, -384 )
 
 [node name="AlertOutline" type="Sprite" parent="Alert" index="0"]
 show_behind_parent = true
-texture = ExtResource( 21 )
+texture = ExtResource( 17 )
 offset = Vector2( 0, -384 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="9"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="8"]
 unique_name_in_owner = true
-anims/RESET = SubResource( 61 )
-anims/alert = SubResource( 65 )
-anims/pound_squish = SubResource( 64 )
-anims/squish = SubResource( 58 )
+anims/RESET = SubResource( 6 )
+anims/alert = SubResource( 7 )
+anims/pound_squish = SubResource( 8 )
+anims/squish_0 = SubResource( 10 )
+anims/squish_1 = SubResource( 9 )
 
-[node name="Poof" type="CPUParticles2D" parent="." index="10"]
-material = SubResource( 60 )
-position = Vector2( -2.84217e-14, -9 )
+[node name="Poof" type="CPUParticles2D" parent="." index="9"]
+material = SubResource( 5 )
+position = Vector2( -2.84217e-14, -14 )
 emitting = false
 amount = 4
 one_shot = true
 explosiveness = 1.0
 draw_order = 1
-texture = ExtResource( 14 )
+texture = ExtResource( 15 )
 emission_shape = 1
 emission_sphere_radius = 5.0
 spread = 180.0
@@ -794,85 +883,88 @@ initial_velocity = 20.0
 initial_velocity_random = 1.0
 anim_speed = 2.0
 
-[node name="VisibilityEnabler2D" parent="." index="11"]
-visible = true
-show_behind_parent = true
-position = Vector2( 0, -20 )
-
 [node name="Stomp" type="AudioStreamPlayer2D" parent="Sounds" index="0"]
-stream = ExtResource( 13 )
+stream = ExtResource( 7 )
 volume_db = 2.0
 bus = "Sounds"
-script = ExtResource( 18 )
+script = ExtResource( 14 )
 min_pitch = 0.9
 max_pitch = 1.1
 
 [node name="Hit" type="AudioStreamPlayer2D" parent="Sounds" index="1"]
 unique_name_in_owner = true
-stream = ExtResource( 16 )
+stream = ExtResource( 8 )
 volume_db = -3.5
 bus = "Sounds"
-script = ExtResource( 18 )
+script = ExtResource( 14 )
 
 [node name="Poof" type="AudioStreamPlayer2D" parent="Sounds" index="2"]
-stream = ExtResource( 12 )
+stream = ExtResource( 9 )
 volume_db = 2.0
 bus = "Sounds"
-script = ExtResource( 18 )
-min_pitch = 0.9
-max_pitch = 1.1
+script = ExtResource( 14 )
+min_pitch = 0.7
+max_pitch = 0.85
 
 [node name="Alert" type="AudioStreamPlayer2D" parent="Sounds" index="3"]
-stream = ExtResource( 19 )
+stream = ExtResource( 10 )
 bus = "Sounds"
-script = ExtResource( 18 )
+script = ExtResource( 14 )
 min_pitch = 0.9
 max_pitch = 1.1
 
 [node name="Walk" type="AudioStreamPlayer2D" parent="Sounds" index="4"]
 unique_name_in_owner = true
-stream = ExtResource( 24 )
+stream = ExtResource( 12 )
 volume_db = -20.0
 bus = "Sounds"
-script = ExtResource( 18 )
+script = ExtResource( 14 )
 min_pitch = 0.9
 max_pitch = 1.1
 
 [node name="Run" type="AudioStreamPlayer2D" parent="Sounds" index="5"]
 unique_name_in_owner = true
-stream = ExtResource( 20 )
+stream = ExtResource( 11 )
 volume_db = -3.0
 bus = "Sounds"
-script = ExtResource( 18 )
+script = ExtResource( 14 )
 min_pitch = 0.9
 max_pitch = 1.1
 
 [node name="Bump" type="AudioStreamPlayer2D" parent="Sounds" index="6"]
 unique_name_in_owner = true
-stream = ExtResource( 25 )
+stream = ExtResource( 13 )
 volume_db = -7.5
 bus = "Sounds"
-script = ExtResource( 18 )
+script = ExtResource( 14 )
 
-[node name="SpawnParticles" parent="." index="14"]
-position = Vector2( 0, -9 )
-process_material = SubResource( 50 )
+[node name="PlayerDetector" type="Area2D" parent="." index="14"]
+unique_name_in_owner = true
+position = Vector2( 0, -13 )
+script = ExtResource( 5 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector" index="0"]
+shape = SubResource( 3 )
+
+[node name="SightRay" type="RayCast2D" parent="PlayerDetector" index="1"]
+position = Vector2( 0, -5 )
+enabled = true
 
 [node name="EnemyBouncer" type="Area2D" parent="." index="15"]
 unique_name_in_owner = true
-visible = false
 collision_layer = 4
 collision_mask = 4
-script = ExtResource( 17 )
+script = ExtResource( 23 )
+inertia_scale = 0.5
+bounce_velocity = Vector2( 32, -32 )
 blacklisted_states = PoolStringArray( "KnockbackState", "DieState" )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyBouncer" index="0"]
 position = Vector2( 0, -13 )
-shape = SubResource( 62 )
+shape = SubResource( 17 )
 
 [node name="CollisionCheck" type="Timer" parent="EnemyBouncer" index="1"]
 autostart = true
 
-[connection signal="state_changed" from="." to="EnemyBouncer" method="state_changed"]
 [connection signal="area_entered" from="EnemyBouncer" to="EnemyBouncer" method="area_entered"]
 [connection signal="timeout" from="EnemyBouncer/CollisionCheck" to="EnemyBouncer" method="check_collisions"]

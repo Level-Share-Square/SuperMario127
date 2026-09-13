@@ -671,7 +671,7 @@ color_lerp_speed = 3.0
 self_modulate = Color( 0, 0.929412, 1, 1 )
 frames = ExtResource( 15 )
 animation = "idle"
-frame = 1
+frame = 2
 offset = Vector2( 0, -7 )
 script = ExtResource( 11 )
 
@@ -679,7 +679,7 @@ script = ExtResource( 11 )
 self_modulate = Color( 0, 0.415686, 1, 1 )
 frames = SubResource( 75 )
 animation = "idle"
-frame = 1
+frame = 2
 offset = Vector2( 0, -7 )
 script = ExtResource( 11 )
 
@@ -689,7 +689,7 @@ self_modulate = Color( 1, 0, 0, 1 )
 material = SubResource( 70 )
 frames = ExtResource( 4 )
 animation = "idle"
-frame = 1
+frame = 2
 offset = Vector2( 0, -7 )
 script = ExtResource( 11 )
 
@@ -808,7 +808,6 @@ shape = SubResource( 101 )
 autostart = true
 
 [connection signal="state_changed" from="." to="EnemyBouncer" method="state_changed"]
-[connection signal="area_entered" from="AnimatedSprite/DialogueDetector" to="AnimatedSprite/DialogueDetector" method="area_entered"]
 [connection signal="area_entered" from="EnemyBouncer" to="EnemyBouncer" method="area_entered"]
 [connection signal="bounced" from="EnemyBouncer" to="." method="set_state_by_name" binds= [ "BumpKnockbackState" ]]
 [connection signal="timeout" from="EnemyBouncer/CollisionCheck" to="EnemyBouncer" method="check_collisions"]

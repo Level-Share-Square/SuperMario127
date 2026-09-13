@@ -72,7 +72,7 @@ func load_base_properties(_editor: Editor, _objects: Dictionary):
 		connect_signals(enabled_property)
 	else:
 		enabled_property.hide()
-	
+	print(objects)
 	var placeable_items: Array = objects.values()
 	var palette_count: int = placeable_items[0].get_palette_count()
 	for placeable_item in placeable_items:
