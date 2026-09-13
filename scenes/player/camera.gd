@@ -448,8 +448,8 @@ func find_path(init_pos: Vector2, final_pos: Vector2, visited_corners = null, de
 			best_corner = corners[1]
 			alt_corner = corners[0]
 
-	var snap_best = Vector2(stepify(best_corner.x, 5.0), stepify(best_corner.y, 5.0))
-	var snap_alt = Vector2(stepify(alt_corner.x, 5.0), stepify(alt_corner.y, 5.0))
+	var snap_best = best_corner.snapped(Vector2(5.0, 5.0))
+	var snap_alt = alt_corner.snapped(Vector2(5.0, 5.0))
 	
 	var best_is_visited: bool = visited_corners.has(snap_best)
 	var alt_is_visited: bool = visited_corners.has(snap_alt)
