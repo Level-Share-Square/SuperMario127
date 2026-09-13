@@ -1,4 +1,5 @@
 tool
+class_name SpriteAnimSync
 extends AnimatedSprite
 
 onready var parent_sprite : AnimatedSprite = get_parent()

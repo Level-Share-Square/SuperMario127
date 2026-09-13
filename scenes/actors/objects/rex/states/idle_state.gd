@@ -4,6 +4,7 @@ extends EnemyStopState
 func _start() -> void:
 	._start()
 	
+	enemy.sprite.speed_scale = 1
 	if enemy.is_on_ground():
 		enemy.sprite.play("idle")
 	else:

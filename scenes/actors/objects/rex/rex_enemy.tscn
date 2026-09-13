@@ -1,6 +1,6 @@
-[gd_scene load_steps=48 format=2]
+[gd_scene load_steps=55 format=2]
 
-[ext_resource path="res://scenes/actors/objects/rex/rex.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://scenes/actors/objects/rex/animations/rex.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/actors/objects/enemy/enemy_base.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/actors/objects/rex/states/idle_state.gd" type="Script" id=3]
 [ext_resource path="res://scenes/actors/objects/rex/states/squish_stun_state.gd" type="Script" id=4]
@@ -11,7 +11,7 @@
 [ext_resource path="res://assets/sounds/goomba_poof.wav" type="AudioStream" id=9]
 [ext_resource path="res://assets/sounds/rex/3W_SeBmBunbunAttackSign.wav" type="AudioStream" id=10]
 [ext_resource path="res://assets/sounds/rex/se_enemy_tosshin_footstep_r.wav" type="AudioStream" id=11]
-[ext_resource path="res://scenes/actors/objects/rex/rex_squished.tres" type="SpriteFrames" id=12]
+[ext_resource path="res://scenes/actors/objects/rex/animations/rex_squished.tres" type="SpriteFrames" id=12]
 [ext_resource path="res://assets/sounds/bump.wav" type="AudioStream" id=13]
 [ext_resource path="res://classes/sound_pitcher_directional.gd" type="Script" id=14]
 [ext_resource path="res://scenes/actors/objects/goomba/animations/poof.png" type="Texture" id=15]
@@ -27,6 +27,13 @@
 [ext_resource path="res://scenes/actors/objects/goomba/player_forgetter.gd" type="Script" id=25]
 [ext_resource path="res://assets/sounds/rex/se_enemy_tosshin_slip.wav" type="AudioStream" id=26]
 [ext_resource path="res://scenes/actors/objects/rex/animations/anger_particle.png" type="Texture" id=27]
+[ext_resource path="res://scenes/actors/objects/rex/animations/rex_squished_recolorable_boots.tres" type="SpriteFrames" id=28]
+[ext_resource path="res://scenes/actors/objects/rex/animations/rex_recolorable0.tres" type="SpriteFrames" id=29]
+[ext_resource path="res://scenes/actors/objects/rex/animations/rex_recolorable1.tres" type="SpriteFrames" id=30]
+[ext_resource path="res://scenes/actors/objects/rex/animations/rex_recolorable_boots.tres" type="SpriteFrames" id=31]
+[ext_resource path="res://scenes/actors/objects/rex/RexAnimSync.gd" type="Script" id=32]
+[ext_resource path="res://scenes/actors/objects/rex/animations/rex_squished_recolorable0.tres" type="SpriteFrames" id=33]
+[ext_resource path="res://scenes/actors/objects/rex/animations/rex_squished_recolorable1.tres" type="SpriteFrames" id=34]
 
 [sub_resource type="CapsuleShape2D" id=118]
 radius = 7.0
@@ -58,7 +65,7 @@ extents = Vector2( 7, 20 )
 
 [sub_resource type="RectangleShape2D" id=1]
 resource_local_to_scene = true
-extents = Vector2( 10, 15.25 )
+extents = Vector2( 10, 12.75 )
 
 [sub_resource type="CanvasItemMaterial" id=119]
 particles_animation = true
@@ -844,7 +851,8 @@ collision_mask = 17
 script = ExtResource( 6 )
 cur_state = "IdleState"
 enemy_size = Vector2( 31, 46 )
-color = Color( 0.282353, 0.239216, 0.545098, 1 )
+color = Color( 0, 0, 1, 1 )
+boots_color = Color( 1, 0, 0, 1 )
 squished = true
 unsquished_frames = ExtResource( 1 )
 squished_frames = ExtResource( 12 )
@@ -911,6 +919,7 @@ can_attack = false
 can_be_hurt = false
 
 [node name="Damage" parent="." index="5"]
+z_index = 1
 script = ExtResource( 18 )
 health = 2
 knockback_power = Vector2( 112, 235 )
@@ -919,8 +928,10 @@ spring_bounce_windup_length = 0.1
 spring_bounce_depth = 22.0
 spring_bounce_pause_length = 0.2
 
-[node name="CollisionShape2D" parent="Damage/Crush" index="0"]
+[node name="Crush" parent="Damage" index="0"]
 visible = false
+
+[node name="CollisionShape2D" parent="Damage/Crush" index="0"]
 shape = SubResource( 14 )
 
 [node name="Stomp" parent="Damage" index="1"]
@@ -932,7 +943,6 @@ position = Vector2( 0, 0 )
 shape = SubResource( 15 )
 
 [node name="Squished" type="CollisionShape2D" parent="Damage/Stomp" index="1"]
-visible = false
 position = Vector2( 0, 15 )
 shape = SubResource( 2 )
 disabled = true
@@ -945,7 +955,7 @@ position = Vector2( 0, -20 )
 shape = SubResource( 16 )
 
 [node name="Squished" type="CollisionShape2D" parent="Damage/Attack" index="1"]
-position = Vector2( 0, -15.75 )
+position = Vector2( 0, -13.25 )
 shape = SubResource( 1 )
 disabled = true
 
@@ -977,6 +987,42 @@ position = Vector2( 0, -14.5 )
 
 [node name="CollisionShape2D" parent="AnimatedSprite/DialogueDetector" index="0"]
 shape = SubResource( 4 )
+
+[node name="Recolorable0" type="AnimatedSprite" parent="AnimatedSprite" index="1"]
+visible = false
+frames = ExtResource( 29 )
+animation = "idle"
+playing = true
+offset = Vector2( 0, -32 )
+script = ExtResource( 32 )
+source_unsquished = ExtResource( 1 )
+source_squished = ExtResource( 12 )
+target_unsquished = ExtResource( 29 )
+target_squished = ExtResource( 33 )
+
+[node name="Recolorable1" type="AnimatedSprite" parent="AnimatedSprite" index="2"]
+visible = false
+frames = ExtResource( 30 )
+animation = "idle"
+playing = true
+offset = Vector2( 0, -32 )
+script = ExtResource( 32 )
+source_unsquished = ExtResource( 1 )
+source_squished = ExtResource( 12 )
+target_unsquished = ExtResource( 30 )
+target_squished = ExtResource( 34 )
+
+[node name="RecolorableBoots" type="AnimatedSprite" parent="AnimatedSprite" index="3"]
+visible = false
+frames = ExtResource( 31 )
+animation = "idle"
+playing = true
+offset = Vector2( 0, -32 )
+script = ExtResource( 32 )
+source_unsquished = ExtResource( 1 )
+source_squished = ExtResource( 12 )
+target_unsquished = ExtResource( 31 )
+target_squished = ExtResource( 28 )
 
 [node name="Alert" type="Sprite" parent="." index="8"]
 modulate = Color( 1, 1, 1, 0 )
@@ -1106,6 +1152,7 @@ max_pitch = 1.1
 
 [node name="PlayerDetector" type="Area2D" parent="." index="17"]
 unique_name_in_owner = true
+visible = false
 position = Vector2( -106, -13 )
 script = ExtResource( 5 )
 

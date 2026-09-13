@@ -54,7 +54,7 @@ func _update(delta: float) -> void:
 		
 			if footstep_interval <= 0:
 				run_sound.play()
-				footstep_interval = 0.6 / enemy.sprite.speed_scale
+				footstep_interval = 0.5 / enemy.sprite.speed_scale
 			footstep_interval -= delta
 	else:
 		if enemy.sprite.animation != "skid" or not should_skid():
@@ -87,6 +87,8 @@ func _update(delta: float) -> void:
 
 
 func _stop() -> void:
+	gravity_multiplier = 1.0
+	is_alert = false
 	$"%StompCloudF".emitting = false
 	$"%StompCloudB".emitting = false
 	enable_raycasts(false)

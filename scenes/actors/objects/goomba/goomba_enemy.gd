@@ -2,11 +2,10 @@ extends EnemyBase
 
 
 const DEFAULT_COLOR := Color.red
-
-export var color := Color.red
+export var color := DEFAULT_COLOR
 
 var rainbow: bool = false setget set_rainbow 
-var rainbow_color := Color(0.999, 0, 0) # so that it doesn't ever snap to the default color
+var rainbow_color := Color(0.95, 0, 0) # so that it doesn't ever snap to the default color
 
 onready var recolor_sprite: AnimatedSprite = $AnimatedSprite/RecolorSprite
 onready var player_detector: Area2D = $PlayerDetector
@@ -15,7 +14,7 @@ onready var player_detector: Area2D = $PlayerDetector
 func set_color(value: Color) -> void:
 	color = value
 	
-	if color != DEFAULT_COLOR:
+	if not color.is_equal_approx(DEFAULT_COLOR):
 		var true_color: Color = color
 		true_color.s /= 2
 		recolor_sprite.visible = true

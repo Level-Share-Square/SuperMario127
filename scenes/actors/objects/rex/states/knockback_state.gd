@@ -18,7 +18,7 @@ func _stop() -> void:
 func _update(delta: float):
 	if enemy.velocity.length_squared() < velocity_threshold and enemy.is_on_ground():
 		enemy.sprite.rotation = 0
-		enemy.set_state_by_name("IdleState")
+		enemy.set_state_node(enemy.last_state)
 	
 	if enemy.is_on_ground():
 		enemy.velocity.x = move_toward(enemy.velocity.x, 0, delta * 3 * 60)
