@@ -171,6 +171,12 @@ func _draw():
 			draw_texture_rect(circle_texture, Rect2(pos - Vector2(2.0, 2.0), Vector2(4.0, 4.0)), false, Color.darkgray)
 
 func _physics_process(delta):
+	if mode != 1:
+		platform.set_position(path_follower.position)
+	else:
+		platform.position = path_follower.position
+		platform.reset_physics_interpolation()
+		
 	if(!activated || frozen):
 		return
 	_set_platform_pos()
@@ -197,11 +203,6 @@ func _set_platform_pos():
 		if !activated:
 			return
 	
-	if mode != 1:
-		platform.set_position(path_follower.position)
-	else:
-		platform.position = path_follower.position
-		platform.reset_physics_interpolation()
 
 func reached_end() -> void:
 	match move_type:
