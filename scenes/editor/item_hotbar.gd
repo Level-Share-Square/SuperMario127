@@ -61,6 +61,7 @@ func _ready():
 	refresh_loadout()
 	check_items()
 	
+	yield(editor, "ready")
 	_on_item_button_pressed(bottom_row.get_children()[0])
 
 
@@ -74,9 +75,11 @@ func _on_item_button_pressed(item_button):
 	match item_name.substr(0, 3):
 		"obj":
 			item_preview.update_item(associated_item, associated_item.palette, true)
+			editor.tool_manager.change_tool("ObjectPaint")
 			last_selected_object = [associated_item, 0]
 		"til":
 			item_preview.update_item(associated_item, associated_item.palette, false)
+			editor.tool_manager.change_tool("TilePaint")
 			last_selected_tile = [associated_item, 0]
 	
 	editor.emit_signal("item_changed", associated_item)

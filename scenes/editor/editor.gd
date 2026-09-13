@@ -73,7 +73,6 @@ func _ready():
 		CurrentLevelData.unsaved_editor_changes = false
 		
 	item_actions.handle_selection()
-	item_preview.update_item(selected_item, selected_item.palette, selected_item is PlaceableObject)
 	var rect := CurrentLevelData.current_area.header.bounds
 	oob_overlay.set_bounds(Rect2(rect.position*32, rect.size*32))
 		
