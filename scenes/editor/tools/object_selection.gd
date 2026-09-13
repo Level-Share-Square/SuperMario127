@@ -113,6 +113,9 @@ func box_expansion():
 	
 	var mouse_pos: Vector2 = get_adjusted_mouse_position()
 	var drag_rect := Rect2(start_pos, mouse_pos - start_pos).abs()
+
+	if drag_rect.size.is_zero_approx(): 
+		drag_rect.size = Vector2(1, 1)
 	
 	fill_rect = drag_rect
 	if layer is LevelParallaxLayer:
@@ -146,9 +149,12 @@ func to_local(global_rect: Rect2) -> Rect2:
 
 func _click_left(event, mouse_position):
 	select_objects([])
-	if fill_rect.has_point(get_adjusted_mouse_position()):
+	var adjusted_mouse_position: Vector2 = get_adjusted_mouse_position()
+	if fill_rect.has_point(adjusted_mouse_position):
 		fill_rect = Rect2()
 	._click_left(event, mouse_position)
+	if !fill_rect.has_point(adjusted_mouse_position):
+		box_expansion()
 		
 func on_undid_delete(objects):
 	editor.selected_objects = objects
