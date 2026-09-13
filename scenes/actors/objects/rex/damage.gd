@@ -34,10 +34,34 @@ func spin_attacked(body: PhysicsBody2D = null) -> void:
 		knock_player(body, true)
 		body.invulnerable_frames = 90
 		return
+	
+		return
 	if not enemy.state == enemy.get_state_by_name("DieState"):
 		strong_hurt(body)
 	
-
+func attack_area_entered(area):
+	if not enemy.enabled: return
+	if area.has_method("is_hurt_area"):
+		spin_attacked(area.get_character())
+	elif area is CharacterHitbox:
+		var character: Character = area.get_character()
+		
+		if not is_instance_valid(enemy.state) or enemy.state.can_be_hurt:
+			if character.attacking:
+				if character.state == character.get_state_node("DiveState") or character.state == character.get_state_node("SlideState"):
+					bonk_player(character, true)
+				spin_attacked(character)
+				
+			
+			if character.invincible:
+				magicked(character)
+			
+		if not is_instance_valid(enemy.state) or enemy.state.can_attack:
+			# lets not hurt the player if theyre stomping,,
+			if character.velocity.y > 0 or character.attacking:
+				return
+			else:
+				damage_player(character)
 
 func ground_pound(body: PhysicsBody2D = null) -> void:
 	if enemy.rainbow:
@@ -58,3 +82,4 @@ func shelled(body: PhysicsBody2D) -> void:
 
 func incinerated() -> void:
 	hurt()
+

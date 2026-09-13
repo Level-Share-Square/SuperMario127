@@ -31,6 +31,7 @@ func _ready():
 
 func _physics_process(delta):
 	._physics_process(delta)
+	#$"%StompCloud".direction.x = -1 if facing_direction > 0 else 1
 
 func set_rainbow(value: bool) -> void:
 	rainbow = value

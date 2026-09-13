@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=2]
+[gd_scene load_steps=43 format=2]
 
 [ext_resource path="res://scenes/actors/objects/rex/rex.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/actors/objects/enemy/enemy_base.tscn" type="PackedScene" id=2]
@@ -7,7 +7,7 @@
 [ext_resource path="res://scenes/actors/objects/goomba/player_detector.gd" type="Script" id=5]
 [ext_resource path="res://scenes/actors/objects/rex/rex_enemy.gd" type="Script" id=6]
 [ext_resource path="res://assets/sounds/goomba_stomp.wav" type="AudioStream" id=7]
-[ext_resource path="res://assets/sounds/enemy_hit_generic.wav" type="AudioStream" id=8]
+[ext_resource path="res://assets/sounds/bonk.ogg" type="AudioStream" id=8]
 [ext_resource path="res://assets/sounds/goomba_poof.wav" type="AudioStream" id=9]
 [ext_resource path="res://assets/sounds/goomba/3W_SeEmKuriboFind.wav" type="AudioStream" id=10]
 [ext_resource path="res://assets/sounds/goomba/3W_SeEmKuriboRun.wav" type="AudioStream" id=11]
@@ -23,6 +23,7 @@
 [ext_resource path="res://scenes/actors/objects/rex/rex_juice.gd" type="Script" id=21]
 [ext_resource path="res://scenes/actors/objects/rex/states/knockback_state.gd" type="Script" id=22]
 [ext_resource path="res://scenes/actors/objects/enemy/enemy_bouncer.gd" type="Script" id=23]
+[ext_resource path="res://scenes/actors/mario/particles/dust.png" type="Texture" id=24]
 
 [sub_resource type="CircleShape2D" id=11]
 radius = 7.07107
@@ -739,6 +740,12 @@ particles_anim_h_frames = 5
 particles_anim_v_frames = 1
 particles_anim_loop = false
 
+[sub_resource type="CanvasItemMaterial" id=116]
+particles_animation = true
+particles_anim_h_frames = 10
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
 [sub_resource type="CircleShape2D" id=3]
 radius = 192.0
 
@@ -770,10 +777,11 @@ shape = SubResource( 13 )
 
 [node name="IdleState" type="Node2D" parent="States" index="0"]
 script = ExtResource( 3 )
-friction = 4.0
+friction = 1.0
 
 [node name="ChaseState" type="Node2D" parent="States" index="1"]
 script = ExtResource( 20 )
+squished_accel = 4.0
 
 [node name="Wall" type="RayCast2D" parent="States/ChaseState" index="0"]
 position = Vector2( 0, -10 )
@@ -883,6 +891,37 @@ initial_velocity = 20.0
 initial_velocity_random = 1.0
 anim_speed = 2.0
 
+[node name="StompCloudF" type="CPUParticles2D" parent="." index="10"]
+unique_name_in_owner = true
+material = SubResource( 116 )
+position = Vector2( 0, -2 )
+z_index = 1
+amount = 1
+lifetime = 0.7
+lifetime_randomness = 0.5
+local_coords = false
+texture = ExtResource( 24 )
+spread = 0.0
+gravity = Vector2( 0, -49 )
+anim_speed = 1.0
+anim_speed_random = 0.3
+
+[node name="StompCloudB" type="CPUParticles2D" parent="." index="11"]
+unique_name_in_owner = true
+material = SubResource( 116 )
+position = Vector2( 0, -2 )
+z_index = -1
+emitting = false
+amount = 4
+lifetime = 0.7
+lifetime_randomness = 0.5
+local_coords = false
+texture = ExtResource( 24 )
+spread = 0.0
+gravity = Vector2( 0, -49 )
+anim_speed = 1.0
+anim_speed_random = 0.3
+
 [node name="Stomp" type="AudioStreamPlayer2D" parent="Sounds" index="0"]
 stream = ExtResource( 7 )
 volume_db = 2.0
@@ -894,9 +933,9 @@ max_pitch = 1.1
 [node name="Hit" type="AudioStreamPlayer2D" parent="Sounds" index="1"]
 unique_name_in_owner = true
 stream = ExtResource( 8 )
-volume_db = -3.5
 bus = "Sounds"
 script = ExtResource( 14 )
+min_pitch = 1.1
 
 [node name="Poof" type="AudioStreamPlayer2D" parent="Sounds" index="2"]
 stream = ExtResource( 9 )
@@ -938,7 +977,7 @@ volume_db = -7.5
 bus = "Sounds"
 script = ExtResource( 14 )
 
-[node name="PlayerDetector" type="Area2D" parent="." index="14"]
+[node name="PlayerDetector" type="Area2D" parent="." index="16"]
 unique_name_in_owner = true
 position = Vector2( 0, -13 )
 script = ExtResource( 5 )
@@ -950,7 +989,7 @@ shape = SubResource( 3 )
 position = Vector2( 0, -5 )
 enabled = true
 
-[node name="EnemyBouncer" type="Area2D" parent="." index="15"]
+[node name="EnemyBouncer" type="Area2D" parent="." index="17"]
 unique_name_in_owner = true
 collision_layer = 4
 collision_mask = 4

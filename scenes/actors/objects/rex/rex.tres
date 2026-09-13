@@ -63,5 +63,5 @@ animations = [ {
 "frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ) ],
 "loop": true,
 "name": "walking_squished",
-"speed": 5.0
+"speed": 12.0
 } ]

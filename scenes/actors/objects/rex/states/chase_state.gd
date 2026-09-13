@@ -19,6 +19,8 @@ onready var run_sound = $"%Run"
 
 func _start() -> void:
 	enable_raycasts(true)
+	$"%StompCloudF".emitting = true
+	$"%StompCloudB".emitting = true
 	if enemy.last_state == $"../SquishStunState" or enemy.last_state == $"../KnockbackState":
 		return
 	if enemy.is_on_ground():
@@ -67,6 +69,8 @@ func _update(delta: float) -> void:
 
 
 func _stop() -> void:
+	$"%StompCloudF".emitting = false
+	$"%StompCloudB".emitting = false
 	enable_raycasts(false)
 	enemy.last_state = self
 

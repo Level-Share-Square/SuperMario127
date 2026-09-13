@@ -410,6 +410,18 @@ func knockback(hit_pos: Vector2, power := Vector2(235, 225), set_state: bool = t
 		sound_player.play_damage_sound()
 		sound_player.play_hit_sound()
 
+#Like knockback, except for more "immovable" objects. Disregards state.disable_knockback.
+func bonk(hit_pos: Vector2, power := Vector2(235, 225), set_state: bool = true, play_hit_sound: bool = true):
+	
+	var direction := sign((global_position - hit_pos).normalized().x)
+	velocity.x = direction * power.x
+	velocity.y = -power.y
+	
+	if set_state:
+		set_state_by_name("BonkedState", 0)
+	if play_hit_sound and not sound_player.damage_sound.playing:
+		sound_player.play_hit_sound()
+		sound_player.play_bonk_sound()
 
 func play_shine_sound() -> void:
 	sound_player.play_shine_sound()

@@ -127,6 +127,9 @@ func knock_player(character: Character, play_hit_sound: bool = false) -> void:
 	if enemy.enabled:
 		character.knockback(global_position, knockback_power, set_player_knockback_state, play_hit_sound)
 
+func bonk_player(character: Character, play_hit_sound: bool = false) -> void:
+	if enemy.enabled:
+		character.bonk(global_position, knockback_power, set_player_knockback_state, play_hit_sound)
 
 func bounce_player(character: Character) -> void:
 	match(bounce_type):
@@ -186,7 +189,6 @@ func bounce_player(character: Character) -> void:
 			character.velocity.y = -bounce_power if not is_boosted else -big_bounce_power
 			if is_boosted:
 				character.velocity.x *= 1.25
-
 
 ## collision detection methods
 func attack_body_entered(body) -> void:
