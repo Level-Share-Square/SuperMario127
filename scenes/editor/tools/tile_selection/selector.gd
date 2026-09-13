@@ -49,6 +49,7 @@ func _click_left(event, mouse_position):
 		on_selection_outside_clicked()
 	else:
 		on_selection_inside_clicked()
+	visible = true
 		
 func _click_left_released(event, mouse_position):
 	is_dragging = false

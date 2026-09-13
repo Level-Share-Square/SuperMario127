@@ -12,7 +12,8 @@ func _ready():
 	editor.action_manager.connect("redo", self, "fit_to_bounding_rectangle")
 	editor.action_manager.connect("action", self, "fit_to_bounding_rectangle")
 	tool_manager.get_node("ObjectCursor").connect("objects_selected", self, "external_objects_selected")
-
+	reset_bounds()
+	
 func _process(_delta):
 	update()
 
@@ -27,6 +28,7 @@ func reset_bounds():
 	editor.item_actions.handle_selection()
 	select_objects([])
 	pivot.visible = false
+	visible = false
 
 func on_mouse_released():
 	select_objects(shared.get_layer(editor.layer).find_objects_in_rect(
@@ -43,6 +45,7 @@ func external_objects_selected(objects: Array):
 		reset_bounds()
 		return
 	run_selection_behavior()
+	visible = true
 	
 func run_selection_behavior():
 	fit_to_bounding_rectangle()
@@ -56,7 +59,11 @@ func action():
 	var action := SelectObjectsAction.new()
 	action.editor = editor
 	action.selected_objects = editor.selected_objects
+	action.connect("selected_objects", self, "signal_selected_objects")
 	editor.action_manager.commit_action([action])
+	
+func signal_selected_objects(objects: Array):
+	visible = not objects.empty()
 	
 func fit_to_bounding_rectangle():
 	fill_rect = get_bounding_rectangle()
