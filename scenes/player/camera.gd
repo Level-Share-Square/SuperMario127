@@ -219,6 +219,7 @@ func clamp_position(new_pos: Vector2, last_pos: Vector2, cur_size: Vector2, excl
 		if exclude_area in compare_areas:
 			compare_areas.erase(exclude_area)
 	for stopper in compare_areas:
+		if in_cutscene: return new_pos
 		if abs(new_pos.y - stopper.global_position.y) < cur_size.y * 1.2 + abs(stopper.top_bound.y - stopper.global_position.y) or abs(new_pos.x - stopper.global_position.x) < cur_size.x * 1.2 + abs(stopper.left_bound.x - stopper.global_position.x):
 			var overlapX = min(abs(last_pos.x + cur_size.x - stopper.left_bound.x), abs(last_pos.x - cur_size.x - stopper.right_bound.x))
 			var overlapY = min(abs(last_pos.y + cur_size.y - stopper.top_bound.y), abs(last_pos.y - cur_size.y - stopper.bottom_bound.y))
@@ -337,48 +338,13 @@ func play_cutscene(cutscene : CameraCutscene, reverse: bool = false):
 			cutscene.cutscene_type = cutscene.Type.TRANSITION
 	
 	if cutscene.cutscene_type == cutscene.Type.PAN:
-		cutscene_tween.remove_all()
-		cutscene_tween.interpolate_property(
-			self, 
-			"global_position", 
-			global_position, 
-			new_position, 
-			cutscene.time, 
-			cutscene.transition_type, 
-			cutscene.tween_ease	
-			)
-		cutscene_tween.interpolate_property(
-			self, 
-			"last_position", 
-			last_position, 
-			new_position, 
-			cutscene.time, 
-			cutscene.transition_type, 
-			cutscene.tween_ease
-			)
-		if abs(global_position.y - new_position.y) > 50:
-			cutscene_tween.interpolate_property(
-				self, 
-				"y_baseline", 
-				y_baseline, 
-				new_position.y, 
-				cutscene.time, 
-				cutscene.transition_type, 
-				cutscene.tween_ease
-				)
-			cutscene_tween.interpolate_property(
-				self, 
-				"cur_baseline", 
-				cur_baseline, 
-				new_position.y, 
-				cutscene.time, 
-				cutscene.transition_type, 
-				cutscene.tween_ease
-				)
-		cutscene_tween.start()
-
-		yield(cutscene_tween, "tween_completed")
-
+		var err: int = yield(pan_to(new_position, cutscene), "completed")
+		
+		if err == ERR_BUG:
+			cutscene.cutscene_type = cutscene.Type.TRANSITION
+			play_cutscene(cutscene, false)
+			return
+		
 		if cutscene.animation != "" and !reverse:
 			cutscene.owner.animation_player.play(cutscene.animation)
 			yield(cutscene.owner.animation_player, "animation_finished")
@@ -407,7 +373,96 @@ func play_cutscene(cutscene : CameraCutscene, reverse: bool = false):
 		return
 		
 	update_cutscene_queue()
+	
+func pan_to(final_position: Vector2, cutscene: CameraCutscene) -> int:
+	yield(get_tree(), "idle_frame") # Force coroutine
+	
+	var path: Array = find_path(global_position, final_position)
+	if -1 in path:
+		return ERR_BUG
+		
+	while path:
+		var next_point: Vector2 = path.pop_front()
+		pan_tween_to(next_point, cutscene)
+		yield(cutscene_tween, "tween_completed")
+		
+	return OK
+	
+const INT32_MAX: int = 2147483647
+	
+func pan_tween_to(new_position: Vector2, cutscene: CameraCutscene):
+	cutscene_tween.remove_all()
+	cutscene_tween.interpolate_property(
+		self, 
+		"global_position", 
+		global_position, 
+		new_position, 
+		cutscene.time, 
+		cutscene.transition_type, 
+		cutscene.tween_ease
+		)
+	cutscene_tween.interpolate_property(
+		self, 
+		"last_position", 
+		last_position, 
+		new_position, 
+		cutscene.time, 
+		cutscene.transition_type, 
+		cutscene.tween_ease
+		)
+	if abs(global_position.y - new_position.y) > 50:
+		cutscene_tween.interpolate_property(
+			self, 
+			"y_baseline", 
+			y_baseline, 
+			new_position.y, 
+			cutscene.time, 
+			cutscene.transition_type, 
+			cutscene.tween_ease
+			)
+		cutscene_tween.interpolate_property(
+			self, 
+			"cur_baseline", 
+			cur_baseline, 
+			new_position.y, 
+			cutscene.time, 
+			cutscene.transition_type, 
+			cutscene.tween_ease
+			)
+	cutscene_tween.start()
+	
+func find_path(init_pos: Vector2, final_pos: Vector2, visited_corners = null, depth: int = 0) -> Array:
+	if not visited_corners:
+		visited_corners = {}
+	if depth > 20: return [-1]
+		
+	var space_state: Physics2DDirectSpaceState = get_world_2d().direct_space_state
+	var hit: Dictionary = space_state.intersect_ray(init_pos, final_pos, [], INT32_MAX, false, true)
+	if not hit: return [final_pos]
+	if not hit.collider is CameraStopper: return []
+	
+	var corners: Array = hit.collider.get_valid_corners(hit.normal)
+	var best_corner: Vector2 = corners[0]
+	var alt_corner: Vector2 = corners[1]
+	if corners[1].distance_to(final_pos) < corners[0].distance_to(final_pos):
+			best_corner = corners[1]
+			alt_corner = corners[0]
 
+	var snap_best = Vector2(stepify(best_corner.x, 5.0), stepify(best_corner.y, 5.0))
+	var snap_alt = Vector2(stepify(alt_corner.x, 5.0), stepify(alt_corner.y, 5.0))
+	
+	var best_is_visited: bool = visited_corners.has(snap_best)
+	var alt_is_visited: bool = visited_corners.has(snap_alt)
+
+	if best_is_visited and alt_is_visited:
+		return [-1]
+	elif best_is_visited:
+		visited_corners[snap_alt] = true
+		return [alt_corner] + find_path(alt_corner, final_pos, visited_corners, depth + 1)
+	else:
+		visited_corners[snap_best] = true
+		return [best_corner] + find_path(best_corner, final_pos, visited_corners, depth + 1)
+		
 func _get_random_offset() -> Vector2:
 	randomize()
 	return Vector2(rand_range(-shake_strength, shake_strength), rand_range(-shake_strength, shake_strength))
