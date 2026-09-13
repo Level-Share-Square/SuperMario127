@@ -11,7 +11,7 @@ func _ready():
 	editor.action_manager.connect("undo", self, "fit_to_bounding_rectangle")
 	editor.action_manager.connect("redo", self, "fit_to_bounding_rectangle")
 	editor.action_manager.connect("action", self, "fit_to_bounding_rectangle")
-	tool_manager.get_node("ObjectCursor").connect("objects_selected", self, "external_objects_selected")
+	tool_manager.get_node("ObjectPen").connect("objects_selected", self, "external_objects_selected")
 	reset_bounds()
 	
 func _process(_delta):
