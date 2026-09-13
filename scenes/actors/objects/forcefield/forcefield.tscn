@@ -520,13 +520,10 @@ mouse_filter = 2
 texture = SubResource( 11 )
 expand = true
 
-[node name="BreakAnimation" parent="." index="2"]
+[node name="BreakAnimation" parent="." index="3"]
 anims/RESET = SubResource( 2 )
 anims/break = SubResource( 1 )
 anims/pulse = SubResource( 15 )
-
-[node name="BreakParticles" parent="." index="3"]
-process_material = SubResource( 16 )
 
 [node name="BreakSound" type="AudioStreamPlayer" parent="." index="4"]
 stream = ExtResource( 2 )
@@ -538,7 +535,10 @@ stream = ExtResource( 4 )
 volume_db = 2.0
 bus = "Sounds"
 
-[node name="Shockwave" type="CanvasLayer" parent="." index="6"]
+[node name="BreakParticles" parent="." index="6"]
+process_material = SubResource( 16 )
+
+[node name="Shockwave" type="CanvasLayer" parent="." index="7"]
 layer = 10
 
 [node name="Effect" type="TextureRect" parent="Shockwave" index="0"]
