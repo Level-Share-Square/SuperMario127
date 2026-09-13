@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=59 format=2]
+[gd_resource type="Resource" load_steps=60 format=2]
 
 [ext_resource path="res://scenes/editor/items/placeable_items.gd" type="Script" id=1]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/blue_coin.tres" type="Resource" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/cannon.tres" type="Resource" id=7]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/shine_shard.tres" type="Resource" id=8]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/lava.tres" type="Resource" id=9]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/roomtext.tres" type="Resource" id=10]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/quicksand.tres" type="Resource" id=11]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/crystal_tap.tres" type="Resource" id=12]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/water.tres" type="Resource" id=13]
@@ -99,6 +100,7 @@ placeable_items = {
 "obj_red_coin": ExtResource( 6 ),
 "obj_rocket_box": ExtResource( 39 ),
 "obj_rocket_nozzle": ExtResource( 23 ),
+"obj_roomtext": ExtResource( 10 ),
 "obj_shine": ExtResource( 3 ),
 "obj_shine_activator": ExtResource( 125 ),
 "obj_shine_shard": ExtResource( 8 ),
