@@ -324,11 +324,17 @@ static func convert_055_to_056(result):
 
 				match(object.type_id):
 					29: #goomba
-						var new_goomba_scale_conversion = Vector2(0.5, 0.5)
+						var new_goomba_scale_conversion = Vector2(0.75, 0.75)
 						var goomba_was_scaled = object.properties[1].x != 1.0 or object.properties[1].y != 1.0
 						if goomba_was_scaled:
 							object.properties[1] *= new_goomba_scale_conversion
-						object.properties[0] -= Vector2(0, 13)# if not goomba_was_scaled else Vector2(0, 13) * new_goomba_scale_conversion
+						object.properties[0] -= Vector2(0, 13) if not goomba_was_scaled else Vector2(0, 13) * new_goomba_scale_conversion
+					130: #rex
+						var new_rex_scale_conversion = Vector2(0.65, 0.65)
+						var rex_was_scaled = object.properties[1].x != 1.0 or object.properties[1].y != 1.0
+						if rex_was_scaled:
+							object.properties[1] *= new_rex_scale_conversion
+						object.properties[0] += Vector2(0, 17) if not rex_was_scaled else Vector2(0, 15) * (Vector2.ONE + new_rex_scale_conversion)
 
 				new_objects.append(object)
 			area_result.objects = new_objects
