@@ -110,10 +110,10 @@ static func decode(code: String)-> Dictionary:
 	var full_result = {}
 
 	code = code.strip_edges()
-	code = code.replace("\n", "")
+	code = code.strip_escapes()
 	var code_array = split_code_top_level(code)
 
-	if (code_array.size() < 4):
+	if (code_array.size() < 3):
 		full_result = {"decode_error":true}
 		return full_result
 
@@ -129,7 +129,7 @@ static func decode(code: String)-> Dictionary:
 	if full_result.format_version == "0.4.0" or full_result.format_version == "0.4.1":
 		add_amount = 0
 
-	elif conversion_util.compare_versions(full_result.format_version, "0.5.0") > -1:
+	if conversion_util.compare_versions(full_result.format_version, "0.5.0") > -1:
 		full_result.author = code_array[2].percent_decode()
 		full_result.description = code_array[3].percent_decode()
 		full_result.thumbnail_url = code_array[4].percent_decode()

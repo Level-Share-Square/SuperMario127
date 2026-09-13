@@ -418,6 +418,15 @@ static func get_collectible_data_from_old_data(level_data) -> CollectibleData:
 		for object in area.objects:
 			object = object as ObjectDataOld
 			var properties: Array = object.properties.duplicate(true)
+			
+			if properties.size() < 7:
+				properties.resize(14)
+				properties[6] = "Unnamed Shine"
+				properties[7] = ""
+				properties[8] = false
+				properties[12] = Color.yellow
+				
+			
 			if properties.size() < 15:
 				properties.resize(16)
 				properties[14] = true
