@@ -255,8 +255,17 @@ static func convert_054_to_055(result):
 					23: # pipe
 						object.properties.resize(12)
 						var color = object.properties[8]
+						if color == null:
+							color = Color(0, 1, 0)
+						
 						var teleport_mode = object.properties[9]
+						if teleport_mode == null:
+							teleport_mode = false
+						
 						var force_fadeout = object.properties[10]
+						if force_fadeout == null:
+							force_fadeout = false
+						
 						object.properties[11] = color
 						object.properties[8] = int(teleport_mode) # true = remote, false = local (why was it that way :/)
 						object.properties[9] = 0 if force_fadeout == true else 800 # setting max pan distance to 0 acts the same as force fadeout
@@ -409,6 +418,11 @@ static func get_collectible_data_from_old_data(level_data) -> CollectibleData:
 		for object in area.objects:
 			object = object as ObjectDataOld
 			var properties: Array = object.properties.duplicate(true)
+			if properties.size() < 15:
+				properties.resize(16)
+				properties[14] = true
+				properties[15] = 0
+			
 			
 			if object.type_id == SHINE_ID:
 				var mission_data: MissionData = MissionData.new(
