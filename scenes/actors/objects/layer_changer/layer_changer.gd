@@ -23,6 +23,8 @@ var one_time: bool = false
 var last_parts := 1
 var used: bool = false
 
+var id: int
+
 func _register_properties():
 	register_property(4, "parts", parts)
 	register_property(5, "stops_camera", stops_camera)
@@ -83,6 +85,10 @@ func _ready():
 	update_property("vertical", vertical)
 	camera_stopper.set_size(camera_stop_shape.shape.extents)
 	update_parts()
+	
+	id = hash([position, CurrentLevelData.area_id])
+	if id in CurrentLevelData.vars.used_changers:
+		used = true
 	
 	
 func update_property(key, value):
@@ -145,6 +151,8 @@ func update_layer(body):
 		CurrentLevelData.vars.layer_states[CurrentLevelData.area_id][layer_uuid] = layer_state
 		
 		used = true
+		if not id in CurrentLevelData.vars.used_changers:
+			CurrentLevelData.vars.used_changers.append(id)
 		
 				
 func _process(delta):
