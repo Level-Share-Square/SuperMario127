@@ -15,8 +15,8 @@
 [ext_resource path="res://assets/sounds/bump.wav" type="AudioStream" id=13]
 [ext_resource path="res://classes/sound_pitcher_directional.gd" type="Script" id=14]
 [ext_resource path="res://scenes/actors/objects/goomba/animations/poof.png" type="Texture" id=15]
-[ext_resource path="res://assets/icons/interaction_marker.png" type="Texture" id=16]
-[ext_resource path="res://assets/icons/interaction_marker_outline.png" type="Texture" id=17]
+[ext_resource path="res://assets/icons/EnemyAlert.svg" type="Texture" id=16]
+[ext_resource path="res://assets/icons/EnemyAlertOutline.svg" type="Texture" id=17]
 [ext_resource path="res://scenes/actors/objects/rex/damage.gd" type="Script" id=18]
 [ext_resource path="res://scenes/actors/objects/rex/states/die_state.gd" type="Script" id=19]
 [ext_resource path="res://scenes/actors/objects/rex/states/chase_state.gd" type="Script" id=20]
@@ -1026,7 +1026,7 @@ target_squished = ExtResource( 28 )
 
 [node name="Alert" type="Sprite" parent="." index="8"]
 modulate = Color( 1, 1, 1, 0 )
-self_modulate = Color( 1, 0.376471, 0.376471, 1 )
+self_modulate = Color( 1, 0, 0, 1 )
 position = Vector2( 0, -23 )
 scale = Vector2( 1e-05, 1e-05 )
 texture = ExtResource( 16 )
