@@ -75,7 +75,7 @@ func _on_item_button_pressed(item_button):
 	match item_name.substr(0, 3):
 		"obj":
 			item_preview.update_item(associated_item, associated_item.palette, true)
-			editor.tool_manager.change_tool("ObjectPaint")
+			editor.tool_manager.change_tool("ObjectPen")
 			last_selected_object = [associated_item, 0]
 		"til":
 			item_preview.update_item(associated_item, associated_item.palette, false)
