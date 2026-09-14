@@ -4,6 +4,7 @@ var account_id: String
 
 var level_id: String
 var level_name: String
+var level_version: String
 var thumbnail_url: String
 
 var author_name: String
@@ -34,9 +35,10 @@ func fetch(dictionary: Dictionary, key: String, default = ""):
 
 func _init(data: Dictionary, acc_id: String = ""):
 	account_id = acc_id
-	
+	print(data)
 	level_id = fetch(data, "_id")
 	level_name = fetch(data, "name")
+	level_version = fetch(data, "gameVersion")
 	thumbnail_url = fetch(data, "thumbnail")
 	
 	author_name = fetch(fetch(data, "author", {}), "username")

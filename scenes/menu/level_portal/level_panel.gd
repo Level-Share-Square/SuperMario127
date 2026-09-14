@@ -61,7 +61,9 @@ onready var http_request = $"%HTTPRequest"
 onready var http_images = $"%HTTPImages"
 var page_info: LSSLevelPage
 
-
+var level_version_map: Dictionary = {
+	101: "0.10.0",
+}
 
 func load_level(_page_info: LSSLevelPage):
 	page_info = _page_info
@@ -123,18 +125,15 @@ func load_level(_page_info: LSSLevelPage):
 	save_button.disabled = lss_link_util.is_level_in_link(page_info.level_id)
 	save_button.text = SAVED_TEXT if save_button.disabled else UNSAVED_TEXT
 	
-	var version_comparison: int = conversion_util.compareVersions(
-		page_info.level_code.get_slice(",", 0), 
-		CurrentLevelData.current_format_version)
+	var version_comparison: int = conversion_util.compare_versions(
+		page_info.level_version, 
+		level_version_map.get(ProjectSettings.get_setting("global/level_code_version")))
 	
 	outdated_version.visible = (version_comparison > 0)
 	level_buttons.visible = (version_comparison <= 0)
-	if version_comparison <= 0:
-		page_info.level_info.load_in()
-		
-		var collectible_counts = page_info.level_info.get_collectible_counts()
-		shines_label.text = str(collectible_counts["total_shines"])
-		coins_label.text = str(collectible_counts["total_star_coins"])
+	if version_comparison <= 0 and page_info.shine_count >= 0 and page_info.star_coin_count >= 0:
+		shines_label.text = str(page_info.shine_count)
+		coins_label.text = str(page_info.star_coin_count)
 	else:
 		shines_label.text = "N/A"
 		coins_label.text = "N/A"
@@ -164,12 +163,14 @@ func open_website():
 
 func save_level():
 	if lss_link_util.is_level_in_link(page_info.level_id): return
-	page_info = add_info_to_level(page_info)
 	
 	var local_id: String = level_list_util.generate_level_id()
 	var level_path: String = level_list_util.get_level_file_path(
 		local_id,
 		level_list_util.BASE_FOLDER)
+	
+	if page_info.level_code.substr(0, 2) != "[{": page_info.level_code = CurrentLevelData.convert_old_code_to_new(page_info.level_code)
+		
 	level_list_util.save_level_code_file(page_info.level_code, level_path)
 	sort_file_util.add_to_sort(local_id, level_list_util.BASE_FOLDER, sort_file_util.LEVELS)
 	
@@ -190,6 +191,10 @@ func play_level():
 	var local_id: String = level_path.get_file().get_basename()
 	var working_folder: String = level_path.get_base_dir()
 	
+	CurrentLevelData.unload_all_areas()
+	
+	if page_info.level_code.substr(0, 2) != "[{": page_info.level_code = CurrentLevelData.convert_old_code_to_new(page_info.level_code)
+	
 	var page_return_vars: Dictionary
 	for variable in http_request.return_args:
 		page_return_vars[variable] = http_request[variable]
@@ -197,9 +202,7 @@ func play_level():
 	Singleton.SceneSwitcher.menu_return_screen = "LevelPortal"
 	Singleton.SceneSwitcher.menu_return_args = [page_info.level_id, page_return_vars]
 	
-	page_info.level_info.level_id = local_id
-	page_info.level_info.level_folder = working_folder
-	Singleton.SceneSwitcher.start_level(page_info.level_info, local_id, working_folder, false)
+	Singleton.SceneSwitcher.start_level(LevelCodeDeserializer.deserialize_level_metadata_code(LevelCodeTokenizer.splice_metadata(page_info.level_code)), local_id, working_folder, false)
 
 
 ## adding descriptions, author, thumbnail
@@ -209,21 +212,3 @@ var keys_defaults: Array = [
 	["author", "author_name", CurrentLevelData.DEFAULT_AUTHOR],
 	["thumbnail_url", "thumbnail_url", CurrentLevelData.DEFAULT_THUMBNAIL_URL]
 ]
-
-func add_info_to_level(page_info: LSSLevelPage) -> LSSLevelPage:
-	var level_info: LevelInfo = page_info.level_info
-	
-	var level_changed: bool
-	for array in keys_defaults:
-		# if the property in the level data is its default value,
-		# set it to its corresponding value in page info 
-		if level_info.level_data[array[0]] == array[2]:
-			level_info.level_data[array[0]] = page_info[array[1]]
-			level_changed = true
-	
-	if level_changed:
-		level_info.level_code = level_info.level_data.get_encoded_level_data()
-		page_info.level_info = level_info
-		page_info.level_code = level_info.level_code
-	
-	return page_info

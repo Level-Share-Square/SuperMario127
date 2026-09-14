@@ -1819,18 +1819,19 @@ script = ExtResource( 2 )
 [node name="Pages" type="HBoxContainer" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 visible = false
-margin_top = 56.0
+margin_top = 57.0
 margin_right = 472.0
-margin_bottom = 80.0
+margin_bottom = 82.0
 alignment = 1
 script = ExtResource( 25 )
 
 [node name="Button" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Pages" instance=ExtResource( 27 )]
+margin_bottom = 25.0
 
 [node name="Button2" type="Button" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Pages"]
 margin_left = 28.0
 margin_right = 52.0
-margin_bottom = 24.0
+margin_bottom = 25.0
 rect_min_size = Vector2( 24, 24 )
 theme_type_variation = "PageButton"
 text = "2"
@@ -1838,7 +1839,7 @@ text = "2"
 [node name="Button3" type="Button" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Pages"]
 margin_left = 56.0
 margin_right = 80.0
-margin_bottom = 24.0
+margin_bottom = 25.0
 rect_min_size = Vector2( 24, 24 )
 theme_type_variation = "PageButton"
 text = "3"
@@ -1846,7 +1847,7 @@ text = "3"
 [node name="Button4" type="Button" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Pages"]
 margin_left = 84.0
 margin_right = 108.0
-margin_bottom = 24.0
+margin_bottom = 25.0
 rect_min_size = Vector2( 24, 24 )
 theme_type_variation = "PageButton"
 text = "4"
@@ -1854,7 +1855,7 @@ text = "4"
 [node name="Button5" type="Button" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Pages"]
 margin_left = 112.0
 margin_right = 136.0
-margin_bottom = 24.0
+margin_bottom = 25.0
 rect_min_size = Vector2( 24, 24 )
 theme_type_variation = "PageButton"
 text = "5"
@@ -1862,7 +1863,7 @@ text = "5"
 [node name="Button6" type="Button" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Pages"]
 margin_left = 140.0
 margin_right = 164.0
-margin_bottom = 24.0
+margin_bottom = 25.0
 rect_min_size = Vector2( 24, 24 )
 theme_type_variation = "PageButton"
 text = "6"
@@ -1870,7 +1871,7 @@ text = "6"
 [node name="Button7" type="Button" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Pages"]
 margin_left = 168.0
 margin_right = 192.0
-margin_bottom = 24.0
+margin_bottom = 25.0
 rect_min_size = Vector2( 24, 24 )
 theme_type_variation = "PageButton"
 text = "7"
@@ -1878,7 +1879,7 @@ text = "7"
 [node name="Button8" type="Button" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Pages"]
 margin_left = 196.0
 margin_right = 220.0
-margin_bottom = 24.0
+margin_bottom = 25.0
 rect_min_size = Vector2( 24, 24 )
 theme_type_variation = "PageButton"
 text = "8"
@@ -1886,7 +1887,7 @@ text = "8"
 [node name="Button9" type="Button" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Pages"]
 margin_left = 224.0
 margin_right = 248.0
-margin_bottom = 24.0
+margin_bottom = 25.0
 rect_min_size = Vector2( 24, 24 )
 theme_type_variation = "PageButton"
 text = "9"
@@ -1894,7 +1895,7 @@ text = "9"
 [node name="Button10" type="Button" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Pages"]
 margin_left = 252.0
 margin_right = 276.0
-margin_bottom = 24.0
+margin_bottom = 25.0
 rect_min_size = Vector2( 24, 24 )
 theme_type_variation = "PageButton"
 text = "10"
@@ -1902,7 +1903,7 @@ text = "10"
 [node name="Button11" type="Button" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Pages"]
 margin_left = 280.0
 margin_right = 304.0
-margin_bottom = 24.0
+margin_bottom = 25.0
 rect_min_size = Vector2( 24, 24 )
 theme_type_variation = "PageButton"
 disabled = true
@@ -1911,7 +1912,7 @@ text = "..."
 [node name="Button12" type="Button" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Pages"]
 margin_left = 308.0
 margin_right = 337.0
-margin_bottom = 24.0
+margin_bottom = 25.0
 rect_min_size = Vector2( 24, 24 )
 theme_type_variation = "PageButton"
 text = "999"
@@ -1919,20 +1920,20 @@ text = "999"
 [node name="Padding" type="Control" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Pages"]
 margin_left = 341.0
 margin_right = 349.0
-margin_bottom = 24.0
+margin_bottom = 25.0
 rect_min_size = Vector2( 8, 0 )
 
 [node name="GoToPage" type="HBoxContainer" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Pages"]
 margin_left = 353.0
 margin_right = 472.0
-margin_bottom = 24.0
+margin_bottom = 25.0
 size_flags_horizontal = 3
 custom_constants/separation = 0
 script = ExtResource( 30 )
 
 [node name="Query" type="LineEdit" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Pages/GoToPage"]
 margin_right = 95.0
-margin_bottom = 24.0
+margin_bottom = 25.0
 focus_neighbour_left = NodePath(".")
 focus_neighbour_top = NodePath(".")
 focus_neighbour_right = NodePath(".")
@@ -1957,7 +1958,7 @@ mouse_filter = 2
 [node name="Search" type="Button" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Pages/GoToPage"]
 margin_left = 95.0
 margin_right = 119.0
-margin_bottom = 24.0
+margin_bottom = 25.0
 rect_min_size = Vector2( 24, 0 )
 focus_mode = 0
 custom_fonts/font = ExtResource( 9 )
@@ -2083,7 +2084,7 @@ custom_constants/separation = 16
 unique_name_in_owner = true
 visible = false
 margin_right = 472.0
-margin_bottom = 16.0
+margin_bottom = 17.0
 custom_fonts/font = ExtResource( 9 )
 text = "Sorry! A newer version is required to play this level."
 align = 1
@@ -3213,10 +3214,9 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-margin_left = 640.0
-margin_top = 32.0
-margin_right = 768.0
-margin_bottom = 464.0
+margin_left = -128.0
+margin_top = -184.0
+margin_bottom = 248.0
 rect_min_size = Vector2( 128, 0 )
 mouse_filter = 2
 script = ExtResource( 17 )

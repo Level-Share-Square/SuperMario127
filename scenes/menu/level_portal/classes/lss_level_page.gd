@@ -3,9 +3,9 @@ class_name LSSLevelPage
 
 var level_id: String
 var level_code: String
-var level_info: LevelInfo
 
 var level_name: String
+var level_version
 var thumbnail_url: String
 var timestamp: String
 
@@ -26,6 +26,8 @@ var has_played: bool
 var has_rated: float
 var has_favorited: bool
 
+var shine_count: int
+var star_coin_count: int
 
 ## dictionary.value causes errors, if the data happens
 ## not to have the required value.
@@ -43,6 +45,7 @@ func _init(data: Dictionary):
 	level_code = fetch(data, "code")
 	
 	level_name = fetch(data, "name")
+	level_version = fetch(data, "gameVersion")
 	thumbnail_url = fetch(data, "thumbnail")
 	timestamp = fetch(data, "postDate")
 	
@@ -63,7 +66,7 @@ func _init(data: Dictionary):
 	has_rated = fetch(data, "hasRated", 0)
 	has_favorited = fetch(data, "hasFavourited", false)
 	
-	level_info = LevelInfo.new("", "", level_code)
-	
+	shine_count = fetch(data, "shineCount", -1)
+	star_coin_count = fetch(data, "starCoinCount", -1)
 #	data.erase("code")
 #	print(data)
