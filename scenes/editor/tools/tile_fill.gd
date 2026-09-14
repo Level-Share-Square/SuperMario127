@@ -5,43 +5,6 @@ const MAX_DEPTH: int = 2000
 var is_erasing: bool
 var undo_tiles: Dictionary = {}
 
-class ListNode:
-	var value = null
-	var next: ListNode = null
-	var prev: ListNode = null
-	
-	func _init(val): value = val
-	
-class Queue:
-	var head: ListNode = null
-	var tail: ListNode = null
-	var size: int = 0
-	
-	func append(val: Vector2):
-		var new_node := ListNode.new(val)
-		if not head: 
-			head = new_node
-			tail = new_node
-		else:
-			tail.next = new_node
-			new_node.prev = tail
-			tail = new_node
-		size += 1
-		
-	func pop_front():
-		if not head: return null
-		
-		var old_head = head
-		head = head.next
-		if head:
-			head.prev = null
-		else:
-			tail = null
-		size -= 1
-		return old_head.value
-		
-	func is_empty(): return size == 0
-
 func _click_left(_event: InputEvent, _world_pos: Vector2) -> void:
 	is_erasing = tool_manager.is_erasing
 	if editor.get_node("%FillConfirmWindow").visible: return
@@ -61,7 +24,7 @@ func fill_place(pos_x, pos_y):
 	var item = editor.selected_item
 	var tile_to_fill = shared.get_tile(pos_x, pos_y, editor.layer)
 	var selected_tile = [item.tileset_id, item.tile_id, item.palette]
-	var cells := Queue.new()
+	var cells = structure_util.Queue.new()
 	cells.append(Vector2(pos_x, pos_y))
 
 	var depth: int = 0

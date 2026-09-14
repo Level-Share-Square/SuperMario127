@@ -1350,6 +1350,11 @@ _global_script_classes=[ {
 "path": "res://util/new/levels_list/sort_file_util.gd"
 }, {
 "base": "Reference",
+"class": "structure_util",
+"language": "GDScript",
+"path": "res://util/structure_util.gd"
+}, {
+"base": "Reference",
 "class": "text_replace_util",
 "language": "GDScript",
 "path": "res://util/text_replace_util.gd"
@@ -1633,6 +1638,7 @@ _global_script_class_icons={
 "old_value_util": "",
 "save_meta_util": "",
 "sort_file_util": "",
+"structure_util": "",
 "text_replace_util": "",
 "tile_util": "",
 "uuid_util": ""
