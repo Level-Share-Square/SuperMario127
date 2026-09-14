@@ -1,7 +1,7 @@
 extends GameObject
 
 const EDGE_WIDTH: int = 32
-const PART_WIDTH: int = 64
+const PART_WIDTH: int = 32
 const HEDGE_EDGE_WIDTH: int = 16
 const HEDGE_PART_WIDTH: int = 32
 
