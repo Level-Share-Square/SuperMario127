@@ -7,7 +7,7 @@
 [ext_resource path="res://assets/icons/palette.svg" type="Texture" id=5]
 [ext_resource path="res://assets/sounds/hover.wav" type="AudioStream" id=6]
 [ext_resource path="res://scenes/editor/windows/big_text/text_editor.gd" type="Script" id=7]
-[ext_resource path="res://scenes/actors/mario/icon2.png" type="Texture" id=8]
+[ext_resource path="res://assets/icons/Shortcut.svg" type="Texture" id=8]
 [ext_resource path="res://assets/icons/Center.svg" type="Texture" id=9]
 [ext_resource path="res://assets/icons/Underline.svg" type="Texture" id=10]
 [ext_resource path="res://assets/icons/Strikethrough.svg" type="Texture" id=11]
@@ -202,6 +202,7 @@ script = ExtResource( 2 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 texture = ExtResource( 8 )
+expand = true
 
 [node name="TextEditor" type="TextEdit" parent="."]
 unique_name_in_owner = true
