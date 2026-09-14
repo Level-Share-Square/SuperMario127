@@ -26,6 +26,8 @@ const Y_DESPERATE_CORRECT_SPEED: float = 24.0
 
 const Y_OFFSET_SPEED: float = 4.0
 
+const STOPPER_EASE_T: float = 0.05
+
 export var character : NodePath
 export var background : NodePath
 export var character2_cam_collider : NodePath
@@ -202,43 +204,101 @@ func _physics_process(delta):
 
 
 func clamp_position(new_pos: Vector2, last_pos: Vector2, cur_size: Vector2, exclude_areas: Array = []) -> Vector2:
-	# level bounds
-	if new_pos.x - cur_size.x < level_bounds.position.x:
-		new_pos.x = level_bounds.position.x + cur_size.x
-	if new_pos.x + cur_size.x > level_bounds.size.x:
-		new_pos.x = level_bounds.size.x - cur_size.x
-
-	if new_pos.y - cur_size.y < level_bounds.position.y:
-		new_pos.y = level_bounds.position.y + cur_size.y
-	if new_pos.y + cur_size.y > level_bounds.size.y:
-		new_pos.y = level_bounds.size.y - cur_size.y
+	new_pos = clamp_to_level_bounds(new_pos, cur_size)
 	
-	# stoppers
 	var compare_areas: Array = area.get_overlapping_areas()
 	for exclude_area in exclude_areas:
 		if exclude_area in compare_areas:
 			compare_areas.erase(exclude_area)
+	
 	for stopper in compare_areas:
 		if in_cutscene: return new_pos
-		if abs(new_pos.y - stopper.global_position.y) < cur_size.y * 1.2 + abs(stopper.top_bound.y - stopper.global_position.y) or abs(new_pos.x - stopper.global_position.x) < cur_size.x * 1.2 + abs(stopper.left_bound.x - stopper.global_position.x):
-			var overlapX = min(abs(last_pos.x + cur_size.x - stopper.left_bound.x), abs(last_pos.x - cur_size.x - stopper.right_bound.x))
-			var overlapY = min(abs(last_pos.y + cur_size.y - stopper.top_bound.y), abs(last_pos.y - cur_size.y - stopper.bottom_bound.y))
-			
-			if overlapX < overlapY:
-				if last_pos.x < stopper.global_position.x and new_pos.x > last_pos.x:
-					new_pos.x = stopper.left_bound.x - cur_size.x + 1
-				elif last_pos.x > stopper.global_position.x and new_pos.x < last_pos.x:
-					new_pos.x = stopper.right_bound.x + cur_size.x - 1
-			else:
-				# top bound of stopper
-				if last_pos.y < stopper.global_position.y and new_pos.y > last_pos.y:
-					new_pos.y = stopper.top_bound.y - cur_size.y + 1
-				# bottom bound of stopper
-				elif last_pos.y > stopper.global_position.y and new_pos.y < last_pos.y:
-					new_pos.y = stopper.bottom_bound.y + cur_size.y - 1
-		else:
+		if not is_near_stopper(new_pos, cur_size, stopper):
 			print("ESCAPED")
+			continue
+		new_pos = resolve_stopper(new_pos, last_pos, cur_size, stopper)
 	
+	return new_pos
+
+
+func clamp_to_level_bounds(new_pos: Vector2, cur_size: Vector2) -> Vector2:
+	if new_pos.x - cur_size.x < level_bounds.position.x:
+		new_pos.x = level_bounds.position.x + cur_size.x
+	if new_pos.x + cur_size.x > level_bounds.size.x:
+		new_pos.x = level_bounds.size.x - cur_size.x
+	if new_pos.y - cur_size.y < level_bounds.position.y:
+		new_pos.y = level_bounds.position.y + cur_size.y
+	if new_pos.y + cur_size.y > level_bounds.size.y:
+		new_pos.y = level_bounds.size.y - cur_size.y
+	return new_pos
+
+
+func is_near_stopper(new_pos: Vector2, cur_size: Vector2, stopper: CameraStopper) -> bool:
+	var near_y: bool = abs(new_pos.y - stopper.global_position.y) < cur_size.y * 1.2 + abs(stopper.top_bound.y - stopper.global_position.y)
+	var near_x: bool = abs(new_pos.x - stopper.global_position.x) < cur_size.x * 1.2 + abs(stopper.left_bound.x - stopper.global_position.x)
+	return near_y or near_x
+
+
+func resolve_stopper(new_pos: Vector2, last_pos: Vector2, cur_size: Vector2, stopper: CameraStopper) -> Vector2:
+	var char_pos: Vector2 = character_node.global_position
+	var in_vband: bool = char_pos.x >= stopper.left_bound.x and char_pos.x <= stopper.right_bound.x
+	var in_hband: bool = char_pos.y >= stopper.top_bound.y and char_pos.y <= stopper.bottom_bound.y
+	
+	if in_vband and not in_hband:
+		return resolve_vertical_route(new_pos, last_pos, cur_size, stopper, char_pos)
+	elif in_hband and not in_vband:
+		return resolve_horizontal_route(new_pos, last_pos, cur_size, stopper, char_pos)
+	else:
+		return resolve_ambiguous_route(new_pos, last_pos, cur_size, stopper)
+
+
+func resolve_vertical_route(new_pos: Vector2, last_pos: Vector2, cur_size: Vector2, stopper: CameraStopper, char_pos: Vector2) -> Vector2:
+	if char_pos.y < stopper.top_bound.y and new_pos.y + cur_size.y > stopper.top_bound.y:
+		var target_y: float = stopper.top_bound.y - cur_size.y + 1
+		new_pos.y = CatmullRomSpline.sample([last_pos, Vector2(new_pos.x, target_y)], STOPPER_EASE_T).y
+	elif char_pos.y > stopper.bottom_bound.y and new_pos.y - cur_size.y < stopper.bottom_bound.y:
+		var target_y: float = stopper.bottom_bound.y + cur_size.y - 1
+		new_pos.y = CatmullRomSpline.sample([last_pos, Vector2(new_pos.x, target_y)], STOPPER_EASE_T).y
+	return new_pos
+
+
+func resolve_horizontal_route(new_pos: Vector2, last_pos: Vector2, cur_size: Vector2, stopper: CameraStopper, char_pos: Vector2) -> Vector2:
+	if char_pos.x < stopper.left_bound.x and new_pos.x + cur_size.x > stopper.left_bound.x:
+		var target_x: float = stopper.left_bound.x - cur_size.x + 1
+		new_pos.x = CatmullRomSpline.sample([last_pos, Vector2(target_x, new_pos.y)], STOPPER_EASE_T).x
+	elif char_pos.x > stopper.right_bound.x and new_pos.x - cur_size.x < stopper.right_bound.x:
+		var target_x: float = stopper.right_bound.x + cur_size.x - 1
+		new_pos.x = CatmullRomSpline.sample([last_pos, Vector2(target_x, new_pos.y)], STOPPER_EASE_T).x
+	return new_pos
+
+
+func resolve_ambiguous_route(new_pos: Vector2, last_pos: Vector2, cur_size: Vector2, stopper: CameraStopper) -> Vector2:
+	var overlap_x: float = min(abs(last_pos.x + cur_size.x - stopper.left_bound.x), abs(last_pos.x - cur_size.x - stopper.right_bound.x))
+	var overlap_y: float = min(abs(last_pos.y + cur_size.y - stopper.top_bound.y), abs(last_pos.y - cur_size.y - stopper.bottom_bound.y))
+	
+	if overlap_x < overlap_y:
+		return resolve_ambiguous_x(new_pos, last_pos, cur_size, stopper)
+	else:
+		return resolve_ambiguous_y(new_pos, last_pos, cur_size, stopper)
+
+
+func resolve_ambiguous_x(new_pos: Vector2, last_pos: Vector2, cur_size: Vector2, stopper: CameraStopper) -> Vector2:
+	if last_pos.x < stopper.global_position.x and new_pos.x > last_pos.x:
+		var clamped_x: float = stopper.left_bound.x - cur_size.x + 1
+		new_pos.x = CatmullRomSpline.sample([last_pos, Vector2(clamped_x, new_pos.y)], STOPPER_EASE_T).x
+	elif last_pos.x > stopper.global_position.x and new_pos.x < last_pos.x:
+		var clamped_x: float = stopper.right_bound.x + cur_size.x - 1
+		new_pos.x = CatmullRomSpline.sample([last_pos, Vector2(clamped_x, new_pos.y)], STOPPER_EASE_T).x
+	return new_pos
+
+
+func resolve_ambiguous_y(new_pos: Vector2, last_pos: Vector2, cur_size: Vector2, stopper: CameraStopper) -> Vector2:
+	if last_pos.y < stopper.global_position.y and new_pos.y > last_pos.y:
+		var clamped_y: float = stopper.top_bound.y - cur_size.y + 1
+		new_pos.y = CatmullRomSpline.sample([last_pos, Vector2(new_pos.x, clamped_y)], STOPPER_EASE_T).y
+	elif last_pos.y > stopper.global_position.y and new_pos.y < last_pos.y:
+		var clamped_y: float = stopper.bottom_bound.y + cur_size.y - 1
+		new_pos.y = CatmullRomSpline.sample([last_pos, Vector2(new_pos.x, clamped_y)], STOPPER_EASE_T).y
 	return new_pos
 
 
