@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=293 format=2]
+[gd_resource type="Resource" load_steps=294 format=2]
 
 [ext_resource path="res://scenes/editor/items/placeable_items.gd" type="Script" id=1]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/blue_coin.tres" type="Resource" id=2]
@@ -120,6 +120,7 @@
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/cobweb2.tres" type="Resource" id=118]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/vine_bulb.tres" type="Resource" id=119]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/vine_stem.tres" type="Resource" id=120]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/diamond_texture.tres" type="Resource" id=121]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/paratroopa.tres" type="Resource" id=122]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/bully.tres" type="Resource" id=123]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/star_door_single.tres" type="Resource" id=124]
@@ -517,6 +518,7 @@ placeable_items = {
 "til_dark_brick": ExtResource( 172 ),
 "til_dark_brick_stairs_left": ExtResource( 180 ),
 "til_dark_brick_stairs_right": ExtResource( 181 ),
+"til_diamond_texture": ExtResource( 121 ),
 "til_empty_bookshelf": ExtResource( 283 ),
 "til_fire_brick": ExtResource( 162 ),
 "til_fire_brick_stairs_left": ExtResource( 182 ),
