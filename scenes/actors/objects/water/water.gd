@@ -70,7 +70,7 @@ func change_size():
 	waves.get_material().set_shader_param("color_tint", color)
 	waves.get_material().set_shader_param("x_size", width)
 	
-	z_index = -1 if !render_in_front else 25
+	#z_index = 0 if !render_in_front else 128
 	
 	last_size = Vector2(width, height)
 	last_color = color

@@ -30,7 +30,7 @@ func update():
 		liquid_body.rect_position.y = 0
 		liquid_body.rect_size = size
 	update_liquid_color(color)
-	z_index = -1 if !render_in_front else 1024 #Same as layer BackBufferCopy z-index to prevent transparency issues
+	z_index = -1 if !render_in_front else 1
 	
 	waves.get_material().set_shader_param("x_size", size.x)
 	liquid_body.get_material().set_shader_param("color_tint", color)
