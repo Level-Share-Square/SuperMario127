@@ -9,25 +9,7 @@ var tileset_id: int
 var tile_id: int
 var palette: int
 
-
 var undo_tiles: Dictionary = {}
-
-
-class ActionTile:
-	var pos: Vector2
-	var lay: String
-	var tileset: int
-	var tile: int
-	var pal: int
-	
-	
-	func _init(position: Vector2, layer: String, tileset_id: int, tile_id: int, palette: int):
-		pos = position
-		lay = layer
-		tileset = tileset_id
-		tile = tile_id
-		pal = palette
-
 
 func _do() -> void:
 	var tile_dict: Dictionary = {}

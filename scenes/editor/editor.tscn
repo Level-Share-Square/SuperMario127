@@ -1,4 +1,4 @@
-[gd_scene load_steps=144 format=2]
+[gd_scene load_steps=145 format=2]
 
 [ext_resource path="res://scenes/menu/options/options.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/menu/menu_controller/screen_manager.gd" type="Script" id=2]
@@ -101,6 +101,7 @@
 [ext_resource path="res://assets/icons/move_selection.png" type="Texture" id=99]
 [ext_resource path="res://assets/icons/Cursor.svg" type="Texture" id=100]
 [ext_resource path="res://scenes/editor/tools/obj_pen_tool.gd" type="Script" id=101]
+[ext_resource path="res://scenes/editor/windows/fill_confirm_window.tscn" type="PackedScene" id=102]
 [ext_resource path="res://scenes/editor/tools/cam_move_tool.gd" type="Script" id=103]
 
 [sub_resource type="RectangleShape2D" id=205]
@@ -2015,6 +2016,13 @@ icon = SubResource( 201 )
 unique_name_in_owner = true
 visible = false
 custom_styles/panel = SubResource( 208 )
+
+[node name="FillConfirmWindow" parent="UI" instance=ExtResource( 102 )]
+unique_name_in_owner = true
+margin_left = 260.0
+margin_top = 172.0
+margin_right = 510.0
+margin_bottom = 253.0
 
 [node name="Options" type="CanvasLayer" parent="."]
 layer = 128
