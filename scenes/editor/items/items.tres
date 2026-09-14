@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=293 format=2]
+[gd_resource type="Resource" load_steps=294 format=2]
 
 [ext_resource path="res://scenes/editor/items/placeable_items.gd" type="Script" id=1]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/blue_coin.tres" type="Resource" id=2]
@@ -120,6 +120,7 @@
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/cobweb2.tres" type="Resource" id=118]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/vine_bulb.tres" type="Resource" id=119]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/vine_stem.tres" type="Resource" id=120]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/roomtext.tres" type="Resource" id=121]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/paratroopa.tres" type="Resource" id=122]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/bully.tres" type="Resource" id=123]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/star_door_single.tres" type="Resource" id=124]
@@ -418,6 +419,7 @@ placeable_items = {
 "obj_rock": ExtResource( 71 ),
 "obj_rocket_box": ExtResource( 39 ),
 "obj_rocket_nozzle": ExtResource( 273 ),
+"obj_roomtext": ExtResource( 121 ),
 "obj_sawblade": ExtResource( 114 ),
 "obj_seesaw": ExtResource( 50 ),
 "obj_shine": ExtResource( 8 ),

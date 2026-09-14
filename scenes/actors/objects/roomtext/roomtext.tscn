@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/fonts/delfino_small.tres" type="DynamicFont" id=1]
+[ext_resource path="res://scenes/actors/objects/roomtext/roomtext.png" type="Texture" id=6]
+[ext_resource path="res://scenes/actors/objects/roomtext/roomtext.gd" type="Script" id=21]
+
+[node name="RoomText" type="Node2D"]
+z_index = -1
+script = ExtResource( 21 )
+internal_id = "roomtext"
+
+[node name="Sprite" type="Sprite" parent="."]
+z_index = -9
+texture = ExtResource( 6 )
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+margin_left = -500.0
+margin_top = -9.0
+margin_right = 500.0
+margin_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 0
+rect_clip_content = false
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_colors/default_color = Color( 1, 1, 1, 1 )
+custom_fonts/normal_font = ExtResource( 1 )
+bbcode_enabled = true
+bbcode_text = "AAAAA"
+text = "AAAAA"
+fit_content_height = true
+scroll_active = false
+
+[connection signal="property_changed" from="." to="." method="on_property_changed"]
