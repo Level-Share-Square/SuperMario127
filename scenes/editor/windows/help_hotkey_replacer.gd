@@ -30,7 +30,9 @@ var hotkeys: PoolStringArray = [
 	"paste_clipboard",
 	"undo_action",
 	"redo_action",
-	"save_level"
+	"save_level",
+	"pen_tool",
+	"move_tool"
 ]
 
 func window_opened():

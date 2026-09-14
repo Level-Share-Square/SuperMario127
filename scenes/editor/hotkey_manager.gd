@@ -22,7 +22,9 @@ var action_signal_array: Array = [
 	"selection_tool",
 	"fill_tool",
 	"rect_fill_tool",
-	"delete_selection"
+	"delete_selection",
+	"pen_tool",
+	"move_tool"
 ]
 
 var modifier_action_signal_array: Array = [
@@ -54,6 +56,8 @@ signal paint_tool
 signal selection_tool
 signal fill_tool
 signal rect_fill_tool
+signal move_tool
+signal pen_tool
 
 signal copy_selection
 signal cut_selection

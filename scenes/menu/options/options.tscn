@@ -1198,9 +1198,9 @@ script = ExtResource( 17 )
 category_paths = [ NodePath("Gameplay"), NodePath("Interface"), NodePath("Hotkeys"), NodePath("Editor/Tab1"), NodePath("Editor/Tab2") ]
 
 [node name="Gameplay" type="GridContainer" parent="Subscreens/Controls/VBoxContainer/Remapper"]
-margin_left = 32.0
+margin_left = 14.0
 margin_top = 1.0
-margin_right = 512.0
+margin_right = 530.0
 margin_bottom = 226.0
 custom_constants/vseparation = 24
 custom_constants/hseparation = 32
@@ -1448,9 +1448,9 @@ sprite_visible = false
 
 [node name="Hotkeys" type="GridContainer" parent="Subscreens/Controls/VBoxContainer/Remapper"]
 visible = false
-margin_left = 32.0
+margin_left = 28.0
 margin_top = 64.0
-margin_right = 512.0
+margin_right = 516.0
 margin_bottom = 164.0
 custom_constants/vseparation = 24
 custom_constants/hseparation = 32
@@ -1642,19 +1642,19 @@ force_ctrl = true
 sprite_visible = false
 
 [node name="Delete" parent="Subscreens/Controls/VBoxContainer/Remapper/Editor/Tab1" instance=ExtResource( 12 )]
-margin_left = 392.0
-margin_top = 62.0
-margin_right = 502.0
-margin_bottom = 100.0
+margin_left = 136.0
+margin_top = 124.0
+margin_right = 232.0
+margin_bottom = 162.0
 remapper_path = NodePath("../../..")
 input_group = "Controls (Editor)"
 input_key = "delete_selection"
 sprite_visible = false
 
 [node name="Undo" parent="Subscreens/Controls/VBoxContainer/Remapper/Editor/Tab1" instance=ExtResource( 12 )]
-margin_left = 136.0
+margin_left = 264.0
 margin_top = 124.0
-margin_right = 232.0
+margin_right = 360.0
 margin_bottom = 162.0
 remapper_path = NodePath("../../..")
 input_group = "Controls (Editor)"
@@ -1663,9 +1663,9 @@ force_ctrl = true
 sprite_visible = false
 
 [node name="Redo" parent="Subscreens/Controls/VBoxContainer/Remapper/Editor/Tab1" instance=ExtResource( 12 )]
-margin_left = 264.0
+margin_left = 392.0
 margin_top = 124.0
-margin_right = 360.0
+margin_right = 502.0
 margin_bottom = 162.0
 remapper_path = NodePath("../../..")
 input_group = "Controls (Editor)"
@@ -1674,10 +1674,9 @@ force_ctrl = true
 sprite_visible = false
 
 [node name="Save" parent="Subscreens/Controls/VBoxContainer/Remapper/Editor/Tab1" instance=ExtResource( 12 )]
-margin_left = 392.0
-margin_top = 124.0
-margin_right = 502.0
-margin_bottom = 162.0
+margin_top = 186.0
+margin_right = 104.0
+margin_bottom = 224.0
 remapper_path = NodePath("../../..")
 input_group = "Controls (Editor)"
 input_key = "save_level"
@@ -1685,8 +1684,9 @@ force_ctrl = true
 sprite_visible = false
 
 [node name="8PixelLock" parent="Subscreens/Controls/VBoxContainer/Remapper/Editor/Tab1" instance=ExtResource( 12 )]
+margin_left = 136.0
 margin_top = 186.0
-margin_right = 104.0
+margin_right = 232.0
 margin_bottom = 224.0
 remapper_path = NodePath("../../..")
 input_group = "Controls (Editor)"
@@ -1694,8 +1694,9 @@ input_key = "8_pixel_lock"
 sprite_visible = false
 
 [node name="ShowOptions" parent="Subscreens/Controls/VBoxContainer/Remapper/Editor/Tab1" instance=ExtResource( 12 )]
+margin_left = 264.0
 margin_top = 186.0
-margin_right = 104.0
+margin_right = 360.0
 margin_bottom = 224.0
 remapper_path = NodePath("../../..")
 input_group = "Controls (Editor)"
@@ -1703,21 +1704,21 @@ input_key = "show_options"
 sprite_visible = false
 
 [node name="SwitchTabs" type="VBoxContainer" parent="Subscreens/Controls/VBoxContainer/Remapper/Editor/Tab1"]
-margin_left = 136.0
+margin_left = 392.0
 margin_top = 186.0
-margin_right = 232.0
+margin_right = 502.0
 margin_bottom = 224.0
 rect_min_size = Vector2( 96, 0 )
 theme = ExtResource( 2 )
 custom_constants/separation = 4
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Subscreens/Controls/VBoxContainer/Remapper/Editor/Tab1/SwitchTabs"]
-margin_right = 96.0
+margin_right = 110.0
 margin_bottom = 16.0
 alignment = 1
 
 [node name="Label" type="Label" parent="Subscreens/Controls/VBoxContainer/Remapper/Editor/Tab1/SwitchTabs/HBoxContainer"]
-margin_right = 96.0
+margin_right = 110.0
 margin_bottom = 16.0
 size_flags_horizontal = 3
 custom_fonts/font = SubResource( 124 )
@@ -1726,7 +1727,7 @@ align = 1
 
 [node name="Button" type="Button" parent="Subscreens/Controls/VBoxContainer/Remapper/Editor/Tab1/SwitchTabs"]
 margin_top = 20.0
-margin_right = 96.0
+margin_right = 110.0
 margin_bottom = 38.0
 rect_min_size = Vector2( 0, 18 )
 theme_type_variation = "OptionsToggle"
@@ -1753,18 +1754,9 @@ input_group = "Controls (Editor)"
 input_key = "grid_toggle"
 sprite_visible = false
 
-[node name="HideHotbar" parent="Subscreens/Controls/VBoxContainer/Remapper/Editor/Tab2" instance=ExtResource( 12 )]
+[node name="LayerMenu" parent="Subscreens/Controls/VBoxContainer/Remapper/Editor/Tab2" instance=ExtResource( 12 )]
 margin_left = 128.0
 margin_right = 224.0
-margin_bottom = 38.0
-remapper_path = NodePath("../../..")
-input_group = "Controls (Editor)"
-input_key = "hide_hotbar"
-sprite_visible = false
-
-[node name="LayerMenu" parent="Subscreens/Controls/VBoxContainer/Remapper/Editor/Tab2" instance=ExtResource( 12 )]
-margin_left = 256.0
-margin_right = 352.0
 margin_bottom = 38.0
 remapper_path = NodePath("../../..")
 input_group = "Controls (Editor)"
@@ -1772,8 +1764,8 @@ input_key = "layer_menu"
 sprite_visible = false
 
 [node name="ItemPicker" parent="Subscreens/Controls/VBoxContainer/Remapper/Editor/Tab2" instance=ExtResource( 12 )]
-margin_left = 384.0
-margin_right = 480.0
+margin_left = 256.0
+margin_right = 352.0
 margin_bottom = 38.0
 remapper_path = NodePath("../../..")
 input_group = "Controls (Editor)"
@@ -1781,38 +1773,17 @@ input_key = "item_picker"
 sprite_visible = false
 
 [node name="ChoosePalette" parent="Subscreens/Controls/VBoxContainer/Remapper/Editor/Tab2" instance=ExtResource( 12 )]
-margin_top = 62.0
-margin_right = 96.0
-margin_bottom = 100.0
+margin_left = 384.0
+margin_right = 480.0
+margin_bottom = 38.0
 remapper_path = NodePath("../../..")
 input_group = "Controls (Editor)"
 input_key = "choose_palette"
 sprite_visible = false
 
-[node name="FlipObjectH" parent="Subscreens/Controls/VBoxContainer/Remapper/Editor/Tab2" instance=ExtResource( 12 )]
-margin_left = 128.0
-margin_top = 62.0
-margin_right = 224.0
-margin_bottom = 100.0
-remapper_path = NodePath("../../..")
-input_group = "Controls (Editor)"
-input_key = "mirror_h"
-sprite_visible = false
-
-[node name="FlipObjectV" parent="Subscreens/Controls/VBoxContainer/Remapper/Editor/Tab2" instance=ExtResource( 12 )]
-margin_left = 256.0
-margin_top = 62.0
-margin_right = 352.0
-margin_bottom = 100.0
-remapper_path = NodePath("../../..")
-input_group = "Controls (Editor)"
-input_key = "mirror_v"
-sprite_visible = false
-
 [node name="RotateObject" parent="Subscreens/Controls/VBoxContainer/Remapper/Editor/Tab2" instance=ExtResource( 12 )]
-margin_left = 384.0
 margin_top = 62.0
-margin_right = 480.0
+margin_right = 96.0
 margin_bottom = 100.0
 remapper_path = NodePath("../../..")
 input_group = "Controls (Editor)"
@@ -1820,38 +1791,58 @@ input_key = "rotate_object"
 sprite_visible = false
 
 [node name="ScaleObject" parent="Subscreens/Controls/VBoxContainer/Remapper/Editor/Tab2" instance=ExtResource( 12 )]
-margin_top = 124.0
-margin_right = 96.0
-margin_bottom = 162.0
+margin_left = 128.0
+margin_top = 62.0
+margin_right = 224.0
+margin_bottom = 100.0
 remapper_path = NodePath("../../..")
 input_group = "Controls (Editor)"
 input_key = "scale_object"
 sprite_visible = false
 
 [node name="DisableObject" parent="Subscreens/Controls/VBoxContainer/Remapper/Editor/Tab2" instance=ExtResource( 12 )]
-margin_left = 128.0
-margin_top = 124.0
-margin_right = 224.0
-margin_bottom = 162.0
+margin_left = 256.0
+margin_top = 62.0
+margin_right = 352.0
+margin_bottom = 100.0
 remapper_path = NodePath("../../..")
 input_group = "Controls (Editor)"
 input_key = "disable_object"
 sprite_visible = false
 
 [node name="ToggleEraser" parent="Subscreens/Controls/VBoxContainer/Remapper/Editor/Tab2" instance=ExtResource( 12 )]
-margin_left = 256.0
-margin_top = 124.0
-margin_right = 352.0
-margin_bottom = 162.0
+margin_left = 384.0
+margin_top = 62.0
+margin_right = 480.0
+margin_bottom = 100.0
 remapper_path = NodePath("../../..")
 input_group = "Controls (Editor)"
 input_key = "toggle_eraser"
 sprite_visible = false
 
-[node name="PaintTool" parent="Subscreens/Controls/VBoxContainer/Remapper/Editor/Tab2" instance=ExtResource( 12 )]
-margin_left = 384.0
+[node name="PenTool" parent="Subscreens/Controls/VBoxContainer/Remapper/Editor/Tab2" instance=ExtResource( 12 )]
 margin_top = 124.0
-margin_right = 480.0
+margin_right = 96.0
+margin_bottom = 162.0
+remapper_path = NodePath("../../..")
+input_group = "Controls (Editor)"
+input_key = "pen_tool"
+sprite_visible = false
+
+[node name="MoveTool" parent="Subscreens/Controls/VBoxContainer/Remapper/Editor/Tab2" instance=ExtResource( 12 )]
+margin_left = 128.0
+margin_top = 124.0
+margin_right = 224.0
+margin_bottom = 162.0
+remapper_path = NodePath("../../..")
+input_group = "Controls (Editor)"
+input_key = "move_tool"
+sprite_visible = false
+
+[node name="PaintTool" parent="Subscreens/Controls/VBoxContainer/Remapper/Editor/Tab2" instance=ExtResource( 12 )]
+margin_left = 256.0
+margin_top = 124.0
+margin_right = 352.0
 margin_bottom = 162.0
 remapper_path = NodePath("../../..")
 input_group = "Controls (Editor)"
@@ -1859,18 +1850,18 @@ input_key = "paint_tool"
 sprite_visible = false
 
 [node name="SelectionTool" parent="Subscreens/Controls/VBoxContainer/Remapper/Editor/Tab2" instance=ExtResource( 12 )]
-margin_top = 186.0
-margin_right = 96.0
-margin_bottom = 224.0
+margin_left = 384.0
+margin_top = 124.0
+margin_right = 480.0
+margin_bottom = 162.0
 remapper_path = NodePath("../../..")
 input_group = "Controls (Editor)"
 input_key = "selection_tool"
 sprite_visible = false
 
 [node name="Fill Tool" parent="Subscreens/Controls/VBoxContainer/Remapper/Editor/Tab2" instance=ExtResource( 12 )]
-margin_left = 128.0
 margin_top = 186.0
-margin_right = 224.0
+margin_right = 96.0
 margin_bottom = 224.0
 remapper_path = NodePath("../../..")
 input_group = "Controls (Editor)"
@@ -1878,9 +1869,9 @@ input_key = "fill_tool"
 sprite_visible = false
 
 [node name="DrawRectTool" parent="Subscreens/Controls/VBoxContainer/Remapper/Editor/Tab2" instance=ExtResource( 12 )]
-margin_left = 256.0
+margin_left = 128.0
 margin_top = 186.0
-margin_right = 352.0
+margin_right = 224.0
 margin_bottom = 224.0
 remapper_path = NodePath("../../..")
 input_group = "Controls (Editor)"
@@ -1888,9 +1879,9 @@ input_key = "rect_fill_tool"
 sprite_visible = false
 
 [node name="SwitchTabs" type="VBoxContainer" parent="Subscreens/Controls/VBoxContainer/Remapper/Editor/Tab2"]
-margin_left = 384.0
+margin_left = 256.0
 margin_top = 186.0
-margin_right = 480.0
+margin_right = 352.0
 margin_bottom = 224.0
 rect_min_size = Vector2( 96, 0 )
 theme = ExtResource( 2 )
@@ -1910,6 +1901,108 @@ text = "Page 1"
 align = 1
 
 [node name="Button" type="Button" parent="Subscreens/Controls/VBoxContainer/Remapper/Editor/Tab2/SwitchTabs"]
+margin_top = 20.0
+margin_right = 96.0
+margin_bottom = 38.0
+rect_min_size = Vector2( 0, 18 )
+theme_type_variation = "OptionsToggle"
+custom_fonts/font = SubResource( 127 )
+text = "Back..."
+clip_text = true
+script = ExtResource( 19 )
+extend_amount = 2
+
+[node name="SwitchTabs2" type="VBoxContainer" parent="Subscreens/Controls/VBoxContainer/Remapper/Editor/Tab2"]
+margin_left = 384.0
+margin_top = 186.0
+margin_right = 480.0
+margin_bottom = 224.0
+rect_min_size = Vector2( 96, 0 )
+theme = ExtResource( 2 )
+custom_constants/separation = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Subscreens/Controls/VBoxContainer/Remapper/Editor/Tab2/SwitchTabs2"]
+margin_right = 96.0
+margin_bottom = 16.0
+alignment = 1
+
+[node name="Label" type="Label" parent="Subscreens/Controls/VBoxContainer/Remapper/Editor/Tab2/SwitchTabs2/HBoxContainer"]
+margin_right = 96.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+custom_fonts/font = SubResource( 126 )
+text = "Page 3"
+align = 1
+
+[node name="Button" type="Button" parent="Subscreens/Controls/VBoxContainer/Remapper/Editor/Tab2/SwitchTabs2"]
+margin_top = 20.0
+margin_right = 96.0
+margin_bottom = 38.0
+rect_min_size = Vector2( 0, 18 )
+theme_type_variation = "OptionsToggle"
+custom_fonts/font = SubResource( 127 )
+text = "Next page..."
+clip_text = true
+script = ExtResource( 19 )
+extend_amount = 2
+
+[node name="Tab3" type="GridContainer" parent="Subscreens/Controls/VBoxContainer/Remapper/Editor"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 1.0
+custom_constants/vseparation = 24
+custom_constants/hseparation = 32
+columns = 4
+
+[node name="HideHotbar" parent="Subscreens/Controls/VBoxContainer/Remapper/Editor/Tab3" instance=ExtResource( 12 )]
+margin_right = 96.0
+margin_bottom = 38.0
+remapper_path = NodePath("../../..")
+input_group = "Controls (Editor)"
+input_key = "hide_hotbar"
+sprite_visible = false
+
+[node name="FlipObjectH" parent="Subscreens/Controls/VBoxContainer/Remapper/Editor/Tab3" instance=ExtResource( 12 )]
+margin_left = 128.0
+margin_right = 224.0
+margin_bottom = 38.0
+remapper_path = NodePath("../../..")
+input_group = "Controls (Editor)"
+input_key = "mirror_h"
+sprite_visible = false
+
+[node name="FlipObjectV" parent="Subscreens/Controls/VBoxContainer/Remapper/Editor/Tab3" instance=ExtResource( 12 )]
+margin_left = 256.0
+margin_right = 352.0
+margin_bottom = 38.0
+remapper_path = NodePath("../../..")
+input_group = "Controls (Editor)"
+input_key = "mirror_v"
+sprite_visible = false
+
+[node name="SwitchTabs" type="VBoxContainer" parent="Subscreens/Controls/VBoxContainer/Remapper/Editor/Tab3"]
+margin_left = 384.0
+margin_right = 480.0
+margin_bottom = 38.0
+rect_min_size = Vector2( 96, 0 )
+theme = ExtResource( 2 )
+custom_constants/separation = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Subscreens/Controls/VBoxContainer/Remapper/Editor/Tab3/SwitchTabs"]
+margin_right = 96.0
+margin_bottom = 16.0
+alignment = 1
+
+[node name="Label" type="Label" parent="Subscreens/Controls/VBoxContainer/Remapper/Editor/Tab3/SwitchTabs/HBoxContainer"]
+margin_right = 96.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+custom_fonts/font = SubResource( 126 )
+text = "Page 2"
+align = 1
+
+[node name="Button" type="Button" parent="Subscreens/Controls/VBoxContainer/Remapper/Editor/Tab3/SwitchTabs"]
 margin_top = 20.0
 margin_right = 96.0
 margin_bottom = 38.0
@@ -2118,10 +2211,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -58.0
-margin_top = 16.0
-margin_right = -7.0
-margin_bottom = 41.0
+margin_left = 710.0
+margin_top = 448.0
+margin_right = 761.0
+margin_bottom = 473.0
 grow_horizontal = 0
 grow_vertical = 0
 text = "v0.9.1"
@@ -2175,6 +2268,8 @@ anims/transition = SubResource( 1 )
 [connection signal="pressed" from="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset/Controller/DefaultEditor" to="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset" method="load_preset" binds= [ "res://scenes/menu/options/controls/presets/controller/editor.cfg", true ]]
 [connection signal="pressed" from="Subscreens/Controls/VBoxContainer/Remapper/Editor/Tab1/SwitchTabs/Button" to="Subscreens/Controls/VBoxContainer/Remapper/Editor" method="set_current_tab" binds= [ 1 ]]
 [connection signal="pressed" from="Subscreens/Controls/VBoxContainer/Remapper/Editor/Tab2/SwitchTabs/Button" to="Subscreens/Controls/VBoxContainer/Remapper/Editor" method="set_current_tab" binds= [ 0 ]]
+[connection signal="pressed" from="Subscreens/Controls/VBoxContainer/Remapper/Editor/Tab2/SwitchTabs2/Button" to="Subscreens/Controls/VBoxContainer/Remapper/Editor" method="set_current_tab" binds= [ 2 ]]
+[connection signal="pressed" from="Subscreens/Controls/VBoxContainer/Remapper/Editor/Tab3/SwitchTabs/Button" to="Subscreens/Controls/VBoxContainer/Remapper/Editor" method="set_current_tab" binds= [ 1 ]]
 [connection signal="pressed" from="Subscreens/Controls/VBoxContainer/Devices/HBoxContainer/Keyboard" to="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset/Keyboard" method="show"]
 [connection signal="pressed" from="Subscreens/Controls/VBoxContainer/Devices/HBoxContainer/Keyboard" to="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset/Controller" method="hide"]
 [connection signal="pressed" from="Subscreens/Controls/VBoxContainer/Devices/HBoxContainer/Keyboard" to="Subscreens/Controls/VBoxContainer/Remapper" method="switch_device_type" binds= [ false ]]

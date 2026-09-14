@@ -105,7 +105,7 @@ scroll_horizontal_enabled = false
 
 [node name="RichTextLabel" type="RichTextLabel" parent="ContentDivider/ContentMat/Tabs/Hotkeys/ScrollContainer" index="0"]
 margin_right = 405.0
-margin_bottom = 1275.0
+margin_bottom = 1335.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_colors/default_color = Color( 1, 1, 1, 1 )
@@ -132,7 +132,11 @@ bbcode_text = "[center][color=yellow]--List of Hotkeys--[/color][/center]
     Disable 8px Snap: :8_pixel_lock: (Hold)
 
 [center][color=aqua]Object & Tile Tools[/color][/center]
-
+	
+	Pen Tool: :pen_tool:
+	
+	Move Tool: :move_tool:
+	
     Paint Tool: :paint_tool:
 
     Toggle Eraser: :toggle_eraser:
@@ -217,7 +221,11 @@ Selection & Interaction
     Disable 8px Snap: :8_pixel_lock: (Hold)
 
 Object & Tile Tools
-
+	
+	Pen Tool: :pen_tool:
+	
+	Move Tool: :move_tool:
+	
     Paint Tool: :paint_tool:
 
     Toggle Eraser: :toggle_eraser:

@@ -121,6 +121,14 @@ func pick_rect_or_path() -> void:
 		change_tool("%TileRectFill")
 
 
+func pick_pen_or_paint() -> void:
+	click_sound.play()
+	if editor.selected_item is PlaceableObject:
+		change_tool("%ObjectPen")
+	else:
+		change_tool("%TilePaint")
+
+
 func toggle_eraser():
 	is_erasing = not is_erasing
 	emit_signal("eraser_toggled", is_erasing)
