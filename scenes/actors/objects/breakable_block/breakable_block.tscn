@@ -143,7 +143,6 @@ gravity = Vector3( 0, 98, 0 )
 initial_velocity = 150.0
 initial_velocity_random = 0.3
 angular_velocity = 253.52
-angular_velocity_random = 1.0
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 damping = 300.0

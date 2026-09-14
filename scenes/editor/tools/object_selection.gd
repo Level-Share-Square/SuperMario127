@@ -11,8 +11,9 @@ func _ready():
 	editor.action_manager.connect("undo", self, "fit_to_bounding_rectangle")
 	editor.action_manager.connect("redo", self, "fit_to_bounding_rectangle")
 	editor.action_manager.connect("action", self, "fit_to_bounding_rectangle")
-	tool_manager.get_node("ObjectCursor").connect("objects_selected", self, "external_objects_selected")
-
+	tool_manager.get_node("ObjectPen").connect("objects_selected", self, "external_objects_selected")
+	reset_bounds()
+	
 func _process(_delta):
 	update()
 
@@ -27,6 +28,7 @@ func reset_bounds():
 	editor.item_actions.handle_selection()
 	select_objects([])
 	pivot.visible = false
+	visible = false
 
 func on_mouse_released():
 	select_objects(shared.get_layer(editor.layer).find_objects_in_rect(
@@ -43,6 +45,7 @@ func external_objects_selected(objects: Array):
 		reset_bounds()
 		return
 	run_selection_behavior()
+	visible = true
 	
 func run_selection_behavior():
 	fit_to_bounding_rectangle()
@@ -56,7 +59,11 @@ func action():
 	var action := SelectObjectsAction.new()
 	action.editor = editor
 	action.selected_objects = editor.selected_objects
+	action.connect("selected_objects", self, "signal_selected_objects")
 	editor.action_manager.commit_action([action])
+	
+func signal_selected_objects(objects: Array):
+	visible = not objects.empty()
 	
 func fit_to_bounding_rectangle():
 	fill_rect = get_bounding_rectangle()
@@ -106,6 +113,9 @@ func box_expansion():
 	
 	var mouse_pos: Vector2 = get_adjusted_mouse_position()
 	var drag_rect := Rect2(start_pos, mouse_pos - start_pos).abs()
+
+	if drag_rect.size.is_zero_approx(): 
+		drag_rect.size = Vector2(1, 1)
 	
 	fill_rect = drag_rect
 	if layer is LevelParallaxLayer:
@@ -139,9 +149,12 @@ func to_local(global_rect: Rect2) -> Rect2:
 
 func _click_left(event, mouse_position):
 	select_objects([])
-	if fill_rect.has_point(get_adjusted_mouse_position()):
+	var adjusted_mouse_position: Vector2 = get_adjusted_mouse_position()
+	if fill_rect.has_point(adjusted_mouse_position):
 		fill_rect = Rect2()
 	._click_left(event, mouse_position)
+	if !fill_rect.has_point(adjusted_mouse_position):
+		box_expansion()
 		
 func on_undid_delete(objects):
 	editor.selected_objects = objects

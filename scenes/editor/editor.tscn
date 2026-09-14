@@ -100,7 +100,7 @@
 [ext_resource path="res://scenes/menu/spinbox_unfocus.gd" type="Script" id=98]
 [ext_resource path="res://assets/icons/move_selection.png" type="Texture" id=99]
 [ext_resource path="res://assets/icons/Cursor.svg" type="Texture" id=100]
-[ext_resource path="res://scenes/editor/tools/obj_cursor_tool.gd" type="Script" id=101]
+[ext_resource path="res://scenes/editor/tools/obj_pen_tool.gd" type="Script" id=101]
 [ext_resource path="res://scenes/editor/tools/cam_move_tool.gd" type="Script" id=103]
 
 [sub_resource type="RectangleShape2D" id=205]
@@ -330,7 +330,7 @@ inverse_tool_name = "ObjectPaint"
 mouse_filter = 2
 script = ExtResource( 69 )
 
-[node name="ObjectCursor" type="Control" parent="ZIndex/Tools"]
+[node name="ObjectPen" type="Control" parent="ZIndex/Tools"]
 unique_name_in_owner = true
 mouse_filter = 2
 script = ExtResource( 101 )
@@ -1454,12 +1454,12 @@ margin_bottom = 214.0
 mouse_filter = 2
 custom_constants/separation = 6
 
-[node name="Cursor" type="Button" parent="UI/UIContainer/EditorUI/Middle/Tools/VBoxContainer/ItemTools"]
+[node name="Pen" type="Button" parent="UI/UIContainer/EditorUI/Middle/Tools/VBoxContainer/ItemTools"]
 unique_name_in_owner = true
 margin_right = 24.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 24, 24 )
-hint_tooltip = "Paint Tool"
+hint_tooltip = "Pen Tool"
 size_flags_vertical = 3
 theme_type_variation = "ButtonTransparent"
 toggle_mode = true

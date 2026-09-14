@@ -179,6 +179,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/menu/levels_list/cards/campaign/campaign_card.gd"
 }, {
+"base": "Reference",
+"class": "CatmullRomSpline",
+"language": "GDScript",
+"path": "res://classes/catmullrom_spline.gd"
+}, {
 "base": "Action",
 "class": "ChangeAreaAction",
 "language": "GDScript",
@@ -1394,6 +1399,7 @@ _global_script_class_icons={
 "CameraCutscene": "",
 "CameraStopper": "",
 "CampaignCard": "",
+"CatmullRomSpline": "",
 "ChangeAreaAction": "",
 "ChangeLayerAction": "",
 "ChangePropertyAction": "",
