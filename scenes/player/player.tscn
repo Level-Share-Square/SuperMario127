@@ -3204,7 +3204,7 @@ bus = "Sounds"
 [node name="BlueCoinSound" type="AudioStreamPlayer" parent="SharedSounds"]
 pause_mode = 2
 stream = ExtResource( 49 )
-volume_db = -5.5
+volume_db = -4.0
 bus = "Sounds"
 
 [node name="PurpleSound" type="AudioStreamPlayer" parent="SharedSounds"]
