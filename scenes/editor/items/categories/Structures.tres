@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=84 format=2]
+[gd_resource type="Resource" load_steps=85 format=2]
 
 [ext_resource path="res://scenes/editor/items/placeable_items.gd" type="Script" id=1]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/stone_bricks_stairs_left.tres" type="Resource" id=2]
@@ -37,6 +37,7 @@
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/empty_bookshelf.tres" type="Resource" id=35]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/boo_block_half_tile.tres" type="Resource" id=36]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/color_tile_half_tile.tres" type="Resource" id=37]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/diamond_texture.tres" type="Resource" id=38]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/bricks_stairs_left.tres" type="Resource" id=148]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/gem_block.tres" type="Resource" id=149]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/glass.tres" type="Resource" id=150]
@@ -131,6 +132,7 @@ placeable_items = {
 "til_dark_bricks": ExtResource( 172 ),
 "til_dark_bricks_stairs_left": ExtResource( 180 ),
 "til_dark_bricks_stairs_right": ExtResource( 181 ),
+"til_diamond_texture": ExtResource( 38 ),
 "til_empty_bookshelf": ExtResource( 35 ),
 "til_fire_bricks": ExtResource( 162 ),
 "til_fire_bricks_stairs_let": ExtResource( 182 ),
