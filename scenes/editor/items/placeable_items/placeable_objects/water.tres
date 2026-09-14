@@ -8,7 +8,7 @@
 script = ExtResource( 3 )
 item_name = "Water"
 change_to = "obj_lava"
-items_in_sequence = 4
+items_in_sequence = 3
 index_in_sequence = 0
 icons = [ ExtResource( 1 ) ]
 previews = [ ExtResource( 2 ) ]

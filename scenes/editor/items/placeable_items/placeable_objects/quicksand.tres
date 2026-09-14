@@ -6,8 +6,8 @@
 [resource]
 script = ExtResource( 1 )
 item_name = "Quicksand"
-change_to = "obj_toxic_gas"
-items_in_sequence = 4
+change_to = "obj_water"
+items_in_sequence = 3
 index_in_sequence = 2
 icons = [ ExtResource( 2 ) ]
 previews = [ ExtResource( 2 ) ]

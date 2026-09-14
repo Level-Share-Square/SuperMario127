@@ -7,7 +7,7 @@
 script = ExtResource( 3 )
 item_name = "Lava"
 change_to = "obj_quicksand"
-items_in_sequence = 4
+items_in_sequence = 3
 index_in_sequence = 1
 icons = [ ExtResource( 1 ) ]
 previews = [ ExtResource( 1 ) ]
