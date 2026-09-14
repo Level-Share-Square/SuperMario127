@@ -34,6 +34,7 @@ var last_red_coin_id = 0
 var switch_state : Array = []
 var activated_shine_ids := []
 var layer_states := []
+var used_changers := []
 var died : bool = false
 
 func reload():
