@@ -30,7 +30,7 @@ const Y_SPEED_THRESHOLD_UP: float = 400.0
 const Y_SPEED_THRESHOLD_DOWN: float = 200.0
 const Y_MAX_SPEED: float = 800.0
 const Y_MAX_LEAD_DISTANCE_Y: float = 400.0
-const Y_LEAD_SPEED: float = 8.0
+const Y_LEAD_SPEED: float = 4.0
 
 const STOPPER_EASE_T: float = 0.05
 
