@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=14 format=2]
+[gd_resource type="Resource" load_steps=16 format=2]
 
 [ext_resource path="res://scenes/editor/items/placeable_object.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/objects/snow_pillar/preview.png" type="Texture" id=2]
@@ -13,6 +13,8 @@
 [ext_resource path="res://scenes/actors/objects/snow_pillar/palettes/icon_5.png" type="Texture" id=11]
 [ext_resource path="res://scenes/actors/objects/snow_pillar/palettes/icon_3.png" type="Texture" id=12]
 [ext_resource path="res://scenes/actors/objects/snow_pillar/palettes/preview_4.png" type="Texture" id=13]
+[ext_resource path="res://scenes/actors/objects/snow_pillar/palettes/preview_6.png" type="Texture" id=14]
+[ext_resource path="res://scenes/actors/objects/snow_pillar/palettes/icon_6.png" type="Texture" id=15]
 
 [resource]
 script = ExtResource( 1 )
@@ -20,8 +22,8 @@ item_name = "Snow Pillar"
 change_to = "obj_large_snow_pillar"
 items_in_sequence = 2
 index_in_sequence = 0
-icons = [ ExtResource( 9 ), ExtResource( 3 ), ExtResource( 7 ), ExtResource( 12 ), ExtResource( 10 ), ExtResource( 11 ) ]
-previews = [ ExtResource( 2 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 13 ), ExtResource( 8 ) ]
+icons = [ ExtResource( 9 ), ExtResource( 3 ), ExtResource( 7 ), ExtResource( 12 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 15 ) ]
+previews = [ ExtResource( 2 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 13 ), ExtResource( 8 ), ExtResource( 14 ) ]
 priority = 176
 object_id = 60
 preview_offset = Vector2( -1, 0 )
