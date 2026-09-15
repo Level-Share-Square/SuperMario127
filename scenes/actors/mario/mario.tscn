@@ -1689,7 +1689,7 @@ shader = ExtResource( 86 )
 shader_param/ray_count = 4
 shader_param/ray_distance = 0.4
 shader_param/ray_seperation_degrees = 22.0
-shader_param/rotation = 1.52157
+shader_param/rotation = 4.23479
 
 [sub_resource type="RectangleShape2D" id=85]
 extents = Vector2( 8, 18 )
@@ -1741,12 +1741,10 @@ disabled = true
 one_way_collision_margin = 0.0
 
 [node name="GroundShape" type="CollisionPolygon2D" parent="."]
-visible = false
 position = Vector2( -1, 16 )
 polygon = PoolVector2Array( -3, -6, 0, 1, 2, 1, 5, -6 )
 
 [node name="LeftCollision" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2( 0.5, 8 )
 rotation = -1.5708
 shape = SubResource( 6 )
@@ -1767,14 +1765,12 @@ shape = SubResource( 7 )
 disabled = true
 
 [node name="CrushedCollision" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2( 0, 23.5 )
 z_index = 2
 shape = SubResource( 108 )
 disabled = true
 
 [node name="CrushedCollisionDive" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2( 0, 7 )
 z_index = 2
 shape = SubResource( 108 )
@@ -1989,9 +1985,6 @@ opacity = Color( 0, 0, 0, 0.741176 )
 frames = ExtResource( 48 )
 animation = "idleRight"
 script = ExtResource( 63 )
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="Wings" type="AnimatedSprite" parent="Sprite"]
 visible = false
@@ -2319,7 +2312,6 @@ material = SubResource( 26 )
 display_icon = ExtResource( 80 )
 
 [node name="CloudContainer" type="Node2D" parent="."]
-visible = false
 
 [node name="PlayerCollision" type="Area2D" parent="."]
 visible = false
@@ -2462,32 +2454,38 @@ shape = SubResource( 148 )
 disabled = true
 
 [node name="BoxPwner" type="Area2D" parent="."]
+visible = false
 modulate = Color( 1, 0.470588, 0, 1 )
 collision_layer = 131072
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BoxPwner"]
+visible = false
 modulate = Color( 0.839216, 0.345098, 0.345098, 1 )
 position = Vector2( 0.5, 7.5 )
 shape = SubResource( 144 )
 
 [node name="DirCheck" type="CollisionShape2D" parent="BoxPwner"]
+visible = false
 modulate = Color( 0.839216, 0.345098, 0.345098, 1 )
 position = Vector2( 0, 7.5 )
 shape = SubResource( 149 )
 disabled = true
 
 [node name="BoxPwnerDive" type="Area2D" parent="."]
+visible = false
 modulate = Color( 1, 0.470588, 0, 1 )
 collision_layer = 131072
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BoxPwnerDive"]
+visible = false
 modulate = Color( 0.839216, 0.345098, 0.345098, 1 )
 position = Vector2( 0.5, -6.25 )
 shape = SubResource( 145 )
 
 [node name="DirCheck" type="CollisionShape2D" parent="BoxPwnerDive"]
+visible = false
 modulate = Color( 0.839216, 0.345098, 0.345098, 1 )
 position = Vector2( 0, -6.25 )
 shape = SubResource( 150 )
@@ -2504,6 +2502,7 @@ position = Vector2( 0.5, 5 )
 shape = SubResource( 30 )
 
 [node name="Bubble" type="Sprite" parent="."]
+visible = false
 
 [node name="WaterGroundCheck" type="RayCast2D" parent="."]
 visible = false
@@ -2528,6 +2527,7 @@ cast_to = Vector2( 0, 7.5 )
 collision_mask = 65617
 
 [node name="SlopeAngleCheck" type="RayCast2D" parent="."]
+visible = false
 modulate = Color( 0.247059, 0.0666667, 1, 1 )
 position = Vector2( 0, 21 )
 z_index = 126
@@ -2626,7 +2626,7 @@ playing = true
 [node name="Recolorable" type="AnimatedSprite" parent="CollectedShine"]
 visible = false
 frames = ExtResource( 61 )
-frame = 3
+frame = 5
 script = ExtResource( 63 )
 
 [node name="ShineParticles" type="Particles2D" parent="CollectedShine"]
@@ -2643,6 +2643,7 @@ modulate = Color( 1, 1, 1, 0 )
 texture = ExtResource( 17 )
 
 [node name="VectorRays" type="ColorRect" parent="CollectedKey"]
+visible = false
 show_behind_parent = true
 material = SubResource( 116 )
 anchor_left = 0.5
@@ -2658,6 +2659,7 @@ color = Color( 1, 1, 0, 1 )
 script = ExtResource( 87 )
 
 [node name="Outline" type="Sprite" parent="CollectedKey"]
+visible = false
 texture = ExtResource( 88 )
 
 [node name="BottomPos" type="Node2D" parent="."]
@@ -2694,6 +2696,7 @@ collision_layer = 0
 collision_mask = 2147483712
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="VanishDetector"]
+visible = false
 position = Vector2( 0, 4 )
 z_index = 2
 shape = SubResource( 85 )
