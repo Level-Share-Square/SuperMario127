@@ -88,7 +88,7 @@ func update_values(bypass_checks: bool = false):
 					break
 		if !update_values: return
 
-	shared.update_tilemaps()
+	if area.header.tile_with_edges: shared.update_tilemaps()
 	camera.update_limits(area.header)
 	editor.oob_overlay.set_bounds(Rect2(area.header.bounds.position*32, area.header.bounds.size*32))
 	area_rect = area.header.bounds
