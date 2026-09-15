@@ -37,7 +37,8 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=2]
 resource_name = "roll"
-length = 130.0
+length = 105.0
+step = 1.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("RichTextLabel:rect_position")
 tracks/0/interp = 1
@@ -45,10 +46,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 130 ),
+"times": PoolRealArray( 0, 100 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 0, 448 ), Vector2( 0, -4980 ) ]
+"values": [ Vector2( 0, 448 ), Vector2( 0, -3932 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("RichTextLabel:modulate")
@@ -69,7 +70,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 129.2 ),
+"times": PoolRealArray( 105 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [ "MainMenu" ],
@@ -229,110 +230,97 @@ expand = true
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 modulate = Color( 1, 1, 1, 0 )
-anchor_bottom = 1.0
 margin_top = 432.0
 margin_right = 768.0
-margin_bottom = 12304.0
+margin_bottom = 4358.0
 custom_fonts/normal_font = ExtResource( 9 )
 bbcode_enabled = true
 bbcode_text = "[center]Super Mario 127
 Development Team
 
-Super Mario 63:
-Robert \"runouw\" Hewitt
-Steven \"runouw\" Hewitt
-
 -
 
 Developers
 
-Audio Engineer:
-Gale \"goatsoup\" Sosa (Resigned)
-Arin \"ArieJuice\" Milan (Resigned)
-
-Composer:
-\"laith\"
-\"AM4\"
-Jake \"PlugAndPlay\"
-Gale \"goatsoup\" Sosa (Resigned)
-\"AquaDoesStuff\" (Resigned)
-Mason \"RetroReboot\" Jackson (Resigned)
-\"FastMario\" (Resigned)
-
 Programmer:
 Abdelrahman \"Dignity\" Essam
+\"aloelucidity\"
+Jake \"PlugAndPlay\"
 \"laith\"
 \"tabs\"
-Jake \"PlugAndPlay\"
 \"met3o\"
-\"aloelucidity\"
-\"TrafficConeGod\" (Resigned)
+\"BlockCycle\"
+Brian \"Linktober\"
+\"SilvererCoin\" (Resigned)
+\"Flarewire\" (Resigned)
 \"skeletontourguide\" (Resigned)
 \"JuPaHe64\" (Resigned)
-\"Flarewire\" (Resigned)
+\"TrafficConeGod\" (Resigned)
 \"Entiss\" (Resigned)
 \"certi\" (Resigned)
-\"SilvererCoin\" (Resigned)
 \"Chlorobyte\" (Resigned)
 
 Sprite Artist:
-Charlotte \"Charpurrr\" Fox
 \"KrystalPhantasm\"
-Brian \"Linktober\"
-Mack \"masterminer176\"
 \"aloelucidity\"
-\"wad\" (Resigned)
-\"Reshi\" (Resigned)
-Doram \"DoramB\" Baramour (Resigned)
-Antonio \"Antonio4444\" (Resigned)
-\"CyanHyprPsychic\" (Resigned)
-\"ChoosingBerry\" (Resigned)
-\"AquaDoesStuff\" (Resigned)
-Hrasyurr \"Azzy\" (Resigned)
+Mack \"masterminer176\"
+Brian \"Linktober\"
+Charlotte \"Charpurrr\" Fox
 \"PumpkinVolt\" (Resigned)
+Doram \"DoramB\" Baramour (Resigned)
+\"Reshi\" (Resigned)
+Antonio \"Antonio4444\" (Resigned)
+Azzy \"Hrasyurr\" (Resigned)
 \"NanTheDark\" (Resigned)
-\"E_WOLFFE\" (Resigned)
 \"AstraSpec\" (Resigned)
-\"le_kappa\" (Resigned)
 \"Saneko\" (Resigned)
 
-Animator:
-Charlotte \"Charpurrr\" Fox
+Composer:
+\"AM4\"
+\"laith\"
+Jake \"PlugAndPlay\"
+\"aloelucidity\"
+Mason \"RetroReboot\" Jackson
+Arin \"ArieJuice\" Milan (Resigned)
+\"AquaDoesStuff\" (Resigned)
+\"FastMario\" (Resigned)
+
+Included Songs:
+Nintendo Co., Ltd
+Jermaine \"ParagonX9\" Blume
+\"RednGreen\"
+\"Súper M 795\"
+\"m477zorz\"
+\"PaperMikes\"
+\"Valtteri Valtteri\"
+
+Level Designer:
+Brian \"Linktober\"
+\"tabs\"
+Rudy \"Rudy12345mc\" Mueller
+\"EnricosUt\"
+\"Fireflower\"
+\"-26 Lives\"
 Mack \"masterminer176\"
-\"CyanHyprPsychic\" (Resigned)
-\"PumpkinVolt\" (Resigned)
+\"Samitizer\"
+Christian \"Chri_ti_03\"
+\"SilvererCoin\" (Resigned)
+
+UI Design:
+\"aloelucidity\"
+\"AgentOGames\"
+\"Refusion\"
 
 Writing:
 Abdelrahman \"Dignity\" Essam
-
-Campaign Story Design:
-Abdelrahman \"Dignity\" Essam
 \"aloelucidity\"
-
-Level Designer:
-Rudy \"Rudy12345mc\" Mueller
-Christian \"Chri_ti_03\"
-Brian \"Linktober\"
-\"tabs\"
-\"Samitizer\" (Resigned)
-
-UI Design:
-\"AgentOGames\"
-\"Refusion\"
-\"AM4\"
-Tee \"teebeeYT\" (Resigned)
-
-QA Tester:
-Brian \"Linktober\"
-\"GreenStarStudios\" (Resigned)
-\"E_WOLFFE\" (Resigned)
-\"Samitizer\" (Resigned)
-\"Vexxter\" (Resigned)
 
 Public Relations:
+Tali \"nbsurprise\" Wiltshire
 Abdelrahman \"Dignity\" Essam
 \"aloelucidity\"
-Tali \"nbsurprise\" Wiltshire
+\"EnricosUt\"
+\"That's Mama Luigi To You\" (Resigned)
 \"FastMario\" (Resigned)
 
 Promotional Artist:
@@ -343,32 +331,10 @@ Promotional Artist:
 
 Concept Artist:
 \"KrystalPhantasm\"
-\"CyanHyprPsychic\" (Resigned)
-\"GreenStarStudios\" (Resigned)
-\"15 Minute Gamer\" (Resigned)
-\"E_WOLFFE\" (Resigned)
-\"Alkalide\" (Resigned)
-
-Discord Server Staff:
-Charlotte \"Charpurrr\" Fox
-Abdelrahman \"Dignity\" Essam
-Rudy \"Rudy12345mc\" Mueller
-\"Linktober\"
-\"Vexxter\"
-\"Luigibonus\"
-\"Kommult\"
-Christian \"Chri_ti_03\"
-\"Samitizer\"
-\"That's Mama Luigi To You\"
-\"iZePlayz\"
-\"PumpkinVolt\" (Resigned)
-\"GateTheCat\" (Resigned)
-\"FastMario\" (Resigned)
-
-Designer Contest Hosts:
-Rudy \"Rudy12345mc\" Mueller
-Brian \"Linktober\"
 \"tabs\"
+
+Awesome Guy Who Did the Icons:
+\"Refusion\"
 
 -
 
@@ -391,18 +357,8 @@ Rudy \"Rudy12345mc\" Mueller
 
 -
 
-Inspiration and Reference:
-\"Greiga Master\"
-\"aloelucidity\"
-\"Parakoopa\"
-\"A.J. Nitro\"
-\"Mageker\"
-\"puggesy\"
-\"Ragey\"
-\"Flare\"
-
-Special Thanks:
-Shoutouts to Simpleflips
+Special thanks:
+Kaze Emanuar
 John \"John Espagueti Largo DLC\" Espagueti Largo
 Matias \"MrEGamer\" Eberbach
 Daniar \"arcatchik\"
@@ -420,109 +376,100 @@ John \"JohnDevelopment\" Russell
 \"Funz\"
 \"Yaya\"
 \"Davin\"
-And you, for sitting through these credits!
 
-You, too, can join the list by applying for development in the discord server. We hope to see you there!
+A very special thanks to Runouw and Team 63 for building 
+our childhoods, and inspiring us to make this fangame.
+And a very special thanks to you, for sitting 
+through these credits!
 
-"
+You, too, can join the list by applying for development 
+in the discord server. We hope to see you there![/center]"
 text = "Super Mario 127
 Development Team
 
-Super Mario 63:
-Robert \"runouw\" Hewitt
-Steven \"runouw\" Hewitt
-
 -
 
 Developers
 
-Audio Engineer:
-Gale \"goatsoup\" Sosa (Resigned)
-Arin \"ArieJuice\" Milan (Resigned)
-
-Composer:
-\"laith\"
-\"AM4\"
-Jake \"PlugAndPlay\"
-Gale \"goatsoup\" Sosa (Resigned)
-\"AquaDoesStuff\" (Resigned)
-Mason \"RetroReboot\" Jackson (Resigned)
-\"FastMario\" (Resigned)
-
 Programmer:
 Abdelrahman \"Dignity\" Essam
+\"aloelucidity\"
+Jake \"PlugAndPlay\"
 \"laith\"
 \"tabs\"
-Jake \"PlugAndPlay\"
 \"met3o\"
-\"aloelucidity\"
-\"TrafficConeGod\" (Resigned)
+\"BlockCycle\"
+Brian \"Linktober\"
+\"SilvererCoin\" (Resigned)
+\"Flarewire\" (Resigned)
 \"skeletontourguide\" (Resigned)
 \"JuPaHe64\" (Resigned)
-\"Flarewire\" (Resigned)
+\"TrafficConeGod\" (Resigned)
 \"Entiss\" (Resigned)
 \"certi\" (Resigned)
-\"SilvererCoin\" (Resigned)
 \"Chlorobyte\" (Resigned)
 
 Sprite Artist:
-Charlotte \"Charpurrr\" Fox
 \"KrystalPhantasm\"
-Brian \"Linktober\"
-Mack \"masterminer176\"
 \"aloelucidity\"
-\"wad\" (Resigned)
-\"Reshi\" (Resigned)
-Doram \"DoramB\" Baramour (Resigned)
-Antonio \"Antonio4444\" (Resigned)
-\"CyanHyprPsychic\" (Resigned)
-\"ChoosingBerry\" (Resigned)
-\"AquaDoesStuff\" (Resigned)
-Hrasyurr \"Azzy\" (Resigned)
+Mack \"masterminer176\"
+Brian \"Linktober\"
+Charlotte \"Charpurrr\" Fox
 \"PumpkinVolt\" (Resigned)
+Doram \"DoramB\" Baramour (Resigned)
+\"Reshi\" (Resigned)
+Antonio \"Antonio4444\" (Resigned)
+Azzy \"Hrasyurr\" (Resigned)
 \"NanTheDark\" (Resigned)
-\"E_WOLFFE\" (Resigned)
 \"AstraSpec\" (Resigned)
-\"le_kappa\" (Resigned)
 \"Saneko\" (Resigned)
 
-Animator:
-Charlotte \"Charpurrr\" Fox
+Composer:
+\"AM4\"
+\"laith\"
+Jake \"PlugAndPlay\"
+\"aloelucidity\"
+Mason \"RetroReboot\" Jackson
+Arin \"ArieJuice\" Milan (Resigned)
+\"AquaDoesStuff\" (Resigned)
+\"FastMario\" (Resigned)
+
+Included Songs:
+Nintendo Co., Ltd
+Jermaine \"ParagonX9\" Blume
+\"RednGreen\"
+\"Súper M 795\"
+\"m477zorz\"
+\"PaperMikes\"
+\"Valtteri Valtteri\"
+
+Level Designer:
+Brian \"Linktober\"
+\"tabs\"
+Rudy \"Rudy12345mc\" Mueller
+\"EnricosUt\"
+\"Fireflower\"
+\"-26 Lives\"
 Mack \"masterminer176\"
-\"CyanHyprPsychic\" (Resigned)
-\"PumpkinVolt\" (Resigned)
+\"Samitizer\"
+Christian \"Chri_ti_03\"
+\"SilvererCoin\" (Resigned)
+
+UI Design:
+\"aloelucidity\"
+\"AgentOGames\"
+\"Refusion\"
 
 Writing:
 Abdelrahman \"Dignity\" Essam
-
-Campaign Story Design:
-Abdelrahman \"Dignity\" Essam
 \"aloelucidity\"
-
-Level Designer:
-Rudy \"Rudy12345mc\" Mueller
-Christian \"Chri_ti_03\"
-Brian \"Linktober\"
-\"tabs\"
-\"Samitizer\" (Resigned)
-
-UI Design:
-\"AgentOGames\"
-\"Refusion\"
-\"AM4\"
-Tee \"teebeeYT\" (Resigned)
-
-QA Tester:
-Brian \"Linktober\"
-\"GreenStarStudios\" (Resigned)
-\"E_WOLFFE\" (Resigned)
-\"Samitizer\" (Resigned)
-\"Vexxter\" (Resigned)
 
 Public Relations:
+Tali \"nbsurprise\" Wiltshire
 Abdelrahman \"Dignity\" Essam
 \"aloelucidity\"
-Tali \"nbsurprise\" Wiltshire
+\"EnricosUt\"
+\"That's Mama Luigi To You\" (Resigned)
 \"FastMario\" (Resigned)
 
 Promotional Artist:
@@ -533,32 +480,10 @@ Promotional Artist:
 
 Concept Artist:
 \"KrystalPhantasm\"
-\"CyanHyprPsychic\" (Resigned)
-\"GreenStarStudios\" (Resigned)
-\"15 Minute Gamer\" (Resigned)
-\"E_WOLFFE\" (Resigned)
-\"Alkalide\" (Resigned)
-
-Discord Server Staff:
-Charlotte \"Charpurrr\" Fox
-Abdelrahman \"Dignity\" Essam
-Rudy \"Rudy12345mc\" Mueller
-\"Linktober\"
-\"Vexxter\"
-\"Luigibonus\"
-\"Kommult\"
-Christian \"Chri_ti_03\"
-\"Samitizer\"
-\"That's Mama Luigi To You\"
-\"iZePlayz\"
-\"PumpkinVolt\" (Resigned)
-\"GateTheCat\" (Resigned)
-\"FastMario\" (Resigned)
-
-Designer Contest Hosts:
-Rudy \"Rudy12345mc\" Mueller
-Brian \"Linktober\"
 \"tabs\"
+
+Awesome Guy Who Did the Icons:
+\"Refusion\"
 
 -
 
@@ -581,18 +506,8 @@ Rudy \"Rudy12345mc\" Mueller
 
 -
 
-Inspiration and Reference:
-\"Greiga Master\"
-\"aloelucidity\"
-\"Parakoopa\"
-\"A.J. Nitro\"
-\"Mageker\"
-\"puggesy\"
-\"Ragey\"
-\"Flare\"
-
-Special Thanks:
-Shoutouts to Simpleflips
+Special thanks:
+Kaze Emanuar
 John \"John Espagueti Largo DLC\" Espagueti Largo
 Matias \"MrEGamer\" Eberbach
 Daniar \"arcatchik\"
@@ -610,11 +525,15 @@ John \"JohnDevelopment\" Russell
 \"Funz\"
 \"Yaya\"
 \"Davin\"
-And you, for sitting through these credits!
 
-You, too, can join the list by applying for development in the discord server. We hope to see you there!
+A very special thanks to Runouw and Team 63 for building 
+our childhoods, and inspiring us to make this fangame.
+And a very special thanks to you, for sitting 
+through these credits!
 
-"
+You, too, can join the list by applying for development 
+in the discord server. We hope to see you there!"
+fit_content_height = true
 scroll_active = false
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
