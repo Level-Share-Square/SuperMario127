@@ -26,6 +26,12 @@ const Y_DESPERATE_CORRECT_SPEED: float = 24.0
 
 const Y_OFFSET_SPEED: float = 4.0
 
+const Y_SPEED_THRESHOLD_UP: float = 400.0
+const Y_SPEED_THRESHOLD_DOWN: float = 200.0
+const Y_MAX_SPEED: float = 800.0
+const Y_MAX_LEAD_DISTANCE_Y: float = 400.0
+const Y_LEAD_SPEED: float = 8.0
+
 const STOPPER_EASE_T: float = 0.05
 
 export var character : NodePath
@@ -66,6 +72,7 @@ onready var viewport
 
 var character_vel = Vector2(0, 0)
 var current_lead_offset: float = 0.0
+var current_lead_offset_y: float = 0.0
 var y_baseline: float = 0.0
 var y_offset: float = 0.0
 var cur_baseline: float = 0.0
@@ -148,9 +155,20 @@ func _physics_process(delta):
 					global_position.x = lerp(global_position.x, global_position.x + clamped_delta, delta * follow_speed)
 				
 				## y axis
+				var char_velocity_y: float = character_node.velocity.y
+				var char_speed_y: float = abs(char_velocity_y)
+				
+				var target_lead_offset_y: float = 0.0
+				var threshold: float = Y_SPEED_THRESHOLD_UP if char_velocity_y < 0 else Y_SPEED_THRESHOLD_DOWN
+				if char_speed_y > threshold:
+					var y_speed_factor: float = clamp((char_speed_y - threshold) / (Y_MAX_SPEED - threshold), 0.0, 1.0)
+					target_lead_offset_y = Y_MAX_LEAD_DISTANCE_Y * zoom.y * y_speed_factor * sign(char_velocity_y)
+				
+				current_lead_offset_y = lerp(current_lead_offset_y, target_lead_offset_y, delta * Y_LEAD_SPEED)
+				
 				var y_dist_abs: float = abs(char_center_distance.y)
 				if y_dist_abs > abs(size.y/4) and not character_node.is_grounded():
-					var target_y: float = character_node.global_position.y
+					var target_y: float = character_node.global_position.y + current_lead_offset_y
 					
 					var t: float = clamp(y_dist_abs / abs(size.y), 0.0, 2.0)
 					var correct_speed: float = smoothstep(Y_SLOW_CORRECT_SPEED, Y_DESPERATE_CORRECT_SPEED, t * Y_DESPERATE_CORRECT_SPEED)
@@ -164,7 +182,7 @@ func _physics_process(delta):
 					cur_baseline = y_baseline
 				
 				elif is_instance_valid(character_node.state) and character_node.state.force_cam_follow_y:
-					y_baseline = character_node.global_position.y
+					y_baseline = character_node.global_position.y + current_lead_offset_y
 					y_offset = lerp(y_offset, 0, delta * Y_OFFSET_SPEED)
 					
 				elif character_node.is_grounded():
@@ -173,7 +191,7 @@ func _physics_process(delta):
 						y_offset = lerp(y_offset, CROUCH_OFFSET, delta * Y_OFFSET_SPEED)
 					else:
 						y_offset = lerp(y_offset, GROUND_OFFSET, delta * Y_OFFSET_SPEED)
-					y_baseline = character_node.global_position.y
+					y_baseline = character_node.global_position.y + current_lead_offset_y
 				
 				var follow_t: float = clamp(y_dist_abs / max(size.y, 0.0001), 0.0, 2.0)
 				var y_follow: float = lerp(Y_DESPERATE_FOLLOW_SPEED, Y_FOLLOW_SPEED, ease(min(follow_t, 1.0), 1.5))
