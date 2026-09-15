@@ -278,6 +278,9 @@ func _process(delta) -> void:
 
 	check_loop(self, loop, loop_end)
 	check_loop(water_music_player, underwater_loop, underwater_loop_end)
+#	seek(82)
+	print(get_precise_position(self))
+	prints(loop, loop_end)
 
 # the plan for this is to mute the current bgm, play the temp song, and then fade the current bgm back in
 func play_temporary_music(temp_song_id : int = 0, temp_song_volume : float = 0) -> void:
@@ -325,8 +328,8 @@ func get_precise_position(player: AudioStreamPlayer) -> float:
 
 func check_loop(player: AudioStreamPlayer, loop_point_start: float, loop_point_end: float) -> void:
 	if not custom_loop: return
-	if loop_point_start >= loop_point_end: loop_point_start = 0.0
 	if loop_point_end == 0 and is_instance_valid(player.stream): loop_point_end = player.stream.get_length()
+	if loop_point_start >= loop_point_end: loop_point_start = 0.0
 	var pos: float = get_precise_position(player)
 
 	if pos >= loop_point_end:
