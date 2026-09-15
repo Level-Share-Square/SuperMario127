@@ -154,7 +154,7 @@ func _on_animation_finished(anim_name : String) -> void:
 		
 		if !is_equal_approx(stored_character.camera.current_zoom.x, target_zoom):
 			stored_character.camera.zoom_tween.remove_all()
-			stored_character.camera.set_zoom_tween(Vector2(target_zoom, target_zoom), 0.8, true)
+			stored_character.camera.set_zoom_tween(Vector2(target_zoom, target_zoom), 0.8)
 		
 		sprite_fuse.visible = true
 
@@ -183,7 +183,7 @@ func fire_cannon() -> void:
 	stored_character.modulate.a = 1
 	if !is_equal_approx(stored_character.camera.current_zoom.x, stored_zoom):
 		stored_character.camera.zoom_tween.remove_all()
-		stored_character.camera.set_zoom_tween(Vector2(stored_zoom, stored_zoom), 0.5, true)
+		stored_character.camera.set_zoom_tween(Vector2(stored_zoom, stored_zoom), 0.5)
 	invuln_timer.start()
 	#set the player so they will fire out of the cannon properly with velocity and such
 	stored_character.position = cannon_exit_position.global_position

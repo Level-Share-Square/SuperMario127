@@ -99,15 +99,7 @@ func _ready():
 
 func _physics_process(delta):
 	last_position = global_position
-	
-	if not zoom_tween.is_active():
-		var level_total_bounds := Vector2(level_bounds.size.x, level_bounds.size.y)
-		var max_zoom: float = min(level_total_bounds.x / (base_size.x*2), level_total_bounds.y / (base_size.y*2))
-		zoom.x = min(zoom.y, max_zoom)
-		zoom.y = min(zoom.y, max_zoom)
-	
-	shape.shape.extents = base_size * zoom.y
-	size = shape.shape.extents
+	update_shape_size()
 	
 	if auto_move:
 		if focus_on != null:
@@ -209,7 +201,7 @@ func _physics_process(delta):
 				global_position.y = lerp(global_position.y - y_offset, cur_baseline, delta * y_follow)
 				global_position.y += y_offset
 		
-		if !zoom.is_equal_approx(old_zoom):
+		if !zoom.is_equal_approx(old_zoom) and !zoom_tween.is_active():
 			zoom = lerp(zoom, old_zoom, 0.08)
 		if shake == true:
 			if round(shake_strength) > 0:
@@ -218,7 +210,19 @@ func _physics_process(delta):
 			else:
 				shake = false
 	
+	update_shape_size()
 	global_position = clamp_position(global_position, last_position, size)
+
+
+func update_shape_size() -> void:
+	if not zoom_tween.is_active():
+		var level_total_bounds := Vector2(level_bounds.size.x, level_bounds.size.y)
+		var max_zoom: float = min(level_total_bounds.x / (base_size.x*2), level_total_bounds.y / (base_size.y*2))
+		zoom.x = min(zoom.y, max_zoom)
+		zoom.y = min(zoom.y, max_zoom)
+	
+	shape.shape.extents = base_size * zoom.y
+	size = base_size * zoom.y
 
 
 func clamp_position(new_pos: Vector2, last_pos: Vector2, cur_size: Vector2, exclude_areas: Array = []) -> Vector2:
@@ -273,20 +277,34 @@ func resolve_stopper(new_pos: Vector2, last_pos: Vector2, cur_size: Vector2, sto
 func resolve_vertical_route(new_pos: Vector2, last_pos: Vector2, cur_size: Vector2, stopper: CameraStopper, char_pos: Vector2) -> Vector2:
 	if char_pos.y < stopper.top_bound.y and new_pos.y + cur_size.y > stopper.top_bound.y:
 		var target_y: float = stopper.top_bound.y - cur_size.y + 1
-		new_pos.y = CatmullRomSpline.sample([last_pos, Vector2(new_pos.x, target_y)], STOPPER_EASE_T).y
+		if zoom_tween.is_active():
+			new_pos.y = target_y
+		else:
+			new_pos.y = CatmullRomSpline.sample([last_pos, Vector2(new_pos.x, target_y)], STOPPER_EASE_T).y
+			
 	elif char_pos.y > stopper.bottom_bound.y and new_pos.y - cur_size.y < stopper.bottom_bound.y:
 		var target_y: float = stopper.bottom_bound.y + cur_size.y - 1
-		new_pos.y = CatmullRomSpline.sample([last_pos, Vector2(new_pos.x, target_y)], STOPPER_EASE_T).y
+		if zoom_tween.is_active():
+			new_pos.y = target_y
+		else:
+			new_pos.y = CatmullRomSpline.sample([last_pos, Vector2(new_pos.x, target_y)], STOPPER_EASE_T).y
+			
 	return new_pos
 
 
 func resolve_horizontal_route(new_pos: Vector2, last_pos: Vector2, cur_size: Vector2, stopper: CameraStopper, char_pos: Vector2) -> Vector2:
 	if char_pos.x < stopper.left_bound.x and new_pos.x + cur_size.x > stopper.left_bound.x:
 		var target_x: float = stopper.left_bound.x - cur_size.x + 1
-		new_pos.x = CatmullRomSpline.sample([last_pos, Vector2(target_x, new_pos.y)], STOPPER_EASE_T).x
+		if zoom_tween.is_active():
+			new_pos.x = target_x
+		else:
+			new_pos.x = CatmullRomSpline.sample([last_pos, Vector2(target_x, new_pos.y)], STOPPER_EASE_T).x
 	elif char_pos.x > stopper.right_bound.x and new_pos.x - cur_size.x < stopper.right_bound.x:
 		var target_x: float = stopper.right_bound.x + cur_size.x - 1
-		new_pos.x = CatmullRomSpline.sample([last_pos, Vector2(target_x, new_pos.y)], STOPPER_EASE_T).x
+		if zoom_tween.is_active():
+			new_pos.x = target_x
+		else:
+			new_pos.x = CatmullRomSpline.sample([last_pos, Vector2(target_x, new_pos.y)], STOPPER_EASE_T).x
 	return new_pos
 
 
@@ -303,24 +321,36 @@ func resolve_ambiguous_route(new_pos: Vector2, last_pos: Vector2, cur_size: Vect
 func resolve_ambiguous_x(new_pos: Vector2, last_pos: Vector2, cur_size: Vector2, stopper: CameraStopper) -> Vector2:
 	if last_pos.x < stopper.global_position.x and new_pos.x > last_pos.x:
 		var clamped_x: float = stopper.left_bound.x - cur_size.x + 1
-		new_pos.x = CatmullRomSpline.sample([last_pos, Vector2(clamped_x, new_pos.y)], STOPPER_EASE_T).x
+		if zoom_tween.is_active():
+			new_pos.x = clamped_x
+		else:
+			new_pos.x = CatmullRomSpline.sample([last_pos, Vector2(clamped_x, new_pos.y)], STOPPER_EASE_T).x
 	elif last_pos.x > stopper.global_position.x and new_pos.x < last_pos.x:
 		var clamped_x: float = stopper.right_bound.x + cur_size.x - 1
-		new_pos.x = CatmullRomSpline.sample([last_pos, Vector2(clamped_x, new_pos.y)], STOPPER_EASE_T).x
+		if zoom_tween.is_active():
+			new_pos.x = clamped_x
+		else:
+			new_pos.x = CatmullRomSpline.sample([last_pos, Vector2(clamped_x, new_pos.y)], STOPPER_EASE_T).x
 	return new_pos
 
 
 func resolve_ambiguous_y(new_pos: Vector2, last_pos: Vector2, cur_size: Vector2, stopper: CameraStopper) -> Vector2:
 	if last_pos.y < stopper.global_position.y and new_pos.y > last_pos.y:
 		var clamped_y: float = stopper.top_bound.y - cur_size.y + 1
-		new_pos.y = CatmullRomSpline.sample([last_pos, Vector2(new_pos.x, clamped_y)], STOPPER_EASE_T).y
+		if zoom_tween.is_active():
+			new_pos.y = clamped_y
+		else:
+			new_pos.y = CatmullRomSpline.sample([last_pos, Vector2(new_pos.x, clamped_y)], STOPPER_EASE_T).y
 	elif last_pos.y > stopper.global_position.y and new_pos.y < last_pos.y:
 		var clamped_y: float = stopper.bottom_bound.y + cur_size.y - 1
-		new_pos.y = CatmullRomSpline.sample([last_pos, Vector2(new_pos.x, clamped_y)], STOPPER_EASE_T).y
+		if zoom_tween.is_active():
+			new_pos.y = clamped_y
+		else:
+			new_pos.y = CatmullRomSpline.sample([last_pos, Vector2(new_pos.x, clamped_y)], STOPPER_EASE_T).y
 	return new_pos
 
 
-func set_zoom_tween(target : Vector2, time : float, override = false):
+func set_zoom_tween(target : Vector2, time : float):
 	var level_total_bounds := Vector2(level_bounds.position.x + level_bounds.size.x, level_bounds.position.y + level_bounds.size.y)
 	var max_zoom: float = min(level_total_bounds.x / (base_size.x*2), level_total_bounds.y / (base_size.y*2))
 	target.x = min(target.x, max_zoom)
@@ -329,13 +359,6 @@ func set_zoom_tween(target : Vector2, time : float, override = false):
 	old_zoom = target
 	current_zoom = target
 	zoom_tween.remove_all()
-	# overrides level boundary safety check
-	if override:
-		zoom_tween.interpolate_property(self, "zoom", zoom, target, time, 1, 0)
-		disable_zoom_effect = true
-		zoom_tween.connect("tween_all_completed", self, "on_zoom_tween_zoomed")
-		zoom_tween.start()
-		return
 	var level_size : Vector2 = CurrentLevelData.current_area.header.bounds.size * 16
 	var intended_zoom = target * size
 	
@@ -348,7 +371,7 @@ func set_zoom_tween(target : Vector2, time : float, override = false):
 	target = Vector2(min(target.x, max_size), min(target.y, max_size))
 	zoom_tween.interpolate_property(self, "zoom", zoom, target, time, 1, 0)
 	disable_zoom_effect = true
-	zoom_tween.connect("tween_all_completed", self, "on_zoom_tween_zoomed")
+	zoom_tween.connect("tween_all_completed", self, "on_zoom_tween_zoomed", [], CONNECT_ONESHOT)
 	zoom_tween.start()
 
 func on_zoom_tween_zoomed():
