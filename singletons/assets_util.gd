@@ -44,17 +44,17 @@ func load_sound(url: String, working_folder: String):
 			ValidSoundTypes.OGG:
 				var stream := AudioStreamOGGVorbis.new()
 				stream.data = bytes
-				stream.loop = true
+				stream.set_loop(false)
 				return stream
 			ValidSoundTypes.MP3:
 				var stream := AudioStreamMP3.new()
 				stream.data = bytes
-				stream.loop = true
+				stream.set_loop(false)
 				return stream
 			ValidSoundTypes.WAV:
 				var stream := AudioStreamSample.new()
 				stream.data = bytes
-				stream.loop = true
+				stream.set_loop(false)
 				return stream
 			_:
 				printerr("Invalid bytes at path ", sound_path)
@@ -66,17 +66,17 @@ func load_sound(url: String, working_folder: String):
 		"ogg":
 			var stream := AudioStreamOGGVorbis.new()
 			stream.data = bytes
-			stream.loop = true
+			stream.set_loop(false)
 			return stream
 		"mp3":
 			var stream := AudioStreamMP3.new()
 			stream.data = bytes
-			stream.loop = true
+			stream.set_loop(false)
 			return stream
 		"wav":
 			var stream := AudioStreamSample.new()
 			stream.data = bytes
-			stream.loop = true
+			stream.set_loop(false)
 			return stream
 		_:
 			printerr("Invalid file extension at path ", sound_path)

@@ -35,6 +35,7 @@ var play_blended := false
 var has_blended := false
 var temp_music := false
 var song_switched := false
+var custom_loop := false
 
 const MUSIC_FADE_LENGTH = 0.75
 
@@ -98,7 +99,7 @@ func handle_custom_song(url: String, underwater: bool = false) -> void:
 		water_music_player.stop()
 			
 	var song_stream = yield(AssetHandler.load_sound(url, CurrentLevelData.working_folder), "completed")
-	
+
 	if song_stream == null:
 		return
 	if song_stream.data == null:
@@ -123,7 +124,9 @@ func play_custom_normal(song_stream):
 	if get_tree().get_current_scene().mode != 2:
 		self.stream = song_stream
 		play()
-
+	
+	custom_loop = true
+	
 	var underwater_raw = CurrentLevelData.current_area.header.underwater_music
 	if underwater_raw == "":
 		handle_custom_song(CurrentLevelData.current_area.header.music, true)
@@ -186,6 +189,7 @@ func change_song(old_setting, music_setting) -> void:
 	song_switched = true
 	
 	if song != null and stream != song.stream:
+		custom_loop = false
 		stream = song.stream
 		base_volume = song.volume_db
 		play()
@@ -275,7 +279,6 @@ func _process(delta) -> void:
 	check_loop(self, loop, loop_end)
 	check_loop(water_music_player, underwater_loop, underwater_loop_end)
 
-
 # the plan for this is to mute the current bgm, play the temp song, and then fade the current bgm back in
 func play_temporary_music(temp_song_id : int = 0, temp_song_volume : float = 0) -> void:
 	volume_multiplier = 0
@@ -321,12 +324,16 @@ func get_precise_position(player: AudioStreamPlayer) -> float:
 	return player.get_playback_position() + AudioServer.get_time_since_last_mix() - AudioServer.get_output_latency()
 
 func check_loop(player: AudioStreamPlayer, loop_point_start: float, loop_point_end: float) -> void:
-	if loop_point_end == 0.0 or !player.playing:
-		return
+	if not custom_loop: return
+	if loop_point_start >= loop_point_end: loop_point_start = 0.0
+	if loop_point_end == 0 and is_instance_valid(player.stream): loop_point_end = player.stream.get_length()
 	var pos: float = get_precise_position(player)
+
 	if pos >= loop_point_end:
 		var overshoot: float = pos - loop_point_end
 		var seg_len: float = loop_point_end - loop_point_start
 		if seg_len > 0.0:
 			overshoot = fmod(overshoot, seg_len)
+
+		player.playing = true
 		player.seek(loop_point_start + overshoot)
