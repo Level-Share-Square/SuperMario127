@@ -71,7 +71,7 @@ func dived(player: Character):
 func damage_player(player: Character, knockback: Vector2 = player_knockback, make_bonked: bool = true) -> void:
 	knockback_power = knockback
 	.damage_player(player)
-	if make_bonked:
+	if make_bonked and player.movable:
 		bonk_sound.play()
 		grunt_sound.play()
 		enemy.sprite.modulate = Color.white * 2

@@ -180,6 +180,7 @@ export var shine_cutscene: bool = false
 export var auto_flip := true
 export var invulnerable := false
 export var invulnerable_frames := 0
+export var force_invulnerable := false
 export var movable := true
 export var dead := false
 export var stomping := false
@@ -398,6 +399,7 @@ func damage_with_knockback(hit_pos : Vector2, amount : int = 1, cause : String =
 
 func knockback(hit_pos: Vector2, power := Vector2(235, 225), set_state: bool = true, play_hit_sound: bool = true):
 	if is_instance_valid(state) and state.disable_knockback: return
+	if not movable: return
 	
 	var direction := sign((global_position - hit_pos).normalized().x)
 	velocity.x = direction * power.x
@@ -412,6 +414,7 @@ func knockback(hit_pos: Vector2, power := Vector2(235, 225), set_state: bool = t
 
 #Like knockback, except for more "immovable" objects. Disregards state.disable_knockback.
 func bonk(hit_pos: Vector2, power := Vector2(235, 225), set_state: bool = true, play_hit_sound: bool = true):
+	if not movable: return
 	
 	var direction := sign((global_position - hit_pos).normalized().x)
 	velocity.x = direction * power.x
@@ -599,7 +602,6 @@ func is_ceiling() -> bool:
 	return test_move(self.transform, Vector2(0, -0.5)) and collided_last_frame
 
 func is_walled() -> bool:
-	print((is_walled_left() or is_walled_right()) and collided_last_frame)
 	return (is_walled_left() or is_walled_right()) and collided_last_frame
 
 func is_walled_left() -> bool:
@@ -784,8 +786,9 @@ func damage(amount : int = 1, cause : String = "hit", frames : int = 180) -> voi
 				camera.zoom -= camera.HURT_ZOOM_IN
 			emit_signal("health_changed", health, health_shards)
 		
-		invulnerable = true if frames != 0 else false
-		invulnerable_frames = frames
+		if not force_invulnerable:
+			invulnerable = true if frames != 0 else false
+			invulnerable_frames = frames
 		
 		if cause != "lava":
 			match cause:
@@ -866,7 +869,8 @@ func _physics_process(delta: float) -> void:
 		for collision_exception in get_collision_exceptions():
 			raycast_node.add_exception(collision_exception)
 	
-	invulnerable = invulnerable_frames > 0
+	if not force_invulnerable:
+		invulnerable = invulnerable_frames > 0
 	if invulnerable_frames > 0:
 		invulnerable_frames -= 1
 	

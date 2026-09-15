@@ -233,6 +233,7 @@ func setup_char(character: Character):
 	
 	character.set_dive_collision(false)
 	character.invulnerable = true
+	character.force_invulnerable = true
 	character.controllable = false
 	character.velocity = Vector2.ZERO
 #	character.set_collision_layer_bit(1, false) # disable collisions w/ most things
@@ -249,6 +250,7 @@ func setup_char(character: Character):
 
 func restore_control(character: Character):
 	character.invulnerable = false
+	character.force_invulnerable = false
 	character.controllable = true
 	character.auto_flip = true
 	character.movable = true
