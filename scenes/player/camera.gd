@@ -101,7 +101,7 @@ func _physics_process(delta):
 	last_position = global_position
 	
 	if not zoom_tween.is_active():
-		var level_total_bounds := Vector2(level_bounds.position.x + level_bounds.size.x, level_bounds.position.y + level_bounds.size.y)
+		var level_total_bounds := Vector2(level_bounds.size.x, level_bounds.size.y)
 		var max_zoom: float = min(level_total_bounds.x / (base_size.x*2), level_total_bounds.y / (base_size.y*2))
 		zoom.x = min(zoom.y, max_zoom)
 		zoom.y = min(zoom.y, max_zoom)
@@ -242,12 +242,12 @@ func clamp_position(new_pos: Vector2, last_pos: Vector2, cur_size: Vector2, excl
 func clamp_to_level_bounds(new_pos: Vector2, cur_size: Vector2) -> Vector2:
 	if new_pos.x - cur_size.x < level_bounds.position.x:
 		new_pos.x = level_bounds.position.x + cur_size.x
-	if new_pos.x + cur_size.x > level_bounds.size.x:
-		new_pos.x = level_bounds.size.x - cur_size.x
+	if new_pos.x + cur_size.x > level_bounds.position.x + level_bounds.size.x:
+		new_pos.x = level_bounds.position.x + level_bounds.size.x - cur_size.x
 	if new_pos.y - cur_size.y < level_bounds.position.y:
 		new_pos.y = level_bounds.position.y + cur_size.y
-	if new_pos.y + cur_size.y > level_bounds.size.y:
-		new_pos.y = level_bounds.size.y - cur_size.y
+	if new_pos.y + cur_size.y > level_bounds.position.y + level_bounds.size.y:
+		new_pos.y = level_bounds.position.y + level_bounds.size.y - cur_size.y
 	return new_pos
 
 
