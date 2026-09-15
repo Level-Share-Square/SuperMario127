@@ -113,7 +113,6 @@ func body_exited(body) -> void:
 func start_entrance_animation(character: Character) -> void:
 	is_idle = false
 	entering = true
-	character.camera.set_zoom_tween(Vector2(1, 1), 0.5)
 	
 	var state_name: String = ""
 	if character.state and teleport_mode != TeleportMode.Location: state_name = character.state.name

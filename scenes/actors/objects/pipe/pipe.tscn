@@ -15,6 +15,7 @@ extents = Vector2( 16, 8 )
 extents = Vector2( 14.5, 20 )
 
 [node name="Pipe" type="Node2D"]
+z_index = -1
 script = ExtResource( 1 )
 editor_rect = Rect2( -18, -24, 36, 41 )
 internal_id = "pipe"
