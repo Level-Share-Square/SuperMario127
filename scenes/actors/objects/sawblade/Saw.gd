@@ -35,6 +35,10 @@ func kill(body):
 		
 		body.velocity.x += added_speed.x
 		body.velocity.y = added_speed.y
+		
+		if body.velocity.y < 0 and not body.inputs[body.input_names.jump][0]:
+			body.velocity.y /= 1.5
+		
 		body.velocity.limit_length(METAL_KNOCKBACK_SPEED_LIMIT)
 		metal_bounce_noise.play()
 #		body.velocity = global_position.direction_to(body.global_position) * METAL_KNOCKBACK

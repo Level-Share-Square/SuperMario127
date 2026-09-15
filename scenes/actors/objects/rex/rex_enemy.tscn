@@ -61,11 +61,11 @@ extents = Vector2( 11.5, 2 )
 
 [sub_resource type="RectangleShape2D" id=16]
 resource_local_to_scene = true
-extents = Vector2( 7, 20 )
+extents = Vector2( 7, 18.5 )
 
 [sub_resource type="RectangleShape2D" id=1]
 resource_local_to_scene = true
-extents = Vector2( 10, 12.75 )
+extents = Vector2( 10, 10.75 )
 
 [sub_resource type="CanvasItemMaterial" id=119]
 particles_animation = true
@@ -922,7 +922,6 @@ can_be_hurt = false
 z_index = 1
 script = ExtResource( 18 )
 health = 2
-knockback_power = Vector2( 112, 235 )
 bounce_type = 1
 spring_bounce_windup_length = 0.1
 spring_bounce_depth = 22.0
@@ -935,7 +934,6 @@ visible = false
 shape = SubResource( 14 )
 
 [node name="Stomp" parent="Damage" index="1"]
-visible = false
 position = Vector2( 0, -44 )
 
 [node name="CollisionShape2D" parent="Damage/Stomp" index="0"]
@@ -947,15 +945,12 @@ position = Vector2( 0, 15 )
 shape = SubResource( 2 )
 disabled = true
 
-[node name="Attack" parent="Damage" index="2"]
-visible = false
-
 [node name="CollisionShape2D" parent="Damage/Attack" index="0"]
-position = Vector2( 0, -20 )
+position = Vector2( 0, -18.5 )
 shape = SubResource( 16 )
 
 [node name="Squished" type="CollisionShape2D" parent="Damage/Attack" index="1"]
-position = Vector2( 0, -13.25 )
+position = Vector2( 0, -11.25 )
 shape = SubResource( 1 )
 disabled = true
 

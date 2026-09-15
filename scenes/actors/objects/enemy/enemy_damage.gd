@@ -136,7 +136,11 @@ func bounce_player(character: Character) -> void:
 		BounceType.NORMAL:
 			if character.state != character.get_state_node("DiveState"):
 				character.set_state_by_name("BounceState", 0)
-			character.velocity.y = -bounce_power
+			
+			if character.inputs[character.input_names.jump][0]:
+				character.velocity.y = -big_bounce_power
+			else:
+				character.velocity.y = -bounce_power
 		
 		BounceType.SPRING:
 			var top_y: float = global_position.y - (enemy.enemy_size.y * enemy.scale.y) - character.foot_offset
