@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/aquatic_race.ogg-3ed99abaf716d426248b0b8fab098809.oggstr"
+
+[deps]
+
+source_file="res://assets/music/aquatic_race.ogg"
+dest_files=[ "res://.import/aquatic_race.ogg-3ed99abaf716d426248b0b8fab098809.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=2.987
