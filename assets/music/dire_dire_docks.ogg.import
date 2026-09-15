@@ -12,4 +12,4 @@ dest_files=[ "res://.import/dire_dire_docks.ogg-e15b825d64bb2ce41cdc713591a092e9
 [params]
 
 loop=true
-loop_offset=0.95
+loop_offset=36.409
