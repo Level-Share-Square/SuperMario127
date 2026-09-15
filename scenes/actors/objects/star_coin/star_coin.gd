@@ -48,6 +48,11 @@ func _ready() -> void:
 		set_property("uuid", data.star_coin_uuid, true)
 	else:
 		data = CurrentLevelData.level_metadata.collectible_data.get_star_coin_by_uuid(uuid)
+	
+	if not data: #This happens if you duplicate an area and delete the star coins
+		data = CurrentLevelData.level_metadata.collectible_data.add_star_coin()
+		set_property("uuid", data.star_coin_uuid, true)
+
 	set_property("hint", data.star_coin_hint, true)
 	set_property("color", data.star_coin_color, true)
 		
