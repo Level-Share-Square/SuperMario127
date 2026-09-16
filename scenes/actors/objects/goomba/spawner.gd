@@ -13,7 +13,6 @@ func get_enemy_properties() -> Array:
 
 
 func _ready():
-	._ready()
 	connect("property_changed", self, "update_property")
 	update_property("rainbow", rainbow)
 
