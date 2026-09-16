@@ -1710,7 +1710,7 @@ shader = ExtResource( 86 )
 shader_param/ray_count = 4
 shader_param/ray_distance = 0.4
 shader_param/ray_seperation_degrees = 22.0
-shader_param/rotation = 4.98103
+shader_param/rotation = 1.06947
 
 [sub_resource type="RectangleShape2D" id=85]
 extents = Vector2( 8, 18 )
@@ -2004,13 +2004,13 @@ opacity = Color( 0, 0, 0, 0.741176 )
 
 [node name="Fludd" type="AnimatedSprite" parent="Sprite"]
 frames = ExtResource( 48 )
-animation = "swimming"
+animation = "idleRight"
 script = ExtResource( 63 )
 
 [node name="Wings" type="AnimatedSprite" parent="Sprite"]
 visible = false
 frames = ExtResource( 65 )
-animation = "swimming"
+animation = "idleRight"
 script = ExtResource( 63 )
 __meta__ = {
 "_edit_lock_": true
@@ -2319,6 +2319,7 @@ fallback_water_pos_left_luigi = Vector2( 15, 0 )
 fallback_water_pos_right_luigi = Vector2( -15, -24 )
 head_position_left = Vector2( 5, -16 )
 head_position_right = Vector2( -5, -16 )
+head_luigi_offset = Vector2( 1, 1 )
 
 [node name="Powerups" type="Node" parent="."]
 
@@ -2668,7 +2669,7 @@ playing = true
 [node name="Recolorable" type="AnimatedSprite" parent="CollectedShine"]
 visible = false
 frames = ExtResource( 61 )
-frame = 1
+frame = 5
 script = ExtResource( 63 )
 
 [node name="ShineParticles" type="Particles2D" parent="CollectedShine"]

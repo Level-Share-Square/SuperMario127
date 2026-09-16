@@ -11,7 +11,7 @@ var cur_global_rotation: float = 0
 
 export var head_position_left: Vector2
 export var head_position_right: Vector2
-
+export var head_luigi_offset: Vector2
 
 export var boost_power := 1000
 export var depletion := 100
@@ -99,6 +99,8 @@ func _update(delta):
 		var dir: Vector2 = character.get_state_node("SwimmingState").last_move_vector
 		turbo_head.visible = true
 		turbo_head.position = head_position_left if character.sprite.flip_h else head_position_right
+		if character.character == 1:
+			turbo_head.position += head_luigi_offset * Vector2(-1 if character.sprite.flip_h else 1, 1)
 		cur_global_rotation = lerp_angle(cur_global_rotation, dir.angle(), delta * 24)
 		turbo_head.global_rotation = cur_global_rotation
 		character.turbo_particles.emitting = false
