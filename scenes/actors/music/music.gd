@@ -329,7 +329,7 @@ func check_loop(player: AudioStreamPlayer, loop_point_start: float, loop_point_e
 	if loop_point_start >= loop_point_end: loop_point_start = 0.0
 	var pos: float = get_precise_position(player)
 
-	if pos >= loop_point_end:
+	if pos >= loop_point_end or not player.playing:
 		var overshoot: float = pos - loop_point_end
 		var seg_len: float = loop_point_end - loop_point_start
 		if seg_len > 0.0:

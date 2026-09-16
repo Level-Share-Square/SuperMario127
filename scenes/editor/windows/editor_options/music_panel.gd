@@ -63,6 +63,7 @@ func save_song() -> String:
 		area.header.custom_music_author = song_author_line.text.strip_edges().strip_escapes()
 	else:
 		area.header.underwater_music = encoded_song
+		Singleton.Music.handle_custom_song(encoded_song, true)
 		
 	
 	return encoded_song
