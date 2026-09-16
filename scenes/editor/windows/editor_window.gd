@@ -114,6 +114,7 @@ func drag_window(event):
 	
 	if (event is InputEventMouseMotion) and (event.button_mask == BUTTON_LEFT):
 		rect_global_position = event.global_position - drag_position
+		rect_global_position.y = max(rect_global_position.y, 0)
 	
 	var window_rect := Rect2(rect_position, rect_size)
 	
