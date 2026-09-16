@@ -1,4 +1,4 @@
-[gd_scene load_steps=210 format=2]
+[gd_scene load_steps=212 format=2]
 
 [ext_resource path="res://scenes/actors/mario/animation_frames.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/actors/mario/states/Bounce.gd" type="Script" id=2]
@@ -91,6 +91,7 @@
 [ext_resource path="res://scenes/actors/mario/materials/palette_swap.tres" type="Material" id=89]
 [ext_resource path="res://assets/sounds/stamina_recharge.wav" type="AudioStream" id=90]
 [ext_resource path="res://assets/sounds/fludd/fludd_empty.wav" type="AudioStream" id=91]
+[ext_resource path="res://scenes/actors/mario/animations/swimming/attachments/mario/turbo_head.png" type="Texture" id=92]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 5.5, 4 )
@@ -544,6 +545,26 @@ damping = 100.0
 scale_curve = SubResource( 124 )
 color_ramp = SubResource( 123 )
 hue_variation = 1.0
+
+[sub_resource type="ParticlesMaterial" id=151]
+lifetime_randomness = 0.79
+emission_shape = 2
+emission_box_extents = Vector3( 2, 2, 2 )
+flag_disable_z = true
+direction = Vector3( -1, 0, 0 )
+spread = 75.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 1000.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = 1600.0
+damping = 100.0
+scale_random = 1.0
+scale_curve = SubResource( 122 )
+color_ramp = SubResource( 121 )
+hue_variation_random = 0.15
+anim_offset = 1.0
+anim_offset_random = 1.0
 
 [sub_resource type="RectangleShape2D" id=104]
 extents = Vector2( 4.5, 14.5 )
@@ -1689,7 +1710,7 @@ shader = ExtResource( 86 )
 shader_param/ray_count = 4
 shader_param/ray_distance = 0.4
 shader_param/ray_seperation_degrees = 22.0
-shader_param/rotation = 4.23479
+shader_param/rotation = 4.98103
 
 [sub_resource type="RectangleShape2D" id=85]
 extents = Vector2( 8, 18 )
@@ -1983,13 +2004,13 @@ opacity = Color( 0, 0, 0, 0.741176 )
 
 [node name="Fludd" type="AnimatedSprite" parent="Sprite"]
 frames = ExtResource( 48 )
-animation = "idleRight"
+animation = "swimming"
 script = ExtResource( 63 )
 
 [node name="Wings" type="AnimatedSprite" parent="Sprite"]
 visible = false
 frames = ExtResource( 65 )
-animation = "idleRight"
+animation = "swimming"
 script = ExtResource( 63 )
 __meta__ = {
 "_edit_lock_": true
@@ -2105,6 +2126,25 @@ texture = ExtResource( 30 )
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="TurboHead" type="Sprite" parent="Sprite"]
+unique_name_in_owner = true
+visible = false
+position = Vector2( -4, -16 )
+texture = ExtResource( 92 )
+offset = Vector2( -3, -0.5 )
+
+[node name="TurboWaterParticles" type="Particles2D" parent="Sprite/TurboHead"]
+material = SubResource( 8 )
+position = Vector2( -10, -0.5 )
+emitting = false
+amount = 256
+lifetime = 0.25
+fixed_fps = 60
+local_coords = false
+process_material = SubResource( 151 )
+texture = ExtResource( 66 )
+script = ExtResource( 68 )
 
 [node name="IsCrushedDetector" type="Area2D" parent="."]
 visible = false
@@ -2277,6 +2317,8 @@ fallback_water_pos_left = Vector2( 16, 0 )
 fallback_water_pos_right = Vector2( -16, -24 )
 fallback_water_pos_left_luigi = Vector2( 15, 0 )
 fallback_water_pos_right_luigi = Vector2( -15, -24 )
+head_position_left = Vector2( 5, -16 )
+head_position_right = Vector2( -5, -16 )
 
 [node name="Powerups" type="Node" parent="."]
 
@@ -2626,7 +2668,7 @@ playing = true
 [node name="Recolorable" type="AnimatedSprite" parent="CollectedShine"]
 visible = false
 frames = ExtResource( 61 )
-frame = 5
+frame = 1
 script = ExtResource( 63 )
 
 [node name="ShineParticles" type="Particles2D" parent="CollectedShine"]

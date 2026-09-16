@@ -21,6 +21,8 @@ var max_enter_fall_speed = 160
 var ground_pound_enter_speed = 350
 var old_gravity_scale = 1
 
+var last_move_vector: Vector2
+
 func _ready():
 	priority = 6
 	blacklisted_states = []
@@ -37,6 +39,8 @@ func _start_check(_delta):
 	return character.check_liquid(LiquidBase.LiquidType.Water) and !(character.powerup != null and character.powerup.id == "Metal")
 
 func _start(_delta):
+	last_move_vector = Vector2(character.facing_direction, 0)
+	
 	if character.anim_player.is_playing(): #fix for launch star causing swimming rotation to bug out.
 		if character.anim_player.current_animation == "triple_jump" or character.anim_player.current_animation == "triple_jump_right":
 			character.anim_player.stop(false)
@@ -71,6 +75,7 @@ func _start(_delta):
 
 func _update(delta):
 	if not character.gravity_scale == 0: character.gravity_scale = 0
+	
 	var move_vector = Vector2()
 	var sprite = character.sprite
 	
@@ -85,6 +90,9 @@ func _update(delta):
 		move_vector.y -= 1
 	if character.inputs[character.input_names.down][0]:
 		move_vector.y += 1
+	
+	if not move_vector == Vector2.ZERO:
+		last_move_vector = move_vector 
 	
 	if character.inputs[character.input_names.spin][1]:
 		character.sprite.scale = JUMP_SQUISH

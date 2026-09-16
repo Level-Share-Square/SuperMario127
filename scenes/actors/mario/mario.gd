@@ -32,6 +32,7 @@ onready var water_particles_2 : Particles2D = $Sprite/Particles2DBack
 onready var bubble_particles_left : Particles2D = $Sprite/BubblesLeft
 onready var bubble_particles_right : Particles2D = $Sprite/BubblesRight
 onready var turbo_particles : Particles2D = $Sprite/TurboParticles
+onready var turbo_water_particles : Particles2D = $Sprite/TurboHead/TurboWaterParticles
 onready var rocket_particles : Particles2D = $Sprite/RocketParticles
 onready var dust_land_particles : Particles2D = $Particles/DustLandParticles
 onready var dust_jump_particles : Particles2D = $Particles/DustJumpParticles
@@ -1142,6 +1143,7 @@ func _physics_process(delta: float) -> void:
 			
 		if nozzle.get_name() != "TurboNozzle":
 			turbo_particles.emitting = false
+			turbo_water_particles.emitting = false
 		
 		if nozzle.get_name() != "RocketNozzle":
 			rocket_particles.emitting = false
@@ -1186,6 +1188,7 @@ func _physics_process(delta: float) -> void:
 		water_sprite.visible = false
 		water_sprite_2.visible = false
 		turbo_particles.emitting = false
+		turbo_water_particles.emitting = false
 		rocket_particles.emitting = false
 	
 	death_fludd_sprite.visible = fludd_sprite.visible
