@@ -1307,7 +1307,6 @@ func kill(cause: String) -> void:
 				toggle_movement(false)
 				cutout_in = cutout_death
 				sprite.visible = false
-				death_sprite.z_index = 127
 				death_sprite.global_position = sprite.global_position
 				death_sprite.reset_physics_interpolation()
 				death_sprite.play_anim()
@@ -1320,7 +1319,6 @@ func kill(cause: String) -> void:
 				toggle_movement(false)
 				cutout_in = cutout_death
 				sprite.visible = false
-				death_sprite.z_index = 127
 				death_sprite.global_position = sprite.global_position
 				death_sprite.reset_physics_interpolation()
 				death_sprite.play_anim()
@@ -1343,7 +1341,6 @@ func kill(cause: String) -> void:
 				movable = false
 				cutout_in = cutout_death
 				sprite.visible = false
-				death_sprite.z_index = 127
 				death_sprite.global_position = sprite.global_position
 				death_sprite.reset_physics_interpolation()
 				death_sprite.play_anim()
@@ -1354,7 +1351,6 @@ func kill(cause: String) -> void:
 				toggle_movement(false)
 				cutout_in = cutout_death
 				sprite.visible = false
-				death_sprite.z_index = 127
 				death_sprite.global_position = sprite.global_position
 				death_sprite.reset_physics_interpolation()
 				
