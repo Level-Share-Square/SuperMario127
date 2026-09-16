@@ -14,7 +14,7 @@ unique_name_in_owner = true
 script = ExtResource( 5 )
 
 [node name="BackBufferCopy" type="BackBufferCopy" parent="ParallaxScroll"]
-z_index = -1
+z_index = 4096
 copy_mode = 2
 
 [node name="ObjectManager" type="Node2D" parent="ParallaxScroll"]
@@ -26,6 +26,7 @@ __meta__ = {
 
 [node name="TileMapManager" type="TileMap" parent="ParallaxScroll"]
 unique_name_in_owner = true
+z_index = -1
 tile_set = ExtResource( 4 )
 cell_size = Vector2( 32, 32 )
 cell_custom_transform = Transform2D( 32, 0, 0, 32, 0, 0 )

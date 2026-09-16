@@ -38,7 +38,6 @@ func create_object(object_data: ObjectData):
 	game_object.level_layer_ref = weakref(owner)
 	game_object.palette = object_data.metadata.palette
 	game_object.position = object_data.metadata.position
-	
 	return game_object
 
 func erase_object(game_object, free: bool = true) -> void:
@@ -53,4 +52,13 @@ func reorder_object(game_object, index: int) -> void:
 	
 	layer_data.object_data.erase(object_data)
 	layer_data.object_data.insert(index, object_data)
-	
+
+func get_absolute_z_index(target: Node2D) -> int:
+	var node = target;
+	var z_index = 0;
+	while node and node.is_class('Node2D'):
+		z_index += node.z_index;
+		if !node.z_as_relative:
+			break;
+		node = node.get_parent();
+	return z_index;

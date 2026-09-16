@@ -121,6 +121,7 @@ func remove_layer(uuid: String, remove_from_data: bool = false):
 			CurrentLevelData.current_area.layers[i].layer_metadata.order = i
 			get_layer_at(i)._update_modulate()
 			get_layer_at(i).order = i
+			get_layer_at(i).reverse_order = CurrentLevelData.current_area.layers.size() - i
 		
 func edit_layer(uuid: String, property: String, value):
 	var layer: LevelLayer = get_layer(uuid)

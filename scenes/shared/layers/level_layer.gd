@@ -3,7 +3,7 @@ extends Node2D
 
 var layer_data: LayerData
 
-const LAYER_Z_SPACING: int = 8 # amount of z indices the layer has on either side of it
+const LAYER_Z_SPACING: int = 16 # amount of z indices the layer has on either side of it
 const DEFAULT_BACKGROUND_COLOR: Color = Color(0.545098, 0.545098, 0.545098)
 
 
@@ -13,6 +13,7 @@ onready var object_manager: ObjectManager = $"%ObjectManager"
 var layer_tint: Color = Color.white
 var autoset_tint: bool = false
 var order: int = 0 setget set_order
+var reverse_order: int = 0 setget set_reverse_order
 # Empty means always active
 var activated_mission_ids: PoolStringArray = []
 # if set to -1, there is no minimum/maximum amount
@@ -37,8 +38,12 @@ func load_in(layer_data: LayerData):
 
 func set_order(s_order: int) -> void:
 	order = s_order
+	reverse_order = CurrentLevelData.current_area.layers.size() - order
 	_update_z_index()
 
+func set_reverse_order(s_order: int) -> void:
+	reverse_order = CurrentLevelData.current_area.layers.size() - order
+	_update_z_index()
 
 func set_layer_modulate(tint: Color, opacity: float) -> void:
 	layer_tint = Color(tint.r * tint.a, tint.g * tint.a, tint.b * tint.a, opacity)
@@ -46,7 +51,9 @@ func set_layer_modulate(tint: Color, opacity: float) -> void:
 
 
 func _update_z_index() -> void:
-	z_index = order * LAYER_Z_SPACING * 2
+	print("Order: ", order)
+	print("Reverse order: ", reverse_order)
+	z_index = 4096 - reverse_order * LAYER_Z_SPACING * 2
 
 func _update_modulate() -> void:
 	if autoset_tint:
