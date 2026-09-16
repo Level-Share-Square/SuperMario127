@@ -543,6 +543,8 @@ static func get_new_area_code(header: AreaHeader, old_area: AreaDataOld) -> Area
 		2: LayerData.new(LayerMetadata.new(0, Vector2.ZERO, false, Color.white, 3, false, "Foreground", false), TileData.new()),
 	}
 	
+	var water_front_layer := LayerData.new(LayerMetadata.new(0, Vector2.ZERO, false, Color.white, 4, true, "Front Liquids", false), TileData.new())
+	
 	var object_layer_map: Array = [3, 0, 1, 2]
 	
 	for chunk_key in old_area.tile_chunks:
@@ -582,7 +584,6 @@ static func get_new_area_code(header: AreaHeader, old_area: AreaDataOld) -> Area
 				old_area.objects.append(old_object)
 			elif old_object.properties[4] is int:
 				object_layer = 3
-				
 		if old_object.type_id == 29: # goomba
 			old_object.properties.resize(10)
 			var color = old_object.properties[4]
@@ -601,6 +602,13 @@ static func get_new_area_code(header: AreaHeader, old_area: AreaDataOld) -> Area
 				old_object.properties[12] = float(0)
 		if old_object.type_id == 113: # star door
 			old_object.properties.insert(11, "")
+		if (old_object.type_id == 72 ||
+			old_object.type_id == 75):
+				if old_object.properties[6] == true:
+					old_object.properties[6] = false
+					
+					if not 5 in layers: layers[5] = water_front_layer
+					object_layer = 5
 		
 		var property_dictionary: Dictionary = {}
 		for i in old_object.properties.size():

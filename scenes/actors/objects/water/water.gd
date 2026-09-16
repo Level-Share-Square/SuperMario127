@@ -74,7 +74,6 @@ func change_size():
 	
 	last_size = Vector2(width, height)
 	last_color = color
-	last_front = render_in_front
 
 func _physics_process(_delta):
 	if !moving: return
@@ -107,6 +106,5 @@ func _process(_delta):
 	if "\n" in tag:
 		tag = tag.replace("\n", "")
 	if (Vector2(width, height) != last_size ||
-			color != last_color ||
-			render_in_front != last_front):
+			color != last_color):
 		change_size()

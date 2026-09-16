@@ -99,7 +99,6 @@ func update():
 		waves.material.set_shader_param("offset", Vector2(position.x, 0))
 	else:
 		waves.visible = false
-	z_index = -1 if !render_in_front else 1024 #Same as layer BackBufferCopy z-index to prevent transparency issues
 
 	#update new stuff
 	liquid_body.rect_position.y = 0

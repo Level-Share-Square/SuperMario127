@@ -73,7 +73,7 @@ func load_layer(_layer_data: LayerData, _can_delete: bool) -> void:
 	show_hide.icon = eye_open if layer_metadata.layer_visible else eye_closed
 	
 	delete.disabled = can_delete
-	merge.disabled = layer_data.layer_metadata.order == shared.layers.size() - 1
+	merge.disabled = layer_data.layer_metadata.order == CurrentLevelData.current_area.layers.size() - 1
 
 func delete_layer() -> void:
 	var editor = layer_dropdown.editor

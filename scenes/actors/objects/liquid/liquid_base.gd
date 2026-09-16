@@ -58,7 +58,6 @@ func update_liquid_color(color : Color):
 
 func update():
 	update_liquid_color(color)
-	z_index = -1 if !render_in_front else 1024 #Same as BackBufferCopy z-index to prevent transparency issues
 
 
 func update_property(key: String, value):
