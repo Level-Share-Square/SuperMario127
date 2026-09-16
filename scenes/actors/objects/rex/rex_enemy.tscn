@@ -933,6 +933,9 @@ position = Vector2( 0, 15 )
 shape = SubResource( 2 )
 disabled = true
 
+[node name="Attack" parent="Damage" index="2"]
+collision_layer = 0
+
 [node name="CollisionShape2D" parent="Damage/Attack" index="0"]
 position = Vector2( 0, -18.5 )
 shape = SubResource( 16 )
@@ -1137,6 +1140,8 @@ max_pitch = 1.1
 unique_name_in_owner = true
 visible = false
 position = Vector2( -106, -13 )
+collision_layer = 0
+collision_mask = 2
 script = ExtResource( 5 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector" index="0"]
@@ -1150,6 +1155,8 @@ enabled = true
 unique_name_in_owner = true
 visible = false
 position = Vector2( 0, -13 )
+collision_layer = 0
+collision_mask = 2
 script = ExtResource( 25 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerForgetter" index="0"]

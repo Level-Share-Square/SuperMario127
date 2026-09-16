@@ -643,12 +643,17 @@ monitoring = true
 position = Vector2( 0, -13 )
 shape = SubResource( 57 )
 
+[node name="PlatformDetector" parent="." index="2"]
+visible = false
+
 [node name="CollisionShape2D" parent="PlatformDetector" index="0"]
 shape = SubResource( 52 )
 
 [node name="PlayerDetector" type="Area2D" parent="." index="3"]
 unique_name_in_owner = true
 position = Vector2( 0, -13 )
+collision_layer = 0
+collision_mask = 2
 script = ExtResource( 7 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector" index="0"]
@@ -660,7 +665,10 @@ enabled = true
 
 [node name="PlayerForgetter" type="Area2D" parent="." index="4"]
 unique_name_in_owner = true
+visible = false
 position = Vector2( 0, -13 )
+collision_layer = 0
+collision_mask = 2
 script = ExtResource( 26 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerForgetter" index="0"]
@@ -719,6 +727,7 @@ can_attack = false
 can_be_hurt = false
 
 [node name="Damage" parent="." index="7"]
+visible = false
 position = Vector2( 0, 1 )
 script = ExtResource( 6 )
 bounce_type = 1
@@ -738,6 +747,7 @@ shape = SubResource( 54 )
 
 [node name="Attack" parent="Damage" index="2"]
 z_index = 1
+collision_layer = 0
 
 [node name="CollisionShape2D" parent="Damage/Attack" index="0"]
 position = Vector2( 0, -10.5 )
@@ -758,7 +768,7 @@ visible = false
 self_modulate = Color( 1, 0.4, 0.333333, 1 )
 frames = ExtResource( 11 )
 animation = "idle"
-frame = 2
+frame = 5
 offset = Vector2( 0, -15 )
 script = ExtResource( 10 )
 

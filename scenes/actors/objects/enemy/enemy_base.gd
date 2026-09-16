@@ -136,7 +136,7 @@ func _physics_process(delta):
 
 
 func is_on_ground() -> bool:
-	return test_move(global_transform, Vector2(0, 0.5))
+	return is_on_floor()
 
 var prev_is_grounded := false
 

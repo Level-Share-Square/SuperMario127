@@ -6,7 +6,7 @@ func get_player() -> Character:
 	
 	if bodies.size() <= 0:
 		return null
-		
+
 	for body in bodies:
 		if body is Character:
 			var character: Character = body

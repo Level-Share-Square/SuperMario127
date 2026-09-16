@@ -7,7 +7,6 @@ onready var sight_ray: RayCast2D = get_node("SightRay")
 
 func get_player(use_sight_ray: bool = true) -> Character:
 	var bodies = get_overlapping_bodies()
-	
 	if bodies.size() <= 0:
 		sight_ray.enabled = false
 		return null
