@@ -78,7 +78,7 @@ func _activated_update(delta):
 		if character.get_input(2, true):
 			character.global_position.y -= 15
 
-	if character.check_liquid(LiquidBase.LiquidType.Water):
+	if is_instance_valid(character.state) and character.state.name == "SwimmingState":
 		var dir: Vector2 = character.get_state_node("SwimmingState").last_move_vector
 		var speed_limit = dir * SPEED_CAP
 		character.velocity = lerp(character.velocity, speed_limit, 0.05)
