@@ -55,6 +55,13 @@ func _ready():
 		items_favorited = CurrentLevelData.editor_data.fav_counts
 		selected_loadout = CurrentLevelData.editor_data.selected_loadout
 		
+		for i in range(loadouts.size()):
+			if loadouts[i].size() < 10:
+				loadouts[i] = EditorData.DEFAULT_ITEMS[i]
+				loadout_palettes[i] = PoolIntArray([0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+				fav_items[i] = Array([])
+				items_favorited[i] = 0
+	
 	last_selected_tile = [placeable_items.placeable_items["til_grass"], 0]
 	last_selected_object = [placeable_items.placeable_items["obj_coin"], 0]
 	
@@ -132,21 +139,28 @@ func _on_loadout_pressed(loadout_button):
 
 
 func new_favorite_selected(placeable_item: Resource, index: int):
-	var boxes: Array = bottom_row.get_children()
-	var item_name =  placeable_items.placeable_items.find_key(placeable_item)
-	
-	if index < fav_items[selected_loadout].size():
-		loadouts[selected_loadout].insert(items_favorited[selected_loadout] - 1, loadouts[selected_loadout].pop_at(fav_items[selected_loadout].find(item_name)))
-		bottom_row.move_child(boxes[index], items_favorited[selected_loadout] - 1)
-		fav_items[selected_loadout].erase(item_name)
-		items_favorited[selected_loadout] -= 1
-		refresh_loadout()
-		update_level_data()
+	var item_name = placeable_items.placeable_items.find_key(placeable_item)
+	if item_name == null:
 		return
 	
-	fav_items[selected_loadout].append(item_name)
-	loadouts[selected_loadout].remove(index)
-	loadouts[selected_loadout].insert(items_favorited[selected_loadout], item_name)
+	var current_loadout_favs: Array = fav_items[selected_loadout]
+	var current_loadout: Array = loadouts[selected_loadout]
+	var boxes: Array = bottom_row.get_children()
+	
+	if index < current_loadout_favs.size():
+		var fav_index = current_loadout_favs.find(item_name)
+		if fav_index != -1:
+			current_loadout.insert(items_favorited[selected_loadout] - 1, current_loadout.pop_at(fav_index))
+			bottom_row.move_child(boxes[index], items_favorited[selected_loadout] - 1)
+			current_loadout_favs.erase(item_name)
+			items_favorited[selected_loadout] -= 1
+			refresh_loadout()
+			update_level_data()
+		return
+	
+	current_loadout_favs.append(item_name)
+	current_loadout.remove(index)
+	current_loadout.insert(items_favorited[selected_loadout], item_name)
 	bottom_row.move_child(boxes[index], items_favorited[selected_loadout])
 	items_favorited[selected_loadout] += 1
 	refresh_loadout()
