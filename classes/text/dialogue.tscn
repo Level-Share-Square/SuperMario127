@@ -52,7 +52,7 @@ anims/bobbin = SubResource( 3 )
 
 [node name="Indicator" type="Node2D" parent="."]
 position = Vector2( -65.625, -74 )
-z_index = 99
+z_index = 4096
 z_as_relative = false
 
 [node name="ExclamationMark" type="TextureRect" parent="Indicator"]
