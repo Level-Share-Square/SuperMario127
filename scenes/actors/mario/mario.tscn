@@ -1,4 +1,4 @@
-[gd_scene load_steps=208 format=2]
+[gd_scene load_steps=212 format=2]
 
 [ext_resource path="res://scenes/actors/mario/animation_frames.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/actors/mario/states/Bounce.gd" type="Script" id=2]
@@ -25,6 +25,7 @@
 [ext_resource path="res://scenes/actors/mario/nozzles/hover_frames.tres" type="SpriteFrames" id=23]
 [ext_resource path="res://scenes/actors/mario/nozzles/water_frames.tres" type="SpriteFrames" id=24]
 [ext_resource path="res://assets/sounds/fludd/fludd_water.wav" type="AudioStream" id=25]
+[ext_resource path="res://scenes/actors/mario/nozzles/hover_frames_luigi.tres" type="SpriteFrames" id=26]
 [ext_resource path="res://assets/sounds/fludd/switch.wav" type="AudioStream" id=27]
 [ext_resource path="res://scenes/actors/mario/states/SlideStop.gd" type="Script" id=28]
 [ext_resource path="res://scenes/actors/mario/states/Backflip.gd" type="Script" id=29]
@@ -41,8 +42,11 @@
 [ext_resource path="res://scenes/actors/mario/states/RainbowStarWindup.gd" type="Script" id=40]
 [ext_resource path="res://scenes/actors/mario/particles/sparkles.png" type="Texture" id=41]
 [ext_resource path="res://assets/sounds/fludd/fludd_charge.wav" type="AudioStream" id=42]
+[ext_resource path="res://scenes/actors/mario/nozzles/rocket_frames_luigi.tres" type="SpriteFrames" id=43]
+[ext_resource path="res://scenes/actors/mario/nozzles/rocket_frames.tres" type="SpriteFrames" id=44]
 [ext_resource path="res://scenes/actors/mario/nozzles/Rocket.gd" type="Script" id=45]
 [ext_resource path="res://scenes/actors/mario/nozzles/Turbo.gd" type="Script" id=46]
+[ext_resource path="res://scenes/actors/mario/nozzles/turbo_frames_luigi.tres" type="SpriteFrames" id=47]
 [ext_resource path="res://scenes/actors/mario/nozzles/turbo_frames.tres" type="SpriteFrames" id=48]
 [ext_resource path="res://scenes/actors/mario/materials/vanish_powerup.tres" type="Material" id=49]
 [ext_resource path="res://scenes/actors/mario/powerups/Vanish.gd" type="Script" id=50]
@@ -1706,7 +1710,7 @@ shader = ExtResource( 86 )
 shader_param/ray_count = 4
 shader_param/ray_distance = 0.4
 shader_param/ray_seperation_degrees = 22.0
-shader_param/rotation = 0.0991264
+shader_param/rotation = 4.98103
 
 [sub_resource type="RectangleShape2D" id=85]
 extents = Vector2( 8, 18 )
@@ -2000,13 +2004,13 @@ opacity = Color( 0, 0, 0, 0.741176 )
 
 [node name="Fludd" type="AnimatedSprite" parent="Sprite"]
 frames = ExtResource( 48 )
-animation = "idleRight"
+animation = "swimming"
 script = ExtResource( 63 )
 
 [node name="Wings" type="AnimatedSprite" parent="Sprite"]
 visible = false
 frames = ExtResource( 65 )
-animation = "idleRight"
+animation = "swimming"
 script = ExtResource( 63 )
 __meta__ = {
 "_edit_lock_": true
@@ -2273,12 +2277,48 @@ priority = 1
 
 [node name="HoverNozzle" type="Node" parent="Nozzles"]
 script = ExtResource( 22 )
+frames = ExtResource( 23 )
+frames_luigi = ExtResource( 26 )
+animation_water_positions = {
+"diveLeft": Vector2( -6, -12 ),
+"diveRight": Vector2( -18, -11 ),
+"fallLeft": Vector2( -3, -4 ),
+"fallRight": Vector2( -22, -4 ),
+"jumpLeft": Vector2( -3, -4 ),
+"jumpRight": Vector2( -22, -4 )
+}
+fallback_water_pos_left = Vector2( -5, -2 )
+fallback_water_pos_right = Vector2( -20, -2 )
+animation_water_positions_luigi = {
+"diveLeft": Vector2( -9, -11 ),
+"diveRight": Vector2( -17, -6 ),
+"fallLeft": Vector2( -7, -5 ),
+"fallRight": Vector2( -19, -5 ),
+"jumpLeft": Vector2( -4, -6 ),
+"jumpRight": Vector2( -21, -6 )
+}
+fallback_water_pos_left_luigi = Vector2( -5, -2 )
+fallback_water_pos_right_luigi = Vector2( -19, -2 )
 
 [node name="RocketNozzle" type="Node" parent="Nozzles"]
 script = ExtResource( 45 )
+frames = ExtResource( 44 )
+frames_luigi = ExtResource( 43 )
+fallback_water_pos_left = Vector2( -5, -2 )
+fallback_water_pos_right = Vector2( -20, -2 )
+fallback_water_pos_left_luigi = Vector2( -5, -2 )
+fallback_water_pos_right_luigi = Vector2( -19, -2 )
 
 [node name="TurboNozzle" type="Node" parent="Nozzles"]
 script = ExtResource( 46 )
+frames = ExtResource( 48 )
+frames_luigi = ExtResource( 47 )
+fallback_water_pos_left = Vector2( 16, 0 )
+fallback_water_pos_right = Vector2( -16, -24 )
+fallback_water_pos_left_luigi = Vector2( 15, 0 )
+fallback_water_pos_right_luigi = Vector2( -15, -24 )
+head_position_left = Vector2( 5, -16 )
+head_position_right = Vector2( -5, -16 )
 
 [node name="Powerups" type="Node" parent="."]
 
@@ -2628,7 +2668,7 @@ playing = true
 [node name="Recolorable" type="AnimatedSprite" parent="CollectedShine"]
 visible = false
 frames = ExtResource( 61 )
-frame = 5
+frame = 1
 script = ExtResource( 63 )
 
 [node name="ShineParticles" type="Particles2D" parent="CollectedShine"]
