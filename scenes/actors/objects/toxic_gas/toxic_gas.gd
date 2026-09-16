@@ -28,8 +28,7 @@ func update():
 		liquid_body.rect_size = size
 
 	update_liquid_color(color)
-	z_index = -1 if !render_in_front else 1024 #Same as BackBufferCopy z-index to prevent transparency issues
-	
+
 	#update new stuff
 	waves.material.set_shader_param("position", global_position)
 	waves.material.set_shader_param("size", waves.rect_size)

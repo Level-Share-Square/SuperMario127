@@ -83,12 +83,10 @@ func change_size():
 		desat_color.s /= 2
 		waves.self_modulate = desat_color
 	
-	z_index = -1 if !render_in_front else 25
 	#sprite.color = color
 	
 	last_size = Vector2(width, height)
 	last_color = color
-	last_front = render_in_front
 
 func _physics_process(delta):
 	if !moving: return
@@ -114,8 +112,7 @@ func _process(_delta):
 	if "\n" in tag:
 		tag = tag.replace("\n", "")
 	if (Vector2(width, height) != last_size ||
-			color != last_color ||
-			render_in_front != last_front):
+			color != last_color):
 		change_size()
 
 func is_middle(check):
