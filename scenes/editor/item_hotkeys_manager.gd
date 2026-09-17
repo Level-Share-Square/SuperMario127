@@ -10,7 +10,7 @@ var mouse_moved: bool = false
 
 func rotate_object():
 	var hovered_objects: Dictionary = editor.get_hovered_objects()
-	if !(editor.get_hovered_objects() or editor.selected_objects): return
+	if !(hovered_objects or editor.selected_objects): return
 	
 	if editor.selected_objects:
 		object_selection.selection_tools.call_deferred("start_tool_hotkey", "rotate_object")
@@ -21,7 +21,7 @@ func rotate_object():
 
 func scale_object():
 	var hovered_objects: Dictionary = editor.get_hovered_objects()
-	if !(editor.get_hovered_objects() or editor.selected_objects): return
+	if !(hovered_objects or editor.selected_objects): return
 	
 	if editor.selected_objects:
 		object_selection.selection_tools.call_deferred("start_tool_hotkey", "scale_object")
@@ -71,7 +71,7 @@ func setup_disabled_objects(objects) -> Dictionary:
 
 func mirror_h():
 	var hovered_objects: Dictionary = editor.get_hovered_objects()
-	if !(editor.get_hovered_objects() or editor.selected_objects): return
+	if !(hovered_objects or editor.selected_objects): return
 	
 	if editor.selected_objects:
 		flip_objects(Vector2(-1, 1), editor.selected_objects)
@@ -81,7 +81,7 @@ func mirror_h():
 
 func mirror_v():
 	var hovered_objects: Dictionary = editor.get_hovered_objects()
-	if !(editor.get_hovered_objects() or editor.selected_objects): return
+	if !(hovered_objects or editor.selected_objects): return
 	
 	if editor.selected_objects:
 		flip_objects(Vector2(1, -1), editor.selected_objects)
@@ -91,7 +91,7 @@ func mirror_v():
 
 func disable_object():
 	var hovered_objects: Dictionary = editor.get_hovered_objects()
-	if !(editor.get_hovered_objects() or editor.selected_objects): return
+	if !(hovered_objects or editor.selected_objects): return
 	
 	if editor.selected_objects:
 		disable_objects(editor.selected_objects)

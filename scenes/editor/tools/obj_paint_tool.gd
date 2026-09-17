@@ -25,12 +25,10 @@ func _click_right(_event: InputEvent, world_pos: Vector2) -> void:
 
 
 func _click(world_pos: Vector2) -> void:
-	editor.get_hovered_objects()
-	
 	if not is_erasing:
 		place_object(world_pos)
 	else:
-		for object in editor.hovered_objects.values():
+		for object in editor.get_hovered_objects().values():
 			erase_object(object)
 
 

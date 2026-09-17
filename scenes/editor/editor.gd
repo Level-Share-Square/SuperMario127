@@ -17,7 +17,7 @@ var path_tool_active = false
 
 var layer: String = ""
 
-var hovered_objects: Dictionary = {}
+var item_preview_hovered_objects: Dictionary = {}
 var selected_objects: Array = []
 var selected_tiles: Dictionary = {}
 var selected_item: PlaceableItem
@@ -96,14 +96,22 @@ func switch_scenes():
 func get_shared_node() -> LevelShared:
 	return get_node(shared_path) as LevelShared
 	
+func _input(event):
+	if event is InputEventMouseMotion: get_hovered_objects()
+	
 func get_hovered_objects():
-	hovered_objects.clear()
+	item_preview_hovered_objects.clear()
+	var hovered_objects: Dictionary = {}
 	var check_layer = get_shared_node().get_layer(layer)
 	if not is_instance_valid(check_layer): return
+
+	var screen_rect := Rect2(Vector2.ZERO, get_viewport_rect().size)
 	
-	for object in check_layer.object_manager.get_children():
-		if object.is_object_hovered():
+	for index in range(check_layer.object_manager.get_child_count()):
+		var object = check_layer.object_manager.get_child(index)
+		if screen_rect.has_point(object.get_global_transform_with_canvas().origin) and object.is_object_hovered():
 			hovered_objects.get_or_add(object.name, object)
+	item_preview_hovered_objects = hovered_objects
 	return hovered_objects
 
 
