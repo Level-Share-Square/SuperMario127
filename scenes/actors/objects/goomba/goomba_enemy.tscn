@@ -747,7 +747,6 @@ shape = SubResource( 54 )
 
 [node name="Attack" parent="Damage" index="2"]
 z_index = 1
-collision_layer = 0
 
 [node name="CollisionShape2D" parent="Damage/Attack" index="0"]
 position = Vector2( 0, -10.5 )
@@ -768,7 +767,7 @@ visible = false
 self_modulate = Color( 1, 0.4, 0.333333, 1 )
 frames = ExtResource( 11 )
 animation = "idle"
-frame = 5
+frame = 4
 offset = Vector2( 0, -15 )
 script = ExtResource( 10 )
 

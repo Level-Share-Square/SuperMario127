@@ -205,7 +205,7 @@ func attack_body_entered(body) -> void:
 
 func attack_area_entered(area):
 	if not enemy.enabled: return
-	print(area.owner)
+
 	if area.has_method("is_hurt_area"):
 		if not is_instance_valid(enemy.state) or enemy.state.can_be_hurt:
 			spin_attacked(area.get_character())
