@@ -63,6 +63,7 @@ func set_camera():
 		mario.camera.auto_move = true
 		
 func set_state(to:int):
+	mario.get_state_node("LaunchStarState").fast_cam_follow = false
 	match(to):
 		states.IDLE:
 			pathfollow.offset = 100
@@ -96,6 +97,8 @@ func set_state(to:int):
 			state = states.WINDUP
 			return
 		states.LAUNCH:
+			mario.get_state_node("LaunchStarState").fast_cam_follow = true
+			
 			animation_player.play("launch")
 			audio_player.stop()
 			audio_player.stream = launch_noise

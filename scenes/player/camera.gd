@@ -128,11 +128,12 @@ func _physics_process(delta):
 				if is_instance_valid(character_node.state) and character_node.state.fast_cam_follow:
 					var target_pos: Vector2 = character_node.global_position
 					var movement: Vector2 = character_node.global_position - last_char_pos
-					target_pos += movement * 25
+					target_pos += movement * 12.5
 					global_position = global_position.linear_interpolate(target_pos, delta * FAST_FOLLOW_SPEED)
 					y_baseline = global_position.y
 					cur_baseline = global_position.y
 					y_offset = 0
+					prints(movement, "|", character_node.global_position, "|", global_position)
 				else:
 					var char_pos: Vector2 = character_node.global_position
 					var char_vel: Vector2 = character_node.velocity

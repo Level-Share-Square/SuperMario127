@@ -16,7 +16,7 @@ func _ready():
 	use_dive_collision = true
 	auto_flip = true
 	force_cam_follow_y = true
-	fast_cam_follow = true
+	fast_cam_follow = false
 	attack_tier = 2
 
 func _start_check(_delta):
