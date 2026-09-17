@@ -354,7 +354,6 @@ func _ready():
 	heal_timer.connect("timeout", self, "_on_heal_timer_timeout")
 	heal_tick_timer.connect("timeout", self, "_on_heal_tick_timer_timeout")
 	ground_collider_enable_timer.connect("timeout", self, "_on_ground_collder_timer_timeout")
-#	print(CurrentLevelData.vars.transition_data)
 	hide()
 	toggle_movement(false)
 	Singleton.Music.toggle_underwater_music(false)
@@ -679,7 +678,6 @@ func set_state_by_name(name: String, delta: float = 0.0001, called_from: State =
 func add_nozzle(new_nozzle: String) -> void:
 	if !new_nozzle in CurrentLevelData.vars.nozzles_collected:
 		CurrentLevelData.vars.nozzles_collected.append(new_nozzle)
-	print(CurrentLevelData.vars.nozzles_collected)
 
 func get_nozzle_node(name: String) -> Node:
 	if nozzles_node.has_node(name):
@@ -1122,8 +1120,6 @@ func _physics_process(delta: float) -> void:
 		set_nozzle(new_nozzle, false)
 		
 		nozzle_switch_sound.play()
-	elif inputs[8][1]:
-		print(CurrentLevelData.vars.nozzles_collected)
 	
 	# Handle nozzle
 	if is_instance_valid(nozzle):
@@ -1256,7 +1252,6 @@ func _physics_process(delta: float) -> void:
 	if Singleton.PlayerSettings.other_player_id != -1:
 		if player_id == Singleton.PlayerSettings.my_player_index and is_network_master():
 			rpc_unreliable("sync", position, velocity, sprite.frame, sprite.animation, sprite.rotation_degrees, attacking, big_attack, heavy, dead, controllable)
-			#print("hi")
 
 	
 

@@ -69,4 +69,3 @@ func _init(data: Dictionary):
 	shine_count = fetch(data, "shineCount", -1)
 	star_coin_count = fetch(data, "starCoinCount", -1)
 #	data.erase("code")
-#	print(data)

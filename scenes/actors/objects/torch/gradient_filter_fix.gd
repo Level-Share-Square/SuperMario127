@@ -22,4 +22,3 @@ func fix_flags(tex: Texture):
 	yield(get_tree(),"idle_frame")
 	tex.flags = aux_flags
 	
-#	print(tex.flags)

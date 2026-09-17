@@ -27,7 +27,6 @@ func _draw() -> void:
 
 func set_tiles():
 	for pos in tile_data.used_tiles:
-		print(pos)
 		var tile = tile_data.get_tile_data_from_packed(tile_data.get_packed_tile_at(pos))
 		if is_air(tile):
 			continue

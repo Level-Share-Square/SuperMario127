@@ -43,7 +43,6 @@ func _physics_process(_delta):
 func collect(body):
 	if is_enabled_and_on_ground() and body.name.begins_with("Character") and !body.dead:
 		CurrentLevelData.vars.collect_local_key(id)
-		#print(CurrentLevelData.vars.local_keys_collected)
 		character = body
 		collected = true
 		collect_sound.play()

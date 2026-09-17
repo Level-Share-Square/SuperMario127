@@ -99,7 +99,6 @@ func update_level_data():
 	for buttons in bottom_row.get_children():
 		loadout_palette.append(buttons.palette)
 	loadout_palettes[selected_loadout] = loadout_palette
-#	print(loadout_palettes[selected_loadout])
 	CurrentLevelData.editor_data.palettes = loadout_palettes
 	CurrentLevelData.editor_data.fav_items = fav_items
 	CurrentLevelData.editor_data.fav_counts = items_favorited
@@ -111,7 +110,6 @@ func check_items():
 		if item_button.item == editor.selected_item:
 			item_button.pressed = true
 		item_button.palette = loadout_palettes[selected_loadout][item_button.get_index()]
-#		print(item_button.get_index())
 		item_button.icon_node.texture = item_button.item.icons[item_button.palette]
 	
 	return

@@ -28,8 +28,6 @@ func _ready():
 	for item_button in button_container.get_children():
 		item_button.connect("pressed", self, "_on_item_button_pressed", [item_button])
 		item_button.item = placeable_items.placeable_items[loadouts[selected_loadout][item_button.get_index()]]
-#func _process(delta):
-#	print(editor)
 
 func item_selected(placeable_item: Resource):
 	bottom_row.move_child(bottom_row.get_children()[6], 0)
@@ -40,7 +38,6 @@ func _on_item_button_pressed(item_button):
 	var item_name: String = loadouts[selected_loadout][item_button.get_index()]
 	var associated_item = placeable_items.placeable_items[loadouts[selected_loadout][item_button.get_index()]]
 	editor.selected_item = associated_item
-#	print(editor.selected_item)
 	match item_name.substr(0, 3):
 		"obj":
 			editor.tool_manager.change_tool("ObjectPaint")

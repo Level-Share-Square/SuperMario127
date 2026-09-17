@@ -99,8 +99,6 @@ func _physics_process(delta):
 	if is_instance_valid(state) and "gravity_multiplier" in state:
 		var first_value = state
 		state._update(delta)
-		if state == null:
-			print(first_value)
 		gravity_multiplier *= state.gravity_multiplier
 	
 	# gravity and floating in liquids

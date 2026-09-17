@@ -39,8 +39,6 @@ func update_item(item, palette, is_obj):
 	offset = texture.get_size()/2
 	preview_offset = Vector2.ZERO
 	if item is PlaceableObject:
-		print(item.item_name)
-		print(item.preview_offset)
 		preview_offset = item.preview_offset
 
 

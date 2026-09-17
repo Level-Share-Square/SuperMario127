@@ -46,7 +46,6 @@ func _physics_process(delta):
 		rect_scale = lerp(rect_scale, Vector2(0.8, 0.8), delta * transition_speed)
 		modulate = lerp(modulate, Color(1, 1, 1, 0), delta * transition_speed)
 	else:
-		#print(is_instance_valid(character))
 		if is_instance_valid(character) and character.inputs[Character.input_names.interact][1] and !sign_obj.tween.is_active():
 			close()
 		rect_position = lerp(rect_position, normal_pos, delta * transition_speed)

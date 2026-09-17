@@ -30,7 +30,6 @@ func _gui_input(event):
 		var center_position: Vector2 = rect_size / 2
 		
 		if event.pressed:
-			prints((rect_size.x / 2) - margin_left)
 			if not pressed:
 				start_finger = event.index
 				pressed = true
@@ -94,12 +93,10 @@ func _physics_process(delta: float):
 		for action in x_actions:
 			commit_action(action[input_dir.x + 1], true)
 			commit_action(action[last_input_dir.x + 1], false)
-		#print("x input change: ", input_dir.x)
 	
 	if input_dir.y != last_input_dir.y:
 		for action in y_actions:
 			commit_action(action[input_dir.y + 1], true)
 			commit_action(action[last_input_dir.y + 1], false)
-		#print("y input change: ", input_dir.y)
 	
 	last_input_dir = input_dir

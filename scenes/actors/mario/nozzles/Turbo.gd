@@ -37,7 +37,6 @@ func is_state(state):
 	return character.state == character.get_state_node(state)
 	
 func _activated_update(delta):
-#	print(character.velocity)
 	character.turbo_particles.process_material.initial_velocity = 1000 - abs(character.velocity.x)
 	var direction_vector: Vector2
 	direction_vector.x = int(character.inputs[character.input_names.right][0]) - int(character.inputs[character.input_names.left][0])

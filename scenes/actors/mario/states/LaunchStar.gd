@@ -22,7 +22,6 @@ func _start_check(_delta):
 	pass
 
 func _start(_delta):
-	#print("starting")
 	old_gravity_scale = character.gravity_scale
 	character.gravity_scale = 0
 	character.sprite.animation = "spinning"
@@ -30,8 +29,6 @@ func _start(_delta):
 	character.camera.set_zoom_tween(Vector2(1.5, 1.5), 1)
 	
 func _stop(_delta):
-	#print("stopping")
-	
 	character.gravity_scale = old_gravity_scale
 	character.camera.set_zoom_tween(Vector2(1, 1), 1)
 	character.camera.auto_move = true

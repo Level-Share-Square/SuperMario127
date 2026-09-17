@@ -34,7 +34,6 @@ func _start(_delta):
 		character.sound_player.set_skid_playing(true)
 	else:
 		character.sound_player.play_duck_sound()
-	#print(character.ground_check.get_collision_normal())
 
 func _update(_delta):
 	var sprite = character.sprite

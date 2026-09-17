@@ -33,7 +33,6 @@ static func fast_is_valid(value: String) -> bool:
 
 const empty_tile := [0,0,0]
 static func encode(tiles, size):
-	#print(settings.bounds)
 	var new_data = []
 	var last_index = -1
 	var last_palette = 0
@@ -62,7 +61,6 @@ static func encode(tiles, size):
 	prepend_string = "" if last_palette == 0 else str(last_palette) + ":"
 	append_string = "" if count == 1 else ("*" + str(count))
 	new_data.append(prepend_string + str(last_index).pad_zeros(3) + append_string)
-	#print(new_data)
 	return new_data
 
 static func generate_from_chunks(tile_chunks: Dictionary, layers: Array, bounds: Rect2):
@@ -291,11 +289,6 @@ static func decode(code: String)-> Dictionary:
 						decoded_object.properties.append(old_value_util.decode_value(value))
 					index += 1
 				full_result.areas[area_id].objects.append(decoded_object)
-				
-				if decoded_object.properties.size() < 5:
-					print(decoded_object)
-	
-#	print(full_result)
 	
 	return full_result
 

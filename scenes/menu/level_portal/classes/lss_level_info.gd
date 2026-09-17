@@ -35,7 +35,6 @@ func fetch(dictionary: Dictionary, key: String, default = ""):
 
 func _init(data: Dictionary, acc_id: String = ""):
 	account_id = acc_id
-	print(data)
 	level_id = fetch(data, "_id")
 	level_name = fetch(data, "name")
 	level_version = fetch(data, "gameVersion")

@@ -383,7 +383,6 @@ static func pad_timevalue(timevalue : int) -> String:
 
 # LevelInfo dictionary loading functions for different versions start here
 func load_save_0_0_1(save_dictionary : Dictionary):
-	#print("01")
 	#level_code = save_dictionary["level_code"]
 	#level_name = save_dictionary["level_name"]
 

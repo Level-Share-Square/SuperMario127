@@ -126,7 +126,6 @@ func character_animation_finished(_animation : String, character : Character) ->
 	emit_signal("start_door_logic", character, entering, get_parent().force_fadeout)
 	
 func animate_door(is_backwards: bool = false) -> void:
-	#print(get_parent().palette_dict[get_parent().palette] + "_" + get_parent().collectible + animation)
 	# this function just plays the door animation, so code doesn't have to repeat
 	icon.play(
 		get_parent().palette_dict[get_parent().palette] + "_" + get_parent().collectible,

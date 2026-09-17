@@ -23,7 +23,6 @@ func load_property(_editor: Editor, init_value, _property: Array, property_name 
 	color_manager.update_nodes()
 	color_manager.read_intensity()
 	
-	print(window)
 	if is_instance_valid(window):
 		window.connect("window_closed", expand_button, "collapse")
 
