@@ -70,7 +70,7 @@ func show_selection_box():
 func _unhandled_input(event):
 	if editor.tool_manager.current_tool == self:
 		if selection_tools.active_tool == null:
-			if event is InputEventMouseButton and event.pressed and event.button_index == BUTTON_LEFT and editor.hovered_objects.empty():
+			if event is InputEventMouseButton and event.pressed and event.button_index == BUTTON_LEFT and editor.get_hovered_objects().empty():
 				pivot_toggle.pressed = false
 				pivot.hide()
 				pivot_position = Vector2.ZERO

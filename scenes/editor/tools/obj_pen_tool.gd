@@ -27,13 +27,13 @@ func _click_right(_event: InputEvent, world_pos: Vector2) -> void:
 
 
 func _click(world_pos: Vector2) -> void:
-	editor.get_hovered_objects()
+	var hovered_objects: Dictionary = editor.get_hovered_objects()
 	
 	if not is_erasing:
-		if editor.selected_objects.empty() && editor.hovered_objects.empty():
+		if editor.selected_objects.empty() && hovered_objects.empty():
 			place_object(world_pos)
-		elif !editor.hovered_objects.empty():
-			var closest_object = objects_util.find_closest_object(editor.hovered_objects.values(), get_mouse_pos())
+		elif !hovered_objects.empty():
+			var closest_object = objects_util.find_closest_object(hovered_objects.values(), get_mouse_pos())
 			
 			if !Input.is_action_pressed("shift_modifier"): hovered_object = closest_object
 			else: 
@@ -48,7 +48,7 @@ func _click(world_pos: Vector2) -> void:
 			emit_signal("objects_selected", [])
 			pass
 	else:
-		for object in editor.hovered_objects.values():
+		for object in hovered_objects.values():
 			erase_object(object)
 			
 func _mouse_movement(event, mouse_pos):
@@ -61,6 +61,8 @@ func _process(delta):
 		hovered_object.global_position = get_node("%ParallaxScroll").get_transform().xform((get_mouse_pos() + pos_offset).snapped(CurrentLevelData.editor_data.pixel_snap)) if editor.pixel_lock else get_node("%ParallaxScroll").get_transform().xform((get_mouse_pos() + pos_offset))
 			
 func _click_left_released(event, mouse_pos):
+	var hovered_objects: Dictionary = editor.get_hovered_objects()
+	
 	if hovered_object:
 		
 		if is_dragging:
@@ -71,7 +73,7 @@ func _click_left_released(event, mouse_pos):
 			
 		else:
 			if not Input.is_action_pressed("ctrl_modifier"):
-				if !editor.hovered_objects.empty() && !editor.selected_objects.empty() && hovered_object in editor.selected_objects:
+				if !hovered_objects.empty() && !editor.selected_objects.empty() && hovered_object in editor.selected_objects:
 					editor.open_object_properties(editor.selected_objects)
 				emit_signal("objects_selected", [hovered_object])
 			else:
