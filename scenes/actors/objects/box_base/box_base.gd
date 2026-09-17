@@ -136,9 +136,9 @@ func try_break() -> void:
 	var hit_flag: int = 0
 	var hit_rect: Rect2
 	var compare_hit_rect: Rect2
-	var box_rect: Rect2 = rect_from_shape(box_collision)
 	
 	if is_instance_valid(character) and is_instance_valid(char_collider):
+		var box_rect: Rect2 = rect_from_shape(box_collision)
 		hit_rect = rect_from_shape(char_collider, true)
 		compare_hit_rect = rect_from_shape(char_dir_check_collider, true)
 		var hit_dir: int = get_rect_dir(last_hit_rect)
@@ -160,6 +160,7 @@ func try_break() -> void:
 	if broken: return
 	
 	for collider in misc_colliders:
+		var box_rect: Rect2 = rect_from_shape(box_collision)
 		if is_instance_valid(collider):
 			hit_rect = rect_from_shape(collider, true)
 			if hit_rect.intersects(box_rect):
