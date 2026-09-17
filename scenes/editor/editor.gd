@@ -96,9 +96,6 @@ func switch_scenes():
 func get_shared_node() -> LevelShared:
 	return get_node(shared_path) as LevelShared
 	
-func _input(event):
-	if event is InputEventMouseMotion: get_hovered_objects()
-	
 func get_hovered_objects():
 	item_preview_hovered_objects.clear()
 	var hovered_objects: Dictionary = {}
