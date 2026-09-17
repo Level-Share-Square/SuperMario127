@@ -220,10 +220,9 @@ func update_shape_size() -> void:
 		var max_zoom: float = min(level_total_bounds.x / (base_size.x*2), level_total_bounds.y / (base_size.y*2))
 		zoom.x = min(zoom.y, max_zoom)
 		zoom.y = min(zoom.y, max_zoom)
-	var new_size: Vector2 = base_size * zoom.y
 	
-	if not new_size.is_equal_approx(shape.shape.extents):
-		shape.shape.extents = new_size
+	if not zoom.is_equal_approx(area.scale):
+		area.scale = zoom
 	
 	size = base_size * zoom.y
 
