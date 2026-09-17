@@ -58,7 +58,7 @@ func _ready() -> void:
 			
 		else:
 			data = CurrentLevelData.level_metadata.collectible_data.get_star_coin_by_uuid(uuid)
-			EditorState.starcoin_uuids_in_use.append(data.star_coin_uuid)
+			if data: EditorState.starcoin_uuids_in_use.append(data.star_coin_uuid)
 			
 	if not data: #This happens if you duplicate an area and delete the star coins
 		data = CurrentLevelData.level_metadata.collectible_data.add_star_coin(uuid)
