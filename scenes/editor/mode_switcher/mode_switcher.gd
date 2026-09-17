@@ -185,6 +185,8 @@ func pressed(force: bool = false, play_sound: bool = false) -> void:
 	
 	switch()
 	
+	transition_rect.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	
 	transition_player.play("transition_out")
 	yield(transition_player, "animation_finished")
 	
@@ -194,7 +196,6 @@ func pressed(force: bool = false, play_sound: bool = false) -> void:
 		if not is_hovered:
 			animation_player.play_backwards("hover")
 	
-	transition_rect.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	is_switching = false
 	button.disabled = false
 

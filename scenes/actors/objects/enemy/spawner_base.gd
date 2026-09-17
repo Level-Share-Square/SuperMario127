@@ -69,10 +69,14 @@ func instance_enemy(emit_particles: bool = true) -> EnemyBase:
 	# handle being flipped
 	if scale.x < 0:
 		spawned_enemy.scale = Vector2.ONE
+		spawned_enemy.facing_direction = 1
+	else:
+		spawned_enemy.scale = Vector2.ONE
 		spawned_enemy.facing_direction = -1
 	# and rotation
 	if is_enabled_and_on_ground():
 		rotation = 0
+		scale = Vector2.ONE
 	# and layer trol
 	spawned_enemy.layer_ref = level_layer_ref
 	
