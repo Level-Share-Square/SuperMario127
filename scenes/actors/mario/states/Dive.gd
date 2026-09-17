@@ -33,10 +33,12 @@ func _start(_delta : float) -> void:
 	var sound_player : Node = character.sound_player # Sounds is apparently a node that gets added at runtime??
 	if dive_buffer > 0 and character.dive_cooldown == 0:
 		if character.character == 0:
-			character.velocity.x = character.velocity.x - (character.velocity.x - (dive_power.x * character.facing_direction)) / 5
+			if !character.in_quicksand:
+				character.velocity.x = character.velocity.x - (character.velocity.x - (dive_power.x * character.facing_direction)) / 5
 			character.velocity.y += dive_power.y
 		else:
-			character.velocity.x = character.velocity.x - (character.velocity.x - (dive_power_luigi.x * \
+			if !character.in_quicksand:
+				character.velocity.x = character.velocity.x - (character.velocity.x - (dive_power_luigi.x * \
 					character.facing_direction)) / 5
 			character.velocity.y += dive_power_luigi.y
 		

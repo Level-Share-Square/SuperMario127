@@ -154,6 +154,7 @@ export var jump_animation := 0
 export var direction_on_stick := 1
 export var rotating := true
 export var swimming := false
+export var in_quicksand := false
 export var spawn_pos := Vector2(0, 0)
 export var gravity : float 
 
@@ -891,6 +892,14 @@ func _physics_process(delta: float) -> void:
 		breath = clamp(breath + 1, 0, 100)
 		if player_id == 0 and Singleton.Music.play_water:
 			Singleton.Music.toggle_underwater_music(false)
+	if (prev_is_grounded or 
+	state is BackflipState or 
+	state is BounceState or 
+	state is LavaBoostState or 
+	state is RainbowStarState or 
+	state is SlideState or 
+	state is SwimmingState):
+		in_quicksand = false
 	
 	if dead: #ewwwwwwwwwwwww I don't like doing this but you give me no choice old devs with your shitty code
 		burn_particles.global_position = death_sprite.global_position

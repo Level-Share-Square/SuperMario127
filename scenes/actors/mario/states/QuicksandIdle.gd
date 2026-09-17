@@ -17,7 +17,7 @@ func _start_check(_delta):
 			return true
 
 func _start(_delta):
-	pass
+	character.in_quicksand = true
 
 func _update(delta):
 	character.velocity = Vector2(character.velocity.x*move_speed_modifier, fall_speed*3)
