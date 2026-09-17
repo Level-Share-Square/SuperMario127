@@ -67,7 +67,7 @@ func set_state(to:int):
 		states.IDLE:
 			pathfollow.offset = 100
 			fly_noise_player.stop()
-			mario.camera.auto_move = true
+			#mario.camera.auto_move = true
 			mario.disconnect("state_changed", self, "cancel_launch")
 			state = states.IDLE
 			return
@@ -106,7 +106,7 @@ func set_state(to:int):
 			LastInputDevice.rumble(0.25, 0.4, 0.3)
 			mario.sound_player.play_triple_jump_sound()
 			mario.sprite.speed_scale = 1.5
-			mario.camera.auto_move = false
+			#mario.camera.auto_move = false
 			state = states.LAUNCH
 			return
 	

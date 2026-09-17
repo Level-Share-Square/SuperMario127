@@ -1,6 +1,8 @@
 extends Camera2D
 
 
+const FAST_FOLLOW_SPEED: float = 4.0
+
 const GROUND_OFFSET: float = -48.0
 const CROUCH_OFFSET: float = 80.0
 
@@ -71,6 +73,7 @@ onready var cutscene_tween: Tween = $CutsceneTween
 
 onready var viewport
 
+var last_char_pos := Vector2.ZERO
 var current_lead_offset_x: float = 0.0
 var current_lead_offset_y: float = 0.0
 var leading_amount: float = 0.0
@@ -121,109 +124,119 @@ func _physics_process(delta):
 					cur_baseline = y_baseline
 					y_offset = GROUND_OFFSET
 					skip_to_player = false
-
-				var char_pos: Vector2 = character_node.global_position
-				var char_vel: Vector2 = character_node.velocity
-				var char_screen_pos: Vector2 = character_node.get_canvas_transform().xform(char_pos)
-				var char_center_distance: Vector2 = char_screen_pos - size
-
-				## x axis
-				var speed_x: float = abs(char_vel.x)
-				var target_lead_x: float = 0.0
 				
-				if speed_x > X_SPEED_THRESHOLD:
-					var speed_factor: float = clamp((speed_x - X_SPEED_THRESHOLD) / (X_MAX_SPEED - X_SPEED_THRESHOLD), 0.0, 1.0)
-					target_lead_x = X_MAX_LEAD_DISTANCE * zoom.y * speed_factor * sign(char_vel.x)
-
-				current_lead_offset_x = lerp(current_lead_offset_x, target_lead_x, delta * X_LEAD_SPEED)
-				
-				var target_x: float = char_pos.x + current_lead_offset_x
-				var x_delta: float = target_x - global_position.x
-				var abs_x_delta: float = abs(x_delta)
-
-				if abs_x_delta > X_MARGIN * zoom.y:
-					var clamped_delta: float = x_delta - (sign(x_delta) * X_MARGIN)
-					var follow_speed: float = X_FOLLOW_SPEED
-					
-					if abs_x_delta < X_FULL_MARGIN:
-						var edge_ratio: float = (abs_x_delta - X_MARGIN) / (X_FULL_MARGIN - X_MARGIN)
-						follow_speed = lerp(X_SLOW_FOLLOW_SPEED, X_FOLLOW_SPEED, edge_ratio)
-						
-					global_position.x = lerp(global_position.x, global_position.x + clamped_delta, delta * follow_speed)
-
-				# y axis
-				var speed_y: float = abs(char_vel.y)
-				var is_moving_up: float = char_vel.y < 0
-				var is_crouching: bool = character_node.inputs[9][0] and speed_x < 10.0
-				
-				if char_vel.y > 80.0:
-					is_descent_unlocked = true
-				elif char_vel.y < -50.0:
-					is_descent_unlocked = false
-
-				var y_threshold: float = Y_SPEED_THRESHOLD_UP if is_moving_up else Y_SPEED_THRESHOLD_DOWN
-				var is_fast_y: float = speed_y > y_threshold
-
-				leading_amount = move_toward(leading_amount, 1.0 if is_fast_y else 0.0, delta * (3.0 if is_fast_y else 2.0))
-
-				var target_lead_y: float = 0.0
-				if is_fast_y:
-					var speed_factor_y: float = clamp((speed_y - y_threshold) / (Y_MAX_SPEED - y_threshold), 0.0, 1.0)
-					target_lead_y = Y_MAX_LEAD_DISTANCE_Y * zoom.y * speed_factor_y * sign(char_vel.y)
-
-				current_lead_offset_y = lerp(current_lead_offset_y, target_lead_y, delta * Y_LEAD_SPEED)
-				var working_lead_y: float = current_lead_offset_y * leading_amount
-
-				var target_y: float = char_pos.y
-				var is_force_follow: bool = is_instance_valid(character_node.state) and character_node.state.force_cam_follow_y
-
-				if is_force_follow:
-					y_baseline = target_y
-					y_offset = lerp(y_offset, 0.0, delta * Y_OFFSET_SPEED)
-					
-				elif character_node.is_grounded():
-					y_baseline = target_y
-					var target_offset: float = CROUCH_OFFSET if is_crouching else GROUND_OFFSET
-					y_offset = lerp(y_offset, target_offset, delta * Y_OFFSET_SPEED)
-					if abs(y_offset - target_offset) < 10:
-						is_descent_unlocked = false
-					
+				if is_instance_valid(character_node.state) and character_node.state.fast_cam_follow:
+					var target_pos: Vector2 = character_node.global_position
+					var movement: Vector2 = character_node.global_position - last_char_pos
+					target_pos += movement * 25
+					global_position = global_position.linear_interpolate(target_pos, delta * FAST_FOLLOW_SPEED)
+					y_baseline = global_position.y
+					cur_baseline = global_position.y
+					y_offset = 0
 				else:
-					var screen_limit: float = abs(size.y * 0.6)
-					var is_past_top: float = char_center_distance.y < -screen_limit
-					var is_past_bottom: float = char_center_distance.y > screen_limit
+					var char_pos: Vector2 = character_node.global_position
+					var char_vel: Vector2 = character_node.velocity
+					var char_screen_pos: Vector2 = character_node.get_canvas_transform().xform(char_pos)
+					var char_center_distance: Vector2 = char_screen_pos - size
 
-					if is_past_top or is_past_bottom:
-						y_offset = GROUND_OFFSET if is_past_top else lerp(y_offset, 0.0, delta * Y_OFFSET_SPEED)
-						var correct_speed: float = Y_FAST_FOLLOW_SPEED if speed_y > Y_FORCE_THRESHOLD else Y_CORRECT_SPEED
-						y_baseline = lerp(y_baseline, target_y, delta * correct_speed)
+					## x axis
+					var speed_x: float = abs(char_vel.x)
+					var target_lead_x: float = 0.0
+					
+					if speed_x > X_SPEED_THRESHOLD:
+						var speed_factor: float = clamp((speed_x - X_SPEED_THRESHOLD) / (X_MAX_SPEED - X_SPEED_THRESHOLD), 0.0, 1.0)
+						target_lead_x = X_MAX_LEAD_DISTANCE * zoom.y * speed_factor * sign(char_vel.x)
+
+					current_lead_offset_x = lerp(current_lead_offset_x, target_lead_x, delta * X_LEAD_SPEED)
+					
+					var target_x: float = char_pos.x + current_lead_offset_x
+					var x_delta: float = target_x - global_position.x
+					var abs_x_delta: float = abs(x_delta)
+
+					if abs_x_delta > X_MARGIN * zoom.y:
+						var clamped_delta: float = x_delta - (sign(x_delta) * X_MARGIN)
+						var follow_speed: float = X_FOLLOW_SPEED
 						
-					elif not is_descent_unlocked:
-						y_offset = GROUND_OFFSET
+						if abs_x_delta < X_FULL_MARGIN:
+							var edge_ratio: float = (abs_x_delta - X_MARGIN) / (X_FULL_MARGIN - X_MARGIN)
+							follow_speed = lerp(X_SLOW_FOLLOW_SPEED, X_FOLLOW_SPEED, edge_ratio)
+							
+						global_position.x = lerp(global_position.x, global_position.x + clamped_delta, delta * follow_speed)
+
+					# y axis
+					var speed_y: float = abs(char_vel.y)
+					var is_moving_up: float = char_vel.y < 0
+					var is_crouching: bool = character_node.inputs[9][0] and speed_x < 10.0
+					
+					if char_vel.y > 80.0:
+						is_descent_unlocked = true
+					elif char_vel.y < -50.0:
+						is_descent_unlocked = false
+
+					var y_threshold: float = Y_SPEED_THRESHOLD_UP if is_moving_up else Y_SPEED_THRESHOLD_DOWN
+					var is_fast_y: float = speed_y > y_threshold
+
+					leading_amount = move_toward(leading_amount, 1.0 if is_fast_y else 0.0, delta * (3.0 if is_fast_y else 2.0))
+
+					var target_lead_y: float = 0.0
+					if is_fast_y:
+						var speed_factor_y: float = clamp((speed_y - y_threshold) / (Y_MAX_SPEED - y_threshold), 0.0, 1.0)
+						target_lead_y = Y_MAX_LEAD_DISTANCE_Y * zoom.y * speed_factor_y * sign(char_vel.y)
+
+					current_lead_offset_y = lerp(current_lead_offset_y, target_lead_y, delta * Y_LEAD_SPEED)
+					var working_lead_y: float = current_lead_offset_y * leading_amount
+
+					var target_y: float = char_pos.y
+					var is_force_follow: bool = is_instance_valid(character_node.state) and character_node.state.force_cam_follow_y
+
+					if is_force_follow:
+						y_baseline = target_y
+						y_offset = lerp(y_offset, 0.0, delta * Y_OFFSET_SPEED)
+						
+					elif character_node.is_grounded():
+						y_baseline = target_y
+						var target_offset: float = CROUCH_OFFSET if is_crouching else GROUND_OFFSET
+						y_offset = lerp(y_offset, target_offset, delta * Y_OFFSET_SPEED)
+						if abs(y_offset - target_offset) < 10:
+							is_descent_unlocked = false
 						
 					else:
-						y_offset = lerp(y_offset, 0.0, delta * Y_OFFSET_SPEED)
-						var y_diff: float = target_y - y_baseline
+						var screen_limit: float = abs(size.y * 0.6)
+						var is_past_top: float = char_center_distance.y < -screen_limit
+						var is_past_bottom: float = char_center_distance.y > screen_limit
 
-						if abs(y_diff) > Y_MARGIN:
-							var adjusted_target_y: float = target_y - (Y_MARGIN * sign(y_diff))
-							var correct_speed: float = Y_CORRECT_SPEED if speed_y > Y_FORCE_THRESHOLD else Y_SLOW_CORRECT_SPEED
-							y_baseline = lerp(y_baseline, adjusted_target_y, delta * correct_speed)
+						if is_past_top or is_past_bottom:
+							y_offset = GROUND_OFFSET if is_past_top else lerp(y_offset, 0.0, delta * Y_OFFSET_SPEED)
+							var correct_speed: float = Y_FAST_FOLLOW_SPEED if speed_y > Y_FORCE_THRESHOLD else Y_CORRECT_SPEED
+							y_baseline = lerp(y_baseline, target_y, delta * correct_speed)
+							
+						elif not is_descent_unlocked:
+							y_offset = GROUND_OFFSET
+							
+						else:
+							y_offset = lerp(y_offset, 0.0, delta * Y_OFFSET_SPEED)
+							var y_diff: float = target_y - y_baseline
 
-				cur_baseline = y_baseline
+							if abs(y_diff) > Y_MARGIN:
+								var adjusted_target_y: float = target_y - (Y_MARGIN * sign(y_diff))
+								var correct_speed: float = Y_CORRECT_SPEED if speed_y > Y_FORCE_THRESHOLD else Y_SLOW_CORRECT_SPEED
+								y_baseline = lerp(y_baseline, adjusted_target_y, delta * correct_speed)
 
-				var y_follow: float = Y_FOLLOW_SPEED
-				if speed_y > Y_FORCE_THRESHOLD:
-					y_follow = Y_FAST_FOLLOW_SPEED
-				elif abs(char_center_distance.y) > abs(size.y):
-					y_follow = Y_DESPERATE_FOLLOW_SPEED
+					cur_baseline = y_baseline
 
-				var target_final_y: float = cur_baseline + y_offset + working_lead_y
+					var y_follow: float = Y_FOLLOW_SPEED
+					if speed_y > Y_FORCE_THRESHOLD:
+						y_follow = Y_FAST_FOLLOW_SPEED
+					elif abs(char_center_distance.y) > abs(size.y):
+						y_follow = Y_DESPERATE_FOLLOW_SPEED
 
-				if not is_descent_unlocked and not is_crouching and target_final_y > global_position.y:
-					target_final_y = global_position.y
+					var target_final_y: float = cur_baseline + y_offset + working_lead_y
 
-				global_position.y = lerp(global_position.y, target_final_y, delta * y_follow)
+					if not is_descent_unlocked and not is_crouching and target_final_y > global_position.y:
+						target_final_y = global_position.y
+
+					global_position.y = lerp(global_position.y, target_final_y, delta * y_follow)
+				last_char_pos = character_node.global_position
 		
 		if !zoom.is_equal_approx(old_zoom) and !zoom_tween.is_active():
 			zoom = lerp(zoom, old_zoom, 0.08)
