@@ -33,6 +33,7 @@ var save_data: LevelSaveData
 var loaded_areas: Dictionary = {}
 
 var area_id: int = -1
+var starting_area_id: int = -1
 var current_area: AreaData
 
 var current_mission_id: String = ""

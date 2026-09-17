@@ -174,6 +174,7 @@ func pressed(force: bool = false, play_sound: bool = false) -> void:
 		if CurrentLevelData.level_metadata.collectible_data.mission_data.size() > 0:
 			var mission = CurrentLevelData.level_metadata.collectible_data.mission_data[0]
 			if is_instance_valid(mission):
+				CurrentLevelData.starting_area_id = mission.spawn_area_id
 				CurrentLevelData.level_transition_data = {
 					"target_area": mission.spawn_area_id,
 					"target_tag": mission.spawn_teleporter_tag

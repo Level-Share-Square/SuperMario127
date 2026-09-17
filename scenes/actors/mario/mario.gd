@@ -1366,7 +1366,7 @@ func kill(cause: String) -> void:
 		
 		if CurrentLevelData.area_id != CurrentLevelData.checkpoint_data.current_area:
 			CurrentLevelData.is_new_area = true
-		SceneTransitions.reload_scene(cutout_in, cutout_out, transition_time, 0, true)
+		SceneTransitions.reload_scene(cutout_in, cutout_out, transition_time, -1, true)
 
 func exit() -> void:
 	#if the mode switcher button is not invisible, we're in edit mode, switch back to that, but if we're in play mode then for now just reload the scene

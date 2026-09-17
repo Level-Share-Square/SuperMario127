@@ -119,6 +119,7 @@ func level_warp(character: Character, target_level: String,
 	var selected_file: int = CurrentLevelData.selected_file
 	
 	if target_area != -1:
+		CurrentLevelData.starting_area_id = target_area
 		CurrentLevelData.level_transition_data = {
 			"target_area": target_area, "target_tag": target_tag}
 	else:

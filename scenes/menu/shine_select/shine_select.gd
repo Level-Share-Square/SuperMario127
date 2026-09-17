@@ -87,6 +87,7 @@ func start_level():
 	shine_parent.can_interact = false
 	
 	var mission_data: MissionData = shine_parent.shine_details[shine_parent.selected_shine_index]
+	CurrentLevelData.starting_area_id = mission_data.spawn_area_id
 	CurrentLevelData.level_transition_data = {
 		"target_area": mission_data.spawn_area_id,
 		"target_tag": mission_data.spawn_teleporter_tag

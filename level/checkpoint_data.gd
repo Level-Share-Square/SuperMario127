@@ -22,7 +22,7 @@ var area_time_left: float = -1
 func reset():
 	current_checkpoint_id = -1
 	current_spawn_pos = Vector2(-999, -999)
-	current_area = 0
+	current_area = CurrentLevelData.starting_area_id
 	current_coins = 0
 	current_red_coins = [0, []]
 	current_shine_shards = []
