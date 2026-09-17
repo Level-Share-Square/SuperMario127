@@ -96,7 +96,7 @@ func update_property(key: String, value):
 		# inverse scaling
 		player_detector.scale = Vector2.ONE / scale
 		player_collision.shape = player_collision.shape.duplicate()
-		player_collision.shape.extents = (box_collision.shape.extents * scale) + Vector2(32, 32)
+		player_collision.shape.extents = (box_collision.shape.extents * scale) + Vector2(48, 48)
 
 
 func area_entered(area):
