@@ -110,6 +110,7 @@ func check_items():
 		if item_button.item == editor.selected_item:
 			item_button.pressed = true
 		item_button.palette = loadout_palettes[selected_loadout][item_button.get_index()]
+		item_button.palette = wrapi(item_button.palette, 0, item_button.item.icons.size())
 		item_button.icon_node.texture = item_button.item.icons[item_button.palette]
 	
 	return
@@ -167,6 +168,9 @@ func new_favorite_selected(placeable_item: Resource, index: int):
 
 func on_item_selected(item: PlaceableItem):
 	var start_index: int = items_favorited[selected_loadout]
+	if start_index > 9:
+		return
+	
 	var boxes: Array = bottom_row.get_children()
 	var selected_box: Button = boxes[start_index]
 	selected_box.change_item(item)
