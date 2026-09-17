@@ -51,8 +51,6 @@ func set_layer_modulate(tint: Color, opacity: float) -> void:
 
 
 func _update_z_index() -> void:
-	print("Order: ", order)
-	print("Reverse order: ", reverse_order)
 	z_index = 4096 - reverse_order * LAYER_Z_SPACING * 2
 
 func _update_modulate() -> void:

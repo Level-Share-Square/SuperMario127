@@ -173,8 +173,6 @@ func update_tilemaps():
 				if tile and bounds.has_point(Vector2(chunk_x*16 + x + 0.5, chunk_y*16 + y + 0.5)):
 #					print("Tile (" + str(x) + ", " + str(y) + ") placed")
 					layer_tilemap_node.call_deferred("set_cell", chunk_x*16 + x, chunk_y*16 + y, get_tile(tile[0],tile[1],tile[2]))
-		
-#		print("")
 	
 	very_back_tilemap_node.tile_set = tile_set
 	back_tilemap_node.tile_set = tile_set

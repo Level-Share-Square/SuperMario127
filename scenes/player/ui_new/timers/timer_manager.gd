@@ -62,8 +62,6 @@ func pause_resume_timer(timer_name: String, pause: bool):
 		return
 	
 	timer_node.is_counting = !pause
-#	print(timer_node)
-#	print(timer_node.is_counting)
 
 
 func remove_timer(timer_name: String):

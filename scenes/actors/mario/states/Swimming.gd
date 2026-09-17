@@ -170,7 +170,6 @@ func _update(delta):
 	if abs(sprite.rotation) > PI + 0.01: #account for floating point error to prevent rapid flipping
 		sprite.rotation = -sprite.rotation
 	sprite.rotation = clamp(sprite.rotation, -PI, PI)
-	#print(sprite.rotation)
 	character.facing_direction = sign(sprite.rotation)
 	sprite.animation = "swimming" if boost_time_left <= 0 else "spinning" 
 

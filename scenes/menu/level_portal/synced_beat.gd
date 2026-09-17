@@ -34,4 +34,3 @@ func _process(delta):
 			play()
 			playback_queued = false
 		last_beats = song_position_in_beats
-		#print(song_position_in_beats)

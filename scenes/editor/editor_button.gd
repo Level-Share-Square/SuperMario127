@@ -13,7 +13,6 @@ var icon_texture_rect: TextureRect
 func _ready() -> void:
 #	var self_path = String(get_path()) + ":text"
 #	var test: Array = get_node_and_resource(NodePath(self_path))
-#	print(test[0].get_indexed(test[2]))
 	
 	set_label_text(text)
 	update_text_styles()

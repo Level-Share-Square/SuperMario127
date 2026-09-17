@@ -96,7 +96,6 @@ func duplicate_area():
 		# the following line is necessary because music
 		# can't be an export var (it has 2 different types)
 		area_header.music = CurrentLevelData.area_headers[id].music
-		print(area_header.music, CurrentLevelData.area_headers[id].music)
 		var action := AddAreaAction.new()
 		action.area_header = area_header
 		area_settings.editor.action_manager.commit_action([action])

@@ -137,7 +137,7 @@ func _on_property_changed(key, value):
 func _physics_process(_delta : float) -> void:
 	if "\n" in destination_tag:
 		destination_tag = destination_tag.replace("\n", "")
-#	print("physics process, entering: ",entering)
+	
 	if is_idle and is_enabled_and_on_ground() and !teleportation_mode and !entering:
 		#the area2d is set to only collide with characters, so we can (hopefully) safely assume if there 
 		#is a collision it's with a character
@@ -152,8 +152,6 @@ func _physics_process(_delta : float) -> void:
 	for chr in stored_characters:
 		if chr != null:
 			character = chr
-	#if character:
-		#print(character.position)
 
 func _on_body_entered(body):
 	if is_enabled_and_on_ground() and is_idle and !entering and teleportation_mode:

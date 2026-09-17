@@ -107,7 +107,6 @@ func _physics_process(delta):
 			alpha = lerp(alpha, -1, delta * 2)
 			modulate = Color(1, 1, 1, alpha)
 			if alpha <= 0:
-				#print("free")
 				queue_free()
 		# Use the position difference to calculate velocity
 		# (the one in the physics body isn't accurate

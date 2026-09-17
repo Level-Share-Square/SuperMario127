@@ -68,7 +68,6 @@ func _process(delta):
 		var area_rect = Rect2(-size/2.0, size)
 
 		if area_rect.has_point(get_local_mouse_position()):
-			print("true")
 			front_tilemap.transparent = true
 
 

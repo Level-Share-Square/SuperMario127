@@ -131,7 +131,6 @@ func start_level(level_metadata: LevelMetadata, level_id: String, working_folder
 		var mission: MissionData = level_metadata.collectible_data.mission_data[0]
 		CurrentLevelData.current_mission_id = mission.mission_uuid
 		CurrentLevelData.current_mission = mission
-		print(mission.spawn_teleporter_tag)
 		CurrentLevelData.level_transition_data = {
 			"target_area": mission.spawn_area_id,
 			"target_tag": mission.spawn_teleporter_tag

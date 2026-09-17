@@ -93,7 +93,6 @@ func _unhandled_input(event):
 				expand = true
 				selection_shape.disabled = false
 				selection_area.monitorable = true
-#				print(editor.selected_objects)
 			
 			elif event is InputEventMouseButton and not event.pressed and event.button_index == BUTTON_LEFT:
 				if start_pos != null:

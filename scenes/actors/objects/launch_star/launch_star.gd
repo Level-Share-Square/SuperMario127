@@ -59,7 +59,6 @@ func invalid_curve(check : Curve2D):
 		return false
 		
 func set_camera():
-	#print("set camera")
 	if mario.movable:
 		mario.camera.auto_move = true
 		

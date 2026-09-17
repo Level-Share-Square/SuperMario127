@@ -27,7 +27,6 @@ func _ready():
 		hit_area.connect("area_entered", self, "_on_hit_area_entered")
 
 	if palette != 0:
-		#print(sprite.region_rect)
 		sprite.region_rect.position.y = (float(palette) * 32) # changes sprite to correct position on that grid of palettes
 		outline.animation = str(palette) + "_outline"
 
