@@ -48,6 +48,7 @@ func _ready():
 
 	CurrentLevelData.enemies_instanced = 0
 	CurrentLevelData.vars.reset_counters()
+	EditorState.starcoin_uuids_in_use.clear()
 	
 	if !Singleton.MiscShared.is_play_reload:
 		CurrentLevelData.checkpoint_data.reset()

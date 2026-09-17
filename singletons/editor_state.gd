@@ -5,6 +5,8 @@ var autosave_interval: int = 108000
 var disable_hotkeys: bool = false
 var time: float = 0
 
+var starcoin_uuids_in_use: Array = []
+
 # this is literally just here cuz
 # this is a singleton and i can
 # check get_tree().paused through

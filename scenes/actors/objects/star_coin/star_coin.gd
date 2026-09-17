@@ -46,11 +46,23 @@ func _ready() -> void:
 	if not uuid:
 		data = CurrentLevelData.level_metadata.collectible_data.add_star_coin()
 		set_property("uuid", data.star_coin_uuid, true)
+		EditorState.starcoin_uuids_in_use.append(data.star_coin_uuid)
+		
 	else:
-		data = CurrentLevelData.level_metadata.collectible_data.get_star_coin_by_uuid(uuid)
-	
+		if uuid in EditorState.starcoin_uuids_in_use:
+			data = CurrentLevelData.level_metadata.collectible_data.add_star_coin()
+			uuid = data.star_coin_uuid
+			data.star_coin_hint = hint
+			data.star_coin_color = color
+			EditorState.starcoin_uuids_in_use.append(uuid)
+			
+		else:
+			data = CurrentLevelData.level_metadata.collectible_data.get_star_coin_by_uuid(uuid)
+			EditorState.starcoin_uuids_in_use.append(data.star_coin_uuid)
+			
 	if not data: #This happens if you duplicate an area and delete the star coins
 		data = CurrentLevelData.level_metadata.collectible_data.add_star_coin(uuid)
+		EditorState.starcoin_uuids_in_use.append(data.star_coin_uuid)
 
 	set_property("hint", data.star_coin_hint, true)
 	set_property("color", data.star_coin_color, true)

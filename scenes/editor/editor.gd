@@ -59,6 +59,7 @@ func _ready():
 	CurrentLevelData.next_shine_id = 0
 	CurrentLevelData.next_star_coin_id = 0
 	CurrentLevelData.checkpoint_data.reset()
+	EditorState.starcoin_uuids_in_use.clear()
 	
 	load_in()
 	# if the mode switch button is invisible then the editor hasn't been readyed for the first time yet
