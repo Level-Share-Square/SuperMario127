@@ -75,6 +75,8 @@ var added_to_data: bool = false
 
 var score_from_before = 0 # haha that rhymes
 var mission_from_before = "" # haha that's the same as the above variable
+var previous_temporary_music_id: int = -1
+var previous_temporary_music_pos: float = 0.0
 
 signal shine_collected
 signal shine_dance_end
@@ -391,7 +393,10 @@ func collect(body: PhysicsBody2D) -> void:
 		# hacky fix for the player being stuck in the ground during the shine dance if diving into a very low shine
 		if character.state != null and character.state.name == "SlideState" and character.is_grounded():
 			character.position.y -= 16
-
+		
+		if !do_kick_out and Singleton.Music.is_temporary_music_playing():
+			previous_temporary_music_id = Singleton.Music.get_song_id(Singleton.Music.temporary_music_player.stream)
+			previous_temporary_music_pos = Singleton.Music.get_precise_position(Singleton.Music.temporary_music_player)
 		Singleton.Music.stop_temporary_music()
 
 		LastInputDevice.rumble(0.5, 0.8, 0.2)
@@ -535,3 +540,7 @@ func restore_control(_animation: String, character) -> void:
 	CurrentLevelData.time_score = score_from_before
 	
 	Singleton.Music.stop_temporary_music()
+	if previous_temporary_music_id != -1:
+		Singleton.Music.play_temporary_music(previous_temporary_music_id, 0, previous_temporary_music_pos)
+		previous_temporary_music_id = -1
+		previous_temporary_music_pos = 0.0

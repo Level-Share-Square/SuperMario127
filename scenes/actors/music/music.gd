@@ -48,6 +48,12 @@ func get_song(song_id : int):
 		
 	return song_cache[song_id]
 
+func get_song_id(stream: AudioStream) -> int:
+	for i in range(0, song_cache.size()):
+		if song_cache[i] != null and song_cache[i].stream == stream:
+			return i
+	return -1
+
 func _init() -> void:
 	base_volume = volume_db
 	
@@ -280,7 +286,7 @@ func _process(delta) -> void:
 	check_loop(water_music_player, underwater_loop, underwater_loop_end)
 
 # the plan for this is to mute the current bgm, play the temp song, and then fade the current bgm back in
-func play_temporary_music(temp_song_id : int = 0, temp_song_volume : float = 0) -> void:
+func play_temporary_music(temp_song_id : int = 0, temp_song_volume : float = 0, start_position: float = 0.0) -> void:
 	volume_multiplier = 0
 	volume_db = -80.0
 	water_music_player.volume_db = -80.0
@@ -294,7 +300,7 @@ func play_temporary_music(temp_song_id : int = 0, temp_song_volume : float = 0) 
 	if temporary_music_player.stream != stream or temporary_music_player.volume_db < -70:
 		temporary_music_player.volume_db = 0
 		temporary_music_player.stream = stream
-		temporary_music_player.play()
+		temporary_music_player.play(start_position)
 	
 		if song.blended_stream != null:
 			blended_music_player.volume_db = -80
