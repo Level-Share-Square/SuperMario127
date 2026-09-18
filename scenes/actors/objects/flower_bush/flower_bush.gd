@@ -76,18 +76,6 @@ func update_property(key: String, value):
 	interaction_shape.shape.extents.x = (sprite.rect_size.x / 2) - 12
 
 
-func _input(event):
-	if event is InputEventMouseButton and event.is_pressed() and is_object_hovered():
-		if event.button_index == 5: # Mouse wheel down
-			parts -= 1
-			if parts < 1:
-				parts = 1
-			set_property("parts", parts)
-		elif event.button_index == 4: # Mouse wheel up
-			parts += 1
-			set_property("parts", parts)
-
-
 func _object_process(delta: float) -> void:
 	if !is_equal_approx(displacement_spring_anim_power, 0):
 		update_displacement_spring(delta)
@@ -99,6 +87,11 @@ func _object_process(delta: float) -> void:
 	else:
 		sprite.rect_scale = Vector2.ONE
 
+func _input(event):
+	parts_input_handler(event, self)
+
+func update_parts():
+	update_property("", null)
 
 func start_anim(body):
 	var entrance_velocity := Vector2.ZERO
