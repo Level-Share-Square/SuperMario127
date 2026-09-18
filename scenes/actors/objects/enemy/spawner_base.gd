@@ -76,7 +76,7 @@ func instance_enemy(emit_particles: bool = true) -> EnemyBase:
 	# and rotation
 	if is_enabled_and_on_ground():
 		rotation = 0
-		scale = Vector2.ONE
+		scale = scale.abs()
 	# and layer trol
 	spawned_enemy.layer_ref = level_layer_ref
 	
