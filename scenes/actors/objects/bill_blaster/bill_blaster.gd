@@ -99,9 +99,10 @@ func _object_physics_process(delta):
 
 
 func create_new_bill(chase, speed, color, facing_direction, invincible) -> Node:
+	if facing_direction == 2: facing_direction = -1
 	var object_setup = create_object(transform.xform(Vector2(16 * facing_direction, 0)), 25, 0)
 	var object: GameObject = object_setup[0]
-	
+
 	object.set_property("scale", scale)
 	object.set_property("rotation_degrees", rotation_degrees)
 	object.set_property("enabled", enabled)
