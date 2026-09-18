@@ -188,7 +188,7 @@ func animate_door(is_backwards: bool) -> void:
 		palette_dict[palette] + "_" + collectible,
 		is_backwards)
 	door_sprite.play(
-		palette_dict[palette] + "_" + collectible,
+		palette_dict[palette],
 		is_backwards)
 	audio_player.stream = open_audio if not is_backwards else close_audio
 	audio_player.play(0.0, is_single)
