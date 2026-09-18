@@ -1,5 +1,16 @@
 extends AudioStreamPlayer
 
+const CACHE_PRELOAD_ID_LIST: Array = [
+	25, # metal_mario
+	26, # rainbow_mario
+	27, # wing_mario
+	28, # course_clear
+	31, # level_designer_portal
+	67, # six sevennn (level_designer_portal_ng)
+	68, # lss_menu
+	71, # course_clear_pocket
+]
+
 export var play_bus : String
 export var edit_bus : String
 
@@ -61,6 +72,8 @@ func _init() -> void:
 	song_cache.resize(level_songs.ids.size())
 	
 func _ready() -> void:
+	for id in CACHE_PRELOAD_ID_LIST:
+		get_song(id)
 	var _connect = temporary_music_player.connect("finished", self, "stop_temporary_music")
 
 func is_tween_active() -> bool:
