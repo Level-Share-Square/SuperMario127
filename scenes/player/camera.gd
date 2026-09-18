@@ -198,8 +198,10 @@ func _physics_process(delta):
 						y_baseline = target_y
 						var target_offset: float = CROUCH_OFFSET if is_crouching else GROUND_OFFSET
 						y_offset = lerp(y_offset, target_offset, delta * Y_OFFSET_SPEED)
-						if abs(y_offset - target_offset) < 10:
+						if abs(y_offset - target_offset) < 10 and char_pos.y == last_char_pos.y:
 							is_descent_unlocked = false
+						else:
+							is_descent_unlocked = true
 						
 					else:
 						var screen_limit: float = abs(size.y * 0.6)
