@@ -85,6 +85,7 @@ func get_collectible_args():
 
 func _on_property_changed(key, value):
 	if key == "collectible":
+		door_sprite.animation = palette_dict[palette]
 		prev_coll = collectible
 		if prev_coll != coll:
 			if collectible != "unknown" and possible_coll.has(collectible):
