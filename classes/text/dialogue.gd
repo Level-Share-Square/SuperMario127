@@ -225,10 +225,13 @@ func area_exited(body):
 
 func setup_char(character: Character):
 	
-	character.anim_player.stop(true)
+	character.anim_player.play("RESET")
 	
 	# flip mario to face this object
 	character.facing_direction = sign(parent.global_position.x - character.global_position.x)
+
+	character.auto_flip = false
+	character.sprite.flip_h = (character.facing_direction < 0)
 
 	if character.controllable:
 		stored_zoom = character.camera.current_zoom
