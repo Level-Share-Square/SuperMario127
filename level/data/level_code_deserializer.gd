@@ -74,7 +74,10 @@ static func deserialize_editor_data(editor_data_code: String) -> EditorData:
 	if components.size() <= 10: return EditorData.new(layouts, palettes, fav_items, fav_count, selected_loadout, selected_layer, show_palettes, area_bounds_increment, camera_positions, last_area)
 	
 	var pixel_snap: Vector2 = deserialize_datas_code(components[10])[0]
-	return EditorData.new(layouts, palettes, fav_items, fav_count, selected_loadout, selected_layer, show_palettes, area_bounds_increment, camera_positions, last_area, pixel_snap)
+	if components.size() <= 11: return EditorData.new(layouts, palettes, fav_items, fav_count, selected_loadout, selected_layer, show_palettes, area_bounds_increment, camera_positions, last_area)
+	
+	var target_tag: String = deserialize_datas_code(components[11])[0]
+	return EditorData.new(layouts, palettes, fav_items, fav_count, selected_loadout, selected_layer, show_palettes, area_bounds_increment, camera_positions, last_area, pixel_snap, target_tag)
 
 static func deserialize_level_tags(level_tags_code: String) -> LevelTags:
 	if level_tags_code.empty():

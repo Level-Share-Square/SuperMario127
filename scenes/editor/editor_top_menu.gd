@@ -10,6 +10,7 @@ onready var layer_adder = $"%LayerAdder"
 onready var autosave_window = $"%AutosaveWindow"
 onready var snap_value = $"%SnapValue"
 onready var pixel_snap = $"%PixelSnap"
+onready var target_tag_editor: PropertyEditor = $"%TargetTag"
 
 func _ready():
 	for button in view_dropdown.get_children():
@@ -22,6 +23,23 @@ func _ready():
 			button.connect("pressed", self, "on_button_pressed", [button])
 	pixel_snap.connect("pressed", self, "on_button_pressed", [pixel_snap])
 	snap_value.value = CurrentLevelData.editor_data.pixel_snap.x
+	
+	load_properties()
+			
+func load_properties():
+	target_tag_editor.load_property(editor, CurrentLevelData.editor_data.target_tag, [
+		"target_tag",
+		[CurrentLevelData.level_tags, "get_teleport_args", [CurrentLevelData.level_tags, "teleport_tags"]],
+		PropertyInfo.new(target_tag_editor.hint_tooltip)
+	], "Spawn Tag")
+	connect_signals()
+	
+func connect_signals():
+	if !target_tag_editor.is_connected("property_edited", self, "change_property"):
+		target_tag_editor.connect("property_edited", self, "change_property")
+		
+func change_property(key: String, value, check_matches, save_to_data):
+	CurrentLevelData.editor_data.target_tag = value
 			
 func on_button_pressed(button: Button):
 	match button.name:

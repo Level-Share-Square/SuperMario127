@@ -48,6 +48,7 @@ static func serialize_editor_data(editor_data: EditorData) -> String:
 	code += serialize_data_array(editor_data.camera_positions)
 	code += serialize_data_array([editor_data.last_area])
 	code += serialize_data_array([editor_data.pixel_snap])
+	code += serialize_data_array([editor_data.target_tag])
 	
 	return wrap_code_in_brackets(code)
 

@@ -166,19 +166,16 @@ func pressed(force: bool = false, play_sound: bool = false) -> void:
 	tween.start()
 	
 	if not playtesting:
+		CurrentLevelData.level_transition_data = {
+			"target_area": CurrentLevelData.area_id,
+			"target_tag": CurrentLevelData.editor_data.target_tag
+		}
+		
+		print(CurrentLevelData.level_transition_data)
 		animation_player.play("press_fast" if do_fast_test() else "press")
 		yield(animation_player, "animation_finished")
 		if not is_hovered:
 			animation_player.play_backwards("hover_marioless")
-			
-		if CurrentLevelData.level_metadata.collectible_data.mission_data.size() > 0:
-			var mission = CurrentLevelData.level_metadata.collectible_data.mission_data[0]
-			if is_instance_valid(mission):
-				CurrentLevelData.starting_area_id = mission.spawn_area_id
-				CurrentLevelData.level_transition_data = {
-					"target_area": mission.spawn_area_id,
-					"target_tag": mission.spawn_teleporter_tag
-				}
 	
 	transition_player.play("transition_in")
 	yield(transition_player, "animation_finished")

@@ -23,6 +23,7 @@ var area_bounds_increment: float = 10
 var camera_positions: Array = [Vector2(288, 840)]
 var last_area: int = 0
 var pixel_snap := Vector2(8, 8)
+var target_tag: String = "_entrance"
 
 func _init(
 		s_loadouts: Array = [], 
@@ -35,7 +36,8 @@ func _init(
 		s_area_bounds_increment: float = 10,
 		s_camera_positions: Array = [Vector2(288, 840)],
 		s_last_area: int = 0,
-		s_pixel_snap := Vector2(8, 8)
+		s_pixel_snap := Vector2(8, 8),
+		s_target_tag: String = "_entrance"
 	) -> void:
 	loadouts = s_loadouts
 	palettes = s_palettes
@@ -68,3 +70,4 @@ func _init(
 	camera_positions = s_camera_positions
 	last_area = s_last_area
 	pixel_snap = s_pixel_snap
+	target_tag = s_target_tag
