@@ -1500,8 +1500,7 @@ func check_liquid(liquid_type) -> bool:
 func update_layer_info():
 	get_parent().remove_child(self)
 	layer.get_ref().add_child(self)
-	layer.get_ref().move_child(self, 0)
-	
+	layer.get_ref().move_child(self, 1)
 	var player = get_tree().current_scene
 	player.character = player.get_path_to(self)
 	player.nodes_to_load[1] = player.get_path_to(self)

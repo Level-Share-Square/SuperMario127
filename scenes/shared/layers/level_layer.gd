@@ -34,7 +34,8 @@ func load_in(layer_data: LayerData):
 	
 	tile_map_manager.load_in(layer_data)
 	object_manager.load_in(layer_data)
-
+	if layer_data.layer_metadata.is_origin:
+		tile_map_manager.z_index = 1
 
 func set_order(s_order: int) -> void:
 	order = s_order

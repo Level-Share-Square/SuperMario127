@@ -1,6 +1,8 @@
 class_name LevelGroundLayer
 extends LevelLayer
 
+onready var back_buffer = $BackBufferCopy
+
 # used for testing load times
 func _test_load_in(layer_data: LayerData) -> void:
 	# tile loading

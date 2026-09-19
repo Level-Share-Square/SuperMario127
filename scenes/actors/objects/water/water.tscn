@@ -66,6 +66,7 @@ shader_param/color_tint = Color( 0.278431, 0.662745, 0.85098, 1 )
 shader_param/x_size = 1800.0
 
 [node name="Water" instance=ExtResource( 1 )]
+z_index = 1
 script = ExtResource( 2 )
 internal_id = "water"
 color = Color( 0.278431, 0.662745, 0.85098, 1 )
@@ -79,7 +80,7 @@ collision_layer = 32896
 shape = SubResource( 7 )
 
 [node name="BackBufferCopy" type="BackBufferCopy" parent="." index="1"]
-copy_mode = 2
+copy_mode = 0
 
 [node name="Visual" type="Node2D" parent="." index="2"]
 
