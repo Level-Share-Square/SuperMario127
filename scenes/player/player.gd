@@ -57,6 +57,8 @@ func _ready():
 	if CurrentLevelData.vars.transition_data.empty():
 		if CurrentLevelData.checkpoint_data.current_checkpoint_id != -1:
 			CurrentLevelData.switch_to_area(CurrentLevelData.checkpoint_data.current_area)
+		else:
+			CurrentLevelData.switch_to_area(CurrentLevelData.level_transition_data.get("target_area", 0))
 		CurrentLevelData.vars.reload()
 	
 	if CurrentLevelData.current_area.header.timer > 0.00:
