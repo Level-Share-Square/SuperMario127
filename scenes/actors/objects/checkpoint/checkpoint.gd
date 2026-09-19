@@ -116,8 +116,6 @@ func set_checkpoint(body):
 	CurrentLevelData.checkpoint_data.liquid_positions = CurrentLevelData.vars.liquid_positions.duplicate(true)
 	CurrentLevelData.checkpoint_data.activated_shine_ids = CurrentLevelData.vars.activated_shine_ids.duplicate(true)
 	
-	CurrentLevelData.level_transition_data = {}
-	
 	for checkpoint in CurrentLevelData.vars.checkpoints:
 		if checkpoint[1] != self:
 			checkpoint[1].unset_checkpoint()
