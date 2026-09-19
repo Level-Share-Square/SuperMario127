@@ -380,6 +380,12 @@ margin_bottom = 40.0
 mouse_filter = 2
 script = ExtResource( 66 )
 
+[node name="ObjectBuffer" type="Control" parent="ParallaxScroll/ZIndex"]
+unique_name_in_owner = true
+margin_right = 40.0
+margin_bottom = 40.0
+mouse_filter = 2
+
 [node name="Grid" type="ParallaxBackground" parent="ParallaxScroll/ZIndex"]
 unique_name_in_owner = true
 layer = -1
@@ -425,12 +431,6 @@ collision_mask = 0
 navigation_layers = 0
 occluder_light_mask = 0
 format = 1
-
-[node name="ObjectBuffer" type="Control" parent="ParallaxScroll"]
-unique_name_in_owner = true
-margin_right = 40.0
-margin_bottom = 40.0
-mouse_filter = 2
 
 [node name="TileRectFill" parent="ParallaxScroll" instance=ExtResource( 70 )]
 unique_name_in_owner = true

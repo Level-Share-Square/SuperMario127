@@ -66,6 +66,7 @@ func signal_selected_objects(objects: Array):
 	visible = not objects.empty()
 	
 func fit_to_bounding_rectangle():
+	print("im run")
 	fill_rect = get_bounding_rectangle()
 	if !fill_rect:
 		reset_bounds()
@@ -89,6 +90,8 @@ func get_bounding_rectangle() -> Rect2:
 		if not is_instance_valid(object): continue
 		if !object.is_inside_tree():
 			editor.selected_objects.erase(object)
+	
+	print(editor.selected_objects)
 	
 	if editor.selected_objects.empty():
 		return Rect2()
@@ -158,6 +161,7 @@ func _click_left(event, mouse_position):
 		
 func on_undid_delete(objects):
 	editor.selected_objects = objects
+	show()
 
 func select_objects(objects):
 	for object in editor.selected_objects:
