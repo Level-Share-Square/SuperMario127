@@ -16,6 +16,7 @@ var inverted : bool = false
 func _register_properties():
 	register_property(4, "inverted", inverted, true)
 
+
 func _ready():
 	init()
 	hit_bounce_enabled = false
@@ -26,14 +27,21 @@ func _ready():
 		hit_area.connect("body_entered", self, "_on_hit_body_entered")
 		hit_area.connect("area_entered", self, "_on_hit_area_entered")
 
-	if palette != 0:
-		sprite.region_rect.position.y = (float(palette) * 32) # changes sprite to correct position on that grid of palettes
-		outline.animation = str(palette) + "_outline"
-
 	switch_state(inverted)
 	if CurrentLevelData.vars.switch_state.has(palette):
 		toggle_state()
 	CurrentLevelData.vars.connect("switch_state_changed", self, "_on_switch_state_changed")
+
+	var _connect = connect("property_changed", self, "update_property")
+	update_property("palette", palette)
+
+
+func update_property(key, value):
+	match(key):
+		"palette":
+			sprite.region_rect.position.y = (float(palette) * 32) # changes sprite to correct position on that grid of palettes
+			outline.animation = str(palette) + "_outline"
+
 
 func toggle_state():
 	inverted = !inverted

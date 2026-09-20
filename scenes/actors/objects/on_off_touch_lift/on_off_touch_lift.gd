@@ -151,6 +151,17 @@ func _ready():
 		
 		set_property("end_position", path.curve.get_point_position(path.curve.get_point_count()-1)/32, true)
 
+	var _connect = connect("property_changed", self, "update_property")
+	update_property("palette", palette)
+
+
+func update_property(key, value):
+	match(key):
+		"palette":
+			start_sprite_node.get_child(0).region_rect.position.y = int(value) * 13
+			end_sprite_node.get_child(0).region_rect.position.y = int(value) * 13
+
+
 func _object_ready():
 	._object_ready()
 	platform.collision_shape.disabled = !is_enabled_and_on_ground()

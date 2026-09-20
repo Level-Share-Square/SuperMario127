@@ -31,8 +31,6 @@ func _ready():
 		press_sound.volume_db = -8
 
 	rotation = 0
-	switch.region_rect.position.y = palette * 21
-	switch.region_rect.position.x = int(!switch_mode) * 20
 	connect("property_changed", self, "_on_property_changed")
 	CurrentLevelData.vars.connect("switch_state_changed", self, "_on_switch_state_changed")
 	update_switch_state()
@@ -40,6 +38,17 @@ func _ready():
 	if CurrentLevelData.vars.switch_state.has(palette):
 		switch_mode = !switch_mode
 		update_switch_state()
+
+	var _connect = connect("property_changed", self, "update_property")
+	update_property("palette", palette)
+
+
+func update_property(key, value):
+	match(key):
+		"palette":
+			switch.region_rect.position.y = palette * 21
+			switch.region_rect.position.x = int(!switch_mode) * 20
+
 
 func press(hit_pos : Vector2) -> void:
 	if !pressed:

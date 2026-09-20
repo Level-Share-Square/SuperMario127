@@ -51,20 +51,11 @@ func _ready():
 	parent = get_parent()
 	if not parent.is_node_ready():
 		yield(parent, "ready")
-
-	sprite.region_rect.position.y = int(parent.palette) * 13
-
-	sprite.region_rect.position.x = int(!parent.disappears) * 46
-
-
-	sprite2.region_rect.position.y = sprite.region_rect.position.y
-	sprite2.region_rect.position.x = 23 + int(!parent.disappears) * 46
-
+	
 	collision_shape.shape = collision_shape.shape.duplicate()
 	platform_area_collision_shape.shape = platform_area_collision_shape.shape.duplicate()
 
 	inverted = parent.inverted
-	
 	switch_state(inverted)
 
 	if CurrentLevelData.vars.switch_state.has(parent.palette):
@@ -79,6 +70,18 @@ func _ready():
 	last_position = global_position
 	collision_shape.shape = collision_shape.shape.duplicate()
 	platform_area_collision_shape.shape = platform_area_collision_shape.shape.duplicate()
+
+	var _connect = parent.connect("property_changed", self, "update_property")
+	update_property("palette", parent.palette)
+
+
+func update_property(key, value):
+	match(key):
+		"palette":
+			sprite.region_rect.position.y = int(value) * 13
+			sprite.region_rect.position.x = int(!parent.disappears) * 46
+			sprite2.region_rect.position.y = sprite.region_rect.position.y
+			sprite2.region_rect.position.x = 23 + int(!parent.disappears) * 46
 
 
 func _physics_process(delta):

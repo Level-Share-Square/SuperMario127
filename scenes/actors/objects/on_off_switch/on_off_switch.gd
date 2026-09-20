@@ -7,18 +7,17 @@ onready var curve_tween = $Sprite/CurveTween
 
 
 func _ready():
-	
 	init()
-	if is_preview:
-		z_index = 0
-		sprite.z_index = 0
-		
-#	if mode == 1:
-#			register_property("default_state", default_state, true)
-#
-	sprite.region_rect.position.x = int(!CurrentLevelData.vars.switch_state.has(palette)) * 32
+	
+	var _connect = connect("property_changed", self, "update_property")
+	update_property("palette", palette)
 
-	sprite.region_rect.position.y = palette * 32
+
+func update_property(key, value):
+	match(key):
+		"palette":
+			sprite.region_rect.position.x = int(!CurrentLevelData.vars.switch_state.has(value)) * 32
+			sprite.region_rect.position.y = value * 32
 	
 func _object_ready():
 	._object_ready()
