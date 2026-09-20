@@ -1,16 +1,24 @@
 class_name ObjectManager
 extends Node2D
 
+const WATER_ID := 72 #water bug my behated
+var water_stack: Array 
+
 var layer_data: LayerData
 
 func load_in(s_layer_data: LayerData):
 	layer_data = s_layer_data
-
+	water_stack.clear()
 	for child in get_children():
 		child.queue_free()
 	
 	for object_data in layer_data.object_data:
-		add_child(create_object(object_data))
+		var obj = create_object(object_data)
+		add_child(obj)
+		if _is_water(object_data):
+			water_stack.append(obj)
+	_push_water_to_top()
+
 
 func place_object(object_data: ObjectData, add_to_data: bool = false):
 	var s_position = object_data.metadata.position
@@ -18,9 +26,12 @@ func place_object(object_data: ObjectData, add_to_data: bool = false):
 		layer_data.place_object(s_position, object_data)
 	
 	var game_object = create_object(object_data)
-
 	add_child(game_object)
 	
+	if _is_water(object_data):
+		water_stack.append(game_object)
+	move_child(game_object, get_child_count())
+	_push_water_to_top()
 	return game_object
 
 
@@ -40,18 +51,26 @@ func create_object(object_data: ObjectData):
 	game_object.position = object_data.metadata.position
 	return game_object
 
+
 func erase_object(game_object, free: bool = true) -> void:
+	if game_object in water_stack:
+		water_stack.erase(game_object)
 	var object_data: ObjectData = game_object.object_data
 	game_object._object_removed(free)
 	if free: game_object.queue_free()
 	layer_data.erase_object(object_data)
+	
 
 func reorder_object(game_object, index: int) -> void:
+	var max_index = get_child_count() - 1 - water_stack.size()
+	index = clamp(index, 0, max_index)
 	move_child(game_object, index)
+	
 	var object_data: ObjectData = game_object.object_data
 	
 	layer_data.object_data.erase(object_data)
 	layer_data.object_data.insert(index, object_data)
+	_push_water_to_top()
 
 func get_absolute_z_index(target: Node2D) -> int:
 	var node = target;
@@ -62,3 +81,17 @@ func get_absolute_z_index(target: Node2D) -> int:
 			break;
 		node = node.get_parent();
 	return z_index;
+
+
+func _is_water(object_data: ObjectData) -> bool:
+	return object_data.metadata.type_id == WATER_ID
+
+
+func _push_water_to_top() -> void:
+	for node in water_stack:
+		node.raise()
+
+func refresh_object_z_index(object):
+	var last_z_index = object.z_index
+	object.z_index = -4096
+	object.z_index = last_z_index

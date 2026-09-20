@@ -1457,6 +1457,7 @@ anims/windup = SubResource( 153 )
 [node name="StarContainer" type="Node2D" parent="."]
 
 [node name="InnerStar" type="Node2D" parent="StarContainer"]
+z_index = -2
 script = ExtResource( 2 )
 
 [node name="InnerTop" type="AnimatedSprite" parent="StarContainer/InnerStar"]
@@ -1465,11 +1466,12 @@ frames = SubResource( 27 )
 playing = true
 
 [node name="InnerBottom" type="AnimatedSprite" parent="StarContainer/InnerStar"]
-z_index = 1
+z_index = 2
 frames = SubResource( 52 )
 playing = true
 
 [node name="OuterStar" type="Node2D" parent="StarContainer"]
+z_index = -1
 script = ExtResource( 2 )
 
 [node name="OuterTop" type="AnimatedSprite" parent="StarContainer/OuterStar"]
