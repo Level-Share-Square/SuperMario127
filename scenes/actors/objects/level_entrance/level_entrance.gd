@@ -4,6 +4,7 @@ extends Teleporter
 ### PROPERTIES
 
 func _init():
+	hide_teleport_properties = true
 	tag = "_entrance"
 
 func start_exit_animation(character: Character) -> void:
