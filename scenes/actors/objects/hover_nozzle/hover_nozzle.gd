@@ -48,6 +48,8 @@ func _ready():
 	gravity = CurrentLevelData.current_area.header.gravity
 	kinematic_body.get_node("Sprite_" + nozzle_map[nozzle_type]).visible = true
 	editor_rect = rect_map[nozzle_type]
+	if not is_enabled_and_on_ground():
+		run_physics = false
 	
 func _object_ready():
 	if is_enabled_and_on_ground():
