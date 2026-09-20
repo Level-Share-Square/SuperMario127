@@ -1333,10 +1333,10 @@ func kill(cause: String) -> void:
 				controllable = false
 				disable_movement = true
 #				sprite.animation = "bonkedLeft" if facing_direction == -1 else "bonkedRight"
-				sprite.animation = "jumpRight"
-#				sprite.speed_scale = 0
+				sprite.animation = "shocked"
+				sprite.speed_scale = 1
 #				sprite.frame = 0
-				sound_player.play_death_sound()
+				sound_player.play_fall_sound()
 				cutout_in = cutout_death
 				yield(get_tree().create_timer(1), "timeout")
 			"poison":

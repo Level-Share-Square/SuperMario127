@@ -19,7 +19,8 @@ func _start(_delta):
 	if character.get_state_node("DiveState").dive_buffer <= 0:
 		LastInputDevice.rumble(0.5, 0.0, 0.05)
 	character.velocity.y = -get_up_power
-	character.position.y -= 7
+	if !character.in_quicksand:
+		character.position.y -= 7
 	character.friction = character.real_friction
 	sprite.rotation_degrees = 90 * character.facing_direction
 	sprite.rotation_degrees = 1

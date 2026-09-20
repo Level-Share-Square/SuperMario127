@@ -71,7 +71,8 @@ func _stop(delta):
 	if character.is_grounded() and character.velocity.x < 5 and character.velocity.x > -5:
 		character.set_state_by_name("SlideStopState", delta, self)
 	else:
-		character.position.y -= 5
+		if !character.in_quicksand:
+			character.position.y -= 5
 		character.set_state_by_name("DiveState", delta, self)
 	stop = false
 	
@@ -79,7 +80,7 @@ func change_to_getup(delta):
 	character.sound_player.set_skid_playing(false)
 	character.particles.emitting = false
 	character.set_state_by_name("GetupState", delta)
-	if !character.test_move(character.transform, Vector2(0, -16)):
+	if !character.test_move(character.transform, Vector2(0, -16)) and !character.in_quicksand:
 		character.position.y -= 16
 	getup_buffer = 0
 	ledge_buffer = 0

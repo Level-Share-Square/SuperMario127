@@ -75,7 +75,8 @@ func _start(_delta : float) -> void:
 				trail_tween.tween_callback(trail, "queue_free")
 		else:
 			sound_player.play_dive_sound()
-	character.position.y += 4
+	if !character.in_quicksand:
+		character.position.y += 4
 	character.rotating = true
 	character.ground_shape.disabled = true
 	if abs(character.velocity.x) > maxVelocityX:
@@ -143,7 +144,8 @@ func _stop(delta : float) -> void:
 		if character.check_liquid(LiquidBase.LiquidType.Quicksand) or character.check_liquid(LiquidBase.LiquidType.Lava):
 			# below fixes an issue with dives putting your bottom 
 			# position below the actual surface of the liquid
-			character.global_position.y -= 12
+			if !character.in_quicksand:
+				character.global_position.y -= 12
 
 func _stop_check(_delta : float) -> bool:
 	return character.is_grounded() or (character.is_walled_right() and character.facing_direction == 1) or (character.is_walled_left() and character.facing_direction == -1)

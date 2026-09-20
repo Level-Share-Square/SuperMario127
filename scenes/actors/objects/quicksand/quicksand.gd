@@ -7,7 +7,7 @@ onready var threshold_gradient : TextureRect = $Visual/ThresholdGradient
 onready var bubbles : Particles2D = $Visual/InstaKillBubbles
 
 var sinking_speed : float = 30.0
-var death_threshold : float = 128.0
+var death_threshold : float = 64.0
 
 ## Box which determines where mario will slow down to a crawl when walking
 var sink_rect := Rect2(Vector2(0, death_threshold), size)
