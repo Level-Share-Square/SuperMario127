@@ -207,7 +207,7 @@ func change_song(old_setting, music_setting) -> void:
 	
 	song_switched = true
 	
-	if song != null and !(stream == song.stream or stream == song.blended_stream):
+	if song != null and !(stream == song.stream or (song.blended_stream and stream == song.blended_stream)):
 		custom_loop = false
 		stream = song.stream if not song.blended_stream else song.blended_stream
 		base_volume = song.volume_db
