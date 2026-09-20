@@ -15,7 +15,7 @@ func _ready():
 	blacklisted_states = ["SlideStopState"]
 
 func _is_squished() -> bool:
-	return character.predictive_collision and crushed_detector.get_overlapping_bodies().size() > 1
+	return false #character.predictive_collision and crushed_detector.get_overlapping_bodies().size() > 1
 
 func _past_squish_threshold() -> bool:
 	return pain_detector.get_overlapping_bodies().size() > 0
