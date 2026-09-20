@@ -6,7 +6,11 @@
 [resource]
 script = ExtResource( 1 )
 stream = ExtResource( 2 )
+stream_link = ""
+underwater_stream_link = ""
+blended_stream_link = ""
 volume_db = 0
 pitch_scale = 1
-title = "Dire Dire Docks"
+title = "Dire, Dire Docks"
 note = "From Mario Kart World"
+type = 0
