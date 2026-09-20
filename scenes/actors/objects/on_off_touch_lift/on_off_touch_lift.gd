@@ -158,8 +158,9 @@ func _ready():
 func update_property(key, value):
 	match(key):
 		"palette":
-			start_sprite_node.get_child(0).region_rect.position.y = int(value) * 13
-			end_sprite_node.get_child(0).region_rect.position.y = int(value) * 13
+			if mode == 1:
+				start_sprite_node.get_child(0).region_rect.position.y = int(value) * 13
+				end_sprite_node.get_child(0).region_rect.position.y = int(value) * 13
 
 
 func _object_ready():
