@@ -44,11 +44,12 @@ static func recalculate_level_collectible_counts(level_data_container) -> void:
 					area.header.max_purples_count += 1
 					
 				if object.metadata.type_id == SHINE_ID and (object.get_property(ENABLED_PROP_ID) == null or object.get_property(ENABLED_PROP_ID) == true):
-					if object.properties[7]:
-						if not used_mission_data.get(object.properties[7], null):
-							used_mission_data[object.properties[7]] = 1
-					else:
-						used_mission_data[object.properties[7]] = used_mission_data[object.properties[7]] + 1
+					if object.properties.size() >= 8:
+						if object.properties[7]:
+							if not used_mission_data.get(object.properties[7], null):
+								used_mission_data[object.properties[7]] = 1
+						else:
+							used_mission_data[object.properties[7]] = used_mission_data[object.properties[7]] + 1
 						
 				if object.metadata.type_id == STAR_COIN_ID and (object.get_property(ENABLED_PROP_ID) == null or object.get_property(ENABLED_PROP_ID) == true):
 					var uuid: String = object.properties[4]

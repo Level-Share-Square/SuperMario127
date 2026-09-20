@@ -198,8 +198,8 @@ func update_shine_info():
 	level_name_backing.text = level_info.level_name
 	
 	if level_info.selected_shine == -1: # This can happen if there are no shine sprites in the level
-		shine_description.bbcode_text = "[center]There are no shine sprites in this level.[/center]"
-		shine_name.bbcode_text = "[center]No shine sprite selected[/center]"
+		shine_description.bbcode_text = "[center]There are no missions in this level.[/center]"
+		shine_name.bbcode_text = "[center]No mission selected[/center]"
 	else:
 		var selected_shine_info = level_info.shine_details[level_info.selected_shine + shine_offset]
 		shine_description.bbcode_text = "[center]%s[/center]" % selected_shine_info["description"] 

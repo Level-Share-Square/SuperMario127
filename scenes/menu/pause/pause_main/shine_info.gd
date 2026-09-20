@@ -84,8 +84,8 @@ func update_info():
 
 func update_shine_info():
 	if total_shines <= 0: # This can happen if there are no shine sprites in the level
-		shine_name.text = "No shine sprite selected"
-		shine_description.bbcode_text = "[center]There are no shine sprites in this level.[/center]"
+		shine_name.text = "No mission selected"
+		shine_description.bbcode_text = "[center]There are no missions in this level.[/center]"
 	else:
 		var selected_shine_info = show_in_menu_missions[selected_shine_index + shine_offset]
 		shine_name.text = selected_shine_info.shine_name
