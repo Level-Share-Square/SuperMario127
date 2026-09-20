@@ -20,7 +20,13 @@ func _register_properties():
 func _register_property_info():
 	set_property_info("activated", PropertyInfo.new("If true, this block exists unless a P-Switch is active.\nIf false, vice versa.", 1, -INF, INF, ["", ""], ["", ""], false, "Activated"))
 
+func property_changed(key, value):
+	p.visible = is_enabled_and_on_ground()
+
 func _ready() -> void:
+	connect("property_changed", self, "property_changed")
+	property_changed("enabled", enabled)
+	
 	current_scene = get_tree().get_current_scene()
 	if scale != Vector2.ONE: # Nothing to do on default scale
 		# Set inverse scale on the body so its overall scale is identity.
@@ -34,7 +40,6 @@ func _ready() -> void:
 
 func _object_ready():
 	._object_ready()
-	p.visible = is_enabled_and_on_ground()
 	collision_shape.disabled = !is_enabled_and_on_ground()
 	area_collision_shape.disabled = !is_enabled_and_on_ground()
 
