@@ -651,7 +651,7 @@ func get_powerup_node(name: String) -> Node:
 	return null
 
 func set_powerup(powerup_node: Node, set_temporary_music: bool, duration = -1) -> void:
-	if is_instance_valid(powerup):
+	if is_instance_valid(powerup) and powerup != powerup_node:
 		# Prevent switching away from rainbow star
 		if powerup.name == "RainbowPowerup" and powerup != powerup_node\
 		and is_instance_valid(powerup_node): # unless it's running out
