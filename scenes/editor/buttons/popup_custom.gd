@@ -10,6 +10,8 @@ var use_icon: bool = true
 export var open_icon: StreamTexture
 export var close_icon: StreamTexture
 
+signal opened(window)
+
 func _ready():
 	add_child(tween)
 	menu.rect_scale.y = 0
@@ -31,3 +33,5 @@ func toggle_menu(is_visible: bool = not menu_visible):
 			0.2, Tween.TRANS_CUBIC, Tween.EASE_OUT
 		)
 		tween.start()
+		
+	if is_visible: emit_signal("opened", menu)

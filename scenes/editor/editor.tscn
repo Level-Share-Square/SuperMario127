@@ -306,6 +306,7 @@ unique_name_in_owner = true
 script = ExtResource( 16 )
 
 [node name="ZIndex" type="Node2D" parent="."]
+visible = false
 z_index = 4096
 z_as_relative = false
 
@@ -2183,6 +2184,7 @@ bus = "Sounds"
 [connection signal="pressed" from="UI/UIContainer/ItemPickerPanel/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer2/ItemPalettes" to="UI/UIContainer/ItemPickerPanel" method="toggle_palettes"]
 [connection signal="pressed" from="UI/UIContainer/EditorUI/Top/Options/PanelContainer/Settings" to="UI/LevelSettingsWindow" method="toggle_window"]
 [connection signal="pressed" from="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/PanelContainer/Settings/AreaSettings" to="UI/AreaSettingsWindow" method="toggle_window"]
+[connection signal="opened" from="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/PanelContainer/Settings/View" to="UI/UIContainer/EditorUI/Top" method="dropdown_opened"]
 [connection signal="pressed" from="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/PanelContainer/Settings/Save" to="SaveManager" method="save_pressed"]
 [connection signal="pressed" from="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/PanelContainer/Settings/Quit" to="SaveManager" method="quit_pressed"]
 [connection signal="value_changed" from="UI/UIContainer/EditorUI/Top/Options/VBoxContainer/Padding/ViewMenu/ViewDropdown/HBoxContainer/SnapValue" to="UI/UIContainer/EditorUI/Top" method="new_snap_value"]

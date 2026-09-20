@@ -63,3 +63,7 @@ func on_button_pressed(button: Button):
 
 func new_snap_value(value):
 	CurrentLevelData.editor_data.pixel_snap = Vector2(round(value), round(value))
+
+
+func dropdown_opened(window):
+	load_properties()
