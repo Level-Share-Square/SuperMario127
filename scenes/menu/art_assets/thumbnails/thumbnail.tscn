@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=2]
 
-[ext_resource path="res://assets/fonts/New Super Mario Font U.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://assets/fonts/MARIO_Font_v3_Solid.otf" type="DynamicFontData" id=1]
 [ext_resource path="res://assets/artwork/logo_shadowed.png" type="Texture" id=2]
 [ext_resource path="res://scenes/menu/theme.tres" type="Theme" id=3]
 [ext_resource path="res://scenes/menu/art_assets/thumbnails/bullies.png" type="Texture" id=4]
@@ -29,7 +29,7 @@ fill_from = Vector2( 0.5, 0.5 )
 fill_to = Vector2( 0.5, 1 )
 
 [sub_resource type="DynamicFont" id=7]
-size = 128
+size = 112
 outline_size = 12
 outline_color = Color( 0, 0.0431373, 0.313726, 1 )
 font_data = ExtResource( 1 )
@@ -78,14 +78,14 @@ margin_bottom = 1080.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="EndCards/Viewport/CenterContainer"]
 margin_left = 320.0
-margin_top = 146.0
+margin_top = 157.0
 margin_right = 1600.0
-margin_bottom = 934.0
+margin_bottom = 923.0
 custom_constants/separation = 56
 
 [node name="VBoxContainer" type="VBoxContainer" parent="EndCards/Viewport/CenterContainer/HBoxContainer"]
 margin_right = 1280.0
-margin_bottom = 788.0
+margin_bottom = 766.0
 custom_constants/separation = 16
 alignment = 1
 
@@ -115,7 +115,7 @@ size_flags_horizontal = 3
 [node name="Label" type="Label" parent="EndCards/Viewport/CenterContainer/HBoxContainer/VBoxContainer"]
 margin_top = 653.0
 margin_right = 1280.0
-margin_bottom = 788.0
+margin_bottom = 766.0
 grow_horizontal = 2
 grow_vertical = 2
 rect_min_size = Vector2( 181, 0 )

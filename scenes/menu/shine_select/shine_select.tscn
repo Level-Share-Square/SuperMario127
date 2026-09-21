@@ -1,7 +1,7 @@
 [gd_scene load_steps=64 format=2]
 
 [ext_resource path="res://scenes/menu/theme.tres" type="Theme" id=1]
-[ext_resource path="res://assets/fonts/New Super Mario Font U.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://assets/fonts/MARIO_Font_v3_Solid.otf" type="DynamicFontData" id=2]
 [ext_resource path="res://scenes/shared/backgrounds.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/menu/shine_select/stripes.png" type="Texture" id=4]
 [ext_resource path="res://scenes/menu/shine_select/shine_select.gd" type="Script" id=5]
@@ -73,7 +73,7 @@ shader_param/speed = 0.22
 shader_param/direction = 1.0
 
 [sub_resource type="DynamicFont" id=21]
-size = 28
+size = 22
 outline_size = 3
 outline_color = Color( 0, 0, 0, 1 )
 extra_spacing_char = -1
@@ -470,7 +470,7 @@ rect_min_size = Vector2( 0, 8 )
 unique_name_in_owner = true
 margin_top = 16.0
 margin_right = 768.0
-margin_bottom = 46.0
+margin_bottom = 39.0
 custom_fonts/font = SubResource( 21 )
 text = "My Level"
 align = 1
@@ -488,16 +488,16 @@ align = 1
 clip_text = true
 
 [node name="Padding2" type="Control" parent="VBoxContainer/TopBar/VBoxContainer"]
-margin_top = 54.0
+margin_top = 47.0
 margin_right = 768.0
-margin_bottom = 62.0
+margin_bottom = 55.0
 rect_min_size = Vector2( 0, 8 )
 
 [node name="ShineTitle" type="Label" parent="VBoxContainer/TopBar/VBoxContainer"]
 unique_name_in_owner = true
-margin_top = 70.0
+margin_top = 63.0
 margin_right = 768.0
-margin_bottom = 95.0
+margin_bottom = 88.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "The Rainbow Shine Sprite"
 align = 1

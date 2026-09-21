@@ -10,7 +10,6 @@
 [ext_resource path="res://scenes/menu/box_shadow.png" type="Texture" id=8]
 [ext_resource path="res://scenes/menu/screen.gd" type="Script" id=9]
 [ext_resource path="res://scenes/menu/level_portal/default_thumb.png" type="Texture" id=10]
-[ext_resource path="res://assets/fonts/New Super Mario Font U.ttf" type="DynamicFontData" id=11]
 [ext_resource path="res://assets/icons/shine.png" type="Texture" id=12]
 [ext_resource path="res://assets/icons/star_coin.png" type="Texture" id=13]
 [ext_resource path="res://scenes/menu/button_scripts/button_hover-horizontal.gd" type="Script" id=14]
@@ -58,6 +57,7 @@
 [ext_resource path="res://scenes/menu/levels_list/campaign_panel.gd" type="Script" id=56]
 [ext_resource path="res://scenes/menu/levels_list/campaign_settings.gd" type="Script" id=57]
 [ext_resource path="res://assets/icons/EditorSave.svg" type="Texture" id=58]
+[ext_resource path="res://assets/fonts/MARIO_Font_v3_Solid.otf" type="DynamicFontData" id=59]
 
 [sub_resource type="CanvasItemMaterial" id=22]
 blend_mode = 1
@@ -181,11 +181,13 @@ tracks/3/keys = {
 }
 
 [sub_resource type="DynamicFont" id=12]
-size = 22
+size = 18
 outline_size = 2
 outline_color = Color( 0, 0.0431373, 0.313726, 1 )
+extra_spacing_top = 1
+extra_spacing_bottom = 1
 extra_spacing_char = -1
-font_data = ExtResource( 11 )
+font_data = ExtResource( 59 )
 
 [sub_resource type="Animation" id=13]
 length = 0.001
@@ -267,11 +269,11 @@ tracks/2/keys = {
 }
 
 [sub_resource type="DynamicFont" id=31]
-size = 28
+size = 20
 outline_size = 2
 outline_color = Color( 0, 0.0431373, 0.313726, 1 )
 extra_spacing_char = -1
-font_data = ExtResource( 11 )
+font_data = ExtResource( 59 )
 
 [sub_resource type="Animation" id=29]
 length = 0.001
@@ -1068,7 +1070,7 @@ custom_constants/separation = 0
 
 [node name="Title" type="Label" parent="Panel/Subscreens/LevelInfo/LevelPanel/InfoTab/Info"]
 margin_right = 380.0
-margin_bottom = 24.0
+margin_bottom = 21.0
 custom_fonts/font = SubResource( 12 )
 text = "SM63 Tall Tall Mountain +"
 align = 1
@@ -1091,9 +1093,9 @@ __meta__ = {
 }
 
 [node name="Author" type="Label" parent="Panel/Subscreens/LevelInfo/LevelPanel/InfoTab/Info"]
-margin_top = 24.0
+margin_top = 21.0
 margin_right = 380.0
-margin_bottom = 41.0
+margin_bottom = 38.0
 custom_fonts/font = ExtResource( 23 )
 text = "by hop193"
 align = 1
@@ -1101,15 +1103,15 @@ valign = 1
 clip_text = true
 
 [node name="Padding" type="Control" parent="Panel/Subscreens/LevelInfo/LevelPanel/InfoTab/Info"]
-margin_top = 41.0
+margin_top = 38.0
 margin_right = 380.0
-margin_bottom = 47.0
+margin_bottom = 44.0
 rect_min_size = Vector2( 0, 6 )
 
 [node name="Shines" type="HBoxContainer" parent="Panel/Subscreens/LevelInfo/LevelPanel/InfoTab/Info"]
-margin_top = 47.0
+margin_top = 44.0
 margin_right = 380.0
-margin_bottom = 83.0
+margin_bottom = 80.0
 
 [node name="Control" type="Control" parent="Panel/Subscreens/LevelInfo/LevelPanel/InfoTab/Info/Shines"]
 margin_right = 36.0
@@ -1140,9 +1142,9 @@ align = 1
 valign = 1
 
 [node name="StarCoins" type="HBoxContainer" parent="Panel/Subscreens/LevelInfo/LevelPanel/InfoTab/Info"]
-margin_top = 83.0
+margin_top = 80.0
 margin_right = 380.0
-margin_bottom = 119.0
+margin_bottom = 116.0
 
 [node name="Control" type="Control" parent="Panel/Subscreens/LevelInfo/LevelPanel/InfoTab/Info/StarCoins"]
 margin_right = 36.0
@@ -1173,15 +1175,15 @@ align = 1
 valign = 1
 
 [node name="Padding2" type="Control" parent="Panel/Subscreens/LevelInfo/LevelPanel/InfoTab/Info"]
-margin_top = 119.0
+margin_top = 116.0
 margin_right = 380.0
-margin_bottom = 125.0
+margin_bottom = 122.0
 rect_min_size = Vector2( 0, 6 )
 
 [node name="Completion" type="Label" parent="Panel/Subscreens/LevelInfo/LevelPanel/InfoTab/Info"]
-margin_top = 125.0
+margin_top = 122.0
 margin_right = 104.0
-margin_bottom = 150.0
+margin_bottom = 147.0
 size_flags_horizontal = 0
 text = "Completed: "
 valign = 1
@@ -1620,7 +1622,7 @@ alignment = 1
 
 [node name="Title" type="Label" parent="Panel/Subscreens/CampaignInfo/CampaignPanel/InfoTab/Info"]
 margin_right = 336.0
-margin_bottom = 30.0
+margin_bottom = 21.0
 custom_fonts/font = SubResource( 31 )
 text = "Super Mario 4D Galaxy 12"
 align = 1
@@ -1645,9 +1647,9 @@ __meta__ = {
 }
 
 [node name="Author" type="Label" parent="Panel/Subscreens/CampaignInfo/CampaignPanel/InfoTab/Info"]
-margin_top = 30.0
+margin_top = 21.0
 margin_right = 336.0
-margin_bottom = 47.0
+margin_bottom = 38.0
 custom_fonts/font = ExtResource( 23 )
 text = "by Mario"
 align = 1
@@ -1655,21 +1657,21 @@ valign = 1
 clip_text = true
 
 [node name="Padding" type="Control" parent="Panel/Subscreens/CampaignInfo/CampaignPanel/InfoTab/Info"]
-margin_top = 47.0
+margin_top = 38.0
 margin_right = 336.0
-margin_bottom = 55.0
+margin_bottom = 46.0
 rect_min_size = Vector2( 0, 8 )
 
 [node name="Padding2" type="Control" parent="Panel/Subscreens/CampaignInfo/CampaignPanel/InfoTab/Info"]
-margin_top = 55.0
+margin_top = 46.0
 margin_right = 336.0
-margin_bottom = 67.0
+margin_bottom = 58.0
 rect_min_size = Vector2( 0, 12 )
 
 [node name="Panel" type="Panel" parent="Panel/Subscreens/CampaignInfo/CampaignPanel/InfoTab/Info"]
 self_modulate = Color( 0, 0, 0, 0.501961 )
 show_behind_parent = true
-margin_top = 67.0
+margin_top = 58.0
 margin_right = 336.0
 margin_bottom = 267.0
 size_flags_vertical = 3
@@ -1686,7 +1688,7 @@ custom_constants/margin_bottom = 4
 margin_left = 4.0
 margin_top = 4.0
 margin_right = 332.0
-margin_bottom = 196.0
+margin_bottom = 205.0
 custom_fonts/normal_font = ExtResource( 23 )
 bbcode_enabled = true
 bbcode_text = "[center]After two years of working on this level (on and off but still), it's finally complete; Super Mario 63 Tall Tall Mountain +!
@@ -1924,9 +1926,9 @@ level_code_path = NodePath("../VBoxContainer/Panel/MarginContainer/LevelCode")
 list_handler_path = NodePath("../../../LevelView/ScrollContainer/MarginContainer/ListHandler")
 
 [node name="Return" type="Button" parent="Panel/Subscreens/AddElement/Control/ElementAddButtons"]
-margin_top = 54.0
+margin_top = 69.0
 margin_right = 163.0
-margin_bottom = 74.0
+margin_bottom = 89.0
 rect_min_size = Vector2( 0, 20 )
 focus_neighbour_top = NodePath("../ImportCode")
 theme_type_variation = "AlternateButton"
@@ -1951,15 +1953,15 @@ script = ExtResource( 29 )
 offset = Vector2( -49, 0 )
 
 [node name="Padding" type="Control" parent="Panel/Subscreens/AddElement/Control/ElementAddButtons"]
-margin_top = 84.0
+margin_top = 99.0
 margin_right = 163.0
-margin_bottom = 104.0
+margin_bottom = 119.0
 rect_min_size = Vector2( 0, 20 )
 
 [node name="NewLevel" type="Button" parent="Panel/Subscreens/AddElement/Control/ElementAddButtons"]
-margin_top = 114.0
+margin_top = 129.0
 margin_right = 163.0
-margin_bottom = 134.0
+margin_bottom = 149.0
 rect_min_size = Vector2( 0, 20 )
 theme_type_variation = "AlternateButton"
 text = "New Level"
@@ -1979,9 +1981,9 @@ script = ExtResource( 29 )
 offset = Vector2( -69, 0 )
 
 [node name="NewFolder" type="Button" parent="Panel/Subscreens/AddElement/Control/ElementAddButtons"]
-margin_top = 144.0
+margin_top = 159.0
 margin_right = 163.0
-margin_bottom = 164.0
+margin_bottom = 179.0
 rect_min_size = Vector2( 0, 20 )
 theme_type_variation = "AlternateButton"
 text = "New Folder"
@@ -2024,14 +2026,14 @@ script = ExtResource( 29 )
 offset = Vector2( -91, 0 )
 
 [node name="Padding2" type="Control" parent="Panel/Subscreens/AddElement/Control/ElementAddButtons"]
-margin_top = 204.0
+margin_top = 189.0
 margin_right = 163.0
-margin_bottom = 204.0
+margin_bottom = 189.0
 
 [node name="ImportCode" type="Button" parent="Panel/Subscreens/AddElement/Control/ElementAddButtons"]
-margin_top = 214.0
+margin_top = 199.0
 margin_right = 163.0
-margin_bottom = 234.0
+margin_bottom = 219.0
 rect_min_size = Vector2( 0, 20 )
 focus_neighbour_bottom = NodePath("../Return")
 theme_type_variation = "AlternateButton"

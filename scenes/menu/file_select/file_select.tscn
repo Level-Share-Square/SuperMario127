@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://scenes/menu/theme.tres" type="Theme" id=1]
 [ext_resource path="res://scenes/menu/button_scripts/button_hover-horizontal.gd" type="Script" id=2]
@@ -7,7 +7,6 @@
 [ext_resource path="res://assets/sounds/click2.wav" type="AudioStream" id=5]
 [ext_resource path="res://scenes/menu/ui_focus.gd" type="Script" id=6]
 [ext_resource path="res://assets/sounds/hover.wav" type="AudioStream" id=7]
-[ext_resource path="res://assets/fonts/New Super Mario Font U.ttf" type="DynamicFontData" id=8]
 [ext_resource path="res://scenes/menu/button_scripts/button_hover-vertical.gd" type="Script" id=9]
 [ext_resource path="res://scenes/actors/objects/hover_box/hover_box.png" type="Texture" id=10]
 [ext_resource path="res://assets/icons/star_coin.png" type="Texture" id=11]
@@ -25,13 +24,6 @@ colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 0.831373, 1, 1, 1, 0 )
 gradient = SubResource( 6 )
 fill_from = Vector2( 0, 1 )
 fill_to = Vector2( 0, 0 )
-
-[sub_resource type="DynamicFont" id=3]
-size = 28
-outline_size = 2
-outline_color = Color( 0, 0.0431373, 0.313726, 1 )
-extra_spacing_char = -1
-font_data = ExtResource( 8 )
 
 [sub_resource type="Gradient" id=4]
 colors = PoolColorArray( 1, 1, 1, 0, 0.72549, 0.843137, 0.937255, 1 )
@@ -246,39 +238,6 @@ patch_margin_left = 11
 patch_margin_top = 11
 patch_margin_right = 11
 patch_margin_bottom = 11
-
-[node name="CenterContainer" type="CenterContainer" parent="MarginContainer2/VBoxContainer/WhiteBar"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_bottom = 32.0
-rect_rotation = 5.0
-rect_pivot_offset = Vector2( 384, 48 )
-mouse_filter = 2
-
-[node name="Title" type="Label" parent="MarginContainer2/VBoxContainer/WhiteBar/CenterContainer"]
-margin_left = 325.0
-margin_top = 49.0
-margin_right = 482.0
-margin_bottom = 79.0
-size_flags_horizontal = 3
-custom_fonts/font = SubResource( 3 )
-text = "Select a file!"
-align = 1
-valign = 1
-
-[node name="Shadow" type="Label" parent="MarginContainer2/VBoxContainer/WhiteBar/CenterContainer/Title"]
-show_behind_parent = true
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = 3.0
-margin_bottom = 3.0
-custom_colors/font_color = Color( 0, 0.0431373, 0.313726, 1 )
-custom_fonts/font = SubResource( 3 )
-text = "Select a file!"
-align = 1
-valign = 1
-clip_text = true
 
 [node name="Padding" type="Control" parent="MarginContainer2/VBoxContainer"]
 margin_top = 96.0
@@ -794,14 +753,14 @@ size_flags_vertical = 3
 
 [node name="Collectibles" type="GridContainer" parent="MarginContainer2/VBoxContainer/Control/FileCards/FileC/Button/Info/VBoxContainer"]
 visible = false
-margin_top = 38.0
-margin_right = 152.0
-margin_bottom = 114.0
+margin_top = 33.0
+margin_right = 136.0
+margin_bottom = 109.0
 mouse_filter = 2
 custom_constants/hseparation = 12
 
 [node name="Shines" type="HBoxContainer" parent="MarginContainer2/VBoxContainer/Control/FileCards/FileC/Button/Info/VBoxContainer/Collectibles"]
-margin_right = 66.0
+margin_right = 100.0
 margin_bottom = 36.0
 mouse_filter = 2
 
@@ -830,7 +789,7 @@ stretch_mode = 6
 [node name="ShinesLabel" type="Label" parent="MarginContainer2/VBoxContainer/Control/FileCards/FileC/Button/Info/VBoxContainer/Collectibles/Shines"]
 margin_left = 40.0
 margin_top = 5.0
-margin_right = 66.0
+margin_right = 100.0
 margin_bottom = 30.0
 custom_colors/font_color = Color( 0, 0.0431373, 0.313726, 1 )
 text = "32/128"
@@ -839,7 +798,7 @@ valign = 1
 
 [node name="StarCoins" type="HBoxContainer" parent="MarginContainer2/VBoxContainer/Control/FileCards/FileC/Button/Info/VBoxContainer/Collectibles"]
 margin_top = 40.0
-margin_right = 66.0
+margin_right = 100.0
 margin_bottom = 76.0
 mouse_filter = 2
 
@@ -868,7 +827,7 @@ stretch_mode = 6
 [node name="StarCoinsLabel" type="Label" parent="MarginContainer2/VBoxContainer/Control/FileCards/FileC/Button/Info/VBoxContainer/Collectibles/StarCoins"]
 margin_left = 40.0
 margin_top = 5.0
-margin_right = 66.0
+margin_right = 100.0
 margin_bottom = 30.0
 custom_colors/font_color = Color( 0, 0.0431373, 0.313726, 1 )
 text = "32/128"

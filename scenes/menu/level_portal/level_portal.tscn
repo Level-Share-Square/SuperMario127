@@ -27,13 +27,13 @@
 [ext_resource path="res://scenes/menu/level_portal/pages.gd" type="Script" id=25]
 [ext_resource path="res://scenes/menu/level_portal/http/http_images.gd" type="Script" id=26]
 [ext_resource path="res://scenes/menu/level_portal/page_button.tscn" type="PackedScene" id=27]
+[ext_resource path="res://assets/fonts/MARIO_Font_v3_Solid.otf" type="DynamicFontData" id=28]
 [ext_resource path="res://scenes/actors/objects/shine/frames_normal.tres" type="SpriteFrames" id=29]
 [ext_resource path="res://scenes/menu/level_portal/go_to_page.gd" type="Script" id=30]
 [ext_resource path="res://shaders/outline2.shader" type="Shader" id=31]
 [ext_resource path="res://scenes/menu/level_portal/default_thumb.png" type="Texture" id=32]
 [ext_resource path="res://assets/icons/star_empty.png" type="Texture" id=33]
 [ext_resource path="res://assets/icons/star_filled.png" type="Texture" id=34]
-[ext_resource path="res://assets/fonts/New Super Mario Font U.ttf" type="DynamicFontData" id=35]
 [ext_resource path="res://assets/icons/favorites.png" type="Texture" id=36]
 [ext_resource path="res://assets/icons/play.png" type="Texture" id=37]
 [ext_resource path="res://scenes/menu/level_portal/default_icon.png" type="Texture" id=38]
@@ -319,11 +319,11 @@ fill = 1
 fill_from = Vector2( 0.5, 1 )
 
 [sub_resource type="DynamicFont" id=206]
-size = 22
+size = 18
 outline_size = 2
 outline_color = Color( 0, 0.0431373, 0.313726, 1 )
 extra_spacing_char = -1
-font_data = ExtResource( 35 )
+font_data = ExtResource( 28 )
 
 [sub_resource type="Shader" id=12]
 code = "shader_type canvas_item;
@@ -2235,10 +2235,10 @@ alignment = 1
 
 [node name="LevelTitle" type="Label" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/HBoxContainer/Title/Clipper/HBoxContainer"]
 unique_name_in_owner = true
-margin_left = 30.0
-margin_top = 4.0
-margin_right = 278.0
-margin_bottom = 28.0
+margin_left = 33.0
+margin_top = 6.0
+margin_right = 274.0
+margin_bottom = 25.0
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 206 )
 text = "SM63 Tall Tall Mountain +"

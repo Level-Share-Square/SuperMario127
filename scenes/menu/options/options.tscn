@@ -27,7 +27,7 @@
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=25]
 [ext_resource path="res://scenes/menu/version_number.gd" type="Script" id=26]
 [ext_resource path="res://scenes/menu/options/General.gd" type="Script" id=27]
-[ext_resource path="res://assets/fonts/New Super Mario Font U.ttf" type="DynamicFontData" id=28]
+[ext_resource path="res://assets/fonts/MARIO_Font_v3_Solid.otf" type="DynamicFontData" id=28]
 [ext_resource path="res://scenes/actors/mario/palettes/mario/default.png" type="Texture" id=29]
 [ext_resource path="res://scenes/menu/options/character/mario_frames.tres" type="SpriteFrames" id=30]
 [ext_resource path="res://scenes/menu/options/character/character_sprite.gd" type="Script" id=31]
@@ -66,8 +66,8 @@ func _ready():
 		get_parent().hide()
 "
 
-[sub_resource type="DynamicFont" id=33]
-size = 28
+[sub_resource type="DynamicFont" id=129]
+size = 24
 outline_size = 3
 outline_color = Color( 0, 0, 0, 1 )
 extra_spacing_char = -1
@@ -698,10 +698,10 @@ alignment = 2
 
 [node name="CharNameLabel" type="Label" parent="Subscreens/Character/HBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
-margin_top = 14.0
+margin_top = 19.0
 margin_right = 540.0
 margin_bottom = 44.0
-custom_fonts/font = SubResource( 33 )
+custom_fonts/font = SubResource( 129 )
 text = "Mario"
 align = 1
 
@@ -712,7 +712,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 3.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_fonts/font = SubResource( 33 )
+custom_fonts/font = SubResource( 129 )
 text = "Mario"
 align = 1
 __meta__ = {
@@ -1198,9 +1198,9 @@ script = ExtResource( 17 )
 category_paths = [ NodePath("Gameplay"), NodePath("Interface"), NodePath("Hotkeys"), NodePath("Editor/Tab1"), NodePath("Editor/Tab2"), NodePath("Editor/Tab3") ]
 
 [node name="Gameplay" type="GridContainer" parent="Subscreens/Controls/VBoxContainer/Remapper"]
-margin_left = 32.0
+margin_left = 14.0
 margin_top = 1.0
-margin_right = 512.0
+margin_right = 530.0
 margin_bottom = 226.0
 custom_constants/vseparation = 24
 custom_constants/hseparation = 32
@@ -1448,9 +1448,9 @@ sprite_visible = false
 
 [node name="Hotkeys" type="GridContainer" parent="Subscreens/Controls/VBoxContainer/Remapper"]
 visible = false
-margin_left = 32.0
+margin_left = 28.0
 margin_top = 64.0
-margin_right = 512.0
+margin_right = 516.0
 margin_bottom = 164.0
 custom_constants/vseparation = 24
 custom_constants/hseparation = 32
@@ -2206,7 +2206,7 @@ script = ExtResource( 19 )
 script = ExtResource( 24 )
 
 [node name="Label" type="Label" parent="."]
-modulate = Color( 1, 1, 1, 0.954246 )
+modulate = Color( 1, 1, 1, 0.666667 )
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0

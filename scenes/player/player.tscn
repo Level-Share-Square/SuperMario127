@@ -26,7 +26,6 @@
 [ext_resource path="res://scenes/player/ui_new/fludd/stamina.tscn" type="PackedScene" id=24]
 [ext_resource path="res://scenes/player/ui_new/text/sign_text.tscn" type="PackedScene" id=25]
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=26]
-[ext_resource path="res://assets/fonts/New Super Mario Font U.ttf" type="DynamicFontData" id=27]
 [ext_resource path="res://scenes/player/ui_new/shine/shine_get.gd" type="Script" id=28]
 [ext_resource path="res://scenes/player/ui_new/collectibles/purple_starbits.gd" type="Script" id=29]
 [ext_resource path="res://scenes/player/ui_new/touch/touch_controls.tscn" type="PackedScene" id=30]
@@ -50,6 +49,7 @@
 [ext_resource path="res://assets/sounds/switch_off.wav" type="AudioStream" id=48]
 [ext_resource path="res://assets/sounds/blue_coin.wav" type="AudioStream" id=49]
 [ext_resource path="res://scenes/player/ui_new/health/hit_vignette.gd" type="Script" id=50]
+[ext_resource path="res://assets/fonts/MARIO_Font_v3_Solid.otf" type="DynamicFontData" id=51]
 [ext_resource path="res://assets/sounds/p_switch_tick.wav" type="AudioStream" id=58]
 [ext_resource path="res://assets/sounds/p_switch_end.wav" type="AudioStream" id=59]
 [ext_resource path="res://assets/sounds/boo_laugh.wav" type="AudioStream" id=60]
@@ -454,11 +454,11 @@ tracks/5/keys = {
 }
 
 [sub_resource type="DynamicFont" id=21]
-size = 28
+size = 24
 outline_size = 3
 outline_color = Color( 0, 0, 0, 1 )
 extra_spacing_char = -1
-font_data = ExtResource( 27 )
+font_data = ExtResource( 51 )
 
 [sub_resource type="DynamicFont" id=11]
 size = 20
@@ -810,19 +810,23 @@ fill = 1
 fill_from = Vector2( 0, 1 )
 
 [sub_resource type="DynamicFont" id=251]
-size = 24
+size = 20
 outline_size = 2
 outline_color = Color( 0, 0.0431373, 0.313726, 1 )
 use_filter = true
+extra_spacing_top = -2
+extra_spacing_bottom = 2
 extra_spacing_char = -1
-font_data = ExtResource( 27 )
+font_data = ExtResource( 51 )
 
 [sub_resource type="DynamicFont" id=260]
-size = 24
+size = 20
 outline_size = 2
 use_filter = true
+extra_spacing_top = -2
+extra_spacing_bottom = 2
 extra_spacing_char = -1
-font_data = ExtResource( 27 )
+font_data = ExtResource( 51 )
 
 [sub_resource type="Animation" id=262]
 length = 0.001
@@ -1935,13 +1939,13 @@ custom_constants/separation = 6
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UIUnder/HUD/Control/ShineGet/VBoxContainer"]
 margin_right = 256.0
-margin_bottom = 30.0
+margin_bottom = 25.0
 alignment = 1
 
 [node name="GetLabel" type="Label" parent="UIUnder/HUD/Control/ShineGet/VBoxContainer/HBoxContainer"]
-margin_left = 61.0
-margin_right = 194.0
-margin_bottom = 30.0
+margin_left = 59.0
+margin_right = 197.0
+margin_bottom = 25.0
 custom_fonts/font = SubResource( 21 )
 text = "Shine Get!"
 align = 1
@@ -1957,9 +1961,9 @@ text = "Shine Get!"
 align = 1
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="UIUnder/HUD/Control/ShineGet/VBoxContainer"]
-margin_top = 36.0
+margin_top = 31.0
 margin_right = 256.0
-margin_bottom = 60.0
+margin_bottom = 55.0
 alignment = 1
 
 [node name="ShineName" type="Label" parent="UIUnder/HUD/Control/ShineGet/VBoxContainer/HBoxContainer2"]
@@ -2243,16 +2247,16 @@ modulate = Color( 0, 1, 1, 0 )
 self_modulate = Color( 1, 1, 1, 0 )
 margin_left = 241.0
 margin_top = 4.0
-margin_right = 466.0
-margin_bottom = 38.0
+margin_right = 462.0
+margin_bottom = 33.0
 rect_scale = Vector2( 0.8, 0.8 )
 size_flags_horizontal = 4
 size_flags_vertical = 0
 custom_styles/panel = SubResource( 250 )
 
 [node name="MissionBackground" type="TextureRect" parent="UIUnder/HUD/Control/AreaInfo/VBoxContainer/AreaContainer"]
-margin_right = 225.0
-margin_bottom = 34.0
+margin_right = 221.0
+margin_bottom = 29.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 texture = SubResource( 249 )
@@ -2283,8 +2287,8 @@ texture = SubResource( 249 )
 expand = true
 
 [node name="MarginContainer" type="MarginContainer" parent="UIUnder/HUD/Control/AreaInfo/VBoxContainer/AreaContainer"]
-margin_right = 225.0
-margin_bottom = 34.0
+margin_right = 221.0
+margin_bottom = 29.0
 custom_constants/margin_right = 8
 custom_constants/margin_top = 4
 custom_constants/margin_left = 8
@@ -2294,8 +2298,8 @@ custom_constants/margin_bottom = 4
 unique_name_in_owner = true
 margin_left = 8.0
 margin_top = 4.0
-margin_right = 217.0
-margin_bottom = 30.0
+margin_right = 213.0
+margin_bottom = 25.0
 grow_horizontal = 2
 grow_vertical = 2
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
@@ -2357,7 +2361,7 @@ anims/appear = SubResource( 261 )
 anims/hide = SubResource( 263 )
 
 [node name="Padding" type="Control" parent="UIUnder/HUD/Control/AreaInfo/VBoxContainer"]
-margin_top = 50.0
+margin_top = 45.0
 margin_right = 708.0
 margin_bottom = 313.0
 size_flags_vertical = 3
