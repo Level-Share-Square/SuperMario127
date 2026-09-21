@@ -206,10 +206,11 @@ func change_song(old_setting, music_setting) -> void:
 		song = get_song(music_setting)
 	
 	song_switched = true
+	has_blended = false
 	
-	if song != null and stream != song.stream:
+	if song != null and !(stream == song.stream or (song.blended_stream and stream == song.blended_stream)):
 		custom_loop = false
-		stream = song.stream
+		stream = song.stream if not song.blended_stream else song.blended_stream
 		base_volume = song.volume_db
 		play()
 		
@@ -303,27 +304,26 @@ func play_temporary_music(temp_song_id : int = 0, temp_song_volume : float = 0, 
 	volume_multiplier = 0
 	volume_db = -80.0
 	water_music_player.volume_db = -80.0
-	blended_music_player.volume_db = -80.0
 
 	#var _tween = tween.stop_all()
 	#temporary_music_player.volume_db = temp_song_volume if !muted else -80.0
 
 	var song = get_song(temp_song_id)
 	var stream = song.stream
-	if temporary_music_player.stream != stream or temporary_music_player.volume_db < -70:
+	if temporary_music_player.stream != stream or (play_blended and blended_music_player.volume_db < -70) or (not play_blended and temporary_music_player.volume_db < -70):
 		temporary_music_player.volume_db = 0
 		temporary_music_player.stream = stream
 		temporary_music_player.play(start_position)
+		
+		blended_music_player.volume_db = -80.0
+		blended_music_player.stream = song.blended_stream
+		blended_music_player.play()
 	
-		if song.blended_stream != null:
-			blended_music_player.volume_db = -80
-			blended_music_player.stream = song.blended_stream
-			blended_music_player.play()
-			has_blended = true
-			play_blended = true
-		else:
-			has_blended = false
-			play_blended = false
+	if song.blended_stream != null:
+		has_blended = true
+	else:
+		has_blended = false
+		play_blended = false
 	
 	temp_music = true
 
@@ -336,6 +336,7 @@ func stop_temporary_music(volume_multiplier_target = 1, music_fade_length = MUSI
 	volume_multiplier = 1
 	temp_music = false
 	play_blended = false
+	has_blended = false
 
 func get_precise_position(player: AudioStreamPlayer) -> float:
 	if !player.playing:

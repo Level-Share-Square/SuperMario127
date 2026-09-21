@@ -109,7 +109,7 @@ func collect(body : PhysicsBody2D) -> void:
 		animation_player.play("collect")
 		var _connect = animation_player.connect("animation_finished", self, "queue_free")
 
-		if not Singleton.ModeSwitcher.visible and CurrentLevelData.save_data.get_collected_star_coin_count() >= CurrentLevelData.level_metadata.collectible_data.get_star_coin_count():
+		if not Singleton.ModeSwitcher.visible and CurrentLevelData.save_data.get_collected_star_coin_count() == CurrentLevelData.level_metadata.collectible_data.get_star_coin_count():
 			audio_player_complete.play()
 		else:
 			audio_player.play()
