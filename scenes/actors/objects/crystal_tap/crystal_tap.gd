@@ -28,6 +28,16 @@ func _register_properties():
 	register_property(9, "cycle_timer", cycle_timer)
 	register_property(10, "cycle_offset", cycle_offset)
 
+func _register_property_info():
+	set_property_info("tag", PropertyInfo.new("When this object is touched, liquids with this tag will move to this tap's position.", 1, -INF, INF, ["", ""], ["", ""], false, ""))
+	set_property_info("auto_activate", PropertyInfo.new("Makes this object activate immediately when loaded.", 1, -INF, INF, ["", ""], ["", ""], false, ""))
+	set_property_info("move_speed", PropertyInfo.new("The speed at which liquids move when this object is activated.", 1, -INF, INF, ["", ""], ["", ""], false, ""))
+	set_property_info("offset", PropertyInfo.new("Makes liquids target a position N pixels away from this\nobject, rather than its exact position", 1, -INF, INF, ["", ""], ["", ""], false, ""))
+	set_property_info("horizontal", PropertyInfo.new("Makes liquids move to this object's position\nhorizontally, rather than vertically.", 1, -INF, INF, ["", ""], ["", ""], false, ""))
+	set_property_info("cycle_timer", PropertyInfo.new("When greater than 0, this object automatically\ntriggers every N seconds.", 1, 0, INF, ["", ""], ["", ""], true, ""))
+	set_property_info("cycle_offset", PropertyInfo.new("If not set to 0, the cycle timer will initialize with N seconds left.", 1, 0, INF, ["", ""], ["", ""], true, ""))
+
+
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.is_pressed() and is_object_hovered():
 		if event.button_index == 4: # Mouse wheel up
