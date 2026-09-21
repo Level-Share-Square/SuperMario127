@@ -301,7 +301,76 @@ fit_content_height = true
 scroll_active = false
 script = ExtResource( 7 )
 
-[node name="Tiles" type="MarginContainer" parent="ContentDivider/ContentMat/Tabs" index="1"]
+[node name="Guides" type="MarginContainer" parent="ContentDivider/ContentMat/Tabs" index="1"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 27.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_clip_content = true
+custom_constants/margin_right = 5
+custom_constants/margin_top = 5
+custom_constants/margin_left = 5
+custom_constants/margin_bottom = 5
+
+[node name="ScrollContainer" type="ScrollContainer" parent="ContentDivider/ContentMat/Tabs/Guides" index="0"]
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 426.0
+margin_bottom = 157.0
+scroll_horizontal_enabled = false
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ContentDivider/ContentMat/Tabs/Guides/ScrollContainer" index="0"]
+margin_right = 413.0
+margin_bottom = 360.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_colors/default_color = Color( 1, 1, 1, 1 )
+custom_fonts/normal_font = SubResource( 15 )
+bbcode_enabled = true
+bbcode_text = "[center][color=yellow]--Guides--[/color]
+The Super Mario 127 team has compiled together a list of guides on how to use the level editor, which may be of assistance when creating levels.
+
+Most of these guides can be found on the  [url=https://www.youtube.com/@supermario127team][color=fuchsia]Super Mario 127 Youtube Channel[/color][/url] and the [url=https://discord.gg/QrftDjD][color=fuchsia]Level Share Square wiki[/color][/url]. The links to each guide, at the time of this version's release, will be listed below.
+
+Note that most properties in the editor have a hint on how they work, when hovered over via the mouse cursor.
+
+[center][color=yellow]--Video Guides--[/color]
+[url=][color=fuchsia]Level Editor Interface Guide[/color][/url]
+[url=https://youtu.be/ahxN_Y7iIvs][color=fuchsia]Custom Music Guide[/color][/url]
+[/center]
+
+[center][color=yellow]--Text Guides--[/color]
+[url=][color=fuchsia]Tiling System Guide[/color][/url]
+[url=][color=fuchsia]Dialogue System Guide[/color][/url]
+[/center]
+
+If you have any other questions, please feel free to ask in the [url=https://discord.gg/QrftDjD][color=fuchsia]official discord server[/color][/url].[/center]"
+text = "--Guides--
+The Super Mario 127 team has compiled together a list of guides on how to use the level editor, which may be of assistance when creating levels.
+
+Most of these guides can be found on the  Super Mario 127 Youtube Channel and the Level Share Square wiki. The links to each guide, at the time of this version's release, will be listed below.
+
+Note that most properties in the editor have a hint on how they work, when hovered over via the mouse cursor.
+
+--Video Guides--
+Level Editor Interface Guide
+Custom Music Guide
+
+
+--Text Guides--
+Tiling System Guide
+Dialogue System Guide
+
+
+If you have any other questions, please feel free to ask in the official discord server."
+fit_content_height = true
+scroll_active = false
+script = ExtResource( 4 )
+
+[node name="Tiles" type="MarginContainer" parent="ContentDivider/ContentMat/Tabs" index="2"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -508,7 +577,8 @@ __meta__ = {
 "_edit_use_anchors_": true
 }
 
-[node name="Dialogue" type="MarginContainer" parent="ContentDivider/ContentMat/Tabs" index="2"]
+[node name="Dialogue" type="MarginContainer" parent="ContentDivider/ContentMat/Tabs" index="3"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0

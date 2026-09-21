@@ -1,5 +1,5 @@
 # Super Mario 127 Public Repository
- As of the 0.8.0 update, the SM127 legacy codebase is public and free to clone and use wherever you need!
+ As of the v0.8.0 update, the SM127 legacy codebase is public and free to clone and use wherever you need!
 
 
 Note:
