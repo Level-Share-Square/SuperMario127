@@ -25,6 +25,8 @@ unique_name_in_owner = true
 margin_top = 0.0
 margin_right = 240.0
 margin_bottom = 17.0
+hint_tooltip = "The title of this mission.
+Often contains a hint on how to complete it."
 
 [node name="ShineDescription" parent="." instance=ExtResource( 12 )]
 unique_name_in_owner = true
@@ -32,6 +34,8 @@ margin_top = 22.0
 margin_right = 240.0
 margin_bottom = 166.0
 rect_min_size = Vector2( 0, 144 )
+hint_tooltip = "This mission's description.
+Often contains flavor text, and/or lore."
 show_name = true
 show_char = false
 
@@ -40,12 +44,17 @@ unique_name_in_owner = true
 margin_top = 171.0
 margin_right = 240.0
 margin_bottom = 188.0
+hint_tooltip = "The order in which this mission shows up in the menu.
+Lower values appear first."
 
 [node name="Color" parent="." instance=ExtResource( 14 )]
 unique_name_in_owner = true
 margin_top = 193.0
 margin_right = 240.0
 margin_bottom = 457.0
+hint_tooltip = "The color of all Shine Sprites connected to this mission.
+Also appears on the mission select, time score, and shine map screens.
+Set the color to #ffff00 to use the default palette."
 custom_styles/panel = SubResource( 191 )
 
 [node name="ForceLeave" parent="." instance=ExtResource( 11 )]
@@ -53,25 +62,32 @@ unique_name_in_owner = true
 margin_top = 462.0
 margin_right = 240.0
 margin_bottom = 479.0
+hint_tooltip = "Whether Shine Sprites connected to this mission force you out of the level after collection.
+If this property is turned off, Shine Sprites connected to it will appear to be sleeping.
+These Shine Sprites are called Pocket Shines!"
 
 [node name="SpawnArea" parent="." instance=ExtResource( 10 )]
 unique_name_in_owner = true
 margin_top = 484.0
 margin_right = 240.0
 margin_bottom = 503.0
+hint_tooltip = "The area in which this mission will spawn the player in,
+when picked on the mission select screen."
 
 [node name="TeleporterTag" parent="." instance=ExtResource( 10 )]
 unique_name_in_owner = true
 margin_top = 508.0
 margin_right = 240.0
 margin_bottom = 527.0
-hint_tooltip = "The tag at which the player will spawn at."
+hint_tooltip = "The teleporter this mission will spawn the player at,
+when picked on the mission select screen."
 
 [node name="ShowInMenu" parent="." instance=ExtResource( 11 )]
 unique_name_in_owner = true
 margin_top = 532.0
 margin_right = 240.0
 margin_bottom = 549.0
+hint_tooltip = "Whether this mission appears in the mission select screen."
 
 [node name="Erase" type="Button" parent="."]
 margin_top = 554.0

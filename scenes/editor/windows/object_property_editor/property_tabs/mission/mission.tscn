@@ -23,6 +23,9 @@ unique_name_in_owner = true
 margin_top = 0.0
 margin_right = 248.0
 margin_bottom = 19.0
+hint_tooltip = "Determines what Mission this Shine Sprite corralates to.
+Missions determine how many Shine Sprite objectives there are in the level,
+and dictate things such as their Names, Descriptions, and Shine Color."
 
 [node name="AddMission" type="Button" parent="VBoxContainer"]
 unique_name_in_owner = true

@@ -26,6 +26,12 @@ func _register_properties():
 	register_property(6, "save_switch_state", save_switch_state, true)
 
 
+func _register_property_info() -> void:
+	set_property_info("save_water_level", PropertyInfo.new("Determines if changes involving Crystal Taps\nmade before touching this Checkpoint are preserved upon respawning.", 1, -INF, INF, ["", ""], ["", ""], false, ""))
+	set_property_info("spawn_offset", PropertyInfo.new("The distance away from this checkpoint the player should respawn from.", 1, -INF, INF, ["X", "Y"], ["", ""], false, ""))
+	set_property_info("save_switch_state", PropertyInfo.new("Determines if changes involving On/Off platforms, blocks, switches, etc.\nmade before touching this Checkpoint are preserved upon respawning.", 1, -INF, INF, ["", ""], ["", ""], false, ""))
+
+
 func _object_ready():
 	display.visible = false
 	if is_enabled_and_on_ground():

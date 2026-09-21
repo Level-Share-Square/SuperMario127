@@ -314,10 +314,15 @@ unique_name_in_owner = true
 margin_top = 0.0
 margin_right = 252.0
 margin_bottom = 17.0
-hint_tooltip = "Forces the player to do the missions in order."
+hint_tooltip = "Forces the player to select missions in order.
+When this is toggled on, only the first uncompleted 
+mission in the menu can be selected."
 
 [node name="PersistentNozzles" parent="ContentDivider/ContentMat/Tabs/Missions/GlobalsContainer/VBoxContainer" index="1" instance=ExtResource( 14 )]
 unique_name_in_owner = true
+hint_tooltip = "Allows the player to keep collected F.L.U.D.D nozzles
+after leaving the level. Disabled F.L.U.D.D nozzles
+will have to be re-collected each session."
 none_is_all = false
 
 [node name="MissionContainer" type="ScrollContainer" parent="ContentDivider/ContentMat/Tabs/Missions" index="3"]

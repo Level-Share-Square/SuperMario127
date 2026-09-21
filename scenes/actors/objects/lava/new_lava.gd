@@ -28,8 +28,8 @@ func get_liquid_properties():
 	
 func _register_property_info():
 	._register_property_info()
-	set_property_info("use_old_lava", PropertyInfo.new("Uses the pre 0.10 lava texture", 1, -INF, INF, ["", ""], ["", ""], false, "Use Old Lava"))
-	set_property_info("lighting", PropertyInfo.new("Light is emitted from the lava's surface", 1, -INF, INF, ["", ""], ["", ""], false, "Lighting"))
+	set_property_info("use_old_lava", PropertyInfo.new("Uses the pre-0.10 lava texture.", 1, -INF, INF, ["", ""], ["", ""], false, "Use Old Lava"))
+	set_property_info("lighting", PropertyInfo.new("Light is emitted from the lava's surface.", 1, -INF, INF, ["", ""], ["", ""], false, "Lighting"))
 	set_property_info("surface_color", PropertyInfo.new("The color of the lava's surface.", 1, -INF, INF, ["", ""], ["", ""], false, "Surface Color"))
 
 
@@ -37,6 +37,10 @@ func update_property(key, value):
 	.update_property(key, value)
 	visual = $New if !use_old_lava else $Old
 	match(key):
+		"use_old_lava":
+			if ($New.visible == value):
+				$New.visible = !value
+				$Old.visible = value
 		"color":
 			update_liquid_color(value)
 		"surface_color":
@@ -150,6 +154,7 @@ func _ready():
 
 	update_liquid_color(color)
 	update()
+	update_property("use_old_lava", use_old_lava)
 
 
 func _object_ready():
@@ -170,10 +175,6 @@ func _editor_ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _object_process(_delta):
 	._object_process(_delta)
-	
-	if (new.visible == use_old_lava):
-		new.visible = !use_old_lava
-		old.visible = use_old_lava
 
 
 func update_light_layer():

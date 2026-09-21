@@ -9,7 +9,6 @@ margin_right = 351.0
 margin_bottom = 192.0
 script = ExtResource( 2 )
 title = "{Object} Settings"
-icon_tooltip = "No object tooltip has been set..."
 
 [node name="Background" parent="." index="0"]
 margin_right = 256.0
