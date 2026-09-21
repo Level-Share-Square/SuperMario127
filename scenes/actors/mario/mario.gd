@@ -1228,6 +1228,8 @@ func _physics_process(delta: float) -> void:
 	# check if mario will collide w/ anything if he continues moving
 	var motion: Vector2 = global_position - last_position
 	predictive_collision = test_move(global_transform.translated(motion), Vector2(0, 0.001))
+	if predictive_collision:
+		position = last_position
 
 	# Boundaries
 	if position.y > (level_bounds.end.y * 32) + 128:
