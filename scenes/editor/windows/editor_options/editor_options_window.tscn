@@ -156,7 +156,7 @@ margin_right = 175.0
 margin_bottom = 110.0
 custom_fonts/font = ExtResource( 7 )
 align = 1
-placeholder_text = "Thumbnail Url"
+placeholder_text = "Thumbnail URL"
 script = ExtResource( 2 )
 
 [node name="HSeparator" type="HSeparator" parent="ContentDivider/ContentMat/Tabs/Level/HBoxContainer/VBoxContainer" index="2"]
