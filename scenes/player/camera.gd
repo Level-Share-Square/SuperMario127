@@ -464,7 +464,7 @@ func start_queue():
 	if cutscene_queue.size() == 0:
 		push_warning("No cutscene queue to start, queue a cutscene then call start_queue()!")
 		return
-	
+		
 	if !in_cutscene:
 		in_cutscene = true
 		play_cutscene(cutscene_queue.pop_front())
@@ -487,6 +487,7 @@ func play_cutscene(cutscene : CameraCutscene, reverse: bool = false):
 	
 	var new_position = cutscene.to if !reverse else character_node.position
 	new_position = clamp_position(new_position, last_position, size, cutscene.exclude_stoppers)
+	
 	
 	var compare_position: Vector2 = global_position
 	if cutscene.from != Vector2.INF:
@@ -540,8 +541,9 @@ func play_cutscene(cutscene : CameraCutscene, reverse: bool = false):
 	
 func pan_to(final_position: Vector2, cutscene: CameraCutscene) -> int:
 	yield(get_tree(), "idle_frame") # Force coroutine
-	
+
 	var path: Array = find_path(global_position, final_position)
+
 	if -1 in path:
 		return ERR_BUG
 		
@@ -601,7 +603,7 @@ func find_path(init_pos: Vector2, final_pos: Vector2, visited_corners = null, de
 	if depth > 20: return [-1]
 		
 	var space_state: Physics2DDirectSpaceState = get_world_2d().direct_space_state
-	var hit: Dictionary = space_state.intersect_ray(init_pos, final_pos, [], INT32_MAX, false, true)
+	var hit: Dictionary = space_state.intersect_ray(init_pos, final_pos, [], 0x800, false, true)
 	if not hit: return [final_pos]
 	if not hit.collider is CameraStopper: return []
 	
