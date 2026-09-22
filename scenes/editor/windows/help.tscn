@@ -324,15 +324,15 @@ Note that most properties in the editor have a hint on how they work, when hover
 
 [center][color=yellow]--Video Guides--[/color]
 [url=][color=fuchsia]Level Editor Interface Guide[/color][/url]
-[url=https://youtu.be/ahxN_Y7iIvs][color=fuchsia]Custom Music Guide[/color][/url]
-[/center]
+[url=https://youtu.be/ahxN_Y7iIvs][color=fuchsia]Custom Music Guide[/color][/url][/center]
 
 [center][color=yellow]--Text Guides--[/color]
 [url=https://wiki.levelsharesquare.com/SM127_help:Tile_system][color=fuchsia]Tile System Guide[/color][/url]
+[url=https://wiki.levelsharesquare.com/SM127_help:Layering_system][color=fuchsia]Layering System Guide[/color][/url]
 [url=https://wiki.levelsharesquare.com/SM127_help:Warp_system][color=fuchsia]Warp System Guide[/color][/url]
 [url=https://wiki.levelsharesquare.com/SM127_help:Dialogue_system][color=fuchsia]Dialogue System Guide[/color][/url]
-[url=https://wiki.levelsharesquare.com/SM127_help:Custom_music_and_thumbnails][color=fuchsia]Custom Music and Thumbnails Guide[/color][/url]
-[/center]
+[url=https://wiki.levelsharesquare.com/SM127_help:Mission_system][color=fuchsia]Mission System Guide[/color][/url]
+[url=https://wiki.levelsharesquare.com/SM127_help:Custom_music_and_thumbnails][color=fuchsia]Custom Music and Thumbnails Guide[/color][/url][/center]
 
 If you have any other questions, please feel free to ask in the [url=https://discord.gg/QrftDjD][color=fuchsia]official discord server[/color][/url].[/center]"
 text = "--Guides--
@@ -346,13 +346,13 @@ Note that most properties in the editor have a hint on how they work, when hover
 Level Editor Interface Guide
 Custom Music Guide
 
-
 --Text Guides--
 Tile System Guide
+Layering System Guide
 Warp System Guide
 Dialogue System Guide
+Mission System Guide
 Custom Music and Thumbnails Guide
-
 
 If you have any other questions, please feel free to ask in the official discord server."
 fit_content_height = true
