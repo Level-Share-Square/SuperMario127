@@ -37,10 +37,11 @@ var working_speed: float = 0
 
 var dialogue_trigger: Node
 var add_required_shines: bool = true
+var unused: String
 
 
 func _register_properties():
-	register_property(4, "curve", curve, false)
+	register_property(4, "unused", unused, false)
 	register_property(5, "curve", curve, true)
 	register_property(6, "move_type", move_type, true)
 	set_property_override("move_type", PropertyTab.OverrideTypes.BOOL_ALIAS, {true: "Loop", false: "Reset"})
@@ -64,6 +65,18 @@ func _register_properties():
 	if add_required_shines:
 		register_property(15, "required_shines", required_shines, false)
 
+
+func _register_property_info():
+	set_property_info("curve", PropertyInfo.new("The path this NPC will automatically follow.\nThe NPC will target this path, but may not always be able to reach it.", 1, -INF, INF, ["", ""], ["", ""], false, "Path"))
+	set_property_info("move_type", PropertyInfo.new("If set to Loop, the path will wrap around instead of stopping at the ends.", 1, -INF, INF, ["", ""], ["", ""], false, "Path Type"))
+	set_property_info("walk_speed", PropertyInfo.new("The speed at which this NPC moves on its own.", 1, -INF, INF, ["", ""], ["", ""], false, ""))
+	set_property_info("physics_enabled", PropertyInfo.new("Whether this NPC is affected by gravity and collision or not.", 1, -INF, INF, ["", ""], ["", ""], false, ""))
+	set_property_info("idle_expression", PropertyInfo.new("This NPC's baseline expression.", 1, -INF, INF, ["", ""], ["", ""], false, ""))
+	set_property_info("idle_action", PropertyInfo.new("This NPC's baseline animation.", 1, -INF, INF, ["", ""], ["", ""], false, ""))
+	set_property_info("speaking_expression", PropertyInfo.new("This NPC's expression when a speech bubble is displayed.", 1, -INF, INF, ["", ""], ["", ""], false, ""))
+	set_property_info("speaking_action", PropertyInfo.new("This NPC's animation when a speech bubble is displayed.", 1, -INF, INF, ["", ""], ["", ""], false, ""))
+	set_property_info("path_reference", PropertyInfo.new("Gives a visual on where this NPC's path is located", 1, -INF, INF, ["", ""], ["", ""], false, ""))
+	set_property_info("tag_link", PropertyInfo.new("Links a dialogue trigger to the NPC from a distance, via its tag.", 1, -INF, INF, ["", ""], ["", ""], false, ""))
 
 
 func get_dialogue_from_tag(tag: String) -> Node:

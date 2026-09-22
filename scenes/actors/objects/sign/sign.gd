@@ -48,6 +48,12 @@ func _register_properties():
 	register_property(6, "on_wall", on_wall, true)
 	property_tabs.append("sign")
 
+func _register_property_info():
+	set_property_info("text", PropertyInfo.new("The text this sign will display.", 1, -INF, INF, ["", ""], ["", ""], false, ""))
+	set_property_info("open_menu", PropertyInfo.new("When checked, this sign's text will show its text in a larger menu, instead of as a speech bubble.", 1, -INF, INF, ["", ""], ["", ""], false, ""))
+	set_property_info("on_wall", PropertyInfo.new("Whether this sign has a stand underneath it or not.", 1, -INF, INF, ["", ""], ["", ""], false, ""))
+
+
 func _ready():
 	if is_preview:
 		z_index = 0

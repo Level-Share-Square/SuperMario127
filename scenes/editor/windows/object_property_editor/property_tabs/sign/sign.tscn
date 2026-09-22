@@ -39,4 +39,5 @@ affected_properties = PoolStringArray( "position", "scale", "rotation_degrees", 
 unique_name_in_owner = true
 margin_right = 760.0
 margin_bottom = 401.0
+hint_tooltip = "The text this sign will display."
 script = SubResource( 2 )

@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://scenes/actors/objects/dialogue_trigger/dialog_trigger.gd" type="Script" id=1]
+[ext_resource path="res://scenes/actors/objects/dialogue_trigger/dialogue_trigger.gd" type="Script" id=1]
 [ext_resource path="res://classes/text/dialogue.tscn" type="PackedScene" id=2]
 [ext_resource path="res://classes/text/speech_bubble.tscn" type="PackedScene" id=3]
 

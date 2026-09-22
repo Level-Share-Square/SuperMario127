@@ -6,7 +6,7 @@ enum DisplayMode {Menu, Bubble, Both}
 onready var dialogue_prefab = $Dialogue
 onready var bubble_prefab = $SpeechBubble
 
-var dialogue := PoolStringArray(["0100;This is a dialogue object.", "0100;Try putting this on top of an NPC and see what happens!"])
+var dialogue := PoolStringArray(["0100;This is a dialogue trigger.", "0100;Try putting this on top of an NPC and see what happens!"])
 var character_name: String
 var speaking_radius: float = 90
 var autostart: int = 0
@@ -46,6 +46,18 @@ func _register_properties():
 	register_property(12, "zoom_size", zoom_size, true)
 	
 	property_tabs.append("dialogue")
+
+
+func _register_property_info():
+	set_property_info("dialogue", PropertyInfo.new("The text this object will use when actively talking to it.", 1, -INF, INF, ["", ""], ["", ""], false, ""))
+	set_property_info("character_name", PropertyInfo.new("The name this object will display when interacted with.\nCan be left empty.", 1, -INF, INF, ["", ""], ["", ""], false, ""))
+	set_property_info("autostart", PropertyInfo.new("Automatically triggers dialogue when the player enters its area.\nIf set to (Oneshot), will only trigger once per area load.", 1, -INF, INF, ["", ""], ["", ""], false, ""))
+	set_property_info("interactable", PropertyInfo.new("Whether the player can initiate the conversation themselves.", 1, -INF, INF, ["", ""], ["", ""], false, ""))
+	set_property_info("bubble_text", PropertyInfo.new("Text that appears overhead when the player is nearby.", 1, -INF, INF, ["", ""], ["", ""], false, ""))
+	set_property_info("display_mode", PropertyInfo.new("Menu: Will display text when interacted with.\nSpeech Bubble: Will display text when in close proximity.\nBoth: Will use Menu, then switch to Speech Bubble.", 1, -INF, INF, ["", ""], ["", ""], false, ""))
+	set_property_info("tag", PropertyInfo.new("ID of this object, used for connecting triggers.", 1, -INF, INF, ["", ""], ["", ""], false, ""))
+	set_property_info("delegate_tag", PropertyInfo.new("Will start dialogue from the specified object ID instead.", 1, -INF, INF, ["", ""], ["", ""], false, ""))
+	set_property_info("zoom_size", PropertyInfo.new("Will specify the zoom amount when focused on the object.", 1, -INF, INF, ["", ""], ["", ""], false, "Zoom"))
 
 
 func _ready():

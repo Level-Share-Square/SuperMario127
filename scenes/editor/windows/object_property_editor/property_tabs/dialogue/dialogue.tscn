@@ -69,6 +69,9 @@ custom_constants/separation = -2
 unique_name_in_owner = true
 margin_right = 228.0
 margin_bottom = 17.0
+hint_tooltip = "The text this object will use when actively talking to it."
+mouse_filter = 0
+mouse_default_cursor_shape = 16
 text = "Dialogue:"
 
 [node name="BigText" parent="HBoxContainer/DialogueProperty/DialogueEditor" instance=ExtResource( 11 )]
@@ -211,8 +214,9 @@ custom_constants/separation = 8
 [node name="Label" type="Label" parent="HBoxContainer/DialogueProperty/RemoteTagEditor"]
 margin_right = 62.0
 margin_bottom = 17.0
-hint_tooltip = "After this page, switch to another dialogue object with the tag provided."
+hint_tooltip = "After this page, switch to another dialogue trigger with the tag provided."
 mouse_filter = 0
+mouse_default_cursor_shape = 16
 text = "Switch to:"
 
 [node name="RemoteTag" type="LineEdit" parent="HBoxContainer/DialogueProperty/RemoteTagEditor"]
@@ -244,6 +248,8 @@ unique_name_in_owner = true
 margin_right = 73.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 0, 24 )
+hint_tooltip = "The expression the NPC will have during this page.
+Does not work on enemies."
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 1.6
@@ -259,6 +265,8 @@ margin_left = 77.0
 margin_right = 150.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 0, 24 )
+hint_tooltip = "The animation the NPC will have during this page.
+Does not work on enemies."
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 1.6
@@ -274,6 +282,7 @@ margin_left = 154.0
 margin_right = 228.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 0, 24 )
+hint_tooltip = "Will make the player react after this page of dialogue."
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 1.6
@@ -293,6 +302,7 @@ unique_name_in_owner = true
 margin_left = 240.0
 margin_right = 468.0
 rect_min_size = Vector2( 0, 100 )
+hint_tooltip = "Text that appears overhead when the player is nearby."
 show_name = true
 
 [node name="HoverSound" type="AudioStreamPlayer" parent="."]
@@ -310,10 +320,10 @@ bus = "Sounds"
 [connection signal="focus_exited" from="HBoxContainer/DialogueProperty/DialogueEditor/BigText" to="HBoxContainer/DialogueProperty" method="save_page"]
 [connection signal="pressed" from="HBoxContainer/DialogueProperty/DialogueEditor/Pages/Remove" to="HBoxContainer/DialogueProperty" method="remove_page"]
 [connection signal="pressed" from="HBoxContainer/DialogueProperty/DialogueEditor/Pages/Add" to="HBoxContainer/DialogueProperty" method="add_page"]
-[connection signal="pressed" from="HBoxContainer/DialogueProperty/DialogueEditor/Pages/Back" to="HBoxContainer/DialogueProperty" method="save_page"]
 [connection signal="pressed" from="HBoxContainer/DialogueProperty/DialogueEditor/Pages/Back" to="HBoxContainer/DialogueProperty" method="change_page" flags=3 binds= [ -1 ]]
-[connection signal="pressed" from="HBoxContainer/DialogueProperty/DialogueEditor/Pages/Next" to="HBoxContainer/DialogueProperty" method="save_page"]
+[connection signal="pressed" from="HBoxContainer/DialogueProperty/DialogueEditor/Pages/Back" to="HBoxContainer/DialogueProperty" method="save_page"]
 [connection signal="pressed" from="HBoxContainer/DialogueProperty/DialogueEditor/Pages/Next" to="HBoxContainer/DialogueProperty" method="change_page" flags=3 binds= [ 1 ]]
+[connection signal="pressed" from="HBoxContainer/DialogueProperty/DialogueEditor/Pages/Next" to="HBoxContainer/DialogueProperty" method="save_page"]
 [connection signal="focus_exited" from="HBoxContainer/DialogueProperty/RemoteTagEditor/RemoteTag" to="HBoxContainer/DialogueProperty" method="save_page"]
 [connection signal="text_entered" from="HBoxContainer/DialogueProperty/RemoteTagEditor/RemoteTag" to="HBoxContainer/DialogueProperty" method="save_page"]
 [connection signal="item_selected" from="HBoxContainer/DialogueProperty/EmoteOptions/ExpressionOption" to="HBoxContainer/DialogueProperty" method="set_expression"]
