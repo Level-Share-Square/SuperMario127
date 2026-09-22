@@ -2,7 +2,7 @@
 
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://scenes/editor/windows/editor_window.tscn" type="PackedScene" id=3]
-[ext_resource path="res://scenes/oldeditor/window/link_funtionality.gd" type="Script" id=4]
+[ext_resource path="res://scenes/oldeditor/window/link_functionality.gd" type="Script" id=4]
 [ext_resource path="res://scenes/editor/windows/help.gd" type="Script" id=6]
 [ext_resource path="res://scenes/editor/windows/help_hotkey_replacer.gd" type="Script" id=7]
 [ext_resource path="res://scenes/editor/buttons/tab_changed_sound.gd" type="Script" id=8]
@@ -318,7 +318,7 @@ bbcode_enabled = true
 bbcode_text = "[center][color=yellow]--Guides--[/color]
 The Super Mario 127 team has compiled together a list of guides on how to use the level editor, which may be of assistance when creating levels.
 
-Most of these guides can be found on the  [url=https://www.youtube.com/@supermario127team][color=fuchsia]Super Mario 127 Youtube Channel[/color][/url] and the [url=https://wiki.levelsharesquare.com/Category:Super_Mario_127_help][color=fuchsia]Level Share Square wiki[/color][/url]. The links to each guide, at the time of this version's release, will be listed below.
+Most of these guides can be found on the  [url=https://www.youtube.com/@supermario127team][color=fuchsia]Super Mario 127 Youtube Channel[/color][/url] and the [url=https://wiki.levelsharesquare.com/Category:Super_Mario_127_guides][color=fuchsia]Level Share Square wiki[/color][/url]. The links to each guide, at the time of this version's release, will be listed below.
 
 Note that most properties in the editor have a hint on how they work, when hovered over via the mouse cursor.
 
