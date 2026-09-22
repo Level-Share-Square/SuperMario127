@@ -27,13 +27,15 @@ const Y_SLOW_CORRECT_SPEED: float = 2.0
 const Y_CORRECT_SPEED: float = 9.0
 
 const Y_OFFSET_SPEED: float = 4.0
-
-const Y_SPEED_THRESHOLD_UP: float = 400.0
-const Y_SPEED_THRESHOLD_DOWN: float = 300.0
 const Y_FORCE_THRESHOLD: float = 600.0
-const Y_MAX_SPEED: float = 800.0
-const Y_MAX_LEAD_DISTANCE_Y: float = 400.0
+
+const Y_MAX_LEAD_DISTANCE_DOWN: float = 400.0
+const Y_MAX_LEAD_DISTANCE_UP: float = 100.0
 const Y_LEAD_SPEED: float = 4.0
+const Y_DOWN_TIME_THRESHOLD: float = 0.25
+const Y_DOWN_TIME_MAX_LEAD: float = 0.75
+const UPWARD_OVERRIDE_CANCEL_TIME: float = 0.35
+const UPWARD_LEAD_RAMP_SPEED: float = 4.0
 
 const STOPPER_EASE_T: float = 0.05
 
@@ -79,6 +81,10 @@ var current_lead_offset_y: float = 0.0
 var leading_amount: float = 0.0
 var y_baseline: float = 0.0
 var y_offset: float = 0.0
+var y_dir_timer: float = 0.0
+var last_y_dir: int = 0
+var force_upward_lead: bool = false
+var y_down_timer: float = 0.0
 var cur_baseline: float = 0.0
 var is_descent_unlocked: bool = false
 
@@ -164,26 +170,41 @@ func _physics_process(delta):
 							
 						global_position.x = lerp(global_position.x, global_position.x + clamped_delta, delta * follow_speed)
 
-					# y axis
+					## y axis
 					var speed_y: float = abs(char_vel.y)
-					var is_moving_up: float = char_vel.y < 0
 					var is_crouching: bool = character_node.inputs[9][0] and speed_x < 10.0
+					var is_moving_down: bool = char_vel.y > 20.0
+					var is_not_moving_up: bool = char_vel.y > -20.0
 					
 					if char_vel.y > 80.0:
 						is_descent_unlocked = true
 					elif char_vel.y < -50.0:
 						is_descent_unlocked = false
 
-					var y_threshold: float = Y_SPEED_THRESHOLD_UP if is_moving_up else Y_SPEED_THRESHOLD_DOWN
-					var is_fast_y: float = speed_y > y_threshold
+					if (force_upward_lead and is_not_moving_up) or (not force_upward_lead and is_moving_down):
+						y_down_timer += delta
+					else:
+						y_down_timer = 0.0
 
-					leading_amount = move_toward(leading_amount, 1.0 if is_fast_y else 0.0, delta * (3.0 if is_fast_y else 2.0))
+					if force_upward_lead and y_down_timer >= UPWARD_OVERRIDE_CANCEL_TIME:
+						force_upward_lead = false
+					
+					if force_upward_lead and character_node.is_grounded():
+						force_upward_lead = false
 
 					var target_lead_y: float = 0.0
-					if is_fast_y:
-						var speed_factor_y: float = clamp((speed_y - y_threshold) / (Y_MAX_SPEED - y_threshold), 0.0, 1.0)
-						target_lead_y = Y_MAX_LEAD_DISTANCE_Y * zoom.y * speed_factor_y * sign(char_vel.y)
 
+					if force_upward_lead:
+						leading_amount = move_toward(leading_amount, 1.0, delta * UPWARD_LEAD_RAMP_SPEED)
+						target_lead_y = -Y_MAX_LEAD_DISTANCE_UP * zoom.y
+					else:
+						var is_time_leading_down: bool = y_down_timer > Y_DOWN_TIME_THRESHOLD
+						leading_amount = move_toward(leading_amount, 1.0 if is_time_leading_down else 0.0, delta * (3.0 if is_time_leading_down else 2.0))
+						
+						if is_time_leading_down:
+							var time_factor: float = clamp((y_down_timer - Y_DOWN_TIME_THRESHOLD) / (Y_DOWN_TIME_MAX_LEAD - Y_DOWN_TIME_THRESHOLD), 0.0, 1.0)
+							target_lead_y = Y_MAX_LEAD_DISTANCE_DOWN * zoom.y * time_factor
+					
 					current_lead_offset_y = lerp(current_lead_offset_y, target_lead_y, delta * Y_LEAD_SPEED)
 					var working_lead_y: float = current_lead_offset_y * leading_amount
 
@@ -628,3 +649,9 @@ func update_cutscene_queue():
 func get_character_screen_position() -> Vector2:
 	if not is_instance_valid(character_node): return global_position
 	return character_node.global_position - global_position + size
+
+func trigger_upward_lead(enabled: bool = true) -> void:
+	if enabled and force_upward_lead != enabled:
+		force_upward_lead = enabled
+		y_down_timer = 0.0
+		leading_amount = 0.0

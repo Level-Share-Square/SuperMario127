@@ -10,6 +10,7 @@ var actual_power
 
 var press_buffer = 0.0
 var wall_jump_timer = 0.0
+var cam_move_timer = 0.0
 var direction_on_wj = 1
 var position_on_wj = Vector2(0, 0)
 var character_in_range = false
@@ -56,6 +57,11 @@ func _start(_delta):
 	character.position.y -= 2
 	direction_on_wj = -character.direction_on_stick
 	wall_jump_timer = 0.45
+	
+	if cam_move_timer > 0.0 and character.camera.has_method("trigger_upward_lead"):
+		character.camera.trigger_upward_lead(true)
+	
+	cam_move_timer = 2.0
 	sound_player.play_wall_jump_sound()
 	sound_player.play_wall_jump_step_sound()
 	LastInputDevice.rumble(0.5, 0.0, 0.05)
@@ -97,3 +103,7 @@ func _general_update(delta):
 		wall_jump_timer -= delta
 		if wall_jump_timer <= 0:
 			wall_jump_timer = 0
+	if cam_move_timer > 0:
+		cam_move_timer -= delta
+		if cam_move_timer <= 0:
+			cam_move_timer = 0
