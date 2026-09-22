@@ -21,7 +21,7 @@ signal text_changed
 
 var text_shortcut_map: Dictionary = {
 	"character": ":char:",
-	"Character": ":Shortcut:",
+	"Character": ":Character:",
 	"CHARACTER": ":CHAR:",
 	"Shine Count": ":shinecount:",
 	"Star Coin Count": ":starcoincount:",
