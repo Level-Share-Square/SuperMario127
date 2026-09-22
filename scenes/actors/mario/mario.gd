@@ -41,6 +41,7 @@ onready var bonk_particles : Particles2D = $Particles/BonkParticles
 onready var collision_shape : CollisionPolygon2D = $Collision
 onready var dive_collision_shape : CollisionPolygon2D = $CollisionDive
 onready var collision_raycast : CollisionShape2D = $GroundCollision
+onready var ceil_collision : CollisionShape2D = $CeilCollision # Just in case :+1:
 onready var ground_shape : CollisionPolygon2D = $GroundShape
 onready var left_collision : CollisionShape2D = $LeftCollision
 onready var right_collision : CollisionShape2D = $RightCollision
