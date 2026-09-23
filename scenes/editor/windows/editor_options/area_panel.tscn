@@ -61,9 +61,9 @@ margin_bottom = 55.0
 
 [node name="Dragger" type="Button" parent="HBoxContainer"]
 modulate = Color( 1, 1, 1, 0.627451 )
-margin_right = 20.0
+margin_right = 16.0
 margin_bottom = 48.0
-rect_min_size = Vector2( 20, 0 )
+rect_min_size = Vector2( 16, 0 )
 focus_mode = 0
 theme = SubResource( 15 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
@@ -77,14 +77,14 @@ icon_align = 1
 expand_icon = true
 
 [node name="VSeparator" type="VSeparator" parent="HBoxContainer"]
-margin_left = 24.0
-margin_right = 28.0
+margin_left = 20.0
+margin_right = 24.0
 margin_bottom = 48.0
 
 [node name="SwitchArea" type="Button" parent="HBoxContainer"]
-margin_left = 32.0
+margin_left = 28.0
 margin_top = 4.0
-margin_right = 101.794
+margin_right = 97.794
 margin_bottom = 43.278
 rect_min_size = Vector2( 69.794, 39.278 )
 focus_mode = 0
@@ -121,19 +121,19 @@ expand = true
 stretch_mode = 6
 
 [node name="VSeparator2" type="VSeparator" parent="HBoxContainer"]
-margin_left = 105.0
-margin_right = 109.0
+margin_left = 101.0
+margin_right = 105.0
 margin_bottom = 48.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
-margin_left = 113.0
+margin_left = 109.0
 margin_right = 376.0
 margin_bottom = 48.0
 size_flags_horizontal = 3
 size_flags_vertical = 4
 
 [node name="LineEdit" type="LineEdit" parent="HBoxContainer/VBoxContainer"]
-margin_right = 263.0
+margin_right = 267.0
 margin_bottom = 24.0
 size_flags_vertical = 4
 placeholder_text = "Name"
@@ -141,12 +141,12 @@ script = ExtResource( 6 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
 margin_top = 28.0
-margin_right = 263.0
+margin_right = 267.0
 margin_bottom = 48.0
 rect_pivot_offset = Vector2( 35, -33 )
 
 [node name="Delete" type="Button" parent="HBoxContainer/VBoxContainer/HBoxContainer"]
-margin_right = 85.0
+margin_right = 86.0
 margin_bottom = 20.0
 focus_mode = 0
 size_flags_horizontal = 3
@@ -155,8 +155,8 @@ theme_type_variation = "ButtonRed"
 text = "Delete"
 
 [node name="Copy" type="Button" parent="HBoxContainer/VBoxContainer/HBoxContainer"]
-margin_left = 89.0
-margin_right = 174.0
+margin_left = 90.0
+margin_right = 176.0
 margin_bottom = 20.0
 focus_mode = 0
 size_flags_horizontal = 3
@@ -164,8 +164,8 @@ size_flags_vertical = 4
 text = "Copy"
 
 [node name="Dupe" type="Button" parent="HBoxContainer/VBoxContainer/HBoxContainer"]
-margin_left = 178.0
-margin_right = 263.0
+margin_left = 180.0
+margin_right = 267.0
 margin_bottom = 20.0
 focus_mode = 0
 size_flags_horizontal = 3
