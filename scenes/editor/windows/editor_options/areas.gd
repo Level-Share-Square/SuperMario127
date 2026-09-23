@@ -32,9 +32,13 @@ func _process(_delta: float) -> void:
 func action_taken():
 	var actions: Array = [editor.action_manager.undo_stack.back(), editor.action_manager.redo_stack.back()]
 	var found_action: bool = false
-	for action in actions:
-		if (action is BaseAreaAction or action is ChangeAreaAction):
-			found_action = true
+	for stack in actions:
+		if stack == null: continue
+		for action in stack:
+			print(action)
+			if (action is BaseAreaAction or action is ChangeAreaAction):
+				found_action = true
+				break
 	if !found_action: return
 	
 	reload_areas()
@@ -69,36 +73,6 @@ func reload_areas():
 	v_box_container.add_child(Control.new()) # because godot :mov:
 	
 	new_area.disabled = (CurrentLevelData.area_headers.size() >= 32)
-
-
-func move_area(area_id: int, delta: int):
-	# A positive delta means to move the area down.
-	# A negative delta moves it up. (This aligns with the data better)
-	var dest_id = area_id + delta
-	var max_id = CurrentLevelData.area_headers.size() - 1
-	if dest_id > max_id or dest_id < 0:
-		return
-
-	# Shift area headers
-	var area_data = CurrentLevelData.area_headers.pop_at(area_id)
-	CurrentLevelData.area_headers.insert(dest_id, area_data)
-
-	# This silly thing gives us an id transformation array.
-	var id_map = range(0, max_id + 1)
-	var tmp = id_map.pop_at(area_id)
-	id_map.insert(dest_id, tmp)
-	
-	# Properly re-assign the current area_id.
-	CurrentLevelData.area_id = id_map.find(CurrentLevelData.area_id)
-	reload_areas()
-	
-	# Shift area cache
-	var cache_copy = CurrentLevelData.loaded_areas.duplicate()
-	CurrentLevelData.loaded_areas.clear()
-	for orig_id in range(0, max_id + 1):
-		var new_id = id_map[orig_id]
-		if cache_copy.has(orig_id):
-			CurrentLevelData.loaded_areas[new_id] = cache_copy[orig_id]
 
 
 func create_area():

@@ -129,7 +129,12 @@ func dragger_up():
 			return
 		if target_area_panel != self:
 			var dest_delta = target_area_panel.id - id
-			area_settings.move_area(id, dest_delta)
+
+			var action := MoveAreaAction.new()
+			action.area_id = id
+			action.delta = dest_delta
+			editor.action_manager.commit_action([action])
+
 			click_sound.play()
 			editor.deselect_objects()
 
