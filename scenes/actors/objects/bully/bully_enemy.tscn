@@ -665,7 +665,6 @@ shape = SubResource( 65 )
 
 [node name="Attack" parent="Damage" index="2"]
 position = Vector2( 0, -1 )
-collision_layer = 0
 
 [node name="CollisionShape2D" parent="Damage/Attack" index="0"]
 shape = SubResource( 66 )
@@ -677,13 +676,12 @@ animation = "idle"
 playing = true
 offset = Vector2( 0, -7 )
 script = ExtResource( 27 )
-lerp_speed = 4.0
-color_lerp_speed = 3.0
 
 [node name="RecolorSpriteHorns" type="AnimatedSprite" parent="AnimatedSprite" index="0"]
 self_modulate = Color( 0, 0.929412, 1, 1 )
 frames = ExtResource( 15 )
 animation = "idle"
+frame = 1
 offset = Vector2( 0, -7 )
 script = ExtResource( 11 )
 
@@ -691,6 +689,7 @@ script = ExtResource( 11 )
 self_modulate = Color( 0, 0.415686, 1, 1 )
 frames = SubResource( 75 )
 animation = "idle"
+frame = 1
 offset = Vector2( 0, -7 )
 script = ExtResource( 11 )
 
@@ -700,6 +699,7 @@ self_modulate = Color( 1, 0, 0, 1 )
 material = SubResource( 70 )
 frames = ExtResource( 4 )
 animation = "idle"
+frame = 1
 offset = Vector2( 0, -7 )
 script = ExtResource( 11 )
 

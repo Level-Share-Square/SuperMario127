@@ -5,39 +5,23 @@ const DEFAULT_COLOR := Color.red
 export var color := DEFAULT_COLOR
 
 var rainbow: bool = false setget set_rainbow 
-var rainbow_color := Color(0.95, 0, 0) # so that it doesn't ever snap to the default color
 
-onready var recolor_sprite: AnimatedSprite = $AnimatedSprite/RecolorSprite
 onready var player_detector: Area2D = $PlayerDetector
+onready var enemy_sprite: AnimatedSprite = $AnimatedSprite
 
 
 func set_color(value: Color) -> void:
-	color = value
-	
-	if not color.is_equal_approx(DEFAULT_COLOR):
-		var true_color: Color = color
-		true_color.s /= 2
-		recolor_sprite.visible = true
-		recolor_sprite.self_modulate = true_color
-	else:
-		recolor_sprite.visible = false
+	if is_instance_valid(enemy_sprite): enemy_sprite.set_color(value)
 
 
 func set_rainbow(value: bool) -> void:
 	rainbow = value
-	if is_instance_valid(damage):
-		damage.bounce_type = EnemyDamage.BounceType.NORMAL if value else EnemyDamage.BounceType.SPRING
+	if is_instance_valid(enemy_sprite): enemy_sprite.rainbow = value
 
 
 func _ready():
 	set_color(color)
 	set_rainbow(rainbow)
-
-
-func _process(delta):
-	if not rainbow: return
-	rainbow_color.h += delta
-	set_color(rainbow_color)
 
 
 func _enter_tree():

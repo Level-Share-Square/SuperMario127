@@ -1,7 +1,17 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://scenes/actors/objects/enemy/spawner_base.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/actors/objects/rex/rex_spawner.gd" type="Script" id=2]
+[ext_resource path="res://scenes/actors/objects/rex/RexAnimSync.gd" type="Script" id=3]
+[ext_resource path="res://scenes/actors/objects/rex/animations/rex.tres" type="SpriteFrames" id=4]
+[ext_resource path="res://scenes/actors/objects/rex/animations/rex_recolorable0.tres" type="SpriteFrames" id=5]
+[ext_resource path="res://scenes/actors/objects/rex/animations/rex_squished_recolorable0.tres" type="SpriteFrames" id=6]
+[ext_resource path="res://scenes/actors/objects/rex/animations/rex_squished_recolorable1.tres" type="SpriteFrames" id=7]
+[ext_resource path="res://scenes/actors/objects/rex/animations/rex_squished_recolorable_boots.tres" type="SpriteFrames" id=8]
+[ext_resource path="res://scenes/actors/objects/rex/animations/rex_recolorable1.tres" type="SpriteFrames" id=9]
+[ext_resource path="res://scenes/actors/objects/rex/animations/rex_squished.tres" type="SpriteFrames" id=10]
+[ext_resource path="res://scenes/actors/objects/rex/animations/rex_recolorable_boots.tres" type="SpriteFrames" id=11]
+[ext_resource path="res://scenes/actors/objects/rex/rex_juice.gd" type="Script" id=12]
 
 [node name="Rex" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
@@ -12,3 +22,47 @@ color = Color( 0, 0, 1, 1 )
 boots_color = Color( 1, 0, 0, 1 )
 rainbow = false
 squished = false
+
+[node name="EnemySprite" parent="." index="2"]
+frames = ExtResource( 4 )
+animation = "idle"
+offset = Vector2( 0, -32 )
+script = ExtResource( 12 )
+unsquished_frames = ExtResource( 4 )
+squished_frames = ExtResource( 10 )
+
+[node name="Recolorable0" type="AnimatedSprite" parent="EnemySprite" index="0"]
+visible = false
+frames = ExtResource( 5 )
+animation = "idle"
+playing = true
+offset = Vector2( 0, -32 )
+script = ExtResource( 3 )
+source_unsquished = ExtResource( 4 )
+source_squished = ExtResource( 10 )
+target_unsquished = ExtResource( 5 )
+target_squished = ExtResource( 6 )
+
+[node name="Recolorable1" type="AnimatedSprite" parent="EnemySprite" index="1"]
+visible = false
+frames = ExtResource( 9 )
+animation = "idle"
+playing = true
+offset = Vector2( 0, -32 )
+script = ExtResource( 3 )
+source_unsquished = ExtResource( 4 )
+source_squished = ExtResource( 10 )
+target_unsquished = ExtResource( 9 )
+target_squished = ExtResource( 7 )
+
+[node name="RecolorableBoots" type="AnimatedSprite" parent="EnemySprite" index="2"]
+visible = false
+frames = ExtResource( 11 )
+animation = "idle"
+playing = true
+offset = Vector2( 0, -32 )
+script = ExtResource( 3 )
+source_unsquished = ExtResource( 4 )
+source_squished = ExtResource( 10 )
+target_unsquished = ExtResource( 11 )
+target_squished = ExtResource( 8 )

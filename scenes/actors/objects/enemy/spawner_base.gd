@@ -10,6 +10,7 @@ enum RespawnMode {Never, Offscreen, Onscreen}
 
 onready var respawn_timer: Timer = $RespawnTimer
 onready var visibility_notifier: VisibilityNotifier2D = $VisibilityNotifier2D
+onready var enemy_sprite: AnimatedSprite = $EnemySprite
 var spawned_enemies: Array
 # enemies should be made invisible but not the spawner,, cuz of projectiles
 var is_visible: bool = true
@@ -139,9 +140,11 @@ func _object_ready():
 	for i in range(5):
 		yield(get_tree(), "idle_frame")
 	spawned_enemy.connect("tree_exited", self, "enemy_deleted", [spawned_enemy])
+	enemy_sprite.visible = false
 
 func _editor_ready():
 	._editor_ready()
 	is_visible = visible
 	visible = true
-	instance_enemy()
+	enemy_sprite.visible = true
+	#instance_enemy()

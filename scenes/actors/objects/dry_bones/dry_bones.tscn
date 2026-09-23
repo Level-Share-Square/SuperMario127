@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scenes/actors/objects/enemy/spawner_base.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/actors/objects/dry_bones/spawner.gd" type="Script" id=2]
+[ext_resource path="res://scenes/actors/objects/dry_bones/animations/animations.tres" type="SpriteFrames" id=3]
 
 [node name="DryBones" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
@@ -11,3 +12,8 @@ enemy_scene_path = "res://scenes/actors/objects/dry_bones/dry_bones_enemy.tscn"
 is_stationary = false
 toss_wait = 5.0
 regenerate_time = 10.0
+
+[node name="EnemySprite" parent="." index="2"]
+position = Vector2( 0, -19 )
+frames = ExtResource( 3 )
+animation = "idle"
