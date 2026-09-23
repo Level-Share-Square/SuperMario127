@@ -1,4 +1,4 @@
-[gd_scene load_steps=212 format=2]
+[gd_scene load_steps=213 format=2]
 
 [ext_resource path="res://scenes/actors/mario/animation_frames.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/actors/mario/states/Bounce.gd" type="Script" id=2]
@@ -104,6 +104,9 @@ extents = Vector2( 17, 5 )
 
 [sub_resource type="RayShape2D" id=5]
 length = 23.0
+
+[sub_resource type="RayShape2D" id=152]
+length = 6.0
 
 [sub_resource type="RayShape2D" id=6]
 length = 6.0
@@ -1710,7 +1713,7 @@ shader = ExtResource( 86 )
 shader_param/ray_count = 4
 shader_param/ray_distance = 0.4
 shader_param/ray_seperation_degrees = 22.0
-shader_param/rotation = 1.21864
+shader_param/rotation = 1.62146
 
 [sub_resource type="RectangleShape2D" id=85]
 extents = Vector2( 8, 18 )
@@ -1759,6 +1762,12 @@ disabled = true
 position = Vector2( 0.5, 0 )
 shape = SubResource( 5 )
 disabled = true
+one_way_collision_margin = 0.0
+
+[node name="CeilCollision" type="CollisionShape2D" parent="."]
+position = Vector2( 0.5, 0 )
+rotation = 3.14159
+shape = SubResource( 152 )
 one_way_collision_margin = 0.0
 
 [node name="GroundShape" type="CollisionPolygon2D" parent="."]
@@ -2669,7 +2678,7 @@ playing = true
 [node name="Recolorable" type="AnimatedSprite" parent="CollectedShine"]
 visible = false
 frames = ExtResource( 61 )
-frame = 8
+frame = 9
 script = ExtResource( 63 )
 
 [node name="ShineParticles" type="Particles2D" parent="CollectedShine"]

@@ -1,7 +1,11 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/actors/objects/enemy/spawner_base.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/actors/objects/goomba/spawner.gd" type="Script" id=2]
+[ext_resource path="res://scenes/actors/objects/goomba/frames.tres" type="SpriteFrames" id=3]
+[ext_resource path="res://scenes/actors/objects/goomba/goomba_juice.gd" type="Script" id=4]
+[ext_resource path="res://scenes/actors/mario/SpriteAnimSync.gd" type="Script" id=5]
+[ext_resource path="res://scenes/actors/objects/goomba/recolorable_frames.tres" type="SpriteFrames" id=6]
 
 [node name="Goomba" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
@@ -10,3 +14,18 @@ internal_id = "goomba"
 enemy_scene_path = "res://scenes/actors/objects/goomba/goomba_enemy.tscn"
 color = Color( 1, 0, 0, 1 )
 rainbow = false
+
+[node name="EnemySprite" parent="." index="2"]
+position = Vector2( 0, -9 )
+frames = ExtResource( 3 )
+animation = "idle"
+offset = Vector2( 0, -15 )
+script = ExtResource( 4 )
+
+[node name="RecolorSprite" type="AnimatedSprite" parent="EnemySprite" index="0"]
+visible = false
+self_modulate = Color( 1, 0.4, 0.333333, 1 )
+frames = ExtResource( 6 )
+animation = "idle"
+offset = Vector2( 0, -15 )
+script = ExtResource( 5 )

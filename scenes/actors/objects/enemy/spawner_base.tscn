@@ -10,3 +10,5 @@ one_shot = true
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
 rect = Rect2( -32, -32, 64, 64 )
+
+[node name="EnemySprite" type="AnimatedSprite" parent="."]

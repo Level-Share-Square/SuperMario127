@@ -1,11 +1,8 @@
-[gd_scene load_steps=75 format=2]
+[gd_scene load_steps=46 format=2]
 
-[ext_resource path="res://scenes/actors/objects/enemy/enemy_base.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/actors/objects/enemy/dialogue.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/objects/enemy/states/patrol_state.gd" type="Script" id=2]
-[ext_resource path="res://scenes/actors/objects/dry_bones/animations/idle.png" type="Texture" id=3]
-[ext_resource path="res://scenes/actors/objects/dry_bones/animations/shamble.png" type="Texture" id=4]
-[ext_resource path="res://scenes/actors/objects/dry_bones/animations/toss.png" type="Texture" id=5]
-[ext_resource path="res://scenes/actors/objects/dry_bones/animations/crumble.png" type="Texture" id=6]
+[ext_resource path="res://scenes/actors/objects/dry_bones/animations/animations.tres" type="SpriteFrames" id=3]
 [ext_resource path="res://scenes/actors/objects/dry_bones/damage.gd" type="Script" id=7]
 [ext_resource path="res://scenes/actors/objects/dry_bones/states/crumble_state.gd" type="Script" id=8]
 [ext_resource path="res://scenes/actors/objects/dry_bones/shake.gd" type="Script" id=9]
@@ -19,7 +16,6 @@
 [ext_resource path="res://scenes/actors/objects/dry_bones/dry_bones_enemy.gd" type="Script" id=17]
 [ext_resource path="res://scenes/actors/objects/dry_bones/states/stunned_state.gd" type="Script" id=18]
 [ext_resource path="res://scenes/actors/objects/enemy/states/idle_state.gd" type="Script" id=19]
-[ext_resource path="res://scenes/actors/objects/dry_bones/animations/speak.png" type="Texture" id=20]
 [ext_resource path="res://assets/sounds/dry_bones/SeEmKaronHeadConnect.wav" type="AudioStream" id=21]
 [ext_resource path="res://assets/sounds/dry_bones/3W_SeEmFishBoneBreak.wav" type="AudioStream" id=22]
 [ext_resource path="res://assets/sounds/dry_bones/3W_SeEmKaronRecover.wav" type="AudioStream" id=23]
@@ -28,6 +24,7 @@
 [ext_resource path="res://assets/sounds/dry_bones/3W_SeEmKaronRecoverSignLv.wav" type="AudioStream" id=26]
 [ext_resource path="res://scenes/actors/objects/dry_bones/regenerate_timer.gd" type="Script" id=27]
 [ext_resource path="res://scenes/actors/objects/dry_bones/states/regenerate_state.gd" type="Script" id=28]
+[ext_resource path="res://scenes/actors/objects/enemy/dust.png" type="Texture" id=29]
 
 [sub_resource type="CapsuleShape2D" id=40]
 resource_local_to_scene = true
@@ -53,155 +50,6 @@ extents = Vector2( 13, 2 )
 [sub_resource type="RectangleShape2D" id=45]
 resource_local_to_scene = true
 extents = Vector2( 6, 8 )
-
-[sub_resource type="AtlasTexture" id=15]
-atlas = ExtResource( 6 )
-region = Rect2( 0, 0, 39, 40 )
-
-[sub_resource type="AtlasTexture" id=16]
-atlas = ExtResource( 6 )
-region = Rect2( 39, 0, 39, 40 )
-
-[sub_resource type="AtlasTexture" id=17]
-atlas = ExtResource( 6 )
-region = Rect2( 78, 0, 39, 40 )
-
-[sub_resource type="AtlasTexture" id=18]
-atlas = ExtResource( 6 )
-region = Rect2( 117, 0, 39, 40 )
-
-[sub_resource type="AtlasTexture" id=9]
-atlas = ExtResource( 3 )
-region = Rect2( 30, 0, 30, 40 )
-
-[sub_resource type="AtlasTexture" id=10]
-atlas = ExtResource( 3 )
-region = Rect2( 60, 0, 30, 40 )
-
-[sub_resource type="AtlasTexture" id=11]
-atlas = ExtResource( 3 )
-region = Rect2( 90, 0, 30, 40 )
-
-[sub_resource type="AtlasTexture" id=12]
-atlas = ExtResource( 3 )
-region = Rect2( 120, 0, 30, 40 )
-
-[sub_resource type="AtlasTexture" id=13]
-atlas = ExtResource( 3 )
-region = Rect2( 0, 0, 30, 40 )
-
-[sub_resource type="AtlasTexture" id=36]
-atlas = ExtResource( 20 )
-region = Rect2( 0, 0, 30, 40 )
-
-[sub_resource type="AtlasTexture" id=37]
-atlas = ExtResource( 20 )
-region = Rect2( 30, 0, 30, 40 )
-
-[sub_resource type="AtlasTexture" id=34]
-atlas = ExtResource( 6 )
-region = Rect2( 0, 0, 39, 40 )
-
-[sub_resource type="AtlasTexture" id=19]
-atlas = ExtResource( 5 )
-region = Rect2( 0, 0, 30, 40 )
-
-[sub_resource type="AtlasTexture" id=20]
-atlas = ExtResource( 5 )
-region = Rect2( 30, 0, 30, 40 )
-
-[sub_resource type="AtlasTexture" id=21]
-atlas = ExtResource( 5 )
-region = Rect2( 60, 0, 30, 40 )
-
-[sub_resource type="AtlasTexture" id=22]
-atlas = ExtResource( 5 )
-region = Rect2( 90, 0, 30, 40 )
-
-[sub_resource type="AtlasTexture" id=23]
-atlas = ExtResource( 5 )
-region = Rect2( 120, 0, 30, 40 )
-
-[sub_resource type="AtlasTexture" id=24]
-atlas = ExtResource( 5 )
-region = Rect2( 150, 0, 30, 40 )
-
-[sub_resource type="AtlasTexture" id=25]
-atlas = ExtResource( 5 )
-region = Rect2( 180, 0, 30, 40 )
-
-[sub_resource type="AtlasTexture" id=26]
-atlas = ExtResource( 5 )
-region = Rect2( 210, 0, 30, 40 )
-
-[sub_resource type="AtlasTexture" id=27]
-atlas = ExtResource( 5 )
-region = Rect2( 240, 0, 30, 40 )
-
-[sub_resource type="AtlasTexture" id=1]
-atlas = ExtResource( 4 )
-region = Rect2( 0, 0, 31, 40 )
-
-[sub_resource type="AtlasTexture" id=2]
-atlas = ExtResource( 4 )
-region = Rect2( 31, 0, 31, 40 )
-
-[sub_resource type="AtlasTexture" id=3]
-atlas = ExtResource( 4 )
-region = Rect2( 62, 0, 31, 40 )
-
-[sub_resource type="AtlasTexture" id=4]
-atlas = ExtResource( 4 )
-region = Rect2( 93, 0, 31, 40 )
-
-[sub_resource type="AtlasTexture" id=5]
-atlas = ExtResource( 4 )
-region = Rect2( 124, 0, 31, 40 )
-
-[sub_resource type="AtlasTexture" id=6]
-atlas = ExtResource( 4 )
-region = Rect2( 155, 0, 31, 40 )
-
-[sub_resource type="AtlasTexture" id=7]
-atlas = ExtResource( 4 )
-region = Rect2( 186, 0, 31, 40 )
-
-[sub_resource type="AtlasTexture" id=8]
-atlas = ExtResource( 4 )
-region = Rect2( 217, 0, 31, 40 )
-
-[sub_resource type="SpriteFrames" id=14]
-animations = [ {
-"frames": [ SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ) ],
-"loop": false,
-"name": "crumble",
-"speed": 9.0
-}, {
-"frames": [ SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 13 ), SubResource( 13 ), SubResource( 13 ), SubResource( 13 ), SubResource( 13 ), SubResource( 13 ), SubResource( 13 ), SubResource( 13 ), SubResource( 13 ), SubResource( 13 ), SubResource( 13 ), SubResource( 13 ) ],
-"loop": true,
-"name": "idle",
-"speed": 9.0
-}, {
-"frames": [ SubResource( 36 ), SubResource( 37 ) ],
-"loop": true,
-"name": "speak",
-"speed": 9.0
-}, {
-"frames": [ SubResource( 34 ) ],
-"loop": false,
-"name": "stunned",
-"speed": 0.0
-}, {
-"frames": [ SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ) ],
-"loop": false,
-"name": "toss",
-"speed": 9.0
-}, {
-"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
-"loop": true,
-"name": "walk",
-"speed": 9.0
-} ]
 
 [sub_resource type="CircleShape2D" id=46]
 resource_local_to_scene = true
@@ -749,90 +597,157 @@ orbit_velocity_random = 0.0
 angle_random = 0.5
 color_ramp = SubResource( 32 )
 
-[node name="DryBonesEnemy" instance=ExtResource( 1 )]
+[sub_resource type="CanvasItemMaterial" id=47]
+particles_animation = true
+particles_anim_h_frames = 10
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id=48]
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=49]
+gradient = SubResource( 48 )
+
+[sub_resource type="ParticlesMaterial" id=50]
+emission_shape = 2
+emission_box_extents = Vector3( 8, 16, 1 )
+flag_disable_z = true
+direction = Vector3( 0, -1, 0 )
+spread = 0.0
+gravity = Vector3( 0, 0, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 0.75
+color_ramp = SubResource( 49 )
+anim_speed = 0.8
+
+[node name="DryBonesEnemy" type="KinematicBody2D"]
+z_index = -2
+collision_layer = 4
 collision_mask = 17
+collision/safe_margin = 0.1
 script = ExtResource( 17 )
 cur_state = "PatrolState"
 float_in_liquids = true
-is_stationary = false
-toss_wait = 5.0
-regenerate_time = 10.0
 
-[node name="TerrainCollider" parent="." index="0"]
+[node name="TerrainCollider" type="CollisionShape2D" parent="."]
 visible = false
+position = Vector2( 0, -16 )
 shape = SubResource( 40 )
 
-[node name="CollisionShape2D" parent="LiquidsDetector" index="0"]
+[node name="LiquidsDetector" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 32768
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LiquidsDetector"]
+position = Vector2( 0, -16 )
 shape = SubResource( 41 )
 
-[node name="CollisionShape2D" parent="PlatformDetector" index="0"]
+[node name="PlatformDetector" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformDetector"]
+position = Vector2( 0, -16 )
 shape = SubResource( 42 )
 
-[node name="IdleState" type="Node2D" parent="States" index="0"]
+[node name="FloorDetector" type="RayCast2D" parent="."]
+position = Vector2( 0, -2 )
+enabled = true
+cast_to = Vector2( 0, 4 )
+collision_mask = 17
+
+[node name="States" type="Node2D" parent="."]
+
+[node name="IdleState" type="Node2D" parent="States"]
 script = ExtResource( 19 )
 
-[node name="PatrolState" type="Node2D" parent="States" index="1"]
+[node name="PatrolState" type="Node2D" parent="States"]
 script = ExtResource( 2 )
 move_speed = 20.0
 ledge_turning = true
 
-[node name="Ledge" type="RayCast2D" parent="States/PatrolState" index="0"]
+[node name="Ledge" type="RayCast2D" parent="States/PatrolState"]
 position = Vector2( -12, -8 )
 cast_to = Vector2( 0, 32 )
 collision_mask = 21
 
-[node name="Wall" type="RayCast2D" parent="States/PatrolState" index="1"]
+[node name="Wall" type="RayCast2D" parent="States/PatrolState"]
 position = Vector2( 0, -16 )
 cast_to = Vector2( -12, 0 )
 collision_mask = 21
 
-[node name="CrumbleState" type="Node2D" parent="States" index="2"]
+[node name="CrumbleState" type="Node2D" parent="States"]
 script = ExtResource( 8 )
 can_attack = false
 can_be_hurt = false
 
-[node name="TossState" type="Node2D" parent="States" index="3"]
+[node name="TossState" type="Node2D" parent="States"]
 script = ExtResource( 10 )
 bone_speed = 60.0
 toss_offset = Vector2( 10, -16 )
 
-[node name="StunnedState" type="Node2D" parent="States" index="4"]
+[node name="StunnedState" type="Node2D" parent="States"]
 script = ExtResource( 18 )
 
-[node name="DieState" type="Node2D" parent="States" index="5"]
+[node name="DieState" type="Node2D" parent="States"]
 script = ExtResource( 16 )
 can_attack = false
 can_be_hurt = false
 
-[node name="RegenerateState" type="Node2D" parent="States" index="6"]
+[node name="RegenerateState" type="Node2D" parent="States"]
 script = ExtResource( 28 )
 
-[node name="Damage" parent="." index="5"]
+[node name="Damage" type="Node2D" parent="."]
 script = ExtResource( 7 )
 
-[node name="CollisionShape2D" parent="Damage/Crush" index="0"]
+[node name="Crush" type="Area2D" parent="Damage"]
+collision_layer = 0
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Damage/Crush"]
+position = Vector2( 0, -16 )
 shape = SubResource( 43 )
 
-[node name="CollisionShape2D" parent="Damage/Stomp" index="0"]
+[node name="Stomp" type="Area2D" parent="Damage"]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+priority = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Damage/Stomp"]
+position = Vector2( 0, -24 )
 shape = SubResource( 44 )
 
-[node name="CollisionShape2D" parent="Damage/Attack" index="0"]
+[node name="Attack" type="Area2D" parent="Damage"]
+collision_layer = 0
+collision_mask = 8482
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Damage/Attack"]
+position = Vector2( 0, -8 )
 shape = SubResource( 45 )
 
-[node name="AnimatedSprite" parent="." index="6"]
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 0, -19 )
-frames = SubResource( 14 )
+frames = ExtResource( 3 )
 animation = "idle"
 playing = true
 script = ExtResource( 9 )
 
-[node name="DialogueDetector" parent="AnimatedSprite" index="0"]
+[node name="DialogueDetector" type="Area2D" parent="AnimatedSprite"]
+collision_layer = 0
+collision_mask = 4096
+monitorable = false
+script = ExtResource( 1 )
 enabled = true
 
-[node name="CollisionShape2D" parent="AnimatedSprite/DialogueDetector" index="0"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatedSprite/DialogueDetector"]
 shape = SubResource( 46 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="7"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
 anims/RESET = SubResource( 28 )
 anims/crumble = SubResource( 29 )
@@ -841,21 +756,21 @@ anims/regenerate = SubResource( 39 )
 anims/stunned = SubResource( 35 )
 anims/toss = SubResource( 30 )
 
-[node name="Timer" type="Timer" parent="." index="8"]
+[node name="Timer" type="Timer" parent="."]
 unique_name_in_owner = true
 wait_time = 10.0
 one_shot = true
 script = ExtResource( 11 )
 
-[node name="RegenerateTimer" type="Timer" parent="." index="9"]
+[node name="RegenerateTimer" type="Timer" parent="."]
 unique_name_in_owner = true
 script = ExtResource( 27 )
 
-[node name="DeathParticles" type="Node2D" parent="." index="10"]
+[node name="DeathParticles" type="Node2D" parent="."]
 unique_name_in_owner = true
 position = Vector2( 0, -16 )
 
-[node name="Head" type="Particles2D" parent="DeathParticles" index="0"]
+[node name="Head" type="Particles2D" parent="DeathParticles"]
 emitting = false
 amount = 1
 one_shot = true
@@ -865,7 +780,7 @@ local_coords = false
 process_material = SubResource( 33 )
 texture = ExtResource( 12 )
 
-[node name="Body" type="Particles2D" parent="DeathParticles" index="1"]
+[node name="Body" type="Particles2D" parent="DeathParticles"]
 emitting = false
 amount = 1
 one_shot = true
@@ -875,7 +790,7 @@ local_coords = false
 process_material = SubResource( 33 )
 texture = ExtResource( 13 )
 
-[node name="Hands" type="Particles2D" parent="DeathParticles" index="2"]
+[node name="Hands" type="Particles2D" parent="DeathParticles"]
 emitting = false
 amount = 2
 one_shot = true
@@ -885,7 +800,7 @@ local_coords = false
 process_material = SubResource( 33 )
 texture = ExtResource( 15 )
 
-[node name="Feet" type="Particles2D" parent="DeathParticles" index="3"]
+[node name="Feet" type="Particles2D" parent="DeathParticles"]
 emitting = false
 amount = 2
 one_shot = true
@@ -895,23 +810,49 @@ local_coords = false
 process_material = SubResource( 33 )
 texture = ExtResource( 14 )
 
-[node name="VisibilityEnabler2D" parent="." index="11"]
+[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+visible = false
+position = Vector2( 0, -32 )
+rect = Rect2( -256, -256, 512, 512 )
 pause_particles = false
+process_parent = true
+physics_process_parent = true
 
-[node name="Sound1" type="AudioStreamPlayer2D" parent="Sounds" index="0"]
+[node name="BottomPos" type="Node2D" parent="."]
+
+[node name="Sounds" type="Node2D" parent="."]
+
+[node name="Sound1" type="AudioStreamPlayer2D" parent="Sounds"]
 stream = ExtResource( 21 )
 bus = "Sounds"
 
-[node name="Sound2" type="AudioStreamPlayer2D" parent="Sounds" index="1"]
+[node name="Sound2" type="AudioStreamPlayer2D" parent="Sounds"]
 stream = ExtResource( 22 )
 bus = "Sounds"
 
-[node name="Sound3" type="AudioStreamPlayer2D" parent="Sounds" index="2"]
+[node name="Sound3" type="AudioStreamPlayer2D" parent="Sounds"]
 stream = ExtResource( 25 )
 volume_db = -8.0
 bus = "Sounds"
 
+[node name="SpawnParticles" type="Particles2D" parent="."]
+material = SubResource( 47 )
+position = Vector2( 0, -16 )
+z_index = 2
+emitting = false
+amount = 16
+one_shot = true
+explosiveness = 1.0
+local_coords = false
+process_material = SubResource( 50 )
+texture = ExtResource( 29 )
+
 [connection signal="state_changed" from="." to="Timer" method="state_changed"]
 [connection signal="state_changed" from="." to="RegenerateTimer" method="state_changed"]
+[connection signal="body_entered" from="Damage/Crush" to="Damage" method="crush_body_entered"]
+[connection signal="area_entered" from="Damage/Stomp" to="Damage" method="stomp_area_entered"]
+[connection signal="area_entered" from="Damage/Attack" to="Damage" method="attack_area_entered"]
+[connection signal="body_entered" from="Damage/Attack" to="Damage" method="attack_body_entered"]
+[connection signal="area_entered" from="AnimatedSprite/DialogueDetector" to="AnimatedSprite/DialogueDetector" method="area_entered"]
 [connection signal="timeout" from="Timer" to="." method="set_state_by_name" binds= [ "TossState" ]]
 [connection signal="timeout" from="RegenerateTimer" to="." method="set_state_by_name" binds= [ "RegenerateState" ]]

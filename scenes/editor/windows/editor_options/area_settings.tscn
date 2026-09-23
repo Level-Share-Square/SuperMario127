@@ -48,7 +48,15 @@ margin_right = 346.0
 [node name="HeaderBox" parent="ContentDivider/Header/HeaderMat" index="0"]
 margin_right = 336.0
 
+[node name="WindowIcon" parent="ContentDivider/Header/HeaderMat/HeaderBox" index="0"]
+visible = false
+
+[node name="IconSpacer" parent="ContentDivider/Header/HeaderMat/HeaderBox" index="1"]
+margin_left = 0.0
+margin_right = 2.0
+
 [node name="WindowTitle" parent="ContentDivider/Header/HeaderMat/HeaderBox" index="2"]
+margin_left = 3.0
 margin_right = 307.0
 
 [node name="WindowClose" parent="ContentDivider/Header/HeaderMat/HeaderBox" index="3"]
