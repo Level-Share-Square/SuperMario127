@@ -5,9 +5,6 @@ onready var delete_button = $HBoxContainer/VBoxContainer/HBoxContainer/Delete
 onready var duplicate_button = $HBoxContainer/VBoxContainer/HBoxContainer/Dupe
 onready var area_name = $HBoxContainer/VBoxContainer/LineEdit
 
-onready var x_line = $HBoxContainer/GridContainer2/LineEdit2
-onready var y_line = $HBoxContainer/GridContainer2/LineEdit
-
 const background_id_mapper = "res://scenes/shared/background/backgrounds/ids.tres"
 const foreground_id_mapper = "res://scenes/shared/background/foregrounds/ids.tres"
 onready var background_preview = $"%Background"

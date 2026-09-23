@@ -1,22 +1,11 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://assets/fonts/arial.ttf" type="DynamicFontData" id=1]
-[ext_resource path="res://assets/fonts/DelfinoFont10.tres" type="DynamicFont" id=2]
+[ext_resource path="res://assets/icons/HamburgerMenu.svg" type="Texture" id=2]
 [ext_resource path="res://scenes/editor/windows/editor_options/area_panel.gd" type="Script" id=3]
 [ext_resource path="res://scenes/shared/background/backgrounds/day/day.png" type="Texture" id=4]
 [ext_resource path="res://scenes/shared/background/foregrounds/forest/preview.png" type="Texture" id=5]
 [ext_resource path="res://scenes/menu/line_edit_unfocus.gd" type="Script" id=6]
-
-[sub_resource type="StyleBoxFlat" id=18]
-bg_color = Color( 0.305882, 0.517647, 1, 0.419608 )
-
-[sub_resource type="StyleBoxFlat" id=19]
-bg_color = Color( 0.745098, 0.745098, 0.745098, 0.533333 )
-
-[sub_resource type="StyleBoxFlat" id=16]
-bg_color = Color( 0.6, 0.6, 0.6, 0.411765 )
-
-[sub_resource type="StyleBoxEmpty" id=17]
 
 [sub_resource type="StyleBoxFlat" id=10]
 bg_color = Color( 0.141176, 0.223529, 0.541176, 1 )
@@ -34,6 +23,27 @@ font_data = ExtResource( 1 )
 default_font = SubResource( 12 )
 Button/styles/normal = SubResource( 10 )
 
+[sub_resource type="StyleBoxEmpty" id=21]
+
+[sub_resource type="StyleBoxEmpty" id=23]
+
+[sub_resource type="StyleBoxEmpty" id=24]
+
+[sub_resource type="StyleBoxEmpty" id=25]
+
+[sub_resource type="StyleBoxEmpty" id=22]
+
+[sub_resource type="StyleBoxFlat" id=18]
+bg_color = Color( 0.305882, 0.517647, 1, 0.419608 )
+
+[sub_resource type="StyleBoxFlat" id=19]
+bg_color = Color( 0.745098, 0.745098, 0.745098, 0.533333 )
+
+[sub_resource type="StyleBoxFlat" id=16]
+bg_color = Color( 0.6, 0.6, 0.6, 0.411765 )
+
+[sub_resource type="StyleBoxEmpty" id=17]
+
 [sub_resource type="RectangleShape2D" id=20]
 extents = Vector2( 191.188, 27.3164 )
 
@@ -49,9 +59,32 @@ margin_top = 7.0
 margin_right = 383.0
 margin_bottom = 55.0
 
+[node name="Dragger" type="Button" parent="HBoxContainer"]
+modulate = Color( 1, 1, 1, 0.627451 )
+margin_right = 20.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 20, 0 )
+focus_mode = 0
+theme = SubResource( 15 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_styles/hover = SubResource( 21 )
+custom_styles/pressed = SubResource( 23 )
+custom_styles/focus = SubResource( 24 )
+custom_styles/disabled = SubResource( 25 )
+custom_styles/normal = SubResource( 22 )
+icon = ExtResource( 2 )
+icon_align = 1
+expand_icon = true
+
+[node name="VSeparator" type="VSeparator" parent="HBoxContainer"]
+margin_left = 24.0
+margin_right = 28.0
+margin_bottom = 48.0
+
 [node name="SwitchArea" type="Button" parent="HBoxContainer"]
+margin_left = 32.0
 margin_top = 4.0
-margin_right = 69.794
+margin_right = 101.794
 margin_bottom = 43.278
 rect_min_size = Vector2( 69.794, 39.278 )
 focus_mode = 0
@@ -68,6 +101,7 @@ margin_left = -59.0
 margin_right = 129.0
 margin_bottom = 39.0
 rect_min_size = Vector2( 180, 0 )
+mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 texture = ExtResource( 4 )
@@ -79,25 +113,27 @@ unique_name_in_owner = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_min_size = Vector2( 180, 0 )
+mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 texture = ExtResource( 5 )
 expand = true
 stretch_mode = 6
 
-[node name="Control" type="Control" parent="HBoxContainer"]
-margin_left = 73.0
-margin_right = 73.0
+[node name="VSeparator2" type="VSeparator" parent="HBoxContainer"]
+margin_left = 105.0
+margin_right = 109.0
 margin_bottom = 48.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
-margin_left = 77.0
-margin_right = 298.0
+margin_left = 113.0
+margin_right = 376.0
 margin_bottom = 48.0
+size_flags_horizontal = 3
 size_flags_vertical = 4
 
 [node name="LineEdit" type="LineEdit" parent="HBoxContainer/VBoxContainer"]
-margin_right = 221.0
+margin_right = 263.0
 margin_bottom = 24.0
 size_flags_vertical = 4
 placeholder_text = "Name"
@@ -105,95 +141,36 @@ script = ExtResource( 6 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
 margin_top = 28.0
-margin_right = 221.0
+margin_right = 263.0
 margin_bottom = 48.0
 rect_pivot_offset = Vector2( 35, -33 )
 
 [node name="Delete" type="Button" parent="HBoxContainer/VBoxContainer/HBoxContainer"]
-margin_right = 70.0
+margin_right = 85.0
 margin_bottom = 20.0
-rect_min_size = Vector2( 70, 0 )
 focus_mode = 0
+size_flags_horizontal = 3
 size_flags_vertical = 4
 theme_type_variation = "ButtonRed"
 text = "Delete"
 
 [node name="Copy" type="Button" parent="HBoxContainer/VBoxContainer/HBoxContainer"]
-margin_left = 74.0
-margin_right = 144.0
+margin_left = 89.0
+margin_right = 174.0
 margin_bottom = 20.0
-rect_min_size = Vector2( 70, 0 )
 focus_mode = 0
+size_flags_horizontal = 3
 size_flags_vertical = 4
 text = "Copy"
 
 [node name="Dupe" type="Button" parent="HBoxContainer/VBoxContainer/HBoxContainer"]
-margin_left = 148.0
-margin_right = 221.0
+margin_left = 178.0
+margin_right = 263.0
 margin_bottom = 20.0
 focus_mode = 0
+size_flags_horizontal = 3
 size_flags_vertical = 4
 text = "Duplicate"
-
-[node name="Control3" type="Control" parent="HBoxContainer"]
-margin_left = 302.0
-margin_right = 302.0
-margin_bottom = 48.0
-
-[node name="GridContainer2" type="GridContainer" parent="HBoxContainer"]
-visible = false
-margin_left = 306.0
-margin_right = 378.0
-margin_bottom = 52.0
-size_flags_vertical = 6
-columns = 2
-
-[node name="Label" type="Label" parent="HBoxContainer/GridContainer2"]
-margin_top = 5.0
-margin_right = 10.0
-margin_bottom = 19.0
-custom_fonts/font = ExtResource( 2 )
-text = "X:"
-
-[node name="LineEdit2" type="LineEdit" parent="HBoxContainer/GridContainer2"]
-margin_left = 14.0
-margin_right = 72.0
-margin_bottom = 24.0
-custom_fonts/font = ExtResource( 2 )
-text = "0"
-script = ExtResource( 6 )
-
-[node name="Label2" type="Label" parent="HBoxContainer/GridContainer2"]
-margin_top = 33.0
-margin_right = 10.0
-margin_bottom = 47.0
-custom_fonts/font = ExtResource( 2 )
-text = "Y:"
-
-[node name="LineEdit" type="LineEdit" parent="HBoxContainer/GridContainer2"]
-margin_left = 14.0
-margin_top = 28.0
-margin_right = 72.0
-margin_bottom = 52.0
-custom_fonts/font = ExtResource( 2 )
-text = "0"
-script = ExtResource( 6 )
-
-[node name="Control2" type="Control" parent="HBoxContainer"]
-margin_left = 306.0
-margin_right = 342.0
-margin_bottom = 48.0
-size_flags_horizontal = 3
-
-[node name="Dragger" type="Button" parent="HBoxContainer"]
-margin_left = 346.0
-margin_right = 376.0
-margin_bottom = 48.0
-rect_min_size = Vector2( 30, 0 )
-focus_mode = 0
-theme = SubResource( 15 )
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-text = "≡"
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 2147483648
@@ -204,8 +181,8 @@ input_pickable = false
 position = Vector2( 194.812, 30.6836 )
 shape = SubResource( 20 )
 
-[connection signal="button_down" from="HBoxContainer/VBoxContainer/HBoxContainer/Copy" to="." method="copy_area"]
 [connection signal="button_down" from="HBoxContainer/Dragger" to="." method="dragger_down"]
 [connection signal="button_up" from="HBoxContainer/Dragger" to="." method="dragger_up"]
+[connection signal="button_down" from="HBoxContainer/VBoxContainer/HBoxContainer/Copy" to="." method="copy_area"]
 [connection signal="area_entered" from="Area2D" to="." method="area_entered"]
 [connection signal="area_exited" from="Area2D" to="." method="area_exited"]
