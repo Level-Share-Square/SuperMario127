@@ -13,8 +13,8 @@ export var knockback_power := Vector2(225, 235)
 export var set_player_knockback_state: bool = true
 
 export(BounceType) var bounce_type: int = 0
-export var bounce_power: float = 275
-export var big_bounce_power: float = 400
+export var bounce_power: float = 365
+export var big_bounce_power: float = 475
 export var spring_bounce_windup_length: float = 0.15
 export var spring_bounce_depth: float = 14
 export var spring_bounce_pause_length: float = 0.15
@@ -171,10 +171,10 @@ func bounce_player(character: Character) -> void:
 			tween.tween_interval(spring_bounce_pause_length)
 			yield(tween, "finished")
 			
-			tween = get_tree().create_tween()
-			tween.set_trans(Tween.TRANS_LINEAR)
-			tween.tween_property(character, "global_position:y", top_y - spring_bounce_depth, spring_bounce_windup_length / 2.0)
-			yield(tween, "finished")
+#			tween = get_tree().create_tween()
+#			tween.set_trans(Tween.TRANS_LINEAR)
+#			tween.tween_property(character, "global_position:y", top_y - spring_bounce_depth, spring_bounce_windup_length / 2.0)
+#			yield(tween, "finished")
 			
 			tween = get_tree().create_tween()
 			if is_boosted:
