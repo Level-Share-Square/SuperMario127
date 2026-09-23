@@ -15,8 +15,15 @@ onready var foreground_preview = $"%Foreground"
 
 onready var area_settings = get_parent().get_parent()
 
+onready var editor = get_tree().current_scene
+onready var hover_sound = editor.get_node("%HoverSound")
+onready var click_sound = editor.get_node("%ClickSound")
+onready var drag_area = editor.get_node("%DragArea")
+
 var id
 var area_names: Array = []
+
+var is_dragging: bool
 
 func set_background(sky, background, palette):
 	var background_mapped_id = load(background_id_mapper).ids[sky]
@@ -62,7 +69,6 @@ func _ready():
 		switch_to_button.disabled = true
 		delete_button.disabled = true
 
-
 func switch_to_area():
 	if id != CurrentLevelData.area_id:
 		var editor = get_tree().current_scene
@@ -102,39 +108,46 @@ func duplicate_area():
 		area_settings.reload_areas()
 
 
-func move_area_down():
-	if id < CurrentLevelData.area_headers.size() - 1 && CurrentLevelData.area_headers.size() > 1:
-		var area_id = CurrentLevelData.area_headers.pop_at(id)
-		CurrentLevelData.area_headers.insert(id + 1, area_id)
-		
-		# Properly re-assign the current area_id.
-		if CurrentLevelData.area_id == id:
-			# If the area_id we're moving is the current area_id.
-			CurrentLevelData.area_id += 1
-			
-		elif abs(CurrentLevelData.area_id - id) == 1:
-			# If the area_id we're moving is next to the current area_id.
-			CurrentLevelData.area_id -= 1
-			
-		# Don't re-assign the current area_id if it isn't next to the area_id we're moving.
-		area_settings.reload_areas()
-
-
-func move_area_up():
-	if id > 0 && CurrentLevelData.area_headers.size() > 1:
-		var area_id = CurrentLevelData.area_headers.pop_at(id)
-		CurrentLevelData.area_headers.insert(id - 1, area_id)
-		
-		if CurrentLevelData.area_id == id:
-			
-			CurrentLevelData.area_id -= 1
-			
-		elif abs(CurrentLevelData.area_id - id) == 1:
-			
-			CurrentLevelData.area_id += 1
-			
-		area_settings.reload_areas()
-
-
 func copy_area():
 	OS.set_clipboard(CurrentLevelData.area_headers[id].area_code)
+
+
+func dragger_down():
+	is_dragging = true
+	area_settings.is_dragging = true
+	highlight_spot(Color(0.75, 1, 2))
+
+
+func dragger_up():
+	is_dragging = false
+	area_settings.is_dragging = false
+	drag_area.position = Vector2.ZERO
+	highlight_spot(Color.white)
+	
+	if not drag_area.get_overlapping_areas().empty():
+		var target_area_panel = drag_area.get_overlapping_areas()[0].owner
+		if target_area_panel.get_script() != get_script():
+			# If something else uses the drag system, this prevents a crash.
+			# (Dragging an incompatible object into here would normally crash)
+			return
+		if target_area_panel != self:
+			var destDelta = target_area_panel.id - id
+			area_settings.move_area(id, destDelta)
+			click_sound.play()
+			editor.deselect_objects()
+
+
+func highlight_spot(color) -> void:
+	modulate = color
+
+
+func area_entered(_area: Area2D):
+	if is_dragging: return
+	highlight_spot(Color(0.5, 1, 0.5))
+	hover_sound.play()
+
+
+func area_exited(_area: Area2D):
+	if is_dragging: return
+	highlight_spot(Color.white)
+

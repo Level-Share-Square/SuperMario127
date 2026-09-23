@@ -5,8 +5,11 @@ onready var v_box_container = $VBoxContainer
 onready var new_area = $VBoxContainer/HBoxContainer/Add
 onready var editor = get_tree().current_scene
 
+onready var drag_area = editor.get_node("%DragArea")
+
 const AREA_PANEL_SCENE = "res://scenes/editor/windows/editor_options/area_panel.tscn"
 
+var is_dragging: bool
 
 func _ready():
 	var _connect = get_parent().connect("window_opened", self, "reload_areas")
@@ -19,7 +22,12 @@ func _ready():
 	editor.action_manager.connect("undo", self, "action_taken")
 	editor.action_manager.connect("redo", self, "action_taken")
 	reload_areas()
-	
+
+
+func _process(_delta: float) -> void:
+	if not is_dragging: return
+	drag_area.position = get_global_mouse_position()
+
 
 func action_taken():
 	var actions: Array = [editor.action_manager.undo_stack.back(), editor.action_manager.redo_stack.back()]
@@ -61,6 +69,36 @@ func reload_areas():
 	v_box_container.add_child(Control.new()) # because godot :mov:
 	
 	new_area.disabled = (CurrentLevelData.area_headers.size() >= 32)
+
+
+func move_area(areaID: int, delta: int):
+	# A positive delta means to move the area down.
+	# A negative delta moves it up. (This aligns with the data better)
+	var destID = areaID + delta
+	var maxID = CurrentLevelData.area_headers.size() - 1
+	if destID > maxID or destID < 0:
+		return
+
+	# Shift area headers
+	var area_data = CurrentLevelData.area_headers.pop_at(areaID)
+	CurrentLevelData.area_headers.insert(destID, area_data)
+
+	# This silly thing gives us an id transformation array.
+	var idMap = range(0, maxID + 1)
+	var tmp = idMap.pop_at(areaID)
+	idMap.insert(destID, tmp)
+	
+	# Properly re-assign the current area_id.
+	CurrentLevelData.area_id = idMap.find(CurrentLevelData.area_id)
+	reload_areas()
+	
+	# Shift area cache
+	var cacheCopy = CurrentLevelData.loaded_areas
+	CurrentLevelData.loaded_areas.clear()
+	for origID in range(0, maxID + 1):
+		var newID = idMap[origID]
+		if cacheCopy.has(origID):
+			CurrentLevelData.loaded_areas[newID] = cacheCopy[origID]
 
 
 func create_area():
