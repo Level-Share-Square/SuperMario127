@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://assets/fonts/arial.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://assets/fonts/DelfinoFont10.tres" type="DynamicFont" id=2]
@@ -33,6 +33,9 @@ font_data = ExtResource( 1 )
 [sub_resource type="Theme" id=15]
 default_font = SubResource( 12 )
 Button/styles/normal = SubResource( 10 )
+
+[sub_resource type="RectangleShape2D" id=20]
+extents = Vector2( 191.188, 27.3164 )
 
 [node name="AreaPanel" type="PanelContainer"]
 margin_right = 390.0
@@ -182,7 +185,7 @@ margin_right = 342.0
 margin_bottom = 48.0
 size_flags_horizontal = 3
 
-[node name="TextureButton" type="Button" parent="HBoxContainer"]
+[node name="Dragger" type="Button" parent="HBoxContainer"]
 margin_left = 346.0
 margin_right = 376.0
 margin_bottom = 48.0
@@ -192,4 +195,17 @@ theme = SubResource( 15 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "≡"
 
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2147483648
+collision_mask = 2147483648
+input_pickable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 194.812, 30.6836 )
+shape = SubResource( 20 )
+
 [connection signal="button_down" from="HBoxContainer/VBoxContainer/HBoxContainer/Copy" to="." method="copy_area"]
+[connection signal="button_down" from="HBoxContainer/Dragger" to="." method="dragger_down"]
+[connection signal="button_up" from="HBoxContainer/Dragger" to="." method="dragger_up"]
+[connection signal="area_entered" from="Area2D" to="." method="area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="area_exited"]

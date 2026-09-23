@@ -135,7 +135,11 @@ func dragger_up() -> void:
 	highlight_spot(Color.white)
 	
 	if not drag_area.get_overlapping_areas().empty():
-		var target_layer_info: LayerInfo = drag_area.get_overlapping_areas()[0].owner
+		var target_layer_info = drag_area.get_overlapping_areas()[0].owner
+		if target_layer_info.get_script() != get_script():
+			# If something else uses the drag system, this prevents a crash.
+			# (Dragging an incompatible object into here would normally crash)
+			return
 		if target_layer_info != self:
 			var editor = layer_dropdown.editor
 			
