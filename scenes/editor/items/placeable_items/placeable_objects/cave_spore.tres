@@ -13,7 +13,7 @@
 [resource]
 script = ExtResource( 3 )
 item_name = "Large Cave Spore"
-change_to = "obj_cave_spore_mini"
+change_to = "obj_cave_spore"
 items_in_sequence = 2
 index_in_sequence = 1
 icons = [ ExtResource( 2 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 9 ) ]
