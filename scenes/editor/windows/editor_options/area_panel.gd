@@ -128,8 +128,8 @@ func dragger_up():
 			# (Dragging an incompatible object into here would normally crash)
 			return
 		if target_area_panel != self:
-			var destDelta = target_area_panel.id - id
-			area_settings.move_area(id, destDelta)
+			var dest_delta = target_area_panel.id - id
+			area_settings.move_area(id, dest_delta)
 			click_sound.play()
 			editor.deselect_objects()
 

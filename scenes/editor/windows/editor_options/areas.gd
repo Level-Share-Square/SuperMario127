@@ -71,34 +71,34 @@ func reload_areas():
 	new_area.disabled = (CurrentLevelData.area_headers.size() >= 32)
 
 
-func move_area(areaID: int, delta: int):
+func move_area(area_id: int, delta: int):
 	# A positive delta means to move the area down.
 	# A negative delta moves it up. (This aligns with the data better)
-	var destID = areaID + delta
-	var maxID = CurrentLevelData.area_headers.size() - 1
-	if destID > maxID or destID < 0:
+	var dest_id = area_id + delta
+	var max_id = CurrentLevelData.area_headers.size() - 1
+	if dest_id > max_id or dest_id < 0:
 		return
 
 	# Shift area headers
-	var area_data = CurrentLevelData.area_headers.pop_at(areaID)
-	CurrentLevelData.area_headers.insert(destID, area_data)
+	var area_data = CurrentLevelData.area_headers.pop_at(area_id)
+	CurrentLevelData.area_headers.insert(dest_id, area_data)
 
 	# This silly thing gives us an id transformation array.
-	var idMap = range(0, maxID + 1)
-	var tmp = idMap.pop_at(areaID)
-	idMap.insert(destID, tmp)
+	var id_map = range(0, max_id + 1)
+	var tmp = id_map.pop_at(area_id)
+	id_map.insert(dest_id, tmp)
 	
 	# Properly re-assign the current area_id.
-	CurrentLevelData.area_id = idMap.find(CurrentLevelData.area_id)
+	CurrentLevelData.area_id = id_map.find(CurrentLevelData.area_id)
 	reload_areas()
 	
 	# Shift area cache
-	var cacheCopy = CurrentLevelData.loaded_areas
+	var cache_copy = CurrentLevelData.loaded_areas.duplicate()
 	CurrentLevelData.loaded_areas.clear()
-	for origID in range(0, maxID + 1):
-		var newID = idMap[origID]
-		if cacheCopy.has(origID):
-			CurrentLevelData.loaded_areas[newID] = cacheCopy[origID]
+	for orig_id in range(0, max_id + 1):
+		var new_id = id_map[orig_id]
+		if cache_copy.has(orig_id):
+			CurrentLevelData.loaded_areas[new_id] = cache_copy[orig_id]
 
 
 func create_area():
