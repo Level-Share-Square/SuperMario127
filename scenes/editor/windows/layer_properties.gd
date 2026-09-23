@@ -94,6 +94,7 @@ func load_base_properties():
 		PropertyInfo.new(lock_axis.hint_tooltip)
 	])
 	connect_signals(lock_axis)
+	lock_axis.visible = not layer_data.layer_metadata.is_ground
 	
 	enabled_missions.window = window
 	enabled_missions.load_property(enabled_missions, get_property_value("activated_mission_ids"), [
