@@ -43,7 +43,7 @@ func _register_property_info() -> void:
 	if not CurrentLevelData.is_campaign:
 		teleport_mode_hint = "Whether this object should teleport locally, or to a different area."
 	set_property_info("teleport_mode", PropertyInfo.new(teleport_mode_hint, 1, -INF, INF, ["", ""], ["", ""]))
-	set_property_info("max_pan_distance", PropertyInfo.new("The max length to pan the camera before fading out.", 1, 0, INF, ["", ""], [" Tile(s)", ""]))
+	set_property_info("max_pan_distance", PropertyInfo.new("The max length the camera will pan when warping.\nIf the teleport is further than this, the camera will fade out instead.", 1, 0, INF, ["", ""], [" Tile(s)", ""]))
 	set_property_info("level_path", PropertyInfo.new("The relative path of the level to teleport to.", 1, -INF, INF, ["", ""], ["", ""]))
 
 
