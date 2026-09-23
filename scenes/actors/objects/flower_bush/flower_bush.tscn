@@ -77,7 +77,7 @@
 extents = Vector2( 48, 8.5 )
 
 [node name="FlowerBush" type="Node2D"]
-z_index = -1
+z_index = -2
 script = ExtResource( 2 )
 editor_rect = Rect2( -20, -12, 40, 24 )
 internal_id = "flower_bush"
