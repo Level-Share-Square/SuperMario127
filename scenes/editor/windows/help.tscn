@@ -309,7 +309,7 @@ scroll_horizontal_enabled = false
 
 [node name="RichTextLabel" type="RichTextLabel" parent="ContentDivider/ContentMat/Tabs/Guides/ScrollContainer" index="0"]
 margin_right = 413.0
-margin_bottom = 360.0
+margin_bottom = 315.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_colors/default_color = Color( 1, 1, 1, 1 )
@@ -327,12 +327,7 @@ Note that most properties in the editor have a hint on how they work, when hover
 [url=https://youtu.be/ahxN_Y7iIvs][color=fuchsia]Custom Music Guide[/color][/url][/center]
 
 [center][color=yellow]--Text Guides--[/color]
-[url=https://wiki.levelsharesquare.com/SM127_help:Tile_system][color=fuchsia]Tile System Guide[/color][/url]
-[url=https://wiki.levelsharesquare.com/SM127_help:Layering_system][color=fuchsia]Layering System Guide[/color][/url]
-[url=https://wiki.levelsharesquare.com/SM127_help:Warp_system][color=fuchsia]Warp System Guide[/color][/url]
-[url=https://wiki.levelsharesquare.com/SM127_help:Dialogue_system][color=fuchsia]Dialogue System Guide[/color][/url]
-[url=https://wiki.levelsharesquare.com/SM127_help:Mission_system][color=fuchsia]Mission System Guide[/color][/url]
-[url=https://wiki.levelsharesquare.com/SM127_help:Custom_music_and_thumbnails][color=fuchsia]Custom Music and Thumbnails Guide[/color][/url][/center]
+[url=https://wiki.levelsharesquare.com/Category:Super_Mario_127_guides][color=fuchsia]List of Super Mario 127 Guides[/color][/url][/center]
 
 If you have any other questions, please feel free to ask in the [url=https://discord.gg/QrftDjD][color=fuchsia]official discord server[/color][/url].[/center]"
 text = "--Guides--
@@ -347,12 +342,7 @@ Level Editor Interface Guide
 Custom Music Guide
 
 --Text Guides--
-Tile System Guide
-Layering System Guide
-Warp System Guide
-Dialogue System Guide
-Mission System Guide
-Custom Music and Thumbnails Guide
+List of Super Mario 127 Guides
 
 If you have any other questions, please feel free to ask in the official discord server."
 fit_content_height = true
