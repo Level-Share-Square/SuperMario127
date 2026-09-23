@@ -108,9 +108,9 @@ func delete_wings():
 		sprite.frames = normal_sprite
 		sprite_color.frames = normal_color_sprite
 
-func retract_into_shell():
-	if is_instance_valid(shell) or rainbow:
-		if rainbow:
+func retract_into_shell(invuln):
+	if is_instance_valid(shell) or invuln:
+		if invuln:
 			koopa_sound.play()
 		return
 	
@@ -144,7 +144,7 @@ func steely_hit(hit_pos : Vector2):
 func kill(hit_pos : Vector2):
 	if !hit:
 		if body_exists():
-			retract_into_shell()
+			retract_into_shell(rainbow)
 		if is_instance_valid(shell):
 			hit = true
 			shell.set_collision_layer_bit(2, false)
@@ -212,8 +212,8 @@ func _physics_process(delta):
 			velocity.y += gravity
 			shell.position += velocity * delta
 			reset_physics_interpolation()
-		if shelled == true and !rainbow :
-			retract_into_shell()
+		if shelled == true :
+			retract_into_shell(false)
 		
 		# Delete Koopa if the shell exists already
 		if is_instance_valid(shell) and body_exists():
@@ -309,7 +309,7 @@ func physics_process_koopa(delta, level_bounds):
 						koopa_sound.play()
 						attack_cooldown = 0.2 # Makes sure the player doesn't get hit right after
 					elif !is_instance_valid(shell):
-						retract_into_shell()
+						retract_into_shell(rainbow)
 				else:
 					shell_hit(hit_body.global_position)
 	
@@ -318,14 +318,14 @@ func physics_process_koopa(delta, level_bounds):
 		for hit_body in attack_area.get_overlapping_bodies():
 			if hit_body.name.begins_with("Character"):
 				if (hit_body.attacking or hit_body.invincible) and !rainbow:
-					retract_into_shell()
+					retract_into_shell(rainbow)
 					velocity.x = (shell.global_position - hit_body.global_position).normalized().x * (shell_max_speed)
 					velocity.y = -275
 				else:
 					hit_body.damage_with_knockback(body.global_position)
 		for hit_area in attack_area.get_overlapping_areas():
 			if hit_area.has_method("is_hurt_area") and !rainbow:
-				retract_into_shell()
+				retract_into_shell(rainbow)
 				velocity.x = (shell.global_position - hit_area.global_position).normalized().x * (shell_max_speed)
 				velocity.y = -275
 	else:
