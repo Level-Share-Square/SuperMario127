@@ -175,13 +175,17 @@ func _physics_process(delta):
 					var is_crouching: bool = character_node.inputs[9][0] and speed_x < 10.0
 					var is_moving_down: bool = char_vel.y > 20.0
 					var is_not_moving_up: bool = char_vel.y > -20.0
+					var is_force_follow: bool = is_instance_valid(character_node.state) and character_node.state.force_cam_follow_y
 					
 					if char_vel.y > 80.0:
 						is_descent_unlocked = true
 					elif char_vel.y < -50.0:
 						is_descent_unlocked = false
 
-					if (force_upward_lead and is_not_moving_up) or (not force_upward_lead and is_moving_down):
+					if is_force_follow:
+						y_down_timer = 0.0
+						is_descent_unlocked = true
+					elif (force_upward_lead and is_not_moving_up) or (not force_upward_lead and is_moving_down):
 						y_down_timer += delta
 					else:
 						y_down_timer = 0.0
@@ -189,7 +193,7 @@ func _physics_process(delta):
 					if force_upward_lead and y_down_timer >= UPWARD_OVERRIDE_CANCEL_TIME:
 						force_upward_lead = false
 					
-					if force_upward_lead and character_node.is_grounded():
+					if force_upward_lead and character_node.is_grounded() or is_force_follow:
 						force_upward_lead = false
 
 					var target_lead_y: float = 0.0
@@ -209,10 +213,10 @@ func _physics_process(delta):
 					var working_lead_y: float = current_lead_offset_y * leading_amount
 
 					var target_y: float = char_pos.y
-					var is_force_follow: bool = is_instance_valid(character_node.state) and character_node.state.force_cam_follow_y
 
 					if is_force_follow:
 						y_baseline = target_y
+						y_baseline += char_vel.y / 5
 						y_offset = lerp(y_offset, 0.0, delta * Y_OFFSET_SPEED)
 						
 					elif character_node.is_grounded():

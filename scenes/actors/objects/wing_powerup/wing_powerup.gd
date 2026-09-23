@@ -25,8 +25,9 @@ func _register_property_info():
 func collect(body):
 	if is_enabled_and_on_ground() and !collected and body.name.begins_with("Character") and !body.dead:
 		body.heal(5 * 8)
-		var powerup_node = body.get_powerup_node("WingPowerup")
-		body.set_powerup(powerup_node, powerup_music, duration)
+		if duration > 0.5 or is_instance_valid(body.powerup):
+			var powerup_node = body.get_powerup_node("WingPowerup")
+			body.set_powerup(powerup_node, powerup_music, duration)
 		if duration > 0.5:
 			LastInputDevice.rumble(0.5, 0.8, 0.2)
 			body.sound_player.play_powerup_sound()
