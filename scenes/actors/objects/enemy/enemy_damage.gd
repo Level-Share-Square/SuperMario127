@@ -14,7 +14,7 @@ export var set_player_knockback_state: bool = true
 
 export(BounceType) var bounce_type: int = 0
 export var bounce_power: float = 365
-export var big_bounce_power: float = 475
+export var big_bounce_power: float = 490
 export var spring_bounce_windup_length: float = 0.15
 export var spring_bounce_depth: float = 14
 export var spring_bounce_pause_length: float = 0.15
