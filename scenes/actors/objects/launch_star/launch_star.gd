@@ -114,6 +114,8 @@ func set_state(to:int):
 			return
 	
 func _ready():
+	if mode == 1:
+		$StarContainer.z_index = -2
 #	launch_particles.emitting = false
 	if(invalid_curve(curve)):
 		curve.add_point(Vector2())

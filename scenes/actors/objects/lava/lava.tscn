@@ -209,6 +209,7 @@ frame_1/texture = SubResource( 6 )
 frame_1/delay_sec = 0.0
 
 [node name="Lava" instance=ExtResource( 4 )]
+z_index = 1
 script = ExtResource( 8 )
 internal_id = "lava"
 liquid_type = 1
