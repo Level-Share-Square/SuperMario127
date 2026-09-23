@@ -35,7 +35,6 @@ func action_taken():
 	for stack in actions:
 		if stack == null: continue
 		for action in stack:
-			print(action)
 			if (action is BaseAreaAction or action is ChangeAreaAction):
 				found_action = true
 				break
