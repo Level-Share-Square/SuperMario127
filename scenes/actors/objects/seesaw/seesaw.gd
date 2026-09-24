@@ -118,6 +118,11 @@ func _physics_process(delta):
 		
 		weight_distribution += (relative_position_x * factor) * weight if distance_to_floor>0 else 0.0
 		weight_distribution = clamp(weight_distribution, -70, 70)
+		
+		# make the character slide off so it's more precarious
+		if abs(factor) < 1:
+			var slide_amount: float = (relative_position_x * factor) * max(tilt * sign(relative_position_x), 0) / 2.5
+			_body.position += Vector2(slide_amount, abs(slide_amount)*1.1)
 	
 	#-----act on self-----
 	
