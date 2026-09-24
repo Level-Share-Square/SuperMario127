@@ -86,6 +86,8 @@ func _object_physics_process(delta):
 	
 	if collision_shape:
 		collision_shape.disabled = !do_physics()
+	if water_shape:
+		water_shape.disabled = !do_physics()
 	
 	velocity = calc_physics(false, delta)
 	
@@ -122,19 +124,19 @@ func calc_physics(interp: bool, delta) -> Vector2:
 	#changes whether physics is being run every frame or not
 	var interp_scale : int = 1 if interp == false else 2
 	
-	#if in water slow velocity down to zero gradually
-	if water_detector.get_overlapping_areas().size() > 0:
-		gravity_scale = 0.25
-	else:
-		gravity_scale = 1
-	
 	#friction calculations
 	new_velocity.x -= sign(new_velocity.x) * frictin_coeff * interp_scale * delta * 60
 	
 	#gravity calculations
 	
-	if velocity.y < 600:
-		new_velocity.y += gravity * gravity_scale * 2 * interp_scale * delta * 60
+	#if in water, lerp velocity to zero gradually
+	if not water_detector.get_overlapping_areas().empty():
+		print("submerged")
+		new_velocity.y = lerp(new_velocity.y, 0, delta * 6 * interp_scale)
+	else:
+		gravity_scale = 1
+		if velocity.y < 600:
+			new_velocity.y += gravity * gravity_scale * 2 * interp_scale * delta * 60
 	
 	#if on the floor, set the Y velocity to zero so it doesn't stack
 	if kinematic_body.is_on_floor():
