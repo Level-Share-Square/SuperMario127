@@ -627,6 +627,8 @@ script = ExtResource( 2 )
 max_gravity_factor = 30.0
 cur_state = "IdleState"
 enemy_size = Vector2( 24, 26 )
+float_in_liquids = true
+float_speed = 96.0
 color = Color( 1, 0, 0, 1 )
 
 [node name="TerrainCollider" parent="." index="0"]
@@ -767,7 +769,6 @@ visible = false
 self_modulate = Color( 1, 0.4, 0.333333, 1 )
 frames = ExtResource( 11 )
 animation = "idle"
-frame = 8
 offset = Vector2( 0, -15 )
 script = ExtResource( 10 )
 

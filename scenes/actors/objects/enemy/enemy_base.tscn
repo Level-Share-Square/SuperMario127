@@ -64,6 +64,7 @@ collision_layer = 4
 collision_mask = 21
 collision/safe_margin = 0.1
 script = ExtResource( 1 )
+float_accel = 8.0
 
 [node name="TerrainCollider" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -16 )

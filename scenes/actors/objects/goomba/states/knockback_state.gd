@@ -15,7 +15,7 @@ func _start():
 func _update(delta: float):
 	enemy.sprite.rotation_degrees += (enemy.velocity.x / 15.0)
 	
-	if enemy.velocity.length_squared() < 2500 and enemy.is_on_ground():
+	if enemy.velocity.length_squared() < 2500 and (enemy.is_on_ground() or not enemy.liquids_detector.get_overlapping_areas().empty()):
 		enemy.sprite.rotation = 0
 		enemy.set_state_by_name("DieState")
 	
