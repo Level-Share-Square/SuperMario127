@@ -155,7 +155,7 @@ func selection_to_stamp() -> void:
 	if selected_tiles.empty(): return
 	create_tile_object(selected_tiles)
 	get_node("%ItemHotkeysManager").last_object()
-	get_node("%Tools").change_tool("ObjectPaint")
+	get_node("%Tools").change_tool("ObjectPen")
 
 
 func deselect_objects() -> void:
