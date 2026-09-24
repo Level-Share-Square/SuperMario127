@@ -44,4 +44,3 @@ func _input(event):
 		elif not event.pressed and is_dragging:
 			is_dragging = false
 			emit_signal("done_editing")
-	

@@ -66,6 +66,7 @@ func _ready():
 		platform_area_collision_shape.disabled = true
 	
 	connect("property_changed", self, "update_property")
+	update_property("palette", palette)
 	
 	update_parts()
 

@@ -66,7 +66,6 @@ func signal_selected_objects(objects: Array):
 	visible = not objects.empty()
 	
 func fit_to_bounding_rectangle():
-	print("im run")
 	fill_rect = get_bounding_rectangle()
 	if !fill_rect:
 		reset_bounds()
