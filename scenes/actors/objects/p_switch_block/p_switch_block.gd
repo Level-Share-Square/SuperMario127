@@ -40,7 +40,6 @@ func _ready() -> void:
 
 func _object_ready():
 	._object_ready()
-	collision_shape.disabled = !is_enabled_and_on_ground()
 	area_collision_shape.disabled = !is_enabled_and_on_ground()
 
 func _physics_process(delta):
@@ -48,6 +47,8 @@ func _physics_process(delta):
 		sprite.modulate = Color(1, 0.5, 0.5)
 	elif mode == 1 or !is_enabled_and_on_ground():
 		sprite.modulate = Color(1, 1, 1)
+	
+	area_collision_shape.disabled = !collision_shape.disabled
 	
 	if !is_instance_valid(current_scene) or mode == 1 or !is_enabled_and_on_ground(): return
 	
