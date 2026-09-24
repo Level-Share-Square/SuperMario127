@@ -14,7 +14,7 @@ func can_collide_with(character):
 		var line_direction = Vector2(-direction.y, direction.x)
 		var p1 = line_center + line_direction
 		var p2 = line_center - line_direction
-		var p = character.bottom_pos.global_position
+		var p = character.bottom_pos.global_position - Vector2(0, 10)
 		var velocity = (character.velocity / 60.0) if character.get("velocity") != null else Vector2.ZERO
 		var diff = p2 - p1
 		var perp = Vector2(-diff.y, diff.x)
