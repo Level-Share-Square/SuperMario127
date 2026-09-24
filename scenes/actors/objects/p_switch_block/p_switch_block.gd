@@ -40,6 +40,7 @@ func _ready() -> void:
 
 func _object_ready():
 	._object_ready()
+	collision_shape.disabled = !is_on_ground_layer()
 	area_collision_shape.disabled = !is_enabled_and_on_ground()
 
 func _physics_process(delta):

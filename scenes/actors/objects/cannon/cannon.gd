@@ -86,8 +86,8 @@ func _ready() -> void:
 
 func _object_ready():
 	._object_ready()
-	collision_shape_2d.disabled = !is_enabled_and_on_ground()
-	collision_shape_2d_2.disabled = !is_enabled_and_on_ground()
+	collision_shape_2d.disabled = !is_on_ground_layer()
+	collision_shape_2d_2.disabled = !is_on_ground_layer()
 
 #disabled by default until process is enabled, so this can assume the cannon is already in an active state
 func _physics_process(delta : float) -> void:
