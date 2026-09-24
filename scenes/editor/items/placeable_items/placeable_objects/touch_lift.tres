@@ -6,7 +6,7 @@
 
 [resource]
 script = ExtResource( 1 )
-item_name = "Touch Lift"
+item_name = "Moving Platform"
 change_to = "obj_platform_wheel"
 items_in_sequence = 2
 index_in_sequence = 0
