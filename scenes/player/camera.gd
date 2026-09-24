@@ -87,6 +87,7 @@ var force_upward_lead: bool = false
 var y_down_timer: float = 0.0
 var cur_baseline: float = 0.0
 var is_descent_unlocked: bool = false
+var had_jumped: bool = false
 
 func _ready():
 	in_cutscene = false
@@ -176,10 +177,16 @@ func _physics_process(delta):
 					var is_moving_down: bool = char_vel.y > 20.0
 					var is_not_moving_up: bool = char_vel.y > -20.0
 					var is_force_follow: bool = is_instance_valid(character_node.state) and character_node.state.force_cam_follow_y
+					if character_node.is_grounded():
+						had_jumped = false
+					elif y_down_timer < 0.4 and not had_jumped:
+						y_down_timer = 0.4
+						is_moving_down = true
 					
 					if char_vel.y > 80.0:
 						is_descent_unlocked = true
 					elif char_vel.y < -50.0:
+						had_jumped = true
 						is_descent_unlocked = false
 
 					if is_force_follow:
