@@ -49,6 +49,9 @@ func update_property(key, value):
 			# display the editorsprite at the position the object will start at
 			pathfollow.offset = value
 			editor_sprite.position = pathfollow.position
+			
+			var editor_sprite_size: Vector2 = editor_sprite.texture.get_size()
+			editor_rect.position = editor_sprite.position - Vector2(editor_sprite_size.x/4, editor_sprite_size.y)/2
 		
 	
 func invalid_curve(check : Curve2D):
