@@ -143,13 +143,15 @@ func highlight_spot(color) -> void:
 	modulate = color
 
 
-func area_entered(_area: Area2D):
+func area_entered(area: Area2D):
 	if is_dragging: return
+	if area != drag_area: return
 	highlight_spot(Color(0.5, 1, 0.5))
 	hover_sound.play()
 
 
-func area_exited(_area: Area2D):
+func area_exited(area: Area2D):
 	if is_dragging: return
+	if area != drag_area: return
 	highlight_spot(Color.white)
 

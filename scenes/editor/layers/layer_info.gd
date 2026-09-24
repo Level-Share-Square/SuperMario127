@@ -154,14 +154,16 @@ func dragger_up() -> void:
 			editor.deselect_objects()
 
 
-func area_entered(_area: Area2D):
+func area_entered(area: Area2D):
 	if is_dragging: return
+	if area != layer_dropdown.drag_area: return
 	highlight_spot(Color(0.5, 1, 0.5))
 	hover_sound.play()
 
 
-func area_exited(_area: Area2D):
+func area_exited(area: Area2D):
 	if is_dragging: return
+	if area != layer_dropdown.drag_area: return
 	highlight_spot(Color.white)
 
 
