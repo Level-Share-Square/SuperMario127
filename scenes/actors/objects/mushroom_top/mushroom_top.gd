@@ -226,14 +226,14 @@ func set_bounce_anim(power: float):
 
 
 func update_bounce_anim(delta: float):
+	print(mushroom_cap.scale)
 	var spring_constant = 500.0
 	var damping_constant = 5
 	
 	var force = (-spring_constant * base_scale_factor) + (damping_constant * spring_anim_power)
 	spring_anim_power -= force * delta
 	base_scale_factor -= spring_anim_power * delta
-	
 	mushroom_cap.scale.y = 1 + (base_scale_factor * 1.25)
 	mushroom_cap.scale.x = (1 - ((mushroom_cap.scale.y - 1) / 2.0)) * (64 / (32 * parts + 64))
 	$Node2D.scale.y = (1 + base_scale_factor * 1.25)
-	$Node2D.scale.x = 1 -(1 - (($Node2D.scale.y - 1) / 2.0)) * ((32 * parts + 64) / 64 - 1)
+	$Node2D.scale.x = -(1 -(1 - (($Node2D.scale.y - 1) / 2.0)) * ((32 * parts + 64) / 64))
