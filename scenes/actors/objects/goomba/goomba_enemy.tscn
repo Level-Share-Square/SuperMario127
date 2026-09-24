@@ -676,9 +676,6 @@ script = ExtResource( 26 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerForgetter" index="0"]
 shape = SubResource( 66 )
 
-[node name="FloorDetector" parent="." index="5"]
-cast_to = Vector2( 0, 6 )
-
 [node name="IdleState" type="Node2D" parent="States" index="0"]
 script = ExtResource( 3 )
 friction = 2.5
@@ -769,6 +766,7 @@ visible = false
 self_modulate = Color( 1, 0.4, 0.333333, 1 )
 frames = ExtResource( 11 )
 animation = "idle"
+frame = 4
 offset = Vector2( 0, -15 )
 script = ExtResource( 10 )
 

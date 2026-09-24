@@ -134,7 +134,7 @@ func _physics_process(delta):
 
 
 func is_on_ground() -> bool:
-	return is_on_floor()
+	return floor_detector.is_colliding()
 
 var prev_is_grounded := false
 
