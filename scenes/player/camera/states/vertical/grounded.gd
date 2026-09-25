@@ -28,8 +28,8 @@ func update(delta: float) -> void:
 	var target_offset: float = -CROUCH_OFFSET if is_crouching else -GROUND_OFFSET
 	
 	offset = lerp(offset, target_offset, delta * OFFSET_SPEED)
-	self.pos = lerp(self.pos + (offset * self.zoom), self.char_pos, delta * CORRECT_SPEED)
-	self.pos -= offset * self.zoom
+	var target_pos: float = lerp(self.pos + (offset * self.zoom), self.char_pos, delta * CORRECT_SPEED) - (offset * self.zoom)
+	self.vel = (target_pos - self.pos) / delta
 
 
 func general_update(delta: float) -> void:

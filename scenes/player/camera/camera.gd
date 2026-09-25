@@ -44,6 +44,8 @@ onready var vertical_state_container: Node = $VerticalStates
 
 var horizontal_state: CamHorizontalState
 var vertical_state: CamVerticalState
+
+var velocity: Vector2
 ##
 
 var last_char_pos := Vector2.ZERO
@@ -127,6 +129,7 @@ func _physics_process(delta):
 							self[property].start()
 						check_state.general_update(delta)
 				
+				global_position += velocity * delta
 				last_char_pos = character_node.global_position
 		
 		if !zoom.is_equal_approx(old_zoom) and !zoom_tween.is_active():
