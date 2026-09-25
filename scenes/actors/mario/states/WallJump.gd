@@ -38,7 +38,7 @@ func _start(_delta):
 	jump_released = false
 	
 	var sound_player = character.sound_player
-	if character_in_range:
+	if character_in_range and character.is_wj_chained:
 		actual_power.y /= 1.15
 		if actual_power.y < minimum_power:
 			actual_power.y = minimum_power
