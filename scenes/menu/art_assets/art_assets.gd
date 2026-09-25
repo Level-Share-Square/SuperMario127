@@ -12,6 +12,7 @@ onready var itch_header = $"%ItchHeader"
 onready var itch_cover = $"%ItchCover"
 onready var itch_profile_banner = $"%ItchProfileBanner"
 onready var itch_profile_bg = $"%ItchProfileBG"
+onready var igdb_box = $"%IGDBBox"
 
 onready var lss_thumbnail = $"%LSSThumbnail"
 onready var android_icon_bg = $"%AndroidIconBG"
@@ -42,6 +43,10 @@ func _ready():
 #	header_img.flip_y()
 #	header_img.save_png("res://assets/artwork/steam/header.png")
 #
+	var igdb_box_img: Image = igdb_box.get_node("Viewport").get_texture().get_data()
+	igdb_box_img.flip_y()
+	igdb_box_img.save_png("res://assets/artwork/igdb/box.png")
+#
 #	var discord_header_img: Image = discord_header.get_node("Viewport").get_texture().get_data()
 #	discord_header_img.flip_y()
 #	discord_header_img.save_png("res://assets/artwork/discord/header.png")
@@ -70,9 +75,9 @@ func _ready():
 #	itch_cover_img.flip_y()
 #	itch_cover_img.save_png("res://assets/artwork/itch/cover.png")
 
-	var itch_profile_banner_img: Image = itch_profile_banner.get_node("Viewport").get_texture().get_data()
-	itch_profile_banner_img.flip_y()
-	itch_profile_banner_img.save_png("res://assets/artwork/itch/profile_banner.png")
+#	var itch_profile_banner_img: Image = itch_profile_banner.get_node("Viewport").get_texture().get_data()
+#	itch_profile_banner_img.flip_y()
+#	itch_profile_banner_img.save_png("res://assets/artwork/itch/profile_banner.png")
 
 #	var itch_profile_bg_img: Image = itch_profile_bg.get_node("Viewport").get_texture().get_data()
 #	itch_profile_bg_img.flip_y()
