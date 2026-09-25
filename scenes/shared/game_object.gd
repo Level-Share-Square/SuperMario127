@@ -275,11 +275,6 @@ func set_property(property: String, value, change_object_data = false):
 			if mode == 1:
 				visible = true
 				visibility = value
-		
-		if property == "in_front" and value == true:
-			z_index = 1
-		else:
-			z_index = 0
 	
 	if mode == 1 and !is_preview:
 		emit_signal("property_changed", property, value)
