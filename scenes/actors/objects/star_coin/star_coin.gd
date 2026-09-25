@@ -99,16 +99,16 @@ func update_color():
 
 func collect(body : PhysicsBody2D) -> void:
 	if is_enabled_and_on_ground() and !collected and (body is Character):
-		if not Singleton.ModeSwitcher.visible and CurrentLevelData.save_data.get_collected_star_coin_count() + 1 == CurrentLevelData.level_metadata.collectible_data.get_star_coin_count():
-			audio_player_complete.play()
-		else:
-			audio_player.play()
-		
 		if not Singleton.ModeSwitcher.visible:
 			CurrentLevelData.save_data.set_star_coin_collected(uuid, CurrentLevelData.selected_file > -2)
 
 		collected = true
 		get_tree().get_current_scene().get_node("%PauseController").emit_signal("star_coin_collected")
+		
+		if not is_blue and not Singleton.ModeSwitcher.visible and CurrentLevelData.save_data.get_collected_star_coin_count() >= CurrentLevelData.level_metadata.collectible_data.get_star_coin_count():
+			audio_player_complete.play()
+		else:
+			audio_player.play()
 		
 		LastInputDevice.rumble(0.5, 0.8, 0.2)
 		animation_player.play("collect")
