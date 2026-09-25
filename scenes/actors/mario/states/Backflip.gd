@@ -51,6 +51,7 @@ func _start(_delta):
 	character.velocity.y = -backflip_power.y
 	character.position.x -= 2 * character.facing_direction
 	character.position.y -= 3
+	character.stamina = 100
 	disable_turning = true
 	sound_player.play_double_jump_sound()
 	sound_player.play_backflip_sound()
