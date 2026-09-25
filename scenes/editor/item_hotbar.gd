@@ -27,6 +27,12 @@ var loadout_palettes: Array = [
 ]
 
 var selected_loadout: int = 0
+var loadout_map: Dictionary = {
+	"LoadoutA": 0,
+	"LoadoutB": 1,
+	"LoadoutC": 2,
+	"LoadoutD": 3,
+}
 
 var last_selected_tile: Array
 var last_selected_object: Array
@@ -117,20 +123,17 @@ func check_items():
 
 
 func _on_loadout_pressed(loadout_button):
+	if palettes.pressed: 
+		var reselect_button: Button = loadout_button.get_parent().get_node(loadout_map.find_key(selected_loadout))
+		reselect_button.pressed = true
+		return
+		
 	update_level_data()
 	var loadout_palette: Array = []
 	for buttons in bottom_row.get_children():
 		loadout_palette.append(buttons.palette)
 		loadout_palettes[selected_loadout] = loadout_palette
-	match loadout_button.name:
-		"LoadoutA":
-			selected_loadout = 0
-		"LoadoutB":
-			selected_loadout = 1
-		"LoadoutC":
-			selected_loadout = 2
-		"LoadoutD":
-			selected_loadout = 3
+	selected_loadout = loadout_map[loadout_button.name]
 	refresh_loadout()
 	check_items()
 	manual_button_click(bottom_row.get_child(0))
