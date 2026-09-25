@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scenes/player/camera/camera.gd" type="Script" id=1]
-[ext_resource path="res://scenes/player/camera/states/horizontal/follow.gd" type="Script" id=2]
+[ext_resource path="res://scenes/player/camera/states/follow.gd" type="Script" id=2]
 [ext_resource path="res://scenes/player/camera/states/vertical/grounded.gd" type="Script" id=3]
 [ext_resource path="res://scenes/player/camera/states/vertical/follow.gd" type="Script" id=4]
 [ext_resource path="res://scenes/player/camera/states/vertical/airborne.gd" type="Script" id=5]
@@ -29,6 +29,13 @@ background = NodePath("../Backgrounds")
 
 [node name="Follow" type="Node" parent="HorizontalStates"]
 script = ExtResource( 2 )
+axis = "x"
+
+[node name="FastFollow" type="Node" parent="HorizontalStates"]
+script = ExtResource( 6 )
+priority = 0
+axis = "x"
+follow_states = PoolStringArray( "LaunchStarState" )
 
 [node name="VerticalStates" type="Node" parent="."]
 
@@ -38,6 +45,11 @@ script = ExtResource( 3 )
 [node name="Follow" type="Node" parent="VerticalStates"]
 script = ExtResource( 4 )
 priority = 0
+margin = 24.0
+full_margin = 96.0
+lerp_slower_speed = 6.0
+lerp_faster_speed = 6.0
+max_lead_distance = 224.0
 follow_states = PoolStringArray( "WingMarioState", "SwimmingState" )
 
 [node name="FastFollow" type="Node" parent="VerticalStates"]
@@ -47,6 +59,9 @@ follow_states = PoolStringArray( "LaunchStarState" )
 
 [node name="Airborne" type="Node" parent="VerticalStates"]
 script = ExtResource( 5 )
+margin = 64.0
+full_margin = 192.0
+slow_follow_speed = 2.0
 
 [node name="ZoomTween" type="Tween" parent="."]
 process_priority = -1

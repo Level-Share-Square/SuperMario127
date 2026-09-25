@@ -1,4 +1,4 @@
-extends CamVerticalState
+extends CamState
 
 
 export var follow_states: PoolStringArray

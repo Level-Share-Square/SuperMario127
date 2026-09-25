@@ -42,8 +42,8 @@ onready var viewport
 onready var horizontal_state_container: Node = $HorizontalStates
 onready var vertical_state_container: Node = $VerticalStates
 
-var horizontal_state: CamHorizontalState
-var vertical_state: CamVerticalState
+var horizontal_state: CamState
+var vertical_state: CamState
 
 var velocity: Vector2
 ##

@@ -1,4 +1,4 @@
-extends CamVerticalState
+extends CamState
 
 
 const GROUND_OFFSET: float = -48.0
