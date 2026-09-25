@@ -92,4 +92,4 @@ static func check_and_convert_new_level(level_code: String, data_container = nul
 		level_version += 1
 			
 	level_code = LevelCodeSerializer.serialize_level_data(data_container)
-	return {"has_converted": true, "level_code": level_code}
+	return {"has_converted": true, "level_code": level_code, "level_data_container": data_container}
