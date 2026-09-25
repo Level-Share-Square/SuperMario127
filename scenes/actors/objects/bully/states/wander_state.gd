@@ -24,12 +24,12 @@ func _update(delta: float) -> void:
 			walk_sound.play()
 			footstep_interval = 0.4
 		footstep_interval -= delta
+	
+		if is_instance_valid(enemy.player_detector.get_player()):
+			enemy.set_state_by_name("ChaseState")
 		
 	else:
 		if enemy.velocity.y > 0:
 			enemy.sprite.play("fall")
 		else:
 			enemy.sprite.play("jump")
-	
-	if is_instance_valid(enemy.player_detector.get_player()):
-		enemy.set_state_by_name("ChaseState")
