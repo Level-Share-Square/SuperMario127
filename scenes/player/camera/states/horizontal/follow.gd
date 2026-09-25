@@ -4,9 +4,10 @@ extends CamHorizontalState
 const MARGIN: float = 32.0
 const FULL_MARGIN: float = 144.0
 
-const SLOW_FOLLOW_SPEED: float = 2.0
+const SLOW_FOLLOW_SPEED: float = 3.0
 const FOLLOW_SPEED: float = 6.0
-const LERP_CORRECT_SPEED: float = 12.0
+const LERP_SLOWER_SPEED: float = 12.0
+const LERP_FASTER_SPEED: float = 12.0
 
 const SPEED_THRESHOLD: float = 120.0
 const MAX_SPEED: float = 500.0
@@ -46,9 +47,10 @@ func update(delta: float) -> void:
 		
 		var target_pos: float = lerp(self.pos, self.pos + clamped_diff, delta * follow_speed)
 		var target_vel: float = (target_pos - self.pos) / delta
-		self.vel = lerp(self.vel, target_vel, delta * LERP_CORRECT_SPEED)
+		var lerp_speed: float = LERP_FASTER_SPEED if abs(target_vel) < abs(self.vel) else LERP_SLOWER_SPEED
+		self.vel = lerp(self.vel, target_vel, delta * lerp_speed)
 	else:
-		self.vel = lerp(self.vel, 0, delta * LERP_CORRECT_SPEED)
+		self.vel = lerp(self.vel, 0, delta * LERP_SLOWER_SPEED)
 
 
 func reset_vars() -> void:
