@@ -364,7 +364,7 @@ margin_right = 237.0
 margin_bottom = 147.0
 focus_neighbour_top = NodePath("../LSS")
 focus_neighbour_bottom = NodePath("../HBoxContainer/Options")
-text = "Saved Levels"
+text = "Custom Levels"
 align = 2
 script = ExtResource( 8 )
 
