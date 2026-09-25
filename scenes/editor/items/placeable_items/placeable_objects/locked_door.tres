@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=12 format=2]
+[gd_resource type="Resource" load_steps=11 format=2]
 
 [ext_resource path="res://scenes/editor/items/placeable_object.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/objects/star_door/Editor/double/standard_door_double_lock_icon.png" type="Texture" id=2]
@@ -6,7 +6,6 @@
 [ext_resource path="res://scenes/actors/objects/star_door/Editor/double/metal_door_double_lock_icon.png" type="Texture" id=4]
 [ext_resource path="res://scenes/actors/objects/star_door/Editor/double/rusty_door_double_lock_icon.png" type="Texture" id=5]
 [ext_resource path="res://scenes/actors/objects/star_door/Editor/double/spooky_door_double_lock_icon.png" type="Texture" id=6]
-[ext_resource path="res://scenes/actors/objects/star_door/Editor/double/metal_door_double_lock_preview.png" type="Texture" id=7]
 [ext_resource path="res://scenes/actors/objects/star_door/Editor/double/planks_door_double_lock_preview.png" type="Texture" id=8]
 [ext_resource path="res://scenes/actors/objects/star_door/Editor/double/rusty_door_double_lock_preview.png" type="Texture" id=9]
 [ext_resource path="res://scenes/actors/objects/star_door/Editor/double/spooky_door_double_lock_preview.png" type="Texture" id=10]
@@ -18,8 +17,8 @@ item_name = "Locked Double Door"
 change_to = "obj_locked_door_single"
 items_in_sequence = 2
 index_in_sequence = 0
-icons = [ ExtResource( 2 ), ExtResource( 4 ), ExtResource( 3 ), ExtResource( 5 ), ExtResource( 6 ) ]
-previews = [ ExtResource( 11 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ) ]
+icons = [ ExtResource( 2 ), ExtResource( 4 ), ExtResource( 6 ), ExtResource( 5 ), ExtResource( 3 ) ]
+previews = [ ExtResource( 11 ), ExtResource( 10 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 8 ) ]
 priority = 48
 object_id = 113
 preview_offset = Vector2( 0, 0 )
