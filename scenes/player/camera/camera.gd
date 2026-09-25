@@ -48,7 +48,6 @@ var vertical_state: CamVerticalState
 var velocity: Vector2
 ##
 
-var last_char_pos := Vector2.ZERO
 var current_lead_offset_x: float = 0.0
 var current_lead_offset_y: float = 0.0
 var leading_amount: float = 0.0
@@ -128,9 +127,7 @@ func _physics_process(delta):
 							self[property] = check_state
 							self[property].start()
 						check_state.general_update(delta)
-				
 				global_position += velocity * delta
-				last_char_pos = character_node.global_position
 		
 		if !zoom.is_equal_approx(old_zoom) and !zoom_tween.is_active():
 			zoom = lerp(zoom, old_zoom, 0.08)
