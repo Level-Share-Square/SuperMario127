@@ -1,42 +1,5 @@
 extends Camera2D
 
-
-const FAST_FOLLOW_SPEED: float = 4.0
-
-const GROUND_OFFSET: float = -48.0
-const CROUCH_OFFSET: float = 80.0
-
-const X_MARGIN: float = 32.0
-const X_FULL_MARGIN: float = 144.0
-
-const X_SLOW_FOLLOW_SPEED: float = 2.0
-const X_FOLLOW_SPEED: float = 6.0
-
-const X_SPEED_THRESHOLD: float = 120.0
-const X_MAX_SPEED: float = 500.0
-const X_MAX_LEAD_DISTANCE: float = 320.0
-const X_LEAD_SPEED: float = 1.0
-
-const Y_MARGIN: float = 48.0
-
-const Y_FOLLOW_SPEED: float = 3.0
-const Y_FAST_FOLLOW_SPEED: float = 5.0
-const Y_DESPERATE_FOLLOW_SPEED: float = 6.0
-
-const Y_SLOW_CORRECT_SPEED: float = 2.0
-const Y_CORRECT_SPEED: float = 9.0
-
-const Y_OFFSET_SPEED: float = 4.0
-const Y_FORCE_THRESHOLD: float = 600.0
-
-const Y_MAX_LEAD_DISTANCE_DOWN: float = 400.0
-const Y_MAX_LEAD_DISTANCE_UP: float = 100.0
-const Y_LEAD_SPEED: float = 4.0
-const Y_DOWN_TIME_THRESHOLD: float = 0.25
-const Y_DOWN_TIME_MAX_LEAD: float = 0.75
-const UPWARD_OVERRIDE_CANCEL_TIME: float = 0.35
-const UPWARD_LEAD_RAMP_SPEED: float = 4.0
-
 const STOPPER_EASE_T: float = 0.05
 
 export var character : NodePath
@@ -75,6 +38,14 @@ onready var cutscene_tween: Tween = $CutsceneTween
 
 onready var viewport
 
+## states
+onready var horizontal_state_container: Node = $HorizontalStates
+onready var vertical_state_container: Node = $VerticalStates
+
+var horizontal_state: CamHorizontalState
+var vertical_state: CamVerticalState
+##
+
 var last_char_pos := Vector2.ZERO
 var current_lead_offset_x: float = 0.0
 var current_lead_offset_y: float = 0.0
@@ -106,8 +77,6 @@ func _ready():
 		global_position = character_node.global_position
 		last_position = global_position
 		y_baseline = global_position.y
-		cur_baseline = y_baseline
-		y_offset = GROUND_OFFSET
 
 func _physics_process(delta):
 	last_position = global_position
@@ -127,150 +96,37 @@ func _physics_process(delta):
 				if skip_to_player:
 					global_position = character_node.global_position
 					last_position = global_position
-					y_baseline = global_position.y
-					cur_baseline = y_baseline
-					y_offset = GROUND_OFFSET
+					
+					for state in horizontal_state_container.get_children():
+						state.reset_vars()
+					for state in vertical_state_container.get_children():
+						state.reset_vars()
+					
+					horizontal_state = null
+					vertical_state = null
+					
 					skip_to_player = false
+					
+				## runs the same code for handling horizontal and vertical states, in that order
+				for i in range(2):
+					var container: Node = horizontal_state_container if i == 0 else vertical_state_container
+					var property: String = "horizontal_state" if i == 0 else "vertical_state"
+					if is_instance_valid(self[property]):
+						self[property].character = character_node
+						self[property].update(delta)
+						if self[property].stop_check():
+							self[property].stop()
+							self[property] = null
+					for check_state in container.get_children():
+						check_state.character = character_node
+						var priority_check: bool = not is_instance_valid(self[property]) or check_state.priority >= self[property].priority
+						if check_state != self[property] and priority_check and check_state.start_check():
+							if is_instance_valid(self[property]):
+								self[property].stop()
+							self[property] = check_state
+							self[property].start()
+						check_state.general_update(delta)
 				
-				if is_instance_valid(character_node.state) and character_node.state.fast_cam_follow:
-					var target_pos: Vector2 = character_node.global_position
-					var movement: Vector2 = character_node.global_position - last_char_pos
-					target_pos += movement * 12.5
-					global_position = global_position.linear_interpolate(target_pos, delta * FAST_FOLLOW_SPEED)
-					y_baseline = global_position.y
-					cur_baseline = global_position.y
-					y_offset = 0
-					prints(movement, "|", character_node.global_position, "|", global_position)
-				else:
-					var char_pos: Vector2 = character_node.global_position
-					var char_vel: Vector2 = character_node.velocity
-					var char_screen_pos: Vector2 = character_node.get_canvas_transform().xform(char_pos)
-					var char_center_distance: Vector2 = char_screen_pos - size
-
-					## x axis
-					var speed_x: float = abs(char_vel.x)
-					var target_lead_x: float = 0.0
-					
-					if speed_x > X_SPEED_THRESHOLD:
-						var speed_factor: float = clamp((speed_x - X_SPEED_THRESHOLD) / (X_MAX_SPEED - X_SPEED_THRESHOLD), 0.0, 1.0)
-						target_lead_x = X_MAX_LEAD_DISTANCE * zoom.y * speed_factor * sign(char_vel.x)
-
-					current_lead_offset_x = lerp(current_lead_offset_x, target_lead_x, delta * X_LEAD_SPEED)
-					
-					var target_x: float = char_pos.x + current_lead_offset_x
-					var x_delta: float = target_x - global_position.x
-					var abs_x_delta: float = abs(x_delta)
-
-					if abs_x_delta > X_MARGIN * zoom.y:
-						var clamped_delta: float = x_delta - (sign(x_delta) * X_MARGIN)
-						var follow_speed: float = X_FOLLOW_SPEED
-						
-						if abs_x_delta < X_FULL_MARGIN:
-							var edge_ratio: float = (abs_x_delta - X_MARGIN) / (X_FULL_MARGIN - X_MARGIN)
-							follow_speed = lerp(X_SLOW_FOLLOW_SPEED, X_FOLLOW_SPEED, edge_ratio)
-							
-						global_position.x = lerp(global_position.x, global_position.x + clamped_delta, delta * follow_speed)
-
-					## y axis
-					var speed_y: float = abs(char_vel.y)
-					var is_crouching: bool = character_node.inputs[9][0] and speed_x < 10.0
-					var is_moving_down: bool = char_vel.y > 20.0
-					var is_not_moving_up: bool = char_vel.y > -20.0
-					var is_force_follow: bool = is_instance_valid(character_node.state) and character_node.state.force_cam_follow_y
-					if character_node.is_grounded():
-						had_jumped = false
-					elif y_down_timer < 0.4 and not had_jumped:
-						y_down_timer = 0.4
-						is_moving_down = true
-					
-					if char_vel.y > 80.0:
-						is_descent_unlocked = true
-					elif char_vel.y < -50.0:
-						had_jumped = true
-						is_descent_unlocked = false
-
-					if is_force_follow:
-						y_down_timer = 0.0
-						is_descent_unlocked = true
-					elif (force_upward_lead and is_not_moving_up) or (not force_upward_lead and is_moving_down):
-						y_down_timer += delta
-					else:
-						y_down_timer = 0.0
-
-					if force_upward_lead and y_down_timer >= UPWARD_OVERRIDE_CANCEL_TIME:
-						force_upward_lead = false
-					
-					if force_upward_lead and character_node.is_grounded() or is_force_follow:
-						force_upward_lead = false
-
-					var target_lead_y: float = 0.0
-
-					if force_upward_lead:
-						leading_amount = move_toward(leading_amount, 1.0, delta * UPWARD_LEAD_RAMP_SPEED)
-						target_lead_y = -Y_MAX_LEAD_DISTANCE_UP * zoom.y
-					else:
-						var is_time_leading_down: bool = y_down_timer > Y_DOWN_TIME_THRESHOLD
-						leading_amount = move_toward(leading_amount, 1.0 if is_time_leading_down else 0.0, delta * (3.0 if is_time_leading_down else 2.0))
-						
-						if is_time_leading_down:
-							var time_factor: float = clamp((y_down_timer - Y_DOWN_TIME_THRESHOLD) / (Y_DOWN_TIME_MAX_LEAD - Y_DOWN_TIME_THRESHOLD), 0.0, 1.0)
-							target_lead_y = Y_MAX_LEAD_DISTANCE_DOWN * zoom.y * time_factor
-					
-					current_lead_offset_y = lerp(current_lead_offset_y, target_lead_y, delta * Y_LEAD_SPEED)
-					var working_lead_y: float = current_lead_offset_y * leading_amount
-
-					var target_y: float = char_pos.y
-
-					if is_force_follow:
-						y_baseline = target_y
-						y_baseline += char_vel.y / 5
-						y_offset = lerp(y_offset, 0.0, delta * Y_OFFSET_SPEED)
-						
-					elif character_node.is_grounded():
-						y_baseline = target_y
-						var target_offset: float = CROUCH_OFFSET if is_crouching else GROUND_OFFSET
-						y_offset = lerp(y_offset, target_offset, delta * Y_OFFSET_SPEED)
-						if abs(y_offset - target_offset) < 10 and char_pos.y == last_char_pos.y:
-							is_descent_unlocked = false
-						else:
-							is_descent_unlocked = true
-						
-					else:
-						var screen_limit: float = abs(size.y * 0.6)
-						var is_past_top: float = char_center_distance.y < -screen_limit
-						var is_past_bottom: float = char_center_distance.y > screen_limit
-
-						if is_past_top or is_past_bottom:
-							y_offset = GROUND_OFFSET if is_past_top else lerp(y_offset, 0.0, delta * Y_OFFSET_SPEED)
-							var correct_speed: float = Y_FAST_FOLLOW_SPEED if speed_y > Y_FORCE_THRESHOLD else Y_CORRECT_SPEED
-							y_baseline = lerp(y_baseline, target_y, delta * correct_speed)
-							
-						elif not is_descent_unlocked:
-							y_offset = GROUND_OFFSET
-							
-						else:
-							y_offset = lerp(y_offset, 0.0, delta * Y_OFFSET_SPEED)
-							var y_diff: float = target_y - y_baseline
-
-							if abs(y_diff) > Y_MARGIN:
-								var adjusted_target_y: float = target_y - (Y_MARGIN * sign(y_diff))
-								var correct_speed: float = Y_CORRECT_SPEED if speed_y > Y_FORCE_THRESHOLD else Y_SLOW_CORRECT_SPEED
-								y_baseline = lerp(y_baseline, adjusted_target_y, delta * correct_speed)
-
-					cur_baseline = y_baseline
-
-					var y_follow: float = Y_FOLLOW_SPEED
-					if speed_y > Y_FORCE_THRESHOLD:
-						y_follow = Y_FAST_FOLLOW_SPEED
-					elif abs(char_center_distance.y) > abs(size.y):
-						y_follow = Y_DESPERATE_FOLLOW_SPEED
-
-					var target_final_y: float = cur_baseline + y_offset + working_lead_y
-
-					if not is_descent_unlocked and not is_crouching and target_final_y > global_position.y:
-						target_final_y = global_position.y
-
-					global_position.y = lerp(global_position.y, target_final_y, delta * y_follow)
 				last_char_pos = character_node.global_position
 		
 		if !zoom.is_equal_approx(old_zoom) and !zoom_tween.is_active():
@@ -587,25 +443,6 @@ func pan_tween_to(new_position: Vector2, cutscene: CameraCutscene):
 		cutscene.transition_type, 
 		cutscene.tween_ease
 		)
-	if abs(global_position.y - new_position.y) > 50:
-		cutscene_tween.interpolate_property(
-			self, 
-			"y_baseline", 
-			y_baseline, 
-			new_position.y, 
-			cutscene.time, 
-			cutscene.transition_type, 
-			cutscene.tween_ease
-			)
-		cutscene_tween.interpolate_property(
-			self, 
-			"cur_baseline", 
-			cur_baseline, 
-			new_position.y, 
-			cutscene.time, 
-			cutscene.transition_type, 
-			cutscene.tween_ease
-			)
 	cutscene_tween.start()
 	
 func find_path(init_pos: Vector2, final_pos: Vector2, visited_corners = null, depth: int = 0) -> Array:

@@ -1,9 +1,9 @@
-[gd_scene load_steps=121 format=2]
+[gd_scene load_steps=120 format=2]
 
 [ext_resource path="res://scenes/player/player.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/level_shared.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/actors/mario/mario.tscn" type="PackedScene" id=3]
-[ext_resource path="res://scenes/player/camera.gd" type="Script" id=4]
+[ext_resource path="res://scenes/player/camera/camera.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/menu/pause/pause_controller.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/menu/theme.tres" type="Theme" id=6]
 [ext_resource path="res://scenes/player/ui_new/text/dialogue_text.tscn" type="PackedScene" id=7]
@@ -1669,9 +1669,6 @@ extra_spacing_top = 5
 extra_spacing_char = -2
 font_data = ExtResource( 11 )
 
-[sub_resource type="RectangleShape2D" id=18]
-extents = Vector2( 393, 216 )
-
 [node name="Player" type="Node2D"]
 script = ExtResource( 1 )
 nodes_to_load = [ NodePath("Area/LevelShared"), NodePath("Area/Character"), NodePath("CameraP1"), NodePath("Backgrounds") ]
@@ -3103,37 +3100,7 @@ __meta__ = {
 }
 character_path = NodePath("../../Area/Character")
 
-[node name="CameraP1" type="Camera2D" parent="."]
-pause_mode = 2
-position = Vector2( 0, -80 )
-rotating = true
-current = true
-process_mode = 0
-drag_margin_left = 0.0
-drag_margin_top = 0.0
-drag_margin_right = 0.0
-drag_margin_bottom = 0.0
-editor_draw_screen = false
-script = ExtResource( 4 )
-character = NodePath("../Area/Character")
-background = NodePath("../Backgrounds")
-
-[node name="ZoomTween" type="Tween" parent="CameraP1"]
-process_priority = -1
-playback_process_mode = 0
-
-[node name="CutsceneTween" type="Tween" parent="CameraP1"]
-pause_mode = 2
-process_priority = -1
-playback_process_mode = 0
-
-[node name="Area2D" type="Area2D" parent="CameraP1"]
-collision_layer = 0
-collision_mask = 2048
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraP1/Area2D"]
-visible = false
-shape = SubResource( 18 )
+[node name="CameraP1" parent="." instance=ExtResource( 4 )]
 
 [node name="Area" type="Node2D" parent="."]
 script = ExtResource( 21 )

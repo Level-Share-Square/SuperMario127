@@ -131,7 +131,6 @@ func calc_physics(interp: bool, delta) -> Vector2:
 	
 	#if in water, lerp velocity to zero gradually
 	if not water_detector.get_overlapping_areas().empty():
-		print("submerged")
 		new_velocity.y = lerp(new_velocity.y, 0, delta * 6 * interp_scale)
 	else:
 		gravity_scale = 1

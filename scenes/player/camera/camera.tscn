@@ -1,0 +1,60 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://scenes/player/camera/camera.gd" type="Script" id=1]
+[ext_resource path="res://scenes/player/camera/states/horizontal/follow.gd" type="Script" id=2]
+[ext_resource path="res://scenes/player/camera/states/vertical/grounded.gd" type="Script" id=3]
+[ext_resource path="res://scenes/player/camera/states/vertical/follow.gd" type="Script" id=4]
+[ext_resource path="res://scenes/player/camera/states/vertical/airborne.gd" type="Script" id=5]
+
+[sub_resource type="RectangleShape2D" id=18]
+extents = Vector2( 393, 216 )
+
+[node name="CameraP1" type="Camera2D"]
+pause_mode = 2
+position = Vector2( 0, -80 )
+rotating = true
+current = true
+process_mode = 0
+drag_margin_left = 0.0
+drag_margin_top = 0.0
+drag_margin_right = 0.0
+drag_margin_bottom = 0.0
+editor_draw_screen = false
+script = ExtResource( 1 )
+character = NodePath("../Area/Character")
+background = NodePath("../Backgrounds")
+
+[node name="HorizontalStates" type="Node" parent="."]
+
+[node name="Follow" type="Node" parent="HorizontalStates"]
+script = ExtResource( 2 )
+
+[node name="VerticalStates" type="Node" parent="."]
+
+[node name="Grounded" type="Node" parent="VerticalStates"]
+script = ExtResource( 3 )
+
+[node name="Follow" type="Node" parent="VerticalStates"]
+script = ExtResource( 4 )
+priority = 0
+follow_states = PoolStringArray( "LaunchStarState", "WingMarioState", "SwimmingState" )
+
+[node name="Airborne" type="Node" parent="VerticalStates"]
+script = ExtResource( 5 )
+
+[node name="ZoomTween" type="Tween" parent="."]
+process_priority = -1
+playback_process_mode = 0
+
+[node name="CutsceneTween" type="Tween" parent="."]
+pause_mode = 2
+process_priority = -1
+playback_process_mode = 0
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2048
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+visible = false
+shape = SubResource( 18 )
