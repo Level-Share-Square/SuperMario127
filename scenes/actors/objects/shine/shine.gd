@@ -311,11 +311,8 @@ func _physics_process(_delta: float) -> void:
 
 func activate_shine(animation: int, temporary: bool = false, manual_start_cutscene: bool = false) -> void:
 	pause_mode = PAUSE_MODE_INHERIT
-	if activated:
-		return
+	if activated: return
 		
-	activated = true
-	
 	yield(get_tree(), "idle_frame")
 	
 	character = current_scene.get_node(current_scene.character)
@@ -323,10 +320,14 @@ func activate_shine(animation: int, temporary: bool = false, manual_start_cutsce
 		yield(get_tree(), "idle_frame")
 		character = current_scene.get_node(current_scene.character)
 		
+	if not character.movable: return
+		
 	var camera = current_scene.get_node(current_scene.camera)
 	while !is_instance_valid(camera):
 		yield(get_tree(), "idle_frame")
 		camera = current_scene.get_node(current_scene.camera)
+		
+	activated = true
 	
 	if animation == ActivateAnimations.NORMAL:
 		var cutscene: CameraCutscene = CameraCutscene.new()
