@@ -80,7 +80,8 @@ extents = Vector2( 80, 60 )
 [node name="SpeechBubble" type="Node2D"]
 modulate = Color( 0, 0, 1, 0 )
 scale = Vector2( 0.68, 0.8 )
-z_index = 50
+z_index = 4096
+z_as_relative = false
 script = ExtResource( 3 )
 
 [node name="Sizing" type="Label" parent="."]
