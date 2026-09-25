@@ -64,6 +64,7 @@ func _start(_delta):
 	
 	character.swimming = true
 	character.gravity_scale = 0
+	character.is_wj_chained = false
 	
 	char_rotation = 90
 	if abs(character.sprite.rotation_degrees) > 90:
