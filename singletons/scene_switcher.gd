@@ -111,7 +111,7 @@ func start_level(level_metadata: LevelMetadata, level_id: String, working_folder
 	var total_shine_count := 0
 	for mission_uuid in level_metadata.collectible_data.used_mission_data:
 		var mission = level_metadata.collectible_data.get_mission_by_uuid(mission_uuid)
-		if mission["mission_show_in_menu"]:
+		if mission and mission["mission_show_in_menu"]:
 			total_shine_count += 1
 			
 	CurrentLevelData.starting_nozzle = ""

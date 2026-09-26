@@ -113,6 +113,8 @@ func get_mission_args() -> Dictionary:
 
 func _ready() -> void:
 	send_score = true
+	if mission_uuid and not CurrentLevelData.level_metadata.collectible_data.get_mission_by_uuid(mission_uuid):
+		mission_uuid = ""
 	if mission_uuid:
 		mission_from_before = mission_uuid
 		update_shine_properties("mission_uuid", mission_uuid)
