@@ -236,3 +236,6 @@ func reset_platform():
 
 func _unhandled_input(event: InputEvent) -> void:
 	parts_input_handler(event,self)
+
+func update_parts():
+	platform.set_parts(parts)

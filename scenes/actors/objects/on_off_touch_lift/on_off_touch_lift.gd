@@ -54,6 +54,9 @@ func _register_properties():
 func _unhandled_input(event: InputEvent) -> void:
 	parts_input_handler(event,self)
 
+func update_parts():
+	platform.set_parts(parts)
+
 func _process(_delta):
 	if parts != last_parts:
 		platform.set_parts(parts)
