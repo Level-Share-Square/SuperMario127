@@ -41,9 +41,8 @@ static func deserialize_level_code(code: String):
 		new_area_headers.push_back(deserialize_area_header_code(header))
 	
 	var new_editor_data = deserialize_editor_data(editor_data_code)
-	var new_level_tags = deserialize_level_tags(level_tags_code)
 	
-	var level_data = LevelDataContainer.new(new_level_metadata, new_editor_data, new_area_headers, new_level_tags)
+	var level_data = LevelDataContainer.new(new_level_metadata, new_editor_data, new_area_headers)
 	return level_data
 
 
@@ -78,20 +77,6 @@ static func deserialize_editor_data(editor_data_code: String) -> EditorData:
 	
 	var target_tag: String = deserialize_datas_code(components[11])[0]
 	return EditorData.new(layouts, palettes, fav_items, fav_count, selected_loadout, selected_layer, show_palettes, area_bounds_increment, camera_positions, last_area, pixel_snap, target_tag)
-
-static func deserialize_level_tags(level_tags_code: String) -> LevelTags:
-	if level_tags_code.empty():
-		return LevelTags.new()
-	
-	var components: Array = LevelCodeTokenizer.splice_level_tags_components(level_tags_code)
-	
-	var teleport_tags: Array =  deserialize_datas_code(components[0])
-	var dialogue_tags: Array =  deserialize_datas_code(components[1])
-	var liquid_tags: Array =  deserialize_datas_code(components[2])
-	if components.size() <= 3: return LevelTags.new(teleport_tags, dialogue_tags, liquid_tags)
-	var key_tags: Array =  deserialize_datas_code(components[3])
-	
-	return LevelTags.new(teleport_tags, dialogue_tags, liquid_tags, key_tags)
 
 static func deserialize_area_code(area_code: String) -> AreaData:
 	var area_components_code = LevelCodeTokenizer.splice_area_components(area_code)

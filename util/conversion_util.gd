@@ -358,7 +358,6 @@ static func generate_data_container(level_code: String) -> LevelDataContainer:
 	var level_tags_code = components_code[2] if components_code.size() == 3 else ""
 	
 	var editor_data = LevelCodeDeserializer.deserialize_editor_data(editor_data_code)
-	var level_tags = LevelCodeDeserializer.deserialize_level_tags(level_tags_code)
 	var area_headers: Array
 	
 	# load area headers
@@ -367,7 +366,7 @@ static func generate_data_container(level_code: String) -> LevelDataContainer:
 		var area_header: AreaHeader = LevelCodeDeserializer.deserialize_area_header_code(area_code)
 		area_headers.append(area_header)
 	
-	return LevelDataContainer.new(level_metadata, editor_data, area_headers, level_tags)
+	return LevelDataContainer.new(level_metadata, editor_data, area_headers)
 	
 static func convert_100_to_101(data_container: LevelDataContainer):
 	for area_header in data_container.area_headers:
@@ -666,8 +665,7 @@ static func get_new_level_data_from_old_data(level_data) -> LevelDataContainer:
 	var container: LevelDataContainer = LevelDataContainer.new(
 		level_metadata,
 		editor_data,
-		area_headers,
-		level_tags
+		area_headers
 	)
 	
 	return container
