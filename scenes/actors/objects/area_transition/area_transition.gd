@@ -38,6 +38,7 @@ func _ready():
 	camera_stopper.set_size(camera_stop_shape.shape.extents)
 	camera_stopper.monitorable = stops_camera
 	camera_stopper.visible = stops_camera
+	camera_stopper.enabled = stops_camera
 	
 	# waits to connect to stop frame 1 teleport bugs
 	yield(get_tree().create_timer(1.0), "timeout")
