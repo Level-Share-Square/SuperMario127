@@ -34,7 +34,7 @@ func load_in():
 	var tex = loaded_boo_texture
 	if get_tree().get_current_scene().mode == 0:
 		tex = loaded_boo_texture_invis
-	for i in [18, 118, 119]:
+	for i in [18, 118, 119, 147]:
 		get_layer(layers[0]).tile_map_manager.tile_set.tile_set_texture(i, tex)
 	emit_signal("loaded_layers")
 
