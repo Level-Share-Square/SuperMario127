@@ -1,4 +1,4 @@
-[gd_scene load_steps=120 format=2]
+[gd_scene load_steps=121 format=2]
 
 [ext_resource path="res://scenes/menu/art_assets/art_assets.gd" type="Script" id=1]
 [ext_resource path="res://scenes/menu/background_scroll/background.tscn" type="PackedScene" id=2]
@@ -308,12 +308,12 @@ shader_param/u_amount = 1.75
 [sub_resource type="CanvasItemMaterial" id=19]
 blend_mode = 1
 
-[sub_resource type="Gradient" id=44]
+[sub_resource type="Gradient" id=315]
 offsets = PoolRealArray( 0.0502793, 1 )
 colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 0.831373 )
 
 [sub_resource type="GradientTexture2D" id=20]
-gradient = SubResource( 44 )
+gradient = SubResource( 315 )
 fill_from = Vector2( 0.5, 0.1 )
 fill_to = Vector2( 0.5, 1 )
 
@@ -441,8 +441,24 @@ height = 32
 fill = 1
 fill_from = Vector2( 0.5, 0.5 )
 
-[sub_resource type="ShaderMaterial" id=315]
-shader = SubResource( 26 )
+[sub_resource type="Shader" id=316]
+code = "shader_type canvas_item;
+
+uniform float u_amount = 0.1;
+
+float get_noise(vec2 uv) {
+	return fract(sin(dot(uv ,vec2(12.9898,78.233))) * 43758.5453);
+}
+
+void fragment() {
+	vec4 screen_sample = texture(SCREEN_TEXTURE, SCREEN_UV);
+	
+	float n = 2.0 * get_noise(UV + vec2(TIME, 0.0)) - 1.0;
+	COLOR = (texture(TEXTURE, UV) + n * u_amount);
+}"
+
+[sub_resource type="ShaderMaterial" id=317]
+shader = SubResource( 316 )
 shader_param/u_amount = 1.75
 
 [sub_resource type="Shader" id=23]
@@ -481,7 +497,7 @@ void fragment() {
 	COLOR = (texture(TEXTURE, UV) + n * u_amount);
 }"
 
-[sub_resource type="ShaderMaterial" id=316]
+[sub_resource type="ShaderMaterial" id=318]
 shader = SubResource( 51 )
 shader_param/u_amount = 1.75
 
@@ -506,11 +522,11 @@ fill = 1
 fill_from = Vector2( 0.5, 0.5 )
 fill_to = Vector2( 0.5, 0 )
 
-[sub_resource type="ShaderMaterial" id=317]
+[sub_resource type="ShaderMaterial" id=319]
 shader = SubResource( 26 )
 shader_param/u_amount = 1.75
 
-[sub_resource type="ShaderMaterial" id=318]
+[sub_resource type="ShaderMaterial" id=320]
 shader = SubResource( 26 )
 shader_param/u_amount = 1.75
 
@@ -2393,7 +2409,7 @@ render_target_update_mode = 3
 rect_scale = Vector2( 3, 3 )
 
 [node name="Overlay" parent="DiscordInvite/Viewport/Background" index="3"]
-material = SubResource( 315 )
+material = SubResource( 317 )
 
 [node name="WhiteGradient" type="TextureRect" parent="DiscordInvite/Viewport"]
 modulate = Color( 0.752941, 0.752941, 1, 0.486275 )
@@ -2437,7 +2453,7 @@ rect_scale = Vector2( 0.225, 0.225 )
 
 [node name="Overlay" parent="SplashScreen/Viewport/Background" index="3"]
 modulate = Color( 0.054902, 0.0117647, 0.152941, 0.270588 )
-material = SubResource( 316 )
+material = SubResource( 318 )
 
 [node name="Overlay" type="TextureRect" parent="SplashScreen/Viewport"]
 modulate = Color( 0.752941, 0.752941, 1, 0.486275 )
@@ -2525,7 +2541,7 @@ render_target_update_mode = 3
 rect_scale = Vector2( 3, 3 )
 
 [node name="Overlay" parent="Icon/Viewport/Background" index="3"]
-material = SubResource( 317 )
+material = SubResource( 319 )
 
 [node name="WhiteGradient" type="TextureRect" parent="Icon/Viewport"]
 modulate = Color( 0.752941, 0.752941, 1, 0.486275 )
@@ -2591,7 +2607,7 @@ render_target_update_mode = 3
 rect_scale = Vector2( 3, 3 )
 
 [node name="Overlay" parent="AndroidIconBG/Viewport/Background" index="3"]
-material = SubResource( 318 )
+material = SubResource( 320 )
 
 [node name="WhiteGradient" type="TextureRect" parent="AndroidIconBG/Viewport"]
 modulate = Color( 0.752941, 0.752941, 1, 0.486275 )

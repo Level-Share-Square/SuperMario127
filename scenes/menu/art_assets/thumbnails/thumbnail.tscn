@@ -1,10 +1,15 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://assets/fonts/MARIO_Font_v3_Solid.otf" type="DynamicFontData" id=1]
 [ext_resource path="res://assets/artwork/logo_shadowed.png" type="Texture" id=2]
 [ext_resource path="res://scenes/menu/theme.tres" type="Theme" id=3]
 [ext_resource path="res://scenes/menu/art_assets/thumbnails/bullies.png" type="Texture" id=4]
 [ext_resource path="res://scenes/menu/art_assets/thumbnails/thumbnail.gd" type="Script" id=5]
+[ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://scenes/menu/art_assets/scaled_border.png" type="Texture" id=7]
+[ext_resource path="res://scenes/menu/box_shadow.png" type="Texture" id=8]
+[ext_resource path="res://scenes/menu/background_scroll/background.tscn" type="PackedScene" id=9]
+[ext_resource path="res://level/Developer Levels/thumbnails/0ca00ba8-ec19-4945-8da8-eaad08465668.png" type="Texture" id=10]
 
 [sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0.0502793, 1 )
@@ -29,10 +34,48 @@ fill_from = Vector2( 0.5, 0.5 )
 fill_to = Vector2( 0.5, 1 )
 
 [sub_resource type="DynamicFont" id=7]
-size = 112
+size = 96
 outline_size = 12
 outline_color = Color( 0, 0.0431373, 0.313726, 1 )
 font_data = ExtResource( 1 )
+
+[sub_resource type="Shader" id=26]
+code = "shader_type canvas_item;
+
+uniform float u_amount = 0.1;
+
+float get_noise(vec2 uv) {
+	return fract(sin(dot(uv ,vec2(12.9898,78.233))) * 43758.5453);
+}
+
+void fragment() {
+	vec4 screen_sample = texture(SCREEN_TEXTURE, SCREEN_UV);
+	
+	float n = 2.0 * get_noise(UV + vec2(TIME, 0.0)) - 1.0;
+	COLOR = (texture(TEXTURE, UV) + n * u_amount);
+}"
+
+[sub_resource type="ShaderMaterial" id=226]
+shader = SubResource( 26 )
+shader_param/u_amount = 1.75
+
+[sub_resource type="CanvasItemMaterial" id=229]
+blend_mode = 1
+
+[sub_resource type="Gradient" id=44]
+offsets = PoolRealArray( 0.0502793, 1 )
+colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 0.831373 )
+
+[sub_resource type="GradientTexture2D" id=230]
+gradient = SubResource( 44 )
+fill_from = Vector2( 0.5, 0.1 )
+fill_to = Vector2( 0.5, 1 )
+
+[sub_resource type="DynamicFont" id=228]
+size = 64
+outline_size = 8
+outline_color = Color( 0, 0.0431373, 0.313726, 1 )
+font_data = ExtResource( 6 )
 
 [node name="Thumbnail" type="Control"]
 anchor_right = 1.0
@@ -41,27 +84,28 @@ margin_right = 1152.0
 margin_bottom = 648.0
 script = ExtResource( 5 )
 
-[node name="EndCards" type="ViewportContainer" parent="."]
+[node name="Showcase" type="ViewportContainer" parent="."]
 unique_name_in_owner = true
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
-[node name="Viewport" type="Viewport" parent="EndCards"]
+[node name="Viewport" type="Viewport" parent="Showcase"]
 size = Vector2( 1920, 1080 )
 transparent_bg = true
 handle_input_locally = false
-render_target_update_mode = 3
+render_target_update_mode = 0
 
-[node name="TextureRect" type="TextureRect" parent="EndCards/Viewport"]
+[node name="TextureRect" type="TextureRect" parent="Showcase/Viewport"]
 self_modulate = Color( 0.505882, 0.466667, 0.733333, 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 texture = ExtResource( 4 )
 expand = true
 
-[node name="Overlay" type="TextureRect" parent="EndCards/Viewport/TextureRect"]
+[node name="Overlay" type="TextureRect" parent="Showcase/Viewport/TextureRect"]
 modulate = Color( 0.501961, 0.0901961, 0.427451, 0.392157 )
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -72,24 +116,24 @@ texture = SubResource( 2 )
 expand = true
 flip_v = true
 
-[node name="CenterContainer" type="CenterContainer" parent="EndCards/Viewport"]
+[node name="CenterContainer" type="CenterContainer" parent="Showcase/Viewport"]
 margin_right = 1920.0
 margin_bottom = 1080.0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="EndCards/Viewport/CenterContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Showcase/Viewport/CenterContainer"]
 margin_left = 320.0
-margin_top = 157.0
+margin_top = 165.0
 margin_right = 1600.0
-margin_bottom = 923.0
+margin_bottom = 915.0
 custom_constants/separation = 56
 
-[node name="VBoxContainer" type="VBoxContainer" parent="EndCards/Viewport/CenterContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Showcase/Viewport/CenterContainer/HBoxContainer"]
 margin_right = 1280.0
-margin_bottom = 766.0
+margin_bottom = 750.0
 custom_constants/separation = 16
 alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="EndCards/Viewport/CenterContainer/HBoxContainer/VBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="Showcase/Viewport/CenterContainer/HBoxContainer/VBoxContainer"]
 margin_right = 1280.0
 margin_bottom = 617.143
 rect_min_size = Vector2( 1280, 617.143 )
@@ -97,7 +141,7 @@ texture = ExtResource( 2 )
 expand = true
 stretch_mode = 6
 
-[node name="TextureRect" type="TextureRect" parent="EndCards/Viewport/CenterContainer/HBoxContainer/VBoxContainer/TextureRect"]
+[node name="TextureRect" type="TextureRect" parent="Showcase/Viewport/CenterContainer/HBoxContainer/VBoxContainer/TextureRect"]
 show_behind_parent = true
 material = SubResource( 4 )
 anchor_right = 1.0
@@ -105,17 +149,17 @@ anchor_bottom = 1.0
 texture = SubResource( 6 )
 expand = true
 
-[node name="HSeparator" type="ColorRect" parent="EndCards/Viewport/CenterContainer/HBoxContainer/VBoxContainer"]
+[node name="HSeparator" type="ColorRect" parent="Showcase/Viewport/CenterContainer/HBoxContainer/VBoxContainer"]
 margin_top = 633.0
 margin_right = 1280.0
 margin_bottom = 637.0
 rect_min_size = Vector2( 0, 4 )
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="EndCards/Viewport/CenterContainer/HBoxContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="Showcase/Viewport/CenterContainer/HBoxContainer/VBoxContainer"]
 margin_top = 653.0
 margin_right = 1280.0
-margin_bottom = 766.0
+margin_bottom = 750.0
 grow_horizontal = 2
 grow_vertical = 2
 rect_min_size = Vector2( 181, 0 )
@@ -128,7 +172,7 @@ text = "Bullies Showcase"
 align = 1
 valign = 1
 
-[node name="Shadow" type="Label" parent="EndCards/Viewport/CenterContainer/HBoxContainer/VBoxContainer/Label"]
+[node name="Shadow" type="Label" parent="Showcase/Viewport/CenterContainer/HBoxContainer/VBoxContainer/Label"]
 modulate = Color( 0, 0, 0, 0.25098 )
 show_behind_parent = true
 anchor_right = 1.0
@@ -150,3 +194,191 @@ custom_fonts/font = SubResource( 7 )
 text = "Bullies Showcase"
 align = 1
 valign = 1
+
+[node name="Walkthrough" type="ViewportContainer" parent="."]
+unique_name_in_owner = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="Viewport" type="Viewport" parent="Walkthrough"]
+size = Vector2( 1920, 1080 )
+transparent_bg = true
+handle_input_locally = false
+render_target_update_mode = 3
+
+[node name="Background" parent="Walkthrough/Viewport" instance=ExtResource( 9 )]
+margin_right = -640.0
+margin_bottom = -360.0
+rect_scale = Vector2( 3, 3 )
+
+[node name="Overlay" parent="Walkthrough/Viewport/Background" index="3"]
+material = SubResource( 226 )
+
+[node name="WhiteGradient" type="TextureRect" parent="Walkthrough/Viewport"]
+modulate = Color( 0.752941, 0.752941, 1, 0.486275 )
+material = SubResource( 229 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = SubResource( 230 )
+expand = true
+
+[node name="CenterContainer" type="CenterContainer" parent="Walkthrough/Viewport"]
+margin_right = 1920.0
+margin_bottom = 1080.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Walkthrough/Viewport/CenterContainer"]
+margin_left = 320.0
+margin_top = 69.0
+margin_right = 1600.0
+margin_bottom = 1010.0
+rect_min_size = Vector2( 1280, 0 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 56
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Walkthrough/Viewport/CenterContainer/HBoxContainer"]
+margin_right = 1280.0
+margin_bottom = 941.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 32
+alignment = 1
+
+[node name="AspectContainer2" type="AspectRatioContainer" parent="Walkthrough/Viewport/CenterContainer/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+margin_right = 1280.0
+margin_bottom = 672.0
+rect_min_size = Vector2( 0, 672 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+ratio = 1.7778
+
+[node name="Border" type="NinePatchRect" parent="Walkthrough/Viewport/CenterContainer/HBoxContainer/VBoxContainer/AspectContainer2"]
+margin_left = 42.6592
+margin_right = 1237.34
+margin_bottom = 672.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 7 )
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 6
+
+[node name="Shadow" type="NinePatchRect" parent="Walkthrough/Viewport/CenterContainer/HBoxContainer/VBoxContainer/AspectContainer2/Border"]
+modulate = Color( 1, 1, 1, 0.25098 )
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 6.0
+margin_right = 4.0
+margin_bottom = 6.0
+texture = ExtResource( 8 )
+patch_margin_left = 11
+patch_margin_top = 11
+patch_margin_right = 11
+patch_margin_bottom = 11
+
+[node name="Thumbnail" type="TextureRect" parent="Walkthrough/Viewport/CenterContainer/HBoxContainer/VBoxContainer/AspectContainer2/Border"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 34.0
+margin_top = 33.0
+margin_right = -34.0
+margin_bottom = -33.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 10 )
+expand = true
+stretch_mode = 1
+
+[node name="HSeparator" type="ColorRect" parent="Walkthrough/Viewport/CenterContainer/HBoxContainer/VBoxContainer"]
+margin_top = 704.0
+margin_right = 1280.0
+margin_bottom = 708.0
+rect_min_size = Vector2( 0, 4 )
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Walkthrough/Viewport/CenterContainer/HBoxContainer/VBoxContainer"]
+margin_top = 740.0
+margin_right = 1280.0
+margin_bottom = 837.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 181, 0 )
+size_flags_horizontal = 3
+theme = ExtResource( 3 )
+custom_colors/font_color_shadow = Color( 0, 0.0431373, 0.313726, 1 )
+custom_constants/shadow_offset_y = 8
+custom_fonts/font = SubResource( 7 )
+text = "Forgo Kingdom"
+align = 1
+valign = 1
+
+[node name="Shadow" type="Label" parent="Walkthrough/Viewport/CenterContainer/HBoxContainer/VBoxContainer/Label"]
+modulate = Color( 0, 0, 0, 0.25098 )
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 6.0
+margin_top = 12.0
+margin_right = 6.0
+margin_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 181, 0 )
+theme = ExtResource( 3 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 1, 1, 1, 1 )
+custom_colors/font_color_shadow = Color( 1, 1, 1, 1 )
+custom_constants/shadow_offset_y = 8
+custom_fonts/font = SubResource( 7 )
+text = "Forgo Kingdom"
+align = 1
+valign = 1
+
+[node name="Label2" type="Label" parent="Walkthrough/Viewport/CenterContainer/HBoxContainer/VBoxContainer"]
+margin_top = 869.0
+margin_right = 1280.0
+margin_bottom = 941.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 181, 0 )
+size_flags_horizontal = 3
+theme = ExtResource( 3 )
+custom_colors/font_color_shadow = Color( 0, 0.0431373, 0.313726, 1 )
+custom_constants/shadow_offset_y = 8
+custom_fonts/font = SubResource( 228 )
+text = "100% Walkthrough"
+align = 1
+valign = 1
+
+[node name="Shadow" type="Label" parent="Walkthrough/Viewport/CenterContainer/HBoxContainer/VBoxContainer/Label2"]
+modulate = Color( 0, 0, 0, 0.25098 )
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 2.0
+margin_top = 8.0
+margin_right = 2.0
+margin_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 181, 0 )
+theme = ExtResource( 3 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 1, 1, 1, 1 )
+custom_colors/font_color_shadow = Color( 1, 1, 1, 1 )
+custom_constants/shadow_offset_y = 12
+custom_fonts/font = SubResource( 228 )
+text = "100% Walkthrough"
+align = 1
+valign = 1
+
+[editable path="Walkthrough/Viewport/Background"]
