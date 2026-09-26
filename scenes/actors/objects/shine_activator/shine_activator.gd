@@ -32,7 +32,7 @@ func _register_property_info():
 	set_property_info("one_shot", PropertyInfo.new("If true, this object can only be used once.", 1, -INF, INF, ["", ""], ["", ""], false, ""))
 	set_property_info("parts", PropertyInfo.new("How long this object should extend.", 1, -INF, INF, ["", ""], ["", ""], false, ""))
 
-func _input(event):
+func _unhandled_input(event: InputEvent) -> void:
 	parts_input_handler(event,self)
 
 

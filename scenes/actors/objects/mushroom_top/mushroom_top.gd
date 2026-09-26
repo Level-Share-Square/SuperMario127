@@ -113,16 +113,8 @@ func update_parts():
 	visibility_enabler.rect.position.x = -visibility_enabler.rect.size.x/2
 
 
-func _input(event):
-	if event is InputEventMouseButton and event.is_pressed() and is_object_hovered():
-		if event.button_index == 5: # Mouse wheel down
-			parts -= 1
-			if parts < 0:
-				parts = 0
-			set_property("parts", parts)
-		elif event.button_index == 4: # Mouse wheel up
-			parts += 1
-			set_property("parts", parts)
+func _unhandled_input(event: InputEvent) -> void:
+	parts_input_handler(event,self)
 
 
 func _process(delta):

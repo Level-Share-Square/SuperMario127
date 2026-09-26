@@ -233,3 +233,6 @@ func reset_platform():
 	yield(get_tree(), "physics_frame")
 	yield(get_tree(), "physics_frame")
 	platform.set_collision_layer_bit(4, true)
+
+func _unhandled_input(event: InputEvent) -> void:
+	parts_input_handler(event,self)
