@@ -126,7 +126,6 @@ func load_level_headers(code: String) -> void:
 	var level_tags_code = components_code[2] if components_code.size() == 3 else ""
 	
 	editor_data = LevelCodeDeserializer.deserialize_editor_data(editor_data_code)
-	level_tags = LevelCodeDeserializer.deserialize_level_tags(level_tags_code)
 	
 	area_headers.clear()
 	# load area headers
@@ -135,19 +134,50 @@ func load_level_headers(code: String) -> void:
 		var area_header: AreaHeader = LevelCodeDeserializer.deserialize_area_header_code(area_code)
 		area_headers.append(area_header)
 
-	populate_keys()
+	populate_tags()
 
-func populate_keys() -> void:
+#	var level_tags := LevelTags.new()
+#	for area in level_data.areas:
+#		for object in area.objects:
+#			if (object.metadata.type_id == 23 or
+#				object.metadata.type_id == 48 or
+#				object.metadata.type_id == 112 or
+#				object.metadata.type_id == 113): # Door, Pipe, Area Transition, and Star Door
+#				if not object.properties[5] in level_tags.teleport_tags:
+#					level_tags.teleport_tags.append(object.properties[5])
+#			if (object.metadata.type_id == 72 or
+#				object.metadata.type_id == 75): # Water and Lava
+#				if not object.properties[7] in level_tags.liquid_tags:
+#					level_tags.liquid_tags.append(object.properties[7])
+#			if object.metadata.type_id == 81: # Crystal Tap
+#				if not object.properties[4] in level_tags.liquid_tags:
+#					level_tags.liquid_tags.append(object.properties[4])
+#			if (object.metadata.type_id == 127 or
+#				object.metadata.type_id == 137 or
+#				object.metadata.type_id == 138 or
+#				object.metadata.type_id == 139): # Toad, Peach, Yoshi, and Red Bob-omb
+#				if not object.properties[14] in level_tags.dialogue_tags:
+#					level_tags.dialogue_tags.append(object.properties[14])
+#			if object.metadata.type_id == 128: # Dialogue Trigger
+#				if not object.properties[10] in level_tags.dialogue_tags:
+#					level_tags.dialogue_tags.append(object.properties[10])
+#	return level_tags
+
+func populate_tags() -> void:
+	level_tags = LevelTags.new()
 	level_tags.key_object_map.clear()
 	for area_header in area_headers:
 		var area = LevelCodeDeserializer.deserialize_area_code(area_header.area_code)
 		for layer in area.layers:
 			for object in layer.object_data:
+				
 				if object.metadata.type_id == 149 and object.properties.get(4):
 					var object_properties: Dictionary = object.properties
 					var key_data := KeyData.new()
 					# PLEASE GIVE ME CONSTRUCTOR OVERLOADINGGGGGGGGGGGG
-					if object_properties.has(4): key_data.tag = object_properties[4]
+					if object_properties.has(4): 
+						key_data.tag = object_properties[4]
+						level_tags.key_tags.append(object_properties[4])
 					if object_properties.has(5): key_data.color = object_properties[5] 
 					if object_properties.has(3): key_data.visible = object_properties[3]
 
@@ -157,6 +187,33 @@ func populate_keys() -> void:
 						level_tags.key_object_map.get_or_add(key_data.tag, [key_data])
 						continue
 					level_tags.key_object_map[key_data.tag].append(key_data)
+					
+				if (object.metadata.type_id == 23 or
+					object.metadata.type_id == 48 or
+					object.metadata.type_id == 112 or
+					object.metadata.type_id == 113): # Door, Pipe, Area Transition, and Star Door
+					if object.properties.get(5) and not object.properties.get(5) in level_tags.teleport_tags:
+						level_tags.teleport_tags.append(object.properties[5])
+						
+				if (object.metadata.type_id == 72 or
+					object.metadata.type_id == 75): # Water and Lava
+					if object.properties.get(7) and not object.properties.get(7) in level_tags.liquid_tags:
+						level_tags.liquid_tags.append(object.properties[7])
+						
+				if object.metadata.type_id == 81: # Crystal Tap
+					if object.properties.get(4) and object.properties.get(4) in level_tags.liquid_tags:
+						level_tags.liquid_tags.append(object.properties[4])
+						
+				if (object.metadata.type_id == 127 or
+					object.metadata.type_id == 137 or
+					object.metadata.type_id == 138 or
+					object.metadata.type_id == 139): # Toad, Peach, Yoshi, and Red Bob-omb
+					if object.properties.get(14) and not object.properties.get(14) in level_tags.dialogue_tags:
+						level_tags.dialogue_tags.append(object.properties[14])
+						
+				if object.metadata.type_id == 128: # Dialogue Trigger
+					if object.properties.get(10) and not object.properties.get(10) in level_tags.dialogue_tags:
+						level_tags.dialogue_tags.append(object.properties[10])
 
 func switch_to_area(new_area_id: int, always_reload: bool = false, keep_old_loaded: bool = true) -> void:
 	if not keep_old_loaded:
@@ -312,7 +369,7 @@ func get_new_star_coin_id() -> int:
 #	var new_id = 0
 #	for area in CurrentLevelData.level_data.areas:
 #		for object in area.objects:
-#			if object.type_id == 52:
+#			if object.metadata.type_id == 52:
 #				last_star_coin_id += 1
 #	return last_star_coin_id
 

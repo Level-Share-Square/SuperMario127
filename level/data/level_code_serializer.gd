@@ -27,7 +27,6 @@ static func serialize_level_data(level_data) -> String:
 	code += serialize_level_metadata(level_data.level_metadata)
 	code += serialize_areas(level_data.area_headers)
 	code += serialize_editor_data(level_data.editor_data)
-	code += serialize_level_tags(level_data.level_tags)
 	
 	code += "]"
 	
@@ -49,16 +48,6 @@ static func serialize_editor_data(editor_data: EditorData) -> String:
 	code += serialize_data_array([editor_data.last_area])
 	code += serialize_data_array([editor_data.pixel_snap])
 	code += serialize_data_array([editor_data.target_tag])
-	
-	return wrap_code_in_brackets(code)
-
-static func serialize_level_tags(level_tags: LevelTags) -> String:
-	var code: String = ""
-	
-	code += serialize_data_array(level_tags.teleport_tags)
-	code += serialize_data_array(level_tags.dialogue_tags)
-	code += serialize_data_array(level_tags.liquid_tags)
-	code += serialize_data_array(level_tags.key_tags)
 	
 	return wrap_code_in_brackets(code)
 

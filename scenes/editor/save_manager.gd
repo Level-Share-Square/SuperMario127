@@ -58,7 +58,7 @@ func save_pressed():
 	CurrentLevelData.unload_all_but_current_area()
 	
 	
-	var level_data: LevelDataContainer = LevelDataContainer.new(CurrentLevelData.level_metadata, CurrentLevelData.editor_data, CurrentLevelData.area_headers, CurrentLevelData.level_tags)
+	var level_data: LevelDataContainer = LevelDataContainer.new(CurrentLevelData.level_metadata, CurrentLevelData.editor_data, CurrentLevelData.area_headers)
 	LevelCodeHandler.recalculate_level_collectible_counts(level_data)
 	var level_code: String = LevelCodeSerializer.serialize_level_data(level_data)
 	
