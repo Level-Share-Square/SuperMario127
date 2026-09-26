@@ -28,9 +28,9 @@ static func recalculate_level_collectible_counts(level_data_container) -> void:
 		area.header.shine_shard_count = 0
 		area.header.max_purples_count = 0
 		for layer in area.layers:
-			if layer is LevelParallaxLayer: 
+			if not layer.layer_metadata.is_ground: 
 				continue
-			
+
 			for object in layer.object_data:
 				object = object as ObjectData
 				
