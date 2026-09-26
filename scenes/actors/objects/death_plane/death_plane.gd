@@ -34,6 +34,7 @@ func _ready():
 	else:
 		var _connect2 = connect("property_changed", self, "update_property")
 		camera_stopper.visible = stops_camera
+	camera_stopper.enabled = stops_camera
 	if parts < 1:
 		parts = 1
 	update_property("vertical", vertical)

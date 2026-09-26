@@ -317,7 +317,7 @@ func play_temporary_music(temp_song_id : int = 0, temp_song_volume : float = 0, 
 		
 		blended_music_player.volume_db = -80.0
 		blended_music_player.stream = song.blended_stream
-		blended_music_player.play()
+		blended_music_player.play(start_position)
 	
 	if song.blended_stream != null:
 		has_blended = true
