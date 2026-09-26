@@ -347,6 +347,7 @@ static func deserialize_object_metadata_code(object_metadata_code: String) -> Ob
 	object_metadata.type_id = vars[0]
 	object_metadata.palette = vars[1]
 	object_metadata.position = vars[2]
+	if vars.size() >= 4: object_metadata.internal_id = vars[3]
 	
 	return object_metadata
 

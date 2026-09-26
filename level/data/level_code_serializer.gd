@@ -227,6 +227,7 @@ static func serialize_object(object: ObjectData) -> String:
 				object.metadata.type_id,
 				object.metadata.palette,
 				object.metadata.position,
+				object.metadata.internal_id,
 			]
 		)
 		

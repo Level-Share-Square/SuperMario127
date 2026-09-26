@@ -46,8 +46,8 @@ func _click_left(_event: InputEvent, _world_pos: Vector2):
 	update_objects_array()
 
 
-func create_object_data(position: Vector2, object_id: int, palette: int) -> ObjectData:
-	var metadata := ObjectMetadata.new(position, object_id, palette)
+func create_object_data(position: Vector2, object_id: int, palette: int, internal_id: String = "") -> ObjectData:
+	var metadata := ObjectMetadata.new(position, object_id, palette, internal_id)
 	var data := ObjectData.new(metadata)
 	
 	return data
@@ -127,7 +127,7 @@ func update_objects_array() -> void:
 		if line.points.size() - 1 != line.points.find(point):
 			counter += 1
 			if counter == dist.value:
-				var data = create_object_data(point, editor.selected_item.object_id, editor.selected_item.palette)
+				var data = create_object_data(point, editor.selected_item.object_id, editor.selected_item.palette, objects_util.get_item_id(editor.selected_item))
 				for property in editor.selected_item.property_overrides:
 					if data.get_property(property) != null: continue
 					data.set_property(property, editor.selected_item.property_overrides[property])

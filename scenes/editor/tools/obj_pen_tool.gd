@@ -87,7 +87,7 @@ func place_object(pos: Vector2, data = null):
 	
 	var object_item: PlaceableObject = editor.selected_item
 	if not data:
-		data = create_object_data(Vector2(round(pos.x), round(pos.y)) if editor.pixel_lock == false else pos.snapped(CurrentLevelData.editor_data.pixel_snap), object_item.object_id, object_item.palette)
+		data = create_object_data(Vector2(round(pos.x), round(pos.y)) if editor.pixel_lock == false else pos.snapped(CurrentLevelData.editor_data.pixel_snap), object_item.object_id, object_item.palette, objects_util.get_item_id(object_item))
 
 	for property in object_item.property_overrides:
 		if data.get_property(property) != null: continue
@@ -104,8 +104,8 @@ func place_object(pos: Vector2, data = null):
 	return action.object
 
 
-func create_object_data(position: Vector2, object_id: int, palette: int) -> ObjectData:
-	var metadata := ObjectMetadata.new(position, object_id, palette)
+func create_object_data(position: Vector2, object_id: int, palette: int, internal_id: String = "") -> ObjectData:
+	var metadata := ObjectMetadata.new(position, object_id, palette, internal_id)
 	var data := ObjectData.new(metadata)
 	
 	return data

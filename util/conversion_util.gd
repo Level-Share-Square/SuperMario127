@@ -639,7 +639,8 @@ static func get_new_area_code(header: AreaHeader, old_area: AreaDataOld) -> Area
 			ObjectMetadata.new(
 				position,
 				old_object.type_id,
-				old_object.palette
+				old_object.palette,
+				""
 			), 
 			property_dictionary
 		)

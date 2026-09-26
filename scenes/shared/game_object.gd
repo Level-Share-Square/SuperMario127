@@ -80,6 +80,8 @@ var placeable_item: PlaceableItem
 
 
 func load_placeable_item():
+	if object_data.metadata.internal_id != "": internal_id = object_data.metadata.internal_id
+
 	if ResourceLoader.exists(PLACEABLE_ITEM_PATH % internal_id):
 		placeable_item = ResourceLoader.load(PLACEABLE_ITEM_PATH % internal_id)
 
@@ -366,7 +368,7 @@ func create_coin(coin_id: int, body: Node2D, physics: bool, velocity: Vector2) -
 	object_setup[1].call_func(object)
 
 
-func create_object(pos: Vector2, object_id: int, palette: int):
+func create_object(pos: Vector2, object_id: int, palette: int, internal_id: String = ""):
 	var level_layer: LevelLayer = level_layer_ref.get_ref()
 	
 	return level_layer.setup_object(
@@ -374,7 +376,8 @@ func create_object(pos: Vector2, object_id: int, palette: int):
 			ObjectMetadata.new(
 				pos,
 				object_id,
-				palette
+				palette,
+				internal_id
 			)
 		)
 	)

@@ -74,7 +74,7 @@ func click_released() -> void:
 
 func draw_object(pos: Vector2) -> void:
 	var item = editor.selected_item
-	var data = create_object_data(pos, item.object_id, item.palette)
+	var data = create_object_data(pos, item.object_id, item.palette, objects_util.get_item_id(item))
 	for property in item.property_overrides:
 		if data.get_property(property) != null: continue
 		data.set_property(property, item.property_overrides[property])
@@ -114,8 +114,8 @@ func finalize_placement() -> void:
 func get_mouse_snapped_pos() -> Vector2:
 	return Vector2(int(get_mouse_pos().x / 32) * 32, int(get_mouse_pos().y / 32) * 32) + Vector2(16, 16)
 
-func create_object_data(position: Vector2, object_id: int, palette: int) -> ObjectData:
-	var metadata := ObjectMetadata.new(position, object_id, palette)
+func create_object_data(position: Vector2, object_id: int, palette: int, internal_id: String = "") -> ObjectData:
+	var metadata := ObjectMetadata.new(position, object_id, palette, internal_id)
 	var data := ObjectData.new(metadata)
 	
 	return data

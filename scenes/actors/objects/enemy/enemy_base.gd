@@ -166,7 +166,7 @@ func create_coin(velocity: Vector2, offset: Vector2):
 	return object
 
 
-func create_object(pos: Vector2, object_id: int, palette: int):
+func create_object(pos: Vector2, object_id: int, palette: int, internal_id: String = ""):
 	var level_layer: LevelLayer = layer_ref.get_ref()
 	
 	return level_layer.setup_object(
@@ -174,7 +174,8 @@ func create_object(pos: Vector2, object_id: int, palette: int):
 			ObjectMetadata.new(
 				pos,
 				object_id,
-				palette
+				palette,
+				internal_id
 			)
 		)
 	)

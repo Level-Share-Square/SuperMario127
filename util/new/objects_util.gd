@@ -3,7 +3,7 @@ class_name objects_util
 
 static func object_data_deep_copy(game_object):
 	var object_data = game_object.object_data
-	var copied_metadata := ObjectMetadata.new(object_data.metadata.position, object_data.metadata.type_id, object_data.metadata.palette)
+	var copied_metadata := ObjectMetadata.new(object_data.metadata.position, object_data.metadata.type_id, object_data.metadata.palette, object_data.metadata.internal_id)
 	var properties: Dictionary = object_data.properties.duplicate(true)
 	
 	for property in properties.keys():
@@ -26,3 +26,6 @@ static func find_closest_object(objects: Array, mouse_pos: Vector2):
 			min_dist = dist
 
 	return closest_object
+
+static func get_item_id(item: PlaceableItem) -> String:
+	return item.resource_path.get_file().get_basename()

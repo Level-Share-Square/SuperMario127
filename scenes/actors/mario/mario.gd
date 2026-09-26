@@ -127,7 +127,6 @@ var last_position := Vector2(0, 0)
 var in_wind := false
 var extra_forces : Dictionary = {}
 
-
 export var gravity_scale := 1.0
 export var facing_direction := 1
 export var move_direction := 0
