@@ -843,13 +843,12 @@ func get_weight() -> int:
 	return 2 if metal_voice else 1
 
 func _physics_process(delta: float) -> void:
+	print(state.name if state else "")
 	if squish_lerp == true:
 		sprite.scale = lerp(sprite.scale, Vector2(1, 1), 0.08)
 	if sprite.scale.is_equal_approx(Vector2(1, 1)):
 		squish_lerp = false
 	update_inputs()
-	if state and (state.name == "NoActionState" or state.name == "LaunchStarState"):
-		return
 	
 	bottom_pos.position = bottom_pos_offset if not using_dive_collision else bottom_pos_dive_offset
 	var is_in_platform := false
