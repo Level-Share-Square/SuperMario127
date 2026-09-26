@@ -8,6 +8,7 @@ const LOCK_MASKS: Array = [
 	Vector2(1, 0),
 	Vector2.ONE
 ]
+const MAX_DISTANCE: float = 3000.0
 
 var parallax_distance: float = 0
 var scroll_offset: Vector2 = Vector2.ZERO
