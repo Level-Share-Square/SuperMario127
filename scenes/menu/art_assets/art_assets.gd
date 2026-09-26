@@ -23,6 +23,7 @@ onready var icon = $"%Icon"
 onready var twitter_icon = $"%TwitterIcon"
 onready var end_cards = $"%EndCards"
 onready var shorts_template = $"%ShortsTemplate"
+onready var tol_template = $"%TolTemplate"
 onready var coin_hud = $"%CoinHUD"
 ## bro thinks he's on the team :sob:
 onready var forcefield_icon = $"%ForcefieldIcon"
@@ -43,9 +44,9 @@ func _ready():
 #	header_img.flip_y()
 #	header_img.save_png("res://assets/artwork/steam/header.png")
 #
-	var igdb_box_img: Image = igdb_box.get_node("Viewport").get_texture().get_data()
-	igdb_box_img.flip_y()
-	igdb_box_img.save_png("res://assets/artwork/igdb/box.png")
+#	var igdb_box_img: Image = igdb_box.get_node("Viewport").get_texture().get_data()
+#	igdb_box_img.flip_y()
+#	igdb_box_img.save_png("res://assets/artwork/igdb/box.png")
 #
 #	var discord_header_img: Image = discord_header.get_node("Viewport").get_texture().get_data()
 #	discord_header_img.flip_y()
@@ -114,6 +115,12 @@ func _ready():
 #	shorts_template_img.flip_y()
 #	fix_transparency(shorts_template_img)
 #	shorts_template_img.save_png("res://assets/artwork/youtube/shorts_template.png")
+
+	var tol_template_img: Image = tol_template.get_node("Viewport").get_texture().get_data()
+	tol_template_img.convert(Image.FORMAT_RGBA8)
+	tol_template_img.flip_y()
+	fix_transparency(tol_template_img)
+	tol_template_img.save_png("res://assets/artwork/youtube/tol_template.png")
 
 #	var coin_hud_img: Image = coin_hud.get_node("Viewport").get_texture().get_data()
 #	coin_hud_img.convert(Image.FORMAT_RGBA8)
