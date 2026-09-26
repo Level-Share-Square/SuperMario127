@@ -88,7 +88,7 @@ func restore_control(_animation : String, character : Character) -> void:
 	yield(get_tree().create_timer(0.2), "timeout")
 	
 	key_get.disappear()
-	Singleton.Music.volume_multiplier = 1
+	if not character.powerup: Singleton.Music.volume_multiplier = 1
 	character.shine_kill = false
 
 	# pausing disabled for same reasons as mode switcher button
