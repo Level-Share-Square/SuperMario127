@@ -92,6 +92,7 @@ func _general_update(delta):
 		character_in_range = false
 	if character.is_grounded():
 		character.is_wj_chained = false
+	if character.is_wj_chained:
 		actual_power = walljump_power
 	if character.inputs[2][1] and !character.is_grounded():
 		press_buffer = 0.075
