@@ -100,12 +100,12 @@ func set_liquid_level(body):
 	for found_liquid in CurrentLevelData.vars.liquids:
 		if found_liquid[0] == tag.to_lower():
 			found_liquid[1].moving = true
-			var match_level = global_position.y
+			var match_level = position.y
 			if horizontal:
-				match_level = global_position.x
-				found_liquid[1].save_pos = Vector2(global_position.x + offset, found_liquid[1].global_position.y)
+				match_level = position.x
+				found_liquid[1].save_pos = Vector2(position.x + offset, found_liquid[1].position.y)
 			else:
-				found_liquid[1].save_pos = Vector2(found_liquid[1].global_position.x, global_position.y + offset)
+				found_liquid[1].save_pos = Vector2(found_liquid[1].position.x, position.y + offset)
 			found_liquid[1].match_level = match_level + offset
 			found_liquid[1].move_speed = move_speed
 		
