@@ -144,7 +144,7 @@ func _update(_delta):
 
 func _stop_check(_delta):
 	if(!override):
-		return character.velocity.y > 0
+		return character.velocity.y > 0 or character.is_grounded()
 
 func _general_update(delta):
 	if squish_lerp == true:
