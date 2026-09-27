@@ -1368,10 +1368,9 @@ func kill(cause: String) -> void:
 				
 				death_sprite.play_anim()
 				yield(get_tree().create_timer(0.55), "timeout")
-				if cause != "lava":
-					sound_player.play_death_sound()
-				else:
-					sound_player.play_lava_hurt_sound()
+				# sorry silver, but i personally find it weird
+				# when the death sound is just the hurt sound again
+				sound_player.play_death_sound()
 				yield(get_tree().create_timer(0.75), "timeout")
 		
 		if CurrentLevelData.area_id != CurrentLevelData.checkpoint_data.current_area:
