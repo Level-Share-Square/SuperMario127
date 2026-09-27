@@ -32,3 +32,12 @@ editor_only = false
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 2 )
 volume_db = -2.5
+
+[node name="PreviewVector" type="Line2D" parent="."]
+visible = false
+points = PoolVector2Array( 0, 0, 0, 0 )
+width = 6.0
+default_color = Color( 1, 0, 0, 0.501961 )
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
