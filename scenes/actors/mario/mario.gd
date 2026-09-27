@@ -609,7 +609,6 @@ func is_walled_left() -> bool:
 	return test_move(self.transform, Vector2(-0.75, 5)) and test_move(self.transform, Vector2(-3, 0)) and collided_last_frame
 
 func is_walled_right() -> bool:
-	print(test_move(self.transform, Vector2(0.75, 5)), test_move(self.transform, Vector2(3, 0)), collided_last_frame)
 	return test_move(self.transform, Vector2(0.75, 5)) and test_move(self.transform, Vector2(3, 0)) and collided_last_frame
 
 func will_collide(multiplier: float = 1) -> bool:
