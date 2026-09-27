@@ -1,4 +1,4 @@
-[gd_scene load_steps=120 format=2]
+[gd_scene load_steps=121 format=2]
 
 [ext_resource path="res://scenes/player/player.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/level_shared.tscn" type="PackedScene" id=2]
@@ -26,6 +26,7 @@
 [ext_resource path="res://scenes/player/ui_new/fludd/stamina.tscn" type="PackedScene" id=24]
 [ext_resource path="res://scenes/player/ui_new/text/sign_text.tscn" type="PackedScene" id=25]
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=26]
+[ext_resource path="res://assets/sounds/crystal_tap.wav" type="AudioStream" id=27]
 [ext_resource path="res://scenes/player/ui_new/shine/shine_get.gd" type="Script" id=28]
 [ext_resource path="res://scenes/player/ui_new/collectibles/purple_starbits.gd" type="Script" id=29]
 [ext_resource path="res://scenes/player/ui_new/touch/touch_controls.tscn" type="PackedScene" id=30]
@@ -3206,6 +3207,11 @@ bus = "Sounds"
 [node name="SwitchOffSound" type="AudioStreamPlayer" parent="SharedSounds"]
 stream = ExtResource( 48 )
 volume_db = 2.0
+bus = "Sounds"
+
+[node name="CrystalTapSound" type="AudioStreamPlayer" parent="SharedSounds"]
+stream = ExtResource( 27 )
+volume_db = 6.0
 bus = "Sounds"
 
 [connection signal="child_entered_tree" from="UIUnder/HUD/Control/TimerManager/RadialTimers" to="UIUnder/HUD/Control/TimerManager/RadialTimers/PurpleStarbits" method="child_entered_tree"]

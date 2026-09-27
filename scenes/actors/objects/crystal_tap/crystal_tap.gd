@@ -96,6 +96,7 @@ func _on_property_changed(key, value):
 func set_liquid_level(body):
 	if body != null and visible:
 		anim_player.play("touch")
+		play_shared_sound("CrystalTapSound")
 	for found_liquid in CurrentLevelData.vars.liquids:
 		if found_liquid[0] == tag.to_lower():
 			found_liquid[1].moving = true

@@ -9,7 +9,8 @@ onready var play_sounds = [
 	["BlastLaunchSound", $BlastSound, false],
 	["BlastSeekSound", $BlastSeekSound, false],
 	["SwitchOnSound", $SwitchOnSound, false],
-	["SwitchOffSound", $SwitchOffSound, false]
+	["SwitchOffSound", $SwitchOffSound, false],
+	["CrystalTapSound", $CrystalTapSound, false]
 ]
 
 onready var saw_sound : AudioStreamPlayer2D = $SawSound
