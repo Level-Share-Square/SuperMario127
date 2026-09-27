@@ -28,9 +28,8 @@ func _start_check(_delta):
 	return false
 
 func _start(_delta):
-
-	if abs(character.velocity.x) < 15:
-		character.velocity.x = character.facing_direction * 15
+	#if abs(character.velocity.x) < 15:
+	#	character.velocity.x = character.facing_direction * 15
 	current_speed = abs(character.velocity.x)
 	character.water_check.enabled = true
 
@@ -53,7 +52,7 @@ func _update(delta):
 		character.sprite.rotation_degrees += 24 * character.facing_direction
 	character.sprite.speed_scale = (abs(character.velocity.x) / run_speed)
 	
-	if character.velocity.x == 0:
+	if character.is_walled():
 		character.facing_direction = -character.facing_direction
 		character.velocity.x = current_speed * character.facing_direction
 		character.position.x += character.facing_direction * 3
