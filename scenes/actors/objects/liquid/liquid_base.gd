@@ -115,7 +115,7 @@ func _object_ready():
 	if CurrentLevelData.vars.liquid_positions.size() > CurrentLevelData.area_id and CurrentLevelData.vars.liquid_positions[CurrentLevelData.area_id].size() > id:
 		var set_position = CurrentLevelData.vars.liquid_positions[CurrentLevelData.area_id][id]
 		if set_position != Vector2():
-			global_position = set_position
+			position = set_position
 			save_pos = set_position
 	CurrentLevelData.vars.current_liquid_id += 1
 	
@@ -152,27 +152,27 @@ func _object_physics_process(_delta):
 	if !moving: return
 	
 	if !horizontal:
-		var end_pos := global_position.y + size.y
+		var end_pos := position.y + size.y
 		var speed_modifier : float = transform.basis_xform(Vector2(0.0, 1.0)).y
-		global_position.y = move_toward(global_position.y, match_level, move_speed * 2)
-		if global_position.y == match_level:
+		position.y = move_toward(position.y, match_level, move_speed * 2)
+		if position.y == match_level:
 			moving = false
 			return
 		if !crystal_tap_mode:
-			size.y += speed_modifier * ((end_pos - global_position.y) - size.y)
+			size.y += speed_modifier * ((end_pos - position.y) - size.y)
 			change_size() # Letting it happen in _process causes issues
 	else:
-		var end_pos := global_position.x + size.x
-		if global_position.x == end_pos:
+		var end_pos := position.x + size.x
+		if position.x == end_pos:
 			moving = false
 			return
 		var speed_modifier : float = transform.basis_xform(Vector2(0.0, 1.0)).x
-		global_position.x = move_toward(global_position.x, match_level, move_speed * 2)
-		if global_position.x == match_level:
+		position.x = move_toward(position.x, match_level, move_speed * 2)
+		if position.x == match_level:
 			moving = false
 			return
 		if !crystal_tap_mode:
-			size.y += speed_modifier * ((end_pos - global_position.x) - size.y)
+			size.y += speed_modifier * ((end_pos - position.x) - size.y)
 			change_size() # Letting it happen in _process causes issues
 
 
