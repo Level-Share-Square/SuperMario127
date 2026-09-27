@@ -35,9 +35,10 @@ volume_db = -2.5
 
 [node name="PreviewVector" type="Line2D" parent="."]
 visible = false
+z_index = 6
 points = PoolVector2Array( 0, 0, 0, 0 )
-width = 6.0
-default_color = Color( 1, 0, 0, 0.501961 )
+width = 5.0
+default_color = Color( 0.4, 0.501961, 1, 0.694118 )
 joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
