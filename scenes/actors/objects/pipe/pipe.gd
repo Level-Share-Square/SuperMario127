@@ -181,7 +181,7 @@ func _ready():
 	
 	_on_property_changed("color", color)
 	connect("property_changed", self, "_on_property_changed")
-	get_node("StaticBody2D/CollisionShape2D").disabled = disable_collision
+	get_node("StaticBody2D/CollisionShape2D").disabled = disable_collision or not is_on_ground_layer()
 
 func is_rainbow(body) -> bool:
 	return body.powerup != null and body.powerup.id == "Rainbow"
