@@ -109,7 +109,6 @@ tracks/1/keys = {
 extents = Vector2( 16, 14 )
 
 [node name="CrystalTap" type="Node2D"]
-z_index = 1
 script = ExtResource( 2 )
 editor_rect = Rect2( -16, -16, 32, 32 )
 internal_id = "crystal_tap"
