@@ -459,6 +459,7 @@ func start_shine_dance() -> void:
 	
 	character.sprite.animation = "shineDance"
 	character.anim_player.play("shine_dance")
+	character.sound_player.set_skid_playing(false)
 	
 	
 	shine_get.appear(title)

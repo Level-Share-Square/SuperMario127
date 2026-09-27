@@ -21,11 +21,11 @@ export var anim_damp = 80
 
 func collect(body):
 	if is_enabled_and_on_ground() and !collected and collectable and body.name.begins_with("Character") and !body.dead:
+		play_shared_sound("PurpleSound")
 		CurrentLevelData.vars.collect_purple_starbit(id)
 		var player_id = 1
 		if body.name == "Character":
 			player_id = 0
-		play_shared_sound("PurpleSound")
 		collected = true
 		animation_player.play("collect")
 
