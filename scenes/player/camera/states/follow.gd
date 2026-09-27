@@ -13,7 +13,7 @@ export var lerp_faster_speed: float = 12.0
 export var speed_threshold: float = 120.0
 export var max_speed: float = 500.0
 export var max_lead_distance: float = 280.0
-export var lead_speed: float = 1.0
+export var lead_speed: float = 1.25
 
 var cur_lead_offset: float = 0
 
