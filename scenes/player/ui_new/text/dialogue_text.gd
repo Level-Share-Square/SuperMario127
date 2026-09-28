@@ -63,7 +63,7 @@ func open(_dialogue : PoolStringArray, dialogue_node : Node2D, character_node : 
 	else:
 		page_change.play()
 	close_label.bbcode_text = text_replace_util.parse_text("[center]Press :interactinput: to continue[/center]", character_node)
-	name_label.bbcode_text = text_replace_util.parse_text(character_name, character_node)
+	name_label.bbcode_text = text_replace_util.parse_text(character_name, character_node, CurrentLevelData.save_data, CurrentLevelData.vars, CurrentLevelData.area_id)
 	open = true
 	
 	last_tag = ""

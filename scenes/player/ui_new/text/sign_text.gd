@@ -26,7 +26,7 @@ func open(text : String, sign_node : Node2D, character_node : Character):
 	character = character_node
 	sign_obj = sign_node
 	menu_open.play()
-	label.bbcode_text = "[center]" + text_replace_util.parse_text(text, character) + "[/center]"
+	label.bbcode_text = "[center]" + text_replace_util.parse_text(text, character, CurrentLevelData.save_data, CurrentLevelData.vars, CurrentLevelData.area_id) + "[/center]"
 	close_label.bbcode_text = text_replace_util.parse_text("[center]Press :interactinput: to close[/center]", character_node)
 	open = true
 
