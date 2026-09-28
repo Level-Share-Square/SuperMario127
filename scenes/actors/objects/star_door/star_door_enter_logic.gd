@@ -62,7 +62,7 @@ func start_door_enter_animation(character : Character) -> void:
 	character.toggle_movement(false)
 	character.velocity = Vector2.ZERO
 	character.sprite.rotation = 0
-	character.set_collision_layer_bit(1, false) # disable collisions w/ most things
+	character.set_collision_mask_bit(1, false) # disable collisions w/ most things
 	character.set_inter_player_collision(false)
 	
 	character.sprite.animation = "enterDoor" + ("Right" if character.facing_direction == 1 else "Left")
@@ -166,7 +166,7 @@ func door_exit_anim_finished(_animation : String, character : Character) -> void
 	character.velocity = Vector2.ZERO
 	character.toggle_movement(true)
 	# undo collision changes 
-	character.set_collision_layer_bit(1, true)
+	character.set_collision_mask_bit(1, true)
 	character.set_inter_player_collision(true) 
 	
 	character.sprite.animation = "exitDoor" + ("Right" if character.facing_direction == 1 else "Left")
@@ -186,7 +186,7 @@ func restore_control():
 	
 	stored_character.get_state_node("JumpState").jump_buffer = 0 # prevent character from jumping right after closing menu
 	stored_character.inputs[Character.input_names.jump][1] = false
-	stored_character.set_collision_layer_bit(1, true)
+	stored_character.set_collision_mask_bit(1, true)
 	stored_character.set_inter_player_collision(true) 
 	
 	stored_character.sprite.animation = "exitDoor" + ("Right" if stored_character.facing_direction == 1 else "Left")

@@ -214,7 +214,7 @@ func return_camera_focus() -> void:
 	stored_character.camera.focus_on = null
 
 func _on_invuln_timeout():
-	stored_character.set_collision_layer_bit(1, true)
+	pass
 #used to re-enable the entrance collision only when a player exits the vicinity
 func _on_NearbyCharacterDetection_body_exited(body : PhysicsBody2D) -> void:
 	attempt_enable_collision(body)

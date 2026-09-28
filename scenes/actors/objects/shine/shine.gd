@@ -414,7 +414,7 @@ func collect(body: PhysicsBody2D) -> void:
 		#character.set_state(null, get_physics_process_delta_time())
 		character.call_deferred("set_dive_collision", false)
 
-		character.set_collision_layer_bit(1, false) # disable collisions w/ most things
+		character.set_collision_mask_bit(1, false) # disable collisions w/ most things
 		character.set_inter_player_collision(false)
 
 		Singleton.ModeSwitcher.is_switching = true
@@ -528,7 +528,7 @@ func restore_control(_animation: String, character) -> void:
 	character.sprite.playing = true
 		
 	# undo collision changes 
-	character.set_collision_layer_bit(1, true)
+	character.set_collision_mask_bit(1, true)
 	character.set_inter_player_collision(true) 
 	character.call_deferred("set_dive_collision", true)
 

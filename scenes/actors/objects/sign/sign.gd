@@ -100,7 +100,7 @@ func enter_area(body):
 
 
 func exit_area(body):
-	if body == character and character.get_collision_layer_bit(1) and enabled:
+	if body == character and not character.invulnerable and enabled:
 		character = null
 		if reset_read_timer == 0 and open_menu:
 			message_disappear.play()
@@ -113,7 +113,7 @@ func setup_char():
 	character.movable = false
 	character.velocity = Vector2.ZERO
 	character.sprite.rotation = 0
-	character.set_collision_layer_bit(1, false) # disable collisions w/ most things
+	character.set_collision_mask_bit(1, false) # disable collisions w/ most things
 	character.set_inter_player_collision(false)
 	
 	character.sprite.animation = "enterDoor" + ("Right" if character.facing_direction == 1 else "Left")
@@ -143,7 +143,7 @@ func restore_control():
 	character.get_state_node("JumpState").jump_buffer = 0 # prevent character from jumping right after closing menu
 	character.inputs[Character.input_names.jump][1] = false
 
-	character.set_collision_layer_bit(1, true)
+	character.set_collision_mask_bit(1, true)
 	character.set_inter_player_collision(true) 
 	
 	character.sprite.animation = "exitDoor" + ("Right" if character.facing_direction == 1 else "Left")

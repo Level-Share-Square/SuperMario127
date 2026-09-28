@@ -50,14 +50,14 @@ func update_property(key, value):
 
 func start_exit_animation(character: Character) -> void:
 	.start_exit_animation(character)
-	character.show()
 	emit_signal("exit_completed")
 
 func finish_exit_animation(character: Character) -> void:
 	.finish_exit_animation(character)
 	character.velocity = start_velocity
 	character.jump_animation = 0
-	character.set_state_by_name(state_name_map[start_state])
+	if start_state == StartState.GroundPound or not character.is_grounded():
+		character.set_state_by_name(state_name_map[start_state])
 	character.velocity = start_velocity
 
 

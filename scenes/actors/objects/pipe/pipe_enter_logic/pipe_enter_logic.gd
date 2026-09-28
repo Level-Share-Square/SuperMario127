@@ -61,7 +61,7 @@ func start_pipe_ground_pound_animation(character : Character) -> void:
 	character.toggle_movement(false)
 	character.sprite.rotation = 0
 	character.global_position.y = global_position.y + -22
-	character.set_collision_layer_bit(1, false) # disable collisions w/ most things
+	character.set_collision_mask_bit(1, false) # disable collisions w/ most things
 	if character.state != null && character.state.name == "GroundPoundState":   # ====================================================
 		character.state = null													# | This is for local teleportation. If this wasn't  |
 																				# | here, you would exit while still ground pounding |
@@ -93,7 +93,7 @@ func start_pipe_enter_animation(character : Character) -> void:
 	character.toggle_movement(false)
 	character.sprite.rotation = 0
 	character.global_position.y = global_position.y + -22
-	character.set_collision_layer_bit(1, false) # disable collisions w/ most things
+	character.set_collision_mask_bit(1, false) # disable collisions w/ most things
 	character.set_inter_player_collision(false)
 	character.sprite.animation = "pipe" + ("Right" if character.facing_direction == 1 else "Left")
 	character.sprite.playing = true
@@ -153,8 +153,6 @@ func start_pipe_exit_animation(character : Character, tp_mode : bool) -> void:
 	# warning-ignore: return_value_discarded
 	tween.start()
 	
-	reset_sprite(character)
-	
 
 func pipe_exit_anim_finished(character : Character):
 	# exits the pipe and gives back control to mario
@@ -164,9 +162,11 @@ func pipe_exit_anim_finished(character : Character):
 	character.velocity = Vector2.ZERO
 	character.toggle_movement(true)
 	# undo collision changes 
-	character.set_collision_layer_bit(1, true)
+	character.set_collision_mask_bit(1, true)
 	character.set_inter_player_collision(true) 
 	
+	yield(get_tree(), "idle_frame")
+	call_deferred("reset_sprite", character)
 	stored_character = null
 
 
@@ -174,10 +174,3 @@ func _tween_all_completed() -> void:
 	if entering: #TODO: Make this work w/o if statement
 		emit_signal("pipe_animation_finished", stored_character, entering, get_parent().force_fadeout)
 		stored_character = null
-
-
-func reset_sprite(character : Character): #This is here in case Mario came from a door to a pipe
-	character.z_index = -1
-	character.sprite.modulate = Color(1.0, 1.0, 1.0, 1.0)
-	character.sprite.scale = Vector2(1.0, 1.0)
-	character.sprite.position = Vector2.ZERO

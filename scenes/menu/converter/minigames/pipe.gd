@@ -34,7 +34,7 @@ func start_entrance_animation(character: Character, is_gp: bool = false) -> void
 	character.velocity = Vector2.ZERO
 	character.sprite.rotation = 0
 	# disable collisions w/ most things
-	character.set_collision_layer_bit(1, false)
+	character.set_collision_mask_bit(1, false)
 	character.set_inter_player_collision(false)
 	character.global_position.y = global_position.y - 48
 	

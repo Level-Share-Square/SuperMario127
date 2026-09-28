@@ -202,9 +202,6 @@ func start_pipe_exit_animation(character : Character, tp_mode : bool) -> void:
 		
 		players = get_tree().root.get_node("Player").get_characters()
 		for player in players:
-			# undo collision changes 
-			player.set_collision_layer_bit(1, true)
-			player.set_inter_player_collision(true) 
 			player.toggle_movement(true)
 			player.camera.auto_move = true
 			player.gravity_scale = 1

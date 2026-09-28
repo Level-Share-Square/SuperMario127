@@ -55,9 +55,6 @@ func collect(body):
 		body.sprite.rotation_degrees = 0
 
 		body.call_deferred("set_dive_collision", false)
-
-		body.set_collision_layer_bit(1, false)
-		body.set_inter_player_collision(false)
 		
 		Singleton.Music.volume_multiplier = 0
 		was_visible = visible
@@ -99,10 +96,7 @@ func restore_control(_animation : String, character : Character) -> void:
 	
 	# player animations won't play past frame 0 after the shine dance without this
 	character.sprite.playing = true
-		
-	# undo collision changes 
-	character.set_collision_layer_bit(1, true)
-	character.set_inter_player_collision(true) 
+	
 	character.call_deferred("set_dive_collision", true)
 
 	# return the character to a state they can actually move around in

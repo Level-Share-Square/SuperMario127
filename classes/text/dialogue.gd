@@ -179,7 +179,7 @@ func body_entered(body):
 func body_exited(body):
 	if being_read: return
 	for character in characters:
-		if character.get_collision_layer_bit(1):
+		if not character.invulnerable:
 			message_disappear.play()
 			body_overlapping = false
 			remove_character(body)
@@ -241,8 +241,6 @@ func setup_char(character: Character):
 	character.force_invulnerable = true
 	character.controllable = false
 	character.velocity = Vector2.ZERO
-#	character.set_collision_layer_bit(1, false) # disable collisions w/ most things
-	character.set_inter_player_collision(false)
 	
 	character.camera.set_zoom_tween(Vector2(zoom_size, zoom_size), 1)
 	character.camera.focus_on = camera_focus
@@ -262,9 +260,6 @@ func restore_control(character: Character):
 	
 	character.get_state_node("JumpState").jump_buffer = 0 # prevent character from jumping right after closing menu
 	character.inputs[Character.input_names.jump][1] = false
-
-	character.set_collision_layer_bit(1, true)
-	character.set_inter_player_collision(true)
 
 	character.camera.zoom_tween.remove_all()
 	character.camera.set_zoom_tween(stored_zoom, 0.5)

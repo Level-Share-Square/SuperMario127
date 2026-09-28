@@ -53,9 +53,6 @@ func start_entrance_animation(character: Character) -> void:
 	character.toggle_movement(false)
 	character.velocity = Vector2.ZERO
 	character.sprite.rotation = 0
-	# disable collisions w/ most things
-	character.set_collision_layer_bit(1, false)
-	character.set_inter_player_collision(false)
 	
 	connect("entrance_completed", self, "begin_warp", [character], CONNECT_ONESHOT)
 
@@ -71,23 +68,24 @@ func start_exit_animation(character: Character) -> void:
 func finish_exit_animation(character: Character) -> void:
 	CurrentLevelData.vars.transition_data = {}
 	CurrentLevelData.vars.area_transition_helper = null
-	if not character.dead:
-		var is_in_cutscene: bool = false
-		if is_instance_valid(character.camera):
-			is_in_cutscene = character.camera.in_cutscene
-		character.toggle_movement(not is_in_cutscene)
 	character.velocity = Vector2.ZERO
-	reset_sprite(character)
-	
-	# undo collision changes 
-	character.set_collision_layer_bit(1, true)
-	character.set_inter_player_collision(true)
 
 	# This is is called twice (once in start_exit_animation and
 	# once here) because for some reason tint data is not
 	# updated yet on start_exit_animation sooo shrug
 	character.layer = level_layer_ref
 	character.update_layer_info()
+
+	if not character.dead:
+		var is_in_cutscene: bool = false
+		if not is_instance_valid(character.camera):
+			yield(get_tree(), "idle_frame")
+			is_in_cutscene = character.camera.in_cutscene
+		character.toggle_movement(not is_in_cutscene)
+	
+	yield(get_tree(), "idle_frame")
+	call_deferred("reset_sprite", character)
+
 
 func set_transition_character_data(character: Character):
 	var transition_character_data = CurrentLevelData.vars.transition_character_data

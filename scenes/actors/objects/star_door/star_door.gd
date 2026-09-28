@@ -204,7 +204,7 @@ func restore_control():
 	
 	stored_character.get_state_node("JumpState").jump_buffer = 0 # prevent character from jumping right after closing menu
 	stored_character.inputs[Character.input_names.jump][1] = false
-	stored_character.set_collision_layer_bit(1, true)
+	stored_character.set_collision_mask_bit(1, true)
 	stored_character.set_inter_player_collision(true) 
 	
 	stored_character.sprite.animation = "exitDoor" + ("Right" if stored_character.facing_direction == 1 else "Left")
