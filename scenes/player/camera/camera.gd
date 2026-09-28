@@ -169,7 +169,7 @@ func clamp_position(new_pos: Vector2, last_pos: Vector2, cur_size: Vector2, excl
 			print("ESCAPED")
 			continue
 		new_pos = resolve_stopper(new_pos, last_pos, cur_size, stopper)
-	
+	new_pos = clamp_to_level_bounds(new_pos, cur_size)
 	return new_pos
 
 
