@@ -616,8 +616,8 @@ func will_collide(multiplier: float = 1) -> bool:
 
 func hide() -> void:
 	visible = false
-	velocity = Vector2(0, 0)
-	position = initial_position
+	#velocity = Vector2(0, 0)
+	#position = initial_position
 	reset_physics_interpolation()
 
 func show() -> void:
@@ -1212,7 +1212,9 @@ func _physics_process(delta: float) -> void:
 			velocity.y = max(0, velocity.y)
 		
 		## CLIPPING CODE
-		var ray_check: Dictionary = get_world_2d().direct_space_state.intersect_ray(last_position, global_position, [self], 1)
+		var exceptions: Array = get_collision_exceptions()
+		exceptions.append(self)
+		var ray_check: Dictionary = get_world_2d().direct_space_state.intersect_ray(last_position, global_position, exceptions, collision_mask)
 		var ray_colliding: bool = not ray_check.empty()
 		if (ray_colliding and last_position != Vector2.ZERO and (last_position - global_position).length_squared() > 0):
 			position = last_position

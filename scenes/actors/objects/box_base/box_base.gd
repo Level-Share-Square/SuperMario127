@@ -118,6 +118,7 @@ func area_exited(area):
 		character = null
 		char_collider = null
 		char_dir_check_collider = null
+		last_non_intersecting_rect = Rect2()
 		# in case there's another overlapping character area still
 		for overlapping_area in player_detector.get_overlapping_areas():
 			if overlapping_area != area:
@@ -154,7 +155,7 @@ func try_break() -> void:
 			box.remove_collision_exception_with(character)
 	
 		last_hit_rect = hit_rect
-		if not compare_hit_rect.intersects(box_rect):
+		if compare_hit_rect != Rect2() and not compare_hit_rect.intersects(box_rect):
 			last_non_intersecting_rect = compare_hit_rect
 	
 	if broken: return
@@ -254,3 +255,4 @@ func _draw():
 	var box_rect: Rect2 = rect_from_shape(box_collision)
 	draw_rect(char_rect, Color.red)
 	draw_rect(box_rect, Color.blue)
+	draw_rect(last_non_intersecting_rect, Color.green)
