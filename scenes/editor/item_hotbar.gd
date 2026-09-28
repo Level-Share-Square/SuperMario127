@@ -212,7 +212,8 @@ func select_item_from_placeable(item, palette):
 	
 	on_item_selected(item)
 	yield(get_tree(), "idle_frame")
-	palette_selected(palette, bottom_row.get_child(0))
+	var favs_amount: int = fav_items[selected_loadout].size()
+	palette_selected(palette, bottom_row.get_child(favs_amount))
 
 func refresh_loadout():
 	var favs_amount: int = fav_items[selected_loadout].size()
