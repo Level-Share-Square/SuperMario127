@@ -113,7 +113,7 @@ length = 6.0
 
 [sub_resource type="RayShape2D" id=7]
 custom_solver_bias = 1.0
-length = 13.0
+length = 10.0
 
 [sub_resource type="RectangleShape2D" id=108]
 extents = Vector2( 0.05, 0.5 )
@@ -1713,7 +1713,7 @@ shader = ExtResource( 86 )
 shader_param/ray_count = 4
 shader_param/ray_distance = 0.4
 shader_param/ray_seperation_degrees = 22.0
-shader_param/rotation = 4.65906
+shader_param/rotation = 4.09249
 
 [sub_resource type="RectangleShape2D" id=85]
 extents = Vector2( 8, 18 )
@@ -1789,7 +1789,7 @@ disabled = true
 one_way_collision_margin = 0.0
 
 [node name="GroundCollisionDive" type="CollisionShape2D" parent="."]
-position = Vector2( 0.5, -6 )
+position = Vector2( 0.5, -3 )
 z_index = 2
 shape = SubResource( 7 )
 disabled = true
@@ -2678,7 +2678,6 @@ playing = true
 [node name="Recolorable" type="AnimatedSprite" parent="CollectedShine"]
 visible = false
 frames = ExtResource( 61 )
-frame = 9
 script = ExtResource( 63 )
 
 [node name="ShineParticles" type="Particles2D" parent="CollectedShine"]
