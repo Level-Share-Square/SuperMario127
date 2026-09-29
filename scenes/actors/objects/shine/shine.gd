@@ -408,6 +408,8 @@ func collect(body: PhysicsBody2D) -> void:
 		character.velocity.x = 0
 		character.sprite.rotation_degrees = 0
 		character.controllable = false
+		character.invulnerable = true
+		character.force_invulnerable = true
 		character.shine_cutscene = true
 
 		# fixes the player being in the ground if they dive into a shine in the air
@@ -535,6 +537,8 @@ func restore_control(_animation: String, character) -> void:
 	# return the character to a state they can actually move around in
 	character.set_state(null, get_physics_process_delta_time())
 	character.controllable = true
+	character.invulnerable = false
+	character.force_invulnerable = false
 	character.shine_cutscene = false
 	var timer_manager = get_node("/root").get_node("Player").get_timer_manager()
 	timer_manager.pause_resume_timer("area_timer", false)

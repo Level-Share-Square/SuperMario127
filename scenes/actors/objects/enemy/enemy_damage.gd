@@ -132,6 +132,8 @@ func bonk_player(character: Character, play_hit_sound: bool = false) -> void:
 		character.bonk(global_position, knockback_power, set_player_knockback_state, play_hit_sound)
 
 func bounce_player(character: Character) -> void:
+	if character.shine_cutscene: return
+	
 	match(bounce_type):
 		BounceType.NORMAL:
 			if character.state != character.get_state_node("DiveState"):
