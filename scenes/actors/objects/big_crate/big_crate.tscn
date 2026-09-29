@@ -212,6 +212,7 @@ initial_particles = 48
 default_size = Vector2( 64, 64 )
 top_states = PoolStringArray( "GroundPoundState", "SwimmingState", "GroundPoundStartState" )
 side_states = PoolStringArray( "DiveState", "SlideState", "SpinningState", "SwimmingState", "WingMarioState" )
+bottom_states = PoolStringArray( "SwimmingState" )
 side_fludds = PoolStringArray( "TurboNozzle" )
 breakable_objects = PoolStringArray( "Steely", "BobOmb", "Shell" )
 overkill_powerups = PoolStringArray( "MetalPowerup", "RainbowPowerup" )
@@ -256,6 +257,3 @@ stream = ExtResource( 1 )
 volume_db = 6.0
 bus = "Sounds"
 script = ExtResource( 5 )
-
-[connection signal="area_entered" from="PlayerDetector" to="." method="area_entered"]
-[connection signal="area_exited" from="PlayerDetector" to="." method="area_exited"]
