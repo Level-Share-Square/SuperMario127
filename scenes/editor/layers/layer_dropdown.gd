@@ -40,6 +40,7 @@ func select_default(index: int):
 
 func select_layer(index: int, toggle_dropdown: bool = true) -> void:
 	var layer = shared.get_layer_at(index)
+	if not layer: return
 	var layer_metadata: LayerMetadata = layer.layer_data.layer_metadata
 	layer_name.text = layer_metadata.layer_name
 	if layer_name.text.length() > 15:
