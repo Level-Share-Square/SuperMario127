@@ -5,6 +5,7 @@ onready var shared = $"%LevelShared"
 onready var object_selection = $"%ObjectSelection"
 onready var hotbar = $"%Hotbar"
 onready var tools = $"%Tools"
+onready var layers = $"%ViewDropdown/Layers"
 
 var mouse_moved: bool = false
 
@@ -122,6 +123,10 @@ func switch_loadout(key):
 	var button = hotbar.loadout_container.get_child((2*key) + 3)
 	button.emit_signal("pressed")
 	
+
+func toggle_focus_layer() -> void:
+	layers.pressed = not layers.pressed
+	layers.emit_signal("pressed")
 
 
 func pick_focused_item():

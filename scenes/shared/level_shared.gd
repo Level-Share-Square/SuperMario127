@@ -202,7 +202,7 @@ func focus_layer(focus: bool, focus_layer: String):
 		if focus:
 			layer.modulate.a = layer.layer_data.layer_metadata.layer_opacity
 			if not layer_uuid == focus_layer: 
-				layer.modulate.a *= 0.5
+				layer.modulate.a *= 0.15
 		else:
 			layer.modulate.a = layer.layer_data.layer_metadata.layer_opacity
 
