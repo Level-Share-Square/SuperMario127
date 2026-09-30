@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/galaxy9.png-df03a48921e546d8e2417bf03a95d6fb.stex"
+path="res://.import/8.png-27d09105945d911d2c9de3cdef24706c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/shared/background/backgrounds/galaxy/galaxy9.png"
-dest_files=[ "res://.import/galaxy9.png-df03a48921e546d8e2417bf03a95d6fb.stex" ]
+source_file="res://scenes/shared/background/backgrounds/galaxy/animations/8.png"
+dest_files=[ "res://.import/8.png-27d09105945d911d2c9de3cdef24706c.stex" ]
 
 [params]
 
