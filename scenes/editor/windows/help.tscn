@@ -318,12 +318,12 @@ bbcode_enabled = true
 bbcode_text = "[center][color=yellow]--Guides--[/color]
 The Super Mario 127 team has compiled together a list of guides on how to use the level editor, which may be of assistance when creating levels.
 
-Most of these guides can be found on the  [url=https://www.youtube.com/@supermario127team][color=fuchsia]Super Mario 127 Youtube Channel[/color][/url] and the [url=https://wiki.levelsharesquare.com/Category:Super_Mario_127_guides][color=fuchsia]Level Share Square wiki[/color][/url]. The links to each guide, at the time of this version's release, will be listed below.
+Most of these guides can be found on the  [url=https://www.youtube.com/@supermario127team][color=fuchsia]Super Mario 127 Youtube Channel[/color][/url] and the [url=https://wiki.levelsharesquare.com/Super_Mario_127][color=fuchsia]Level Share Square wiki[/color][/url]. The links to each guide, at the time of this version's release, will be listed below.
 
 Note that most properties in the editor have a hint on how they work, when hovered over via the mouse cursor.
 
 [center][color=yellow]--Video Guides--[/color]
-[url=][color=fuchsia]Level Editor Interface Guide[/color][/url]
+[url=https://youtu.be/wL7xnisMV_s][color=fuchsia]Level Editor Interface Guide[/color][/url]
 [url=https://youtu.be/ahxN_Y7iIvs][color=fuchsia]Custom Music Guide[/color][/url][/center]
 
 [center][color=yellow]--Text Guides--[/color]
