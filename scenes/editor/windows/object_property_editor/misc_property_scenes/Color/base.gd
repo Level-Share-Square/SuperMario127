@@ -22,9 +22,6 @@ func load_property(_editor: Editor, init_value, _property: Array, property_name 
 	color_manager.color = init_value
 	color_manager.update_nodes()
 	color_manager.read_intensity()
-	
-	if is_instance_valid(window):
-		window.connect("window_closed", expand_button, "collapse")
 
 func property_changed(key: String, new_value):
 	if key != property[0]: return
