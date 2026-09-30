@@ -133,6 +133,7 @@ func bonk_player(character: Character, play_hit_sound: bool = false) -> void:
 
 func bounce_player(character: Character) -> void:
 	if character.shine_cutscene: return
+	if not character.movable: return
 	
 	match(bounce_type):
 		BounceType.NORMAL:
