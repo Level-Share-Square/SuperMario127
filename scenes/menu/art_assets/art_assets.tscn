@@ -319,7 +319,7 @@ void fragment() {
 	COLOR = (texture(TEXTURE, UV) + n * u_amount);
 }"
 
-[sub_resource type="ShaderMaterial" id=319]
+[sub_resource type="ShaderMaterial" id=325]
 shader = SubResource( 26 )
 shader_param/u_amount = 1.75
 
@@ -475,7 +475,7 @@ void fragment() {
 	COLOR = (texture(TEXTURE, UV) + n * u_amount);
 }"
 
-[sub_resource type="ShaderMaterial" id=320]
+[sub_resource type="ShaderMaterial" id=326]
 shader = SubResource( 316 )
 shader_param/u_amount = 1.75
 
@@ -515,7 +515,7 @@ void fragment() {
 	COLOR = (texture(TEXTURE, UV) + n * u_amount);
 }"
 
-[sub_resource type="ShaderMaterial" id=321]
+[sub_resource type="ShaderMaterial" id=327]
 shader = SubResource( 51 )
 shader_param/u_amount = 1.75
 
@@ -540,11 +540,11 @@ fill = 1
 fill_from = Vector2( 0.5, 0.5 )
 fill_to = Vector2( 0.5, 0 )
 
-[sub_resource type="ShaderMaterial" id=322]
+[sub_resource type="ShaderMaterial" id=328]
 shader = SubResource( 26 )
 shader_param/u_amount = 1.75
 
-[sub_resource type="ShaderMaterial" id=323]
+[sub_resource type="ShaderMaterial" id=329]
 shader = SubResource( 26 )
 shader_param/u_amount = 1.75
 
@@ -1769,7 +1769,7 @@ render_target_update_mode = 3
 rect_scale = Vector2( 3, 3 )
 
 [node name="Overlay" parent="DiscordIcon/Viewport/Background" index="3"]
-material = SubResource( 319 )
+material = SubResource( 325 )
 
 [node name="WhiteGradient" type="TextureRect" parent="DiscordIcon/Viewport"]
 modulate = Color( 0.752941, 0.752941, 1, 0.486275 )
@@ -2298,26 +2298,27 @@ stretch_mode = 6
 [node name="ItchHeader" type="ViewportContainer" parent="."]
 unique_name_in_owner = true
 margin_top = 9642.0
-margin_right = 900.0
+margin_right = 960.0
 margin_bottom = 9892.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
 [node name="Viewport" type="Viewport" parent="ItchHeader"]
-size = Vector2( 900, 250 )
+size = Vector2( 960, 250 )
 handle_input_locally = false
 render_target_update_mode = 3
 
 [node name="BG" type="Sprite" parent="ItchHeader/Viewport"]
-scale = Vector2( 1.2, 1.2 )
+position = Vector2( 0, -16 )
+scale = Vector2( 1.25, 1.25 )
 z_index = -512
 z_as_relative = false
 texture = ExtResource( 5 )
 centered = false
 
 [node name="FG2" type="Sprite" parent="ItchHeader/Viewport"]
-position = Vector2( -264, -32 )
-scale = Vector2( 1.2, 1.2 )
+position = Vector2( -200, -16 )
+scale = Vector2( 1.25, 1.25 )
 z_index = -512
 z_as_relative = false
 texture = ExtResource( 6 )
@@ -2353,15 +2354,15 @@ anchor_bottom = 1.0
 rect_min_size = Vector2( 900, 250 )
 
 [node name="CenterContainer" type="CenterContainer" parent="ItchHeader/Viewport/HBoxContainer"]
-margin_right = 900.0
+margin_right = 960.0
 margin_bottom = 250.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ItchHeader/Viewport/HBoxContainer/CenterContainer"]
-margin_left = 150.0
+margin_left = 180.0
 margin_top = 9.0
-margin_right = 750.0
+margin_right = 780.0
 margin_bottom = 240.0
 custom_constants/separation = 16
 
@@ -2877,7 +2878,7 @@ render_target_update_mode = 3
 rect_scale = Vector2( 3, 3 )
 
 [node name="Overlay" parent="DiscordInvite/Viewport/Background" index="3"]
-material = SubResource( 320 )
+material = SubResource( 326 )
 
 [node name="WhiteGradient" type="TextureRect" parent="DiscordInvite/Viewport"]
 modulate = Color( 0.752941, 0.752941, 1, 0.486275 )
@@ -2921,7 +2922,7 @@ rect_scale = Vector2( 0.225, 0.225 )
 
 [node name="Overlay" parent="SplashScreen/Viewport/Background" index="3"]
 modulate = Color( 0.054902, 0.0117647, 0.152941, 0.270588 )
-material = SubResource( 321 )
+material = SubResource( 327 )
 
 [node name="Overlay" type="TextureRect" parent="SplashScreen/Viewport"]
 modulate = Color( 0.752941, 0.752941, 1, 0.486275 )
@@ -3009,7 +3010,7 @@ render_target_update_mode = 3
 rect_scale = Vector2( 3, 3 )
 
 [node name="Overlay" parent="Icon/Viewport/Background" index="3"]
-material = SubResource( 322 )
+material = SubResource( 328 )
 
 [node name="WhiteGradient" type="TextureRect" parent="Icon/Viewport"]
 modulate = Color( 0.752941, 0.752941, 1, 0.486275 )
@@ -3075,7 +3076,7 @@ render_target_update_mode = 3
 rect_scale = Vector2( 3, 3 )
 
 [node name="Overlay" parent="AndroidIconBG/Viewport/Background" index="3"]
-material = SubResource( 323 )
+material = SubResource( 329 )
 
 [node name="WhiteGradient" type="TextureRect" parent="AndroidIconBG/Viewport"]
 modulate = Color( 0.752941, 0.752941, 1, 0.486275 )

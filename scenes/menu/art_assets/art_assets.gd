@@ -68,9 +68,9 @@ func _ready():
 #	bluesky_banner_img.flip_y()
 #	bluesky_banner_img.save_png("res://assets/artwork/bluesky/banner.png")
 
-#	var itch_header_img: Image = itch_header.get_node("Viewport").get_texture().get_data()
-#	itch_header_img.flip_y()
-#	itch_header_img.save_png("res://assets/artwork/itch/header.png")
+	var itch_header_img: Image = itch_header.get_node("Viewport").get_texture().get_data()
+	itch_header_img.flip_y()
+	itch_header_img.save_png("res://assets/artwork/itch/header.png")
 
 #	var itch_cover_img: Image = itch_cover.get_node("Viewport").get_texture().get_data()
 #	itch_cover_img.flip_y()
@@ -116,11 +116,11 @@ func _ready():
 #	fix_transparency(shorts_template_img)
 #	shorts_template_img.save_png("res://assets/artwork/youtube/shorts_template.png")
 
-	var tol_template_img: Image = tol_template.get_node("Viewport").get_texture().get_data()
-	tol_template_img.convert(Image.FORMAT_RGBA8)
-	tol_template_img.flip_y()
-	fix_transparency(tol_template_img)
-	tol_template_img.save_png("res://assets/artwork/youtube/tol_template.png")
+#	var tol_template_img: Image = tol_template.get_node("Viewport").get_texture().get_data()
+#	tol_template_img.convert(Image.FORMAT_RGBA8)
+#	tol_template_img.flip_y()
+#	fix_transparency(tol_template_img)
+#	tol_template_img.save_png("res://assets/artwork/youtube/tol_template.png")
 
 #	var coin_hud_img: Image = coin_hud.get_node("Viewport").get_texture().get_data()
 #	coin_hud_img.convert(Image.FORMAT_RGBA8)
