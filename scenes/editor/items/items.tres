@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=295 format=2]
+[gd_resource type="Resource" load_steps=298 format=2]
 
 [ext_resource path="res://scenes/editor/items/placeable_items.gd" type="Script" id=1]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/blue_coin.tres" type="Resource" id=2]
@@ -294,6 +294,9 @@
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/boo_block_half_tile.tres" type="Resource" id=292]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/color_tile_half_tile.tres" type="Resource" id=293]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/flat_rock.tres" type="Resource" id=294]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/small_tree.tres" type="Resource" id=295]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/tree.tres" type="Resource" id=296]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/leafy_tree.tres" type="Resource" id=297]
 
 [resource]
 script = ExtResource( 1 )
@@ -380,6 +383,7 @@ placeable_items = {
 "obj_launch_star": ExtResource( 104 ),
 "obj_lava": ExtResource( 72 ),
 "obj_layer_changer": ExtResource( 245 ),
+"obj_leafy_tree": ExtResource( 297 ),
 "obj_locked_door": ExtResource( 271 ),
 "obj_locked_door_single": ExtResource( 270 ),
 "obj_log": ExtResource( 15 ),
@@ -432,6 +436,7 @@ placeable_items = {
 "obj_small_bottle": ExtResource( 29 ),
 "obj_small_bush": ExtResource( 22 ),
 "obj_small_chain": ExtResource( 269 ),
+"obj_small_tree": ExtResource( 295 ),
 "obj_snow_log": ExtResource( 67 ),
 "obj_snow_pillar": ExtResource( 60 ),
 "obj_snow_platform": ExtResource( 33 ),
@@ -446,6 +451,7 @@ placeable_items = {
 "obj_toad": ExtResource( 145 ),
 "obj_torch": ExtResource( 98 ),
 "obj_touch_lift": ExtResource( 48 ),
+"obj_tree": ExtResource( 296 ),
 "obj_turbo_box": ExtResource( 40 ),
 "obj_turbo_nozzle": ExtResource( 274 ),
 "obj_twisted_tree_angle": ExtResource( 23 ),

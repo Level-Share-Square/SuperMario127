@@ -68,6 +68,6 @@ func _input(event):
 	parts_input_handler(event, self)
 
 func update_parts():
-	update_property("", null)
+	update_property("parts", parts)
 
 
