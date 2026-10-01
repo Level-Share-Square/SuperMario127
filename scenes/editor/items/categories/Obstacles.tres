@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=48 format=2]
+[gd_resource type="Resource" load_steps=49 format=2]
 
 [ext_resource path="res://scenes/editor/items/placeable_items.gd" type="Script" id=1]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/big_barrel.tres" type="Resource" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/mushroom_top.tres" type="Resource" id=11]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/mushroom_curve.tres" type="Resource" id=12]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/cloud_platform.tres" type="Resource" id=13]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/flat_rock.tres" type="Resource" id=14]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/log.tres" type="Resource" id=15]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/bone_platform.tres" type="Resource" id=20]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/snow_platform.tres" type="Resource" id=33]
@@ -68,6 +69,7 @@ placeable_items = {
 "obj_cloud_platform": ExtResource( 13 ),
 "obj_crate": ExtResource( 3 ),
 "obj_fire": ExtResource( 101 ),
+"obj_flat_rock": ExtResource( 14 ),
 "obj_forcefield": ExtResource( 7 ),
 "obj_large_cave_spore": ExtResource( 66 ),
 "obj_large_snow_pillar": ExtResource( 64 ),

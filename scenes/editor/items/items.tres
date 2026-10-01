@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=294 format=2]
+[gd_resource type="Resource" load_steps=295 format=2]
 
 [ext_resource path="res://scenes/editor/items/placeable_items.gd" type="Script" id=1]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/blue_coin.tres" type="Resource" id=2]
@@ -293,6 +293,7 @@
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/breakable_marble_brick.tres" type="Resource" id=291]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/boo_block_half_tile.tres" type="Resource" id=292]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/color_tile_half_tile.tres" type="Resource" id=293]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/flat_rock.tres" type="Resource" id=294]
 
 [resource]
 script = ExtResource( 1 )
@@ -358,6 +359,7 @@ placeable_items = {
 "obj_dry_bones": ExtResource( 142 ),
 "obj_fire": ExtResource( 101 ),
 "obj_flat_cobweb": ExtResource( 118 ),
+"obj_flat_rock": ExtResource( 294 ),
 "obj_flower_bush": ExtResource( 79 ),
 "obj_forcefield": ExtResource( 252 ),
 "obj_goomba": ExtResource( 34 ),

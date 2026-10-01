@@ -12,7 +12,8 @@ z_index = -2
 script = ExtResource( 2 )
 editor_rect = Rect2( -40, -32, 79, 63 )
 internal_id = "rock"
-palette_textures = [ ExtResource( 4 ), ExtResource( 3 ), ExtResource( 5 ), ExtResource( 6 ) ]
+palette_textures = [ ExtResource( 1 ), ExtResource( 4 ), ExtResource( 3 ), ExtResource( 5 ), ExtResource( 6 ) ]
+zero_is_default = true
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
