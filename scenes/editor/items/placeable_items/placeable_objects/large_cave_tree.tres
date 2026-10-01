@@ -8,11 +8,11 @@
 script = ExtResource( 1 )
 item_name = "Large Cave Tree"
 change_to = "obj_cave_tree"
-items_in_sequence = 2
+items_in_sequence = 3
 index_in_sequence = 0
 icons = [ ExtResource( 3 ) ]
 previews = [ ExtResource( 2 ) ]
-priority = 125
+priority = 131
 object_id = 55
 preview_offset = Vector2( 0, -1 )
 property_overrides = {

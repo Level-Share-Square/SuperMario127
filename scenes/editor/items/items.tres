@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=298 format=2]
+[gd_resource type="Resource" load_steps=299 format=2]
 
 [ext_resource path="res://scenes/editor/items/placeable_items.gd" type="Script" id=1]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/blue_coin.tres" type="Resource" id=2]
@@ -297,6 +297,7 @@
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/small_tree.tres" type="Resource" id=295]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/tree.tres" type="Resource" id=296]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/leafy_tree.tres" type="Resource" id=297]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/unblossomed_cave_tree.tres" type="Resource" id=298]
 
 [resource]
 script = ExtResource( 1 )
@@ -457,6 +458,7 @@ placeable_items = {
 "obj_twisted_tree_angle": ExtResource( 23 ),
 "obj_twisted_tree_body": ExtResource( 21 ),
 "obj_twisted_tree_top": ExtResource( 18 ),
+"obj_unblossomed_cave_tree": ExtResource( 298 ),
 "obj_vanish_passable_block": ExtResource( 45 ),
 "obj_vanish_pepper": ExtResource( 36 ),
 "obj_vine_bend": ExtResource( 143 ),

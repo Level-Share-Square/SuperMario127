@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=44 format=2]
+[gd_resource type="Resource" load_steps=45 format=2]
 
 [ext_resource path="res://scenes/editor/items/placeable_items.gd" type="Script" id=1]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/big_net.tres" type="Resource" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/chain.tres" type="Resource" id=6]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/bush.tres" type="Resource" id=7]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/hedge.tres" type="Resource" id=8]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/unblossomed_cave_tree.tres" type="Resource" id=9]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/big_tree.tres" type="Resource" id=10]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/big_bush.tres" type="Resource" id=16]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/twisted_tree_top.tres" type="Resource" id=18]
@@ -88,5 +89,6 @@ placeable_items = {
 "obj_tree": ExtResource( 296 ),
 "obj_twisted_tree_angle": ExtResource( 23 ),
 "obj_twisted_tree_body": ExtResource( 21 ),
-"obj_twisted_tree_top": ExtResource( 18 )
+"obj_twisted_tree_top": ExtResource( 18 ),
+"obj_unblossomed_cave_tree": ExtResource( 9 )
 }

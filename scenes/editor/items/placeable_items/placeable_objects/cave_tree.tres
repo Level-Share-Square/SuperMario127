@@ -7,8 +7,8 @@
 [resource]
 script = ExtResource( 1 )
 item_name = "Cave Tree"
-change_to = "obj_large_cave_tree"
-items_in_sequence = 2
+change_to = "obj_unblossomed_cave_tree"
+items_in_sequence = 3
 index_in_sequence = 1
 icons = [ ExtResource( 3 ) ]
 previews = [ ExtResource( 2 ) ]

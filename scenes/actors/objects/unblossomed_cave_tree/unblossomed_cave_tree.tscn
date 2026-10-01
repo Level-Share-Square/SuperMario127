@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/actors/objects/unblossomed_cave_tree/texture.png" type="Texture" id=1]
+[ext_resource path="res://scenes/actors/objects/big_tree/decoration.gd" type="Script" id=2]
+
+[node name="CaveTree" type="Node2D"]
+z_index = -1
+script = ExtResource( 2 )
+editor_rect = Rect2( -9, -34, 18, 38 )
+internal_id = "unblossomed_cave_tree"
+
+[node name="Sprite" type="Sprite" parent="."]
+z_index = -9
+texture = ExtResource( 1 )
+offset = Vector2( 0, -16 )
