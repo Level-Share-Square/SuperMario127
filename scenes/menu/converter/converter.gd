@@ -140,7 +140,7 @@ func on_conversion_finished():
 	prints("Conversion complete. Files that failed:", failed_files)
 	thread_timer_on = false
 	
-	progress_bar.value = 100
+	progress_bar.value = progress_bar.max_value
 	progress_label.auto_update = false
 	progress_label.text = "Done!"
 	status_label.text = status_done
