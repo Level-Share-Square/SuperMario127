@@ -1461,11 +1461,13 @@ z_index = -2
 script = ExtResource( 2 )
 
 [node name="InnerTop" type="AnimatedSprite" parent="StarContainer/InnerStar"]
+unique_name_in_owner = true
 z_index = -3
 frames = SubResource( 27 )
 playing = true
 
 [node name="InnerBottom" type="AnimatedSprite" parent="StarContainer/InnerStar"]
+unique_name_in_owner = true
 z_index = 2
 frames = SubResource( 52 )
 playing = true
@@ -1475,21 +1477,25 @@ z_index = -1
 script = ExtResource( 2 )
 
 [node name="OuterTop" type="AnimatedSprite" parent="StarContainer/OuterStar"]
+unique_name_in_owner = true
 z_index = -1
 frames = SubResource( 77 )
 playing = true
 
 [node name="OuterTopShadow" type="AnimatedSprite" parent="StarContainer/OuterStar"]
+unique_name_in_owner = true
 z_index = -2
 frames = SubResource( 102 )
 playing = true
 
 [node name="OuterBottom" type="AnimatedSprite" parent="StarContainer/OuterStar"]
+unique_name_in_owner = true
 z_index = 2
 frames = SubResource( 127 )
 playing = true
 
 [node name="OuterBottomShadow" type="AnimatedSprite" parent="StarContainer/OuterStar"]
+unique_name_in_owner = true
 z_index = 1
 frames = SubResource( 152 )
 playing = true

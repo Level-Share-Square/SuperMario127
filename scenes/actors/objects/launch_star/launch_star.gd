@@ -165,6 +165,11 @@ func physics_process_idle(delta:float):
 	for body in player_detector.get_overlapping_bodies():
 		if body.name.begins_with("Character"):
 			mario = body
+			# the launch star should always surround the player when usable
+			if is_enabled_and_on_ground():
+				$"%InnerBottom".z_index = max(0, mario.get_parent().z_index + 1)
+				$"%OuterBottom".z_index = max(0, mario.get_parent().z_index + 2)
+				$"%OuterBottomShadow".z_index = max(0, mario.get_parent().z_index + 2)
 			if body.inputs[4][0] and body.state and body.state.name == "LaunchStarState":
 				mario.state._stop(delta)
 				set_state(3)
