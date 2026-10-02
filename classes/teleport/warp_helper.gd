@@ -36,11 +36,13 @@ func location_warp(character: Character, target_tag: String, max_pan_distance: i
 	cutscene.do_time_scaling = false
 	cutscene.do_pause = false
 	cutscene.do_reverse = false
-	cutscene.lock_movement = false
+	cutscene.lock_character_movement = false
 	cutscene.from_character = true
 	cutscene.set_up(teleporter, end_point, teleporter.global_position)
 	
 	if teleporter is AreaTransition:
+		if teleporter.teleport_mode == Teleporter.TeleportMode.Location:
+			cutscene.lock_camera_movement = true
 		cutscene.exclude_stoppers.append(teleporter.camera_stopper)
 	if target_teleporter is AreaTransition:
 		cutscene.exclude_stoppers.append(target_teleporter.camera_stopper)

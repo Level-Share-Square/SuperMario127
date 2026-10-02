@@ -11,7 +11,8 @@ export(float) var max_pan_distance = 800 #how far it will pan before switching t
 export(bool) var do_time_scaling = true # increases the pan time dynamically based on distance
 export(bool) var do_pause = true # pauses the game after the cutscene 
 export(bool) var do_reverse = true # will do the cutscene again in reverse once its done 
-export(bool) var lock_movement = true # will stop the player from moving 
+export(bool) var lock_character_movement = true # will stop the player from moving
+export(bool) var lock_camera_movement = false # will stop the camera from moving
 export(bool) var from_character = false # should make the circle thing close in on the players position 
 export(Array) var exclude_stoppers = [] # will ignore the passed camera stoppers during the cutscene 
 export(NodePath) var owner_path # the nod etha towns the cutscene (for shine animation player stuff) 
