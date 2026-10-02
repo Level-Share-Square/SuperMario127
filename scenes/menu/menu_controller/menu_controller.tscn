@@ -97,6 +97,7 @@ func toggle_secret(key: String, secret_enabled):
 	if screens.current_screen.music_id != -1: 
 		if screens.current_screen.music_id != 67 and screens.current_screen.music_id != 31: 
 			return
+	if screens.current_screen != main_menu: return
 	
 	main_menu.music_id = 67 if secret_enabled else 31
 	Singleton.Music.change_song(Singleton.Music.last_song, main_menu.music_id)

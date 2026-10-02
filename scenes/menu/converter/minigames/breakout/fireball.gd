@@ -76,6 +76,7 @@ func paddle_hit(paddle: Area2D):
 		
 		if velocity.y < 0:
 			velocity.y = -velocity.y
+		
 		var bounce_normal: Vector2 = Vector2.UP
 		bounce_normal.x = clamp((global_position.x - paddle.global_position.x) / 100, -0.75, 0.75)
 		bounce_normal = bounce_normal.normalized()
@@ -83,6 +84,7 @@ func paddle_hit(paddle: Area2D):
 		var relative_velocity: Vector2 = velocity - altered_char_vel
 		var bounced_velocity: Vector2 = relative_velocity.bounce(bounce_normal)
 		velocity = bounced_velocity + altered_char_vel
+		velocity.y = min(velocity.y, -20)
 		
 		hit.play()
 		

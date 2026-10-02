@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://scenes/menu/converter/minigame_funcs.gd" type="Script" id=1]
 [ext_resource path="res://scenes/menu/screen.gd" type="Script" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://assets/fonts/delfino_medium.tres" type="DynamicFont" id=6]
 [ext_resource path="res://assets/fonts/delfino_small.tres" type="DynamicFont" id=7]
 [ext_resource path="res://scenes/menu/levels_list/old_levels.gd" type="Script" id=8]
+[ext_resource path="res://scenes/menu/converter/progress_label.gd" type="Script" id=9]
 
 [sub_resource type="Animation" id=47]
 length = 0.001
@@ -259,6 +260,7 @@ theme = ExtResource( 3 )
 custom_fonts/font = ExtResource( 7 )
 text = "0%"
 align = 1
+script = ExtResource( 9 )
 
 [connection signal="screen_change" from="." to="MinigameFuncs" method="stop_playing"]
 [connection signal="screen_opened" from="." to="MinigameFuncs" method="start_playing"]

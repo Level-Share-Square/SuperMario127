@@ -130,7 +130,7 @@ func start_file_timer(file_path: String):
 
 func finish_file(file_path: String):
 	progress_bar.value += 1
-	progress_label.text = str(stepify(progress_bar.value / progress_bar.max_value, 0.01) * 100).pad_decimals(2) + "%"
+	progress_label.auto_update = true
 	files_to_convert.erase(file_path)
 
 func on_conversion_finished():
@@ -139,6 +139,7 @@ func on_conversion_finished():
 	prints("Conversion complete. Files that failed:", failed_files)
 	thread_timer_on = false
 	
+	progress_label.auto_update = false
 	progress_label.text = "Done!"
 	status_label.text = status_done
 	if not OS.has_feature("JavaScript"):
