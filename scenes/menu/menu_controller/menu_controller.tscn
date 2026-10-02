@@ -78,6 +78,10 @@ script/source = "extends Node
 
 export var main_menu_path: NodePath
 onready var main_menu = get_node(main_menu_path)
+
+export var levels_list_path: NodePath
+onready var levels_list = get_node(levels_list_path)
+
 onready var screens: Control = $\"%Screens\"
 
 func _ready():
@@ -97,7 +101,7 @@ func toggle_secret(key: String, secret_enabled):
 	if screens.current_screen.music_id != -1: 
 		if screens.current_screen.music_id != 67 and screens.current_screen.music_id != 31: 
 			return
-	if screens.current_screen != main_menu: return
+	if screens.current_screen != main_menu and screens.current_screen != levels_list: return
 	
 	main_menu.music_id = 67 if secret_enabled else 31
 	Singleton.Music.change_song(Singleton.Music.last_song, main_menu.music_id)
@@ -156,6 +160,7 @@ required_scancodes = [ 67, 72, 69, 65, 84 ]
 [node name="Secret2" type="Node" parent="UI/Special"]
 script = SubResource( 12 )
 main_menu_path = NodePath("../../Screens/MainMenu")
+levels_list_path = NodePath("../../Screens/LevelsList")
 
 [node name="SecretCTRL2" type="Node" parent="UI/Special"]
 script = SubResource( 13 )
