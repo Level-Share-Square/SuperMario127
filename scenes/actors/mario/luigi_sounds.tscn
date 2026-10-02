@@ -279,12 +279,12 @@ script = ExtResource( 47 )
 
 [node name="Lava1" type="AudioStreamPlayer" parent="VoiceEffects/LavaHurtSounds"]
 stream = ExtResource( 45 )
-volume_db = -9.5
+volume_db = -1.0
 bus = "Voices"
 
 [node name="Lava2" type="AudioStreamPlayer" parent="VoiceEffects/LavaHurtSounds"]
 stream = ExtResource( 43 )
-volume_db = -3.5
+volume_db = 1.0
 bus = "Voices"
 
 [node name="ShineSounds" type="Node" parent="VoiceEffects"]

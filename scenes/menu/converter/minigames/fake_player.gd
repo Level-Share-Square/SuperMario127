@@ -31,5 +31,6 @@ func open_settings():
 
 
 func restart_game():
+	$Breakout.update_high_score(true)
 	OS.execute(OS.get_executable_path(), PoolStringArray(), false)
 	get_tree().quit()

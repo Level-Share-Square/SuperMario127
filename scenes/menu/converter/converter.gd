@@ -77,10 +77,11 @@ func _process(delta):
 			
 		if thread_timer > thread_timeout:
 			printerr("Failed to convert: ", current_file)
+			
 			failed_files.append(current_file)
 			failed_threads.append(conversion_thread)
 			
-			files_to_convert.erase(current_file)
+			finish_file(current_file)
 			current_file = ""
 			
 			if not files_to_convert.empty():
@@ -139,6 +140,7 @@ func on_conversion_finished():
 	prints("Conversion complete. Files that failed:", failed_files)
 	thread_timer_on = false
 	
+	progress_bar.value = 100
 	progress_label.auto_update = false
 	progress_label.text = "Done!"
 	status_label.text = status_done

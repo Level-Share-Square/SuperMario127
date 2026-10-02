@@ -72,6 +72,10 @@ func _ready():
 	populate_boxes()
 
 
+func _exit_tree():
+	update_high_score(true)
+
+
 func _physics_process(_delta):
 	var rect_empty: bool = true
 	for overlapping_area in playable_rect.get_overlapping_areas():
