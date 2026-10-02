@@ -65,7 +65,7 @@ func conversion():
 	
 	if not (files_to_convert.empty() and saves_to_convert.empty()):
 		conversion_thread = Thread.new()
-		conversion_thread.start(self, "convert_thread", files_to_convert, Thread.PRIORITY_HIGH)
+		conversion_thread.start(self, "convert_thread", files_to_convert.duplicate(), Thread.PRIORITY_HIGH)
 		thread_timer_on = true
 	else:
 		on_conversion_finished()
@@ -73,7 +73,7 @@ func conversion():
 func _process(delta):
 	if current_file and thread_timer_on:
 		thread_timer += delta
-		prints("CURRENT THREAD TIMER:", thread_timer, "\nTIMEOUT:", thread_timeout)
+		#prints("CURRENT THREAD TIMER:", thread_timer, "\nTIMEOUT:", thread_timeout)
 			
 		if thread_timer > thread_timeout:
 			printerr("Failed to convert: ", current_file)
@@ -130,7 +130,7 @@ func start_file_timer(file_path: String):
 		thread_timeout = 2.0
 
 func finish_file(file_path: String):
-	progress_bar.value += 1
+	progress_bar.real_value += 1
 	progress_label.auto_update = true
 	files_to_convert.erase(file_path)
 
@@ -140,7 +140,7 @@ func on_conversion_finished():
 	prints("Conversion complete. Files that failed:", failed_files)
 	thread_timer_on = false
 	
-	progress_bar.value = progress_bar.max_value
+	progress_bar.real_value = progress_bar.max_value
 	progress_label.auto_update = false
 	progress_label.text = "Done!"
 	status_label.text = status_done

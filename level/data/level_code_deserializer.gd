@@ -239,6 +239,7 @@ static func deserialize_mission_datas_code(code: String) -> Array:
 		mission_data.shine_force_leave = set_or_use_default_value(vars, 6, mission_data.shine_force_leave)
 		mission_data.spawn_area_id = set_or_use_default_value(vars, 7, mission_data.spawn_area_id)
 		mission_data.spawn_teleporter_tag = set_or_use_default_value(vars, 8, mission_data.spawn_teleporter_tag)
+		mission_data.legacy_id = set_or_use_default_value(vars, 9, mission_data.legacy_id)
 		
 		mission_datas.append(mission_data)
 	

@@ -415,23 +415,22 @@ static func get_collectible_data_from_old_data(level_data) -> CollectibleData:
 		area = area as AreaDataOld
 		for object in area.objects:
 			object = object as ObjectDataOld
-			var properties: Array = object.properties.duplicate(true)
-			
-			if properties.size() < 7:
-				properties.resize(14)
-				properties[6] = "Unnamed Shine"
-				properties[7] = ""
-				properties[8] = false
-				properties[12] = Color.yellow
-				
-			
-			if properties.size() < 15:
-				properties.resize(16)
-				properties[14] = true
-				properties[15] = 0
-			
 			
 			if object.type_id == SHINE_ID:
+				var properties: Array = object.properties.duplicate(true)
+				
+				if properties.size() < 7:
+					properties.resize(14)
+					properties[6] = "Unnamed Shine"
+					properties[7] = ""
+					properties[8] = false
+					properties[12] = Color.yellow
+					
+				if properties.size() < 15:
+					properties.resize(16)
+					properties[14] = true
+					properties[15] = 0
+				
 				var mission_data: MissionData = MissionData.new(
 					uuid_util.v4(),
 					properties[8], # Show in menu
@@ -441,7 +440,8 @@ static func get_collectible_data_from_old_data(level_data) -> CollectibleData:
 					properties[12], # Color
 					properties[14], # Kick out
 					0,
-					"spawn"
+					"_entrance",
+					properties[13] # Internal ID
 				)
 				
 				object.properties = properties.slice(0, 5)

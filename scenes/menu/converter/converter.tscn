@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://scenes/menu/converter/minigame_funcs.gd" type="Script" id=1]
 [ext_resource path="res://scenes/menu/screen.gd" type="Script" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://assets/fonts/delfino_small.tres" type="DynamicFont" id=7]
 [ext_resource path="res://scenes/menu/levels_list/old_levels.gd" type="Script" id=8]
 [ext_resource path="res://scenes/menu/converter/progress_label.gd" type="Script" id=9]
+[ext_resource path="res://scenes/menu/converter/progress_bar.gd" type="Script" id=10]
 
 [sub_resource type="Animation" id=47]
 length = 0.001
@@ -251,6 +252,7 @@ theme = ExtResource( 3 )
 custom_fonts/font = SubResource( 57 )
 max_value = 9000.0
 step = 0.0
+script = ExtResource( 10 )
 
 [node name="ProgressLabel" type="Label" parent="Node2D/HBoxContainer/VBoxContainer/MarginContainer"]
 unique_name_in_owner = true

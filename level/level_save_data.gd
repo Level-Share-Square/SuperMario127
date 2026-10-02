@@ -167,8 +167,10 @@ func convert_save_to_0_1_0(save_dictionary: Dictionary) -> Dictionary:
 	for shine in save_dictionary["collected_shines"]:
 		var shine_id: int = int(shine)
 		if save_dictionary.get("collected_shines", {}).get(shine, false):
-			var mission_uuid: String = collectible_data.mission_data[shine_id].mission_uuid
-			mission_array.append(mission_uuid)
+			for mission_data in collectible_data.mission_data:
+				if mission_data.legacy_id == shine_id:
+					var mission_uuid: String = mission_data.mission_uuid
+					mission_array.append(mission_uuid)
 
 	new_save_dict.get_or_add("completed_missions", mission_array)
 
@@ -186,8 +188,10 @@ func convert_save_to_0_1_0(save_dictionary: Dictionary) -> Dictionary:
 	var time_score_dict: Dictionary = {}
 	for shine in save_dictionary["time_scores"]:
 		var shine_id: int = int(shine)
-		var mission_uuid: String = collectible_data.mission_data[shine_id].mission_uuid
-		time_score_dict.get_or_add(mission_uuid, save_dictionary.get("time_scores", {}).get(shine, -1))
+		for mission_data in collectible_data.mission_data:
+			if mission_data.legacy_id == shine_id:
+				var mission_uuid: String = mission_data.mission_uuid
+				time_score_dict.get_or_add(mission_uuid, save_dictionary.get("time_scores", {}).get(shine, -1))
 
 	new_save_dict.get_or_add("time_scores", time_score_dict)
 	new_save_dict.get_or_add("activated_fludds", save_dictionary.get("activated_fludds", [false, false, false])) 

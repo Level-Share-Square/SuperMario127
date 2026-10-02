@@ -84,6 +84,7 @@ static func serialize_missions(mission_data: Array) -> String:
 				mission.shine_force_leave,
 				mission.spawn_area_id,
 				mission.spawn_teleporter_tag,
+				mission.legacy_id,
 			]
 		)
 		

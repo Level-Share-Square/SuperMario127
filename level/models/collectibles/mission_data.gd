@@ -14,6 +14,10 @@ var shine_force_leave: bool
 var spawn_area_id: int
 var spawn_teleporter_tag: String
 
+# the old internal id the game used to identify shine sprites within levels
+# used only for old converted levels
+var legacy_id: int = -1
+
 
 func _init(
 		s_mission_uuid: String = uuid_util.v4(),
@@ -24,7 +28,8 @@ func _init(
 		s_shine_color: Color = Color.yellow,
 		s_shine_force_leave: bool = true,
 		s_spawn_area_id: int = 0,
-		s_spawn_teleporter_tag: String = "spawn"
+		s_spawn_teleporter_tag: String = "_entrance",
+		s_legacy_id: int = -1
 	):
 	mission_uuid = s_mission_uuid
 	mission_show_in_menu = s_mission_show_in_menu
@@ -37,6 +42,8 @@ func _init(
 	
 	spawn_area_id = s_spawn_area_id
 	spawn_teleporter_tag = s_spawn_teleporter_tag
+	
+	legacy_id = s_legacy_id
 
 static func sort_by_order(a: MissionData, b: MissionData):
 	return a.shine_sort_order < b.shine_sort_order
