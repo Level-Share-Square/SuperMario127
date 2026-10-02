@@ -79,6 +79,8 @@ func do_transition_animation(transition_texture : StreamTexture = cutout_circle,
 	
 	# if the start scale is greater, then the screen is transitioning to black
 	var to_black = texture_scale_start > texture_scale_end
+	if tween.is_active():
+		tween.remove_all()
 	tween.interpolate_property(canvas_mask, "texture_scale", texture_scale_start, texture_scale_end, transition_time, Tween.TRANS_CIRC, Tween.EASE_OUT if to_black else Tween.EASE_IN)
 	tween.start()
 	
@@ -101,3 +103,6 @@ func do_transition_animation(transition_texture : StreamTexture = cutout_circle,
 
 func play_transition_audio():
 	transition_audio.play()
+
+func is_transition_playing() -> bool:
+	return tween.is_active()

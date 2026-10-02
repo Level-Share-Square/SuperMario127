@@ -105,7 +105,6 @@ func _physics_process(delta):
 					
 					horizontal_state = null
 					vertical_state = null
-					
 					skip_to_player = false
 					
 				## runs the same code for handling horizontal and vertical states, in that order
@@ -341,7 +340,7 @@ func play_cutscene(cutscene : CameraCutscene, reverse: bool = false):
 
 	did_pause = false
 	locked_movement = false
-	if cutscene.lock_movement:
+	if cutscene.lock_character_movement:
 		locked_movement = true
 		character_node.toggle_movement(false)
 	if cutscene.do_pause:
@@ -389,10 +388,12 @@ func play_cutscene(cutscene : CameraCutscene, reverse: bool = false):
 			cutscene.time
 			)
 		yield(SceneTransitions, "transition_finished")
+
 		y_baseline = new_position.y
 		cur_baseline = new_position.y
 		last_position = new_position
 		global_position = new_position
+		skip_to_player = true #Helps with camera pan jank between transitions TODO: Properly fix this
 		if cutscene.from_character:
 			SceneTransitions.canvas_mask.global_position = get_character_screen_position()
 		
