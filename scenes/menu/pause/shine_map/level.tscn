@@ -1,0 +1,54 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/menu/theme.tres" type="Theme" id=1]
+[ext_resource path="res://scenes/menu/pause/shine_map/level.gd" type="Script" id=3]
+
+[node name="Level" type="VBoxContainer"]
+margin_right = 436.0
+margin_bottom = 97.0
+rect_min_size = Vector2( 436, 0 )
+theme = ExtResource( 1 )
+custom_constants/separation = 0
+script = ExtResource( 3 )
+
+[node name="Title" type="Label" parent="."]
+unique_name_in_owner = true
+margin_right = 436.0
+margin_bottom = 25.0
+text = "Tutorial Hills"
+
+[node name="HSeparator" type="HSeparator" parent="."]
+margin_top = 25.0
+margin_right = 436.0
+margin_bottom = 29.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_top = 29.0
+margin_right = 436.0
+margin_bottom = 32.0
+
+[node name="Shines" type="GridContainer" parent="HBoxContainer"]
+unique_name_in_owner = true
+margin_right = 212.0
+margin_bottom = 3.0
+rect_min_size = Vector2( 212, 0 )
+columns = 6
+
+[node name="VSeparator" type="VSeparator" parent="HBoxContainer"]
+margin_left = 216.0
+margin_right = 220.0
+margin_bottom = 3.0
+
+[node name="StarCoins" type="GridContainer" parent="HBoxContainer"]
+unique_name_in_owner = true
+margin_left = 224.0
+margin_right = 436.0
+margin_bottom = 3.0
+rect_min_size = Vector2( 212, 0 )
+columns = 6
+
+[node name="Padding" type="Control" parent="."]
+margin_top = 32.0
+margin_right = 436.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 0, 16 )

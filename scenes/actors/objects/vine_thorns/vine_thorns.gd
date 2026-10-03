@@ -20,13 +20,10 @@ export var override_part_width := 0 # If this value is not equal to 0, this'll r
 export var parts := 1
 var last_parts := 1
 
-func _set_properties():
-	savable_properties = ["parts"]
-	editable_properties = ["parts"]
-	
-func _set_property_values():
-	set_property("parts", parts, 1)
-	
+
+func _register_properties():
+	register_property(4, "parts", parts, 1)
+
 func _ready():
 	preview_position = custom_preview_position
 	if is_preview:
@@ -34,17 +31,10 @@ func _ready():
 	
 	if palette != 0:
 		$Sprite.texture = palette_textures[palette - 1]
+	update_parts()
 		
-func _input(event):
-	if event is InputEventMouseButton and event.is_pressed() and hovered:
-		if event.button_index == 5: # Mouse wheel down
-			parts -= 1
-			if parts < 1:
-				parts = 1
-			set_property("parts", parts, true)
-		elif event.button_index == 4: # Mouse wheel up
-			parts += 1
-			set_property("parts", parts, true)
+func _unhandled_input(event: InputEvent) -> void:
+	parts_input_handler(event,self)
 
 func _process(_delta):
 	if parts != last_parts:
@@ -60,12 +50,13 @@ func update_parts():
 	
 	#calculate the total platform scale
 	scale_y = scale.y * (left_width + right_width + part_width * parts) / (left_width + right_width + part_width)
+	editor_rect = Rect2(sprite.rect_position, sprite.rect_size)
 
 func is_vanish(body):
 	return body.powerup != null and (body.powerup.id == "Vanish" or body.powerup.id == "Metal" or body.powerup.id == "Rainbow")
 	
 func _physics_process(delta):
-	if !enabled:
+	if !is_enabled_and_on_ground():
 		return
 	for body in area.get_overlapping_bodies():
 		if !(body.name.begins_with("Character") and !body.dead and body.controllable):
@@ -75,7 +66,4 @@ func _physics_process(delta):
 			body.knockback(global_position)
 			if body.global_position.y > (global_position.y - 4):
 				body.velocity.y = 55
-			body.damage()
-			body.sound_player.play_hit_sound()
-	
-	
+			body.damage(1, "sharp")

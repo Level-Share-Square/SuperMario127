@@ -22,7 +22,7 @@ func _ready():
 func body_entered(body):
 	if not body is Character: return
 	body_overlapping = true
-	set_text(text_replace_util.parse_text(parent.bubble_text, body))
+	set_text(text_replace_util.parse_text(parent.bubble_text, body, CurrentLevelData.save_data, CurrentLevelData.vars, CurrentLevelData.area_id))
 	if visible:
 		appear()
 

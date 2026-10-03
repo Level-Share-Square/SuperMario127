@@ -28,6 +28,18 @@ func screen_opened(_category_name: String = ""):
 	device.text = "Any"
 	if current_device != -1:
 		device.text = str(current_device)
+	
+	## okay this looks weird but basically this just starts u off as 
+	## keyboard or controller depending on what u used last
+	var is_controller: bool = LastInputDevice.last_input_type == LastInputDevice.InputType.Controller
+	if is_controller:
+		for connection in controller.get_signal_connection_list("pressed"):
+			if not connection.target is ButtonSound:
+				connection.target.callv(connection.method, connection.binds)
+	else:
+		for connection in keyboard.get_signal_connection_list("pressed"):
+			if not connection.target is ButtonSound:
+				connection.target.callv(connection.method, connection.binds)
 
 
 func switch_device():

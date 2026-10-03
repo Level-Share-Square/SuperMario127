@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/wing_mario_air.ogg-dbf18311761b2acb0ff7f5226557abe4.oggstr"
+
+[deps]
+
+source_file="res://assets/music/wing_mario_air.ogg"
+dest_files=[ "res://.import/wing_mario_air.ogg-dbf18311761b2acb0ff7f5226557abe4.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=9.796

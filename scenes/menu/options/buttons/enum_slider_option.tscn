@@ -42,4 +42,3 @@ max_value = -1.0
 rounded = true
 
 [connection signal="renamed" from="." to="." method="renamed"]
-[connection signal="value_changed" from="Panel/HSlider" to="." method="slider_changed"]

@@ -18,6 +18,8 @@ func area_entered(area: Area2D) -> void:
 	if connected: return
 	connected = true
 	
+	if not area.get_parent().get_parent() is GameObject: return
+	
 	var dialogue_trigger: GameObject = area.get_parent().get_parent()
 	dialogue_trigger.connect("change_emote", self, "start_talking")
 	dialogue_trigger.connect("start_talking", self, "start_talking", [1, 0])

@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scenes/shared/shared.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/tilemap_loader.gd" type="Script" id=2]
+[ext_resource path="res://scenes/shared/tilemap_layer.gd" type="Script" id=3]
 [ext_resource path="res://assets/tiles/tiles.tres" type="TileSet" id=4]
 [ext_resource path="res://scenes/shared/objects.gd" type="Script" id=5]
 
@@ -12,6 +13,7 @@ tilemaps = NodePath("Tilemaps")
 objects = NodePath("Objects")
 
 [node name="Tilemaps" type="Node2D" parent="."]
+z_index = 1
 script = ExtResource( 2 )
 very_back_tilemap = NodePath("VeryBack")
 back_tilemap = NodePath("Back")
@@ -20,36 +22,52 @@ front_tilemap = NodePath("Front")
 
 [node name="VeryBack" type="TileMap" parent="Tilemaps"]
 modulate = Color( 0.545098, 0.545098, 0.545098, 1 )
-z_index = -10
+z_index = -11
+z_as_relative = false
 tile_set = ExtResource( 4 )
 cell_size = Vector2( 32, 32 )
 collision_layer = 262144
 collision_mask = 262144
 format = 1
+script = ExtResource( 3 )
+background = true
 
 [node name="Back" type="TileMap" parent="Tilemaps"]
 modulate = Color( 0.545098, 0.545098, 0.545098, 1 )
 z_index = -10
+z_as_relative = false
 tile_set = ExtResource( 4 )
 cell_size = Vector2( 32, 32 )
 collision_layer = 262144
 collision_mask = 262144
 format = 1
+script = ExtResource( 3 )
+layer = 1
+background = true
 
 [node name="Middle" type="TileMap" parent="Tilemaps"]
+z_index = -1
+z_as_relative = false
 tile_set = ExtResource( 4 )
 cell_size = Vector2( 32, 32 )
 collision_mask = 0
 format = 1
+script = ExtResource( 3 )
+layer = 2
 
 [node name="Front" type="TileMap" parent="Tilemaps"]
-light_mask = 524288
+light_mask = 524289
 z_index = 10
+z_as_relative = false
 tile_set = ExtResource( 4 )
 cell_size = Vector2( 32, 32 )
+cell_quadrant_size = 64
 collision_layer = 262144
 collision_mask = 262144
 format = 1
+script = ExtResource( 3 )
+layer = 3
 
 [node name="Objects" type="Node" parent="."]
 script = ExtResource( 5 )
+shared_path = NodePath("..")

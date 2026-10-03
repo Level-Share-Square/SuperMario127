@@ -16,8 +16,15 @@ func _init():
 	
 	# we can initialize this here for now i suppose
 	if not config.has_section_key("Meta", "game_version"):
-		LocalSettings.change_setting("Meta", "game_version", Singleton.PlayerSettings.game_version)
-		handle_version_upgrade()
+		var dir := Directory.new()
+		if dir.dir_exists("user://levels"):
+			Singleton.PlayerSettings.game_version_mismatch = true
+			LocalSettings.change_setting("Meta", "game_version", "0.7.0")
+		else:
+			LocalSettings.change_setting("Meta", "game_version", Singleton.PlayerSettings.game_version)
+	
+	cursor_setter_util.init_mouse_cursor()
+
 
 func load_category(category: String, config: ConfigFile):
 	for key in config.get_section_keys(category):
@@ -32,7 +39,7 @@ func change_setting(key: String, new_value):
 	match key:
 		# General
 		"window_scale":
-			if OS.has_feature("JavaScript"): return
+			if OS.has_feature("JavaScript") or OS.has_feature("mobile"): return
 			
 			ScreenSizeUtil.set_screen_size(new_value)
 			if not OS.window_fullscreen:
@@ -42,19 +49,14 @@ func change_setting(key: String, new_value):
 			OS.vsync_enabled = new_value
 		"fps_cap":
 			Engine.target_fps = 10 * (new_value + 3)
-		"rich_presence":
-			Singleton2.rp = new_value
-		"level_ghost":
-			Singleton2.ghost_enabled = new_value
-		"dark_mode":
-			Singleton2.dark_mode = new_value
-			Singleton2.toggle_dark_mode()
 		"multiplayer":
-			Singleton.PlayerSettings.number_of_players = 2 if new_value else 1
+			Singleton.PlayerSettings.number_of_players = 1
 		"first_player":
 			Singleton.PlayerSettings.player1_character = new_value
 		"second_player":
 			Singleton.PlayerSettings.player2_character = new_value
+		"rumble":
+			Singleton.PlayerSettings.rumble = new_value
 		
 		"master_volume":
 			var bus_index: int = AudioServer.get_bus_index("Master")
@@ -76,29 +78,34 @@ func change_setting(key: String, new_value):
 		# Meta
 		"game_version":
 			if new_value != Singleton.PlayerSettings.game_version:
-				handle_version_upgrade()
+				handle_version_upgrade(new_value)
 
 
 ## related to various hotkeys
 var last_master_volume: float = 75
-var last_non_muted_bgm: float = 100
+var last_non_muted_bgm: float = 70
 var last_non_full_scale: int = 0
 
 func _unhandled_input(event):
 	if event.is_action_pressed("fullscreen"):
 		LocalSettings.change_setting("General", "window_scale", 3 if not OS.window_fullscreen else last_non_full_scale)
-
-	if event.is_action_pressed("volume_up"):
-		LocalSettings.change_setting("Audio", "master_volume", last_master_volume + 5)
-	if event.is_action_pressed("volume_down"):
-		LocalSettings.change_setting("Audio", "master_volume", last_master_volume - 5)
 	
+	var current_scene = get_tree().get_current_scene()
+	if not "mode" in current_scene or current_scene.mode != 1:
+		if event.is_action_pressed("volume_up"):
+			LocalSettings.change_setting("Audio", "master_volume", last_master_volume + 5)
+		if event.is_action_pressed("volume_down"):
+			LocalSettings.change_setting("Audio", "master_volume", last_master_volume - 5)
+		
 	if event.is_action_pressed("mute"):
-		var current_vol = LocalSettings.load_setting("Audio", "bgm_volume", 100)
+		var current_vol = LocalSettings.load_setting("Audio", "bgm_volume", 70)
 		LocalSettings.change_setting("Audio", "bgm_volume", 0 if current_vol > 0 else last_non_muted_bgm)
 
 
-
 ## when you come from a version that's lower or higher than your current one
-func handle_version_upgrade():
-	print("Version mismatch! This currently does not do anything...")
+func handle_version_upgrade(old_version: String):
+	print("Version mismatch detected! Old version: %s, New version: %s" % [old_version, Singleton.PlayerSettings.game_version])
+	Singleton.PlayerSettings.game_version_mismatch = true
+	var dir := Directory.new()
+	if dir.file_exists("user://level_list/converted"):
+		LocalSettings.change_setting("Meta", "game_version", Singleton.PlayerSettings.game_version)

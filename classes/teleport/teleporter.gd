@@ -1,0 +1,138 @@
+class_name Teleporter
+extends GameObject
+
+
+signal entrance_completed
+signal exit_completed
+
+enum TeleportMode {Location, Area, Level}
+
+onready var warp_helper = $"%WarpHelper"
+var teleporter: Teleporter
+var timer_manager
+var hide_teleport_properties: bool
+
+var target_area := -1
+var tag: String = "default_teleporter"
+var teleport_mode: int = TeleportMode.Location
+var max_pan_distance: int = 800
+var level_path: String = ""
+
+
+### PROPERTIES
+#func _set_properties() -> void:
+#	savable_properties = ["target_area", "tag", "teleport_mode", "max_pan_distance", "level_path"]
+#	editable_properties = ["target_area", "tag", "teleport_mode", "max_pan_distance", "level_path"]
+
+
+func _register_properties() -> void:
+	register_property(4, "target_area", target_area, not hide_teleport_properties)
+	set_property_override("target_area", PropertyTab.OverrideTypes.DROPDOWN, [CurrentLevelData, "get_area_args"])
+	register_property(5, "tag", tag)
+	set_property_override("tag", PropertyTab.OverrideTypes.DROPDOWN, [CurrentLevelData.level_tags, "get_teleport_args", [CurrentLevelData.level_tags, "teleport_tags"]])
+	register_property(6, "teleport_mode", teleport_mode, not hide_teleport_properties)
+	set_property_override("teleport_mode", PropertyTab.OverrideTypes.ENUM, ["Local", "Area", "Level"] if CurrentLevelData.is_campaign else ["Local", "Area"])
+	register_property(7, "max_pan_distance", max_pan_distance, not hide_teleport_properties)
+	register_property(8, "level_path", level_path, CurrentLevelData.is_campaign and not hide_teleport_properties)
+
+
+func _register_property_info() -> void:
+	set_property_info("target_area", PropertyInfo.new("The name of the area to teleport to.", 1, -INF, INF, ["", ""], ["", ""]))
+	set_property_info("tag", PropertyInfo.new("The tag this object will teleport to and from.", 1, -INF, INF, ["", ""], ["", ""]))
+	var teleport_mode_hint: String = "Whether this object should teleport locally, to a different area, or to a diferent level."
+	if not CurrentLevelData.is_campaign:
+		teleport_mode_hint = "Whether this object should teleport locally, or to a different area."
+	set_property_info("teleport_mode", PropertyInfo.new(teleport_mode_hint, 1, -INF, INF, ["", ""], ["", ""]))
+	set_property_info("max_pan_distance", PropertyInfo.new("The max length the camera will pan when warping.\nIf the teleport is further than this, the camera will fade out instead.", 1, 0, INF, ["", ""], [" Tile(s)", ""]))
+	set_property_info("level_path", PropertyInfo.new("The relative path of the level to teleport to.", 1, -INF, INF, ["", ""], ["", ""]))
+
+
+### ANIMATION
+func start_entrance_animation(character: Character) -> void:
+	character.set_dive_collision(false)
+	character.toggle_movement(false)
+	character.velocity = Vector2.ZERO
+	character.sprite.rotation = 0
+	
+	connect("entrance_completed", self, "begin_warp", [character], CONNECT_ONESHOT)
+
+
+func start_exit_animation(character: Character) -> void:
+	set_transition_character_data(character)
+	character.layer = level_layer_ref
+	character.update_layer_info()
+	connect("exit_completed", self, "finish_exit_animation", [character], CONNECT_ONESHOT)
+
+
+## mostly just restoring control to mario
+func finish_exit_animation(character: Character) -> void:
+	CurrentLevelData.vars.transition_data = {}
+	CurrentLevelData.vars.area_transition_helper = null
+	character.velocity = Vector2.ZERO
+
+	# This is is called twice (once in start_exit_animation and
+	# once here) because for some reason tint data is not
+	# updated yet on start_exit_animation sooo shrug
+	character.layer = level_layer_ref
+	character.update_layer_info()
+
+	if not character.dead:
+		var is_in_cutscene: bool = false
+		if not is_instance_valid(character.camera):
+			yield(get_tree(), "idle_frame")
+			is_in_cutscene = character.camera.in_cutscene
+		character.toggle_movement(not is_in_cutscene)
+	
+	yield(get_tree(), "idle_frame")
+	call_deferred("reset_sprite", character)
+
+
+func set_transition_character_data(character: Character):
+	var transition_character_data = CurrentLevelData.vars.transition_character_data
+
+	if transition_character_data.size() > 0:
+		character.health = transition_character_data[0]
+		character.health_shards = transition_character_data[1]
+		character.emit_signal("health_changed", character.health, character.health_shards)
+		
+		if transition_character_data[2] != null:
+			character.set_nozzle(transition_character_data[2])
+		character.fuel = transition_character_data[3]
+		if transition_character_data[4][0] != null:
+			var powerup_node: Powerup = character.get_powerup_node(transition_character_data[4][0])
+			character.set_powerup(powerup_node, transition_character_data[4][2], transition_character_data[4][1])
+		get_tree().get_current_scene().set_switch_timer(transition_character_data[5])
+		
+	CurrentLevelData.vars.transition_character_data.clear()
+
+### MISC
+func _ready():
+	._ready()
+
+	if "\n" in tag:
+		tag = tag.replace("\n", "")
+	CurrentLevelData.vars.teleporters.append([tag.to_lower(), self])
+
+func begin_warp(character: Character) -> void:
+	timer_manager = get_node("/root").get_node("Player").get_timer_manager()
+	warp_helper.timer_manager = timer_manager
+	
+	match teleport_mode:
+		TeleportMode.Location:
+			warp_helper.location_warp(character, tag, max_pan_distance)
+		
+		TeleportMode.Area:
+			warp_helper.area_warp(character, tag, target_area)
+		
+		TeleportMode.Level:
+			if not Singleton.ModeSwitcher.visible:
+				warp_helper.level_warp(character, level_path, tag, target_area)
+			else:
+				warp_helper.location_warp(character, "", max_pan_distance)
+
+func reset_sprite(character: Character): #This is here in case Mario came from a painting to a door
+	character.show()
+	character.z_index = -1
+	character.sprite.modulate = Color(1.0, 1.0, 1.0, 1.0)
+	character.sprite.scale = Vector2(1.0, 1.0)
+	character.sprite.position = Vector2.ZERO

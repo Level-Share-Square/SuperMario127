@@ -15,8 +15,8 @@ onready var login_screen = $"%Login"
 
 
 func login():
-	var email: String = email_input.text
-	var password: String = password_input.text
+	var email: String = email_input.text.strip_edges().strip_escapes()
+	var password: String = password_input.text.strip_edges().strip_escapes()
 	
 	http_login.login(email, password)
 	

@@ -1,11 +1,14 @@
-extends GameObject
+extends Node2D
 
 onready var area = $Area2D
 onready var metal_bounce_noise = $AudioStreamPlayer2D
+onready var sawblade = $"../../.."
 
 const METAL_KNOCKBACK = 400
 const METAL_KNOCKBACK_SPEED_LIMIT = 800
 const METAL_DOWNWARD_KNOCKBACK_LIMIT = 100
+
+var enabled: bool
 	
 func is_vanish(body):
 	return body.powerup != null and body.powerup.id == "Vanish"
@@ -14,6 +17,9 @@ func is_metal_or_rainbow(body):
 	return body.powerup != null and (body.powerup.id == "Metal" or body.powerup.id == "Rainbow")
 
 func kill(body):
+	
+	enabled = get_parent().get_parent().get_parent().enabled
+	
 	if !(enabled and body.name.begins_with("Character") and !body.dead and body.controllable):
 		return
 	
@@ -25,8 +31,14 @@ func kill(body):
 		added_speed.y = stepify(added_speed.y, 0.5)
 		added_speed *= METAL_KNOCKBACK
 		
+		LastInputDevice.rumble(0.2, 0.2, 0.2)
+		
 		body.velocity.x += added_speed.x
 		body.velocity.y = added_speed.y
+		
+		if body.velocity.y < 0 and not body.inputs[body.input_names.jump][0]:
+			body.velocity.y /= 1.5
+		
 		body.velocity.limit_length(METAL_KNOCKBACK_SPEED_LIMIT)
 		metal_bounce_noise.play()
 #		body.velocity = global_position.direction_to(body.global_position) * METAL_KNOCKBACK
@@ -38,9 +50,13 @@ func kill(body):
 		if body.global_position.y > (global_position.y - 4):
 			body.velocity.y = 55
 		if !body.invulnerable:
-			body.damage()
+			body.damage(1, "saw")
 		else:
+			body.sound_player.play_saw_damage_sound()
+			body.sound_player.play_damage_sound()
 			body.sound_player.play_hit_sound()
 
 func _ready():
+#	shared = sawblade.shared
 	var _connect = area.connect("body_entered", self, "kill")
+	add_to_group("sawblades")

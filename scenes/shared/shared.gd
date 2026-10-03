@@ -1,15 +1,35 @@
 extends LevelDataLoader
 
-export var tilemaps : NodePath
-export var objects : NodePath
+
+enum Layers {
+	VeryBack,
+	Back,
+	Middle,
+	Front,
+}
+
+enum TileLayers {
+	VeryBack,
+	Back,
+	Middle,
+	Front,
+}
+
+const layer_index_offset: int = -2
+const layer_spacing: int = 16
+
+export var tilemaps: NodePath
+export var objects: NodePath
 export var boo_block_texture = "res://assets/tiles/boo_block/boo_block.png"
 export var boo_block_texture_invis = "res://assets/tiles/boo_block/boo_block_invis.png"
+
 
 onready var loaded_boo_texture = load(boo_block_texture)
 onready var loaded_boo_texture_invis = load(boo_block_texture_invis)
 
 onready var tilemaps_node = get_node(tilemaps)
 onready var objects_node = get_node(objects)
+
 
 func _ready():
 	var tex = loaded_boo_texture
@@ -23,12 +43,11 @@ func _ready():
 func get_objects_node():
 	return objects_node
 
-func set_tile(x: int, y:int, layer: int, tileset_id: int, tile_id: int, palette_id : int = 0):
-	#print("set ",x," ",y)
-	tilemaps_node.set_tile(x, y, layer, tileset_id, tile_id, palette_id)
+func set_tile(x: int, y: int, layer: int, tileset_id: int, tile_id: int, palette_id : int = 0):
+	tilemaps_node.set_tile(x, y, convert_layer(layer), tileset_id, tile_id, palette_id)
 
 func get_tile(x: int, y:int, layer: int):
-	return tilemaps_node.get_tile_in_data(x, y, layer)
+	return tilemaps_node.get_tile_in_data(x, y, convert_layer(layer))
 
 func create_object(object, add_to_data):
 	return objects_node.create_object(object, add_to_data)
@@ -143,33 +162,36 @@ func get_objects_overlapping_position(point: Vector2, area_rect: Rect2, area: Ar
 		
 	return found_objects
 
-func destroy_objects_overlapping_position(point: Vector2, area_check : Rect2, remove_from_data):
-	var objectsToDelete = get_objects_overlapping_position(point, area_check)
-	
-	for object_node in objectsToDelete:
-		if remove_from_data:
-			level_area.objects.erase(object_node.level_object)
-		object_node.queue_free()
 
 func update_tilemaps():
 	tilemaps_node.update_tilemaps()
 
-func toggle_layer_transparency(current_layer, is_transparent):
-	var index = 3 # has to be done because for some reason the indices are wrong for the layers
+
+func toggle_layer_transparency(current_layer: int, is_transparent: bool):
+	var index = 0
 	for tilemap in tilemaps_node.get_children():
-		var tilemap_color = Color(1, 1, 1, 1)
-		if tilemap.name == "Back" || tilemap.name == "VeryBack":
-			tilemap_color = Color(0.54, 0.54, 0.54, 1)
-		if index == current_layer:
-			tilemap.modulate = tilemap_color
+		var corrected_index = wrapi(index - 1, 0, 4)
+		
+		if corrected_index == current_layer:
+			tilemap.hidden = false
 		else:
-			if is_transparent:
-				tilemap_color.a = 0.25
-			tilemap.modulate = tilemap_color
-		index = (index + 1) % 4
+			tilemap.hidden = is_transparent
+		
+		index += 1
 
 func move_object_to_back(object):
 	objects_node.move_object_to_back(object)
 
 func move_object_to_front(object):
 	objects_node.move_object_to_front(object)
+
+func convert_layer(layer):
+	match layer:
+		0:
+			return 3
+		1:
+			return 0
+		2:
+			return 1
+		3:
+			return 2

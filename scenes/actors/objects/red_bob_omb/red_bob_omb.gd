@@ -13,17 +13,19 @@ var eye_color := Color8(255, 255, 255)
 var rainbow: bool
 
 
-func _set_properties():
-	savable_properties = ["curve", "custom_path", "move_type", "walk_speed", "physics_enabled", "idle_expression", "idle_action", "speaking_expression", "speaking_action", "path_reference", "tag_link", "color", "rainbow", "eye_color"]
-	editable_properties = ["idle_expression", "idle_action", "speaking_expression", "speaking_action", "tag_link", "custom_path", "walk_speed", "move_type", "physics_enabled", "path_reference", "color", "eye_color", "rainbow"]
+#func _set_properties():
+#	savable_properties = ["curve", "custom_path", "move_type", "walk_speed", "physics_enabled", "idle_expression", "idle_action", "speaking_expression", "speaking_action", "path_reference", "tag_link", "color", "rainbow", "eye_color"]
+#	editable_properties = ["idle_expression", "idle_action", "speaking_expression", "speaking_action", "tag_link", "curve", "walk_speed", "move_type", "physics_enabled", "path_reference", "color", "eye_color", "rainbow"]
 
 
-func _set_property_values():
-	._set_property_values()
+func _register_properties():
+	add_required_shines = false
+	._register_properties()
 	
-	set_property("color", color, true)
-	set_property("rainbow", rainbow, true)
-	set_property("eye_color", eye_color, true)
+	register_property(15, "color", color, true)
+	register_property(16, "rainbow", rainbow, true)
+	register_property(17, "eye_color", eye_color, true)
+	register_property(18, "required_shines", required_shines, true)
 
 
 func _process(delta):

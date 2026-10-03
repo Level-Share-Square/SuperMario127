@@ -4,6 +4,7 @@
 [ext_resource path="res://scenes/actors/objects/sponge/sponge.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=3]
+resource_local_to_scene = true
 extents = Vector2( 12, 12 )
 
 [sub_resource type="RectangleShape2D" id=2]
@@ -11,6 +12,8 @@ extents = Vector2( 16, 16 )
 
 [node name="Sponge" type="Node2D"]
 script = ExtResource( 1 )
+editor_rect = Rect2( -16, -16, 32, 32 )
+internal_id = "sponge"
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )

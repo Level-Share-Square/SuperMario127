@@ -23,21 +23,22 @@ func should_convert_levels():
 func convert_old_levels(base_folder: String):
 	var file := File.new()
 	var err: int = file.open(OLD_LEVELS_SORT_PATH, File.READ)
+
 	if err != OK: 
 		printerr("Legacy level sorting json could not be loaded. Error code: " + str(err))
 		return
 	
 	var parse: JSONParseResult = JSON.parse(file.get_as_text())
 	file.close()
-	
+
 	if parse.error != OK:
 		printerr(parse.error_string)
 		return
-	
-	progress_bar.max_value = parse.result.size()
-	
+
 	var sort: Dictionary = sort_file_util.load_sort_file(base_folder)
+
 	var index: int = 0
+
 	for file_path in parse.result:
 		var level_dict = level_list_util.load_level_save_file(file_path)
 		var level_code = level_dict.level_code
@@ -54,7 +55,6 @@ func convert_old_levels(base_folder: String):
 		sort.get_or_add(sort_file_util.LEVELS, []).push_front(level_id)
 		
 		index += 1
-		progress_bar.value = index
 	sort_file_util.save_sort_file(base_folder, sort)
 
 	file.open(OLD_LEVELS_FLAG_PATH, File.WRITE)

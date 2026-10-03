@@ -26,29 +26,25 @@ onready var frozen = false
 
 onready var hitbox = $EditorCircle/EditorCircle
 
-func _set_properties():
-	savable_properties = ["parts", "speed", "radius", "platform_count",  "start_angle", "disappears", "inverted"]
-	editable_properties = ["parts", "speed", "radius", "platform_count",  "start_angle", "inverted"]
-	
-func _set_property_values():
-	set_property("parts", parts)
-	set_property("speed", speed)
-	set_property("radius", radius)
-	set_property("platform_count", platform_count)
-	set_property("start_angle", start_angle)
-	set_property("disappears", disappears)
-	set_property("inverted", inverted)
+#func _set_properties():
+#	savable_properties = ["parts", "speed", "radius", "platform_count",  "start_angle", "disappears", "inverted"]
+#	editable_properties = ["parts", "speed", "radius", "platform_count",  "start_angle", "inverted"]
+#
+func _register_properties():
+	register_property(4, "parts", parts)
+	register_property(5, "speed", speed)
+	register_property(6, "radius", radius)
+	register_property(7, "platform_count", platform_count)
+	register_property(8, "start_angle", start_angle)
+	register_property(9, "disappears", disappears)
+	register_property(10, "inverted", inverted)
 
-func _input(event):
-	if event is InputEventMouseButton and event.is_pressed() and hovered:
-		if event.button_index == 5: # Mouse wheel down
-			parts -= 1
-			if parts < 1:
-				parts = 1
-			set_property("parts", parts)
-		elif event.button_index == 4: # Mouse wheel up
-			parts += 1
-			set_property("parts", parts)
+func _unhandled_input(event: InputEvent) -> void:
+	parts_input_handler(event,self)
+	
+func update_parts():
+	for platform in platforms:
+		platform.set_parts(parts)
 
 func _process(_delta):
 	if parts != last_parts:
@@ -69,9 +65,9 @@ func _process(_delta):
 				if(mode==1):
 					# Disable to fix rotation issues.
 					instance.set_sync_to_physics(false)
-				# Disable the collision if enabled = false
-				instance.collision_shape.disabled = !enabled
-				instance.platform_area_collision_shape.disabled = !enabled
+				# Disable the collision if is_enabled_and_on_ground() = false
+				instance.collision_shape.disabled = !is_enabled_and_on_ground()
+				instance.platform_area_collision_shape.disabled = !is_enabled_and_on_ground()
 				
 		elif platform_count<platforms.size():
 			var delta_count = platforms.size() - platform_count
@@ -92,6 +88,9 @@ func _draw():
 	if(radius == 0):
 		return
 	var radius_vector = Vector2(radius*32, 0.0)
+	var working_radius: float = (radius+3) * 32
+	
+	editor_rect = Rect2(-working_radius/2, -working_radius/2, working_radius, working_radius)
 	
 	var delta_rad = 2*PI/ceil(radius*32*2*PI/20.0) #so the points are at most 20 curve pixels appart
 	var rad := 0.0
@@ -112,15 +111,21 @@ func _ready():
 		if(mode==1):
 			# Disable to fix rotation issues.
 			instance.set_sync_to_physics(false)
-		# Disable the collision if enabled = false
-		instance.collision_shape.disabled = !enabled
-		instance.platform_area_collision_shape.disabled = !enabled
+		# Disable the collision if is_enabled_and_on_ground() = false
+		instance.z_index = z_index
 	
 	#_set_platform_pos()
 	
 	if(!disappears && inverted):
 		frozen = true
 
+func _object_ready():
+	._object_ready()
+	for instance in platforms:
+		instance.collision_shape.disabled = !is_enabled_and_on_ground()
+		instance.platform_area_collision_shape.disabled = !is_enabled_and_on_ground()
+		instance.enabled = is_enabled_and_on_ground()
+		instance.switch_state(instance.sprite.visible)
 
 func _physics_process(_delta):
 	if(!frozen):
@@ -138,3 +143,6 @@ func _set_platform_pos():
 			platform.position = new_pos
 			platform.reset_physics_interpolation()
 		angle += delta_angle
+
+func is_middle(check: bool):
+	return

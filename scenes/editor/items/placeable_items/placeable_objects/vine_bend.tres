@@ -1,0 +1,29 @@
+[gd_resource type="Resource" load_steps=14 format=2]
+
+[ext_resource path="res://scenes/editor/items/placeable_object.gd" type="Script" id=1]
+[ext_resource path="res://scenes/actors/objects/vine_bend/palettes/vine_bend_icon4.png" type="Texture" id=2]
+[ext_resource path="res://scenes/actors/objects/vine_bend/palettes/vine_bend_icon2.png" type="Texture" id=3]
+[ext_resource path="res://scenes/actors/objects/vine_bend/palettes/vine_bend5.png" type="Texture" id=4]
+[ext_resource path="res://scenes/actors/objects/vine_bend/palettes/vine_bend_icon3.png" type="Texture" id=5]
+[ext_resource path="res://scenes/actors/objects/vine_bend/palettes/vine_bend4.png" type="Texture" id=6]
+[ext_resource path="res://scenes/actors/objects/vine_bend/vine_bend.png" type="Texture" id=7]
+[ext_resource path="res://scenes/actors/objects/vine_bend/vine_bend_icon.png" type="Texture" id=8]
+[ext_resource path="res://scenes/actors/objects/vine_bend/palettes/vine_bend1.png" type="Texture" id=9]
+[ext_resource path="res://scenes/actors/objects/vine_bend/palettes/vine_bend2.png" type="Texture" id=10]
+[ext_resource path="res://scenes/actors/objects/vine_bend/palettes/vine_bend_icon5.png" type="Texture" id=11]
+[ext_resource path="res://scenes/actors/objects/vine_bend/palettes/vine_bend3.png" type="Texture" id=12]
+[ext_resource path="res://scenes/actors/objects/vine_bend/palettes/vine_bend_icon1.png" type="Texture" id=13]
+
+[resource]
+script = ExtResource( 1 )
+item_name = "Vine Bend"
+change_to = "obj_vine_stem_end"
+items_in_sequence = 6
+index_in_sequence = 4
+icons = [ ExtResource( 8 ), ExtResource( 13 ), ExtResource( 3 ), ExtResource( 5 ), ExtResource( 2 ), ExtResource( 11 ) ]
+previews = [ ExtResource( 7 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 12 ), ExtResource( 6 ), ExtResource( 4 ) ]
+priority = 92
+object_id = 122
+preview_offset = Vector2( 0, 0 )
+property_overrides = {
+}

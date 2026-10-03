@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 198.28 198.28">
+  <g id="Layer_64" data-name="Layer 64">
+    <path d="M186.78,57.33v109.22c0,11.17-9.05,20.22-20.22,20.22H31.72c-11.17,0-20.22-9.05-20.22-20.22V31.72c0-11.17,9.05-20.22,20.22-20.22h21.1" style="fill: none; stroke: #fff; stroke-linecap: round; stroke-linejoin: round; stroke-width: 23px;"/>
+    <g>
+      <path d="M99.14,91.49c-6.35,0-11.5-5.15-11.5-11.5V11.5C87.64,5.15,92.79,0,99.14,0h87.64c6.35,0,11.5,5.15,11.5,11.5s-5.15,11.5-11.5,11.5h-76.14v56.99c0,6.35-5.15,11.5-11.5,11.5Z" style="fill: #fff;"/>
+      <polygon points="68.27 59.84 99.14 73.89 130.01 59.84 99.14 114.32 68.27 59.84" style="fill: #fff;"/>
+    </g>
+    <line x1="47.62" y1="145.61" x2="150.66" y2="145.61" style="fill: none; stroke: #fff; stroke-linecap: round; stroke-linejoin: round; stroke-width: 23px;"/>
+  </g>
+</svg>

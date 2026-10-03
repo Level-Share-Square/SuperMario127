@@ -1,0 +1,19 @@
+[gd_resource type="Resource" load_steps=4 format=2]
+
+[ext_resource path="res://scenes/editor/items/placeable_object.gd" type="Script" id=1]
+[ext_resource path="res://scenes/actors/objects/red_coin/preview.png" type="Texture" id=2]
+[ext_resource path="res://scenes/actors/objects/red_coin/icon.png" type="Texture" id=3]
+
+[resource]
+script = ExtResource( 1 )
+item_name = "Red Coin"
+change_to = "obj_purple_starbit"
+items_in_sequence = 3
+index_in_sequence = 0
+icons = [ ExtResource( 3 ) ]
+previews = [ ExtResource( 2 ) ]
+priority = 162
+object_id = 30
+preview_offset = Vector2( 0, 0 )
+property_overrides = {
+}

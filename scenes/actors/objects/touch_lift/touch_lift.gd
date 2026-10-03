@@ -34,34 +34,25 @@ var custom_path = Curve2D.new()
 
 var path_length : float = 0
 
-func _set_properties():
-	savable_properties = ["parts", "max_speed", "curve", "move_type", "touch_start", "color", "start_offset", "custom_path", "path_length"]
-	editable_properties = ["parts", "max_speed", "move_type", "touch_start", "color", "start_offset", "custom_path", "path_length"]
-	
-func _set_property_values():
-	set_property("parts", parts)
-	set_property("max_speed", max_speed)
-	set_property("curve", curve)
-	set_property("end_position", end_position)
-	set_property("move_type", move_type, true, null)
-	set_property_menu("move_type", ["option", 5, 0, ['Back and Forth', 'Reset', 'Once', 'Loop', 'Freeze']])
-	set_property("touch_start", touch_start)
-	set_property("color", color)
-	set_property("start_offset", start_offset)
-	set_property("custom_path", curve)
-	set_property("path_length", path_length, true)
+#func _set_properties():
+#	savable_properties = ["parts", "max_speed", "curve", "move_type", "touch_start", "color", "start_offset", "custom_path", "path_length"]
+#	editable_properties = ["parts", "max_speed", "move_type", "touch_start", "color", "start_offset", "curve", "path_length"]
+
+
+func _register_properties():
+	register_property(4, "parts", parts)
+	register_property(5, "max_speed", max_speed)
+	register_property(6, "curve", curve)
+	register_property(7, "move_type", move_type)
+	set_property_override("move_type", PropertyTab.OverrideTypes.ENUM, ["Back and Forth", "Reset", "Once", "Loop", "Freeze"])
+	register_property(8, "touch_start", touch_start)
+	register_property(9, "color", color)
+	register_property(10, "start_offset", start_offset)
+	register_property(11, "custom_path", curve, false)
+	register_property(12, "path_length", path_length)
 	set_property_menu("path_length", ["viewer"])
-	
-func _input(event):
-	if event is InputEventMouseButton and event.is_pressed() and hovered:
-		if event.button_index == 5: # Mouse wheel down
-			parts -= 1
-			if parts < 1:
-				parts = 1
-			set_property("parts", parts)
-		elif event.button_index == 4: # Mouse wheel up
-			parts += 1
-			set_property("parts", parts)
+
+
 # TODO:
 # Optimize the amount of nodes in the curve path.
 # Fix physics:
@@ -124,8 +115,8 @@ onready var part_width = platform_sprite.texture.get_width() - left_width - righ
 func _ready():
 	activated = !touch_start
 	$TouchLiftPlatform/Area2D/CollisionShape2D.disabled = false
-	platform.collision_shape.disabled = !enabled
-	platform.platform_area_collision_shape.disabled = !enabled
+	platform.collision_shape.disabled = !is_enabled_and_on_ground()
+	platform.platform_area_collision_shape.disabled = !is_enabled_and_on_ground()
 	
 	platform.platform_area_collision_shape.get_parent().connect("body_entered", self, "_on_touch_area_entered")
 	if curve.get_point_count() == 0:
@@ -139,7 +130,6 @@ func _ready():
 		set_property("curve", path.curve)
 		curve = path.curve
 	elif path.curve == null:
-		#print("creating curve2")
 		path.curve = curve
 	elif curve == null:
 		set_property("curve", path.curve)
@@ -157,7 +147,7 @@ func _ready():
 		
 		# i don't know why this fixes the layering, 1.0 doesn't work and 0.0 doesn't work
 		# this is an integer
-		platform.z_index -= 0.5
+		#platform.z_index -= 0.5
 		
 		start_sprite_node = Node2D.new()
 		start_sprite_node.add_child(platform_sprite.duplicate())
@@ -171,7 +161,6 @@ func _ready():
 		end_sprite_node.modulate = transparent_color
 		add_child(end_sprite_node)
 
-		#print(path.curve.get_point_count())
 func set_sprite_parts(sprite):
 	sprite.rect_position.x = -(left_width + (part_width * parts) + right_width) / 2
 	sprite.rect_size.x = left_width + right_width + part_width * parts
@@ -186,6 +175,12 @@ func _draw():
 			draw_texture_rect(circle_texture, Rect2(pos - Vector2(2.0, 2.0), Vector2(4.0, 4.0)), false, Color.darkgray)
 
 func _physics_process(delta):
+	if mode != 1:
+		platform.set_position(path_follower.position)
+	else:
+		platform.position = path_follower.position
+		platform.reset_physics_interpolation()
+		
 	if(!activated):
 		return
 	
@@ -211,12 +206,6 @@ func _physics_process(delta):
 		
 		if !activated:
 			return
-	
-	if mode != 1:
-		platform.set_position(path_follower.position)
-	else:
-		platform.position = path_follower.position
-		platform.reset_physics_interpolation()
 
 func reached_end() -> void:
 	match move_type:
@@ -244,3 +233,9 @@ func reset_platform():
 	yield(get_tree(), "physics_frame")
 	yield(get_tree(), "physics_frame")
 	platform.set_collision_layer_bit(4, true)
+
+func _unhandled_input(event: InputEvent) -> void:
+	parts_input_handler(event,self)
+
+func update_parts():
+	platform.set_parts(parts)

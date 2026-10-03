@@ -1,12 +1,13 @@
 extends Node2D
 
 ## level data
-onready var level_info: LevelInfo = Singleton.CurrentLevelData.level_info
+onready var level_metadata: LevelMetadata = CurrentLevelData.level_metadata
 
 ## nodes
 onready var tween: Tween = $"%Tween"
 onready var shine_title: Label = $"%ShineTitle"
 onready var shine_description: RichTextLabel = $"%ShineDescription"
+onready var shine_focus = $"%ShineFocus"
 
 onready var mission_focus_sfx: AudioStreamPlayer = $"%MissionFocus"
 
@@ -22,7 +23,9 @@ const SHINE_FIRST_OFFSET_DIFFERENCE: float = SHINE_FIRST_POSITION_OFFSET - SHINE
 
 # size of the shine at different points
 const SHINE_CENTER_SIZE: float = 4.0
-const SHINE_BESIDE_CENTER_SIZE: float = 2.0
+const SHINE_CENTER_UNFOCUS_SIZE: float = 3.0
+const SHINE_BESIDE_CENTER_SIZE: float = 2.75
+const SHINE_BESIDE_CENTER_UNFOCUS_SIZE: float = 2.5
 const SHINE_DEFAULT_SIZE: float = 2.0
 
 ## vars
@@ -35,28 +38,48 @@ var used_shine_ids: Array = []
 var shine_details_indices: Array = []
 # contains an array that stores dictionaries containing all the information needed to populate the shine select screen
 var shine_details: Array = []
+# first value is uuid, second value is overall index
+var scrollable_shines: Array = []
 
 var selected_shine_index: int = -1
 
 func _ready():
-	shine_details = level_info.shine_details
+	for mission in level_metadata.collectible_data.used_mission_data:
+		shine_details.append(level_metadata.collectible_data.get_mission_by_uuid(mission))
+	
+	shine_details.sort_custom(MissionData, "sort_by_order")
 	
 	var shine_index: int = 0
+	var found_uncollected: bool = false
 	for i in range(shine_details.size()):
-		if used_shine_ids.has(shine_details[i]["id"]):
+		var end: bool = false
+		
+		var is_collected = CurrentLevelData.save_data.is_mission_complete(shine_details[i]["mission_uuid"])
+		if used_shine_ids.has(shine_details[i]["mission_uuid"]):
 			continue
-		if !shine_details[i]["show_in_menu"]:
+		if !shine_details[i]["mission_show_in_menu"]:
 			continue
 
-		used_shine_ids.append(shine_details[i]["id"])
+		used_shine_ids.append(shine_details[i]["mission_uuid"])
 
 		var shine_sprite = SHINE_SPRITE_SCENE.instance()
 		shine_sprites.append(shine_sprite)
 		shine_details_indices.append(i)
+		add_child(shine_sprite)
+		
+		if CurrentLevelData.level_metadata.collectible_data.linear_progression:
+			if !is_collected:
+				if found_uncollected:
+					shine_sprite.make_disabled()
+				found_uncollected = true
+		
+		if not shine_sprite.disabled:
+			var uuid: String = shine_details[i]["mission_uuid"]
+			scrollable_shines.append([uuid, i])
 		
 		# make non-kickout shines turn the other way
-		if "do_kick_out" in shine_details[i]:
-			shine_sprite.is_flipped = !shine_details[i]["do_kick_out"]
+		if "shine_force_leave" in shine_details[i]:
+			shine_sprite.is_flipped = !shine_details[i]["shine_force_leave"]
 		
 		# place all the shines the correct distance away from the center shine
 		if i > 1:
@@ -69,8 +92,6 @@ func _ready():
 		
 		# if the shine isn't collected, make it blue on the shine select scree
 		# if it is collected, show the correct colour of the shine
-		var collected_shines = level_info.collected_shines
-		var is_collected = collected_shines[str(shine_details[i]["id"])]
 		if !is_collected:
 			# automatically select first empty shine
 			if selected_shine_index == -1:
@@ -78,11 +99,13 @@ func _ready():
 			shine_sprite.make_blue()
 		else:
 			# Shine color is stored as rgba32 from a json, and json converts stuff to float so it has to be converted twice
-			shine_sprite.set_color(Color(int(shine_details[i]["color"])))
+			shine_sprite.set_color(shine_details[i]["shine_color"])
 		
 		shine_index += 1
 		shine_sprite.add_to_group("shine_sprites")
-		add_child(shine_sprite)
+		
+		if end:
+			break
 	
 	selected_shine_index = max(0, selected_shine_index)
 	get_child(selected_shine_index).selected = true
@@ -90,27 +113,33 @@ func _ready():
 	move_shine_sprites(true) # make sure everything is in the right spot and size and such
 	update_labels()
 
-
 func _input(event):
+	if shine_focus.get_focus_owner() != shine_focus and shine_focus.get_focus_owner() != null: return
+	
 	if Input.is_action_just_pressed("ui_right"):
 		attempt_increment_selected_shine_index(1)
 	elif Input.is_action_just_pressed("ui_left"):
 		attempt_increment_selected_shine_index(-1)
 	elif Input.is_action_just_pressed("ui_accept"):
 		get_parent().start_level()
-	elif Input.is_action_just_pressed("ui_cancel"):
-		get_parent().back()
 
 
 # this will try to change the selected shine, but won't if you're already at the first or last shine
 func attempt_increment_selected_shine_index(increment : int) -> void:
 	if !can_interact:
 		return
-
+	
+	var scrollable_index: int
+	for scrollable in scrollable_shines:
+		if scrollable[1] == selected_shine_index:
+			break 
+		scrollable_index += 1
+	var target_index: int = clamp(scrollable_index + increment, 0, scrollable_shines.size() - 1)
+	var real_index: int = scrollable_shines[target_index][1]
+	
 	var previous_selected_shine_index = selected_shine_index
 	# warning-ignore:narrowing_conversion
-	selected_shine_index = clamp(selected_shine_index + increment, 0, shine_sprites.size() - 1)
-
+	selected_shine_index = real_index
 	# no point in doing anything if the value didn't actually change
 	if selected_shine_index == previous_selected_shine_index:
 		return
@@ -132,9 +161,16 @@ func move_shine_sprites(instant: bool = false) -> void:
 
 		# based on the position of the shine relative to the center, set the scale and position
 		if i == selected_shine_index:
-			shine_size = SHINE_CENTER_SIZE
+			if shine_focus.get_focus_owner() == shine_focus or not is_instance_valid(shine_focus.get_focus_owner()):
+				shine_size = SHINE_CENTER_SIZE
+			else:
+				shine_size = SHINE_CENTER_UNFOCUS_SIZE
 			target_position_x = 0 
 		elif abs(i - selected_shine_index) == 1:
+			if shine_focus.get_focus_owner() == shine_focus or not is_instance_valid(shine_focus.get_focus_owner()):
+				shine_size = SHINE_BESIDE_CENTER_SIZE
+			else:
+				shine_size = SHINE_BESIDE_CENTER_UNFOCUS_SIZE
 			target_position_x = SHINE_FIRST_POSITION_OFFSET * sign(i - selected_shine_index)
 		elif abs(i - selected_shine_index) > 1:
 			# this comment won't make sense if the values change, current values are first offset 125 then increment 100
@@ -155,9 +191,10 @@ func move_shine_sprites(instant: bool = false) -> void:
 
 func update_labels() -> void:
 	# this will assume the selected shine and the selected level are valid
-	shine_title.text = shine_details[shine_details_indices[selected_shine_index]]["title"]
+	shine_title.text = shine_details[shine_details_indices[selected_shine_index]]["shine_name"]
 	shine_description.bbcode_text = (
 		"[center]" +
-		shine_details[shine_details_indices[selected_shine_index]]["description"] +
+		shine_details[shine_details_indices[selected_shine_index]]["shine_description"] +
 		"[/center]"
 	)
+

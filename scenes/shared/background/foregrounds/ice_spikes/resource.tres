@@ -5,9 +5,10 @@
 [ext_resource path="res://scenes/shared/background/foregrounds/ice_spikes/back.tres" type="Resource" id=3]
 [ext_resource path="res://scenes/shared/background/foregrounds/ice_spikes/preview.png" type="Texture" id=4]
 
-
-
 [resource]
 script = ExtResource( 1 )
 layers = [ ExtResource( 3 ), ExtResource( 2 ) ]
+immune_to = PoolIntArray(  )
 preview = ExtResource( 4 )
+palettes = [  ]
+auto_scroll_speed = 0.0

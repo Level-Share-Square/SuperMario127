@@ -28,7 +28,7 @@ func setting_changed(key: String, new_value: bool):
 func update_visibility():
 	var current_scene = get_tree().get_current_scene()
 	if "mode" in current_scene:
-		time_score.visible = (shown and current_scene.mode == 0 and Singleton.ModeSwitcher.get_node("ModeSwitcherButton").invisible)
+		time_score.visible = (shown and current_scene.mode == 0 and not Singleton.ModeSwitcher.visible and not CurrentLevelData.is_hub_level())
 	else:
 		time_score.visible = false
 
@@ -48,24 +48,28 @@ func add_set_timer(timer_name: String, timer_amount: float, sound: String = "non
 	timer_node.kill_on_end = kill_on_end
 	return timer_node
 
+
 func get_timer(timer_name: String) -> Control:
 	var timer_node: Control = grid.get_node_or_null(timer_name)
 	
 	return timer_node
 
+
 func pause_resume_timer(timer_name: String, pause: bool):
 	var timer_node: Control = grid.get_node_or_null(timer_name)
 	if not is_instance_valid(timer_node):
+		push_warning("Timer %s could not be gotten, returning instead.")
 		return
 	
 	timer_node.is_counting = !pause
+
 
 func remove_timer(timer_name: String):
 	var timer_node: Control = grid.get_node_or_null(timer_name)
 	if not is_instance_valid(timer_node):
 		return
 	
-	timer_node.time = 0
+	timer_node.stop()
 
 
 func add_radial_timer(timer_name: String, read_node: Node, read_property: String, icon: Texture = null, set_max: bool = true) -> Control:	

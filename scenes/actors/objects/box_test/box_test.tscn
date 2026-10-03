@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://scenes/actors/objects/box_base/box_base.tscn" type="PackedScene" id=1]
+
+[node name="BoxBase" instance=ExtResource( 1 )]
+internal_id = "box_test"
+breakable_sides = 9
+breakable_states = PoolStringArray( "SpinningState", "GroundPoundState", "DiveState" )

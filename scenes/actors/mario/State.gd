@@ -2,7 +2,7 @@ extends Node
 
 class_name State
 
-var character : Character
+var character
 
 export var priority = 0
 export var disable_movement = false
@@ -15,6 +15,8 @@ export var override_rotation = false
 export var attack_tier = 0
 export var use_dive_collision = false
 export var auto_flip = false
+export var force_cam_follow_y = false
+export var fast_cam_follow = false
 export var blacklisted_states = []
 
 func _ready():
@@ -25,11 +27,11 @@ func handle_update(delta: float):
 		if character.state != self and _start_check(delta) and !character.switching_state:
 			var old_priority = -1 if character.state == null else character.state.priority
 			if self.priority >= old_priority and !is_in_blacklisted_state():
-				character.set_state(self, delta)
+				character.set_state(self, delta, self)
 		if character.state == self:
 			_update(delta)
 		if character.state == self and _stop_check(delta):
-			character.set_state(null, delta)
+			character.set_state(null, delta, self)
 	_general_update(delta)
 
 func is_in_blacklisted_state():

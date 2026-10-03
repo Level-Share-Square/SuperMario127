@@ -32,35 +32,30 @@ var path_length : float = 0.0
 var disappears : bool = true
 var inverted : bool = false
 
-func _set_properties():
-	savable_properties = ["parts", "max_speed", "curve", "move_type", "touch_start", "start_offset", "disappears", "inverted", "custom_path", "path_length"]
-	editable_properties = ["parts", "max_speed", "move_type", "touch_start", "start_offset", "inverted", "custom_path", "path_length"]
-	
-func _set_property_values():
-	set_property("parts", parts)
-	set_property("max_speed", max_speed)
-	set_property("curve", curve)
-	set_property("end_position", end_position)
-	set_property("move_type", move_type)
-	set_property_menu("move_type", ["option", 5, 0, ['Back and Forth', 'Reset', 'Once', 'Loop', 'Freeze']])
-	set_property("touch_start", touch_start)
-	set_property("start_offset", start_offset)
-	set_property("disappears", disappears)
-	set_property("inverted", inverted)
-	set_property("custom_path", curve)
-	set_property("path_length", path_length)
+#func _set_properties():
+#	savable_properties = ["parts", "max_speed", "curve", "move_type", "touch_start", "start_offset", "disappears", "inverted", "custom_path", "path_length"]
+#	editable_properties = ["parts", "max_speed", "move_type", "touch_start", "start_offset", "inverted", "curve", "path_length"]
+#
+func _register_properties():
+	register_property(4, "parts", parts)
+	register_property(5, "max_speed", max_speed)
+	register_property(6, "curve", curve)
+	register_property(7, "move_type", move_type)
+	set_property_override("move_type", PropertyTab.OverrideTypes.ENUM, ["Back and Forth", "Reset", "Once", "Loop", "Freeze"])
+	register_property(8, "touch_start", touch_start)
+	register_property(9, "start_offset", start_offset)
+	register_property(10, "disappears", disappears, false)
+	register_property(11, "inverted", inverted)
+	register_property(12, "custom_path", curve, false)
+	register_property(13, "path_length", path_length)
 	set_property_menu("path_length", ["viewer"])
+	register_property(14, "end_position", end_position, false)
 
-func _input(event):
-	if event is InputEventMouseButton and event.is_pressed() and hovered:
-		if event.button_index == 5: # Mouse wheel down
-			parts -= 1
-			if parts < 1:
-				parts = 1
-			set_property("parts", parts)
-		elif event.button_index == 4: # Mouse wheel up
-			parts += 1
-			set_property("parts", parts)
+func _unhandled_input(event: InputEvent) -> void:
+	parts_input_handler(event,self)
+
+func update_parts():
+	platform.set_parts(parts)
 
 func _process(_delta):
 	if parts != last_parts:
@@ -120,11 +115,11 @@ func _ready():
 		path.curve.add_point(Vector2())
 		path.curve.add_point(Vector2(0,-64))
 		
-		set_property("curve", path.curve)
+		set_property("curve", path.curve, true)
 	elif path.curve == null:
 		path.curve = curve
 	elif curve == null:
-		set_property("curve", path.curve)
+		set_property("curve", path.curve, true)
 	
 	platform.set_parts(parts)
 	
@@ -149,7 +144,26 @@ func _ready():
 		end_sprite_node.modulate = transparent_color
 		add_child(end_sprite_node)
 		
-		set_property("end_position", path.curve.get_point_position(path.curve.get_point_count()-1)/32)
+		set_property("end_position", path.curve.get_point_position(path.curve.get_point_count()-1)/32, true)
+
+	var _connect = connect("property_changed", self, "update_property")
+	update_property("palette", palette)
+
+
+func update_property(key, value):
+	match(key):
+		"palette":
+			if mode == 1:
+				start_sprite_node.get_child(0).region_rect.position.y = int(value) * 13
+				end_sprite_node.get_child(0).region_rect.position.y = int(value) * 13
+
+
+func _object_ready():
+	._object_ready()
+	platform.collision_shape.disabled = !is_enabled_and_on_ground()
+	platform.platform_area_collision_shape.disabled = !is_enabled_and_on_ground()
+	platform.enabled = is_enabled_and_on_ground()
+	platform.switch_state(platform.sprite.visible)
 
 func set_sprite_parts(sprite):
 	sprite.rect_position.x = -(left_width + (part_width * parts) + right_width) / 2
@@ -164,6 +178,12 @@ func _draw():
 			draw_texture_rect(circle_texture, Rect2(pos - Vector2(2.0, 2.0), Vector2(4.0, 4.0)), false, Color.darkgray)
 
 func _physics_process(delta):
+	if mode != 1:
+		platform.set_position(path_follower.position)
+	else:
+		platform.position = path_follower.position
+		platform.reset_physics_interpolation()
+		
 	if(!activated || frozen):
 		return
 	_set_platform_pos()
@@ -190,11 +210,6 @@ func _set_platform_pos():
 		if !activated:
 			return
 	
-	if mode != 1:
-		platform.set_position(path_follower.position)
-	else:
-		platform.position = path_follower.position
-		platform.reset_physics_interpolation()
 
 func reached_end() -> void:
 	match move_type:

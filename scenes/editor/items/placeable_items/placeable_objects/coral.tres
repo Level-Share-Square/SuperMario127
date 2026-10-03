@@ -1,0 +1,27 @@
+[gd_resource type="Resource" load_steps=12 format=2]
+
+[ext_resource path="res://scenes/actors/objects/coral/coral_preview.png" type="Texture" id=1]
+[ext_resource path="res://scenes/actors/objects/coral/icon.png" type="Texture" id=2]
+[ext_resource path="res://scenes/editor/items/placeable_object.gd" type="Script" id=3]
+[ext_resource path="res://scenes/actors/objects/coral/palettes/1/icon.png" type="Texture" id=4]
+[ext_resource path="res://scenes/actors/objects/coral/palettes/4/icon.png" type="Texture" id=5]
+[ext_resource path="res://scenes/actors/objects/coral/palettes/3/icon.png" type="Texture" id=6]
+[ext_resource path="res://scenes/actors/objects/coral/palettes/1/MCoralB_preview'.png" type="Texture" id=7]
+[ext_resource path="res://scenes/actors/objects/coral/palettes/3/MCoralR_preview.png" type="Texture" id=8]
+[ext_resource path="res://scenes/actors/objects/coral/palettes/2/MCoralG_preview.png" type="Texture" id=9]
+[ext_resource path="res://scenes/actors/objects/coral/palettes/4/MCoralY_preview.png" type="Texture" id=10]
+[ext_resource path="res://scenes/actors/objects/coral/palettes/2/icon.png" type="Texture" id=11]
+
+[resource]
+script = ExtResource( 3 )
+item_name = "Coral"
+change_to = "obj_coral_large"
+items_in_sequence = 3
+index_in_sequence = 1
+icons = [ ExtResource( 2 ), ExtResource( 4 ), ExtResource( 11 ), ExtResource( 6 ), ExtResource( 5 ) ]
+previews = [ ExtResource( 1 ), ExtResource( 7 ), ExtResource( 9 ), ExtResource( 8 ), ExtResource( 10 ) ]
+priority = 140
+object_id = 97
+preview_offset = Vector2( -2, -1 )
+property_overrides = {
+}

@@ -1,0 +1,23 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/TripleJump5.wav-f8ff7d9cccd1a7cd05b9c847198a2af6.sample"
+
+[deps]
+
+source_file="res://scenes/actors/mario/sounds_luigi/TripleJump5.wav"
+dest_files=[ "res://.import/TripleJump5.wav-f8ff7d9cccd1a7cd05b9c847198a2af6.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

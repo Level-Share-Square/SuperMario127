@@ -20,22 +20,22 @@ onready var sprite = $Fill
 onready var waves = $Line
 
 func _ready():
-	var id = Singleton.CurrentLevelData.level_data.vars.current_liquid_id
-	if Singleton.CurrentLevelData.level_data.vars.liquid_positions.size() > Singleton.CurrentLevelData.area and Singleton.CurrentLevelData.level_data.vars.liquid_positions[Singleton.CurrentLevelData.area].size() > id:
-		var set_position = Singleton.CurrentLevelData.level_data.vars.liquid_positions[Singleton.CurrentLevelData.area][id]
+	var id = CurrentLevelData.vars.current_liquid_id
+	if CurrentLevelData.vars.liquid_positions.size() > CurrentLevelData.current_area and CurrentLevelData.vars.liquid_positions[CurrentLevelData.current_area].size() > id:
+		var set_position = CurrentLevelData.vars.liquid_positions[CurrentLevelData.current_area][id]
 		if set_position != Vector2():
 			global_position = set_position
 			save_pos = set_position
-	Singleton.CurrentLevelData.level_data.vars.current_liquid_id += 1
+	CurrentLevelData.vars.current_liquid_id += 1
 	
 	color.a = 0.5
 	area_collision.shape = area_collision.shape.duplicate()
 	change_size()
 	last_radius = radius
 	
-	area_collision.disabled = !enabled
+	area_collision.disabled = !is_enabled_and_on_ground()
 	
-	Singleton.CurrentLevelData.level_data.vars.liquids.append([tag.to_lower(), self])
+	CurrentLevelData.vars.liquids.append([tag.to_lower(), self])
 
 func change_size():
 	area.set_radius(radius)

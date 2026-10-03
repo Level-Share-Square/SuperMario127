@@ -1,0 +1,67 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://scenes/actors/mode_switcher_old/mode_switcher_button.gd" type="Script" id=1]
+[ext_resource path="res://scenes/actors/mode_switcher_old/ui/play_button.png" type="Texture" id=2]
+[ext_resource path="res://scenes/actors/mode_switcher_old/ui/stop_button.png" type="Texture" id=3]
+[ext_resource path="res://scenes/actors/mode_switcher_old/ui/coin.png" type="Texture" id=4]
+[ext_resource path="res://assets/sounds/hover.wav" type="AudioStream" id=5]
+[ext_resource path="res://scenes/shared/sounds/play_button_reverb.wav" type="AudioStream" id=6]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends CanvasLayer
+
+onready var button: TextureButton = $ModeSwitcherButton
+"
+
+[node name="CanvasLayer" type="CanvasLayer"]
+layer = 127
+script = SubResource( 1 )
+
+[node name="Fader" type="ColorRect" parent="."]
+visible = false
+margin_right = 768.0
+margin_bottom = 432.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween" type="Tween" parent="Fader"]
+
+[node name="ModeSwitcherButton" type="TextureButton" parent="."]
+pause_mode = 2
+margin_left = 652.0
+margin_top = 154.903
+margin_right = 877.0
+margin_bottom = 379.903
+rect_scale = Vector2( 0.333, 0.333 )
+rect_pivot_offset = Vector2( 60, 300 )
+focus_mode = 0
+action_mode = 0
+texture_normal = ExtResource( 2 )
+script = ExtResource( 1 )
+texture_play = ExtResource( 2 )
+texture_stop = ExtResource( 3 )
+
+[node name="Tween" type="Tween" parent="ModeSwitcherButton"]
+
+[node name="TweenHover" type="Tween" parent="ModeSwitcherButton"]
+
+[node name="TweenCoin" type="Tween" parent="ModeSwitcherButton"]
+
+[node name="TweenDisappear" type="Tween" parent="ModeSwitcherButton"]
+
+[node name="Sound" type="AudioStreamPlayer" parent="ModeSwitcherButton"]
+stream = ExtResource( 6 )
+volume_db = -10.0
+bus = "Sounds"
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="ModeSwitcherButton"]
+stream = ExtResource( 5 )
+volume_db = -10.0
+bus = "Sounds"
+
+[node name="Coin" type="Sprite" parent="ModeSwitcherButton"]
+show_behind_parent = true
+texture = ExtResource( 4 )
+centered = false

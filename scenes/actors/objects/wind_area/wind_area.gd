@@ -15,15 +15,11 @@ var triggerable := false
 var triggered := true
 var wind_angle_vector : Vector2
 
-func _set_properties():
-	savable_properties = ["size", "wind_power", "color", "triggerable"]
-	editable_properties = ["size", "wind_power", "color", "triggerable"]
-
-func _set_property_values():
-	set_property("size", size, true, null)
-	set_property("wind_power", wind_power, true, "Wind Strength")
-	set_property("color", color)
-	set_property("triggerable", triggerable)
+func _register_properties():
+	register_property(4, "size", size)
+	register_property(5, "wind_power", wind_power)
+	register_property(6, "color", color)
+	register_property(7, "triggerable", triggerable)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -35,7 +31,7 @@ func _ready():
 			triggered = false
 	else:
 		var _connect = connect("property_changed", self, "update_property")
-	wind_angle_vector = Vector2.UP.rotated(deg2rad(rotation_degrees)).normalized()
+	wind_angle_vector = -global_transform.y
 	update_size()
 
 func _physics_process(delta):
@@ -43,17 +39,17 @@ func _physics_process(delta):
 		if triggered:
 			particles.emitting = true
 			for body in area.get_overlapping_bodies():
-				if enabled and body is Character and !body.dead and body.controllable:
+				if is_enabled_and_on_ground() and body is Character and !body.dead and body.controllable:
 					if !is_instance_valid(body.powerup):
 						character_apply_wind(body, delta)
 					else:
-						if body.powerup != MetalPowerup:
+						if body.powerup != body.get_powerup_node("MetalPowerup"):
 							character_apply_wind(body, delta)
 				
-				elif enabled and body is EnemyBase:
+				elif is_enabled_and_on_ground() and body is EnemyBase:
 					body.velocity = apply_velocity(body.velocity, delta)
 						
-				elif enabled and not (body is Character) and "velocity" in body:
+				elif is_enabled_and_on_ground() and not (body is Character) and "velocity" in body:
 					var body_object = body.get_parent()
 					body_object.velocity = apply_velocity(body_object.velocity, delta)
 		else:
@@ -61,12 +57,12 @@ func _physics_process(delta):
 	else:
 		sprite.visible == true
 
-func character_apply_wind(body, delta):
+func character_apply_wind(body : Character, delta):
 	if wind_angle_vector.x > 0.05 or wind_angle_vector.x < -0.05:
 		body.in_wind = true
 	body.velocity = apply_velocity(body.velocity, delta)
 	
-	if !body.is_on_floor() and (body.state is FallState or body.state == null):
+	if !body.is_on_floor() and (body.state == body.get_state_node("FallState") or body.state == null):
 		var char_sprite = body.sprite
 		if body.facing_direction == 1:
 			if body.jump_animation == 0:
@@ -81,7 +77,7 @@ func character_apply_wind(body, delta):
 				char_sprite.animation = "doubleFallLeft"
 	
 	#set's mario's state to falling if he stops going down in a ground pound or dive (dive has a certain threshold tho)
-	if (body.state is GroundPoundState) and (body.velocity.y <= 0):
+	if (body.state == body.get_state_node("GroundPoundState")) and (body.velocity.y <= 0):
 		if !body.is_on_floor():
 			body.set_state_by_name("FallState", delta)
 	elif (body.state is DiveState) and (body.velocity.y <= -wind_power*18) and (wind_angle_vector.y == -1):
@@ -116,24 +112,24 @@ func update_property(key, value):
 	update_size()
 
 func entered(body):
-	if enabled and body is EnemyBase:
+	if is_enabled_and_on_ground() and body is EnemyBase:
 		body.snap_enabled = false
-	if enabled and body is Character and !body.dead and body.controllable:
+	if is_enabled_and_on_ground() and body is Character and !body.dead and body.controllable:
 		body.velocity += Vector2(wind_power, wind_power)*wind_angle_vector
 	if triggerable:
 		particles.preprocess = 0
 		triggered = true
 
 func exited(body):
-	if enabled and body is EnemyBase:
+	if is_enabled_and_on_ground() and body is EnemyBase:
 		body.snap_enabled = true
-	elif enabled and body is Character and !body.dead and body.controllable:
+	elif is_enabled_and_on_ground() and body is Character and !body.dead and body.controllable:
 		body.in_wind = false
 		if wind_angle_vector.x != 0 and body.velocity.x >= (wind_power*wind_angle_vector.y)*18:
 			body.velocity.x = body.velocity.x*.95
 		if wind_angle_vector.y != 0 and body.velocity.y >= (wind_power*wind_angle_vector.y)*18:
 			body.velocity.y = body.velocity.y*.75
-	elif enabled and not (body is Character) and "velocity" in body:
+	elif is_enabled_and_on_ground() and not (body is Character) and "velocity" in body:
 		body.get_parent().velocity.y = body.get_parent().velocity.y*.75
 	
 	if triggerable:

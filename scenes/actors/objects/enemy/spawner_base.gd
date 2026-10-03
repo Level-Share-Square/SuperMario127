@@ -10,17 +10,19 @@ enum RespawnMode {Never, Offscreen, Onscreen}
 
 onready var respawn_timer: Timer = $RespawnTimer
 onready var visibility_notifier: VisibilityNotifier2D = $VisibilityNotifier2D
+onready var enemy_sprite: AnimatedSprite = $EnemySprite
 var spawned_enemies: Array
 # enemies should be made invisible but not the spawner,, cuz of projectiles
 var is_visible: bool = true
 
-export var enemy_scene_path: String = "res://scenes/actors/objects/enemy/enemy_base.tscn"
+export(String, FILE, "*.tscn") var enemy_scene_path: String = "res://scenes/actors/objects/enemy/enemy_base.tscn"
 
 export var respawn_time: float = 15
 export(RespawnMode) var respawn_mode
 export var max_enemies: int = 1
 export var initial_velocity: Vector2
 export var spawn_offset: float = 0
+export var coin_id: int = 1
 
 var spawner_properties: Array = [
 	"respawn_time",
@@ -31,65 +33,62 @@ var spawner_properties: Array = [
 ]
 
 
+func _register_enemy_properties() -> void:
+	var index: int = 4 + spawner_properties.size()
+	for property in get_enemy_properties():
+		register_property(index, property, self[property])
+		index += 1
+
+
 func get_enemy_properties() -> Array:
 	return []
 
 
-func set_enemy_property_menus():
-	pass
-
-
-func _set_properties():
-	savable_properties = []
-	editable_properties = []
-	for spawner_property in spawner_properties:
-		savable_properties.append(spawner_property)
-		editable_properties.append(spawner_property)
+func _register_properties() -> void:
+	_register_enemy_properties()
 	
-	# for editable properties, we want to put enemy
-	# properties in front of spawner ones, but still in order
-	var i: int = 0
-	for enemy_property in get_enemy_properties():
-		savable_properties.append(enemy_property)
-		editable_properties.insert(i, enemy_property)
-		i += 1
-
-
-func _set_property_values():
-	for spawner_property in spawner_properties:
-		set_property(spawner_property, self[spawner_property], true)
-	set_property_menu("respawn_mode", ["option", 3, 0, ['Never', 'Offscreen', 'Onscreen']])
-	
-	for enemy_property in get_enemy_properties():
-		set_property(enemy_property, self[enemy_property], true)
-	set_enemy_property_menus()
+	register_property(4, "respawn_time", respawn_time)
+	register_property(5, "respawn_mode", respawn_mode)
+	set_property_override("respawn_mode", PropertyTab.OverrideTypes.ENUM, ["Never", "Offscreen", "Onscreen"])
+	register_property(6, "max_enemies", max_enemies)
+	register_property(7, "initial_velocity", initial_velocity)
+	register_property(8, "spawn_offset", spawn_offset)
 
 
 func instance_enemy(emit_particles: bool = true) -> EnemyBase:
 	# idk why this is needed? but its here
-	Singleton.CurrentLevelData.enemies_instanced += 1
+	CurrentLevelData.enemies_instanced += 1
 	
 	var spawned_enemy: EnemyBase = load(enemy_scene_path).instance()
 	# disable it if in editor
-	spawned_enemy.enabled = (enabled and mode != 1)
+	spawned_enemy.enabled = (is_enabled_and_on_ground() and mode != 1)
 	# hide it if invisible
 	spawned_enemy.visible = is_visible
+	
 	# give it proper gravity
-	spawned_enemy.gravity = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].settings.gravity * 2
+	spawned_enemy.gravity = CurrentLevelData.current_area.header.gravity * 2
 	# handle being flipped
 	if scale.x < 0:
 		spawned_enemy.scale = Vector2.ONE
+		spawned_enemy.facing_direction = 1
+	else:
+		spawned_enemy.scale = Vector2.ONE
 		spawned_enemy.facing_direction = -1
 	# and rotation
-	if enabled:
+	if is_enabled_and_on_ground():
 		rotation = 0
+		scale = scale.abs()
+	# and layer trol
+	spawned_enemy.layer_ref = level_layer_ref
 	
 	spawned_enemy.velocity = initial_velocity
 	spawned_enemy.spawn_effect = emit_particles
+	spawned_enemy.coin_id = coin_id
 	for enemy_property in get_enemy_properties():
 		spawned_enemy[enemy_property] = self[enemy_property]
 	
 	spawned_enemies.append(spawned_enemy)
+	
 	add_child(spawned_enemy)
 	return spawned_enemy
 
@@ -119,17 +118,13 @@ func enemy_deleted(enemy: EnemyBase):
 		respawn_timer.start()
 
 
-func _ready():
-	if mode != 1:
-		is_visible = visible
-		visible = true
-	
-	if enabled and mode != 1 and spawn_offset > 0:
+func _object_ready():
+	if mode != 1 and spawn_offset > 0:
 		yield(get_tree().create_timer(spawn_offset), "timeout")
 	
 	var spawned_enemy: EnemyBase = instance_enemy()
 	
-	if enabled and mode != 1:
+	if mode != 1 and is_enabled_and_on_ground():
 		respawn_timer.wait_time = respawn_time
 		match respawn_mode:
 			RespawnMode.Offscreen:
@@ -145,3 +140,11 @@ func _ready():
 	for i in range(5):
 		yield(get_tree(), "idle_frame")
 	spawned_enemy.connect("tree_exited", self, "enemy_deleted", [spawned_enemy])
+	enemy_sprite.visible = false
+
+func _editor_ready():
+	._editor_ready()
+	is_visible = visible
+	visible = true
+	enemy_sprite.visible = true
+	#instance_enemy()

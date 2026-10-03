@@ -1,3 +1,4 @@
+class_name ButtonHoverScale
 extends ButtonSound
 
 export var lerp_speed: float = 12

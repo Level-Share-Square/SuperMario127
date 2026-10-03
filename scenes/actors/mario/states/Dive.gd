@@ -1,6 +1,10 @@
 extends State
 
+# warnings-disable
+
 class_name DiveState
+
+const LAND_SQUISH := Vector2(1.15, 0.85)
 
 export var dive_power : Vector2 = Vector2(1200, 75)
 export var dive_power_luigi : Vector2 = Vector2(1200, 75)
@@ -29,14 +33,50 @@ func _start(_delta : float) -> void:
 	var sound_player : Node = character.sound_player # Sounds is apparently a node that gets added at runtime??
 	if dive_buffer > 0 and character.dive_cooldown == 0:
 		if character.character == 0:
-			character.velocity.x = character.velocity.x - (character.velocity.x - (dive_power.x * character.facing_direction)) / 5
+			if !character.in_quicksand:
+				character.velocity.x = character.velocity.x - (character.velocity.x - (dive_power.x * character.facing_direction)) / 5
 			character.velocity.y += dive_power.y
 		else:
-			character.velocity.x = character.velocity.x - (character.velocity.x - (dive_power_luigi.x * \
+			if !character.in_quicksand:
+				character.velocity.x = character.velocity.x - (character.velocity.x - (dive_power_luigi.x * \
 					character.facing_direction)) / 5
 			character.velocity.y += dive_power_luigi.y
-		sound_player.play_dive_sound()
-	character.position.y += 4
+		
+		## super dive recover/slide dive
+		if character.state_set_from and character.state_set_from.name == "SlideState":
+			sound_player.play_perfect_sound()
+			LastInputDevice.rumble(0.2, 0.2, 0.2)
+			
+			character.sprite.modulate = Color(2, 2, 2)
+			
+			var tween: SceneTreeTween = create_tween()
+			tween.set_trans(Tween.TRANS_CIRC)
+			tween.set_ease(Tween.EASE_OUT)
+			tween.tween_property(character.sprite, "modulate", Color.white, 1.0)
+			
+			for i in range(3):
+				var target_lag: float = (float(i+1) / 3) * 3
+				var trail: AnimatedSprite = character.sprite.duplicate()
+				trail.show_behind_parent = true
+				trail.modulate = Color(1, 1, 1, 0.5)
+				trail.set_script(preload("res://scenes/actors/mario/SpriteAnimSync.gd"))
+				trail.lag_behind = true
+				trail.lag_amount = 0.0
+				trail.parent_sprite = character.sprite
+				for child in trail.get_children():
+					child.queue_free()
+				character.sprite.add_child(trail)
+				
+				var trail_tween: SceneTreeTween = create_tween()
+				trail_tween.set_parallel(true)
+				trail_tween.tween_property(trail, "modulate", Color(1, 1.5, 1.5, 0), 0.5)
+				trail_tween.tween_property(trail, "lag_amount", target_lag, 0.5)
+				trail_tween.set_parallel(false)
+				trail_tween.tween_callback(trail, "queue_free")
+		else:
+			sound_player.play_dive_sound()
+	if !character.in_quicksand:
+		character.position.y += 4
 	character.rotating = true
 	character.ground_shape.disabled = true
 	if abs(character.velocity.x) > maxVelocityX:
@@ -63,34 +103,49 @@ func _update(_delta) -> void:
 		sprite.rotation_degrees += 0.15 * character.facing_direction
 		last_above_rot_limit = true
 
+
 func _stop(delta : float) -> void:
 	var sprite : AnimatedSprite = character.sprite
-	if !character.test_move(character.transform, Vector2(0, 8)) and character.test_move(character.transform, Vector2(0.1 * character.facing_direction, -15)) and !character.test_move(character.transform, Vector2(0, -16)) and !character.is_grounded():
+	if character.is_on_wall():
+		character.velocity.x = 150 * -character.facing_direction
+		character.velocity.y = -200
+		character.position.x -= 4 * character.facing_direction
+		character.position.y -= 16
+		character.set_state_by_name("BonkedState", delta)
+		character.sound_player.play_bonk_sound()
+		character.camera.shake_strength = 2
+		character.camera.shake = true
+	elif !character.test_move(character.transform, Vector2(0, 8)) and character.test_move(character.transform, Vector2(0.1 * character.facing_direction, -15)) and !character.test_move(character.transform, Vector2(0, -16)) and !character.is_grounded():
 		character.velocity.x = bonk_power * -character.facing_direction
 		character.velocity.y = -65
 		character.position.x -= 2 * character.facing_direction
 		character.position.y -= 16
 		character.set_state_by_name("BonkedState", delta)
 		character.sound_player.play_bonk_sound()
+		character.camera.shake_strength = 2
+		character.camera.shake = true
 		sprite.rotation_degrees = 0
-	if character.is_on_wall():
-		character.velocity.x = 150 * -character.facing_direction
-		character.velocity.y = -65
-		character.position.x -= 2 * character.facing_direction
-		character.set_state_by_name("BonkedState", delta)
-		character.sound_player.play_bonk_sound()
 	if character.is_grounded():
+		LastInputDevice.rumble(0.5, 0.0, 0.05)
 		character.set_state_by_name("SlideState", delta)
-	elif character.water_detector.get_overlapping_areas().size() <= 0:
+		character.sprite.scale = LAND_SQUISH
+		character.squish_lerp = true
+	elif !character.check_liquid(LiquidBase.LiquidType.Water):
 		sprite.rotation_degrees = 0
 	character.ground_shape.disabled = true
 	
-	if character.is_grounded():
+	
+	if character.is_grounded() or character.check_liquid(LiquidBase.LiquidType.Quicksand):
 		character.facing_direction = start_facing
 		var normal = character.ground_check.get_collision_normal()
 		var sprite_rotation = atan2(normal.y, normal.x) + (PI/2)
 		sprite_rotation += PI/2 * start_facing
 		character.sprite.rotation = sprite_rotation
+		if character.check_liquid(LiquidBase.LiquidType.Quicksand) or character.check_liquid(LiquidBase.LiquidType.Lava):
+			# below fixes an issue with dives putting your bottom 
+			# position below the actual surface of the liquid
+			if !character.in_quicksand:
+				character.global_position.y -= 12
 
 func _stop_check(_delta : float) -> bool:
 	return character.is_grounded() or (character.is_walled_right() and character.facing_direction == 1) or (character.is_walled_left() and character.facing_direction == -1)

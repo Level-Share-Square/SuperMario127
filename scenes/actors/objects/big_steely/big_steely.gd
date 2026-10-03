@@ -5,6 +5,8 @@ onready var shape = $Steely/Area2D/CollisionShape2D2
 onready var break_detector = $Steely/BreakDetector
 onready var platform_detector = $Steely/PlatformDetector
 onready var water_detector = $Steely/WaterDetector
+onready var box_pwn_collider = $Steely/BoxPwnCollider
+
 onready var body = $Steely
 onready var sound = $Steely/AudioStreamPlayer
 onready var sprite = $Steely/Sprite
@@ -43,48 +45,41 @@ func is_grounded():
 	if !grounded_check.is_colliding():
 		check = grounded_check_2
 	return check.is_colliding()
-	
+
+
 func _ready():
 	initial_scale = scale / 1.5
 	actual_scale = scale
 	scale = initial_scale
 	fade_time = 0.5
 	modulate = Color(1, 1, 1, 0)
-
-	despawn_timer.connect("timeout", self, "_on_despawn_timer_timeout")
 	
+	despawn_timer.connect("timeout", self, "_on_despawn_timer_timeout")
+
+
 func disable_all_descendants(node):
 	for child in node.get_children():
 		if child is CollisionShape2D:
 			child.disabled = true
 		disable_all_descendants(child)
-	
+
+
 func destroy():
 	broken = true
 	disable_all_descendants(self)
 	sound.play()
-	create_coin()
+	
+	time_alive += 1
+	time_alive += (time_alive/3*5/10)
+	var power = int(time_alive*100) % 80
+	var velocity_x = -power if int(time_alive * 10) % 2 == 0 else power
+	create_coin(40, body, true, Vector2(velocity_x, -300))
+	
 	dust_particle.emitting = true
 	break_particle.emitting = true
 	sprite.visible = false
 	break_timer = 1.5
 
-func create_coin(): #creates a coin
-	time_alive += 1
-	time_alive += (time_alive/3*5/10)
-	var object = LevelObject.new()
-	object.type_id = 40
-	object.properties = []
-	object.properties.append(body.global_position)
-	object.properties.append(Vector2(1, 1))
-	object.properties.append(0)
-	object.properties.append(true)
-	object.properties.append(true)
-	object.properties.append(true)
-	var power = int(time_alive*100) % 80
-	var velocity_x = -power if int(time_alive * 10) % 2 == 0 else power
-	object.properties.append(Vector2(velocity_x, -300)) #makes the coin move around and fly in the air when the block breaks
-	get_parent().create_object(object, false) #finishes the object creation
 
 func _physics_process(delta):
 	time_alive += delta
@@ -112,7 +107,6 @@ func _physics_process(delta):
 			alpha = lerp(alpha, -1, delta * 2)
 			modulate = Color(1, 1, 1, alpha)
 			if alpha <= 0:
-				#print("free")
 				queue_free()
 		# Use the position difference to calculate velocity
 		# (the one in the physics body isn't accurate
@@ -122,6 +116,7 @@ func _physics_process(delta):
 		prev_pos = new_pos
 		
 		should_hit = actual_velocity.length_squared() > 0.25
+		box_pwn_collider.set_collision_layer_bit(17, should_hit)
 		
 		var platform_collision_enabled = false
 		for platform_body in platform_detector.get_overlapping_areas():
@@ -140,7 +135,7 @@ func _physics_process(delta):
 					hit_body.get_parent().steely_hit(global_position)
 		
 	
-		gravity = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].settings.gravity
+		gravity = CurrentLevelData.current_area.header.gravity
 		#body.apply_central_impulse(Vector2(0, gravity))
 		velocity.y += gravity * gravity_scale
 		velocity.y += gravity * gravity_scale
@@ -164,7 +159,7 @@ func _physics_process(delta):
 		rotation = 0
 		velocity = body.move_and_slide(velocity)
 		
-		if !visiblity_notifier.is_on_screen() or global_position.y > (level_area.settings.bounds.end.y * 32) + 96:
+		if !visiblity_notifier.is_on_screen() or global_position.y > (CurrentLevelData.current_area.header.bounds.end.y * 32) + 96:
 			queue_free()
 
 		for hit_body in break_detector.get_overlapping_bodies():
@@ -179,10 +174,12 @@ func _physics_process(delta):
 			break_timer = 0
 			queue_free()
 
+
 func setup_despawn_timer(wait_time): #for now, this is only called by the steely spawner
 	despawn_timer.wait_time = wait_time 
 	despawn_timer.start()
-	
+
+
 func _on_despawn_timer_timeout():
 	if !visiblity_notifier.is_on_screen():
 		queue_free()

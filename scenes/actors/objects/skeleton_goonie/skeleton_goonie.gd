@@ -50,14 +50,14 @@ var bombs: = false
 var dead: = false
 var hit: = false
 
-func _set_properties():
-	savable_properties = ["wingless", "speed", "bombs"]
-	editable_properties = ["wingless", "speed", "bombs"]
+#func _set_properties():
+#	savable_properties = ["wingless", "speed", "bombs"]
+#	editable_properties = ["wingless", "speed", "bombs"]
 
-func _set_property_values():
-	set_property("wingless", wingless, true)
-	set_property("speed", speed, true)
-	set_property("bombs", bombs, true)
+func _register_properties():
+	register_property(4, "wingless", wingless, true)
+	register_property(5, "speed", speed, true)
+	register_property(6, "bombs", bombs, true)
 
 func update_wingless():
 	if (wingless):
@@ -79,7 +79,7 @@ func goonie_ready():
 	bomb_body = get_node("StaticBody2D/BombBody")
 	poof = get_node("Sprite/Poof")
 	
-	gravity = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].settings.gravity
+	gravity = CurrentLevelData.current_area.header.gravity
 	wingless_collision_layer = wingless_body.collision_layer
 	wingless_collision_mask = wingless_body.collision_mask
 	bomb_collision_mask = bomb_body.collision_mask
@@ -94,19 +94,6 @@ func goonie_ready():
 func exploded(hit_pos:Vector2):
 	hurt(hit_pos)
 
-func create_coin(spawn_pos)->void :
-	var object: = LevelObject.new()
-	object.type_id = 1
-	object.properties = []
-	object.properties.append(spawn_pos)
-	object.properties.append(Vector2(1, 1))
-	object.properties.append(0)
-	object.properties.append(true)
-	object.properties.append(true)
-	object.properties.append(true)
-	var velocity_x = - 80 if randi() % 2 == 0 else 80
-	object.properties.append(Vector2(velocity_x, - 300))
-	get_parent().create_object(object, false)
 
 func hurt(hit_pos:Vector2):
 	if (inv_timer > 0):
@@ -142,7 +129,8 @@ func hurt(hit_pos:Vector2):
 		if (sprite.flip_h): head_particle.texture = load("res://scenes/actors/objects/skeleton_goonie/headflip_h.png")
 		head_particle.emitting = true
 		head_particle.restart()
-		create_coin(wingless_body.global_position)
+		var velocity_x = - 80 if randi() % 2 == 0 else 80
+		create_coin(1, wingless_body, true, Vector2(velocity_x, -300))
 	bones_sfx.play()
 	hit_sfx.play()
 	poof.emitting = true
@@ -194,7 +182,7 @@ func drop_bomb():
 func goonie_physics_process(delta: float):
 	sprite.playing = true
 	
-	if not (mode != 1 and enabled):
+	if not (mode != 1 and is_enabled_and_on_ground()):
 		update_wingless()
 		if (wingless):
 			sprite.global_position = wingless_body.global_position
@@ -304,3 +292,7 @@ func goonie_physics_process(delta: float):
 
 func goonie_platform_area_exited(body):
 	pass
+	
+func is_middle(check: bool):
+	stomp_area_wing.get_node("CollisionShape2D").disabled = !check
+	attack_area.get_node("CollisionShape2D").disabled = !check

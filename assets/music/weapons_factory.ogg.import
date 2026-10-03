@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/weapons_factory.ogg-e3e3d5b9bcbaa376bca6a8221ce3485e.oggstr"
+
+[deps]
+
+source_file="res://assets/music/weapons_factory.ogg"
+dest_files=[ "res://.import/weapons_factory.ogg-e3e3d5b9bcbaa376bca6a8221ce3485e.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=16.725

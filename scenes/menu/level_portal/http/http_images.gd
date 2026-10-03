@@ -60,13 +60,16 @@ func request_completed(result: int, response_code: int, headers: PoolStringArray
 	else:
 		error = image.load_jpg_from_buffer(body)
 	
+	var texture: ImageTexture
+	
 	if error != OK:
 		printerr("Image failed to load.")
 	
-	var texture := ImageTexture.new()
-	texture.create_from_image(image)
-	
-	cached_images[url] = texture
+	else:
+		texture = ImageTexture.new()
+		texture.create_from_image(image)
+		
+		cached_images[url] = texture
 	loading = false
 	emit_signal("image_loaded", url, texture)
 	

@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scenes/actors/objects/koopa_troopa/shell_frames.tres" type="SpriteFrames" id=1]
-[ext_resource path="res://scenes/actors/objects/bullet_bill/sound.wav" type="AudioStream" id=2]
+[ext_resource path="res://assets/sounds/koopa_hit.wav" type="AudioStream" id=2]
 [ext_resource path="res://scenes/actors/objects/koopa_troopa/shell_color_frames.tres" type="SpriteFrames" id=3]
 
 [sub_resource type="RayShape2D" id=1]
@@ -22,7 +22,7 @@ extents = Vector2( 13.5, 9 )
 [node name="Shell" type="KinematicBody2D"]
 position = Vector2( 0, -4 )
 collision_layer = 4
-collision_mask = 21
+collision_mask = 17
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
@@ -51,7 +51,7 @@ shape = SubResource( 2 )
 
 [node name="AttackArea" type="Area2D" parent="."]
 visible = false
-collision_layer = 4
+collision_layer = 131076
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
@@ -70,7 +70,7 @@ shape = SubResource( 4 )
 [node name="DestroyArea" type="Area2D" parent="."]
 visible = false
 collision_layer = 2
-collision_mask = 10
+collision_mask = 14
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DestroyArea"]
 position = Vector2( 0, 3 )

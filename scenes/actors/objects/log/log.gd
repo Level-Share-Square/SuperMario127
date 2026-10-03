@@ -7,6 +7,8 @@ onready var collision_shape = $StaticBody2D/CollisionShape2D
 onready var tween = $Tween
 onready var sprite = $Sprite
 
+export(Array, Texture) var palette_textures
+
 var buffer := -5
 var character = null
 var fall_on_touch := false
@@ -21,12 +23,12 @@ var shake_amount := 1.0
 
 var fall_speed := 1.0
 
-func _set_properties():
-	savable_properties = ["fall_on_touch"]
-	editable_properties = ["fall_on_touch"]
+#func _set_properties():
+#	savable_properties = ["fall_on_touch"]
+#	editable_properties = ["fall_on_touch"]
 	
-func _set_property_values():
-	set_property("fall_on_touch", fall_on_touch, true)
+func _register_properties():
+	register_property(4, "fall_on_touch", fall_on_touch, true)
 	
 func can_collide_with(_character):
 	return true
@@ -35,16 +37,23 @@ func _ready():
 	if is_preview:
 		z_index = 0
 		sprite.z_index = 0
-	if !enabled:
+	if !is_enabled_and_on_ground():
 		collision_shape.disabled = true
 	orig_pos = position
 	if mode != 1:
 		var _connect = area.connect("body_entered", self, "enter_area")
 		var _connect2 = area.connect("body_exited", self, "exit_area")
 
+	var _connect = connect("property_changed", self, "update_property")
+	update_property("palette", palette)
+
+func update_property(key: String, value):
+	if key == "palette":
+		sprite.texture = palette_textures[value]
+
 func fall_detector(body):
 
-	if character and enabled:
+	if character and is_enabled_and_on_ground():
 		var can_fall = false
 		var _direction = static_body.global_transform.y.normalized()
 		if character.velocity.y >= 0 and character.is_grounded():
@@ -111,7 +120,7 @@ func _physics_process(delta):
 			Tween.TRANS_QUART, Tween.EASE_OUT)
 			tween.start()
 		
-	if character != null and !falling and enabled:
+	if character != null and !falling and is_enabled_and_on_ground():
 		var direction = static_body.global_transform.y.normalized()
 		
 		if direction.y > 0.5:
@@ -119,7 +128,7 @@ func _physics_process(delta):
 			var line_direction = Vector2(-direction.y, direction.x)
 			var p1 = line_center + line_direction
 			var p2 = line_center - line_direction
-			var p = character.bottom_pos.global_position if (character.has_method("is_grounded") and !character.is_grounded()) else character.global_position
+			var p = character.bottom_pos.global_position - Vector2(0, 10) if (character.has_method("is_grounded") and !character.is_grounded()) else character.global_position
 			var diff = p2 - p1
 			var perp = Vector2(-diff.y, diff.x)
 			var d = (p - p1).dot(perp)

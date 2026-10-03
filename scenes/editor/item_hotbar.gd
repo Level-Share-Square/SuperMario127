@@ -1,0 +1,284 @@
+extends HBoxContainer
+
+export var placeable_items: Resource
+onready var editor = owner
+
+onready var bottom_row = $Middle/VBoxContainer/PanelContainer/HBoxContainer
+onready var button_container = $Middle/VBoxContainer/PanelContainer/HBoxContainer
+onready var loadout_container = $Middle/VBoxContainer/PanelContainer2/HBoxContainer
+onready var palette_container = $"%PaletteContainer"
+onready var palettes = $"%Palettes"
+onready var item_preview = $"%ItemPreview"
+
+
+var items_favorited: PoolIntArray = [0, 0, 0, 0] #Per each loadout
+var fav_items: Array = [
+	Array([]),
+	Array([]),
+	Array([]),
+	Array([]),
+]
+var loadouts: Array = EditorData.DEFAULT_ITEMS
+var loadout_palettes: Array = [
+	PoolIntArray([0, 0, 0, 0, 0, 0, 0, 0, 0, 0]),
+	PoolIntArray([0, 0, 0, 0, 0, 0, 0, 0, 0, 0]),
+	PoolIntArray([0, 0, 0, 0, 0, 0, 0, 0, 0, 0]),
+	PoolIntArray([0, 0, 0, 0, 0, 0, 0, 0, 0, 0]),
+]
+
+var selected_loadout: int = 0
+var loadout_map: Dictionary = {
+	"LoadoutA": 0,
+	"LoadoutB": 1,
+	"LoadoutC": 2,
+	"LoadoutD": 3,
+}
+
+var last_selected_tile: Array
+var last_selected_object: Array
+
+var selected_button
+
+func _ready():
+	bottom_row.show()
+	palette_container.hide()
+	bottom_row.get_children()[0].pressed = true
+	
+	for item_button in button_container.get_children():
+		item_button.connect("button_down", self, "_on_item_button_pressed", [item_button])
+		item_button.change_item(placeable_items.placeable_items[loadouts[selected_loadout][item_button.get_index()]])
+	
+	for loadout_button in loadout_container.get_children():
+		if "Loadout" in loadout_button.name:
+			loadout_button.connect("pressed", self, "_on_loadout_pressed", [loadout_button])
+		else:
+			loadout_button.connect("pressed", self, "_on_palettes_pressed")
+	
+	if CurrentLevelData.editor_data.loadouts != []:
+		loadouts = CurrentLevelData.editor_data.loadouts
+		fav_items = CurrentLevelData.editor_data.fav_items
+		loadout_palettes = CurrentLevelData.editor_data.palettes
+		items_favorited = CurrentLevelData.editor_data.fav_counts
+		selected_loadout = CurrentLevelData.editor_data.selected_loadout
+		
+		for i in range(loadouts.size()):
+			if loadouts[i].size() < 10:
+				loadouts[i] = EditorData.DEFAULT_ITEMS[i]
+				loadout_palettes[i] = PoolIntArray([0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+				fav_items[i] = Array([])
+				items_favorited[i] = 0
+	
+	last_selected_tile = [placeable_items.placeable_items["til_grass"], 0]
+	last_selected_object = [placeable_items.placeable_items["obj_coin"], 0]
+	
+	refresh_loadout()
+	check_items()
+	
+	yield(editor, "ready")
+	_on_item_button_pressed(bottom_row.get_children()[0])
+
+
+func _on_item_button_pressed(item_button):
+	var item_name: String = loadouts[selected_loadout][item_button.get_index()]
+	var associated_item = placeable_items.placeable_items[loadouts[selected_loadout][item_button.get_index()]]
+	if associated_item == editor.selected_item and item_button.palette == editor.selected_item.palette:
+		item_button.timer_start = true
+	editor.selected_item = associated_item
+	editor.selected_item.palette = item_button.palette
+	match item_name.substr(0, 3):
+		"obj":
+			item_preview.update_item(associated_item, associated_item.palette, true)
+			editor.tool_manager.change_tool("ObjectPen")
+			last_selected_object = [associated_item, 0]
+		"til":
+			item_preview.update_item(associated_item, associated_item.palette, false)
+			editor.tool_manager.change_tool("TilePaint")
+			last_selected_tile = [associated_item, 0]
+	
+	editor.emit_signal("item_changed", associated_item)
+	update_level_data()
+	selected_button = item_button
+
+func update_level_data():
+	CurrentLevelData.editor_data.loadouts = loadouts
+	var loadout_palette: PoolIntArray = PoolIntArray()
+	for buttons in bottom_row.get_children():
+		loadout_palette.append(buttons.palette)
+	loadout_palettes[selected_loadout] = loadout_palette
+	CurrentLevelData.editor_data.palettes = loadout_palettes
+	CurrentLevelData.editor_data.fav_items = fav_items
+	CurrentLevelData.editor_data.fav_counts = items_favorited
+	CurrentLevelData.editor_data.selected_loadout = selected_loadout
+
+
+func check_items():
+	for item_button in button_container.get_children():
+		if item_button.item == editor.selected_item:
+			item_button.pressed = true
+		item_button.palette = loadout_palettes[selected_loadout][item_button.get_index()]
+		item_button.palette = wrapi(item_button.palette, 0, item_button.item.icons.size())
+		item_button.icon_node.texture = item_button.item.icons[item_button.palette]
+	
+	return
+
+
+func _on_loadout_pressed(loadout_button):
+	if palettes.pressed: 
+		var reselect_button: Button = loadout_button.get_parent().get_node(loadout_map.find_key(selected_loadout))
+		reselect_button.pressed = true
+		return
+		
+	update_level_data()
+	var loadout_palette: Array = []
+	for buttons in bottom_row.get_children():
+		loadout_palette.append(buttons.palette)
+		loadout_palettes[selected_loadout] = loadout_palette
+	selected_loadout = loadout_map[loadout_button.name]
+	refresh_loadout()
+	check_items()
+	manual_button_click(bottom_row.get_child(0))
+	update_level_data()
+
+
+func new_favorite_selected(placeable_item: Resource, index: int):
+	var item_name = placeable_items.placeable_items.find_key(placeable_item)
+	if item_name == null:
+		return
+	
+	var current_loadout_favs: Array = fav_items[selected_loadout]
+	var current_loadout: Array = loadouts[selected_loadout]
+	var boxes: Array = bottom_row.get_children()
+	
+	if index < current_loadout_favs.size():
+		var fav_index = current_loadout_favs.find(item_name)
+		if fav_index != -1:
+			current_loadout.insert(items_favorited[selected_loadout] - 1, current_loadout.pop_at(fav_index))
+			bottom_row.move_child(boxes[index], items_favorited[selected_loadout] - 1)
+			current_loadout_favs.erase(item_name)
+			items_favorited[selected_loadout] -= 1
+			refresh_loadout()
+			update_level_data()
+		return
+	
+	current_loadout_favs.append(item_name)
+	current_loadout.remove(index)
+	current_loadout.insert(items_favorited[selected_loadout], item_name)
+	bottom_row.move_child(boxes[index], items_favorited[selected_loadout])
+	items_favorited[selected_loadout] += 1
+	refresh_loadout()
+	update_level_data()
+
+
+func on_item_selected(item: PlaceableItem):
+	var start_index: int = items_favorited[selected_loadout]
+	if start_index > 9:
+		return
+	
+	var boxes: Array = bottom_row.get_children()
+	var selected_box: Button = boxes[start_index]
+	selected_box.change_item(item)
+	selected_box.visible = true
+	boxes[9].palette = 0
+	bottom_row.move_child(boxes[9], start_index)
+	loadouts[selected_loadout].insert(start_index, loadouts[selected_loadout].pop_back())
+	loadouts[selected_loadout][start_index] = placeable_items.placeable_items.find_key(item)
+	refresh_loadout()
+	update_level_data()
+	_on_item_button_pressed(boxes[9])
+
+	boxes[9].set_deferred("pressed", true)
+
+func select_last_object():
+	if editor.selected_item is PlaceableObject: return
+	select_item_from_placeable(last_selected_object[0], last_selected_object[1])
+	
+func select_last_tile():
+	if editor.selected_item is PlaceableTile: return
+	select_item_from_placeable(last_selected_tile[0], last_selected_tile[1])
+	
+func select_object_from_other(object):
+	select_item_from_placeable(object.placeable_item, object.object_data.metadata.palette)
+	
+func select_tile_from_other(tile):
+	var item = tile_util.get_placeable_from_tile(tile, placeable_items)
+	select_item_from_placeable(item, tile[2])
+
+
+func select_item_from_placeable(item, palette):
+	for button in bottom_row.get_children():
+		if button.item == item and button.palette == palette:
+			manual_button_click(button)
+			return
+	
+	on_item_selected(item)
+	yield(get_tree(), "idle_frame")
+	var favs_amount: int = fav_items[selected_loadout].size()
+	palette_selected(palette, bottom_row.get_child(favs_amount))
+
+func refresh_loadout():
+	var favs_amount: int = fav_items[selected_loadout].size()
+	for item_button in button_container.get_children():
+		var item = loadouts[selected_loadout][item_button.get_index()]
+		item_button.set_favorite(favs_amount > 0)
+		item_button.change_item(placeable_items.placeable_items[item])
+		favs_amount -= 1
+		
+	match selected_loadout:
+		0:
+			loadout_container.get_node("LoadoutA").pressed = true
+		1:
+			loadout_container.get_node("LoadoutB").pressed = true
+		2:
+			loadout_container.get_node("LoadoutC").pressed = true
+		3:
+			loadout_container.get_node("LoadoutD").pressed = true
+
+
+func _on_palettes_pressed():
+	bottom_row.visible = not palettes.pressed
+	palette_container.visible = palettes.pressed
+	var palette_count: int = editor.selected_item.icons.size() - 1
+	var item_palettes: Array = editor.selected_item.icons
+
+	for palette_button in palette_container.get_children():
+		palette_button.item = editor.selected_item
+		if palette_button.get_index() < item_palettes.size():
+			palette_button.show()
+			palette_button.icon_node.texture = item_palettes[palette_button.get_index()]
+		else:
+			palette_button.hide()
+
+
+func hide_palettes():
+	bottom_row.show()
+	palette_container.hide()
+	palettes.pressed = false
+
+
+func palette_selected(palette, item_button):
+	hide_palettes()
+	
+	item_button.palette = palette
+	item_button.icon_node.texture = item_button.item.icons[palette]
+	if item_button == selected_button:
+		editor.selected_item.palette = palette
+		_on_item_button_pressed(item_button)
+
+func _unhandled_input(event):
+	if (not (Input.is_action_pressed("alt_modifier") or Input.is_action_pressed("ctrl_modifier"))) and not editor.get_hovered_objects():
+		if event.is_action_pressed("scroll_down"):
+			var new_button = bottom_row.get_child(wrapi((selected_button.get_index() + 1), 0, 9))
+			manual_button_click(new_button)
+			
+		if event.is_action_pressed("scroll_up"):
+			var new_button = bottom_row.get_child(wrapi((selected_button.get_index() - 1), 0, 9))
+			manual_button_click(new_button)
+
+func manual_button_click(button):
+	button.emit_signal("pressed")
+	button.emit_signal("button_down")
+
+	yield(button.tween, "tween_completed")
+
+	button.emit_signal("button_up")
+	button.pressed = true

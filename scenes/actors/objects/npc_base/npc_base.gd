@@ -36,34 +36,47 @@ var last_position: float = 0
 var working_speed: float = 0
 
 var dialogue_trigger: Node
+var add_required_shines: bool = true
+var unused: String
 
 
-func _set_properties():
-	savable_properties = ["curve", "custom_path", "move_type", "walk_speed", "physics_enabled", "idle_expression", "idle_action", "speaking_expression", "speaking_action", "path_reference", "tag_link", "required_shines"]
-	editable_properties = ["idle_expression", "idle_action", "speaking_expression", "speaking_action", "tag_link", "custom_path", "walk_speed", "move_type", "physics_enabled", "required_shines", "path_reference"]
-
-
-func _set_property_values():
-	set_property("curve", curve, true)
-	set_property("custom_path", curve, true)
-	set_property("move_type", move_type, true)
-	set_bool_alias("move_type", "Loop", "Reset")
-	set_property("walk_speed", walk_speed, true)
-	set_property("physics_enabled", physics_enabled, true)
+func _register_properties():
+	register_property(4, "unused", unused, false)
+	register_property(5, "curve", curve, true)
+	register_property(6, "move_type", move_type, true)
+	set_property_override("move_type", PropertyTab.OverrideTypes.BOOL_ALIAS, {true: "Loop", false: "Reset"})
+	register_property(7, "walk_speed", walk_speed, true)
+	register_property(8, "physics_enabled", physics_enabled, true)
 	
-	set_property("idle_expression", idle_expression, true)
-	set_property_menu("idle_expression", ["option", expression_map.size(), 0, expression_map])
-	set_property("idle_action", idle_action, true)
-	set_property_menu("idle_action", ["option", action_map.size(), 0, action_map])
+	register_property(9, "idle_expression", idle_expression, true)
+	set_property_override("idle_expression", PropertyTab.OverrideTypes.ENUM, expression_map)
+	register_property(10, "idle_action", idle_action, true)
+	set_property_override("idle_action", PropertyTab.OverrideTypes.ENUM, action_map)
 	
-	set_property("speaking_expression", speaking_expression, true)
-	set_property_menu("speaking_expression", ["option", expression_map.size(), 0, expression_map])
-	set_property("speaking_action", speaking_action, true)
-	set_property_menu("speaking_action", ["option", action_map.size(), 0, action_map])
+	register_property(11, "speaking_expression", speaking_expression, true)
+	set_property_override("speaking_expression", PropertyTab.OverrideTypes.ENUM, expression_map)
+	register_property(12, "speaking_action", speaking_action, true)
+	set_property_override("speaking_action", PropertyTab.OverrideTypes.ENUM, action_map)
 	
-	set_property("path_reference", path_reference, true)
-	set_property("tag_link", tag_link, true)
-	set_property("required_shines", required_shines, true)
+	register_property(13, "path_reference", path_reference, true)
+	register_property(14, "tag_link", tag_link, true)
+	set_property_override("tag_link", PropertyTab.OverrideTypes.DROPDOWN, [CurrentLevelData.level_tags, "get_dialogue_args", [CurrentLevelData.level_tags, "dialogue_tags"]])
+	
+	if add_required_shines:
+		register_property(15, "required_shines", required_shines, false)
+
+
+func _register_property_info():
+	set_property_info("curve", PropertyInfo.new("The path this NPC will automatically follow.\nThe NPC will target this path, but may not always be able to reach it.", 1, -INF, INF, ["", ""], ["", ""], false, "Path"))
+	set_property_info("move_type", PropertyInfo.new("If set to Loop, the path will wrap around instead of stopping at the ends.", 1, -INF, INF, ["", ""], ["", ""], false, "Path Type"))
+	set_property_info("walk_speed", PropertyInfo.new("The speed at which this NPC moves on its own.", 1, -INF, INF, ["", ""], ["", ""], false, ""))
+	set_property_info("physics_enabled", PropertyInfo.new("Whether this NPC is affected by gravity and collision or not.", 1, -INF, INF, ["", ""], ["", ""], false, ""))
+	set_property_info("idle_expression", PropertyInfo.new("This NPC's baseline expression.", 1, -INF, INF, ["", ""], ["", ""], false, ""))
+	set_property_info("idle_action", PropertyInfo.new("This NPC's baseline animation.", 1, -INF, INF, ["", ""], ["", ""], false, ""))
+	set_property_info("speaking_expression", PropertyInfo.new("This NPC's expression when a speech bubble is displayed.", 1, -INF, INF, ["", ""], ["", ""], false, ""))
+	set_property_info("speaking_action", PropertyInfo.new("This NPC's animation when a speech bubble is displayed.", 1, -INF, INF, ["", ""], ["", ""], false, ""))
+	set_property_info("path_reference", PropertyInfo.new("Gives a visual on where this NPC's path is located", 1, -INF, INF, ["", ""], ["", ""], false, ""))
+	set_property_info("tag_link", PropertyInfo.new("Links a dialogue trigger to the NPC from a distance, via its tag.", 1, -INF, INF, ["", ""], ["", ""], false, ""))
 
 
 func get_dialogue_from_tag(tag: String) -> Node:
@@ -80,6 +93,7 @@ func set_dialogue(dialogue_trigger: Node):
 	dialogue_trigger.position -= position
 	dialogue_trigger.position *= scale.sign()
 	dialogue_trigger.scale = scale.sign()
+	dialogue_trigger.scale = Vector2(1/scale.x, 1/scale.y)
 	
 	dialogue_trigger.connect("start_talking", self, "start_talking")
 	dialogue_trigger.connect("stop_talking", self, "stop_talking")
@@ -102,7 +116,7 @@ func _ready():
 		# warning-ignore: unused_variable
 		connect("property_changed", self, "property_changed")
 	else:
-		gravity = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].settings.gravity
+		gravity = CurrentLevelData.current_area.header.gravity
 		yield(get_tree(), "idle_frame")
 		working_speed = walk_speed
 		pathfollow.loop = !move_type
@@ -126,7 +140,13 @@ func _ready():
 					break
 		
 		if required_shines > 0:
-			var collected_shines: int = Singleton.CurrentLevelData.level_info.collected_shines.values().count(true)
+			var collected_shines: int
+			if CurrentLevelData.is_playing_hub_level():
+				var total_dict: Dictionary = CurrentLevelData.get_meta_collectibles()
+				collected_shines = total_dict.get("collected_shines", 0)
+			else:
+				collected_shines = CurrentLevelData.save_data.get_completed_mission_count()
+			
 			if collected_shines < required_shines:
 				queue_free()
 

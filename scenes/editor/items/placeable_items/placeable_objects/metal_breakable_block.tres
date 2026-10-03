@@ -1,0 +1,18 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://scenes/editor/items/placeable_object.gd" type="Script" id=1]
+[ext_resource path="res://scenes/actors/objects/metal_breakable_block/icon.png" type="Texture" id=3]
+
+[resource]
+script = ExtResource( 1 )
+item_name = "Metal Breakable"
+change_to = ""
+items_in_sequence = 0
+index_in_sequence = 0
+icons = [ ExtResource( 3 ) ]
+previews = [ ExtResource( 3 ) ]
+priority = 111
+object_id = 35
+preview_offset = Vector2( 0, 0 )
+property_overrides = {
+}

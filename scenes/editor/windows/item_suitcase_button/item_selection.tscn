@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scenes/editor/windows/item_suitcase_button/item_selection.gd" type="Script" id=1]
+
+[sub_resource type="InputEventKey" id=3]
+scancode = 49
+physical_scancode = 49
+
+[sub_resource type="ShortCut" id=4]
+shortcut = SubResource( 3 )
+
+[node name="ItemBase" type="Button"]
+visible = false
+margin_right = 32.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+focus_mode = 0
+theme_type_variation = "ButtonEmpty"
+enabled_focus_mode = 0
+shortcut = SubResource( 4 )
+flat = true
+expand_icon = true
+script = ExtResource( 1 )

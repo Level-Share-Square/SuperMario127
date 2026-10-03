@@ -1,10 +1,13 @@
 extends Powerup
 class_name RainbowPowerup
 
+const HUE_SHIFT: float = 0.006
+
 var hue = 0
 var rainbow_trails = []
 var trail_timer = 0.075
 var has_landed = false
+var last_active = false
 
 onready var trail_script = load("res://scenes/actors/mario/powerups/rainbow_trail.gd")
 
@@ -28,13 +31,22 @@ func create_trail():
 	var trail = character.sprite.duplicate()
 	trail.global_position = character.sprite.global_position
 	trail.playing = false
-	trail.z_index = -2
+	trail.z_index = -1
 	trail.script = trail_script
-	add_child(trail)
+	character.get_parent().add_child(trail)
+	character.get_parent().move_child(trail, 0)
 
 func _process(delta):
+	if character.powerup == self:
+		if !last_active:
+			character.set_all_collision_masks(8, true)
+	else:
+		if last_active:
+			character.set_all_collision_masks(8, false)
+	
+	last_active = (character.powerup == self)
 	if character.sprite.material == material:
-		hue += 0.015
+		hue += HUE_SHIFT
 		var gradient_texture = GradientTexture.new()
 		var gradient = Gradient.new()
 		gradient.offsets = PoolRealArray([0.15, 1])

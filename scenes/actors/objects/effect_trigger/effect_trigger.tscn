@@ -9,6 +9,7 @@ extents = Vector2( 20, 20 )
 
 [node name="EffectTrigger" type="Node2D"]
 script = ExtResource( 1 )
+internal_id = "effect_trigger"
 
 [node name="Sprite" type="NinePatchRect" parent="."]
 margin_left = -20.0

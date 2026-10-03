@@ -6,31 +6,27 @@ extends GameObject
 var parts := 1
 var last_parts := 1
 
-func _set_properties():
-	savable_properties = ["parts"]
-	editable_properties = ["parts"]
+var can_rotate : bool = true
+
+#func _set_properties():
+#	savable_properties = ["parts", "can_rotate"]
+#	editable_properties = ["parts", "can_rotate"]
 	
-func _set_property_values():
-	set_property("parts", parts, 1)
+func _register_properties():
+	register_property(4, "parts", parts, 1)
+	register_property(5, "can_rotate", can_rotate, 1)
 
-func _input(event):
-	if event is InputEventMouseButton and event.is_pressed() and hovered:
-		if event.button_index == 5: # Mouse wheel down
-			parts -= 1
-			if parts < 1:
-				parts = 1
-			set_property("parts", parts, true)
-		elif event.button_index == 4: # Mouse wheel up
-			parts += 1
-			set_property("parts", parts, true)
+func _unhandled_input(event: InputEvent) -> void:
+	parts_input_handler(event,self)
 
-func _process(_delta):
-	if parts != last_parts:
+
+func update_property(key, value):
+	if is_savable_property(key):
 		update_parts()
-	last_parts = parts
 
-
-
+	if key == "palette":
+		sprite.texture = platform_palette_textures[value]
+		screw.texture = screw_palette_textures[value]
 
 
 
@@ -38,12 +34,15 @@ func _process(_delta):
 
 onready var body = $KinematicBody2D
 onready var sprite = $Sprite
-onready var screw = $Screw
+onready var screw = $Sprite/Screw
 onready var area = $FloorTouchArea
 
 onready var platform_area_collision_shape = $KinematicBody2D/Area2D/CollisionShape2D
 onready var area_collision_shape = $FloorTouchArea/CollisionShape2D
 onready var collision_shape = $KinematicBody2D/CollisionShape2D
+
+export(Array, Texture) var platform_palette_textures
+export(Array, Texture) var screw_palette_textures
 
 var buffer := -5
 
@@ -61,14 +60,13 @@ var current_weights := []
 var scale_x : float
 
 func _ready():
-	platform_area_collision_shape.shape = platform_area_collision_shape.shape.duplicate(true)
-	area_collision_shape.shape = area_collision_shape.shape.duplicate(true)
-	collision_shape.shape = collision_shape.shape.duplicate(true)
-	
-	if !enabled:
+	if !is_enabled_and_on_ground():
 		collision_shape.disabled = true
 		area_collision_shape.disabled = true
 		platform_area_collision_shape.disabled = true
+	
+	connect("property_changed", self, "update_property")
+	update_property("palette", palette)
 	
 	update_parts()
 
@@ -82,9 +80,13 @@ func update_parts():
 	
 	#calculate the total platform scale
 	scale_x = scale.x * (left_width + right_width + part_width * parts) / (left_width + right_width + part_width)
+	
+	screw.position = -sprite.rect_position
+	screw.visible = can_rotate
+	editor_rect = Rect2(sprite.rect_position, sprite.rect_size)
 
 func _physics_process(delta):
-	if mode == 1 or !enabled: # dont do physics if in edit more or disabled
+	if mode == 1 or !is_enabled_and_on_ground() or !can_rotate: # dont do physics if in edit more or disabled
 		return
 	
 	# first, erase any potential null pointers
@@ -116,6 +118,11 @@ func _physics_process(delta):
 		
 		weight_distribution += (relative_position_x * factor) * weight if distance_to_floor>0 else 0.0
 		weight_distribution = clamp(weight_distribution, -70, 70)
+		
+		# make the character slide off so it's more precarious
+		if abs(factor) < 1:
+			var slide_amount: float = (relative_position_x * factor) * max(tilt * sign(relative_position_x), 0) / 2.5
+			_body.position += Vector2(slide_amount, abs(slide_amount)*1.1)
 	
 	#-----act on self-----
 	

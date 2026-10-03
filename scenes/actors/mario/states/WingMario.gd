@@ -25,6 +25,7 @@ func _ready():
 	disable_animation = true
 	override_rotation = true
 	use_dive_collision = true
+	force_cam_follow_y = true
 
 func _start_check(_delta):
 	return (character.rotating_jump or character.state == character.get_state_node("DiveState")) and character.velocity.y > 0 and (character.powerup != null and character.powerup.id == "Wing")
@@ -39,11 +40,15 @@ func _update(delta):
 	# Things can - and probably should - be tweaked here
 	
 	# Set control mode
+	var is_controller: bool = LastInputDevice.last_input_type == LastInputDevice.InputType.Controller
 	up_down_controls = LocalSettings.load_setting(
-		"Controls (Player " + str(character.player_id + 1) + ")", 
+		"Controls (Player 1)" + input_settings_util.get_group_suffix(is_controller), 
 		"63_wing_cap",
 		false
 	)
+	
+	if LastInputDevice.last_input_type == LastInputDevice.InputType.Touch:
+		up_down_controls = true
 	
 	# Capping rotation
 	var clamp_max : float = lerp(rotation_down, 220 - momentum / 1.5, fps_util.PHYSICS_DELTA * 4)

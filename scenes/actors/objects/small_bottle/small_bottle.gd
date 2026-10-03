@@ -8,15 +8,18 @@ var respawns := true
 var collected = false
 var respawn_timer = 0.0
 
-func _set_properties() -> void:
-	savable_properties = ["respawns"]
-	editable_properties = ["respawns"]
+#func _set_properties() -> void:
+#	savable_properties = ["respawns"]
+#	editable_properties = ["respawns"]
 	
-func _set_property_values() -> void:
-	set_property("respawns", respawns, true)
+func _register_properties() -> void:
+	register_property(4, "respawns", respawns, true)
+	
+func _register_property_info():
+	set_property_info("respawns", PropertyInfo.new("This will respawn 40 seconds after being collected.", 1, -INF, INF, ["", ""], ["", ""], false, "Respawns"))
 
 func collect(body):
-	if enabled and !collected and body.name.begins_with("Character") and !body.dead:
+	if is_enabled_and_on_ground() and !collected and body.name.begins_with("Character") and !body.dead:
 		sound.play()
 		sprite.visible = false
 		if respawns:
@@ -32,6 +35,7 @@ func _ready():
 	if is_preview:
 		z_index = 0
 		sprite.z_index = 0
+	
 	var _connect = area.connect("body_entered", self, "collect")
 	
 func _process(delta):

@@ -13,7 +13,7 @@ export var display_offset: Vector2
 export var alpha: float
 export var fade_speed: float
 
-export var viewport_offset: Vector2
+export var viewport_offset: Vector2 = Vector2(384, 216)
 
 
 func _physics_process(delta):
@@ -36,10 +36,6 @@ func _physics_process(delta):
 	rect_position += viewport_offset
 	rect_scale = Vector2.ONE / camera_zoom
 	modulate.a = lerp(modulate.a, alpha if is_visible else 0, delta * fade_speed)
-
-
-func player_removed():
-	viewport_offset = Vector2(384, 216)
 
 
 ## for the ui hiding stuff

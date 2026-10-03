@@ -34,7 +34,6 @@ func _start(_delta):
 		character.sound_player.set_skid_playing(true)
 	else:
 		character.sound_player.play_duck_sound()
-	#print(character.ground_check.get_collision_normal())
 
 func _update(_delta):
 	var sprite = character.sprite
@@ -70,17 +69,18 @@ func _stop(delta):
 	character.particles.emitting = false
 	character.friction = character.real_friction
 	if character.is_grounded() and character.velocity.x < 5 and character.velocity.x > -5:
-		character.set_state_by_name("SlideStopState", delta)
+		character.set_state_by_name("SlideStopState", delta, self)
 	else:
-		character.position.y -= 5
-		character.set_state_by_name("DiveState", delta)
+		if !character.in_quicksand:
+			character.position.y -= 5
+		character.set_state_by_name("DiveState", delta, self)
 	stop = false
 	
 func change_to_getup(delta):
 	character.sound_player.set_skid_playing(false)
 	character.particles.emitting = false
 	character.set_state_by_name("GetupState", delta)
-	if !character.test_move(character.transform, Vector2(0, -16)):
+	if !character.test_move(character.transform, Vector2(0, -16)) and !character.in_quicksand:
 		character.position.y -= 16
 	getup_buffer = 0
 	ledge_buffer = 0

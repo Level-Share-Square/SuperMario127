@@ -15,22 +15,24 @@ func _ready():
 	override_rotation = true
 	use_dive_collision = true
 	auto_flip = true
+	force_cam_follow_y = true
+	fast_cam_follow = false
 	attack_tier = 2
 
 func _start_check(_delta):
 	pass
 
-func _start(_delta):
-	#print("starting")
+func _start(delta):
 	old_gravity_scale = character.gravity_scale
 	character.gravity_scale = 0
 	character.sprite.animation = "spinning"
 	character.sprite.speed_scale = 1.5
 	character.camera.set_zoom_tween(Vector2(1.5, 1.5), 1)
+	if is_instance_valid(character.nozzle):
+		character.nozzle.activated = false
+		character.nozzle._general_update(delta)
 	
 func _stop(_delta):
-	#print("stopping")
-	
 	character.gravity_scale = old_gravity_scale
 	character.camera.set_zoom_tween(Vector2(1, 1), 1)
 	character.camera.auto_move = true

@@ -22,7 +22,6 @@ var rainbow: = false
 var wander: = false
 var fire: = 0
 var hit: = false
-var bouncy_fire := false
 
 var gravity: = 0.0
 var gravit_scale: = 2.0
@@ -41,21 +40,20 @@ export var super_jump_height = 280
 export var walk_spd = 48
 export var max_fire_pause = 3.0
 
-func _set_properties():
-	savable_properties = ["wander", "fire", "color", "rainbow", "super_jump_height"]
-	editable_properties = ["wander", "super_jump_height", "fire", "color", "rainbow"]
-	
-func _set_property_values():
-	set_property("wander", wander, true)
-	set_property("fire", fire, true)
-	set_property_menu("fire", ["option", 3, 0, ["None", "Normal", "Bouncy"]])
-	set_property("color", color, true)
-	set_property("rainbow", rainbow, true)
-	set_property("bouncy_fire", bouncy_fire, true)
-	set_property("super_jump_height", super_jump_height, true, "Jump Height")
+#func _set_properties():
+#	savable_properties = ["wander", "fire", "color", "rainbow", "super_jump_height"]
+#	editable_properties = ["wander", "super_jump_height", "fire", "color", "rainbow"]
+#
+func _register_properties():
+	register_property(4, "wander", wander, true)
+	register_property(5, "fire", fire, true)
+	set_property_override("fire", PropertyTab.OverrideTypes.ENUM, ["None", "Normal", "Bouncy"])
+	register_property(6, "color", color, true)
+	register_property(7, "rainbow", rainbow, true)
+	register_property(8, "super_jump_height", super_jump_height, true)
 
 func _ready():
-	gravity = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].settings.gravity
+	gravity = CurrentLevelData.current_area.header.gravity
 	
 	if scale.x < 0:
 		scale.x = abs(scale.x)
@@ -74,7 +72,7 @@ func _process(delta):
 	recolorable_sprite.visible = sprite.visible
 	recolorable_sprite.rotation = sprite.rotation
 	
-	if not (mode != 1 and enabled):
+	if not (mode != 1 and is_enabled_and_on_ground()):
 		return
 	
 	if (fire != 0):
@@ -111,25 +109,16 @@ func hit(hit_pos: Vector2):
 	velocity = Vector2(normal * 225, - 225)
 	hide_timer = 3.0
 	position.y -= 2
+	
+func _object_ready():
+	._object_ready()
+	get_node("Body/CollisionShape2D").disabled = not is_enabled_and_on_ground()
 
-func create_coin()->void :
-	var object: = LevelObject.new()
-	object.type_id = 1
-	object.properties = []
-	object.properties.append(body.global_position)
-	object.properties.append(Vector2(1, 1))
-	object.properties.append(0)
-	object.properties.append(true)
-	object.properties.append(true)
-	object.properties.append(true)
-	var velocity_x = - 80 if randi() % 2 == 0 else 80
-	object.properties.append(Vector2(velocity_x, - 300))
-	get_parent().create_object(object, false)
 
 func _physics_process(delta):
-	if not (mode != 1 and enabled):
+	if not (mode != 1 and is_enabled_and_on_ground()):
 		return
-	
+
 	if (not hit):
 		sprite.playing = true
 		
@@ -225,7 +214,8 @@ func _physics_process(delta):
 			poof.emitting = true
 			poof_sfx.play()
 			poof.restart()
-			create_coin()
+			var velocity_x = - 80 if randi() % 2 == 0 else 80
+			create_coin(1, body, true, Vector2(velocity_x, -300))
 	elif (delete_timer > 0):
 		delete_timer -= delta
 		velocity = Vector2.ZERO
@@ -257,15 +247,22 @@ func calculate_fireball_velocity(source_position: Vector2, target_position: Vect
 	return new_velocity/.13
 
 func spawn_fireball():
-	var object: = LevelObject.new()
-					
-	object.type_id = 134
-	object.properties = []
-	object.properties.append(body.global_position - Vector2(0, 8))
-	object.properties.append(Vector2(1, 1))
-	object.properties.append(0)
-	object.properties.append(true)
-	object.properties.append(true)
-	object.properties.append(calculate_fireball_velocity(body.global_position - Vector2(0, 8), character_position, gravity))
-	object.properties.append(fire == 2)
-	get_parent().create_object(object, false)
+#	var object: = ObjectDataOld.new()
+#
+#	object.type_id = 134
+#	object.properties = []
+#	object.properties.append(body.global_position - Vector2(0, 8))
+#	object.properties.append(Vector2(1, 1))
+#	object.properties.append(0)
+#	object.properties.append(true)
+#	object.properties.append(true)
+#
+#	object.properties.append(calculate_fireball_velocity(body.global_position - Vector2(0, 8), character_position, gravity))
+#	object.properties.append(fire == 2)
+#	get_parent().create_object(object, false)
+	var object_setup = create_object(body.global_position - Vector2(0, 8), 134, 0)
+	var object = object_setup[0]
+	object.set_property("velocity", calculate_fireball_velocity(body.global_position - Vector2(0, 8), character_position, gravity))
+	object.set_property("bouncy", fire == 2)
+	
+	object_setup[1].call_func(object)

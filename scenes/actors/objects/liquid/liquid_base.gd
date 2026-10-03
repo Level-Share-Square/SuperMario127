@@ -1,0 +1,187 @@
+class_name LiquidBase
+extends GameObject
+
+enum LiquidType {Water, Lava, Quicksand, Poison}
+
+export (LiquidType) var liquid_type
+export var size := Vector2(640.0, 320.0)
+export var color := Color(0.19, 0.52, 1)
+export var render_in_front := false
+export var tag = "default"
+export var waves_enable : bool = true
+
+var crystal_tap_mode : bool = true
+var moving : bool = false
+var move_speed : float = 1.0
+var horizontal : bool = false
+var last_size : Vector2
+var last_color : Color
+var last_front : bool
+var match_level : float = 0.0
+var save_pos : Vector2
+
+export var surface_offset : float = 0.0
+
+onready var liquid_area : Area2D = $LiquidArea
+
+onready var liquid_area_collision : CollisionShape2D = $LiquidArea/CollisionShape2D
+
+onready var visual : Node2D = $Visual
+
+onready var liquid_body : Control = $Visual/Body
+
+onready var waves : Control = $Visual/Waves
+
+var liquid_properties: Array = [
+	"size",
+	"color",
+	"render_in_front",
+	"tag",
+	"crystal_tap_mode",
+	"waves_enable",
+]
+
+signal transform_changed()
+
+
+func get_liquid_properties() -> Array:
+	return []
+
+
+func set_liquid_property_menus():
+	pass
+
+
+func update_liquid_color(color : Color):
+	pass
+
+
+func update():
+	update_liquid_color(color)
+
+
+func update_property(key: String, value):
+	if key == "size":
+		change_size()
+
+#func _set_properties():
+#	savable_properties = []
+#	editable_properties = []
+#	for liquid_property in liquid_properties:
+#		savable_properties.append(liquid_property)
+#		editable_properties.append(liquid_property)
+#
+#	#extra liquid properties that a liquid might have
+#	var i: int = 0
+#	for liquid_property in get_liquid_properties():
+#		savable_properties.append(liquid_property)
+#		editable_properties.insert(i, liquid_property)
+#		i += 1
+
+
+func _register_properties():
+	var id: int = 4
+	for liquid_property in liquid_properties:
+		if liquid_property == "render_in_front":
+			register_property(id, liquid_property, self[liquid_property], false)
+			id += 1
+			continue
+		register_property(id, liquid_property, self[liquid_property])
+		id += 1
+	set_property_override("crystal_tap_mode", PropertyTab.OverrideTypes.BOOL_ALIAS, {true: "Move", false: "Grow/Shrink"})
+	
+	for liquid_property in get_liquid_properties():
+		register_property(id, liquid_property, self[liquid_property])
+		id += 1
+	set_property_override("tag", PropertyTab.OverrideTypes.DROPDOWN, [CurrentLevelData.level_tags, "get_liquid_args", [CurrentLevelData.level_tags, "liquid_tags"]])
+	set_liquid_property_menus()
+
+func _register_property_info():
+	set_property_info("size", PropertyInfo.new("Dimensions of this object", 1, 0, INF, ["X", "Y"], ["", ""], false, "Size"))
+	set_property_info("color", PropertyInfo.new("The color of this object.", 1, -INF, INF, ["", ""], ["", ""], false, "Color"))
+	set_property_info("tag", PropertyInfo.new("This is affected by Crystal Taps with the same Tag as this.", 1, -INF, INF, ["", ""], ["", ""], false, "Tag"))
+	set_property_info("crystal_tap_mode", PropertyInfo.new("Dictates if a vertically moving liquid moves to it's destination\nor prioritizes expanding and retracting in height.", 1, -INF, INF, ["", ""], ["", ""], false, "Crystal Tap Mode"))
+	set_property_info("waves_enable", PropertyInfo.new("Waves appear at the liquid's surface.", 1, -INF, INF, ["", ""], ["", ""], false, "Waves Enabled"))
+	set_property_info("toxicity", PropertyInfo.new("Drains health from the player at a rate of approximately this/6.5s\nIf this is above 255, this will instantly kill the player.", 1, -INF, INF, ["", ""], ["", ""], false, "Toxicity"))
+
+func _object_ready():
+	if mode == 1:
+		connect("property_changed", self, "update_property")
+	else:
+		connect("transform_changed", self, "update")
+	connect("ready", self, "change_size")
+	
+	var id = CurrentLevelData.vars.current_liquid_id
+	if CurrentLevelData.vars.liquid_positions.size() > CurrentLevelData.area_id and CurrentLevelData.vars.liquid_positions[CurrentLevelData.area_id].size() > id:
+		var set_position = CurrentLevelData.vars.liquid_positions[CurrentLevelData.area_id][id]
+		if set_position != Vector2():
+			position = set_position
+			save_pos = set_position
+	CurrentLevelData.vars.current_liquid_id += 1
+	
+	last_size = size
+	
+	liquid_area.monitoring = (is_enabled_and_on_ground() and mode != 1)
+	liquid_area.monitorable = (is_enabled_and_on_ground() and mode != 1)
+	
+	CurrentLevelData.vars.liquids.append([tag.to_lower(), self])
+
+
+func _editor_ready() -> void:
+	connect("property_changed", self, "update_property")
+	_object_ready()
+
+
+func change_size():
+	if !is_instance_valid(waves) and !is_instance_valid(liquid_body): return
+	
+	preview_position = -size/2
+	liquid_area_collision.position = size/2
+	liquid_area_collision.shape.extents = liquid_area_collision.position
+	
+	editor_rect.position = Vector2.ZERO
+	editor_rect.size = size
+	
+	last_size = size
+	last_color = color
+	last_front = render_in_front
+	emit_signal("transform_changed") #calling update in here causes issues with getting nodes, so we connect that to this instead
+
+
+func _object_physics_process(_delta):
+	if !moving: return
+	
+	if !horizontal:
+		var end_pos := position.y + size.y
+		var speed_modifier : float = transform.basis_xform(Vector2(0.0, 1.0)).y
+		position.y = move_toward(position.y, match_level, move_speed * 2)
+		if position.y == match_level:
+			moving = false
+			return
+		if !crystal_tap_mode:
+			size.y += speed_modifier * ((end_pos - position.y) - size.y)
+			change_size() # Letting it happen in _process causes issues
+	else:
+		var end_pos := position.x + size.x
+		if position.x == end_pos:
+			moving = false
+			return
+		var speed_modifier : float = transform.basis_xform(Vector2(0.0, 1.0)).x
+		position.x = move_toward(position.x, match_level, move_speed * 2)
+		if position.x == match_level:
+			moving = false
+			return
+		if !crystal_tap_mode:
+			size.y += speed_modifier * ((end_pos - position.x) - size.y)
+			change_size() # Letting it happen in _process causes issues
+
+
+func _object_process(_delta):
+	if "\n" in tag:
+		tag = tag.replace("\n", "")
+	if (size != last_size ||
+			color != last_color ||
+			render_in_front != last_front):
+		change_size()
+	if waves_enable != waves.visible:
+		waves.visible = waves_enable

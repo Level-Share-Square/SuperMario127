@@ -1,0 +1,23 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/goomba_stomp.wav-16677cdbfc88db7f6b92384a26ed9444.sample"
+
+[deps]
+
+source_file="res://assets/sounds/goomba_stomp.wav"
+dest_files=[ "res://.import/goomba_stomp.wav-16677cdbfc88db7f6b92384a26ed9444.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

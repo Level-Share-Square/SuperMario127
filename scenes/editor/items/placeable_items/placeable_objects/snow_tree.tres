@@ -1,0 +1,29 @@
+[gd_resource type="Resource" load_steps=14 format=2]
+
+[ext_resource path="res://scenes/editor/items/placeable_object.gd" type="Script" id=1]
+[ext_resource path="res://scenes/actors/objects/snow_tree/palettes/icon_3.png" type="Texture" id=2]
+[ext_resource path="res://scenes/actors/objects/snow_tree/preview.png" type="Texture" id=3]
+[ext_resource path="res://scenes/actors/objects/snow_tree/palettes/icon_4.png" type="Texture" id=4]
+[ext_resource path="res://scenes/actors/objects/snow_tree/palettes/icon_5.png" type="Texture" id=5]
+[ext_resource path="res://scenes/actors/objects/snow_tree/icon.png" type="Texture" id=6]
+[ext_resource path="res://scenes/actors/objects/snow_tree/palettes/icon_2.png" type="Texture" id=7]
+[ext_resource path="res://scenes/actors/objects/snow_tree/palettes/previews/1.png" type="Texture" id=8]
+[ext_resource path="res://scenes/actors/objects/snow_tree/palettes/previews/2.png" type="Texture" id=9]
+[ext_resource path="res://scenes/actors/objects/snow_tree/palettes/previews/3.png" type="Texture" id=10]
+[ext_resource path="res://scenes/actors/objects/snow_tree/palettes/icon_1.png" type="Texture" id=11]
+[ext_resource path="res://scenes/actors/objects/snow_tree/palettes/previews/4.png" type="Texture" id=12]
+[ext_resource path="res://scenes/actors/objects/snow_tree/palettes/previews/5.png" type="Texture" id=13]
+
+[resource]
+script = ExtResource( 1 )
+item_name = "Snow Tree"
+change_to = "obj_large_snow_tree"
+items_in_sequence = 2
+index_in_sequence = 1
+icons = [ ExtResource( 6 ), ExtResource( 11 ), ExtResource( 7 ), ExtResource( 2 ), ExtResource( 4 ), ExtResource( 5 ) ]
+previews = [ ExtResource( 3 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 12 ), ExtResource( 13 ) ]
+priority = 170
+object_id = 24
+preview_offset = Vector2( -1, 1 )
+property_overrides = {
+}

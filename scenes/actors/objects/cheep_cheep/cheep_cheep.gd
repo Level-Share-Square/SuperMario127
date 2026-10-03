@@ -46,23 +46,22 @@ var snap := Vector2(0, 0)
 
 var bounced := false
 
-var loaded := true
+
 
 var character : Character
 
 export var top_point : Vector2
 
-func _set_properties():
-	savable_properties = ["color", "rainbow"]
-	editable_properties = ["color", "rainbow"]
+#func _set_properties():
+#	savable_properties = ["color", "rainbow"]
+#	editable_properties = ["color", "rainbow"]
 	
-func _set_property_values():
-	set_property("color", color, true)
-	set_property("rainbow", rainbow, true)
-
+func _register_properties():
+	register_property(4, "color", color, true)
+	register_property(5, "rainbow", rainbow, true)
 
 func detect_player(body : Character) -> void:
-	if character == null and enabled and body != null and !dead:
+	if character == null and is_enabled_and_on_ground() and body != null and !dead:
 		character = body
 
 func remove_player(body : Character) -> void:
@@ -87,13 +86,15 @@ func _ready() -> void:
 	player_exit_detector.connect("body_exited", self, "remove_player")
 	player_detector.scale = Vector2(1, 1) / scale
 	player_exit_detector.scale = Vector2(1, 1) / scale
-	Singleton.CurrentLevelData.enemies_instanced += 1
-	time_alive += float(Singleton.CurrentLevelData.enemies_instanced) / 2.0
-	gravity = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].settings.gravity
+	CurrentLevelData.enemies_instanced += 1
+	time_alive += float(CurrentLevelData.enemies_instanced) / 2.0
+	gravity = CurrentLevelData.current_area.header.gravity
 	
-	if scale.x < 0:
+	if scale.x < 0 and is_enabled_and_on_ground() and mode != 1:
 		scale.x = abs(scale.x)
 		facing_direction = -facing_direction
+		
+	loaded = true
 
 func shell_hit(shell_pos : Vector2) -> void:
 	if !hit:
@@ -106,20 +107,6 @@ func exploded(explosion_pos : Vector2) -> void:
 func steely_hit(hit_pos : Vector2) -> void:
 	if !hit:
 		kill(hit_pos)
-
-func create_coin() -> void:
-	var object := LevelObject.new()
-	object.type_id = 1
-	object.properties = []
-	object.properties.append(kinematic_body.global_position)
-	object.properties.append(Vector2(1, 1))
-	object.properties.append(0)
-	object.properties.append(true)
-	object.properties.append(true)
-	object.properties.append(true)
-	var velocity_x = -80 if int(time_alive * 10) % 2 == 0 else 80
-	object.properties.append(Vector2(velocity_x, -300))
-	get_parent().create_object(object, false)
 
 func kill(hit_pos : Vector2) -> void:
 	if !hit and !dead:
@@ -158,7 +145,7 @@ func _process(_delta) -> void:
 func _physics_process(delta : float) -> void:
 	time_alive += delta
 	
-	if mode != 1 and enabled and loaded:
+	if mode != 1 and is_enabled_and_on_ground() and loaded:
 		var is_in_platform := false
 		var platform_collision_enabled := false
 		for platform_body in platform_detector.get_overlapping_areas():
@@ -243,7 +230,8 @@ func physics_process_hit(delta: float, is_in_platform: bool) -> void:
 			delete_timer = 1.25
 			poof_sound.play()
 			velocity = Vector2()
-			create_coin()
+			var velocity_x = -80 if int(time_alive * 10) % 2 == 0 else 80
+			create_coin(1, kinematic_body, true, Vector2(velocity_x, -300))
 	if delete_timer > 0:
 		delete_timer -= delta
 		if delete_timer <= 0:

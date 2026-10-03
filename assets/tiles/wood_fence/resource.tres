@@ -1,13 +1,13 @@
 [gd_resource type="Resource" load_steps=9 format=2]
 
 [ext_resource path="res://level/Tileset.gd" type="Script" id=1]
-[ext_resource path="res://assets/tiles/wood_fence/palletes/3.png" type="Texture" id=2]
-[ext_resource path="res://assets/tiles/wood_fence/palletes/1.png" type="Texture" id=3]
-[ext_resource path="res://assets/tiles/wood_fence/palletes/2.png" type="Texture" id=4]
-[ext_resource path="res://assets/tiles/wood_fence/palletes/4.png" type="Texture" id=5]
-[ext_resource path="res://assets/tiles/wood_fence/palletes/5.png" type="Texture" id=6]
-[ext_resource path="res://assets/tiles/wood_fence/palletes/7.png" type="Texture" id=7]
-[ext_resource path="res://assets/tiles/wood_fence/palletes/6.png" type="Texture" id=8]
+[ext_resource path="res://assets/tiles/wood_fence/palettes/3.png" type="Texture" id=2]
+[ext_resource path="res://assets/tiles/wood_fence/palettes/1.png" type="Texture" id=3]
+[ext_resource path="res://assets/tiles/wood_fence/palettes/2.png" type="Texture" id=4]
+[ext_resource path="res://assets/tiles/wood_fence/palettes/4.png" type="Texture" id=5]
+[ext_resource path="res://assets/tiles/wood_fence/palettes/5.png" type="Texture" id=6]
+[ext_resource path="res://assets/tiles/wood_fence/palettes/7.png" type="Texture" id=7]
+[ext_resource path="res://assets/tiles/wood_fence/palettes/6.png" type="Texture" id=8]
 
 [resource]
 script = ExtResource( 1 )

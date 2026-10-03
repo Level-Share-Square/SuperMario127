@@ -1,25 +1,23 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://scenes/actors/mario/icon.png" type="Texture" id=1]
-[ext_resource path="res://scenes/actors/objects/pipe/sound.wav" type="AudioStream" id=2]
+[ext_resource path="res://scenes/actors/objects/level_entrance/entrance.png" type="Texture" id=1]
+[ext_resource path="res://assets/sounds/pipe_sound.wav" type="AudioStream" id=2]
 [ext_resource path="res://scenes/actors/objects/level_entrance/level_entrance.gd" type="Script" id=3]
 [ext_resource path="res://scenes/actors/objects/level_entrance/level_entrance_sprite.gd" type="Script" id=4]
-
-[sub_resource type="SpriteFrames" id=1]
-animations = [ {
-"frames": [ ExtResource( 1 ) ],
-"loop": false,
-"name": "pipe",
-"speed": 0.0
-} ]
+[ext_resource path="res://classes/teleport/warp_helper.gd" type="Script" id=5]
 
 [node name="tp_exit" type="Node2D"]
 z_index = -1
 script = ExtResource( 3 )
+editor_rect = Rect2( -9, -12, 19, 36 )
+internal_id = "level_entrance"
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-frames = SubResource( 1 )
-animation = "pipe"
+[node name="WarpHelper" type="Node2D" parent="."]
+unique_name_in_owner = true
+script = ExtResource( 5 )
+
+[node name="AnimatedSprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
 script = ExtResource( 4 )
 
 [node name="ReferenceRect" type="ReferenceRect" parent="AnimatedSprite"]
@@ -34,3 +32,13 @@ editor_only = false
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 2 )
 volume_db = -2.5
+
+[node name="PreviewVector" type="Line2D" parent="."]
+visible = false
+z_index = 6
+points = PoolVector2Array( 0, 0, 0, 0 )
+width = 5.0
+default_color = Color( 0.4, 0.501961, 1, 0.694118 )
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2

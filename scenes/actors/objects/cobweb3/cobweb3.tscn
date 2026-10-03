@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://scenes/actors/objects/big_tree/big_tree.gd" type="Script" id=1]
+[ext_resource path="res://scenes/actors/objects/big_tree/decoration.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/objects/cobweb3/palettes/cobweb_droopy2.png" type="Texture" id=2]
 [ext_resource path="res://scenes/actors/objects/cobweb3/palettes/cobweb_droopy8.png" type="Texture" id=3]
 [ext_resource path="res://scenes/actors/objects/cobweb3/cobweb_droopy1.png" type="Texture" id=4]
@@ -13,6 +13,8 @@
 
 [node name="Cobweb3" type="Node2D"]
 script = ExtResource( 1 )
+editor_rect = Rect2( -22, -28, 44, 58 )
+internal_id = "cobweb3"
 palette_textures = [ ExtResource( 2 ), ExtResource( 5 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 6 ), ExtResource( 3 ), ExtResource( 7 ) ]
 
 [node name="Sprite" type="Sprite" parent="."]

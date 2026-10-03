@@ -6,11 +6,13 @@
 [ext_resource path="res://scenes/actors/objects/yoshi/head_frames.tres" type="SpriteFrames" id=4]
 [ext_resource path="res://scenes/actors/objects/yoshi/body_color2_frames.tres" type="SpriteFrames" id=5]
 [ext_resource path="res://scenes/actors/objects/yoshi/body_frames.tres" type="SpriteFrames" id=6]
-[ext_resource path="res://scenes/actors/mario/FluddAnimSync.gd" type="Script" id=7]
+[ext_resource path="res://scenes/actors/mario/SpriteAnimSync.gd" type="Script" id=7]
 [ext_resource path="res://scenes/actors/objects/yoshi/yoshi.gd" type="Script" id=8]
 
 [node name="Yoshi" instance=ExtResource( 2 )]
 script = ExtResource( 8 )
+editor_rect = Rect2( -14, -24, 24, 42 )
+internal_id = "yoshi"
 
 [node name="AnimationHandler" parent="KinematicBody2D" index="2"]
 position = Vector2( -1, -7 )

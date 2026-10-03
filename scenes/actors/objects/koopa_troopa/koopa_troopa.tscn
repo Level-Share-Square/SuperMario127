@@ -2,13 +2,13 @@
 
 [ext_resource path="res://scenes/actors/objects/koopa_troopa/koopa_troopa.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/objects/koopa_troopa/regular_frames.tres" type="SpriteFrames" id=2]
-[ext_resource path="res://scenes/actors/objects/bullet_bill/sound.wav" type="AudioStream" id=3]
+[ext_resource path="res://assets/sounds/koopa_hit.wav" type="AudioStream" id=3]
 [ext_resource path="res://scenes/actors/objects/koopa_troopa/color_frames.tres" type="SpriteFrames" id=4]
 [ext_resource path="res://scenes/actors/objects/koopa_troopa/para_color_frames.tres" type="SpriteFrames" id=5]
 [ext_resource path="res://scenes/actors/objects/koopa_troopa/para_regular_frames.tres" type="SpriteFrames" id=6]
 [ext_resource path="res://scenes/actors/objects/koopa_troopa/body.gd" type="Script" id=7]
 [ext_resource path="res://scenes/actors/objects/koopa_troopa/shell.tscn" type="PackedScene" id=8]
-[ext_resource path="res://scenes/actors/mario/FluddAnimSync.gd" type="Script" id=9]
+[ext_resource path="res://scenes/actors/mario/SpriteAnimSync.gd" type="Script" id=9]
 
 [sub_resource type="RayShape2D" id=1]
 length = 16.0
@@ -28,6 +28,8 @@ extents = Vector2( 18, 16 )
 [node name="KoopaTroopa" type="Node2D"]
 z_index = -2
 script = ExtResource( 1 )
+editor_rect = Rect2( -16, -16, 32, 32 )
+internal_id = "koopa_troopa"
 normal_sprite = ExtResource( 2 )
 normal_color_sprite = ExtResource( 4 )
 para_sprite = ExtResource( 6 )

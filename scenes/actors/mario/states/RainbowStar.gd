@@ -28,14 +28,15 @@ func _start_check(_delta):
 	return false
 
 func _start(_delta):
-
-	if abs(character.velocity.x) < 15:
-		character.velocity.x = character.facing_direction * 15
+	#if abs(character.velocity.x) < 15:
+	#	character.velocity.x = character.facing_direction * 15
 	current_speed = abs(character.velocity.x)
 	character.water_check.enabled = true
 
 func _update(delta):
 	if character.is_grounded():
+		if override_rotation:
+			character.sound_player.play_land_step_sound()
 		override_rotation = false
 		if character.facing_direction == 1:
 			character.sprite.animation = "starRunRight"
@@ -51,19 +52,23 @@ func _update(delta):
 		character.sprite.rotation_degrees += 24 * character.facing_direction
 	character.sprite.speed_scale = (abs(character.velocity.x) / run_speed)
 	
-	if character.velocity.x == 0:
+	if character.is_walled():
 		character.facing_direction = -character.facing_direction
 		character.velocity.x = current_speed * character.facing_direction
 		character.position.x += character.facing_direction * 3
 		if !character.is_grounded() and had_jumped:
 			character.sound_player.play_wall_jump_sound_voiceless()
+			character.sound_player.play_wall_jump_step_sound()
 			character.position.y -= 3
 			character.velocity.y = -wall_jump_power
 			jumping = false
 			current_speed = run_speed * 1.3
+		elif !character.is_grounded():
+			character.sound_player.play_wall_jump_step_sound()
 	
 	if jump_buffer > 0 and ledge_buffer > 0:
 		character.sound_player.play_dive_sound()
+		character.sound_player.play_jump_step_sound()
 		jump_buffer = 0
 		character.velocity.y = -jump_power
 		character.position.y -= 3
@@ -88,7 +93,7 @@ func _update(delta):
 		if character.velocity.y >= 0:
 			jumping = false
 			
-	if had_jumped and character.inputs[9][1]:
+	if had_jumped and character.inputs[9][0]:
 		had_jumped = false
 	
 	current_speed = clamp(current_speed, -run_speed * 2, run_speed * 2)

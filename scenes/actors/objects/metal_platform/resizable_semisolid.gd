@@ -9,23 +9,15 @@ export(Array, Texture) var palette_textures
 export var parts := 9
 var last_parts := 1
 
-func _set_properties():
-	savable_properties = ["parts"]
-	editable_properties = ["parts"]
-	
-func _set_property_values():
-	set_property("parts", parts, 1)
+#func _set_properties():
+#	savable_properties = ["parts"]
+#	editable_properties = ["parts"]
+#
+func _register_properties():
+	register_property(4, "parts", parts, true)
 
-func _input(event):
-	if event is InputEventMouseButton and event.is_pressed() and hovered:
-		if event.button_index == 5: # Mouse wheel down
-			parts -= 1
-			if parts < 1:
-				parts = 1
-			set_property("parts", parts, true)
-		elif event.button_index == 4: # Mouse wheel up
-			parts += 1
-			set_property("parts", parts, true)
+func _unhandled_input(event: InputEvent) -> void:
+	parts_input_handler(event,self)
 
 func _process(_delta):
 	if palette != 0:
@@ -55,12 +47,13 @@ func _ready():
 
 	platform_area_collision_shape.shape = platform_area_collision_shape.shape.duplicate(true)
 	collision_shape.shape = collision_shape.shape.duplicate(true)
-	
-	if !enabled:
-		collision_shape.disabled = true
-		platform_area_collision_shape.disabled = true
 		
 	update_parts()
+
+func _object_ready():
+	._object_ready()
+	collision_shape.disabled = !is_enabled_and_on_ground()
+	platform_area_collision_shape.disabled = !is_enabled_and_on_ground()
 
 func update_parts():
 	sprite.rect_position.x = -(left_width + (part_width * parts) + right_width) / 2
@@ -71,3 +64,9 @@ func update_parts():
 	
 	#calculate the total platform scale
 	scale_x = scale.x * (left_width + right_width + part_width * parts) / (left_width + right_width + part_width)
+	editor_rect = Rect2(sprite.rect_position, sprite.rect_size)
+
+func is_middle(check):
+	.is_middle(check)
+	
+	collision_shape.disabled = !check

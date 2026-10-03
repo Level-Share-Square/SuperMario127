@@ -21,7 +21,7 @@ var hit: = false
 
 func _ready():
 	if mode != 1:
-		gravity = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].settings.gravity
+		gravity = CurrentLevelData.current_area.header.gravity
 		if bouncy:
 			modulate = Color(0, 1, 1)
 			bounce_count = 2
@@ -34,13 +34,13 @@ func _ready():
 		var _connect = hit_area.connect("body_entered", self, "damage_player")
 		_connect = poof_particles.connect("finished", self, "queue_free")
 
-func _set_properties():
-	savable_properties = ["velocity", "bouncy"]
-	editable_properties = ["velocity", "bouncy"]
+#func _set_properties():
+#	savable_properties = ["velocity", "bouncy"]
+#	editable_properties = ["velocity", "bouncy"]
 	
-func _set_property_values():
-	set_property("velocity", velocity, true)
-	set_property("bouncy", bouncy, true)
+func _register_properties():
+	register_property(4, "velocity", velocity, true)
+	register_property(5, "bouncy", bouncy, true)
 
 func _process(delta):
 	if (delete_timer > 0):

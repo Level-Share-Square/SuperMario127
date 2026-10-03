@@ -3,6 +3,9 @@ extends TimerBase
 
 onready var timer_display: Label = $Time
 onready var name_display: Label = $Time/Name
+onready var death_sound_timer: Timer = $DeathSoundTimer
+onready var death_sound_type: int = 0
+onready var ticks_left: int = 0
 
 export var label_text: String = "TIME LEFT"
 export var show_time_score: bool = false
@@ -14,6 +17,9 @@ export var p_switch_end_tick: AudioStream
 export var kill_beep_start: AudioStream
 export var kill_beep_middle: AudioStream
 export var kill_beep_final: AudioStream
+export var timer_finished: AudioStream
+
+enum DeathSoundType {NO_SOUND = 0,BEEP_START = 1,BEEP_MIDDLE = 2,BEEP_FINAL = 3,FINISHED = 4}
 
 var sound_time: float
 
@@ -23,6 +29,7 @@ func _ready():
 	set_label(label_text)
 	
 	var _connect = connect("time_over", self, "kill_player")
+	death_sound_timer.connect("timeout",self,"handle_death_timer")
 	
 	match(sound):
 		"switch":
@@ -39,24 +46,30 @@ func _ready():
 	if show_time_score:
 		modulate.a = 1
 		return
+		
+	death_sound_timer.stop()
+	death_sound_timer.set_one_shot(true)
 
 
 func _physics_process(delta):
 	# we don't need anything below this if its just displaying ur time score :)
 	if show_time_score:
-		timer_display.text = LevelInfo.generate_time_string(Singleton.CurrentLevelData.time_score)
+		timer_display.text = LevelInfo.generate_time_string(CurrentLevelData.time_score)
 		return
 	
+	var player = get_node("/root").get_node("Player").get_node(get_node("/root").get_node("Player").character)
 	# justt in case the timer is set again right after running out
-	if not is_counting and time > 0:
-		cancel_time_over()
+	# causing some issues with area changes, re-enable if need be
+	#if not is_counting and time > 0 && !player.shine_cutscene:
+	#	cancel_time_over()
 	
 	if is_counting:
-		time -= delta
+		death_sound_timer.paused = false
+		time -= fps_util.PHYSICS_DELTA
 		sound_time = wrapf(time, 0, 1)
 		match(sound):
 			"switch":
-				sound_time -= delta
+				sound_time -= fps_util.PHYSICS_DELTA
 				if sound_time <= 0:
 					if time > 3:
 						audio_player.play()
@@ -65,33 +78,44 @@ func _physics_process(delta):
 							audio_player_secondary.play()
 					sound_time = wrapf(time, 0, 1.1)
 			"death":
-				if sound_time <= 0:
-					if time <= 10:
+				if (death_sound_timer.is_stopped() and death_sound_type != DeathSoundType.FINISHED):
+					
+					if time > 11:
+						death_sound_timer.start(time - 11)
+					else:
+						death_sound_timer.set_one_shot(false)
+						
 						if time > 6:
-							set_timer_sound(kill_beep_start)
-							play_timer_sound()
 							
+							death_sound_type = DeathSoundType.BEEP_START
+							death_sound_timer.start(time - floor(time))
+							ticks_left = int(time) - 6
+						
 						elif time > 2:
-							set_timer_sound(kill_beep_middle)
-							play_timer_sound()
 							
-						elif time > 0:
-							set_timer_sound(kill_beep_final)
-							play_timer_sound()
+							death_sound_type = DeathSoundType.BEEP_MIDDLE
+							death_sound_timer.start(time - floor(time))
+							ticks_left = int(time) - 2
+						
+						else:
 							
+							death_sound_type = DeathSoundType.BEEP_FINAL
+							death_sound_timer.start(time - floor(time))
+							ticks_left = 1
 				
 		if kill_on_end:
 			var mod_color_time = wrapf(time, 0, 1)
 			if time <= 10 and time > 0:
 				#this is really hacky but it works and I'll take it working, a signal would probably be better here
-				if !tween.is_active() and timer_display.rect_scale != Vector2(1.35, 1.35):
+				if !tween.is_active() and timer_display.rect_scale != Vector2(1.25, 1.25):
 					tween.interpolate_property(
 						timer_display,
 						"rect_scale",
 						Vector2(1, 1),
-						Vector2(1.35, 1.35),
+						Vector2(1.25, 1.25),
 						0.2, 
-						tween.TRANS_BOUNCE
+						Tween.TRANS_QUAD,
+						Tween.EASE_IN_OUT
 						)
 					tween.start()
 				timer_display.modulate.r = ((cos(4*PI*mod_color_time)))+2
@@ -103,25 +127,72 @@ func _physics_process(delta):
 		if time <= 0:
 			time = 0
 			time_over()
+	else:
+		death_sound_timer.paused = true
 
 func kill_player():
-	var player = get_node("/root").get_node("Player").get_node(get_node("/root").get_node("Player").character)
-	var player2 = get_node("/root").get_node("Player").get_node_or_null(get_node("/root").get_node("Player").character2)
+	if !kill_on_end:
+		return
+	
+	var player = get_tree().get_current_scene().get_node(get_tree().get_current_scene().character)
+	
 	if is_instance_valid(player):
-		if !player.dead and player.controllable:
+		if !player.dead:
 			player.kill("timer")
-	if is_instance_valid(player2):
-		if !player2.dead and player2.controllable:
-			player2.kill("timer")
+
+func handle_death_timer():
+	
+	match (death_sound_type):
+		
+		DeathSoundType.NO_SOUND:
+			
+			death_sound_timer.start(1)
+			death_sound_timer.set_one_shot(false)
+			
+			death_sound_type = DeathSoundType.BEEP_START
+			ticks_left = 4 # 4 ticks of the timer until transitioning to the next sound type
+		
+		DeathSoundType.BEEP_START:
+			
+			play_timer_sound(kill_beep_start)
+			ticks_left -= 1
+			
+			if (ticks_left == 0):
+				
+				death_sound_type = DeathSoundType.BEEP_MIDDLE
+				ticks_left = 4
+		
+		DeathSoundType.BEEP_MIDDLE:
+			
+			play_timer_sound(kill_beep_middle)
+			ticks_left -= 1
+			
+			if (ticks_left == 0):
+				
+				death_sound_type = DeathSoundType.BEEP_FINAL
+				ticks_left = 2
+		
+		DeathSoundType.BEEP_FINAL:
+			
+			play_timer_sound(kill_beep_final)
+			ticks_left -= 1
+			
+			if (ticks_left == 0):
+				
+				death_sound_type = DeathSoundType.FINISHED
+		
+		DeathSoundType.FINISHED:
+			
+			play_timer_sound(timer_finished)
+			death_sound_timer.stop()
 
 func set_label(new_text: String):
 	name_display.text = new_text
 
-func set_timer_sound(stream : AudioStream):
+func play_timer_sound(stream : AudioStream):
 	audio_player.stream = stream
 	audio_player_secondary.stream = stream
-
-func play_timer_sound():
+	
 	if !audio_player.playing:
 		audio_player.play()
 	else:

@@ -55,8 +55,10 @@ var shine_details : Array
 # An array for the shine indices into the shine_details array, since directly indexing shine_details is unreliable
 var shine_details_indices := []
 
-func toggle_dark_mode():
-	if Singleton2.dark_mode:
+func toggle_dark_mode(key: String = "dark_mode", _value = null) -> void:
+	if key != "dark_mode":
+		return
+	if LocalSettings.load_setting("General", "dark_mode", false):
 		$TransitionRect.color = Color(0,0,0)
 	else:
 		$TransitionRect.color = Color(1,1,1)
@@ -64,7 +66,7 @@ func toggle_dark_mode():
 func _ready() -> void:
 	
 	toggle_dark_mode()
-	Singleton2.connect("dark_mode_toggled",self,"toggle_dark_mode")
+	LocalSettings.connect("setting_changed",self,"toggle_dark_mode")
 	
 	# store the initial volume of the mission_select_sfx
 	mission_select_sfx_volume = mission_select_sfx.volume_db
@@ -203,7 +205,7 @@ func move_shine_sprites() -> void:
 
 func update_labels() -> void:
 	# this will assume the selected shine and the selected level are valid
-	level_title.text = Singleton.CurrentLevelData.level_info.level_name
+	level_title.text = CurrentLevelData.level_info.level_name
 	level_title_backing.text = level_title.text
 	shine_title.text = shine_details[shine_details_indices[selected_shine_index]]["title"]
 	shine_description.text = shine_details[shine_details_indices[selected_shine_index]]["description"]
@@ -222,7 +224,7 @@ func start_level() -> void:
 	
 	get_tree().call_group("shine_sprites", "start_pressed_animation")
 
-	Singleton.CurrentLevelData.level_info.selected_shine = shine_details_indices[selected_shine_index]
+	CurrentLevelData.level_info.selected_shine = shine_details_indices[selected_shine_index]
 	
 	# levels screen is supposed to set the CurrentLevelData before changing to the shine select screen
 	# so we'll assume it's safe to just go straight to the player scene 
@@ -254,11 +256,11 @@ func on_animation_finished(anim_name : String) -> void:
 # unlike the rest of the signals, this is connected in the start_level function
 func change_to_player_scene(_animation : String) -> void:
 	# Start fading out now; the transition has finished
-	if Singleton2.dark_mode:
-		Singleton.SceneTransitions.do_transition_fade(Singleton.SceneTransitions.DEFAULT_TRANSITION_TIME,\
+	if LocalSettings.load_setting("General", "dark_mode", false):
+		SceneTransitions.do_transition_fade(SceneTransitions.DEFAULT_TRANSITION_TIME,\
 		Color(0, 0, 0, 1), Color(0, 0, 0, 0), false)
 	else:
-		Singleton.SceneTransitions.do_transition_fade(Singleton.SceneTransitions.DEFAULT_TRANSITION_TIME,\
+		SceneTransitions.do_transition_fade(SceneTransitions.DEFAULT_TRANSITION_TIME,\
 		Color(1, 1, 1, 1), Color(1, 1, 1, 0), false)
 
 	var _change_scene = get_tree().change_scene_to(PLAYER_SCENE)

@@ -6,10 +6,13 @@ onready var current_mod = $VBoxContainer/CurrentMod
 
 
 func _ready():
-	if Singleton2.mod_active:
-		current_mod.text = "Current Mod: " + Singleton2.mod_path.get_file().get_basename()
+	OS.current_screen = 0
+	
+	if ModLoader.active:
+		current_mod.text = "Current Mod: " + ModLoader.path.get_file().get_basename()
 		yield(timer, "timeout")
 	
+	Singleton.SceneSwitcher.menu_return_screen = "Preamble"
 	Singleton.SceneSwitcher.quit_to_menu()
 
 

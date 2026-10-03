@@ -17,14 +17,14 @@ func quit_to_menu(screen_to_open : String = ""): #switch this to use the enum an
 
 	# clear out the level data of the current level, it has to be regenerated so there isn't leftover data 
 	if Singleton.SavedLevels.selected_level != Singleton.SavedLevels.NO_LEVEL:
-		Singleton.CurrentLevelData.level_info.level_data = null
+		CurrentLevelData.level_info.level_data = null
 	else:
 		# Go to the main menu instead of the level select
 		if screen_to_open == "levels_screen":
 			screen_to_open = "main_menu"
 	# if the mode switcher button is visible (eg quitting from the editor), hide and disable it
-	Singleton.ModeSwitcher.get_node("ModeSwitcherButton").invisible = true
-	Singleton.ModeSwitcher.get_node("ModeSwitcherButton").switching_disabled = true
+	Singleton.ModeSwitcher.visible = false
+	Singleton.ModeSwitcher.is_switching = true
 
 	custom_open_screen_name = screen_to_open
 
@@ -34,8 +34,8 @@ func quit_to_menu(screen_to_open : String = ""): #switch this to use the enum an
 
 func quit_to_menu_with_transition(screen_to_open : String = ""):
 	# after the transition finishes fading out, switch to the menu before starting the fade in
-	var _connect = Singleton.SceneTransitions.connect("transition_finished", self, "quit_to_menu", [screen_to_open], CONNECT_ONESHOT)
-	if Singleton2.dark_mode:
-		Singleton.SceneTransitions.do_transition_fade(Singleton.SceneTransitions.DEFAULT_TRANSITION_TIME, Color(0, 0, 0, 0), Color(0, 0, 0, 1))
+	var _connect = SceneTransitions.connect("transition_finished", self, "quit_to_menu", [screen_to_open], CONNECT_ONESHOT)
+	if LocalSettings.load_setting("General", "dark_mode", false):
+		SceneTransitions.do_transition_fade(SceneTransitions.DEFAULT_TRANSITION_TIME, Color(0, 0, 0, 0), Color(0, 0, 0, 1))
 	else:
-		Singleton.SceneTransitions.do_transition_fade(Singleton.SceneTransitions.DEFAULT_TRANSITION_TIME, Color(1, 1, 1, 0), Color(1, 1, 1, 1))
+		SceneTransitions.do_transition_fade(SceneTransitions.DEFAULT_TRANSITION_TIME, Color(1, 1, 1, 0), Color(1, 1, 1, 1))

@@ -1,0 +1,78 @@
+class_name QuicksandHopState
+extends State
+
+const JUMP_DECAY_RATE: float = 1.15
+#const RESET_TIME: float = 3.0
+
+export var jump_strength : float = 350.0
+export var jump_length : int = 5
+
+var length_remaining : int = jump_length
+var working_jump_strength : float = jump_strength
+
+var jump_buffer : float = 0
+var dive_buffer : float = 0
+
+#var reset_timer: float = 0.0
+
+func _ready():
+	priority = 6
+	blacklisted_states = ["BounceState", "DiveState", "SlideState", "GetupState", "BackflipState"]
+
+func _start_check(_delta):
+	for area in character.liquid_detector.get_overlapping_areas():
+		var liquid : LiquidBase = area.get_parent()
+		if liquid.liquid_type == liquid.LiquidType.Quicksand:
+			return (jump_buffer > 0 or (dive_buffer > 0 and abs(character.velocity.x) > 50 and !character.test_move(character.transform, Vector2(8 * character.facing_direction, 0))))
+
+func _start(_delta):
+	character.in_quicksand = true
+	length_remaining = jump_length
+	
+	character.quicksand_particles.set_particles_emitting(true)
+	working_jump_strength /= JUMP_DECAY_RATE
+	character.sound_player.play_jump_sound()
+	character.velocity.y = -working_jump_strength
+	character.jump_animation = 0
+	character.current_jump = 1
+
+func _update(_delta):
+	if character.facing_direction == 1:
+		if character.jump_animation == 0:
+			character.sprite.animation = "jumpRight"
+	elif character.facing_direction == -1:
+		if character.jump_animation == 0:
+			character.sprite.animation = "jumpLeft"
+
+func _stop_check(_delta):
+	length_remaining -= 1
+	var check = length_remaining <= 0 or character.velocity.y > 0
+	if check:
+		character.quicksand_particles.set_particles_emitting(false)
+	
+	return check
+
+func _general_update(delta):
+	if (!character.in_quicksand):
+		working_jump_strength = jump_strength
+#	if reset_timer > 0:
+#		reset_timer -= delta
+#		pass
+#	if reset_timer <= 0:
+#		reset_timer = RESET_TIME
+#		for area in character.liquid_detector.get_overlapping_areas():
+#			var liquid: LiquidBase = area.get_parent()
+#			if liquid.liquid_type == LiquidBase.LiquidType.Quicksand: return
+#		working_jump_strength = jump_strength
+	if jump_buffer > 0:
+		jump_buffer -= delta
+		if jump_buffer < 0:
+			jump_buffer = 0
+	if character.inputs[2][1]:
+		jump_buffer = 0.075
+	if character.inputs[3][1] and !(character.inputs[9][0] and abs(character.velocity.x) <= 150):
+		dive_buffer = 0.075
+	if dive_buffer > 0:
+		dive_buffer -= delta
+		if dive_buffer < 0:
+			dive_buffer = 0

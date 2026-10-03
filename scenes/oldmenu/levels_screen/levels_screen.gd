@@ -51,7 +51,7 @@ onready var confirm_delete_window = $PopupContainer/ConfirmDelete
 const PLAYER_SCENE : PackedScene = preload("res://scenes/player/player.tscn")
 const EDITOR_SCENE : PackedScene = preload("res://scenes/editor/editor.tscn")
 
-const TEMPLATE_LEVEL: String = preload("res://assets/level_data/template_level.tres").contents
+const TEMPLATE_LEVEL: String = ""
 
 const NO_LEVEL : int = -1
 
@@ -67,8 +67,10 @@ var show_sample_levels := true
 
 var is_dark:bool = false
 
-func toggle_dark_mode():
-	if Singleton2.dark_mode:
+func toggle_dark_mode(key: String = "dark_mode", _value = null) -> void:
+	if key != "dark_mode":
+		return
+	if LocalSettings.load_setting("General", "dark_mode", false):
 		$TransitionRect.modulate = Color(0,0,0)
 		is_dark = true
 	else:
@@ -76,10 +78,9 @@ func toggle_dark_mode():
 		is_dark = false
 
 func _ready() -> void:
-	Singleton2.save_ghost = false
-	
+
 	toggle_dark_mode()
-	Singleton2.connect("dark_mode_toggled",self,"toggle_dark_mode")
+	LocalSettings.connect("setting_changed",self,"toggle_dark_mode")
 	
 	var _connect
 
@@ -301,7 +302,7 @@ func start_level(start_in_edit_mode : bool):
 	can_interact = false
 	
 	var level_info = levels[selected_level]
-	Singleton.CurrentLevelData.level_data = level_info.level_data
+	CurrentLevelData.level_data = level_info.level_data
 
 	# if it's a multi-shine level, open the shine select screen, otherwise open the level directly 
 	# TODO: additional checks for things like all shines set to not show in menu and such
@@ -327,14 +328,14 @@ func start_level(start_in_edit_mode : bool):
 	$TransitionRect.visible = false
 	# use the first fire of the transition_finished signal to change the scene when the screen finishes transitioning out
 	var goal_scene = EDITOR_SCENE if start_in_edit_mode else PLAYER_SCENE
-	var _connect = Singleton.SceneTransitions.connect("transition_finished", get_tree(), "change_scene_to", [goal_scene], CONNECT_ONESHOT)
+	var _connect = SceneTransitions.connect("transition_finished", get_tree(), "change_scene_to", [goal_scene], CONNECT_ONESHOT)
 	
-	Singleton.SceneTransitions.play_transition_audio()
+	SceneTransitions.play_transition_audio()
 	
-	if is_dark:
-		Singleton.SceneTransitions.do_transition_fade(Singleton.SceneTransitions.DEFAULT_TRANSITION_TIME, Color(0, 0, 0, 0), Color(0, 0, 0, 1))
-	else:
-		Singleton.SceneTransitions.do_transition_fade(Singleton.SceneTransitions.DEFAULT_TRANSITION_TIME, Color(1, 1, 1, 0), Color(1, 1, 1, 1))
+#	if is_dark:
+#		SceneTransitions.do_transition_fade(SceneTransitions.DEFAULT_TRANSITION_TIME, Color(0, 0, 0, 0), Color(0, 0, 0, 1))
+#	else:
+#		SceneTransitions.do_transition_fade(SceneTransitions.DEFAULT_TRANSITION_TIME, Color(1, 1, 1, 0), Color(1, 1, 1, 1))
 
 func set_level_code_panel(new_value : bool):
 	level_list_panel.visible = !new_value 
@@ -358,19 +359,14 @@ func set_control_buttons(is_enabled : bool) -> void:
 
 func on_level_selected(index : int) -> void:
 	Singleton.SavedLevels.selected_level = index
-	Singleton2.level = Singleton.SavedLevels.selected_level
 	var level_info : LevelInfo = levels[Singleton.SavedLevels.selected_level]
 	populate_info_panel(level_info)
 	
 	if double_click:
-		if Singleton2.rp == true:
+		if LocalSettings.load_setting("General", "rich_presence", true):
 			update_activity()
-		elif Singleton2.rp == false:
-			if Singleton2.dead == false:
-				Discord.queue_free()
-				Singleton2.dead = true
-			elif Singleton2.dead == true:
-				pass
+		else:
+			Discord.set_rich_presence_enabled(false)
 		start_level(false)
 
 func on_button_back_pressed() -> void:
@@ -394,14 +390,14 @@ func on_button_code_import_pressed() -> void:
 	var also_level_code = OS.clipboard
 
 	if level_code_util.is_valid(level_code):
-		var level_info : LevelInfo = LevelInfo.new(level_code)
+		var level_info : LevelInfo = LevelInfo.new(level_code, "", "")
 		add_level(level_info)
 		level_code_entry.text = ""
 		set_level_code_panel(false)
 		return
 		
 	if level_code_util.is_valid(also_level_code):
-		var level_info : LevelInfo = LevelInfo.new(also_level_code)
+		var level_info : LevelInfo = LevelInfo.new(also_level_code, "", "")
 		add_level(level_info)
 		level_code_entry.text = ""
 		set_level_code_panel(false)
@@ -409,7 +405,7 @@ func on_button_code_import_pressed() -> void:
 func import(code):
 
 	if level_code_util.is_valid(code):
-		var level_info : LevelInfo = LevelInfo.new(code)
+		var level_info : LevelInfo = LevelInfo.new(code, "", "")
 		add_level(level_info)
 		level_code_entry.text = ""
 		set_level_code_panel(false)
@@ -448,28 +444,20 @@ func on_button_sample_levels_pressed() -> void:
 
 
 func on_button_play_pressed() -> void:
-	if Singleton2.rp == true:
+	if LocalSettings.load_setting("General", "rich_presence", true):
 		update_activity()
-	elif Singleton2.rp == false:
-		if Singleton2.dead == false:
-			Discord.queue_free()
-			Singleton2.dead = true
-		elif Singleton2.dead == true:
-			pass
+	else:
+		Discord.set_rich_presence_enabled(false)
 	if !can_interact:
 		return
 	start_level(false)
 
 func on_button_edit_pressed() -> void:
 	toggle_dark_mode()
-	if Singleton2.rp == true:
+	if LocalSettings.load_setting("General", "rich_presence", true):
 		update_activity2()
-	elif Singleton2.rp == false:
-		if Singleton2.dead == false:
-			Discord.queue_free()
-			Singleton2.dead = true
-		elif Singleton2.dead == true:
-			pass
+	else:
+		Discord.set_rich_presence_enabled(false)
 	if !can_interact:
 		return
 	start_level(true)
@@ -480,7 +468,7 @@ func on_button_delete_pressed() -> void:
 		return
 	
 	var level_code = levels[selected_level].level_code
-	var level_info : LevelInfo = LevelInfo.new(level_code)
+	var level_info : LevelInfo = LevelInfo.new(level_code, "", "")
 	
 	pop_up_container.visible = true
 	confirm_delete_window.set_level_name(level_info.level_name)
@@ -510,38 +498,8 @@ func on_button_close_time_scores_pressed() -> void:
 
 	
 func update_activity() -> void:
-	var activity = Discord.Activity.new()
-	activity.set_type(Discord.ActivityType.Playing)
-	activity.set_state("Playing " + level_name_label.text)
-
-	var assets = activity.get_assets()
-	assets.set_large_image("sm127")
-	assets.set_large_text("0.8.0")
-	assets.set_small_image("capsule_main")
-	assets.set_small_text("ZONE 2 WOOO")
-	
-	var timestamps = activity.get_timestamps()
-	timestamps.set_start(OS.get_unix_time() + 1)
-
-	var result = yield(Discord.activity_manager.update_activity(activity), "result").result
-	if result != Discord.Result.Ok:
-		printerr(str(result))
+	Discord.set_playing("Playing " + level_name_label.text)
 		
 func update_activity2() -> void:
-	var activity = Discord.Activity.new()
-	activity.set_type(Discord.ActivityType.Playing)
-	activity.set_state("Editing a level")
-
-	var assets = activity.get_assets()
-	assets.set_large_image("sm127")
-	assets.set_large_text("0.8.0")
-	assets.set_small_image("capsule_main")
-	assets.set_small_text("ZONE 2 WOOO")
-	
-	var timestamps = activity.get_timestamps()
-	timestamps.set_start(OS.get_unix_time() + 1)
-
-	var result = yield(Discord.activity_manager.update_activity(activity), "result").result
-	if result != Discord.Result.Ok:
-		printerr(str(result))
+	Discord.set_playing("Editing a level")
 

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 183.84 96.53">
+  <g id="Layer_61" data-name="Layer 61">
+    <g>
+      <polyline points="83.54 36.27 62.33 36.27 9 89.6 9 96.53 23.28 96.53 83.54 36.27" style="fill: #fff;"/>
+      <polyline points="38.03 36.27 16.82 36.27 9 44.09 9 65.3 38.03 36.27" style="fill: #fff;"/>
+      <polyline points="129.05 36.27 107.84 36.27 47.57 96.53 68.79 96.53 129.05 36.27" style="fill: #fff;"/>
+      <polyline points="174.56 36.27 153.35 36.27 93.08 96.53 114.3 96.53 174.56 36.27" style="fill: #fff;"/>
+      <polyline points="165.84 18 18 18 18 18.27 165.84 18.27 165.84 18" style="fill: #fff;"/>
+      <path d="M71.33,27.27h-35.6l5.65,5.65-3.35,3.35h24.3l9-9M116.84,27.27h-35.6l5.65,5.65-3.35,3.35h24.3l9-9M162.35,27.27h-35.6l5.65,5.65-3.35,3.35h24.3l9-9M174.84,27.27h0v-9,9h9-9M183.84,0H0v36.27h16.82l9-9H9V9h165.84v18.27h-2.58l2.58,2.58v6.14s-.28.28-.28.28h9.28V0" style="fill: #fff; opacity: 0;"/>
+      <polyline points="81.24 27.27 71.33 27.27 62.33 36.27 83.54 36.27 86.89 32.92 81.24 27.27" style="fill: #fff; opacity: 0;"/>
+      <polyline points="35.73 27.27 25.82 27.27 16.82 36.27 38.03 36.27 41.38 32.92 35.73 27.27" style="fill: #fff; opacity: 0;"/>
+      <polyline points="126.75 27.27 116.84 27.27 107.84 36.27 129.05 36.27 132.4 32.92 126.75 27.27" style="fill: #fff; opacity: 0;"/>
+      <polyline points="172.26 27.27 162.35 27.27 153.35 36.27 174.56 36.27 174.84 35.99 174.84 29.85 172.26 27.27" style="fill: #fff; opacity: 0;"/>
+      <path d="M18,18.27v-.27h147.84v.27H18M174.84,9H9v18.27h165.84V9" style="fill: #fff;"/>
+      <polyline points="174.84 60.29 138.59 96.53 159.81 96.53 174.84 81.5 174.84 60.29" style="fill: #fff;"/>
+    </g>
+  </g>
+</svg>

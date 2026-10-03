@@ -11,5 +11,5 @@ func _ready():
 		"connect", 
 		"button_pressed", 
 		folder_card.list_handler.loader,
-		"transition_to_directory", [file_path]
+		"transition_to_directory", [file_path, false]
 	)

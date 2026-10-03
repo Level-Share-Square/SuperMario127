@@ -1,50 +1,48 @@
-extends Sprite
+extends TextureRect
+
+onready var editor = owner
+onready var parallax_scroll = $"%ParallaxScroll"
+
+var offset := Vector2(16, 16)
+var preview_offset := Vector2.ZERO
+var is_object: bool
+var position_override: bool = false
+
 
 func _ready():
-	var editor = get_parent()
-	update_preview(editor.selected_box.item)
+	is_object = editor.selected_item is PlaceableObject
 
-func update_preview(item: Node):
-	if item:
-		texture = load(item.preview.load_path)
 
-func _process(_delta):
-	var editor = get_parent()
-	# warning-ignore: unused_variable
-	var selected_box = editor.selected_box
-
-	if editor.dragging_item != null or editor.display_preview_item == false or editor.selected_tool != 0:
-		visible = false
+func _process(delta):
+	var mouse_pos = parallax_scroll.corrected_mouse_position()
+	if is_object:
+		if editor.pixel_lock:
+			mouse_pos = Vector2(stepify(mouse_pos.x, CurrentLevelData.editor_data.pixel_snap.x), stepify(mouse_pos.y, CurrentLevelData.editor_data.pixel_snap.y))
+		mouse_pos -= offset
 	else:
-		visible = true
+		mouse_pos = Vector2(
+			floor(parallax_scroll.corrected_mouse_position().x / 32) * 32, 
+			floor(parallax_scroll.corrected_mouse_position().y / 32) * 32
+		)
+	
+	visible = should_show_preview()
+	if !position_override: 
+		rect_position = mouse_pos + preview_offset
 
-	# has to be in process since _unhandled_input() only gets called at the start of an input, not throughout it
-	if Input.is_action_pressed("editor_up") or Input.is_action_pressed("editor_down") or Input.is_action_pressed("editor_left") or Input.is_action_pressed("editor_right"):
-		update_item_preview_position()
-		
-func _unhandled_input(event):
-	if event is InputEventMouseMotion:
-		update_item_preview_position()
-		
-func update_item_preview_position():
-	var editor = get_parent()
-	var selected_box = editor.selected_box
-	if selected_box:
-		if selected_box.item:
-			var item = selected_box.item
-			var mouse_pos = get_global_mouse_position()
-			var mouse_tile_pos = Vector2(floor(mouse_pos.x / item.tile_mode_step), floor(mouse_pos.y / item.tile_mode_step))
-			var mouse_grid_pos = Vector2((mouse_tile_pos.x * item.tile_mode_step) + (item.tile_mode_step / 2), (mouse_tile_pos.y * item.tile_mode_step) + (item.tile_mode_step / 2))
-			
-			if editor.placement_mode == "Tile" or !item.is_object:
-				position = mouse_grid_pos + item.tile_mode_offset
-			else:
-				if !Input.is_action_pressed("8_pixel_lock"):
-					mouse_pos = Vector2(stepify(mouse_pos.x, 8), stepify(mouse_pos.y, 8))
-				if editor.surface_snap:
-					var object_bottom = mouse_pos + Vector2(0, item.object_size.y)
-					var space_state = get_world_2d().direct_space_state
-					var result = space_state.intersect_ray(object_bottom, object_bottom + Vector2(0, 16))
-					if result:
-						mouse_pos = result.position - Vector2(0, item.object_size.y)
-				position = mouse_pos
+
+func update_item(item, palette, is_obj):
+	is_object = is_obj
+	if is_obj:
+		texture = item.previews[palette]
+	else:
+		texture = item.icons[palette]
+	offset = texture.get_size()/2
+	preview_offset = Vector2.ZERO
+	if item is PlaceableObject:
+		preview_offset = item.preview_offset
+
+
+func should_show_preview() -> bool:
+	var cur_tool_name: String = editor.tool_manager.current_tool.name
+	var is_valid_tool: bool = "Paint" in cur_tool_name or "TileLock" in cur_tool_name or "Pen" in cur_tool_name
+	return is_valid_tool and editor.item_preview_hovered_objects.empty() and editor.ui.visible

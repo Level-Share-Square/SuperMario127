@@ -1,0 +1,367 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://scenes/editor/buttons/tab_changed_sound.gd" type="Script" id=1]
+[ext_resource path="res://scenes/menu/line_edit_unfocus.gd" type="Script" id=2]
+[ext_resource path="res://scenes/editor/windows/editor_window.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/editor/windows/editor_options/area_panel.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/editor/windows/editor_options/mission_prefab.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/menu/button_scripts/button_sound.gd" type="Script" id=6]
+[ext_resource path="res://assets/fonts/DelfinoFont10.tres" type="DynamicFont" id=7]
+[ext_resource path="res://scenes/shared/background/backgrounds/day/day.png" type="Texture" id=8]
+[ext_resource path="res://scenes/editor/windows/editor_options/editor_options_window.gd" type="Script" id=9]
+[ext_resource path="res://scenes/actors/objects/painting/border.png" type="Texture" id=10]
+[ext_resource path="res://scenes/editor/windows/big_text/big_text.tscn" type="PackedScene" id=11]
+[ext_resource path="res://scenes/shared/background/foregrounds/forest/preview.png" type="Texture" id=12]
+[ext_resource path="res://scenes/editor/windows/editor_options/areas.gd" type="Script" id=13]
+[ext_resource path="res://scenes/editor/windows/object_property_editor/misc_property_scenes/multiselect/base.tscn" type="PackedScene" id=14]
+[ext_resource path="res://scenes/editor/windows/editor_options/level.gd" type="Script" id=15]
+[ext_resource path="res://scenes/editor/windows/object_property_editor/misc_property_scenes/bool/base.tscn" type="PackedScene" id=21]
+[ext_resource path="res://scenes/editor/windows/editor_options/missions.gd" type="Script" id=25]
+
+[node name="EditorOptionsWindow" instance=ExtResource( 3 )]
+margin_right = 400.0
+margin_bottom = 241.0
+script = ExtResource( 9 )
+title = "Level Settings"
+
+[node name="Background" parent="." index="0"]
+margin_right = 453.0
+margin_bottom = 241.0
+
+[node name="ContentDivider" parent="." index="1"]
+margin_right = 453.0
+margin_bottom = 241.0
+
+[node name="Header" parent="ContentDivider" index="0"]
+margin_right = 453.0
+
+[node name="HeaderMat" parent="ContentDivider/Header" index="0"]
+margin_right = 449.0
+
+[node name="HeaderBox" parent="ContentDivider/Header/HeaderMat" index="0"]
+margin_right = 439.0
+
+[node name="WindowIcon" parent="ContentDivider/Header/HeaderMat/HeaderBox" index="0"]
+visible = false
+
+[node name="IconSpacer" parent="ContentDivider/Header/HeaderMat/HeaderBox" index="1"]
+margin_left = 0.0
+margin_right = 2.0
+
+[node name="WindowTitle" parent="ContentDivider/Header/HeaderMat/HeaderBox" index="2"]
+margin_left = 3.0
+margin_right = 410.0
+
+[node name="WindowClose" parent="ContentDivider/Header/HeaderMat/HeaderBox" index="3"]
+margin_left = 411.0
+margin_right = 433.0
+
+[node name="HSeparator" parent="ContentDivider" index="1"]
+modulate = Color( 1, 1, 1, 1 )
+margin_right = 453.0
+
+[node name="ContentMat" parent="ContentDivider" index="2"]
+margin_right = 453.0
+margin_bottom = 241.0
+custom_constants/margin_right = 6
+custom_constants/margin_top = 6
+custom_constants/margin_left = 6
+custom_constants/margin_bottom = 6
+
+[node name="Tabs" type="TabContainer" parent="ContentDivider/ContentMat" index="0"]
+margin_left = 6.0
+margin_top = 6.0
+margin_right = 447.0
+margin_bottom = 204.0
+rect_pivot_offset = Vector2( -131, 46 )
+mouse_filter = 1
+size_flags_stretch_ratio = 2.5
+custom_constants/hseparation = 8
+custom_constants/side_margin = 4
+tab_align = 0
+all_tabs_in_front = true
+use_hidden_tabs_for_min_size = true
+script = ExtResource( 1 )
+
+[node name="Level" type="MarginContainer" parent="ContentDivider/ContentMat/Tabs" index="0"]
+unique_name_in_owner = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 27.0
+margin_right = -4.0
+margin_bottom = -4.0
+custom_constants/margin_right = 5
+custom_constants/margin_top = 5
+custom_constants/margin_left = 5
+custom_constants/margin_bottom = 5
+script = ExtResource( 15 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ContentDivider/ContentMat/Tabs/Level" index="0"]
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 428.0
+margin_bottom = 162.0
+custom_constants/separation = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ContentDivider/ContentMat/Tabs/Level/HBoxContainer" index="0"]
+margin_right = 175.0
+margin_bottom = 157.0
+rect_min_size = Vector2( 175, 0 )
+custom_constants/separation = 4
+
+[node name="AspectContainer" type="AspectRatioContainer" parent="ContentDivider/ContentMat/Tabs/Level/HBoxContainer/VBoxContainer" index="0"]
+unique_name_in_owner = true
+margin_right = 175.0
+margin_bottom = 92.0
+rect_min_size = Vector2( 0, 92 )
+size_flags_horizontal = 3
+ratio = 1.7778
+
+[node name="Border" type="NinePatchRect" parent="ContentDivider/ContentMat/Tabs/Level/HBoxContainer/VBoxContainer/AspectContainer" index="0"]
+unique_name_in_owner = true
+margin_left = 5.7212
+margin_right = 169.279
+margin_bottom = 92.0
+rect_min_size = Vector2( 0, 80 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 10 )
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 6
+
+[node name="Thumbnail" type="TextureRect" parent="ContentDivider/ContentMat/Tabs/Level/HBoxContainer/VBoxContainer/AspectContainer/Border" index="0"]
+unique_name_in_owner = true
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 8 )
+expand = true
+stretch_mode = 6
+
+[node name="Foreground" type="TextureRect" parent="ContentDivider/ContentMat/Tabs/Level/HBoxContainer/VBoxContainer/AspectContainer/Border/Thumbnail" index="0"]
+unique_name_in_owner = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -8.0
+margin_right = 8.44238
+margin_bottom = -5.0
+rect_min_size = Vector2( 180, 0 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 12 )
+expand = true
+stretch_mode = 6
+
+[node name="ThumbnailURL" type="LineEdit" parent="ContentDivider/ContentMat/Tabs/Level/HBoxContainer/VBoxContainer" index="1"]
+unique_name_in_owner = true
+margin_top = 96.0
+margin_right = 175.0
+margin_bottom = 110.0
+custom_fonts/font = ExtResource( 7 )
+align = 1
+placeholder_text = "Thumbnail URL"
+script = ExtResource( 2 )
+
+[node name="HSeparator" type="HSeparator" parent="ContentDivider/ContentMat/Tabs/Level/HBoxContainer/VBoxContainer" index="2"]
+margin_top = 114.0
+margin_right = 175.0
+margin_bottom = 118.0
+
+[node name="Level Name" type="LineEdit" parent="ContentDivider/ContentMat/Tabs/Level/HBoxContainer/VBoxContainer" index="3"]
+unique_name_in_owner = true
+margin_top = 122.0
+margin_right = 175.0
+margin_bottom = 139.0
+align = 1
+placeholder_text = "Level Name"
+script = ExtResource( 2 )
+
+[node name="Author" type="LineEdit" parent="ContentDivider/ContentMat/Tabs/Level/HBoxContainer/VBoxContainer" index="4"]
+unique_name_in_owner = true
+margin_left = 20.0
+margin_top = 143.0
+margin_right = 155.0
+margin_bottom = 157.0
+rect_min_size = Vector2( 135, 0 )
+size_flags_horizontal = 6
+custom_fonts/font = ExtResource( 7 )
+align = 1
+placeholder_text = "Author"
+script = ExtResource( 2 )
+
+[node name="VSeparator" type="VSeparator" parent="ContentDivider/ContentMat/Tabs/Level/HBoxContainer" index="1"]
+margin_left = 185.0
+margin_right = 185.0
+margin_bottom = 157.0
+custom_constants/separation = 0
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="ContentDivider/ContentMat/Tabs/Level/HBoxContainer" index="2"]
+margin_left = 195.0
+margin_right = 423.0
+margin_bottom = 157.0
+size_flags_horizontal = 3
+
+[node name="Description" parent="ContentDivider/ContentMat/Tabs/Level/HBoxContainer/VBoxContainer2" index="0" instance=ExtResource( 11 )]
+unique_name_in_owner = true
+margin_right = 228.0
+margin_bottom = 157.0
+size_flags_vertical = 3
+show_char = false
+is_small = true
+holds_property = false
+
+[node name="Areas" type="ScrollContainer" parent="ContentDivider/ContentMat/Tabs" index="1"]
+unique_name_in_owner = true
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 27.0
+margin_right = -4.0
+margin_bottom = -4.0
+scroll_horizontal_enabled = false
+script = ExtResource( 13 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ContentDivider/ContentMat/Tabs/Areas" index="0"]
+margin_right = 425.0
+margin_bottom = 19.0
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ContentDivider/ContentMat/Tabs/Areas/VBoxContainer" index="0"]
+margin_right = 372.0
+margin_bottom = 19.0
+custom_constants/separation = 16
+
+[node name="Add" type="Button" parent="ContentDivider/ContentMat/Tabs/Areas/VBoxContainer/HBoxContainer" index="0"]
+margin_right = 178.0
+margin_bottom = 19.0
+size_flags_horizontal = 3
+size_flags_vertical = 4
+text = "Add"
+
+[node name="Paste" type="Button" parent="ContentDivider/ContentMat/Tabs/Areas/VBoxContainer/HBoxContainer" index="1"]
+margin_left = 194.0
+margin_right = 372.0
+margin_bottom = 19.0
+size_flags_horizontal = 3
+size_flags_vertical = 4
+text = "Paste"
+
+[node name="AreaPanel" parent="ContentDivider/ContentMat/Tabs/Areas/VBoxContainer" index="1" instance=ExtResource( 4 )]
+visible = false
+margin_top = 23.0
+margin_right = 372.0
+margin_bottom = 75.0
+
+[node name="Missions" type="HBoxContainer" parent="ContentDivider/ContentMat/Tabs" index="2"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 27.0
+margin_right = -4.0
+margin_bottom = -4.0
+script = ExtResource( 25 )
+
+[node name="ScrollContainer" type="ScrollContainer" parent="ContentDivider/ContentMat/Tabs/Missions" index="0"]
+margin_right = 108.0
+margin_bottom = 167.0
+size_flags_horizontal = 0
+scroll_horizontal_enabled = false
+
+[node name="MissionButtonContainer" type="VBoxContainer" parent="ContentDivider/ContentMat/Tabs/Missions/ScrollContainer" index="0"]
+unique_name_in_owner = true
+margin_right = 100.0
+margin_bottom = 42.0
+rect_min_size = Vector2( 100, 0 )
+size_flags_horizontal = 0
+
+[node name="Globals" type="Button" parent="ContentDivider/ContentMat/Tabs/Missions/ScrollContainer/MissionButtonContainer" index="0"]
+unique_name_in_owner = true
+margin_right = 100.0
+margin_bottom = 19.0
+theme_type_variation = "ButtonPurple"
+text = "Globals"
+script = ExtResource( 6 )
+
+[node name="NewMission" type="Button" parent="ContentDivider/ContentMat/Tabs/Missions/ScrollContainer/MissionButtonContainer" index="1"]
+unique_name_in_owner = true
+margin_top = 23.0
+margin_right = 100.0
+margin_bottom = 42.0
+theme_type_variation = "ButtonPurple"
+text = "New Mission..."
+script = ExtResource( 6 )
+
+[node name="VSeparator" type="VSeparator" parent="ContentDivider/ContentMat/Tabs/Missions" index="1"]
+margin_left = 112.0
+margin_right = 116.0
+margin_bottom = 167.0
+
+[node name="GlobalsContainer" type="ScrollContainer" parent="ContentDivider/ContentMat/Tabs/Missions" index="2"]
+unique_name_in_owner = true
+margin_left = 120.0
+margin_right = 380.0
+margin_bottom = 167.0
+size_flags_horizontal = 3
+scroll_horizontal_enabled = false
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ContentDivider/ContentMat/Tabs/Missions/GlobalsContainer" index="0"]
+margin_right = 252.0
+margin_bottom = 45.0
+size_flags_horizontal = 3
+custom_constants/separation = 5
+
+[node name="LinearProgression" parent="ContentDivider/ContentMat/Tabs/Missions/GlobalsContainer/VBoxContainer" index="0" instance=ExtResource( 21 )]
+unique_name_in_owner = true
+margin_top = 0.0
+margin_right = 252.0
+margin_bottom = 17.0
+hint_tooltip = "Forces the player to select missions in order.
+When this is toggled on, only the first uncompleted 
+mission in the menu can be selected."
+
+[node name="PersistentNozzles" parent="ContentDivider/ContentMat/Tabs/Missions/GlobalsContainer/VBoxContainer" index="1" instance=ExtResource( 14 )]
+unique_name_in_owner = true
+hint_tooltip = "Allows the player to keep collected F.L.U.D.D nozzles
+after leaving the level. Disabled F.L.U.D.D nozzles
+will have to be re-collected each session."
+none_is_all = false
+
+[node name="MissionContainer" type="ScrollContainer" parent="ContentDivider/ContentMat/Tabs/Missions" index="3"]
+unique_name_in_owner = true
+visible = false
+margin_left = 372.0
+margin_right = 620.0
+margin_bottom = 167.0
+size_flags_horizontal = 3
+scroll_horizontal_enabled = false
+
+[node name="MissionPrefab" parent="ContentDivider/ContentMat/Tabs/Missions/MissionContainer" index="0" instance=ExtResource( 5 )]
+unique_name_in_owner = true
+margin_bottom = 331.0
+
+[node name="WindowCorner" parent="." index="2"]
+margin_left = 441.0
+margin_top = 229.0
+margin_right = 453.0
+margin_bottom = 241.0
+
+[node name="Border" parent="." index="3"]
+margin_right = 453.0
+margin_bottom = 241.0
+
+[node name="WindowMat" parent="." index="4"]
+margin_right = 453.0
+margin_bottom = 241.0
+
+[node name="Control" parent="." index="5"]
+margin_right = 453.0
+margin_bottom = 241.0
+
+[connection signal="button_down" from="ContentDivider/ContentMat/Tabs/Areas/VBoxContainer/HBoxContainer/Paste" to="ContentDivider/ContentMat/Tabs/Areas" method="paste_area"]

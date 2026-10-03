@@ -62,7 +62,7 @@ func start_door_enter_animation(character : Character) -> void:
 	character.toggle_movement(false)
 	character.velocity = Vector2.ZERO
 	character.sprite.rotation = 0
-	character.set_collision_layer_bit(1, false) # disable collisions w/ most things
+	character.set_collision_mask_bit(1, false) # disable collisions w/ most things
 	character.set_inter_player_collision(false)
 	
 	character.sprite.animation = "enterDoor" + ("Right" if character.facing_direction == 1 else "Left")
@@ -79,10 +79,10 @@ func start_door_enter_animation(character : Character) -> void:
 	var can_enter = true
 	# yucky code to stop character from entering if they dont have enough
 	if get_parent().collectible == "coin":
-		if Singleton.CurrentLevelData.level_data.vars.coins_collected < get_parent().required_amount:
+		if CurrentLevelData.vars.coins_collected < get_parent().required_amount:
 			can_enter = false
 	elif get_parent().collectible == "star bit":
-		var star_bits_collected: int = Singleton.CurrentLevelData.level_data.vars.purple_starbits_collected[Singleton.CurrentLevelData.area][0]
+		var star_bits_collected: int = CurrentLevelData.vars.purple_starbits_collected[CurrentLevelData.current_area][0]
 		if star_bits_collected < get_parent().required_amount:
 			can_enter = false
 	else:
@@ -94,7 +94,7 @@ func start_door_enter_animation(character : Character) -> void:
 		if collected < get_parent().required_amount:
 			can_enter = false
 	
-	if not Singleton.ModeSwitcher.get_node("ModeSwitcherButton").invisible and (
+	if Singleton.ModeSwitcher.visible and (
 		get_parent().collectible == "shine" or get_parent().collectible == "star coin"):
 		can_enter = true
 			
@@ -126,7 +126,6 @@ func character_animation_finished(_animation : String, character : Character) ->
 	emit_signal("start_door_logic", character, entering, get_parent().force_fadeout)
 	
 func animate_door(is_backwards: bool = false) -> void:
-	#print(get_parent().palette_dict[get_parent().palette] + "_" + get_parent().collectible + animation)
 	# this function just plays the door animation, so code doesn't have to repeat
 	icon.play(
 		get_parent().palette_dict[get_parent().palette] + "_" + get_parent().collectible,
@@ -161,13 +160,13 @@ func start_door_exit_animation(character : Character, tp_mode : bool) -> void:
 
 func door_exit_anim_finished(_animation : String, character : Character) -> void:
 	# closes the door and gives back control to mario
-	Singleton.CurrentLevelData.level_data.vars.transition_data = []
+	CurrentLevelData.vars.transition_data = []
 	is_idle = true
 	entering = false
 	character.velocity = Vector2.ZERO
 	character.toggle_movement(true)
 	# undo collision changes 
-	character.set_collision_layer_bit(1, true)
+	character.set_collision_mask_bit(1, true)
 	character.set_inter_player_collision(true) 
 	
 	character.sprite.animation = "exitDoor" + ("Right" if character.facing_direction == 1 else "Left")
@@ -187,7 +186,7 @@ func restore_control():
 	
 	stored_character.get_state_node("JumpState").jump_buffer = 0 # prevent character from jumping right after closing menu
 	stored_character.inputs[Character.input_names.jump][1] = false
-	stored_character.set_collision_layer_bit(1, true)
+	stored_character.set_collision_mask_bit(1, true)
 	stored_character.set_inter_player_collision(true) 
 	
 	stored_character.sprite.animation = "exitDoor" + ("Right" if stored_character.facing_direction == 1 else "Left")

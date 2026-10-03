@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scenes/actors/objects/cave_plant/cave_plant.png" type="Texture" id=1]
-[ext_resource path="res://scenes/actors/objects/big_tree/big_tree.gd" type="Script" id=2]
+[ext_resource path="res://scenes/actors/objects/big_tree/decoration.gd" type="Script" id=2]
 [ext_resource path="res://scenes/actors/objects/cave_plant/palettes/2/cave_plant.png" type="Texture" id=3]
 [ext_resource path="res://scenes/actors/objects/cave_plant/palettes/4/cave_plant.png" type="Texture" id=4]
 [ext_resource path="res://scenes/actors/objects/cave_plant/palettes/3/cave_plant.png" type="Texture" id=5]
@@ -11,6 +11,8 @@
 [node name="CavePlant" type="Node2D"]
 z_index = -1
 script = ExtResource( 2 )
+editor_rect = Rect2( -22, -28, 46, 32 )
+internal_id = "cave_plant"
 custom_preview_position = Vector2( 70, 120 )
 palette_textures = [ ExtResource( 6 ), ExtResource( 3 ), ExtResource( 5 ), ExtResource( 4 ), ExtResource( 7 ) ]
 

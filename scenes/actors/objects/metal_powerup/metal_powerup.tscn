@@ -1,6 +1,6 @@
 [gd_scene load_steps=16 format=2]
 
-[ext_resource path="res://scenes/actors/objects/rainbow_powerup/collect.wav" type="AudioStream" id=1]
+[ext_resource path="res://assets/sounds/powerup_collect.wav" type="AudioStream" id=1]
 [ext_resource path="res://scenes/actors/mario/particles/metal_sparkles.png" type="Texture" id=2]
 [ext_resource path="res://scenes/actors/objects/metal_powerup/metal_powerup.gd" type="Script" id=3]
 [ext_resource path="res://scenes/actors/objects/metal_powerup/texture.png" type="Texture" id=4]
@@ -159,6 +159,8 @@ radius = 11.0
 
 [node name="MetalPowerup" type="Node2D"]
 script = ExtResource( 3 )
+editor_rect = Rect2( -11, -11, 22, 22 )
+internal_id = "metal_powerup"
 
 [node name="Particles2D" type="Particles2D" parent="."]
 material = SubResource( 1 )

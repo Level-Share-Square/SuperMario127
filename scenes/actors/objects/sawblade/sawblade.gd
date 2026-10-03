@@ -8,6 +8,7 @@ onready var sprite = $Path2D/PathFollow2D/Saw/AnimatedSprite
 onready var editor_sprite = $EditorSprite
 
 export var circle_texture : Texture
+export(Array, StreamTexture) var palette_textures: Array
 
 var custom_path = Curve2D.new()
 var curve = Curve2D.new()
@@ -18,21 +19,28 @@ var start_offset = 0
 
 var baked_length : float = 0.0
 
-func _set_properties():
-	savable_properties = ["curve", "custom_path", "speed", "start_offset", "loops", "baked_length"]
-	editable_properties = ["custom_path", "speed", "start_offset", "baked_length", "loops"]
-	
-func _set_property_values():
-	set_property("curve", curve)
-	set_property("custom_path", curve)
-	set_property("speed", speed)
-	set_property("start_offset", start_offset)
-	set_property("loops", loops)
-	set_property("baked_length", baked_length)
+#func _set_properties():
+#	savable_properties = ["curve", "custom_path", "speed", "start_offset", "loops", "baked_length"]
+#	editable_properties = ["curve", "speed", "start_offset", "baked_length", "loops"]
+#
+func _register_properties():
+	register_property(4, "curve", curve)
+	register_property(5, "custom_path", curve, false)
+	register_property(6, "speed", speed)
+	register_property(7, "start_offset", start_offset)
+	register_property(8, "loops", loops)
+	register_property(9, "baked_length", baked_length)
 	set_property_menu("baked_length", ["viewer"])
 	
 func update_property(key, value):
 	match(key):
+		"palette":
+			sprite.texture = palette_textures[palette]
+			for subsprite in sprite.get_children():
+				subsprite.texture = palette_textures[palette]
+			editor_sprite.texture = palette_textures[palette]
+			for subsprite in editor_sprite.get_children():
+				subsprite.texture = palette_textures[palette]
 		"speed":
 			working_speed = value
 		"loops":
@@ -41,6 +49,9 @@ func update_property(key, value):
 			# display the editorsprite at the position the object will start at
 			pathfollow.offset = value
 			editor_sprite.position = pathfollow.position
+			
+			var editor_sprite_size: Vector2 = editor_sprite.texture.get_size()
+			editor_rect.position = editor_sprite.position - Vector2(editor_sprite_size.x/4, editor_sprite_size.y)/2
 		
 	
 func invalid_curve(check : Curve2D):
@@ -71,13 +82,13 @@ func _ready():
 	
 	if mode == 0:
 		editor_sprite.visible = false
-		sprite.self_modulate = Color(1, 1, 1, 1)
+		sprite.modulate = Color(1, 1, 1, 1)
 	else:
 		editor_sprite.visible = true
-		sprite.self_modulate = Color(1, 1, 1, 0.5)
-		var _connect = connect("property_changed", self, "update_property")
-	sprite.animation = String(palette)
-	editor_sprite.animation = String(palette)
+		sprite.modulate = Color(1, 1, 1, 0.5)
+	
+	var _connect = connect("property_changed", self, "update_property")
+	update_property("palette", palette)
 
 
 func _process(_delta):
@@ -101,3 +112,6 @@ func _physics_process(delta):
 		#beautiful logic right here (makes saw move back and forward
 		if pathfollow.offset >= path.curve.get_baked_length() or pathfollow.offset <= 0:
 			working_speed = -working_speed
+
+func is_middle(check: bool):
+	$Path2D/PathFollow2D/Saw/Area2D/CollisionShape2D.disabled = !check

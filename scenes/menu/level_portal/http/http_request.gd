@@ -67,6 +67,7 @@ func load_page(new_page: int = page, new_sort: int = sort_type, query = last_que
 	
 	var search: String
 	if query != "":
+		query = query.replace(" ","+")
 		search = "&name=" + query
 		sort_type = SortType.Default
 	

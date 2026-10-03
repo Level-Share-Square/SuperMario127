@@ -4,9 +4,9 @@ const DEFAULT_SIZE = Vector2(768, 432)
 const WIDTH_FACTOR = DEFAULT_SIZE.x / DEFAULT_SIZE.y
 
 static func set_screen_size(window_scale):
-	
 	var window_size : Vector2 = DEFAULT_SIZE * (window_scale + 1)
-	var max_size = Vector2(OS.get_screen_size().x, OS.get_screen_size().y)
+	var prev_screen: int = OS.current_screen
+	var max_size = Vector2(OS.get_screen_size(prev_screen).x, OS.get_screen_size(prev_screen).y)
 	
 	var modified = false
 	if window_size.x > max_size.x or window_size.y > max_size.y:
@@ -16,6 +16,7 @@ static func set_screen_size(window_scale):
 		OS.window_fullscreen = false
 		OS.window_size = window_size
 		OS.window_position = Vector2((max_size.x - OS.window_size.x) / 2, (max_size.y - OS.window_size.y) / 2)
+		OS.current_screen = prev_screen
 	else:
 		OS.window_fullscreen = true
 	

@@ -10,11 +10,11 @@ onready var back_tilemap_node : TileMap = get_node(back_tilemap)
 onready var middle_tilemap_node : TileMap = get_node(middle_tilemap)
 onready var front_tilemap_node : TileMap = get_node(front_tilemap)
 
-var level_data : LevelData
-var level_area : LevelArea
+var level_area
 
 var tileset_cache := []
 var tileset_palettes := []
+
 
 func _ready():
 	var level_tilesets := preload("res://assets/tiles/ids.tres")
@@ -30,8 +30,6 @@ func _ready():
 		var tileset : LevelTileset = load("res://assets/tiles/" + tileset_id + "/resource.tres")
 		tileset_cache.append(tileset)
 		
-		var tileset_resource = middle_tilemap_node.tile_set
-		
 		var tile_variations = [
 			tileset.block_tile_id,
 			tileset.slab_tile_id,
@@ -39,7 +37,9 @@ func _ready():
 			tileset.right_slope_tile_id
 		]
 		
-		tileset_palettes = preload("res://generation/tileset_palettes.res").tileset_palettes
+#		tileset_palettes = load("res://generation/tileset_palettes.res").tileset_ids
+	level_area = CurrentLevelData.current_area.header
+	
 	
 func get_tile(tileset_id, tile_id, palette_id = 0):
 	if palette_id == 0 or tileset_palettes[tileset_id].size() < palette_id:
@@ -87,11 +87,11 @@ const emptyTile = [0,0,0]
 func get_tile_in_data(x: int, y: int, layer: int):
 	var chunk_key = get_chunk_key(x, y, layer)
 	
-	if level_area.tile_chunks.has(chunk_key):
-		var tile = level_area.tile_chunks[chunk_key][posmod(x, 16)+posmod(y, 16)*16]
-		return tile if tile else emptyTile
-	else:
-		return emptyTile
+#	if CurrentLevelData.current_area_data.tile_chunks.has(chunk_key):
+#		var tile = level_area.tile_chunks[chunk_key][posmod(x, 16)+posmod(y, 16)*16]
+#		return tile if tile else emptyTile
+#	else:
+#		return emptyTile
 
 var numChunks : int = 0
 func set_tile(x: int, y: int, layer: int, tileset_id: int, tile_id: int, palette_id: int = 0):
@@ -113,25 +113,24 @@ func set_tile_visual(x: int, y: int, layer: int, tileset_id: int, tile_id: int, 
 	var cache_tile = get_tile(tileset_id, tile_id, palette_id)
 	var layer_tilemap_node = back_tilemap_node
 	if layer == 3:
-		layer_tilemap_node = very_back_tilemap_node	
+		layer_tilemap_node = very_back_tilemap_node
 	elif layer == 1:
-		layer_tilemap_node = middle_tilemap_node	
+		layer_tilemap_node = middle_tilemap_node
 	elif layer == 2:
-		layer_tilemap_node = front_tilemap_node	
+		layer_tilemap_node = front_tilemap_node
+	
 	if layer_tilemap_node.get_cell(x, y) != cache_tile:
 		layer_tilemap_node.set_cell(x, y, cache_tile)
 		if(update_bitmask):
 			layer_tilemap_node.update_bitmask_area(Vector2(x, y))
 
-func load_in(loaded_level_data : LevelData, loaded_level_area : LevelArea):
-	
-	level_data = loaded_level_data
-	level_area = loaded_level_area
-	
+
+func load_in():
 	update_tilemaps()
 
+
 func update_tilemaps():
-	var bounds = level_area.settings.bounds
+	var bounds = level_area.bounds
 	
 	var tile_set = very_back_tilemap_node.tile_set
 	
@@ -146,8 +145,8 @@ func update_tilemaps():
 	front_tilemap_node.clear()
 	
 #	print("Area Chunk Count: " + str(level_area.tile_chunks.size()))
-	for key in level_area.tile_chunks:
-		var chunk : Array = level_area.tile_chunks[key]
+	for key in CurrentLevelData.current_area.layers[0].tile_data.chunks:
+		var chunk : Array = CurrentLevelData.current_area.layers[0].tile_data.chunks[key]
 
 		var _key : Array = key.split(":")
 		var chunk_x := int(_key[0])
@@ -174,8 +173,6 @@ func update_tilemaps():
 				if tile and bounds.has_point(Vector2(chunk_x*16 + x + 0.5, chunk_y*16 + y + 0.5)):
 #					print("Tile (" + str(x) + ", " + str(y) + ") placed")
 					layer_tilemap_node.call_deferred("set_cell", chunk_x*16 + x, chunk_y*16 + y, get_tile(tile[0],tile[1],tile[2]))
-		
-#		print("")
 	
 	very_back_tilemap_node.tile_set = tile_set
 	back_tilemap_node.tile_set = tile_set
@@ -221,7 +218,7 @@ func update_tilemaps():
 
 #func _draw():
 #	for tilemap in [middle_tilemap_node]:
-#		var bounds = level_area.settings.bounds
+#		var bounds = level_area.bounds
 #		for x in range(bounds.position.x, bounds.end.x):
 #			for y in range(bounds.position.y, bounds.end.y):
 #				var tile = tilemap.get_cell(x, y)

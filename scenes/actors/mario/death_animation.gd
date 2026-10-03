@@ -10,22 +10,28 @@ var time_alive := 0.0
 
 var last_downwards := false
 onready var fludd_sprite = $Fludd
+onready var sprite = $"%Sprite"
+
 
 func _ready():
-	var level_area = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area]
-	gravity = level_area.settings.gravity
+	if not "mode" in get_tree().get_current_scene(): return
+	gravity = CurrentLevelData.current_area.header.gravity
+
 
 func play_anim():
-	velocity = Vector2()
+	velocity = Vector2.ZERO
 	visible = true
+	material = sprite.material
 	animation = "death"
 	anim_playing = true
 	time_until_fall = 0.55
-	
+
+
 func _process(_delta):
 	fludd_sprite.frame = frame
 	fludd_sprite.animation = animation
-	
+
+
 func _physics_process(delta):
 	time_alive += delta
 	if anim_playing:

@@ -13,6 +13,8 @@ extents = Vector2( 13, 13 )
 [node name="SwitchBlock" type="Node2D"]
 z_index = -1
 script = ExtResource( 2 )
+editor_rect = Rect2( -16, -16, 32, 32 )
+internal_id = "p_switch_block"
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
@@ -35,6 +37,6 @@ collision_mask = 0
 shape = SubResource( 2 )
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
-visible = false
+rect = Rect2( -128, -128, 256, 256 )
 process_parent = true
 physics_process_parent = true

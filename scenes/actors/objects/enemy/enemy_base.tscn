@@ -6,25 +6,32 @@
 [ext_resource path="res://scenes/actors/objects/enemy/dust.png" type="Texture" id=4]
 
 [sub_resource type="CapsuleShape2D" id=37]
+resource_local_to_scene = true
 radius = 8.0
 height = 16.0
 
 [sub_resource type="RectangleShape2D" id=11]
+resource_local_to_scene = true
 extents = Vector2( 8, 16 )
 
 [sub_resource type="RectangleShape2D" id=38]
+resource_local_to_scene = true
 extents = Vector2( 100, 100 )
 
 [sub_resource type="CircleShape2D" id=14]
+resource_local_to_scene = true
 radius = 3.0
 
 [sub_resource type="RectangleShape2D" id=13]
+resource_local_to_scene = true
 extents = Vector2( 13, 2 )
 
 [sub_resource type="RectangleShape2D" id=12]
+resource_local_to_scene = true
 extents = Vector2( 6, 8 )
 
 [sub_resource type="CircleShape2D" id=15]
+resource_local_to_scene = true
 
 [sub_resource type="CanvasItemMaterial" id=33]
 particles_animation = true
@@ -57,6 +64,7 @@ collision_layer = 4
 collision_mask = 21
 collision/safe_margin = 0.1
 script = ExtResource( 1 )
+float_accel = 8.0
 
 [node name="TerrainCollider" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -16 )
@@ -79,6 +87,12 @@ collision_mask = 16
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformDetector"]
 position = Vector2( 0, -16 )
 shape = SubResource( 38 )
+
+[node name="FloorDetector" type="RayCast2D" parent="."]
+position = Vector2( 0, -2 )
+enabled = true
+cast_to = Vector2( 0, 8 )
+collision_mask = 17
 
 [node name="States" type="Node2D" parent="."]
 
@@ -106,7 +120,6 @@ shape = SubResource( 13 )
 [node name="Attack" type="Area2D" parent="Damage"]
 collision_layer = 0
 collision_mask = 8482
-monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Damage/Attack"]
 position = Vector2( 0, -8 )
@@ -125,8 +138,10 @@ script = ExtResource( 2 )
 shape = SubResource( 15 )
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+visible = false
 position = Vector2( 0, -32 )
-rect = Rect2( -64, -64, 128, 128 )
+rect = Rect2( -256, -256, 512, 512 )
+pause_particles = false
 process_parent = true
 physics_process_parent = true
 
@@ -147,7 +162,7 @@ process_material = SubResource( 36 )
 texture = ExtResource( 4 )
 
 [connection signal="body_entered" from="Damage/Crush" to="Damage" method="crush_body_entered"]
-[connection signal="body_entered" from="Damage/Stomp" to="Damage" method="stomp_body_entered"]
+[connection signal="area_entered" from="Damage/Stomp" to="Damage" method="stomp_area_entered"]
 [connection signal="area_entered" from="Damage/Attack" to="Damage" method="attack_area_entered"]
 [connection signal="body_entered" from="Damage/Attack" to="Damage" method="attack_body_entered"]
 [connection signal="area_entered" from="AnimatedSprite/DialogueDetector" to="AnimatedSprite/DialogueDetector" method="area_entered"]

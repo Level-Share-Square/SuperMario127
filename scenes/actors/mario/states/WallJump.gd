@@ -2,16 +2,25 @@ extends State
 
 class_name WallJumpState
 
+const JUMP_SQUISH := Vector2(0.8, 1.2)
+
 export var walljump_power = Vector2(350, 320)
 export var minimum_power = 225
 var actual_power
 
 var press_buffer = 0.0
 var wall_jump_timer = 0.0
+var cam_move_timer = 0.0
 var direction_on_wj = 1
 var position_on_wj = Vector2(0, 0)
 var character_in_range = false
 var correcting_frames = 0
+
+
+## jump height variation
+var jump_released: bool = false
+const HEIGHT_MULT: float = 0.7
+
 
 func _ready():
 	actual_power = walljump_power
@@ -24,8 +33,12 @@ func _start_check(_delta):
 	return (character.state == character.get_state_node("WallSlideState") or slide_check) and press_buffer > 0
 
 func _start(_delta):
+	character.sprite.scale = JUMP_SQUISH
+	## jump height variation
+	jump_released = false
+	
 	var sound_player = character.sound_player
-	if character_in_range:
+	if character_in_range and character.is_wj_chained:
 		actual_power.y /= 1.15
 		if actual_power.y < minimum_power:
 			actual_power.y = minimum_power
@@ -44,17 +57,30 @@ func _start(_delta):
 	character.position.y -= 2
 	direction_on_wj = -character.direction_on_stick
 	wall_jump_timer = 0.45
+	
+	if cam_move_timer > 0.0 and character.camera.has_method("trigger_upward_lead"):
+		character.camera.trigger_upward_lead(true)
+	
+	cam_move_timer = 2.0
 	sound_player.play_wall_jump_sound()
+	sound_player.play_wall_jump_step_sound()
+	LastInputDevice.rumble(0.5, 0.0, 0.05)
 	character.jump_animation = 0
 	character.is_wj_chained = true
 
 func _update(_delta):
+	character.sprite.scale = lerp(character.sprite.scale, Vector2(1, 1), 0.08)
 	var sprite = character.sprite
 	if (direction_on_wj == 1):
 		sprite.animation = "jumpRight"
 	else:
 		sprite.animation = "jumpLeft"
-	pass
+	
+	## jump height variation
+	if not jump_released and not character.inputs[2][0]:
+		jump_released = true
+		character.velocity.y *= HEIGHT_MULT
+
 
 func _stop_check(_delta):
 	return wall_jump_timer <= 0 or character.is_walled() or character.is_grounded()
@@ -66,6 +92,7 @@ func _general_update(delta):
 		character_in_range = false
 	if character.is_grounded():
 		character.is_wj_chained = false
+	if character.is_wj_chained:
 		actual_power = walljump_power
 	if character.inputs[2][1] and !character.is_grounded():
 		press_buffer = 0.075
@@ -77,3 +104,7 @@ func _general_update(delta):
 		wall_jump_timer -= delta
 		if wall_jump_timer <= 0:
 			wall_jump_timer = 0
+	if cam_move_timer > 0:
+		cam_move_timer -= delta
+		if cam_move_timer <= 0:
+			cam_move_timer = 0

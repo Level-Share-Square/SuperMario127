@@ -1,0 +1,18 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://scenes/actors/objects/spinning_heart/icon.png" type="Texture" id=1]
+[ext_resource path="res://scenes/editor/items/placeable_object.gd" type="Script" id=2]
+
+[resource]
+script = ExtResource( 2 )
+item_name = "Spinning Heart"
+change_to = ""
+items_in_sequence = 0
+index_in_sequence = 0
+icons = [ ExtResource( 1 ) ]
+previews = [ ExtResource( 1 ) ]
+priority = 45
+object_id = 91
+preview_offset = Vector2( 0, 0 )
+property_overrides = {
+}

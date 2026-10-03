@@ -24,17 +24,17 @@ var dead = false
 var velocity := Vector2()
 
 var delete_timer = 0.0
-
-func _set_properties():
-	savable_properties = ["chase", "speed", "color", "facing_direction", "invincible"]
-	editable_properties = ["chase", "speed", "color", "facing_direction", "invincible"]
-	
-func _set_property_values():
-	set_property("chase", chase, true)
-	set_property("speed", speed, true)
-	set_property("color", color, true)
-	set_property("facing_direction", facing_direction, true)
-	set_property("invincible", invincible, true)
+#
+#func _set_properties():
+#	savable_properties = ["chase", "speed", "color", "facing_direction", "invincible"]
+#	editable_properties = ["chase", "speed", "color", "facing_direction", "invincible"]
+#
+func _register_properties():
+	register_property(4, "chase", chase, true)
+	register_property(5, "speed", speed, true)
+	register_property(6, "color", color, true)
+	register_property(7, "facing_direction", facing_direction, true)
+	register_property(8, "invincible", invincible, true)
 	
 func kill(body, attack_type):
 	if attack_type == "spin":
@@ -55,28 +55,31 @@ func kill(body, attack_type):
 			sound.play()
 
 func detect_spin(body):
-	if enabled and body.name.begins_with("Character") and !body.dead and !dead and body.controllable:
+	if is_enabled_and_on_ground() and body.name.begins_with("Character") and !body.dead and !dead and body.controllable:
 		if !body.attacking and !body.invincible:
 			body.damage_with_knockback(global_position)
 		elif body.attacking or body.invincible:
 			kill(body, "spin")
-	elif enabled and body.has_method("is_hurt_area"):
+	elif is_enabled_and_on_ground() and body.has_method("is_hurt_area"):
 		kill(body, "spin")
 			
 func detect_stomp(body):
-	if enabled and body.name.begins_with("Character") and !body.dead and !dead:
+	if is_enabled_and_on_ground() and body.name.begins_with("Character") and !body.dead and !dead:
 		kill(body, "stomp")
 
 func _ready():
-	Singleton.CurrentLevelData.enemies_instanced += 1
-	sprite.rotation = PI if chase and facing_direction == -1 else 0.0
-	sprite.flip_h = true if facing_direction == 1 or (chase and facing_direction == -1) else false
-	colored_sprite.flip_h = true if facing_direction == 1 or (chase and facing_direction == -1) else false
-	if mode != 1 and enabled:
+	CurrentLevelData.enemies_instanced += 1
+	if mode != 1 and is_enabled_and_on_ground():
 		var _connect = area.connect("body_entered", self, "detect_spin")
 		var _connect2 = area.connect("area_entered", self, "detect_spin")
 		var _connect3 = stomp_detector.connect("body_entered", self, "detect_stomp")
+	set_init_rotations()
 		
+func set_init_rotations():
+	sprite.rotation = PI if chase and facing_direction == -1 else 0.0
+	sprite.flip_h = true if facing_direction == 1 or (chase and facing_direction == -1) else false
+	colored_sprite.flip_h = true if facing_direction == 1 or (chase and facing_direction == -1) else false
+
 func _process(_delta):
 	colored_sprite.modulate = color
 	colored_sprite.frame = sprite.frame
@@ -135,14 +138,14 @@ func _physics_process(delta):
 				if invincible:
 					dead = false
 				else:
-					Singleton.CurrentLevelData.enemies_instanced -= 1
+					CurrentLevelData.enemies_instanced -= 1
 					queue_free()
 		elif !chase:
 			sprite.frame = 0
 			position += Vector2(cos(sprite.rotation), sin(sprite.rotation)) * (speed * 2) * facing_direction
 		
 		if !visibility_notifer.is_on_screen():
-			Singleton.CurrentLevelData.enemies_instanced -= 1
+			CurrentLevelData.enemies_instanced -= 1
 			queue_free()
 	
 	if char_find_timer > 0:

@@ -8,10 +8,10 @@ export(Array, Texture) var palette_textures
 var stored_character : Character
 
 func kill(body):
-	if !enabled or body.invincible or body.invulnerable:
+	if !is_enabled_and_on_ground() or body.invincible or body.invulnerable:
 		return
 	
-	body.damage(1, "hit", 60)
+	body.damage(1, "sharp", 60)
 
 func _process(_delta):
 	if is_instance_valid(stored_character):
@@ -30,3 +30,4 @@ func _ready():
 	_connect = area.connect("body_exited", self, "body_exited")
 	if palette != 0:
 		sprite.texture = palette_textures[palette - 1]
+	$StaticBody2D/CollisionShape2D.disabled = !is_enabled_and_on_ground()

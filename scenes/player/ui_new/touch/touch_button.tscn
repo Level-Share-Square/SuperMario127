@@ -1,0 +1,123 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://shaders/rounded_corners.gdshader" type="Shader" id=2]
+[ext_resource path="res://scenes/player/ui_new/touch/icons/jump.png" type="Texture" id=3]
+
+[sub_resource type="GDScript" id=9]
+script/source = "extends MarginContainer
+
+
+const PLAYER_ID: int = 0
+
+onready var bg := $BG
+onready var icon := $CenterContainer/Icon
+
+export var pressed_opacity: float = 128
+export var lerp_speed: float = 32.0
+
+var start_finger: int
+var pressed: bool
+
+
+func _gui_input(event):
+	if event is InputEventScreenTouch:
+		if event.pressed:
+			if not pressed:
+				start_finger = event.index
+				pressed = true
+		else:
+			if event.index == start_finger:
+				pressed = false
+	
+	elif event is InputEventScreenDrag:
+		if event.index == start_finger or start_finger == -1:
+			if pressed:
+				pressed = false
+			else:
+				start_finger = event.index
+				pressed = true
+
+
+func commit_action(action_name: String, is_pressed: bool):
+	if action_name == \"\": return
+	var event_action := InputEventAction.new()
+	event_action.action = action_name + str(PLAYER_ID)
+	event_action.pressed = is_pressed
+	Input.parse_input_event(event_action)
+
+
+var last_input_dir: Vector2
+func _process(delta):
+	modulate.a = lerp(modulate.a, (pressed_opacity / 256) if pressed else 1.0, delta * lerp_speed)
+"
+
+[sub_resource type="ShaderMaterial" id=4]
+shader = ExtResource( 2 )
+shader_param/radius_scale = 1.0
+shader_param/rounded_corner_top_left = true
+shader_param/rounded_corner_top_right = true
+shader_param/rounded_corner_bottom_left = true
+shader_param/rounded_corner_bottom_right = true
+shader_param/width = 1.0
+shader_param/height = 1.0
+
+[sub_resource type="Gradient" id=8]
+offsets = PoolRealArray( 0, 0.560976, 1 )
+colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1 )
+
+[sub_resource type="GradientTexture2D" id=6]
+gradient = SubResource( 8 )
+fill = 1
+fill_from = Vector2( 0.5, 0.5 )
+
+[sub_resource type="ShaderMaterial" id=7]
+shader = ExtResource( 2 )
+shader_param/radius_scale = 0.8
+shader_param/rounded_corner_top_left = true
+shader_param/rounded_corner_top_right = true
+shader_param/rounded_corner_bottom_left = true
+shader_param/rounded_corner_bottom_right = true
+shader_param/width = 1.0
+shader_param/height = 1.0
+
+[node name="TouchButton" type="MarginContainer"]
+margin_right = 160.0
+margin_bottom = 160.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_constants/margin_right = 16
+custom_constants/margin_top = 16
+custom_constants/margin_left = 16
+custom_constants/margin_bottom = 16
+script = SubResource( 9 )
+
+[node name="BG" type="TextureRect" parent="."]
+material = SubResource( 4 )
+margin_left = 16.0
+margin_top = 16.0
+margin_right = 144.0
+margin_bottom = 144.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = SubResource( 6 )
+expand = true
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+margin_left = 16.0
+margin_top = 16.0
+margin_right = 144.0
+margin_bottom = 144.0
+mouse_filter = 2
+
+[node name="Icon" type="TextureRect" parent="CenterContainer"]
+material = SubResource( 7 )
+margin_left = 32.0
+margin_top = 32.0
+margin_right = 96.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 64, 64 )
+mouse_filter = 2
+texture = ExtResource( 3 )
+expand = true
+stretch_mode = 6

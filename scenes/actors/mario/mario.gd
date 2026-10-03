@@ -1,6 +1,7 @@
+class_name Character
 extends KinematicBody2D
 
-class_name Character
+# warnings-disable
 
 signal state_changed
 signal health_changed(new_health, new_shards)
@@ -11,6 +12,8 @@ signal fludd_deactivated
 
 signal start_moving
 signal stop_moving
+
+signal loaded
 
 # Child nodes
 onready var states_node = $States
@@ -29,11 +32,16 @@ onready var water_particles_2 : Particles2D = $Sprite/Particles2DBack
 onready var bubble_particles_left : Particles2D = $Sprite/BubblesLeft
 onready var bubble_particles_right : Particles2D = $Sprite/BubblesRight
 onready var turbo_particles : Particles2D = $Sprite/TurboParticles
+onready var turbo_water_particles : Particles2D = $Sprite/TurboHead/TurboWaterParticles
 onready var rocket_particles : Particles2D = $Sprite/RocketParticles
+onready var dust_land_particles : Particles2D = $Particles/DustLandParticles
+onready var dust_jump_particles : Particles2D = $Particles/DustJumpParticles
+onready var bonk_particles : Particles2D = $Particles/BonkParticles
 
-onready var collision_shape : CollisionShape2D = $Collision
-onready var dive_collision_shape : CollisionShape2D = $CollisionDive
+onready var collision_shape : CollisionPolygon2D = $Collision
+onready var dive_collision_shape : CollisionPolygon2D = $CollisionDive
 onready var collision_raycast : CollisionShape2D = $GroundCollision
+onready var ceil_collision : CollisionShape2D = $CeilCollision # Just in case :+1:
 onready var ground_shape : CollisionPolygon2D = $GroundShape
 onready var left_collision : CollisionShape2D = $LeftCollision
 onready var right_collision : CollisionShape2D = $RightCollision
@@ -44,12 +52,15 @@ onready var ground_check_dive : RayCast2D = $GroundCheckDive
 onready var left_check : RayCast2D = $LeftCheck
 onready var right_check : RayCast2D = $RightCheck
 onready var slope_stop_check : RayCast2D = $SlopeStopCheck
+onready var slope_angle_check : RayCast2D = $SlopeAngleCheck
 onready var player_collision : Area2D = $PlayerCollision
+onready var enemy_collision: Area2D = $EnemyCollision
 onready var water_detector : Area2D = $WaterDetector
 onready var lava_detector : Area2D = $LavaDetector
+onready var liquid_detector : Area2D = $LiquidDetector
 onready var pipe_detector : Area2D = $PipeDetector
 onready var p_block_detector : Area2D = $PBlockDetector
-onready var burn_particles : Particles2D = $BurnParticles
+onready var burn_particles : Particles2D = $Particles/BurnParticles
 onready var terrain_detector : Area2D = $TerrainDetector
 onready var platform_detector : Area2D = $PlatformDetector
 onready var spin_area : Area2D = $SpinArea
@@ -57,39 +68,47 @@ onready var spin_swim_area : Area2D = $SpinSwimArea
 onready var player_collision_shape : CollisionShape2D = $PlayerCollision/CollisionShape2D
 onready var spin_area_shape : CollisionShape2D = $SpinArea/CollisionShape2D
 onready var spin_swim_area_shape : CollisionShape2D = $SpinSwimArea/CollisionShape2D
+onready var box_pwner = $BoxPwner
+onready var box_pwner_dive = $BoxPwnerDive
 onready var fludd_sound : AudioStreamPlayer = $FluddSound
 onready var turbo_sound : AudioStreamPlayer = $TurboFluddSound
 onready var fludd_boost_sound : AudioStreamPlayer = $FluddBoostSound
 onready var fludd_charge_sound : AudioStreamPlayer = $FluddChargeSound
+onready var stamina_recharge_sound : AudioStreamPlayer = $StaminaRechargeSound
+onready var stamina_empty_sound : AudioStreamPlayer = $StaminaEmptySound
 onready var nozzle_switch_sound : AudioStreamPlayer = $NozzleSwitchSound
-onready var particles : Particles2D = $Particles2D
-onready var slide_particles : Particles2D = $SlideParticles
-onready var gp_particles1 : Particles2D = $GPParticles1
-onready var gp_particles2 : Particles2D = $GPParticles2
-onready var regen_particles : Particles2D = $RegenParticles
-onready var rainbow_particles : Particles2D = $RainbowSparkles
-onready var metal_particles : Particles2D = $MetalSparkles
-onready var vanish_particles : Particles2D = $VanishSparkles
+onready var particles : Particles2D = $Particles/Particles2D
+onready var slide_particles : Particles2D = $Particles/SlideParticles
+onready var gp_particles1 : Particles2D = $Particles/GPParticles1
+onready var gp_particles2 : Particles2D = $Particles/GPParticles2
+onready var regen_particles : Particles2D = $Particles/RegenParticles
+onready var rainbow_particles : Particles2D = $Particles/RainbowSparkles
+onready var metal_particles : Particles2D = $Particles/MetalSparkles
+onready var vanish_particles : Particles2D = $Particles/VanishSparkles
+onready var quicksand_particles : ParticlesCollection = $Particles/QuicksandParticles
 onready var bottom_pos : Node2D = $BottomPos
 onready var dialogue_focus : Node2D = $DialogueFocus
-onready var ring_particles : AnimatedSprite = $RingParticles
-onready var ring_particles_back : AnimatedSprite = $RingParticlesBack
-onready var collected_shine : AnimatedSprite = $CollectedShine # used for the shine dance animation, can be edited to reflect different shine colours or sprites or something
-onready var collected_shine_outline : AnimatedSprite = $CollectedShineOutline # this is separate from the recolorable part
+onready var ring_particles : AnimatedSprite = $Particles/RingParticles
+onready var ring_particles_back : AnimatedSprite = $Particles/RingParticlesBack
+onready var collected_shine : AnimatedSprite = $CollectedShine # used for the shine dance animation
+onready var collected_shine_recolorable : AnimatedSprite = $CollectedShine/Recolorable # this is overlayed on top
 onready var collected_shine_particles : Particles2D = $CollectedShine/ShineParticles # same as above
+onready var collected_key : Sprite = $CollectedKey # used for the key dance animation, can be edited to reflect different key colours or sprites or something
+onready var collected_key_rays : ColorRect = $CollectedKey/VectorRays # same as above
 onready var death_sprite : AnimatedSprite = $DeathSprite
 onready var death_fludd_sprite : AnimatedSprite = $DeathSprite/Fludd
 onready var vanish_detector : Area2D = $VanishDetector
-onready var raycasts = [ground_check, ground_check_dive, left_check, right_check, slope_stop_check]
+onready var raycasts = [ground_check, ground_check_dive, left_check, right_check, slope_stop_check, slope_angle_check]
 onready var heal_timer = $HealTimer
 onready var heal_tick_timer = $HealTickTimer
 onready var ground_collider_enable_timer = $GroundColliderEnableTimer
 export var bottom_pos_offset : Vector2
 export var bottom_pos_dive_offset : Vector2
-onready var squish_vertical_check = $SquishCasts/VerticalCheck
-onready var squish_vertical_check_dive = $SquishCasts/VerticalCheckDive
-onready var squish_left_check = $SquishCasts/LeftCheck
-onready var squish_right_check = $SquishCasts/RightCheck
+onready var crusher_detector = $CrusherDetector
+onready var crushed_collision = $CrushedCollision
+onready var crushed_collision_dive = $CrushedCollisionDive
+var predictive_collision: bool = false
+var crush_disable: bool = false
 
 
 onready var spotlight : Light2D = $Spotlight
@@ -107,7 +126,6 @@ var last_velocity := Vector2(0, 0)
 var last_position := Vector2(0, 0)
 var in_wind := false
 var extra_forces : Dictionary = {}
-
 
 export var gravity_scale := 1.0
 export var facing_direction := 1
@@ -136,8 +154,9 @@ export var jump_animation := 0
 export var direction_on_stick := 1
 export var rotating := true
 export var swimming := false
+export var in_quicksand := false
 export var spawn_pos := Vector2(0, 0)
-export var gravity : float
+export var gravity : float 
 
 export var disable_movement := false
 export var disable_turning := false
@@ -154,13 +173,16 @@ export var player_id := 0
 
 # States. Couldn't set static type due to circle reference
 var switched = false
-var state : Node = null
-var last_state : Node = null
+var state: State = null
+var last_state: State = null
+var state_set_from: State = null
 var switching_state := false
 export var controllable := true
+export var shine_cutscene: bool = false
 export var auto_flip := true
 export var invulnerable := false
 export var invulnerable_frames := 0
+export var force_invulnerable := false
 export var movable := true
 export var dead := false
 export var stomping := false
@@ -174,6 +196,7 @@ var turbo_nerf := false
 
 var fuel := 100.0
 var stamina := 100.0
+var last_stamina := 100.0
 var breath := 100.0
 var nozzles_list_index := 0
 var powerup : Node = null # Couldn't set static type due to circle reference
@@ -181,19 +204,15 @@ var rainbow_stored := false
 var next_flash := 0.0
 var frames_until_flash := 3
 var metal_voice := false
+var layer: WeakRef
 var file = File.new()
-var ghost_pos = []
-var ghost_anim = []
-var temp_gp = []
-var temp_ga = []
-var temp_gsr = []
-var temp_gar = []
 
 var can_heal : bool = true
 var healing_timer_enabled := false
 var overheal_enabled := false
 
 # Collision vars
+export var foot_offset: float = 24
 var collision_down
 var collision_up
 var collision_left
@@ -211,9 +230,6 @@ export var character := 0
 
 export var mario_frames : SpriteFrames
 export var luigi_frames : SpriteFrames
-
-export var mario_alt_frames : SpriteFrames
-export var luigi_alt_frames : SpriteFrames
 
 export var mario_wing_frames : SpriteFrames
 export var luigi_wing_frames : SpriteFrames
@@ -243,8 +259,10 @@ export var inputs : Array
 export var controlled_locally = true
 export var rotating_jump = false
 
-var level_bounds = Rect2(0, 0, 80, 30)
+export var level_bounds = Rect2(0, 0, 80, 30)
 var number_of_players = 2
+
+var squish_lerp: bool = false
 
 var next_position : Vector2
 var sync_interpolation_speed = 20
@@ -314,25 +332,38 @@ const ANIM_IDS : Dictionary = {
 	"disagree": 51,
 	"thinking": 52,
 	"angry": 53,
+	"enterPainting": 54,
+	"keyDance": 55,
 }
 
+const PALETTES_PATH: String = "res://scenes/actors/mario/palettes/%s/%s.png"
+const PALETTE_SWAP_MAT: ShaderMaterial = preload("res://scenes/actors/mario/materials/palette_swap.tres")
+const PALETTE_INS: Array = [
+	preload("res://scenes/actors/mario/palettes/mario/default.png"),
+	preload("res://scenes/actors/mario/palettes/luigi/default.png")
+]
+const CHAR_NAMES: Array = [
+	"Mario",
+	"Luigi"
+]
+var cur_palette: String = "default"
+
 func _ready():
-	Singleton.CurrentLevelData.can_pause = true
+	_update_player_framerate()
+	CurrentLevelData.can_pause = true
 
 	heal_timer.connect("timeout", self, "_on_heal_timer_timeout")
 	heal_tick_timer.connect("timeout", self, "_on_heal_tick_timer_timeout")
 	ground_collider_enable_timer.connect("timeout", self, "_on_ground_collder_timer_timeout")
-	#print(Singleton.CurrentLevelData.level_data.vars.transition_data)
-	if Singleton.CurrentLevelData.level_data.vars.transition_data != []:
-		hide()
-		toggle_movement(false)
-	else:
-		show()
-		toggle_movement(true)
+	hide()
+	toggle_movement(false)
 	Singleton.Music.toggle_underwater_music(false)
 	for input in input_names.keys():
 		inputs.append([false, false, str(input)])
 
+func _update_player_framerate():
+	fps_util._update_framerate(false)
+	get_tree().create_timer(1.0).connect("timeout", self, "_update_player_framerate")
 
 #slavery in super mario 127 :flushed:
 puppet func sync(pos, vel, sprite_frame, sprite_animation, sprite_rotation, is_attacking, is_big_attacking, is_heavy, is_dead, is_controllable): # Ok slave
@@ -346,60 +377,98 @@ puppet func sync(pos, vel, sprite_frame, sprite_animation, sprite_rotation, is_a
 	heavy = is_heavy
 	dead = is_dead
 	controllable = is_controllable
-		
+
+
 func exploded(explosion_pos : Vector2) -> void:
 	if !invincible:
 		damage_with_knockback(explosion_pos, 2)
+
 
 func steely_hit(steely_pos : Vector2) -> void:
 	if !invincible:
 		damage_with_knockback(steely_pos, 2)
 
-func damage_with_knockback(hit_pos : Vector2, amount : int = 1, cause : String = "hit", frames : int = 180) -> void:
+
+func damage_with_knockback(hit_pos : Vector2, amount : int = 1, cause : String = "hit", frames : int = 180, power := Vector2(235, 225)) -> void:
 	if !invulnerable:
 		# Mario shouldn't take damage with the vanish cap*
 		if amount > 0 and is_instance_valid(powerup) and powerup.get_name() == "VanishPowerup":
 			return
-		knockback(hit_pos)
+		knockback(hit_pos, power, true, false)
 		damage(amount, cause, frames)
 
-func knockback(hit_pos: Vector2):
+
+func knockback(hit_pos: Vector2, power := Vector2(235, 225), set_state: bool = true, play_hit_sound: bool = true):
 	if is_instance_valid(state) and state.disable_knockback: return
+	if not movable: return
 	
 	var direction := sign((global_position - hit_pos).normalized().x)
-	velocity.x = direction * 235
-	velocity.y = -225
-	set_state_by_name("KnockbackState", 0)
+	velocity.x = direction * power.x
+	velocity.y = -power.y
 	
+	if set_state:
+		set_state_by_name("KnockbackState", 0)
+	
+	if play_hit_sound and not sound_player.damage_sound.playing:
+		sound_player.play_damage_sound()
+		sound_player.play_hit_sound()
+
+#Like knockback, except for more "immovable" objects. Disregards state.disable_knockback.
+func bonk(hit_pos: Vector2, power := Vector2(235, 225), set_state: bool = true, play_hit_sound: bool = true):
+	if not movable: return
+	
+	var direction := sign((global_position - hit_pos).normalized().x)
+	velocity.x = direction * power.x
+	velocity.y = -power.y
+	
+	if set_state:
+		set_state_by_name("BonkedState", 0)
+	if play_hit_sound and not sound_player.damage_sound.playing:
+		sound_player.play_bonk_sound()
+
+func play_shine_sound() -> void:
+	sound_player.play_shine_sound()
+
 
 # warning-ignore: unused_argument
-func load_in(level_data : LevelData, level_area : LevelArea):
-	level_bounds = level_area.settings.bounds
+func load_in():
+	if "mode" in get_tree().get_current_scene():
+		level_bounds = CurrentLevelData.current_area.header.bounds
+	else:
+		level_bounds = Rect2(-INF, -INF, INF, INF)
+	
 	for exception in collision_exceptions:
 		add_collision_exception_with(get_node(exception))
 	var _connect = player_collision.connect("body_entered", self, "player_hit")
 	
-	# Whether or not the alt character (e.g. Wario for Mario) should be loaded instead
-	var use_alt_character : bool = Singleton.PlayerSettings.player1_character == Singleton.PlayerSettings.player2_character and player_id != 0
 	match character:
 		0: # Mario
 			sound_player = $Sounds
 			$Sounds2.queue_free()
 			remove_child($Sounds2)
-			sprite.frames = mario_alt_frames if use_alt_character else mario_frames
+			sprite.frames = mario_frames
 			real_friction = friction
 		1: # Luigi
 			sound_player = $Sounds2
 			$Sounds.queue_free()
 			remove_child($Sounds)
-			sprite.frames = luigi_alt_frames if use_alt_character else luigi_frames
+			sprite.frames = luigi_frames
 			move_speed = luigi_speed
-			acceleration = luigi_accel
-			friction = luigi_fric
-			real_friction = luigi_fric
+#			acceleration = luigi_accel
+#			friction = luigi_fric
+#			real_friction = luigi_fric
+			real_friction = friction
 			wing_sprite.frames = luigi_wing_frames
 		_:
 			printerr("Illegal character loaded: " + str(character) + " REEEEEE")
+	
+	## palettes
+	LocalSettings.change_setting("General", "char_palette", "default") ## temp until 1.0 release
+	var char_folder: String = CHAR_NAMES[character].to_lower()
+	cur_palette = LocalSettings.load_setting("General", "char_palette", "default")
+	PALETTE_SWAP_MAT.set_shader_param("palette_in", load(PALETTES_PATH % [char_folder, "default"]))
+	PALETTE_SWAP_MAT.set_shader_param("palette_out", load(PALETTES_PATH % [char_folder, cur_palette]))
+	##
 	
 	sound_player.set_deferred("name", "Sounds")
 	call_deferred("add_child", sound_player) #Will throw an error if the level you're in is reset. Not that big of a deal.
@@ -410,33 +479,102 @@ func load_in(level_data : LevelData, level_area : LevelArea):
 	collision_raycast.disabled = false
 	left_collision.disabled = false
 	right_collision.disabled = false
-	gravity = level_area.settings.gravity
+	if "mode" in get_tree().get_current_scene():
+		gravity = CurrentLevelData.current_area.header.gravity
+	else:
+		gravity = 7.82
 	
 	# reset some stuff that can be changed by accident when using the editor
 	sprite.playing = true
 	collected_shine.visible = false
 	collected_shine.get_node("ShineParticles").emitting = false
 	
-	#print(Singleton.CheckpointSaved.current_checkpoint_id)
-	if Singleton.CheckpointSaved.current_checkpoint_id != -1 and Singleton.CurrentLevelData.level_data.vars.transition_data == []:
-		position = Singleton.CheckpointSaved.current_spawn_pos
-		reset_physics_interpolation()
-		var score_from_before = Singleton.CurrentLevelData.time_score
-		Singleton.CurrentLevelData.start_tracking_time_score()
-		Singleton.CurrentLevelData.time_score = score_from_before
+	# fludd persistence
+	if "mode" in get_tree().get_current_scene():
+		var fludd_array: Array = ["HoverNozzle", "RocketNozzle", "TurboNozzle"]
+		for fludd_index in CurrentLevelData.save_data._activated_fludds.size():
+			if (
+				fludd_array[fludd_index] in CurrentLevelData.level_metadata.collectible_data.persistent_nozzles
+				and CurrentLevelData.save_data._activated_fludds[fludd_index]
+			):
+				add_nozzle(fludd_array[fludd_index])
+		
+		if CurrentLevelData.starting_nozzle != "":
+			set_nozzle(CurrentLevelData.starting_nozzle)
+	
+	# the ghost of player 2 shall not haunt my teleporter code,,,
+	if player_id != 0 or not "mode" in get_tree().get_current_scene():
+		return
+	
+	# time score
+	if CurrentLevelData.vars.transition_data.empty() and CurrentLevelData.checkpoint_data.current_checkpoint_id == -1:
+		CurrentLevelData.start_time_score()
 	else:
-		# start speedrun timer
-		if Singleton.ModeSwitcher.get_node("ModeSwitcherButton").invisible and Singleton.CheckpointSaved.current_checkpoint_id == -1:
-			if Singleton.CurrentLevelData.level_data.vars.transition_data == []:
-				Singleton.CurrentLevelData.start_tracking_time_score()
-			else:
-				var score_from_before = Singleton.CurrentLevelData.time_score
-				Singleton.CurrentLevelData.start_tracking_time_score()
-				Singleton.CurrentLevelData.time_score = score_from_before
-		elif Singleton.ModeSwitcher.get_node("ModeSwitcherButton").invisible and Singleton.CurrentLevelData.level_data.vars.transition_data != []:
-			var score_from_before = Singleton.CurrentLevelData.time_score
-			Singleton.CurrentLevelData.start_tracking_time_score()
-			Singleton.CurrentLevelData.time_score = score_from_before
+		CurrentLevelData.unpause_time_score()
+	
+	# teleporters
+	var do_teleport: bool = false
+	var target_tag: String = CurrentLevelData.vars.transition_data.get("target_tag", "")
+	var level_target_tag: String = CurrentLevelData.level_transition_data.get("target_tag", "")
+
+	if target_tag != "":
+		do_teleport = true
+	elif CurrentLevelData.checkpoint_data.current_checkpoint_id != -1:
+		position = CurrentLevelData.checkpoint_data.current_spawn_pos
+		set_nozzle(CurrentLevelData.checkpoint_data.nozzle_name)
+		fuel = CurrentLevelData.checkpoint_data.water_left
+		reset_physics_interpolation()
+		if not is_instance_valid(camera):
+			yield(get_tree(), "idle_frame")
+		toggle_movement(not camera.in_cutscene)
+		show()
+	elif level_target_tag != "":
+		do_teleport = true
+		target_tag = level_target_tag
+	else:
+		do_teleport = true
+		target_tag = "_entrance"
+	
+	if do_teleport:
+		var shared_node: LevelShared = get_tree().get_current_scene().get_shared_node()
+#		var objects_node: Node = shared_node.get_objects_node()
+#		if not objects_node.loaded:
+#			yield(objects_node, "objects_ready")
+
+		var teleporter: GameObject = find_teleporter(target_tag)
+		if not is_instance_valid(teleporter):
+			target_tag = "_entrance"
+			teleporter = find_teleporter(target_tag)
+
+		if is_instance_valid(teleporter):
+			global_position = teleporter.global_position
+			reset_physics_interpolation()
+
+			if not teleporter.has_method("is_level_entrance"):
+				# to stop tweens from failing to play on startup
+				yield(get_tree().create_timer(0.3), "timeout")
+
+			show()
+			teleporter.start_exit_animation(self)
+		else:
+			show()
+			if not is_instance_valid(camera):
+				yield(get_tree(), "idle_frame")
+			toggle_movement(not camera.in_cutscene)
+			
+			if not shared_node.origin: yield(shared_node, "found_origin")
+			layer = weakref(shared_node.origin)
+			update_layer_info()
+	
+	emit_signal("loaded")
+
+
+func find_teleporter(target_tag: String) -> GameObject:
+	for i in CurrentLevelData.vars.teleporters:
+		if i[0] == target_tag.to_lower():
+			return i[1]
+	return null
+
 
 var prev_is_grounded := false
 func is_grounded() -> bool:
@@ -446,7 +584,8 @@ func is_grounded() -> bool:
 	
 	var raycast_node := ground_check
 	raycast_node.cast_to = Vector2(0, raycast_length) #26 or 30
-	if !ground_collision_dive.disabled:
+	
+	if using_dive_collision:
 		raycast_node = ground_check_dive
 		raycast_node.cast_to = Vector2(0, 7.5)
 	
@@ -461,34 +600,37 @@ func is_grounded() -> bool:
 	return prev_is_grounded
 
 func is_ceiling() -> bool:
-	return test_move(self.transform, Vector2(0, -0.1)) and collided_last_frame
+	return test_move(self.transform, Vector2(0, -0.5)) and collided_last_frame
 
 func is_walled() -> bool:
 	return (is_walled_left() or is_walled_right()) and collided_last_frame
 
 func is_walled_left() -> bool:
-	return test_move(self.transform, Vector2(-0.5, 1)) and test_move(self.transform, Vector2(-0.5, -1)) and collided_last_frame
+	return test_move(self.transform, Vector2(-0.75, 5)) and test_move(self.transform, Vector2(-3, 0)) and collided_last_frame
 
 func is_walled_right() -> bool:
-	return test_move(self.transform, Vector2(0.5, 1)) and test_move(self.transform, Vector2(0.5, -1)) and collided_last_frame
+	return test_move(self.transform, Vector2(0.75, 5)) and test_move(self.transform, Vector2(3, 0)) and collided_last_frame
 
 func will_collide(multiplier: float = 1) -> bool:
 	return test_move(self.transform, velocity * multiplier * fps_util.PHYSICS_DELTA)
 
 func hide() -> void:
 	visible = false
-	velocity = Vector2(0, 0)
-	position = initial_position
+	#velocity = Vector2(0, 0)
+	#position = initial_position
 	reset_physics_interpolation()
 
 func show() -> void:
 	visible = true
 
 # new_state is of type State, however adding static typing would cause a cyclic dependency
-func set_state(new_state: Node, delta: float) -> void:
+func set_state(new_state: Node, delta: float, called_from: State = null) -> void:
+	if dead: return
+	
 	if(is_instance_valid(state)):
 		if(state.name=="LaunchStarState"):
 			return
+	state_set_from = called_from
 	last_state = state
 	state = null
 	if is_instance_valid(last_state):
@@ -509,7 +651,7 @@ func get_powerup_node(name: String) -> Node:
 	return null
 
 func set_powerup(powerup_node: Node, set_temporary_music: bool, duration = -1) -> void:
-	if is_instance_valid(powerup):
+	if is_instance_valid(powerup) and powerup != powerup_node:
 		# Prevent switching away from rainbow star
 		if powerup.name == "RainbowPowerup" and powerup != powerup_node\
 		and is_instance_valid(powerup_node): # unless it's running out
@@ -526,14 +668,17 @@ func set_powerup(powerup_node: Node, set_temporary_music: bool, duration = -1) -
 			powerup.time_left = duration
 		powerup._start(0, set_temporary_music)
 		powerup.apply_visuals()
+	else:
+		sound_player.play_powerdown_jingle()
+		sprite.material = PALETTE_SWAP_MAT
 
-func set_state_by_name(name: String, delta: float = 0.0001) -> void:
+func set_state_by_name(name: String, delta: float = 0.0001, called_from: State = null) -> void:
 	if is_instance_valid(get_state_node(name)):
-		set_state(get_state_node(name), delta)
+		set_state(get_state_node(name), delta, called_from)
 		
 func add_nozzle(new_nozzle: String) -> void:
-	if !new_nozzle in Singleton.CurrentLevelData.level_data.vars.nozzles_collected:
-		Singleton.CurrentLevelData.level_data.vars.nozzles_collected.append(new_nozzle)
+	if !new_nozzle in CurrentLevelData.vars.nozzles_collected:
+		CurrentLevelData.vars.nozzles_collected.append(new_nozzle)
 
 func get_nozzle_node(name: String) -> Node:
 	if nozzles_node.has_node(name):
@@ -547,7 +692,7 @@ func nozzle_sort(a, b):
 	return false
 
 func set_nozzle(new_nozzle: String, change_index := true) -> void:
-	Singleton.CurrentLevelData.level_data.vars.nozzles_collected.sort_custom(self, "nozzle_sort")
+	CurrentLevelData.vars.nozzles_collected.sort_custom(self, "nozzle_sort")
 	
 	fludd_sound.stop()
 	turbo_sound.stop()
@@ -561,7 +706,7 @@ func set_nozzle(new_nozzle: String, change_index := true) -> void:
 	using_turbo = false
 	turbo_nerf = false
 	if change_index:
-		nozzles_list_index = Singleton.CurrentLevelData.level_data.vars.nozzles_collected.find(str(new_nozzle))
+		nozzles_list_index = CurrentLevelData.vars.nozzles_collected.find(str(new_nozzle))
 	
 	if is_instance_valid(nozzle) and (is_instance_valid(powerup) and powerup.name == "RainbowPowerup"):
 		set_nozzle("null", true) # Mario simply isn't allowed to have fludd
@@ -590,6 +735,7 @@ func player_hit(body : Node) -> void:
 					velocity.x = 205 * mul_sign
 					velocity.y = -175
 					set_state_by_name("KnockbackState", 0)
+					sound_player.play_damage_sound()
 					sound_player.play_hit_sound()
 				elif !attacking or (body.attacking and attacking):
 					velocity.x = 250 * mul_sign
@@ -610,16 +756,8 @@ func _process(delta: float) -> void:
 	
 	if next_position:
 		position = position.linear_interpolate(next_position, fps_util.PHYSICS_DELTA * sync_interpolation_speed)
-		reset_physics_interpolation()
-
-	collected_shine_outline.frame = collected_shine.frame
-	collected_shine_outline.position = collected_shine.position
-	collected_shine_outline.scale = collected_shine.scale
-	collected_shine_outline.visible = collected_shine.visible
-	collected_shine_outline.z_index = collected_shine.z_index
-	collected_shine_outline.reset_physics_interpolation()
 	
-	if state and state.name == "NoActionState":
+	if state == get_state_node("NoActionState"):
 		return
 	
 	if is_instance_valid(powerup):
@@ -632,7 +770,8 @@ func _process(delta: float) -> void:
 				frames_until_flash = 3
 				powerup.toggle_visuals()
 	
-	visible = !visible if invulnerable_frames > 0 else true
+	sprite.self_modulate.a8 = 100 if invulnerable_frames%2 == 1 else 255
+
 
 func damage(amount : int = 1, cause : String = "hit", frames : int = 180) -> void:
 	if !dead:
@@ -640,19 +779,41 @@ func damage(amount : int = 1, cause : String = "hit", frames : int = 180) -> voi
 			frames = 4
 		else:
 			health -= amount
+			camera.shake_strength = 4
+			camera.shake = true
+			if !camera.disable_zoom_effect:
+				camera.old_zoom  = camera.zoom
+				camera.zoom -= camera.HURT_ZOOM_IN
 			emit_signal("health_changed", health, health_shards)
 		
-		invulnerable = true if frames != 0 else false
-		invulnerable_frames = frames
+		if not force_invulnerable:
+			invulnerable = true if frames != 0 else false
+			invulnerable_frames = frames
+		
+		if cause != "lava":
+			match cause:
+				"zap":
+					sound_player.play_zap_damage_sound()
+					sound_player.play_damage_sound()
+				"sharp":
+					sound_player.play_sharp_damage_sound()
+					sound_player.play_damage_sound()
+				"saw":
+					sound_player.play_saw_damage_sound()
+					sound_player.play_damage_sound()
+				_:
+					sound_player.play_damage_sound()
+			sound_player.play_hit_sound()
+		
 		if health <= 0:
+			LastInputDevice.rumble(0.5, 1.0, 0.5)
 			health = 0 # Fix -1 bug
 			sound_player.play_last_hit_sound()
 			kill(cause)
 		else:
+			LastInputDevice.rumble(0.5, 0.8, 0.2)
 			if cause == "crushed":
 				sound_player.play_last_hit_voice_sound()
-			elif cause != "lava":
-				sound_player.play_hit_sound()
 				
 
 func slow_heal(shards : int = 1, tick : float = 1, time : float = 1, can_overheal : bool = false) -> void:
@@ -682,13 +843,15 @@ func get_weight() -> int:
 	return 2 if metal_voice else 1
 
 func _physics_process(delta: float) -> void:
+	if squish_lerp == true:
+		sprite.scale = lerp(sprite.scale, Vector2(1, 1), 0.08)
+	if sprite.scale.is_equal_approx(Vector2(1, 1)):
+		squish_lerp = false
 	update_inputs()
 	if state and (state.name == "NoActionState" or state.name == "LaunchStarState"):
-		update_ghost()
 		return
 	
-	bottom_pos.position = bottom_pos_offset if ground_collision_dive.disabled else bottom_pos_dive_offset
-	bottom_pos.reset_physics_interpolation()
+	bottom_pos.position = bottom_pos_offset if not using_dive_collision else bottom_pos_dive_offset
 	var is_in_platform := false
 	for body in platform_detector.get_overlapping_areas():
 		if body.has_method("is_platform_area"):
@@ -698,18 +861,21 @@ func _physics_process(delta: float) -> void:
 			if body.get_parent() is PhysicsBody2D:
 				if state == $States/SlideStopState or body.get_parent().can_collide_with(self):
 					remove_collision_exception_with(body.get_parent())
-					for raycast in raycasts:
-						raycast.remove_exception(body.get_parent())
 				else:
 					add_collision_exception_with(body.get_parent())
-					for raycast in raycasts:
-						raycast.add_exception(body.get_parent())
 	
-	invulnerable = invulnerable_frames > 0
+	for raycast_node in raycasts:
+		raycast_node.clear_exceptions()
+		for collision_exception in get_collision_exceptions():
+			raycast_node.add_exception(collision_exception)
+	
+	if not force_invulnerable:
+		invulnerable = invulnerable_frames > 0
 	if invulnerable_frames > 0:
 		invulnerable_frames -= 1
 	
-	var is_in_water = water_detector.get_overlapping_areas().size() > 0
+	var is_in_water = check_liquid(LiquidBase.LiquidType.Water)
+	
 	if is_in_water and (max_aerial_velocity == 640 or gravity_scale == 1):
 		gravity_scale = 0.5
 		max_aerial_velocity = 320
@@ -726,13 +892,27 @@ func _physics_process(delta: float) -> void:
 		breath = clamp(breath + 1, 0, 100)
 		if player_id == 0 and Singleton.Music.play_water:
 			Singleton.Music.toggle_underwater_music(false)
+	if (prev_is_grounded or 
+	state is BackflipState or 
+	state is BounceState or 
+	state is LavaBoostState or 
+	state is RainbowStarState or 
+	state is SlideState or 
+	state is SwimmingState):
+		in_quicksand = false
+	
+	if dead: #ewwwwwwwwwwwww I don't like doing this but you give me no choice old devs with your shitty code
+		burn_particles.global_position = death_sprite.global_position
+		burn_particles.reset_physics_interpolation()
 	
 	# Gravity
 	# Twice to work the same as 120fps
-	velocity.y += gravity * gravity_scale
-	velocity.y += gravity * gravity_scale
+	if movable and not is_grounded():
+		velocity.y += gravity * gravity_scale
+		velocity.y += gravity * gravity_scale
+	
 	if !swimming:
-		velocity.y = clamp(velocity.y, velocity.y, max_aerial_velocity)
+		velocity.y = min(velocity.y, max_aerial_velocity)
 	
 	if is_instance_valid(state):
 		disable_movement = state.disable_movement or (nozzle != null and (nozzle.name == "TurboNozzle" and nozzle.activated))
@@ -790,7 +970,7 @@ func _physics_process(delta: float) -> void:
 		if abs(velocity.x) > 0:
 			if abs(velocity.x) > 15:
 				var new_velocity
-				if is_on_floor():
+				if is_grounded():
 #					new_velocity = 
 #					if abs(new_velocity) > 0:
 					velocity.x -= sign(velocity.x) * friction
@@ -809,11 +989,12 @@ func _physics_process(delta: float) -> void:
 	#frictionless is affected by gravity on slopes (also gets dives working with friction)
 	if disable_friction and is_grounded() and !(nozzle != null and (nozzle.name == "TurboNozzle" and nozzle.activated)) and powerup != get_powerup_node("RainbowPowerup") and state != get_state_node("ButtSlideState"):
 		var normal = ground_check.get_collision_normal()
+		
 		var max_speed = 450
 		if state == null or state == get_state_node("DiveState"):
 			max_speed = max_frictionless_slide_velocity
 		elif state == get_state_node("ButtSlideState"):
-			max_speed = state.move_speed
+			max_speed = state.move_speed*1.1
 		
 		if abs(velocity.length()) < max_speed and abs(normal.y) < 1:
 			if normal.y > 0:
@@ -842,7 +1023,7 @@ func _physics_process(delta: float) -> void:
 			sprite.animation = "idleRight" if facing_direction == 1 else "idleLeft"
 		if footstep_interval <= 0 and sprite.speed_scale > 0:
 			sound_player.play_footsteps()
-			footstep_interval = clamp(0.8 - (sprite.speed_scale / 2.5), 0.1, 1)
+			footstep_interval = clamp(0.66 - (sprite.speed_scale / 2.5), 0.1, 1)
 		footstep_interval -= delta
 	elif is_grounded():
 		if !disable_animation and movable and controlled_locally:
@@ -853,17 +1034,18 @@ func _physics_process(delta: float) -> void:
 	if movable and (!is_instance_valid(state) or !state.override_rotation) and (!is_instance_valid(nozzle) or !nozzle.override_rotation) and !rotating_jump and last_state != get_state_node("SlideState"):
 		var sprite_rotation = 0
 		var sprite_offset = Vector2()
-		if ground_check.is_colliding():
+		if ground_check.is_colliding() and crusher_detector.get_overlapping_bodies().size() <= 0:
 			var normal = ground_check.get_collision_normal()
+			
 			sprite_rotation = (atan2(normal.y, normal.x) + (PI/2)) / 2
 			sprite_offset = Vector2(rad2deg(sprite_rotation) / 10, -abs(rad2deg(sprite_rotation) / 10))
 
 			# Translate velocity X to Y
-			if normal.y != 0: # Avoid division by zero (what)
-				var add = (velocity.x * normal.x / normal.y) * -1
-				if add < 0: # upwards velocity, don't allow that
-					add = 0
-				velocity.y += add
+#			if normal.y != 0: # Avoid division by zero (what)
+#				var add = (velocity.x * normal.x / normal.y) * -1
+#				if add < 0: # upwards velocity, don't allow that
+#					add = 0
+#				velocity.y += add
 			
 			if abs(sprite_rotation) >= 80:
 				sprite_rotation = 0
@@ -876,16 +1058,22 @@ func _physics_process(delta: float) -> void:
 		sprite.position = sprite.position.linear_interpolate(sprite_offset, fps_util.PHYSICS_DELTA * rotation_interpolation_speed)
 		sprite.rotation = lerp_angle(sprite.rotation, sprite_rotation, fps_util.PHYSICS_DELTA * rotation_interpolation_speed)
 		sprite.rotation_degrees = wrapf(sprite.rotation_degrees, -180, 180)
-		sprite.reset_physics_interpolation()
+		#sprite.reset_physics_interpolation()
 	
-	# Update all states, nozzles and powerups
-	if Singleton.PlayerSettings.other_player_id == -1 or Singleton.PlayerSettings.my_player_index == player_id:
+	# Update all states, nozzles, powerups, and liquid-dependant physics
+	if Singleton.PlayerSettings.other_player_id == -1 or Singleton.PlayerSettings.my_player_index == player_id and !dead:
 		for state_node in states_node.get_children():
 			state_node.handle_update(delta)
 		for nozzle_node in nozzles_node.get_children():
 			nozzle_node.handle_update(delta)
-		for powerup_node in powerups_node.get_children():
-			powerup_node.handle_update(delta)
+			
+		if "mode" in get_tree().get_current_scene():
+			for powerup_node in powerups_node.get_children():
+				powerup_node.handle_update(delta)
+			handle_liquids(liquid_detector.get_overlapping_areas(), delta)
+	if last_stamina < 100 and stamina >= 100:
+		stamina_recharge_sound.play()
+	last_stamina = stamina
 	
 	# Handle powerup
 	if is_instance_valid(powerup):
@@ -918,27 +1106,29 @@ func _physics_process(delta: float) -> void:
 			sprite.flip_h = false
 	
 	# Set up snap
+	slope_angle_check.position.x = velocity.x * delta * 2
+	slope_angle_check.force_raycast_update()
+	
+	snap = Vector2.ZERO
 	if is_instance_valid(state) and state.disable_snap:
-		snap = Vector2()
-	elif (left_check.is_colliding() or right_check.is_colliding()) and velocity.y > 0:
-		var normal = ground_check.get_collision_normal()
-		snap = Vector2(0, 6 if normal.x == 0 else 12)
-	else:
-		snap = Vector2()
+		snap = Vector2.ZERO
+	elif slope_angle_check.is_colliding() and velocity.y >= -10:
+		var normal = slope_angle_check.get_collision_normal()
+		var should_snap: bool = abs(normal.x) < deg2rad(46)
+		snap = Vector2(0, 9 if should_snap else 3)
 	
 	# Switch nozzle
-	if (inputs[8][1] and Singleton.CurrentLevelData.level_data.vars.nozzles_collected.size() > 1
+	if (inputs[8][1] and CurrentLevelData.vars.nozzles_collected.size() > 1
 	# Rainbow Mario can't use fludd, so no point in allowing switching nozzles
 	and (!is_instance_valid(powerup) or powerup.name != "RainbowPowerup")):
 		nozzles_list_index += 1
-		if nozzles_list_index >= Singleton.CurrentLevelData.level_data.vars.nozzles_collected.size():
+		if nozzles_list_index >= CurrentLevelData.vars.nozzles_collected.size():
 			nozzles_list_index = 0
 		
-		var new_nozzle = str(Singleton.CurrentLevelData.level_data.vars.nozzles_collected[nozzles_list_index])
+		var new_nozzle = str(CurrentLevelData.vars.nozzles_collected[nozzles_list_index])
 		set_nozzle(new_nozzle, false)
 		
 		nozzle_switch_sound.play()
-		#print(Singleton.CurrentLevelData.level_data.vars.nozzles_collected)
 	
 	# Handle nozzle
 	if is_instance_valid(nozzle):
@@ -958,6 +1148,7 @@ func _physics_process(delta: float) -> void:
 			
 		if nozzle.get_name() != "TurboNozzle":
 			turbo_particles.emitting = false
+			turbo_water_particles.emitting = false
 		
 		if nozzle.get_name() != "RocketNozzle":
 			rocket_particles.emitting = false
@@ -988,34 +1179,45 @@ func _physics_process(delta: float) -> void:
 		
 		water_sprite_2.position = water_sprite.position - Vector2(-5 * facing_direction, 2)
 		water_sprite_2.reset_physics_interpolation()
-		water_particles.position = water_sprite.position + Vector2(12, 3)
+		water_particles.position = water_sprite.position + Vector2(12, 4)
 		water_particles.reset_physics_interpolation()
-		water_particles_2.position = water_particles.position + (Vector2(9.5 * facing_direction, 2))
+		water_particles_2.position = water_particles.position + (Vector2(9.5 * facing_direction, 3))
 		water_particles_2.reset_physics_interpolation()
 		turbo_particles.process_material.direction = Vector3(-facing_direction, 0, 0)
-		turbo_particles.position = water_sprite.position + Vector2(-3 * facing_direction, -11.5 if facing_direction == -1 else 11.5)
+		turbo_particles.position = water_sprite.position + Vector2(-4 * facing_direction, -11.5 if facing_direction == -1 else 11.5)
 		turbo_particles.reset_physics_interpolation()
-		rocket_particles.position = water_sprite.position + Vector2(8 if facing_direction == 1 else 10, 1.5)
+		rocket_particles.position = water_sprite.position + Vector2(8 if facing_direction == 1 else 10, 2.5)
 		rocket_particles.reset_physics_interpolation()
 	else:
 		fludd_sprite.visible = false
-		water_sprite.visible = false
-		water_sprite_2.visible = false
+		water_particles.emitting = false
+		water_particles_2.emitting = false
 		turbo_particles.emitting = false
+		turbo_water_particles.emitting = false
 		rocket_particles.emitting = false
 	
 	death_fludd_sprite.visible = fludd_sprite.visible
 	
 	# Move by velocity
 	if movable:
-
-		velocity = move_and_slide_with_snap(velocity, snap, Vector2.UP, true, 4, deg2rad(46))
+		# if crushers detected, disable all collision and enable singular "crushed" collider
+		update_collision(crusher_detector.get_overlapping_bodies().size() <= 0)
 		
-		if (last_position != Vector2.ZERO and (last_position - global_position).length_squared() > 0
-			and get_world_2d().direct_space_state.intersect_ray(last_position, global_position, [self], 1).size() > 0):
+		var old_y_vel: float = velocity.y
+		velocity = move_and_slide_with_snap(velocity, snap, Vector2.UP, true, 4, deg2rad(46))
+		velocity.y = old_y_vel
+		if is_grounded():
+			velocity.y = min(0, velocity.y)
+		if is_ceiling():
+			velocity.y = max(0, velocity.y)
+		
+		## CLIPPING CODE
+		var exceptions: Array = get_collision_exceptions()
+		exceptions.append(self)
+		var ray_check: Dictionary = get_world_2d().direct_space_state.intersect_ray(last_position, global_position, exceptions, collision_layer)
+		var ray_colliding: bool = not ray_check.empty()
+		if (ray_colliding and last_position != Vector2.ZERO and (last_position - global_position).length_squared() > 0):
 			position = last_position
-			reset_physics_interpolation()
-			
 			if velocity.length_squared() < 1:
 				# Clip attempt, just reset velocity
 				velocity = last_velocity * 0.95
@@ -1024,14 +1226,18 @@ func _physics_process(delta: float) -> void:
 			collided_last_frame = slide_count > 0
 	else:
 		collided_last_frame = false
+	
+	# check if mario will collide w/ anything if he continues moving
+	var motion: Vector2 = global_position - last_position
+	predictive_collision = test_move(global_transform.translated(motion), Vector2(0, 0.001))
 
 	# Boundaries
 	if position.y > (level_bounds.end.y * 32) + 128:
 		if (Singleton.PlayerSettings.other_player_id == -1 or Singleton.PlayerSettings.my_player_index == player_id)\
 		and controllable: # If not controllable, the player is (likely) collecting a shine
 			kill("fall")
-	if position.x < level_bounds.position.x * 32:
-		position.x = level_bounds.position.x * 32
+	if position.x < level_bounds.position.x * 32 + 10:
+		position.x = level_bounds.position.x * 32 + 10
 		velocity.x = 0
 	if position.x > level_bounds.end.x * 32 -1:
 		position.x = level_bounds.end.x * 32 -1
@@ -1047,6 +1253,8 @@ func _physics_process(delta: float) -> void:
 	last_velocity = velocity
 	last_move_direction = move_direction
 	
+	if not "mode" in get_tree().get_current_scene(): return
+		
 	if get_tree().get_current_scene().switch_timer < 0.2 and get_tree().get_current_scene().switch_timer > 0:
 		if p_block_detector.get_overlapping_areas().size() > 0:
 			get_tree().get_current_scene().switch_timer = 0.2
@@ -1055,34 +1263,9 @@ func _physics_process(delta: float) -> void:
 	if Singleton.PlayerSettings.other_player_id != -1:
 		if player_id == Singleton.PlayerSettings.my_player_index and is_network_master():
 			rpc_unreliable("sync", position, velocity, sprite.frame, sprite.animation, sprite.rotation_degrees, attacking, big_attack, heavy, dead, controllable)
-			#print("hi")
+
 	
-	update_ghost()
 
-
-func update_ghost():
-	if !Singleton2.save_ghost:
-		GhostArrays.temp_gp.append(Vector2(int(position.x), int(position.y)))
-		GhostArrays.temp_ga.append(ANIM_IDS[sprite.animation])
-		GhostArrays.temp_gsr.append(int(sprite.rotation_degrees))
-		GhostArrays.temp_gar.append(Singleton.CurrentLevelData.area)
-	
-	var level_info = Singleton.CurrentLevelData.level_info
-	if Singleton2.save_ghost == true and GhostArrays.dont_save == false:
-		Singleton2.save_ghost = false
-		
-		var directory := Directory.new()
-		if !directory.dir_exists("user://replays"):
-			directory.make_dir("user://replays")
-		
-		file.open("user://replays/" + str(level_info.level_name) + "_" + str(level_info.selected_shine) + ".127ghost", File.WRITE)
-		file.store_var(GhostArrays.temp_gp)
-		file.store_var(GhostArrays.temp_ga)
-		file.store_var(GhostArrays.temp_gsr)
-		file.store_var(GhostArrays.temp_gar)
-		file.close()
-
-		
 func encode_int_bytes(val: int, num: int) -> PoolByteArray:
 	var output = PoolByteArray([])
 	for i in range(num):
@@ -1098,7 +1281,8 @@ func encode_int_bytes(val: int, num: int) -> PoolByteArray:
 	return output
 	
 func switch_areas(area_id, transition_time):
-	Singleton.SceneTransitions.reload_scene(cutout_circle, cutout_circle, transition_time, area_id, false, false)
+	CurrentLevelData.is_new_area = true
+	SceneTransitions.reload_scene(cutout_circle, cutout_circle, transition_time, area_id, false)
 	if !switched:
 		if Singleton.PlayerSettings.other_player_id != -1:
 			get_tree().multiplayer.send_bytes(JSON.print(["area", area_id, transition_time]).to_ascii())
@@ -1106,101 +1290,98 @@ func switch_areas(area_id, transition_time):
 
 	
 func kill(cause: String) -> void:
-	Singleton.CurrentLevelData.can_pause = false
+	CurrentLevelData.can_pause = false
 	if !dead:
 		if Singleton.PlayerSettings.other_player_id != -1:
 			get_tree().multiplayer.send_bytes(JSON.print(["reload"]).to_ascii())
 		dead = true
-		var reload := true
 		var cutout_in := cutout_circle
 		var cutout_out := cutout_circle
 		var transition_time := 0.75
 		Singleton.Music.stop_temporary_music()
-		if cause == "fall":
-			controllable = false
-			sound_player.play_fall_sound()
-			if number_of_players == 1:
+		
+		match(cause):
+			"fall":
+				toggle_movement(false)
+				sound_player.play_fall_sound()
 				cutout_in = cutout_death
 				yield(get_tree().create_timer(1), "timeout")
-			else:
-				reload = false
-		elif cause == "reload":
-			transition_time = 0.4
-		elif cause == "green_demon":
-			sound_player.play_last_hit_sound()
-			controllable = false
-			movable = false
-			cutout_in = cutout_death
-			sprite.visible = false
-			death_sprite.set_as_toplevel(true)
-			death_sprite.global_position = sprite.global_position
-			death_sprite.play_anim()
-			position = Vector2(0, 100000000000000000)
-			reset_physics_interpolation()
-			yield(get_tree().create_timer(0.55), "timeout")
-			sound_player.play_death_sound()
-			yield(get_tree().create_timer(0.75), "timeout")
-		elif cause == "hit" or cause == "lava" or cause == "crushed":
-			controllable = false
-			movable = false
-			cutout_in = cutout_death
-			sprite.visible = false
-			death_sprite.set_as_toplevel(true)
-			death_sprite.global_position = sprite.global_position
-			death_sprite.play_anim()
-			position = Vector2(0, 100000000000000000)
-			reset_physics_interpolation()
-			yield(get_tree().create_timer(0.55), "timeout")
-			sound_player.play_death_sound()
-			yield(get_tree().create_timer(0.75), "timeout")
-			if number_of_players != 1:
-				reload = false
-		elif cause == "timer":
-			sound_player.play_last_hit_sound()
-			controllable = false
-			movable = false
-			cutout_in = cutout_death
-			sprite.visible = false
-			death_sprite.set_as_toplevel(true)
-			death_sprite.global_position = sprite.global_position
-			death_sprite.play_anim()
-			position = Vector2(0, 100000000000000000)
-			reset_physics_interpolation()
-			yield(get_tree().create_timer(0.55), "timeout")
-			sound_player.play_death_sound()
-			yield(get_tree().create_timer(0.75), "timeout")
-			reload = true
+			"reload":
+				transition_time = 0.4
+			"green_demon":
+				sound_player.play_last_hit_sound()
+				toggle_movement(false)
+				cutout_in = cutout_death
+				sprite.visible = false
+				death_sprite.global_position = sprite.global_position
+				death_sprite.reset_physics_interpolation()
+				death_sprite.play_anim()
+				
+				yield(get_tree().create_timer(0.55), "timeout")
+				sound_player.play_death_sound()
+				yield(get_tree().create_timer(0.75), "timeout")
+			"timer":
+				sound_player.play_last_hit_sound()
+				toggle_movement(false)
+				cutout_in = cutout_death
+				sprite.visible = false
+				death_sprite.global_position = sprite.global_position
+				death_sprite.reset_physics_interpolation()
+				death_sprite.play_anim()
+				yield(get_tree().create_timer(0.55), "timeout")
+				sound_player.play_timeout_sound()
+				yield(get_tree().create_timer(0.75), "timeout")
+			"quicksand":
+				controllable = false
+				disable_movement = true
+#				sprite.animation = "bonkedLeft" if facing_direction == -1 else "bonkedRight"
+				sprite.animation = "shocked"
+				sprite.speed_scale = 1
+#				sprite.frame = 0
+				sound_player.play_fall_sound()
+				cutout_in = cutout_death
+				yield(get_tree().create_timer(1), "timeout")
+			"poison":
+				sound_player.play_last_hit_sound()
+				controllable = false
+				movable = false
+				cutout_in = cutout_death
+				sprite.visible = false
+				death_sprite.global_position = sprite.global_position
+				death_sprite.reset_physics_interpolation()
+				death_sprite.play_anim()
+				yield(get_tree().create_timer(0.55), "timeout")
+				sound_player.play_death_sound()
+				yield(get_tree().create_timer(0.75), "timeout")
+			_:
+				toggle_movement(false)
+				cutout_in = cutout_death
+				sprite.visible = false
+				death_sprite.global_position = sprite.global_position
+				death_sprite.reset_physics_interpolation()
+				
+				if cause == "lava":
+					burn_particles.z_index = 50
+					burn_particles.global_position = Vector2(sprite.global_position.x, sprite.global_position.y)
+					burn_particles.reset_physics_interpolation()
+					burn_particles.emitting = true
+					
+				
+				death_sprite.play_anim()
+				yield(get_tree().create_timer(0.55), "timeout")
+				# sorry silver, but i personally find it weird
+				# when the death sound is just the hurt sound again
+				sound_player.play_death_sound()
+				yield(get_tree().create_timer(0.75), "timeout")
 		
-		if reload:
-			Singleton.SceneTransitions.reload_scene(cutout_in, cutout_out, transition_time, 0, true)
-		else:
-			yield(get_tree().create_timer(3), "timeout")
-			set_powerup(null, false)
-			
-			health = 8
-			health_shards = 0
-			emit_signal("health_changed", health, health_shards)
-			
-			if Singleton.CheckpointSaved.current_checkpoint_id != -1 and Singleton.CheckpointSaved.current_area == Singleton.CurrentLevelData.area and Singleton.CurrentLevelData.level_data.vars.transition_data == []:
-				position = Singleton.CheckpointSaved.current_spawn_pos
-				reset_physics_interpolation()
-				GhostArrays.dont_save = true
-			else:
-				position = spawn_pos - Vector2(0, 16)
-				reset_physics_interpolation()
-			last_position = position # fixes infinite death bug
-			dead = false
-			movable = true
-			sprite.visible = true
-			death_sprite.visible = false
-			controllable = true
-			Singleton.CurrentLevelData.can_pause = true
-			set_state_by_name("FallState", 0)
+		if CurrentLevelData.area_id != CurrentLevelData.checkpoint_data.current_area:
+			CurrentLevelData.is_new_area = true
+		SceneTransitions.reload_scene(cutout_in, cutout_out, transition_time, -1, true)
 
 func exit() -> void:
 	#if the mode switcher button is not invisible, we're in edit mode, switch back to that, but if we're in play mode then for now just reload the scene
-	if !Singleton.ModeSwitcher.get_node("ModeSwitcherButton").invisible:
-		Singleton.ModeSwitcher.get_node("ModeSwitcherButton").switch()
+	if !not Singleton.ModeSwitcher.visible:
+		Singleton.ModeSwitcher.switch()
 	else: 
 		# warning-ignore: return_value_discarded
 		get_tree().reload_current_scene()
@@ -1212,11 +1393,7 @@ onready var terrain_collision_nodes: Array = [
 	ground_check_dive,
 	left_check,
 	right_check,
-	slope_stop_check,
-	squish_vertical_check,
-	squish_vertical_check_dive,
-	squish_left_check,
-	squish_right_check
+	slope_stop_check
 ]
 func set_all_collision_masks(bit, value) -> void:
 	for collision_node in terrain_collision_nodes:
@@ -1237,21 +1414,36 @@ func set_inter_player_collision(can_collide : bool) -> void:
 	player_collision.set_collision_mask_bit(1, can_collide)
 	player_collision.set_collision_layer_bit(1, can_collide)
 
-func set_dive_collision(is_enabled : bool) -> void:
-	using_dive_collision = is_enabled
-	if is_enabled:
-		ground_shape.disabled = is_enabled
+func set_dive_collision(is_dive : bool, force_disabled: bool = crush_disable, set_using: bool = true) -> void:
+	if set_using:
+		using_dive_collision = is_dive
+	
+	if force_disabled or is_dive:
+		ground_shape.disabled = is_dive
 	else:
 		ground_collider_enable_timer.start()
-	collision_raycast.disabled = is_enabled
-	dive_collision_shape.disabled = !is_enabled
-	ground_collision_dive.disabled = !is_enabled
-	left_collision.disabled = is_enabled
-	right_collision.disabled = is_enabled
+	
+	collision_shape.disabled = is_dive or force_disabled
+	collision_raycast.disabled = is_dive or force_disabled
+	dive_collision_shape.disabled = !is_dive or force_disabled
+	ground_collision_dive.disabled = !is_dive or force_disabled
+	left_collision.disabled = is_dive or force_disabled
+	right_collision.disabled = is_dive or force_disabled
+	
+	crushed_collision.disabled = is_dive or !force_disabled
+	crushed_collision_dive.disabled = !is_dive or !force_disabled
+	
+	box_pwner.get_child(0).disabled = is_dive or force_disabled
+	box_pwner_dive.get_child(0).disabled = !is_dive or force_disabled
+
+
+func update_collision(enabled: bool) -> void:
+	set_dive_collision(using_dive_collision, not enabled, false)
+	crush_disable = not enabled
+
 
 func hide_shine_dance_shine():
 	$CollectedShine.visible = false
-	$CollectedShineOutline.visible = false
 	
 func _connect_signals():
 	for i in $Powerups.get_children():
@@ -1294,5 +1486,80 @@ func toggle_movement(var value : bool):
 	controllable = value
 	movable = value
 
-func add_force(velocity : Vector2, UUID : int):
-	extra_forces.get_or_add(UUID, velocity)
+func check_liquid(liquid_type) -> bool:
+	if liquid_type == LiquidBase.LiquidType.Water:
+		for liquid_area in water_detector.get_overlapping_areas():
+			if liquid_area.get_parent().liquid_type == liquid_type:
+				return true
+	else:
+		for liquid_area in liquid_detector.get_overlapping_areas():
+			if liquid_area.get_parent().liquid_type == liquid_type:
+				return true
+	
+	return false
+
+func update_layer_info():
+	get_parent().remove_child(self)
+	layer.get_ref().add_child(self)
+	layer.get_ref().move_child(self, 1)
+	var player = get_tree().current_scene
+	player.character = player.get_path_to(self)
+	player.nodes_to_load[1] = player.get_path_to(self)
+
+func handle_liquids(liquid_areas, delta):
+	if is_instance_valid(state):
+		liquid_detector.get_node("BaseCollision").disabled = state.use_dive_collision
+		liquid_detector.get_node("DiveCollision").disabled = !state.use_dive_collision
+	else:
+		liquid_detector.get_node("BaseCollision").disabled = false
+		liquid_detector.get_node("DiveCollision").disabled = true
+	
+	quicksand_particles.set_particles_emitting(false)
+	
+	if liquid_areas.size() <= 0: return
+	
+	for area in liquid_areas:
+		var liquid : LiquidBase = area.get_parent()
+		match(liquid.liquid_type):
+			liquid.LiquidType.Water, liquid.LiquidType.Poison:
+				var toxicity = liquid.toxicity
+				
+				if toxicity > 255:
+					breath -= 12
+					if breath <= 0:
+						kill("poison")
+				elif toxicity > 0:
+					breath -= 0.25 * toxicity
+					if breath <= 0:
+						breath = 100
+						damage(1, "hit", 0)
+
+			liquid.LiquidType.Lava:
+				if powerup != get_powerup_node("MetalPowerup") and powerup != get_powerup_node("RainbowPowerup") and shine_cutscene == false:
+					set_state_by_name("LavaBoostState", delta)
+
+			liquid.LiquidType.Quicksand:
+				var sinking_speed = liquid.sinking_speed/10
+				var death_threshold = liquid.death_threshold
+
+				if dead:
+					velocity = Vector2(0, sinking_speed*6)
+
+				var idle_state = get_state_node("QuicksandIdleState")
+				var hop_state = get_state_node("QuicksandHopState")
+
+				quicksand_particles.set_particles_color(liquid.color/1.2)
+				quicksand_particles.set_particles_emitting(true)
+
+				idle_state.fall_speed = sinking_speed
+
+				if !dead:
+					match(liquid.depth_check(bottom_pos.global_position)):
+						Quicksand.DepthResults.Surface:
+							idle_state.move_speed_modifier = .9
+
+						Quicksand.DepthResults.Sinking:
+							idle_state.move_speed_modifier = min(1-(((bottom_pos.global_position.y-liquid.global_position.y)/death_threshold)/1.75), .75)
+
+						Quicksand.DepthResults.Death:
+							kill("quicksand")

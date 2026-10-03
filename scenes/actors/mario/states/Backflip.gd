@@ -2,6 +2,8 @@ extends State
 
 class_name BackflipState
 
+const JUMP_SQUISH := Vector2(0.9, 1.2)
+
 var is_crouch = false
 var stop = false
 var getup_buffer = 0
@@ -12,6 +14,12 @@ var unlock_timer = 0.0
 
 export var backflip_power := Vector2(280, 360) # no longer nice
 
+
+## jump height variation
+var jump_released: bool = false
+const HEIGHT_MULT: float = 0.67
+
+
 func _ready():
 	priority = 4
 	disable_animation = true
@@ -19,6 +27,9 @@ func _ready():
 	disable_turning = true
 
 func _start(_delta):
+	## jump height variation
+	jump_released = false
+	character.sprite.scale = JUMP_SQUISH
 	priority = 4
 	unlock_timer = 0.4
 	direction_on_start = character.facing_direction
@@ -40,8 +51,10 @@ func _start(_delta):
 	character.velocity.y = -backflip_power.y
 	character.position.x -= 2 * character.facing_direction
 	character.position.y -= 3
+	character.stamina = 100
 	disable_turning = true
 	sound_player.play_double_jump_sound()
+	sound_player.play_backflip_sound()
 	if character.facing_direction == -1:
 		character.anim_player.play("backflip")
 	else:
@@ -50,6 +63,7 @@ func _start(_delta):
 
 func _update(_delta):
 	# if 127cs wasnt a thing this code would get me cancelled lol
+	character.sprite.scale = lerp(character.sprite.scale, Vector2(1, 1), 0.08)
 	var division_amount = unlock_timer * 2.5
 	if division_amount == 0:
 		division_amount = 0.05
@@ -60,6 +74,12 @@ func _update(_delta):
 	else:
 		sprite.animation = "jumpLeft"
 		
+	## jump height variation
+	if not jump_released and not character.inputs[2][0]:
+		jump_released = true
+		character.velocity.y *= HEIGHT_MULT
+
+
 func _stop(_delta):
 	character.anim_player.stop()
 	

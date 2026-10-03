@@ -1,6 +1,6 @@
 extends GameObject
 
-
+const rainbow_animation_speed := 2500
 
 onready var path : Path2D = $Path2D
 onready var pathfollow = $Path2D/PathFollow2D
@@ -11,10 +11,11 @@ onready var animation_player = $AnimationPlayer
 onready var audio_player : AudioStreamPlayer2D = $AudioStreamPlayer2D
 onready var fly_noise_player : AudioStreamPlayer2D = $AudioStreamPlayer2D2
 onready var player_detector = $PlayerDetector
-onready var launch_noise : AudioStream = preload("res://scenes/actors/objects/launch_star/sfx/launch.wav")
-onready var flying_noise : AudioStream = preload("res://scenes/actors/objects/launch_star/sfx/flying.wav")
-onready var windup_noise : AudioStream = preload("res://scenes/actors/objects/launch_star/sfx/windup.wav")
 onready var launch_particles : CPUParticles2D = $LaunchParticles
+
+export var launch_noise: AudioStream
+export var windup_noise: AudioStream
+export var flying_noise: AudioStream
 
 enum states {IDLE, HOLDING, WINDUP, LAUNCH}
 var state = states.IDLE
@@ -26,19 +27,30 @@ var last_position
 var speed = 10
 var curve = Curve2D.new()
 var custom_path = Curve2D.new()
+var color := Color(1, 1, 0)
+var rainbow := false
 
 
 
 
+#
+#func _set_properties():
+#	savable_properties = ["curve", "custom_path", "speed"]
+#	editable_properties = ["curve", "speed"]
 
-func _set_properties():
-	savable_properties = ["curve", "custom_path", "speed"]
-	editable_properties = ["custom_path", "speed"]
+func _register_properties():
+	register_property(4, "curve", curve)
+	register_property(5, "custom_path", curve, false)
+	register_property(6, "speed", speed)
+	register_property(7, "color", color, true)
+	register_property(8, "rainbow", rainbow, true)
+	base_hidden_properties.append("rotation_degrees")
 
-func _set_property_values():
-	set_property("curve", curve)
-	set_property("custom_path", curve)
-	set_property("speed", speed)
+
+func _register_property_info() -> void:
+	set_property_info("curve", PropertyInfo.new("Determines the path the player will travel while flying.", 1, -INF, INF, ["", ""], ["", ""]))
+	set_property_info("speed", PropertyInfo.new("The velocity at which the player travels while flying.", 1, -INF, INF, ["", ""], ["", ""]))
+
 
 func invalid_curve(check : Curve2D):
 	if(!is_instance_valid(check) or check.get_point_count() == 0):
@@ -47,16 +59,16 @@ func invalid_curve(check : Curve2D):
 		return false
 		
 func set_camera():
-	#print("set camera")
 	if mario.movable:
 		mario.camera.auto_move = true
 		
 func set_state(to:int):
+	mario.get_state_node("LaunchStarState").fast_cam_follow = false
 	match(to):
 		states.IDLE:
 			pathfollow.offset = 100
 			fly_noise_player.stop()
-			mario.camera.auto_move = true
+			#mario.camera.auto_move = true
 			mario.disconnect("state_changed", self, "cancel_launch")
 			state = states.IDLE
 			return
@@ -85,6 +97,8 @@ func set_state(to:int):
 			state = states.WINDUP
 			return
 		states.LAUNCH:
+			mario.get_state_node("LaunchStarState").fast_cam_follow = true
+			
 			animation_player.play("launch")
 			audio_player.stop()
 			audio_player.stream = launch_noise
@@ -92,13 +106,16 @@ func set_state(to:int):
 			fly_noise_player.stream = flying_noise
 			fly_noise_player.play()
 			speed_tween.remove_all()
+			LastInputDevice.rumble(0.25, 0.4, 0.3)
 			mario.sound_player.play_triple_jump_sound()
 			mario.sprite.speed_scale = 1.5
-			mario.camera.auto_move = false
+			#mario.camera.auto_move = false
 			state = states.LAUNCH
 			return
 	
 func _ready():
+	if mode == 1:
+		$StarContainer.z_index = -2
 #	launch_particles.emitting = false
 	if(invalid_curve(curve)):
 		curve.add_point(Vector2())
@@ -115,6 +132,16 @@ func _ready():
 func _process(_delta):
 	if curve != path.curve:
 		path.curve = curve		
+	if color != Color(1, 1, 0):
+		for child in $StarContainer.get_children():
+			for grandchild in child.get_children():
+				grandchild.animation = "recolor"
+				grandchild.modulate = color
+		
+	if rainbow:
+		# Hue rotation
+		color.h = float(OS.get_ticks_msec() % rainbow_animation_speed) / rainbow_animation_speed
+		
 func _physics_process(delta):
 	if mode != 0:
 		star_container.look_at(position + path.curve.get_point_position(1))
@@ -122,7 +149,7 @@ func _physics_process(delta):
 		player_detector.look_at(position + path.curve.get_point_position(1))
 		player_detector.rotation_degrees += 90
 		launch_particles.direction = Vector2.UP.rotated(deg2rad(star_container.rotation_degrees))
-	if enabled and mode == 0:
+	if is_enabled_and_on_ground() and mode == 0:
 		match(state):
 			states.IDLE:
 				physics_process_idle(delta)
@@ -138,6 +165,11 @@ func physics_process_idle(delta:float):
 	for body in player_detector.get_overlapping_bodies():
 		if body.name.begins_with("Character"):
 			mario = body
+			# the launch star should always surround the player when usable
+			if is_enabled_and_on_ground():
+				$"%InnerBottom".z_index = max(0, mario.get_parent().z_index + 1)
+				$"%OuterBottom".z_index = max(0, mario.get_parent().z_index + 2)
+				$"%OuterBottomShadow".z_index = max(0, mario.get_parent().z_index + 2)
 			if body.inputs[4][0] and body.state and body.state.name == "LaunchStarState":
 				mario.state._stop(delta)
 				set_state(3)
@@ -182,7 +214,7 @@ func physics_process_launch(delta:float):
 	mario.sprite.rotation = lerp_angle(mario.sprite.rotation, pathfollow.rotation + PI/2, clamp(0.008 * speed, 0, 1))
 	#mario.sprite.rotation_degrees += 90
 	
-	
+	speed = max(speed,1) # Speeds lower than 1 softlock the player.
 
 	# reached end
 	#todo: fix exit velocity

@@ -1,0 +1,136 @@
+class_name EditorWindow
+extends PanelContainer
+
+const popup_anim_duration: float = 0.1
+
+export(NodePath) var drag_control_path
+export(NodePath) var close_button_path
+export(NodePath) var resize_control_path
+
+export var title: String
+export var icon: Texture
+export var icon_tooltip: String
+
+var drag_position: Vector2
+
+onready var title_node: RichTextLabel = $"%WindowTitle"
+onready var icon_node: TextureRect = $"%WindowIcon"
+onready var icon_spacer: Control = $"%IconSpacer"
+
+signal window_opened
+signal window_closed
+
+
+func set_title(val: String):
+	title_node.bbcode_text = val
+	title_node.bbcode_enabled = true
+
+
+func set_icon(val):
+	icon_node.texture = val
+	if not val:
+		icon_node.hide()
+		icon_spacer.hide()
+
+
+func set_tooltip(val):
+	icon_node.hint_tooltip = val
+
+
+func _ready() -> void:
+	var drag_control: Control = get_node(drag_control_path)
+	if is_instance_valid(drag_control):
+		drag_control.connect("gui_input", self, "drag_window")
+	
+	var close_button: BaseButton = get_node(close_button_path)
+	if is_instance_valid(close_button):
+		close_button.connect("pressed", self, "close")
+	
+	var resize_control: Control = get_node(resize_control_path)
+	if is_instance_valid(resize_control):
+		resize_control.connect("gui_input", self, "resize_window")
+	
+	popup_centered(rect_size)
+	
+	if not self == get_tree().current_scene:
+		hide()
+	
+	set_title(title)
+	set_icon(icon)
+	set_tooltip(icon_tooltip)
+
+
+func popup(rect: Rect2) -> void:
+	if visible:
+		return
+	
+	rect_position = rect.position
+	rect_size = rect.size
+	rect_pivot_offset = rect_size / 2.0
+	rect_scale = Vector2.ZERO
+	show()
+	
+	var tween = create_tween()
+	tween.set_ease(Tween.EASE_OUT)
+	tween.set_trans(Tween.TRANS_CUBIC)
+	tween.tween_property(self, "rect_scale", Vector2.ONE, popup_anim_duration)
+	
+	emit_signal("window_opened")
+
+
+func popup_centered(size: Vector2) -> void:
+	size = Vector2(max(size.x, rect_min_size.x), max(size.y, rect_min_size.y))
+	var position: Vector2 = (get_viewport_rect().size / 2.0) - (size / 2.0)
+	
+	popup(Rect2(position, size))
+
+
+func close():
+	var tween = create_tween()
+	
+	if is_instance_valid(tween):
+		tween.set_ease(Tween.EASE_IN)
+		tween.set_trans(Tween.TRANS_CUBIC)
+		tween.tween_property(self, "rect_scale", Vector2.ZERO, popup_anim_duration)
+
+		yield(tween, "finished")
+
+	hide()
+	emit_signal("window_closed")
+
+
+func toggle_window(size: Vector2 = rect_size) -> void:
+	if visible:
+		close()
+	else:
+		popup_centered(size)
+
+
+func drag_window(event):
+	if event is InputEventMouseButton:
+		if event.pressed:
+			drag_position = get_local_mouse_position()
+			raise()
+	
+	if (event is InputEventMouseMotion) and (event.button_mask == BUTTON_LEFT):
+		rect_global_position = event.global_position - drag_position
+		rect_global_position.y = max(rect_global_position.y, 0)
+	
+	var window_rect := Rect2(rect_position, rect_size)
+	
+	if not window_rect.intersects(get_viewport_rect()):
+		hide()
+
+
+func resize_window(event):
+	if (event is InputEventMouseMotion) and (event.button_mask == BUTTON_LEFT):
+		rect_size = event.global_position - rect_global_position
+	
+	var window_rect := Rect2(rect_position, rect_size)
+	
+	if not window_rect.intersects(get_viewport_rect()):
+		hide()
+
+
+func play(tab):
+	pass # Replace with function body.

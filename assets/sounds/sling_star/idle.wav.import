@@ -1,0 +1,23 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/idle.wav-177a4cb70cc05029a5232ae3da557ba3.sample"
+
+[deps]
+
+source_file="res://assets/sounds/sling_star/idle.wav"
+dest_files=[ "res://.import/idle.wav-177a4cb70cc05029a5232ae3da557ba3.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=2
+edit/loop_begin=32000
+edit/loop_end=320000
+compress/mode=0

@@ -2,6 +2,8 @@ extends Nozzle
 
 class_name RocketNozzle
 
+const JUMP_SQUISH := Vector2(0.7, 1.3)
+
 export var boost_power := 5000
 export var depletion := 100
 export var fuel_depletion := 5
@@ -20,6 +22,7 @@ func _activate_check(_delta):
 	return !(character.state == character.get_state_node("SwimmingState") and character.state.boost_time_left > 0) and cooldown_time == 0 and !(character.state == character.get_state_node("BackflipState") and character.state.disable_turning == true) and character.get_state_node("SlideState").crouch_buffer == 0
 	
 func is_state(state):
+	character.sprite.scale = JUMP_SQUISH
 	return character.state == character.get_state_node(state)
 		
 func _activated_update(delta):
@@ -32,7 +35,8 @@ func _activated_update(delta):
 		character.fludd_sprite.modulate = Color(1, 1 - (charge * 1.4), 1 - (charge * 1.4))
 		character.fludd_sprite.offset = Vector2(rand_range(-1, 1), rand_range(-1, 1)) * charge
 		return
-		
+	
+	LastInputDevice.rumble(0.5, 0.8, 0.2)
 	cooldown_time = 0.2
 	character.fludd_sprite.offset = Vector2(0, 0)
 	character.fludd_sprite.modulate = Color(1, 1, 1)
@@ -41,6 +45,7 @@ func _activated_update(delta):
 	charge = 0
 	if !character.swimming:
 		character.stamina = 0
+		empty_cooldown = 0.75
 	character.get_state_node("JumpState").ledge_buffer = 0 # Disable coyote time, which allowed for a "double jump" that was weaker than the actual blast
 	deactivate_frames = 30
 		
@@ -68,6 +73,7 @@ func _activated_update(delta):
 	
 	if (character.velocity.y > power * normal.y and normal.y > 0) or (character.velocity.y < power * normal.y and normal.y < 0):
 		character.velocity.y = sqrt(abs(character.velocity.y)) * sign(character.velocity.y)
+		character.squish_lerp = true
 		character.velocity.y -= accel * normal.y
 	
 	if character.fuel > 0 and !character.swimming:
@@ -108,7 +114,7 @@ func _general_update(delta):
 	
 	if activated and !last_activated and character.stamina == 0:
 		character.rocket_particles.emitting = true
-		character.fludd_sound.play(((100 - character.stamina) / 100) * 2.79)
+		character.fludd_sound.play(((100 - character.stamina) / 100))
 		last_activated = true
 	elif last_activated:
 		if deactivate_frames > 0:

@@ -1,6 +1,6 @@
 [gd_scene load_steps=26 format=2]
 
-[ext_resource path="res://scenes/actors/objects/yellow_coin/sound.wav" type="AudioStream" id=1]
+[ext_resource path="res://assets/sounds/coin.wav" type="AudioStream" id=1]
 [ext_resource path="res://scenes/actors/objects/wing_powerup/wing_powerup.png" type="Texture" id=2]
 [ext_resource path="res://scenes/actors/objects/wing_powerup/wing_powerup.gd" type="Script" id=3]
 [ext_resource path="res://scenes/actors/mario/particles/metal_sparkles.png" type="Texture" id=4]
@@ -195,6 +195,8 @@ extents = Vector2( 11.5, 16 )
 
 [node name="WingPowerup" type="Node2D"]
 script = ExtResource( 3 )
+editor_rect = Rect2( -10, -16, 23, 32 )
+internal_id = "wing_powerup"
 
 [node name="Particles2D" type="Particles2D" parent="."]
 material = SubResource( 1 )

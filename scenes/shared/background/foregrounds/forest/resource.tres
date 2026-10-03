@@ -13,3 +13,4 @@ layers = [ ExtResource( 3 ) ]
 immune_to = PoolIntArray(  )
 preview = ExtResource( 2 )
 palettes = [ ExtResource( 5 ), ExtResource( 4 ), ExtResource( 6 ) ]
+auto_scroll_speed = 0.0

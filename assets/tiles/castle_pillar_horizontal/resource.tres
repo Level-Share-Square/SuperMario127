@@ -1,0 +1,18 @@
+[gd_resource type="Resource" load_steps=9 format=2]
+
+[ext_resource path="res://level/Tileset.gd" type="Script" id=1]
+[ext_resource path="res://assets/tiles/castle_pillar_horizontal/5.png" type="Texture" id=2]
+[ext_resource path="res://assets/tiles/castle_pillar_horizontal/6.png" type="Texture" id=3]
+[ext_resource path="res://assets/tiles/castle_pillar_horizontal/1.png" type="Texture" id=4]
+[ext_resource path="res://assets/tiles/castle_pillar_horizontal/2.png" type="Texture" id=5]
+[ext_resource path="res://assets/tiles/castle_pillar_horizontal/3.png" type="Texture" id=6]
+[ext_resource path="res://assets/tiles/castle_pillar_horizontal/7.png" type="Texture" id=7]
+[ext_resource path="res://assets/tiles/castle_pillar_horizontal/4.png" type="Texture" id=8]
+
+[resource]
+script = ExtResource( 1 )
+block_tile_id = 137
+slab_tile_id = 137
+left_slope_tile_id = 137
+right_slope_tile_id = 137
+palettes = [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 8 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 7 ) ]

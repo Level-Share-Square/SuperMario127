@@ -1,7 +1,8 @@
 extends GameObject
 
 onready var animated_sprite = $AnimatedSprite
-onready var sound = $AudioStreamPlayer
+onready var sound = $Collect
+onready var last_sound = $CollectLast
 onready var area = $Area2D
 onready var visibility_enabler = $VisibilityEnabler2D
 onready var label = $Label
@@ -19,16 +20,16 @@ var id : int
 export var anim_damp = 80
 
 func collect(body):
-	if enabled and !collected and body.name.begins_with("Character") and !body.dead:
-		Singleton.CurrentLevelData.level_data.vars.collect_shine_shard(id)
-		var player_id = 1
-		if body.name == "Character":
-			player_id = 0
-		if Singleton.PlayerSettings.other_player_id == -1 or Singleton.PlayerSettings.my_player_index == player_id:
-			sound.play()
+	if is_enabled_and_on_ground() and !collected and body.name.begins_with("Character") and !body.dead:
+		CurrentLevelData.vars.collect_shine_shard(id)
 		collected = true
 		
-		label.text = str(Singleton.CurrentLevelData.level_data.vars.shine_shards_collected[Singleton.CurrentLevelData.area][0])
+		if CurrentLevelData.vars.shine_shards_collected[CurrentLevelData.area_id][0] != CurrentLevelData.vars.max_shine_shards:
+			sound.play()
+		else:
+			last_sound.play()
+		
+		label.text = str(CurrentLevelData.vars.shine_shards_collected[CurrentLevelData.area_id][0])
 		
 		#all of the collecting animation takes place in the animation player now, any old commented
 		#out code is part of the old animation and is simply left here to revert if necessary
@@ -46,15 +47,15 @@ func _ready():
 		animation_player.play("RESET")
 		return
 	
-	if enabled:
-		id = Singleton.CurrentLevelData.level_data.vars.max_shine_shards
-		Singleton.CurrentLevelData.level_data.vars.max_shine_shards += 1
+	if is_enabled_and_on_ground():
+		id = CurrentLevelData.vars.max_shine_shards
+		CurrentLevelData.vars.max_shine_shards += 1
 	
 	# band aid crash fix
-	while Singleton.CurrentLevelData.level_data.vars.shine_shards_collected.size() <= Singleton.CurrentLevelData.area:
-		Singleton.CurrentLevelData.level_data.vars.shine_shards_collected.append([0, []])
+	while CurrentLevelData.vars.shine_shards_collected.size() <= CurrentLevelData.area_id:
+		CurrentLevelData.vars.shine_shards_collected.append([0, []])
 	
-	if id in Singleton.CurrentLevelData.level_data.vars.shine_shards_collected[Singleton.CurrentLevelData.area][1]:
+	if id in CurrentLevelData.vars.shine_shards_collected[CurrentLevelData.area_id][1]:
 		queue_free()
 	
 	var _connect = area.connect("body_entered", self, "collect")

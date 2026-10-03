@@ -61,7 +61,7 @@ func _ready():
 	bottombar.rect_position = Vector2(768, 500)
 	shine_info.rect_scale = Vector2(0, 0)
 
-	Singleton.CurrentLevelData.can_pause = false
+	CurrentLevelData.can_pause = false
 
 	set_process(false)
 
@@ -69,7 +69,7 @@ func _ready():
 
 	# Wait before enabling pausing, so that the game can't enter the strangest pause state
 	yield(get_tree().create_timer(0.2), "timeout")
-	Singleton.CurrentLevelData.can_pause = true
+	CurrentLevelData.can_pause = true
 
 func populate_info_panel(level_info : LevelInfo = null) -> void:
 
@@ -87,14 +87,14 @@ func populate_info_panel(level_info : LevelInfo = null) -> void:
 		var collected_star_coin_count = level_info.collected_star_coins.values().count(true)
 		sccount.text = "%s/%s" % [collected_star_coin_count, level_info.collected_star_coins.size()]
 func _unhandled_input(event):
-	if Singleton.CurrentLevelData.can_pause and event.is_action_pressed("pause") and !(character_node.dead or (Singleton.PlayerSettings.number_of_players != 1 and character2_node.dead)):
+	if CurrentLevelData.can_pause and event.is_action_pressed("pause") and !(character_node.dead or (Singleton.PlayerSettings.number_of_players != 1 and character2_node.dead)):
 		toggle_pause()
 
 func toggle_pause():
-	var is_not_transitioning : bool = !Singleton.SceneTransitions.transitioning
+	var is_not_transitioning : bool = !SceneTransitions.transitioning
 	# if the mode switcher button is invisible, then we're not in the editor at all
-	var is_not_switching_modes : bool = !Singleton.ModeSwitcher.get_node("ModeSwitcherButton").switching_disabled or Singleton.ModeSwitcher.get_node("ModeSwitcherButton").invisible
-	if is_not_transitioning and is_not_switching_modes and !Singleton.PhotoMode.enabled and paused == get_tree().paused and get_parent().get_node("SignText").modulate.a <= 0.005 and get_parent().get_node("DialogueText").modulate.a <= 0.005:
+	var is_not_switching_modes : bool = !Singleton.ModeSwitcher.is_switching or not Singleton.ModeSwitcher.visible
+	if is_not_transitioning and is_not_switching_modes and !Singleton.PhotoMode.is_enabled_and_on_ground() and paused == get_tree().paused and get_parent().get_node("SignText").modulate.a <= 0.005 and get_parent().get_node("DialogueText").modulate.a <= 0.005:
 		if !shine_info.visible:
 			$ControlsOptions.reset() # for resetting the Wait... state
 			$ControlsOptions/ControlBindingWindow/Contents/ScrollContainer/BindingBoxContainer.reset()
@@ -108,7 +108,7 @@ func toggle_pause():
 				shine_info.visible = true
 		resume_button.focus_mode = 0
 		
-		Singleton.CurrentLevelData.can_pause = false
+		CurrentLevelData.can_pause = false
 		get_tree().paused = true if !self.visible and Singleton.PlayerSettings.other_player_id == -1 else false
 		paused = get_tree().paused
 		# if we're visible and toggling pause, that means we need to fade out back to gameplay
@@ -138,7 +138,7 @@ func toggle_pause():
 			yield(fade_tween, "tween_completed")
 			
 			self.visible = false
-			Singleton.CurrentLevelData.can_pause = true
+			CurrentLevelData.can_pause = true
 
 			# disable process at the end of the transition so the time score updates during it
 			set_process(false)
@@ -171,7 +171,7 @@ func toggle_pause():
 			
 			yield(fade_tween, "tween_completed")
 			
-			Singleton.CurrentLevelData.can_pause = true
+			CurrentLevelData.can_pause = true
 	
 func retry():
 	SettingsSaver.save()
@@ -187,7 +187,7 @@ func quit_to_menu() -> void:
 	Singleton.MenuVariables.quit_to_menu_with_transition("levels_screen")
 
 func update_shine_info():
-	var level_info = Singleton.CurrentLevelData.level_info
+	var level_info = CurrentLevelData.level_info
 	
 	var level_name : Label = shine_info.get_node("LevelName")
 	var level_name_backing : Label = shine_info.get_node("LevelName/LevelNameBacking")
@@ -198,20 +198,20 @@ func update_shine_info():
 	level_name_backing.text = level_info.level_name
 	
 	if level_info.selected_shine == -1: # This can happen if there are no shine sprites in the level
-		shine_description.bbcode_text = "[center]There are no shine sprites in this level.[/center]"
-		shine_name.bbcode_text = "[center]No shine sprite selected[/center]"
+		shine_description.bbcode_text = "[center]There are no missions in this level.[/center]"
+		shine_name.bbcode_text = "[center]No mission selected[/center]"
 	else:
 		var selected_shine_info = level_info.shine_details[level_info.selected_shine + shine_offset]
 		shine_description.bbcode_text = "[center]%s[/center]" % selected_shine_info["description"] 
 		shine_name.bbcode_text = "[center]%s[/center]" % selected_shine_info["title"]
 		
 func _process(delta):
-	var level_info = Singleton.CurrentLevelData.level_info
+	var level_info = CurrentLevelData.level_info
 	populate_info_panel(level_info)
 
 #changes pause menu description to previous shine info
 func prev_shine():
-	var level_info = Singleton.CurrentLevelData.level_info
+	var level_info = CurrentLevelData.level_info
 	
 	if level_info.selected_shine + shine_offset >= 1:
 		shine_offset -= 1
@@ -222,7 +222,7 @@ func prev_shine():
 
 #changes pause menu description to next shine info
 func next_shine():	
-	var level_info = Singleton.CurrentLevelData.level_info
+	var level_info = CurrentLevelData.level_info
 	if (level_info.selected_shine + shine_offset) < (shineDetails.size()-1):
 		shine_offset += 1 
 	else:
@@ -232,7 +232,7 @@ func next_shine():
 	scrollcheck()
 	
 func scrollcheck():
-	var level_info = Singleton.CurrentLevelData.level_info
+	var level_info = CurrentLevelData.level_info
 	if (level_info.selected_shine + shine_offset) < (shineDetails.size()-1):
 		nextbutton.show()
 	else:

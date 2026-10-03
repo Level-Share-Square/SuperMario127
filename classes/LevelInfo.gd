@@ -7,7 +7,7 @@ const OBJECT_ID_SHINE = 2
 const OBJECT_ID_STAR_COIN = 52
 
 const VERSION : String = "0.0.3"
-const INFO_DATA_SUFFIX: String = "~0*0~0*0~0*0~0*0]"
+#const INFO_DATA_SUFFIX: String = "~0*0~0*0~0*0~0*0]"
 
 # this class stores all the info and savedata relating to a level that can be played from the level list 
 
@@ -17,7 +17,7 @@ var level_folder: String
 
 # i'm not quite sure what the idea was behind making it load
 # the level data twice, but i went and removed that
-var level_data : LevelData
+var level_data : LevelDataOld
 # if the code was already loaded in full once,
 # no point in wasting time doing it again :p
 var is_fully_loaded: bool
@@ -46,97 +46,158 @@ var collected_star_coins : Dictionary = {} # same as collected_shines
 var coin_score : int = 0
 var time_scores : Dictionary = {} # time_scores should probably be stored as the sum of delta while playing, keys are same as collected_shines
 var activated_fludds : Array = [false, false, false]
+var chosen_fludd: String = "null"
+var validity_check: ValidityChecker
+var previous_number_of_players: int = 0
 
 
 ## this function makes it so we can get info about a level for
 ## its card without loading everything in the level and wasting
 ## processing power :3
-func get_info_level_code(level_code: String):
-	var first_bracket_index: int = level_code.find("[")
-	var first_end_bracket_index: int = level_code.find("]")
-	
-	var level_code_start: String = level_code.left(first_bracket_index + 1)
-	level_code.erase(first_bracket_index, first_end_bracket_index - first_bracket_index)
-	level_code.erase(0, first_bracket_index)
-	
-	var info_level_code = level_code_start + level_code.get_slice("~", 0)
-	info_level_code += INFO_DATA_SUFFIX
-	
-	return info_level_code
+#func get_info_level_code(level_code: String):
+#	var first_bracket_index: int = level_code.find("[")
+#	var first_end_bracket_index: int = level_code.find("]")
+#
+#	var level_code_start: String = level_code.left(first_bracket_index + 1)
+#	level_code.erase(first_bracket_index, first_end_bracket_index - first_bracket_index)
+#	level_code.erase(0, first_bracket_index)
+#
+#	var info_level_code = level_code_start + level_code.get_slice("~", 0)
+#	info_level_code += INFO_DATA_SUFFIX
+#
+#	return info_level_code
 
 
 func _init(passed_id: String, passed_folder: String, passed_level_code: String = "") -> void:
 	level_id = passed_id
 	level_folder = passed_folder
 	level_code = passed_level_code
-	if passed_level_code == "":
+	
+	if (!is_instance_valid(validity_check)):
+		validity_check = ValidityChecker.new(level_code,ValidityChecker.ValidityCheckTypes.INFO)
+	else:
+		validity_check.validity_check_type = ValidityChecker.ValidityCheckTypes.INFO
+	validity_check.check_validity()
+	var result = validity_check.result
+
+	if (!validity_check.is_level_multiplayer_compatible):
+		level_name = "\"MultiplayerIncompatibleLevel\""
 		return
-	
-	var info_level_code: String = get_info_level_code(passed_level_code)
-	var result: Dictionary = level_code_util.decode_info(info_level_code)
-	
+	if (!validity_check.is_valid):
+		level_name = "\"InvalidLevel\""
+		return
+
 	level_name = result.get("name", "")
 	level_author = result.get("author", "")
 	level_description = result.get("description", "")
-	
+
 	thumbnail_url = result.get("thumbnail_url", "")
-	thumbnail_sky = result.areas[0].settings.sky
-	thumbnail_background = result.areas[0].settings.background
-	thumbnail_background_palette = result.areas[0].settings.background_palette
+	thumbnail_sky = result.areas[0].sky
+	thumbnail_background = result.areas[0].background
+	thumbnail_background_palette = result.areas[0].background_palette
 
 
 func load_in() -> void:
-	if is_fully_loaded: return
 	
-	level_data = LevelData.new(level_code)
+	var current_number_of_players: int = Singleton.PlayerSettings.number_of_players
+	
+	if current_number_of_players == previous_number_of_players and is_fully_loaded: return
+	
+	if (!is_instance_valid(validity_check)):
+		validity_check = ValidityChecker.new(level_code, ValidityChecker.ValidityCheckTypes.FULL)
+	else:
+		validity_check.validity_check_type = ValidityChecker.ValidityCheckTypes.FULL
+	validity_check.check_validity()
+	
+	previous_number_of_players = int(current_number_of_players)
+	
+	if (Singleton.PlayerSettings.number_of_players > 1 and !validity_check.is_level_multiplayer_compatible):
+		level_name = "\"MultiplayerIncompatibleLevel\""
+		return
+	elif (!validity_check.is_valid):
+		level_name = "\"InvalidLevel\""
+		return
+	
+	level_data = validity_check
 	
 	level_name = level_data.name
 	level_author = level_data.author
 	level_description = level_data.description
 	thumbnail_url = level_data.thumbnail_url
 	
-	thumbnail_sky = level_data.areas[0].settings.sky
-	thumbnail_background = level_data.areas[0].settings.background
+	thumbnail_sky = level_data.areas[0].sky
+	thumbnail_background = level_data.areas[0].background
 
+	init_collectibles()
+	
+	is_fully_loaded = true
+
+
+func init_collectibles():
+	shine_details = []
+	star_coin_details = []
+	collected_shines = {}
+	collected_star_coins = {}
+	time_scores = {}
 	# loop through all objects in all areas to find the number of shines and star coins
 	for area in level_data.areas:
 		for object in area.objects:
 			match(object.type_id):
 				OBJECT_ID_SHINE:
 					# these use weird indexed things because that's unfortunately just how stuff is stored before being loaded, this bit does what you'd expect, the values are the shines properties
-					var shine_dictionary : Dictionary = \
-					{
-						"title": object.properties[5],
-						"description": object.properties[6],
-						"show_in_menu": object.properties[7],
-						"color": object.properties[11].to_rgba32(),
-						"id": object.properties[12],
-						"do_kick_out": object.properties[13]
+					var shine_dictionary : Dictionary = {
+						"title": object.properties[6],
+						"description": object.properties[7],
+						"show_in_menu": object.properties[8],
+						"color": object.properties[12].to_rgba32() if typeof(object.properties[12]) == TYPE_COLOR else Color(1, 1, 0).to_rgba32(),
+						"id": object.properties[13],
+						"do_kick_out": object.properties[14],
+						"enabled": object.properties[4],
+						"layer": object.properties[5],
 					}
+					shine_dictionary.merge({"entrance_area": -1, "entrance_tag": "_entrance"} if object.properties.size() != 20 else {"entrance_area": object.properties[18], "entrance_tag": object.properties[19]})
+		
 					# Lol band aid
 					if object.properties.size() > 13:
-						shine_dictionary["sort_order"] = object.properties[14]
+						shine_dictionary["sort_order"] = object.properties[15]
 					else:
 						shine_dictionary["sort_order"] = object.properties[12]
-					shine_details.append(shine_dictionary)
-
-					# initialize collected_shines and time_scores
-					collected_shines[str(shine_dictionary["id"])] = false 
-					time_scores[str(shine_dictionary["id"])] = EMPTY_TIME_SCORE
+					
+					var repeated_shine : bool = false
+					
+					for shine in shine_details:
+						if shine["id"] == shine_dictionary["id"]:
+							repeated_shine = true
+					
+					if !repeated_shine and shine_dictionary["enabled"]:
+						shine_details.append(shine_dictionary)
+						
+						# initialize collected_shines and time_scores
+						collected_shines[str(shine_dictionary["id"])] = false 
+						time_scores[str(shine_dictionary["id"])] = EMPTY_TIME_SCORE
+						
 				OBJECT_ID_STAR_COIN:
-					var star_coin_id = object.properties[5]
-					star_coin_details.append(star_coin_id)
-
-					# initialize collected star coins
-					collected_star_coins[str(star_coin_id)] = false
+					var star_coin_id : int = object.properties[6]
+					var layer = object.properties[5]
+					var enabled = object.properties[3]
+					
+					var repeated_star_coin : bool = false
+					
+					for id in star_coin_details:
+						if id == star_coin_id:
+							repeated_star_coin = true
+					
+					if !repeated_star_coin and enabled:
+						star_coin_details.append(star_coin_id)
+						
+						# initialize collected star coins
+						collected_star_coins[str(star_coin_id)] = false
 
 			shine_details.sort_custom(self, "shine_sort")
 			star_coin_details.sort()
-	
-	is_fully_loaded = true
 
 
-func reset_save_data(delete_file: bool = true) -> void:
+func reset_save_data(delete_file: bool = true, selected_file: int = -1) -> void:
 	for collected_shine in collected_shines:
 		collected_shines[collected_shine] = false
 	for collected_star_coin in collected_star_coins:
@@ -146,19 +207,15 @@ func reset_save_data(delete_file: bool = true) -> void:
 	for key in time_scores.keys():
 		time_scores[key] = EMPTY_TIME_SCORE
 	
-	if delete_file and level_list_util.file_exists(get_save_path()):
-		level_list_util.delete_file(get_save_path())
-	
-	# delete replays
-	for shine in shine_details:
-		var replay_path: String = "user://replays/" + level_name + "_" + str(shine.id) + ".127ghost"
-		if level_list_util.file_exists(replay_path):
-			level_list_util.delete_file(replay_path)
+	if delete_file and level_list_util.file_exists(get_save_path(selected_file)):
+		level_list_util.delete_file(get_save_path(selected_file))
 
 
 ### new functions designed to save separately to the level code
-func get_save_path() -> String:
-	return level_list_util.get_level_save_path(level_id, level_folder)
+func get_save_path(selected_file: int = -3) -> String:
+	if selected_file == -3:
+		selected_file = CurrentLevelData.selected_file
+	return level_list_util.get_level_save_path(level_id, level_folder, selected_file)
 
 func get_save_file_dictionary() -> Dictionary:
 	var save_dictionary : Dictionary = \
@@ -217,15 +274,29 @@ func load_from_dictionary(save_dictionary : Dictionary) -> void:
 static func shine_sort(item1 : Dictionary, item2 : Dictionary) -> bool:
 	return item1["sort_order"] < item2["sort_order"]
 
+func update_meta_file() -> void:
+#	var selected_file: int = CurrentLevelData.selected_file
+#	var level_id: String = CurrentLevelData.level_id
+#	var campaign_path: String = CurrentLevelData.working_folder
+#	var save_folder: String = level_list_util.get_save_folder(campaign_path, selected_file)
+#	var meta_dict: Dictionary = save_meta_util.load_meta_file(save_folder)
+#	meta_dict = save_meta_util.update_meta_level(level_id, meta_dict, campaign_path, selected_file, self)
+#	save_meta_util.save_meta_file(save_folder, meta_dict)
+	pass
+
 func set_shine_collected(shine_id : int, save_to_disk : bool = true) -> void:
 	collected_shines[str(shine_id)] = true
 	if save_to_disk:
 		level_list_util.save_level_save_file(get_save_file_dictionary(), get_save_path())
+		if CurrentLevelData.selected_file > -1:
+			update_meta_file()
 
 func set_star_coin_collected(star_coin_id : int, save_to_disk : bool = true) -> void:
 	collected_star_coins[str(star_coin_id)] = true
 	if save_to_disk:
 		level_list_util.save_level_save_file(get_save_file_dictionary(), get_save_path())
+		if CurrentLevelData.selected_file > -1:
+			update_meta_file()
 
 func set_fludd_activated(fludd_id : int, save_to_disk : bool = true) -> void:
 	activated_fludds[fludd_id] = true
@@ -233,28 +304,35 @@ func set_fludd_activated(fludd_id : int, save_to_disk : bool = true) -> void:
 		level_list_util.save_level_save_file(get_save_file_dictionary(), get_save_path())
 
 func update_time_and_coin_score(shine_id : int, save_to_disk : bool = true):
-	var new_coin_score = Singleton.CurrentLevelData.level_data.vars.coins_collected
-	var new_time_score = Singleton.CurrentLevelData.time_score
+	var new_coin_score = CurrentLevelData.vars.coins_collected
+	var new_time_score = CurrentLevelData.time_score
 
 	if new_coin_score > coin_score:
 		coin_score = new_coin_score 
 
 	if new_time_score < time_scores[str(shine_id)] or time_scores[str(shine_id)] == EMPTY_TIME_SCORE:
 		time_scores[str(shine_id)] = new_time_score
-		Singleton2.save_ghost = true
 	if save_to_disk:
 		level_list_util.save_level_save_file(get_save_file_dictionary(), get_save_path())
+		if CurrentLevelData.selected_file > -1:
+			update_meta_file()
+
+func is_new_record(shine_id : int) -> bool:
+	var new_time_score = CurrentLevelData.time_score
+	if new_time_score < time_scores[str(shine_id)] or time_scores[str(shine_id)] == EMPTY_TIME_SCORE:
+		return true
+	return false
 
 func get_level_background_texture() -> StreamTexture:
-	var background_resource = Singleton.CurrentLevelData.get_cached_background(thumbnail_sky)
+	var background_resource = CurrentLevelData.get_cached_background(thumbnail_sky)
 	return background_resource.texture
 	
 func get_level_background_modulate() -> Color:
-	var background_resource = Singleton.CurrentLevelData.get_cached_background(thumbnail_sky)
+	var background_resource = CurrentLevelData.get_cached_background(thumbnail_sky)
 	return background_resource.parallax_modulate
 
 func get_level_foreground_texture() -> StreamTexture:
-	var foreground_resource = Singleton.CurrentLevelData.get_cached_foreground(thumbnail_background)
+	var foreground_resource = CurrentLevelData.get_cached_foreground(thumbnail_background)
 	var palette = thumbnail_background_palette
 	
 	if palette == 0:
@@ -305,7 +383,6 @@ static func pad_timevalue(timevalue : int) -> String:
 
 # LevelInfo dictionary loading functions for different versions start here
 func load_save_0_0_1(save_dictionary : Dictionary):
-	#print("01")
 	#level_code = save_dictionary["level_code"]
 	#level_name = save_dictionary["level_name"]
 

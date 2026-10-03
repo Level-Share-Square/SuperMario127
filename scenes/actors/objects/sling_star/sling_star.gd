@@ -1,11 +1,15 @@
 extends GameObject
 
+const rainbow_animation_speed := 2500
+
 onready var speed_tween = $Tween
 onready var audio_player : AudioStreamPlayer2D = $AudioStreamPlayer2D
 onready var player_detector = $PlayerDetector
 onready var animation_player = $AnimationPlayer
-onready var launch_noise : AudioStream = preload("res://scenes/actors/objects/sling_star/sfx/launch.wav")
-onready var windup_noise : AudioStream = preload("res://scenes/actors/objects/sling_star/sfx/windup.wav")
+
+export var launch_noise: AudioStream
+export var windup_noise: AudioStream
+
 onready var star = $Star
 
 enum states {IDLE, HOLDING, WINDUP, LAUNCH}
@@ -15,19 +19,27 @@ var mario : Character
 var float_timer = 4
 
 var launch_power : float = 10.0
+var color := Color(1, 1, 0)
+var rainbow := false
 
 var parts := 1
 var last_parts := 1
 
 var cooldown = 0.0
 
-func _set_properties():
-	savable_properties = ["launch_power"]
-	editable_properties = ["launch_power"]
+#func _set_properties():
+#	savable_properties = ["launch_power"]
+#	editable_properties = ["launch_power"]
 	
-func _set_property_values():
-	set_property("launch_power", launch_power, 10)
-	
+func _register_properties():
+	register_property(4, "launch_power", launch_power, 10)
+	register_property(5, "color", color, true)
+	register_property(6, "rainbow", rainbow, true)
+
+func _register_property_info() -> void:
+	set_property_info("launch_power", PropertyInfo.new("The velocity at which this object slings the player.", 1, -INF, INF, ["", ""], ["", ""]))
+
+
 func set_state(to:int):
 	match(to):
 		states.IDLE:
@@ -65,6 +77,7 @@ func set_state(to:int):
 			speed_tween.remove_all()
 			if is_instance_valid(mario.state):
 				mario.state._stop(fps_util.PHYSICS_DELTA)
+			LastInputDevice.rumble(0.25, 0.4, 0.2)
 			mario.velocity = Vector2(1, -launch_power * 80).rotated(rotation)
 			mario.sound_player.play_double_jump_sound()
 			state = states.LAUNCH
@@ -78,10 +91,17 @@ func _input(event):
 	pass
 
 func _process(delta):
-	pass
+	if color != Color(1, 1, 0):
+		for child in $Star.get_children():
+			child.animation = "recolor"
+			child.modulate = color
+	
+	if rainbow:
+		# Hue rotation
+		color.h = float(OS.get_ticks_msec() % rainbow_animation_speed) / rainbow_animation_speed
 	
 func _physics_process(delta):
-	if enabled and mode == 0:
+	if is_enabled_and_on_ground() and mode == 0:
 		
 		match(state):
 			states.IDLE:
@@ -99,6 +119,9 @@ func physics_process_idle(delta:float):
 	for body in player_detector.get_overlapping_bodies():
 		if body.name.begins_with("Character"):
 			mario = body
+			# the sling star should always surround the player when usable
+			if is_enabled_and_on_ground():
+				$"%Lower".z_index = max(0, mario.get_parent().z_index + 1)
 			# mid flight interrupt
 			if body.inputs[4][0] and body.state and body.state.name == "LaunchStarState":
 				mario.state._stop(delta)

@@ -11,7 +11,7 @@ func _ready():
 func _start(_delta):
 	character.sprite.position.y = 6
 
-func _update(delta):
+func _update(_delta):
 	var sprite = character.sprite
 	if abs(sprite.rotation_degrees) < 45:
 		if (character.facing_direction == 1):

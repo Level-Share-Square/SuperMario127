@@ -1,0 +1,23 @@
+[gd_resource type="Resource" load_steps=10 format=2]
+
+[ext_resource path="res://scenes/editor/items/placeable_tile.gd" type="Script" id=1]
+[ext_resource path="res://assets/tiles/castle_pillar/palette_icons/1_block.png" type="Texture" id=2]
+[ext_resource path="res://assets/tiles/castle_pillar/palette_icons/2_block.png" type="Texture" id=3]
+[ext_resource path="res://assets/tiles/castle_pillar/icon.png" type="Texture" id=4]
+[ext_resource path="res://assets/tiles/castle_pillar/palette_icons/5Yellow-pillar_icon.png" type="Texture" id=5]
+[ext_resource path="res://assets/tiles/castle_pillar/palette_icons/6Blue-pillar_icon.png" type="Texture" id=6]
+[ext_resource path="res://assets/tiles/castle_pillar/palette_icons/3Purple-pillar_icon.png" type="Texture" id=7]
+[ext_resource path="res://assets/tiles/castle_pillar/palette_icons/4Brown-pillar_icon.png" type="Texture" id=8]
+[ext_resource path="res://assets/tiles/castle_pillar/palette_icons/7_block.png" type="Texture" id=9]
+
+[resource]
+script = ExtResource( 1 )
+item_name = "Castle Pillar"
+change_to = "til_castle_pillar_horizontal"
+items_in_sequence = 2
+index_in_sequence = 0
+icons = [ ExtResource( 4 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 9 ) ]
+previews = [ ExtResource( 4 ) ]
+priority = 430
+tileset_id = 30
+tile_id = 0

@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/menu/launcher/launcher.gd" type="Script" id=1]
+[ext_resource path="res://assets/tiles/tiles.tres" type="TileSet" id=2]
 
 [sub_resource type="Gradient" id=1]
 colors = PoolColorArray( 0.113725, 0.0784314, 0.211765, 1, 0, 0, 0, 1 )
@@ -65,5 +66,10 @@ margin_left = 344.0
 margin_right = 424.0
 margin_bottom = 20.0
 text = "Reset Mod"
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 32, 32 )
+format = 1
 
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/ResetMod" to="." method="reset_mod"]

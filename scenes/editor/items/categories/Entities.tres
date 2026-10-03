@@ -1,0 +1,58 @@
+[gd_resource type="Resource" load_steps=27 format=2]
+
+[ext_resource path="res://scenes/editor/items/placeable_items.gd" type="Script" id=1]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/paratroopa.tres" type="Resource" id=2]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/green_demon.tres" type="Resource" id=17]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/sign.tres" type="Resource" id=19]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/bill_blaster.tres" type="Resource" id=30]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/goomba.tres" type="Resource" id=34]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/bob_omb.tres" type="Resource" id=37]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/koopa_troopa.tres" type="Resource" id=38]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/big_steely_entrance.tres" type="Resource" id=42]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/goonie.tres" type="Resource" id=70]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/cheep_cheep.tres" type="Resource" id=74]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/butterfly.tres" type="Resource" id=78]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/jelectro.tres" type="Resource" id=80]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/boo.tres" type="Resource" id=97]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/big_steely_despawner.tres" type="Resource" id=110]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/bully.tres" type="Resource" id=123]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/dialogue_trigger.tres" type="Resource" id=128]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/skeleton_goonie.tres" type="Resource" id=130]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/nipper_plant.tres" type="Resource" id=131]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/rex.tres" type="Resource" id=134]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/princess_peach.tres" type="Resource" id=136]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/blurp.tres" type="Resource" id=138]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/yoshi.tres" type="Resource" id=140]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/red_bob_omb.tres" type="Resource" id=141]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/dry_bones.tres" type="Resource" id=142]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/toad.tres" type="Resource" id=145]
+
+[resource]
+script = ExtResource( 1 )
+placeable_items = {
+"obj_big_steely_despawner": ExtResource( 110 ),
+"obj_big_steely_spawner": ExtResource( 42 ),
+"obj_bill_blaster": ExtResource( 30 ),
+"obj_blurp": ExtResource( 138 ),
+"obj_bob_omb": ExtResource( 37 ),
+"obj_boo": ExtResource( 97 ),
+"obj_bully": ExtResource( 123 ),
+"obj_butterfly": ExtResource( 78 ),
+"obj_cheep_cheep": ExtResource( 74 ),
+"obj_dialogue_trigger": ExtResource( 128 ),
+"obj_dry_bones": ExtResource( 142 ),
+"obj_goomba": ExtResource( 34 ),
+"obj_goonie": ExtResource( 70 ),
+"obj_green_demon": ExtResource( 17 ),
+"obj_jelectro": ExtResource( 80 ),
+"obj_koopa_troopa": ExtResource( 38 ),
+"obj_nipper_plant": ExtResource( 131 ),
+"obj_paratroopa": ExtResource( 2 ),
+"obj_princess_peach": ExtResource( 136 ),
+"obj_red_bob_omb": ExtResource( 141 ),
+"obj_rex": ExtResource( 134 ),
+"obj_sign": ExtResource( 19 ),
+"obj_skeleton_goonie": ExtResource( 130 ),
+"obj_toad": ExtResource( 145 ),
+"obj_yoshi": ExtResource( 140 )
+}

@@ -1,0 +1,152 @@
+extends VBoxContainer
+
+
+onready var capsule = $"%Capsule"
+onready var header = $"%Header"
+onready var discord_header = $"%DiscordHeader"
+onready var discord_banner = $"%DiscordBanner"
+onready var discord_invite = $"%DiscordInvite"
+onready var youtube_banner = $"%YoutubeBanner"
+onready var bluesky_banner = $"%BlueskyBanner"
+onready var itch_header = $"%ItchHeader"
+onready var itch_cover = $"%ItchCover"
+onready var itch_profile_banner = $"%ItchProfileBanner"
+onready var itch_profile_bg = $"%ItchProfileBG"
+onready var igdb_box = $"%IGDBBox"
+
+onready var lss_thumbnail = $"%LSSThumbnail"
+onready var android_icon_bg = $"%AndroidIconBG"
+onready var android_icon_fg = $"%AndroidIconFG"
+
+onready var splash_screen = $"%SplashScreen"
+onready var icon = $"%Icon"
+onready var twitter_icon = $"%TwitterIcon"
+onready var end_cards = $"%EndCards"
+onready var shorts_template = $"%ShortsTemplate"
+onready var tol_template = $"%TolTemplate"
+onready var coin_hud = $"%CoinHUD"
+## bro thinks he's on the team :sob:
+onready var forcefield_icon = $"%ForcefieldIcon"
+## oh shoot bro's growing his own team now
+onready var water_icon = $"%WaterIcon"
+
+func _ready():
+	#return
+	
+	for i in range(5):
+		yield(get_tree(), "idle_frame")
+		
+#	var capsule_img: Image = capsule.get_node("Viewport").get_texture().get_data()
+#	capsule_img.flip_y()
+#	capsule_img.save_png("res://assets/artwork/steam/capsule.png")
+#
+#	var header_img: Image = header.get_node("Viewport").get_texture().get_data()
+#	header_img.flip_y()
+#	header_img.save_png("res://assets/artwork/steam/header.png")
+#
+#	var igdb_box_img: Image = igdb_box.get_node("Viewport").get_texture().get_data()
+#	igdb_box_img.flip_y()
+#	igdb_box_img.save_png("res://assets/artwork/igdb/box.png")
+#
+#	var discord_header_img: Image = discord_header.get_node("Viewport").get_texture().get_data()
+#	discord_header_img.flip_y()
+#	discord_header_img.save_png("res://assets/artwork/discord/header.png")
+#
+#	var discord_banner_img: Image = discord_banner.get_node("Viewport").get_texture().get_data()
+#	discord_banner_img.flip_y()
+#	discord_banner_img.save_png("res://assets/artwork/discord/banner.png")
+#
+#	var discord_inv_img: Image = discord_invite.get_node("Viewport").get_texture().get_data()
+#	discord_inv_img.flip_y()
+#	discord_inv_img.save_png("res://assets/artwork/discord/invite_bg.png")
+#
+#	var youtube_banner_img: Image = youtube_banner.get_node("Viewport").get_texture().get_data()
+#	youtube_banner_img.flip_y()
+#	youtube_banner_img.save_png("res://assets/artwork/youtube/banner.png")
+#
+#	var bluesky_banner_img: Image = bluesky_banner.get_node("Viewport").get_texture().get_data()
+#	bluesky_banner_img.flip_y()
+#	bluesky_banner_img.save_png("res://assets/artwork/bluesky/banner.png")
+
+	var itch_header_img: Image = itch_header.get_node("Viewport").get_texture().get_data()
+	itch_header_img.flip_y()
+	itch_header_img.save_png("res://assets/artwork/itch/header.png")
+
+#	var itch_cover_img: Image = itch_cover.get_node("Viewport").get_texture().get_data()
+#	itch_cover_img.flip_y()
+#	itch_cover_img.save_png("res://assets/artwork/itch/cover.png")
+
+#	var itch_profile_banner_img: Image = itch_profile_banner.get_node("Viewport").get_texture().get_data()
+#	itch_profile_banner_img.flip_y()
+#	itch_profile_banner_img.save_png("res://assets/artwork/itch/profile_banner.png")
+
+#	var itch_profile_bg_img: Image = itch_profile_bg.get_node("Viewport").get_texture().get_data()
+#	itch_profile_bg_img.flip_y()
+#	itch_profile_bg_img.save_png("res://assets/artwork/itch/profile_bg.png")
+
+#	var lss_thumbnail_img: Image = lss_thumbnail.get_node("Viewport").get_texture().get_data()
+#	lss_thumbnail_img.flip_y()
+#	lss_thumbnail_img.save_png("res://assets/artwork/lss/thumbnail.png")
+
+#	var android_icon_bg_img: Image = android_icon_bg.get_node("Viewport").get_texture().get_data()
+#	android_icon_bg_img.flip_y()
+#	android_icon_bg_img.save_png("res://assets/artwork/android_icon_bg.png")
+
+#	var android_icon_fg_img: Image = android_icon_fg.get_node("Viewport").get_texture().get_data()
+#	android_icon_fg_img.convert(Image.FORMAT_RGBA8)
+#	android_icon_fg_img.flip_y()
+#	fix_transparency(android_icon_fg_img)
+#	android_icon_fg_img.save_png("res://assets/artwork/android_icon_fg.png")
+
+#	var splash_img: Image = splash_screen.get_node("Viewport").get_texture().get_data()
+#	splash_img.flip_y()
+#	splash_img.save_png("res://assets/artwork/splash_screen.png")
+
+#	var icon_img: Image = icon.get_node("Viewport").get_texture().get_data()
+#	icon_img.flip_y()
+#	icon_img.save_png("res://assets/artwork/icon.png")
+#
+#	var twitter_icon_img: Image = twitter_icon.get_node("Viewport").get_texture().get_data()
+#	twitter_icon_img.flip_y()
+#	twitter_icon_img.save_png("res://assets/artwork/twitter/twitter_icon.png")
+	
+#	var shorts_template_img: Image = shorts_template.get_node("Viewport").get_texture().get_data()
+#	shorts_template_img.convert(Image.FORMAT_RGBA8)
+#	shorts_template_img.flip_y()
+#	fix_transparency(shorts_template_img)
+#	shorts_template_img.save_png("res://assets/artwork/youtube/shorts_template.png")
+
+#	var tol_template_img: Image = tol_template.get_node("Viewport").get_texture().get_data()
+#	tol_template_img.convert(Image.FORMAT_RGBA8)
+#	tol_template_img.flip_y()
+#	fix_transparency(tol_template_img)
+#	tol_template_img.save_png("res://assets/artwork/youtube/tol_template.png")
+
+#	var coin_hud_img: Image = coin_hud.get_node("Viewport").get_texture().get_data()
+#	coin_hud_img.convert(Image.FORMAT_RGBA8)
+#	coin_hud_img.flip_y()
+#	fix_transparency(coin_hud_img)
+#	coin_hud_img.save_png("res://assets/artwork/coin_hud.png")
+
+#	var forcefield_img: Image = forcefield_icon.get_node("Viewport").get_texture().get_data()
+#	forcefield_img.convert(Image.FORMAT_RGBA8)
+#	forcefield_img.flip_y()
+#	fix_transparency(forcefield_img)
+#	forcefield_img.save_png("res://scenes/actors/objects/forcefield/icon.png")
+
+#	var water_img: Image = water_icon.get_node("Viewport").get_texture().get_data()
+#	water_img.convert(Image.FORMAT_RGBA8)
+#	water_img.flip_y()
+#	fix_transparency(water_img)
+#	water_img.save_png("res://scenes/actors/objects/water/icon.png")
+
+
+func fix_transparency(image_data: Image) -> void:
+	for j in image_data.get_height():
+		for i in image_data.get_width():
+			var c = image_data.get_pixel(i, j)
+			if c.a > 0:
+				c.r /= c.a
+				c.g /= c.a
+				c.b /= c.a
+			image_data.set_pixel(i, j, c)

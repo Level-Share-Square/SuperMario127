@@ -22,6 +22,7 @@ extents = Vector2( 48, 28 )
 [node name="SnowPlatform" type="Node2D"]
 z_index = -1
 script = ExtResource( 4 )
+internal_id = "snow_platform"
 palette_textures = [ ExtResource( 1 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 5 ) ]
 parts = 1
 

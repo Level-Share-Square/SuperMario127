@@ -13,7 +13,7 @@ onready var platform_area_shape : CollisionShape2D = $StaticBody2D/Area2D/Collis
 
 onready var left_width = sprite.patch_margin_left
 onready var right_width = sprite.patch_margin_right
-onready var part_width = sprite.texture.get_width() - left_width - right_width
+export var part_width: float
 
 export var weak_bounce_sound : AudioStream
 export var bounce_sound : AudioStream
@@ -26,41 +26,35 @@ var parts := 1
 var last_parts := 1
 
 
-func _set_properties():
-	savable_properties = ["parts", "strong_bounce_power"]
-	editable_properties = ["parts", "strong_bounce_power"]
+#func _set_properties():
+#	savable_properties = ["parts", "strong_bounce_power"]
+#	editable_properties = ["parts", "strong_bounce_power"]
 	
-func _set_property_values():
-	set_property("parts", parts, 1)
-	set_property("strong_bounce_power", strong_bounce_power, 1)
+func _register_properties():
+	register_property(4, "parts", parts, true)
+	register_property(5, "strong_bounce_power", strong_bounce_power, true)
 	
 func _ready():
 	bounce_collision_shape.shape = bounce_collision_shape.shape.duplicate(true)
 	bottom_collision_shape.shape = bottom_collision_shape.shape.duplicate(true)
 	platform_area_shape.shape = platform_area_shape.shape.duplicate(true)
-	
-	if !enabled:
-		bottom_collision_shape.disabled = true
-		bounce_collision_shape.disabled = true
-		platform_area_shape.disabled = true
-	
-	if enabled and mode == 0:
-		area_2d.connect("body_entered", self, "bounce")
-	elif mode == 1:
-		var _connect = connect("property_changed", self, "update_property")
 		
 	update_parts()
 
-func _input(event):
-	if event is InputEventMouseButton and event.is_pressed() and hovered:
-		if event.button_index == 5: # Mouse wheel down
-			parts -= 1
-			if parts < 1:
-				parts = 1
-			set_property("parts", parts, true)
-		elif event.button_index == 4: # Mouse wheel up
-			parts += 1
-			set_property("parts", parts, true)
+func _object_ready():
+	._object_ready()
+	if is_enabled_and_on_ground():
+		area_2d.connect("body_entered", self, "bounce")
+	bottom_collision_shape.disabled = !is_enabled_and_on_ground()
+	bounce_collision_shape.disabled = !is_enabled_and_on_ground()
+	platform_area_shape.disabled = !is_enabled_and_on_ground()
+	
+func _editor_ready():
+	._editor_ready()
+	var _connect = connect("property_changed", self, "update_property")
+
+func _unhandled_input(event: InputEvent) -> void:
+	parts_input_handler(event,self)
 
 func _physics_process(delta):
 	for object in blacklisted_bodies.keys():
@@ -72,7 +66,7 @@ func _physics_process(delta):
 			else:
 				blacklisted_bodies[object] = cooldown
 		
-	if enabled and mode == 0:
+	if is_enabled_and_on_ground() and mode == 0:
 		if area_2d.get_overlapping_bodies().size() > 0:
 			for body in area_2d.get_overlapping_bodies():
 					bounce(body)
@@ -143,8 +137,11 @@ func update_parts():
 	bounce_collision_shape.shape.extents.x = (left_width + (part_width * parts) + right_width) / 2 + 1.5
 	bottom_collision_shape.shape.extents.x = (left_width + (part_width * parts) + right_width) / 2 - 2
 	platform_area_shape.shape.extents.x = (left_width + (part_width * parts) + right_width) / 2 + 20
-
+	
+	$VisibilityEnabler2D.rect.size.x = part_width + 224
+	
 	note.position.x = sprite.rect_size.x / 2
+	editor_rect = Rect2(sprite.rect_position + Vector2(0, -16), sprite.rect_size)
 
 func add_body_to_bounce(body):
 	blacklisted_bodies.get_or_add(body, 0.1)

@@ -1,0 +1,243 @@
+extends Camera2D
+
+onready var tween = $Tween
+
+export var speed: float = 12.0
+export var zoom_level: float = 1.0
+export var smoothing: float = 12.5
+
+onready var editor: Editor = get_owner()
+
+var last_pos: Vector2
+var sim_pos: Vector2
+
+signal zoom_changed(zoom_level)
+
+var held_actions: Dictionary = {
+	"editor_left": "left_held",
+	"editor_right": "right_held",
+	"editor_up": "up_held",
+	"editor_down": "down_held",
+	"speed_up_camera": "speedup_held",
+	"pan_camera": "pan_held"
+}
+
+var left_held: bool
+var right_held: bool
+var up_held: bool
+var down_held: bool
+var speedup_held: bool
+var pan_held: bool
+
+var allow_magnify: bool
+var move_override: bool
+var ignore_wrap: bool
+
+
+func _ready():
+	if CurrentLevelData.editor_data.camera_positions.size() <= CurrentLevelData.area_id:
+		position = Vector2(288, 840)
+	else:
+		position = CurrentLevelData.editor_data.camera_positions[CurrentLevelData.area_id]
+	sim_pos = position
+	Singleton.ModeSwitcher.connect("mode_switched", self, "save_position")
+	save_position()
+
+
+func _unhandled_input(event: InputEvent):
+	var zoom_amount = 0.25
+	var scroll_zoom_amount = 0.125
+	if Input.is_action_pressed("8_pixel_lock"):
+		zoom_amount = 0.15
+	
+	if event.is_action_pressed("zoom_out"):
+		add_zoom_level(zoom_amount)
+	elif event.is_action_pressed("zoom_in"):
+		add_zoom_level(-zoom_amount)
+	
+	if allow_magnify and event is InputEventMagnifyGesture:
+		var mouse_pos_before: Vector2 = get_global_mouse_position()
+		add_zoom_level(1.0 - event.factor)
+		zoom = Vector2(zoom_level, zoom_level)
+		var new_pos: Vector2 = position + (mouse_pos_before - get_global_mouse_position())
+		position = new_pos
+		sim_pos = position
+		get_tree().set_input_as_handled()
+	
+	if Input.is_action_pressed("ctrl_modifier") and not Input.is_action_pressed("alt_modifier") and not editor.get_hovered_objects():
+		var is_zooming: bool
+		var working_zoom: float
+		if event.is_action_pressed("scroll_down"):
+			is_zooming = true
+			working_zoom = scroll_zoom_amount
+		if event.is_action_pressed("scroll_up"):
+			is_zooming = true
+			working_zoom = -scroll_zoom_amount
+		
+		if is_zooming:
+			var mouse_pos_before: Vector2 = get_global_mouse_position()
+			add_zoom_level(working_zoom)
+			zoom = Vector2(zoom_level, zoom_level)
+			var new_pos: Vector2 = position + (mouse_pos_before - get_global_mouse_position())
+			position = new_pos
+			sim_pos = position
+	
+	for held_action in held_actions.keys():
+		if event.is_action_pressed(held_action):
+			self[held_actions[held_action]] = true
+			if held_action == "pan_camera":
+				Input.set_default_cursor_shape(Input.CURSOR_DRAG)
+		if event.is_action_released(held_action):
+			self[held_actions[held_action]] = false
+			if held_action == "pan_camera":
+				Input.set_default_cursor_shape(Input.CURSOR_ARROW)
+
+
+func _input(event: InputEvent):
+	if event is InputEventMouseMotion and (pan_held or move_override):
+		if not ignore_wrap:
+			sim_pos -= event.relative * zoom
+			position = position.linear_interpolate(sim_pos, 50 * (1 / Engine.get_frames_per_second()))
+		ignore_wrap = false
+		
+		## screen wrapping
+		if not OS.window_fullscreen:
+			var window_size: Vector2 = ScreenSizeUtil.DEFAULT_SIZE
+			var pos: Vector2 = event.position
+			var new_pos: Vector2 = pos
+			
+			new_pos.x = wrapf(new_pos.x, 0, window_size.x)
+			new_pos.y = wrapf(new_pos.y, 0, window_size.y)
+			
+			if new_pos != pos:
+				Input.warp_mouse_position(new_pos)
+				ignore_wrap = true
+
+
+func _physics_process(delta):
+	zoom = zoom.linear_interpolate(Vector2(zoom_level, zoom_level), delta * 30.0)
+	camera_movement(delta)
+
+
+func load_in():
+#	for object in level_area.objects:
+#		if is_instance_valid(object) and object is ObjectDataOld:
+#			if object.type_id == 0:
+#				position = object.properties[0] # properties[0] is always position, at least for spawners
+	
+	update_limits(CurrentLevelData.current_area.header)
+
+
+func camera_movement(delta: float):
+	var editor_ui: Control = get_node("%EditorUI")
+	
+	var move_speed = speed * 2 if speedup_held else speed
+	move_speed *= zoom
+	
+	var direction = Vector2.ZERO
+	direction.x = int(right_held) - int(left_held)
+	direction.y = int(down_held) - int(up_held)
+	direction = direction.normalized()
+	
+	last_pos = position
+	sim_pos += direction * move_speed * 60 * delta
+	sim_pos += Input.get_vector("editor_joy_left", "editor_joy_right", "editor_joy_up", "editor_joy_down") * move_speed * 60 * delta
+	sim_pos = resolve_limit_collisions(sim_pos)
+	
+	position = lerp(position, sim_pos, 12.5 * delta)
+	position = resolve_limit_collisions(position)
+	
+func save_position(mode = 0):
+	if CurrentLevelData.area_id >= CurrentLevelData.editor_data.camera_positions.size():
+		CurrentLevelData.editor_data.camera_positions.resize(CurrentLevelData.area_id + 1)
+		var i: int = 0
+		for pos in CurrentLevelData.editor_data.camera_positions:
+			if not pos:
+				CurrentLevelData.editor_data.camera_positions[i] = Vector2(288, 840)
+			i += 1
+	CurrentLevelData.editor_data.camera_positions[CurrentLevelData.area_id] = position
+	
+
+
+func is_moving() -> bool:
+	return not position.is_equal_approx(last_pos)
+
+
+func update_limits(level_area_header: AreaHeader):
+	var area_bounds = level_area_header.bounds.grow(8)
+
+	limit_left = int(area_bounds.position.x * 32)
+	limit_top = int(area_bounds.position.y * 32 * zoom.x) #needs to include the toolbar
+	
+	limit_right = int(area_bounds.end.x * 32)
+	limit_bottom = int(area_bounds.end.y * 32)
+	
+	sim_pos = resolve_limit_collisions(sim_pos)
+	position = resolve_limit_collisions(position)
+
+
+func resolve_limit_collisions(pos: Vector2) -> Vector2:
+	# If you were curious, this stops the camera node's position value from
+	# exceeding the level bounds. If you don't do this, the camera will continue
+	# to move past the limits while the viewport won't.
+	
+	var camera_left = pos.x - ((get_viewport_rect().size.x / 2) * zoom.x)
+	var camera_right = pos.x + ((get_viewport_rect().size.x / 2) * zoom.x)
+	var camera_up = pos.y - ((get_viewport_rect().size.y / 2) * zoom.y)
+	var camera_down = pos.y + ((get_viewport_rect().size.y / 2) * zoom.y)
+	
+	if camera_left < limit_left:
+		pos.x = limit_left + ((get_viewport_rect().size.x / 2) * zoom.x)
+	if camera_right > limit_right:
+		pos.x = limit_right - ((get_viewport_rect().size.x / 2) * zoom.x)
+	if camera_up < limit_top:
+		pos.y = limit_top + ((get_viewport_rect().size.y / 2) * zoom.y)
+	if camera_down > limit_bottom:
+		pos.y = limit_bottom - ((get_viewport_rect().size.y / 2) * zoom.y)
+	
+	return pos
+
+
+# Functions to avoid copy pasted code
+func cap_zoom_level(zoom : float) -> float:
+	# Reduce the zoom level if the screen wouldn't fit within the level
+	# NOTE: all tile counts are +6 since there are 3 tiles OOB in both directions for both axis
+	var viewport_size := Vector2(
+		ProjectSettings.get_setting("display/window/size/width"), 
+		ProjectSettings.get_setting("display/window/size/height")
+	)
+	# This accounts for the toolbar cutting off the top 70 pixels of the screen,
+	# I'd prefer to not hardcode this but frankly it's not worth the time to 
+	# figure out getting the height of the toolbar.
+	var toolbar_size : float = 0
+	var level_size : Vector2 = CurrentLevelData.current_area.header.bounds.size
+
+	while (
+		viewport_size.x * zoom > (level_size.x + 6) * Editor.TILE_SIZE.x or 
+		(viewport_size.y - 70) * zoom > (level_size.y + 6) * Editor.TILE_SIZE.y
+	):
+		zoom = zoom - .05
+	
+	return zoom
+
+
+func set_zoom_level(level : float) -> void:
+	# Zoom level limits
+	if level < 0.25: level = 0.25 # lower limit on zoom
+	
+#	if level > 4.01: # 4 flat wouldn't work and I don't know why
+#		$Grid.visible = false
+#	else:
+#		$Grid.visible = true
+	
+	zoom_level = cap_zoom_level(level) # makes sure the zoom isn't too large
+	Singleton.EditorSavedSettings.zoom_level = zoom_level
+	emit_signal("zoom_changed", zoom_level)
+
+
+func add_zoom_level(level : float) -> void:
+	set_zoom_level(zoom_level + level)
+
+
+func _on_ResetZoom_button_down():
+	set_zoom_level(1.0)

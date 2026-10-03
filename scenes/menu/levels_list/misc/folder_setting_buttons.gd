@@ -38,7 +38,7 @@ func delete_folder():
 	level_list_util.delete_level_folder(list_handler.working_folder)
 	
 	var parent_folder: String = level_list_util.get_parent_from_path(list_handler.working_folder)
-	list_handler.loader.transition_to_directory(parent_folder)
+	list_handler.loader.transition_to_directory(parent_folder, false)
 
 
 func update_folder_name(new_path: String):

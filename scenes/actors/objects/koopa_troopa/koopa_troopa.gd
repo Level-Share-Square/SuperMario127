@@ -27,7 +27,6 @@ export var para_color_sprite : SpriteFrames
 export var shell_scene : PackedScene
 
 var dead = false
-var loaded = false
 
 var gravity : float
 var gravity_scale : float
@@ -63,14 +62,15 @@ var winged := false
 var shelled := false
 var attack_cooldown := 0.0 # Prevents the player from getting hurt right after stomping on a paratroopa
 
-func _set_properties():
-	savable_properties = ["color", "rainbow", "winged", "shelled"]
-	editable_properties = ["color", "rainbow", "shelled"]
+#func _set_properties():
+#	savable_properties = ["color", "rainbow", "winged", "shelled"]
+#	editable_properties = ["color", "rainbow", "shelled"]
 
-func _set_property_values():
-	set_property("color", color, true)
-	set_property("rainbow", rainbow, true)
-	set_property("winged", winged, true)
+func _register_properties():
+	register_property(4, "color", color, true)
+	register_property(5, "rainbow", rainbow, true)
+	register_property(6, "winged", winged, true)
+	register_property(7, "shelled", shelled, true)
 
 func on_visibility_changed(is_visible: bool) -> void:
 	for raycast in [left_check, right_check]:
@@ -88,9 +88,9 @@ func _ready() -> void:
 	$VisibilityEnabler2D.connect("screen_entered", self, "on_show")
 	on_visibility_changed($VisibilityEnabler2D.is_on_screen())
 	original_position = global_position
-	Singleton.CurrentLevelData.enemies_instanced += 1
-	time_alive += float(Singleton.CurrentLevelData.enemies_instanced) / 2.0
-	gravity = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].settings.gravity
+	CurrentLevelData.enemies_instanced += 1
+	time_alive += float(CurrentLevelData.enemies_instanced) / 2.0
+	gravity = CurrentLevelData.current_area.header.gravity
 	
 	var scene = get_tree().current_scene
 	if scene.mode == 1 and scene.placed_item_property == "Para":
@@ -98,9 +98,26 @@ func _ready() -> void:
 	sprite.frames = para_sprite if winged else normal_sprite
 	sprite_color.frames = para_color_sprite if winged else normal_color_sprite
 	
-	if scale.x < 0 and mode == 0 and enabled:
+	if scale.x < 0 and mode == 0 and is_enabled_and_on_ground():
 		facing_direction = sign(scale.x)
 		scale.x = abs(scale.x)
+		
+
+func _object_ready():
+	._object_ready()
+	for child in body.get_children():
+		if "CollisionShape" in child.name:
+			child.disabled = not is_enabled_and_on_ground()
+			
+func _editor_ready():
+	._editor_ready()
+	
+	connect("property_changed", self, "update_property")
+	
+func update_property(key, value):
+	if key == "winged":
+		sprite.frames = para_sprite if winged else normal_sprite
+		sprite_color.frames = para_color_sprite if winged else normal_color_sprite
 
 func delete_wings():
 	if !rainbow:
@@ -183,7 +200,7 @@ func _process(_delta):
 		sprite_color.frame = sprite.frame
 		sprite_color.modulate = color
 
-func _physics_process(delta):
+func _object_physics_process(delta):
 	if is_queued_for_deletion():
 		print("this has been hit??")
 		return # Prevent crashes
@@ -192,8 +209,8 @@ func _physics_process(delta):
 	
 	if !loaded and visibility_notifier and visibility_notifier.is_on_screen():
 		loaded = true
-	if mode != 1 and enabled and !dead and loaded:
-		var level_bounds = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].settings.bounds
+	if mode != 1 and is_enabled_and_on_ground() and !dead and loaded:
+		var level_bounds = CurrentLevelData.current_area.header.bounds
 		if !hit:
 			# Run the appropriate physics process function
 			if is_instance_valid(shell):
@@ -247,6 +264,9 @@ func physics_process_shell(delta, _level_bounds):
 	for hit_area in shell_destroy_area.get_overlapping_areas():
 		var hit_parent = hit_area.get_parent()
 		var hit_parent_parent = hit_parent.get_parent()
+		
+		if hit_parent.has_method("shelled"):
+			hit_parent.shelled(shell)
 		
 		if hit_area.get_collision_layer_bit(2) == true and hit_parent_parent.has_method("shell_hit") and hit_parent_parent != self and abs(velocity.x) > 15:
 			hit_parent_parent.shell_hit(shell.global_position)
@@ -359,3 +379,7 @@ func physics_process_koopa(delta, level_bounds):
 			if !right_check.is_colliding() or (body.global_position.x > (level_bounds.end.x * 32 - 1) - 4) or body.test_move(body.global_transform, Vector2(0.1, 0)):
 				facing_direction = -1
 			
+func is_middle(check: bool):
+	.is_middle(check)
+	if !check:
+		sprite.play("default")

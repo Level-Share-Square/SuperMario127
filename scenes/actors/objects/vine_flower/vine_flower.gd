@@ -6,15 +6,12 @@ export(Array, Texture) var palette_textures
 
 var color := Color(1, 0, 0)
 
-func _set_properties():
-	savable_properties = ["color"]
-	editable_properties = ["color"]
-	
-func _set_property_values():
-	set_property("color", color, 1)
+
+func _register_properties():
+	register_property(4, "color", color)
 
 func _ready():
-	collision_shape.disabled = !enabled
+	collision_shape.disabled = !is_enabled_and_on_ground()
 	preview_position = custom_preview_position
 	if is_preview:
 		z_index = 0

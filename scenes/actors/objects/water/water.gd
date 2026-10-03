@@ -24,37 +24,38 @@ onready var area_collision = $Col/CollisionShape2D
 onready var sprite = $ColorRect
 onready var waves = $Waves
 
-func _set_properties():
-	savable_properties = ["width", "height", "color", "render_in_front", "tag", "toxicity", "tap_mode"]
-	editable_properties = ["width", "height", "color", "render_in_front", "tag", "toxicity", "tap_mode"]
+#func _set_properties():
+#	savable_properties = ["width", "height", "color", "render_in_front", "tag", "toxicity", "tap_mode"]
+#	editable_properties = ["width", "height", "color", "render_in_front", "tag", "toxicity", "tap_mode"]
 
-func _set_property_values():
-	set_property("width", width, true)
-	set_property("height", height, true)
-	set_property("color", color, true)
-	set_property("render_in_front", render_in_front, true)
-	set_property("tag", tag, true)
-	set_property("toxicity", toxicity, true)
-	set_property("tap_mode", tap_mode, true)
-	set_bool_alias("tap_mode", "Move", "Scale")
+func _register_properties():
+	register_property(4, "width", width, true)
+	register_property(5, "height", height, true)
+	register_property(6, "color", color, true)
+	register_property(7, "render_in_front", render_in_front, true)
+	register_property(8, "tag", tag, true)
+	set_property_override("tag", PropertyTab.OverrideTypes.DROPDOWN, [CurrentLevelData.level_tags, "get_liquid_args", [CurrentLevelData.level_tags, "liquid_tags"]])
+	register_property(9, "toxicity", toxicity, true)
+	register_property(10, "tap_mode", tap_mode, true)
+	set_property_override("tap_mode", PropertyTab.OverrideTypes.BOOL_ALIAS, {true: "Move", false: "Scale"})
 
 func _ready():
-	var id = Singleton.CurrentLevelData.level_data.vars.current_liquid_id
-	if Singleton.CurrentLevelData.level_data.vars.liquid_positions.size() > Singleton.CurrentLevelData.area and Singleton.CurrentLevelData.level_data.vars.liquid_positions[Singleton.CurrentLevelData.area].size() > id:
-		var set_position = Singleton.CurrentLevelData.level_data.vars.liquid_positions[Singleton.CurrentLevelData.area][id]
+	var id = CurrentLevelData.vars.current_liquid_id
+	if CurrentLevelData.vars.liquid_positions.size() > CurrentLevelData.current_area and CurrentLevelData.vars.liquid_positions[CurrentLevelData.current_area].size() > id:
+		var set_position = CurrentLevelData.vars.liquid_positions[CurrentLevelData.current_area][id]
 		if set_position != Vector2():
 			global_position = set_position
 			save_pos = set_position
-	Singleton.CurrentLevelData.level_data.vars.current_liquid_id += 1
+	CurrentLevelData.vars.current_liquid_id += 1
 	
 	color.a = 0.5
 	area_collision.shape = area_collision.shape.duplicate()
 	change_size()
 	last_size = Vector2(width, height)
 	
-	area_collision.disabled = !enabled
+	area_collision.disabled = !is_enabled_and_on_ground()
 	
-	Singleton.CurrentLevelData.level_data.vars.liquids.append([tag.to_lower(), self])
+	CurrentLevelData.vars.liquids.append([tag.to_lower(), self])
 
 func change_size():
 	preview_position = Vector2(-width / 2, -height / 2)
@@ -69,21 +70,12 @@ func change_size():
 	waves.get_material().set_shader_param("color_tint", color)
 	waves.get_material().set_shader_param("x_size", width)
 	
-	z_index = -1 if !render_in_front else 25
+	#z_index = 0 if !render_in_front else 128
 	
 	last_size = Vector2(width, height)
 	last_color = color
-	last_front = render_in_front
 
 func _physics_process(_delta):
-	if area.get_overlapping_bodies().size() > 0:
-		for body in area.get_overlapping_bodies():
-			if body is Character:
-				body.breath -= 0.25 * toxicity
-				if body.breath <= 0:
-					body.breath = 100
-					body.damage(1, "hit", 0)
-	
 	if !moving: return
 	
 	if !horizontal:
@@ -114,6 +106,5 @@ func _process(_delta):
 	if "\n" in tag:
 		tag = tag.replace("\n", "")
 	if (Vector2(width, height) != last_size ||
-			color != last_color ||
-			render_in_front != last_front):
+			color != last_color):
 		change_size()

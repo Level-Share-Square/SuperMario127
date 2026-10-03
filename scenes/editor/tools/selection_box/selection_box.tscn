@@ -1,0 +1,272 @@
+[gd_scene load_steps=26 format=2]
+
+[ext_resource path="res://scenes/editor/tools/selection_box/selection_border.png" type="Texture" id=1]
+[ext_resource path="res://scenes/editor/tools/selection_box/selection_box.gd" type="Script" id=2]
+[ext_resource path="res://scenes/editor/tools/selection_box/selection_tools_manager.gd" type="Script" id=3]
+[ext_resource path="res://scenes/editor/tools/selection_box/selection_tools/move.gd" type="Script" id=4]
+[ext_resource path="res://scenes/editor/editor_theme.tres" type="Theme" id=5]
+[ext_resource path="res://scenes/editor/tools/selection_box/tool_button.gd" type="Script" id=6]
+[ext_resource path="res://scenes/editor/tools/selection_box/scale.gd" type="Script" id=7]
+[ext_resource path="res://scenes/editor/tools/selection_box/rotate.gd" type="Script" id=8]
+[ext_resource path="res://scenes/editor/tools/selection_box/pivot.png" type="Texture" id=9]
+[ext_resource path="res://scenes/editor/tools/selection_box/pivot.gd" type="Script" id=10]
+[ext_resource path="res://scenes/editor/tools/selection_box/pivot_1.png" type="Texture" id=11]
+[ext_resource path="res://scenes/editor/tools/selection_box/pivot_2.png" type="Texture" id=12]
+[ext_resource path="res://scenes/menu/button_scripts/button_sound.gd" type="Script" id=13]
+[ext_resource path="res://assets/icons/settings.svg" type="Texture" id=14]
+[ext_resource path="res://assets/icons/reset_save.png" type="Texture" id=15]
+[ext_resource path="res://assets/icons/PivotOn.svg" type="Texture" id=16]
+[ext_resource path="res://assets/icons/Scale.svg" type="Texture" id=17]
+[ext_resource path="res://assets/icons/move_selection.png" type="Texture" id=18]
+[ext_resource path="res://assets/sounds/hover.wav" type="AudioStream" id=19]
+[ext_resource path="res://assets/sounds/click2.wav" type="AudioStream" id=20]
+
+[sub_resource type="AnimatedTexture" id=3]
+frames = 3
+fps = 5.0
+frame_0/texture = ExtResource( 9 )
+frame_1/texture = ExtResource( 11 )
+frame_1/delay_sec = 0.0
+frame_2/texture = ExtResource( 12 )
+frame_2/delay_sec = 0.0
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 28, 28 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 42.5, 10 )
+
+[sub_resource type="StyleBoxEmpty" id=164]
+
+[sub_resource type="StyleBoxEmpty" id=163]
+
+[node name="ObjectSelection" type="Control"]
+margin_right = 40.0
+margin_bottom = 40.0
+theme = ExtResource( 5 )
+script = ExtResource( 2 )
+
+[node name="Pivot" type="TextureButton" parent="."]
+unique_name_in_owner = true
+anchor_left = 0.024
+anchor_top = 0.056
+anchor_right = 0.024
+anchor_bottom = 0.056
+margin_left = 215.04
+margin_top = 63.76
+margin_right = 223.04
+margin_bottom = 71.76
+rect_scale = Vector2( 2, 2 )
+rect_pivot_offset = Vector2( 4, 4 )
+texture_normal = SubResource( 3 )
+texture_pressed = SubResource( 3 )
+texture_hover = SubResource( 3 )
+script = ExtResource( 10 )
+
+[node name="SelectionBox" type="NinePatchRect" parent="."]
+unique_name_in_owner = true
+margin_left = 220.0
+margin_top = 70.0
+margin_right = 384.0
+margin_bottom = 161.0
+texture = SubResource( 1 )
+draw_center = false
+region_rect = Rect2( 0, 0, 28, 28 )
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="SelectionArea" type="Area2D" parent="SelectionBox"]
+unique_name_in_owner = true
+collision_layer = 3
+collision_mask = 3
+
+[node name="SelectionShape" type="CollisionShape2D" parent="SelectionBox/SelectionArea"]
+unique_name_in_owner = true
+position = Vector2( 204.5, 59 )
+shape = SubResource( 2 )
+
+[node name="WhiteHighlight" type="ReferenceRect" parent="SelectionBox"]
+unique_name_in_owner = true
+visible = false
+margin_left = 1.0
+margin_top = 1.0
+margin_right = 163.0
+margin_bottom = 71.0
+mouse_filter = 2
+border_color = Color( 1, 1, 1, 1 )
+border_width = 2.0
+editor_only = false
+
+[node name="SelectionTools" type="Control" parent="SelectionBox"]
+unique_name_in_owner = true
+margin_right = 40.0
+margin_bottom = 40.0
+mouse_filter = 2
+script = ExtResource( 3 )
+
+[node name="Move" type="Control" parent="SelectionBox/SelectionTools"]
+unique_name_in_owner = true
+margin_right = 40.0
+margin_bottom = 40.0
+mouse_filter = 2
+script = ExtResource( 4 )
+
+[node name="Rotate" type="Control" parent="SelectionBox/SelectionTools"]
+unique_name_in_owner = true
+margin_right = 40.0
+margin_bottom = 40.0
+mouse_filter = 2
+script = ExtResource( 8 )
+
+[node name="Scale" type="Control" parent="SelectionBox/SelectionTools"]
+unique_name_in_owner = true
+margin_right = 40.0
+margin_bottom = 40.0
+mouse_filter = 2
+script = ExtResource( 7 )
+
+[node name="Align" type="PanelContainer" parent="SelectionBox"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -70.5
+margin_right = 70.5
+margin_bottom = 25.0
+custom_styles/panel = SubResource( 164 )
+
+[node name="EditSelection" type="PanelContainer" parent="SelectionBox/Align"]
+unique_name_in_owner = true
+margin_right = 141.0
+margin_bottom = 25.0
+size_flags_horizontal = 4
+size_flags_stretch_ratio = 2.0
+theme_type_variation = "FlatPanel"
+
+[node name="ButtonContainer" type="HBoxContainer" parent="SelectionBox/Align/EditSelection"]
+unique_name_in_owner = true
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 137.0
+margin_bottom = 21.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="MoveSelection" type="Button" parent="SelectionBox/Align/EditSelection/ButtonContainer"]
+margin_right = 17.0
+margin_bottom = 17.0
+rect_min_size = Vector2( 17, 17 )
+hint_tooltip = "Move Selection"
+focus_mode = 0
+size_flags_vertical = 3
+theme_type_variation = "ButtonTransparent"
+icon = ExtResource( 18 )
+icon_align = 1
+expand_icon = true
+script = ExtResource( 6 )
+associated_tool_path = NodePath("../../../../SelectionTools/Move")
+
+[node name="VSeparator" type="VSeparator" parent="SelectionBox/Align/EditSelection/ButtonContainer"]
+margin_left = 21.0
+margin_right = 25.0
+margin_bottom = 17.0
+
+[node name="RotateSelection" type="Button" parent="SelectionBox/Align/EditSelection/ButtonContainer"]
+margin_left = 29.0
+margin_right = 46.0
+margin_bottom = 17.0
+rect_min_size = Vector2( 17, 17 )
+hint_tooltip = "Rotate Selection"
+focus_mode = 0
+size_flags_vertical = 3
+theme_type_variation = "ButtonTransparent"
+icon = ExtResource( 15 )
+icon_align = 1
+expand_icon = true
+script = ExtResource( 6 )
+associated_tool_path = NodePath("../../../../SelectionTools/Rotate")
+
+[node name="VSeparator2" type="VSeparator" parent="SelectionBox/Align/EditSelection/ButtonContainer"]
+margin_left = 50.0
+margin_right = 54.0
+margin_bottom = 17.0
+
+[node name="ScaleSelection" type="Button" parent="SelectionBox/Align/EditSelection/ButtonContainer"]
+margin_left = 58.0
+margin_right = 75.0
+margin_bottom = 17.0
+rect_min_size = Vector2( 17, 17 )
+hint_tooltip = "Scale Selection"
+focus_mode = 0
+size_flags_vertical = 3
+theme_type_variation = "ButtonTransparent"
+icon = ExtResource( 17 )
+icon_align = 1
+expand_icon = true
+script = ExtResource( 6 )
+associated_tool_path = NodePath("../../../../SelectionTools/Scale")
+
+[node name="VSeparator3" type="VSeparator" parent="SelectionBox/Align/EditSelection/ButtonContainer"]
+unique_name_in_owner = true
+margin_left = 79.0
+margin_right = 83.0
+margin_bottom = 17.0
+
+[node name="PivotToggleButton" type="Button" parent="SelectionBox/Align/EditSelection/ButtonContainer"]
+unique_name_in_owner = true
+margin_left = 87.0
+margin_right = 104.0
+margin_bottom = 17.0
+rect_min_size = Vector2( 17, 17 )
+hint_tooltip = "Toggle Pivot"
+focus_mode = 0
+size_flags_vertical = 3
+theme_type_variation = "ButtonTransparent"
+custom_styles/pressed = SubResource( 163 )
+toggle_mode = true
+pressed = true
+icon = ExtResource( 16 )
+icon_align = 1
+expand_icon = true
+script = ExtResource( 13 )
+
+[node name="VSeparator4" type="VSeparator" parent="SelectionBox/Align/EditSelection/ButtonContainer"]
+margin_left = 108.0
+margin_right = 112.0
+margin_bottom = 17.0
+
+[node name="PropertiesButton" type="Button" parent="SelectionBox/Align/EditSelection/ButtonContainer"]
+unique_name_in_owner = true
+margin_left = 116.0
+margin_right = 133.0
+margin_bottom = 17.0
+rect_min_size = Vector2( 17, 17 )
+hint_tooltip = "Object Settings"
+focus_mode = 0
+size_flags_vertical = 3
+theme_type_variation = "ButtonTransparent"
+icon = ExtResource( 14 )
+icon_align = 1
+expand_icon = true
+script = ExtResource( 13 )
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource( 19 )
+volume_db = -10.0
+bus = "Sounds"
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource( 20 )
+volume_db = -10.0
+bus = "Sounds"
+
+[connection signal="pressed" from="SelectionBox/Align/EditSelection/ButtonContainer/PivotToggleButton" to="Pivot" method="on_toggle"]
+[connection signal="pressed" from="SelectionBox/Align/EditSelection/ButtonContainer/PropertiesButton" to="." method="open_properties_window"]

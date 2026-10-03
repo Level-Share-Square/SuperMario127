@@ -6,7 +6,10 @@
 [resource]
 script = ExtResource( 1 )
 stream = ExtResource( 2 )
+stream_link = ""
+underwater_stream_link = ""
+timer_stream_link = ""
 volume_db = 0
 pitch_scale = 1
 title = "Course Clear"
-note = "Remix by JerryStuff"
+note = "Remix by RetroReboot"

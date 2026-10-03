@@ -9,7 +9,6 @@ signal setting_changed(key, new_value)
 const FILE_PATH: String = "user://settings.cfg"
 var config := ConfigFile.new()
 
-
 func _init():
 	var file := File.new()
 	if not file.file_exists(FILE_PATH):

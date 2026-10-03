@@ -1,0 +1,31 @@
+[gd_resource type="Resource" load_steps=16 format=2]
+
+[ext_resource path="res://scenes/editor/items/placeable_object.gd" type="Script" id=1]
+[ext_resource path="res://scenes/actors/objects/twisted_tree_body/twisted_tree_body.png" type="Texture" id=2]
+[ext_resource path="res://scenes/actors/objects/twisted_tree_body/palette/1.png" type="Texture" id=3]
+[ext_resource path="res://scenes/actors/objects/twisted_tree_body/palette/3.png" type="Texture" id=4]
+[ext_resource path="res://scenes/actors/objects/twisted_tree_body/palette/2.png" type="Texture" id=5]
+[ext_resource path="res://scenes/actors/objects/twisted_tree_body/palette/6.png" type="Texture" id=6]
+[ext_resource path="res://scenes/actors/objects/twisted_tree_body/palette/4.png" type="Texture" id=7]
+[ext_resource path="res://scenes/actors/objects/twisted_tree_body/palette/5.png" type="Texture" id=8]
+[ext_resource path="res://scenes/actors/objects/twisted_tree_body/palette/icon_5.png" type="Texture" id=9]
+[ext_resource path="res://scenes/actors/objects/twisted_tree_body/palette/icon_4.png" type="Texture" id=10]
+[ext_resource path="res://scenes/actors/objects/twisted_tree_body/palette/icon_1.png" type="Texture" id=11]
+[ext_resource path="res://scenes/actors/objects/twisted_tree_body/palette/icon_3.png" type="Texture" id=12]
+[ext_resource path="res://scenes/actors/objects/twisted_tree_body/icon.png" type="Texture" id=13]
+[ext_resource path="res://scenes/actors/objects/twisted_tree_body/palette/icon_2.png" type="Texture" id=14]
+[ext_resource path="res://scenes/actors/objects/twisted_tree_body/palette/icon_6.png" type="Texture" id=15]
+
+[resource]
+script = ExtResource( 1 )
+item_name = "Twisted Tree Body"
+change_to = "obj_twisted_tree_angle"
+items_in_sequence = 3
+index_in_sequence = 1
+icons = [ ExtResource( 13 ), ExtResource( 11 ), ExtResource( 14 ), ExtResource( 12 ), ExtResource( 10 ), ExtResource( 9 ), ExtResource( 15 ) ]
+previews = [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 5 ), ExtResource( 4 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 6 ) ]
+priority = 90
+object_id = 17
+preview_offset = Vector2( 0, 0 )
+property_overrides = {
+}

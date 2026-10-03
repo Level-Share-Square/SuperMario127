@@ -35,14 +35,24 @@ var on_wall := false
 export(Array, Texture) var palette_textures
 export(Array, Texture) var palette_textures_2
 
-func _set_properties():
-	savable_properties = ["text", "open_menu", "on_wall"]
-	editable_properties = ["text", "open_menu", "on_wall"]
+#func _set_properties():
+#	savable_properties = ["text", "open_menu", "on_wall"]
+#	editable_properties = ["text", "open_menu", "on_wall"]
 	
-func _set_property_values():
-	set_property("text", text, true)
-	set_property("open_menu", open_menu, true)
-	set_property("on_wall", on_wall, true)
+func _object_ready():
+	pass
+	
+func _register_properties():
+	register_property(4, "text", text, false)
+	register_property(5, "open_menu", open_menu, true)
+	register_property(6, "on_wall", on_wall, true)
+	property_tabs.append("sign")
+
+func _register_property_info():
+	set_property_info("text", PropertyInfo.new("The text this sign will display.", 1, -INF, INF, ["", ""], ["", ""], false, ""))
+	set_property_info("open_menu", PropertyInfo.new("When checked, this sign's text will show its text in a larger menu, instead of as a speech bubble.", 1, -INF, INF, ["", ""], ["", ""], false, ""))
+	set_property_info("on_wall", PropertyInfo.new("Whether this sign has a stand underneath it or not.", 1, -INF, INF, ["", ""], ["", ""], false, ""))
+
 
 func _ready():
 	if is_preview:
@@ -55,14 +65,12 @@ func _ready():
 		sprite.visible = false
 	
 	if palette != 0:
-		sprite.texture = palette_textures[palette - 1]
-		stick_sprite.texture = palette_textures_2[palette - 1]
-	
-	if !enabled:
-		interact_pop_up.visible = false
+		update_palette()
 	
 	if not enabled:
+		interact_pop_up.visible = false
 		speech_bubble.hide()
+	
 	if open_menu:
 		speech_bubble.hide()
 		exclamation_mark.visible = true
@@ -78,16 +86,21 @@ func _ready():
 		var _connect = area.connect("body_entered", self, "enter_area")
 		var _connect2 = area.connect("body_exited", self, "exit_area")
 
+	connect("property_changed", self, "on_property_changed")
+
+func on_property_changed(key, value):
+	if key == "palette":
+		update_palette()
+
 func enter_area(body):
 	if body.name.begins_with("Character") and character == null and enabled:
 		character = body
-		
 		if open_menu:
 			message_appear.play()
 
 
 func exit_area(body):
-	if body == character and character.get_collision_layer_bit(1) and enabled:
+	if body == character and not character.invulnerable and enabled:
 		character = null
 		if reset_read_timer == 0 and open_menu:
 			message_disappear.play()
@@ -100,9 +113,8 @@ func setup_char():
 	character.movable = false
 	character.velocity = Vector2.ZERO
 	character.sprite.rotation = 0
-	character.set_collision_layer_bit(1, false) # disable collisions w/ most things
+	character.set_collision_mask_bit(1, false) # disable collisions w/ most things
 	character.set_inter_player_collision(false)
-	character.camera.smoothing_enabled = true # Re-enable camera smoothing
 	
 	character.sprite.animation = "enterDoor" + ("Right" if character.facing_direction == 1 else "Left")
 	character.sprite.playing = true
@@ -131,7 +143,7 @@ func restore_control():
 	character.get_state_node("JumpState").jump_buffer = 0 # prevent character from jumping right after closing menu
 	character.inputs[Character.input_names.jump][1] = false
 
-	character.set_collision_layer_bit(1, true)
+	character.set_collision_mask_bit(1, true)
 	character.set_inter_player_collision(true) 
 	
 	character.sprite.animation = "exitDoor" + ("Right" if character.facing_direction == 1 else "Left")
@@ -154,7 +166,7 @@ func _physics_process(delta):
 			being_read = false
 	
 	
-	if character == null or being_read: 
+	if not is_instance_valid(character) or being_read: 
 		interact_pop_up.position = lerp(interact_pop_up.position, Vector2(normal_pos.x * 0.8, normal_pos.y * 0.9), delta * transition_speed)
 		interact_pop_up.scale = lerp(interact_pop_up.scale, Vector2(0.8, 0.8), delta * transition_speed)
 		interact_pop_up.modulate = lerp(interact_pop_up.modulate, Color(1, 1, 1, 0), delta * transition_speed)
@@ -183,6 +195,11 @@ func _physics_process(delta):
 		
 		if !has_char and is_instance_valid(character):
 			exit_area(character)
+
+
+func update_palette() -> void:
+	sprite.texture = palette_textures[palette - 1]
+	stick_sprite.texture = palette_textures_2[palette - 1]
 
 
 ## compatibility w/ pop-up prefab

@@ -1,3 +1,4 @@
+class_name ButtonHoverVertical
 extends ButtonSound
 
 export var lerp_speed: float = 18

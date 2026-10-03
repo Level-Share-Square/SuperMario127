@@ -16,12 +16,12 @@ void fragment () {
 
 [sub_resource type="ShaderMaterial" id=24]
 shader = SubResource( 23 )
-shader_param/speed = 0.02
+shader_param/speed = 0.22
 shader_param/direction = 1.0
 
 [sub_resource type="ShaderMaterial" id=25]
 shader = SubResource( 23 )
-shader_param/speed = 0.04
+shader_param/speed = 0.24
 shader_param/direction = -1.0
 
 [sub_resource type="Shader" id=26]
@@ -51,7 +51,6 @@ rect_clip_content = true
 script = ExtResource( 3 )
 overlay_tint = Color( 0.054902, 0.0588235, 0.129412, 0.270588 )
 static_amount = 1.75
-gradient_visible = true
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchor_right = 1.0

@@ -10,6 +10,7 @@ func _ready():
 	
 	var return_args: Array = Singleton.SceneSwitcher.menu_return_args
 	list_handler.working_folder = return_args[2]
+	list_handler.is_campaign = return_args[4]
 	
 	list_handler.parent_screen.transition("LevelInfo")
-	list_handler.level_panel.load_level_info(return_args[0], return_args[1], return_args[2], return_args[3])
+	list_handler.level_panel.load_level_info(return_args[0], return_args[1], return_args[2], return_args[3], return_args[4])

@@ -1,0 +1,19 @@
+[gd_resource type="Resource" load_steps=4 format=2]
+
+[ext_resource path="res://scenes/editor/items/placeable_object.gd" type="Script" id=1]
+[ext_resource path="res://scenes/actors/objects/big_bottle/big_bottle.png" type="Texture" id=2]
+[ext_resource path="res://scenes/actors/objects/big_bottle/icon.png" type="Texture" id=3]
+
+[resource]
+script = ExtResource( 1 )
+item_name = "Big Bottle"
+change_to = "obj_small_bottle"
+items_in_sequence = 2
+index_in_sequence = 1
+icons = [ ExtResource( 3 ) ]
+previews = [ ExtResource( 2 ) ]
+priority = 138
+object_id = 22
+preview_offset = Vector2( 0, 0 )
+property_overrides = {
+}

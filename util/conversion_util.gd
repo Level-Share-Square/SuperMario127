@@ -1,11 +1,17 @@
 class_name conversion_util
+extends Reference
+
 
 static func convert_040_to_041(result):
 	result.format_version = "0.4.1"
 	for area_result in result.areas:
 		if typeof(area_result) == TYPE_DICTIONARY:
+			
+			if !area_result.has("objects"):
+				break
+			
 			var new_objects = []
-			area_result.settings.music = int(area_result.settings.music)
+			area_result.music = int(area_result.music)
 			for object_result in area_result.objects:
 				var object = object_result
 				object.properties[2] = int(object.properties[2])
@@ -27,10 +33,15 @@ static func convert_040_to_041(result):
 			area_result.objects = new_objects
 	return result
 
+
 static func convert_042_to_043(result):
 	result.format_version = "0.4.3"
 	for area_result in result.areas:
 		if typeof(area_result) == TYPE_DICTIONARY:
+			
+			if !area_result.has("objects"):
+				break
+			
 			var new_objects = []
 			for object_result in area_result.objects:
 				var object = object_result
@@ -40,6 +51,7 @@ static func convert_042_to_043(result):
 			area_result.objects = new_objects
 	return result
 
+
 static func convert_044_to_045(result):
 	# basically this function recreates the objects dictonary,
 	# but changes the shine sprites to have an automatic id
@@ -48,6 +60,10 @@ static func convert_044_to_045(result):
 	var current_id = 0
 	for area_result in result.areas:
 		if typeof(area_result) == TYPE_DICTIONARY:
+			
+			if !area_result.has("objects"):
+				break
+			
 			var new_objects = []
 			for object_result in area_result.objects:
 				var object = object_result
@@ -62,13 +78,18 @@ static func convert_044_to_045(result):
 				new_objects.append(object)
 			area_result.objects = new_objects
 	return result
-	
+
+
 static func convert_047_to_048(result):
 	result.format_version = "0.4.8"
 	var door_container = []
 	var current_id = 0
 	for area_result in result.areas:
 		if typeof(area_result) == TYPE_DICTIONARY:
+			
+			if !area_result.has("objects"):
+				break
+			
 			var new_objects = []
 			for object_result in area_result.objects:
 				var object = object_result
@@ -79,6 +100,7 @@ static func convert_047_to_048(result):
 					door_container.append(object)
 					continue
 				new_objects.append(object)
+			
 			if door_container != null:
 				var door_pairs = []
 				var pair_id = 0
@@ -98,6 +120,7 @@ static func convert_047_to_048(result):
 					new_objects.append(j)
 			area_result.objects = new_objects
 	return result
+
 
 static func convert_048_to_049(result):
 	result.format_version = "0.4.9"
@@ -120,10 +143,10 @@ static func convert_048_to_049(result):
 					if object.properties[6] == "default_teleporter" || object.properties[6] == "none":
 						object.properties[6] = new_tag
 					object.properties[7] = false
-					#print(object)
 				new_objects.append(object)
 			area_result.objects = new_objects #==========================================
 	return result
+
 
 static func convert_049_to_050(result):
 	result.format_version = "0.5.0"
@@ -134,21 +157,572 @@ static func convert_049_to_050(result):
 #		result_area.timer = 0.00
 	return result
 
-static func compareVersions(version, other) -> int:
+
+static func convert_051_to_052(result):
+	result.format_version = "0.5.2"
+	for area_result in result.areas:
+		if typeof(area_result) == TYPE_DICTIONARY:
+			
+			if !area_result.has("objects"):
+				break
+			
+			var new_objects : Array = []
+			for object_result in area_result.objects:
+				var object = object_result
+				#liquid conversion (oh boy let the fun begin)
+				match(object.type_id):
+					72: #water
+						var old_properties = object.properties.duplicate()
+						object.properties.resize(12)
+						object.properties[5] = Vector2(old_properties[5], old_properties[6]) #convert width and height to single vector2
+						object.properties[6] = old_properties[7] #move subsequent properties forward: color, render in front, tag
+						object.properties[7] = old_properties[8]
+						object.properties[8] = old_properties[9]
+						object.properties[9] = true if old_properties.size() < 12 else old_properties[11] #tap mode (checks if property is present, if it isn't it just sets it to true)
+						object.properties[10] = true #waves enable (defaults to true)
+						object.properties[11] = old_properties[10] #water toxicity
+					75: #lava
+						var old_properties = object.properties.duplicate()
+						object.properties.resize(14)
+						object.properties[5] = Vector2(old_properties[5], old_properties[6])
+						object.properties[6] = old_properties[7]
+						object.properties[7] = old_properties[8]
+						object.properties[8] = old_properties[9]
+						object.properties[9] = true if old_properties.size() < 11 else old_properties[10]
+						object.properties[10] = true
+						object.properties[11] = true
+						object.properties[12] = true
+						object.properties[13] = Color8(255, 195, 0, 255)
+					142: #quicksand (from before liquids were finished)
+						var old_properties = object.properties.duplicate()
+						object.properties.resize(13)
+						object.properties[5] = old_properties[5]
+						object.properties[6] = old_properties[6]
+						object.properties[7] = old_properties[7]
+						object.properties[8] = old_properties[8]
+						object.properties[9] = old_properties[9]
+						object.properties[10] = old_properties[12]
+						object.properties[11] = old_properties[13]
+						object.properties[12] = old_properties[14]
+				
+				new_objects.append(object)
+			area_result.objects = new_objects
+
+	return result
+
+
+static func convert_052_to_053(result):
+	result.format_version = "0.5.3"
+	for area_result in result.areas:
+		if typeof(area_result) == TYPE_DICTIONARY:
+			
+			if !area_result.has("objects"):
+				break
+			
+			var new_objects = []
+			for object_result in area_result.objects:
+				var object = object_result
+				object.properties.insert(5, 2)
+				
+				if object.type_id == 82: #checkpoint conversion
+					var old_properties = object.properties.duplicate()
+					object.properties[7] = Vector2(0, old_properties[7])
+				
+				new_objects.append(object)
+			area_result.objects = new_objects
+	return result
+
+
+static func convert_053_to_054(result):
+	result.format_version = "0.5.4"
+	return result
+
+
+static func convert_054_to_055(result):
+	result.format_version = "0.5.5"
+	for area_result in result.areas:
+		if typeof(area_result) == TYPE_DICTIONARY:
+			
+			if !area_result.has("objects"):
+				break
+			
+			var new_objects : Array = []
+			for object_result in area_result.objects:
+				var object = object_result
+				# teleporter conversion (property indexes are gonna make me go insane i swear
+				match(object.type_id):
+					23: # pipe
+						object.properties.resize(12)
+						var color = object.properties[8]
+						if color == null:
+							color = Color(0, 1, 0)
+						
+						var teleport_mode = object.properties[9]
+						if teleport_mode == null:
+							teleport_mode = false
+						
+						var force_fadeout = object.properties[10]
+						if force_fadeout == null:
+							force_fadeout = false
+						
+						object.properties[11] = color
+						object.properties[8] = int(teleport_mode) # true = remote, false = local (why was it that way :/)
+						object.properties[9] = 0 if force_fadeout == true else 800 # setting max pan distance to 0 acts the same as force fadeout
+						object.properties[10] = ""
+					
+					29: # goomba
+						object.properties[0] += Vector2(0, 25)
+						
+					48: # door
+						object.properties.resize(10)
+						var teleport_mode = object.properties[8]
+						var force_fadeout = object.properties[9]
+						object.properties[8] = int(teleport_mode) # true = remote, false = local
+						object.properties[9] = 0 if force_fadeout == true else 800 # setting max pan distance to 0 acts the same as force fadeout
+						
+					112: # area transition:
+						object.properties.resize(14)
+						var teleport_mode = object.properties[8]
+						var vertical = object.properties[9]
+						var parts = object.properties[10]
+						var stops_camera = object.properties[11]
+						var force_fadeout = object.properties[12]
+						object.properties[8] = int(teleport_mode) # true = remote, false = local (why was it that way :/)
+						object.properties[9] = 0 if force_fadeout == true else 800 # setting max pan distance to 0 acts the same as force fadeout
+						object.properties[10] = ""
+						object.properties[11] = vertical
+						object.properties[12] = parts
+						object.properties[13] = stops_camera
+		
+						
+					113: # star door
+						object.properties.resize(15)
+						var teleport_mode = object.properties[8]
+						var collectible = object.properties[9]
+						var required_amount = object.properties[10]
+						var insufficient_text = object.properties[11]
+						var is_single = object.properties[12]
+						object.properties[8] = int(teleport_mode) # true = remote, false = local
+						object.properties[9] = 800 # max pan distance - just setting back to defaults so they arent borked
+						object.properties[10] = "" # level path
+						object.properties[11] = collectible
+						object.properties[12] = required_amount
+						object.properties[13] = insufficient_text
+						object.properties[14] = is_single
+						
+					124: #buoyant platform
+						object.properties[0] += Vector2(0, 15 * -object.properties[1].y)
+					
+				
+				new_objects.append(object)
+			area_result.objects = new_objects
+	return result
+
+static func convert_055_to_056(result):
+	result.format_version = "0.5.6"
+	for area_result in result.areas:
+		if typeof(area_result) == TYPE_DICTIONARY:
+			
+			if !area_result.has("objects"):
+				break
+			
+			var new_objects : Array = []
+			for object_result in area_result.objects:
+				var object = object_result
+
+				match(object.type_id):
+					29: #goomba
+						var new_goomba_scale_conversion = Vector2(0.75, 0.75)
+						var goomba_was_scaled = object.properties[1].x != 1.0 or object.properties[1].y != 1.0
+						if goomba_was_scaled:
+							object.properties[1] *= new_goomba_scale_conversion
+						object.properties[0] -= Vector2(0, 13) if not goomba_was_scaled else Vector2(0, 13) * new_goomba_scale_conversion
+					130: #rex
+						var new_rex_scale_conversion = Vector2(0.65, 0.65)
+						var rex_was_scaled = object.properties[1].x != 1.0 or object.properties[1].y != 1.0
+						if rex_was_scaled:
+							object.properties[1] *= new_rex_scale_conversion
+						object.properties[0] += Vector2(0, 17) if not rex_was_scaled else Vector2(0, 15) * (Vector2.ONE + new_rex_scale_conversion)
+
+				new_objects.append(object)
+			area_result.objects = new_objects
+	return result
+	
+static func generate_data_container(level_code: String) -> LevelDataContainer:
+	level_code = LevelCodeTokenizer.splice_level(level_code)
+	var level_metadata_code: String = LevelCodeTokenizer.splice_metadata(level_code)
+	var level_metadata = LevelCodeDeserializer.deserialize_level_metadata_code(level_metadata_code)
+	
+	var components_code = LevelCodeTokenizer.splice_level_components(level_code)
+	var editor_data_code = components_code[1]
+	var level_tags_code = components_code[2] if components_code.size() == 3 else ""
+	
+	var editor_data = LevelCodeDeserializer.deserialize_editor_data(editor_data_code)
+	var area_headers: Array
+	
+	# load area headers
+	var area_codes: PoolStringArray = LevelCodeTokenizer.splice_areas(components_code[0])
+	for area_code in area_codes:
+		var area_header: AreaHeader = LevelCodeDeserializer.deserialize_area_header_code(area_code)
+		area_headers.append(area_header)
+	
+	return LevelDataContainer.new(level_metadata, editor_data, area_headers)
+	
+static func convert_100_to_101(data_container: LevelDataContainer):
+	for area_header in data_container.area_headers:
+		var area: AreaData = LevelCodeDeserializer.deserialize_area_code(area_header.area_code)
+		for layer in area.layers:
+			var tile_data: TileData = layer.tile_data
+			for used_tile in tile_data.used_tiles:
+				var tile: Array = tile_data.get_tile_data_at(used_tile)
+				if tile[0] == 36:
+					# tile[2] % 2 checks whether or not this
+					# tile should belong to bookshelf or
+					# empty bookshelf
+					tile_data.set_tile(used_tile, 36 if tile[2] % 2 == 0 else 51, 0, tile[2]/2)
+				layer.tile_data = tile_data
+		area_header.area_code = LevelCodeSerializer.serialize_area(area)
+	
+	return data_container
+
+static func is_pre_100(level_code: String) -> bool:
+	return level_code.begins_with("0")
+
+static func get_level_metadata_from_old_data(level_data) -> LevelMetadata:
+	var starting_area: AreaDataOld = level_data.areas[0]
+	return LevelMetadata.new(
+		level_data.name,
+		level_data.author,
+		level_data.description,
+		level_data.thumbnail_url,
+		starting_area.sky,
+		starting_area.background,
+		starting_area.background_palette,
+		100,
+		get_collectible_data_from_old_data(level_data)
+	)
+
+
+static func get_collectible_data_from_old_data(level_data) -> CollectibleData:
+	var mission_datas: Dictionary = {}
+	var star_coin_datas: Dictionary = {}
+	var used_mission_datas: Dictionary = {}
+	
+	var SHINE_ID: int = 2
+	var STAR_COIN_ID: int = 52
+	
+	for area in level_data.areas:
+		area = area as AreaDataOld
+		for object in area.objects:
+			object = object as ObjectDataOld
+			
+			if object.type_id == SHINE_ID:
+				var properties: Array = object.properties.duplicate(true)
+				
+				if properties.size() < 7:
+					properties.resize(14)
+					properties[6] = "Unnamed Shine"
+					properties[7] = ""
+					properties[8] = false
+					properties[12] = Color.yellow
+					
+				if properties.size() < 15:
+					properties.resize(16)
+					properties[14] = true
+					properties[15] = 0
+				
+				var mission_data: MissionData = mission_datas.get_or_add(
+					properties[13],
+					MissionData.new(
+						uuid_util.v4(),
+						properties[8], # Show in menu
+						properties[6], # Shine name
+						properties[7], # Shine desc
+						properties[15], # Sort order
+						properties[12], # Color
+						properties[14], # Kick out
+						0,
+						"_entrance",
+						properties[13] # Internal ID
+					)
+				)
+				
+				object.properties = properties.slice(0, 5)
+				object.properties.resize(13)
+				object.properties[6] = properties[9]
+				object.properties[7] = properties[10]
+				object.properties[8] = properties[11]
+				object.properties[9] = mission_data.mission_uuid
+				object.properties[10] = 0 if properties.size() <= 16 else properties[16]
+				object.properties[11] = ""
+				
+				mission_datas[properties[13]] = mission_data
+				used_mission_datas[mission_data.mission_uuid] = 1
+			elif object.type_id == STAR_COIN_ID:
+				var old_internal_id: int = object.properties[6]
+				var star_coin_data: StarCoinData = star_coin_datas.get_or_add(old_internal_id, 
+					StarCoinData.new(
+						uuid_util.v4(),
+						StarCoinData.DEFAULT_HINT,
+						StarCoinData.DEFAULT_COLOR
+					)
+				)
+				
+				object.properties[6] = star_coin_data.star_coin_uuid
+				star_coin_datas[old_internal_id] = star_coin_data
+	
+	var mission_data_list: Array = mission_datas.values()
+	var star_coin_data_list: Array = star_coin_datas.values()
+	return CollectibleData.new(mission_data_list, star_coin_data_list, 0, used_mission_datas, false, [])
+
+
+static func get_area_data_from_old_data(old_area: AreaDataOld) -> AreaData:
+	var area_header := AreaHeader.new(
+		"",
+		old_area.bounds,
+		old_area.name,
+		old_area.sky,
+		old_area.background,
+		old_area.background_palette,
+		old_area.bg_autoscroll_speed,
+		old_area.gravity,
+		old_area.timer,
+		old_area.music,
+		old_area.underwater_music
+	)
+	
+	area_header.tile_with_edges = true
+	area_header.show_name = false
+	area_header.show_song = false
+	area_header.minimum_timer = -1
+	
+	return get_new_area_code(area_header, old_area)
+
+static func get_area_headers_from_old_data(level_data) -> Array:
+	var area_headers: Array = []
+	
+	var middle_layer_id: String
+	var area_header: AreaHeader
+	for old_area in level_data.areas:
+		old_area = old_area as AreaDataOld
+		area_header = AreaHeader.new(
+			"",
+			old_area.bounds,
+			old_area.name,
+			old_area.sky,
+			old_area.background,
+			old_area.background_palette,
+			old_area.bg_autoscroll_speed,
+			old_area.gravity,
+			old_area.timer,
+			old_area.music,
+			old_area.underwater_music
+		)
+		
+		area_header.tile_with_edges = true
+		area_header.show_name = false
+		area_header.show_song = false
+		area_header.minimum_timer = -1
+		
+		var area_data: AreaData = get_new_area_code(area_header, old_area)
+		if middle_layer_id == "":
+			middle_layer_id = area_data.layers[2].layer_metadata.layer_uuid
+		
+		area_header.area_code = LevelCodeSerializer.serialize_area(area_data)
+		
+		area_headers.append(area_header)
+	
+	return [middle_layer_id] + area_headers
+
+
+static func get_new_area_code(header: AreaHeader, old_area: AreaDataOld) -> AreaData:
+	var area_data: AreaData = AreaData.new(header, [])
+	
+	var BACKGROUND_TINT: Color = Color(0.545098, 0.545098, 0.545098)
+	
+	# ahh the last time VeryBack's cursed layer index will ever get to haunt me...
+	var layers: Dictionary = {
+		3: LayerData.new(LayerMetadata.new(0, Vector2.ZERO, false, BACKGROUND_TINT, 0, false, "Very Back", false), TileData.new()),
+		0: LayerData.new(LayerMetadata.new(0, Vector2.ZERO, false, BACKGROUND_TINT, 1, false, "Background", false), TileData.new()),
+		1: LayerData.new(LayerMetadata.new(0, Vector2.ZERO, false, Color.white, 2, true, "Ground", true), TileData.new()),
+		2: LayerData.new(LayerMetadata.new(0, Vector2.ZERO, false, Color.white, 3, false, "Foreground", false), TileData.new()),
+	}
+	
+	var water_front_layer := LayerData.new(LayerMetadata.new(0, Vector2.ZERO, false, Color.white, 4, true, "Front Liquids", false), TileData.new())
+	
+	var object_layer_map: Array = [3, 0, 1, 2]
+	
+	for chunk_key in old_area.tile_chunks:
+		chunk_key = chunk_key as String
+		var layer: int = int(chunk_key.split(":")[2])
+		var layer_data: LayerData = layers[layer]
+		var chunk_coord: Vector2 = Vector2(int(chunk_key.split(":")[0]), int(chunk_key.split(":")[1]))
+		var new_chunk_data: PoolIntArray = PoolIntArray()
+		for tile in old_area.tile_chunks.get(chunk_key):
+			if tile != null:
+				new_chunk_data.append(tile_util.get_packed_tile(tile[0], tile[1], tile[2]))
+			else:
+				new_chunk_data.append(0)
+		
+		layer_data.tile_data.set_chunk_data(chunk_coord, new_chunk_data)
+	
+	for old_object in old_area.objects:
+		old_object = old_object as ObjectDataOld
+		var object_layer: int = object_layer_map[old_object.properties.pop_at(5)]
+		var position: Vector2 = old_object.properties.pop_at(0)
+		
+		if old_object.type_id == 14: # sign
+			if old_object.properties[5] == true: # is background
+				object_layer = 0
+		if old_object.type_id == 87: # airship window
+			if old_object.properties[4] == true: # is background
+				object_layer = 0
+			else:
+				object_layer = 2
+		if old_object.type_id == 68:
+			if old_object.properties[4] == true: # is background
+				object_layer = 0
+		if old_object.type_id == 100: # castle window, torch
+			if old_object.properties[4] is bool and old_object.properties[4] == true: # is background
+				object_layer = 0
+				old_object.properties[4] = 3
+				old_area.objects.append(old_object)
+			elif old_object.properties[4] is int:
+				object_layer = 3
+		if old_object.type_id == 29: # goomba
+			old_object.properties.resize(10)
+			var color = old_object.properties[4]
+			position += Vector2(0, -3)
+			old_object.properties[4] = float(15)
+			old_object.properties[5] = 0
+			old_object.properties[6] = 1
+			old_object.properties[7] = Vector2.ZERO
+			old_object.properties[8] = float(0)
+			old_object.properties[9] = color
+		if old_object.type_id == 49: # touch lift
+			if old_object.properties.size() == 10:
+				old_object.properties.resize(13)
+				old_object.properties[10] = int(0)
+				old_object.properties[11] = old_object.properties[6].duplicate(true)
+				old_object.properties[12] = float(0)
+		if old_object.type_id == 113: # star door
+			old_object.properties.insert(11, "")
+		if (old_object.type_id == 72 ||
+			old_object.type_id == 75):
+				if old_object.properties[6] == true:
+					old_object.properties[6] = false
+					
+					if not 5 in layers: layers[5] = water_front_layer
+					object_layer = 5
+		
+		var property_dictionary: Dictionary = {}
+		for i in old_object.properties.size():
+			var value = old_object.properties[i]
+			# can't get all the default properties but we can at least check the old
+			# base ones and not include them if they're unchanged
+			match i:
+				0: # scale
+					if value is Vector2 and value != Vector2.ONE:
+						property_dictionary.get_or_add(i, old_object.properties[i])
+				1: # rotation degrees
+					if value is float and !is_zero_approx(value):
+						property_dictionary.get_or_add(i, old_object.properties[i])
+				2: # enabled
+					if value is bool and value != true:
+						property_dictionary.get_or_add(i, old_object.properties[i])
+				3: # visible
+					if value is bool and value != true:
+						property_dictionary.get_or_add(i, old_object.properties[i])
+				_:
+					property_dictionary.get_or_add(i, old_object.properties[i])
+		
+		property_dictionary.get_or_add(-3, object_layer == 0 or object_layer == 3) # in front
+		
+		if old_object.type_id == 75: # Lava
+			property_dictionary[10] = true # use old lava
+		
+		var new_object: ObjectData = ObjectData.new(
+			ObjectMetadata.new(
+				position,
+				old_object.type_id,
+				old_object.palette,
+				""
+			), 
+			property_dictionary
+		)
+		layers[object_layer].object_data.append(new_object)
+		
+		if old_object.type_id == 100:
+			old_object.properties.insert(5, object_layer)
+			old_object.properties.push_front(position)
+	
+	area_data.layers = layers.values()
+	
+	return area_data
+
+
+static func get_new_level_data_from_old_data(level_data) -> LevelDataContainer:
+	var level_metadata: LevelMetadata = get_level_metadata_from_old_data(level_data)
+	var editor_data := EditorData.new()
+	var area_headers: Array = get_area_headers_from_old_data(level_data)
+	var level_tags: LevelTags = get_level_tags_from_old_data(level_data)
+	
+	editor_data.selected_layer = area_headers.pop_front()
+	
+	var container: LevelDataContainer = LevelDataContainer.new(
+		level_metadata,
+		editor_data,
+		area_headers
+	)
+	
+	return container
+
+static func get_level_tags_from_old_data(level_data) -> LevelTags:
+	var level_tags := LevelTags.new()
+	for area in level_data.areas:
+		for object in area.objects:
+			if (object.type_id == 23 or
+				object.type_id == 48 or
+				object.type_id == 112 or
+				object.type_id == 113): # Door, Pipe, Area Transition, and Star Door
+				if not object.properties[5] in level_tags.teleport_tags:
+					level_tags.teleport_tags.append(object.properties[5])
+			if (object.type_id == 72 or
+				object.type_id == 75): # Water and Lava
+				if not object.properties[7] in level_tags.liquid_tags:
+					level_tags.liquid_tags.append(object.properties[7])
+			if object.type_id == 81: # Crystal Tap
+				if not object.properties[4] in level_tags.liquid_tags:
+					level_tags.liquid_tags.append(object.properties[4])
+			if (object.type_id == 127 or
+				object.type_id == 137 or
+				object.type_id == 138 or
+				object.type_id == 139): # Toad, Peach, Yoshi, and Red Bob-omb
+				if not object.properties[14] in level_tags.dialogue_tags:
+					level_tags.dialogue_tags.append(object.properties[14])
+			if object.type_id == 128: # Dialogue Trigger
+				if not object.properties[10] in level_tags.dialogue_tags:
+					level_tags.dialogue_tags.append(object.properties[10])
+	return level_tags
+
+static func compare_versions(version, other) -> int:
 	var v = version.split(".")
 	var o = other.split(".")
-
+	
+	if (len(v) != 3 or len(o) != 3):
+		return -1
 	for i in range(3):
 		var nv = int(v[i])
 		var no = int(o[i])
-		if(nv<no):
-			return -1 #smaller version
+		if(nv < no):
+			return -1 # smaller version
 		# so originally this was a lower than symbol again instead of a greater than symbol like it should be?
 		# that caused me quite a fair deal of annoyance... and it was over one character,, (dies)
-		if(nv>no):
-			return 1 #bigger version
+		if(nv > no):
+			return 1 # bigger version
 
-	return 0 #same version
+	return 0 # same version
+
 
 static func get_chunk_tile_id(chunk : String):
 	var chunk_parts
@@ -163,7 +737,8 @@ static func get_chunk_tile_id(chunk : String):
 		return tile[1].left(2)
 	else:
 		return chunk_parts[0].left(2)
-	
+
+
 static func set_chunk_tile_id(chunk : String, new_id : String):
 	var chunk_parts
 	if "*" in chunk: 

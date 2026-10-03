@@ -3,10 +3,10 @@
 [ext_resource path="res://assets/fonts/delfino_small.tres" type="DynamicFont" id=1]
 [ext_resource path="res://scenes/menu/theme.tres" type="Theme" id=2]
 [ext_resource path="res://classes/text/speech_bubble.gd" type="Script" id=3]
-[ext_resource path="res://scenes/editor/assets/clickable_arrow.png" type="Texture" id=4]
+[ext_resource path="res://scenes/oldeditor/assets/clickable_arrow.png" type="Texture" id=4]
 [ext_resource path="res://scenes/actors/objects/sign/label_sizing.gd" type="Script" id=5]
-[ext_resource path="res://scenes/actors/objects/sign/message_appear.wav" type="AudioStream" id=6]
-[ext_resource path="res://scenes/actors/objects/sign/message_disappear.wav" type="AudioStream" id=7]
+[ext_resource path="res://assets/sounds/message_appear.wav" type="AudioStream" id=6]
+[ext_resource path="res://assets/sounds/message_disappear.wav" type="AudioStream" id=7]
 
 [sub_resource type="Gradient" id=6]
 offsets = PoolRealArray( 0.429293, 1 )
@@ -80,7 +80,7 @@ extents = Vector2( 80, 60 )
 [node name="SpeechBubble" type="Node2D"]
 modulate = Color( 0, 0, 1, 0 )
 scale = Vector2( 0.68, 0.8 )
-z_index = 50
+z_index = 4096
 z_as_relative = false
 script = ExtResource( 3 )
 
@@ -116,7 +116,7 @@ mouse_filter = 2
 [node name="RichTextLabel" type="RichTextLabel" parent="Dialogue"]
 margin_left = 108.0
 margin_right = 108.0
-margin_bottom = 17.0
+margin_bottom = 18.0
 grow_vertical = 0
 rect_clip_content = false
 mouse_filter = 2

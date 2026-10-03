@@ -16,23 +16,25 @@ var max_shown: bool
 var max_purples: int
 var required_purples: int
 
-var variables: LevelVars = Singleton.CurrentLevelData.level_data.vars
+var variables: LevelVars
 
 
 func _ready():
 	hide()
-	
-	# sigh, have to wait for the player scene to finish up their work
-	yield(get_tree(), "physics_frame")
-	yield(get_tree(), "physics_frame")
-	
+	var player: LevelPlayer = get_tree().current_scene
+	var shared: LevelShared = player.get_shared_node()
+	yield(shared, "loaded_layers")
+	delayed_ready()
+
+func delayed_ready():
+	variables = CurrentLevelData.vars
 	max_purples = variables.max_purple_starbits
 	if max_purples <= 0: return
 	
 	show()
 	variables.connect("purple_starbit_collected", self, "collect_coin")
 
-	var new_coins: int = variables.purple_starbits_collected[Singleton.CurrentLevelData.area][0]
+	var new_coins: int = variables.purple_starbits_collected[CurrentLevelData.area_id][0]
 	update_counter(new_coins)
 	
 	if required_purples <= 0:
@@ -56,12 +58,12 @@ func update_counter(new_coins: int):
 	max_label.text = "(" + str(max_purples) + ")"
 
 func update_required_purples():
-	var current_required_purples = variables.required_purple_starbits[Singleton.CurrentLevelData.area]
+	var current_required_purples = variables.required_purple_starbits[CurrentLevelData.area_id]
 	if len(current_required_purples) > 0:
 		if len(current_required_purples) > 1:
-			if variables.purple_starbits_collected[Singleton.CurrentLevelData.area][0] >= required_purples:
-				variables.required_purple_starbits[Singleton.CurrentLevelData.area].pop_front()
-			required_purples = variables.required_purple_starbits[Singleton.CurrentLevelData.area][0]
+			if variables.purple_starbits_collected[CurrentLevelData.area_id][0] >= required_purples:
+				variables.required_purple_starbits[CurrentLevelData.area_id].pop_front()
+			required_purples = variables.required_purple_starbits[CurrentLevelData.area_id][0]
 
 
 # this is to make sure the counter always displays underneath any radial timers

@@ -13,6 +13,7 @@ onready var parent_screen := $"%LevelView"
 
 onready var level_grid := $"%LevelGrid"
 onready var level_panel := $"%LevelPanel"
+onready var campaign_panel := $"%CampaignPanel"
 onready var old_levels := $"%OldLevels"
 onready var loader := $"%Loader"
 onready var focus = $"%Focus"
@@ -22,6 +23,7 @@ onready var focus = $"%Focus"
 const BASE_FOLDER: String = level_list_util.BASE_FOLDER
 const DEV_FOLDER: String = level_list_util.DEV_FOLDER
 var working_folder: String = BASE_FOLDER
+var is_campaign: bool = false
 var loaded_folder: String
 
 
@@ -35,7 +37,7 @@ func screen_opened():
 		yield(old_levels, "conversion_complete")
 	
 	if working_folder != loaded_folder:
-		loader.load_directory(working_folder)
+		loader.load_directory(working_folder, is_campaign)
 		loaded_folder = working_folder
 		return
 	
@@ -44,7 +46,7 @@ func screen_opened():
 	if working_folder != BASE_FOLDER: return
 	if Singleton.SceneSwitcher.reload_base_folder:
 		loaded_folder = working_folder
-		loader.load_directory(working_folder)
+		loader.load_directory(working_folder, false)
 		Singleton.SceneSwitcher.reload_base_folder = false
 
 
@@ -60,6 +62,17 @@ func change_focus(focus_node = null):
 	focus.call_deferred("focus_node")
 
 
+func insert_campaign():
+	var folder_id: String = "New Campaign"
+	folder_id = level_list_util.get_valid_folder_name(folder_id, working_folder)
+	
+	var folder_path: String = level_list_util.get_folder_path(folder_id, working_folder)
+	level_list_util.create_campaign_folder(folder_path)
+	
+	sort_file_util.add_to_sort(folder_id, working_folder, sort_file_util.CAMPAIGNS)
+	loader.add_campaign_card(folder_id, working_folder, true, true)
+
+
 func insert_folder():
 	var folder_id: String = "New Folder"
 	folder_id = level_list_util.get_valid_folder_name(folder_id, working_folder)
@@ -73,19 +86,39 @@ func insert_folder():
 
 func insert_level(level_code: String = "", folder: String = working_folder):
 	if level_code == "":
-		level_code = level_list_util.load_level_code_file(LevelData.DEFAULT_CODE_PATH)
+		level_code = load(CurrentLevelData.DEFAULT_CODE_PATH).contents
+	
+	if not level_code_validator_util.validate_level_code(level_code):
+		return
 	
 	var level_id: String = level_list_util.generate_level_id()
 	var file_path: String = level_list_util.get_level_file_path(level_id, folder)
 	
+	if conversion_util.is_pre_100(level_code):
+		level_code = CurrentLevelData.convert_old_code_to_new(level_code)
+		
+	level_code = LevelCodeHandler.check_and_convert_new_level(level_code).level_code
+	
 	level_list_util.save_level_code_file(level_code, file_path)
 	sort_file_util.add_to_sort(level_id, folder, sort_file_util.LEVELS)
-	loader.add_level_card(level_id, folder, true, true, level_code)
+	loader.add_level_card(level_id, folder, true, true, level_code, is_campaign)
+	
+	if is_campaign:
+		save_meta_util.update_all_with_level(level_id, working_folder, false)
 
 
 func remove_level(level_id: String, folder: String = working_folder):
 	level_list_util.wipe_level_files(level_id, folder)
 	level_grid.get_node(level_id).call_deferred("queue_free")
+	
+	if is_campaign:
+		save_meta_util.update_all_with_level(level_id, working_folder, true)
+		var info_dict: Dictionary = campaign_info_util.load_info_file(working_folder)
+		if info_dict.get("hub_level", "") == level_id:
+			info_dict["hub_level"] = ""
+		if info_dict.get("intro_level", "") == level_id:
+			info_dict["intro_level"] = ""
+		campaign_info_util.save_info_file(working_folder, info_dict)
 
 
 func go_back():

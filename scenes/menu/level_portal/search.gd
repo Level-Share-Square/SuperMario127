@@ -25,7 +25,7 @@ onready var search_nodes: Array = [
 
 
 func search():
-	http_request.load_page(http_request.page, http_request.sort_type, query.text)
+	http_request.load_page(http_request.page, http_request.sort_type, query.text.replace(" ", "+").strip_edges().strip_escapes())
 
 
 func screen_opened():

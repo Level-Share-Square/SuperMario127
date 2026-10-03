@@ -107,7 +107,7 @@ func _general_update(delta):
 	
 	if activated and !last_activated and character.stamina == 0:
 		character.rocket_particles.emitting = true
-		character.fludd_sound.play(((100 - character.stamina) / 100) * 2.79)
+		character.fludd_sound.play(((100 - character.stamina) / 100))
 		last_activated = true
 	elif last_activated:
 		if deactivate_frames > 0:

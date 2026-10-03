@@ -1,0 +1,18 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://scenes/editor/items/placeable_object.gd" type="Script" id=1]
+[ext_resource path="res://scenes/actors/objects/metal_powerup/icon.png" type="Texture" id=2]
+
+[resource]
+script = ExtResource( 1 )
+item_name = "Metal Gear"
+change_to = "obj_vanish_pepper"
+items_in_sequence = 4
+index_in_sequence = 1
+icons = [ ExtResource( 2 ) ]
+previews = [ ExtResource( 2 ) ]
+priority = 126
+object_id = 34
+preview_offset = Vector2( 0, 0 )
+property_overrides = {
+}

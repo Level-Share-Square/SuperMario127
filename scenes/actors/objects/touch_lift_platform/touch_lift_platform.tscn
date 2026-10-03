@@ -29,7 +29,7 @@ patch_margin_right = 8
 axis_stretch_horizontal = 1
 
 [node name="SpriteRecolor" type="NinePatchRect" parent="."]
-self_modulate = Color( 0, 1, 0, 1 )
+self_modulate = Color( 0, 0.99, 0, 1 )
 margin_left = -23.0
 margin_top = -7.0
 margin_right = 23.0
@@ -48,9 +48,11 @@ process_parent = true
 physics_process_parent = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource( 1 )
 
 [node name="Area2D" type="Area2D" parent="."]
+visible = false
 collision_layer = 16
 collision_mask = 2
 script = ExtResource( 3 )

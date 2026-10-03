@@ -30,7 +30,7 @@ func _physics_process(_delta):
 		#disable collisions with the passthrough blocks again
 		character.set_all_collision_masks(6, false)
 	else:
-		#no collisions, so leave collisions enabled and disable physics process
+		#no collisions, so leave collisions is_enabled_and_on_ground() and disable physics process
 		set_physics_process(false)
 
 func apply_visuals():

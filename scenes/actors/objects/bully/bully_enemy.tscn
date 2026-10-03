@@ -1,0 +1,823 @@
+[gd_scene load_steps=76 format=2]
+
+[ext_resource path="res://scenes/actors/objects/enemy/enemy_base.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/actors/objects/bully/states/knockback_state.gd" type="Script" id=2]
+[ext_resource path="res://scenes/actors/objects/bully/damage.gd" type="Script" id=3]
+[ext_resource path="res://scenes/actors/objects/bully/animations/normal.tres" type="SpriteFrames" id=4]
+[ext_resource path="res://scenes/actors/objects/bully/states/wander_state.gd" type="Script" id=5]
+[ext_resource path="res://scenes/actors/objects/bully/states/idle_state.gd" type="Script" id=6]
+[ext_resource path="res://scenes/actors/objects/goomba/player_detector.gd" type="Script" id=7]
+[ext_resource path="res://scenes/actors/objects/bully/states/die_state.gd" type="Script" id=8]
+[ext_resource path="res://scenes/actors/objects/bully/bully_enemy.gd" type="Script" id=9]
+[ext_resource path="res://scenes/actors/objects/bully/states/chase_state.gd" type="Script" id=10]
+[ext_resource path="res://scenes/actors/mario/SpriteAnimSync.gd" type="Script" id=11]
+[ext_resource path="res://assets/sounds/bully/3W_SeEm_Lavasplash_Small01.wav" type="AudioStream" id=12]
+[ext_resource path="res://assets/sounds/bully/3W_SeEm_Lavasplash_Sink.wav" type="AudioStream" id=13]
+[ext_resource path="res://scenes/actors/objects/goomba/animations/poof.png" type="Texture" id=14]
+[ext_resource path="res://scenes/actors/objects/bully/animations/normal_horns_recolorable.tres" type="SpriteFrames" id=15]
+[ext_resource path="res://scenes/actors/objects/bully/kill_particles.tscn" type="PackedScene" id=16]
+[ext_resource path="res://scenes/actors/objects/bully/animations/bully_feet_recolorable.png" type="Texture" id=17]
+[ext_resource path="res://classes/sound_pitcher_directional.gd" type="Script" id=18]
+[ext_resource path="res://assets/sounds/SM64_Thwomp_Grunt.ogg" type="AudioStream" id=19]
+[ext_resource path="res://scenes/actors/objects/goomba/player_forgetter.gd" type="Script" id=20]
+[ext_resource path="res://assets/sounds/bully/SeEmDonketsuFallLv.wav" type="AudioStream" id=21]
+[ext_resource path="res://assets/sounds/bully/SeEmDonketsuPushed.wav" type="AudioStream" id=22]
+[ext_resource path="res://assets/sounds/bully/SeEmDonketsuHit.wav" type="AudioStream" id=23]
+[ext_resource path="res://assets/sounds/bully/SeBmDonketsuRunR.wav" type="AudioStream" id=24]
+[ext_resource path="res://assets/sounds/bully/SeBmDonketsuStepR.wav" type="AudioStream" id=25]
+[ext_resource path="res://assets/sounds/bully/3W_SeEmDonketsuKouraHit.wav" type="AudioStream" id=26]
+[ext_resource path="res://scenes/actors/objects/bully/bully_juice.gd" type="Script" id=27]
+[ext_resource path="res://scenes/actors/objects/enemy/enemy_bouncer.gd" type="Script" id=28]
+
+[sub_resource type="CapsuleShape2D" id=64]
+height = 2.0
+
+[sub_resource type="RectangleShape2D" id=57]
+resource_local_to_scene = true
+extents = Vector2( 7, 9.5 )
+
+[sub_resource type="RectangleShape2D" id=52]
+resource_local_to_scene = true
+extents = Vector2( 100, 100 )
+
+[sub_resource type="CircleShape2D" id=63]
+radius = 256.0
+
+[sub_resource type="CircleShape2D" id=102]
+radius = 384.0
+
+[sub_resource type="CircleShape2D" id=53]
+resource_local_to_scene = true
+radius = 3.0
+
+[sub_resource type="RectangleShape2D" id=65]
+extents = Vector2( 11, 5 )
+
+[sub_resource type="RectangleShape2D" id=66]
+resource_local_to_scene = true
+extents = Vector2( 11, 8 )
+
+[sub_resource type="AtlasTexture" id=71]
+atlas = ExtResource( 17 )
+region = Rect2( 0, 224, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=72]
+atlas = ExtResource( 17 )
+region = Rect2( 32, 224, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=73]
+atlas = ExtResource( 17 )
+region = Rect2( 64, 224, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=74]
+atlas = ExtResource( 17 )
+region = Rect2( 96, 224, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=79]
+atlas = ExtResource( 17 )
+region = Rect2( 0, 128, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=80]
+atlas = ExtResource( 17 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=81]
+atlas = ExtResource( 17 )
+region = Rect2( 32, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=82]
+atlas = ExtResource( 17 )
+region = Rect2( 64, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=83]
+atlas = ExtResource( 17 )
+region = Rect2( 96, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=84]
+atlas = ExtResource( 17 )
+region = Rect2( 0, 160, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=85]
+atlas = ExtResource( 17 )
+region = Rect2( 0, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=86]
+atlas = ExtResource( 17 )
+region = Rect2( 32, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=87]
+atlas = ExtResource( 17 )
+region = Rect2( 0, 96, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=88]
+atlas = ExtResource( 17 )
+region = Rect2( 32, 96, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=89]
+atlas = ExtResource( 17 )
+region = Rect2( 64, 96, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=90]
+atlas = ExtResource( 17 )
+region = Rect2( 96, 96, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=91]
+atlas = ExtResource( 17 )
+region = Rect2( 128, 96, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=92]
+atlas = ExtResource( 17 )
+region = Rect2( 160, 96, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=99]
+atlas = ExtResource( 17 )
+region = Rect2( 0, 192, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=100]
+atlas = ExtResource( 17 )
+region = Rect2( 32, 192, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=93]
+atlas = ExtResource( 17 )
+region = Rect2( 96, 64, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=94]
+atlas = ExtResource( 17 )
+region = Rect2( 128, 64, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=95]
+atlas = ExtResource( 17 )
+region = Rect2( 160, 64, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=96]
+atlas = ExtResource( 17 )
+region = Rect2( 0, 64, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=97]
+atlas = ExtResource( 17 )
+region = Rect2( 32, 64, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=98]
+atlas = ExtResource( 17 )
+region = Rect2( 64, 64, 32, 32 )
+
+[sub_resource type="SpriteFrames" id=75]
+animations = [ {
+"frames": [ SubResource( 71 ), SubResource( 72 ), SubResource( 73 ), SubResource( 74 ) ],
+"loop": true,
+"name": "burn",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 79 ) ],
+"loop": true,
+"name": "fall",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 80 ), SubResource( 81 ), SubResource( 82 ), SubResource( 83 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 84 ) ],
+"loop": true,
+"name": "jump",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 85 ), SubResource( 85 ), SubResource( 85 ), SubResource( 86 ), SubResource( 86 ), SubResource( 85 ), SubResource( 85 ), SubResource( 85 ), SubResource( 86 ), SubResource( 86 ) ],
+"loop": true,
+"name": "knockback",
+"speed": 20.0
+}, {
+"frames": [ SubResource( 87 ), SubResource( 88 ), SubResource( 89 ), SubResource( 90 ), SubResource( 91 ), SubResource( 92 ) ],
+"loop": true,
+"name": "run",
+"speed": 14.0
+}, {
+"frames": [ SubResource( 99 ), SubResource( 100 ) ],
+"loop": true,
+"name": "speak",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 93 ), SubResource( 94 ), SubResource( 95 ), SubResource( 96 ), SubResource( 97 ), SubResource( 98 ) ],
+"loop": true,
+"name": "walk",
+"speed": 8.0
+} ]
+
+[sub_resource type="Shader" id=69]
+code = "shader_type canvas_item;
+render_mode blend_add;
+
+void fragment() {
+	float alpha = texture(TEXTURE, UV).a;
+	
+	if (alpha > 0.0) {
+		COLOR = vec4(1.0);
+	} else {
+		discard;
+	}
+}"
+
+[sub_resource type="ShaderMaterial" id=70]
+shader = SubResource( 69 )
+
+[sub_resource type="CircleShape2D" id=67]
+resource_local_to_scene = true
+radius = 11.0
+
+[sub_resource type="Animation" id=61]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, -9 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimatedSprite:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, -7 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AnimatedSprite:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AnimatedSprite:animation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "idle" ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Poof:emitting")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("AnimatedSprite:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Sounds/Sink:volume_db")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("AnimatedSprite/Overlay:modulate")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=76]
+resource_name = "die"
+
+[sub_resource type="Animation" id=68]
+resource_name = "incinerated"
+length = 1.75
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.754 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("States/DieState")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.753 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "spawn_coin"
+} ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AnimatedSprite:animation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "burn" ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AnimatedSprite/Overlay:modulate:a")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Poof:emitting")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0.75 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/5/type = "method"
+tracks/5/path = NodePath("Sounds/Burn")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ 0.0 ],
+"method": "play"
+} ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Sounds/Sink:volume_db")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 1.7 ),
+"transitions": PoolRealArray( 3.86374, 1 ),
+"update": 0,
+"values": [ -4.0, -80.0 ]
+}
+tracks/7/type = "audio"
+tracks/7/path = NodePath("Sounds/Sink")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 13 )
+} ],
+"times": PoolRealArray( 0 )
+}
+tracks/8/type = "method"
+tracks/8/path = NodePath("Sounds/Poof")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0.7 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ 0.0 ],
+"method": "play"
+} ]
+}
+
+[sub_resource type="Animation" id=58]
+resource_name = "pit"
+length = 0.9
+step = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.333333 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("States/DieState")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.301 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "spawn_coin"
+} ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath("Sounds/Fall")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.007 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ 0.0 ],
+"method": "play"
+} ]
+}
+
+[sub_resource type="CanvasItemMaterial" id=60]
+light_mode = 1
+particles_animation = true
+particles_anim_h_frames = 5
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id=77]
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=78]
+gradient = SubResource( 77 )
+
+[sub_resource type="ParticlesMaterial" id=50]
+emission_shape = 2
+emission_box_extents = Vector3( 8, 8, 1 )
+flag_disable_z = true
+direction = Vector3( 0, -1, 0 )
+spread = 0.0
+gravity = Vector3( 0, 0, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 0.75
+color_ramp = SubResource( 78 )
+anim_speed = 0.8
+
+[sub_resource type="RectangleShape2D" id=101]
+extents = Vector2( 11, 13 )
+
+[node name="BullyEnemy" instance=ExtResource( 1 )]
+collision_mask = 17
+script = ExtResource( 9 )
+horn_color = Color( 1, 1, 0, 1 )
+feet_color = Color( 0, 1, 0, 1 )
+
+[node name="TerrainCollider" parent="." index="0"]
+position = Vector2( 0, -11 )
+shape = SubResource( 64 )
+
+[node name="LiquidsDetector" parent="." index="1"]
+monitoring = true
+
+[node name="CollisionShape2D" parent="LiquidsDetector" index="0"]
+position = Vector2( 0, -9.5 )
+shape = SubResource( 57 )
+
+[node name="PlatformDetector" parent="." index="2"]
+visible = false
+
+[node name="CollisionShape2D" parent="PlatformDetector" index="0"]
+shape = SubResource( 52 )
+
+[node name="PlayerDetector" type="Area2D" parent="." index="3"]
+unique_name_in_owner = true
+position = Vector2( 0, -13 )
+collision_layer = 0
+collision_mask = 2
+script = ExtResource( 7 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector" index="0"]
+shape = SubResource( 63 )
+
+[node name="SightRay" type="RayCast2D" parent="PlayerDetector" index="1"]
+enabled = true
+
+[node name="PlayerForgetter" type="Area2D" parent="." index="4"]
+unique_name_in_owner = true
+visible = false
+position = Vector2( 0, -13 )
+collision_layer = 0
+collision_mask = 2
+script = ExtResource( 20 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerForgetter" index="0"]
+shape = SubResource( 102 )
+
+[node name="FloorDetector" parent="." index="5"]
+cast_to = Vector2( 0, 8 )
+
+[node name="IdleState" type="Node2D" parent="States" index="0"]
+script = ExtResource( 6 )
+friction = 2.5
+min_idle_time = 120
+max_idle_time = 180
+
+[node name="WanderState" type="Node2D" parent="States" index="1"]
+script = ExtResource( 5 )
+move_speed = 24.0
+accel = 8.0
+ledge_turning = true
+min_wander_time = 240
+max_wander_time = 360
+
+[node name="Ledge" type="RayCast2D" parent="States/WanderState" index="0"]
+position = Vector2( -12, -8 )
+cast_to = Vector2( 0, 32 )
+collision_mask = 17
+
+[node name="Wall" type="RayCast2D" parent="States/WanderState" index="1"]
+position = Vector2( 0, -10 )
+cast_to = Vector2( -12, 0 )
+collision_mask = 21
+
+[node name="ChaseState" type="Node2D" parent="States" index="2"]
+script = ExtResource( 10 )
+move_speed = 32.0
+chase_speed = 96.0
+accel = 8.0
+
+[node name="Ledge" type="RayCast2D" parent="States/ChaseState" index="0"]
+position = Vector2( -12, -8 )
+enabled = true
+cast_to = Vector2( 0, 32 )
+collision_mask = 17
+
+[node name="Wall" type="RayCast2D" parent="States/ChaseState" index="1"]
+position = Vector2( 0, -10 )
+enabled = true
+cast_to = Vector2( -12, 0 )
+collision_mask = 17
+
+[node name="KnockbackState" type="Node2D" parent="States" index="3"]
+script = ExtResource( 2 )
+can_attack = false
+can_be_hurt = false
+
+[node name="BumpKnockbackState" type="Node2D" parent="States" index="4"]
+script = ExtResource( 2 )
+can_attack = false
+can_be_hurt = false
+velocity_threshold = 10000
+
+[node name="RamKnockbackState" type="Node2D" parent="States" index="5"]
+script = ExtResource( 2 )
+can_attack = false
+can_be_hurt = false
+anim_name = "jump"
+
+[node name="DieState" type="Node2D" parent="States" index="6"]
+script = ExtResource( 8 )
+can_attack = false
+can_be_hurt = false
+friction = 4.0
+air_friction = 4.0
+
+[node name="Damage" parent="." index="7"]
+position = Vector2( 0, 1 )
+script = ExtResource( 3 )
+damage = 0
+knockback_power = Vector2( 350, 200 )
+set_player_knockback_state = false
+spring_bounce_windup_length = 0.125
+spring_bounce_depth = 8.0
+bully_jump_knockback = Vector2( 150, 0 )
+bully_spin_knockback = Vector2( 72, -150 )
+bully_gp_knockback = Vector2( 200, 0 )
+bully_ram_knockback = Vector2( 115, 0 )
+player_knockback = Vector2( 225, 235 )
+player_spin_knockback_mult = Vector2( 1, 0.75 )
+
+[node name="Crush" parent="Damage" index="0"]
+position = Vector2( 0, -1 )
+
+[node name="CollisionShape2D" parent="Damage/Crush" index="0"]
+position = Vector2( 0, -10 )
+shape = SubResource( 53 )
+
+[node name="CollisionShape2D" parent="Damage/Stomp" index="0"]
+position = Vector2( 0, -22 )
+shape = SubResource( 65 )
+
+[node name="Attack" parent="Damage" index="2"]
+position = Vector2( 0, -1 )
+
+[node name="CollisionShape2D" parent="Damage/Attack" index="0"]
+shape = SubResource( 66 )
+
+[node name="AnimatedSprite" parent="." index="8"]
+position = Vector2( 0, -9 )
+frames = ExtResource( 4 )
+animation = "idle"
+playing = true
+offset = Vector2( 0, -7 )
+script = ExtResource( 27 )
+
+[node name="RecolorSpriteHorns" type="AnimatedSprite" parent="AnimatedSprite" index="0"]
+self_modulate = Color( 0, 0.929412, 1, 1 )
+frames = ExtResource( 15 )
+animation = "idle"
+frame = 1
+offset = Vector2( 0, -7 )
+script = ExtResource( 11 )
+
+[node name="RecolorSpriteFeet" type="AnimatedSprite" parent="AnimatedSprite" index="1"]
+self_modulate = Color( 0, 0.415686, 1, 1 )
+frames = SubResource( 75 )
+animation = "idle"
+frame = 1
+offset = Vector2( 0, -7 )
+script = ExtResource( 11 )
+
+[node name="Overlay" type="AnimatedSprite" parent="AnimatedSprite" index="2"]
+modulate = Color( 1, 1, 1, 0 )
+self_modulate = Color( 1, 0, 0, 1 )
+material = SubResource( 70 )
+frames = ExtResource( 4 )
+animation = "idle"
+frame = 1
+offset = Vector2( 0, -7 )
+script = ExtResource( 11 )
+
+[node name="DialogueDetector" parent="AnimatedSprite" index="3"]
+visible = false
+position = Vector2( 0, -11 )
+
+[node name="CollisionShape2D" parent="AnimatedSprite/DialogueDetector" index="0"]
+position = Vector2( 0, 6 )
+shape = SubResource( 67 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="9"]
+unique_name_in_owner = true
+anims/RESET = SubResource( 61 )
+anims/die = SubResource( 76 )
+anims/incinerated = SubResource( 68 )
+anims/pit = SubResource( 58 )
+
+[node name="Poof" type="CPUParticles2D" parent="." index="10"]
+material = SubResource( 60 )
+position = Vector2( -2.84217e-14, -9 )
+emitting = false
+amount = 4
+one_shot = true
+explosiveness = 1.0
+local_coords = false
+draw_order = 1
+texture = ExtResource( 14 )
+emission_shape = 1
+emission_sphere_radius = 5.0
+spread = 180.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 20.0
+initial_velocity_random = 1.0
+anim_speed = 2.0
+
+[node name="VisibilityEnabler2D" parent="." index="11"]
+position = Vector2( 0, -20 )
+
+[node name="Grunt" type="AudioStreamPlayer2D" parent="Sounds" index="0"]
+unique_name_in_owner = true
+stream = ExtResource( 19 )
+volume_db = -2.0
+bus = "Sounds"
+script = ExtResource( 18 )
+min_pitch = 1.1
+max_pitch = 1.4
+
+[node name="Fall" type="AudioStreamPlayer2D" parent="Sounds" index="1"]
+stream = ExtResource( 21 )
+volume_db = -2.0
+bus = "Sounds"
+
+[node name="Burn" type="AudioStreamPlayer2D" parent="Sounds" index="2"]
+stream = ExtResource( 12 )
+volume_db = -2.0
+bus = "Sounds"
+script = ExtResource( 18 )
+
+[node name="Sink" type="AudioStreamPlayer2D" parent="Sounds" index="3"]
+stream = ExtResource( 13 )
+bus = "Sounds"
+
+[node name="Poof" type="AudioStreamPlayer2D" parent="Sounds" index="4"]
+stream = ExtResource( 22 )
+volume_db = -4.0
+bus = "Sounds"
+script = ExtResource( 18 )
+
+[node name="Hit" type="AudioStreamPlayer2D" parent="Sounds" index="5"]
+unique_name_in_owner = true
+stream = ExtResource( 23 )
+volume_db = -4.0
+bus = "Sounds"
+script = ExtResource( 18 )
+
+[node name="Bonk" type="AudioStreamPlayer2D" parent="Sounds" index="6"]
+unique_name_in_owner = true
+stream = ExtResource( 26 )
+volume_db = -6.0
+bus = "Sounds"
+script = ExtResource( 18 )
+
+[node name="Run" type="AudioStreamPlayer2D" parent="Sounds" index="7"]
+unique_name_in_owner = true
+stream = ExtResource( 24 )
+volume_db = -4.0
+bus = "Sounds"
+script = ExtResource( 18 )
+
+[node name="Walk" type="AudioStreamPlayer2D" parent="Sounds" index="8"]
+unique_name_in_owner = true
+stream = ExtResource( 25 )
+volume_db = -12.0
+bus = "Sounds"
+script = ExtResource( 18 )
+
+[node name="BullyKillParticles" parent="." index="14" instance=ExtResource( 16 )]
+
+[node name="SpawnParticles" parent="." index="15"]
+position = Vector2( 0, -9 )
+process_material = SubResource( 50 )
+
+[node name="EnemyBouncer" type="Area2D" parent="." index="16"]
+unique_name_in_owner = true
+collision_layer = 4
+collision_mask = 4
+script = ExtResource( 28 )
+blacklisted_states = PoolStringArray( "DieState" )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyBouncer" index="0"]
+position = Vector2( 0, -13 )
+shape = SubResource( 101 )
+
+[node name="CollisionCheck" type="Timer" parent="EnemyBouncer" index="1"]
+autostart = true
+
+[connection signal="state_changed" from="." to="EnemyBouncer" method="state_changed"]
+[connection signal="area_entered" from="EnemyBouncer" to="EnemyBouncer" method="area_entered"]
+[connection signal="bounced" from="EnemyBouncer" to="." method="set_state_by_name" binds= [ "BumpKnockbackState" ]]
+[connection signal="timeout" from="EnemyBouncer/CollisionCheck" to="EnemyBouncer" method="check_collisions"]

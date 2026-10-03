@@ -16,25 +16,26 @@ var loaded_activated = true
 
 var respawn_timer = 0.0
 
-func _set_properties():
-	savable_properties = ["activated"]
-	editable_properties = ["activated"]
+func _register_properties():
+	register_property(4, "activated", activated)
 
-func _set_property_values():
-	set_property("activated", activated)
-	
-func _ready():
+func _register_property_info():
+	set_property_info("activated", PropertyInfo.new("If false, this box will be a hologram until a F.L.U.D.D. of it's type is found.\nThis information persists across level loads.", 1, -INF, INF, ["", ""], ["", ""], false, "Activated"))
+
+
+func _object_ready():
 	if is_preview:
 		z_index = 0
 		sprite.z_index = 0
 	rotation_degrees = 0
-	if mode != 1:
+	if mode != 1 and is_enabled_and_on_ground():
 		var _connect = area.connect("body_entered", self, "enter_area")
 		var _connect2 = area.connect("body_exited", self, "exit_area")
 		
 		var _connect3 = detector.connect("body_entered", self, "enter_detector")
-	if !activated and !Singleton.CurrentLevelData.level_data.vars.is_fludd_activated(1):
-			Singleton.CurrentLevelData.level_data.vars.connect("turbo_fludd_activated", self, "_on_fludd_activated", [], CONNECT_ONESHOT)
+		
+		if !activated and !CurrentLevelData.vars.is_fludd_activated(2):
+			CurrentLevelData.vars.connect("turbo_fludd_activated", self, "_on_fludd_activated", [], CONNECT_ONESHOT)
 			sprite.modulate.a = 0.2
 			loaded_activated = false
 
@@ -50,7 +51,7 @@ func exit_area(body):
 func enter_detector(body):
 	if !loaded_activated:
 		return
-	if body.name.begins_with("Character") and respawn_timer == 0 and enabled and body.velocity.y > 0:
+	if body.name.begins_with("Character") and respawn_timer == 0 and is_enabled_and_on_ground() and body.velocity.y > 0:
 		respawn_timer = 10.0
 		if body.state != body.get_state_node("GroundPoundState"):
 			body.velocity.y = -230
@@ -62,17 +63,7 @@ func enter_detector(body):
 			body.add_nozzle("TurboNozzle")
 			
 			#create nozzle after bouncing
-			var object = LevelObject.new()
-			object.type_id = 20
-			object.properties = []
-			object.properties.append(position + Vector2(0, 4))
-			object.properties.append(Vector2(1, 1))
-			object.properties.append(0)
-			object.properties.append(true)
-			object.properties.append(true)
-			object.properties.append(Vector2(0, -250))
-			object.properties.append("TurboNozzle")
-			get_parent().create_object(object, false)
+			create_nozzle("TurboNozzle")
 		
 		else:
 			collect_sound.play()
@@ -82,12 +73,19 @@ func enter_detector(body):
 		sprite.visible = false
 		sound.play()
 		
-		# activates all deactivated hover turbo loaded in the level
-		Singleton.CurrentLevelData.level_data.vars.activate_fludd(1)
+		# activates all deactivated turbo fludds loaded in the level
+		CurrentLevelData.vars.activate_fludd(2)
 		
 func _on_fludd_activated():
 	sprite.modulate.a = 1
 	loaded_activated = true
+	
+func create_nozzle(nozzle: String):
+	var object_setup = create_object(position + Vector2(0, 4), 20, 0)
+	var object = object_setup[0]
+	object.set_property("velocity", Vector2(0, -250))
+	object.set_property("nozzle_type", object.nozzle_map.find(nozzle))
+	object_setup[1].call_func(object)
 		
 func _physics_process(delta):
 	if respawn_timer > 0:
@@ -114,3 +112,8 @@ func _process(_delta):
 			collision_shape.disabled = true
 		if character.velocity.y > 10 and direction.y < -0.5:
 			collision_shape.disabled = true
+
+func is_middle(check):
+	.is_middle(check)
+	
+	$StompDetector/CollisionShape2D.disabled = !check

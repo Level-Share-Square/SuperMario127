@@ -5,83 +5,131 @@ export var used_sparkles : Texture
 
 onready var use_area = $UseArea
 onready var sound = $Use
+onready var display = $Display
 
 var is_used := false
 
 var save_water_level := true
 var save_switch_state := true
-var spawn_y_offset := 0.0
+var spawn_offset := Vector2(0,0)
 var id = 0
 
-func _set_properties():
-	savable_properties = ["save_water_level", "spawn_y_offset", "save_switch_state", "id"]
-	editable_properties = ["save_water_level", "save_switch_state", "spawn_y_offset"]
-	
-func _set_property_values():
-	set_property("save_water_level", save_water_level, true)
-	set_property("spawn_y_offset", spawn_y_offset, true)
-	set_property("save_switch_state", save_switch_state, true)	
 
-func _ready():
-	if is_preview: return
+#func _set_properties():
+#	savable_properties = ["save_water_level", "spawn_offset", "save_switch_state", "id"]
+#	editable_properties = ["save_water_level", "save_switch_state", "spawn_offset"]
+
+
+func _register_properties():
+	register_property(4, "save_water_level", save_water_level, true)
+	register_property(5, "spawn_offset", spawn_offset, true)
+	register_property(6, "save_switch_state", save_switch_state, true)
+
+
+func _register_property_info() -> void:
+	set_property_info("save_water_level", PropertyInfo.new("Determines if changes involving Crystal Taps\nmade before touching this Checkpoint are preserved upon respawning.", 1, -INF, INF, ["", ""], ["", ""], false, ""))
+	set_property_info("spawn_offset", PropertyInfo.new("The distance away from this checkpoint the player should respawn from.", 1, -INF, INF, ["X", "Y"], ["", ""], false, ""))
+	set_property_info("save_switch_state", PropertyInfo.new("Determines if changes involving On/Off platforms, blocks, switches, etc.\nmade before touching this Checkpoint are preserved upon respawning.", 1, -INF, INF, ["", ""], ["", ""], false, ""))
+
+
+func _object_ready():
+	display.visible = false
+	if is_enabled_and_on_ground():
+		var _connect = use_area.connect("body_entered", self, "set_checkpoint")
 	
-	var _connect = use_area.connect("body_entered", self, "set_checkpoint")
-	Singleton.CurrentLevelData.set_checkpoint_ids()
-	id = level_object.get_ref().properties[6]
-	if Singleton.CheckpointSaved.current_checkpoint_id == id:
+	id = hash([position, CurrentLevelData.area_id])
+	if CurrentLevelData.checkpoint_data.current_checkpoint_id == id:
 		is_used = true
 	
-	Singleton.CurrentLevelData.level_data.vars.checkpoints.append([id, self])
+	CurrentLevelData.vars.checkpoints.append([id, self])
+	
 
-func _physics_process(delta):
+
+func _editor_ready():
+	display.visible = true
+
+func _object_process(delta: float):
+	update_ring_particles(delta)
+
+
+func _editor_process(delta: float):
+	display.global_scale = Vector2.ONE
+	update_ring_particles(delta)
+
+
+func update_ring_particles(delta: float):
+	if not $"%VisibilityEnabler2D".is_on_screen():
+		return
+	
 	var sprite = $Rotation/RotationRight
 	var particles = $Rotation/RotationRight/Particles
 	
 	particles.texture = used_sparkles if is_used else normal_sparkles
-	sprite.rotation_degrees += 8
+#	sprite.reset_physics_interpolation()
+	sprite.rotate(deg2rad(8) * delta * 60)
+	
 	sprite.scale = sprite.scale.move_toward(Vector2(1, 1), delta * 4) if !is_used else sprite.scale.move_toward(Vector2(1.15, 1.15), delta * 8)
 
 	var sprite2 = $Rotation/RotationLeft
 	var particles2 = $Rotation/RotationLeft/Particles
 	
 	particles2.texture = used_sparkles if is_used else normal_sparkles
-	sprite2.rotation_degrees -= 8
+#	sprite2.reset_physics_interpolation()
+	sprite2.rotate(deg2rad(-8) * delta * 60)
+	
 	sprite2.scale = sprite2.scale.move_toward(Vector2(1, 1), delta * 4) if !is_used else sprite2.scale.move_toward(Vector2(1.15, 1.15), delta * 8)
 
+
 func set_checkpoint(body):
-	if is_used or !enabled:
+	if is_used or !is_enabled_and_on_ground():
 		return
 	
 	is_used = true
 	
-	Singleton.CheckpointSaved.current_checkpoint_id = id
-	Singleton.CheckpointSaved.current_spawn_pos = global_position + Vector2(0, spawn_y_offset)
-	Singleton.CheckpointSaved.current_area = Singleton.CurrentLevelData.area
-	Singleton.CheckpointSaved.current_coins = Singleton.CurrentLevelData.level_data.vars.coins_collected
-	Singleton.CheckpointSaved.nozzles_collected = Singleton.CurrentLevelData.level_data.vars.nozzles_collected.duplicate(true)
-	Singleton.CheckpointSaved.current_red_coins = Singleton.CurrentLevelData.level_data.vars.red_coins_collected.duplicate(true)
-	Singleton.CheckpointSaved.current_shine_shards = Singleton.CurrentLevelData.level_data.vars.shine_shards_collected.duplicate(true)
-	Singleton.CheckpointSaved.current_purple_starbits = Singleton.CurrentLevelData.level_data.vars.purple_starbits_collected.duplicate(true)
+	CurrentLevelData.checkpoint_data.current_checkpoint_id = id
+	CurrentLevelData.checkpoint_data.current_spawn_pos = global_position + spawn_offset
+	CurrentLevelData.checkpoint_data.current_area = CurrentLevelData.area_id
+	CurrentLevelData.checkpoint_data.current_coins = CurrentLevelData.vars.coins_collected
+	CurrentLevelData.checkpoint_data.nozzles_collected = CurrentLevelData.vars.nozzles_collected.duplicate(true)
+	CurrentLevelData.checkpoint_data.current_red_coins = CurrentLevelData.vars.red_coins_collected.duplicate(true)
+	CurrentLevelData.checkpoint_data.current_shine_shards = CurrentLevelData.vars.shine_shards_collected.duplicate(true)
+	CurrentLevelData.checkpoint_data.current_purple_starbits = CurrentLevelData.vars.purple_starbits_collected.duplicate(true)
+	CurrentLevelData.checkpoint_data.current_local_keys = CurrentLevelData.vars.local_keys_collected.duplicate(true)
+	CurrentLevelData.checkpoint_data.current_layer = level_layer_ref.get_ref().layer_data.layer_metadata.layer_uuid
+	CurrentLevelData.checkpoint_data.current_layer_states = CurrentLevelData.vars.layer_states.duplicate(true)
+	CurrentLevelData.checkpoint_data.used_changers = CurrentLevelData.vars.used_changers
+	CurrentLevelData.checkpoint_data.nozzle_name = ""
+	if is_instance_valid(body.nozzle):
+		CurrentLevelData.checkpoint_data.nozzle_name = body.nozzle.name
+	CurrentLevelData.checkpoint_data.water_left = body.fuel
+	CurrentLevelData.checkpoint_data.area_time_left = -1
 	
-	while Singleton.CurrentLevelData.level_data.vars.liquid_positions.size() <= Singleton.CurrentLevelData.area:
-		Singleton.CurrentLevelData.level_data.vars.liquid_positions.append([])
+	var timer_manager = get_node("/root").get_node("Player").get_timer_manager()
+	if is_instance_valid(timer_manager):
+		var area_timer: Control = timer_manager.get_timer("area_timer")
+		if is_instance_valid(area_timer):
+			CurrentLevelData.checkpoint_data.area_time_left = area_timer.time
+	
+	while CurrentLevelData.vars.liquid_positions.size() <= CurrentLevelData.area_id:
+		CurrentLevelData.vars.liquid_positions.append([])
 	
 	if save_water_level:
-		Singleton.CurrentLevelData.level_data.vars.liquid_positions[Singleton.CurrentLevelData.area] = []
-		for liquid in Singleton.CurrentLevelData.level_data.vars.liquids:
-			Singleton.CurrentLevelData.level_data.vars.liquid_positions[Singleton.CurrentLevelData.area].append(liquid[1].save_pos)
+		CurrentLevelData.vars.liquid_positions[CurrentLevelData.area_id] = []
+		for liquid in CurrentLevelData.vars.liquids:
+			CurrentLevelData.vars.liquid_positions[CurrentLevelData.area_id].append(liquid[1].save_pos)
 	
 	if save_switch_state:
-		Singleton.CheckpointSaved.switch_state = Singleton.CurrentLevelData.level_data.vars.switch_state.duplicate(true)
-	Singleton.CheckpointSaved.liquid_positions = Singleton.CurrentLevelData.level_data.vars.liquid_positions.duplicate(true)
-	Singleton.CheckpointSaved.activated_shine_ids = Singleton.CurrentLevelData.level_data.vars.activated_shine_ids.duplicate(true)
+		CurrentLevelData.checkpoint_data.switch_state = CurrentLevelData.vars.switch_state.duplicate(true)
+	CurrentLevelData.checkpoint_data.liquid_positions = CurrentLevelData.vars.liquid_positions.duplicate(true)
+	CurrentLevelData.checkpoint_data.activated_shine_ids = CurrentLevelData.vars.activated_shine_ids.duplicate(true)
 	
-	for checkpoint in Singleton.CurrentLevelData.level_data.vars.checkpoints:
+	for checkpoint in CurrentLevelData.vars.checkpoints:
 		if checkpoint[1] != self:
 			checkpoint[1].unset_checkpoint()
 	
 	if visible:
 		sound.play()
+		body.sound_player.play_checkpoint_sound()
 
 func unset_checkpoint():
 	is_used = false

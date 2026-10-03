@@ -1,0 +1,29 @@
+[gd_resource type="Resource" load_steps=14 format=2]
+
+[ext_resource path="res://scenes/editor/items/placeable_object.gd" type="Script" id=1]
+[ext_resource path="res://scenes/actors/objects/vine_stem_end/palettes/vine_stem_end4.png" type="Texture" id=2]
+[ext_resource path="res://scenes/actors/objects/vine_stem_end/palettes/vine_stem_end5.png" type="Texture" id=3]
+[ext_resource path="res://scenes/actors/objects/vine_stem_end/palettes/vine_stem_end2.png" type="Texture" id=4]
+[ext_resource path="res://scenes/actors/objects/vine_stem_end/palettes/vine_stem_end3.png" type="Texture" id=5]
+[ext_resource path="res://scenes/actors/objects/vine_stem_end/palettes/vine_stem_end1.png" type="Texture" id=6]
+[ext_resource path="res://scenes/actors/objects/vine_stem_end/vine_stem_end.png" type="Texture" id=7]
+[ext_resource path="res://scenes/actors/objects/vine_stem_end/palettes/icon_1.png" type="Texture" id=8]
+[ext_resource path="res://scenes/actors/objects/vine_stem_end/palettes/icon_3.png" type="Texture" id=9]
+[ext_resource path="res://scenes/actors/objects/vine_stem_end/palettes/icon_4.png" type="Texture" id=10]
+[ext_resource path="res://scenes/actors/objects/vine_stem_end/palettes/icon_2.png" type="Texture" id=11]
+[ext_resource path="res://scenes/actors/objects/vine_stem_end/icon.png" type="Texture" id=12]
+[ext_resource path="res://scenes/actors/objects/vine_stem_end/palettes/icon_5.png" type="Texture" id=13]
+
+[resource]
+script = ExtResource( 1 )
+item_name = "Vine Stem End"
+change_to = "obj_vine_flower"
+items_in_sequence = 6
+index_in_sequence = 5
+icons = [ ExtResource( 12 ), ExtResource( 8 ), ExtResource( 11 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 13 ) ]
+previews = [ ExtResource( 7 ), ExtResource( 6 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 2 ), ExtResource( 3 ) ]
+priority = 86
+object_id = 123
+preview_offset = Vector2( 0, 0 )
+property_overrides = {
+}

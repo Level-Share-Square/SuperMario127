@@ -2,11 +2,11 @@
 
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://scenes/player/ui_new/text/dialogue_text.gd" type="Script" id=2]
-[ext_resource path="res://scenes/player/ui_new/text/sounds/SE_TutorialWindow.wav" type="AudioStream" id=3]
-[ext_resource path="res://scenes/player/ui_new/text/sounds/SE_TutorialCancel.wav" type="AudioStream" id=4]
+[ext_resource path="res://assets/sounds/dialogue/SE_TutorialWindow.wav" type="AudioStream" id=3]
+[ext_resource path="res://assets/sounds/dialogue/SE_TutorialCancel.wav" type="AudioStream" id=4]
 [ext_resource path="res://assets/fonts/super-mario-script-3-1402.ttf" type="DynamicFontData" id=5]
-[ext_resource path="res://scenes/player/ui_new/text/sounds/UI_Message_Default.wav" type="AudioStream" id=6]
-[ext_resource path="res://scenes/player/ui_new/text/sounds/SE_PageNExt2.wav" type="AudioStream" id=7]
+[ext_resource path="res://assets/sounds/dialogue/UI_Message_Default.wav" type="AudioStream" id=6]
+[ext_resource path="res://assets/sounds/dialogue/SE_PageNExt2.wav" type="AudioStream" id=7]
 
 [sub_resource type="StyleBoxFlat" id=39]
 bg_color = Color( 0, 0, 0, 0.627451 )

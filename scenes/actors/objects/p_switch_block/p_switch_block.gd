@@ -10,14 +10,23 @@ var current_scene
 
 var activated = false
 
-func _set_properties():
-	savable_properties = ["activated"]
-	editable_properties = ["activated"]
+#func _set_properties():
+#	savable_properties = ["activated"]
+#	editable_properties = ["activated"]
 
-func _set_property_values():
-	set_property("activated", activated, true)
+func _register_properties():
+	register_property(4, "activated", activated, true)
+	
+func _register_property_info():
+	set_property_info("activated", PropertyInfo.new("If true, this block exists unless a P-Switch is active.\nIf false, vice versa.", 1, -INF, INF, ["", ""], ["", ""], false, "Activated"))
+
+func property_changed(key, value):
+	p.visible = is_enabled_and_on_ground()
 
 func _ready() -> void:
+	connect("property_changed", self, "property_changed")
+	property_changed("enabled", enabled)
+	
 	current_scene = get_tree().get_current_scene()
 	if scale != Vector2.ONE: # Nothing to do on default scale
 		# Set inverse scale on the body so its overall scale is identity.
@@ -29,16 +38,20 @@ func _ready() -> void:
 		collision_shape.shape.extents = Vector2(collision_shape.shape.extents.x * scale.x,\
 												collision_shape.shape.extents.y * scale.y)
 
+func _object_ready():
+	._object_ready()
+	collision_shape.disabled = !is_on_ground_layer()
+	area_collision_shape.disabled = !is_enabled_and_on_ground()
+
 func _physics_process(delta):
-	if mode == 1 and activated and enabled:
+	if mode == 1 and activated and is_enabled_and_on_ground():
 		sprite.modulate = Color(1, 0.5, 0.5)
-	elif mode == 1 or !enabled:
+	elif mode == 1 or !is_enabled_and_on_ground():
 		sprite.modulate = Color(1, 1, 1)
-		
-	p.visible = enabled
+	
 	area_collision_shape.disabled = !collision_shape.disabled
 	
-	if !is_instance_valid(current_scene) or mode == 1 or !enabled: return
+	if !is_instance_valid(current_scene) or mode == 1 or !is_enabled_and_on_ground(): return
 	
 	var activated_color = Color(1, 1, 1, 1)
 	var deactivated_color = Color(1, 1, 1, 0)
@@ -55,3 +68,7 @@ func _physics_process(delta):
 	else:
 		sprite.modulate = activated_color if activated else deactivated_color
 		collision_shape.disabled = !activated
+
+func is_middle(check):
+	.is_middle(check)
+	collision_shape.disabled = !check

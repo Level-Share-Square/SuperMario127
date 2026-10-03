@@ -38,4 +38,3 @@ func _process(delta):
 		rect_position.x = lerp(rect_position.x, original_x + (sink_amount * direction), delta * lerp_speed)
 	
 	last_x = rect_position.x
-

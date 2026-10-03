@@ -1,13 +1,17 @@
 extends GameObject
 
+export var idle_texture: StreamTexture
+export var chase_texture: StreamTexture
+
 onready var area = $Area2D
 onready var sprite = $Sprite
 onready var particles = $Particles2D
 onready var particles2 = $Sparkles
 onready var revolve_sound = $Revolve
 onready var revolve_last_sound = $RevolveLast
+onready var chase_sound = $Chase
+onready var collect_sound = $Collect
 onready var animation_player = $AnimationPlayer
-var collected = false
 var poofed = false
 var character
 
@@ -15,55 +19,81 @@ var chase_anim_finished = false
 var chase_start_anim_angle = 0.0
 var chase_start_rotations = 0
 const CHASE_ANIM_ROTATION_RADIUS = 30
+const CHASE_ANIM_MAX_TILT: float = PI/6
+const CHASE_TILT_SPEED: float = 4.0
 var original_position
 
 var chase := false
 var chase_speed := 1.0
+var chase_turn_speed := 17.0
 var current_speed = 2.5
 
 var update_timer = 0.0
 var char_find_timer = 0.0
 
 var cached_pos := Vector2()
+var chase_angle: float
 
 var cc = false
 
-func _set_properties():
-	savable_properties = ["chase", "chase_speed"]
-	editable_properties = ["chase", "chase_speed"]
+#func _set_properties():
+#	savable_properties = ["chase", "chase_speed"]
+#	editable_properties = ["chase", "chase_speed"]
 	
-func _set_property_values():
-	set_property("chase", chase, true)
-	set_property("chase_speed", chase_speed, true)
+func _register_properties():
+	register_property(4, "chase", chase, true)
+	register_property(5, "chase_speed", chase_speed, true)
 	
 func is_vanish(body):
 	return body.powerup != null and body.powerup.id == "Vanish"
 
 func kill(body):
-	if enabled and body.name.begins_with("Character") and !body.dead and body.controllable and !is_vanish(body):
+	if is_enabled_and_on_ground() and body.name.begins_with("Character") and !body.dead and body.controllable and !is_vanish(body):
 		body.kill("green_demon")
 		enabled = false
 		chase = false
-		sprite.visible = false
-		particles.emitting = false
-		particles2.emitting = false
+		if visible:
+			collect_sound.play()
+		animation_player.play("collect")
+		chase_sound.stop()
 
 func _ready():
+	update_sprite()
+	
+func _editor_ready():
+	._editor_ready()
+	connect("property_changed", self, "on_property_changed")
+
+func _object_ready():
+	._object_ready()
+	
 	cc = Singleton.MiscShared.get_can_control()
 	original_position = position
 	particles.process_material.scale = (scale.x + scale.y) / 2 # Average works well enough
 	particles.amount = 6 * current_speed
-	if mode != 1:
+	particles.process_material = particles.process_material.duplicate()
+	if mode != 1 and is_enabled_and_on_ground():
 		var _connect = area.connect("body_entered", self, "kill")
 		if chase:
 			Singleton.MiscShared.play_green_demon_audio(revolve_sound, cc) #since the game doesn't detect a rotation at the start, we play the sound manually
 
-func _physics_process(delta):
+func _object_physics_process(delta):
+	if particles.emitting:
+		particles.process_material.angle = -sprite.rotation_degrees
+	
 	if cached_pos != Vector2() and chase and character != null:
-		var move_to = (cached_pos - global_position).normalized()
+		chase_angle = lerp_angle(chase_angle, global_position.direction_to(cached_pos).angle(), fps_util.PHYSICS_DELTA * chase_turn_speed)
+		
+		var move_to = Vector2.RIGHT.rotated(chase_angle)
 		global_position += move_to * current_speed * 2
 		
-	if mode != 1 and chase and !poofed:
+		var speed_factor: float = current_speed / chase_speed
+		sprite.rotation = lerp_angle(
+			sprite.rotation, CHASE_ANIM_MAX_TILT * speed_factor * move_to.x, 
+			fps_util.PHYSICS_DELTA * CHASE_TILT_SPEED
+		)
+	
+	if mode != 1 and chase and !poofed and is_enabled_and_on_ground():
 		if chase_anim_finished:
 			current_speed = lerp(current_speed, chase_speed, fps_util.PHYSICS_DELTA * 2) #this will make the transition from animation to movement not so jarring
 			particles.emitting = true
@@ -101,16 +131,17 @@ func _physics_process(delta):
 			if chase_start_anim_angle > PI * 2: #if the demon reaches the bottom of the rotation circle, add to the variable
 				chase_start_anim_angle = 0
 				chase_start_rotations += 1
+				
 				#plays a sound after each rotation
 				if chase_start_rotations >= 3:
 					Singleton.MiscShared.play_green_demon_audio(revolve_last_sound, cc)
 					Singleton.MiscShared.stop_green_demon_audio(revolve_sound) #to keep it consistent with the other sounds cutting off
 				else:
 					Singleton.MiscShared.play_green_demon_audio(revolve_sound, cc)
-					pass
 			
 			if chase_start_anim_angle > PI and chase_start_rotations >= 3: #if the demon is at the top of the rotation circle, and it's already rotated three times, stop the animation and go chase after mario
 				chase_anim_finished = true
+				chase_sound.play()
 				particles.amount = 6 * abs(chase_speed)
 			
 			#this calculates the position offset using the current angle, and then sets the position accordingly
@@ -130,3 +161,12 @@ func _physics_process(delta):
 		update_timer -= delta
 		if update_timer <= 0:
 			update_timer = 0
+
+func update_sprite():
+	if chase:
+		sprite.texture = chase_texture
+	else:
+		sprite.texture = idle_texture
+
+func on_property_changed(key, value):
+	update_sprite()

@@ -1,0 +1,18 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://scenes/editor/items/placeable_object.gd" type="Script" id=1]
+[ext_resource path="res://scenes/actors/objects/mushroom_curve/mushroom_curve.png" type="Texture" id=2]
+
+[resource]
+script = ExtResource( 1 )
+item_name = "Mushroom Curve"
+change_to = "obj_mushroom_top"
+items_in_sequence = 3
+index_in_sequence = 2
+icons = [ ExtResource( 2 ) ]
+previews = [ ExtResource( 2 ) ]
+priority = 122
+object_id = 8
+preview_offset = Vector2( 0, 0 )
+property_overrides = {
+}

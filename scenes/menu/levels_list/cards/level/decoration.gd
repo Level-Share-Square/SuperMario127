@@ -6,6 +6,7 @@ const SHINE_MATERIAL: ShaderMaterial = preload("res://scenes/menu/levels_list/ca
 ## nodes
 onready var level_card: LevelCard = get_owner()
 onready var visibility_enabler_2d := $"%VisibilityEnabler2D"
+onready var default_thumbnail = preload("res://.import/default_thumb.png-3e78509f186eb58e5a939ece4213411a.stex")
 
 onready var panel := $"%Panel"
 onready var thumbnail_edge := $"%Edge"
@@ -16,19 +17,24 @@ onready var foreground := $"%Foreground"
 onready var name_label := $"%Name"
 
 ## external
-var level_info: LevelInfo
-var http_thumbnails: HTTPThumbnails
+var level_metadata: LevelMetadata
+var level_save_data: LevelSaveData
 
 
 func _ready():
-	http_thumbnails = level_card.http_thumbnails
-	http_thumbnails.connect("image_loaded", self, "load_custom_thumbnail")
+	level_metadata = level_card.level_metadata
+	level_save_data = level_card.level_save_data
 	
-	level_info = level_card.level_info
-	name_label.text = level_info.level_name
-	check_thumbnail()
+	if not level_card.is_valid:
+		level_metadata = LevelMetadata.new()
+		level_metadata.level_name = "Invalid Level"
+		name_label.text = "Invalid Level"
+		thumbnail.texture = default_thumbnail
+	else:
+		load_custom_thumbnail(level_metadata.level_thumbnail_url)
+		name_label.text = level_metadata.level_name
 	
-	if level_card.has_save and level_info.is_fully_completed():
+	if level_card.has_save and level_save_data.is_fully_completed():
 		activate_completion_style()
 	else:
 		star.call_deferred("hide")
@@ -40,30 +46,20 @@ func activate_completion_style():
 	thumbnail_edge.modulate = COMPLETED_COLOR
 
 
-func check_thumbnail():
-	var thumbnail_url: String = level_info.thumbnail_url
-	if thumbnail_url != "":
-		var cached_image: ImageTexture = http_thumbnails.get_cached_image(thumbnail_url)
-		if cached_image == null:
-			http_thumbnails.add_to_queue(thumbnail_url, level_card.id)
-			http_thumbnails.load_next_image()
-		else:
-			load_custom_thumbnail(thumbnail_url, cached_image)
-	else:
-		visibility_enabler_2d.connect("viewport_entered", self, "load_default_thumbnail", [], CONNECT_ONESHOT)
-
-
 func load_default_thumbnail(_viewport: Viewport = null):
-	thumbnail.texture = level_info.get_level_background_texture()
+	thumbnail.texture = level_metadata.get_level_background_texture()
 	
-	foreground.modulate = level_info.get_level_background_modulate()
-	foreground.texture = level_info.get_level_foreground_texture()
+	foreground.modulate = level_metadata.get_level_background_modulate()
+	foreground.texture = level_metadata.get_level_foreground_texture()
 
 
-func load_custom_thumbnail(url: String, texture: ImageTexture):
-	if url != level_info.thumbnail_url: return
+func load_custom_thumbnail(url: String):
+	var folder = CurrentLevelData.working_folder if !level_list_util.file_exists(level_list_util.get_level_thumbnail_path(level_card.id, level_card.parent_folder)) else level_card.parent_folder 
+	var thumbnail_texture: ImageTexture = yield(AssetHandler.load_image(url, folder, level_card.id), "completed")
 	
-	thumbnail.texture = texture
-	foreground.visible = false
+	if !thumbnail_texture:
+		load_default_thumbnail()
+		return
 	
-	http_thumbnails.disconnect("image_loaded", self, "load_custom_thumbnail")
+	thumbnail.texture = thumbnail_texture
+	

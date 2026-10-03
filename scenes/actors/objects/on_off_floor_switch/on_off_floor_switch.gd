@@ -10,52 +10,60 @@ export var top_point : Vector2
 onready var switch = $Switch
 onready var anim_player = $AnimationPlayer
 onready var press_area = $PressArea
-onready var beep_sound = $Beep
 onready var press_sound = $Press
 
 var switch_mode : bool = true
 
 var self_activated : bool = false
 
-func _set_properties():
-	savable_properties = ["switch_mode"]
-	editable_properties = ["switch_mode"]
+#func _set_properties():
+#	savable_properties = ["switch_mode"]
+#	editable_properties = ["switch_mode"]
 
-func _set_property_values():
-	set_property("switch_mode", switch_mode, true)
-	set_bool_alias("switch_mode", "On", "Off")
+func _register_properties():
+	register_property(4, "switch_mode", switch_mode, true)
+	set_property_override("switch_mode", PropertyTab.OverrideTypes.BOOL_ALIAS, {true: "On", false: "Off"})
 
 func _ready():
-	beep_sound.volume_db = -80
 	if mode == 1:
 		press_sound.volume_db = -80
 	else:
-		press_sound.volume_db = 0
+		press_sound.volume_db = -8
 
 	rotation = 0
-	switch.region_rect.position.y = palette * 21
-	switch.region_rect.position.x = int(!switch_mode) * 20
 	connect("property_changed", self, "_on_property_changed")
-	Singleton.CurrentLevelData.level_data.vars.connect("switch_state_changed", self, "_on_switch_state_changed")
+	CurrentLevelData.vars.connect("switch_state_changed", self, "_on_switch_state_changed")
 	update_switch_state()
 
-	if Singleton.CurrentLevelData.level_data.vars.switch_state.has(palette):
+	if CurrentLevelData.vars.switch_state.has(palette):
 		switch_mode = !switch_mode
 		update_switch_state()
 
+	var _connect = connect("property_changed", self, "update_property")
+	update_property("palette", palette)
+
+
+func update_property(key, value):
+	match(key):
+		"palette":
+			switch.region_rect.position.y = palette * 21
+			switch.region_rect.position.x = int(!switch_mode) * 20
+
+
 func press(hit_pos : Vector2) -> void:
-	#print("Current_Switch_Palette: ", palette)
 	if !pressed:
 		pressed = true
 		anim_player.play("press", -1, 2.0)
 		self_activated = true
-		beep_sound.volume_db = 0
-		Singleton.CurrentLevelData.level_data.vars.toggle_switch_state(palette)#set_switch_state(palette, switch_mode)
+		
+		play_shared_sound("SwitchOnSound")
+		
+		CurrentLevelData.vars.toggle_switch_state(palette)#set_switch_state(palette, switch_mode)
 		boost_timer = 0.175
 
 func _physics_process(delta):
 	if mode == 1: return
-	if enabled:
+	if is_enabled_and_on_ground():
 		if pressed and is_instance_valid(character) and !character.dead:
 			# Mario stepped on the switch (it broke, how will he play vidya game now)
 			if boost_timer > 0:

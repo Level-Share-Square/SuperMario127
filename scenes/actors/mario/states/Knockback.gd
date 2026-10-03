@@ -24,6 +24,7 @@ func _start(_delta):
 	character.friction = 8
 	bounces_left = 2
 	bonked_time = 0
+	character.spin_area_shape.disabled = true
 
 func _update(delta):
 	bonked_time += delta

@@ -1,6 +1,6 @@
+class_name LevelTileset
 extends Resource
 
-class_name LevelTileset
 
 export var block_tile_id : int
 export var slab_tile_id : int

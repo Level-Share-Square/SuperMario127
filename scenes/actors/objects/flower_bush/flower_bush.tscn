@@ -1,19 +1,121 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=74 format=2]
 
-[ext_resource path="res://scenes/actors/objects/flower_bush/flower_bush.png" type="Texture" id=1]
-[ext_resource path="res://scenes/actors/objects/big_tree/big_tree.gd" type="Script" id=2]
-[ext_resource path="res://scenes/actors/objects/flower_bush/palettes/1.png" type="Texture" id=3]
-[ext_resource path="res://scenes/actors/objects/flower_bush/palettes/2.png" type="Texture" id=4]
-[ext_resource path="res://scenes/actors/objects/flower_bush/palettes/4.png" type="Texture" id=5]
-[ext_resource path="res://scenes/actors/objects/flower_bush/palettes/3.png" type="Texture" id=6]
-[ext_resource path="res://scenes/actors/objects/flower_bush/palettes/5.png" type="Texture" id=7]
+[ext_resource path="res://scenes/actors/objects/flower_bush/textures/bush_0.png" type="Texture" id=1]
+[ext_resource path="res://scenes/actors/objects/flower_bush/flower_bush.gd" type="Script" id=2]
+[ext_resource path="res://scenes/actors/objects/flower_bush/textures/bush_colourable_0.png" type="Texture" id=3]
+[ext_resource path="res://scenes/actors/objects/flower_bush/textures/bush_4.png" type="Texture" id=4]
+[ext_resource path="res://scenes/actors/objects/flower_bush/textures/bush_1.png" type="Texture" id=5]
+[ext_resource path="res://scenes/actors/objects/flower_bush/textures/bush_2.png" type="Texture" id=6]
+[ext_resource path="res://scenes/actors/objects/flower_bush/textures/bush_3.png" type="Texture" id=7]
+[ext_resource path="res://scenes/actors/objects/flower_bush/textures/bush_5.png" type="Texture" id=9]
+[ext_resource path="res://scenes/actors/objects/flower_bush/textures/bush_6.png" type="Texture" id=10]
+[ext_resource path="res://scenes/actors/objects/flower_bush/textures/bush_8.png" type="Texture" id=11]
+[ext_resource path="res://scenes/actors/objects/flower_bush/textures/bush_9.png" type="Texture" id=12]
+[ext_resource path="res://scenes/actors/objects/flower_bush/textures/bush_7.png" type="Texture" id=13]
+[ext_resource path="res://scenes/actors/objects/flower_bush/textures/bush_colourable_2.png" type="Texture" id=14]
+[ext_resource path="res://scenes/actors/objects/flower_bush/textures/bush_colourable_1.png" type="Texture" id=15]
+[ext_resource path="res://scenes/actors/objects/flower_bush/textures/bush_colourable_5.png" type="Texture" id=16]
+[ext_resource path="res://scenes/actors/objects/flower_bush/textures/bush_colourable_6.png" type="Texture" id=17]
+[ext_resource path="res://scenes/actors/objects/flower_bush/textures/bush_colourable_8.png" type="Texture" id=18]
+[ext_resource path="res://scenes/actors/objects/flower_bush/textures/bush_colourable_4.png" type="Texture" id=19]
+[ext_resource path="res://scenes/actors/objects/flower_bush/textures/bush_colourable_9.png" type="Texture" id=20]
+[ext_resource path="res://scenes/actors/objects/flower_bush/textures/bush_colourable_7.png" type="Texture" id=21]
+[ext_resource path="res://scenes/actors/objects/flower_bush/textures/bush_colourable_3.png" type="Texture" id=22]
+[ext_resource path="res://scenes/actors/objects/flower_bush/textures/bush_flowerless_0.png" type="Texture" id=23]
+[ext_resource path="res://scenes/actors/objects/flower_bush/textures/bush_flowerless_8.png" type="Texture" id=24]
+[ext_resource path="res://scenes/actors/objects/flower_bush/textures/bush_flowerless_1.png" type="Texture" id=25]
+[ext_resource path="res://scenes/actors/objects/flower_bush/textures/bush_flowerless_2.png" type="Texture" id=26]
+[ext_resource path="res://scenes/actors/objects/flower_bush/textures/bush_flowerless_3.png" type="Texture" id=27]
+[ext_resource path="res://scenes/actors/objects/flower_bush/textures/bush_flowerless_4.png" type="Texture" id=28]
+[ext_resource path="res://scenes/actors/objects/flower_bush/textures/bush_flowerless_5.png" type="Texture" id=29]
+[ext_resource path="res://scenes/actors/objects/flower_bush/textures/bush_flowerless_6.png" type="Texture" id=30]
+[ext_resource path="res://scenes/actors/objects/flower_bush/textures/bush_flowerless_7.png" type="Texture" id=31]
+[ext_resource path="res://scenes/actors/objects/flower_bush/textures/bush_flowerless_9.png" type="Texture" id=32]
+[ext_resource path="res://scenes/actors/objects/flower_bush/textures/bush_hedge_4.png" type="Texture" id=33]
+[ext_resource path="res://scenes/actors/objects/flower_bush/textures/bush_hedge_0.png" type="Texture" id=34]
+[ext_resource path="res://scenes/actors/objects/flower_bush/textures/bush_hedge_9.png" type="Texture" id=35]
+[ext_resource path="res://scenes/actors/objects/flower_bush/textures/bush_hedge_2.png" type="Texture" id=36]
+[ext_resource path="res://scenes/actors/objects/flower_bush/textures/bush_hedge_1.png" type="Texture" id=37]
+[ext_resource path="res://scenes/actors/objects/flower_bush/textures/bush_hedge_3.png" type="Texture" id=38]
+[ext_resource path="res://scenes/actors/objects/flower_bush/textures/bush_hedge_5.png" type="Texture" id=39]
+[ext_resource path="res://scenes/actors/objects/flower_bush/textures/bush_hedge_6.png" type="Texture" id=40]
+[ext_resource path="res://scenes/actors/objects/flower_bush/textures/bush_hedge_7.png" type="Texture" id=41]
+[ext_resource path="res://scenes/actors/objects/flower_bush/textures/bush_hedge_8.png" type="Texture" id=42]
+[ext_resource path="res://scenes/actors/objects/flower_bush/textures/bush_singular_7.png" type="Texture" id=43]
+[ext_resource path="res://scenes/actors/objects/flower_bush/textures/flower_bush_singular_9.png" type="Texture" id=44]
+[ext_resource path="res://scenes/actors/objects/flower_bush/textures/hedge_singular_6.png" type="Texture" id=45]
+[ext_resource path="res://scenes/actors/objects/flower_bush/textures/flower_bush_singular_2.png" type="Texture" id=46]
+[ext_resource path="res://scenes/actors/objects/flower_bush/textures/hedge_singular_7.png" type="Texture" id=47]
+[ext_resource path="res://scenes/actors/objects/flower_bush/textures/bush_singular_9.png" type="Texture" id=48]
+[ext_resource path="res://scenes/actors/objects/flower_bush/textures/bush_singular_8.png" type="Texture" id=49]
+[ext_resource path="res://scenes/actors/objects/flower_bush/textures/flower_bush_singular_7.png" type="Texture" id=50]
+[ext_resource path="res://scenes/actors/objects/flower_bush/textures/bush_singular_3.png" type="Texture" id=51]
+[ext_resource path="res://scenes/actors/objects/flower_bush/textures/bush_singular_2.png" type="Texture" id=52]
+[ext_resource path="res://scenes/actors/objects/flower_bush/textures/bush_singular_4.png" type="Texture" id=53]
+[ext_resource path="res://scenes/actors/objects/flower_bush/textures/flower_bush_singular_0.png" type="Texture" id=54]
+[ext_resource path="res://scenes/actors/objects/flower_bush/textures/hedge_singular_2.png" type="Texture" id=55]
+[ext_resource path="res://scenes/actors/objects/flower_bush/textures/flower_bush_singular_5.png" type="Texture" id=56]
+[ext_resource path="res://scenes/actors/objects/flower_bush/textures/flower_bush_singular_3.png" type="Texture" id=57]
+[ext_resource path="res://scenes/actors/objects/flower_bush/textures/flower_bush_singular_8.png" type="Texture" id=58]
+[ext_resource path="res://scenes/actors/objects/flower_bush/textures/hedge_singular_0.png" type="Texture" id=59]
+[ext_resource path="res://scenes/actors/objects/flower_bush/textures/bush_singular_0.png" type="Texture" id=60]
+[ext_resource path="res://scenes/actors/objects/flower_bush/textures/bush_singular_6.png" type="Texture" id=61]
+[ext_resource path="res://scenes/actors/objects/flower_bush/textures/hedge_singular_1.png" type="Texture" id=62]
+[ext_resource path="res://scenes/actors/objects/flower_bush/textures/flower_bush_singular_1.png" type="Texture" id=63]
+[ext_resource path="res://scenes/actors/objects/flower_bush/textures/bush_singular_colorable.png" type="Texture" id=64]
+[ext_resource path="res://scenes/actors/objects/flower_bush/textures/hedge_singular_4.png" type="Texture" id=65]
+[ext_resource path="res://scenes/actors/objects/flower_bush/textures/bush_singular_5.png" type="Texture" id=66]
+[ext_resource path="res://scenes/actors/objects/flower_bush/textures/hedge_singular_5.png" type="Texture" id=67]
+[ext_resource path="res://scenes/actors/objects/flower_bush/textures/bush_singular_1.png" type="Texture" id=68]
+[ext_resource path="res://scenes/actors/objects/flower_bush/textures/flower_bush_singular_4.png" type="Texture" id=69]
+[ext_resource path="res://scenes/actors/objects/flower_bush/textures/flower_bush_singular_6.png" type="Texture" id=70]
+[ext_resource path="res://scenes/actors/objects/flower_bush/textures/hedge_singular_3.png" type="Texture" id=71]
+[ext_resource path="res://scenes/actors/objects/flower_bush/textures/hedge_singular_8.png" type="Texture" id=72]
+[ext_resource path="res://scenes/actors/objects/flower_bush/textures/hedge_singular_9.png" type="Texture" id=73]
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 48, 8.5 )
 
 [node name="FlowerBush" type="Node2D"]
-z_index = -1
+z_index = -2
 script = ExtResource( 2 )
-custom_preview_position = Vector2( 75, 145 )
-palette_textures = [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 6 ), ExtResource( 5 ), ExtResource( 7 ) ]
+editor_rect = Rect2( -20, -12, 40, 24 )
+internal_id = "flower_bush"
+palette_textures = [ ExtResource( 1 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 4 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 13 ), ExtResource( 11 ), ExtResource( 12 ) ]
+flowerless_textures = [ ExtResource( 23 ), ExtResource( 25 ), ExtResource( 26 ), ExtResource( 27 ), ExtResource( 28 ), ExtResource( 29 ), ExtResource( 30 ), ExtResource( 31 ), ExtResource( 24 ), ExtResource( 32 ) ]
+recolorable_textures = [ ExtResource( 3 ), ExtResource( 15 ), ExtResource( 14 ), ExtResource( 22 ), ExtResource( 19 ), ExtResource( 16 ), ExtResource( 17 ), ExtResource( 21 ), ExtResource( 18 ), ExtResource( 20 ) ]
+hedge_textures = [ ExtResource( 34 ), ExtResource( 37 ), ExtResource( 36 ), ExtResource( 38 ), ExtResource( 33 ), ExtResource( 39 ), ExtResource( 40 ), ExtResource( 41 ), ExtResource( 42 ), ExtResource( 35 ) ]
+single_palette_textures = [ ExtResource( 54 ), ExtResource( 63 ), ExtResource( 46 ), ExtResource( 57 ), ExtResource( 69 ), ExtResource( 56 ), ExtResource( 70 ), ExtResource( 50 ), ExtResource( 58 ), ExtResource( 44 ) ]
+single_flowerless_textures = [ ExtResource( 60 ), ExtResource( 68 ), ExtResource( 52 ), ExtResource( 51 ), ExtResource( 53 ), ExtResource( 66 ), ExtResource( 61 ), ExtResource( 43 ), ExtResource( 49 ), ExtResource( 48 ) ]
+single_recolorable_textures = [ ExtResource( 64 ), ExtResource( 64 ), ExtResource( 64 ), ExtResource( 64 ), ExtResource( 64 ), ExtResource( 64 ), ExtResource( 64 ), ExtResource( 64 ), ExtResource( 64 ), ExtResource( 64 ) ]
+single_hedge_textures = [ ExtResource( 59 ), ExtResource( 62 ), ExtResource( 55 ), ExtResource( 71 ), ExtResource( 65 ), ExtResource( 67 ), ExtResource( 45 ), ExtResource( 47 ), ExtResource( 72 ), ExtResource( 73 ) ]
 
-[node name="Sprite" type="Sprite" parent="."]
-z_index = -9
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 16430
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 0, 1.5 )
+shape = SubResource( 3 )
+
+[node name="Sprite" type="NinePatchRect" parent="."]
+margin_left = -48.0
+margin_top = -22.0
+margin_right = 48.0
+margin_bottom = 10.0
 texture = ExtResource( 1 )
+patch_margin_left = 32
+patch_margin_right = 32
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="Recolorable" type="NinePatchRect" parent="Sprite"]
+modulate = Color( 1, 0, 0, 1 )
+use_parent_material = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 3 )
+patch_margin_left = 32
+patch_margin_right = 32
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1

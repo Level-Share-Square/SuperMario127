@@ -2,8 +2,8 @@ extends GameObject
 
 onready var sprite = $Top
 onready var color_sprite = $Top/Color
-onready var sound = $AudioStreamPlayer2D
 onready var collision_shape = $StaticBody2D/CollisionShape2D
+onready var visibility_notifier = $VisibilityNotifier2D
 
 var wait_time = 3.0
 
@@ -15,36 +15,41 @@ var color := Color(0, 1, 0)
 var invincible := false
 var force_direction := 0
 
-func _set_properties():
-	savable_properties = ["chase", "speed", "color", "wait_time", "invincible", "force_direction", "offset"]
-	editable_properties = ["chase", "speed", "offset", "color", "wait_time", "invincible", "force_direction"]
-	
-func _set_property_values():
-	set_property("chase", chase, true)
-	set_property("speed", speed, true)
-	set_property("color", color, true)
-	set_property("wait_time", wait_time, true)
-	set_property("invincible", invincible, true)
-	set_property("force_direction", force_direction, true)
-	set_property_menu("force_direction", ["option", 3, -1, ['Face Player', 'Right', 'Left']])
-	set_property("offset", offset, true)
+
+func _register_properties():
+	register_property(4, "chase", chase)
+	register_property(5, "speed", speed)
+	register_property(10, "offset", offset)
+	register_property(6, "color", color)
+	register_property(7, "wait_time", wait_time)
+	register_property(8, "invincible", invincible)
+	register_property(9, "force_direction", force_direction)
+	set_property_override("force_direction", PropertyTab.OverrideTypes.ENUM, ["Face Player", "Right", "Left"])
+
 
 func _ready():
-	spawn_timer = wait_time+offset
+	add_to_group("blasters")
+	spawn_timer = wait_time + offset
 	sprite.frame = 3
-	collision_shape.disabled = !enabled
 
-func _process(delta):
+
+func _object_ready():
+	collision_shape.disabled = !is_enabled_and_on_ground()
+
+
+func _object_process(delta):
 	if sprite.frame == 1 or sprite.frame == 2:
 		sprite.scale = sprite.scale.linear_interpolate(Vector2(1.75, 1.75), delta * 12)
 	else:
 		sprite.scale = sprite.scale.linear_interpolate(Vector2(1, 1), delta * 7)
 
 func _physics_process(delta):
+	var final_color: Color = color
 	if invincible:
-		color.h = float(wrapi(OS.get_ticks_msec(), 0, 500)) / 500
-	#rotation_degrees = 0
-	color_sprite.modulate = color
+		final_color.h = float(wrapi(OS.get_ticks_msec(), 0, 500)) / 500
+	color_sprite.modulate = final_color
+
+func _object_physics_process(delta):
 		
 	if mode != 1:
 		spawn_timer -= delta
@@ -80,25 +85,31 @@ func _physics_process(delta):
 			
 			var prev_scale_x = scale.x
 			scale.x = scale.y
-			
-			var object = LevelObject.new()
-			object.type_id = 25
-			object.properties = []
-			object.properties.append(transform.xform(Vector2(16 * facing_direction, 0)))
-			object.properties.append(scale)
-			object.properties.append(rotation_degrees)
-			object.properties.append(enabled)
-			object.properties.append(true)
-			object.properties.append(chase)
-			object.properties.append(speed)
-			object.properties.append(color)
-			object.properties.append(facing_direction)
-			object.properties.append(invincible)
-			get_parent().create_object(object, false)
+			create_new_bill(chase, speed, color, facing_direction, invincible)
 			
 			scale.x = prev_scale_x
 			
-			sound.play()
+			if visibility_notifier.is_on_screen():
+				play_shared_sound("BlastLaunchSound")
+				if chase:
+					play_shared_sound("BlastSeekSound")
 			
 		elif spawn_timer <= 0:
 			spawn_timer = wait_time
+
+
+func create_new_bill(chase, speed, color, facing_direction, invincible) -> Node:
+	if facing_direction == 2: facing_direction = -1
+	var object_setup = create_object(transform.xform(Vector2(16 * facing_direction, 0)), 25, 0)
+	var object: GameObject = object_setup[0]
+
+	object.set_property("scale", scale)
+	object.set_property("rotation_degrees", rotation_degrees)
+	object.set_property("enabled", enabled)
+	object.set_property("chase", chase)
+	object.set_property("speed", speed)
+	object.set_property("color", color)
+	object.set_property("facing_direction", facing_direction)
+	object.set_property("invincible", invincible)
+	
+	return object_setup[1].call_func(object)

@@ -11,7 +11,7 @@ onready var none_button = $"%NoMods"
 
 
 func _ready():
-	if OS.has_feature("JavaScript"):
+	if OS.has_feature("JavaScript") or OS.has_feature("mobile"):
 		mods_container.hide()
 		return
 	
@@ -38,7 +38,7 @@ func _ready():
 func create_mod_button(path: String):
 	var mod_button: Button = none_button.duplicate()
 	mod_button.text = path.get_basename()
-	mod_button.disabled = (path == Singleton2.mod_path.get_file())
+	mod_button.disabled = (path == ModLoader.path.get_file())
 	mod_button.connect("pressed", self, "set_active_mod", [path])
 	mods_container.call_deferred("add_child", mod_button)
 
@@ -96,3 +96,6 @@ func check_old_data(delete_data: bool):
 	
 	old_data_button.disabled = (not has_old_data) or delete_data 
 	return has_old_data
+
+func clear_cache():
+	pass

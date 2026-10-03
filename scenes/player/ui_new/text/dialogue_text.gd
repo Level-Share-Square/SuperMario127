@@ -24,7 +24,6 @@ onready var page_change = $PageChange
 onready var typing = $Typing
 
 onready var tween = $Tween
-onready var fade_tween = $FadeTween
 
 var dialogue: PoolStringArray 
 var last_tag: String
@@ -51,7 +50,9 @@ func _ready():
 	modulate = Color(1, 1, 1, 0)
 
 func open(_dialogue : PoolStringArray, dialogue_node : Node2D, character_node : Character, character_name : String):
-	Singleton.CurrentLevelData.can_pause = false
+	CurrentLevelData.can_pause = false
+	
+	var area_timer : TimerBase = get_tree().get_current_scene().get_node("%TimerManager").pause_resume_timer("area_timer", true)
 	
 	dialogue = _dialogue
 	character = character_node
@@ -62,7 +63,7 @@ func open(_dialogue : PoolStringArray, dialogue_node : Node2D, character_node : 
 	else:
 		page_change.play()
 	close_label.bbcode_text = text_replace_util.parse_text("[center]Press :interactinput: to continue[/center]", character_node)
-	name_label.bbcode_text = text_replace_util.parse_text(character_name, character_node)
+	name_label.bbcode_text = text_replace_util.parse_text(character_name, character_node, CurrentLevelData.save_data, CurrentLevelData.vars, CurrentLevelData.area_id)
 	open = true
 	
 	last_tag = ""
@@ -92,6 +93,10 @@ func interact():
 	if player_speaking: return
 	
 	var dialogue_page: int = dialogue_obj.page_cache
+	
+	if Input.is_action_just_pressed("pause"):
+		close()
+		return
 	
 	if label.percent_visible == 1:
 		if last_player != 0 and character.is_grounded() and not is_instance_valid(character.state):
@@ -128,7 +133,7 @@ func interact():
 	last_player = int(page_text.substr(2, 1))
 	dialogue_obj.emit_signal("message_changed", expression, action)
 	
-	label.bbcode_text = text_replace_util.parse_text(cur_text, character)
+	label.bbcode_text = text_replace_util.parse_text(cur_text, character, CurrentLevelData.save_data, CurrentLevelData.vars, CurrentLevelData.area_id)
 	if not tween.is_active():
 		if cur_text.length() > 0: 
 			typing.play()
@@ -153,7 +158,7 @@ func get_dialogue_from_tag(tag: String) -> Node:
 	return null
 
 func close():
-	Singleton.CurrentLevelData.can_pause = true
+	CurrentLevelData.can_pause = true
 	open = false
 	
 	label.percent_visible = 0
@@ -174,9 +179,10 @@ func _physics_process(delta):
 		rect_scale = lerp(rect_scale, Vector2(0.8, 0.8), delta * transition_speed)
 		modulate = lerp(modulate, Color(1, 1, 1, 0), delta * transition_speed)
 	else:
-		#print(is_instance_valid(character))
-		if is_instance_valid(character) and character.inputs[Character.input_names.interact][1] and !dialogue_obj.tween.is_active():
-			interact()
+		if is_instance_valid(character) and !dialogue_obj.tween.is_active():
+			var is_inputting: bool = character.inputs[Character.input_names.interact][1] or Input.is_action_just_pressed("pause")
+			if is_inputting:
+				interact()
 		rect_position = lerp(rect_position, normal_pos, delta * transition_speed)
 		rect_scale = lerp(rect_scale, Vector2(1, 1), delta * transition_speed)
 		modulate = lerp(modulate, Color(1, 1, 1, 1), delta * transition_speed)

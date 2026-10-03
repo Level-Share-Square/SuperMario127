@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/editor/windows/object_property_editor/property_tabs/base/layer.gd" type="Script" id=1]
+[ext_resource path="res://scenes/menu/button_scripts/button_sound.gd" type="Script" id=2]
+
+[node name="Layer" type="HBoxContainer"]
+unique_name_in_owner = true
+margin_right = 652.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+script = ExtResource( 1 )
+
+[node name="PropertyName" type="Label" parent="."]
+unique_name_in_owner = true
+margin_top = 3.0
+margin_right = 38.0
+margin_bottom = 17.0
+text = "Layer:"
+
+[node name="OptionButton" type="OptionButton" parent="."]
+margin_left = 42.0
+margin_right = 652.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 72, 0 )
+focus_mode = 0
+size_flags_horizontal = 3
+script = ExtResource( 2 )
+
+[connection signal="item_selected" from="OptionButton" to="." method="change_property"]

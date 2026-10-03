@@ -1,4 +1,5 @@
 extends Node
+
 onready var voice_effects = $VoiceEffects
 onready var jump_sounds = $VoiceEffects/JumpSounds
 onready var double_jump_sounds = $VoiceEffects/DoubleJumpSounds
@@ -8,10 +9,12 @@ onready var fall_sounds = $VoiceEffects/FallSounds
 onready var hit_sounds = $VoiceEffects/HitSounds
 onready var last_hit_sounds = $VoiceEffects/LastHitSounds
 onready var death_sounds = $VoiceEffects/DeathSounds
+onready var timeout_sounds = $VoiceEffects/TimeoutSounds
 onready var stomped_sounds = $VoiceEffects/StompedSounds
 onready var powerup_sounds = $VoiceEffects/PowerupSounds
 onready var lava_hurt_sounds = $VoiceEffects/LavaHurtSounds
 onready var shine_sounds = $VoiceEffects/ShineSounds
+onready var checkpoint_sounds = $VoiceEffects/CheckpointSounds
 onready var speak_sounds = $VoiceEffects/SpeakSounds
 onready var happy_sounds = $VoiceEffects/HappySounds
 onready var shocked_sounds = $VoiceEffects/ShockedSounds
@@ -23,23 +26,38 @@ onready var angry_sounds = $VoiceEffects/AngrySounds
 onready var gp_hit = $OtherSounds/GPHit
 onready var gp_windup = $OtherSounds/GPWindup
 onready var skid = $OtherSounds/Skid
+onready var jump_step = $OtherSounds/JumpStep
+onready var land_step = $OtherSounds/LandStep
+onready var wall_jump_step = $OtherSounds/WallJumpStep
 onready var jump_voiceless = $OtherSounds/Jump
 onready var double_jump_voiceless = $OtherSounds/DoubleJump
 onready var triple_jump_voiceless = $OtherSounds/TripleJump
-onready var wall_jump_voiceless = $OtherSounds/WallJump
 onready var spin_sound = $OtherSounds/Spin
 onready var duck_sound = $OtherSounds/Duck
 onready var last_hit_8bit_sound = $OtherSounds/LastHit8Bit
-onready var splash_sound = $OtherSounds/WaterSplash
+onready var water_enter_sound = $OtherSounds/WaterEnter
+onready var water_exit_sound = $OtherSounds/WaterExit
 onready var swim_sound = $OtherSounds/Swim
 onready var spin_water_sound = $OtherSounds/SpinWater
 onready var powerup_sound_voiceless = $OtherSounds/Powerup
+onready var powerdown_sound_voiceless = $OtherSounds/Powerdown
+onready var rainbow_star_sound = $OtherSounds/RainbowStar
 onready var burn_sound = $OtherSounds/Burn
+onready var bonk_sound = $OtherSounds/Bonk
+onready var damage_sound = $OtherSounds/Damage
+onready var zap_damage_sound = $OtherSounds/ZapDamage
+onready var sharp_damage_sound = $OtherSounds/SharpDamage
+onready var saw_damage_sound = $OtherSounds/SawDamage
+onready var dive_sound = $OtherSounds/Dive
+onready var getup_sound = $OtherSounds/Getup
+onready var backflip_sound = $OtherSounds/Backflip
+onready var perfect_sound = $OtherSounds/Perfect
+onready var spring_sound = $OtherSounds/Spring
 
 onready var footsteps_default = $Footsteps/Default
 onready var footsteps_metal = $Footsteps/Metal
 
-
+enum death_types {Normal, Fall, Lava, Poison, Timeout}
 
 export var normal_bus : String
 export var metal_bus : String
@@ -86,6 +104,18 @@ func play_jump_sound_voiceless():
 	if ready:
 		jump_voiceless.play()
 
+func play_jump_step_sound():
+	if ready:
+		jump_step.play()
+
+func play_wall_jump_step_sound():
+	if ready:
+		wall_jump_step.play()
+
+func play_land_step_sound():
+	if ready:
+		land_step.play()
+
 func play_double_jump_sound():
 	if ready:
 		double_jump_sounds.play()
@@ -99,15 +129,33 @@ func play_triple_jump_sound():
 func play_wall_jump_sound():
 	if ready:
 		jump_sounds.play()
-		wall_jump_voiceless.play()
+		jump_voiceless.play()
 
 func play_wall_jump_sound_voiceless():
 	if ready:
-		wall_jump_voiceless.play()
+		jump_voiceless.play()
 	
 func play_dive_sound():
 	if ready:
 		dive_sounds.play()
+		dive_sound.play()
+	
+func play_dive_sound_voiceless():
+	if ready:
+		dive_sound.play()
+
+func play_getup_sound():
+	if ready:
+		dive_sounds.play()
+		getup_sound.play()
+
+func play_backflip_sound():
+	if ready:
+		backflip_sound.play()
+
+func play_getup_sound_voiceless():
+	if ready:
+		getup_sound.play()
 	
 func play_fall_sound():
 	if ready:
@@ -129,13 +177,25 @@ func play_death_sound():
 	if ready:
 		death_sounds.play()
 
+func play_timeout_sound():
+	if ready:
+		timeout_sounds.play()
+
 func play_powerup_sound():
 	if ready:
 		powerup_sounds.play()
 
+func play_rainbow_star_sound():
+	if ready:
+		rainbow_star_sound.play()
+
 func play_shine_sound():
 	if ready:
 		shine_sounds.play()
+
+func play_checkpoint_sound():
+	if ready:
+		checkpoint_sounds.play()
 
 func play_speak_sound():
 	if ready:
@@ -168,10 +228,40 @@ func play_angry_sound():
 func play_powerup_jingle():
 	if ready:
 		powerup_sound_voiceless.play()
+
+func play_powerdown_jingle():
+	if ready:
+		powerdown_sound_voiceless.play()
 	
 func play_bonk_sound():
 	if ready:
 		hit_sounds.play()
+		bonk_sound.play()
+		damage_sound.play()
+
+func play_damage_sound():
+	if ready:
+		damage_sound.play()
+
+func play_zap_damage_sound():
+	if ready:
+		zap_damage_sound.play()
+
+func play_sharp_damage_sound():
+	if ready:
+		sharp_damage_sound.play()
+
+func play_saw_damage_sound():
+	if ready:
+		saw_damage_sound.play()
+
+func play_perfect_sound():
+	if ready:
+		perfect_sound.play()
+
+func play_spring_sound():
+	if ready:
+		spring_sound.play()
 
 func play_gp_windup_sound():
 	if ready:
@@ -197,10 +287,15 @@ func play_spin_water_sound():
 	if ready:
 		spin_water_sound.play()
 
-func play_splash_sound():
+func play_water_enter_sound():
 	if ready:
-		splash_sound.play()
+		water_enter_sound.play()
+
+func play_water_exit_sound():
+	if ready:
+		water_exit_sound.play()
 
 func set_swim_playing(value):
 	if ready:
-		swim_sound.playing = value
+		if swim_sound.playing != value:
+			swim_sound.playing = value

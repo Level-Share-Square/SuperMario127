@@ -1,18 +1,27 @@
 extends AudioStreamPlayer
 
+const CACHE_PRELOAD_ID_LIST: Array = [
+	25, # metal_mario
+	26, # rainbow_mario
+	27, # wing_mario
+	28, # course_clear
+	31, # level_designer_portal
+	67, # six sevennn (level_designer_portal_ng)
+	68, # lss_menu
+	71, # course_clear_pocket
+]
+
 export var play_bus : String
 export var edit_bus : String
 
 var character
-var character2
-
 
 onready var http_request = $HTTPRequest
 
 onready var temporary_music_player : AudioStreamPlayer = $TemporaryMusicPlayer
 onready var water_music_player : AudioStreamPlayer = $WaterMusicPlayer
+onready var blended_music_player : AudioStreamPlayer = $BlendedMusicPlayer
 onready var tween : Tween = $Tween
-
 
 export var volume_multiplier := 1.0
 export var loading := false
@@ -25,20 +34,36 @@ var cur_setting = -1
 
 var song_cache := []
 var loop := 1.0
+var loop_end: float = 0.0
 
+var underwater_loop: float = 0.0
+var underwater_loop_end: float = 0.0
+
+var play_music := true
 var play_water := false
 var has_water := false
+var play_blended := false
+var has_blended := false
 var temp_music := false
+var song_switched := false
+var custom_loop := false
 
 const MUSIC_FADE_LENGTH = 0.75
 
 var level_songs : IdMap
+
 
 func get_song(song_id : int):
 	if song_cache[song_id] == null:
 		song_cache[song_id] = load("res://assets/music/resources/" + level_songs.ids[song_id] + ".tres")
 		
 	return song_cache[song_id]
+
+func get_song_id(stream: AudioStream) -> int:
+	for i in range(0, song_cache.size()):
+		if song_cache[i] != null and song_cache[i].stream == stream:
+			return i
+	return -1
 
 func _init() -> void:
 	base_volume = volume_db
@@ -47,6 +72,8 @@ func _init() -> void:
 	song_cache.resize(level_songs.ids.size())
 	
 func _ready() -> void:
+	for id in CACHE_PRELOAD_ID_LIST:
+		get_song(id)
 	var _connect = temporary_music_player.connect("finished", self, "stop_temporary_music")
 
 func is_tween_active() -> bool:
@@ -54,107 +81,136 @@ func is_tween_active() -> bool:
 
 
 ##### CUSTOM MUSIC
-func get_custom_file_path() -> String:
-	# i think accessing leveldata singleton is safe for now since
+func get_custom_file_path(underwater: bool = false) -> String:
+	# i think accessing LevelDataOld singleton is safe for now since
 	# this only is called inside levels, i hope i dont regret that decision
-	var level_id: String = Singleton.CurrentLevelData.level_id
-	var area: int = Singleton.CurrentLevelData.area
-	var working_folder: String = Singleton.CurrentLevelData.working_folder
+	var level_id: String = CurrentLevelData.level_id
+	var area: int = CurrentLevelData.area_id
+	var working_folder: String = CurrentLevelData.working_folder
 	
 	return level_list_util.get_level_music_path(
 		level_id, 
 		area,
-		working_folder)
+		working_folder,
+		underwater)
+
 
 func reset_custom_song() -> void:
 	var file_path: String = get_custom_file_path()
 	if level_list_util.file_exists(file_path):
 		level_list_util.delete_file(file_path)
 
-func handle_custom_song(url: String) -> void:
-	loop = 0.0
+
+func handle_custom_song(url: String, underwater: bool = false) -> void:
 	if url.begins_with("LP"):
-		var trimmed_url = url.trim_prefix("LP").split("=")
-		loop = float(trimmed_url[0])
-		url = trimmed_url[1]
-	
-	stop()
-	
-	var file_path: String = get_custom_file_path()
-	if not level_list_util.file_exists(file_path):
-		print("OGG file not found, downloading from url...")
-		
-		var level_id: String = Singleton.CurrentLevelData.level_id
-		var area: int = Singleton.CurrentLevelData.area
-		var working_folder: String = Singleton.CurrentLevelData.working_folder
-		save_ogg(url, level_id, area, working_folder)
+		var variables = decode_music(url)
+		if underwater:
+			underwater_loop = variables[0]
+			underwater_loop_end = variables[2]
+		else:
+			loop = variables[0]
+			loop_end = variables[2]
+		url = variables[1]
+			
+	if !underwater:
+		stop()
 	else:
-		print("OGG file found, loading...")
-		
-		var ogg_file := File.new()
-		var _open = ogg_file.open(file_path, File.READ)
-		var bytes: PoolByteArray = ogg_file.get_buffer(ogg_file.get_len())
-		ogg_file.close()
-		
-		load_ogg(bytes)
+		water_music_player.stop()
+			
+	var song_stream = yield(AssetHandler.load_sound(url, CurrentLevelData.working_folder), "completed")
 
-
-func save_ogg(url: String, level_id: String, area: int, working_folder: String) -> void:
-	var file_path: String = level_list_util.get_level_music_path(
-		level_id, 
-		area,
-		working_folder)
-	
-	#http_request.download_file = file_path
-	http_request.request(url)
-	
-	# warning-ignore:return_value_discarded
-	http_request.connect("request_completed", self, "request_completed", [file_path], CONNECT_ONESHOT)
-
-
-func request_completed(result: int, response_code: int, headers: PoolStringArray, body: PoolByteArray, file_path: String):
-	var ogg_file := File.new()
-	var err: int = ogg_file.open(file_path, File.WRITE)
-	if err != OK:
-		printerr("Error saving custom music file. Error code: " + str(err) + "\nFile path: " + file_path)
+	if song_stream == null:
 		return
-	
-	ogg_file.store_buffer(body)
-	ogg_file.close()
-	
-	load_ogg(body)
-
-
-func load_ogg(bytes: PoolByteArray) -> void:
-	var stream := AudioStreamOGGVorbis.new()
-	stream.data = bytes
-	stream.loop = true
-	stream.loop_offset = loop
-	if stream.data == null:
+	if song_stream.data == null:
 		return
 
+	if !underwater:
+		play_custom_normal(song_stream)
+	else:
+		play_custom_underwater(song_stream)
+
+
+func play_custom_underwater(song_stream):
 	if get_tree().get_current_scene().mode != 2:
-		self.stream = stream
+		water_music_player.stream = song_stream
+		water_music_player.play()
+		water_music_player.volume_db = -80
+		has_water = CurrentLevelData.current_area.header.music is String and CurrentLevelData.current_area.header.music != CurrentLevelData.current_area.header.underwater_music
+		play_water = false
+
+
+func play_custom_normal(song_stream):
+	if get_tree().get_current_scene().mode != 2:
+		self.stream = song_stream
 		play()
 	
-	print("OGG file loaded.")
-#######
+	custom_loop = true
+	
+	var underwater_raw = CurrentLevelData.current_area.header.underwater_music
+	if underwater_raw == "":
+		handle_custom_song(CurrentLevelData.current_area.header.music, true)
+	else:
+		handle_custom_song(underwater_raw, true)
+	
+
+func decode_music(raw_music: String) -> Array:
+	if !raw_music.begins_with("LP"):
+		return [0, raw_music, 0, ""]
+	var loop_start
+	var loop_end
+	var url
+	if !"|" in raw_music:
+		var trimmed_url = raw_music.trim_prefix("LP").split("=")
+		loop_start = float(trimmed_url[0])
+		url = trimmed_url[1]
+		loop_end = 0
+		return [loop_start, url, loop_end]
+	var loop_start_string = raw_music.substr(0, raw_music.find("="))
+	loop_start_string.erase(0, 2)
+	if float(loop_start_string) == 0:
+		loop_start = 0.0
+	else:
+		loop_start = float(loop_start_string)
+	
+	raw_music.erase(0, raw_music.find("h"))
+	
+	if raw_music.find("|") != -1:
+		url = raw_music.substr(0, raw_music.find("|"))
+	else:
+		url = raw_music
+		loop_end = 0
+		return [loop_start, url, loop_end]
+		
+	raw_music.erase(0, raw_music.find("|") + 1)
+	
+	var loop_end_string = raw_music.substr(0, raw_music.find("N"))
+	loop_end_string.erase(0, 4)
+	if float(loop_end_string) == 0:
+		loop_end = 0.0
+	else:
+		loop_end = float(loop_end_string)
+	
+	return [loop_start, url, loop_end]
 
 
 func change_song(old_setting, music_setting) -> void:
 	var song
-	
 	cur_setting = music_setting
-	if typeof(music_setting) == TYPE_INT:
-		song = get_song(music_setting)
-	elif typeof(music_setting) == TYPE_STRING:
+	if typeof(music_setting) == TYPE_STRING:
+		# Custom music can't have water variations currently
+		# Set has_water to false whenever loading custom music
 		if typeof(music_setting) != typeof(old_setting) or music_setting != old_setting:
 			base_volume = 0
 			handle_custom_song(music_setting)
-			
+	else:
+		song = get_song(music_setting)
 	
-	if song != null and stream != song.stream:
-		stream = song.stream
+	song_switched = true
+	has_blended = false
+	
+	if song != null and !(stream == song.stream or (song.blended_stream and stream == song.blended_stream)):
+		custom_loop = false
+		stream = song.stream if not song.blended_stream else song.blended_stream
 		base_volume = song.volume_db
 		play()
 		
@@ -162,26 +218,42 @@ func change_song(old_setting, music_setting) -> void:
 			water_music_player.stream = song.underwater_stream
 			water_music_player.play()
 			water_music_player.volume_db = -80
+			water_music_player.bus = "Music"
 			has_water = true
 			play_water = false
 		else:
-			water_music_player.stop()
-			has_water = false
+			water_music_player.stream = stream
+			water_music_player.play()
+			water_music_player.volume_db = -80
+			water_music_player.bus = "WaterMusicFilters"
+			has_water = true
 			play_water = false
+	
 	
 	if "mode" in get_tree().get_current_scene():
 		bus = play_bus if get_tree().get_current_scene().mode == 0 else edit_bus
 	else:
 		bus = play_bus # perhaps we should define a general bus or a menu bus later # FUCKIGN YES WWE SHOULD
 
-func toggle_underwater_music(state):
+
+func toggle_underwater_music(state: bool):
 	if has_water:
 		play_water = state
 	else:
 		play_water = false
 
+
+func toggle_blended_music(state: bool):
+	if has_blended:
+		play_blended = state
+	else:
+		play_blended = false
+
+
 func reset_music():
 	toggle_underwater_music(false)
+	toggle_blended_music(false)
+
 
 func _process(delta) -> void:
 	var current_scene = get_tree().get_current_scene()
@@ -190,7 +262,7 @@ func _process(delta) -> void:
 	# change this script so this entire block ceases to exist because it is bad and it makes me simultaniously mad and sad
 	# scenes should ask the music singleton to change the music, the music singleton shouldn't check every frame for if it should change the music
 	if "mode" in current_scene: #script will crash if the scene root doesn't have this property defined
-		var level_song = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].settings.music
+		var level_song = CurrentLevelData.current_area.header.music if play_music else 0
 		current_song = level_song
 		if current_scene.mode != last_mode or typeof(last_song) != typeof(level_song):
 			change_song(last_song, level_song)
@@ -205,18 +277,30 @@ func _process(delta) -> void:
 	if play_water and !is_instance_valid(character):
 		play_water = false
 	
+	if play_blended and !is_instance_valid(character):
+		play_blended = false
+	
 	var target_volume = (db2linear(base_volume) * volume_multiplier) if !get_tree().paused else 0
-	volume_db = linear2db(lerp(db2linear(volume_db), target_volume if !play_water else 0, delta * 3))
-	water_music_player.volume_db = linear2db(lerp(db2linear(water_music_player.volume_db), target_volume if play_water else 0, delta * 3))
+	volume_db = linear2db(lerp(db2linear(volume_db), target_volume if !play_water and !play_blended else 0, delta * 3))
+	water_music_player.volume_db = linear2db(lerp(db2linear(water_music_player.volume_db), target_volume if play_water and !play_blended else 0, delta * 3))
+	
 	if temp_music:
 		var target_temp_volume = db2linear(base_volume) if !get_tree().paused else 0
+		blended_music_player.volume_db = linear2db(lerp(db2linear(blended_music_player.volume_db), target_temp_volume if play_blended else 0, delta * 3))
+		
+		if has_blended:
+			target_temp_volume = target_temp_volume if !play_blended else -0
 		temporary_music_player.volume_db = linear2db(lerp(db2linear(temporary_music_player.volume_db), target_temp_volume, delta * 3))
 	else:
+		blended_music_player.volume_db = linear2db(lerp(db2linear(blended_music_player.volume_db), 0, delta * 3))
 		temporary_music_player.volume_db = linear2db(lerp(db2linear(temporary_music_player.volume_db), 0, delta * 3))
 		temporary_music_player.volume_db = linear2db(lerp(db2linear(temporary_music_player.volume_db), 0, delta * 3))
 
+	check_loop(self, loop, loop_end)
+	check_loop(water_music_player, underwater_loop, underwater_loop_end)
+
 # the plan for this is to mute the current bgm, play the temp song, and then fade the current bgm back in
-func play_temporary_music(temp_song_id : int = 0, temp_song_volume : float = 0) -> void:
+func play_temporary_music(temp_song_id : int = 0, temp_song_volume : float = 0, start_position: float = 0.0) -> void:
 	volume_multiplier = 0
 	volume_db = -80.0
 	water_music_player.volume_db = -80.0
@@ -224,11 +308,23 @@ func play_temporary_music(temp_song_id : int = 0, temp_song_volume : float = 0) 
 	#var _tween = tween.stop_all()
 	#temporary_music_player.volume_db = temp_song_volume if !muted else -80.0
 
-	var stream = get_song(temp_song_id).stream
-	if temporary_music_player.stream != stream or temporary_music_player.volume_db < -70:
+	var song = get_song(temp_song_id)
+	var stream = song.stream
+	if temporary_music_player.stream != stream or (play_blended and blended_music_player.volume_db < -70) or (not play_blended and temporary_music_player.volume_db < -70):
 		temporary_music_player.volume_db = 0
 		temporary_music_player.stream = stream
-		temporary_music_player.play()
+		temporary_music_player.play(start_position)
+		
+		blended_music_player.volume_db = -80.0
+		blended_music_player.stream = song.blended_stream
+		blended_music_player.play(start_position)
+	
+	if song.blended_stream != null:
+		has_blended = true
+	else:
+		has_blended = false
+		play_blended = false
+	
 	temp_music = true
 
 # returns the id of the temporary song
@@ -239,3 +335,26 @@ func is_temporary_music_playing() -> bool:
 func stop_temporary_music(volume_multiplier_target = 1, music_fade_length = MUSIC_FADE_LENGTH) -> void:
 	volume_multiplier = 1
 	temp_music = false
+	play_blended = false
+	has_blended = false
+
+func get_precise_position(player: AudioStreamPlayer) -> float:
+	if !player.playing:
+		return 0.0
+	return player.get_playback_position() + AudioServer.get_time_since_last_mix() - AudioServer.get_output_latency()
+
+func check_loop(player: AudioStreamPlayer, loop_point_start: float, loop_point_end: float) -> void:
+	if not custom_loop: return
+	if loop_point_end == 0 and is_instance_valid(player.stream): loop_point_end = player.stream.get_length()
+	if loop_point_start >= loop_point_end: loop_point_start = 0.0
+	var pos: float = get_precise_position(player)
+
+	if pos >= loop_point_end or not player.playing:
+		if pos == 0: pos = loop_point_end
+		var overshoot: float = pos - loop_point_end
+		var seg_len: float = loop_point_end - loop_point_start
+		if seg_len > 0.0:
+			overshoot = fmod(overshoot, seg_len)
+
+		player.playing = true
+		player.seek(loop_point_start + overshoot)

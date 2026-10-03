@@ -3,10 +3,19 @@ extends GameObject
 export var custom_preview_position = Vector2(70, 170)
 onready var collision_shape = $StaticBody2D/CollisionShape2D
 onready var area_2d : Area2D = $StaticBody2D/Area2D
+onready var bounce_area_collision : CollisionShape2D = $StaticBody2D/Area2D/CollisionShape2D
 onready var animation_player : AnimationPlayer = $AnimationPlayer
 onready var mushroom_cap : Sprite = $Sprite
 onready var mushroom_cap_color : Sprite = $Sprite/Color
-onready var sound : AudioStreamPlayer2D = $AudioStreamPlayer2D
+onready var mushroom_spots_color : Sprite = $Sprite/ColorSpots
+onready var mushroom_spots_color_modulate : Sprite = $Sprite/ColorSpots/Modulate
+onready var resizeable_cap : NinePatchRect = $Node2D/Resizeable
+onready var resizeable_cap_color : NinePatchRect = $Node2D/Resizeable/ResizableColor
+onready var resizeable_spots_color : NinePatchRect = $Node2D/Resizeable/ResizableColorSpots
+onready var resizeable_spots_color_modulate : NinePatchRect = $Node2D/Resizeable/ResizableColorSpotsModulate
+onready var sound : AudioStreamPlayer = $AudioStreamPlayer
+onready var visibility_enabler : VisibilityEnabler2D = $VisibilityEnabler2D
+onready var timer : Timer = $IdleBounceTimer
 
 export var weak_bounce_sound : AudioStream
 export var bounce_sound : AudioStream
@@ -17,35 +26,107 @@ var blacklisted_bodies := {}
 var color := Color(1, 0, 0)
 var bouncy := false
 var strong_bounce_power : int = 650
+var parts : int = 0
 
-func _set_properties():
-	savable_properties = ["color", "bouncy", "strong_bounce_power"]
-	editable_properties = ["color", "bouncy", "strong_bounce_power"]
-	
-func _set_property_values():
-	set_property("color", color, 1)
-	set_property("bouncy", bouncy, 1)
-	set_property("strong_bounce_power", strong_bounce_power, 1)
+var base_scale_factor : float = 0.0
+var spring_anim_power : float = 0.0
+
+
+#func _set_properties():
+#	savable_properties = ["color", "bouncy", "strong_bounce_power", "parts"]
+#	editable_properties = ["parts", "color", "bouncy", "strong_bounce_power"]
+
+
+func _register_properties():
+	register_property(4, "color", color, true)
+	register_property(5, "bouncy", bouncy, true)
+	register_property(6, "strong_bounce_power", strong_bounce_power, true)
+	register_property(7, "parts", parts, true)
+
 
 func _ready():
 	var _connect = connect("property_changed", self, "update_property")
-	if bouncy and enabled and mode == 0:
-		_connect = get_tree().create_timer(5).connect("timeout", self, "idle_bounce_anim")
-		_connect = area_2d.connect("body_entered", self, "bounce")
 	
 	update_property("color", color)
-	collision_shape.disabled = !enabled or bouncy
+	update_parts()
+	collision_shape.disabled = bouncy or !is_enabled_and_on_ground()
 	preview_position = custom_preview_position
 	if is_preview:
 		z_index = 0
 		mushroom_cap.z_index = 0
+	
+	if parts < 0:
+		parts = 0
+
+func _object_ready():
+	._object_ready()
+	if bouncy and is_enabled_and_on_ground():
+		var _connect = timer.connect("timeout", self, "idle_bounce_anim")
+		_connect = area_2d.connect("body_entered", self, "bounce")
 
 func update_property(key, value):
 	if color == Color(1, 0, 0):
 		mushroom_cap_color.visible = false
+		mushroom_spots_color.visible = false
+		resizeable_cap_color.visible = false
+		resizeable_spots_color.visible = false
 	else:
 		mushroom_cap_color.visible = true
+		mushroom_spots_color.visible = true
+		resizeable_cap_color.visible = true
+		resizeable_spots_color.visible = true
 		mushroom_cap_color.modulate = color
+		mushroom_spots_color_modulate.modulate = color
+		resizeable_cap_color.modulate = color
+		resizeable_spots_color_modulate.modulate = color
+	
+	if parts > 0:
+		resizeable_cap.visible = true
+		mushroom_cap.visible = false
+		update_parts()
+	else:
+		if parts < 0: #make sure parts don't go below zero
+			parts = 0
+		
+		mushroom_cap.visible = true
+		resizeable_cap.visible = false
+
+
+func update_parts():
+	collision_shape.shape.extents.x = 28 + (16 * parts)
+	bounce_area_collision.shape.extents.x = 29 + (16 * parts)
+	
+	resizeable_cap.rect_size.x = 64 + (32 * parts)
+	resizeable_cap_color.rect_size.x = 64 + (32 * parts)
+	resizeable_spots_color.rect_size.x  = 64 + (32 * parts)
+	resizeable_spots_color_modulate.rect_size.x  = 64 + (32 * parts)
+
+	resizeable_cap.rect_position.x = -resizeable_cap.rect_size.x/2
+	resizeable_cap_color.rect_position.x = 0
+	
+	resizeable_cap.rect_pivot_offset.x = resizeable_cap.rect_size.x/2
+	resizeable_cap_color.rect_pivot_offset.x = resizeable_cap.rect_size.x/2
+	resizeable_spots_color.rect_pivot_offset.x = resizeable_cap.rect_size.x/2
+	resizeable_spots_color_modulate.rect_pivot_offset.x = resizeable_cap.rect_size.x/2
+
+	visibility_enabler.rect.size.x = 128 + (32 * parts)
+	visibility_enabler.rect.position.x = -visibility_enabler.rect.size.x/2
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	parts_input_handler(event,self)
+
+
+func _process(delta):
+	if !is_equal_approx(spring_anim_power, 0):
+		update_bounce_anim(delta)
+	else:
+		if mushroom_cap.scale != Vector2.ONE:
+			mushroom_cap.scale = Vector2.ONE
+			
+		if $Node2D.scale != Vector2.ONE:
+			$Node2D.scale = Vector2.ONE
+
 
 func _physics_process(delta):
 	for object in blacklisted_bodies.keys():
@@ -57,7 +138,7 @@ func _physics_process(delta):
 			else:
 				blacklisted_bodies[object] = cooldown
 		
-	if bouncy and enabled and mode == 0:
+	if bouncy and is_enabled_and_on_ground() and mode == 0:
 		if area_2d.get_overlapping_bodies().size() > 0:
 			for body in area_2d.get_overlapping_bodies():
 					bounce(body)
@@ -75,6 +156,7 @@ func bounce(body):
 		actually_bounce(body.get_parent())
 	
 	add_body_to_bounce(body)
+
 
 func actually_bounce(body):
 	var normal := transform.y
@@ -110,21 +192,39 @@ func actually_bounce(body):
 			body.position.y += 2 * sign(y_power)
 			# Bounce the player off of the ground if necessary,
 			# if this wasn't done the player would stay on the ground, repeatedly bouncing
-			if y_power < 0 and body.prev_is_grounded\
-			and !body.test_move(body.transform, Vector2(0, 4 * sign(y_power))):
+			if y_power < 0 and "prev_is_grounded" in body and body.prev_is_grounded and !body.test_move(body.transform, Vector2(0, 4 * sign(y_power))):
 				body.position.y += 4 * sign(y_power)
 	animation_player.play("bounce_weak" if is_weak_bounce else "bounce")
 	
 	if "stamina" in body:
 		body.stamina = 100
 
+
 func add_body_to_bounce(body):
 	blacklisted_bodies.get_or_add(body, 0.1)
+
 
 func remove_body_to_bounce(body):
 	blacklisted_bodies.erase(body)
 
+
 func idle_bounce_anim():
-	var _connect = get_tree().create_timer(5).connect("timeout", self, "idle_bounce_anim")
-	if !animation_player.is_playing():
+	if is_equal_approx(spring_anim_power, 0):
 		animation_player.play("idle")
+
+
+func set_bounce_anim(power: float):
+	spring_anim_power = power
+
+
+func update_bounce_anim(delta: float):
+	var spring_constant = 500.0
+	var damping_constant = 5
+	
+	var force = (-spring_constant * base_scale_factor) + (damping_constant * spring_anim_power)
+	spring_anim_power -= force * delta
+	base_scale_factor -= spring_anim_power * delta
+	mushroom_cap.scale.y = 1 + (base_scale_factor * 1.25)
+	mushroom_cap.scale.x = (1 - ((mushroom_cap.scale.y - 1) / 2.0)) * (64 / (32 * parts + 64))
+	$Node2D.scale.y = (1 + base_scale_factor * 1.25)
+	$Node2D.scale.x = -(1 -(1 - (($Node2D.scale.y - 1) / 2.0)) * ((32 * parts + 64) / 64))

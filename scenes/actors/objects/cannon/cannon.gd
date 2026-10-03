@@ -15,9 +15,11 @@ onready var animation_player : AnimationPlayer = $AnimationPlayer
 onready var tween : Tween = $Tween 
 onready var timer : Timer = $Timer
 onready var invuln_timer = $InvulnTimer
-onready var audio_player : AudioStreamPlayer = $AudioStreamPlayer
+onready var audio_player : AudioStreamPlayer2D = $AudioStreamPlayer
 onready var particles : Particles2D = $CannonMoveable/SpriteBodyReverser/SpriteBody/Particles2D
 onready var nearby_character_detection : Area2D = $NearbyCharacterDetection
+onready var collision_shape_2d = $RingCollision/CollisionShape2D
+onready var collision_shape_2d_2 = $EntranceCollision/CollisionShape2D
 
 # the character using the cannon
 var stored_character : Character
@@ -50,20 +52,28 @@ var target_zoom: float = 1.5
 var stored_zoom: float = 1.0
 
 # the audio files used in the code for some of the cannons movements
-onready var cannon_move_noise : AudioStream = preload("res://scenes/actors/objects/cannon/crank.tres")
-onready var cannon_fire_noise : AudioStream = preload("res://scenes/actors/objects/cannon/nsmbwiiBobombCannon.wav")
+onready var cannon_move_noise : AudioStream = preload("res://assets/sounds/cannon/crank.wav")
+onready var cannon_fire_noise : AudioStream = preload("res://assets/sounds/cannon/shoot.wav")
 
-func _set_properties() -> void:
-	savable_properties = ["launch_power", "min_rotation", "max_rotation", "faces_right", "target_zoom"]
-	editable_properties = ["launch_power", "min_rotation", "max_rotation", "faces_right", "target_zoom"]
+#func _set_properties() -> void:
+#	savable_properties = ["launch_power", "min_rotation", "max_rotation", "faces_right", "target_zoom"]
+#	editable_properties = ["launch_power", "min_rotation", "max_rotation", "faces_right", "target_zoom"]
+#
+func _register_properties() -> void:
+	register_property(4, "launch_power", launch_power)
+	register_property(5, "min_rotation", min_rotation)
+	register_property(6, "max_rotation", max_rotation)
+	register_property(7, "faces_right", faces_right)
+	register_property(8, "target_zoom", target_zoom)
 	
-func _set_property_values() -> void:
-	set_property("launch_power", launch_power)
-	set_property("min_rotation", min_rotation)
-	set_property("max_rotation", max_rotation)
-	set_property("faces_right", faces_right)
-	set_property("target_zoom", target_zoom)
-	
+func _register_property_info() -> void:
+	set_property_info("launch_power", PropertyInfo.new("The velocity at which this object launches the player.", 1, 0, INF, ["", ""], ["", ""]))
+	set_property_info("min_rotation", PropertyInfo.new("The minimum radius in degrees you can aim this cannon from the center.\nMake sure this number is less than or equal to Max Rotation!", 1, -360, 360, ["", ""], ["", ""]))
+	set_property_info("max_rotation", PropertyInfo.new("The maximum radius in degrees you can aim this cannon from the center.", 1, -360, 360, ["", ""], ["", ""]))
+	set_property_info("faces_right", PropertyInfo.new("Determines if this cannon pivots left or right from it's center while aiming.", 1, -INF, INF, ["", ""], ["", ""]))
+	set_property_info("target_zoom", PropertyInfo.new("Multiplier of the camera's zoom while aiming.", 0.1, 0, INF, ["", ""], ["", ""]))
+
+
 func _ready() -> void:
 	set_physics_process(false)
 
@@ -73,6 +83,11 @@ func _ready() -> void:
 		cannon_direction_multiplier = -1
 	# warning-ignore:return_value_discarded
 	pipe_enter_logic.connect("pipe_animation_finished", self, "_start_cannon_animation")
+
+func _object_ready():
+	._object_ready()
+	collision_shape_2d.disabled = !is_on_ground_layer()
+	collision_shape_2d_2.disabled = !is_on_ground_layer()
 
 #disabled by default until process is enabled, so this can assume the cannon is already in an active state
 func _physics_process(delta : float) -> void:
@@ -139,12 +154,12 @@ func _on_animation_finished(anim_name : String) -> void:
 		
 		if !is_equal_approx(stored_character.camera.current_zoom.x, target_zoom):
 			stored_character.camera.zoom_tween.remove_all()
-			stored_character.camera.set_zoom_tween(Vector2(target_zoom, target_zoom), 0.8, true)
+			stored_character.camera.set_zoom_tween(Vector2(target_zoom, target_zoom), 0.8)
 		
 		sprite_fuse.visible = true
 
 		#normally we would change current volume, but process for the audio stream player is disabled until the cannon fires
-		audio_player.volume_db = -10 #needs to be a bit quieter to sound right
+		audio_player.volume_db = -7 #needs to be a bit quieter to sound right
 		audio_player.stream = cannon_move_noise
 		audio_player.play()
 		audio_player.stream_paused = true #pause it so we can unpause it when the cannon is moving
@@ -168,7 +183,7 @@ func fire_cannon() -> void:
 	stored_character.modulate.a = 1
 	if !is_equal_approx(stored_character.camera.current_zoom.x, stored_zoom):
 		stored_character.camera.zoom_tween.remove_all()
-		stored_character.camera.set_zoom_tween(Vector2(stored_zoom, stored_zoom), 0.5, true)
+		stored_character.camera.set_zoom_tween(Vector2(stored_zoom, stored_zoom), 0.5)
 	invuln_timer.start()
 	#set the player so they will fire out of the cannon properly with velocity and such
 	stored_character.position = cannon_exit_position.global_position
@@ -178,10 +193,11 @@ func fire_cannon() -> void:
 	stored_character.set_state_by_name("DiveState", get_physics_process_delta_time())
 	stored_character.velocity = launch_velocity
 	stored_character.facing_direction = sign(Vector2.UP.rotated(sprite_body.global_rotation).x)
-
+	LastInputDevice.rumble(0.5, 0.8, 0.2)
+	
 	#play cannon fire sound
 	audio_player.stream = cannon_fire_noise
-	audio_player.current_volume = 10 # use current_volume since the audio_players process will be enabled now
+	audio_player.volume_db = 10
 	audio_player.stream_paused = false #the cannon aiming sfx uses the pause feature to play it properly, so no audio will play unless we set this
 	audio_player.play()
 	
@@ -198,7 +214,7 @@ func return_camera_focus() -> void:
 	stored_character.camera.focus_on = null
 
 func _on_invuln_timeout():
-	stored_character.set_collision_layer_bit(1, true)
+	pass
 #used to re-enable the entrance collision only when a player exits the vicinity
 func _on_NearbyCharacterDetection_body_exited(body : PhysicsBody2D) -> void:
 	attempt_enable_collision(body)

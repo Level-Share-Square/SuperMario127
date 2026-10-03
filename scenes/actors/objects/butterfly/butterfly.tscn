@@ -87,6 +87,7 @@ animations = [ {
 [node name="Butterfly" type="Node2D"]
 z_index = -1
 script = ExtResource( 2 )
+internal_id = "butterfly"
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 13 )

@@ -1,0 +1,164 @@
+extends GameObject
+
+onready var area = $Area2D
+onready var collision_shape = $Area2D/CollisionShape2D
+onready var camera_stopper = $CameraStopper
+onready var camera_stop_shape = $CameraStopper/CollisionShape2D
+onready var sprite = $Sprite
+
+
+var parts := 1
+export var stops_camera := false
+export var vertical := false
+
+var layer_uuid: String = ""
+var parallax_distance: float = 0
+var tint := Color(0.545098, 0.545098, 0.545098)
+var opacity: float = 1
+var lock_axis: int = LayerMetadata.LockAxis.None
+var is_visible: bool = true
+var move_to_index: int = -1
+var one_time: bool = false
+
+var last_parts := 1
+var used: bool = false
+
+var id: int
+
+func _register_properties():
+	register_property(4, "parts", parts)
+	register_property(5, "stops_camera", stops_camera)
+	register_property(6, "vertical", vertical)
+	register_property(7, "layer_uuid", layer_uuid)
+	set_property_override("layer_uuid", PropertyTab.OverrideTypes.DROPDOWN, [self, "get_layer_args"])
+	register_property(8, "parallax_distance", parallax_distance)
+	register_property(9, "tint", tint)
+	register_property(10, "opacity", opacity)
+	register_property(11, "is_visible", is_visible)
+	register_property(12, "move_to_index", move_to_index)
+	register_property(14, "lock_axis", lock_axis)
+	set_property_override("lock_axis", PropertyTab.OverrideTypes.ENUM, ["None", "Vertical", "Horizontal", "Both"])
+	register_property(13, "one_time", one_time)
+
+func _register_property_info():
+	set_property_info("parts", PropertyInfo.new("How long this object should extend.", 1, 1, INF, ["", ""], ["", ""]))
+	set_property_info("stops_camera", PropertyInfo.new("Whether or not this object should stop the camera.\nDepends on parts.", 1, -INF, INF, ["", ""], ["", ""]))
+	set_property_info("vertical", PropertyInfo.new("Whether or not the object should extend vertically.", 1, -INF, INF, ["", ""], ["", ""]))
+	set_property_info("layer_uuid", PropertyInfo.new("The layer that will be affected by this object.", 1, -INF, INF, ["", ""], ["", ""], false, "Layer"))
+	set_property_info("parallax_distance", PropertyInfo.new("How far away this layer will be. Negative values are closer.", 1, -ParallaxScroll.MAX_DISTANCE, ParallaxScroll.MAX_DISTANCE, ["", ""], ["", ""]))
+	set_property_info("tint", PropertyInfo.new("The color modulation of this layer.", 1, -INF, INF, ["", ""], ["", ""]))
+	set_property_info("opacity", PropertyInfo.new("How transparent this layer will be.", 0.05, 0, 1, ["", ""], ["", ""]))
+	set_property_info("is_visible", PropertyInfo.new("Whether or not to hide this layer after interacting.", 1, -INF, INF, ["", ""], ["", ""]))
+	set_property_info("move_to_index", PropertyInfo.new("Where to move this layer in the layer order, counted from 0 as you move down,", 1, -INF, INF, ["", ""], ["", ""]))
+	set_property_info("lock_axis", PropertyInfo.new("Whether to stop the layer from scrolling, on one or both axes.", 1, -INF, INF, ["", ""], ["", ""]))
+	set_property_info("one_time", PropertyInfo.new("Whether or not to repeat this trigger's actions.", 1, -INF, INF, ["", ""], ["", ""], false, "Oneshot"))
+
+func get_layer_args() -> Dictionary:
+	var args: Dictionary = {}
+	
+	var shared = get_tree().current_scene.get_shared_node()
+	for layer in shared.layers:
+		args[layer] = shared.get_layer(layer).layer_data.layer_metadata.layer_name
+	return args
+
+func _unhandled_input(event: InputEvent) -> void:
+	parts_input_handler(event,self)
+
+func _object_ready():
+	._object_ready()
+	if not is_enabled():
+		camera_stopper.set_size(Vector2.ZERO)
+		camera_stopper.monitorable = false
+		camera_stopper.visible = false
+		
+		sprite.visible = not is_on_ground_layer()
+	
+func _ready():
+	if mode != 1:
+		var _connect = area.connect("body_entered", self, "update_layer")
+		sprite.visible = false
+		camera_stopper.monitorable = stops_camera
+	else:
+		var _connect2 = connect("property_changed", self, "update_property")
+		camera_stopper.visible = stops_camera
+	if parts < 1:
+		parts = 1
+	update_property("vertical", vertical)
+	camera_stopper.set_size(camera_stop_shape.shape.extents)
+	update_parts()
+	
+	id = hash([position, CurrentLevelData.area_id])
+	if id in CurrentLevelData.vars.used_changers:
+		used = true
+	
+	
+func update_property(key, value):
+	match(key):
+		"parts":
+			if value < 1:
+				parts = 1
+				return
+			update_parts()
+		"vertical":
+			if vertical:
+				sprite.rect_size.x = 32
+				sprite.rect_position.x = -16
+				collision_shape.shape.extents.x = 16
+				camera_stop_shape.shape.extents.x = 52
+			else:
+				sprite.rect_size.y = 32
+				sprite.rect_position.y = -16
+				collision_shape.shape.extents.y = 16
+				camera_stop_shape.shape.extents.y = 52
+			update_parts()
+		"rotation_degrees":
+			rotation_degrees = 0
+		"stops_camera":
+			camera_stopper.visible = stops_camera
+			
+func update_parts():
+	if vertical:
+		sprite.rect_size.y = parts * 32
+		sprite.rect_position.y = (-16 * parts)
+		collision_shape.shape.extents.y = 16 * parts
+		camera_stop_shape.shape.extents.y = collision_shape.shape.extents.y + 26
+	else:
+		sprite.rect_size.x = parts * 32
+		sprite.rect_position.x = (-16 * parts)
+		collision_shape.shape.extents.x = 16 * parts
+		camera_stop_shape.shape.extents.x = collision_shape.shape.extents.x + 26
+	editor_rect = Rect2(sprite.rect_position, sprite.rect_size)
+	
+func update_layer(body):
+	if is_enabled_and_on_ground() and body.name.begins_with("Character") and !body.dead and body.controllable:
+		if used and one_time: return
+		
+		var player = get_tree().current_scene
+		var shared = player.get_shared_node()
+		var character = player.get_node(player.character)
+		if !shared.get_layer(layer_uuid): return
+		if move_to_index < 0 or move_to_index > shared.layers.size() - 1: move_to_index = -1
+		
+		var layer_state := LayerState.new(
+			move_to_index,
+			parallax_distance,
+			tint,
+			opacity,
+			is_visible,
+			lock_axis
+		)
+		
+		shared.load_layer_states({layer_uuid: layer_state})
+		CurrentLevelData.vars.layer_states[CurrentLevelData.area_id][layer_uuid] = layer_state
+		
+		used = true
+		if not id in CurrentLevelData.vars.used_changers:
+			CurrentLevelData.vars.used_changers.append(id)
+		
+				
+func _process(delta):
+	if parts <= 0:
+		parts = 1
+		set_property("parts", parts, true)
+			
+

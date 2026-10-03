@@ -1,3 +1,4 @@
+class_name LevelBackgrounds
 extends Node2D
 
 onready var parallax_node = $Parallax
@@ -6,15 +7,21 @@ onready var background_node = $Background/Sprite
 var ready = false
 var do_auto_scroll = false
 var auto_scroll_speed := 0.0
+var auto_scroll_override: float = 0
+
 
 func _ready():
 	ready = true
 
-func load_in(_level_data : LevelData, level_area : LevelArea):
-	update_background(level_area.settings.sky, level_area.settings.background, level_area.settings.bounds, 0, level_area.settings.background_palette)
 
-func update_background_area(area : LevelArea):
-	update_background(area.settings.sky, area.settings.background, area.settings.bounds, 0, area.settings.background_palette)
+func load_in():
+	var area_header: AreaHeader = CurrentLevelData.area_headers[CurrentLevelData.area_id]
+	update_background(area_header.sky, area_header.background, area_header.bounds, 0, area_header.background_palette, area_header.bg_autoscroll_speed if not auto_scroll_override else auto_scroll_speed)
+
+
+func update_background_area(area_header: AreaHeader):
+	update_background(area_header.sky, area_header.background, area_header.bounds, 0, area_header.background_palette, area_header.bg_autoscroll_speed if not auto_scroll_override else auto_scroll_speed)
+
 
 func update_background(sky : int = 1, background : int = 1, bounds : Rect2 = Rect2(0, 0, 0, 0), extra_y_offset : float = 0, background_palette : int = 0, speed_override: float = 0):
 	if !ready:
@@ -22,11 +29,11 @@ func update_background(sky : int = 1, background : int = 1, bounds : Rect2 = Rec
 		
 	#warning-ignore:unused_variable
 	var background_id_mapper = preload("res://scenes/shared/background/backgrounds/ids.tres")
-	var background_resource = Singleton.CurrentLevelData.get_cached_background(sky)
+	var background_resource = CurrentLevelData.get_cached_background(sky)
 	
 	#warning-ignore:unused_variable
 	var foreground_id_mapper = preload("res://scenes/shared/background/foregrounds/ids.tres")
-	var foreground_resource = Singleton.CurrentLevelData.get_cached_foreground(background)
+	var foreground_resource = CurrentLevelData.get_cached_foreground(background)
 	
 	background_node.texture = background_resource.texture
 	
@@ -58,19 +65,17 @@ func update_background(sky : int = 1, background : int = 1, bounds : Rect2 = Rec
 		
 		parallax_node.offset.y += extra_y_offset
 	
-	auto_scroll_speed = 0
 	parallax_node.scroll_base_scale.x = 1
 	
-	if foreground_resource.auto_scroll_speed > 0.0:
-		do_auto_scroll = true
-		parallax_node.scroll_base_scale.x = 0
-		auto_scroll_speed = foreground_resource.auto_scroll_speed
-	
-	if speed_override > 0:
+	if abs(speed_override) > 0:
 		do_auto_scroll = true
 		parallax_node.scroll_base_scale.x = 0
 		auto_scroll_speed = speed_override
-
+	else:
+		do_auto_scroll = false
+		parallax_node.scroll_base_scale.x = 1
+		auto_scroll_speed = 0
+		
 func _process(delta):
 	if do_auto_scroll:
 		parallax_node.scroll_base_offset.x += auto_scroll_speed*delta

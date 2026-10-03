@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 145.18 157.63">
+  <g id="Layer_59" data-name="Layer 59">
+    <path d="M72.37,69.39c-13.71,0-24.87-11.16-24.87-24.87s11.16-24.87,24.87-24.87,24.87,11.16,24.87,24.87h17c0-23.09-18.78-41.87-41.87-41.87S30.5,21.43,30.5,44.52s18.78,41.87,41.87,41.87h0c13.71,0,24.87,11.16,24.87,24.87s-11.16,24.87-24.87,24.87-24.87-11.16-24.87-24.87h-17c0,23.09,18.78,41.87,41.87,41.87s41.87-18.78,41.87-41.87-18.78-41.87-41.87-41.87Z" style="fill: #fff;"/>
+    <g>
+      <polyline points="27.5 6.35 10.93 28.16 18.98 58.65 5.5 77.02" style="fill: none; stroke: #fff; stroke-linecap: round; stroke-miterlimit: 10; stroke-width: 11px;"/>
+      <polyline points="5.5 98.27 17.31 115.47 10.81 135.14 28.5 151.13" style="fill: none; stroke: #fff; stroke-linecap: round; stroke-miterlimit: 10; stroke-width: 11px;"/>
+      <polyline points="128.65 5.5 124.42 26.36 138.3 43.46 122.26 66.48" style="fill: none; stroke: #fff; stroke-linecap: round; stroke-miterlimit: 10; stroke-width: 11px;"/>
+      <polyline points="126.12 88.41 138.3 111 122.26 133.58 123.26 152.13" style="fill: none; stroke: #fff; stroke-linecap: round; stroke-miterlimit: 10; stroke-width: 11px;"/>
+    </g>
+  </g>
+</svg>

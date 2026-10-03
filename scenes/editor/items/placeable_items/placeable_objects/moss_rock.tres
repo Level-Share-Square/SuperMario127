@@ -1,0 +1,37 @@
+[gd_resource type="Resource" load_steps=22 format=2]
+
+[ext_resource path="res://scenes/editor/items/placeable_object.gd" type="Script" id=1]
+[ext_resource path="res://scenes/actors/objects/moss_rock/icon.png" type="Texture" id=2]
+[ext_resource path="res://scenes/actors/objects/moss_rock/moss_rock.png" type="Texture" id=3]
+[ext_resource path="res://scenes/actors/objects/moss_rock/palettes/6icon.png" type="Texture" id=4]
+[ext_resource path="res://scenes/actors/objects/moss_rock/palettes/9icon.png" type="Texture" id=5]
+[ext_resource path="res://scenes/actors/objects/moss_rock/palettes/2.png" type="Texture" id=6]
+[ext_resource path="res://scenes/actors/objects/moss_rock/palettes/7icon.png" type="Texture" id=7]
+[ext_resource path="res://scenes/actors/objects/moss_rock/palettes/3icon.png" type="Texture" id=8]
+[ext_resource path="res://scenes/actors/objects/moss_rock/palettes/3.png" type="Texture" id=9]
+[ext_resource path="res://scenes/actors/objects/moss_rock/palettes/4.png" type="Texture" id=10]
+[ext_resource path="res://scenes/actors/objects/moss_rock/palettes/5.png" type="Texture" id=11]
+[ext_resource path="res://scenes/actors/objects/moss_rock/palettes/4icon.png" type="Texture" id=12]
+[ext_resource path="res://scenes/actors/objects/moss_rock/palettes/5icon.png" type="Texture" id=13]
+[ext_resource path="res://scenes/actors/objects/moss_rock/palettes/1icon.png" type="Texture" id=14]
+[ext_resource path="res://scenes/actors/objects/moss_rock/palettes/2icon.png" type="Texture" id=15]
+[ext_resource path="res://scenes/actors/objects/moss_rock/palettes/9.png" type="Texture" id=16]
+[ext_resource path="res://scenes/actors/objects/moss_rock/palettes/7.png" type="Texture" id=17]
+[ext_resource path="res://scenes/actors/objects/moss_rock/palettes/1.png" type="Texture" id=18]
+[ext_resource path="res://scenes/actors/objects/moss_rock/palettes/6.png" type="Texture" id=19]
+[ext_resource path="res://scenes/actors/objects/moss_rock/palettes/8.png" type="Texture" id=20]
+[ext_resource path="res://scenes/actors/objects/moss_rock/palettes/8icon.png" type="Texture" id=21]
+
+[resource]
+script = ExtResource( 1 )
+item_name = "Mossy Rock"
+change_to = "obj_rock"
+items_in_sequence = 3
+index_in_sequence = 0
+icons = [ ExtResource( 2 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 8 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 4 ), ExtResource( 7 ), ExtResource( 21 ), ExtResource( 5 ) ]
+previews = [ ExtResource( 3 ), ExtResource( 18 ), ExtResource( 6 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 19 ), ExtResource( 17 ), ExtResource( 20 ), ExtResource( 16 ) ]
+priority = 146
+object_id = 141
+preview_offset = Vector2( 0, 0 )
+property_overrides = {
+}

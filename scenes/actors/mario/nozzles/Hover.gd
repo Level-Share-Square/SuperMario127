@@ -6,6 +6,7 @@ export var boost_power := 170
 export var depletion := 1.1
 export var fuel_depletion := 0.035
 
+var max_cutoff = 2500
 var accel = 30
 var rotation_interpolation_speed = 35
 var preservation_factor = 0
@@ -14,12 +15,19 @@ func _init():
 	blacklisted_states = ["WingMarioState", "LavaBoostState", "RainbowStarState", "ButtSlideState", "WallSlideState", "GroundPoundStartState", "GroundPoundState", "GroundPoundEndState", "GetupState", "KnockbackState", "BonkedState", "SpinningState"]
 
 func _activate_check(_delta):
-	return !(character.state == character.get_state_node("SwimmingState") and character.state.boost_time_left > 0) and !(character.state == character.get_state_node("BackflipState") and character.state.disable_turning == true) and (character.get_state_node("SlideState").crouch_buffer == 0 or character.swimming)
+	return !(character.state == character.get_state_node("SwimmingState") and character.state.boost_time_left > 0) and (character.get_state_node("SlideState").crouch_buffer == 0 or character.swimming)
 	
 func is_state(state):
 	return character.state == character.get_state_node(state)
 	
 func _activated_update(delta):
+	var sprite = character.sprite
+
+	if is_state("JumpState") or is_state("BackflipState"):
+		sprite.rotation_degrees = 0
+		character.rotating_jump = false
+		character.state.disable_turning = false
+
 	if !is_state("DiveState") and !is_state("SlideState") and !character.swimming:
 		if character.facing_direction == 1:
 			character.sprite.animation = "jumpRight"
@@ -28,12 +36,11 @@ func _activated_update(delta):
 
 	if (character.state == null or !character.state.override_rotation) and !character.rotating_jump:
 		override_rotation = true
-		var sprite = character.sprite
 		var sprite_rotation = (character.velocity.x / character.move_speed) * 6
 		sprite.rotation_degrees = lerp(sprite.rotation_degrees, sprite_rotation, fps_util.PHYSICS_DELTA * rotation_interpolation_speed)
-	else:
-		override_rotation = false
-			
+#	else:
+#		override_rotation = false
+
 	var normal = character.sprite.transform.y.normalized()
 	character.jump_animation = 0
 	
@@ -70,6 +77,10 @@ func _update(_delta):
 
 	if !activated:
 		override_rotation = false
+	else:
+		var bus_index: int = AudioServer.get_bus_index("FluddSound")
+		var bus_effect: AudioEffectFilter = AudioServer.get_bus_effect(bus_index, 0)
+		bus_effect.cutoff_hz = max(max_cutoff * (1.0 - (character.stamina / 100.0)), 100.0)
 
 	last_state = character.state
 
@@ -89,11 +100,12 @@ func _general_update(_delta):
 		if abs(character.velocity.x) < abs(power * normal.x) * 8:
 			character.velocity.x -= accel * normal.x
 
+		LastInputDevice.rumble(0.1, 0.0, 0.0)
 		character.water_particles.emitting = true
 		character.water_particles_2.emitting = true
 		#character.water_sprite.animation = "out"
 		character.water_sprite.frame = 0
-		character.fludd_sound.play(((100 - character.stamina) / 100) * 2.79)
+		character.fludd_sound.play(((100 - character.stamina) / 100))
 		
 		if character.velocity.y < 0 and character.stamina == 100:
 			preservation_factor = character.velocity.y / 96
@@ -102,6 +114,7 @@ func _general_update(_delta):
 	elif !activated and last_activated:
 		character.emit_signal("fludd_deactivated")
 		
+		LastInputDevice.stop_rumble()
 		character.water_particles.emitting = false
 		character.water_particles_2.emitting = false
 		#character.water_sprite.animation = "in"

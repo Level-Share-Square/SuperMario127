@@ -7,7 +7,8 @@ signal state_changed(new_state)
 
 const UP_DIR := Vector2.UP
 const SNAP_VECTOR := Vector2(0, 12)
-const FLOOR_MAX_ANGLE: float = rad2deg(67)
+const FLOOR_MAX_ANGLE: float = deg2rad(67)
+
 
 # the enemy cant fall faster than gravity times this
 export var max_gravity_factor: float = 20
@@ -15,24 +16,32 @@ export var max_gravity_factor: float = 20
 export var facing_direction: int = -1
 export var velocity: Vector2
 export var cur_state: String
+export var enemy_size: Vector2
 
 export var float_in_liquids: bool
 export var float_speed: float = 32
 export var float_accel: float = 4
+export var coin_id: int = 1
 
+
+var level_bounds: Rect2
 # parent should set this to area gravity times two
 var gravity: float
-# if not enabled... enemy stops moving altogether (also used for editor)
+# if not is_enabled_and_on_ground()... enemy stops moving altogether (also used for editor)
 var enabled: bool
 # for wind
 var snap_enabled: bool = true
 # whether to emit particles on startup
 var spawn_effect: bool = true
+# layer ref
+var layer_ref: WeakRef
 
 # water and lava
 onready var liquids_detector: Area2D = $LiquidsDetector
 # detects platforms (copy pasted from mario.gd so we're just going to reuse this from there)
 onready var platform_detector: Area2D = $PlatformDetector
+# checks for the floor bc is_on_floor() is way too janky on it's own.
+onready var floor_detector: RayCast2D = $FloorDetector
 # holds all the states
 onready var state_container: Node = $States 
 # self explanatory
@@ -70,6 +79,7 @@ func set_state_node(new_state: EnemyState) -> void:
 
 
 func _ready():
+	z_as_relative = true
 	if spawn_effect:
 		spawn_particles.emitting = true
 	
@@ -83,42 +93,97 @@ func _ready():
 func _physics_process(delta):
 	if not enabled: return
 	
-	sprite.flip_h = (facing_direction > 0)
-	
 	var working_snap_vector: Vector2 = SNAP_VECTOR if snap_enabled else Vector2.ZERO
 	
 	var gravity_multiplier: float = 1
-	if is_instance_valid(state):
+	if is_instance_valid(state) and "gravity_multiplier" in state:
+		var first_value = state
 		state._update(delta)
 		gravity_multiplier *= state.gravity_multiplier
 	
 	# gravity and floating in liquids
-	if not float_in_liquids or liquids_detector.get_overlapping_areas().size() <= 0:
-		velocity.y += gravity * gravity_multiplier * delta * 60
-		velocity.y = min(velocity.y, gravity * max_gravity_factor)
+	if not float_in_liquids or liquids_detector.get_overlapping_areas().empty():
+		if not is_on_floor():
+			velocity.y += gravity * gravity_multiplier * delta * 60
+			velocity.y = min(velocity.y, gravity * max_gravity_factor)
 	else:
 		velocity.y = move_toward(velocity.y, -float_speed, float_accel * delta * 60)
 		working_snap_vector = Vector2.ZERO
 	
 	var floor_normal: Vector2 = get_floor_normal()
-	var working_velocity = velocity
 	
 	for body in platform_detector.get_overlapping_bodies():
 		if body is PhysicsBody2D:
 			if body.can_collide_with(self):
 				remove_collision_exception_with(body)
+				floor_detector.remove_exception(body)
+				_on_collision_exception_removed(body)
 			else:
 				add_collision_exception_with(body)
+				floor_detector.add_exception(body)
+				_on_collision_exception_added(body)
 	
-	# counteract slope slowdown/speedup
-	if is_on_floor() and not is_zero_approx(floor_normal.y):
-		# anti-slowdown
-		if sign(floor_normal.x) != sign(working_velocity.x):
-			working_velocity.x /= abs(floor_normal.y)
-		# anti-speedup
-		else:
-			working_velocity.x *= abs(floor_normal.y)
+	if is_on_ceiling() and velocity.y < 0:
+		velocity.y = -velocity.y
 	
-	velocity.y = move_and_slide_with_snap(working_velocity, 
+	velocity = move_and_slide_with_snap(velocity, 
 		working_snap_vector if velocity.y >= 0 else Vector2.ZERO, 
-		UP_DIR, true, 4, FLOOR_MAX_ANGLE).y
+		UP_DIR, true, 4, FLOOR_MAX_ANGLE)
+	
+	sprite.flip_h = (facing_direction > 0)
+
+
+func is_on_ground() -> bool:
+	return floor_detector.is_colliding()
+
+var prev_is_grounded := false
+
+#Needed for semisolid platforms
+func is_grounded() -> bool:
+	# "Death barrier", can only be reached by collecting a shine sprite
+	if position.y > (level_bounds.end.y * 32) + 256:
+		return true
+	
+	var raycast_node := floor_detector
+	raycast_node.cast_to = Vector2(0, 30) #26 or 30
+	
+	var normal = Vector2.UP
+	if raycast_node.is_colliding():
+		normal = raycast_node.get_collision_normal()
+	
+	var is_downward: bool = velocity.y > -1
+	var new_is_grounded := (raycast_node.is_colliding() or is_on_floor()) and is_downward
+	
+	prev_is_grounded = new_is_grounded
+	return prev_is_grounded
+
+func create_coin(velocity: Vector2, offset: Vector2):
+	var object_setup = create_object(global_position + offset, coin_id, 0)
+	var object = object_setup[0]
+	object.set_property("physics", true)
+	object.set_property("velocity", velocity)
+	object_setup[1].call_func(object)
+	return object
+
+
+func create_object(pos: Vector2, object_id: int, palette: int, internal_id: String = ""):
+	var level_layer: LevelLayer = layer_ref.get_ref()
+	
+	return level_layer.setup_object(
+		ObjectData.new(
+			ObjectMetadata.new(
+				pos,
+				object_id,
+				palette,
+				internal_id
+			)
+		)
+	)
+
+# override on child enemies for updating auxillary collision shapes when an exception is added
+func _on_collision_exception_added(body):
+	pass
+
+# override on child enemies for updating auxillary collision shapes when an exception is removed
+func _on_collision_exception_removed(body):
+	pass

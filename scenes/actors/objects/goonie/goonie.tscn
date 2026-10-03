@@ -100,11 +100,12 @@ tracks/0/keys = {
 [node name="Goonie" type="Node2D"]
 z_index = 1
 script = ExtResource( 1 )
+editor_rect = Rect2( -24, -16, 42, 32 )
+internal_id = "goonie"
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 11 )
 animation = "flying"
-frame = 6
 playing = true
 offset = Vector2( -4, 0 )
 flip_h = true
@@ -136,4 +137,5 @@ process_parent = true
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/appear = SubResource( 14 )
 anims/disappear = SubResource( 15 )
+
 [connection signal="body_exited" from="StaticBody2D/Area2D" to="." method="_on_PlatformArea_body_exited"]

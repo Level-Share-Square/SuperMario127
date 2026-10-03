@@ -2,7 +2,7 @@
 
 [ext_resource path="res://scenes/actors/objects/hover_nozzle/hover_nozzle.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/objects/hover_nozzle/hover_nozzle.png" type="Texture" id=2]
-[ext_resource path="res://scenes/actors/objects/hover_nozzle/sound.wav" type="AudioStream" id=3]
+[ext_resource path="res://assets/sounds/fludd/fludd_refill.wav" type="AudioStream" id=3]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/turbo_nozzle.png-e4fdae774c5fa77bc2ebfcd9ed684d54.stex"
@@ -18,6 +18,8 @@ extents = Vector2( 16, 10 )
 
 [node name="HoverNozzle" type="Node2D"]
 script = ExtResource( 1 )
+editor_rect = Rect2( -12, -7, 24, 14 )
+internal_id = "hover_nozzle"
 
 [node name="KinematicBody2D" type="KinematicBody2D" parent="."]
 collision_layer = 8

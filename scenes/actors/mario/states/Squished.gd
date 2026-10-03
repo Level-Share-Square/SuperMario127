@@ -33,11 +33,11 @@ func _update_squish_amount():
 	squish_amount = 0.0
 	squish_y_difference = 0
 	
-	var y_from := character.bottom_pos.global_position.y
+	var y_from: float = character.bottom_pos.global_position.y
 	if character.ground_check.is_colliding():
 		y_from = character.ground_check.get_collision_point().y - 1
 	
-	var y_to := character.position.y - (0 if character.using_dive_collision else 6)
+	var y_to: float = character.position.y - (0 if character.using_dive_collision else 6)
 	
 	# Is Mario's head inside terrain?
 	if character.get_world_2d().direct_space_state.intersect_point(Vector2(character.position.x, y_to), 1, [self], 1).size() > 0:
@@ -47,7 +47,7 @@ func _update_squish_amount():
 			squish_amount = 1.0
 		else:
 			# Do raycast
-			var raycast := character.get_world_2d().direct_space_state.intersect_ray(
+			var raycast: Dictionary = character.get_world_2d().direct_space_state.intersect_ray(
 				Vector2(character.position.x, y_from), Vector2(character.position.x, y_to), [self], 1)
 			if raycast.size() > 0:
 				squish_y_difference = raycast["position"].y - y_to

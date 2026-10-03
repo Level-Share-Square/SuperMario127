@@ -32,8 +32,7 @@ static func fast_is_valid(value: String) -> bool:
 	return true
 
 const empty_tile := [0,0,0]
-static func encode(tiles, settings):
-	#print(settings.bounds)
+static func encode(tiles, size):
 	var new_data = []
 	var last_index = -1
 	var last_palette = 0
@@ -41,7 +40,7 @@ static func encode(tiles, settings):
 	var append_string = ""
 	var prepend_string = ""
 	
-	for index in range(settings.bounds.size.x * settings.bounds.size.y):
+	for index in range(size.x * size.y):
 		var encoded_tile = tiles[index]
 		if not encoded_tile:
 			encoded_tile = empty_tile
@@ -62,7 +61,6 @@ static func encode(tiles, settings):
 	prepend_string = "" if last_palette == 0 else str(last_palette) + ":"
 	append_string = "" if count == 1 else ("*" + str(count))
 	new_data.append(prepend_string + str(last_index).pad_zeros(3) + append_string)
-	#print(new_data)
 	return new_data
 
 static func generate_from_chunks(tile_chunks: Dictionary, layers: Array, bounds: Rect2):
@@ -105,128 +103,173 @@ static func split_code_top_level(string):
 				start_from = index + 1
 	return parts
 
-static func decode(code: String) -> Dictionary:
-	var result = {}
+static func decode(code: String)-> Dictionary:
+
+	var full_result = {}
 
 	code = code.strip_edges()
-	code = code.replace("\n", "")
+	code = code.strip_escapes()
 	var code_array = split_code_top_level(code)
+
+	if (code_array.size() < 3):
+		full_result = {"decode_error":true}
+		return full_result
+
+	full_result.format_version = code_array[0]
+	full_result.name = code_array[1].percent_decode()
 	
-	result.format_version = code_array[0]
-	result.name = code_array[1].percent_decode()
-	
+	var new_toolbar: bool = true
 	var add_amount = 1
 	var layout_array: Array
 	var pins_array: Array
-	
-	
-	if result.format_version == "0.4.0" or result.format_version == "0.4.1":
+
+
+	if full_result.format_version == "0.4.0" or full_result.format_version == "0.4.1":
 		add_amount = 0
-	
-	elif conversion_util.compareVersions(result.format_version, "0.5.0") > -1:
-		result.author = code_array[2].percent_decode()
-		result.description = code_array[3].percent_decode()
-		result.thumbnail_url = code_array[4].percent_decode()
-		
-		var editor_array: Array = code_array[5].split("^")
-		if editor_array.size() > 1:
-			layout_array = editor_array[0].split(",")
-			pins_array = editor_array[1].split(",")
-		
+
+	if conversion_util.compare_versions(full_result.format_version, "0.5.0") > -1:
+		full_result.author = code_array[2].percent_decode()
+		full_result.description = code_array[3].percent_decode()
+		full_result.thumbnail_url = code_array[4].percent_decode()
+
+		var layout_ids: Array = []
+		var layout_palettes: Array = []
+		var pinned_items: Array = []
 		add_amount = 4
-	
-	
-	var layout_ids: Array
-	var layout_palettes: Array
-	var pinned_items: Array
-	
-	var starting_toolbar = preload("res://scenes/editor/starting_toolbar.tres")
-	for index in range(starting_toolbar.ids.size()):
-		layout_ids.append(starting_toolbar.ids[index])
-		layout_palettes.append(0)
-	
-	for index in range(layout_array.size()):
-		var item: String = layout_array[index]
-		var palette := int(item[0])
-		item.erase(0, 1)
-		
-		layout_ids[index] = item
-		layout_palettes[index] = palette
-		
-	for index in range(pins_array.size()):
-		var item: String = pins_array[index]
-		if item != "":
-			var palette := int(item[0])
-			item.erase(0, 1)
+		if code_array[5].substr(1, 1) != "^":
+			new_toolbar = false
+			var editor_array: Array = code_array[5].split("^")
+			if editor_array.size() > 1:
+				layout_array = editor_array[0].split(",")
+				pins_array = editor_array[1].split(",")
 			
-			var pin_array: Array
-			pin_array.append(item)
-			pin_array.append(palette)
-			pinned_items.append(pin_array)
+			var starting_toolbar = preload("res://scenes/editor/starting_toolbar.tres")
+			for index in range(starting_toolbar.ids.size()):
+				layout_ids.append(starting_toolbar.ids[index])
+				layout_palettes.append(0)
+			
+			for index in range(layout_array.size()):
+				var item: String = layout_array[index]
+				var palette := int(item[0])
+				item.erase(0, 1)
+				
+				layout_ids[index] = item
+				layout_palettes[index] = palette
+				
+			for index in range(pins_array.size()):
+				var item: String = pins_array[index]
+				if item != "":
+					var palette := int(item[0])
+					item.erase(0, 1)
+					
+					var pin_array: Array = []
+					pin_array.append(item)
+					pin_array.append(palette)
+					pinned_items.append(pin_array)
+		else:
+			new_toolbar = true
+			var loadouts_array: Array = [[], [], [], []]
+			var favs_array: Array = [[], [], [], []]
+			var favs_num_array: Array = []
+			var palettes_array: Array = [[], [], [], []]
+			var split_loadouts = code_array[5].split("|")
+			var loadout_counter = 0
+			
+			for incomplete_loadout in split_loadouts:
+				favs_num_array.append(int(incomplete_loadout.left(1)))
+			var favs_num_copy = favs_num_array.duplicate()
+			for incomplete_loadout in split_loadouts:
+				incomplete_loadout.erase(0, 2)
+				var items = incomplete_loadout.split(",")
+				for item in items:
+					palettes_array[loadout_counter].append(int(item.left(1)))
+					item.erase(0, 1)
+					loadouts_array[loadout_counter].append(item)
+					if favs_num_copy[loadout_counter] > 0:
+						favs_array[loadout_counter].append(item)
+						favs_num_copy[loadout_counter] -= 1
+				loadout_counter += 1
+			
+			full_result.loadouts = loadouts_array
+			full_result.fav_items = favs_array
+			full_result.items_favorited = favs_num_array
+			full_result.loadout_palettes = palettes_array
+		
+		full_result.layout_ids = layout_ids
+		full_result.layout_palettes = layout_palettes
+		full_result.pinned_items = pinned_items
 	
-	result.layout_ids = layout_ids
-	result.layout_palettes = layout_palettes
-	result.pinned_items = pinned_items
-	
-	
+	else:
+		full_result.layout_ids = []
+		full_result.layout_palettes = []
+		full_result.pinned_items = []
+
 	var areas = code_array.size() - (2 + add_amount)
-	
-	result.areas = []
-	
-	
+	full_result.areas = []
 	for area_id in range(areas):
 		var area_index = (2 + add_amount) + area_id
-		
+
 		var area_array = code_array[area_index].split("~")
-	
+
 		var area_settings_array = area_array[0].split(",")
-		result.areas.append({})
-		result.areas[area_id].settings = {}
-		result.areas[area_id].settings.size = value_util.decode_value(area_settings_array[0])
-		result.areas[area_id].settings.sky = value_util.decode_value(area_settings_array[1])
-		result.areas[area_id].settings.background = value_util.decode_value(area_settings_array[2])
-		result.areas[area_id].settings.music = value_util.decode_value(area_settings_array[3])
+
+		if (area_settings_array.size() < 4):
+			full_result = {"decode_error":true}
+			return full_result
+
+		full_result.areas.append({})
+		full_result.areas[area_id].size = old_value_util.decode_value(area_settings_array[0])
+		full_result.areas[area_id].sky = old_value_util.decode_value(area_settings_array[1])
+		full_result.areas[area_id].background = old_value_util.decode_value(area_settings_array[2])
+		full_result.areas[area_id].music = old_value_util.decode_value(area_settings_array[3])
 		if area_settings_array.size() > 4:
-			result.areas[area_id].settings.gravity = value_util.decode_value(area_settings_array[4])
+			full_result.areas[area_id].gravity = old_value_util.decode_value(area_settings_array[4])
 		else:
-			result.areas[area_id].settings.gravity = 7.82
-		
+			full_result.areas[area_id].gravity = 7.82
+
 		if area_settings_array.size() > 5:
-			result.areas[area_id].settings.background_palette = value_util.decode_value(area_settings_array[5])
+			full_result.areas[area_id].background_palette = old_value_util.decode_value(area_settings_array[5])
 		else:
-			result.areas[area_id].settings.background_palette = 0
-		
+			full_result.areas[area_id].background_palette = 0
+
 		if area_settings_array.size() > 6:
-			result.areas[area_id].settings.timer = value_util.decode_value(area_settings_array[6])
+			full_result.areas[area_id].timer = old_value_util.decode_value(area_settings_array[6])
 		else:
-			result.areas[area_id].settings.timer = 0.00
-		
-		
-		
-		if(conversion_util.compareVersions(result.format_version, "0.4.5") == -1):
+			full_result.areas[area_id].timer = 0.00
+
+		if area_settings_array.size() > 7:
+			full_result.areas[area_id].name = old_value_util.decode_value(area_settings_array[7])
+		else:
+			full_result.areas[area_id].name = ""
+		if area_settings_array.size() > 8:
+			full_result.areas[area_id].underwater_music = old_value_util.decode_value(area_settings_array[8])
+		else:
+			full_result.areas[area_id].underwater_music = ""
+
+		if(conversion_util.compare_versions(full_result.format_version, "0.4.5") == -1):
 			area_array.insert(2,"0*0")
-		
+
 		var area_tiles_array = area_array[1].split(",")
-		result.areas[area_id].foreground_tiles = []
+		full_result.areas[area_id].foreground_tiles = []
 		for tile in area_tiles_array:
-			result.areas[area_id].foreground_tiles.append(tile)
-			
+			full_result.areas[area_id].foreground_tiles.append(tile)
+
 		var area_very_background_tiles_array = area_array[2].split(",")
-		result.areas[area_id].very_background_tiles = []
+		full_result.areas[area_id].very_background_tiles = []
 		for tile in area_very_background_tiles_array:
-			result.areas[area_id].very_background_tiles.append(tile)
+			full_result.areas[area_id].very_background_tiles.append(tile)
 
 		var area_background_tiles_array = area_array[3].split(",")
-		result.areas[area_id].background_tiles = []
+		full_result.areas[area_id].background_tiles = []
 		for tile in area_background_tiles_array:
-			result.areas[area_id].background_tiles.append(tile)
-			
+			full_result.areas[area_id].background_tiles.append(tile)
+
 		var area_foreground_tiles_array = area_array[4].split(",")
-		result.areas[area_id].very_foreground_tiles = []
+		full_result.areas[area_id].very_foreground_tiles = []
 		for tile in area_foreground_tiles_array:
-			result.areas[area_id].very_foreground_tiles.append(tile)
-			
-		result.areas[area_id].objects = []
+			full_result.areas[area_id].very_foreground_tiles.append(tile)
+
+		full_result.areas[area_id].objects = []
 		if area_array.size() > 5:
 			var objects_array = area_array[5].split("|")
 			for object in objects_array:
@@ -235,7 +278,7 @@ static func decode(code: String) -> Dictionary:
 				decoded_object.properties = []
 				decoded_object.type_id = int(object_array[0])
 				var start_index = 1
-				if (conversion_util.compareVersions(result.format_version, "0.4.7") != -1):
+				if (conversion_util.compare_versions(full_result.format_version, "0.4.7") != -1):
 					decoded_object.palette = int(object_array[1])
 				else:
 					start_index = 0
@@ -243,41 +286,123 @@ static func decode(code: String) -> Dictionary:
 				var index = 0
 				for value in object_array:
 					if index > start_index:
-						decoded_object.properties.append(value_util.decode_value(value))
+						decoded_object.properties.append(old_value_util.decode_value(value))
 					index += 1
-				result.areas[area_id].objects.append(decoded_object)
+				full_result.areas[area_id].objects.append(decoded_object)
 	
-	return result
+	return full_result
+
+
+static func decode_area(area: String):
+	var area_array = area.split("~")
+	var area_settings_array = area_array[0].split(",")
+	var full_result = {}
+
+	if (area_settings_array.size() < 4):
+		full_result = {"decode_error":true}
+		return full_result
+
+	full_result.size = old_value_util.decode_value(area_settings_array[0])
+	full_result.sky = old_value_util.decode_value(area_settings_array[1])
+	full_result.background = old_value_util.decode_value(area_settings_array[2])
+	full_result.music = old_value_util.decode_value(area_settings_array[3])
+	if area_settings_array.size() > 4:
+		full_result.gravity = old_value_util.decode_value(area_settings_array[4])
+	else:
+		full_result.gravity = 7.82
+
+	if area_settings_array.size() > 5:
+		full_result.background_palette = old_value_util.decode_value(area_settings_array[5])
+	else:
+		full_result.background_palette = 0
+
+	if area_settings_array.size() > 6:
+		full_result.timer = old_value_util.decode_value(area_settings_array[6])
+	else:
+		full_result.timer = 0.00
+
+	if area_settings_array.size() > 7:
+		full_result.name = old_value_util.decode_value(area_settings_array[7])
+
+	if area_settings_array.size() > 8:
+		full_result.underwater_music = old_value_util.decode_value(area_settings_array[8])
+	else:
+		full_result.underwater_music = ""
+
+
+	var area_tiles_array = area_array[1].split(",")
+	full_result.foreground_tiles = []
+	for tile in area_tiles_array:
+		full_result.foreground_tiles.append(tile)
+
+	var area_very_background_tiles_array = area_array[2].split(",")
+	full_result.very_background_tiles = []
+	for tile in area_very_background_tiles_array:
+		full_result.very_background_tiles.append(tile)
+
+	var area_background_tiles_array = area_array[3].split(",")
+	full_result.background_tiles = []
+	for tile in area_background_tiles_array:
+		full_result.background_tiles.append(tile)
+
+	var area_foreground_tiles_array = area_array[4].split(",")
+	full_result.very_foreground_tiles = []
+	for tile in area_foreground_tiles_array:
+		full_result.very_foreground_tiles.append(tile)
+
+	full_result.objects = []
+	if area_array.size() > 5:
+		var objects_array = area_array[5].split("|")
+		for object in objects_array:
+			var object_array = object.split(",")
+			var decoded_object = {}
+			decoded_object.properties = []
+			decoded_object.type_id = int(object_array[0])
+			var start_index = 1
+			start_index = 0
+			decoded_object.palette = 0
+			var index = 0
+			for value in object_array:
+				if index > start_index:
+					decoded_object.properties.append(old_value_util.decode_value(value))
+				index += 1
+			full_result.objects.append(decoded_object)
+	return full_result
+
 
 static func decode_info(code: String) -> Dictionary:
 	var result: Dictionary = {}
-	
+
 	code = code.strip_edges()
 	var code_array: Array = code.split(",")
-	
+
 	result.format_version = code_array[0]
-	result.name = code_array[1].percent_decode()
-	
-	
+	result.name = code_array[1].percent_decode() if code_array.size() > 1 else "~~~"
+
+
 	var add_amount = 1
 	if result.format_version == "0.4.0" or result.format_version == "0.4.1":
 		add_amount = 0
-	
+
 	elif conversion_util.compareVersions(result.format_version, "0.5.0") > -1:
 		result.author = code_array[2].percent_decode()
 		result.description = code_array[3].percent_decode()
 		result.thumbnail_url = code_array[4].percent_decode()
 		add_amount = 4
-	
+
+	if (code_array.size() < 5 + add_amount):
+		result.name = "~~~"
+		return result
+
 	var area_index: int = 2 + add_amount
 	result.areas = [{}]
 	result.areas[0].settings = {}
-	result.areas[0].settings.sky = value_util.decode_value(code_array[area_index + 1])
-	result.areas[0].settings.background = value_util.decode_value(code_array[area_index + 2])
+	result.areas[0].settings.sky = old_value_util.decode_value(code_array[area_index + 1])
+	result.areas[0].settings.background = old_value_util.decode_value(code_array[area_index + 2])
 	result.areas[0].settings.background_palette = 0
-	
+
 	if conversion_util.compareVersions(result.format_version, "0.4.6") == 1:
 		var split: String = code_array[area_index + 5].get_slice("~", 0)
-		result.areas[0].settings.background_palette = value_util.decode_value(split)
-	
+		result.areas[0].settings.background_palette = old_value_util.decode_value(split)
+
 	return result

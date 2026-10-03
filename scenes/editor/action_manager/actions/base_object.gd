@@ -1,0 +1,28 @@
+class_name BaseObjectAction
+extends Action
+
+
+var shared
+var layer: String
+var object
+var object_data: ObjectData
+var object_index: int
+
+
+func create_new_object():
+	object = shared.create_object(object_data, layer, true)
+
+func remove_object():
+	object_data = object.object_data
+	object_index = object.get_index()
+	var objects_node: ObjectManager = shared.get_objects_manager(layer)
+	objects_node.erase_object(object, false)
+	objects_node.remove_child(object)
+	
+func restore_object():
+	object_data = object.object_data
+	var objects_node: ObjectManager = shared.get_objects_manager(layer)
+	objects_node.add_child(object)
+	objects_node.move_child(object, object_index)
+	objects_node.layer_data.place_object(object.position, object_data)
+	object._object_restored()

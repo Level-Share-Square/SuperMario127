@@ -9,33 +9,39 @@ onready var hit_collider = $HitCollider/CollisionShape2D
 
 var inverted : bool = false
 
-func _set_properties():
-	savable_properties = ["inverted", "palette"]
-	editable_properties = ["inverted"]
+#func _set_properties():
+#	savable_properties = ["inverted", "palette"]
+#	editable_properties = ["inverted"]
 
-func _set_property_values():
-	set_property("inverted", inverted, false)
-	set_property("palette", palette, 0)
+func _register_properties():
+	register_property(4, "inverted", inverted, true)
+
 
 func _ready():
 	init()
 	hit_bounce_enabled = false
 	connect("property_changed", self, "_on_property_changed")
-	if !enabled:
+	if !is_enabled_and_on_ground():
 		$StaticBody2D.set_collision_layer_bit(0, false)
 	if mode != 1:
 		hit_area.connect("body_entered", self, "_on_hit_body_entered")
 		hit_area.connect("area_entered", self, "_on_hit_area_entered")
 
-	if palette != 0:
-		#print(sprite.region_rect)
-		sprite.region_rect.position.y = (float(palette) * 32) # changes sprite to correct position on that grid of palettes
-		outline.animation = str(palette) + "_outline"
-
 	switch_state(inverted)
-	if Singleton.CurrentLevelData.level_data.vars.switch_state.has(palette):
+	if CurrentLevelData.vars.switch_state.has(palette):
 		toggle_state()
-	Singleton.CurrentLevelData.level_data.vars.connect("switch_state_changed", self, "_on_switch_state_changed")
+	CurrentLevelData.vars.connect("switch_state_changed", self, "_on_switch_state_changed")
+
+	var _connect = connect("property_changed", self, "update_property")
+	update_property("palette", palette)
+
+
+func update_property(key, value):
+	match(key):
+		"palette":
+			sprite.region_rect.position.y = (float(palette) * 32) # changes sprite to correct position on that grid of palettes
+			outline.animation = str(palette) + "_outline"
+
 
 func toggle_state():
 	inverted = !inverted

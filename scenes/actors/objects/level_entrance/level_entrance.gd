@@ -1,128 +1,65 @@
-extends GameObject
-
-var show_behind_layer := false
-
-var exit_timer = 0.0
-var exit_pos
-var tween_to
-var character
-var transition_data
-var transition_character_data
+extends Teleporter
 
 
-var wait_timer = 0.0
+### PROPERTIES
 
-export var character_string = "character"
+var state_name_map: Dictionary = {
+	StartState.Default: "FallState",
+	StartState.Fall: "ExitPaintingState",
+	StartState.Spinning: "RainbowStarState",
+	StartState.Bounce: "BounceState",
+	StartState.GroundPound: "GroundPoundState"
+}
+enum StartState {Default, Fall, Spinning, Bounce, GroundPound}
 
-onready var sound = $AudioStreamPlayer
+var start_state: int = StartState.Default
+var start_velocity: Vector2
 
-# ==================================================================================
-# | As best as I can tell, this is a singleton called in whenever an area changes. |
-# | All remote teleporters in an area are listening to this singleton to see       |
-# | which teleporter Mario should exit from. When the time comes, this script      |
-# | should carry over all of Mario's data from the last area, and pass an instance |
-# | of Mario over to the teleporter he's supposed to exit from.                    |
-# ==================================================================================
+
+func _register_properties() -> void:
+	._register_properties()
+	register_property(9, "start_velocity", start_velocity)
+	register_property(10, "start_state", start_state)
+	set_property_override("start_state", PropertyTab.OverrideTypes.ENUM, [
+		"Default", "Falling", "Spinning", "Jumping", "Ground Pound"
+	])
+
+func _register_property_info() -> void:
+	._register_property_info()
+	set_property_info("start_velocity", PropertyInfo.new("The speed the player starts with upon entering the level", 1, -INF, INF, ["", ""], ["", ""]))
+	set_property_info("start_state", PropertyInfo.new("The action the player will be performing upon entering the level.\nCan be used to create different start animations.", 1, -INF, INF, ["", ""], ["", ""]))
+
+
+func _init():
+	hide_teleport_properties = true
+	tag = "_entrance"
+
 
 func _ready():
-	if mode == 0:
-		if character_string != "character" and Singleton.PlayerSettings.number_of_players == 1: return
-		if enabled and (Singleton.CheckpointSaved.current_checkpoint_id == -1 or Singleton.CurrentLevelData.level_data.vars.transition_data != []):
-			var player = get_tree().get_current_scene()
-			character = player.get_node(player[character_string])
-			transition_data = Singleton.CurrentLevelData.level_data.vars.transition_data
-			transition_character_data = Singleton.CurrentLevelData.level_data.vars.transition_character_data
-			if character_string != "character":
-				transition_character_data = Singleton.CurrentLevelData.level_data.vars.transition_character_data_2
-				
-			if transition_data.size() == 0:
-				character.position = position
-				character.reset_physics_interpolation()
-			else:
-				var found_obj = false
-				var obj
-				
-				yield(get_tree(), "physics_frame")
-				for tp_obj in Singleton.CurrentLevelData.level_data.vars.teleporters:
-					if tp_obj[0] == transition_data[1].to_lower():
-						obj = tp_obj
-						found_obj = true
-						break
-				
-				if found_obj:
-					character.invulnerable = true
-					character.movable = false
-					character.controllable = false
-					
-					match transition_data[0]:
-						"pipe", "door", "area_transition":
-							exit_teleport(obj)
-							pass
-						_:
-							printerr("Remote teleport unsuccessful! %s has an invalid object type!" % transition_data[1])
-							character.position = position
-							character.reset_physics_interpolation()
-							Singleton.CurrentLevelData.level_data.vars.transition_data = []
-							pass
-					
-				else:
-					character.position = position
-					character.reset_physics_interpolation()
-					character.toggle_movement(true)
-				_cleanup()
+	if mode == 1:
+		$PreviewVector.show()
+	connect("property_changed", self, "update_property")
+	update_property("start_velocity", start_velocity)
 
 
-func exit_teleport(obj : Array):
-	#print(obj[1].object_type)
-	if transition_data[2] == true: #Remember, true = remote, false = local
-		if obj[1].teleportation_mode != true:
-			character.position = position
-			character.reset_physics_interpolation()
-			character.toggle_movement(true)
-			_cleanup()
-			return
-		character.position = obj[1].position
-		character.reset_physics_interpolation()
-		character.sprite.modulate = Color(1.0, 1.0, 1.0, 0.0)
-		if obj[1].object_type == "pipe":
-			character.position = obj[1].position + Vector2(0, obj[1].get_bottom_distance())
-			character.reset_physics_interpolation()
-		if obj[1].object_type == "area_transition":
-			obj[1].is_idle = false
-			if transition_character_data.size() >= 7 and obj[1].stops_camera:	
-				var helper = transition_character_data.back()
-				character.camera.global_position = helper.find_camera_position(obj[1].vertical, character.global_position, character.camera.base_size, obj[1].parts * 32)
-				character.camera.last_position = character.camera.global_position
-				character.camera.auto_move = false
-			else:
-				character.state = character.get_state_node("FallState")
-		yield(get_tree().create_timer(0.5), "timeout")
-		if character_string != "character":
-			yield(get_tree().create_timer(1.25), "timeout")
-		obj[1].start_exit_anim(character)
+func update_property(key, value):
+	if mode == 1 and key == "start_velocity":
+		$PreviewVector.visible = not start_velocity.is_zero_approx()
+		$PreviewVector.points[1] = start_velocity * fps_util.PHYSICS_DELTA * 5
 
-		if transition_character_data.size() > 0:
-			character.health = transition_character_data[0]
-			character.health_shards = transition_character_data[1]
-			character.emit_signal("health_changed", character.health, character.health_shards)
-			
-			if transition_character_data[2] != null:
-				character.set_nozzle(transition_character_data[2])
-			character.fuel = transition_character_data[3]
-			if transition_character_data[4][0] != null:
-				var powerup_node: Powerup = character.get_powerup_node(transition_character_data[4][0])
-				powerup_node.time_left = transition_character_data[4][1]
-				character.set_powerup(powerup_node, transition_character_data[4][2])
-			
-			get_tree().get_current_scene().set_switch_timer(transition_character_data[5])
-		_cleanup()
 
-func _cleanup():
-	Singleton.CurrentLevelData.level_data.vars.transition_data = []
+func start_exit_animation(character: Character) -> void:
+	.start_exit_animation(character)
+	emit_signal("exit_completed")
 
-	character.spawn_pos = position
-	character.get_node("Spotlight").enabled = false
-	character.scale = Vector2(abs(scale.x), scale.y)
-	if scale.x < 0:
-		character.facing_direction = -character.facing_direction
-	character.visible = visible
+func finish_exit_animation(character: Character) -> void:
+	.finish_exit_animation(character)
+	character.velocity = start_velocity
+	character.jump_animation = 0
+	if start_state == StartState.GroundPound or not character.is_grounded():
+		character.set_state_by_name(state_name_map[start_state])
+	character.velocity = start_velocity
+
+
+func is_level_entrance() -> bool:
+	return true

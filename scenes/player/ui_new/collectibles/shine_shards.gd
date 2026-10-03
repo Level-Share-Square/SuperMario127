@@ -8,24 +8,24 @@ onready var fill: TextureProgress = $Resizable/Fill
 
 var max_shards: int
 
+
 func _ready():
-	var objects = get_node("/root").get_node("Player").get_shared_node().get_node("Objects")
-	objects.connect("objects_ready", self, "delayed_ready")
-	
+	hide()
+	var player: LevelPlayer = get_tree().current_scene
+	var shared: LevelShared = player.get_shared_node()
+	yield(shared, "loaded_layers")
+	delayed_ready()
 
 func delayed_ready():
-	var variables: LevelVars = Singleton.CurrentLevelData.level_data.vars
+	var variables: LevelVars = CurrentLevelData.vars
 	max_shards = variables.max_shine_shards
 	fill.max_value = max_shards
 	
 	if max_shards > 0:
-		visible = true
+		show()
 		variables.connect("shine_shard_collected", self, "collect_shard")
 		
-		var shard_amount = (
-			variables.shine_shards_collected[
-				Singleton.CurrentLevelData.area][0]
-			)
+		var shard_amount = variables.shine_shards_collected[CurrentLevelData.area_id][0]
 		
 		label.text = str(max_shards-shard_amount)
 		fill.value = shard_amount

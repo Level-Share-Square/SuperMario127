@@ -34,7 +34,8 @@ func _update(delta):
 	else:
 		sprite.animation = "tripleJumpLeft"
 	sprite.rotation_degrees = lerp(abs(sprite.rotation_degrees), 360, 12 * delta) * character.facing_direction
-	if character.inputs[character.input_names.dive][1] and can_dive:
+	if  (character.inputs[character.input_names.dive][1] || character.inputs[character.input_names.spin][1]) and can_dive:
+		get_parent().get_node("DiveState").dive_buffer = 0.075
 		character.velocity.y = -dive_vertical_power
 		character.set_state_by_name("DiveState", delta)
 		

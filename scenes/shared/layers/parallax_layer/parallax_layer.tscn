@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://scenes/shared/layers/tile_map_manager.gd" type="Script" id=1]
+[ext_resource path="res://scenes/shared/layers/parallax_layer/parallax_layer.gd" type="Script" id=2]
+[ext_resource path="res://scenes/shared/layers/object_manager.gd" type="Script" id=3]
+[ext_resource path="res://generation/generated_tiles.res" type="TileSet" id=4]
+[ext_resource path="res://scenes/shared/layers/parallax_layer/parallax_scroll.gd" type="Script" id=5]
+
+[node name="Layer" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="ParallaxScroll" type="Node2D" parent="."]
+pause_mode = 2
+unique_name_in_owner = true
+script = ExtResource( 5 )
+
+[node name="ObjectManager" type="Node2D" parent="ParallaxScroll"]
+pause_mode = 1
+unique_name_in_owner = true
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="BackBufferCopy" type="BackBufferCopy" parent="ParallaxScroll"]
+z_index = 1
+copy_mode = 2
+
+[node name="TileMapManager" type="TileMap" parent="ParallaxScroll"]
+pause_mode = 1
+unique_name_in_owner = true
+tile_set = ExtResource( 4 )
+cell_size = Vector2( 32, 32 )
+cell_custom_transform = Transform2D( 32, 0, 0, 32, 0, 0 )
+format = 1
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}

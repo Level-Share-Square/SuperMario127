@@ -1,0 +1,135 @@
+extends GameObject
+
+onready var area = $Area2D
+onready var area_shape = $Area2D/CollisionShape2D
+onready var sprite = $Sprite
+onready var current_scene = get_tree().get_current_scene()
+
+var shine_tag: String = "shine_tag"
+var time_limit: float = 0.0
+var one_shot: bool = false
+var parts: int = 1
+
+var one_shot_run: bool = false
+var timer : TimerBase
+var timer_manager : TimerManager
+
+
+#func _set_properties():
+#	savable_properties = ["shine_tag", "time_limit", "one_shot", "parts"]
+#	editable_properties = ["shine_tag", "time_limit", "one_shot", "parts"]
+
+
+func _register_properties():
+	register_property(4, "shine_tag", shine_tag)
+	register_property(5, "time_limit", time_limit)
+	register_property(6, "one_shot", one_shot)
+	register_property(7, "parts", parts)
+
+func _register_property_info():
+	set_property_info("shine_tag", PropertyInfo.new("Non-Activated Shine Sprites with the same Activation Tag as this\nwill be activated upon touching this.", 1, -INF, INF, ["", ""], ["", ""], false, ""))
+	set_property_info("time_limit", PropertyInfo.new("How long in seconds the Shine specified will stay activated for.\nIf set to 0, this Shine will be activated indefinitely.", 1, 0, INF, ["", ""], ["", ""], false, ""))
+	set_property_info("one_shot", PropertyInfo.new("If true, this object can only be used once.", 1, -INF, INF, ["", ""], ["", ""], false, ""))
+	set_property_info("parts", PropertyInfo.new("How long this object should extend.", 1, -INF, INF, ["", ""], ["", ""], false, ""))
+
+func _unhandled_input(event: InputEvent) -> void:
+	parts_input_handler(event,self)
+
+
+func update_property(_key, _value):
+	update_parts()
+	
+func _object_ready():
+	._object_ready()
+	sprite.visible = not is_on_ground_layer()
+
+
+func update_parts():
+	if parts <= 0:
+		parts = 1
+		set_property("parts", parts, true)
+	
+	sprite.rect_size.y = parts * 32
+	sprite.rect_position.y = (-16 * parts)
+	area_shape.shape.extents.y = 16 * parts
+	editor_rect = Rect2(sprite.rect_position, sprite.rect_size)
+
+
+func _ready():
+	if mode != 1:
+		var _connect = area.connect("body_entered", self, "_body_entered")
+		sprite.visible = false
+		timer_manager = current_scene.get_timer_manager()
+	else:
+		connect("property_changed", self, "update_property")
+	
+	if parts < 1:
+		parts = 1
+	
+	update_parts()
+
+
+func _process(delta):
+	if parts <= 0:
+		parts = 1
+		set_property("parts", parts, true)
+
+
+func _body_entered(body):
+	if mode == 1:
+		return
+	
+	var shines = get_tree().get_nodes_in_group("tag_shine_%s" % shine_tag.to_lower())
+	shines = remove_active_shines(shines)
+	
+	if is_enabled_and_on_ground() and body is Character:
+		if time_limit <= 0:
+			if shines.size() <= 0:
+				return
+			
+			activate_shines(shines, false)
+		else:
+			if is_instance_valid(timer) or shines.size() <= 0:
+				return
+			
+			var camera = current_scene.get_node(current_scene.camera)
+			
+			yield(activate_shines(shines, true), "completed")
+			
+			while camera.in_cutscene:
+				yield(get_tree(), "idle_frame")
+			
+			for shine in shines:
+				shine.pause_mode = PAUSE_MODE_INHERIT
+			
+			timer = timer_manager.add_set_timer("shine_%s" % shine_tag, time_limit, "switch", false, true)
+			timer.connect("time_over", self, "deactivate_shines", [shines])
+
+
+func activate_shines(shines: Array, timed: bool = false):
+	get_tree().set_group("tag_shine_%s" % shine_tag.to_lower(), "pause_mode", PAUSE_MODE_PROCESS)
+	var camera = current_scene.get_node(current_scene.camera)
+	
+	for shine in shines:
+		shine.activate_shine(0 if !timed else 2, true)
+		
+		if timed:
+			shine.connect("shine_collected", timer_manager, "pause_resume_timer", ["shine_%s" % shine_tag, true])
+			shine.connect("shine_dance_end", timer_manager, "pause_resume_timer", ["shine_%s" % shine_tag, false])
+	
+	yield(get_tree(), "idle_frame")
+	
+	camera.call_deferred("start_queue")
+
+
+func deactivate_shines(shines: Array):
+	for shine in shines:
+		shine.deactivate_shine(true)
+
+
+func remove_active_shines(tagged_shines: Array) -> Array:
+	for shine in tagged_shines:
+		if shine.activated and !shine.collected:
+			tagged_shines.remove(tagged_shines.find(shine))
+	
+	return tagged_shines

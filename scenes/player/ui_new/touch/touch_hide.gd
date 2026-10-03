@@ -5,6 +5,7 @@ export var force_show: bool
 
 export var character_path: NodePath
 onready var character: Character = get_node(character_path)
+onready var start_alpha: float = modulate.a
 
 
 func _ready():
@@ -16,3 +17,8 @@ func update_visibility(input_type: int):
 	visible = (input_type == LastInputDevice.InputType.Touch)
 	if force_show:
 		visible = true
+
+
+## can't check for paused any other way sadly
+func _process(delta):
+	modulate.a = lerp(modulate.a, 0 if get_tree().paused else start_alpha, delta * 8)

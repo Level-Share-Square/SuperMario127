@@ -1,6 +1,10 @@
 extends State
 
+# warnings-disable
+
 class_name SwimmingState
+
+const JUMP_SQUISH := Vector2(0.8, 1.2)
 
 var base_swim_speed = 285
 var boost_speed = 450
@@ -13,11 +17,11 @@ var boost_buffer = 0.0
 
 var boost_disable_time = 0.0
 
-var is_boosted := false
-
 var max_enter_fall_speed = 160
 var ground_pound_enter_speed = 350
 var old_gravity_scale = 1
+
+var last_move_vector: Vector2
 
 func _ready():
 	priority = 6
@@ -29,16 +33,28 @@ func _ready():
 	override_rotation = true
 	use_dive_collision = true
 	auto_flip = true
+	force_cam_follow_y = true
 
 func _start_check(_delta):
-	return character.water_detector.get_overlapping_areas().size() > 0 and !(character.powerup != null and character.powerup.id == "Metal")
+	return character.check_liquid(LiquidBase.LiquidType.Water) and !(character.powerup != null and character.powerup.id == "Metal")
 
 func _start(_delta):
+	last_move_vector = Vector2(character.facing_direction, 0)
 	
+	if character.anim_player.is_playing(): #fix for launch star causing swimming rotation to bug out.
+		if character.anim_player.current_animation == "triple_jump" or character.anim_player.current_animation == "triple_jump_right":
+			character.anim_player.stop(false)
+			character.sprite.rotation = character.velocity.angle() + (PI / 2)
+	
+	if character.sprite.rotation == 0:
+		character.sprite.rotation = 0.01 * character.facing_direction
+
 	if abs(character.sprite.rotation) > PI:
 		character.sprite.rotation = 0
-	
-	character.sound_player.play_splash_sound()
+
+	LastInputDevice.rumble(0.25, 0.4, 0.2)
+	character.sound_player.play_water_enter_sound()
+	character.sound_player.set_swim_playing(true)
 	character.jump_animation = 0
 	
 	old_gravity_scale = character.gravity_scale
@@ -48,6 +64,7 @@ func _start(_delta):
 	
 	character.swimming = true
 	character.gravity_scale = 0
+	character.is_wj_chained = false
 	
 	char_rotation = 90
 	if abs(character.sprite.rotation_degrees) > 90:
@@ -58,6 +75,7 @@ func _start(_delta):
 	boost_disable_time = 0.14
 
 func _update(delta):
+	if not character.gravity_scale == 0: character.gravity_scale = 0
 	
 	var move_vector = Vector2()
 	var sprite = character.sprite
@@ -74,7 +92,12 @@ func _update(delta):
 	if character.inputs[character.input_names.down][0]:
 		move_vector.y += 1
 	
+	if not move_vector == Vector2.ZERO:
+		last_move_vector = move_vector 
+	
 	if character.inputs[character.input_names.spin][1]:
+		character.sprite.scale = JUMP_SQUISH
+		character.squish_lerp = true
 		boost_buffer = 0.15
 	
 	if boost_buffer > 0 and boost_time_left <= 0.15 and boost_disable_time <= 0:
@@ -82,9 +105,8 @@ func _update(delta):
 		swim_speed = boost_speed
 		boost_buffer = 0
 		boost_time_left = 0.75
-		is_boosted = true
+		LastInputDevice.rumble(0.25, 0.4, 0.2)
 		character.spin_swim_area_shape.disabled = false
-		character.sound_player.set_swim_playing(false)
 		character.bubble_particles_left.emitting = true
 		character.bubble_particles_right.emitting = true
 		character.sound_player.play_spin_water_sound()
@@ -113,7 +135,6 @@ func _update(delta):
 			boost_time_left = 0
 			sprite.speed_scale = 1
 			character.spin_swim_area_shape.disabled = true
-			character.sound_player.set_swim_playing(true)
 			character.bubble_particles_left.emitting = false
 			character.bubble_particles_right.emitting = false
 			swim_speed = base_swim_speed
@@ -127,7 +148,6 @@ func _update(delta):
 		boost_disable_time -= delta
 		if boost_disable_time <= 0:
 			boost_disable_time = 0
-			character.sound_player.set_swim_playing(true)
 			
 	var lerp_speed = 480
 	if boost_time_left > 0:
@@ -148,9 +168,9 @@ func _update(delta):
 	else:
 		character.velocity = character.velocity.move_toward(Vector2(), fps_util.PHYSICS_DELTA * (240 if (abs(character.velocity.x) <= base_swim_speed and abs(character.velocity.y) <= base_swim_speed) else 480))
 
-	if abs(sprite.rotation) > PI:
+	if abs(sprite.rotation) > PI + 0.01: #account for floating point error to prevent rapid flipping
 		sprite.rotation = -sprite.rotation
-
+	sprite.rotation = clamp(sprite.rotation, -PI, PI)
 	character.facing_direction = sign(sprite.rotation)
 	sprite.animation = "swimming" if boost_time_left <= 0 else "spinning" 
 
@@ -164,7 +184,8 @@ func _stop(delta):
 	character.sprite.speed_scale = 1
 	character.gravity_scale = 1
 	character.swimming = false
-	character.sound_player.play_splash_sound()
+	LastInputDevice.rumble(0.25, 0.4, 0.2)
+	character.sound_player.play_water_exit_sound()
 	character.sound_player.set_swim_playing(false)
 	character.spin_swim_area_shape.disabled = true
 	character.bubble_particles_left.emitting = false
@@ -174,5 +195,9 @@ func _stop(delta):
 	character.set_state_by_name("BounceState", delta)
 
 func _stop_check(_delta):
-	return character.water_detector.get_overlapping_areas().size() <= 0 or (character.powerup != null and character.powerup.id == "Metal")
+	return !character.check_liquid(LiquidBase.LiquidType.Water) or (character.powerup != null and character.powerup.id == "Metal")
 
+func _general_update(_delta):
+	if not is_instance_valid(character.sound_player): return
+	if (!character.swimming && character.sound_player.swim_sound.playing):
+		character.sound_player.set_swim_playing(false)

@@ -1,21 +1,21 @@
-[gd_scene load_steps=78 format=2]
+[gd_scene load_steps=121 format=2]
 
 [ext_resource path="res://scenes/player/player.gd" type="Script" id=1]
-[ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/shared/level_shared.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/actors/mario/mario.tscn" type="PackedScene" id=3]
-[ext_resource path="res://scenes/player/camera.gd" type="Script" id=4]
+[ext_resource path="res://scenes/player/camera/camera.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/menu/pause/pause_controller.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/menu/theme.tres" type="Theme" id=6]
 [ext_resource path="res://scenes/player/ui_new/text/dialogue_text.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/player/ui_new/timers/timer_manager.tscn" type="PackedScene" id=8]
-[ext_resource path="res://scenes/actors/objects/purple_starbit/purple_collect.wav" type="AudioStream" id=9]
+[ext_resource path="res://assets/sounds/purple_collect.wav" type="AudioStream" id=9]
 [ext_resource path="res://scenes/player/ui_new/ui/shine_shards.png" type="Texture" id=10]
 [ext_resource path="res://assets/fonts/super-mario-script-3-1402.ttf" type="DynamicFontData" id=11]
-[ext_resource path="res://scenes/player/viewports.gd" type="Script" id=12]
+[ext_resource path="res://scenes/player/ui_new/black_panel_align.gd" type="Script" id=12]
 [ext_resource path="res://scenes/shared/backgrounds.tscn" type="PackedScene" id=13]
 [ext_resource path="res://scenes/player/ui_new/polygon_swatch.tscn" type="PackedScene" id=14]
 [ext_resource path="res://assets/fonts/marioscript_ui.tres" type="DynamicFont" id=15]
-[ext_resource path="res://scenes/actors/mario/GhostMario.tscn" type="PackedScene" id=16]
+[ext_resource path="res://assets/icons/Music.svg" type="Texture" id=16]
 [ext_resource path="res://scenes/player/ui_new/health/health.tscn" type="PackedScene" id=17]
 [ext_resource path="res://scenes/player/ui_new/collectibles/coins.gd" type="Script" id=18]
 [ext_resource path="res://scenes/player/ui_new/collectibles/red_coins.gd" type="Script" id=19]
@@ -26,18 +26,68 @@
 [ext_resource path="res://scenes/player/ui_new/fludd/stamina.tscn" type="PackedScene" id=24]
 [ext_resource path="res://scenes/player/ui_new/text/sign_text.tscn" type="PackedScene" id=25]
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=26]
-[ext_resource path="res://assets/fonts/New Super Mario Font U.ttf" type="DynamicFontData" id=27]
-[ext_resource path="res://scenes/player/ui_new/shine_get.gd" type="Script" id=28]
+[ext_resource path="res://assets/sounds/crystal_tap.wav" type="AudioStream" id=27]
+[ext_resource path="res://scenes/player/ui_new/shine/shine_get.gd" type="Script" id=28]
 [ext_resource path="res://scenes/player/ui_new/collectibles/purple_starbits.gd" type="Script" id=29]
-[ext_resource path="res://scenes/player/ui_new/touch/gesture_controls.tscn" type="PackedScene" id=30]
+[ext_resource path="res://scenes/player/ui_new/touch/touch_controls.tscn" type="PackedScene" id=30]
 [ext_resource path="res://scenes/player/ui_new/collectibles/show_max_purples.gd" type="Script" id=31]
 [ext_resource path="res://scenes/player/photo_mode_updater.gd" type="Script" id=32]
 [ext_resource path="res://scenes/player/photo_mode.gd" type="Script" id=33]
-[ext_resource path="res://scenes/actors/objects/yellow_coin/sound.wav" type="AudioStream" id=39]
+[ext_resource path="res://assets/sounds/sawblade.ogg" type="AudioStream" id=34]
+[ext_resource path="res://assets/sounds/bill_blaster.wav" type="AudioStream" id=35]
+[ext_resource path="res://scenes/player/shared_saw_sound.gd" type="Script" id=36]
+[ext_resource path="res://scenes/player/shared_blast_launch_sound.gd" type="Script" id=37]
+[ext_resource path="res://assets/sounds/bill_seek.wav" type="AudioStream" id=38]
+[ext_resource path="res://assets/sounds/coin.wav" type="AudioStream" id=39]
 [ext_resource path="res://scenes/player/shared_sounds.gd" type="Script" id=40]
-[ext_resource path="res://scenes/actors/objects/p_switch/tick.wav" type="AudioStream" id=58]
-[ext_resource path="res://scenes/actors/objects/p_switch/tick_end.wav" type="AudioStream" id=59]
-[ext_resource path="res://scenes/actors/objects/boo/laugh.wav" type="AudioStream" id=60]
+[ext_resource path="res://scenes/player/ui_new/shine/shine_results.gd" type="Script" id=41]
+[ext_resource path="res://assets/sounds/shine_results/high_score.wav" type="AudioStream" id=42]
+[ext_resource path="res://scenes/player/ui_new/shine/new_record.gd" type="Script" id=43]
+[ext_resource path="res://assets/sounds/shine_results/127tally_drum.wav" type="AudioStream" id=44]
+[ext_resource path="res://scenes/player/ui_new/key_get.gd" type="Script" id=45]
+[ext_resource path="res://scenes/player/ui_new/area_info.gd" type="Script" id=46]
+[ext_resource path="res://assets/sounds/switch_on.wav" type="AudioStream" id=47]
+[ext_resource path="res://assets/sounds/switch_off.wav" type="AudioStream" id=48]
+[ext_resource path="res://assets/sounds/blue_coin.wav" type="AudioStream" id=49]
+[ext_resource path="res://scenes/player/ui_new/health/hit_vignette.gd" type="Script" id=50]
+[ext_resource path="res://assets/fonts/MARIO_Font_v3_Solid.otf" type="DynamicFontData" id=51]
+[ext_resource path="res://assets/sounds/p_switch_tick.wav" type="AudioStream" id=58]
+[ext_resource path="res://assets/sounds/p_switch_end.wav" type="AudioStream" id=59]
+[ext_resource path="res://assets/sounds/boo_laugh.wav" type="AudioStream" id=60]
+
+[sub_resource type="CanvasItemMaterial" id=233]
+blend_mode = 1
+
+[sub_resource type="ParticlesMaterial" id=230]
+emission_shape = 2
+emission_box_extents = Vector3( 608, 1, 1 )
+flag_align_y = true
+flag_disable_z = true
+direction = Vector3( 0.4, 1, 0 )
+spread = 0.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 256.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = 196.0
+
+[sub_resource type="Gradient" id=231]
+colors = PoolColorArray( 0.539063, 0.562109, 1, 1, 0.683594, 0.701172, 1, 1 )
+
+[sub_resource type="GradientTexture2D" id=232]
+gradient = SubResource( 231 )
+width = 1
+height = 6
+fill_from = Vector2( 1, 1 )
+
+[sub_resource type="Gradient" id=264]
+offsets = PoolRealArray( 0, 0.372093, 0.697674, 1.5 )
+colors = PoolColorArray( 1, 0, 0, 0, 1, 0, 0, 0.0542636, 1, 0, 0, 0.14767, 1, 0, 0, 1 )
+
+[sub_resource type="GradientTexture2D" id=265]
+gradient = SubResource( 264 )
+fill = 1
+fill_from = Vector2( 0.5, 0.5 )
 
 [sub_resource type="Animation" id=216]
 length = 0.001
@@ -405,11 +455,11 @@ tracks/5/keys = {
 }
 
 [sub_resource type="DynamicFont" id=21]
-size = 28
+size = 24
 outline_size = 3
 outline_color = Color( 0, 0, 0, 1 )
 extra_spacing_char = -1
-font_data = ExtResource( 27 )
+font_data = ExtResource( 51 )
 
 [sub_resource type="DynamicFont" id=11]
 size = 20
@@ -418,6 +468,757 @@ outline_color = Color( 0, 0.0431373, 0.313726, 1 )
 use_filter = true
 extra_spacing_char = -1
 font_data = ExtResource( 26 )
+
+[sub_resource type="Animation" id=236]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0.8, 0.9 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("VBoxContainer/CenterContainer/TimeScore:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("VBoxContainer/CenterContainer/TimeScore:rect_position:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 4.0 ]
+}
+
+[sub_resource type="Animation" id=237]
+resource_name = "transition"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.2, 0.6 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0.8, 0.9 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.2, 0.6 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("VBoxContainer/CenterContainer/TimeScore:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("VBoxContainer/CenterContainer/TimeScore:rect_position:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ 0.0, 4.0 ]
+}
+
+[sub_resource type="Animation" id=240]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("VBoxContainer/NewRecord:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("VBoxContainer/NewRecord:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 4 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("VBoxContainer/NewRecord:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("VBoxContainer/NewRecord:rect_scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1.3, 1.5 ) ]
+}
+
+[sub_resource type="Animation" id=241]
+resource_name = "new_record"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("VBoxContainer/NewRecord:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.01 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("VBoxContainer/NewRecord:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 4 ), Vector2( 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("VBoxContainer/NewRecord:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("VBoxContainer/NewRecord:rect_scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.1, 0.4 ),
+"transitions": PoolRealArray( -2, 1 ),
+"update": 0,
+"values": [ Vector2( 1.3, 1.5 ), Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="DynamicFont" id=239]
+outline_size = 2
+use_filter = true
+extra_spacing_char = -1
+font_data = ExtResource( 26 )
+
+[sub_resource type="StyleBoxFlat" id=235]
+bg_color = Color( 1, 1, 1, 1 )
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+expand_margin_left = 4.0
+expand_margin_right = 4.0
+
+[sub_resource type="DynamicFont" id=234]
+outline_size = 2
+outline_color = Color( 0, 0.0431373, 0.313726, 1 )
+use_filter = true
+extra_spacing_char = -1
+font_data = ExtResource( 26 )
+
+[sub_resource type="Animation" id=242]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("VBoxContainer/KeyName:percent_visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("VBoxContainer/KeyName/Backing:percent_visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("VBoxContainer/KeyName/Panel:rect_scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("VBoxContainer/KeyName:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0.752941, 1 ) ]
+}
+
+[sub_resource type="Animation" id=243]
+resource_name = "transition"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("VBoxContainer/KeyName:percent_visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ 1.0, 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("VBoxContainer/KeyName/Backing:percent_visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ 1.0, 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("VBoxContainer/KeyName/Panel:rect_scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.3, 0.6 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("VBoxContainer/KeyName:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.1, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0, 0, 0.752941, 1 ) ]
+}
+
+[sub_resource type="StyleBoxEmpty" id=250]
+
+[sub_resource type="Gradient" id=24]
+colors = PoolColorArray( 0, 0.0431373, 0.313726, 0.878431, 0.0392157, 0.282353, 0.423529, 0.25098 )
+
+[sub_resource type="GradientTexture2D" id=249]
+gradient = SubResource( 24 )
+fill = 1
+fill_from = Vector2( 0, 1 )
+
+[sub_resource type="DynamicFont" id=251]
+size = 20
+outline_size = 2
+outline_color = Color( 0, 0.0431373, 0.313726, 1 )
+use_filter = true
+extra_spacing_top = -2
+extra_spacing_bottom = 2
+extra_spacing_char = -1
+font_data = ExtResource( 51 )
+
+[sub_resource type="DynamicFont" id=260]
+size = 20
+outline_size = 2
+use_filter = true
+extra_spacing_top = -2
+extra_spacing_bottom = 2
+extra_spacing_char = -1
+font_data = ExtResource( 51 )
+
+[sub_resource type="Animation" id=262]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("MarginContainer/AreaName:percent_visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("MarginContainer/AreaName/AreaNameBack1:percent_visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("MarginContainer/AreaName/AreaNameBack2:percent_visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath(".:rect_scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0.8, 0.8 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath(".:rect_position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 241, 4 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath(".:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=261]
+resource_name = "appear"
+length = 3.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 0.5, 2 ),
+"update": 0,
+"values": [ 4.0, -5.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("MarginContainer/AreaName:percent_visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( -2, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("MarginContainer/AreaName/AreaNameBack1:percent_visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( -2, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("MarginContainer/AreaName/AreaNameBack2:percent_visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( -2, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath(".:rect_scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 0.5, 1 ),
+"update": 0,
+"values": [ Vector2( 0.6, 0.9 ), Vector2( 1, 1 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath(".:rect_position:y")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 0.5, 1 ),
+"update": 0,
+"values": [ -8.0, 0.0 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath(".:modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, -2 ),
+"update": 0,
+"values": [ Color( 0, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/7/type = "method"
+tracks/7/path = NodePath("AreaNameAnim")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 3.5 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ "hide", -1, 1.0, false ],
+"method": "play"
+} ]
+}
+
+[sub_resource type="Animation" id=263]
+resource_name = "hide"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( -2, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0, 0, 1, 0 ) ]
+}
+
+[sub_resource type="StyleBoxEmpty" id=255]
+
+[sub_resource type="StyleBoxFlat" id=256]
+bg_color = Color( 0, 0, 0, 0.627451 )
+skew = Vector2( 0.2, 0 )
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 48
+corner_radius_bottom_left = 64
+
+[sub_resource type="DynamicFont" id=252]
+size = 14
+use_filter = true
+extra_spacing_char = -1
+font_data = ExtResource( 26 )
+
+[sub_resource type="DynamicFont" id=257]
+size = 9
+use_filter = true
+extra_spacing_char = -1
+extra_spacing_space = 1
+font_data = ExtResource( 26 )
+
+[sub_resource type="Animation" id=258]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("VBoxContainer/PanelContainer/HBoxContainer/SongName:percent_visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("VBoxContainer/PanelContainer2/AuthorName:percent_visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("VBoxContainer/PanelContainer2:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 1, 0 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath(".:rect_scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 0.8 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("VBoxContainer/PanelContainer2:rect_scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 0.8 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath(".:rect_rotation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 3.0 ]
+}
+
+[sub_resource type="Animation" id=259]
+resource_name = "appear"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 0.5, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("VBoxContainer/PanelContainer/HBoxContainer/SongName:percent_visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("VBoxContainer/PanelContainer2/AuthorName:percent_visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3, 0.8 ),
+"transitions": PoolRealArray( 1, -2, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 1.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("VBoxContainer/PanelContainer2:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.3, 0.8 ),
+"transitions": PoolRealArray( 1, 0.5, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 1, 0 ), Color( 0, 0, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath(".:rect_scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( -2, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 0.8 ), Vector2( 1, 1 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("VBoxContainer/PanelContainer2:rect_scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.3, 0.8 ),
+"transitions": PoolRealArray( 1, -2, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 0.8 ), Vector2( 1, 0.8 ), Vector2( 1, 1 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath(".:rect_rotation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 4.11831e-05, 0.6 ),
+"transitions": PoolRealArray( -2, 1 ),
+"update": 0,
+"values": [ 3.0, 0.0 ]
+}
 
 [sub_resource type="Animation" id=206]
 length = 0.001
@@ -510,7 +1311,7 @@ func _draw():
 	draw_circle(rect_size/2, min(rect_size.x, rect_size.y) / 2, color)
 "
 
-[sub_resource type="Shader" id=192]
+[sub_resource type="Shader" id=244]
 code = "shader_type canvas_item;
 // Shader to round corners of a canvas. The 'radius_scale' is multiplied by
 // minimum(width, height)/2.0 to calculate the radius of the corners.
@@ -582,7 +1383,7 @@ void fragment() {
 "
 
 [sub_resource type="ShaderMaterial" id=193]
-shader = SubResource( 192 )
+shader = SubResource( 244 )
 shader_param/radius_scale = 1.0
 shader_param/rounded_corner_top_left = true
 shader_param/rounded_corner_top_right = true
@@ -591,12 +1392,12 @@ shader_param/rounded_corner_bottom_right = true
 shader_param/width = 1.0
 shader_param/height = 1.0
 
-[sub_resource type="Gradient" id=194]
+[sub_resource type="Gradient" id=245]
 offsets = PoolRealArray( 0, 0.264249, 0.626943, 1 )
 colors = PoolColorArray( 1, 1, 1, 0.376471, 1, 1, 1, 0.501961, 1, 0.592157, 0, 0, 0.631373, 0.14902, 0.262745, 0.501961 )
 
 [sub_resource type="GradientTexture2D" id=195]
-gradient = SubResource( 194 )
+gradient = SubResource( 245 )
 fill_to = Vector2( 0, 1 )
 
 [sub_resource type="Animation" id=208]
@@ -709,12 +1510,12 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 0.729412, 0.317647, 0.580392, 1 ) ]
 }
 
-[sub_resource type="Gradient" id=200]
+[sub_resource type="Gradient" id=246]
 offsets = PoolRealArray( 0, 0.264249, 0.626943, 1 )
 colors = PoolColorArray( 1, 1, 1, 0.376471, 1, 1, 1, 0.501961, 1, 0, 0.74902, 0, 0.631373, 0.14902, 0.262745, 0.501961 )
 
 [sub_resource type="GradientTexture2D" id=201]
-gradient = SubResource( 200 )
+gradient = SubResource( 246 )
 fill_to = Vector2( 0, 1 )
 
 [sub_resource type="Animation" id=212]
@@ -839,7 +1640,7 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 0.533333, 0.521569, 0.686275, 1 ) ]
 }
 
-[sub_resource type="Shader" id=12]
+[sub_resource type="Shader" id=247]
 code = "shader_type canvas_item;
 render_mode blend_mix;
 uniform sampler2D gradient;
@@ -854,12 +1655,12 @@ void fragment(){
 offsets = PoolRealArray( 0.473373, 0.715976 )
 colors = PoolColorArray( 1, 0.992157, 0.894118, 1, 1, 0.670588, 0.286275, 1 )
 
-[sub_resource type="GradientTexture" id=191]
+[sub_resource type="GradientTexture" id=248]
 gradient = SubResource( 190 )
 
 [sub_resource type="ShaderMaterial" id=15]
-shader = SubResource( 12 )
-shader_param/gradient = SubResource( 191 )
+shader = SubResource( 247 )
+shader_param/gradient = SubResource( 248 )
 
 [sub_resource type="DynamicFont" id=31]
 size = 18
@@ -869,28 +1670,51 @@ extra_spacing_top = 5
 extra_spacing_char = -2
 font_data = ExtResource( 11 )
 
-[sub_resource type="RectangleShape2D" id=18]
-extents = Vector2( 393, 216 )
-
-[sub_resource type="RectangleShape2D" id=24]
-resource_local_to_scene = true
-extents = Vector2( 393, 216 )
-
 [node name="Player" type="Node2D"]
 script = ExtResource( 1 )
-nodes_to_load = [ NodePath("Viewports/ViewportContainer/Viewport/World/Shared"), NodePath("Viewports/ViewportContainer/Viewport/World/Character"), NodePath("Viewports/ViewportContainer/Viewport/CameraP1"), NodePath("Viewports/ViewportContainer/Viewport/World/Character2"), NodePath("Viewports/ViewportContainer2/Viewport/CameraP2"), NodePath("Viewports/ViewportContainer/Viewport/Backgrounds"), NodePath("Viewports/ViewportContainer2/Viewport/Backgrounds") ]
-character = NodePath("Viewports/ViewportContainer/Viewport/World/Character")
-character2 = NodePath("Viewports/ViewportContainer/Viewport/World/Character2")
-camera = NodePath("Viewports/ViewportContainer/Viewport/CameraP1")
+nodes_to_load = [ NodePath("Area/LevelShared"), NodePath("Area/Character"), NodePath("CameraP1"), NodePath("Backgrounds") ]
+character = NodePath("Area/Character")
+camera = NodePath("CameraP1")
+shared = NodePath("Area/LevelShared")
+backgrounds = NodePath("Backgrounds")
 
 [node name="PhotoModeController" type="Node" parent="."]
 pause_mode = 2
 script = ExtResource( 33 )
 
+[node name="LevelEffects" type="CanvasLayer" parent="."]
+layer = 32
+visible = false
+
+[node name="Particles2D" type="Particles2D" parent="LevelEffects"]
+material = SubResource( 233 )
+position = Vector2( 384, -16 )
+emitting = false
+amount = 196
+lifetime = 2.0
+preprocess = 2.0
+visibility_rect = Rect2( -384, 16, 768, 432 )
+local_coords = false
+process_material = SubResource( 230 )
+texture = SubResource( 232 )
+
 [node name="UIUnder" type="CanvasLayer" parent="."]
 pause_mode = 2
 layer = 61
 script = ExtResource( 32 )
+
+[node name="HitVignette" type="NinePatchRect" parent="UIUnder"]
+unique_name_in_owner = true
+modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = SubResource( 265 )
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+script = ExtResource( 50 )
+character_path = NodePath("../../Area/Character")
 
 [node name="HUD" type="MarginContainer" parent="UIUnder"]
 anchor_right = 1.0
@@ -918,6 +1742,12 @@ __meta__ = {
 margin_left = 318.0
 margin_right = 414.0
 
+[node name="TimeScore" parent="UIUnder/HUD/Control/TimerManager/Timers/Grid" index="0"]
+is_counting = null
+time = null
+sound = null
+kill_on_end = null
+
 [node name="PurpleStarbits" type="Control" parent="UIUnder/HUD/Control/TimerManager/RadialTimers" index="0"]
 visible = false
 margin_top = 384.0
@@ -940,7 +1770,7 @@ anims/collect = SubResource( 217 )
 anims/RESET = SubResource( 227 )
 anims/transition = SubResource( 228 )
 script = ExtResource( 31 )
-character_path = NodePath("../../../../../../../Viewports/ViewportContainer/Viewport/World/Character")
+character_path = NodePath("../../../../../../../Area/Character")
 
 [node name="Fadeout" type="AnimationPlayer" parent="UIUnder/HUD/Control/TimerManager/RadialTimers/PurpleStarbits"]
 anims/RESET = SubResource( 218 )
@@ -1107,13 +1937,13 @@ custom_constants/separation = 6
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UIUnder/HUD/Control/ShineGet/VBoxContainer"]
 margin_right = 256.0
-margin_bottom = 30.0
+margin_bottom = 25.0
 alignment = 1
 
 [node name="GetLabel" type="Label" parent="UIUnder/HUD/Control/ShineGet/VBoxContainer/HBoxContainer"]
-margin_left = 61.0
-margin_right = 194.0
-margin_bottom = 30.0
+margin_left = 59.0
+margin_right = 197.0
+margin_bottom = 25.0
 custom_fonts/font = SubResource( 21 )
 text = "Shine Get!"
 align = 1
@@ -1129,9 +1959,9 @@ text = "Shine Get!"
 align = 1
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="UIUnder/HUD/Control/ShineGet/VBoxContainer"]
-margin_top = 36.0
+margin_top = 31.0
 margin_right = 256.0
-margin_bottom = 60.0
+margin_bottom = 55.0
 alignment = 1
 
 [node name="ShineName" type="Label" parent="UIUnder/HUD/Control/ShineGet/VBoxContainer/HBoxContainer2"]
@@ -1154,6 +1984,531 @@ align = 1
 __meta__ = {
 "_edit_use_anchors_": true
 }
+
+[node name="ShineResults" type="PanelContainer" parent="UIUnder/HUD/Control"]
+pause_mode = 1
+modulate = Color( 1, 1, 1, 0 )
+self_modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 12.0
+rect_scale = Vector2( 0.8, 0.9 )
+rect_pivot_offset = Vector2( 372, 408 )
+size_flags_horizontal = 4
+size_flags_vertical = 3
+script = ExtResource( 41 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UIUnder/HUD/Control/ShineResults"]
+anims/RESET = SubResource( 236 )
+anims/transition = SubResource( 237 )
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="UIUnder/HUD/Control/ShineResults"]
+anims/RESET = SubResource( 240 )
+anims/new_record = SubResource( 241 )
+
+[node name="ShowTimer" type="Timer" parent="UIUnder/HUD/Control/ShineResults"]
+wait_time = 0.5
+one_shot = true
+
+[node name="HideTimer" type="Timer" parent="UIUnder/HUD/Control/ShineResults"]
+wait_time = 2.0
+one_shot = true
+
+[node name="RecordTimer" type="Timer" parent="UIUnder/HUD/Control/ShineResults"]
+wait_time = 3.0
+one_shot = true
+
+[node name="HighScore" type="AudioStreamPlayer" parent="UIUnder/HUD/Control/ShineResults"]
+stream = ExtResource( 42 )
+volume_db = 3.0
+bus = "Music"
+
+[node name="Count" type="AudioStreamPlayer" parent="UIUnder/HUD/Control/ShineResults"]
+stream = ExtResource( 44 )
+bus = "Sounds"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UIUnder/HUD/Control/ShineResults"]
+margin_left = 303.0
+margin_top = 334.0
+margin_right = 440.0
+margin_bottom = 404.0
+size_flags_horizontal = 4
+size_flags_vertical = 8
+custom_constants/separation = 4
+
+[node name="NewRecord" type="Label" parent="UIUnder/HUD/Control/ShineResults/VBoxContainer"]
+visible = false
+modulate = Color( 1, 1, 1, 0 )
+margin_top = 4.0
+margin_right = 137.0
+margin_bottom = 23.0
+rect_scale = Vector2( 1.3, 1.5 )
+rect_pivot_offset = Vector2( 68, 9 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 239 )
+text = "New record!"
+align = 1
+script = ExtResource( 43 )
+max_rotation = 2.0
+rotation_speed = 2.0
+
+[node name="Backing" type="Label" parent="UIUnder/HUD/Control/ShineResults/VBoxContainer/NewRecord"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 1.0
+margin_bottom = 1.0
+custom_colors/font_color = Color( 0, 0.0431373, 0.313726, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 239 )
+text = "New record!"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="GetLabel" type="Label" parent="UIUnder/HUD/Control/ShineResults/VBoxContainer"]
+margin_right = 137.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+custom_fonts/font = SubResource( 11 )
+text = "You got a Shine!"
+align = 1
+
+[node name="Panel" type="Panel" parent="UIUnder/HUD/Control/ShineResults/VBoxContainer/GetLabel"]
+modulate = Color( 0.247059, 0.27451, 0.737255, 0.752941 )
+show_behind_parent = true
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+rect_min_size = Vector2( 0, 8 )
+custom_styles/panel = SubResource( 235 )
+
+[node name="Backing" type="Label" parent="UIUnder/HUD/Control/ShineResults/VBoxContainer/GetLabel"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 1.0
+margin_bottom = 1.0
+size_flags_horizontal = 3
+custom_colors/font_color = Color( 0, 0.0431373, 0.313726, 1 )
+custom_fonts/font = SubResource( 11 )
+text = "You got a Shine!"
+align = 1
+
+[node name="ShineName" type="Label" parent="UIUnder/HUD/Control/ShineResults/VBoxContainer"]
+margin_top = 28.0
+margin_right = 137.0
+margin_bottom = 47.0
+custom_fonts/font = SubResource( 234 )
+text = "P-Switch Speedrun"
+align = 1
+
+[node name="Panel" type="Panel" parent="UIUnder/HUD/Control/ShineResults/VBoxContainer/ShineName"]
+modulate = Color( 0.247059, 0.27451, 0.737255, 0.752941 )
+show_behind_parent = true
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_bottom = 6.0
+rect_min_size = Vector2( 0, 8 )
+custom_styles/panel = SubResource( 235 )
+
+[node name="Backing" type="Label" parent="UIUnder/HUD/Control/ShineResults/VBoxContainer/ShineName"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 1.0
+margin_bottom = 1.0
+custom_colors/font_color = Color( 0, 0.0431373, 0.313726, 1 )
+custom_fonts/font = SubResource( 234 )
+text = "P-Switch Speedrun"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="UIUnder/HUD/Control/ShineResults/VBoxContainer"]
+margin_top = 51.0
+margin_right = 137.0
+margin_bottom = 70.0
+rect_min_size = Vector2( 0, 19 )
+
+[node name="TimeScore" type="Label" parent="UIUnder/HUD/Control/ShineResults/VBoxContainer/CenterContainer"]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = 32.0
+margin_top = 4.0
+margin_right = 105.0
+margin_bottom = 23.0
+rect_pivot_offset = Vector2( 30, 9 )
+custom_fonts/font = SubResource( 234 )
+text = "-00:00.00-"
+align = 1
+
+[node name="Backing" type="Label" parent="UIUnder/HUD/Control/ShineResults/VBoxContainer/CenterContainer/TimeScore"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 1.0
+margin_bottom = 1.0
+custom_colors/font_color = Color( 0, 0.0431373, 0.313726, 1 )
+custom_fonts/font = SubResource( 234 )
+text = "-00:00.00-"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="KeyGet" type="PanelContainer" parent="UIUnder/HUD/Control"]
+unique_name_in_owner = true
+self_modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 45 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UIUnder/HUD/Control/KeyGet"]
+margin_left = 85.0
+margin_top = 360.0
+margin_right = 647.0
+margin_bottom = 404.0
+mouse_filter = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+custom_constants/separation = 4
+alignment = 1
+
+[node name="KeyName" type="Label" parent="UIUnder/HUD/Control/KeyGet/VBoxContainer"]
+modulate = Color( 0, 0, 0.752941, 1 )
+margin_right = 562.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+custom_fonts/font = SubResource( 11 )
+text = "You got the Mario Kart 8 Deluxe - Booster Course Pass DLC key!"
+align = 1
+percent_visible = 0.0
+
+[node name="Panel" type="Panel" parent="UIUnder/HUD/Control/KeyGet/VBoxContainer/KeyName"]
+modulate = Color( 0.247059, 0.27451, 0.737255, 0.752941 )
+show_behind_parent = true
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+rect_min_size = Vector2( 0, 8 )
+rect_scale = Vector2( 1e-05, 1 )
+custom_styles/panel = SubResource( 235 )
+
+[node name="Backing" type="Label" parent="UIUnder/HUD/Control/KeyGet/VBoxContainer/KeyName"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 1.0
+margin_bottom = 1.0
+size_flags_horizontal = 3
+custom_colors/font_color = Color( 0, 0.0431373, 0.313726, 1 )
+custom_fonts/font = SubResource( 11 )
+text = "You got the Mario Kart 8 Deluxe - Booster Course Pass DLC key!"
+align = 1
+percent_visible = 0.0
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Padding" type="Control" parent="UIUnder/HUD/Control/KeyGet/VBoxContainer"]
+margin_top = 28.0
+margin_right = 562.0
+margin_bottom = 44.0
+rect_min_size = Vector2( 0, 16 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UIUnder/HUD/Control/KeyGet"]
+anims/RESET = SubResource( 242 )
+anims/transition = SubResource( 243 )
+
+[node name="AreaInfo" type="MarginContainer" parent="UIUnder/HUD/Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_top = 40
+custom_constants/margin_bottom = 10
+script = ExtResource( 46 )
+area_start_delay = 0.5
+song_start_delay = 1.0
+song_end_delay = 3.5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UIUnder/HUD/Control/AreaInfo"]
+margin_left = 12.0
+margin_top = 40.0
+margin_right = 720.0
+margin_bottom = 398.0
+
+[node name="AreaContainer" type="PanelContainer" parent="UIUnder/HUD/Control/AreaInfo/VBoxContainer"]
+unique_name_in_owner = true
+modulate = Color( 0, 1, 1, 0 )
+self_modulate = Color( 1, 1, 1, 0 )
+margin_left = 241.0
+margin_top = 4.0
+margin_right = 462.0
+margin_bottom = 33.0
+rect_scale = Vector2( 0.8, 0.8 )
+size_flags_horizontal = 4
+size_flags_vertical = 0
+custom_styles/panel = SubResource( 250 )
+
+[node name="MissionBackground" type="TextureRect" parent="UIUnder/HUD/Control/AreaInfo/VBoxContainer/AreaContainer"]
+margin_right = 221.0
+margin_bottom = 29.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = SubResource( 249 )
+expand = true
+
+[node name="Glow" type="TextureRect" parent="UIUnder/HUD/Control/AreaInfo/VBoxContainer/AreaContainer/MissionBackground"]
+modulate = Color( 1, 1, 1, 0.501961 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -4.0
+margin_top = -4.0
+margin_right = 4.0
+margin_bottom = 4.0
+rect_rotation = -3.0
+texture = SubResource( 249 )
+expand = true
+
+[node name="Glow2" type="TextureRect" parent="UIUnder/HUD/Control/AreaInfo/VBoxContainer/AreaContainer/MissionBackground/Glow"]
+modulate = Color( 1, 1, 1, 0.501961 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -4.0
+margin_top = -4.0
+margin_right = 4.0
+margin_bottom = 4.0
+rect_rotation = 4.0
+texture = SubResource( 249 )
+expand = true
+
+[node name="MarginContainer" type="MarginContainer" parent="UIUnder/HUD/Control/AreaInfo/VBoxContainer/AreaContainer"]
+margin_right = 221.0
+margin_bottom = 29.0
+custom_constants/margin_right = 8
+custom_constants/margin_top = 4
+custom_constants/margin_left = 8
+custom_constants/margin_bottom = 4
+
+[node name="AreaName" type="Label" parent="UIUnder/HUD/Control/AreaInfo/VBoxContainer/AreaContainer/MarginContainer"]
+unique_name_in_owner = true
+margin_left = 8.0
+margin_top = 4.0
+margin_right = 213.0
+margin_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 0.501961 )
+custom_constants/shadow_offset_x = 0
+custom_constants/shadow_offset_y = 2
+custom_fonts/font = SubResource( 251 )
+text = "Grassy Grasslands"
+align = 1
+valign = 1
+percent_visible = 0.0
+
+[node name="AreaNameBack1" type="Label" parent="UIUnder/HUD/Control/AreaInfo/VBoxContainer/AreaContainer/MarginContainer/AreaName"]
+unique_name_in_owner = true
+modulate = Color( 0, 0, 0, 0.12549 )
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -4.0
+margin_top = -2.0
+margin_right = -4.0
+margin_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_colors/font_color_shadow = Color( 0, 0, 0, 0.501961 )
+custom_constants/shadow_offset_x = 0
+custom_constants/shadow_offset_y = 2
+custom_fonts/font = SubResource( 260 )
+text = "Grassy Grasslands"
+align = 1
+valign = 1
+percent_visible = 0.0
+
+[node name="AreaNameBack2" type="Label" parent="UIUnder/HUD/Control/AreaInfo/VBoxContainer/AreaContainer/MarginContainer/AreaName"]
+unique_name_in_owner = true
+modulate = Color( 0, 0, 0, 0.12549 )
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 2.0
+margin_right = 4.0
+margin_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_colors/font_color_shadow = Color( 0, 0, 0, 0.501961 )
+custom_constants/shadow_offset_x = 0
+custom_constants/shadow_offset_y = 2
+custom_fonts/font = SubResource( 260 )
+text = "Grassy Grasslands"
+align = 1
+valign = 1
+percent_visible = 0.0
+
+[node name="AreaNameAnim" type="AnimationPlayer" parent="UIUnder/HUD/Control/AreaInfo/VBoxContainer/AreaContainer"]
+unique_name_in_owner = true
+anims/RESET = SubResource( 262 )
+anims/appear = SubResource( 261 )
+anims/hide = SubResource( 263 )
+
+[node name="Padding" type="Control" parent="UIUnder/HUD/Control/AreaInfo/VBoxContainer"]
+margin_top = 45.0
+margin_right = 708.0
+margin_bottom = 313.0
+size_flags_vertical = 3
+
+[node name="SongContainer" type="PanelContainer" parent="UIUnder/HUD/Control/AreaInfo/VBoxContainer"]
+unique_name_in_owner = true
+modulate = Color( 0, 0, 1, 0 )
+self_modulate = Color( 1, 1, 1, 0 )
+margin_left = 292.0
+margin_top = 329.0
+margin_right = 416.0
+margin_bottom = 358.0
+rect_rotation = 3.0
+rect_scale = Vector2( 1, 0.8 )
+rect_pivot_offset = Vector2( 0, 29 )
+size_flags_horizontal = 4
+size_flags_vertical = 0
+custom_styles/panel = SubResource( 250 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UIUnder/HUD/Control/AreaInfo/VBoxContainer/SongContainer"]
+margin_right = 124.0
+margin_bottom = 29.0
+custom_constants/separation = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="UIUnder/HUD/Control/AreaInfo/VBoxContainer/SongContainer/VBoxContainer"]
+margin_right = 124.0
+margin_bottom = 16.0
+custom_styles/panel = SubResource( 255 )
+
+[node name="MarginContainer" type="MarginContainer" parent="UIUnder/HUD/Control/AreaInfo/VBoxContainer/SongContainer/VBoxContainer/PanelContainer"]
+margin_right = 124.0
+margin_bottom = 16.0
+custom_constants/margin_right = -6
+custom_constants/margin_top = -3
+custom_constants/margin_left = -6
+custom_constants/margin_bottom = -3
+
+[node name="Panel" type="Panel" parent="UIUnder/HUD/Control/AreaInfo/VBoxContainer/SongContainer/VBoxContainer/PanelContainer/MarginContainer"]
+margin_left = -6.0
+margin_top = -3.0
+margin_right = 130.0
+margin_bottom = 19.0
+custom_styles/panel = SubResource( 256 )
+
+[node name="Panel" type="Panel" parent="UIUnder/HUD/Control/AreaInfo/VBoxContainer/SongContainer/VBoxContainer/PanelContainer/MarginContainer/Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -136.0
+margin_right = -136.0
+rect_rotation = 1.0
+rect_scale = Vector2( -1, 1 )
+rect_pivot_offset = Vector2( 136, 0 )
+custom_styles/panel = SubResource( 256 )
+script = ExtResource( 12 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UIUnder/HUD/Control/AreaInfo/VBoxContainer/SongContainer/VBoxContainer/PanelContainer"]
+margin_right = 124.0
+margin_bottom = 16.0
+custom_constants/separation = 0
+
+[node name="SongName" type="Label" parent="UIUnder/HUD/Control/AreaInfo/VBoxContainer/SongContainer/VBoxContainer/PanelContainer/HBoxContainer"]
+unique_name_in_owner = true
+margin_right = 109.0
+margin_bottom = 16.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 0.027451, 0.054902, 0.278431, 0.65098 )
+custom_fonts/font = SubResource( 252 )
+text = "Cursed Cathedral"
+align = 1
+valign = 1
+percent_visible = 0.0
+
+[node name="MarginContainer" type="MarginContainer" parent="UIUnder/HUD/Control/AreaInfo/VBoxContainer/SongContainer/VBoxContainer/PanelContainer/HBoxContainer"]
+margin_left = 109.0
+margin_right = 124.0
+margin_bottom = 16.0
+custom_constants/margin_right = 1
+custom_constants/margin_top = 1
+custom_constants/margin_left = 1
+custom_constants/margin_bottom = 1
+
+[node name="MusicIcon" type="TextureRect" parent="UIUnder/HUD/Control/AreaInfo/VBoxContainer/SongContainer/VBoxContainer/PanelContainer/HBoxContainer/MarginContainer"]
+margin_left = 1.0
+margin_top = 1.0
+margin_right = 14.0
+margin_bottom = 15.0
+rect_min_size = Vector2( 13, 0 )
+size_flags_vertical = 3
+texture = ExtResource( 16 )
+expand = true
+stretch_mode = 6
+
+[node name="HSeparator" type="HSeparator" parent="UIUnder/HUD/Control/AreaInfo/VBoxContainer/SongContainer/VBoxContainer"]
+visible = false
+margin_top = 16.0
+margin_right = 141.0
+margin_bottom = 20.0
+
+[node name="PanelContainer2" type="PanelContainer" parent="UIUnder/HUD/Control/AreaInfo/VBoxContainer/SongContainer/VBoxContainer"]
+modulate = Color( 0, 0, 1, 0 )
+margin_left = 9.0
+margin_top = 18.0
+margin_right = 114.0
+margin_bottom = 29.0
+rect_scale = Vector2( 1, 0.8 )
+size_flags_horizontal = 4
+custom_styles/panel = SubResource( 255 )
+
+[node name="MarginContainer" type="MarginContainer" parent="UIUnder/HUD/Control/AreaInfo/VBoxContainer/SongContainer/VBoxContainer/PanelContainer2"]
+margin_right = 105.0
+margin_bottom = 11.0
+custom_constants/margin_right = -6
+custom_constants/margin_top = 0
+custom_constants/margin_left = -6
+custom_constants/margin_bottom = -3
+
+[node name="Panel" type="Panel" parent="UIUnder/HUD/Control/AreaInfo/VBoxContainer/SongContainer/VBoxContainer/PanelContainer2/MarginContainer"]
+margin_left = -6.0
+margin_right = 111.0
+margin_bottom = 14.0
+custom_styles/panel = SubResource( 256 )
+
+[node name="Panel" type="Panel" parent="UIUnder/HUD/Control/AreaInfo/VBoxContainer/SongContainer/VBoxContainer/PanelContainer2/MarginContainer/Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -117.0
+margin_right = -117.0
+rect_rotation = 1.0
+rect_scale = Vector2( -1, 1 )
+rect_pivot_offset = Vector2( 117, 0 )
+custom_styles/panel = SubResource( 256 )
+script = ExtResource( 12 )
+
+[node name="AuthorName" type="Label" parent="UIUnder/HUD/Control/AreaInfo/VBoxContainer/SongContainer/VBoxContainer/PanelContainer2"]
+unique_name_in_owner = true
+margin_right = 105.0
+margin_bottom = 11.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 0.027451, 0.054902, 0.278431, 0.65098 )
+custom_fonts/font = SubResource( 257 )
+text = "By RednGreen, Súper M 795"
+align = 1
+valign = 1
+percent_visible = 0.0
+
+[node name="SongNameAnim" type="AnimationPlayer" parent="UIUnder/HUD/Control/AreaInfo/VBoxContainer/SongContainer"]
+unique_name_in_owner = true
+anims/RESET = SubResource( 258 )
+anims/appear = SubResource( 259 )
 
 [node name="SignText" parent="UIUnder" instance=ExtResource( 25 )]
 unique_name_in_owner = true
@@ -1739,117 +3094,39 @@ text = "0"
 align = 1
 valign = 1
 
-[node name="GestureControls" parent="UIOver" instance=ExtResource( 30 )]
+[node name="TouchControls" parent="UIOver" instance=ExtResource( 30 )]
+visible = false
 __meta__ = {
 "_edit_lock_": true
 }
-character_path = NodePath("../../Viewports/ViewportContainer/Viewport/World/Character")
+character_path = NodePath("../../Area/Character")
 
-[node name="Viewports" type="HBoxContainer" parent="."]
-margin_right = 772.0
-margin_bottom = 432.0
-mouse_filter = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-script = ExtResource( 12 )
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
-character_scene_path = "res://scenes/actors/mario/mario.tscn"
+[node name="CameraP1" parent="." instance=ExtResource( 4 )]
 
-[node name="ViewportContainer" type="ViewportContainer" parent="Viewports"]
-margin_right = 384.0
-margin_bottom = 432.0
-mouse_filter = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-stretch = true
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="Viewport" type="Viewport" parent="Viewports/ViewportContainer"]
-size = Vector2( 384, 432 )
-handle_input_locally = false
-render_target_update_mode = 3
-
-[node name="CameraP1" type="Camera2D" parent="Viewports/ViewportContainer/Viewport"]
-pause_mode = 2
-position = Vector2( 0, -80 )
-rotating = true
-current = true
-process_mode = 0
-limit_left = 0
-limit_top = 0
-limit_right = 960
-limit_bottom = 960
-limit_smoothed = true
-smoothing_enabled = true
-smoothing_speed = 15.0
-drag_margin_left = 0.0
-drag_margin_top = 0.0
-drag_margin_right = 0.0
-drag_margin_bottom = 0.0
-editor_draw_screen = false
-script = ExtResource( 4 )
-character = NodePath("../World/Character")
-background = NodePath("../Backgrounds")
-character2_cam_collider = NodePath("../World/Character2/CamCollision2")
-
-[node name="ZoomTween" type="Tween" parent="Viewports/ViewportContainer/Viewport/CameraP1"]
-
-[node name="PanTween" type="Tween" parent="Viewports/ViewportContainer/Viewport/CameraP1"]
-
-[node name="Area2D" type="Area2D" parent="Viewports/ViewportContainer/Viewport/CameraP1"]
-collision_layer = 0
-collision_mask = 2048
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Viewports/ViewportContainer/Viewport/CameraP1/Area2D"]
-visible = false
-shape = SubResource( 18 )
-
-[node name="World" type="Node2D" parent="Viewports/ViewportContainer/Viewport"]
+[node name="Area" type="Node2D" parent="."]
 script = ExtResource( 21 )
 
-[node name="Shared" parent="Viewports/ViewportContainer/Viewport/World" instance=ExtResource( 2 )]
+[node name="Character" parent="Area" instance=ExtResource( 3 )]
+collision_exceptions = [ NodePath("") ]
 
-[node name="Character" parent="Viewports/ViewportContainer/Viewport/World" instance=ExtResource( 3 )]
-collision_exceptions = [ NodePath("../Character2") ]
+[node name="LevelShared" parent="Area" instance=ExtResource( 2 )]
 
-[node name="Character2" parent="Viewports/ViewportContainer/Viewport/World" instance=ExtResource( 3 )]
-player_id = 1
-collision_exceptions = [ NodePath("../Character") ]
-character = 1
+[node name="Backgrounds" parent="." instance=ExtResource( 13 )]
 
-[node name="CamCollision2" type="Area2D" parent="Viewports/ViewportContainer/Viewport/World/Character2"]
-position = Vector2( 1000, 920 )
-collision_layer = 0
-collision_mask = 2048
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Viewports/ViewportContainer/Viewport/World/Character2/CamCollision2"]
-visible = false
-shape = SubResource( 24 )
-
-[node name="GhostMario" parent="Viewports/ViewportContainer/Viewport/World" instance=ExtResource( 16 )]
-
-[node name="Backgrounds" parent="Viewports/ViewportContainer/Viewport" instance=ExtResource( 13 )]
-
-[node name="CanvasLayer" type="CanvasLayer" parent="Viewports/ViewportContainer"]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 60
 script = ExtResource( 22 )
 
-[node name="Health" parent="Viewports/ViewportContainer/CanvasLayer" instance=ExtResource( 17 )]
+[node name="Health" parent="CanvasLayer" instance=ExtResource( 17 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 688.0
 margin_top = 14.0
 margin_right = 752.0
 margin_bottom = 78.0
-character_path = NodePath("../../Viewport/World/Character")
+character_path = NodePath("../../Area/Character")
 
-[node name="Fludd" parent="Viewports/ViewportContainer/CanvasLayer" instance=ExtResource( 23 )]
+[node name="Fludd" parent="CanvasLayer" instance=ExtResource( 23 )]
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
@@ -1858,107 +3135,55 @@ margin_left = -66.0
 margin_top = -66.0
 margin_right = -26.0
 margin_bottom = -16.0
-character_path = NodePath("../../Viewport/World/Character")
+character_path = NodePath("../../Area/Character")
 
-[node name="CanvasLayer2" type="CanvasLayer" parent="Viewports/ViewportContainer"]
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
 layer = 60
 
-[node name="Stamina" parent="Viewports/ViewportContainer/CanvasLayer2" instance=ExtResource( 24 )]
-character_path = NodePath("../../Viewport/World/Character")
-camera_path = NodePath("../../Viewport/CameraP1")
-viewport_offset = Vector2( 192, 216 )
-
-[node name="ViewportContainer2" type="ViewportContainer" parent="Viewports"]
-margin_left = 388.0
-margin_right = 772.0
-margin_bottom = 432.0
-mouse_filter = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-stretch = true
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="Viewport" type="Viewport" parent="Viewports/ViewportContainer2"]
-size = Vector2( 384, 432 )
-handle_input_locally = false
-render_target_update_mode = 3
-
-[node name="CameraP2" type="Camera2D" parent="Viewports/ViewportContainer2/Viewport"]
-pause_mode = 2
-position = Vector2( 0, -80 )
-rotating = true
-current = true
-process_mode = 0
-limit_left = 0
-limit_top = 0
-limit_right = 960
-limit_bottom = 960
-limit_smoothed = true
-smoothing_enabled = true
-smoothing_speed = 15.0
-drag_margin_left = 0.0
-drag_margin_top = 0.0
-drag_margin_right = 0.0
-drag_margin_bottom = 0.0
-editor_draw_screen = false
-script = ExtResource( 4 )
-character = NodePath("../../../ViewportContainer/Viewport/World/Character2")
-background = NodePath("../Backgrounds")
-character2_cam_collider = NodePath("../../../ViewportContainer/Viewport/World/Character2/CamCollision2")
-
-[node name="ZoomTween" type="Tween" parent="Viewports/ViewportContainer2/Viewport/CameraP2"]
-
-[node name="PanTween" type="Tween" parent="Viewports/ViewportContainer2/Viewport/CameraP2"]
-
-[node name="Backgrounds" parent="Viewports/ViewportContainer2/Viewport" instance=ExtResource( 13 )]
-
-[node name="World" type="Node2D" parent="Viewports/ViewportContainer2/Viewport"]
-
-[node name="CanvasLayer" type="CanvasLayer" parent="Viewports/ViewportContainer2"]
-layer = 60
-
-[node name="Health" parent="Viewports/ViewportContainer2/CanvasLayer" instance=ExtResource( 17 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 688.0
-margin_top = 14.0
-margin_right = 752.0
-margin_bottom = 78.0
-character_path = NodePath("../../../ViewportContainer/Viewport/World/Character2")
-
-[node name="Fludd" parent="Viewports/ViewportContainer2/CanvasLayer" instance=ExtResource( 23 )]
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -66.0
-margin_top = -66.0
-margin_right = -26.0
-margin_bottom = -16.0
-character_path = NodePath("../../../ViewportContainer/Viewport/World/Character2")
-
-[node name="CanvasLayer2" type="CanvasLayer" parent="Viewports/ViewportContainer2"]
-layer = 60
-
-[node name="Stamina" parent="Viewports/ViewportContainer2/CanvasLayer2" instance=ExtResource( 24 )]
-character_path = NodePath("../../../ViewportContainer/Viewport/World/Character2")
-camera_path = NodePath("../../Viewport/CameraP2")
-viewport_offset = Vector2( 576, 216 )
+[node name="Stamina" parent="CanvasLayer2" instance=ExtResource( 24 )]
+character_path = NodePath("../../Area/Character")
+camera_path = NodePath("../../CameraP1")
 
 [node name="SharedSounds" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource( 40 )
 
+[node name="SawSound" type="AudioStreamPlayer2D" parent="SharedSounds"]
+pause_mode = 1
+stream = ExtResource( 34 )
+volume_db = -80.0
+max_distance = 1280.0
+attenuation = 2.0
+bus = "Sounds"
+script = ExtResource( 36 )
+
+[node name="BlastSound" type="AudioStreamPlayer2D" parent="SharedSounds"]
+pause_mode = 1
+stream = ExtResource( 35 )
+max_distance = 1280.0
+bus = "Sounds"
+script = ExtResource( 37 )
+
+[node name="BlastSeekSound" type="AudioStreamPlayer" parent="SharedSounds"]
+stream = ExtResource( 38 )
+bus = "Sounds"
+
 [node name="CoinSound" type="AudioStreamPlayer" parent="SharedSounds"]
+pause_mode = 2
 stream = ExtResource( 39 )
 volume_db = -9.0
 bus = "Sounds"
 
+[node name="BlueCoinSound" type="AudioStreamPlayer" parent="SharedSounds"]
+pause_mode = 2
+stream = ExtResource( 49 )
+volume_db = -5.5
+bus = "Sounds"
+
 [node name="PurpleSound" type="AudioStreamPlayer" parent="SharedSounds"]
+pause_mode = 2
 stream = ExtResource( 9 )
+volume_db = -2.5
 bus = "Sounds"
 
 [node name="LaughSound" type="AudioStreamPlayer" parent="SharedSounds"]
@@ -1974,8 +3199,27 @@ bus = "Sounds"
 stream = ExtResource( 59 )
 bus = "Sounds"
 
+[node name="SwitchOnSound" type="AudioStreamPlayer" parent="SharedSounds"]
+stream = ExtResource( 47 )
+volume_db = 2.0
+bus = "Sounds"
+
+[node name="SwitchOffSound" type="AudioStreamPlayer" parent="SharedSounds"]
+stream = ExtResource( 48 )
+volume_db = 2.0
+bus = "Sounds"
+
+[node name="CrystalTapSound" type="AudioStreamPlayer" parent="SharedSounds"]
+stream = ExtResource( 27 )
+volume_db = 6.0
+bus = "Sounds"
+
 [connection signal="child_entered_tree" from="UIUnder/HUD/Control/TimerManager/RadialTimers" to="UIUnder/HUD/Control/TimerManager/RadialTimers/PurpleStarbits" method="child_entered_tree"]
-[connection signal="player_removed" from="Viewports" to="Viewports/ViewportContainer/CanvasLayer2/Stamina" method="player_removed"]
-[connection signal="player_removed" from="Viewports" to="Viewports/ViewportContainer2/CanvasLayer2/Stamina" method="player_removed"]
+[connection signal="appearing" from="UIUnder/HUD/Control/ShineGet" to="UIUnder/HUD/Control/AreaInfo" method="hide_info"]
+[connection signal="timeout" from="UIUnder/HUD/Control/ShineResults/ShowTimer" to="UIUnder/HUD/Control/ShineResults" method="start"]
+[connection signal="timeout" from="UIUnder/HUD/Control/ShineResults/HideTimer" to="UIUnder/HUD/Control/ShineResults" method="hide_ui"]
+[connection signal="timeout" from="UIUnder/HUD/Control/ShineResults/RecordTimer" to="UIUnder/HUD/Control/ShineResults" method="hide_ui"]
+[connection signal="resized" from="UIUnder/HUD/Control/ShineResults/VBoxContainer/NewRecord" to="UIUnder/HUD/Control/ShineResults/VBoxContainer/NewRecord" method="resized"]
+[connection signal="appearing" from="UIUnder/HUD/Control/KeyGet" to="UIUnder/HUD/Control/AreaInfo" method="hide_info"]
 
 [editable path="UIUnder/HUD/Control/TimerManager"]

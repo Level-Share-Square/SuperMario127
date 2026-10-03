@@ -1,147 +1,194 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=40 format=2]
 
-[ext_resource path="res://scenes/actors/objects/breakable_block/breakable_block.gd" type="Script" id=1]
-[ext_resource path="res://scenes/actors/objects/breakable_block/breakable_block.png" type="Texture" id=2]
-[ext_resource path="res://scenes/actors/objects/breakable_block/break.wav" type="AudioStream" id=3]
-[ext_resource path="res://scenes/actors/mario/particles/dust.png" type="Texture" id=4]
+[ext_resource path="res://scenes/actors/objects/box_base/box_base.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/actors/objects/box_base/paletted_box_base.gd" type="Script" id=2]
+[ext_resource path="res://assets/sounds/wood_break.wav" type="AudioStream" id=3]
+[ext_resource path="res://scenes/actors/objects/breakable_block/breakable_block.png" type="Texture" id=4]
 [ext_resource path="res://scenes/actors/objects/breakable_block/particles.png" type="Texture" id=5]
-[ext_resource path="res://scenes/actors/objects/breakable_block/block_material.tres" type="Material" id=6]
+[ext_resource path="res://scenes/actors/objects/breakable_block/palettes/4_outline.png" type="Texture" id=6]
+[ext_resource path="res://scenes/actors/objects/breakable_block/breakable_block_outline.png" type="Texture" id=7]
+[ext_resource path="res://scenes/actors/objects/breakable_block/palettes/5_outline.png" type="Texture" id=8]
+[ext_resource path="res://scenes/actors/objects/breakable_block/palettes/6_outline.png" type="Texture" id=9]
+[ext_resource path="res://scenes/actors/objects/breakable_block/palettes/7_outline.png" type="Texture" id=10]
+[ext_resource path="res://scenes/actors/objects/breakable_block/palettes/1_particles.png" type="Texture" id=11]
+[ext_resource path="res://scenes/actors/objects/breakable_block/palettes/6_particles.png" type="Texture" id=12]
+[ext_resource path="res://scenes/actors/objects/breakable_block/palettes/4_particles.png" type="Texture" id=13]
+[ext_resource path="res://scenes/actors/objects/breakable_block/palettes/3_particles.png" type="Texture" id=14]
+[ext_resource path="res://scenes/actors/objects/breakable_block/palettes/5_particles.png" type="Texture" id=15]
+[ext_resource path="res://scenes/actors/objects/breakable_block/palettes/2_particles.png" type="Texture" id=16]
+[ext_resource path="res://scenes/actors/objects/breakable_block/palettes/7_particles.png" type="Texture" id=17]
+[ext_resource path="res://scenes/actors/objects/breakable_block/palettes/1.png" type="Texture" id=18]
+[ext_resource path="res://scenes/actors/objects/breakable_block/palettes/2.png" type="Texture" id=19]
+[ext_resource path="res://scenes/actors/objects/breakable_block/palettes/3.png" type="Texture" id=20]
+[ext_resource path="res://scenes/actors/objects/breakable_block/palettes/6.png" type="Texture" id=21]
+[ext_resource path="res://scenes/actors/objects/breakable_block/palettes/5.png" type="Texture" id=22]
+[ext_resource path="res://scenes/actors/objects/breakable_block/palettes/7.png" type="Texture" id=23]
+[ext_resource path="res://scenes/actors/objects/breakable_block/palettes/4.png" type="Texture" id=24]
+[ext_resource path="res://scenes/actors/objects/breakable_block/palettes/2_outline.png" type="Texture" id=25]
+[ext_resource path="res://scenes/actors/objects/breakable_block/palettes/1_outline.png" type="Texture" id=26]
+[ext_resource path="res://scenes/actors/objects/breakable_block/palettes/3_outline.png" type="Texture" id=27]
+[ext_resource path="res://classes/sound_pitcher_directional.gd" type="Script" id=28]
+[ext_resource path="res://scenes/actors/objects/breakable_block/palettes/8.png" type="Texture" id=29]
+[ext_resource path="res://scenes/actors/objects/breakable_block/palettes/9.png" type="Texture" id=30]
+[ext_resource path="res://scenes/actors/objects/breakable_block/palettes/8_outline.png" type="Texture" id=31]
+[ext_resource path="res://scenes/actors/objects/breakable_block/palettes/8_particles.png" type="Texture" id=32]
+[ext_resource path="res://scenes/actors/objects/breakable_block/palettes/9_outline.png" type="Texture" id=33]
+[ext_resource path="res://scenes/actors/objects/breakable_block/palettes/9_particles.png" type="Texture" id=34]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 16, 16 )
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Box/Sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Box/Sprite:rect_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
 
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 16, 16 )
+[sub_resource type="Animation" id=1]
+resource_name = "break"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/path = NodePath("Box/Sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 0.5, 1 ),
+"update": 0,
+"values": [ Color( 1.25, 1.25, 1.25, 1 ), Color( 1.5, 1.5, 1.5, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Box/Sprite:rect_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 0.5, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.5, 1.5 ) ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.7 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "queue_free"
+} ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("BreakParticles:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/4/type = "method"
+tracks/4/path = NodePath("BreakSound")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ 0.0 ],
+"method": "play_rand_pitch"
+} ]
+}
 
-[sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 22, 12 )
-
-[sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 36, 10 )
-
-[sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 24, 24 )
-
-[sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 32, 102 )
-
-[sub_resource type="RectangleShape2D" id=7]
-extents = Vector2( 100, 24 )
-
-[sub_resource type="CanvasItemMaterial" id=8]
-particles_animation = true
-particles_anim_h_frames = 3
-particles_anim_v_frames = 1
-particles_anim_loop = false
-
-[sub_resource type="CanvasItemMaterial" id=9]
-particles_animation = true
-particles_anim_h_frames = 10
-particles_anim_v_frames = 1
-particles_anim_loop = false
-
-[sub_resource type="Gradient" id=10]
+[sub_resource type="Gradient" id=7]
 colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
 
-[sub_resource type="GradientTexture" id=11]
-gradient = SubResource( 10 )
+[sub_resource type="GradientTexture" id=5]
+gradient = SubResource( 7 )
 
-[sub_resource type="ParticlesMaterial" id=12]
-emission_shape = 1
-emission_sphere_radius = 2.0
+[sub_resource type="ParticlesMaterial" id=8]
 flag_disable_z = true
-direction = Vector3( 1, -1, 0 )
 spread = 180.0
-gravity = Vector3( 0, 50, 0 )
-initial_velocity = 16.67
+gravity = Vector3( 0, 98, 0 )
+initial_velocity = 150.0
+initial_velocity_random = 0.3
+angular_velocity = 253.52
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
-scale = 0.75
-color_ramp = SubResource( 11 )
-anim_speed = 1.0
+damping = 300.0
+color_ramp = SubResource( 5 )
+anim_offset = 1.0
+anim_offset_random = 1.0
 
-[node name="BreakableBlock" type="Node2D"]
-z_index = -1
-script = ExtResource( 1 )
+[node name="BreakableBlock" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+internal_id = "breakable_block"
+top_states = PoolStringArray( "GroundPoundState", "SwimmingState", "GroundPoundStartState" )
+side_states = PoolStringArray( "DiveState", "SlideState", "SpinningState", "SwimmingState", "WingMarioState" )
+bottom_states = PoolStringArray( "SwimmingState" )
+side_fludds = PoolStringArray( "TurboNozzle" )
+breakable_objects = PoolStringArray( "Steely", "BobOmb", "Shell" )
+overkill_powerups = PoolStringArray( "MetalPowerup", "RainbowPowerup" )
+inner_textures = [ ExtResource( 4 ), ExtResource( 18 ), ExtResource( 19 ), ExtResource( 20 ), ExtResource( 24 ), ExtResource( 22 ), ExtResource( 21 ), ExtResource( 23 ), ExtResource( 29 ), ExtResource( 30 ) ]
+outer_textures = [ ExtResource( 7 ), ExtResource( 26 ), ExtResource( 25 ), ExtResource( 27 ), ExtResource( 6 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 31 ), ExtResource( 33 ) ]
+particle_textures = [ ExtResource( 5 ), ExtResource( 11 ), ExtResource( 16 ), ExtResource( 14 ), ExtResource( 13 ), ExtResource( 15 ), ExtResource( 12 ), ExtResource( 17 ), ExtResource( 32 ), ExtResource( 34 ) ]
 
-[node name="Sprite" type="Sprite" parent="."]
-texture = ExtResource( 2 )
+[node name="Sprite" parent="Box" index="0"]
+rect_pivot_offset = Vector2( 16, 16 )
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-collision_mask = 2147483654
+[node name="Outline" type="NinePatchRect" parent="Box/Sprite" index="0"]
+unique_name_in_owner = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 7 )
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-shape = SubResource( 1 )
+[node name="BreakAnimation" parent="." index="2"]
+anims/RESET = SubResource( 2 )
+anims/break = SubResource( 1 )
 
-[node name="StompArea" type="Area2D" parent="."]
-collision_mask = 2
+[node name="BreakParticles" parent="." index="3"]
+amount = 24
+process_material = SubResource( 8 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StompArea"]
-position = Vector2( 0, -24 )
-shape = SubResource( 2 )
-
-[node name="SpinArea" type="Area2D" parent="."]
-visible = false
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SpinArea"]
-shape = SubResource( 3 )
-
-[node name="TurboSpinArea" type="Area2D" parent="."]
-visible = false
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TurboSpinArea"]
-shape = SubResource( 4 )
-
-[node name="Area2D" type="Area2D" parent="."]
-visible = false
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource( 5 )
-
-[node name="PlayerStompDetector" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerStompDetector"]
-shape = SubResource( 6 )
-
-[node name="PlayerSpinDetector" type="Area2D" parent="."]
-visible = false
-collision_layer = 0
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerSpinDetector"]
-shape = SubResource( 7 )
-
-[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
-visible = false
-process_parent = true
-physics_process_parent = true
-
-[node name="Broken" type="AudioStreamPlayer" parent="."]
+[node name="BreakSound" type="AudioStreamPlayer2D" parent="." index="4"]
+unique_name_in_owner = true
 stream = ExtResource( 3 )
-volume_db = -10.0
+volume_db = 6.0
 bus = "Sounds"
-
-[node name="BreakParticle" type="Particles2D" parent="."]
-material = SubResource( 8 )
-z_index = -1
-emitting = false
-amount = 12
-one_shot = true
-explosiveness = 1.0
-process_material = ExtResource( 6 )
-texture = ExtResource( 5 )
-
-[node name="DustParticle" type="Particles2D" parent="."]
-material = SubResource( 9 )
-z_index = -1
-emitting = false
-amount = 3
-one_shot = true
-explosiveness = 1.0
-process_material = SubResource( 12 )
-texture = ExtResource( 4 )
+script = ExtResource( 28 )
