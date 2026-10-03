@@ -141,6 +141,7 @@ func camera_movement(delta: float):
 	
 	last_pos = position
 	sim_pos += direction * move_speed * 60 * delta
+	sim_pos += Input.get_vector("editor_joy_left", "editor_joy_right", "editor_joy_up", "editor_joy_down") * move_speed * 60 * delta
 	sim_pos = resolve_limit_collisions(sim_pos)
 	
 	position = lerp(position, sim_pos, 12.5 * delta)
