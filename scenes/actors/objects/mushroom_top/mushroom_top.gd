@@ -218,7 +218,6 @@ func set_bounce_anim(power: float):
 
 
 func update_bounce_anim(delta: float):
-	print(mushroom_cap.scale)
 	var spring_constant = 500.0
 	var damping_constant = 5
 	
