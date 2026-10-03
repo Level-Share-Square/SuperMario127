@@ -31,9 +31,10 @@ func create_trail():
 	var trail = character.sprite.duplicate()
 	trail.global_position = character.sprite.global_position
 	trail.playing = false
-	trail.z_index = -2
+	trail.z_index = -1
 	trail.script = trail_script
-	add_child(trail)
+	character.get_parent().add_child(trail)
+	character.get_parent().move_child(trail, 0)
 
 func _process(delta):
 	if character.powerup == self:
