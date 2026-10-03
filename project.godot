@@ -177,7 +177,7 @@ _global_script_classes=[ {
 "base": "Resource",
 "class": "CameraCutscene",
 "language": "GDScript",
-"path": "res://classes/CameraCutscene.gd"
+"path": "res://classes/camera_cutscene.gd"
 }, {
 "base": "Area2D",
 "class": "CameraStopper",

@@ -51,13 +51,11 @@ var velocity: Vector2
 var current_lead_offset_x: float = 0.0
 var current_lead_offset_y: float = 0.0
 var leading_amount: float = 0.0
-var y_baseline: float = 0.0
 var y_offset: float = 0.0
 var y_dir_timer: float = 0.0
 var last_y_dir: int = 0
 var force_upward_lead: bool = false
 var y_down_timer: float = 0.0
-var cur_baseline: float = 0.0
 var is_descent_unlocked: bool = false
 var had_jumped: bool = false
 
@@ -77,7 +75,6 @@ func _ready():
 		yield(character_node, "loaded")
 		global_position = character_node.global_position
 		last_position = global_position
-		y_baseline = global_position.y
 
 func _physics_process(delta):
 	last_position = global_position
@@ -206,14 +203,14 @@ func resolve_stopper(new_pos: Vector2, last_pos: Vector2, cur_size: Vector2, sto
 func resolve_vertical_route(new_pos: Vector2, last_pos: Vector2, cur_size: Vector2, stopper: CameraStopper, char_pos: Vector2) -> Vector2:
 	if char_pos.y < stopper.top_bound.y and new_pos.y + cur_size.y > stopper.top_bound.y:
 		var target_y: float = stopper.top_bound.y - cur_size.y + 1
-		if zoom_tween.is_active():
+		if zoom_tween.is_active() or cutscene_tween.is_active():
 			new_pos.y = target_y
 		else:
 			new_pos.y = CatmullRomSpline.sample([last_pos, Vector2(new_pos.x, target_y)], STOPPER_EASE_T).y
 			
 	elif char_pos.y > stopper.bottom_bound.y and new_pos.y - cur_size.y < stopper.bottom_bound.y:
 		var target_y: float = stopper.bottom_bound.y + cur_size.y - 1
-		if zoom_tween.is_active():
+		if zoom_tween.is_active() or cutscene_tween.is_active():
 			new_pos.y = target_y
 		else:
 			new_pos.y = CatmullRomSpline.sample([last_pos, Vector2(new_pos.x, target_y)], STOPPER_EASE_T).y
@@ -224,13 +221,13 @@ func resolve_vertical_route(new_pos: Vector2, last_pos: Vector2, cur_size: Vecto
 func resolve_horizontal_route(new_pos: Vector2, last_pos: Vector2, cur_size: Vector2, stopper: CameraStopper, char_pos: Vector2) -> Vector2:
 	if char_pos.x < stopper.left_bound.x and new_pos.x + cur_size.x > stopper.left_bound.x:
 		var target_x: float = stopper.left_bound.x - cur_size.x + 1
-		if zoom_tween.is_active():
+		if zoom_tween.is_active() or cutscene_tween.is_active():
 			new_pos.x = target_x
 		else:
 			new_pos.x = CatmullRomSpline.sample([last_pos, Vector2(target_x, new_pos.y)], STOPPER_EASE_T).x
 	elif char_pos.x > stopper.right_bound.x and new_pos.x - cur_size.x < stopper.right_bound.x:
 		var target_x: float = stopper.right_bound.x + cur_size.x - 1
-		if zoom_tween.is_active():
+		if zoom_tween.is_active() or cutscene_tween.is_active():
 			new_pos.x = target_x
 		else:
 			new_pos.x = CatmullRomSpline.sample([last_pos, Vector2(target_x, new_pos.y)], STOPPER_EASE_T).x
@@ -250,13 +247,13 @@ func resolve_ambiguous_route(new_pos: Vector2, last_pos: Vector2, cur_size: Vect
 func resolve_ambiguous_x(new_pos: Vector2, last_pos: Vector2, cur_size: Vector2, stopper: CameraStopper) -> Vector2:
 	if last_pos.x < stopper.global_position.x and new_pos.x > last_pos.x:
 		var clamped_x: float = stopper.left_bound.x - cur_size.x + 1
-		if zoom_tween.is_active():
+		if zoom_tween.is_active() or cutscene_tween.is_active():
 			new_pos.x = clamped_x
 		else:
 			new_pos.x = CatmullRomSpline.sample([last_pos, Vector2(clamped_x, new_pos.y)], STOPPER_EASE_T).x
 	elif last_pos.x > stopper.global_position.x and new_pos.x < last_pos.x:
 		var clamped_x: float = stopper.right_bound.x + cur_size.x - 1
-		if zoom_tween.is_active():
+		if zoom_tween.is_active() or cutscene_tween.is_active():
 			new_pos.x = clamped_x
 		else:
 			new_pos.x = CatmullRomSpline.sample([last_pos, Vector2(clamped_x, new_pos.y)], STOPPER_EASE_T).x
@@ -266,13 +263,13 @@ func resolve_ambiguous_x(new_pos: Vector2, last_pos: Vector2, cur_size: Vector2,
 func resolve_ambiguous_y(new_pos: Vector2, last_pos: Vector2, cur_size: Vector2, stopper: CameraStopper) -> Vector2:
 	if last_pos.y < stopper.global_position.y and new_pos.y > last_pos.y:
 		var clamped_y: float = stopper.top_bound.y - cur_size.y + 1
-		if zoom_tween.is_active():
+		if zoom_tween.is_active() or cutscene_tween.is_active():
 			new_pos.y = clamped_y
 		else:
 			new_pos.y = CatmullRomSpline.sample([last_pos, Vector2(new_pos.x, clamped_y)], STOPPER_EASE_T).y
 	elif last_pos.y > stopper.global_position.y and new_pos.y < last_pos.y:
 		var clamped_y: float = stopper.bottom_bound.y + cur_size.y - 1
-		if zoom_tween.is_active():
+		if zoom_tween.is_active() or cutscene_tween.is_active():
 			new_pos.y = clamped_y
 		else:
 			new_pos.y = CatmullRomSpline.sample([last_pos, Vector2(new_pos.x, clamped_y)], STOPPER_EASE_T).y
@@ -354,7 +351,6 @@ func play_cutscene(cutscene : CameraCutscene, reverse: bool = false):
 	var new_position = cutscene.to if !reverse else character_node.position
 	new_position = clamp_position(new_position, last_position, size, cutscene.exclude_stoppers)
 	
-	
 	var compare_position: Vector2 = global_position
 	if cutscene.from != Vector2.INF:
 		compare_position = cutscene.from
@@ -388,12 +384,11 @@ func play_cutscene(cutscene : CameraCutscene, reverse: bool = false):
 			cutscene.time
 			)
 		yield(SceneTransitions, "transition_finished")
-
-		y_baseline = new_position.y
-		cur_baseline = new_position.y
+		
 		last_position = new_position
 		global_position = new_position
-		skip_to_player = true #Helps with camera pan jank between transitions TODO: Properly fix this
+		skip_to_player = true
+		
 		if cutscene.from_character:
 			SceneTransitions.canvas_mask.global_position = get_character_screen_position()
 		
@@ -404,14 +399,14 @@ func play_cutscene(cutscene : CameraCutscene, reverse: bool = false):
 	if cutscene.do_reverse and cutscene_queue.empty() and not reverse:
 		play_cutscene(cutscene, true)
 		return
-		
+	
 	update_cutscene_queue()
 	
 func pan_to(final_position: Vector2, cutscene: CameraCutscene) -> int:
 	yield(get_tree(), "idle_frame") # Force coroutine
 
-	var path: Array = find_path(global_position, final_position)
-
+	var path: Array = find_path(global_position, final_position, cutscene.exclude_stoppers)
+	
 	if -1 in path:
 		return ERR_BUG
 		
@@ -419,7 +414,7 @@ func pan_to(final_position: Vector2, cutscene: CameraCutscene) -> int:
 		var next_point: Vector2 = path.pop_front()
 		pan_tween_to(next_point, cutscene)
 		yield(cutscene_tween, "tween_completed")
-		
+	
 	return OK
 	
 const INT32_MAX: int = 2147483647
@@ -438,7 +433,7 @@ func pan_tween_to(new_position: Vector2, cutscene: CameraCutscene):
 	cutscene_tween.interpolate_property(
 		self, 
 		"last_position", 
-		last_position, 
+		global_position, 
 		new_position, 
 		cutscene.time, 
 		cutscene.transition_type, 
@@ -446,13 +441,13 @@ func pan_tween_to(new_position: Vector2, cutscene: CameraCutscene):
 		)
 	cutscene_tween.start()
 	
-func find_path(init_pos: Vector2, final_pos: Vector2, visited_corners = null, depth: int = 0) -> Array:
+func find_path(init_pos: Vector2, final_pos: Vector2, exclude_stoppers: Array, visited_corners = null, depth: int = 0) -> Array:
 	if not visited_corners:
 		visited_corners = {}
 	if depth > 20: return [-1]
 		
 	var space_state: Physics2DDirectSpaceState = get_world_2d().direct_space_state
-	var hit: Dictionary = space_state.intersect_ray(init_pos, final_pos, [], 0x800, false, true)
+	var hit: Dictionary = space_state.intersect_ray(init_pos, final_pos, exclude_stoppers, 0x800, false, true)
 	if not hit: return [final_pos]
 	if not hit.collider is CameraStopper: return []
 	
@@ -473,10 +468,10 @@ func find_path(init_pos: Vector2, final_pos: Vector2, visited_corners = null, de
 		return [-1]
 	elif best_is_visited:
 		visited_corners[snap_alt] = true
-		return [alt_corner] + find_path(alt_corner, final_pos, visited_corners, depth + 1)
+		return [alt_corner] + find_path(alt_corner, final_pos, exclude_stoppers, visited_corners, depth + 1)
 	else:
 		visited_corners[snap_best] = true
-		return [best_corner] + find_path(best_corner, final_pos, visited_corners, depth + 1)
+		return [best_corner] + find_path(best_corner, final_pos, exclude_stoppers, visited_corners, depth + 1)
 		
 func _get_random_offset() -> Vector2:
 	randomize()

@@ -23,7 +23,7 @@ func location_warp(character: Character, target_tag: String, max_pan_distance: i
 		end_point = CurrentLevelData.vars.area_transition_helper.find_camera_position(
 			target_teleporter.vertical, 
 			target_teleporter.global_position,
-			character.camera.base_size, 
+			character.camera.size, 
 			target_teleporter.parts * 32
 		)
 	
