@@ -54,7 +54,9 @@ static func recalculate_level_collectible_counts(level_data_container) -> void:
 				if object.metadata.type_id == STAR_COIN_ID and (object.get_property(ENABLED_PROP_ID) == null or object.get_property(ENABLED_PROP_ID) == true):
 					var uuid: String = object.properties[4]
 					var data: StarCoinData = level_metadata.collectible_data.get_star_coin_by_uuid(uuid)
-					if uuid and data and not data in final_star_coin_data: final_star_coin_data.append(data)
+					if uuid and data: 
+						if not data in final_star_coin_data:
+							final_star_coin_data.append(data)
 					else: 
 						data = level_metadata.collectible_data.add_star_coin()
 						object.properties[4] = data.star_coin_uuid

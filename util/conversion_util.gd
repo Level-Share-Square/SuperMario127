@@ -404,8 +404,8 @@ static func get_level_metadata_from_old_data(level_data) -> LevelMetadata:
 
 
 static func get_collectible_data_from_old_data(level_data) -> CollectibleData:
-	var mission_datas: Array = []
-	var star_coin_datas: Array = []
+	var mission_datas: Dictionary = {}
+	var star_coin_datas: Dictionary = {}
 	var used_mission_datas: Dictionary = {}
 	
 	var SHINE_ID: int = 2
@@ -431,17 +431,20 @@ static func get_collectible_data_from_old_data(level_data) -> CollectibleData:
 					properties[14] = true
 					properties[15] = 0
 				
-				var mission_data: MissionData = MissionData.new(
-					uuid_util.v4(),
-					properties[8], # Show in menu
-					properties[6], # Shine name
-					properties[7], # Shine desc
-					properties[15], # Sort order
-					properties[12], # Color
-					properties[14], # Kick out
-					0,
-					"_entrance",
-					properties[13] # Internal ID
+				var mission_data: MissionData = mission_datas.get_or_add(
+					properties[13],
+					MissionData.new(
+						uuid_util.v4(),
+						properties[8], # Show in menu
+						properties[6], # Shine name
+						properties[7], # Shine desc
+						properties[15], # Sort order
+						properties[12], # Color
+						properties[14], # Kick out
+						0,
+						"_entrance",
+						properties[13] # Internal ID
+					)
 				)
 				
 				object.properties = properties.slice(0, 5)
@@ -453,20 +456,24 @@ static func get_collectible_data_from_old_data(level_data) -> CollectibleData:
 				object.properties[10] = 0 if properties.size() <= 16 else properties[16]
 				object.properties[11] = ""
 				
-				mission_datas.append(mission_data)
+				mission_datas[properties[13]] = mission_data
 				used_mission_datas[mission_data.mission_uuid] = 1
 			elif object.type_id == STAR_COIN_ID:
-				var star_coin_data: StarCoinData = StarCoinData.new(
-					uuid_util.v4(),
-					StarCoinData.DEFAULT_HINT,
-					StarCoinData.DEFAULT_COLOR
+				var old_internal_id: int = object.properties[6]
+				var star_coin_data: StarCoinData = star_coin_datas.get_or_add(old_internal_id, 
+					StarCoinData.new(
+						uuid_util.v4(),
+						StarCoinData.DEFAULT_HINT,
+						StarCoinData.DEFAULT_COLOR
+					)
 				)
 				
 				object.properties[6] = star_coin_data.star_coin_uuid
-				
-				star_coin_datas.append(star_coin_data)
+				star_coin_datas[old_internal_id] = star_coin_data
 	
-	return CollectibleData.new(mission_datas, star_coin_datas, 0, used_mission_datas, false, [])
+	var mission_data_list: Array = mission_datas.values()
+	var star_coin_data_list: Array = star_coin_datas.values()
+	return CollectibleData.new(mission_data_list, star_coin_data_list, 0, used_mission_datas, false, [])
 
 
 static func get_area_data_from_old_data(old_area: AreaDataOld) -> AreaData:
