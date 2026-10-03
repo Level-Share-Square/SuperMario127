@@ -48,6 +48,7 @@ func reload():
 	activated_shine_ids = CurrentLevelData.checkpoint_data.activated_shine_ids.duplicate(true)
 	layer_states = CurrentLevelData.checkpoint_data.current_layer_states.duplicate(true)
 	nozzles_collected = CurrentLevelData.checkpoint_data.nozzles_collected.duplicate(true)
+	used_changers = CurrentLevelData.checkpoint_data.used_changers.duplicate(true)
 	required_purple_starbits = []
 	for area in CurrentLevelData.area_headers:
 		required_purple_starbits.append([0])
