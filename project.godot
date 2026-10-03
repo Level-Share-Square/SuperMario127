@@ -179,6 +179,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://classes/camera_cutscene.gd"
 }, {
+"base": "Event",
+"class": "CameraShakeEvent",
+"language": "GDScript",
+"path": "res://scenes/actors/events/camera_shake_event.gd"
+}, {
 "base": "Area2D",
 "class": "CameraStopper",
 "language": "GDScript",
@@ -483,6 +488,16 @@ _global_script_classes=[ {
 "class": "EraseObjectBulkAction",
 "language": "GDScript",
 "path": "res://scenes/editor/action_manager/actions/erase_object_bulk.gd"
+}, {
+"base": "Resource",
+"class": "Event",
+"language": "GDScript",
+"path": "res://scenes/actors/events/event.gd"
+}, {
+"base": "GameObject",
+"class": "EventObject",
+"language": "GDScript",
+"path": "res://scenes/actors/objects/event_object/event_object.gd"
 }, {
 "base": "State",
 "class": "ExitPaintingState",
@@ -1239,6 +1254,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/actors/mario/powerups/Vanish.gd"
 }, {
+"base": "Event",
+"class": "WaitEvent",
+"language": "GDScript",
+"path": "res://scenes/actors/events/wait_event.gd"
+}, {
 "base": "State",
 "class": "WallJumpState",
 "language": "GDScript",
@@ -1273,6 +1293,11 @@ _global_script_classes=[ {
 "class": "campaign_info_util",
 "language": "GDScript",
 "path": "res://util/new/levels_list/campaign_info_util.gd"
+}, {
+"base": "Node",
+"class": "class_util",
+"language": "GDScript",
+"path": "res://util/new/class_util.gd"
 }, {
 "base": "Reference",
 "class": "conversion_util",
@@ -1419,6 +1444,7 @@ _global_script_class_icons={
 "CamFollowState": "",
 "CamState": "",
 "CameraCutscene": "",
+"CameraShakeEvent": "",
 "CameraStopper": "",
 "CampaignCard": "",
 "CatmullRomSpline": "",
@@ -1480,6 +1506,8 @@ _global_script_class_icons={
 "EnemyWanderState": "",
 "EraseObjectAction": "",
 "EraseObjectBulkAction": "",
+"Event": "",
+"EventObject": "",
 "ExitPaintingState": "",
 "FallState": "",
 "FolderCard": "",
@@ -1631,6 +1659,7 @@ _global_script_class_icons={
 "TurboNozzle": "",
 "ValidityChecker": "",
 "VanishPowerup": "",
+"WaitEvent": "",
 "WallJumpState": "",
 "WallSlideState": "",
 "WarpHelper": "",
@@ -1638,6 +1667,7 @@ _global_script_class_icons={
 "WingMarioState": "",
 "WingPowerup": "",
 "campaign_info_util": "",
+"class_util": "",
 "conversion_util": "",
 "cursor_setter_util": "",
 "fps_util": "",
