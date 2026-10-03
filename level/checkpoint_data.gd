@@ -14,6 +14,7 @@ var nozzles_collected := ["null"]
 var switch_state := []
 var activated_shine_ids := []
 var current_layer_states := []
+var used_changers := []
 var current_layer: String
 var nozzle_name: String
 var water_left: float = 0
@@ -33,6 +34,7 @@ func reset():
 	switch_state = []
 	activated_shine_ids = []
 	current_layer_states = []
+	used_changers = []
 	nozzle_name = ""
 	water_left = 100
 	area_time_left = -1

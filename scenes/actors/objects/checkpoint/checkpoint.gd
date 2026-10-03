@@ -97,6 +97,7 @@ func set_checkpoint(body):
 	CurrentLevelData.checkpoint_data.current_local_keys = CurrentLevelData.vars.local_keys_collected.duplicate(true)
 	CurrentLevelData.checkpoint_data.current_layer = level_layer_ref.get_ref().layer_data.layer_metadata.layer_uuid
 	CurrentLevelData.checkpoint_data.current_layer_states = CurrentLevelData.vars.layer_states.duplicate(true)
+	CurrentLevelData.checkpoint_data.used_changers = CurrentLevelData.vars.used_changers
 	CurrentLevelData.checkpoint_data.nozzle_name = ""
 	if is_instance_valid(body.nozzle):
 		CurrentLevelData.checkpoint_data.nozzle_name = body.nozzle.name
