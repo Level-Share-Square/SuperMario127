@@ -60,7 +60,7 @@ tracks/1/keys = {
 }
 
 [node name="Arrow" type="Node2D"]
-z_index = -1
+z_index = -2
 script = ExtResource( 2 )
 editor_rect = Rect2( -10, -13, 20, 26 )
 internal_id = "arrow"
