@@ -36,7 +36,7 @@ func start():
 	status_done = status_done_js if OS.has_feature("JavaScript") else status_done_default
 	var dir := Directory.new()
 	if Singleton.PlayerSettings.game_version_mismatch and not dir.file_exists("user://level_list/converted"):
-		if dir.dir_exists("user://levels"):
+		if old_levels.should_convert_levels():
 			status_label.text = status_converting
 			old_levels.start(level_list_util.BASE_FOLDER)
 			yield(old_levels, "conversion_complete")
