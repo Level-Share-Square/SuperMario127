@@ -1190,8 +1190,8 @@ func _physics_process(delta: float) -> void:
 		rocket_particles.reset_physics_interpolation()
 	else:
 		fludd_sprite.visible = false
-		water_sprite.visible = false
-		water_sprite_2.visible = false
+		water_particles.emitting = false
+		water_particles_2.emitting = false
 		turbo_particles.emitting = false
 		turbo_water_particles.emitting = false
 		rocket_particles.emitting = false

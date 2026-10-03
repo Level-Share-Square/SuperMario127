@@ -22,12 +22,15 @@ func _ready():
 func _start_check(_delta):
 	pass
 
-func _start(_delta):
+func _start(delta):
 	old_gravity_scale = character.gravity_scale
 	character.gravity_scale = 0
 	character.sprite.animation = "spinning"
 	character.sprite.speed_scale = 1.5
 	character.camera.set_zoom_tween(Vector2(1.5, 1.5), 1)
+	if is_instance_valid(character.nozzle):
+		character.nozzle.activated = false
+		character.nozzle._general_update(delta)
 	
 func _stop(_delta):
 	character.gravity_scale = old_gravity_scale
