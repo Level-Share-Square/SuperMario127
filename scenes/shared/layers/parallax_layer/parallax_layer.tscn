@@ -10,10 +10,12 @@
 script = ExtResource( 2 )
 
 [node name="ParallaxScroll" type="Node2D" parent="."]
+pause_mode = 2
 unique_name_in_owner = true
 script = ExtResource( 5 )
 
 [node name="ObjectManager" type="Node2D" parent="ParallaxScroll"]
+pause_mode = 1
 unique_name_in_owner = true
 script = ExtResource( 3 )
 __meta__ = {
@@ -25,6 +27,7 @@ z_index = 1
 copy_mode = 2
 
 [node name="TileMapManager" type="TileMap" parent="ParallaxScroll"]
+pause_mode = 1
 unique_name_in_owner = true
 tile_set = ExtResource( 4 )
 cell_size = Vector2( 32, 32 )
