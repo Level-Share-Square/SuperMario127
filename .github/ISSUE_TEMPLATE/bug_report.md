@@ -1,6 +1,6 @@
 ---
 name: Bug report
-about: Create a report to help us improve
+about: Report a bug you found!
 title: ''
 labels: ''
 assignees: ''
@@ -24,14 +24,14 @@ A clear and concise description of what you expected to happen.
 A video or screenshots detailing the error. This entry is *highly* recommended if you want this bug to be solved.
 
 **Desktop (please complete the following information):**
- - OS: [e.g. Android]
- - Browser [e.g. chrome, safari]
+ - OS: [e.g. Windows]
+ - Browser [e.g. chrome, safari] (if applicable)
  - Version [e.g. 0.10.0]
 
-**Smartphone (if applicable):**
+**Smartphone (please complete the following information):**
  - Device: [e.g. iPhone6]
  - OS: [e.g. iOS8.1]
- - Browser [e.g. stock browser, safari]
+ - Browser [e.g. stock browser, safari] (if applicable)
  - Version [e.g. 0.10.0]
 
 **Additional context**
