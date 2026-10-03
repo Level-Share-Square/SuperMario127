@@ -151,15 +151,18 @@ func update_shape_size() -> void:
 	size = base_size * zoom.y
 
 
-func clamp_position(new_pos: Vector2, last_pos: Vector2, cur_size: Vector2, exclude_areas: Array = []) -> Vector2:
-	new_pos = clamp_to_level_bounds(new_pos, cur_size)
-	
+func get_compare_areas(exclude_areas: Array = []) -> Array:
 	var compare_areas: Array = area.get_overlapping_areas()
 	for exclude_area in exclude_areas:
 		if exclude_area in compare_areas:
 			compare_areas.erase(exclude_area)
+	return compare_areas
+
+
+func clamp_position(new_pos: Vector2, last_pos: Vector2, cur_size: Vector2, exclude_areas: Array = []) -> Vector2:
+	new_pos = clamp_to_level_bounds(new_pos, cur_size)
 	
-	for stopper in compare_areas:
+	for stopper in get_compare_areas(exclude_areas):
 		if in_cutscene: return new_pos
 		if not is_near_stopper(new_pos, cur_size, stopper):
 			print("ESCAPED")
@@ -490,6 +493,7 @@ func update_cutscene_queue():
 			CurrentLevelData.can_pause = true
 		if locked_movement:
 			character_node.toggle_movement(true)
+		velocity = Vector2.ZERO
 		auto_move = true
 
 func get_character_screen_position() -> Vector2:
