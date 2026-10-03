@@ -14,7 +14,7 @@ A clear and concise description of what the bug is.
 Steps to reproduce the behavior:
 1. Go to '...'
 2. Have Hover FLUDD equipped
-3. Triple Jump Dive into the wall
+3. Triple-jump dive into the wall
 4. See error
 
 **Expected behavior**
