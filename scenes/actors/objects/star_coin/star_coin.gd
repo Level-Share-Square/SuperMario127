@@ -96,14 +96,17 @@ func collect(body : PhysicsBody2D) -> void:
 		collected = true
 		get_tree().get_current_scene().get_node("%PauseController").emit_signal("star_coin_collected")
 		
+		var used_audio_player: AudioStreamPlayer
 		if not is_blue and not Singleton.ModeSwitcher.visible and CurrentLevelData.save_data.get_collected_star_coin_count() >= CurrentLevelData.level_metadata.collectible_data.get_star_coin_count():
+			used_audio_player = audio_player_complete
 			audio_player_complete.play()
 		else:
+			used_audio_player = audio_player
 			audio_player.play()
 		
 		LastInputDevice.rumble(0.5, 0.8, 0.2)
 		animation_player.play("collect")
-		var _connect = animation_player.connect("animation_finished", self, "queue_free")
+		var _connect = used_audio_player.connect("finished", self, "queue_free")
 
 
 func _object_removed(free: bool) -> void:
