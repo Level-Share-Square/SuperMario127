@@ -37,7 +37,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=2]
 resource_name = "roll"
-length = 105.0
+length = 100.0
 step = 1.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("RichTextLabel:rect_position")
@@ -70,7 +70,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 105 ),
+"times": PoolRealArray( 100 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [ "MainMenu" ],
