@@ -47,18 +47,9 @@ func _ready() -> void:
 		data = CurrentLevelData.level_metadata.collectible_data.add_star_coin()
 		set_property("uuid", data.star_coin_uuid, true)
 		EditorState.starcoin_uuids_in_use.append(data.star_coin_uuid)
-		
 	else:
-		if uuid in EditorState.starcoin_uuids_in_use:
-			data = CurrentLevelData.level_metadata.collectible_data.add_star_coin()
-			uuid = data.star_coin_uuid
-			data.star_coin_hint = hint
-			data.star_coin_color = color
-			EditorState.starcoin_uuids_in_use.append(uuid)
-			
-		else:
-			data = CurrentLevelData.level_metadata.collectible_data.get_star_coin_by_uuid(uuid)
-			if data: EditorState.starcoin_uuids_in_use.append(data.star_coin_uuid)
+		data = CurrentLevelData.level_metadata.collectible_data.get_star_coin_by_uuid(uuid)
+		if data and not uuid in EditorState.starcoin_uuids_in_use: EditorState.starcoin_uuids_in_use.append(data.star_coin_uuid)
 			
 	if not data: #This happens if you duplicate an area and delete the star coins
 		data = CurrentLevelData.level_metadata.collectible_data.add_star_coin(uuid)
@@ -99,7 +90,7 @@ func update_color():
 
 func collect(body : PhysicsBody2D) -> void:
 	if is_enabled_and_on_ground() and !collected and (body is Character):
-		if not Singleton.ModeSwitcher.visible:
+		if not Singleton.ModeSwitcher.visible and not CurrentLevelData.save_data.is_star_coin_collected(uuid):
 			CurrentLevelData.save_data.set_star_coin_collected(uuid, CurrentLevelData.selected_file > -2)
 
 		collected = true
