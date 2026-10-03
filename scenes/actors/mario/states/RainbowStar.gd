@@ -93,7 +93,7 @@ func _update(delta):
 		if character.velocity.y >= 0:
 			jumping = false
 			
-	if had_jumped and character.inputs[9][1]:
+	if had_jumped and character.inputs[9][0]:
 		had_jumped = false
 	
 	current_speed = clamp(current_speed, -run_speed * 2, run_speed * 2)
