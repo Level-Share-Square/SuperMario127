@@ -233,7 +233,7 @@ bus = "Sounds"
 [connection signal="pressed" from="Modifiers/ModifierButtons/Underline" to="TextEditor" method="add_bbcode" binds= [ "u" ]]
 [connection signal="pressed" from="Modifiers/ModifierButtons/Strikethrough" to="TextEditor" method="add_bbcode" binds= [ "s" ]]
 [connection signal="pressed" from="Modifiers/ModifierButtons/Center" to="TextEditor" method="add_bbcode" binds= [ "center" ]]
-[connection signal="pressed" from="Modifiers/ModifierButtons/Color" to="TextEditor" method="add_bbcode" binds= [ "color", "=#00aeff" ]]
+[connection signal="pressed" from="Modifiers/ModifierButtons/Color" to="TextEditor" method="add_bbcode" binds= [ "color", "=#7DCBFF" ]]
 [connection signal="pressed" from="Modifiers/ModifierButtons/Wave" to="TextEditor" method="add_bbcode" binds= [ "wave" ]]
 [connection signal="pressed" from="Modifiers/ModifierButtons/Shake" to="TextEditor" method="add_bbcode" binds= [ "shake" ]]
 [connection signal="pressed" from="Modifiers/ModifierButtons/Rainbow" to="TextEditor" method="add_bbcode" binds= [ "rainbow" ]]
