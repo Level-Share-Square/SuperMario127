@@ -29,15 +29,26 @@ func _ready():
 	
 	var header: AreaHeader = CurrentLevelData.current_area.header
 	
+	## setting text here so that it does not interrupt the animation
+	area_name.text = header.name
+	area_name_back_1.text = area_name.text
+	area_name_back_2.text = area_name.text
+	
+	var song_id = header.music
+	if song_id is int:
+		var song_data: LevelSong = Singleton.Music.get_song(song_id)
+		song_name.text = song_data.title
+		author_name.text = song_data.note
+	else:
+		song_name.text = header.custom_music_name
+		author_name.text = header.custom_music_author
+	
+	## okay now we can play it
 	area_name_anim.playback_speed = 0
 	if CurrentLevelData.is_new_area:
 		CurrentLevelData.is_new_area = false
 		
 		if header.name != "" and header.show_name:
-			area_name.text = header.name
-			area_name_back_1.text = area_name.text
-			area_name_back_2.text = area_name.text
-			
 			area_name_anim.playback_speed = 1
 			area_tween = create_tween()
 			area_tween.tween_interval(area_start_delay)
@@ -50,15 +61,6 @@ func _ready():
 		Singleton.Music.song_switched = false
 		
 		if header.show_song and not Singleton.ModeSwitcher.visible:
-			var song_id = header.music
-			if song_id is int:
-				var song_data: LevelSong = Singleton.Music.get_song(song_id)
-				song_name.text = song_data.title
-				author_name.text = song_data.note
-			else:
-				song_name.text = header.custom_music_name
-				author_name.text = header.custom_music_author
-			
 			song_name_anim.playback_speed = 1
 			song_tween = create_tween()
 			song_tween.tween_callback(song_name_anim, "play", ["appear"])
