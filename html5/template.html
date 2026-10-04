@@ -182,7 +182,7 @@
 			top: 75%;
 			width: 100%;
 			height: 100%;
-			
+
 			background-image: inherit;
 			background-size: inherit;
 			background-repeat: inherit;
@@ -282,9 +282,9 @@
 			background-color: white;
 			width: 100%;
 			height: 100%;
-			
+
 			z-index: 10;
-			
+
 			transition: filter 2.5s ease-in-out;
 			filter: opacity(0);
 		}
@@ -346,7 +346,7 @@
 				collectTimer: null,
 			})
 		}
-		
+
 		const splashScreen = document.getElementById("splash-screen")
 		const viewport = document.getElementById("viewport");
 		const marioSprite = document.getElementById("mario");
@@ -367,7 +367,7 @@
 		var intPercent = 0;
 		var lastIntPercent = 0;
 		var engineStarted = false;
-	
+
 		var blockStates = [
 			{ threshold: 168, requiredPercent: 33, hit: false, type: 'jumping', element: block0 },
 			{ threshold: 328, requiredPercent: 66, hit: false, type: 'jumping', element: block1 },
@@ -383,15 +383,17 @@
 
 		GODOT_CONFIG.onProgress = function(current, total) {
 			if (total > 0) {
-				let newIntPercent = Math.floor(current / total * 100);
+				let effectiveCurrent = Math.min(current, total);
+				let newIntPercent = Math.floor((effectiveCurrent / total) * 100);
+
 				if (newIntPercent > intPercent) {
 					for (let i = intPercent; i < newIntPercent; i++) {
-						if (i != 33 && i != 66 && i < 95) {
+						if (i !== 33 && i !== 66 && i < 95) {
 							spawnCoin();
 						}
 					}
+					intPercent = newIntPercent;
 				}
-				intPercent = newIntPercent;
 			}
 		}
 		GODOT_CONFIG.args.push('--main-pack', GODOT_CONFIG.executable + '.pck');
@@ -404,7 +406,7 @@
 			function updateViewportScale() {
 				const windowWidth = window.innerWidth;
 				const windowHeight = window.innerHeight;
-				
+
 				const scaleX = windowWidth / 768;
 				const scaleY = windowHeight / 432;
 				const scale = Math.min(scaleX, scaleY);
@@ -463,13 +465,15 @@
 									setTimeout(() => {
 										viewport.style.opacity = 0;
 									}, 4500);
+
 									setTimeout(() => {
 										engineStarted = true;
 										engine.start({
 											args: GODOT_CONFIG.args,
 											canvas: document.getElementById('canvas')
+										}).then(() => {
+											viewport.remove();
 										}).catch(displayFailureNotice);
-										viewport.remove();
 									}, 5500);
 								}
 							}
@@ -481,14 +485,14 @@
 					jumpY += jumpVel * deltaTime;
 					marioSprite.style.transform = `translateY(${jumpY}px)`;
 					marioSprite.style.setProperty('--reflection-offset', `${jumpY * 2.5}px`);
-					
+
 					if (jumpY <= -64 && jumpVel < 50) {
 						jumpVel = 50;
 
 						collectedCoins += 1;
-						hudLabel.textContent = collectedCoins + "/100"; 
+						hudLabel.textContent = collectedCoins + "/100";
 						playCoinSound();
-						
+
 						if (marioState != 'endless') {
 							nextBlockData.hit = true;
 							nextBlockData.element.classList.add('hit');
@@ -526,7 +530,7 @@
 							marioState = 'walking';
 						}
 						else if (collectedCoins < 100) {
-							jumpVel = -500; 
+							jumpVel = -500;
 						}
 					}
 
@@ -565,7 +569,7 @@
 						if (coinDict.x < marioX + 32) {
 							coinDict.collectTimer = 1.0;
 							collectedCoins += 1;
-							hudLabel.textContent = collectedCoins + "/100"; 
+							hudLabel.textContent = collectedCoins + "/100";
 							playCoinSound();
 						}
 					}
@@ -588,12 +592,10 @@
 				}
 			}
 
-			// 1. Initialize the Audio Context
 			const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 			let audioBuffer = null;
 			let activeSource = null;
 
-			// 2. Load and decode the sound into memory immediately
 			async function loadSound(url) {
 				try {
 					const response = await fetch(url);
@@ -604,28 +606,21 @@
 				}
 			}
 
-			// Call this during your loading screen setup
 			loadSound('assets/sound.mp3');
 
-			// 3. Play the sound with zero delay, cutting off the previous one
 			function playCoinSound() {
-				if (!audioBuffer) return; // Not loaded yet
+				if (!audioBuffer) return;
 
-				// If a sound is already playing, stop it immediately (cuts it off)
 				if (activeSource) {
 					try {
 						activeSource.stop();
 					} catch (e) {
-						// Ignore if it already finished
 					}
 				}
 
-				// Create a fresh source node from the pre-decoded buffer
 				activeSource = audioCtx.createBufferSource();
 				activeSource.buffer = audioBuffer;
 				activeSource.connect(audioCtx.destination);
-				
-				// Play instantly
 				activeSource.start(0);
 			}
 
@@ -637,14 +632,64 @@
 				doneLoading.textContent = msg;
 			};
 
+			async function loadPckWithProgress(url, onProgress) {
+				const response = await fetch(url);
+				if (!response.ok) throw new Error(`Failed to load ${url}: ${response.statusText}`);
+				const total = GODOT_CONFIG.fileSizes["index.pck"]
+
+				let loaded = 0;
+				const reader = response.body.getReader();
+				const chunks = [];
+
+				while (true) {
+					const { done, value } = await reader.read();
+					if (done) break;
+
+					chunks.push(value);
+					loaded += value.length;
+
+					if (onProgress) {
+						onProgress(loaded, total);
+					}
+				}
+
+				const allChunks = new Uint8Array(loaded);
+				let position = 0;
+				for (const chunk of chunks) {
+					allChunks.set(chunk, position);
+					position += chunk.length;
+				}
+				return allChunks.buffer;
+			}
+
+			var pckLoaded = false;
+
 			if (!Engine.isWebGLAvailable()) {
 				displayFailureNotice('WebGL not available');
 			} else {
-				engine.init(GODOT_CONFIG.executable).then(() => {
-					return engine.preloadFile(GODOT_CONFIG.executable + '.pck');
-				}).then(() => {
-					initializing = false;
-				}).catch(displayFailureNotice);
+				const pckPromise = loadPckWithProgress(
+					GODOT_CONFIG.executable + '.pck',
+					GODOT_CONFIG.onProgress
+				);
+				const wasmPromise = fetch(GODOT_CONFIG.executable + '.wasm')
+					.then(response => {
+						if (!response.ok) throw new Error(`Failed to load WASM: ${response.statusText}`);
+						return response.arrayBuffer();
+					});
+				pckLoadPromise = Promise.all([pckPromise, wasmPromise])
+					.then(async ([pckData, wasmBuffer]) => {
+						await engine.init(GODOT_CONFIG.executable, {
+							instantiateWasm(imports, onSuccess) {
+								WebAssembly.instantiate(wasmBuffer, imports).then(result => {
+									onSuccess(result.instance, result.module);
+								});
+								return {};
+							}
+						});
+						engine.preloadFile(pckData, GODOT_CONFIG.executable + '.pck');
+						pckLoaded = true;
+					})
+					.catch(displayFailureNotice);
 			}
 		})();
 	//]]></script>
