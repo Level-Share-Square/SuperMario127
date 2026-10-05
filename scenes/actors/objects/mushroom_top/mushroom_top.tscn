@@ -217,7 +217,7 @@ patch_margin_right = 32
 axis_stretch_horizontal = 1
 
 [node name="ResizableColorSpotsModulate" type="NinePatchRect" parent="Node2D/Resizeable"]
-modulate = Color( 0, 1, 0, 1 )
+modulate = Color( 0, 0, 0, 1 )
 material = SubResource( 6 )
 margin_right = 96.0
 margin_bottom = 32.0
