@@ -182,12 +182,12 @@ font_data = ExtResource( 18 )
 [sub_resource type="Gradient" id=35]
 colors = PoolColorArray( 0, 0.419608, 1, 1, 0.266667, 0, 0.509804, 1 )
 
-[sub_resource type="GradientTexture2D" id=36]
+[sub_resource type="GradientTexture2D" id=60]
 gradient = SubResource( 35 )
 fill_to = Vector2( 0, 1 )
 
 [sub_resource type="StyleBoxTexture" id=37]
-texture = SubResource( 36 )
+texture = SubResource( 60 )
 region_rect = Rect2( 0, 0, 64, 64 )
 
 [sub_resource type="ShaderMaterial" id=59]

@@ -6,7 +6,6 @@ extends BaseCard
 var http_thumbnails: HTTPThumbnails
 
 ## internal
-var level_info: LevelInfo
 var is_campaign: bool
 var has_save: bool
 var is_valid: bool
@@ -46,17 +45,9 @@ func setup(
 	var file_path: String = level_list_util.get_level_file_path(id, parent_folder)
 	if level_code == "":
 		level_code = level_list_util.load_level_code_file(file_path)
-#	elif not level_code_util.fast_is_valid(level_code):
-#		level_code = level_list_util.load_level_code_file(LevelDataOld.DEFAULT_CODE_PATH)
-
+	
 	level_metadata = LevelCodeDeserializer.deserialize_level_metadata_code(LevelCodeTokenizer.splice_metadata(level_code))
 	is_valid = true
-	# Uncomment the lines below and above to have any invalid level code be replaced by the default level code
-	# For now it just shows a predefined invalid level card that doesn't let you edit or play the level
-#	if (level_info.level_name == "\"Invalid Level\""):
-#		level_code = level_list_util.load_level_code_file(LevelDataOld.DEFAULT_CODE_PATH)
-#		level_info = LevelInfo.new(id, parent_folder, level_code)
-#		level_info = LevelInfo.new(id, parent_folder, level_code)
 	
 	if is_campaign: return
 	

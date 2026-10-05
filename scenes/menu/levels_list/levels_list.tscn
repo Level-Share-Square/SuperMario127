@@ -183,7 +183,7 @@ tracks/3/keys = {
 [sub_resource type="DynamicFont" id=12]
 size = 18
 outline_size = 2
-outline_color = Color( 0, 0.0431373, 0.313726, 1 )
+outline_color = Color( 0, 0, 0, 1 )
 extra_spacing_top = 1
 extra_spacing_bottom = 1
 extra_spacing_char = -1
@@ -271,7 +271,9 @@ tracks/2/keys = {
 [sub_resource type="DynamicFont" id=31]
 size = 20
 outline_size = 2
-outline_color = Color( 0, 0.0431373, 0.313726, 1 )
+outline_color = Color( 0, 0, 0, 1 )
+extra_spacing_top = -4
+extra_spacing_bottom = 4
 extra_spacing_char = -1
 font_data = ExtResource( 59 )
 
@@ -1082,7 +1084,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 3.0
 margin_bottom = 3.0
-custom_colors/font_color = Color( 0, 0.0431373, 0.313726, 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 12 )
 text = "SM63 Tall Tall Mountain +"
 align = 1
@@ -1635,7 +1637,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 3.0
 margin_bottom = 3.0
-custom_colors/font_color = Color( 0, 0.0431373, 0.313726, 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 31 )
 text = "Super Mario 4D Galaxy 12"
 align = 1
@@ -2003,7 +2005,6 @@ script = ExtResource( 29 )
 offset = Vector2( -75, 0 )
 
 [node name="NewCampaign" type="Button" parent="Panel/Subscreens/AddElement/Control/ElementAddButtons"]
-visible = false
 margin_top = 174.0
 margin_right = 163.0
 margin_bottom = 194.0

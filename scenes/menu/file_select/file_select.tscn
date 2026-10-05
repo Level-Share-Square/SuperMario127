@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://scenes/menu/theme.tres" type="Theme" id=1]
 [ext_resource path="res://scenes/menu/button_scripts/button_hover-horizontal.gd" type="Script" id=2]
@@ -7,12 +7,10 @@
 [ext_resource path="res://assets/sounds/click2.wav" type="AudioStream" id=5]
 [ext_resource path="res://scenes/menu/ui_focus.gd" type="Script" id=6]
 [ext_resource path="res://assets/sounds/hover.wav" type="AudioStream" id=7]
+[ext_resource path="res://scenes/menu/shine_select/nozzle_graphic.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/menu/button_scripts/button_hover-vertical.gd" type="Script" id=9]
-[ext_resource path="res://scenes/actors/objects/hover_box/hover_box.png" type="Texture" id=10]
 [ext_resource path="res://assets/icons/star_coin.png" type="Texture" id=11]
 [ext_resource path="res://assets/icons/shine.png" type="Texture" id=12]
-[ext_resource path="res://scenes/actors/objects/turbo_box/turbo_box.png" type="Texture" id=13]
-[ext_resource path="res://scenes/actors/objects/rocket_box/rocket_box.png" type="Texture" id=14]
 [ext_resource path="res://scenes/menu/file_select/file_manager.gd" type="Script" id=15]
 [ext_resource path="res://scenes/menu/file_select/file_card.gd" type="Script" id=16]
 
@@ -31,6 +29,52 @@ colors = PoolColorArray( 1, 1, 1, 0, 0.72549, 0.843137, 0.937255, 1 )
 [sub_resource type="GradientTexture2D" id=5]
 gradient = SubResource( 4 )
 fill_to = Vector2( 0, 1 )
+
+[sub_resource type="Gradient" id=53]
+colors = PoolColorArray( 0, 0.419608, 1, 1, 0.266667, 0, 0.509804, 1 )
+
+[sub_resource type="GradientTexture2D" id=36]
+gradient = SubResource( 53 )
+fill_to = Vector2( 0, 1 )
+
+[sub_resource type="StyleBoxTexture" id=54]
+texture = SubResource( 36 )
+region_rect = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="StyleBoxFlat" id=55]
+bg_color = Color( 1, 1, 1, 1 )
+draw_center = false
+border_width_left = 2
+border_width_top = 6
+border_width_right = 2
+border_width_bottom = 1
+border_color = Color( 0.658824, 0.764706, 0.945098, 1 )
+border_blend = true
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="Gradient" id=41]
+offsets = PoolRealArray( 0.544304, 1 )
+colors = PoolColorArray( 1, 1, 1, 0, 0.854902, 0.94902, 1, 0.752941 )
+
+[sub_resource type="GradientTexture2D" id=56]
+gradient = SubResource( 41 )
+fill_from = Vector2( 0, 0.8 )
+fill_to = Vector2( 0, 0.2 )
+repeat = 2
+
+[sub_resource type="Gradient" id=52]
+colors = PoolColorArray( 1, 0, 0, 1, 0.509804, 0, 0.313726, 1 )
+
+[sub_resource type="GradientTexture2D" id=38]
+gradient = SubResource( 52 )
+fill_to = Vector2( 0, 1 )
+
+[sub_resource type="StyleBoxTexture" id=39]
+texture = SubResource( 38 )
+region_rect = Rect2( 0, 0, 64, 64 )
 
 [sub_resource type="Animation" id=1]
 length = 0.001
@@ -314,56 +358,47 @@ custom_constants/margin_bottom = 20
 margin_left = 20.0
 margin_top = 20.0
 margin_right = 156.0
-margin_bottom = 156.0
+margin_bottom = 161.0
 mouse_filter = 2
 custom_constants/separation = 0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer2/VBoxContainer/Control/FileCards/FileA/Button/Info/VBoxContainer"]
 margin_right = 136.0
-margin_bottom = 25.0
+margin_bottom = 32.0
 mouse_filter = 2
 custom_constants/separation = 6
 
-[node name="Icon" type="TextureRect" parent="MarginContainer2/VBoxContainer/Control/FileCards/FileA/Button/Info/VBoxContainer/HBoxContainer"]
-margin_right = 25.0
-margin_bottom = 25.0
-rect_min_size = Vector2( 25, 0 )
-texture = ExtResource( 10 )
-expand = true
-stretch_mode = 6
-
-[node name="Shadow" type="TextureRect" parent="MarginContainer2/VBoxContainer/Control/FileCards/FileA/Button/Info/VBoxContainer/HBoxContainer/Icon"]
-modulate = Color( 0, 0, 0, 0.25098 )
-show_behind_parent = true
-margin_left = 2.0
-margin_top = 3.0
-margin_right = 27.0
-margin_bottom = 28.0
-rect_min_size = Vector2( 25, 0 )
-mouse_filter = 2
-texture = ExtResource( 10 )
-expand = true
-stretch_mode = 6
+[node name="Icon" parent="MarginContainer2/VBoxContainer/Control/FileCards/FileA/Button/Info/VBoxContainer/HBoxContainer" instance=ExtResource( 8 )]
+margin_right = 32.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+rect_rotation = 0.0
+custom_styles/panel = SubResource( 54 )
+panel_hover = SubResource( 54 )
+inner_panel_hover = SubResource( 55 )
+shine_hover = SubResource( 56 )
+box_type = 1
 
 [node name="FileName" type="Label" parent="MarginContainer2/VBoxContainer/Control/FileCards/FileA/Button/Info/VBoxContainer/HBoxContainer"]
-margin_left = 31.0
-margin_right = 82.0
-margin_bottom = 25.0
+margin_left = 38.0
+margin_top = 3.0
+margin_right = 89.0
+margin_bottom = 28.0
 custom_colors/font_color = Color( 0, 0.0431373, 0.313726, 1 )
 text = "File A"
 
 [node name="Padding" type="Control" parent="MarginContainer2/VBoxContainer/Control/FileCards/FileA/Button/Info/VBoxContainer"]
-margin_top = 25.0
+margin_top = 32.0
 margin_right = 136.0
-margin_bottom = 33.0
+margin_bottom = 40.0
 rect_min_size = Vector2( 0, 8 )
 mouse_filter = 2
 size_flags_vertical = 3
 
 [node name="Collectibles" type="GridContainer" parent="MarginContainer2/VBoxContainer/Control/FileCards/FileA/Button/Info/VBoxContainer"]
-margin_top = 33.0
+margin_top = 40.0
 margin_right = 136.0
-margin_bottom = 109.0
+margin_bottom = 116.0
 mouse_filter = 2
 custom_constants/hseparation = 12
 
@@ -443,16 +478,16 @@ align = 1
 valign = 1
 
 [node name="Padding2" type="Control" parent="MarginContainer2/VBoxContainer/Control/FileCards/FileA/Button/Info/VBoxContainer"]
-margin_top = 109.0
+margin_top = 116.0
 margin_right = 136.0
-margin_bottom = 111.0
+margin_bottom = 116.0
 mouse_filter = 2
 size_flags_vertical = 3
 
 [node name="Completion" type="Label" parent="MarginContainer2/VBoxContainer/Control/FileCards/FileA/Button/Info/VBoxContainer"]
-margin_top = 111.0
+margin_top = 116.0
 margin_right = 136.0
-margin_bottom = 136.0
+margin_bottom = 141.0
 custom_colors/font_color = Color( 0, 0.0431373, 0.313726, 1 )
 text = "25%"
 align = 2
@@ -514,43 +549,33 @@ custom_constants/separation = 0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer2/VBoxContainer/Control/FileCards/FileB/Button/Info/VBoxContainer"]
 margin_right = 136.0
-margin_bottom = 25.0
+margin_bottom = 32.0
 mouse_filter = 2
 custom_constants/separation = 6
 
-[node name="Icon" type="TextureRect" parent="MarginContainer2/VBoxContainer/Control/FileCards/FileB/Button/Info/VBoxContainer/HBoxContainer"]
-margin_right = 25.0
-margin_bottom = 25.0
-rect_min_size = Vector2( 25, 0 )
-mouse_filter = 2
-texture = ExtResource( 14 )
-expand = true
-stretch_mode = 6
-
-[node name="Shadow" type="TextureRect" parent="MarginContainer2/VBoxContainer/Control/FileCards/FileB/Button/Info/VBoxContainer/HBoxContainer/Icon"]
-modulate = Color( 0, 0, 0, 0.25098 )
-show_behind_parent = true
-margin_left = 2.0
-margin_top = 3.0
-margin_right = 27.0
-margin_bottom = 28.0
-rect_min_size = Vector2( 25, 0 )
-mouse_filter = 2
-texture = ExtResource( 14 )
-expand = true
-stretch_mode = 6
+[node name="Icon" parent="MarginContainer2/VBoxContainer/Control/FileCards/FileB/Button/Info/VBoxContainer/HBoxContainer" instance=ExtResource( 8 )]
+margin_right = 32.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+rect_rotation = 0.0
+custom_styles/panel = SubResource( 54 )
+panel_hover = SubResource( 54 )
+inner_panel_hover = SubResource( 55 )
+shine_hover = SubResource( 56 )
+box_type = 2
 
 [node name="FileName" type="Label" parent="MarginContainer2/VBoxContainer/Control/FileCards/FileB/Button/Info/VBoxContainer/HBoxContainer"]
-margin_left = 31.0
-margin_right = 80.0
-margin_bottom = 25.0
+margin_left = 38.0
+margin_top = 3.0
+margin_right = 87.0
+margin_bottom = 28.0
 custom_colors/font_color = Color( 0, 0.0431373, 0.313726, 1 )
 text = "File B"
 
 [node name="Padding" type="Control" parent="MarginContainer2/VBoxContainer/Control/FileCards/FileB/Button/Info/VBoxContainer"]
-margin_top = 25.0
+margin_top = 32.0
 margin_right = 136.0
-margin_bottom = 68.0
+margin_bottom = 71.0
 rect_min_size = Vector2( 0, 8 )
 mouse_filter = 2
 size_flags_vertical = 3
@@ -639,7 +664,7 @@ align = 1
 valign = 1
 
 [node name="Padding2" type="Control" parent="MarginContainer2/VBoxContainer/Control/FileCards/FileB/Button/Info/VBoxContainer"]
-margin_top = 68.0
+margin_top = 71.0
 margin_right = 136.0
 margin_bottom = 111.0
 mouse_filter = 2
@@ -710,43 +735,33 @@ custom_constants/separation = 0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer2/VBoxContainer/Control/FileCards/FileC/Button/Info/VBoxContainer"]
 margin_right = 136.0
-margin_bottom = 25.0
+margin_bottom = 32.0
 mouse_filter = 2
 custom_constants/separation = 6
 
-[node name="Icon" type="TextureRect" parent="MarginContainer2/VBoxContainer/Control/FileCards/FileC/Button/Info/VBoxContainer/HBoxContainer"]
-margin_right = 25.0
-margin_bottom = 25.0
-rect_min_size = Vector2( 25, 0 )
-mouse_filter = 2
-texture = ExtResource( 13 )
-expand = true
-stretch_mode = 6
-
-[node name="Shadow" type="TextureRect" parent="MarginContainer2/VBoxContainer/Control/FileCards/FileC/Button/Info/VBoxContainer/HBoxContainer/Icon"]
-modulate = Color( 0, 0, 0, 0.25098 )
-show_behind_parent = true
-margin_left = 2.0
-margin_top = 3.0
-margin_right = 27.0
-margin_bottom = 28.0
-rect_min_size = Vector2( 25, 0 )
-mouse_filter = 2
-texture = ExtResource( 13 )
-expand = true
-stretch_mode = 6
+[node name="Icon2" parent="MarginContainer2/VBoxContainer/Control/FileCards/FileC/Button/Info/VBoxContainer/HBoxContainer" instance=ExtResource( 8 )]
+margin_right = 32.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+rect_rotation = 0.0
+custom_styles/panel = SubResource( 39 )
+panel_hover = SubResource( 54 )
+inner_panel_hover = SubResource( 55 )
+shine_hover = SubResource( 56 )
+box_type = 3
 
 [node name="FileName" type="Label" parent="MarginContainer2/VBoxContainer/Control/FileCards/FileC/Button/Info/VBoxContainer/HBoxContainer"]
-margin_left = 31.0
-margin_right = 81.0
-margin_bottom = 25.0
+margin_left = 38.0
+margin_top = 3.0
+margin_right = 88.0
+margin_bottom = 28.0
 custom_colors/font_color = Color( 0, 0.0431373, 0.313726, 1 )
 text = "File C"
 
 [node name="Padding" type="Control" parent="MarginContainer2/VBoxContainer/Control/FileCards/FileC/Button/Info/VBoxContainer"]
-margin_top = 25.0
+margin_top = 32.0
 margin_right = 136.0
-margin_bottom = 68.0
+margin_bottom = 71.0
 rect_min_size = Vector2( 0, 8 )
 mouse_filter = 2
 size_flags_vertical = 3
@@ -835,7 +850,7 @@ align = 1
 valign = 1
 
 [node name="Padding2" type="Control" parent="MarginContainer2/VBoxContainer/Control/FileCards/FileC/Button/Info/VBoxContainer"]
-margin_top = 68.0
+margin_top = 71.0
 margin_right = 136.0
 margin_bottom = 111.0
 mouse_filter = 2

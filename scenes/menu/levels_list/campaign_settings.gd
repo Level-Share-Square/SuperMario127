@@ -22,7 +22,11 @@ var level_ids: Array = []
 
 
 func load_campaign_info(_campaign_path: String) -> void:
-	if not list_handler.is_campaign: return
+	if not list_handler.is_campaign: 
+		if level_grid.is_connected("child_entered_tree", self, "card_added"):
+			level_grid.disconnect("child_entered_tree", self, "card_added")
+			level_grid.disconnect("child_exiting_tree", self, "card_removed")
+		return
 	
 	campaign_path = _campaign_path
 	campaign_id = level_list_util.get_last_in_path(campaign_path)
@@ -57,20 +61,20 @@ func load_campaign_info(_campaign_path: String) -> void:
 
 func card_added(card: BaseCard):
 	if card is LevelCard:
-		level_ids.append(card.level_info.level_id)
-		intro_option.add_item(card.level_info.level_name)
-		hub_option.add_item(card.level_info.level_name)
+		level_ids.append(card.id)
+		intro_option.add_item(card.level_metadata.level_name)
+		hub_option.add_item(card.level_metadata.level_name)
 		
 		if not info_dict.empty():
-			if info_dict.get("intro_level", "") == card.level_info.level_id:
+			if info_dict.get("intro_level", "") == card.id:
 				intro_option.select(level_ids.size())
-			if info_dict.get("hub_level", "") == card.level_info.level_id:
+			if info_dict.get("hub_level", "") == card.id:
 				hub_option.select(level_ids.size())
 
 
 func card_removed(card: BaseCard):
 	if card is LevelCard:
-		var index = level_ids.find(card.level_info.level_id)
+		var index = level_ids.find(card.id)
 		
 		if intro_option.selected == index + 1:
 			intro_option.select(0)
