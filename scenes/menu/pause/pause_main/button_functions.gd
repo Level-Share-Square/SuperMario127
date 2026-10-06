@@ -4,7 +4,7 @@ extends Node
 const QUIT_TEXT: String = "Quit"
 const QUIT_OFFSET: int = -40
 const QUIT_GAME_TEXT: String = "To Menu"
-const QUIT_GAME_OFFSET: int = -68
+const QUIT_GAME_OFFSET: int = -66
 
 onready var retry_start = $"%RetryStart"
 onready var shine_map = $"%ShineMap"

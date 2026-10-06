@@ -44,12 +44,12 @@ func prepare_level_from_path(level_id: String, working_folder: String, hub_level
 	return level_metadata
 
 
-func prepare_and_start_level(level_id: String, working_folder: String, hub_level: String = CurrentLevelData.hub_level, selected_file: int = CurrentLevelData.selected_file) -> void:
+func prepare_and_start_level(level_id: String, working_folder: String, hub_level: String = CurrentLevelData.hub_level, selected_file: int = CurrentLevelData.selected_file, play_warp_sound: bool = true) -> void:
 	Singleton.Music.reset_music()
 	Singleton.Music.stop()
 	
 	var level_metadata: LevelMetadata = prepare_level_from_path(level_id, working_folder)
-	start_level(level_metadata, level_id, working_folder, false, false, hub_level, true, true, selected_file)
+	start_level(level_metadata, level_id, working_folder, false, false, hub_level, true, play_warp_sound, selected_file)
 
 
 func quit_level(do_transition: bool = true, force_menu: bool = false):
@@ -149,13 +149,13 @@ func start_level(level_metadata: LevelMetadata, level_id: String, working_folder
 	
 	if do_transition:
 		# setup level when the transition finishes so music doesnt bug out
-		var _connect = SceneTransitions.connect("transition_finished", self, "level_scene_switch", [goal_scene, level_metadata, level_id, working_folder, start_in_edit_mode, skip_shine_select, hub_level, true, true, selected_file], CONNECT_ONESHOT)
+		var _connect = SceneTransitions.connect("transition_finished", self, "level_scene_switch", [goal_scene, level_metadata, level_id, working_folder, start_in_edit_mode, skip_shine_select, hub_level, true, play_warp_sound, selected_file], CONNECT_ONESHOT)
 		
 		if play_warp_sound:
 			SceneTransitions.play_transition_audio()
 		SceneTransitions.do_transition_fade(SceneTransitions.DEFAULT_TRANSITION_TIME)
 	else:
-		level_scene_switch(goal_scene, level_metadata, level_id, working_folder, start_in_edit_mode, skip_shine_select, hub_level, true, true, selected_file)
+		level_scene_switch(goal_scene, level_metadata, level_id, working_folder, start_in_edit_mode, skip_shine_select, hub_level, true, play_warp_sound, selected_file)
 
 
 ## the final stretch...

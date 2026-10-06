@@ -129,7 +129,7 @@ func level_warp(character: Character, target_level: String,
 	
 	var level_id: String = target_level
 	var working_folder: String = CurrentLevelData.working_folder
-	Singleton.SceneSwitcher.prepare_and_start_level(level_id, working_folder)
+	Singleton.SceneSwitcher.prepare_and_start_level(level_id, working_folder, CurrentLevelData.hub_level, CurrentLevelData.selected_file, play_warp_sound)
 
 ### OTHER ###
 func find_teleporter(target_tag: String) -> GameObject:

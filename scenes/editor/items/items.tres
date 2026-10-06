@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=299 format=2]
+[gd_resource type="Resource" load_steps=300 format=2]
 
 [ext_resource path="res://scenes/editor/items/placeable_items.gd" type="Script" id=1]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/blue_coin.tres" type="Resource" id=2]
@@ -298,6 +298,7 @@
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/tree.tres" type="Resource" id=296]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/leafy_tree.tres" type="Resource" id=297]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/unblossomed_cave_tree.tres" type="Resource" id=298]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/painting.tres" type="Resource" id=299]
 
 [resource]
 script = ExtResource( 1 )
@@ -406,6 +407,7 @@ placeable_items = {
 "obj_on_off_touch_lift": ExtResource( 92 ),
 "obj_p_switch": ExtResource( 81 ),
 "obj_p_switch_block": ExtResource( 76 ),
+"obj_painting": ExtResource( 299 ),
 "obj_palm_tree": ExtResource( 69 ),
 "obj_paratroopa": ExtResource( 122 ),
 "obj_pearl_platform": ExtResource( 46 ),

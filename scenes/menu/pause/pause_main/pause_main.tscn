@@ -422,16 +422,18 @@ script = ExtResource( 13 )
 
 [node name="Icon" type="TextureRect" parent="Buttons/VBoxContainer/ToHub"]
 modulate = Color( 0.694118, 0.2, 0.2, 1 )
-margin_left = 110.0
+margin_left = 108.0
 margin_top = 2.0
-margin_right = 128.0
+margin_right = 126.0
 margin_bottom = 20.0
 mouse_filter = 2
 texture = ExtResource( 18 )
 expand = true
 stretch_mode = 6
 script = ExtResource( 15 )
-offset = Vector2( -102, 0 )
+countdown_path = NodePath("../Countdown")
+count_offsets = [ 0, -19, -21, -21 ]
+offset = Vector2( -104, 0 )
 
 [node name="Countdown" type="Node" parent="Buttons/VBoxContainer/ToHub"]
 script = ExtResource( 9 )
