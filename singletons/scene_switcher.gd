@@ -56,7 +56,7 @@ func quit_level(do_transition: bool = true, force_menu: bool = false):
 	if CurrentLevelData.is_campaign and CurrentLevelData.level_id != CurrentLevelData.hub_level and not force_menu:
 		var level_id: String = CurrentLevelData.hub_level
 		var level_metadata: LevelMetadata = prepare_level_from_path(level_id, CurrentLevelData.working_folder)
-		var start_args: Array = [level_metadata, level_id, CurrentLevelData.working_folder, false, true, CurrentLevelData.hub_level, false, true, CurrentLevelData.selected_file]
+		var start_args: Array = [level_metadata, level_id, CurrentLevelData.working_folder, false, true, CurrentLevelData.hub_level, false, true, CurrentLevelData.selected_file, true]
 		
 		if do_transition:
 			var _connect = SceneTransitions.connect("transition_finished", self, "start_level", start_args, CONNECT_ONESHOT)
@@ -105,7 +105,7 @@ func setup_level(level_metadata: LevelMetadata, level_id: String, working_folder
 
 ## loads shine select if there's more than 1 shine,
 ## else loads directly into level
-func start_level(level_metadata: LevelMetadata, level_id: String, working_folder: String, start_in_edit_mode: bool, skip_shine_select: bool = false, hub_level: String = "", do_transition: bool = true, play_warp_sound: bool = true, selected_file: int = -1):
+func start_level(level_metadata: LevelMetadata, level_id: String, working_folder: String, start_in_edit_mode: bool, skip_shine_select: bool = false, hub_level: String = "", do_transition: bool = true, play_warp_sound: bool = true, selected_file: int = -1, is_returning: bool = false):
 	# if it's a multi-shine level, open the shine select screen, otherwise open the level directly 
 	# using collected_shines for the size check because there can only be one entry in collected shines per id, while shine_details can have multiple shines with the same id
 	var goal_scene = EDITOR_PATH if start_in_edit_mode else PLAYER_PATH
@@ -139,7 +139,7 @@ func start_level(level_metadata: LevelMetadata, level_id: String, working_folder
 			"target_tag": mission.spawn_teleporter_tag
 		}
 	
-	if not CurrentLevelData.hub_return_data.empty() and not start_in_edit_mode:
+	if not CurrentLevelData.hub_return_data.empty() and not start_in_edit_mode and is_returning:
 		if total_shine_count > 0:
 			var mission: MissionData = level_metadata.collectible_data.mission_data[0]
 			CurrentLevelData.current_mission_id = mission.mission_uuid
