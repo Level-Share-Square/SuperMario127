@@ -74,7 +74,6 @@ func save_pressed():
 	
 #	CurrentLevelData.level_info.reset_save_data(false)
 #	CurrentLevelData.level_info.init_collectibles()
-	save_meta_util.update_all_with_level(level_id, working_folder, false)
 	
 	CurrentLevelData.unsaved_editor_changes = false
 	level_settings.get_node("%Areas").reload_areas()

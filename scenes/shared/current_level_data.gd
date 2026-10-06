@@ -300,7 +300,7 @@ func get_meta_dict() -> Dictionary:
 
 func get_meta_collectibles() -> Dictionary:
 	var meta_dict: Dictionary = get_meta_dict()
-	return save_meta_util.get_collectible_totals(meta_dict, working_folder, selected_file)
+	return save_meta_util.get_collectible_totals(working_folder, selected_file)
 
 
 ## caching

@@ -33,11 +33,9 @@ static func generate_level_id() -> String:
 
 static func move_level_files(level_id: String, working_folder: String, new_folder: String):
 	# weird workaround to allow using these classes without cyclic reference error
-	var save_meta_script = load("res://util/new/levels_list/save_meta_util.gd")
 	var campaign_info_script = load("res://util/new/levels_list/campaign_info_util.gd")
 		
 	if is_campaign(working_folder):
-		save_meta_script.update_all_with_level(level_id, working_folder, true)
 		var info_dict: Dictionary = campaign_info_script.load_info_file(working_folder)
 		if info_dict.get("hub_level", "") == level_id:
 			info_dict["hub_level"] = ""
@@ -85,9 +83,6 @@ static func move_level_files(level_id: String, working_folder: String, new_folde
 	if lss_id != "":
 		lss_link_util.remove_level_from_link(lss_id)
 		lss_link_util.add_level_to_link(lss_id, new_file_path)
-	
-	if is_campaign(new_folder):
-		save_meta_script.update_all_with_level(level_id, new_folder, false)
 
 
 static func wipe_level_files(level_id: String, working_folder: String):

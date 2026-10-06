@@ -102,9 +102,6 @@ func insert_level(level_code: String = "", folder: String = working_folder):
 	level_list_util.save_level_code_file(level_code, file_path)
 	sort_file_util.add_to_sort(level_id, folder, sort_file_util.LEVELS)
 	loader.add_level_card(level_id, folder, true, true, level_code, is_campaign)
-	
-	if is_campaign:
-		save_meta_util.update_all_with_level(level_id, working_folder, false)
 
 
 func remove_level(level_id: String, folder: String = working_folder):
@@ -112,7 +109,6 @@ func remove_level(level_id: String, folder: String = working_folder):
 	level_grid.get_node(level_id).call_deferred("queue_free")
 	
 	if is_campaign:
-		save_meta_util.update_all_with_level(level_id, working_folder, true)
 		var info_dict: Dictionary = campaign_info_util.load_info_file(working_folder)
 		if info_dict.get("hub_level", "") == level_id:
 			info_dict["hub_level"] = ""
