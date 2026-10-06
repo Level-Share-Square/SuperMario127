@@ -1,1 +1,6 @@
 When exporting an HTML5 build of the game, drag and drop the assets folder into the same folder as the export. These assets are used for the preloader.
+
+Make sure also to compress the .ogg files, as the game currently exceeds the 200MB limit with them uncompressed. The command to do this is as follows:
+> mkdir -p compressed && for f in *.ogg; do ffmpeg -i "$f" -c:a libvorbis -b:a 64k "compressed/$f"; done
+Then drag all the files from the "compressed" folder to the main folder, and overwrite. Do not open the Godot editor before this step, the import files should not be overwritten.
+Then, delete the "compressed" folder and finally open the Godot editor, allowing it to reimport the tracks with import settings intact.

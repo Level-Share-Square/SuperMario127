@@ -97,7 +97,7 @@ func collect(body : PhysicsBody2D) -> void:
 		get_tree().get_current_scene().get_node("%PauseController").emit_signal("star_coin_collected")
 		
 		var used_audio_player: AudioStreamPlayer
-		if not is_blue and not Singleton.ModeSwitcher.visible and CurrentLevelData.save_data.get_collected_star_coin_count() >= CurrentLevelData.level_metadata.collectible_data.get_star_coin_count():
+		if not is_blue and not Singleton.ModeSwitcher.visible and CurrentLevelData.save_data.all_star_coins_collected():
 			used_audio_player = audio_player_complete
 			audio_player_complete.play()
 		else:
