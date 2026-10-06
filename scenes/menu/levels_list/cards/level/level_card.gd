@@ -46,6 +46,10 @@ func setup(
 	var file_path: String = level_list_util.get_level_file_path(id, parent_folder)
 	if level_code == "":
 		level_code = level_list_util.load_level_code_file(file_path)
+	# if it's still empty, this code just isn't valid at all
+	if level_code == "":
+		is_valid = false
+		return
 #	elif not level_code_util.fast_is_valid(level_code):
 #		level_code = level_list_util.load_level_code_file(LevelDataOld.DEFAULT_CODE_PATH)
 

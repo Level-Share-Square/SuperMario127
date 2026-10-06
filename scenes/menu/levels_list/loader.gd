@@ -3,6 +3,8 @@ extends Node
 
 signal loading_finished
 
+const LEVELS_PER_FRAME: int = 1
+
 onready var subscreens := $"%Subscreens"
 onready var list_handler: LevelListHandler = $"%ListHandler"
 onready var drag_cursor: Area2D = $"%DragCursor"
@@ -14,7 +16,6 @@ onready var star_coin_counter = $"%StarCoinCounter"
 onready var campaign_card_scene: PackedScene = preload("res://scenes/menu/levels_list/cards/campaign/campaign_card.tscn")
 onready var folder_card_scene: PackedScene = preload("res://scenes/menu/levels_list/cards/folder/folder_card.tscn")
 onready var level_card_scene: PackedScene = preload("res://scenes/menu/levels_list/cards/level/level_card.tscn")
-onready var level_load_thread := Thread.new()
 
 var collected_shines: int
 var total_shines: int
@@ -22,23 +23,7 @@ var total_shines: int
 var collected_star_coins: int
 var total_star_coins: int
 
-#func thread_load_directory(working_folder: String):
-#	if level_load_thread.is_active():
-#		level_load_thread.wait_to_finish()
-#
-#	var err = level_load_thread.start(self, "load_directory", working_folder)
-#	if err != OK:
-#		printerr("Error starting level loading thread.")
-
-
-func next_page():
-	if not is_loading: return
-	if load_amount > 0: return
-	load_amount = 50
-	load_next_queue_level(
-		list_handler.working_folder, 
-		list_handler.working_folder != level_list_util.DEV_FOLDER,
-		list_handler.is_campaign)
+var loaded_levels: int = 0
 
 
 func clear_level_queue():
@@ -60,7 +45,7 @@ func update_collectibles():
 
 func transition_to_directory(working_folder: String, is_campaign: bool):
 	can_return = false
-	if is_loading: 
+	if is_loading:
 		clear_level_queue()
 	
 	list_handler.parent_screen.transition("LevelView")
@@ -72,8 +57,10 @@ var can_return: bool
 var is_loading: bool
 func load_directory(working_folder: String, is_campaign: bool):
 	clear_level_queue()
-	clear_collectibles()
 	http_thumbnails.clear_queue()
+	
+	yield(get_tree(), "idle_frame")
+	clear_collectibles()
 	list_handler.clear_grid()
 	
 	list_handler.working_folder = working_folder
@@ -102,12 +89,10 @@ func load_directory(working_folder: String, is_campaign: bool):
 	for level in sort.get(sort_file_util.LEVELS, []):
 		level_queue.append(level)
 	
-	load_amount = 50
 	load_next_queue_level(working_folder, not is_dev_folder, is_campaign)
 
 
 var level_queue: Array
-var load_amount: int
 func load_next_queue_level(working_folder, can_sort, is_campaign):
 	if level_queue.size() <= 0:
 		print("Done loading levels in directory.")
@@ -115,28 +100,25 @@ func load_next_queue_level(working_folder, can_sort, is_campaign):
 		is_loading = false
 		return
 	
-	if level_load_thread.is_active():
-		level_load_thread.wait_to_finish()
-	
-	load_amount -= 1
-	var err = level_load_thread.start(self, "thread_add_level_card", [
+	queue_add_level_card([
 		level_queue.pop_front(), 
 		working_folder, 
 		can_sort,
 		is_campaign
-	])
-	if err != OK:
-		printerr("Error starting level loading thread.")
+	 ])
 
 
-func thread_add_level_card(params: Array):
+func queue_add_level_card(params: Array):
 	var level_id: String = params[0]
 	var working_folder: String = params[1]
 	var can_sort: bool = params[2]
 	var is_campaign: bool = params[3]
 	var level_card: LevelCard = add_level_card(level_id, working_folder, can_sort, false, "", is_campaign)
-	if load_amount > 0:
-		level_card.connect("ready", self, "load_next_queue_level", [working_folder, can_sort, is_campaign])
+	if loaded_levels >= LEVELS_PER_FRAME:
+		yield(get_tree(), "idle_frame")
+		loaded_levels = 0
+	loaded_levels += 1
+	load_next_queue_level(working_folder, can_sort, is_campaign)
 
 
 func add_campaign_card(
@@ -208,6 +190,9 @@ func add_level_card(
 		level_code,
 		is_campaign
 	)
+	
+	if not is_instance_valid(card_node.level_metadata):
+		return null
 	
 	total_shines += card_node.level_metadata.collectible_data.get_shine_count()
 	total_star_coins += card_node.level_metadata.collectible_data.get_star_coin_count()
