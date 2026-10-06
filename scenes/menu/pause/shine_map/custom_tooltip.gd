@@ -1,4 +1,4 @@
-extends Control
+extends ButtonHoverScale
 
 
 func _make_custom_tooltip(for_text: String):

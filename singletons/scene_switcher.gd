@@ -129,13 +129,13 @@ func start_level(level_metadata: LevelMetadata, level_id: String, working_folder
 	
 	if do_transition:
 		# setup level when the transition finishes so music doesnt bug out
-		var _connect = SceneTransitions.connect("transition_finished", self, "level_scene_switch", [goal_scene, level_metadata, level_id, working_folder, start_in_edit_mode, skip_shine_select, hub_level, selected_file, start_in_edit_mode], CONNECT_ONESHOT)
+		var _connect = SceneTransitions.connect("transition_finished", self, "level_scene_switch", [goal_scene, level_metadata, level_id, working_folder, start_in_edit_mode, skip_shine_select, hub_level, true, true, selected_file], CONNECT_ONESHOT)
 		
 		if play_warp_sound:
 			SceneTransitions.play_transition_audio()
 		SceneTransitions.do_transition_fade(SceneTransitions.DEFAULT_TRANSITION_TIME)
 	else:
-		level_scene_switch(goal_scene, level_metadata, level_id, working_folder, start_in_edit_mode, skip_shine_select, hub_level, selected_file, start_in_edit_mode)
+		level_scene_switch(goal_scene, level_metadata, level_id, working_folder, start_in_edit_mode, skip_shine_select, hub_level, true, true, selected_file)
 
 
 ## the final stretch...

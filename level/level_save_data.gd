@@ -91,7 +91,7 @@ func get_time_score_dictionary() -> Dictionary:
 	return _time_scores
 	
 func get_time_score(mission_uuid: String):
-	return _time_scores.get(mission_uuid, 0)
+	return _time_scores.get(mission_uuid, -1)
 
 func update_time_and_coin_score(mission_uuid: String, save_to_disk: bool = true):
 	var new_time_score = CurrentLevelData.time_score

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://scenes/menu/theme.tres" type="Theme" id=1]
 [ext_resource path="res://scenes/menu/ui_focus.gd" type="Script" id=2]
@@ -8,6 +8,8 @@
 [ext_resource path="res://scenes/menu/pause/shine_map/levels.gd" type="Script" id=6]
 [ext_resource path="res://assets/icons/back.png" type="Texture" id=7]
 [ext_resource path="res://scenes/menu/button_scripts/button_scroller.gd" type="Script" id=8]
+[ext_resource path="res://assets/fonts/delfino_medium.tres" type="DynamicFont" id=9]
+[ext_resource path="res://assets/icons/ratings.png" type="Texture" id=10]
 [ext_resource path="res://scenes/menu/button_scripts/button_hover-horizontal.gd" type="Script" id=13]
 [ext_resource path="res://scenes/menu/button_scripts/icon_helper.gd" type="Script" id=15]
 
@@ -115,6 +117,30 @@ tracks/6/keys = {
 "update": 0,
 "values": [ Vector2( -16, 430 ) ]
 }
+tracks/7/type = "value"
+tracks/7/path = NodePath("CollectibleInfo:modulate")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 1, 0 ) ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("CollectibleInfo:rect_position:x")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -96.0 ]
+}
 
 [sub_resource type="Animation" id=2]
 resource_name = "transition"
@@ -203,6 +229,30 @@ tracks/6/keys = {
 "transitions": PoolRealArray( 2, 1 ),
 "update": 0,
 "values": [ Vector2( -16, 366 ), Vector2( -16, 430 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("CollectibleInfo:modulate")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.35 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0, 0, 1, 0 ) ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("CollectibleInfo:rect_position:x")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 0.35 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ -12.0, -96.0 ]
 }
 
 [node name="ShineMap" type="Control"]
@@ -316,9 +366,11 @@ margin_left = 4.0
 margin_top = 4.0
 margin_right = 476.0
 margin_bottom = 392.0
+focus_mode = 0
 mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+disabled = true
 flat = true
 script = ExtResource( 8 )
 scroll_path = NodePath("../MarginContainer/ScrollContainer")
@@ -333,6 +385,116 @@ margin_bottom = 547.0
 rect_rotation = 15.0
 texture = SubResource( 24 )
 expand = true
+
+[node name="CollectibleInfo" type="MarginContainer" parent="."]
+modulate = Color( 0, 0, 1, 0 )
+margin_left = -247.0
+margin_right = -23.0
+margin_bottom = 432.0
+custom_constants/margin_right = 0
+custom_constants/margin_top = 168
+custom_constants/margin_left = 0
+custom_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CollectibleInfo"]
+margin_top = 168.0
+margin_right = 224.0
+margin_bottom = 412.0
+size_flags_horizontal = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="CollectibleInfo/VBoxContainer"]
+self_modulate = Color( 0, 0, 0, 0 )
+margin_right = 224.0
+margin_bottom = 87.0
+
+[node name="Control" type="Control" parent="CollectibleInfo/VBoxContainer/PanelContainer"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 220.0
+margin_bottom = 83.0
+rect_min_size = Vector2( 0, 24 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="CountersBG" type="Panel" parent="CollectibleInfo/VBoxContainer/PanelContainer/Control"]
+modulate = Color( 0, 0, 0, 0.25098 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 0, 24 )
+rect_rotation = 1.5
+size_flags_vertical = 4
+
+[node name="CountersBG2" type="Panel" parent="CollectibleInfo/VBoxContainer/PanelContainer/Control/CountersBG"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_rotation = -3.0
+
+[node name="MarginContainer" type="MarginContainer" parent="CollectibleInfo/VBoxContainer/PanelContainer"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 220.0
+margin_bottom = 83.0
+custom_constants/margin_left = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CollectibleInfo/VBoxContainer/PanelContainer/MarginContainer"]
+margin_left = 16.0
+margin_top = 12.0
+margin_right = 204.0
+margin_bottom = 67.0
+custom_constants/separation = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CollectibleInfo/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
+margin_right = 188.0
+margin_bottom = 24.0
+
+[node name="CollectibleStar" type="Control" parent="CollectibleInfo/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+visible = false
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+
+[node name="Icon" type="TextureRect" parent="CollectibleInfo/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/CollectibleStar"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -8.0
+margin_top = -8.0
+margin_right = 8.0
+margin_bottom = 8.0
+rect_min_size = Vector2( 16, 16 )
+texture = ExtResource( 10 )
+expand = true
+stretch_mode = 6
+
+[node name="CollectibleName" type="Label" parent="CollectibleInfo/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+margin_right = 188.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 0, 24 )
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 9 )
+text = "???"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="TimeSeparator" type="HSeparator" parent="CollectibleInfo/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+margin_top = 28.0
+margin_right = 188.0
+margin_bottom = 32.0
+
+[node name="TimeScore" type="Label" parent="CollectibleInfo/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+margin_top = 36.0
+margin_right = 188.0
+margin_bottom = 55.0
+custom_fonts/font = ExtResource( 9 )
+text = "--:--.--"
+align = 1
+autowrap = true
 
 [node name="Buttons" type="MarginContainer" parent="."]
 modulate = Color( 0, 0, 1, 0 )

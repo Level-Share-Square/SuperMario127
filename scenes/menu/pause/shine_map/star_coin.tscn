@@ -1,11 +1,17 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://scenes/actors/objects/star_coin/regular_frames.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://scenes/menu/pause/shine_map/custom_tooltip.gd" type="Script" id=2]
 
-[node name="StarCoin" type="Control"]
+[node name="StarCoin" type="Button"]
 margin_right = 27.0
 margin_bottom = 31.0
 rect_min_size = Vector2( 32, 32 )
+rect_pivot_offset = Vector2( 16, 16 )
+flat = true
+script = ExtResource( 2 )
+click_override = "None"
+target_scale = Vector2( 1.2, 1.2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )

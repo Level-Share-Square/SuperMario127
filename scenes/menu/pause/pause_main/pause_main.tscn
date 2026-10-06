@@ -324,9 +324,9 @@ alignment = 2
 
 [node name="Resume" type="Button" parent="Buttons/VBoxContainer"]
 unique_name_in_owner = true
-margin_top = 252.0
+margin_top = 214.0
 margin_right = 230.0
-margin_bottom = 274.0
+margin_bottom = 236.0
 rect_min_size = Vector2( 0, 22 )
 theme_type_variation = "OptionsToggle"
 text = "Resume"
@@ -347,9 +347,9 @@ script = ExtResource( 15 )
 offset = Vector2( -64, 0 )
 
 [node name="Retry" type="Button" parent="Buttons/VBoxContainer"]
-margin_top = 290.0
+margin_top = 252.0
 margin_right = 230.0
-margin_bottom = 312.0
+margin_bottom = 274.0
 rect_min_size = Vector2( 0, 22 )
 theme_type_variation = "OptionsToggle"
 text = "Retry"
@@ -371,9 +371,9 @@ offset = Vector2( -52, 0 )
 
 [node name="RetryStart" type="Button" parent="Buttons/VBoxContainer"]
 unique_name_in_owner = true
-margin_top = 328.0
+margin_top = 290.0
 margin_right = 230.0
-margin_bottom = 350.0
+margin_bottom = 312.0
 rect_min_size = Vector2( 0, 22 )
 theme_type_variation = "OptionsToggle"
 custom_colors/font_color_focus = Color( 0.694118, 0.2, 0.2, 1 )
@@ -404,12 +404,46 @@ script = ExtResource( 9 )
 countdown_style = 1
 countdown_time = 3
 
-[node name="ShineMap" type="Button" parent="Buttons/VBoxContainer"]
+[node name="ToHub" type="Button" parent="Buttons/VBoxContainer"]
 unique_name_in_owner = true
-visible = false
 margin_top = 328.0
 margin_right = 230.0
 margin_bottom = 350.0
+rect_min_size = Vector2( 0, 22 )
+theme_type_variation = "OptionsToggle"
+custom_colors/font_color_focus = Color( 0.694118, 0.2, 0.2, 1 )
+custom_colors/font_color = Color( 0.694118, 0.2, 0.2, 1 )
+custom_colors/font_color_hover = Color( 0.694118, 0.2, 0.2, 1 )
+custom_colors/font_color_pressed = Color( 0.694118, 0.2, 0.2, 1 )
+text = "Return to Hub"
+align = 2
+icon_align = 1
+script = ExtResource( 13 )
+
+[node name="Icon" type="TextureRect" parent="Buttons/VBoxContainer/ToHub"]
+modulate = Color( 0.694118, 0.2, 0.2, 1 )
+margin_left = 110.0
+margin_top = 2.0
+margin_right = 128.0
+margin_bottom = 20.0
+mouse_filter = 2
+texture = ExtResource( 18 )
+expand = true
+stretch_mode = 6
+script = ExtResource( 15 )
+offset = Vector2( -102, 0 )
+
+[node name="Countdown" type="Node" parent="Buttons/VBoxContainer/ToHub"]
+script = ExtResource( 9 )
+countdown_style = 1
+countdown_time = 3
+
+[node name="ShineMap" type="Button" parent="Buttons/VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+margin_top = 290.0
+margin_right = 230.0
+margin_bottom = 312.0
 rect_min_size = Vector2( 0, 22 )
 theme_type_variation = "OptionsToggle"
 text = "Shine Map"
@@ -449,14 +483,14 @@ margin_bottom = 22.0
 rect_min_size = Vector2( 47, 22 )
 size_flags_horizontal = 3
 theme_type_variation = "OptionsToggleRed"
-text = "Quit"
+text = "To Menu"
 align = 2
 script = ExtResource( 14 )
 
 [node name="Icon" type="TextureRect" parent="Buttons/VBoxContainer/HBoxContainer/Quit"]
-margin_left = 53.0
+margin_left = 25.0
 margin_top = 3.0
-margin_right = 69.0
+margin_right = 41.0
 margin_bottom = 19.0
 mouse_filter = 2
 texture = ExtResource( 18 )
@@ -465,7 +499,7 @@ script = ExtResource( 15 )
 countdown_path = NodePath("../Countdown")
 disabled_color = Color( 0.427451, 0.2, 0.2, 1 )
 count_offsets = [ 0, -19, -21, -21 ]
-offset = Vector2( -40, 0 )
+offset = Vector2( -68, 0 )
 
 [node name="Countdown" type="Node" parent="Buttons/VBoxContainer/HBoxContainer/Quit"]
 script = ExtResource( 9 )
@@ -502,10 +536,10 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-margin_left = -384.0
-margin_top = -248.0
-margin_right = 120.001
-margin_bottom = 184.0
+margin_left = 384.0
+margin_top = -32.0
+margin_right = 888.001
+margin_bottom = 400.0
 rect_min_size = Vector2( 504, 0 )
 script = ExtResource( 12 )
 
@@ -786,10 +820,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -72.0
-margin_top = -40.0
-margin_right = 88.0
-margin_bottom = 8.0
+margin_left = 696.0
+margin_top = 392.0
+margin_right = 856.0
+margin_bottom = 440.0
 rect_scale = Vector2( 0.9, 0.9 )
 rect_pivot_offset = Vector2( 160, 0 )
 script = ExtResource( 23 )
@@ -914,6 +948,8 @@ anims/transition = SubResource( 6 )
 [connection signal="pressed" from="Buttons/VBoxContainer/Retry" to="Buttons/ButtonFunctions" method="retry"]
 [connection signal="pressed" from="Buttons/VBoxContainer/RetryStart/Countdown" to="Buttons/ButtonFunctions" method="retry_start"]
 [connection signal="text_changed" from="Buttons/VBoxContainer/RetryStart/Countdown" to="Buttons/VBoxContainer/RetryStart/Icon" method="update_offset"]
+[connection signal="pressed" from="Buttons/VBoxContainer/ToHub/Countdown" to="Buttons/ButtonFunctions" method="to_hub"]
+[connection signal="text_changed" from="Buttons/VBoxContainer/ToHub/Countdown" to="Buttons/VBoxContainer/ToHub/Icon" method="update_offset"]
 [connection signal="pressed" from="Buttons/VBoxContainer/ShineMap" to="." method="transition" binds= [ "ShineMap" ]]
 [connection signal="pressed" from="Buttons/VBoxContainer/ShineMap" to="Focus" method="set_default_focus" binds= [ "%ShineMap" ]]
 [connection signal="pressed" from="Buttons/VBoxContainer/HBoxContainer/Quit/Countdown" to="Buttons/ButtonFunctions" method="quit"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://scenes/menu/theme.tres" type="Theme" id=1]
 [ext_resource path="res://scenes/menu/button_scripts/button_hover-horizontal.gd" type="Script" id=2]
@@ -74,6 +74,17 @@ fill_to = Vector2( 0, 1 )
 
 [sub_resource type="StyleBoxTexture" id=39]
 texture = SubResource( 38 )
+region_rect = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="Gradient" id=43]
+colors = PoolColorArray( 0.657227, 0.657227, 0.657227, 1, 0.227451, 0.196078, 0.317647, 1 )
+
+[sub_resource type="GradientTexture2D" id=44]
+gradient = SubResource( 43 )
+fill_to = Vector2( 0, 1 )
+
+[sub_resource type="StyleBoxTexture" id=45]
+texture = SubResource( 44 )
 region_rect = Rect2( 0, 0, 64, 64 )
 
 [sub_resource type="Animation" id=1]
@@ -558,7 +569,7 @@ margin_right = 32.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 rect_rotation = 0.0
-custom_styles/panel = SubResource( 54 )
+custom_styles/panel = SubResource( 39 )
 panel_hover = SubResource( 54 )
 inner_panel_hover = SubResource( 55 )
 shine_hover = SubResource( 56 )
@@ -744,7 +755,7 @@ margin_right = 32.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 rect_rotation = 0.0
-custom_styles/panel = SubResource( 39 )
+custom_styles/panel = SubResource( 45 )
 panel_hover = SubResource( 54 )
 inner_panel_hover = SubResource( 55 )
 shine_hover = SubResource( 56 )

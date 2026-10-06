@@ -3,11 +3,12 @@ extends Node
 
 const QUIT_TEXT: String = "Quit"
 const QUIT_OFFSET: int = -40
-const HUB_TEXT: String = "To Hub"
-const HUB_OFFSET: int = -56
+const QUIT_GAME_TEXT: String = "To Menu"
+const QUIT_GAME_OFFSET: int = -68
 
 onready var retry_start = $"%RetryStart"
 onready var shine_map = $"%ShineMap"
+onready var to_hub = $"%ToHub"
 
 onready var quit = $"%Quit"
 onready var icon = quit.get_node("Icon")
@@ -31,6 +32,12 @@ func retry_start():
 	CurrentLevelData.checkpoint_data.reset()
 	retry()
 
+func to_hub():
+	# music is stopped while paused, but there's a frame where it starts playing again after the transition, just kill it here to stop that
+	Singleton.Music.change_song(Singleton.Music.last_song, 0)
+	Singleton.Music.stop_temporary_music()
+	Singleton.SceneSwitcher.quit_level()
+
 func quit():
 	# music is stopped while paused, but there's a frame where it starts playing again after the transition, just kill it here to stop that
 	Singleton.Music.change_song(Singleton.Music.last_song, 0)
@@ -38,16 +45,12 @@ func quit():
 	Singleton.SceneSwitcher.quit_level()
 
 func set_quit_name():
-	quit.text = QUIT_TEXT if (
-		CurrentLevelData.is_hub_level() 
-		or not CurrentLevelData.is_campaign
-	) else HUB_TEXT
-	
+	quit.text = QUIT_GAME_TEXT if CurrentLevelData.is_campaign else QUIT_TEXT
 	icon.offset = Vector2(
-		QUIT_OFFSET if quit.text == QUIT_TEXT else HUB_OFFSET,
+		QUIT_OFFSET if quit.text == QUIT_TEXT else QUIT_GAME_OFFSET,
 	0)
-	
 	countdown.initial_text = quit.text
 	
 	shine_map.visible = CurrentLevelData.is_hub_level()
-	retry_start.visible = not CurrentLevelData.is_hub_level()
+	#retry_start.visible = not CurrentLevelData.is_hub_level()
+	to_hub.visible = CurrentLevelData.is_campaign and not CurrentLevelData.is_hub_level()

@@ -18,48 +18,62 @@ const COIN_FRAMES_COLLECTED: SpriteFrames = preload("res://scenes/actors/objects
 onready var title = $"%Title"
 onready var shines = $"%Shines"
 onready var star_coins = $"%StarCoins"
-var level_dict: Dictionary
+
+var collectible_display: Label
+var collectible_star: Control
+var time_separator: HSeparator
+var time_display: Label
+
+var level_metadata: LevelMetadata
+var level_save_data: LevelSaveData
 
 
 func _ready():
-	populate(level_dict)
+	populate()
 
-func populate(level_dict: Dictionary) -> void:
+func populate() -> void:
 	var is_hidden: bool = false
-	var collected_shines: Array = level_dict.get("collected_shines", [])
-	var collected_star_coins: Array = level_dict.get("collected_star_coins", [])
 	
+	var collected_shines: Array = level_save_data._completed_missions
+	var collected_star_coins: Array = level_save_data._collected_star_coins
 	if collected_shines.count(true) <= 0 and collected_star_coins.count(true) <= 0:
 		is_hidden = true
-	title.text = HIDDEN_TITLE if is_hidden else level_dict.get("name", "Unknown Level")
+	title.text = HIDDEN_TITLE if is_hidden else level_metadata.level_name
 	
-	var shine_details: Array = level_dict.get("shine_details", [])
-	var shine_times: Array = level_dict.get("shine_times", [])
+	var missions: Array = []
+	var collectible_data: CollectibleData = level_metadata.collectible_data
+	for mission_uuid in collectible_data.used_mission_data:
+		missions.append(collectible_data.get_mission_by_uuid(mission_uuid))
 	
-	if shine_details == []:
-		shine_details.resize(collected_shines.size())
-		shine_details.fill({})
-	if shine_times == []:
-		shine_times.resize(collected_shines.size())
-		shine_times.fill(-1)
+	missions.sort_custom(MissionData, "sort_by_order")
 	
-	for shine_id in range(collected_shines.size()):
-		add_shine(collected_shines[shine_id], shine_details[shine_id], shine_times[shine_id], is_hidden)
+	for mission_data in missions:
+		add_shine(
+			level_save_data.is_mission_complete(mission_data.mission_uuid), 
+			mission_data,
+			level_save_data.get_time_score(mission_data.mission_uuid), 
+			is_hidden
+		)
 	
-	for is_collected in collected_star_coins:
-		add_star_coin(is_collected)
+	var star_coin_index: int = 0
+	for star_coin_data in collectible_data.star_coin_data:
+		add_star_coin(
+			level_save_data.is_star_coin_collected(star_coin_data.star_coin_uuid), 
+			star_coin_data,
+			star_coin_index
+		)
+		star_coin_index += 1
 
 
-func add_shine(is_collected: bool, shine_dictionary: Dictionary, time_score: int, is_hidden: bool):
+func add_shine(is_collected: bool, mission_data: MissionData, time_score: int, is_hidden: bool):
 	var shine: Control = SHINE_SCENE.instance()
 	var sprite: AnimatedSprite = shine.get_node("AnimatedSprite")
 	var recolorable: AnimatedSprite = shine.get_node("AnimatedSprite/Recolorable")
-	var do_kick_out: bool = shine_dictionary.get("do_kick_out", true)
+	var do_kick_out: bool = mission_data.shine_force_leave
 	
 	if is_collected:
 		sprite.frames = FRAMES_NORMAL if do_kick_out else FRAMES_POCKET
-		# Shine color is stored as rgba32 from a json, and json converts stuff to float so it has to be converted twice
-		var shine_color: Color = Color(int(shine_dictionary.get("color", Color.yellow.to_rgba32())))
+		var shine_color: Color = mission_data.shine_color
 		if shine_color != Color.yellow:
 			recolorable.frames = FRAMES_RECOLORABLE if do_kick_out else FRAMES_POCKET_RECOLORABLE
 			recolorable.self_modulate = shine_color
@@ -67,27 +81,38 @@ func add_shine(is_collected: bool, shine_dictionary: Dictionary, time_score: int
 	else:
 		sprite.frames = FRAMES_COLLECTED if do_kick_out else FRAMES_POCKET_COLLECTED
 	
+	sprite.flip_h = not do_kick_out
 	sprite.play("default")
 	recolorable.play("default")
 	
-	if is_hidden:
-		shine.hint_tooltip = "???"
-	else:
-		shine.hint_tooltip = shine_dictionary.get("title", "Unknown Shine")
-		shine.hint_tooltip += "\n"
-		
-		if time_score == -1:
-			shine.hint_tooltip += "--:--.--"
-		else:
-			shine.hint_tooltip += LevelInfo.generate_time_string(time_score)
-		
+	var display_text: String = mission_data.shine_name if not is_hidden else "???"
+	shine.connect("hovered", self, "update_display", [display_text, is_collected, true, time_score])
 	shines.add_child(shine)
 
 
-func add_star_coin(is_collected: bool):
+func add_star_coin(is_collected: bool, star_coin_data: StarCoinData, star_coin_index: int):
 	var star_coin: Control = STAR_COIN_SCENE.instance()
+	
 	var sprite: AnimatedSprite = star_coin.get_node("AnimatedSprite")
 	if not is_collected:
 		sprite.frames = COIN_FRAMES_COLLECTED
 	sprite.play("default")
+	
+	star_coin.connect("hovered", self, "update_display", ["Star Coin %s" % str(star_coin_index + 1), is_collected])
 	star_coins.add_child(star_coin)
+
+
+func update_display(name_text: String, is_collected, has_time: bool = false, time_score: int = -1):
+	if has_time:
+		time_separator.show()
+		time_display.show()
+		if time_score == -1:
+			time_display.text = "--:--.--"
+		else:
+			time_display.text = LevelInfo.generate_time_string(time_score)
+	else:
+		time_separator.hide()
+		time_display.hide()
+	
+	collectible_display.text = name_text
+	collectible_star.visible = is_collected
