@@ -108,7 +108,8 @@ func exit_area(body):
 
 func setup_char():
 	character.set_dive_collision(false)
-	character.invulnerable = true 
+	character.force_invulnerable = true
+	character.invulnerable = true
 	character.controllable = false
 	character.movable = false
 	character.velocity = Vector2.ZERO
@@ -136,7 +137,8 @@ func setup_char():
 	
 func restore_control():
 	character.velocity = Vector2.ZERO
-	character.invulnerable = false 
+	character.force_invulnerable = false
+	character.invulnerable = false
 	character.controllable = true
 	character.movable = true
 	
