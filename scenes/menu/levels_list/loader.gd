@@ -8,11 +8,19 @@ onready var list_handler: LevelListHandler = $"%ListHandler"
 onready var drag_cursor: Area2D = $"%DragCursor"
 onready var http_thumbnails: HTTPThumbnails = $"%HTTPThumbnails"
 
+onready var shine_counter = $"%ShineCounter"
+onready var star_coin_counter = $"%StarCoinCounter"
+
 onready var campaign_card_scene: PackedScene = preload("res://scenes/menu/levels_list/cards/campaign/campaign_card.tscn")
 onready var folder_card_scene: PackedScene = preload("res://scenes/menu/levels_list/cards/folder/folder_card.tscn")
 onready var level_card_scene: PackedScene = preload("res://scenes/menu/levels_list/cards/level/level_card.tscn")
 onready var level_load_thread := Thread.new()
 
+var collected_shines: int
+var total_shines: int
+
+var collected_star_coins: int
+var total_star_coins: int
 
 #func thread_load_directory(working_folder: String):
 #	if level_load_thread.is_active():
@@ -37,6 +45,19 @@ func clear_level_queue():
 	level_queue.clear()
 
 
+func clear_collectibles():
+	collected_shines = 0
+	total_shines = 0
+	collected_star_coins = 0
+	total_star_coins = 0
+	update_collectibles()
+
+
+func update_collectibles():
+	shine_counter.text = "%s/%s" % [collected_shines, total_shines]
+	star_coin_counter.text = "%s/%s" % [collected_star_coins, total_star_coins]
+
+
 func transition_to_directory(working_folder: String, is_campaign: bool):
 	can_return = false
 	if is_loading: 
@@ -51,6 +72,7 @@ var can_return: bool
 var is_loading: bool
 func load_directory(working_folder: String, is_campaign: bool):
 	clear_level_queue()
+	clear_collectibles()
 	http_thumbnails.clear_queue()
 	list_handler.clear_grid()
 	
@@ -186,6 +208,15 @@ func add_level_card(
 		level_code,
 		is_campaign
 	)
+	
+	total_shines += card_node.level_metadata.collectible_data.get_shine_count()
+	total_star_coins += card_node.level_metadata.collectible_data.get_star_coin_count()
+	
+	if is_instance_valid(card_node.level_save_data):
+		collected_shines += card_node.level_save_data.get_completed_mission_count()
+		collected_star_coins += card_node.level_save_data.get_collected_star_coin_count()
+	
+	update_collectibles()
 	
 	level_grid.call_deferred("add_child", card_node)
 	return card_node

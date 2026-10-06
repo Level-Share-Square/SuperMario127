@@ -1,4 +1,4 @@
-[gd_scene load_steps=91 format=2]
+[gd_scene load_steps=94 format=2]
 
 [ext_resource path="res://scenes/menu/theme.tres" type="Theme" id=1]
 [ext_resource path="res://scenes/actors/objects/cloud_platform/texture.png" type="Texture" id=2]
@@ -76,6 +76,18 @@ fill_to = Vector2( 1, 1 )
 size = 14
 use_filter = true
 font_data = ExtResource( 6 )
+
+[sub_resource type="Gradient" id=38]
+offsets = PoolRealArray( 0, 0.121019, 0.88, 1 )
+colors = PoolColorArray( 0, 0, 0, 0, 0, 0, 0, 1, 0.12549, 0.12549, 0.407843, 1, 1, 1, 1, 1 )
+
+[sub_resource type="GradientTexture2D" id=39]
+gradient = SubResource( 38 )
+fill_to = Vector2( 0, 1 )
+
+[sub_resource type="StyleBoxTexture" id=40]
+texture = SubResource( 39 )
+region_rect = Rect2( 0, 0, 64, 64 )
 
 [sub_resource type="Animation" id=9]
 length = 0.001
@@ -768,7 +780,7 @@ stretch_mode = 1
 
 [node name="Buttons" type="HBoxContainer" parent="Panel"]
 margin_top = -32.0
-margin_right = 648.0
+margin_right = 672.0
 margin_bottom = -8.0
 script = ExtResource( 27 )
 visible_screens = [ "LevelView" ]
@@ -915,6 +927,116 @@ patch_margin_left = 11
 patch_margin_top = 11
 patch_margin_right = 11
 patch_margin_bottom = 11
+
+[node name="Padding" type="Control" parent="Panel/Buttons"]
+margin_left = 190.0
+margin_right = 450.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+
+[node name="CountersLabels" type="MarginContainer" parent="Panel/Buttons"]
+margin_left = 454.0
+margin_right = 672.0
+margin_bottom = 24.0
+grow_horizontal = 0
+custom_constants/margin_right = 2
+custom_constants/margin_top = 0
+custom_constants/margin_left = 8
+custom_constants/margin_bottom = -8
+
+[node name="CountersBG" type="Panel" parent="Panel/Buttons/CountersLabels"]
+margin_left = 8.0
+margin_right = 216.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 0, 24 )
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 40 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/Buttons/CountersLabels"]
+margin_left = 8.0
+margin_right = 216.0
+margin_bottom = 32.0
+custom_constants/separation = 0
+
+[node name="Padding" type="Control" parent="Panel/Buttons/CountersLabels/VBoxContainer"]
+margin_right = 208.0
+margin_bottom = 4.0
+rect_min_size = Vector2( 0, 4 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/Buttons/CountersLabels/VBoxContainer"]
+margin_top = 4.0
+margin_right = 208.0
+margin_bottom = 28.0
+grow_horizontal = 0
+alignment = 2
+
+[node name="Padding3" type="Control" parent="Panel/Buttons/CountersLabels/VBoxContainer/HBoxContainer"]
+margin_right = 4.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 4, 0 )
+
+[node name="ShineIcon" type="Control" parent="Panel/Buttons/CountersLabels/VBoxContainer/HBoxContainer"]
+margin_left = 8.0
+margin_right = 32.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+
+[node name="TextureRect" type="TextureRect" parent="Panel/Buttons/CountersLabels/VBoxContainer/HBoxContainer/ShineIcon"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 12 )
+expand = true
+stretch_mode = 6
+
+[node name="ShineCounter" type="Label" parent="Panel/Buttons/CountersLabels/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+margin_left = 36.0
+margin_top = 2.0
+margin_right = 99.0
+margin_bottom = 21.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = ExtResource( 48 )
+text = "542/1100"
+
+[node name="Padding" type="Control" parent="Panel/Buttons/CountersLabels/VBoxContainer/HBoxContainer"]
+margin_left = 103.0
+margin_right = 103.0
+margin_bottom = 24.0
+
+[node name="StarCoinIcon" type="Control" parent="Panel/Buttons/CountersLabels/VBoxContainer/HBoxContainer"]
+margin_left = 107.0
+margin_right = 131.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+
+[node name="TextureRect" type="TextureRect" parent="Panel/Buttons/CountersLabels/VBoxContainer/HBoxContainer/StarCoinIcon"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -10.0
+margin_top = -10.0
+margin_right = 10.0
+margin_bottom = 10.0
+texture = ExtResource( 13 )
+expand = true
+stretch_mode = 6
+
+[node name="StarCoinCounter" type="Label" parent="Panel/Buttons/CountersLabels/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+margin_left = 135.0
+margin_top = 2.0
+margin_right = 198.0
+margin_bottom = 21.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = ExtResource( 48 )
+text = "542/1100"
+
+[node name="Padding2" type="Control" parent="Panel/Buttons/CountersLabels/VBoxContainer/HBoxContainer"]
+margin_left = 202.0
+margin_right = 208.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 6, 0 )
 
 [node name="Subscreens" type="Control" parent="Panel"]
 unique_name_in_owner = true
