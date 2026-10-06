@@ -113,13 +113,6 @@ func area_warp(character: Character, target_tag: String, target_area: int) -> vo
 func level_warp(character: Character, target_level: String, 
 				target_tag: String, target_area: int = -1) -> void:
 	
-	var level_id: String = target_level
-	var working_folder: String = CurrentLevelData.working_folder
-	var level_info: LevelInfo = Singleton.SceneSwitcher.load_level_info(level_id, working_folder)
-	
-	var hub_level: String = CurrentLevelData.hub_level
-	var selected_file: int = CurrentLevelData.selected_file
-	
 	if target_area != -1:
 		CurrentLevelData.starting_area_id = target_area
 		CurrentLevelData.level_transition_data = {
@@ -133,12 +126,10 @@ func level_warp(character: Character, target_level: String,
 		else:
 			CurrentLevelData.hub_return_data = {
 				"target_area": CurrentLevelData.area_id, "target_tag": target_tag}
-			
 	
-	Singleton.Music.reset_music()
-	Singleton.Music.stop()
-	Singleton.SceneSwitcher.start_level(level_info, level_id, working_folder, false, false, hub_level, true, play_warp_sound, selected_file)
-
+	var level_id: String = target_level
+	var working_folder: String = CurrentLevelData.working_folder
+	Singleton.SceneSwitcher.prepare_and_start_level(level_id, working_folder)
 
 ### OTHER ###
 func find_teleporter(target_tag: String) -> GameObject:

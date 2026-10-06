@@ -241,6 +241,18 @@ func get_area_args() -> Dictionary:
 	args[-1] = "None"
 	return args
 
+func get_level_args() -> Dictionary:
+	var sort: Dictionary = sort_file_util.load_sort_file(working_folder)
+	var args: Dictionary = {}
+	
+	for level_id in sort.get("levels", []):
+		var file_path: String = level_list_util.get_level_file_path(level_id, working_folder)
+		var level_code: String = level_list_util.load_level_code_file(file_path)
+		var level_metadata = LevelCodeDeserializer.deserialize_level_metadata_code(LevelCodeTokenizer.splice_metadata(level_code))
+		args[level_id] = level_metadata.level_name
+	
+	return args
+
 func load_level_area(load_area_id: int, always_reload: bool = false) -> AreaData:
 	if not always_reload:
 		if not loaded_areas.has(load_area_id):

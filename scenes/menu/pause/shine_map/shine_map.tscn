@@ -350,6 +350,7 @@ margin_right = 460.0
 margin_bottom = 388.0
 rect_clip_content = false
 size_flags_horizontal = 9
+follow_focus = true
 
 [node name="CenterContainer" type="CenterContainer" parent="MarginContainer/Panel/MarginContainer/ScrollContainer"]
 margin_right = 448.0

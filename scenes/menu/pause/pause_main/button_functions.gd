@@ -36,13 +36,13 @@ func to_hub():
 	# music is stopped while paused, but there's a frame where it starts playing again after the transition, just kill it here to stop that
 	Singleton.Music.change_song(Singleton.Music.last_song, 0)
 	Singleton.Music.stop_temporary_music()
-	Singleton.SceneSwitcher.quit_level()
+	Singleton.SceneSwitcher.quit_level(true, false)
 
 func quit():
 	# music is stopped while paused, but there's a frame where it starts playing again after the transition, just kill it here to stop that
 	Singleton.Music.change_song(Singleton.Music.last_song, 0)
 	Singleton.Music.stop_temporary_music()
-	Singleton.SceneSwitcher.quit_level()
+	Singleton.SceneSwitcher.quit_level(true, true)
 
 func set_quit_name():
 	quit.text = QUIT_GAME_TEXT if CurrentLevelData.is_campaign else QUIT_TEXT

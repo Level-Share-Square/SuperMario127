@@ -53,9 +53,13 @@ func clear_collectibles():
 	update_collectibles()
 
 
-func update_collectibles():
-	shine_counter.text = "%s/%s" % [collected_shines, total_shines]
-	star_coin_counter.text = "%s/%s" % [collected_star_coins, total_star_coins]
+func update_collectibles(is_campaign: bool = false):
+	if is_campaign:
+		shine_counter.text = "%s" % total_shines
+		star_coin_counter.text = "%s" % total_star_coins
+	else:
+		shine_counter.text = "%s/%s" % [collected_shines, total_shines]
+		star_coin_counter.text = "%s/%s" % [collected_star_coins, total_star_coins]
 
 
 func transition_to_directory(working_folder: String, is_campaign: bool):
@@ -216,7 +220,7 @@ func add_level_card(
 		collected_shines += card_node.level_save_data.get_completed_mission_count()
 		collected_star_coins += card_node.level_save_data.get_collected_star_coin_count()
 	
-	update_collectibles()
+	update_collectibles(is_campaign)
 	
 	level_grid.call_deferred("add_child", card_node)
 	return card_node

@@ -36,7 +36,7 @@ func populate() -> void:
 	
 	var collected_shines: Array = level_save_data._completed_missions
 	var collected_star_coins: Array = level_save_data._collected_star_coins
-	if collected_shines.count(true) <= 0 and collected_star_coins.count(true) <= 0:
+	if collected_shines.empty() and collected_star_coins.empty():
 		is_hidden = true
 	title.text = HIDDEN_TITLE if is_hidden else level_metadata.level_name
 	
@@ -92,11 +92,18 @@ func add_shine(is_collected: bool, mission_data: MissionData, time_score: int, i
 
 func add_star_coin(is_collected: bool, star_coin_data: StarCoinData, star_coin_index: int):
 	var star_coin: Control = STAR_COIN_SCENE.instance()
-	
 	var sprite: AnimatedSprite = star_coin.get_node("AnimatedSprite")
-	if not is_collected:
+	var recolorable: AnimatedSprite = star_coin.get_node("AnimatedSprite/Recolorable")
+	
+	if is_collected:
+		if star_coin_data.star_coin_color != Color.yellow:
+			recolorable.self_modulate = star_coin_data.star_coin_color
+			recolorable.show()
+	else:
 		sprite.frames = COIN_FRAMES_COLLECTED
+	
 	sprite.play("default")
+	recolorable.play("default")
 	
 	star_coin.connect("hovered", self, "update_display", ["Star Coin %s" % str(star_coin_index + 1), is_collected])
 	star_coins.add_child(star_coin)

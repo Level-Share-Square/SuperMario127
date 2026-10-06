@@ -114,7 +114,6 @@ static func wipe_level_files(level_id: String, working_folder: String):
 	var lss_id: String = lss_link_util.get_id_from_path(file_path)
 	if lss_id != "":
 		lss_link_util.remove_level_from_link(lss_id)
-	
 
 ## FOLDERS
 static func get_folder_path(folder_id: String, parent_folder: String) -> String:

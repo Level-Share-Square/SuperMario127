@@ -31,27 +31,39 @@ func quit_to_menu_with_transition(screen_to_open : String = ""):
 	SceneTransitions.do_transition_fade(SceneTransitions.DEFAULT_TRANSITION_TIME)
 
 
-func quit_level(do_transition: bool = true):
-	if CurrentLevelData.is_campaign and CurrentLevelData.level_id != CurrentLevelData.hub_level:
-		## ok maybe make a helper function for setting up 
-		## and starting a level from its id and folder ^^;
-		## this is getting to be too much boilerplate
+func prepare_level_from_path(level_id: String, working_folder: String, hub_level: String = CurrentLevelData.hub_level, selected_file: int = CurrentLevelData.selected_file) -> LevelMetadata:
+	var file_path: String = level_list_util.get_level_file_path(level_id, working_folder)
+	var level_code: String = level_list_util.load_level_code_file(file_path)
+	var level_metadata: LevelMetadata = LevelCodeDeserializer.deserialize_level_metadata_code(LevelCodeTokenizer.splice_metadata(level_code))
+	
+	CurrentLevelData.level_id = level_id
+	CurrentLevelData.level_metadata = level_metadata
+	CurrentLevelData.load_save_data()
+	CurrentLevelData.unload_all_areas()
+	
+	return level_metadata
+
+
+func prepare_and_start_level(level_id: String, working_folder: String, hub_level: String = CurrentLevelData.hub_level, selected_file: int = CurrentLevelData.selected_file) -> void:
+	Singleton.Music.reset_music()
+	Singleton.Music.stop()
+	
+	var level_metadata: LevelMetadata = prepare_level_from_path(level_id, working_folder)
+	start_level(level_metadata, level_id, working_folder, false, false, hub_level, true, true, selected_file)
+
+
+func quit_level(do_transition: bool = true, force_menu: bool = false):
+	if CurrentLevelData.is_campaign and CurrentLevelData.level_id != CurrentLevelData.hub_level and not force_menu:
 		var level_id: String = CurrentLevelData.hub_level
-		var working_folder: String = CurrentLevelData.working_folder
-		var level_metadata: LevelMetadata = CurrentLevelData.level_metadata
-		var hub_level: String = CurrentLevelData.hub_level
-		var selected_file: int = CurrentLevelData.selected_file
-		
-		CurrentLevelData.level_transition_data = CurrentLevelData.hub_return_data
-		CurrentLevelData.hub_return_data = {}
+		var level_metadata: LevelMetadata = prepare_level_from_path(level_id, CurrentLevelData.working_folder)
+		var start_args: Array = [level_metadata, level_id, CurrentLevelData.working_folder, false, true, CurrentLevelData.hub_level, false, true, CurrentLevelData.selected_file]
 		
 		if do_transition:
-			var _connect = SceneTransitions.connect("transition_finished", self, "start_level", 
-			[level_metadata, level_id, working_folder, false, true, hub_level, false, true, selected_file], CONNECT_ONESHOT)
+			var _connect = SceneTransitions.connect("transition_finished", self, "start_level", start_args, CONNECT_ONESHOT)
 			SceneTransitions.do_transition_fade(SceneTransitions.DEFAULT_TRANSITION_TIME)
 		else:
 			yield(get_tree(), "physics_frame")
-			start_level(level_metadata, level_id, working_folder, false, true, hub_level, false, true, selected_file)
+			self.callv("start_level", start_args)
 	else:
 		CurrentLevelData.level_transition_data = {}
 		CurrentLevelData.hub_return_data = {}
@@ -108,7 +120,7 @@ func start_level(level_metadata: LevelMetadata, level_id: String, working_folder
 	CurrentLevelData.is_new_area = true
 	
 	# If there is more than 1, go to shine select screen
-	if total_shine_count > 1:
+	if total_shine_count > 1 and level_id != hub_level:
 		if start_in_edit_mode or skip_shine_select:
 			# just so the menu can work properly
 			var mission: MissionData = level_metadata.collectible_data.mission_data[0]
@@ -126,6 +138,14 @@ func start_level(level_metadata: LevelMetadata, level_id: String, working_folder
 			"target_area": mission.spawn_area_id,
 			"target_tag": mission.spawn_teleporter_tag
 		}
+	
+	if not CurrentLevelData.hub_return_data.empty() and not start_in_edit_mode:
+		if total_shine_count > 0:
+			var mission: MissionData = level_metadata.collectible_data.mission_data[0]
+			CurrentLevelData.current_mission_id = mission.mission_uuid
+			CurrentLevelData.current_mission = mission
+		CurrentLevelData.starting_area_id = CurrentLevelData.hub_return_data.get("target_area", 0)
+		CurrentLevelData.level_transition_data = CurrentLevelData.hub_return_data
 	
 	if do_transition:
 		# setup level when the transition finishes so music doesnt bug out

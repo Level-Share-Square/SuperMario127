@@ -34,6 +34,8 @@ func _register_properties() -> void:
 	set_property_override("teleport_mode", PropertyTab.OverrideTypes.ENUM, ["Local", "Area", "Level"] if CurrentLevelData.is_campaign else ["Local", "Area"])
 	register_property(7, "max_pan_distance", max_pan_distance, not hide_teleport_properties)
 	register_property(8, "level_path", level_path, CurrentLevelData.is_campaign and not hide_teleport_properties)
+	if CurrentLevelData.is_campaign and not hide_teleport_properties:
+		set_property_override("level_path", PropertyTab.OverrideTypes.DROPDOWN, [CurrentLevelData, "get_level_args"])
 
 
 func _register_property_info() -> void:
@@ -44,7 +46,7 @@ func _register_property_info() -> void:
 		teleport_mode_hint = "Whether this object should teleport locally, or to a different area."
 	set_property_info("teleport_mode", PropertyInfo.new(teleport_mode_hint, 1, -INF, INF, ["", ""], ["", ""]))
 	set_property_info("max_pan_distance", PropertyInfo.new("The max length the camera will pan when warping.\nIf the teleport is further than this, the camera will fade out instead.", 1, 0, INF, ["", ""], [" Tile(s)", ""]))
-	set_property_info("level_path", PropertyInfo.new("The relative path of the level to teleport to.", 1, -INF, INF, ["", ""], ["", ""]))
+	set_property_info("level_path", PropertyInfo.new("The level to teleport to. Must be within the same campaign folder.", 1, -INF, INF, ["", ""], ["", ""], false, "Level"))
 
 
 ### ANIMATION
@@ -125,7 +127,7 @@ func begin_warp(character: Character) -> void:
 			warp_helper.area_warp(character, tag, target_area)
 		
 		TeleportMode.Level:
-			if not Singleton.ModeSwitcher.visible:
+			if not Singleton.ModeSwitcher.visible and level_path != "":
 				warp_helper.level_warp(character, level_path, tag, target_area)
 			else:
 				warp_helper.location_warp(character, "", max_pan_distance)

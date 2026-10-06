@@ -82,7 +82,8 @@ func _ready():
 	Singleton.Music.character = get_node(character)
 	#Singleton.Music.reset_music()
 	if !Singleton.Music.playing:
-		Singleton.Music.play() # make sure the music will play even if it's stopped prior to loading the player
+		# make sure the music will play even if it's stopped prior to loading the player
+		Singleton.Music.change_song(Singleton.Music.last_song, CurrentLevelData.current_area.header.music)
 	
 	can_collect_coins.append(get_node(character))
 		

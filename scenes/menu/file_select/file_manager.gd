@@ -28,11 +28,5 @@ func play_level(selected_file: int, collected_shines: int = 0) -> void:
 	CurrentLevelData.level_transition_data = {}
 	CurrentLevelData.hub_return_data = {}
 	
-	Singleton.Music.reset_music()
-	Singleton.Music.stop()
-	
 	var level_id = intro_level if (intro_level != "" and collected_shines < 1) else hub_level
-	var file_path: String = level_list_util.get_level_file_path(level_id, campaign_path)
-	var level_code: String = level_list_util.load_level_code_file(file_path)
-	var level_metadata := LevelCodeDeserializer.deserialize_level_metadata_code(LevelCodeTokenizer.splice_metadata(level_code))
-	Singleton.SceneSwitcher.start_level(level_metadata, level_id, campaign_path, false, false, hub_level, true, true, selected_file)
+	Singleton.SceneSwitcher.prepare_and_start_level(level_id, campaign_path, hub_level, selected_file)
