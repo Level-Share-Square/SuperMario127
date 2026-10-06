@@ -180,7 +180,7 @@ static func convert_051_to_052(result):
 						object.properties[8] = old_properties[9]
 						object.properties[9] = true if old_properties.size() < 12 else old_properties[11] #tap mode (checks if property is present, if it isn't it just sets it to true)
 						object.properties[10] = true #waves enable (defaults to true)
-						object.properties[11] = old_properties[10] #water toxicity
+						object.properties[11] = 0 if old_properties.size() < 11 else old_properties[10] #water toxicity
 					75: #lava
 						var old_properties = object.properties.duplicate()
 						object.properties.resize(14)
