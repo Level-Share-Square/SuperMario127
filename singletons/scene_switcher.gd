@@ -75,22 +75,12 @@ func load_level_info(level_id: String, working_folder: String) -> LevelInfo:
 
 
 func setup_level(level_metadata: LevelMetadata, level_id: String, working_folder: String, hub_level: String = "", selected_file: int = -1, start_in_edit_mode: bool = false):
-	# load save file, if it exists
-	var save_path: String = level_list_util.get_level_save_path(level_id, working_folder, selected_file)
-	if level_list_util.file_exists(save_path):
-#		level_info.load_save_from_dictionary(level_list_util.load_level_save_file(save_path))
-		pass
+	CurrentLevelData.working_folder = working_folder
+	CurrentLevelData.level_id = level_id
+	CurrentLevelData.hub_level = hub_level
+	CurrentLevelData.is_campaign = level_list_util.is_campaign(working_folder)
+	CurrentLevelData.selected_file = selected_file
 	
-#	CurrentLevelData.level_info = level_info
-#	CurrentLevelData.level_data = level_info.level_data
-#
-#	CurrentLevelData.working_folder = working_folder
-#	CurrentLevelData.level_id = level_id
-#	CurrentLevelData.hub_level = hub_level
-#	CurrentLevelData.is_campaign = level_list_util.is_campaign(working_folder)
-#	CurrentLevelData.selected_file = selected_file
-#
-#	CurrentLevelData.level_info.selected_shine = -1
 	CurrentLevelData.load_level_headers(level_list_util.load_level_code_file(level_list_util.get_level_file_path(level_id, working_folder)))
 	if not CurrentLevelData.level_transition_data.empty():
 		CurrentLevelData.switch_to_area(CurrentLevelData.level_transition_data.get("target_area", 0))

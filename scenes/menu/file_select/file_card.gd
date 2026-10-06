@@ -35,7 +35,7 @@ func load_file_info(_campaign_path: String):
 		file_exists = true
 		
 		var meta_dict: Dictionary = save_meta_util.load_meta_file(save_folder)
-		var total_dict: Dictionary = save_meta_util.get_collectible_totals(meta_dict)
+		var total_dict: Dictionary = save_meta_util.get_collectible_totals(meta_dict, campaign_path, file_id)
 		collectibles.visible = true
 		
 		collected_shines = total_dict.get("collected_shines", 0)

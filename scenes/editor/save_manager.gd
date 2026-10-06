@@ -71,10 +71,10 @@ func save_pressed():
 		)
 		if level_list_util.file_exists(save_path):
 			level_list_util.delete_file(save_path)
-			
+	
 #	CurrentLevelData.level_info.reset_save_data(false)
 #	CurrentLevelData.level_info.init_collectibles()
-#	save_meta_util.update_all_with_level(level_id, working_folder, false, CurrentLevelData.level_metadata)
+	save_meta_util.update_all_with_level(level_id, working_folder, false)
 	
 	CurrentLevelData.unsaved_editor_changes = false
 	level_settings.get_node("%Areas").reload_areas()

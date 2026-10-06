@@ -23,11 +23,11 @@ func get_save_path(selected_file: int = -3) -> String:
 	return level_list_util.get_level_save_path(level_id, level_folder, selected_file)
 
 
-func _init(s_level_id: String, s_level_folder: String, s_collectible_data: CollectibleData = null) -> void:
+func _init(s_level_id: String, s_level_folder: String, s_collectible_data: CollectibleData = null, selected_file: int = -3) -> void:
 	level_id = s_level_id
 	level_folder = s_level_folder
 	collectible_data = s_collectible_data
-	load_save_from_dictionary(level_list_util.load_level_save_file(get_save_path()))
+	load_save_from_dictionary(level_list_util.load_level_save_file(get_save_path(selected_file)))
 
 func reset_save_data():
 	_completed_missions = []
