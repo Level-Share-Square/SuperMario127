@@ -4,6 +4,7 @@ extends Node
 signal loading_finished
 
 const LEVELS_PER_FRAME: int = 1
+const COMPLETION_COLOR := Color("ffff7f")
 
 onready var subscreens := $"%Subscreens"
 onready var list_handler: LevelListHandler = $"%ListHandler"
@@ -12,6 +13,7 @@ onready var http_thumbnails: HTTPThumbnails = $"%HTTPThumbnails"
 
 onready var shine_counter = $"%ShineCounter"
 onready var star_coin_counter = $"%StarCoinCounter"
+onready var completion_counter = $"%CompletionCounter"
 
 onready var campaign_card_scene: PackedScene = preload("res://scenes/menu/levels_list/cards/campaign/campaign_card.tscn")
 onready var folder_card_scene: PackedScene = preload("res://scenes/menu/levels_list/cards/folder/folder_card.tscn")
@@ -38,9 +40,23 @@ func clear_collectibles():
 	update_collectibles()
 
 
-func update_collectibles():
+func update_collectibles(is_final: bool = false):
 	shine_counter.text = "%s/%s" % [collected_shines, total_shines]
 	star_coin_counter.text = "%s/%s" % [collected_star_coins, total_star_coins]
+	
+	if is_final:
+		shine_counter.modulate = Color.white if collected_shines < total_shines else COMPLETION_COLOR
+		star_coin_counter.modulate = Color.white if collected_star_coins < total_star_coins else COMPLETION_COLOR
+		
+		var total_collectibles: float = total_shines + total_star_coins
+		if total_collectibles > 0:
+			var total_collected: float = collected_shines + collected_star_coins
+			var completion_percent: float = stepify(total_collected / total_collectibles, 0.01) * 100
+			completion_counter.modulate = Color.white if completion_percent < 100 else COMPLETION_COLOR
+			completion_counter.text = str(completion_percent) + "%"
+		else:
+			completion_counter.modulate = COMPLETION_COLOR
+			completion_counter.text = "100%"
 
 
 func transition_to_directory(working_folder: String, is_campaign: bool):
@@ -97,6 +113,7 @@ func load_next_queue_level(working_folder, can_sort, is_campaign):
 	if level_queue.size() <= 0:
 		print("Done loading levels in directory.")
 		emit_signal("loading_finished")
+		update_collectibles(true)
 		is_loading = false
 		return
 	
