@@ -13,4 +13,7 @@ func _init() -> void:
 	if error == OK:
 		path = file.get_line()
 		file.close()
-		active = ProjectSettings.load_resource_pack(path)
+		active = true
+
+func load_mod() -> void:
+	active = ProjectSettings.load_resource_pack(path)
