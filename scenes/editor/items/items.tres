@@ -300,6 +300,7 @@
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/unblossomed_cave_tree.tres" type="Resource" id=298]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/painting.tres" type="Resource" id=299]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/lily_pad.tres" type="Resource" id=300]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/test_event_object.tres" type="Resource" id=301]
 
 [resource]
 script = ExtResource( 1 )
@@ -453,6 +454,7 @@ placeable_items = {
 "obj_star_door": ExtResource( 113 ),
 "obj_star_door_single": ExtResource( 124 ),
 "obj_switch_block": ExtResource( 91 ),
+"obj_test_event_object": ExtResource( 299 ),
 "obj_toad": ExtResource( 145 ),
 "obj_torch": ExtResource( 98 ),
 "obj_touch_lift": ExtResource( 48 ),

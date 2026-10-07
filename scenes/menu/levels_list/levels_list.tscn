@@ -932,12 +932,12 @@ patch_margin_bottom = 11
 
 [node name="Padding" type="Control" parent="Panel/Buttons"]
 margin_left = 190.0
-margin_right = 450.0
+margin_right = 413.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
 
 [node name="CountersLabels" type="MarginContainer" parent="Panel/Buttons"]
-margin_left = 454.0
+margin_left = 417.0
 margin_right = 672.0
 margin_bottom = 24.0
 grow_horizontal = 0
@@ -948,7 +948,7 @@ custom_constants/margin_bottom = -8
 
 [node name="CountersBG" type="Panel" parent="Panel/Buttons/CountersLabels"]
 margin_left = 8.0
-margin_right = 216.0
+margin_right = 253.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 0, 24 )
 size_flags_vertical = 3
@@ -956,18 +956,18 @@ custom_styles/panel = SubResource( 40 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel/Buttons/CountersLabels"]
 margin_left = 8.0
-margin_right = 216.0
+margin_right = 253.0
 margin_bottom = 32.0
 custom_constants/separation = 0
 
 [node name="Padding" type="Control" parent="Panel/Buttons/CountersLabels/VBoxContainer"]
-margin_right = 208.0
+margin_right = 245.0
 margin_bottom = 4.0
 rect_min_size = Vector2( 0, 4 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel/Buttons/CountersLabels/VBoxContainer"]
 margin_top = 4.0
-margin_right = 208.0
+margin_right = 245.0
 margin_bottom = 28.0
 grow_horizontal = 0
 alignment = 2
@@ -1034,11 +1034,29 @@ custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_fonts/font = ExtResource( 48 )
 text = "542/1100"
 
-[node name="Padding2" type="Control" parent="Panel/Buttons/CountersLabels/VBoxContainer/HBoxContainer"]
+[node name="VSeparator" type="VSeparator" parent="Panel/Buttons/CountersLabels/VBoxContainer/HBoxContainer"]
 margin_left = 202.0
-margin_right = 208.0
+margin_right = 210.0
 margin_bottom = 24.0
-rect_min_size = Vector2( 6, 0 )
+rect_min_size = Vector2( 8, 0 )
+
+[node name="CompletionCounter" type="Label" parent="Panel/Buttons/CountersLabels/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+margin_left = 214.0
+margin_top = 2.0
+margin_right = 237.0
+margin_bottom = 21.0
+size_flags_horizontal = 0
+custom_fonts/font = ExtResource( 48 )
+text = "0%"
+align = 1
+valign = 1
+
+[node name="Padding2" type="Control" parent="Panel/Buttons/CountersLabels/VBoxContainer/HBoxContainer"]
+margin_left = 241.0
+margin_right = 245.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 4, 0 )
 
 [node name="Subscreens" type="Control" parent="Panel"]
 unique_name_in_owner = true
@@ -1179,7 +1197,6 @@ margin_bottom = 301.0
 script = ExtResource( 7 )
 view_scores_text = "View Scores"
 view_info_text = "View Info"
-completion_color = Color( 1, 1, 0.498039, 1 )
 
 [node name="InfoTab" type="Control" parent="Panel/Subscreens/LevelInfo/LevelPanel"]
 anchor_right = 1.0

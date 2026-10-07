@@ -19,7 +19,7 @@ const TYPE_CODE_RECT2 = "R" # Rect2
 const TYPE_CODE_CURVE_2D = "U" # Curve2D
 const TYPE_CODE_TILE_DATA = "T" # TileData (wrapper for a PoolByteArray)
 const TYPE_CODE_DIALOGUE_DATA = "D" # DialogueData (wrapper for PoolStringArray)
-
+const TYPE_CODE_EVENT = "E" # Event
 
 static func serialize_level_data(level_data) -> String:
 	var code = "["
@@ -361,7 +361,7 @@ static func base64_encode_float(number: float) -> String:
 
 static func serialize_data(value) -> String:
 	var data_code: String = ""
-	
+
 	match typeof(value):
 		TYPE_STRING:
 			value = value as String
@@ -444,7 +444,18 @@ static func serialize_data(value) -> String:
 				
 				var tile_byte_data: PoolByteArray = tile_util.chunks_to_tile_bytes(value.chunks)
 				data_code += serialize_data_array([tile_byte_data])
-#			elif value is DialogueData:
-#				pass
+			elif value is Event:
+				value = value as Event
+				data_code = TYPE_CODE_EVENT
+				
+				var property_dict: Dictionary = inst2dict(value)
+				property_dict.erase("@path")
+				property_dict.erase("@subpath")
+				
+				property_dict["event"] = class_util.get_custom_class_name(value)
+				
+				data_code += serialize_data_array(property_dict.keys())
+				data_code += serialize_data_array(property_dict.values())
+					
 	
 	return data_code
