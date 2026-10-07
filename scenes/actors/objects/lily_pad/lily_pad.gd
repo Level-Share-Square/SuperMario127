@@ -1,8 +1,8 @@
 extends GameObject
 
+const SINKING_FORCE : Vector2 = Vector2(0, 10)
+
 export(Array, Texture) var palette_textures
-export var parts := 1
-export var override_part_width := 0 # If this value is not equal to 0, this'll replace part_width with it's value
 
 onready var sprite = $BuoyancyController/Sprite
 onready var static_body = $BuoyancyController/StaticBody2D
@@ -11,12 +11,8 @@ onready var platform_area_collision_shape = $BuoyancyController/StaticBody2D/Are
 onready var collision_shape = $BuoyancyController/StaticBody2D/CollisionShape2D
 onready var buoyancy_controller = $"%BuoyancyController"
 
-onready var left_width = sprite.patch_margin_left
-onready var right_width = sprite.patch_margin_right
-onready var part_width = sprite.texture.get_width() - left_width - right_width
 
-var scale_x : float
-var last_parts := 1
+var parts : int = 1
 
 var physics_enabled := true
 var spawn_pos : Vector2 = Vector2(0, 0)
@@ -26,7 +22,6 @@ var spawn_pos : Vector2 = Vector2(0, 0)
 #	editable_properties = ["parts", "physics_enabled"]
 	
 func _register_properties():
-	register_property(4, "parts", parts, true)
 	register_property(5, "physics_enabled", physics_enabled, true)
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -35,33 +30,19 @@ func _unhandled_input(event: InputEvent) -> void:
 func _ready():
 	if palette != 0:
 		sprite.texture = palette_textures[palette]
-
-	if override_part_width != 0:
-		part_width = override_part_width
 	
 	spawn_pos = global_position
 	
 	if !is_enabled_and_on_ground():
 		collision_shape.disabled = true
-		
-	buoyancy_controller.init_physics()
-	update_parts()
-
-func _process(_delta):
-	if parts != last_parts:
-		update_parts()
-	last_parts = parts
 	
+	buoyancy_controller.can_sink = true
+	buoyancy_controller.init_physics()
+	buoyancy_controller.standing_detector_shape.shape.extents.x = collision_shape.shape.extents.x
+	buoyancy_controller.standing_detector.position.y = static_body.position.y + buoyancy_controller.standing_detector_shape.shape.extents.y
 func _physics_process(delta):
 	static_body.constant_linear_velocity = buoyancy_controller.linear_velocity
-	
-func update_parts():
-	sprite.rect_position.x = -(left_width + (part_width * parts) + right_width) / 2
-	sprite.rect_size.x = left_width + right_width + part_width * parts
 
-	platform_area_collision_shape.shape.extents.x = (left_width + (part_width * parts) + right_width) / 2 + 20
-	collision_shape.shape.extents.x = (left_width + (part_width * parts) + right_width) / 2
-	buoyancy_controller.shape.extents.x = collision_shape.shape.extents.x
-	#calculate the total platform scale
-	scale_x = scale.x * (left_width + right_width + part_width * parts) / (left_width + right_width + part_width)
-	editor_rect = Rect2(sprite.rect_position, sprite.rect_size)
+	
+func apply_sinking_force():
+	buoyancy_controller.add_force(Vector2.ZERO, SINKING_FORCE)

@@ -1,12 +1,18 @@
 extends RigidBody2D
 
+const SINKING_FORCE : Vector2 = Vector2(0, 4.3)
 onready var collision = $CollisionShape2D
 onready var test_ray = $RayCast2D
+onready var standing_detector = $"%CharacterStandingDetector"
+onready var standing_detector_shape = $CharacterStandingDetector/CollisionShape2D
 
 var shape
 var buoyancy_point:= preload("res://scenes/actors/objects/buoyant_platform/BuoyancyPoint.tscn")
 var point_area : Area2D
 var num_shapes = 0
+var can_sink : bool = false
+
+var char_is_standng : bool = false
 
 export var float_force : float = 270.0
 
@@ -24,9 +30,12 @@ func init_physics():
 		inertia = 1000 + 100 * num_shapes
 		point_area.connect("area_shape_entered", self, "buoyancy_point_submerged")
 		point_area.connect("area_shape_exited", self, "buoyancy_point_surfaced")
+		standing_detector.connect("body_entered", self, "character_standing")
+		standing_detector.connect("body_exited", self, "character_leaving")
 		
 	else:
 		mode = MODE_STATIC
+		can_sink = false
 	
 
 func _integrate_forces(state):
@@ -57,3 +66,10 @@ func buoyancy_point_surfaced(area_rid: RID, area: Area, area_shape_index: int, l
 	#gravity_scale = 7
 		
 	
+func _physics_process(delta: float) -> void:
+	if !can_sink: return
+	for body in standing_detector.get_overlapping_bodies():
+		if body is Character and body.has_method("is_grounded") and !body.swimming and body.is_grounded():
+			linear_velocity += SINKING_FORCE
+			if is_instance_valid(body.powerup) and body.powerup.name == "MetalPowerup":
+				linear_velocity += SINKING_FORCE/2
