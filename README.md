@@ -8,6 +8,7 @@ Note:
 
 If you'd like to contribute to ongoing development of the game, please use the development branch, as the master branch is only updated when a new stable version is released. Thank you!
 
+_Keep in mind that AI generated code is strictly prohibited._
 
 ### How to set-up SM127 using Godot 3.6.3:
 
