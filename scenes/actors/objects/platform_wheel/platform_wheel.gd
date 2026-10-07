@@ -9,8 +9,10 @@ var time_alive := 0.0
 var parts := 4
 var last_parts := 4
 
-var color := Color.green
-var last_color := Color.green
+var top_color := Color.green
+var bottom_color: Color = Color.white
+# Last top colour, Last bottom colour
+var last_colors: PoolColorArray = [Color.green,Color.white]
 
 var start_angle := 0.0
 onready var angle_offset := deg2rad(start_angle)
@@ -33,8 +35,9 @@ func _register_properties():
 	register_property(5, "speed", speed)
 	register_property(6, "radius", radius)
 	register_property(7, "platform_count", platform_count)
-	register_property(8, "color", color)
-	register_property(9, "start_angle", start_angle)
+	register_property(8, "top_color", top_color)
+	register_property(9, "bottom_color", bottom_color)
+	register_property(10, "start_angle", start_angle)
 
 func _unhandled_input(event: InputEvent) -> void:
 	parts_input_handler(event,self)
@@ -80,11 +83,16 @@ func _process(_delta):
 		hitbox.get_shape().radius = radius * 32
 		last_radius = radius
 		
-	if color != last_color:
+	if top_color != last_colors[0]:
 		for platform in platforms:
-			platform.recolor_sprite.self_modulate = color
+			platform.recolor_sprite.self_modulate = top_color
 			#end_sprite_node.get_child(1).self_modulate = color
-		last_color = color
+		last_colors[0] = top_color
+	
+	if bottom_color != last_colors[1]:
+		for platform in platforms:
+			platform.sprite.self_modulate = bottom_color
+		last_colors[1] = bottom_color
 
 func _draw():
 	if(radius == 0):
