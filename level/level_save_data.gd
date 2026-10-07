@@ -154,7 +154,9 @@ func load_save_0_1_0(save_dictionary: Dictionary):
 	_completed_missions = save_dictionary["completed_missions"]
 	_collected_star_coins = save_dictionary["collected_star_coins"]
 	_time_scores = save_dictionary["time_scores"]
-	_activated_fludds = save_dictionary["activated_fludds"]
+	var activated_fludds = save_dictionary.get("activated_fludds", [])
+	if activated_fludds is Array:
+		_activated_fludds = activated_fludds
 	_total_mission_count = save_dictionary["total_missions"]
 	_total_star_coins = save_dictionary["total_star_coins"]
 
@@ -179,6 +181,8 @@ func convert_save_to_0_1_0(save_dictionary: Dictionary) -> Dictionary:
 	for star_coin in save_dictionary["collected_star_coins"]:
 		var star_coin_id: int = int(star_coin)
 		if save_dictionary.get("collected_star_coins", {}).get(star_coin, false):
+			if star_coin_id >= collectible_data.star_coin_data.size():
+				star_coin_id = clamp(star_coin_id, 0, collectible_data.star_coin_data.size() - 1)
 			var star_coin_uuid: String = collectible_data.star_coin_data[star_coin_id].star_coin_uuid
 			star_coin_array.append(star_coin_uuid)
 

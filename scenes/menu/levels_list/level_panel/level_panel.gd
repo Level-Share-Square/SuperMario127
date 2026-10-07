@@ -41,7 +41,7 @@ onready var foreground := $InfoTab/Thumbnail/Foreground
 onready var shine_label := $InfoTab/Info/Shines/Label
 onready var star_coin_label := $InfoTab/Info/StarCoins/Label
 
-export var completion_color: Color = Color("ffffc4")
+export var completion_color: Color = Color("ffff7f")
 onready var percentage_label := $InfoTab/Info/Completion/Percentage
 
 onready var shines = $InfoTab/Info/Shines

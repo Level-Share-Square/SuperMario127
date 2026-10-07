@@ -273,10 +273,15 @@ static func get_level_file_path(level_id: String, working_folder: String) -> Str
 	return working_folder + "/" + level_id + ".127level"
 
 static func load_level_code_file(file_path: String) -> String:
+	if not file_exists(file_path):
+		printerr("File " + file_path + " does not exist.")
+		return ""
+	
 	var file := File.new()
 	var err: int = file.open(file_path, File.READ)
 	if err != OK:
 		printerr("File " + file_path + " failed to load. Error code: " + str(err))
+		return ""
 	
 	var level_code: String = file.get_as_text()
 	file.close()
@@ -294,6 +299,7 @@ static func save_level_code_file(level_code: String, file_path: String):
 	var err: int = file.open(file_path, File.WRITE)
 	if err != OK:
 		printerr("File " + file_path + " could not be saved. Error code: " + str(err))
+		return
 	
 	file.store_string(level_code)
 	file.close()
@@ -313,10 +319,15 @@ static func get_level_save_path(level_id: String, working_folder: String, select
 	return save_folder + level_id + ".127save"
 
 static func load_level_save_file(file_path: String) -> Dictionary:
+	if not file_exists(file_path):
+		printerr("File " + file_path + " does not exist.")
+		return {}
+	
 	var file := File.new()
 	var err: int = file.open_encrypted_with_pass(file_path, File.READ, ENCRYPTION_PASSWORD)
 	if err != OK:
 		printerr("File " + file_path + " failed to load. Error code: " + str(err))
+		return {}
 	
 	var parse: JSONParseResult = JSON.parse(file.get_as_text())
 	file.close()
