@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=49 format=2]
+[gd_resource type="Resource" load_steps=50 format=2]
 
 [ext_resource path="res://scenes/editor/items/placeable_items.gd" type="Script" id=1]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/big_barrel.tres" type="Resource" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/cloud_platform.tres" type="Resource" id=13]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/flat_rock.tres" type="Resource" id=14]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/log.tres" type="Resource" id=15]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/lily_pad.tres" type="Resource" id=16]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/bone_platform.tres" type="Resource" id=20]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/snow_platform.tres" type="Resource" id=33]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/pearl_platform.tres" type="Resource" id=46]
@@ -73,6 +74,7 @@ placeable_items = {
 "obj_forcefield": ExtResource( 7 ),
 "obj_large_cave_spore": ExtResource( 66 ),
 "obj_large_snow_pillar": ExtResource( 64 ),
+"obj_lily_pad": ExtResource( 16 ),
 "obj_log": ExtResource( 15 ),
 "obj_metal_bridge_platform": ExtResource( 10 ),
 "obj_metal_platform": ExtResource( 4 ),
