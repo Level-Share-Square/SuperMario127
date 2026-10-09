@@ -190,7 +190,8 @@ func add_level_card(
 	can_sort: bool,
 	move_to_front: bool = false,
 	level_code: String = "",
-	is_campaign: bool = false
+	is_campaign: bool = false,
+	recalculate_counts: bool = false
 ) -> LevelCard:
 	var level_grid: GridContainer = list_handler.level_grid
 	var card_node: LevelCard = level_card_scene.instance()
@@ -218,7 +219,18 @@ func add_level_card(
 		collected_shines += card_node.level_save_data.get_completed_mission_count()
 		collected_star_coins += card_node.level_save_data.get_collected_star_coin_count()
 	
-	update_collectibles()
+	update_collectibles(recalculate_counts)
 	
 	level_grid.call_deferred("add_child", card_node)
 	return card_node
+
+
+func remove_level_collectibles(level_metadata: LevelMetadata, level_save_data: LevelSaveData = null):
+	total_shines -= level_metadata.collectible_data.get_shine_count()
+	total_star_coins -= level_metadata.collectible_data.get_star_coin_count()
+	
+	if is_instance_valid(level_save_data):
+		collected_shines -= level_save_data.get_completed_mission_count()
+		collected_star_coins -= level_save_data.get_collected_star_coin_count()
+	
+	update_collectibles(true)

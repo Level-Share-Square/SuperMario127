@@ -10,6 +10,7 @@ onready var default_thumbnail = preload("res://scenes/menu/level_portal/default_
 var working_folder: String
 var level_id: String
 var level_metadata: LevelMetadata
+var level_save_data: LevelSaveData
 var can_edit: bool
 var is_campaign: bool
 var previous_number_of_players: int = 0
@@ -96,6 +97,7 @@ func load_level_info(_level_metadata: LevelMetadata, _level_id: String, _working
 	CurrentLevelData.unload_all_areas()
 	
 	level_metadata = CurrentLevelData.level_metadata
+	level_save_data = CurrentLevelData.save_data
 	level_id = _level_id
 	working_folder = _working_folder
 	can_edit = _can_edit
@@ -170,15 +172,12 @@ func load_level_info(_level_metadata: LevelMetadata, _level_id: String, _working
 	# load save file
 	load_time_scores()
 
-
-
-	var save_data: LevelSaveData = CurrentLevelData.save_data
 	var collectibledata: CollectibleData = CurrentLevelData.level_metadata.collectible_data
-	load_collectibles_info(save_data)
+	load_collectibles_info(level_save_data)
 
 	# these are floats cuz they need to be divided for some calculations :)
 	var total_collectibles: float = min(collectibledata.mission_data.size(), collectibledata.used_mission_data.size()) + collectibledata.star_coin_data.size()
-	var total_collected: float = save_data.get_completed_mission_count() + save_data.get_collected_star_coin_count()
+	var total_collected: float = level_save_data.get_completed_mission_count() + level_save_data.get_collected_star_coin_count()
 	if total_collectibles <= 0:
 		percentage_label.text = "100%"
 		percentage_label.modulate = completion_color
@@ -193,13 +192,12 @@ func load_time_scores():
 		# go, my children, be free
 		child.queue_free()
 	
-	var save_data: LevelSaveData = CurrentLevelData.save_data
 	var collectible_data: CollectibleData = CurrentLevelData.level_metadata.collectible_data
 	var mission_ids = collectible_data.mission_data
 	for mission in mission_ids:
 		if not mission.mission_uuid in collectible_data.used_mission_data: continue
 		
-		var time_score = save_data.get_time_score(mission.mission_uuid)
+		var time_score = level_save_data.get_time_score(mission.mission_uuid)
 
 		if time_score != null:
 			var time_score_node = TIME_SCORE_SCENE.instance()
@@ -242,6 +240,9 @@ func view_scores():
 	scores_tab.visible = switch_to_scores
 
 func reset_save():
+	var card_node: LevelCard = list_handler.level_grid.get_node(level_id)
+	card_node.decoration.deactivate_completion_style()
+	list_handler.loader.remove_level_collectibles(level_metadata, level_save_data)
 	CurrentLevelData.save_data.reset_save_data()
 
 func delete_level():
