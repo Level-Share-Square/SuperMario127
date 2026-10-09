@@ -20,9 +20,11 @@ func _ready():
 
 var last_scale: Vector2
 func _process(delta):
+	## framerate independent
+	var interp_amount: float = 1 - exp(-lerp_speed * delta)
 	if is_hovered() or focused:
-		rect_scale = lerp(rect_scale, target_scale, delta * lerp_speed)
+		rect_scale = lerp(rect_scale, target_scale, interp_amount)
 	else:
-		rect_scale = lerp(rect_scale, original_scale, delta * lerp_speed)
+		rect_scale = lerp(rect_scale, original_scale, interp_amount)
 
 	last_scale = rect_scale

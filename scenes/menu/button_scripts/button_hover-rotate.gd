@@ -21,9 +21,11 @@ func _process(delta):
 	if abs(last_rot - rect_rotation) > rotation_amount/4:
 		rect_rotation = last_rot
 	
+	## framerate independent
+	var interp_amount: float = 1 - exp(-lerp_speed * delta)
 	if is_hovered() or focused:
-		rect_rotation = lerp(rect_rotation, rotation_amount, delta * lerp_speed)
+		rect_rotation = lerp(rect_rotation, rotation_amount, interp_amount)
 	else:
-		rect_rotation = lerp(rect_rotation, 0, delta * lerp_speed)
+		rect_rotation = lerp(rect_rotation, 0, interp_amount)
 	
 	last_rot = rect_rotation

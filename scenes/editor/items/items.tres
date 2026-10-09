@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=301 format=2]
+[gd_resource type="Resource" load_steps=303 format=2]
 
 [ext_resource path="res://scenes/editor/items/placeable_items.gd" type="Script" id=1]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/blue_coin.tres" type="Resource" id=2]
@@ -301,6 +301,9 @@
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/painting.tres" type="Resource" id=299]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/lily_pad.tres" type="Resource" id=300]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/test_event_object.tres" type="Resource" id=301]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/leaves.tres" type="Resource" id=302]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/leaves_slope_right.tres" type="Resource" id=303]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/leaves_slope_left.tres" type="Resource" id=304]
 
 [resource]
 script = ExtResource( 1 )
@@ -454,7 +457,7 @@ placeable_items = {
 "obj_star_door": ExtResource( 113 ),
 "obj_star_door_single": ExtResource( 124 ),
 "obj_switch_block": ExtResource( 91 ),
-"obj_test_event_object": ExtResource( 299 ),
+"obj_test_event_object": ExtResource( 301 ),
 "obj_toad": ExtResource( 145 ),
 "obj_torch": ExtResource( 98 ),
 "obj_touch_lift": ExtResource( 48 ),
@@ -559,6 +562,9 @@ placeable_items = {
 "til_lava_rock_half_tile": ExtResource( 215 ),
 "til_lava_rock_slope_left": ExtResource( 202 ),
 "til_lava_rock_slope_right": ExtResource( 211 ),
+"til_leaves": ExtResource( 302 ),
+"til_leaves_slope_left": ExtResource( 303 ),
+"til_leaves_slope_right": ExtResource( 304 ),
 "til_log": ExtResource( 164 ),
 "til_log_half_tile": ExtResource( 216 ),
 "til_log_slope_left": ExtResource( 217 ),

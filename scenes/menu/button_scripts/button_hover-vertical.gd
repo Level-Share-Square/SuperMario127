@@ -24,9 +24,11 @@ func _process(delta):
 	if abs(last_y - rect_position.y) > extend_amount/2:
 		rect_position.y = last_y
 	
+	## framerate independent
+	var interp_amount: float = 1 - exp(-lerp_speed * delta)
 	if is_hovered() or focused:
-		rect_position.y = lerp(rect_position.y, original_y - extend_amount, delta * lerp_speed)
+		rect_position.y = lerp(rect_position.y, original_y - extend_amount, interp_amount)
 	else:
-		rect_position.y = lerp(rect_position.y, original_y, delta * lerp_speed)
+		rect_position.y = lerp(rect_position.y, original_y, interp_amount)
 
 	last_y = rect_position.y

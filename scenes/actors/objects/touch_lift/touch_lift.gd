@@ -6,8 +6,10 @@ extends GameObject
 var parts := 4
 var last_parts := 4
 
-var color := Color.green
-var last_color := Color.green
+var top_color := Color.green
+var bottom_color: Color = Color.white
+# Last top colour, Last bottom colour
+var last_colors: PoolColorArray = [Color.green,Color.white]
 
 var start_offset := 0
 var start_percentage := 0
@@ -46,10 +48,11 @@ func _register_properties():
 	register_property(7, "move_type", move_type)
 	set_property_override("move_type", PropertyTab.OverrideTypes.ENUM, ["Back and Forth", "Reset", "Once", "Loop", "Freeze"])
 	register_property(8, "touch_start", touch_start)
-	register_property(9, "color", color)
-	register_property(10, "start_offset", start_offset)
-	register_property(11, "custom_path", curve, false)
-	register_property(12, "path_length", path_length)
+	register_property(9, "top_color", top_color)
+	register_property(10, "bottom_color", bottom_color)
+	register_property(11, "start_offset", start_offset)
+	register_property(12, "custom_path", curve, false)
+	register_property(13, "path_length", path_length)
 	set_property_menu("path_length", ["viewer"])
 
 
@@ -76,12 +79,19 @@ func _process(_delta):
 		
 	
 		
-	if color != last_color:
-		platform_sprite_recolor.self_modulate = color
+	if top_color != last_colors[0]:
+		platform_sprite_recolor.self_modulate = top_color
 		if(mode==1):
-			start_sprite_node.get_child(1).self_modulate = color
-			end_sprite_node.get_child(1).self_modulate = color
-		last_color = color
+			start_sprite_node.get_child(1).self_modulate = top_color
+			end_sprite_node.get_child(1).self_modulate = top_color
+		last_colors[0] = top_color
+	
+	if bottom_color != last_colors[1]:
+		platform_sprite.self_modulate = bottom_color
+		if(mode==1):
+			start_sprite_node.get_child(0).self_modulate = bottom_color
+			end_sprite_node.get_child(0).self_modulate = bottom_color
+		last_colors[1] = bottom_color
 
 #-------------------------------- platform logic -----------------------
 
