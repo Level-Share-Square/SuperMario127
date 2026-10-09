@@ -19,7 +19,6 @@ texture = ExtResource( 2 )
 collision_layer = 0
 collision_mask = 35
 input_pickable = false
-monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="OverlapChecker"]
 shape = SubResource( 1 )
