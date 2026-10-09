@@ -64,7 +64,6 @@ func _start(_delta):
 	cam_move_timer = 2.0
 	sound_player.play_wall_jump_sound()
 	sound_player.play_wall_jump_step_sound()
-	LastInputDevice.rumble(0.5, 0.0, 0.05)
 	character.jump_animation = 0
 	character.is_wj_chained = true
 
