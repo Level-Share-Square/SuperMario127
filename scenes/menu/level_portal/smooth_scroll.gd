@@ -8,13 +8,14 @@ export var lerp_speed: float
 
 var target_scroll: float = -1
 var last_scroll: float
+var smoothing: bool = true
 
 # hacky code but i really dont want to care rn ,, 
 export var page_loading: bool
 var child: Node
 
 func _process(delta):
-	if abs(last_scroll - scroll_vertical) > LERP_THRESHOLD:
+	if smoothing and abs(last_scroll - scroll_vertical) > LERP_THRESHOLD:
 		target_scroll = scroll_vertical
 		scroll_vertical = last_scroll
 	
@@ -24,11 +25,12 @@ func _process(delta):
 			scroll_vertical = target_scroll
 			target_scroll = -1
 	
-	if page_loading and target_scroll > 0:
+	if page_loading:
 		if not is_instance_valid(child):
 			child = get_child(0)
 		
-		if target_scroll != last_scroll and target_scroll > child.rect_size.y - rect_size.y - 32:
+		var destination: float = target_scroll if target_scroll > -1 else float(scroll_vertical)
+		if destination != last_scroll and destination > child.rect_size.y - rect_size.y - 32:
 			emit_signal("next_page")
 	
 	last_scroll = scroll_vertical
@@ -37,6 +39,25 @@ func _process(delta):
 func _ready():
 	follow_focus = false
 	get_viewport().connect("gui_focus_changed", self, "gui_focus_changed")
+	get_tree().connect("node_added", self, "pass_touch")
+	pass_touch(self)
+
+
+func pass_touch(node: Node) -> void:
+	if node is Control and node.mouse_filter == MOUSE_FILTER_STOP and is_a_parent_of(node) \
+			and not (node is Range or node is TextEdit):
+		node.mouse_filter = MOUSE_FILTER_PASS
+	for child in node.get_children():
+		pass_touch(child)
+
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventScreenTouch or event is InputEventScreenDrag:
+		smoothing = false
+		target_scroll = -1
+	elif event is InputEventKey or event is InputEventJoypadButton or event is InputEventJoypadMotion \
+			or (event is InputEventMouseButton and event.button_index in [BUTTON_WHEEL_UP, BUTTON_WHEEL_DOWN]):
+		smoothing = true
 
 
 export var custom_follow_focus: bool

@@ -1762,6 +1762,10 @@ old_level_code_version="0.5.5"
 "Game Version"="0.10.0"
 level=false
 
+[gui]
+
+common/default_scroll_deadzone=6
+
 [importer_defaults]
 
 texture={
