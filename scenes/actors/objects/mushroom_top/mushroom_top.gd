@@ -117,7 +117,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	parts_input_handler(event,self)
 
 
-func _process(delta):
+func _physics_process(delta):
 	if !is_equal_approx(spring_anim_power, 0):
 		update_bounce_anim(delta)
 	else:
@@ -126,9 +126,7 @@ func _process(delta):
 			
 		if $Node2D.scale != Vector2.ONE:
 			$Node2D.scale = Vector2.ONE
-
-
-func _physics_process(delta):
+	
 	for object in blacklisted_bodies.keys():
 		var cooldown = blacklisted_bodies[object]
 		if cooldown > 0:
