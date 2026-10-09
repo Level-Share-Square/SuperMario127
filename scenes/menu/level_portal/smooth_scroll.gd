@@ -39,6 +39,16 @@ func _process(delta):
 func _ready():
 	follow_focus = false
 	get_viewport().connect("gui_focus_changed", self, "gui_focus_changed")
+	get_tree().connect("node_added", self, "pass_touch")
+	pass_touch(self)
+
+
+func pass_touch(node: Node) -> void:
+	if node is Control and node.mouse_filter == MOUSE_FILTER_STOP and is_a_parent_of(node) \
+			and not (node is Range or node is TextEdit):
+		node.mouse_filter = MOUSE_FILTER_PASS
+	for child in node.get_children():
+		pass_touch(child)
 
 
 func _input(event: InputEvent) -> void:

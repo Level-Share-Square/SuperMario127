@@ -1656,7 +1656,7 @@ disabled = true
 default_focus_path = NodePath("../../../Buttons/LevelList/Back")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Subscreens/LevelList"]
-margin_right = 775.0
+margin_right = 768.0
 margin_bottom = 432.0
 rect_min_size = Vector2( 0, 432 )
 scroll_horizontal_enabled = false
@@ -2078,7 +2078,6 @@ default_focus_path = NodePath("../ScrollContainer/MarginContainer/VBoxContainer/
 [node name="ScrollContainer" type="ScrollContainer" parent="Subscreens/LevelPage"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = 7.0
 rect_min_size = Vector2( 0, 432 )
 scroll_horizontal_enabled = false
 script = ExtResource( 24 )
