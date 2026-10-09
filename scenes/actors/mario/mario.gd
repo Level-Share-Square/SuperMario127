@@ -219,6 +219,7 @@ var collision_left
 var collision_right
 var collided_last_frame := false
 var using_dive_collision := false
+var hit_level_boundaries := false 
 
 
 export var snap := Vector2(0, 32)
@@ -1236,12 +1237,16 @@ func _physics_process(delta: float) -> void:
 		if (Singleton.PlayerSettings.other_player_id == -1 or Singleton.PlayerSettings.my_player_index == player_id)\
 		and controllable: # If not controllable, the player is (likely) collecting a shine
 			kill("fall")
+	
+	hit_level_boundaries = false
 	if position.x < level_bounds.position.x * 32 + 10:
 		position.x = level_bounds.position.x * 32 + 10
 		velocity.x = 0
+		hit_level_boundaries = true
 	if position.x > level_bounds.end.x * 32 -1:
 		position.x = level_bounds.end.x * 32 -1
 		velocity.x = 0
+		hit_level_boundaries = true
 	
 	last_position = global_position
 	

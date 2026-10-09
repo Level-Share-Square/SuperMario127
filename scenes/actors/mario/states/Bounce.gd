@@ -11,7 +11,6 @@ func _start_check(_delta):
 
 func _start(_delta):
 	if is_instance_valid(character.nozzle) and character.nozzle.activated: return
-	LastInputDevice.rumble(0.5, 0.0, 0.05)
 	character.is_wj_chained = false
 
 func _update(_delta):

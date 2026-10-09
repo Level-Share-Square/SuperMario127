@@ -3,6 +3,7 @@ extends Control
 const COMPLETED_COLOR := Color("ffffc4")
 const SHINE_MATERIAL: ShaderMaterial = preload("res://scenes/menu/levels_list/cards/level/shine.tres")
 
+
 ## nodes
 onready var level_card: LevelCard = get_owner()
 onready var visibility_enabler_2d := $"%VisibilityEnabler2D"
@@ -44,6 +45,14 @@ func activate_completion_style():
 	panel.material = SHINE_MATERIAL
 	panel.modulate = COMPLETED_COLOR
 	thumbnail_edge.modulate = COMPLETED_COLOR
+	star.call_deferred("show")
+
+
+func deactivate_completion_style():
+	panel.material = null
+	panel.modulate = Color.white
+	thumbnail_edge.modulate = Color.white
+	star.call_deferred("hide")
 
 
 func load_default_thumbnail(_viewport: Viewport = null):
