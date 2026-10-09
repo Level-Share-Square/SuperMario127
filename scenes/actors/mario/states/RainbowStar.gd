@@ -52,7 +52,7 @@ func _update(delta):
 		character.sprite.rotation_degrees += 24 * character.facing_direction
 	character.sprite.speed_scale = (abs(character.velocity.x) / run_speed)
 	
-	if character.is_walled():
+	if character.is_walled() or character.hit_level_boundaries:
 		character.facing_direction = -character.facing_direction
 		character.velocity.x = current_speed * character.facing_direction
 		character.position.x += character.facing_direction * 3
