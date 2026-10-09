@@ -6,6 +6,8 @@
 margin_right = 24.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 24, 24 )
+focus_mode = 0
+mouse_filter = 1
 theme_type_variation = "PageButton"
 text = "1"
 script = ExtResource( 1 )

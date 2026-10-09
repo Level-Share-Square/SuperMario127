@@ -34,7 +34,7 @@ var layouts_regex: Dictionary = {
 func _input(event):
 	if not "device" in event or event.device != -1:
 		var last_mouse: bool = is_mouse
-		is_mouse = (event is InputEventMouseMotion or event is InputEventMouseButton)
+		is_mouse = (event is InputEventMouseMotion or event is InputEventMouseButton or event is InputEventScreenTouch or event is InputEventScreenDrag)
 		if is_mouse != last_mouse:
 			emit_signal("mouse_changed", is_mouse)
 	
