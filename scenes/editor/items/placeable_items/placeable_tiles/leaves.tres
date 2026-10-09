@@ -1,0 +1,25 @@
+[gd_resource type="Resource" load_steps=12 format=2]
+
+[ext_resource path="res://scenes/editor/items/placeable_tile.gd" type="Script" id=1]
+[ext_resource path="res://assets/tiles/leaves/icons/0.png" type="Texture" id=2]
+[ext_resource path="res://assets/tiles/leaves/icons/4.png" type="Texture" id=3]
+[ext_resource path="res://assets/tiles/leaves/icons/3.png" type="Texture" id=4]
+[ext_resource path="res://assets/tiles/leaves/icons/2.png" type="Texture" id=5]
+[ext_resource path="res://assets/tiles/leaves/icons/7.png" type="Texture" id=6]
+[ext_resource path="res://assets/tiles/leaves/icons/5.png" type="Texture" id=7]
+[ext_resource path="res://assets/tiles/leaves/icons/8.png" type="Texture" id=8]
+[ext_resource path="res://assets/tiles/leaves/icons/1.png" type="Texture" id=9]
+[ext_resource path="res://assets/tiles/leaves/icons/6.png" type="Texture" id=10]
+[ext_resource path="res://assets/tiles/leaves/icons/9.png" type="Texture" id=11]
+
+[resource]
+script = ExtResource( 1 )
+item_name = "Leaves"
+change_to = "til_leaves_slope_left"
+items_in_sequence = 3
+index_in_sequence = 0
+icons = [ ExtResource( 2 ), ExtResource( 9 ), ExtResource( 5 ), ExtResource( 4 ), ExtResource( 3 ), ExtResource( 7 ), ExtResource( 10 ), ExtResource( 6 ), ExtResource( 8 ), ExtResource( 11 ) ]
+previews = [ ExtResource( 2 ), ExtResource( 9 ), ExtResource( 5 ), ExtResource( 4 ), ExtResource( 3 ), ExtResource( 7 ), ExtResource( 10 ), ExtResource( 6 ), ExtResource( 8 ), ExtResource( 11 ) ]
+priority = 490
+tileset_id = 53
+tile_id = 0
