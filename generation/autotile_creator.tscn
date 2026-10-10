@@ -1,0 +1,2804 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/tiles/template/template.png" type="Texture" id=1]
+[ext_resource path="res://generation/base.png" type="Texture" id=2]
+
+[node name="autotile_creator" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Reference" type="TextureRect" parent="."]
+modulate = Color( 0.458824, 0.27451, 0.27451, 0.564706 )
+margin_right = 40.0
+margin_bottom = 40.0
+texture = ExtResource( 1 )
+
+[node name="Tiles" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="FullTiles" type="Control" parent="Tiles"]
+margin_right = 32.0
+margin_bottom = 32.0
+
+[node name="Tile" type="Control" parent="Tiles/FullTiles"]
+margin_right = 32.0
+margin_bottom = 32.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/FullTiles/Tile"]
+position = Vector2( 8, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 16, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/FullTiles/Tile"]
+position = Vector2( 24, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 80, 0, 16, 32 )
+
+[node name="Tile2" type="Control" parent="Tiles/FullTiles"]
+margin_top = 32.0
+margin_right = 32.0
+margin_bottom = 64.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/FullTiles/Tile2"]
+position = Vector2( 8, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 0, 32, 16, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/FullTiles/Tile2"]
+position = Vector2( 24, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 80, 32, 16, 32 )
+
+[node name="Tile3" type="Control" parent="Tiles/FullTiles"]
+margin_top = 64.0
+margin_right = 32.0
+margin_bottom = 96.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/FullTiles/Tile3"]
+position = Vector2( 8, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 0, 64, 16, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/FullTiles/Tile3"]
+position = Vector2( 24, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 80, 64, 16, 32 )
+
+[node name="Tile4" type="Control" parent="Tiles/FullTiles"]
+margin_top = 96.0
+margin_right = 32.0
+margin_bottom = 128.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/FullTiles/Tile4"]
+position = Vector2( 8, 8 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 16, 16 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/FullTiles/Tile4"]
+position = Vector2( 24, 8 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 80, 0, 16, 16 )
+
+[node name="Sprite3" type="Sprite" parent="Tiles/FullTiles/Tile4"]
+position = Vector2( 8, 24 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 0, 80, 16, 16 )
+
+[node name="Sprite4" type="Sprite" parent="Tiles/FullTiles/Tile4"]
+position = Vector2( 24, 24 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 80, 80, 16, 16 )
+
+[node name="Tile5" type="Control" parent="Tiles/FullTiles"]
+margin_left = 32.0
+margin_right = 64.0
+margin_bottom = 32.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/FullTiles/Tile5"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/FullTiles/Tile5"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 32, 32, 32 )
+
+[node name="Tile6" type="Control" parent="Tiles/FullTiles"]
+margin_left = 32.0
+margin_top = 32.0
+margin_right = 64.0
+margin_bottom = 64.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/FullTiles/Tile6"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 0, 32, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/FullTiles/Tile6"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 32, 32, 32 )
+
+[node name="Sprite3" type="Sprite" parent="Tiles/FullTiles/Tile6"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 0, 32, 32 )
+
+[node name="Tile7" type="Control" parent="Tiles/FullTiles"]
+margin_left = 32.0
+margin_top = 64.0
+margin_right = 64.0
+margin_bottom = 96.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/FullTiles/Tile7"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 0, 64, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/FullTiles/Tile7"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 0, 32, 32 )
+
+[node name="Tile8" type="Control" parent="Tiles/FullTiles"]
+margin_left = 32.0
+margin_top = 96.0
+margin_right = 64.0
+margin_bottom = 128.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/FullTiles/Tile8"]
+position = Vector2( 16, 8 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 32, 16 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/FullTiles/Tile8"]
+position = Vector2( 16, 24 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 0, 80, 32, 16 )
+
+[node name="Tile9" type="Control" parent="Tiles/FullTiles"]
+margin_left = 64.0
+margin_right = 96.0
+margin_bottom = 32.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/FullTiles/Tile9"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 32, 0, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/FullTiles/Tile9"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 32, 32, 32 )
+
+[node name="Sprite3" type="Sprite" parent="Tiles/FullTiles/Tile9"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 32, 32, 32 )
+
+[node name="Tile10" type="Control" parent="Tiles/FullTiles"]
+margin_left = 64.0
+margin_top = 32.0
+margin_right = 96.0
+margin_bottom = 64.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/FullTiles/Tile10"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 32, 32, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/FullTiles/Tile10"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 32, 32, 32 )
+
+[node name="Sprite3" type="Sprite" parent="Tiles/FullTiles/Tile10"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 0, 32, 32 )
+
+[node name="Sprite4" type="Sprite" parent="Tiles/FullTiles/Tile10"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 0, 32, 32 )
+
+[node name="Sprite5" type="Sprite" parent="Tiles/FullTiles/Tile10"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 32, 32, 32 )
+
+[node name="Tile11" type="Control" parent="Tiles/FullTiles"]
+margin_left = 64.0
+margin_top = 64.0
+margin_right = 96.0
+margin_bottom = 96.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/FullTiles/Tile11"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 32, 64, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/FullTiles/Tile11"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 0, 32, 32 )
+
+[node name="Sprite3" type="Sprite" parent="Tiles/FullTiles/Tile11"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 0, 32, 32 )
+
+[node name="Tile12" type="Control" parent="Tiles/FullTiles"]
+margin_left = 64.0
+margin_top = 96.0
+margin_right = 96.0
+margin_bottom = 128.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/FullTiles/Tile12"]
+position = Vector2( 16, 8 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 32, 0, 32, 16 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/FullTiles/Tile12"]
+position = Vector2( 16, 24 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 32, 80, 32, 16 )
+
+[node name="Tile13" type="Control" parent="Tiles/FullTiles"]
+margin_left = 96.0
+margin_right = 128.0
+margin_bottom = 32.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/FullTiles/Tile13"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 64, 0, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/FullTiles/Tile13"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 32, 32, 32 )
+
+[node name="Tile14" type="Control" parent="Tiles/FullTiles"]
+margin_left = 96.0
+margin_top = 32.0
+margin_right = 128.0
+margin_bottom = 64.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/FullTiles/Tile14"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 64, 32, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/FullTiles/Tile14"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 32, 32, 32 )
+
+[node name="Sprite3" type="Sprite" parent="Tiles/FullTiles/Tile14"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 0, 32, 32 )
+
+[node name="Tile15" type="Control" parent="Tiles/FullTiles"]
+margin_left = 96.0
+margin_top = 64.0
+margin_right = 128.0
+margin_bottom = 96.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/FullTiles/Tile15"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 64, 64, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/FullTiles/Tile15"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 0, 32, 32 )
+
+[node name="Tile16" type="Control" parent="Tiles/FullTiles"]
+margin_left = 96.0
+margin_top = 96.0
+margin_right = 128.0
+margin_bottom = 128.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/FullTiles/Tile16"]
+position = Vector2( 16, 8 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 64, 0, 32, 16 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/FullTiles/Tile16"]
+position = Vector2( 16, 24 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 64, 80, 32, 16 )
+
+[node name="Tile17" type="Control" parent="Tiles/FullTiles"]
+margin_left = 128.0
+margin_right = 160.0
+margin_bottom = 32.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/FullTiles/Tile17"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 32, 32, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/FullTiles/Tile17"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 32, 32, 32 )
+
+[node name="Sprite3" type="Sprite" parent="Tiles/FullTiles/Tile17"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 32, 32, 32 )
+
+[node name="Sprite4" type="Sprite" parent="Tiles/FullTiles/Tile17"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 0, 32, 32 )
+
+[node name="Tile18" type="Control" parent="Tiles/FullTiles"]
+margin_left = 128.0
+margin_top = 32.0
+margin_right = 160.0
+margin_bottom = 64.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/FullTiles/Tile18"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 0, 32, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/FullTiles/Tile18"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 0, 32, 32 )
+
+[node name="Tile19" type="Control" parent="Tiles/FullTiles"]
+margin_left = 128.0
+margin_top = 64.0
+margin_right = 160.0
+margin_bottom = 96.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/FullTiles/Tile19"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 0, 32, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/FullTiles/Tile19"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 32, 32, 32 )
+
+[node name="Tile20" type="Control" parent="Tiles/FullTiles"]
+margin_left = 128.0
+margin_top = 96.0
+margin_right = 160.0
+margin_bottom = 128.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/FullTiles/Tile20"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 32, 32, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/FullTiles/Tile20"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 0, 32, 32 )
+
+[node name="Sprite3" type="Sprite" parent="Tiles/FullTiles/Tile20"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 0, 32, 32 )
+
+[node name="Sprite4" type="Sprite" parent="Tiles/FullTiles/Tile20"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 32, 32, 32 )
+
+[node name="Tile21" type="Control" parent="Tiles/FullTiles"]
+margin_left = 160.0
+margin_right = 192.0
+margin_bottom = 32.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/FullTiles/Tile21"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 32, 0, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/FullTiles/Tile21"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 32, 32, 32 )
+
+[node name="Tile22" type="Control" parent="Tiles/FullTiles"]
+margin_left = 160.0
+margin_top = 32.0
+margin_right = 192.0
+margin_bottom = 64.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/FullTiles/Tile22"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 32, 32, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/FullTiles/Tile22"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 0, 32, 32 )
+
+[node name="Tile23" type="Control" parent="Tiles/FullTiles"]
+margin_left = 160.0
+margin_top = 64.0
+margin_right = 192.0
+margin_bottom = 96.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/FullTiles/Tile23"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 32, 32, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/FullTiles/Tile23"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 32, 32, 32 )
+
+[node name="Tile24" type="Control" parent="Tiles/FullTiles"]
+margin_left = 160.0
+margin_top = 96.0
+margin_right = 192.0
+margin_bottom = 128.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/FullTiles/Tile24"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 32, 64, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/FullTiles/Tile24"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 0, 32, 32 )
+
+[node name="Tile25" type="Control" parent="Tiles/FullTiles"]
+margin_left = 192.0
+margin_right = 224.0
+margin_bottom = 32.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/FullTiles/Tile25"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 32, 0, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/FullTiles/Tile25"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 32, 32, 32 )
+
+[node name="Tile26" type="Control" parent="Tiles/FullTiles"]
+margin_left = 192.0
+margin_top = 32.0
+margin_right = 224.0
+margin_bottom = 64.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/FullTiles/Tile26"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 32, 32, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/FullTiles/Tile26"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 0, 32, 32 )
+
+[node name="Tile27" type="Control" parent="Tiles/FullTiles"]
+margin_left = 192.0
+margin_top = 64.0
+margin_right = 224.0
+margin_bottom = 96.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/FullTiles/Tile27"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 32, 32, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/FullTiles/Tile27"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 32, 32, 32 )
+
+[node name="Tile28" type="Control" parent="Tiles/FullTiles"]
+margin_left = 192.0
+margin_top = 96.0
+margin_right = 224.0
+margin_bottom = 128.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/FullTiles/Tile28"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 32, 64, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/FullTiles/Tile28"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 0, 32, 32 )
+
+[node name="Tile29" type="Control" parent="Tiles/FullTiles"]
+margin_left = 224.0
+margin_right = 256.0
+margin_bottom = 32.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/FullTiles/Tile29"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 32, 32, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/FullTiles/Tile29"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 32, 32, 32 )
+
+[node name="Sprite3" type="Sprite" parent="Tiles/FullTiles/Tile29"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 32, 32, 32 )
+
+[node name="Sprite4" type="Sprite" parent="Tiles/FullTiles/Tile29"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 0, 32, 32 )
+
+[node name="Tile30" type="Control" parent="Tiles/FullTiles"]
+margin_left = 224.0
+margin_top = 32.0
+margin_right = 256.0
+margin_bottom = 64.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/FullTiles/Tile30"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 64, 32, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/FullTiles/Tile30"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 0, 32, 32 )
+
+[node name="Tile31" type="Control" parent="Tiles/FullTiles"]
+margin_left = 224.0
+margin_top = 64.0
+margin_right = 256.0
+margin_bottom = 96.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/FullTiles/Tile31"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 64, 32, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/FullTiles/Tile31"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 32, 32, 32 )
+
+[node name="Tile32" type="Control" parent="Tiles/FullTiles"]
+margin_left = 224.0
+margin_top = 96.0
+margin_right = 256.0
+margin_bottom = 128.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/FullTiles/Tile32"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 32, 32, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/FullTiles/Tile32"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 0, 32, 32 )
+
+[node name="Sprite3" type="Sprite" parent="Tiles/FullTiles/Tile32"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 0, 32, 32 )
+
+[node name="Sprite4" type="Sprite" parent="Tiles/FullTiles/Tile32"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 32, 32, 32 )
+
+[node name="Tile33" type="Control" parent="Tiles/FullTiles"]
+margin_left = 256.0
+margin_right = 288.0
+margin_bottom = 32.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/FullTiles/Tile33"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 32, 32 )
+
+[node name="Tile34" type="Control" parent="Tiles/FullTiles"]
+margin_left = 256.0
+margin_top = 32.0
+margin_right = 288.0
+margin_bottom = 64.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/FullTiles/Tile34"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 0, 32, 32, 32 )
+
+[node name="Tile35" type="Control" parent="Tiles/FullTiles"]
+margin_left = 256.0
+margin_top = 64.0
+margin_right = 288.0
+margin_bottom = 96.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/FullTiles/Tile35"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 32, 32, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/FullTiles/Tile35"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 0, 32, 32 )
+
+[node name="Sprite3" type="Sprite" parent="Tiles/FullTiles/Tile35"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 32, 32, 32 )
+
+[node name="Tile36" type="Control" parent="Tiles/FullTiles"]
+margin_left = 256.0
+margin_top = 96.0
+margin_right = 288.0
+margin_bottom = 128.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/FullTiles/Tile36"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 0, 64, 32, 32 )
+
+[node name="Tile37" type="Control" parent="Tiles/FullTiles"]
+margin_left = 288.0
+margin_right = 320.0
+margin_bottom = 32.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/FullTiles/Tile37"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 32, 32, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/FullTiles/Tile37"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 0, 32, 32 )
+
+[node name="Sprite3" type="Sprite" parent="Tiles/FullTiles/Tile37"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 0, 32, 32 )
+
+[node name="Tile38" type="Control" parent="Tiles/FullTiles"]
+margin_left = 288.0
+margin_top = 32.0
+margin_right = 320.0
+margin_bottom = 64.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/FullTiles/Tile38"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 32, 32, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/FullTiles/Tile38"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 0, 32, 32 )
+
+[node name="Sprite3" type="Sprite" parent="Tiles/FullTiles/Tile38"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 32, 32, 32 )
+
+[node name="Tile39" type="Control" parent="Tiles/FullTiles"]
+margin_left = 288.0
+margin_top = 64.0
+margin_right = 320.0
+margin_bottom = 96.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/FullTiles/Tile39"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 32, 32, 32, 32 )
+
+[node name="Tile40" type="Control" parent="Tiles/FullTiles"]
+margin_left = 288.0
+margin_top = 96.0
+margin_right = 320.0
+margin_bottom = 128.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/FullTiles/Tile40"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 32, 64, 32, 32 )
+
+[node name="Tile41" type="Control" parent="Tiles/FullTiles"]
+margin_left = 320.0
+margin_right = 352.0
+margin_bottom = 32.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/FullTiles/Tile41"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 32, 0, 32, 32 )
+
+[node name="Tile42" type="Control" parent="Tiles/FullTiles"]
+margin_left = 320.0
+margin_top = 32.0
+margin_right = 352.0
+margin_bottom = 64.0
+
+[node name="Tile43" type="Control" parent="Tiles/FullTiles"]
+margin_left = 320.0
+margin_top = 64.0
+margin_right = 352.0
+margin_bottom = 96.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/FullTiles/Tile43"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 32, 32, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/FullTiles/Tile43"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 0, 32, 32 )
+
+[node name="Sprite3" type="Sprite" parent="Tiles/FullTiles/Tile43"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 32, 32, 32 )
+
+[node name="Tile44" type="Control" parent="Tiles/FullTiles"]
+margin_left = 320.0
+margin_top = 96.0
+margin_right = 352.0
+margin_bottom = 128.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/FullTiles/Tile44"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 32, 32, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/FullTiles/Tile44"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 32, 32, 32 )
+
+[node name="Sprite3" type="Sprite" parent="Tiles/FullTiles/Tile44"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 32, 32, 32 )
+
+[node name="Tile45" type="Control" parent="Tiles/FullTiles"]
+margin_left = 352.0
+margin_right = 384.0
+margin_bottom = 32.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/FullTiles/Tile45"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 64, 0, 32, 32 )
+
+[node name="Tile46" type="Control" parent="Tiles/FullTiles"]
+margin_left = 352.0
+margin_top = 32.0
+margin_right = 384.0
+margin_bottom = 64.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/FullTiles/Tile46"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 32, 32, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/FullTiles/Tile46"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 0, 32, 32 )
+
+[node name="Sprite3" type="Sprite" parent="Tiles/FullTiles/Tile46"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 32, 32, 32 )
+
+[node name="Tile47" type="Control" parent="Tiles/FullTiles"]
+margin_left = 352.0
+margin_top = 64.0
+margin_right = 384.0
+margin_bottom = 96.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/FullTiles/Tile47"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 64, 32, 32, 32 )
+
+[node name="Tile48" type="Control" parent="Tiles/FullTiles"]
+margin_left = 352.0
+margin_top = 96.0
+margin_right = 384.0
+margin_bottom = 128.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/FullTiles/Tile48"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 64, 64, 32, 32 )
+
+[node name="LeftSlopeTiles" type="Control" parent="Tiles"]
+margin_left = 544.0
+margin_right = 576.0
+margin_bottom = 32.0
+
+[node name="Tile" type="Control" parent="Tiles/LeftSlopeTiles"]
+margin_right = 32.0
+margin_bottom = 32.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 160, 32, 32 )
+
+[node name="Tile2" type="Control" parent="Tiles/LeftSlopeTiles"]
+margin_top = 32.0
+margin_right = 32.0
+margin_bottom = 64.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile2"]
+position = Vector2( 8, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 0, 32, 16, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile2"]
+position = Vector2( 24, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 80, 32, 16, 32 )
+
+[node name="Tile3" type="Control" parent="Tiles/LeftSlopeTiles"]
+margin_top = 64.0
+margin_right = 32.0
+margin_bottom = 96.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile3"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 192, 32, 32 )
+
+[node name="Tile4" type="Control" parent="Tiles/LeftSlopeTiles"]
+margin_top = 96.0
+margin_right = 32.0
+margin_bottom = 128.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile4"]
+position = Vector2( 8, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 32, 160, 16, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile4"]
+position = Vector2( 24, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 112, 160, 16, 32 )
+
+[node name="Sprite3" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile4"]
+position = Vector2( 24, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 16, 160, 16, 32 )
+
+[node name="Tile5" type="Control" parent="Tiles/LeftSlopeTiles"]
+margin_left = 32.0
+margin_right = 64.0
+margin_bottom = 32.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile5"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 0, 96, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile5"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 32, 32, 32 )
+
+[node name="Tile6" type="Control" parent="Tiles/LeftSlopeTiles"]
+margin_left = 32.0
+margin_top = 32.0
+margin_right = 64.0
+margin_bottom = 64.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile6"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 64, 128, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile6"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 32, 32, 32 )
+
+[node name="Sprite3" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile6"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 0, 32, 32 )
+
+[node name="Tile7" type="Control" parent="Tiles/LeftSlopeTiles"]
+margin_left = 32.0
+margin_top = 64.0
+margin_right = 64.0
+margin_bottom = 96.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile7"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 0, 128, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile7"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 0, 32, 32 )
+
+[node name="Tile8" type="Control" parent="Tiles/LeftSlopeTiles"]
+margin_left = 32.0
+margin_top = 96.0
+margin_right = 64.0
+margin_bottom = 128.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile8"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 32, 160, 32, 32 )
+
+[node name="Tile9" type="Control" parent="Tiles/LeftSlopeTiles"]
+margin_left = 64.0
+margin_right = 96.0
+margin_bottom = 32.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile9"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 128, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile9"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 32, 32, 32 )
+
+[node name="Sprite3" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile9"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 96, 32, 32 )
+
+[node name="Tile10" type="Control" parent="Tiles/LeftSlopeTiles"]
+margin_left = 64.0
+margin_top = 32.0
+margin_right = 96.0
+margin_bottom = 64.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile10"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 32, 32, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile10"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 32, 32, 32 )
+
+[node name="Sprite3" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile10"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 0, 32, 32 )
+
+[node name="Sprite4" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile10"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 64, 32, 32 )
+
+[node name="Sprite5" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile10"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 96, 32, 32 )
+
+[node name="Tile11" type="Control" parent="Tiles/LeftSlopeTiles"]
+margin_left = 64.0
+margin_top = 64.0
+margin_right = 96.0
+margin_bottom = 96.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile11"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 32, 64, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile11"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 0, 32, 32 )
+
+[node name="Sprite3" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile11"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 64, 32, 32 )
+
+[node name="Tile12" type="Control" parent="Tiles/LeftSlopeTiles"]
+margin_left = 64.0
+margin_top = 96.0
+margin_right = 96.0
+margin_bottom = 128.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile12"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 128, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile12"]
+position = Vector2( 8, 24 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 64, 176, 16, 16 )
+
+[node name="Sprite3" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile12"]
+position = Vector2( 24, 24 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 48, 176, 16, 16 )
+
+[node name="Tile13" type="Control" parent="Tiles/LeftSlopeTiles"]
+margin_left = 96.0
+margin_right = 128.0
+margin_bottom = 32.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile13"]
+position = Vector2( 8, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 128, 16, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile13"]
+position = Vector2( 24, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 144, 128, 16, 32 )
+
+[node name="Sprite3" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile13"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 96, 32, 32 )
+
+[node name="Tile14" type="Control" parent="Tiles/LeftSlopeTiles"]
+margin_left = 96.0
+margin_top = 32.0
+margin_right = 128.0
+margin_bottom = 64.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile14"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 64, 32, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile14"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 64, 32, 32 )
+
+[node name="Sprite3" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile14"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 96, 32, 32 )
+
+[node name="Tile15" type="Control" parent="Tiles/LeftSlopeTiles"]
+margin_left = 96.0
+margin_top = 64.0
+margin_right = 128.0
+margin_bottom = 96.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile15"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 64, 64, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile15"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 64, 32, 32 )
+
+[node name="Tile16" type="Control" parent="Tiles/LeftSlopeTiles"]
+margin_left = 96.0
+margin_top = 96.0
+margin_right = 128.0
+margin_bottom = 128.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile16"]
+position = Vector2( 8, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 128, 16, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile16"]
+position = Vector2( 24, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 144, 128, 16, 32 )
+
+[node name="Sprite3" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile16"]
+position = Vector2( 8, 24 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 64, 176, 16, 16 )
+
+[node name="Sprite4" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile16"]
+position = Vector2( 24, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 16, 160, 16, 32 )
+
+[node name="Tile17" type="Control" parent="Tiles/LeftSlopeTiles"]
+margin_left = 128.0
+margin_right = 160.0
+margin_bottom = 32.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile17"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 32, 32, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile17"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 96, 32, 32 )
+
+[node name="Sprite3" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile17"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 32, 32, 32 )
+
+[node name="Sprite4" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile17"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 0, 32, 32 )
+
+[node name="Tile18" type="Control" parent="Tiles/LeftSlopeTiles"]
+margin_left = 128.0
+margin_top = 32.0
+margin_right = 160.0
+margin_bottom = 64.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile18"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 64, 128, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile18"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 0, 32, 32 )
+
+[node name="Tile19" type="Control" parent="Tiles/LeftSlopeTiles"]
+margin_left = 128.0
+margin_top = 64.0
+margin_right = 160.0
+margin_bottom = 96.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile19"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 64, 128, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile19"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 32, 32, 32 )
+
+[node name="Tile20" type="Control" parent="Tiles/LeftSlopeTiles"]
+margin_left = 128.0
+margin_top = 96.0
+margin_right = 160.0
+margin_bottom = 128.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile20"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 32, 32, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile20"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 64, 32, 32 )
+
+[node name="Sprite3" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile20"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 0, 32, 32 )
+
+[node name="Sprite4" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile20"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 32, 32, 32 )
+
+[node name="Tile21" type="Control" parent="Tiles/LeftSlopeTiles"]
+margin_left = 160.0
+margin_right = 192.0
+margin_bottom = 32.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile21"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 128, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile21"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 96, 32, 32 )
+
+[node name="Tile22" type="Control" parent="Tiles/LeftSlopeTiles"]
+margin_left = 160.0
+margin_top = 32.0
+margin_right = 192.0
+margin_bottom = 64.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile22"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 32, 32, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile22"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 64, 32, 32 )
+
+[node name="Tile23" type="Control" parent="Tiles/LeftSlopeTiles"]
+margin_left = 160.0
+margin_top = 64.0
+margin_right = 192.0
+margin_bottom = 96.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile23"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 32, 32, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile23"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 96, 32, 32 )
+
+[node name="Tile24" type="Control" parent="Tiles/LeftSlopeTiles"]
+margin_left = 160.0
+margin_top = 96.0
+margin_right = 192.0
+margin_bottom = 128.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile24"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 32, 64, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile24"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 64, 32, 32 )
+
+[node name="Tile25" type="Control" parent="Tiles/LeftSlopeTiles"]
+margin_left = 192.0
+margin_right = 224.0
+margin_bottom = 32.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile25"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 128, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile25"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 32, 32, 32 )
+
+[node name="Tile26" type="Control" parent="Tiles/LeftSlopeTiles"]
+margin_left = 192.0
+margin_top = 32.0
+margin_right = 224.0
+margin_bottom = 64.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile26"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 32, 32, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile26"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 0, 32, 32 )
+
+[node name="Tile27" type="Control" parent="Tiles/LeftSlopeTiles"]
+margin_left = 192.0
+margin_top = 64.0
+margin_right = 224.0
+margin_bottom = 96.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile27"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 32, 32, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile27"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 32, 32, 32 )
+
+[node name="Tile28" type="Control" parent="Tiles/LeftSlopeTiles"]
+margin_left = 192.0
+margin_top = 96.0
+margin_right = 224.0
+margin_bottom = 128.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile28"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 32, 64, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile28"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 0, 32, 32 )
+
+[node name="Tile29" type="Control" parent="Tiles/LeftSlopeTiles"]
+margin_left = 224.0
+margin_right = 256.0
+margin_bottom = 32.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile29"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 32, 32, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile29"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 96, 32, 32 )
+
+[node name="Sprite3" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile29"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 32, 32, 32 )
+
+[node name="Sprite4" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile29"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 64, 32, 32 )
+
+[node name="Tile30" type="Control" parent="Tiles/LeftSlopeTiles"]
+margin_left = 224.0
+margin_top = 32.0
+margin_right = 256.0
+margin_bottom = 64.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile30"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 64, 32, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile30"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 64, 32, 32 )
+
+[node name="Tile31" type="Control" parent="Tiles/LeftSlopeTiles"]
+margin_left = 224.0
+margin_top = 64.0
+margin_right = 256.0
+margin_bottom = 96.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile31"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 64, 32, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile31"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 96, 32, 32 )
+
+[node name="Tile32" type="Control" parent="Tiles/LeftSlopeTiles"]
+margin_left = 224.0
+margin_top = 96.0
+margin_right = 256.0
+margin_bottom = 128.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile32"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 32, 32, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile32"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 64, 32, 32 )
+
+[node name="Sprite3" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile32"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 0, 32, 32 )
+
+[node name="Sprite4" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile32"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 96, 32, 32 )
+
+[node name="Tile33" type="Control" parent="Tiles/LeftSlopeTiles"]
+margin_left = 256.0
+margin_right = 288.0
+margin_bottom = 32.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile33"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 0, 96, 32, 32 )
+
+[node name="Tile34" type="Control" parent="Tiles/LeftSlopeTiles"]
+margin_left = 256.0
+margin_top = 32.0
+margin_right = 288.0
+margin_bottom = 64.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile34"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 64, 128, 32, 32 )
+
+[node name="Tile35" type="Control" parent="Tiles/LeftSlopeTiles"]
+margin_left = 256.0
+margin_top = 64.0
+margin_right = 288.0
+margin_bottom = 96.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile35"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 32, 32, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile35"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 64, 32, 32 )
+
+[node name="Sprite3" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile35"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 96, 32, 32 )
+
+[node name="Tile36" type="Control" parent="Tiles/LeftSlopeTiles"]
+margin_left = 256.0
+margin_top = 96.0
+margin_right = 288.0
+margin_bottom = 128.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile36"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 0, 128, 32, 32 )
+
+[node name="Tile37" type="Control" parent="Tiles/LeftSlopeTiles"]
+margin_left = 288.0
+margin_right = 320.0
+margin_bottom = 32.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile37"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 32, 32, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile37"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 64, 32, 32 )
+
+[node name="Sprite3" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile37"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 0, 32, 32 )
+
+[node name="Tile38" type="Control" parent="Tiles/LeftSlopeTiles"]
+margin_left = 288.0
+margin_top = 32.0
+margin_right = 320.0
+margin_bottom = 64.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile38"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 32, 32, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile38"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 64, 32, 32 )
+
+[node name="Sprite3" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile38"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 32, 32, 32 )
+
+[node name="Tile39" type="Control" parent="Tiles/LeftSlopeTiles"]
+margin_left = 288.0
+margin_top = 64.0
+margin_right = 320.0
+margin_bottom = 96.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile39"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 32, 32, 32, 32 )
+
+[node name="Tile40" type="Control" parent="Tiles/LeftSlopeTiles"]
+margin_left = 288.0
+margin_top = 96.0
+margin_right = 320.0
+margin_bottom = 128.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile40"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 32, 64, 32, 32 )
+
+[node name="Tile41" type="Control" parent="Tiles/LeftSlopeTiles"]
+margin_left = 320.0
+margin_right = 352.0
+margin_bottom = 32.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile41"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 128, 32, 32 )
+
+[node name="Tile42" type="Control" parent="Tiles/LeftSlopeTiles"]
+margin_left = 320.0
+margin_top = 32.0
+margin_right = 352.0
+margin_bottom = 64.0
+
+[node name="Tile43" type="Control" parent="Tiles/LeftSlopeTiles"]
+margin_left = 320.0
+margin_top = 64.0
+margin_right = 352.0
+margin_bottom = 96.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile43"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 32, 32, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile43"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 0, 32, 32 )
+
+[node name="Sprite3" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile43"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 96, 32, 32 )
+
+[node name="Tile44" type="Control" parent="Tiles/LeftSlopeTiles"]
+margin_left = 320.0
+margin_top = 96.0
+margin_right = 352.0
+margin_bottom = 128.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile44"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 32, 32, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile44"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 96, 32, 32 )
+
+[node name="Sprite3" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile44"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 32, 32, 32 )
+
+[node name="Tile45" type="Control" parent="Tiles/LeftSlopeTiles"]
+margin_left = 352.0
+margin_right = 384.0
+margin_bottom = 32.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile45"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 128, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile45"]
+position = Vector2( 24, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 144, 128, 16, 32 )
+
+[node name="Tile46" type="Control" parent="Tiles/LeftSlopeTiles"]
+margin_left = 352.0
+margin_top = 32.0
+margin_right = 384.0
+margin_bottom = 64.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile46"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 32, 32, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile46"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 0, 32, 32 )
+
+[node name="Sprite3" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile46"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 32, 32, 32 )
+
+[node name="Tile47" type="Control" parent="Tiles/LeftSlopeTiles"]
+margin_left = 352.0
+margin_top = 64.0
+margin_right = 384.0
+margin_bottom = 96.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile47"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 64, 32, 32, 32 )
+
+[node name="Tile48" type="Control" parent="Tiles/LeftSlopeTiles"]
+margin_left = 352.0
+margin_top = 96.0
+margin_right = 384.0
+margin_bottom = 128.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/LeftSlopeTiles/Tile48"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 64, 64, 32, 32 )
+
+[node name="RightSlopeTiles" type="Control" parent="Tiles"]
+margin_top = 160.0
+margin_right = 32.0
+margin_bottom = 192.0
+
+[node name="Tile" type="Control" parent="Tiles/RightSlopeTiles"]
+margin_right = 32.0
+margin_bottom = 32.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/RightSlopeTiles/Tile"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 160, 32, 32 )
+
+[node name="Tile2" type="Control" parent="Tiles/RightSlopeTiles"]
+margin_top = 32.0
+margin_right = 32.0
+margin_bottom = 64.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/RightSlopeTiles/Tile2"]
+position = Vector2( 8, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 0, 32, 16, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/RightSlopeTiles/Tile2"]
+position = Vector2( 24, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 80, 32, 16, 32 )
+
+[node name="Tile3" type="Control" parent="Tiles/RightSlopeTiles"]
+margin_top = 64.0
+margin_right = 32.0
+margin_bottom = 96.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/RightSlopeTiles/Tile3"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 192, 32, 32 )
+
+[node name="Tile4" type="Control" parent="Tiles/RightSlopeTiles"]
+margin_top = 96.0
+margin_right = 32.0
+margin_bottom = 128.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/RightSlopeTiles/Tile4"]
+position = Vector2( 24, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 80, 160, 16, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/RightSlopeTiles/Tile4"]
+position = Vector2( 8, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 160, 16, 32 )
+
+[node name="Sprite3" type="Sprite" parent="Tiles/RightSlopeTiles/Tile4"]
+position = Vector2( 8, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 0, 160, 16, 32 )
+
+[node name="Tile5" type="Control" parent="Tiles/RightSlopeTiles"]
+margin_left = 32.0
+margin_right = 64.0
+margin_bottom = 32.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/RightSlopeTiles/Tile5"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 128, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/RightSlopeTiles/Tile5"]
+position = Vector2( 8, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 128, 16, 32 )
+
+[node name="Sprite3" type="Sprite" parent="Tiles/RightSlopeTiles/Tile5"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 96, 32, 32 )
+
+[node name="Tile6" type="Control" parent="Tiles/RightSlopeTiles"]
+margin_left = 32.0
+margin_top = 32.0
+margin_right = 64.0
+margin_bottom = 64.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/RightSlopeTiles/Tile6"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 0, 32, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/RightSlopeTiles/Tile6"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 96, 32, 32 )
+
+[node name="Sprite3" type="Sprite" parent="Tiles/RightSlopeTiles/Tile6"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 64, 32, 32 )
+
+[node name="Tile7" type="Control" parent="Tiles/RightSlopeTiles"]
+margin_left = 32.0
+margin_top = 64.0
+margin_right = 64.0
+margin_bottom = 96.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/RightSlopeTiles/Tile7"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 0, 64, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/RightSlopeTiles/Tile7"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 64, 32, 32 )
+
+[node name="Tile8" type="Control" parent="Tiles/RightSlopeTiles"]
+margin_left = 32.0
+margin_top = 96.0
+margin_right = 64.0
+margin_bottom = 128.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/RightSlopeTiles/Tile8"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 128, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/RightSlopeTiles/Tile8"]
+position = Vector2( 8, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 128, 16, 32 )
+
+[node name="Sprite3" type="Sprite" parent="Tiles/RightSlopeTiles/Tile8"]
+position = Vector2( 8, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 0, 160, 16, 32 )
+
+[node name="Sprite4" type="Sprite" parent="Tiles/RightSlopeTiles/Tile8"]
+position = Vector2( 24, 24 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 48, 176, 16, 16 )
+
+[node name="Tile9" type="Control" parent="Tiles/RightSlopeTiles"]
+margin_left = 64.0
+margin_right = 96.0
+margin_bottom = 32.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/RightSlopeTiles/Tile9"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 128, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/RightSlopeTiles/Tile9"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 96, 32, 32 )
+
+[node name="Sprite3" type="Sprite" parent="Tiles/RightSlopeTiles/Tile9"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 32, 32, 32 )
+
+[node name="Tile10" type="Control" parent="Tiles/RightSlopeTiles"]
+margin_left = 64.0
+margin_top = 32.0
+margin_right = 96.0
+margin_bottom = 64.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/RightSlopeTiles/Tile10"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 32, 32, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/RightSlopeTiles/Tile10"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 32, 32, 32 )
+
+[node name="Sprite3" type="Sprite" parent="Tiles/RightSlopeTiles/Tile10"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 0, 32, 32 )
+
+[node name="Sprite4" type="Sprite" parent="Tiles/RightSlopeTiles/Tile10"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 64, 32, 32 )
+
+[node name="Sprite5" type="Sprite" parent="Tiles/RightSlopeTiles/Tile10"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 96, 32, 32 )
+
+[node name="Tile11" type="Control" parent="Tiles/RightSlopeTiles"]
+margin_left = 64.0
+margin_top = 64.0
+margin_right = 96.0
+margin_bottom = 96.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/RightSlopeTiles/Tile11"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 32, 64, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/RightSlopeTiles/Tile11"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 64, 32, 32 )
+
+[node name="Sprite3" type="Sprite" parent="Tiles/RightSlopeTiles/Tile11"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 0, 32, 32 )
+
+[node name="Tile12" type="Control" parent="Tiles/RightSlopeTiles"]
+margin_left = 64.0
+margin_top = 96.0
+margin_right = 96.0
+margin_bottom = 128.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/RightSlopeTiles/Tile12"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 128, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/RightSlopeTiles/Tile12"]
+position = Vector2( 8, 24 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 64, 176, 16, 16 )
+
+[node name="Sprite3" type="Sprite" parent="Tiles/RightSlopeTiles/Tile12"]
+position = Vector2( 24, 24 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 48, 176, 16, 16 )
+
+[node name="Tile13" type="Control" parent="Tiles/RightSlopeTiles"]
+margin_left = 96.0
+margin_right = 128.0
+margin_bottom = 32.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/RightSlopeTiles/Tile13"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 32, 96, 32, 32 )
+
+[node name="Sprite3" type="Sprite" parent="Tiles/RightSlopeTiles/Tile13"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 32, 32, 32 )
+
+[node name="Tile14" type="Control" parent="Tiles/RightSlopeTiles"]
+margin_left = 96.0
+margin_top = 32.0
+margin_right = 128.0
+margin_bottom = 64.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/RightSlopeTiles/Tile14"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 64, 96, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/RightSlopeTiles/Tile14"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 0, 32, 32 )
+
+[node name="Sprite3" type="Sprite" parent="Tiles/RightSlopeTiles/Tile14"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 32, 32, 32 )
+
+[node name="Tile15" type="Control" parent="Tiles/RightSlopeTiles"]
+margin_left = 96.0
+margin_top = 64.0
+margin_right = 128.0
+margin_bottom = 96.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/RightSlopeTiles/Tile15"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 32, 128, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/RightSlopeTiles/Tile15"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 0, 32, 32 )
+
+[node name="Tile16" type="Control" parent="Tiles/RightSlopeTiles"]
+margin_left = 96.0
+margin_top = 96.0
+margin_right = 128.0
+margin_bottom = 128.0
+
+[node name="Sprite3" type="Sprite" parent="Tiles/RightSlopeTiles/Tile16"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 64, 160, 32, 32 )
+
+[node name="Tile17" type="Control" parent="Tiles/RightSlopeTiles"]
+margin_left = 128.0
+margin_right = 160.0
+margin_bottom = 32.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/RightSlopeTiles/Tile17"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 32, 32, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/RightSlopeTiles/Tile17"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 32, 32, 32 )
+
+[node name="Sprite3" type="Sprite" parent="Tiles/RightSlopeTiles/Tile17"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 64, 32, 32 )
+
+[node name="Sprite4" type="Sprite" parent="Tiles/RightSlopeTiles/Tile17"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 96, 32, 32 )
+
+[node name="Tile18" type="Control" parent="Tiles/RightSlopeTiles"]
+margin_left = 128.0
+margin_top = 32.0
+margin_right = 160.0
+margin_bottom = 64.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/RightSlopeTiles/Tile18"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 0, 32, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/RightSlopeTiles/Tile18"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 64, 32, 32 )
+
+[node name="Tile19" type="Control" parent="Tiles/RightSlopeTiles"]
+margin_left = 128.0
+margin_top = 64.0
+margin_right = 160.0
+margin_bottom = 96.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/RightSlopeTiles/Tile19"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 0, 32, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/RightSlopeTiles/Tile19"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 96, 32, 32 )
+
+[node name="Tile20" type="Control" parent="Tiles/RightSlopeTiles"]
+margin_left = 128.0
+margin_top = 96.0
+margin_right = 160.0
+margin_bottom = 128.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/RightSlopeTiles/Tile20"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 32, 32, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/RightSlopeTiles/Tile20"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 0, 32, 32 )
+
+[node name="Sprite3" type="Sprite" parent="Tiles/RightSlopeTiles/Tile20"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 64, 32, 32 )
+
+[node name="Sprite4" type="Sprite" parent="Tiles/RightSlopeTiles/Tile20"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 96, 32, 32 )
+
+[node name="Tile21" type="Control" parent="Tiles/RightSlopeTiles"]
+margin_left = 160.0
+margin_right = 192.0
+margin_bottom = 32.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/RightSlopeTiles/Tile21"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 128, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/RightSlopeTiles/Tile21"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 32, 32, 32 )
+
+[node name="Tile22" type="Control" parent="Tiles/RightSlopeTiles"]
+margin_left = 160.0
+margin_top = 32.0
+margin_right = 192.0
+margin_bottom = 64.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/RightSlopeTiles/Tile22"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 32, 32, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/RightSlopeTiles/Tile22"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 0, 32, 32 )
+
+[node name="Tile23" type="Control" parent="Tiles/RightSlopeTiles"]
+margin_left = 160.0
+margin_top = 64.0
+margin_right = 192.0
+margin_bottom = 96.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/RightSlopeTiles/Tile23"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 32, 32, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/RightSlopeTiles/Tile23"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 32, 32, 32 )
+
+[node name="Tile24" type="Control" parent="Tiles/RightSlopeTiles"]
+margin_left = 160.0
+margin_top = 96.0
+margin_right = 192.0
+margin_bottom = 128.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/RightSlopeTiles/Tile24"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 32, 64, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/RightSlopeTiles/Tile24"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 0, 32, 32 )
+
+[node name="Tile25" type="Control" parent="Tiles/RightSlopeTiles"]
+margin_left = 192.0
+margin_right = 224.0
+margin_bottom = 32.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/RightSlopeTiles/Tile25"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 128, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/RightSlopeTiles/Tile25"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 96, 32, 32 )
+
+[node name="Tile26" type="Control" parent="Tiles/RightSlopeTiles"]
+margin_left = 192.0
+margin_top = 32.0
+margin_right = 224.0
+margin_bottom = 64.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/RightSlopeTiles/Tile26"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 32, 32, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/RightSlopeTiles/Tile26"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 64, 32, 32 )
+
+[node name="Tile27" type="Control" parent="Tiles/RightSlopeTiles"]
+margin_left = 192.0
+margin_top = 64.0
+margin_right = 224.0
+margin_bottom = 96.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/RightSlopeTiles/Tile27"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 32, 32, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/RightSlopeTiles/Tile27"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 96, 32, 32 )
+
+[node name="Tile28" type="Control" parent="Tiles/RightSlopeTiles"]
+margin_left = 192.0
+margin_top = 96.0
+margin_right = 224.0
+margin_bottom = 128.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/RightSlopeTiles/Tile28"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 32, 64, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/RightSlopeTiles/Tile28"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 64, 32, 32 )
+
+[node name="Tile29" type="Control" parent="Tiles/RightSlopeTiles"]
+margin_left = 224.0
+margin_right = 256.0
+margin_bottom = 32.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/RightSlopeTiles/Tile29"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 32, 32, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/RightSlopeTiles/Tile29"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 32, 32, 32 )
+
+[node name="Sprite3" type="Sprite" parent="Tiles/RightSlopeTiles/Tile29"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 96, 32, 32 )
+
+[node name="Sprite4" type="Sprite" parent="Tiles/RightSlopeTiles/Tile29"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 0, 32, 32 )
+
+[node name="Tile30" type="Control" parent="Tiles/RightSlopeTiles"]
+margin_left = 224.0
+margin_top = 32.0
+margin_right = 256.0
+margin_bottom = 64.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/RightSlopeTiles/Tile30"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 64, 32, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/RightSlopeTiles/Tile30"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 0, 32, 32 )
+
+[node name="Tile31" type="Control" parent="Tiles/RightSlopeTiles"]
+margin_left = 224.0
+margin_top = 64.0
+margin_right = 256.0
+margin_bottom = 96.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/RightSlopeTiles/Tile31"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 64, 32, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/RightSlopeTiles/Tile31"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 32, 32, 32 )
+
+[node name="Tile32" type="Control" parent="Tiles/RightSlopeTiles"]
+margin_left = 224.0
+margin_top = 96.0
+margin_right = 256.0
+margin_bottom = 128.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/RightSlopeTiles/Tile32"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 32, 32, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/RightSlopeTiles/Tile32"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 0, 32, 32 )
+
+[node name="Sprite3" type="Sprite" parent="Tiles/RightSlopeTiles/Tile32"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 64, 32, 32 )
+
+[node name="Sprite4" type="Sprite" parent="Tiles/RightSlopeTiles/Tile32"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 32, 32, 32 )
+
+[node name="Tile33" type="Control" parent="Tiles/RightSlopeTiles"]
+margin_left = 256.0
+margin_right = 288.0
+margin_bottom = 32.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/RightSlopeTiles/Tile33"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 128, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/RightSlopeTiles/Tile33"]
+position = Vector2( 8, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 128, 16, 32 )
+
+[node name="Tile34" type="Control" parent="Tiles/RightSlopeTiles"]
+margin_left = 256.0
+margin_top = 32.0
+margin_right = 288.0
+margin_bottom = 64.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/RightSlopeTiles/Tile34"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 0, 32, 32, 32 )
+
+[node name="Tile35" type="Control" parent="Tiles/RightSlopeTiles"]
+margin_left = 256.0
+margin_top = 64.0
+margin_right = 288.0
+margin_bottom = 96.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/RightSlopeTiles/Tile35"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 32, 32, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/RightSlopeTiles/Tile35"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 0, 32, 32 )
+
+[node name="Sprite3" type="Sprite" parent="Tiles/RightSlopeTiles/Tile35"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 32, 32, 32 )
+
+[node name="Tile36" type="Control" parent="Tiles/RightSlopeTiles"]
+margin_left = 256.0
+margin_top = 96.0
+margin_right = 288.0
+margin_bottom = 128.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/RightSlopeTiles/Tile36"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 0, 64, 32, 32 )
+
+[node name="Tile37" type="Control" parent="Tiles/RightSlopeTiles"]
+margin_left = 288.0
+margin_right = 320.0
+margin_bottom = 32.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/RightSlopeTiles/Tile37"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 32, 32, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/RightSlopeTiles/Tile37"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 0, 32, 32 )
+
+[node name="Sprite3" type="Sprite" parent="Tiles/RightSlopeTiles/Tile37"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 64, 32, 32 )
+
+[node name="Tile38" type="Control" parent="Tiles/RightSlopeTiles"]
+margin_left = 288.0
+margin_top = 32.0
+margin_right = 320.0
+margin_bottom = 64.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/RightSlopeTiles/Tile38"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 32, 32, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/RightSlopeTiles/Tile38"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 0, 32, 32 )
+
+[node name="Sprite3" type="Sprite" parent="Tiles/RightSlopeTiles/Tile38"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 96, 32, 32 )
+
+[node name="Tile39" type="Control" parent="Tiles/RightSlopeTiles"]
+margin_left = 288.0
+margin_top = 64.0
+margin_right = 320.0
+margin_bottom = 96.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/RightSlopeTiles/Tile39"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 32, 32, 32, 32 )
+
+[node name="Tile40" type="Control" parent="Tiles/RightSlopeTiles"]
+margin_left = 288.0
+margin_top = 96.0
+margin_right = 320.0
+margin_bottom = 128.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/RightSlopeTiles/Tile40"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 32, 64, 32, 32 )
+
+[node name="Tile41" type="Control" parent="Tiles/RightSlopeTiles"]
+margin_left = 320.0
+margin_right = 352.0
+margin_bottom = 32.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/RightSlopeTiles/Tile41"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 128, 32, 32 )
+
+[node name="Tile42" type="Control" parent="Tiles/RightSlopeTiles"]
+margin_left = 320.0
+margin_top = 32.0
+margin_right = 352.0
+margin_bottom = 64.0
+
+[node name="Tile43" type="Control" parent="Tiles/RightSlopeTiles"]
+margin_left = 320.0
+margin_top = 64.0
+margin_right = 352.0
+margin_bottom = 96.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/RightSlopeTiles/Tile43"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 32, 32, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/RightSlopeTiles/Tile43"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 64, 32, 32 )
+
+[node name="Sprite3" type="Sprite" parent="Tiles/RightSlopeTiles/Tile43"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 32, 32, 32 )
+
+[node name="Tile44" type="Control" parent="Tiles/RightSlopeTiles"]
+margin_left = 320.0
+margin_top = 96.0
+margin_right = 352.0
+margin_bottom = 128.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/RightSlopeTiles/Tile44"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 32, 32, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/RightSlopeTiles/Tile44"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 32, 32, 32 )
+
+[node name="Sprite3" type="Sprite" parent="Tiles/RightSlopeTiles/Tile44"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 96, 32, 32 )
+
+[node name="Tile45" type="Control" parent="Tiles/RightSlopeTiles"]
+margin_left = 352.0
+margin_right = 384.0
+margin_bottom = 32.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/RightSlopeTiles/Tile45"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 32, 96, 32, 32 )
+
+[node name="Tile46" type="Control" parent="Tiles/RightSlopeTiles"]
+margin_left = 352.0
+margin_top = 32.0
+margin_right = 384.0
+margin_bottom = 64.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/RightSlopeTiles/Tile46"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 32, 32, 32, 32 )
+
+[node name="Sprite2" type="Sprite" parent="Tiles/RightSlopeTiles/Tile46"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 64, 32, 32 )
+
+[node name="Sprite3" type="Sprite" parent="Tiles/RightSlopeTiles/Tile46"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 96, 32, 32 )
+
+[node name="Tile47" type="Control" parent="Tiles/RightSlopeTiles"]
+margin_left = 352.0
+margin_top = 64.0
+margin_right = 384.0
+margin_bottom = 96.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/RightSlopeTiles/Tile47"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 64, 96, 32, 32 )
+
+[node name="Tile48" type="Control" parent="Tiles/RightSlopeTiles"]
+margin_left = 352.0
+margin_top = 96.0
+margin_right = 384.0
+margin_bottom = 128.0
+
+[node name="Sprite" type="Sprite" parent="Tiles/RightSlopeTiles/Tile48"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 32, 128, 32, 32 )

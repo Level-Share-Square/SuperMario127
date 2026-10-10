@@ -9,7 +9,7 @@
 [ext_resource path="res://scenes/menu/art_assets/scaled_border.png" type="Texture" id=7]
 [ext_resource path="res://scenes/menu/box_shadow.png" type="Texture" id=8]
 [ext_resource path="res://scenes/menu/background_scroll/background.tscn" type="PackedScene" id=9]
-[ext_resource path="res://level/Developer Levels/thumbnails/0ca00ba8-ec19-4945-8da8-eaad08465668.png" type="Texture" id=10]
+[ext_resource path="res://level/Developer Levels/thumbnails/700ba7ac-f18b-4e00-b893-d8627dfc1a3a.png" type="Texture" id=10]
 
 [sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0.0502793, 1 )
@@ -55,7 +55,7 @@ void fragment() {
 	COLOR = (texture(TEXTURE, UV) + n * u_amount);
 }"
 
-[sub_resource type="ShaderMaterial" id=226]
+[sub_resource type="ShaderMaterial" id=231]
 shader = SubResource( 26 )
 shader_param/u_amount = 1.75
 
@@ -214,7 +214,7 @@ margin_bottom = -360.0
 rect_scale = Vector2( 3, 3 )
 
 [node name="Overlay" parent="Walkthrough/Viewport/Background" index="3"]
-material = SubResource( 226 )
+material = SubResource( 231 )
 
 [node name="WhiteGradient" type="TextureRect" parent="Walkthrough/Viewport"]
 modulate = Color( 0.752941, 0.752941, 1, 0.486275 )
@@ -317,7 +317,7 @@ theme = ExtResource( 3 )
 custom_colors/font_color_shadow = Color( 0, 0.0431373, 0.313726, 1 )
 custom_constants/shadow_offset_y = 8
 custom_fonts/font = SubResource( 7 )
-text = "Forgo Kingdom"
+text = "Four-Faced Fortress"
 align = 1
 valign = 1
 
@@ -339,7 +339,7 @@ custom_colors/font_outline_modulate = Color( 1, 1, 1, 1 )
 custom_colors/font_color_shadow = Color( 1, 1, 1, 1 )
 custom_constants/shadow_offset_y = 8
 custom_fonts/font = SubResource( 7 )
-text = "Forgo Kingdom"
+text = "Four-Faced Fortress"
 align = 1
 valign = 1
 
