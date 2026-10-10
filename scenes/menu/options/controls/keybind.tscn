@@ -60,7 +60,6 @@ rect_min_size = Vector2( 24, 0 )
 [node name="Sprite" type="AnimatedSprite" parent="HBoxContainer/Action"]
 position = Vector2( 12, -2 )
 scale = Vector2( 0.75, 0.75 )
-animation = "movingIn"
 playing = true
 
 [node name="Button" type="Button" parent="."]

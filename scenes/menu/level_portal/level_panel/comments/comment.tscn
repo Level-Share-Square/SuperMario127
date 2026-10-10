@@ -50,16 +50,79 @@ expand = true
 [node name="CombinedContent" parent="." instance=ExtResource( 1 )]
 unique_name_in_owner = true
 
+[node name="AuthorName" parent="CombinedContent/Content/HBoxContainer" index="1"]
+margin_top = 3.0
+
 [node name="Padding" parent="CombinedContent/Content/HBoxContainer" index="2"]
-margin_right = 313.0
+margin_right = 301.0
 
 [node name="Reply" type="Button" parent="CombinedContent/Content/HBoxContainer" index="3"]
-margin_left = 317.0
-margin_right = 359.0
+margin_left = 305.0
+margin_right = 351.0
 margin_bottom = 24.0
 theme_type_variation = "TransparentButton"
 text = " Reply "
 script = ExtResource( 3 )
+
+[node name="Edit" parent="CombinedContent/Content/HBoxContainer" index="4"]
+margin_left = 355.0
+
+[node name="Edit" parent="CombinedContent/Content/HBoxContainer/Edit" index="0"]
+margin_right = 38.0
+
+[node name="Delete" parent="CombinedContent/Content/HBoxContainer/Edit" index="1"]
+margin_left = 42.0
+margin_right = 97.0
+
+[node name="PanelContainer" parent="CombinedContent/Content" index="3"]
+margin_bottom = 62.0
+
+[node name="MarginContainer" parent="CombinedContent/Content/PanelContainer" index="0"]
+margin_bottom = 30.0
+
+[node name="Content" parent="CombinedContent/Content/PanelContainer/MarginContainer" index="0"]
+margin_bottom = 22.0
+
+[node name="HBoxContainer2" parent="CombinedContent/Content" index="4"]
+margin_top = 66.0
+margin_bottom = 87.0
+
+[node name="Votes" parent="CombinedContent/Content/HBoxContainer2" index="0"]
+margin_right = 118.0
+margin_bottom = 21.0
+
+[node name="LikeButton" parent="CombinedContent/Content/HBoxContainer2/Votes" index="0"]
+margin_right = 38.0
+margin_bottom = 21.0
+
+[node name="Likes" parent="CombinedContent/Content/HBoxContainer2/Votes" index="1"]
+margin_left = 40.0
+margin_right = 49.0
+margin_bottom = 19.0
+
+[node name="Padding" parent="CombinedContent/Content/HBoxContainer2/Votes" index="2"]
+margin_left = 51.0
+margin_right = 53.0
+margin_bottom = 21.0
+
+[node name="DislikeButton" parent="CombinedContent/Content/HBoxContainer2/Votes" index="3"]
+margin_left = 55.0
+margin_right = 107.0
+margin_bottom = 21.0
+
+[node name="Dislikes" parent="CombinedContent/Content/HBoxContainer2/Votes" index="4"]
+margin_left = 109.0
+margin_right = 118.0
+margin_bottom = 19.0
+
+[node name="Padding" parent="CombinedContent/Content/HBoxContainer2" index="1"]
+margin_left = 120.0
+margin_right = 304.0
+margin_bottom = 21.0
+
+[node name="Timestamp" parent="CombinedContent/Content/HBoxContainer2" index="2"]
+margin_left = 306.0
+margin_bottom = 19.0
 
 [node name="Replies" type="HBoxContainer" parent="CombinedContent/Content" index="5"]
 unique_name_in_owner = true
@@ -127,14 +190,9 @@ margin_right = 428.0
 visible = true
 
 [connection signal="deletion_successful" from="CombinedContent/PostContent" to="." method="queue_free"]
-[connection signal="edit_successful" from="CombinedContent/PostContent" to="CombinedContent/Content/PanelContainer/MarginContainer/Content" method="set_bbcode"]
+[connection signal="account_loaded" from="CombinedContent/Content" to="CombinedContent/Content/HBoxContainer/Reply" method="set_visible"]
 [connection signal="pressed" from="CombinedContent/Content/HBoxContainer/Reply" to="CombinedContent/Content/Replies" method="check_visibility"]
 [connection signal="pressed" from="CombinedContent/Content/HBoxContainer/Reply" to="CombinedContent/Content/Replies/PanelContainer/ReplyBox/PostReply" method="show"]
-[connection signal="pressed" from="CombinedContent/Content/HBoxContainer/Edit/Edit" to="CombinedContent/PostContent" method="show"]
-[connection signal="pressed" from="CombinedContent/Content/HBoxContainer/Edit/Edit" to="CombinedContent/Content" method="hide"]
-[connection signal="pressed" from="CombinedContent/Content/HBoxContainer/Edit/Delete/PressCountdown" to="CombinedContent/PostContent" method="show"]
-[connection signal="pressed" from="CombinedContent/Content/HBoxContainer/Edit/Delete/PressCountdown" to="CombinedContent/PostContent" method="delete_comment"]
-[connection signal="pressed" from="CombinedContent/Content/HBoxContainer/Edit/Delete/PressCountdown" to="CombinedContent/Content" method="hide"]
 [connection signal="child_entered_tree" from="CombinedContent/Content/Replies/PanelContainer/ReplyBox" to="CombinedContent/Content/Replies" method="check_visibility"]
 [connection signal="child_exiting_tree" from="CombinedContent/Content/Replies/PanelContainer/ReplyBox" to="CombinedContent/Content/Replies" method="check_visibility"]
 [connection signal="post_completed" from="CombinedContent/Content/Replies/PanelContainer/ReplyBox/PostReply" to="CombinedContent/Content/Replies" method="check_visibility"]

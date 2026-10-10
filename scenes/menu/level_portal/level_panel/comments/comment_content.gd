@@ -33,6 +33,8 @@ var parent_id: String
 
 export var is_reply: bool
 
+signal account_loaded(is_logged_in)
+
 func hide_votes():
 	votes.visible = false
 
@@ -49,6 +51,8 @@ func load_account(_account_info: AccountInfo, _http_account: HTTPRequest, _post_
 		else:
 			like_button.disabled = false
 			dislike_button.disabled = false
+	
+	emit_signal("account_loaded", account_info.logged_in)
 	
 	post_content.http_images = http_images
 	post_content.http_account = http_account
