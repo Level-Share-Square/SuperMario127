@@ -504,8 +504,13 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/actors/events/event.gd"
 }, {
+"base": "EventTrigger",
+"class": "EventTouchTrigger",
+"language": "GDScript",
+"path": "res://scenes/actors/objects/event_touch_trigger/event_touch_trigger.gd"
+}, {
 "base": "GameObject",
-"class": "EventObject",
+"class": "EventTrigger",
 "language": "GDScript",
 "path": "res://scenes/actors/objects/event_object/event_object.gd"
 }, {
@@ -1519,7 +1524,8 @@ _global_script_class_icons={
 "EraseObjectAction": "",
 "EraseObjectBulkAction": "",
 "Event": "",
-"EventObject": "",
+"EventTouchTrigger": "",
+"EventTrigger": "",
 "ExitPaintingState": "",
 "FallState": "",
 "FolderCard": "",

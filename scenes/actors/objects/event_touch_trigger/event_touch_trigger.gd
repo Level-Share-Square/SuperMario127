@@ -1,0 +1,58 @@
+extends EventTrigger
+class_name EventTouchTrigger
+
+onready var area = $Area2D
+onready var area_shape = $Area2D/CollisionShape2D
+onready var sprite = $Sprite
+var parts := 1
+
+
+func _register_properties():
+	register_property(6, "parts", parts)
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	parts_input_handler(event,self)
+
+func update_property(_key, _value):
+	update_parts()
+	
+func _object_ready():
+	._object_ready()
+	
+	var zoom_trigger := CameraZoomEvent.new()
+	events = [zoom_trigger]
+	sprite.visible = not is_on_ground_layer()
+
+
+func update_parts():
+	if parts <= 0:
+		parts = 1
+		set_property("parts", parts, true)
+	
+	sprite.rect_size.y = parts * 32
+	sprite.rect_position.y = (-16 * parts)
+	area_shape.shape.extents.y = 16 * parts
+	editor_rect = Rect2(sprite.rect_position, sprite.rect_size)
+
+
+func _ready():
+	if mode != 1:
+		var _connect = area.connect("body_entered", self, "_body_entered")
+		sprite.visible = false
+	
+	if parts < 1:
+		parts = 1
+	
+	update_parts()
+
+
+func _body_entered(body):
+	if is_enabled_and_on_ground() and body.name.begins_with("Character"):
+		run_event()
+
+
+func _process(delta):
+	if parts <= 0:
+		parts = 1
+		set_property("parts", parts, true)
