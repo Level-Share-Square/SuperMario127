@@ -1,5 +1,6 @@
 extends Node
 
+const WEBP_HEADER := PoolByteArray([0x52, 0x49, 0x46, 0x46])
 const PNG_HEADER := PoolByteArray([0x89, 0x50, 0x4e, 0x47])
 const JPEG_HEADER := PoolByteArray([0xff, 0xd8, 0xff])
 const OGG_HEADER := PoolByteArray([0x4f, 0x67, 0x67, 0x53])
@@ -7,7 +8,7 @@ const OGG_HEADER := PoolByteArray([0x4f, 0x67, 0x67, 0x53])
 const WAV_HEADER_FORMER := PoolByteArray([0x52, 0x49, 0x46, 0x46])
 const WAV_HEADER_LATTER := PoolByteArray([0x57, 0x41, 0x56, 0x45])
 
-enum ValidImageTypes {PNG, JPEG}
+enum ValidImageTypes {PNG, JPEG, WEBP}
 enum ValidSoundTypes {OGG, WAD, MP3}
 
 signal file_loaded(err)
@@ -110,6 +111,8 @@ func load_image(url: String, working_folder: String, id: String = "") -> ImageTe
 				err = image.load_png_from_buffer(bytes)
 			ValidImageTypes.JPEG:
 				err = image.load_jpg_from_buffer(bytes)
+			ValidImageTypes.WEBP:
+				err = image.load_webp_from_buffer(bytes)
 			_:
 				printerr("Invalid bytes at path ", image_path, ". Error code: ", err)
 				return null
@@ -179,8 +182,11 @@ func get_image_ext_from_bytes(bytes: PoolByteArray) -> int:
 	
 	if header == PNG_HEADER:
 		return ValidImageTypes.PNG
-		
-	if bytes.subarray(0, 2) == JPEG_HEADER:
+	
+	elif header == WEBP_HEADER:
+		return ValidImageTypes.WEBP
+	
+	elif bytes.subarray(0, 2) == JPEG_HEADER:
 		return ValidImageTypes.JPEG
 		
 	return -1
