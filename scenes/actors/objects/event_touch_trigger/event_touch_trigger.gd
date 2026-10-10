@@ -8,8 +8,7 @@ var parts := 1
 
 
 func _register_properties():
-	register_property(6, "parts", parts)
-
+	._register_properties()
 
 func _unhandled_input(event: InputEvent) -> void:
 	parts_input_handler(event,self)
@@ -19,9 +18,6 @@ func update_property(_key, _value):
 	
 func _object_ready():
 	._object_ready()
-	
-	var zoom_trigger := CameraZoomEvent.new()
-	events = [zoom_trigger]
 	sprite.visible = not is_on_ground_layer()
 
 
@@ -45,6 +41,9 @@ func _ready():
 		parts = 1
 	
 	update_parts()
+	
+	var zoom_trigger := CameraZoomEvent.new()
+	events = [zoom_trigger]
 
 
 func _body_entered(body):

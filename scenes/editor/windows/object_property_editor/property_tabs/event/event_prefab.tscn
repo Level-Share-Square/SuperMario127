@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://scenes/menu/button_scripts/button_sound.gd" type="Script" id=1]
+[ext_resource path="res://scenes/editor/editor_theme.tres" type="Theme" id=2]
+[ext_resource path="res://scenes/editor/windows/object_property_editor/property_tabs/event/event_prefab.gd" type="Script" id=4]
+[ext_resource path="res://assets/sounds/hover.wav" type="AudioStream" id=5]
+[ext_resource path="res://assets/sounds/click2.wav" type="AudioStream" id=6]
+
+[node name="EventPrefab" type="VBoxContainer"]
+margin_left = 6.0
+margin_top = 6.0
+margin_right = 190.0
+margin_bottom = 54.0
+theme = ExtResource( 2 )
+custom_constants/separation = 10
+script = ExtResource( 4 )
+
+[node name="EventContainer" type="VBoxContainer" parent="."]
+unique_name_in_owner = true
+margin_right = 184.0
+custom_constants/separation = 10
+
+[node name="AddEvent" type="Button" parent="."]
+margin_top = 10.0
+margin_right = 184.0
+margin_bottom = 29.0
+text = "Add Event"
+script = ExtResource( 1 )
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource( 5 )
+volume_db = -10.0
+bus = "Sounds"
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource( 6 )
+volume_db = -10.0
+bus = "Sounds"

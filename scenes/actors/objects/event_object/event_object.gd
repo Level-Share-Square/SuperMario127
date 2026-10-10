@@ -5,6 +5,7 @@ var events: Array = []
 
 func _register_properties():
 	register_property(4, "events", events, true)
+	property_tabs.append("event")
 
 func run_event():
 	if events.size() == 0:
