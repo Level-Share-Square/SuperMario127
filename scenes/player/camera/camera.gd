@@ -59,6 +59,9 @@ var y_down_timer: float = 0.0
 var is_descent_unlocked: bool = false
 var had_jumped: bool = false
 
+signal finished_cutscene
+signal finished_all_cutscenes
+
 func _ready():
 	in_cutscene = false
 	old_zoom = zoom
@@ -403,6 +406,7 @@ func play_cutscene(cutscene : CameraCutscene, reverse: bool = false):
 		play_cutscene(cutscene, true)
 		return
 	
+	emit_signal("finished_cutscene")
 	update_cutscene_queue()
 	
 func pan_to(final_position: Vector2, cutscene: CameraCutscene) -> int:
@@ -495,6 +499,8 @@ func update_cutscene_queue():
 			character_node.toggle_movement(true)
 		velocity = Vector2.ZERO
 		auto_move = true
+		
+		emit_signal("finished_all_cutscenes")
 
 func get_character_screen_position() -> Vector2:
 	if not is_instance_valid(character_node): return global_position

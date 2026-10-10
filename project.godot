@@ -180,6 +180,11 @@ _global_script_classes=[ {
 "path": "res://classes/camera_cutscene.gd"
 }, {
 "base": "Event",
+"class": "CameraCutsceneEvent",
+"language": "GDScript",
+"path": "res://scenes/actors/events/camera_cutscene_event.gd"
+}, {
+"base": "Event",
 "class": "CameraShakeEvent",
 "language": "GDScript",
 "path": "res://scenes/actors/events/camera_shake_event.gd"
@@ -188,6 +193,11 @@ _global_script_classes=[ {
 "class": "CameraStopper",
 "language": "GDScript",
 "path": "res://classes/camera_stopper.gd"
+}, {
+"base": "Event",
+"class": "CameraZoomEvent",
+"language": "GDScript",
+"path": "res://scenes/actors/events/camera_zoom_event.gd"
 }, {
 "base": "BaseCard",
 "class": "CampaignCard",
@@ -1444,8 +1454,10 @@ _global_script_class_icons={
 "CamFollowState": "",
 "CamState": "",
 "CameraCutscene": "",
+"CameraCutsceneEvent": "",
 "CameraShakeEvent": "",
 "CameraStopper": "",
+"CameraZoomEvent": "",
 "CampaignCard": "",
 "CatmullRomSpline": "",
 "ChangeAreaAction": "",

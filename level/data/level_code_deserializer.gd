@@ -552,7 +552,7 @@ static func deserialize_data_code(data_code: String):
 			properties_dict.erase("event")
 			
 			for property in properties_dict:
-				event[property] = properties_dict[property]
+				event.properties[property] = properties_dict[property]
 				
 			return event
 	

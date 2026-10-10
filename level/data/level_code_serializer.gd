@@ -448,9 +448,7 @@ static func serialize_data(value) -> String:
 				value = value as Event
 				data_code = TYPE_CODE_EVENT
 				
-				var property_dict: Dictionary = inst2dict(value)
-				property_dict.erase("@path")
-				property_dict.erase("@subpath")
+				var property_dict: Dictionary = value.properties
 				
 				property_dict["event"] = class_util.get_custom_class_name(value)
 				

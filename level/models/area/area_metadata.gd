@@ -41,6 +41,8 @@ export var area_code: String
 export var shine_shard_count: int = 0
 export var max_purples_count: int = 0
 
+var events: Array
+
 
 func _init(
 	set_area_code = "", 
@@ -61,7 +63,8 @@ func _init(
 	set_custom_music_author: String = DEFAULT_CUSTOM_MUSIC_AUTHOR,
 	set_show_song: bool = true,
 	set_minimum_timer: float = 15,
-	set_tile_with_edges: bool = false
+	set_tile_with_edges: bool = false,
+	set_events: Array = []
 ):
 	area_code = set_area_code
 	bounds = set_bounds
@@ -82,3 +85,4 @@ func _init(
 	show_song = set_show_song
 	minimum_timer = set_minimum_timer
 	tile_with_edges = set_tile_with_edges
+	events = set_events
