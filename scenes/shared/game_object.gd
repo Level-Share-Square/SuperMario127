@@ -75,6 +75,7 @@ signal property_changed(key, value)
 signal object_clicked(object)
 
 export var internal_id: String
+export var event_start_text: String = "When this object is activated, it will..."
 const PLACEABLE_ITEM_PATH: String = "res://scenes/editor/items/placeable_items/placeable_objects/%s.tres"
 var placeable_item: PlaceableItem
 

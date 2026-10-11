@@ -504,6 +504,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/actors/events/event.gd"
 }, {
+"base": "VBoxContainer",
+"class": "EventList",
+"language": "GDScript",
+"path": "res://scenes/editor/windows/object_property_editor/property_tabs/event/event_list.gd"
+}, {
 "base": "HBoxContainer",
 "class": "EventPanel",
 "language": "GDScript",
@@ -1529,6 +1534,7 @@ _global_script_class_icons={
 "EraseObjectAction": "",
 "EraseObjectBulkAction": "",
 "Event": "",
+"EventList": "",
 "EventPanel": "",
 "EventTouchTrigger": "",
 "EventTrigger": "",

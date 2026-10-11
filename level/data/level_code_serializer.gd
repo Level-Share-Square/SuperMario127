@@ -20,6 +20,8 @@ const TYPE_CODE_CURVE_2D = "U" # Curve2D
 const TYPE_CODE_TILE_DATA = "T" # TileData (wrapper for a PoolByteArray)
 const TYPE_CODE_DIALOGUE_DATA = "D" # DialogueData (wrapper for PoolStringArray)
 const TYPE_CODE_EVENT = "E" # Event
+const EVENT_IDS: PoolStringArray = preload("res://scenes/actors/events/ids.tres").ids
+
 
 static func serialize_level_data(level_data) -> String:
 	var code = "["
@@ -450,7 +452,7 @@ static func serialize_data(value) -> String:
 				
 				var property_dict: Dictionary = value.properties
 				
-				property_dict["event"] = class_util.get_custom_class_name(value)
+				property_dict["event"] = EVENT_IDS.find(value.get_internal_name())
 				
 				data_code += serialize_data_array(property_dict.keys())
 				data_code += serialize_data_array(property_dict.values())

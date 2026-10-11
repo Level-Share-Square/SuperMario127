@@ -8,6 +8,19 @@ var properties: Dictionary = {
 	"do_reverse": true,
 }
 
+func get_internal_name() -> String:
+	return "camera_cutscene_event"
+
+func get_display_name() -> String:
+	return "Move the camera"
+
+func get_display_suffix() -> String:
+	var suffix: String = " to col_open%scol_close for col_open%scol_close seconds"
+	suffix = suffix.replace("col_open", COLOR_OPENING)
+	suffix = suffix.replace("col_close", COLOR_CLOSING)
+	suffix = suffix % [properties["to"], properties["time"]]
+	return suffix
+
 func do_event(handler: Node) -> void:
 	var cutscene := CameraCutscene.new()
 	

@@ -1,38 +1,99 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scenes/menu/button_scripts/button_sound.gd" type="Script" id=1]
 [ext_resource path="res://scenes/editor/editor_theme.tres" type="Theme" id=2]
 [ext_resource path="res://scenes/editor/windows/object_property_editor/property_tabs/event/event_panel.gd" type="Script" id=3]
 [ext_resource path="res://assets/sounds/hover.wav" type="AudioStream" id=4]
 [ext_resource path="res://assets/sounds/click2.wav" type="AudioStream" id=5]
+[ext_resource path="res://assets/icons/settings.svg" type="Texture" id=6]
+[ext_resource path="res://scenes/actors/objects/zoom_trigger/zoom_trigger.png" type="Texture" id=7]
+[ext_resource path="res://assets/icons/Confirm.svg" type="Texture" id=8]
+
+[sub_resource type="StyleBoxEmpty" id=1]
 
 [node name="EventPanel" type="HBoxContainer"]
-margin_right = 184.0
+margin_right = 153.0
 margin_bottom = 19.0
+size_flags_horizontal = 3
 theme = ExtResource( 2 )
 script = ExtResource( 3 )
 
-[node name="EventName" type="Label" parent="."]
+[node name="Icon" type="TextureRect" parent="."]
 unique_name_in_owner = true
-margin_top = 1.0
-margin_right = 71.0
-margin_bottom = 18.0
-text = "Wait Event"
-
-[node name="Control" type="Control" parent="."]
-margin_left = 75.0
-margin_right = 145.0
+margin_right = 19.0
 margin_bottom = 19.0
-rect_min_size = Vector2( 70, 0 )
+rect_min_size = Vector2( 19, 0 )
+texture = ExtResource( 7 )
+expand = true
+
+[node name="Text" type="PanelContainer" parent="."]
+margin_left = 23.0
+margin_right = 130.0
+margin_bottom = 19.0
+size_flags_horizontal = 3
+custom_styles/panel = SubResource( 1 )
+
+[node name="Sizing" type="Label" parent="Text"]
+unique_name_in_owner = true
+modulate = Color( 1, 1, 1, 0 )
+margin_top = 1.0
+margin_right = 107.0
+margin_bottom = 18.0
+size_flags_horizontal = 3
+text = "Wait (5 seconds)"
+align = 1
+
+[node name="EventName" type="RichTextLabel" parent="Text"]
+unique_name_in_owner = true
+margin_right = 107.0
+margin_bottom = 19.0
+size_flags_horizontal = 3
+bbcode_enabled = true
+bbcode_text = "Wait (5 seconds)"
+text = "Wait (5 seconds)"
+scroll_active = false
+
+[node name="Padding" type="Control" parent="."]
+visible = false
+margin_left = 130.0
+margin_right = 130.0
+margin_bottom = 19.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
+[node name="UseEvent" type="Button" parent="."]
+unique_name_in_owner = true
+visible = false
+margin_left = 130.0
+margin_right = 149.0
+margin_bottom = 19.0
+rect_min_size = Vector2( 19, 0 )
+custom_colors/icon_color_pressed = Color( 0, 0, 0, 1 )
+custom_colors/icon_color_disabled = Color( 0, 0, 0, 1 )
+custom_colors/icon_color_focus = Color( 0, 0, 0, 1 )
+custom_colors/icon_color_hover_pressed = Color( 0, 0, 0, 1 )
+custom_colors/icon_color_normal = Color( 0, 0, 0, 1 )
+custom_colors/icon_color_hover = Color( 0, 0, 0, 1 )
+icon = ExtResource( 8 )
+icon_align = 1
+expand_icon = true
+script = ExtResource( 1 )
+
 [node name="EditProperties" type="Button" parent="."]
 unique_name_in_owner = true
-margin_left = 149.0
-margin_right = 184.0
+margin_left = 134.0
+margin_right = 153.0
 margin_bottom = 19.0
-text = "Edit"
+rect_min_size = Vector2( 19, 0 )
+custom_colors/icon_color_pressed = Color( 0, 0, 0, 1 )
+custom_colors/icon_color_disabled = Color( 0, 0, 0, 1 )
+custom_colors/icon_color_focus = Color( 0, 0, 0, 1 )
+custom_colors/icon_color_hover_pressed = Color( 0, 0, 0, 1 )
+custom_colors/icon_color_normal = Color( 0, 0, 0, 1 )
+custom_colors/icon_color_hover = Color( 0, 0, 0, 1 )
+icon = ExtResource( 6 )
+icon_align = 1
+expand_icon = true
 script = ExtResource( 1 )
 
 [node name="HoverSound" type="AudioStreamPlayer" parent="."]
@@ -47,4 +108,5 @@ stream = ExtResource( 5 )
 volume_db = -10.0
 bus = "Sounds"
 
+[connection signal="button_down" from="UseEvent" to="." method="edit_properties"]
 [connection signal="button_down" from="EditProperties" to="." method="edit_properties"]

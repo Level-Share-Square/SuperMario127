@@ -20,6 +20,8 @@ const TYPE_CODE_CURVE_2D = "U" # Curve2D
 const TYPE_CODE_TILE_DATA = "T" # TileData (wrapper for a PoolByteArray)
 const TYPE_CODE_DIALOGUE_DATA = "D" # DialogueData (wrapper for PoolStringArray)
 const TYPE_CODE_EVENT = "E" # Event
+const EVENT_IDS: PoolStringArray = preload("res://scenes/actors/events/ids.tres").ids
+const EVENT_PATH: String = "res://scenes/actors/events/%s.gd"
 
 
 static func deserialize_level_code(code: String):
@@ -547,8 +549,8 @@ static func deserialize_data_code(data_code: String):
 			
 			for i in range(size):
 				properties_dict[deserialize_data_code(keys[i])] = deserialize_data_code(values[i])
-				
-			var event = class_util.create_instance_from_name(properties_dict["event"])
+			
+			var event: Event = load(EVENT_PATH % properties_dict["event"]).new()
 			properties_dict.erase("event")
 			
 			for property in properties_dict:

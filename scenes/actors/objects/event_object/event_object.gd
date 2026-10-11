@@ -4,7 +4,7 @@ class_name EventTrigger
 var events: Array = []
 
 func _register_properties():
-	register_property(4, "events", events, true)
+	register_property(4, "events", events, false)
 	property_tabs.append("event")
 
 func run_event():
