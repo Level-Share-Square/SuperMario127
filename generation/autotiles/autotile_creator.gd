@@ -22,7 +22,6 @@ func get_palette(palette_id: int):
 	
 	for x in range(in_img.get_width()):
 		palette_dict[in_img.get_pixel(x, 0)] = out_img.get_pixel(x, 0)
-		print("Color #%s added to dictionary" % in_img.get_pixel(x, 0))
 	
 	return paletted_image()
 
