@@ -29,6 +29,7 @@ unique_name_in_owner = true
 size = Vector2( 1248, 288 )
 transparent_bg = true
 handle_input_locally = false
+hdr = false
 usage = 0
 debug_draw = 1
 render_target_update_mode = 3
@@ -3255,7 +3256,7 @@ margin_bottom = 32.0
 position = Vector2( 16, 16 )
 texture = ExtResource( 1 )
 region_enabled = true
-region_rect = Rect2( 32, 288, 32, 32 )
+region_rect = Rect2( 0, 224, 32, 32 )
 
 [node name="Sprite2" type="Sprite" parent="ViewportContainer/Viewport/Tiles/HalfTiles/Tile21"]
 position = Vector2( 16, 16 )
