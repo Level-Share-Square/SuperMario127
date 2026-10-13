@@ -52,7 +52,7 @@ tracks/2/keys = {
 "values": [  ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("Particles2D2:emitting")
+tracks/3/path = NodePath("WaterParticles:emitting")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -100,7 +100,7 @@ tracks/6/keys = {
 "values": [ Vector2( 0, 0 ) ]
 }
 tracks/7/type = "value"
-tracks/7/path = NodePath("Particles2D:emitting")
+tracks/7/path = NodePath("ShineParticles:emitting")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/imported = false
@@ -198,7 +198,7 @@ tracks/2/keys = {
 "values": [  ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("Particles2D2:emitting")
+tracks/3/path = NodePath("WaterParticles:emitting")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -234,7 +234,7 @@ tracks/5/keys = {
 "values": [ 1.0, 0.0 ]
 }
 tracks/6/type = "value"
-tracks/6/path = NodePath("Particles2D:emitting")
+tracks/6/path = NodePath("ShineParticles:emitting")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/imported = false
@@ -326,7 +326,7 @@ tracks/4/keys = {
 } ]
 }
 tracks/5/type = "value"
-tracks/5/path = NodePath("Particles2D:emitting")
+tracks/5/path = NodePath("ShineParticles:emitting")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
@@ -448,7 +448,7 @@ anims/bpb = SubResource( 3 )
 anims/pop = SubResource( 93 )
 anims/respawn = SubResource( 94 )
 
-[node name="Particles2D" type="Particles2D" parent="."]
+[node name="ShineParticles" type="Particles2D" parent="."]
 material = SubResource( 4 )
 scale = Vector2( 0.7, 0.7 )
 emitting = false
@@ -456,7 +456,7 @@ amount = 3
 process_material = SubResource( 5 )
 texture = ExtResource( 4 )
 
-[node name="Particles2D2" type="Particles2D" parent="."]
+[node name="WaterParticles" type="Particles2D" parent="."]
 material = SubResource( 13 )
 emitting = false
 amount = 192

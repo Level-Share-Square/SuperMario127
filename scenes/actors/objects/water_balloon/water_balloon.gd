@@ -6,6 +6,8 @@ onready var bows = $Sprite/Bowser
 onready var area = $Area2D
 onready var refill_sound = $Refill
 onready var animation_player = $AnimationPlayer
+onready var shine_particles = $ShineParticles
+onready var water_particles = $WaterParticles
 
 export var normal_texture : Texture
 export var recolorable_texture : Texture
@@ -97,11 +99,14 @@ func _on_property_changed(key, value):
 			bows.visible = false
 			if added_water <= 0:
 				drop.visible = false
-				$Particles2D.emitting = false
+				shine_particles.visible = false
+				water_particles.visible = false
 			else:
 				drop.visible = true
-				$Particles2D.emitting = true
+				shine_particles.visible = true
+				water_particles.visible = true
 		else:
 			bows.visible = true
 			drop.visible = false
-			$Particles2D.emitting = true
+			shine_particles.visible = false
+			water_particles.visible = false
