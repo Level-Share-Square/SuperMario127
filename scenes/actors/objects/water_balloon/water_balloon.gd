@@ -16,6 +16,8 @@ export var recolorable_droplet : Texture
 export var normal_bowser : Texture
 export var recolorable_bowser : Texture
 
+export var recolorable_material : ShaderMaterial
+
 const BOUNCE_POWER = -400
 
 var added_stamina = 100
@@ -82,11 +84,13 @@ func _on_property_changed(key, value):
 			drop.texture = normal_droplet
 			bows.texture = normal_bowser
 			sprite.modulate = Color(1, 1, 1)
+			sprite.material = null
 		else:
 			sprite.texture = recolorable_texture
 			drop.texture = recolorable_droplet
 			bows.texture = recolorable_bowser
 			sprite.modulate = value
+			sprite.material = recolorable_material
 	
 	if key == "added_water" or key == "added_stamina":
 		if added_water >= 0 and added_stamina >= 0:

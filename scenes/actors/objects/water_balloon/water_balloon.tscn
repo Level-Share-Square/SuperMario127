@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://scenes/actors/objects/water_balloon/water_balloon.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/objects/water_balloon/texture.png" type="Texture" id=2]
@@ -12,23 +12,7 @@
 [ext_resource path="res://scenes/actors/objects/water_balloon/bowser.png" type="Texture" id=10]
 [ext_resource path="res://scenes/actors/objects/water_balloon/recolorable_bowser.png" type="Texture" id=11]
 [ext_resource path="res://scenes/actors/objects/water_balloon/recolorable_droplet.png" type="Texture" id=12]
-
-[sub_resource type="Shader" id=97]
-code = "shader_type canvas_item;
-render_mode unshaded;
-
-void fragment()
-{
-	vec4 source_color = texture(TEXTURE, UV);
-	vec4 final_color = source_color;
-	if (source_color != vec4(1, 1, 1, 1)) {
-		final_color *= MODULATE;
-	}
-	COLOR = final_color;
-}"
-
-[sub_resource type="ShaderMaterial" id=96]
-shader = SubResource( 97 )
+[ext_resource path="res://scenes/actors/objects/water_balloon/recolor_curve.tres" type="Material" id=13]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 14, 16 )
@@ -400,6 +384,7 @@ normal_droplet = ExtResource( 6 )
 recolorable_droplet = ExtResource( 12 )
 normal_bowser = ExtResource( 10 )
 recolorable_bowser = ExtResource( 11 )
+recolorable_material = ExtResource( 13 )
 
 [node name="Pop" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 3 )
@@ -417,11 +402,11 @@ z_index = -1
 texture = ExtResource( 2 )
 
 [node name="Droplet" type="Sprite" parent="Sprite"]
-material = SubResource( 96 )
+use_parent_material = true
 texture = ExtResource( 6 )
 
 [node name="Bowser" type="Sprite" parent="Sprite"]
-material = SubResource( 96 )
+use_parent_material = true
 texture = ExtResource( 10 )
 
 [node name="Area2D" type="Area2D" parent="."]
