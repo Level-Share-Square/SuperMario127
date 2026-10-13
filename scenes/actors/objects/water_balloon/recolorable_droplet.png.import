@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/icons.png-c7a2375279d239e08ab1b18195cec1cf.stex"
+path="res://.import/recolorable_droplet.png-58fcc37e30f2a74fca10904267b7b754.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/actors/objects/water_balloon/icons.png"
-dest_files=[ "res://.import/icons.png-c7a2375279d239e08ab1b18195cec1cf.stex" ]
+source_file="res://scenes/actors/objects/water_balloon/recolorable_droplet.png"
+dest_files=[ "res://.import/recolorable_droplet.png-58fcc37e30f2a74fca10904267b7b754.stex" ]
 
 [params]
 

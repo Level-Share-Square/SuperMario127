@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/2small.png-4c32fa284b86af9545bf577885844138.stex"
+path="res://.import/recolorable_bowser.png-71dc4088b266de40137a6241562b879e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/actors/objects/water_balloon/2small.png"
-dest_files=[ "res://.import/2small.png-4c32fa284b86af9545bf577885844138.stex" ]
+source_file="res://scenes/actors/objects/water_balloon/recolorable_bowser.png"
+dest_files=[ "res://.import/recolorable_bowser.png-71dc4088b266de40137a6241562b879e.stex" ]
 
 [params]
 

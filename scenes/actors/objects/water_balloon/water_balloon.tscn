@@ -1,14 +1,34 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://scenes/actors/objects/water_balloon/water_balloon.gd" type="Script" id=1]
-[ext_resource path="res://scenes/actors/objects/water_balloon/2.png" type="Texture" id=2]
+[ext_resource path="res://scenes/actors/objects/water_balloon/texture.png" type="Texture" id=2]
 [ext_resource path="res://assets/sounds/balloon_pop.wav" type="AudioStream" id=3]
 [ext_resource path="res://scenes/actors/mario/particles/metal_sparkles.png" type="Texture" id=4]
 [ext_resource path="res://scenes/actors/mario/nozzles/water_particle.png" type="Texture" id=5]
-[ext_resource path="res://scenes/actors/objects/water_balloon/1.png" type="Texture" id=6]
+[ext_resource path="res://scenes/actors/objects/water_balloon/droplet.png" type="Texture" id=6]
 [ext_resource path="res://scenes/actors/objects/water_balloon/recolorable_texture.png" type="Texture" id=7]
 [ext_resource path="res://classes/sound_pitcher_directional.gd" type="Script" id=8]
 [ext_resource path="res://assets/sounds/fludd/fludd_refill.wav" type="AudioStream" id=9]
+[ext_resource path="res://scenes/actors/objects/water_balloon/bowser.png" type="Texture" id=10]
+[ext_resource path="res://scenes/actors/objects/water_balloon/recolorable_bowser.png" type="Texture" id=11]
+[ext_resource path="res://scenes/actors/objects/water_balloon/recolorable_droplet.png" type="Texture" id=12]
+
+[sub_resource type="Shader" id=97]
+code = "shader_type canvas_item;
+render_mode unshaded;
+
+void fragment()
+{
+	vec4 source_color = texture(TEXTURE, UV);
+	vec4 final_color = source_color;
+	if (source_color != vec4(1, 1, 1, 1)) {
+		final_color *= MODULATE;
+	}
+	COLOR = final_color;
+}"
+
+[sub_resource type="ShaderMaterial" id=96]
+shader = SubResource( 97 )
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 14, 16 )
@@ -36,7 +56,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 )
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("Sprite/Sprite2:position")
+tracks/2/path = NodePath("Sprite/Droplet:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -170,7 +190,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 )
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("Sprite/Sprite2:position")
+tracks/2/path = NodePath("Sprite/Droplet:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -248,7 +268,7 @@ tracks/7/keys = {
 resource_name = "respawn"
 length = 0.7
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite/Sprite2:position")
+tracks/0/path = NodePath("Sprite/Droplet:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -376,6 +396,10 @@ editor_rect = Rect2( -16, -16, 32, 32 )
 internal_id = "water_balloon"
 normal_texture = ExtResource( 2 )
 recolorable_texture = ExtResource( 7 )
+normal_droplet = ExtResource( 6 )
+recolorable_droplet = ExtResource( 12 )
+normal_bowser = ExtResource( 10 )
+recolorable_bowser = ExtResource( 11 )
 
 [node name="Pop" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 3 )
@@ -392,8 +416,14 @@ bus = "Sounds"
 z_index = -1
 texture = ExtResource( 2 )
 
-[node name="Sprite2" type="Sprite" parent="Sprite"]
+[node name="Droplet" type="Sprite" parent="Sprite"]
+modulate = Color( 1, 0.462745, 0.462745, 1 )
+material = SubResource( 96 )
 texture = ExtResource( 6 )
+
+[node name="Bowser" type="Sprite" parent="Sprite"]
+material = SubResource( 96 )
+texture = ExtResource( 10 )
 
 [node name="Area2D" type="Area2D" parent="."]
 visible = false

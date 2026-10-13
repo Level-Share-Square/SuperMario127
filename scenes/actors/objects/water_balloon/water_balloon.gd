@@ -1,13 +1,20 @@
 extends GameObject
 
 onready var sprite = $Sprite
-onready var drop = $Sprite/Sprite2
+onready var drop = $Sprite/Droplet
+onready var bows = $Sprite/Bowser
 onready var area = $Area2D
 onready var refill_sound = $Refill
 onready var animation_player = $AnimationPlayer
 
 export var normal_texture : Texture
-export var recolorable_texture : Texture 
+export var recolorable_texture : Texture
+
+export var normal_droplet : Texture
+export var recolorable_droplet : Texture
+
+export var normal_bowser : Texture
+export var recolorable_bowser : Texture
 
 const BOUNCE_POWER = -400
 
@@ -54,25 +61,13 @@ func collect(body):
 func _ready():
 	animation_player.play("bpb")
 	connect("property_changed", self, "_on_property_changed")
-	if is_preview:
-		z_index = 0
-		sprite.z_index = 0
-	if color == Color(0, 0.7, 1):
-		sprite.texture = normal_texture
-		sprite.self_modulate = Color(1, 1, 1)
-	else:
-		sprite.texture = recolorable_texture
-		sprite.self_modulate = color
-		
+	_on_property_changed("added_water", added_water)
+	_on_property_changed("color", color)
+
 func _object_ready():
 	var _connect = area.connect("body_entered", self, "collect")
-	
+
 func _process(delta):
-	if added_water == 0:
-		drop.visible = false
-		$Particles2D.emitting = false
-	else:
-		drop.visible = true
 	if timer > 0:
 		timer -= delta
 		if timer <= 0:
@@ -84,7 +79,25 @@ func _on_property_changed(key, value):
 	if key == "color":
 		if color == Color(0, 0.7, 1):
 			sprite.texture = normal_texture
-			sprite.self_modulate = Color(1, 1, 1)
+			drop.texture = normal_droplet
+			bows.texture = normal_bowser
+			sprite.modulate = Color(1, 1, 1)
 		else:
 			sprite.texture = recolorable_texture
-			sprite.self_modulate = value
+			drop.texture = recolorable_droplet
+			bows.texture = recolorable_bowser
+			sprite.modulate = value
+	
+	if key == "added_water" or key == "added_stamina":
+		if added_water >= 0 and added_stamina >= 0:
+			bows.visible = false
+			if added_water <= 0:
+				drop.visible = false
+				$Particles2D.emitting = false
+			else:
+				drop.visible = true
+				$Particles2D.emitting = true
+		else:
+			bows.visible = true
+			drop.visible = false
+			$Particles2D.emitting = true

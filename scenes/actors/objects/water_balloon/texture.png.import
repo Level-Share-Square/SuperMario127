@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/small_bottle.png-0c3eb477ee7f1e938abbae408bc1d68d.stex"
+path="res://.import/texture.png-6945558a2463855e454d41e1957c19bd.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/actors/objects/water_balloon/small_bottle.png"
-dest_files=[ "res://.import/small_bottle.png-0c3eb477ee7f1e938abbae408bc1d68d.stex" ]
+source_file="res://scenes/actors/objects/water_balloon/texture.png"
+dest_files=[ "res://.import/texture.png-6945558a2463855e454d41e1957c19bd.stex" ]
 
 [params]
 
