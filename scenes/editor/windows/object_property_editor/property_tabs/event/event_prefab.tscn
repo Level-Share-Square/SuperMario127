@@ -202,9 +202,19 @@ margin_right = 184.0
 margin_bottom = 31.0
 
 [node name="PropertiesContainer" type="VBoxContainer" parent="EventProperties"]
+unique_name_in_owner = true
 margin_top = 39.0
 margin_right = 184.0
 margin_bottom = 39.0
+
+[node name="InvalidLabel" type="Label" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_colors/font_color = Color( 1, 1, 1, 0.752941 )
+text = "Various events selected!"
+align = 1
+autowrap = true
 
 [node name="HoverSound" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true

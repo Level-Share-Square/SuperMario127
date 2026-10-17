@@ -5,6 +5,8 @@ var properties: Dictionary = {
 	"shake_strength": 4
 }
 
+var property_overrides: Dictionary = {}
+
 func get_internal_name() -> String:
 	return "camera_shake_event"
 

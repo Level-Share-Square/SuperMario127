@@ -6,6 +6,8 @@ var properties: Dictionary = {
 	"target_zoom": 2,
 }
 
+var property_overrides: Dictionary = {}
+
 func get_internal_name() -> String:
 	return "camera_zoom_event"
 

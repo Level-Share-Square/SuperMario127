@@ -5,6 +5,8 @@ var properties: Dictionary = {
 	"time": 4
 }
 
+var property_overrides: Dictionary = {}
+
 func get_internal_name() -> String:
 	return "wait_event"
 

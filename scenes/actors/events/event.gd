@@ -20,3 +20,12 @@ func get_display_text() -> String:
 
 func do_event(handler: Node):
 	emit_signal("event_finished")
+
+func check_equivalent(other_event: Event) -> bool:
+	if class_util.get_custom_class_name(other_event) != class_util.get_custom_class_name(self): return false
+
+	var properties: Dictionary = self.properties
+	for property in properties:
+		if other_event.properties[property] != properties[property]: return false
+		
+	return true

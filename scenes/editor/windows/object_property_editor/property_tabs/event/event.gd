@@ -10,8 +10,25 @@ func load_properties(_editor, _objects):
 	editor = _editor
 	objects = _objects
 	
-	# will this still work with editing events on multiple objects at once?
-	# make sure to account for that in some way  
+	var check_events: Array = []
+	for object in objects.keys():
+		if not object is EventTrigger:
+			event_prefab.show_invalid_text()
+			return
+			
+		if check_events.empty(): check_events = object.events
+		
+		if check_events.size() != object.events.size():
+			event_prefab.show_invalid_text()
+			return
+			
+		for i in range(check_events.size()):
+			if not check_events[i].check_equivalent(object.events[i]):
+				event_prefab.show_invalid_text()
+				return
+				
+	event_prefab.show_invalid_text(false)
+	 
 	var object: EventTrigger = objects.keys()[0]
 	for event in object.events:
 		var event_panel = EVENT_PANEL.instance()
@@ -19,3 +36,7 @@ func load_properties(_editor, _objects):
 		event_prefab.add_event(event_panel)
 	
 	event_prefab.load_info(object.event_start_text)
+
+func on_properties_opened(event_panel: EventPanel):
+	event_prefab.load_properties(self, event_panel)
+
