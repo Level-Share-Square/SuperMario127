@@ -224,6 +224,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/editor/action_manager/actions/change_area.gd"
 }, {
+"base": "Event",
+"class": "ChangeCharacterEvent",
+"language": "GDScript",
+"path": "res://scenes/actors/events/change_character_event.gd"
+}, {
 "base": "Action",
 "class": "ChangeEventAction",
 "language": "GDScript",
@@ -1503,6 +1508,7 @@ _global_script_class_icons={
 "CampaignCard": "",
 "CatmullRomSpline": "",
 "ChangeAreaAction": "",
+"ChangeCharacterEvent": "",
 "ChangeEventAction": "",
 "ChangeLayerAction": "",
 "ChangePropertyAction": "",

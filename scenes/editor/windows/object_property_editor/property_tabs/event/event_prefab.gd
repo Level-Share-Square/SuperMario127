@@ -109,9 +109,9 @@ func load_properties(event_panel: EventPanel):
 func load_property_override(override: String, event: Event, override_name: String, override_data):
 	var property_scene: PropertyEditor = load("res://scenes/editor/windows/object_property_editor/misc_property_scenes/" + override_name.to_lower() + "/base.tscn").instance()
 	var editor = get_tree().current_scene
+	get_node("%PropertiesContainer").add_child(property_scene)
 	property_scene.load_property(editor, event.properties[override], override_data[1])
 	connect_signals(property_scene)
-	get_node("%Properties").add_child(property_scene)
 
 func connect_signals(property_editor: PropertyEditor):
 	property_editor.connect("property_edited", self, "change_property")

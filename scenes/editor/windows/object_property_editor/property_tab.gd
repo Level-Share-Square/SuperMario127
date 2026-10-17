@@ -1,7 +1,7 @@
 class_name PropertyTab
 extends PanelContainer
 
-enum OverrideTypes {BOOL_ALIAS, ENUM, DROPDOWN}
+enum OverrideTypes {BOOL_ALIAS, ENUM, DROPDOWN, MULTISELECT}
 
 var editor: Editor
 var window: EditorWindow

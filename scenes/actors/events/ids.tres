@@ -4,4 +4,4 @@
 
 [resource]
 script = ExtResource( 1 )
-ids = PoolStringArray( "wait_event", "camera_cutscene_event", "camera_shake_event", "camera_zoom_event" )
+ids = PoolStringArray( "wait_event", "camera_cutscene_event", "camera_shake_event", "camera_zoom_event", "change_character_event" )
