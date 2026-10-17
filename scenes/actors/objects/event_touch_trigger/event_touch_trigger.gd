@@ -41,9 +41,6 @@ func _ready():
 		parts = 1
 	
 	update_parts()
-	
-	var zoom_trigger := CameraZoomEvent.new()
-	events = [zoom_trigger]
 
 
 func _body_entered(body):

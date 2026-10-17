@@ -1,6 +1,9 @@
 class_name ChangePropertyBulkAction
 extends ChangePropertyAction
 
+signal done
+signal undone
+
 var affected_objects: Dictionary
 
 func _do():
@@ -9,6 +12,8 @@ func _do():
 		var original_properties: Dictionary = properties_dict.original_properties
 		var changed_properties: Dictionary = properties_dict.changed_properties
 		set_properties(object, original_properties, changed_properties)
+		
+	emit_signal("done")
 
 func _undo():
 	for object in affected_objects.keys():
@@ -16,6 +21,8 @@ func _undo():
 		var original_properties: Dictionary = properties_dict.original_properties
 		var changed_properties: Dictionary = properties_dict.changed_properties
 		restore_properties(object, original_properties, changed_properties)
+	
+	emit_signal("undone")
 
 ## note that this function is only needed for tools like move and rotate, which change
 ## object properties prior to setting them. if you're setting properties from say, the property

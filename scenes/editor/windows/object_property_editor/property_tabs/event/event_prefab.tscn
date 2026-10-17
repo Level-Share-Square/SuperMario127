@@ -230,5 +230,6 @@ bus = "Sounds"
 
 [connection signal="pressed" from="Events/HBoxContainer/AddEvent" to="." method="set_current_tab" binds= [ 1 ]]
 [connection signal="button_down" from="AddEvent/VBoxContainer/HBoxContainer/Back" to="." method="set_current_tab" binds= [ 0 ]]
-[connection signal="add_event" from="AddEvent/VBoxContainer/EventList" to="." method="add_event"]
+[connection signal="add_event" from="AddEvent/VBoxContainer/EventList" to="." method="add_new_event"]
+[connection signal="button_down" from="EventProperties/HBoxContainer/Done" to="." method="on_finished_editing_properties"]
 [connection signal="button_down" from="EventProperties/HBoxContainer/Done" to="." method="set_current_tab" binds= [ 0 ]]

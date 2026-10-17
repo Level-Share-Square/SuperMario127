@@ -550,7 +550,7 @@ static func deserialize_data_code(data_code: String):
 			for i in range(size):
 				properties_dict[deserialize_data_code(keys[i])] = deserialize_data_code(values[i])
 			
-			var event: Event = load(EVENT_PATH % properties_dict["event"]).new()
+			var event: Event = load(EVENT_PATH % EVENT_IDS[properties_dict["event"]]).new()
 			properties_dict.erase("event")
 			
 			for property in properties_dict:

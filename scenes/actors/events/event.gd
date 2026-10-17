@@ -26,6 +26,13 @@ func check_equivalent(other_event: Event) -> bool:
 
 	var properties: Dictionary = self.properties
 	for property in properties:
+		if property == "event": continue
 		if other_event.properties[property] != properties[property]: return false
 		
 	return true
+	
+func duplicate_deep() -> Event:
+	var new_event = class_util.create_instance_from_name(class_util.get_custom_class_name(self))
+	new_event.properties = self.properties.duplicate(true)
+	new_event.properties.erase("event")
+	return new_event

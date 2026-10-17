@@ -14,10 +14,11 @@ func get_display_name() -> String:
 	return "Wait"
 
 func get_display_suffix() -> String:
-	var suffix: String = " col_open%scol_close seconds"
+	var suffix: String = " col_open%scol_close second"
 	suffix = suffix.replace("col_open", COLOR_OPENING)
 	suffix = suffix.replace("col_close", COLOR_CLOSING)
 	suffix = suffix % properties["time"]
+	suffix += "s" if properties["time"] > 1 else ""
 	return suffix
 
 func do_event(handler: Node):

@@ -13,6 +13,7 @@ func change_property(property: String, new_value, check_matches, save_to_data):
 	var affected_objects: Dictionary = setup_affected_objects(property, new_value)
 	if check_matches and affected_objects["property_matches"] >= objects.size(): return
 	affected_objects.erase("property_matches")
+	print(affected_objects)
 	if save_to_data:
 		var action := ChangePropertyBulkAction.new()
 		action.affected_objects = affected_objects
