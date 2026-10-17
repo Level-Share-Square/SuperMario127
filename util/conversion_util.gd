@@ -384,6 +384,31 @@ static func convert_100_to_101(data_container: LevelDataContainer):
 		area_header.area_code = LevelCodeSerializer.serialize_area(area)
 	
 	return data_container
+	
+static func convert_101_to_102(data_container: LevelDataContainer):
+	return data_container
+	
+
+static func convert_102_to_103(data_container: LevelDataContainer):
+	for area_header in data_container.area_headers:
+		var area: AreaData = LevelCodeDeserializer.deserialize_area_code(area_header.area_code)
+		for layer in area.layers:
+			for object in layer.object_data:
+				object = object as ObjectData
+				
+				if object.metadata.type_id == 126:
+					var new_zoom_metadata = ObjectMetadata.new(object.metadata.position, 174, 0, "zoom_trigger")
+					var zoom_event := CameraZoomEvent.new()
+					zoom_event.properties["zoom_time"] = object.properties.get(4, 4)
+					zoom_event.properties["target_zoom"] = object.properties.get(4, 2)
+					var new_zoom_data = ObjectData.new(new_zoom_metadata, {4: [zoom_event], 5: object.properties.get(6, 1)})
+					layer.object_data.append(new_zoom_data)
+					layer.object_data.erase(object)
+					
+		area_header.area_code = LevelCodeSerializer.serialize_area(area)
+					
+	return data_container
+				
 
 static func is_pre_100(level_code: String) -> bool:
 	return level_code.begins_with("0")

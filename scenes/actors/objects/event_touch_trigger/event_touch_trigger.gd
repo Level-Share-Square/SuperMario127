@@ -9,6 +9,7 @@ var parts := 1
 
 func _register_properties():
 	._register_properties()
+	register_property(5, "parts", parts, true)
 
 func _unhandled_input(event: InputEvent) -> void:
 	parts_input_handler(event,self)
