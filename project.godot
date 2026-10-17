@@ -34,6 +34,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/editor/action_manager/actions/add_layer.gd"
 }, {
+"base": "BaseLocalEventAction",
+"class": "AddLocalEventAction",
+"language": "GDScript",
+"path": "res://scenes/editor/action_manager/actions/add_local_event.gd"
+}, {
 "base": "HBoxContainer",
 "class": "AreaBoundsEditor",
 "language": "GDScript",
@@ -103,6 +108,11 @@ _global_script_classes=[ {
 "class": "BaseLayerAction",
 "language": "GDScript",
 "path": "res://scenes/editor/action_manager/actions/base_layer.gd"
+}, {
+"base": "Action",
+"class": "BaseLocalEventAction",
+"language": "GDScript",
+"path": "res://scenes/editor/action_manager/actions/base_local_event.gd"
 }, {
 "base": "Action",
 "class": "BaseObjectAction",
@@ -323,6 +333,11 @@ _global_script_classes=[ {
 "class": "DeleteLayerAction",
 "language": "GDScript",
 "path": "res://scenes/editor/action_manager/actions/delete_layer.gd"
+}, {
+"base": "BaseLocalEventAction",
+"class": "DeleteLocalEventAction",
+"language": "GDScript",
+"path": "res://scenes/editor/action_manager/actions/delete_local_event.gd"
 }, {
 "base": "Node2D",
 "class": "Dialog",
@@ -1070,6 +1085,11 @@ _global_script_classes=[ {
 "path": "res://scenes/menu/range_sound.gd"
 }, {
 "base": "Action",
+"class": "ReorderEventAction",
+"language": "GDScript",
+"path": "res://scenes/editor/action_manager/actions/reorder_event.gd"
+}, {
+"base": "Action",
 "class": "ReorderLayerAction",
 "language": "GDScript",
 "path": "res://scenes/editor/action_manager/actions/reorder_layer.gd"
@@ -1445,6 +1465,7 @@ _global_script_class_icons={
 "ActionManager": "",
 "AddAreaAction": "",
 "AddLayerAction": "",
+"AddLocalEventAction": "",
 "AreaBoundsEditor": "",
 "AreaData": "",
 "AreaDataOld": "",
@@ -1459,6 +1480,7 @@ _global_script_class_icons={
 "BaseButtonSound": "",
 "BaseCard": "",
 "BaseLayerAction": "",
+"BaseLocalEventAction": "",
 "BaseObjectAction": "",
 "BigText": "",
 "Block": "",
@@ -1503,6 +1525,7 @@ _global_script_class_icons={
 "Decoration": "",
 "DeleteAreaAction": "",
 "DeleteLayerAction": "",
+"DeleteLocalEventAction": "",
 "Dialog": "",
 "DiscordActivity": "",
 "DiscordActivityAssets": "",
@@ -1652,6 +1675,7 @@ _global_script_class_icons={
 "RainbowStarState": "",
 "RainbowStarWindupState": "",
 "RangeSound": "",
+"ReorderEventAction": "",
 "ReorderLayerAction": "",
 "ReorderObjectsAction": "",
 "ResizableSemisolid": "",

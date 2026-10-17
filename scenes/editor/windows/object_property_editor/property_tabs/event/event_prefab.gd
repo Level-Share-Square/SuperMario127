@@ -24,6 +24,7 @@ var new_properties: Dictionary = {}
 
 signal finished_editing(event, new_properties)
 signal added_new_event(event)
+signal delete_event(event)
 
 func _enter_tree():
 	event_container = $"%EventContainer"
@@ -123,3 +124,6 @@ func on_finished_editing_properties():
 
 func add_new_event(event_panel):
 	emit_signal("added_new_event", event_panel.held_event)
+
+func on_delete_event():
+	emit_signal("delete_event", event_selected)

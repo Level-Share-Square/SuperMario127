@@ -450,12 +450,13 @@ static func serialize_data(value) -> String:
 				value = value as Event
 				data_code = TYPE_CODE_EVENT
 				
-				var property_dict: Dictionary = value.properties
+				var properties_array: Array = ["event", EVENT_IDS.find(value.get_internal_name())]
+				for property in value.properties:
+					properties_array.append(property)
+					properties_array.append(value.properties[property])
 				
-				property_dict["event"] = EVENT_IDS.find(value.get_internal_name())
+				data_code += serialize_data_array(properties_array)
 				
-				data_code += serialize_data_array(property_dict.keys())
-				data_code += serialize_data_array(property_dict.values())
 					
 	
 	return data_code

@@ -23,4 +23,5 @@ margin_right = 102.0
 margin_bottom = 80.0
 
 [connection signal="added_new_event" from="EventPrefab" to="." method="added_new_event"]
+[connection signal="delete_event" from="EventPrefab" to="." method="delete_event"]
 [connection signal="finished_editing" from="EventPrefab" to="." method="on_finished_editing"]

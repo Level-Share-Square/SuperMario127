@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://scenes/menu/button_scripts/button_sound.gd" type="Script" id=1]
 [ext_resource path="res://scenes/editor/editor_theme.tres" type="Theme" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://assets/icons/Confirm.svg" type="Texture" id=8]
 [ext_resource path="res://scenes/actors/objects/zoom_trigger/zoom_trigger.png" type="Texture" id=9]
 [ext_resource path="res://assets/icons/back.png" type="Texture" id=10]
+[ext_resource path="res://assets/icons/delete.svg" type="Texture" id=11]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
@@ -24,6 +25,7 @@ tabs_visible = false
 script = ExtResource( 4 )
 
 [node name="Events" type="VBoxContainer" parent="."]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_constants/separation = 8
@@ -146,7 +148,6 @@ custom_constants/separation = 10
 script = ExtResource( 7 )
 
 [node name="EventProperties" type="VBoxContainer" parent="."]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_constants/separation = 8
@@ -155,7 +156,24 @@ custom_constants/separation = 8
 margin_right = 184.0
 margin_bottom = 19.0
 
+[node name="Delete" type="Button" parent="EventProperties/HBoxContainer"]
+unique_name_in_owner = true
+margin_right = 19.0
+margin_bottom = 19.0
+rect_min_size = Vector2( 19, 0 )
+custom_colors/icon_color_pressed = Color( 0, 0, 0, 1 )
+custom_colors/icon_color_disabled = Color( 0, 0, 0, 1 )
+custom_colors/icon_color_focus = Color( 0, 0, 0, 1 )
+custom_colors/icon_color_hover_pressed = Color( 0, 0, 0, 1 )
+custom_colors/icon_color_normal = Color( 0, 0, 0, 1 )
+custom_colors/icon_color_hover = Color( 0, 0, 0, 1 )
+icon = ExtResource( 11 )
+icon_align = 1
+expand_icon = true
+script = ExtResource( 1 )
+
 [node name="HBoxContainer" type="HBoxContainer" parent="EventProperties/HBoxContainer"]
+margin_left = 23.0
 margin_right = 161.0
 margin_bottom = 19.0
 size_flags_horizontal = 3
@@ -163,17 +181,17 @@ alignment = 1
 
 [node name="Icon" type="TextureRect" parent="EventProperties/HBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
-margin_left = 35.0
-margin_right = 54.0
+margin_left = 23.0
+margin_right = 42.0
 margin_bottom = 19.0
 rect_min_size = Vector2( 19, 0 )
 texture = ExtResource( 9 )
 expand = true
 
 [node name="Label" type="Label" parent="EventProperties/HBoxContainer/HBoxContainer"]
-margin_left = 58.0
+margin_left = 46.0
 margin_top = 1.0
-margin_right = 126.0
+margin_right = 114.0
 margin_bottom = 18.0
 custom_colors/font_color = Color( 1, 1, 1, 0.752941 )
 text = "Properties"
@@ -231,5 +249,7 @@ bus = "Sounds"
 [connection signal="pressed" from="Events/HBoxContainer/AddEvent" to="." method="set_current_tab" binds= [ 1 ]]
 [connection signal="button_down" from="AddEvent/VBoxContainer/HBoxContainer/Back" to="." method="set_current_tab" binds= [ 0 ]]
 [connection signal="add_event" from="AddEvent/VBoxContainer/EventList" to="." method="add_new_event"]
+[connection signal="button_down" from="EventProperties/HBoxContainer/Delete" to="." method="set_current_tab" binds= [ 0 ]]
+[connection signal="button_down" from="EventProperties/HBoxContainer/Delete" to="." method="on_delete_event"]
 [connection signal="button_down" from="EventProperties/HBoxContainer/Done" to="." method="on_finished_editing_properties"]
 [connection signal="button_down" from="EventProperties/HBoxContainer/Done" to="." method="set_current_tab" binds= [ 0 ]]

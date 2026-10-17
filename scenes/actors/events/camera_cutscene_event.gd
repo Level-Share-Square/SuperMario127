@@ -5,7 +5,7 @@ var properties: Dictionary = {
 	"time": 4,
 	"max_pan_distance": 800,
 	"to": Vector2(1, 1),
-	"do_reverse": true,
+	"do_reverse": true
 }
 
 var property_overrides: Dictionary = {}

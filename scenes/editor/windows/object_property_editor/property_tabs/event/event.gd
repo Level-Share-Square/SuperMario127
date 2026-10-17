@@ -48,30 +48,38 @@ func on_finished_editing(event, new_properties):
 	for object in objects.keys():
 		var action := ChangeEventAction.new()
 		action.event = object.events[event_index]
-		action.new_properties = new_properties
+		action.new_properties = new_properties.duplicate(true)
 		actions.append(action)
 		
 	editor.action_manager.commit_action(actions)
 	load_properties(editor, objects)
 
-func change_property(property: String, new_value, check_matches, save_to_data):
-	var affected_objects: Dictionary = setup_affected_objects(property, new_value)
-	if check_matches and affected_objects["property_matches"] >= objects.size(): return
-	affected_objects.erase("property_matches")
-	print(affected_objects)
-	if save_to_data:
-		var action := ChangePropertyBulkAction.new()
-		action.affected_objects = affected_objects
-		action.bulk_store_original_properties()
+func added_new_event(event):
+	var actions: Array = []
+	for object in objects.keys():
+		var action := AddLocalEventAction.new()
+		action.event = event.duplicate_deep()
+		action.object = object
 		action.connect("done", self, "load_properties", [editor, objects])
 		action.connect("undone", self, "load_properties", [editor, objects])
-		editor.action_manager.commit_action([action])
-	else:
-		for object in affected_objects:
-			var properties = affected_objects[object]["changed_properties"]
-			for property in properties:
-				object[property] = properties[property]
-				object.emit_signal("property_changed", property, properties[property])
+		actions.append(action)
+		
+	editor.action_manager.commit_action(actions)
+	load_properties(editor, objects)
 
-func added_new_event(event):
-	change_property("events", objects.keys()[0].events + [event], false, true)
+func delete_event(event):
+	var event_trigger: EventTrigger = objects.keys()[0]
+	
+	var event_index = event_trigger.events.find(event)
+	var actions: Array = []
+	for object in objects.keys():
+		var action := DeleteLocalEventAction.new()
+		action.event = object.events[event_index]
+		action.event_index = event_index
+		action.object = object
+		action.connect("done", self, "load_properties", [editor, objects])
+		action.connect("undone", self, "load_properties", [editor, objects])
+		actions.append(action)
+		
+	editor.action_manager.commit_action(actions)
+	load_properties(editor, objects)

@@ -541,20 +541,13 @@ static func deserialize_data_code(data_code: String):
 		TYPE_CODE_DIALOGUE_DATA:
 			data = data
 		TYPE_CODE_EVENT:
-			var properties_dict: Dictionary = {}
-			var keys: Array = LevelCodeTokenizer.splice_data(LevelCodeTokenizer.splice_dictionary(data)[0])
-			var values: Array = LevelCodeTokenizer.splice_data(LevelCodeTokenizer.splice_dictionary(data)[1])
+			data = LevelCodeTokenizer.splice_data_array(data)
+			var properties_array = deserialize_datas_code(data)
+			properties_array.pop_front()
+			var event: Event = load(EVENT_PATH % EVENT_IDS[properties_array.pop_front()]).new()
 			
-			var size: int = min(keys.size(), values.size())
-			
-			for i in range(size):
-				properties_dict[deserialize_data_code(keys[i])] = deserialize_data_code(values[i])
-			
-			var event: Event = load(EVENT_PATH % EVENT_IDS[properties_dict["event"]]).new()
-			properties_dict.erase("event")
-			
-			for property in properties_dict:
-				event.properties[property] = properties_dict[property]
+			for i in range(0, properties_array.size(), 2):
+				event.properties[properties_array[i]] = properties_array[i + 1]
 				
 			return event
 	
