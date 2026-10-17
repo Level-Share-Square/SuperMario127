@@ -12,6 +12,8 @@ var property_overrides: Dictionary = {
 	"add_fludds": [PropertyTab.OverrideTypes.MULTISELECT, ["add_fludds", [self, "get_fludd_args"], false]]
 }
 
+var property_info: Dictionary = {}
+
 func get_fludd_args() -> Dictionary:
 	return {
 		"HoverNozzle": "Hover",

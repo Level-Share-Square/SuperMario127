@@ -10,6 +10,8 @@ var properties: Dictionary = {
 
 var property_overrides: Dictionary = {}
 
+var property_info: Dictionary = {}
+
 func get_internal_name() -> String:
 	return "camera_cutscene_event"
 
