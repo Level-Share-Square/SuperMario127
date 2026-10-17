@@ -16,7 +16,9 @@ func load_properties(_editor, _objects):
 			event_prefab.show_invalid_text()
 			return
 			
-		if check_events.empty(): check_events = object.events
+		if check_events.empty():
+			check_events = object.events
+			continue
 		
 		if check_events.size() != object.events.size():
 			event_prefab.show_invalid_text()
