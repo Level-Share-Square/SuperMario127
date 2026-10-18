@@ -9,7 +9,7 @@
 [ext_resource path="res://scenes/menu/art_assets/scaled_border.png" type="Texture" id=7]
 [ext_resource path="res://scenes/menu/box_shadow.png" type="Texture" id=8]
 [ext_resource path="res://scenes/menu/background_scroll/background.tscn" type="PackedScene" id=9]
-[ext_resource path="res://level/Developer Levels/thumbnails/700ba7ac-f18b-4e00-b893-d8627dfc1a3a.png" type="Texture" id=10]
+[ext_resource path="res://level/Developer Levels/thumbnails/8669d255-512c-4306-9d64-f2af20b387ba.png" type="Texture" id=10]
 
 [sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0.0502793, 1 )
@@ -231,9 +231,9 @@ margin_right = 1920.0
 margin_bottom = 1080.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Walkthrough/Viewport/CenterContainer"]
-margin_left = 320.0
+margin_left = 262.0
 margin_top = 69.0
-margin_right = 1600.0
+margin_right = 1657.0
 margin_bottom = 1010.0
 rect_min_size = Vector2( 1280, 0 )
 size_flags_horizontal = 3
@@ -241,7 +241,7 @@ size_flags_vertical = 3
 custom_constants/separation = 56
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Walkthrough/Viewport/CenterContainer/HBoxContainer"]
-margin_right = 1280.0
+margin_right = 1395.0
 margin_bottom = 941.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -250,7 +250,7 @@ alignment = 1
 
 [node name="AspectContainer2" type="AspectRatioContainer" parent="Walkthrough/Viewport/CenterContainer/HBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
-margin_right = 1280.0
+margin_right = 1395.0
 margin_bottom = 672.0
 rect_min_size = Vector2( 0, 672 )
 size_flags_horizontal = 3
@@ -258,8 +258,8 @@ size_flags_vertical = 3
 ratio = 1.7778
 
 [node name="Border" type="NinePatchRect" parent="Walkthrough/Viewport/CenterContainer/HBoxContainer/VBoxContainer/AspectContainer2"]
-margin_left = 42.6592
-margin_right = 1237.34
+margin_left = 100.159
+margin_right = 1294.84
 margin_bottom = 672.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -300,14 +300,14 @@ stretch_mode = 1
 
 [node name="HSeparator" type="ColorRect" parent="Walkthrough/Viewport/CenterContainer/HBoxContainer/VBoxContainer"]
 margin_top = 704.0
-margin_right = 1280.0
+margin_right = 1395.0
 margin_bottom = 708.0
 rect_min_size = Vector2( 0, 4 )
 size_flags_horizontal = 3
 
 [node name="Label" type="Label" parent="Walkthrough/Viewport/CenterContainer/HBoxContainer/VBoxContainer"]
 margin_top = 740.0
-margin_right = 1280.0
+margin_right = 1395.0
 margin_bottom = 837.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -317,7 +317,7 @@ theme = ExtResource( 3 )
 custom_colors/font_color_shadow = Color( 0, 0.0431373, 0.313726, 1 )
 custom_constants/shadow_offset_y = 8
 custom_fonts/font = SubResource( 7 )
-text = "Four-Faced Fortress"
+text = "Waterfloat Galaxy Redux"
 align = 1
 valign = 1
 
@@ -339,13 +339,13 @@ custom_colors/font_outline_modulate = Color( 1, 1, 1, 1 )
 custom_colors/font_color_shadow = Color( 1, 1, 1, 1 )
 custom_constants/shadow_offset_y = 8
 custom_fonts/font = SubResource( 7 )
-text = "Four-Faced Fortress"
+text = "Waterfloat Galaxy Redux"
 align = 1
 valign = 1
 
 [node name="Label2" type="Label" parent="Walkthrough/Viewport/CenterContainer/HBoxContainer/VBoxContainer"]
 margin_top = 869.0
-margin_right = 1280.0
+margin_right = 1395.0
 margin_bottom = 941.0
 grow_horizontal = 2
 grow_vertical = 2
