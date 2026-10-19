@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=303 format=2]
+[gd_resource type="Resource" load_steps=309 format=2]
 
 [ext_resource path="res://scenes/editor/items/placeable_items.gd" type="Script" id=1]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/blue_coin.tres" type="Resource" id=2]
@@ -298,12 +298,18 @@
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/tree.tres" type="Resource" id=296]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/leafy_tree.tres" type="Resource" id=297]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/unblossomed_cave_tree.tres" type="Resource" id=298]
-[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/painting.tres" type="Resource" id=299]
-[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/lily_pad.tres" type="Resource" id=300]
-[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/test_event_object.tres" type="Resource" id=301]
-[ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/leaves.tres" type="Resource" id=302]
-[ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/leaves_slope_right.tres" type="Resource" id=303]
-[ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/leaves_slope_left.tres" type="Resource" id=304]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/painting.tres" type="Resource" id=309]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/lily_pad.tres" type="Resource" id=310]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_objects/event_touch_trigger.tres" type="Resource" id=299]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/leaves.tres" type="Resource" id=300]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/leaves_slope_right.tres" type="Resource" id=301]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/leaves_slope_left.tres" type="Resource" id=302]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/ancient_bricks_chiseled.tres" type="Resource" id=303]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/statue_orb.tres" type="Resource" id=304]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/ancient_bricks.tres" type="Resource" id=305]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/statue_empty.tres" type="Resource" id=306]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/statue_goomba.tres" type="Resource" id=307]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/statue_mysterious.tres" type="Resource" id=308]
 
 [resource]
 script = ExtResource( 1 )
@@ -391,7 +397,7 @@ placeable_items = {
 "obj_lava": ExtResource( 72 ),
 "obj_layer_changer": ExtResource( 245 ),
 "obj_leafy_tree": ExtResource( 297 ),
-"obj_lily_pad": ExtResource( 300 ),
+"obj_lily_pad": ExtResource( 310 ),
 "obj_locked_door": ExtResource( 271 ),
 "obj_locked_door_single": ExtResource( 270 ),
 "obj_log": ExtResource( 15 ),
@@ -413,7 +419,7 @@ placeable_items = {
 "obj_on_off_touch_lift": ExtResource( 92 ),
 "obj_p_switch": ExtResource( 81 ),
 "obj_p_switch_block": ExtResource( 76 ),
-"obj_painting": ExtResource( 299 ),
+"obj_painting": ExtResource( 309 ),
 "obj_palm_tree": ExtResource( 69 ),
 "obj_paratroopa": ExtResource( 122 ),
 "obj_pearl_platform": ExtResource( 46 ),
@@ -483,6 +489,8 @@ placeable_items = {
 "obj_wood_platform": ExtResource( 56 ),
 "obj_yoshi": ExtResource( 140 ),
 "obj_zoom_trigger": ExtResource( 139 ),
+"til_ancient_bricks": ExtResource( 305 ),
+"til_ancient_bricks_chiseled": ExtResource( 303 ),
 "til_awkward_wall": ExtResource( 265 ),
 "til_awkward_wall_stairs_left": ExtResource( 267 ),
 "til_awkward_wall_stairs_right": ExtResource( 266 ),
@@ -593,6 +601,10 @@ placeable_items = {
 "til_snow_half_tile": ExtResource( 230 ),
 "til_snow_slope_left": ExtResource( 227 ),
 "til_snow_slope_right": ExtResource( 228 ),
+"til_statue_empty": ExtResource( 306 ),
+"til_statue_goomba": ExtResource( 307 ),
+"til_statue_mysterious": ExtResource( 308 ),
+"til_statue_orb": ExtResource( 304 ),
 "til_stone_brick": ExtResource( 155 ),
 "til_stone_bricks_stairs_left": ExtResource( 224 ),
 "til_stone_bricks_stairs_right": ExtResource( 225 ),

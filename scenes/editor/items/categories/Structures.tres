@@ -84,6 +84,12 @@
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/cork_tile_slope_right.tres" type="Resource" id=283]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/cork_tile_slope_left.tres" type="Resource" id=284]
 [ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/cork_tile.tres" type="Resource" id=285]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/ancient_bricks_chiseled.tres" type="Resource" id=303]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/statue_orb.tres" type="Resource" id=304]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/ancient_bricks.tres" type="Resource" id=305]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/statue_empty.tres" type="Resource" id=306]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/statue_goomba.tres" type="Resource" id=307]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/statue_mysterious.tres" type="Resource" id=308]
 
 [resource]
 script = ExtResource( 1 )
@@ -170,5 +176,11 @@ placeable_items = {
 "til_wood_fence_slope_left": ExtResource( 15 ),
 "til_wood_fence_slope_right": ExtResource( 22 ),
 "til_wood_stairs_left": ExtResource( 17 ),
-"til_wood_stairs_right": ExtResource( 16 )
+"til_wood_stairs_right": ExtResource( 16 ),
+"til_ancient_bricks": ExtResource( 305 ),
+"til_ancient_bricks_chiseled": ExtResource( 303 ),
+"til_statue_empty": ExtResource( 306 ),
+"til_statue_goomba": ExtResource( 307 ),
+"til_statue_mysterious": ExtResource( 308 ),
+"til_statue_orb": ExtResource( 304 )
 }
