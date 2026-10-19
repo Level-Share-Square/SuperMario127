@@ -101,13 +101,17 @@ func req(arguments):
 		file.open(destination + filename + TEMP_SUFFIX, File.READ)
 		
 		# determine filetype by reading the first 8 bytes (the header)
+		var extension = ".jpg"
 		var bytes = file.get_buffer(8)
-		var is_png_header = image_util.is_png(bytes)
 		
+		if image_util.is_webp(bytes):
+			extension = ".webp"
+		elif image_util.is_png(bytes):
+			extension = ".png"
+
 		file.close()
 		
 		# move it to a more permanent location
-		var extension = ".png" if is_png_header else ".jpeg"
 		level_list_util.move_file(destination + filename + TEMP_SUFFIX, destination + filename + extension)
 		
 

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/icons.png-c7a2375279d239e08ab1b18195cec1cf.stex"
+path="res://.import/2.png-5d832a396ea30db57e5d923847471989.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/actors/objects/water_balloon/icons.png"
-dest_files=[ "res://.import/icons.png-c7a2375279d239e08ab1b18195cec1cf.stex" ]
+source_file="res://generation/palette_swapper/input/palettes/2.png"
+dest_files=[ "res://.import/2.png-5d832a396ea30db57e5d923847471989.stex" ]
 
 [params]
 

@@ -8,9 +8,7 @@ export var base_texture: StreamTexture
 export var in_palette: StreamTexture
 export var palette_id: String
 
-var in_img: Image 
-var out_img: Image
-
+var palette_dict: Dictionary
 var stored_textures: Array
 var character: int
 
@@ -19,17 +17,19 @@ func load_palette(new_character: int):
 	$Orb.texture = stored_textures[character]
 
 func get_palette(char_name: String):
-	in_img = in_palette.get_data()
-	out_img = load(PALETTES_PATH % [char_name.to_lower(), palette_id]).get_data()
+	var in_img: Image = in_palette.get_data()
+	var out_img: Image = load(PALETTES_PATH % [char_name.to_lower(), palette_id]).get_data()
 	in_img.lock()
 	out_img.lock()
+	
+	for x in range(in_img.get_width()):
+		palette_dict[in_img.get_pixel(x, 0)] = out_img.get_pixel(x, 0)
+	
 	return paletted_image()
 
 func swap_color(color: Color) -> Color:
-	for x in range(in_img.get_width()):
-		var color_in: Color = in_img.get_pixel(x, 0)
-		if color.is_equal_approx(color_in):
-			return out_img.get_pixel(x, 0)
+	if palette_dict.get(color, null) != null:
+		return palette_dict.get(color, Color.white)
 	return color
 
 func paletted_image() -> ImageTexture:

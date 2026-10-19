@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/2.png-30d99e79fa9d2c742820540d620eaa8b.stex"
+path="res://.import/1.png-39139029a191b48f32f4b0561b711535.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/actors/objects/water_balloon/2.png"
-dest_files=[ "res://.import/2.png-30d99e79fa9d2c742820540d620eaa8b.stex" ]
+source_file="res://generation/autotiles/output/textures/1.png"
+dest_files=[ "res://.import/1.png-39139029a191b48f32f4b0561b711535.stex" ]
 
 [params]
 

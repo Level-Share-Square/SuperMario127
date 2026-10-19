@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/2small.png-4c32fa284b86af9545bf577885844138.stex"
+path="res://.import/7_block.png-29f1950cb11f237464fec861f1973ba9.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/actors/objects/water_balloon/2small.png"
-dest_files=[ "res://.import/2small.png-4c32fa284b86af9545bf577885844138.stex" ]
+source_file="res://assets/tiles/stone_bricks/palette_icons/7_block.png"
+dest_files=[ "res://.import/7_block.png-29f1950cb11f237464fec861f1973ba9.stex" ]
 
 [params]
 

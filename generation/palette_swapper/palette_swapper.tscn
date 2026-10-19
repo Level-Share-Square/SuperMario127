@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://generation/palette_swapper/palette_swapper.gd" type="Script" id=1]
+[ext_resource path="res://generation/palette_swapper/input/textures/base.png" type="Texture" id=2]
+[ext_resource path="res://generation/palette_swapper/input/base_palette.png" type="Texture" id=3]
+
+[node name="PaletteSwapper" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 480.0
+margin_bottom = -144.0
+script = ExtResource( 1 )
+in_palette = ExtResource( 3 )
+in_images = [ ExtResource( 2 ) ]

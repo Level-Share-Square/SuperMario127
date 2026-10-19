@@ -1656,7 +1656,7 @@ disabled = true
 default_focus_path = NodePath("../../../Buttons/LevelList/Back")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Subscreens/LevelList"]
-margin_right = 775.0
+margin_right = 768.0
 margin_bottom = 432.0
 rect_min_size = Vector2( 0, 432 )
 scroll_horizontal_enabled = false
@@ -1670,6 +1670,7 @@ margin_bottom = 105.0
 rect_min_size = Vector2( 768, 0 )
 rect_scale = Vector2( 0.9, 0.9 )
 rect_pivot_offset = Vector2( 384, 0 )
+mouse_filter = 1
 custom_constants/margin_right = 148
 custom_constants/margin_top = 32
 custom_constants/margin_left = 148
@@ -1697,6 +1698,7 @@ focus_neighbour_left = NodePath(".")
 focus_neighbour_top = NodePath(".")
 focus_neighbour_right = NodePath(".")
 focus_neighbour_bottom = NodePath(".")
+mouse_filter = 1
 size_flags_horizontal = 3
 custom_styles/read_only = SubResource( 169 )
 custom_styles/focus = SubResource( 170 )
@@ -1720,6 +1722,7 @@ margin_right = 318.0
 margin_bottom = 25.0
 rect_min_size = Vector2( 24, 0 )
 focus_mode = 0
+mouse_filter = 1
 custom_fonts/font = ExtResource( 9 )
 icon_align = 1
 expand_icon = true
@@ -1745,12 +1748,14 @@ margin_left = 318.0
 margin_right = 334.0
 margin_bottom = 25.0
 rect_min_size = Vector2( 16, 0 )
+mouse_filter = 1
 
 [node name="Default" type="Button" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search"]
 margin_left = 334.0
 margin_right = 403.0
 margin_bottom = 25.0
 focus_mode = 0
+mouse_filter = 1
 custom_fonts/font = ExtResource( 9 )
 toggle_mode = true
 pressed = true
@@ -1765,6 +1770,7 @@ margin_left = 403.0
 margin_right = 404.0
 margin_bottom = 25.0
 rect_min_size = Vector2( 1, 0 )
+mouse_filter = 1
 color = Color( 0, 0.0431373, 0.313726, 1 )
 
 [node name="Featured" type="Button" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search"]
@@ -1772,6 +1778,7 @@ margin_left = 404.0
 margin_right = 472.0
 margin_bottom = 25.0
 focus_mode = 0
+mouse_filter = 1
 custom_fonts/font = ExtResource( 9 )
 toggle_mode = true
 group = SubResource( 8 )
@@ -1791,6 +1798,7 @@ custom_constants/separation = 0
 margin_right = 1.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 1, 0 )
+mouse_filter = 1
 color = Color( 0, 0.0431373, 0.313726, 1 )
 
 [node name="Favorited" type="Button" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search/Favorites"]
@@ -1798,6 +1806,7 @@ margin_left = 1.0
 margin_right = 71.0
 margin_bottom = 24.0
 focus_mode = 0
+mouse_filter = 1
 custom_fonts/font = ExtResource( 9 )
 toggle_mode = true
 group = SubResource( 8 )
@@ -1827,12 +1836,14 @@ script = ExtResource( 25 )
 
 [node name="Button" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Pages" instance=ExtResource( 27 )]
 margin_bottom = 25.0
+mouse_filter = 1
 
 [node name="Button2" type="Button" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Pages"]
 margin_left = 28.0
 margin_right = 52.0
 margin_bottom = 25.0
 rect_min_size = Vector2( 24, 24 )
+mouse_filter = 1
 theme_type_variation = "PageButton"
 text = "2"
 
@@ -1841,6 +1852,7 @@ margin_left = 56.0
 margin_right = 80.0
 margin_bottom = 25.0
 rect_min_size = Vector2( 24, 24 )
+mouse_filter = 1
 theme_type_variation = "PageButton"
 text = "3"
 
@@ -1849,6 +1861,7 @@ margin_left = 84.0
 margin_right = 108.0
 margin_bottom = 25.0
 rect_min_size = Vector2( 24, 24 )
+mouse_filter = 1
 theme_type_variation = "PageButton"
 text = "4"
 
@@ -1857,6 +1870,7 @@ margin_left = 112.0
 margin_right = 136.0
 margin_bottom = 25.0
 rect_min_size = Vector2( 24, 24 )
+mouse_filter = 1
 theme_type_variation = "PageButton"
 text = "5"
 
@@ -1865,6 +1879,7 @@ margin_left = 140.0
 margin_right = 164.0
 margin_bottom = 25.0
 rect_min_size = Vector2( 24, 24 )
+mouse_filter = 1
 theme_type_variation = "PageButton"
 text = "6"
 
@@ -1873,6 +1888,7 @@ margin_left = 168.0
 margin_right = 192.0
 margin_bottom = 25.0
 rect_min_size = Vector2( 24, 24 )
+mouse_filter = 1
 theme_type_variation = "PageButton"
 text = "7"
 
@@ -1881,6 +1897,7 @@ margin_left = 196.0
 margin_right = 220.0
 margin_bottom = 25.0
 rect_min_size = Vector2( 24, 24 )
+mouse_filter = 1
 theme_type_variation = "PageButton"
 text = "8"
 
@@ -1889,6 +1906,7 @@ margin_left = 224.0
 margin_right = 248.0
 margin_bottom = 25.0
 rect_min_size = Vector2( 24, 24 )
+mouse_filter = 1
 theme_type_variation = "PageButton"
 text = "9"
 
@@ -1897,6 +1915,7 @@ margin_left = 252.0
 margin_right = 276.0
 margin_bottom = 25.0
 rect_min_size = Vector2( 24, 24 )
+mouse_filter = 1
 theme_type_variation = "PageButton"
 text = "10"
 
@@ -1905,6 +1924,7 @@ margin_left = 280.0
 margin_right = 304.0
 margin_bottom = 25.0
 rect_min_size = Vector2( 24, 24 )
+mouse_filter = 1
 theme_type_variation = "PageButton"
 disabled = true
 text = "..."
@@ -1914,6 +1934,7 @@ margin_left = 308.0
 margin_right = 337.0
 margin_bottom = 25.0
 rect_min_size = Vector2( 24, 24 )
+mouse_filter = 1
 theme_type_variation = "PageButton"
 text = "999"
 
@@ -1922,6 +1943,7 @@ margin_left = 341.0
 margin_right = 349.0
 margin_bottom = 25.0
 rect_min_size = Vector2( 8, 0 )
+mouse_filter = 1
 
 [node name="GoToPage" type="HBoxContainer" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Pages"]
 margin_left = 353.0
@@ -1938,6 +1960,7 @@ focus_neighbour_left = NodePath(".")
 focus_neighbour_top = NodePath(".")
 focus_neighbour_right = NodePath(".")
 focus_neighbour_bottom = NodePath(".")
+mouse_filter = 1
 size_flags_horizontal = 3
 custom_styles/read_only = SubResource( 169 )
 custom_styles/focus = SubResource( 170 )
@@ -1961,6 +1984,7 @@ margin_right = 119.0
 margin_bottom = 25.0
 rect_min_size = Vector2( 24, 0 )
 focus_mode = 0
+mouse_filter = 1
 custom_fonts/font = ExtResource( 9 )
 icon_align = 1
 expand_icon = true
@@ -2054,7 +2078,6 @@ default_focus_path = NodePath("../ScrollContainer/MarginContainer/VBoxContainer/
 [node name="ScrollContainer" type="ScrollContainer" parent="Subscreens/LevelPage"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = 7.0
 rect_min_size = Vector2( 0, 432 )
 scroll_horizontal_enabled = false
 script = ExtResource( 24 )
