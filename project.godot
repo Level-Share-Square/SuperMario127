@@ -34,6 +34,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/editor/action_manager/actions/add_layer.gd"
 }, {
+"base": "BaseLocalEventAction",
+"class": "AddLocalEventAction",
+"language": "GDScript",
+"path": "res://scenes/editor/action_manager/actions/add_local_event.gd"
+}, {
 "base": "HBoxContainer",
 "class": "AreaBoundsEditor",
 "language": "GDScript",
@@ -103,6 +108,11 @@ _global_script_classes=[ {
 "class": "BaseLayerAction",
 "language": "GDScript",
 "path": "res://scenes/editor/action_manager/actions/base_layer.gd"
+}, {
+"base": "Action",
+"class": "BaseLocalEventAction",
+"language": "GDScript",
+"path": "res://scenes/editor/action_manager/actions/base_local_event.gd"
 }, {
 "base": "Action",
 "class": "BaseObjectAction",
@@ -180,6 +190,11 @@ _global_script_classes=[ {
 "path": "res://classes/camera_cutscene.gd"
 }, {
 "base": "Event",
+"class": "CameraCutsceneEvent",
+"language": "GDScript",
+"path": "res://scenes/actors/events/camera_cutscene_event.gd"
+}, {
+"base": "Event",
 "class": "CameraShakeEvent",
 "language": "GDScript",
 "path": "res://scenes/actors/events/camera_shake_event.gd"
@@ -188,6 +203,11 @@ _global_script_classes=[ {
 "class": "CameraStopper",
 "language": "GDScript",
 "path": "res://classes/camera_stopper.gd"
+}, {
+"base": "Event",
+"class": "CameraZoomEvent",
+"language": "GDScript",
+"path": "res://scenes/actors/events/camera_zoom_event.gd"
 }, {
 "base": "BaseCard",
 "class": "CampaignCard",
@@ -203,6 +223,16 @@ _global_script_classes=[ {
 "class": "ChangeAreaAction",
 "language": "GDScript",
 "path": "res://scenes/editor/action_manager/actions/change_area.gd"
+}, {
+"base": "Event",
+"class": "ChangeCharacterEvent",
+"language": "GDScript",
+"path": "res://scenes/actors/events/change_character_event.gd"
+}, {
+"base": "Action",
+"class": "ChangeEventAction",
+"language": "GDScript",
+"path": "res://scenes/editor/action_manager/actions/change_event.gd"
 }, {
 "base": "Action",
 "class": "ChangeLayerAction",
@@ -308,6 +338,11 @@ _global_script_classes=[ {
 "class": "DeleteLayerAction",
 "language": "GDScript",
 "path": "res://scenes/editor/action_manager/actions/delete_layer.gd"
+}, {
+"base": "BaseLocalEventAction",
+"class": "DeleteLocalEventAction",
+"language": "GDScript",
+"path": "res://scenes/editor/action_manager/actions/delete_local_event.gd"
 }, {
 "base": "Node2D",
 "class": "Dialog",
@@ -494,8 +529,23 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/actors/events/event.gd"
 }, {
+"base": "VBoxContainer",
+"class": "EventList",
+"language": "GDScript",
+"path": "res://scenes/editor/windows/object_property_editor/property_tabs/event/event_list.gd"
+}, {
+"base": "HBoxContainer",
+"class": "EventPanel",
+"language": "GDScript",
+"path": "res://scenes/editor/windows/object_property_editor/property_tabs/event/event_panel.gd"
+}, {
+"base": "EventTrigger",
+"class": "EventTouchTrigger",
+"language": "GDScript",
+"path": "res://scenes/actors/objects/event_touch_trigger/event_touch_trigger.gd"
+}, {
 "base": "GameObject",
-"class": "EventObject",
+"class": "EventTrigger",
 "language": "GDScript",
 "path": "res://scenes/actors/objects/event_object/event_object.gd"
 }, {
@@ -1040,6 +1090,11 @@ _global_script_classes=[ {
 "path": "res://scenes/menu/range_sound.gd"
 }, {
 "base": "Action",
+"class": "ReorderEventAction",
+"language": "GDScript",
+"path": "res://scenes/editor/action_manager/actions/reorder_event.gd"
+}, {
+"base": "Action",
 "class": "ReorderLayerAction",
 "language": "GDScript",
 "path": "res://scenes/editor/action_manager/actions/reorder_layer.gd"
@@ -1415,6 +1470,7 @@ _global_script_class_icons={
 "ActionManager": "",
 "AddAreaAction": "",
 "AddLayerAction": "",
+"AddLocalEventAction": "",
 "AreaBoundsEditor": "",
 "AreaData": "",
 "AreaDataOld": "",
@@ -1429,6 +1485,7 @@ _global_script_class_icons={
 "BaseButtonSound": "",
 "BaseCard": "",
 "BaseLayerAction": "",
+"BaseLocalEventAction": "",
 "BaseObjectAction": "",
 "BigText": "",
 "Block": "",
@@ -1444,11 +1501,15 @@ _global_script_class_icons={
 "CamFollowState": "",
 "CamState": "",
 "CameraCutscene": "",
+"CameraCutsceneEvent": "",
 "CameraShakeEvent": "",
 "CameraStopper": "",
+"CameraZoomEvent": "",
 "CampaignCard": "",
 "CatmullRomSpline": "",
 "ChangeAreaAction": "",
+"ChangeCharacterEvent": "",
+"ChangeEventAction": "",
 "ChangeLayerAction": "",
 "ChangePropertyAction": "",
 "ChangePropertyBulkAction": "",
@@ -1470,6 +1531,7 @@ _global_script_class_icons={
 "Decoration": "",
 "DeleteAreaAction": "",
 "DeleteLayerAction": "",
+"DeleteLocalEventAction": "",
 "Dialog": "",
 "DiscordActivity": "",
 "DiscordActivityAssets": "",
@@ -1507,7 +1569,10 @@ _global_script_class_icons={
 "EraseObjectAction": "",
 "EraseObjectBulkAction": "",
 "Event": "",
-"EventObject": "",
+"EventList": "",
+"EventPanel": "",
+"EventTouchTrigger": "",
+"EventTrigger": "",
 "ExitPaintingState": "",
 "FallState": "",
 "FolderCard": "",
@@ -1616,6 +1681,7 @@ _global_script_class_icons={
 "RainbowStarState": "",
 "RainbowStarWindupState": "",
 "RangeSound": "",
+"ReorderEventAction": "",
 "ReorderLayerAction": "",
 "ReorderObjectsAction": "",
 "ResizableSemisolid": "",
@@ -1757,7 +1823,7 @@ audio=false
 transforms=false
 fps=true
 game_version="0.10.0"
-level_code_version=101
+level_code_version=103
 old_level_code_version="0.5.5"
 "Game Version"="0.10.0"
 level=false

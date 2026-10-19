@@ -2419,6 +2419,7 @@ script = ExtResource( 12 )
 margin_right = 124.0
 margin_bottom = 16.0
 custom_constants/separation = 0
+alignment = 1
 
 [node name="SongName" type="Label" parent="UIUnder/HUD/Control/AreaInfo/VBoxContainer/SongContainer/VBoxContainer/PanelContainer/HBoxContainer"]
 unique_name_in_owner = true

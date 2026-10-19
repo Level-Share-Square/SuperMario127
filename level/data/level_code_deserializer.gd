@@ -20,6 +20,8 @@ const TYPE_CODE_CURVE_2D = "U" # Curve2D
 const TYPE_CODE_TILE_DATA = "T" # TileData (wrapper for a PoolByteArray)
 const TYPE_CODE_DIALOGUE_DATA = "D" # DialogueData (wrapper for PoolStringArray)
 const TYPE_CODE_EVENT = "E" # Event
+const EVENT_IDS: PoolStringArray = preload("res://scenes/actors/events/ids.tres").ids
+const EVENT_PATH: String = "res://scenes/actors/events/%s.gd"
 
 
 static func deserialize_level_code(code: String):
@@ -539,20 +541,13 @@ static func deserialize_data_code(data_code: String):
 		TYPE_CODE_DIALOGUE_DATA:
 			data = data
 		TYPE_CODE_EVENT:
-			var properties_dict: Dictionary = {}
-			var keys: Array = LevelCodeTokenizer.splice_data(LevelCodeTokenizer.splice_dictionary(data)[0])
-			var values: Array = LevelCodeTokenizer.splice_data(LevelCodeTokenizer.splice_dictionary(data)[1])
+			data = LevelCodeTokenizer.splice_data_array(data)
+			var properties_array = deserialize_datas_code(data)
+			properties_array.pop_front()
+			var event: Event = load(EVENT_PATH % EVENT_IDS[properties_array.pop_front()]).new()
 			
-			var size: int = min(keys.size(), values.size())
-			
-			for i in range(size):
-				properties_dict[deserialize_data_code(keys[i])] = deserialize_data_code(values[i])
-				
-			var event = class_util.create_instance_from_name(properties_dict["event"])
-			properties_dict.erase("event")
-			
-			for property in properties_dict:
-				event[property] = properties_dict[property]
+			for i in range(0, properties_array.size(), 2):
+				event.properties[properties_array[i]] = properties_array[i + 1]
 				
 			return event
 	

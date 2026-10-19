@@ -55,7 +55,9 @@ func request_completed(result: int, response_code: int, headers: PoolStringArray
 	var image := Image.new()
 	
 	var error: int = -1
-	if image_util.is_png(body):
+	if image_util.is_webp(body):
+		error = image.load_webp_from_buffer(body)
+	elif image_util.is_png(body):
 		error = image.load_png_from_buffer(body)
 	else:
 		error = image.load_jpg_from_buffer(body)

@@ -1,14 +1,18 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://scenes/actors/objects/water_balloon/water_balloon.gd" type="Script" id=1]
-[ext_resource path="res://scenes/actors/objects/water_balloon/2.png" type="Texture" id=2]
+[ext_resource path="res://scenes/actors/objects/water_balloon/texture.png" type="Texture" id=2]
 [ext_resource path="res://assets/sounds/balloon_pop.wav" type="AudioStream" id=3]
 [ext_resource path="res://scenes/actors/mario/particles/metal_sparkles.png" type="Texture" id=4]
 [ext_resource path="res://scenes/actors/mario/nozzles/water_particle.png" type="Texture" id=5]
-[ext_resource path="res://scenes/actors/objects/water_balloon/1.png" type="Texture" id=6]
+[ext_resource path="res://scenes/actors/objects/water_balloon/droplet.png" type="Texture" id=6]
 [ext_resource path="res://scenes/actors/objects/water_balloon/recolorable_texture.png" type="Texture" id=7]
 [ext_resource path="res://classes/sound_pitcher_directional.gd" type="Script" id=8]
 [ext_resource path="res://assets/sounds/fludd/fludd_refill.wav" type="AudioStream" id=9]
+[ext_resource path="res://scenes/actors/objects/water_balloon/bowser.png" type="Texture" id=10]
+[ext_resource path="res://scenes/actors/objects/water_balloon/recolorable_bowser.png" type="Texture" id=11]
+[ext_resource path="res://scenes/actors/objects/water_balloon/recolorable_droplet.png" type="Texture" id=12]
+[ext_resource path="res://scenes/actors/objects/water_balloon/recolor_curve.tres" type="Material" id=13]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 14, 16 )
@@ -36,7 +40,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 )
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("Sprite/Sprite2:position")
+tracks/2/path = NodePath("Sprite/Droplet:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -48,7 +52,7 @@ tracks/2/keys = {
 "values": [  ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("Particles2D2:emitting")
+tracks/3/path = NodePath("WaterParticles:emitting")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -72,7 +76,7 @@ tracks/4/keys = {
 "values": [ Vector2( 1, 1 ) ]
 }
 tracks/5/type = "value"
-tracks/5/path = NodePath("Sprite:modulate")
+tracks/5/path = NodePath("Sprite:modulate:a")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
@@ -81,7 +85,7 @@ tracks/5/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Color( 1, 1, 1, 1 ) ]
+"values": [ 1.0 ]
 }
 tracks/6/type = "value"
 tracks/6/path = NodePath("Sprite:position")
@@ -94,6 +98,18 @@ tracks/6/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ Vector2( 0, 0 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("ShineParticles:emitting")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
 }
 
 [sub_resource type="Animation" id=3]
@@ -170,7 +186,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 )
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("Sprite/Sprite2:position")
+tracks/2/path = NodePath("Sprite/Droplet:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -182,7 +198,7 @@ tracks/2/keys = {
 "values": [  ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("Particles2D2:emitting")
+tracks/3/path = NodePath("WaterParticles:emitting")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -206,7 +222,7 @@ tracks/4/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( 2, 2 ) ]
 }
 tracks/5/type = "value"
-tracks/5/path = NodePath("Sprite:modulate")
+tracks/5/path = NodePath("Sprite:modulate:a")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
@@ -215,10 +231,10 @@ tracks/5/keys = {
 "times": PoolRealArray( 0, 0.3 ),
 "transitions": PoolRealArray( 0.5, 1 ),
 "update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 2, 2, 2, 0 ) ]
+"values": [ 1.0, 0.0 ]
 }
 tracks/6/type = "value"
-tracks/6/path = NodePath("Particles2D:emitting")
+tracks/6/path = NodePath("ShineParticles:emitting")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/imported = false
@@ -248,7 +264,7 @@ tracks/7/keys = {
 resource_name = "respawn"
 length = 0.7
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite/Sprite2:position")
+tracks/0/path = NodePath("Sprite/Droplet:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -272,7 +288,7 @@ tracks/1/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( 1, 1 ) ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("Sprite:modulate")
+tracks/2/path = NodePath("Sprite:modulate:a")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -281,7 +297,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0, 0.7 ),
 "transitions": PoolRealArray( 1, 0.5 ),
 "update": 0,
-"values": [ Color( 2, 2, 2, 0 ), Color( 1, 1, 1, 1 ) ]
+"values": [ 0.0, 1.0 ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("Sprite:position")
@@ -308,6 +324,18 @@ tracks/4/keys = {
 "args": [ "bpb", -1, 1.0, false ],
 "method": "play"
 } ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("ShineParticles:emitting")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0.7 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
 }
 
 [sub_resource type="CanvasItemMaterial" id=4]
@@ -376,6 +404,11 @@ editor_rect = Rect2( -16, -16, 32, 32 )
 internal_id = "water_balloon"
 normal_texture = ExtResource( 2 )
 recolorable_texture = ExtResource( 7 )
+normal_droplet = ExtResource( 6 )
+recolorable_droplet = ExtResource( 12 )
+normal_bowser = ExtResource( 10 )
+recolorable_bowser = ExtResource( 11 )
+recolorable_material = ExtResource( 13 )
 
 [node name="Pop" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 3 )
@@ -392,8 +425,13 @@ bus = "Sounds"
 z_index = -1
 texture = ExtResource( 2 )
 
-[node name="Sprite2" type="Sprite" parent="Sprite"]
+[node name="Droplet" type="Sprite" parent="Sprite"]
+use_parent_material = true
 texture = ExtResource( 6 )
+
+[node name="Bowser" type="Sprite" parent="Sprite"]
+use_parent_material = true
+texture = ExtResource( 10 )
 
 [node name="Area2D" type="Area2D" parent="."]
 visible = false
@@ -410,7 +448,7 @@ anims/bpb = SubResource( 3 )
 anims/pop = SubResource( 93 )
 anims/respawn = SubResource( 94 )
 
-[node name="Particles2D" type="Particles2D" parent="."]
+[node name="ShineParticles" type="Particles2D" parent="."]
 material = SubResource( 4 )
 scale = Vector2( 0.7, 0.7 )
 emitting = false
@@ -418,7 +456,7 @@ amount = 3
 process_material = SubResource( 5 )
 texture = ExtResource( 4 )
 
-[node name="Particles2D2" type="Particles2D" parent="."]
+[node name="WaterParticles" type="Particles2D" parent="."]
 material = SubResource( 13 )
 emitting = false
 amount = 192

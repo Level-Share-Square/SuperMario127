@@ -44,7 +44,11 @@ func request_completed(result: int, response_code: int, headers: PoolStringArray
 	var level_id: String = ids_queue.pop_front()
 	
 	var path: String = level_list_util.get_level_thumbnail_path(level_id, working_folder, false)
-	var extension: String = ".png" if image_util.is_png(body) else ".jpg"
+	var extension: String = ".jpg"
+	if image_util.is_webp(body):
+		extension = ".webp"
+	elif image_util.is_png(body):
+		extension = ".png"
 	
 	var image_file := File.new()
 	var err: int = image_file.open(path + extension, File.WRITE)

@@ -38,9 +38,6 @@ func add_comment(comment_info: LSSComment, move_to_front: bool = false):
 	var comment_content: Control = combined_content.get_node("%Content")
 	comment_node.name = comment_info.comment_id
 	
-	var reply_button: Button = comment_node.get_node("%Reply")
-	reply_button.visible = account_info.logged_in
-	
 	comment_content.http_images = http_images
 	http_images.connect("image_loaded", comment_content, "image_loaded")
 	

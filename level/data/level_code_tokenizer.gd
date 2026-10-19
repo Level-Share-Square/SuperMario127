@@ -3,7 +3,7 @@ extends Object
 
 
 const METADATA_PATTERN = "\\{([^{}]*)\\}"
-const DATA_PATTERN = "(?:[^\\[\\],]+|\\[[^\\]]*\\])+"
+const DATA_PATTERN = "(?:[^\\[\\],]+|\\[(?:[^\\[\\]]|\\[[^\\]]*\\])*\\])+"
 const DICTIONARY_ENTRY_PATTERN = "(?:[^\\[\\]:]+|\\[[^\\]]*\\])+"
 const array_data_pattern = "\\{(?:[^{}]++|\\{[^{}]*\\})*\\}"
 

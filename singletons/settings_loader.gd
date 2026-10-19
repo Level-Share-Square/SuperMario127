@@ -14,6 +14,9 @@ func _init():
 		if config.has_section(category):
 			load_category(category, config)
 	
+	if config.has_section_key("Controls (Player 1)", "rumble"):
+		change_setting("rumble", LocalSettings.load_setting("Controls (Player 1)", "rumble", true))
+	
 	# we can initialize this here for now i suppose
 	if not config.has_section_key("Meta", "game_version"):
 		var dir := Directory.new()

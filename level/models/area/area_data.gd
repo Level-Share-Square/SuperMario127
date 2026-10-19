@@ -5,6 +5,7 @@ extends LevelDataResource
 var header: AreaHeader
 # Array of LayerData
 var layers: Array
+var events: Array
 
 
 func _init(set_header: AreaHeader, set_layers: Array):

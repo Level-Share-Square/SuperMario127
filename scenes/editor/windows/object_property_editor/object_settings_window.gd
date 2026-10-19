@@ -101,9 +101,9 @@ func load_objects(_objects: Dictionary):
 			"res://scenes/editor/windows/object_property_editor/property_tabs/%s/%s.tscn" % [tab, tab]
 		).instance()
 		extra_tab.window = self
-		extra_tab.load_properties(editor, objects)
 		property_groups.add_child(extra_tab)
 		property_groups.move_child(extra_tab, 0)
+		extra_tab.load_properties(editor, objects)
 	
 	popup_centered(rect_size)
 

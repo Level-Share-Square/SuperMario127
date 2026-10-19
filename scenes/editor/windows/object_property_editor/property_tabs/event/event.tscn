@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scenes/editor/windows/object_property_editor/property_tabs/event/event_prefab.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/editor/editor_theme.tres" type="Theme" id=2]
+[ext_resource path="res://scenes/editor/windows/object_property_editor/property_tabs/event/event.gd" type="Script" id=4]
+
+[sub_resource type="StyleBoxEmpty" id=1]
+content_margin_left = 4.0
+content_margin_right = 4.0
+content_margin_top = 4.0
+content_margin_bottom = 4.0
+
+[node name="Event" type="PanelContainer"]
+theme = ExtResource( 2 )
+custom_styles/panel = SubResource( 1 )
+script = ExtResource( 4 )
+
+[node name="EventPrefab" parent="." instance=ExtResource( 1 )]
+unique_name_in_owner = true
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 102.0
+margin_bottom = 80.0
+
+[connection signal="added_new_event" from="EventPrefab" to="." method="added_new_event"]
+[connection signal="delete_event" from="EventPrefab" to="." method="delete_event"]
+[connection signal="finished_editing" from="EventPrefab" to="." method="on_finished_editing"]

@@ -47,6 +47,8 @@ func load_property(_editor: Editor, init_value, _property: Array, property_name 
 		var property_info = property[2]
 		if property_info is PropertyInfo:
 			hint_tooltip = property_info.hint
+		else:
+			none_is_all = property[2]
 	stored_property = init_value
 	
 	reload_lookup_table()

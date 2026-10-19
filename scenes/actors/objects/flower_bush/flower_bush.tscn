@@ -1,4 +1,4 @@
-[gd_scene load_steps=74 format=2]
+[gd_scene load_steps=76 format=2]
 
 [ext_resource path="res://scenes/actors/objects/flower_bush/textures/bush_0.png" type="Texture" id=1]
 [ext_resource path="res://scenes/actors/objects/flower_bush/flower_bush.gd" type="Script" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://scenes/actors/objects/flower_bush/textures/bush_1.png" type="Texture" id=5]
 [ext_resource path="res://scenes/actors/objects/flower_bush/textures/bush_2.png" type="Texture" id=6]
 [ext_resource path="res://scenes/actors/objects/flower_bush/textures/bush_3.png" type="Texture" id=7]
+[ext_resource path="res://shaders/recolor_curve.gdshader" type="Shader" id=8]
 [ext_resource path="res://scenes/actors/objects/flower_bush/textures/bush_5.png" type="Texture" id=9]
 [ext_resource path="res://scenes/actors/objects/flower_bush/textures/bush_6.png" type="Texture" id=10]
 [ext_resource path="res://scenes/actors/objects/flower_bush/textures/bush_8.png" type="Texture" id=11]
@@ -76,6 +77,10 @@
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 48, 8.5 )
 
+[sub_resource type="ShaderMaterial" id=4]
+shader = ExtResource( 8 )
+shader_param/color_curve = 10.0
+
 [node name="FlowerBush" type="Node2D"]
 z_index = -2
 script = ExtResource( 2 )
@@ -111,7 +116,7 @@ axis_stretch_vertical = 1
 
 [node name="Recolorable" type="NinePatchRect" parent="Sprite"]
 modulate = Color( 1, 0, 0, 1 )
-use_parent_material = true
+material = SubResource( 4 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 texture = ExtResource( 3 )
