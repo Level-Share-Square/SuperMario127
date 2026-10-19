@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=3058 format=2]
+[gd_resource type="TileSet" load_steps=3059 format=2]
 
 [ext_resource path="res://assets/tiles/bricks/bricks.png" type="Texture" id=1]
 [ext_resource path="res://assets/tiles/grass/grass.png" type="Texture" id=2]
@@ -56,7 +56,7 @@
 [ext_resource path="res://assets/tiles/bookshelf/5.png" type="Texture" id=54]
 [ext_resource path="res://assets/tiles/diamond_texture/diamond_texture.png" type="Texture" id=55]
 [ext_resource path="res://assets/tiles/template/template.png" type="Texture" id=56]
-[ext_resource path="res://assets/tiles/leaves/leaves.png" type="Texture" id=60]
+[ext_resource path="res://assets/tiles/leaves/textures/0.png" type="Texture" id=60]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 32, 32, 0, 32, 0, 0, 32, 0 )
@@ -52569,7 +52569,7 @@ points = PoolVector2Array( 8, 0, 32, 0, 32, 32, 0, 16, 0, 0 )
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 160/z_index = 0
-161/name = "Leaves Slope Left"
+161/name = "Leaves (Slope Left)"
 161/texture = ExtResource( 60 )
 161/tex_offset = Vector2( 0, 0 )
 161/modulate = Color( 1, 1, 1, 1 )
@@ -52876,7 +52876,7 @@ points = PoolVector2Array( 8, 0, 32, 0, 32, 32, 0, 16, 0, 0 )
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 161/z_index = 0
-162/name = "Leaves Slope Right"
+162/name = "Leaves (Slope Right)"
 162/texture = ExtResource( 60 )
 162/tex_offset = Vector2( 0, 0 )
 162/modulate = Color( 1, 1, 1, 1 )
@@ -53183,4 +53183,28 @@ points = PoolVector2Array( 8, 0, 32, 0, 32, 32, 0, 16, 0, 0 )
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 162/z_index = 0
+163/name = "Leaves (Half Tile)"
+163/texture = ExtResource( 60 )
+163/tex_offset = Vector2( 0, 0 )
+163/modulate = Color( 1, 1, 1, 1 )
+163/region = Rect2( 544, 160, 704, 128 )
+163/tile_mode = 1
+163/autotile/bitmask_mode = 2
+163/autotile/bitmask_flags = [ Vector2( 0, 0 ), 327824, Vector2( 0, 1 ), 21299346, Vector2( 0, 2 ), 21299218, Vector2( 0, 3 ), 21299216, Vector2( 1, 0 ), 65712, Vector2( 1, 1 ), 4260018, Vector2( 1, 2 ), 21037106, Vector2( 1, 3 ), 21037104, Vector2( 2, 0 ), 184, Vector2( 2, 1 ), 186, Vector2( 2, 2 ), 20971578, Vector2( 2, 3 ), 20971576, Vector2( 3, 0 ), 262296, Vector2( 3, 1 ), 17039514, Vector2( 3, 2 ), 21233690, Vector2( 3, 3 ), 21233688, Vector2( 4, 0 ), 187, Vector2( 4, 1 ), 4260274, Vector2( 4, 2 ), 65782, Vector2( 4, 3 ), 250, Vector2( 5, 0 ), 440, Vector2( 5, 1 ), 510, Vector2( 5, 2 ), 447, Vector2( 5, 3 ), 4194366, Vector2( 6, 0 ), 248, Vector2( 6, 1 ), 507, Vector2( 6, 2 ), 255, Vector2( 6, 3 ), 16777275, Vector2( 7, 0 ), 190, Vector2( 7, 1 ), 17039578, Vector2( 7, 2 ), 262555, Vector2( 7, 3 ), 442, Vector2( 8, 0 ), 65968, Vector2( 8, 1 ), 4260278, Vector2( 8, 2 ), 446, Vector2( 8, 3 ), 4194615, Vector2( 9, 0 ), 506, Vector2( 9, 1 ), 254, Vector2( 9, 2 ), 511, Vector2( 9, 3 ), 63, Vector2( 10, 0 ), 504, Vector2( 10, 1 ), 328144, Vector2( 10, 2 ), 443, Vector2( 10, 3 ), 191, Vector2( 11, 0 ), 262360, Vector2( 11, 1 ), 251, Vector2( 11, 2 ), 17039579, Vector2( 11, 3 ), 16777311, Vector2( 12, 0 ), 66032, Vector2( 12, 1 ), 4259894, Vector2( 12, 2 ), 65776, Vector2( 12, 3 ), 328080, Vector2( 13, 0 ), 508, Vector2( 13, 1 ), 319, Vector2( 13, 2 ), 20971580, Vector2( 13, 3 ), 327888, Vector2( 14, 0 ), 505, Vector2( 14, 1 ), 127, Vector2( 14, 2 ), 20971577, Vector2( 14, 3 ), 21037108, Vector2( 15, 0 ), 262616, Vector2( 15, 1 ), 17039387, Vector2( 15, 2 ), 262552, Vector2( 15, 3 ), 21233689, Vector2( 16, 0 ), 65972, Vector2( 16, 1 ), 65716, Vector2( 16, 2 ), 65780, Vector2( 16, 3 ), 66036, Vector2( 17, 0 ), 249, Vector2( 17, 1 ), 441, Vector2( 17, 2 ), 185, Vector2( 17, 3 ), 262617, Vector2( 18, 0 ), 444, Vector2( 18, 1 ), 252, Vector2( 18, 2 ), 188, Vector2( 19, 0 ), 262361, Vector2( 19, 1 ), 262297, Vector2( 19, 2 ), 262553, Vector2( 20, 0 ), 253, Vector2( 20, 1 ), 16777339, Vector2( 20, 2 ), 509, Vector2( 20, 3 ), 383, Vector2( 21, 0 ), 445, Vector2( 21, 1 ), 4194622, Vector2( 21, 2 ), 189, Vector2( 21, 3 ), 20971581 ]
+163/autotile/icon_coordinate = Vector2( 0, 3 )
+163/autotile/tile_size = Vector2( 32, 32 )
+163/autotile/spacing = 0
+163/autotile/occluder_map = [  ]
+163/autotile/navpoly_map = [  ]
+163/autotile/priority_map = [  ]
+163/autotile/z_index_map = [  ]
+163/autotile/fallback_mode = 0
+163/occluder_offset = Vector2( 0, 0 )
+163/navigation_offset = Vector2( 0, 0 )
+163/shape_offset = Vector2( 0, 0 )
+163/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+163/shape_one_way = false
+163/shape_one_way_margin = 0.0
+163/shapes = [  ]
+163/z_index = 0
 script = ExtResource( 3 )
