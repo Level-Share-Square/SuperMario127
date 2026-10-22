@@ -22,3 +22,4 @@ func toss_bone() -> void:
 	enemy.get_parent().get_parent().call_deferred("add_child", bone) # Parent's parent so the bone is a separated entity and therefore it's not invisible along with Dry Bones
 	bone.global_position = enemy.global_position
 	bone.position += toss_offset * Vector2(enemy.facing_direction, 1)
+	bone.scale = enemy.get_parent().scale
