@@ -75,6 +75,8 @@ func _update(delta):
 		
 	if character.inputs[2][0]:
 		character.set_state_by_name("JumpState", 0)
+	if character.inputs[2][0] and !character.is_grounded() and character.gravity == 0:
+		character.set_state_by_name("FallState", 0)
 	
 	# Prevent infinite slides between 2 slopes
 	if starting_slide_sign == 0: # If Mario was stationary
